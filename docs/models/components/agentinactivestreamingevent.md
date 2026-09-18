@@ -12,10 +12,6 @@ let value: AgentInactiveStreamingEvent = {
   timestamp: "<value>",
   data: {
     lastMessage: "<value>",
-    lastMessageFull: {
-      role: "user",
-      parts: [],
-    },
     finishReason: "stop",
     workflowRunId: "<id>",
   },

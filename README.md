@@ -89,43 +89,7 @@ const orq = new Orq({
 });
 
 async function run() {
-  const result = await orq.deployments.invoke({
-    key: "<key>",
-    identity: {
-      id: "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV",
-      displayName: "Jane Doe",
-      email: "jane.doe@example.com",
-      metadata: [
-        {
-          "department": "Engineering",
-          "role": "Senior Developer",
-        },
-      ],
-      logoUrl: "https://example.com/avatars/jane-doe.jpg",
-      tags: [
-        "hr",
-        "engineering",
-      ],
-    },
-    documents: [
-      {
-        text:
-          "The refund policy allows customers to return items within 30 days of purchase for a full refund.",
-        metadata: {
-          fileName: "refund_policy.pdf",
-          fileType: "application/pdf",
-          pageNumber: 1,
-        },
-      },
-      {
-        text: "Premium members receive free shipping on all orders over $50.",
-        metadata: {
-          fileName: "membership_benefits.md",
-          fileType: "text/markdown",
-        },
-      },
-    ],
-  });
+  const result = await orq.evals.all({});
 
   console.log(result);
 }
@@ -155,43 +119,7 @@ const orq = new Orq({
 });
 
 async function run() {
-  const result = await orq.deployments.invoke({
-    key: "<key>",
-    identity: {
-      id: "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV",
-      displayName: "Jane Doe",
-      email: "jane.doe@example.com",
-      metadata: [
-        {
-          "department": "Engineering",
-          "role": "Senior Developer",
-        },
-      ],
-      logoUrl: "https://example.com/avatars/jane-doe.jpg",
-      tags: [
-        "hr",
-        "engineering",
-      ],
-    },
-    documents: [
-      {
-        text:
-          "The refund policy allows customers to return items within 30 days of purchase for a full refund.",
-        metadata: {
-          fileName: "refund_policy.pdf",
-          fileType: "application/pdf",
-          pageNumber: 1,
-        },
-      },
-      {
-        text: "Premium members receive free shipping on all orders over $50.",
-        metadata: {
-          fileName: "membership_benefits.md",
-          fileType: "text/markdown",
-        },
-      },
-    ],
-  });
+  const result = await orq.evals.all({});
 
   console.log(result);
 }
@@ -239,12 +167,12 @@ run();
 * [list](docs/sdks/annotationqueues/README.md#list) - List annotation queues
 * [create](docs/sdks/annotationqueues/README.md#create) - Create an annotation queue
 * [retrieve](docs/sdks/annotationqueues/README.md#retrieve) - Retrieve an annotation queue
+* [update](docs/sdks/annotationqueues/README.md#update) - Edit an annotation queue
 * [delete](docs/sdks/annotationqueues/README.md#delete) - Delete an annotation queue
-* [update](docs/sdks/annotationqueues/README.md#update) - Update an annotation queue
-* [clear](docs/sdks/annotationqueues/README.md#clear) - Clear an annotation queue
+* [clear](docs/sdks/annotationqueues/README.md#clear) - Delete all items
 * [listItems](docs/sdks/annotationqueues/README.md#listitems) - Query items from an annotation queue
 * [addItems](docs/sdks/annotationqueues/README.md#additems) - Add items to an annotation queue
-* [removeItems](docs/sdks/annotationqueues/README.md#removeitems) - Remove items from an annotation queue
+* [removeItems](docs/sdks/annotationqueues/README.md#removeitems) - Remove annotation queue items
 * [retrieveItem](docs/sdks/annotationqueues/README.md#retrieveitem) - Retrieve an annotation queue item
 
 ### [Annotations](docs/sdks/annotations/README.md)
@@ -260,10 +188,6 @@ run();
 * [get](docs/sdks/apikeys/README.md#get) - Retrieve an API key
 * [delete](docs/sdks/apikeys/README.md#delete) - Delete an API key
 * [update](docs/sdks/apikeys/README.md#update) - Update an API key
-
-### [AuditLogs](docs/sdks/auditlogs/README.md)
-
-* [query](docs/sdks/auditlogs/README.md#query) - Query audit logs
 
 ### [Budgets](docs/sdks/budgets/README.md)
 
@@ -295,20 +219,19 @@ run();
 ### [Deployments](docs/sdks/deployments/README.md)
 
 * [invoke](docs/sdks/deployments/README.md#invoke) - Invoke
-* [stream](docs/sdks/deployments/README.md#stream) - Stream
 * [list](docs/sdks/deployments/README.md#list) - List all deployments
 * [getConfig](docs/sdks/deployments/README.md#getconfig) - Get config
+* [stream](docs/sdks/deployments/README.md#stream) - Stream
 
 ### [Evals](docs/sdks/evals/README.md)
 
 * [all](docs/sdks/evals/README.md#all) - Get all Evaluators
 * [create](docs/sdks/evals/README.md#create) - Create an Evaluator
 * [get](docs/sdks/evals/README.md#get) - Retrieve an Evaluator
-* [delete](docs/sdks/evals/README.md#delete) - Delete an Evaluator
 * [update](docs/sdks/evals/README.md#update) - Update an Evaluator
-* [listVersions](docs/sdks/evals/README.md#listversions) - List evaluator versions
-* [getVersion](docs/sdks/evals/README.md#getversion) - Get evaluator version
+* [delete](docs/sdks/evals/README.md#delete) - Delete an Evaluator
 * [invoke](docs/sdks/evals/README.md#invoke) - Invoke a Custom Evaluator
+* [listVersions](docs/sdks/evals/README.md#listversions) - List evaluator versions
 
 ### [Feedback](docs/sdks/feedback/README.md)
 
@@ -326,19 +249,6 @@ run();
 * [delete](docs/sdks/files/README.md#delete) - Delete a file
 * [update](docs/sdks/files/README.md#update) - Update a file
 
-### [FileSystems](docs/sdks/filesystems/README.md)
-
-* [list](docs/sdks/filesystems/README.md#list) - List file systems
-* [create](docs/sdks/filesystems/README.md#create) - Create file system
-* [retrieve](docs/sdks/filesystems/README.md#retrieve) - Retrieve file system
-* [delete](docs/sdks/filesystems/README.md#delete) - Delete file system
-* [update](docs/sdks/filesystems/README.md#update) - Update file system
-* [listFiles](docs/sdks/filesystems/README.md#listfiles) - List files
-* [deleteFile](docs/sdks/filesystems/README.md#deletefile) - Delete file
-* [moveFile](docs/sdks/filesystems/README.md#movefile) - Move file
-* [statFile](docs/sdks/filesystems/README.md#statfile) - Stat file
-* [createFolder](docs/sdks/filesystems/README.md#createfolder) - Create folder
-
 ### [GuardrailRules](docs/sdks/guardrailrules/README.md)
 
 * [list](docs/sdks/guardrailrules/README.md#list) - List guardrail rules
@@ -347,11 +257,6 @@ run();
 * [retrieve](docs/sdks/guardrailrules/README.md#retrieve) - Retrieve a guardrail rule
 * [delete](docs/sdks/guardrailrules/README.md#delete) - Delete a guardrail rule
 * [update](docs/sdks/guardrailrules/README.md#update) - Update a guardrail rule
-
-### [Hub](docs/sdks/hub/README.md)
-
-* [search](docs/sdks/hub/README.md#search) - Search hub items
-* [get](docs/sdks/hub/README.md#get) - Get a hub item
 
 ### [HumanReviewSets](docs/sdks/humanreviewsets/README.md)
 
@@ -378,7 +283,6 @@ run();
 * [update](docs/sdks/knowledge/README.md#update) - Updates a knowledge
 * [listDatasources](docs/sdks/knowledge/README.md#listdatasources) - List all datasources
 * [createDatasource](docs/sdks/knowledge/README.md#createdatasource) - Create a new datasource
-* [previewChunks](docs/sdks/knowledge/README.md#previewchunks) - Preview datasource chunks
 * [retrieveDatasource](docs/sdks/knowledge/README.md#retrievedatasource) - Retrieve a datasource
 * [deleteDatasource](docs/sdks/knowledge/README.md#deletedatasource) - Deletes a datasource
 * [updateDatasource](docs/sdks/knowledge/README.md#updatedatasource) - Update a datasource
@@ -489,7 +393,6 @@ run();
 
 ### [Pii](docs/sdks/pii/README.md)
 
-* [capabilities](docs/sdks/pii/README.md#capabilities) - Get PII capabilities
 * [detect](docs/sdks/pii/README.md#detect) - Detect PII
 * [redact](docs/sdks/pii/README.md#redact) - Redact PII
 * [restore](docs/sdks/pii/README.md#restore) - Restore redacted text
@@ -595,16 +498,6 @@ run();
 * [update](docs/sdks/schedules/README.md#update) - Update schedule
 * [trigger](docs/sdks/schedules/README.md#trigger) - Trigger schedule execution
 
-### [Sessions](docs/sdks/sessions/README.md)
-
-* [create](docs/sdks/sessions/README.md#create) - Create trace thread
-* [getCount](docs/sdks/sessions/README.md#getcount) - Get thread count
-* [list](docs/sdks/sessions/README.md#list) - List trace threads
-* [listTags](docs/sdks/sessions/README.md#listtags) - List thread tags
-* [get](docs/sdks/sessions/README.md#get) - Get trace thread
-* [delete](docs/sdks/sessions/README.md#delete) - Delete trace thread
-* [update](docs/sdks/sessions/README.md#update) - Update trace thread
-
 ### [Skills](docs/sdks/skills/README.md)
 
 * [list](docs/sdks/skills/README.md#list) - List all skills
@@ -620,12 +513,6 @@ run();
 * [get](docs/sdks/smartrouters/README.md#get) - Retrieve a Smart Router
 * [delete](docs/sdks/smartrouters/README.md#delete) - Delete a Smart Router
 * [update](docs/sdks/smartrouters/README.md#update) - Update a Smart Router
-
-### [Telemetry](docs/sdks/telemetry/README.md)
-
-* [listCapabilities](docs/sdks/telemetry/README.md#listcapabilities) - List telemetry capabilities
-* [listFacetValues](docs/sdks/telemetry/README.md#listfacetvalues) - List telemetry facet values
-* [query](docs/sdks/telemetry/README.md#query) - Query telemetry
 
 ### [Tools](docs/sdks/tools/README.md)
 
@@ -659,12 +546,6 @@ run();
 * [get](docs/sdks/webhooks/README.md#get) - Retrieve a webhook
 * [delete](docs/sdks/webhooks/README.md#delete) - Delete a webhook
 * [update](docs/sdks/webhooks/README.md#update) - Update a webhook
-
-### [Workspaces](docs/sdks/workspaces/README.md)
-
-* [list](docs/sdks/workspaces/README.md#list) - List workspaces
-* [get](docs/sdks/workspaces/README.md#get) - Retrieve a workspace
-* [update](docs/sdks/workspaces/README.md#update) - Update a workspace
 
 ### [WorkspaceSecurity](docs/sdks/workspacesecurity/README.md)
 
@@ -713,15 +594,15 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`alertsListTriggers`](docs/sdks/alerts/README.md#listtriggers) - List alert triggers
 - [`alertsUpdate`](docs/sdks/alerts/README.md#update) - Update an alert
 - [`annotationQueuesAddItems`](docs/sdks/annotationqueues/README.md#additems) - Add items to an annotation queue
-- [`annotationQueuesClear`](docs/sdks/annotationqueues/README.md#clear) - Clear an annotation queue
+- [`annotationQueuesClear`](docs/sdks/annotationqueues/README.md#clear) - Delete all items
 - [`annotationQueuesCreate`](docs/sdks/annotationqueues/README.md#create) - Create an annotation queue
 - [`annotationQueuesDelete`](docs/sdks/annotationqueues/README.md#delete) - Delete an annotation queue
 - [`annotationQueuesList`](docs/sdks/annotationqueues/README.md#list) - List annotation queues
 - [`annotationQueuesListItems`](docs/sdks/annotationqueues/README.md#listitems) - Query items from an annotation queue
-- [`annotationQueuesRemoveItems`](docs/sdks/annotationqueues/README.md#removeitems) - Remove items from an annotation queue
+- [`annotationQueuesRemoveItems`](docs/sdks/annotationqueues/README.md#removeitems) - Remove annotation queue items
 - [`annotationQueuesRetrieve`](docs/sdks/annotationqueues/README.md#retrieve) - Retrieve an annotation queue
 - [`annotationQueuesRetrieveItem`](docs/sdks/annotationqueues/README.md#retrieveitem) - Retrieve an annotation queue item
-- [`annotationQueuesUpdate`](docs/sdks/annotationqueues/README.md#update) - Update an annotation queue
+- [`annotationQueuesUpdate`](docs/sdks/annotationqueues/README.md#update) - Edit an annotation queue
 - [`annotationsCreate`](docs/sdks/annotations/README.md#create) - Annotate a span
 - [`annotationsDelete`](docs/sdks/annotations/README.md#delete) - Remove an annotation from a span
 - [`apiKeysCreate`](docs/sdks/apikeys/README.md#create) - Create a new API key
@@ -730,7 +611,6 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`apiKeysList`](docs/sdks/apikeys/README.md#list) - List API keys
 - [`apiKeysListCapabilities`](docs/sdks/apikeys/README.md#listcapabilities) - List capability catalog
 - [`apiKeysUpdate`](docs/sdks/apikeys/README.md#update) - Update an API key
-- [`auditLogsQuery`](docs/sdks/auditlogs/README.md#query) - Query audit logs
 - [`budgetsCreate`](docs/sdks/budgets/README.md#create) - Create a new budget
 - [`budgetsDelete`](docs/sdks/budgets/README.md#delete) - Delete a budget
 - [`budgetsGet`](docs/sdks/budgets/README.md#get) - Retrieve a budget
@@ -757,7 +637,6 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`evalsCreate`](docs/sdks/evals/README.md#create) - Create an Evaluator
 - [`evalsDelete`](docs/sdks/evals/README.md#delete) - Delete an Evaluator
 - [`evalsGet`](docs/sdks/evals/README.md#get) - Retrieve an Evaluator
-- [`evalsGetVersion`](docs/sdks/evals/README.md#getversion) - Get evaluator version
 - [`evalsInvoke`](docs/sdks/evals/README.md#invoke) - Invoke a Custom Evaluator
 - [`evalsListVersions`](docs/sdks/evals/README.md#listversions) - List evaluator versions
 - [`evalsUpdate`](docs/sdks/evals/README.md#update) - Update an Evaluator
@@ -771,24 +650,12 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`filesGetContent`](docs/sdks/files/README.md#getcontent) - Download file content
 - [`filesList`](docs/sdks/files/README.md#list) - List all files
 - [`filesUpdate`](docs/sdks/files/README.md#update) - Update a file
-- [`fileSystemsCreate`](docs/sdks/filesystems/README.md#create) - Create file system
-- [`fileSystemsCreateFolder`](docs/sdks/filesystems/README.md#createfolder) - Create folder
-- [`fileSystemsDelete`](docs/sdks/filesystems/README.md#delete) - Delete file system
-- [`fileSystemsDeleteFile`](docs/sdks/filesystems/README.md#deletefile) - Delete file
-- [`fileSystemsList`](docs/sdks/filesystems/README.md#list) - List file systems
-- [`fileSystemsListFiles`](docs/sdks/filesystems/README.md#listfiles) - List files
-- [`fileSystemsMoveFile`](docs/sdks/filesystems/README.md#movefile) - Move file
-- [`fileSystemsRetrieve`](docs/sdks/filesystems/README.md#retrieve) - Retrieve file system
-- [`fileSystemsStatFile`](docs/sdks/filesystems/README.md#statfile) - Stat file
-- [`fileSystemsUpdate`](docs/sdks/filesystems/README.md#update) - Update file system
 - [`guardrailRulesCreate`](docs/sdks/guardrailrules/README.md#create) - Create a guardrail rule
 - [`guardrailRulesDelete`](docs/sdks/guardrailrules/README.md#delete) - Delete a guardrail rule
 - [`guardrailRulesList`](docs/sdks/guardrailrules/README.md#list) - List guardrail rules
 - [`guardrailRulesListUsedGuardrails`](docs/sdks/guardrailrules/README.md#listusedguardrails) - List guardrails used by guardrail rules
 - [`guardrailRulesRetrieve`](docs/sdks/guardrailrules/README.md#retrieve) - Retrieve a guardrail rule
 - [`guardrailRulesUpdate`](docs/sdks/guardrailrules/README.md#update) - Update a guardrail rule
-- [`hubGet`](docs/sdks/hub/README.md#get) - Get a hub item
-- [`hubSearch`](docs/sdks/hub/README.md#search) - Search hub items
 - [`humanReviewSetsCreate`](docs/sdks/humanreviewsets/README.md#create) - Create a human review set
 - [`humanReviewSetsDelete`](docs/sdks/humanreviewsets/README.md#delete) - Delete a human review set
 - [`humanReviewSetsGet`](docs/sdks/humanreviewsets/README.md#get) - Get a human review set by ID
@@ -811,7 +678,6 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`knowledgeListChunks`](docs/sdks/knowledge/README.md#listchunks) - List all chunks for a datasource
 - [`knowledgeListChunksPaginated`](docs/sdks/knowledge/README.md#listchunkspaginated) - List chunks with offset-based pagination
 - [`knowledgeListDatasources`](docs/sdks/knowledge/README.md#listdatasources) - List all datasources
-- [`knowledgePreviewChunks`](docs/sdks/knowledge/README.md#previewchunks) - Preview datasource chunks
 - [`knowledgeRetrieve`](docs/sdks/knowledge/README.md#retrieve) - Retrieves a knowledge base
 - [`knowledgeRetrieveChunk`](docs/sdks/knowledge/README.md#retrievechunk) - Retrieve a chunk
 - [`knowledgeRetrieveDatasource`](docs/sdks/knowledge/README.md#retrievedatasource) - Retrieve a datasource
@@ -890,7 +756,6 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`notifiersGet`](docs/sdks/notifiers/README.md#get) - Retrieve a notifier
 - [`notifiersList`](docs/sdks/notifiers/README.md#list) - List notifiers
 - [`notifiersUpdate`](docs/sdks/notifiers/README.md#update) - Update a notifier
-- [`piiCapabilities`](docs/sdks/pii/README.md#capabilities) - Get PII capabilities
 - [`piiDetect`](docs/sdks/pii/README.md#detect) - Detect PII
 - [`piiRedact`](docs/sdks/pii/README.md#redact) - Redact PII
 - [`piiRestore`](docs/sdks/pii/README.md#restore) - Restore redacted text
@@ -938,13 +803,6 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`schedulesRetrieve`](docs/sdks/schedules/README.md#retrieve) - Retrieve schedule
 - [`schedulesTrigger`](docs/sdks/schedules/README.md#trigger) - Trigger schedule execution
 - [`schedulesUpdate`](docs/sdks/schedules/README.md#update) - Update schedule
-- [`sessionsCreate`](docs/sdks/sessions/README.md#create) - Create trace thread
-- [`sessionsDelete`](docs/sdks/sessions/README.md#delete) - Delete trace thread
-- [`sessionsGet`](docs/sdks/sessions/README.md#get) - Get trace thread
-- [`sessionsGetCount`](docs/sdks/sessions/README.md#getcount) - Get thread count
-- [`sessionsList`](docs/sdks/sessions/README.md#list) - List trace threads
-- [`sessionsListTags`](docs/sdks/sessions/README.md#listtags) - List thread tags
-- [`sessionsUpdate`](docs/sdks/sessions/README.md#update) - Update trace thread
 - [`skillsCreate`](docs/sdks/skills/README.md#create) - Create a new skill
 - [`skillsDelete`](docs/sdks/skills/README.md#delete) - Delete a skill
 - [`skillsGet`](docs/sdks/skills/README.md#get) - Retrieve a skill
@@ -955,9 +813,6 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`smartRoutersGet`](docs/sdks/smartrouters/README.md#get) - Retrieve a Smart Router
 - [`smartRoutersList`](docs/sdks/smartrouters/README.md#list) - List Smart Routers
 - [`smartRoutersUpdate`](docs/sdks/smartrouters/README.md#update) - Update a Smart Router
-- [`telemetryListCapabilities`](docs/sdks/telemetry/README.md#listcapabilities) - List telemetry capabilities
-- [`telemetryListFacetValues`](docs/sdks/telemetry/README.md#listfacetvalues) - List telemetry facet values
-- [`telemetryQuery`](docs/sdks/telemetry/README.md#query) - Query telemetry
 - [`toolsCreate`](docs/sdks/tools/README.md#create) - Create tool
 - [`toolsDelete`](docs/sdks/tools/README.md#delete) - Delete tool
 - [`toolsGetVersion`](docs/sdks/tools/README.md#getversion) - Get tool version
@@ -991,9 +846,6 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`workspaceSecurityVerifyDomain`](docs/sdks/workspacesecurity/README.md#verifydomain) - Verify a domain
 - [`workspaceSettingsGet`](docs/sdks/workspacesettings/README.md#get) - Retrieve workspace settings
 - [`workspaceSettingsUpdate`](docs/sdks/workspacesettings/README.md#update) - Update workspace settings
-- [`workspacesGet`](docs/sdks/workspaces/README.md#get) - Retrieve a workspace
-- [`workspacesList`](docs/sdks/workspaces/README.md#list) - List workspaces
-- [`workspacesUpdate`](docs/sdks/workspaces/README.md#update) - Update a workspace
 - ~~[`agentsInvoke`](docs/sdks/agents/README.md#invoke)~~ - Execute an agent task :warning: **Deprecated**
 - ~~[`agentsResponsesCreate`](docs/sdks/orqresponses/README.md#create)~~ - Create response :warning: **Deprecated**
 - ~~[`agentsResponsesGet`](docs/sdks/orqresponses/README.md#get)~~ - Get response :warning: **Deprecated**
@@ -1195,43 +1047,7 @@ const orq = new Orq({
 });
 
 async function run() {
-  const result = await orq.deployments.invoke({
-    key: "<key>",
-    identity: {
-      id: "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV",
-      displayName: "Jane Doe",
-      email: "jane.doe@example.com",
-      metadata: [
-        {
-          "department": "Engineering",
-          "role": "Senior Developer",
-        },
-      ],
-      logoUrl: "https://example.com/avatars/jane-doe.jpg",
-      tags: [
-        "hr",
-        "engineering",
-      ],
-    },
-    documents: [
-      {
-        text:
-          "The refund policy allows customers to return items within 30 days of purchase for a full refund.",
-        metadata: {
-          fileName: "refund_policy.pdf",
-          fileType: "application/pdf",
-          pageNumber: 1,
-        },
-      },
-      {
-        text: "Premium members receive free shipping on all orders over $50.",
-        metadata: {
-          fileName: "membership_benefits.md",
-          fileType: "text/markdown",
-        },
-      },
-    ],
-  }, {
+  const result = await orq.evals.all({}, {
     retries: {
       strategy: "backoff",
       backoff: {
@@ -1270,43 +1086,7 @@ const orq = new Orq({
 });
 
 async function run() {
-  const result = await orq.deployments.invoke({
-    key: "<key>",
-    identity: {
-      id: "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV",
-      displayName: "Jane Doe",
-      email: "jane.doe@example.com",
-      metadata: [
-        {
-          "department": "Engineering",
-          "role": "Senior Developer",
-        },
-      ],
-      logoUrl: "https://example.com/avatars/jane-doe.jpg",
-      tags: [
-        "hr",
-        "engineering",
-      ],
-    },
-    documents: [
-      {
-        text:
-          "The refund policy allows customers to return items within 30 days of purchase for a full refund.",
-        metadata: {
-          fileName: "refund_policy.pdf",
-          fileType: "application/pdf",
-          pageNumber: 1,
-        },
-      },
-      {
-        text: "Premium members receive free shipping on all orders over $50.",
-        metadata: {
-          fileName: "membership_benefits.md",
-          fileType: "text/markdown",
-        },
-      },
-    ],
-  });
+  const result = await orq.evals.all({});
 
   console.log(result);
 }
@@ -1341,7 +1121,7 @@ const orq = new Orq({
 
 async function run() {
   try {
-    const result = await orq.deployments.list({});
+    const result = await orq.evals.all({});
 
     console.log(result);
   } catch (error) {
@@ -1353,8 +1133,7 @@ async function run() {
       console.log(error.headers);
 
       // Depending on the method different errors may be thrown
-      if (error instanceof errors.HonoApiError) {
-        console.log(error.data$.code); // string
+      if (error instanceof errors.GetEvalsResponseBody) {
         console.log(error.data$.message); // string
       }
     }
@@ -1369,7 +1148,7 @@ run();
 **Primary error:**
 * [`OrqError`](./src/models/errors/orqerror.ts): The base class for HTTP error responses.
 
-<details><summary>Less common errors (40)</summary>
+<details><summary>Less common errors (41)</summary>
 
 <br />
 
@@ -1382,40 +1161,41 @@ run();
 
 
 **Inherit from [`OrqError`](./src/models/errors/orqerror.ts)**:
-* [`HonoApiError`](./src/models/errors/honoapierror.ts): Applicable to 13 of 301 methods.*
-* [`PostV2FeedbackResponseBody`](./src/models/errors/postv2feedbackresponsebody.ts): Bad Request. Status code `400`. Applicable to 1 of 301 methods.*
-* [`CreateAgentScheduleResponseBody`](./src/models/errors/createagentscheduleresponsebody.ts): Invalid schedule type, expression, or sub-hour cadence. Status code `400`. Applicable to 1 of 301 methods.*
-* [`UpdateAgentScheduleResponseBody`](./src/models/errors/updateagentscheduleresponsebody.ts): Invalid type, expression, or sub-hour cadence. Status code `400`. Applicable to 1 of 301 methods.*
-* [`TriggerAgentScheduleResponseBody`](./src/models/errors/triggeragentscheduleresponsebody.ts): Schedule is inactive. Status code `400`. Applicable to 1 of 301 methods.*
-* [`DeleteAgentResponseBody`](./src/models/errors/deleteagentresponsebody.ts): Agent not found. The specified agent key does not exist in the workspace or has already been deleted. Status code `404`. Applicable to 1 of 301 methods.*
-* [`RetrieveAgentRequestResponseBody`](./src/models/errors/retrieveagentrequestresponsebody.ts): Agent not found. The specified agent key does not exist in the workspace or you do not have permission to access it. Status code `404`. Applicable to 1 of 301 methods.*
-* [`UpdateAgentResponseBody`](./src/models/errors/updateagentresponsebody.ts): Agent not found. The specified agent key does not exist in the workspace or you do not have permission to modify it. Status code `404`. Applicable to 1 of 301 methods.*
-* [`StreamRunAgentResponseBody`](./src/models/errors/streamrunagentresponsebody.ts): Model not found. Status code `404`. Applicable to 1 of 301 methods.*
-* [`StreamAgentResponseBody`](./src/models/errors/streamagentresponsebody.ts): Agent not found. Status code `404`. Applicable to 1 of 301 methods.*
-* [`UpdatePromptResponseBody`](./src/models/errors/updatepromptresponsebody.ts): Prompt not found. Status code `404`. Applicable to 1 of 301 methods.*
-* [`DeletePromptResponseBody`](./src/models/errors/deletepromptresponsebody.ts): Prompt not found. Status code `404`. Applicable to 1 of 301 methods.*
-* [`GetPromptVersionResponseBody`](./src/models/errors/getpromptversionresponsebody.ts): Not Found - The prompt or prompt version does not exist. Status code `404`. Applicable to 1 of 301 methods.*
-* [`UpdateToolResponseBody`](./src/models/errors/updatetoolresponsebody.ts): Tool not found. Status code `404`. Applicable to 1 of 301 methods.*
-* [`GetV2ToolsToolIdVersionsResponseBody`](./src/models/errors/getv2toolstoolidversionsresponsebody.ts): Tool not found. Status code `404`. Applicable to 1 of 301 methods.*
-* [`GetV2ToolsToolIdVersionsVersionIdResponseBody`](./src/models/errors/getv2toolstoolidversionsversionidresponsebody.ts): Tool or version not found. Status code `404`. Applicable to 1 of 301 methods.*
-* [`PostV2FeedbackRemoveResponseBody`](./src/models/errors/postv2feedbackremoveresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 301 methods.*
-* [`PostV2FeedbackFeedbackResponseBody`](./src/models/errors/postv2feedbackfeedbackresponsebody.ts): Workspace, trace, or feedback property was not found. Status code `404`. Applicable to 1 of 301 methods.*
-* [`GetEvalsResponseBody`](./src/models/errors/getevalsresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 301 methods.*
-* [`CreateEvalResponseBody`](./src/models/errors/createevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 301 methods.*
-* [`GetEvalResponseBody`](./src/models/errors/getevalresponsebody.ts): No evaluator with this id exists in the authenticated workspace, or the request carries no workspace. Status code `404`. Applicable to 1 of 301 methods.*
-* [`DeleteEvalResponseBody`](./src/models/errors/deleteevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 301 methods.*
-* [`UpdateEvalResponseBody`](./src/models/errors/updateevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 301 methods.*
-* [`CreateAgentScheduleSchedulesResponseBody`](./src/models/errors/createagentscheduleschedulesresponsebody.ts): Agent (or agent version, when agent_tag is set) not found. Status code `404`. Applicable to 1 of 301 methods.*
-* [`DeleteAgentScheduleResponseBody`](./src/models/errors/deleteagentscheduleresponsebody.ts): Schedule not found, or belongs to a different agent. Status code `404`. Applicable to 1 of 301 methods.*
-* [`RetrieveAgentScheduleResponseBody`](./src/models/errors/retrieveagentscheduleresponsebody.ts): Schedule not found, or belongs to a different agent. Status code `404`. Applicable to 1 of 301 methods.*
-* [`UpdateAgentScheduleSchedulesResponseBody`](./src/models/errors/updateagentscheduleschedulesresponsebody.ts): Schedule or agent version not found. Status code `404`. Applicable to 1 of 301 methods.*
-* [`TriggerAgentScheduleSchedulesResponseBody`](./src/models/errors/triggeragentscheduleschedulesresponsebody.ts): Schedule not found, or belongs to a different agent. Status code `404`. Applicable to 1 of 301 methods.*
-* [`RetrieveResponseResponseBody`](./src/models/errors/retrieveresponseresponsebody.ts): Response not found. Status code `404`. Applicable to 1 of 301 methods.*
-* [`DeleteEvalEvalsResponseBody`](./src/models/errors/deleteevalevalsresponsebody.ts): The evaluator is still referenced as an evaluator or guardrail by one or more deployments. Status code `409`. Applicable to 1 of 301 methods.*
-* [`CreateModerationResponseBody`](./src/models/errors/createmoderationresponsebody.ts): Returns validation error. Status code `422`. Applicable to 1 of 301 methods.*
-* [`CreateTranscriptionResponseBody`](./src/models/errors/createtranscriptionresponsebody.ts): Returns validation error. Status code `422`. Applicable to 1 of 301 methods.*
-* [`CreateTranslationResponseBody`](./src/models/errors/createtranslationresponsebody.ts): Returns validation error. Status code `422`. Applicable to 1 of 301 methods.*
-* [`KnowledgeApiError`](./src/models/errors/knowledgeapierror.ts): An error has occured. Status code `500`. Applicable to 1 of 301 methods.*
+* [`HonoApiError`](./src/models/errors/honoapierror.ts): Applicable to 12 of 272 methods.*
+* [`PostV2FeedbackResponseBody`](./src/models/errors/postv2feedbackresponsebody.ts): Bad Request. Status code `400`. Applicable to 1 of 272 methods.*
+* [`CreateAgentScheduleResponseBody`](./src/models/errors/createagentscheduleresponsebody.ts): Invalid schedule type, expression, or sub-hour cadence. Status code `400`. Applicable to 1 of 272 methods.*
+* [`UpdateAgentScheduleResponseBody`](./src/models/errors/updateagentscheduleresponsebody.ts): Invalid type, expression, or sub-hour cadence. Status code `400`. Applicable to 1 of 272 methods.*
+* [`TriggerAgentScheduleResponseBody`](./src/models/errors/triggeragentscheduleresponsebody.ts): Schedule is inactive. Status code `400`. Applicable to 1 of 272 methods.*
+* [`GetEvalsResponseBody`](./src/models/errors/getevalsresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 272 methods.*
+* [`CreateEvalResponseBody`](./src/models/errors/createevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 272 methods.*
+* [`GetEvalResponseBody`](./src/models/errors/getevalresponsebody.ts): No evaluator with this id exists in the authenticated workspace, or the request carries no workspace. Status code `404`. Applicable to 1 of 272 methods.*
+* [`UpdateEvalResponseBody`](./src/models/errors/updateevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 272 methods.*
+* [`DeleteEvalResponseBody`](./src/models/errors/deleteevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 272 methods.*
+* [`GetV2EvaluatorsIdVersionsResponseBody`](./src/models/errors/getv2evaluatorsidversionsresponsebody.ts): Evaluator not found. Status code `404`. Applicable to 1 of 272 methods.*
+* [`DeleteAgentResponseBody`](./src/models/errors/deleteagentresponsebody.ts): Agent not found. The specified agent key does not exist in the workspace or has already been deleted. Status code `404`. Applicable to 1 of 272 methods.*
+* [`RetrieveAgentRequestResponseBody`](./src/models/errors/retrieveagentrequestresponsebody.ts): Agent not found. The specified agent key does not exist in the workspace or you do not have permission to access it. Status code `404`. Applicable to 1 of 272 methods.*
+* [`UpdateAgentResponseBody`](./src/models/errors/updateagentresponsebody.ts): Agent not found. The specified agent key does not exist in the workspace or you do not have permission to modify it. Status code `404`. Applicable to 1 of 272 methods.*
+* [`StreamRunAgentResponseBody`](./src/models/errors/streamrunagentresponsebody.ts): Model not found. Status code `404`. Applicable to 1 of 272 methods.*
+* [`StreamAgentResponseBody`](./src/models/errors/streamagentresponsebody.ts): Agent not found. Status code `404`. Applicable to 1 of 272 methods.*
+* [`UpdatePromptResponseBody`](./src/models/errors/updatepromptresponsebody.ts): Prompt not found. Status code `404`. Applicable to 1 of 272 methods.*
+* [`DeletePromptResponseBody`](./src/models/errors/deletepromptresponsebody.ts): Prompt not found. Status code `404`. Applicable to 1 of 272 methods.*
+* [`GetPromptVersionResponseBody`](./src/models/errors/getpromptversionresponsebody.ts): Not Found - The prompt or prompt version does not exist. Status code `404`. Applicable to 1 of 272 methods.*
+* [`UpdateToolResponseBody`](./src/models/errors/updatetoolresponsebody.ts): Tool not found. Status code `404`. Applicable to 1 of 272 methods.*
+* [`GetV2ToolsToolIdVersionsResponseBody`](./src/models/errors/getv2toolstoolidversionsresponsebody.ts): Tool not found. Status code `404`. Applicable to 1 of 272 methods.*
+* [`GetV2ToolsToolIdVersionsVersionIdResponseBody`](./src/models/errors/getv2toolstoolidversionsversionidresponsebody.ts): Tool or version not found. Status code `404`. Applicable to 1 of 272 methods.*
+* [`PostV2FeedbackRemoveResponseBody`](./src/models/errors/postv2feedbackremoveresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 272 methods.*
+* [`PostV2FeedbackFeedbackResponseBody`](./src/models/errors/postv2feedbackfeedbackresponsebody.ts): Workspace, trace, or feedback property was not found. Status code `404`. Applicable to 1 of 272 methods.*
+* [`CreateAgentScheduleSchedulesResponseBody`](./src/models/errors/createagentscheduleschedulesresponsebody.ts): Agent (or agent version, when agent_tag is set) not found. Status code `404`. Applicable to 1 of 272 methods.*
+* [`DeleteAgentScheduleResponseBody`](./src/models/errors/deleteagentscheduleresponsebody.ts): Schedule not found, or belongs to a different agent. Status code `404`. Applicable to 1 of 272 methods.*
+* [`RetrieveAgentScheduleResponseBody`](./src/models/errors/retrieveagentscheduleresponsebody.ts): Schedule not found, or belongs to a different agent. Status code `404`. Applicable to 1 of 272 methods.*
+* [`UpdateAgentScheduleSchedulesResponseBody`](./src/models/errors/updateagentscheduleschedulesresponsebody.ts): Schedule or agent version not found. Status code `404`. Applicable to 1 of 272 methods.*
+* [`TriggerAgentScheduleSchedulesResponseBody`](./src/models/errors/triggeragentscheduleschedulesresponsebody.ts): Schedule not found, or belongs to a different agent. Status code `404`. Applicable to 1 of 272 methods.*
+* [`RetrieveResponseResponseBody`](./src/models/errors/retrieveresponseresponsebody.ts): Response not found. Status code `404`. Applicable to 1 of 272 methods.*
+* [`DeleteEvalEvalsResponseBody`](./src/models/errors/deleteevalevalsresponsebody.ts): The evaluator is still referenced as an evaluator or guardrail by one or more deployments. Status code `409`. Applicable to 1 of 272 methods.*
+* [`CreateModerationResponseBody`](./src/models/errors/createmoderationresponsebody.ts): Returns validation error. Status code `422`. Applicable to 1 of 272 methods.*
+* [`CreateTranscriptionResponseBody`](./src/models/errors/createtranscriptionresponsebody.ts): Returns validation error. Status code `422`. Applicable to 1 of 272 methods.*
+* [`CreateTranslationResponseBody`](./src/models/errors/createtranslationresponsebody.ts): Returns validation error. Status code `422`. Applicable to 1 of 272 methods.*
+* [`KnowledgeApiError`](./src/models/errors/knowledgeapierror.ts): An error has occured. Status code `500`. Applicable to 1 of 272 methods.*
 * [`ResponseValidationError`](./src/models/errors/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
 
 </details>
@@ -1438,43 +1218,7 @@ const orq = new Orq({
 });
 
 async function run() {
-  const result = await orq.deployments.invoke({
-    key: "<key>",
-    identity: {
-      id: "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV",
-      displayName: "Jane Doe",
-      email: "jane.doe@example.com",
-      metadata: [
-        {
-          "department": "Engineering",
-          "role": "Senior Developer",
-        },
-      ],
-      logoUrl: "https://example.com/avatars/jane-doe.jpg",
-      tags: [
-        "hr",
-        "engineering",
-      ],
-    },
-    documents: [
-      {
-        text:
-          "The refund policy allows customers to return items within 30 days of purchase for a full refund.",
-        metadata: {
-          fileName: "refund_policy.pdf",
-          fileType: "application/pdf",
-          pageNumber: 1,
-        },
-      },
-      {
-        text: "Premium members receive free shipping on all orders over $50.",
-        metadata: {
-          fileName: "membership_benefits.md",
-          fileType: "text/markdown",
-        },
-      },
-    ],
-  });
+  const result = await orq.evals.all({});
 
   console.log(result);
 }

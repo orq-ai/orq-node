@@ -1,17 +1,17 @@
 # CreateToolResponseBodyToolsResponse200ApplicationJSONType
 
-The type must be "object"
+The type of the argument.
 
 ## Example Usage
 
 ```typescript
 import { CreateToolResponseBodyToolsResponse200ApplicationJSONType } from "@orq-ai/node/models/operations";
 
-let value: CreateToolResponseBodyToolsResponse200ApplicationJSONType = "object";
+let value: CreateToolResponseBodyToolsResponse200ApplicationJSONType = "string";
 ```
 
 ## Values
 
 ```typescript
-"object"
+"string" | "number" | "boolean"
 ```

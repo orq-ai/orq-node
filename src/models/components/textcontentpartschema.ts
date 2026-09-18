@@ -12,25 +12,27 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 /**
  * The type of the content part.
  */
-export const Type = {
+export const TextContentPartSchemaType = {
   Text: "text",
 } as const;
 /**
  * The type of the content part.
  */
-export type Type = ClosedEnum<typeof Type>;
+export type TextContentPartSchemaType = ClosedEnum<
+  typeof TextContentPartSchemaType
+>;
 
 /**
  * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
  */
-export const TextContentPartSchemaType = {
+export const TextContentPartSchemaCacheControlType = {
   Ephemeral: "ephemeral",
 } as const;
 /**
  * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
  */
-export type TextContentPartSchemaType = ClosedEnum<
-  typeof TextContentPartSchemaType
+export type TextContentPartSchemaCacheControlType = ClosedEnum<
+  typeof TextContentPartSchemaCacheControlType
 >;
 
 /**
@@ -43,7 +45,7 @@ export type TextContentPartSchemaType = ClosedEnum<
  *
  * Defaults to `5m`. Only supported by `Anthropic` Claude models.
  */
-export const TextContentPartSchemaTtl = {
+export const Ttl = {
   Fivem: "5m",
   Oneh: "1h",
 } as const;
@@ -57,15 +59,13 @@ export const TextContentPartSchemaTtl = {
  *
  * Defaults to `5m`. Only supported by `Anthropic` Claude models.
  */
-export type TextContentPartSchemaTtl = ClosedEnum<
-  typeof TextContentPartSchemaTtl
->;
+export type Ttl = ClosedEnum<typeof Ttl>;
 
 export type CacheControl = {
   /**
    * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
    */
-  type: TextContentPartSchemaType;
+  type: TextContentPartSchemaCacheControlType;
   /**
    * The time-to-live for the cache control breakpoint. This may be one of the following values:
    *
@@ -76,7 +76,7 @@ export type CacheControl = {
    *
    * Defaults to `5m`. Only supported by `Anthropic` Claude models.
    */
-  ttl?: TextContentPartSchemaTtl | undefined;
+  ttl?: Ttl | undefined;
 };
 
 /**
@@ -86,21 +86,13 @@ export type TextContentPartSchema = {
   /**
    * The type of the content part.
    */
-  type: Type;
+  type: TextContentPartSchemaType;
   /**
    * The text content.
    */
   text: string;
   cacheControl?: CacheControl | undefined;
 };
-
-/** @internal */
-export const Type$inboundSchema: z.ZodNativeEnum<typeof Type> = z.nativeEnum(
-  Type,
-);
-/** @internal */
-export const Type$outboundSchema: z.ZodNativeEnum<typeof Type> =
-  Type$inboundSchema;
 
 /** @internal */
 export const TextContentPartSchemaType$inboundSchema: z.ZodNativeEnum<
@@ -112,13 +104,20 @@ export const TextContentPartSchemaType$outboundSchema: z.ZodNativeEnum<
 > = TextContentPartSchemaType$inboundSchema;
 
 /** @internal */
-export const TextContentPartSchemaTtl$inboundSchema: z.ZodNativeEnum<
-  typeof TextContentPartSchemaTtl
-> = z.nativeEnum(TextContentPartSchemaTtl);
+export const TextContentPartSchemaCacheControlType$inboundSchema:
+  z.ZodNativeEnum<typeof TextContentPartSchemaCacheControlType> = z.nativeEnum(
+    TextContentPartSchemaCacheControlType,
+  );
 /** @internal */
-export const TextContentPartSchemaTtl$outboundSchema: z.ZodNativeEnum<
-  typeof TextContentPartSchemaTtl
-> = TextContentPartSchemaTtl$inboundSchema;
+export const TextContentPartSchemaCacheControlType$outboundSchema:
+  z.ZodNativeEnum<typeof TextContentPartSchemaCacheControlType> =
+    TextContentPartSchemaCacheControlType$inboundSchema;
+
+/** @internal */
+export const Ttl$inboundSchema: z.ZodNativeEnum<typeof Ttl> = z.nativeEnum(Ttl);
+/** @internal */
+export const Ttl$outboundSchema: z.ZodNativeEnum<typeof Ttl> =
+  Ttl$inboundSchema;
 
 /** @internal */
 export const CacheControl$inboundSchema: z.ZodType<
@@ -126,8 +125,8 @@ export const CacheControl$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: TextContentPartSchemaType$inboundSchema,
-  ttl: TextContentPartSchemaTtl$inboundSchema.default("5m"),
+  type: TextContentPartSchemaCacheControlType$inboundSchema,
+  ttl: Ttl$inboundSchema.default("5m"),
 });
 /** @internal */
 export type CacheControl$Outbound = {
@@ -141,8 +140,8 @@ export const CacheControl$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CacheControl
 > = z.object({
-  type: TextContentPartSchemaType$outboundSchema,
-  ttl: TextContentPartSchemaTtl$outboundSchema.default("5m"),
+  type: TextContentPartSchemaCacheControlType$outboundSchema,
+  ttl: Ttl$outboundSchema.default("5m"),
 });
 
 export function cacheControlToJSON(cacheControl: CacheControl): string {
@@ -164,7 +163,7 @@ export const TextContentPartSchema$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: Type$inboundSchema,
+  type: TextContentPartSchemaType$inboundSchema,
   text: z.string(),
   cache_control: z.lazy(() => CacheControl$inboundSchema).optional(),
 }).transform((v) => {
@@ -185,7 +184,7 @@ export const TextContentPartSchema$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   TextContentPartSchema
 > = z.object({
-  type: Type$outboundSchema,
+  type: TextContentPartSchemaType$outboundSchema,
   text: z.string(),
   cacheControl: z.lazy(() => CacheControl$outboundSchema).optional(),
 }).transform((v) => {

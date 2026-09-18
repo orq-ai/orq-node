@@ -1,69 +1,19 @@
 # One
 
-
-## Supported Types
-
-### `components.InvokeDeploymentRequest1Eq`
+## Example Usage
 
 ```typescript
-const value: components.InvokeDeploymentRequest1Eq = {
-  eq: 1527.51,
+import { One } from "@orq-ai/node/models/components";
+
+let value: One = {
+  type: "contains",
+  value: "<value>",
 };
 ```
 
-### `components.InvokeDeploymentRequest1Ne`
+## Fields
 
-```typescript
-const value: components.InvokeDeploymentRequest1Ne = {
-  ne: "<value>",
-};
-```
-
-### `components.Gt`
-
-```typescript
-const value: components.Gt = {
-  gt: 2952.97,
-};
-```
-
-### `components.Gte`
-
-```typescript
-const value: components.Gte = {
-  gte: 9700.59,
-};
-```
-
-### `components.Lt`
-
-```typescript
-const value: components.Lt = {
-  lt: 854.37,
-};
-```
-
-### `components.Lte`
-
-```typescript
-const value: components.Lte = {
-  lte: 454.79,
-};
-```
-
-### `components.InvokeDeploymentRequest1In`
-
-```typescript
-const value: components.InvokeDeploymentRequest1In = {
-  in: [],
-};
-```
-
-### `components.InvokeDeploymentRequest1Nin`
-
-```typescript
-const value: components.InvokeDeploymentRequest1Nin = {
-  nin: [],
-};
-```
-
+| Field              | Type               | Required           | Description        |
+| ------------------ | ------------------ | ------------------ | ------------------ |
+| `type`             | *"contains"*       | :heavy_check_mark: | N/A                |
+| `value`            | *string*           | :heavy_check_mark: | N/A                |

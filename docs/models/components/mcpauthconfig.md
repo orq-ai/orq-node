@@ -7,12 +7,6 @@ import { McpAuthConfig } from "@orq-ai/node/models/components";
 
 let value: McpAuthConfig = {
   type: "MCP_AUTH_TYPE_PER_USER_OAUTH",
-  staticHeaders: [
-    {
-      key: "Authorization",
-      value: "ghp_xxxxxxxxxxxx",
-    },
-  ],
 };
 ```
 

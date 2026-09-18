@@ -15,7 +15,7 @@ let value: ListPromptVersionsResponseBody = {
       prompt: {
         fallbacks: [
           {
-            model: "openai/gpt-5.4-mini",
+            model: "openai/gpt-4o-mini",
           },
         ],
         retry: {
@@ -47,7 +47,7 @@ let value: ListPromptVersionsResponseBody = {
         timeout: {
           callTimeout: 30000,
         },
-        model: "openai/gpt-5.6-sol",
+        model: "openai/gpt-4o",
       },
       timestamp: "<value>",
     },

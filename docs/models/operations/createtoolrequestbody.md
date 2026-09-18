@@ -11,7 +11,7 @@ The tool to create
 const value: operations.FunctionTool = {
   path: "Default Project",
   key: "<key>",
-  description: "Searches the company knowledge base for relevant documents.",
+  description: "beyond playfully atop apropos aw how",
   type: "function",
   function: {
     name: "<value>",
@@ -25,11 +25,11 @@ const value: operations.FunctionTool = {
 const value: operations.JSONSchemaTool = {
   path: "Default Project",
   key: "<key>",
-  description: "Searches the company knowledge base for relevant documents.",
+  description: "uh-huh scholarship what madly",
   type: "json_schema",
   jsonSchema: {
     name: "<value>",
-    description: "uh-huh scholarship what madly",
+    description: "barring climb usefully however ouch yuck bicycle",
     schema: {
       type: "<value>",
       properties: {
@@ -47,7 +47,7 @@ const value: operations.JSONSchemaTool = {
 const value: operations.HTTPTool = {
   path: "Default Project",
   key: "<key>",
-  description: "Searches the company knowledge base for relevant documents.",
+  description: "midst too hello difficult proofread",
   type: "http",
   http: {
     blueprint: {
@@ -64,7 +64,7 @@ const value: operations.HTTPTool = {
 const value: operations.CodeExecutionTool = {
   path: "Default Project",
   key: "<key>",
-  description: "Searches the company knowledge base for relevant documents.",
+  description: "convince without brr",
   type: "code",
   codeTool: {
     language: "python",

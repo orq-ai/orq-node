@@ -11,7 +11,6 @@ import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
-import * as components from "../models/components/index.js";
 import {
   ConnectionError,
   InvalidRequestError,
@@ -30,7 +29,7 @@ import { Result } from "../types/fp.js";
  * List annotation queues
  *
  * @remarks
- * Returns annotation queues in the workspace, newest first.
+ * Retrieves a paginated list of annotation queues for the current workspace. Results can be paginated using cursor-based pagination.
  */
 export function annotationQueuesList(
   client: OrqCore,
@@ -38,7 +37,7 @@ export function annotationQueuesList(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    components.ListAnnotationQueuesResponse,
+    operations.ListAnnotationQueuesResponseBody,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -63,7 +62,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      components.ListAnnotationQueuesResponse,
+      operations.ListAnnotationQueuesResponseBody,
       | OrqError
       | ResponseValidationError
       | ConnectionError
@@ -152,7 +151,7 @@ async function $do(
   const response = doResult.value;
 
   const [result] = await M.match<
-    components.ListAnnotationQueuesResponse,
+    operations.ListAnnotationQueuesResponseBody,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -162,7 +161,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, components.ListAnnotationQueuesResponse$inboundSchema),
+    M.json(200, operations.ListAnnotationQueuesResponseBody$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, req);

@@ -326,13 +326,13 @@ export type FilterBy =
       | Exists;
   };
 
-export type Two = {
+export type AgenticRagConfig2 = {
   /**
    * The name of the model for the Agent to use. Refer to the [model list](https://docs.orq.ai/docs/proxy#/chat-models).
    */
   model?: string | undefined;
   /**
-   * Identifier of the stored model configuration to use.
+   * Internal database model identifier used by the retrieval testing UI.
    */
   modelDbId: string;
   /**
@@ -351,7 +351,7 @@ export type AgenticRagConfig1 = {
    */
   model: string;
   /**
-   * Identifier of the stored model configuration to use.
+   * Internal database model identifier used by the retrieval testing UI.
    */
   modelDbId?: string | undefined;
   /**
@@ -367,13 +367,15 @@ export type AgenticRagConfig1 = {
 /**
  * Represents a dynamically typed value which can be either null, a number, a string, a boolean, a recursive struct value, or a list of values.
  */
-export type SearchKnowledgeRequestAgenticRagConfig = Two | AgenticRagConfig1;
+export type SearchKnowledgeRequestAgenticRagConfig =
+  | AgenticRagConfig2
+  | AgenticRagConfig1;
 
 /**
- * Search request. Sets the knowledge base and query, plus optional retrieval
+ * SearchKnowledgeRequest mirrors the existing public search body and adds the
  *
  * @remarks
- *  settings.
+ *  internal retrieval configuration override used by the knowledge testing UI.
  */
 export type SearchKnowledgeRequest = {
   /**
@@ -419,7 +421,7 @@ export type SearchKnowledgeRequest = {
   /**
    * Override the agentic RAG configuration for this search. If not provided, will use the knowledge base configured agentic RAG settings.
    */
-  agenticRagConfig?: Two | AgenticRagConfig1 | null | undefined;
+  agenticRagConfig?: AgenticRagConfig2 | AgenticRagConfig1 | null | undefined;
   /**
    * Override the stored retrieval configuration for this search. If not provided, the knowledge base configuration is used.
    */
@@ -1474,7 +1476,7 @@ export function filterByToJSON(filterBy: FilterBy): string {
 }
 
 /** @internal */
-export type Two$Outbound = {
+export type AgenticRagConfig2$Outbound = {
   model?: string | undefined;
   model_db_id: string;
   provider: string;
@@ -1482,21 +1484,28 @@ export type Two$Outbound = {
 };
 
 /** @internal */
-export const Two$outboundSchema: z.ZodType<Two$Outbound, z.ZodTypeDef, Two> = z
-  .object({
-    model: z.string().optional(),
-    modelDbId: z.string(),
-    provider: z.string(),
-    integrationId: z.nullable(z.string()).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      modelDbId: "model_db_id",
-      integrationId: "integration_id",
-    });
+export const AgenticRagConfig2$outboundSchema: z.ZodType<
+  AgenticRagConfig2$Outbound,
+  z.ZodTypeDef,
+  AgenticRagConfig2
+> = z.object({
+  model: z.string().optional(),
+  modelDbId: z.string(),
+  provider: z.string(),
+  integrationId: z.nullable(z.string()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    modelDbId: "model_db_id",
+    integrationId: "integration_id",
   });
+});
 
-export function twoToJSON(two: Two): string {
-  return JSON.stringify(Two$outboundSchema.parse(two));
+export function agenticRagConfig2ToJSON(
+  agenticRagConfig2: AgenticRagConfig2,
+): string {
+  return JSON.stringify(
+    AgenticRagConfig2$outboundSchema.parse(agenticRagConfig2),
+  );
 }
 
 /** @internal */
@@ -1534,7 +1543,7 @@ export function agenticRagConfig1ToJSON(
 
 /** @internal */
 export type SearchKnowledgeRequestAgenticRagConfig$Outbound =
-  | Two$Outbound
+  | AgenticRagConfig2$Outbound
   | AgenticRagConfig1$Outbound;
 
 /** @internal */
@@ -1543,7 +1552,7 @@ export const SearchKnowledgeRequestAgenticRagConfig$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   SearchKnowledgeRequestAgenticRagConfig
 > = z.union([
-  z.lazy(() => Two$outboundSchema),
+  z.lazy(() => AgenticRagConfig2$outboundSchema),
   z.lazy(() => AgenticRagConfig1$outboundSchema),
 ]);
 
@@ -1583,7 +1592,7 @@ export type SearchKnowledgeRequest$Outbound = {
   search_options?: SearchOptions$Outbound | undefined;
   rerank_config?: SearchRerankConfig$Outbound | undefined;
   agentic_rag_config?:
-    | Two$Outbound
+    | AgenticRagConfig2$Outbound
     | AgenticRagConfig1$Outbound
     | null
     | undefined;
@@ -1621,7 +1630,7 @@ export const SearchKnowledgeRequest$outboundSchema: z.ZodType<
   rerankConfig: SearchRerankConfig$outboundSchema.optional(),
   agenticRagConfig: z.nullable(
     z.union([
-      z.lazy(() => Two$outboundSchema),
+      z.lazy(() => AgenticRagConfig2$outboundSchema),
       z.lazy(() => AgenticRagConfig1$outboundSchema),
     ]),
   ).optional(),

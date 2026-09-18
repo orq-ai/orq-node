@@ -1,23 +1,19 @@
 # DeploymentStreamAndIn
 
+In
 
-## Supported Types
-
-### `string`
-
-```typescript
-const value: string = "<value>";
-```
-
-### `number`
+## Example Usage
 
 ```typescript
-const value: number = 1284.03;
+import { DeploymentStreamAndIn } from "@orq-ai/node/models/operations";
+
+let value: DeploymentStreamAndIn = {
+  in: [],
+};
 ```
 
-### `boolean`
+## Fields
 
-```typescript
-const value: boolean = true;
-```
-
+| Field                                           | Type                                            | Required                                        | Description                                     |
+| ----------------------------------------------- | ----------------------------------------------- | ----------------------------------------------- | ----------------------------------------------- |
+| `in`                                            | *operations.DeploymentStreamAndDeploymentsIn*[] | :heavy_check_mark:                              | N/A                                             |

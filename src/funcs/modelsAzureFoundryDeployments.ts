@@ -157,7 +157,7 @@ async function $do(
       200,
       operations.ModelAzureFoundryDeploymentsResponseBody$inboundSchema,
     ),
-    M.fail([400, 401, "4XX"]),
+    M.fail([400, "4XX"]),
     M.fail("5XX"),
   )(response, req);
   if (!result.ok) {

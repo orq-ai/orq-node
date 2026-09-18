@@ -12,7 +12,7 @@ export class Reporting extends ClientSDK {
    * Query reporting metrics
    *
    * @remarks
-   * Returns time-series, scalar, and top-list analytics for AI usage, cost, latency, evaluator results, and guardrail outcomes.
+   * Returns time-series, scalar, and top-list analytics for AI usage, cost, latency, evaluator results, and guardrail outcomes. This API remains supported while the neutral telemetry envelope is proven against every reporting request shape.
    */
   async query(
     request: components.QueryReportRequest,

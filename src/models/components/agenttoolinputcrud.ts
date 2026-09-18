@@ -34,11 +34,6 @@ import {
   DeleteMemoryDocumentToolInput$outboundSchema,
 } from "./deletememorydocumenttoolinput.js";
 import {
-  FileSystemToolInput,
-  FileSystemToolInput$Outbound,
-  FileSystemToolInput$outboundSchema,
-} from "./filesystemtoolinput.js";
-import {
   FunctionToolInput,
   FunctionToolInput$Outbound,
   FunctionToolInput$outboundSchema,
@@ -122,7 +117,6 @@ export type AgentToolInputCRUD =
   | AdvisorToolInput
   | SidekickToolInput
   | CodeInterpreterToolInput
-  | FileSystemToolInput
   | HttpToolInput
   | CodeToolInput
   | FunctionToolInput
@@ -145,7 +139,6 @@ export type AgentToolInputCRUD$Outbound =
   | AdvisorToolInput$Outbound
   | SidekickToolInput$Outbound
   | CodeInterpreterToolInput$Outbound
-  | FileSystemToolInput$Outbound
   | HttpToolInput$Outbound
   | CodeToolInput$Outbound
   | FunctionToolInput$Outbound
@@ -172,7 +165,6 @@ export const AgentToolInputCRUD$outboundSchema: z.ZodType<
   AdvisorToolInput$outboundSchema,
   SidekickToolInput$outboundSchema,
   CodeInterpreterToolInput$outboundSchema,
-  FileSystemToolInput$outboundSchema,
   HttpToolInput$outboundSchema,
   CodeToolInput$outboundSchema,
   FunctionToolInput$outboundSchema,

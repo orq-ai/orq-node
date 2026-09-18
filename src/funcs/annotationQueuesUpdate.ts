@@ -11,7 +11,6 @@ import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
-import * as components from "../models/components/index.js";
 import {
   ConnectionError,
   InvalidRequestError,
@@ -27,10 +26,10 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Update an annotation queue
+ * Edit an annotation queue
  *
  * @remarks
- * Partially updates an existing annotation queue. Setting `project_id` clears the legacy `human_review_ids` selection.
+ * Update an annotation queue by ID with the provided fields.
  */
 export function annotationQueuesUpdate(
   client: OrqCore,
@@ -38,7 +37,7 @@ export function annotationQueuesUpdate(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    components.AnnotationQueue,
+    operations.UpdateAnnotationQueueResponseBody,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -63,7 +62,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      components.AnnotationQueue,
+      operations.UpdateAnnotationQueueResponseBody,
       | OrqError
       | ResponseValidationError
       | ConnectionError
@@ -86,9 +85,7 @@ async function $do(
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = encodeJSON("body", payload.UpdateAnnotationQueueRequest, {
-    explode: true,
-  });
+  const body = encodeJSON("body", payload.RequestBody, { explode: true });
 
   const pathParams = {
     annotation_queue_id: encodeSimple(
@@ -153,7 +150,7 @@ async function $do(
   const response = doResult.value;
 
   const [result] = await M.match<
-    components.AnnotationQueue,
+    operations.UpdateAnnotationQueueResponseBody,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -163,7 +160,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, components.AnnotationQueue$inboundSchema),
+    M.json(200, operations.UpdateAnnotationQueueResponseBody$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, req);

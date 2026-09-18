@@ -1,23 +1,21 @@
 # DeploymentStreamOrNin
 
+Not in
 
-## Supported Types
-
-### `string`
-
-```typescript
-const value: string = "<value>";
-```
-
-### `number`
+## Example Usage
 
 ```typescript
-const value: number = 1284.03;
+import { DeploymentStreamOrNin } from "@orq-ai/node/models/operations";
+
+let value: DeploymentStreamOrNin = {
+  nin: [
+    false,
+  ],
+};
 ```
 
-### `boolean`
+## Fields
 
-```typescript
-const value: boolean = true;
-```
-
+| Field                                           | Type                                            | Required                                        | Description                                     |
+| ----------------------------------------------- | ----------------------------------------------- | ----------------------------------------------- | ----------------------------------------------- |
+| `nin`                                           | *operations.DeploymentStreamOrDeploymentsNin*[] | :heavy_check_mark:                              | N/A                                             |

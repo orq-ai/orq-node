@@ -8,14 +8,14 @@ File in URI format. Check in the model's documentation for the supported mime ty
 import { FileInURIFormat } from "@orq-ai/node/models/components";
 
 let value: FileInURIFormat = {
-  uri: "https://example.com/report.pdf",
+  uri: "https://experienced-pupil.org",
 };
 ```
 
 ## Fields
 
-| Field                          | Type                           | Required                       | Description                    | Example                        |
-| ------------------------------ | ------------------------------ | ------------------------------ | ------------------------------ | ------------------------------ |
-| `uri`                          | *string*                       | :heavy_check_mark:             | URL for the File content       | https://example.com/report.pdf |
-| `mimeType`                     | *string*                       | :heavy_minus_sign:             | Optional mimeType for the file |                                |
-| `name`                         | *string*                       | :heavy_minus_sign:             | Optional name for the file     |                                |
+| Field                          | Type                           | Required                       | Description                    |
+| ------------------------------ | ------------------------------ | ------------------------------ | ------------------------------ |
+| `uri`                          | *string*                       | :heavy_check_mark:             | URL for the File content       |
+| `mimeType`                     | *string*                       | :heavy_minus_sign:             | Optional mimeType for the file |
+| `name`                         | *string*                       | :heavy_minus_sign:             | Optional name for the file     |

@@ -1,21 +1,23 @@
 # DeploymentGetConfigOrNin
 
-Not in
 
-## Example Usage
+## Supported Types
+
+### `string`
 
 ```typescript
-import { DeploymentGetConfigOrNin } from "@orq-ai/node/models/operations";
-
-let value: DeploymentGetConfigOrNin = {
-  nin: [
-    "<value>",
-  ],
-};
+const value: string = "<value>";
 ```
 
-## Fields
+### `number`
 
-| Field                                              | Type                                               | Required                                           | Description                                        |
-| -------------------------------------------------- | -------------------------------------------------- | -------------------------------------------------- | -------------------------------------------------- |
-| `nin`                                              | *operations.DeploymentGetConfigOrDeploymentsNin*[] | :heavy_check_mark:                                 | N/A                                                |
+```typescript
+const value: number = 1284.03;
+```
+
+### `boolean`
+
+```typescript
+const value: boolean = true;
+```
+

@@ -6,7 +6,6 @@ import { evalsAll } from "../funcs/evalsAll.js";
 import { evalsCreate } from "../funcs/evalsCreate.js";
 import { evalsDelete } from "../funcs/evalsDelete.js";
 import { evalsGet } from "../funcs/evalsGet.js";
-import { evalsGetVersion } from "../funcs/evalsGetVersion.js";
 import { evalsInvoke } from "../funcs/evalsInvoke.js";
 import { evalsListVersions } from "../funcs/evalsListVersions.js";
 import { evalsUpdate } from "../funcs/evalsUpdate.js";
@@ -68,23 +67,6 @@ export class Evals extends ClientSDK {
   }
 
   /**
-   * Delete an Evaluator
-   *
-   * @remarks
-   * Delete an evaluator by its unique identifier.
-   */
-  async delete(
-    request: operations.DeleteEvalRequest,
-    options?: RequestOptions,
-  ): Promise<void> {
-    return unwrapAsync(evalsDelete(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
    * Update an Evaluator
    *
    * @remarks
@@ -102,33 +84,16 @@ export class Evals extends ClientSDK {
   }
 
   /**
-   * List evaluator versions
+   * Delete an Evaluator
    *
    * @remarks
-   * Returns version history for a specific evaluator.
+   * Delete an evaluator by its unique identifier.
    */
-  async listVersions(
-    request: operations.ListEvalVersionsRequest,
+  async delete(
+    request: operations.DeleteEvalRequest,
     options?: RequestOptions,
-  ): Promise<components.ListEvaluatorVersionsResponse> {
-    return unwrapAsync(evalsListVersions(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Get evaluator version
-   *
-   * @remarks
-   * Returns a specific version of an evaluator.
-   */
-  async getVersion(
-    request: operations.GetEvalVersionRequest,
-    options?: RequestOptions,
-  ): Promise<operations.GetEvalVersionResponseBody> {
-    return unwrapAsync(evalsGetVersion(
+  ): Promise<void> {
+    return unwrapAsync(evalsDelete(
       this,
       request,
       options,
@@ -144,8 +109,25 @@ export class Evals extends ClientSDK {
   async invoke(
     request: operations.InvokeEvalRequest,
     options?: RequestOptions,
-  ): Promise<components.EvaluationResult> {
+  ): Promise<components.InvokeEvaluatorResponse> {
     return unwrapAsync(evalsInvoke(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * List evaluator versions
+   *
+   * @remarks
+   * Returns version history for a specific evaluator
+   */
+  async listVersions(
+    request: operations.GetV2EvaluatorsIdVersionsRequest,
+    options?: RequestOptions,
+  ): Promise<operations.GetV2EvaluatorsIdVersionsResponseBody> {
+    return unwrapAsync(evalsListVersions(
       this,
       request,
       options,

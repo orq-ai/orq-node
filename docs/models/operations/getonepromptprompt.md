@@ -18,7 +18,7 @@ let value: GetOnePromptPrompt = {
   prompt: {
     fallbacks: [
       {
-        model: "openai/gpt-5.4-mini",
+        model: "openai/gpt-4o-mini",
       },
     ],
     retry: {
@@ -50,7 +50,7 @@ let value: GetOnePromptPrompt = {
     timeout: {
       callTimeout: 30000,
     },
-    model: "openai/gpt-5.6-sol",
+    model: "openai/gpt-4o",
   },
 };
 ```

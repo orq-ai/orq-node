@@ -7,11 +7,6 @@ import { McpAuthConfigOutput } from "@orq-ai/node/models/components";
 
 let value: McpAuthConfigOutput = {
   type: "MCP_AUTH_TYPE_OAUTH_CLIENT_CREDENTIALS",
-  staticHeaders: [
-    {
-      key: "Authorization",
-    },
-  ],
 };
 ```
 

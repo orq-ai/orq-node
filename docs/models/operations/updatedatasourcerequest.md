@@ -9,7 +9,7 @@ let value: UpdateDatasourceRequest = {
   knowledgeId: "<id>",
   datasourceId: "<id>",
   datasourcesServiceUpdateRequest: {
-    displayName: "Product handbook",
+    displayName: "Caleigh_Graham-Breitenberg84",
   },
 };
 ```

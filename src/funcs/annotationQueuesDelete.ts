@@ -30,7 +30,7 @@ import { Result } from "../types/fp.js";
  * Delete an annotation queue
  *
  * @remarks
- * Deletes an annotation queue, its items, and the queue references stored on the annotated spans.
+ * Delete an annotation queue and its items by ID.
  */
 export function annotationQueuesDelete(
   client: OrqCore,
@@ -161,7 +161,7 @@ async function $do(
     | SDKValidationError
   >(
     M.nil(204, z.void()),
-    M.fail("4XX"),
+    M.fail([404, "4XX"]),
     M.fail("5XX"),
   )(response, req);
   if (!result.ok) {

@@ -103,7 +103,7 @@ export class Webhooks extends ClientSDK {
    * Retrieve a webhook
    *
    * @remarks
-   * Retrieves a webhook in the current workspace by ID. The signing secret is returned masked; it is only shown in full when the webhook is created.
+   * Retrieves a webhook in the current workspace by ID. The response includes its signing secret; treat it as sensitive.
    */
   async get(
     request: operations.WebhookGetRequest,

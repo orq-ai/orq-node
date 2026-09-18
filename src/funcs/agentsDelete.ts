@@ -170,7 +170,7 @@ async function $do(
   >(
     M.nil(204, z.void()),
     M.jsonErr(404, errors.DeleteAgentResponseBody$inboundSchema),
-    M.fail([401, "4XX"]),
+    M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });
   if (!result.ok) {

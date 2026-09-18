@@ -10,6 +10,9 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetEvalRequest = {
+  /**
+   * Unique identifier of the evaluator, as returned in the `_id` field by `GET /v2/evaluators`.
+   */
   id: string;
 };
 
@@ -57,7 +60,7 @@ export type BedrockGuardrail = {
   integrationId?: string | null | undefined;
 };
 
-export type GetEvalResponseBodyEvalsResponse200ApplicationJson7Metadata = {
+export type GetEvalResponseBodyEvalsResponse200ApplicationJSONMetadata = {
   requiredModelWithToolsSupport?: boolean | undefined;
   requiredRetrievalContext?: boolean | undefined;
   requiredExpectedOutput?: boolean | undefined;
@@ -85,7 +88,7 @@ export type GetEvalResponseBodyEvalsResponse200ApplicationJson7OutputType =
 
 export type Typescript = {
   enabled: boolean;
-  metadata: GetEvalResponseBodyEvalsResponse200ApplicationJson7Metadata;
+  metadata: GetEvalResponseBodyEvalsResponse200ApplicationJSONMetadata;
   id: string;
   displayName: string;
   description: string;
@@ -110,7 +113,7 @@ export type Typescript = {
   type: "typescript_eval";
 };
 
-export type GetEvalResponseBodyEvalsResponse200ApplicationJSONMetadata = {
+export type GetEvalResponseBodyEvalsResponse200Metadata = {
   requiredModelWithToolsSupport?: boolean | undefined;
   requiredRetrievalContext?: boolean | undefined;
   requiredExpectedOutput?: boolean | undefined;
@@ -130,7 +133,7 @@ export type GetEvalResponseBodyEvalsResponse200ApplicationJSONOutputType =
 
 export type ResponseBodyPython = {
   enabled: boolean;
-  metadata: GetEvalResponseBodyEvalsResponse200ApplicationJSONMetadata;
+  metadata: GetEvalResponseBodyEvalsResponse200Metadata;
   id: string;
   displayName: string;
   description: string;
@@ -152,7 +155,7 @@ export type ResponseBodyPython = {
   type: "python_eval";
 };
 
-export type GetEvalResponseBodyEvalsResponse200Metadata = {
+export type GetEvalResponseBodyEvalsResponseMetadata = {
   requiredModelWithToolsSupport?: boolean | undefined;
   requiredRetrievalContext?: boolean | undefined;
   requiredExpectedOutput?: boolean | undefined;
@@ -183,9 +186,9 @@ export const ResponseBodyMethod = {
 } as const;
 export type ResponseBodyMethod = ClosedEnum<typeof ResponseBodyMethod>;
 
-export type GetEvalResponseBodyHTTP = {
+export type ResponseBodyHTTP = {
   enabled: boolean;
-  metadata: GetEvalResponseBodyEvalsResponse200Metadata;
+  metadata: GetEvalResponseBodyEvalsResponseMetadata;
   id: string;
   displayName: string;
   description: string;
@@ -211,7 +214,7 @@ export type GetEvalResponseBodyHTTP = {
   payload: { [k: string]: any };
 };
 
-export type GetEvalResponseBodyEvalsResponseMetadata = {
+export type GetEvalResponseBodyEvalsMetadata = {
   requiredModelWithToolsSupport?: boolean | undefined;
   requiredRetrievalContext?: boolean | undefined;
   requiredExpectedOutput?: boolean | undefined;
@@ -229,7 +232,7 @@ export type GetEvalResponseBodyEvalsResponseOutputType = ClosedEnum<
 
 export type Json = {
   enabled: boolean;
-  metadata: GetEvalResponseBodyEvalsResponseMetadata;
+  metadata: GetEvalResponseBodyEvalsMetadata;
   id: string;
   displayName: string;
   description: string;
@@ -249,7 +252,7 @@ export type Json = {
   schema: string;
 };
 
-export type GetEvalResponseBodyEvalsMetadata = {
+export type GetEvalResponseBodyMetadata = {
   requiredModelWithToolsSupport?: boolean | undefined;
   requiredRetrievalContext?: boolean | undefined;
   requiredExpectedOutput?: boolean | undefined;
@@ -265,7 +268,7 @@ export type GetEvalResponseBodyEvalsOutputType = ClosedEnum<
   typeof GetEvalResponseBodyEvalsOutputType
 >;
 
-export type GetEvalResponseBodyModel = {
+export type ResponseBodyModel = {
   id: string;
   integrationId?: string | null | undefined;
 };
@@ -288,7 +291,7 @@ export type RagasMetric = ClosedEnum<typeof RagasMetric>;
 
 export type Ragas = {
   enabled: boolean;
-  metadata: GetEvalResponseBodyEvalsMetadata;
+  metadata: GetEvalResponseBodyMetadata;
   id: string;
   displayName: string;
   description: string;
@@ -305,11 +308,11 @@ export type Ragas = {
   guardrailConfig?: any | undefined;
   outputType?: GetEvalResponseBodyEvalsOutputType | undefined;
   type: "ragas";
-  model: GetEvalResponseBodyModel;
+  model: ResponseBodyModel;
   ragasMetric: RagasMetric;
 };
 
-export type GetEvalResponseBodyMetadata = {
+export type ResponseBodyMetadata = {
   requiredModelWithToolsSupport?: boolean | undefined;
   requiredRetrievalContext?: boolean | undefined;
   requiredExpectedOutput?: boolean | undefined;
@@ -440,11 +443,11 @@ export type Seven = {
   type: "contains_valid_link";
 };
 
-export type FunctionParams6 = {
+export type Six = {
   type: "contains_url";
 };
 
-export type FunctionParams5 = {
+export type Five = {
   type: "contains_email";
 };
 
@@ -473,8 +476,8 @@ export type FunctionParams =
   | FunctionParams2
   | FunctionParams3
   | FunctionParams4
-  | FunctionParams5
-  | FunctionParams6
+  | Five
+  | Six
   | Seven
   | Eight
   | Nine
@@ -502,9 +505,9 @@ export type FunctionParams =
   | ThirtyOne
   | ThirtyTwo;
 
-export type GetEvalResponseBodyFunction = {
+export type ResponseBodyFunction = {
   enabled: boolean;
-  metadata: GetEvalResponseBodyMetadata;
+  metadata: ResponseBodyMetadata;
   id: string;
   displayName: string;
   description: string;
@@ -526,8 +529,8 @@ export type GetEvalResponseBodyFunction = {
     | FunctionParams2
     | FunctionParams3
     | FunctionParams4
-    | FunctionParams5
-    | FunctionParams6
+    | Five
+    | Six
     | Seven
     | Eight
     | Nine
@@ -556,7 +559,7 @@ export type GetEvalResponseBodyFunction = {
     | ThirtyTwo;
 };
 
-export type ResponseBodyMetadata = {
+export type GetEvalResponseBodyEvalsResponse200ApplicationJson1Metadata = {
   requiredModelWithToolsSupport?: boolean | undefined;
   requiredRetrievalContext?: boolean | undefined;
   requiredExpectedOutput?: boolean | undefined;
@@ -596,59 +599,10 @@ export type ResponseBodyModelParameters = {
   budgetTokens?: number | undefined;
 };
 
-export type ResponseBodyModel = {
+export type GetEvalResponseBodyModel = {
   id: string;
   integrationId?: string | null | undefined;
   modelParameters?: ResponseBodyModelParameters | undefined;
-};
-
-export type GetEvalResponseBodyModelParameters = {
-  temperature?: number | undefined;
-  maxTokens?: number | undefined;
-  topK?: number | undefined;
-  topP?: number | undefined;
-  frequencyPenalty?: number | undefined;
-  presencePenalty?: number | undefined;
-  reasoningEffort?: string | undefined;
-  budgetTokens?: number | undefined;
-};
-
-export type GetEvalResponseBodyEvalsResponseModel = {
-  id: string;
-  integrationId?: string | null | undefined;
-  modelParameters?: GetEvalResponseBodyModelParameters | undefined;
-};
-
-export type ResponseBodyRetry = {
-  count: number;
-  onCodes?: Array<number> | undefined;
-};
-
-export type GetEvalResponseBodyEvalsResponseModelParameters = {
-  temperature?: number | undefined;
-  maxTokens?: number | undefined;
-  topK?: number | undefined;
-  topP?: number | undefined;
-  frequencyPenalty?: number | undefined;
-  presencePenalty?: number | undefined;
-  reasoningEffort?: string | undefined;
-  budgetTokens?: number | undefined;
-};
-
-export type GetEvalResponseBodyEvalsResponse200ApplicationJSONModel = {
-  id: string;
-  integrationId?: string | null | undefined;
-  modelParameters?: GetEvalResponseBodyEvalsResponseModelParameters | undefined;
-};
-
-export type ResponseBodyFallbacks = {
-  model: GetEvalResponseBodyEvalsResponse200ApplicationJSONModel;
-};
-
-export type ResponseBodyJudges = {
-  model: GetEvalResponseBodyEvalsResponseModel;
-  retry?: ResponseBodyRetry | undefined;
-  fallbacks?: Array<ResponseBodyFallbacks> | undefined;
 };
 
 export type GetEvalResponseBodyEvalsModelParameters = {
@@ -668,7 +622,7 @@ export type GetEvalResponseBodyEvalsModel = {
   modelParameters?: GetEvalResponseBodyEvalsModelParameters | undefined;
 };
 
-export type GetEvalResponseBodyRetry = {
+export type ResponseBodyRetry = {
   count: number;
   onCodes?: Array<number> | undefined;
 };
@@ -692,12 +646,61 @@ export type GetEvalResponseBodyEvalsResponse200Model = {
     | undefined;
 };
 
-export type GetEvalResponseBodyFallbacks = {
+export type ResponseBodyFallbacks = {
   model: GetEvalResponseBodyEvalsResponse200Model;
 };
 
-export type ResponseBodyReplacementJudges = {
+export type ResponseBodyJudges = {
   model: GetEvalResponseBodyEvalsModel;
+  retry?: ResponseBodyRetry | undefined;
+  fallbacks?: Array<ResponseBodyFallbacks> | undefined;
+};
+
+export type GetEvalResponseBodyModelParameters = {
+  temperature?: number | undefined;
+  maxTokens?: number | undefined;
+  topK?: number | undefined;
+  topP?: number | undefined;
+  frequencyPenalty?: number | undefined;
+  presencePenalty?: number | undefined;
+  reasoningEffort?: string | undefined;
+  budgetTokens?: number | undefined;
+};
+
+export type GetEvalResponseBodyEvalsResponseModel = {
+  id: string;
+  integrationId?: string | null | undefined;
+  modelParameters?: GetEvalResponseBodyModelParameters | undefined;
+};
+
+export type GetEvalResponseBodyRetry = {
+  count: number;
+  onCodes?: Array<number> | undefined;
+};
+
+export type GetEvalResponseBodyEvalsResponseModelParameters = {
+  temperature?: number | undefined;
+  maxTokens?: number | undefined;
+  topK?: number | undefined;
+  topP?: number | undefined;
+  frequencyPenalty?: number | undefined;
+  presencePenalty?: number | undefined;
+  reasoningEffort?: string | undefined;
+  budgetTokens?: number | undefined;
+};
+
+export type GetEvalResponseBodyEvalsResponse200ApplicationJSONModel = {
+  id: string;
+  integrationId?: string | null | undefined;
+  modelParameters?: GetEvalResponseBodyEvalsResponseModelParameters | undefined;
+};
+
+export type GetEvalResponseBodyFallbacks = {
+  model: GetEvalResponseBodyEvalsResponse200ApplicationJSONModel;
+};
+
+export type ResponseBodyReplacementJudges = {
+  model: GetEvalResponseBodyEvalsResponseModel;
   retry?: GetEvalResponseBodyRetry | undefined;
   fallbacks?: Array<GetEvalResponseBodyFallbacks> | undefined;
 };
@@ -721,7 +724,7 @@ export type ResponseBodyCategoricalLabels = {
 
 export type ResponseBodyLLM = {
   enabled: boolean;
-  metadata: ResponseBodyMetadata;
+  metadata: GetEvalResponseBodyEvalsResponse200ApplicationJson1Metadata;
   id: string;
   displayName: string;
   description: string;
@@ -743,7 +746,7 @@ export type ResponseBodyLLM = {
   type: "llm_eval";
   mode?: ResponseBodyMode | null | undefined;
   repetitions?: number | null | undefined;
-  model?: ResponseBodyModel | undefined;
+  model?: GetEvalResponseBodyModel | undefined;
   jury?: ResponseBodyJury | null | undefined;
   prompt: string;
   categories?: Array<string> | null | undefined;
@@ -756,10 +759,10 @@ export type ResponseBodyLLM = {
  */
 export type GetEvalResponseBody =
   | ResponseBodyLLM
-  | GetEvalResponseBodyFunction
+  | ResponseBodyFunction
   | Ragas
   | Json
-  | GetEvalResponseBodyHTTP
+  | ResponseBodyHTTP
   | ResponseBodyPython
   | Typescript
   | BedrockGuardrail;
@@ -843,8 +846,8 @@ export const BedrockGuardrail$inboundSchema: z.ZodType<
   display_name: z.string(),
   description: z.string(),
   owner: z.string(),
-  created: z.string().default("2026-08-05T15:12:51.947Z"),
-  updated: z.string().default("2026-08-05T15:12:51.947Z"),
+  created: z.string().default("2026-09-18T09:52:55.048Z"),
+  updated: z.string().default("2026-09-18T09:52:55.048Z"),
   created_by_id: z.nullable(z.string()).optional(),
   updated_by_id: z.nullable(z.string()).optional(),
   domain_id: z.string(),
@@ -882,102 +885,6 @@ export function bedrockGuardrailFromJSON(
     jsonString,
     (x) => BedrockGuardrail$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'BedrockGuardrail' from JSON`,
-  );
-}
-
-/** @internal */
-export const GetEvalResponseBodyEvalsResponse200ApplicationJson7Metadata$inboundSchema:
-  z.ZodType<
-    GetEvalResponseBodyEvalsResponse200ApplicationJson7Metadata,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    required_model_with_tools_support: z.boolean().optional(),
-    required_retrieval_context: z.boolean().optional(),
-    required_expected_output: z.boolean().optional(),
-    supported_on_input_type: z.boolean().optional(),
-    supported_on_output_type: z.boolean().optional(),
-    support_use_as_guardrail: z.boolean().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "required_model_with_tools_support": "requiredModelWithToolsSupport",
-      "required_retrieval_context": "requiredRetrievalContext",
-      "required_expected_output": "requiredExpectedOutput",
-      "supported_on_input_type": "supportedOnInputType",
-      "supported_on_output_type": "supportedOnOutputType",
-      "support_use_as_guardrail": "supportUseAsGuardrail",
-    });
-  });
-
-export function getEvalResponseBodyEvalsResponse200ApplicationJSON7MetadataFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  GetEvalResponseBodyEvalsResponse200ApplicationJson7Metadata,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      GetEvalResponseBodyEvalsResponse200ApplicationJson7Metadata$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'GetEvalResponseBodyEvalsResponse200ApplicationJson7Metadata' from JSON`,
-  );
-}
-
-/** @internal */
-export const GetEvalResponseBodyEvalsResponse200ApplicationJson7OutputType$inboundSchema:
-  z.ZodNativeEnum<
-    typeof GetEvalResponseBodyEvalsResponse200ApplicationJson7OutputType
-  > = z.nativeEnum(
-    GetEvalResponseBodyEvalsResponse200ApplicationJson7OutputType,
-  );
-
-/** @internal */
-export const Typescript$inboundSchema: z.ZodType<
-  Typescript,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  enabled: z.boolean().default(true),
-  metadata: z.lazy(() =>
-    GetEvalResponseBodyEvalsResponse200ApplicationJson7Metadata$inboundSchema
-  ),
-  _id: z.string(),
-  display_name: z.string(),
-  description: z.string(),
-  owner: z.string(),
-  created: z.string().default("2026-08-05T15:12:51.947Z"),
-  updated: z.string().default("2026-08-05T15:12:51.947Z"),
-  created_by_id: z.nullable(z.string()).optional(),
-  updated_by_id: z.nullable(z.string()).optional(),
-  domain_id: z.string(),
-  project_id: z.string().optional(),
-  guardrail_config: z.any().optional(),
-  output_type:
-    GetEvalResponseBodyEvalsResponse200ApplicationJson7OutputType$inboundSchema
-      .optional(),
-  code: z.string(),
-  type: z.literal("typescript_eval"),
-}).transform((v) => {
-  return remap$(v, {
-    "_id": "id",
-    "display_name": "displayName",
-    "created_by_id": "createdById",
-    "updated_by_id": "updatedById",
-    "domain_id": "domainId",
-    "project_id": "projectId",
-    "guardrail_config": "guardrailConfig",
-    "output_type": "outputType",
-  });
-});
-
-export function typescriptFromJSON(
-  jsonString: string,
-): SafeParseResult<Typescript, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => Typescript$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Typescript' from JSON`,
   );
 }
 
@@ -1021,16 +928,16 @@ export function getEvalResponseBodyEvalsResponse200ApplicationJSONMetadataFromJS
 }
 
 /** @internal */
-export const GetEvalResponseBodyEvalsResponse200ApplicationJSONOutputType$inboundSchema:
+export const GetEvalResponseBodyEvalsResponse200ApplicationJson7OutputType$inboundSchema:
   z.ZodNativeEnum<
-    typeof GetEvalResponseBodyEvalsResponse200ApplicationJSONOutputType
+    typeof GetEvalResponseBodyEvalsResponse200ApplicationJson7OutputType
   > = z.nativeEnum(
-    GetEvalResponseBodyEvalsResponse200ApplicationJSONOutputType,
+    GetEvalResponseBodyEvalsResponse200ApplicationJson7OutputType,
   );
 
 /** @internal */
-export const ResponseBodyPython$inboundSchema: z.ZodType<
-  ResponseBodyPython,
+export const Typescript$inboundSchema: z.ZodType<
+  Typescript,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -1042,18 +949,18 @@ export const ResponseBodyPython$inboundSchema: z.ZodType<
   display_name: z.string(),
   description: z.string(),
   owner: z.string(),
-  created: z.string().default("2026-08-05T15:12:51.947Z"),
-  updated: z.string().default("2026-08-05T15:12:51.947Z"),
+  created: z.string().default("2026-09-18T09:52:55.048Z"),
+  updated: z.string().default("2026-09-18T09:52:55.048Z"),
   created_by_id: z.nullable(z.string()).optional(),
   updated_by_id: z.nullable(z.string()).optional(),
   domain_id: z.string(),
   project_id: z.string().optional(),
   guardrail_config: z.any().optional(),
   output_type:
-    GetEvalResponseBodyEvalsResponse200ApplicationJSONOutputType$inboundSchema
+    GetEvalResponseBodyEvalsResponse200ApplicationJson7OutputType$inboundSchema
       .optional(),
   code: z.string(),
-  type: z.literal("python_eval"),
+  type: z.literal("typescript_eval"),
 }).transform((v) => {
   return remap$(v, {
     "_id": "id",
@@ -1067,13 +974,13 @@ export const ResponseBodyPython$inboundSchema: z.ZodType<
   });
 });
 
-export function responseBodyPythonFromJSON(
+export function typescriptFromJSON(
   jsonString: string,
-): SafeParseResult<ResponseBodyPython, SDKValidationError> {
+): SafeParseResult<Typescript, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => ResponseBodyPython$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ResponseBodyPython' from JSON`,
+    (x) => Typescript$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Typescript' from JSON`,
   );
 }
 
@@ -1118,18 +1025,16 @@ export function getEvalResponseBodyEvalsResponse200MetadataFromJSON(
 }
 
 /** @internal */
-export const GetEvalResponseBodyEvalsResponse200OutputType$inboundSchema:
-  z.ZodNativeEnum<typeof GetEvalResponseBodyEvalsResponse200OutputType> = z
-    .nativeEnum(GetEvalResponseBodyEvalsResponse200OutputType);
+export const GetEvalResponseBodyEvalsResponse200ApplicationJSONOutputType$inboundSchema:
+  z.ZodNativeEnum<
+    typeof GetEvalResponseBodyEvalsResponse200ApplicationJSONOutputType
+  > = z.nativeEnum(
+    GetEvalResponseBodyEvalsResponse200ApplicationJSONOutputType,
+  );
 
 /** @internal */
-export const ResponseBodyMethod$inboundSchema: z.ZodNativeEnum<
-  typeof ResponseBodyMethod
-> = z.nativeEnum(ResponseBodyMethod);
-
-/** @internal */
-export const GetEvalResponseBodyHTTP$inboundSchema: z.ZodType<
-  GetEvalResponseBodyHTTP,
+export const ResponseBodyPython$inboundSchema: z.ZodType<
+  ResponseBodyPython,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -1141,20 +1046,18 @@ export const GetEvalResponseBodyHTTP$inboundSchema: z.ZodType<
   display_name: z.string(),
   description: z.string(),
   owner: z.string(),
-  created: z.string().default("2026-08-05T15:12:51.947Z"),
-  updated: z.string().default("2026-08-05T15:12:51.947Z"),
+  created: z.string().default("2026-09-18T09:52:55.048Z"),
+  updated: z.string().default("2026-09-18T09:52:55.048Z"),
   created_by_id: z.nullable(z.string()).optional(),
   updated_by_id: z.nullable(z.string()).optional(),
   domain_id: z.string(),
   project_id: z.string().optional(),
   guardrail_config: z.any().optional(),
-  output_type: GetEvalResponseBodyEvalsResponse200OutputType$inboundSchema
-    .optional(),
-  type: z.literal("http_eval"),
-  url: z.string(),
-  method: ResponseBodyMethod$inboundSchema,
-  headers: z.record(z.string()),
-  payload: z.record(z.any()),
+  output_type:
+    GetEvalResponseBodyEvalsResponse200ApplicationJSONOutputType$inboundSchema
+      .optional(),
+  code: z.string(),
+  type: z.literal("python_eval"),
 }).transform((v) => {
   return remap$(v, {
     "_id": "id",
@@ -1168,13 +1071,13 @@ export const GetEvalResponseBodyHTTP$inboundSchema: z.ZodType<
   });
 });
 
-export function getEvalResponseBodyHTTPFromJSON(
+export function responseBodyPythonFromJSON(
   jsonString: string,
-): SafeParseResult<GetEvalResponseBodyHTTP, SDKValidationError> {
+): SafeParseResult<ResponseBodyPython, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => GetEvalResponseBodyHTTP$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetEvalResponseBodyHTTP' from JSON`,
+    (x) => ResponseBodyPython$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ResponseBodyPython' from JSON`,
   );
 }
 
@@ -1218,52 +1121,63 @@ export function getEvalResponseBodyEvalsResponseMetadataFromJSON(
 }
 
 /** @internal */
-export const GetEvalResponseBodyEvalsResponseOutputType$inboundSchema:
-  z.ZodNativeEnum<typeof GetEvalResponseBodyEvalsResponseOutputType> = z
-    .nativeEnum(GetEvalResponseBodyEvalsResponseOutputType);
+export const GetEvalResponseBodyEvalsResponse200OutputType$inboundSchema:
+  z.ZodNativeEnum<typeof GetEvalResponseBodyEvalsResponse200OutputType> = z
+    .nativeEnum(GetEvalResponseBodyEvalsResponse200OutputType);
 
 /** @internal */
-export const Json$inboundSchema: z.ZodType<Json, z.ZodTypeDef, unknown> = z
-  .object({
-    enabled: z.boolean().default(true),
-    metadata: z.lazy(() =>
-      GetEvalResponseBodyEvalsResponseMetadata$inboundSchema
-    ),
-    _id: z.string(),
-    display_name: z.string(),
-    description: z.string(),
-    owner: z.string(),
-    created: z.string().default("2026-08-05T15:12:51.947Z"),
-    updated: z.string().default("2026-08-05T15:12:51.947Z"),
-    created_by_id: z.nullable(z.string()).optional(),
-    updated_by_id: z.nullable(z.string()).optional(),
-    domain_id: z.string(),
-    project_id: z.string().optional(),
-    guardrail_config: z.any().optional(),
-    output_type: GetEvalResponseBodyEvalsResponseOutputType$inboundSchema
-      .optional(),
-    type: z.literal("json_schema"),
-    schema: z.string(),
-  }).transform((v) => {
-    return remap$(v, {
-      "_id": "id",
-      "display_name": "displayName",
-      "created_by_id": "createdById",
-      "updated_by_id": "updatedById",
-      "domain_id": "domainId",
-      "project_id": "projectId",
-      "guardrail_config": "guardrailConfig",
-      "output_type": "outputType",
-    });
-  });
+export const ResponseBodyMethod$inboundSchema: z.ZodNativeEnum<
+  typeof ResponseBodyMethod
+> = z.nativeEnum(ResponseBodyMethod);
 
-export function jsonFromJSON(
+/** @internal */
+export const ResponseBodyHTTP$inboundSchema: z.ZodType<
+  ResponseBodyHTTP,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  enabled: z.boolean().default(true),
+  metadata: z.lazy(() =>
+    GetEvalResponseBodyEvalsResponseMetadata$inboundSchema
+  ),
+  _id: z.string(),
+  display_name: z.string(),
+  description: z.string(),
+  owner: z.string(),
+  created: z.string().default("2026-09-18T09:52:55.048Z"),
+  updated: z.string().default("2026-09-18T09:52:55.048Z"),
+  created_by_id: z.nullable(z.string()).optional(),
+  updated_by_id: z.nullable(z.string()).optional(),
+  domain_id: z.string(),
+  project_id: z.string().optional(),
+  guardrail_config: z.any().optional(),
+  output_type: GetEvalResponseBodyEvalsResponse200OutputType$inboundSchema
+    .optional(),
+  type: z.literal("http_eval"),
+  url: z.string(),
+  method: ResponseBodyMethod$inboundSchema,
+  headers: z.record(z.string()),
+  payload: z.record(z.any()),
+}).transform((v) => {
+  return remap$(v, {
+    "_id": "id",
+    "display_name": "displayName",
+    "created_by_id": "createdById",
+    "updated_by_id": "updatedById",
+    "domain_id": "domainId",
+    "project_id": "projectId",
+    "guardrail_config": "guardrailConfig",
+    "output_type": "outputType",
+  });
+});
+
+export function responseBodyHTTPFromJSON(
   jsonString: string,
-): SafeParseResult<Json, SDKValidationError> {
+): SafeParseResult<ResponseBodyHTTP, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Json$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Json' from JSON`,
+    (x) => ResponseBodyHTTP$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ResponseBodyHTTP' from JSON`,
   );
 }
 
@@ -1301,40 +1215,12 @@ export function getEvalResponseBodyEvalsMetadataFromJSON(
 }
 
 /** @internal */
-export const GetEvalResponseBodyEvalsOutputType$inboundSchema: z.ZodNativeEnum<
-  typeof GetEvalResponseBodyEvalsOutputType
-> = z.nativeEnum(GetEvalResponseBodyEvalsOutputType);
+export const GetEvalResponseBodyEvalsResponseOutputType$inboundSchema:
+  z.ZodNativeEnum<typeof GetEvalResponseBodyEvalsResponseOutputType> = z
+    .nativeEnum(GetEvalResponseBodyEvalsResponseOutputType);
 
 /** @internal */
-export const GetEvalResponseBodyModel$inboundSchema: z.ZodType<
-  GetEvalResponseBodyModel,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  id: z.string(),
-  integration_id: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "integration_id": "integrationId",
-  });
-});
-
-export function getEvalResponseBodyModelFromJSON(
-  jsonString: string,
-): SafeParseResult<GetEvalResponseBodyModel, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => GetEvalResponseBodyModel$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetEvalResponseBodyModel' from JSON`,
-  );
-}
-
-/** @internal */
-export const RagasMetric$inboundSchema: z.ZodNativeEnum<typeof RagasMetric> = z
-  .nativeEnum(RagasMetric);
-
-/** @internal */
-export const Ragas$inboundSchema: z.ZodType<Ragas, z.ZodTypeDef, unknown> = z
+export const Json$inboundSchema: z.ZodType<Json, z.ZodTypeDef, unknown> = z
   .object({
     enabled: z.boolean().default(true),
     metadata: z.lazy(() => GetEvalResponseBodyEvalsMetadata$inboundSchema),
@@ -1342,17 +1228,17 @@ export const Ragas$inboundSchema: z.ZodType<Ragas, z.ZodTypeDef, unknown> = z
     display_name: z.string(),
     description: z.string(),
     owner: z.string(),
-    created: z.string().default("2026-08-05T15:12:51.947Z"),
-    updated: z.string().default("2026-08-05T15:12:51.947Z"),
+    created: z.string().default("2026-09-18T09:52:55.048Z"),
+    updated: z.string().default("2026-09-18T09:52:55.048Z"),
     created_by_id: z.nullable(z.string()).optional(),
     updated_by_id: z.nullable(z.string()).optional(),
     domain_id: z.string(),
     project_id: z.string().optional(),
     guardrail_config: z.any().optional(),
-    output_type: GetEvalResponseBodyEvalsOutputType$inboundSchema.optional(),
-    type: z.literal("ragas"),
-    model: z.lazy(() => GetEvalResponseBodyModel$inboundSchema),
-    ragas_metric: RagasMetric$inboundSchema,
+    output_type: GetEvalResponseBodyEvalsResponseOutputType$inboundSchema
+      .optional(),
+    type: z.literal("json_schema"),
+    schema: z.string(),
   }).transform((v) => {
     return remap$(v, {
       "_id": "id",
@@ -1363,17 +1249,16 @@ export const Ragas$inboundSchema: z.ZodType<Ragas, z.ZodTypeDef, unknown> = z
       "project_id": "projectId",
       "guardrail_config": "guardrailConfig",
       "output_type": "outputType",
-      "ragas_metric": "ragasMetric",
     });
   });
 
-export function ragasFromJSON(
+export function jsonFromJSON(
   jsonString: string,
-): SafeParseResult<Ragas, SDKValidationError> {
+): SafeParseResult<Json, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Ragas$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Ragas' from JSON`,
+    (x) => Json$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Json' from JSON`,
   );
 }
 
@@ -1407,6 +1292,116 @@ export function getEvalResponseBodyMetadataFromJSON(
     jsonString,
     (x) => GetEvalResponseBodyMetadata$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetEvalResponseBodyMetadata' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetEvalResponseBodyEvalsOutputType$inboundSchema: z.ZodNativeEnum<
+  typeof GetEvalResponseBodyEvalsOutputType
+> = z.nativeEnum(GetEvalResponseBodyEvalsOutputType);
+
+/** @internal */
+export const ResponseBodyModel$inboundSchema: z.ZodType<
+  ResponseBodyModel,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.string(),
+  integration_id: z.nullable(z.string()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "integration_id": "integrationId",
+  });
+});
+
+export function responseBodyModelFromJSON(
+  jsonString: string,
+): SafeParseResult<ResponseBodyModel, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ResponseBodyModel$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ResponseBodyModel' from JSON`,
+  );
+}
+
+/** @internal */
+export const RagasMetric$inboundSchema: z.ZodNativeEnum<typeof RagasMetric> = z
+  .nativeEnum(RagasMetric);
+
+/** @internal */
+export const Ragas$inboundSchema: z.ZodType<Ragas, z.ZodTypeDef, unknown> = z
+  .object({
+    enabled: z.boolean().default(true),
+    metadata: z.lazy(() => GetEvalResponseBodyMetadata$inboundSchema),
+    _id: z.string(),
+    display_name: z.string(),
+    description: z.string(),
+    owner: z.string(),
+    created: z.string().default("2026-09-18T09:52:55.048Z"),
+    updated: z.string().default("2026-09-18T09:52:55.048Z"),
+    created_by_id: z.nullable(z.string()).optional(),
+    updated_by_id: z.nullable(z.string()).optional(),
+    domain_id: z.string(),
+    project_id: z.string().optional(),
+    guardrail_config: z.any().optional(),
+    output_type: GetEvalResponseBodyEvalsOutputType$inboundSchema.optional(),
+    type: z.literal("ragas"),
+    model: z.lazy(() => ResponseBodyModel$inboundSchema),
+    ragas_metric: RagasMetric$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "_id": "id",
+      "display_name": "displayName",
+      "created_by_id": "createdById",
+      "updated_by_id": "updatedById",
+      "domain_id": "domainId",
+      "project_id": "projectId",
+      "guardrail_config": "guardrailConfig",
+      "output_type": "outputType",
+      "ragas_metric": "ragasMetric",
+    });
+  });
+
+export function ragasFromJSON(
+  jsonString: string,
+): SafeParseResult<Ragas, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Ragas$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Ragas' from JSON`,
+  );
+}
+
+/** @internal */
+export const ResponseBodyMetadata$inboundSchema: z.ZodType<
+  ResponseBodyMetadata,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  required_model_with_tools_support: z.boolean().optional(),
+  required_retrieval_context: z.boolean().optional(),
+  required_expected_output: z.boolean().optional(),
+  supported_on_input_type: z.boolean().optional(),
+  supported_on_output_type: z.boolean().optional(),
+  support_use_as_guardrail: z.boolean().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "required_model_with_tools_support": "requiredModelWithToolsSupport",
+    "required_retrieval_context": "requiredRetrievalContext",
+    "required_expected_output": "requiredExpectedOutput",
+    "supported_on_input_type": "supportedOnInputType",
+    "supported_on_output_type": "supportedOnOutputType",
+    "support_use_as_guardrail": "supportUseAsGuardrail",
+  });
+});
+
+export function responseBodyMetadataFromJSON(
+  jsonString: string,
+): SafeParseResult<ResponseBodyMetadata, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ResponseBodyMetadata$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ResponseBodyMetadata' from JSON`,
   );
 }
 
@@ -1888,40 +1883,34 @@ export function sevenFromJSON(
 }
 
 /** @internal */
-export const FunctionParams6$inboundSchema: z.ZodType<
-  FunctionParams6,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: z.literal("contains_url"),
-});
+export const Six$inboundSchema: z.ZodType<Six, z.ZodTypeDef, unknown> = z
+  .object({
+    type: z.literal("contains_url"),
+  });
 
-export function functionParams6FromJSON(
+export function sixFromJSON(
   jsonString: string,
-): SafeParseResult<FunctionParams6, SDKValidationError> {
+): SafeParseResult<Six, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => FunctionParams6$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'FunctionParams6' from JSON`,
+    (x) => Six$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Six' from JSON`,
   );
 }
 
 /** @internal */
-export const FunctionParams5$inboundSchema: z.ZodType<
-  FunctionParams5,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: z.literal("contains_email"),
-});
+export const Five$inboundSchema: z.ZodType<Five, z.ZodTypeDef, unknown> = z
+  .object({
+    type: z.literal("contains_email"),
+  });
 
-export function functionParams5FromJSON(
+export function fiveFromJSON(
   jsonString: string,
-): SafeParseResult<FunctionParams5, SDKValidationError> {
+): SafeParseResult<Five, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => FunctionParams5$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'FunctionParams5' from JSON`,
+    (x) => Five$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Five' from JSON`,
   );
 }
 
@@ -2015,8 +2004,8 @@ export const FunctionParams$inboundSchema: z.ZodType<
   z.lazy(() => FunctionParams2$inboundSchema),
   z.lazy(() => FunctionParams3$inboundSchema),
   z.lazy(() => FunctionParams4$inboundSchema),
-  z.lazy(() => FunctionParams5$inboundSchema),
-  z.lazy(() => FunctionParams6$inboundSchema),
+  z.lazy(() => Five$inboundSchema),
+  z.lazy(() => Six$inboundSchema),
   z.lazy(() => Seven$inboundSchema),
   z.lazy(() => Eight$inboundSchema),
   z.lazy(() => Nine$inboundSchema),
@@ -2056,19 +2045,19 @@ export function functionParamsFromJSON(
 }
 
 /** @internal */
-export const GetEvalResponseBodyFunction$inboundSchema: z.ZodType<
-  GetEvalResponseBodyFunction,
+export const ResponseBodyFunction$inboundSchema: z.ZodType<
+  ResponseBodyFunction,
   z.ZodTypeDef,
   unknown
 > = z.object({
   enabled: z.boolean().default(true),
-  metadata: z.lazy(() => GetEvalResponseBodyMetadata$inboundSchema),
+  metadata: z.lazy(() => ResponseBodyMetadata$inboundSchema),
   _id: z.string(),
   display_name: z.string(),
   description: z.string(),
   owner: z.string(),
-  created: z.string().default("2026-08-05T15:12:51.947Z"),
-  updated: z.string().default("2026-08-05T15:12:51.947Z"),
+  created: z.string().default("2026-09-18T09:52:55.048Z"),
+  updated: z.string().default("2026-09-18T09:52:55.048Z"),
   created_by_id: z.nullable(z.string()).optional(),
   updated_by_id: z.nullable(z.string()).optional(),
   domain_id: z.string(),
@@ -2081,8 +2070,8 @@ export const GetEvalResponseBodyFunction$inboundSchema: z.ZodType<
     z.lazy(() => FunctionParams2$inboundSchema),
     z.lazy(() => FunctionParams3$inboundSchema),
     z.lazy(() => FunctionParams4$inboundSchema),
-    z.lazy(() => FunctionParams5$inboundSchema),
-    z.lazy(() => FunctionParams6$inboundSchema),
+    z.lazy(() => Five$inboundSchema),
+    z.lazy(() => Six$inboundSchema),
     z.lazy(() => Seven$inboundSchema),
     z.lazy(() => Eight$inboundSchema),
     z.lazy(() => Nine$inboundSchema),
@@ -2124,46 +2113,52 @@ export const GetEvalResponseBodyFunction$inboundSchema: z.ZodType<
   });
 });
 
-export function getEvalResponseBodyFunctionFromJSON(
+export function responseBodyFunctionFromJSON(
   jsonString: string,
-): SafeParseResult<GetEvalResponseBodyFunction, SDKValidationError> {
+): SafeParseResult<ResponseBodyFunction, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => GetEvalResponseBodyFunction$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetEvalResponseBodyFunction' from JSON`,
+    (x) => ResponseBodyFunction$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ResponseBodyFunction' from JSON`,
   );
 }
 
 /** @internal */
-export const ResponseBodyMetadata$inboundSchema: z.ZodType<
-  ResponseBodyMetadata,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  required_model_with_tools_support: z.boolean().optional(),
-  required_retrieval_context: z.boolean().optional(),
-  required_expected_output: z.boolean().optional(),
-  supported_on_input_type: z.boolean().optional(),
-  supported_on_output_type: z.boolean().optional(),
-  support_use_as_guardrail: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "required_model_with_tools_support": "requiredModelWithToolsSupport",
-    "required_retrieval_context": "requiredRetrievalContext",
-    "required_expected_output": "requiredExpectedOutput",
-    "supported_on_input_type": "supportedOnInputType",
-    "supported_on_output_type": "supportedOnOutputType",
-    "support_use_as_guardrail": "supportUseAsGuardrail",
+export const GetEvalResponseBodyEvalsResponse200ApplicationJson1Metadata$inboundSchema:
+  z.ZodType<
+    GetEvalResponseBodyEvalsResponse200ApplicationJson1Metadata,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    required_model_with_tools_support: z.boolean().optional(),
+    required_retrieval_context: z.boolean().optional(),
+    required_expected_output: z.boolean().optional(),
+    supported_on_input_type: z.boolean().optional(),
+    supported_on_output_type: z.boolean().optional(),
+    support_use_as_guardrail: z.boolean().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "required_model_with_tools_support": "requiredModelWithToolsSupport",
+      "required_retrieval_context": "requiredRetrievalContext",
+      "required_expected_output": "requiredExpectedOutput",
+      "supported_on_input_type": "supportedOnInputType",
+      "supported_on_output_type": "supportedOnOutputType",
+      "support_use_as_guardrail": "supportUseAsGuardrail",
+    });
   });
-});
 
-export function responseBodyMetadataFromJSON(
+export function getEvalResponseBodyEvalsResponse200ApplicationJSON1MetadataFromJSON(
   jsonString: string,
-): SafeParseResult<ResponseBodyMetadata, SDKValidationError> {
+): SafeParseResult<
+  GetEvalResponseBodyEvalsResponse200ApplicationJson1Metadata,
+  SDKValidationError
+> {
   return safeParse(
     jsonString,
-    (x) => ResponseBodyMetadata$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ResponseBodyMetadata' from JSON`,
+    (x) =>
+      GetEvalResponseBodyEvalsResponse200ApplicationJson1Metadata$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'GetEvalResponseBodyEvalsResponse200ApplicationJson1Metadata' from JSON`,
   );
 }
 
@@ -2214,8 +2209,8 @@ export function responseBodyModelParametersFromJSON(
 }
 
 /** @internal */
-export const ResponseBodyModel$inboundSchema: z.ZodType<
-  ResponseBodyModel,
+export const GetEvalResponseBodyModel$inboundSchema: z.ZodType<
+  GetEvalResponseBodyModel,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -2230,223 +2225,13 @@ export const ResponseBodyModel$inboundSchema: z.ZodType<
   });
 });
 
-export function responseBodyModelFromJSON(
+export function getEvalResponseBodyModelFromJSON(
   jsonString: string,
-): SafeParseResult<ResponseBodyModel, SDKValidationError> {
+): SafeParseResult<GetEvalResponseBodyModel, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => ResponseBodyModel$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ResponseBodyModel' from JSON`,
-  );
-}
-
-/** @internal */
-export const GetEvalResponseBodyModelParameters$inboundSchema: z.ZodType<
-  GetEvalResponseBodyModelParameters,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  temperature: z.number().optional(),
-  max_tokens: z.number().optional(),
-  top_k: z.number().optional(),
-  top_p: z.number().optional(),
-  frequency_penalty: z.number().optional(),
-  presence_penalty: z.number().optional(),
-  reasoning_effort: z.string().optional(),
-  budget_tokens: z.number().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "max_tokens": "maxTokens",
-    "top_k": "topK",
-    "top_p": "topP",
-    "frequency_penalty": "frequencyPenalty",
-    "presence_penalty": "presencePenalty",
-    "reasoning_effort": "reasoningEffort",
-    "budget_tokens": "budgetTokens",
-  });
-});
-
-export function getEvalResponseBodyModelParametersFromJSON(
-  jsonString: string,
-): SafeParseResult<GetEvalResponseBodyModelParameters, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      GetEvalResponseBodyModelParameters$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetEvalResponseBodyModelParameters' from JSON`,
-  );
-}
-
-/** @internal */
-export const GetEvalResponseBodyEvalsResponseModel$inboundSchema: z.ZodType<
-  GetEvalResponseBodyEvalsResponseModel,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  id: z.string(),
-  integration_id: z.nullable(z.string()).optional(),
-  model_parameters: z.lazy(() =>
-    GetEvalResponseBodyModelParameters$inboundSchema
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "integration_id": "integrationId",
-    "model_parameters": "modelParameters",
-  });
-});
-
-export function getEvalResponseBodyEvalsResponseModelFromJSON(
-  jsonString: string,
-): SafeParseResult<GetEvalResponseBodyEvalsResponseModel, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      GetEvalResponseBodyEvalsResponseModel$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetEvalResponseBodyEvalsResponseModel' from JSON`,
-  );
-}
-
-/** @internal */
-export const ResponseBodyRetry$inboundSchema: z.ZodType<
-  ResponseBodyRetry,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  count: z.number().int().default(2),
-  on_codes: z.array(z.number().int()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "on_codes": "onCodes",
-  });
-});
-
-export function responseBodyRetryFromJSON(
-  jsonString: string,
-): SafeParseResult<ResponseBodyRetry, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ResponseBodyRetry$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ResponseBodyRetry' from JSON`,
-  );
-}
-
-/** @internal */
-export const GetEvalResponseBodyEvalsResponseModelParameters$inboundSchema:
-  z.ZodType<
-    GetEvalResponseBodyEvalsResponseModelParameters,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    temperature: z.number().optional(),
-    max_tokens: z.number().optional(),
-    top_k: z.number().optional(),
-    top_p: z.number().optional(),
-    frequency_penalty: z.number().optional(),
-    presence_penalty: z.number().optional(),
-    reasoning_effort: z.string().optional(),
-    budget_tokens: z.number().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "max_tokens": "maxTokens",
-      "top_k": "topK",
-      "top_p": "topP",
-      "frequency_penalty": "frequencyPenalty",
-      "presence_penalty": "presencePenalty",
-      "reasoning_effort": "reasoningEffort",
-      "budget_tokens": "budgetTokens",
-    });
-  });
-
-export function getEvalResponseBodyEvalsResponseModelParametersFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  GetEvalResponseBodyEvalsResponseModelParameters,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      GetEvalResponseBodyEvalsResponseModelParameters$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'GetEvalResponseBodyEvalsResponseModelParameters' from JSON`,
-  );
-}
-
-/** @internal */
-export const GetEvalResponseBodyEvalsResponse200ApplicationJSONModel$inboundSchema:
-  z.ZodType<
-    GetEvalResponseBodyEvalsResponse200ApplicationJSONModel,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    id: z.string(),
-    integration_id: z.nullable(z.string()).optional(),
-    model_parameters: z.lazy(() =>
-      GetEvalResponseBodyEvalsResponseModelParameters$inboundSchema
-    ).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "integration_id": "integrationId",
-      "model_parameters": "modelParameters",
-    });
-  });
-
-export function getEvalResponseBodyEvalsResponse200ApplicationJSONModelFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  GetEvalResponseBodyEvalsResponse200ApplicationJSONModel,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      GetEvalResponseBodyEvalsResponse200ApplicationJSONModel$inboundSchema
-        .parse(JSON.parse(x)),
-    `Failed to parse 'GetEvalResponseBodyEvalsResponse200ApplicationJSONModel' from JSON`,
-  );
-}
-
-/** @internal */
-export const ResponseBodyFallbacks$inboundSchema: z.ZodType<
-  ResponseBodyFallbacks,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  model: z.lazy(() =>
-    GetEvalResponseBodyEvalsResponse200ApplicationJSONModel$inboundSchema
-  ),
-});
-
-export function responseBodyFallbacksFromJSON(
-  jsonString: string,
-): SafeParseResult<ResponseBodyFallbacks, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ResponseBodyFallbacks$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ResponseBodyFallbacks' from JSON`,
-  );
-}
-
-/** @internal */
-export const ResponseBodyJudges$inboundSchema: z.ZodType<
-  ResponseBodyJudges,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  model: z.lazy(() => GetEvalResponseBodyEvalsResponseModel$inboundSchema),
-  retry: z.lazy(() => ResponseBodyRetry$inboundSchema).optional(),
-  fallbacks: z.array(z.lazy(() => ResponseBodyFallbacks$inboundSchema))
-    .optional(),
-});
-
-export function responseBodyJudgesFromJSON(
-  jsonString: string,
-): SafeParseResult<ResponseBodyJudges, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ResponseBodyJudges$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ResponseBodyJudges' from JSON`,
+    (x) => GetEvalResponseBodyModel$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetEvalResponseBodyModel' from JSON`,
   );
 }
 
@@ -2521,8 +2306,8 @@ export function getEvalResponseBodyEvalsModelFromJSON(
 }
 
 /** @internal */
-export const GetEvalResponseBodyRetry$inboundSchema: z.ZodType<
-  GetEvalResponseBodyRetry,
+export const ResponseBodyRetry$inboundSchema: z.ZodType<
+  ResponseBodyRetry,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -2534,13 +2319,13 @@ export const GetEvalResponseBodyRetry$inboundSchema: z.ZodType<
   });
 });
 
-export function getEvalResponseBodyRetryFromJSON(
+export function responseBodyRetryFromJSON(
   jsonString: string,
-): SafeParseResult<GetEvalResponseBodyRetry, SDKValidationError> {
+): SafeParseResult<ResponseBodyRetry, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => GetEvalResponseBodyRetry$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetEvalResponseBodyRetry' from JSON`,
+    (x) => ResponseBodyRetry$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ResponseBodyRetry' from JSON`,
   );
 }
 
@@ -2622,12 +2407,222 @@ export function getEvalResponseBodyEvalsResponse200ModelFromJSON(
 }
 
 /** @internal */
+export const ResponseBodyFallbacks$inboundSchema: z.ZodType<
+  ResponseBodyFallbacks,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  model: z.lazy(() => GetEvalResponseBodyEvalsResponse200Model$inboundSchema),
+});
+
+export function responseBodyFallbacksFromJSON(
+  jsonString: string,
+): SafeParseResult<ResponseBodyFallbacks, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ResponseBodyFallbacks$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ResponseBodyFallbacks' from JSON`,
+  );
+}
+
+/** @internal */
+export const ResponseBodyJudges$inboundSchema: z.ZodType<
+  ResponseBodyJudges,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  model: z.lazy(() => GetEvalResponseBodyEvalsModel$inboundSchema),
+  retry: z.lazy(() => ResponseBodyRetry$inboundSchema).optional(),
+  fallbacks: z.array(z.lazy(() => ResponseBodyFallbacks$inboundSchema))
+    .optional(),
+});
+
+export function responseBodyJudgesFromJSON(
+  jsonString: string,
+): SafeParseResult<ResponseBodyJudges, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ResponseBodyJudges$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ResponseBodyJudges' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetEvalResponseBodyModelParameters$inboundSchema: z.ZodType<
+  GetEvalResponseBodyModelParameters,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  temperature: z.number().optional(),
+  max_tokens: z.number().optional(),
+  top_k: z.number().optional(),
+  top_p: z.number().optional(),
+  frequency_penalty: z.number().optional(),
+  presence_penalty: z.number().optional(),
+  reasoning_effort: z.string().optional(),
+  budget_tokens: z.number().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "max_tokens": "maxTokens",
+    "top_k": "topK",
+    "top_p": "topP",
+    "frequency_penalty": "frequencyPenalty",
+    "presence_penalty": "presencePenalty",
+    "reasoning_effort": "reasoningEffort",
+    "budget_tokens": "budgetTokens",
+  });
+});
+
+export function getEvalResponseBodyModelParametersFromJSON(
+  jsonString: string,
+): SafeParseResult<GetEvalResponseBodyModelParameters, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetEvalResponseBodyModelParameters$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetEvalResponseBodyModelParameters' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetEvalResponseBodyEvalsResponseModel$inboundSchema: z.ZodType<
+  GetEvalResponseBodyEvalsResponseModel,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.string(),
+  integration_id: z.nullable(z.string()).optional(),
+  model_parameters: z.lazy(() =>
+    GetEvalResponseBodyModelParameters$inboundSchema
+  ).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "integration_id": "integrationId",
+    "model_parameters": "modelParameters",
+  });
+});
+
+export function getEvalResponseBodyEvalsResponseModelFromJSON(
+  jsonString: string,
+): SafeParseResult<GetEvalResponseBodyEvalsResponseModel, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetEvalResponseBodyEvalsResponseModel$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetEvalResponseBodyEvalsResponseModel' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetEvalResponseBodyRetry$inboundSchema: z.ZodType<
+  GetEvalResponseBodyRetry,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  count: z.number().int().default(2),
+  on_codes: z.array(z.number().int()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "on_codes": "onCodes",
+  });
+});
+
+export function getEvalResponseBodyRetryFromJSON(
+  jsonString: string,
+): SafeParseResult<GetEvalResponseBodyRetry, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetEvalResponseBodyRetry$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetEvalResponseBodyRetry' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetEvalResponseBodyEvalsResponseModelParameters$inboundSchema:
+  z.ZodType<
+    GetEvalResponseBodyEvalsResponseModelParameters,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    temperature: z.number().optional(),
+    max_tokens: z.number().optional(),
+    top_k: z.number().optional(),
+    top_p: z.number().optional(),
+    frequency_penalty: z.number().optional(),
+    presence_penalty: z.number().optional(),
+    reasoning_effort: z.string().optional(),
+    budget_tokens: z.number().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "max_tokens": "maxTokens",
+      "top_k": "topK",
+      "top_p": "topP",
+      "frequency_penalty": "frequencyPenalty",
+      "presence_penalty": "presencePenalty",
+      "reasoning_effort": "reasoningEffort",
+      "budget_tokens": "budgetTokens",
+    });
+  });
+
+export function getEvalResponseBodyEvalsResponseModelParametersFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  GetEvalResponseBodyEvalsResponseModelParameters,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetEvalResponseBodyEvalsResponseModelParameters$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'GetEvalResponseBodyEvalsResponseModelParameters' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetEvalResponseBodyEvalsResponse200ApplicationJSONModel$inboundSchema:
+  z.ZodType<
+    GetEvalResponseBodyEvalsResponse200ApplicationJSONModel,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    id: z.string(),
+    integration_id: z.nullable(z.string()).optional(),
+    model_parameters: z.lazy(() =>
+      GetEvalResponseBodyEvalsResponseModelParameters$inboundSchema
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "integration_id": "integrationId",
+      "model_parameters": "modelParameters",
+    });
+  });
+
+export function getEvalResponseBodyEvalsResponse200ApplicationJSONModelFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  GetEvalResponseBodyEvalsResponse200ApplicationJSONModel,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetEvalResponseBodyEvalsResponse200ApplicationJSONModel$inboundSchema
+        .parse(JSON.parse(x)),
+    `Failed to parse 'GetEvalResponseBodyEvalsResponse200ApplicationJSONModel' from JSON`,
+  );
+}
+
+/** @internal */
 export const GetEvalResponseBodyFallbacks$inboundSchema: z.ZodType<
   GetEvalResponseBodyFallbacks,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  model: z.lazy(() => GetEvalResponseBodyEvalsResponse200Model$inboundSchema),
+  model: z.lazy(() =>
+    GetEvalResponseBodyEvalsResponse200ApplicationJSONModel$inboundSchema
+  ),
 });
 
 export function getEvalResponseBodyFallbacksFromJSON(
@@ -2646,7 +2641,7 @@ export const ResponseBodyReplacementJudges$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  model: z.lazy(() => GetEvalResponseBodyEvalsModel$inboundSchema),
+  model: z.lazy(() => GetEvalResponseBodyEvalsResponseModel$inboundSchema),
   retry: z.lazy(() => GetEvalResponseBodyRetry$inboundSchema).optional(),
   fallbacks: z.array(z.lazy(() => GetEvalResponseBodyFallbacks$inboundSchema))
     .optional(),
@@ -2724,13 +2719,15 @@ export const ResponseBodyLLM$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   enabled: z.boolean().default(true),
-  metadata: z.lazy(() => ResponseBodyMetadata$inboundSchema),
+  metadata: z.lazy(() =>
+    GetEvalResponseBodyEvalsResponse200ApplicationJson1Metadata$inboundSchema
+  ),
   _id: z.string(),
   display_name: z.string(),
   description: z.string(),
   owner: z.string(),
-  created: z.string().default("2026-08-05T15:12:51.947Z"),
-  updated: z.string().default("2026-08-05T15:12:51.947Z"),
+  created: z.string().default("2026-09-18T09:52:55.048Z"),
+  updated: z.string().default("2026-09-18T09:52:55.048Z"),
   created_by_id: z.nullable(z.string()).optional(),
   updated_by_id: z.nullable(z.string()).optional(),
   domain_id: z.string(),
@@ -2740,7 +2737,7 @@ export const ResponseBodyLLM$inboundSchema: z.ZodType<
   type: z.literal("llm_eval"),
   mode: z.nullable(ResponseBodyMode$inboundSchema).optional(),
   repetitions: z.nullable(z.number().int()).optional(),
-  model: z.lazy(() => ResponseBodyModel$inboundSchema).optional(),
+  model: z.lazy(() => GetEvalResponseBodyModel$inboundSchema).optional(),
   jury: z.nullable(z.lazy(() => ResponseBodyJury$inboundSchema)).optional(),
   prompt: z.string(),
   categories: z.nullable(z.array(z.string())).optional(),
@@ -2780,10 +2777,10 @@ export const GetEvalResponseBody$inboundSchema: z.ZodType<
   unknown
 > = z.union([
   z.lazy(() => ResponseBodyLLM$inboundSchema),
-  z.lazy(() => GetEvalResponseBodyFunction$inboundSchema),
+  z.lazy(() => ResponseBodyFunction$inboundSchema),
   z.lazy(() => Ragas$inboundSchema),
   z.lazy(() => Json$inboundSchema),
-  z.lazy(() => GetEvalResponseBodyHTTP$inboundSchema),
+  z.lazy(() => ResponseBodyHTTP$inboundSchema),
   z.lazy(() => ResponseBodyPython$inboundSchema),
   z.lazy(() => Typescript$inboundSchema),
   z.lazy(() => BedrockGuardrail$inboundSchema),

@@ -12,7 +12,6 @@ import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
-import * as components from "../models/components/index.js";
 import {
   ConnectionError,
   InvalidRequestError,
@@ -31,7 +30,7 @@ import { Result } from "../types/fp.js";
  * Add items to an annotation queue
  *
  * @remarks
- * Adds spans to the annotation queue. Spans already present are skipped; the response contains only the newly created items.
+ * Adds items to the specified annotation queue.
  */
 export function annotationQueuesAddItems(
   client: OrqCore,
@@ -39,7 +38,7 @@ export function annotationQueuesAddItems(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    Array<components.AnnotationQueueItem>,
+    Array<operations.AddAnnotationQueueItemsResponseBody>,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -64,7 +63,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      Array<components.AnnotationQueueItem>,
+      Array<operations.AddAnnotationQueueItemsResponseBody>,
       | OrqError
       | ResponseValidationError
       | ConnectionError
@@ -87,9 +86,7 @@ async function $do(
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = encodeJSON("body", payload.AddAnnotationQueueItemsRequest, {
-    explode: true,
-  });
+  const body = encodeJSON("body", payload.RequestBody, { explode: true });
 
   const pathParams = {
     annotation_queue_id: encodeSimple(
@@ -154,7 +151,7 @@ async function $do(
   const response = doResult.value;
 
   const [result] = await M.match<
-    Array<components.AnnotationQueueItem>,
+    Array<operations.AddAnnotationQueueItemsResponseBody>,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -164,7 +161,10 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, z.array(components.AnnotationQueueItem$inboundSchema)),
+    M.json(
+      200,
+      z.array(operations.AddAnnotationQueueItemsResponseBody$inboundSchema),
+    ),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, req);

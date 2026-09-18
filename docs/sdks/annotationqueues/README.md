@@ -7,17 +7,17 @@
 * [list](#list) - List annotation queues
 * [create](#create) - Create an annotation queue
 * [retrieve](#retrieve) - Retrieve an annotation queue
+* [update](#update) - Edit an annotation queue
 * [delete](#delete) - Delete an annotation queue
-* [update](#update) - Update an annotation queue
-* [clear](#clear) - Clear an annotation queue
+* [clear](#clear) - Delete all items
 * [listItems](#listitems) - Query items from an annotation queue
 * [addItems](#additems) - Add items to an annotation queue
-* [removeItems](#removeitems) - Remove items from an annotation queue
+* [removeItems](#removeitems) - Remove annotation queue items
 * [retrieveItem](#retrieveitem) - Retrieve an annotation queue item
 
 ## list
 
-Returns annotation queues in the workspace, newest first.
+Retrieves a paginated list of annotation queues for the current workspace. Results can be paginated using cursor-based pagination.
 
 ### Example Usage
 
@@ -30,9 +30,7 @@ const orq = new Orq({
 });
 
 async function run() {
-  const result = await orq.annotationQueues.list({
-    limit: 10,
-  });
+  const result = await orq.annotationQueues.list({});
 
   console.log(result);
 }
@@ -55,9 +53,7 @@ const orq = new OrqCore({
 });
 
 async function run() {
-  const res = await annotationQueuesList(orq, {
-    limit: 10,
-  });
+  const res = await annotationQueuesList(orq, {});
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
@@ -80,7 +76,7 @@ run();
 
 ### Response
 
-**Promise\<[components.ListAnnotationQueuesResponse](../../models/components/listannotationqueuesresponse.md)\>**
+**Promise\<[operations.ListAnnotationQueuesResponseBody](../../models/operations/listannotationqueuesresponsebody.md)\>**
 
 ### Errors
 
@@ -90,7 +86,7 @@ run();
 
 ## create
 
-Creates an annotation queue in a project.
+Create a new annotation queue in the workspace.
 
 ### Example Usage
 
@@ -150,14 +146,14 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [components.CreateAnnotationQueueRequest](../../models/components/createannotationqueuerequest.md)                                                                             | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `request`                                                                                                                                                                      | [operations.CreateAnnotationQueueRequestBody](../../models/operations/createannotationqueuerequestbody.md)                                                                     | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
-**Promise\<[components.AnnotationQueue](../../models/components/annotationqueue.md)\>**
+**Promise\<[operations.CreateAnnotationQueueResponseBody](../../models/operations/createannotationqueueresponsebody.md)\>**
 
 ### Errors
 
@@ -167,7 +163,7 @@ run();
 
 ## retrieve
 
-Retrieves an existing annotation queue by ID.
+Retrieves a specific annotation queue by its unique identifier
 
 ### Example Usage
 
@@ -230,7 +226,82 @@ run();
 
 ### Response
 
-**Promise\<[components.AnnotationQueue](../../models/components/annotationqueue.md)\>**
+**Promise\<[operations.RetrieveAnnotationQueueResponseBody](../../models/operations/retrieveannotationqueueresponsebody.md)\>**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.APIError | 4XX, 5XX        | \*/\*           |
+
+## update
+
+Update an annotation queue by ID with the provided fields.
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="UpdateAnnotationQueue" method="patch" path="/v2/annotation-queues/{annotation_queue_id}" -->
+```typescript
+import { Orq } from "@orq-ai/node";
+
+const orq = new Orq({
+  apiKey: process.env["ORQ_API_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await orq.annotationQueues.update({
+    annotationQueueId: "<id>",
+    requestBody: {},
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { OrqCore } from "@orq-ai/node/core.js";
+import { annotationQueuesUpdate } from "@orq-ai/node/funcs/annotationQueuesUpdate.js";
+
+// Use `OrqCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const orq = new OrqCore({
+  apiKey: process.env["ORQ_API_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await annotationQueuesUpdate(orq, {
+    annotationQueueId: "<id>",
+    requestBody: {},
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("annotationQueuesUpdate failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.UpdateAnnotationQueueRequest](../../models/operations/updateannotationqueuerequest.md)                                                                             | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[operations.UpdateAnnotationQueueResponseBody](../../models/operations/updateannotationqueueresponsebody.md)\>**
 
 ### Errors
 
@@ -240,7 +311,7 @@ run();
 
 ## delete
 
-Deletes an annotation queue, its items, and the queue references stored on the annotated spans.
+Delete an annotation queue and its items by ID.
 
 ### Example Usage
 
@@ -311,84 +382,9 @@ run();
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## update
-
-Partially updates an existing annotation queue. Setting `project_id` clears the legacy `human_review_ids` selection.
-
-### Example Usage
-
-<!-- UsageSnippet language="typescript" operationID="UpdateAnnotationQueue" method="patch" path="/v2/annotation-queues/{annotation_queue_id}" -->
-```typescript
-import { Orq } from "@orq-ai/node";
-
-const orq = new Orq({
-  apiKey: process.env["ORQ_API_KEY"] ?? "",
-});
-
-async function run() {
-  const result = await orq.annotationQueues.update({
-    annotationQueueId: "<id>",
-    updateAnnotationQueueRequest: {},
-  });
-
-  console.log(result);
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { OrqCore } from "@orq-ai/node/core.js";
-import { annotationQueuesUpdate } from "@orq-ai/node/funcs/annotationQueuesUpdate.js";
-
-// Use `OrqCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const orq = new OrqCore({
-  apiKey: process.env["ORQ_API_KEY"] ?? "",
-});
-
-async function run() {
-  const res = await annotationQueuesUpdate(orq, {
-    annotationQueueId: "<id>",
-    updateAnnotationQueueRequest: {},
-  });
-  if (res.ok) {
-    const { value: result } = res;
-    console.log(result);
-  } else {
-    console.log("annotationQueuesUpdate failed:", res.error);
-  }
-}
-
-run();
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.UpdateAnnotationQueueRequest](../../models/operations/updateannotationqueuerequest.md)                                                                             | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
-| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
-| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
-
-### Response
-
-**Promise\<[components.AnnotationQueue](../../models/components/annotationqueue.md)\>**
-
-### Errors
-
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
-
 ## clear
 
-Removes every item from the annotation queue without deleting the queue itself.
+Delete all items from an annotation queue. This action is irreversible.
 
 ### Example Usage
 
@@ -461,7 +457,7 @@ run();
 
 ## listItems
 
-Queries items from the specified annotation queue. Items whose span no longer exists are skipped.
+Queries items from the specified annotation queue.
 
 ### Example Usage
 
@@ -476,7 +472,6 @@ const orq = new Orq({
 async function run() {
   const result = await orq.annotationQueues.listItems({
     annotationQueueId: "<id>",
-    limit: 10,
   });
 
   console.log(result);
@@ -502,7 +497,6 @@ const orq = new OrqCore({
 async function run() {
   const res = await annotationQueuesListItems(orq, {
     annotationQueueId: "<id>",
-    limit: 10,
   });
   if (res.ok) {
     const { value: result } = res;
@@ -526,7 +520,7 @@ run();
 
 ### Response
 
-**Promise\<[components.ListAnnotationQueueItemsResponse](../../models/components/listannotationqueueitemsresponse.md)\>**
+**Promise\<[operations.ListAnnotationQueueItemsResponseBody](../../models/operations/listannotationqueueitemsresponsebody.md)\>**
 
 ### Errors
 
@@ -536,7 +530,7 @@ run();
 
 ## addItems
 
-Adds spans to the annotation queue. Spans already present are skipped; the response contains only the newly created items.
+Adds items to the specified annotation queue.
 
 ### Example Usage
 
@@ -551,7 +545,7 @@ const orq = new Orq({
 async function run() {
   const result = await orq.annotationQueues.addItems({
     annotationQueueId: "<id>",
-    addAnnotationQueueItemsRequest: {
+    requestBody: {
       items: [
         {
           spanId: "<id>",
@@ -584,7 +578,7 @@ const orq = new OrqCore({
 async function run() {
   const res = await annotationQueuesAddItems(orq, {
     annotationQueueId: "<id>",
-    addAnnotationQueueItemsRequest: {
+    requestBody: {
       items: [
         {
           spanId: "<id>",
@@ -615,7 +609,7 @@ run();
 
 ### Response
 
-**Promise\<[components.AnnotationQueueItem[]](../../models/.md)\>**
+**Promise\<[operations.AddAnnotationQueueItemsResponseBody[]](../../models/.md)\>**
 
 ### Errors
 
@@ -625,7 +619,7 @@ run();
 
 ## removeItems
 
-Removes the referenced spans from the annotation queue.
+Removes items from the specified annotation queue.
 
 ### Example Usage
 
@@ -640,7 +634,7 @@ const orq = new Orq({
 async function run() {
   await orq.annotationQueues.removeItems({
     annotationQueueId: "<id>",
-    removeAnnotationQueueItemsRequest: {
+    requestBody: {
       spanIds: [
         "<value 1>",
         "<value 2>",
@@ -671,7 +665,7 @@ const orq = new OrqCore({
 async function run() {
   const res = await annotationQueuesRemoveItems(orq, {
     annotationQueueId: "<id>",
-    removeAnnotationQueueItemsRequest: {
+    requestBody: {
       spanIds: [
         "<value 1>",
         "<value 2>",
@@ -710,7 +704,7 @@ run();
 
 ## retrieveItem
 
-Retrieves an item from the specified annotation queue in its expanded form. An annotation queue item is a pointer to a span; this endpoint returns the fully resolved span the item references.
+Retrieve an annotation queue item. Each item is a pointer to a span with fully resolved span data.
 
 ### Example Usage
 
@@ -775,7 +769,7 @@ run();
 
 ### Response
 
-**Promise\<[operations.RetrieveAnnotationQueueItemResponseBody](../../models/operations/retrieveannotationqueueitemresponsebody.md)\>**
+**Promise\<[components.PublicSpan](../../models/components/publicspan.md)\>**
 
 ### Errors
 

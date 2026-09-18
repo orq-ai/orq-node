@@ -58,10 +58,11 @@ export type Skill = {
    */
   instructions: string;
   /**
-   * Latest semver for the skill. It advances when the skill's definition
+   * Latest semver assigned by the activity log. Stamped on the document
    *
    * @remarks
-   *  changes and is returned on every read.
+   *  by CreateSkill / UpdateSkill so reads return it without joining
+   *  workspaces.activities.
    */
   version: string;
 };

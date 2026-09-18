@@ -13,11 +13,11 @@ export type AggregateLogsRequest = {
   from?: Date | undefined;
   to?: Date | undefined;
   /**
-   * Time bucket grain: "auto" | "minute" | "hour" | "day". "auto" picks the
+   * Time bucket grain: "auto" | "minute" | "hour" | "day", matching the shared
    *
    * @remarks
-   *  grain from the requested time range. Empty returns rows without time
-   *  buckets.
+   *  libs/go/reporting Grain vocabulary used by the traces reporting API. Empty
+   *  defaults to "auto" (grain picked from the time range).
    */
   grain?: string | undefined;
   filters?: Array<TraceFilter> | undefined;

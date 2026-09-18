@@ -19,6 +19,18 @@ export const PublicPluginId = {
  */
 export type PublicPluginId = ClosedEnum<typeof PublicPluginId>;
 
+/**
+ * pii_redaction only. Detector language. Defaults to en.
+ */
+export const PublicPluginLanguage = {
+  En: "en",
+  Nl: "nl",
+} as const;
+/**
+ * pii_redaction only. Detector language. Defaults to en.
+ */
+export type PublicPluginLanguage = ClosedEnum<typeof PublicPluginLanguage>;
+
 export const PublicPluginMask = {
   All: "all",
   System: "system",
@@ -43,21 +55,17 @@ export type PublicPluginOnFailure = ClosedEnum<typeof PublicPluginOnFailure>;
 
 export type PublicPlugin = {
   /**
-   * pii_redaction only. Entity types to redact (e.g. EMAIL_ADDRESS, BSN). On its own this is a strict allowlist; alongside regions it adds to the region coverage. Omit to redact every type detected for the language and regions. See GET /v2/pii/capabilities for valid types.
+   * pii_redaction only. Entity types to redact (e.g. EMAIL_ADDRESS, BSN). Omit to redact every type detected for the language.
    */
   entities?: Array<string> | null | undefined;
-  /**
-   * pii_redaction only. Per-entity confidence cutoff overrides in [0,1], keyed by entity type. An override replaces threshold for that type and may sit above or below it. Every key must also appear in entities.
-   */
-  entityThresholds?: { [k: string]: number } | undefined;
   /**
    * Plugin discriminator. pii_redaction redacts PII, response_healing repairs malformed JSON, and trace_scrubbing removes selected sensitive fields from exported traces.
    */
   id: PublicPluginId;
   /**
-   * pii_redaction only. Detector language, or "auto" to detect it per request. Defaults to en. The accepted values are whatever GET /v2/pii/capabilities lists, so they are not enumerated here: a fixed enum would reject a language the detector has since added.
+   * pii_redaction only. Detector language. Defaults to en.
    */
-  language?: string | undefined;
+  language?: PublicPluginLanguage | undefined;
   /**
    * trace_scrubbing only. Trace surfaces to scrub. At least one value required.
    */
@@ -66,10 +74,6 @@ export type PublicPlugin = {
    * pii_redaction only. Behavior when redaction is unavailable. block (default) fails the request; passthrough sends the original text.
    */
   onFailure?: PublicPluginOnFailure | undefined;
-  /**
-   * pii_redaction only. Region codes selecting whole regions of coverage (e.g. nl, gb). Every entity type those regions cover is redacted, alongside the base catalog. ["all"] cannot be combined with other region codes, and leaving both this and entities empty also runs every region, so selecting nothing is the widest request rather than the narrowest. Combines with entities: the two selections are unioned.
-   */
-  regions?: Array<string> | null | undefined;
   /**
    * pii_redaction only. Detector confidence cutoff in [0,1].
    */
@@ -80,6 +84,11 @@ export type PublicPlugin = {
 export const PublicPluginId$outboundSchema: z.ZodNativeEnum<
   typeof PublicPluginId
 > = z.nativeEnum(PublicPluginId);
+
+/** @internal */
+export const PublicPluginLanguage$outboundSchema: z.ZodNativeEnum<
+  typeof PublicPluginLanguage
+> = z.nativeEnum(PublicPluginLanguage);
 
 /** @internal */
 export const PublicPluginMask$outboundSchema: z.ZodNativeEnum<
@@ -94,12 +103,10 @@ export const PublicPluginOnFailure$outboundSchema: z.ZodNativeEnum<
 /** @internal */
 export type PublicPlugin$Outbound = {
   entities?: Array<string> | null | undefined;
-  entity_thresholds?: { [k: string]: number } | undefined;
   id: string;
   language?: string | undefined;
   mask?: Array<string> | null | undefined;
   on_failure?: string | undefined;
-  regions?: Array<string> | null | undefined;
   threshold?: number | undefined;
 };
 
@@ -110,16 +117,13 @@ export const PublicPlugin$outboundSchema: z.ZodType<
   PublicPlugin
 > = z.object({
   entities: z.nullable(z.array(z.string())).optional(),
-  entityThresholds: z.record(z.number()).optional(),
   id: PublicPluginId$outboundSchema,
-  language: z.string().optional(),
+  language: PublicPluginLanguage$outboundSchema.optional(),
   mask: z.nullable(z.array(PublicPluginMask$outboundSchema)).optional(),
   onFailure: PublicPluginOnFailure$outboundSchema.optional(),
-  regions: z.nullable(z.array(z.string())).optional(),
   threshold: z.number().optional(),
 }).transform((v) => {
   return remap$(v, {
-    entityThresholds: "entity_thresholds",
     onFailure: "on_failure",
   });
 });

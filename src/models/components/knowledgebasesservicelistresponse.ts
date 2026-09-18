@@ -10,23 +10,20 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { Knowledge, Knowledge$inboundSchema } from "./knowledge.js";
 
-export const KnowledgeBasesServiceListResponseObject = {
+export const ObjectT = {
   List: "list",
 } as const;
-export type KnowledgeBasesServiceListResponseObject = ClosedEnum<
-  typeof KnowledgeBasesServiceListResponseObject
->;
+export type ObjectT = ClosedEnum<typeof ObjectT>;
 
 export type KnowledgeBasesServiceListResponse = {
-  object: KnowledgeBasesServiceListResponseObject;
+  object: ObjectT;
   data: Array<Knowledge>;
   hasMore: boolean;
 };
 
 /** @internal */
-export const KnowledgeBasesServiceListResponseObject$inboundSchema:
-  z.ZodNativeEnum<typeof KnowledgeBasesServiceListResponseObject> = z
-    .nativeEnum(KnowledgeBasesServiceListResponseObject);
+export const ObjectT$inboundSchema: z.ZodNativeEnum<typeof ObjectT> = z
+  .nativeEnum(ObjectT);
 
 /** @internal */
 export const KnowledgeBasesServiceListResponse$inboundSchema: z.ZodType<
@@ -34,7 +31,7 @@ export const KnowledgeBasesServiceListResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  object: KnowledgeBasesServiceListResponseObject$inboundSchema,
+  object: ObjectT$inboundSchema,
   data: z.array(Knowledge$inboundSchema),
   has_more: z.boolean(),
 }).transform((v) => {

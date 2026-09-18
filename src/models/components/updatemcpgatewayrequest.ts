@@ -9,11 +9,6 @@ import {
   McpGatewayMode$outboundSchema,
 } from "./mcpgatewaymode.js";
 import {
-  McpGatewayPlugin,
-  McpGatewayPlugin$Outbound,
-  McpGatewayPlugin$outboundSchema,
-} from "./mcpgatewayplugin.js";
-import {
   McpGatewayServerLink,
   McpGatewayServerLink$Outbound,
   McpGatewayServerLink$outboundSchema,
@@ -64,10 +59,6 @@ export type UpdateMcpGatewayRequest = {
    * Set true to remove every link; cannot be combined with `server_links`.
    */
   clearServerLinks?: boolean | undefined;
-  /**
-   * Plugins run on every tool call this gateway serves.
-   */
-  plugins?: Array<McpGatewayPlugin> | undefined;
 };
 
 /** @internal */
@@ -81,7 +72,6 @@ export type UpdateMcpGatewayRequest$Outbound = {
   mode?: string | undefined;
   sharing?: Sharing$Outbound | undefined;
   clear_server_links?: boolean | undefined;
-  plugins?: Array<McpGatewayPlugin$Outbound> | undefined;
 };
 
 /** @internal */
@@ -99,7 +89,6 @@ export const UpdateMcpGatewayRequest$outboundSchema: z.ZodType<
   mode: McpGatewayMode$outboundSchema.optional(),
   sharing: Sharing$outboundSchema.optional(),
   clearServerLinks: z.boolean().optional(),
-  plugins: z.array(McpGatewayPlugin$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     displayName: "display_name",

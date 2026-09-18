@@ -35,10 +35,10 @@ const value: components.AudioContentPartSchema = {
 };
 ```
 
-### `components.Two4`
+### `components.InvokeDeploymentRequest24`
 
 ```typescript
-const value: components.Two4 = {
+const value: components.InvokeDeploymentRequest24 = {
   type: "file",
   file: {},
 };

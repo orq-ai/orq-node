@@ -99,6 +99,11 @@ export type CreateCompletionThinking =
   | components.ThinkingConfigEnabledSchema
   | components.ThinkingConfigAdaptiveSchema;
 
+export type CreateCompletionPlugins =
+  | components.PIIRedactionPluginEn
+  | components.PIIRedactionPluginNl
+  | components.PIIRedactionPluginAuto;
+
 /**
  * Retry configuration for the request
  */
@@ -470,7 +475,7 @@ export type CreateCompletionFilterBy1 =
   | CreateCompletion1Nin;
 
 /**
- * The metadata filter to apply to the search. Check the [Searching a Knowledge Base](https://docs.orq.ai/docs/ai-studio/ai-engineering/knowledge-bases#search-a-knowledge-base) for more information.
+ * The metadata filter to apply to the search. Check the [Searching a Knowledge Base](https://docs.orq.ai/docs/knowledge/api#knowledge-base-search) for more information.
  */
 export type CreateCompletionFilterBy =
   | CreateCompletionFilterByAnd
@@ -510,7 +515,7 @@ export type CreateCompletionSearchOptions = {
  */
 export type CreateCompletionRerankConfig = {
   /**
-   * The name of the rerank model to use. Refer to the [model list](https://docs.orq.ai/docs/ai-gateway/supported-models#rerank-models).
+   * The name of the rerank model to use. Refer to the [model list](https://docs.orq.ai/docs/proxy#/rerank-models).
    */
   model: string;
   /**
@@ -528,7 +533,7 @@ export type CreateCompletionRerankConfig = {
  */
 export type CreateCompletionAgenticRagConfig = {
   /**
-   * The name of the model for the Agent to use. Refer to the [model list](https://docs.orq.ai/docs/ai-gateway/supported-models#chat-models).
+   * The name of the model for the Agent to use. Refer to the [model list](https://docs.orq.ai/docs/proxy#/chat-models).
    */
   model: string;
 };
@@ -547,7 +552,7 @@ export type CreateCompletionKnowledgeBases = {
    */
   searchType?: CreateCompletionSearchType | null | undefined;
   /**
-   * The metadata filter to apply to the search. Check the [Searching a Knowledge Base](https://docs.orq.ai/docs/ai-studio/ai-engineering/knowledge-bases#search-a-knowledge-base) for more information.
+   * The metadata filter to apply to the search. Check the [Searching a Knowledge Base](https://docs.orq.ai/docs/knowledge/api#knowledge-base-search) for more information.
    */
   filterBy?: CreateCompletionFilterByAnd | CreateCompletionFilterByOr | {
     [k: string]:
@@ -763,7 +768,13 @@ export type CreateCompletionRequestBody = {
   /**
    * Request-scoped transforms applied to the text exchanged with the model. Currently supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response.
    */
-  plugins?: Array<components.PIIRedactionPlugin> | undefined;
+  plugins?:
+    | Array<
+      | components.PIIRedactionPluginEn
+      | components.PIIRedactionPluginNl
+      | components.PIIRedactionPluginAuto
+    >
+    | undefined;
   /**
    * Leverage Orq's intelligent routing capabilities to enhance your AI application with enterprise-grade reliability and observability. Orq provides automatic request management including retries on failures, model fallbacks for high availability, identity-level analytics tracking, conversation threading, and dynamic prompt templating with variable substitution.
    *
@@ -1227,6 +1238,31 @@ export function createCompletionThinkingToJSON(
 ): string {
   return JSON.stringify(
     CreateCompletionThinking$outboundSchema.parse(createCompletionThinking),
+  );
+}
+
+/** @internal */
+export type CreateCompletionPlugins$Outbound =
+  | components.PIIRedactionPluginEn$Outbound
+  | components.PIIRedactionPluginNl$Outbound
+  | components.PIIRedactionPluginAuto$Outbound;
+
+/** @internal */
+export const CreateCompletionPlugins$outboundSchema: z.ZodType<
+  CreateCompletionPlugins$Outbound,
+  z.ZodTypeDef,
+  CreateCompletionPlugins
+> = z.union([
+  components.PIIRedactionPluginEn$outboundSchema,
+  components.PIIRedactionPluginNl$outboundSchema,
+  components.PIIRedactionPluginAuto$outboundSchema,
+]);
+
+export function createCompletionPluginsToJSON(
+  createCompletionPlugins: CreateCompletionPlugins,
+): string {
+  return JSON.stringify(
+    CreateCompletionPlugins$outboundSchema.parse(createCompletionPlugins),
   );
 }
 
@@ -2877,7 +2913,13 @@ export type CreateCompletionRequestBody$Outbound = {
     | components.ThinkingConfigAdaptiveSchema$Outbound
     | null
     | undefined;
-  plugins?: Array<components.PIIRedactionPlugin$Outbound> | undefined;
+  plugins?:
+    | Array<
+      | components.PIIRedactionPluginEn$Outbound
+      | components.PIIRedactionPluginNl$Outbound
+      | components.PIIRedactionPluginAuto$Outbound
+    >
+    | undefined;
   orq?: CreateCompletionOrq$Outbound | undefined;
   stream: boolean;
 };
@@ -2915,7 +2957,13 @@ export const CreateCompletionRequestBody$outboundSchema: z.ZodType<
       components.ThinkingConfigAdaptiveSchema$outboundSchema,
     ]),
   ).optional(),
-  plugins: z.array(components.PIIRedactionPlugin$outboundSchema).optional(),
+  plugins: z.array(
+    z.union([
+      components.PIIRedactionPluginEn$outboundSchema,
+      components.PIIRedactionPluginNl$outboundSchema,
+      components.PIIRedactionPluginAuto$outboundSchema,
+    ]),
+  ).optional(),
   orq: z.lazy(() => CreateCompletionOrq$outboundSchema).optional(),
   stream: z.boolean().default(false),
 }).transform((v) => {

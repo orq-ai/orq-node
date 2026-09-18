@@ -34,7 +34,7 @@ export class Projects extends ClientSDK {
    * Create a new project
    *
    * @remarks
-   * Creates a project in the current workspace. Projects are workspace-level containers for resources such as skills, deployments, datasets, rules, and related team access. Requires a key with write access to Projects (management key or API key), or an admin session. Project-scoped API keys are rejected.
+   * Creates a project in the current workspace. Projects are workspace-level containers for resources such as skills, deployments, datasets, rules, and related team access.
    */
   async create(
     request: components.CreateProjectRequest,
@@ -68,7 +68,7 @@ export class Projects extends ClientSDK {
    * Delete a project
    *
    * @remarks
-   * Deletes a project from the workspace. The response body is empty when the delete succeeds. Requires a key with write access to Projects (management key or API key), or an admin session. Project-scoped API keys are rejected.
+   * Deletes a project from the workspace. The response body is empty when the delete succeeds.
    */
   async delete(
     request: operations.ProjectDeleteRequest,
@@ -85,7 +85,7 @@ export class Projects extends ClientSDK {
    * Update a project
    *
    * @remarks
-   * Updates the specified project by setting the values of the parameters passed. Requires a key with write access to Projects (management key or API key), or an admin session. Project-scoped API keys are rejected.
+   * Updates the specified project by setting the values of the parameters passed.
    */
   async update(
     request: operations.ProjectUpdateRequest,

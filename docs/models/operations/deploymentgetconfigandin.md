@@ -1,21 +1,23 @@
 # DeploymentGetConfigAndIn
 
-In
 
-## Example Usage
+## Supported Types
+
+### `string`
 
 ```typescript
-import { DeploymentGetConfigAndIn } from "@orq-ai/node/models/operations";
-
-let value: DeploymentGetConfigAndIn = {
-  in: [
-    "<value>",
-  ],
-};
+const value: string = "<value>";
 ```
 
-## Fields
+### `number`
 
-| Field                                              | Type                                               | Required                                           | Description                                        |
-| -------------------------------------------------- | -------------------------------------------------- | -------------------------------------------------- | -------------------------------------------------- |
-| `in`                                               | *operations.DeploymentGetConfigAndDeploymentsIn*[] | :heavy_check_mark:                                 | N/A                                                |
+```typescript
+const value: number = 1284.03;
+```
+
+### `boolean`
+
+```typescript
+const value: boolean = true;
+```
+

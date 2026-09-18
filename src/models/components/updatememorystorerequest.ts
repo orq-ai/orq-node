@@ -3,16 +3,11 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../lib/primitives.js";
 
 export type UpdateMemoryStoreRequest = {
   description?: string | undefined;
   ttl?: number | null | undefined;
   path?: string | undefined;
-  /**
-   * New containing project. Omit to keep the current project; `path` resolves inside it.
-   */
-  projectId?: string | undefined;
 };
 
 /** @internal */
@@ -20,7 +15,6 @@ export type UpdateMemoryStoreRequest$Outbound = {
   description?: string | undefined;
   ttl?: number | null | undefined;
   path?: string | undefined;
-  project_id?: string | undefined;
 };
 
 /** @internal */
@@ -32,11 +26,6 @@ export const UpdateMemoryStoreRequest$outboundSchema: z.ZodType<
   description: z.string().optional(),
   ttl: z.nullable(z.number()).optional(),
   path: z.string().optional(),
-  projectId: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    projectId: "project_id",
-  });
 });
 
 export function updateMemoryStoreRequestToJSON(

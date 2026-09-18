@@ -66,7 +66,7 @@ const value: operations.ResponseBodyHTTPTool = {
   type: "http",
   http: {
     blueprint: {
-      url: "https://impartial-wombat.name",
+      url: "https://content-schnitzel.net/",
       method: "PUT",
     },
   },

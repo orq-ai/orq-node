@@ -171,7 +171,7 @@ export const RequestBodySource = {
 } as const;
 export type RequestBodySource = ClosedEnum<typeof RequestBodySource>;
 
-export type RequestBody1 = {
+export type PostV2FeedbackEvaluationRequestBody1 = {
   /**
    * The unique identifier of the human evaluation
    */
@@ -201,7 +201,7 @@ export type RequestBody1 = {
 };
 
 export type PostV2FeedbackEvaluationRequestBody =
-  | RequestBody1
+  | PostV2FeedbackEvaluationRequestBody1
   | RequestBody2
   | Three
   | RequestBody4;
@@ -245,7 +245,7 @@ export const RequestBody4$outboundSchema: z.ZodType<
     PostV2FeedbackEvaluationRequestBodyFeedbackRequestSource$outboundSchema
       .default("orq"),
   explanation: z.string().optional(),
-  reviewedAt: z.date().default(() => new Date("2026-09-17T15:44:47.146Z"))
+  reviewedAt: z.date().default(() => new Date("2026-09-18T09:53:03.944Z"))
     .transform(v => v.toISOString()),
   type: z.literal("string_array"),
   values: z.array(z.string()),
@@ -299,7 +299,7 @@ export const Three$outboundSchema: z.ZodType<
   source: PostV2FeedbackEvaluationRequestBodyFeedbackSource$outboundSchema
     .default("orq"),
   explanation: z.string().optional(),
-  reviewedAt: z.date().default(() => new Date("2026-09-17T15:44:47.146Z"))
+  reviewedAt: z.date().default(() => new Date("2026-09-18T09:53:03.943Z"))
     .transform(v => v.toISOString()),
   type: z.literal("boolean"),
   value: z.boolean(),
@@ -353,7 +353,7 @@ export const RequestBody2$outboundSchema: z.ZodType<
     "orq",
   ),
   explanation: z.string().optional(),
-  reviewedAt: z.date().default(() => new Date("2026-09-17T15:44:47.146Z"))
+  reviewedAt: z.date().default(() => new Date("2026-09-18T09:53:03.943Z"))
     .transform(v => v.toISOString()),
   type: z.literal("number"),
   value: z.number(),
@@ -382,7 +382,7 @@ export const RequestBodySource$outboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(RequestBodySource);
 
 /** @internal */
-export type RequestBody1$Outbound = {
+export type PostV2FeedbackEvaluationRequestBody1$Outbound = {
   id: string;
   evaluation_type: string;
   human_review_id?: string | undefined;
@@ -395,17 +395,17 @@ export type RequestBody1$Outbound = {
 };
 
 /** @internal */
-export const RequestBody1$outboundSchema: z.ZodType<
-  RequestBody1$Outbound,
+export const PostV2FeedbackEvaluationRequestBody1$outboundSchema: z.ZodType<
+  PostV2FeedbackEvaluationRequestBody1$Outbound,
   z.ZodTypeDef,
-  RequestBody1
+  PostV2FeedbackEvaluationRequestBody1
 > = z.object({
   id: z.string(),
   evaluationType: EvaluationType$outboundSchema,
   humanReviewId: z.string().optional(),
   source: RequestBodySource$outboundSchema.default("orq"),
   explanation: z.string().optional(),
-  reviewedAt: z.date().default(() => new Date("2026-09-17T15:44:47.146Z"))
+  reviewedAt: z.date().default(() => new Date("2026-09-18T09:53:03.942Z"))
     .transform(v => v.toISOString()),
   type: z.literal("string"),
   value: z.string(),
@@ -419,13 +419,19 @@ export const RequestBody1$outboundSchema: z.ZodType<
   });
 });
 
-export function requestBody1ToJSON(requestBody1: RequestBody1): string {
-  return JSON.stringify(RequestBody1$outboundSchema.parse(requestBody1));
+export function postV2FeedbackEvaluationRequestBody1ToJSON(
+  postV2FeedbackEvaluationRequestBody1: PostV2FeedbackEvaluationRequestBody1,
+): string {
+  return JSON.stringify(
+    PostV2FeedbackEvaluationRequestBody1$outboundSchema.parse(
+      postV2FeedbackEvaluationRequestBody1,
+    ),
+  );
 }
 
 /** @internal */
 export type PostV2FeedbackEvaluationRequestBody$Outbound =
-  | RequestBody1$Outbound
+  | PostV2FeedbackEvaluationRequestBody1$Outbound
   | RequestBody2$Outbound
   | Three$Outbound
   | RequestBody4$Outbound;
@@ -436,7 +442,7 @@ export const PostV2FeedbackEvaluationRequestBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   PostV2FeedbackEvaluationRequestBody
 > = z.union([
-  z.lazy(() => RequestBody1$outboundSchema),
+  z.lazy(() => PostV2FeedbackEvaluationRequestBody1$outboundSchema),
   z.lazy(() => RequestBody2$outboundSchema),
   z.lazy(() => Three$outboundSchema),
   z.lazy(() => RequestBody4$outboundSchema),

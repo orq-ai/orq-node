@@ -8,6 +8,17 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+/**
+ * Plugin discriminator. Must be `trace_scrubbing`.
+ */
+export const TraceScrubbingPluginId = {
+  TraceScrubbing: "trace_scrubbing",
+} as const;
+/**
+ * Plugin discriminator. Must be `trace_scrubbing`.
+ */
+export type TraceScrubbingPluginId = ClosedEnum<typeof TraceScrubbingPluginId>;
+
 export const Mask = {
   All: "all",
   System: "system",
@@ -22,12 +33,21 @@ export type TraceScrubbingPlugin = {
   /**
    * Plugin discriminator. Must be `trace_scrubbing`.
    */
-  id: "trace_scrubbing";
+  id: TraceScrubbingPluginId;
   /**
    * Trace surfaces to scrub. `all` includes system, input, output, metadata, and variables.
    */
   mask: Array<Mask>;
 };
+
+/** @internal */
+export const TraceScrubbingPluginId$inboundSchema: z.ZodNativeEnum<
+  typeof TraceScrubbingPluginId
+> = z.nativeEnum(TraceScrubbingPluginId);
+/** @internal */
+export const TraceScrubbingPluginId$outboundSchema: z.ZodNativeEnum<
+  typeof TraceScrubbingPluginId
+> = TraceScrubbingPluginId$inboundSchema;
 
 /** @internal */
 export const Mask$inboundSchema: z.ZodNativeEnum<typeof Mask> = z.nativeEnum(
@@ -43,12 +63,12 @@ export const TraceScrubbingPlugin$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  id: z.literal("trace_scrubbing"),
+  id: TraceScrubbingPluginId$inboundSchema,
   mask: z.array(Mask$inboundSchema),
 });
 /** @internal */
 export type TraceScrubbingPlugin$Outbound = {
-  id: "trace_scrubbing";
+  id: string;
   mask: Array<string>;
 };
 
@@ -58,7 +78,7 @@ export const TraceScrubbingPlugin$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   TraceScrubbingPlugin
 > = z.object({
-  id: z.literal("trace_scrubbing"),
+  id: TraceScrubbingPluginId$outboundSchema,
   mask: z.array(Mask$outboundSchema),
 });
 

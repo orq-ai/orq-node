@@ -9,12 +9,14 @@ import {
   EvaluationContext$outboundSchema,
 } from "./evaluationcontext.js";
 
+export type InvokeEvaluatorRequestMessages = {};
+
 /**
  * Accepts two shapes. `context` names its fields after the template variables
  *
  * @remarks
- *  they feed and is the one to use; the flat fields below are folded into
- *  `context` when it is absent. Setting `context` wins.
+ *  they feed and is the one to use; the flat fields below are the legacy body,
+ *  folded into `context` when it is absent. Setting `context` wins.
  */
 export type InvokeEvaluatorRequest = {
   /**
@@ -22,7 +24,7 @@ export type InvokeEvaluatorRequest = {
    *
    * @remarks
    *  `input.user_query` is ignored; `output.response` is appended only when the
-   *  conversation carries no assistant turn.
+   *  conversation carries no assistant turn. Mirrors graders-api buildGraderRequest.
    */
   context?: EvaluationContext | undefined;
   /**
@@ -63,7 +65,7 @@ export type InvokeEvaluatorRequest = {
    * @remarks
    *  `context.messages`.
    */
-  messages?: Array<{ [k: string]: any }> | undefined;
+  messages?: Array<InvokeEvaluatorRequestMessages> | undefined;
   /**
    * Template variables for evaluator prompt substitution. Folds into
    *
@@ -74,6 +76,26 @@ export type InvokeEvaluatorRequest = {
 };
 
 /** @internal */
+export type InvokeEvaluatorRequestMessages$Outbound = {};
+
+/** @internal */
+export const InvokeEvaluatorRequestMessages$outboundSchema: z.ZodType<
+  InvokeEvaluatorRequestMessages$Outbound,
+  z.ZodTypeDef,
+  InvokeEvaluatorRequestMessages
+> = z.object({});
+
+export function invokeEvaluatorRequestMessagesToJSON(
+  invokeEvaluatorRequestMessages: InvokeEvaluatorRequestMessages,
+): string {
+  return JSON.stringify(
+    InvokeEvaluatorRequestMessages$outboundSchema.parse(
+      invokeEvaluatorRequestMessages,
+    ),
+  );
+}
+
+/** @internal */
 export type InvokeEvaluatorRequest$Outbound = {
   context?: EvaluationContext$Outbound | undefined;
   model?: string | undefined;
@@ -81,7 +103,7 @@ export type InvokeEvaluatorRequest$Outbound = {
   output?: string | undefined;
   reference?: string | undefined;
   retrievals?: Array<string> | undefined;
-  messages?: Array<{ [k: string]: any }> | undefined;
+  messages?: Array<InvokeEvaluatorRequestMessages$Outbound> | undefined;
   variables?: { [k: string]: any } | undefined;
 };
 
@@ -97,7 +119,8 @@ export const InvokeEvaluatorRequest$outboundSchema: z.ZodType<
   output: z.string().optional(),
   reference: z.string().optional(),
   retrievals: z.array(z.string()).optional(),
-  messages: z.array(z.record(z.any())).optional(),
+  messages: z.array(z.lazy(() => InvokeEvaluatorRequestMessages$outboundSchema))
+    .optional(),
   variables: z.record(z.any()).optional(),
 });
 

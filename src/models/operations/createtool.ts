@@ -31,14 +31,14 @@ export type CreateToolRequestBodyToolsStatus = ClosedEnum<
 /**
  * The type must be "object"
  */
-export const CreateToolRequestBodyToolsRequest4Type = {
+export const CreateToolRequestBodyToolsRequest4CodeToolType = {
   Object: "object",
 } as const;
 /**
  * The type must be "object"
  */
-export type CreateToolRequestBodyToolsRequest4Type = ClosedEnum<
-  typeof CreateToolRequestBodyToolsRequest4Type
+export type CreateToolRequestBodyToolsRequest4CodeToolType = ClosedEnum<
+  typeof CreateToolRequestBodyToolsRequest4CodeToolType
 >;
 
 /**
@@ -48,7 +48,7 @@ export type CreateToolRequestBodyParameters = {
   /**
    * The type must be "object"
    */
-  type: CreateToolRequestBodyToolsRequest4Type;
+  type: CreateToolRequestBodyToolsRequest4CodeToolType;
   /**
    * The properties of the function parameters
    */
@@ -633,7 +633,7 @@ export type ResponseBodyBlueprint = {
 /**
  * The type of the argument.
  */
-export const CreateToolResponseBodyToolsResponse200Type = {
+export const CreateToolResponseBodyToolsResponse200ApplicationJSONType = {
   String: "string",
   Number: "number",
   Boolean: "boolean",
@@ -641,9 +641,8 @@ export const CreateToolResponseBodyToolsResponse200Type = {
 /**
  * The type of the argument.
  */
-export type CreateToolResponseBodyToolsResponse200Type = ClosedEnum<
-  typeof CreateToolResponseBodyToolsResponse200Type
->;
+export type CreateToolResponseBodyToolsResponse200ApplicationJSONType =
+  ClosedEnum<typeof CreateToolResponseBodyToolsResponse200ApplicationJSONType>;
 
 /**
  * The default value of the argument.
@@ -654,7 +653,7 @@ export type ResponseBodyArguments = {
   /**
    * The type of the argument.
    */
-  type: CreateToolResponseBodyToolsResponse200Type;
+  type: CreateToolResponseBodyToolsResponse200ApplicationJSONType;
   /**
    * A description of the argument.
    */
@@ -669,7 +668,7 @@ export type ResponseBodyArguments = {
   defaultValue?: string | number | boolean | undefined;
 };
 
-export type ResponseBodyHttp = {
+export type CreateToolResponseBodyHttp = {
   /**
    * The blueprint for the HTTP request. The `arguments` field will be used to replace the placeholders in the `url`, `headers`, `body`, and `arguments` fields.
    */
@@ -724,7 +723,7 @@ export type ResponseBodyHTTPTool = {
    */
   status: CreateToolResponseBodyToolsStatus;
   type: "http";
-  http: ResponseBodyHttp;
+  http: CreateToolResponseBodyHttp;
 };
 
 /**
@@ -845,14 +844,14 @@ export type ResponseBodyStatus = ClosedEnum<typeof ResponseBodyStatus>;
 /**
  * The type must be "object"
  */
-export const CreateToolResponseBodyToolsResponse200ApplicationJSONType = {
+export const CreateToolResponseBodyToolsResponse200ApplicationJson1Type = {
   Object: "object",
 } as const;
 /**
  * The type must be "object"
  */
-export type CreateToolResponseBodyToolsResponse200ApplicationJSONType =
-  ClosedEnum<typeof CreateToolResponseBodyToolsResponse200ApplicationJSONType>;
+export type CreateToolResponseBodyToolsResponse200ApplicationJson1Type =
+  ClosedEnum<typeof CreateToolResponseBodyToolsResponse200ApplicationJson1Type>;
 
 /**
  * The parameters the functions accepts, described as a JSON Schema object. See the `OpenAI` [guide](https://platform.openai.com/docs/guides/function-calling) for examples, and the [JSON Schema reference](https://json-schema.org/understanding-json-schema/) for documentation about the format.
@@ -861,7 +860,7 @@ export type ResponseBodyParameters = {
   /**
    * The type must be "object"
    */
-  type: CreateToolResponseBodyToolsResponse200ApplicationJSONType;
+  type: CreateToolResponseBodyToolsResponse200ApplicationJson1Type;
   /**
    * The properties of the function parameters
    */
@@ -873,7 +872,7 @@ export type ResponseBodyParameters = {
   additionalProperties?: { [k: string]: any } | undefined;
 };
 
-export type ResponseBodyFunction = {
+export type CreateToolResponseBodyFunction = {
   /**
    * The name of the function to be called. Must be a-z, A-Z, 0-9, or contain underscores and dashes, with a maximum length of 64.
    */
@@ -936,7 +935,7 @@ export type ResponseBodyFunctionTool = {
    */
   status: ResponseBodyStatus;
   type: "function";
-  function: ResponseBodyFunction;
+  function: CreateToolResponseBodyFunction;
 };
 
 /**
@@ -954,10 +953,9 @@ export const CreateToolRequestBodyToolsStatus$outboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(CreateToolRequestBodyToolsStatus);
 
 /** @internal */
-export const CreateToolRequestBodyToolsRequest4Type$outboundSchema:
-  z.ZodNativeEnum<typeof CreateToolRequestBodyToolsRequest4Type> = z.nativeEnum(
-    CreateToolRequestBodyToolsRequest4Type,
-  );
+export const CreateToolRequestBodyToolsRequest4CodeToolType$outboundSchema:
+  z.ZodNativeEnum<typeof CreateToolRequestBodyToolsRequest4CodeToolType> = z
+    .nativeEnum(CreateToolRequestBodyToolsRequest4CodeToolType);
 
 /** @internal */
 export type CreateToolRequestBodyParameters$Outbound = {
@@ -973,7 +971,7 @@ export const CreateToolRequestBodyParameters$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateToolRequestBodyParameters
 > = z.object({
-  type: CreateToolRequestBodyToolsRequest4Type$outboundSchema,
+  type: CreateToolRequestBodyToolsRequest4CodeToolType$outboundSchema,
   properties: z.record(z.any()),
   required: z.array(z.string()),
   additionalProperties: z.record(z.any()).optional(),
@@ -1575,7 +1573,7 @@ export const ResponseBodyCodeExecutionTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01M2R0NDFTCGHCVMTK3SPSNY31"),
+  _id: z.string().default("tool_01M2SYY3R40RRH1EN8MV3J854X"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -1686,9 +1684,10 @@ export function responseBodyBlueprintFromJSON(
 }
 
 /** @internal */
-export const CreateToolResponseBodyToolsResponse200Type$inboundSchema:
-  z.ZodNativeEnum<typeof CreateToolResponseBodyToolsResponse200Type> = z
-    .nativeEnum(CreateToolResponseBodyToolsResponse200Type);
+export const CreateToolResponseBodyToolsResponse200ApplicationJSONType$inboundSchema:
+  z.ZodNativeEnum<
+    typeof CreateToolResponseBodyToolsResponse200ApplicationJSONType
+  > = z.nativeEnum(CreateToolResponseBodyToolsResponse200ApplicationJSONType);
 
 /** @internal */
 export const ResponseBodyDefaultValue$inboundSchema: z.ZodType<
@@ -1713,7 +1712,7 @@ export const ResponseBodyArguments$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  type: CreateToolResponseBodyToolsResponse200Type$inboundSchema,
+  type: CreateToolResponseBodyToolsResponse200ApplicationJSONType$inboundSchema,
   description: z.string(),
   send_to_model: z.boolean().default(true),
   default_value: z.union([z.string(), z.number(), z.boolean()]).optional(),
@@ -1735,8 +1734,8 @@ export function responseBodyArgumentsFromJSON(
 }
 
 /** @internal */
-export const ResponseBodyHttp$inboundSchema: z.ZodType<
-  ResponseBodyHttp,
+export const CreateToolResponseBodyHttp$inboundSchema: z.ZodType<
+  CreateToolResponseBodyHttp,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -1745,13 +1744,13 @@ export const ResponseBodyHttp$inboundSchema: z.ZodType<
     .optional(),
 });
 
-export function responseBodyHttpFromJSON(
+export function createToolResponseBodyHttpFromJSON(
   jsonString: string,
-): SafeParseResult<ResponseBodyHttp, SDKValidationError> {
+): SafeParseResult<CreateToolResponseBodyHttp, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => ResponseBodyHttp$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ResponseBodyHttp' from JSON`,
+    (x) => CreateToolResponseBodyHttp$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateToolResponseBodyHttp' from JSON`,
   );
 }
 
@@ -1761,7 +1760,7 @@ export const ResponseBodyHTTPTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01M2R0NDFS2F1K2KAASJTH3JCW"),
+  _id: z.string().default("tool_01M2SYY3R2HZMZSJYKKQ655EDQ"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -1774,7 +1773,7 @@ export const ResponseBodyHTTPTool$inboundSchema: z.ZodType<
   updated: z.string(),
   status: CreateToolResponseBodyToolsStatus$inboundSchema.default("live"),
   type: z.literal("http"),
-  http: z.lazy(() => ResponseBodyHttp$inboundSchema),
+  http: z.lazy(() => CreateToolResponseBodyHttp$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
     "_id": "id",
@@ -1854,7 +1853,7 @@ export const ResponseBodyJSONSchemaTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01M2R0NDFSEMHX8TTCZYRNAS54"),
+  _id: z.string().default("tool_01M2SYY3R1NWXZMKBMDRFBBJ02"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -1896,10 +1895,10 @@ export const ResponseBodyStatus$inboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(ResponseBodyStatus);
 
 /** @internal */
-export const CreateToolResponseBodyToolsResponse200ApplicationJSONType$inboundSchema:
+export const CreateToolResponseBodyToolsResponse200ApplicationJson1Type$inboundSchema:
   z.ZodNativeEnum<
-    typeof CreateToolResponseBodyToolsResponse200ApplicationJSONType
-  > = z.nativeEnum(CreateToolResponseBodyToolsResponse200ApplicationJSONType);
+    typeof CreateToolResponseBodyToolsResponse200ApplicationJson1Type
+  > = z.nativeEnum(CreateToolResponseBodyToolsResponse200ApplicationJson1Type);
 
 /** @internal */
 export const ResponseBodyParameters$inboundSchema: z.ZodType<
@@ -1909,7 +1908,7 @@ export const ResponseBodyParameters$inboundSchema: z.ZodType<
 > = collectExtraKeys$(
   z.object({
     type:
-      CreateToolResponseBodyToolsResponse200ApplicationJSONType$inboundSchema,
+      CreateToolResponseBodyToolsResponse200ApplicationJson1Type$inboundSchema,
     properties: z.record(z.any()),
     required: z.array(z.string()),
   }).catchall(z.any()),
@@ -1928,8 +1927,8 @@ export function responseBodyParametersFromJSON(
 }
 
 /** @internal */
-export const ResponseBodyFunction$inboundSchema: z.ZodType<
-  ResponseBodyFunction,
+export const CreateToolResponseBodyFunction$inboundSchema: z.ZodType<
+  CreateToolResponseBodyFunction,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -1939,13 +1938,13 @@ export const ResponseBodyFunction$inboundSchema: z.ZodType<
   parameters: z.lazy(() => ResponseBodyParameters$inboundSchema).optional(),
 });
 
-export function responseBodyFunctionFromJSON(
+export function createToolResponseBodyFunctionFromJSON(
   jsonString: string,
-): SafeParseResult<ResponseBodyFunction, SDKValidationError> {
+): SafeParseResult<CreateToolResponseBodyFunction, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => ResponseBodyFunction$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ResponseBodyFunction' from JSON`,
+    (x) => CreateToolResponseBodyFunction$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateToolResponseBodyFunction' from JSON`,
   );
 }
 
@@ -1955,7 +1954,7 @@ export const ResponseBodyFunctionTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01M2R0NDFS9ED1VNVT81BPEX3B"),
+  _id: z.string().default("tool_01M2SYY3R00QJGTBXV0B4DRVSD"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -1968,7 +1967,7 @@ export const ResponseBodyFunctionTool$inboundSchema: z.ZodType<
   updated: z.string(),
   status: ResponseBodyStatus$inboundSchema.default("live"),
   type: z.literal("function"),
-  function: z.lazy(() => ResponseBodyFunction$inboundSchema),
+  function: z.lazy(() => CreateToolResponseBodyFunction$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
     "_id": "id",

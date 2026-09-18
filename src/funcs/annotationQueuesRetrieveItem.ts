@@ -11,6 +11,7 @@ import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
+import * as components from "../models/components/index.js";
 import {
   ConnectionError,
   InvalidRequestError,
@@ -29,7 +30,7 @@ import { Result } from "../types/fp.js";
  * Retrieve an annotation queue item
  *
  * @remarks
- * Retrieves an item from the specified annotation queue in its expanded form. An annotation queue item is a pointer to a span; this endpoint returns the fully resolved span the item references.
+ * Retrieve an annotation queue item. Each item is a pointer to a span with fully resolved span data.
  */
 export function annotationQueuesRetrieveItem(
   client: OrqCore,
@@ -37,7 +38,7 @@ export function annotationQueuesRetrieveItem(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.RetrieveAnnotationQueueItemResponseBody,
+    components.PublicSpan,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -62,7 +63,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      operations.RetrieveAnnotationQueueItemResponseBody,
+      components.PublicSpan,
       | OrqError
       | ResponseValidationError
       | ConnectionError
@@ -153,7 +154,7 @@ async function $do(
   const response = doResult.value;
 
   const [result] = await M.match<
-    operations.RetrieveAnnotationQueueItemResponseBody,
+    components.PublicSpan,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -163,10 +164,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(
-      200,
-      operations.RetrieveAnnotationQueueItemResponseBody$inboundSchema,
-    ),
+    M.json(200, components.PublicSpan$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, req);

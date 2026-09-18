@@ -17,7 +17,7 @@ let value: CreateImageVariationOrq = {
   },
   fallbacks: [
     {
-      model: "openai/gpt-5.4-mini",
+      model: "openai/gpt-4o-mini",
     },
   ],
   prompt: {

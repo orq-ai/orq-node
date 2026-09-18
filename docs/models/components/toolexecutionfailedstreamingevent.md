@@ -21,7 +21,7 @@ let value: ToolExecutionFailedStreamingEvent = {
       workspaceId: "<id>",
       agentManifestId: "<id>",
       agentExecutionId: "<id>",
-      product: "memory-stores",
+      product: "agents",
     },
     workflowRunId: "<id>",
   },

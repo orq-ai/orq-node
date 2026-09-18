@@ -14,15 +14,17 @@ import {
   StructuredOutput$outboundSchema,
 } from "./structuredoutput.js";
 
+export type EvaluationContextMessages = {};
+
 /**
  * The data to grade. When `messages` is present it is the conversation and
  *
  * @remarks
  *  `input.user_query` is ignored; `output.response` is appended only when the
- *  conversation carries no assistant turn.
+ *  conversation carries no assistant turn. Mirrors graders-api buildGraderRequest.
  */
 export type EvaluationContext = {
-  messages?: Array<{ [k: string]: any }> | undefined;
+  messages?: Array<EvaluationContextMessages> | undefined;
   /**
    * StructuredInput names its fields after the template variables they feed, so
    *
@@ -35,8 +37,26 @@ export type EvaluationContext = {
 };
 
 /** @internal */
+export type EvaluationContextMessages$Outbound = {};
+
+/** @internal */
+export const EvaluationContextMessages$outboundSchema: z.ZodType<
+  EvaluationContextMessages$Outbound,
+  z.ZodTypeDef,
+  EvaluationContextMessages
+> = z.object({});
+
+export function evaluationContextMessagesToJSON(
+  evaluationContextMessages: EvaluationContextMessages,
+): string {
+  return JSON.stringify(
+    EvaluationContextMessages$outboundSchema.parse(evaluationContextMessages),
+  );
+}
+
+/** @internal */
 export type EvaluationContext$Outbound = {
-  messages?: Array<{ [k: string]: any }> | undefined;
+  messages?: Array<EvaluationContextMessages$Outbound> | undefined;
   input?: StructuredInput$Outbound | undefined;
   output?: StructuredOutput$Outbound | undefined;
   variables?: { [k: string]: any } | undefined;
@@ -48,7 +68,8 @@ export const EvaluationContext$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   EvaluationContext
 > = z.object({
-  messages: z.array(z.record(z.any())).optional(),
+  messages: z.array(z.lazy(() => EvaluationContextMessages$outboundSchema))
+    .optional(),
   input: StructuredInput$outboundSchema.optional(),
   output: StructuredOutput$outboundSchema.optional(),
   variables: z.record(z.any()).optional(),

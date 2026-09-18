@@ -5,25 +5,7 @@
 ```typescript
 import { SyncMcpServerResponse } from "@orq-ai/node/models/components";
 
-let value: SyncMcpServerResponse = {
-  mcpServer: {
-    connection: {
-      type: "MCP_CONNECTION_TYPE_HTTP",
-      url: "https://api.githubcopilot.com/mcp/",
-    },
-    auth: {
-      type: "MCP_AUTH_TYPE_STATIC_HEADERS",
-      staticHeaders: [
-        {
-          key: "Authorization",
-        },
-      ],
-    },
-    defaultToolExposure: {
-      mode: "MCP_TOOL_EXPOSURE_MODE_ALL",
-    },
-  },
-};
+let value: SyncMcpServerResponse = {};
 ```
 
 ## Fields

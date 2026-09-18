@@ -4,19 +4,51 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import * as components from "../components/index.js";
+
+export type RemoveAnnotationQueueItemsRequestBody = {
+  /**
+   * The unique identifiers of the spans to be removed from the annotation queue
+   */
+  spanIds: Array<string>;
+};
 
 export type RemoveAnnotationQueueItemsRequest = {
   annotationQueueId: string;
-  removeAnnotationQueueItemsRequest:
-    components.RemoveAnnotationQueueItemsRequest;
+  requestBody?: RemoveAnnotationQueueItemsRequestBody | undefined;
 };
+
+/** @internal */
+export type RemoveAnnotationQueueItemsRequestBody$Outbound = {
+  span_ids: Array<string>;
+};
+
+/** @internal */
+export const RemoveAnnotationQueueItemsRequestBody$outboundSchema: z.ZodType<
+  RemoveAnnotationQueueItemsRequestBody$Outbound,
+  z.ZodTypeDef,
+  RemoveAnnotationQueueItemsRequestBody
+> = z.object({
+  spanIds: z.array(z.string()),
+}).transform((v) => {
+  return remap$(v, {
+    spanIds: "span_ids",
+  });
+});
+
+export function removeAnnotationQueueItemsRequestBodyToJSON(
+  removeAnnotationQueueItemsRequestBody: RemoveAnnotationQueueItemsRequestBody,
+): string {
+  return JSON.stringify(
+    RemoveAnnotationQueueItemsRequestBody$outboundSchema.parse(
+      removeAnnotationQueueItemsRequestBody,
+    ),
+  );
+}
 
 /** @internal */
 export type RemoveAnnotationQueueItemsRequest$Outbound = {
   annotation_queue_id: string;
-  RemoveAnnotationQueueItemsRequest:
-    components.RemoveAnnotationQueueItemsRequest$Outbound;
+  RequestBody?: RemoveAnnotationQueueItemsRequestBody$Outbound | undefined;
 };
 
 /** @internal */
@@ -26,12 +58,13 @@ export const RemoveAnnotationQueueItemsRequest$outboundSchema: z.ZodType<
   RemoveAnnotationQueueItemsRequest
 > = z.object({
   annotationQueueId: z.string(),
-  removeAnnotationQueueItemsRequest:
-    components.RemoveAnnotationQueueItemsRequest$outboundSchema,
+  requestBody: z.lazy(() =>
+    RemoveAnnotationQueueItemsRequestBody$outboundSchema
+  ).optional(),
 }).transform((v) => {
   return remap$(v, {
     annotationQueueId: "annotation_queue_id",
-    removeAnnotationQueueItemsRequest: "RemoveAnnotationQueueItemsRequest",
+    requestBody: "RequestBody",
   });
 });
 

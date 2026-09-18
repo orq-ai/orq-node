@@ -30,7 +30,6 @@ export const ToolExecutionFinishedStreamingEventProduct = {
   Evaluators: "evaluators",
   Otel: "otel",
   AiChat: "ai-chat",
-  McpGateway: "mcp_gateway",
 } as const;
 /**
  * Orquesta product

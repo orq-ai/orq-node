@@ -40,34 +40,33 @@ let value: PublicResponseResource = {
   presencePenalty: 2988.81,
   previousResponseId: "<id>",
   promptCacheKey: "<value>",
-  promptCacheOptions: {},
   promptCacheRetention: "<value>",
   reasoning: {},
   safetyIdentifier: "<value>",
   serviceTier: "scale",
-  status: "in_progress",
+  status: "failed",
   store: true,
-  temperature: 138.17,
+  temperature: 164.13,
   text: "<value>",
   toolChoice: "<value>",
-  tools: [],
-  topLogprobs: 377524,
-  topP: 8436.75,
+  tools: null,
+  topLogprobs: 365177,
+  topP: 1473.73,
   truncation: "disabled",
   usage: {
-    inputTokens: 763695,
+    inputTokens: 786005,
     inputTokensDetails: {
-      cacheCreationTokens: 732588,
-      cacheWriteTokens: 376439,
-      cachedTokens: 349904,
+      cacheCreationTokens: 763695,
+      cacheWriteTokens: 732588,
+      cachedTokens: 376439,
     },
-    outputTokens: 437223,
+    outputTokens: 349904,
     outputTokensDetails: {
-      reasoningTokens: 846277,
+      reasoningTokens: 437223,
     },
-    totalTokens: 81544,
+    totalTokens: 846277,
   },
-  user: "Mervin18",
+  user: "Kelsi_Ratke81",
 };
 ```
 
@@ -96,7 +95,6 @@ let value: PublicResponseResource = {
 | `presencePenalty`                                                                                   | *number*                                                                                            | :heavy_check_mark:                                                                                  | N/A                                                                                                 |
 | `previousResponseId`                                                                                | *string*                                                                                            | :heavy_check_mark:                                                                                  | N/A                                                                                                 |
 | `promptCacheKey`                                                                                    | *string*                                                                                            | :heavy_check_mark:                                                                                  | N/A                                                                                                 |
-| `promptCacheOptions`                                                                                | [components.OpenAIPromptCacheOptions](../../models/components/openaipromptcacheoptions.md)          | :heavy_check_mark:                                                                                  | N/A                                                                                                 |
 | `promptCacheRetention`                                                                              | *string*                                                                                            | :heavy_check_mark:                                                                                  | N/A                                                                                                 |
 | `reasoning`                                                                                         | [components.Reasoning](../../models/components/reasoning.md)                                        | :heavy_check_mark:                                                                                  | N/A                                                                                                 |
 | `safetyIdentifier`                                                                                  | *string*                                                                                            | :heavy_check_mark:                                                                                  | N/A                                                                                                 |

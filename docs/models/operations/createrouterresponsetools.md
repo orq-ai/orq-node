@@ -14,15 +14,6 @@ const value: operations.ToolsFunction = {
 };
 ```
 
-### `operations.Custom`
-
-```typescript
-const value: operations.Custom = {
-  name: "<value>",
-  type: "custom",
-};
-```
-
 ### `components.OrqAdvisorTool`
 
 ```typescript
@@ -37,16 +28,7 @@ const value: components.OrqAdvisorTool = {
 ```typescript
 const value: components.OrqSidekickTool = {
   model: "Challenger",
-  type: "orq:subagent",
-};
-```
-
-### `components.OrqSidekickTool`
-
-```typescript
-const value: components.OrqSidekickTool = {
-  model: "Challenger",
-  type: "orq:subagent",
+  type: "orq:sidekick",
 };
 ```
 
@@ -54,7 +36,7 @@ const value: components.OrqSidekickTool = {
 
 ```typescript
 const value: operations.OrqAiTool = {
-  type: "orq:http",
+  type: "orq:function",
 };
 ```
 
@@ -62,7 +44,7 @@ const value: operations.OrqAiTool = {
 
 ```typescript
 const value: operations.OrqAiTool = {
-  type: "orq:http",
+  type: "orq:function",
 };
 ```
 
@@ -70,7 +52,7 @@ const value: operations.OrqAiTool = {
 
 ```typescript
 const value: operations.OrqAiTool = {
-  type: "orq:http",
+  type: "orq:function",
 };
 ```
 
@@ -78,7 +60,7 @@ const value: operations.OrqAiTool = {
 
 ```typescript
 const value: operations.OrqAiTool = {
-  type: "orq:http",
+  type: "orq:function",
 };
 ```
 
@@ -86,7 +68,7 @@ const value: operations.OrqAiTool = {
 
 ```typescript
 const value: operations.OrqAiTool = {
-  type: "orq:http",
+  type: "orq:function",
 };
 ```
 
@@ -94,7 +76,7 @@ const value: operations.OrqAiTool = {
 
 ```typescript
 const value: operations.OrqAiTool = {
-  type: "orq:http",
+  type: "orq:function",
 };
 ```
 
@@ -102,87 +84,7 @@ const value: operations.OrqAiTool = {
 
 ```typescript
 const value: operations.OrqAiTool = {
-  type: "orq:http",
-};
-```
-
-### `operations.OrqAiTool`
-
-```typescript
-const value: operations.OrqAiTool = {
-  type: "orq:http",
-};
-```
-
-### `operations.OrqAiTool`
-
-```typescript
-const value: operations.OrqAiTool = {
-  type: "orq:http",
-};
-```
-
-### `operations.OrqAiTool`
-
-```typescript
-const value: operations.OrqAiTool = {
-  type: "orq:http",
-};
-```
-
-### `operations.OrqAiTool`
-
-```typescript
-const value: operations.OrqAiTool = {
-  type: "orq:http",
-};
-```
-
-### `operations.OrqAiTool`
-
-```typescript
-const value: operations.OrqAiTool = {
-  type: "orq:http",
-};
-```
-
-### `operations.OrqAiTool`
-
-```typescript
-const value: operations.OrqAiTool = {
-  type: "orq:http",
-};
-```
-
-### `operations.OrqAiTool`
-
-```typescript
-const value: operations.OrqAiTool = {
-  type: "orq:http",
-};
-```
-
-### `operations.OrqAiTool`
-
-```typescript
-const value: operations.OrqAiTool = {
-  type: "orq:http",
-};
-```
-
-### `operations.OrqAiTool`
-
-```typescript
-const value: operations.OrqAiTool = {
-  type: "orq:http",
-};
-```
-
-### `operations.OrqAiTool`
-
-```typescript
-const value: operations.OrqAiTool = {
-  type: "orq:http",
+  type: "orq:function",
 };
 ```
 

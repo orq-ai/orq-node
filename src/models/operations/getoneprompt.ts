@@ -836,9 +836,11 @@ export type GetOnePromptGuardrails = {
 };
 
 export type GetOnePromptPlugins =
-  | (components.PIIRedactionPlugin & { id: "pii_redaction" })
-  | components.ResponseHealingPlugin
-  | components.TraceScrubbingPlugin;
+  | components.PIIRedactionPluginEn
+  | components.PIIRedactionPluginNl
+  | components.TraceScrubbingPlugin
+  | components.PIIRedactionPluginAuto
+  | components.ResponseHealingPlugin;
 
 export type GetOnePromptFallbacks = {
   /**
@@ -1429,9 +1431,11 @@ export type GetOnePromptPromptField = {
    */
   plugins?:
     | Array<
-      | (components.PIIRedactionPlugin & { id: "pii_redaction" })
-      | components.ResponseHealingPlugin
+      | components.PIIRedactionPluginEn
+      | components.PIIRedactionPluginNl
       | components.TraceScrubbingPlugin
+      | components.PIIRedactionPluginAuto
+      | components.ResponseHealingPlugin
     >
     | undefined;
   /**
@@ -1474,7 +1478,7 @@ export type GetOnePromptPromptField = {
     >
     | undefined;
   /**
-   * Model ID used to generate the response, like `openai/gpt-5.6-sol` or `anthropic/claude-sonnet-5`. For private models, use format: `{workspaceKey}@{provider}/{model}`.
+   * Model ID used to generate the response, like `openai/gpt-4o` or `anthropic/claude-3-5-sonnet-20241022`. For private models, use format: `{workspaceKey}@{provider}/{model}`.
    */
   model?: string | null | undefined;
   version?: string | undefined;
@@ -2495,11 +2499,11 @@ export const GetOnePromptPlugins$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
-  components.PIIRedactionPlugin$inboundSchema.and(
-    z.object({ id: z.literal("pii_redaction") }),
-  ),
-  components.ResponseHealingPlugin$inboundSchema,
+  components.PIIRedactionPluginEn$inboundSchema,
+  components.PIIRedactionPluginNl$inboundSchema,
   components.TraceScrubbingPlugin$inboundSchema,
+  components.PIIRedactionPluginAuto$inboundSchema,
+  components.ResponseHealingPlugin$inboundSchema,
 ]);
 
 export function getOnePromptPluginsFromJSON(
@@ -3231,11 +3235,11 @@ export const GetOnePromptPromptField$inboundSchema: z.ZodType<
     .optional(),
   plugins: z.array(
     z.union([
-      components.PIIRedactionPlugin$inboundSchema.and(
-        z.object({ id: z.literal("pii_redaction") }),
-      ),
-      components.ResponseHealingPlugin$inboundSchema,
+      components.PIIRedactionPluginEn$inboundSchema,
+      components.PIIRedactionPluginNl$inboundSchema,
       components.TraceScrubbingPlugin$inboundSchema,
+      components.PIIRedactionPluginAuto$inboundSchema,
+      components.ResponseHealingPlugin$inboundSchema,
     ]),
   ).optional(),
   fallbacks: z.array(z.lazy(() => GetOnePromptFallbacks$inboundSchema))

@@ -85,6 +85,11 @@ export type CreateRerankTimeout = {
   callTimeout: number;
 };
 
+export type CreateRerankPlugins =
+  | components.PIIRedactionPluginEn
+  | components.PIIRedactionPluginNl
+  | components.PIIRedactionPluginAuto;
+
 export type CreateRerankRouterRerankFallbacks = {
   /**
    * Fallback model identifier
@@ -255,7 +260,13 @@ export type CreateRerankRequestBody = {
   /**
    * Request-scoped transforms applied to the text exchanged with the model. Currently supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response.
    */
-  plugins?: Array<components.PIIRedactionPlugin> | undefined;
+  plugins?:
+    | Array<
+      | components.PIIRedactionPluginEn
+      | components.PIIRedactionPluginNl
+      | components.PIIRedactionPluginAuto
+    >
+    | undefined;
   orq?: CreateRerankOrq | undefined;
 };
 
@@ -505,6 +516,31 @@ export function createRerankTimeoutToJSON(
 ): string {
   return JSON.stringify(
     CreateRerankTimeout$outboundSchema.parse(createRerankTimeout),
+  );
+}
+
+/** @internal */
+export type CreateRerankPlugins$Outbound =
+  | components.PIIRedactionPluginEn$Outbound
+  | components.PIIRedactionPluginNl$Outbound
+  | components.PIIRedactionPluginAuto$Outbound;
+
+/** @internal */
+export const CreateRerankPlugins$outboundSchema: z.ZodType<
+  CreateRerankPlugins$Outbound,
+  z.ZodTypeDef,
+  CreateRerankPlugins
+> = z.union([
+  components.PIIRedactionPluginEn$outboundSchema,
+  components.PIIRedactionPluginNl$outboundSchema,
+  components.PIIRedactionPluginAuto$outboundSchema,
+]);
+
+export function createRerankPluginsToJSON(
+  createRerankPlugins: CreateRerankPlugins,
+): string {
+  return JSON.stringify(
+    CreateRerankPlugins$outboundSchema.parse(createRerankPlugins),
   );
 }
 
@@ -760,7 +796,13 @@ export type CreateRerankRequestBody$Outbound = {
   cache?: CreateRerankCache$Outbound | undefined;
   load_balancer?: CreateRerankLoadBalancer1$Outbound | undefined;
   timeout?: CreateRerankTimeout$Outbound | undefined;
-  plugins?: Array<components.PIIRedactionPlugin$Outbound> | undefined;
+  plugins?:
+    | Array<
+      | components.PIIRedactionPluginEn$Outbound
+      | components.PIIRedactionPluginNl$Outbound
+      | components.PIIRedactionPluginAuto$Outbound
+    >
+    | undefined;
   orq?: CreateRerankOrq$Outbound | undefined;
 };
 
@@ -784,7 +826,13 @@ export const CreateRerankRequestBody$outboundSchema: z.ZodType<
   loadBalancer: z.lazy(() => CreateRerankLoadBalancer1$outboundSchema)
     .optional(),
   timeout: z.lazy(() => CreateRerankTimeout$outboundSchema).optional(),
-  plugins: z.array(components.PIIRedactionPlugin$outboundSchema).optional(),
+  plugins: z.array(
+    z.union([
+      components.PIIRedactionPluginEn$outboundSchema,
+      components.PIIRedactionPluginNl$outboundSchema,
+      components.PIIRedactionPluginAuto$outboundSchema,
+    ]),
+  ).optional(),
   orq: z.lazy(() => CreateRerankOrq$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {

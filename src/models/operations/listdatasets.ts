@@ -30,10 +30,6 @@ export type ListDatasetsRequest = {
    * Comma-separated list of user IDs; returns datasets last updated by any of them.
    */
   updatedBy?: string | undefined;
-  /**
-   * Restricts results to a single project. Defaults to every project the caller can access.
-   */
-  projectId?: string | undefined;
 };
 
 export const ListDatasetsObject = {
@@ -98,7 +94,6 @@ export type ListDatasetsRequest$Outbound = {
   ending_before?: string | undefined;
   search?: string | undefined;
   updated_by?: string | undefined;
-  project_id?: string | undefined;
 };
 
 /** @internal */
@@ -112,13 +107,11 @@ export const ListDatasetsRequest$outboundSchema: z.ZodType<
   endingBefore: z.string().optional(),
   search: z.string().optional(),
   updatedBy: z.string().optional(),
-  projectId: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     startingAfter: "starting_after",
     endingBefore: "ending_before",
     updatedBy: "updated_by",
-    projectId: "project_id",
   });
 });
 
@@ -176,7 +169,7 @@ export const ListDatasetsData$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2026-09-17T15:44:41.850Z",
+    "2026-09-18T09:52:53.438Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {

@@ -7,17 +7,17 @@ import { LiteLLMParams } from "@orq-ai/node/models/components";
 
 let value: LiteLLMParams = {
   mergeReasoningContentInChoices: false,
-  model: "openai/gpt-5.6-sol",
+  model: "Golf",
   useInPassThrough: false,
-  useLitellmProxy: false,
+  useLitellmProxy: true,
 };
 ```
 
 ## Fields
 
-| Field                            | Type                             | Required                         | Description                      | Example                          |
-| -------------------------------- | -------------------------------- | -------------------------------- | -------------------------------- | -------------------------------- |
-| `mergeReasoningContentInChoices` | *boolean*                        | :heavy_check_mark:               | N/A                              |                                  |
-| `model`                          | *string*                         | :heavy_check_mark:               | N/A                              | openai/gpt-5.6-sol               |
-| `useInPassThrough`               | *boolean*                        | :heavy_check_mark:               | N/A                              |                                  |
-| `useLitellmProxy`                | *boolean*                        | :heavy_check_mark:               | N/A                              |                                  |
+| Field                            | Type                             | Required                         | Description                      |
+| -------------------------------- | -------------------------------- | -------------------------------- | -------------------------------- |
+| `mergeReasoningContentInChoices` | *boolean*                        | :heavy_check_mark:               | N/A                              |
+| `model`                          | *string*                         | :heavy_check_mark:               | N/A                              |
+| `useInPassThrough`               | *boolean*                        | :heavy_check_mark:               | N/A                              |
+| `useLitellmProxy`                | *boolean*                        | :heavy_check_mark:               | N/A                              |

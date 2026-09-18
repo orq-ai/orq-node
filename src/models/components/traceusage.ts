@@ -18,7 +18,6 @@ export type TraceUsage = {
   completionAudioTokens?: number | undefined;
   completionAcceptedPredictionTokens?: number | undefined;
   completionRejectedPredictionTokens?: number | undefined;
-  promptCacheCreationTokens?: number | undefined;
 };
 
 /** @internal */
@@ -36,7 +35,6 @@ export const TraceUsage$inboundSchema: z.ZodType<
   completion_audio_tokens: z.number().int().optional(),
   completion_accepted_prediction_tokens: z.number().int().optional(),
   completion_rejected_prediction_tokens: z.number().int().optional(),
-  prompt_cache_creation_tokens: z.number().int().optional(),
 }).transform((v) => {
   return remap$(v, {
     "prompt_tokens": "promptTokens",
@@ -50,7 +48,6 @@ export const TraceUsage$inboundSchema: z.ZodType<
       "completionAcceptedPredictionTokens",
     "completion_rejected_prediction_tokens":
       "completionRejectedPredictionTokens",
-    "prompt_cache_creation_tokens": "promptCacheCreationTokens",
   });
 });
 

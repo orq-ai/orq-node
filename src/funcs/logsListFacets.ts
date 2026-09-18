@@ -3,7 +3,7 @@
  */
 
 import { OrqCore } from "../core.js";
-import { encodeJSON } from "../lib/encodings.js";
+import { encodeFormQuery } from "../lib/encodings.js";
 import { matchStatusCode } from "../lib/http.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
@@ -22,6 +22,7 @@ import {
 import { OrqError } from "../models/errors/orqerror.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import * as operations from "../models/operations/index.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -29,11 +30,11 @@ import { Result } from "../types/fp.js";
  * List log facets
  *
  * @remarks
- * Return the facet hierarchy: attribute families (native, attribute, resource, scope) with their keys, counts, and top values. Accepts optional filters and free-text query to narrow the counted subset.
+ * Return the facet hierarchy: attribute families (native, attribute, resource, scope) with their keys, counts, and top values for the requested time range.
  */
 export function logsListFacets(
   client: OrqCore,
-  request: components.ListLogFacetsRequest,
+  request?: operations.ListLogFacetsRequest | undefined,
   options?: RequestOptions,
 ): APIPromise<
   Result<
@@ -57,7 +58,7 @@ export function logsListFacets(
 
 async function $do(
   client: OrqCore,
-  request: components.ListLogFacetsRequest,
+  request?: operations.ListLogFacetsRequest | undefined,
   options?: RequestOptions,
 ): Promise<
   [
@@ -77,19 +78,26 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) => components.ListLogFacetsRequest$outboundSchema.parse(value),
+    (value) =>
+      operations.ListLogFacetsRequest$outboundSchema.optional().parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = encodeJSON("body", payload, { explode: true });
+  const body = null;
 
   const path = pathToFunc("/v3/logs/facets")();
 
+  const query = encodeFormQuery({
+    "from": payload?.from,
+    "key_limit": payload?.key_limit,
+    "to": payload?.to,
+    "value_limit": payload?.value_limit,
+  });
+
   const headers = new Headers(compactMap({
-    "Content-Type": "application/json",
     Accept: "application/json",
   }));
 
@@ -114,10 +122,11 @@ async function $do(
 
   const requestRes = client._createRequest(context, {
     security: requestSecurity,
-    method: "POST",
+    method: "GET",
     baseURL: options?.serverURL,
     path: path,
     headers: headers,
+    query: query,
     body: body,
     userAgent: client._options.userAgent,
     timeoutMs: options?.timeoutMs || client._options.timeoutMs || 600000,

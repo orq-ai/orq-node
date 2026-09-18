@@ -1,7 +1,5 @@
 # VersionIncrement
 
-Optional semantic version bump to create after a successful publish.
-
 ## Example Usage
 
 ```typescript

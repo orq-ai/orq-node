@@ -6,7 +6,7 @@
 import { CreateCompletionLoadBalancerModels } from "@orq-ai/node/models/operations";
 
 let value: CreateCompletionLoadBalancerModels = {
-  model: "openai/gpt-5.6-sol",
+  model: "openai/gpt-4o",
   weight: 0.7,
 };
 ```
@@ -15,5 +15,5 @@ let value: CreateCompletionLoadBalancerModels = {
 
 | Field                                            | Type                                             | Required                                         | Description                                      | Example                                          |
 | ------------------------------------------------ | ------------------------------------------------ | ------------------------------------------------ | ------------------------------------------------ | ------------------------------------------------ |
-| `model`                                          | *string*                                         | :heavy_check_mark:                               | Model identifier for load balancing              | openai/gpt-5.6-sol                               |
+| `model`                                          | *string*                                         | :heavy_check_mark:                               | Model identifier for load balancing              | openai/gpt-4o                                    |
 | `weight`                                         | *number*                                         | :heavy_minus_sign:                               | Weight assigned to this model for load balancing | 0.7                                              |

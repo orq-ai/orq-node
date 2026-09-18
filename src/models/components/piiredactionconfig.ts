@@ -9,16 +9,18 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * PiiRedactionConfig mirrors the workspace-default PII redaction plugin
+ * PiiRedactionConfig mirrors the workspace-default PII redaction plugin config
  *
  * @remarks
- *  configuration. Every field is optional; the gateway applies its own
- *  defaults for unset fields.
+ *  (libs/go/models PIIRedactionPlugin / libs/models/gateway
+ *  PIIRedactionPluginSchema). Every field is optional; the gateway applies its
+ *  own defaults for unset fields.
  *
- *  The stored value is validated on write using the same rules the gateway
- *  applies to live requests. Without that, an invalid workspace default
- *  would 400 every gateway call for the workspace, since the default plugin
- *  is injected into each request and validated there.
+ *  The stored value is validated on write with the same
+ *  models.PIIRedactionPlugin.Validate() the gateway runs per request. Without
+ *  that, an invalid workspace default would 400 every gateway call for the
+ *  workspace, since the default plugin is injected into each request and
+ *  validated there.
  */
 export type PiiRedactionConfig = {
   /**
@@ -47,20 +49,6 @@ export type PiiRedactionConfig = {
    * Detection confidence threshold in the [0, 1] range.
    */
   threshold?: number | undefined;
-  /**
-   * Regions of coverage by lowercase ISO 3166-1 alpha-2 code, or ["all"].
-   *
-   * @remarks
-   *  Adds every entity type the regions cover on top of `entities`.
-   */
-  regions?: Array<string> | undefined;
-  /**
-   * Per-entity-type confidence cutoff in [0, 1]. Every key must also appear in
-   *
-   * @remarks
-   *  `entities`.
-   */
-  entityThresholds?: { [k: string]: number } | undefined;
 };
 
 /** @internal */
@@ -73,12 +61,9 @@ export const PiiRedactionConfig$inboundSchema: z.ZodType<
   entities: z.array(z.string()).optional(),
   on_failure: z.string().optional(),
   threshold: z.number().optional(),
-  regions: z.array(z.string()).optional(),
-  entity_thresholds: z.record(z.number()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "on_failure": "onFailure",
-    "entity_thresholds": "entityThresholds",
   });
 });
 /** @internal */
@@ -87,8 +72,6 @@ export type PiiRedactionConfig$Outbound = {
   entities?: Array<string> | undefined;
   on_failure?: string | undefined;
   threshold?: number | undefined;
-  regions?: Array<string> | undefined;
-  entity_thresholds?: { [k: string]: number } | undefined;
 };
 
 /** @internal */
@@ -101,12 +84,9 @@ export const PiiRedactionConfig$outboundSchema: z.ZodType<
   entities: z.array(z.string()).optional(),
   onFailure: z.string().optional(),
   threshold: z.number().optional(),
-  regions: z.array(z.string()).optional(),
-  entityThresholds: z.record(z.number()).optional(),
 }).transform((v) => {
   return remap$(v, {
     onFailure: "on_failure",
-    entityThresholds: "entity_thresholds",
   });
 });
 

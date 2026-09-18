@@ -38,7 +38,7 @@ export function evalsInvoke(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    components.EvaluationResult,
+    components.InvokeEvaluatorResponse,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -63,7 +63,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      components.EvaluationResult,
+      components.InvokeEvaluatorResponse,
       | OrqError
       | ResponseValidationError
       | ConnectionError
@@ -149,7 +149,7 @@ async function $do(
   const response = doResult.value;
 
   const [result] = await M.match<
-    components.EvaluationResult,
+    components.InvokeEvaluatorResponse,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -159,7 +159,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, components.EvaluationResult$inboundSchema),
+    M.json(200, components.InvokeEvaluatorResponse$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, req);

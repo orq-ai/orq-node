@@ -3,21 +3,25 @@
 
 ## Supported Types
 
-### `components.FunctionParams1`
+### `components.One`
 
 ```typescript
-const value: components.FunctionParams1 = {
+const value: components.One = {
   type: "contains",
   value: "<value>",
 };
 ```
 
-### `components.FunctionParams2`
+### `components.Two`
 
 ```typescript
-const value: components.FunctionParams2 = {
+const value: components.Two = {
   type: "contains_none",
-  keywords: [],
+  keywords: [
+    "<value 1>",
+    "<value 2>",
+    "<value 3>",
+  ],
 };
 ```
 

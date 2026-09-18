@@ -188,11 +188,13 @@ export type Guardrails = {
 };
 
 export type Plugins =
-  | (components.PIIRedactionPlugin & { id: "pii_redaction" })
-  | components.ResponseHealingPlugin
-  | components.TraceScrubbingPlugin;
+  | components.PIIRedactionPluginEn
+  | components.PIIRedactionPluginNl
+  | components.TraceScrubbingPlugin
+  | components.PIIRedactionPluginAuto
+  | components.ResponseHealingPlugin;
 
-export type Fallbacks = {
+export type ModelConfigurationFallbacks = {
   /**
    * Fallback model identifier
    */
@@ -406,15 +408,17 @@ export type ParametersT = {
    */
   plugins?:
     | Array<
-      | (components.PIIRedactionPlugin & { id: "pii_redaction" })
-      | components.ResponseHealingPlugin
+      | components.PIIRedactionPluginEn
+      | components.PIIRedactionPluginNl
       | components.TraceScrubbingPlugin
+      | components.PIIRedactionPluginAuto
+      | components.ResponseHealingPlugin
     >
     | undefined;
   /**
    * Array of fallback models to use if primary model fails
    */
-  fallbacks?: Array<Fallbacks> | undefined;
+  fallbacks?: Array<ModelConfigurationFallbacks> | undefined;
   /**
    * Cache configuration for the request.
    */
@@ -440,7 +444,7 @@ export type ParametersT = {
 /**
  * Retry configuration for model requests. Retries are triggered for specific HTTP status codes (e.g., 500, 429, 502, 503, 504). Supports configurable retry count (1-5) and custom status codes.
  */
-export type Retry = {
+export type ModelConfigurationRetry = {
   /**
    * Number of retry attempts (1-5)
    */
@@ -458,7 +462,7 @@ export type Retry = {
  */
 export type ModelConfiguration2 = {
   /**
-   * A model ID string (e.g., `openai/gpt-5.6-sol` or `anthropic/claude-sonnet-5`). Only models that support tool calling can be used with agents.
+   * A model ID string (e.g., `openai/gpt-4o` or `anthropic/claude-haiku-4-5-20251001`). Only models that support tool calling can be used with agents.
    */
   id: string;
   /**
@@ -468,7 +472,7 @@ export type ModelConfiguration2 = {
   /**
    * Retry configuration for model requests. Retries are triggered for specific HTTP status codes (e.g., 500, 429, 502, 503, 504). Supports configurable retry count (1-5) and custom status codes.
    */
-  retry?: Retry | undefined;
+  retry?: ModelConfigurationRetry | undefined;
 };
 
 /**
@@ -669,9 +673,11 @@ export type FallbackModelConfigurationGuardrails = {
 };
 
 export type FallbackModelConfigurationPlugins =
-  | (components.PIIRedactionPlugin & { id: "pii_redaction" })
-  | components.ResponseHealingPlugin
-  | components.TraceScrubbingPlugin;
+  | components.PIIRedactionPluginEn
+  | components.PIIRedactionPluginNl
+  | components.TraceScrubbingPlugin
+  | components.PIIRedactionPluginAuto
+  | components.ResponseHealingPlugin;
 
 export type FallbackModelConfigurationFallbacks = {
   /**
@@ -901,9 +907,11 @@ export type FallbackModelConfigurationParameters = {
    */
   plugins?:
     | Array<
-      | (components.PIIRedactionPlugin & { id: "pii_redaction" })
-      | components.ResponseHealingPlugin
+      | components.PIIRedactionPluginEn
+      | components.PIIRedactionPluginNl
       | components.TraceScrubbingPlugin
+      | components.PIIRedactionPluginAuto
+      | components.ResponseHealingPlugin
     >
     | undefined;
   /**
@@ -1009,10 +1017,6 @@ export type Evaluators = {
    * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
    */
   executeOn: CreateAgentRequestExecuteOn;
-  /**
-   * Evaluator-specific configuration, passed through to the evaluator at run time. For orq_pii_detection this carries regions, entities, entity_thresholds, language and threshold, and is validated against PIIDetectionGuardrailOptions: regions and entities are two mutually exclusive coverage modes, and every entity_thresholds key must also appear in entities. on_failure is rejected: an evaluator acting as a guardrail always fails closed.
-   */
-  options?: { [k: string]: any } | undefined;
 };
 
 /**
@@ -1042,10 +1046,6 @@ export type CreateAgentRequestGuardrails = {
    * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
    */
   executeOn: CreateAgentRequestAgentsExecuteOn;
-  /**
-   * Evaluator-specific configuration, passed through to the evaluator at run time. For orq_pii_detection this carries regions, entities, entity_thresholds, language and threshold, and is validated against PIIDetectionGuardrailOptions: regions and entities are two mutually exclusive coverage modes, and every entity_thresholds key must also appear in entities. on_failure is rejected: an evaluator acting as a guardrail always fails closed.
-   */
-  options?: { [k: string]: any } | undefined;
 };
 
 /**
@@ -1340,10 +1340,6 @@ export type CreateAgentRequestEvaluators = {
    * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
    */
   executeOn: CreateAgentRequestAgentsResponseExecuteOn;
-  /**
-   * Evaluator-specific configuration, passed through to the evaluator at run time. For orq_pii_detection this carries regions, entities, entity_thresholds, language and threshold, and is validated against PIIDetectionGuardrailOptions: regions and entities are two mutually exclusive coverage modes, and every entity_thresholds key must also appear in entities. on_failure is rejected: an evaluator acting as a guardrail always fails closed.
-   */
-  options?: { [k: string]: any } | undefined;
 };
 
 /**
@@ -1373,10 +1369,6 @@ export type CreateAgentRequestAgentsGuardrails = {
    * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
    */
   executeOn: CreateAgentRequestAgentsResponse201ExecuteOn;
-  /**
-   * Evaluator-specific configuration, passed through to the evaluator at run time. For orq_pii_detection this carries regions, entities, entity_thresholds, language and threshold, and is validated against PIIDetectionGuardrailOptions: regions and entities are two mutually exclusive coverage modes, and every entity_thresholds key must also appear in entities. on_failure is rejected: an evaluator acting as a guardrail always fails closed.
-   */
-  options?: { [k: string]: any } | undefined;
 };
 
 export type CreateAgentRequestSettings = {
@@ -1406,7 +1398,7 @@ export type CreateAgentRequestSettings = {
    */
   evaluators?: Array<CreateAgentRequestEvaluators> | undefined;
   /**
-   * Configuration for a guardrail applied to the agent. sample_rate has no effect here: a guardrail is a gate rather than a measurement, so it runs on every request.
+   * Configuration for a guardrail applied to the agent
    */
   guardrails?: Array<CreateAgentRequestAgentsGuardrails> | undefined;
 };
@@ -1607,9 +1599,11 @@ export type CreateAgentRequestAgentsResponseGuardrails = {
 };
 
 export type CreateAgentRequestPlugins =
-  | (components.PIIRedactionPlugin & { id: "pii_redaction" })
-  | components.ResponseHealingPlugin
-  | components.TraceScrubbingPlugin;
+  | components.PIIRedactionPluginEn
+  | components.PIIRedactionPluginNl
+  | components.TraceScrubbingPlugin
+  | components.PIIRedactionPluginAuto
+  | components.ResponseHealingPlugin;
 
 export type CreateAgentRequestFallbacks = {
   /**
@@ -1837,9 +1831,11 @@ export type CreateAgentRequestParameters = {
    */
   plugins?:
     | Array<
-      | (components.PIIRedactionPlugin & { id: "pii_redaction" })
-      | components.ResponseHealingPlugin
+      | components.PIIRedactionPluginEn
+      | components.PIIRedactionPluginNl
       | components.TraceScrubbingPlugin
+      | components.PIIRedactionPluginAuto
+      | components.ResponseHealingPlugin
     >
     | undefined;
   /**
@@ -2085,9 +2081,11 @@ export type CreateAgentRequestFallbackModelConfigurationGuardrails = {
 };
 
 export type CreateAgentRequestFallbackModelConfigurationPlugins =
-  | (components.PIIRedactionPlugin & { id: "pii_redaction" })
-  | components.ResponseHealingPlugin
-  | components.TraceScrubbingPlugin;
+  | components.PIIRedactionPluginEn
+  | components.PIIRedactionPluginNl
+  | components.TraceScrubbingPlugin
+  | components.PIIRedactionPluginAuto
+  | components.ResponseHealingPlugin;
 
 export type CreateAgentRequestFallbackModelConfigurationFallbacks = {
   /**
@@ -2325,9 +2323,11 @@ export type CreateAgentRequestFallbackModelConfigurationParameters = {
    */
   plugins?:
     | Array<
-      | (components.PIIRedactionPlugin & { id: "pii_redaction" })
-      | components.ResponseHealingPlugin
+      | components.PIIRedactionPluginEn
+      | components.PIIRedactionPluginNl
       | components.TraceScrubbingPlugin
+      | components.PIIRedactionPluginAuto
+      | components.ResponseHealingPlugin
     >
     | undefined;
   /**
@@ -2756,9 +2756,11 @@ export function guardrailsToJSON(guardrails: Guardrails): string {
 
 /** @internal */
 export type Plugins$Outbound =
-  | (components.PIIRedactionPlugin$Outbound & { id: "pii_redaction" })
-  | components.ResponseHealingPlugin$Outbound
-  | components.TraceScrubbingPlugin$Outbound;
+  | components.PIIRedactionPluginEn$Outbound
+  | components.PIIRedactionPluginNl$Outbound
+  | components.TraceScrubbingPlugin$Outbound
+  | components.PIIRedactionPluginAuto$Outbound
+  | components.ResponseHealingPlugin$Outbound;
 
 /** @internal */
 export const Plugins$outboundSchema: z.ZodType<
@@ -2766,11 +2768,11 @@ export const Plugins$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Plugins
 > = z.union([
-  components.PIIRedactionPlugin$outboundSchema.and(
-    z.object({ id: z.literal("pii_redaction") }),
-  ),
-  components.ResponseHealingPlugin$outboundSchema,
+  components.PIIRedactionPluginEn$outboundSchema,
+  components.PIIRedactionPluginNl$outboundSchema,
   components.TraceScrubbingPlugin$outboundSchema,
+  components.PIIRedactionPluginAuto$outboundSchema,
+  components.ResponseHealingPlugin$outboundSchema,
 ]);
 
 export function pluginsToJSON(plugins: Plugins): string {
@@ -2778,21 +2780,27 @@ export function pluginsToJSON(plugins: Plugins): string {
 }
 
 /** @internal */
-export type Fallbacks$Outbound = {
+export type ModelConfigurationFallbacks$Outbound = {
   model: string;
 };
 
 /** @internal */
-export const Fallbacks$outboundSchema: z.ZodType<
-  Fallbacks$Outbound,
+export const ModelConfigurationFallbacks$outboundSchema: z.ZodType<
+  ModelConfigurationFallbacks$Outbound,
   z.ZodTypeDef,
-  Fallbacks
+  ModelConfigurationFallbacks
 > = z.object({
   model: z.string(),
 });
 
-export function fallbacksToJSON(fallbacks: Fallbacks): string {
-  return JSON.stringify(Fallbacks$outboundSchema.parse(fallbacks));
+export function modelConfigurationFallbacksToJSON(
+  modelConfigurationFallbacks: ModelConfigurationFallbacks,
+): string {
+  return JSON.stringify(
+    ModelConfigurationFallbacks$outboundSchema.parse(
+      modelConfigurationFallbacks,
+    ),
+  );
 }
 
 /** @internal */
@@ -2967,12 +2975,14 @@ export type ParametersT$Outbound = {
   guardrails?: Array<Guardrails$Outbound> | undefined;
   plugins?:
     | Array<
-      | (components.PIIRedactionPlugin$Outbound & { id: "pii_redaction" })
-      | components.ResponseHealingPlugin$Outbound
+      | components.PIIRedactionPluginEn$Outbound
+      | components.PIIRedactionPluginNl$Outbound
       | components.TraceScrubbingPlugin$Outbound
+      | components.PIIRedactionPluginAuto$Outbound
+      | components.ResponseHealingPlugin$Outbound
     >
     | undefined;
-  fallbacks?: Array<Fallbacks$Outbound> | undefined;
+  fallbacks?: Array<ModelConfigurationFallbacks$Outbound> | undefined;
   cache?: Cache$Outbound | undefined;
   load_balancer?: LoadBalancer1$Outbound | undefined;
   timeout?: Timeout$Outbound | undefined;
@@ -3017,14 +3027,15 @@ export const ParametersT$outboundSchema: z.ZodType<
   guardrails: z.array(z.lazy(() => Guardrails$outboundSchema)).optional(),
   plugins: z.array(
     z.union([
-      components.PIIRedactionPlugin$outboundSchema.and(
-        z.object({ id: z.literal("pii_redaction") }),
-      ),
-      components.ResponseHealingPlugin$outboundSchema,
+      components.PIIRedactionPluginEn$outboundSchema,
+      components.PIIRedactionPluginNl$outboundSchema,
       components.TraceScrubbingPlugin$outboundSchema,
+      components.PIIRedactionPluginAuto$outboundSchema,
+      components.ResponseHealingPlugin$outboundSchema,
     ]),
   ).optional(),
-  fallbacks: z.array(z.lazy(() => Fallbacks$outboundSchema)).optional(),
+  fallbacks: z.array(z.lazy(() => ModelConfigurationFallbacks$outboundSchema))
+    .optional(),
   cache: z.lazy(() => Cache$outboundSchema).optional(),
   loadBalancer: z.lazy(() => LoadBalancer1$outboundSchema).optional(),
   timeout: z.lazy(() => Timeout$outboundSchema).optional(),
@@ -3054,16 +3065,16 @@ export function parametersToJSON(parametersT: ParametersT): string {
 }
 
 /** @internal */
-export type Retry$Outbound = {
+export type ModelConfigurationRetry$Outbound = {
   count: number;
   on_codes?: Array<number> | undefined;
 };
 
 /** @internal */
-export const Retry$outboundSchema: z.ZodType<
-  Retry$Outbound,
+export const ModelConfigurationRetry$outboundSchema: z.ZodType<
+  ModelConfigurationRetry$Outbound,
   z.ZodTypeDef,
-  Retry
+  ModelConfigurationRetry
 > = z.object({
   count: z.number().default(3),
   onCodes: z.array(z.number()).optional(),
@@ -3073,15 +3084,19 @@ export const Retry$outboundSchema: z.ZodType<
   });
 });
 
-export function retryToJSON(retry: Retry): string {
-  return JSON.stringify(Retry$outboundSchema.parse(retry));
+export function modelConfigurationRetryToJSON(
+  modelConfigurationRetry: ModelConfigurationRetry,
+): string {
+  return JSON.stringify(
+    ModelConfigurationRetry$outboundSchema.parse(modelConfigurationRetry),
+  );
 }
 
 /** @internal */
 export type ModelConfiguration2$Outbound = {
   id: string;
   parameters?: ParametersT$Outbound | undefined;
-  retry?: Retry$Outbound | undefined;
+  retry?: ModelConfigurationRetry$Outbound | undefined;
 };
 
 /** @internal */
@@ -3092,7 +3107,7 @@ export const ModelConfiguration2$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   parameters: z.lazy(() => ParametersT$outboundSchema).optional(),
-  retry: z.lazy(() => Retry$outboundSchema).optional(),
+  retry: z.lazy(() => ModelConfigurationRetry$outboundSchema).optional(),
 });
 
 export function modelConfiguration2ToJSON(
@@ -3465,9 +3480,11 @@ export function fallbackModelConfigurationGuardrailsToJSON(
 
 /** @internal */
 export type FallbackModelConfigurationPlugins$Outbound =
-  | (components.PIIRedactionPlugin$Outbound & { id: "pii_redaction" })
-  | components.ResponseHealingPlugin$Outbound
-  | components.TraceScrubbingPlugin$Outbound;
+  | components.PIIRedactionPluginEn$Outbound
+  | components.PIIRedactionPluginNl$Outbound
+  | components.TraceScrubbingPlugin$Outbound
+  | components.PIIRedactionPluginAuto$Outbound
+  | components.ResponseHealingPlugin$Outbound;
 
 /** @internal */
 export const FallbackModelConfigurationPlugins$outboundSchema: z.ZodType<
@@ -3475,11 +3492,11 @@ export const FallbackModelConfigurationPlugins$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   FallbackModelConfigurationPlugins
 > = z.union([
-  components.PIIRedactionPlugin$outboundSchema.and(
-    z.object({ id: z.literal("pii_redaction") }),
-  ),
-  components.ResponseHealingPlugin$outboundSchema,
+  components.PIIRedactionPluginEn$outboundSchema,
+  components.PIIRedactionPluginNl$outboundSchema,
   components.TraceScrubbingPlugin$outboundSchema,
+  components.PIIRedactionPluginAuto$outboundSchema,
+  components.ResponseHealingPlugin$outboundSchema,
 ]);
 
 export function fallbackModelConfigurationPluginsToJSON(
@@ -3719,9 +3736,11 @@ export type FallbackModelConfigurationParameters$Outbound = {
   guardrails?: Array<FallbackModelConfigurationGuardrails$Outbound> | undefined;
   plugins?:
     | Array<
-      | (components.PIIRedactionPlugin$Outbound & { id: "pii_redaction" })
-      | components.ResponseHealingPlugin$Outbound
+      | components.PIIRedactionPluginEn$Outbound
+      | components.PIIRedactionPluginNl$Outbound
       | components.TraceScrubbingPlugin$Outbound
+      | components.PIIRedactionPluginAuto$Outbound
+      | components.ResponseHealingPlugin$Outbound
     >
     | undefined;
   fallbacks?: Array<FallbackModelConfigurationFallbacks$Outbound> | undefined;
@@ -3774,11 +3793,11 @@ export const FallbackModelConfigurationParameters$outboundSchema: z.ZodType<
   ).optional(),
   plugins: z.array(
     z.union([
-      components.PIIRedactionPlugin$outboundSchema.and(
-        z.object({ id: z.literal("pii_redaction") }),
-      ),
-      components.ResponseHealingPlugin$outboundSchema,
+      components.PIIRedactionPluginEn$outboundSchema,
+      components.PIIRedactionPluginNl$outboundSchema,
       components.TraceScrubbingPlugin$outboundSchema,
+      components.PIIRedactionPluginAuto$outboundSchema,
+      components.ResponseHealingPlugin$outboundSchema,
     ]),
   ).optional(),
   fallbacks: z.array(
@@ -3920,7 +3939,6 @@ export type Evaluators$Outbound = {
   id: string;
   sample_rate: number;
   execute_on: string;
-  options?: { [k: string]: any } | undefined;
 };
 
 /** @internal */
@@ -3932,7 +3950,6 @@ export const Evaluators$outboundSchema: z.ZodType<
   id: z.string(),
   sampleRate: z.number().default(50),
   executeOn: CreateAgentRequestExecuteOn$outboundSchema,
-  options: z.record(z.any()).optional(),
 }).transform((v) => {
   return remap$(v, {
     sampleRate: "sample_rate",
@@ -3954,7 +3971,6 @@ export type CreateAgentRequestGuardrails$Outbound = {
   id: string;
   sample_rate: number;
   execute_on: string;
-  options?: { [k: string]: any } | undefined;
 };
 
 /** @internal */
@@ -3966,7 +3982,6 @@ export const CreateAgentRequestGuardrails$outboundSchema: z.ZodType<
   id: z.string(),
   sampleRate: z.number().default(50),
   executeOn: CreateAgentRequestAgentsExecuteOn$outboundSchema,
-  options: z.record(z.any()).optional(),
 }).transform((v) => {
   return remap$(v, {
     sampleRate: "sample_rate",
@@ -4312,7 +4327,6 @@ export const CreateAgentRequestEvaluators$inboundSchema: z.ZodType<
   id: z.string(),
   sample_rate: z.number().default(50),
   execute_on: CreateAgentRequestAgentsResponseExecuteOn$inboundSchema,
-  options: z.record(z.any()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "sample_rate": "sampleRate",
@@ -4344,7 +4358,6 @@ export const CreateAgentRequestAgentsGuardrails$inboundSchema: z.ZodType<
   id: z.string(),
   sample_rate: z.number().default(50),
   execute_on: CreateAgentRequestAgentsResponse201ExecuteOn$inboundSchema,
-  options: z.record(z.any()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "sample_rate": "sampleRate",
@@ -4716,11 +4729,11 @@ export const CreateAgentRequestPlugins$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
-  components.PIIRedactionPlugin$inboundSchema.and(
-    z.object({ id: z.literal("pii_redaction") }),
-  ),
-  components.ResponseHealingPlugin$inboundSchema,
+  components.PIIRedactionPluginEn$inboundSchema,
+  components.PIIRedactionPluginNl$inboundSchema,
   components.TraceScrubbingPlugin$inboundSchema,
+  components.PIIRedactionPluginAuto$inboundSchema,
+  components.ResponseHealingPlugin$inboundSchema,
 ]);
 
 export function createAgentRequestPluginsFromJSON(
@@ -4939,11 +4952,11 @@ export const CreateAgentRequestParameters$inboundSchema: z.ZodType<
   ).optional(),
   plugins: z.array(
     z.union([
-      components.PIIRedactionPlugin$inboundSchema.and(
-        z.object({ id: z.literal("pii_redaction") }),
-      ),
-      components.ResponseHealingPlugin$inboundSchema,
+      components.PIIRedactionPluginEn$inboundSchema,
+      components.PIIRedactionPluginNl$inboundSchema,
       components.TraceScrubbingPlugin$inboundSchema,
+      components.PIIRedactionPluginAuto$inboundSchema,
+      components.ResponseHealingPlugin$inboundSchema,
     ]),
   ).optional(),
   fallbacks: z.array(z.lazy(() => CreateAgentRequestFallbacks$inboundSchema))
@@ -5380,11 +5393,11 @@ export const CreateAgentRequestFallbackModelConfigurationPlugins$inboundSchema:
     z.ZodTypeDef,
     unknown
   > = z.union([
-    components.PIIRedactionPlugin$inboundSchema.and(
-      z.object({ id: z.literal("pii_redaction") }),
-    ),
-    components.ResponseHealingPlugin$inboundSchema,
+    components.PIIRedactionPluginEn$inboundSchema,
+    components.PIIRedactionPluginNl$inboundSchema,
     components.TraceScrubbingPlugin$inboundSchema,
+    components.PIIRedactionPluginAuto$inboundSchema,
+    components.ResponseHealingPlugin$inboundSchema,
   ]);
 
 export function createAgentRequestFallbackModelConfigurationPluginsFromJSON(
@@ -5667,11 +5680,11 @@ export const CreateAgentRequestFallbackModelConfigurationParameters$inboundSchem
     ).optional(),
     plugins: z.array(
       z.union([
-        components.PIIRedactionPlugin$inboundSchema.and(
-          z.object({ id: z.literal("pii_redaction") }),
-        ),
-        components.ResponseHealingPlugin$inboundSchema,
+        components.PIIRedactionPluginEn$inboundSchema,
+        components.PIIRedactionPluginNl$inboundSchema,
         components.TraceScrubbingPlugin$inboundSchema,
+        components.PIIRedactionPluginAuto$inboundSchema,
+        components.ResponseHealingPlugin$inboundSchema,
       ]),
     ).optional(),
     fallbacks: z.array(

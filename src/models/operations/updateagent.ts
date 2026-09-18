@@ -201,11 +201,13 @@ export type ModelConfigurationGuardrails = {
 };
 
 export type ModelConfigurationPlugins =
-  | (components.PIIRedactionPlugin & { id: "pii_redaction" })
-  | components.ResponseHealingPlugin
-  | components.TraceScrubbingPlugin;
+  | components.PIIRedactionPluginEn
+  | components.PIIRedactionPluginNl
+  | components.TraceScrubbingPlugin
+  | components.PIIRedactionPluginAuto
+  | components.ResponseHealingPlugin;
 
-export type ModelConfigurationFallbacks = {
+export type UpdateAgentModelConfigurationFallbacks = {
   /**
    * Fallback model identifier
    */
@@ -429,15 +431,17 @@ export type ModelConfigurationParameters = {
    */
   plugins?:
     | Array<
-      | (components.PIIRedactionPlugin & { id: "pii_redaction" })
-      | components.ResponseHealingPlugin
+      | components.PIIRedactionPluginEn
+      | components.PIIRedactionPluginNl
       | components.TraceScrubbingPlugin
+      | components.PIIRedactionPluginAuto
+      | components.ResponseHealingPlugin
     >
     | undefined;
   /**
    * Array of fallback models to use if primary model fails
    */
-  fallbacks?: Array<ModelConfigurationFallbacks> | undefined;
+  fallbacks?: Array<UpdateAgentModelConfigurationFallbacks> | undefined;
   /**
    * Cache configuration for the request.
    */
@@ -463,7 +467,7 @@ export type ModelConfigurationParameters = {
 /**
  * Retry configuration for model requests. Retries are triggered for specific HTTP status codes (e.g., 500, 429, 502, 503, 504). Supports configurable retry count (1-5) and custom status codes.
  */
-export type ModelConfigurationRetry = {
+export type UpdateAgentModelConfigurationRetry = {
   /**
    * Number of retry attempts (1-5)
    */
@@ -481,7 +485,7 @@ export type ModelConfigurationRetry = {
  */
 export type UpdateAgentModelConfiguration2 = {
   /**
-   * A model ID string (e.g., `openai/gpt-5.6-sol` or `anthropic/claude-sonnet-5`). Only models that support tool calling can be used with agents.
+   * A model ID string (e.g., `openai/gpt-4o` or `anthropic/claude-haiku-4-5-20251001`). Only models that support tool calling can be used with agents.
    */
   id: string;
   /**
@@ -491,7 +495,7 @@ export type UpdateAgentModelConfiguration2 = {
   /**
    * Retry configuration for model requests. Retries are triggered for specific HTTP status codes (e.g., 500, 429, 502, 503, 504). Supports configurable retry count (1-5) and custom status codes.
    */
-  retry?: ModelConfigurationRetry | undefined;
+  retry?: UpdateAgentModelConfigurationRetry | undefined;
 };
 
 /**
@@ -696,9 +700,11 @@ export type UpdateAgentFallbackModelConfigurationGuardrails = {
 };
 
 export type UpdateAgentFallbackModelConfigurationPlugins =
-  | (components.PIIRedactionPlugin & { id: "pii_redaction" })
-  | components.ResponseHealingPlugin
-  | components.TraceScrubbingPlugin;
+  | components.PIIRedactionPluginEn
+  | components.PIIRedactionPluginNl
+  | components.TraceScrubbingPlugin
+  | components.PIIRedactionPluginAuto
+  | components.ResponseHealingPlugin;
 
 export type UpdateAgentFallbackModelConfigurationFallbacks = {
   /**
@@ -935,9 +941,11 @@ export type UpdateAgentFallbackModelConfigurationParameters = {
    */
   plugins?:
     | Array<
-      | (components.PIIRedactionPlugin & { id: "pii_redaction" })
-      | components.ResponseHealingPlugin
+      | components.PIIRedactionPluginEn
+      | components.PIIRedactionPluginNl
       | components.TraceScrubbingPlugin
+      | components.PIIRedactionPluginAuto
+      | components.ResponseHealingPlugin
     >
     | undefined;
   /**
@@ -1039,10 +1047,6 @@ export type UpdateAgentEvaluators = {
    * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
    */
   executeOn: UpdateAgentExecuteOn;
-  /**
-   * Evaluator-specific configuration, passed through to the evaluator at run time. For orq_pii_detection this carries regions, entities, entity_thresholds, language and threshold, and is validated against PIIDetectionGuardrailOptions: regions and entities are two mutually exclusive coverage modes, and every entity_thresholds key must also appear in entities. on_failure is rejected: an evaluator acting as a guardrail always fails closed.
-   */
-  options?: { [k: string]: any } | undefined;
 };
 
 /**
@@ -1072,10 +1076,6 @@ export type UpdateAgentGuardrails = {
    * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
    */
   executeOn: UpdateAgentAgentsExecuteOn;
-  /**
-   * Evaluator-specific configuration, passed through to the evaluator at run time. For orq_pii_detection this carries regions, entities, entity_thresholds, language and threshold, and is validated against PIIDetectionGuardrailOptions: regions and entities are two mutually exclusive coverage modes, and every entity_thresholds key must also appear in entities. on_failure is rejected: an evaluator acting as a guardrail always fails closed.
-   */
-  options?: { [k: string]: any } | undefined;
 };
 
 export type UpdateAgentSettings = {
@@ -1126,7 +1126,7 @@ export type UpdateAgentEngine = ClosedEnum<typeof UpdateAgentEngine>;
 /**
  * Optional semantic version bump to create after a successful publish.
  */
-export const VersionIncrement = {
+export const UpdateAgentVersionIncrement = {
   Major: "major",
   Minor: "minor",
   Patch: "patch",
@@ -1134,7 +1134,9 @@ export const VersionIncrement = {
 /**
  * Optional semantic version bump to create after a successful publish.
  */
-export type VersionIncrement = ClosedEnum<typeof VersionIncrement>;
+export type UpdateAgentVersionIncrement = ClosedEnum<
+  typeof UpdateAgentVersionIncrement
+>;
 
 export type UpdateAgentRequestBody = {
   key?: string | undefined;
@@ -1192,7 +1194,7 @@ export type UpdateAgentRequestBody = {
   /**
    * Optional semantic version bump to create after a successful publish.
    */
-  versionIncrement?: VersionIncrement | undefined;
+  versionIncrement?: UpdateAgentVersionIncrement | undefined;
   /**
    * Optional description stored with the created version.
    */
@@ -1359,10 +1361,6 @@ export type UpdateAgentAgentsEvaluators = {
    * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
    */
   executeOn: UpdateAgentAgentsResponseExecuteOn;
-  /**
-   * Evaluator-specific configuration, passed through to the evaluator at run time. For orq_pii_detection this carries regions, entities, entity_thresholds, language and threshold, and is validated against PIIDetectionGuardrailOptions: regions and entities are two mutually exclusive coverage modes, and every entity_thresholds key must also appear in entities. on_failure is rejected: an evaluator acting as a guardrail always fails closed.
-   */
-  options?: { [k: string]: any } | undefined;
 };
 
 /**
@@ -1392,10 +1390,6 @@ export type UpdateAgentAgentsGuardrails = {
    * Determines whether the evaluator runs on the agent input (user message) or output (agent response).
    */
   executeOn: UpdateAgentAgentsResponse200ExecuteOn;
-  /**
-   * Evaluator-specific configuration, passed through to the evaluator at run time. For orq_pii_detection this carries regions, entities, entity_thresholds, language and threshold, and is validated against PIIDetectionGuardrailOptions: regions and entities are two mutually exclusive coverage modes, and every entity_thresholds key must also appear in entities. on_failure is rejected: an evaluator acting as a guardrail always fails closed.
-   */
-  options?: { [k: string]: any } | undefined;
 };
 
 export type UpdateAgentAgentsSettings = {
@@ -1425,7 +1419,7 @@ export type UpdateAgentAgentsSettings = {
    */
   evaluators?: Array<UpdateAgentAgentsEvaluators> | undefined;
   /**
-   * Configuration for a guardrail applied to the agent. sample_rate has no effect here: a guardrail is a gate rather than a measurement, so it runs on every request.
+   * Configuration for a guardrail applied to the agent
    */
   guardrails?: Array<UpdateAgentAgentsGuardrails> | undefined;
 };
@@ -1623,9 +1617,11 @@ export type UpdateAgentAgentsResponseGuardrails = {
 };
 
 export type UpdateAgentPlugins =
-  | (components.PIIRedactionPlugin & { id: "pii_redaction" })
-  | components.ResponseHealingPlugin
-  | components.TraceScrubbingPlugin;
+  | components.PIIRedactionPluginEn
+  | components.PIIRedactionPluginNl
+  | components.TraceScrubbingPlugin
+  | components.PIIRedactionPluginAuto
+  | components.ResponseHealingPlugin;
 
 export type UpdateAgentFallbacks = {
   /**
@@ -1850,9 +1846,11 @@ export type UpdateAgentParameters = {
    */
   plugins?:
     | Array<
-      | (components.PIIRedactionPlugin & { id: "pii_redaction" })
-      | components.ResponseHealingPlugin
+      | components.PIIRedactionPluginEn
+      | components.PIIRedactionPluginNl
       | components.TraceScrubbingPlugin
+      | components.PIIRedactionPluginAuto
+      | components.ResponseHealingPlugin
     >
     | undefined;
   /**
@@ -2096,9 +2094,11 @@ export type UpdateAgentFallbackModelConfigurationAgentsGuardrails = {
 };
 
 export type UpdateAgentFallbackModelConfigurationAgentsPlugins =
-  | (components.PIIRedactionPlugin & { id: "pii_redaction" })
-  | components.ResponseHealingPlugin
-  | components.TraceScrubbingPlugin;
+  | components.PIIRedactionPluginEn
+  | components.PIIRedactionPluginNl
+  | components.TraceScrubbingPlugin
+  | components.PIIRedactionPluginAuto
+  | components.ResponseHealingPlugin;
 
 export type UpdateAgentFallbackModelConfigurationAgentsFallbacks = {
   /**
@@ -2333,9 +2333,11 @@ export type UpdateAgentFallbackModelConfigurationAgentsParameters = {
    */
   plugins?:
     | Array<
-      | (components.PIIRedactionPlugin & { id: "pii_redaction" })
-      | components.ResponseHealingPlugin
+      | components.PIIRedactionPluginEn
+      | components.PIIRedactionPluginNl
       | components.TraceScrubbingPlugin
+      | components.PIIRedactionPluginAuto
+      | components.ResponseHealingPlugin
     >
     | undefined;
   /**
@@ -2838,9 +2840,11 @@ export function modelConfigurationGuardrailsToJSON(
 
 /** @internal */
 export type ModelConfigurationPlugins$Outbound =
-  | (components.PIIRedactionPlugin$Outbound & { id: "pii_redaction" })
-  | components.ResponseHealingPlugin$Outbound
-  | components.TraceScrubbingPlugin$Outbound;
+  | components.PIIRedactionPluginEn$Outbound
+  | components.PIIRedactionPluginNl$Outbound
+  | components.TraceScrubbingPlugin$Outbound
+  | components.PIIRedactionPluginAuto$Outbound
+  | components.ResponseHealingPlugin$Outbound;
 
 /** @internal */
 export const ModelConfigurationPlugins$outboundSchema: z.ZodType<
@@ -2848,11 +2852,11 @@ export const ModelConfigurationPlugins$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ModelConfigurationPlugins
 > = z.union([
-  components.PIIRedactionPlugin$outboundSchema.and(
-    z.object({ id: z.literal("pii_redaction") }),
-  ),
-  components.ResponseHealingPlugin$outboundSchema,
+  components.PIIRedactionPluginEn$outboundSchema,
+  components.PIIRedactionPluginNl$outboundSchema,
   components.TraceScrubbingPlugin$outboundSchema,
+  components.PIIRedactionPluginAuto$outboundSchema,
+  components.ResponseHealingPlugin$outboundSchema,
 ]);
 
 export function modelConfigurationPluginsToJSON(
@@ -2864,25 +2868,26 @@ export function modelConfigurationPluginsToJSON(
 }
 
 /** @internal */
-export type ModelConfigurationFallbacks$Outbound = {
+export type UpdateAgentModelConfigurationFallbacks$Outbound = {
   model: string;
 };
 
 /** @internal */
-export const ModelConfigurationFallbacks$outboundSchema: z.ZodType<
-  ModelConfigurationFallbacks$Outbound,
+export const UpdateAgentModelConfigurationFallbacks$outboundSchema: z.ZodType<
+  UpdateAgentModelConfigurationFallbacks$Outbound,
   z.ZodTypeDef,
-  ModelConfigurationFallbacks
+  UpdateAgentModelConfigurationFallbacks
 > = z.object({
   model: z.string(),
 });
 
-export function modelConfigurationFallbacksToJSON(
-  modelConfigurationFallbacks: ModelConfigurationFallbacks,
+export function updateAgentModelConfigurationFallbacksToJSON(
+  updateAgentModelConfigurationFallbacks:
+    UpdateAgentModelConfigurationFallbacks,
 ): string {
   return JSON.stringify(
-    ModelConfigurationFallbacks$outboundSchema.parse(
-      modelConfigurationFallbacks,
+    UpdateAgentModelConfigurationFallbacks$outboundSchema.parse(
+      updateAgentModelConfigurationFallbacks,
     ),
   );
 }
@@ -3086,12 +3091,16 @@ export type ModelConfigurationParameters$Outbound = {
   guardrails?: Array<ModelConfigurationGuardrails$Outbound> | undefined;
   plugins?:
     | Array<
-      | (components.PIIRedactionPlugin$Outbound & { id: "pii_redaction" })
-      | components.ResponseHealingPlugin$Outbound
+      | components.PIIRedactionPluginEn$Outbound
+      | components.PIIRedactionPluginNl$Outbound
       | components.TraceScrubbingPlugin$Outbound
+      | components.PIIRedactionPluginAuto$Outbound
+      | components.ResponseHealingPlugin$Outbound
     >
     | undefined;
-  fallbacks?: Array<ModelConfigurationFallbacks$Outbound> | undefined;
+  fallbacks?:
+    | Array<UpdateAgentModelConfigurationFallbacks$Outbound>
+    | undefined;
   cache?: ModelConfigurationCache$Outbound | undefined;
   load_balancer?: UpdateAgentLoadBalancer1$Outbound | undefined;
   timeout?: ModelConfigurationTimeout$Outbound | undefined;
@@ -3140,15 +3149,16 @@ export const ModelConfigurationParameters$outboundSchema: z.ZodType<
     .optional(),
   plugins: z.array(
     z.union([
-      components.PIIRedactionPlugin$outboundSchema.and(
-        z.object({ id: z.literal("pii_redaction") }),
-      ),
-      components.ResponseHealingPlugin$outboundSchema,
+      components.PIIRedactionPluginEn$outboundSchema,
+      components.PIIRedactionPluginNl$outboundSchema,
       components.TraceScrubbingPlugin$outboundSchema,
+      components.PIIRedactionPluginAuto$outboundSchema,
+      components.ResponseHealingPlugin$outboundSchema,
     ]),
   ).optional(),
-  fallbacks: z.array(z.lazy(() => ModelConfigurationFallbacks$outboundSchema))
-    .optional(),
+  fallbacks: z.array(
+    z.lazy(() => UpdateAgentModelConfigurationFallbacks$outboundSchema),
+  ).optional(),
   cache: z.lazy(() => ModelConfigurationCache$outboundSchema).optional(),
   loadBalancer: z.lazy(() => UpdateAgentLoadBalancer1$outboundSchema)
     .optional(),
@@ -3186,16 +3196,16 @@ export function modelConfigurationParametersToJSON(
 }
 
 /** @internal */
-export type ModelConfigurationRetry$Outbound = {
+export type UpdateAgentModelConfigurationRetry$Outbound = {
   count: number;
   on_codes?: Array<number> | undefined;
 };
 
 /** @internal */
-export const ModelConfigurationRetry$outboundSchema: z.ZodType<
-  ModelConfigurationRetry$Outbound,
+export const UpdateAgentModelConfigurationRetry$outboundSchema: z.ZodType<
+  UpdateAgentModelConfigurationRetry$Outbound,
   z.ZodTypeDef,
-  ModelConfigurationRetry
+  UpdateAgentModelConfigurationRetry
 > = z.object({
   count: z.number().default(3),
   onCodes: z.array(z.number()).optional(),
@@ -3205,11 +3215,13 @@ export const ModelConfigurationRetry$outboundSchema: z.ZodType<
   });
 });
 
-export function modelConfigurationRetryToJSON(
-  modelConfigurationRetry: ModelConfigurationRetry,
+export function updateAgentModelConfigurationRetryToJSON(
+  updateAgentModelConfigurationRetry: UpdateAgentModelConfigurationRetry,
 ): string {
   return JSON.stringify(
-    ModelConfigurationRetry$outboundSchema.parse(modelConfigurationRetry),
+    UpdateAgentModelConfigurationRetry$outboundSchema.parse(
+      updateAgentModelConfigurationRetry,
+    ),
   );
 }
 
@@ -3217,7 +3229,7 @@ export function modelConfigurationRetryToJSON(
 export type UpdateAgentModelConfiguration2$Outbound = {
   id: string;
   parameters?: ModelConfigurationParameters$Outbound | undefined;
-  retry?: ModelConfigurationRetry$Outbound | undefined;
+  retry?: UpdateAgentModelConfigurationRetry$Outbound | undefined;
 };
 
 /** @internal */
@@ -3229,7 +3241,8 @@ export const UpdateAgentModelConfiguration2$outboundSchema: z.ZodType<
   id: z.string(),
   parameters: z.lazy(() => ModelConfigurationParameters$outboundSchema)
     .optional(),
-  retry: z.lazy(() => ModelConfigurationRetry$outboundSchema).optional(),
+  retry: z.lazy(() => UpdateAgentModelConfigurationRetry$outboundSchema)
+    .optional(),
 });
 
 export function updateAgentModelConfiguration2ToJSON(
@@ -3630,9 +3643,11 @@ export function updateAgentFallbackModelConfigurationGuardrailsToJSON(
 
 /** @internal */
 export type UpdateAgentFallbackModelConfigurationPlugins$Outbound =
-  | (components.PIIRedactionPlugin$Outbound & { id: "pii_redaction" })
-  | components.ResponseHealingPlugin$Outbound
-  | components.TraceScrubbingPlugin$Outbound;
+  | components.PIIRedactionPluginEn$Outbound
+  | components.PIIRedactionPluginNl$Outbound
+  | components.TraceScrubbingPlugin$Outbound
+  | components.PIIRedactionPluginAuto$Outbound
+  | components.ResponseHealingPlugin$Outbound;
 
 /** @internal */
 export const UpdateAgentFallbackModelConfigurationPlugins$outboundSchema:
@@ -3641,11 +3656,11 @@ export const UpdateAgentFallbackModelConfigurationPlugins$outboundSchema:
     z.ZodTypeDef,
     UpdateAgentFallbackModelConfigurationPlugins
   > = z.union([
-    components.PIIRedactionPlugin$outboundSchema.and(
-      z.object({ id: z.literal("pii_redaction") }),
-    ),
-    components.ResponseHealingPlugin$outboundSchema,
+    components.PIIRedactionPluginEn$outboundSchema,
+    components.PIIRedactionPluginNl$outboundSchema,
     components.TraceScrubbingPlugin$outboundSchema,
+    components.PIIRedactionPluginAuto$outboundSchema,
+    components.ResponseHealingPlugin$outboundSchema,
   ]);
 
 export function updateAgentFallbackModelConfigurationPluginsToJSON(
@@ -3900,9 +3915,11 @@ export type UpdateAgentFallbackModelConfigurationParameters$Outbound = {
     | undefined;
   plugins?:
     | Array<
-      | (components.PIIRedactionPlugin$Outbound & { id: "pii_redaction" })
-      | components.ResponseHealingPlugin$Outbound
+      | components.PIIRedactionPluginEn$Outbound
+      | components.PIIRedactionPluginNl$Outbound
       | components.TraceScrubbingPlugin$Outbound
+      | components.PIIRedactionPluginAuto$Outbound
+      | components.ResponseHealingPlugin$Outbound
     >
     | undefined;
   fallbacks?:
@@ -3965,11 +3982,11 @@ export const UpdateAgentFallbackModelConfigurationParameters$outboundSchema:
     ).optional(),
     plugins: z.array(
       z.union([
-        components.PIIRedactionPlugin$outboundSchema.and(
-          z.object({ id: z.literal("pii_redaction") }),
-        ),
-        components.ResponseHealingPlugin$outboundSchema,
+        components.PIIRedactionPluginEn$outboundSchema,
+        components.PIIRedactionPluginNl$outboundSchema,
         components.TraceScrubbingPlugin$outboundSchema,
+        components.PIIRedactionPluginAuto$outboundSchema,
+        components.ResponseHealingPlugin$outboundSchema,
       ]),
     ).optional(),
     fallbacks: z.array(
@@ -4124,7 +4141,6 @@ export type UpdateAgentEvaluators$Outbound = {
   id: string;
   sample_rate: number;
   execute_on: string;
-  options?: { [k: string]: any } | undefined;
 };
 
 /** @internal */
@@ -4136,7 +4152,6 @@ export const UpdateAgentEvaluators$outboundSchema: z.ZodType<
   id: z.string(),
   sampleRate: z.number().default(50),
   executeOn: UpdateAgentExecuteOn$outboundSchema,
-  options: z.record(z.any()).optional(),
 }).transform((v) => {
   return remap$(v, {
     sampleRate: "sample_rate",
@@ -4162,7 +4177,6 @@ export type UpdateAgentGuardrails$Outbound = {
   id: string;
   sample_rate: number;
   execute_on: string;
-  options?: { [k: string]: any } | undefined;
 };
 
 /** @internal */
@@ -4174,7 +4188,6 @@ export const UpdateAgentGuardrails$outboundSchema: z.ZodType<
   id: z.string(),
   sampleRate: z.number().default(50),
   executeOn: UpdateAgentAgentsExecuteOn$outboundSchema,
-  options: z.record(z.any()).optional(),
 }).transform((v) => {
   return remap$(v, {
     sampleRate: "sample_rate",
@@ -4293,9 +4306,9 @@ export const UpdateAgentEngine$outboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(UpdateAgentEngine);
 
 /** @internal */
-export const VersionIncrement$outboundSchema: z.ZodNativeEnum<
-  typeof VersionIncrement
-> = z.nativeEnum(VersionIncrement);
+export const UpdateAgentVersionIncrement$outboundSchema: z.ZodNativeEnum<
+  typeof UpdateAgentVersionIncrement
+> = z.nativeEnum(UpdateAgentVersionIncrement);
 
 /** @internal */
 export type UpdateAgentRequestBody$Outbound = {
@@ -4356,7 +4369,7 @@ export const UpdateAgentRequestBody$outboundSchema: z.ZodType<
   skills: z.nullable(z.array(z.string())).optional(),
   variables: z.record(z.any()).optional(),
   engine: UpdateAgentEngine$outboundSchema.optional(),
-  versionIncrement: VersionIncrement$outboundSchema.optional(),
+  versionIncrement: UpdateAgentVersionIncrement$outboundSchema.optional(),
   versionDescription: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -4570,7 +4583,6 @@ export const UpdateAgentAgentsEvaluators$inboundSchema: z.ZodType<
   id: z.string(),
   sample_rate: z.number().default(50),
   execute_on: UpdateAgentAgentsResponseExecuteOn$inboundSchema,
-  options: z.record(z.any()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "sample_rate": "sampleRate",
@@ -4603,7 +4615,6 @@ export const UpdateAgentAgentsGuardrails$inboundSchema: z.ZodType<
   id: z.string(),
   sample_rate: z.number().default(50),
   execute_on: UpdateAgentAgentsResponse200ExecuteOn$inboundSchema,
-  options: z.record(z.any()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "sample_rate": "sampleRate",
@@ -4982,11 +4993,11 @@ export const UpdateAgentPlugins$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
-  components.PIIRedactionPlugin$inboundSchema.and(
-    z.object({ id: z.literal("pii_redaction") }),
-  ),
-  components.ResponseHealingPlugin$inboundSchema,
+  components.PIIRedactionPluginEn$inboundSchema,
+  components.PIIRedactionPluginNl$inboundSchema,
   components.TraceScrubbingPlugin$inboundSchema,
+  components.PIIRedactionPluginAuto$inboundSchema,
+  components.ResponseHealingPlugin$inboundSchema,
 ]);
 
 export function updateAgentPluginsFromJSON(
@@ -5212,11 +5223,11 @@ export const UpdateAgentParameters$inboundSchema: z.ZodType<
   ).optional(),
   plugins: z.array(
     z.union([
-      components.PIIRedactionPlugin$inboundSchema.and(
-        z.object({ id: z.literal("pii_redaction") }),
-      ),
-      components.ResponseHealingPlugin$inboundSchema,
+      components.PIIRedactionPluginEn$inboundSchema,
+      components.PIIRedactionPluginNl$inboundSchema,
       components.TraceScrubbingPlugin$inboundSchema,
+      components.PIIRedactionPluginAuto$inboundSchema,
+      components.ResponseHealingPlugin$inboundSchema,
     ]),
   ).optional(),
   fallbacks: z.array(z.lazy(() => UpdateAgentFallbacks$inboundSchema))
@@ -5651,11 +5662,11 @@ export const UpdateAgentFallbackModelConfigurationAgentsPlugins$inboundSchema:
     z.ZodTypeDef,
     unknown
   > = z.union([
-    components.PIIRedactionPlugin$inboundSchema.and(
-      z.object({ id: z.literal("pii_redaction") }),
-    ),
-    components.ResponseHealingPlugin$inboundSchema,
+    components.PIIRedactionPluginEn$inboundSchema,
+    components.PIIRedactionPluginNl$inboundSchema,
     components.TraceScrubbingPlugin$inboundSchema,
+    components.PIIRedactionPluginAuto$inboundSchema,
+    components.ResponseHealingPlugin$inboundSchema,
   ]);
 
 export function updateAgentFallbackModelConfigurationAgentsPluginsFromJSON(
@@ -5940,11 +5951,11 @@ export const UpdateAgentFallbackModelConfigurationAgentsParameters$inboundSchema
     ).optional(),
     plugins: z.array(
       z.union([
-        components.PIIRedactionPlugin$inboundSchema.and(
-          z.object({ id: z.literal("pii_redaction") }),
-        ),
-        components.ResponseHealingPlugin$inboundSchema,
+        components.PIIRedactionPluginEn$inboundSchema,
+        components.PIIRedactionPluginNl$inboundSchema,
         components.TraceScrubbingPlugin$inboundSchema,
+        components.PIIRedactionPluginAuto$inboundSchema,
+        components.ResponseHealingPlugin$inboundSchema,
       ]),
     ).optional(),
     fallbacks: z.array(

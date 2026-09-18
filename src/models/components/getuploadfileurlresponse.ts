@@ -14,10 +14,6 @@ import {
 export type GetUploadFileUrlResponse = {
   objectName: string;
   postPolicy: UploadPostPolicy;
-  /**
-   * Identifier of the file record registered for this upload
-   */
-  fileId: string;
 };
 
 /** @internal */
@@ -28,7 +24,6 @@ export const GetUploadFileUrlResponse$inboundSchema: z.ZodType<
 > = z.object({
   objectName: z.string(),
   postPolicy: UploadPostPolicy$inboundSchema,
-  fileId: z.string(),
 });
 
 export function getUploadFileUrlResponseFromJSON(

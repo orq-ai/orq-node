@@ -7,22 +7,54 @@ import { RunAgentRequestBody } from "@orq-ai/node/models/operations";
 
 let value: RunAgentRequestBody = {
   key: "<key>",
-  model: "openai/gpt-5.6-sol",
+  model: "Camaro",
   fallbackModels: [
-    "<value>",
+    {
+      id: "<id>",
+      parameters: {
+        fallbacks: [
+          {
+            model: "openai/gpt-4o-mini",
+          },
+        ],
+        cache: {
+          ttl: 3600,
+          type: "exact_match",
+        },
+        loadBalancer: {
+          type: "weight_based",
+          models: [
+            {
+              model: "openai/gpt-4o",
+              weight: 0.7,
+            },
+            {
+              model: "anthropic/claude-3-5-sonnet",
+              weight: 0.3,
+            },
+          ],
+        },
+        timeout: {
+          callTimeout: 30000,
+        },
+      },
+      retry: {
+        count: 3,
+        onCodes: [
+          429,
+          500,
+          502,
+          503,
+          504,
+        ],
+      },
+    },
   ],
   role: "<value>",
   instructions: "<value>",
   message: {
     role: "user",
-    parts: [
-      {
-        kind: "file",
-        file: {
-          bytes: "<value>",
-        },
-      },
-    ],
+    parts: [],
   },
   identity: {
     id: "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV",

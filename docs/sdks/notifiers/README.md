@@ -327,9 +327,7 @@ const orq = new Orq({
 async function run() {
   const result = await orq.notifiers.update({
     notifierId: "<id>",
-    updateNotifierRequest: {
-      type: "NOTIFIER_TYPE_SLACK_WEBHOOK",
-    },
+    updateNotifierRequest: {},
   });
 
   console.log(result);
@@ -355,9 +353,7 @@ const orq = new OrqCore({
 async function run() {
   const res = await notifiersUpdate(orq, {
     notifierId: "<id>",
-    updateNotifierRequest: {
-      type: "NOTIFIER_TYPE_SLACK_WEBHOOK",
-    },
+    updateNotifierRequest: {},
   });
   if (res.ok) {
     const { value: result } = res;

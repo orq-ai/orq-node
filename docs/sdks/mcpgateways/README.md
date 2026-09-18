@@ -98,15 +98,6 @@ async function run() {
   const result = await orq.mcpGateways.create({
     key: "<key>",
     displayName: "Litzy_Ruecker98",
-    serverLinks: [
-      {
-        mcpServerId: "<id>",
-        alias: "<value>",
-        toolExposure: {
-          mode: "MCP_TOOL_EXPOSURE_MODE_ALL",
-        },
-      },
-    ],
   });
 
   console.log(result);
@@ -133,15 +124,6 @@ async function run() {
   const res = await mcpGatewaysCreate(orq, {
     key: "<key>",
     displayName: "Litzy_Ruecker98",
-    serverLinks: [
-      {
-        mcpServerId: "<id>",
-        alias: "<value>",
-        toolExposure: {
-          mode: "MCP_TOOL_EXPOSURE_MODE_ALL",
-        },
-      },
-    ],
   });
   if (res.ok) {
     const { value: result } = res;
@@ -409,17 +391,7 @@ const orq = new Orq({
 async function run() {
   const result = await orq.mcpGateways.update({
     id: "<id>",
-    updateMcpGatewayRequest: {
-      serverLinks: [
-        {
-          mcpServerId: "<id>",
-          alias: "<value>",
-          toolExposure: {
-            mode: "MCP_TOOL_EXPOSURE_MODE_ALL",
-          },
-        },
-      ],
-    },
+    updateMcpGatewayRequest: {},
   });
 
   console.log(result);
@@ -445,17 +417,7 @@ const orq = new OrqCore({
 async function run() {
   const res = await mcpGatewaysUpdate(orq, {
     id: "<id>",
-    updateMcpGatewayRequest: {
-      serverLinks: [
-        {
-          mcpServerId: "<id>",
-          alias: "<value>",
-          toolExposure: {
-            mode: "MCP_TOOL_EXPOSURE_MODE_ALL",
-          },
-        },
-      ],
-    },
+    updateMcpGatewayRequest: {},
   });
   if (res.ok) {
     const { value: result } = res;

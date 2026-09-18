@@ -13,11 +13,12 @@ const value: components.EmailNotifier = {
   emails: [
     "<value 1>",
     "<value 2>",
+    "<value 3>",
   ],
   id: "<id>",
-  displayName: "Rhiannon.Huels",
-  createdAt: new Date("2024-10-31T01:17:10.561Z"),
-  updatedAt: new Date("2026-05-22T09:40:20.879Z"),
+  displayName: "Juvenal.Dare46",
+  createdAt: new Date("2026-05-22T09:40:20.879Z"),
+  updatedAt: new Date("2024-03-22T14:14:08.246Z"),
 };
 ```
 
@@ -25,12 +26,12 @@ const value: components.EmailNotifier = {
 
 ```typescript
 const value: components.SlackWebhookNotifier = {
-  type: "NOTIFIER_TYPE_SLACK_WEBHOOK",
-  incomingWebhookUrl: "https://fussy-precedent.net/",
+  type: "NOTIFIER_TYPE_UNSPECIFIED",
+  incomingWebhookUrl: "https://rundown-polyester.name/",
   id: "<id>",
-  displayName: "Ludie.VonRueden6",
-  createdAt: new Date("2025-03-09T09:31:19.799Z"),
-  updatedAt: new Date("2024-05-31T15:23:14.236Z"),
+  displayName: "Michele.Hintz",
+  createdAt: new Date("2024-05-31T15:23:14.236Z"),
+  updatedAt: new Date("2024-12-31T17:53:36.307Z"),
 };
 ```
 
@@ -39,11 +40,11 @@ const value: components.SlackWebhookNotifier = {
 ```typescript
 const value: components.GenericWebhookNotifier = {
   type: "NOTIFIER_TYPE_SLACK_WEBHOOK",
-  webhookUrl: "https://stable-heartache.org",
+  webhookUrl: "https://infamous-soybean.net",
   id: "<id>",
-  displayName: "Maxine_Ritchie",
-  createdAt: new Date("2026-06-28T03:39:13.726Z"),
-  updatedAt: new Date("2025-08-29T23:51:48.411Z"),
+  displayName: "Luz66",
+  createdAt: new Date("2025-08-29T23:51:48.411Z"),
+  updatedAt: new Date("2024-04-16T04:52:09.184Z"),
 };
 ```
 

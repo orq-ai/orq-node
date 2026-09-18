@@ -34,11 +34,11 @@ export type UpdateWorkspaceSettingsRequest = {
    */
   enforceEnabledModels?: boolean | undefined;
   /**
-   * Workspace-default PII redaction update. Omit to leave it unchanged. When
+   * Replacement workspace-default PII redaction configuration. Omit to leave
    *
    * @remarks
-   *  present, `enabled` is always applied; `config` omitted keeps the stored
-   *  config, `config` present replaces it wholesale, and `config: {}` clears it.
+   *  the current PII redaction configuration unchanged; when present it fully
+   *  replaces the stored pii_redaction object.
    */
   piiRedaction?: PiiRedaction | undefined;
 };

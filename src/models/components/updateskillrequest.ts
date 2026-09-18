@@ -15,7 +15,7 @@ export type UpdateSkillRequest = {
    */
   description?: string | undefined;
   /**
-   * Replacement tag list. When provided, replaces the current tags; send an empty array to clear them.
+   * Replacement tag list. Leave empty to clear tags.
    */
   tags?: Array<string> | undefined;
   /**

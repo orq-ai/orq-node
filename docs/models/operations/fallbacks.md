@@ -6,12 +6,12 @@
 import { Fallbacks } from "@orq-ai/node/models/operations";
 
 let value: Fallbacks = {
-  model: "openai/gpt-5.4-mini",
+  model: "Mustang",
 };
 ```
 
 ## Fields
 
-| Field                     | Type                      | Required                  | Description               | Example                   |
-| ------------------------- | ------------------------- | ------------------------- | ------------------------- | ------------------------- |
-| `model`                   | *string*                  | :heavy_check_mark:        | Fallback model identifier | openai/gpt-5.4-mini       |
+| Field              | Type               | Required           | Description        |
+| ------------------ | ------------------ | ------------------ | ------------------ |
+| `model`            | *string*           | :heavy_check_mark: | N/A                |

@@ -8,7 +8,6 @@ import { Alerts } from "./alerts.js";
 import { AnnotationQueues } from "./annotationqueues.js";
 import { Annotations } from "./annotations.js";
 import { ApiKeys } from "./apikeys.js";
-import { AuditLogs } from "./auditlogs.js";
 import { Budgets } from "./budgets.js";
 import { Chunking } from "./chunking.js";
 import { Datasets } from "./datasets.js";
@@ -16,9 +15,7 @@ import { Deployments } from "./deployments.js";
 import { Evals } from "./evals.js";
 import { Feedback } from "./feedback.js";
 import { Files } from "./files.js";
-import { FileSystems } from "./filesystems.js";
 import { GuardrailRules } from "./guardrailrules.js";
-import { Hub } from "./hub.js";
 import { HumanReviewSets } from "./humanreviewsets.js";
 import { Identities } from "./identities.js";
 import { Knowledge } from "./knowledge.js";
@@ -39,18 +36,20 @@ import { Responses } from "./responses.js";
 import { Router } from "./router.js";
 import { RoutingRules } from "./routingrules.js";
 import { Schedules } from "./schedules.js";
-import { Sessions } from "./sessions.js";
 import { Skills } from "./skills.js";
 import { SmartRouters } from "./smartrouters.js";
-import { Telemetry } from "./telemetry.js";
 import { Tools } from "./tools.js";
 import { Traces } from "./traces.js";
 import { Webhooks } from "./webhooks.js";
-import { Workspaces } from "./workspaces.js";
 import { WorkspaceSecurity } from "./workspacesecurity.js";
 import { WorkspaceSettings } from "./workspacesettings.js";
 
 export class Orq extends ClientSDK {
+  private _evals?: Evals;
+  get evals(): Evals {
+    return (this._evals ??= new Evals(this._options));
+  }
+
   private _deployments?: Deployments;
   get deployments(): Deployments {
     return (this._deployments ??= new Deployments(this._options));
@@ -96,14 +95,14 @@ export class Orq extends ClientSDK {
     return (this._humanReviewSets ??= new HumanReviewSets(this._options));
   }
 
+  private _annotationQueues?: AnnotationQueues;
+  get annotationQueues(): AnnotationQueues {
+    return (this._annotationQueues ??= new AnnotationQueues(this._options));
+  }
+
   private _chunking?: Chunking;
   get chunking(): Chunking {
     return (this._chunking ??= new Chunking(this._options));
-  }
-
-  private _fileSystems?: FileSystems;
-  get fileSystems(): FileSystems {
-    return (this._fileSystems ??= new FileSystems(this._options));
   }
 
   private _knowledge?: Knowledge;
@@ -116,34 +115,9 @@ export class Orq extends ClientSDK {
     return (this._memoryStores ??= new MemoryStores(this._options));
   }
 
-  private _evals?: Evals;
-  get evals(): Evals {
-    return (this._evals ??= new Evals(this._options));
-  }
-
   private _pii?: Pii;
   get pii(): Pii {
     return (this._pii ??= new Pii(this._options));
-  }
-
-  private _logs?: Logs;
-  get logs(): Logs {
-    return (this._logs ??= new Logs(this._options));
-  }
-
-  private _reporting?: Reporting;
-  get reporting(): Reporting {
-    return (this._reporting ??= new Reporting(this._options));
-  }
-
-  private _telemetry?: Telemetry;
-  get telemetry(): Telemetry {
-    return (this._telemetry ??= new Telemetry(this._options));
-  }
-
-  private _traces?: Traces;
-  get traces(): Traces {
-    return (this._traces ??= new Traces(this._options));
   }
 
   private _models?: Models;
@@ -161,19 +135,9 @@ export class Orq extends ClientSDK {
     return (this._alerts ??= new Alerts(this._options));
   }
 
-  private _annotationQueues?: AnnotationQueues;
-  get annotationQueues(): AnnotationQueues {
-    return (this._annotationQueues ??= new AnnotationQueues(this._options));
-  }
-
   private _apiKeys?: ApiKeys;
   get apiKeys(): ApiKeys {
     return (this._apiKeys ??= new ApiKeys(this._options));
-  }
-
-  private _auditLogs?: AuditLogs;
-  get auditLogs(): AuditLogs {
-    return (this._auditLogs ??= new AuditLogs(this._options));
   }
 
   private _budgets?: Budgets;
@@ -189,11 +153,6 @@ export class Orq extends ClientSDK {
   private _guardrailRules?: GuardrailRules;
   get guardrailRules(): GuardrailRules {
     return (this._guardrailRules ??= new GuardrailRules(this._options));
-  }
-
-  private _hub?: Hub;
-  get hub(): Hub {
-    return (this._hub ??= new Hub(this._options));
   }
 
   private _identities?: Identities;
@@ -236,11 +195,6 @@ export class Orq extends ClientSDK {
     return (this._routingRules ??= new RoutingRules(this._options));
   }
 
-  private _sessions?: Sessions;
-  get sessions(): Sessions {
-    return (this._sessions ??= new Sessions(this._options));
-  }
-
   private _skills?: Skills;
   get skills(): Skills {
     return (this._skills ??= new Skills(this._options));
@@ -254,11 +208,6 @@ export class Orq extends ClientSDK {
   private _webhooks?: Webhooks;
   get webhooks(): Webhooks {
     return (this._webhooks ??= new Webhooks(this._options));
-  }
-
-  private _workspaces?: Workspaces;
-  get workspaces(): Workspaces {
-    return (this._workspaces ??= new Workspaces(this._options));
   }
 
   private _workspaceSecurity?: WorkspaceSecurity;
@@ -279,5 +228,20 @@ export class Orq extends ClientSDK {
   private _responses?: Responses;
   get responses(): Responses {
     return (this._responses ??= new Responses(this._options));
+  }
+
+  private _logs?: Logs;
+  get logs(): Logs {
+    return (this._logs ??= new Logs(this._options));
+  }
+
+  private _reporting?: Reporting;
+  get reporting(): Reporting {
+    return (this._reporting ??= new Reporting(this._options));
+  }
+
+  private _traces?: Traces;
+  get traces(): Traces {
+    return (this._traces ??= new Traces(this._options));
   }
 }

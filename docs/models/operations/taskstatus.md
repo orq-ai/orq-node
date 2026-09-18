@@ -9,12 +9,6 @@ import { TaskStatus } from "@orq-ai/node/models/operations";
 
 let value: TaskStatus = {
   state: "input-required",
-  message: {
-    kind: "message",
-    messageId: "<id>",
-    role: "tool",
-    parts: [],
-  },
 };
 ```
 

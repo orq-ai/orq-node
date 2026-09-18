@@ -5,22 +5,7 @@
 ```typescript
 import { ListMcpGatewaysResponse } from "@orq-ai/node/models/components";
 
-let value: ListMcpGatewaysResponse = {
-  data: [
-    {
-      displayName: "Production Gateway",
-      serverLinks: [
-        {
-          mcpServerId: "<id>",
-          alias: "<value>",
-          toolExposure: {
-            mode: "MCP_TOOL_EXPOSURE_MODE_ALL",
-          },
-        },
-      ],
-    },
-  ],
-};
+let value: ListMcpGatewaysResponse = {};
 ```
 
 ## Fields

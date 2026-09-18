@@ -1,23 +1,19 @@
 # DeploymentStreamOrEq
 
+Equal to
 
-## Supported Types
-
-### `string`
-
-```typescript
-const value: string = "<value>";
-```
-
-### `number`
+## Example Usage
 
 ```typescript
-const value: number = 1284.03;
+import { DeploymentStreamOrEq } from "@orq-ai/node/models/operations";
+
+let value: DeploymentStreamOrEq = {
+  eq: false,
+};
 ```
 
-### `boolean`
+## Fields
 
-```typescript
-const value: boolean = true;
-```
-
+| Field                                        | Type                                         | Required                                     | Description                                  |
+| -------------------------------------------- | -------------------------------------------- | -------------------------------------------- | -------------------------------------------- |
+| `eq`                                         | *operations.DeploymentStreamOrDeploymentsEq* | :heavy_check_mark:                           | N/A                                          |

@@ -12,7 +12,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 /**
  * Indicates the type of model used to generate the response
  */
-export const ObjectT = {
+export const DeploymentInvokeObject = {
   Chat: "chat",
   Completion: "completion",
   Image: "image",
@@ -20,7 +20,7 @@ export const ObjectT = {
 /**
  * Indicates the type of model used to generate the response
  */
-export type ObjectT = ClosedEnum<typeof ObjectT>;
+export type DeploymentInvokeObject = ClosedEnum<typeof DeploymentInvokeObject>;
 
 /**
  * The provider used to generate the response
@@ -299,7 +299,7 @@ export type DeploymentInvokeResponseBody = {
   /**
    * Indicates the type of model used to generate the response
    */
-  object: ObjectT;
+  object: DeploymentInvokeObject;
   /**
    * The model used to generate the response
    */
@@ -344,8 +344,9 @@ export type DeploymentInvokeResponseBody = {
 };
 
 /** @internal */
-export const ObjectT$inboundSchema: z.ZodNativeEnum<typeof ObjectT> = z
-  .nativeEnum(ObjectT);
+export const DeploymentInvokeObject$inboundSchema: z.ZodNativeEnum<
+  typeof DeploymentInvokeObject
+> = z.nativeEnum(DeploymentInvokeObject);
 
 /** @internal */
 export const Provider$inboundSchema: z.ZodNativeEnum<typeof Provider> = z
@@ -699,7 +700,7 @@ export const DeploymentInvokeResponseBody$inboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   created: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  object: ObjectT$inboundSchema,
+  object: DeploymentInvokeObject$inboundSchema,
   model: z.string(),
   provider: Provider$inboundSchema,
   is_final: z.boolean(),

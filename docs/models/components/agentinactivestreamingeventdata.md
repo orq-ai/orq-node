@@ -7,10 +7,6 @@ import { AgentInactiveStreamingEventData } from "@orq-ai/node/models/components"
 
 let value: AgentInactiveStreamingEventData = {
   lastMessage: "<value>",
-  lastMessageFull: {
-    role: "user",
-    parts: [],
-  },
   finishReason: "max_iterations",
   workflowRunId: "<id>",
 };

@@ -10,7 +10,7 @@ import { CreateAgentRequestFallbackModelConfigurationParameters } from "@orq-ai/
 let value: CreateAgentRequestFallbackModelConfigurationParameters = {
   fallbacks: [
     {
-      model: "openai/gpt-5.4-mini",
+      model: "openai/gpt-4o-mini",
     },
   ],
   cache: {

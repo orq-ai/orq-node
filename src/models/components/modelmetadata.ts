@@ -41,7 +41,6 @@ export type ModelMetadata = {
   embeddingDimensions?: number | undefined;
   extendedContextPricingMode?: string | undefined;
   extendedContextThreshold?: number | undefined;
-  functionToolsRequireEffortNone?: boolean | undefined;
   generateAudio?: boolean | undefined;
   imageInputCost?: number | undefined;
   imageOutputCost?: number | undefined;
@@ -173,7 +172,6 @@ export const ModelMetadata$inboundSchema: z.ZodType<
   embedding_dimensions: z.number().int().optional(),
   extended_context_pricing_mode: z.string().optional(),
   extended_context_threshold: z.number().int().optional(),
-  function_tools_require_effort_none: z.boolean().optional(),
   generate_audio: z.boolean().optional(),
   image_input_cost: z.number().optional(),
   image_output_cost: z.number().optional(),
@@ -299,7 +297,6 @@ export const ModelMetadata$inboundSchema: z.ZodType<
     "embedding_dimensions": "embeddingDimensions",
     "extended_context_pricing_mode": "extendedContextPricingMode",
     "extended_context_threshold": "extendedContextThreshold",
-    "function_tools_require_effort_none": "functionToolsRequireEffortNone",
     "generate_audio": "generateAudio",
     "image_input_cost": "imageInputCost",
     "image_output_cost": "imageOutputCost",
@@ -427,7 +424,6 @@ export type ModelMetadata$Outbound = {
   embedding_dimensions?: number | undefined;
   extended_context_pricing_mode?: string | undefined;
   extended_context_threshold?: number | undefined;
-  function_tools_require_effort_none?: boolean | undefined;
   generate_audio?: boolean | undefined;
   image_input_cost?: number | undefined;
   image_output_cost?: number | undefined;
@@ -561,7 +557,6 @@ export const ModelMetadata$outboundSchema: z.ZodType<
   embeddingDimensions: z.number().int().optional(),
   extendedContextPricingMode: z.string().optional(),
   extendedContextThreshold: z.number().int().optional(),
-  functionToolsRequireEffortNone: z.boolean().optional(),
   generateAudio: z.boolean().optional(),
   imageInputCost: z.number().optional(),
   imageOutputCost: z.number().optional(),
@@ -687,7 +682,6 @@ export const ModelMetadata$outboundSchema: z.ZodType<
     embeddingDimensions: "embedding_dimensions",
     extendedContextPricingMode: "extended_context_pricing_mode",
     extendedContextThreshold: "extended_context_threshold",
-    functionToolsRequireEffortNone: "function_tools_require_effort_none",
     generateAudio: "generate_audio",
     imageInputCost: "image_input_cost",
     imageOutputCost: "image_output_cost",

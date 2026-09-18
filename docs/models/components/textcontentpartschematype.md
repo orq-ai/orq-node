@@ -1,17 +1,17 @@
 # TextContentPartSchemaType
 
-Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+The type of the content part.
 
 ## Example Usage
 
 ```typescript
 import { TextContentPartSchemaType } from "@orq-ai/node/models/components";
 
-let value: TextContentPartSchemaType = "ephemeral";
+let value: TextContentPartSchemaType = "text";
 ```
 
 ## Values
 
 ```typescript
-"ephemeral"
+"text"
 ```

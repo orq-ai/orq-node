@@ -5,20 +5,7 @@
 ```typescript
 import { CreateMcpGatewayResponse } from "@orq-ai/node/models/components";
 
-let value: CreateMcpGatewayResponse = {
-  mcpGateway: {
-    displayName: "Production Gateway",
-    serverLinks: [
-      {
-        mcpServerId: "<id>",
-        alias: "<value>",
-        toolExposure: {
-          mode: "MCP_TOOL_EXPOSURE_MODE_ALL",
-        },
-      },
-    ],
-  },
-};
+let value: CreateMcpGatewayResponse = {};
 ```
 
 ## Fields

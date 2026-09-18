@@ -13,21 +13,7 @@ let value: InvokeAgentA2ATaskResponse = {
   kind: "task",
   status: {
     state: "rejected",
-    message: {
-      kind: "message",
-      messageId: "<id>",
-      role: "tool",
-      parts: [],
-    },
   },
-  messages: [
-    {
-      kind: "message",
-      messageId: "<id>",
-      role: "agent",
-      parts: [],
-    },
-  ],
 };
 ```
 

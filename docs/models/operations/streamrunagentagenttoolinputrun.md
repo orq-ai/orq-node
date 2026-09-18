@@ -117,15 +117,6 @@ const value: components.CodeInterpreterToolInput = {
 };
 ```
 
-### `components.FileSystemToolInput`
-
-```typescript
-const value: components.FileSystemToolInput = {
-  type: "file_system",
-  configuration: {},
-};
-```
-
 ### `operations.AgentToolInputRunHTTPToolRun`
 
 ```typescript

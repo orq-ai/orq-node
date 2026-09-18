@@ -6,16 +6,18 @@
 import { Two } from "@orq-ai/node/models/components";
 
 let value: Two = {
-  modelDbId: "<id>",
-  provider: "<value>",
+  type: "contains_none",
+  keywords: [
+    "<value 1>",
+    "<value 2>",
+    "<value 3>",
+  ],
 };
 ```
 
 ## Fields
 
-| Field                                                                                                               | Type                                                                                                                | Required                                                                                                            | Description                                                                                                         |
-| ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
-| `model`                                                                                                             | *string*                                                                                                            | :heavy_minus_sign:                                                                                                  | The name of the model for the Agent to use. Refer to the [model list](https://docs.orq.ai/docs/proxy#/chat-models). |
-| `modelDbId`                                                                                                         | *string*                                                                                                            | :heavy_check_mark:                                                                                                  | Identifier of the stored model configuration to use.                                                                |
-| `provider`                                                                                                          | *string*                                                                                                            | :heavy_check_mark:                                                                                                  | Provider identifier for the stored model configuration.                                                             |
-| `integrationId`                                                                                                     | *string*                                                                                                            | :heavy_minus_sign:                                                                                                  | Optional integration identifier for the stored model configuration.                                                 |
+| Field              | Type               | Required           | Description        |
+| ------------------ | ------------------ | ------------------ | ------------------ |
+| `type`             | *"contains_none"*  | :heavy_check_mark: | N/A                |
+| `keywords`         | *string*[]         | :heavy_check_mark: | N/A                |

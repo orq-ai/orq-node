@@ -14,7 +14,7 @@ let value: StreamAgentRequest = {
         {
           kind: "file",
           file: {
-            uri: "https://example.com/report.pdf",
+            uri: "https://ignorant-hawk.com",
           },
         },
       ],

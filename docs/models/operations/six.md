@@ -5,11 +5,13 @@
 ```typescript
 import { Six } from "@orq-ai/node/models/operations";
 
-let value: Six = "vtt";
+let value: Six = {
+  type: "contains_url",
+};
 ```
 
-## Values
+## Fields
 
-```typescript
-"json" | "text" | "srt" | "verbose_json" | "vtt"
-```
+| Field              | Type               | Required           | Description        |
+| ------------------ | ------------------ | ------------------ | ------------------ |
+| `type`             | *"contains_url"*   | :heavy_check_mark: | N/A                |

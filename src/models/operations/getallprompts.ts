@@ -854,9 +854,11 @@ export type GetAllPromptsGuardrails = {
 };
 
 export type GetAllPromptsPlugins =
-  | (components.PIIRedactionPlugin & { id: "pii_redaction" })
-  | components.ResponseHealingPlugin
-  | components.TraceScrubbingPlugin;
+  | components.PIIRedactionPluginEn
+  | components.PIIRedactionPluginNl
+  | components.TraceScrubbingPlugin
+  | components.PIIRedactionPluginAuto
+  | components.ResponseHealingPlugin;
 
 export type GetAllPromptsFallbacks = {
   /**
@@ -1447,9 +1449,11 @@ export type GetAllPromptsPromptField = {
    */
   plugins?:
     | Array<
-      | (components.PIIRedactionPlugin & { id: "pii_redaction" })
-      | components.ResponseHealingPlugin
+      | components.PIIRedactionPluginEn
+      | components.PIIRedactionPluginNl
       | components.TraceScrubbingPlugin
+      | components.PIIRedactionPluginAuto
+      | components.ResponseHealingPlugin
     >
     | undefined;
   /**
@@ -1492,7 +1496,7 @@ export type GetAllPromptsPromptField = {
     >
     | undefined;
   /**
-   * Model ID used to generate the response, like `openai/gpt-5.6-sol` or `anthropic/claude-sonnet-5`. For private models, use format: `{workspaceKey}@{provider}/{model}`.
+   * Model ID used to generate the response, like `openai/gpt-4o` or `anthropic/claude-3-5-sonnet-20241022`. For private models, use format: `{workspaceKey}@{provider}/{model}`.
    */
   model?: string | null | undefined;
   version?: string | undefined;
@@ -2537,11 +2541,11 @@ export const GetAllPromptsPlugins$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
-  components.PIIRedactionPlugin$inboundSchema.and(
-    z.object({ id: z.literal("pii_redaction") }),
-  ),
-  components.ResponseHealingPlugin$inboundSchema,
+  components.PIIRedactionPluginEn$inboundSchema,
+  components.PIIRedactionPluginNl$inboundSchema,
   components.TraceScrubbingPlugin$inboundSchema,
+  components.PIIRedactionPluginAuto$inboundSchema,
+  components.ResponseHealingPlugin$inboundSchema,
 ]);
 
 export function getAllPromptsPluginsFromJSON(
@@ -3283,11 +3287,11 @@ export const GetAllPromptsPromptField$inboundSchema: z.ZodType<
     .optional(),
   plugins: z.array(
     z.union([
-      components.PIIRedactionPlugin$inboundSchema.and(
-        z.object({ id: z.literal("pii_redaction") }),
-      ),
-      components.ResponseHealingPlugin$inboundSchema,
+      components.PIIRedactionPluginEn$inboundSchema,
+      components.PIIRedactionPluginNl$inboundSchema,
       components.TraceScrubbingPlugin$inboundSchema,
+      components.PIIRedactionPluginAuto$inboundSchema,
+      components.ResponseHealingPlugin$inboundSchema,
     ]),
   ).optional(),
   fallbacks: z.array(z.lazy(() => GetAllPromptsFallbacks$inboundSchema))

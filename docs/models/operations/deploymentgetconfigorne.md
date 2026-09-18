@@ -1,19 +1,23 @@
 # DeploymentGetConfigOrNe
 
-Not equal to
 
-## Example Usage
+## Supported Types
+
+### `string`
 
 ```typescript
-import { DeploymentGetConfigOrNe } from "@orq-ai/node/models/operations";
-
-let value: DeploymentGetConfigOrNe = {
-  ne: false,
-};
+const value: string = "<value>";
 ```
 
-## Fields
+### `number`
 
-| Field                                           | Type                                            | Required                                        | Description                                     |
-| ----------------------------------------------- | ----------------------------------------------- | ----------------------------------------------- | ----------------------------------------------- |
-| `ne`                                            | *operations.DeploymentGetConfigOrDeploymentsNe* | :heavy_check_mark:                              | N/A                                             |
+```typescript
+const value: number = 1284.03;
+```
+
+### `boolean`
+
+```typescript
+const value: boolean = true;
+```
+

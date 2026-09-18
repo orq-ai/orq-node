@@ -1,6 +1,6 @@
 # Id
 
-PII redaction plugin.
+Plugin discriminator. Must be `pii_redaction`.
 
 ## Example Usage
 
