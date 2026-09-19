@@ -97,6 +97,7 @@ const orq = new Orq({
 async function run() {
   const result = await orq.apiKeys.create({
     name: "<value>",
+    permissionMode: "PERMISSION_MODE_ALL",
   });
 
   console.log(result);
@@ -122,6 +123,7 @@ const orq = new OrqCore({
 async function run() {
   const res = await apiKeysCreate(orq, {
     name: "<value>",
+    permissionMode: "PERMISSION_MODE_ALL",
   });
   if (res.ok) {
     const { value: result } = res;

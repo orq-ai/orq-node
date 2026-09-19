@@ -38,7 +38,7 @@ export type CreateApiKeyRequest = {
    * Project authorization scope. Defaults to all-projects when omitted.
    */
   projectScope?: ProjectScope | undefined;
-  permissionMode?: PermissionMode | undefined;
+  permissionMode: PermissionMode;
   /**
    * Per-domain access map. Required when `permission_mode` =
    *
@@ -77,7 +77,7 @@ export type CreateApiKeyRequest$Outbound = {
   name: string;
   owner?: ApiKeyOwner$Outbound | undefined;
   project_scope?: ProjectScope$Outbound | undefined;
-  permission_mode?: string | undefined;
+  permission_mode: string;
   access?: { [k: string]: string } | undefined;
   expires_at?: string | undefined;
   mcp_access?: McpAccess$Outbound | undefined;
@@ -93,7 +93,7 @@ export const CreateApiKeyRequest$outboundSchema: z.ZodType<
   name: z.string(),
   owner: ApiKeyOwner$outboundSchema.optional(),
   projectScope: ProjectScope$outboundSchema.optional(),
-  permissionMode: PermissionMode$outboundSchema.optional(),
+  permissionMode: PermissionMode$outboundSchema,
   access: z.record(AccessLevel$outboundSchema).optional(),
   expiresAt: z.date().transform(v => v.toISOString()).optional(),
   mcpAccess: McpAccess$outboundSchema.optional(),

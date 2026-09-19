@@ -46,6 +46,7 @@ import { Telemetry } from "./telemetry.js";
 import { Tools } from "./tools.js";
 import { Traces } from "./traces.js";
 import { Webhooks } from "./webhooks.js";
+import { Wikis } from "./wikis.js";
 import { Workspaces } from "./workspaces.js";
 import { WorkspaceSecurity } from "./workspacesecurity.js";
 import { WorkspaceSettings } from "./workspacesettings.js";
@@ -254,6 +255,11 @@ export class Orq extends ClientSDK {
   private _webhooks?: Webhooks;
   get webhooks(): Webhooks {
     return (this._webhooks ??= new Webhooks(this._options));
+  }
+
+  private _wikis?: Wikis;
+  get wikis(): Wikis {
+    return (this._wikis ??= new Wikis(this._options));
   }
 
   private _workspaces?: Workspaces;
