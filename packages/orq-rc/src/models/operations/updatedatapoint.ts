@@ -149,6 +149,20 @@ export type UpdateDatapointMessagesFunction = {
   arguments?: string | undefined;
 };
 
+export type UpdateDatapointMessagesGoogle = {
+  /**
+   * Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call. Takes precedence over the top-level `thought_signature` when both are set.
+   */
+  thoughtSignature?: string | undefined;
+};
+
+/**
+ * Provider-specific extra content for the tool call.
+ */
+export type UpdateDatapointMessagesExtraContent = {
+  google?: UpdateDatapointMessagesGoogle | undefined;
+};
+
 export type UpdateDatapointMessagesToolCalls = {
   /**
    * The ID of the tool call.
@@ -163,6 +177,10 @@ export type UpdateDatapointMessagesToolCalls = {
    * Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call.
    */
   thoughtSignature?: string | undefined;
+  /**
+   * Provider-specific extra content for the tool call.
+   */
+  extraContent?: UpdateDatapointMessagesExtraContent | undefined;
 };
 
 export type UpdateDatapointMessagesAssistantMessage = {
@@ -537,6 +555,20 @@ export type UpdateDatapointMessagesDatasetsFunction = {
   arguments?: string | undefined;
 };
 
+export type UpdateDatapointMessagesDatasetsGoogle = {
+  /**
+   * Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call. Takes precedence over the top-level `thought_signature` when both are set.
+   */
+  thoughtSignature?: string | undefined;
+};
+
+/**
+ * Provider-specific extra content for the tool call.
+ */
+export type UpdateDatapointMessagesDatasetsExtraContent = {
+  google?: UpdateDatapointMessagesDatasetsGoogle | undefined;
+};
+
 export type UpdateDatapointMessagesDatasetsToolCalls = {
   /**
    * The ID of the tool call.
@@ -551,6 +583,10 @@ export type UpdateDatapointMessagesDatasetsToolCalls = {
    * Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call.
    */
   thoughtSignature?: string | undefined;
+  /**
+   * Provider-specific extra content for the tool call.
+   */
+  extraContent?: UpdateDatapointMessagesDatasetsExtraContent | undefined;
 };
 
 export type UpdateDatapointMessagesDatasetsAssistantMessage = {
@@ -1556,11 +1592,64 @@ export function updateDatapointMessagesFunctionToJSON(
 }
 
 /** @internal */
+export type UpdateDatapointMessagesGoogle$Outbound = {
+  thought_signature?: string | undefined;
+};
+
+/** @internal */
+export const UpdateDatapointMessagesGoogle$outboundSchema: z.ZodType<
+  UpdateDatapointMessagesGoogle$Outbound,
+  z.ZodTypeDef,
+  UpdateDatapointMessagesGoogle
+> = z.object({
+  thoughtSignature: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    thoughtSignature: "thought_signature",
+  });
+});
+
+export function updateDatapointMessagesGoogleToJSON(
+  updateDatapointMessagesGoogle: UpdateDatapointMessagesGoogle,
+): string {
+  return JSON.stringify(
+    UpdateDatapointMessagesGoogle$outboundSchema.parse(
+      updateDatapointMessagesGoogle,
+    ),
+  );
+}
+
+/** @internal */
+export type UpdateDatapointMessagesExtraContent$Outbound = {
+  google?: UpdateDatapointMessagesGoogle$Outbound | undefined;
+};
+
+/** @internal */
+export const UpdateDatapointMessagesExtraContent$outboundSchema: z.ZodType<
+  UpdateDatapointMessagesExtraContent$Outbound,
+  z.ZodTypeDef,
+  UpdateDatapointMessagesExtraContent
+> = z.object({
+  google: z.lazy(() => UpdateDatapointMessagesGoogle$outboundSchema).optional(),
+});
+
+export function updateDatapointMessagesExtraContentToJSON(
+  updateDatapointMessagesExtraContent: UpdateDatapointMessagesExtraContent,
+): string {
+  return JSON.stringify(
+    UpdateDatapointMessagesExtraContent$outboundSchema.parse(
+      updateDatapointMessagesExtraContent,
+    ),
+  );
+}
+
+/** @internal */
 export type UpdateDatapointMessagesToolCalls$Outbound = {
   id: string;
   type: string;
   function: UpdateDatapointMessagesFunction$Outbound;
   thought_signature?: string | undefined;
+  extra_content?: UpdateDatapointMessagesExtraContent$Outbound | undefined;
 };
 
 /** @internal */
@@ -1573,9 +1662,12 @@ export const UpdateDatapointMessagesToolCalls$outboundSchema: z.ZodType<
   type: UpdateDatapointMessagesType$outboundSchema,
   function: z.lazy(() => UpdateDatapointMessagesFunction$outboundSchema),
   thoughtSignature: z.string().optional(),
+  extraContent: z.lazy(() => UpdateDatapointMessagesExtraContent$outboundSchema)
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     thoughtSignature: "thought_signature",
+    extraContent: "extra_content",
   });
 });
 
@@ -2301,6 +2393,57 @@ export function updateDatapointMessagesDatasetsFunctionFromJSON(
 }
 
 /** @internal */
+export const UpdateDatapointMessagesDatasetsGoogle$inboundSchema: z.ZodType<
+  UpdateDatapointMessagesDatasetsGoogle,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  thought_signature: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "thought_signature": "thoughtSignature",
+  });
+});
+
+export function updateDatapointMessagesDatasetsGoogleFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateDatapointMessagesDatasetsGoogle, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      UpdateDatapointMessagesDatasetsGoogle$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateDatapointMessagesDatasetsGoogle' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdateDatapointMessagesDatasetsExtraContent$inboundSchema:
+  z.ZodType<
+    UpdateDatapointMessagesDatasetsExtraContent,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    google: z.lazy(() => UpdateDatapointMessagesDatasetsGoogle$inboundSchema)
+      .optional(),
+  });
+
+export function updateDatapointMessagesDatasetsExtraContentFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  UpdateDatapointMessagesDatasetsExtraContent,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      UpdateDatapointMessagesDatasetsExtraContent$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'UpdateDatapointMessagesDatasetsExtraContent' from JSON`,
+  );
+}
+
+/** @internal */
 export const UpdateDatapointMessagesDatasetsToolCalls$inboundSchema: z.ZodType<
   UpdateDatapointMessagesDatasetsToolCalls,
   z.ZodTypeDef,
@@ -2310,9 +2453,13 @@ export const UpdateDatapointMessagesDatasetsToolCalls$inboundSchema: z.ZodType<
   type: UpdateDatapointMessagesDatasetsResponseType$inboundSchema,
   function: z.lazy(() => UpdateDatapointMessagesDatasetsFunction$inboundSchema),
   thought_signature: z.string().optional(),
+  extra_content: z.lazy(() =>
+    UpdateDatapointMessagesDatasetsExtraContent$inboundSchema
+  ).optional(),
 }).transform((v) => {
   return remap$(v, {
     "thought_signature": "thoughtSignature",
+    "extra_content": "extraContent",
   });
 });
 
@@ -2760,7 +2907,7 @@ export const UpdateDatapointEvaluations4$inboundSchema: z.ZodType<
   explanation: z.string().optional(),
   reviewed_by_id: z.string(),
   reviewed_at: z.string().datetime({ offset: true }).default(
-    "2026-09-19T13:53:10.750Z",
+    "2026-09-20T18:42:26.305Z",
   ).transform(v => new Date(v)),
   type: z.literal("string_array"),
   values: z.array(z.string()),
@@ -2860,7 +3007,7 @@ export const UpdateDatapointEvaluations3$inboundSchema: z.ZodType<
   explanation: z.string().optional(),
   reviewed_by_id: z.string(),
   reviewed_at: z.string().datetime({ offset: true }).default(
-    "2026-09-19T13:53:10.750Z",
+    "2026-09-20T18:42:26.304Z",
   ).transform(v => new Date(v)),
   type: z.literal("boolean"),
   value: z.boolean(),
@@ -2957,7 +3104,7 @@ export const UpdateDatapointEvaluations2$inboundSchema: z.ZodType<
   explanation: z.string().optional(),
   reviewed_by_id: z.string(),
   reviewed_at: z.string().datetime({ offset: true }).default(
-    "2026-09-19T13:53:10.750Z",
+    "2026-09-20T18:42:26.304Z",
   ).transform(v => new Date(v)),
   type: z.literal("number"),
   value: z.number(),
@@ -3046,7 +3193,7 @@ export const UpdateDatapointEvaluations1$inboundSchema: z.ZodType<
   explanation: z.string().optional(),
   reviewed_by_id: z.string(),
   reviewed_at: z.string().datetime({ offset: true }).default(
-    "2026-09-19T13:53:10.750Z",
+    "2026-09-20T18:42:26.304Z",
   ).transform(v => new Date(v)),
   type: z.literal("string"),
   value: z.string(),
@@ -3131,7 +3278,7 @@ export const UpdateDatapointResponseBody$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2026-09-19T13:53:05.334Z",
+    "2026-09-20T18:42:18.531Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {

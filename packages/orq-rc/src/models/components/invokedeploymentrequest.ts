@@ -178,6 +178,20 @@ export type PrefixMessagesFunction = {
   arguments?: string | undefined;
 };
 
+export type Google = {
+  /**
+   * Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call. Takes precedence over the top-level `thought_signature` when both are set.
+   */
+  thoughtSignature?: string | undefined;
+};
+
+/**
+ * Provider-specific extra content for the tool call.
+ */
+export type ExtraContent = {
+  google?: Google | undefined;
+};
+
 export type ToolCalls = {
   /**
    * The ID of the tool call.
@@ -192,6 +206,10 @@ export type ToolCalls = {
    * Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call.
    */
   thoughtSignature?: string | undefined;
+  /**
+   * Provider-specific extra content for the tool call.
+   */
+  extraContent?: ExtraContent | undefined;
 };
 
 export type AssistantMessage = {
@@ -525,6 +543,20 @@ export type MessagesFunction = {
   arguments?: string | undefined;
 };
 
+export type MessagesGoogle = {
+  /**
+   * Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call. Takes precedence over the top-level `thought_signature` when both are set.
+   */
+  thoughtSignature?: string | undefined;
+};
+
+/**
+ * Provider-specific extra content for the tool call.
+ */
+export type MessagesExtraContent = {
+  google?: MessagesGoogle | undefined;
+};
+
 export type MessagesToolCalls = {
   /**
    * The ID of the tool call.
@@ -539,6 +571,10 @@ export type MessagesToolCalls = {
    * Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call.
    */
   thoughtSignature?: string | undefined;
+  /**
+   * Provider-specific extra content for the tool call.
+   */
+  extraContent?: MessagesExtraContent | undefined;
 };
 
 export type MessagesAssistantMessage = {
@@ -1379,11 +1415,52 @@ export function prefixMessagesFunctionToJSON(
 }
 
 /** @internal */
+export type Google$Outbound = {
+  thought_signature?: string | undefined;
+};
+
+/** @internal */
+export const Google$outboundSchema: z.ZodType<
+  Google$Outbound,
+  z.ZodTypeDef,
+  Google
+> = z.object({
+  thoughtSignature: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    thoughtSignature: "thought_signature",
+  });
+});
+
+export function googleToJSON(google: Google): string {
+  return JSON.stringify(Google$outboundSchema.parse(google));
+}
+
+/** @internal */
+export type ExtraContent$Outbound = {
+  google?: Google$Outbound | undefined;
+};
+
+/** @internal */
+export const ExtraContent$outboundSchema: z.ZodType<
+  ExtraContent$Outbound,
+  z.ZodTypeDef,
+  ExtraContent
+> = z.object({
+  google: z.lazy(() => Google$outboundSchema).optional(),
+});
+
+export function extraContentToJSON(extraContent: ExtraContent): string {
+  return JSON.stringify(ExtraContent$outboundSchema.parse(extraContent));
+}
+
+/** @internal */
 export type ToolCalls$Outbound = {
   id: string;
   type: string;
   function: PrefixMessagesFunction$Outbound;
   thought_signature?: string | undefined;
+  extra_content?: ExtraContent$Outbound | undefined;
 };
 
 /** @internal */
@@ -1396,9 +1473,11 @@ export const ToolCalls$outboundSchema: z.ZodType<
   type: PrefixMessagesType$outboundSchema,
   function: z.lazy(() => PrefixMessagesFunction$outboundSchema),
   thoughtSignature: z.string().optional(),
+  extraContent: z.lazy(() => ExtraContent$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     thoughtSignature: "thought_signature",
+    extraContent: "extra_content",
   });
 });
 
@@ -1982,11 +2061,56 @@ export function messagesFunctionToJSON(
 }
 
 /** @internal */
+export type MessagesGoogle$Outbound = {
+  thought_signature?: string | undefined;
+};
+
+/** @internal */
+export const MessagesGoogle$outboundSchema: z.ZodType<
+  MessagesGoogle$Outbound,
+  z.ZodTypeDef,
+  MessagesGoogle
+> = z.object({
+  thoughtSignature: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    thoughtSignature: "thought_signature",
+  });
+});
+
+export function messagesGoogleToJSON(messagesGoogle: MessagesGoogle): string {
+  return JSON.stringify(MessagesGoogle$outboundSchema.parse(messagesGoogle));
+}
+
+/** @internal */
+export type MessagesExtraContent$Outbound = {
+  google?: MessagesGoogle$Outbound | undefined;
+};
+
+/** @internal */
+export const MessagesExtraContent$outboundSchema: z.ZodType<
+  MessagesExtraContent$Outbound,
+  z.ZodTypeDef,
+  MessagesExtraContent
+> = z.object({
+  google: z.lazy(() => MessagesGoogle$outboundSchema).optional(),
+});
+
+export function messagesExtraContentToJSON(
+  messagesExtraContent: MessagesExtraContent,
+): string {
+  return JSON.stringify(
+    MessagesExtraContent$outboundSchema.parse(messagesExtraContent),
+  );
+}
+
+/** @internal */
 export type MessagesToolCalls$Outbound = {
   id: string;
   type: string;
   function: MessagesFunction$Outbound;
   thought_signature?: string | undefined;
+  extra_content?: MessagesExtraContent$Outbound | undefined;
 };
 
 /** @internal */
@@ -1999,9 +2123,11 @@ export const MessagesToolCalls$outboundSchema: z.ZodType<
   type: MessagesType$outboundSchema,
   function: z.lazy(() => MessagesFunction$outboundSchema),
   thoughtSignature: z.string().optional(),
+  extraContent: z.lazy(() => MessagesExtraContent$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     thoughtSignature: "thought_signature",
+    extraContent: "extra_content",
   });
 });
 

@@ -173,6 +173,20 @@ export type ListDatasetDatapointsMessagesFunction = {
   arguments?: string | undefined;
 };
 
+export type ListDatasetDatapointsMessagesGoogle = {
+  /**
+   * Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call. Takes precedence over the top-level `thought_signature` when both are set.
+   */
+  thoughtSignature?: string | undefined;
+};
+
+/**
+ * Provider-specific extra content for the tool call.
+ */
+export type ListDatasetDatapointsMessagesExtraContent = {
+  google?: ListDatasetDatapointsMessagesGoogle | undefined;
+};
+
 export type ListDatasetDatapointsMessagesToolCalls = {
   /**
    * The ID of the tool call.
@@ -187,6 +201,10 @@ export type ListDatasetDatapointsMessagesToolCalls = {
    * Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call.
    */
   thoughtSignature?: string | undefined;
+  /**
+   * Provider-specific extra content for the tool call.
+   */
+  extraContent?: ListDatasetDatapointsMessagesExtraContent | undefined;
 };
 
 export type ListDatasetDatapointsMessagesAssistantMessage = {
@@ -1211,6 +1229,56 @@ export function listDatasetDatapointsMessagesFunctionFromJSON(
 }
 
 /** @internal */
+export const ListDatasetDatapointsMessagesGoogle$inboundSchema: z.ZodType<
+  ListDatasetDatapointsMessagesGoogle,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  thought_signature: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "thought_signature": "thoughtSignature",
+  });
+});
+
+export function listDatasetDatapointsMessagesGoogleFromJSON(
+  jsonString: string,
+): SafeParseResult<ListDatasetDatapointsMessagesGoogle, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      ListDatasetDatapointsMessagesGoogle$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListDatasetDatapointsMessagesGoogle' from JSON`,
+  );
+}
+
+/** @internal */
+export const ListDatasetDatapointsMessagesExtraContent$inboundSchema: z.ZodType<
+  ListDatasetDatapointsMessagesExtraContent,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  google: z.lazy(() => ListDatasetDatapointsMessagesGoogle$inboundSchema)
+    .optional(),
+});
+
+export function listDatasetDatapointsMessagesExtraContentFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  ListDatasetDatapointsMessagesExtraContent,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      ListDatasetDatapointsMessagesExtraContent$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'ListDatasetDatapointsMessagesExtraContent' from JSON`,
+  );
+}
+
+/** @internal */
 export const ListDatasetDatapointsMessagesToolCalls$inboundSchema: z.ZodType<
   ListDatasetDatapointsMessagesToolCalls,
   z.ZodTypeDef,
@@ -1220,9 +1288,13 @@ export const ListDatasetDatapointsMessagesToolCalls$inboundSchema: z.ZodType<
   type: ListDatasetDatapointsMessagesType$inboundSchema,
   function: z.lazy(() => ListDatasetDatapointsMessagesFunction$inboundSchema),
   thought_signature: z.string().optional(),
+  extra_content: z.lazy(() =>
+    ListDatasetDatapointsMessagesExtraContent$inboundSchema
+  ).optional(),
 }).transform((v) => {
   return remap$(v, {
     "thought_signature": "thoughtSignature",
+    "extra_content": "extraContent",
   });
 });
 
@@ -1653,7 +1725,7 @@ export const ListDatasetDatapointsEvaluations4$inboundSchema: z.ZodType<
   explanation: z.string().optional(),
   reviewed_by_id: z.string(),
   reviewed_at: z.string().datetime({ offset: true }).default(
-    "2026-09-19T13:53:10.740Z",
+    "2026-09-20T18:42:26.281Z",
   ).transform(v => new Date(v)),
   type: z.literal("string_array"),
   values: z.array(z.string()),
@@ -1749,7 +1821,7 @@ export const ListDatasetDatapointsEvaluations3$inboundSchema: z.ZodType<
   explanation: z.string().optional(),
   reviewed_by_id: z.string(),
   reviewed_at: z.string().datetime({ offset: true }).default(
-    "2026-09-19T13:53:10.740Z",
+    "2026-09-20T18:42:26.281Z",
   ).transform(v => new Date(v)),
   type: z.literal("boolean"),
   value: z.boolean(),
@@ -1853,7 +1925,7 @@ export const ListDatasetDatapointsEvaluations2$inboundSchema: z.ZodType<
   explanation: z.string().optional(),
   reviewed_by_id: z.string(),
   reviewed_at: z.string().datetime({ offset: true }).default(
-    "2026-09-19T13:53:10.739Z",
+    "2026-09-20T18:42:26.281Z",
   ).transform(v => new Date(v)),
   type: z.literal("number"),
   value: z.number(),
@@ -1959,7 +2031,7 @@ export const ListDatasetDatapointsEvaluations1$inboundSchema: z.ZodType<
   explanation: z.string().optional(),
   reviewed_by_id: z.string(),
   reviewed_at: z.string().datetime({ offset: true }).default(
-    "2026-09-19T13:53:10.739Z",
+    "2026-09-20T18:42:26.280Z",
   ).transform(v => new Date(v)),
   type: z.literal("string"),
   value: z.string(),
@@ -2042,7 +2114,7 @@ export const ListDatasetDatapointsData$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2026-09-19T13:53:05.334Z",
+    "2026-09-20T18:42:18.531Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {

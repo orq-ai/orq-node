@@ -158,6 +158,20 @@ export type RetrieveDatapointMessagesFunction = {
   arguments?: string | undefined;
 };
 
+export type RetrieveDatapointMessagesGoogle = {
+  /**
+   * Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call. Takes precedence over the top-level `thought_signature` when both are set.
+   */
+  thoughtSignature?: string | undefined;
+};
+
+/**
+ * Provider-specific extra content for the tool call.
+ */
+export type RetrieveDatapointMessagesExtraContent = {
+  google?: RetrieveDatapointMessagesGoogle | undefined;
+};
+
 export type RetrieveDatapointMessagesToolCalls = {
   /**
    * The ID of the tool call.
@@ -172,6 +186,10 @@ export type RetrieveDatapointMessagesToolCalls = {
    * Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call.
    */
   thoughtSignature?: string | undefined;
+  /**
+   * Provider-specific extra content for the tool call.
+   */
+  extraContent?: RetrieveDatapointMessagesExtraContent | undefined;
 };
 
 export type RetrieveDatapointMessagesAssistantMessage = {
@@ -1155,6 +1173,50 @@ export function retrieveDatapointMessagesFunctionFromJSON(
 }
 
 /** @internal */
+export const RetrieveDatapointMessagesGoogle$inboundSchema: z.ZodType<
+  RetrieveDatapointMessagesGoogle,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  thought_signature: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "thought_signature": "thoughtSignature",
+  });
+});
+
+export function retrieveDatapointMessagesGoogleFromJSON(
+  jsonString: string,
+): SafeParseResult<RetrieveDatapointMessagesGoogle, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => RetrieveDatapointMessagesGoogle$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RetrieveDatapointMessagesGoogle' from JSON`,
+  );
+}
+
+/** @internal */
+export const RetrieveDatapointMessagesExtraContent$inboundSchema: z.ZodType<
+  RetrieveDatapointMessagesExtraContent,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  google: z.lazy(() => RetrieveDatapointMessagesGoogle$inboundSchema)
+    .optional(),
+});
+
+export function retrieveDatapointMessagesExtraContentFromJSON(
+  jsonString: string,
+): SafeParseResult<RetrieveDatapointMessagesExtraContent, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      RetrieveDatapointMessagesExtraContent$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RetrieveDatapointMessagesExtraContent' from JSON`,
+  );
+}
+
+/** @internal */
 export const RetrieveDatapointMessagesToolCalls$inboundSchema: z.ZodType<
   RetrieveDatapointMessagesToolCalls,
   z.ZodTypeDef,
@@ -1164,9 +1226,13 @@ export const RetrieveDatapointMessagesToolCalls$inboundSchema: z.ZodType<
   type: RetrieveDatapointMessagesType$inboundSchema,
   function: z.lazy(() => RetrieveDatapointMessagesFunction$inboundSchema),
   thought_signature: z.string().optional(),
+  extra_content: z.lazy(() =>
+    RetrieveDatapointMessagesExtraContent$inboundSchema
+  ).optional(),
 }).transform((v) => {
   return remap$(v, {
     "thought_signature": "thoughtSignature",
+    "extra_content": "extraContent",
   });
 });
 
@@ -1585,7 +1651,7 @@ export const RetrieveDatapointEvaluations4$inboundSchema: z.ZodType<
   explanation: z.string().optional(),
   reviewed_by_id: z.string(),
   reviewed_at: z.string().datetime({ offset: true }).default(
-    "2026-09-19T13:53:10.742Z",
+    "2026-09-20T18:42:26.289Z",
   ).transform(v => new Date(v)),
   type: z.literal("string_array"),
   values: z.array(z.string()),
@@ -1685,7 +1751,7 @@ export const Evaluations3$inboundSchema: z.ZodType<
   explanation: z.string().optional(),
   reviewed_by_id: z.string(),
   reviewed_at: z.string().datetime({ offset: true }).default(
-    "2026-09-19T13:53:10.742Z",
+    "2026-09-20T18:42:26.288Z",
   ).transform(v => new Date(v)),
   type: z.literal("boolean"),
   value: z.boolean(),
@@ -1783,7 +1849,7 @@ export const RetrieveDatapointEvaluations2$inboundSchema: z.ZodType<
   explanation: z.string().optional(),
   reviewed_by_id: z.string(),
   reviewed_at: z.string().datetime({ offset: true }).default(
-    "2026-09-19T13:53:10.741Z",
+    "2026-09-20T18:42:26.288Z",
   ).transform(v => new Date(v)),
   type: z.literal("number"),
   value: z.number(),
@@ -1871,7 +1937,7 @@ export const RetrieveDatapointEvaluations1$inboundSchema: z.ZodType<
   explanation: z.string().optional(),
   reviewed_by_id: z.string(),
   reviewed_at: z.string().datetime({ offset: true }).default(
-    "2026-09-19T13:53:10.741Z",
+    "2026-09-20T18:42:26.288Z",
   ).transform(v => new Date(v)),
   type: z.literal("string"),
   value: z.string(),
@@ -1952,7 +2018,7 @@ export const RetrieveDatapointResponseBody$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2026-09-19T13:53:05.334Z",
+    "2026-09-20T18:42:18.531Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {

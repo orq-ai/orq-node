@@ -148,6 +148,20 @@ export type CreateChatCompletionMessagesFunction = {
   arguments?: string | undefined;
 };
 
+export type CreateChatCompletionMessagesGoogle = {
+  /**
+   * Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call. Takes precedence over the top-level `thought_signature` when both are set.
+   */
+  thoughtSignature?: string | undefined;
+};
+
+/**
+ * Provider-specific extra content for the tool call.
+ */
+export type CreateChatCompletionMessagesExtraContent = {
+  google?: CreateChatCompletionMessagesGoogle | undefined;
+};
+
 export type CreateChatCompletionMessagesToolCalls = {
   /**
    * The ID of the tool call.
@@ -162,6 +176,10 @@ export type CreateChatCompletionMessagesToolCalls = {
    * Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call.
    */
   thoughtSignature?: string | undefined;
+  /**
+   * Provider-specific extra content for the tool call.
+   */
+  extraContent?: CreateChatCompletionMessagesExtraContent | undefined;
 };
 
 export type CreateChatCompletionMessagesAssistantMessage = {
@@ -1748,6 +1766,20 @@ export type CreateChatCompletionRouterChatCompletionsResponseFunction = {
   arguments?: string | undefined;
 };
 
+export type CreateChatCompletionRouterChatCompletionsGoogle = {
+  /**
+   * Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models.
+   */
+  thoughtSignature?: string | undefined;
+};
+
+/**
+ * Provider-specific extra content for the tool call.
+ */
+export type CreateChatCompletionRouterChatCompletionsExtraContent = {
+  google?: CreateChatCompletionRouterChatCompletionsGoogle | undefined;
+};
+
 export type CreateChatCompletionRouterChatCompletionsToolCalls = {
   /**
    * The index of the tool call.
@@ -1768,6 +1800,12 @@ export type CreateChatCompletionRouterChatCompletionsToolCalls = {
    * Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models.
    */
   thoughtSignature?: string | undefined;
+  /**
+   * Provider-specific extra content for the tool call.
+   */
+  extraContent?:
+    | CreateChatCompletionRouterChatCompletionsExtraContent
+    | undefined;
 };
 
 export const CreateChatCompletionRouterChatCompletionsRole = {
@@ -1966,6 +2004,20 @@ export type CreateChatCompletionRouterChatCompletionsFunction = {
   arguments?: string | undefined;
 };
 
+export type CreateChatCompletionGoogle = {
+  /**
+   * Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call.
+   */
+  thoughtSignature?: string | undefined;
+};
+
+/**
+ * Provider-specific extra content for the tool call.
+ */
+export type CreateChatCompletionExtraContent = {
+  google?: CreateChatCompletionGoogle | undefined;
+};
+
 export type CreateChatCompletionToolCalls = {
   index?: number | undefined;
   id?: string | undefined;
@@ -1975,6 +2027,10 @@ export type CreateChatCompletionToolCalls = {
    * Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call.
    */
   thoughtSignature?: string | undefined;
+  /**
+   * Provider-specific extra content for the tool call.
+   */
+  extraContent?: CreateChatCompletionExtraContent | undefined;
 };
 
 export const CreateChatCompletionRole = {
@@ -2468,11 +2524,66 @@ export function createChatCompletionMessagesFunctionToJSON(
 }
 
 /** @internal */
+export type CreateChatCompletionMessagesGoogle$Outbound = {
+  thought_signature?: string | undefined;
+};
+
+/** @internal */
+export const CreateChatCompletionMessagesGoogle$outboundSchema: z.ZodType<
+  CreateChatCompletionMessagesGoogle$Outbound,
+  z.ZodTypeDef,
+  CreateChatCompletionMessagesGoogle
+> = z.object({
+  thoughtSignature: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    thoughtSignature: "thought_signature",
+  });
+});
+
+export function createChatCompletionMessagesGoogleToJSON(
+  createChatCompletionMessagesGoogle: CreateChatCompletionMessagesGoogle,
+): string {
+  return JSON.stringify(
+    CreateChatCompletionMessagesGoogle$outboundSchema.parse(
+      createChatCompletionMessagesGoogle,
+    ),
+  );
+}
+
+/** @internal */
+export type CreateChatCompletionMessagesExtraContent$Outbound = {
+  google?: CreateChatCompletionMessagesGoogle$Outbound | undefined;
+};
+
+/** @internal */
+export const CreateChatCompletionMessagesExtraContent$outboundSchema: z.ZodType<
+  CreateChatCompletionMessagesExtraContent$Outbound,
+  z.ZodTypeDef,
+  CreateChatCompletionMessagesExtraContent
+> = z.object({
+  google: z.lazy(() => CreateChatCompletionMessagesGoogle$outboundSchema)
+    .optional(),
+});
+
+export function createChatCompletionMessagesExtraContentToJSON(
+  createChatCompletionMessagesExtraContent:
+    CreateChatCompletionMessagesExtraContent,
+): string {
+  return JSON.stringify(
+    CreateChatCompletionMessagesExtraContent$outboundSchema.parse(
+      createChatCompletionMessagesExtraContent,
+    ),
+  );
+}
+
+/** @internal */
 export type CreateChatCompletionMessagesToolCalls$Outbound = {
   id: string;
   type: string;
   function: CreateChatCompletionMessagesFunction$Outbound;
   thought_signature?: string | undefined;
+  extra_content?: CreateChatCompletionMessagesExtraContent$Outbound | undefined;
 };
 
 /** @internal */
@@ -2485,9 +2596,13 @@ export const CreateChatCompletionMessagesToolCalls$outboundSchema: z.ZodType<
   type: CreateChatCompletionMessagesType$outboundSchema,
   function: z.lazy(() => CreateChatCompletionMessagesFunction$outboundSchema),
   thoughtSignature: z.string().optional(),
+  extraContent: z.lazy(() =>
+    CreateChatCompletionMessagesExtraContent$outboundSchema
+  ).optional(),
 }).transform((v) => {
   return remap$(v, {
     thoughtSignature: "thought_signature",
+    extraContent: "extra_content",
   });
 });
 
@@ -5623,6 +5738,64 @@ export function createChatCompletionRouterChatCompletionsResponseFunctionFromJSO
 }
 
 /** @internal */
+export const CreateChatCompletionRouterChatCompletionsGoogle$inboundSchema:
+  z.ZodType<
+    CreateChatCompletionRouterChatCompletionsGoogle,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    thought_signature: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "thought_signature": "thoughtSignature",
+    });
+  });
+
+export function createChatCompletionRouterChatCompletionsGoogleFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  CreateChatCompletionRouterChatCompletionsGoogle,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      CreateChatCompletionRouterChatCompletionsGoogle$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'CreateChatCompletionRouterChatCompletionsGoogle' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreateChatCompletionRouterChatCompletionsExtraContent$inboundSchema:
+  z.ZodType<
+    CreateChatCompletionRouterChatCompletionsExtraContent,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    google: z.lazy(() =>
+      CreateChatCompletionRouterChatCompletionsGoogle$inboundSchema
+    ).optional(),
+  });
+
+export function createChatCompletionRouterChatCompletionsExtraContentFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  CreateChatCompletionRouterChatCompletionsExtraContent,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      CreateChatCompletionRouterChatCompletionsExtraContent$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'CreateChatCompletionRouterChatCompletionsExtraContent' from JSON`,
+  );
+}
+
+/** @internal */
 export const CreateChatCompletionRouterChatCompletionsToolCalls$inboundSchema:
   z.ZodType<
     CreateChatCompletionRouterChatCompletionsToolCalls,
@@ -5637,9 +5810,13 @@ export const CreateChatCompletionRouterChatCompletionsToolCalls$inboundSchema:
       CreateChatCompletionRouterChatCompletionsResponseFunction$inboundSchema
     ).optional(),
     thought_signature: z.string().optional(),
+    extra_content: z.lazy(() =>
+      CreateChatCompletionRouterChatCompletionsExtraContent$inboundSchema
+    ).optional(),
   }).transform((v) => {
     return remap$(v, {
       "thought_signature": "thoughtSignature",
+      "extra_content": "extraContent",
     });
   });
 
@@ -5996,6 +6173,48 @@ export function createChatCompletionRouterChatCompletionsFunctionFromJSON(
 }
 
 /** @internal */
+export const CreateChatCompletionGoogle$inboundSchema: z.ZodType<
+  CreateChatCompletionGoogle,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  thought_signature: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "thought_signature": "thoughtSignature",
+  });
+});
+
+export function createChatCompletionGoogleFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateChatCompletionGoogle, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreateChatCompletionGoogle$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateChatCompletionGoogle' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreateChatCompletionExtraContent$inboundSchema: z.ZodType<
+  CreateChatCompletionExtraContent,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  google: z.lazy(() => CreateChatCompletionGoogle$inboundSchema).optional(),
+});
+
+export function createChatCompletionExtraContentFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateChatCompletionExtraContent, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreateChatCompletionExtraContent$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateChatCompletionExtraContent' from JSON`,
+  );
+}
+
+/** @internal */
 export const CreateChatCompletionToolCalls$inboundSchema: z.ZodType<
   CreateChatCompletionToolCalls,
   z.ZodTypeDef,
@@ -6009,9 +6228,12 @@ export const CreateChatCompletionToolCalls$inboundSchema: z.ZodType<
     CreateChatCompletionRouterChatCompletionsFunction$inboundSchema
   ).optional(),
   thought_signature: z.string().optional(),
+  extra_content: z.lazy(() => CreateChatCompletionExtraContent$inboundSchema)
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     "thought_signature": "thoughtSignature",
+    "extra_content": "extraContent",
   });
 });
 

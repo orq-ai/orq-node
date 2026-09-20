@@ -8,7 +8,7 @@
 
 ## create
 
-**Beta.** Runs typed classification questions (`noul`, `choice`, `score`) against a classify model such as `typesafe/jev-latest`. The request and response proxy the TypeSafe classification contract 1:1; `model` in the response is the orq model id that served the request and `usage` carries the computed cost like the Responses API. This endpoint currently does not apply PII plugins or guardrails.
+**Beta.** Runs typed classification questions (`noul`, `choice`, `score`) against the native classify model `typesafe/jev-latest` or a chat model that supports classify, such as `anthropic/claude-haiku-4-5`, `google-ai/gemini-3.8-flash` or `zai/glm-5.3-flash`. Chat models answer through one structured-output call and their probabilities are model-reported rather than calibrated. The request and response follow the TypeSafe classification contract; `model` in the response echoes the request and `usage` carries the computed cost like the Responses API. This endpoint currently does not apply PII plugins or guardrails.
 
 ### Example Usage
 

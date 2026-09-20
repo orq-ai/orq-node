@@ -93,7 +93,7 @@ export type CreateClassifyRequestBody = {
    */
   metadata?: { [k: string]: string } | undefined;
   /**
-   * ID of the classify model to use, for example typesafe/jev-latest.
+   * ID of the model to use: the native classify model typesafe/jev-latest, or a chat model that supports classify such as anthropic/claude-haiku-4-5, google-ai/gemini-3.8-flash or zai/glm-5.3-flash.
    */
   model: string;
   /**
@@ -120,9 +120,10 @@ export type CreateClassifyResponseBody = {
    */
   answers: { [k: string]: components.ClassifyAnswer };
   /**
-   * The model that served the request, for example typesafe/jev-latest.
+   * The model ID from the request, for example typesafe/jev-latest or google/gemini-3.8-flash.
    */
   model: string;
+  telemetry?: components.ResponseTelemetry | undefined;
   usage: components.ClassifyUsage;
 };
 
@@ -357,6 +358,7 @@ export const CreateClassifyResponseBody$inboundSchema: z.ZodType<
 > = z.object({
   answers: z.record(components.ClassifyAnswer$inboundSchema),
   model: z.string(),
+  telemetry: components.ResponseTelemetry$inboundSchema.optional(),
   usage: components.ClassifyUsage$inboundSchema,
 });
 

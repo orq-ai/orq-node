@@ -149,6 +149,20 @@ export type CreateDatasetItemMessagesFunction = {
   arguments?: string | undefined;
 };
 
+export type CreateDatasetItemMessagesGoogle = {
+  /**
+   * Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call. Takes precedence over the top-level `thought_signature` when both are set.
+   */
+  thoughtSignature?: string | undefined;
+};
+
+/**
+ * Provider-specific extra content for the tool call.
+ */
+export type CreateDatasetItemMessagesExtraContent = {
+  google?: CreateDatasetItemMessagesGoogle | undefined;
+};
+
 export type CreateDatasetItemMessagesToolCalls = {
   /**
    * The ID of the tool call.
@@ -163,6 +177,10 @@ export type CreateDatasetItemMessagesToolCalls = {
    * Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call.
    */
   thoughtSignature?: string | undefined;
+  /**
+   * Provider-specific extra content for the tool call.
+   */
+  extraContent?: CreateDatasetItemMessagesExtraContent | undefined;
 };
 
 export type CreateDatasetItemMessagesAssistantMessage = {
@@ -533,6 +551,20 @@ export type CreateDatasetItemMessagesDatasetsFunction = {
   arguments?: string | undefined;
 };
 
+export type CreateDatasetItemMessagesDatasetsGoogle = {
+  /**
+   * Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call. Takes precedence over the top-level `thought_signature` when both are set.
+   */
+  thoughtSignature?: string | undefined;
+};
+
+/**
+ * Provider-specific extra content for the tool call.
+ */
+export type CreateDatasetItemMessagesDatasetsExtraContent = {
+  google?: CreateDatasetItemMessagesDatasetsGoogle | undefined;
+};
+
 export type CreateDatasetItemMessagesDatasetsToolCalls = {
   /**
    * The ID of the tool call.
@@ -547,6 +579,10 @@ export type CreateDatasetItemMessagesDatasetsToolCalls = {
    * Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call.
    */
   thoughtSignature?: string | undefined;
+  /**
+   * Provider-specific extra content for the tool call.
+   */
+  extraContent?: CreateDatasetItemMessagesDatasetsExtraContent | undefined;
 };
 
 export type CreateDatasetItemMessagesDatasetsAssistantMessage = {
@@ -1531,11 +1567,65 @@ export function createDatasetItemMessagesFunctionToJSON(
 }
 
 /** @internal */
+export type CreateDatasetItemMessagesGoogle$Outbound = {
+  thought_signature?: string | undefined;
+};
+
+/** @internal */
+export const CreateDatasetItemMessagesGoogle$outboundSchema: z.ZodType<
+  CreateDatasetItemMessagesGoogle$Outbound,
+  z.ZodTypeDef,
+  CreateDatasetItemMessagesGoogle
+> = z.object({
+  thoughtSignature: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    thoughtSignature: "thought_signature",
+  });
+});
+
+export function createDatasetItemMessagesGoogleToJSON(
+  createDatasetItemMessagesGoogle: CreateDatasetItemMessagesGoogle,
+): string {
+  return JSON.stringify(
+    CreateDatasetItemMessagesGoogle$outboundSchema.parse(
+      createDatasetItemMessagesGoogle,
+    ),
+  );
+}
+
+/** @internal */
+export type CreateDatasetItemMessagesExtraContent$Outbound = {
+  google?: CreateDatasetItemMessagesGoogle$Outbound | undefined;
+};
+
+/** @internal */
+export const CreateDatasetItemMessagesExtraContent$outboundSchema: z.ZodType<
+  CreateDatasetItemMessagesExtraContent$Outbound,
+  z.ZodTypeDef,
+  CreateDatasetItemMessagesExtraContent
+> = z.object({
+  google: z.lazy(() => CreateDatasetItemMessagesGoogle$outboundSchema)
+    .optional(),
+});
+
+export function createDatasetItemMessagesExtraContentToJSON(
+  createDatasetItemMessagesExtraContent: CreateDatasetItemMessagesExtraContent,
+): string {
+  return JSON.stringify(
+    CreateDatasetItemMessagesExtraContent$outboundSchema.parse(
+      createDatasetItemMessagesExtraContent,
+    ),
+  );
+}
+
+/** @internal */
 export type CreateDatasetItemMessagesToolCalls$Outbound = {
   id: string;
   type: string;
   function: CreateDatasetItemMessagesFunction$Outbound;
   thought_signature?: string | undefined;
+  extra_content?: CreateDatasetItemMessagesExtraContent$Outbound | undefined;
 };
 
 /** @internal */
@@ -1548,9 +1638,13 @@ export const CreateDatasetItemMessagesToolCalls$outboundSchema: z.ZodType<
   type: CreateDatasetItemMessagesType$outboundSchema,
   function: z.lazy(() => CreateDatasetItemMessagesFunction$outboundSchema),
   thoughtSignature: z.string().optional(),
+  extraContent: z.lazy(() =>
+    CreateDatasetItemMessagesExtraContent$outboundSchema
+  ).optional(),
 }).transform((v) => {
   return remap$(v, {
     thoughtSignature: "thought_signature",
+    extraContent: "extra_content",
   });
 });
 
@@ -2279,6 +2373,62 @@ export function createDatasetItemMessagesDatasetsFunctionFromJSON(
 }
 
 /** @internal */
+export const CreateDatasetItemMessagesDatasetsGoogle$inboundSchema: z.ZodType<
+  CreateDatasetItemMessagesDatasetsGoogle,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  thought_signature: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "thought_signature": "thoughtSignature",
+  });
+});
+
+export function createDatasetItemMessagesDatasetsGoogleFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  CreateDatasetItemMessagesDatasetsGoogle,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      CreateDatasetItemMessagesDatasetsGoogle$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'CreateDatasetItemMessagesDatasetsGoogle' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreateDatasetItemMessagesDatasetsExtraContent$inboundSchema:
+  z.ZodType<
+    CreateDatasetItemMessagesDatasetsExtraContent,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    google: z.lazy(() => CreateDatasetItemMessagesDatasetsGoogle$inboundSchema)
+      .optional(),
+  });
+
+export function createDatasetItemMessagesDatasetsExtraContentFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  CreateDatasetItemMessagesDatasetsExtraContent,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      CreateDatasetItemMessagesDatasetsExtraContent$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'CreateDatasetItemMessagesDatasetsExtraContent' from JSON`,
+  );
+}
+
+/** @internal */
 export const CreateDatasetItemMessagesDatasetsToolCalls$inboundSchema:
   z.ZodType<CreateDatasetItemMessagesDatasetsToolCalls, z.ZodTypeDef, unknown> =
     z.object({
@@ -2288,9 +2438,13 @@ export const CreateDatasetItemMessagesDatasetsToolCalls$inboundSchema:
         CreateDatasetItemMessagesDatasetsFunction$inboundSchema
       ),
       thought_signature: z.string().optional(),
+      extra_content: z.lazy(() =>
+        CreateDatasetItemMessagesDatasetsExtraContent$inboundSchema
+      ).optional(),
     }).transform((v) => {
       return remap$(v, {
         "thought_signature": "thoughtSignature",
+        "extra_content": "extraContent",
       });
     });
 
@@ -2739,7 +2893,7 @@ export const Evaluations4$inboundSchema: z.ZodType<
   explanation: z.string().optional(),
   reviewed_by_id: z.string(),
   reviewed_at: z.string().datetime({ offset: true }).default(
-    "2026-09-19T13:53:10.743Z",
+    "2026-09-20T18:42:26.293Z",
   ).transform(v => new Date(v)),
   type: z.literal("string_array"),
   values: z.array(z.string()),
@@ -2829,7 +2983,7 @@ export const CreateDatasetItemEvaluations3$inboundSchema: z.ZodType<
   explanation: z.string().optional(),
   reviewed_by_id: z.string(),
   reviewed_at: z.string().datetime({ offset: true }).default(
-    "2026-09-19T13:53:10.743Z",
+    "2026-09-20T18:42:26.293Z",
   ).transform(v => new Date(v)),
   type: z.literal("boolean"),
   value: z.boolean(),
@@ -2914,7 +3068,7 @@ export const Evaluations2$inboundSchema: z.ZodType<
   explanation: z.string().optional(),
   reviewed_by_id: z.string(),
   reviewed_at: z.string().datetime({ offset: true }).default(
-    "2026-09-19T13:53:10.743Z",
+    "2026-09-20T18:42:26.292Z",
   ).transform(v => new Date(v)),
   type: z.literal("number"),
   value: z.number(),
@@ -3000,7 +3154,7 @@ export const Evaluations1$inboundSchema: z.ZodType<
   explanation: z.string().optional(),
   reviewed_by_id: z.string(),
   reviewed_at: z.string().datetime({ offset: true }).default(
-    "2026-09-19T13:53:10.743Z",
+    "2026-09-20T18:42:26.292Z",
   ).transform(v => new Date(v)),
   type: z.literal("string"),
   value: z.string(),
@@ -3087,7 +3241,7 @@ export const ResponseBody$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2026-09-19T13:53:05.334Z",
+    "2026-09-20T18:42:18.531Z",
   ).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {

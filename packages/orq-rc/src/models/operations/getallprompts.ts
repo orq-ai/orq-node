@@ -1134,6 +1134,20 @@ export type GetAllPromptsMessagesFunction = {
   arguments?: string | undefined;
 };
 
+export type GetAllPromptsMessagesGoogle = {
+  /**
+   * Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call. Takes precedence over the top-level `thought_signature` when both are set.
+   */
+  thoughtSignature?: string | undefined;
+};
+
+/**
+ * Provider-specific extra content for the tool call.
+ */
+export type GetAllPromptsMessagesExtraContent = {
+  google?: GetAllPromptsMessagesGoogle | undefined;
+};
+
 export type GetAllPromptsMessagesToolCalls = {
   /**
    * The ID of the tool call.
@@ -1148,6 +1162,10 @@ export type GetAllPromptsMessagesToolCalls = {
    * Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call.
    */
   thoughtSignature?: string | undefined;
+  /**
+   * Provider-specific extra content for the tool call.
+   */
+  extraContent?: GetAllPromptsMessagesExtraContent | undefined;
 };
 
 export type GetAllPromptsMessagesAssistantMessage = {
@@ -2956,6 +2974,48 @@ export function getAllPromptsMessagesFunctionFromJSON(
 }
 
 /** @internal */
+export const GetAllPromptsMessagesGoogle$inboundSchema: z.ZodType<
+  GetAllPromptsMessagesGoogle,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  thought_signature: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "thought_signature": "thoughtSignature",
+  });
+});
+
+export function getAllPromptsMessagesGoogleFromJSON(
+  jsonString: string,
+): SafeParseResult<GetAllPromptsMessagesGoogle, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetAllPromptsMessagesGoogle$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetAllPromptsMessagesGoogle' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetAllPromptsMessagesExtraContent$inboundSchema: z.ZodType<
+  GetAllPromptsMessagesExtraContent,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  google: z.lazy(() => GetAllPromptsMessagesGoogle$inboundSchema).optional(),
+});
+
+export function getAllPromptsMessagesExtraContentFromJSON(
+  jsonString: string,
+): SafeParseResult<GetAllPromptsMessagesExtraContent, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetAllPromptsMessagesExtraContent$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetAllPromptsMessagesExtraContent' from JSON`,
+  );
+}
+
+/** @internal */
 export const GetAllPromptsMessagesToolCalls$inboundSchema: z.ZodType<
   GetAllPromptsMessagesToolCalls,
   z.ZodTypeDef,
@@ -2965,9 +3025,12 @@ export const GetAllPromptsMessagesToolCalls$inboundSchema: z.ZodType<
   type: GetAllPromptsMessagesType$inboundSchema,
   function: z.lazy(() => GetAllPromptsMessagesFunction$inboundSchema),
   thought_signature: z.string().optional(),
+  extra_content: z.lazy(() => GetAllPromptsMessagesExtraContent$inboundSchema)
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     "thought_signature": "thoughtSignature",
+    "extra_content": "extraContent",
   });
 });
 

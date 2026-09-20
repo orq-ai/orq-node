@@ -15,7 +15,7 @@ export type CreateManagementKeyRequest = {
    * Human-readable name. Required.
    */
   name: string;
-  permissionMode?: ManagementPermissionMode | undefined;
+  permissionMode: ManagementPermissionMode;
   /**
    * Per-domain access map. Required when `permission_mode` =
    *
@@ -39,7 +39,7 @@ export type CreateManagementKeyRequest = {
 /** @internal */
 export type CreateManagementKeyRequest$Outbound = {
   name: string;
-  permission_mode?: string | undefined;
+  permission_mode: string;
   access?: { [k: string]: string } | undefined;
   expires_at?: string | undefined;
 };
@@ -51,7 +51,7 @@ export const CreateManagementKeyRequest$outboundSchema: z.ZodType<
   CreateManagementKeyRequest
 > = z.object({
   name: z.string(),
-  permissionMode: ManagementPermissionMode$outboundSchema.optional(),
+  permissionMode: ManagementPermissionMode$outboundSchema,
   access: z.record(AccessLevel$outboundSchema).optional(),
   expiresAt: z.date().transform(v => v.toISOString()).optional(),
 }).transform((v) => {
