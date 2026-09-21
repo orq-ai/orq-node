@@ -8,7 +8,6 @@ import { Alerts } from "./alerts.js";
 import { AnnotationQueues } from "./annotationqueues.js";
 import { Annotations } from "./annotations.js";
 import { ApiKeys } from "./apikeys.js";
-import { AuditLogs } from "./auditlogs.js";
 import { Budgets } from "./budgets.js";
 import { Chunking } from "./chunking.js";
 import { Datasets } from "./datasets.js";
@@ -170,11 +169,6 @@ export class Orq extends ClientSDK {
   private _apiKeys?: ApiKeys;
   get apiKeys(): ApiKeys {
     return (this._apiKeys ??= new ApiKeys(this._options));
-  }
-
-  private _auditLogs?: AuditLogs;
-  get auditLogs(): AuditLogs {
-    return (this._auditLogs ??= new AuditLogs(this._options));
   }
 
   private _budgets?: Budgets;
