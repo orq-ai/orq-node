@@ -219,16 +219,6 @@ components:
                         thought_signature:
                           type: "string"
                           description: "Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call."
-                        extra_content:
-                          type: "object"
-                          properties:
-                            google:
-                              type: "object"
-                              properties:
-                                thought_signature:
-                                  type: "string"
-                                  description: "Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call. Takes precedence over the top-level `thought_signature` when both are set."
-                          description: "Provider-specific extra content for the tool call."
                       required:
                         - "id"
                         - "type"
@@ -467,16 +457,6 @@ components:
                         thought_signature:
                           type: "string"
                           description: "Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call."
-                        extra_content:
-                          type: "object"
-                          properties:
-                            google:
-                              type: "object"
-                              properties:
-                                thought_signature:
-                                  type: "string"
-                                  description: "Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call. Takes precedence over the top-level `thought_signature` when both are set."
-                          description: "Provider-specific extra content for the tool call."
                       required:
                         - "id"
                         - "type"
@@ -2556,7 +2536,7 @@ components:
           properties:
             _id:
               type: "string"
-              default: "reasoning_01m31df1tdsrcs9ycn375bwfcq"
+              default: "reasoning_01m321mwmb2bx40f223g017t83"
               description: "Unique identifier for the part. Format: reasoning_{ulid} (e.g., reasoning_01hxyz...)"
               example: "reasoning_01hxyz123abc"
             kind:
@@ -3320,16 +3300,6 @@ components:
                           thought_signature:
                             type: "string"
                             description: "Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call."
-                          extra_content:
-                            type: "object"
-                            properties:
-                              google:
-                                type: "object"
-                                properties:
-                                  thought_signature:
-                                    type: "string"
-                                    description: "Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call."
-                            description: "Provider-specific extra content for the tool call."
                     role:
                       type: "string"
                       enum:
@@ -9391,271 +9361,6 @@ components:
           items:
             type: "string"
           description: "Non-fatal warnings about the response. May contain `totals_unavailable` when totals were requested but failed."
-    TelemetrySource:
-      type: "string"
-      enum:
-        - "TELEMETRY_SOURCE_UNSPECIFIED"
-        - "TELEMETRY_SOURCE_TRACES"
-        - "TELEMETRY_SOURCE_METRICS"
-        - "TELEMETRY_SOURCE_LOGS"
-    ListTelemetryCapabilitiesResponse:
-      type: "object"
-      properties:
-        sources:
-          type: "array"
-          items:
-            $ref: "#/components/schemas/TelemetrySourceCapability"
-    ListTelemetryFacetValuesRequest:
-      type: "object"
-      properties:
-        source:
-          $ref: "#/components/schemas/TelemetrySource"
-        metric:
-          type: "string"
-        field:
-          type: "string"
-        from:
-          type: "string"
-          format: "date-time"
-        to:
-          type: "string"
-          format: "date-time"
-        filters:
-          type: "array"
-          items:
-            $ref: "#/components/schemas/TraceFilter"
-        filter_operator:
-          type: "string"
-        limit:
-          type: "integer"
-          format: "int32"
-    ListTelemetryFacetValuesResponse:
-      type: "object"
-      properties:
-        field:
-          type: "string"
-        values:
-          type: "array"
-          items:
-            $ref: "#/components/schemas/TraceFacetValue"
-        has_more:
-          type: "boolean"
-    QueryTelemetryRequest:
-      type: "object"
-      properties:
-        source:
-          $ref: "#/components/schemas/TelemetrySource"
-        from:
-          type: "string"
-          format: "date-time"
-        to:
-          type: "string"
-          format: "date-time"
-        compute:
-          type: "array"
-          items:
-            $ref: "#/components/schemas/TraceCompute"
-        grain:
-          type: "string"
-          description: "Empty string and \"none\" are equivalent: a single row per group instead\n of a time series."
-        group_by:
-          type: "array"
-          items:
-            type: "string"
-        filters:
-          type: "array"
-          items:
-            $ref: "#/components/schemas/TraceFilter"
-        filter_operator:
-          type: "string"
-        limit:
-          type: "integer"
-          description: "Scalar queries: maximum returned rows, default 100. Time-series queries: optional maximum number of distinct groups; exceeding it fails the query instead of truncating timelines. Time-series results are complete within safety budgets of 5000 rows, 5000 buckets, and 50000 metric values. Queries are limited to 90 days and 30 seconds of execution."
-          format: "int32"
-        time_zone:
-          type: "string"
-        include_totals:
-          type: "boolean"
-        mode:
-          enum:
-            - "timeseries"
-            - "scalar"
-          type: "string"
-          description: "Value shaping. `timeseries` buckets by grain; `scalar` returns one row per group. When omitted, grain selects the compatible shape."
-        sort:
-          enum:
-            - "desc"
-            - "asc"
-          type: "string"
-          description: "Ordering for scalar/top-list rows. Defaults to `desc`."
-        interval_seconds:
-          type: "integer"
-          description: "Explicit bucket width in seconds. Takes precedence over `grain` when both are set."
-          format: "int32"
-        selected_range_seconds:
-          type: "integer"
-          description: "The span originally selected, before live extended [from, to). `grain:\"auto\"` resolves bucket width from this span, independent of how far [from, to) has since grown."
-          format: "int32"
-    QueryTelemetryResponse:
-      type: "object"
-      properties:
-        object:
-          type: "string"
-        data:
-          type: "array"
-          items:
-            $ref: "#/components/schemas/TelemetryRow"
-        totals:
-          $ref: "#/components/schemas/TelemetryRow"
-        meta:
-          $ref: "#/components/schemas/QueryTelemetryMeta"
-        request:
-          $ref: "#/components/schemas/QueryTelemetryRequest"
-        has_more:
-          type: "boolean"
-    TelemetrySourceCapability:
-      type: "object"
-      properties:
-        source:
-          $ref: "#/components/schemas/TelemetrySource"
-        label:
-          type: "string"
-        metrics:
-          type: "array"
-          items:
-            $ref: "#/components/schemas/TelemetryMetricCapability"
-    TraceFacetValue:
-      type: "object"
-      properties:
-        value:
-          type: "string"
-        count:
-          type: "integer"
-          format: "uint32"
-    TraceCompute:
-      type: "object"
-      properties:
-        metric:
-          type: "string"
-        op:
-          type: "string"
-    TelemetryRow:
-      type: "object"
-      properties:
-        timestamp:
-          type: "string"
-          description: "Unset when the resolved grain is \"none\" — one row per group, not a\n time series."
-          format: "date-time"
-        group:
-          type: "object"
-          additionalProperties:
-            type: "string"
-        metrics:
-          type: "object"
-          additionalProperties:
-            type: "number"
-            format: "double"
-    QueryTelemetryMeta:
-      type: "object"
-      properties:
-        effective_grain:
-          type: "string"
-        warnings:
-          type: "array"
-          items:
-            type: "string"
-        row_count:
-          type: "integer"
-          format: "int32"
-        request_id:
-          type: "string"
-        currency:
-          type: "string"
-    TelemetryMetricCapability:
-      type: "object"
-      properties:
-        name:
-          type: "string"
-        label:
-          type: "string"
-        description:
-          type: "string"
-        unit:
-          type: "string"
-        operations:
-          type: "array"
-          items:
-            type: "string"
-        default_operation:
-          type: "string"
-        modes:
-          type: "array"
-          items:
-            $ref: "#/components/schemas/TelemetryQueryMode"
-        result_kinds:
-          type: "array"
-          items:
-            $ref: "#/components/schemas/TelemetryResultKind"
-        value_cardinality:
-          $ref: "#/components/schemas/TelemetryValueCardinality"
-        dimensions:
-          type: "array"
-          items:
-            $ref: "#/components/schemas/TelemetryDimensionCapability"
-        dimension_sets:
-          type: "array"
-          items:
-            $ref: "#/components/schemas/TelemetryDimensionSetCapability"
-    TelemetryQueryMode:
-      type: "string"
-      enum:
-        - "TELEMETRY_QUERY_MODE_UNSPECIFIED"
-        - "TELEMETRY_QUERY_MODE_SCALAR"
-        - "TELEMETRY_QUERY_MODE_TIME_SERIES"
-    TelemetryResultKind:
-      type: "string"
-      enum:
-        - "TELEMETRY_RESULT_KIND_UNSPECIFIED"
-        - "TELEMETRY_RESULT_KIND_SCALAR"
-        - "TELEMETRY_RESULT_KIND_GROUPED_SCALAR"
-        - "TELEMETRY_RESULT_KIND_TIME_SERIES"
-        - "TELEMETRY_RESULT_KIND_GROUPED_TIME_SERIES"
-    TelemetryValueCardinality:
-      type: "string"
-      enum:
-        - "TELEMETRY_VALUE_CARDINALITY_UNSPECIFIED"
-        - "TELEMETRY_VALUE_CARDINALITY_SINGLE"
-        - "TELEMETRY_VALUE_CARDINALITY_MULTIPLE"
-    TelemetryDimensionCapability:
-      type: "object"
-      properties:
-        name:
-          type: "string"
-        label:
-          type: "string"
-        type:
-          type: "string"
-        groupable:
-          type: "boolean"
-        filter_operators:
-          type: "array"
-          items:
-            type: "string"
-        key_prefix:
-          type: "string"
-    TelemetryDimensionSetCapability:
-      type: "object"
-      properties:
-        name:
-          type: "string"
-        group_by:
-          type: "array"
-          items:
-            type: "string"
-        filters:
-          type: "array"
-          items:
-            type: "string"
     AggregateTracesRequest:
       type: "object"
       properties:
@@ -9813,6 +9518,13 @@ components:
       properties:
         span:
           $ref: "#/components/schemas/SpanDetail"
+    TraceCompute:
+      type: "object"
+      properties:
+        metric:
+          type: "string"
+        op:
+          type: "string"
     TraceAggregateRow:
       type: "object"
       properties:
@@ -9834,6 +9546,14 @@ components:
           type: "string"
         type:
           type: "string"
+    TraceFacetValue:
+      type: "object"
+      properties:
+        value:
+          type: "string"
+        count:
+          type: "integer"
+          format: "uint32"
     TraceField:
       type: "object"
       properties:
@@ -12525,7 +12245,6 @@ components:
     CreateApiKeyRequest:
       required:
         - "name"
-        - "permission_mode"
       type: "object"
       properties:
         name:
@@ -12540,7 +12259,7 @@ components:
             - $ref: "#/components/schemas/ProjectScope"
           description: "Project authorization scope. Defaults to all-projects when omitted."
         permission_mode:
-          description: "Permission preset. Required; an omitted or unspecified value is\n rejected with INVALID_ARGUMENT rather than defaulted to full access."
+          description: "Permission preset. Defaults to PERMISSION_MODE_ALL when omitted."
           $ref: "#/components/schemas/PermissionMode"
         access:
           type: "object"
@@ -12603,7 +12322,7 @@ components:
           type: "string"
           description: "New name. Omit to keep current."
         status:
-          description: "New lifecycle status. Omit to keep current. A revoked key cannot\n change status; the call fails with FAILED_PRECONDITION."
+          description: "New lifecycle status. Omit to keep current."
           $ref: "#/components/schemas/ApiKeyStatus"
         permission_mode:
           description: "New permission preset. Omit to keep current."
@@ -13006,6 +12725,220 @@ components:
       enum:
         - "SCOPE_MODE_ALL"
         - "SCOPE_MODE_SINGLE"
+    QueryAuditLogsRequest:
+      example:
+        filters:
+          operator: "and"
+          filters:
+            - type: "string"
+              path: "entity_type"
+              operator: "is"
+              value: "skill"
+        pagination:
+          limit: 20
+        sorting:
+          - key: "created_at"
+            direction: "desc"
+      required:
+        - "filters"
+        - "pagination"
+      type: "object"
+      properties:
+        filters:
+          $ref: "#/components/schemas/AuditLogFilterQuery"
+        pagination:
+          $ref: "#/components/schemas/AuditLogPagination"
+        sorting:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/AuditLogSort"
+          description: "Sort expressions. Defaults to audit_log_id descending when omitted."
+      description: "Request body for querying audit logs in the authenticated workspace."
+    QueryAuditLogsResponse:
+      example:
+        audit_logs:
+          - audit_log_id: "audit_log_01JZ9QMB6AEH7B8XH0ZQ9ZPQEY"
+            project_id: "proj_01JZ9QMB6AEH7B8XH0ZQ9ZPQEY"
+            entity_id: "skill_01JZ9QMB6AEH7B8XH0ZQ9ZPQEY"
+            entity_type: "skill"
+            action: "updated"
+            actor_id: "usr_01JZ9QMB6AEH7B8XH0ZQ9ZPQEY"
+            actor_ip: "203.0.113.10"
+            created_at: "2026-06-15T12:30:00Z"
+            metadata:
+              display_name: "Production skill"
+        overall_total: 1
+        has_more: false
+      required:
+        - "audit_logs"
+        - "overall_total"
+        - "has_more"
+      type: "object"
+      properties:
+        audit_logs:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/AuditLog"
+          description: "Audit logs matching the query."
+        overall_total:
+          example: 42
+          type: "string"
+          description: "Total number of audit logs matching the query before cursor pagination."
+        has_more:
+          example: false
+          type: "boolean"
+          description: "Whether another page exists after the returned audit logs."
+      description: "Paginated audit log query result."
+    AuditLogFilterQuery:
+      required:
+        - "operator"
+        - "filters"
+      type: "object"
+      properties:
+        search:
+          example: "Production skill"
+          type: "string"
+          description: "Optional text search applied to supported display fields."
+        operator:
+          example: "and"
+          type: "string"
+          description: "Logical operator used to combine filters."
+        filters:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/AuditLogFilter"
+          description: "Advanced filters applied to the query."
+      description: "Search and advanced filters for querying audit logs."
+    AuditLogPagination:
+      type: "object"
+      properties:
+        limit:
+          example: 20
+          type: "integer"
+          description: "Maximum number of audit logs to return. Defaults to 50 when omitted."
+          format: "int32"
+        starting_after:
+          example: "audit_log_01JZ9QMB6AEH7B8XH0ZQ9ZPQEY"
+          type: "string"
+          description: "Cursor for the next page. Use the last audit_log_id from the previous page."
+        ending_before:
+          example: "audit_log_01JZ9QMB6AEH7B8XH0ZQ9ZPQEY"
+          type: "string"
+          description: "Cursor for the previous page. Use the first audit_log_id from the current page."
+      description: "Cursor pagination settings for audit log queries."
+    AuditLogSort:
+      required:
+        - "key"
+      type: "object"
+      properties:
+        key:
+          example: "created_at"
+          type: "string"
+          description: "Audit log field to sort by. Supported keys include _id, created_at, entity_type, entity_id, action, and actor_id."
+        direction:
+          example: "desc"
+          type: "string"
+          description: "Sort direction. Defaults to desc when omitted or invalid."
+      description: "A sort expression for audit log queries."
+    AuditLog:
+      required:
+        - "audit_log_id"
+        - "entity_id"
+        - "entity_type"
+        - "action"
+        - "created_at"
+      type: "object"
+      properties:
+        audit_log_id:
+          example: "audit_log_01JZ9QMB6AEH7B8XH0ZQ9ZPQEY"
+          type: "string"
+          description: "Unique identifier for the audit log entry."
+        project_id:
+          example: "proj_01JZ9QMB6AEH7B8XH0ZQ9ZPQEY"
+          type: "string"
+          description: "Project associated with the event, when the audited entity belongs to a project."
+        entity_id:
+          example: "skill_01JZ9QMB6AEH7B8XH0ZQ9ZPQEY"
+          type: "string"
+          description: "Identifier of the entity that changed."
+        entity_type:
+          example: "skill"
+          description: "Type of entity that changed."
+          $ref: "#/components/schemas/Value"
+        action:
+          example: "updated"
+          description: "Action recorded for the entity event."
+          $ref: "#/components/schemas/Value"
+        actor_id:
+          example: "usr_01JZ9QMB6AEH7B8XH0ZQ9ZPQEY"
+          type: "string"
+          description: "User or system actor that caused the event, when available."
+        actor_ip:
+          example: "203.0.113.10"
+          type: "string"
+          description: "IP address observed for the actor, when available."
+        actor_type:
+          example: "user"
+          description: "Kind of actor behind the action. Omitted when unknown."
+          $ref: "#/components/schemas/Value"
+        actor_display:
+          example: "kevin@orq.ai"
+          type: "string"
+          description: "Human readable actor name captured when the action happened."
+        origin:
+          example: "api"
+          description: "Surface the action came from. Omitted when unknown."
+          $ref: "#/components/schemas/Value"
+        request_id:
+          example: "req_01JZ9QMB6AEH7B8XH0ZQ9ZPQEY"
+          type: "string"
+          description: "Correlates the entry with the originating request."
+        created_at:
+          example: "2026-06-15T12:30:00Z"
+          type: "string"
+          description: "Time when the audit log entry was created."
+          format: "date-time"
+        metadata:
+          example:
+            display_name: "Production skill"
+          type: "object"
+          description: "Additional event metadata. The exact shape depends on entity_type and action."
+      description: "An audit log entry for an entity event in the authenticated workspace."
+    AuditLogFilter:
+      required:
+        - "type"
+        - "path"
+        - "operator"
+        - "value"
+      type: "object"
+      properties:
+        type:
+          example: "string"
+          type: "string"
+          description: "Filter value type, such as string, date, number, boolean, or array."
+        path:
+          example: "entity_type"
+          type: "string"
+          description: "Audit log field path to filter on. Supported paths include created_at, entity_id, entity_type, action, actor_id, origin, and metadata.display_name."
+        operator:
+          example: "is"
+          type: "string"
+          description: "Filter operator supported by the selected field type."
+        value:
+          $ref: "#/components/schemas/GoogleProtobufValue"
+      description: "A single advanced filter applied to audit logs."
+    Value:
+      type: "string"
+      enum:
+        - "ORIGIN_UNSPECIFIED"
+        - "ui"
+        - "api"
+        - "scim"
+        - "system"
+        - "router"
+        - "mcp"
+        - "automation"
+        - "internal"
     BudgetScopeKind:
       type: "string"
       enum:
@@ -13898,14 +13831,13 @@ components:
     CreateManagementKeyRequest:
       required:
         - "name"
-        - "permission_mode"
       type: "object"
       properties:
         name:
           type: "string"
           description: "Human-readable name. Required."
         permission_mode:
-          description: "Permission preset. Required; an omitted or unspecified value is\n rejected with INVALID_ARGUMENT rather than defaulted to full access."
+          description: "Permission preset. Defaults to MANAGEMENT_PERMISSION_MODE_ALL when omitted."
           $ref: "#/components/schemas/ManagementPermissionMode"
         access:
           type: "object"
@@ -13959,7 +13891,7 @@ components:
           type: "string"
           description: "New name. Omit to keep current."
         status:
-          description: "New lifecycle status. Omit to keep current. A revoked key cannot\n change status; the call fails with FAILED_PRECONDITION."
+          description: "New lifecycle status. Omit to keep current."
           $ref: "#/components/schemas/ManagementKeyStatus"
         permission_mode:
           description: "New permission preset. Omit to keep current."
@@ -16291,300 +16223,6 @@ components:
           type: "string"
         direction:
           type: "string"
-    ListWikisResponse:
-      type: "object"
-      properties:
-        data:
-          type: "array"
-          items:
-            $ref: "#/components/schemas/Wiki"
-        has_more:
-          type: "boolean"
-    CreateWikiRequest:
-      type: "object"
-      properties:
-        display_name:
-          type: "string"
-        repository:
-          $ref: "#/components/schemas/WikiRepository"
-        branch:
-          type: "string"
-        scm_connection_id:
-          type: "string"
-        settings:
-          $ref: "#/components/schemas/WikiSettings"
-        import_existing:
-          type: "boolean"
-        factory_id:
-          type: "string"
-    CreateWikiResponse:
-      type: "object"
-      properties:
-        wiki:
-          $ref: "#/components/schemas/Wiki"
-    InspectRepositoryWikiRequest:
-      type: "object"
-      properties:
-        scm_connection_id:
-          type: "string"
-        repository_url:
-          type: "string"
-        branch:
-          type: "string"
-    InspectRepositoryWikiResponse:
-      type: "object"
-      properties:
-        available:
-          type: "boolean"
-        page_count:
-          type: "integer"
-          format: "int32"
-    GetWikiResponse:
-      type: "object"
-      properties:
-        wiki:
-          $ref: "#/components/schemas/Wiki"
-    DeleteWikiResponse:
-      type: "object"
-      properties: {}
-    UpdateWikiRequest:
-      type: "object"
-      properties:
-        display_name:
-          type: "string"
-        scm_connection_id:
-          type: "string"
-        settings:
-          $ref: "#/components/schemas/WikiSettings"
-    UpdateWikiResponse:
-      type: "object"
-      properties:
-        wiki:
-          $ref: "#/components/schemas/Wiki"
-    GetWikiPageResponse:
-      type: "object"
-      properties:
-        page:
-          $ref: "#/components/schemas/WikiPage"
-    UpdateWikiPageRequest:
-      type: "object"
-      properties:
-        path:
-          type: "string"
-        markdown:
-          type: "string"
-        expected_content_hash:
-          type: "string"
-    UpdateWikiPageResponse:
-      type: "object"
-      properties:
-        page:
-          $ref: "#/components/schemas/WikiPage"
-    RefreshWikiRequest:
-      type: "object"
-      properties:
-        full:
-          type: "boolean"
-    RefreshWikiResponse:
-      type: "object"
-      properties:
-        run:
-          $ref: "#/components/schemas/WikiRun"
-    ListWikiRunsResponse:
-      type: "object"
-      properties:
-        data:
-          type: "array"
-          items:
-            $ref: "#/components/schemas/WikiRun"
-    SearchWikiResponse:
-      type: "object"
-      properties:
-        hits:
-          type: "array"
-          items:
-            $ref: "#/components/schemas/WikiSearchHit"
-    GetWikiTreeResponse:
-      type: "object"
-      properties:
-        pages:
-          type: "array"
-          items:
-            $ref: "#/components/schemas/WikiTreePage"
-    Wiki:
-      type: "object"
-      properties:
-        wiki_id:
-          type: "string"
-        workspace_id:
-          type: "string"
-        created_by_id:
-          type: "string"
-        display_name:
-          type: "string"
-        repository_key:
-          type: "string"
-        repository:
-          $ref: "#/components/schemas/WikiRepository"
-        branch:
-          type: "string"
-        scm_connection_id:
-          type: "string"
-        settings:
-          $ref: "#/components/schemas/WikiSettings"
-        automation_id:
-          type: "string"
-        status:
-          type: "string"
-        current_run_id:
-          type: "string"
-        last_generated_commit:
-          type: "string"
-        last_generated_at:
-          type: "string"
-          format: "date-time"
-        page_count:
-          type: "integer"
-          format: "int32"
-        created_at:
-          type: "string"
-          format: "date-time"
-        updated_at:
-          type: "string"
-          format: "date-time"
-        factory_id:
-          type: "string"
-    WikiRepository:
-      type: "object"
-      properties:
-        provider:
-          type: "string"
-        owner:
-          type: "string"
-        name:
-          type: "string"
-        url:
-          type: "string"
-        default_branch:
-          type: "string"
-    WikiSettings:
-      type: "object"
-      properties:
-        model:
-          type: "string"
-        computer_template:
-          type: "string"
-        depth:
-          type: "string"
-        refresh_cadence:
-          type: "string"
-        publish_to_repository:
-          type: "boolean"
-    WikiPage:
-      type: "object"
-      properties:
-        path:
-          type: "string"
-        title:
-          type: "string"
-        section:
-          type: "string"
-        order:
-          type: "integer"
-          format: "int32"
-        content_hash:
-          type: "string"
-        edited_by_id:
-          type: "string"
-        markdown:
-          type: "string"
-        run_id:
-          type: "string"
-        links:
-          type: "array"
-          items:
-            type: "string"
-        edited_at:
-          type: "string"
-          format: "date-time"
-    WikiRun:
-      type: "object"
-      properties:
-        run_id:
-          type: "string"
-        workspace_id:
-          type: "string"
-        wiki_id:
-          type: "string"
-        agent_session_id:
-          type: "string"
-        agent_session_run_id:
-          type: "string"
-        kind:
-          type: "string"
-        trigger:
-          type: "string"
-        pull_request_url:
-          type: "string"
-        base_commit:
-          type: "string"
-        head_commit:
-          type: "string"
-        status:
-          type: "string"
-        error:
-          type: "string"
-        stats:
-          $ref: "#/components/schemas/WikiRunStats"
-        started:
-          type: "string"
-          format: "date-time"
-        finished:
-          type: "string"
-          format: "date-time"
-    WikiSearchHit:
-      type: "object"
-      properties:
-        path:
-          type: "string"
-        page_title:
-          type: "string"
-        heading_path:
-          type: "string"
-        anchor:
-          type: "string"
-        snippet:
-          type: "string"
-    WikiTreePage:
-      type: "object"
-      properties:
-        path:
-          type: "string"
-        title:
-          type: "string"
-        section:
-          type: "string"
-        order:
-          type: "integer"
-          format: "int32"
-        content_hash:
-          type: "string"
-        edited_by_id:
-          type: "string"
-    WikiRunStats:
-      type: "object"
-      properties:
-        page_count:
-          type: "integer"
-          format: "int32"
-        section_count:
-          type: "integer"
-          format: "int32"
-        mermaid_count:
-          type: "integer"
-          format: "int32"
-        bytes:
-          type: "string"
     ListWorkspacesResponse:
       required:
         - "object"
@@ -16980,7 +16618,7 @@ components:
           description: "The selected option. Present for choice answers."
           type: "string"
         confidence:
-          description: "Probability of the selected option or level. Present for choice and score answers."
+          description: "Confidence in the selected option or level. Present for choice and score answers."
           format: "double"
           type: "number"
         legend:
@@ -17043,11 +16681,11 @@ components:
           format: "int64"
           type: "integer"
         output_cost:
-          description: "Cost (USD) of output tokens. 0 for typesafe/jev-latest. Present when billing was computed for this request."
+          description: "Cost (USD) of output tokens, always 0 for classify. Present when billing was computed for this request."
           format: "double"
           type: "number"
         output_tokens:
-          description: "The number of output tokens generated. Free for typesafe/jev-latest, billed at the model rate for chat models."
+          description: "The number of output tokens generated. Not billed."
           format: "int64"
           type: "integer"
         total_cost:
@@ -17078,7 +16716,7 @@ components:
           description: "Key-value metadata attached to the trace."
           type: "object"
         model:
-          description: "ID of the model to use: the native classify model typesafe/jev-latest, or a chat model that supports classify such as anthropic/claude-haiku-4-5, google-ai/gemini-3.8-flash or zai/glm-5.3-flash."
+          description: "ID of the classify model to use, for example typesafe/jev-latest."
           type: "string"
         name:
           description: "The name to display on the trace. If not specified, the default system name will be used."
@@ -21252,16 +20890,6 @@ paths:
                                 thought_signature:
                                   type: "string"
                                   description: "Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call."
-                                extra_content:
-                                  type: "object"
-                                  properties:
-                                    google:
-                                      type: "object"
-                                      properties:
-                                        thought_signature:
-                                          type: "string"
-                                          description: "Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call. Takes precedence over the top-level `thought_signature` when both are set."
-                                  description: "Provider-specific extra content for the tool call."
                               required:
                                 - "id"
                                 - "type"
@@ -21500,16 +21128,6 @@ paths:
                                 thought_signature:
                                   type: "string"
                                   description: "Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call."
-                                extra_content:
-                                  type: "object"
-                                  properties:
-                                    google:
-                                      type: "object"
-                                      properties:
-                                        thought_signature:
-                                          type: "string"
-                                          description: "Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call. Takes precedence over the top-level `thought_signature` when both are set."
-                                  description: "Provider-specific extra content for the tool call."
                               required:
                                 - "id"
                                 - "type"
@@ -23049,16 +22667,6 @@ paths:
                                 thought_signature:
                                   type: "string"
                                   description: "Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call."
-                                extra_content:
-                                  type: "object"
-                                  properties:
-                                    google:
-                                      type: "object"
-                                      properties:
-                                        thought_signature:
-                                          type: "string"
-                                          description: "Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call. Takes precedence over the top-level `thought_signature` when both are set."
-                                  description: "Provider-specific extra content for the tool call."
                               required:
                                 - "id"
                                 - "type"
@@ -23297,16 +22905,6 @@ paths:
                                 thought_signature:
                                   type: "string"
                                   description: "Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call."
-                                extra_content:
-                                  type: "object"
-                                  properties:
-                                    google:
-                                      type: "object"
-                                      properties:
-                                        thought_signature:
-                                          type: "string"
-                                          description: "Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call. Takes precedence over the top-level `thought_signature` when both are set."
-                                  description: "Provider-specific extra content for the tool call."
                               required:
                                 - "id"
                                 - "type"
@@ -31838,7 +31436,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01M31DF1VHRBVCQCYDZKWYH822"
+                                          default: "01M321MWN8RTHQHEYEQTADTGBF"
                                         name:
                                           type: "string"
                                         description:
@@ -33436,7 +33034,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01M31DF1VZT8EG4KG1HPD4BJCH"
+                                          default: "01M321MWNMDW7JH7SCT0YAW3TY"
                                         name:
                                           type: "string"
                                         description:
@@ -34986,16 +34584,6 @@ paths:
                                             thought_signature:
                                               type: "string"
                                               description: "Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call."
-                                            extra_content:
-                                              type: "object"
-                                              properties:
-                                                google:
-                                                  type: "object"
-                                                  properties:
-                                                    thought_signature:
-                                                      type: "string"
-                                                      description: "Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call. Takes precedence over the top-level `thought_signature` when both are set."
-                                              description: "Provider-specific extra content for the tool call."
                                           required:
                                             - "id"
                                             - "type"
@@ -35358,16 +34946,6 @@ paths:
                                     thought_signature:
                                       type: "string"
                                       description: "Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call."
-                                    extra_content:
-                                      type: "object"
-                                      properties:
-                                        google:
-                                          type: "object"
-                                          properties:
-                                            thought_signature:
-                                              type: "string"
-                                              description: "Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call. Takes precedence over the top-level `thought_signature` when both are set."
-                                      description: "Provider-specific extra content for the tool call."
                                   required:
                                     - "id"
                                     - "type"
@@ -36822,16 +36400,6 @@ paths:
                                       thought_signature:
                                         type: "string"
                                         description: "Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call."
-                                      extra_content:
-                                        type: "object"
-                                        properties:
-                                          google:
-                                            type: "object"
-                                            properties:
-                                              thought_signature:
-                                                type: "string"
-                                                description: "Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call. Takes precedence over the top-level `thought_signature` when both are set."
-                                        description: "Provider-specific extra content for the tool call."
                                     required:
                                       - "id"
                                       - "type"
@@ -37958,16 +37526,6 @@ paths:
                                       thought_signature:
                                         type: "string"
                                         description: "Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call."
-                                      extra_content:
-                                        type: "object"
-                                        properties:
-                                          google:
-                                            type: "object"
-                                            properties:
-                                              thought_signature:
-                                                type: "string"
-                                                description: "Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call. Takes precedence over the top-level `thought_signature` when both are set."
-                                        description: "Provider-specific extra content for the tool call."
                                     required:
                                       - "id"
                                       - "type"
@@ -38305,16 +37863,6 @@ paths:
                                     thought_signature:
                                       type: "string"
                                       description: "Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call."
-                                    extra_content:
-                                      type: "object"
-                                      properties:
-                                        google:
-                                          type: "object"
-                                          properties:
-                                            thought_signature:
-                                              type: "string"
-                                              description: "Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call. Takes precedence over the top-level `thought_signature` when both are set."
-                                      description: "Provider-specific extra content for the tool call."
                                   required:
                                     - "id"
                                     - "type"
@@ -39809,16 +39357,6 @@ paths:
                                       thought_signature:
                                         type: "string"
                                         description: "Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call."
-                                      extra_content:
-                                        type: "object"
-                                        properties:
-                                          google:
-                                            type: "object"
-                                            properties:
-                                              thought_signature:
-                                                type: "string"
-                                                description: "Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call. Takes precedence over the top-level `thought_signature` when both are set."
-                                        description: "Provider-specific extra content for the tool call."
                                     required:
                                       - "id"
                                       - "type"
@@ -41005,16 +40543,6 @@ paths:
                                                 thought_signature:
                                                   type: "string"
                                                   description: "Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call."
-                                                extra_content:
-                                                  type: "object"
-                                                  properties:
-                                                    google:
-                                                      type: "object"
-                                                      properties:
-                                                        thought_signature:
-                                                          type: "string"
-                                                          description: "Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call. Takes precedence over the top-level `thought_signature` when both are set."
-                                                  description: "Provider-specific extra content for the tool call."
                                               required:
                                                 - "id"
                                                 - "type"
@@ -42136,16 +41664,6 @@ paths:
                                           thought_signature:
                                             type: "string"
                                             description: "Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call."
-                                          extra_content:
-                                            type: "object"
-                                            properties:
-                                              google:
-                                                type: "object"
-                                                properties:
-                                                  thought_signature:
-                                                    type: "string"
-                                                    description: "Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call. Takes precedence over the top-level `thought_signature` when both are set."
-                                            description: "Provider-specific extra content for the tool call."
                                         required:
                                           - "id"
                                           - "type"
@@ -42333,7 +41851,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M31DF1WW2K8D3Z04RD6YQ28Q"
+                              default: "tool_01M321MWPEDZCZS8MCMSXTJ6VC"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -42434,7 +41952,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M31DF1WXF2FMEP7PAGEQC90J"
+                              default: "tool_01M321MWPEEQ20H2RMG2VCAX4Q"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -42537,7 +42055,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M31DF1WX6QBV43BKS0C5TS36"
+                              default: "tool_01M321MWPEXC5SF0M9WVTFHQX2"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -42681,7 +42199,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M31DF1WX474SQ9G1AQ6T09J0"
+                              default: "tool_01M321MWPFGZDXNR2Q3HFPQHJD"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -43172,7 +42690,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M31DF1X0DBQJRY3VXW3HMESS"
+                        default: "tool_01M321MWPH4NVE1CG4A1N9SPQJ"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -43273,7 +42791,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M31DF1X0940AH29VG3EYK6Y3"
+                        default: "tool_01M321MWPHD27K4VVQR6AYD9G9"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -43376,7 +42894,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M31DF1X0GR4HY6D1J87261Y2"
+                        default: "tool_01M321MWPJRS2H862SZJ8FEPKP"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -43520,7 +43038,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M31DF1X1FMGK6KJAGHK20SPY"
+                        default: "tool_01M321MWPJNNCAKHFWJYJA6J5N"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -44018,7 +43536,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M31DF1X33PRGJDAH9792AAAP"
+                        default: "tool_01M321MWPKQ9WBY4B8ZZ1K5PGG"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -44119,7 +43637,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M31DF1X456T3R8J5QGWKXTW3"
+                        default: "tool_01M321MWPMJTDGFDZB0TPJRW6B"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -44222,7 +43740,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M31DF1X42TCDHJ55R4KAN0FY"
+                        default: "tool_01M321MWPN344Y5SXZF6GC2BHC"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -44366,7 +43884,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M31DF1X5PAGSSGY15CZ1ZPT0"
+                        default: "tool_01M321MWPPC05QXWNJD9BBVGYM"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -44527,7 +44045,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M31DF1X8J7HKZVYQ3Y49XFZQ"
+                        default: "tool_01M321MWPSDMY6WQ760D25G8TC"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -44628,7 +44146,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M31DF1X8VBDRVVG7844KF8H2"
+                        default: "tool_01M321MWPSWHQNW7N5SPJA8SHT"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -44731,7 +44249,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M31DF1X94NVB9PCFTF9062FZ"
+                        default: "tool_01M321MWPSKECKYXQC2GJ6HKDY"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -44875,7 +44393,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M31DF1X9H2HBV1786F0E7RW4"
+                        default: "tool_01M321MWPT7X2P6N8ATEEXQ4QF"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -45302,7 +44820,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-09-21T07:21:34.711Z"
+                          default: "2026-09-21T13:14:17.695Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -45310,7 +44828,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-09-21T07:21:34.711Z"
+                              default: "2026-09-21T13:14:17.695Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -45435,7 +44953,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date-time"
-                    default: "2026-09-21T07:21:34.711Z"
+                    default: "2026-09-21T13:14:17.695Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -45443,7 +44961,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-09-21T07:21:34.711Z"
+                        default: "2026-09-21T13:14:17.695Z"
                       - type: "string"
                         format: "date-time"
                     readOnly: true
@@ -45558,7 +45076,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date-time"
-                    default: "2026-09-21T07:21:34.711Z"
+                    default: "2026-09-21T13:14:17.695Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -45566,7 +45084,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-09-21T07:21:34.711Z"
+                        default: "2026-09-21T13:14:17.695Z"
                       - type: "string"
                         format: "date-time"
                     readOnly: true
@@ -45710,7 +45228,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date-time"
-                    default: "2026-09-21T07:21:34.711Z"
+                    default: "2026-09-21T13:14:17.695Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -45718,7 +45236,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-09-21T07:21:34.711Z"
+                        default: "2026-09-21T13:14:17.695Z"
                       - type: "string"
                         format: "date-time"
                     readOnly: true
@@ -46028,16 +45546,6 @@ paths:
                                         thought_signature:
                                           type: "string"
                                           description: "Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call."
-                                        extra_content:
-                                          type: "object"
-                                          properties:
-                                            google:
-                                              type: "object"
-                                              properties:
-                                                thought_signature:
-                                                  type: "string"
-                                                  description: "Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call. Takes precedence over the top-level `thought_signature` when both are set."
-                                          description: "Provider-specific extra content for the tool call."
                                       required:
                                         - "id"
                                         - "type"
@@ -46157,7 +45665,7 @@ paths:
                                   reviewed_at:
                                     type: "string"
                                     format: "date-time"
-                                    default: "2026-09-21T07:21:40.015Z"
+                                    default: "2026-09-21T13:14:22.815Z"
                                     deprecated: true
                                     description: "Deprecated. The date and time the item was reviewed"
                                   type:
@@ -46230,7 +45738,7 @@ paths:
                                   reviewed_at:
                                     type: "string"
                                     format: "date-time"
-                                    default: "2026-09-21T07:21:40.015Z"
+                                    default: "2026-09-21T13:14:22.815Z"
                                     deprecated: true
                                     description: "Deprecated. The date and time the item was reviewed"
                                   type:
@@ -46303,7 +45811,7 @@ paths:
                                   reviewed_at:
                                     type: "string"
                                     format: "date-time"
-                                    default: "2026-09-21T07:21:40.015Z"
+                                    default: "2026-09-21T13:14:22.816Z"
                                     deprecated: true
                                     description: "Deprecated. The date and time the item was reviewed"
                                   type:
@@ -46376,7 +45884,7 @@ paths:
                                   reviewed_at:
                                     type: "string"
                                     format: "date-time"
-                                    default: "2026-09-21T07:21:40.016Z"
+                                    default: "2026-09-21T13:14:22.816Z"
                                     deprecated: true
                                     description: "Deprecated. The date and time the item was reviewed"
                                   type:
@@ -46416,7 +45924,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-09-21T07:21:34.711Z"
+                          default: "2026-09-21T13:14:17.695Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -46424,7 +45932,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-09-21T07:21:34.711Z"
+                              default: "2026-09-21T13:14:17.695Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -46672,16 +46180,6 @@ paths:
                                   thought_signature:
                                     type: "string"
                                     description: "Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call."
-                                  extra_content:
-                                    type: "object"
-                                    properties:
-                                      google:
-                                        type: "object"
-                                        properties:
-                                          thought_signature:
-                                            type: "string"
-                                            description: "Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call. Takes precedence over the top-level `thought_signature` when both are set."
-                                    description: "Provider-specific extra content for the tool call."
                                 required:
                                   - "id"
                                   - "type"
@@ -46945,16 +46443,6 @@ paths:
                                     thought_signature:
                                       type: "string"
                                       description: "Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call."
-                                    extra_content:
-                                      type: "object"
-                                      properties:
-                                        google:
-                                          type: "object"
-                                          properties:
-                                            thought_signature:
-                                              type: "string"
-                                              description: "Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call. Takes precedence over the top-level `thought_signature` when both are set."
-                                      description: "Provider-specific extra content for the tool call."
                                   required:
                                     - "id"
                                     - "type"
@@ -47074,7 +46562,7 @@ paths:
                               reviewed_at:
                                 type: "string"
                                 format: "date-time"
-                                default: "2026-09-21T07:21:40.020Z"
+                                default: "2026-09-21T13:14:22.820Z"
                                 deprecated: true
                                 description: "Deprecated. The date and time the item was reviewed"
                               type:
@@ -47147,7 +46635,7 @@ paths:
                               reviewed_at:
                                 type: "string"
                                 format: "date-time"
-                                default: "2026-09-21T07:21:40.020Z"
+                                default: "2026-09-21T13:14:22.820Z"
                                 deprecated: true
                                 description: "Deprecated. The date and time the item was reviewed"
                               type:
@@ -47220,7 +46708,7 @@ paths:
                               reviewed_at:
                                 type: "string"
                                 format: "date-time"
-                                default: "2026-09-21T07:21:40.020Z"
+                                default: "2026-09-21T13:14:22.820Z"
                                 deprecated: true
                                 description: "Deprecated. The date and time the item was reviewed"
                               type:
@@ -47293,7 +46781,7 @@ paths:
                               reviewed_at:
                                 type: "string"
                                 format: "date-time"
-                                default: "2026-09-21T07:21:40.020Z"
+                                default: "2026-09-21T13:14:22.820Z"
                                 deprecated: true
                                 description: "Deprecated. The date and time the item was reviewed"
                               type:
@@ -47333,7 +46821,7 @@ paths:
                           format: "date-time"
                         - type: "string"
                           format: "date-time"
-                      default: "2026-09-21T07:21:34.711Z"
+                      default: "2026-09-21T13:14:17.695Z"
                       readOnly: true
                       format: "date-time"
                       description: "The date and time the resource was created"
@@ -47341,7 +46829,7 @@ paths:
                       anyOf:
                         - type: "string"
                           format: "date-time"
-                          default: "2026-09-21T07:21:34.711Z"
+                          default: "2026-09-21T13:14:17.695Z"
                         - type: "string"
                           format: "date-time"
                       readOnly: true
@@ -47592,16 +47080,6 @@ paths:
                                   thought_signature:
                                     type: "string"
                                     description: "Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call."
-                                  extra_content:
-                                    type: "object"
-                                    properties:
-                                      google:
-                                        type: "object"
-                                        properties:
-                                          thought_signature:
-                                            type: "string"
-                                            description: "Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call. Takes precedence over the top-level `thought_signature` when both are set."
-                                    description: "Provider-specific extra content for the tool call."
                                 required:
                                   - "id"
                                   - "type"
@@ -47721,7 +47199,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-09-21T07:21:40.018Z"
+                              default: "2026-09-21T13:14:22.817Z"
                               deprecated: true
                               description: "Deprecated. The date and time the item was reviewed"
                             type:
@@ -47794,7 +47272,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-09-21T07:21:40.018Z"
+                              default: "2026-09-21T13:14:22.817Z"
                               deprecated: true
                               description: "Deprecated. The date and time the item was reviewed"
                             type:
@@ -47867,7 +47345,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-09-21T07:21:40.018Z"
+                              default: "2026-09-21T13:14:22.817Z"
                               deprecated: true
                               description: "Deprecated. The date and time the item was reviewed"
                             type:
@@ -47940,7 +47418,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-09-21T07:21:40.019Z"
+                              default: "2026-09-21T13:14:22.818Z"
                               deprecated: true
                               description: "Deprecated. The date and time the item was reviewed"
                             type:
@@ -47980,7 +47458,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date-time"
-                    default: "2026-09-21T07:21:34.711Z"
+                    default: "2026-09-21T13:14:17.695Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -47988,7 +47466,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-09-21T07:21:34.711Z"
+                        default: "2026-09-21T13:14:17.695Z"
                       - type: "string"
                         format: "date-time"
                     readOnly: true
@@ -48235,16 +47713,6 @@ paths:
                                 thought_signature:
                                   type: "string"
                                   description: "Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call."
-                                extra_content:
-                                  type: "object"
-                                  properties:
-                                    google:
-                                      type: "object"
-                                      properties:
-                                        thought_signature:
-                                          type: "string"
-                                          description: "Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call. Takes precedence over the top-level `thought_signature` when both are set."
-                                  description: "Provider-specific extra content for the tool call."
                               required:
                                 - "id"
                                 - "type"
@@ -48503,16 +47971,6 @@ paths:
                                   thought_signature:
                                     type: "string"
                                     description: "Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call."
-                                  extra_content:
-                                    type: "object"
-                                    properties:
-                                      google:
-                                        type: "object"
-                                        properties:
-                                          thought_signature:
-                                            type: "string"
-                                            description: "Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call. Takes precedence over the top-level `thought_signature` when both are set."
-                                    description: "Provider-specific extra content for the tool call."
                                 required:
                                   - "id"
                                   - "type"
@@ -48632,7 +48090,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-09-21T07:21:40.026Z"
+                              default: "2026-09-21T13:14:22.825Z"
                               deprecated: true
                               description: "Deprecated. The date and time the item was reviewed"
                             type:
@@ -48705,7 +48163,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-09-21T07:21:40.026Z"
+                              default: "2026-09-21T13:14:22.825Z"
                               deprecated: true
                               description: "Deprecated. The date and time the item was reviewed"
                             type:
@@ -48778,7 +48236,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-09-21T07:21:40.026Z"
+                              default: "2026-09-21T13:14:22.825Z"
                               deprecated: true
                               description: "Deprecated. The date and time the item was reviewed"
                             type:
@@ -48851,7 +48309,7 @@ paths:
                             reviewed_at:
                               type: "string"
                               format: "date-time"
-                              default: "2026-09-21T07:21:40.026Z"
+                              default: "2026-09-21T13:14:22.826Z"
                               deprecated: true
                               description: "Deprecated. The date and time the item was reviewed"
                             type:
@@ -48891,7 +48349,7 @@ paths:
                         format: "date-time"
                       - type: "string"
                         format: "date-time"
-                    default: "2026-09-21T07:21:34.711Z"
+                    default: "2026-09-21T13:14:17.695Z"
                     readOnly: true
                     format: "date-time"
                     description: "The date and time the resource was created"
@@ -48899,7 +48357,7 @@ paths:
                     anyOf:
                       - type: "string"
                         format: "date-time"
-                        default: "2026-09-21T07:21:34.711Z"
+                        default: "2026-09-21T13:14:17.695Z"
                       - type: "string"
                         format: "date-time"
                     readOnly: true
@@ -49199,16 +48657,6 @@ paths:
                                     thought_signature:
                                       type: "string"
                                       description: "Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call."
-                                    extra_content:
-                                      type: "object"
-                                      properties:
-                                        google:
-                                          type: "object"
-                                          properties:
-                                            thought_signature:
-                                              type: "string"
-                                              description: "Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call. Takes precedence over the top-level `thought_signature` when both are set."
-                                      description: "Provider-specific extra content for the tool call."
                                   required:
                                     - "id"
                                     - "type"
@@ -50415,16 +49863,6 @@ paths:
                                   thought_signature:
                                     type: "string"
                                     description: "Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call."
-                                  extra_content:
-                                    type: "object"
-                                    properties:
-                                      google:
-                                        type: "object"
-                                        properties:
-                                          thought_signature:
-                                            type: "string"
-                                            description: "Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call."
-                                    description: "Provider-specific extra content for the tool call."
                             role:
                               type: "string"
                               enum:
@@ -50828,16 +50266,6 @@ paths:
                                       thought_signature:
                                         type: string
                                         description: Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models.
-                                      extra_content:
-                                        type: object
-                                        properties:
-                                          google:
-                                            type: object
-                                            properties:
-                                              thought_signature:
-                                                type: string
-                                                description: Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models.
-                                        description: Provider-specific extra content for the tool call.
                                 role:
                                   type: string
                                   enum:
@@ -55164,7 +54592,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-09-21T07:21:40.051Z"
+                      default: "2026-09-21T13:14:22.849Z"
                       deprecated: true
                       description: "Deprecated. The date and time the item was reviewed"
                     type:
@@ -55206,7 +54634,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-09-21T07:21:40.052Z"
+                      default: "2026-09-21T13:14:22.849Z"
                       deprecated: true
                       description: "Deprecated. The date and time the item was reviewed"
                     type:
@@ -55248,7 +54676,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-09-21T07:21:40.052Z"
+                      default: "2026-09-21T13:14:22.849Z"
                       deprecated: true
                       description: "Deprecated. The date and time the item was reviewed"
                     type:
@@ -55290,7 +54718,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-09-21T07:21:40.052Z"
+                      default: "2026-09-21T13:14:22.849Z"
                       deprecated: true
                       description: "Deprecated. The date and time the item was reviewed"
                     type:
@@ -55621,7 +55049,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-09-21T07:21:34.711Z"
+                          default: "2026-09-21T13:14:17.695Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -55629,7 +55057,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-09-21T07:21:34.711Z"
+                              default: "2026-09-21T13:14:17.695Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -55699,7 +55127,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-09-21T07:21:34.711Z"
+                          default: "2026-09-21T13:14:17.695Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -55707,7 +55135,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-09-21T07:21:34.711Z"
+                              default: "2026-09-21T13:14:17.695Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -55883,7 +55311,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-09-21T07:21:34.711Z"
+                        default: "2026-09-21T13:14:17.695Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -55891,7 +55319,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-09-21T07:21:34.711Z"
+                            default: "2026-09-21T13:14:17.695Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -55961,7 +55389,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-09-21T07:21:34.711Z"
+                        default: "2026-09-21T13:14:17.695Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -55969,7 +55397,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-09-21T07:21:34.711Z"
+                            default: "2026-09-21T13:14:17.695Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -56063,7 +55491,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-09-21T07:21:34.711Z"
+                        default: "2026-09-21T13:14:17.695Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -56071,7 +55499,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-09-21T07:21:34.711Z"
+                            default: "2026-09-21T13:14:17.695Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -56141,7 +55569,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-09-21T07:21:34.711Z"
+                        default: "2026-09-21T13:14:17.695Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -56149,7 +55577,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-09-21T07:21:34.711Z"
+                            default: "2026-09-21T13:14:17.695Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -56333,7 +55761,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-09-21T07:21:34.711Z"
+                        default: "2026-09-21T13:14:17.695Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -56341,7 +55769,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-09-21T07:21:34.711Z"
+                            default: "2026-09-21T13:14:17.695Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -56411,7 +55839,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-09-21T07:21:34.711Z"
+                        default: "2026-09-21T13:14:17.695Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -56419,7 +55847,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-09-21T07:21:34.711Z"
+                            default: "2026-09-21T13:14:17.695Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -62266,77 +61694,6 @@ paths:
       x-speakeasy-name-override: "query"
       security:
         - ApiKey: []
-  /v3/telemetry/capabilities:
-    get:
-      tags:
-        - "Telemetry"
-      summary: "List telemetry capabilities"
-      description: "Lists the caller-scoped metrics, operations, units, query modes, result kinds, dimensions, and filter operators supported by the unified telemetry query service."
-      operationId: "TelemetryListCapabilities"
-      parameters:
-        - name: "source"
-          in: "query"
-          schema:
-            $ref: "#/components/schemas/TelemetrySource"
-      responses:
-        "200":
-          description: "OK"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ListTelemetryCapabilitiesResponse"
-      x-speakeasy-group: "telemetry"
-      x-speakeasy-name-override: "listCapabilities"
-      security:
-        - ApiKey: []
-  /v3/telemetry/facet-values:
-    post:
-      tags:
-        - "Telemetry"
-      summary: "List telemetry facet values"
-      description: "Lists caller-scoped values for one source, metric, and field while applying sibling structured filters. Reporting metrics use metric-aware rollups; raw trace metrics preserve trace facet semantics."
-      operationId: "TelemetryListFacetValues"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/ListTelemetryFacetValuesRequest"
-        required: true
-      responses:
-        "200":
-          description: "OK"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ListTelemetryFacetValuesResponse"
-      x-speakeasy-group: "telemetry"
-      x-speakeasy-name-override: "listFacetValues"
-      security:
-        - ApiKey: []
-  /v3/telemetry/query:
-    post:
-      tags:
-        - "Telemetry"
-      summary: "Query telemetry"
-      description: "Canonical neutral query envelope for traces, metrics, and logs. Select a source, compute list, and time range; optionally group, filter, bucket, sort, limit, and include totals. ReportingService.QueryReport and TraceQueryService.AggregateTraces remain supported compatibility contracts."
-      operationId: "TelemetryQuery"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/QueryTelemetryRequest"
-        required: true
-      responses:
-        "200":
-          description: "OK"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/QueryTelemetryResponse"
-      x-speakeasy-group: "telemetry"
-      x-speakeasy-name-override: "query"
-      security:
-        - ApiKey: []
   /v3/traces/aggregate:
     post:
       tags:
@@ -65566,6 +64923,37 @@ paths:
         - lang: "typescript"
           label: "Node.js - Disable a key"
           source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\nconst result = await client.apiKeys.update({\n  apiKeyId: '01HZXW2K7Y8Q9M0N1P2R3S4T5V',\n  status: 'API_KEY_STATUS_DISABLED',\n});\n\nconsole.log(result.status);\n"
+      security:
+        - ApiKey: []
+  /v2/audit-logs/query:
+    post:
+      tags:
+        - "Audit Logs"
+      summary: "Query audit logs"
+      description: "Queries audit logs from your workspace with filters, sorting, and cursor pagination."
+      operationId: "AuditLogQuery"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/QueryAuditLogsRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/QueryAuditLogsResponse"
+      x-speakeasy-group: "auditLogs"
+      x-speakeasy-name-override: "query"
+      x-code-samples:
+        - lang: "curl"
+          label: "cURL"
+          source: "curl --request POST \\\n  --url https://my.orq.ai/v2/audit-logs/query \\\n  --header \"Authorization: Bearer $ORQ_API_KEY\" \\\n  --header \"Content-Type: application/json\" \\\n  --data '{\n    \"filters\": {\n      \"operator\": \"and\",\n      \"filters\": [\n        {\n          \"type\": \"string\",\n          \"path\": \"entity_type\",\n          \"operator\": \"is\",\n          \"value\": \"skill\"\n        }\n      ]\n    },\n    \"pagination\": {\n      \"limit\": 20\n    },\n    \"sorting\": [\n      {\n        \"key\": \"created_at\",\n        \"direction\": \"desc\"\n      }\n    ]\n  }'\n"
+        - lang: "typescript"
+          label: "TypeScript"
+          source: "const auditLogs = await client.auditLogs.query({\n  filters: {\n    operator: \"and\",\n    filters: [\n      {\n        type: \"string\",\n        path: \"entity_type\",\n        operator: \"is\",\n        value: \"skill\",\n      },\n    ],\n  },\n  pagination: {\n    limit: 20,\n  },\n  sorting: [\n    {\n      key: \"created_at\",\n      direction: \"desc\",\n    },\n  ],\n});\n"
       security:
         - ApiKey: []
   /v2/budgets:
@@ -69081,350 +68469,6 @@ paths:
           source: "curl --request PATCH \\\n  --url 'https://my.orq.ai/v2/webhooks/webhook_01HZXW2K7Y8Q9M0N1P2R3S4T5V' \\\n  --header \"Authorization: Bearer $ORQ_API_KEY\" \\\n  --header 'Content-Type: application/json' \\\n  --data '{\n    \"display_name\": \"Updated alerts\",\n    \"enabled\": false\n  }'\n"
       security:
         - ApiKey: []
-  /v2/wikis:
-    get:
-      tags: []
-      operationId: "ListWikis"
-      parameters:
-        - name: "limit"
-          in: "query"
-          schema:
-            type: "integer"
-            format: "int32"
-        - name: "starting_after"
-          in: "query"
-          schema:
-            type: "string"
-        - name: "ending_before"
-          in: "query"
-          schema:
-            type: "string"
-        - name: "repository_key"
-          in: "query"
-          schema:
-            type: "string"
-        - name: "branch"
-          in: "query"
-          schema:
-            type: "string"
-        - name: "factory_id"
-          in: "query"
-          schema:
-            type: "string"
-      responses:
-        "200":
-          description: "OK"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ListWikisResponse"
-      x-speakeasy-group: "wikis"
-      x-speakeasy-name-override: "list"
-      x-code-samples:
-        - lang: "TypeScript"
-          source: "import { Orq } from '@orq-ai/node';\nconst orq = new Orq({ apiKey: process.env.ORQ_API_KEY });\nawait orq.wikis.list({ factoryId: 'fac_01J81V5RZPVTDHXBV6M2YVJHRB' });\n"
-      security:
-        - ApiKey: []
-    post:
-      tags: []
-      operationId: "CreateWiki"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/CreateWikiRequest"
-        required: true
-      responses:
-        "200":
-          description: "OK"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/CreateWikiResponse"
-      x-speakeasy-group: "wikis"
-      x-speakeasy-name-override: "create"
-      x-code-samples:
-        - lang: "TypeScript"
-          source: "import { Orq } from '@orq-ai/node';\nconst orq = new Orq({ apiKey: process.env.ORQ_API_KEY });\nawait orq.wikis.create({ factoryId: 'fac_01J81V5RZPVTDHXBV6M2YVJHRB', displayName: 'Example repository', repository: { provider: 'github', owner: 'octocat', name: 'Hello-World', url: 'https://github.com/octocat/Hello-World', defaultBranch: 'main' }, branch: 'main', scmConnectionId: 'scmc_01J81V5RZPVTDHXBV6M2YVJHRB', settings: { depth: 'concise', refreshCadence: 'manual', publishToRepository: false } });\n"
-      security:
-        - ApiKey: []
-  /v2/wikis/inspect-repository:
-    post:
-      tags: []
-      operationId: "InspectRepositoryWiki"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/InspectRepositoryWikiRequest"
-        required: true
-      responses:
-        "200":
-          description: "OK"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/InspectRepositoryWikiResponse"
-      x-speakeasy-group: "wikis"
-      x-speakeasy-name-override: "inspectRepository"
-      x-code-samples:
-        - lang: "TypeScript"
-          source: "import { Orq } from '@orq-ai/node';\nconst orq = new Orq({ apiKey: process.env.ORQ_API_KEY });\nawait orq.wikis.inspectRepository({ scmConnectionId: 'scmc_01J81V5RZPVTDHXBV6M2YVJHRB', repositoryUrl: 'https://github.com/octocat/Hello-World', branch: 'main' });\n"
-      security:
-        - ApiKey: []
-  /v2/wikis/{wiki_id}:
-    get:
-      tags: []
-      operationId: "GetWiki"
-      parameters:
-        - name: "wiki_id"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
-      responses:
-        "200":
-          description: "OK"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GetWikiResponse"
-      x-speakeasy-group: "wikis"
-      x-speakeasy-name-override: "get"
-      x-code-samples:
-        - lang: "TypeScript"
-          source: "import { Orq } from '@orq-ai/node';\nconst orq = new Orq({ apiKey: process.env.ORQ_API_KEY });\nawait orq.wikis.get({ wikiId: 'wiki_01J81V5RZPVTDHXBV6M2YVJHRA' });\n"
-      security:
-        - ApiKey: []
-    delete:
-      tags: []
-      operationId: "DeleteWiki"
-      parameters:
-        - name: "wiki_id"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
-      responses:
-        "200":
-          description: "OK"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/DeleteWikiResponse"
-      x-speakeasy-group: "wikis"
-      x-speakeasy-name-override: "delete"
-      x-code-samples:
-        - lang: "TypeScript"
-          source: "import { Orq } from '@orq-ai/node';\nconst orq = new Orq({ apiKey: process.env.ORQ_API_KEY });\nawait orq.wikis.delete({ wikiId: 'wiki_01J81V5RZPVTDHXBV6M2YVJHRA' });\n"
-      security:
-        - ApiKey: []
-    patch:
-      tags: []
-      operationId: "UpdateWiki"
-      parameters:
-        - name: "wiki_id"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/UpdateWikiRequest"
-        required: true
-      responses:
-        "200":
-          description: "OK"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/UpdateWikiResponse"
-      x-speakeasy-group: "wikis"
-      x-speakeasy-name-override: "update"
-      x-code-samples:
-        - lang: "TypeScript"
-          source: "import { Orq } from '@orq-ai/node';\nconst orq = new Orq({ apiKey: process.env.ORQ_API_KEY });\nawait orq.wikis.update({ wikiId: 'wiki_01J81V5RZPVTDHXBV6M2YVJHRA', settings: { depth: 'extensive', refreshCadence: 'weekly', publishToRepository: false } });\n"
-      security:
-        - ApiKey: []
-  /v2/wikis/{wiki_id}/page:
-    get:
-      tags: []
-      operationId: "GetWikiPage"
-      parameters:
-        - name: "wiki_id"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
-        - name: "path"
-          in: "query"
-          schema:
-            type: "string"
-        - name: "run_id"
-          in: "query"
-          schema:
-            type: "string"
-      responses:
-        "200":
-          description: "OK"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GetWikiPageResponse"
-      x-speakeasy-group: "wikis"
-      x-speakeasy-name-override: "getPage"
-      x-code-samples:
-        - lang: "TypeScript"
-          source: "import { Orq } from '@orq-ai/node';\nconst orq = new Orq({ apiKey: process.env.ORQ_API_KEY });\nawait orq.wikis.getPage({ wikiId: 'wiki_01J81V5RZPVTDHXBV6M2YVJHRA', path: 'index.md' });\n"
-      security:
-        - ApiKey: []
-    patch:
-      tags: []
-      operationId: "UpdateWikiPage"
-      parameters:
-        - name: "wiki_id"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/UpdateWikiPageRequest"
-        required: true
-      responses:
-        "200":
-          description: "OK"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/UpdateWikiPageResponse"
-      x-speakeasy-group: "wikis"
-      x-speakeasy-name-override: "updatePage"
-      x-code-samples:
-        - lang: "TypeScript"
-          source: "import { Orq } from '@orq-ai/node';\nconst orq = new Orq({ apiKey: process.env.ORQ_API_KEY });\nconst { page } = await orq.wikis.getPage({ wikiId: 'wiki_01J81V5RZPVTDHXBV6M2YVJHRA', path: 'index.md' });\nawait orq.wikis.updatePage({ wikiId: 'wiki_01J81V5RZPVTDHXBV6M2YVJHRA', path: 'index.md', markdown: '# Overview\\nUpdated documentation.', expectedContentHash: page.contentHash });\n"
-      security:
-        - ApiKey: []
-  /v2/wikis/{wiki_id}/refresh:
-    post:
-      tags: []
-      operationId: "RefreshWiki"
-      parameters:
-        - name: "wiki_id"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/RefreshWikiRequest"
-        required: true
-      responses:
-        "200":
-          description: "OK"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/RefreshWikiResponse"
-      x-speakeasy-group: "wikis"
-      x-speakeasy-name-override: "refresh"
-      x-code-samples:
-        - lang: "TypeScript"
-          source: "import { Orq } from '@orq-ai/node';\nconst orq = new Orq({ apiKey: process.env.ORQ_API_KEY });\nawait orq.wikis.refresh({ wikiId: 'wiki_01J81V5RZPVTDHXBV6M2YVJHRA', full: false });\n"
-      security:
-        - ApiKey: []
-  /v2/wikis/{wiki_id}/runs:
-    get:
-      tags: []
-      operationId: "ListWikiRuns"
-      parameters:
-        - name: "wiki_id"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
-        - name: "limit"
-          in: "query"
-          schema:
-            type: "integer"
-            format: "int32"
-      responses:
-        "200":
-          description: "OK"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ListWikiRunsResponse"
-      x-speakeasy-group: "wikis"
-      x-speakeasy-name-override: "listRuns"
-      x-code-samples:
-        - lang: "TypeScript"
-          source: "import { Orq } from '@orq-ai/node';\nconst orq = new Orq({ apiKey: process.env.ORQ_API_KEY });\nawait orq.wikis.listRuns({ wikiId: 'wiki_01J81V5RZPVTDHXBV6M2YVJHRA', limit: 20 });\n"
-      security:
-        - ApiKey: []
-  /v2/wikis/{wiki_id}/search:
-    get:
-      tags: []
-      operationId: "SearchWiki"
-      parameters:
-        - name: "wiki_id"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
-        - name: "query"
-          in: "query"
-          schema:
-            type: "string"
-        - name: "limit"
-          in: "query"
-          schema:
-            type: "integer"
-            format: "int32"
-      responses:
-        "200":
-          description: "OK"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/SearchWikiResponse"
-      x-speakeasy-group: "wikis"
-      x-speakeasy-name-override: "search"
-      x-code-samples:
-        - lang: "TypeScript"
-          source: "import { Orq } from '@orq-ai/node';\nconst orq = new Orq({ apiKey: process.env.ORQ_API_KEY });\nawait orq.wikis.search({ wikiId: 'wiki_01J81V5RZPVTDHXBV6M2YVJHRA', query: 'installation', limit: 20 });\n"
-      security:
-        - ApiKey: []
-  /v2/wikis/{wiki_id}/tree:
-    get:
-      tags: []
-      operationId: "GetWikiTree"
-      parameters:
-        - name: "wiki_id"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
-      responses:
-        "200":
-          description: "OK"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GetWikiTreeResponse"
-      x-speakeasy-group: "wikis"
-      x-speakeasy-name-override: "getTree"
-      x-code-samples:
-        - lang: "TypeScript"
-          source: "import { Orq } from '@orq-ai/node';\nconst orq = new Orq({ apiKey: process.env.ORQ_API_KEY });\nawait orq.wikis.getTree({ wikiId: 'wiki_01J81V5RZPVTDHXBV6M2YVJHRA' });\n"
-      security:
-        - ApiKey: []
   /v2/workspaces:
     get:
       tags:
@@ -70513,7 +69557,7 @@ paths:
         - ApiKey: []
   /v3/router/classify:
     post:
-      description: "**Beta.** Runs typed classification questions (`noul`, `choice`, `score`) against the native classify model `typesafe/jev-latest` or a chat model that supports classify, such as `anthropic/claude-haiku-4-5`, `google-ai/gemini-3.8-flash` or `zai/glm-5.3-flash`. Chat models answer through one structured-output call and their probabilities are model-reported rather than calibrated. The request and response follow the TypeSafe classification contract; `model` in the response echoes the request and `usage` carries the computed cost like the Responses API. This endpoint currently does not apply PII plugins or guardrails."
+      description: "**Beta.** Runs typed classification questions (`noul`, `choice`, `score`) against a classify model such as `typesafe/jev-latest`. The request and response proxy the TypeSafe classification contract 1:1; `model` in the response is the orq model id that served the request and `usage` carries the computed cost like the Responses API. This endpoint currently does not apply PII plugins or guardrails."
       operationId: "CreateClassify"
       requestBody:
         content:
@@ -70554,7 +69598,7 @@ paths:
                   description: "Key-value metadata attached to the trace."
                   type: "object"
                 model:
-                  description: "ID of the model to use: the native classify model typesafe/jev-latest, or a chat model that supports classify such as anthropic/claude-haiku-4-5, google-ai/gemini-3.8-flash or zai/glm-5.3-flash."
+                  description: "ID of the classify model to use, for example typesafe/jev-latest."
                   type: "string"
                 name:
                   description: "The name to display on the trace. If not specified, the default system name will be used."
@@ -70688,11 +69732,8 @@ paths:
                     description: "Answers keyed by the question identifiers from the request."
                     type: "object"
                   model:
-                    description: "The model ID from the request, for example typesafe/jev-latest or google/gemini-3.8-flash."
+                    description: "The model that served the request, for example typesafe/jev-latest."
                     type: "string"
-                  telemetry:
-                    $ref: "#/components/schemas/ResponseTelemetry"
-                    description: "OpenTelemetry trace and span identifiers for this request."
                   usage:
                     $ref: "#/components/schemas/ClassifyUsage"
                     description: "The usage information for the request."
@@ -71910,8 +70951,6 @@ tags:
     description: "OpenTelemetry log query API. Search, filter, aggregate, and facet log records ingested via OTLP."
   - name: "Reporting"
     description: "GenAI reporting API over canonical analytics rollups. Accepts a metric name, time range, grain, group-by, and filters; returns a typed time series and optional totals."
-  - name: "Telemetry"
-    description: "Unified query envelope for traces, metrics, and logs (ADR 0004). One request shape, one filter dialect, and one response shape per source, validated by a per-source registry."
   - name: "Traces"
     description: "Query and inspect ingested trace data: search trace summaries, aggregate metrics, and read individual traces and their spans."
   - description: "List models available through the AI Router."
@@ -71923,6 +70962,8 @@ tags:
     description: "Annotation queues collect spans for human review."
   - name: "API keys"
     description: "API keys authenticate programmatic access to the workspace. They expose opaque tokens, per-domain access grants, and budget and rate-limit constraints."
+  - name: "Audit Logs"
+    description: "Audit logs record workspace entity changes and access-relevant events."
   - name: "Budgets"
     description: "Budgets govern spend, token usage, and request rate across six scopes: workspace, project, identity, API key, provider, and model. Every applicable budget is enforced, and the most restrictive limit applies per dimension."
   - name: "Files"
