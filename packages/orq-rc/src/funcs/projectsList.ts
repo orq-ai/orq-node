@@ -30,7 +30,7 @@ import { Result } from "../types/fp.js";
  * List all projects
  *
  * @remarks
- * Returns projects visible to the current workspace, ordered by creation time with the newest project first. Use `starting_after` or `ending_before` to page through large collections.
+ * Returns projects visible to the current workspace, ordered by creation time with the newest project first. Use `starting_after` or `ending_before` to page through large collections; the two cursors are mutually exclusive.
  */
 export function projectsList(
   client: OrqCore,

@@ -93,7 +93,7 @@ export type GetV2HumanEvalSetsResponseBody1 = {
   filterValues: Array<string>;
 };
 
-export type GetV2HumanEvalSetsResponseBody =
+export type ResponseBody =
   | GetV2HumanEvalSetsResponseBody1
   | GetV2HumanEvalSetsResponseBody2;
 
@@ -140,7 +140,7 @@ export const GetV2HumanEvalSetsResponseBody2$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2026-09-21T07:21:34.711Z",
+    "2026-09-21T16:34:27.567Z",
   ).transform(v => new Date(v)),
   filter_type: z.literal("name"),
   filter_value: z.string(),
@@ -185,7 +185,7 @@ export const GetV2HumanEvalSetsResponseBody1$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2026-09-21T07:21:34.711Z",
+    "2026-09-21T16:34:27.567Z",
   ).transform(v => new Date(v)),
   filter_type: z.literal("span_type"),
   filter_values: z.array(z.string()),
@@ -214,8 +214,8 @@ export function getV2HumanEvalSetsResponseBody1FromJSON(
 }
 
 /** @internal */
-export const GetV2HumanEvalSetsResponseBody$inboundSchema: z.ZodType<
-  GetV2HumanEvalSetsResponseBody,
+export const ResponseBody$inboundSchema: z.ZodType<
+  ResponseBody,
   z.ZodTypeDef,
   unknown
 > = z.union([
@@ -223,12 +223,12 @@ export const GetV2HumanEvalSetsResponseBody$inboundSchema: z.ZodType<
   z.lazy(() => GetV2HumanEvalSetsResponseBody2$inboundSchema),
 ]);
 
-export function getV2HumanEvalSetsResponseBodyFromJSON(
+export function responseBodyFromJSON(
   jsonString: string,
-): SafeParseResult<GetV2HumanEvalSetsResponseBody, SDKValidationError> {
+): SafeParseResult<ResponseBody, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => GetV2HumanEvalSetsResponseBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetV2HumanEvalSetsResponseBody' from JSON`,
+    (x) => ResponseBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ResponseBody' from JSON`,
   );
 }

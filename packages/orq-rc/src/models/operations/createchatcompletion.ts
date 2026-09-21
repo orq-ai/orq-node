@@ -915,7 +915,7 @@ export type Inputs2 = {
  *
  * @deprecated class: This will be removed in a future release, please migrate away from it as soon as possible.
  */
-export type CreateChatCompletionInputs = { [k: string]: any } | Array<Inputs2>;
+export type Inputs = { [k: string]: any } | Array<Inputs2>;
 
 export const CreateChatCompletionRouterChatCompletionsRequestRequestBodyOrqType =
   {
@@ -3917,23 +3917,17 @@ export function inputs2ToJSON(inputs2: Inputs2): string {
 }
 
 /** @internal */
-export type CreateChatCompletionInputs$Outbound =
-  | { [k: string]: any }
-  | Array<Inputs2$Outbound>;
+export type Inputs$Outbound = { [k: string]: any } | Array<Inputs2$Outbound>;
 
 /** @internal */
-export const CreateChatCompletionInputs$outboundSchema: z.ZodType<
-  CreateChatCompletionInputs$Outbound,
+export const Inputs$outboundSchema: z.ZodType<
+  Inputs$Outbound,
   z.ZodTypeDef,
-  CreateChatCompletionInputs
+  Inputs
 > = z.union([z.record(z.any()), z.array(z.lazy(() => Inputs2$outboundSchema))]);
 
-export function createChatCompletionInputsToJSON(
-  createChatCompletionInputs: CreateChatCompletionInputs,
-): string {
-  return JSON.stringify(
-    CreateChatCompletionInputs$outboundSchema.parse(createChatCompletionInputs),
-  );
+export function inputsToJSON(inputs: Inputs): string {
+  return JSON.stringify(Inputs$outboundSchema.parse(inputs));
 }
 
 /** @internal */

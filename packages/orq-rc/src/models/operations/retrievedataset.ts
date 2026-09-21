@@ -4,59 +4,9 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type RetrieveDatasetRequest = {
-  /**
-   * The unique identifier of the dataset
-   */
   datasetId: string;
-};
-
-export type RetrieveDatasetMetadata = {
-  totalVersions: number;
-  datapointsCount: number;
-};
-
-/**
- * Dataset retrieved successfully. Returns the complete dataset object.
- */
-export type RetrieveDatasetResponseBody = {
-  /**
-   * The unique identifier of the dataset
-   */
-  id: string;
-  /**
-   * The display name of the dataset
-   */
-  displayName: string;
-  /**
-   * The unique identifier of the project it belongs to
-   */
-  projectId: string;
-  /**
-   * The unique identifier of the workspace it belongs to
-   */
-  workspaceId: string;
-  metadata: RetrieveDatasetMetadata;
-  /**
-   * The unique identifier of the user who created the dataset
-   */
-  createdById?: string | null | undefined;
-  /**
-   * The unique identifier of the user who last updated the dataset
-   */
-  updatedById?: string | null | undefined;
-  /**
-   * The date and time the resource was created
-   */
-  created?: Date | undefined;
-  /**
-   * The date and time the resource was last updated
-   */
-  updated: Date;
 };
 
 /** @internal */
@@ -82,69 +32,5 @@ export function retrieveDatasetRequestToJSON(
 ): string {
   return JSON.stringify(
     RetrieveDatasetRequest$outboundSchema.parse(retrieveDatasetRequest),
-  );
-}
-
-/** @internal */
-export const RetrieveDatasetMetadata$inboundSchema: z.ZodType<
-  RetrieveDatasetMetadata,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  total_versions: z.number(),
-  datapoints_count: z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    "total_versions": "totalVersions",
-    "datapoints_count": "datapointsCount",
-  });
-});
-
-export function retrieveDatasetMetadataFromJSON(
-  jsonString: string,
-): SafeParseResult<RetrieveDatasetMetadata, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => RetrieveDatasetMetadata$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RetrieveDatasetMetadata' from JSON`,
-  );
-}
-
-/** @internal */
-export const RetrieveDatasetResponseBody$inboundSchema: z.ZodType<
-  RetrieveDatasetResponseBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  _id: z.string(),
-  display_name: z.string(),
-  project_id: z.string(),
-  workspace_id: z.string(),
-  metadata: z.lazy(() => RetrieveDatasetMetadata$inboundSchema),
-  created_by_id: z.nullable(z.string()).optional(),
-  updated_by_id: z.nullable(z.string()).optional(),
-  created: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  updated: z.string().datetime({ offset: true }).default(
-    "2026-09-21T07:21:34.711Z",
-  ).transform(v => new Date(v)),
-}).transform((v) => {
-  return remap$(v, {
-    "_id": "id",
-    "display_name": "displayName",
-    "project_id": "projectId",
-    "workspace_id": "workspaceId",
-    "created_by_id": "createdById",
-    "updated_by_id": "updatedById",
-  });
-});
-
-export function retrieveDatasetResponseBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<RetrieveDatasetResponseBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => RetrieveDatasetResponseBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'RetrieveDatasetResponseBody' from JSON`,
   );
 }

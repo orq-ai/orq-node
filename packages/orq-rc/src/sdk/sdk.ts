@@ -71,11 +71,6 @@ export class Orq extends ClientSDK {
     return (this._tools ??= new Tools(this._options));
   }
 
-  private _datasets?: Datasets;
-  get datasets(): Datasets {
-    return (this._datasets ??= new Datasets(this._options));
-  }
-
   private _router?: Router;
   get router(): Router {
     return (this._router ??= new Router(this._options));
@@ -144,6 +139,11 @@ export class Orq extends ClientSDK {
   private _traces?: Traces;
   get traces(): Traces {
     return (this._traces ??= new Traces(this._options));
+  }
+
+  private _datasets?: Datasets;
+  get datasets(): Datasets {
+    return (this._datasets ??= new Datasets(this._options));
   }
 
   private _models?: Models;

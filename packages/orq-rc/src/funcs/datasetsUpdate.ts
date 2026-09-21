@@ -11,6 +11,7 @@ import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
+import * as components from "../models/components/index.js";
 import {
   ConnectionError,
   InvalidRequestError,
@@ -18,7 +19,6 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
-import * as errors from "../models/errors/index.js";
 import { OrqError } from "../models/errors/orqerror.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
@@ -30,7 +30,7 @@ import { Result } from "../types/fp.js";
  * Update a dataset
  *
  * @remarks
- * Update a dataset
+ * Updates the specified dataset.
  */
 export function datasetsUpdate(
   client: OrqCore,
@@ -38,8 +38,7 @@ export function datasetsUpdate(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.UpdateDatasetResponseBody,
-    | errors.HonoApiError
+    components.Dataset,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -64,8 +63,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      operations.UpdateDatasetResponseBody,
-      | errors.HonoApiError
+      components.Dataset,
       | OrqError
       | ResponseValidationError
       | ConnectionError
@@ -87,7 +85,9 @@ async function $do(
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = encodeJSON("body", payload.RequestBody, { explode: true });
+  const body = encodeJSON("body", payload.UpdateDatasetRequest, {
+    explode: true,
+  });
 
   const pathParams = {
     dataset_id: encodeSimple("dataset_id", payload.dataset_id, {
@@ -148,13 +148,8 @@ async function $do(
   }
   const response = doResult.value;
 
-  const responseFields = {
-    HttpMeta: { Response: response, Request: req },
-  };
-
   const [result] = await M.match<
-    operations.UpdateDatasetResponseBody,
-    | errors.HonoApiError
+    components.Dataset,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -164,11 +159,10 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, operations.UpdateDatasetResponseBody$inboundSchema),
-    M.jsonErr(404, errors.HonoApiError$inboundSchema),
+    M.json(200, components.Dataset$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
-  )(response, req, { extraFields: responseFields });
+  )(response, req);
   if (!result.ok) {
     return [result, { status: "complete", request: req, response }];
   }

@@ -4,118 +4,17 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-
-export type UpdateDatasetRequestBody = {
-  /**
-   * The display name of the dataset
-   */
-  displayName?: string | undefined;
-  /**
-   * The unique identifier of the project it belongs to
-   */
-  projectId?: string | undefined;
-  /**
-   * Entity storage path.
-   *
-   * @remarks
-   *
-   * With workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.
-   *
-   * With project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project.
-   */
-  path?: string | undefined;
-};
+import * as components from "../components/index.js";
 
 export type UpdateDatasetRequest = {
-  /**
-   * The unique identifier of the dataset
-   */
   datasetId: string;
-  requestBody?: UpdateDatasetRequestBody | undefined;
+  updateDatasetRequest: components.UpdateDatasetRequest;
 };
-
-export type UpdateDatasetMetadata = {
-  totalVersions: number;
-  datapointsCount: number;
-};
-
-/**
- * Dataset updated.
- */
-export type UpdateDatasetResponseBody = {
-  /**
-   * The unique identifier of the dataset
-   */
-  id: string;
-  /**
-   * The display name of the dataset
-   */
-  displayName: string;
-  /**
-   * The unique identifier of the project it belongs to
-   */
-  projectId: string;
-  /**
-   * The unique identifier of the workspace it belongs to
-   */
-  workspaceId: string;
-  metadata: UpdateDatasetMetadata;
-  /**
-   * The unique identifier of the user who created the dataset
-   */
-  createdById?: string | null | undefined;
-  /**
-   * The unique identifier of the user who last updated the dataset
-   */
-  updatedById?: string | null | undefined;
-  /**
-   * The date and time the resource was created
-   */
-  created?: Date | undefined;
-  /**
-   * The date and time the resource was last updated
-   */
-  updated: Date;
-};
-
-/** @internal */
-export type UpdateDatasetRequestBody$Outbound = {
-  display_name?: string | undefined;
-  project_id?: string | undefined;
-  path?: string | undefined;
-};
-
-/** @internal */
-export const UpdateDatasetRequestBody$outboundSchema: z.ZodType<
-  UpdateDatasetRequestBody$Outbound,
-  z.ZodTypeDef,
-  UpdateDatasetRequestBody
-> = z.object({
-  displayName: z.string().optional(),
-  projectId: z.string().optional(),
-  path: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    displayName: "display_name",
-    projectId: "project_id",
-  });
-});
-
-export function updateDatasetRequestBodyToJSON(
-  updateDatasetRequestBody: UpdateDatasetRequestBody,
-): string {
-  return JSON.stringify(
-    UpdateDatasetRequestBody$outboundSchema.parse(updateDatasetRequestBody),
-  );
-}
 
 /** @internal */
 export type UpdateDatasetRequest$Outbound = {
   dataset_id: string;
-  RequestBody?: UpdateDatasetRequestBody$Outbound | undefined;
+  UpdateDatasetRequest: components.UpdateDatasetRequest$Outbound;
 };
 
 /** @internal */
@@ -125,11 +24,11 @@ export const UpdateDatasetRequest$outboundSchema: z.ZodType<
   UpdateDatasetRequest
 > = z.object({
   datasetId: z.string(),
-  requestBody: z.lazy(() => UpdateDatasetRequestBody$outboundSchema).optional(),
+  updateDatasetRequest: components.UpdateDatasetRequest$outboundSchema,
 }).transform((v) => {
   return remap$(v, {
     datasetId: "dataset_id",
-    requestBody: "RequestBody",
+    updateDatasetRequest: "UpdateDatasetRequest",
   });
 });
 
@@ -138,69 +37,5 @@ export function updateDatasetRequestToJSON(
 ): string {
   return JSON.stringify(
     UpdateDatasetRequest$outboundSchema.parse(updateDatasetRequest),
-  );
-}
-
-/** @internal */
-export const UpdateDatasetMetadata$inboundSchema: z.ZodType<
-  UpdateDatasetMetadata,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  total_versions: z.number(),
-  datapoints_count: z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    "total_versions": "totalVersions",
-    "datapoints_count": "datapointsCount",
-  });
-});
-
-export function updateDatasetMetadataFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdateDatasetMetadata, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdateDatasetMetadata$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateDatasetMetadata' from JSON`,
-  );
-}
-
-/** @internal */
-export const UpdateDatasetResponseBody$inboundSchema: z.ZodType<
-  UpdateDatasetResponseBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  _id: z.string(),
-  display_name: z.string(),
-  project_id: z.string(),
-  workspace_id: z.string(),
-  metadata: z.lazy(() => UpdateDatasetMetadata$inboundSchema),
-  created_by_id: z.nullable(z.string()).optional(),
-  updated_by_id: z.nullable(z.string()).optional(),
-  created: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  updated: z.string().datetime({ offset: true }).default(
-    "2026-09-21T07:21:34.711Z",
-  ).transform(v => new Date(v)),
-}).transform((v) => {
-  return remap$(v, {
-    "_id": "id",
-    "display_name": "displayName",
-    "project_id": "projectId",
-    "workspace_id": "workspaceId",
-    "created_by_id": "createdById",
-    "updated_by_id": "updatedById",
-  });
-});
-
-export function updateDatasetResponseBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<UpdateDatasetResponseBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => UpdateDatasetResponseBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'UpdateDatasetResponseBody' from JSON`,
   );
 }

@@ -71,7 +71,7 @@ run();
 
 ### Response
 
-**Promise\<[operations.GetV2HumanEvalSetsResponseBody[]](../../models/.md)\>**
+**Promise\<[operations.ResponseBody[]](../../models/.md)\>**
 
 ### Errors
 

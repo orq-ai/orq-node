@@ -4,96 +4,19 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ListDatasetsRequest = {
-  /**
-   * A limit on the number of objects to be returned. Limit can range between 1 and 200, and the default is 10
-   */
   limit?: number | undefined;
-  /**
-   * A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 20 objects, ending with `01JJ1HDHN79XAS7A01WB3HYSDB`, your subsequent call can include `after=01JJ1HDHN79XAS7A01WB3HYSDB` in order to fetch the next page of the list.
-   */
   startingAfter?: string | undefined;
-  /**
-   * A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 20 objects, starting with `01JJ1HDHN79XAS7A01WB3HYSDB`, your subsequent call can include `before=01JJ1HDHN79XAS7A01WB3HYSDB` in order to fetch the previous page of the list.
-   */
   endingBefore?: string | undefined;
-  /**
-   * Filter datasets by display name (case-insensitive match).
-   */
   search?: string | undefined;
-  /**
-   * Comma-separated list of user IDs; returns datasets last updated by any of them.
-   */
   updatedBy?: string | undefined;
-  /**
-   * Restricts results to a single project. Defaults to every project the caller can access.
-   */
   projectId?: string | undefined;
-};
-
-export const ListDatasetsObject = {
-  List: "list",
-} as const;
-export type ListDatasetsObject = ClosedEnum<typeof ListDatasetsObject>;
-
-export type ListDatasetsMetadata = {
-  totalVersions: number;
-  datapointsCount: number;
-};
-
-export type ListDatasetsData = {
-  /**
-   * The unique identifier of the dataset
-   */
-  id: string;
-  /**
-   * The display name of the dataset
-   */
-  displayName: string;
-  /**
-   * The unique identifier of the project it belongs to
-   */
-  projectId: string;
-  /**
-   * The unique identifier of the workspace it belongs to
-   */
-  workspaceId: string;
-  metadata: ListDatasetsMetadata;
-  /**
-   * The unique identifier of the user who created the dataset
-   */
-  createdById?: string | null | undefined;
-  /**
-   * The unique identifier of the user who last updated the dataset
-   */
-  updatedById?: string | null | undefined;
-  /**
-   * The date and time the resource was created
-   */
-  created?: Date | undefined;
-  /**
-   * The date and time the resource was last updated
-   */
-  updated: Date;
-};
-
-/**
- * Datasets Retrieved Successfully
- */
-export type ListDatasetsResponseBody = {
-  object: ListDatasetsObject;
-  data: Array<ListDatasetsData>;
-  hasMore: boolean;
 };
 
 /** @internal */
 export type ListDatasetsRequest$Outbound = {
-  limit: number;
+  limit?: number | undefined;
   starting_after?: string | undefined;
   ending_before?: string | undefined;
   search?: string | undefined;
@@ -107,7 +30,7 @@ export const ListDatasetsRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ListDatasetsRequest
 > = z.object({
-  limit: z.number().int().default(10),
+  limit: z.number().int().optional(),
   startingAfter: z.string().optional(),
   endingBefore: z.string().optional(),
   search: z.string().optional(),
@@ -127,99 +50,5 @@ export function listDatasetsRequestToJSON(
 ): string {
   return JSON.stringify(
     ListDatasetsRequest$outboundSchema.parse(listDatasetsRequest),
-  );
-}
-
-/** @internal */
-export const ListDatasetsObject$inboundSchema: z.ZodNativeEnum<
-  typeof ListDatasetsObject
-> = z.nativeEnum(ListDatasetsObject);
-
-/** @internal */
-export const ListDatasetsMetadata$inboundSchema: z.ZodType<
-  ListDatasetsMetadata,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  total_versions: z.number(),
-  datapoints_count: z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    "total_versions": "totalVersions",
-    "datapoints_count": "datapointsCount",
-  });
-});
-
-export function listDatasetsMetadataFromJSON(
-  jsonString: string,
-): SafeParseResult<ListDatasetsMetadata, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ListDatasetsMetadata$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ListDatasetsMetadata' from JSON`,
-  );
-}
-
-/** @internal */
-export const ListDatasetsData$inboundSchema: z.ZodType<
-  ListDatasetsData,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  _id: z.string(),
-  display_name: z.string(),
-  project_id: z.string(),
-  workspace_id: z.string(),
-  metadata: z.lazy(() => ListDatasetsMetadata$inboundSchema),
-  created_by_id: z.nullable(z.string()).optional(),
-  updated_by_id: z.nullable(z.string()).optional(),
-  created: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  updated: z.string().datetime({ offset: true }).default(
-    "2026-09-21T07:21:34.711Z",
-  ).transform(v => new Date(v)),
-}).transform((v) => {
-  return remap$(v, {
-    "_id": "id",
-    "display_name": "displayName",
-    "project_id": "projectId",
-    "workspace_id": "workspaceId",
-    "created_by_id": "createdById",
-    "updated_by_id": "updatedById",
-  });
-});
-
-export function listDatasetsDataFromJSON(
-  jsonString: string,
-): SafeParseResult<ListDatasetsData, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ListDatasetsData$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ListDatasetsData' from JSON`,
-  );
-}
-
-/** @internal */
-export const ListDatasetsResponseBody$inboundSchema: z.ZodType<
-  ListDatasetsResponseBody,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  object: ListDatasetsObject$inboundSchema,
-  data: z.array(z.lazy(() => ListDatasetsData$inboundSchema)),
-  has_more: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    "has_more": "hasMore",
-  });
-});
-
-export function listDatasetsResponseBodyFromJSON(
-  jsonString: string,
-): SafeParseResult<ListDatasetsResponseBody, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ListDatasetsResponseBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ListDatasetsResponseBody' from JSON`,
   );
 }
