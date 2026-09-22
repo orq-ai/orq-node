@@ -2555,7 +2555,7 @@ components:
           properties:
             _id:
               type: "string"
-              default: "reasoning_01m337fg6xwrwet1n3qqy5w2hn"
+              default: "reasoning_01m346z14scz5tepcrmd2mqyx0"
               description: "Unique identifier for the part. Format: reasoning_{ulid} (e.g., reasoning_01hxyz...)"
               example: "reasoning_01hxyz123abc"
             kind:
@@ -2908,7 +2908,7 @@ components:
         - "role"
         - "parts"
       title: "Extended A2A Message"
-      description: "Extended Agent-to-Agent protocol message with support for tool calls and tool results. Extends the base A2A message format with Orquesta-specific features."
+      description: "Extended Agent-to-Agent protocol message with support for tool calls and tool results. Extends the base A2A message format with orq.ai-specific features."
     AgentExecutionStartedStreamingEvent:
       type: "object"
       properties:
@@ -4122,7 +4122,7 @@ components:
                     - "otel"
                     - "ai-chat"
                     - "mcp_gateway"
-                  description: "Orquesta product"
+                  description: "orq.ai product"
                 memory:
                   type: "object"
                   properties:
@@ -4214,7 +4214,7 @@ components:
                     - "otel"
                     - "ai-chat"
                     - "mcp_gateway"
-                  description: "Orquesta product"
+                  description: "orq.ai product"
                 memory:
                   type: "object"
                   properties:
@@ -4312,7 +4312,7 @@ components:
                     - "otel"
                     - "ai-chat"
                     - "mcp_gateway"
-                  description: "Orquesta product"
+                  description: "orq.ai product"
                 memory:
                   type: "object"
                   properties:
@@ -4545,9 +4545,6 @@ components:
         - "updated"
       type: "object"
       properties:
-        id:
-          type: "string"
-          description: "The unique identifier of the file system"
         key:
           maxLength: 255
           minLength: 1
@@ -4599,6 +4596,9 @@ components:
             - "string"
             - "null"
           description: "When usage was last measured. Absent until first metered."
+        _id:
+          type: "string"
+          description: "The unique identifier of the file system"
     DeleteFileSystemResponse:
       type: "object"
       properties: {}
@@ -5046,7 +5046,7 @@ components:
             settings:
               allOf:
                 - $ref: "#/components/schemas/KnowledgeSettings"
-              description: "Additive compatibility fields formerly available only from private internal endpoints."
+              description: "Settings for the knowledge base: embedding model, retrieval configuration, and agentic RAG configuration."
             metadata:
               $ref: "#/components/schemas/KnowledgeMetadata"
           required:
@@ -5162,7 +5162,7 @@ components:
             settings:
               allOf:
                 - $ref: "#/components/schemas/KnowledgeSettings"
-              description: "Additive compatibility fields formerly available only from private internal endpoints."
+              description: "Settings for the knowledge base: embedding model, retrieval configuration, and agentic RAG configuration."
             metadata:
               $ref: "#/components/schemas/KnowledgeMetadata"
           required:
@@ -5364,14 +5364,14 @@ components:
           type:
             - "string"
             - "null"
-          description: "The description of the knowledge base"
+          description: "The description of the datasource"
         file_id:
           type: "string"
         chunking_options:
           $ref: "#/components/schemas/DatasourceChunkingOptions"
         id:
           type: "string"
-          description: "Compatibility fields used by the former datasource shell/legacy route."
+          description: "Optional datasource ID. When omitted, the server generates one."
         attachment:
           $ref: "#/components/schemas/DatasourceAttachment"
         metadata:
@@ -5393,7 +5393,7 @@ components:
           type:
             - "string"
             - "null"
-          description: "The description of the knowledge base"
+          description: "The description of the datasource"
         status:
           type: "string"
           enum:
@@ -5436,7 +5436,7 @@ components:
           type: "array"
           items:
             $ref: "#/components/schemas/ProcessingAttempt"
-          description: "Additive compatibility fields formerly available only from database-shaped responses."
+          description: "Processing attempts recorded for the datasource."
         metadata:
           $ref: "#/components/schemas/CountMetadata"
         attachment:
@@ -5637,7 +5637,7 @@ components:
           type: "array"
           items:
             $ref: "#/components/schemas/ProcessingAttempt"
-          description: "Additive compatibility fields from the database document."
+          description: "Processing attempts recorded for the chunk."
         count_metadata:
           $ref: "#/components/schemas/CountMetadata"
         _id:
@@ -7013,13 +7013,13 @@ components:
           type: "string"
         documents_count:
           type: "number"
-          description: "The number of memories in the entity"
+          description: "The number of documents in the entity"
           format: "double"
         metadata:
           type: "object"
           additionalProperties:
             type: "string"
-          description: "Present on update responses in the live TypeScript implementation even\n though the legacy generated OpenAPI schema omitted it."
+          description: "Key-value metadata for the memory."
         _id:
           type: "string"
           description: "Unique identifier for the memory. This is automatically generated by the system."
@@ -12895,7 +12895,7 @@ components:
           description: "Optional expiration. The authenticate hot-path rejects keys whose\n `expires_at` is in the past. Unset means the key never expires."
           format: "date-time"
         legacy_token_family:
-          description: "Token family marker used by the legacy adapter to route validation."
+          description: "Token family for keys issued before the current opaque token format."
           $ref: "#/components/schemas/LegacyTokenFamily"
         legacy_key_id:
           type: "string"
@@ -13813,7 +13813,7 @@ components:
           $ref: "#/components/schemas/HubItemSummary"
     HubItem:
       required:
-        - "_id"
+        - "id"
         - "entity_id"
         - "display_name"
         - "description"
@@ -13869,7 +13869,7 @@ components:
           description: "Unique hub search item ID."
         entity_id:
           type: "string"
-          description: "ID of the workspace entity represented by this hub item. Empty on search results: the field is not part of the Typesense index."
+          description: "ID of the workspace entity represented by this hub item. Empty on search results: the field is not part of the search index."
         display_name:
           type: "string"
           description: "Human-readable hub item name."
@@ -24703,7 +24703,7 @@ paths:
                             prompt_cache_key:
                               type: "string"
                               description: "Used by OpenAI to cache responses for similar requests to optimize your cache hit rates. Replaces the legacy `user` field for prompt caching."
-                          description: "Model behavior parameters that control how the model generates responses. Common parameters: `temperature` (0-1, randomness), `max_completion_tokens` (max output length), `top_p` (sampling diversity). Advanced: `frequency_penalty`, `presence_penalty`, `response_format` (JSON/structured), `reasoning_effort`, `seed` (reproducibility). Support varies by model - consult AI Gateway documentation."
+                          description: "Model behavior parameters that control how the model generates responses. Common parameters: `temperature` (0-2, randomness; the selected model may impose a lower maximum), `max_completion_tokens` (max output length), `top_p` (sampling diversity). Advanced: `frequency_penalty`, `presence_penalty`, `response_format` (JSON/structured), `reasoning_effort`, `seed` (reproducibility). Support varies by model - consult AI Gateway documentation."
                         retry:
                           type: "object"
                           properties:
@@ -25363,7 +25363,7 @@ paths:
                       - "internal"
                       - "a2a"
                     default: "internal"
-                    description: "Agent type: internal (Orquesta-managed) or a2a (external A2A-compliant)"
+                    description: "Agent type: internal (orq.ai-managed) or a2a (external A2A-compliant)"
                   role:
                     type: "string"
                     minLength: 1
@@ -25851,7 +25851,7 @@ paths:
                           prompt_cache_key:
                             type: "string"
                             description: "Used by OpenAI to cache responses for similar requests to optimize your cache hit rates. Replaces the legacy `user` field for prompt caching."
-                        description: "Model behavior parameters (snake_case) stored as part of the agent configuration. These become the default parameters used when the agent is executed. Commonly used: temperature (0-1, controls randomness), max_completion_tokens (response length), top_p (nucleus sampling). Advanced: frequency_penalty, presence_penalty, response_format (JSON/structured output), reasoning_effort (for o1/thinking models), seed (reproducibility), stop sequences. Model-specific support varies. Runtime parameters in agent execution requests can override these defaults."
+                        description: "Model behavior parameters (snake_case) stored as part of the agent configuration. These become the default parameters used when the agent is executed. Commonly used: temperature (0-2, controls randomness; the selected model may impose a lower maximum), max_completion_tokens (response length), top_p (nucleus sampling). Advanced: frequency_penalty, presence_penalty, response_format (JSON/structured output), reasoning_effort (for o1/thinking models), seed (reproducibility), stop sequences. Model-specific support varies. Runtime parameters in agent execution requests can override these defaults."
                       retry:
                         type: "object"
                         properties:
@@ -26413,7 +26413,7 @@ paths:
                             - "internal"
                             - "a2a"
                           default: "internal"
-                          description: "Agent type: internal (Orquesta-managed) or a2a (external A2A-compliant)"
+                          description: "Agent type: internal (orq.ai-managed) or a2a (external A2A-compliant)"
                         role:
                           type: "string"
                           minLength: 1
@@ -26901,7 +26901,7 @@ paths:
                                 prompt_cache_key:
                                   type: "string"
                                   description: "Used by OpenAI to cache responses for similar requests to optimize your cache hit rates. Replaces the legacy `user` field for prompt caching."
-                              description: "Model behavior parameters (snake_case) stored as part of the agent configuration. These become the default parameters used when the agent is executed. Commonly used: temperature (0-1, controls randomness), max_completion_tokens (response length), top_p (nucleus sampling). Advanced: frequency_penalty, presence_penalty, response_format (JSON/structured output), reasoning_effort (for o1/thinking models), seed (reproducibility), stop sequences. Model-specific support varies. Runtime parameters in agent execution requests can override these defaults."
+                              description: "Model behavior parameters (snake_case) stored as part of the agent configuration. These become the default parameters used when the agent is executed. Commonly used: temperature (0-2, controls randomness; the selected model may impose a lower maximum), max_completion_tokens (response length), top_p (nucleus sampling). Advanced: frequency_penalty, presence_penalty, response_format (JSON/structured output), reasoning_effort (for o1/thinking models), seed (reproducibility), stop sequences. Model-specific support varies. Runtime parameters in agent execution requests can override these defaults."
                             retry:
                               type: "object"
                               properties:
@@ -27569,7 +27569,7 @@ paths:
                       - "internal"
                       - "a2a"
                     default: "internal"
-                    description: "Agent type: internal (Orquesta-managed) or a2a (external A2A-compliant)"
+                    description: "Agent type: internal (orq.ai-managed) or a2a (external A2A-compliant)"
                   role:
                     type: "string"
                     minLength: 1
@@ -28057,7 +28057,7 @@ paths:
                           prompt_cache_key:
                             type: "string"
                             description: "Used by OpenAI to cache responses for similar requests to optimize your cache hit rates. Replaces the legacy `user` field for prompt caching."
-                        description: "Model behavior parameters (snake_case) stored as part of the agent configuration. These become the default parameters used when the agent is executed. Commonly used: temperature (0-1, controls randomness), max_completion_tokens (response length), top_p (nucleus sampling). Advanced: frequency_penalty, presence_penalty, response_format (JSON/structured output), reasoning_effort (for o1/thinking models), seed (reproducibility), stop sequences. Model-specific support varies. Runtime parameters in agent execution requests can override these defaults."
+                        description: "Model behavior parameters (snake_case) stored as part of the agent configuration. These become the default parameters used when the agent is executed. Commonly used: temperature (0-2, controls randomness; the selected model may impose a lower maximum), max_completion_tokens (response length), top_p (nucleus sampling). Advanced: frequency_penalty, presence_penalty, response_format (JSON/structured output), reasoning_effort (for o1/thinking models), seed (reproducibility), stop sequences. Model-specific support varies. Runtime parameters in agent execution requests can override these defaults."
                       retry:
                         type: "object"
                         properties:
@@ -28824,7 +28824,7 @@ paths:
                             prompt_cache_key:
                               type: "string"
                               description: "Used by OpenAI to cache responses for similar requests to optimize your cache hit rates. Replaces the legacy `user` field for prompt caching."
-                          description: "Model behavior parameters that control how the model generates responses. Common parameters: `temperature` (0-1, randomness), `max_completion_tokens` (max output length), `top_p` (sampling diversity). Advanced: `frequency_penalty`, `presence_penalty`, `response_format` (JSON/structured), `reasoning_effort`, `seed` (reproducibility). Support varies by model - consult AI Gateway documentation."
+                          description: "Model behavior parameters that control how the model generates responses. Common parameters: `temperature` (0-2, randomness; the selected model may impose a lower maximum), `max_completion_tokens` (max output length), `top_p` (sampling diversity). Advanced: `frequency_penalty`, `presence_penalty`, `response_format` (JSON/structured), `reasoning_effort`, `seed` (reproducibility). Support varies by model - consult AI Gateway documentation."
                         retry:
                           type: "object"
                           properties:
@@ -29470,7 +29470,7 @@ paths:
                       - "internal"
                       - "a2a"
                     default: "internal"
-                    description: "Agent type: internal (Orquesta-managed) or a2a (external A2A-compliant)"
+                    description: "Agent type: internal (orq.ai-managed) or a2a (external A2A-compliant)"
                   role:
                     type: "string"
                     minLength: 1
@@ -29958,7 +29958,7 @@ paths:
                           prompt_cache_key:
                             type: "string"
                             description: "Used by OpenAI to cache responses for similar requests to optimize your cache hit rates. Replaces the legacy `user` field for prompt caching."
-                        description: "Model behavior parameters (snake_case) stored as part of the agent configuration. These become the default parameters used when the agent is executed. Commonly used: temperature (0-1, controls randomness), max_completion_tokens (response length), top_p (nucleus sampling). Advanced: frequency_penalty, presence_penalty, response_format (JSON/structured output), reasoning_effort (for o1/thinking models), seed (reproducibility), stop sequences. Model-specific support varies. Runtime parameters in agent execution requests can override these defaults."
+                        description: "Model behavior parameters (snake_case) stored as part of the agent configuration. These become the default parameters used when the agent is executed. Commonly used: temperature (0-2, controls randomness; the selected model may impose a lower maximum), max_completion_tokens (response length), top_p (nucleus sampling). Advanced: frequency_penalty, presence_penalty, response_format (JSON/structured output), reasoning_effort (for o1/thinking models), seed (reproducibility), stop sequences. Model-specific support varies. Runtime parameters in agent execution requests can override these defaults."
                       retry:
                         type: "object"
                         properties:
@@ -31024,7 +31024,7 @@ paths:
                             prompt_cache_key:
                               type: "string"
                               description: "Used by OpenAI to cache responses for similar requests to optimize your cache hit rates. Replaces the legacy `user` field for prompt caching."
-                          description: "Model behavior parameters that control how the model generates responses. Common parameters: `temperature` (0-1, randomness), `max_completion_tokens` (max output length), `top_p` (sampling diversity). Advanced: `frequency_penalty`, `presence_penalty`, `response_format` (JSON/structured), `reasoning_effort`, `seed` (reproducibility). Support varies by model - consult AI Gateway documentation."
+                          description: "Model behavior parameters that control how the model generates responses. Common parameters: `temperature` (0-2, randomness; the selected model may impose a lower maximum), `max_completion_tokens` (max output length), `top_p` (sampling diversity). Advanced: `frequency_penalty`, `presence_penalty`, `response_format` (JSON/structured), `reasoning_effort`, `seed` (reproducibility). Support varies by model - consult AI Gateway documentation."
                         retry:
                           type: "object"
                           properties:
@@ -32009,7 +32009,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01M337FG7XFDX4136262DV0CMQ"
+                                          default: "01M346Z15T9KBWMFE9K5G6JA4A"
                                         name:
                                           type: "string"
                                         description:
@@ -32621,7 +32621,7 @@ paths:
                             prompt_cache_key:
                               type: "string"
                               description: "Used by OpenAI to cache responses for similar requests to optimize your cache hit rates. Replaces the legacy `user` field for prompt caching."
-                          description: "Model behavior parameters that control how the model generates responses. Common parameters: `temperature` (0-1, randomness), `max_completion_tokens` (max output length), `top_p` (sampling diversity). Advanced: `frequency_penalty`, `presence_penalty`, `response_format` (JSON/structured), `reasoning_effort`, `seed` (reproducibility). Support varies by model - consult AI Gateway documentation."
+                          description: "Model behavior parameters that control how the model generates responses. Common parameters: `temperature` (0-2, randomness; the selected model may impose a lower maximum), `max_completion_tokens` (max output length), `top_p` (sampling diversity). Advanced: `frequency_penalty`, `presence_penalty`, `response_format` (JSON/structured), `reasoning_effort`, `seed` (reproducibility). Support varies by model - consult AI Gateway documentation."
                         retry:
                           type: "object"
                           properties:
@@ -33606,7 +33606,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01M337FG89BAT3M1VCT7CE9G1Q"
+                                          default: "01M346Z168A4VXE28FGX3KWA77"
                                         name:
                                           type: "string"
                                         description:
@@ -42502,7 +42502,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M337FG96TXYANA7JNDZ7D0ZC"
+                              default: "tool_01M346Z176N7GH4VS93ZXQQ7RK"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -42603,7 +42603,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M337FG97EJGEBV852RSPPTJ2"
+                              default: "tool_01M346Z177Y43FVQS2EVC2X8DF"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -42706,7 +42706,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M337FG97YSKE9989R8XM1BKT"
+                              default: "tool_01M346Z177WWQP3YD6JHZ2DNJT"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -42850,7 +42850,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M337FG985BKRGMKPK7N7VZG4"
+                              default: "tool_01M346Z178JH9Q15BPHKRXRVQQ"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -43337,7 +43337,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M337FG9AC4GP5S1ZK7WHJB2V"
+                        default: "tool_01M346Z17AJ1J5FDXDVQJFDPM5"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -43438,7 +43438,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M337FG9A8W0RQNNTB2WHSG04"
+                        default: "tool_01M346Z17A9VPC95R1NNR2PRA4"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -43541,7 +43541,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M337FG9BVKHXZHFNRYS1TRAP"
+                        default: "tool_01M346Z17CXDBT7GVAJDWDV46P"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -43685,7 +43685,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M337FG9BZ9AWR08KZFNKP3N7"
+                        default: "tool_01M346Z17DR3MMF92MV55R2NF7"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -44183,7 +44183,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M337FG9E1WNSNZ3RY2GYDFH9"
+                        default: "tool_01M346Z17E2AR7A0MNAMCTBK89"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -44284,7 +44284,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M337FG9ERJ69CCRZ8SF8C63A"
+                        default: "tool_01M346Z17FW3PEHWQ08RM5CD9D"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -44387,7 +44387,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M337FG9E3HTNZADXNR2AMXPE"
+                        default: "tool_01M346Z17FVG45VN60FQ0KC63V"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -44531,7 +44531,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M337FG9F2V1TTXHNW37JFSKE"
+                        default: "tool_01M346Z17G1PBGH1JXWTMZ538J"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -44692,7 +44692,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M337FG9JM8X5Q6QGVWJZ11XR"
+                        default: "tool_01M346Z17KA16DD01BM3XE9RQK"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -44793,7 +44793,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M337FG9KBXE6RM7QP2R8QXSW"
+                        default: "tool_01M346Z17KPWZ6YK6CV51V63MW"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -44896,7 +44896,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M337FG9KNFCSQFK3JCJHYM6A"
+                        default: "tool_01M346Z17M3FQRZ6Y39MQ0BT7R"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -45040,7 +45040,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M337FG9MV4W3BN2Z83DRSM71"
+                        default: "tool_01M346Z17MT3V1JG75H4N5XDM0"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -46614,7 +46614,7 @@ paths:
                               required:
                                 - "type"
                                 - "models"
-                          description: "Array of models with weights for load balancing requests"
+                          description: "Load balancer configuration for the request."
                           example:
                             type: "weight_based"
                             models:
@@ -47898,7 +47898,7 @@ paths:
                           required:
                             - "type"
                             - "models"
-                      description: "Array of models with weights for load balancing requests"
+                      description: "Load balancer configuration for the request."
                       example:
                         type: "weight_based"
                         models:
@@ -48198,7 +48198,7 @@ paths:
                           required:
                             - "type"
                             - "models"
-                      description: "Array of models with weights for load balancing requests"
+                      description: "Load balancer configuration for the request."
                       example:
                         type: "weight_based"
                         models:
@@ -48313,7 +48313,7 @@ paths:
                       description: "How many completions to generate for each prompt. Note: Because this parameter generates many completions, it can quickly consume your token quota."
                     user:
                       type: "string"
-                      description: "A unique identifier representing your end-user, which can help OpenAI to monitor and detect abuse."
+                      description: "A unique identifier representing your end-user, which can help monitor and detect abuse."
                     name:
                       type: "string"
                       description: "The name to display on the trace. If not specified, the default system name will be used."
@@ -48997,7 +48997,7 @@ paths:
                               required:
                                 - "type"
                                 - "models"
-                          description: "Array of models with weights for load balancing requests"
+                          description: "Load balancer configuration for the request."
                           example:
                             type: "weight_based"
                             models:
@@ -49581,7 +49581,7 @@ paths:
                           required:
                             - "type"
                             - "models"
-                      description: "Array of models with weights for load balancing requests"
+                      description: "Load balancer configuration for the request."
                       example:
                         type: "weight_based"
                         models:
@@ -49925,7 +49925,7 @@ paths:
                           required:
                             - "type"
                             - "models"
-                      description: "Array of models with weights for load balancing requests"
+                      description: "Load balancer configuration for the request."
                       example:
                         type: "weight_based"
                         models:
@@ -50276,7 +50276,7 @@ paths:
                           required:
                             - "type"
                             - "models"
-                      description: "Array of models with weights for load balancing requests"
+                      description: "Load balancer configuration for the request."
                       example:
                         type: "weight_based"
                         models:
@@ -50598,7 +50598,7 @@ paths:
                           required:
                             - "type"
                             - "models"
-                      description: "Array of models with weights for load balancing requests"
+                      description: "Load balancer configuration for the request."
                       example:
                         type: "weight_based"
                         models:
@@ -50946,7 +50946,7 @@ paths:
                           required:
                             - "type"
                             - "models"
-                      description: "Array of models with weights for load balancing requests"
+                      description: "Load balancer configuration for the request."
                       example:
                         type: "weight_based"
                         models:
@@ -51482,7 +51482,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-09-22T00:15:32.172Z"
+                      default: "2026-09-22T09:25:46.896Z"
                       deprecated: true
                       description: "Deprecated. The date and time the item was reviewed"
                     type:
@@ -51524,7 +51524,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-09-22T00:15:32.172Z"
+                      default: "2026-09-22T09:25:46.896Z"
                       deprecated: true
                       description: "Deprecated. The date and time the item was reviewed"
                     type:
@@ -51566,7 +51566,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-09-22T00:15:32.172Z"
+                      default: "2026-09-22T09:25:46.896Z"
                       deprecated: true
                       description: "Deprecated. The date and time the item was reviewed"
                     type:
@@ -51608,7 +51608,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-09-22T00:15:32.172Z"
+                      default: "2026-09-22T09:25:46.896Z"
                       deprecated: true
                       description: "Deprecated. The date and time the item was reviewed"
                     type:
@@ -51939,7 +51939,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-09-22T00:15:26.496Z"
+                          default: "2026-09-22T09:25:41.511Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -51947,7 +51947,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-09-22T00:15:26.497Z"
+                              default: "2026-09-22T09:25:41.511Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -52017,7 +52017,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-09-22T00:15:26.496Z"
+                          default: "2026-09-22T09:25:41.511Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -52025,7 +52025,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-09-22T00:15:26.497Z"
+                              default: "2026-09-22T09:25:41.511Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -52201,7 +52201,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-09-22T00:15:26.496Z"
+                        default: "2026-09-22T09:25:41.511Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -52209,7 +52209,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-09-22T00:15:26.497Z"
+                            default: "2026-09-22T09:25:41.511Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -52279,7 +52279,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-09-22T00:15:26.496Z"
+                        default: "2026-09-22T09:25:41.511Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -52287,7 +52287,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-09-22T00:15:26.497Z"
+                            default: "2026-09-22T09:25:41.511Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -52381,7 +52381,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-09-22T00:15:26.496Z"
+                        default: "2026-09-22T09:25:41.511Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -52389,7 +52389,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-09-22T00:15:26.497Z"
+                            default: "2026-09-22T09:25:41.511Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -52459,7 +52459,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-09-22T00:15:26.496Z"
+                        default: "2026-09-22T09:25:41.511Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -52467,7 +52467,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-09-22T00:15:26.497Z"
+                            default: "2026-09-22T09:25:41.511Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -52651,7 +52651,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-09-22T00:15:26.496Z"
+                        default: "2026-09-22T09:25:41.511Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -52659,7 +52659,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-09-22T00:15:26.497Z"
+                            default: "2026-09-22T09:25:41.511Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -52729,7 +52729,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-09-22T00:15:26.496Z"
+                        default: "2026-09-22T09:25:41.511Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -52737,7 +52737,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-09-22T00:15:26.497Z"
+                            default: "2026-09-22T09:25:41.511Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -53781,9 +53781,9 @@ paths:
             minimum: 1
             maximum: 50
             default: 50
-            description: "A limit on the number of objects to be returned. Limit can range between 1 and 50, and the default is 10"
+            description: "A limit on the number of objects to be returned. Limit can range between 1 and 50, and the default is 50"
           required: false
-          description: "A limit on the number of objects to be returned. Limit can range between 1 and 50, and the default is 10"
+          description: "A limit on the number of objects to be returned. Limit can range between 1 and 50, and the default is 50"
           name: "limit"
           in: "query"
         - schema:
@@ -54019,9 +54019,9 @@ paths:
             minimum: 1
             maximum: 200
             default: 10
-            description: "A limit on the number of objects to be returned. Limit can range between 1 and 50, and the default is 10"
+            description: "A limit on the number of objects to be returned. Limit can range between 1 and 200, and the default is 10"
           required: false
-          description: "A limit on the number of objects to be returned. Limit can range between 1 and 50, and the default is 10"
+          description: "A limit on the number of objects to be returned. Limit can range between 1 and 200, and the default is 10"
           name: "limit"
           in: "query"
         - schema:
@@ -54577,9 +54577,9 @@ paths:
             minimum: 1
             maximum: 200
             default: 10
-            description: "A limit on the number of objects to be returned. Limit can range between 1 and 50, and the default is 10"
+            description: "A limit on the number of objects to be returned. Limit can range between 1 and 200, and the default is 10"
           required: false
-          description: "A limit on the number of objects to be returned. Limit can range between 1 and 50, and the default is 10"
+          description: "A limit on the number of objects to be returned. Limit can range between 1 and 200, and the default is 10"
           name: "limit"
           in: "query"
         - schema:
@@ -54790,9 +54790,9 @@ paths:
             minimum: 1
             maximum: 200
             default: 10
-            description: "A limit on the number of objects to be returned. Limit can range between 1 and 50, and the default is 10"
+            description: "A limit on the number of objects to be returned. Limit can range between 1 and 200, and the default is 10"
           required: false
-          description: "A limit on the number of objects to be returned. Limit can range between 1 and 50, and the default is 10"
+          description: "A limit on the number of objects to be returned. Limit can range between 1 and 200, and the default is 10"
           name: "limit"
           in: "query"
         - schema:
@@ -55010,9 +55010,9 @@ paths:
             minimum: 1
             maximum: 200
             default: 10
-            description: "A limit on the number of objects to be returned. Limit can range between 1 and 50, and the default is 10"
+            description: "A limit on the number of objects to be returned. Limit can range between 1 and 200, and the default is 10"
           required: false
-          description: "A limit on the number of objects to be returned. Limit can range between 1 and 50, and the default is 10"
+          description: "A limit on the number of objects to be returned. Limit can range between 1 and 200, and the default is 10"
           name: "limit"
           in: "query"
         - schema:
@@ -64582,7 +64582,7 @@ paths:
       tags:
         - "Projects"
       summary: "Create a new project"
-      description: "Creates a project in the current workspace. Projects are workspace-level containers for resources such as skills, deployments, datasets, rules, and related team access. Requires a key with write access to Projects (management key or API key), or an admin session. Project-scoped API keys are rejected."
+      description: "Creates a project in the current workspace. Projects are workspace-level containers for resources such as skills, deployments, datasets, rules, and related team access. Requires a workspace-scoped management key or API key with Projects write access, or an admin session. Project-scoped API keys cannot be granted Projects access."
       operationId: "ProjectCreate"
       requestBody:
         content:
@@ -64650,7 +64650,7 @@ paths:
       tags:
         - "Projects"
       summary: "Delete a project"
-      description: "Deletes a project from the workspace. The response body is empty when the delete succeeds. Requires a key with write access to Projects (management key or API key), or an admin session. Project-scoped API keys are rejected."
+      description: "Deletes a project from the workspace. The response body is empty when the delete succeeds. Requires a workspace-scoped management key or API key with Projects write access, or an admin session. Project-scoped API keys cannot be granted Projects access."
       operationId: "ProjectDelete"
       parameters:
         - name: "project_id"
@@ -64684,7 +64684,7 @@ paths:
       tags:
         - "Projects"
       summary: "Update a project"
-      description: "Updates the specified project by setting the values of the parameters passed. Requires a key with write access to Projects (management key or API key), or an admin session. Project-scoped API keys are rejected."
+      description: "Updates the specified project by setting the values of the parameters passed. Requires a workspace-scoped management key or API key with Projects write access, or an admin session. Project-scoped API keys cannot be granted Projects access."
       operationId: "ProjectUpdate"
       parameters:
         - name: "project_id"
@@ -68671,7 +68671,7 @@ tags:
   - name: "Reporting"
     description: "GenAI reporting API over canonical analytics rollups. Accepts a metric name, time range, grain, group-by, and filters; returns a typed time series and optional totals."
   - name: "Telemetry"
-    description: "Unified query envelope for traces, metrics, and logs (ADR 0004). One request shape, one filter dialect, and one response shape per source, validated by a per-source registry."
+    description: "Unified query envelope for traces, metrics, and logs. One request shape, one filter dialect, and one response shape per source, validated by a per-source registry."
   - name: "Traces"
     description: "Query and inspect ingested trace data: search trace summaries, aggregate metrics, and read individual traces and their spans."
   - name: "Datasets"
@@ -68716,7 +68716,7 @@ tags:
   - name: "Webhooks"
     description: "Create and manage webhooks that deliver workspace events to external HTTPS endpoints."
   - name: "Workspaces"
-    description: "A workspace is the tenant. Create is a user-session onboarding RPC; Get, List, and Update are the public management surface."
+    description: "A workspace is the tenant. Create is called from a user session during onboarding; Get, List, and Update are the public management surface."
   - name: "Workspace Security"
     description: "Workspace-level domain verification and IP allowlist controls. These operations are restricted to workspace administrators."
   - name: "Workspace Settings"
