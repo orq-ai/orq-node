@@ -7,6 +7,7 @@ import { GetHubItemResponse } from "@orq-ai/node/models/components";
 
 let value: GetHubItemResponse = {
   hubItem: {
+    id: "<id>",
     entityId: "<id>",
     displayName: "Lea_Lindgren-Walter57",
     description:

@@ -1,6 +1,6 @@
 # UpdateAgentType
 
-Agent type: internal (Orquesta-managed) or a2a (external A2A-compliant)
+Agent type: internal (orq.ai-managed) or a2a (external A2A-compliant)
 
 ## Example Usage
 

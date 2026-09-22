@@ -606,7 +606,7 @@ export type CreateCompletionLoadBalancerRouterCompletions1 = {
 };
 
 /**
- * Array of models with weights for load balancing requests
+ * Load balancer configuration for the request.
  */
 export type CreateCompletionRouterCompletionsLoadBalancer =
   CreateCompletionLoadBalancerRouterCompletions1;
@@ -669,7 +669,7 @@ export type CreateCompletionOrq = {
   cache?: CreateCompletionRouterCompletionsCache | undefined;
   knowledgeBases?: Array<CreateCompletionKnowledgeBases> | undefined;
   /**
-   * Array of models with weights for load balancing requests
+   * Load balancer configuration for the request.
    */
   loadBalancer?: CreateCompletionLoadBalancerRouterCompletions1 | undefined;
   /**
@@ -724,7 +724,7 @@ export type CreateCompletionRequestBody = {
    */
   n?: number | null | undefined;
   /**
-   * A unique identifier representing your end-user, which can help OpenAI to monitor and detect abuse.
+   * A unique identifier representing your end-user, which can help monitor and detect abuse.
    */
   user?: string | undefined;
   /**

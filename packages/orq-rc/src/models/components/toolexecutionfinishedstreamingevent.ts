@@ -10,7 +10,7 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * Orquesta product
+ * orq.ai product
  */
 export const ToolExecutionFinishedStreamingEventProduct = {
   Remoteconfigs: "remoteconfigs",
@@ -33,7 +33,7 @@ export const ToolExecutionFinishedStreamingEventProduct = {
   McpGateway: "mcp_gateway",
 } as const;
 /**
- * Orquesta product
+ * orq.ai product
  */
 export type ToolExecutionFinishedStreamingEventProduct = ClosedEnum<
   typeof ToolExecutionFinishedStreamingEventProduct
@@ -50,7 +50,7 @@ export type ToolExecutionFinishedStreamingEventToolExecutionContext = {
   agentManifestId: string;
   agentExecutionId: string;
   /**
-   * Orquesta product
+   * orq.ai product
    */
   product: ToolExecutionFinishedStreamingEventProduct;
   memory?: ToolExecutionFinishedStreamingEventMemory | undefined;

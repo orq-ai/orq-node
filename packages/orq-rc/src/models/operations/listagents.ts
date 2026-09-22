@@ -96,14 +96,14 @@ export const ListAgentsEngine = {
 export type ListAgentsEngine = ClosedEnum<typeof ListAgentsEngine>;
 
 /**
- * Agent type: internal (Orquesta-managed) or a2a (external A2A-compliant)
+ * Agent type: internal (orq.ai-managed) or a2a (external A2A-compliant)
  */
 export const ListAgentsType = {
   Internal: "internal",
   A2a: "a2a",
 } as const;
 /**
- * Agent type: internal (Orquesta-managed) or a2a (external A2A-compliant)
+ * Agent type: internal (orq.ai-managed) or a2a (external A2A-compliant)
  */
 export type ListAgentsType = ClosedEnum<typeof ListAgentsType>;
 
@@ -579,7 +579,7 @@ export type ListAgentsCacheControl = {
 };
 
 /**
- * Model behavior parameters (snake_case) stored as part of the agent configuration. These become the default parameters used when the agent is executed. Commonly used: temperature (0-1, controls randomness), max_completion_tokens (response length), top_p (nucleus sampling). Advanced: frequency_penalty, presence_penalty, response_format (JSON/structured output), reasoning_effort (for o1/thinking models), seed (reproducibility), stop sequences. Model-specific support varies. Runtime parameters in agent execution requests can override these defaults.
+ * Model behavior parameters (snake_case) stored as part of the agent configuration. These become the default parameters used when the agent is executed. Commonly used: temperature (0-2, controls randomness; the selected model may impose a lower maximum), max_completion_tokens (response length), top_p (nucleus sampling). Advanced: frequency_penalty, presence_penalty, response_format (JSON/structured output), reasoning_effort (for o1/thinking models), seed (reproducibility), stop sequences. Model-specific support varies. Runtime parameters in agent execution requests can override these defaults.
  */
 export type ListAgentsParameters = {
   /**
@@ -1236,7 +1236,7 @@ export type ListAgentsModel = {
    */
   integrationId?: string | null | undefined;
   /**
-   * Model behavior parameters (snake_case) stored as part of the agent configuration. These become the default parameters used when the agent is executed. Commonly used: temperature (0-1, controls randomness), max_completion_tokens (response length), top_p (nucleus sampling). Advanced: frequency_penalty, presence_penalty, response_format (JSON/structured output), reasoning_effort (for o1/thinking models), seed (reproducibility), stop sequences. Model-specific support varies. Runtime parameters in agent execution requests can override these defaults.
+   * Model behavior parameters (snake_case) stored as part of the agent configuration. These become the default parameters used when the agent is executed. Commonly used: temperature (0-2, controls randomness; the selected model may impose a lower maximum), max_completion_tokens (response length), top_p (nucleus sampling). Advanced: frequency_penalty, presence_penalty, response_format (JSON/structured output), reasoning_effort (for o1/thinking models), seed (reproducibility), stop sequences. Model-specific support varies. Runtime parameters in agent execution requests can override these defaults.
    */
   parameters?: ListAgentsParameters | null | undefined;
   /**
@@ -1305,7 +1305,7 @@ export type ListAgentsData = {
   source?: ListAgentsSource | undefined;
   engine: ListAgentsEngine;
   /**
-   * Agent type: internal (Orquesta-managed) or a2a (external A2A-compliant)
+   * Agent type: internal (orq.ai-managed) or a2a (external A2A-compliant)
    */
   type: ListAgentsType;
   role: string;

@@ -228,7 +228,7 @@ export type CreateImageLoadBalancerRouterImagesGenerations1 = {
 };
 
 /**
- * Array of models with weights for load balancing requests
+ * Load balancer configuration for the request.
  */
 export type CreateImageRouterImagesGenerationsLoadBalancer =
   CreateImageLoadBalancerRouterImagesGenerations1;
@@ -271,7 +271,7 @@ export type CreateImageOrq = {
    */
   cache?: CreateImageRouterImagesGenerationsCache | undefined;
   /**
-   * Array of models with weights for load balancing requests
+   * Load balancer configuration for the request.
    */
   loadBalancer?: CreateImageLoadBalancerRouterImagesGenerations1 | undefined;
   /**

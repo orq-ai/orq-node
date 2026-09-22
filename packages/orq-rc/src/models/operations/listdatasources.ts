@@ -28,7 +28,7 @@ export type ListDatasourcesRequest = {
    */
   q?: string | undefined;
   /**
-   * A limit on the number of objects to be returned. Limit can range between 1 and 50, and the default is 10
+   * A limit on the number of objects to be returned. Limit can range between 1 and 50, and the default is 50
    */
   limit?: number | undefined;
   /**

@@ -143,7 +143,7 @@ export type CreateSpeechLoadBalancerRouterAudioSpeech1 = {
 };
 
 /**
- * Array of models with weights for load balancing requests
+ * Load balancer configuration for the request.
  */
 export type CreateSpeechRouterAudioSpeechLoadBalancer =
   CreateSpeechLoadBalancerRouterAudioSpeech1;
@@ -186,7 +186,7 @@ export type CreateSpeechOrq = {
    */
   thread?: CreateSpeechThread | undefined;
   /**
-   * Array of models with weights for load balancing requests
+   * Load balancer configuration for the request.
    */
   loadBalancer?: CreateSpeechLoadBalancerRouterAudioSpeech1 | undefined;
   /**

@@ -1379,7 +1379,7 @@ export type CreateChatCompletionLoadBalancerRouterChatCompletions1 = {
 };
 
 /**
- * Array of models with weights for load balancing requests
+ * Load balancer configuration for the request.
  */
 export type CreateChatCompletionRouterChatCompletionsLoadBalancer =
   CreateChatCompletionLoadBalancerRouterChatCompletions1;
@@ -1444,7 +1444,7 @@ export type Orq = {
   cache?: CreateChatCompletionRouterChatCompletionsCache | undefined;
   knowledgeBases?: Array<CreateChatCompletionKnowledgeBases> | undefined;
   /**
-   * Array of models with weights for load balancing requests
+   * Load balancer configuration for the request.
    */
   loadBalancer?:
     | CreateChatCompletionLoadBalancerRouterChatCompletions1

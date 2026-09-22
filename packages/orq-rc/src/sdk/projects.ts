@@ -34,7 +34,7 @@ export class Projects extends ClientSDK {
    * Create a new project
    *
    * @remarks
-   * Creates a project in the current workspace. Projects are workspace-level containers for resources such as skills, deployments, datasets, rules, and related team access. Requires a key with write access to Projects (management key or API key), or an admin session. Project-scoped API keys are rejected.
+   * Creates a project in the current workspace. Projects are workspace-level containers for resources such as skills, deployments, datasets, rules, and related team access. Requires a workspace-scoped management key or API key with Projects write access, or an admin session. Project-scoped API keys cannot be granted Projects access.
    */
   async create(
     request: components.CreateProjectRequest,
@@ -68,7 +68,7 @@ export class Projects extends ClientSDK {
    * Delete a project
    *
    * @remarks
-   * Deletes a project from the workspace. The response body is empty when the delete succeeds. Requires a key with write access to Projects (management key or API key), or an admin session. Project-scoped API keys are rejected.
+   * Deletes a project from the workspace. The response body is empty when the delete succeeds. Requires a workspace-scoped management key or API key with Projects write access, or an admin session. Project-scoped API keys cannot be granted Projects access.
    */
   async delete(
     request: operations.ProjectDeleteRequest,
@@ -85,7 +85,7 @@ export class Projects extends ClientSDK {
    * Update a project
    *
    * @remarks
-   * Updates the specified project by setting the values of the parameters passed. Requires a key with write access to Projects (management key or API key), or an admin session. Project-scoped API keys are rejected.
+   * Updates the specified project by setting the values of the parameters passed. Requires a workspace-scoped management key or API key with Projects write access, or an admin session. Project-scoped API keys cannot be granted Projects access.
    */
   async update(
     request: operations.ProjectUpdateRequest,
