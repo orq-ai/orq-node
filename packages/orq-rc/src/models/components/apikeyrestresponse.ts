@@ -16,7 +16,7 @@ export type ApiKeyRestResponse = {
   name: string;
   workspaceId: string;
   /**
-   * Raw on create/retrieve and masked in list responses.
+   * Raw on create; the key prefix on retrieve and update; masked in list responses.
    */
   token: string;
   active?: boolean | undefined;
