@@ -2555,7 +2555,7 @@ components:
           properties:
             _id:
               type: "string"
-              default: "reasoning_01m36fze80dmpdh3yehn775t27"
+              default: "reasoning_01m36hs43jws1jys50wh6yp0hc"
               description: "Unique identifier for the part. Format: reasoning_{ulid} (e.g., reasoning_01hxyz...)"
               example: "reasoning_01hxyz123abc"
             kind:
@@ -8651,6 +8651,241 @@ components:
           items:
             type: "string"
       description: "EntityList wraps a repeated string because proto3 maps cannot hold\n repeated values directly."
+    ApiKeyResponse:
+      additionalProperties: false
+      properties:
+        access:
+          additionalProperties:
+            type: "string"
+          type: "object"
+        active:
+          type: "boolean"
+        constraints:
+          $ref: "#/components/schemas/Constraints"
+        created:
+          format: "date-time"
+          type: "string"
+        created_by_id:
+          type: "string"
+        expiration:
+          type: "string"
+        id:
+          description: "Unique identifier of the key."
+          type: "string"
+        is_legacy:
+          type: "boolean"
+        last_used_at:
+          format: "date-time"
+          type: "string"
+        legacy_key_id:
+          type: "string"
+        legacy_token_family:
+          type: "string"
+        name:
+          description: "Display name of the key."
+          type: "string"
+        owner:
+          $ref: "#/components/schemas/Owner"
+        permission_mode:
+          enum:
+            - "all"
+            - "restricted"
+            - "read_only"
+          type: "string"
+        project_scope:
+          $ref: "#/components/schemas/ProjectScope"
+        projects:
+          items:
+            type: "string"
+          type:
+            - "array"
+            - "null"
+        source:
+          type: "string"
+        status:
+          enum:
+            - "active"
+            - "disabled"
+            - "revoked"
+          type: "string"
+        token:
+          description: "The raw secret on create only; a masked display value everywhere else."
+          type: "string"
+        token_prefix:
+          description: "Display prefix of the secret; not usable as a credential."
+          type: "string"
+        updated:
+          format: "date-time"
+          type: "string"
+        updated_by_id:
+          type: "string"
+        workspace_id:
+          description: "Workspace the key belongs to."
+          type: "string"
+      required:
+        - "id"
+        - "name"
+        - "workspace_id"
+        - "token"
+      type: "object"
+    Constraints:
+      additionalProperties: false
+      properties:
+        expires_at:
+          format: "date-time"
+          type: "string"
+      type: "object"
+    CreateApiKeyRequest:
+      additionalProperties: false
+      properties:
+        access:
+          additionalProperties:
+            type: "string"
+          description: "Per-domain access level (none, read or write) for restricted keys; domain ids come from the capability catalog."
+          type: "object"
+        constraints:
+          $ref: "#/components/schemas/Constraints"
+          description: "Expiry and other limits applied to the key."
+        expiration:
+          description: "Legacy expiry as an RFC 3339 timestamp; prefer constraints.expires_at."
+          format: "date-time"
+          type: "string"
+        name:
+          description: "Display name of the key."
+          maxLength: 100
+          type: "string"
+        owner:
+          $ref: "#/components/schemas/Owner"
+          description: "Lifecycle binding: a user-owned key is revoked with the user, a service-account key outlives any user."
+        permission_mode:
+          description: "Permission preset; restricted keys hold only the domains granted in access."
+          enum:
+            - "all"
+            - "restricted"
+            - "read_only"
+          type: "string"
+        project_scope:
+          $ref: "#/components/schemas/ProjectScope"
+          description: "Projects the key may reach: every project of the workspace or a single one."
+        projects:
+          description: "Legacy single-project binding; prefer project_scope."
+          items:
+            type: "string"
+          maxItems: 1
+          type:
+            - "array"
+            - "null"
+        source:
+          description: "Origin of the key; router keys are minted for the AI router."
+          enum:
+            - "workspace"
+            - "router"
+          type: "string"
+      required:
+        - "name"
+      type: "object"
+    Domain:
+      additionalProperties: false
+      properties:
+        allowed_scopes:
+          description: "Project scopes this domain may be granted under."
+          items:
+            type: "string"
+          type:
+            - "array"
+            - "null"
+        display_name:
+          description: "Human-readable label."
+          type: "string"
+        extra_write_verbs:
+          description: "Additional verbs granted only with write access."
+          items:
+            type: "string"
+          type:
+            - "array"
+            - "null"
+        group:
+          description: "Logical group the entry belongs to."
+          enum:
+            - "DOMAIN_GROUP_UNSPECIFIED"
+            - "DOMAIN_GROUP_WORKSPACE_ADMIN"
+            - "DOMAIN_GROUP_PLATFORM"
+            - "DOMAIN_GROUP_GATEWAY"
+          type: "string"
+        id:
+          description: "Stable domain identifier, used as the key in access and as the verb prefix in resolved permissions."
+          type: "string"
+        readable:
+          description: "Whether the domain can be granted read access."
+          type: "boolean"
+        writable:
+          description: "Whether the domain can be granted write access."
+          type: "boolean"
+      required:
+        - "id"
+        - "display_name"
+        - "group"
+        - "allowed_scopes"
+        - "readable"
+        - "writable"
+        - "extra_write_verbs"
+      type: "object"
+    Owner:
+      additionalProperties: false
+      properties:
+        type:
+          type: "string"
+        user_id:
+          type: "string"
+      required:
+        - "type"
+      type: "object"
+    ProjectScope:
+      additionalProperties: false
+      properties:
+        mode:
+          type: "string"
+        project_id:
+          type: "string"
+      required:
+        - "mode"
+      type: "object"
+    UpdateApiKeyRequest:
+      additionalProperties: false
+      properties:
+        access:
+          additionalProperties:
+            type: "string"
+          description: "Per-domain access level (none, read or write) for restricted keys."
+          type: "object"
+        active:
+          description: "Legacy toggle mirrored onto status: false disables, true re-enables."
+          type: "boolean"
+        constraints:
+          $ref: "#/components/schemas/Constraints"
+          description: "Expiry and other limits; null clears them."
+        name:
+          description: "New display name."
+          maxLength: 100
+          type: "string"
+        permission_mode:
+          description: "Permission preset; a restricted key must keep at least one granted domain."
+          enum:
+            - "all"
+            - "restricted"
+            - "read_only"
+          type: "string"
+        project_scope:
+          $ref: "#/components/schemas/ProjectScope"
+          description: "Projects the key may reach."
+        status:
+          description: "Lifecycle status; revoked is terminal."
+          enum:
+            - "active"
+            - "disabled"
+            - "revoked"
+          type: "string"
+      type: "object"
     AggregateLogsRequest:
       type: "object"
       properties:
@@ -12678,528 +12913,6 @@ components:
         trace_id:
           type: "string"
       description: "Span reference accepted by AddAnnotationQueueItems."
-    ApiKeyStatus:
-      type: "string"
-      enum:
-        - "API_KEY_STATUS_UNSPECIFIED"
-        - "API_KEY_STATUS_ACTIVE"
-        - "API_KEY_STATUS_DISABLED"
-        - "API_KEY_STATUS_REVOKED"
-    OwnerType:
-      type: "string"
-      enum:
-        - "OWNER_TYPE_UNSPECIFIED"
-        - "OWNER_TYPE_USER"
-        - "OWNER_TYPE_SERVICE_ACCOUNT"
-    PermissionMode:
-      type: "string"
-      enum:
-        - "PERMISSION_MODE_UNSPECIFIED"
-        - "PERMISSION_MODE_ALL"
-        - "PERMISSION_MODE_RESTRICTED"
-        - "PERMISSION_MODE_READ_ONLY"
-    ListApiKeysResponse:
-      required:
-        - "object"
-        - "data"
-        - "has_more"
-      type: "object"
-      properties:
-        object:
-          type: "string"
-          description: "Object discriminator for list responses; always `list`."
-        data:
-          type: "array"
-          items:
-            $ref: "#/components/schemas/ApiKey"
-          description: "Page of api-keys, ordered newest first. `token_hash` and\n `api_key` are always elided in list responses."
-        has_more:
-          type: "boolean"
-          description: "Whether more api-keys are available in the selected pagination\n direction."
-    CreateApiKeyRequest:
-      required:
-        - "name"
-        - "permission_mode"
-      type: "object"
-      properties:
-        name:
-          type: "string"
-          description: "Human-readable name. Required."
-        owner:
-          allOf:
-            - $ref: "#/components/schemas/ApiKeyOwner"
-          description: "Owner attribution. Defaults to service_account when omitted."
-        project_scope:
-          allOf:
-            - $ref: "#/components/schemas/ProjectScope"
-          description: "Project authorization scope. Defaults to all-projects when omitted."
-        permission_mode:
-          description: "Permission preset. Required; an omitted or unspecified value is\n rejected with INVALID_ARGUMENT rather than defaulted to full access."
-          $ref: "#/components/schemas/PermissionMode"
-        access:
-          type: "object"
-          additionalProperties:
-            $ref: "#/components/schemas/AccessLevel"
-          description: "Per-domain access map. Required when `permission_mode` =\n `PERMISSION_MODE_RESTRICTED`. See `ApiKey.access` for the full\n catalog of valid keys (Domain.id) and AccessLevel string values,\n or fetch the live catalog via the capability catalog endpoint."
-        expires_at:
-          type: "string"
-          description: "Optional expiration. When set, the authenticate hot-path rejects\n the key once `expires_at` is in the past. Unset means the key\n never expires."
-          format: "date-time"
-        mcp_access:
-          allOf:
-            - $ref: "#/components/schemas/McpAccess"
-          description: "Optional MCP-gateway access restriction. Unset means no\n restriction. See McpAccess for the deny_all / allow-list semantics."
-        labels:
-          type: "object"
-          additionalProperties:
-            type: "string"
-          description: "Optional attribution labels (at most 10; keys `^[a-z0-9_.-]{1,32}$`,\n values up to 64 characters). See ApiKey.labels."
-    CreateApiKeyResponse:
-      required:
-        - "api_key"
-        - "token"
-      type: "object"
-      properties:
-        api_key:
-          allOf:
-            - $ref: "#/components/schemas/ApiKey"
-          description: "Newly minted api-key record."
-        token:
-          type: "string"
-          description: "Raw bearer token in the form `sk-orq-<api_key_id>-<secret>`.\n Returned ONCE; the API never exposes this value again. Clients\n must persist it immediately on receipt."
-    ListCapabilitiesResponse:
-      required:
-        - "domains"
-      type: "object"
-      properties:
-        domains:
-          type: "array"
-          items:
-            $ref: "#/components/schemas/Domain"
-          description: "Full capability catalog. Order is stable: workspace-admin first,\n then platform, then gateway."
-    GetApiKeyResponse:
-      required:
-        - "api_key"
-      type: "object"
-      properties:
-        api_key:
-          allOf:
-            - $ref: "#/components/schemas/ApiKey"
-          description: "Requested api-key. Raw token never included."
-    DeleteApiKeyResponse:
-      type: "object"
-      properties: {}
-    UpdateApiKeyRequest:
-      required: []
-      type: "object"
-      properties:
-        name:
-          type: "string"
-          description: "New name. Omit to keep current."
-        status:
-          description: "New lifecycle status. Omit to keep current. A revoked key cannot\n change status; the call fails with FAILED_PRECONDITION."
-          $ref: "#/components/schemas/ApiKeyStatus"
-        permission_mode:
-          description: "New permission preset. Omit to keep current."
-          $ref: "#/components/schemas/PermissionMode"
-        access:
-          type: "object"
-          additionalProperties:
-            $ref: "#/components/schemas/AccessLevel"
-          description: "Replacement access map. Required when changing to\n `PERMISSION_MODE_RESTRICTED`; ignored otherwise. Provide an empty\n map to clear. See `ApiKey.access` for the full catalog of valid\n keys (Domain.id) and AccessLevel string values, or fetch the\n live catalog via the capability catalog endpoint."
-        project_scope:
-          allOf:
-            - $ref: "#/components/schemas/ProjectScope"
-          description: "New project scope. Omit to keep current."
-        expires_at:
-          type: "string"
-          description: "New expiration. Omit to keep current. Set `clear_expires_at = true`\n to remove an existing expiration (a zero Timestamp here would still\n mean \"no change\" because of optional semantics)."
-          format: "date-time"
-        clear_expires_at:
-          type: "boolean"
-          description: "Force-clear the expiration. Mutually exclusive with `expires_at`."
-        mcp_access:
-          allOf:
-            - $ref: "#/components/schemas/McpAccess"
-          description: "Replacement MCP-gateway access restriction. Absent leaves the\n current value intact; an explicitly-set McpAccess replaces it —\n including an empty one (deny_all=false + empty list), which clears\n any existing restriction. See McpAccess."
-    UpdateApiKeyResponse:
-      required:
-        - "api_key"
-      type: "object"
-      properties:
-        api_key:
-          allOf:
-            - $ref: "#/components/schemas/ApiKey"
-          description: "Updated api-key."
-    ApiKey:
-      required:
-        - "api_key_id"
-        - "name"
-        - "owner"
-        - "project_scope"
-        - "permission_mode"
-        - "token_prefix"
-        - "status"
-        - "created_at"
-        - "updated_at"
-      type: "object"
-      properties:
-        api_key_id:
-          type: "string"
-          description: "Canonical key identifier (ULID). Embedded in opaque tokens as\n `sk-orq-<id>-<secret>`."
-        name:
-          type: "string"
-          description: "Human-readable name shown in the dashboard."
-        owner:
-          allOf:
-            - $ref: "#/components/schemas/ApiKeyOwner"
-          description: "Owner attribution (drives lifecycle)."
-        project_scope:
-          allOf:
-            - $ref: "#/components/schemas/ProjectScope"
-          description: "Project authorization scope."
-        permission_mode:
-          description: "Permission preset. `all` and `read_only` resolve at auth time from\n the capability catalog. `restricted` reads the per-domain `access`\n map."
-          $ref: "#/components/schemas/PermissionMode"
-        access:
-          type: "object"
-          additionalProperties:
-            $ref: "#/components/schemas/AccessLevel"
-          description: "Per-domain access map. Only populated when `permission_mode` is\n `PERMISSION_MODE_RESTRICTED`. The authoritative list of valid\n keys (Domain.id values) and the per-domain read / write semantics\n are returned by the List capability catalog endpoint\n (GET /v2/api-keys/capabilities). Values are AccessLevel enum names\n on the JSON wire:\n   \"ACCESS_LEVEL_NONE\"  — capability not granted\n   \"ACCESS_LEVEL_READ\"  — list / view verbs\n   \"ACCESS_LEVEL_WRITE\" — list / view + mutating / execute verbs"
-        token_prefix:
-          type: "string"
-          description: "Displayable prefix for UI listings (e.g. \"sk-orq-01HXY...\"). Safe\n to expose."
-        status:
-          description: "Lifecycle status."
-          $ref: "#/components/schemas/ApiKeyStatus"
-        created_by_id:
-          type: "string"
-          description: "Audit: user who created the key. Optional. Distinct from\n `owner.user_id` — created_by is provenance only, while owner\n determines lifecycle binding."
-        updated_by_id:
-          type: "string"
-          description: "Audit: user who last updated the key."
-        created_at:
-          type: "string"
-          description: "Time the key was created."
-          format: "date-time"
-        updated_at:
-          type: "string"
-          description: "Time the key was last updated."
-          format: "date-time"
-        last_used_at:
-          type: "string"
-          description: "Approximate time of the last authenticated use. Updates are sampled\n and may be delayed."
-          format: "date-time"
-        expires_at:
-          type: "string"
-          description: "Optional expiration. The authenticate hot-path rejects keys whose\n `expires_at` is in the past. Unset means the key never expires."
-          format: "date-time"
-        legacy_token_family:
-          description: "Token family for keys issued before the current opaque token format."
-          $ref: "#/components/schemas/LegacyTokenFamily"
-        legacy_key_id:
-          type: "string"
-          description: "Legacy key identifier from before the canonical ULID was assigned.\n Used to associate existing tokens with this key."
-        budget:
-          readOnly: true
-          allOf:
-            - $ref: "#/components/schemas/Budget"
-          description: "The budget scoped to this api-key, if one exists. Read-only here:\n budgets are created and managed through the Budgets API\n (scope.api_key). Populated only when the read request sets\n `include_budget`. Live consumption (`usage`) is not attached on this\n path — call the Budgets API for current spend."
-        mcp_access:
-          allOf:
-            - $ref: "#/components/schemas/McpAccess"
-          description: "Optional MCP-gateway access restriction. Unset means the key can\n reach every MCP gateway allowed by its project scope. See\n McpAccess for the deny_all / allow-list semantics."
-        labels:
-          type: "object"
-          additionalProperties:
-            type: "string"
-          description: "Attribution labels (at most 10; keys `^[a-z0-9_.-]{1,32}$`, values\n up to 64 characters). Emitted on every gateway span as\n `orq.api_key.label.<key>`."
-      description: "ApiKey defines an API key's scope, permissions, owner, budget,\n expiration, and revocation."
-    ApiKeyOwner:
-      type: "object"
-      properties:
-        user:
-          $ref: "#/components/schemas/UserOwner"
-        service_account:
-          $ref: "#/components/schemas/ServiceAccountOwner"
-      description: "Owner attribution drives lifecycle.\n\n `service_account` keys are workspace-owned and outlive any individual\n user. `user` keys are bound to `user_id`: when the user is removed,\n disabled, or loses project access, the key is revoked / its scope\n shrinks accordingly."
-    ProjectScope:
-      type: "object"
-      properties:
-        all:
-          $ref: "#/components/schemas/AllProjects"
-        single:
-          $ref: "#/components/schemas/SingleProject"
-      description: "Project authorization scope. Single-project or all-projects.\n Multi-project use cases are served by minting per-project keys or by\n using an all-projects key with `restricted` mode."
-    McpAccess:
-      type: "object"
-      properties:
-        deny_all:
-          type: "boolean"
-          description: "When true, the key is denied every MCP gateway regardless of\n allowed_mcp_gateway_ids."
-        allowed_mcp_gateway_ids:
-          type: "array"
-          items:
-            type: "string"
-          description: "Allow-list of MCP gateway ids (`mcp_gateway_<ULID>`) the key may\n reach. Ignored when deny_all is true. Empty (with deny_all=false)\n means no restriction."
-        toolset_ids:
-          type: "array"
-          items:
-            type: "string"
-          description: "Allow-list of MCP toolset ids (`mcp_toolset_<ULID>`) the key is\n bound to. When non-empty, the key sees and may call only the tools\n that are both exposed by the target gateway and members of the\n union of these toolsets. Empty means no toolset restriction."
-        allowed_filesystem_ids:
-          type: "array"
-          items:
-            type: "string"
-          description: "Allow-list of file system ids (`fsys_<ULID>`) the key may reach over\n the file system MCP endpoint. Ignored when deny_all is true. Empty\n (with deny_all=false) means no restriction. The access mode a key\n gets on a reachable file system is the file system's own\n external_access, never something the key carries."
-      description: "McpAccess optionally restricts which MCP gateways an API key may\n reach at the data plane. It is orthogonal to permission_mode /\n access: the key must still hold the `mcp_gateway.execute` verb and\n project membership; McpAccess only narrows the reachable gateway set\n within that grant. Human sessions and keys without an McpAccess are\n unaffected.\n\n Semantics:\n   - absent, or deny_all=false with an empty allowed_mcp_gateway_ids:\n     no restriction — every gateway in the key's project scope is\n     reachable.\n   - deny_all=true: zero gateways are reachable. Wins over\n     allowed_mcp_gateway_ids.\n   - non-empty allowed_mcp_gateway_ids: only the listed gateway ids\n     are reachable. Each id must look like `mcp_gateway_<ULID>`."
-    Domain:
-      type: "object"
-      properties:
-        id:
-          type: "string"
-          description: "Stable domain identifier (e.g. \"agent\", \"chat_completions\"). Used\n as the key in ApiKey.access and as the verb prefix in resolved\n permissions (e.g. agent.list, agent.view, agent.create)."
-        display_name:
-          type: "string"
-          description: "Human-readable label for the dashboard."
-        group:
-          description: "Logical group used by the UI to render this entry."
-          $ref: "#/components/schemas/DomainGroup"
-        allowed_scopes:
-          type: "array"
-          items:
-            $ref: "#/components/schemas/ScopeMode"
-          description: "Project scopes this domain may be granted under. A workspace-\n admin domain like `member` is typically SCOPE_MODE_ALL only."
-        readable:
-          type: "boolean"
-          description: "Whether this domain can be granted read access."
-        writable:
-          type: "boolean"
-          description: "Whether this domain can be granted write access."
-        extra_write_verbs:
-          type: "array"
-          items:
-            type: "string"
-          description: "Additional full verb names granted only with write access. This is\n additive to the standard group-derived verbs and intentionally does\n not affect read access (e.g. \"insights.run\")."
-      description: "Domain describes a permission domain that can be granted to an\n API key. Standard verbs are derived from id + group +\n readable/writable; exceptional write verbs are explicit data."
-    LegacyTokenFamily:
-      type: "string"
-      enum:
-        - "LEGACY_TOKEN_FAMILY_UNSPECIFIED"
-        - "LEGACY_TOKEN_FAMILY_ROUTER_JWT"
-        - "LEGACY_TOKEN_FAMILY_PROJECT_JWT"
-        - "LEGACY_TOKEN_FAMILY_WORKSPACE_JWT"
-    Budget:
-      required:
-        - "budget_id"
-        - "limits"
-        - "created_at"
-        - "updated_at"
-      type: "object"
-      properties:
-        budget_id:
-          type: "string"
-        scope:
-          allOf:
-            - $ref: "#/components/schemas/BudgetScope"
-          description: "Denormalized metadata for UI rendering, list filters, and the\n resolver's prefilter index. Never consulted for matching — the\n `match` expression is the single source of matching semantics.\n Unset for budgets created from a raw CEL expression (\"custom\")."
-        match:
-          allOf:
-            - $ref: "#/components/schemas/BudgetMatch"
-          description: "The matching semantics of the budget. The enforcement resolver\n evaluates `match.cel` against the request context; a budget\n applies to a request if and only if the expression evaluates to\n true. Scoped creates derive a canonical expression (e.g.\n `provider == \"openai\"`); an empty expression always matches\n (workspace-wide)."
-        limits:
-          $ref: "#/components/schemas/BudgetLimits"
-        rate_limit:
-          $ref: "#/components/schemas/RateLimit"
-        is_active:
-          type: "boolean"
-        expires_at:
-          type: "string"
-          format: "date-time"
-        created_at:
-          type: "string"
-          format: "date-time"
-        updated_at:
-          type: "string"
-          format: "date-time"
-        usage:
-          allOf:
-            - $ref: "#/components/schemas/BudgetUsage"
-          description: "Latest available consumption used for enforcement in the current\n period. This is not an exact billing ledger. Populated by read paths\n (Get / List); omitted on write responses (Create / Update / Reset)\n where it carries no signal. Absent or all-zero for a budget that\n has not been spent against in the current period."
-        alerts:
-          type: "array"
-          items:
-            $ref: "#/components/schemas/BudgetAlert"
-          description: "Threshold notifications. Absent when the budget has none."
-      description: "Budget defines limits and matching rules used to govern consumption."
-    UserOwner:
-      required:
-        - "user_id"
-      type: "object"
-      properties:
-        user_id:
-          type: "string"
-          description: "User ID that owns the API key."
-    ServiceAccountOwner:
-      type: "object"
-      properties: {}
-    AllProjects:
-      type: "object"
-      properties: {}
-    SingleProject:
-      required:
-        - "project_id"
-      type: "object"
-      properties:
-        project_id:
-          type: "string"
-          description: "Project ID this API key is scoped to."
-    BudgetScope:
-      type: "object"
-      properties:
-        workspace:
-          $ref: "#/components/schemas/WorkspaceBudgetScope"
-        project:
-          $ref: "#/components/schemas/ProjectBudgetScope"
-        identity:
-          $ref: "#/components/schemas/IdentityBudgetScope"
-        api_key:
-          $ref: "#/components/schemas/ApiKeyBudgetScope"
-        provider:
-          $ref: "#/components/schemas/ProviderBudgetScope"
-        model:
-          $ref: "#/components/schemas/ModelBudgetScope"
-      description: "Closed oneof of workspace, project, identity, api_key, provider, or model. Exactly one variant must be set. Variants are ordered by enforcement precedence (most specific to most general)."
-    BudgetMatch:
-      type: "object"
-      properties:
-        cel:
-          type: "string"
-      description: "CEL expression that decides whether a budget applies to a request. Available variables: `model`, `provider`, `model_id`, `api_key`, `api_key_labels` (map), `identity`, `project`, `metadata` (map), `headers` (map, lowercase keys). An empty expression always matches. Expressions are syntax-validated at write time."
-    BudgetLimits:
-      type: "object"
-      properties:
-        period:
-          $ref: "#/components/schemas/BudgetPeriod"
-        amount:
-          type: "number"
-          format: "double"
-        token_limit:
-          type: "number"
-          description: "Token ceiling. Carried as a double so it serializes as a JSON number\n (proto int64 would serialize as a quoted string); token counts are\n whole and well within double's exact-integer range (2^53). Stored as\n an integer server-side."
-          format: "double"
-      description: "BudgetLimits is the per-period spend and token ceiling. At least one\n of `amount`, `token_limit`, or RateLimit.requests_per_minute MUST be\n set on a Budget; that invariant is enforced by the handler."
-    RateLimit:
-      type: "object"
-      properties:
-        requests_per_minute:
-          type: "integer"
-          format: "int32"
-      description: "RateLimit is the per-minute request ceiling. Enforced via atomic\n increment-first semantics in the enforcement middleware."
-    BudgetUsage:
-      type: "object"
-      properties:
-        amount:
-          type: "number"
-          format: "double"
-        tokens:
-          type: "number"
-          description: "Carried as a double (not int64) so it serializes as a JSON number\n rather than a quoted string, matching limits.token_limit."
-          format: "double"
-        requests:
-          type: "integer"
-          format: "int32"
-      description: "BudgetUsage is the latest available current-period consumption used\n for budget enforcement, not an exact billing ledger. Each dimension is\n the consumed side of the matching limit dimension: `amount` is the\n accumulated cost in USD (vs limits.amount), `tokens` is the accumulated\n token count (vs limits.token_limit), and `requests` is the count in the\n rolling 60-second window (vs rate_limit.requests_per_minute). All three\n are explicit-presence so the triple is always emitted in full, zeros\n included — a never-spent budget serializes {amount:0, tokens:0,\n requests:0} rather than dropping its zero dimensions."
-    BudgetAlert:
-      required:
-        - "threshold_percent"
-        - "notifier_ids"
-      type: "object"
-      properties:
-        id:
-          type: "string"
-          description: "Assigned by ORQ. Supply an existing id to edit that alert in place."
-        threshold_percent:
-          type: "integer"
-          description: "Percentage of the dimension's limit at which the alert fires, 1–100."
-          format: "uint32"
-        notifier_ids:
-          type: "array"
-          items:
-            type: "string"
-          description: "Must be workspace-scoped; project-scoped notifiers are rejected."
-        dimension:
-          description: "Defaults to COST when unset."
-          $ref: "#/components/schemas/BudgetAlertDimension"
-      description: "Notifies every listed notifier once current-period consumption on\n `dimension` reaches `threshold_percent` of the matching limit. Each alert\n fires at most once per period, re-arming on rollover or a limit change.\n The dimension must have a limit set, or the write is rejected."
-    WorkspaceBudgetScope:
-      type: "object"
-      properties: {}
-      description: "Workspace-wide ceiling. The implicit target is the caller's workspace."
-    ProjectBudgetScope:
-      type: "object"
-      properties:
-        project_id:
-          type: "string"
-      description: "Per-project cap."
-    IdentityBudgetScope:
-      type: "object"
-      properties:
-        identity_external_id:
-          type: "string"
-      description: "Per-identity cap. Keyed by the contact's external identifier so the\n scope is stable across imports."
-    ApiKeyBudgetScope:
-      type: "object"
-      properties:
-        api_key_id:
-          type: "string"
-      description: "Per-api-key cap. Replaces the legacy embedded `constraints.budget`\n associated with an API key."
-    ProviderBudgetScope:
-      type: "object"
-      properties:
-        provider:
-          type: "string"
-      description: "Per-provider cap. The value is the provider enum string (e.g.\n \"openai\", \"anthropic\") drawn from ModelIntegrationIdentifier."
-    ModelBudgetScope:
-      required:
-        - "model_id"
-      type: "object"
-      properties:
-        model_id:
-          type: "string"
-      description: "Per-model cap. The value is the FULL model reference as callers send\n it (\"openai/gpt-4o\", or \"workspaceKey@openai/gpt-4o\" for private\n models), rather than an internal identifier."
-    BudgetPeriod:
-      type: "string"
-      enum:
-        - "BUDGET_PERIOD_UNSPECIFIED"
-        - "BUDGET_PERIOD_DAILY"
-        - "BUDGET_PERIOD_WEEKLY"
-        - "BUDGET_PERIOD_MONTHLY"
-        - "BUDGET_PERIOD_YEARLY"
-        - "BUDGET_PERIOD_ONE_TIME"
-    BudgetAlertDimension:
-      type: "string"
-      enum:
-        - "BUDGET_ALERT_DIMENSION_UNSPECIFIED"
-        - "BUDGET_ALERT_DIMENSION_COST"
-        - "BUDGET_ALERT_DIMENSION_TOKENS"
-    AccessLevel:
-      type: "string"
-      enum:
-        - "ACCESS_LEVEL_NONE"
-        - "ACCESS_LEVEL_READ"
-        - "ACCESS_LEVEL_WRITE"
-    DomainGroup:
-      type: "string"
-      enum:
-        - "DOMAIN_GROUP_WORKSPACE_ADMIN"
-        - "DOMAIN_GROUP_PLATFORM"
-        - "DOMAIN_GROUP_GATEWAY"
-    ScopeMode:
-      type: "string"
-      enum:
-        - "SCOPE_MODE_ALL"
-        - "SCOPE_MODE_SINGLE"
     BudgetScopeKind:
       type: "string"
       enum:
@@ -13210,6 +12923,15 @@ components:
         - "BUDGET_SCOPE_KIND_API_KEY"
         - "BUDGET_SCOPE_KIND_PROVIDER"
         - "BUDGET_SCOPE_KIND_MODEL"
+    BudgetPeriod:
+      type: "string"
+      enum:
+        - "BUDGET_PERIOD_UNSPECIFIED"
+        - "BUDGET_PERIOD_DAILY"
+        - "BUDGET_PERIOD_WEEKLY"
+        - "BUDGET_PERIOD_MONTHLY"
+        - "BUDGET_PERIOD_YEARLY"
+        - "BUDGET_PERIOD_ONE_TIME"
     BudgetSortField:
       type: "string"
       enum:
@@ -13339,6 +13061,169 @@ components:
           allOf:
             - $ref: "#/components/schemas/BudgetRestResponse"
           description: "Budget after reset. The record itself is unchanged; only counters\n were cleared."
+    Budget:
+      required:
+        - "budget_id"
+        - "limits"
+        - "created_at"
+        - "updated_at"
+      type: "object"
+      properties:
+        budget_id:
+          type: "string"
+        scope:
+          allOf:
+            - $ref: "#/components/schemas/BudgetScope"
+          description: "Denormalized metadata for UI rendering, list filters, and the\n resolver's prefilter index. Never consulted for matching — the\n `match` expression is the single source of matching semantics.\n Unset for budgets created from a raw CEL expression (\"custom\")."
+        match:
+          allOf:
+            - $ref: "#/components/schemas/BudgetMatch"
+          description: "The matching semantics of the budget. The enforcement resolver\n evaluates `match.cel` against the request context; a budget\n applies to a request if and only if the expression evaluates to\n true. Scoped creates derive a canonical expression (e.g.\n `provider == \"openai\"`); an empty expression always matches\n (workspace-wide)."
+        limits:
+          $ref: "#/components/schemas/BudgetLimits"
+        rate_limit:
+          $ref: "#/components/schemas/RateLimit"
+        is_active:
+          type: "boolean"
+        expires_at:
+          type: "string"
+          format: "date-time"
+        created_at:
+          type: "string"
+          format: "date-time"
+        updated_at:
+          type: "string"
+          format: "date-time"
+        usage:
+          allOf:
+            - $ref: "#/components/schemas/BudgetUsage"
+          description: "Latest available consumption used for enforcement in the current\n period. This is not an exact billing ledger. Populated by read paths\n (Get / List); omitted on write responses (Create / Update / Reset)\n where it carries no signal. Absent or all-zero for a budget that\n has not been spent against in the current period."
+        alerts:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/BudgetAlert"
+          description: "Threshold notifications. Absent when the budget has none."
+      description: "Budget defines limits and matching rules used to govern consumption."
+    BudgetScope:
+      type: "object"
+      properties:
+        workspace:
+          $ref: "#/components/schemas/WorkspaceBudgetScope"
+        project:
+          $ref: "#/components/schemas/ProjectBudgetScope"
+        identity:
+          $ref: "#/components/schemas/IdentityBudgetScope"
+        api_key:
+          $ref: "#/components/schemas/ApiKeyBudgetScope"
+        provider:
+          $ref: "#/components/schemas/ProviderBudgetScope"
+        model:
+          $ref: "#/components/schemas/ModelBudgetScope"
+      description: "Closed oneof of workspace, project, identity, api_key, provider, or model. Exactly one variant must be set. Variants are ordered by enforcement precedence (most specific to most general)."
+    BudgetMatch:
+      type: "object"
+      properties:
+        cel:
+          type: "string"
+      description: "CEL expression that decides whether a budget applies to a request. Available variables: `model`, `provider`, `model_id`, `api_key`, `api_key_labels` (map), `identity`, `project`, `metadata` (map), `headers` (map, lowercase keys). An empty expression always matches. Expressions are syntax-validated at write time."
+    BudgetLimits:
+      type: "object"
+      properties:
+        period:
+          $ref: "#/components/schemas/BudgetPeriod"
+        amount:
+          type: "number"
+          format: "double"
+        token_limit:
+          type: "number"
+          description: "Token ceiling. Carried as a double so it serializes as a JSON number\n (proto int64 would serialize as a quoted string); token counts are\n whole and well within double's exact-integer range (2^53). Stored as\n an integer server-side."
+          format: "double"
+      description: "BudgetLimits is the per-period spend and token ceiling. At least one\n of `amount`, `token_limit`, or RateLimit.requests_per_minute MUST be\n set on a Budget; that invariant is enforced by the handler."
+    RateLimit:
+      type: "object"
+      properties:
+        requests_per_minute:
+          type: "integer"
+          format: "int32"
+      description: "RateLimit is the per-minute request ceiling. Enforced via atomic\n increment-first semantics in the enforcement middleware."
+    BudgetAlert:
+      required:
+        - "threshold_percent"
+        - "notifier_ids"
+      type: "object"
+      properties:
+        id:
+          type: "string"
+          description: "Assigned by ORQ. Supply an existing id to edit that alert in place."
+        threshold_percent:
+          type: "integer"
+          description: "Percentage of the dimension's limit at which the alert fires, 1–100."
+          format: "uint32"
+        notifier_ids:
+          type: "array"
+          items:
+            type: "string"
+          description: "Must be workspace-scoped; project-scoped notifiers are rejected."
+        dimension:
+          description: "Defaults to COST when unset."
+          $ref: "#/components/schemas/BudgetAlertDimension"
+      description: "Notifies every listed notifier once current-period consumption on\n `dimension` reaches `threshold_percent` of the matching limit. Each alert\n fires at most once per period, re-arming on rollover or a limit change.\n The dimension must have a limit set, or the write is rejected."
+    BudgetUsage:
+      type: "object"
+      properties:
+        amount:
+          type: "number"
+          format: "double"
+        tokens:
+          type: "number"
+          description: "Carried as a double (not int64) so it serializes as a JSON number\n rather than a quoted string, matching limits.token_limit."
+          format: "double"
+        requests:
+          type: "integer"
+          format: "int32"
+      description: "BudgetUsage is the latest available current-period consumption used\n for budget enforcement, not an exact billing ledger. Each dimension is\n the consumed side of the matching limit dimension: `amount` is the\n accumulated cost in USD (vs limits.amount), `tokens` is the accumulated\n token count (vs limits.token_limit), and `requests` is the count in the\n rolling 60-second window (vs rate_limit.requests_per_minute). All three\n are explicit-presence so the triple is always emitted in full, zeros\n included — a never-spent budget serializes {amount:0, tokens:0,\n requests:0} rather than dropping its zero dimensions."
+    WorkspaceBudgetScope:
+      type: "object"
+      properties: {}
+      description: "Workspace-wide ceiling. The implicit target is the caller's workspace."
+    ProjectBudgetScope:
+      type: "object"
+      properties:
+        project_id:
+          type: "string"
+      description: "Per-project cap."
+    IdentityBudgetScope:
+      type: "object"
+      properties:
+        identity_external_id:
+          type: "string"
+      description: "Per-identity cap. Keyed by the contact's external identifier so the\n scope is stable across imports."
+    ApiKeyBudgetScope:
+      type: "object"
+      properties:
+        api_key_id:
+          type: "string"
+      description: "Per-api-key cap. Replaces the legacy embedded `constraints.budget`\n associated with an API key."
+    ProviderBudgetScope:
+      type: "object"
+      properties:
+        provider:
+          type: "string"
+      description: "Per-provider cap. The value is the provider enum string (e.g.\n \"openai\", \"anthropic\") drawn from ModelIntegrationIdentifier."
+    ModelBudgetScope:
+      required:
+        - "model_id"
+      type: "object"
+      properties:
+        model_id:
+          type: "string"
+      description: "Per-model cap. The value is the FULL model reference as callers send\n it (\"openai/gpt-4o\", or \"workspaceKey@openai/gpt-4o\" for private\n models), rather than an internal identifier."
+    BudgetAlertDimension:
+      type: "string"
+      enum:
+        - "BUDGET_ALERT_DIMENSION_UNSPECIFIED"
+        - "BUDGET_ALERT_DIMENSION_COST"
+        - "BUDGET_ALERT_DIMENSION_TOKENS"
     BudgetRestResponse:
       required:
         - "budgetId"
@@ -14251,6 +14136,12 @@ components:
           type: "boolean"
           description: "Whether this domain can be granted write access."
       description: "ManagementDomain describes a permission domain that can be granted\n to a management key. Verbs are derived from id + readable/writable."
+    AccessLevel:
+      type: "string"
+      enum:
+        - "ACCESS_LEVEL_NONE"
+        - "ACCESS_LEVEL_READ"
+        - "ACCESS_LEVEL_WRITE"
     ManagementDomainGroup:
       type: "string"
       enum:
@@ -17155,7 +17046,7 @@ components:
           description: "The selected option. Present for choice answers."
           type: "string"
         confidence:
-          description: "Probability of the selected option or level. Present for choice and score answers."
+          description: "How sure the model is of the answer it selected: on chat models the largest value in probabilities, so it adds nothing the distribution does not; typesafe/jev-latest returns its own calibrated value, which can sit below the largest probability. Present for choice and score answers."
           format: "double"
           type: "number"
         legend:
@@ -17174,7 +17065,7 @@ components:
           description: "Probability distribution over the options or levels. Present for choice and score answers."
           type: "object"
         score:
-          description: "The selected level index. Present for score answers."
+          description: "Position on the scale, not an index: on chat models the weighted index, each level index multiplied by that level probability and summed, so the value is usually fractional; typesafe/jev-latest returns its own score. Present for score answers."
           format: "double"
           type: "number"
         type:
@@ -17253,7 +17144,7 @@ components:
           description: "Key-value metadata attached to the trace."
           type: "object"
         model:
-          description: "ID of the model to use: the native classify model typesafe/jev-latest, or a chat model that supports classify such as anthropic/claude-haiku-4-5, google-ai/gemini-3.8-flash or zai/glm-5.3-flash."
+          description: "ID of the model to use: the native classify model typesafe/jev-latest, or a chat model that supports classify."
           type: "string"
         name:
           description: "The name to display on the trace. If not specified, the default system name will be used."
@@ -32009,7 +31900,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01M36FZE9S44D3B53RGRCQDJ7T"
+                                          default: "01M36HS44XZ9GGYYNC805AB4T8"
                                         name:
                                           type: "string"
                                         description:
@@ -33606,7 +33497,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01M36FZEAF5WE29P0HE6E4F8VY"
+                                          default: "01M36HS45D8PAQ91K6BSXZABMR"
                                         name:
                                           type: "string"
                                         description:
@@ -42502,7 +42393,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M36FZEC47Q5GS4SK1ADZ12G1"
+                              default: "tool_01M36HS46NMBX4GS6A1RCQPDWK"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -42603,7 +42494,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M36FZEC4F3E8MX0G4MGG4J7G"
+                              default: "tool_01M36HS46PT6V62KQB6462NJKF"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -42706,7 +42597,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M36FZEC5BDNVPCG87ZJBK1BC"
+                              default: "tool_01M36HS46P1VDBB6Q489C3WXBN"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -42850,7 +42741,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M36FZEC6YV78A9XCY6PV1T4C"
+                              default: "tool_01M36HS46Q5D9KVPER8VSRFJYX"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -43337,7 +43228,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M36FZECB16Q3YVHA2MHM9DVH"
+                        default: "tool_01M36HS46WCEK5PGQXPXCMA4G1"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -43438,7 +43329,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M36FZECBN9C4AX9NGDAHPAF2"
+                        default: "tool_01M36HS46WVS5SJMRJGGG4K299"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -43541,7 +43432,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M36FZECC8J3TZ0C6TKX8HJZB"
+                        default: "tool_01M36HS46XT7NW4RCNVZK9WDST"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -43685,7 +43576,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M36FZECDNT4F1W971DVCQ5YB"
+                        default: "tool_01M36HS46YTMFF82XMFE9B62KA"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -44183,7 +44074,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M36FZECGJMVH0D4QEFZM65XN"
+                        default: "tool_01M36HS470PRK2CWB93XEXSNMA"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -44284,7 +44175,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M36FZECHK6BYCX8VM8JG8PPZ"
+                        default: "tool_01M36HS470GY37YQNVXW9CH25V"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -44387,7 +44278,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M36FZECH97PZ2NK02460NE52"
+                        default: "tool_01M36HS471PFFYKVQM46GMQ9CD"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -44531,7 +44422,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M36FZECJKVNDVZ201CV5WDNZ"
+                        default: "tool_01M36HS4710W9633MZM3AP3336"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -44692,7 +44583,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M36FZECS1SNWYM6X6EPES3MD"
+                        default: "tool_01M36HS476KZ4QW24T2A3GJKFV"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -44793,7 +44684,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M36FZECT6PV891WG3GYPC8FX"
+                        default: "tool_01M36HS4775XDPSTJ2B8ZSBAWZ"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -44896,7 +44787,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M36FZECTW130595DD123M10T"
+                        default: "tool_01M36HS4770JXKYEH54NPN8VE5"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -45040,7 +44931,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M36FZECVKMGKHJ63RVNGZZTY"
+                        default: "tool_01M36HS478XTGJBR2ZTMBXNC6H"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -51482,7 +51373,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-09-23T06:41:46.442Z"
+                      default: "2026-09-23T07:13:16.556Z"
                       deprecated: true
                       description: "Deprecated. The date and time the item was reviewed"
                     type:
@@ -51524,7 +51415,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-09-23T06:41:46.442Z"
+                      default: "2026-09-23T07:13:16.556Z"
                       deprecated: true
                       description: "Deprecated. The date and time the item was reviewed"
                     type:
@@ -51566,7 +51457,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-09-23T06:41:46.442Z"
+                      default: "2026-09-23T07:13:16.556Z"
                       deprecated: true
                       description: "Deprecated. The date and time the item was reviewed"
                     type:
@@ -51608,7 +51499,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-09-23T06:41:46.443Z"
+                      default: "2026-09-23T07:13:16.556Z"
                       deprecated: true
                       description: "Deprecated. The date and time the item was reviewed"
                     type:
@@ -51939,7 +51830,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-09-23T06:41:38.146Z"
+                          default: "2026-09-23T07:13:09.371Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -51947,7 +51838,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-09-23T06:41:38.146Z"
+                              default: "2026-09-23T07:13:09.371Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -52017,7 +51908,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-09-23T06:41:38.146Z"
+                          default: "2026-09-23T07:13:09.371Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -52025,7 +51916,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-09-23T06:41:38.146Z"
+                              default: "2026-09-23T07:13:09.371Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -52201,7 +52092,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-09-23T06:41:38.146Z"
+                        default: "2026-09-23T07:13:09.371Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -52209,7 +52100,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-09-23T06:41:38.146Z"
+                            default: "2026-09-23T07:13:09.371Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -52279,7 +52170,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-09-23T06:41:38.146Z"
+                        default: "2026-09-23T07:13:09.371Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -52287,7 +52178,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-09-23T06:41:38.146Z"
+                            default: "2026-09-23T07:13:09.371Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -52381,7 +52272,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-09-23T06:41:38.146Z"
+                        default: "2026-09-23T07:13:09.371Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -52389,7 +52280,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-09-23T06:41:38.146Z"
+                            default: "2026-09-23T07:13:09.371Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -52459,7 +52350,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-09-23T06:41:38.146Z"
+                        default: "2026-09-23T07:13:09.371Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -52467,7 +52358,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-09-23T06:41:38.146Z"
+                            default: "2026-09-23T07:13:09.371Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -52651,7 +52542,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-09-23T06:41:38.146Z"
+                        default: "2026-09-23T07:13:09.371Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -52659,7 +52550,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-09-23T06:41:38.146Z"
+                            default: "2026-09-23T07:13:09.371Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -52729,7 +52620,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-09-23T06:41:38.146Z"
+                        default: "2026-09-23T07:13:09.371Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -52737,7 +52628,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-09-23T06:41:38.146Z"
+                            default: "2026-09-23T07:13:09.371Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -58291,6 +58182,356 @@ paths:
       x-speakeasy-name-override: "restore"
       security:
         - ApiKey: []
+  /v2/api-keys:
+    get:
+      description: "Returns API keys visible to the current workspace as a JSON array sorted by name. Raw tokens are never included; the `token` field contains a masked display value."
+      operationId: "ApiKeyList"
+      parameters:
+        - description: "Only return keys bound to this project. When omitted, every key visible to the caller is returned."
+          explode: false
+          in: "query"
+          name: "project_id"
+          schema:
+            description: "Only return keys bound to this project. When omitted, every key visible to the caller is returned."
+            type: "string"
+        - description: "Only return keys of this source."
+          explode: false
+          in: "query"
+          name: "source"
+          schema:
+            description: "Only return keys of this source."
+            enum:
+              - "workspace"
+              - "router"
+            type: "string"
+      responses:
+        "401":
+          description: "Missing or invalid credentials"
+        "403":
+          description: "The caller may not list API keys"
+        "200":
+          description: API keys in the workspace.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ApiKeyRestResponse"
+      summary: "List API keys"
+      tags:
+        - "API keys"
+      x-speakeasy-group: "apiKeys"
+      x-speakeasy-name-override: "list"
+      x-code-samples:
+        - lang: "curl"
+          label: "Core - List project keys"
+          source: "curl --get 'https://my.orq.ai/v2/api-keys' \\\n  --header \"Authorization: Bearer $ORQ_API_KEY\" \\\n  --data-urlencode 'project_id=proj_01HZXW2K7Y8Q9M0N1P2R3S4T5V'\n"
+        - lang: "python"
+          label: "Python - List project keys"
+          source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\napi_keys = client.api_keys.list(\n    project_id=\"proj_01HZXW2K7Y8Q9M0N1P2R3S4T5V\",\n)\n\nfor api_key in api_keys:\n    print(api_key.name, api_key.token)\n"
+        - lang: "typescript"
+          label: "Node.js - List project keys"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\nconst apiKeys = await client.apiKeys.list({\n  projectId: 'proj_01HZXW2K7Y8Q9M0N1P2R3S4T5V',\n});\n\nfor (const apiKey of apiKeys) {\n  console.log(apiKey.name, apiKey.token);\n}\n"
+      security:
+        - ApiKey: []
+    post:
+      description: "Mints a new API key in the workspace, bound to the single project in `projects` or to every project when omitted. The raw token is returned once in the `token` field and is never retrievable afterwards. Unknown body fields are rejected."
+      operationId: "ApiKeyCreate"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              additionalProperties: false
+              properties:
+                access:
+                  additionalProperties:
+                    type: "string"
+                  description: "Per-domain access level (none, read or write) for restricted keys; domain ids come from the capability catalog."
+                  type: "object"
+                constraints:
+                  $ref: "#/components/schemas/Constraints"
+                  description: "Expiry and other limits applied to the key."
+                expiration:
+                  description: "Legacy expiry as an RFC 3339 timestamp; prefer constraints.expires_at."
+                  format: "date-time"
+                  type: "string"
+                name:
+                  description: "Display name of the key."
+                  maxLength: 100
+                  type: "string"
+                owner:
+                  $ref: "#/components/schemas/Owner"
+                  description: "Lifecycle binding: a user-owned key is revoked with the user, a service-account key outlives any user."
+                permission_mode:
+                  description: "Permission preset; restricted keys hold only the domains granted in access."
+                  enum:
+                    - "all"
+                    - "restricted"
+                    - "read_only"
+                  type: "string"
+                project_scope:
+                  $ref: "#/components/schemas/ProjectScope"
+                  description: "Projects the key may reach: every project of the workspace or a single one."
+                projects:
+                  description: "Legacy single-project binding; prefer project_scope."
+                  items:
+                    type: "string"
+                  maxItems: 1
+                  type:
+                    - "array"
+                    - "null"
+                source:
+                  description: "Origin of the key; router keys are minted for the AI router."
+                  enum:
+                    - "workspace"
+                    - "router"
+                  type: "string"
+              required:
+                - "name"
+              type: "object"
+        required: true
+      responses:
+        "400":
+          description: "Invalid or unknown body field"
+        "401":
+          description: "Missing or invalid credentials"
+        "403":
+          description: "The caller may not create API keys or the requested scope exceeds the caller's reach"
+        "200":
+          description: API key created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiKeyRestResponse"
+      summary: "Create a new API key"
+      tags:
+        - "API keys"
+      x-speakeasy-group: "apiKeys"
+      x-speakeasy-name-override: "create"
+      x-code-samples:
+        - lang: "curl"
+          label: "Core - Create service account key"
+          source: "curl --request POST \\\n  --url 'https://my.orq.ai/v2/api-keys' \\\n  --header \"Authorization: Bearer $ORQ_API_KEY\" \\\n  --header 'Content-Type: application/json' \\\n  --data '{\n    \"name\": \"Production service key\",\n    \"owner\": {\n      \"type\": \"service_account\"\n    },\n    \"project_scope\": {\n      \"mode\": \"all\"\n    },\n    \"permission_mode\": \"all\"\n  }'\n"
+        - lang: "python"
+          label: "Python - Create service account key"
+          source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\nresult = client.api_keys.create(\n    name=\"Production service key\",\n    owner={\"type\": \"service_account\"},\n    project_scope={\"mode\": \"all\"},\n    permission_mode=\"all\",\n)\n\n# Store the token immediately. It is only returned once.\nprint(result.token)\n"
+        - lang: "typescript"
+          label: "Node.js - Create service account key"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\nconst result = await client.apiKeys.create({\n  name: 'Production service key',\n  owner: {\n    type: 'service_account',\n  },\n  projectScope: {\n    mode: 'all',\n  },\n  permissionMode: 'all',\n});\n\n// Store the token immediately. It is only returned once.\nconsole.log(result.token);\n"
+        - lang: "curl"
+          label: "Core - Create restricted project key"
+          source: "curl --request POST \\\n  --url 'https://my.orq.ai/v2/api-keys' \\\n  --header \"Authorization: Bearer $ORQ_API_KEY\" \\\n  --header 'Content-Type: application/json' \\\n  --data '{\n    \"name\": \"Support automation key\",\n    \"project_scope\": {\n      \"mode\": \"single\",\n      \"project_id\": \"proj_01HZXW2K7Y8Q9M0N1P2R3S4T5V\"\n    },\n    \"permission_mode\": \"restricted\",\n    \"access\": {\n      \"agent\": \"write\",\n      \"deployment\": \"read\"\n    }\n  }'\n"
+        - lang: "python"
+          label: "Python - Create restricted project key"
+          source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\nresult = client.api_keys.create(\n    name=\"Support automation key\",\n    project_scope={\n        \"mode\": \"single\",\n        \"project_id\": \"proj_01HZXW2K7Y8Q9M0N1P2R3S4T5V\",\n    },\n    permission_mode=\"restricted\",\n    access={\n        \"agent\": \"write\",\n        \"deployment\": \"read\",\n    },\n)\n\nprint(result.id)\nprint(result.token)\n"
+        - lang: "typescript"
+          label: "Node.js - Create restricted project key"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\nconst result = await client.apiKeys.create({\n  name: 'Support automation key',\n  projectScope: {\n    mode: 'single',\n    projectId: 'proj_01HZXW2K7Y8Q9M0N1P2R3S4T5V',\n  },\n  permissionMode: 'restricted',\n  access: {\n    agent: 'write',\n    deployment: 'read',\n  },\n});\n\nconsole.log(result.id);\nconsole.log(result.token);\n"
+      security:
+        - ApiKey: []
+  /v2/api-keys/capabilities:
+    get:
+      description: "Returns the capability catalog: the set of permission domains that can be granted to an API key. Each entry includes the domain id, display name, group, allowed project scopes and whether it can be granted read or write access. No credentials are required."
+      operationId: "ApiKeyListCapabilities"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                properties:
+                  domains:
+                    description: "Full capability catalog. Order is stable: workspace-admin first, then platform, then gateway."
+                    items:
+                      $ref: "#/components/schemas/Domain"
+                    type:
+                      - "array"
+                      - "null"
+                required:
+                  - "domains"
+                type: "object"
+          description: "The capability catalog"
+      summary: "List capability catalog"
+      tags:
+        - "API keys"
+      x-speakeasy-group: "apiKeys"
+      x-speakeasy-name-override: "listCapabilities"
+      x-code-samples:
+        - lang: "curl"
+          label: "Core - List capability catalog"
+          source: "curl --request GET \\\n  --url 'https://my.orq.ai/v2/api-keys/capabilities'\n"
+        - lang: "python"
+          label: "Python - List capability catalog"
+          source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\ncatalog = client.api_keys.list_capabilities()\n\nfor domain in catalog.domains:\n    print(domain.id, domain.display_name)\n"
+        - lang: "typescript"
+          label: "Node.js - List capability catalog"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\nconst catalog = await client.apiKeys.listCapabilities();\n\nfor (const domain of catalog.domains) {\n  console.log(domain.id, domain.displayName);\n}\n"
+      security:
+        - ApiKey: []
+  /v2/api-keys/{api_key_id}:
+    delete:
+      description: "Permanently deletes an API key. The key is revoked immediately; in-flight requests using it will fail. The response body is empty on success."
+      operationId: "ApiKeyDelete"
+      parameters:
+        - description: "Unique identifier of the API key."
+          in: "path"
+          name: "api_key_id"
+          required: true
+          schema:
+            description: "Unique identifier of the API key."
+            type: "string"
+      responses:
+        "204":
+          description: "API key deleted successfully."
+        "401":
+          description: "Missing or invalid credentials"
+        "403":
+          description: "The caller may not delete API keys"
+        "404":
+          description: "No API key with this id is visible to the caller"
+      summary: "Delete an API key"
+      tags:
+        - "API keys"
+      x-speakeasy-group: "apiKeys"
+      x-speakeasy-name-override: "delete"
+      x-code-samples:
+        - lang: "curl"
+          label: "Core - Delete a key"
+          source: "curl --request DELETE \\\n  --url 'https://my.orq.ai/v2/api-keys/01HZXW2K7Y8Q9M0N1P2R3S4T5V' \\\n  --header \"Authorization: Bearer $ORQ_API_KEY\"\n"
+        - lang: "python"
+          label: "Python - Delete a key"
+          source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\nclient.api_keys.delete(\n    api_key_id=\"01HZXW2K7Y8Q9M0N1P2R3S4T5V\",\n)\n"
+        - lang: "typescript"
+          label: "Node.js - Delete a key"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\nawait client.apiKeys.delete({\n  apiKeyId: '01HZXW2K7Y8Q9M0N1P2R3S4T5V',\n});\n"
+      security:
+        - ApiKey: []
+    get:
+      description: "Retrieves the metadata for an existing API key by its unique identifier. The raw secret is never returned; `token` carries a masked display value."
+      operationId: "ApiKeyGet"
+      parameters:
+        - description: "Unique identifier of the API key."
+          in: "path"
+          name: "api_key_id"
+          required: true
+          schema:
+            description: "Unique identifier of the API key."
+            type: "string"
+      responses:
+        "401":
+          description: "Missing or invalid credentials"
+        "403":
+          description: "The caller may not view API keys"
+        "404":
+          description: "No API key with this id is visible to the caller"
+        "200":
+          description: API key retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiKeyRestResponse"
+      summary: "Retrieve an API key"
+      tags:
+        - "API keys"
+      x-speakeasy-group: "apiKeys"
+      x-speakeasy-name-override: "get"
+      x-code-samples:
+        - lang: "curl"
+          label: "Core - Retrieve key metadata"
+          source: "curl --request GET \\\n  --url 'https://my.orq.ai/v2/api-keys/01HZXW2K7Y8Q9M0N1P2R3S4T5V' \\\n  --header \"Authorization: Bearer $ORQ_API_KEY\"\n"
+        - lang: "python"
+          label: "Python - Retrieve key metadata"
+          source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\nresult = client.api_keys.get(\n    api_key_id=\"01HZXW2K7Y8Q9M0N1P2R3S4T5V\",\n)\n\nprint(result.name)\n"
+        - lang: "typescript"
+          label: "Node.js - Retrieve key metadata"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\nconst result = await client.apiKeys.get({\n  apiKeyId: '01HZXW2K7Y8Q9M0N1P2R3S4T5V',\n});\n\nconsole.log(result.name);\n"
+      security:
+        - ApiKey: []
+    patch:
+      description: "Updates mutable fields of an API key: display name, status (active / disabled / revoked), permission mode and access map, project scope and constraints. Omitted fields keep their current values. Unknown body fields are rejected."
+      operationId: "ApiKeyUpdate"
+      parameters:
+        - description: "Unique identifier of the API key."
+          in: "path"
+          name: "api_key_id"
+          required: true
+          schema:
+            description: "Unique identifier of the API key."
+            type: "string"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              additionalProperties: false
+              properties:
+                access:
+                  additionalProperties:
+                    type: "string"
+                  description: "Per-domain access level (none, read or write) for restricted keys."
+                  type: "object"
+                active:
+                  description: "Legacy toggle mirrored onto status: false disables, true re-enables."
+                  type: "boolean"
+                constraints:
+                  $ref: "#/components/schemas/Constraints"
+                  description: "Expiry and other limits; null clears them."
+                name:
+                  description: "New display name."
+                  maxLength: 100
+                  type: "string"
+                permission_mode:
+                  description: "Permission preset; a restricted key must keep at least one granted domain."
+                  enum:
+                    - "all"
+                    - "restricted"
+                    - "read_only"
+                  type: "string"
+                project_scope:
+                  $ref: "#/components/schemas/ProjectScope"
+                  description: "Projects the key may reach."
+                status:
+                  description: "Lifecycle status; revoked is terminal."
+                  enum:
+                    - "active"
+                    - "disabled"
+                    - "revoked"
+                  type: "string"
+              type: "object"
+        required: true
+      responses:
+        "400":
+          description: "Invalid or unknown body field"
+        "401":
+          description: "Missing or invalid credentials"
+        "403":
+          description: "The caller may not update API keys"
+        "404":
+          description: "No API key with this id is visible to the caller"
+        "409":
+          description: "The key is revoked and cannot change status"
+        "200":
+          description: API key updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiKeyRestResponse"
+      summary: "Update an API key"
+      tags:
+        - "API keys"
+      x-speakeasy-group: "apiKeys"
+      x-speakeasy-name-override: "update"
+      x-code-samples:
+        - lang: "curl"
+          label: "Core - Disable a key"
+          source: "curl --request PATCH \\\n  --url 'https://my.orq.ai/v2/api-keys/01HZXW2K7Y8Q9M0N1P2R3S4T5V' \\\n  --header \"Authorization: Bearer $ORQ_API_KEY\" \\\n  --header 'Content-Type: application/json' \\\n  --data '{\n    \"status\": \"disabled\"\n  }'\n"
+        - lang: "python"
+          label: "Python - Disable a key"
+          source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\nresult = client.api_keys.update(\n    api_key_id=\"01HZXW2K7Y8Q9M0N1P2R3S4T5V\",\n    status=\"disabled\",\n)\n\nprint(result.status)\n"
+        - lang: "typescript"
+          label: "Node.js - Disable a key"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\nconst result = await client.apiKeys.update({\n  apiKeyId: '01HZXW2K7Y8Q9M0N1P2R3S4T5V',\n  status: 'disabled',\n});\n\nconsole.log(result.status);\n"
+      security:
+        - ApiKey: []
   /v3/logs/aggregate:
     post:
       tags:
@@ -62066,267 +62307,6 @@ paths:
         - lang: "typescript"
           label: "Node.js - Retrieve a queue item"
           source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({ apiKey: process.env.ORQ_API_KEY });\n\nconst item = await client.annotationQueues.retrieveItem({\n  annotationQueueId: '01HXXXXXXXXXXXXXXXXXXXXXXX',\n  itemId: 'item_01',\n});\n\nconsole.log(item.spanId);\n"
-      security:
-        - ApiKey: []
-  /v2/api-keys:
-    get:
-      tags:
-        - "API keys"
-      summary: "List API keys"
-      description: "Returns API keys visible to the current workspace as a JSON array. Raw tokens are never included; the `token` field contains a masked display value."
-      operationId: "ApiKeyList"
-      parameters:
-        - name: "limit"
-          in: "query"
-          description: "Page size, 1–200. Unset uses the server default (25)."
-          schema:
-            type: "integer"
-            format: "int32"
-        - name: "starting_after"
-          in: "query"
-          description: "Cursor for forward pagination. Set to the `api_key_id` of the last\n item from the previous page."
-          schema:
-            type: "string"
-        - name: "ending_before"
-          in: "query"
-          description: "Cursor for backward pagination. Set to the `api_key_id` of the\n first item from the previous page."
-          schema:
-            type: "string"
-        - name: "project_id"
-          in: "query"
-          description: "Optional filter: only return keys belonging to this project. When\n omitted, returns workspace-scoped and any single-project keys."
-          schema:
-            type: "string"
-        - name: "status"
-          in: "query"
-          description: "Optional filter: only return keys with this status."
-          schema:
-            $ref: "#/components/schemas/ApiKeyStatus"
-        - name: "search"
-          in: "query"
-          description: "Optional case-insensitive substring match against the api-key\n name. Empty means no name filter."
-          schema:
-            type: "string"
-        - name: "owner_type"
-          in: "query"
-          description: "Optional filter: only return keys whose `owner.kind` matches\n one of the requested types. Combines the user / service-account\n oneof cases into a single repeated enum so the wire stays flat\n and multi-select filters travel as a single field. Empty means\n no owner-type filter."
-          schema:
-            type: "array"
-            items:
-              $ref: "#/components/schemas/OwnerType"
-        - name: "permission_mode"
-          in: "query"
-          description: "Optional filter: only return keys whose permission mode is one\n of the listed presets. Empty means no permission-mode filter."
-          schema:
-            type: "array"
-            items:
-              $ref: "#/components/schemas/PermissionMode"
-        - name: "include_budget"
-          in: "query"
-          description: "When true, embed each key's api-key-scoped budget (config and limits\n only, no live usage) on the returned records. Adds one budget lookup\n for the page; omit to skip it."
-          schema:
-            type: "boolean"
-      responses:
-        "200":
-          description: API keys in the workspace.
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/ApiKeyRestResponse"
-      x-speakeasy-group: "apiKeys"
-      x-speakeasy-name-override: "list"
-      x-code-samples:
-        - lang: "curl"
-          label: "Core - List active project keys"
-          source: "curl --get 'https://my.orq.ai/v2/api-keys' \\\n  --header \"Authorization: Bearer $ORQ_API_KEY\" \\\n  --data-urlencode 'limit=25' \\\n  --data-urlencode 'project_id=proj_01HZXW2K7Y8Q9M0N1P2R3S4T5V' \\\n  --data-urlencode 'status=API_KEY_STATUS_ACTIVE'\n"
-        - lang: "python"
-          label: "Python - List active project keys"
-          source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\napi_keys = client.api_keys.list(\n    limit=25,\n    project_id=\"proj_01HZXW2K7Y8Q9M0N1P2R3S4T5V\",\n    status=\"API_KEY_STATUS_ACTIVE\",\n)\n\nfor api_key in api_keys:\n    print(api_key.name, api_key.token)\n"
-        - lang: "typescript"
-          label: "Node.js - List active project keys"
-          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\nconst apiKeys = await client.apiKeys.list({\n  limit: 25,\n  projectId: 'proj_01HZXW2K7Y8Q9M0N1P2R3S4T5V',\n  status: 'API_KEY_STATUS_ACTIVE',\n});\n\nfor (const apiKey of apiKeys) {\n  console.log(apiKey.name, apiKey.token);\n}\n"
-      security:
-        - ApiKey: []
-    post:
-      tags:
-        - "API keys"
-      summary: "Create a new API key"
-      description: "Mints a new opaque API key (`sk-orq-<key_id>-<secret>`) in the workspace. The raw secret is returned ONCE in the response and is never retrievable afterwards. The stored record retains only `token_prefix` and a SHA-256 `token_hash`."
-      operationId: "ApiKeyCreate"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/CreateApiKeyRequest"
-        required: true
-      responses:
-        "200":
-          description: API key created successfully.
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ApiKeyRestResponse"
-      x-speakeasy-group: "apiKeys"
-      x-speakeasy-name-override: "create"
-      x-code-samples:
-        - lang: "curl"
-          label: "Core - Create service account key"
-          source: "curl --request POST \\\n  --url 'https://my.orq.ai/v2/api-keys' \\\n  --header \"Authorization: Bearer $ORQ_API_KEY\" \\\n  --header 'Content-Type: application/json' \\\n  --data '{\n    \"name\": \"Production service key\",\n    \"owner\": {\n      \"service_account\": {}\n    },\n    \"project_scope\": {\n      \"all\": {}\n    },\n    \"permission_mode\": \"PERMISSION_MODE_ALL\"\n  }'\n"
-        - lang: "python"
-          label: "Python - Create service account key"
-          source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\nresult = client.api_keys.create(\n    name=\"Production service key\",\n    owner={\"service_account\": {}},\n    project_scope={\"all\": {}},\n    permission_mode=\"PERMISSION_MODE_ALL\",\n)\n\n# Store the token immediately. It is only returned once.\nprint(result.token)\n"
-        - lang: "typescript"
-          label: "Node.js - Create service account key"
-          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\nconst result = await client.apiKeys.create({\n  name: 'Production service key',\n  owner: {\n    serviceAccount: {},\n  },\n  projectScope: {\n    all: {},\n  },\n  permissionMode: 'PERMISSION_MODE_ALL',\n});\n\n// Store the token immediately. It is only returned once.\nconsole.log(result.token);\n"
-        - lang: "curl"
-          label: "Core - Create restricted project key"
-          source: "curl --request POST \\\n  --url 'https://my.orq.ai/v2/api-keys' \\\n  --header \"Authorization: Bearer $ORQ_API_KEY\" \\\n  --header 'Content-Type: application/json' \\\n  --data '{\n    \"name\": \"Support automation key\",\n    \"project_scope\": {\n      \"single\": {\n        \"project_id\": \"proj_01HZXW2K7Y8Q9M0N1P2R3S4T5V\"\n      }\n    },\n    \"permission_mode\": \"PERMISSION_MODE_RESTRICTED\",\n    \"access\": {\n      \"agents\": \"ACCESS_LEVEL_WRITE\",\n      \"deployments\": \"ACCESS_LEVEL_READ\"\n    }\n  }'\n"
-        - lang: "python"
-          label: "Python - Create restricted project key"
-          source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\nresult = client.api_keys.create(\n    name=\"Support automation key\",\n    project_scope={\n        \"single\": {\n            \"project_id\": \"proj_01HZXW2K7Y8Q9M0N1P2R3S4T5V\",\n        },\n    },\n    permission_mode=\"PERMISSION_MODE_RESTRICTED\",\n    access={\n        \"agents\": \"ACCESS_LEVEL_WRITE\",\n        \"deployments\": \"ACCESS_LEVEL_READ\",\n    },\n)\n\nprint(result.id)\nprint(result.token)\n"
-        - lang: "typescript"
-          label: "Node.js - Create restricted project key"
-          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\nconst result = await client.apiKeys.create({\n  name: 'Support automation key',\n  projectScope: {\n    single: {\n      projectId: 'proj_01HZXW2K7Y8Q9M0N1P2R3S4T5V',\n    },\n  },\n  permissionMode: 'PERMISSION_MODE_RESTRICTED',\n  access: {\n    agents: 'ACCESS_LEVEL_WRITE',\n    deployments: 'ACCESS_LEVEL_READ',\n  },\n});\n\nconsole.log(result.id);\nconsole.log(result.token);\n"
-      security:
-        - ApiKey: []
-  /v2/api-keys/capabilities:
-    get:
-      tags:
-        - "API keys"
-      summary: "List capability catalog"
-      description: "Returns the capability catalog: the set of permission domains that can be granted to an API key. Each entry includes the domain id, display name, group, allowed project scopes, and the read / write verb sets resolved at authorize() time. Drives the permissions UI in the dashboard."
-      operationId: "ApiKeyListCapabilities"
-      responses:
-        "200":
-          description: "OK"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ListCapabilitiesResponse"
-      x-speakeasy-group: "apiKeys"
-      x-speakeasy-name-override: "listCapabilities"
-      x-code-samples:
-        - lang: "curl"
-          label: "Core - List capability catalog"
-          source: "curl --request GET \\\n  --url 'https://my.orq.ai/v2/api-keys/capabilities' \\\n  --header \"Authorization: Bearer $ORQ_API_KEY\"\n"
-        - lang: "python"
-          label: "Python - List capability catalog"
-          source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\ncatalog = client.api_keys.list_capabilities()\n\nfor domain in catalog.domains:\n    print(domain.id, domain.display_name)\n"
-        - lang: "typescript"
-          label: "Node.js - List capability catalog"
-          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\nconst catalog = await client.apiKeys.listCapabilities();\n\nfor (const domain of catalog.domains) {\n  console.log(domain.id, domain.displayName);\n}\n"
-      security:
-        - ApiKey: []
-  /v2/api-keys/{api_key_id}:
-    get:
-      tags:
-        - "API keys"
-      summary: "Retrieve an API key"
-      description: "Retrieves the metadata for an existing API key by its unique identifier. The raw secret is never returned — only `token_prefix`, `permission_mode`, `project_scope`, and lifecycle fields."
-      operationId: "ApiKeyGet"
-      parameters:
-        - name: "api_key_id"
-          in: "path"
-          description: "API key id to retrieve (e.g. `01H...`)."
-          required: true
-          schema:
-            type: "string"
-        - name: "include_budget"
-          in: "query"
-          description: "When true, embed the api-key-scoped budget (config and limits only,\n no live usage) on the returned record."
-          schema:
-            type: "boolean"
-      responses:
-        "200":
-          description: API key retrieved successfully.
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ApiKeyRestResponse"
-      x-speakeasy-group: "apiKeys"
-      x-speakeasy-name-override: "get"
-      x-code-samples:
-        - lang: "curl"
-          label: "Core - Retrieve key metadata"
-          source: "curl --request GET \\\n  --url 'https://my.orq.ai/v2/api-keys/01HZXW2K7Y8Q9M0N1P2R3S4T5V' \\\n  --header \"Authorization: Bearer $ORQ_API_KEY\"\n"
-        - lang: "python"
-          label: "Python - Retrieve key metadata"
-          source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\nresult = client.api_keys.get(\n    api_key_id=\"01HZXW2K7Y8Q9M0N1P2R3S4T5V\",\n)\n\nprint(result.name)\n"
-        - lang: "typescript"
-          label: "Node.js - Retrieve key metadata"
-          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\nconst result = await client.apiKeys.get({\n  apiKeyId: '01HZXW2K7Y8Q9M0N1P2R3S4T5V',\n});\n\nconsole.log(result.name);\n"
-      security:
-        - ApiKey: []
-    delete:
-      tags:
-        - "API keys"
-      summary: "Delete an API key"
-      description: "Permanently deletes an API key. The key is revoked immediately; in-flight requests using it will fail. The response body is empty on success."
-      operationId: "ApiKeyDelete"
-      parameters:
-        - name: "api_key_id"
-          in: "path"
-          description: "API key id to delete."
-          required: true
-          schema:
-            type: "string"
-      responses:
-        "204":
-          description: API key deleted successfully.
-      x-speakeasy-group: "apiKeys"
-      x-speakeasy-name-override: "delete"
-      x-code-samples:
-        - lang: "curl"
-          label: "Core - Delete a key"
-          source: "curl --request DELETE \\\n  --url 'https://my.orq.ai/v2/api-keys/01HZXW2K7Y8Q9M0N1P2R3S4T5V' \\\n  --header \"Authorization: Bearer $ORQ_API_KEY\"\n"
-        - lang: "python"
-          label: "Python - Delete a key"
-          source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\nclient.api_keys.delete(\n    api_key_id=\"01HZXW2K7Y8Q9M0N1P2R3S4T5V\",\n)\n"
-        - lang: "typescript"
-          label: "Node.js - Delete a key"
-          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\nawait client.apiKeys.delete({\n  apiKeyId: '01HZXW2K7Y8Q9M0N1P2R3S4T5V',\n});\n"
-      security:
-        - ApiKey: []
-    patch:
-      tags:
-        - "API keys"
-      summary: "Update an API key"
-      description: "Updates mutable fields of an API key: display name, status (active / disabled / revoked), permission mode and access map, project scope, and constraints (budget / rate limit / expiry). Omitted fields keep their current values."
-      operationId: "ApiKeyUpdate"
-      parameters:
-        - name: "api_key_id"
-          in: "path"
-          description: "API key id to update."
-          required: true
-          schema:
-            type: "string"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/UpdateApiKeyRequest"
-        required: true
-      responses:
-        "200":
-          description: API key updated successfully.
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ApiKeyRestResponse"
-      x-speakeasy-group: "apiKeys"
-      x-speakeasy-name-override: "update"
-      x-code-samples:
-        - lang: "curl"
-          label: "Core - Disable a key"
-          source: "curl --request PATCH \\\n  --url 'https://my.orq.ai/v2/api-keys/01HZXW2K7Y8Q9M0N1P2R3S4T5V' \\\n  --header \"Authorization: Bearer $ORQ_API_KEY\" \\\n  --header 'Content-Type: application/json' \\\n  --data '{\n    \"status\": \"API_KEY_STATUS_DISABLED\"\n  }'\n"
-        - lang: "python"
-          label: "Python - Disable a key"
-          source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\nresult = client.api_keys.update(\n    api_key_id=\"01HZXW2K7Y8Q9M0N1P2R3S4T5V\",\n    status=\"API_KEY_STATUS_DISABLED\",\n)\n\nprint(result.status)\n"
-        - lang: "typescript"
-          label: "Node.js - Disable a key"
-          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\nconst result = await client.apiKeys.update({\n  apiKeyId: '01HZXW2K7Y8Q9M0N1P2R3S4T5V',\n  status: 'API_KEY_STATUS_DISABLED',\n});\n\nconsole.log(result.status);\n"
       security:
         - ApiKey: []
   /v2/budgets:
@@ -67273,7 +67253,7 @@ paths:
         - ApiKey: []
   /v3/router/classify:
     post:
-      description: "**Beta.** Runs typed classification questions (`noul`, `choice`, `score`) against the native classify model `typesafe/jev-latest` or a chat model that supports classify, such as `anthropic/claude-haiku-4-5`, `google-ai/gemini-3.8-flash` or `zai/glm-5.3-flash`. Chat models answer through one structured-output call and their probabilities are model-reported rather than calibrated. The request and response follow the TypeSafe classification contract; `model` in the response echoes the request and `usage` carries the computed cost like the Responses API. This endpoint currently does not apply PII plugins or guardrails."
+      description: "**Beta.** Runs typed classification questions (`noul`, `choice`, `score`) against the native classify model `typesafe/jev-latest` or a chat model that supports classify. Chat models answer through one structured-output call and their probabilities are model-reported rather than calibrated. The request and response follow the TypeSafe classification contract; `model` in the response echoes the request and `usage` carries the computed cost like the Responses API. This endpoint currently does not apply PII plugins or guardrails."
       operationId: "CreateClassify"
       requestBody:
         content:
@@ -67314,7 +67294,7 @@ paths:
                   description: "Key-value metadata attached to the trace."
                   type: "object"
                 model:
-                  description: "ID of the model to use: the native classify model typesafe/jev-latest, or a chat model that supports classify such as anthropic/claude-haiku-4-5, google-ai/gemini-3.8-flash or zai/glm-5.3-flash."
+                  description: "ID of the model to use: the native classify model typesafe/jev-latest, or a chat model that supports classify."
                   type: "string"
                 name:
                   description: "The name to display on the trace. If not specified, the default system name will be used."
@@ -67448,7 +67428,7 @@ paths:
                     description: "Answers keyed by the question identifiers from the request."
                     type: "object"
                   model:
-                    description: "The model ID from the request, for example typesafe/jev-latest or google/gemini-3.8-flash."
+                    description: "The model ID from the request."
                     type: "string"
                   telemetry:
                     $ref: "#/components/schemas/ResponseTelemetry"
@@ -68666,6 +68646,8 @@ tags:
     description: "Create and manage memory stores, memories, and memory documents."
   - name: "Evals"
     description: "Run an evaluator against a conversation and its result"
+  - description: "API keys authenticate programmatic access to the workspace. They expose opaque tokens, per-domain access grants, and budget and rate-limit constraints."
+    name: "API keys"
   - name: "Logs"
     description: "OpenTelemetry log query API. Search, filter, aggregate, and facet log records ingested via OTLP."
   - name: "Reporting"
@@ -68683,8 +68665,6 @@ tags:
     description: "Alerts evaluate a Reporting API metric on a fixed interval and fire notifications through notifiers when the value breaches a threshold. Each breach opens a trigger that tracks the incident until the value recovers."
   - name: "Annotation Queues"
     description: "Annotation queues collect spans for human review."
-  - name: "API keys"
-    description: "API keys authenticate programmatic access to the workspace. They expose opaque tokens, per-domain access grants, and budget and rate-limit constraints."
   - name: "Budgets"
     description: "Budgets govern spend, token usage, and request rate across six scopes: workspace, project, identity, API key, provider, and model. Every applicable budget is enforced, and the most restrictive limit applies per dimension."
   - name: "Files"
