@@ -7,7 +7,7 @@ import { remap as remap$ } from "../../lib/primitives.js";
 
 export type ApiKeyDeleteRequest = {
   /**
-   * API key id to delete.
+   * Unique identifier of the API key.
    */
   apiKeyId: string;
 };

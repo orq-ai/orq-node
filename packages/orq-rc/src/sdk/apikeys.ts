@@ -18,7 +18,7 @@ export class ApiKeys extends ClientSDK {
    * List API keys
    *
    * @remarks
-   * Returns API keys visible to the current workspace as a JSON array. Raw tokens are never included; the `token` field contains a masked display value.
+   * Returns API keys visible to the current workspace as a JSON array sorted by name. Raw tokens are never included; the `token` field contains a masked display value.
    */
   async list(
     request?: operations.ApiKeyListRequest | undefined,
@@ -35,10 +35,10 @@ export class ApiKeys extends ClientSDK {
    * Create a new API key
    *
    * @remarks
-   * Mints a new opaque API key (`sk-orq-<key_id>-<secret>`) in the workspace. The raw secret is returned ONCE in the response and is never retrievable afterwards. The stored record retains only `token_prefix` and a SHA-256 `token_hash`.
+   * Mints a new API key in the workspace, bound to the single project in `projects` or to every project when omitted. The raw token is returned once in the `token` field and is never retrievable afterwards. Unknown body fields are rejected.
    */
   async create(
-    request: components.CreateApiKeyRequest,
+    request: operations.ApiKeyCreateRequestBody,
     options?: RequestOptions,
   ): Promise<components.ApiKeyRestResponse> {
     return unwrapAsync(apiKeysCreate(
@@ -52,30 +52,13 @@ export class ApiKeys extends ClientSDK {
    * List capability catalog
    *
    * @remarks
-   * Returns the capability catalog: the set of permission domains that can be granted to an API key. Each entry includes the domain id, display name, group, allowed project scopes, and the read / write verb sets resolved at authorize() time. Drives the permissions UI in the dashboard.
+   * Returns the capability catalog: the set of permission domains that can be granted to an API key. Each entry includes the domain id, display name, group, allowed project scopes and whether it can be granted read or write access. No credentials are required.
    */
   async listCapabilities(
     options?: RequestOptions,
-  ): Promise<components.ListCapabilitiesResponse> {
+  ): Promise<operations.ApiKeyListCapabilitiesResponseBody> {
     return unwrapAsync(apiKeysListCapabilities(
       this,
-      options,
-    ));
-  }
-
-  /**
-   * Retrieve an API key
-   *
-   * @remarks
-   * Retrieves the metadata for an existing API key by its unique identifier. The raw secret is never returned — only `token_prefix`, `permission_mode`, `project_scope`, and lifecycle fields.
-   */
-  async get(
-    request: operations.ApiKeyGetRequest,
-    options?: RequestOptions,
-  ): Promise<components.ApiKeyRestResponse> {
-    return unwrapAsync(apiKeysGet(
-      this,
-      request,
       options,
     ));
   }
@@ -98,10 +81,27 @@ export class ApiKeys extends ClientSDK {
   }
 
   /**
+   * Retrieve an API key
+   *
+   * @remarks
+   * Retrieves the metadata for an existing API key by its unique identifier. The raw secret is never returned; `token` carries a masked display value.
+   */
+  async get(
+    request: operations.ApiKeyGetRequest,
+    options?: RequestOptions,
+  ): Promise<components.ApiKeyRestResponse> {
+    return unwrapAsync(apiKeysGet(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
    * Update an API key
    *
    * @remarks
-   * Updates mutable fields of an API key: display name, status (active / disabled / revoked), permission mode and access map, project scope, and constraints (budget / rate limit / expiry). Omitted fields keep their current values.
+   * Updates mutable fields of an API key: display name, status (active / disabled / revoked), permission mode and access map, project scope and constraints. Omitted fields keep their current values. Unknown body fields are rejected.
    */
   async update(
     request: operations.ApiKeyUpdateRequest,

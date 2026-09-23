@@ -4,20 +4,122 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { ClosedEnum } from "../../types/enums.js";
 import * as components from "../components/index.js";
+
+/**
+ * Permission preset; a restricted key must keep at least one granted domain.
+ */
+export const ApiKeyUpdatePermissionMode = {
+  All: "all",
+  Restricted: "restricted",
+  ReadOnly: "read_only",
+} as const;
+/**
+ * Permission preset; a restricted key must keep at least one granted domain.
+ */
+export type ApiKeyUpdatePermissionMode = ClosedEnum<
+  typeof ApiKeyUpdatePermissionMode
+>;
+
+/**
+ * Lifecycle status; revoked is terminal.
+ */
+export const Status = {
+  Active: "active",
+  Disabled: "disabled",
+  Revoked: "revoked",
+} as const;
+/**
+ * Lifecycle status; revoked is terminal.
+ */
+export type Status = ClosedEnum<typeof Status>;
+
+export type ApiKeyUpdateRequestBody = {
+  /**
+   * Per-domain access level (none, read or write) for restricted keys.
+   */
+  access?: { [k: string]: string } | undefined;
+  /**
+   * Legacy toggle mirrored onto status: false disables, true re-enables.
+   */
+  active?: boolean | undefined;
+  constraints?: components.Constraints | undefined;
+  /**
+   * New display name.
+   */
+  name?: string | undefined;
+  /**
+   * Permission preset; a restricted key must keep at least one granted domain.
+   */
+  permissionMode?: ApiKeyUpdatePermissionMode | undefined;
+  projectScope?: components.ProjectScope | undefined;
+  /**
+   * Lifecycle status; revoked is terminal.
+   */
+  status?: Status | undefined;
+};
 
 export type ApiKeyUpdateRequest = {
   /**
-   * API key id to update.
+   * Unique identifier of the API key.
    */
   apiKeyId: string;
-  updateApiKeyRequest: components.UpdateApiKeyRequest;
+  requestBody: ApiKeyUpdateRequestBody;
 };
+
+/** @internal */
+export const ApiKeyUpdatePermissionMode$outboundSchema: z.ZodNativeEnum<
+  typeof ApiKeyUpdatePermissionMode
+> = z.nativeEnum(ApiKeyUpdatePermissionMode);
+
+/** @internal */
+export const Status$outboundSchema: z.ZodNativeEnum<typeof Status> = z
+  .nativeEnum(Status);
+
+/** @internal */
+export type ApiKeyUpdateRequestBody$Outbound = {
+  access?: { [k: string]: string } | undefined;
+  active?: boolean | undefined;
+  constraints?: components.Constraints$Outbound | undefined;
+  name?: string | undefined;
+  permission_mode?: string | undefined;
+  project_scope?: components.ProjectScope$Outbound | undefined;
+  status?: string | undefined;
+};
+
+/** @internal */
+export const ApiKeyUpdateRequestBody$outboundSchema: z.ZodType<
+  ApiKeyUpdateRequestBody$Outbound,
+  z.ZodTypeDef,
+  ApiKeyUpdateRequestBody
+> = z.object({
+  access: z.record(z.string()).optional(),
+  active: z.boolean().optional(),
+  constraints: components.Constraints$outboundSchema.optional(),
+  name: z.string().optional(),
+  permissionMode: ApiKeyUpdatePermissionMode$outboundSchema.optional(),
+  projectScope: components.ProjectScope$outboundSchema.optional(),
+  status: Status$outboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    permissionMode: "permission_mode",
+    projectScope: "project_scope",
+  });
+});
+
+export function apiKeyUpdateRequestBodyToJSON(
+  apiKeyUpdateRequestBody: ApiKeyUpdateRequestBody,
+): string {
+  return JSON.stringify(
+    ApiKeyUpdateRequestBody$outboundSchema.parse(apiKeyUpdateRequestBody),
+  );
+}
 
 /** @internal */
 export type ApiKeyUpdateRequest$Outbound = {
   api_key_id: string;
-  UpdateApiKeyRequest: components.UpdateApiKeyRequest$Outbound;
+  RequestBody: ApiKeyUpdateRequestBody$Outbound;
 };
 
 /** @internal */
@@ -27,11 +129,11 @@ export const ApiKeyUpdateRequest$outboundSchema: z.ZodType<
   ApiKeyUpdateRequest
 > = z.object({
   apiKeyId: z.string(),
-  updateApiKeyRequest: components.UpdateApiKeyRequest$outboundSchema,
+  requestBody: z.lazy(() => ApiKeyUpdateRequestBody$outboundSchema),
 }).transform((v) => {
   return remap$(v, {
     apiKeyId: "api_key_id",
-    updateApiKeyRequest: "UpdateApiKeyRequest",
+    requestBody: "RequestBody",
   });
 });
 

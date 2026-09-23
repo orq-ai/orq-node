@@ -4,83 +4,40 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import * as components from "../components/index.js";
+import { ClosedEnum } from "../../types/enums.js";
+
+/**
+ * Only return keys of this source.
+ */
+export const QueryParamSource = {
+  Workspace: "workspace",
+  Router: "router",
+} as const;
+/**
+ * Only return keys of this source.
+ */
+export type QueryParamSource = ClosedEnum<typeof QueryParamSource>;
 
 export type ApiKeyListRequest = {
   /**
-   * Page size, 1–200. Unset uses the server default (25).
-   */
-  limit?: number | undefined;
-  /**
-   * Cursor for forward pagination. Set to the `api_key_id` of the last
-   *
-   * @remarks
-   *  item from the previous page.
-   */
-  startingAfter?: string | undefined;
-  /**
-   * Cursor for backward pagination. Set to the `api_key_id` of the
-   *
-   * @remarks
-   *  first item from the previous page.
-   */
-  endingBefore?: string | undefined;
-  /**
-   * Optional filter: only return keys belonging to this project. When
-   *
-   * @remarks
-   *  omitted, returns workspace-scoped and any single-project keys.
+   * Only return keys bound to this project. When omitted, every key visible to the caller is returned.
    */
   projectId?: string | undefined;
   /**
-   * Optional filter: only return keys with this status.
+   * Only return keys of this source.
    */
-  status?: components.ApiKeyStatus | undefined;
-  /**
-   * Optional case-insensitive substring match against the api-key
-   *
-   * @remarks
-   *  name. Empty means no name filter.
-   */
-  search?: string | undefined;
-  /**
-   * Optional filter: only return keys whose `owner.kind` matches
-   *
-   * @remarks
-   *  one of the requested types. Combines the user / service-account
-   *  oneof cases into a single repeated enum so the wire stays flat
-   *  and multi-select filters travel as a single field. Empty means
-   *  no owner-type filter.
-   */
-  ownerType?: Array<components.OwnerType> | undefined;
-  /**
-   * Optional filter: only return keys whose permission mode is one
-   *
-   * @remarks
-   *  of the listed presets. Empty means no permission-mode filter.
-   */
-  permissionMode?: Array<components.PermissionMode> | undefined;
-  /**
-   * When true, embed each key's api-key-scoped budget (config and limits
-   *
-   * @remarks
-   *  only, no live usage) on the returned records. Adds one budget lookup
-   *  for the page; omit to skip it.
-   */
-  includeBudget?: boolean | undefined;
+  source?: QueryParamSource | undefined;
 };
 
 /** @internal */
+export const QueryParamSource$outboundSchema: z.ZodNativeEnum<
+  typeof QueryParamSource
+> = z.nativeEnum(QueryParamSource);
+
+/** @internal */
 export type ApiKeyListRequest$Outbound = {
-  limit?: number | undefined;
-  starting_after?: string | undefined;
-  ending_before?: string | undefined;
   project_id?: string | undefined;
-  status?: string | undefined;
-  search?: string | undefined;
-  owner_type?: Array<string> | undefined;
-  permission_mode?: Array<string> | undefined;
-  include_budget?: boolean | undefined;
+  source?: string | undefined;
 };
 
 /** @internal */
@@ -89,23 +46,11 @@ export const ApiKeyListRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ApiKeyListRequest
 > = z.object({
-  limit: z.number().int().optional(),
-  startingAfter: z.string().optional(),
-  endingBefore: z.string().optional(),
   projectId: z.string().optional(),
-  status: components.ApiKeyStatus$outboundSchema.optional(),
-  search: z.string().optional(),
-  ownerType: z.array(components.OwnerType$outboundSchema).optional(),
-  permissionMode: z.array(components.PermissionMode$outboundSchema).optional(),
-  includeBudget: z.boolean().optional(),
+  source: QueryParamSource$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
-    startingAfter: "starting_after",
-    endingBefore: "ending_before",
     projectId: "project_id",
-    ownerType: "owner_type",
-    permissionMode: "permission_mode",
-    includeBudget: "include_budget",
   });
 });
 

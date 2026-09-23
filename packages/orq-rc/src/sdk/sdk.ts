@@ -121,6 +121,11 @@ export class Orq extends ClientSDK {
     return (this._pii ??= new Pii(this._options));
   }
 
+  private _apiKeys?: ApiKeys;
+  get apiKeys(): ApiKeys {
+    return (this._apiKeys ??= new ApiKeys(this._options));
+  }
+
   private _logs?: Logs;
   get logs(): Logs {
     return (this._logs ??= new Logs(this._options));
@@ -164,11 +169,6 @@ export class Orq extends ClientSDK {
   private _annotationQueues?: AnnotationQueues;
   get annotationQueues(): AnnotationQueues {
     return (this._annotationQueues ??= new AnnotationQueues(this._options));
-  }
-
-  private _apiKeys?: ApiKeys;
-  get apiKeys(): ApiKeys {
-    return (this._apiKeys ??= new ApiKeys(this._options));
   }
 
   private _budgets?: Budgets;

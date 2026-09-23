@@ -367,7 +367,7 @@ export type InputRole = ClosedEnum<typeof InputRole>;
 /**
  * The status of a model-generated input item.
  */
-export const Status = {
+export const InputStatus = {
   InProgress: "in_progress",
   Completed: "completed",
   Incomplete: "incomplete",
@@ -375,7 +375,7 @@ export const Status = {
 /**
  * The status of a model-generated input item.
  */
-export type Status = ClosedEnum<typeof Status>;
+export type InputStatus = ClosedEnum<typeof InputStatus>;
 
 /**
  * The type of item.
@@ -456,7 +456,7 @@ export type CreateRouterResponseInput2 = {
   /**
    * The status of a model-generated input item.
    */
-  status?: Status | undefined;
+  status?: InputStatus | undefined;
   /**
    * The type of item.
    */
@@ -1476,8 +1476,8 @@ export const InputRole$outboundSchema: z.ZodNativeEnum<typeof InputRole> = z
   .nativeEnum(InputRole);
 
 /** @internal */
-export const Status$outboundSchema: z.ZodNativeEnum<typeof Status> = z
-  .nativeEnum(Status);
+export const InputStatus$outboundSchema: z.ZodNativeEnum<typeof InputStatus> = z
+  .nativeEnum(InputStatus);
 
 /** @internal */
 export const InputType$outboundSchema: z.ZodNativeEnum<typeof InputType> = z
@@ -1523,7 +1523,7 @@ export const CreateRouterResponseInput2$outboundSchema: z.ZodType<
   output: z.string().optional(),
   reasoning: z.lazy(() => Reasoning$outboundSchema).optional(),
   role: InputRole$outboundSchema.optional(),
-  status: Status$outboundSchema.optional(),
+  status: InputStatus$outboundSchema.optional(),
   type: InputType$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {

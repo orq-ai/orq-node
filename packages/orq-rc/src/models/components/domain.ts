@@ -5,71 +5,74 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import { DomainGroup, DomainGroup$inboundSchema } from "./domaingroup.js";
-import { ScopeMode, ScopeMode$inboundSchema } from "./scopemode.js";
 
 /**
- * Domain describes a permission domain that can be granted to an
- *
- * @remarks
- *  API key. Standard verbs are derived from id + group +
- *  readable/writable; exceptional write verbs are explicit data.
+ * Logical group the entry belongs to.
  */
+export const Group = {
+  DomainGroupUnspecified: "DOMAIN_GROUP_UNSPECIFIED",
+  DomainGroupWorkspaceAdmin: "DOMAIN_GROUP_WORKSPACE_ADMIN",
+  DomainGroupPlatform: "DOMAIN_GROUP_PLATFORM",
+  DomainGroupGateway: "DOMAIN_GROUP_GATEWAY",
+} as const;
+/**
+ * Logical group the entry belongs to.
+ */
+export type Group = ClosedEnum<typeof Group>;
+
 export type Domain = {
   /**
-   * Stable domain identifier (e.g. "agent", "chat_completions"). Used
-   *
-   * @remarks
-   *  as the key in ApiKey.access and as the verb prefix in resolved
-   *  permissions (e.g. agent.list, agent.view, agent.create).
+   * Project scopes this domain may be granted under.
    */
-  id?: string | undefined;
+  allowedScopes: Array<string> | null;
   /**
-   * Human-readable label for the dashboard.
+   * Human-readable label.
    */
-  displayName?: string | undefined;
-  group?: DomainGroup | undefined;
+  displayName: string;
   /**
-   * Project scopes this domain may be granted under. A workspace-
-   *
-   * @remarks
-   *  admin domain like `member` is typically SCOPE_MODE_ALL only.
+   * Additional verbs granted only with write access.
    */
-  allowedScopes?: Array<ScopeMode> | undefined;
+  extraWriteVerbs: Array<string> | null;
   /**
-   * Whether this domain can be granted read access.
+   * Logical group the entry belongs to.
    */
-  readable?: boolean | undefined;
+  group: Group;
   /**
-   * Whether this domain can be granted write access.
+   * Stable domain identifier, used as the key in access and as the verb prefix in resolved permissions.
    */
-  writable?: boolean | undefined;
+  id: string;
   /**
-   * Additional full verb names granted only with write access. This is
-   *
-   * @remarks
-   *  additive to the standard group-derived verbs and intentionally does
-   *  not affect read access (e.g. "insights.run").
+   * Whether the domain can be granted read access.
    */
-  extraWriteVerbs?: Array<string> | undefined;
+  readable: boolean;
+  /**
+   * Whether the domain can be granted write access.
+   */
+  writable: boolean;
 };
+
+/** @internal */
+export const Group$inboundSchema: z.ZodNativeEnum<typeof Group> = z.nativeEnum(
+  Group,
+);
 
 /** @internal */
 export const Domain$inboundSchema: z.ZodType<Domain, z.ZodTypeDef, unknown> = z
   .object({
-    id: z.string().optional(),
-    display_name: z.string().optional(),
-    group: DomainGroup$inboundSchema.optional(),
-    allowed_scopes: z.array(ScopeMode$inboundSchema).optional(),
-    readable: z.boolean().optional(),
-    writable: z.boolean().optional(),
-    extra_write_verbs: z.array(z.string()).optional(),
+    allowed_scopes: z.nullable(z.array(z.string())),
+    display_name: z.string(),
+    extra_write_verbs: z.nullable(z.array(z.string())),
+    group: Group$inboundSchema,
+    id: z.string(),
+    readable: z.boolean(),
+    writable: z.boolean(),
   }).transform((v) => {
     return remap$(v, {
-      "display_name": "displayName",
       "allowed_scopes": "allowedScopes",
+      "display_name": "displayName",
       "extra_write_verbs": "extraWriteVerbs",
     });
   });

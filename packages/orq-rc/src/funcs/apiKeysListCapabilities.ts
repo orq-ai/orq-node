@@ -9,7 +9,6 @@ import { compactMap } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
-import * as components from "../models/components/index.js";
 import {
   ConnectionError,
   InvalidRequestError,
@@ -20,6 +19,7 @@ import {
 import { OrqError } from "../models/errors/orqerror.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import * as operations from "../models/operations/index.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -27,14 +27,14 @@ import { Result } from "../types/fp.js";
  * List capability catalog
  *
  * @remarks
- * Returns the capability catalog: the set of permission domains that can be granted to an API key. Each entry includes the domain id, display name, group, allowed project scopes, and the read / write verb sets resolved at authorize() time. Drives the permissions UI in the dashboard.
+ * Returns the capability catalog: the set of permission domains that can be granted to an API key. Each entry includes the domain id, display name, group, allowed project scopes and whether it can be granted read or write access. No credentials are required.
  */
 export function apiKeysListCapabilities(
   client: OrqCore,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    components.ListCapabilitiesResponse,
+    operations.ApiKeyListCapabilitiesResponseBody,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -57,7 +57,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      components.ListCapabilitiesResponse,
+      operations.ApiKeyListCapabilitiesResponseBody,
       | OrqError
       | ResponseValidationError
       | ConnectionError
@@ -122,7 +122,7 @@ async function $do(
   const response = doResult.value;
 
   const [result] = await M.match<
-    components.ListCapabilitiesResponse,
+    operations.ApiKeyListCapabilitiesResponseBody,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -132,7 +132,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, components.ListCapabilitiesResponse$inboundSchema),
+    M.json(200, operations.ApiKeyListCapabilitiesResponseBody$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, req);
