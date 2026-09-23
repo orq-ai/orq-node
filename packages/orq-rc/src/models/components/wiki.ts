@@ -23,7 +23,7 @@ export type Wiki = {
   branch?: string | undefined;
   scmConnectionId?: string | undefined;
   settings?: WikiSettings | undefined;
-  automationId?: string | undefined;
+  loopId?: string | undefined;
   status?: string | undefined;
   currentRunId?: string | undefined;
   lastGeneratedCommit?: string | undefined;
@@ -46,7 +46,7 @@ export const Wiki$inboundSchema: z.ZodType<Wiki, z.ZodTypeDef, unknown> = z
     branch: z.string().optional(),
     scm_connection_id: z.string().optional(),
     settings: WikiSettings$inboundSchema.optional(),
-    automation_id: z.string().optional(),
+    loop_id: z.string().optional(),
     status: z.string().optional(),
     current_run_id: z.string().optional(),
     last_generated_commit: z.string().optional(),
@@ -69,7 +69,7 @@ export const Wiki$inboundSchema: z.ZodType<Wiki, z.ZodTypeDef, unknown> = z
       "display_name": "displayName",
       "repository_key": "repositoryKey",
       "scm_connection_id": "scmConnectionId",
-      "automation_id": "automationId",
+      "loop_id": "loopId",
       "current_run_id": "currentRunId",
       "last_generated_commit": "lastGeneratedCommit",
       "last_generated_at": "lastGeneratedAt",
