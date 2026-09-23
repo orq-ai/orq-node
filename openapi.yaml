@@ -2556,7 +2556,7 @@ components:
           properties:
             _id:
               type: "string"
-              default: "reasoning_01m346z14scz5tepcrmd2mqyx0"
+              default: "reasoning_01m36fze80dmpdh3yehn775t27"
               description: "Unique identifier for the part. Format: reasoning_{ulid} (e.g., reasoning_01hxyz...)"
               example: "reasoning_01hxyz123abc"
             kind:
@@ -16636,7 +16636,7 @@ components:
           type: "string"
         settings:
           $ref: "#/components/schemas/WikiSettings"
-        automation_id:
+        loop_id:
           type: "string"
         status:
           type: "string"
@@ -32042,7 +32042,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01M346Z15T9KBWMFE9K5G6JA4A"
+                                          default: "01M36FZE9S44D3B53RGRCQDJ7T"
                                         name:
                                           type: "string"
                                         description:
@@ -33640,7 +33640,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01M346Z168A4VXE28FGX3KWA77"
+                                          default: "01M36FZEAF5WE29P0HE6E4F8VY"
                                         name:
                                           type: "string"
                                         description:
@@ -42537,7 +42537,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M346Z176N7GH4VS93ZXQQ7RK"
+                              default: "tool_01M36FZEC47Q5GS4SK1ADZ12G1"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -42638,7 +42638,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M346Z177Y43FVQS2EVC2X8DF"
+                              default: "tool_01M36FZEC4F3E8MX0G4MGG4J7G"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -42741,7 +42741,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M346Z177WWQP3YD6JHZ2DNJT"
+                              default: "tool_01M36FZEC5BDNVPCG87ZJBK1BC"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -42885,7 +42885,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M346Z178JH9Q15BPHKRXRVQQ"
+                              default: "tool_01M36FZEC6YV78A9XCY6PV1T4C"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -43376,7 +43376,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M346Z17AJ1J5FDXDVQJFDPM5"
+                        default: "tool_01M36FZECB16Q3YVHA2MHM9DVH"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -43477,7 +43477,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M346Z17A9VPC95R1NNR2PRA4"
+                        default: "tool_01M36FZECBN9C4AX9NGDAHPAF2"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -43580,7 +43580,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M346Z17CXDBT7GVAJDWDV46P"
+                        default: "tool_01M36FZECC8J3TZ0C6TKX8HJZB"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -43724,7 +43724,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M346Z17DR3MMF92MV55R2NF7"
+                        default: "tool_01M36FZECDNT4F1W971DVCQ5YB"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -44222,7 +44222,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M346Z17E2AR7A0MNAMCTBK89"
+                        default: "tool_01M36FZECGJMVH0D4QEFZM65XN"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -44323,7 +44323,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M346Z17FW3PEHWQ08RM5CD9D"
+                        default: "tool_01M36FZECHK6BYCX8VM8JG8PPZ"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -44426,7 +44426,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M346Z17FVG45VN60FQ0KC63V"
+                        default: "tool_01M36FZECH97PZ2NK02460NE52"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -44570,7 +44570,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M346Z17G1PBGH1JXWTMZ538J"
+                        default: "tool_01M36FZECJKVNDVZ201CV5WDNZ"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -44731,7 +44731,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M346Z17KA16DD01BM3XE9RQK"
+                        default: "tool_01M36FZECS1SNWYM6X6EPES3MD"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -44832,7 +44832,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M346Z17KPWZ6YK6CV51V63MW"
+                        default: "tool_01M36FZECT6PV891WG3GYPC8FX"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -44935,7 +44935,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M346Z17M3FQRZ6Y39MQ0BT7R"
+                        default: "tool_01M36FZECTW130595DD123M10T"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -45079,7 +45079,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M346Z17MT3V1JG75H4N5XDM0"
+                        default: "tool_01M36FZECVKMGKHJ63RVNGZZTY"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -51533,7 +51533,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-09-22T09:25:46.896Z"
+                      default: "2026-09-23T06:41:46.442Z"
                       deprecated: true
                       description: "Deprecated. The date and time the item was reviewed"
                     type:
@@ -51575,7 +51575,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-09-22T09:25:46.896Z"
+                      default: "2026-09-23T06:41:46.442Z"
                       deprecated: true
                       description: "Deprecated. The date and time the item was reviewed"
                     type:
@@ -51617,7 +51617,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-09-22T09:25:46.896Z"
+                      default: "2026-09-23T06:41:46.442Z"
                       deprecated: true
                       description: "Deprecated. The date and time the item was reviewed"
                     type:
@@ -51659,7 +51659,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-09-22T09:25:46.896Z"
+                      default: "2026-09-23T06:41:46.443Z"
                       deprecated: true
                       description: "Deprecated. The date and time the item was reviewed"
                     type:
@@ -51990,7 +51990,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-09-22T09:25:41.511Z"
+                          default: "2026-09-23T06:41:38.146Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -51998,7 +51998,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-09-22T09:25:41.511Z"
+                              default: "2026-09-23T06:41:38.146Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -52068,7 +52068,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-09-22T09:25:41.511Z"
+                          default: "2026-09-23T06:41:38.146Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -52076,7 +52076,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-09-22T09:25:41.511Z"
+                              default: "2026-09-23T06:41:38.146Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -52252,7 +52252,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-09-22T09:25:41.511Z"
+                        default: "2026-09-23T06:41:38.146Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -52260,7 +52260,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-09-22T09:25:41.511Z"
+                            default: "2026-09-23T06:41:38.146Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -52330,7 +52330,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-09-22T09:25:41.511Z"
+                        default: "2026-09-23T06:41:38.146Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -52338,7 +52338,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-09-22T09:25:41.511Z"
+                            default: "2026-09-23T06:41:38.146Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -52432,7 +52432,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-09-22T09:25:41.511Z"
+                        default: "2026-09-23T06:41:38.146Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -52440,7 +52440,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-09-22T09:25:41.511Z"
+                            default: "2026-09-23T06:41:38.146Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -52510,7 +52510,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-09-22T09:25:41.511Z"
+                        default: "2026-09-23T06:41:38.146Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -52518,7 +52518,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-09-22T09:25:41.511Z"
+                            default: "2026-09-23T06:41:38.146Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -52702,7 +52702,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-09-22T09:25:41.511Z"
+                        default: "2026-09-23T06:41:38.146Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -52710,7 +52710,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-09-22T09:25:41.511Z"
+                            default: "2026-09-23T06:41:38.146Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -52780,7 +52780,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-09-22T09:25:41.511Z"
+                        default: "2026-09-23T06:41:38.146Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -52788,7 +52788,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-09-22T09:25:41.511Z"
+                            default: "2026-09-23T06:41:38.146Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -62599,18 +62599,18 @@ paths:
       parameters:
         - name: "limit"
           in: "query"
-          description: "Page size. Unset uses the server default."
+          description: "Page size, 1-200. Unset uses the server default."
           schema:
             type: "integer"
             format: "int32"
         - name: "starting_after"
           in: "query"
-          description: "Cursor for forward pagination. Set to the `file_id` of the last item\n from the previous page."
+          description: "Cursor for forward pagination. Set to the `file_id` of the last item\n from the previous page. Mutually exclusive with `ending_before`."
           schema:
             type: "string"
         - name: "ending_before"
           in: "query"
-          description: "Cursor for backward pagination. Set to the `file_id` of the first item\n from the previous page."
+          description: "Cursor for backward pagination. Set to the `file_id` of the first item\n from the previous page. Mutually exclusive with `starting_after`."
           schema:
             type: "string"
         - name: "project_id"
@@ -64114,12 +64114,12 @@ paths:
             format: "int32"
         - name: "starting_after"
           in: "query"
-          description: "Cursor for forward pagination. Set to the `id` of the last item from\n the previous page."
+          description: "Cursor for forward pagination. Set to the `id` of the last item from\n the previous page. Mutually exclusive with `ending_before`."
           schema:
             type: "string"
         - name: "ending_before"
           in: "query"
-          description: "Cursor for backward pagination. Set to the `id` of the first item\n from the previous page."
+          description: "Cursor for backward pagination. Set to the `id` of the first item\n from the previous page. Mutually exclusive with `starting_after`."
           schema:
             type: "string"
         - name: "provider"
@@ -64245,12 +64245,12 @@ paths:
             format: "int32"
         - name: "starting_after"
           in: "query"
-          description: "Cursor for forward pagination. Set to the `id` of the last item from\n the previous page."
+          description: "Cursor for forward pagination. Set to the `id` of the last item from\n the previous page. Mutually exclusive with `ending_before`."
           schema:
             type: "string"
         - name: "ending_before"
           in: "query"
-          description: "Cursor for backward pagination. Set to the `id` of the first item\n from the previous page."
+          description: "Cursor for backward pagination. Set to the `id` of the first item\n from the previous page. Mutually exclusive with `starting_after`."
           schema:
             type: "string"
         - name: "provider"
