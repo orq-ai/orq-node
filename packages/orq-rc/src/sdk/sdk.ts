@@ -12,6 +12,7 @@ import { Budgets } from "./budgets.js";
 import { Chunking } from "./chunking.js";
 import { Datasets } from "./datasets.js";
 import { Deployments } from "./deployments.js";
+import { Environments } from "./environments.js";
 import { Evals } from "./evals.js";
 import { Feedback } from "./feedback.js";
 import { Files } from "./files.js";
@@ -174,6 +175,11 @@ export class Orq extends ClientSDK {
   private _budgets?: Budgets;
   get budgets(): Budgets {
     return (this._budgets ??= new Budgets(this._options));
+  }
+
+  private _environments?: Environments;
+  get environments(): Environments {
+    return (this._environments ??= new Environments(this._options));
   }
 
   private _files?: Files;
