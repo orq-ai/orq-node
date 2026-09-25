@@ -2556,7 +2556,7 @@ components:
           properties:
             _id:
               type: "string"
-              default: "reasoning_01m3by48wf0r65xs1wbgnywdtw"
+              default: "reasoning_01m3cfsbrdsksyhachyty6tg9c"
               description: "Unique identifier for the part. Format: reasoning_{ulid} (e.g., reasoning_01hxyz...)"
               example: "reasoning_01hxyz123abc"
             kind:
@@ -13365,6 +13365,109 @@ components:
         modelId:
           type: "string"
       description: "Per-model cap. The value is the FULL model reference as callers send\n it (\"openai/gpt-4o\", or \"workspaceKey@openai/gpt-4o\" for private\n models), rather than an internal identifier."
+    ListEnvironmentsResponse:
+      required:
+        - "object"
+        - "data"
+        - "has_more"
+      type: "object"
+      properties:
+        object:
+          type: "string"
+        data:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/Environment"
+        has_more:
+          type: "boolean"
+    CreateEnvironmentRequest:
+      required:
+        - "slug"
+        - "display_name"
+      type: "object"
+      properties:
+        slug:
+          type: "string"
+        display_name:
+          type: "string"
+        description:
+          type: "string"
+        project_id:
+          type: "string"
+        sharing:
+          $ref: "#/components/schemas/Sharing"
+    CreateEnvironmentResponse:
+      required:
+        - "environment"
+      type: "object"
+      properties:
+        environment:
+          $ref: "#/components/schemas/Environment"
+    GetEnvironmentResponse:
+      required:
+        - "environment"
+      type: "object"
+      properties:
+        environment:
+          $ref: "#/components/schemas/Environment"
+    DeleteEnvironmentResponse:
+      type: "object"
+      properties: {}
+    UpdateEnvironmentRequest:
+      required: []
+      type: "object"
+      properties:
+        display_name:
+          type: "string"
+        description:
+          type: "string"
+        sharing:
+          $ref: "#/components/schemas/Sharing"
+    UpdateEnvironmentResponse:
+      required:
+        - "environment"
+      type: "object"
+      properties:
+        environment:
+          $ref: "#/components/schemas/Environment"
+    Environment:
+      required:
+        - "id"
+        - "slug"
+        - "display_name"
+        - "description"
+        - "created_at"
+        - "created_by_id"
+        - "updated_at"
+        - "updated_by_id"
+      type: "object"
+      properties:
+        id:
+          type: "string"
+          description: "Unique environment ID in env_<ulid> form."
+        slug:
+          type: "string"
+          description: "Immutable workspace-unique environment slug."
+        display_name:
+          type: "string"
+          description: "Workspace-unique display name."
+        description:
+          type: "string"
+        created_at:
+          type: "string"
+          format: "date-time"
+        created_by_id:
+          type: "string"
+        updated_at:
+          type: "string"
+          format: "date-time"
+        updated_by_id:
+          type: "string"
+        project_id:
+          type: "string"
+          description: "Project that owns this environment."
+        sharing:
+          $ref: "#/components/schemas/Sharing"
     ListFilesResponse:
       required:
         - "object"
@@ -32015,7 +32118,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01M3BY48XECV4HVVKETAQTFKMK"
+                                          default: "01M3CFSBTNR3SKD8HMSTWE1MYS"
                                         name:
                                           type: "string"
                                         description:
@@ -33613,7 +33716,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01M3BY48XTB29GASBX970AJED2"
+                                          default: "01M3CFSBVJCVYXRWSGVYNV5HB9"
                                         name:
                                           type: "string"
                                         description:
@@ -42510,7 +42613,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M3BY48YNEZZ25BSVAWXFXNMT"
+                              default: "tool_01M3CFSBXEF4ZFR32YD0XSMFD9"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -42611,7 +42714,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M3BY48YNX85VMJYC4H77FB1D"
+                              default: "tool_01M3CFSBXF54MKT1P7RJGW335Y"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -42714,7 +42817,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M3BY48YNXCY66V3G3H0HKD2Q"
+                              default: "tool_01M3CFSBXGYXRWJ7EA8VJJ2KSV"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -42858,7 +42961,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M3BY48YP38GC0A8Z1NM225YM"
+                              default: "tool_01M3CFSBXH1AB8WZ1E4BJSVAAC"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -43349,7 +43452,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M3BY48YR3Y2TR9Y5XXG4AC84"
+                        default: "tool_01M3CFSBXN70XAT8R9Z8YAGDX1"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -43450,7 +43553,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M3BY48YSPT8CYMGK4RFCQ3D4"
+                        default: "tool_01M3CFSBXPG06H5933EH5C2E78"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -43553,7 +43656,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M3BY48YSS9KJ9X73FKBGGWJ7"
+                        default: "tool_01M3CFSBXQ2H8YEHKXXQQDVS3X"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -43697,7 +43800,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M3BY48YSRYEA8M26E4BWQ8A1"
+                        default: "tool_01M3CFSBXRW4RZVG6YMNTNFA66"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -44195,7 +44298,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M3BY48YVTSJDNSCZWWS11921"
+                        default: "tool_01M3CFSBXW7CW98K5QXSHJJR37"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -44296,7 +44399,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M3BY48YVKDMK9CFYNPQTC6BV"
+                        default: "tool_01M3CFSBXY7B3GDTMN608H51QN"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -44399,7 +44502,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M3BY48YVHMXDBA8GSNVJRN47"
+                        default: "tool_01M3CFSBXZ440JEQS8F2B7XV67"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -44543,7 +44646,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M3BY48YW90VDQ4Y3DE6KM92G"
+                        default: "tool_01M3CFSBY1TKZGH81PKXMTNVYD"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -44704,7 +44807,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M3BY48Z0GNAV9K7YTBE5RB41"
+                        default: "tool_01M3CFSBYBXWRHW7NG1AADKC0A"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -44805,7 +44908,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M3BY48Z1QWXD3Z35XTBY7Y1A"
+                        default: "tool_01M3CFSBYC62MZTJ7NHAY22MS6"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -44908,7 +45011,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M3BY48Z1RW79RERHJM53QQN9"
+                        default: "tool_01M3CFSBYDWHRHCVKFTFEGAXNF"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -45052,7 +45155,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M3BY48Z1EG3QMJ97JN4RG4VW"
+                        default: "tool_01M3CFSBYEPEK42D0B573AQP2J"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -51357,7 +51460,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-09-25T09:25:16.920Z"
+                      default: "2026-09-25T14:33:53.921Z"
                       deprecated: true
                       description: "Deprecated. The date and time the item was reviewed"
                     type:
@@ -51399,7 +51502,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-09-25T09:25:16.920Z"
+                      default: "2026-09-25T14:33:53.921Z"
                       deprecated: true
                       description: "Deprecated. The date and time the item was reviewed"
                     type:
@@ -51441,7 +51544,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-09-25T09:25:16.920Z"
+                      default: "2026-09-25T14:33:53.921Z"
                       deprecated: true
                       description: "Deprecated. The date and time the item was reviewed"
                     type:
@@ -51483,7 +51586,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-09-25T09:25:16.920Z"
+                      default: "2026-09-25T14:33:53.921Z"
                       deprecated: true
                       description: "Deprecated. The date and time the item was reviewed"
                     type:
@@ -51814,7 +51917,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-09-25T09:25:11.549Z"
+                          default: "2026-09-25T14:33:45.160Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -51822,7 +51925,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-09-25T09:25:11.549Z"
+                              default: "2026-09-25T14:33:45.161Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -51892,7 +51995,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-09-25T09:25:11.549Z"
+                          default: "2026-09-25T14:33:45.160Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -51900,7 +52003,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-09-25T09:25:11.549Z"
+                              default: "2026-09-25T14:33:45.161Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -52076,7 +52179,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-09-25T09:25:11.549Z"
+                        default: "2026-09-25T14:33:45.160Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -52084,7 +52187,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-09-25T09:25:11.549Z"
+                            default: "2026-09-25T14:33:45.161Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -52154,7 +52257,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-09-25T09:25:11.549Z"
+                        default: "2026-09-25T14:33:45.160Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -52162,7 +52265,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-09-25T09:25:11.549Z"
+                            default: "2026-09-25T14:33:45.161Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -52256,7 +52359,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-09-25T09:25:11.549Z"
+                        default: "2026-09-25T14:33:45.160Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -52264,7 +52367,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-09-25T09:25:11.549Z"
+                            default: "2026-09-25T14:33:45.161Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -52334,7 +52437,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-09-25T09:25:11.549Z"
+                        default: "2026-09-25T14:33:45.160Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -52342,7 +52445,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-09-25T09:25:11.549Z"
+                            default: "2026-09-25T14:33:45.161Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -52526,7 +52629,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-09-25T09:25:11.549Z"
+                        default: "2026-09-25T14:33:45.160Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -52534,7 +52637,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-09-25T09:25:11.549Z"
+                            default: "2026-09-25T14:33:45.161Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -52604,7 +52707,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-09-25T09:25:11.549Z"
+                        default: "2026-09-25T14:33:45.160Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -52612,7 +52715,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-09-25T09:25:11.549Z"
+                            default: "2026-09-25T14:33:45.161Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -62647,6 +62750,195 @@ paths:
       x-speakeasy-name-override: "resetConsumption"
       security:
         - ApiKey: []
+  /v3/environments:
+    get:
+      tags:
+        - "Environments"
+      summary: "List environments"
+      description: "Returns environments visible to the caller. When project_id is set, the result contains project-owned environments plus workspace environments shared with that project. When project_id is omitted, the result contains workspace-owned environments."
+      operationId: "EnvironmentList"
+      parameters:
+        - name: "limit"
+          in: "query"
+          schema:
+            type: "integer"
+            format: "int32"
+        - name: "starting_after"
+          in: "query"
+          schema:
+            type: "string"
+        - name: "ending_before"
+          in: "query"
+          schema:
+            type: "string"
+        - name: "project_id"
+          in: "query"
+          schema:
+            type: "string"
+        - name: "search"
+          in: "query"
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListEnvironmentsResponse"
+      x-speakeasy-group: "environments"
+      x-speakeasy-name-override: "list"
+      x-code-samples:
+        - lang: "curl"
+          label: "Core - List project environments"
+          source: "curl --get 'https://my.orq.ai/v3/environments' \\\n  --header \"Authorization: Bearer $ORQ_API_KEY\" \\\n  --data-urlencode 'project_id=proj_01HZXW2K7Y8Q9M0N1P2R3S4T5V' \\\n  --data-urlencode 'limit=25'\n"
+        - lang: "python"
+          label: "Python - List project environments"
+          source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\npage = client.environments.list(\n    project_id=\"proj_01HZXW2K7Y8Q9M0N1P2R3S4T5V\",\n    limit=25,\n)\n\nfor environment in page.data:\n    print(environment.environment_id, environment.display_name)\n"
+        - lang: "typescript"
+          label: "Node.js - List project environments"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({ apiKey: process.env.ORQ_API_KEY });\nconst result = await client.environments.list({\n  projectId: 'proj_01HZXW2K7Y8Q9M0N1P2R3S4T5V',\n  limit: 25,\n});\nconsole.log(result.data);\n"
+      security:
+        - ApiKey: []
+    post:
+      tags:
+        - "Environments"
+      summary: "Create an environment"
+      description: "Creates either a project-owned environment or a workspace-owned environment with sharing. Exactly one scope must be provided."
+      operationId: "EnvironmentCreate"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateEnvironmentRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreateEnvironmentResponse"
+      x-speakeasy-group: "environments"
+      x-speakeasy-name-override: "create"
+      x-code-samples:
+        - lang: "curl"
+          label: "Core - Create a project environment"
+          source: "curl --request POST \\\n  --url 'https://my.orq.ai/v3/environments' \\\n  --header \"Authorization: Bearer $ORQ_API_KEY\" \\\n  --header 'Content-Type: application/json' \\\n  --data '{\n    \"slug\": \"production\",\n    \"display_name\": \"Production\",\n    \"description\": \"Customer-facing production workloads\",\n    \"project_id\": \"proj_01HZXW2K7Y8Q9M0N1P2R3S4T5V\"\n  }'\n"
+        - lang: "python"
+          label: "Python - Create a project environment"
+          source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\nresult = client.environments.create(\n    slug=\"production\",\n    display_name=\"Production\",\n    description=\"Customer-facing production workloads\",\n    project_id=\"proj_01HZXW2K7Y8Q9M0N1P2R3S4T5V\",\n)\n\nprint(result.environment.environment_id)\n"
+        - lang: "typescript"
+          label: "Node.js - Create a project environment"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({ apiKey: process.env.ORQ_API_KEY });\nconst result = await client.environments.create({\n  slug: 'production',\n  displayName: 'Production',\n  description: 'Customer-facing production workloads',\n  projectId: 'proj_01HZXW2K7Y8Q9M0N1P2R3S4T5V',\n});\nconsole.log(result.environment.environmentId);\n"
+      security:
+        - ApiKey: []
+  /v3/environments/{environment_id}:
+    get:
+      tags:
+        - "Environments"
+      summary: "Retrieve an environment"
+      description: "Retrieves a visible environment by ID."
+      operationId: "EnvironmentGet"
+      parameters:
+        - name: "environment_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetEnvironmentResponse"
+      x-speakeasy-group: "environments"
+      x-speakeasy-name-override: "get"
+      x-code-samples:
+        - lang: "curl"
+          label: "Core - Retrieve an environment"
+          source: "curl --request GET \\\n  --url 'https://my.orq.ai/v3/environments/env_01jz2r3s4t5v6w7x8y9z0abcde' \\\n  --header \"Authorization: Bearer $ORQ_API_KEY\"\n"
+        - lang: "python"
+          label: "Python - Retrieve an environment"
+          source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\nresult = client.environments.get(\n    environment_id=\"env_01jz2r3s4t5v6w7x8y9z0abcde\",\n)\n\nprint(result.environment)\n"
+        - lang: "typescript"
+          label: "Node.js - Retrieve an environment"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({ apiKey: process.env.ORQ_API_KEY });\nconst result = await client.environments.get({\n  environmentId: 'env_01jz2r3s4t5v6w7x8y9z0abcde',\n});\nconsole.log(result.environment);\n"
+      security:
+        - ApiKey: []
+    delete:
+      tags:
+        - "Environments"
+      summary: "Delete an environment"
+      description: "Permanently deletes an environment."
+      operationId: "EnvironmentDelete"
+      parameters:
+        - name: "environment_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeleteEnvironmentResponse"
+      x-speakeasy-group: "environments"
+      x-speakeasy-name-override: "delete"
+      x-code-samples:
+        - lang: "curl"
+          label: "Core - Delete an environment"
+          source: "curl --request DELETE \\\n  --url 'https://my.orq.ai/v3/environments/env_01jz2r3s4t5v6w7x8y9z0abcde' \\\n  --header \"Authorization: Bearer $ORQ_API_KEY\"\n"
+        - lang: "python"
+          label: "Python - Delete an environment"
+          source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\nclient.environments.delete(\n    environment_id=\"env_01jz2r3s4t5v6w7x8y9z0abcde\",\n)\n"
+        - lang: "typescript"
+          label: "Node.js - Delete an environment"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({ apiKey: process.env.ORQ_API_KEY });\nawait client.environments.delete({\n  environmentId: 'env_01jz2r3s4t5v6w7x8y9z0abcde',\n});\n"
+      security:
+        - ApiKey: []
+    patch:
+      tags:
+        - "Environments"
+      summary: "Update an environment"
+      description: "Updates environment metadata. Scope is immutable; sharing may only be updated on workspace-owned environments."
+      operationId: "EnvironmentUpdate"
+      parameters:
+        - name: "environment_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateEnvironmentRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UpdateEnvironmentResponse"
+      x-speakeasy-group: "environments"
+      x-speakeasy-name-override: "update"
+      x-code-samples:
+        - lang: "curl"
+          label: "Core - Update an environment"
+          source: "curl --request PATCH \\\n  --url 'https://my.orq.ai/v3/environments/env_01jz2r3s4t5v6w7x8y9z0abcde' \\\n  --header \"Authorization: Bearer $ORQ_API_KEY\" \\\n  --header 'Content-Type: application/json' \\\n  --data '{\n    \"display_name\": \"Production EU\"\n  }'\n"
+        - lang: "python"
+          label: "Python - Update an environment"
+          source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\nresult = client.environments.update(\n    environment_id=\"env_01jz2r3s4t5v6w7x8y9z0abcde\",\n    display_name=\"Production EU\",\n)\n\nprint(result.environment)\n"
+        - lang: "typescript"
+          label: "Node.js - Update an environment"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({ apiKey: process.env.ORQ_API_KEY });\nconst result = await client.environments.update({\n  environmentId: 'env_01jz2r3s4t5v6w7x8y9z0abcde',\n  displayName: 'Production EU',\n});\nconsole.log(result.environment);\n"
+      security:
+        - ApiKey: []
   /v2/files:
     get:
       tags:
@@ -68964,6 +69256,8 @@ tags:
     description: "Annotation queues collect spans for human review."
   - name: "Budgets"
     description: "Budgets govern spend, token usage, and request rate across six scopes: workspace, project, identity, API key, provider, and model. Every applicable budget is enforced, and the most restrictive limit applies per dimension."
+  - name: "Environments"
+    description: "Reusable workspace- and project-scoped deployment environments."
   - name: "Files"
     description: "File upload and retrieval operations."
   - name: "Guardrail Rules"
