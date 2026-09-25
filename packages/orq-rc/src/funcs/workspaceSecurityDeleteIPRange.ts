@@ -101,7 +101,7 @@ async function $do(
     }),
   };
   const path = pathToFunc(
-    "/v2/{workspace_key}/ip-allowlist/entries/{range_id}",
+    "/v2/workspaces/{workspace_key}/ip-allowlist/entries/{range_id}",
   )(pathParams);
 
   const headers = new Headers(compactMap({

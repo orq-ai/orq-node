@@ -8,6 +8,9 @@ import { CreateAnnotationRequest } from "@orq-ai/node/models/operations";
 let value: CreateAnnotationRequest = {
   traceId: "<id>",
   spanId: "<id>",
+  requestBody: {
+    annotations: [],
+  },
 };
 ```
 
@@ -17,4 +20,4 @@ let value: CreateAnnotationRequest = {
 | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
 | `traceId`                                                                                        | *string*                                                                                         | :heavy_check_mark:                                                                               | Unique identifier of the trace                                                                   |
 | `spanId`                                                                                         | *string*                                                                                         | :heavy_check_mark:                                                                               | Unique identifier of the span                                                                    |
-| `requestBody`                                                                                    | [operations.CreateAnnotationRequestBody](../../models/operations/createannotationrequestbody.md) | :heavy_minus_sign:                                                                               | N/A                                                                                              |
+| `requestBody`                                                                                    | [operations.CreateAnnotationRequestBody](../../models/operations/createannotationrequestbody.md) | :heavy_check_mark:                                                                               | N/A                                                                                              |

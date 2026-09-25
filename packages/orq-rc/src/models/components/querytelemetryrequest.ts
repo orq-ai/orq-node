@@ -91,6 +91,13 @@ export type QueryTelemetryRequest = {
    * The span originally selected, before live extended [from, to). `grain:"auto"` resolves bucket width from this span, independent of how far [from, to) has since grown.
    */
   selectedRangeSeconds?: number | undefined;
+  /**
+   * Pins the read to one project the caller can reach. Omit to keep the
+   *
+   * @remarks
+   *  caller's token scope.
+   */
+  projectId?: string | undefined;
 };
 
 /** @internal */
@@ -134,6 +141,7 @@ export const QueryTelemetryRequest$inboundSchema: z.ZodType<
   sort: QueryTelemetryRequestSort$inboundSchema.optional(),
   interval_seconds: z.number().int().optional(),
   selected_range_seconds: z.number().int().optional(),
+  project_id: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "group_by": "groupBy",
@@ -142,6 +150,7 @@ export const QueryTelemetryRequest$inboundSchema: z.ZodType<
     "include_totals": "includeTotals",
     "interval_seconds": "intervalSeconds",
     "selected_range_seconds": "selectedRangeSeconds",
+    "project_id": "projectId",
   });
 });
 /** @internal */
@@ -161,6 +170,7 @@ export type QueryTelemetryRequest$Outbound = {
   sort?: string | undefined;
   interval_seconds?: number | undefined;
   selected_range_seconds?: number | undefined;
+  project_id?: string | undefined;
 };
 
 /** @internal */
@@ -184,6 +194,7 @@ export const QueryTelemetryRequest$outboundSchema: z.ZodType<
   sort: QueryTelemetryRequestSort$outboundSchema.optional(),
   intervalSeconds: z.number().int().optional(),
   selectedRangeSeconds: z.number().int().optional(),
+  projectId: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     groupBy: "group_by",
@@ -192,6 +203,7 @@ export const QueryTelemetryRequest$outboundSchema: z.ZodType<
     includeTotals: "include_totals",
     intervalSeconds: "interval_seconds",
     selectedRangeSeconds: "selected_range_seconds",
+    projectId: "project_id",
   });
 });
 

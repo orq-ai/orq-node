@@ -19,7 +19,7 @@ Lists domain-verification records for the workspace.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="WorkspaceSecurityListDomains" method="get" path="/v2/{workspace_key}/domains" -->
+<!-- UsageSnippet language="typescript" operationID="WorkspaceSecurityListDomains" method="get" path="/v2/workspaces/{workspace_key}/domains" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -92,7 +92,7 @@ Creates a domain-verification challenge and returns the TXT record to add to DNS
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="WorkspaceSecurityCreateDomain" method="post" path="/v2/{workspace_key}/domains" -->
+<!-- UsageSnippet language="typescript" operationID="WorkspaceSecurityCreateDomain" method="post" path="/v2/workspaces/{workspace_key}/domains" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -167,7 +167,7 @@ Permanently removes a domain-verification record.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="WorkspaceSecurityDeleteDomain" method="delete" path="/v2/{workspace_key}/domains/{domain_id}" -->
+<!-- UsageSnippet language="typescript" operationID="WorkspaceSecurityDeleteDomain" method="delete" path="/v2/workspaces/{workspace_key}/domains/{domain_id}" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -242,7 +242,7 @@ Checks DNS for the expected TXT record and marks the domain as verified when it 
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="WorkspaceSecurityVerifyDomain" method="post" path="/v2/{workspace_key}/domains/{domain_id}/verify" -->
+<!-- UsageSnippet language="typescript" operationID="WorkspaceSecurityVerifyDomain" method="post" path="/v2/workspaces/{workspace_key}/domains/{domain_id}/verify" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -317,7 +317,7 @@ Returns the workspace IP allowlist and the current caller IP when available.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="WorkspaceSecurityGetIPAllowlist" method="get" path="/v2/{workspace_key}/ip-allowlist" -->
+<!-- UsageSnippet language="typescript" operationID="WorkspaceSecurityGetIPAllowlist" method="get" path="/v2/workspaces/{workspace_key}/ip-allowlist" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -390,7 +390,7 @@ Updates the workspace-level allowlist switch. Every listed range applies while t
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="WorkspaceSecurityUpdateIPAllowlist" method="patch" path="/v2/{workspace_key}/ip-allowlist" -->
+<!-- UsageSnippet language="typescript" operationID="WorkspaceSecurityUpdateIPAllowlist" method="patch" path="/v2/workspaces/{workspace_key}/ip-allowlist" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -465,7 +465,7 @@ Adds an IPv4 or IPv6 CIDR range to the workspace allowlist.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="WorkspaceSecurityAddIPRange" method="post" path="/v2/{workspace_key}/ip-allowlist/entries" -->
+<!-- UsageSnippet language="typescript" operationID="WorkspaceSecurityAddIPRange" method="post" path="/v2/workspaces/{workspace_key}/ip-allowlist/entries" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 
@@ -540,7 +540,7 @@ Permanently removes a CIDR range from the workspace allowlist.
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="WorkspaceSecurityDeleteIPRange" method="delete" path="/v2/{workspace_key}/ip-allowlist/entries/{range_id}" -->
+<!-- UsageSnippet language="typescript" operationID="WorkspaceSecurityDeleteIPRange" method="delete" path="/v2/workspaces/{workspace_key}/ip-allowlist/entries/{range_id}" -->
 ```typescript
 import { Orq } from "@orq-ai/node";
 

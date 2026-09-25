@@ -8,7 +8,11 @@ import { remap as remap$ } from "../../lib/primitives.js";
 /**
  * The feedback value. For single-select, provide a string or single-element array. For multi-select, provide an array of strings. For range evaluations, provide a number. For boolean, provide a boolean. For text/correction, provide a string.
  */
-export type AnnotationsValue = string | number | boolean | Array<string>;
+export type CreateAnnotationAnnotationsValue =
+  | string
+  | number
+  | boolean
+  | Array<string>;
 
 export type Annotations2 = {
   /**
@@ -28,7 +32,7 @@ export type Annotations2 = {
 /**
  * The feedback value. For single-select, provide a string or single-element array. For multi-select, provide an array of strings. For range evaluations, provide a number. For boolean, provide a boolean. For text/correction, provide a string.
  */
-export type Value = string | number | boolean | Array<string>;
+export type AnnotationsValue = string | number | boolean | Array<string>;
 
 export type Annotations1 = {
   /**
@@ -61,28 +65,30 @@ export type CreateAnnotationRequest = {
    * Unique identifier of the span
    */
   spanId: string;
-  requestBody?: CreateAnnotationRequestBody | undefined;
+  requestBody: CreateAnnotationRequestBody;
 };
 
 /** @internal */
-export type AnnotationsValue$Outbound =
+export type CreateAnnotationAnnotationsValue$Outbound =
   | string
   | number
   | boolean
   | Array<string>;
 
 /** @internal */
-export const AnnotationsValue$outboundSchema: z.ZodType<
-  AnnotationsValue$Outbound,
+export const CreateAnnotationAnnotationsValue$outboundSchema: z.ZodType<
+  CreateAnnotationAnnotationsValue$Outbound,
   z.ZodTypeDef,
-  AnnotationsValue
+  CreateAnnotationAnnotationsValue
 > = z.union([z.string(), z.number(), z.boolean(), z.array(z.string())]);
 
-export function annotationsValueToJSON(
-  annotationsValue: AnnotationsValue,
+export function createAnnotationAnnotationsValueToJSON(
+  createAnnotationAnnotationsValue: CreateAnnotationAnnotationsValue,
 ): string {
   return JSON.stringify(
-    AnnotationsValue$outboundSchema.parse(annotationsValue),
+    CreateAnnotationAnnotationsValue$outboundSchema.parse(
+      createAnnotationAnnotationsValue,
+    ),
   );
 }
 
@@ -113,17 +119,25 @@ export function annotations2ToJSON(annotations2: Annotations2): string {
 }
 
 /** @internal */
-export type Value$Outbound = string | number | boolean | Array<string>;
+export type AnnotationsValue$Outbound =
+  | string
+  | number
+  | boolean
+  | Array<string>;
 
 /** @internal */
-export const Value$outboundSchema: z.ZodType<
-  Value$Outbound,
+export const AnnotationsValue$outboundSchema: z.ZodType<
+  AnnotationsValue$Outbound,
   z.ZodTypeDef,
-  Value
+  AnnotationsValue
 > = z.union([z.string(), z.number(), z.boolean(), z.array(z.string())]);
 
-export function valueToJSON(value: Value): string {
-  return JSON.stringify(Value$outboundSchema.parse(value));
+export function annotationsValueToJSON(
+  annotationsValue: AnnotationsValue,
+): string {
+  return JSON.stringify(
+    AnnotationsValue$outboundSchema.parse(annotationsValue),
+  );
 }
 
 /** @internal */
@@ -226,7 +240,7 @@ export function createAnnotationRequestBodyToJSON(
 export type CreateAnnotationRequest$Outbound = {
   trace_id: string;
   span_id: string;
-  RequestBody?: CreateAnnotationRequestBody$Outbound | undefined;
+  RequestBody: CreateAnnotationRequestBody$Outbound;
 };
 
 /** @internal */
@@ -237,8 +251,7 @@ export const CreateAnnotationRequest$outboundSchema: z.ZodType<
 > = z.object({
   traceId: z.string(),
   spanId: z.string(),
-  requestBody: z.lazy(() => CreateAnnotationRequestBody$outboundSchema)
-    .optional(),
+  requestBody: z.lazy(() => CreateAnnotationRequestBody$outboundSchema),
 }).transform((v) => {
   return remap$(v, {
     traceId: "trace_id",

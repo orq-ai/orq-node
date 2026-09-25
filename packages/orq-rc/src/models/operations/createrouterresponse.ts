@@ -353,7 +353,7 @@ export type Reasoning = {
 /**
  * The role of the message sender (for message items).
  */
-export const InputRole = {
+export const CreateRouterResponseInputRole = {
   User: "user",
   Assistant: "assistant",
   System: "system",
@@ -362,7 +362,9 @@ export const InputRole = {
 /**
  * The role of the message sender (for message items).
  */
-export type InputRole = ClosedEnum<typeof InputRole>;
+export type CreateRouterResponseInputRole = ClosedEnum<
+  typeof CreateRouterResponseInputRole
+>;
 
 /**
  * The status of a model-generated input item.
@@ -380,7 +382,7 @@ export type InputStatus = ClosedEnum<typeof InputStatus>;
 /**
  * The type of item.
  */
-export const InputType = {
+export const CreateRouterResponseInputType = {
   Message: "message",
   FunctionCall: "function_call",
   FunctionCallOutput: "function_call_output",
@@ -411,7 +413,9 @@ export const InputType = {
 /**
  * The type of item.
  */
-export type InputType = ClosedEnum<typeof InputType>;
+export type CreateRouterResponseInputType = ClosedEnum<
+  typeof CreateRouterResponseInputType
+>;
 
 /**
  * An input item. The "type" field determines the item kind: "message", "function_call", "function_call_output", "item_reference", etc.
@@ -452,7 +456,7 @@ export type CreateRouterResponseInput2 = {
   /**
    * The role of the message sender (for message items).
    */
-  role?: InputRole | undefined;
+  role?: CreateRouterResponseInputRole | undefined;
   /**
    * The status of a model-generated input item.
    */
@@ -460,7 +464,7 @@ export type CreateRouterResponseInput2 = {
   /**
    * The type of item.
    */
-  type?: InputType | undefined;
+  type?: CreateRouterResponseInputType | undefined;
 };
 
 /**
@@ -1472,16 +1476,18 @@ export function reasoningToJSON(reasoning: Reasoning): string {
 }
 
 /** @internal */
-export const InputRole$outboundSchema: z.ZodNativeEnum<typeof InputRole> = z
-  .nativeEnum(InputRole);
+export const CreateRouterResponseInputRole$outboundSchema: z.ZodNativeEnum<
+  typeof CreateRouterResponseInputRole
+> = z.nativeEnum(CreateRouterResponseInputRole);
 
 /** @internal */
 export const InputStatus$outboundSchema: z.ZodNativeEnum<typeof InputStatus> = z
   .nativeEnum(InputStatus);
 
 /** @internal */
-export const InputType$outboundSchema: z.ZodNativeEnum<typeof InputType> = z
-  .nativeEnum(InputType);
+export const CreateRouterResponseInputType$outboundSchema: z.ZodNativeEnum<
+  typeof CreateRouterResponseInputType
+> = z.nativeEnum(CreateRouterResponseInputType);
 
 /** @internal */
 export type CreateRouterResponseInput2$Outbound = {
@@ -1522,9 +1528,9 @@ export const CreateRouterResponseInput2$outboundSchema: z.ZodType<
   name: z.string().optional(),
   output: z.string().optional(),
   reasoning: z.lazy(() => Reasoning$outboundSchema).optional(),
-  role: InputRole$outboundSchema.optional(),
+  role: CreateRouterResponseInputRole$outboundSchema.optional(),
   status: InputStatus$outboundSchema.optional(),
-  type: InputType$outboundSchema.optional(),
+  type: CreateRouterResponseInputType$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     callId: "call_id",

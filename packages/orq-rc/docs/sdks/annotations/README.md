@@ -25,6 +25,9 @@ async function run() {
   await orq.annotations.create({
     traceId: "<id>",
     spanId: "<id>",
+    requestBody: {
+      annotations: [],
+    },
   });
 
 
@@ -51,6 +54,9 @@ async function run() {
   const res = await annotationsCreate(orq, {
     traceId: "<id>",
     spanId: "<id>",
+    requestBody: {
+      annotations: [],
+    },
   });
   if (res.ok) {
     const { value: result } = res;
@@ -100,6 +106,7 @@ async function run() {
   await orq.annotations.delete({
     traceId: "<id>",
     spanId: "<id>",
+    requestBody: {},
   });
 
 
@@ -126,6 +133,7 @@ async function run() {
   const res = await annotationsDelete(orq, {
     traceId: "<id>",
     spanId: "<id>",
+    requestBody: {},
   });
   if (res.ok) {
     const { value: result } = res;

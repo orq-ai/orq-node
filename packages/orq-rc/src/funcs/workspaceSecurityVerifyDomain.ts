@@ -100,9 +100,9 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-  const path = pathToFunc("/v2/{workspace_key}/domains/{domain_id}/verify")(
-    pathParams,
-  );
+  const path = pathToFunc(
+    "/v2/workspaces/{workspace_key}/domains/{domain_id}/verify",
+  )(pathParams);
 
   const headers = new Headers(compactMap({
     Accept: "application/json",

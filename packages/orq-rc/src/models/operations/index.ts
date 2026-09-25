@@ -23,6 +23,7 @@ export * from "./budgetupdate.js";
 export * from "./bulkcreatedatapoints.js";
 export * from "./clearannotationqueue.js";
 export * from "./cleardataset.js";
+export * from "./compactresponse.js";
 export * from "./createagentrequest.js";
 export * from "./createagentresponserequest.js";
 export * from "./createagentschedule.js";

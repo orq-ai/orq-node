@@ -76,11 +76,6 @@ export class Orq extends ClientSDK {
     return (this._router ??= new Router(this._options));
   }
 
-  private _annotations?: Annotations;
-  get annotations(): Annotations {
-    return (this._annotations ??= new Annotations(this._options));
-  }
-
   private _feedback?: Feedback;
   get feedback(): Feedback {
     return (this._feedback ??= new Feedback(this._options));
@@ -124,6 +119,11 @@ export class Orq extends ClientSDK {
   private _apiKeys?: ApiKeys;
   get apiKeys(): ApiKeys {
     return (this._apiKeys ??= new ApiKeys(this._options));
+  }
+
+  private _annotations?: Annotations;
+  get annotations(): Annotations {
+    return (this._annotations ??= new Annotations(this._options));
   }
 
   private _logs?: Logs;
@@ -271,13 +271,13 @@ export class Orq extends ClientSDK {
     return (this._workspaceSettings ??= new WorkspaceSettings(this._options));
   }
 
-  private _schedules?: Schedules;
-  get schedules(): Schedules {
-    return (this._schedules ??= new Schedules(this._options));
-  }
-
   private _responses?: Responses;
   get responses(): Responses {
     return (this._responses ??= new Responses(this._options));
+  }
+
+  private _schedules?: Schedules;
+  get schedules(): Schedules {
+    return (this._schedules ??= new Schedules(this._options));
   }
 }
