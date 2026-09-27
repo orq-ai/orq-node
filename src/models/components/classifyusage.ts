@@ -18,11 +18,11 @@ export type ClassifyUsage = {
    */
   inputTokens: number;
   /**
-   * Cost (USD) of output tokens, always 0 for classify. Present when billing was computed for this request.
+   * Cost (USD) of output tokens. 0 for typesafe/jev-latest. Present when billing was computed for this request.
    */
   outputCost?: number | undefined;
   /**
-   * The number of output tokens generated. Not billed.
+   * The number of output tokens generated. Free for typesafe/jev-latest, billed at the model rate for chat models.
    */
   outputTokens: number;
   /**

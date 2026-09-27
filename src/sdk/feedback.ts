@@ -6,7 +6,9 @@ import { feedbackCreate } from "../funcs/feedbackCreate.js";
 import { feedbackCreateEvaluation } from "../funcs/feedbackCreateEvaluation.js";
 import { feedbackRemove } from "../funcs/feedbackRemove.js";
 import { feedbackRemoveEvaluation } from "../funcs/feedbackRemoveEvaluation.js";
+import { feedbackSubmit } from "../funcs/feedbackSubmit.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
+import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
@@ -49,6 +51,23 @@ export class Feedback extends ClientSDK {
     options?: RequestOptions,
   ): Promise<operations.PostV2FeedbackResponseBody> {
     return unwrapAsync(feedbackCreate(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Submit feedback
+   *
+   * @remarks
+   * Report problems or request features for Orq.ai APIs, MCP tools, SDKs, and documentation.
+   */
+  async submit(
+    request: components.SubmitFeedbackRequest,
+    options?: RequestOptions,
+  ): Promise<components.SubmitFeedbackResponse> {
+    return unwrapAsync(feedbackSubmit(
       this,
       request,
       options,

@@ -557,6 +557,8 @@ export * from "./streamoptions.js";
 export * from "./structuredinput.js";
 export * from "./structuredoutput.js";
 export * from "./structuredtoolcall.js";
+export * from "./submitfeedbackrequest.js";
+export * from "./submitfeedbackresponse.js";
 export * from "./syncmcpserverrequest.js";
 export * from "./syncmcpserverresponse.js";
 export * from "./syncstatus.js";

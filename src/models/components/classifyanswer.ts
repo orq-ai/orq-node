@@ -27,7 +27,7 @@ export type ClassifyAnswer = {
    */
   choice?: string | undefined;
   /**
-   * Confidence in the selected option or level. Present for choice and score answers.
+   * Probability of the selected option or level. Present for choice and score answers.
    */
   confidence?: number | undefined;
   /**

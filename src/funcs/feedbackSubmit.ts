@@ -11,6 +11,7 @@ import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
+import * as components from "../models/components/index.js";
 import {
   ConnectionError,
   InvalidRequestError,
@@ -18,30 +19,25 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
-import * as errors from "../models/errors/index.js";
 import { OrqError } from "../models/errors/orqerror.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Classify
+ * Submit feedback
  *
  * @remarks
- * **Beta.** Runs typed classification questions (`noul`, `choice`, `score`) against the native classify model `typesafe/jev-latest` or a chat model that supports classify, such as `anthropic/claude-haiku-4-5`, `google-ai/gemini-3.8-flash` or `zai/glm-5.3-flash`. Chat models answer through one structured-output call and their probabilities are model-reported rather than calibrated. The request and response follow the TypeSafe classification contract; `model` in the response echoes the request and `usage` carries the computed cost like the Responses API. This endpoint currently does not apply PII plugins or guardrails.
+ * Report problems or request features for Orq.ai APIs, MCP tools, SDKs, and documentation.
  */
-export function routerClassifyCreate(
+export function feedbackSubmit(
   client: OrqCore,
-  request: operations.CreateClassifyRequestBody,
+  request: components.SubmitFeedbackRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.CreateClassifyResponseBody,
-    | errors.CreateClassifyResponseBody
-    | errors.CreateClassifyRouterClassifyResponseBody
-    | errors.CreateClassifyRouterClassifyResponseResponseBody
+    components.SubmitFeedbackResponse,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -61,15 +57,12 @@ export function routerClassifyCreate(
 
 async function $do(
   client: OrqCore,
-  request: operations.CreateClassifyRequestBody,
+  request: components.SubmitFeedbackRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.CreateClassifyResponseBody,
-      | errors.CreateClassifyResponseBody
-      | errors.CreateClassifyRouterClassifyResponseBody
-      | errors.CreateClassifyRouterClassifyResponseResponseBody
+      components.SubmitFeedbackResponse,
       | OrqError
       | ResponseValidationError
       | ConnectionError
@@ -84,7 +77,7 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) => operations.CreateClassifyRequestBody$outboundSchema.parse(value),
+    (value) => components.SubmitFeedbackRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -93,7 +86,7 @@ async function $do(
   const payload = parsed.value;
   const body = encodeJSON("body", payload, { explode: true });
 
-  const path = pathToFunc("/v3/router/classify")();
+  const path = pathToFunc("/v3/submit-feedback")();
 
   const headers = new Headers(compactMap({
     "Content-Type": "application/json",
@@ -107,7 +100,7 @@ async function $do(
   const context = {
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
-    operationID: "CreateClassify",
+    operationID: "SubmitFeedback",
     oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
@@ -146,15 +139,8 @@ async function $do(
   }
   const response = doResult.value;
 
-  const responseFields = {
-    HttpMeta: { Response: response, Request: req },
-  };
-
   const [result] = await M.match<
-    operations.CreateClassifyResponseBody,
-    | errors.CreateClassifyResponseBody
-    | errors.CreateClassifyRouterClassifyResponseBody
-    | errors.CreateClassifyRouterClassifyResponseResponseBody
+    components.SubmitFeedbackResponse,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -164,19 +150,10 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, operations.CreateClassifyResponseBody$inboundSchema),
-    M.jsonErr(400, errors.CreateClassifyResponseBody$inboundSchema),
-    M.jsonErr(
-      422,
-      errors.CreateClassifyRouterClassifyResponseBody$inboundSchema,
-    ),
-    M.jsonErr(
-      429,
-      errors.CreateClassifyRouterClassifyResponseResponseBody$inboundSchema,
-    ),
+    M.json(200, components.SubmitFeedbackResponse$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
-  )(response, req, { extraFields: responseFields });
+  )(response, req);
   if (!result.ok) {
     return [result, { status: "complete", request: req, response }];
   }
