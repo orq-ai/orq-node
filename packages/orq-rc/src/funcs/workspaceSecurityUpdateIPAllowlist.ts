@@ -98,9 +98,7 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-  const path = pathToFunc("/v2/workspaces/{workspace_key}/ip-allowlist")(
-    pathParams,
-  );
+  const path = pathToFunc("/v2/{workspace_key}/ip-allowlist")(pathParams);
 
   const headers = new Headers(compactMap({
     "Content-Type": "application/json",

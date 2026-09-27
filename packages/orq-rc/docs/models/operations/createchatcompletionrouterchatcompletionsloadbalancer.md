@@ -1,6 +1,6 @@
 # CreateChatCompletionRouterChatCompletionsLoadBalancer
 
-Load balancer configuration for the request.
+Array of models with weights for load balancing requests
 
 
 ## Supported Types

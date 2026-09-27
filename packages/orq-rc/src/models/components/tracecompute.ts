@@ -3,24 +3,12 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type TraceCompute = {
   metric?: string | undefined;
   op?: string | undefined;
 };
 
-/** @internal */
-export const TraceCompute$inboundSchema: z.ZodType<
-  TraceCompute,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  metric: z.string().optional(),
-  op: z.string().optional(),
-});
 /** @internal */
 export type TraceCompute$Outbound = {
   metric?: string | undefined;
@@ -39,13 +27,4 @@ export const TraceCompute$outboundSchema: z.ZodType<
 
 export function traceComputeToJSON(traceCompute: TraceCompute): string {
   return JSON.stringify(TraceCompute$outboundSchema.parse(traceCompute));
-}
-export function traceComputeFromJSON(
-  jsonString: string,
-): SafeParseResult<TraceCompute, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => TraceCompute$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'TraceCompute' from JSON`,
-  );
 }

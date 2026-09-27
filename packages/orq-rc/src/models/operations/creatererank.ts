@@ -148,7 +148,7 @@ export type CreateRerankLoadBalancerRouterRerank1 = {
 };
 
 /**
- * Load balancer configuration for the request.
+ * Array of models with weights for load balancing requests
  */
 export type CreateRerankRouterRerankLoadBalancer =
   CreateRerankLoadBalancerRouterRerank1;
@@ -191,7 +191,7 @@ export type CreateRerankOrq = {
    */
   contact?: components.PublicContact | undefined;
   /**
-   * Load balancer configuration for the request.
+   * Array of models with weights for load balancing requests
    */
   loadBalancer?: CreateRerankLoadBalancerRouterRerank1 | undefined;
   /**

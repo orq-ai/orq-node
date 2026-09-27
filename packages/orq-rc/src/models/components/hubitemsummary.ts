@@ -14,7 +14,7 @@ export type HubItemSummary = {
    */
   id: string;
   /**
-   * ID of the workspace entity represented by this hub item. Empty on search results: the field is not part of the search index.
+   * ID of the workspace entity represented by this hub item. Empty on search results: the field is not part of the Typesense index.
    */
   entityId?: string | undefined;
   /**

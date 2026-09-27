@@ -59,19 +59,19 @@ let value: CreateRouterResponseResponseBody = {
   topP: 9592.24,
   truncation: "disabled",
   usage: {
-    inputTokens: 276387,
+    inputTokens: 763695,
     inputTokensDetails: {
-      cacheCreationTokens: 49885,
-      cacheWriteTokens: 905586,
-      cachedTokens: 432413,
+      cacheCreationTokens: 732588,
+      cacheWriteTokens: 376439,
+      cachedTokens: 349904,
     },
-    outputTokens: 725695,
+    outputTokens: 437223,
     outputTokensDetails: {
-      reasoningTokens: 91824,
+      reasoningTokens: 846277,
     },
-    totalTokens: 938481,
+    totalTokens: 81544,
   },
-  user: "Mossie.Heller84",
+  user: "Camden39",
 };
 ```
 

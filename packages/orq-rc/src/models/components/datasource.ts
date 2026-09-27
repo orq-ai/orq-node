@@ -30,7 +30,7 @@ export type DatasourceStatus = ClosedEnum<typeof DatasourceStatus>;
 export type Datasource = {
   displayName: string;
   /**
-   * The description of the datasource
+   * The description of the knowledge base
    */
   description?: string | null | undefined;
   status: DatasourceStatus;
@@ -51,7 +51,7 @@ export type Datasource = {
   knowledgeId: string;
   chunksCount: number;
   /**
-   * Processing attempts recorded for the datasource.
+   * Additive compatibility fields formerly available only from database-shaped responses.
    */
   processingAttempts?: Array<ProcessingAttempt> | undefined;
   metadata?: CountMetadata | undefined;

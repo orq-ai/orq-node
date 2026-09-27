@@ -15,7 +15,7 @@ export type ErrorT = {
 };
 
 /**
- * orq.ai product
+ * Orquesta product
  */
 export const ToolExecutionFailedStreamingEventProduct = {
   Remoteconfigs: "remoteconfigs",
@@ -38,7 +38,7 @@ export const ToolExecutionFailedStreamingEventProduct = {
   McpGateway: "mcp_gateway",
 } as const;
 /**
- * orq.ai product
+ * Orquesta product
  */
 export type ToolExecutionFailedStreamingEventProduct = ClosedEnum<
   typeof ToolExecutionFailedStreamingEventProduct
@@ -55,7 +55,7 @@ export type ToolExecutionFailedStreamingEventToolExecutionContext = {
   agentManifestId: string;
   agentExecutionId: string;
   /**
-   * orq.ai product
+   * Orquesta product
    */
   product: ToolExecutionFailedStreamingEventProduct;
   memory?: ToolExecutionFailedStreamingEventMemory | undefined;

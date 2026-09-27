@@ -7,21 +7,21 @@ import { remap as remap$ } from "../../lib/primitives.js";
 
 export type FileListRequest = {
   /**
-   * Page size, 1-200. Unset uses the server default.
+   * Page size. Unset uses the server default.
    */
   limit?: number | undefined;
   /**
    * Cursor for forward pagination. Set to the `file_id` of the last item
    *
    * @remarks
-   *  from the previous page. Mutually exclusive with `ending_before`.
+   *  from the previous page.
    */
   startingAfter?: string | undefined;
   /**
    * Cursor for backward pagination. Set to the `file_id` of the first item
    *
    * @remarks
-   *  from the previous page. Mutually exclusive with `starting_after`.
+   *  from the previous page.
    */
   endingBefore?: string | undefined;
   projectId?: string | undefined;

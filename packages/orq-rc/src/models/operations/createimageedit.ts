@@ -208,7 +208,7 @@ export type CreateImageEditLoadBalancerRouterImagesEdits1 = {
 };
 
 /**
- * Load balancer configuration for the request.
+ * Array of models with weights for load balancing requests
  */
 export type CreateImageEditRouterImagesEditsLoadBalancer =
   CreateImageEditLoadBalancerRouterImagesEdits1;
@@ -255,7 +255,7 @@ export type CreateImageEditOrq = {
    */
   cache?: CreateImageEditRouterImagesEditsCache | undefined;
   /**
-   * Load balancer configuration for the request.
+   * Array of models with weights for load balancing requests
    */
   loadBalancer?: CreateImageEditLoadBalancerRouterImagesEdits1 | undefined;
   /**

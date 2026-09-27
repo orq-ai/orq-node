@@ -3,9 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type TraceFilter = {
   field?: string | undefined;
@@ -13,16 +10,6 @@ export type TraceFilter = {
   values?: Array<string> | undefined;
 };
 
-/** @internal */
-export const TraceFilter$inboundSchema: z.ZodType<
-  TraceFilter,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  field: z.string().optional(),
-  op: z.string().optional(),
-  values: z.array(z.string()).optional(),
-});
 /** @internal */
 export type TraceFilter$Outbound = {
   field?: string | undefined;
@@ -43,13 +30,4 @@ export const TraceFilter$outboundSchema: z.ZodType<
 
 export function traceFilterToJSON(traceFilter: TraceFilter): string {
   return JSON.stringify(TraceFilter$outboundSchema.parse(traceFilter));
-}
-export function traceFilterFromJSON(
-  jsonString: string,
-): SafeParseResult<TraceFilter, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => TraceFilter$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'TraceFilter' from JSON`,
-  );
 }

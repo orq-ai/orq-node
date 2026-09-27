@@ -22,7 +22,7 @@ export type HubItem = {
   /**
    * Unique hub item ID.
    */
-  id: string;
+  id?: string | undefined;
   /**
    * ID of the workspace entity represented by this hub item.
    */
@@ -103,7 +103,7 @@ export function promptFromJSON(
 /** @internal */
 export const HubItem$inboundSchema: z.ZodType<HubItem, z.ZodTypeDef, unknown> =
   z.object({
-    id: z.string(),
+    id: z.string().optional(),
     entity_id: z.string(),
     display_name: z.string(),
     description: z.string(),

@@ -31,7 +31,7 @@ import { Result } from "../types/fp.js";
  * List API keys
  *
  * @remarks
- * Returns API keys visible to the current workspace as a JSON array sorted by name. Raw tokens are never included; the `token` field contains a masked display value.
+ * Returns API keys visible to the current workspace as a JSON array. Raw tokens are never included; the `token` field contains a masked display value.
  */
 export function apiKeysList(
   client: OrqCore,
@@ -92,9 +92,16 @@ async function $do(
   const path = pathToFunc("/v2/api-keys")();
 
   const query = encodeFormQuery({
+    "ending_before": payload?.ending_before,
+    "include_budget": payload?.include_budget,
+    "limit": payload?.limit,
+    "owner_type": payload?.owner_type,
+    "permission_mode": payload?.permission_mode,
     "project_id": payload?.project_id,
-    "source": payload?.source,
-  }, { explode: false });
+    "search": payload?.search,
+    "starting_after": payload?.starting_after,
+    "status": payload?.status,
+  });
 
   const headers = new Headers(compactMap({
     Accept: "application/json",
@@ -159,7 +166,7 @@ async function $do(
     | SDKValidationError
   >(
     M.json(200, z.array(components.ApiKeyRestResponse$inboundSchema)),
-    M.fail([401, 403, "4XX"]),
+    M.fail("4XX"),
     M.fail("5XX"),
   )(response, req);
   if (!result.ok) {

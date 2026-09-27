@@ -22,11 +22,14 @@ export type Memory = {
   storeId: string;
   workspaceId: string;
   /**
-   * The number of documents in the entity
+   * The number of memories in the entity
    */
   documentsCount: number;
   /**
-   * Key-value metadata for the memory.
+   * Present on update responses in the live TypeScript implementation even
+   *
+   * @remarks
+   *  though the legacy generated OpenAPI schema omitted it.
    */
   metadata?: { [k: string]: string } | undefined;
   /**

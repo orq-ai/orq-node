@@ -23,13 +23,13 @@ import {
 export type DatasourcesServiceCreateRequest = {
   displayName?: string | undefined;
   /**
-   * The description of the datasource
+   * The description of the knowledge base
    */
   description?: string | null | undefined;
   fileId?: string | undefined;
   chunkingOptions?: DatasourceChunkingOptions | undefined;
   /**
-   * Optional datasource ID. When omitted, the server generates one.
+   * Compatibility fields used by the former datasource shell/legacy route.
    */
   id?: string | undefined;
   attachment?: DatasourceAttachment | undefined;

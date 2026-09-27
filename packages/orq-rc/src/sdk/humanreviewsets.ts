@@ -18,7 +18,7 @@ export class HumanReviewSets extends ClientSDK {
   async list(
     request?: operations.GetV2HumanEvalSetsRequest | undefined,
     options?: RequestOptions,
-  ): Promise<Array<operations.ResponseBody>> {
+  ): Promise<Array<operations.GetV2HumanEvalSetsResponseBody>> {
     return unwrapAsync(humanReviewSetsList(
       this,
       request,

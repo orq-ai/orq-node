@@ -5,10 +5,8 @@
 import { datasetsClear } from "../funcs/datasetsClear.js";
 import { datasetsCreate } from "../funcs/datasetsCreate.js";
 import { datasetsCreateDatapoint } from "../funcs/datasetsCreateDatapoint.js";
-import { datasetsCreateDatapoints } from "../funcs/datasetsCreateDatapoints.js";
 import { datasetsDelete } from "../funcs/datasetsDelete.js";
 import { datasetsDeleteDatapoint } from "../funcs/datasetsDeleteDatapoint.js";
-import { datasetsDeleteDatapoints } from "../funcs/datasetsDeleteDatapoints.js";
 import { datasetsList } from "../funcs/datasetsList.js";
 import { datasetsListDatapoints } from "../funcs/datasetsListDatapoints.js";
 import { datasetsRetrieve } from "../funcs/datasetsRetrieve.js";
@@ -16,7 +14,6 @@ import { datasetsRetrieveDatapoint } from "../funcs/datasetsRetrieveDatapoint.js
 import { datasetsUpdate } from "../funcs/datasetsUpdate.js";
 import { datasetsUpdateDatapoint } from "../funcs/datasetsUpdateDatapoint.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
-import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
@@ -25,12 +22,12 @@ export class Datasets extends ClientSDK {
    * List datasets
    *
    * @remarks
-   * Retrieves a paginated list of datasets for the current workspace.
+   * Retrieves a paginated list of datasets for the current workspace. Results can be paginated using cursor-based pagination.
    */
   async list(
     request?: operations.ListDatasetsRequest | undefined,
     options?: RequestOptions,
-  ): Promise<components.ListDatasetsResponse> {
+  ): Promise<operations.ListDatasetsResponseBody> {
     return unwrapAsync(datasetsList(
       this,
       request,
@@ -42,12 +39,12 @@ export class Datasets extends ClientSDK {
    * Create a dataset
    *
    * @remarks
-   * Creates a new dataset in the project bound to the API key, or in the workspace default project.
+   * Creates a new dataset in the specified project.
    */
   async create(
-    request: components.CreateDatasetRequest,
+    request?: operations.CreateDatasetRequestBody | undefined,
     options?: RequestOptions,
-  ): Promise<components.Dataset> {
+  ): Promise<operations.CreateDatasetResponseBody> {
     return unwrapAsync(datasetsCreate(
       this,
       request,
@@ -59,30 +56,13 @@ export class Datasets extends ClientSDK {
    * Retrieve a dataset
    *
    * @remarks
-   * Retrieves a specific dataset by its unique identifier.
+   * Retrieves a specific dataset by its unique identifier
    */
   async retrieve(
     request: operations.RetrieveDatasetRequest,
     options?: RequestOptions,
-  ): Promise<components.Dataset> {
+  ): Promise<operations.RetrieveDatasetResponseBody> {
     return unwrapAsync(datasetsRetrieve(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Delete a dataset
-   *
-   * @remarks
-   * Permanently deletes a dataset and all its datapoints.
-   */
-  async delete(
-    request: operations.DeleteDatasetRequest,
-    options?: RequestOptions,
-  ): Promise<void> {
-    return unwrapAsync(datasetsDelete(
       this,
       request,
       options,
@@ -93,12 +73,12 @@ export class Datasets extends ClientSDK {
    * Update a dataset
    *
    * @remarks
-   * Updates the specified dataset.
+   * Update a dataset
    */
   async update(
     request: operations.UpdateDatasetRequest,
     options?: RequestOptions,
-  ): Promise<components.Dataset> {
+  ): Promise<operations.UpdateDatasetResponseBody> {
     return unwrapAsync(datasetsUpdate(
       this,
       request,
@@ -107,16 +87,16 @@ export class Datasets extends ClientSDK {
   }
 
   /**
-   * Delete all datapoints
+   * Delete a dataset
    *
    * @remarks
-   * Deletes all datapoints from a dataset.
+   * Permanently deletes a dataset and all its datapoints. This action is irreversible.
    */
-  async clear(
-    request: operations.ClearDatasetRequest,
+  async delete(
+    request: operations.DeleteDatasetRequest,
     options?: RequestOptions,
   ): Promise<void> {
-    return unwrapAsync(datasetsClear(
+    return unwrapAsync(datasetsDelete(
       this,
       request,
       options,
@@ -132,7 +112,7 @@ export class Datasets extends ClientSDK {
   async listDatapoints(
     request: operations.ListDatasetDatapointsRequest,
     options?: RequestOptions,
-  ): Promise<components.ListDatapointsResponse> {
+  ): Promise<operations.ListDatasetDatapointsResponseBody> {
     return unwrapAsync(datasetsListDatapoints(
       this,
       request,
@@ -141,50 +121,16 @@ export class Datasets extends ClientSDK {
   }
 
   /**
-   * Create datapoints
+   * Create a datapoint
    *
    * @remarks
-   * Creates one or more datapoints in the specified dataset.
+   * Creates a new datapoint in the specified dataset.
    */
   async createDatapoint(
     request: operations.CreateDatasetItemRequest,
     options?: RequestOptions,
-  ): Promise<Array<components.Datapoint1>> {
+  ): Promise<Array<operations.ResponseBody>> {
     return unwrapAsync(datasetsCreateDatapoint(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Delete specific datapoints
-   *
-   * @remarks
-   * Deletes multiple datapoints from a dataset by ID.
-   */
-  async deleteDatapoints(
-    request: operations.DeleteDatasetDatapointsRequest,
-    options?: RequestOptions,
-  ): Promise<void> {
-    return unwrapAsync(datasetsDeleteDatapoints(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Create multiple datapoints
-   *
-   * @remarks
-   * Creates multiple datapoints at once.
-   */
-  async createDatapoints(
-    request: operations.BulkCreateDatapointsRequest,
-    options?: RequestOptions,
-  ): Promise<Array<components.Datapoint1>> {
-    return unwrapAsync(datasetsCreateDatapoints(
       this,
       request,
       options,
@@ -195,13 +141,30 @@ export class Datasets extends ClientSDK {
    * Retrieve a datapoint
    *
    * @remarks
-   * Retrieves a datapoint object.
+   * Retrieves a datapoint object
    */
   async retrieveDatapoint(
     request: operations.RetrieveDatapointRequest,
     options?: RequestOptions,
-  ): Promise<components.Datapoint1> {
+  ): Promise<operations.RetrieveDatapointResponseBody> {
     return unwrapAsync(datasetsRetrieveDatapoint(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Update a datapoint
+   *
+   * @remarks
+   * Update a datapoint in the specified dataset.
+   */
+  async updateDatapoint(
+    request: operations.UpdateDatapointRequest,
+    options?: RequestOptions,
+  ): Promise<operations.UpdateDatapointResponseBody> {
+    return unwrapAsync(datasetsUpdateDatapoint(
       this,
       request,
       options,
@@ -226,16 +189,16 @@ export class Datasets extends ClientSDK {
   }
 
   /**
-   * Update a datapoint
+   * Delete all datapoints
    *
    * @remarks
-   * Updates the inputs, messages, or expected output for a datapoint.
+   * Delete all datapoints from a dataset. This action is irreversible.
    */
-  async updateDatapoint(
-    request: operations.UpdateDatapointRequest,
+  async clear(
+    request: operations.ClearDatasetRequest,
     options?: RequestOptions,
-  ): Promise<components.Datapoint1> {
-    return unwrapAsync(datasetsUpdateDatapoint(
+  ): Promise<void> {
+    return unwrapAsync(datasetsClear(
       this,
       request,
       options,

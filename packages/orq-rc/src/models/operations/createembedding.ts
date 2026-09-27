@@ -22,7 +22,7 @@ export const EncodingFormat = {
  */
 export type EncodingFormat = ClosedEnum<typeof EncodingFormat>;
 
-export type CreateEmbeddingInput2 = string | Array<number>;
+export type Input2 = string | Array<number>;
 
 /**
  * Input text to embed, encoded as a string or array of tokens.
@@ -101,21 +101,17 @@ export const EncodingFormat$outboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(EncodingFormat);
 
 /** @internal */
-export type CreateEmbeddingInput2$Outbound = string | Array<number>;
+export type Input2$Outbound = string | Array<number>;
 
 /** @internal */
-export const CreateEmbeddingInput2$outboundSchema: z.ZodType<
-  CreateEmbeddingInput2$Outbound,
+export const Input2$outboundSchema: z.ZodType<
+  Input2$Outbound,
   z.ZodTypeDef,
-  CreateEmbeddingInput2
+  Input2
 > = z.union([z.string(), z.array(z.number().int())]);
 
-export function createEmbeddingInput2ToJSON(
-  createEmbeddingInput2: CreateEmbeddingInput2,
-): string {
-  return JSON.stringify(
-    CreateEmbeddingInput2$outboundSchema.parse(createEmbeddingInput2),
-  );
+export function input2ToJSON(input2: Input2): string {
+  return JSON.stringify(Input2$outboundSchema.parse(input2));
 }
 
 /** @internal */

@@ -17,11 +17,11 @@ export type ListPromptVersionsRequest = {
    */
   limit?: number | undefined;
   /**
-   * A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 20 objects, ending with `01JJ1HDHN79XAS7A01WB3HYSDB`, your subsequent call can include `starting_after=01JJ1HDHN79XAS7A01WB3HYSDB` in order to fetch the next page of the list.
+   * A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 20 objects, ending with `01JJ1HDHN79XAS7A01WB3HYSDB`, your subsequent call can include `after=01JJ1HDHN79XAS7A01WB3HYSDB` in order to fetch the next page of the list.
    */
   startingAfter?: string | undefined;
   /**
-   * A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 20 objects, starting with `01JJ1HDHN79XAS7A01WB3HYSDB`, your subsequent call can include `ending_before=01JJ1HDHN79XAS7A01WB3HYSDB` in order to fetch the previous page of the list.
+   * A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 20 objects, starting with `01JJ1HDHN79XAS7A01WB3HYSDB`, your subsequent call can include `before=01JJ1HDHN79XAS7A01WB3HYSDB` in order to fetch the previous page of the list.
    */
   endingBefore?: string | undefined;
 };
@@ -1142,20 +1142,6 @@ export type ListPromptVersionsMessagesFunction = {
   arguments?: string | undefined;
 };
 
-export type ListPromptVersionsMessagesGoogle = {
-  /**
-   * Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call. Takes precedence over the top-level `thought_signature` when both are set.
-   */
-  thoughtSignature?: string | undefined;
-};
-
-/**
- * Provider-specific extra content for the tool call.
- */
-export type ListPromptVersionsMessagesExtraContent = {
-  google?: ListPromptVersionsMessagesGoogle | undefined;
-};
-
 export type ListPromptVersionsMessagesToolCalls = {
   /**
    * The ID of the tool call.
@@ -1170,10 +1156,6 @@ export type ListPromptVersionsMessagesToolCalls = {
    * Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call.
    */
   thoughtSignature?: string | undefined;
-  /**
-   * Provider-specific extra content for the tool call.
-   */
-  extraContent?: ListPromptVersionsMessagesExtraContent | undefined;
 };
 
 export type ListPromptVersionsMessagesAssistantMessage = {
@@ -3008,50 +2990,6 @@ export function listPromptVersionsMessagesFunctionFromJSON(
 }
 
 /** @internal */
-export const ListPromptVersionsMessagesGoogle$inboundSchema: z.ZodType<
-  ListPromptVersionsMessagesGoogle,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  thought_signature: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "thought_signature": "thoughtSignature",
-  });
-});
-
-export function listPromptVersionsMessagesGoogleFromJSON(
-  jsonString: string,
-): SafeParseResult<ListPromptVersionsMessagesGoogle, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ListPromptVersionsMessagesGoogle$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ListPromptVersionsMessagesGoogle' from JSON`,
-  );
-}
-
-/** @internal */
-export const ListPromptVersionsMessagesExtraContent$inboundSchema: z.ZodType<
-  ListPromptVersionsMessagesExtraContent,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  google: z.lazy(() => ListPromptVersionsMessagesGoogle$inboundSchema)
-    .optional(),
-});
-
-export function listPromptVersionsMessagesExtraContentFromJSON(
-  jsonString: string,
-): SafeParseResult<ListPromptVersionsMessagesExtraContent, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      ListPromptVersionsMessagesExtraContent$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ListPromptVersionsMessagesExtraContent' from JSON`,
-  );
-}
-
-/** @internal */
 export const ListPromptVersionsMessagesToolCalls$inboundSchema: z.ZodType<
   ListPromptVersionsMessagesToolCalls,
   z.ZodTypeDef,
@@ -3061,13 +2999,9 @@ export const ListPromptVersionsMessagesToolCalls$inboundSchema: z.ZodType<
   type: ListPromptVersionsMessagesType$inboundSchema,
   function: z.lazy(() => ListPromptVersionsMessagesFunction$inboundSchema),
   thought_signature: z.string().optional(),
-  extra_content: z.lazy(() =>
-    ListPromptVersionsMessagesExtraContent$inboundSchema
-  ).optional(),
 }).transform((v) => {
   return remap$(v, {
     "thought_signature": "thoughtSignature",
-    "extra_content": "extraContent",
   });
 });
 

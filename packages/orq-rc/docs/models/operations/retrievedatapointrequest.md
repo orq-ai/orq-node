@@ -13,7 +13,7 @@ let value: RetrieveDatapointRequest = {
 
 ## Fields
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `datasetId`        | *string*           | :heavy_check_mark: | N/A                |
-| `datapointId`      | *string*           | :heavy_check_mark: | N/A                |
+| Field                                  | Type                                   | Required                               | Description                            |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| `datasetId`                            | *string*                               | :heavy_check_mark:                     | The unique identifier of the dataset   |
+| `datapointId`                          | *string*                               | :heavy_check_mark:                     | The unique identifier of the datapoint |

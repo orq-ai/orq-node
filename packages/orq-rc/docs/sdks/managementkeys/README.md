@@ -97,7 +97,6 @@ const orq = new Orq({
 async function run() {
   const result = await orq.managementKeys.create({
     name: "<value>",
-    permissionMode: "MANAGEMENT_PERMISSION_MODE_UNSPECIFIED",
   });
 
   console.log(result);
@@ -123,7 +122,6 @@ const orq = new OrqCore({
 async function run() {
   const res = await managementKeysCreate(orq, {
     name: "<value>",
-    permissionMode: "MANAGEMENT_PERMISSION_MODE_UNSPECIFIED",
   });
   if (res.ok) {
     const { value: result } = res;

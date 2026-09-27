@@ -210,7 +210,7 @@ export type CreateImageVariationLoadBalancerRouterImagesVariations1 = {
 };
 
 /**
- * Load balancer configuration for the request.
+ * Array of models with weights for load balancing requests
  */
 export type CreateImageVariationRouterImagesVariationsLoadBalancer =
   CreateImageVariationLoadBalancerRouterImagesVariations1;
@@ -259,7 +259,7 @@ export type CreateImageVariationOrq = {
    */
   cache?: CreateImageVariationRouterImagesVariationsCache | undefined;
   /**
-   * Load balancer configuration for the request.
+   * Array of models with weights for load balancing requests
    */
   loadBalancer?:
     | CreateImageVariationLoadBalancerRouterImagesVariations1

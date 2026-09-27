@@ -14,14 +14,14 @@ export type ProjectListRequest = {
    * Cursor for forward pagination. Set to the `project_id` of the last
    *
    * @remarks
-   *  item from the previous page. Mutually exclusive with `ending_before`.
+   *  item from the previous page.
    */
   startingAfter?: string | undefined;
   /**
    * Cursor for backward pagination. Set to the `project_id` of the first
    *
    * @remarks
-   *  item from the previous page. Mutually exclusive with `starting_after`.
+   *  item from the previous page.
    */
   endingBefore?: string | undefined;
 };

@@ -7,13 +7,12 @@ import { UpdateDatasetRequest } from "@orq-ai/node/models/operations";
 
 let value: UpdateDatasetRequest = {
   datasetId: "<id>",
-  updateDatasetRequest: {},
 };
 ```
 
 ## Fields
 
-| Field                                                                              | Type                                                                               | Required                                                                           | Description                                                                        |
-| ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
-| `datasetId`                                                                        | *string*                                                                           | :heavy_check_mark:                                                                 | N/A                                                                                |
-| `updateDatasetRequest`                                                             | [components.UpdateDatasetRequest](../../models/components/updatedatasetrequest.md) | :heavy_check_mark:                                                                 | N/A                                                                                |
+| Field                                                                                      | Type                                                                                       | Required                                                                                   | Description                                                                                |
+| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
+| `datasetId`                                                                                | *string*                                                                                   | :heavy_check_mark:                                                                         | The unique identifier of the dataset                                                       |
+| `requestBody`                                                                              | [operations.UpdateDatasetRequestBody](../../models/operations/updatedatasetrequestbody.md) | :heavy_minus_sign:                                                                         | N/A                                                                                        |

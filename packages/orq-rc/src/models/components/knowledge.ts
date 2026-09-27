@@ -127,7 +127,7 @@ export type Knowledge2 = {
   retrievalSettings?: KnowledgeRetrievalSettings | undefined;
   externalConfig: ExternalConfig;
   /**
-   * Settings for the knowledge base: embedding model, retrieval configuration, and agentic RAG configuration.
+   * Additive compatibility fields formerly available only from private internal endpoints.
    */
   settings?: KnowledgeSettings | undefined;
   metadata?: KnowledgeMetadata | undefined;
@@ -252,7 +252,7 @@ export type Knowledge1 = {
    */
   model: string;
   /**
-   * Settings for the knowledge base: embedding model, retrieval configuration, and agentic RAG configuration.
+   * Additive compatibility fields formerly available only from private internal endpoints.
    */
   settings?: KnowledgeSettings | undefined;
   metadata?: KnowledgeMetadata | undefined;

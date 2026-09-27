@@ -1,17 +1,17 @@
 # Status
 
-Lifecycle status; revoked is terminal.
+The status of a model-generated input item.
 
 ## Example Usage
 
 ```typescript
 import { Status } from "@orq-ai/node/models/operations";
 
-let value: Status = "disabled";
+let value: Status = "completed";
 ```
 
 ## Values
 
 ```typescript
-"active" | "disabled" | "revoked"
+"in_progress" | "completed" | "incomplete"
 ```

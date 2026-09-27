@@ -146,7 +146,7 @@ export type CreateTranslationLoadBalancerRouterAudioTranslations1 = {
 };
 
 /**
- * Load balancer configuration for the request.
+ * Array of models with weights for load balancing requests
  */
 export type CreateTranslationRouterAudioTranslationsLoadBalancer =
   CreateTranslationLoadBalancerRouterAudioTranslations1;
@@ -187,7 +187,7 @@ export type CreateTranslationOrq = {
    */
   contact?: components.PublicContact | undefined;
   /**
-   * Load balancer configuration for the request.
+   * Array of models with weights for load balancing requests
    */
   loadBalancer?:
     | CreateTranslationLoadBalancerRouterAudioTranslations1

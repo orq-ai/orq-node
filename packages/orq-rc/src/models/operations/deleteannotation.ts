@@ -30,7 +30,7 @@ export type DeleteAnnotationRequest = {
    * Unique identifier of the span
    */
   spanId: string;
-  requestBody: DeleteAnnotationRequestBody;
+  requestBody?: DeleteAnnotationRequestBody | undefined;
 };
 
 /** @internal */
@@ -95,7 +95,7 @@ export function deleteAnnotationRequestBodyToJSON(
 export type DeleteAnnotationRequest$Outbound = {
   trace_id: string;
   span_id: string;
-  RequestBody: DeleteAnnotationRequestBody$Outbound;
+  RequestBody?: DeleteAnnotationRequestBody$Outbound | undefined;
 };
 
 /** @internal */
@@ -106,7 +106,8 @@ export const DeleteAnnotationRequest$outboundSchema: z.ZodType<
 > = z.object({
   traceId: z.string(),
   spanId: z.string(),
-  requestBody: z.lazy(() => DeleteAnnotationRequestBody$outboundSchema),
+  requestBody: z.lazy(() => DeleteAnnotationRequestBody$outboundSchema)
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     traceId: "trace_id",

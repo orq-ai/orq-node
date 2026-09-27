@@ -11,7 +11,6 @@ import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
-import * as components from "../models/components/index.js";
 import {
   ConnectionError,
   InvalidRequestError,
@@ -22,6 +21,7 @@ import {
 import { OrqError } from "../models/errors/orqerror.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import * as operations from "../models/operations/index.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -29,15 +29,15 @@ import { Result } from "../types/fp.js";
  * Create a dataset
  *
  * @remarks
- * Creates a new dataset in the project bound to the API key, or in the workspace default project.
+ * Creates a new dataset in the specified project.
  */
 export function datasetsCreate(
   client: OrqCore,
-  request: components.CreateDatasetRequest,
+  request?: operations.CreateDatasetRequestBody | undefined,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    components.Dataset,
+    operations.CreateDatasetResponseBody,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -57,12 +57,12 @@ export function datasetsCreate(
 
 async function $do(
   client: OrqCore,
-  request: components.CreateDatasetRequest,
+  request?: operations.CreateDatasetRequestBody | undefined,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      components.Dataset,
+      operations.CreateDatasetResponseBody,
       | OrqError
       | ResponseValidationError
       | ConnectionError
@@ -77,14 +77,19 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) => components.CreateDatasetRequest$outboundSchema.parse(value),
+    (value) =>
+      operations.CreateDatasetRequestBody$outboundSchema.optional().parse(
+        value,
+      ),
     "Input validation failed",
   );
   if (!parsed.ok) {
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = encodeJSON("body", payload, { explode: true });
+  const body = payload === undefined
+    ? null
+    : encodeJSON("body", payload, { explode: true });
 
   const path = pathToFunc("/v2/datasets")();
 
@@ -140,7 +145,7 @@ async function $do(
   const response = doResult.value;
 
   const [result] = await M.match<
-    components.Dataset,
+    operations.CreateDatasetResponseBody,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -150,7 +155,7 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, components.Dataset$inboundSchema),
+    M.json(200, operations.CreateDatasetResponseBody$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, req);

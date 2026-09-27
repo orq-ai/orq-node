@@ -1,25 +1,23 @@
-# ~~Inputs~~
-
-@deprecated Use top-level `variables` field instead. Values to replace in the prompt messages using {{variableName}} syntax.
-
-> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
+# Inputs
 
 
 ## Supported Types
 
-### `{ [k: string]: any }`
+### `string`
 
 ```typescript
-const value: { [k: string]: any } = {
-  "customer_name": "John Smith",
-  "product_name": "Premium Plan",
-  "issue_type": "billing",
-};
+const value: string = "<value>";
 ```
 
-### `operations.Inputs2[]`
+### `number`
 
 ```typescript
-const value: operations.Inputs2[] = [];
+const value: number = 1284.03;
+```
+
+### `boolean`
+
+```typescript
+const value: boolean = true;
 ```
 

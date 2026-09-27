@@ -22,7 +22,6 @@ import {
 import { OrqError } from "../models/errors/orqerror.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
@@ -30,11 +29,11 @@ import { Result } from "../types/fp.js";
  * Create a new API key
  *
  * @remarks
- * Mints a new API key in the workspace, bound to the single project in `projects` or to every project when omitted. The raw token is returned once in the `token` field and is never retrievable afterwards. Unknown body fields are rejected.
+ * Mints a new opaque API key (`sk-orq-<key_id>-<secret>`) in the workspace. The raw secret is returned ONCE in the response and is never retrievable afterwards. The stored record retains only `token_prefix` and a SHA-256 `token_hash`.
  */
 export function apiKeysCreate(
   client: OrqCore,
-  request: operations.ApiKeyCreateRequestBody,
+  request: components.CreateApiKeyRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
@@ -58,7 +57,7 @@ export function apiKeysCreate(
 
 async function $do(
   client: OrqCore,
-  request: operations.ApiKeyCreateRequestBody,
+  request: components.CreateApiKeyRequest,
   options?: RequestOptions,
 ): Promise<
   [
@@ -78,7 +77,7 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) => operations.ApiKeyCreateRequestBody$outboundSchema.parse(value),
+    (value) => components.CreateApiKeyRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -152,7 +151,7 @@ async function $do(
     | SDKValidationError
   >(
     M.json(200, components.ApiKeyRestResponse$inboundSchema),
-    M.fail([400, 401, 403, "4XX"]),
+    M.fail("4XX"),
     M.fail("5XX"),
   )(response, req);
   if (!result.ok) {
