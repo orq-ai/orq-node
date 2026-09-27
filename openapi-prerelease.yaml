@@ -2555,7 +2555,7 @@ components:
           properties:
             _id:
               type: "string"
-              default: "reasoning_01m3cfsbrdsksyhachyty6tg9c"
+              default: "reasoning_01m3j9jn56w4msah6j44as14q3"
               description: "Unique identifier for the part. Format: reasoning_{ulid} (e.g., reasoning_01hxyz...)"
               example: "reasoning_01hxyz123abc"
             kind:
@@ -9951,6 +9951,21 @@ components:
           type: "array"
           items:
             $ref: "#/components/schemas/TraceField"
+    ListTraceFiltersResponse:
+      type: "object"
+      properties:
+        evaluators:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/EvaluatorFilter"
+        metadata:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/MetadataFilter"
+        annotations:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/AnnotationFilter"
     QueryTracesRequest:
       required:
         - "from"
@@ -10097,6 +10112,37 @@ components:
           items:
             type: "string"
         enum_values:
+          type: "array"
+          items:
+            type: "string"
+    EvaluatorFilter:
+      type: "object"
+      properties:
+        id:
+          type: "string"
+        display_name:
+          type: "string"
+        type:
+          type: "string"
+        output_type:
+          type: "string"
+    MetadataFilter:
+      type: "object"
+      properties:
+        key:
+          type: "string"
+        type:
+          type: "string"
+    AnnotationFilter:
+      type: "object"
+      properties:
+        id:
+          type: "string"
+        display_name:
+          type: "string"
+        type:
+          type: "string"
+        option_values:
           type: "array"
           items:
             type: "string"
@@ -11289,6 +11335,41 @@ components:
         - "enabled"
         - "refId"
       type: "object"
+    ModelFusionConfig:
+      additionalProperties: false
+      properties:
+        feed_raw_to_synth:
+          type: "boolean"
+        id:
+          type: "string"
+        judge_model:
+          type: "string"
+        max_tool_calls:
+          format: "int64"
+          type: "integer"
+        orchestrator_model:
+          type: "string"
+        panel_models:
+          items:
+            type: "string"
+          type:
+            - "array"
+            - "null"
+        preset:
+          type: "string"
+        synthesis_mode:
+          type: "string"
+        web_tools:
+          type: "boolean"
+      required:
+        - "panel_models"
+        - "judge_model"
+        - "synthesis_mode"
+        - "preset"
+        - "web_tools"
+        - "max_tool_calls"
+        - "feed_raw_to_synth"
+      type: "object"
     ModelMetadata:
       additionalProperties: false
       properties:
@@ -11338,6 +11419,8 @@ components:
           type: "integer"
         function_tools_require_effort_none:
           type: "boolean"
+        fusion:
+          $ref: "#/components/schemas/ModelFusionConfig"
         generate_audio:
           type: "boolean"
         image_input_cost:
@@ -12440,8 +12523,10 @@ components:
           type: "string"
           description: "Current runtime status, maintained by the evaluation engine."
         last_triggered_at:
-          type: "string"
-          description: "Time when the alert last opened a trigger."
+          type:
+            - "string"
+            - "null"
+          description: "Time when the alert last opened a trigger. `null` until the alert first triggers."
           format: "date-time"
         recent_runs:
           type: "array"
@@ -12463,9 +12548,11 @@ components:
           type: "string"
           description: "User ID that last updated the alert."
         display:
-          allOf:
-            - $ref: "#/components/schemas/AlertDisplay"
-          description: "Display options for the alert activity chart."
+          description: "Display options for the alert activity chart. `null` when none are saved."
+          anyOf:
+            - allOf:
+                - $ref: "#/components/schemas/AlertDisplay"
+            - type: "null"
     AlertQuery:
       required:
         - "metric"
@@ -12596,8 +12683,10 @@ components:
           description: "Time when the threshold was first crossed."
           format: "date-time"
         resolved_at:
-          type: "string"
-          description: "Time when the value recovered. Unset while the trigger is open."
+          type:
+            - "string"
+            - "null"
+          description: "Time when the value recovered. `null` while the trigger is open."
           format: "date-time"
         peak_value:
           type: "number"
@@ -13458,6 +13547,29 @@ components:
           description: "Project that owns this environment."
         sharing:
           $ref: "#/components/schemas/Sharing"
+    SubmitFeedbackRequest:
+      required:
+        - "message"
+        - "category"
+      type: "object"
+      properties:
+        message:
+          type: "string"
+          description: "What happened, what was expected, and steps to reproduce. Do not include secrets."
+        category:
+          type: "string"
+        request_id:
+          type: "string"
+        url:
+          type: "string"
+    SubmitFeedbackResponse:
+      required:
+        - "feedback_id"
+      type: "object"
+      properties:
+        feedback_id:
+          type: "string"
+          description: "Reference included in the support email."
     ListFilesResponse:
       required:
         - "object"
@@ -15052,6 +15164,205 @@ components:
           items:
             type: "string"
           description: "Modalities this offering produces as output."
+    ModelFusionPreset:
+      type: "string"
+      enum:
+        - "MODEL_FUSION_PRESET_UNSPECIFIED"
+        - "MODEL_FUSION_PRESET_GENERAL"
+        - "MODEL_FUSION_PRESET_QUALITY"
+        - "MODEL_FUSION_PRESET_BUDGET"
+        - "MODEL_FUSION_PRESET_CODE"
+        - "MODEL_FUSION_PRESET_SAFETY"
+    ListModelFusionsResponse:
+      required:
+        - "object"
+        - "data"
+        - "has_more"
+      type: "object"
+      properties:
+        object:
+          type: "string"
+        data:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/ModelFusion"
+        has_more:
+          type: "boolean"
+    CreateModelFusionRequest:
+      required:
+        - "key"
+        - "panel_models"
+        - "judge_model"
+        - "synthesis_mode"
+        - "preset"
+      type: "object"
+      properties:
+        key:
+          type: "string"
+          description: "Required. Stable lowercase key containing letters, numbers, and hyphens."
+        panel_models:
+          type: "array"
+          items:
+            type: "string"
+          description: "Required. One to eight distinct chat/text model references in provider/model format."
+        judge_model:
+          type: "string"
+          description: "Required. Model reference used for strict structured judge output."
+        synthesis_mode:
+          $ref: "#/components/schemas/ModelFusionSynthesisMode"
+        preset:
+          $ref: "#/components/schemas/ModelFusionPreset"
+        orchestrator_model:
+          type: "string"
+          description: "Required for analysis mode and invalid for judge_writes_final mode."
+        web_tools:
+          type: "boolean"
+          description: "Optional. Defaults to true."
+        max_tool_calls:
+          type: "integer"
+          description: "Optional. Defaults to 8 and must be between 0 and 20. Zero disables Fusion-managed tool calls."
+          format: "int32"
+        feed_raw_to_synth:
+          type: "boolean"
+          description: "Optional. Defaults to true."
+    CreateModelFusionResponse:
+      required:
+        - "model_fusion"
+      type: "object"
+      properties:
+        model_fusion:
+          $ref: "#/components/schemas/ModelFusion"
+    GetModelFusionResponse:
+      required:
+        - "model_fusion"
+      type: "object"
+      properties:
+        model_fusion:
+          $ref: "#/components/schemas/ModelFusion"
+    UpdateModelFusionRequest:
+      required:
+        - "panel_models"
+        - "judge_model"
+        - "synthesis_mode"
+        - "preset"
+        - "web_tools"
+        - "max_tool_calls"
+        - "feed_raw_to_synth"
+      type: "object"
+      properties:
+        panel_models:
+          type: "array"
+          items:
+            type: "string"
+        judge_model:
+          type: "string"
+        synthesis_mode:
+          $ref: "#/components/schemas/ModelFusionSynthesisMode"
+        preset:
+          $ref: "#/components/schemas/ModelFusionPreset"
+        orchestrator_model:
+          type: "string"
+          description: "Required for analysis mode and omitted for judge_writes_final mode."
+        web_tools:
+          type: "boolean"
+        max_tool_calls:
+          type: "integer"
+          description: "Required. Must be between 0 and 20. Zero disables Fusion-managed tool calls."
+          format: "int32"
+        feed_raw_to_synth:
+          type: "boolean"
+    UpdateModelFusionResponse:
+      required:
+        - "model_fusion"
+      type: "object"
+      properties:
+        model_fusion:
+          $ref: "#/components/schemas/ModelFusion"
+    DeleteModelFusionResponse:
+      type: "object"
+      properties: {}
+    SetModelFusionEnabledRequest:
+      required:
+        - "enabled"
+      type: "object"
+      properties:
+        enabled:
+          type: "boolean"
+    SetModelFusionEnabledResponse:
+      required:
+        - "model_fusion"
+      type: "object"
+      properties:
+        model_fusion:
+          $ref: "#/components/schemas/ModelFusion"
+    ModelFusion:
+      required:
+        - "model_fusion_id"
+        - "key"
+        - "model_ref"
+        - "panel_models"
+        - "judge_model"
+        - "synthesis_mode"
+        - "preset"
+        - "web_tools"
+        - "max_tool_calls"
+        - "feed_raw_to_synth"
+        - "enabled"
+        - "created_at"
+        - "updated_at"
+      type: "object"
+      properties:
+        model_fusion_id:
+          type: "string"
+          description: "Unique Model Fusion identifier assigned by ORQ."
+        key:
+          type: "string"
+          description: "Stable lowercase key used in the gateway model reference."
+        model_ref:
+          type: "string"
+          description: "Workspace-qualified gateway model reference."
+        panel_models:
+          type: "array"
+          items:
+            type: "string"
+          description: "Distinct model references evaluated independently."
+        judge_model:
+          type: "string"
+          description: "Model reference used to judge anonymized panel answers."
+        synthesis_mode:
+          description: "Whether a separate orchestrator synthesizes the final answer or the judge writes it."
+          $ref: "#/components/schemas/ModelFusionSynthesisMode"
+        preset:
+          description: "Prompt preset applied to the panel, judge, and synthesis phases."
+          $ref: "#/components/schemas/ModelFusionPreset"
+        orchestrator_model:
+          type: "string"
+          description: "Required only for analysis mode; omitted when the judge writes the final answer."
+        web_tools:
+          type: "boolean"
+          description: "Whether the Fusion-managed ORQ web tools are available to panel and judge phases."
+        max_tool_calls:
+          type: "integer"
+          description: "Maximum Fusion-managed web tool calls per participating phase. Zero disables Fusion-managed tool calls."
+          format: "int32"
+        feed_raw_to_synth:
+          type: "boolean"
+          description: "Whether raw panel candidate answers are included in synthesis input."
+        enabled:
+          type: "boolean"
+          description: "Whether the Fusion is available to gateway requests."
+        created_at:
+          type: "string"
+          format: "date-time"
+        updated_at:
+          type: "string"
+          format: "date-time"
+    ModelFusionSynthesisMode:
+      type: "string"
+      enum:
+        - "MODEL_FUSION_SYNTHESIS_MODE_UNSPECIFIED"
+        - "MODEL_FUSION_SYNTHESIS_MODE_ANALYSIS"
+        - "MODEL_FUSION_SYNTHESIS_MODE_JUDGE_WRITES_FINAL"
     NotifierType:
       type: "string"
       enum:
@@ -32085,7 +32396,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01M3CFSBTNR3SKD8HMSTWE1MYS"
+                                          default: "01M3J9JN6X24GHWAFNN272N58C"
                                         name:
                                           type: "string"
                                         description:
@@ -33682,7 +33993,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01M3CFSBVJCVYXRWSGVYNV5HB9"
+                                          default: "01M3J9JN7M69EAC1E2ADYAQKQW"
                                         name:
                                           type: "string"
                                         description:
@@ -42578,7 +42889,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M3CFSBXEF4ZFR32YD0XSMFD9"
+                              default: "tool_01M3J9JN96KBCF0D488VD1HA8N"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -42679,7 +42990,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M3CFSBXF54MKT1P7RJGW335Y"
+                              default: "tool_01M3J9JN9700ZNRNM41VW2CS4H"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -42782,7 +43093,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M3CFSBXGYXRWJ7EA8VJJ2KSV"
+                              default: "tool_01M3J9JN97X77T9J5BXGRWPWZP"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -42926,7 +43237,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M3CFSBXH1AB8WZ1E4BJSVAAC"
+                              default: "tool_01M3J9JN988THBH0RVZBPTA4XG"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -43413,7 +43724,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M3CFSBXN70XAT8R9Z8YAGDX1"
+                        default: "tool_01M3J9JN9C9F790PF7AV5EMVNG"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -43514,7 +43825,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M3CFSBXPG06H5933EH5C2E78"
+                        default: "tool_01M3J9JN9DH977D61K2ZXTZPG4"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -43617,7 +43928,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M3CFSBXQ2H8YEHKXXQQDVS3X"
+                        default: "tool_01M3J9JN9D6CX734RNDNNHKANH"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -43761,7 +44072,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M3CFSBXRW4RZVG6YMNTNFA66"
+                        default: "tool_01M3J9JN9EY7CTV0HDS59V583W"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -44259,7 +44570,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M3CFSBXW7CW98K5QXSHJJR37"
+                        default: "tool_01M3J9JN9HA255ASV8TWZBR5NX"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -44360,7 +44671,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M3CFSBXY7B3GDTMN608H51QN"
+                        default: "tool_01M3J9JN9HRT680VX9X9AZAGHC"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -44463,7 +44774,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M3CFSBXZ440JEQS8F2B7XV67"
+                        default: "tool_01M3J9JN9JY82AZ7H48819MNEP"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -44607,7 +44918,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M3CFSBY1TKZGH81PKXMTNVYD"
+                        default: "tool_01M3J9JN9NCNA624C9AEK9CVD9"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -44768,7 +45079,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M3CFSBYBXWRHW7NG1AADKC0A"
+                        default: "tool_01M3J9JN9V597C68YFK7TWD70P"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -44869,7 +45180,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M3CFSBYC62MZTJ7NHAY22MS6"
+                        default: "tool_01M3J9JN9WQSSCYBVRXPJ00S1T"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -44972,7 +45283,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M3CFSBYDWHRHCVKFTFEGAXNF"
+                        default: "tool_01M3J9JN9W4DTJCQPW7S859JTD"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -45116,7 +45427,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M3CFSBYEPEK42D0B573AQP2J"
+                        default: "tool_01M3J9JN9X0CZ2QB38EKRW4VDH"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -51409,7 +51720,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-09-25T14:33:53.921Z"
+                      default: "2026-09-27T20:40:49.253Z"
                       deprecated: true
                       description: "Deprecated. The date and time the item was reviewed"
                     type:
@@ -51451,7 +51762,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-09-25T14:33:53.921Z"
+                      default: "2026-09-27T20:40:49.253Z"
                       deprecated: true
                       description: "Deprecated. The date and time the item was reviewed"
                     type:
@@ -51493,7 +51804,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-09-25T14:33:53.921Z"
+                      default: "2026-09-27T20:40:49.254Z"
                       deprecated: true
                       description: "Deprecated. The date and time the item was reviewed"
                     type:
@@ -51535,7 +51846,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-09-25T14:33:53.921Z"
+                      default: "2026-09-27T20:40:49.254Z"
                       deprecated: true
                       description: "Deprecated. The date and time the item was reviewed"
                     type:
@@ -51866,7 +52177,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-09-25T14:33:45.160Z"
+                          default: "2026-09-27T20:40:40.695Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -51874,7 +52185,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-09-25T14:33:45.161Z"
+                              default: "2026-09-27T20:40:40.695Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -51944,7 +52255,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-09-25T14:33:45.160Z"
+                          default: "2026-09-27T20:40:40.695Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -51952,7 +52263,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-09-25T14:33:45.161Z"
+                              default: "2026-09-27T20:40:40.695Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -52128,7 +52439,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-09-25T14:33:45.160Z"
+                        default: "2026-09-27T20:40:40.695Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -52136,7 +52447,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-09-25T14:33:45.161Z"
+                            default: "2026-09-27T20:40:40.695Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -52206,7 +52517,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-09-25T14:33:45.160Z"
+                        default: "2026-09-27T20:40:40.695Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -52214,7 +52525,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-09-25T14:33:45.161Z"
+                            default: "2026-09-27T20:40:40.695Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -52308,7 +52619,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-09-25T14:33:45.160Z"
+                        default: "2026-09-27T20:40:40.695Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -52316,7 +52627,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-09-25T14:33:45.161Z"
+                            default: "2026-09-27T20:40:40.695Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -52386,7 +52697,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-09-25T14:33:45.160Z"
+                        default: "2026-09-27T20:40:40.695Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -52394,7 +52705,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-09-25T14:33:45.161Z"
+                            default: "2026-09-27T20:40:40.695Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -52578,7 +52889,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-09-25T14:33:45.160Z"
+                        default: "2026-09-27T20:40:40.695Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -52586,7 +52897,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-09-25T14:33:45.161Z"
+                            default: "2026-09-27T20:40:40.695Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -52656,7 +52967,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-09-25T14:33:45.160Z"
+                        default: "2026-09-27T20:40:40.695Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -52664,7 +52975,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-09-25T14:33:45.161Z"
+                            default: "2026-09-27T20:40:40.695Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -59180,6 +59491,30 @@ paths:
       x-speakeasy-name-override: "list_fields"
       security:
         - ApiKey: []
+  /v3/traces/filters:
+    get:
+      tags:
+        - "Traces"
+      summary: "List trace filters"
+      description: "List the evaluators, human reviews and metadata keys a trace filter can address."
+      operationId: "TracesListFilters"
+      parameters:
+        - name: "include_all"
+          in: "query"
+          description: "Every evaluator and human review in the workspace, not only recent ones."
+          schema:
+            type: "boolean"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListTraceFiltersResponse"
+      x-speakeasy-group: "traces"
+      x-speakeasy-name-override: "list_filters"
+      security:
+        - ApiKey: []
   /v3/traces/query:
     post:
       tags:
@@ -62885,6 +63220,32 @@ paths:
           source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({ apiKey: process.env.ORQ_API_KEY });\nconst result = await client.environments.update({\n  environmentId: 'env_01jz2r3s4t5v6w7x8y9z0abcde',\n  displayName: 'Production EU',\n});\nconsole.log(result.environment);\n"
       security:
         - ApiKey: []
+  /v3/submit-feedback:
+    post:
+      tags: []
+      summary: "Submit feedback"
+      description: "Report problems or request features for Orq.ai APIs, MCP tools, SDKs, and documentation."
+      operationId: "SubmitFeedback"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SubmitFeedbackRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SubmitFeedbackResponse"
+      x-speakeasy-group: "feedback"
+      x-speakeasy-name-override: "submit"
+      x-code-samples:
+        - lang: "TypeScript"
+          source: "import { Orq } from '@orq-ai/node';\nconst orq = new Orq({ apiKey: process.env.ORQ_API_KEY });\nawait orq.feedback.submit({ category: 'bug', message: 'The MCP tool returned an unexpected error.', requestId: 'req_example' });\n"
+      security:
+        - ApiKey: []
   /v2/files:
     get:
       tags:
@@ -64680,6 +65041,181 @@ paths:
         - lang: "typescript"
           label: "Node.js - Retrieve a model catalog entry"
           source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\nconst result = await client.modelCatalog.get({\n  id: 'openai/gpt-4o',\n});\n\nconsole.log(result.model.name, result.model.pricing);\n"
+      security:
+        - ApiKey: []
+  /v3/model-fusions:
+    get:
+      tags:
+        - "Model Fusions"
+      summary: "List Model Fusions"
+      description: "Returns Model Fusions in the caller's workspace, ordered newest first. Supports cursor pagination, key search, preset filtering, and enabled-state filtering."
+      operationId: "ModelFusionList"
+      parameters:
+        - name: "limit"
+          in: "query"
+          schema:
+            type: "integer"
+            format: "int32"
+        - name: "starting_after"
+          in: "query"
+          schema:
+            type: "string"
+        - name: "ending_before"
+          in: "query"
+          schema:
+            type: "string"
+        - name: "search"
+          in: "query"
+          schema:
+            type: "string"
+        - name: "preset"
+          in: "query"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/components/schemas/ModelFusionPreset"
+        - name: "enabled"
+          in: "query"
+          schema:
+            type: "boolean"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListModelFusionsResponse"
+      x-speakeasy-group: "modelFusions"
+      x-speakeasy-name-override: "list"
+      security:
+        - ApiKey: []
+    post:
+      tags:
+        - "Model Fusions"
+      summary: "Create a Model Fusion"
+      description: "Creates a workspace Model Fusion virtual model. The key becomes the stable model identifier used by gateway requests."
+      operationId: "ModelFusionCreate"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateModelFusionRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreateModelFusionResponse"
+      x-speakeasy-group: "modelFusions"
+      x-speakeasy-name-override: "create"
+      security:
+        - ApiKey: []
+  /v3/model-fusions/{model_fusion_id}:
+    get:
+      tags:
+        - "Model Fusions"
+      summary: "Retrieve a Model Fusion"
+      description: "Retrieves a Model Fusion by ID within the caller's workspace."
+      operationId: "ModelFusionGet"
+      parameters:
+        - name: "model_fusion_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetModelFusionResponse"
+      x-speakeasy-group: "modelFusions"
+      x-speakeasy-name-override: "get"
+      security:
+        - ApiKey: []
+    put:
+      tags:
+        - "Model Fusions"
+      summary: "Replace a Model Fusion configuration"
+      description: "Replaces the complete Fusion configuration. The key is immutable."
+      operationId: "ModelFusionUpdate"
+      parameters:
+        - name: "model_fusion_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateModelFusionRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UpdateModelFusionResponse"
+      x-speakeasy-group: "modelFusions"
+      x-speakeasy-name-override: "update"
+      security:
+        - ApiKey: []
+    delete:
+      tags:
+        - "Model Fusions"
+      summary: "Delete a Model Fusion"
+      description: "Permanently deletes a Model Fusion and removes its gateway model configuration."
+      operationId: "ModelFusionDelete"
+      parameters:
+        - name: "model_fusion_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeleteModelFusionResponse"
+      x-speakeasy-group: "modelFusions"
+      x-speakeasy-name-override: "delete"
+      security:
+        - ApiKey: []
+  /v3/model-fusions/{model_fusion_id}/enabled:
+    post:
+      tags:
+        - "Model Fusions"
+      summary: "Enable or disable a Model Fusion"
+      description: "Controls whether a Model Fusion is available to gateway requests in the workspace."
+      operationId: "ModelFusionSetEnabled"
+      parameters:
+        - name: "model_fusion_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SetModelFusionEnabledRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SetModelFusionEnabledResponse"
+      x-speakeasy-group: "modelFusions"
+      x-speakeasy-name-override: "setEnabled"
       security:
         - ApiKey: []
   /v2/notifiers:
@@ -69217,6 +69753,8 @@ tags:
     description: "Register upstream MCP servers, discover and sync their tools, and assemble gateways that expose a curated tool surface to MCP clients."
   - name: "Model Catalog"
     description: "Browse the orq.ai model catalog: every model orq offers, across every provider, with pricing, capabilities and benchmark data. List endpoints only return models that are not deprecated. This API is public, requires no authentication, and is rate limited to 120 requests per minute per IP. Responses carry a 5-minute cache-control max-age."
+  - name: "Model Fusions"
+    description: "Model Fusions combine independent model answers through a panel, judge, and optional synthesizer."
   - name: "Notifiers"
     description: "Notifier destinations used to send delivery and workflow notifications."
   - name: "Projects"
