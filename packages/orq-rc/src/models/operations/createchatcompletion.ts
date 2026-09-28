@@ -1247,7 +1247,7 @@ export type FilterBy1 =
   | CreateChatCompletion1Nin;
 
 /**
- * The metadata filter to apply to the search. Check the [Searching a Knowledge Base](https://docs.orq.ai/docs/ai-studio/ai-engineering/knowledge-bases#search-a-knowledge-base) for more information.
+ * The metadata filter to apply to the search. Check the [Searching a Knowledge Base](https://docs.orq.ai/ai-studio/ai-engineering/knowledge-bases#search-a-knowledge-base) for more information.
  */
 export type FilterBy = FilterByAnd | FilterByOr | {
   [k: string]:
@@ -1284,7 +1284,7 @@ export type SearchOptions = {
  */
 export type RerankConfig = {
   /**
-   * The name of the rerank model to use. Refer to the [model list](https://docs.orq.ai/docs/ai-gateway/supported-models#rerank-models).
+   * The name of the rerank model to use. Refer to the [model list](https://docs.orq.ai/ai-gateway/supported-models#rerank-models).
    */
   model: string;
   /**
@@ -1302,7 +1302,7 @@ export type RerankConfig = {
  */
 export type AgenticRagConfig = {
   /**
-   * The name of the model for the Agent to use. Refer to the [model list](https://docs.orq.ai/docs/ai-gateway/supported-models#chat-models).
+   * The name of the model for the Agent to use. Refer to the [model list](https://docs.orq.ai/ai-gateway/supported-models#chat-models).
    */
   model: string;
 };
@@ -1321,7 +1321,7 @@ export type CreateChatCompletionKnowledgeBases = {
    */
   searchType?: SearchType | null | undefined;
   /**
-   * The metadata filter to apply to the search. Check the [Searching a Knowledge Base](https://docs.orq.ai/docs/ai-studio/ai-engineering/knowledge-bases#search-a-knowledge-base) for more information.
+   * The metadata filter to apply to the search. Check the [Searching a Knowledge Base](https://docs.orq.ai/ai-studio/ai-engineering/knowledge-bases#search-a-knowledge-base) for more information.
    */
   filterBy?: FilterByAnd | FilterByOr | {
     [k: string]:
@@ -1467,7 +1467,7 @@ export type CreateChatCompletionRequestBody = {
     | CreateChatCompletionMessagesToolMessage
   >;
   /**
-   * Model ID used to generate the response, like `openai/gpt-5.6-sol` or `anthropic/claude-sonnet-5`. The AI Gateway offers a wide range of models with different capabilities, performance characteristics, and price points. Refer to the [Supported models](/docs/ai-gateway/supported-models) to browse available models.
+   * Model ID used to generate the response, like `openai/gpt-5.6-sol` or `anthropic/claude-sonnet-5`. The AI Gateway offers a wide range of models with different capabilities, performance characteristics, and price points. Refer to the [Supported models](/ai-gateway/supported-models) to browse available models.
    */
   model: string;
   /**

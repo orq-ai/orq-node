@@ -1,11 +1,11 @@
-# InternalRetrievalConfig
+# RetrievalConfig
 
 ## Example Usage
 
 ```typescript
-import { InternalRetrievalConfig } from "@orq-ai/node/models/components";
+import { RetrievalConfig } from "@orq-ai/node/models/components";
 
-let value: InternalRetrievalConfig = {};
+let value: RetrievalConfig = {};
 ```
 
 ## Fields

@@ -9,7 +9,7 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { RerankConfig, RerankConfig$inboundSchema } from "./rerankconfig.js";
 
-export type InternalRetrievalConfig = {
+export type RetrievalConfig = {
   type?: string | undefined;
   topK?: number | undefined;
   threshold?: number | undefined;
@@ -17,8 +17,8 @@ export type InternalRetrievalConfig = {
 };
 
 /** @internal */
-export const InternalRetrievalConfig$inboundSchema: z.ZodType<
-  InternalRetrievalConfig,
+export const RetrievalConfig$inboundSchema: z.ZodType<
+  RetrievalConfig,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -33,12 +33,12 @@ export const InternalRetrievalConfig$inboundSchema: z.ZodType<
   });
 });
 
-export function internalRetrievalConfigFromJSON(
+export function retrievalConfigFromJSON(
   jsonString: string,
-): SafeParseResult<InternalRetrievalConfig, SDKValidationError> {
+): SafeParseResult<RetrievalConfig, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => InternalRetrievalConfig$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'InternalRetrievalConfig' from JSON`,
+    (x) => RetrievalConfig$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RetrievalConfig' from JSON`,
   );
 }

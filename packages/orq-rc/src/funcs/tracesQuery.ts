@@ -29,7 +29,7 @@ import { Result } from "../types/fp.js";
  * Query traces with OQL
  *
  * @remarks
- * Run an OQL trace query. OQL is validated against the trace field registry and compiled through the trace planner.
+ * Run an OQL trace query over a time range. OQL selects the traces to return.
  */
 export function tracesQuery(
   client: OrqCore,

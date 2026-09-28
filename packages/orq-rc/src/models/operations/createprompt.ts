@@ -810,7 +810,7 @@ export type PromptInput = {
     | CreatePromptMessagesToolMessage
   >;
   /**
-   * Model ID used to generate the response, like `openai/gpt-5.6-sol` or `anthropic/claude-sonnet-5`. For private models, use format: `{workspaceKey}@{provider}/{model}`. The full list of models can be found at https://docs.orq.ai/docs/ai-gateway/supported-models. Only chat models are supported.
+   * Model ID used to generate the response, like `openai/gpt-5.6-sol` or `anthropic/claude-sonnet-5`. For private models, use format: `{workspaceKey}@{provider}/{model}`. The full list of models can be found at https://docs.orq.ai/ai-gateway/supported-models. Only chat models are supported.
    */
   model?: string | undefined;
   /**

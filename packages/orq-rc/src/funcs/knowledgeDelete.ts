@@ -27,7 +27,7 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Deletes a knowledge
+ * Delete a knowledge base
  *
  * @remarks
  * Deletes a knowledge base. Deleting a knowledge base will delete all the datasources and chunks associated with it.

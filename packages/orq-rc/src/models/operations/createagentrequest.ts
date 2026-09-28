@@ -2403,7 +2403,7 @@ export type CreateAgentRequestFallbackModelConfiguration =
 
 export type Model = {
   /**
-   * The database ID of the primary model
+   * ID of the primary model, in provider/model-id format (for example `openai/gpt-5.6-sol`)
    */
   id: string;
   /**

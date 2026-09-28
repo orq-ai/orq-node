@@ -7,10 +7,10 @@ import { remap as remap$ } from "../../lib/primitives.js";
 
 export type SkillListRequest = {
   /**
-   * Page size, 1–200. Unset uses the server default (25); explicit 0
+   * Page size, 1–200. Unset uses the server default (25). Values outside
    *
    * @remarks
-   *  (or anything outside the range) is rejected by buf.validate.
+   *  the range, including 0, are rejected.
    */
   limit?: number | undefined;
   /**

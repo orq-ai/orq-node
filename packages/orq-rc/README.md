@@ -379,15 +379,15 @@ run();
 ### [Knowledge](docs/sdks/knowledge/README.md)
 
 * [list](docs/sdks/knowledge/README.md#list) - List all knowledge bases
-* [create](docs/sdks/knowledge/README.md#create) - Create a knowledge
-* [retrieve](docs/sdks/knowledge/README.md#retrieve) - Retrieves a knowledge base
-* [delete](docs/sdks/knowledge/README.md#delete) - Deletes a knowledge
-* [update](docs/sdks/knowledge/README.md#update) - Updates a knowledge
+* [create](docs/sdks/knowledge/README.md#create) - Create a knowledge base
+* [retrieve](docs/sdks/knowledge/README.md#retrieve) - Retrieve a knowledge base
+* [delete](docs/sdks/knowledge/README.md#delete) - Delete a knowledge base
+* [update](docs/sdks/knowledge/README.md#update) - Update a knowledge base
 * [listDatasources](docs/sdks/knowledge/README.md#listdatasources) - List all datasources
 * [createDatasource](docs/sdks/knowledge/README.md#createdatasource) - Create a new datasource
 * [previewChunks](docs/sdks/knowledge/README.md#previewchunks) - Preview datasource chunks
 * [retrieveDatasource](docs/sdks/knowledge/README.md#retrievedatasource) - Retrieve a datasource
-* [deleteDatasource](docs/sdks/knowledge/README.md#deletedatasource) - Deletes a datasource
+* [deleteDatasource](docs/sdks/knowledge/README.md#deletedatasource) - Delete a datasource
 * [updateDatasource](docs/sdks/knowledge/README.md#updatedatasource) - Update a datasource
 * [listChunks](docs/sdks/knowledge/README.md#listchunks) - List all chunks for a datasource
 * [createChunks](docs/sdks/knowledge/README.md#createchunks) - Create chunks for a datasource
@@ -843,27 +843,27 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`identitiesList`](docs/sdks/identities/README.md#list) - List identities
 - [`identitiesRetrieve`](docs/sdks/identities/README.md#retrieve) - Retrieve an identity
 - [`identitiesUpdate`](docs/sdks/identities/README.md#update) - Update an identity
-- [`knowledgeCreate`](docs/sdks/knowledge/README.md#create) - Create a knowledge
+- [`knowledgeCreate`](docs/sdks/knowledge/README.md#create) - Create a knowledge base
 - [`knowledgeCreateChunks`](docs/sdks/knowledge/README.md#createchunks) - Create chunks for a datasource
 - [`knowledgeCreateDatasource`](docs/sdks/knowledge/README.md#createdatasource) - Create a new datasource
-- [`knowledgeDelete`](docs/sdks/knowledge/README.md#delete) - Deletes a knowledge
+- [`knowledgeDelete`](docs/sdks/knowledge/README.md#delete) - Delete a knowledge base
 - [`knowledgeDeleteChunk`](docs/sdks/knowledge/README.md#deletechunk) - Delete a chunk
 - [`knowledgeDeleteChunks`](docs/sdks/knowledge/README.md#deletechunks) - Delete multiple chunks
-- [`knowledgeDeleteDatasource`](docs/sdks/knowledge/README.md#deletedatasource) - Deletes a datasource
+- [`knowledgeDeleteDatasource`](docs/sdks/knowledge/README.md#deletedatasource) - Delete a datasource
 - [`knowledgeGetChunksCount`](docs/sdks/knowledge/README.md#getchunkscount) - Get chunks total count
 - [`knowledgeList`](docs/sdks/knowledge/README.md#list) - List all knowledge bases
 - [`knowledgeListChunks`](docs/sdks/knowledge/README.md#listchunks) - List all chunks for a datasource
 - [`knowledgeListChunksPaginated`](docs/sdks/knowledge/README.md#listchunkspaginated) - List chunks with offset-based pagination
 - [`knowledgeListDatasources`](docs/sdks/knowledge/README.md#listdatasources) - List all datasources
 - [`knowledgePreviewChunks`](docs/sdks/knowledge/README.md#previewchunks) - Preview datasource chunks
-- [`knowledgeRetrieve`](docs/sdks/knowledge/README.md#retrieve) - Retrieves a knowledge base
+- [`knowledgeRetrieve`](docs/sdks/knowledge/README.md#retrieve) - Retrieve a knowledge base
 - [`knowledgeRetrieveChunk`](docs/sdks/knowledge/README.md#retrievechunk) - Retrieve a chunk
 - [`knowledgeRetrieveDatasource`](docs/sdks/knowledge/README.md#retrievedatasource) - Retrieve a datasource
 - [`knowledgeRetrieveFileUrl`](docs/sdks/knowledge/README.md#retrievefileurl) - Retrieve a file upload URL
 - [`knowledgeRetrieveProcessingStatus`](docs/sdks/knowledge/README.md#retrieveprocessingstatus) - Retrieve datasource processing status
 - [`knowledgeSearch`](docs/sdks/knowledge/README.md#search) - Search knowledge base
 - [`knowledgeToggleChunk`](docs/sdks/knowledge/README.md#togglechunk) - Set a chunk's enabled status
-- [`knowledgeUpdate`](docs/sdks/knowledge/README.md#update) - Updates a knowledge
+- [`knowledgeUpdate`](docs/sdks/knowledge/README.md#update) - Update a knowledge base
 - [`knowledgeUpdateChunk`](docs/sdks/knowledge/README.md#updatechunk) - Update a chunk
 - [`knowledgeUpdateDatasource`](docs/sdks/knowledge/README.md#updatedatasource) - Update a datasource
 - [`logsAggregate`](docs/sdks/logs/README.md#aggregate) - Aggregate logs

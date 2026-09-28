@@ -39,7 +39,7 @@ export type Sharing = {
    * Consuming projects may pin a specific version instead of tracking
    *
    * @remarks
-   *  latest. Enforcement lives with the consuming reference.
+   *  the latest version.
    */
   allowVersionPin?: boolean | undefined;
   /**
@@ -53,8 +53,7 @@ export type Sharing = {
    * New projects created after this sharing config is applied should
    *
    * @remarks
-   *  receive access automatically. Enforcement lives with project
-   *  creation and entity-specific adoption code.
+   *  receive access automatically.
    */
   autoGrantNewProjects?: boolean | undefined;
 };

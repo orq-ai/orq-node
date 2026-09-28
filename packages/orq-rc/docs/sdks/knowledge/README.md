@@ -5,15 +5,15 @@
 ### Available Operations
 
 * [list](#list) - List all knowledge bases
-* [create](#create) - Create a knowledge
-* [retrieve](#retrieve) - Retrieves a knowledge base
-* [delete](#delete) - Deletes a knowledge
-* [update](#update) - Updates a knowledge
+* [create](#create) - Create a knowledge base
+* [retrieve](#retrieve) - Retrieve a knowledge base
+* [delete](#delete) - Delete a knowledge base
+* [update](#update) - Update a knowledge base
 * [listDatasources](#listdatasources) - List all datasources
 * [createDatasource](#createdatasource) - Create a new datasource
 * [previewChunks](#previewchunks) - Preview datasource chunks
 * [retrieveDatasource](#retrievedatasource) - Retrieve a datasource
-* [deleteDatasource](#deletedatasource) - Deletes a datasource
+* [deleteDatasource](#deletedatasource) - Delete a datasource
 * [updateDatasource](#updatedatasource) - Update a datasource
 * [listChunks](#listchunks) - List all chunks for a datasource
 * [createChunks](#createchunks) - Create chunks for a datasource

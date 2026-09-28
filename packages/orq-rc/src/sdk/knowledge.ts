@@ -49,7 +49,7 @@ export class Knowledge extends ClientSDK {
   }
 
   /**
-   * Create a knowledge
+   * Create a knowledge base
    *
    * @remarks
    * Creates an internal or external knowledge base. Internal knowledge bases embed and index uploaded content; external knowledge bases query the configured external retrieval API.
@@ -66,7 +66,7 @@ export class Knowledge extends ClientSDK {
   }
 
   /**
-   * Retrieves a knowledge base
+   * Retrieve a knowledge base
    *
    * @remarks
    * Retrieve a knowledge base with the settings.
@@ -83,7 +83,7 @@ export class Knowledge extends ClientSDK {
   }
 
   /**
-   * Deletes a knowledge
+   * Delete a knowledge base
    *
    * @remarks
    * Deletes a knowledge base. Deleting a knowledge base will delete all the datasources and chunks associated with it.
@@ -100,7 +100,7 @@ export class Knowledge extends ClientSDK {
   }
 
   /**
-   * Updates a knowledge
+   * Update a knowledge base
    *
    * @remarks
    * Updates a knowledge base. Omitted optional fields retain their current values.
@@ -185,7 +185,7 @@ export class Knowledge extends ClientSDK {
   }
 
   /**
-   * Deletes a datasource
+   * Delete a datasource
    *
    * @remarks
    * Deletes a datasource from a knowledge base. Deleting a datasource will remove it from the knowledge base and all associated chunks. This action is irreversible and cannot be undone.

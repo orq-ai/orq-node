@@ -19,12 +19,10 @@ export type BudgetLimitsRestResponse = {
   period?: BudgetPeriod | undefined;
   amount?: number | undefined;
   /**
-   * Token ceiling. Carried as a double so it serializes as a JSON number
+   * Token ceiling for the budget period. Token counts are whole numbers
    *
    * @remarks
-   *  (proto int64 would serialize as a quoted string); token counts are
-   *  whole and well within double's exact-integer range (2^53). Stored as
-   *  an integer server-side.
+   *  and stored as integers.
    */
   tokenLimit?: number | undefined;
 };

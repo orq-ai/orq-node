@@ -27,7 +27,7 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Updates a knowledge
+ * Update a knowledge base
  *
  * @remarks
  * Updates a knowledge base. Omitted optional fields retain their current values.
