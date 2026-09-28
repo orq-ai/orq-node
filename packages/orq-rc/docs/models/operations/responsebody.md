@@ -1,30 +1,39 @@
 # ResponseBody
 
-## Example Usage
+
+## Supported Types
+
+### `operations.GetV2HumanEvalSetsResponseBody1`
 
 ```typescript
-import { ResponseBody } from "@orq-ai/node/models/operations";
-
-let value: ResponseBody = {
+const value: operations.GetV2HumanEvalSetsResponseBody1 = {
   id: "<id>",
+  displayName: "Kurtis_Schoen",
+  humanEvalIds: [
+    "<id 1>",
+    "<id 2>",
+  ],
   workspaceId: "<id>",
-  datasetId: "<id>",
+  filterType: "span_type",
+  filterValues: [
+    "<value 1>",
+  ],
 };
 ```
 
-## Fields
+### `operations.GetV2HumanEvalSetsResponseBody2`
 
-| Field                                                                                                                                          | Type                                                                                                                                           | Required                                                                                                                                       | Description                                                                                                                                    |
-| ---------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
-| `id`                                                                                                                                           | *string*                                                                                                                                       | :heavy_check_mark:                                                                                                                             | The unique identifier of the dataset item                                                                                                      |
-| `workspaceId`                                                                                                                                  | *string*                                                                                                                                       | :heavy_check_mark:                                                                                                                             | The unique identifier of the workspace it belongs to                                                                                           |
-| `inputs`                                                                                                                                       | Record<string, *any*>                                                                                                                          | :heavy_minus_sign:                                                                                                                             | The inputs of the dataset. Key value pairs where the key is the input name and the value is the input value. Nested objects are not supported. |
-| `messages`                                                                                                                                     | *operations.CreateDatasetItemDatasetsMessages*[]                                                                                               | :heavy_minus_sign:                                                                                                                             | A list of messages comprising the conversation so far                                                                                          |
-| `expectedOutput`                                                                                                                               | *string*                                                                                                                                       | :heavy_minus_sign:                                                                                                                             | N/A                                                                                                                                            |
-| `evaluations`                                                                                                                                  | *operations.Evaluations*[]                                                                                                                     | :heavy_minus_sign:                                                                                                                             | Evaluations associated with the datapoint                                                                                                      |
-| `datasetId`                                                                                                                                    | *string*                                                                                                                                       | :heavy_check_mark:                                                                                                                             | The unique identifier of the dataset                                                                                                           |
-| `snapshotVersion`                                                                                                                              | *string*                                                                                                                                       | :heavy_minus_sign:                                                                                                                             | The version of the dataset snapshot                                                                                                            |
-| `createdById`                                                                                                                                  | *string*                                                                                                                                       | :heavy_minus_sign:                                                                                                                             | The unique identifier of the user who created the dataset                                                                                      |
-| `updatedById`                                                                                                                                  | *string*                                                                                                                                       | :heavy_minus_sign:                                                                                                                             | The unique identifier of the user who last updated the dataset                                                                                 |
-| `created`                                                                                                                                      | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)                                                  | :heavy_minus_sign:                                                                                                                             | The date and time the resource was created                                                                                                     |
-| `updated`                                                                                                                                      | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)                                                  | :heavy_minus_sign:                                                                                                                             | The date and time the resource was last updated                                                                                                |
+```typescript
+const value: operations.GetV2HumanEvalSetsResponseBody2 = {
+  id: "<id>",
+  displayName: "Emmet35",
+  humanEvalIds: [
+    "<id 1>",
+    "<id 2>",
+  ],
+  workspaceId: "<id>",
+  filterType: "name",
+  filterValue: "<value>",
+};
+```
+

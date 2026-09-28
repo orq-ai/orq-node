@@ -75,9 +75,9 @@ export type AlertTrigger = {
    */
   openedAt: Date;
   /**
-   * Time when the value recovered. Unset while the trigger is open.
+   * Time when the value recovered. `null` while the trigger is open.
    */
-  resolvedAt?: Date | undefined;
+  resolvedAt?: Date | null | undefined;
   /**
    * Worst observed value while the trigger was open.
    */
@@ -119,8 +119,9 @@ export const AlertTrigger$inboundSchema: z.ZodType<
   severity: AlertTriggerSeverity$inboundSchema.optional(),
   peak_severity: PeakSeverity$inboundSchema.optional(),
   opened_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  resolved_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
+  resolved_at: z.nullable(
+    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  ).optional(),
   peak_value: z.number(),
   last_value: z.number(),
   event_count: z.number().int(),

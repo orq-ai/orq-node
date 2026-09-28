@@ -334,7 +334,7 @@ export type StreamRunAgentModelConfigurationCacheControl = {
 };
 
 /**
- * Model behavior parameters that control how the model generates responses. Common parameters: `temperature` (0-1, randomness), `max_completion_tokens` (max output length), `top_p` (sampling diversity). Advanced: `frequency_penalty`, `presence_penalty`, `response_format` (JSON/structured), `reasoning_effort`, `seed` (reproducibility). Support varies by model - consult AI Gateway documentation.
+ * Model behavior parameters that control how the model generates responses. Common parameters: `temperature` (0-2, randomness; the selected model may impose a lower maximum), `max_completion_tokens` (max output length), `top_p` (sampling diversity). Advanced: `frequency_penalty`, `presence_penalty`, `response_format` (JSON/structured), `reasoning_effort`, `seed` (reproducibility). Support varies by model - consult AI Gateway documentation.
  */
 export type StreamRunAgentModelConfigurationParameters = {
   /**
@@ -494,7 +494,7 @@ export type StreamRunAgentModelConfiguration2 = {
    */
   id: string;
   /**
-   * Model behavior parameters that control how the model generates responses. Common parameters: `temperature` (0-1, randomness), `max_completion_tokens` (max output length), `top_p` (sampling diversity). Advanced: `frequency_penalty`, `presence_penalty`, `response_format` (JSON/structured), `reasoning_effort`, `seed` (reproducibility). Support varies by model - consult AI Gateway documentation.
+   * Model behavior parameters that control how the model generates responses. Common parameters: `temperature` (0-2, randomness; the selected model may impose a lower maximum), `max_completion_tokens` (max output length), `top_p` (sampling diversity). Advanced: `frequency_penalty`, `presence_penalty`, `response_format` (JSON/structured), `reasoning_effort`, `seed` (reproducibility). Support varies by model - consult AI Gateway documentation.
    */
   parameters?: StreamRunAgentModelConfigurationParameters | undefined;
   /**
@@ -3949,7 +3949,7 @@ export const AgentToolInputRunTools$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AgentToolInputRunTools
 > = z.object({
-  id: z.string().default("01M3JB73T97YFKHWNWJ4SM1G67"),
+  id: z.string().default("01M3JZR7FY2TNB100X820Z14BZ"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() =>

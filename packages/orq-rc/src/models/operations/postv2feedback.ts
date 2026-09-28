@@ -12,7 +12,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 /**
  * The feedback value. For single selection of multiple choice, the value should be an array of strings. For `correction`, the value should be a string.
  */
-export type PostV2FeedbackValue = string | number | Array<string>;
+export type Value = string | number | Array<string>;
 
 export const PostV2FeedbackProduct = {
   Remoteconfigs: "remoteconfigs",
@@ -59,7 +59,7 @@ export type PostV2FeedbackRequestBody = {
 /**
  * The feedback value. For single selection of multiple choice, the value should be an array of strings. For `correction`, the value should be a string.
  */
-export type PostV2FeedbackFeedbackValue = string | number | Array<string>;
+export type PostV2FeedbackValue = string | number | Array<string>;
 
 export const PostV2FeedbackFeedbackProduct = {
   Remoteconfigs: "remoteconfigs",
@@ -109,21 +109,17 @@ export type PostV2FeedbackResponseBody = {
 };
 
 /** @internal */
-export type PostV2FeedbackValue$Outbound = string | number | Array<string>;
+export type Value$Outbound = string | number | Array<string>;
 
 /** @internal */
-export const PostV2FeedbackValue$outboundSchema: z.ZodType<
-  PostV2FeedbackValue$Outbound,
+export const Value$outboundSchema: z.ZodType<
+  Value$Outbound,
   z.ZodTypeDef,
-  PostV2FeedbackValue
+  Value
 > = z.union([z.string(), z.number(), z.array(z.string())]);
 
-export function postV2FeedbackValueToJSON(
-  postV2FeedbackValue: PostV2FeedbackValue,
-): string {
-  return JSON.stringify(
-    PostV2FeedbackValue$outboundSchema.parse(postV2FeedbackValue),
-  );
+export function valueToJSON(value: Value): string {
+  return JSON.stringify(Value$outboundSchema.parse(value));
 }
 
 /** @internal */
@@ -167,19 +163,19 @@ export function postV2FeedbackRequestBodyToJSON(
 }
 
 /** @internal */
-export const PostV2FeedbackFeedbackValue$inboundSchema: z.ZodType<
-  PostV2FeedbackFeedbackValue,
+export const PostV2FeedbackValue$inboundSchema: z.ZodType<
+  PostV2FeedbackValue,
   z.ZodTypeDef,
   unknown
 > = z.union([z.string(), z.number(), z.array(z.string())]);
 
-export function postV2FeedbackFeedbackValueFromJSON(
+export function postV2FeedbackValueFromJSON(
   jsonString: string,
-): SafeParseResult<PostV2FeedbackFeedbackValue, SDKValidationError> {
+): SafeParseResult<PostV2FeedbackValue, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => PostV2FeedbackFeedbackValue$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PostV2FeedbackFeedbackValue' from JSON`,
+    (x) => PostV2FeedbackValue$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostV2FeedbackValue' from JSON`,
   );
 }
 

@@ -74,14 +74,14 @@ export type RetrieveAgentRequestEngine = ClosedEnum<
 >;
 
 /**
- * Agent type: internal (Orquesta-managed) or a2a (external A2A-compliant)
+ * Agent type: internal (orq.ai-managed) or a2a (external A2A-compliant)
  */
 export const RetrieveAgentRequestType = {
   Internal: "internal",
   A2a: "a2a",
 } as const;
 /**
- * Agent type: internal (Orquesta-managed) or a2a (external A2A-compliant)
+ * Agent type: internal (orq.ai-managed) or a2a (external A2A-compliant)
  */
 export type RetrieveAgentRequestType = ClosedEnum<
   typeof RetrieveAgentRequestType
@@ -572,7 +572,7 @@ export type RetrieveAgentRequestCacheControl = {
 };
 
 /**
- * Model behavior parameters (snake_case) stored as part of the agent configuration. These become the default parameters used when the agent is executed. Commonly used: temperature (0-1, controls randomness), max_completion_tokens (response length), top_p (nucleus sampling). Advanced: frequency_penalty, presence_penalty, response_format (JSON/structured output), reasoning_effort (for o1/thinking models), seed (reproducibility), stop sequences. Model-specific support varies. Runtime parameters in agent execution requests can override these defaults.
+ * Model behavior parameters (snake_case) stored as part of the agent configuration. These become the default parameters used when the agent is executed. Commonly used: temperature (0-2, controls randomness; the selected model may impose a lower maximum), max_completion_tokens (response length), top_p (nucleus sampling). Advanced: frequency_penalty, presence_penalty, response_format (JSON/structured output), reasoning_effort (for o1/thinking models), seed (reproducibility), stop sequences. Model-specific support varies. Runtime parameters in agent execution requests can override these defaults.
  */
 export type RetrieveAgentRequestParameters = {
   /**
@@ -1240,7 +1240,7 @@ export type RetrieveAgentRequestModel = {
    */
   integrationId?: string | null | undefined;
   /**
-   * Model behavior parameters (snake_case) stored as part of the agent configuration. These become the default parameters used when the agent is executed. Commonly used: temperature (0-1, controls randomness), max_completion_tokens (response length), top_p (nucleus sampling). Advanced: frequency_penalty, presence_penalty, response_format (JSON/structured output), reasoning_effort (for o1/thinking models), seed (reproducibility), stop sequences. Model-specific support varies. Runtime parameters in agent execution requests can override these defaults.
+   * Model behavior parameters (snake_case) stored as part of the agent configuration. These become the default parameters used when the agent is executed. Commonly used: temperature (0-2, controls randomness; the selected model may impose a lower maximum), max_completion_tokens (response length), top_p (nucleus sampling). Advanced: frequency_penalty, presence_penalty, response_format (JSON/structured output), reasoning_effort (for o1/thinking models), seed (reproducibility), stop sequences. Model-specific support varies. Runtime parameters in agent execution requests can override these defaults.
    */
   parameters?: RetrieveAgentRequestParameters | null | undefined;
   /**
@@ -1313,7 +1313,7 @@ export type RetrieveAgentRequestResponseBody = {
   source?: RetrieveAgentRequestSource | undefined;
   engine: RetrieveAgentRequestEngine;
   /**
-   * Agent type: internal (Orquesta-managed) or a2a (external A2A-compliant)
+   * Agent type: internal (orq.ai-managed) or a2a (external A2A-compliant)
    */
   type: RetrieveAgentRequestType;
   role: string;

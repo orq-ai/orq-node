@@ -29,7 +29,7 @@ import { Result } from "../types/fp.js";
  * Create a new project
  *
  * @remarks
- * Creates a project in the current workspace. Projects are workspace-level containers for resources such as skills, deployments, datasets, rules, and related team access. Requires a key with write access to Projects (management key or API key), or an admin session. Project-scoped API keys are rejected.
+ * Creates a project in the current workspace. Projects are workspace-level containers for resources such as skills, deployments, datasets, rules, and related team access. Requires a workspace-scoped management key or API key with Projects write access, or an admin session. Project-scoped API keys cannot be granted Projects access.
  */
 export function projectsCreate(
   client: OrqCore,

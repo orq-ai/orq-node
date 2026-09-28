@@ -312,7 +312,7 @@ export type ModelConfigurationCacheControl = {
 };
 
 /**
- * Model behavior parameters that control how the model generates responses. Common parameters: `temperature` (0-1, randomness), `max_completion_tokens` (max output length), `top_p` (sampling diversity). Advanced: `frequency_penalty`, `presence_penalty`, `response_format` (JSON/structured), `reasoning_effort`, `seed` (reproducibility). Support varies by model - consult AI Gateway documentation.
+ * Model behavior parameters that control how the model generates responses. Common parameters: `temperature` (0-2, randomness; the selected model may impose a lower maximum), `max_completion_tokens` (max output length), `top_p` (sampling diversity). Advanced: `frequency_penalty`, `presence_penalty`, `response_format` (JSON/structured), `reasoning_effort`, `seed` (reproducibility). Support varies by model - consult AI Gateway documentation.
  */
 export type ParametersT = {
   /**
@@ -462,7 +462,7 @@ export type ModelConfiguration2 = {
    */
   id: string;
   /**
-   * Model behavior parameters that control how the model generates responses. Common parameters: `temperature` (0-1, randomness), `max_completion_tokens` (max output length), `top_p` (sampling diversity). Advanced: `frequency_penalty`, `presence_penalty`, `response_format` (JSON/structured), `reasoning_effort`, `seed` (reproducibility). Support varies by model - consult AI Gateway documentation.
+   * Model behavior parameters that control how the model generates responses. Common parameters: `temperature` (0-2, randomness; the selected model may impose a lower maximum), `max_completion_tokens` (max output length), `top_p` (sampling diversity). Advanced: `frequency_penalty`, `presence_penalty`, `response_format` (JSON/structured), `reasoning_effort`, `seed` (reproducibility). Support varies by model - consult AI Gateway documentation.
    */
   parameters?: ParametersT | undefined;
   /**
@@ -1241,14 +1241,14 @@ export type CreateAgentRequestEngine = ClosedEnum<
 >;
 
 /**
- * Agent type: internal (Orquesta-managed) or a2a (external A2A-compliant)
+ * Agent type: internal (orq.ai-managed) or a2a (external A2A-compliant)
  */
 export const CreateAgentRequestType = {
   Internal: "internal",
   A2a: "a2a",
 } as const;
 /**
- * Agent type: internal (Orquesta-managed) or a2a (external A2A-compliant)
+ * Agent type: internal (orq.ai-managed) or a2a (external A2A-compliant)
  */
 export type CreateAgentRequestType = ClosedEnum<typeof CreateAgentRequestType>;
 
@@ -1736,7 +1736,7 @@ export type CreateAgentRequestCacheControl = {
 };
 
 /**
- * Model behavior parameters (snake_case) stored as part of the agent configuration. These become the default parameters used when the agent is executed. Commonly used: temperature (0-1, controls randomness), max_completion_tokens (response length), top_p (nucleus sampling). Advanced: frequency_penalty, presence_penalty, response_format (JSON/structured output), reasoning_effort (for o1/thinking models), seed (reproducibility), stop sequences. Model-specific support varies. Runtime parameters in agent execution requests can override these defaults.
+ * Model behavior parameters (snake_case) stored as part of the agent configuration. These become the default parameters used when the agent is executed. Commonly used: temperature (0-2, controls randomness; the selected model may impose a lower maximum), max_completion_tokens (response length), top_p (nucleus sampling). Advanced: frequency_penalty, presence_penalty, response_format (JSON/structured output), reasoning_effort (for o1/thinking models), seed (reproducibility), stop sequences. Model-specific support varies. Runtime parameters in agent execution requests can override these defaults.
  */
 export type CreateAgentRequestParameters = {
   /**
@@ -2411,7 +2411,7 @@ export type Model = {
    */
   integrationId?: string | null | undefined;
   /**
-   * Model behavior parameters (snake_case) stored as part of the agent configuration. These become the default parameters used when the agent is executed. Commonly used: temperature (0-1, controls randomness), max_completion_tokens (response length), top_p (nucleus sampling). Advanced: frequency_penalty, presence_penalty, response_format (JSON/structured output), reasoning_effort (for o1/thinking models), seed (reproducibility), stop sequences. Model-specific support varies. Runtime parameters in agent execution requests can override these defaults.
+   * Model behavior parameters (snake_case) stored as part of the agent configuration. These become the default parameters used when the agent is executed. Commonly used: temperature (0-2, controls randomness; the selected model may impose a lower maximum), max_completion_tokens (response length), top_p (nucleus sampling). Advanced: frequency_penalty, presence_penalty, response_format (JSON/structured output), reasoning_effort (for o1/thinking models), seed (reproducibility), stop sequences. Model-specific support varies. Runtime parameters in agent execution requests can override these defaults.
    */
   parameters?: CreateAgentRequestParameters | null | undefined;
   /**
@@ -2484,7 +2484,7 @@ export type CreateAgentRequestResponseBody = {
   source?: CreateAgentRequestSource | undefined;
   engine: CreateAgentRequestEngine;
   /**
-   * Agent type: internal (Orquesta-managed) or a2a (external A2A-compliant)
+   * Agent type: internal (orq.ai-managed) or a2a (external A2A-compliant)
    */
   type: CreateAgentRequestType;
   role: string;

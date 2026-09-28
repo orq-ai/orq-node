@@ -7,13 +7,13 @@ import { ApiKeyUpdateRequest } from "@orq-ai/node/models/operations";
 
 let value: ApiKeyUpdateRequest = {
   apiKeyId: "<id>",
-  updateApiKeyRequest: {},
+  requestBody: {},
 };
 ```
 
 ## Fields
 
-| Field                                                                            | Type                                                                             | Required                                                                         | Description                                                                      |
-| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| `apiKeyId`                                                                       | *string*                                                                         | :heavy_check_mark:                                                               | API key id to update.                                                            |
-| `updateApiKeyRequest`                                                            | [components.UpdateApiKeyRequest](../../models/components/updateapikeyrequest.md) | :heavy_check_mark:                                                               | N/A                                                                              |
+| Field                                                                                    | Type                                                                                     | Required                                                                                 | Description                                                                              |
+| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `apiKeyId`                                                                               | *string*                                                                                 | :heavy_check_mark:                                                                       | Unique identifier of the API key.                                                        |
+| `requestBody`                                                                            | [operations.ApiKeyUpdateRequestBody](../../models/operations/apikeyupdaterequestbody.md) | :heavy_check_mark:                                                                       | N/A                                                                                      |

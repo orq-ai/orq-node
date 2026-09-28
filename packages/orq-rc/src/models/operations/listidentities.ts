@@ -27,7 +27,7 @@ export type ListIdentitiesRequest = {
    */
   search?: string | undefined;
   /**
-   * Return only identities that have at least one of these tags.
+   * Return only identities that have all of these tags.
    */
   filterByTags?: Array<string> | undefined;
   /**

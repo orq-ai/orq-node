@@ -1126,6 +1126,20 @@ export type GetPromptVersionMessagesFunction = {
   arguments?: string | undefined;
 };
 
+export type GetPromptVersionMessagesGoogle = {
+  /**
+   * Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call. Takes precedence over the top-level `thought_signature` when both are set.
+   */
+  thoughtSignature?: string | undefined;
+};
+
+/**
+ * Provider-specific extra content for the tool call.
+ */
+export type GetPromptVersionMessagesExtraContent = {
+  google?: GetPromptVersionMessagesGoogle | undefined;
+};
+
 export type GetPromptVersionMessagesToolCalls = {
   /**
    * The ID of the tool call.
@@ -1140,6 +1154,10 @@ export type GetPromptVersionMessagesToolCalls = {
    * Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call.
    */
   thoughtSignature?: string | undefined;
+  /**
+   * Provider-specific extra content for the tool call.
+   */
+  extraContent?: GetPromptVersionMessagesExtraContent | undefined;
 };
 
 export type GetPromptVersionMessagesAssistantMessage = {
@@ -2952,6 +2970,49 @@ export function getPromptVersionMessagesFunctionFromJSON(
 }
 
 /** @internal */
+export const GetPromptVersionMessagesGoogle$inboundSchema: z.ZodType<
+  GetPromptVersionMessagesGoogle,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  thought_signature: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "thought_signature": "thoughtSignature",
+  });
+});
+
+export function getPromptVersionMessagesGoogleFromJSON(
+  jsonString: string,
+): SafeParseResult<GetPromptVersionMessagesGoogle, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetPromptVersionMessagesGoogle$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetPromptVersionMessagesGoogle' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetPromptVersionMessagesExtraContent$inboundSchema: z.ZodType<
+  GetPromptVersionMessagesExtraContent,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  google: z.lazy(() => GetPromptVersionMessagesGoogle$inboundSchema).optional(),
+});
+
+export function getPromptVersionMessagesExtraContentFromJSON(
+  jsonString: string,
+): SafeParseResult<GetPromptVersionMessagesExtraContent, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetPromptVersionMessagesExtraContent$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetPromptVersionMessagesExtraContent' from JSON`,
+  );
+}
+
+/** @internal */
 export const GetPromptVersionMessagesToolCalls$inboundSchema: z.ZodType<
   GetPromptVersionMessagesToolCalls,
   z.ZodTypeDef,
@@ -2961,9 +3022,13 @@ export const GetPromptVersionMessagesToolCalls$inboundSchema: z.ZodType<
   type: GetPromptVersionMessagesType$inboundSchema,
   function: z.lazy(() => GetPromptVersionMessagesFunction$inboundSchema),
   thought_signature: z.string().optional(),
+  extra_content: z.lazy(() =>
+    GetPromptVersionMessagesExtraContent$inboundSchema
+  ).optional(),
 }).transform((v) => {
   return remap$(v, {
     "thought_signature": "thoughtSignature",
+    "extra_content": "extraContent",
   });
 });
 

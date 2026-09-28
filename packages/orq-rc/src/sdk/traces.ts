@@ -8,6 +8,7 @@ import { tracesGetSpan } from "../funcs/tracesGetSpan.js";
 import { tracesListFacets } from "../funcs/tracesListFacets.js";
 import { tracesListFacetValues } from "../funcs/tracesListFacetValues.js";
 import { tracesListFields } from "../funcs/tracesListFields.js";
+import { tracesListFilters } from "../funcs/tracesListFilters.js";
 import { tracesListSpans } from "../funcs/tracesListSpans.js";
 import { tracesQuery } from "../funcs/tracesQuery.js";
 import { tracesSearch } from "../funcs/tracesSearch.js";
@@ -77,6 +78,23 @@ export class Traces extends ClientSDK {
   ): Promise<components.ListTraceFieldsResponse> {
     return unwrapAsync(tracesListFields(
       this,
+      options,
+    ));
+  }
+
+  /**
+   * List trace filters
+   *
+   * @remarks
+   * List the evaluators, human reviews and metadata keys a trace filter can address.
+   */
+  async listFilters(
+    request?: operations.TracesListFiltersRequest | undefined,
+    options?: RequestOptions,
+  ): Promise<components.ListTraceFiltersResponse> {
+    return unwrapAsync(tracesListFilters(
+      this,
+      request,
       options,
     ));
   }

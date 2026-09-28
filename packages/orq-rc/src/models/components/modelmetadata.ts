@@ -20,6 +20,12 @@ import {
   EmbeddingDimensionSupport$outboundSchema,
 } from "./embeddingdimensionsupport.js";
 import {
+  ModelFusionConfig,
+  ModelFusionConfig$inboundSchema,
+  ModelFusionConfig$Outbound,
+  ModelFusionConfig$outboundSchema,
+} from "./modelfusionconfig.js";
+import {
   Pricing,
   Pricing$inboundSchema,
   Pricing$Outbound,
@@ -42,6 +48,7 @@ export type ModelMetadata = {
   extendedContextPricingMode?: string | undefined;
   extendedContextThreshold?: number | undefined;
   functionToolsRequireEffortNone?: boolean | undefined;
+  fusion?: ModelFusionConfig | undefined;
   generateAudio?: boolean | undefined;
   imageInputCost?: number | undefined;
   imageOutputCost?: number | undefined;
@@ -175,6 +182,7 @@ export const ModelMetadata$inboundSchema: z.ZodType<
   extended_context_pricing_mode: z.string().optional(),
   extended_context_threshold: z.number().int().optional(),
   function_tools_require_effort_none: z.boolean().optional(),
+  fusion: ModelFusionConfig$inboundSchema.optional(),
   generate_audio: z.boolean().optional(),
   image_input_cost: z.number().optional(),
   image_output_cost: z.number().optional(),
@@ -431,6 +439,7 @@ export type ModelMetadata$Outbound = {
   extended_context_pricing_mode?: string | undefined;
   extended_context_threshold?: number | undefined;
   function_tools_require_effort_none?: boolean | undefined;
+  fusion?: ModelFusionConfig$Outbound | undefined;
   generate_audio?: boolean | undefined;
   image_input_cost?: number | undefined;
   image_output_cost?: number | undefined;
@@ -566,6 +575,7 @@ export const ModelMetadata$outboundSchema: z.ZodType<
   extendedContextPricingMode: z.string().optional(),
   extendedContextThreshold: z.number().int().optional(),
   functionToolsRequireEffortNone: z.boolean().optional(),
+  fusion: ModelFusionConfig$outboundSchema.optional(),
   generateAudio: z.boolean().optional(),
   imageInputCost: z.number().optional(),
   imageOutputCost: z.number().optional(),

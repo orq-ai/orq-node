@@ -93,7 +93,7 @@ export type CreateClassifyRequestBody = {
    */
   metadata?: { [k: string]: string } | undefined;
   /**
-   * ID of the model to use: the native classify model typesafe/jev-latest, or a chat model that supports classify such as anthropic/claude-haiku-4-5, google-ai/gemini-3.8-flash or zai/glm-5.3-flash.
+   * ID of the model to use: the native classify model typesafe/jev-latest, or a chat model that supports classify.
    */
   model: string;
   /**
@@ -120,7 +120,7 @@ export type CreateClassifyResponseBody = {
    */
   answers: { [k: string]: components.ClassifyAnswer };
   /**
-   * The model ID from the request, for example typesafe/jev-latest or google/gemini-3.8-flash.
+   * The model ID from the request.
    */
   model: string;
   telemetry?: components.ResponseTelemetry | undefined;

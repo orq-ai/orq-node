@@ -95,9 +95,9 @@ export type Alert = {
    */
   status: AlertStatus;
   /**
-   * Time when the alert last opened a trigger.
+   * Time when the alert last opened a trigger. `null` until the alert first triggers.
    */
-  lastTriggeredAt?: Date | undefined;
+  lastTriggeredAt?: Date | null | undefined;
   /**
    * Rolling window of the most recent evaluation ticks, oldest first.
    *
@@ -122,9 +122,9 @@ export type Alert = {
    */
   updatedById: string;
   /**
-   * Display options for the alert activity chart.
+   * Display options for the alert activity chart. `null` when none are saved.
    */
-  display?: AlertDisplay | undefined;
+  display?: AlertDisplay | null | undefined;
 };
 
 /** @internal */
@@ -148,8 +148,8 @@ export const Alert$inboundSchema: z.ZodType<Alert, z.ZodTypeDef, unknown> = z
     notifier_ids: z.array(z.string()),
     enabled: z.boolean(),
     status: AlertStatus$inboundSchema,
-    last_triggered_at: z.string().datetime({ offset: true }).transform(v =>
-      new Date(v)
+    last_triggered_at: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
     ).optional(),
     recent_runs: z.array(AlertRun$inboundSchema).optional(),
     created_at: z.string().datetime({ offset: true }).transform(v =>
@@ -160,7 +160,7 @@ export const Alert$inboundSchema: z.ZodType<Alert, z.ZodTypeDef, unknown> = z
     ),
     created_by_id: z.string(),
     updated_by_id: z.string(),
-    display: AlertDisplay$inboundSchema.optional(),
+    display: z.nullable(AlertDisplay$inboundSchema).optional(),
   }).transform((v) => {
     return remap$(v, {
       "alert_id": "alertId",

@@ -1,8 +1,9 @@
 {
   "name": "@orq-ai/node",
-  "version": "4.16.0-rc.22",
+  "version": "4.16.0-rc.23",
   "author": "Orq",
   "exports": {
+    "./*": "./*",
     "./langchain": {
       "import": "./langchain/index.mjs",
       "require": "./langchain/index.js",
@@ -12,8 +13,7 @@
       "import": "./index.js",
       "require": "./index.js",
       "types": "./index.d.ts"
-    },
-    "./*": "./*"
+    }
   },
   "main": "./index.js",
   "sideEffects": false,

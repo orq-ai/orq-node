@@ -23,7 +23,7 @@ export type McpAuthConfig = {
    */
   staticHeaders?: Array<McpHeaderSecret> | undefined;
   /**
-   * Not settable through these endpoints.
+   * OAuth client credentials the gateway presents to the upstream authorization server; set when type is OAUTH_CLIENT_CREDENTIALS.
    */
   oauth?: McpOAuthConfig | undefined;
 };

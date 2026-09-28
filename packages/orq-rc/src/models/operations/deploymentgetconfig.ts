@@ -147,6 +147,20 @@ export type PrefixMessagesFunction = {
   arguments?: string | undefined;
 };
 
+export type PrefixMessagesGoogle = {
+  /**
+   * Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call. Takes precedence over the top-level `thought_signature` when both are set.
+   */
+  thoughtSignature?: string | undefined;
+};
+
+/**
+ * Provider-specific extra content for the tool call.
+ */
+export type PrefixMessagesExtraContent = {
+  google?: PrefixMessagesGoogle | undefined;
+};
+
 export type PrefixMessagesToolCalls = {
   /**
    * The ID of the tool call.
@@ -161,6 +175,10 @@ export type PrefixMessagesToolCalls = {
    * Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call.
    */
   thoughtSignature?: string | undefined;
+  /**
+   * Provider-specific extra content for the tool call.
+   */
+  extraContent?: PrefixMessagesExtraContent | undefined;
 };
 
 export type PrefixMessagesAssistantMessage = {
@@ -505,6 +523,20 @@ export type DeploymentGetConfigMessagesFunction = {
   arguments?: string | undefined;
 };
 
+export type DeploymentGetConfigMessagesGoogle = {
+  /**
+   * Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call. Takes precedence over the top-level `thought_signature` when both are set.
+   */
+  thoughtSignature?: string | undefined;
+};
+
+/**
+ * Provider-specific extra content for the tool call.
+ */
+export type DeploymentGetConfigMessagesExtraContent = {
+  google?: DeploymentGetConfigMessagesGoogle | undefined;
+};
+
 export type DeploymentGetConfigMessagesToolCalls = {
   /**
    * The ID of the tool call.
@@ -519,6 +551,10 @@ export type DeploymentGetConfigMessagesToolCalls = {
    * Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call.
    */
   thoughtSignature?: string | undefined;
+  /**
+   * Provider-specific extra content for the tool call.
+   */
+  extraContent?: DeploymentGetConfigMessagesExtraContent | undefined;
 };
 
 export type DeploymentGetConfigMessagesAssistantMessage = {
@@ -1952,11 +1988,60 @@ export function prefixMessagesFunctionToJSON(
 }
 
 /** @internal */
+export type PrefixMessagesGoogle$Outbound = {
+  thought_signature?: string | undefined;
+};
+
+/** @internal */
+export const PrefixMessagesGoogle$outboundSchema: z.ZodType<
+  PrefixMessagesGoogle$Outbound,
+  z.ZodTypeDef,
+  PrefixMessagesGoogle
+> = z.object({
+  thoughtSignature: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    thoughtSignature: "thought_signature",
+  });
+});
+
+export function prefixMessagesGoogleToJSON(
+  prefixMessagesGoogle: PrefixMessagesGoogle,
+): string {
+  return JSON.stringify(
+    PrefixMessagesGoogle$outboundSchema.parse(prefixMessagesGoogle),
+  );
+}
+
+/** @internal */
+export type PrefixMessagesExtraContent$Outbound = {
+  google?: PrefixMessagesGoogle$Outbound | undefined;
+};
+
+/** @internal */
+export const PrefixMessagesExtraContent$outboundSchema: z.ZodType<
+  PrefixMessagesExtraContent$Outbound,
+  z.ZodTypeDef,
+  PrefixMessagesExtraContent
+> = z.object({
+  google: z.lazy(() => PrefixMessagesGoogle$outboundSchema).optional(),
+});
+
+export function prefixMessagesExtraContentToJSON(
+  prefixMessagesExtraContent: PrefixMessagesExtraContent,
+): string {
+  return JSON.stringify(
+    PrefixMessagesExtraContent$outboundSchema.parse(prefixMessagesExtraContent),
+  );
+}
+
+/** @internal */
 export type PrefixMessagesToolCalls$Outbound = {
   id: string;
   type: string;
   function: PrefixMessagesFunction$Outbound;
   thought_signature?: string | undefined;
+  extra_content?: PrefixMessagesExtraContent$Outbound | undefined;
 };
 
 /** @internal */
@@ -1969,9 +2054,12 @@ export const PrefixMessagesToolCalls$outboundSchema: z.ZodType<
   type: DeploymentGetConfigPrefixMessagesType$outboundSchema,
   function: z.lazy(() => PrefixMessagesFunction$outboundSchema),
   thoughtSignature: z.string().optional(),
+  extraContent: z.lazy(() => PrefixMessagesExtraContent$outboundSchema)
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     thoughtSignature: "thought_signature",
+    extraContent: "extra_content",
   });
 });
 
@@ -2633,11 +2721,66 @@ export function deploymentGetConfigMessagesFunctionToJSON(
 }
 
 /** @internal */
+export type DeploymentGetConfigMessagesGoogle$Outbound = {
+  thought_signature?: string | undefined;
+};
+
+/** @internal */
+export const DeploymentGetConfigMessagesGoogle$outboundSchema: z.ZodType<
+  DeploymentGetConfigMessagesGoogle$Outbound,
+  z.ZodTypeDef,
+  DeploymentGetConfigMessagesGoogle
+> = z.object({
+  thoughtSignature: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    thoughtSignature: "thought_signature",
+  });
+});
+
+export function deploymentGetConfigMessagesGoogleToJSON(
+  deploymentGetConfigMessagesGoogle: DeploymentGetConfigMessagesGoogle,
+): string {
+  return JSON.stringify(
+    DeploymentGetConfigMessagesGoogle$outboundSchema.parse(
+      deploymentGetConfigMessagesGoogle,
+    ),
+  );
+}
+
+/** @internal */
+export type DeploymentGetConfigMessagesExtraContent$Outbound = {
+  google?: DeploymentGetConfigMessagesGoogle$Outbound | undefined;
+};
+
+/** @internal */
+export const DeploymentGetConfigMessagesExtraContent$outboundSchema: z.ZodType<
+  DeploymentGetConfigMessagesExtraContent$Outbound,
+  z.ZodTypeDef,
+  DeploymentGetConfigMessagesExtraContent
+> = z.object({
+  google: z.lazy(() => DeploymentGetConfigMessagesGoogle$outboundSchema)
+    .optional(),
+});
+
+export function deploymentGetConfigMessagesExtraContentToJSON(
+  deploymentGetConfigMessagesExtraContent:
+    DeploymentGetConfigMessagesExtraContent,
+): string {
+  return JSON.stringify(
+    DeploymentGetConfigMessagesExtraContent$outboundSchema.parse(
+      deploymentGetConfigMessagesExtraContent,
+    ),
+  );
+}
+
+/** @internal */
 export type DeploymentGetConfigMessagesToolCalls$Outbound = {
   id: string;
   type: string;
   function: DeploymentGetConfigMessagesFunction$Outbound;
   thought_signature?: string | undefined;
+  extra_content?: DeploymentGetConfigMessagesExtraContent$Outbound | undefined;
 };
 
 /** @internal */
@@ -2650,9 +2793,13 @@ export const DeploymentGetConfigMessagesToolCalls$outboundSchema: z.ZodType<
   type: DeploymentGetConfigMessagesType$outboundSchema,
   function: z.lazy(() => DeploymentGetConfigMessagesFunction$outboundSchema),
   thoughtSignature: z.string().optional(),
+  extraContent: z.lazy(() =>
+    DeploymentGetConfigMessagesExtraContent$outboundSchema
+  ).optional(),
 }).transform((v) => {
   return remap$(v, {
     thoughtSignature: "thought_signature",
+    extraContent: "extra_content",
   });
 });
 

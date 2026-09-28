@@ -15,10 +15,6 @@ import { Sharing, Sharing$inboundSchema } from "./sharing.js";
 
 export type FileSystem = {
   /**
-   * The unique identifier of the file system
-   */
-  id?: string | undefined;
-  /**
    * The unique key of the file system. The key is unique and immutable and cannot be repeated within the same workspace.
    */
   key: string;
@@ -70,6 +66,10 @@ export type FileSystem = {
    * When usage was last measured. Absent until first metered.
    */
   lastMeteredAt?: string | null | undefined;
+  /**
+   * The unique identifier of the file system
+   */
+  id: string;
 };
 
 /** @internal */
@@ -78,7 +78,6 @@ export const FileSystem$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  id: z.string().optional(),
   key: z.string(),
   display_name: z.string(),
   description: z.string(),
@@ -92,6 +91,7 @@ export const FileSystem$inboundSchema: z.ZodType<
   used_bytes: z.nullable(z.string()).optional(),
   used_inodes: z.nullable(z.string()).optional(),
   last_metered_at: z.nullable(z.string()).optional(),
+  _id: z.string(),
 }).transform((v) => {
   return remap$(v, {
     "display_name": "displayName",
@@ -102,6 +102,7 @@ export const FileSystem$inboundSchema: z.ZodType<
     "used_bytes": "usedBytes",
     "used_inodes": "usedInodes",
     "last_metered_at": "lastMeteredAt",
+    "_id": "id",
   });
 });
 

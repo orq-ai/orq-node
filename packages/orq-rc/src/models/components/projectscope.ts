@@ -3,33 +3,17 @@
  */
 
 import * as z from "zod/v3";
-import {
-  AllProjects,
-  AllProjects$Outbound,
-  AllProjects$outboundSchema,
-} from "./allprojects.js";
-import {
-  SingleProject,
-  SingleProject$Outbound,
-  SingleProject$outboundSchema,
-} from "./singleproject.js";
+import { remap as remap$ } from "../../lib/primitives.js";
 
-/**
- * Project authorization scope. Single-project or all-projects.
- *
- * @remarks
- *  Multi-project use cases are served by minting per-project keys or by
- *  using an all-projects key with `restricted` mode.
- */
 export type ProjectScope = {
-  all?: AllProjects | undefined;
-  single?: SingleProject | undefined;
+  mode: string;
+  projectId?: string | undefined;
 };
 
 /** @internal */
 export type ProjectScope$Outbound = {
-  all?: AllProjects$Outbound | undefined;
-  single?: SingleProject$Outbound | undefined;
+  mode: string;
+  project_id?: string | undefined;
 };
 
 /** @internal */
@@ -38,8 +22,12 @@ export const ProjectScope$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ProjectScope
 > = z.object({
-  all: AllProjects$outboundSchema.optional(),
-  single: SingleProject$outboundSchema.optional(),
+  mode: z.string(),
+  projectId: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    projectId: "project_id",
+  });
 });
 
 export function projectScopeToJSON(projectScope: ProjectScope): string {

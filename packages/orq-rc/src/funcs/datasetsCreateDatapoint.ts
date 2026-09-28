@@ -12,6 +12,7 @@ import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
+import * as components from "../models/components/index.js";
 import {
   ConnectionError,
   InvalidRequestError,
@@ -19,7 +20,6 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
-import * as errors from "../models/errors/index.js";
 import { OrqError } from "../models/errors/orqerror.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
@@ -28,10 +28,10 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Create a datapoint
+ * Create datapoints
  *
  * @remarks
- * Creates a new datapoint in the specified dataset.
+ * Creates one or more datapoints in the specified dataset.
  */
 export function datasetsCreateDatapoint(
   client: OrqCore,
@@ -39,8 +39,7 @@ export function datasetsCreateDatapoint(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    Array<operations.ResponseBody>,
-    | errors.HonoApiError
+    Array<components.Datapoint1>,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -65,8 +64,7 @@ async function $do(
 ): Promise<
   [
     Result<
-      Array<operations.ResponseBody>,
-      | errors.HonoApiError
+      Array<components.Datapoint1>,
       | OrqError
       | ResponseValidationError
       | ConnectionError
@@ -149,13 +147,8 @@ async function $do(
   }
   const response = doResult.value;
 
-  const responseFields = {
-    HttpMeta: { Response: response, Request: req },
-  };
-
   const [result] = await M.match<
-    Array<operations.ResponseBody>,
-    | errors.HonoApiError
+    Array<components.Datapoint1>,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -165,11 +158,10 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, z.array(operations.ResponseBody$inboundSchema)),
-    M.jsonErr(404, errors.HonoApiError$inboundSchema),
+    M.json(200, z.array(components.Datapoint1$inboundSchema)),
     M.fail("4XX"),
     M.fail("5XX"),
-  )(response, req, { extraFields: responseFields });
+  )(response, req);
   if (!result.ok) {
     return [result, { status: "complete", request: req, response }];
   }

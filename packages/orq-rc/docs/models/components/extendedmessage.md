@@ -1,6 +1,6 @@
 # ExtendedMessage
 
-Extended Agent-to-Agent protocol message with support for tool calls and tool results. Extends the base A2A message format with Orquesta-specific features.
+Extended Agent-to-Agent protocol message with support for tool calls and tool results. Extends the base A2A message format with orq.ai-specific features.
 
 ## Example Usage
 
