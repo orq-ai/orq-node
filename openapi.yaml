@@ -2556,7 +2556,7 @@ components:
           properties:
             _id:
               type: "string"
-              default: "reasoning_01m3mbsyn3227js4abm3k4befe"
+              default: "reasoning_01m3nxav5me5tkzqb8bz93kss5"
               description: "Unique identifier for the part. Format: reasoning_{ulid} (e.g., reasoning_01hxyz...)"
               example: "reasoning_01hxyz123abc"
             kind:
@@ -32429,7 +32429,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01M3MBSYPSYDR6XPQ2HYSV6RQW"
+                                          default: "01M3NXAV6ZVDN0Q2Y9HRX7HQJ8"
                                         name:
                                           type: "string"
                                         description:
@@ -34027,7 +34027,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01M3MBSYQFVDVKWW66WCDPA0AD"
+                                          default: "01M3NXAV7G5QGJH65N9XKPWYF8"
                                         name:
                                           type: "string"
                                         description:
@@ -42924,7 +42924,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M3MBSYS01EZV5N6YWD08ZERY"
+                              default: "tool_01M3NXAV8N2QPD6HG8F6SWVX9E"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -43025,7 +43025,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M3MBSYS1PJ37A5H8WC8PD2VA"
+                              default: "tool_01M3NXAV8PJ5GRVE89GEFBRH20"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -43128,7 +43128,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M3MBSYS1RN7FNGYZNCD9T2XA"
+                              default: "tool_01M3NXAV8Q5VZCWEZX7ZPN743Q"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -43272,7 +43272,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M3MBSYS2AGD9J77GNKSD4Z8C"
+                              default: "tool_01M3NXAV8QPQT1BJKR9S30KZ1C"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -43763,7 +43763,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M3MBSYS84VWXYZ7Y59PKN63V"
+                        default: "tool_01M3NXAV8TC6B5W625F7EZRR4Q"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -43864,7 +43864,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M3MBSYS9M9FAHXEV25QE4GWS"
+                        default: "tool_01M3NXAV8VXT3HFMDBX22PV1CP"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -43967,7 +43967,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M3MBSYS9HC818CGRF15RY9W1"
+                        default: "tool_01M3NXAV8VT5B2HBRTJDNBSXXX"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -44111,7 +44111,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M3MBSYSAEEP9GPQQF2B7J517"
+                        default: "tool_01M3NXAV8W0NDPFYY4F9CHXMW5"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -44609,7 +44609,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M3MBSYSDXMM47D5BZ2125279"
+                        default: "tool_01M3NXAV8Y3XTXM4030AE9YHMW"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -44710,7 +44710,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M3MBSYSEQF1PPATGKZT4BN32"
+                        default: "tool_01M3NXAV8ZCV7HFMS13XPBQV3T"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -44813,7 +44813,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M3MBSYSE2DYR4NF1JDGPFDQR"
+                        default: "tool_01M3NXAV8ZRZ8F4EJG4W72DJCG"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -44957,7 +44957,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M3MBSYSF912Y44PY6HQZ9HAA"
+                        default: "tool_01M3NXAV90MW517XVNTQHHPZHK"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -45118,7 +45118,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M3MBSYSNARYY533ZHRR6X6QZ"
+                        default: "tool_01M3NXAV96WFDWDY7WA5P21YY6"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -45219,7 +45219,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M3MBSYSPNS7GZJ8EYF1Q37X2"
+                        default: "tool_01M3NXAV96RBFREAJR2SW93BNG"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -45322,7 +45322,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M3MBSYSQSNJJGYX00SEMQ8E7"
+                        default: "tool_01M3NXAV9795XXJX5EP044D22M"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -45466,7 +45466,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M3MBSYSQY3W83MXV9S86KX85"
+                        default: "tool_01M3NXAV985P9NZPK007480V0Q"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -51716,6 +51716,7 @@ paths:
     post:
       tags:
         - "Feedback"
+      deprecated: true
       x-speakeasy-name-override: "removeEvaluation"
       requestBody:
         content:
@@ -51740,6 +51741,7 @@ paths:
     post:
       tags:
         - "Feedback"
+      deprecated: true
       x-speakeasy-name-override: "createEvaluation"
       requestBody:
         content:
@@ -51771,7 +51773,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-09-28T15:58:14.369Z"
+                      default: "2026-09-29T06:23:48.039Z"
                       deprecated: true
                       description: "Deprecated. The date and time the item was reviewed"
                     type:
@@ -51813,7 +51815,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-09-28T15:58:14.370Z"
+                      default: "2026-09-29T06:23:48.039Z"
                       deprecated: true
                       description: "Deprecated. The date and time the item was reviewed"
                     type:
@@ -51855,7 +51857,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-09-28T15:58:14.370Z"
+                      default: "2026-09-29T06:23:48.039Z"
                       deprecated: true
                       description: "Deprecated. The date and time the item was reviewed"
                     type:
@@ -51897,7 +51899,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-09-28T15:58:14.370Z"
+                      default: "2026-09-29T06:23:48.040Z"
                       deprecated: true
                       description: "Deprecated. The date and time the item was reviewed"
                     type:
@@ -51919,234 +51921,6 @@ paths:
       responses:
         "200":
           description: "Event has been dispatched to report the feedback"
-      security:
-        - ApiKey: []
-  /v2/feedback/remove:
-    post:
-      tags:
-        - "Feedback"
-      x-cli-group: "feedback"
-      x-cli-name: "delete"
-      x-speakeasy-name-override: "remove"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: "object"
-              properties:
-                id:
-                  type: "string"
-                  format: "ulid"
-                trace_id:
-                  type: "string"
-                product:
-                  type: "string"
-                  enum:
-                    - "remoteconfigs"
-                    - "deployments"
-                    - "experiments"
-                    - "playgrounds"
-                    - "spreadsheets"
-                    - "spreadsheet_run"
-                    - "llm_evaluator"
-                    - "knowledge"
-                    - "router"
-                    - "workflows"
-                    - "external_events"
-                    - "agents"
-                    - "memory-stores"
-                    - "generic"
-                    - "evaluators"
-                    - "otel"
-                    - "ai-chat"
-                    - "mcp_gateway"
-              required:
-                - "id"
-                - "trace_id"
-                - "product"
-      responses:
-        "200":
-          description: "Event has been dispatched to delete the feedback"
-          content:
-            application/json:
-              schema:
-                type: "object"
-                properties:
-                  id:
-                    type: "string"
-                    format: "ulid"
-                  trace_id:
-                    type: "string"
-                  product:
-                    type: "string"
-                    enum:
-                      - "remoteconfigs"
-                      - "deployments"
-                      - "experiments"
-                      - "playgrounds"
-                      - "spreadsheets"
-                      - "spreadsheet_run"
-                      - "llm_evaluator"
-                      - "knowledge"
-                      - "router"
-                      - "workflows"
-                      - "external_events"
-                      - "agents"
-                      - "memory-stores"
-                      - "generic"
-                      - "evaluators"
-                      - "otel"
-                      - "ai-chat"
-                      - "mcp_gateway"
-                required:
-                  - "id"
-                  - "trace_id"
-                  - "product"
-        "404":
-          description: "Workspace ID is not found on the request"
-          content:
-            application/json:
-              schema:
-                type: "object"
-                properties:
-                  message:
-                    type: "string"
-                required:
-                  - "message"
-      security:
-        - ApiKey: []
-  /v2/feedback:
-    post:
-      tags:
-        - "Feedback"
-      x-cli-group: "feedback"
-      x-cli-name: "create"
-      x-speakeasy-name-override: "create"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: "object"
-              properties:
-                id:
-                  type: "string"
-                  format: "ulid"
-                  description: "Unique identifier for the feedback"
-                property:
-                  type: "string"
-                  description: "A string describing the specific property or aspect rated."
-                  x-speakeasy-name-override: field
-                value:
-                  anyOf:
-                    - type: "string"
-                    - type: "number"
-                    - type: "array"
-                      items:
-                        type: "string"
-                  description: "The feedback value. For single selection of multiple choice, the value should be an array of strings. For `correction`, the value should be a string."
-                trace_id:
-                  type: "string"
-                  description: "The id returned by the [`get_config`](https://docs.orq.ai/reference/deployments/get-config) or [`invoke`](https://docs.orq.ai/reference/deployments/invoke) endpoints"
-                product:
-                  type: "string"
-                  enum:
-                    - "remoteconfigs"
-                    - "deployments"
-                    - "experiments"
-                    - "playgrounds"
-                    - "spreadsheets"
-                    - "spreadsheet_run"
-                    - "llm_evaluator"
-                    - "knowledge"
-                    - "router"
-                    - "workflows"
-                    - "external_events"
-                    - "agents"
-                    - "memory-stores"
-                    - "generic"
-                    - "evaluators"
-                    - "otel"
-                    - "ai-chat"
-                    - "mcp_gateway"
-                  default: "deployments"
-              required:
-                - "property"
-                - "value"
-                - "trace_id"
-      responses:
-        "200":
-          description: "Feedback submitted successfully"
-          content:
-            application/json:
-              schema:
-                type: "object"
-                properties:
-                  id:
-                    type: "string"
-                    format: "ulid"
-                    description: "Unique identifier for the feedback"
-                  property:
-                    type: "string"
-                    description: "A string describing the specific property or aspect rated."
-                  value:
-                    anyOf:
-                      - type: "string"
-                      - type: "number"
-                      - type: "array"
-                        items:
-                          type: "string"
-                    description: "The feedback value. For single selection of multiple choice, the value should be an array of strings. For `correction`, the value should be a string."
-                  trace_id:
-                    type: "string"
-                    description: "The id returned by the [`get_config`](https://docs.orq.ai/reference/deployments/get-config) or [`invoke`](https://docs.orq.ai/reference/deployments/invoke) endpoints"
-                  product:
-                    type: "string"
-                    enum:
-                      - "remoteconfigs"
-                      - "deployments"
-                      - "experiments"
-                      - "playgrounds"
-                      - "spreadsheets"
-                      - "spreadsheet_run"
-                      - "llm_evaluator"
-                      - "knowledge"
-                      - "router"
-                      - "workflows"
-                      - "external_events"
-                      - "agents"
-                      - "memory-stores"
-                      - "generic"
-                      - "evaluators"
-                      - "otel"
-                      - "ai-chat"
-                      - "mcp_gateway"
-                    default: "deployments"
-                required:
-                  - "property"
-                  - "value"
-                  - "trace_id"
-        "400":
-          description: "Bad Request"
-          content:
-            application/json:
-              schema:
-                type: "object"
-                properties:
-                  message:
-                    type: "string"
-                required:
-                  - "message"
-        "404":
-          description: "Workspace, trace, or feedback property was not found"
-          content:
-            application/json:
-              schema:
-                type: "object"
-                properties:
-                  message:
-                    type: "string"
-                required:
-                  - "message"
       security:
         - ApiKey: []
   /v2/human-eval-sets:
@@ -52228,7 +52002,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-09-28T15:58:05.741Z"
+                          default: "2026-09-29T06:23:41.380Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -52236,7 +52010,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-09-28T15:58:05.741Z"
+                              default: "2026-09-29T06:23:41.380Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -52306,7 +52080,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-09-28T15:58:05.741Z"
+                          default: "2026-09-29T06:23:41.380Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -52314,7 +52088,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-09-28T15:58:05.741Z"
+                              default: "2026-09-29T06:23:41.380Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -52490,7 +52264,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-09-28T15:58:05.741Z"
+                        default: "2026-09-29T06:23:41.380Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -52498,7 +52272,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-09-28T15:58:05.741Z"
+                            default: "2026-09-29T06:23:41.380Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -52568,7 +52342,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-09-28T15:58:05.741Z"
+                        default: "2026-09-29T06:23:41.380Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -52576,7 +52350,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-09-28T15:58:05.741Z"
+                            default: "2026-09-29T06:23:41.380Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -52670,7 +52444,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-09-28T15:58:05.741Z"
+                        default: "2026-09-29T06:23:41.380Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -52678,7 +52452,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-09-28T15:58:05.741Z"
+                            default: "2026-09-29T06:23:41.380Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -52748,7 +52522,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-09-28T15:58:05.741Z"
+                        default: "2026-09-29T06:23:41.380Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -52756,7 +52530,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-09-28T15:58:05.741Z"
+                            default: "2026-09-29T06:23:41.380Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -52940,7 +52714,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-09-28T15:58:05.741Z"
+                        default: "2026-09-29T06:23:41.380Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -52948,7 +52722,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-09-28T15:58:05.741Z"
+                            default: "2026-09-29T06:23:41.380Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -53018,7 +52792,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-09-28T15:58:05.741Z"
+                        default: "2026-09-29T06:23:41.380Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -53026,7 +52800,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-09-28T15:58:05.741Z"
+                            default: "2026-09-29T06:23:41.380Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -59072,6 +58846,234 @@ paths:
       x-speakeasy-group: "annotations"
       x-speakeasy-name-override: "delete"
       x-cli-group: "traces"
+      x-cli-name: "delete"
+      security:
+        - ApiKey: []
+  /v2/feedback:
+    post:
+      tags: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: "object"
+              properties:
+                id:
+                  type: "string"
+                  format: "ulid"
+                  description: "Unique identifier for the feedback"
+                property:
+                  type: "string"
+                  description: "A string describing the specific property or aspect rated."
+                  x-speakeasy-name-override: field
+                value:
+                  anyOf:
+                    - type: "string"
+                    - type: "number"
+                    - type: "array"
+                      items:
+                        type: "string"
+                  description: "The feedback value. For single selection of multiple choice, the value should be an array of strings. For `correction`, the value should be a string."
+                trace_id:
+                  type: "string"
+                  description: "The id returned by the [`get_config`](https://docs.orq.ai/reference/deployments/get-config) or [`invoke`](https://docs.orq.ai/reference/deployments/invoke) endpoints"
+                product:
+                  type: "string"
+                  enum:
+                    - "remoteconfigs"
+                    - "deployments"
+                    - "experiments"
+                    - "playgrounds"
+                    - "spreadsheets"
+                    - "spreadsheet_run"
+                    - "llm_evaluator"
+                    - "knowledge"
+                    - "router"
+                    - "workflows"
+                    - "external_events"
+                    - "agents"
+                    - "memory-stores"
+                    - "generic"
+                    - "evaluators"
+                    - "otel"
+                    - "ai-chat"
+                    - "mcp_gateway"
+                  default: "deployments"
+              required:
+                - "property"
+                - "value"
+                - "trace_id"
+      responses:
+        "200":
+          description: "Feedback submitted successfully"
+          content:
+            application/json:
+              schema:
+                type: "object"
+                properties:
+                  id:
+                    type: "string"
+                    format: "ulid"
+                    description: "Unique identifier for the feedback"
+                  property:
+                    type: "string"
+                    description: "A string describing the specific property or aspect rated."
+                  value:
+                    anyOf:
+                      - type: "string"
+                      - type: "number"
+                      - type: "array"
+                        items:
+                          type: "string"
+                    description: "The feedback value. For single selection of multiple choice, the value should be an array of strings. For `correction`, the value should be a string."
+                  trace_id:
+                    type: "string"
+                    description: "The id returned by the [`get_config`](https://docs.orq.ai/reference/deployments/get-config) or [`invoke`](https://docs.orq.ai/reference/deployments/invoke) endpoints"
+                  product:
+                    type: "string"
+                    enum:
+                      - "remoteconfigs"
+                      - "deployments"
+                      - "experiments"
+                      - "playgrounds"
+                      - "spreadsheets"
+                      - "spreadsheet_run"
+                      - "llm_evaluator"
+                      - "knowledge"
+                      - "router"
+                      - "workflows"
+                      - "external_events"
+                      - "agents"
+                      - "memory-stores"
+                      - "generic"
+                      - "evaluators"
+                      - "otel"
+                      - "ai-chat"
+                      - "mcp_gateway"
+                    default: "deployments"
+                required:
+                  - "property"
+                  - "value"
+                  - "trace_id"
+        "400":
+          description: "Bad Request"
+          content:
+            application/json:
+              schema:
+                type: "object"
+                properties:
+                  message:
+                    type: "string"
+                required:
+                  - "message"
+        "404":
+          description: "Workspace, trace, or feedback property was not found"
+          content:
+            application/json:
+              schema:
+                type: "object"
+                properties:
+                  message:
+                    type: "string"
+                required:
+                  - "message"
+      x-speakeasy-group: "feedback"
+      x-speakeasy-name-override: "create"
+      x-cli-group: "feedback"
+      x-cli-name: "create"
+      security:
+        - ApiKey: []
+  /v2/feedback/remove:
+    post:
+      tags: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: "object"
+              properties:
+                id:
+                  type: "string"
+                  format: "ulid"
+                trace_id:
+                  type: "string"
+                product:
+                  type: "string"
+                  enum:
+                    - "remoteconfigs"
+                    - "deployments"
+                    - "experiments"
+                    - "playgrounds"
+                    - "spreadsheets"
+                    - "spreadsheet_run"
+                    - "llm_evaluator"
+                    - "knowledge"
+                    - "router"
+                    - "workflows"
+                    - "external_events"
+                    - "agents"
+                    - "memory-stores"
+                    - "generic"
+                    - "evaluators"
+                    - "otel"
+                    - "ai-chat"
+                    - "mcp_gateway"
+              required:
+                - "id"
+                - "trace_id"
+                - "product"
+      responses:
+        "200":
+          description: "Event has been dispatched to delete the feedback"
+          content:
+            application/json:
+              schema:
+                type: "object"
+                properties:
+                  id:
+                    type: "string"
+                    format: "ulid"
+                  trace_id:
+                    type: "string"
+                  product:
+                    type: "string"
+                    enum:
+                      - "remoteconfigs"
+                      - "deployments"
+                      - "experiments"
+                      - "playgrounds"
+                      - "spreadsheets"
+                      - "spreadsheet_run"
+                      - "llm_evaluator"
+                      - "knowledge"
+                      - "router"
+                      - "workflows"
+                      - "external_events"
+                      - "agents"
+                      - "memory-stores"
+                      - "generic"
+                      - "evaluators"
+                      - "otel"
+                      - "ai-chat"
+                      - "mcp_gateway"
+                required:
+                  - "id"
+                  - "trace_id"
+                  - "product"
+        "404":
+          description: "Workspace ID is not found on the request"
+          content:
+            application/json:
+              schema:
+                type: "object"
+                properties:
+                  message:
+                    type: "string"
+                required:
+                  - "message"
+      x-speakeasy-group: "feedback"
+      x-speakeasy-name-override: "remove"
+      x-cli-group: "feedback"
       x-cli-name: "delete"
       security:
         - ApiKey: []
