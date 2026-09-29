@@ -12,7 +12,54 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 /**
  * The feedback value. For single selection of multiple choice, the value should be an array of strings. For `correction`, the value should be a string.
  */
-export type Value = string | number | Array<string>;
+export type PostV2FeedbackValue = string | number | Array<string>;
+
+export const Product = {
+  Remoteconfigs: "remoteconfigs",
+  Deployments: "deployments",
+  Experiments: "experiments",
+  Playgrounds: "playgrounds",
+  Spreadsheets: "spreadsheets",
+  SpreadsheetRun: "spreadsheet_run",
+  LlmEvaluator: "llm_evaluator",
+  Knowledge: "knowledge",
+  Router: "router",
+  Workflows: "workflows",
+  ExternalEvents: "external_events",
+  Agents: "agents",
+  MemoryStores: "memory-stores",
+  Generic: "generic",
+  Evaluators: "evaluators",
+  Otel: "otel",
+  AiChat: "ai-chat",
+  McpGateway: "mcp_gateway",
+} as const;
+export type Product = ClosedEnum<typeof Product>;
+
+export type PostV2FeedbackRequestBody = {
+  /**
+   * Unique identifier for the feedback
+   */
+  id?: string | undefined;
+  /**
+   * A string describing the specific property or aspect rated.
+   */
+  field: string;
+  /**
+   * The feedback value. For single selection of multiple choice, the value should be an array of strings. For `correction`, the value should be a string.
+   */
+  value: string | number | Array<string>;
+  /**
+   * The id returned by the [`get_config`](https://docs.orq.ai/reference/deployments/get-config) or [`invoke`](https://docs.orq.ai/reference/deployments/invoke) endpoints
+   */
+  traceId: string;
+  product?: Product | undefined;
+};
+
+/**
+ * The feedback value. For single selection of multiple choice, the value should be an array of strings. For `correction`, the value should be a string.
+ */
+export type PostV2FeedbackFeedbackValue = string | number | Array<string>;
 
 export const PostV2FeedbackProduct = {
   Remoteconfigs: "remoteconfigs",
@@ -36,55 +83,6 @@ export const PostV2FeedbackProduct = {
 } as const;
 export type PostV2FeedbackProduct = ClosedEnum<typeof PostV2FeedbackProduct>;
 
-export type PostV2FeedbackRequestBody = {
-  /**
-   * Unique identifier for the feedback
-   */
-  id?: string | undefined;
-  /**
-   * A string describing the specific property or aspect rated.
-   */
-  field: string;
-  /**
-   * The feedback value. For single selection of multiple choice, the value should be an array of strings. For `correction`, the value should be a string.
-   */
-  value: string | number | Array<string>;
-  /**
-   * The id returned by the [`get_config`](https://docs.orq.ai/reference/deployments/get-config) or [`invoke`](https://docs.orq.ai/reference/deployments/invoke) endpoints
-   */
-  traceId: string;
-  product?: PostV2FeedbackProduct | undefined;
-};
-
-/**
- * The feedback value. For single selection of multiple choice, the value should be an array of strings. For `correction`, the value should be a string.
- */
-export type PostV2FeedbackValue = string | number | Array<string>;
-
-export const PostV2FeedbackFeedbackProduct = {
-  Remoteconfigs: "remoteconfigs",
-  Deployments: "deployments",
-  Experiments: "experiments",
-  Playgrounds: "playgrounds",
-  Spreadsheets: "spreadsheets",
-  SpreadsheetRun: "spreadsheet_run",
-  LlmEvaluator: "llm_evaluator",
-  Knowledge: "knowledge",
-  Router: "router",
-  Workflows: "workflows",
-  ExternalEvents: "external_events",
-  Agents: "agents",
-  MemoryStores: "memory-stores",
-  Generic: "generic",
-  Evaluators: "evaluators",
-  Otel: "otel",
-  AiChat: "ai-chat",
-  McpGateway: "mcp_gateway",
-} as const;
-export type PostV2FeedbackFeedbackProduct = ClosedEnum<
-  typeof PostV2FeedbackFeedbackProduct
->;
-
 /**
  * Feedback submitted successfully
  */
@@ -105,27 +103,30 @@ export type PostV2FeedbackResponseBody = {
    * The id returned by the [`get_config`](https://docs.orq.ai/reference/deployments/get-config) or [`invoke`](https://docs.orq.ai/reference/deployments/invoke) endpoints
    */
   traceId: string;
-  product: PostV2FeedbackFeedbackProduct;
+  product: PostV2FeedbackProduct;
 };
 
 /** @internal */
-export type Value$Outbound = string | number | Array<string>;
+export type PostV2FeedbackValue$Outbound = string | number | Array<string>;
 
 /** @internal */
-export const Value$outboundSchema: z.ZodType<
-  Value$Outbound,
+export const PostV2FeedbackValue$outboundSchema: z.ZodType<
+  PostV2FeedbackValue$Outbound,
   z.ZodTypeDef,
-  Value
+  PostV2FeedbackValue
 > = z.union([z.string(), z.number(), z.array(z.string())]);
 
-export function valueToJSON(value: Value): string {
-  return JSON.stringify(Value$outboundSchema.parse(value));
+export function postV2FeedbackValueToJSON(
+  postV2FeedbackValue: PostV2FeedbackValue,
+): string {
+  return JSON.stringify(
+    PostV2FeedbackValue$outboundSchema.parse(postV2FeedbackValue),
+  );
 }
 
 /** @internal */
-export const PostV2FeedbackProduct$outboundSchema: z.ZodNativeEnum<
-  typeof PostV2FeedbackProduct
-> = z.nativeEnum(PostV2FeedbackProduct);
+export const Product$outboundSchema: z.ZodNativeEnum<typeof Product> = z
+  .nativeEnum(Product);
 
 /** @internal */
 export type PostV2FeedbackRequestBody$Outbound = {
@@ -146,7 +147,7 @@ export const PostV2FeedbackRequestBody$outboundSchema: z.ZodType<
   field: z.string(),
   value: z.union([z.string(), z.number(), z.array(z.string())]),
   traceId: z.string(),
-  product: PostV2FeedbackProduct$outboundSchema.default("deployments"),
+  product: Product$outboundSchema.default("deployments"),
 }).transform((v) => {
   return remap$(v, {
     field: "property",
@@ -163,26 +164,26 @@ export function postV2FeedbackRequestBodyToJSON(
 }
 
 /** @internal */
-export const PostV2FeedbackValue$inboundSchema: z.ZodType<
-  PostV2FeedbackValue,
+export const PostV2FeedbackFeedbackValue$inboundSchema: z.ZodType<
+  PostV2FeedbackFeedbackValue,
   z.ZodTypeDef,
   unknown
 > = z.union([z.string(), z.number(), z.array(z.string())]);
 
-export function postV2FeedbackValueFromJSON(
+export function postV2FeedbackFeedbackValueFromJSON(
   jsonString: string,
-): SafeParseResult<PostV2FeedbackValue, SDKValidationError> {
+): SafeParseResult<PostV2FeedbackFeedbackValue, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => PostV2FeedbackValue$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PostV2FeedbackValue' from JSON`,
+    (x) => PostV2FeedbackFeedbackValue$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostV2FeedbackFeedbackValue' from JSON`,
   );
 }
 
 /** @internal */
-export const PostV2FeedbackFeedbackProduct$inboundSchema: z.ZodNativeEnum<
-  typeof PostV2FeedbackFeedbackProduct
-> = z.nativeEnum(PostV2FeedbackFeedbackProduct);
+export const PostV2FeedbackProduct$inboundSchema: z.ZodNativeEnum<
+  typeof PostV2FeedbackProduct
+> = z.nativeEnum(PostV2FeedbackProduct);
 
 /** @internal */
 export const PostV2FeedbackResponseBody$inboundSchema: z.ZodType<
@@ -194,7 +195,7 @@ export const PostV2FeedbackResponseBody$inboundSchema: z.ZodType<
   property: z.string(),
   value: z.union([z.string(), z.number(), z.array(z.string())]),
   trace_id: z.string(),
-  product: PostV2FeedbackFeedbackProduct$inboundSchema.default("deployments"),
+  product: PostV2FeedbackProduct$inboundSchema.default("deployments"),
 }).transform((v) => {
   return remap$(v, {
     "trace_id": "traceId",

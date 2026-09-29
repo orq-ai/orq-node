@@ -8,11 +8,7 @@ import { remap as remap$ } from "../../lib/primitives.js";
 /**
  * The feedback value. For single-select, provide a string or single-element array. For multi-select, provide an array of strings. For range evaluations, provide a number. For boolean, provide a boolean. For text/correction, provide a string.
  */
-export type CreateAnnotationAnnotationsValue =
-  | string
-  | number
-  | boolean
-  | Array<string>;
+export type AnnotationsValue = string | number | boolean | Array<string>;
 
 export type Annotations2 = {
   /**
@@ -32,7 +28,7 @@ export type Annotations2 = {
 /**
  * The feedback value. For single-select, provide a string or single-element array. For multi-select, provide an array of strings. For range evaluations, provide a number. For boolean, provide a boolean. For text/correction, provide a string.
  */
-export type AnnotationsValue = string | number | boolean | Array<string>;
+export type Value = string | number | boolean | Array<string>;
 
 export type Annotations1 = {
   /**
@@ -69,26 +65,24 @@ export type CreateAnnotationRequest = {
 };
 
 /** @internal */
-export type CreateAnnotationAnnotationsValue$Outbound =
+export type AnnotationsValue$Outbound =
   | string
   | number
   | boolean
   | Array<string>;
 
 /** @internal */
-export const CreateAnnotationAnnotationsValue$outboundSchema: z.ZodType<
-  CreateAnnotationAnnotationsValue$Outbound,
+export const AnnotationsValue$outboundSchema: z.ZodType<
+  AnnotationsValue$Outbound,
   z.ZodTypeDef,
-  CreateAnnotationAnnotationsValue
+  AnnotationsValue
 > = z.union([z.string(), z.number(), z.boolean(), z.array(z.string())]);
 
-export function createAnnotationAnnotationsValueToJSON(
-  createAnnotationAnnotationsValue: CreateAnnotationAnnotationsValue,
+export function annotationsValueToJSON(
+  annotationsValue: AnnotationsValue,
 ): string {
   return JSON.stringify(
-    CreateAnnotationAnnotationsValue$outboundSchema.parse(
-      createAnnotationAnnotationsValue,
-    ),
+    AnnotationsValue$outboundSchema.parse(annotationsValue),
   );
 }
 
@@ -119,25 +113,17 @@ export function annotations2ToJSON(annotations2: Annotations2): string {
 }
 
 /** @internal */
-export type AnnotationsValue$Outbound =
-  | string
-  | number
-  | boolean
-  | Array<string>;
+export type Value$Outbound = string | number | boolean | Array<string>;
 
 /** @internal */
-export const AnnotationsValue$outboundSchema: z.ZodType<
-  AnnotationsValue$Outbound,
+export const Value$outboundSchema: z.ZodType<
+  Value$Outbound,
   z.ZodTypeDef,
-  AnnotationsValue
+  Value
 > = z.union([z.string(), z.number(), z.boolean(), z.array(z.string())]);
 
-export function annotationsValueToJSON(
-  annotationsValue: AnnotationsValue,
-): string {
-  return JSON.stringify(
-    AnnotationsValue$outboundSchema.parse(annotationsValue),
-  );
+export function valueToJSON(value: Value): string {
+  return JSON.stringify(Value$outboundSchema.parse(value));
 }
 
 /** @internal */

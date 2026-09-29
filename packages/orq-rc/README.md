@@ -318,10 +318,10 @@ run();
 
 ### [Feedback](docs/sdks/feedback/README.md)
 
-* [removeEvaluation](docs/sdks/feedback/README.md#removeevaluation)
-* [createEvaluation](docs/sdks/feedback/README.md#createevaluation)
-* [remove](docs/sdks/feedback/README.md#remove)
+* [~~removeEvaluation~~](docs/sdks/feedback/README.md#removeevaluation) - :warning: **Deprecated**
+* [~~createEvaluation~~](docs/sdks/feedback/README.md#createevaluation) - :warning: **Deprecated**
 * [create](docs/sdks/feedback/README.md#create)
+* [remove](docs/sdks/feedback/README.md#remove)
 * [submit](docs/sdks/feedback/README.md#submit) - Submit feedback
 
 ### [Files](docs/sdks/files/README.md)
@@ -805,9 +805,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`evalsListVersions`](docs/sdks/evals/README.md#listversions) - List evaluator versions
 - [`evalsUpdate`](docs/sdks/evals/README.md#update) - Update an Evaluator
 - [`feedbackCreate`](docs/sdks/feedback/README.md#create)
-- [`feedbackCreateEvaluation`](docs/sdks/feedback/README.md#createevaluation)
 - [`feedbackRemove`](docs/sdks/feedback/README.md#remove)
-- [`feedbackRemoveEvaluation`](docs/sdks/feedback/README.md#removeevaluation)
 - [`feedbackSubmit`](docs/sdks/feedback/README.md#submit) - Submit feedback
 - [`filesCreate`](docs/sdks/files/README.md#create) - Upload a file
 - [`filesDelete`](docs/sdks/files/README.md#delete) - Delete a file
@@ -1065,6 +1063,8 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - ~~[`agentsRun`](docs/sdks/agents/README.md#run)~~ - Run an agent with configuration :warning: **Deprecated**
 - ~~[`agentsStream`](docs/sdks/agents/README.md#stream)~~ - Stream agent execution in real-time :warning: **Deprecated**
 - ~~[`agentsStreamRun`](docs/sdks/agents/README.md#streamrun)~~ - Run agent with streaming response :warning: **Deprecated**
+- ~~[`feedbackCreateEvaluation`](docs/sdks/feedback/README.md#createevaluation)~~ - :warning: **Deprecated**
+- ~~[`feedbackRemoveEvaluation`](docs/sdks/feedback/README.md#removeevaluation)~~ - :warning: **Deprecated**
 - ~~[`webhooksQuery`](docs/sdks/webhooks/README.md#query)~~ - Query webhooks :warning: **Deprecated**
 
 </details>
@@ -1466,8 +1466,8 @@ run();
 * [`UpdateToolResponseBody`](./src/models/errors/updatetoolresponsebody.ts): Tool not found. Status code `404`. Applicable to 1 of 329 methods.*
 * [`GetV2ToolsToolIdVersionsResponseBody`](./src/models/errors/getv2toolstoolidversionsresponsebody.ts): Tool not found. Status code `404`. Applicable to 1 of 329 methods.*
 * [`GetV2ToolsToolIdVersionsVersionIdResponseBody`](./src/models/errors/getv2toolstoolidversionsversionidresponsebody.ts): Tool or version not found. Status code `404`. Applicable to 1 of 329 methods.*
-* [`PostV2FeedbackRemoveResponseBody`](./src/models/errors/postv2feedbackremoveresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 329 methods.*
 * [`PostV2FeedbackFeedbackResponseBody`](./src/models/errors/postv2feedbackfeedbackresponsebody.ts): Workspace, trace, or feedback property was not found. Status code `404`. Applicable to 1 of 329 methods.*
+* [`PostV2FeedbackRemoveResponseBody`](./src/models/errors/postv2feedbackremoveresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 329 methods.*
 * [`GetEvalsResponseBody`](./src/models/errors/getevalsresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 329 methods.*
 * [`CreateEvalResponseBody`](./src/models/errors/createevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 329 methods.*
 * [`GetEvalResponseBody`](./src/models/errors/getevalresponsebody.ts): No evaluator with this id exists in the authenticated workspace, or the request carries no workspace. Status code `404`. Applicable to 1 of 329 methods.*

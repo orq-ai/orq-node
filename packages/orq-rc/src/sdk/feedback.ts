@@ -13,6 +13,9 @@ import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
 export class Feedback extends ClientSDK {
+  /**
+   * @deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
+   */
   async removeEvaluation(
     request?: operations.PostV2FeedbackEvaluationRemoveRequestBody | undefined,
     options?: RequestOptions,
@@ -24,6 +27,9 @@ export class Feedback extends ClientSDK {
     ));
   }
 
+  /**
+   * @deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
+   */
   async createEvaluation(
     request?: operations.PostV2FeedbackEvaluationRequestBody | undefined,
     options?: RequestOptions,
@@ -35,22 +41,22 @@ export class Feedback extends ClientSDK {
     ));
   }
 
-  async remove(
-    request?: operations.PostV2FeedbackRemoveRequestBody | undefined,
+  async create(
+    request?: operations.PostV2FeedbackRequestBody | undefined,
     options?: RequestOptions,
-  ): Promise<operations.PostV2FeedbackRemoveResponseBody> {
-    return unwrapAsync(feedbackRemove(
+  ): Promise<operations.PostV2FeedbackResponseBody> {
+    return unwrapAsync(feedbackCreate(
       this,
       request,
       options,
     ));
   }
 
-  async create(
-    request?: operations.PostV2FeedbackRequestBody | undefined,
+  async remove(
+    request?: operations.PostV2FeedbackRemoveRequestBody | undefined,
     options?: RequestOptions,
-  ): Promise<operations.PostV2FeedbackResponseBody> {
-    return unwrapAsync(feedbackCreate(
+  ): Promise<operations.PostV2FeedbackRemoveResponseBody> {
+    return unwrapAsync(feedbackRemove(
       this,
       request,
       options,

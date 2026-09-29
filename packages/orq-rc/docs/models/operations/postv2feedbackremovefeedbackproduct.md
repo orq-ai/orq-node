@@ -1,11 +1,11 @@
-# PostV2FeedbackFeedbackProduct
+# PostV2FeedbackRemoveFeedbackProduct
 
 ## Example Usage
 
 ```typescript
-import { PostV2FeedbackFeedbackProduct } from "@orq-ai/node/models/operations";
+import { PostV2FeedbackRemoveFeedbackProduct } from "@orq-ai/node/models/operations";
 
-let value: PostV2FeedbackFeedbackProduct = "generic";
+let value: PostV2FeedbackRemoveFeedbackProduct = "mcp_gateway";
 ```
 
 ## Values
