@@ -98,6 +98,14 @@ export type QueryTelemetryRequest = {
    *  caller's token scope.
    */
   projectId?: string | undefined;
+  /**
+   * Free-text trace search, matched like the trace list search. Only for source `TRACES` with trace aggregate metrics.
+   */
+  query?: string | undefined;
+  /**
+   * OQL trace selection (`fetch traces | ...`), compiled to filters like the OQL trace query. Only for source `TRACES` with trace aggregate metrics; cannot be combined with `filters` or `query`.
+   */
+  oql?: string | undefined;
 };
 
 /** @internal */
@@ -142,6 +150,8 @@ export const QueryTelemetryRequest$inboundSchema: z.ZodType<
   interval_seconds: z.number().int().optional(),
   selected_range_seconds: z.number().int().optional(),
   project_id: z.string().optional(),
+  query: z.string().optional(),
+  oql: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "group_by": "groupBy",
@@ -171,6 +181,8 @@ export type QueryTelemetryRequest$Outbound = {
   interval_seconds?: number | undefined;
   selected_range_seconds?: number | undefined;
   project_id?: string | undefined;
+  query?: string | undefined;
+  oql?: string | undefined;
 };
 
 /** @internal */
@@ -195,6 +207,8 @@ export const QueryTelemetryRequest$outboundSchema: z.ZodType<
   intervalSeconds: z.number().int().optional(),
   selectedRangeSeconds: z.number().int().optional(),
   projectId: z.string().optional(),
+  query: z.string().optional(),
+  oql: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     groupBy: "group_by",

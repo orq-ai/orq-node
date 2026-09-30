@@ -30,7 +30,7 @@ import { Result } from "../types/fp.js";
  * Create a new API key
  *
  * @remarks
- * Mints a new API key in the workspace, bound to the single project in `projects` or to every project when omitted. The raw token is returned once in the `token` field and is never retrievable afterwards. Unknown body fields are rejected.
+ * Mints an opaque `sk-orq-` API key. Use `project_scope` to bind it to a single project and `permission_mode` with `access` to restrict permissions. A management key with API-key write access can create keys. The legacy `projects` field is also accepted. The raw token is returned once in the `token` field and is never retrievable afterwards. Unknown body fields are rejected.
  */
 export function apiKeysCreate(
   client: OrqCore,

@@ -14,23 +14,14 @@ export const PermissionMode = {
   All: "all",
   Restricted: "restricted",
   ReadOnly: "read_only",
+  PermissionModeAll: "PERMISSION_MODE_ALL",
+  PermissionModeRestricted: "PERMISSION_MODE_RESTRICTED",
+  PermissionModeReadOnly: "PERMISSION_MODE_READ_ONLY",
 } as const;
 /**
  * Permission preset; restricted keys hold only the domains granted in access.
  */
 export type PermissionMode = ClosedEnum<typeof PermissionMode>;
-
-/**
- * Origin of the key; router keys are minted for the AI router.
- */
-export const ApiKeyCreateSource = {
-  Workspace: "workspace",
-  Router: "router",
-} as const;
-/**
- * Origin of the key; router keys are minted for the AI router.
- */
-export type ApiKeyCreateSource = ClosedEnum<typeof ApiKeyCreateSource>;
 
 export type ApiKeyCreateRequestBody = {
   /**
@@ -51,26 +42,17 @@ export type ApiKeyCreateRequestBody = {
    * Permission preset; restricted keys hold only the domains granted in access.
    */
   permissionMode?: PermissionMode | undefined;
-  projectScope?: components.ProjectScope | undefined;
+  projectScope?: components.RequestProjectScope | undefined;
   /**
    * Legacy single-project binding; prefer project_scope.
    */
   projects?: Array<string> | null | undefined;
-  /**
-   * Origin of the key; router keys are minted for the AI router.
-   */
-  source?: ApiKeyCreateSource | undefined;
 };
 
 /** @internal */
 export const PermissionMode$outboundSchema: z.ZodNativeEnum<
   typeof PermissionMode
 > = z.nativeEnum(PermissionMode);
-
-/** @internal */
-export const ApiKeyCreateSource$outboundSchema: z.ZodNativeEnum<
-  typeof ApiKeyCreateSource
-> = z.nativeEnum(ApiKeyCreateSource);
 
 /** @internal */
 export type ApiKeyCreateRequestBody$Outbound = {
@@ -80,9 +62,8 @@ export type ApiKeyCreateRequestBody$Outbound = {
   name: string;
   owner?: components.Owner$Outbound | undefined;
   permission_mode?: string | undefined;
-  project_scope?: components.ProjectScope$Outbound | undefined;
+  project_scope?: components.RequestProjectScope$Outbound | undefined;
   projects?: Array<string> | null | undefined;
-  source?: string | undefined;
 };
 
 /** @internal */
@@ -97,9 +78,8 @@ export const ApiKeyCreateRequestBody$outboundSchema: z.ZodType<
   name: z.string(),
   owner: components.Owner$outboundSchema.optional(),
   permissionMode: PermissionMode$outboundSchema.optional(),
-  projectScope: components.ProjectScope$outboundSchema.optional(),
+  projectScope: components.RequestProjectScope$outboundSchema.optional(),
   projects: z.nullable(z.array(z.string())).optional(),
-  source: ApiKeyCreateSource$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     permissionMode: "permission_mode",

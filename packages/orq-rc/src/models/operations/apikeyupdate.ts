@@ -14,6 +14,9 @@ export const ApiKeyUpdatePermissionMode = {
   All: "all",
   Restricted: "restricted",
   ReadOnly: "read_only",
+  PermissionModeAll: "PERMISSION_MODE_ALL",
+  PermissionModeRestricted: "PERMISSION_MODE_RESTRICTED",
+  PermissionModeReadOnly: "PERMISSION_MODE_READ_ONLY",
 } as const;
 /**
  * Permission preset; a restricted key must keep at least one granted domain.
@@ -53,7 +56,7 @@ export type ApiKeyUpdateRequestBody = {
    * Permission preset; a restricted key must keep at least one granted domain.
    */
   permissionMode?: ApiKeyUpdatePermissionMode | undefined;
-  projectScope?: components.ProjectScope | undefined;
+  projectScope?: components.RequestProjectScope | undefined;
   /**
    * Lifecycle status; revoked is terminal.
    */
@@ -84,7 +87,7 @@ export type ApiKeyUpdateRequestBody$Outbound = {
   constraints?: components.Constraints$Outbound | undefined;
   name?: string | undefined;
   permission_mode?: string | undefined;
-  project_scope?: components.ProjectScope$Outbound | undefined;
+  project_scope?: components.RequestProjectScope$Outbound | undefined;
   status?: string | undefined;
 };
 
@@ -99,7 +102,7 @@ export const ApiKeyUpdateRequestBody$outboundSchema: z.ZodType<
   constraints: components.Constraints$outboundSchema.optional(),
   name: z.string().optional(),
   permissionMode: ApiKeyUpdatePermissionMode$outboundSchema.optional(),
-  projectScope: components.ProjectScope$outboundSchema.optional(),
+  projectScope: components.RequestProjectScope$outboundSchema.optional(),
   status: Status$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
