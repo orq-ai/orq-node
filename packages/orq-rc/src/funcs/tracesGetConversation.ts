@@ -3,7 +3,7 @@
  */
 
 import { OrqCore } from "../core.js";
-import { encodeSimple } from "../lib/encodings.js";
+import { encodeFormQuery, encodeSimple } from "../lib/encodings.js";
 import { matchStatusCode } from "../lib/http.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
@@ -11,6 +11,7 @@ import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
+import * as components from "../models/components/index.js";
 import {
   ConnectionError,
   InvalidRequestError,
@@ -18,7 +19,6 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
-import * as errors from "../models/errors/index.js";
 import { OrqError } from "../models/errors/orqerror.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
@@ -27,19 +27,18 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Retrieve an Evaluator
+ * Get trace conversation
  *
  * @remarks
- * Retrieve a single evaluator by ID with more detail than the list endpoint: full type-specific config, owner, domain_id, metadata and enabled.
+ * Return ordered OpenResponses items from the selected model-call span. Prefers spans with output outside evaluator subtrees unless `span_id` is given.
  */
-export function evalsGet(
+export function tracesGetConversation(
   client: OrqCore,
-  request: operations.GetEvalRequest,
+  request: operations.TracesGetConversationRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.GetEvalResponseBody,
-    | errors.GetEvalResponseBody
+    components.GetTraceConversationResponse,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -59,13 +58,12 @@ export function evalsGet(
 
 async function $do(
   client: OrqCore,
-  request: operations.GetEvalRequest,
+  request: operations.TracesGetConversationRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.GetEvalResponseBody,
-      | errors.GetEvalResponseBody
+      components.GetTraceConversationResponse,
       | OrqError
       | ResponseValidationError
       | ConnectionError
@@ -80,7 +78,8 @@ async function $do(
 > {
   const parsed = safeParse(
     request,
-    (value) => operations.GetEvalRequest$outboundSchema.parse(value),
+    (value) =>
+      operations.TracesGetConversationRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -90,12 +89,16 @@ async function $do(
   const body = null;
 
   const pathParams = {
-    id: encodeSimple("id", payload.id, {
+    trace_id: encodeSimple("trace_id", payload.trace_id, {
       explode: false,
       charEncoding: "percent",
     }),
   };
-  const path = pathToFunc("/v2/evaluators/{id}")(pathParams);
+  const path = pathToFunc("/v3/traces/{trace_id}/conversation")(pathParams);
+
+  const query = encodeFormQuery({
+    "span_id": payload.span_id,
+  });
 
   const headers = new Headers(compactMap({
     Accept: "application/json",
@@ -108,7 +111,7 @@ async function $do(
   const context = {
     options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
-    operationID: "GetEval",
+    operationID: "TracesGetConversation",
     oAuth2Scopes: null,
 
     resolvedSecurity: requestSecurity,
@@ -126,6 +129,7 @@ async function $do(
     baseURL: options?.serverURL,
     path: path,
     headers: headers,
+    query: query,
     body: body,
     userAgent: client._options.userAgent,
     timeoutMs: options?.timeoutMs || client._options.timeoutMs || 600000,
@@ -147,13 +151,8 @@ async function $do(
   }
   const response = doResult.value;
 
-  const responseFields = {
-    HttpMeta: { Response: response, Request: req },
-  };
-
   const [result] = await M.match<
-    operations.GetEvalResponseBody,
-    | errors.GetEvalResponseBody
+    components.GetTraceConversationResponse,
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -163,11 +162,10 @@ async function $do(
     | UnexpectedClientError
     | SDKValidationError
   >(
-    M.json(200, operations.GetEvalResponseBody$inboundSchema),
-    M.jsonErr(404, errors.GetEvalResponseBody$inboundSchema),
+    M.json(200, components.GetTraceConversationResponse$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
-  )(response, req, { extraFields: responseFields });
+  )(response, req);
   if (!result.ok) {
     return [result, { status: "complete", request: req, response }];
   }

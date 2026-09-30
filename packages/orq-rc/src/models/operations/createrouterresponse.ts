@@ -962,10 +962,6 @@ export type CreateRouterResponseRequestBody = {
   stream?: boolean | undefined;
   streamOptions?: components.StreamOptions | undefined;
   /**
-   * Tags attached to the request trace.
-   */
-  tags?: Array<string> | null | undefined;
-  /**
    * Sampling temperature between 0 and 2.
    */
   temperature?: number | undefined;
@@ -2109,7 +2105,6 @@ export type CreateRouterResponseRequestBody$Outbound = {
   store?: boolean | undefined;
   stream?: boolean | undefined;
   stream_options?: components.StreamOptions$Outbound | undefined;
-  tags?: Array<string> | null | undefined;
   temperature?: number | undefined;
   template_engine?: string | undefined;
   text?: CreateRouterResponseText$Outbound | undefined;
@@ -2195,7 +2190,6 @@ export const CreateRouterResponseRequestBody$outboundSchema: z.ZodType<
   store: z.boolean().optional(),
   stream: z.boolean().optional(),
   streamOptions: components.StreamOptions$outboundSchema.optional(),
-  tags: z.nullable(z.array(z.string())).optional(),
   temperature: z.number().optional(),
   templateEngine: TemplateEngine$outboundSchema.optional(),
   text: z.lazy(() => CreateRouterResponseText$outboundSchema).optional(),

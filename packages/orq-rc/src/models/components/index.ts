@@ -249,6 +249,7 @@ export * from "./getskillresponse.js";
 export * from "./getsmartrouterresponse.js";
 export * from "./getthreadcountrequest.js";
 export * from "./getthreadcountresponse.js";
+export * from "./gettraceconversationresponse.js";
 export * from "./gettraceresponse.js";
 export * from "./gettracespanresponse.js";
 export * from "./getuploadfileurlresponse.js";

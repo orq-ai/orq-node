@@ -238,6 +238,7 @@ export * from "./streamagent.js";
 export * from "./streamrunagent.js";
 export * from "./telemetrylistcapabilities.js";
 export * from "./tracesget.js";
+export * from "./tracesgetconversation.js";
 export * from "./tracesgetspan.js";
 export * from "./traceslistfacetvalues.js";
 export * from "./traceslistfilters.js";

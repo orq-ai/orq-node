@@ -4,6 +4,7 @@
 
 import { tracesAggregate } from "../funcs/tracesAggregate.js";
 import { tracesGet } from "../funcs/tracesGet.js";
+import { tracesGetConversation } from "../funcs/tracesGetConversation.js";
 import { tracesGetSpan } from "../funcs/tracesGetSpan.js";
 import { tracesListFacets } from "../funcs/tracesListFacets.js";
 import { tracesListFacetValues } from "../funcs/tracesListFacetValues.js";
@@ -144,6 +145,23 @@ export class Traces extends ClientSDK {
     options?: RequestOptions,
   ): Promise<components.GetTraceResponse> {
     return unwrapAsync(tracesGet(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Get trace conversation
+   *
+   * @remarks
+   * Return ordered OpenResponses items from the selected model-call span. Prefers spans with output outside evaluator subtrees unless `span_id` is given.
+   */
+  async getConversation(
+    request: operations.TracesGetConversationRequest,
+    options?: RequestOptions,
+  ): Promise<components.GetTraceConversationResponse> {
+    return unwrapAsync(tracesGetConversation(
       this,
       request,
       options,
