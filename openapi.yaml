@@ -2556,7 +2556,7 @@ components:
           properties:
             _id:
               type: "string"
-              default: "reasoning_01m3scsze39ebd8mkp4v5d1xat"
+              default: "reasoning_01m3sp0zygs3tb5b9sgptv4kdr"
               description: "Unique identifier for the part. Format: reasoning_{ulid} (e.g., reasoning_01hxyz...)"
               example: "reasoning_01hxyz123abc"
             kind:
@@ -8717,6 +8717,9 @@ components:
           items:
             type: "string"
       description: "EntityList wraps a repeated string because proto3 maps cannot hold\n repeated values directly."
+    AllProjectsScope:
+      additionalProperties: false
+      type: "object"
     ApiKeyResponse:
       additionalProperties: false
       properties:
@@ -8829,9 +8832,12 @@ components:
             - "all"
             - "restricted"
             - "read_only"
+            - "PERMISSION_MODE_ALL"
+            - "PERMISSION_MODE_RESTRICTED"
+            - "PERMISSION_MODE_READ_ONLY"
           type: "string"
         project_scope:
-          $ref: "#/components/schemas/ProjectScope"
+          $ref: "#/components/schemas/RequestProjectScope"
           description: "Projects the key may reach: every project of the workspace or a single one."
         projects:
           description: "Legacy single-project binding; prefer project_scope."
@@ -8841,12 +8847,6 @@ components:
           type:
             - "array"
             - "null"
-        source:
-          description: "Origin of the key; router keys are minted for the AI router."
-          enum:
-            - "workspace"
-            - "router"
-          type: "string"
       required:
         - "name"
       type: "object"
@@ -8916,6 +8916,31 @@ components:
       required:
         - "mode"
       type: "object"
+    RequestProjectScope:
+      additionalProperties: false
+      properties:
+        all:
+          $ref: "#/components/schemas/AllProjectsScope"
+        mode:
+          enum:
+            - "all"
+            - "single"
+            - "PROJECT_SCOPE_MODE_ALL"
+            - "PROJECT_SCOPE_MODE_SINGLE"
+          type: "string"
+        project_id:
+          type: "string"
+        single:
+          $ref: "#/components/schemas/SingleProjectScope"
+      type: "object"
+    SingleProjectScope:
+      additionalProperties: false
+      properties:
+        project_id:
+          type: "string"
+      required:
+        - "project_id"
+      type: "object"
     UpdateApiKeyRequest:
       additionalProperties: false
       properties:
@@ -8940,9 +8965,12 @@ components:
             - "all"
             - "restricted"
             - "read_only"
+            - "PERMISSION_MODE_ALL"
+            - "PERMISSION_MODE_RESTRICTED"
+            - "PERMISSION_MODE_READ_ONLY"
           type: "string"
         project_scope:
-          $ref: "#/components/schemas/ProjectScope"
+          $ref: "#/components/schemas/RequestProjectScope"
           description: "Projects the key may reach."
         status:
           description: "Lifecycle status; revoked is terminal."
@@ -9797,6 +9825,12 @@ components:
         project_id:
           type: "string"
           description: "Pins the read to one project the caller can reach. Omit to keep the\n caller's token scope."
+        query:
+          type: "string"
+          description: "Free-text trace search, matched like the trace list search. Only for source `TRACES` with trace aggregate metrics."
+        oql:
+          type: "string"
+          description: "OQL trace selection (`fetch traces | ...`), compiled to filters like the OQL trace query. Only for source `TRACES` with trace aggregate metrics; cannot be combined with `filters` or `query`."
     QueryTelemetryResponse:
       type: "object"
       properties:
@@ -9983,6 +10017,9 @@ components:
           format: "int32"
         filter_operator:
           type: "string"
+        query:
+          type: "string"
+          description: "Free-text search with the same matching as SearchTracesRequest.query."
     AggregateTracesResponse:
       type: "object"
       properties:
@@ -32498,7 +32535,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01M3SCSZG10RCCWS7F4KBJ942K"
+                                          default: "01M3SP0ZZDWV9XBX6EGJTNG4BE"
                                         name:
                                           type: "string"
                                         description:
@@ -34096,7 +34133,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01M3SCSZGQNFWR1EJEA4779TVC"
+                                          default: "01M3SP0ZZR8MVV595EVH6WW96N"
                                         name:
                                           type: "string"
                                         description:
@@ -42993,7 +43030,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M3SCSZJGX0C5XP7KH9Y89545"
+                              default: "tool_01M3SP100JNAKANS841PZ05C6S"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -43094,7 +43131,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M3SCSZJHQTG10F6895GQY4XF"
+                              default: "tool_01M3SP100JJCMJRR9G84RJDTFR"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -43197,7 +43234,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M3SCSZJHE2Q9CEEKF1MF26JK"
+                              default: "tool_01M3SP100KW6NSHEZM9PXD4V27"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -43341,7 +43378,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M3SCSZJK5NM6Y0N38YYV34X3"
+                              default: "tool_01M3SP100K4Y8TRAGHPVSC752P"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -43832,7 +43869,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M3SCSZJQ13T1RQXKD36M2BN8"
+                        default: "tool_01M3SP100NKNX8Q34M66GE0EG2"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -43933,7 +43970,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M3SCSZJRDT6DB1RRNCMKDZRP"
+                        default: "tool_01M3SP100PWKSZ2ZFSEFESDZ4E"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -44036,7 +44073,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M3SCSZJSVP1FD1V08T64PQAR"
+                        default: "tool_01M3SP100PZW58414R5XE9HBXN"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -44180,7 +44217,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M3SCSZJTEEJESCKB4DJM64EC"
+                        default: "tool_01M3SP100P46KJFT4Q32DK0D4W"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -44678,7 +44715,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M3SCSZJX7J99TMGEX98V5DZV"
+                        default: "tool_01M3SP100RBPZG8TWV1NMC3P7H"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -44779,7 +44816,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M3SCSZJXV93MY3CAC2DPNZPF"
+                        default: "tool_01M3SP100R3DR61CTPF3SWBTFT"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -44882,7 +44919,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M3SCSZJYYT53B0K1VSTMGPFM"
+                        default: "tool_01M3SP100RBAKQJQQ058VQJJB3"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -45026,7 +45063,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M3SCSZJZ9B1H9ZS0JBQTBPFC"
+                        default: "tool_01M3SP100SCR6H959P7TV4H3JX"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -45187,7 +45224,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M3SCSZK6QA5G8PR80JJ3K92X"
+                        default: "tool_01M3SP100WVVYHE6ZVEMPFD7EA"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -45288,7 +45325,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M3SCSZK714KKYSE9T10GMVSZ"
+                        default: "tool_01M3SP100WGQFHEZ63QB3CVZP6"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -45391,7 +45428,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M3SCSZK8HAPD1BPWV7E1K8YR"
+                        default: "tool_01M3SP100XZD7E6QK4VHNR363R"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -45535,7 +45572,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M3SCSZK9GZ6QTK81DE7DRA4B"
+                        default: "tool_01M3SP100XQV3JKQTZ78EDNVF6"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -51842,7 +51879,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-09-30T14:51:55.928Z"
+                      default: "2026-09-30T17:33:02.900Z"
                       deprecated: true
                       description: "Deprecated. The date and time the item was reviewed"
                     type:
@@ -51884,7 +51921,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-09-30T14:51:55.928Z"
+                      default: "2026-09-30T17:33:02.900Z"
                       deprecated: true
                       description: "Deprecated. The date and time the item was reviewed"
                     type:
@@ -51926,7 +51963,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-09-30T14:51:55.928Z"
+                      default: "2026-09-30T17:33:02.900Z"
                       deprecated: true
                       description: "Deprecated. The date and time the item was reviewed"
                     type:
@@ -51968,7 +52005,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-09-30T14:51:55.929Z"
+                      default: "2026-09-30T17:33:02.900Z"
                       deprecated: true
                       description: "Deprecated. The date and time the item was reviewed"
                     type:
@@ -52071,7 +52108,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-09-30T14:51:46.789Z"
+                          default: "2026-09-30T17:32:57.754Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -52079,7 +52116,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-09-30T14:51:46.790Z"
+                              default: "2026-09-30T17:32:57.755Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -52149,7 +52186,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-09-30T14:51:46.789Z"
+                          default: "2026-09-30T17:32:57.754Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -52157,7 +52194,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-09-30T14:51:46.790Z"
+                              default: "2026-09-30T17:32:57.755Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -52333,7 +52370,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-09-30T14:51:46.789Z"
+                        default: "2026-09-30T17:32:57.754Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -52341,7 +52378,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-09-30T14:51:46.790Z"
+                            default: "2026-09-30T17:32:57.755Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -52411,7 +52448,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-09-30T14:51:46.789Z"
+                        default: "2026-09-30T17:32:57.754Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -52419,7 +52456,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-09-30T14:51:46.790Z"
+                            default: "2026-09-30T17:32:57.755Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -52513,7 +52550,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-09-30T14:51:46.789Z"
+                        default: "2026-09-30T17:32:57.754Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -52521,7 +52558,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-09-30T14:51:46.790Z"
+                            default: "2026-09-30T17:32:57.755Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -52591,7 +52628,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-09-30T14:51:46.789Z"
+                        default: "2026-09-30T17:32:57.754Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -52599,7 +52636,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-09-30T14:51:46.790Z"
+                            default: "2026-09-30T17:32:57.755Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -52783,7 +52820,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-09-30T14:51:46.789Z"
+                        default: "2026-09-30T17:32:57.754Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -52791,7 +52828,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-09-30T14:51:46.790Z"
+                            default: "2026-09-30T17:32:57.755Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -52861,7 +52898,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-09-30T14:51:46.789Z"
+                        default: "2026-09-30T17:32:57.754Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -52869,7 +52906,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-09-30T14:51:46.790Z"
+                            default: "2026-09-30T17:32:57.755Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -58476,7 +58513,7 @@ paths:
       security:
         - ApiKey: []
     post:
-      description: "Mints a new API key in the workspace, bound to the single project in `projects` or to every project when omitted. The raw token is returned once in the `token` field and is never retrievable afterwards. Unknown body fields are rejected."
+      description: "Mints an opaque `sk-orq-` API key. Use `project_scope` to bind it to a single project and `permission_mode` with `access` to restrict permissions. A management key with API-key write access can create keys. The legacy `projects` field is also accepted. The raw token is returned once in the `token` field and is never retrievable afterwards. Unknown body fields are rejected."
       operationId: "ApiKeyCreate"
       requestBody:
         content:
@@ -58509,9 +58546,12 @@ paths:
                     - "all"
                     - "restricted"
                     - "read_only"
+                    - "PERMISSION_MODE_ALL"
+                    - "PERMISSION_MODE_RESTRICTED"
+                    - "PERMISSION_MODE_READ_ONLY"
                   type: "string"
                 project_scope:
-                  $ref: "#/components/schemas/ProjectScope"
+                  $ref: "#/components/schemas/RequestProjectScope"
                   description: "Projects the key may reach: every project of the workspace or a single one."
                 projects:
                   description: "Legacy single-project binding; prefer project_scope."
@@ -58521,12 +58561,6 @@ paths:
                   type:
                     - "array"
                     - "null"
-                source:
-                  description: "Origin of the key; router keys are minted for the AI router."
-                  enum:
-                    - "workspace"
-                    - "router"
-                  type: "string"
               required:
                 - "name"
               type: "object"
@@ -58552,22 +58586,22 @@ paths:
       x-code-samples:
         - lang: "curl"
           label: "Core - Create service account key"
-          source: "curl --request POST \\\n  --url 'https://my.orq.ai/v2/api-keys' \\\n  --header \"Authorization: Bearer $ORQ_API_KEY\" \\\n  --header 'Content-Type: application/json' \\\n  --data '{\n    \"name\": \"Production service key\",\n    \"owner\": {\n      \"type\": \"service_account\"\n    },\n    \"project_scope\": {\n      \"mode\": \"all\"\n    },\n    \"permission_mode\": \"all\"\n  }'\n"
+          source: "curl --request POST \\\n  --url 'https://my.orq.ai/v2/api-keys' \\\n  --header \"Authorization: Bearer $ORQ_MANAGEMENT_KEY\" \\\n  --header 'Content-Type: application/json' \\\n  --data '{\n    \"name\": \"Production service key\",\n    \"owner\": {\n      \"type\": \"service_account\"\n    },\n    \"project_scope\": {\n      \"mode\": \"all\"\n    },\n    \"permission_mode\": \"all\"\n  }'\n"
         - lang: "python"
           label: "Python - Create service account key"
-          source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\nresult = client.api_keys.create(\n    name=\"Production service key\",\n    owner={\"type\": \"service_account\"},\n    project_scope={\"mode\": \"all\"},\n    permission_mode=\"all\",\n)\n\n# Store the token immediately. It is only returned once.\nprint(result.token)\n"
+          source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_MANAGEMENT_KEY\"])\n\nresult = client.api_keys.create(\n    name=\"Production service key\",\n    owner={\"type\": \"service_account\"},\n    project_scope={\"mode\": \"all\"},\n    permission_mode=\"all\",\n)\n\n# Store the token immediately. It is only returned once.\nprint(result.token)\n"
         - lang: "typescript"
           label: "Node.js - Create service account key"
-          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\nconst result = await client.apiKeys.create({\n  name: 'Production service key',\n  owner: {\n    type: 'service_account',\n  },\n  projectScope: {\n    mode: 'all',\n  },\n  permissionMode: 'all',\n});\n\n// Store the token immediately. It is only returned once.\nconsole.log(result.token);\n"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_MANAGEMENT_KEY,\n});\n\nconst result = await client.apiKeys.create({\n  name: 'Production service key',\n  owner: {\n    type: 'service_account',\n  },\n  projectScope: {\n    mode: 'all',\n  },\n  permissionMode: 'all',\n});\n\n// Store the token immediately. It is only returned once.\nconsole.log(result.token);\n"
         - lang: "curl"
           label: "Core - Create restricted project key"
-          source: "curl --request POST \\\n  --url 'https://my.orq.ai/v2/api-keys' \\\n  --header \"Authorization: Bearer $ORQ_API_KEY\" \\\n  --header 'Content-Type: application/json' \\\n  --data '{\n    \"name\": \"Support automation key\",\n    \"project_scope\": {\n      \"mode\": \"single\",\n      \"project_id\": \"proj_01HZXW2K7Y8Q9M0N1P2R3S4T5V\"\n    },\n    \"permission_mode\": \"restricted\",\n    \"access\": {\n      \"agent\": \"write\",\n      \"deployment\": \"read\"\n    }\n  }'\n"
+          source: "curl --request POST \\\n  --url 'https://my.orq.ai/v2/api-keys' \\\n  --header \"Authorization: Bearer $ORQ_MANAGEMENT_KEY\" \\\n  --header 'Content-Type: application/json' \\\n  --data '{\n    \"name\": \"Support automation key\",\n    \"project_scope\": {\n      \"mode\": \"single\",\n      \"project_id\": \"proj_01HZXW2K7Y8Q9M0N1P2R3S4T5V\"\n    },\n    \"permission_mode\": \"restricted\",\n    \"access\": {\n      \"agent\": \"write\",\n      \"deployment\": \"read\"\n    }\n  }'\n"
         - lang: "python"
           label: "Python - Create restricted project key"
-          source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\nresult = client.api_keys.create(\n    name=\"Support automation key\",\n    project_scope={\n        \"mode\": \"single\",\n        \"project_id\": \"proj_01HZXW2K7Y8Q9M0N1P2R3S4T5V\",\n    },\n    permission_mode=\"restricted\",\n    access={\n        \"agent\": \"write\",\n        \"deployment\": \"read\",\n    },\n)\n\nprint(result.id)\nprint(result.token)\n"
+          source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_MANAGEMENT_KEY\"])\n\nresult = client.api_keys.create(\n    name=\"Support automation key\",\n    project_scope={\n        \"mode\": \"single\",\n        \"project_id\": \"proj_01HZXW2K7Y8Q9M0N1P2R3S4T5V\",\n    },\n    permission_mode=\"restricted\",\n    access={\n        \"agent\": \"write\",\n        \"deployment\": \"read\",\n    },\n)\n\nprint(result.id)\nprint(result.token)\n"
         - lang: "typescript"
           label: "Node.js - Create restricted project key"
-          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\nconst result = await client.apiKeys.create({\n  name: 'Support automation key',\n  projectScope: {\n    mode: 'single',\n    projectId: 'proj_01HZXW2K7Y8Q9M0N1P2R3S4T5V',\n  },\n  permissionMode: 'restricted',\n  access: {\n    agent: 'write',\n    deployment: 'read',\n  },\n});\n\nconsole.log(result.id);\nconsole.log(result.token);\n"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_MANAGEMENT_KEY,\n});\n\nconst result = await client.apiKeys.create({\n  name: 'Support automation key',\n  projectScope: {\n    mode: 'single',\n    projectId: 'proj_01HZXW2K7Y8Q9M0N1P2R3S4T5V',\n  },\n  permissionMode: 'restricted',\n  access: {\n    agent: 'write',\n    deployment: 'read',\n  },\n});\n\nconsole.log(result.id);\nconsole.log(result.token);\n"
       security:
         - ApiKey: []
   /v2/api-keys/capabilities:
@@ -58726,9 +58760,12 @@ paths:
                     - "all"
                     - "restricted"
                     - "read_only"
+                    - "PERMISSION_MODE_ALL"
+                    - "PERMISSION_MODE_RESTRICTED"
+                    - "PERMISSION_MODE_READ_ONLY"
                   type: "string"
                 project_scope:
-                  $ref: "#/components/schemas/ProjectScope"
+                  $ref: "#/components/schemas/RequestProjectScope"
                   description: "Projects the key may reach."
                 status:
                   description: "Lifecycle status; revoked is terminal."
