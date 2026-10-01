@@ -70,6 +70,11 @@ export type ListAgentsTeamOfAgents = {
   role?: string | undefined;
 };
 
+export type ListAgentsAgentPlugins = {
+  id: string;
+  version: string;
+};
+
 export type ListAgentsMetrics = {
   totalCost: number;
 };
@@ -1293,6 +1298,7 @@ export type ListAgentsData = {
    * List of skills that the agent can utilize. This field allows you to specify which skills the agent has access to, enabling more complex and dynamic behavior.
    */
   skills?: Array<string> | undefined;
+  agentPlugins?: Array<ListAgentsAgentPlugins> | undefined;
   metrics?: ListAgentsMetrics | undefined;
   /**
    * Extracted variables from agent instructions
@@ -1390,6 +1396,26 @@ export function listAgentsTeamOfAgentsFromJSON(
     jsonString,
     (x) => ListAgentsTeamOfAgents$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'ListAgentsTeamOfAgents' from JSON`,
+  );
+}
+
+/** @internal */
+export const ListAgentsAgentPlugins$inboundSchema: z.ZodType<
+  ListAgentsAgentPlugins,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.string(),
+  version: z.string(),
+});
+
+export function listAgentsAgentPluginsFromJSON(
+  jsonString: string,
+): SafeParseResult<ListAgentsAgentPlugins, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ListAgentsAgentPlugins$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListAgentsAgentPlugins' from JSON`,
   );
 }
 
@@ -2979,6 +3005,8 @@ export const ListAgentsData$inboundSchema: z.ZodType<
   team_of_agents: z.array(z.lazy(() => ListAgentsTeamOfAgents$inboundSchema))
     .optional(),
   skills: z.array(z.string()).optional(),
+  agent_plugins: z.array(z.lazy(() => ListAgentsAgentPlugins$inboundSchema))
+    .optional(),
   metrics: z.lazy(() => ListAgentsMetrics$inboundSchema).optional(),
   variables: z.record(z.any()).optional(),
   knowledge_bases: z.array(z.lazy(() => ListAgentsKnowledgeBases$inboundSchema))
@@ -3000,6 +3028,7 @@ export const ListAgentsData$inboundSchema: z.ZodType<
     "updated_by_id": "updatedById",
     "memory_stores": "memoryStores",
     "team_of_agents": "teamOfAgents",
+    "agent_plugins": "agentPlugins",
     "knowledge_bases": "knowledgeBases",
     "system_prompt": "systemPrompt",
   });

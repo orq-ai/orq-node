@@ -44,6 +44,11 @@ export type RetrieveAgentRequestTeamOfAgents = {
   role?: string | undefined;
 };
 
+export type RetrieveAgentRequestAgentPlugins = {
+  id: string;
+  version: string;
+};
+
 export type RetrieveAgentRequestMetrics = {
   totalCost: number;
 };
@@ -1301,6 +1306,7 @@ export type RetrieveAgentRequestResponseBody = {
    * List of skills that the agent can utilize. This field allows you to specify which skills the agent has access to, enabling more complex and dynamic behavior.
    */
   skills?: Array<string> | undefined;
+  agentPlugins?: Array<RetrieveAgentRequestAgentPlugins> | undefined;
   metrics?: RetrieveAgentRequestMetrics | undefined;
   /**
    * Extracted variables from agent instructions
@@ -1374,6 +1380,26 @@ export function retrieveAgentRequestTeamOfAgentsFromJSON(
     jsonString,
     (x) => RetrieveAgentRequestTeamOfAgents$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'RetrieveAgentRequestTeamOfAgents' from JSON`,
+  );
+}
+
+/** @internal */
+export const RetrieveAgentRequestAgentPlugins$inboundSchema: z.ZodType<
+  RetrieveAgentRequestAgentPlugins,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.string(),
+  version: z.string(),
+});
+
+export function retrieveAgentRequestAgentPluginsFromJSON(
+  jsonString: string,
+): SafeParseResult<RetrieveAgentRequestAgentPlugins, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => RetrieveAgentRequestAgentPlugins$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RetrieveAgentRequestAgentPlugins' from JSON`,
   );
 }
 
@@ -3064,6 +3090,9 @@ export const RetrieveAgentRequestResponseBody$inboundSchema: z.ZodType<
     z.lazy(() => RetrieveAgentRequestTeamOfAgents$inboundSchema),
   ).optional(),
   skills: z.array(z.string()).optional(),
+  agent_plugins: z.array(
+    z.lazy(() => RetrieveAgentRequestAgentPlugins$inboundSchema),
+  ).optional(),
   metrics: z.lazy(() => RetrieveAgentRequestMetrics$inboundSchema).optional(),
   variables: z.record(z.any()).optional(),
   knowledge_bases: z.array(
@@ -3087,6 +3116,7 @@ export const RetrieveAgentRequestResponseBody$inboundSchema: z.ZodType<
     "updated_by_id": "updatedById",
     "memory_stores": "memoryStores",
     "team_of_agents": "teamOfAgents",
+    "agent_plugins": "agentPlugins",
     "knowledge_bases": "knowledgeBases",
     "system_prompt": "systemPrompt",
   });

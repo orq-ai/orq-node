@@ -44,7 +44,7 @@ let value: RetrieveResponseResponseBody = {
   promptCacheRetention: "<value>",
   reasoning: {},
   safetyIdentifier: null,
-  serviceTier: "scale",
+  serviceTier: "ultrafast",
   status: "failed",
   store: false,
   temperature: 1686.88,

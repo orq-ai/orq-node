@@ -475,18 +475,19 @@ export type CreateRouterResponseInput =
   | Array<CreateRouterResponseInput2>;
 
 /**
- * Processing mode for the request. Fast uses premium low-latency processing; priority remains a backward-compatible alias.
+ * Processing mode for the request. Ultrafast is available for GPT-6 Astra on US/global processing. Fast uses premium low-latency processing; priority remains a backward-compatible alias.
  */
 export const ServiceTier = {
   Auto: "auto",
   Default: "default",
   Flex: "flex",
   Fast: "fast",
+  Ultrafast: "ultrafast",
   Scale: "scale",
   Priority: "priority",
 } as const;
 /**
- * Processing mode for the request. Fast uses premium low-latency processing; priority remains a backward-compatible alias.
+ * Processing mode for the request. Ultrafast is available for GPT-6 Astra on US/global processing. Fast uses premium low-latency processing; priority remains a backward-compatible alias.
  */
 export type ServiceTier = ClosedEnum<typeof ServiceTier>;
 
@@ -684,6 +685,7 @@ export const CreateRouterResponseToolsResponsesRequestType = {
   OrqWebFetch: "orq:web_fetch",
   OrqDatetime: "orq:datetime",
   OrqSearchModels: "orq:search_models",
+  OrqToolSearch: "orq:tool_search",
   OrqImageGeneration: "orq:image_generation",
   OrqApplyPatch: "orq:apply_patch",
   OrqFusion: "orq:fusion",
@@ -713,6 +715,10 @@ export type OrqAiTool = {
    * Files to stage in /workspace for orq:code_interpreter. Maximum 10 files.
    */
   files?: Array<Files> | undefined;
+  /**
+   * Maximum results per call for orq:search_models (1-20, default 5) and orq:tool_search (1-50, default 5).
+   */
+  maxResults?: number | undefined;
   /**
    * Network access intent for orq:code_interpreter. Stored and validated today; runtime enforcement by the sandbox egress layer is rolling out and until then sandbox executions retain default public internet egress.
    */
@@ -815,6 +821,10 @@ export type ToolsFunction = {
   async?: boolean | undefined;
   cacheControl?: ToolsCacheControl | undefined;
   /**
+   * Hide this tool from the model until an orq:tool_search call reveals it. Requires an orq:tool_search tool in the same request.
+   */
+  deferLoading?: boolean | undefined;
+  /**
    * A description of what the function does.
    */
   description?: string | undefined;
@@ -846,6 +856,7 @@ export type CreateRouterResponseTools =
   | (OrqAiTool & { type: "orq:web_fetch" })
   | (OrqAiTool & { type: "orq:datetime" })
   | (OrqAiTool & { type: "orq:search_models" })
+  | (OrqAiTool & { type: "orq:tool_search" })
   | (OrqAiTool & { type: "orq:image_generation" })
   | (OrqAiTool & { type: "orq:apply_patch" })
   | (OrqAiTool & { type: "orq:fusion" })
@@ -945,7 +956,7 @@ export type CreateRouterResponseRequestBody = {
   safetyIdentifier?: string | undefined;
   security?: components.SecurityConfig | undefined;
   /**
-   * Processing mode for the request. Fast uses premium low-latency processing; priority remains a backward-compatible alias.
+   * Processing mode for the request. Ultrafast is available for GPT-6 Astra on US/global processing. Fast uses premium low-latency processing; priority remains a backward-compatible alias.
    */
   serviceTier?: ServiceTier | undefined;
   /**
@@ -993,6 +1004,7 @@ export type CreateRouterResponseRequestBody = {
       | (OrqAiTool & { type: "orq:web_fetch" })
       | (OrqAiTool & { type: "orq:datetime" })
       | (OrqAiTool & { type: "orq:search_models" })
+      | (OrqAiTool & { type: "orq:tool_search" })
       | (OrqAiTool & { type: "orq:image_generation" })
       | (OrqAiTool & { type: "orq:apply_patch" })
       | (OrqAiTool & { type: "orq:fusion" })
@@ -1042,6 +1054,7 @@ export const CreateRouterResponseServiceTier = {
   Default: "default",
   Flex: "flex",
   Fast: "fast",
+  Ultrafast: "ultrafast",
   Scale: "scale",
   Priority: "priority",
 } as const;
@@ -1848,6 +1861,7 @@ export const CreateRouterResponseToolsResponsesRequestType$outboundSchema:
 /** @internal */
 export type OrqAiTool$Outbound = {
   files?: Array<Files$Outbound> | undefined;
+  max_results?: number | undefined;
   network?: Network$Outbound | undefined;
   timezone?: string | undefined;
   tool_id?: string | undefined;
@@ -1861,12 +1875,14 @@ export const OrqAiTool$outboundSchema: z.ZodType<
   OrqAiTool
 > = z.object({
   files: z.array(z.lazy(() => Files$outboundSchema)).optional(),
+  maxResults: z.number().int().optional(),
   network: z.lazy(() => Network$outboundSchema).optional(),
   timezone: z.string().optional(),
   toolId: z.string().optional(),
   type: CreateRouterResponseToolsResponsesRequestType$outboundSchema,
 }).transform((v) => {
   return remap$(v, {
+    maxResults: "max_results",
     toolId: "tool_id",
   });
 });
@@ -1935,6 +1951,7 @@ export function toolsCacheControlToJSON(
 export type ToolsFunction$Outbound = {
   async?: boolean | undefined;
   cache_control?: ToolsCacheControl$Outbound | undefined;
+  defer_loading?: boolean | undefined;
   description?: string | undefined;
   name: string;
   parameters?: { [k: string]: any } | undefined;
@@ -1950,6 +1967,7 @@ export const ToolsFunction$outboundSchema: z.ZodType<
 > = z.object({
   async: z.boolean().optional(),
   cacheControl: z.lazy(() => ToolsCacheControl$outboundSchema).optional(),
+  deferLoading: z.boolean().optional(),
   description: z.string().optional(),
   name: z.string(),
   parameters: z.record(z.any()).optional(),
@@ -1958,6 +1976,7 @@ export const ToolsFunction$outboundSchema: z.ZodType<
 }).transform((v) => {
   return remap$(v, {
     cacheControl: "cache_control",
+    deferLoading: "defer_loading",
   });
 });
 
@@ -1976,6 +1995,7 @@ export type CreateRouterResponseTools$Outbound =
   | (OrqAiTool$Outbound & { type: "orq:web_fetch" })
   | (OrqAiTool$Outbound & { type: "orq:datetime" })
   | (OrqAiTool$Outbound & { type: "orq:search_models" })
+  | (OrqAiTool$Outbound & { type: "orq:tool_search" })
   | (OrqAiTool$Outbound & { type: "orq:image_generation" })
   | (OrqAiTool$Outbound & { type: "orq:apply_patch" })
   | (OrqAiTool$Outbound & { type: "orq:fusion" })
@@ -2017,6 +2037,9 @@ export const CreateRouterResponseTools$outboundSchema: z.ZodType<
   ),
   z.lazy(() => OrqAiTool$outboundSchema).and(
     z.object({ type: z.literal("orq:search_models") }),
+  ),
+  z.lazy(() => OrqAiTool$outboundSchema).and(
+    z.object({ type: z.literal("orq:tool_search") }),
   ),
   z.lazy(() => OrqAiTool$outboundSchema).and(
     z.object({ type: z.literal("orq:image_generation") }),
@@ -2122,6 +2145,7 @@ export type CreateRouterResponseRequestBody$Outbound = {
       | (OrqAiTool$Outbound & { type: "orq:web_fetch" })
       | (OrqAiTool$Outbound & { type: "orq:datetime" })
       | (OrqAiTool$Outbound & { type: "orq:search_models" })
+      | (OrqAiTool$Outbound & { type: "orq:tool_search" })
       | (OrqAiTool$Outbound & { type: "orq:image_generation" })
       | (OrqAiTool$Outbound & { type: "orq:apply_patch" })
       | (OrqAiTool$Outbound & { type: "orq:fusion" })
@@ -2221,6 +2245,9 @@ export const CreateRouterResponseRequestBody$outboundSchema: z.ZodType<
       ),
       z.lazy(() => OrqAiTool$outboundSchema).and(
         z.object({ type: z.literal("orq:search_models") }),
+      ),
+      z.lazy(() => OrqAiTool$outboundSchema).and(
+        z.object({ type: z.literal("orq:tool_search") }),
       ),
       z.lazy(() => OrqAiTool$outboundSchema).and(
         z.object({ type: z.literal("orq:image_generation") }),

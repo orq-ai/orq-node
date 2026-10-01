@@ -1211,6 +1211,11 @@ export type CreateAgentRequestTeamOfAgents = {
   role?: string | undefined;
 };
 
+export type CreateAgentRequestAgentPlugins = {
+  id: string;
+  version: string;
+};
+
 export type Metrics = {
   totalCost: number;
 };
@@ -2472,6 +2477,7 @@ export type CreateAgentRequestResponseBody = {
    * List of skills that the agent can utilize. This field allows you to specify which skills the agent has access to, enabling more complex and dynamic behavior.
    */
   skills?: Array<string> | undefined;
+  agentPlugins?: Array<CreateAgentRequestAgentPlugins> | undefined;
   metrics?: Metrics | undefined;
   /**
    * Extracted variables from agent instructions
@@ -4179,6 +4185,26 @@ export function createAgentRequestTeamOfAgentsFromJSON(
 }
 
 /** @internal */
+export const CreateAgentRequestAgentPlugins$inboundSchema: z.ZodType<
+  CreateAgentRequestAgentPlugins,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.string(),
+  version: z.string(),
+});
+
+export function createAgentRequestAgentPluginsFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateAgentRequestAgentPlugins, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreateAgentRequestAgentPlugins$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateAgentRequestAgentPlugins' from JSON`,
+  );
+}
+
+/** @internal */
 export const Metrics$inboundSchema: z.ZodType<Metrics, z.ZodTypeDef, unknown> =
   z.object({
     total_cost: z.number().default(0),
@@ -5871,6 +5897,9 @@ export const CreateAgentRequestResponseBody$inboundSchema: z.ZodType<
     z.lazy(() => CreateAgentRequestTeamOfAgents$inboundSchema),
   ).optional(),
   skills: z.array(z.string()).optional(),
+  agent_plugins: z.array(
+    z.lazy(() => CreateAgentRequestAgentPlugins$inboundSchema),
+  ).optional(),
   metrics: z.lazy(() => Metrics$inboundSchema).optional(),
   variables: z.record(z.any()).optional(),
   knowledge_bases: z.array(
@@ -5894,6 +5923,7 @@ export const CreateAgentRequestResponseBody$inboundSchema: z.ZodType<
     "updated_by_id": "updatedById",
     "memory_stores": "memoryStores",
     "team_of_agents": "teamOfAgents",
+    "agent_plugins": "agentPlugins",
     "knowledge_bases": "knowledgeBases",
     "system_prompt": "systemPrompt",
   });

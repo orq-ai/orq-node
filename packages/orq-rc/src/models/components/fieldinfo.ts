@@ -10,6 +10,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 export type FieldInfo = {
   name?: string | undefined;
   type?: string | undefined;
+  operators?: Array<string> | undefined;
 };
 
 /** @internal */
@@ -20,6 +21,7 @@ export const FieldInfo$inboundSchema: z.ZodType<
 > = z.object({
   name: z.string().optional(),
   type: z.string().optional(),
+  operators: z.array(z.string()).optional(),
 });
 
 export function fieldInfoFromJSON(
