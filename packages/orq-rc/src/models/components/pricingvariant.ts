@@ -20,9 +20,11 @@ export type PricingVariant = {
   cacheRead?: Price | undefined;
   cacheWrite1h?: Price | undefined;
   cacheWrite5m?: Price | undefined;
+  fetch?: Price | undefined;
   input?: Price | undefined;
   output?: Price | undefined;
   reasoning?: Price | undefined;
+  search?: Price | undefined;
   when: string;
 };
 
@@ -37,9 +39,11 @@ export const PricingVariant$inboundSchema: z.ZodType<
   cache_read: Price$inboundSchema.optional(),
   cache_write_1h: Price$inboundSchema.optional(),
   cache_write_5m: Price$inboundSchema.optional(),
+  fetch: Price$inboundSchema.optional(),
   input: Price$inboundSchema.optional(),
   output: Price$inboundSchema.optional(),
   reasoning: Price$inboundSchema.optional(),
+  search: Price$inboundSchema.optional(),
   when: z.string(),
 }).transform((v) => {
   return remap$(v, {
@@ -57,9 +61,11 @@ export type PricingVariant$Outbound = {
   cache_read?: Price$Outbound | undefined;
   cache_write_1h?: Price$Outbound | undefined;
   cache_write_5m?: Price$Outbound | undefined;
+  fetch?: Price$Outbound | undefined;
   input?: Price$Outbound | undefined;
   output?: Price$Outbound | undefined;
   reasoning?: Price$Outbound | undefined;
+  search?: Price$Outbound | undefined;
   when: string;
 };
 
@@ -74,9 +80,11 @@ export const PricingVariant$outboundSchema: z.ZodType<
   cacheRead: Price$outboundSchema.optional(),
   cacheWrite1h: Price$outboundSchema.optional(),
   cacheWrite5m: Price$outboundSchema.optional(),
+  fetch: Price$outboundSchema.optional(),
   input: Price$outboundSchema.optional(),
   output: Price$outboundSchema.optional(),
   reasoning: Price$outboundSchema.optional(),
+  search: Price$outboundSchema.optional(),
   when: z.string(),
 }).transform((v) => {
   return remap$(v, {

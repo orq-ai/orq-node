@@ -10,11 +10,16 @@ export type CreateDatasetRequest = {
    * Human-readable dataset name.
    */
   displayName: string;
+  /**
+   * Project path where the dataset should be stored, in the format `project/folder/subfolder`. With a project-scoped API key the path is relative to that project. Omit to use the API key project or the workspace default project.
+   */
+  path?: string | undefined;
 };
 
 /** @internal */
 export type CreateDatasetRequest$Outbound = {
   display_name: string;
+  path?: string | undefined;
 };
 
 /** @internal */
@@ -24,6 +29,7 @@ export const CreateDatasetRequest$outboundSchema: z.ZodType<
   CreateDatasetRequest
 > = z.object({
   displayName: z.string(),
+  path: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     displayName: "display_name",

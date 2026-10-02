@@ -61,6 +61,7 @@ export type ModelMetadata = {
   maxInputTokens?: number | undefined;
   maxOutputTokens?: number | undefined;
   maxTemperature?: number | undefined;
+  millionFetchesCost?: number | undefined;
   millionSearchesCost?: number | undefined;
   millionTokensAbove128kCacheReadCost?: number | undefined;
   millionTokensAbove128kCacheWriteCost?: number | undefined;
@@ -195,6 +196,7 @@ export const ModelMetadata$inboundSchema: z.ZodType<
   max_input_tokens: z.number().int().optional(),
   max_output_tokens: z.number().int().optional(),
   max_temperature: z.number().optional(),
+  million_fetches_cost: z.number().optional(),
   million_searches_cost: z.number().optional(),
   million_tokens_above_128k_cache_read_cost: z.number().optional(),
   million_tokens_above_128k_cache_write_cost: z.number().optional(),
@@ -322,6 +324,7 @@ export const ModelMetadata$inboundSchema: z.ZodType<
     "max_input_tokens": "maxInputTokens",
     "max_output_tokens": "maxOutputTokens",
     "max_temperature": "maxTemperature",
+    "million_fetches_cost": "millionFetchesCost",
     "million_searches_cost": "millionSearchesCost",
     "million_tokens_above_128k_cache_read_cost":
       "millionTokensAbove128kCacheReadCost",
@@ -452,6 +455,7 @@ export type ModelMetadata$Outbound = {
   max_input_tokens?: number | undefined;
   max_output_tokens?: number | undefined;
   max_temperature?: number | undefined;
+  million_fetches_cost?: number | undefined;
   million_searches_cost?: number | undefined;
   million_tokens_above_128k_cache_read_cost?: number | undefined;
   million_tokens_above_128k_cache_write_cost?: number | undefined;
@@ -588,6 +592,7 @@ export const ModelMetadata$outboundSchema: z.ZodType<
   maxInputTokens: z.number().int().optional(),
   maxOutputTokens: z.number().int().optional(),
   maxTemperature: z.number().optional(),
+  millionFetchesCost: z.number().optional(),
   millionSearchesCost: z.number().optional(),
   millionTokensAbove128kCacheReadCost: z.number().optional(),
   millionTokensAbove128kCacheWriteCost: z.number().optional(),
@@ -715,6 +720,7 @@ export const ModelMetadata$outboundSchema: z.ZodType<
     maxInputTokens: "max_input_tokens",
     maxOutputTokens: "max_output_tokens",
     maxTemperature: "max_temperature",
+    millionFetchesCost: "million_fetches_cost",
     millionSearchesCost: "million_searches_cost",
     millionTokensAbove128kCacheReadCost:
       "million_tokens_above_128k_cache_read_cost",
