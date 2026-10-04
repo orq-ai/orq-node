@@ -46,6 +46,7 @@ import { SmartRouters } from "./smartrouters.js";
 import { Telemetry } from "./telemetry.js";
 import { Tools } from "./tools.js";
 import { Traces } from "./traces.js";
+import { Views } from "./views.js";
 import { Webhooks } from "./webhooks.js";
 import { Wikis } from "./wikis.js";
 import { Workspaces } from "./workspaces.js";
@@ -146,6 +147,11 @@ export class Orq extends ClientSDK {
   private _traces?: Traces;
   get traces(): Traces {
     return (this._traces ??= new Traces(this._options));
+  }
+
+  private _views?: Views;
+  get views(): Views {
+    return (this._views ??= new Views(this._options));
   }
 
   private _datasets?: Datasets;
