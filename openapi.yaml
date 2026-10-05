@@ -2556,7 +2556,7 @@ components:
           properties:
             _id:
               type: "string"
-              default: "reasoning_01m46dbdh8bbt33rw8nyjkpks2"
+              default: "reasoning_01m4766ze4107nrn430kb569b6"
               description: "Unique identifier for the part. Format: reasoning_{ulid} (e.g., reasoning_01hxyz...)"
               example: "reasoning_01hxyz123abc"
             kind:
@@ -15352,10 +15352,12 @@ components:
           description: "Catalog identifier, `<provider>/<model>` (for example `openai/gpt-4o`)."
         created:
           type: "string"
-          description: "When orq listed this offering, Unix seconds (string-encoded int64 in\n JSON)."
+          description: "When orq listed this offering, as an RFC 3339 UTC timestamp."
+          format: "date-time"
         deprecation:
           type: "string"
-          description: "When this offering stops being served, Unix seconds (string-encoded\n int64 in JSON): orq's own sunset date if one is set, otherwise the\n developer's announced deprecation date. Absent when neither is set."
+          description: "When this offering stops being served, as an RFC 3339 UTC timestamp:\n orq's own sunset date if one is set, otherwise the developer's announced\n deprecation date. Absent when neither is set."
+          format: "date-time"
         name:
           type: "string"
           description: "Display name shown in the orq model garden."
@@ -21458,6 +21460,50 @@ components:
           type: "integer"
       required:
         - "call_timeout"
+      type: "object"
+    WebSearchPIIRedactionPlugin:
+      additionalProperties: false
+      description: "Redact detected personal information from the search query and result fields."
+      properties:
+        entities:
+          description: "Entity types to redact, using names supported by the PII detector. Used alone, this is an allowlist; combined with regions, both sets of detectors apply."
+          items:
+            type: "string"
+          type:
+            - "array"
+            - "null"
+        entity_thresholds:
+          additionalProperties:
+            format: "double"
+            type: "number"
+          description: "Per-entity confidence cutoffs from 0 to 1, applied in addition to threshold. Each key must also appear in entities."
+          type: "object"
+        id:
+          description: "Plugin identifier. Must be pii_redaction."
+          enum:
+            - "pii_redaction"
+          type: "string"
+        language:
+          description: "Language used by the PII detector. Defaults to en; supported languages depend on the detector capabilities."
+          type: "string"
+        on_failure:
+          description: "Behavior when the PII detector fails: block rejects the request (default); passthrough continues with the original text. Workspace and rule requirements can enforce blocking."
+          type: "string"
+        regions:
+          description: "Country codes that select regional PII detectors. Use [\"all\"] on its own for all regions. Omitting both regions and entities enables all regions."
+          items:
+            type: "string"
+          type:
+            - "array"
+            - "null"
+        threshold:
+          description: "Minimum detection confidence from 0 to 1. Omit to use the detector's default threshold."
+          format: "double"
+          maximum: 1
+          minimum: 0
+          type: "number"
+      required:
+        - "id"
       type: "object"
     ApiKeyRestResponse:
       type: object
@@ -32753,7 +32799,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01M46DBDK0PEX3JNG1ZCJJT4YT"
+                                          default: "01M4766ZF51BMC6974DTM4D8AZ"
                                         name:
                                           type: "string"
                                         description:
@@ -34351,7 +34397,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01M46DBDKKRR8ZBSBWZZBK1QAS"
+                                          default: "01M4766ZFJCQA3975ZPXXJQKYJ"
                                         name:
                                           type: "string"
                                         description:
@@ -43248,7 +43294,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M46DBDN6TNYZTSDHYH5JX9NP"
+                              default: "tool_01M4766ZGFRBJJW4H8AMS9DAWS"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -43349,7 +43395,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M46DBDN7NJ692HRBB5AV3YK9"
+                              default: "tool_01M4766ZGFQV14YF94KXQWMFH4"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -43452,7 +43498,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M46DBDN8SVFBZXY5MY5RVWW2"
+                              default: "tool_01M4766ZGF5ZMFZ8D9F9PGK967"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -43596,7 +43642,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M46DBDN94DZBQED7XA6YAK4A"
+                              default: "tool_01M4766ZGGQ8G797JZ6XMEPR3G"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -44087,7 +44133,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M46DBDNFWTYFV250WTS0F71B"
+                        default: "tool_01M4766ZGJD5JZT5ZHAZQVJD20"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -44188,7 +44234,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M46DBDNFRDJZXJEFMB33C1X0"
+                        default: "tool_01M4766ZGKHQJ9BBEHZHPM6J36"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -44291,7 +44337,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M46DBDNG473TT6TMV2NDEH2C"
+                        default: "tool_01M4766ZGKR47NTW3440SKBHXP"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -44435,7 +44481,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M46DBDNHHNHEH225BDD7JHM2"
+                        default: "tool_01M4766ZGMF77AMFH37JQJ476J"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -44933,7 +44979,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M46DBDNKR3GSZNT3JC22G818"
+                        default: "tool_01M4766ZGNVGXNHWGQBRFP48W3"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -45034,7 +45080,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M46DBDNMCATVZJMGSZ0QG8GN"
+                        default: "tool_01M4766ZGN2PQCXHWQ1FPBRGJN"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -45137,7 +45183,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M46DBDNN7AJP6FR3Z9AF1DSD"
+                        default: "tool_01M4766ZGPW7B853DMWDCAG3VY"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -45281,7 +45327,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M46DBDNPHDZGVPFQKEVVEXV5"
+                        default: "tool_01M4766ZGPV58K53J5DVQF472K"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -45442,7 +45488,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M46DBDNWYJD5Q2E55XSTECX7"
+                        default: "tool_01M4766ZGSKBPS1WF97140962F"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -45543,7 +45589,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M46DBDNX5TBAE28KS4QN8S6F"
+                        default: "tool_01M4766ZGT54N8B99CP9H1031V"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -45646,7 +45692,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M46DBDNX0Z7E8CS8VXTFME4S"
+                        default: "tool_01M4766ZGT6B9KY7B5BTT9TEFF"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -45790,7 +45836,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M46DBDNYMAG835CNVXQQ62MX"
+                        default: "tool_01M4766ZGV5BHZ212BARDX00ST"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -52097,7 +52143,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-10-05T16:11:35.018Z"
+                      default: "2026-10-05T23:26:03.828Z"
                       deprecated: true
                       description: "Deprecated. The date and time the item was reviewed"
                     type:
@@ -52139,7 +52185,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-10-05T16:11:35.018Z"
+                      default: "2026-10-05T23:26:03.828Z"
                       deprecated: true
                       description: "Deprecated. The date and time the item was reviewed"
                     type:
@@ -52181,7 +52227,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-10-05T16:11:35.018Z"
+                      default: "2026-10-05T23:26:03.829Z"
                       deprecated: true
                       description: "Deprecated. The date and time the item was reviewed"
                     type:
@@ -52223,7 +52269,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-10-05T16:11:35.018Z"
+                      default: "2026-10-05T23:26:03.829Z"
                       deprecated: true
                       description: "Deprecated. The date and time the item was reviewed"
                     type:
@@ -52326,7 +52372,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-10-05T16:11:26.322Z"
+                          default: "2026-10-05T23:25:58.553Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -52334,7 +52380,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-10-05T16:11:26.322Z"
+                              default: "2026-10-05T23:25:58.554Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -52404,7 +52450,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-10-05T16:11:26.322Z"
+                          default: "2026-10-05T23:25:58.553Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -52412,7 +52458,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-10-05T16:11:26.322Z"
+                              default: "2026-10-05T23:25:58.554Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -52588,7 +52634,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-10-05T16:11:26.322Z"
+                        default: "2026-10-05T23:25:58.553Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -52596,7 +52642,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-10-05T16:11:26.322Z"
+                            default: "2026-10-05T23:25:58.554Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -52666,7 +52712,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-10-05T16:11:26.322Z"
+                        default: "2026-10-05T23:25:58.553Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -52674,7 +52720,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-10-05T16:11:26.322Z"
+                            default: "2026-10-05T23:25:58.554Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -52768,7 +52814,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-10-05T16:11:26.322Z"
+                        default: "2026-10-05T23:25:58.553Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -52776,7 +52822,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-10-05T16:11:26.322Z"
+                            default: "2026-10-05T23:25:58.554Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -52846,7 +52892,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-10-05T16:11:26.322Z"
+                        default: "2026-10-05T23:25:58.553Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -52854,7 +52900,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-10-05T16:11:26.322Z"
+                            default: "2026-10-05T23:25:58.554Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -53038,7 +53084,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-10-05T16:11:26.322Z"
+                        default: "2026-10-05T23:25:58.553Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -53046,7 +53092,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-10-05T16:11:26.322Z"
+                            default: "2026-10-05T23:25:58.554Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -53116,7 +53162,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-10-05T16:11:26.322Z"
+                        default: "2026-10-05T23:25:58.553Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -53124,7 +53170,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-10-05T16:11:26.322Z"
+                            default: "2026-10-05T23:25:58.554Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -70279,6 +70325,377 @@ paths:
       x-speakeasy-name-override: "get"
       security:
         - ApiKey: []
+  /v3/websearch:
+    post:
+      description: "Search with Exa, Ceramic, Linkup, Tavily, or Serper and return page URLs, titles, and descriptions in one response format. Authenticate with an API key that grants **websearch.execute** and send **Content-Type: application/json**.\n\n### Provider and credentials\n\nEach request uses the selected provider. Exa uses **auto** search, Linkup uses **standard** depth, and Tavily uses **basic** depth.\n\nCredentials are selected from the authenticated workspace. A configured provider integration takes precedence over ORQ-managed credentials: the default integration is used, or the first configured integration if no default is set. Configure BYOK in the workspace integrations settings. Invalid integration credentials cause an error.\n\n### Billing\n\nManaged searches use the same credits as the **AI Gateway** and charge the provider cost plus **US$0.001 per search** (US$1 per 1,000 searches). BYOK searches consume no ORQ credits and add no ORQ markup; the provider bills the integration owner directly.\n\nExa's published auto rate is **US$7 per 1,000 requests** for up to 10 results, or **US$8 per 1,000** including the ORQ markup. Exa charges use the actual cost reported by the provider.\n\nA successful managed search is billable even if an output guardrail or output redaction failure prevents the results from being returned.\n\n### Policies and observability\n\nPII Redaction is the only supported request plugin. Workspace PII settings and matching guardrail rules also apply. Query redaction runs before input guardrails and the provider call; result redaction runs before output guardrails and the response.\n\nSearch spans and metrics record the provider, latency, result count, and cost. Use the **x-orq-trace-id** response header to find the trace."
+      operationId: "search-web"
+      requestBody:
+        content:
+          application/json:
+            examples:
+              basic:
+                summary: "Search with Exa auto"
+                value:
+                  provider: "exa"
+                  query: "Things to do in Salt Lake City in fall"
+              customer_search:
+                summary: "Limit results and attribute usage to a customer"
+                value:
+                  identity:
+                    id: "customer-123"
+                  limit: 10
+                  provider: "exa"
+                  query: "Things to do in Salt Lake City in fall"
+              pii_redaction:
+                summary: "Apply PII Redaction to the query and results"
+                value:
+                  limit: 5
+                  plugins:
+                    - id: "pii_redaction"
+                  provider: "exa"
+                  query: "Travel advice for john.smith@example.com"
+            schema:
+              additionalProperties: false
+              properties:
+                identity:
+                  additionalProperties: false
+                  description: "Customer or end-user identity for attributing this search and its usage."
+                  properties:
+                    id:
+                      description: "Customer or end-user identifier used consistently across API requests."
+                      minLength: 1
+                      type: "string"
+                  required:
+                    - "id"
+                  type: "object"
+                limit:
+                  default: 10
+                  description: "Maximum number of results to return, from 1 to 10. Defaults to 10. The provider may return fewer results."
+                  maximum: 10
+                  minimum: 1
+                  type: "integer"
+                plugins:
+                  description: "Optional PII Redaction configuration. At most one plugin is accepted, with id pii_redaction. Workspace and matching rule requirements still apply when this field is omitted."
+                  items:
+                    additionalProperties: false
+                    description: "Redact detected personal information from the search query and result fields."
+                    properties:
+                      entities:
+                        description: "Entity types to redact, using names supported by the PII detector. Used alone, this is an allowlist; combined with regions, both sets of detectors apply."
+                        items:
+                          type: "string"
+                        type:
+                          - "array"
+                          - "null"
+                      entity_thresholds:
+                        additionalProperties:
+                          format: "double"
+                          type: "number"
+                        description: "Per-entity confidence cutoffs from 0 to 1, applied in addition to threshold. Each key must also appear in entities."
+                        type: "object"
+                      id:
+                        description: "Plugin identifier. Must be pii_redaction."
+                        enum:
+                          - "pii_redaction"
+                        type: "string"
+                      language:
+                        description: "Language used by the PII detector. Defaults to en; supported languages depend on the detector capabilities."
+                        type: "string"
+                      on_failure:
+                        description: "Behavior when the PII detector fails: block rejects the request (default); passthrough continues with the original text. Workspace and rule requirements can enforce blocking."
+                        type: "string"
+                      regions:
+                        description: "Country codes that select regional PII detectors. Use [\"all\"] on its own for all regions. Omitting both regions and entities enables all regions."
+                        items:
+                          type: "string"
+                        type:
+                          - "array"
+                          - "null"
+                      threshold:
+                        description: "Minimum detection confidence from 0 to 1. Omit to use the detector's default threshold."
+                        format: "double"
+                        maximum: 1
+                        minimum: 0
+                        type: "number"
+                    required:
+                      - "id"
+                    type: "object"
+                  maxItems: 1
+                  type: "array"
+                provider:
+                  description: "Provider to run this search. Exa uses auto, Linkup uses standard depth, and Tavily uses basic depth. Workspace credentials are selected automatically for this provider."
+                  enum:
+                    - "exa"
+                    - "ceramic"
+                    - "linkup"
+                    - "tavily"
+                    - "serper"
+                  type: "string"
+                query:
+                  description: "Search text. Must not be blank or exceed 10,000 characters. Ceramic accepts at most 50 words."
+                  maxLength: 10000
+                  minLength: 1
+                  type: "string"
+              required:
+                - "query"
+                - "provider"
+              type: "object"
+        description: "Search query and provider, with optional result limit, customer identity, and PII settings."
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                no_results:
+                  summary: "Search completed with no results"
+                  value:
+                    items: []
+                    metadata:
+                      latencyMs: 612
+                      provider: "exa"
+                      query: "Things to do in Salt Lake City in fall"
+                      requestId: "01ARZ3NDEKTSV4RRFFQ69G5FAV"
+                results:
+                  summary: "Search results"
+                  value:
+                    items:
+                      - description: "Scenic drives through Big Cottonwood Canyon and local pumpkin patches."
+                        title: "Fall in Salt Lake City: A Local's Guide"
+                        url: "https://example.com/salt-lake-city-fall-guide"
+                    metadata:
+                      latencyMs: 612
+                      provider: "exa"
+                      query: "Things to do in Salt Lake City in fall"
+                      requestId: "01ARZ3NDEKTSV4RRFFQ69G5FAV"
+              schema:
+                properties:
+                  items:
+                    description: "Results in the provider's order, after any required PII redaction. Empty when no results are found."
+                    items:
+                      properties:
+                        description:
+                          description: "Provider-supplied excerpt or description. May be empty."
+                          type: "string"
+                        title:
+                          description: "Page title. May be empty if the provider supplies no title."
+                          type: "string"
+                        url:
+                          description: "Page URL returned by the provider. PII redaction can replace sensitive parts of the URL."
+                          type: "string"
+                      required:
+                        - "url"
+                        - "title"
+                        - "description"
+                      type: "object"
+                    type: "array"
+                  metadata:
+                    description: "Details about this search request."
+                    properties:
+                      latencyMs:
+                        description: "Elapsed search processing time in milliseconds, including applied policies."
+                        format: "int32"
+                        minimum: 0
+                        type: "integer"
+                      provider:
+                        description: "Provider that executed the search."
+                        enum:
+                          - "exa"
+                          - "ceramic"
+                          - "linkup"
+                          - "tavily"
+                          - "serper"
+                        type: "string"
+                      query:
+                        description: "Query sent to the provider after any required PII redaction."
+                        type: "string"
+                      requestId:
+                        description: "ORQ-generated identifier for this search request. Distinct from the trace ID in the response headers."
+                        type: "string"
+                    required:
+                      - "query"
+                      - "requestId"
+                      - "latencyMs"
+                      - "provider"
+                    type: "object"
+                required:
+                  - "items"
+                  - "metadata"
+                type: "object"
+          description: "Search completed. Results may be empty or fewer than the requested limit."
+          headers:
+            x-orq-trace-id:
+              description: "Trace identifier for inspecting this request and its search span."
+              schema:
+                type: "string"
+            x-orq-trace-span-id:
+              description: "Span identifier for the HTTP request within the trace."
+              schema:
+                type: "string"
+        "400":
+          content:
+            application/json:
+              examples:
+                invalid_request:
+                  summary: "Invalid query, provider, limit, or plugin"
+                  value:
+                    error:
+                      message: "invalid web search request"
+                      type: "web_search_error"
+                      param: null
+                      code: null
+              schema:
+                additionalProperties: false
+                properties:
+                  error:
+                    $ref: "#/components/schemas/APIError"
+                required:
+                  - "error"
+                type: "object"
+          description: "Invalid request, unusable workspace integration, or a blocking guardrail. Check the request fields and workspace integration settings."
+        "401":
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                properties:
+                  error:
+                    $ref: "#/components/schemas/APIError"
+                required:
+                  - "error"
+                type: "object"
+          description: "Missing or invalid API key. Send a valid API key in the Authorization header."
+        "402":
+          content:
+            application/json:
+              examples:
+                insufficient_credits:
+                  summary: "Managed search has no available ORQ credits"
+                  value:
+                    error:
+                      message: "insufficient credits for managed web search"
+                      type: "web_search_error"
+                      param: null
+                      code: null
+              schema:
+                additionalProperties: false
+                properties:
+                  error:
+                    $ref: "#/components/schemas/APIError"
+                required:
+                  - "error"
+                type: "object"
+          description: "Managed search requires a positive ORQ credit balance. Add credits before retrying. BYOK does not require ORQ credits."
+        "403":
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                properties:
+                  error:
+                    $ref: "#/components/schemas/APIError"
+                required:
+                  - "error"
+                type: "object"
+          description: "The API key lacks websearch.execute permission."
+        "415":
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                properties:
+                  error:
+                    $ref: "#/components/schemas/APIError"
+                required:
+                  - "error"
+                type: "object"
+          description: "Unsupported or missing Content-Type. Send application/json; an optional charset parameter is accepted."
+        "422":
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                properties:
+                  error:
+                    $ref: "#/components/schemas/APIError"
+                required:
+                  - "error"
+                type: "object"
+          description: "A configured guardrail evaluator could not complete its evaluation."
+        "429":
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                properties:
+                  error:
+                    $ref: "#/components/schemas/APIError"
+                required:
+                  - "error"
+                type: "object"
+          description: "A workspace or provider rate limit, or a matching budget, was reached. Wait before retrying or raise the budget."
+        "500":
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                properties:
+                  error:
+                    $ref: "#/components/schemas/APIError"
+                required:
+                  - "error"
+                type: "object"
+          description: "Unexpected gateway error. Include the trace ID, if available, when reporting the failure."
+        "502":
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                properties:
+                  error:
+                    $ref: "#/components/schemas/APIError"
+                required:
+                  - "error"
+                type: "object"
+          description: "The search provider, PII detector, or guardrail service failed. Invalid upstream credentials can also produce this response."
+        "503":
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                properties:
+                  error:
+                    $ref: "#/components/schemas/APIError"
+                required:
+                  - "error"
+                type: "object"
+          description: "The gateway could not load workspace integrations. Retry when the credential store is available."
+        "504":
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                properties:
+                  error:
+                    $ref: "#/components/schemas/APIError"
+                required:
+                  - "error"
+                type: "object"
+          description: "The provider request timed out or was cancelled."
+      summary: "Search the web with a selected provider"
+      tags:
+        - "Web Search"
+      x-cli-group: "websearch"
+      x-cli-name: "search"
+      x-code-samples:
+        - label: "Node.js"
+          lang: "typescript"
+          source: "import { Orq } from \"@orq-ai/node\";\n\nconst orq = new Orq({ apiKey: process.env.ORQ_API_KEY });\nconst result = await orq.websearch.search({\n  query: \"Things to do in Salt Lake City in fall\",\n  provider: \"exa\",\n  limit: 10,\n  identity: { id: \"customer-123\" },\n});"
+      x-orq-gateway-group: true
+      x-speakeasy-group: "websearch"
+      x-speakeasy-name-override: "search"
+      security:
+        - ApiKey: []
 webhooks: {}
 tags:
   - name: "Chunking"
@@ -70352,6 +70769,8 @@ tags:
     description: "Workspace-level domain verification and IP allowlist controls. These operations are restricted to workspace administrators."
   - name: "Workspace Settings"
     description: "Workspace-level settings managed with a workspace credential. A workspace is the tenant, so these settings are a singleton — there is nothing to create or delete, only read and update."
+  - description: "Search Gateway with managed credits or BYOK."
+    name: "Web Search"
   - name: "Responses"
   - description: "Run agents on a cron cadence. Minimum firing interval is 1 hour."
     name: "Agent Schedules"
