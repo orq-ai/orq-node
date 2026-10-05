@@ -121,7 +121,7 @@ export class Traces extends ClientSDK {
    * Search traces
    *
    * @remarks
-   * Search trace summaries using the structured trace filter contract.
+   * Search trace summaries using the structured trace filter contract. See the [filter grammar](/ai-studio/observability/traces#filter-grammar) for the field and operator reference.
    */
   async search(
     request: components.SearchTracesRequest,
