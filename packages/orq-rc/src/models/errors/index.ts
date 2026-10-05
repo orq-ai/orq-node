@@ -30,6 +30,7 @@ export * from "./retrieveagentrequest.js";
 export * from "./retrieveagentschedule.js";
 export * from "./retrieveresponse.js";
 export * from "./sdkvalidationerror.js";
+export * from "./searchweb.js";
 export * from "./streamagent.js";
 export * from "./streamrunagent.js";
 export * from "./triggeragentschedule.js";

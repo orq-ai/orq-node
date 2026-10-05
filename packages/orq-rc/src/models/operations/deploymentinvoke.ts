@@ -25,7 +25,7 @@ export type ObjectT = ClosedEnum<typeof ObjectT>;
 /**
  * The provider used to generate the response
  */
-export const Provider = {
+export const DeploymentInvokeProvider = {
   Openai: "openai",
   Groq: "groq",
   Cohere: "cohere",
@@ -73,7 +73,9 @@ export const Provider = {
 /**
  * The provider used to generate the response
  */
-export type Provider = ClosedEnum<typeof Provider>;
+export type DeploymentInvokeProvider = ClosedEnum<
+  typeof DeploymentInvokeProvider
+>;
 
 export type Telemetry = {
   /**
@@ -308,7 +310,7 @@ export type DeploymentInvokeResponseBody = {
   /**
    * The provider used to generate the response
    */
-  provider: Provider;
+  provider: DeploymentInvokeProvider;
   /**
    * Indicates if the response is the final response
    */
@@ -349,8 +351,9 @@ export const ObjectT$inboundSchema: z.ZodNativeEnum<typeof ObjectT> = z
   .nativeEnum(ObjectT);
 
 /** @internal */
-export const Provider$inboundSchema: z.ZodNativeEnum<typeof Provider> = z
-  .nativeEnum(Provider);
+export const DeploymentInvokeProvider$inboundSchema: z.ZodNativeEnum<
+  typeof DeploymentInvokeProvider
+> = z.nativeEnum(DeploymentInvokeProvider);
 
 /** @internal */
 export const Telemetry$inboundSchema: z.ZodType<
@@ -702,7 +705,7 @@ export const DeploymentInvokeResponseBody$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v)),
   object: ObjectT$inboundSchema,
   model: z.string(),
-  provider: Provider$inboundSchema,
+  provider: DeploymentInvokeProvider$inboundSchema,
   is_final: z.boolean(),
   integration_id: z.string().optional(),
   telemetry: z.lazy(() => Telemetry$inboundSchema),

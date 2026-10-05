@@ -39,20 +39,17 @@ export type Model = {
    */
   id: string;
   /**
-   * When orq listed this offering, Unix seconds (string-encoded int64 in
-   *
-   * @remarks
-   *  JSON).
+   * When orq listed this offering, as an RFC 3339 UTC timestamp.
    */
-  created: string;
+  created: Date;
   /**
-   * When this offering stops being served, Unix seconds (string-encoded
+   * When this offering stops being served, as an RFC 3339 UTC timestamp:
    *
    * @remarks
-   *  int64 in JSON): orq's own sunset date if one is set, otherwise the
-   *  developer's announced deprecation date. Absent when neither is set.
+   *  orq's own sunset date if one is set, otherwise the developer's announced
+   *  deprecation date. Absent when neither is set.
    */
-  deprecation?: string | undefined;
+  deprecation?: Date | undefined;
   /**
    * Display name shown in the orq model garden.
    */
@@ -168,8 +165,10 @@ export function artificialIntelligenceFromJSON(
 export const Model$inboundSchema: z.ZodType<Model, z.ZodTypeDef, unknown> = z
   .object({
     id: z.string(),
-    created: z.string(),
-    deprecation: z.string().optional(),
+    created: z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    deprecation: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ).optional(),
     name: z.string(),
     description: z.string(),
     provider: ModelProvider$inboundSchema,

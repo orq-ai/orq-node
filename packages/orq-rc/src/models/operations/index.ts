@@ -224,6 +224,7 @@ export * from "./routingrulelistusedmodels.js";
 export * from "./routingruleupdate.js";
 export * from "./runagent.js";
 export * from "./searchknowledge.js";
+export * from "./searchweb.js";
 export * from "./searchwiki.js";
 export * from "./skilldelete.js";
 export * from "./skillget.js";

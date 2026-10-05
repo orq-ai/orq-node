@@ -48,6 +48,7 @@ import { Tools } from "./tools.js";
 import { Traces } from "./traces.js";
 import { Views } from "./views.js";
 import { Webhooks } from "./webhooks.js";
+import { Websearch } from "./websearch.js";
 import { Wikis } from "./wikis.js";
 import { Workspaces } from "./workspaces.js";
 import { WorkspaceSecurity } from "./workspacesecurity.js";
@@ -297,5 +298,10 @@ export class Orq extends ClientSDK {
   private _schedules?: Schedules;
   get schedules(): Schedules {
     return (this._schedules ??= new Schedules(this._options));
+  }
+
+  private _websearch?: Websearch;
+  get websearch(): Websearch {
+    return (this._websearch ??= new Websearch(this._options));
   }
 }
