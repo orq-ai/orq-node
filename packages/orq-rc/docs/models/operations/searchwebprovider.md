@@ -7,11 +7,11 @@ Provider that executed the search.
 ```typescript
 import { SearchWebProvider } from "@orq-ai/node/models/operations";
 
-let value: SearchWebProvider = "tavily";
+let value: SearchWebProvider = "serper";
 ```
 
 ## Values
 
 ```typescript
-"exa" | "ceramic" | "linkup" | "tavily" | "serper"
+"exa" | "ceramic" | "linkup" | "tavily" | "serper" | "openai" | "perplexity"
 ```
