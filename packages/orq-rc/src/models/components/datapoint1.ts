@@ -9,18 +9,13 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * Structured variables passed to the prompt or workflow.
- */
-export type Inputs = {};
-
-/**
  * A datapoint stores the inputs, messages, and expected output used in dataset evaluations.
  */
 export type Datapoint1 = {
   /**
    * Structured variables passed to the prompt or workflow.
    */
-  inputs?: Inputs | undefined;
+  inputs?: { [k: string]: any } | undefined;
   /**
    * A JSON array containing dynamically typed values.
    */
@@ -68,26 +63,12 @@ export type Datapoint1 = {
 };
 
 /** @internal */
-export const Inputs$inboundSchema: z.ZodType<Inputs, z.ZodTypeDef, unknown> = z
-  .object({});
-
-export function inputsFromJSON(
-  jsonString: string,
-): SafeParseResult<Inputs, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => Inputs$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Inputs' from JSON`,
-  );
-}
-
-/** @internal */
 export const Datapoint1$inboundSchema: z.ZodType<
   Datapoint1,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  inputs: z.lazy(() => Inputs$inboundSchema).optional(),
+  inputs: z.record(z.any()).optional(),
   messages: z.array(z.any()).optional(),
   expected_output: z.string().optional(),
   evaluations: z.array(z.any()).optional(),

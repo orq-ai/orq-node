@@ -6,18 +6,13 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 
 /**
- * Structured variables passed to the prompt or workflow.
- */
-export type DatapointInputInputs = {};
-
-/**
  * Datapoint content submitted by the caller.
  */
 export type DatapointInput = {
   /**
    * Structured variables passed to the prompt or workflow.
    */
-  inputs?: DatapointInputInputs | undefined;
+  inputs?: { [k: string]: any } | undefined;
   /**
    * A JSON array containing dynamically typed values.
    */
@@ -29,26 +24,8 @@ export type DatapointInput = {
 };
 
 /** @internal */
-export type DatapointInputInputs$Outbound = {};
-
-/** @internal */
-export const DatapointInputInputs$outboundSchema: z.ZodType<
-  DatapointInputInputs$Outbound,
-  z.ZodTypeDef,
-  DatapointInputInputs
-> = z.object({});
-
-export function datapointInputInputsToJSON(
-  datapointInputInputs: DatapointInputInputs,
-): string {
-  return JSON.stringify(
-    DatapointInputInputs$outboundSchema.parse(datapointInputInputs),
-  );
-}
-
-/** @internal */
 export type DatapointInput$Outbound = {
-  inputs?: DatapointInputInputs$Outbound | undefined;
+  inputs?: { [k: string]: any } | undefined;
   messages?: Array<any> | undefined;
   expected_output?: string | undefined;
 };
@@ -59,7 +36,7 @@ export const DatapointInput$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DatapointInput
 > = z.object({
-  inputs: z.lazy(() => DatapointInputInputs$outboundSchema).optional(),
+  inputs: z.record(z.any()).optional(),
   messages: z.array(z.any()).optional(),
   expectedOutput: z.string().optional(),
 }).transform((v) => {
