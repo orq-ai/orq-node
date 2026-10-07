@@ -7,19 +7,19 @@ import { remap as remap$ } from "../../lib/primitives.js";
 
 export type ClassifyRetryConfig = {
   /**
-   * Number of retry attempts (1-5).
+   * Number of retries per model after the initial attempt (1-5). No retries are made when retry is omitted.
    */
   count: number;
   /**
-   * HTTP status codes that trigger retry logic.
+   * HTTP status codes that trigger retries, between 100 and 599. Retry-After is honored; otherwise the gateway waits one second.
    */
-  onCodes: Array<number> | null;
+  onCodes: Array<number>;
 };
 
 /** @internal */
 export type ClassifyRetryConfig$Outbound = {
   count: number;
-  on_codes: Array<number> | null;
+  on_codes: Array<number>;
 };
 
 /** @internal */
@@ -29,7 +29,7 @@ export const ClassifyRetryConfig$outboundSchema: z.ZodType<
   ClassifyRetryConfig
 > = z.object({
   count: z.number().int(),
-  onCodes: z.nullable(z.array(z.number().int())),
+  onCodes: z.array(z.number().int()),
 }).transform((v) => {
   return remap$(v, {
     onCodes: "on_codes",

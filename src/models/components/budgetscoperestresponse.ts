@@ -69,7 +69,7 @@ export type BudgetScopeRestResponse = {
    *
    * @remarks
    *  it ("openai/gpt-4o", or "workspaceKey@openai/gpt-4o" for private
-   *  models), rather than an internal identifier.
+   *  models).
    */
   model?: ModelBudgetScopeRestResponse | undefined;
 };

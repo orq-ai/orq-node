@@ -331,7 +331,7 @@ export type UpdateAgentModelConfigurationCacheControl = {
 };
 
 /**
- * Model behavior parameters that control how the model generates responses. Common parameters: `temperature` (0-1, randomness), `max_completion_tokens` (max output length), `top_p` (sampling diversity). Advanced: `frequency_penalty`, `presence_penalty`, `response_format` (JSON/structured), `reasoning_effort`, `seed` (reproducibility). Support varies by model - consult AI Gateway documentation.
+ * Model behavior parameters that control how the model generates responses. Common parameters: `temperature` (0-2, randomness; the selected model may impose a lower maximum), `max_completion_tokens` (max output length), `top_p` (sampling diversity). Advanced: `frequency_penalty`, `presence_penalty`, `response_format` (JSON/structured), `reasoning_effort`, `seed` (reproducibility). Support varies by model - consult AI Gateway documentation.
  */
 export type ModelConfigurationParameters = {
   /**
@@ -485,7 +485,7 @@ export type UpdateAgentModelConfiguration2 = {
    */
   id: string;
   /**
-   * Model behavior parameters that control how the model generates responses. Common parameters: `temperature` (0-1, randomness), `max_completion_tokens` (max output length), `top_p` (sampling diversity). Advanced: `frequency_penalty`, `presence_penalty`, `response_format` (JSON/structured), `reasoning_effort`, `seed` (reproducibility). Support varies by model - consult AI Gateway documentation.
+   * Model behavior parameters that control how the model generates responses. Common parameters: `temperature` (0-2, randomness; the selected model may impose a lower maximum), `max_completion_tokens` (max output length), `top_p` (sampling diversity). Advanced: `frequency_penalty`, `presence_penalty`, `response_format` (JSON/structured), `reasoning_effort`, `seed` (reproducibility). Support varies by model - consult AI Gateway documentation.
    */
   parameters?: ModelConfigurationParameters | undefined;
   /**
@@ -1116,6 +1116,11 @@ export type UpdateAgentTeamOfAgents = {
   role?: string | undefined;
 };
 
+export type AgentPlugins = {
+  id: string;
+  version: string;
+};
+
 export const UpdateAgentEngine = {
   Text: "text",
   Jinja: "jinja",
@@ -1184,6 +1189,7 @@ export type UpdateAgentRequestBody = {
    * List of skills that the agent can utilize. This field allows you to specify which skills the agent has access to, enabling more complex and dynamic behavior.
    */
   skills?: Array<string> | null | undefined;
+  agentPlugins?: Array<AgentPlugins> | null | undefined;
   /**
    * Extracted variables from agent instructions
    */
@@ -1232,6 +1238,11 @@ export type UpdateAgentAgentsTeamOfAgents = {
   role?: string | undefined;
 };
 
+export type UpdateAgentAgentPlugins = {
+  id: string;
+  version: string;
+};
+
 export type UpdateAgentMetrics = {
   totalCost: number;
 };
@@ -1260,14 +1271,14 @@ export type UpdateAgentAgentsEngine = ClosedEnum<
 >;
 
 /**
- * Agent type: internal (Orquesta-managed) or a2a (external A2A-compliant)
+ * Agent type: internal (orq.ai-managed) or a2a (external A2A-compliant)
  */
 export const UpdateAgentType = {
   Internal: "internal",
   A2a: "a2a",
 } as const;
 /**
- * Agent type: internal (Orquesta-managed) or a2a (external A2A-compliant)
+ * Agent type: internal (orq.ai-managed) or a2a (external A2A-compliant)
  */
 export type UpdateAgentType = ClosedEnum<typeof UpdateAgentType>;
 
@@ -1749,7 +1760,7 @@ export type UpdateAgentCacheControl = {
 };
 
 /**
- * Model behavior parameters (snake_case) stored as part of the agent configuration. These become the default parameters used when the agent is executed. Commonly used: temperature (0-1, controls randomness), max_completion_tokens (response length), top_p (nucleus sampling). Advanced: frequency_penalty, presence_penalty, response_format (JSON/structured output), reasoning_effort (for o1/thinking models), seed (reproducibility), stop sequences. Model-specific support varies. Runtime parameters in agent execution requests can override these defaults.
+ * Model behavior parameters (snake_case) stored as part of the agent configuration. These become the default parameters used when the agent is executed. Commonly used: temperature (0-2, controls randomness; the selected model may impose a lower maximum), max_completion_tokens (response length), top_p (nucleus sampling). Advanced: frequency_penalty, presence_penalty, response_format (JSON/structured output), reasoning_effort (for o1/thinking models), seed (reproducibility), stop sequences. Model-specific support varies. Runtime parameters in agent execution requests can override these defaults.
  */
 export type UpdateAgentParameters = {
   /**
@@ -2411,7 +2422,7 @@ export type UpdateAgentAgentsFallbackModelConfiguration =
 
 export type UpdateAgentModel = {
   /**
-   * The database ID of the primary model
+   * ID of the primary model, in provider/model-id format (for example `openai/gpt-5.6-sol`)
    */
   id: string;
   /**
@@ -2419,7 +2430,7 @@ export type UpdateAgentModel = {
    */
   integrationId?: string | null | undefined;
   /**
-   * Model behavior parameters (snake_case) stored as part of the agent configuration. These become the default parameters used when the agent is executed. Commonly used: temperature (0-1, controls randomness), max_completion_tokens (response length), top_p (nucleus sampling). Advanced: frequency_penalty, presence_penalty, response_format (JSON/structured output), reasoning_effort (for o1/thinking models), seed (reproducibility), stop sequences. Model-specific support varies. Runtime parameters in agent execution requests can override these defaults.
+   * Model behavior parameters (snake_case) stored as part of the agent configuration. These become the default parameters used when the agent is executed. Commonly used: temperature (0-2, controls randomness; the selected model may impose a lower maximum), max_completion_tokens (response length), top_p (nucleus sampling). Advanced: frequency_penalty, presence_penalty, response_format (JSON/structured output), reasoning_effort (for o1/thinking models), seed (reproducibility), stop sequences. Model-specific support varies. Runtime parameters in agent execution requests can override these defaults.
    */
   parameters?: UpdateAgentParameters | null | undefined;
   /**
@@ -2480,6 +2491,7 @@ export type UpdateAgentResponseBody = {
    * List of skills that the agent can utilize. This field allows you to specify which skills the agent has access to, enabling more complex and dynamic behavior.
    */
   skills?: Array<string> | undefined;
+  agentPlugins?: Array<UpdateAgentAgentPlugins> | undefined;
   metrics?: UpdateAgentMetrics | undefined;
   /**
    * Extracted variables from agent instructions
@@ -2492,7 +2504,7 @@ export type UpdateAgentResponseBody = {
   source?: UpdateAgentSource | undefined;
   engine: UpdateAgentAgentsEngine;
   /**
-   * Agent type: internal (Orquesta-managed) or a2a (external A2A-compliant)
+   * Agent type: internal (orq.ai-managed) or a2a (external A2A-compliant)
    */
   type: UpdateAgentType;
   role: string;
@@ -4288,6 +4300,26 @@ export function updateAgentTeamOfAgentsToJSON(
 }
 
 /** @internal */
+export type AgentPlugins$Outbound = {
+  id: string;
+  version: string;
+};
+
+/** @internal */
+export const AgentPlugins$outboundSchema: z.ZodType<
+  AgentPlugins$Outbound,
+  z.ZodTypeDef,
+  AgentPlugins
+> = z.object({
+  id: z.string(),
+  version: z.string(),
+});
+
+export function agentPluginsToJSON(agentPlugins: AgentPlugins): string {
+  return JSON.stringify(AgentPlugins$outboundSchema.parse(agentPlugins));
+}
+
+/** @internal */
 export const UpdateAgentEngine$outboundSchema: z.ZodNativeEnum<
   typeof UpdateAgentEngine
 > = z.nativeEnum(UpdateAgentEngine);
@@ -4316,6 +4348,7 @@ export type UpdateAgentRequestBody$Outbound = {
   knowledge_bases?: Array<UpdateAgentKnowledgeBases$Outbound> | undefined;
   team_of_agents?: Array<UpdateAgentTeamOfAgents$Outbound> | undefined;
   skills?: Array<string> | null | undefined;
+  agent_plugins?: Array<AgentPlugins$Outbound> | null | undefined;
   variables?: { [k: string]: any } | undefined;
   engine?: string | undefined;
   versionIncrement?: string | undefined;
@@ -4354,6 +4387,8 @@ export const UpdateAgentRequestBody$outboundSchema: z.ZodType<
   teamOfAgents: z.array(z.lazy(() => UpdateAgentTeamOfAgents$outboundSchema))
     .optional(),
   skills: z.nullable(z.array(z.string())).optional(),
+  agentPlugins: z.nullable(z.array(z.lazy(() => AgentPlugins$outboundSchema)))
+    .optional(),
   variables: z.record(z.any()).optional(),
   engine: UpdateAgentEngine$outboundSchema.optional(),
   versionIncrement: VersionIncrement$outboundSchema.optional(),
@@ -4367,6 +4402,7 @@ export const UpdateAgentRequestBody$outboundSchema: z.ZodType<
     memoryStores: "memory_stores",
     knowledgeBases: "knowledge_bases",
     teamOfAgents: "team_of_agents",
+    agentPlugins: "agent_plugins",
   });
 });
 
@@ -4429,6 +4465,26 @@ export function updateAgentAgentsTeamOfAgentsFromJSON(
     jsonString,
     (x) => UpdateAgentAgentsTeamOfAgents$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'UpdateAgentAgentsTeamOfAgents' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpdateAgentAgentPlugins$inboundSchema: z.ZodType<
+  UpdateAgentAgentPlugins,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.string(),
+  version: z.string(),
+});
+
+export function updateAgentAgentPluginsFromJSON(
+  jsonString: string,
+): SafeParseResult<UpdateAgentAgentPlugins, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpdateAgentAgentPlugins$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpdateAgentAgentPlugins' from JSON`,
   );
 }
 
@@ -6145,6 +6201,8 @@ export const UpdateAgentResponseBody$inboundSchema: z.ZodType<
     z.lazy(() => UpdateAgentAgentsTeamOfAgents$inboundSchema),
   ).optional(),
   skills: z.array(z.string()).optional(),
+  agent_plugins: z.array(z.lazy(() => UpdateAgentAgentPlugins$inboundSchema))
+    .optional(),
   metrics: z.lazy(() => UpdateAgentMetrics$inboundSchema).optional(),
   variables: z.record(z.any()).optional(),
   knowledge_bases: z.array(
@@ -6168,6 +6226,7 @@ export const UpdateAgentResponseBody$inboundSchema: z.ZodType<
     "updated_by_id": "updatedById",
     "memory_stores": "memoryStores",
     "team_of_agents": "teamOfAgents",
+    "agent_plugins": "agentPlugins",
     "knowledge_bases": "knowledgeBases",
     "system_prompt": "systemPrompt",
   });

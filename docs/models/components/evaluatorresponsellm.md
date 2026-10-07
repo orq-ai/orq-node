@@ -9,6 +9,7 @@ let value: EvaluatorResponseLlm = {
   id: "<id>",
   description: "wetly whereas failing",
   type: "llm_eval",
+  outputType: "string",
   prompt: "<value>",
   key: "<key>",
   mode: "jury",
@@ -27,6 +28,7 @@ let value: EvaluatorResponseLlm = {
 | `projectId`                                                                    | *string*                                                                       | :heavy_minus_sign:                                                             | Unique identifier of the project owning this evaluator.                        |
 | `guardrailConfig`                                                              | *any*                                                                          | :heavy_minus_sign:                                                             | N/A                                                                            |
 | `type`                                                                         | *"llm_eval"*                                                                   | :heavy_check_mark:                                                             | N/A                                                                            |
+| `outputType`                                                                   | [components.OutputType](../../models/components/outputtype.md)                 | :heavy_check_mark:                                                             | The type of output expected from the evaluator                                 |
 | `repetitions`                                                                  | *number*                                                                       | :heavy_minus_sign:                                                             | N/A                                                                            |
 | `prompt`                                                                       | *string*                                                                       | :heavy_check_mark:                                                             | N/A                                                                            |
 | `categories`                                                                   | *string*[]                                                                     | :heavy_minus_sign:                                                             | N/A                                                                            |

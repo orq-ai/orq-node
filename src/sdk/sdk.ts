@@ -8,11 +8,11 @@ import { Alerts } from "./alerts.js";
 import { AnnotationQueues } from "./annotationqueues.js";
 import { Annotations } from "./annotations.js";
 import { ApiKeys } from "./apikeys.js";
-import { AuditLogs } from "./auditlogs.js";
 import { Budgets } from "./budgets.js";
 import { Chunking } from "./chunking.js";
 import { Datasets } from "./datasets.js";
 import { Deployments } from "./deployments.js";
+import { Environments } from "./environments.js";
 import { Evals } from "./evals.js";
 import { Feedback } from "./feedback.js";
 import { Files } from "./files.js";
@@ -28,6 +28,7 @@ import { McpGateways } from "./mcpgateways.js";
 import { McpServers } from "./mcpservers.js";
 import { MemoryStores } from "./memorystores.js";
 import { ModelCatalog } from "./modelcatalog.js";
+import { ModelFusions } from "./modelfusions.js";
 import { Models } from "./models.js";
 import { Notifiers } from "./notifiers.js";
 import { Pii } from "./pii.js";
@@ -42,9 +43,13 @@ import { Schedules } from "./schedules.js";
 import { Sessions } from "./sessions.js";
 import { Skills } from "./skills.js";
 import { SmartRouters } from "./smartrouters.js";
+import { Telemetry } from "./telemetry.js";
 import { Tools } from "./tools.js";
 import { Traces } from "./traces.js";
+import { Views } from "./views.js";
 import { Webhooks } from "./webhooks.js";
+import { Websearch } from "./websearch.js";
+import { Wikis } from "./wikis.js";
 import { Workspaces } from "./workspaces.js";
 import { WorkspaceSecurity } from "./workspacesecurity.js";
 import { WorkspaceSettings } from "./workspacesettings.js";
@@ -70,19 +75,9 @@ export class Orq extends ClientSDK {
     return (this._tools ??= new Tools(this._options));
   }
 
-  private _datasets?: Datasets;
-  get datasets(): Datasets {
-    return (this._datasets ??= new Datasets(this._options));
-  }
-
   private _router?: Router;
   get router(): Router {
     return (this._router ??= new Router(this._options));
-  }
-
-  private _annotations?: Annotations;
-  get annotations(): Annotations {
-    return (this._annotations ??= new Annotations(this._options));
   }
 
   private _feedback?: Feedback;
@@ -125,6 +120,16 @@ export class Orq extends ClientSDK {
     return (this._pii ??= new Pii(this._options));
   }
 
+  private _apiKeys?: ApiKeys;
+  get apiKeys(): ApiKeys {
+    return (this._apiKeys ??= new ApiKeys(this._options));
+  }
+
+  private _annotations?: Annotations;
+  get annotations(): Annotations {
+    return (this._annotations ??= new Annotations(this._options));
+  }
+
   private _logs?: Logs;
   get logs(): Logs {
     return (this._logs ??= new Logs(this._options));
@@ -135,9 +140,24 @@ export class Orq extends ClientSDK {
     return (this._reporting ??= new Reporting(this._options));
   }
 
+  private _telemetry?: Telemetry;
+  get telemetry(): Telemetry {
+    return (this._telemetry ??= new Telemetry(this._options));
+  }
+
   private _traces?: Traces;
   get traces(): Traces {
     return (this._traces ??= new Traces(this._options));
+  }
+
+  private _views?: Views;
+  get views(): Views {
+    return (this._views ??= new Views(this._options));
+  }
+
+  private _datasets?: Datasets;
+  get datasets(): Datasets {
+    return (this._datasets ??= new Datasets(this._options));
   }
 
   private _models?: Models;
@@ -160,19 +180,14 @@ export class Orq extends ClientSDK {
     return (this._annotationQueues ??= new AnnotationQueues(this._options));
   }
 
-  private _apiKeys?: ApiKeys;
-  get apiKeys(): ApiKeys {
-    return (this._apiKeys ??= new ApiKeys(this._options));
-  }
-
-  private _auditLogs?: AuditLogs;
-  get auditLogs(): AuditLogs {
-    return (this._auditLogs ??= new AuditLogs(this._options));
-  }
-
   private _budgets?: Budgets;
   get budgets(): Budgets {
     return (this._budgets ??= new Budgets(this._options));
+  }
+
+  private _environments?: Environments;
+  get environments(): Environments {
+    return (this._environments ??= new Environments(this._options));
   }
 
   private _files?: Files;
@@ -215,6 +230,11 @@ export class Orq extends ClientSDK {
     return (this._modelCatalog ??= new ModelCatalog(this._options));
   }
 
+  private _modelFusions?: ModelFusions;
+  get modelFusions(): ModelFusions {
+    return (this._modelFusions ??= new ModelFusions(this._options));
+  }
+
   private _notifiers?: Notifiers;
   get notifiers(): Notifiers {
     return (this._notifiers ??= new Notifiers(this._options));
@@ -250,6 +270,11 @@ export class Orq extends ClientSDK {
     return (this._webhooks ??= new Webhooks(this._options));
   }
 
+  private _wikis?: Wikis;
+  get wikis(): Wikis {
+    return (this._wikis ??= new Wikis(this._options));
+  }
+
   private _workspaces?: Workspaces;
   get workspaces(): Workspaces {
     return (this._workspaces ??= new Workspaces(this._options));
@@ -265,13 +290,18 @@ export class Orq extends ClientSDK {
     return (this._workspaceSettings ??= new WorkspaceSettings(this._options));
   }
 
+  private _responses?: Responses;
+  get responses(): Responses {
+    return (this._responses ??= new Responses(this._options));
+  }
+
   private _schedules?: Schedules;
   get schedules(): Schedules {
     return (this._schedules ??= new Schedules(this._options));
   }
 
-  private _responses?: Responses;
-  get responses(): Responses {
-    return (this._responses ??= new Responses(this._options));
+  private _websearch?: Websearch;
+  get websearch(): Websearch {
+    return (this._websearch ??= new Websearch(this._options));
   }
 }

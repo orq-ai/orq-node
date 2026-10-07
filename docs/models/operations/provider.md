@@ -1,17 +1,17 @@
 # Provider
 
-The provider used to generate the response
+Provider to run this search. Exa uses auto, Linkup uses standard depth, Tavily uses basic depth, and OpenAI runs one web_search tool call on gpt-5.6-luna. Workspace credentials are selected automatically for this provider.
 
 ## Example Usage
 
 ```typescript
 import { Provider } from "@orq-ai/node/models/operations";
 
-let value: Provider = "huggingface";
+let value: Provider = "ceramic";
 ```
 
 ## Values
 
 ```typescript
-"openai" | "groq" | "cohere" | "azure" | "aws" | "google" | "google-ai" | "huggingface" | "togetherai" | "perplexity" | "anthropic" | "leonardoai" | "fal" | "nvidia" | "jina" | "elevenlabs" | "litellm" | "cerebras" | "openailike" | "bytedance" | "mistral" | "deepseek" | "moonshotai" | "zai" | "minimax" | "xai" | "alibaba" | "tensorix" | "scaleway" | "hcompany" | "inceptron" | "wafer" | "poolside" | "tencent" | "nebius" | "fireworks" | "baseten" | "reson8" | "meta" | "greenpt" | "typesafe" | "slack" | "orq"
+"exa" | "ceramic" | "linkup" | "tavily" | "serper" | "openai" | "perplexity"
 ```

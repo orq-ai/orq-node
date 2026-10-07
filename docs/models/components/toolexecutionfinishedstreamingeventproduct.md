@@ -1,6 +1,6 @@
 # ToolExecutionFinishedStreamingEventProduct
 
-Orquesta product
+orq.ai product
 
 ## Example Usage
 

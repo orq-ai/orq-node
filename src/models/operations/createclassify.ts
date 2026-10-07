@@ -82,18 +82,22 @@ export type NoulQuestion = {
 export type Questions = NoulQuestion | ChoiceQuestion | ScoreQuestion;
 
 /**
- * The content to evaluate. A string, an object or an array.
+ * The content to evaluate. A string, an object or an array. For OpenAI GPT-6 Luna, strings are passed as text and objects or ordinary JSON arrays are serialized as text. User-message arrays accept string content or input_text/input_image parts. Images must be inline base64 data URLs, with at most 128 images across the request. Remote image URLs, file IDs, audio, non-user roles, bare content parts and tool items are rejected.
  */
 export type State = string | { [k: string]: any } | Array<any>;
 
 export type CreateClassifyRequestBody = {
+  /**
+   * Up to 10 fallback models in order. The gateway retries a model for matching error codes before trying the next model. Every model must support classification and satisfy access checks. Image requests require native OpenAI image-capable fallbacks.
+   */
+  fallbacks?: Array<components.FallbackConfig> | null | undefined;
   identity?: components.ResponseIdentity | undefined;
   /**
    * Key-value metadata attached to the trace.
    */
   metadata?: { [k: string]: string } | undefined;
   /**
-   * ID of the model to use: the native classify model typesafe/jev-latest, or a chat model that supports classify such as anthropic/claude-haiku-4-5, google-ai/gemini-3.8-flash or zai/glm-5.3-flash.
+   * ID of a model that supports native or emulated classify, including openai/gpt-6-luna.
    */
   model: string;
   /**
@@ -106,7 +110,7 @@ export type CreateClassifyRequestBody = {
   questions: { [k: string]: NoulQuestion | ChoiceQuestion | ScoreQuestion };
   retry?: components.ClassifyRetryConfig | undefined;
   /**
-   * The content to evaluate. A string, an object or an array.
+   * The content to evaluate. A string, an object or an array. For OpenAI GPT-6 Luna, strings are passed as text and objects or ordinary JSON arrays are serialized as text. User-message arrays accept string content or input_text/input_image parts. Images must be inline base64 data URLs, with at most 128 images across the request. Remote image URLs, file IDs, audio, non-user roles, bare content parts and tool items are rejected.
    */
   state: string | { [k: string]: any } | Array<any>;
 };
@@ -120,7 +124,7 @@ export type CreateClassifyResponseBody = {
    */
   answers: { [k: string]: components.ClassifyAnswer };
   /**
-   * The model ID from the request, for example typesafe/jev-latest or google/gemini-3.8-flash.
+   * The requested ID of the model that answered. This can be a fallback model.
    */
   model: string;
   telemetry?: components.ResponseTelemetry | undefined;
@@ -307,6 +311,7 @@ export function stateToJSON(state: State): string {
 
 /** @internal */
 export type CreateClassifyRequestBody$Outbound = {
+  fallbacks?: Array<components.FallbackConfig$Outbound> | null | undefined;
   identity?: components.ResponseIdentity$Outbound | undefined;
   metadata?: { [k: string]: string } | undefined;
   model: string;
@@ -327,6 +332,8 @@ export const CreateClassifyRequestBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateClassifyRequestBody
 > = z.object({
+  fallbacks: z.nullable(z.array(components.FallbackConfig$outboundSchema))
+    .optional(),
   identity: components.ResponseIdentity$outboundSchema.optional(),
   metadata: z.record(z.string()).optional(),
   model: z.string(),

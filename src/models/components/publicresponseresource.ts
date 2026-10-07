@@ -34,6 +34,7 @@ export const ServiceTier = {
   Default: "default",
   Flex: "flex",
   Fast: "fast",
+  Ultrafast: "ultrafast",
   Scale: "scale",
   Priority: "priority",
 } as const;

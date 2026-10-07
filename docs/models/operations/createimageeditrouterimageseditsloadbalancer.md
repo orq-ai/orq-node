@@ -1,6 +1,6 @@
 # CreateImageEditRouterImagesEditsLoadBalancer
 
-Array of models with weights for load balancing requests
+Load balancer configuration for the request.
 
 
 ## Supported Types

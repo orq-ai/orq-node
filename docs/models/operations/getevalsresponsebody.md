@@ -16,13 +16,14 @@ let value: GetEvalsResponseBody = {
       created: "2026-08-05T15:12:51.947Z",
       updated: "2026-08-05T15:12:51.947Z",
       type: "function_eval",
+      outputType: "number",
       functionParams: {
-        type: "meteor_score",
+        type: "contains_url",
       },
       key: "<key>",
     },
   ],
-  hasMore: true,
+  hasMore: false,
 };
 ```
 

@@ -8,24 +8,17 @@ import { GetModelCatalogModelResponse } from "@orq-ai/node/models/components";
 let value: GetModelCatalogModelResponse = {
   model: {
     id: "<id>",
-    created: "<value>",
+    created: new Date("2026-08-06T11:27:51.346Z"),
     name: "<value>",
     description:
-      "separate keenly following despite rigidly woot ugh internationalize reprove",
+      "brave conjecture garage preheat dramatic braid popularity brr",
     provider: {
       id: "<id>",
       logo: "<value>",
     },
-    endpoints: [
-      "<value 1>",
-      "<value 2>",
-    ],
+    endpoints: [],
     modalities: {
-      input: [
-        "<value 1>",
-        "<value 2>",
-        "<value 3>",
-      ],
+      input: [],
       output: [
         "<value 1>",
       ],
@@ -34,12 +27,16 @@ let value: GetModelCatalogModelResponse = {
     supportedParameters: [
       "<value 1>",
     ],
-    supportedTiers: [],
-    location: [
+    supportedTiers: [
       "<value 1>",
     ],
+    location: [
+      "<value 1>",
+      "<value 2>",
+    ],
     features: [],
-    deprecated: true,
+    deprecated: false,
+    zdr: false,
   },
 };
 ```

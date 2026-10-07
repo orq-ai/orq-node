@@ -308,7 +308,7 @@ export type FilterBy1 =
   | Exists;
 
 /**
- * The metadata filter to apply to the search. Check the [Searching a Knowledge Base](https://docs.orq.ai/docs/knowledge/api#knowledge-base-search) for more information.
+ * The metadata filter to apply to the search. Check the [Searching a Knowledge Base](https://docs.orq.ai/ai-studio/ai-engineering/knowledge-bases#search-a-knowledge-base) for more information.
  */
 export type FilterBy =
   | SearchKnowledgeRequestFilterByAnd
@@ -328,7 +328,7 @@ export type FilterBy =
 
 export type Two = {
   /**
-   * The name of the model for the Agent to use. Refer to the [model list](https://docs.orq.ai/docs/proxy#/chat-models).
+   * The name of the model for the Agent to use. Refer to the [model list](https://docs.orq.ai/ai-gateway/supported-models#chat-models).
    */
   model?: string | undefined;
   /**
@@ -347,7 +347,7 @@ export type Two = {
 
 export type AgenticRagConfig1 = {
   /**
-   * The name of the model for the Agent to use. Refer to the [model list](https://docs.orq.ai/docs/proxy#/chat-models).
+   * The name of the model for the Agent to use. Refer to the [model list](https://docs.orq.ai/ai-gateway/supported-models#chat-models).
    */
   model: string;
   /**
@@ -390,7 +390,7 @@ export type SearchKnowledgeRequest = {
   threshold?: number | undefined;
   searchType?: SearchType | undefined;
   /**
-   * The metadata filter to apply to the search. Check the [Searching a Knowledge Base](https://docs.orq.ai/docs/knowledge/api#knowledge-base-search) for more information.
+   * The metadata filter to apply to the search. Check the [Searching a Knowledge Base](https://docs.orq.ai/ai-studio/ai-engineering/knowledge-bases#search-a-knowledge-base) for more information.
    */
   filterBy?:
     | SearchKnowledgeRequestFilterByAnd

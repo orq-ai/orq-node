@@ -26,10 +26,10 @@ export type SearchLogsResponse = {
   nextPageToken?: string | undefined;
   meta?: TraceSearchMeta | undefined;
   /**
-   * Exact match count for the full time range (cursor-independent, constant
+   * Exact match count for the full time range. Constant across pages.
    *
    * @remarks
-   *  across pages). int64 serializes as a JSON string per protojson.
+   *  Serialized as a JSON string.
    */
   totalCount?: string | undefined;
 };

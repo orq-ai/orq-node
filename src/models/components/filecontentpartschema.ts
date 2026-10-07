@@ -9,7 +9,7 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * File data for the content part. Must contain either file_data or uri, but not both.
+ * File data for the content part. Must contain exactly one of file_data, file_id or uri.
  */
 export type FileContentPartSchema = {
   /**
@@ -17,13 +17,17 @@ export type FileContentPartSchema = {
    */
   fileData?: string | undefined;
   /**
-   * URL to the file. Only supported by Anthropic Claude models for PDF files.
+   * URL of the file. Supported for PDFs on Anthropic Claude models and for `https://` and Google Cloud Storage `gs://` URIs on Vertex AI Gemini models.
    */
   uri?: string | undefined;
   /**
-   * MIME type of the file (e.g., application/pdf, image/png)
+   * MIME type of the file (e.g., application/pdf, image/png). Inferred from `filename` or the URI extension when omitted.
    */
   mimeType?: string | undefined;
+  /**
+   * A provider file reference: a Google Cloud Storage `gs://` URI for Vertex AI Gemini models, or an OpenAI file ID (`file-...`) for OpenAI models.
+   */
+  fileId?: string | undefined;
   /**
    * The name of the file, used when passing the file to the model as a string.
    */
@@ -39,10 +43,12 @@ export const FileContentPartSchema$inboundSchema: z.ZodType<
   file_data: z.string().optional(),
   uri: z.string().optional(),
   mimeType: z.string().optional(),
+  file_id: z.string().optional(),
   filename: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "file_data": "fileData",
+    "file_id": "fileId",
   });
 });
 /** @internal */
@@ -50,6 +56,7 @@ export type FileContentPartSchema$Outbound = {
   file_data?: string | undefined;
   uri?: string | undefined;
   mimeType?: string | undefined;
+  file_id?: string | undefined;
   filename?: string | undefined;
 };
 
@@ -62,10 +69,12 @@ export const FileContentPartSchema$outboundSchema: z.ZodType<
   fileData: z.string().optional(),
   uri: z.string().optional(),
   mimeType: z.string().optional(),
+  fileId: z.string().optional(),
   filename: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     fileData: "file_data",
+    fileId: "file_id",
   });
 });
 

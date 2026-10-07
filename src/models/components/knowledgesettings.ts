@@ -16,13 +16,13 @@ import {
   EmbeddingsConfig$inboundSchema,
 } from "./embeddingsconfig.js";
 import {
-  InternalRetrievalConfig,
-  InternalRetrievalConfig$inboundSchema,
-} from "./internalretrievalconfig.js";
+  RetrievalConfig,
+  RetrievalConfig$inboundSchema,
+} from "./retrievalconfig.js";
 
 export type KnowledgeSettings = {
   embeddingsConfig?: EmbeddingsConfig | undefined;
-  retrievalConfig?: InternalRetrievalConfig | undefined;
+  retrievalConfig?: RetrievalConfig | undefined;
   agenticRagConfig?: AgenticRagConfig | undefined;
 };
 
@@ -33,7 +33,7 @@ export const KnowledgeSettings$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   embeddings_config: EmbeddingsConfig$inboundSchema.optional(),
-  retrieval_config: InternalRetrievalConfig$inboundSchema.optional(),
+  retrieval_config: RetrievalConfig$inboundSchema.optional(),
   agentic_rag_config: AgenticRagConfig$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {

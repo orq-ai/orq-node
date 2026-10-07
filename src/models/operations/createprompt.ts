@@ -199,6 +199,20 @@ export type CreatePromptMessagesFunction = {
   arguments?: string | undefined;
 };
 
+export type CreatePromptMessagesGoogle = {
+  /**
+   * Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call. Takes precedence over the top-level `thought_signature` when both are set.
+   */
+  thoughtSignature?: string | undefined;
+};
+
+/**
+ * Provider-specific extra content for the tool call.
+ */
+export type CreatePromptMessagesExtraContent = {
+  google?: CreatePromptMessagesGoogle | undefined;
+};
+
 export type CreatePromptMessagesToolCalls = {
   /**
    * The ID of the tool call.
@@ -213,6 +227,10 @@ export type CreatePromptMessagesToolCalls = {
    * Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call.
    */
   thoughtSignature?: string | undefined;
+  /**
+   * Provider-specific extra content for the tool call.
+   */
+  extraContent?: CreatePromptMessagesExtraContent | undefined;
 };
 
 export type CreatePromptMessagesAssistantMessage = {
@@ -319,7 +337,7 @@ export type CreatePrompt24 = {
   type: "file";
   cacheControl?: CreatePrompt2CacheControl | undefined;
   /**
-   * File data for the content part. Must contain either file_data or uri, but not both.
+   * File data for the content part. Must contain exactly one of file_data, file_id or uri.
    */
   file: components.FileContentPartSchema;
 };
@@ -792,7 +810,7 @@ export type PromptInput = {
     | CreatePromptMessagesToolMessage
   >;
   /**
-   * Model ID used to generate the response, like `openai/gpt-5.6-sol` or `anthropic/claude-sonnet-5`. For private models, use format: `{workspaceKey}@{provider}/{model}`. The full list of models can be found at https://docs.orq.ai/docs/ai-gateway/supported-models. Only chat models are supported.
+   * Model ID used to generate the response, like `openai/gpt-5.6-sol` or `anthropic/claude-sonnet-5`. For private models, use format: `{workspaceKey}@{provider}/{model}`. The full list of models can be found at https://docs.orq.ai/ai-gateway/supported-models. Only chat models are supported.
    */
   model?: string | undefined;
   /**
@@ -1399,6 +1417,7 @@ export const CreatePromptProvider = {
   Meta: "meta",
   Greenpt: "greenpt",
   Typesafe: "typesafe",
+  Berget: "berget",
   Slack: "slack",
   Orq: "orq",
 } as const;
@@ -2088,6 +2107,20 @@ export type CreatePromptMessagesPromptsFunction = {
   arguments?: string | undefined;
 };
 
+export type CreatePromptMessagesPromptsGoogle = {
+  /**
+   * Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call. Takes precedence over the top-level `thought_signature` when both are set.
+   */
+  thoughtSignature?: string | undefined;
+};
+
+/**
+ * Provider-specific extra content for the tool call.
+ */
+export type CreatePromptMessagesPromptsExtraContent = {
+  google?: CreatePromptMessagesPromptsGoogle | undefined;
+};
+
 export type CreatePromptMessagesPromptsToolCalls = {
   /**
    * The ID of the tool call.
@@ -2102,6 +2135,10 @@ export type CreatePromptMessagesPromptsToolCalls = {
    * Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call.
    */
   thoughtSignature?: string | undefined;
+  /**
+   * Provider-specific extra content for the tool call.
+   */
+  extraContent?: CreatePromptMessagesPromptsExtraContent | undefined;
 };
 
 export type CreatePromptMessagesPromptsAssistantMessage = {
@@ -2212,7 +2249,7 @@ export type CreatePrompt2Prompts4 = {
   type: "file";
   cacheControl?: CreatePrompt2PromptsCacheControl | undefined;
   /**
-   * File data for the content part. Must contain either file_data or uri, but not both.
+   * File data for the content part. Must contain exactly one of file_data, file_id or uri.
    */
   file: components.FileContentPartSchema;
 };
@@ -2834,11 +2871,62 @@ export function createPromptMessagesFunctionToJSON(
 }
 
 /** @internal */
+export type CreatePromptMessagesGoogle$Outbound = {
+  thought_signature?: string | undefined;
+};
+
+/** @internal */
+export const CreatePromptMessagesGoogle$outboundSchema: z.ZodType<
+  CreatePromptMessagesGoogle$Outbound,
+  z.ZodTypeDef,
+  CreatePromptMessagesGoogle
+> = z.object({
+  thoughtSignature: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    thoughtSignature: "thought_signature",
+  });
+});
+
+export function createPromptMessagesGoogleToJSON(
+  createPromptMessagesGoogle: CreatePromptMessagesGoogle,
+): string {
+  return JSON.stringify(
+    CreatePromptMessagesGoogle$outboundSchema.parse(createPromptMessagesGoogle),
+  );
+}
+
+/** @internal */
+export type CreatePromptMessagesExtraContent$Outbound = {
+  google?: CreatePromptMessagesGoogle$Outbound | undefined;
+};
+
+/** @internal */
+export const CreatePromptMessagesExtraContent$outboundSchema: z.ZodType<
+  CreatePromptMessagesExtraContent$Outbound,
+  z.ZodTypeDef,
+  CreatePromptMessagesExtraContent
+> = z.object({
+  google: z.lazy(() => CreatePromptMessagesGoogle$outboundSchema).optional(),
+});
+
+export function createPromptMessagesExtraContentToJSON(
+  createPromptMessagesExtraContent: CreatePromptMessagesExtraContent,
+): string {
+  return JSON.stringify(
+    CreatePromptMessagesExtraContent$outboundSchema.parse(
+      createPromptMessagesExtraContent,
+    ),
+  );
+}
+
+/** @internal */
 export type CreatePromptMessagesToolCalls$Outbound = {
   id: string;
   type: string;
   function: CreatePromptMessagesFunction$Outbound;
   thought_signature?: string | undefined;
+  extra_content?: CreatePromptMessagesExtraContent$Outbound | undefined;
 };
 
 /** @internal */
@@ -2851,9 +2939,12 @@ export const CreatePromptMessagesToolCalls$outboundSchema: z.ZodType<
   type: CreatePromptMessagesType$outboundSchema,
   function: z.lazy(() => CreatePromptMessagesFunction$outboundSchema),
   thoughtSignature: z.string().optional(),
+  extraContent: z.lazy(() => CreatePromptMessagesExtraContent$outboundSchema)
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     thoughtSignature: "thought_signature",
+    extraContent: "extra_content",
   });
 });
 
@@ -5376,6 +5467,55 @@ export function createPromptMessagesPromptsFunctionFromJSON(
 }
 
 /** @internal */
+export const CreatePromptMessagesPromptsGoogle$inboundSchema: z.ZodType<
+  CreatePromptMessagesPromptsGoogle,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  thought_signature: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "thought_signature": "thoughtSignature",
+  });
+});
+
+export function createPromptMessagesPromptsGoogleFromJSON(
+  jsonString: string,
+): SafeParseResult<CreatePromptMessagesPromptsGoogle, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreatePromptMessagesPromptsGoogle$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreatePromptMessagesPromptsGoogle' from JSON`,
+  );
+}
+
+/** @internal */
+export const CreatePromptMessagesPromptsExtraContent$inboundSchema: z.ZodType<
+  CreatePromptMessagesPromptsExtraContent,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  google: z.lazy(() => CreatePromptMessagesPromptsGoogle$inboundSchema)
+    .optional(),
+});
+
+export function createPromptMessagesPromptsExtraContentFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  CreatePromptMessagesPromptsExtraContent,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      CreatePromptMessagesPromptsExtraContent$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'CreatePromptMessagesPromptsExtraContent' from JSON`,
+  );
+}
+
+/** @internal */
 export const CreatePromptMessagesPromptsToolCalls$inboundSchema: z.ZodType<
   CreatePromptMessagesPromptsToolCalls,
   z.ZodTypeDef,
@@ -5385,9 +5525,13 @@ export const CreatePromptMessagesPromptsToolCalls$inboundSchema: z.ZodType<
   type: CreatePromptMessagesPromptsResponseType$inboundSchema,
   function: z.lazy(() => CreatePromptMessagesPromptsFunction$inboundSchema),
   thought_signature: z.string().optional(),
+  extra_content: z.lazy(() =>
+    CreatePromptMessagesPromptsExtraContent$inboundSchema
+  ).optional(),
 }).transform((v) => {
   return remap$(v, {
     "thought_signature": "thoughtSignature",
+    "extra_content": "extraContent",
   });
 });
 

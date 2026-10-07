@@ -4,73 +4,45 @@
 
 import * as z from "zod/v3";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import {
+  ClassifyChoiceAnswer,
+  ClassifyChoiceAnswer$inboundSchema,
+} from "./classifychoiceanswer.js";
+import {
+  ClassifyNoulAnswer,
+  ClassifyNoulAnswer$inboundSchema,
+} from "./classifynoulanswer.js";
+import {
+  ClassifyRefusalAnswer,
+  ClassifyRefusalAnswer$inboundSchema,
+} from "./classifyrefusalanswer.js";
+import {
+  ClassifyScoreAnswer,
+  ClassifyScoreAnswer$inboundSchema,
+} from "./classifyscoreanswer.js";
 
 /**
- * The question type this answer belongs to.
+ * One answer to a classification question. The type selects the answer fields. A refusal contains only type.
  */
-export const ClassifyAnswerType = {
-  Noul: "noul",
-  Choice: "choice",
-  Score: "score",
-} as const;
-/**
- * The question type this answer belongs to.
- */
-export type ClassifyAnswerType = ClosedEnum<typeof ClassifyAnswerType>;
-
-export type ClassifyAnswer = {
-  /**
-   * The selected option. Present for choice answers.
-   */
-  choice?: string | undefined;
-  /**
-   * Probability of the selected option or level. Present for choice and score answers.
-   */
-  confidence?: number | undefined;
-  /**
-   * Level index to level description. Present for score answers.
-   */
-  legend?: { [k: string]: string } | undefined;
-  /**
-   * Probability between 0 and 1 that the statement holds. Present for noul answers.
-   */
-  noul?: number | undefined;
-  /**
-   * Probability distribution over the options or levels. Present for choice and score answers.
-   */
-  probabilities?: { [k: string]: number } | undefined;
-  /**
-   * The selected level index. Present for score answers.
-   */
-  score?: number | undefined;
-  /**
-   * The question type this answer belongs to.
-   */
-  type: ClassifyAnswerType;
-};
-
-/** @internal */
-export const ClassifyAnswerType$inboundSchema: z.ZodNativeEnum<
-  typeof ClassifyAnswerType
-> = z.nativeEnum(ClassifyAnswerType);
+export type ClassifyAnswer =
+  | ClassifyChoiceAnswer
+  | ClassifyNoulAnswer
+  | ClassifyRefusalAnswer
+  | ClassifyScoreAnswer;
 
 /** @internal */
 export const ClassifyAnswer$inboundSchema: z.ZodType<
   ClassifyAnswer,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  choice: z.string().optional(),
-  confidence: z.number().optional(),
-  legend: z.record(z.string()).optional(),
-  noul: z.number().optional(),
-  probabilities: z.record(z.number()).optional(),
-  score: z.number().optional(),
-  type: ClassifyAnswerType$inboundSchema,
-});
+> = z.union([
+  ClassifyChoiceAnswer$inboundSchema,
+  ClassifyNoulAnswer$inboundSchema,
+  ClassifyRefusalAnswer$inboundSchema,
+  ClassifyScoreAnswer$inboundSchema,
+]);
 
 export function classifyAnswerFromJSON(
   jsonString: string,

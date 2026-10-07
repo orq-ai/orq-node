@@ -4,10 +4,12 @@
 
 import { tracesAggregate } from "../funcs/tracesAggregate.js";
 import { tracesGet } from "../funcs/tracesGet.js";
+import { tracesGetConversation } from "../funcs/tracesGetConversation.js";
 import { tracesGetSpan } from "../funcs/tracesGetSpan.js";
 import { tracesListFacets } from "../funcs/tracesListFacets.js";
 import { tracesListFacetValues } from "../funcs/tracesListFacetValues.js";
 import { tracesListFields } from "../funcs/tracesListFields.js";
+import { tracesListFilters } from "../funcs/tracesListFilters.js";
 import { tracesListSpans } from "../funcs/tracesListSpans.js";
 import { tracesQuery } from "../funcs/tracesQuery.js";
 import { tracesSearch } from "../funcs/tracesSearch.js";
@@ -82,10 +84,27 @@ export class Traces extends ClientSDK {
   }
 
   /**
+   * List trace filters
+   *
+   * @remarks
+   * List the evaluators, human reviews and metadata keys a trace filter can address.
+   */
+  async listFilters(
+    request?: operations.TracesListFiltersRequest | undefined,
+    options?: RequestOptions,
+  ): Promise<components.ListTraceFiltersResponse> {
+    return unwrapAsync(tracesListFilters(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
    * Query traces with OQL
    *
    * @remarks
-   * Run an OQL trace query. OQL is validated against the trace field registry and compiled through the trace planner.
+   * Run an OQL trace query over a time range. OQL selects the traces to return.
    */
   async query(
     request: components.QueryTracesRequest,
@@ -102,7 +121,7 @@ export class Traces extends ClientSDK {
    * Search traces
    *
    * @remarks
-   * Search trace summaries using the structured trace filter contract.
+   * Search trace summaries using the structured trace filter contract. See the [filter grammar](/ai-studio/observability/traces#filter-grammar) for the field and operator reference.
    */
   async search(
     request: components.SearchTracesRequest,
@@ -126,6 +145,23 @@ export class Traces extends ClientSDK {
     options?: RequestOptions,
   ): Promise<components.GetTraceResponse> {
     return unwrapAsync(tracesGet(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Get trace conversation
+   *
+   * @remarks
+   * Return ordered OpenResponses items from the selected model-call span. Prefers spans with output outside evaluator subtrees unless `span_id` is given.
+   */
+  async getConversation(
+    request: operations.TracesGetConversationRequest,
+    options?: RequestOptions,
+  ): Promise<components.GetTraceConversationResponse> {
+    return unwrapAsync(tracesGetConversation(
       this,
       request,
       options,

@@ -30,23 +30,22 @@ import { RateLimit, RateLimit$inboundSchema } from "./ratelimit.js";
 export type Budget = {
   budgetId: string;
   /**
-   * Denormalized metadata for UI rendering, list filters, and the
+   * Scope the budget was created for, used to group and filter budgets in
    *
    * @remarks
-   *  resolver's prefilter index. Never consulted for matching — the
-   *  `match` expression is the single source of matching semantics.
-   *  Unset for budgets created from a raw CEL expression ("custom").
+   *  the console. Not used for matching: the `match` expression decides
+   *  which requests a budget applies to. Unset for budgets created from a
+   *  raw CEL expression ("custom").
    */
   scope?: BudgetScope | undefined;
   /**
-   * The matching semantics of the budget. The enforcement resolver
+   * The matching semantics of the budget. A budget applies to a request
    *
    * @remarks
-   *  evaluates `match.cel` against the request context; a budget
-   *  applies to a request if and only if the expression evaluates to
-   *  true. Scoped creates derive a canonical expression (e.g.
-   *  `provider == "openai"`); an empty expression always matches
-   *  (workspace-wide).
+   *  when `match.cel` evaluates to true against the request context.
+   *  Creating a budget for a scope derives the expression for that scope
+   *  (e.g. `provider == "openai"`); an empty expression matches every
+   *  request in the workspace.
    */
   match?: BudgetMatch | undefined;
   /**
@@ -58,10 +57,10 @@ export type Budget = {
    */
   limits: BudgetLimits;
   /**
-   * RateLimit is the per-minute request ceiling. Enforced via atomic
+   * Per-minute request ceiling applied to the requests this budget
    *
    * @remarks
-   *  increment-first semantics in the enforcement middleware.
+   *  matches.
    */
   rateLimit?: RateLimit | undefined;
   isActive?: boolean | undefined;

@@ -7,14 +7,142 @@ import * as components from "../components/index.js";
 import { OrqError } from "./orqerror.js";
 
 /**
- * Rate limited by the provider.
+ * The upstream provider failed or returned an invalid classification response.
+ */
+export type CreateClassifyRouterClassifyResponse502ResponseBodyData = {
+  error: components.APIError;
+};
+
+/**
+ * The upstream provider failed or returned an invalid classification response.
+ */
+export class CreateClassifyRouterClassifyResponse502ResponseBody
+  extends OrqError
+{
+  error: components.APIError;
+
+  /** The original data that was passed to this error instance. */
+  data$: CreateClassifyRouterClassifyResponse502ResponseBodyData;
+
+  constructor(
+    err: CreateClassifyRouterClassifyResponse502ResponseBodyData,
+    httpMeta: { response: Response; request: Request; body: string },
+  ) {
+    const message = err.error?.message
+      || `API error occurred: ${JSON.stringify(err)}`;
+    super(message, httpMeta);
+    this.data$ = err;
+    this.error = err.error;
+
+    this.name = "CreateClassifyRouterClassifyResponse502ResponseBody";
+  }
+}
+
+/**
+ * An internal model-resolution error occurred.
+ */
+export type CreateClassifyRouterClassifyResponse500ResponseBodyData = {
+  error: components.APIError;
+};
+
+/**
+ * An internal model-resolution error occurred.
+ */
+export class CreateClassifyRouterClassifyResponse500ResponseBody
+  extends OrqError
+{
+  error: components.APIError;
+
+  /** The original data that was passed to this error instance. */
+  data$: CreateClassifyRouterClassifyResponse500ResponseBodyData;
+
+  constructor(
+    err: CreateClassifyRouterClassifyResponse500ResponseBodyData,
+    httpMeta: { response: Response; request: Request; body: string },
+  ) {
+    const message = err.error?.message
+      || `API error occurred: ${JSON.stringify(err)}`;
+    super(message, httpMeta);
+    this.data$ = err;
+    this.error = err.error;
+
+    this.name = "CreateClassifyRouterClassifyResponse500ResponseBody";
+  }
+}
+
+/**
+ * A plan rate limit, budget or provider rate limit was exceeded.
+ */
+export type CreateClassifyRouterClassifyResponse429ResponseBodyData = {
+  error: components.APIError;
+};
+
+/**
+ * A plan rate limit, budget or provider rate limit was exceeded.
+ */
+export class CreateClassifyRouterClassifyResponse429ResponseBody
+  extends OrqError
+{
+  error: components.APIError;
+
+  /** The original data that was passed to this error instance. */
+  data$: CreateClassifyRouterClassifyResponse429ResponseBodyData;
+
+  constructor(
+    err: CreateClassifyRouterClassifyResponse429ResponseBodyData,
+    httpMeta: { response: Response; request: Request; body: string },
+  ) {
+    const message = err.error?.message
+      || `API error occurred: ${JSON.stringify(err)}`;
+    super(message, httpMeta);
+    this.data$ = err;
+    this.error = err.error;
+
+    this.name = "CreateClassifyRouterClassifyResponse429ResponseBody";
+  }
+}
+
+/**
+ * The state or a question violates the classification contract.
+ */
+export type CreateClassifyRouterClassifyResponse422ResponseBodyData = {
+  error: components.APIError;
+};
+
+/**
+ * The state or a question violates the classification contract.
+ */
+export class CreateClassifyRouterClassifyResponse422ResponseBody
+  extends OrqError
+{
+  error: components.APIError;
+
+  /** The original data that was passed to this error instance. */
+  data$: CreateClassifyRouterClassifyResponse422ResponseBodyData;
+
+  constructor(
+    err: CreateClassifyRouterClassifyResponse422ResponseBodyData,
+    httpMeta: { response: Response; request: Request; body: string },
+  ) {
+    const message = err.error?.message
+      || `API error occurred: ${JSON.stringify(err)}`;
+    super(message, httpMeta);
+    this.data$ = err;
+    this.error = err.error;
+
+    this.name = "CreateClassifyRouterClassifyResponse422ResponseBody";
+  }
+}
+
+/**
+ * The API key lacks classify permission, or the workspace or project cannot access the model.
  */
 export type CreateClassifyRouterClassifyResponseResponseBodyData = {
   error: components.APIError;
 };
 
 /**
- * Rate limited by the provider.
+ * The API key lacks classify permission, or the workspace or project cannot access the model.
  */
 export class CreateClassifyRouterClassifyResponseResponseBody extends OrqError {
   error: components.APIError;
@@ -37,14 +165,14 @@ export class CreateClassifyRouterClassifyResponseResponseBody extends OrqError {
 }
 
 /**
- * The state or a question violates the classification contract.
+ * Missing, invalid, expired or revoked API key.
  */
 export type CreateClassifyRouterClassifyResponseBodyData = {
   error: components.APIError;
 };
 
 /**
- * The state or a question violates the classification contract.
+ * Missing, invalid, expired or revoked API key.
  */
 export class CreateClassifyRouterClassifyResponseBody extends OrqError {
   error: components.APIError;
@@ -67,14 +195,14 @@ export class CreateClassifyRouterClassifyResponseBody extends OrqError {
 }
 
 /**
- * Malformed JSON or missing model.
+ * Malformed JSON, missing or unsupported model, or invalid retry/fallback fields.
  */
 export type CreateClassifyResponseBodyData = {
   error: components.APIError;
 };
 
 /**
- * Malformed JSON or missing model.
+ * Malformed JSON, missing or unsupported model, or invalid retry/fallback fields.
  */
 export class CreateClassifyResponseBody extends OrqError {
   error: components.APIError;
@@ -95,6 +223,86 @@ export class CreateClassifyResponseBody extends OrqError {
     this.name = "CreateClassifyResponseBody";
   }
 }
+
+/** @internal */
+export const CreateClassifyRouterClassifyResponse502ResponseBody$inboundSchema:
+  z.ZodType<
+    CreateClassifyRouterClassifyResponse502ResponseBody,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    error: components.APIError$inboundSchema,
+    request$: z.instanceof(Request),
+    response$: z.instanceof(Response),
+    body$: z.string(),
+  })
+    .transform((v) => {
+      return new CreateClassifyRouterClassifyResponse502ResponseBody(v, {
+        request: v.request$,
+        response: v.response$,
+        body: v.body$,
+      });
+    });
+
+/** @internal */
+export const CreateClassifyRouterClassifyResponse500ResponseBody$inboundSchema:
+  z.ZodType<
+    CreateClassifyRouterClassifyResponse500ResponseBody,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    error: components.APIError$inboundSchema,
+    request$: z.instanceof(Request),
+    response$: z.instanceof(Response),
+    body$: z.string(),
+  })
+    .transform((v) => {
+      return new CreateClassifyRouterClassifyResponse500ResponseBody(v, {
+        request: v.request$,
+        response: v.response$,
+        body: v.body$,
+      });
+    });
+
+/** @internal */
+export const CreateClassifyRouterClassifyResponse429ResponseBody$inboundSchema:
+  z.ZodType<
+    CreateClassifyRouterClassifyResponse429ResponseBody,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    error: components.APIError$inboundSchema,
+    request$: z.instanceof(Request),
+    response$: z.instanceof(Response),
+    body$: z.string(),
+  })
+    .transform((v) => {
+      return new CreateClassifyRouterClassifyResponse429ResponseBody(v, {
+        request: v.request$,
+        response: v.response$,
+        body: v.body$,
+      });
+    });
+
+/** @internal */
+export const CreateClassifyRouterClassifyResponse422ResponseBody$inboundSchema:
+  z.ZodType<
+    CreateClassifyRouterClassifyResponse422ResponseBody,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    error: components.APIError$inboundSchema,
+    request$: z.instanceof(Request),
+    response$: z.instanceof(Response),
+    body$: z.string(),
+  })
+    .transform((v) => {
+      return new CreateClassifyRouterClassifyResponse422ResponseBody(v, {
+        request: v.request$,
+        response: v.response$,
+        body: v.body$,
+      });
+    });
 
 /** @internal */
 export const CreateClassifyRouterClassifyResponseResponseBody$inboundSchema:

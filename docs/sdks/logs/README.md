@@ -448,7 +448,7 @@ run();
 
 ## search
 
-Query log records with filters, free-text search, and keyset pagination. Results are ordered timestamp desc (the only supported sort, mirroring traces).
+Query log records with filters, free-text search, and keyset pagination. Results are ordered timestamp desc (the only supported sort, mirroring traces). See the [filter grammar](/ai-studio/observability/traces#filter-grammar) for the field and operator reference.
 
 ### Example Usage
 

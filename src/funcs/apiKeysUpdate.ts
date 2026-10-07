@@ -30,7 +30,7 @@ import { Result } from "../types/fp.js";
  * Update an API key
  *
  * @remarks
- * Updates mutable fields of an API key: display name, status (active / disabled / revoked), permission mode and access map, project scope, and constraints (budget / rate limit / expiry). Omitted fields keep their current values.
+ * Updates mutable fields of an API key: display name, status (active / disabled / revoked), permission mode and access map, project scope and constraints. Omitted fields keep their current values. Unknown body fields are rejected.
  */
 export function apiKeysUpdate(
   client: OrqCore,
@@ -85,9 +85,7 @@ async function $do(
     return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
-  const body = encodeJSON("body", payload.UpdateApiKeyRequest, {
-    explode: true,
-  });
+  const body = encodeJSON("body", payload.RequestBody, { explode: true });
 
   const pathParams = {
     api_key_id: encodeSimple("api_key_id", payload.api_key_id, {
@@ -160,7 +158,7 @@ async function $do(
     | SDKValidationError
   >(
     M.json(200, components.ApiKeyRestResponse$inboundSchema),
-    M.fail("4XX"),
+    M.fail([400, 401, 403, 404, 409, "4XX"]),
     M.fail("5XX"),
   )(response, req);
   if (!result.ok) {

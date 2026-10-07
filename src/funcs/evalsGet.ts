@@ -30,7 +30,7 @@ import { Result } from "../types/fp.js";
  * Retrieve an Evaluator
  *
  * @remarks
- * Retrieve a single evaluator by ID with more detail than the list endpoint: full type-specific config, owner, domain_id, metadata, enabled, and output_type.
+ * Retrieve a single evaluator by ID with more detail than the list endpoint: full type-specific config, owner, domain_id, metadata and enabled.
  */
 export function evalsGet(
   client: OrqCore,

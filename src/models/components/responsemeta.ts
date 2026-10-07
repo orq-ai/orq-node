@@ -10,7 +10,7 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * Bucket grain actually applied by the planner.
+ * Bucket grain actually applied. Differs from the requested value when `grain=auto`.
  */
 export const EffectiveGrain = {
   Minute: "minute",
@@ -18,7 +18,7 @@ export const EffectiveGrain = {
   Day: "day",
 } as const;
 /**
- * Bucket grain actually applied by the planner.
+ * Bucket grain actually applied. Differs from the requested value when `grain=auto`.
  */
 export type EffectiveGrain = ClosedEnum<typeof EffectiveGrain>;
 
@@ -35,7 +35,7 @@ export type Currency = ClosedEnum<typeof Currency>;
 
 export type ResponseMeta = {
   /**
-   * Bucket grain actually applied by the planner.
+   * Bucket grain actually applied. Differs from the requested value when `grain=auto`.
    */
   effectiveGrain?: EffectiveGrain | undefined;
   /**

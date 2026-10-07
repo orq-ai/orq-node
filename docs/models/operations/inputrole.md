@@ -13,5 +13,5 @@ let value: InputRole = "assistant";
 ## Values
 
 ```typescript
-"user" | "assistant" | "system" | "developer"
+"user" | "assistant" | "system"
 ```

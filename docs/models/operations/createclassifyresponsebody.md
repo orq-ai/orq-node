@@ -10,22 +10,23 @@ import { CreateClassifyResponseBody } from "@orq-ai/node/models/operations";
 let value: CreateClassifyResponseBody = {
   answers: {
     "key": {
+      score: 8762.99,
       type: "score",
     },
   },
-  model: "Silverado",
+  model: "XC90",
   usage: {
-    inputTokens: 979305,
-    outputTokens: 938729,
+    inputTokens: 938729,
+    outputTokens: 809892,
   },
 };
 ```
 
 ## Fields
 
-| Field                                                                                      | Type                                                                                       | Required                                                                                   | Description                                                                                |
-| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
-| `answers`                                                                                  | Record<string, [components.ClassifyAnswer](../../models/components/classifyanswer.md)>     | :heavy_check_mark:                                                                         | Answers keyed by the question identifiers from the request.                                |
-| `model`                                                                                    | *string*                                                                                   | :heavy_check_mark:                                                                         | The model ID from the request, for example typesafe/jev-latest or google/gemini-3.8-flash. |
-| `telemetry`                                                                                | [components.ResponseTelemetry](../../models/components/responsetelemetry.md)               | :heavy_minus_sign:                                                                         | N/A                                                                                        |
-| `usage`                                                                                    | [components.ClassifyUsage](../../models/components/classifyusage.md)                       | :heavy_check_mark:                                                                         | N/A                                                                                        |
+| Field                                                                        | Type                                                                         | Required                                                                     | Description                                                                  |
+| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| `answers`                                                                    | Record<string, *components.ClassifyAnswer*>                                  | :heavy_check_mark:                                                           | Answers keyed by the question identifiers from the request.                  |
+| `model`                                                                      | *string*                                                                     | :heavy_check_mark:                                                           | The requested ID of the model that answered. This can be a fallback model.   |
+| `telemetry`                                                                  | [components.ResponseTelemetry](../../models/components/responsetelemetry.md) | :heavy_minus_sign:                                                           | N/A                                                                          |
+| `usage`                                                                      | [components.ClassifyUsage](../../models/components/classifyusage.md)         | :heavy_check_mark:                                                           | N/A                                                                          |

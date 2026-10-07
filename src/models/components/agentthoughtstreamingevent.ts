@@ -83,6 +83,20 @@ export type AgentThoughtStreamingEventFunction = {
   arguments?: string | undefined;
 };
 
+export type AgentThoughtStreamingEventGoogle = {
+  /**
+   * Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call.
+   */
+  thoughtSignature?: string | undefined;
+};
+
+/**
+ * Provider-specific extra content for the tool call.
+ */
+export type AgentThoughtStreamingEventExtraContent = {
+  google?: AgentThoughtStreamingEventGoogle | undefined;
+};
+
 export type AgentThoughtStreamingEventToolCalls = {
   index?: number | undefined;
   id?: string | undefined;
@@ -92,6 +106,10 @@ export type AgentThoughtStreamingEventToolCalls = {
    * Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call.
    */
   thoughtSignature?: string | undefined;
+  /**
+   * Provider-specific extra content for the tool call.
+   */
+  extraContent?: AgentThoughtStreamingEventExtraContent | undefined;
 };
 
 export const AgentThoughtStreamingEventDataRole = {
@@ -411,6 +429,50 @@ export function agentThoughtStreamingEventFunctionFromJSON(
 }
 
 /** @internal */
+export const AgentThoughtStreamingEventGoogle$inboundSchema: z.ZodType<
+  AgentThoughtStreamingEventGoogle,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  thought_signature: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "thought_signature": "thoughtSignature",
+  });
+});
+
+export function agentThoughtStreamingEventGoogleFromJSON(
+  jsonString: string,
+): SafeParseResult<AgentThoughtStreamingEventGoogle, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => AgentThoughtStreamingEventGoogle$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'AgentThoughtStreamingEventGoogle' from JSON`,
+  );
+}
+
+/** @internal */
+export const AgentThoughtStreamingEventExtraContent$inboundSchema: z.ZodType<
+  AgentThoughtStreamingEventExtraContent,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  google: z.lazy(() => AgentThoughtStreamingEventGoogle$inboundSchema)
+    .optional(),
+});
+
+export function agentThoughtStreamingEventExtraContentFromJSON(
+  jsonString: string,
+): SafeParseResult<AgentThoughtStreamingEventExtraContent, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      AgentThoughtStreamingEventExtraContent$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'AgentThoughtStreamingEventExtraContent' from JSON`,
+  );
+}
+
+/** @internal */
 export const AgentThoughtStreamingEventToolCalls$inboundSchema: z.ZodType<
   AgentThoughtStreamingEventToolCalls,
   z.ZodTypeDef,
@@ -422,9 +484,13 @@ export const AgentThoughtStreamingEventToolCalls$inboundSchema: z.ZodType<
   function: z.lazy(() => AgentThoughtStreamingEventFunction$inboundSchema)
     .optional(),
   thought_signature: z.string().optional(),
+  extra_content: z.lazy(() =>
+    AgentThoughtStreamingEventExtraContent$inboundSchema
+  ).optional(),
 }).transform((v) => {
   return remap$(v, {
     "thought_signature": "thoughtSignature",
+    "extra_content": "extraContent",
   });
 });
 

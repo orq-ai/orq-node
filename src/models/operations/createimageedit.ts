@@ -208,7 +208,7 @@ export type CreateImageEditLoadBalancerRouterImagesEdits1 = {
 };
 
 /**
- * Array of models with weights for load balancing requests
+ * Load balancer configuration for the request.
  */
 export type CreateImageEditRouterImagesEditsLoadBalancer =
   CreateImageEditLoadBalancerRouterImagesEdits1;
@@ -255,7 +255,7 @@ export type CreateImageEditOrq = {
    */
   cache?: CreateImageEditRouterImagesEditsCache | undefined;
   /**
-   * Array of models with weights for load balancing requests
+   * Load balancer configuration for the request.
    */
   loadBalancer?: CreateImageEditLoadBalancerRouterImagesEdits1 | undefined;
   /**
@@ -266,7 +266,7 @@ export type CreateImageEditOrq = {
 
 export type CreateImageEditRequestBody = {
   /**
-   * The model to use for image edit. [Check models](https://docs.orq.ai/docs/ai-gateway/supported-models#image-models)
+   * The model to use for image edit. [Check models](https://docs.orq.ai/ai-gateway/supported-models#image-models)
    */
   model: string;
   /**

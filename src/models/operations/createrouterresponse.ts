@@ -353,7 +353,7 @@ export type Reasoning = {
 /**
  * The role of the message sender (for message items).
  */
-export const InputRole = {
+export const CreateRouterResponseInputRole = {
   User: "user",
   Assistant: "assistant",
   System: "system",
@@ -362,12 +362,14 @@ export const InputRole = {
 /**
  * The role of the message sender (for message items).
  */
-export type InputRole = ClosedEnum<typeof InputRole>;
+export type CreateRouterResponseInputRole = ClosedEnum<
+  typeof CreateRouterResponseInputRole
+>;
 
 /**
  * The status of a model-generated input item.
  */
-export const Status = {
+export const InputStatus = {
   InProgress: "in_progress",
   Completed: "completed",
   Incomplete: "incomplete",
@@ -375,12 +377,12 @@ export const Status = {
 /**
  * The status of a model-generated input item.
  */
-export type Status = ClosedEnum<typeof Status>;
+export type InputStatus = ClosedEnum<typeof InputStatus>;
 
 /**
  * The type of item.
  */
-export const InputType = {
+export const CreateRouterResponseInputType = {
   Message: "message",
   FunctionCall: "function_call",
   FunctionCallOutput: "function_call_output",
@@ -411,7 +413,9 @@ export const InputType = {
 /**
  * The type of item.
  */
-export type InputType = ClosedEnum<typeof InputType>;
+export type CreateRouterResponseInputType = ClosedEnum<
+  typeof CreateRouterResponseInputType
+>;
 
 /**
  * An input item. The "type" field determines the item kind: "message", "function_call", "function_call_output", "item_reference", etc.
@@ -452,15 +456,15 @@ export type CreateRouterResponseInput2 = {
   /**
    * The role of the message sender (for message items).
    */
-  role?: InputRole | undefined;
+  role?: CreateRouterResponseInputRole | undefined;
   /**
    * The status of a model-generated input item.
    */
-  status?: Status | undefined;
+  status?: InputStatus | undefined;
   /**
    * The type of item.
    */
-  type?: InputType | undefined;
+  type?: CreateRouterResponseInputType | undefined;
 };
 
 /**
@@ -471,18 +475,19 @@ export type CreateRouterResponseInput =
   | Array<CreateRouterResponseInput2>;
 
 /**
- * Processing mode for the request. Fast uses premium low-latency processing; priority remains a backward-compatible alias.
+ * Processing mode for the request. Ultrafast is available for GPT-6 Astra on US/global processing. Fast uses premium low-latency processing; priority remains a backward-compatible alias.
  */
 export const ServiceTier = {
   Auto: "auto",
   Default: "default",
   Flex: "flex",
   Fast: "fast",
+  Ultrafast: "ultrafast",
   Scale: "scale",
   Priority: "priority",
 } as const;
 /**
- * Processing mode for the request. Fast uses premium low-latency processing; priority remains a backward-compatible alias.
+ * Processing mode for the request. Ultrafast is available for GPT-6 Astra on US/global processing. Fast uses premium low-latency processing; priority remains a backward-compatible alias.
  */
 export type ServiceTier = ClosedEnum<typeof ServiceTier>;
 
@@ -680,6 +685,7 @@ export const CreateRouterResponseToolsResponsesRequestType = {
   OrqWebFetch: "orq:web_fetch",
   OrqDatetime: "orq:datetime",
   OrqSearchModels: "orq:search_models",
+  OrqToolSearch: "orq:tool_search",
   OrqImageGeneration: "orq:image_generation",
   OrqApplyPatch: "orq:apply_patch",
   OrqFusion: "orq:fusion",
@@ -709,6 +715,10 @@ export type OrqAiTool = {
    * Files to stage in /workspace for orq:code_interpreter. Maximum 10 files.
    */
   files?: Array<Files> | undefined;
+  /**
+   * Maximum results per call for orq:search_models (1-20, default 5) and orq:tool_search (1-50, default 5).
+   */
+  maxResults?: number | undefined;
   /**
    * Network access intent for orq:code_interpreter. Stored and validated today; runtime enforcement by the sandbox egress layer is rolling out and until then sandbox executions retain default public internet egress.
    */
@@ -811,6 +821,10 @@ export type ToolsFunction = {
   async?: boolean | undefined;
   cacheControl?: ToolsCacheControl | undefined;
   /**
+   * Hide this tool from the model until an orq:tool_search call reveals it. Requires an orq:tool_search tool in the same request.
+   */
+  deferLoading?: boolean | undefined;
+  /**
    * A description of what the function does.
    */
   description?: string | undefined;
@@ -842,6 +856,7 @@ export type CreateRouterResponseTools =
   | (OrqAiTool & { type: "orq:web_fetch" })
   | (OrqAiTool & { type: "orq:datetime" })
   | (OrqAiTool & { type: "orq:search_models" })
+  | (OrqAiTool & { type: "orq:tool_search" })
   | (OrqAiTool & { type: "orq:image_generation" })
   | (OrqAiTool & { type: "orq:apply_patch" })
   | (OrqAiTool & { type: "orq:fusion" })
@@ -941,7 +956,7 @@ export type CreateRouterResponseRequestBody = {
   safetyIdentifier?: string | undefined;
   security?: components.SecurityConfig | undefined;
   /**
-   * Processing mode for the request. Fast uses premium low-latency processing; priority remains a backward-compatible alias.
+   * Processing mode for the request. Ultrafast is available for GPT-6 Astra on US/global processing. Fast uses premium low-latency processing; priority remains a backward-compatible alias.
    */
   serviceTier?: ServiceTier | undefined;
   /**
@@ -957,10 +972,6 @@ export type CreateRouterResponseRequestBody = {
    */
   stream?: boolean | undefined;
   streamOptions?: components.StreamOptions | undefined;
-  /**
-   * Tags attached to the request trace.
-   */
-  tags?: Array<string> | null | undefined;
   /**
    * Sampling temperature between 0 and 2.
    */
@@ -993,6 +1004,7 @@ export type CreateRouterResponseRequestBody = {
       | (OrqAiTool & { type: "orq:web_fetch" })
       | (OrqAiTool & { type: "orq:datetime" })
       | (OrqAiTool & { type: "orq:search_models" })
+      | (OrqAiTool & { type: "orq:tool_search" })
       | (OrqAiTool & { type: "orq:image_generation" })
       | (OrqAiTool & { type: "orq:apply_patch" })
       | (OrqAiTool & { type: "orq:fusion" })
@@ -1042,6 +1054,7 @@ export const CreateRouterResponseServiceTier = {
   Default: "default",
   Flex: "flex",
   Fast: "fast",
+  Ultrafast: "ultrafast",
   Scale: "scale",
   Priority: "priority",
 } as const;
@@ -1472,16 +1485,18 @@ export function reasoningToJSON(reasoning: Reasoning): string {
 }
 
 /** @internal */
-export const InputRole$outboundSchema: z.ZodNativeEnum<typeof InputRole> = z
-  .nativeEnum(InputRole);
+export const CreateRouterResponseInputRole$outboundSchema: z.ZodNativeEnum<
+  typeof CreateRouterResponseInputRole
+> = z.nativeEnum(CreateRouterResponseInputRole);
 
 /** @internal */
-export const Status$outboundSchema: z.ZodNativeEnum<typeof Status> = z
-  .nativeEnum(Status);
+export const InputStatus$outboundSchema: z.ZodNativeEnum<typeof InputStatus> = z
+  .nativeEnum(InputStatus);
 
 /** @internal */
-export const InputType$outboundSchema: z.ZodNativeEnum<typeof InputType> = z
-  .nativeEnum(InputType);
+export const CreateRouterResponseInputType$outboundSchema: z.ZodNativeEnum<
+  typeof CreateRouterResponseInputType
+> = z.nativeEnum(CreateRouterResponseInputType);
 
 /** @internal */
 export type CreateRouterResponseInput2$Outbound = {
@@ -1522,9 +1537,9 @@ export const CreateRouterResponseInput2$outboundSchema: z.ZodType<
   name: z.string().optional(),
   output: z.string().optional(),
   reasoning: z.lazy(() => Reasoning$outboundSchema).optional(),
-  role: InputRole$outboundSchema.optional(),
-  status: Status$outboundSchema.optional(),
-  type: InputType$outboundSchema.optional(),
+  role: CreateRouterResponseInputRole$outboundSchema.optional(),
+  status: InputStatus$outboundSchema.optional(),
+  type: CreateRouterResponseInputType$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     callId: "call_id",
@@ -1846,6 +1861,7 @@ export const CreateRouterResponseToolsResponsesRequestType$outboundSchema:
 /** @internal */
 export type OrqAiTool$Outbound = {
   files?: Array<Files$Outbound> | undefined;
+  max_results?: number | undefined;
   network?: Network$Outbound | undefined;
   timezone?: string | undefined;
   tool_id?: string | undefined;
@@ -1859,12 +1875,14 @@ export const OrqAiTool$outboundSchema: z.ZodType<
   OrqAiTool
 > = z.object({
   files: z.array(z.lazy(() => Files$outboundSchema)).optional(),
+  maxResults: z.number().int().optional(),
   network: z.lazy(() => Network$outboundSchema).optional(),
   timezone: z.string().optional(),
   toolId: z.string().optional(),
   type: CreateRouterResponseToolsResponsesRequestType$outboundSchema,
 }).transform((v) => {
   return remap$(v, {
+    maxResults: "max_results",
     toolId: "tool_id",
   });
 });
@@ -1933,6 +1951,7 @@ export function toolsCacheControlToJSON(
 export type ToolsFunction$Outbound = {
   async?: boolean | undefined;
   cache_control?: ToolsCacheControl$Outbound | undefined;
+  defer_loading?: boolean | undefined;
   description?: string | undefined;
   name: string;
   parameters?: { [k: string]: any } | undefined;
@@ -1948,6 +1967,7 @@ export const ToolsFunction$outboundSchema: z.ZodType<
 > = z.object({
   async: z.boolean().optional(),
   cacheControl: z.lazy(() => ToolsCacheControl$outboundSchema).optional(),
+  deferLoading: z.boolean().optional(),
   description: z.string().optional(),
   name: z.string(),
   parameters: z.record(z.any()).optional(),
@@ -1956,6 +1976,7 @@ export const ToolsFunction$outboundSchema: z.ZodType<
 }).transform((v) => {
   return remap$(v, {
     cacheControl: "cache_control",
+    deferLoading: "defer_loading",
   });
 });
 
@@ -1974,6 +1995,7 @@ export type CreateRouterResponseTools$Outbound =
   | (OrqAiTool$Outbound & { type: "orq:web_fetch" })
   | (OrqAiTool$Outbound & { type: "orq:datetime" })
   | (OrqAiTool$Outbound & { type: "orq:search_models" })
+  | (OrqAiTool$Outbound & { type: "orq:tool_search" })
   | (OrqAiTool$Outbound & { type: "orq:image_generation" })
   | (OrqAiTool$Outbound & { type: "orq:apply_patch" })
   | (OrqAiTool$Outbound & { type: "orq:fusion" })
@@ -2015,6 +2037,9 @@ export const CreateRouterResponseTools$outboundSchema: z.ZodType<
   ),
   z.lazy(() => OrqAiTool$outboundSchema).and(
     z.object({ type: z.literal("orq:search_models") }),
+  ),
+  z.lazy(() => OrqAiTool$outboundSchema).and(
+    z.object({ type: z.literal("orq:tool_search") }),
   ),
   z.lazy(() => OrqAiTool$outboundSchema).and(
     z.object({ type: z.literal("orq:image_generation") }),
@@ -2103,7 +2128,6 @@ export type CreateRouterResponseRequestBody$Outbound = {
   store?: boolean | undefined;
   stream?: boolean | undefined;
   stream_options?: components.StreamOptions$Outbound | undefined;
-  tags?: Array<string> | null | undefined;
   temperature?: number | undefined;
   template_engine?: string | undefined;
   text?: CreateRouterResponseText$Outbound | undefined;
@@ -2121,6 +2145,7 @@ export type CreateRouterResponseRequestBody$Outbound = {
       | (OrqAiTool$Outbound & { type: "orq:web_fetch" })
       | (OrqAiTool$Outbound & { type: "orq:datetime" })
       | (OrqAiTool$Outbound & { type: "orq:search_models" })
+      | (OrqAiTool$Outbound & { type: "orq:tool_search" })
       | (OrqAiTool$Outbound & { type: "orq:image_generation" })
       | (OrqAiTool$Outbound & { type: "orq:apply_patch" })
       | (OrqAiTool$Outbound & { type: "orq:fusion" })
@@ -2189,7 +2214,6 @@ export const CreateRouterResponseRequestBody$outboundSchema: z.ZodType<
   store: z.boolean().optional(),
   stream: z.boolean().optional(),
   streamOptions: components.StreamOptions$outboundSchema.optional(),
-  tags: z.nullable(z.array(z.string())).optional(),
   temperature: z.number().optional(),
   templateEngine: TemplateEngine$outboundSchema.optional(),
   text: z.lazy(() => CreateRouterResponseText$outboundSchema).optional(),
@@ -2221,6 +2245,9 @@ export const CreateRouterResponseRequestBody$outboundSchema: z.ZodType<
       ),
       z.lazy(() => OrqAiTool$outboundSchema).and(
         z.object({ type: z.literal("orq:search_models") }),
+      ),
+      z.lazy(() => OrqAiTool$outboundSchema).and(
+        z.object({ type: z.literal("orq:tool_search") }),
       ),
       z.lazy(() => OrqAiTool$outboundSchema).and(
         z.object({ type: z.literal("orq:image_generation") }),

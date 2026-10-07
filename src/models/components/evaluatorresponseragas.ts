@@ -9,6 +9,22 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+/**
+ * The type of output expected from the evaluator
+ */
+export const EvaluatorResponseRagasOutputType = {
+  Boolean: "boolean",
+  Categorical: "categorical",
+  Number: "number",
+  String: "string",
+} as const;
+/**
+ * The type of output expected from the evaluator
+ */
+export type EvaluatorResponseRagasOutputType = ClosedEnum<
+  typeof EvaluatorResponseRagasOutputType
+>;
+
 export const RagasMetric = {
   ContextPrecision: "context_precision",
   ContextRecall: "context_recall",
@@ -37,10 +53,19 @@ export type EvaluatorResponseRagas = {
   projectId?: string | undefined;
   guardrailConfig?: any | undefined;
   type: "ragas";
+  /**
+   * The type of output expected from the evaluator
+   */
+  outputType: EvaluatorResponseRagasOutputType;
   ragasMetric: RagasMetric;
   key: string;
   model: string;
 };
+
+/** @internal */
+export const EvaluatorResponseRagasOutputType$inboundSchema: z.ZodNativeEnum<
+  typeof EvaluatorResponseRagasOutputType
+> = z.nativeEnum(EvaluatorResponseRagasOutputType);
 
 /** @internal */
 export const RagasMetric$inboundSchema: z.ZodNativeEnum<typeof RagasMetric> = z
@@ -60,6 +85,7 @@ export const EvaluatorResponseRagas$inboundSchema: z.ZodType<
   project_id: z.string().optional(),
   guardrail_config: z.any().optional(),
   type: z.literal("ragas"),
+  output_type: EvaluatorResponseRagasOutputType$inboundSchema,
   ragas_metric: RagasMetric$inboundSchema,
   key: z.string(),
   model: z.string(),
@@ -69,6 +95,7 @@ export const EvaluatorResponseRagas$inboundSchema: z.ZodType<
     "updated_by_id": "updatedById",
     "project_id": "projectId",
     "guardrail_config": "guardrailConfig",
+    "output_type": "outputType",
     "ragas_metric": "ragasMetric",
   });
 });

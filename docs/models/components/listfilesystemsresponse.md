@@ -17,6 +17,7 @@ let value: ListFileSystemsResponse = {
       externalAccess: "read_only",
       created: "<value>",
       updated: "<value>",
+      id: "<id>",
     },
   ],
   hasMore: true,

@@ -5,8 +5,25 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+
+/**
+ * The type of output expected from the evaluator
+ */
+export const EvaluatorResponseTypescriptOutputType = {
+  Boolean: "boolean",
+  Categorical: "categorical",
+  Number: "number",
+  String: "string",
+} as const;
+/**
+ * The type of output expected from the evaluator
+ */
+export type EvaluatorResponseTypescriptOutputType = ClosedEnum<
+  typeof EvaluatorResponseTypescriptOutputType
+>;
 
 export type EvaluatorResponseTypescript = {
   id: string;
@@ -21,8 +38,18 @@ export type EvaluatorResponseTypescript = {
   guardrailConfig?: any | undefined;
   code: string;
   type: "typescript_eval";
+  /**
+   * The type of output expected from the evaluator
+   */
+  outputType: EvaluatorResponseTypescriptOutputType;
   key: string;
 };
+
+/** @internal */
+export const EvaluatorResponseTypescriptOutputType$inboundSchema:
+  z.ZodNativeEnum<typeof EvaluatorResponseTypescriptOutputType> = z.nativeEnum(
+    EvaluatorResponseTypescriptOutputType,
+  );
 
 /** @internal */
 export const EvaluatorResponseTypescript$inboundSchema: z.ZodType<
@@ -39,6 +66,7 @@ export const EvaluatorResponseTypescript$inboundSchema: z.ZodType<
   guardrail_config: z.any().optional(),
   code: z.string(),
   type: z.literal("typescript_eval"),
+  output_type: EvaluatorResponseTypescriptOutputType$inboundSchema,
   key: z.string(),
 }).transform((v) => {
   return remap$(v, {
@@ -46,6 +74,7 @@ export const EvaluatorResponseTypescript$inboundSchema: z.ZodType<
     "updated_by_id": "updatedById",
     "project_id": "projectId",
     "guardrail_config": "guardrailConfig",
+    "output_type": "outputType",
   });
 });
 

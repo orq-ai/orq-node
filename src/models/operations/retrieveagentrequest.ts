@@ -44,6 +44,11 @@ export type RetrieveAgentRequestTeamOfAgents = {
   role?: string | undefined;
 };
 
+export type RetrieveAgentRequestAgentPlugins = {
+  id: string;
+  version: string;
+};
+
 export type RetrieveAgentRequestMetrics = {
   totalCost: number;
 };
@@ -74,14 +79,14 @@ export type RetrieveAgentRequestEngine = ClosedEnum<
 >;
 
 /**
- * Agent type: internal (Orquesta-managed) or a2a (external A2A-compliant)
+ * Agent type: internal (orq.ai-managed) or a2a (external A2A-compliant)
  */
 export const RetrieveAgentRequestType = {
   Internal: "internal",
   A2a: "a2a",
 } as const;
 /**
- * Agent type: internal (Orquesta-managed) or a2a (external A2A-compliant)
+ * Agent type: internal (orq.ai-managed) or a2a (external A2A-compliant)
  */
 export type RetrieveAgentRequestType = ClosedEnum<
   typeof RetrieveAgentRequestType
@@ -572,7 +577,7 @@ export type RetrieveAgentRequestCacheControl = {
 };
 
 /**
- * Model behavior parameters (snake_case) stored as part of the agent configuration. These become the default parameters used when the agent is executed. Commonly used: temperature (0-1, controls randomness), max_completion_tokens (response length), top_p (nucleus sampling). Advanced: frequency_penalty, presence_penalty, response_format (JSON/structured output), reasoning_effort (for o1/thinking models), seed (reproducibility), stop sequences. Model-specific support varies. Runtime parameters in agent execution requests can override these defaults.
+ * Model behavior parameters (snake_case) stored as part of the agent configuration. These become the default parameters used when the agent is executed. Commonly used: temperature (0-2, controls randomness; the selected model may impose a lower maximum), max_completion_tokens (response length), top_p (nucleus sampling). Advanced: frequency_penalty, presence_penalty, response_format (JSON/structured output), reasoning_effort (for o1/thinking models), seed (reproducibility), stop sequences. Model-specific support varies. Runtime parameters in agent execution requests can override these defaults.
  */
 export type RetrieveAgentRequestParameters = {
   /**
@@ -1232,7 +1237,7 @@ export type RetrieveAgentRequestFallbackModelConfiguration =
 
 export type RetrieveAgentRequestModel = {
   /**
-   * The database ID of the primary model
+   * ID of the primary model, in provider/model-id format (for example `openai/gpt-5.6-sol`)
    */
   id: string;
   /**
@@ -1240,7 +1245,7 @@ export type RetrieveAgentRequestModel = {
    */
   integrationId?: string | null | undefined;
   /**
-   * Model behavior parameters (snake_case) stored as part of the agent configuration. These become the default parameters used when the agent is executed. Commonly used: temperature (0-1, controls randomness), max_completion_tokens (response length), top_p (nucleus sampling). Advanced: frequency_penalty, presence_penalty, response_format (JSON/structured output), reasoning_effort (for o1/thinking models), seed (reproducibility), stop sequences. Model-specific support varies. Runtime parameters in agent execution requests can override these defaults.
+   * Model behavior parameters (snake_case) stored as part of the agent configuration. These become the default parameters used when the agent is executed. Commonly used: temperature (0-2, controls randomness; the selected model may impose a lower maximum), max_completion_tokens (response length), top_p (nucleus sampling). Advanced: frequency_penalty, presence_penalty, response_format (JSON/structured output), reasoning_effort (for o1/thinking models), seed (reproducibility), stop sequences. Model-specific support varies. Runtime parameters in agent execution requests can override these defaults.
    */
   parameters?: RetrieveAgentRequestParameters | null | undefined;
   /**
@@ -1301,6 +1306,7 @@ export type RetrieveAgentRequestResponseBody = {
    * List of skills that the agent can utilize. This field allows you to specify which skills the agent has access to, enabling more complex and dynamic behavior.
    */
   skills?: Array<string> | undefined;
+  agentPlugins?: Array<RetrieveAgentRequestAgentPlugins> | undefined;
   metrics?: RetrieveAgentRequestMetrics | undefined;
   /**
    * Extracted variables from agent instructions
@@ -1313,7 +1319,7 @@ export type RetrieveAgentRequestResponseBody = {
   source?: RetrieveAgentRequestSource | undefined;
   engine: RetrieveAgentRequestEngine;
   /**
-   * Agent type: internal (Orquesta-managed) or a2a (external A2A-compliant)
+   * Agent type: internal (orq.ai-managed) or a2a (external A2A-compliant)
    */
   type: RetrieveAgentRequestType;
   role: string;
@@ -1374,6 +1380,26 @@ export function retrieveAgentRequestTeamOfAgentsFromJSON(
     jsonString,
     (x) => RetrieveAgentRequestTeamOfAgents$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'RetrieveAgentRequestTeamOfAgents' from JSON`,
+  );
+}
+
+/** @internal */
+export const RetrieveAgentRequestAgentPlugins$inboundSchema: z.ZodType<
+  RetrieveAgentRequestAgentPlugins,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.string(),
+  version: z.string(),
+});
+
+export function retrieveAgentRequestAgentPluginsFromJSON(
+  jsonString: string,
+): SafeParseResult<RetrieveAgentRequestAgentPlugins, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => RetrieveAgentRequestAgentPlugins$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RetrieveAgentRequestAgentPlugins' from JSON`,
   );
 }
 
@@ -3064,6 +3090,9 @@ export const RetrieveAgentRequestResponseBody$inboundSchema: z.ZodType<
     z.lazy(() => RetrieveAgentRequestTeamOfAgents$inboundSchema),
   ).optional(),
   skills: z.array(z.string()).optional(),
+  agent_plugins: z.array(
+    z.lazy(() => RetrieveAgentRequestAgentPlugins$inboundSchema),
+  ).optional(),
   metrics: z.lazy(() => RetrieveAgentRequestMetrics$inboundSchema).optional(),
   variables: z.record(z.any()).optional(),
   knowledge_bases: z.array(
@@ -3087,6 +3116,7 @@ export const RetrieveAgentRequestResponseBody$inboundSchema: z.ZodType<
     "updated_by_id": "updatedById",
     "memory_stores": "memoryStores",
     "team_of_agents": "teamOfAgents",
+    "agent_plugins": "agentPlugins",
     "knowledge_bases": "knowledgeBases",
     "system_prompt": "systemPrompt",
   });

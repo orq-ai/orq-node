@@ -6,6 +6,7 @@
 import { HubItem } from "@orq-ai/node/models/components";
 
 let value: HubItem = {
+  id: "<id>",
   entityId: "<id>",
   displayName: "Stone85",
   description: "considering instead dimly",
@@ -17,7 +18,7 @@ let value: HubItem = {
 
 | Field                                                        | Type                                                         | Required                                                     | Description                                                  |
 | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| `id`                                                         | *string*                                                     | :heavy_minus_sign:                                           | Unique hub item ID.                                          |
+| `id`                                                         | *string*                                                     | :heavy_check_mark:                                           | Unique hub item ID.                                          |
 | `entityId`                                                   | *string*                                                     | :heavy_check_mark:                                           | ID of the workspace entity represented by this hub item.     |
 | `displayName`                                                | *string*                                                     | :heavy_check_mark:                                           | Human-readable hub item name.                                |
 | `description`                                                | *string*                                                     | :heavy_check_mark:                                           | Hub item description.                                        |

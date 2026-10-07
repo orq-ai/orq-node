@@ -10,6 +10,7 @@ const value: components.EvaluatorResponseLlm = {
   id: "<id>",
   description: "wetly whereas failing",
   type: "llm_eval",
+  outputType: "string",
   prompt: "<value>",
   key: "<key>",
   mode: "jury",
@@ -23,6 +24,7 @@ const value: components.EvaluatorResponseJsonSchema = {
   id: "<id>",
   description: "partially muted and per yahoo until upliftingly like",
   type: "json_schema",
+  outputType: "boolean",
   schema: "<value>",
   key: "<key>",
 };
@@ -36,10 +38,14 @@ const value: components.EvaluatorResponseHttp = {
   description:
     "and slime corporation um because resort ligate good-natured lonely violin",
   type: "http_eval",
-  url: "https://pertinent-membership.name",
-  method: "POST",
+  outputType: "string",
+  url: "https://oblong-ocelot.name",
+  method: "GET",
   headers: {},
-  payload: {},
+  payload: {
+    "key": "<value>",
+    "key1": "<value>",
+  },
   key: "<key>",
 };
 ```
@@ -52,6 +58,7 @@ const value: components.EvaluatorResponsePython = {
   description: "glaring which athwart deficient woot alongside",
   code: "<value>",
   type: "python_eval",
+  outputType: "categorical",
   key: "<key>",
 };
 ```
@@ -63,8 +70,14 @@ const value: components.EvaluatorResponseFunction = {
   id: "<id>",
   description: "amount faithfully whoa eek cheerful pfft",
   type: "function_eval",
+  outputType: "string",
   functionParams: {
-    type: "sentences_count",
+    type: "keywords_match",
+    keywords: [
+      "<value 1>",
+      "<value 2>",
+      "<value 3>",
+    ],
   },
   key: "<key>",
 };
@@ -77,9 +90,10 @@ const value: components.EvaluatorResponseRagas = {
   id: "<id>",
   description: "rewarding ack as geez rot outrun an hmph",
   type: "ragas",
-  ragasMetric: "faithfulness",
+  outputType: "string",
+  ragasMetric: "noise_sensitivity",
   key: "<key>",
-  model: "XTS",
+  model: "XC90",
 };
 ```
 
@@ -91,6 +105,7 @@ const value: components.EvaluatorResponseTypescript = {
   description: "since loftily for along past among qua",
   code: "<value>",
   type: "typescript_eval",
+  outputType: "boolean",
   key: "<key>",
 };
 ```

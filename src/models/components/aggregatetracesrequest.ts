@@ -23,6 +23,10 @@ export type AggregateTracesRequest = {
   compute?: Array<TraceCompute> | undefined;
   limit?: number | undefined;
   filterOperator?: string | undefined;
+  /**
+   * Free-text search with the same matching as SearchTracesRequest.query.
+   */
+  query?: string | undefined;
 };
 
 /** @internal */
@@ -34,6 +38,7 @@ export type AggregateTracesRequest$Outbound = {
   compute?: Array<TraceCompute$Outbound> | undefined;
   limit?: number | undefined;
   filter_operator?: string | undefined;
+  query?: string | undefined;
 };
 
 /** @internal */
@@ -49,6 +54,7 @@ export const AggregateTracesRequest$outboundSchema: z.ZodType<
   compute: z.array(TraceCompute$outboundSchema).optional(),
   limit: z.number().int().optional(),
   filterOperator: z.string().optional(),
+  query: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     groupBy: "group_by",

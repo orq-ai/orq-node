@@ -20,5 +20,6 @@ let value: ServerToolUseDetails = {};
 | `searchModelsRequests`    | *number*                  | :heavy_minus_sign:        | N/A                       |
 | `shellCommands`           | *number*                  | :heavy_minus_sign:        | N/A                       |
 | `subagentRequests`        | *number*                  | :heavy_minus_sign:        | N/A                       |
+| `toolSearchRequests`      | *number*                  | :heavy_minus_sign:        | N/A                       |
 | `webFetchRequests`        | *number*                  | :heavy_minus_sign:        | N/A                       |
 | `webSearchRequests`       | *number*                  | :heavy_minus_sign:        | N/A                       |

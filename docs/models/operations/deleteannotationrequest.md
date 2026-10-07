@@ -8,6 +8,7 @@ import { DeleteAnnotationRequest } from "@orq-ai/node/models/operations";
 let value: DeleteAnnotationRequest = {
   traceId: "<id>",
   spanId: "<id>",
+  requestBody: {},
 };
 ```
 
@@ -17,4 +18,4 @@ let value: DeleteAnnotationRequest = {
 | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
 | `traceId`                                                                                        | *string*                                                                                         | :heavy_check_mark:                                                                               | Unique identifier of the trace                                                                   |
 | `spanId`                                                                                         | *string*                                                                                         | :heavy_check_mark:                                                                               | Unique identifier of the span                                                                    |
-| `requestBody`                                                                                    | [operations.DeleteAnnotationRequestBody](../../models/operations/deleteannotationrequestbody.md) | :heavy_minus_sign:                                                                               | N/A                                                                                              |
+| `requestBody`                                                                                    | [operations.DeleteAnnotationRequestBody](../../models/operations/deleteannotationrequestbody.md) | :heavy_check_mark:                                                                               | N/A                                                                                              |

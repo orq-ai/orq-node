@@ -470,7 +470,7 @@ export type CreateCompletionFilterBy1 =
   | CreateCompletion1Nin;
 
 /**
- * The metadata filter to apply to the search. Check the [Searching a Knowledge Base](https://docs.orq.ai/docs/ai-studio/ai-engineering/knowledge-bases#search-a-knowledge-base) for more information.
+ * The metadata filter to apply to the search. Check the [Searching a Knowledge Base](https://docs.orq.ai/ai-studio/ai-engineering/knowledge-bases#search-a-knowledge-base) for more information.
  */
 export type CreateCompletionFilterBy =
   | CreateCompletionFilterByAnd
@@ -510,7 +510,7 @@ export type CreateCompletionSearchOptions = {
  */
 export type CreateCompletionRerankConfig = {
   /**
-   * The name of the rerank model to use. Refer to the [model list](https://docs.orq.ai/docs/ai-gateway/supported-models#rerank-models).
+   * The name of the rerank model to use. Refer to the [model list](https://docs.orq.ai/ai-gateway/supported-models#rerank-models).
    */
   model: string;
   /**
@@ -528,7 +528,7 @@ export type CreateCompletionRerankConfig = {
  */
 export type CreateCompletionAgenticRagConfig = {
   /**
-   * The name of the model for the Agent to use. Refer to the [model list](https://docs.orq.ai/docs/ai-gateway/supported-models#chat-models).
+   * The name of the model for the Agent to use. Refer to the [model list](https://docs.orq.ai/ai-gateway/supported-models#chat-models).
    */
   model: string;
 };
@@ -547,7 +547,7 @@ export type CreateCompletionKnowledgeBases = {
    */
   searchType?: CreateCompletionSearchType | null | undefined;
   /**
-   * The metadata filter to apply to the search. Check the [Searching a Knowledge Base](https://docs.orq.ai/docs/ai-studio/ai-engineering/knowledge-bases#search-a-knowledge-base) for more information.
+   * The metadata filter to apply to the search. Check the [Searching a Knowledge Base](https://docs.orq.ai/ai-studio/ai-engineering/knowledge-bases#search-a-knowledge-base) for more information.
    */
   filterBy?: CreateCompletionFilterByAnd | CreateCompletionFilterByOr | {
     [k: string]:
@@ -606,7 +606,7 @@ export type CreateCompletionLoadBalancerRouterCompletions1 = {
 };
 
 /**
- * Array of models with weights for load balancing requests
+ * Load balancer configuration for the request.
  */
 export type CreateCompletionRouterCompletionsLoadBalancer =
   CreateCompletionLoadBalancerRouterCompletions1;
@@ -669,7 +669,7 @@ export type CreateCompletionOrq = {
   cache?: CreateCompletionRouterCompletionsCache | undefined;
   knowledgeBases?: Array<CreateCompletionKnowledgeBases> | undefined;
   /**
-   * Array of models with weights for load balancing requests
+   * Load balancer configuration for the request.
    */
   loadBalancer?: CreateCompletionLoadBalancerRouterCompletions1 | undefined;
   /**
@@ -724,7 +724,7 @@ export type CreateCompletionRequestBody = {
    */
   n?: number | null | undefined;
   /**
-   * A unique identifier representing your end-user, which can help OpenAI to monitor and detect abuse.
+   * A unique identifier representing your end-user, which can help monitor and detect abuse.
    */
   user?: string | undefined;
   /**

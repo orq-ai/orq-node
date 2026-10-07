@@ -10,6 +10,7 @@ import { Audio } from "./audio.js";
 import { Chat } from "./chat.js";
 import { Classify } from "./classify.js";
 import { Completions } from "./completions.js";
+import { Decisions } from "./decisions.js";
 import { Embeddings } from "./embeddings.js";
 import { Images } from "./images.js";
 import { Moderations } from "./moderations.js";
@@ -54,6 +55,11 @@ export class Router extends ClientSDK {
   private _classify?: Classify;
   get classify(): Classify {
     return (this._classify ??= new Classify(this._options));
+  }
+
+  private _decisions?: Decisions;
+  get decisions(): Decisions {
+    return (this._decisions ??= new Decisions(this._options));
   }
 
   /**

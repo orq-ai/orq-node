@@ -55,7 +55,7 @@ export type PublicPlugin = {
    */
   id: PublicPluginId;
   /**
-   * pii_redaction only. Detector language, or "auto" to detect it per request. Defaults to en. The accepted values are whatever GET /v2/pii/capabilities lists, so they are not enumerated here: a fixed enum would reject a language the detector has since added.
+   * pii_redaction only. Detector language, or "auto" to detect it per request. Defaults to auto. The accepted values are whatever GET /v2/pii/capabilities lists, so they are not enumerated here: a fixed enum would reject a language the detector has since added.
    */
   language?: string | undefined;
   /**

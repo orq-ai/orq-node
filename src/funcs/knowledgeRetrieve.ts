@@ -27,7 +27,7 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Retrieves a knowledge base
+ * Retrieve a knowledge base
  *
  * @remarks
  * Retrieve a knowledge base with the settings.

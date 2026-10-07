@@ -14,3 +14,4 @@ let value: FieldInfo = {};
 | ------------------ | ------------------ | ------------------ | ------------------ |
 | `name`             | *string*           | :heavy_minus_sign: | N/A                |
 | `type`             | *string*           | :heavy_minus_sign: | N/A                |
+| `operators`        | *string*[]         | :heavy_minus_sign: | N/A                |

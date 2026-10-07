@@ -30,7 +30,7 @@ import { Result } from "../types/fp.js";
  * Delete a dataset
  *
  * @remarks
- * Permanently deletes a dataset and all its datapoints. This action is irreversible.
+ * Permanently deletes a dataset and all its datapoints.
  */
 export function datasetsDelete(
   client: OrqCore,
@@ -157,7 +157,7 @@ async function $do(
     | SDKValidationError
   >(
     M.nil(204, z.void()),
-    M.fail([404, "4XX"]),
+    M.fail("4XX"),
     M.fail("5XX"),
   )(response, req);
   if (!result.ok) {

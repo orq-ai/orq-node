@@ -21,10 +21,7 @@ export type Project = {
    */
   name: string;
   /**
-   * Stable project key generated from the name and used by internal
-   *
-   * @remarks
-   *  workspace navigation.
+   * Stable project key generated from the name.
    */
   key: string;
   /**

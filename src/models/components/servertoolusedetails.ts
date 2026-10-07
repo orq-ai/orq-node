@@ -17,6 +17,7 @@ export type ServerToolUseDetails = {
   searchModelsRequests?: number | undefined;
   shellCommands?: number | undefined;
   subagentRequests?: number | undefined;
+  toolSearchRequests?: number | undefined;
   webFetchRequests?: number | undefined;
   webSearchRequests?: number | undefined;
 };
@@ -35,6 +36,7 @@ export const ServerToolUseDetails$inboundSchema: z.ZodType<
   search_models_requests: z.number().int().optional(),
   shell_commands: z.number().int().optional(),
   subagent_requests: z.number().int().optional(),
+  tool_search_requests: z.number().int().optional(),
   web_fetch_requests: z.number().int().optional(),
   web_search_requests: z.number().int().optional(),
 }).transform((v) => {
@@ -47,6 +49,7 @@ export const ServerToolUseDetails$inboundSchema: z.ZodType<
     "search_models_requests": "searchModelsRequests",
     "shell_commands": "shellCommands",
     "subagent_requests": "subagentRequests",
+    "tool_search_requests": "toolSearchRequests",
     "web_fetch_requests": "webFetchRequests",
     "web_search_requests": "webSearchRequests",
   });

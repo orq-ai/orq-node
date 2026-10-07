@@ -9,13 +9,11 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type DataPoint = {
   /**
-   * Bucket start in UTC, RFC 3339. Clients that need epoch ms can call
+   * Bucket start in UTC, RFC 3339. Clients that need epoch milliseconds
    *
    * @remarks
-   *  `Date.parse(timestamp)` or `new Date(timestamp).getTime()` —
-   *  returning the int64 in JSON would force a string (protojson rule)
-   *  and force callers to coerce anyway, so we ship ISO only. Unset for
-   *  `mode=scalar` rows, which aggregate the whole window.
+   *  can derive them from this value. Unset for `mode=scalar` rows, which
+   *  aggregate the whole window.
    */
   timestamp?: Date | undefined;
   /**

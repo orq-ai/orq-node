@@ -79,7 +79,7 @@ export class Models extends ClientSDK {
    * Update AWS Bedrock custom model
    *
    * @remarks
-   * Updates an AWS Bedrock custom model. ARN changes are format-validated (live AWS validation lives in the dedicated validate endpoint). Configuration and metadata are spread-merged. Parameters are replaced only when the request produces a non-empty list.
+   * Updates an AWS Bedrock custom model. ARN changes are format-validated (live AWS validation lives in the dedicated validate endpoint). Fields you send are merged into the stored configuration and metadata. Parameters are replaced only when the request produces a non-empty list.
    */
   async updateAwsBedrock(
     request: operations.ModelUpdateAwsBedrockRequest,

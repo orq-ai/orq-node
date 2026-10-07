@@ -16,11 +16,11 @@ export type GetAllPromptsRequest = {
    */
   limit?: number | undefined;
   /**
-   * A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 20 objects, ending with `01JJ1HDHN79XAS7A01WB3HYSDB`, your subsequent call can include `after=01JJ1HDHN79XAS7A01WB3HYSDB` in order to fetch the next page of the list.
+   * A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 20 objects, ending with `01JJ1HDHN79XAS7A01WB3HYSDB`, your subsequent call can include `starting_after=01JJ1HDHN79XAS7A01WB3HYSDB` in order to fetch the next page of the list.
    */
   startingAfter?: string | undefined;
   /**
-   * A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 20 objects, starting with `01JJ1HDHN79XAS7A01WB3HYSDB`, your subsequent call can include `before=01JJ1HDHN79XAS7A01WB3HYSDB` in order to fetch the previous page of the list.
+   * A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 20 objects, starting with `01JJ1HDHN79XAS7A01WB3HYSDB`, your subsequent call can include `ending_before=01JJ1HDHN79XAS7A01WB3HYSDB` in order to fetch the previous page of the list.
    */
   endingBefore?: string | undefined;
 };
@@ -450,6 +450,7 @@ export const GetAllPromptsProvider = {
   Meta: "meta",
   Greenpt: "greenpt",
   Typesafe: "typesafe",
+  Berget: "berget",
   Slack: "slack",
   Orq: "orq",
 } as const;
@@ -1134,6 +1135,20 @@ export type GetAllPromptsMessagesFunction = {
   arguments?: string | undefined;
 };
 
+export type GetAllPromptsMessagesGoogle = {
+  /**
+   * Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call. Takes precedence over the top-level `thought_signature` when both are set.
+   */
+  thoughtSignature?: string | undefined;
+};
+
+/**
+ * Provider-specific extra content for the tool call.
+ */
+export type GetAllPromptsMessagesExtraContent = {
+  google?: GetAllPromptsMessagesGoogle | undefined;
+};
+
 export type GetAllPromptsMessagesToolCalls = {
   /**
    * The ID of the tool call.
@@ -1148,6 +1163,10 @@ export type GetAllPromptsMessagesToolCalls = {
    * Encrypted representation of the model internal reasoning state during function calling. Required by Gemini 3 models when continuing a conversation after a tool call.
    */
   thoughtSignature?: string | undefined;
+  /**
+   * Provider-specific extra content for the tool call.
+   */
+  extraContent?: GetAllPromptsMessagesExtraContent | undefined;
 };
 
 export type GetAllPromptsMessagesAssistantMessage = {
@@ -1254,7 +1273,7 @@ export type GetAllPrompts24 = {
   type: "file";
   cacheControl?: GetAllPrompts2CacheControl | undefined;
   /**
-   * File data for the content part. Must contain either file_data or uri, but not both.
+   * File data for the content part. Must contain exactly one of file_data, file_id or uri.
    */
   file: components.FileContentPartSchema;
 };
@@ -2956,6 +2975,48 @@ export function getAllPromptsMessagesFunctionFromJSON(
 }
 
 /** @internal */
+export const GetAllPromptsMessagesGoogle$inboundSchema: z.ZodType<
+  GetAllPromptsMessagesGoogle,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  thought_signature: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "thought_signature": "thoughtSignature",
+  });
+});
+
+export function getAllPromptsMessagesGoogleFromJSON(
+  jsonString: string,
+): SafeParseResult<GetAllPromptsMessagesGoogle, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetAllPromptsMessagesGoogle$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetAllPromptsMessagesGoogle' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetAllPromptsMessagesExtraContent$inboundSchema: z.ZodType<
+  GetAllPromptsMessagesExtraContent,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  google: z.lazy(() => GetAllPromptsMessagesGoogle$inboundSchema).optional(),
+});
+
+export function getAllPromptsMessagesExtraContentFromJSON(
+  jsonString: string,
+): SafeParseResult<GetAllPromptsMessagesExtraContent, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetAllPromptsMessagesExtraContent$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetAllPromptsMessagesExtraContent' from JSON`,
+  );
+}
+
+/** @internal */
 export const GetAllPromptsMessagesToolCalls$inboundSchema: z.ZodType<
   GetAllPromptsMessagesToolCalls,
   z.ZodTypeDef,
@@ -2965,9 +3026,12 @@ export const GetAllPromptsMessagesToolCalls$inboundSchema: z.ZodType<
   type: GetAllPromptsMessagesType$inboundSchema,
   function: z.lazy(() => GetAllPromptsMessagesFunction$inboundSchema),
   thought_signature: z.string().optional(),
+  extra_content: z.lazy(() => GetAllPromptsMessagesExtraContent$inboundSchema)
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
     "thought_signature": "thoughtSignature",
+    "extra_content": "extraContent",
   });
 });
 

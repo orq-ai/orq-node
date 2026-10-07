@@ -9,6 +9,20 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+/**
+ * The type of output expected from the evaluator
+ */
+export const OutputType = {
+  Boolean: "boolean",
+  Categorical: "categorical",
+  Number: "number",
+  String: "string",
+} as const;
+/**
+ * The type of output expected from the evaluator
+ */
+export type OutputType = ClosedEnum<typeof OutputType>;
+
 export type CategoricalLabels = {
   value: string;
   description?: string | undefined;
@@ -74,6 +88,10 @@ export type EvaluatorResponseLlm = {
   projectId?: string | undefined;
   guardrailConfig?: any | undefined;
   type: "llm_eval";
+  /**
+   * The type of output expected from the evaluator
+   */
+  outputType: OutputType;
   repetitions?: number | null | undefined;
   prompt: string;
   categories?: Array<string> | null | undefined;
@@ -84,6 +102,10 @@ export type EvaluatorResponseLlm = {
   model?: string | undefined;
   jury?: Jury | undefined;
 };
+
+/** @internal */
+export const OutputType$inboundSchema: z.ZodNativeEnum<typeof OutputType> = z
+  .nativeEnum(OutputType);
 
 /** @internal */
 export const CategoricalLabels$inboundSchema: z.ZodType<
@@ -277,6 +299,7 @@ export const EvaluatorResponseLlm$inboundSchema: z.ZodType<
   project_id: z.string().optional(),
   guardrail_config: z.any().optional(),
   type: z.literal("llm_eval"),
+  output_type: OutputType$inboundSchema,
   repetitions: z.nullable(z.number().int()).optional(),
   prompt: z.string(),
   categories: z.nullable(z.array(z.string())).optional(),
@@ -294,6 +317,7 @@ export const EvaluatorResponseLlm$inboundSchema: z.ZodType<
     "updated_by_id": "updatedById",
     "project_id": "projectId",
     "guardrail_config": "guardrailConfig",
+    "output_type": "outputType",
     "categorical_labels": "categoricalLabels",
     "dataset_id": "datasetId",
   });

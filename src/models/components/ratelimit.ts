@@ -9,10 +9,10 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * RateLimit is the per-minute request ceiling. Enforced via atomic
+ * Per-minute request ceiling applied to the requests this budget
  *
  * @remarks
- *  increment-first semantics in the enforcement middleware.
+ *  matches.
  */
 export type RateLimit = {
   requestsPerMinute?: number | undefined;

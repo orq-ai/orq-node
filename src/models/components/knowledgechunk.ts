@@ -53,7 +53,7 @@ export type KnowledgeChunk = {
    */
   updateById?: string | null | undefined;
   /**
-   * Additive compatibility fields from the database document.
+   * Processing attempts recorded for the chunk.
    */
   processingAttempts?: Array<ProcessingAttempt> | undefined;
   countMetadata?: CountMetadata | undefined;

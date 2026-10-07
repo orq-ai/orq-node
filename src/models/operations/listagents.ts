@@ -27,11 +27,11 @@ export type ListAgentsRequest = {
    */
   limit?: number | undefined;
   /**
-   * A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 20 objects, ending with `01JJ1HDHN79XAS7A01WB3HYSDB`, your subsequent call can include `after=01JJ1HDHN79XAS7A01WB3HYSDB` in order to fetch the next page of the list.
+   * A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 20 objects, ending with `01JJ1HDHN79XAS7A01WB3HYSDB`, your subsequent call can include `starting_after=01JJ1HDHN79XAS7A01WB3HYSDB` in order to fetch the next page of the list.
    */
   startingAfter?: string | undefined;
   /**
-   * A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 20 objects, starting with `01JJ1HDHN79XAS7A01WB3HYSDB`, your subsequent call can include `before=01JJ1HDHN79XAS7A01WB3HYSDB` in order to fetch the previous page of the list.
+   * A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 20 objects, starting with `01JJ1HDHN79XAS7A01WB3HYSDB`, your subsequent call can include `ending_before=01JJ1HDHN79XAS7A01WB3HYSDB` in order to fetch the previous page of the list.
    */
   endingBefore?: string | undefined;
   /**
@@ -70,6 +70,11 @@ export type ListAgentsTeamOfAgents = {
   role?: string | undefined;
 };
 
+export type ListAgentsAgentPlugins = {
+  id: string;
+  version: string;
+};
+
 export type ListAgentsMetrics = {
   totalCost: number;
 };
@@ -96,14 +101,14 @@ export const ListAgentsEngine = {
 export type ListAgentsEngine = ClosedEnum<typeof ListAgentsEngine>;
 
 /**
- * Agent type: internal (Orquesta-managed) or a2a (external A2A-compliant)
+ * Agent type: internal (orq.ai-managed) or a2a (external A2A-compliant)
  */
 export const ListAgentsType = {
   Internal: "internal",
   A2a: "a2a",
 } as const;
 /**
- * Agent type: internal (Orquesta-managed) or a2a (external A2A-compliant)
+ * Agent type: internal (orq.ai-managed) or a2a (external A2A-compliant)
  */
 export type ListAgentsType = ClosedEnum<typeof ListAgentsType>;
 
@@ -579,7 +584,7 @@ export type ListAgentsCacheControl = {
 };
 
 /**
- * Model behavior parameters (snake_case) stored as part of the agent configuration. These become the default parameters used when the agent is executed. Commonly used: temperature (0-1, controls randomness), max_completion_tokens (response length), top_p (nucleus sampling). Advanced: frequency_penalty, presence_penalty, response_format (JSON/structured output), reasoning_effort (for o1/thinking models), seed (reproducibility), stop sequences. Model-specific support varies. Runtime parameters in agent execution requests can override these defaults.
+ * Model behavior parameters (snake_case) stored as part of the agent configuration. These become the default parameters used when the agent is executed. Commonly used: temperature (0-2, controls randomness; the selected model may impose a lower maximum), max_completion_tokens (response length), top_p (nucleus sampling). Advanced: frequency_penalty, presence_penalty, response_format (JSON/structured output), reasoning_effort (for o1/thinking models), seed (reproducibility), stop sequences. Model-specific support varies. Runtime parameters in agent execution requests can override these defaults.
  */
 export type ListAgentsParameters = {
   /**
@@ -1228,7 +1233,7 @@ export type ListAgentsFallbackModelConfiguration =
 
 export type ListAgentsModel = {
   /**
-   * The database ID of the primary model
+   * ID of the primary model, in provider/model-id format (for example `openai/gpt-5.6-sol`)
    */
   id: string;
   /**
@@ -1236,7 +1241,7 @@ export type ListAgentsModel = {
    */
   integrationId?: string | null | undefined;
   /**
-   * Model behavior parameters (snake_case) stored as part of the agent configuration. These become the default parameters used when the agent is executed. Commonly used: temperature (0-1, controls randomness), max_completion_tokens (response length), top_p (nucleus sampling). Advanced: frequency_penalty, presence_penalty, response_format (JSON/structured output), reasoning_effort (for o1/thinking models), seed (reproducibility), stop sequences. Model-specific support varies. Runtime parameters in agent execution requests can override these defaults.
+   * Model behavior parameters (snake_case) stored as part of the agent configuration. These become the default parameters used when the agent is executed. Commonly used: temperature (0-2, controls randomness; the selected model may impose a lower maximum), max_completion_tokens (response length), top_p (nucleus sampling). Advanced: frequency_penalty, presence_penalty, response_format (JSON/structured output), reasoning_effort (for o1/thinking models), seed (reproducibility), stop sequences. Model-specific support varies. Runtime parameters in agent execution requests can override these defaults.
    */
   parameters?: ListAgentsParameters | null | undefined;
   /**
@@ -1293,6 +1298,7 @@ export type ListAgentsData = {
    * List of skills that the agent can utilize. This field allows you to specify which skills the agent has access to, enabling more complex and dynamic behavior.
    */
   skills?: Array<string> | undefined;
+  agentPlugins?: Array<ListAgentsAgentPlugins> | undefined;
   metrics?: ListAgentsMetrics | undefined;
   /**
    * Extracted variables from agent instructions
@@ -1305,7 +1311,7 @@ export type ListAgentsData = {
   source?: ListAgentsSource | undefined;
   engine: ListAgentsEngine;
   /**
-   * Agent type: internal (Orquesta-managed) or a2a (external A2A-compliant)
+   * Agent type: internal (orq.ai-managed) or a2a (external A2A-compliant)
    */
   type: ListAgentsType;
   role: string;
@@ -1390,6 +1396,26 @@ export function listAgentsTeamOfAgentsFromJSON(
     jsonString,
     (x) => ListAgentsTeamOfAgents$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'ListAgentsTeamOfAgents' from JSON`,
+  );
+}
+
+/** @internal */
+export const ListAgentsAgentPlugins$inboundSchema: z.ZodType<
+  ListAgentsAgentPlugins,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.string(),
+  version: z.string(),
+});
+
+export function listAgentsAgentPluginsFromJSON(
+  jsonString: string,
+): SafeParseResult<ListAgentsAgentPlugins, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ListAgentsAgentPlugins$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ListAgentsAgentPlugins' from JSON`,
   );
 }
 
@@ -2979,6 +3005,8 @@ export const ListAgentsData$inboundSchema: z.ZodType<
   team_of_agents: z.array(z.lazy(() => ListAgentsTeamOfAgents$inboundSchema))
     .optional(),
   skills: z.array(z.string()).optional(),
+  agent_plugins: z.array(z.lazy(() => ListAgentsAgentPlugins$inboundSchema))
+    .optional(),
   metrics: z.lazy(() => ListAgentsMetrics$inboundSchema).optional(),
   variables: z.record(z.any()).optional(),
   knowledge_bases: z.array(z.lazy(() => ListAgentsKnowledgeBases$inboundSchema))
@@ -3000,6 +3028,7 @@ export const ListAgentsData$inboundSchema: z.ZodType<
     "updated_by_id": "updatedById",
     "memory_stores": "memoryStores",
     "team_of_agents": "teamOfAgents",
+    "agent_plugins": "agentPlugins",
     "knowledge_bases": "knowledgeBases",
     "system_prompt": "systemPrompt",
   });

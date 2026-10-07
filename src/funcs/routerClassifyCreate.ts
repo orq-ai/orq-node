@@ -30,7 +30,11 @@ import { Result } from "../types/fp.js";
  * Classify
  *
  * @remarks
- * **Beta.** Runs typed classification questions (`noul`, `choice`, `score`) against the native classify model `typesafe/jev-latest` or a chat model that supports classify, such as `anthropic/claude-haiku-4-5`, `google-ai/gemini-3.8-flash` or `zai/glm-5.3-flash`. Chat models answer through one structured-output call and their probabilities are model-reported rather than calibrated. The request and response follow the TypeSafe classification contract; `model` in the response echoes the request and `usage` carries the computed cost like the Responses API. This endpoint currently does not apply PII plugins or guardrails.
+ * **Deprecated.** Use `POST /v3/router/decisions` and `orq.router.decisions.create()` for new integrations. This endpoint remains available for backward compatibility with the same request and response contract.
+ *
+ * **Beta.** Runs typed classification questions (`noul`, `choice`, `score`) against a native classify provider, including OpenAI Decisions with `openai/gpt-6-luna`, or a chat model that supports classify emulation. Emulated models answer through one structured-output call and their probabilities are model-reported rather than calibrated. Native providers can return `refusal` for individual questions; refused answers contain only `type`. The request and response follow the TypeSafe classification contract; `model` in the response identifies the primary or fallback model that answered and `usage` carries the computed cost like the Responses API. Both `/v3/router/classify` and `/v3/router/decisions` use this contract, including ordered `fallbacks`, request-level `retry`, and `identity` attribution. Both require `classify.execute`. This endpoint currently does not apply PII plugins or guardrails.
+ *
+ * @deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
  */
 export function routerClassifyCreate(
   client: OrqCore,
@@ -42,6 +46,10 @@ export function routerClassifyCreate(
     | errors.CreateClassifyResponseBody
     | errors.CreateClassifyRouterClassifyResponseBody
     | errors.CreateClassifyRouterClassifyResponseResponseBody
+    | errors.CreateClassifyRouterClassifyResponse422ResponseBody
+    | errors.CreateClassifyRouterClassifyResponse429ResponseBody
+    | errors.CreateClassifyRouterClassifyResponse500ResponseBody
+    | errors.CreateClassifyRouterClassifyResponse502ResponseBody
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -70,6 +78,10 @@ async function $do(
       | errors.CreateClassifyResponseBody
       | errors.CreateClassifyRouterClassifyResponseBody
       | errors.CreateClassifyRouterClassifyResponseResponseBody
+      | errors.CreateClassifyRouterClassifyResponse422ResponseBody
+      | errors.CreateClassifyRouterClassifyResponse429ResponseBody
+      | errors.CreateClassifyRouterClassifyResponse500ResponseBody
+      | errors.CreateClassifyRouterClassifyResponse502ResponseBody
       | OrqError
       | ResponseValidationError
       | ConnectionError
@@ -155,6 +167,10 @@ async function $do(
     | errors.CreateClassifyResponseBody
     | errors.CreateClassifyRouterClassifyResponseBody
     | errors.CreateClassifyRouterClassifyResponseResponseBody
+    | errors.CreateClassifyRouterClassifyResponse422ResponseBody
+    | errors.CreateClassifyRouterClassifyResponse429ResponseBody
+    | errors.CreateClassifyRouterClassifyResponse500ResponseBody
+    | errors.CreateClassifyRouterClassifyResponse502ResponseBody
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -167,12 +183,28 @@ async function $do(
     M.json(200, operations.CreateClassifyResponseBody$inboundSchema),
     M.jsonErr(400, errors.CreateClassifyResponseBody$inboundSchema),
     M.jsonErr(
-      422,
+      401,
       errors.CreateClassifyRouterClassifyResponseBody$inboundSchema,
     ),
     M.jsonErr(
-      429,
+      403,
       errors.CreateClassifyRouterClassifyResponseResponseBody$inboundSchema,
+    ),
+    M.jsonErr(
+      422,
+      errors.CreateClassifyRouterClassifyResponse422ResponseBody$inboundSchema,
+    ),
+    M.jsonErr(
+      429,
+      errors.CreateClassifyRouterClassifyResponse429ResponseBody$inboundSchema,
+    ),
+    M.jsonErr(
+      500,
+      errors.CreateClassifyRouterClassifyResponse500ResponseBody$inboundSchema,
+    ),
+    M.jsonErr(
+      502,
+      errors.CreateClassifyRouterClassifyResponse502ResponseBody$inboundSchema,
     ),
     M.fail("4XX"),
     M.fail("5XX"),

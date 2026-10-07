@@ -5,8 +5,25 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+
+/**
+ * The type of output expected from the evaluator
+ */
+export const EvaluatorResponseFunctionOutputType = {
+  Boolean: "boolean",
+  Categorical: "categorical",
+  Number: "number",
+  String: "string",
+} as const;
+/**
+ * The type of output expected from the evaluator
+ */
+export type EvaluatorResponseFunctionOutputType = ClosedEnum<
+  typeof EvaluatorResponseFunctionOutputType
+>;
 
 export type ThirtyTwo = {
   type: "grammar_diversity";
@@ -194,6 +211,10 @@ export type EvaluatorResponseFunction = {
   projectId?: string | undefined;
   guardrailConfig?: any | undefined;
   type: "function_eval";
+  /**
+   * The type of output expected from the evaluator
+   */
+  outputType: EvaluatorResponseFunctionOutputType;
   functionParams:
     | FunctionParams1
     | FunctionParams2
@@ -229,6 +250,11 @@ export type EvaluatorResponseFunction = {
     | ThirtyTwo;
   key: string;
 };
+
+/** @internal */
+export const EvaluatorResponseFunctionOutputType$inboundSchema: z.ZodNativeEnum<
+  typeof EvaluatorResponseFunctionOutputType
+> = z.nativeEnum(EvaluatorResponseFunctionOutputType);
 
 /** @internal */
 export const ThirtyTwo$inboundSchema: z.ZodType<
@@ -872,6 +898,7 @@ export const EvaluatorResponseFunction$inboundSchema: z.ZodType<
   project_id: z.string().optional(),
   guardrail_config: z.any().optional(),
   type: z.literal("function_eval"),
+  output_type: EvaluatorResponseFunctionOutputType$inboundSchema,
   function_params: z.union([
     z.lazy(() => FunctionParams1$inboundSchema),
     z.lazy(() => FunctionParams2$inboundSchema),
@@ -913,6 +940,7 @@ export const EvaluatorResponseFunction$inboundSchema: z.ZodType<
     "updated_by_id": "updatedById",
     "project_id": "projectId",
     "guardrail_config": "guardrailConfig",
+    "output_type": "outputType",
     "function_params": "functionParams",
   });
 });

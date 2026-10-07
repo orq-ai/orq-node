@@ -20,6 +20,12 @@ import {
   EmbeddingDimensionSupport$outboundSchema,
 } from "./embeddingdimensionsupport.js";
 import {
+  ModelFusionConfig,
+  ModelFusionConfig$inboundSchema,
+  ModelFusionConfig$Outbound,
+  ModelFusionConfig$outboundSchema,
+} from "./modelfusionconfig.js";
+import {
   Pricing,
   Pricing$inboundSchema,
   Pricing$Outbound,
@@ -42,6 +48,7 @@ export type ModelMetadata = {
   extendedContextPricingMode?: string | undefined;
   extendedContextThreshold?: number | undefined;
   functionToolsRequireEffortNone?: boolean | undefined;
+  fusion?: ModelFusionConfig | undefined;
   generateAudio?: boolean | undefined;
   imageInputCost?: number | undefined;
   imageOutputCost?: number | undefined;
@@ -54,6 +61,7 @@ export type ModelMetadata = {
   maxInputTokens?: number | undefined;
   maxOutputTokens?: number | undefined;
   maxTemperature?: number | undefined;
+  millionFetchesCost?: number | undefined;
   millionSearchesCost?: number | undefined;
   millionTokensAbove128kCacheReadCost?: number | undefined;
   millionTokensAbove128kCacheWriteCost?: number | undefined;
@@ -113,6 +121,7 @@ export type ModelMetadata = {
   supportsJsonModeResponseFormat?: boolean | undefined;
   supportsJsonSchemaResponseFormat?: boolean | undefined;
   supportsMaxCompletionTokens?: boolean | undefined;
+  supportsNativeClassify?: boolean | undefined;
   supportsOpenaiRealtimeApi?: boolean | undefined;
   supportsOpenaiSDK?: boolean | undefined;
   supportsParallelToolCalls?: boolean | undefined;
@@ -175,6 +184,7 @@ export const ModelMetadata$inboundSchema: z.ZodType<
   extended_context_pricing_mode: z.string().optional(),
   extended_context_threshold: z.number().int().optional(),
   function_tools_require_effort_none: z.boolean().optional(),
+  fusion: ModelFusionConfig$inboundSchema.optional(),
   generate_audio: z.boolean().optional(),
   image_input_cost: z.number().optional(),
   image_output_cost: z.number().optional(),
@@ -187,6 +197,7 @@ export const ModelMetadata$inboundSchema: z.ZodType<
   max_input_tokens: z.number().int().optional(),
   max_output_tokens: z.number().int().optional(),
   max_temperature: z.number().optional(),
+  million_fetches_cost: z.number().optional(),
   million_searches_cost: z.number().optional(),
   million_tokens_above_128k_cache_read_cost: z.number().optional(),
   million_tokens_above_128k_cache_write_cost: z.number().optional(),
@@ -247,6 +258,7 @@ export const ModelMetadata$inboundSchema: z.ZodType<
   supports_json_mode_response_format: z.boolean().optional(),
   supports_json_schema_response_format: z.boolean().optional(),
   supports_max_completion_tokens: z.boolean().optional(),
+  supports_native_classify: z.boolean().optional(),
   supports_openai_realtime_api: z.boolean().optional(),
   supports_openai_sdk: z.boolean().optional(),
   supports_parallel_tool_calls: z.boolean().optional(),
@@ -314,6 +326,7 @@ export const ModelMetadata$inboundSchema: z.ZodType<
     "max_input_tokens": "maxInputTokens",
     "max_output_tokens": "maxOutputTokens",
     "max_temperature": "maxTemperature",
+    "million_fetches_cost": "millionFetchesCost",
     "million_searches_cost": "millionSearchesCost",
     "million_tokens_above_128k_cache_read_cost":
       "millionTokensAbove128kCacheReadCost",
@@ -373,6 +386,7 @@ export const ModelMetadata$inboundSchema: z.ZodType<
     "supports_json_mode_response_format": "supportsJsonModeResponseFormat",
     "supports_json_schema_response_format": "supportsJsonSchemaResponseFormat",
     "supports_max_completion_tokens": "supportsMaxCompletionTokens",
+    "supports_native_classify": "supportsNativeClassify",
     "supports_openai_realtime_api": "supportsOpenaiRealtimeApi",
     "supports_openai_sdk": "supportsOpenaiSDK",
     "supports_parallel_tool_calls": "supportsParallelToolCalls",
@@ -431,6 +445,7 @@ export type ModelMetadata$Outbound = {
   extended_context_pricing_mode?: string | undefined;
   extended_context_threshold?: number | undefined;
   function_tools_require_effort_none?: boolean | undefined;
+  fusion?: ModelFusionConfig$Outbound | undefined;
   generate_audio?: boolean | undefined;
   image_input_cost?: number | undefined;
   image_output_cost?: number | undefined;
@@ -443,6 +458,7 @@ export type ModelMetadata$Outbound = {
   max_input_tokens?: number | undefined;
   max_output_tokens?: number | undefined;
   max_temperature?: number | undefined;
+  million_fetches_cost?: number | undefined;
   million_searches_cost?: number | undefined;
   million_tokens_above_128k_cache_read_cost?: number | undefined;
   million_tokens_above_128k_cache_write_cost?: number | undefined;
@@ -504,6 +520,7 @@ export type ModelMetadata$Outbound = {
   supports_json_mode_response_format?: boolean | undefined;
   supports_json_schema_response_format?: boolean | undefined;
   supports_max_completion_tokens?: boolean | undefined;
+  supports_native_classify?: boolean | undefined;
   supports_openai_realtime_api?: boolean | undefined;
   supports_openai_sdk?: boolean | undefined;
   supports_parallel_tool_calls?: boolean | undefined;
@@ -566,6 +583,7 @@ export const ModelMetadata$outboundSchema: z.ZodType<
   extendedContextPricingMode: z.string().optional(),
   extendedContextThreshold: z.number().int().optional(),
   functionToolsRequireEffortNone: z.boolean().optional(),
+  fusion: ModelFusionConfig$outboundSchema.optional(),
   generateAudio: z.boolean().optional(),
   imageInputCost: z.number().optional(),
   imageOutputCost: z.number().optional(),
@@ -578,6 +596,7 @@ export const ModelMetadata$outboundSchema: z.ZodType<
   maxInputTokens: z.number().int().optional(),
   maxOutputTokens: z.number().int().optional(),
   maxTemperature: z.number().optional(),
+  millionFetchesCost: z.number().optional(),
   millionSearchesCost: z.number().optional(),
   millionTokensAbove128kCacheReadCost: z.number().optional(),
   millionTokensAbove128kCacheWriteCost: z.number().optional(),
@@ -638,6 +657,7 @@ export const ModelMetadata$outboundSchema: z.ZodType<
   supportsJsonModeResponseFormat: z.boolean().optional(),
   supportsJsonSchemaResponseFormat: z.boolean().optional(),
   supportsMaxCompletionTokens: z.boolean().optional(),
+  supportsNativeClassify: z.boolean().optional(),
   supportsOpenaiRealtimeApi: z.boolean().optional(),
   supportsOpenaiSDK: z.boolean().optional(),
   supportsParallelToolCalls: z.boolean().optional(),
@@ -705,6 +725,7 @@ export const ModelMetadata$outboundSchema: z.ZodType<
     maxInputTokens: "max_input_tokens",
     maxOutputTokens: "max_output_tokens",
     maxTemperature: "max_temperature",
+    millionFetchesCost: "million_fetches_cost",
     millionSearchesCost: "million_searches_cost",
     millionTokensAbove128kCacheReadCost:
       "million_tokens_above_128k_cache_read_cost",
@@ -764,6 +785,7 @@ export const ModelMetadata$outboundSchema: z.ZodType<
     supportsJsonModeResponseFormat: "supports_json_mode_response_format",
     supportsJsonSchemaResponseFormat: "supports_json_schema_response_format",
     supportsMaxCompletionTokens: "supports_max_completion_tokens",
+    supportsNativeClassify: "supports_native_classify",
     supportsOpenaiRealtimeApi: "supports_openai_realtime_api",
     supportsOpenaiSDK: "supports_openai_sdk",
     supportsParallelToolCalls: "supports_parallel_tool_calls",

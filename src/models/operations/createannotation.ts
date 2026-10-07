@@ -61,7 +61,7 @@ export type CreateAnnotationRequest = {
    * Unique identifier of the span
    */
   spanId: string;
-  requestBody?: CreateAnnotationRequestBody | undefined;
+  requestBody: CreateAnnotationRequestBody;
 };
 
 /** @internal */
@@ -226,7 +226,7 @@ export function createAnnotationRequestBodyToJSON(
 export type CreateAnnotationRequest$Outbound = {
   trace_id: string;
   span_id: string;
-  RequestBody?: CreateAnnotationRequestBody$Outbound | undefined;
+  RequestBody: CreateAnnotationRequestBody$Outbound;
 };
 
 /** @internal */
@@ -237,8 +237,7 @@ export const CreateAnnotationRequest$outboundSchema: z.ZodType<
 > = z.object({
   traceId: z.string(),
   spanId: z.string(),
-  requestBody: z.lazy(() => CreateAnnotationRequestBody$outboundSchema)
-    .optional(),
+  requestBody: z.lazy(() => CreateAnnotationRequestBody$outboundSchema),
 }).transform((v) => {
   return remap$(v, {
     traceId: "trace_id",

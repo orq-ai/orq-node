@@ -6,13 +6,7 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 
 export type DeleteDatapointRequest = {
-  /**
-   * The unique identifier of the dataset
-   */
   datasetId: string;
-  /**
-   * The unique identifier of the datapoint
-   */
   datapointId: string;
 };
 

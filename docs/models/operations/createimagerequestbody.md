@@ -1,6 +1,6 @@
 # CreateImageRequestBody
 
-input
+The image generation request: the prompt plus optional size, quality, style and format settings.
 
 ## Example Usage
 

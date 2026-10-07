@@ -1,6 +1,6 @@
 # EffectiveGrain
 
-Bucket grain actually applied by the planner.
+Bucket grain actually applied. Differs from the requested value when `grain=auto`.
 
 ## Example Usage
 

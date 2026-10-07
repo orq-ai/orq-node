@@ -9,6 +9,22 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+/**
+ * The type of output expected from the evaluator
+ */
+export const EvaluatorResponseHttpOutputType = {
+  Boolean: "boolean",
+  Categorical: "categorical",
+  Number: "number",
+  String: "string",
+} as const;
+/**
+ * The type of output expected from the evaluator
+ */
+export type EvaluatorResponseHttpOutputType = ClosedEnum<
+  typeof EvaluatorResponseHttpOutputType
+>;
+
 export const Method = {
   Get: "GET",
   Post: "POST",
@@ -27,12 +43,21 @@ export type EvaluatorResponseHttp = {
   projectId?: string | undefined;
   guardrailConfig?: any | undefined;
   type: "http_eval";
+  /**
+   * The type of output expected from the evaluator
+   */
+  outputType: EvaluatorResponseHttpOutputType;
   url: string;
   method: Method;
   headers: { [k: string]: string };
   payload: { [k: string]: any };
   key: string;
 };
+
+/** @internal */
+export const EvaluatorResponseHttpOutputType$inboundSchema: z.ZodNativeEnum<
+  typeof EvaluatorResponseHttpOutputType
+> = z.nativeEnum(EvaluatorResponseHttpOutputType);
 
 /** @internal */
 export const Method$inboundSchema: z.ZodNativeEnum<typeof Method> = z
@@ -52,6 +77,7 @@ export const EvaluatorResponseHttp$inboundSchema: z.ZodType<
   project_id: z.string().optional(),
   guardrail_config: z.any().optional(),
   type: z.literal("http_eval"),
+  output_type: EvaluatorResponseHttpOutputType$inboundSchema,
   url: z.string(),
   method: Method$inboundSchema,
   headers: z.record(z.string()),
@@ -63,6 +89,7 @@ export const EvaluatorResponseHttp$inboundSchema: z.ZodType<
     "updated_by_id": "updatedById",
     "project_id": "projectId",
     "guardrail_config": "guardrailConfig",
+    "output_type": "outputType",
   });
 });
 

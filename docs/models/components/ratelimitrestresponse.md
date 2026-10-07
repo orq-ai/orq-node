@@ -1,7 +1,7 @@
 # RateLimitRestResponse
 
-RateLimit is the per-minute request ceiling. Enforced via atomic
- increment-first semantics in the enforcement middleware.
+Per-minute request ceiling applied to the requests this budget
+ matches.
 
 ## Example Usage
 

@@ -14,14 +14,14 @@ export type ModelCatalogListRequest = {
    * Cursor for forward pagination. Set to the `id` of the last item from
    *
    * @remarks
-   *  the previous page.
+   *  the previous page. Mutually exclusive with `ending_before`.
    */
   startingAfter?: string | undefined;
   /**
    * Cursor for backward pagination. Set to the `id` of the first item
    *
    * @remarks
-   *  from the previous page.
+   *  from the previous page. Mutually exclusive with `starting_after`.
    */
   endingBefore?: string | undefined;
   /**

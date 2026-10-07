@@ -30,7 +30,7 @@ import { Result } from "../types/fp.js";
  * Delete a project
  *
  * @remarks
- * Deletes a project from the workspace. The response body is empty when the delete succeeds. Requires a key with write access to Projects (management key or API key), or an admin session. Project-scoped API keys are rejected.
+ * Deletes a project from the workspace. The response body is empty when the delete succeeds. Requires a workspace-scoped management key or API key with Projects write access, or an admin session. Project-scoped API keys cannot be granted Projects access.
  */
 export function projectsDelete(
   client: OrqCore,

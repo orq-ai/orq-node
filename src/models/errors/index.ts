@@ -3,8 +3,10 @@
  */
 
 export * from "./apierror.js";
+export * from "./compactresponse.js";
 export * from "./createagentschedule.js";
 export * from "./createclassify.js";
+export * from "./createdecisions.js";
 export * from "./createeval.js";
 export * from "./createmoderation.js";
 export * from "./createtranscription.js";
@@ -29,6 +31,7 @@ export * from "./retrieveagentrequest.js";
 export * from "./retrieveagentschedule.js";
 export * from "./retrieveresponse.js";
 export * from "./sdkvalidationerror.js";
+export * from "./searchweb.js";
 export * from "./streamagent.js";
 export * from "./streamrunagent.js";
 export * from "./triggeragentschedule.js";
