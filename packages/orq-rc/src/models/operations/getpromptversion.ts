@@ -440,6 +440,7 @@ export const GetPromptVersionProvider = {
   Meta: "meta",
   Greenpt: "greenpt",
   Typesafe: "typesafe",
+  Berget: "berget",
   Slack: "slack",
   Orq: "orq",
 } as const;

@@ -67,6 +67,7 @@ export const DeploymentInvokeProvider = {
   Meta: "meta",
   Greenpt: "greenpt",
   Typesafe: "typesafe",
+  Berget: "berget",
   Slack: "slack",
   Orq: "orq",
 } as const;
