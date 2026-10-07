@@ -2556,7 +2556,7 @@ components:
           properties:
             _id:
               type: "string"
-              default: "reasoning_01m4ajd901rajypgxyw60sjp09"
+              default: "reasoning_01m4at2ckzmnw0rac1fqcsec9c"
               description: "Unique identifier for the part. Format: reasoning_{ulid} (e.g., reasoning_01hxyz...)"
               example: "reasoning_01hxyz123abc"
             kind:
@@ -11875,6 +11875,8 @@ components:
           type: "boolean"
         supports_max_completion_tokens:
           type: "boolean"
+        supports_native_classify:
+          type: "boolean"
         supports_openai_realtime_api:
           type: "boolean"
         supports_openai_sdk:
@@ -15349,6 +15351,7 @@ components:
         - "location"
         - "features"
         - "deprecated"
+        - "zdr"
       type: "object"
       properties:
         id:
@@ -15416,6 +15419,9 @@ components:
         deprecated:
           type: "boolean"
           description: "True when this offering is deprecated, whether or not a deprecation\n date is known. `deprecation` carries the date when one is announced."
+        zdr:
+          type: "boolean"
+          description: "True when this offering guarantees zero data retention."
     ModelProvider:
       required:
         - "id"
@@ -17745,22 +17751,27 @@ components:
         - "type"
       type: "object"
     ClassifyAnswer:
+      description: "One answer to a classification question. The type selects the answer fields. A refusal contains only type."
+      discriminator:
+        mapping:
+          choice: "#/components/schemas/ClassifyChoiceAnswer"
+          noul: "#/components/schemas/ClassifyNoulAnswer"
+          refusal: "#/components/schemas/ClassifyRefusalAnswer"
+          score: "#/components/schemas/ClassifyScoreAnswer"
+        propertyName: "type"
+      oneOf:
+        - $ref: "#/components/schemas/ClassifyNoulAnswer"
+        - $ref: "#/components/schemas/ClassifyChoiceAnswer"
+        - $ref: "#/components/schemas/ClassifyScoreAnswer"
+        - $ref: "#/components/schemas/ClassifyRefusalAnswer"
+    ClassifyChoiceAnswer:
       additionalProperties: false
       properties:
         choice:
           description: "The selected option. Present for choice answers."
           type: "string"
         confidence:
-          description: "How sure the model is of the answer it selected: on chat models the largest value in probabilities, so it adds nothing the distribution does not; typesafe/jev-latest returns its own calibrated value, which can sit below the largest probability. Present for choice and score answers."
-          format: "double"
-          type: "number"
-        legend:
-          additionalProperties:
-            type: "string"
-          description: "Level index to level description. Present for score answers."
-          type: "object"
-        noul:
-          description: "Probability between 0 and 1 that the statement holds. Present for noul answers."
+          description: "How sure the model is of the answer it selected: on emulated chat models the largest value in probabilities, so it adds nothing the distribution does not; native providers return their own confidence value, which can sit below the largest probability. Present for choice and score answers."
           format: "double"
           type: "number"
         probabilities:
@@ -17769,38 +17780,109 @@ components:
             type: "number"
           description: "Probability distribution over the options or levels. Present for choice and score answers."
           type: "object"
-        score:
-          description: "Position on the scale, not an index: on chat models the weighted index, each level index multiplied by that level probability and summed, so the value is usually fractional; typesafe/jev-latest returns its own score. Present for score answers."
-          format: "double"
-          type: "number"
         type:
-          description: "The question type this answer belongs to."
           enum:
-            - "noul"
             - "choice"
-            - "score"
           type: "string"
       required:
         - "type"
+        - "choice"
+      title: "ClassifyChoiceAnswer"
+      type: "object"
+    ClassifyInputTokensDetails:
+      additionalProperties: false
+      properties:
+        cache_write_tokens:
+          description: "Input tokens written to cache."
+          format: "int64"
+          type: "integer"
+        cached_tokens:
+          description: "Input tokens read from cache."
+          format: "int64"
+          type: "integer"
+      required:
+        - "cached_tokens"
+        - "cache_write_tokens"
+      type: "object"
+    ClassifyNoulAnswer:
+      additionalProperties: false
+      properties:
+        noul:
+          description: "Probability between 0 and 1 that the statement holds. Present for noul answers."
+          format: "double"
+          type: "number"
+        type:
+          enum:
+            - "noul"
+          type: "string"
+      required:
+        - "type"
+        - "noul"
+      title: "ClassifyNoulAnswer"
+      type: "object"
+    ClassifyRefusalAnswer:
+      additionalProperties: false
+      properties:
+        type:
+          enum:
+            - "refusal"
+          type: "string"
+      required:
+        - "type"
+      title: "ClassifyRefusalAnswer"
       type: "object"
     ClassifyRetryConfig:
       additionalProperties: false
       properties:
         count:
-          description: "Number of retry attempts (1-5)."
+          description: "Number of retries per model after the initial attempt (1-5). No retries are made when retry is omitted."
           format: "int64"
+          maximum: 5
+          minimum: 1
           type: "integer"
         on_codes:
-          description: "HTTP status codes that trigger retry logic."
+          description: "HTTP status codes that trigger retries, between 100 and 599. Retry-After is honored; otherwise the gateway waits one second."
           items:
             format: "int64"
+            maximum: 599
+            minimum: 100
             type: "integer"
-          type:
-            - "array"
-            - "null"
+          minItems: 1
+          type: "array"
       required:
         - "count"
         - "on_codes"
+      type: "object"
+    ClassifyScoreAnswer:
+      additionalProperties: false
+      properties:
+        confidence:
+          description: "How sure the model is of the answer it selected: on emulated chat models the largest value in probabilities, so it adds nothing the distribution does not; native providers return their own confidence value, which can sit below the largest probability. Present for choice and score answers."
+          format: "double"
+          type: "number"
+        legend:
+          additionalProperties:
+            type: "string"
+          description: "Level index to level description. Present for score answers."
+          type: "object"
+        probabilities:
+          additionalProperties:
+            format: "double"
+            type: "number"
+          description: "Probability distribution over the options or levels. Present for choice and score answers."
+          type: "object"
+        score:
+          description: "Position on the scale, not an index: on emulated chat models and OpenAI Decisions the weighted index, each level index multiplied by that level probability and summed, so the value is usually fractional; typesafe/jev-latest returns its own score. Present for score answers."
+          format: "double"
+          type: "number"
+        type:
+          enum:
+            - "score"
+          type: "string"
+      required:
+        - "type"
+        - "score"
+      title: "ClassifyScoreAnswer"
       type: "object"
     ClassifyUsage:
       additionalProperties: false
@@ -17813,12 +17895,15 @@ components:
           description: "The number of input tokens processed."
           format: "int64"
           type: "integer"
+        input_tokens_details:
+          $ref: "#/components/schemas/ClassifyInputTokensDetails"
+          description: "Provider-reported cache token usage. OpenAI Decisions does not charge for cache reads or writes."
         output_cost:
-          description: "Cost (USD) of output tokens. 0 for typesafe/jev-latest. Present when billing was computed for this request."
+          description: "Cost (USD) of output tokens. 0 for native classify providers, including OpenAI Decisions. Present when billing was computed for this request."
           format: "double"
           type: "number"
         output_tokens:
-          description: "The number of output tokens generated. Free for typesafe/jev-latest, billed at the model rate for chat models."
+          description: "The number of output tokens generated. Free for native classify providers, billed at the model rate for emulated chat models."
           format: "int64"
           type: "integer"
         total_cost:
@@ -17840,6 +17925,14 @@ components:
     CreateClassifyRequest:
       additionalProperties: false
       properties:
+        fallbacks:
+          description: "Up to 10 fallback models in order. The gateway retries a model for matching error codes before trying the next model. Every model must support classification and satisfy access checks. Image requests require native OpenAI image-capable fallbacks."
+          items:
+            $ref: "#/components/schemas/FallbackConfig"
+          maxItems: 10
+          type:
+            - "array"
+            - "null"
         identity:
           $ref: "#/components/schemas/ResponseIdentity"
           description: "The identity to attach to the trace."
@@ -17849,7 +17942,7 @@ components:
           description: "Key-value metadata attached to the trace."
           type: "object"
         model:
-          description: "ID of the model to use: the native classify model typesafe/jev-latest, or a chat model that supports classify."
+          description: "ID of a model that supports native or emulated classify, including openai/gpt-6-luna."
           type: "string"
         name:
           description: "The name to display on the trace. If not specified, the default system name will be used."
@@ -17963,7 +18056,7 @@ components:
             - items: {}
               title: "Array"
               type: "array"
-          description: "The content to evaluate. A string, an object or an array."
+          description: "The content to evaluate. A string, an object or an array. For OpenAI GPT-6 Luna, strings are passed as text and objects or ordinary JSON arrays are serialized as text. User-message arrays accept string content or input_text/input_image parts. Images must be inline base64 data URLs, with at most 128 images across the request. Remote image URLs, file IDs, audio, non-user roles, bare content parts and tool items are rejected."
       required:
         - "model"
         - "state"
@@ -32806,7 +32899,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01M4AJD91FQ7T57KBXP4NTXZBS"
+                                          default: "01M4AT2CNBT9PFKGDH1KEVSMHA"
                                         name:
                                           type: "string"
                                         description:
@@ -34404,7 +34497,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01M4AJD9218PFAW8AG9Z3N4VVK"
+                                          default: "01M4AT2CNWQ4P3B6C584T0PAZ6"
                                         name:
                                           type: "string"
                                         description:
@@ -43307,7 +43400,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M4AJD93BVKKFKP5CCGW48QF7"
+                              default: "tool_01M4AT2CQ2FN13C03XNTYYFHNZ"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -43408,7 +43501,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M4AJD93B05ZAX18PSBH51VQA"
+                              default: "tool_01M4AT2CQ39Q2WG31RF3R4EDD2"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -43511,7 +43604,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M4AJD93C6HR7HR8EAMGX1JW2"
+                              default: "tool_01M4AT2CQ3NN1SBKAADYJEGKJ9"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -43655,7 +43748,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M4AJD93DYEW23KAT0Z9GMB40"
+                              default: "tool_01M4AT2CQ4QG8FC3J47XQHRGVG"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -44146,7 +44239,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M4AJD93GT4R2QZZ4C77RJTCW"
+                        default: "tool_01M4AT2CQ8SVP9RBEAV8DXQVMN"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -44247,7 +44340,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M4AJD93H194XZN9PPW4N5EN0"
+                        default: "tool_01M4AT2CQ87R7SS7W7T16496S5"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -44350,7 +44443,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M4AJD93HXF92W1EPCPT9FVRG"
+                        default: "tool_01M4AT2CQ9P32A2N0C2RSB3BS2"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -44494,7 +44587,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M4AJD93JFFQKP4JTWBGGBSPK"
+                        default: "tool_01M4AT2CQ97JG9J6H42REYKRQC"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -44992,7 +45085,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M4AJD93MVCPJ5PZ6FGQ25KSS"
+                        default: "tool_01M4AT2CQB6KC0KY5WFFJF3TTX"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -45093,7 +45186,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M4AJD93N7HQCRQ66FKDGXTVP"
+                        default: "tool_01M4AT2CQC76S92CVGNSCR7P45"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -45196,7 +45289,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M4AJD93NPNMVVTB5N6GW28TN"
+                        default: "tool_01M4AT2CQCHG6FXM6PV31K1N54"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -45340,7 +45433,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M4AJD93PSTRNK4XFB9QMYPPE"
+                        default: "tool_01M4AT2CQDQCBGPWHA2X69DZY7"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -45501,7 +45594,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M4AJD93X3M9817QVMQJXT1R4"
+                        default: "tool_01M4AT2CQKJKRB7QEDWZVFV147"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -45602,7 +45695,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M4AJD93XPJHX131BR50GHP95"
+                        default: "tool_01M4AT2CQMQ4DYK75CT7EX9821"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -45705,7 +45798,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M4AJD93YKY0XJMNKD1A5DWEV"
+                        default: "tool_01M4AT2CQM8NKGGMN0J5N977TM"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -45849,7 +45942,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M4AJD93Z7KW9KF7P56SA60P2"
+                        default: "tool_01M4AT2CQNC99M1NPTPME1BYYZ"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -52156,7 +52249,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-10-07T06:56:56.480Z"
+                      default: "2026-10-07T09:10:48.341Z"
                       deprecated: true
                       description: "Deprecated. The date and time the item was reviewed"
                     type:
@@ -52198,7 +52291,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-10-07T06:56:56.480Z"
+                      default: "2026-10-07T09:10:48.341Z"
                       deprecated: true
                       description: "Deprecated. The date and time the item was reviewed"
                     type:
@@ -52240,7 +52333,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-10-07T06:56:56.480Z"
+                      default: "2026-10-07T09:10:48.342Z"
                       deprecated: true
                       description: "Deprecated. The date and time the item was reviewed"
                     type:
@@ -52282,7 +52375,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-10-07T06:56:56.480Z"
+                      default: "2026-10-07T09:10:48.342Z"
                       deprecated: true
                       description: "Deprecated. The date and time the item was reviewed"
                     type:
@@ -52385,7 +52478,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-10-07T06:56:49.630Z"
+                          default: "2026-10-07T09:10:41.834Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -52393,7 +52486,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-10-07T06:56:49.631Z"
+                              default: "2026-10-07T09:10:41.835Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -52463,7 +52556,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-10-07T06:56:49.630Z"
+                          default: "2026-10-07T09:10:41.834Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -52471,7 +52564,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-10-07T06:56:49.631Z"
+                              default: "2026-10-07T09:10:41.835Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -52647,7 +52740,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-10-07T06:56:49.630Z"
+                        default: "2026-10-07T09:10:41.834Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -52655,7 +52748,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-10-07T06:56:49.631Z"
+                            default: "2026-10-07T09:10:41.835Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -52725,7 +52818,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-10-07T06:56:49.630Z"
+                        default: "2026-10-07T09:10:41.834Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -52733,7 +52826,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-10-07T06:56:49.631Z"
+                            default: "2026-10-07T09:10:41.835Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -52827,7 +52920,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-10-07T06:56:49.630Z"
+                        default: "2026-10-07T09:10:41.834Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -52835,7 +52928,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-10-07T06:56:49.631Z"
+                            default: "2026-10-07T09:10:41.835Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -52905,7 +52998,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-10-07T06:56:49.630Z"
+                        default: "2026-10-07T09:10:41.834Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -52913,7 +53006,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-10-07T06:56:49.631Z"
+                            default: "2026-10-07T09:10:41.835Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -53097,7 +53190,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-10-07T06:56:49.630Z"
+                        default: "2026-10-07T09:10:41.834Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -53105,7 +53198,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-10-07T06:56:49.631Z"
+                            default: "2026-10-07T09:10:41.835Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -53175,7 +53268,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-10-07T06:56:49.630Z"
+                        default: "2026-10-07T09:10:41.834Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -53183,7 +53276,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-10-07T06:56:49.631Z"
+                            default: "2026-10-07T09:10:41.835Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -68954,12 +69047,92 @@ paths:
         - ApiKey: []
   /v3/router/classify:
     post:
-      description: "**Beta.** Runs typed classification questions (`noul`, `choice`, `score`) against the native classify model `typesafe/jev-latest` or a chat model that supports classify. Chat models answer through one structured-output call and their probabilities are model-reported rather than calibrated. The request and response follow the TypeSafe classification contract; `model` in the response echoes the request and `usage` carries the computed cost like the Responses API. This endpoint currently does not apply PII plugins or guardrails."
+      description: "**Beta.** Runs typed classification questions (`noul`, `choice`, `score`) against a native classify provider, including OpenAI Decisions with `openai/gpt-6-luna`, or a chat model that supports classify emulation. Emulated models answer through one structured-output call and their probabilities are model-reported rather than calibrated. Native providers can return `refusal` for individual questions; refused answers contain only `type`. The request and response follow the TypeSafe classification contract; `model` in the response identifies the primary or fallback model that answered and `usage` carries the computed cost like the Responses API. Both `/v3/router/classify` and `/v3/router/decisions` use this contract, including ordered `fallbacks`, request-level `retry`, and `identity` attribution. Both require `classify.execute`. This endpoint currently does not apply PII plugins or guardrails."
       operationId: "CreateClassify"
       requestBody:
         content:
           application/json:
             examples:
+              fallback_retry_identity:
+                summary: "Decisions with fallbacks, retries and identity"
+                value:
+                  fallbacks:
+                    - model: "openai/gpt-5.6-luna"
+                  identity:
+                    id: "customer-demo"
+                    display_name: "Sample customer"
+                  model: "openai/gpt-6-luna"
+                  questions:
+                    positive:
+                      criteria:
+                        "false": "The customer is unhappy."
+                        "true": "The customer is happy."
+                      instructions: "Is the sentiment positive?"
+                      type: "noul"
+                    rating:
+                      criteria:
+                        - "Negative"
+                        - "Neutral"
+                        - "Positive"
+                      instructions: "Rate sentiment."
+                      type: "score"
+                    sentiment:
+                      criteria:
+                        negative: "Negative sentiment"
+                        neutral: null
+                        positive: "Positive sentiment"
+                      instructions: "Classify sentiment."
+                      type: "choice"
+                  retry:
+                    count: 2
+                    on_codes:
+                      - 429
+                      - 502
+                      - 503
+                      - 504
+                  state: "The customer says: I love this product. It is wonderful!"
+              openai_inline_image:
+                description: "A small self-contained PNG. Replace it with your own base64 image data URL."
+                summary: "Classify an inline image with OpenAI Decisions"
+                value:
+                  model: "openai/gpt-6-luna"
+                  questions:
+                    contains_text:
+                      instructions: "Does the image contain text?"
+                      type: "noul"
+                  state:
+                    - content:
+                        - text: "Evaluate this image."
+                          type: "input_text"
+                        - image_url: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAACLSURBVHgBdY8NDYAgEIXBBEQgAhG0gRGMYBNtoA2M4EygDYygDfCxvdMbk7d9A453f8ZQMcYAWuBVzIHujeGyxE8nYz7dJWYl01p749zxDKABEzhYfDNaMPZSAUymJLZLuvSsSVUhx4G7VM2xpSzQ5YYhLUHDCGoad47ixXjxY84qi1a9QPgZpdYLPVkbtsfywz3jAAAAAElFTkSuQmCC"
+                          type: "input_image"
+                      role: "user"
+              openai_text:
+                summary: "Classify text with OpenAI Decisions"
+                value:
+                  model: "openai/gpt-6-luna"
+                  questions:
+                    positive:
+                      criteria:
+                        "false": "The customer is unhappy."
+                        "true": "The customer is happy."
+                      instructions: "Is the sentiment positive?"
+                      type: "noul"
+                    rating:
+                      criteria:
+                        - "Negative"
+                        - "Neutral"
+                        - "Positive"
+                      instructions: "Rate sentiment."
+                      type: "score"
+                    sentiment:
+                      criteria:
+                        negative: "Negative sentiment"
+                        neutral: null
+                        positive: "Positive sentiment"
+                      instructions: "Classify sentiment."
+                      type: "choice"
+                  state: "The customer says: I love this product. It is wonderful!"
               support_ticket:
                 summary: "Classify a support message"
                 value:
@@ -68986,6 +69159,14 @@ paths:
             schema:
               additionalProperties: false
               properties:
+                fallbacks:
+                  description: "Up to 10 fallback models in order. The gateway retries a model for matching error codes before trying the next model. Every model must support classification and satisfy access checks. Image requests require native OpenAI image-capable fallbacks."
+                  items:
+                    $ref: "#/components/schemas/FallbackConfig"
+                  maxItems: 10
+                  type:
+                    - "array"
+                    - "null"
                 identity:
                   $ref: "#/components/schemas/ResponseIdentity"
                   description: "The identity to attach to the trace."
@@ -68995,7 +69176,7 @@ paths:
                   description: "Key-value metadata attached to the trace."
                   type: "object"
                 model:
-                  description: "ID of the model to use: the native classify model typesafe/jev-latest, or a chat model that supports classify."
+                  description: "ID of a model that supports native or emulated classify, including openai/gpt-6-luna."
                   type: "string"
                 name:
                   description: "The name to display on the trace. If not specified, the default system name will be used."
@@ -69109,7 +69290,7 @@ paths:
                     - items: {}
                       title: "Array"
                       type: "array"
-                  description: "The content to evaluate. A string, an object or an array."
+                  description: "The content to evaluate. A string, an object or an array. For OpenAI GPT-6 Luna, strings are passed as text and objects or ordinary JSON arrays are serialized as text. User-message arrays accept string content or input_text/input_image parts. Images must be inline base64 data URLs, with at most 128 images across the request. Remote image URLs, file IDs, audio, non-user roles, bare content parts and tool items are rejected."
               required:
                 - "model"
                 - "state"
@@ -69120,6 +69301,81 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                openai_answers:
+                  summary: "OpenAI Decisions answers and usage"
+                  value:
+                    model: "openai/gpt-6-luna"
+                    answers:
+                      positive:
+                        type: "noul"
+                        noul: 1
+                      rating:
+                        type: "score"
+                        score: 2
+                        legend:
+                          "0": "Negative"
+                          "1": "Neutral"
+                          "2": "Positive"
+                        probabilities:
+                          "0": 0
+                          "1": 0
+                          "2": 1
+                        confidence: 1
+                      sentiment:
+                        type: "choice"
+                        choice: "positive"
+                        probabilities:
+                          negative: 0
+                          neutral: 0
+                          positive: 1
+                        confidence: 1
+                    usage:
+                      input_tokens_details:
+                        cached_tokens: 0
+                        cache_write_tokens: 0
+                      input_tokens: 408
+                      output_tokens: 0
+                      input_cost: 0.0000408
+                      output_cost: 0
+                      total_cost: 0.0000408
+                partial_refusal:
+                  description: "Illustrative response. A provider may refuse one question while answering the rest. Refusals have no scored fields."
+                  summary: "One question is refused"
+                  value:
+                    model: "openai/gpt-6-luna"
+                    answers:
+                      positive:
+                        type: "refusal"
+                      rating:
+                        type: "score"
+                        score: 2
+                        legend:
+                          "0": "Negative"
+                          "1": "Neutral"
+                          "2": "Positive"
+                        probabilities:
+                          "0": 0
+                          "1": 0
+                          "2": 1
+                        confidence: 1
+                      sentiment:
+                        type: "choice"
+                        choice: "positive"
+                        probabilities:
+                          negative: 0
+                          neutral: 0
+                          positive: 1
+                        confidence: 1
+                    usage:
+                      input_tokens_details:
+                        cached_tokens: 0
+                        cache_write_tokens: 0
+                      input_tokens: 408
+                      output_tokens: 0
+                      input_cost: 0.0000408
+                      output_cost: 0
+                      total_cost: 0.0000408
               schema:
                 additionalProperties: false
                 properties:
@@ -69129,7 +69385,7 @@ paths:
                     description: "Answers keyed by the question identifiers from the request."
                     type: "object"
                   model:
-                    description: "The model ID from the request."
+                    description: "The requested ID of the model that answered. This can be a fallback model."
                     type: "string"
                   telemetry:
                     $ref: "#/components/schemas/ResponseTelemetry"
@@ -69154,7 +69410,31 @@ paths:
                 required:
                   - "error"
                 type: "object"
-          description: "Malformed JSON or missing model."
+          description: "Malformed JSON, missing or unsupported model, or invalid retry/fallback fields."
+        "401":
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                properties:
+                  error:
+                    $ref: "#/components/schemas/APIError"
+                required:
+                  - "error"
+                type: "object"
+          description: "Missing, invalid, expired or revoked API key."
+        "403":
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                properties:
+                  error:
+                    $ref: "#/components/schemas/APIError"
+                required:
+                  - "error"
+                type: "object"
+          description: "The API key lacks classify permission, or the workspace or project cannot access the model."
         "422":
           content:
             application/json:
@@ -69178,7 +69458,31 @@ paths:
                 required:
                   - "error"
                 type: "object"
-          description: "Rate limited by the provider."
+          description: "A plan rate limit, budget or provider rate limit was exceeded."
+        "500":
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                properties:
+                  error:
+                    $ref: "#/components/schemas/APIError"
+                required:
+                  - "error"
+                type: "object"
+          description: "An internal model-resolution error occurred."
+        "502":
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                properties:
+                  error:
+                    $ref: "#/components/schemas/APIError"
+                required:
+                  - "error"
+                type: "object"
+          description: "The upstream provider failed or returned an invalid classification response."
       summary: "Classify"
       tags:
         - "Classify"
@@ -69191,8 +69495,517 @@ paths:
         - label: "Python"
           lang: "python"
           source: "result = client.router.classify.create(\n    model=\"typesafe/jev-latest\",\n    state=\"The parcel arrived two days late and the box was crushed.\",\n    questions={\n        \"is_complaint\": {\"type\": \"noul\", \"instructions\": \"Is the customer complaining?\"},\n        \"topic\": {\n            \"type\": \"choice\",\n            \"instructions\": \"What is the message mainly about?\",\n            \"criteria\": {\"delivery\": \"Shipping or delivery issues\", \"product\": \"Product quality\", \"other\": None},\n        },\n        \"severity\": {\"type\": \"score\", \"instructions\": \"How severe is the issue?\", \"criteria\": [\"Minor\", \"Moderate\", \"Severe\"]},\n    },\n)"
+        - label: "Node.js: OpenAI text"
+          lang: "typescript"
+          source: "import { Orq } from \"@orq-ai/node\";\n\nconst orq = new Orq({ apiKey: process.env[\"ORQ_API_KEY\"] ?? \"\" });\nconst result = await orq.router.classify.create({\n  \"model\": \"openai/gpt-6-luna\",\n  \"questions\": {\n    \"positive\": {\n      \"criteria\": {\n        \"false\": \"The customer is unhappy.\",\n        \"true\": \"The customer is happy.\"\n      },\n      \"instructions\": \"Is the sentiment positive?\",\n      \"type\": \"noul\"\n    },\n    \"rating\": {\n      \"criteria\": [\n        \"Negative\",\n        \"Neutral\",\n        \"Positive\"\n      ],\n      \"instructions\": \"Rate sentiment.\",\n      \"type\": \"score\"\n    },\n    \"sentiment\": {\n      \"criteria\": {\n        \"negative\": \"Negative sentiment\",\n        \"neutral\": null,\n        \"positive\": \"Positive sentiment\"\n      },\n      \"instructions\": \"Classify sentiment.\",\n      \"type\": \"choice\"\n    }\n  },\n  \"state\": \"The customer says: I love this product. It is wonderful!\"\n});\n\nfor (const [name, answer] of Object.entries(result.answers)) {\n  if (answer.type === \"refusal\") {\n    console.log(name, \"refused\");\n    continue;\n  }\n  console.log(name, answer);\n}"
+        - label: "Python: OpenAI text"
+          lang: "python"
+          source: "import json\nimport os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\nrequest = json.loads(\"{\\n  \\\"model\\\": \\\"openai/gpt-6-luna\\\",\\n  \\\"questions\\\": {\\n    \\\"positive\\\": {\\n      \\\"criteria\\\": {\\n        \\\"false\\\": \\\"The customer is unhappy.\\\",\\n        \\\"true\\\": \\\"The customer is happy.\\\"\\n      },\\n      \\\"instructions\\\": \\\"Is the sentiment positive?\\\",\\n      \\\"type\\\": \\\"noul\\\"\\n    },\\n    \\\"rating\\\": {\\n      \\\"criteria\\\": [\\n        \\\"Negative\\\",\\n        \\\"Neutral\\\",\\n        \\\"Positive\\\"\\n      ],\\n      \\\"instructions\\\": \\\"Rate sentiment.\\\",\\n      \\\"type\\\": \\\"score\\\"\\n    },\\n    \\\"sentiment\\\": {\\n      \\\"criteria\\\": {\\n        \\\"negative\\\": \\\"Negative sentiment\\\",\\n        \\\"neutral\\\": null,\\n        \\\"positive\\\": \\\"Positive sentiment\\\"\\n      },\\n      \\\"instructions\\\": \\\"Classify sentiment.\\\",\\n      \\\"type\\\": \\\"choice\\\"\\n    }\\n  },\\n  \\\"state\\\": \\\"The customer says: I love this product. It is wonderful!\\\"\\n}\")\nresult = client.router.classify.create(**request)\n\nfor name, answer in result.answers.items():\n    if answer.type == \"refusal\":\n        print(name, \"refused\")\n        continue\n    print(name, answer)"
+        - label: "cURL: OpenAI text"
+          lang: "bash"
+          source: "curl https://my.orq.ai/v3/router/classify \\\n  -H \"Authorization: Bearer $ORQ_API_KEY\" \\\n  -H \"Content-Type: application/json\" \\\n  --data-binary @- <<'JSON'\n{\n  \"model\": \"openai/gpt-6-luna\",\n  \"questions\": {\n    \"positive\": {\n      \"criteria\": {\n        \"false\": \"The customer is unhappy.\",\n        \"true\": \"The customer is happy.\"\n      },\n      \"instructions\": \"Is the sentiment positive?\",\n      \"type\": \"noul\"\n    },\n    \"rating\": {\n      \"criteria\": [\n        \"Negative\",\n        \"Neutral\",\n        \"Positive\"\n      ],\n      \"instructions\": \"Rate sentiment.\",\n      \"type\": \"score\"\n    },\n    \"sentiment\": {\n      \"criteria\": {\n        \"negative\": \"Negative sentiment\",\n        \"neutral\": null,\n        \"positive\": \"Positive sentiment\"\n      },\n      \"instructions\": \"Classify sentiment.\",\n      \"type\": \"choice\"\n    }\n  },\n  \"state\": \"The customer says: I love this product. It is wonderful!\"\n}\nJSON"
+        - label: "Node.js: OpenAI inline image"
+          lang: "typescript"
+          source: "import { Orq } from \"@orq-ai/node\";\n\nconst orq = new Orq({ apiKey: process.env[\"ORQ_API_KEY\"] ?? \"\" });\nconst result = await orq.router.classify.create({\n  \"model\": \"openai/gpt-6-luna\",\n  \"questions\": {\n    \"contains_text\": {\n      \"instructions\": \"Does the image contain text?\",\n      \"type\": \"noul\"\n    }\n  },\n  \"state\": [\n    {\n      \"content\": [\n        {\n          \"text\": \"Evaluate this image.\",\n          \"type\": \"input_text\"\n        },\n        {\n          \"image_url\": \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAACLSURBVHgBdY8NDYAgEIXBBEQgAhG0gRGMYBNtoA2M4EygDYygDfCxvdMbk7d9A453f8ZQMcYAWuBVzIHujeGyxE8nYz7dJWYl01p749zxDKABEzhYfDNaMPZSAUymJLZLuvSsSVUhx4G7VM2xpSzQ5YYhLUHDCGoad47ixXjxY84qi1a9QPgZpdYLPVkbtsfywz3jAAAAAElFTkSuQmCC\",\n          \"type\": \"input_image\"\n        }\n      ],\n      \"role\": \"user\"\n    }\n  ]\n});\n\nfor (const [name, answer] of Object.entries(result.answers)) {\n  if (answer.type === \"refusal\") {\n    console.log(name, \"refused\");\n    continue;\n  }\n  console.log(name, answer);\n}"
+        - label: "Python: OpenAI inline image"
+          lang: "python"
+          source: "import json\nimport os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\nrequest = json.loads(\"{\\n  \\\"model\\\": \\\"openai/gpt-6-luna\\\",\\n  \\\"questions\\\": {\\n    \\\"contains_text\\\": {\\n      \\\"instructions\\\": \\\"Does the image contain text?\\\",\\n      \\\"type\\\": \\\"noul\\\"\\n    }\\n  },\\n  \\\"state\\\": [\\n    {\\n      \\\"content\\\": [\\n        {\\n          \\\"text\\\": \\\"Evaluate this image.\\\",\\n          \\\"type\\\": \\\"input_text\\\"\\n        },\\n        {\\n          \\\"image_url\\\": \\\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAACLSURBVHgBdY8NDYAgEIXBBEQgAhG0gRGMYBNtoA2M4EygDYygDfCxvdMbk7d9A453f8ZQMcYAWuBVzIHujeGyxE8nYz7dJWYl01p749zxDKABEzhYfDNaMPZSAUymJLZLuvSsSVUhx4G7VM2xpSzQ5YYhLUHDCGoad47ixXjxY84qi1a9QPgZpdYLPVkbtsfywz3jAAAAAElFTkSuQmCC\\\",\\n          \\\"type\\\": \\\"input_image\\\"\\n        }\\n      ],\\n      \\\"role\\\": \\\"user\\\"\\n    }\\n  ]\\n}\")\nresult = client.router.classify.create(**request)\n\nfor name, answer in result.answers.items():\n    if answer.type == \"refusal\":\n        print(name, \"refused\")\n        continue\n    print(name, answer)"
+        - label: "cURL: OpenAI inline image"
+          lang: "bash"
+          source: "curl https://my.orq.ai/v3/router/classify \\\n  -H \"Authorization: Bearer $ORQ_API_KEY\" \\\n  -H \"Content-Type: application/json\" \\\n  --data-binary @- <<'JSON'\n{\n  \"model\": \"openai/gpt-6-luna\",\n  \"questions\": {\n    \"contains_text\": {\n      \"instructions\": \"Does the image contain text?\",\n      \"type\": \"noul\"\n    }\n  },\n  \"state\": [\n    {\n      \"content\": [\n        {\n          \"text\": \"Evaluate this image.\",\n          \"type\": \"input_text\"\n        },\n        {\n          \"image_url\": \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAACLSURBVHgBdY8NDYAgEIXBBEQgAhG0gRGMYBNtoA2M4EygDYygDfCxvdMbk7d9A453f8ZQMcYAWuBVzIHujeGyxE8nYz7dJWYl01p749zxDKABEzhYfDNaMPZSAUymJLZLuvSsSVUhx4G7VM2xpSzQ5YYhLUHDCGoad47ixXjxY84qi1a9QPgZpdYLPVkbtsfywz3jAAAAAElFTkSuQmCC\",\n          \"type\": \"input_image\"\n        }\n      ],\n      \"role\": \"user\"\n    }\n  ]\n}\nJSON"
+        - label: "Node.js: Fallbacks, retries and identity"
+          lang: "typescript"
+          source: "import { Orq } from \"@orq-ai/node\";\n\nconst orq = new Orq({ apiKey: process.env[\"ORQ_API_KEY\"] ?? \"\" });\nconst result = await orq.router.classify.create({\n  \"fallbacks\": [\n    {\n      \"model\": \"openai/gpt-5.6-luna\"\n    }\n  ],\n  \"identity\": {\n    \"displayName\": \"Sample customer\",\n    \"id\": \"customer-demo\"\n  },\n  \"model\": \"openai/gpt-6-luna\",\n  \"questions\": {\n    \"positive\": {\n      \"criteria\": {\n        \"false\": \"The customer is unhappy.\",\n        \"true\": \"The customer is happy.\"\n      },\n      \"instructions\": \"Is the sentiment positive?\",\n      \"type\": \"noul\"\n    },\n    \"rating\": {\n      \"criteria\": [\n        \"Negative\",\n        \"Neutral\",\n        \"Positive\"\n      ],\n      \"instructions\": \"Rate sentiment.\",\n      \"type\": \"score\"\n    },\n    \"sentiment\": {\n      \"criteria\": {\n        \"negative\": \"Negative sentiment\",\n        \"neutral\": null,\n        \"positive\": \"Positive sentiment\"\n      },\n      \"instructions\": \"Classify sentiment.\",\n      \"type\": \"choice\"\n    }\n  },\n  \"retry\": {\n    \"count\": 2,\n    \"onCodes\": [\n      429,\n      502,\n      503,\n      504\n    ]\n  },\n  \"state\": \"The customer says: I love this product. It is wonderful!\"\n});\n\nfor (const [name, answer] of Object.entries(result.answers)) {\n  if (answer.type === \"refusal\") {\n    console.log(name, \"refused\");\n    continue;\n  }\n  console.log(name, answer);\n}"
+        - label: "Python: Fallbacks, retries and identity"
+          lang: "python"
+          source: "import json\nimport os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\nrequest = json.loads(\"{\\n  \\\"fallbacks\\\": [\\n    {\\n      \\\"model\\\": \\\"openai/gpt-5.6-luna\\\"\\n    }\\n  ],\\n  \\\"identity\\\": {\\n    \\\"id\\\": \\\"customer-demo\\\",\\n    \\\"display_name\\\": \\\"Sample customer\\\"\\n  },\\n  \\\"model\\\": \\\"openai/gpt-6-luna\\\",\\n  \\\"questions\\\": {\\n    \\\"positive\\\": {\\n      \\\"criteria\\\": {\\n        \\\"false\\\": \\\"The customer is unhappy.\\\",\\n        \\\"true\\\": \\\"The customer is happy.\\\"\\n      },\\n      \\\"instructions\\\": \\\"Is the sentiment positive?\\\",\\n      \\\"type\\\": \\\"noul\\\"\\n    },\\n    \\\"rating\\\": {\\n      \\\"criteria\\\": [\\n        \\\"Negative\\\",\\n        \\\"Neutral\\\",\\n        \\\"Positive\\\"\\n      ],\\n      \\\"instructions\\\": \\\"Rate sentiment.\\\",\\n      \\\"type\\\": \\\"score\\\"\\n    },\\n    \\\"sentiment\\\": {\\n      \\\"criteria\\\": {\\n        \\\"negative\\\": \\\"Negative sentiment\\\",\\n        \\\"neutral\\\": null,\\n        \\\"positive\\\": \\\"Positive sentiment\\\"\\n      },\\n      \\\"instructions\\\": \\\"Classify sentiment.\\\",\\n      \\\"type\\\": \\\"choice\\\"\\n    }\\n  },\\n  \\\"retry\\\": {\\n    \\\"count\\\": 2,\\n    \\\"on_codes\\\": [\\n      429,\\n      502,\\n      503,\\n      504\\n    ]\\n  },\\n  \\\"state\\\": \\\"The customer says: I love this product. It is wonderful!\\\"\\n}\")\nresult = client.router.classify.create(**request)\n\nfor name, answer in result.answers.items():\n    if answer.type == \"refusal\":\n        print(name, \"refused\")\n        continue\n    print(name, answer)"
+        - label: "cURL: Fallbacks, retries and identity"
+          lang: "bash"
+          source: "curl https://my.orq.ai/v3/router/classify \\\n  -H \"Authorization: Bearer $ORQ_API_KEY\" \\\n  -H \"Content-Type: application/json\" \\\n  --data-binary @- <<'JSON'\n{\n  \"fallbacks\": [\n    {\n      \"model\": \"openai/gpt-5.6-luna\"\n    }\n  ],\n  \"identity\": {\n    \"id\": \"customer-demo\",\n    \"display_name\": \"Sample customer\"\n  },\n  \"model\": \"openai/gpt-6-luna\",\n  \"questions\": {\n    \"positive\": {\n      \"criteria\": {\n        \"false\": \"The customer is unhappy.\",\n        \"true\": \"The customer is happy.\"\n      },\n      \"instructions\": \"Is the sentiment positive?\",\n      \"type\": \"noul\"\n    },\n    \"rating\": {\n      \"criteria\": [\n        \"Negative\",\n        \"Neutral\",\n        \"Positive\"\n      ],\n      \"instructions\": \"Rate sentiment.\",\n      \"type\": \"score\"\n    },\n    \"sentiment\": {\n      \"criteria\": {\n        \"negative\": \"Negative sentiment\",\n        \"neutral\": null,\n        \"positive\": \"Positive sentiment\"\n      },\n      \"instructions\": \"Classify sentiment.\",\n      \"type\": \"choice\"\n    }\n  },\n  \"retry\": {\n    \"count\": 2,\n    \"on_codes\": [\n      429,\n      502,\n      503,\n      504\n    ]\n  },\n  \"state\": \"The customer says: I love this product. It is wonderful!\"\n}\nJSON"
       x-orq-gateway-group: true
       x-speakeasy-group: "router.classify"
+      x-speakeasy-name-override: "create"
+      security:
+        - ApiKey: []
+  /v3/router/decisions:
+    post:
+      description: "**Beta.** Runs typed classification questions (`noul`, `choice`, `score`) against a native classify provider, including OpenAI Decisions with `openai/gpt-6-luna`, or a chat model that supports classify emulation. Emulated models answer through one structured-output call and their probabilities are model-reported rather than calibrated. Native providers can return `refusal` for individual questions; refused answers contain only `type`. The request and response follow the TypeSafe classification contract; `model` in the response identifies the primary or fallback model that answered and `usage` carries the computed cost like the Responses API. Both `/v3/router/classify` and `/v3/router/decisions` use this contract, including ordered `fallbacks`, request-level `retry`, and `identity` attribution. Both require `classify.execute`. This endpoint currently does not apply PII plugins or guardrails."
+      operationId: "CreateDecisions"
+      requestBody:
+        content:
+          application/json:
+            examples:
+              fallback_retry_identity:
+                summary: "Decisions with fallbacks, retries and identity"
+                value:
+                  fallbacks:
+                    - model: "openai/gpt-5.6-luna"
+                  identity:
+                    id: "customer-demo"
+                    display_name: "Sample customer"
+                  model: "openai/gpt-6-luna"
+                  questions:
+                    positive:
+                      criteria:
+                        "false": "The customer is unhappy."
+                        "true": "The customer is happy."
+                      instructions: "Is the sentiment positive?"
+                      type: "noul"
+                    rating:
+                      criteria:
+                        - "Negative"
+                        - "Neutral"
+                        - "Positive"
+                      instructions: "Rate sentiment."
+                      type: "score"
+                    sentiment:
+                      criteria:
+                        negative: "Negative sentiment"
+                        neutral: null
+                        positive: "Positive sentiment"
+                      instructions: "Classify sentiment."
+                      type: "choice"
+                  retry:
+                    count: 2
+                    on_codes:
+                      - 429
+                      - 502
+                      - 503
+                      - 504
+                  state: "The customer says: I love this product. It is wonderful!"
+              openai_inline_image:
+                description: "A small self-contained PNG. Replace it with your own base64 image data URL."
+                summary: "Classify an inline image with OpenAI Decisions"
+                value:
+                  model: "openai/gpt-6-luna"
+                  questions:
+                    contains_text:
+                      instructions: "Does the image contain text?"
+                      type: "noul"
+                  state:
+                    - content:
+                        - text: "Evaluate this image."
+                          type: "input_text"
+                        - image_url: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAACLSURBVHgBdY8NDYAgEIXBBEQgAhG0gRGMYBNtoA2M4EygDYygDfCxvdMbk7d9A453f8ZQMcYAWuBVzIHujeGyxE8nYz7dJWYl01p749zxDKABEzhYfDNaMPZSAUymJLZLuvSsSVUhx4G7VM2xpSzQ5YYhLUHDCGoad47ixXjxY84qi1a9QPgZpdYLPVkbtsfywz3jAAAAAElFTkSuQmCC"
+                          type: "input_image"
+                      role: "user"
+              openai_text:
+                summary: "Classify text with OpenAI Decisions"
+                value:
+                  model: "openai/gpt-6-luna"
+                  questions:
+                    positive:
+                      criteria:
+                        "false": "The customer is unhappy."
+                        "true": "The customer is happy."
+                      instructions: "Is the sentiment positive?"
+                      type: "noul"
+                    rating:
+                      criteria:
+                        - "Negative"
+                        - "Neutral"
+                        - "Positive"
+                      instructions: "Rate sentiment."
+                      type: "score"
+                    sentiment:
+                      criteria:
+                        negative: "Negative sentiment"
+                        neutral: null
+                        positive: "Positive sentiment"
+                      instructions: "Classify sentiment."
+                      type: "choice"
+                  state: "The customer says: I love this product. It is wonderful!"
+              support_ticket:
+                summary: "Classify a support message"
+                value:
+                  model: "typesafe/jev-latest"
+                  questions:
+                    is_complaint:
+                      instructions: "Is the customer complaining?"
+                      type: "noul"
+                    severity:
+                      criteria:
+                        - "Minor"
+                        - "Moderate"
+                        - "Severe"
+                      instructions: "How severe is the issue?"
+                      type: "score"
+                    topic:
+                      criteria:
+                        delivery: "Shipping or delivery issues"
+                        other: null
+                        product: "Product quality"
+                      instructions: "What is the message mainly about?"
+                      type: "choice"
+                  state: "The parcel arrived two days late and the box was crushed."
+            schema:
+              additionalProperties: false
+              properties:
+                fallbacks:
+                  description: "Up to 10 fallback models in order. The gateway retries a model for matching error codes before trying the next model. Every model must support classification and satisfy access checks. Image requests require native OpenAI image-capable fallbacks."
+                  items:
+                    $ref: "#/components/schemas/FallbackConfig"
+                  maxItems: 10
+                  type:
+                    - "array"
+                    - "null"
+                identity:
+                  $ref: "#/components/schemas/ResponseIdentity"
+                  description: "The identity to attach to the trace."
+                metadata:
+                  additionalProperties:
+                    type: "string"
+                  description: "Key-value metadata attached to the trace."
+                  type: "object"
+                model:
+                  description: "ID of a model that supports native or emulated classify, including openai/gpt-6-luna."
+                  type: "string"
+                name:
+                  description: "The name to display on the trace. If not specified, the default system name will be used."
+                  type: "string"
+                questions:
+                  additionalProperties:
+                    oneOf:
+                      - description: "Answers with a probability between 0 and 1 that the statement holds."
+                        properties:
+                          criteria:
+                            description: "Optional descriptions of what true and false mean."
+                            properties:
+                              "false":
+                                type: "string"
+                              "true":
+                                type: "string"
+                            type: "object"
+                          instructions:
+                            anyOf:
+                              - title: "String"
+                                type: "string"
+                              - additionalProperties: true
+                                title: "Object"
+                                type: "object"
+                              - items: {}
+                                title: "Array"
+                                type: "array"
+                            description: "The evaluation prompt for this question. A string, an object or an array."
+                          type:
+                            enum:
+                              - "noul"
+                            type: "string"
+                        required:
+                          - "type"
+                          - "instructions"
+                        title: "NoulQuestion"
+                        type: "object"
+                      - description: "Picks one of the given options and returns the probability of each."
+                        properties:
+                          criteria:
+                            additionalProperties:
+                              type:
+                                - "string"
+                                - "null"
+                            description: "Options keyed by name, each mapped to a description or null."
+                            minProperties: 1
+                            type: "object"
+                          instructions:
+                            anyOf:
+                              - title: "String"
+                                type: "string"
+                              - additionalProperties: true
+                                title: "Object"
+                                type: "object"
+                              - items: {}
+                                title: "Array"
+                                type: "array"
+                            description: "The evaluation prompt for this question. A string, an object or an array."
+                          type:
+                            enum:
+                              - "choice"
+                            type: "string"
+                        required:
+                          - "type"
+                          - "instructions"
+                          - "criteria"
+                        title: "ChoiceQuestion"
+                        type: "object"
+                      - description: "Places the state on an ordered scale and returns the probability of each level."
+                        properties:
+                          criteria:
+                            description: "Ordered level descriptions from lowest to highest. At least two levels."
+                            items:
+                              type: "string"
+                            minItems: 2
+                            type: "array"
+                          instructions:
+                            anyOf:
+                              - title: "String"
+                                type: "string"
+                              - additionalProperties: true
+                                title: "Object"
+                                type: "object"
+                              - items: {}
+                                title: "Array"
+                                type: "array"
+                            description: "The evaluation prompt for this question. A string, an object or an array."
+                          type:
+                            enum:
+                              - "score"
+                            type: "string"
+                        required:
+                          - "type"
+                          - "instructions"
+                          - "criteria"
+                        title: "ScoreQuestion"
+                        type: "object"
+                  description: "Typed questions keyed by an identifier of your choice. Each answer is returned under the same key."
+                  minProperties: 1
+                  type: "object"
+                retry:
+                  $ref: "#/components/schemas/ClassifyRetryConfig"
+                  description: "Retry configuration for the request."
+                state:
+                  anyOf:
+                    - title: "String"
+                      type: "string"
+                    - additionalProperties: true
+                      title: "Object"
+                      type: "object"
+                    - items: {}
+                      title: "Array"
+                      type: "array"
+                  description: "The content to evaluate. A string, an object or an array. For OpenAI GPT-6 Luna, strings are passed as text and objects or ordinary JSON arrays are serialized as text. User-message arrays accept string content or input_text/input_image parts. Images must be inline base64 data URLs, with at most 128 images across the request. Remote image URLs, file IDs, audio, non-user roles, bare content parts and tool items are rejected."
+              required:
+                - "model"
+                - "state"
+                - "questions"
+              type: "object"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                openai_answers:
+                  summary: "OpenAI Decisions answers and usage"
+                  value:
+                    model: "openai/gpt-6-luna"
+                    answers:
+                      positive:
+                        type: "noul"
+                        noul: 1
+                      rating:
+                        type: "score"
+                        score: 2
+                        legend:
+                          "0": "Negative"
+                          "1": "Neutral"
+                          "2": "Positive"
+                        probabilities:
+                          "0": 0
+                          "1": 0
+                          "2": 1
+                        confidence: 1
+                      sentiment:
+                        type: "choice"
+                        choice: "positive"
+                        probabilities:
+                          negative: 0
+                          neutral: 0
+                          positive: 1
+                        confidence: 1
+                    usage:
+                      input_tokens_details:
+                        cached_tokens: 0
+                        cache_write_tokens: 0
+                      input_tokens: 408
+                      output_tokens: 0
+                      input_cost: 0.0000408
+                      output_cost: 0
+                      total_cost: 0.0000408
+                partial_refusal:
+                  description: "Illustrative response. A provider may refuse one question while answering the rest. Refusals have no scored fields."
+                  summary: "One question is refused"
+                  value:
+                    model: "openai/gpt-6-luna"
+                    answers:
+                      positive:
+                        type: "refusal"
+                      rating:
+                        type: "score"
+                        score: 2
+                        legend:
+                          "0": "Negative"
+                          "1": "Neutral"
+                          "2": "Positive"
+                        probabilities:
+                          "0": 0
+                          "1": 0
+                          "2": 1
+                        confidence: 1
+                      sentiment:
+                        type: "choice"
+                        choice: "positive"
+                        probabilities:
+                          negative: 0
+                          neutral: 0
+                          positive: 1
+                        confidence: 1
+                    usage:
+                      input_tokens_details:
+                        cached_tokens: 0
+                        cache_write_tokens: 0
+                      input_tokens: 408
+                      output_tokens: 0
+                      input_cost: 0.0000408
+                      output_cost: 0
+                      total_cost: 0.0000408
+              schema:
+                additionalProperties: false
+                properties:
+                  answers:
+                    additionalProperties:
+                      $ref: "#/components/schemas/ClassifyAnswer"
+                    description: "Answers keyed by the question identifiers from the request."
+                    type: "object"
+                  model:
+                    description: "The requested ID of the model that answered. This can be a fallback model."
+                    type: "string"
+                  telemetry:
+                    $ref: "#/components/schemas/ResponseTelemetry"
+                    description: "OpenTelemetry trace and span identifiers for this request."
+                  usage:
+                    $ref: "#/components/schemas/ClassifyUsage"
+                    description: "The usage information for the request."
+                required:
+                  - "model"
+                  - "answers"
+                  - "usage"
+                type: "object"
+          description: "Returns one answer per question."
+        "400":
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                properties:
+                  error:
+                    $ref: "#/components/schemas/APIError"
+                required:
+                  - "error"
+                type: "object"
+          description: "Malformed JSON, missing or unsupported model, or invalid retry/fallback fields."
+        "401":
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                properties:
+                  error:
+                    $ref: "#/components/schemas/APIError"
+                required:
+                  - "error"
+                type: "object"
+          description: "Missing, invalid, expired or revoked API key."
+        "403":
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                properties:
+                  error:
+                    $ref: "#/components/schemas/APIError"
+                required:
+                  - "error"
+                type: "object"
+          description: "The API key lacks classify permission, or the workspace or project cannot access the model."
+        "422":
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                properties:
+                  error:
+                    $ref: "#/components/schemas/APIError"
+                required:
+                  - "error"
+                type: "object"
+          description: "The state or a question violates the classification contract."
+        "429":
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                properties:
+                  error:
+                    $ref: "#/components/schemas/APIError"
+                required:
+                  - "error"
+                type: "object"
+          description: "A plan rate limit, budget or provider rate limit was exceeded."
+        "500":
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                properties:
+                  error:
+                    $ref: "#/components/schemas/APIError"
+                required:
+                  - "error"
+                type: "object"
+          description: "An internal model-resolution error occurred."
+        "502":
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                properties:
+                  error:
+                    $ref: "#/components/schemas/APIError"
+                required:
+                  - "error"
+                type: "object"
+          description: "The upstream provider failed or returned an invalid classification response."
+      summary: "Decisions"
+      tags:
+        - "Decisions"
+      x-cli-group: "decisions"
+      x-cli-name: "create"
+      x-code-samples:
+        - label: "Node.js"
+          lang: "typescript"
+          source: "const result = await orq.router.decisions.create({\n  model: \"typesafe/jev-latest\",\n  state: \"The parcel arrived two days late and the box was crushed.\",\n  questions: {\n    is_complaint: { type: \"noul\", instructions: \"Is the customer complaining?\" },\n    topic: {\n      type: \"choice\",\n      instructions: \"What is the message mainly about?\",\n      criteria: { delivery: \"Shipping or delivery issues\", product: \"Product quality\", other: null },\n    },\n    severity: { type: \"score\", instructions: \"How severe is the issue?\", criteria: [\"Minor\", \"Moderate\", \"Severe\"] },\n  },\n});"
+        - label: "Python"
+          lang: "python"
+          source: "result = client.router.decisions.create(\n    model=\"typesafe/jev-latest\",\n    state=\"The parcel arrived two days late and the box was crushed.\",\n    questions={\n        \"is_complaint\": {\"type\": \"noul\", \"instructions\": \"Is the customer complaining?\"},\n        \"topic\": {\n            \"type\": \"choice\",\n            \"instructions\": \"What is the message mainly about?\",\n            \"criteria\": {\"delivery\": \"Shipping or delivery issues\", \"product\": \"Product quality\", \"other\": None},\n        },\n        \"severity\": {\"type\": \"score\", \"instructions\": \"How severe is the issue?\", \"criteria\": [\"Minor\", \"Moderate\", \"Severe\"]},\n    },\n)"
+        - label: "Node.js: OpenAI text"
+          lang: "typescript"
+          source: "import { Orq } from \"@orq-ai/node\";\n\nconst orq = new Orq({ apiKey: process.env[\"ORQ_API_KEY\"] ?? \"\" });\nconst result = await orq.router.decisions.create({\n  \"model\": \"openai/gpt-6-luna\",\n  \"questions\": {\n    \"positive\": {\n      \"criteria\": {\n        \"false\": \"The customer is unhappy.\",\n        \"true\": \"The customer is happy.\"\n      },\n      \"instructions\": \"Is the sentiment positive?\",\n      \"type\": \"noul\"\n    },\n    \"rating\": {\n      \"criteria\": [\n        \"Negative\",\n        \"Neutral\",\n        \"Positive\"\n      ],\n      \"instructions\": \"Rate sentiment.\",\n      \"type\": \"score\"\n    },\n    \"sentiment\": {\n      \"criteria\": {\n        \"negative\": \"Negative sentiment\",\n        \"neutral\": null,\n        \"positive\": \"Positive sentiment\"\n      },\n      \"instructions\": \"Classify sentiment.\",\n      \"type\": \"choice\"\n    }\n  },\n  \"state\": \"The customer says: I love this product. It is wonderful!\"\n});\n\nfor (const [name, answer] of Object.entries(result.answers)) {\n  if (answer.type === \"refusal\") {\n    console.log(name, \"refused\");\n    continue;\n  }\n  console.log(name, answer);\n}"
+        - label: "Python: OpenAI text"
+          lang: "python"
+          source: "import json\nimport os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\nrequest = json.loads(\"{\\n  \\\"model\\\": \\\"openai/gpt-6-luna\\\",\\n  \\\"questions\\\": {\\n    \\\"positive\\\": {\\n      \\\"criteria\\\": {\\n        \\\"false\\\": \\\"The customer is unhappy.\\\",\\n        \\\"true\\\": \\\"The customer is happy.\\\"\\n      },\\n      \\\"instructions\\\": \\\"Is the sentiment positive?\\\",\\n      \\\"type\\\": \\\"noul\\\"\\n    },\\n    \\\"rating\\\": {\\n      \\\"criteria\\\": [\\n        \\\"Negative\\\",\\n        \\\"Neutral\\\",\\n        \\\"Positive\\\"\\n      ],\\n      \\\"instructions\\\": \\\"Rate sentiment.\\\",\\n      \\\"type\\\": \\\"score\\\"\\n    },\\n    \\\"sentiment\\\": {\\n      \\\"criteria\\\": {\\n        \\\"negative\\\": \\\"Negative sentiment\\\",\\n        \\\"neutral\\\": null,\\n        \\\"positive\\\": \\\"Positive sentiment\\\"\\n      },\\n      \\\"instructions\\\": \\\"Classify sentiment.\\\",\\n      \\\"type\\\": \\\"choice\\\"\\n    }\\n  },\\n  \\\"state\\\": \\\"The customer says: I love this product. It is wonderful!\\\"\\n}\")\nresult = client.router.decisions.create(**request)\n\nfor name, answer in result.answers.items():\n    if answer.type == \"refusal\":\n        print(name, \"refused\")\n        continue\n    print(name, answer)"
+        - label: "cURL: OpenAI text"
+          lang: "bash"
+          source: "curl https://my.orq.ai/v3/router/decisions \\\n  -H \"Authorization: Bearer $ORQ_API_KEY\" \\\n  -H \"Content-Type: application/json\" \\\n  --data-binary @- <<'JSON'\n{\n  \"model\": \"openai/gpt-6-luna\",\n  \"questions\": {\n    \"positive\": {\n      \"criteria\": {\n        \"false\": \"The customer is unhappy.\",\n        \"true\": \"The customer is happy.\"\n      },\n      \"instructions\": \"Is the sentiment positive?\",\n      \"type\": \"noul\"\n    },\n    \"rating\": {\n      \"criteria\": [\n        \"Negative\",\n        \"Neutral\",\n        \"Positive\"\n      ],\n      \"instructions\": \"Rate sentiment.\",\n      \"type\": \"score\"\n    },\n    \"sentiment\": {\n      \"criteria\": {\n        \"negative\": \"Negative sentiment\",\n        \"neutral\": null,\n        \"positive\": \"Positive sentiment\"\n      },\n      \"instructions\": \"Classify sentiment.\",\n      \"type\": \"choice\"\n    }\n  },\n  \"state\": \"The customer says: I love this product. It is wonderful!\"\n}\nJSON"
+        - label: "Node.js: OpenAI inline image"
+          lang: "typescript"
+          source: "import { Orq } from \"@orq-ai/node\";\n\nconst orq = new Orq({ apiKey: process.env[\"ORQ_API_KEY\"] ?? \"\" });\nconst result = await orq.router.decisions.create({\n  \"model\": \"openai/gpt-6-luna\",\n  \"questions\": {\n    \"contains_text\": {\n      \"instructions\": \"Does the image contain text?\",\n      \"type\": \"noul\"\n    }\n  },\n  \"state\": [\n    {\n      \"content\": [\n        {\n          \"text\": \"Evaluate this image.\",\n          \"type\": \"input_text\"\n        },\n        {\n          \"image_url\": \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAACLSURBVHgBdY8NDYAgEIXBBEQgAhG0gRGMYBNtoA2M4EygDYygDfCxvdMbk7d9A453f8ZQMcYAWuBVzIHujeGyxE8nYz7dJWYl01p749zxDKABEzhYfDNaMPZSAUymJLZLuvSsSVUhx4G7VM2xpSzQ5YYhLUHDCGoad47ixXjxY84qi1a9QPgZpdYLPVkbtsfywz3jAAAAAElFTkSuQmCC\",\n          \"type\": \"input_image\"\n        }\n      ],\n      \"role\": \"user\"\n    }\n  ]\n});\n\nfor (const [name, answer] of Object.entries(result.answers)) {\n  if (answer.type === \"refusal\") {\n    console.log(name, \"refused\");\n    continue;\n  }\n  console.log(name, answer);\n}"
+        - label: "Python: OpenAI inline image"
+          lang: "python"
+          source: "import json\nimport os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\nrequest = json.loads(\"{\\n  \\\"model\\\": \\\"openai/gpt-6-luna\\\",\\n  \\\"questions\\\": {\\n    \\\"contains_text\\\": {\\n      \\\"instructions\\\": \\\"Does the image contain text?\\\",\\n      \\\"type\\\": \\\"noul\\\"\\n    }\\n  },\\n  \\\"state\\\": [\\n    {\\n      \\\"content\\\": [\\n        {\\n          \\\"text\\\": \\\"Evaluate this image.\\\",\\n          \\\"type\\\": \\\"input_text\\\"\\n        },\\n        {\\n          \\\"image_url\\\": \\\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAACLSURBVHgBdY8NDYAgEIXBBEQgAhG0gRGMYBNtoA2M4EygDYygDfCxvdMbk7d9A453f8ZQMcYAWuBVzIHujeGyxE8nYz7dJWYl01p749zxDKABEzhYfDNaMPZSAUymJLZLuvSsSVUhx4G7VM2xpSzQ5YYhLUHDCGoad47ixXjxY84qi1a9QPgZpdYLPVkbtsfywz3jAAAAAElFTkSuQmCC\\\",\\n          \\\"type\\\": \\\"input_image\\\"\\n        }\\n      ],\\n      \\\"role\\\": \\\"user\\\"\\n    }\\n  ]\\n}\")\nresult = client.router.decisions.create(**request)\n\nfor name, answer in result.answers.items():\n    if answer.type == \"refusal\":\n        print(name, \"refused\")\n        continue\n    print(name, answer)"
+        - label: "cURL: OpenAI inline image"
+          lang: "bash"
+          source: "curl https://my.orq.ai/v3/router/decisions \\\n  -H \"Authorization: Bearer $ORQ_API_KEY\" \\\n  -H \"Content-Type: application/json\" \\\n  --data-binary @- <<'JSON'\n{\n  \"model\": \"openai/gpt-6-luna\",\n  \"questions\": {\n    \"contains_text\": {\n      \"instructions\": \"Does the image contain text?\",\n      \"type\": \"noul\"\n    }\n  },\n  \"state\": [\n    {\n      \"content\": [\n        {\n          \"text\": \"Evaluate this image.\",\n          \"type\": \"input_text\"\n        },\n        {\n          \"image_url\": \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAACLSURBVHgBdY8NDYAgEIXBBEQgAhG0gRGMYBNtoA2M4EygDYygDfCxvdMbk7d9A453f8ZQMcYAWuBVzIHujeGyxE8nYz7dJWYl01p749zxDKABEzhYfDNaMPZSAUymJLZLuvSsSVUhx4G7VM2xpSzQ5YYhLUHDCGoad47ixXjxY84qi1a9QPgZpdYLPVkbtsfywz3jAAAAAElFTkSuQmCC\",\n          \"type\": \"input_image\"\n        }\n      ],\n      \"role\": \"user\"\n    }\n  ]\n}\nJSON"
+        - label: "Node.js: Fallbacks, retries and identity"
+          lang: "typescript"
+          source: "import { Orq } from \"@orq-ai/node\";\n\nconst orq = new Orq({ apiKey: process.env[\"ORQ_API_KEY\"] ?? \"\" });\nconst result = await orq.router.decisions.create({\n  \"fallbacks\": [\n    {\n      \"model\": \"openai/gpt-5.6-luna\"\n    }\n  ],\n  \"identity\": {\n    \"displayName\": \"Sample customer\",\n    \"id\": \"customer-demo\"\n  },\n  \"model\": \"openai/gpt-6-luna\",\n  \"questions\": {\n    \"positive\": {\n      \"criteria\": {\n        \"false\": \"The customer is unhappy.\",\n        \"true\": \"The customer is happy.\"\n      },\n      \"instructions\": \"Is the sentiment positive?\",\n      \"type\": \"noul\"\n    },\n    \"rating\": {\n      \"criteria\": [\n        \"Negative\",\n        \"Neutral\",\n        \"Positive\"\n      ],\n      \"instructions\": \"Rate sentiment.\",\n      \"type\": \"score\"\n    },\n    \"sentiment\": {\n      \"criteria\": {\n        \"negative\": \"Negative sentiment\",\n        \"neutral\": null,\n        \"positive\": \"Positive sentiment\"\n      },\n      \"instructions\": \"Classify sentiment.\",\n      \"type\": \"choice\"\n    }\n  },\n  \"retry\": {\n    \"count\": 2,\n    \"onCodes\": [\n      429,\n      502,\n      503,\n      504\n    ]\n  },\n  \"state\": \"The customer says: I love this product. It is wonderful!\"\n});\n\nfor (const [name, answer] of Object.entries(result.answers)) {\n  if (answer.type === \"refusal\") {\n    console.log(name, \"refused\");\n    continue;\n  }\n  console.log(name, answer);\n}"
+        - label: "Python: Fallbacks, retries and identity"
+          lang: "python"
+          source: "import json\nimport os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\nrequest = json.loads(\"{\\n  \\\"fallbacks\\\": [\\n    {\\n      \\\"model\\\": \\\"openai/gpt-5.6-luna\\\"\\n    }\\n  ],\\n  \\\"identity\\\": {\\n    \\\"id\\\": \\\"customer-demo\\\",\\n    \\\"display_name\\\": \\\"Sample customer\\\"\\n  },\\n  \\\"model\\\": \\\"openai/gpt-6-luna\\\",\\n  \\\"questions\\\": {\\n    \\\"positive\\\": {\\n      \\\"criteria\\\": {\\n        \\\"false\\\": \\\"The customer is unhappy.\\\",\\n        \\\"true\\\": \\\"The customer is happy.\\\"\\n      },\\n      \\\"instructions\\\": \\\"Is the sentiment positive?\\\",\\n      \\\"type\\\": \\\"noul\\\"\\n    },\\n    \\\"rating\\\": {\\n      \\\"criteria\\\": [\\n        \\\"Negative\\\",\\n        \\\"Neutral\\\",\\n        \\\"Positive\\\"\\n      ],\\n      \\\"instructions\\\": \\\"Rate sentiment.\\\",\\n      \\\"type\\\": \\\"score\\\"\\n    },\\n    \\\"sentiment\\\": {\\n      \\\"criteria\\\": {\\n        \\\"negative\\\": \\\"Negative sentiment\\\",\\n        \\\"neutral\\\": null,\\n        \\\"positive\\\": \\\"Positive sentiment\\\"\\n      },\\n      \\\"instructions\\\": \\\"Classify sentiment.\\\",\\n      \\\"type\\\": \\\"choice\\\"\\n    }\\n  },\\n  \\\"retry\\\": {\\n    \\\"count\\\": 2,\\n    \\\"on_codes\\\": [\\n      429,\\n      502,\\n      503,\\n      504\\n    ]\\n  },\\n  \\\"state\\\": \\\"The customer says: I love this product. It is wonderful!\\\"\\n}\")\nresult = client.router.decisions.create(**request)\n\nfor name, answer in result.answers.items():\n    if answer.type == \"refusal\":\n        print(name, \"refused\")\n        continue\n    print(name, answer)"
+        - label: "cURL: Fallbacks, retries and identity"
+          lang: "bash"
+          source: "curl https://my.orq.ai/v3/router/decisions \\\n  -H \"Authorization: Bearer $ORQ_API_KEY\" \\\n  -H \"Content-Type: application/json\" \\\n  --data-binary @- <<'JSON'\n{\n  \"fallbacks\": [\n    {\n      \"model\": \"openai/gpt-5.6-luna\"\n    }\n  ],\n  \"identity\": {\n    \"id\": \"customer-demo\",\n    \"display_name\": \"Sample customer\"\n  },\n  \"model\": \"openai/gpt-6-luna\",\n  \"questions\": {\n    \"positive\": {\n      \"criteria\": {\n        \"false\": \"The customer is unhappy.\",\n        \"true\": \"The customer is happy.\"\n      },\n      \"instructions\": \"Is the sentiment positive?\",\n      \"type\": \"noul\"\n    },\n    \"rating\": {\n      \"criteria\": [\n        \"Negative\",\n        \"Neutral\",\n        \"Positive\"\n      ],\n      \"instructions\": \"Rate sentiment.\",\n      \"type\": \"score\"\n    },\n    \"sentiment\": {\n      \"criteria\": {\n        \"negative\": \"Negative sentiment\",\n        \"neutral\": null,\n        \"positive\": \"Positive sentiment\"\n      },\n      \"instructions\": \"Classify sentiment.\",\n      \"type\": \"choice\"\n    }\n  },\n  \"retry\": {\n    \"count\": 2,\n    \"on_codes\": [\n      429,\n      502,\n      503,\n      504\n    ]\n  },\n  \"state\": \"The customer says: I love this product. It is wonderful!\"\n}\nJSON"
+      x-orq-gateway-group: true
+      x-speakeasy-group: "router.decisions"
       x-speakeasy-name-override: "create"
       security:
         - ApiKey: []
@@ -70794,3 +71607,5 @@ tags:
   - name: "Embeddings"
   - description: "Beta. Run typed classification questions against a classify model."
     name: "Classify"
+  - description: "Beta. Run classification decisions with the classify contract."
+    name: "Decisions"
