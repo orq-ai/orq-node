@@ -1,23 +1,42 @@
 # ClassifyAnswer
 
-## Example Usage
+One answer to a classification question. The type selects the answer fields. A refusal contains only type.
+
+
+## Supported Types
+
+### `components.ClassifyChoiceAnswer`
 
 ```typescript
-import { ClassifyAnswer } from "@orq-ai/node/models/components";
+const value: components.ClassifyChoiceAnswer = {
+  choice: "<value>",
+  type: "choice",
+};
+```
 
-let value: ClassifyAnswer = {
+### `components.ClassifyNoulAnswer`
+
+```typescript
+const value: components.ClassifyNoulAnswer = {
+  noul: 7389.16,
+  type: "noul",
+};
+```
+
+### `components.ClassifyRefusalAnswer`
+
+```typescript
+const value: components.ClassifyRefusalAnswer = {
+  type: "refusal",
+};
+```
+
+### `components.ClassifyScoreAnswer`
+
+```typescript
+const value: components.ClassifyScoreAnswer = {
+  score: 5100.81,
   type: "score",
 };
 ```
 
-## Fields
-
-| Field                                                                                                                                                                                                                                                                                      | Type                                                                                                                                                                                                                                                                                       | Required                                                                                                                                                                                                                                                                                   | Description                                                                                                                                                                                                                                                                                |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `choice`                                                                                                                                                                                                                                                                                   | *string*                                                                                                                                                                                                                                                                                   | :heavy_minus_sign:                                                                                                                                                                                                                                                                         | The selected option. Present for choice answers.                                                                                                                                                                                                                                           |
-| `confidence`                                                                                                                                                                                                                                                                               | *number*                                                                                                                                                                                                                                                                                   | :heavy_minus_sign:                                                                                                                                                                                                                                                                         | How sure the model is of the answer it selected: on chat models the largest value in probabilities, so it adds nothing the distribution does not; typesafe/jev-latest returns its own calibrated value, which can sit below the largest probability. Present for choice and score answers. |
-| `legend`                                                                                                                                                                                                                                                                                   | Record<string, *string*>                                                                                                                                                                                                                                                                   | :heavy_minus_sign:                                                                                                                                                                                                                                                                         | Level index to level description. Present for score answers.                                                                                                                                                                                                                               |
-| `noul`                                                                                                                                                                                                                                                                                     | *number*                                                                                                                                                                                                                                                                                   | :heavy_minus_sign:                                                                                                                                                                                                                                                                         | Probability between 0 and 1 that the statement holds. Present for noul answers.                                                                                                                                                                                                            |
-| `probabilities`                                                                                                                                                                                                                                                                            | Record<string, *number*>                                                                                                                                                                                                                                                                   | :heavy_minus_sign:                                                                                                                                                                                                                                                                         | Probability distribution over the options or levels. Present for choice and score answers.                                                                                                                                                                                                 |
-| `score`                                                                                                                                                                                                                                                                                    | *number*                                                                                                                                                                                                                                                                                   | :heavy_minus_sign:                                                                                                                                                                                                                                                                         | Position on the scale, not an index: on chat models the weighted index, each level index multiplied by that level probability and summed, so the value is usually fractional; typesafe/jev-latest returns its own score. Present for score answers.                                        |
-| `type`                                                                                                                                                                                                                                                                                     | [components.ClassifyAnswerType](../../models/components/classifyanswertype.md)                                                                                                                                                                                                             | :heavy_check_mark:                                                                                                                                                                                                                                                                         | The question type this answer belongs to.                                                                                                                                                                                                                                                  |

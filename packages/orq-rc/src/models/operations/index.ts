@@ -34,6 +34,7 @@ export * from "./createclassify.js";
 export * from "./createcompletion.js";
 export * from "./createdatasetitem.js";
 export * from "./createdatasource.js";
+export * from "./createdecisions.js";
 export * from "./createembedding.js";
 export * from "./createeval.js";
 export * from "./createfolder.js";

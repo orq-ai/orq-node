@@ -125,6 +125,10 @@ export type Model = {
    *  date is known. `deprecation` carries the date when one is announced.
    */
   deprecated: boolean;
+  /**
+   * True when this offering guarantees zero data retention.
+   */
+  zdr: boolean;
 };
 
 /** @internal */
@@ -184,6 +188,7 @@ export const Model$inboundSchema: z.ZodType<Model, z.ZodTypeDef, unknown> = z
       .optional(),
     features: z.array(z.string()),
     deprecated: z.boolean(),
+    zdr: z.boolean(),
   }).transform((v) => {
     return remap$(v, {
       "offering_of": "offeringOf",

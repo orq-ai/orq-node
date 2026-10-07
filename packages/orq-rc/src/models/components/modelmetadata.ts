@@ -121,6 +121,7 @@ export type ModelMetadata = {
   supportsJsonModeResponseFormat?: boolean | undefined;
   supportsJsonSchemaResponseFormat?: boolean | undefined;
   supportsMaxCompletionTokens?: boolean | undefined;
+  supportsNativeClassify?: boolean | undefined;
   supportsOpenaiRealtimeApi?: boolean | undefined;
   supportsOpenaiSDK?: boolean | undefined;
   supportsParallelToolCalls?: boolean | undefined;
@@ -257,6 +258,7 @@ export const ModelMetadata$inboundSchema: z.ZodType<
   supports_json_mode_response_format: z.boolean().optional(),
   supports_json_schema_response_format: z.boolean().optional(),
   supports_max_completion_tokens: z.boolean().optional(),
+  supports_native_classify: z.boolean().optional(),
   supports_openai_realtime_api: z.boolean().optional(),
   supports_openai_sdk: z.boolean().optional(),
   supports_parallel_tool_calls: z.boolean().optional(),
@@ -384,6 +386,7 @@ export const ModelMetadata$inboundSchema: z.ZodType<
     "supports_json_mode_response_format": "supportsJsonModeResponseFormat",
     "supports_json_schema_response_format": "supportsJsonSchemaResponseFormat",
     "supports_max_completion_tokens": "supportsMaxCompletionTokens",
+    "supports_native_classify": "supportsNativeClassify",
     "supports_openai_realtime_api": "supportsOpenaiRealtimeApi",
     "supports_openai_sdk": "supportsOpenaiSDK",
     "supports_parallel_tool_calls": "supportsParallelToolCalls",
@@ -517,6 +520,7 @@ export type ModelMetadata$Outbound = {
   supports_json_mode_response_format?: boolean | undefined;
   supports_json_schema_response_format?: boolean | undefined;
   supports_max_completion_tokens?: boolean | undefined;
+  supports_native_classify?: boolean | undefined;
   supports_openai_realtime_api?: boolean | undefined;
   supports_openai_sdk?: boolean | undefined;
   supports_parallel_tool_calls?: boolean | undefined;
@@ -653,6 +657,7 @@ export const ModelMetadata$outboundSchema: z.ZodType<
   supportsJsonModeResponseFormat: z.boolean().optional(),
   supportsJsonSchemaResponseFormat: z.boolean().optional(),
   supportsMaxCompletionTokens: z.boolean().optional(),
+  supportsNativeClassify: z.boolean().optional(),
   supportsOpenaiRealtimeApi: z.boolean().optional(),
   supportsOpenaiSDK: z.boolean().optional(),
   supportsParallelToolCalls: z.boolean().optional(),
@@ -780,6 +785,7 @@ export const ModelMetadata$outboundSchema: z.ZodType<
     supportsJsonModeResponseFormat: "supports_json_mode_response_format",
     supportsJsonSchemaResponseFormat: "supports_json_schema_response_format",
     supportsMaxCompletionTokens: "supports_max_completion_tokens",
+    supportsNativeClassify: "supports_native_classify",
     supportsOpenaiRealtimeApi: "supports_openai_realtime_api",
     supportsOpenaiSDK: "supports_openai_sdk",
     supportsParallelToolCalls: "supports_parallel_tool_calls",

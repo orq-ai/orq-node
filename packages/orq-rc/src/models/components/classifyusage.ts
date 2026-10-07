@@ -7,6 +7,10 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import {
+  ClassifyInputTokensDetails,
+  ClassifyInputTokensDetails$inboundSchema,
+} from "./classifyinputtokensdetails.js";
 
 export type ClassifyUsage = {
   /**
@@ -17,12 +21,13 @@ export type ClassifyUsage = {
    * The number of input tokens processed.
    */
   inputTokens: number;
+  inputTokensDetails?: ClassifyInputTokensDetails | undefined;
   /**
-   * Cost (USD) of output tokens. 0 for typesafe/jev-latest. Present when billing was computed for this request.
+   * Cost (USD) of output tokens. 0 for native classify providers, including OpenAI Decisions. Present when billing was computed for this request.
    */
   outputCost?: number | undefined;
   /**
-   * The number of output tokens generated. Free for typesafe/jev-latest, billed at the model rate for chat models.
+   * The number of output tokens generated. Free for native classify providers, billed at the model rate for emulated chat models.
    */
   outputTokens: number;
   /**
@@ -39,6 +44,7 @@ export const ClassifyUsage$inboundSchema: z.ZodType<
 > = z.object({
   input_cost: z.number().optional(),
   input_tokens: z.number().int(),
+  input_tokens_details: ClassifyInputTokensDetails$inboundSchema.optional(),
   output_cost: z.number().optional(),
   output_tokens: z.number().int(),
   total_cost: z.number().optional(),
@@ -46,6 +52,7 @@ export const ClassifyUsage$inboundSchema: z.ZodType<
   return remap$(v, {
     "input_cost": "inputCost",
     "input_tokens": "inputTokens",
+    "input_tokens_details": "inputTokensDetails",
     "output_cost": "outputCost",
     "output_tokens": "outputTokens",
     "total_cost": "totalCost",

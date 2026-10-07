@@ -1,6 +1,6 @@
 # CreateClassifyRouterClassifyResponseResponseBody
 
-Rate limited by the provider.
+The API key lacks classify permission, or the workspace or project cannot access the model.
 
 ## Example Usage
 

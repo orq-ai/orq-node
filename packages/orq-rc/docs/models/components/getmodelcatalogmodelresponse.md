@@ -36,6 +36,7 @@ let value: GetModelCatalogModelResponse = {
     ],
     features: [],
     deprecated: false,
+    zdr: false,
   },
 };
 ```
