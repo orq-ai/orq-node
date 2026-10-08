@@ -82,7 +82,7 @@ export type CompactResponseRequestBody = {
    */
   model?: string | undefined;
   /**
-   * The ID of a previous response to continue from.
+   * The ID of a stored response whose conversation is compacted; input is appended after it.
    */
   previousResponseId?: string | undefined;
   /**
@@ -119,9 +119,9 @@ export type CompactResponseResponseBody = {
    */
   object: CompactResponseObject;
   /**
-   * The compacted list of output items.
+   * The next context window: a compaction item summarizing older items, followed by the most recent items verbatim. Pass it as the input of the next request, without previous_response_id.
    */
-  output: Array<components.PublicCompactionItem> | null;
+  output: Array<any> | null;
   usage: components.PublicUsage;
 };
 
@@ -225,7 +225,7 @@ export const CompactResponseResponseBody$inboundSchema: z.ZodType<
   created_at: z.number().int(),
   id: z.string(),
   object: CompactResponseObject$inboundSchema,
-  output: z.nullable(z.array(components.PublicCompactionItem$inboundSchema)),
+  output: z.nullable(z.array(z.any())),
   usage: components.PublicUsage$inboundSchema,
 }).transform((v) => {
   return remap$(v, {

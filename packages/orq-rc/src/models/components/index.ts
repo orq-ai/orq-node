@@ -444,7 +444,6 @@ export * from "./projectbudgetscope.js";
 export * from "./projectbudgetscoperestresponse.js";
 export * from "./providerbudgetscope.js";
 export * from "./providertoolinput.js";
-export * from "./publiccompactionitem.js";
 export * from "./publiccontact.js";
 export * from "./publicembeddingdata.js";
 export * from "./publicembeddingusage.js";
