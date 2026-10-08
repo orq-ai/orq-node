@@ -566,9 +566,9 @@ run();
 
 * [create](docs/sdks/orqcompletions/README.md#create) - Create chat completion
 
-#### [Router.Classify](docs/sdks/classify/README.md)
+#### [~~Router.Classify~~](docs/sdks/classify/README.md)
 
-* [create](docs/sdks/classify/README.md#create) - Classify
+* [~~create~~](docs/sdks/classify/README.md#create) - Classify :warning: **Deprecated**
 
 #### [Router.Completions](docs/sdks/completions/README.md)
 
@@ -984,7 +984,6 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`routerAudioTranscriptionsCreate`](docs/sdks/transcriptions/README.md#create) - Create transcription
 - [`routerAudioTranslationsCreate`](docs/sdks/translations/README.md#create) - Create translation
 - [`routerChatCompletionsCreate`](docs/sdks/orqcompletions/README.md#create) - Create chat completion
-- [`routerClassifyCreate`](docs/sdks/classify/README.md#create) - Classify
 - [`routerCompletionsCreate`](docs/sdks/completions/README.md#create) - Create completion
 - [`routerDecisionsCreate`](docs/sdks/decisions/README.md#create) - Decisions
 - [`routerEmbeddingsCreate`](docs/sdks/embeddings/README.md#create) - Create embeddings
@@ -1090,6 +1089,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - ~~[`agentsStreamRun`](docs/sdks/agents/README.md#streamrun)~~ - Run agent with streaming response :warning: **Deprecated**
 - ~~[`feedbackCreateEvaluation`](docs/sdks/feedback/README.md#createevaluation)~~ - :warning: **Deprecated**
 - ~~[`feedbackRemoveEvaluation`](docs/sdks/feedback/README.md#removeevaluation)~~ - :warning: **Deprecated**
+- ~~[`routerClassifyCreate`](docs/sdks/classify/README.md#create)~~ - Classify :warning: **Deprecated**
 - ~~[`webhooksQuery`](docs/sdks/webhooks/README.md#query)~~ - Query webhooks :warning: **Deprecated**
 
 </details>
@@ -1479,6 +1479,7 @@ run();
 * [`UpdateAgentScheduleResponseBody`](./src/models/errors/updateagentscheduleresponsebody.ts): Invalid type, expression, or sub-hour cadence. Status code `400`. Applicable to 1 of 337 methods.*
 * [`TriggerAgentScheduleResponseBody`](./src/models/errors/triggeragentscheduleresponsebody.ts): Schedule is inactive. Status code `400`. Applicable to 1 of 337 methods.*
 * [`SearchWebResponseBody`](./src/models/errors/searchwebresponsebody.ts): Invalid request, unusable workspace integration, or a blocking guardrail. Check the request fields and workspace integration settings. Status code `400`. Applicable to 1 of 337 methods.*
+* [`CreateModerationResponseBody`](./src/models/errors/createmoderationresponsebody.ts): Returns validation error. Status code `400`. Applicable to 1 of 337 methods.*
 * [`CreateClassifyResponseBody`](./src/models/errors/createclassifyresponsebody.ts): Malformed JSON, missing or unsupported model, or invalid retry/fallback fields. Status code `400`. Applicable to 1 of 337 methods.*
 * [`CreateDecisionsResponseBody`](./src/models/errors/createdecisionsresponsebody.ts): Malformed JSON, missing or unsupported model, or invalid retry/fallback fields. Status code `400`. Applicable to 1 of 337 methods.*
 * [`CompactResponseResponsesResponseBody`](./src/models/errors/compactresponseresponsesresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 337 methods.*
@@ -1516,7 +1517,6 @@ run();
 * [`DeleteEvalEvalsResponseBody`](./src/models/errors/deleteevalevalsresponsebody.ts): The evaluator is still referenced as an evaluator or guardrail by one or more deployments. Status code `409`. Applicable to 1 of 337 methods.*
 * [`SearchWebWebsearchResponse415ResponseBody`](./src/models/errors/searchwebwebsearchresponse415responsebody.ts): Unsupported or missing Content-Type. Send application/json; an optional charset parameter is accepted. Status code `415`. Applicable to 1 of 337 methods.*
 * [`SearchWebWebsearchResponse422ResponseBody`](./src/models/errors/searchwebwebsearchresponse422responsebody.ts): A configured guardrail evaluator could not complete its evaluation. Status code `422`. Applicable to 1 of 337 methods.*
-* [`CreateModerationResponseBody`](./src/models/errors/createmoderationresponsebody.ts): Returns validation error. Status code `422`. Applicable to 1 of 337 methods.*
 * [`CreateClassifyRouterClassifyResponse422ResponseBody`](./src/models/errors/createclassifyrouterclassifyresponse422responsebody.ts): The state or a question violates the classification contract. Status code `422`. Applicable to 1 of 337 methods.*
 * [`CreateDecisionsRouterDecisionsResponse422ResponseBody`](./src/models/errors/createdecisionsrouterdecisionsresponse422responsebody.ts): The state or a question violates the classification contract. Status code `422`. Applicable to 1 of 337 methods.*
 * [`CreateTranscriptionResponseBody`](./src/models/errors/createtranscriptionresponsebody.ts): Returns validation error. Status code `422`. Applicable to 1 of 337 methods.*

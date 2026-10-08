@@ -287,7 +287,7 @@ export type DeploymentGetConfig24 = {
   type: "file";
   cacheControl?: DeploymentGetConfig2CacheControl | undefined;
   /**
-   * File data for the content part. Must contain either file_data or uri, but not both.
+   * File data for the content part. Must contain exactly one of file_data, file_id or uri.
    */
   file: components.FileContentPartSchema;
 };
@@ -663,7 +663,7 @@ export type DeploymentGetConfig2Deployments4 = {
   type: "file";
   cacheControl?: DeploymentGetConfig2DeploymentsCacheControl | undefined;
   /**
-   * File data for the content part. Must contain either file_data or uri, but not both.
+   * File data for the content part. Must contain exactly one of file_data, file_id or uri.
    */
   file: components.FileContentPartSchema;
 };

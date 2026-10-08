@@ -1,14 +1,21 @@
-# Router.Classify
+# ~~Router.Classify~~
+
+> [!WARNING]
+> This SDK is **DEPRECATED**
 
 ## Overview
 
 ### Available Operations
 
-* [create](#create) - Classify
+* [~~create~~](#create) - Classify :warning: **Deprecated**
 
-## create
+## ~~create~~
+
+**Deprecated.** Use `POST /v3/router/decisions` and `orq.router.decisions.create()` for new integrations. This endpoint remains available for backward compatibility with the same request and response contract.
 
 **Beta.** Runs typed classification questions (`noul`, `choice`, `score`) against a native classify provider, including OpenAI Decisions with `openai/gpt-6-luna`, or a chat model that supports classify emulation. Emulated models answer through one structured-output call and their probabilities are model-reported rather than calibrated. Native providers can return `refusal` for individual questions; refused answers contain only `type`. The request and response follow the TypeSafe classification contract; `model` in the response identifies the primary or fallback model that answered and `usage` carries the computed cost like the Responses API. Both `/v3/router/classify` and `/v3/router/decisions` use this contract, including ordered `fallbacks`, request-level `retry`, and `identity` attribution. Both require `classify.execute`. This endpoint currently does not apply PII plugins or guardrails.
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage: fallback_retry_identity
 

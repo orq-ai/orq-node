@@ -160,7 +160,7 @@ async function $do(
     | SDKValidationError
   >(
     M.json(200, operations.CreateModerationResponseBody$inboundSchema),
-    M.jsonErr(422, errors.CreateModerationResponseBody$inboundSchema),
+    M.jsonErr(400, errors.CreateModerationResponseBody$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });

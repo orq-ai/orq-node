@@ -23,7 +23,6 @@ const orq = new Orq({
 async function run() {
   const result = await orq.router.moderations.create({
     input: [],
-    model: "Fiesta",
   });
 
   console.log(result);
@@ -49,7 +48,6 @@ const orq = new OrqCore({
 async function run() {
   const res = await routerModerationsCreate(orq, {
     input: [],
-    model: "Fiesta",
   });
   if (res.ok) {
     const { value: result } = res;
@@ -79,5 +77,5 @@ run();
 
 | Error Type                          | Status Code                         | Content Type                        |
 | ----------------------------------- | ----------------------------------- | ----------------------------------- |
-| errors.CreateModerationResponseBody | 422                                 | application/json                    |
+| errors.CreateModerationResponseBody | 400                                 | application/json                    |
 | errors.APIError                     | 4XX, 5XX                            | \*/\*                               |

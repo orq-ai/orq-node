@@ -288,7 +288,7 @@ export type CreateChatCompletion24 = {
   type: "file";
   cacheControl?: CreateChatCompletion2CacheControl | undefined;
   /**
-   * File data for the content part. Must contain either file_data or uri, but not both.
+   * File data for the content part. Must contain exactly one of file_data, file_id or uri.
    */
   file: components.FileContentPartSchema;
 };

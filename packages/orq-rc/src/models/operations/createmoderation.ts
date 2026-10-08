@@ -24,7 +24,7 @@ export type CreateModerationRequestBody = {
   /**
    * The content moderation model you would like to use. Defaults to omni-moderation-latest
    */
-  model: string;
+  model?: string | undefined;
 };
 
 /**
@@ -352,7 +352,7 @@ export function inputToJSON(input: Input): string {
 /** @internal */
 export type CreateModerationRequestBody$Outbound = {
   input: string | Array<string>;
-  model: string;
+  model?: string | undefined;
 };
 
 /** @internal */
@@ -362,7 +362,7 @@ export const CreateModerationRequestBody$outboundSchema: z.ZodType<
   CreateModerationRequestBody
 > = z.object({
   input: z.union([z.string(), z.array(z.string())]),
-  model: z.string(),
+  model: z.string().optional(),
 });
 
 export function createModerationRequestBodyToJSON(

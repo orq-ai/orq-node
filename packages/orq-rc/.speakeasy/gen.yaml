@@ -90,6 +90,7 @@ typescript:
   modelPropertyCasing: camel
   moduleFormat: commonjs
   multipartArrayFormat: legacy
+  numericEnumMemberNames: legacy
   outputModelSuffix: output
   packageName: '@orq-ai/node'
   preApplyUnionDiscriminators: true
