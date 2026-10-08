@@ -498,6 +498,7 @@ export const DeploymentsProvider = {
   Reson8: "reson8",
   Meta: "meta",
   Greenpt: "greenpt",
+  Liquid: "liquid",
   Typesafe: "typesafe",
   Berget: "berget",
   Slack: "slack",
