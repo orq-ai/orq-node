@@ -2559,7 +2559,7 @@ components:
           properties:
             _id:
               type: "string"
-              default: "reasoning_01m4h4gsswce33sqxcdy6yk8s8"
+              default: "reasoning_01m4hab6k2kpyggxwtrzbmp117"
               description: "Unique identifier for the part. Format: reasoning_{ulid} (e.g., reasoning_01hxyz...)"
               example: "reasoning_01hxyz123abc"
             kind:
@@ -17405,6 +17405,8 @@ components:
           type: "boolean"
         chat_kit:
           $ref: "#/components/schemas/ChatKitResources"
+        tracing_enabled:
+          type: "boolean"
     UpdateWorkspaceResponse:
       required:
         - "workspace"
@@ -17767,6 +17769,23 @@ components:
         - $ref: "#/components/schemas/ClassifyChoiceAnswer"
         - $ref: "#/components/schemas/ClassifyScoreAnswer"
         - $ref: "#/components/schemas/ClassifyRefusalAnswer"
+    ClassifyCacheConfig:
+      additionalProperties: false
+      properties:
+        ttl:
+          description: "Time to live for the cached response in seconds, up to 259200 (3 days). Defaults to 3600."
+          format: "int64"
+          maximum: 259200
+          minimum: 1
+          type: "integer"
+        type:
+          description: "Cache type. Only exact_match is supported."
+          enum:
+            - "exact_match"
+          type: "string"
+      required:
+        - "type"
+      type: "object"
     ClassifyChoiceAnswer:
       additionalProperties: false
       properties:
@@ -17939,6 +17958,9 @@ components:
     CreateClassifyRequest:
       additionalProperties: false
       properties:
+        cache:
+          $ref: "#/components/schemas/ClassifyCacheConfig"
+          description: "Exact-match response cache for this request. An identical request body from the same workspace and project is served from the stored response, with the X-Cache header reporting HIT or MISS."
         fallbacks:
           description: "Up to 10 fallback models in order. The gateway retries a model for matching error codes before trying the next model. Every model must support classification and satisfy access checks. Image requests require native OpenAI image-capable fallbacks."
           items:
@@ -21966,6 +21988,7 @@ paths:
                       - "liquid"
                       - "typesafe"
                       - "berget"
+                      - "cloudflare"
                       - "slack"
                       - "orq"
                     description: "The provider used to generate the response"
@@ -23245,6 +23268,7 @@ paths:
                           - liquid
                           - typesafe
                           - berget
+                          - cloudflare
                           - slack
                           - orq
                         description: The provider used to generate the response
@@ -23861,6 +23885,7 @@ paths:
                                 - "liquid"
                                 - "typesafe"
                                 - "berget"
+                                - "cloudflare"
                                 - "slack"
                                 - "orq"
                             messages:
@@ -33089,7 +33114,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01M4H4GSV6TT5A03GCSC2JZQFA"
+                                          default: "01M4HAB6M0A6WT8AXB8YCGSR11"
                                         name:
                                           type: "string"
                                         description:
@@ -34687,7 +34712,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01M4H4GSVQBDVVDN2AEWE5WXC7"
+                                          default: "01M4HAB6MDWHFN31582AKEAH6Y"
                                         name:
                                           type: "string"
                                         description:
@@ -35548,6 +35573,7 @@ paths:
                                 - "liquid"
                                 - "typesafe"
                                 - "berget"
+                                - "cloudflare"
                                 - "slack"
                                 - "orq"
                                 - null
@@ -37386,6 +37412,7 @@ paths:
                           - "liquid"
                           - "typesafe"
                           - "berget"
+                          - "cloudflare"
                           - "slack"
                           - "orq"
                           - null
@@ -38524,6 +38551,7 @@ paths:
                           - "liquid"
                           - "typesafe"
                           - "berget"
+                          - "cloudflare"
                           - "slack"
                           - "orq"
                           - null
@@ -40377,6 +40405,7 @@ paths:
                           - "liquid"
                           - "typesafe"
                           - "berget"
+                          - "cloudflare"
                           - "slack"
                           - "orq"
                           - null
@@ -41575,6 +41604,7 @@ paths:
                                     - "liquid"
                                     - "typesafe"
                                     - "berget"
+                                    - "cloudflare"
                                     - "slack"
                                     - "orq"
                                     - null
@@ -42708,6 +42738,7 @@ paths:
                               - "liquid"
                               - "typesafe"
                               - "berget"
+                              - "cloudflare"
                               - "slack"
                               - "orq"
                               - null
@@ -43596,7 +43627,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M4H4GSWX4R2FGN5TRST5RZAB"
+                              default: "tool_01M4HAB6N80DBVM76CX2CB44JM"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -43697,7 +43728,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M4H4GSWY5G7DM96WAYEVHH0X"
+                              default: "tool_01M4HAB6N8C5T7K6JY5CY618V9"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -43800,7 +43831,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M4H4GSWY6KAYZ4YJ8K83GASC"
+                              default: "tool_01M4HAB6N983T2AFAGAK0RCQYF"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -43944,7 +43975,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M4H4GSWZQ3493QXY0NY8JKAA"
+                              default: "tool_01M4HAB6N9VSVA3AJJ9NFQJKFQ"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -44435,7 +44466,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M4H4GSX2YVB3D1A8ENXEGQ22"
+                        default: "tool_01M4HAB6NBG1445W075K08D34C"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -44536,7 +44567,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M4H4GSX25BPW648GDBQZB408"
+                        default: "tool_01M4HAB6NCZWFH0CFH2W3J6PG6"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -44639,7 +44670,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M4H4GSX3V0CXGEJGRFEQXXPM"
+                        default: "tool_01M4HAB6NC1Z3D2PT6AE31D7CP"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -44783,7 +44814,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M4H4GSX47EMC9A1DFA4BFYBH"
+                        default: "tool_01M4HAB6NDZQ4DTPZW69NDCYB6"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -45281,7 +45312,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M4H4GSX63ZG57TXSQ8Q4FFYS"
+                        default: "tool_01M4HAB6NE50NA8MPCXE3MBEX9"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -45382,7 +45413,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M4H4GSX6WSZVKQWC5Y3TNR8J"
+                        default: "tool_01M4HAB6NEBTG3MBJ6PSQM6JKA"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -45485,7 +45516,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M4H4GSX7QVTB8WK4B6JYVNK2"
+                        default: "tool_01M4HAB6NF0719XPQZTG5YJJ76"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -45629,7 +45660,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M4H4GSX7D9SQ1VMXQV6ZYSFM"
+                        default: "tool_01M4HAB6NF8VKRKG9G6BTFV72Y"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -45790,7 +45821,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M4H4GSXD7JX9JWJSHDK9BAZ5"
+                        default: "tool_01M4HAB6NKNAD4X92GAGSJQXYC"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -45891,7 +45922,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M4H4GSXE8SE53C8ZZP09PPBF"
+                        default: "tool_01M4HAB6NKRRN8PETEKKWKBWR2"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -45994,7 +46025,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M4H4GSXEZWREW9HMF6SN1J5G"
+                        default: "tool_01M4HAB6NMFKGVSTJ5YP1P0JB2"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -46138,7 +46169,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M4H4GSXFDX4DW88PGE519VAT"
+                        default: "tool_01M4HAB6NNKJ7NY9MJ6MPQ8ZJC"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -52446,7 +52477,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-10-09T20:08:52.942Z"
+                      default: "2026-10-09T21:50:40.844Z"
                       deprecated: true
                       description: "Deprecated. The date and time the item was reviewed"
                     type:
@@ -52488,7 +52519,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-10-09T20:08:52.942Z"
+                      default: "2026-10-09T21:50:40.844Z"
                       deprecated: true
                       description: "Deprecated. The date and time the item was reviewed"
                     type:
@@ -52530,7 +52561,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-10-09T20:08:52.943Z"
+                      default: "2026-10-09T21:50:40.844Z"
                       deprecated: true
                       description: "Deprecated. The date and time the item was reviewed"
                     type:
@@ -52572,7 +52603,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-10-09T20:08:52.943Z"
+                      default: "2026-10-09T21:50:40.844Z"
                       deprecated: true
                       description: "Deprecated. The date and time the item was reviewed"
                     type:
@@ -52675,7 +52706,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-10-09T20:08:46.356Z"
+                          default: "2026-10-09T21:50:35.798Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -52683,7 +52714,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-10-09T20:08:46.357Z"
+                              default: "2026-10-09T21:50:35.799Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -52753,7 +52784,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-10-09T20:08:46.356Z"
+                          default: "2026-10-09T21:50:35.798Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -52761,7 +52792,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-10-09T20:08:46.357Z"
+                              default: "2026-10-09T21:50:35.799Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -52937,7 +52968,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-10-09T20:08:46.356Z"
+                        default: "2026-10-09T21:50:35.798Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -52945,7 +52976,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-10-09T20:08:46.357Z"
+                            default: "2026-10-09T21:50:35.799Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -53015,7 +53046,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-10-09T20:08:46.356Z"
+                        default: "2026-10-09T21:50:35.798Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -53023,7 +53054,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-10-09T20:08:46.357Z"
+                            default: "2026-10-09T21:50:35.799Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -53117,7 +53148,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-10-09T20:08:46.356Z"
+                        default: "2026-10-09T21:50:35.798Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -53125,7 +53156,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-10-09T20:08:46.357Z"
+                            default: "2026-10-09T21:50:35.799Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -53195,7 +53226,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-10-09T20:08:46.356Z"
+                        default: "2026-10-09T21:50:35.798Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -53203,7 +53234,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-10-09T20:08:46.357Z"
+                            default: "2026-10-09T21:50:35.799Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -53387,7 +53418,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-10-09T20:08:46.356Z"
+                        default: "2026-10-09T21:50:35.798Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -53395,7 +53426,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-10-09T20:08:46.357Z"
+                            default: "2026-10-09T21:50:35.799Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -53465,7 +53496,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-10-09T20:08:46.356Z"
+                        default: "2026-10-09T21:50:35.798Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -53473,7 +53504,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-10-09T20:08:46.357Z"
+                            default: "2026-10-09T21:50:35.799Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -69245,7 +69276,7 @@ paths:
   /v3/router/classify:
     post:
       deprecated: true
-      description: "**Deprecated.** Use `POST /v3/router/decisions` and `orq.router.decisions.create()` for new integrations. This endpoint remains available for backward compatibility with the same request and response contract.\n\n**Beta.** Evaluate content against named questions and receive structured answers, probabilities, and usage costs. Send the content as `state` and define each entry in `questions` as:\n\n- `noul`: estimate the probability that a statement is true.\n- `choice`: select an option from a set.\n- `score`: rate the content on an ordered scale.\n\nUse a native decision model or a supported chat model. Configure ordered `fallbacks`, optional `retry`, and `timeout.call_timeout` in milliseconds. Each retry and fallback gets a fresh timeout; omit `retry` to move directly to the next fallback on timeout. The response identifies the model that answered.\n\nRequires the `classify` API-key permission. PII plugins and guardrails are not applied. See the [Decisions guide](/ai-gateway/features/decisions) for supported models, probability interpretation, and refusals."
+      description: "**Deprecated.** Use `POST /v3/router/decisions` and `orq.router.decisions.create()` for new integrations. This endpoint remains available for backward compatibility with the same request and response contract.\n\n**Beta.** Evaluate content against named questions and receive structured answers, probabilities, and usage costs. Send the content as `state` and define each entry in `questions` as:\n\n- `noul`: estimate the probability that a statement is true.\n- `choice`: select an option from a set.\n- `score`: rate the content on an ordered scale.\n\nUse a native decision model or a supported chat model. Configure ordered `fallbacks`, optional `retry`, `timeout.call_timeout` in milliseconds, and an exact-match `cache`. Each retry and fallback gets a fresh timeout; omit `retry` to move directly to the next fallback on timeout. The response identifies the model that answered.\n\nRequires the `classify` API-key permission. PII plugins and guardrails are not applied. See the [Decisions guide](/ai-gateway/features/decisions) for supported models, probability interpretation, and refusals."
       operationId: "CreateClassify"
       requestBody:
         content:
@@ -69359,6 +69390,9 @@ paths:
             schema:
               additionalProperties: false
               properties:
+                cache:
+                  $ref: "#/components/schemas/ClassifyCacheConfig"
+                  description: "Exact-match response cache for this request. An identical request body from the same workspace and project is served from the stored response, with the X-Cache header reporting HIT or MISS."
                 fallbacks:
                   description: "Up to 10 fallback models in order. The gateway retries a model for matching error codes before trying the next model. Every model must support classification and satisfy access checks. Image requests require native OpenAI image-capable fallbacks."
                   items:
@@ -69744,7 +69778,7 @@ paths:
         - ApiKey: []
   /v3/router/decisions:
     post:
-      description: "**Beta.** Evaluate content against named questions and receive structured answers, probabilities, and usage costs. Send the content as `state` and define each entry in `questions` as:\n\n- `noul`: estimate the probability that a statement is true.\n- `choice`: select an option from a set.\n- `score`: rate the content on an ordered scale.\n\nUse a native decision model or a supported chat model. Configure ordered `fallbacks`, optional `retry`, and `timeout.call_timeout` in milliseconds. Each retry and fallback gets a fresh timeout; omit `retry` to move directly to the next fallback on timeout. The response identifies the model that answered.\n\nRequires the `classify` API-key permission. PII plugins and guardrails are not applied. See the [Decisions guide](/ai-gateway/features/decisions) for supported models, probability interpretation, and refusals."
+      description: "**Beta.** Evaluate content against named questions and receive structured answers, probabilities, and usage costs. Send the content as `state` and define each entry in `questions` as:\n\n- `noul`: estimate the probability that a statement is true.\n- `choice`: select an option from a set.\n- `score`: rate the content on an ordered scale.\n\nUse a native decision model or a supported chat model. Configure ordered `fallbacks`, optional `retry`, `timeout.call_timeout` in milliseconds, and an exact-match `cache`. Each retry and fallback gets a fresh timeout; omit `retry` to move directly to the next fallback on timeout. The response identifies the model that answered.\n\nRequires the `classify` API-key permission. PII plugins and guardrails are not applied. See the [Decisions guide](/ai-gateway/features/decisions) for supported models, probability interpretation, and refusals."
       operationId: "CreateDecisions"
       requestBody:
         content:
@@ -69858,6 +69892,9 @@ paths:
             schema:
               additionalProperties: false
               properties:
+                cache:
+                  $ref: "#/components/schemas/ClassifyCacheConfig"
+                  description: "Exact-match response cache for this request. An identical request body from the same workspace and project is served from the stored response, with the X-Cache header reporting HIT or MISS."
                 fallbacks:
                   description: "Up to 10 fallback models in order. The gateway retries a model for matching error codes before trying the next model. Every model must support classification and satisfy access checks. Image requests require native OpenAI image-capable fallbacks."
                   items:
