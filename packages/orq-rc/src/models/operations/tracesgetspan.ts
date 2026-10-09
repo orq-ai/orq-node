@@ -6,6 +6,9 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 
 export type TracesGetSpanRequest = {
+  /**
+   * Optional: queue items predating trace_id capture only have the span.
+   */
   traceId: string;
   spanId: string;
 };

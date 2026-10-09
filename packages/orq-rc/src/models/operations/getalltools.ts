@@ -639,7 +639,7 @@ export const DataCodeExecutionTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01M4E34XP4FNRMGKZQ3XW7N1RA"),
+  _id: z.string().default("tool_01M4G8RBYN0WW58T25ZQE9P1ZX"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -821,7 +821,7 @@ export const DataHTTPTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01M4E34XP3BH1K3A71NYRXKAZ2"),
+  _id: z.string().default("tool_01M4G8RBYMVZ2YMEDG6J2BXP14"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -914,7 +914,7 @@ export const DataJSONSchemaTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01M4E34XP3Z43M4B56DS5SH8DC"),
+  _id: z.string().default("tool_01M4G8RBYKZPVA74WVPY8DMR2F"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
@@ -1012,7 +1012,7 @@ export const DataFunctionTool$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  _id: z.string().default("tool_01M4E34XP3S2DMR8YE6VVSS1VY"),
+  _id: z.string().default("tool_01M4G8RBYJNCZ510T003SGT9SH"),
   path: z.string(),
   key: z.string(),
   display_name: z.string().optional(),
