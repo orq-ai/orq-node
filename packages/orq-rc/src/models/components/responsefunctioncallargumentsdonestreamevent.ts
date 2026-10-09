@@ -24,6 +24,10 @@ export type ResponseFunctionCallArgumentsDoneStreamEvent = {
    */
   itemId: string;
   /**
+   * The function name.
+   */
+  name?: string | undefined;
+  /**
    * Index of the output item in the response output array.
    */
   outputIndex: number;
@@ -48,6 +52,7 @@ export const ResponseFunctionCallArgumentsDoneStreamEvent$inboundSchema:
     z.object({
       arguments: z.string(),
       item_id: z.string(),
+      name: z.string().optional(),
       output_index: z.number().int(),
       sequence_number: z.number().int(),
       type: z.literal("response.function_call_arguments.done"),

@@ -1,21 +1,19 @@
-# ResponseReasoningSummaryPartDoneStreamEvent
+# ResponseShellCallOutputContentDoneStreamEvent
 
-A `response.reasoning_summary_part.done` server-sent event.
+A `response.shell_call_output_content.done` server-sent event.
 
 ## Example Usage
 
 ```typescript
-import { ResponseReasoningSummaryPartDoneStreamEvent } from "@orq-ai/node/models/components";
+import { ResponseShellCallOutputContentDoneStreamEvent } from "@orq-ai/node/models/components";
 
-let value: ResponseReasoningSummaryPartDoneStreamEvent = {
+let value: ResponseShellCallOutputContentDoneStreamEvent = {
+  commandIndex: 853788,
   itemId: "<id>",
-  outputIndex: 680285,
-  part: {
-    "key": "<value>",
-  },
-  sequenceNumber: 606296,
-  summaryIndex: 996469,
-  type: "response.reasoning_summary_part.done",
+  output: [],
+  outputIndex: 642098,
+  sequenceNumber: 774113,
+  type: "response.shell_call_output_content.done",
 };
 ```
 
@@ -23,11 +21,10 @@ let value: ResponseReasoningSummaryPartDoneStreamEvent = {
 
 | Field                                                         | Type                                                          | Required                                                      | Description                                                   |
 | ------------------------------------------------------------- | ------------------------------------------------------------- | ------------------------------------------------------------- | ------------------------------------------------------------- |
+| `commandIndex`                                                | *number*                                                      | :heavy_check_mark:                                            | Index of the shell command.                                   |
 | `itemId`                                                      | *string*                                                      | :heavy_check_mark:                                            | ID of the output item this event refers to.                   |
+| `output`                                                      | Record<string, *any*>[]                                       | :heavy_check_mark:                                            | N/A                                                           |
 | `outputIndex`                                                 | *number*                                                      | :heavy_check_mark:                                            | Index of the output item in the response output array.        |
-| `part`                                                        | Record<string, *any*>                                         | :heavy_check_mark:                                            | The reasoning summary part.                                   |
 | `sequenceNumber`                                              | *number*                                                      | :heavy_check_mark:                                            | Monotonically increasing sequence number for ordering events. |
-| `status`                                                      | *string*                                                      | :heavy_minus_sign:                                            | The completed summary part status, when supplied.             |
-| `summaryIndex`                                                | *number*                                                      | :heavy_check_mark:                                            | Index of the reasoning summary part.                          |
-| `type`                                                        | *"response.reasoning_summary_part.done"*                      | :heavy_check_mark:                                            | The event type. Discriminates the payload.                    |
+| `type`                                                        | *"response.shell_call_output_content.done"*                   | :heavy_check_mark:                                            | The event type. Discriminates the payload.                    |
 | `additionalProperties`                                        | Record<string, *any*>                                         | :heavy_minus_sign:                                            | N/A                                                           |

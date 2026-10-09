@@ -12,79 +12,71 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * A `response.reasoning_summary_part.added` server-sent event.
+ * A `response.shell_call_output_content.done` server-sent event.
  */
-export type ResponseReasoningSummaryPartAddedStreamEvent = {
+export type ResponseShellCallOutputContentDoneStreamEvent = {
+  /**
+   * Index of the shell command.
+   */
+  commandIndex: number;
   /**
    * ID of the output item this event refers to.
    */
   itemId: string;
+  output: Array<{ [k: string]: any }>;
   /**
    * Index of the output item in the response output array.
    */
   outputIndex: number;
   /**
-   * The reasoning summary part.
-   */
-  part: { [k: string]: any };
-  /**
    * Monotonically increasing sequence number for ordering events.
    */
   sequenceNumber: number;
   /**
-   * The completed summary part status, when supplied.
-   */
-  status?: string | undefined;
-  /**
-   * Index of the reasoning summary part.
-   */
-  summaryIndex: number;
-  /**
    * The event type. Discriminates the payload.
    */
-  type: "response.reasoning_summary_part.added";
+  type: "response.shell_call_output_content.done";
   additionalProperties?: { [k: string]: any } | undefined;
 };
 
 /** @internal */
-export const ResponseReasoningSummaryPartAddedStreamEvent$inboundSchema:
+export const ResponseShellCallOutputContentDoneStreamEvent$inboundSchema:
   z.ZodType<
-    ResponseReasoningSummaryPartAddedStreamEvent,
+    ResponseShellCallOutputContentDoneStreamEvent,
     z.ZodTypeDef,
     unknown
   > = collectExtraKeys$(
     z.object({
+      command_index: z.number().int(),
       item_id: z.string(),
+      output: z.array(z.record(z.any())),
       output_index: z.number().int(),
-      part: z.record(z.any()),
       sequence_number: z.number().int(),
-      status: z.string().optional(),
-      summary_index: z.number().int(),
-      type: z.literal("response.reasoning_summary_part.added"),
+      type: z.literal("response.shell_call_output_content.done"),
     }).catchall(z.any()),
     "additionalProperties",
     true,
   ).transform((v) => {
     return remap$(v, {
+      "command_index": "commandIndex",
       "item_id": "itemId",
       "output_index": "outputIndex",
       "sequence_number": "sequenceNumber",
-      "summary_index": "summaryIndex",
     });
   });
 
-export function responseReasoningSummaryPartAddedStreamEventFromJSON(
+export function responseShellCallOutputContentDoneStreamEventFromJSON(
   jsonString: string,
 ): SafeParseResult<
-  ResponseReasoningSummaryPartAddedStreamEvent,
+  ResponseShellCallOutputContentDoneStreamEvent,
   SDKValidationError
 > {
   return safeParse(
     jsonString,
     (x) =>
-      ResponseReasoningSummaryPartAddedStreamEvent$inboundSchema.parse(
+      ResponseShellCallOutputContentDoneStreamEvent$inboundSchema.parse(
         JSON.parse(x),
       ),
-    `Failed to parse 'ResponseReasoningSummaryPartAddedStreamEvent' from JSON`,
+    `Failed to parse 'ResponseShellCallOutputContentDoneStreamEvent' from JSON`,
   );
 }
