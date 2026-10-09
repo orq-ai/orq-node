@@ -2559,7 +2559,7 @@ components:
           properties:
             _id:
               type: "string"
-              default: "reasoning_01m4gd6yttgv9d36vz51fyhetc"
+              default: "reasoning_01m4gnqfvp3k2665xp9gsx2bcp"
               description: "Unique identifier for the part. Format: reasoning_{ulid} (e.g., reasoning_01hxyz...)"
               example: "reasoning_01hxyz123abc"
             kind:
@@ -20276,6 +20276,9 @@ components:
         item_id:
           description: "ID of the output item this event refers to."
           type: "string"
+        name:
+          description: "The function name."
+          type: "string"
         output_index:
           description: "Index of the output item in the response output array."
           type: "integer"
@@ -20399,8 +20402,14 @@ components:
       additionalProperties: true
       description: "A `response.image_generation_call.partial_image` server-sent event."
       properties:
+        background:
+          description: "Image background."
+          type: "string"
         item_id:
           description: "ID of the output item this event refers to."
+          type: "string"
+        output_format:
+          description: "Image encoding format."
           type: "string"
         output_index:
           description: "Index of the output item in the response output array."
@@ -20411,9 +20420,15 @@ components:
         partial_image_index:
           description: "Index of the partial image."
           type: "integer"
+        quality:
+          description: "Image quality."
+          type: "string"
         sequence_number:
           description: "Monotonically increasing sequence number for ordering events."
           type: "integer"
+        size:
+          description: "Image dimensions."
+          type: "string"
         type:
           description: "The event type. Discriminates the payload."
           enum:
@@ -20955,6 +20970,9 @@ components:
         sequence_number:
           description: "Monotonically increasing sequence number for ordering events."
           type: "integer"
+        status:
+          description: "The completed summary part status, when supplied."
+          type: "string"
         summary_index:
           description: "Index of the reasoning summary part."
           type: "integer"
@@ -20989,6 +21007,9 @@ components:
         sequence_number:
           description: "Monotonically increasing sequence number for ordering events."
           type: "integer"
+        status:
+          description: "The completed summary part status, when supplied."
+          type: "string"
         summary_index:
           description: "Index of the reasoning summary part."
           type: "integer"
@@ -21229,6 +21250,166 @@ components:
         - "count"
         - "on_codes"
       type: "object"
+    ResponseShellCallCommandAddedStreamEvent:
+      additionalProperties: true
+      description: "A `response.shell_call_command.added` server-sent event."
+      properties:
+        command:
+          description: "The shell command."
+          type: "string"
+        command_index:
+          description: "Index of the shell command."
+          type: "integer"
+        output_index:
+          description: "Index of the output item in the response output array."
+          type: "integer"
+        sequence_number:
+          description: "Monotonically increasing sequence number for ordering events."
+          type: "integer"
+        type:
+          description: "The event type. Discriminates the payload."
+          enum:
+            - "response.shell_call_command.added"
+          type: "string"
+      required:
+        - "type"
+        - "sequence_number"
+        - "command_index"
+        - "output_index"
+        - "command"
+      title: "Shell Call Command Added"
+      type: "object"
+    ResponseShellCallCommandDeltaStreamEvent:
+      additionalProperties: true
+      description: "A `response.shell_call_command.delta` server-sent event."
+      properties:
+        command_index:
+          description: "Index of the shell command."
+          type: "integer"
+        delta:
+          description: "Incremental text or argument chunk."
+          type: "string"
+        obfuscation:
+          description: "Obfuscation padding accompanying the delta, when present."
+          type: "string"
+        output_index:
+          description: "Index of the output item in the response output array."
+          type: "integer"
+        sequence_number:
+          description: "Monotonically increasing sequence number for ordering events."
+          type: "integer"
+        type:
+          description: "The event type. Discriminates the payload."
+          enum:
+            - "response.shell_call_command.delta"
+          type: "string"
+      required:
+        - "type"
+        - "sequence_number"
+        - "command_index"
+        - "output_index"
+        - "delta"
+      title: "Shell Call Command Delta"
+      type: "object"
+    ResponseShellCallCommandDoneStreamEvent:
+      additionalProperties: true
+      description: "A `response.shell_call_command.done` server-sent event."
+      properties:
+        command:
+          description: "The shell command."
+          type: "string"
+        command_index:
+          description: "Index of the shell command."
+          type: "integer"
+        output_index:
+          description: "Index of the output item in the response output array."
+          type: "integer"
+        sequence_number:
+          description: "Monotonically increasing sequence number for ordering events."
+          type: "integer"
+        type:
+          description: "The event type. Discriminates the payload."
+          enum:
+            - "response.shell_call_command.done"
+          type: "string"
+      required:
+        - "type"
+        - "sequence_number"
+        - "command_index"
+        - "output_index"
+        - "command"
+      title: "Shell Call Command Done"
+      type: "object"
+    ResponseShellCallOutputContentDeltaStreamEvent:
+      additionalProperties: true
+      description: "A `response.shell_call_output_content.delta` server-sent event."
+      properties:
+        command_index:
+          description: "Index of the shell command."
+          type: "integer"
+        delta:
+          additionalProperties: true
+          description: "Shell stdout and stderr deltas."
+          type: "object"
+        item_id:
+          description: "ID of the output item this event refers to."
+          type: "string"
+        output_index:
+          description: "Index of the output item in the response output array."
+          type: "integer"
+        sequence_number:
+          description: "Monotonically increasing sequence number for ordering events."
+          type: "integer"
+        type:
+          description: "The event type. Discriminates the payload."
+          enum:
+            - "response.shell_call_output_content.delta"
+          type: "string"
+      required:
+        - "type"
+        - "sequence_number"
+        - "command_index"
+        - "item_id"
+        - "output_index"
+        - "delta"
+      title: "Shell Call Output Content Delta"
+      type: "object"
+    ResponseShellCallOutputContentDoneStreamEvent:
+      additionalProperties: true
+      description: "A `response.shell_call_output_content.done` server-sent event."
+      properties:
+        command_index:
+          description: "Index of the shell command."
+          type: "integer"
+        item_id:
+          description: "ID of the output item this event refers to."
+          type: "string"
+        output:
+          items:
+            additionalProperties: true
+            description: "Shell command output and exit outcome."
+            type: "object"
+          type: "array"
+        output_index:
+          description: "Index of the output item in the response output array."
+          type: "integer"
+        sequence_number:
+          description: "Monotonically increasing sequence number for ordering events."
+          type: "integer"
+        type:
+          description: "The event type. Discriminates the payload."
+          enum:
+            - "response.shell_call_output_content.done"
+          type: "string"
+      required:
+        - "type"
+        - "sequence_number"
+        - "command_index"
+        - "item_id"
+        - "output_index"
+        - "output"
+      title: "Shell Call Output Content Done"
+      type: "object"
     ResponseStreamEvent:
       description: "A single server-sent event emitted on the response stream. The `type` field discriminates the payload."
       discriminator:
@@ -21281,6 +21462,11 @@ components:
           response.reasoning_text.done: "#/components/schemas/ResponseReasoningTextDoneStreamEvent"
           response.refusal.delta: "#/components/schemas/ResponseRefusalDeltaStreamEvent"
           response.refusal.done: "#/components/schemas/ResponseRefusalDoneStreamEvent"
+          response.shell_call_command.added: "#/components/schemas/ResponseShellCallCommandAddedStreamEvent"
+          response.shell_call_command.delta: "#/components/schemas/ResponseShellCallCommandDeltaStreamEvent"
+          response.shell_call_command.done: "#/components/schemas/ResponseShellCallCommandDoneStreamEvent"
+          response.shell_call_output_content.delta: "#/components/schemas/ResponseShellCallOutputContentDeltaStreamEvent"
+          response.shell_call_output_content.done: "#/components/schemas/ResponseShellCallOutputContentDoneStreamEvent"
           response.web_search_call.completed: "#/components/schemas/ResponseWebSearchCallCompletedStreamEvent"
           response.web_search_call.in_progress: "#/components/schemas/ResponseWebSearchCallInProgressStreamEvent"
           response.web_search_call.searching: "#/components/schemas/ResponseWebSearchCallSearchingStreamEvent"
@@ -21336,6 +21522,11 @@ components:
         - $ref: "#/components/schemas/ResponseCustomToolCallInputDeltaStreamEvent"
         - $ref: "#/components/schemas/ResponseCustomToolCallInputDoneStreamEvent"
         - $ref: "#/components/schemas/ResponseImageGenerationCallPartialImageStreamEvent"
+        - $ref: "#/components/schemas/ResponseShellCallCommandAddedStreamEvent"
+        - $ref: "#/components/schemas/ResponseShellCallCommandDoneStreamEvent"
+        - $ref: "#/components/schemas/ResponseShellCallCommandDeltaStreamEvent"
+        - $ref: "#/components/schemas/ResponseShellCallOutputContentDeltaStreamEvent"
+        - $ref: "#/components/schemas/ResponseShellCallOutputContentDoneStreamEvent"
         - $ref: "#/components/schemas/ResponseErrorStreamEvent"
       title: "Response Stream Event"
     ResponseTelemetry:
@@ -32884,7 +33075,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01M4GD6YVX35F0BASAE6DT8W76"
+                                          default: "01M4GNQFWR6T7KK2KXPN0S8J5E"
                                         name:
                                           type: "string"
                                         description:
@@ -34482,7 +34673,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01M4GD6YWB6HH4S6ESFZ6ANKW6"
+                                          default: "01M4GNQFX36K42K8K8WBT1P3SW"
                                         name:
                                           type: "string"
                                         description:
@@ -43391,7 +43582,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M4GD6YX503SWDWRAZ9VSWMFN"
+                              default: "tool_01M4GNQFXXFHHRCM4NNHMDVZ25"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -43492,7 +43683,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M4GD6YX58THYVJ623GV5FYEZ"
+                              default: "tool_01M4GNQFXXN3NN55Q91G40784B"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -43595,7 +43786,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M4GD6YX6S785SXB2KRMND93H"
+                              default: "tool_01M4GNQFXX4RHC945VYAPK0J8A"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -43739,7 +43930,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M4GD6YX6X3GZ6NJTFHDYH7MA"
+                              default: "tool_01M4GNQFXYA85Z7F2EBKTC3ZAC"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -44230,7 +44421,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M4GD6YX8EARFYAF5QJQC94Z6"
+                        default: "tool_01M4GNQFY0WB800V4JSBXW1G9E"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -44331,7 +44522,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M4GD6YX994R7YZ5Z2X3D5KSJ"
+                        default: "tool_01M4GNQFY0158BB78TKHEYSPKM"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -44434,7 +44625,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M4GD6YX9CVQJ5ZAZ97XW5J82"
+                        default: "tool_01M4GNQFY1YP7HJ9139GKY2KSP"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -44578,7 +44769,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M4GD6YX9MHXFJHYS2KAR4P1X"
+                        default: "tool_01M4GNQFY1RW67PYJVBM6TK785"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -45076,7 +45267,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M4GD6YXB6SQ28RFRFXEE7YWN"
+                        default: "tool_01M4GNQFY2SPM9QFJT9J5V01BV"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -45177,7 +45368,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M4GD6YXBVRD3GT613C58R891"
+                        default: "tool_01M4GNQFY3F7G93BRFYAH3HNZZ"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -45280,7 +45471,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M4GD6YXCKTXR980TPS9TQ5E7"
+                        default: "tool_01M4GNQFY3G48ZPEQ7ZWQXY637"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -45424,7 +45615,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M4GD6YXC4EQARNGGA2NG4Y0J"
+                        default: "tool_01M4GNQFY3SMRPBPENRA17TWFA"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -45585,7 +45776,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M4GD6YXG397VQC64SVDSTHZ3"
+                        default: "tool_01M4GNQFY7DY1PT8SZ7M1XYFQ7"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -45686,7 +45877,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M4GD6YXG9BVFPD5XFTEACM2Y"
+                        default: "tool_01M4GNQFY8YV3BHVQSMVD91QSR"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -45789,7 +45980,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M4GD6YXH3YFDZKCRA6AA2RNJ"
+                        default: "tool_01M4GNQFY8RZJ3SX9554SZ1WXP"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -45933,7 +46124,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M4GD6YXHSG89NPCZBN22FGDK"
+                        default: "tool_01M4GNQFY9ZZFNAMF22NX22S55"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -52241,7 +52432,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-10-09T13:21:33.127Z"
+                      default: "2026-10-09T15:50:23.454Z"
                       deprecated: true
                       description: "Deprecated. The date and time the item was reviewed"
                     type:
@@ -52283,7 +52474,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-10-09T13:21:33.127Z"
+                      default: "2026-10-09T15:50:23.454Z"
                       deprecated: true
                       description: "Deprecated. The date and time the item was reviewed"
                     type:
@@ -52325,7 +52516,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-10-09T13:21:33.127Z"
+                      default: "2026-10-09T15:50:23.454Z"
                       deprecated: true
                       description: "Deprecated. The date and time the item was reviewed"
                     type:
@@ -52367,7 +52558,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-10-09T13:21:33.127Z"
+                      default: "2026-10-09T15:50:23.454Z"
                       deprecated: true
                       description: "Deprecated. The date and time the item was reviewed"
                     type:
@@ -52470,7 +52661,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-10-09T13:21:28.324Z"
+                          default: "2026-10-09T15:50:18.630Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -52478,7 +52669,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-10-09T13:21:28.324Z"
+                              default: "2026-10-09T15:50:18.630Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -52548,7 +52739,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-10-09T13:21:28.324Z"
+                          default: "2026-10-09T15:50:18.630Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -52556,7 +52747,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-10-09T13:21:28.324Z"
+                              default: "2026-10-09T15:50:18.630Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -52732,7 +52923,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-10-09T13:21:28.324Z"
+                        default: "2026-10-09T15:50:18.630Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -52740,7 +52931,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-10-09T13:21:28.324Z"
+                            default: "2026-10-09T15:50:18.630Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -52810,7 +53001,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-10-09T13:21:28.324Z"
+                        default: "2026-10-09T15:50:18.630Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -52818,7 +53009,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-10-09T13:21:28.324Z"
+                            default: "2026-10-09T15:50:18.630Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -52912,7 +53103,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-10-09T13:21:28.324Z"
+                        default: "2026-10-09T15:50:18.630Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -52920,7 +53111,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-10-09T13:21:28.324Z"
+                            default: "2026-10-09T15:50:18.630Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -52990,7 +53181,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-10-09T13:21:28.324Z"
+                        default: "2026-10-09T15:50:18.630Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -52998,7 +53189,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-10-09T13:21:28.324Z"
+                            default: "2026-10-09T15:50:18.630Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -53182,7 +53373,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-10-09T13:21:28.324Z"
+                        default: "2026-10-09T15:50:18.630Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -53190,7 +53381,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-10-09T13:21:28.324Z"
+                            default: "2026-10-09T15:50:18.630Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -53260,7 +53451,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-10-09T13:21:28.324Z"
+                        default: "2026-10-09T15:50:18.630Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -53268,7 +53459,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-10-09T13:21:28.324Z"
+                            default: "2026-10-09T15:50:18.630Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
