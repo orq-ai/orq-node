@@ -87,6 +87,7 @@ export type Questions = NoulQuestion | ChoiceQuestion | ScoreQuestion;
 export type State = string | { [k: string]: any } | Array<any>;
 
 export type CreateClassifyRequestBody = {
+  cache?: components.ClassifyCacheConfig | undefined;
   /**
    * Up to 10 fallback models in order. The gateway retries a model for matching error codes before trying the next model. Every model must support classification and satisfy access checks. Image requests require native OpenAI image-capable fallbacks.
    */
@@ -312,6 +313,7 @@ export function stateToJSON(state: State): string {
 
 /** @internal */
 export type CreateClassifyRequestBody$Outbound = {
+  cache?: components.ClassifyCacheConfig$Outbound | undefined;
   fallbacks?: Array<components.FallbackConfig$Outbound> | null | undefined;
   identity?: components.ResponseIdentity$Outbound | undefined;
   metadata?: { [k: string]: string } | undefined;
@@ -334,6 +336,7 @@ export const CreateClassifyRequestBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateClassifyRequestBody
 > = z.object({
+  cache: components.ClassifyCacheConfig$outboundSchema.optional(),
   fallbacks: z.nullable(z.array(components.FallbackConfig$outboundSchema))
     .optional(),
   identity: components.ResponseIdentity$outboundSchema.optional(),

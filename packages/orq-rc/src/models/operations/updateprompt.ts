@@ -1441,6 +1441,7 @@ export const UpdatePromptProvider = {
   Liquid: "liquid",
   Typesafe: "typesafe",
   Berget: "berget",
+  Cloudflare: "cloudflare",
   Slack: "slack",
   Orq: "orq",
 } as const;

@@ -85,6 +85,7 @@ export * from "./chunksservicelistresponse.js";
 export * from "./chunksservicesetenabledrequest.js";
 export * from "./chunksserviceupdaterequest.js";
 export * from "./classifyanswer.js";
+export * from "./classifycacheconfig.js";
 export * from "./classifychoiceanswer.js";
 export * from "./classifyinputtokensdetails.js";
 export * from "./classifynoulanswer.js";
