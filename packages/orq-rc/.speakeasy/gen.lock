@@ -1,20 +1,20 @@
 lockVersion: 2.0.0
 id: e953f19a-4543-490e-bba2-d73a1538b74b
 management:
-  docChecksum: b9691cf2e3c19ab42cb320cbf3a775ee
+  docChecksum: add7c818f58ff99b7e73d30c8607160e
   docVersion: "2.0"
   speakeasyVersion: 1.801.0
   generationVersion: 2.946.0
-  releaseVersion: 4.17.0-rc.7
-  configChecksum: 4a80373c50444aa315b20467ab50ff8d
+  releaseVersion: 4.17.0-rc.8
+  configChecksum: ac8bf17ff7f505cbe6de215e4b99ed33
   repoURL: https://github.com/orq-ai/orq-node.git
   repoSubDirectory: packages/orq-rc
   installationURL: https://github.com/orq-ai/orq-node
   published: true
 persistentEdits:
-  generation_id: c3ed6ec2-5874-45ac-b7ab-4be6341f0e9e
-  pristine_commit_hash: 6db589fd24339cf1a49437e6fd1412082fb5fd41
-  pristine_tree_hash: ab9adce612f7bc696ec657e39255f818a45b390a
+  generation_id: 065cea52-f947-44d0-bbad-ec9a3ce9d3b9
+  pristine_commit_hash: 9a04e530138a0427a24cc5ab9d4e2e9656aed652
+  pristine_tree_hash: 4ff6b4a801d993c06d6748e4fd9b0adec1567bd2
 features:
   typescript:
     acceptHeaders: 2.81.2
@@ -787,6 +787,10 @@ trackedFiles:
     id: bdda48d31543
     last_write_checksum: sha1:5da050e2629bb1186eb3c880c9e762fc4df6a5af
     pristine_git_object: e11e40c429c653531c25381df642c85fb625cb71
+  docs/models/components/classifytimeoutconfig.md:
+    id: d66ed6d58c52
+    last_write_checksum: sha1:61dd8aeae615d71cdced0d4c85dce8505a040653
+    pristine_git_object: 6edef2c36dc14acd313bcc93d14cafb0d042d166
   docs/models/components/classifyusage.md:
     id: c1d433dc555a
     last_write_checksum: sha1:743368315230fe8cd4a86eaedc0ec3acd44c6a8e
@@ -5101,8 +5105,12 @@ trackedFiles:
     pristine_git_object: 5b3543cb4d4c4796bd870362f528e32f0320cdac
   docs/models/errors/createclassifyresponsebody.md:
     id: b4cf9265d8ff
-    last_write_checksum: sha1:e12336e33c8c8a4621fed1637a8a79f47e569e35
-    pristine_git_object: 92d3aa9af50a257ee227155ce086bd9c4cc3d7f1
+    last_write_checksum: sha1:cb34e01b791139fb30c19f5d1421b3ebb80a7837
+    pristine_git_object: 22164e94a5cbf8940e608322a93671ef259fba85
+  docs/models/errors/createclassifyrouterclassifyresponse408responsebody.md:
+    id: c5038f889ad1
+    last_write_checksum: sha1:1d874cdef47aded80a146835a5a84948d09e891d
+    pristine_git_object: faa87bbbbe8e73cbd668c44fae310143155cb545
   docs/models/errors/createclassifyrouterclassifyresponse422responsebody.md:
     id: d250328e4a0f
     last_write_checksum: sha1:2bb9275f6732a9e5d46681a010ba121cfaef53ec
@@ -5129,8 +5137,12 @@ trackedFiles:
     pristine_git_object: 4b52d2c78beff8a2e062b829e94a9c177e06eeb9
   docs/models/errors/createdecisionsresponsebody.md:
     id: 5d586cb6a338
-    last_write_checksum: sha1:c5cd4f0f11d1778aaecef07efe91df7102622bcb
-    pristine_git_object: f45078786068ff3d8357bdf9b4ebbe65880230ce
+    last_write_checksum: sha1:93aa1784be16e7fcb7e2b4d1b3accd736a2099e9
+    pristine_git_object: 72d5af72852ddf702444cdc2a9dcc0d941ec9bd1
+  docs/models/errors/createdecisionsrouterdecisionsresponse408responsebody.md:
+    id: d1df43b20dbc
+    last_write_checksum: sha1:8b1c18ea2d1ecf1251c737efbbe05c80fb4f89e5
+    pristine_git_object: 5fef05e377d185b502d9f3436759092184b660a6
   docs/models/errors/createdecisionsrouterdecisionsresponse422responsebody.md:
     id: 1fa575141d69
     last_write_checksum: sha1:542e197c394304b7d19c7df4eb2d4733f73996aa
@@ -6757,8 +6769,8 @@ trackedFiles:
     pristine_git_object: 17ab0453c9d85a5713e42f9487d5e822b66724ba
   docs/models/operations/createclassifyrequestbody.md:
     id: d7baf6300410
-    last_write_checksum: sha1:441d7e6aeeed959d8521d3d8c974a546e58b5513
-    pristine_git_object: 41aba8f8306e6ac79e6456c8df55c19f7a056df9
+    last_write_checksum: sha1:983a4004e040f9ac93f0985dae710b7318485657
+    pristine_git_object: ed341132a93659e8a57d5195fc7af07cb89e055c
   docs/models/operations/createclassifyresponsebody.md:
     id: 0346a18d2d0a
     last_write_checksum: sha1:81a9dd67508c160e7c1f5b6bd779529eeeec8a0c
@@ -7149,8 +7161,8 @@ trackedFiles:
     pristine_git_object: 5ddb2e1ac9d1d9b5e2a8f34f6720726de7c34217
   docs/models/operations/createdecisionsrequestbody.md:
     id: 150e6583d34c
-    last_write_checksum: sha1:89519a43d534796fefd5aad51ebb7910b4e443bb
-    pristine_git_object: 12cccf37e96fe5434b793b888bbd11412b2e5167
+    last_write_checksum: sha1:f4e4520b265e2e5eff87b3cf49f18c09b7f1c96c
+    pristine_git_object: 7b6e1ace5b857705fdd5b05c7063e2ab29a10d2b
   docs/models/operations/createdecisionsresponsebody.md:
     id: 9b44bcbc6b30
     last_write_checksum: sha1:aa075e239d40931267560b89e4fb2ec8858cc4b6
@@ -10501,8 +10513,8 @@ trackedFiles:
     pristine_git_object: 23a669305bf3290ce5de6da811c66eb739df8827
   docs/models/operations/getalltoolsresponsebody.md:
     id: 21315a96cb5b
-    last_write_checksum: sha1:703ea6faf3a76748d87fcaf6be6448fd873b4788
-    pristine_git_object: 37e144e25596782bf0a4dc21c3b2a3e2d970b191
+    last_write_checksum: sha1:38a9ed0dad8c43f4b0d3c5c94d55f9e40d307924
+    pristine_git_object: 2abc41eac8351583d75669824be10facee2ced98
   docs/models/operations/getchunkscountrequest.md:
     id: ac37b515e111
     last_write_checksum: sha1:5c3ac8ae830ef265634da7d51655fa872afb31d6
@@ -17637,8 +17649,8 @@ trackedFiles:
     pristine_git_object: ac65eb2f2d65d11d2ccf2adfcd2165064fbc77ea
   docs/sdks/classify/README.md:
     id: 7c7df6e9ebe2
-    last_write_checksum: sha1:832ae6f03a09120b6eedc3c2420bb8d740297dda
-    pristine_git_object: 390caa867cdd86089594fb41f222396ca05f903e
+    last_write_checksum: sha1:bf11b6bf7970985dd649bbe98b8445c9bd8e9d0c
+    pristine_git_object: 0ecfc90ebdd5f4d49ef1eaff1b0f2c90a565dfc6
   docs/sdks/completions/README.md:
     id: bfc4f87accdb
     last_write_checksum: sha1:2baa5a25cc6c3e715abd765b906597631433f722
@@ -17649,8 +17661,8 @@ trackedFiles:
     pristine_git_object: 965ea69fed3aa6df979853d240be8ba99c30e556
   docs/sdks/decisions/README.md:
     id: ff338046c642
-    last_write_checksum: sha1:014285eed1c7ba61d1a8edb7b9c9eebc4417f0bb
-    pristine_git_object: b3a56730b01f5a0f9f96a65f6054d70959bb3113
+    last_write_checksum: sha1:85093a1fb28618aabc6588133d2a6f96db144e02
+    pristine_git_object: 5590586a695f67c676fda18b14db5a2b0a342c3c
   docs/sdks/deployments/README.md:
     id: e7c5559ab768
     last_write_checksum: sha1:899da8764b99971c7de5eb374b9c9559647249ac
@@ -17885,12 +17897,12 @@ trackedFiles:
     pristine_git_object: 4cf0d2ceb6acaa225a9f3afe05e2913f263c3462
   jsr.json:
     id: 7f6ab7767282
-    last_write_checksum: sha1:244c6e7840c9b6cc08b0d59dee3ef57165b90ef6
-    pristine_git_object: 81485a61b1120adb8a0df344c98f3efde223986c
+    last_write_checksum: sha1:3f8883f13cee4bccb7a82dfa5d3109151fa66ad1
+    pristine_git_object: 4c36fabb76006044591f3f9c87ac3081526effa0
   package.json:
     id: 7030d0b2f71b
-    last_write_checksum: sha1:1b13baaec485265bc344f298839c866398470f2e
-    pristine_git_object: 02917f5e026ef1120b13df222429b0a2bff5f6a6
+    last_write_checksum: sha1:aca0107ed897a1663c636ca9a5bcebf295b7b277
+    pristine_git_object: a2fe2f7753634db905ed17f46b8504925e8c0488
   src/core.ts:
     id: f431fdbcd144
     last_write_checksum: sha1:06cbcf678f38adf43f7fa3f7c1cfbb7a536903c9
@@ -18849,16 +18861,16 @@ trackedFiles:
     pristine_git_object: a4c8920cea9f96b8f750395534bd523391ffe978
   src/funcs/routerClassifyCreate.ts:
     id: b01aa4fb6389
-    last_write_checksum: sha1:741b4cf17cbd326a01993647516a1159d1299c88
-    pristine_git_object: 72dbdbdda30b382cc67447ec7b1852bff3954a77
+    last_write_checksum: sha1:29e2a35ae4698c9ad5b99012b45f70e0d67f9e33
+    pristine_git_object: 668ac57e5ea8e680e09dbb4f519836ecdf203467
   src/funcs/routerCompletionsCreate.ts:
     id: 332cab3e3c5b
     last_write_checksum: sha1:65b229096ddb94205b033a5638217a27c4dc6763
     pristine_git_object: ead732d8227f7b1560029ccd60fcb7cdeae7a239
   src/funcs/routerDecisionsCreate.ts:
     id: 4bc89c78ff68
-    last_write_checksum: sha1:fa65b0f307b64ff22bb328e274629763ab806829
-    pristine_git_object: 58963ba86d1abc39534c3f83c44f417d0834e0c2
+    last_write_checksum: sha1:55cf46f7be739c0f5e50c47dfc548959f11f1290
+    pristine_git_object: 457bd88b26a01ffc7da8df9839e4b42460337258
   src/funcs/routerEmbeddingsCreate.ts:
     id: dc71dd43e27b
     last_write_checksum: sha1:e1169aa742ecec75ac3cf785a8320bb2feff6bd7
@@ -19265,8 +19277,8 @@ trackedFiles:
     pristine_git_object: 0aebd8b0a4867e35cb3348fc52921c3c0b4725b7
   src/lib/config.ts:
     id: 320761608fb3
-    last_write_checksum: sha1:879d27202b3a984ab88247fa7697627a68864f96
-    pristine_git_object: b1b210bc8b3030f8724272e7e594eba287206111
+    last_write_checksum: sha1:12aeca83ae515321b11740679788c295d9695d4f
+    pristine_git_object: da2f154cbf31cfa59ff5b9a4958edf81563ca0ef
   src/lib/encodings.ts:
     id: 3bd8ead98afd
     last_write_checksum: sha1:a257d6f6108693db2197617c579400bc8f0da914
@@ -19675,6 +19687,10 @@ trackedFiles:
     id: 9e90592718fd
     last_write_checksum: sha1:fdc402be15095df893215602dc1e5668185d8b2e
     pristine_git_object: eb2f6a58a46ffab10d2decccd32992b01531f8e2
+  src/models/components/classifytimeoutconfig.ts:
+    id: da941e2984a7
+    last_write_checksum: sha1:ca994c76e55ea59355b3ec6a224ccc7c8bed2d97
+    pristine_git_object: 6acb72d92f56eb686e6664e0710bb7c6bdef782e
   src/models/components/classifyusage.ts:
     id: da786381949a
     last_write_checksum: sha1:2cdff2d55446876d5dc312af41f834cd42f400fb
@@ -20449,8 +20465,8 @@ trackedFiles:
     pristine_git_object: 5a9a0850b853b2f9db8a098d885162065fa9e48c
   src/models/components/index.ts:
     id: 0aa842dce54d
-    last_write_checksum: sha1:8a4d66b7a7b8d4a8d3b764d598cb94b548e0790d
-    pristine_git_object: 6cf4ffa69b2f96d16174e242381e22af9d4fe7ee
+    last_write_checksum: sha1:1ac6b7733500581f8c77b6b28a708c76fd04606b
+    pristine_git_object: ca1c8f987695c2d81540c1c1fe93daee2b8c12ff
   src/models/components/inputtokensdetails.ts:
     id: 34cf8af8d9e2
     last_write_checksum: sha1:7061e17257edbfa4129ebb0b7b253812facafc8f
@@ -21213,8 +21229,8 @@ trackedFiles:
     pristine_git_object: 04903cd42d2d0ab6fb65bdcd0345e62b36bf01ea
   src/models/components/reasoningpart.ts:
     id: 60c791422ccb
-    last_write_checksum: sha1:94f0257ab3a7a182019ec98cb237c091d16b2ea7
-    pristine_git_object: f37f08239809863636c3a19048719179290bc52f
+    last_write_checksum: sha1:8a2ad9b495101b3472d72bcf0fd32d1ee1ce5669
+    pristine_git_object: f1e3823a2aeafad400a10f91f6a7a06128d3681c
   src/models/components/reasoningpartschema.ts:
     id: 51d31d0f4f79
     last_write_checksum: sha1:b1655ea3101450cb67a1bfd56d22980dfe3e22e3
@@ -22285,12 +22301,12 @@ trackedFiles:
     pristine_git_object: 1257e3e2dbae71b4c384038bd6bb4eac85ac928a
   src/models/errors/createclassify.ts:
     id: 24e9f3a067fb
-    last_write_checksum: sha1:a68839fe5cf5c589dc31115b1dc12d09216867b2
-    pristine_git_object: a895ebc96763bde29938b41f8721aa3cc883e64f
+    last_write_checksum: sha1:068e0b3ff39b7509e06f56201ddf21d26ce5011a
+    pristine_git_object: 0b27f921a53d7178b59b1014eec0a6219d79c171
   src/models/errors/createdecisions.ts:
     id: d49438ceda43
-    last_write_checksum: sha1:8364dc7d0a01dadea7c1431a52159fec68a85cc6
-    pristine_git_object: afa14f0fb73c2ff752d643d656f864f417e173e1
+    last_write_checksum: sha1:636f6583127912813f30d6ffa4e453214c394053
+    pristine_git_object: 5befc06c35f66cffacd8380f3db8437f426b88c8
   src/models/errors/createeval.ts:
     id: 9ec768b47943
     last_write_checksum: sha1:03ecd1e6b00fe1cb84bc0935ef2970db7fbe71bf
@@ -22541,8 +22557,8 @@ trackedFiles:
     pristine_git_object: a2afe77a64f676160194d67f348167bcd35b7c82
   src/models/operations/createclassify.ts:
     id: cf366f0fde54
-    last_write_checksum: sha1:4d73caab9ffa7a5861e98e0f6a7bb3922a099029
-    pristine_git_object: 4ef763b0022d30dd8b08588949612a12d0f4c500
+    last_write_checksum: sha1:3a53950c9b6f16e543710891fc21e9f5d7b02377
+    pristine_git_object: 11a7e01320aaea4395198202f7f2b017b3e40053
   src/models/operations/createcompletion.ts:
     id: 54735d1e6a5a
     last_write_checksum: sha1:85973d01aea20416cfeec128d872aed22ba21701
@@ -22557,8 +22573,8 @@ trackedFiles:
     pristine_git_object: a06f4912d0b1459a264668c066dc37be90096b20
   src/models/operations/createdecisions.ts:
     id: 9d818ffd2b76
-    last_write_checksum: sha1:cae9c9663de81a04d8daa049e7a76a834ca182ca
-    pristine_git_object: 6c91c21714568fae06c43be312eaca4d08425409
+    last_write_checksum: sha1:c8cf0e7d554d287c8b1972ea005b6c565c0e33e0
+    pristine_git_object: 3c3181ef2f37cf606a9eb5236878087195e95d15
   src/models/operations/createembedding.ts:
     id: d6c58aae537e
     last_write_checksum: sha1:b165c0d7ad7c9f2c12782a437f2b745f7c096a87
@@ -22617,8 +22633,8 @@ trackedFiles:
     pristine_git_object: c3c71ac3c980a45d6a35e724f222b0e5496da37b
   src/models/operations/createtool.ts:
     id: a60d92110eae
-    last_write_checksum: sha1:ed8435e842e45321dfc34113e5a31760e5a775bb
-    pristine_git_object: bc06ae6be0fdf39f020cb7a52fbc609de8240a2f
+    last_write_checksum: sha1:96581edc08a6a44e8bf704798406e96793ed6f63
+    pristine_git_object: e2ec93d35a620dff351e5a2273f6b208d8b5fedf
   src/models/operations/createtranscription.ts:
     id: 9a143abb247e
     last_write_checksum: sha1:2df0bf65bb60519815e842346615c19e0ec3ed84
@@ -22793,8 +22809,8 @@ trackedFiles:
     pristine_git_object: a1a172c14ada7b331490ac3594aa229a264c5a43
   src/models/operations/getalltools.ts:
     id: b61aae342581
-    last_write_checksum: sha1:739d3f690647c419b7d507229dcfc6864e491c36
-    pristine_git_object: 09bfb36467a7960c1750d3b80167e5f8080c982d
+    last_write_checksum: sha1:c16412625966343aca57f8409c6c4aabf3b83376
+    pristine_git_object: 4cd416f32e281dd3954527bca23b8e44c4eb8a36
   src/models/operations/getchunkscount.ts:
     id: 5df96041413a
     last_write_checksum: sha1:2f5df1ac159ff592468ec45c81a5589d1bfc2d75
@@ -22849,12 +22865,12 @@ trackedFiles:
     pristine_git_object: f59afe04b40a6b804d3aa2c462289db249db7216
   src/models/operations/getv2humanevalsets.ts:
     id: cdbced4ec510
-    last_write_checksum: sha1:c9f09cab8cf67b5a4a55e5dc481f804682f48e70
-    pristine_git_object: a9c2ddd61d1eb45ea4de4fc472ce4681b3a199bb
+    last_write_checksum: sha1:95e7bb7fbe20e2a9bdf414939d8fb2855889b16b
+    pristine_git_object: 1ceb2115dc98af5790748638a5298d42e531e8e8
   src/models/operations/getv2humanevalsetsid.ts:
     id: bba83e08158f
-    last_write_checksum: sha1:eabcd60b3757fc25126a21153cb2dc66bf963608
-    pristine_git_object: 26ae6fad1c8234929250a67208e3a5b3ba44e71d
+    last_write_checksum: sha1:65d7df9da1c82e75ae39f2766e9a3a5a593c9f0d
+    pristine_git_object: c54261a24d92c6e1ef4844ed09ec04b870c728c0
   src/models/operations/getv2toolstoolidversions.ts:
     id: aacc7424ce4e
     last_write_checksum: sha1:95ac145a162dcfbbb42489d006d9f25d61cbe0de
@@ -23165,8 +23181,8 @@ trackedFiles:
     pristine_git_object: 67a66e89fe99382242b7fda115f99b6f9e7decd4
   src/models/operations/patchv2humanevalsetsid.ts:
     id: 07cbb1bc8ccb
-    last_write_checksum: sha1:918769c8a080fcdf30448b0c57e1b64db2c6d3b0
-    pristine_git_object: c26567a3ec2faed1b97a16297eae4273e126ccab
+    last_write_checksum: sha1:752b38cf111ba462726ea3d95950e175a17e631a
+    pristine_git_object: b2a6746fdc0798540a27815953721de19bf0ecd3
   src/models/operations/policycreate.ts:
     id: a68fda0920e9
     last_write_checksum: sha1:204ba4344d4783a17b795e00d5e1035884173f5b
@@ -23193,8 +23209,8 @@ trackedFiles:
     pristine_git_object: 01bd0e0d007c6f57573ec84b99dc06f2d17935e7
   src/models/operations/postv2feedbackevaluation.ts:
     id: a0e947acf097
-    last_write_checksum: sha1:08e659c967707b1fc35faeb993fd5d91ca609f70
-    pristine_git_object: 671d748a988cffedb2bf7df3846ddbc358f91d00
+    last_write_checksum: sha1:682b692609f9909facb612817ad8a65181351bd1
+    pristine_git_object: 94ccc41d82d7b34b9dafa540410368e4e011ad76
   src/models/operations/postv2feedbackevaluationremove.ts:
     id: e92f23a9d978
     last_write_checksum: sha1:df3dbc2b10978f501f7899287eaeb5188e6d9b38
@@ -23205,8 +23221,8 @@ trackedFiles:
     pristine_git_object: b8ad5401d9ce6e087eed648e340d105d8db866d8
   src/models/operations/postv2humanevalsets.ts:
     id: 1a6666d6e86a
-    last_write_checksum: sha1:bb4156fdb8795878bec736461217a3830ffe16d9
-    pristine_git_object: af8364257f371803b0f5d3871212e5d425934c75
+    last_write_checksum: sha1:9e319e40c736df9a46561d595862def73ce7a08c
+    pristine_git_object: bf2c98b8f5d85cc003fb59a238702e4761df2af3
   src/models/operations/postv2routerocr.ts:
     id: f68f6afb85d5
     last_write_checksum: sha1:308f1c5cbaaeb6a2b77e2d24c58fb9f913ff4623
@@ -23293,8 +23309,8 @@ trackedFiles:
     pristine_git_object: 0076ff36dd79df27188a87d5ac596fd7cd31a476
   src/models/operations/retrievetool.ts:
     id: 5e769769390f
-    last_write_checksum: sha1:ea2993fafa2045cb2dfd76c9fab0ac4e6ecfc58c
-    pristine_git_object: 96b6c7a8df2a0b3aff864cdd80a8eecf71294955
+    last_write_checksum: sha1:a71804a63f3af8f12d42099bb17d7b1f50f7a998
+    pristine_git_object: 857036bc6127976c9c08cae5da49611081f7b187
   src/models/operations/routingruledelete.ts:
     id: 77bfe37edd40
     last_write_checksum: sha1:94e292fd0d9c576eccc3ed17b4774f83a7b429ce
@@ -23317,8 +23333,8 @@ trackedFiles:
     pristine_git_object: be729275df0664ea006d10cdafae6ac400624471
   src/models/operations/runagent.ts:
     id: 58a38d9df148
-    last_write_checksum: sha1:23b5299058aa26cb427eb56533ec2ea17ed93635
-    pristine_git_object: 4d7359a0c873e1cfcbc690b93983f2633fe897fd
+    last_write_checksum: sha1:e1a728e61d51914c20cc19230d20492e56c0dffd
+    pristine_git_object: 2e03352030186f9dc352225b55534401a181d0e8
   src/models/operations/searchknowledge.ts:
     id: b675baf944c8
     last_write_checksum: sha1:7af8cc4d4c50b18972abbf549d7503cdd80a6ac1
@@ -23373,8 +23389,8 @@ trackedFiles:
     pristine_git_object: 6b874af002c8938c956f1f37d5ffe6fdf9a85355
   src/models/operations/streamrunagent.ts:
     id: 575f8e1a1e6e
-    last_write_checksum: sha1:3074ad4975e5f92b652dfbf265345aaf9de93ee1
-    pristine_git_object: bd0632210bdbad64a63b1c7eb7d54de161103414
+    last_write_checksum: sha1:73fb5b810bc2ed4541a0a11ed5845855e869a841
+    pristine_git_object: 174b3ad0cf263f9263a91989716c417318803f56
   src/models/operations/telemetrylistcapabilities.ts:
     id: df21ed3c4b5e
     last_write_checksum: sha1:2cbb142e1eded8d11e1c90e953ad07315d8bd841
@@ -23477,8 +23493,8 @@ trackedFiles:
     pristine_git_object: 2c7c7fb293d7db3d7c2617e13402f816a58e34b7
   src/models/operations/updatetool.ts:
     id: f8c4ba69e202
-    last_write_checksum: sha1:6abc893fdd5097ea417e56e14f1eb16689243b69
-    pristine_git_object: 6d78bc66a962cf87cc6f24e90dbc4c1aee0602af
+    last_write_checksum: sha1:0654a808522f126a2ab33a5b46737b6687fa2ca3
+    pristine_git_object: b369ee08add9e61647d7c28ebbb5672beef2e61d
   src/models/operations/updatewiki.ts:
     id: acbc72237165
     last_write_checksum: sha1:cc5af9628337fb6004b0f8e72f4537f9445e7bf1
@@ -23601,8 +23617,8 @@ trackedFiles:
     pristine_git_object: 3579de537fc032f6d01641c17a1588fecf77b922
   src/sdk/classify.ts:
     id: 54040502b6ff
-    last_write_checksum: sha1:68287f80ef73d22f9e9429bb8f280e79c622b260
-    pristine_git_object: d57d4b3816cf9b7fd3cf7146bf5c2ee42e8429c2
+    last_write_checksum: sha1:c6341bbfd326f48e052d6a02554cd98a88ec3ddf
+    pristine_git_object: 2cbbe534f3bb50e9f397a1d3dabff4572f2147ac
   src/sdk/completions.ts:
     id: b452d35d53b4
     last_write_checksum: sha1:c0d6eeb9b5d0ecc7ee29f48e20bdb663cc2a5155
@@ -23613,8 +23629,8 @@ trackedFiles:
     pristine_git_object: 2cccb3dea701b6be6533f218b5216fed98d845cb
   src/sdk/decisions.ts:
     id: 0e5d2e557690
-    last_write_checksum: sha1:3596e6718f2460597075e0ec3ff07dd976cd5dbc
-    pristine_git_object: b9676d58679a90cc4baee5e80f8107f316241a96
+    last_write_checksum: sha1:053901f65b29516a332bc9a7687689d3e5551c5e
+    pristine_git_object: a737e1ce39e36526426156220ebb7cad0e6c1863
   src/sdk/deployments.ts:
     id: 80d6fb28a717
     last_write_checksum: sha1:39f03923ee0da713cd6e2f7991564911a5aab662
@@ -27762,6 +27778,8 @@ examples:
           application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "type": "<value>"}}
         "502":
           application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "type": "<value>"}}
+        "408":
+          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "type": "<value>"}}
     speakeasy-default-create-classify:
       requestBody:
         application/json: {"model": "LeBaron", "questions": {}, "state": {}}
@@ -27776,7 +27794,7 @@ examples:
           application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "type": "<value>"}}
     fallback_retry_identity:
       requestBody:
-        application/json: {"fallbacks": [{"model": "openai/gpt-5.6-luna"}], "identity": {"display_name": "Sample customer", "id": "customer-demo"}, "model": "openai/gpt-6-luna", "questions": {"positive": {"criteria": {"false": "The customer is unhappy.", "true": "The customer is happy."}, "instructions": "Is the sentiment positive?", "type": "noul"}, "rating": {"criteria": ["Negative", "Neutral", "Positive"], "instructions": "Rate sentiment.", "type": "score"}, "sentiment": {"criteria": {"negative": "Negative sentiment", "neutral": "<value>", "positive": "Positive sentiment"}, "instructions": "Classify sentiment.", "type": "choice"}}, "retry": {"count": 2, "on_codes": [429, 502, 503, 504]}, "state": "The customer says: I love this product. It is wonderful!"}
+        application/json: {"fallbacks": [{"model": "openai/gpt-5.6-luna"}], "identity": {"display_name": "Sample customer", "id": "customer-demo"}, "model": "openai/gpt-6-luna", "questions": {"positive": {"criteria": {"false": "The customer is unhappy.", "true": "The customer is happy."}, "instructions": "Is the sentiment positive?", "type": "noul"}, "rating": {"criteria": ["Negative", "Neutral", "Positive"], "instructions": "Rate sentiment.", "type": "score"}, "sentiment": {"criteria": {"negative": "Negative sentiment", "neutral": "<value>", "positive": "Positive sentiment"}, "instructions": "Classify sentiment.", "type": "choice"}}, "retry": {"count": 2, "on_codes": [429, 502, 503, 504]}, "state": "The customer says: I love this product. It is wonderful!", "timeout": {"call_timeout": 2000}}
       responses:
         "200":
           application/json: {"answers": {}, "model": "Jetta", "usage": {"input_tokens": 225719, "output_tokens": 209640}}
@@ -27793,6 +27811,8 @@ examples:
         "500":
           application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "type": "<value>"}}
         "502":
+          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "type": "<value>"}}
+        "408":
           application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "type": "<value>"}}
     openai_inline_image:
       requestBody:
@@ -27814,6 +27834,8 @@ examples:
           application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "type": "<value>"}}
         "502":
           application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "type": "<value>"}}
+        "408":
+          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "type": "<value>"}}
     openai_text:
       requestBody:
         application/json: {"model": "openai/gpt-6-luna", "questions": {"positive": {"criteria": {"false": "The customer is unhappy.", "true": "The customer is happy."}, "instructions": "Is the sentiment positive?", "type": "noul"}, "rating": {"criteria": ["Negative", "Neutral", "Positive"], "instructions": "Rate sentiment.", "type": "score"}, "sentiment": {"criteria": {"negative": "Negative sentiment", "neutral": "<value>", "positive": "Positive sentiment"}, "instructions": "Classify sentiment.", "type": "choice"}}, "state": "The customer says: I love this product. It is wonderful!"}
@@ -27833,6 +27855,8 @@ examples:
         "500":
           application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "type": "<value>"}}
         "502":
+          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "type": "<value>"}}
+        "408":
           application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "type": "<value>"}}
     openai_answers:
       requestBody:
@@ -28231,7 +28255,7 @@ examples:
   CreateDecisions:
     fallback_retry_identity:
       requestBody:
-        application/json: {"fallbacks": [{"model": "openai/gpt-5.6-luna"}], "identity": {"display_name": "Sample customer", "id": "customer-demo"}, "model": "openai/gpt-6-luna", "questions": {"positive": {"criteria": {"false": "The customer is unhappy.", "true": "The customer is happy."}, "instructions": "Is the sentiment positive?", "type": "noul"}, "rating": {"criteria": ["Negative", "Neutral", "Positive"], "instructions": "Rate sentiment.", "type": "score"}, "sentiment": {"criteria": {"negative": "Negative sentiment", "neutral": "<value>", "positive": "Positive sentiment"}, "instructions": "Classify sentiment.", "type": "choice"}}, "retry": {"count": 2, "on_codes": [429, 502, 503, 504]}, "state": "The customer says: I love this product. It is wonderful!"}
+        application/json: {"fallbacks": [{"model": "openai/gpt-5.6-luna"}], "identity": {"display_name": "Sample customer", "id": "customer-demo"}, "model": "openai/gpt-6-luna", "questions": {"positive": {"criteria": {"false": "The customer is unhappy.", "true": "The customer is happy."}, "instructions": "Is the sentiment positive?", "type": "noul"}, "rating": {"criteria": ["Negative", "Neutral", "Positive"], "instructions": "Rate sentiment.", "type": "score"}, "sentiment": {"criteria": {"negative": "Negative sentiment", "neutral": "<value>", "positive": "Positive sentiment"}, "instructions": "Classify sentiment.", "type": "choice"}}, "retry": {"count": 2, "on_codes": [429, 502, 503, 504]}, "state": "The customer says: I love this product. It is wonderful!", "timeout": {"call_timeout": 2000}}
       responses:
         "200":
           application/json: {"answers": {"key": {"noul": 1483.74, "type": "noul"}}, "model": "Taurus", "usage": {"input_tokens": 863618, "output_tokens": 912451}}
@@ -28248,6 +28272,8 @@ examples:
         "500":
           application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "type": "<value>"}}
         "502":
+          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "type": "<value>"}}
+        "408":
           application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "type": "<value>"}}
     openai_inline_image:
       requestBody:
@@ -28269,6 +28295,8 @@ examples:
           application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "type": "<value>"}}
         "502":
           application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "type": "<value>"}}
+        "408":
+          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "type": "<value>"}}
     openai_text:
       requestBody:
         application/json: {"model": "openai/gpt-6-luna", "questions": {"positive": {"criteria": {"false": "The customer is unhappy.", "true": "The customer is happy."}, "instructions": "Is the sentiment positive?", "type": "noul"}, "rating": {"criteria": ["Negative", "Neutral", "Positive"], "instructions": "Rate sentiment.", "type": "score"}, "sentiment": {"criteria": {"negative": "Negative sentiment", "neutral": "<value>", "positive": "Positive sentiment"}, "instructions": "Classify sentiment.", "type": "choice"}}, "state": "The customer says: I love this product. It is wonderful!"}
@@ -28288,6 +28316,8 @@ examples:
         "500":
           application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "type": "<value>"}}
         "502":
+          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "type": "<value>"}}
+        "408":
           application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "type": "<value>"}}
     support_ticket:
       requestBody:
@@ -28309,6 +28339,8 @@ examples:
           application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "type": "<value>"}}
         "502":
           application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "type": "<value>"}}
+        "408":
+          application/json: {"error": {"code": "<value>", "message": "<value>", "param": "<value>", "type": "<value>"}}
     openai_answers:
       requestBody:
         application/json: {"model": "Impala", "questions": {"key": {"instructions": {}, "type": "noul"}}, "state": "California"}
@@ -28323,6 +28355,7 @@ examples:
           application/json: {"answers": {"positive": {"type": "refusal"}, "rating": {"confidence": 1, "legend": {"0": "Negative", "1": "Neutral", "2": "Positive"}, "probabilities": {"0": 0, "1": 0, "2": 1}, "score": 2, "type": "score"}, "sentiment": {"choice": "positive", "confidence": 1, "probabilities": {"negative": 0, "neutral": 0, "positive": 1}, "type": "choice"}}, "model": "openai/gpt-6-luna", "usage": {"input_cost": 0.0000408, "input_tokens": 408, "input_tokens_details": {"cache_write_tokens": 0, "cached_tokens": 0}, "output_cost": 0, "output_tokens": 0, "total_cost": 0.0000408}}
 examplesVersion: 1.0.2
 generatedTests: {}
+releaseNotes: "## Typescript SDK Changes:\n* `orq.router.classify.create()`: \n  *  `request.timeout` **Added**\n  *  `error.status[408]` **Added**\n* `orq.router.decisions.create()`: \n  *  `request.timeout` **Added**\n  *  `error.status[408]` **Added**\n"
 generatedFiles:
   - .gitattributes
   - .npmignore

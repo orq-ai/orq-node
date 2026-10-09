@@ -1459,7 +1459,7 @@ run();
 **Primary error:**
 * [`OrqError`](./src/models/errors/orqerror.ts): The base class for HTTP error responses.
 
-<details><summary>Less common errors (68)</summary>
+<details><summary>Less common errors (70)</summary>
 
 <br />
 
@@ -1480,8 +1480,8 @@ run();
 * [`TriggerAgentScheduleResponseBody`](./src/models/errors/triggeragentscheduleresponsebody.ts): Schedule is inactive. Status code `400`. Applicable to 1 of 337 methods.*
 * [`SearchWebResponseBody`](./src/models/errors/searchwebresponsebody.ts): Invalid request, unusable workspace integration, or a blocking guardrail. Check the request fields and workspace integration settings. Status code `400`. Applicable to 1 of 337 methods.*
 * [`CreateModerationResponseBody`](./src/models/errors/createmoderationresponsebody.ts): Returns validation error. Status code `400`. Applicable to 1 of 337 methods.*
-* [`CreateClassifyResponseBody`](./src/models/errors/createclassifyresponsebody.ts): Malformed JSON, missing or unsupported model, or invalid retry/fallback fields. Status code `400`. Applicable to 1 of 337 methods.*
-* [`CreateDecisionsResponseBody`](./src/models/errors/createdecisionsresponsebody.ts): Malformed JSON, missing or unsupported model, or invalid retry/fallback fields. Status code `400`. Applicable to 1 of 337 methods.*
+* [`CreateClassifyResponseBody`](./src/models/errors/createclassifyresponsebody.ts): Malformed JSON, missing or unsupported model, or invalid retry, timeout, or fallback fields. Status code `400`. Applicable to 1 of 337 methods.*
+* [`CreateDecisionsResponseBody`](./src/models/errors/createdecisionsresponsebody.ts): Malformed JSON, missing or unsupported model, or invalid retry, timeout, or fallback fields. Status code `400`. Applicable to 1 of 337 methods.*
 * [`CompactResponseResponsesResponseBody`](./src/models/errors/compactresponseresponsesresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 337 methods.*
 * [`SearchWebWebsearchResponseBody`](./src/models/errors/searchwebwebsearchresponsebody.ts): Missing or invalid API key. Send a valid API key in the Authorization header. Status code `401`. Applicable to 1 of 337 methods.*
 * [`CreateClassifyRouterClassifyResponseBody`](./src/models/errors/createclassifyrouterclassifyresponsebody.ts): Missing, invalid, expired or revoked API key. Status code `401`. Applicable to 1 of 337 methods.*
@@ -1514,6 +1514,8 @@ run();
 * [`RetrieveAgentScheduleResponseBody`](./src/models/errors/retrieveagentscheduleresponsebody.ts): Schedule not found, or belongs to a different agent. Status code `404`. Applicable to 1 of 337 methods.*
 * [`UpdateAgentScheduleSchedulesResponseBody`](./src/models/errors/updateagentscheduleschedulesresponsebody.ts): Schedule or agent version not found. Status code `404`. Applicable to 1 of 337 methods.*
 * [`TriggerAgentScheduleSchedulesResponseBody`](./src/models/errors/triggeragentscheduleschedulesresponsebody.ts): Schedule not found, or belongs to a different agent. Status code `404`. Applicable to 1 of 337 methods.*
+* [`CreateClassifyRouterClassifyResponse408ResponseBody`](./src/models/errors/createclassifyrouterclassifyresponse408responsebody.ts): The final model call exceeded its timeout after available retries and fallbacks were exhausted. Status code `408`. Applicable to 1 of 337 methods.*
+* [`CreateDecisionsRouterDecisionsResponse408ResponseBody`](./src/models/errors/createdecisionsrouterdecisionsresponse408responsebody.ts): The final model call exceeded its timeout after available retries and fallbacks were exhausted. Status code `408`. Applicable to 1 of 337 methods.*
 * [`DeleteEvalEvalsResponseBody`](./src/models/errors/deleteevalevalsresponsebody.ts): The evaluator is still referenced as an evaluator or guardrail by one or more deployments. Status code `409`. Applicable to 1 of 337 methods.*
 * [`SearchWebWebsearchResponse415ResponseBody`](./src/models/errors/searchwebwebsearchresponse415responsebody.ts): Unsupported or missing Content-Type. Send application/json; an optional charset parameter is accepted. Status code `415`. Applicable to 1 of 337 methods.*
 * [`SearchWebWebsearchResponse422ResponseBody`](./src/models/errors/searchwebwebsearchresponse422responsebody.ts): A configured guardrail evaluator could not complete its evaluation. Status code `422`. Applicable to 1 of 337 methods.*

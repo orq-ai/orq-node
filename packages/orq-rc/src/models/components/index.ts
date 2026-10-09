@@ -91,6 +91,7 @@ export * from "./classifynoulanswer.js";
 export * from "./classifyrefusalanswer.js";
 export * from "./classifyretryconfig.js";
 export * from "./classifyscoreanswer.js";
+export * from "./classifytimeoutconfig.js";
 export * from "./classifyusage.js";
 export * from "./codeinterpretertoolinput.js";
 export * from "./codetoolinput.js";

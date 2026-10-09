@@ -1,6 +1,6 @@
 # CreateDecisionsResponseBody
 
-Malformed JSON, missing or unsupported model, or invalid retry/fallback fields.
+Malformed JSON, missing or unsupported model, or invalid retry, timeout, or fallback fields.
 
 ## Example Usage
 

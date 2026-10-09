@@ -13,7 +13,15 @@
 
 **Deprecated.** Use `POST /v3/router/decisions` and `orq.router.decisions.create()` for new integrations. This endpoint remains available for backward compatibility with the same request and response contract.
 
-**Beta.** Runs typed classification questions (`noul`, `choice`, `score`) against a native classify provider, including OpenAI Decisions with `openai/gpt-6-luna`, or a chat model that supports classify emulation. Emulated models answer through one structured-output call and their probabilities are model-reported rather than calibrated. Native providers can return `refusal` for individual questions; refused answers contain only `type`. The request and response follow the TypeSafe classification contract; `model` in the response identifies the primary or fallback model that answered and `usage` carries the computed cost like the Responses API. Both `/v3/router/classify` and `/v3/router/decisions` use this contract, including ordered `fallbacks`, request-level `retry`, and `identity` attribution. Both require `classify.execute`. This endpoint currently does not apply PII plugins or guardrails.
+**Beta.** Evaluate content against named questions and receive structured answers, probabilities, and usage costs. Send the content as `state` and define each entry in `questions` as:
+
+- `noul`: estimate the probability that a statement is true.
+- `choice`: select an option from a set.
+- `score`: rate the content on an ordered scale.
+
+Use a native decision model or a supported chat model. Configure ordered `fallbacks`, optional `retry`, and `timeout.call_timeout` in milliseconds. Each retry and fallback gets a fresh timeout; omit `retry` to move directly to the next fallback on timeout. The response identifies the model that answered.
+
+Requires the `classify` API-key permission. PII plugins and guardrails are not applied. See the [Decisions guide](/ai-gateway/features/decisions) for supported models, probability interpretation, and refusals.
 
 > :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
@@ -77,6 +85,9 @@ async function run() {
       ],
     },
     state: "The customer says: I love this product. It is wonderful!",
+    timeout: {
+      callTimeout: 2000,
+    },
   });
 
   console.log(result);
@@ -149,6 +160,9 @@ async function run() {
       ],
     },
     state: "The customer says: I love this product. It is wonderful!",
+    timeout: {
+      callTimeout: 2000,
+    },
   });
   if (res.ok) {
     const { value: result } = res;
@@ -600,6 +614,7 @@ run();
 | errors.CreateClassifyResponseBody                          | 400                                                        | application/json                                           |
 | errors.CreateClassifyRouterClassifyResponseBody            | 401                                                        | application/json                                           |
 | errors.CreateClassifyRouterClassifyResponseResponseBody    | 403                                                        | application/json                                           |
+| errors.CreateClassifyRouterClassifyResponse408ResponseBody | 408                                                        | application/json                                           |
 | errors.CreateClassifyRouterClassifyResponse422ResponseBody | 422                                                        | application/json                                           |
 | errors.CreateClassifyRouterClassifyResponse429ResponseBody | 429                                                        | application/json                                           |
 | errors.CreateClassifyRouterClassifyResponse500ResponseBody | 500                                                        | application/json                                           |

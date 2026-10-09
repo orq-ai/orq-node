@@ -1,11 +1,11 @@
-# CreateClassifyResponseBody
+# CreateClassifyRouterClassifyResponse408ResponseBody
 
-Malformed JSON, missing or unsupported model, or invalid retry, timeout, or fallback fields.
+The final model call exceeded its timeout after available retries and fallbacks were exhausted.
 
 ## Example Usage
 
 ```typescript
-import { CreateClassifyResponseBody } from "@orq-ai/node/models/errors";
+import { CreateClassifyRouterClassifyResponse408ResponseBody } from "@orq-ai/node/models/errors";
 
 // No examples available for this model
 ```
