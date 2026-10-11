@@ -598,6 +598,7 @@ export * from "./sharing.js";
 export * from "./sharingallprojects.js";
 export * from "./sharingselectedprojects.js";
 export * from "./sidekicktoolinput.js";
+export * from "./signalscheck.js";
 export * from "./singleprojectscope.js";
 export * from "./skill.js";
 export * from "./smartrouter.js";
