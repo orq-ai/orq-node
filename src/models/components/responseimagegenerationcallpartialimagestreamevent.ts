@@ -16,9 +16,17 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
  */
 export type ResponseImageGenerationCallPartialImageStreamEvent = {
   /**
+   * Image background.
+   */
+  background?: string | undefined;
+  /**
    * ID of the output item this event refers to.
    */
   itemId: string;
+  /**
+   * Image encoding format.
+   */
+  outputFormat?: string | undefined;
   /**
    * Index of the output item in the response output array.
    */
@@ -32,9 +40,17 @@ export type ResponseImageGenerationCallPartialImageStreamEvent = {
    */
   partialImageIndex: number;
   /**
+   * Image quality.
+   */
+  quality?: string | undefined;
+  /**
    * Monotonically increasing sequence number for ordering events.
    */
   sequenceNumber: number;
+  /**
+   * Image dimensions.
+   */
+  size?: string | undefined;
   /**
    * The event type. Discriminates the payload.
    */
@@ -50,11 +66,15 @@ export const ResponseImageGenerationCallPartialImageStreamEvent$inboundSchema:
     unknown
   > = collectExtraKeys$(
     z.object({
+      background: z.string().optional(),
       item_id: z.string(),
+      output_format: z.string().optional(),
       output_index: z.number().int(),
       partial_image_b64: z.string(),
       partial_image_index: z.number().int(),
+      quality: z.string().optional(),
       sequence_number: z.number().int(),
+      size: z.string().optional(),
       type: z.literal("response.image_generation_call.partial_image"),
     }).catchall(z.any()),
     "additionalProperties",
@@ -62,6 +82,7 @@ export const ResponseImageGenerationCallPartialImageStreamEvent$inboundSchema:
   ).transform((v) => {
     return remap$(v, {
       "item_id": "itemId",
+      "output_format": "outputFormat",
       "output_index": "outputIndex",
       "partial_image_b64": "partialImageB64",
       "partial_image_index": "partialImageIndex",

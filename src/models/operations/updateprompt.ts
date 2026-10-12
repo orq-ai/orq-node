@@ -1438,8 +1438,10 @@ export const UpdatePromptProvider = {
   Reson8: "reson8",
   Meta: "meta",
   Greenpt: "greenpt",
+  Liquid: "liquid",
   Typesafe: "typesafe",
   Berget: "berget",
+  Cloudflare: "cloudflare",
   Slack: "slack",
   Orq: "orq",
 } as const;

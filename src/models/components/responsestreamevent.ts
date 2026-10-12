@@ -199,6 +199,26 @@ import {
   ResponseRefusalDoneStreamEvent$inboundSchema,
 } from "./responserefusaldonestreamevent.js";
 import {
+  ResponseShellCallCommandAddedStreamEvent,
+  ResponseShellCallCommandAddedStreamEvent$inboundSchema,
+} from "./responseshellcallcommandaddedstreamevent.js";
+import {
+  ResponseShellCallCommandDeltaStreamEvent,
+  ResponseShellCallCommandDeltaStreamEvent$inboundSchema,
+} from "./responseshellcallcommanddeltastreamevent.js";
+import {
+  ResponseShellCallCommandDoneStreamEvent,
+  ResponseShellCallCommandDoneStreamEvent$inboundSchema,
+} from "./responseshellcallcommanddonestreamevent.js";
+import {
+  ResponseShellCallOutputContentDeltaStreamEvent,
+  ResponseShellCallOutputContentDeltaStreamEvent$inboundSchema,
+} from "./responseshellcalloutputcontentdeltastreamevent.js";
+import {
+  ResponseShellCallOutputContentDoneStreamEvent,
+  ResponseShellCallOutputContentDoneStreamEvent$inboundSchema,
+} from "./responseshellcalloutputcontentdonestreamevent.js";
+import {
   ResponseWebSearchCallCompletedStreamEvent,
   ResponseWebSearchCallCompletedStreamEvent$inboundSchema,
 } from "./responsewebsearchcallcompletedstreamevent.js";
@@ -263,6 +283,11 @@ export type ResponseStreamEvent =
   | ResponseReasoningTextDoneStreamEvent
   | ResponseRefusalDeltaStreamEvent
   | ResponseRefusalDoneStreamEvent
+  | ResponseShellCallCommandAddedStreamEvent
+  | ResponseShellCallCommandDeltaStreamEvent
+  | ResponseShellCallCommandDoneStreamEvent
+  | ResponseShellCallOutputContentDeltaStreamEvent
+  | ResponseShellCallOutputContentDoneStreamEvent
   | ResponseWebSearchCallCompletedStreamEvent
   | ResponseWebSearchCallInProgressStreamEvent
   | ResponseWebSearchCallSearchingStreamEvent;
@@ -321,6 +346,11 @@ export const ResponseStreamEvent$inboundSchema: z.ZodType<
   ResponseReasoningTextDoneStreamEvent$inboundSchema,
   ResponseRefusalDeltaStreamEvent$inboundSchema,
   ResponseRefusalDoneStreamEvent$inboundSchema,
+  ResponseShellCallCommandAddedStreamEvent$inboundSchema,
+  ResponseShellCallCommandDeltaStreamEvent$inboundSchema,
+  ResponseShellCallCommandDoneStreamEvent$inboundSchema,
+  ResponseShellCallOutputContentDeltaStreamEvent$inboundSchema,
+  ResponseShellCallOutputContentDoneStreamEvent$inboundSchema,
   ResponseWebSearchCallCompletedStreamEvent$inboundSchema,
   ResponseWebSearchCallInProgressStreamEvent$inboundSchema,
   ResponseWebSearchCallSearchingStreamEvent$inboundSchema,

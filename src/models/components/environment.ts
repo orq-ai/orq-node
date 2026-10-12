@@ -15,7 +15,7 @@ export type Environment = {
    */
   id: string;
   /**
-   * Immutable workspace-unique environment slug.
+   * Immutable environment slug, unique among the environments a project can see.
    */
   slug: string;
   /**

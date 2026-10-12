@@ -958,6 +958,71 @@ const value: components.ResponseRefusalDoneStreamEvent = {
 };
 ```
 
+### `components.ResponseShellCallCommandAddedStreamEvent`
+
+```typescript
+const value: components.ResponseShellCallCommandAddedStreamEvent = {
+  command: "<value>",
+  commandIndex: 157854,
+  outputIndex: 935090,
+  sequenceNumber: 474875,
+  type: "response.shell_call_command.added",
+};
+```
+
+### `components.ResponseShellCallCommandDeltaStreamEvent`
+
+```typescript
+const value: components.ResponseShellCallCommandDeltaStreamEvent = {
+  commandIndex: 272606,
+  delta: "<value>",
+  outputIndex: 1657,
+  sequenceNumber: 819829,
+  type: "response.shell_call_command.delta",
+};
+```
+
+### `components.ResponseShellCallCommandDoneStreamEvent`
+
+```typescript
+const value: components.ResponseShellCallCommandDoneStreamEvent = {
+  command: "<value>",
+  commandIndex: 433813,
+  outputIndex: 153489,
+  sequenceNumber: 630865,
+  type: "response.shell_call_command.done",
+};
+```
+
+### `components.ResponseShellCallOutputContentDeltaStreamEvent`
+
+```typescript
+const value: components.ResponseShellCallOutputContentDeltaStreamEvent = {
+  commandIndex: 743475,
+  delta: {
+    "key": "<value>",
+    "key1": "<value>",
+  },
+  itemId: "<id>",
+  outputIndex: 503237,
+  sequenceNumber: 378596,
+  type: "response.shell_call_output_content.delta",
+};
+```
+
+### `components.ResponseShellCallOutputContentDoneStreamEvent`
+
+```typescript
+const value: components.ResponseShellCallOutputContentDoneStreamEvent = {
+  commandIndex: 853788,
+  itemId: "<id>",
+  output: [],
+  outputIndex: 642098,
+  sequenceNumber: 774113,
+  type: "response.shell_call_output_content.done",
+};
+```
+
 ### `components.ResponseWebSearchCallCompletedStreamEvent`
 
 ```typescript

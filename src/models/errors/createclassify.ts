@@ -135,6 +135,38 @@ export class CreateClassifyRouterClassifyResponse422ResponseBody
 }
 
 /**
+ * The final model call exceeded its timeout after available retries and fallbacks were exhausted.
+ */
+export type CreateClassifyRouterClassifyResponse408ResponseBodyData = {
+  error: components.APIError;
+};
+
+/**
+ * The final model call exceeded its timeout after available retries and fallbacks were exhausted.
+ */
+export class CreateClassifyRouterClassifyResponse408ResponseBody
+  extends OrqError
+{
+  error: components.APIError;
+
+  /** The original data that was passed to this error instance. */
+  data$: CreateClassifyRouterClassifyResponse408ResponseBodyData;
+
+  constructor(
+    err: CreateClassifyRouterClassifyResponse408ResponseBodyData,
+    httpMeta: { response: Response; request: Request; body: string },
+  ) {
+    const message = err.error?.message
+      || `API error occurred: ${JSON.stringify(err)}`;
+    super(message, httpMeta);
+    this.data$ = err;
+    this.error = err.error;
+
+    this.name = "CreateClassifyRouterClassifyResponse408ResponseBody";
+  }
+}
+
+/**
  * The API key lacks classify permission, or the workspace or project cannot access the model.
  */
 export type CreateClassifyRouterClassifyResponseResponseBodyData = {
@@ -195,14 +227,14 @@ export class CreateClassifyRouterClassifyResponseBody extends OrqError {
 }
 
 /**
- * Malformed JSON, missing or unsupported model, or invalid retry/fallback fields.
+ * Malformed JSON, missing or unsupported model, or invalid retry, timeout, or fallback fields.
  */
 export type CreateClassifyResponseBodyData = {
   error: components.APIError;
 };
 
 /**
- * Malformed JSON, missing or unsupported model, or invalid retry/fallback fields.
+ * Malformed JSON, missing or unsupported model, or invalid retry, timeout, or fallback fields.
  */
 export class CreateClassifyResponseBody extends OrqError {
   error: components.APIError;
@@ -298,6 +330,26 @@ export const CreateClassifyRouterClassifyResponse422ResponseBody$inboundSchema:
   })
     .transform((v) => {
       return new CreateClassifyRouterClassifyResponse422ResponseBody(v, {
+        request: v.request$,
+        response: v.response$,
+        body: v.body$,
+      });
+    });
+
+/** @internal */
+export const CreateClassifyRouterClassifyResponse408ResponseBody$inboundSchema:
+  z.ZodType<
+    CreateClassifyRouterClassifyResponse408ResponseBody,
+    z.ZodTypeDef,
+    unknown
+  > = z.object({
+    error: components.APIError$inboundSchema,
+    request$: z.instanceof(Request),
+    response$: z.instanceof(Response),
+    body$: z.string(),
+  })
+    .transform((v) => {
+      return new CreateClassifyRouterClassifyResponse408ResponseBody(v, {
         request: v.request$,
         response: v.response$,
         body: v.body$,

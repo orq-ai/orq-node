@@ -32,6 +32,10 @@ export type ResponseReasoningSummaryPartDoneStreamEvent = {
    */
   sequenceNumber: number;
   /**
+   * The completed summary part status, when supplied.
+   */
+  status?: string | undefined;
+  /**
    * Index of the reasoning summary part.
    */
   summaryIndex: number;
@@ -54,6 +58,7 @@ export const ResponseReasoningSummaryPartDoneStreamEvent$inboundSchema:
       output_index: z.number().int(),
       part: z.record(z.any()),
       sequence_number: z.number().int(),
+      status: z.string().optional(),
       summary_index: z.number().int(),
       type: z.literal("response.reasoning_summary_part.done"),
     }).catchall(z.any()),
