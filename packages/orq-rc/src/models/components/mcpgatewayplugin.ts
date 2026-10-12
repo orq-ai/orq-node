@@ -18,6 +18,14 @@ export type McpGatewayPlugin = {
   onFailure?: string | undefined;
   threshold?: number | undefined;
   mask?: Array<string> | undefined;
+  /**
+   * Regions of coverage by ISO 3166-1 alpha-2 code, or ["all"]. Combines with entities: the two selections are unioned.
+   */
+  regions?: Array<string> | undefined;
+  /**
+   * Per-entity-type confidence cutoff. Every key must also appear in entities.
+   */
+  entityThresholds?: { [k: string]: number } | undefined;
 };
 
 /** @internal */
@@ -32,9 +40,12 @@ export const McpGatewayPlugin$inboundSchema: z.ZodType<
   on_failure: z.string().optional(),
   threshold: z.number().optional(),
   mask: z.array(z.string()).optional(),
+  regions: z.array(z.string()).optional(),
+  entity_thresholds: z.record(z.number()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "on_failure": "onFailure",
+    "entity_thresholds": "entityThresholds",
   });
 });
 /** @internal */
@@ -45,6 +56,8 @@ export type McpGatewayPlugin$Outbound = {
   on_failure?: string | undefined;
   threshold?: number | undefined;
   mask?: Array<string> | undefined;
+  regions?: Array<string> | undefined;
+  entity_thresholds?: { [k: string]: number } | undefined;
 };
 
 /** @internal */
@@ -59,9 +72,12 @@ export const McpGatewayPlugin$outboundSchema: z.ZodType<
   onFailure: z.string().optional(),
   threshold: z.number().optional(),
   mask: z.array(z.string()).optional(),
+  regions: z.array(z.string()).optional(),
+  entityThresholds: z.record(z.number()).optional(),
 }).transform((v) => {
   return remap$(v, {
     onFailure: "on_failure",
+    entityThresholds: "entity_thresholds",
   });
 });
 
