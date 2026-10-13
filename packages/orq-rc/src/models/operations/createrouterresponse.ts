@@ -882,6 +882,13 @@ export type CreateRouterResponseRequestBody = {
    * Top-level cache control automatically applies a cache_control marker to the last cacheable block in the request.
    */
   cacheControl?: CreateRouterResponseCacheControl | undefined;
+  /**
+   * Context management entries. One compaction entry summarizes history older than compact_threshold into a single item. See the [Context Compaction](https://docs.orq.ai/ai-gateway/features/context-compaction) guide.
+   */
+  contextManagement?:
+    | Array<components.OpenAIContextManagement>
+    | null
+    | undefined;
   conversation?: components.ConversationParam | undefined;
   /**
    * HTTP status codes that trigger fallback. Defaults to [408,429,500,502,503,504,529]. Each code must be unique and between 400 and 599.
@@ -900,6 +907,10 @@ export type CreateRouterResponseRequestBody = {
    */
   guardrails?: Array<components.EvaluatorRef> | undefined;
   identity?: components.ResponseIdentity | undefined;
+  /**
+   * Additional fields to include in the response. Use web_search_call.action.sources to add source URLs and titles to a web search action, or web_search_call.results for detailed results. See the [Web search](https://docs.orq.ai/ai-gateway/features/web-search) guide for the supported values.
+   */
+  include?: Array<string> | undefined;
   /**
    * Input to the model: a string or an array of input items (messages, files, etc.).
    */
@@ -988,6 +999,7 @@ export type CreateRouterResponseRequestBody = {
    * Configuration for text output.
    */
   text?: CreateRouterResponseText | undefined;
+  thinking?: components.ThinkingParam | undefined;
   thread?: components.ResponseThread | undefined;
   timeout?: components.TimeoutConfig | undefined;
   /**
@@ -2100,12 +2112,17 @@ export type CreateRouterResponseRequestBody$Outbound = {
   background?: boolean | undefined;
   cache?: components.CacheConfig$Outbound | undefined;
   cache_control?: CreateRouterResponseCacheControl$Outbound | undefined;
+  context_management?:
+    | Array<components.OpenAIContextManagement$Outbound>
+    | null
+    | undefined;
   conversation?: components.ConversationParam$Outbound | undefined;
   fallback_on_codes?: Array<number> | null | undefined;
   fallbacks?: Array<components.FallbackConfig$Outbound> | null | undefined;
   frequency_penalty?: number | undefined;
   guardrails?: Array<components.EvaluatorRef$Outbound> | undefined;
   identity?: components.ResponseIdentity$Outbound | undefined;
+  include?: Array<string> | undefined;
   input?: string | Array<CreateRouterResponseInput2$Outbound> | undefined;
   instructions?: string | undefined;
   integration_id?: string | undefined;
@@ -2136,6 +2153,7 @@ export type CreateRouterResponseRequestBody$Outbound = {
   temperature?: number | undefined;
   template_engine?: string | undefined;
   text?: CreateRouterResponseText$Outbound | undefined;
+  thinking?: components.ThinkingParam$Outbound | undefined;
   thread?: components.ResponseThread$Outbound | undefined;
   timeout?: components.TimeoutConfig$Outbound | undefined;
   tool_choice?: SpecificFunction$Outbound | string | undefined;
@@ -2183,6 +2201,9 @@ export const CreateRouterResponseRequestBody$outboundSchema: z.ZodType<
   cache: components.CacheConfig$outboundSchema.optional(),
   cacheControl: z.lazy(() => CreateRouterResponseCacheControl$outboundSchema)
     .optional(),
+  contextManagement: z.nullable(
+    z.array(components.OpenAIContextManagement$outboundSchema),
+  ).optional(),
   conversation: components.ConversationParam$outboundSchema.optional(),
   fallbackOnCodes: z.nullable(z.array(z.number().int())).optional(),
   fallbacks: z.nullable(z.array(components.FallbackConfig$outboundSchema))
@@ -2190,6 +2211,7 @@ export const CreateRouterResponseRequestBody$outboundSchema: z.ZodType<
   frequencyPenalty: z.number().optional(),
   guardrails: z.array(components.EvaluatorRef$outboundSchema).optional(),
   identity: components.ResponseIdentity$outboundSchema.optional(),
+  include: z.array(z.string()).optional(),
   input: z.union([
     z.string(),
     z.array(z.lazy(() => CreateRouterResponseInput2$outboundSchema)),
@@ -2223,6 +2245,7 @@ export const CreateRouterResponseRequestBody$outboundSchema: z.ZodType<
   temperature: z.number().optional(),
   templateEngine: TemplateEngine$outboundSchema.optional(),
   text: z.lazy(() => CreateRouterResponseText$outboundSchema).optional(),
+  thinking: components.ThinkingParam$outboundSchema.optional(),
   thread: components.ResponseThread$outboundSchema.optional(),
   timeout: components.TimeoutConfig$outboundSchema.optional(),
   toolChoice: z.union([
@@ -2304,6 +2327,7 @@ export const CreateRouterResponseRequestBody$outboundSchema: z.ZodType<
 }).transform((v) => {
   return remap$(v, {
     cacheControl: "cache_control",
+    contextManagement: "context_management",
     fallbackOnCodes: "fallback_on_codes",
     frequencyPenalty: "frequency_penalty",
     integrationId: "integration_id",

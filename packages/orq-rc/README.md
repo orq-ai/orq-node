@@ -219,6 +219,16 @@ run();
 * [~~streamRun~~](docs/sdks/agents/README.md#streamrun) - Run agent with streaming response :warning: **Deprecated**
 * [~~stream~~](docs/sdks/agents/README.md#stream) - Stream agent execution in real-time :warning: **Deprecated**
 
+#### [Agents.External](docs/sdks/external/README.md)
+
+* [list](docs/sdks/external/README.md#list) - List external agents
+* [create](docs/sdks/external/README.md#create) - Create external agent
+* [retrieve](docs/sdks/external/README.md#retrieve) - Retrieve external agent
+* [delete](docs/sdks/external/README.md#delete) - Delete external agent
+* [update](docs/sdks/external/README.md#update) - Update external agent
+* [refreshCard](docs/sdks/external/README.md#refreshcard) - Refresh external agent card
+* [testConnection](docs/sdks/external/README.md#testconnection) - Test external agent connection
+
 #### [~~Agents.Responses~~](docs/sdks/orqresponses/README.md)
 
 * [~~create~~](docs/sdks/orqresponses/README.md#create) - Create response :warning: **Deprecated**
@@ -495,6 +505,15 @@ run();
 * [disable](docs/sdks/models/README.md#disable) - Disable model for workspace
 * [list](docs/sdks/models/README.md#list) - List models
 
+### [Monitors](docs/sdks/monitors/README.md)
+
+* [list](docs/sdks/monitors/README.md#list) - List monitors
+* [create](docs/sdks/monitors/README.md#create) - Create a monitor
+* [listPresets](docs/sdks/monitors/README.md#listpresets) - List monitor presets
+* [get](docs/sdks/monitors/README.md#get) - Retrieve a monitor
+* [delete](docs/sdks/monitors/README.md#delete) - Delete a monitor
+* [update](docs/sdks/monitors/README.md#update) - Update a monitor
+
 ### [Notifiers](docs/sdks/notifiers/README.md)
 
 * [list](docs/sdks/notifiers/README.md#list) - List notifiers
@@ -676,6 +695,14 @@ run();
 * [listSpans](docs/sdks/traces/README.md#listspans) - List trace spans
 * [getSpan](docs/sdks/traces/README.md#getspan) - Get trace span
 
+### [Users](docs/sdks/users/README.md)
+
+* [list](docs/sdks/users/README.md#list) - List workspace users
+* [get](docs/sdks/users/README.md#get) - Retrieve a workspace user
+* [delete](docs/sdks/users/README.md#delete) - Delete a workspace user
+* [update](docs/sdks/users/README.md#update) - Update a workspace user
+* [create](docs/sdks/users/README.md#create) - Create or add workspace users
+
 ### [Views](docs/sdks/views/README.md)
 
 * [list](docs/sdks/views/README.md#list) - List visible saved views
@@ -756,6 +783,13 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 
 - [`agentsCreate`](docs/sdks/agents/README.md#create) - Create agent
 - [`agentsDelete`](docs/sdks/agents/README.md#delete) - Delete agent
+- [`agentsExternalCreate`](docs/sdks/external/README.md#create) - Create external agent
+- [`agentsExternalDelete`](docs/sdks/external/README.md#delete) - Delete external agent
+- [`agentsExternalList`](docs/sdks/external/README.md#list) - List external agents
+- [`agentsExternalRefreshCard`](docs/sdks/external/README.md#refreshcard) - Refresh external agent card
+- [`agentsExternalRetrieve`](docs/sdks/external/README.md#retrieve) - Retrieve external agent
+- [`agentsExternalTestConnection`](docs/sdks/external/README.md#testconnection) - Test external agent connection
+- [`agentsExternalUpdate`](docs/sdks/external/README.md#update) - Update external agent
 - [`agentsList`](docs/sdks/agents/README.md#list) - List agents
 - [`agentsRetrieve`](docs/sdks/agents/README.md#retrieve) - Retrieve agent
 - [`agentsUpdate`](docs/sdks/agents/README.md#update) - Update agent
@@ -950,6 +984,12 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`modelsUpdateOpenaiLike`](docs/sdks/models/README.md#updateopenailike) - Update OpenAI-compatible custom model
 - [`modelsValidate`](docs/sdks/models/README.md#validate) - Validate model endpoint
 - [`modelsValidateAwsBedrock`](docs/sdks/models/README.md#validateawsbedrock) - Validate AWS Bedrock inference profile
+- [`monitorsCreate`](docs/sdks/monitors/README.md#create) - Create a monitor
+- [`monitorsDelete`](docs/sdks/monitors/README.md#delete) - Delete a monitor
+- [`monitorsGet`](docs/sdks/monitors/README.md#get) - Retrieve a monitor
+- [`monitorsList`](docs/sdks/monitors/README.md#list) - List monitors
+- [`monitorsListPresets`](docs/sdks/monitors/README.md#listpresets) - List monitor presets
+- [`monitorsUpdate`](docs/sdks/monitors/README.md#update) - Update a monitor
 - [`notifiersCreate`](docs/sdks/notifiers/README.md#create) - Create a notifier
 - [`notifiersDelete`](docs/sdks/notifiers/README.md#delete) - Delete a notifier
 - [`notifiersGet`](docs/sdks/notifiers/README.md#get) - Retrieve a notifier
@@ -1043,6 +1083,11 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`tracesListSpans`](docs/sdks/traces/README.md#listspans) - List trace spans
 - [`tracesQuery`](docs/sdks/traces/README.md#query) - Query traces with OQL
 - [`tracesSearch`](docs/sdks/traces/README.md#search) - Search traces
+- [`usersCreate`](docs/sdks/users/README.md#create) - Create or add workspace users
+- [`usersDelete`](docs/sdks/users/README.md#delete) - Delete a workspace user
+- [`usersGet`](docs/sdks/users/README.md#get) - Retrieve a workspace user
+- [`usersList`](docs/sdks/users/README.md#list) - List workspace users
+- [`usersUpdate`](docs/sdks/users/README.md#update) - Update a workspace user
 - [`viewsCreate`](docs/sdks/views/README.md#create) - Create a saved view
 - [`viewsDelete`](docs/sdks/views/README.md#delete) - Delete a saved view
 - [`viewsGet`](docs/sdks/views/README.md#get) - Retrieve a saved view
@@ -1472,70 +1517,70 @@ run();
 
 
 **Inherit from [`OrqError`](./src/models/errors/orqerror.ts)**:
-* [`HonoApiError`](./src/models/errors/honoapierror.ts): Applicable to 5 of 337 methods.*
-* [`PostV2FeedbackResponseBody`](./src/models/errors/postv2feedbackresponsebody.ts): Bad Request. Status code `400`. Applicable to 1 of 337 methods.*
-* [`CompactResponseResponseBody`](./src/models/errors/compactresponseresponsebody.ts): Model is required or request is invalid. Status code `400`. Applicable to 1 of 337 methods.*
-* [`CreateAgentScheduleResponseBody`](./src/models/errors/createagentscheduleresponsebody.ts): Invalid schedule type, expression, or sub-hour cadence. Status code `400`. Applicable to 1 of 337 methods.*
-* [`UpdateAgentScheduleResponseBody`](./src/models/errors/updateagentscheduleresponsebody.ts): Invalid type, expression, or sub-hour cadence. Status code `400`. Applicable to 1 of 337 methods.*
-* [`TriggerAgentScheduleResponseBody`](./src/models/errors/triggeragentscheduleresponsebody.ts): Schedule is inactive. Status code `400`. Applicable to 1 of 337 methods.*
-* [`SearchWebResponseBody`](./src/models/errors/searchwebresponsebody.ts): Invalid request, unusable workspace integration, or a blocking guardrail. Check the request fields and workspace integration settings. Status code `400`. Applicable to 1 of 337 methods.*
-* [`CreateModerationResponseBody`](./src/models/errors/createmoderationresponsebody.ts): Returns validation error. Status code `400`. Applicable to 1 of 337 methods.*
-* [`CreateClassifyResponseBody`](./src/models/errors/createclassifyresponsebody.ts): Malformed JSON, missing or unsupported model, or invalid retry, timeout, or fallback fields. Status code `400`. Applicable to 1 of 337 methods.*
-* [`CreateDecisionsResponseBody`](./src/models/errors/createdecisionsresponsebody.ts): Malformed JSON, missing or unsupported model, or invalid retry, timeout, or fallback fields. Status code `400`. Applicable to 1 of 337 methods.*
-* [`CompactResponseResponsesResponseBody`](./src/models/errors/compactresponseresponsesresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 337 methods.*
-* [`SearchWebWebsearchResponseBody`](./src/models/errors/searchwebwebsearchresponsebody.ts): Missing or invalid API key. Send a valid API key in the Authorization header. Status code `401`. Applicable to 1 of 337 methods.*
-* [`CreateClassifyRouterClassifyResponseBody`](./src/models/errors/createclassifyrouterclassifyresponsebody.ts): Missing, invalid, expired or revoked API key. Status code `401`. Applicable to 1 of 337 methods.*
-* [`CreateDecisionsRouterDecisionsResponseBody`](./src/models/errors/createdecisionsrouterdecisionsresponsebody.ts): Missing, invalid, expired or revoked API key. Status code `401`. Applicable to 1 of 337 methods.*
-* [`SearchWebWebsearchResponseResponseBody`](./src/models/errors/searchwebwebsearchresponseresponsebody.ts): Managed search requires a positive ORQ credit balance. Add credits before retrying. BYOK does not require ORQ credits. Status code `402`. Applicable to 1 of 337 methods.*
-* [`SearchWebWebsearchResponse403ResponseBody`](./src/models/errors/searchwebwebsearchresponse403responsebody.ts): The API key lacks websearch.execute permission. Status code `403`. Applicable to 1 of 337 methods.*
-* [`CreateClassifyRouterClassifyResponseResponseBody`](./src/models/errors/createclassifyrouterclassifyresponseresponsebody.ts): The API key lacks classify permission, or the workspace or project cannot access the model. Status code `403`. Applicable to 1 of 337 methods.*
-* [`CreateDecisionsRouterDecisionsResponseResponseBody`](./src/models/errors/createdecisionsrouterdecisionsresponseresponsebody.ts): The API key lacks classify permission, or the workspace or project cannot access the model. Status code `403`. Applicable to 1 of 337 methods.*
-* [`DeleteAgentResponseBody`](./src/models/errors/deleteagentresponsebody.ts): Agent not found. The specified agent key does not exist in the workspace or has already been deleted. Status code `404`. Applicable to 1 of 337 methods.*
-* [`RetrieveAgentRequestResponseBody`](./src/models/errors/retrieveagentrequestresponsebody.ts): Agent not found. The specified agent key does not exist in the workspace or you do not have permission to access it. Status code `404`. Applicable to 1 of 337 methods.*
-* [`UpdateAgentResponseBody`](./src/models/errors/updateagentresponsebody.ts): Agent not found. The specified agent key does not exist in the workspace or you do not have permission to modify it. Status code `404`. Applicable to 1 of 337 methods.*
-* [`StreamRunAgentResponseBody`](./src/models/errors/streamrunagentresponsebody.ts): Model not found. Status code `404`. Applicable to 1 of 337 methods.*
-* [`StreamAgentResponseBody`](./src/models/errors/streamagentresponsebody.ts): Agent not found. Status code `404`. Applicable to 1 of 337 methods.*
-* [`UpdatePromptResponseBody`](./src/models/errors/updatepromptresponsebody.ts): Prompt not found. Status code `404`. Applicable to 1 of 337 methods.*
-* [`DeletePromptResponseBody`](./src/models/errors/deletepromptresponsebody.ts): Prompt not found. Status code `404`. Applicable to 1 of 337 methods.*
-* [`GetPromptVersionResponseBody`](./src/models/errors/getpromptversionresponsebody.ts): Not Found - The prompt or prompt version does not exist. Status code `404`. Applicable to 1 of 337 methods.*
-* [`UpdateToolResponseBody`](./src/models/errors/updatetoolresponsebody.ts): Tool not found. Status code `404`. Applicable to 1 of 337 methods.*
-* [`GetV2ToolsToolIdVersionsResponseBody`](./src/models/errors/getv2toolstoolidversionsresponsebody.ts): Tool not found. Status code `404`. Applicable to 1 of 337 methods.*
-* [`GetV2ToolsToolIdVersionsVersionIdResponseBody`](./src/models/errors/getv2toolstoolidversionsversionidresponsebody.ts): Tool or version not found. Status code `404`. Applicable to 1 of 337 methods.*
-* [`PostV2FeedbackFeedbackResponseBody`](./src/models/errors/postv2feedbackfeedbackresponsebody.ts): Workspace, trace, or feedback property was not found. Status code `404`. Applicable to 1 of 337 methods.*
-* [`PostV2FeedbackRemoveResponseBody`](./src/models/errors/postv2feedbackremoveresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 337 methods.*
-* [`GetEvalsResponseBody`](./src/models/errors/getevalsresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 337 methods.*
-* [`CreateEvalResponseBody`](./src/models/errors/createevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 337 methods.*
-* [`GetEvalResponseBody`](./src/models/errors/getevalresponsebody.ts): No evaluator with this id exists in the authenticated workspace, or the request carries no workspace. Status code `404`. Applicable to 1 of 337 methods.*
-* [`DeleteEvalResponseBody`](./src/models/errors/deleteevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 337 methods.*
-* [`UpdateEvalResponseBody`](./src/models/errors/updateevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 337 methods.*
-* [`RetrieveResponseResponseBody`](./src/models/errors/retrieveresponseresponsebody.ts): Response not found. Status code `404`. Applicable to 1 of 337 methods.*
-* [`CreateAgentScheduleSchedulesResponseBody`](./src/models/errors/createagentscheduleschedulesresponsebody.ts): Agent (or agent version, when agent_tag is set) not found. Status code `404`. Applicable to 1 of 337 methods.*
-* [`DeleteAgentScheduleResponseBody`](./src/models/errors/deleteagentscheduleresponsebody.ts): Schedule not found, or belongs to a different agent. Status code `404`. Applicable to 1 of 337 methods.*
-* [`RetrieveAgentScheduleResponseBody`](./src/models/errors/retrieveagentscheduleresponsebody.ts): Schedule not found, or belongs to a different agent. Status code `404`. Applicable to 1 of 337 methods.*
-* [`UpdateAgentScheduleSchedulesResponseBody`](./src/models/errors/updateagentscheduleschedulesresponsebody.ts): Schedule or agent version not found. Status code `404`. Applicable to 1 of 337 methods.*
-* [`TriggerAgentScheduleSchedulesResponseBody`](./src/models/errors/triggeragentscheduleschedulesresponsebody.ts): Schedule not found, or belongs to a different agent. Status code `404`. Applicable to 1 of 337 methods.*
-* [`CreateClassifyRouterClassifyResponse408ResponseBody`](./src/models/errors/createclassifyrouterclassifyresponse408responsebody.ts): The final model call exceeded its timeout after available retries and fallbacks were exhausted. Status code `408`. Applicable to 1 of 337 methods.*
-* [`CreateDecisionsRouterDecisionsResponse408ResponseBody`](./src/models/errors/createdecisionsrouterdecisionsresponse408responsebody.ts): The final model call exceeded its timeout after available retries and fallbacks were exhausted. Status code `408`. Applicable to 1 of 337 methods.*
-* [`DeleteEvalEvalsResponseBody`](./src/models/errors/deleteevalevalsresponsebody.ts): The evaluator is still referenced as an evaluator or guardrail by one or more deployments. Status code `409`. Applicable to 1 of 337 methods.*
-* [`SearchWebWebsearchResponse415ResponseBody`](./src/models/errors/searchwebwebsearchresponse415responsebody.ts): Unsupported or missing Content-Type. Send application/json; an optional charset parameter is accepted. Status code `415`. Applicable to 1 of 337 methods.*
-* [`SearchWebWebsearchResponse422ResponseBody`](./src/models/errors/searchwebwebsearchresponse422responsebody.ts): A configured guardrail evaluator could not complete its evaluation. Status code `422`. Applicable to 1 of 337 methods.*
-* [`CreateClassifyRouterClassifyResponse422ResponseBody`](./src/models/errors/createclassifyrouterclassifyresponse422responsebody.ts): The state or a question violates the classification contract. Status code `422`. Applicable to 1 of 337 methods.*
-* [`CreateDecisionsRouterDecisionsResponse422ResponseBody`](./src/models/errors/createdecisionsrouterdecisionsresponse422responsebody.ts): The state or a question violates the classification contract. Status code `422`. Applicable to 1 of 337 methods.*
-* [`CreateTranscriptionResponseBody`](./src/models/errors/createtranscriptionresponsebody.ts): Returns validation error. Status code `422`. Applicable to 1 of 337 methods.*
-* [`CreateTranslationResponseBody`](./src/models/errors/createtranslationresponsebody.ts): Returns validation error. Status code `422`. Applicable to 1 of 337 methods.*
-* [`SearchWebWebsearchResponse429ResponseBody`](./src/models/errors/searchwebwebsearchresponse429responsebody.ts): A workspace or provider rate limit, or a matching budget, was reached. Wait before retrying or raise the budget. Status code `429`. Applicable to 1 of 337 methods.*
-* [`CreateClassifyRouterClassifyResponse429ResponseBody`](./src/models/errors/createclassifyrouterclassifyresponse429responsebody.ts): A plan rate limit, budget or provider rate limit was exceeded. Status code `429`. Applicable to 1 of 337 methods.*
-* [`CreateDecisionsRouterDecisionsResponse429ResponseBody`](./src/models/errors/createdecisionsrouterdecisionsresponse429responsebody.ts): A plan rate limit, budget or provider rate limit was exceeded. Status code `429`. Applicable to 1 of 337 methods.*
-* [`KnowledgeApiError`](./src/models/errors/knowledgeapierror.ts): An error has occured. Status code `500`. Applicable to 1 of 337 methods.*
-* [`SearchWebWebsearchResponse500ResponseBody`](./src/models/errors/searchwebwebsearchresponse500responsebody.ts): Unexpected gateway error. Include the trace ID, if available, when reporting the failure. Status code `500`. Applicable to 1 of 337 methods.*
-* [`CreateClassifyRouterClassifyResponse500ResponseBody`](./src/models/errors/createclassifyrouterclassifyresponse500responsebody.ts): An internal model-resolution error occurred. Status code `500`. Applicable to 1 of 337 methods.*
-* [`CreateDecisionsRouterDecisionsResponse500ResponseBody`](./src/models/errors/createdecisionsrouterdecisionsresponse500responsebody.ts): An internal model-resolution error occurred. Status code `500`. Applicable to 1 of 337 methods.*
-* [`CompactResponseResponsesResponseResponseBody`](./src/models/errors/compactresponseresponsesresponseresponsebody.ts): Failed to compact conversation. Status code `502`. Applicable to 1 of 337 methods.*
-* [`SearchWebWebsearchResponse502ResponseBody`](./src/models/errors/searchwebwebsearchresponse502responsebody.ts): The search provider, PII detector, or guardrail service failed. Invalid upstream credentials can also produce this response. Status code `502`. Applicable to 1 of 337 methods.*
-* [`CreateClassifyRouterClassifyResponse502ResponseBody`](./src/models/errors/createclassifyrouterclassifyresponse502responsebody.ts): The upstream provider failed or returned an invalid classification response. Status code `502`. Applicable to 1 of 337 methods.*
-* [`CreateDecisionsRouterDecisionsResponse502ResponseBody`](./src/models/errors/createdecisionsrouterdecisionsresponse502responsebody.ts): The upstream provider failed or returned an invalid classification response. Status code `502`. Applicable to 1 of 337 methods.*
-* [`SearchWebWebsearchResponse503ResponseBody`](./src/models/errors/searchwebwebsearchresponse503responsebody.ts): The gateway could not load workspace integrations. Retry when the credential store is available. Status code `503`. Applicable to 1 of 337 methods.*
-* [`SearchWebWebsearchResponse504ResponseBody`](./src/models/errors/searchwebwebsearchresponse504responsebody.ts): The provider request timed out or was cancelled. Status code `504`. Applicable to 1 of 337 methods.*
+* [`HonoApiError`](./src/models/errors/honoapierror.ts): Applicable to 5 of 355 methods.*
+* [`PostV2FeedbackResponseBody`](./src/models/errors/postv2feedbackresponsebody.ts): Bad Request. Status code `400`. Applicable to 1 of 355 methods.*
+* [`CompactResponseResponseBody`](./src/models/errors/compactresponseresponsebody.ts): Model is required or request is invalid. Status code `400`. Applicable to 1 of 355 methods.*
+* [`CreateAgentScheduleResponseBody`](./src/models/errors/createagentscheduleresponsebody.ts): Invalid schedule type, expression, or sub-hour cadence. Status code `400`. Applicable to 1 of 355 methods.*
+* [`UpdateAgentScheduleResponseBody`](./src/models/errors/updateagentscheduleresponsebody.ts): Invalid type, expression, or sub-hour cadence. Status code `400`. Applicable to 1 of 355 methods.*
+* [`TriggerAgentScheduleResponseBody`](./src/models/errors/triggeragentscheduleresponsebody.ts): Schedule is inactive. Status code `400`. Applicable to 1 of 355 methods.*
+* [`SearchWebResponseBody`](./src/models/errors/searchwebresponsebody.ts): Invalid request, unusable workspace integration, or a blocking guardrail. Check the request fields and workspace integration settings. Status code `400`. Applicable to 1 of 355 methods.*
+* [`CreateModerationResponseBody`](./src/models/errors/createmoderationresponsebody.ts): Returns validation error. Status code `400`. Applicable to 1 of 355 methods.*
+* [`CreateClassifyResponseBody`](./src/models/errors/createclassifyresponsebody.ts): Malformed JSON, missing or unsupported model, or invalid retry, timeout, or fallback fields. Status code `400`. Applicable to 1 of 355 methods.*
+* [`CreateDecisionsResponseBody`](./src/models/errors/createdecisionsresponsebody.ts): Malformed JSON, missing or unsupported model, or invalid retry, timeout, or fallback fields. Status code `400`. Applicable to 1 of 355 methods.*
+* [`CompactResponseResponsesResponseBody`](./src/models/errors/compactresponseresponsesresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 355 methods.*
+* [`SearchWebWebsearchResponseBody`](./src/models/errors/searchwebwebsearchresponsebody.ts): Missing or invalid API key. Send a valid API key in the Authorization header. Status code `401`. Applicable to 1 of 355 methods.*
+* [`CreateClassifyRouterClassifyResponseBody`](./src/models/errors/createclassifyrouterclassifyresponsebody.ts): Missing, invalid, expired or revoked API key. Status code `401`. Applicable to 1 of 355 methods.*
+* [`CreateDecisionsRouterDecisionsResponseBody`](./src/models/errors/createdecisionsrouterdecisionsresponsebody.ts): Missing, invalid, expired or revoked API key. Status code `401`. Applicable to 1 of 355 methods.*
+* [`SearchWebWebsearchResponseResponseBody`](./src/models/errors/searchwebwebsearchresponseresponsebody.ts): Managed search requires a positive ORQ credit balance. Add credits before retrying. BYOK does not require ORQ credits. Status code `402`. Applicable to 1 of 355 methods.*
+* [`SearchWebWebsearchResponse403ResponseBody`](./src/models/errors/searchwebwebsearchresponse403responsebody.ts): The API key lacks websearch.execute permission. Status code `403`. Applicable to 1 of 355 methods.*
+* [`CreateClassifyRouterClassifyResponseResponseBody`](./src/models/errors/createclassifyrouterclassifyresponseresponsebody.ts): The API key lacks classify permission, or the workspace or project cannot access the model. Status code `403`. Applicable to 1 of 355 methods.*
+* [`CreateDecisionsRouterDecisionsResponseResponseBody`](./src/models/errors/createdecisionsrouterdecisionsresponseresponsebody.ts): The API key lacks classify permission, or the workspace or project cannot access the model. Status code `403`. Applicable to 1 of 355 methods.*
+* [`DeleteAgentResponseBody`](./src/models/errors/deleteagentresponsebody.ts): Agent not found. The specified agent key does not exist in the workspace or has already been deleted. Status code `404`. Applicable to 1 of 355 methods.*
+* [`RetrieveAgentRequestResponseBody`](./src/models/errors/retrieveagentrequestresponsebody.ts): Agent not found. The specified agent key does not exist in the workspace or you do not have permission to access it. Status code `404`. Applicable to 1 of 355 methods.*
+* [`UpdateAgentResponseBody`](./src/models/errors/updateagentresponsebody.ts): Agent not found. The specified agent key does not exist in the workspace or you do not have permission to modify it. Status code `404`. Applicable to 1 of 355 methods.*
+* [`StreamRunAgentResponseBody`](./src/models/errors/streamrunagentresponsebody.ts): Model not found. Status code `404`. Applicable to 1 of 355 methods.*
+* [`StreamAgentResponseBody`](./src/models/errors/streamagentresponsebody.ts): Agent not found. Status code `404`. Applicable to 1 of 355 methods.*
+* [`UpdatePromptResponseBody`](./src/models/errors/updatepromptresponsebody.ts): Prompt not found. Status code `404`. Applicable to 1 of 355 methods.*
+* [`DeletePromptResponseBody`](./src/models/errors/deletepromptresponsebody.ts): Prompt not found. Status code `404`. Applicable to 1 of 355 methods.*
+* [`GetPromptVersionResponseBody`](./src/models/errors/getpromptversionresponsebody.ts): Not Found - The prompt or prompt version does not exist. Status code `404`. Applicable to 1 of 355 methods.*
+* [`UpdateToolResponseBody`](./src/models/errors/updatetoolresponsebody.ts): Tool not found. Status code `404`. Applicable to 1 of 355 methods.*
+* [`GetV2ToolsToolIdVersionsResponseBody`](./src/models/errors/getv2toolstoolidversionsresponsebody.ts): Tool not found. Status code `404`. Applicable to 1 of 355 methods.*
+* [`GetV2ToolsToolIdVersionsVersionIdResponseBody`](./src/models/errors/getv2toolstoolidversionsversionidresponsebody.ts): Tool or version not found. Status code `404`. Applicable to 1 of 355 methods.*
+* [`PostV2FeedbackFeedbackResponseBody`](./src/models/errors/postv2feedbackfeedbackresponsebody.ts): Workspace, trace, or feedback property was not found. Status code `404`. Applicable to 1 of 355 methods.*
+* [`PostV2FeedbackRemoveResponseBody`](./src/models/errors/postv2feedbackremoveresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 355 methods.*
+* [`GetEvalsResponseBody`](./src/models/errors/getevalsresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 355 methods.*
+* [`CreateEvalResponseBody`](./src/models/errors/createevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 355 methods.*
+* [`GetEvalResponseBody`](./src/models/errors/getevalresponsebody.ts): No evaluator with this id exists in the authenticated workspace, or the request carries no workspace. Status code `404`. Applicable to 1 of 355 methods.*
+* [`DeleteEvalResponseBody`](./src/models/errors/deleteevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 355 methods.*
+* [`UpdateEvalResponseBody`](./src/models/errors/updateevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 355 methods.*
+* [`RetrieveResponseResponseBody`](./src/models/errors/retrieveresponseresponsebody.ts): Response not found. Status code `404`. Applicable to 1 of 355 methods.*
+* [`CreateAgentScheduleSchedulesResponseBody`](./src/models/errors/createagentscheduleschedulesresponsebody.ts): Agent (or agent version, when agent_tag is set) not found. Status code `404`. Applicable to 1 of 355 methods.*
+* [`DeleteAgentScheduleResponseBody`](./src/models/errors/deleteagentscheduleresponsebody.ts): Schedule not found, or belongs to a different agent. Status code `404`. Applicable to 1 of 355 methods.*
+* [`RetrieveAgentScheduleResponseBody`](./src/models/errors/retrieveagentscheduleresponsebody.ts): Schedule not found, or belongs to a different agent. Status code `404`. Applicable to 1 of 355 methods.*
+* [`UpdateAgentScheduleSchedulesResponseBody`](./src/models/errors/updateagentscheduleschedulesresponsebody.ts): Schedule or agent version not found. Status code `404`. Applicable to 1 of 355 methods.*
+* [`TriggerAgentScheduleSchedulesResponseBody`](./src/models/errors/triggeragentscheduleschedulesresponsebody.ts): Schedule not found, or belongs to a different agent. Status code `404`. Applicable to 1 of 355 methods.*
+* [`CreateClassifyRouterClassifyResponse408ResponseBody`](./src/models/errors/createclassifyrouterclassifyresponse408responsebody.ts): The final model call exceeded its timeout after available retries and fallbacks were exhausted. Status code `408`. Applicable to 1 of 355 methods.*
+* [`CreateDecisionsRouterDecisionsResponse408ResponseBody`](./src/models/errors/createdecisionsrouterdecisionsresponse408responsebody.ts): The final model call exceeded its timeout after available retries and fallbacks were exhausted. Status code `408`. Applicable to 1 of 355 methods.*
+* [`DeleteEvalEvalsResponseBody`](./src/models/errors/deleteevalevalsresponsebody.ts): The evaluator is still referenced as an evaluator or guardrail by one or more deployments. Status code `409`. Applicable to 1 of 355 methods.*
+* [`SearchWebWebsearchResponse415ResponseBody`](./src/models/errors/searchwebwebsearchresponse415responsebody.ts): Unsupported or missing Content-Type. Send application/json; an optional charset parameter is accepted. Status code `415`. Applicable to 1 of 355 methods.*
+* [`SearchWebWebsearchResponse422ResponseBody`](./src/models/errors/searchwebwebsearchresponse422responsebody.ts): A configured guardrail evaluator could not complete its evaluation. Status code `422`. Applicable to 1 of 355 methods.*
+* [`CreateClassifyRouterClassifyResponse422ResponseBody`](./src/models/errors/createclassifyrouterclassifyresponse422responsebody.ts): The state or a question violates the classification contract. Status code `422`. Applicable to 1 of 355 methods.*
+* [`CreateDecisionsRouterDecisionsResponse422ResponseBody`](./src/models/errors/createdecisionsrouterdecisionsresponse422responsebody.ts): The state or a question violates the classification contract. Status code `422`. Applicable to 1 of 355 methods.*
+* [`CreateTranscriptionResponseBody`](./src/models/errors/createtranscriptionresponsebody.ts): Returns validation error. Status code `422`. Applicable to 1 of 355 methods.*
+* [`CreateTranslationResponseBody`](./src/models/errors/createtranslationresponsebody.ts): Returns validation error. Status code `422`. Applicable to 1 of 355 methods.*
+* [`SearchWebWebsearchResponse429ResponseBody`](./src/models/errors/searchwebwebsearchresponse429responsebody.ts): A workspace or provider rate limit, or a matching budget, was reached. Wait before retrying or raise the budget. Status code `429`. Applicable to 1 of 355 methods.*
+* [`CreateClassifyRouterClassifyResponse429ResponseBody`](./src/models/errors/createclassifyrouterclassifyresponse429responsebody.ts): A plan rate limit, budget or provider rate limit was exceeded. Status code `429`. Applicable to 1 of 355 methods.*
+* [`CreateDecisionsRouterDecisionsResponse429ResponseBody`](./src/models/errors/createdecisionsrouterdecisionsresponse429responsebody.ts): A plan rate limit, budget or provider rate limit was exceeded. Status code `429`. Applicable to 1 of 355 methods.*
+* [`KnowledgeApiError`](./src/models/errors/knowledgeapierror.ts): An error has occured. Status code `500`. Applicable to 1 of 355 methods.*
+* [`SearchWebWebsearchResponse500ResponseBody`](./src/models/errors/searchwebwebsearchresponse500responsebody.ts): Unexpected gateway error. Include the trace ID, if available, when reporting the failure. Status code `500`. Applicable to 1 of 355 methods.*
+* [`CreateClassifyRouterClassifyResponse500ResponseBody`](./src/models/errors/createclassifyrouterclassifyresponse500responsebody.ts): An internal model-resolution error occurred. Status code `500`. Applicable to 1 of 355 methods.*
+* [`CreateDecisionsRouterDecisionsResponse500ResponseBody`](./src/models/errors/createdecisionsrouterdecisionsresponse500responsebody.ts): An internal model-resolution error occurred. Status code `500`. Applicable to 1 of 355 methods.*
+* [`CompactResponseResponsesResponseResponseBody`](./src/models/errors/compactresponseresponsesresponseresponsebody.ts): Failed to compact conversation. Status code `502`. Applicable to 1 of 355 methods.*
+* [`SearchWebWebsearchResponse502ResponseBody`](./src/models/errors/searchwebwebsearchresponse502responsebody.ts): The search provider, PII detector, or guardrail service failed. Invalid upstream credentials can also produce this response. Status code `502`. Applicable to 1 of 355 methods.*
+* [`CreateClassifyRouterClassifyResponse502ResponseBody`](./src/models/errors/createclassifyrouterclassifyresponse502responsebody.ts): The upstream provider failed or returned an invalid classification response. Status code `502`. Applicable to 1 of 355 methods.*
+* [`CreateDecisionsRouterDecisionsResponse502ResponseBody`](./src/models/errors/createdecisionsrouterdecisionsresponse502responsebody.ts): The upstream provider failed or returned an invalid classification response. Status code `502`. Applicable to 1 of 355 methods.*
+* [`SearchWebWebsearchResponse503ResponseBody`](./src/models/errors/searchwebwebsearchresponse503responsebody.ts): The gateway could not load workspace integrations. Retry when the credential store is available. Status code `503`. Applicable to 1 of 355 methods.*
+* [`SearchWebWebsearchResponse504ResponseBody`](./src/models/errors/searchwebwebsearchresponse504responsebody.ts): The provider request timed out or was cancelled. Status code `504`. Applicable to 1 of 355 methods.*
 * [`ResponseValidationError`](./src/models/errors/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
 
 </details>

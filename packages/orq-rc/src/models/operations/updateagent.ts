@@ -1149,7 +1149,10 @@ export const VersionIncrement = {
  */
 export type VersionIncrement = ClosedEnum<typeof VersionIncrement>;
 
-export type UpdateAgentRequestBody = {
+/**
+ * Request body for updating an existing agent via the API. Uses simplified tool input format.
+ */
+export type UpdateAgentUpdateAgentRequest = {
   key?: string | undefined;
   displayName?: string | undefined;
   projectId?: string | undefined;
@@ -1218,7 +1221,7 @@ export type UpdateAgentRequest = {
    * The unique key of the agent to update
    */
   agentKey: string;
-  requestBody: UpdateAgentRequestBody;
+  requestBody: UpdateAgentUpdateAgentRequest;
 };
 
 /**
@@ -4352,7 +4355,7 @@ export const VersionIncrement$outboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(VersionIncrement);
 
 /** @internal */
-export type UpdateAgentRequestBody$Outbound = {
+export type UpdateAgentUpdateAgentRequest$Outbound = {
   key?: string | undefined;
   display_name?: string | undefined;
   project_id?: string | undefined;
@@ -4378,10 +4381,10 @@ export type UpdateAgentRequestBody$Outbound = {
 };
 
 /** @internal */
-export const UpdateAgentRequestBody$outboundSchema: z.ZodType<
-  UpdateAgentRequestBody$Outbound,
+export const UpdateAgentUpdateAgentRequest$outboundSchema: z.ZodType<
+  UpdateAgentUpdateAgentRequest$Outbound,
   z.ZodTypeDef,
-  UpdateAgentRequestBody
+  UpdateAgentUpdateAgentRequest
 > = z.object({
   key: z.string().optional(),
   displayName: z.string().optional(),
@@ -4428,18 +4431,20 @@ export const UpdateAgentRequestBody$outboundSchema: z.ZodType<
   });
 });
 
-export function updateAgentRequestBodyToJSON(
-  updateAgentRequestBody: UpdateAgentRequestBody,
+export function updateAgentUpdateAgentRequestToJSON(
+  updateAgentUpdateAgentRequest: UpdateAgentUpdateAgentRequest,
 ): string {
   return JSON.stringify(
-    UpdateAgentRequestBody$outboundSchema.parse(updateAgentRequestBody),
+    UpdateAgentUpdateAgentRequest$outboundSchema.parse(
+      updateAgentUpdateAgentRequest,
+    ),
   );
 }
 
 /** @internal */
 export type UpdateAgentRequest$Outbound = {
   agent_key: string;
-  RequestBody: UpdateAgentRequestBody$Outbound;
+  RequestBody: UpdateAgentUpdateAgentRequest$Outbound;
 };
 
 /** @internal */
@@ -4449,7 +4454,7 @@ export const UpdateAgentRequest$outboundSchema: z.ZodType<
   UpdateAgentRequest
 > = z.object({
   agentKey: z.string(),
-  requestBody: z.lazy(() => UpdateAgentRequestBody$outboundSchema),
+  requestBody: z.lazy(() => UpdateAgentUpdateAgentRequest$outboundSchema),
 }).transform((v) => {
   return remap$(v, {
     agentKey: "agent_key",
