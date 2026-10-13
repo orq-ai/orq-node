@@ -2558,7 +2558,7 @@ components:
           properties:
             _id:
               type: "string"
-              default: "reasoning_01m4tyms540333ksja09gb5nkn"
+              default: "reasoning_01m4v6453xwdftx3980s4s9hvh"
               description: "Unique identifier for the part. Format: reasoning_{ulid} (e.g., reasoning_01hxyz...)"
               example: "reasoning_01hxyz123abc"
             kind:
@@ -10829,8 +10829,6 @@ components:
     AutoRouterConfig:
       additionalProperties: false
       properties:
-        benchmark_model:
-          type: "string"
         economical_model:
           type: "string"
         id:
@@ -10843,8 +10841,6 @@ components:
             - "null"
         profile:
           type: "string"
-        session_affinity:
-          $ref: "#/components/schemas/SessionAffinityConfig"
         strong_model:
           type: "string"
         v2:
@@ -11045,8 +11041,6 @@ components:
           type: "string"
         autorouter_version:
           type: "string"
-        benchmark_model:
-          type: "string"
         cache_read_cost:
           format: "double"
           type: "number"
@@ -11133,8 +11127,6 @@ components:
     CreateModelRequest:
       additionalProperties: false
       properties:
-        benchmark_model:
-          type: "string"
         configuration:
           additionalProperties: {}
           type: "object"
@@ -11191,8 +11183,6 @@ components:
         api_key:
           type: "string"
         base_url:
-          type: "string"
-        benchmark_model:
           type: "string"
         cache_read_cost:
           format: "double"
@@ -11281,8 +11271,6 @@ components:
     CreateVertexModelRequest:
       additionalProperties: false
       properties:
-        benchmark_model:
-          type: "string"
         configuration:
           $ref: "#/components/schemas/VertexConfiguration"
         display_name:
@@ -12042,15 +12030,6 @@ components:
     ModelsConfig:
       additionalProperties: false
       properties:
-        fallback_on_codes:
-          items:
-            format: "int64"
-            type: "integer"
-          maxItems: 20
-          type:
-            - "array"
-            - "null"
-          uniqueItems: true
         mode:
           enum:
             - "fallback"
@@ -12240,21 +12219,6 @@ components:
         - "amount"
         - "period"
       type: "object"
-    SessionAffinityConfig:
-      additionalProperties: false
-      properties:
-        enabled:
-          description: "Whether later turns of a thread stay on the model chosen for its first turn. Only requests that carry a thread id take part. Off by default."
-          type: "boolean"
-        ttl_seconds:
-          description: "Sliding idle window in seconds. A thread that stays quiet longer than this is routed afresh on its next turn. Between 60 and 3600. Defaults to 600 when omitted."
-          format: "int64"
-          maximum: 3600
-          minimum: 60
-          type: "integer"
-      required:
-        - "enabled"
-      type: "object"
     TokenLimit:
       additionalProperties: false
       properties:
@@ -12284,8 +12248,6 @@ components:
         autorouter_id:
           type: "string"
         autorouter_version:
-          type: "string"
-        benchmark_model:
           type: "string"
         cache_read_cost:
           format: "double"
@@ -12364,8 +12326,6 @@ components:
     UpdateModelRequest:
       additionalProperties: false
       properties:
-        benchmark_model:
-          type: "string"
         display_name:
           maxLength: 128
           type: "string"
@@ -12390,8 +12350,6 @@ components:
       additionalProperties: false
       properties:
         base_url:
-          type: "string"
-        benchmark_model:
           type: "string"
         cache_read_cost:
           format: "double"
@@ -14899,17 +14857,6 @@ components:
           type: "array"
           items:
             type: "string"
-        regions:
-          type: "array"
-          items:
-            type: "string"
-          description: "Regions of coverage by ISO 3166-1 alpha-2 code, or [\"all\"]. Combines with entities: the two selections are unioned."
-        entity_thresholds:
-          type: "object"
-          additionalProperties:
-            type: "number"
-            format: "double"
-          description: "Per-entity-type confidence cutoff. Every key must also appear in entities."
     McpGatewayTool:
       type: "object"
       properties:
@@ -15661,7 +15608,7 @@ components:
           description: "Required only for analysis mode; omitted when the judge writes the final answer."
         web_tools:
           type: "boolean"
-          description: "Whether panel and judge phases get the provider-native web search tool. Models without native web search run without it."
+          description: "Whether the Fusion-managed ORQ web tools are available to panel and judge phases."
         max_tool_calls:
           type: "integer"
           description: "Maximum Fusion-managed web tool calls per participating phase. Zero disables Fusion-managed tool calls."
@@ -16240,16 +16187,6 @@ components:
           type: "array"
           items:
             $ref: "#/components/schemas/RoutingRuleModel"
-        fallback_on_codes:
-          maxItems: 20
-          uniqueItems: true
-          type: "array"
-          items:
-            type: "integer"
-            format: "int32"
-            maximum: 599
-            minimum: 400
-          description: "HTTP error status codes that trigger fallback. Only allowed in fallback mode. Empty uses the default: 408, 429, 500, 502, 503, 504, 529."
     RoutingRulePlugin:
       type: "object"
       properties:
@@ -16284,12 +16221,6 @@ components:
             type: "number"
             format: "double"
           description: "Per-entity-type confidence cutoff. Every key must also appear in entities."
-        models_config:
-          $ref: "#/components/schemas/RoutingRuleModelsConfig"
-        checks:
-          type: "object"
-          additionalProperties:
-            $ref: "#/components/schemas/SignalsCheck"
     RoutingRuleCacheConfig:
       required:
         - "ttl"
@@ -16311,14 +16242,6 @@ components:
           format: "double"
         integration_id:
           type: "string"
-    SignalsCheck:
-      type: "object"
-      properties:
-        enabled:
-          type: "boolean"
-        threshold:
-          type: "number"
-          format: "double"
     CreateThreadRequest:
       required:
         - "external_id"
@@ -16835,8 +16758,6 @@ components:
         profile:
           description: "Routing preference: quality favors more capable models, cost favors less expensive models, and balanced trades off both."
           $ref: "#/components/schemas/SmartRouterProfile"
-        session_affinity:
-          $ref: "#/components/schemas/SmartRouterSessionAffinity"
     CreateSmartRouterResponse:
       required:
         - "smart_router"
@@ -16866,8 +16787,6 @@ components:
         profile:
           description: "New routing preference. Omit to keep the current profile."
           $ref: "#/components/schemas/SmartRouterProfile"
-        session_affinity:
-          $ref: "#/components/schemas/SmartRouterSessionAffinity"
     UpdateSmartRouterResponse:
       required:
         - "smart_router"
@@ -16915,22 +16834,6 @@ components:
           type: "string"
           description: "Date and time when the Smart Router was last updated."
           format: "date-time"
-        session_affinity:
-          $ref: "#/components/schemas/SmartRouterSessionAffinity"
-    SmartRouterSessionAffinity:
-      required:
-        - "enabled"
-      type: "object"
-      properties:
-        enabled:
-          type: "boolean"
-          description: "Whether later turns of a thread stay on the model chosen for its first turn. Only requests that carry a thread id take part. Off by default."
-        ttl_seconds:
-          maximum: 3600
-          minimum: 60
-          type: "integer"
-          description: "Sliding idle window in seconds. A thread that stays quiet longer than this is routed afresh on its next turn. Between 60 and 3600. Defaults to 600 when omitted."
-          format: "int32"
     ListWebhooksResponse:
       required:
         - "count"
@@ -17473,8 +17376,6 @@ components:
           type: "boolean"
         chat_kit:
           $ref: "#/components/schemas/ChatKitResources"
-        tracing_enabled:
-          type: "boolean"
     UpdateWorkspaceResponse:
       required:
         - "workspace"
@@ -18029,15 +17930,6 @@ components:
         cache:
           $ref: "#/components/schemas/ClassifyCacheConfig"
           description: "Exact-match response cache for this request. An identical request body from the same workspace and project is served from the stored response, with the X-Cache header reporting HIT or MISS."
-        fallback_on_codes:
-          description: "HTTP status codes that trigger fallback. Defaults to [408,429,500,502,503,504,529]. Each code must be unique and between 400 and 599."
-          items:
-            format: "int64"
-            type: "integer"
-          maxItems: 20
-          type:
-            - "array"
-            - "null"
         fallbacks:
           description: "Up to 10 fallback models in order. The gateway retries a model for matching error codes before trying the next model. Every model must support classification and satisfy access checks. Image requests require native OpenAI image-capable fallbacks."
           items:
@@ -18585,6 +18477,29 @@ components:
       required:
         - "type"
       type: "object"
+    PublicCompactionItem:
+      additionalProperties: false
+      properties:
+        content:
+          description: "Not populated by this endpoint."
+          type: "string"
+        created_by:
+          description: "The model that created this summary."
+          type: "string"
+        encrypted_content:
+          description: "The summary content generated by the model."
+          type: "string"
+        id:
+          description: "The ID of the compaction item."
+          type: "string"
+        type:
+          description: "Always \"compaction\"."
+          enum:
+            - "compaction"
+          type: "string"
+      required:
+        - "type"
+      type: "object"
     PublicCreateCompactBody:
       additionalProperties: false
       properties:
@@ -18633,7 +18548,7 @@ components:
           description: "The model to use for compaction in provider/model format (e.g. openai/gpt-4o). Required."
           type: "string"
         previous_response_id:
-          description: "The ID of a stored response whose conversation is compacted; input is appended after it."
+          description: "The ID of a previous response to continue from."
           type: "string"
         prompt_cache_key:
           description: "Key for prompt caching across requests."
@@ -18655,15 +18570,6 @@ components:
             - "float"
             - "base64"
           type: "string"
-        fallback_on_codes:
-          description: "HTTP status codes that trigger fallback. Defaults to [408,429,500,502,503,504,529]. Each code must be unique and between 400 and 599."
-          items:
-            format: "int64"
-            type: "integer"
-          maxItems: 20
-          type:
-            - "array"
-            - "null"
         fallbacks:
           description: "Array of fallback models to use if primary model fails."
           items:
@@ -18746,15 +18652,6 @@ components:
         conversation:
           $ref: "#/components/schemas/ConversationParam"
           description: "Conversation context for multi-turn interactions."
-        fallback_on_codes:
-          description: "HTTP status codes that trigger fallback. Defaults to [408,429,500,502,503,504,529]. Each code must be unique and between 400 and 599."
-          items:
-            format: "int64"
-            type: "integer"
-          maxItems: 20
-          type:
-            - "array"
-            - "null"
         fallbacks:
           description: "Fallback models to try if the primary model fails. Each entry specifies a model in provider/model format."
           items:
@@ -25735,14 +25632,6 @@ paths:
                                   - $ref: "#/components/schemas/ResponseHealingPlugin"
                                   - $ref: "#/components/schemas/TraceScrubbingPlugin"
                               description: "Request-scoped transforms applied to the text exchanged with the model. Supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response, and `response_healing`, which repairs malformed JSON in non-streaming output."
-                            fallback_on_codes:
-                              type: "array"
-                              items:
-                                type: "integer"
-                                minimum: 400
-                                maximum: 599
-                              maxItems: 20
-                              description: "HTTP status codes that trigger fallback. Enter up to 20 unique integers from 400 to 599. When omitted or empty, defaults to [408, 429, 500, 502, 503, 504, 529]."
                             fallbacks:
                               type: "array"
                               items:
@@ -26091,14 +25980,6 @@ paths:
                                     - $ref: "#/components/schemas/ResponseHealingPlugin"
                                     - $ref: "#/components/schemas/TraceScrubbingPlugin"
                                 description: "Request-scoped transforms applied to the text exchanged with the model. Supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response, and `response_healing`, which repairs malformed JSON in non-streaming output."
-                              fallback_on_codes:
-                                type: "array"
-                                items:
-                                  type: "integer"
-                                  minimum: 400
-                                  maximum: 599
-                                maxItems: 20
-                                description: "HTTP status codes that trigger fallback. Enter up to 20 unique integers from 400 to 599. When omitted or empty, defaults to [408, 429, 500, 502, 503, 504, 529]."
                               fallbacks:
                                 type: "array"
                                 items:
@@ -26912,14 +26793,6 @@ paths:
                                 - $ref: "#/components/schemas/ResponseHealingPlugin"
                                 - $ref: "#/components/schemas/TraceScrubbingPlugin"
                             description: "Request-scoped transforms applied to the text exchanged with the model. Supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response, and `response_healing`, which repairs malformed JSON in non-streaming output."
-                          fallback_on_codes:
-                            type: "array"
-                            items:
-                              type: "integer"
-                              minimum: 400
-                              maximum: 599
-                            maxItems: 20
-                            description: "HTTP status codes that trigger fallback. Enter up to 20 unique integers from 400 to 599. When omitted or empty, defaults to [408, 429, 500, 502, 503, 504, 529]."
                           fallbacks:
                             type: "array"
                             items:
@@ -27265,14 +27138,6 @@ paths:
                                           - $ref: "#/components/schemas/ResponseHealingPlugin"
                                           - $ref: "#/components/schemas/TraceScrubbingPlugin"
                                       description: "Request-scoped transforms applied to the text exchanged with the model. Supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response, and `response_healing`, which repairs malformed JSON in non-streaming output."
-                                    fallback_on_codes:
-                                      type: "array"
-                                      items:
-                                        type: "integer"
-                                        minimum: 400
-                                        maximum: 599
-                                      maxItems: 20
-                                      description: "HTTP status codes that trigger fallback. Enter up to 20 unique integers from 400 to 599. When omitted or empty, defaults to [408, 429, 500, 502, 503, 504, 529]."
                                     fallbacks:
                                       type: "array"
                                       items:
@@ -27991,14 +27856,6 @@ paths:
                                       - $ref: "#/components/schemas/ResponseHealingPlugin"
                                       - $ref: "#/components/schemas/TraceScrubbingPlugin"
                                   description: "Request-scoped transforms applied to the text exchanged with the model. Supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response, and `response_healing`, which repairs malformed JSON in non-streaming output."
-                                fallback_on_codes:
-                                  type: "array"
-                                  items:
-                                    type: "integer"
-                                    minimum: 400
-                                    maximum: 599
-                                  maxItems: 20
-                                  description: "HTTP status codes that trigger fallback. Enter up to 20 unique integers from 400 to 599. When omitted or empty, defaults to [408, 429, 500, 502, 503, 504, 529]."
                                 fallbacks:
                                   type: "array"
                                   items:
@@ -28344,14 +28201,6 @@ paths:
                                                 - $ref: "#/components/schemas/ResponseHealingPlugin"
                                                 - $ref: "#/components/schemas/TraceScrubbingPlugin"
                                             description: "Request-scoped transforms applied to the text exchanged with the model. Supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response, and `response_healing`, which repairs malformed JSON in non-streaming output."
-                                          fallback_on_codes:
-                                            type: "array"
-                                            items:
-                                              type: "integer"
-                                              minimum: 400
-                                              maximum: 599
-                                            maxItems: 20
-                                            description: "HTTP status codes that trigger fallback. Enter up to 20 unique integers from 400 to 599. When omitted or empty, defaults to [408, 429, 500, 502, 503, 504, 529]."
                                           fallbacks:
                                             type: "array"
                                             items:
@@ -29176,14 +29025,6 @@ paths:
                                 - $ref: "#/components/schemas/ResponseHealingPlugin"
                                 - $ref: "#/components/schemas/TraceScrubbingPlugin"
                             description: "Request-scoped transforms applied to the text exchanged with the model. Supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response, and `response_healing`, which repairs malformed JSON in non-streaming output."
-                          fallback_on_codes:
-                            type: "array"
-                            items:
-                              type: "integer"
-                              minimum: 400
-                              maximum: 599
-                            maxItems: 20
-                            description: "HTTP status codes that trigger fallback. Enter up to 20 unique integers from 400 to 599. When omitted or empty, defaults to [408, 429, 500, 502, 503, 504, 529]."
                           fallbacks:
                             type: "array"
                             items:
@@ -29529,14 +29370,6 @@ paths:
                                           - $ref: "#/components/schemas/ResponseHealingPlugin"
                                           - $ref: "#/components/schemas/TraceScrubbingPlugin"
                                       description: "Request-scoped transforms applied to the text exchanged with the model. Supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response, and `response_healing`, which repairs malformed JSON in non-streaming output."
-                                    fallback_on_codes:
-                                      type: "array"
-                                      items:
-                                        type: "integer"
-                                        minimum: 400
-                                        maximum: 599
-                                      maxItems: 20
-                                      description: "HTTP status codes that trigger fallback. Enter up to 20 unique integers from 400 to 599. When omitted or empty, defaults to [408, 429, 500, 502, 503, 504, 529]."
                                     fallbacks:
                                       type: "array"
                                       items:
@@ -29959,14 +29792,6 @@ paths:
                                   - $ref: "#/components/schemas/ResponseHealingPlugin"
                                   - $ref: "#/components/schemas/TraceScrubbingPlugin"
                               description: "Request-scoped transforms applied to the text exchanged with the model. Supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response, and `response_healing`, which repairs malformed JSON in non-streaming output."
-                            fallback_on_codes:
-                              type: "array"
-                              items:
-                                type: "integer"
-                                minimum: 400
-                                maximum: 599
-                              maxItems: 20
-                              description: "HTTP status codes that trigger fallback. Enter up to 20 unique integers from 400 to 599. When omitted or empty, defaults to [408, 429, 500, 502, 503, 504, 529]."
                             fallbacks:
                               type: "array"
                               items:
@@ -30315,14 +30140,6 @@ paths:
                                     - $ref: "#/components/schemas/ResponseHealingPlugin"
                                     - $ref: "#/components/schemas/TraceScrubbingPlugin"
                                 description: "Request-scoped transforms applied to the text exchanged with the model. Supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response, and `response_healing`, which repairs malformed JSON in non-streaming output."
-                              fallback_on_codes:
-                                type: "array"
-                                items:
-                                  type: "integer"
-                                  minimum: 400
-                                  maximum: 599
-                                maxItems: 20
-                                description: "HTTP status codes that trigger fallback. Enter up to 20 unique integers from 400 to 599. When omitted or empty, defaults to [408, 429, 500, 502, 503, 504, 529]."
                               fallbacks:
                                 type: "array"
                                 items:
@@ -31136,14 +30953,6 @@ paths:
                                 - $ref: "#/components/schemas/ResponseHealingPlugin"
                                 - $ref: "#/components/schemas/TraceScrubbingPlugin"
                             description: "Request-scoped transforms applied to the text exchanged with the model. Supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response, and `response_healing`, which repairs malformed JSON in non-streaming output."
-                          fallback_on_codes:
-                            type: "array"
-                            items:
-                              type: "integer"
-                              minimum: 400
-                              maximum: 599
-                            maxItems: 20
-                            description: "HTTP status codes that trigger fallback. Enter up to 20 unique integers from 400 to 599. When omitted or empty, defaults to [408, 429, 500, 502, 503, 504, 529]."
                           fallbacks:
                             type: "array"
                             items:
@@ -31489,14 +31298,6 @@ paths:
                                           - $ref: "#/components/schemas/ResponseHealingPlugin"
                                           - $ref: "#/components/schemas/TraceScrubbingPlugin"
                                       description: "Request-scoped transforms applied to the text exchanged with the model. Supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response, and `response_healing`, which repairs malformed JSON in non-streaming output."
-                                    fallback_on_codes:
-                                      type: "array"
-                                      items:
-                                        type: "integer"
-                                        minimum: 400
-                                        maximum: 599
-                                      maxItems: 20
-                                      description: "HTTP status codes that trigger fallback. Enter up to 20 unique integers from 400 to 599. When omitted or empty, defaults to [408, 429, 500, 502, 503, 504, 529]."
                                     fallbacks:
                                       type: "array"
                                       items:
@@ -32218,14 +32019,6 @@ paths:
                                   - $ref: "#/components/schemas/ResponseHealingPlugin"
                                   - $ref: "#/components/schemas/TraceScrubbingPlugin"
                               description: "Request-scoped transforms applied to the text exchanged with the model. Supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response, and `response_healing`, which repairs malformed JSON in non-streaming output."
-                            fallback_on_codes:
-                              type: "array"
-                              items:
-                                type: "integer"
-                                minimum: 400
-                                maximum: 599
-                              maxItems: 20
-                              description: "HTTP status codes that trigger fallback. Enter up to 20 unique integers from 400 to 599. When omitted or empty, defaults to [408, 429, 500, 502, 503, 504, 529]."
                             fallbacks:
                               type: "array"
                               items:
@@ -32574,14 +32367,6 @@ paths:
                                     - $ref: "#/components/schemas/ResponseHealingPlugin"
                                     - $ref: "#/components/schemas/TraceScrubbingPlugin"
                                 description: "Request-scoped transforms applied to the text exchanged with the model. Supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response, and `response_healing`, which repairs malformed JSON in non-streaming output."
-                              fallback_on_codes:
-                                type: "array"
-                                items:
-                                  type: "integer"
-                                  minimum: 400
-                                  maximum: 599
-                                maxItems: 20
-                                description: "HTTP status codes that trigger fallback. Enter up to 20 unique integers from 400 to 599. When omitted or empty, defaults to [408, 429, 500, 502, 503, 504, 529]."
                               fallbacks:
                                 type: "array"
                                 items:
@@ -33317,7 +33102,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01M4TYMS766BN963XWETGRG6J7"
+                                          default: "01M4V64558HVPHXPACN0M3MAK9"
                                         name:
                                           type: "string"
                                         description:
@@ -33831,14 +33616,6 @@ paths:
                                   - $ref: "#/components/schemas/ResponseHealingPlugin"
                                   - $ref: "#/components/schemas/TraceScrubbingPlugin"
                               description: "Request-scoped transforms applied to the text exchanged with the model. Supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response, and `response_healing`, which repairs malformed JSON in non-streaming output."
-                            fallback_on_codes:
-                              type: "array"
-                              items:
-                                type: "integer"
-                                minimum: 400
-                                maximum: 599
-                              maxItems: 20
-                              description: "HTTP status codes that trigger fallback. Enter up to 20 unique integers from 400 to 599. When omitted or empty, defaults to [408, 429, 500, 502, 503, 504, 529]."
                             fallbacks:
                               type: "array"
                               items:
@@ -34187,14 +33964,6 @@ paths:
                                     - $ref: "#/components/schemas/ResponseHealingPlugin"
                                     - $ref: "#/components/schemas/TraceScrubbingPlugin"
                                 description: "Request-scoped transforms applied to the text exchanged with the model. Supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response, and `response_healing`, which repairs malformed JSON in non-streaming output."
-                              fallback_on_codes:
-                                type: "array"
-                                items:
-                                  type: "integer"
-                                  minimum: 400
-                                  maximum: 599
-                                maxItems: 20
-                                description: "HTTP status codes that trigger fallback. Enter up to 20 unique integers from 400 to 599. When omitted or empty, defaults to [408, 429, 500, 502, 503, 504, 529]."
                               fallbacks:
                                 type: "array"
                                 items:
@@ -34930,7 +34699,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01M4TYMS7Z3X8CTEZ6HN59JEJ5"
+                                          default: "01M4V6455SRZZPS91SW7Z697GE"
                                         name:
                                           type: "string"
                                         description:
@@ -36201,14 +35970,6 @@ paths:
                                   - $ref: "#/components/schemas/ResponseHealingPlugin"
                                   - $ref: "#/components/schemas/TraceScrubbingPlugin"
                               description: "Request-scoped transforms applied to the text exchanged with the model. Supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response, and `response_healing`, which repairs malformed JSON in non-streaming output."
-                            fallback_on_codes:
-                              type: "array"
-                              items:
-                                type: "integer"
-                                minimum: 400
-                                maximum: 599
-                              maxItems: 20
-                              description: "HTTP status codes that trigger fallback. Enter up to 20 unique integers from 400 to 599. When omitted or empty, defaults to [408, 429, 500, 502, 503, 504, 529]."
                             fallbacks:
                               type: "array"
                               items:
@@ -37196,14 +36957,6 @@ paths:
                           - $ref: "#/components/schemas/ResponseHealingPlugin"
                           - $ref: "#/components/schemas/TraceScrubbingPlugin"
                       description: "Request-scoped transforms applied to the text exchanged with the model. Supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response, and `response_healing`, which repairs malformed JSON in non-streaming output."
-                    fallback_on_codes:
-                      type: "array"
-                      items:
-                        type: "integer"
-                        minimum: 400
-                        maximum: 599
-                      maxItems: 20
-                      description: "HTTP status codes that trigger fallback. Enter up to 20 unique integers from 400 to 599. When omitted or empty, defaults to [408, 429, 500, 502, 503, 504, 529]."
                     fallbacks:
                       type: "array"
                       items:
@@ -38055,14 +37808,6 @@ paths:
                             - $ref: "#/components/schemas/ResponseHealingPlugin"
                             - $ref: "#/components/schemas/TraceScrubbingPlugin"
                         description: "Request-scoped transforms applied to the text exchanged with the model. Supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response, and `response_healing`, which repairs malformed JSON in non-streaming output."
-                      fallback_on_codes:
-                        type: "array"
-                        items:
-                          type: "integer"
-                          minimum: 400
-                          maximum: 599
-                        maxItems: 20
-                        description: "HTTP status codes that trigger fallback. Enter up to 20 unique integers from 400 to 599. When omitted or empty, defaults to [408, 429, 500, 502, 503, 504, 529]."
                       fallbacks:
                         type: "array"
                         items:
@@ -39202,14 +38947,6 @@ paths:
                             - $ref: "#/components/schemas/ResponseHealingPlugin"
                             - $ref: "#/components/schemas/TraceScrubbingPlugin"
                         description: "Request-scoped transforms applied to the text exchanged with the model. Supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response, and `response_healing`, which repairs malformed JSON in non-streaming output."
-                      fallback_on_codes:
-                        type: "array"
-                        items:
-                          type: "integer"
-                          minimum: 400
-                          maximum: 599
-                        maxItems: 20
-                        description: "HTTP status codes that trigger fallback. Enter up to 20 unique integers from 400 to 599. When omitted or empty, defaults to [408, 429, 500, 502, 503, 504, 529]."
                       fallbacks:
                         type: "array"
                         items:
@@ -40175,14 +39912,6 @@ paths:
                           - $ref: "#/components/schemas/ResponseHealingPlugin"
                           - $ref: "#/components/schemas/TraceScrubbingPlugin"
                       description: "Request-scoped transforms applied to the text exchanged with the model. Supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response, and `response_healing`, which repairs malformed JSON in non-streaming output."
-                    fallback_on_codes:
-                      type: "array"
-                      items:
-                        type: "integer"
-                        minimum: 400
-                        maximum: 599
-                      maxItems: 20
-                      description: "HTTP status codes that trigger fallback. Enter up to 20 unique integers from 400 to 599. When omitted or empty, defaults to [408, 429, 500, 502, 503, 504, 529]."
                     fallbacks:
                       type: "array"
                       items:
@@ -41072,14 +40801,6 @@ paths:
                             - $ref: "#/components/schemas/ResponseHealingPlugin"
                             - $ref: "#/components/schemas/TraceScrubbingPlugin"
                         description: "Request-scoped transforms applied to the text exchanged with the model. Supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response, and `response_healing`, which repairs malformed JSON in non-streaming output."
-                      fallback_on_codes:
-                        type: "array"
-                        items:
-                          type: "integer"
-                          minimum: 400
-                          maximum: 599
-                        maxItems: 20
-                        description: "HTTP status codes that trigger fallback. Enter up to 20 unique integers from 400 to 599. When omitted or empty, defaults to [408, 429, 500, 502, 503, 504, 529]."
                       fallbacks:
                         type: "array"
                         items:
@@ -42279,14 +42000,6 @@ paths:
                                       - $ref: "#/components/schemas/ResponseHealingPlugin"
                                       - $ref: "#/components/schemas/TraceScrubbingPlugin"
                                   description: "Request-scoped transforms applied to the text exchanged with the model. Supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response, and `response_healing`, which repairs malformed JSON in non-streaming output."
-                                fallback_on_codes:
-                                  type: "array"
-                                  items:
-                                    type: "integer"
-                                    minimum: 400
-                                    maximum: 599
-                                  maxItems: 20
-                                  description: "HTTP status codes that trigger fallback. Enter up to 20 unique integers from 400 to 599. When omitted or empty, defaults to [408, 429, 500, 502, 503, 504, 529]."
                                 fallbacks:
                                   type: "array"
                                   items:
@@ -43421,14 +43134,6 @@ paths:
                                 - $ref: "#/components/schemas/ResponseHealingPlugin"
                                 - $ref: "#/components/schemas/TraceScrubbingPlugin"
                             description: "Request-scoped transforms applied to the text exchanged with the model. Supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response, and `response_healing`, which repairs malformed JSON in non-streaming output."
-                          fallback_on_codes:
-                            type: "array"
-                            items:
-                              type: "integer"
-                              minimum: 400
-                              maximum: 599
-                            maxItems: 20
-                            description: "HTTP status codes that trigger fallback. Enter up to 20 unique integers from 400 to 599. When omitted or empty, defaults to [408, 429, 500, 502, 503, 504, 529]."
                           fallbacks:
                             type: "array"
                             items:
@@ -43908,7 +43613,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M4TYMS9SNHKHH5PJ354PPSR1"
+                              default: "tool_01M4V6456ZA0ZZFKM62P789V0R"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -44009,7 +43714,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M4TYMS9TVE2S9FYRXFC47CC9"
+                              default: "tool_01M4V6456ZGTN19804M1H0ZNY7"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -44112,7 +43817,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M4TYMS9TQA4Z8CHF6T9SFGCN"
+                              default: "tool_01M4V64570XYR7XTB34JH1X4C0"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -44256,7 +43961,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M4TYMS9WTMJ1P55ENEW3HYFQ"
+                              default: "tool_01M4V6457168HFYH9H5EQ51317"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -44743,7 +44448,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M4TYMSA0R0DV9CT61DZ2TQFG"
+                        default: "tool_01M4V64574QE9PZ70A2QQFFRNC"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -44844,7 +44549,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M4TYMSA1QDPAKBHFQ4353SG8"
+                        default: "tool_01M4V645741BSG2XXS9QM538KK"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -44947,7 +44652,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M4TYMSA25Z7TTSXDH249A59W"
+                        default: "tool_01M4V64575EPMSFX3GBXDNFQJ1"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -45091,7 +44796,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M4TYMSA3WR4ZEGGZ685JE58K"
+                        default: "tool_01M4V64576J238BF7BT2F8J5HT"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -45589,7 +45294,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M4TYMSA60KXKD3HQP0AXM7EA"
+                        default: "tool_01M4V64578TX9JJWMCA8E3V9ME"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -45690,7 +45395,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M4TYMSA7CMGF6S5BXJK1MCE3"
+                        default: "tool_01M4V64578KJ4F5GPPV50188CV"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -45793,7 +45498,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M4TYMSA7Z99QB3QG93DZW9B9"
+                        default: "tool_01M4V64579Y7DJ1BSP7YEZ10KR"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -45937,7 +45642,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M4TYMSA8ZXQQ13CKQW7TXTBY"
+                        default: "tool_01M4V64579V588SK5DFQBNHED8"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -46098,7 +45803,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M4TYMSAFWA0K3AT5BVVWB9RE"
+                        default: "tool_01M4V6457E3ZW2VFE3YCBPYDJ2"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -46199,7 +45904,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M4TYMSAG645371WNMW4CS89R"
+                        default: "tool_01M4V6457FFYY0VQ96WKFJT0SD"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -46302,7 +46007,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M4TYMSAH15MF9ADG1NXEBY1H"
+                        default: "tool_01M4V6457GKCBG5569WNWXACFG"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -46446,7 +46151,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M4TYMSAJ8KRJTV1D7AYM74ZG"
+                        default: "tool_01M4V6457HH1M5HB19SZ6WF00N"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -46551,7 +46256,6 @@ paths:
         - "Tools"
       x-cli-group: "tools"
       x-cli-name: "listVersions"
-      x-speakeasy-group: "tools"
       x-speakeasy-name-override: "listVersions"
       summary: "List tool versions"
       description: "Returns version history for a specific tool"
@@ -46662,7 +46366,6 @@ paths:
         - "Tools"
       x-cli-group: "tools"
       x-cli-name: "getVersion"
-      x-speakeasy-group: "tools"
       x-speakeasy-name-override: "getVersion"
       summary: "Get tool version"
       description: "Returns a specific version of a tool"
@@ -47318,14 +47021,6 @@ paths:
                           - $ref: "#/components/schemas/ResponseHealingPlugin"
                           - $ref: "#/components/schemas/TraceScrubbingPlugin"
                       description: "Request-scoped transforms applied to the text exchanged with the model. Supports `pii_redaction`, which replaces PII with placeholders before the provider sees it and restores the original values in the response, and `response_healing`, which repairs malformed JSON in non-streaming output."
-                    fallback_on_codes:
-                      type: "array"
-                      items:
-                        type: "integer"
-                        minimum: 400
-                        maximum: 599
-                      maxItems: 20
-                      description: "HTTP status codes that trigger fallback. Enter up to 20 unique integers from 400 to 599. When omitted or empty, defaults to [408, 429, 500, 502, 503, 504, 529]."
                     fallbacks:
                       type: "array"
                       items:
@@ -47487,14 +47182,6 @@ paths:
                                 - 503
                                 - 504
                           description: "Retry configuration for the request"
-                        fallback_on_codes:
-                          type: "array"
-                          items:
-                            type: "integer"
-                            minimum: 400
-                            maximum: 599
-                          maxItems: 20
-                          description: "HTTP status codes that trigger fallback. Enter up to 20 unique integers from 400 to 599. When omitted or empty, defaults to [408, 429, 500, 502, 503, 504, 529]."
                         fallbacks:
                           type: "array"
                           items:
@@ -48737,6 +48424,7 @@ paths:
                   description: "The content moderation model you would like to use. Defaults to omni-moderation-latest"
               required:
                 - "input"
+                - "model"
       responses:
         "200":
           description: "Returns moderation classification results"
@@ -49053,7 +48741,7 @@ paths:
                   - "id"
                   - "model"
                   - "results"
-        "400":
+        "422":
           description: "Returns validation error"
           content:
             application/json:
@@ -49072,9 +48760,7 @@ paths:
                           - "string"
                           - "null"
                       code:
-                        type:
-                          - "string"
-                          - "null"
+                        type: "string"
                     required:
                       - "message"
                       - "type"
@@ -49131,14 +48817,6 @@ paths:
                 name:
                   type: "string"
                   description: "The name to display on the trace. If not specified, the default system name will be used."
-                fallback_on_codes:
-                  type: "array"
-                  items:
-                    type: "integer"
-                    minimum: 400
-                    maximum: 599
-                  maxItems: 20
-                  description: "HTTP status codes that trigger fallback. Enter up to 20 unique integers from 400 to 599. When omitted or empty, defaults to [408, 429, 500, 502, 503, 504, 529]."
                 fallbacks:
                   type: "array"
                   items:
@@ -49256,14 +48934,6 @@ paths:
                         required:
                           - "model"
                       description: "Array of fallback models to use if primary model fails"
-                    fallback_on_codes:
-                      type: "array"
-                      items:
-                        type: "integer"
-                        minimum: 400
-                        maximum: 599
-                      maxItems: 20
-                      description: "HTTP status codes that trigger fallback. Enter up to 20 unique integers from 400 to 599. When omitted or empty, defaults to [408, 429, 500, 502, 503, 504, 529]."
                     cache:
                       type: "object"
                       properties:
@@ -49468,14 +49138,6 @@ paths:
                 name:
                   type: "string"
                   description: "The name to display on the trace. If not specified, the default system name will be used."
-                fallback_on_codes:
-                  type: "array"
-                  items:
-                    type: "integer"
-                    minimum: 400
-                    maximum: 599
-                  maxItems: 20
-                  description: "HTTP status codes that trigger fallback. Enter up to 20 unique integers from 400 to 599. When omitted or empty, defaults to [408, 429, 500, 502, 503, 504, 529]."
                 fallbacks:
                   type: "array"
                   items:
@@ -49593,14 +49255,6 @@ paths:
                         required:
                           - "model"
                       description: "Array of fallback models to use if primary model fails"
-                    fallback_on_codes:
-                      type: "array"
-                      items:
-                        type: "integer"
-                        minimum: 400
-                        maximum: 599
-                      maxItems: 20
-                      description: "HTTP status codes that trigger fallback. Enter up to 20 unique integers from 400 to 599. When omitted or empty, defaults to [408, 429, 500, 502, 503, 504, 529]."
                     name:
                       type: "string"
                       description: "The name to display on the trace. If not specified, the default system name will be used."
@@ -49774,14 +49428,6 @@ paths:
                     name:
                       type: "string"
                       description: "The name to display on the trace. If not specified, the default system name will be used."
-                    fallback_on_codes:
-                      type: "array"
-                      items:
-                        type: "integer"
-                        minimum: 400
-                        maximum: 599
-                      maxItems: 20
-                      description: "HTTP status codes that trigger fallback. Enter up to 20 unique integers from 400 to 599. When omitted or empty, defaults to [408, 429, 500, 502, 503, 504, 529]."
                     fallbacks:
                       type: "array"
                       items:
@@ -49919,14 +49565,6 @@ paths:
                                 - 503
                                 - 504
                           description: "Retry configuration for the request"
-                        fallback_on_codes:
-                          type: "array"
-                          items:
-                            type: "integer"
-                            minimum: 400
-                            maximum: 599
-                          maxItems: 20
-                          description: "HTTP status codes that trigger fallback. Enter up to 20 unique integers from 400 to 599. When omitted or empty, defaults to [408, 429, 500, 502, 503, 504, 529]."
                         fallbacks:
                           type: "array"
                           items:
@@ -50862,14 +50500,6 @@ paths:
                 name:
                   type: "string"
                   description: "The name to display on the trace. If not specified, the default system name will be used."
-                fallback_on_codes:
-                  type: "array"
-                  items:
-                    type: "integer"
-                    minimum: 400
-                    maximum: 599
-                  maxItems: 20
-                  description: "HTTP status codes that trigger fallback. Enter up to 20 unique integers from 400 to 599. When omitted or empty, defaults to [408, 429, 500, 502, 503, 504, 529]."
                 fallbacks:
                   type: "array"
                   items:
@@ -51000,14 +50630,6 @@ paths:
                             - 503
                             - 504
                       description: "Retry configuration for the request"
-                    fallback_on_codes:
-                      type: "array"
-                      items:
-                        type: "integer"
-                        minimum: 400
-                        maximum: 599
-                      maxItems: 20
-                      description: "HTTP status codes that trigger fallback. Enter up to 20 unique integers from 400 to 599. When omitted or empty, defaults to [408, 429, 500, 502, 503, 504, 529]."
                     fallbacks:
                       type: "array"
                       items:
@@ -51210,14 +50832,6 @@ paths:
                 name:
                   type: "string"
                   description: "The name to display on the trace. If not specified, the default system name will be used."
-                fallback_on_codes:
-                  type: "array"
-                  items:
-                    type: "integer"
-                    minimum: 400
-                    maximum: 599
-                  maxItems: 20
-                  description: "HTTP status codes that trigger fallback. Enter up to 20 unique integers from 400 to 599. When omitted or empty, defaults to [408, 429, 500, 502, 503, 504, 529]."
                 fallbacks:
                   type: "array"
                   items:
@@ -51343,14 +50957,6 @@ paths:
                             - 503
                             - 504
                       description: "Retry configuration for the request"
-                    fallback_on_codes:
-                      type: "array"
-                      items:
-                        type: "integer"
-                        minimum: 400
-                        maximum: 599
-                      maxItems: 20
-                      description: "HTTP status codes that trigger fallback. Enter up to 20 unique integers from 400 to 599. When omitted or empty, defaults to [408, 429, 500, 502, 503, 504, 529]."
                     fallbacks:
                       type: "array"
                       items:
@@ -51577,14 +51183,6 @@ paths:
                 name:
                   type: "string"
                   description: "The name to display on the trace. If not specified, the default system name will be used."
-                fallback_on_codes:
-                  type: "array"
-                  items:
-                    type: "integer"
-                    minimum: 400
-                    maximum: 599
-                  maxItems: 20
-                  description: "HTTP status codes that trigger fallback. Enter up to 20 unique integers from 400 to 599. When omitted or empty, defaults to [408, 429, 500, 502, 503, 504, 529]."
                 fallbacks:
                   type: "array"
                   items:
@@ -51710,14 +51308,6 @@ paths:
                             - 503
                             - 504
                       description: "Retry configuration for the request"
-                    fallback_on_codes:
-                      type: "array"
-                      items:
-                        type: "integer"
-                        minimum: 400
-                        maximum: 599
-                      maxItems: 20
-                      description: "HTTP status codes that trigger fallback. Enter up to 20 unique integers from 400 to 599. When omitted or empty, defaults to [408, 429, 500, 502, 503, 504, 529]."
                     fallbacks:
                       type: "array"
                       items:
@@ -51966,14 +51556,6 @@ paths:
                 name:
                   type: "string"
                   description: "The name to display on the trace. If not specified, the default system name will be used."
-                fallback_on_codes:
-                  type: "array"
-                  items:
-                    type: "integer"
-                    minimum: 400
-                    maximum: 599
-                  maxItems: 20
-                  description: "HTTP status codes that trigger fallback. Enter up to 20 unique integers from 400 to 599. When omitted or empty, defaults to [408, 429, 500, 502, 503, 504, 529]."
                 fallbacks:
                   type: "array"
                   items:
@@ -52069,14 +51651,6 @@ paths:
                         required:
                           - "model"
                       description: "Array of fallback models to use if primary model fails"
-                    fallback_on_codes:
-                      type: "array"
-                      items:
-                        type: "integer"
-                        minimum: 400
-                        maximum: 599
-                      maxItems: 20
-                      description: "HTTP status codes that trigger fallback. Enter up to 20 unique integers from 400 to 599. When omitted or empty, defaults to [408, 429, 500, 502, 503, 504, 529]."
                     retry:
                       type: "object"
                       properties:
@@ -52330,14 +51904,6 @@ paths:
                 name:
                   type: "string"
                   description: "The name to display on the trace. If not specified, the default system name will be used."
-                fallback_on_codes:
-                  type: "array"
-                  items:
-                    type: "integer"
-                    minimum: 400
-                    maximum: 599
-                  maxItems: 20
-                  description: "HTTP status codes that trigger fallback. Enter up to 20 unique integers from 400 to 599. When omitted or empty, defaults to [408, 429, 500, 502, 503, 504, 529]."
                 fallbacks:
                   type: "array"
                   items:
@@ -52433,14 +51999,6 @@ paths:
                         required:
                           - "model"
                       description: "Array of fallback models to use if primary model fails"
-                    fallback_on_codes:
-                      type: "array"
-                      items:
-                        type: "integer"
-                        minimum: 400
-                        maximum: 599
-                      maxItems: 20
-                      description: "HTTP status codes that trigger fallback. Enter up to 20 unique integers from 400 to 599. When omitted or empty, defaults to [408, 429, 500, 502, 503, 504, 529]."
                     retry:
                       type: "object"
                       properties:
@@ -52832,10 +52390,7 @@ paths:
       tags:
         - "Feedback"
       deprecated: true
-      x-speakeasy-group: "feedback"
       x-speakeasy-name-override: "removeEvaluation"
-      x-cli-group: "feedback"
-      x-cli-name: "evaluationRemove"
       requestBody:
         content:
           application/json:
@@ -52860,10 +52415,7 @@ paths:
       tags:
         - "Feedback"
       deprecated: true
-      x-speakeasy-group: "feedback"
       x-speakeasy-name-override: "createEvaluation"
-      x-cli-group: "feedback"
-      x-cli-name: "evaluation"
       requestBody:
         content:
           application/json:
@@ -52894,7 +52446,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-10-13T15:38:36.293Z"
+                      default: "2026-10-13T17:49:20.016Z"
                       deprecated: true
                       description: "Deprecated. The date and time the item was reviewed"
                     type:
@@ -52936,7 +52488,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-10-13T15:38:36.293Z"
+                      default: "2026-10-13T17:49:20.016Z"
                       deprecated: true
                       description: "Deprecated. The date and time the item was reviewed"
                     type:
@@ -52978,7 +52530,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-10-13T15:38:36.294Z"
+                      default: "2026-10-13T17:49:20.016Z"
                       deprecated: true
                       description: "Deprecated. The date and time the item was reviewed"
                     type:
@@ -53020,7 +52572,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-10-13T15:38:36.294Z"
+                      default: "2026-10-13T17:49:20.017Z"
                       deprecated: true
                       description: "Deprecated. The date and time the item was reviewed"
                     type:
@@ -53051,7 +52603,6 @@ paths:
       x-cli-group: "human-review-sets"
       x-cli-name: "getAll"
       x-cli-hidden: true
-      x-speakeasy-group: "humanReviewSets"
       x-speakeasy-name-override: "list"
       summary: "Get all human review sets"
       parameters:
@@ -53124,7 +52675,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-10-13T15:38:27.158Z"
+                          default: "2026-10-13T17:49:13.521Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -53132,7 +52683,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-10-13T15:38:27.158Z"
+                              default: "2026-10-13T17:49:13.522Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -53202,7 +52753,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-10-13T15:38:27.158Z"
+                          default: "2026-10-13T17:49:13.521Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -53210,7 +52761,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-10-13T15:38:27.158Z"
+                              default: "2026-10-13T17:49:13.522Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -53239,7 +52790,6 @@ paths:
       x-cli-group: "human-review-sets"
       x-cli-name: "create"
       x-cli-hidden: true
-      x-speakeasy-group: "humanReviewSets"
       x-speakeasy-name-override: "create"
       summary: "Create a human review set"
       requestBody:
@@ -53387,7 +52937,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-10-13T15:38:27.158Z"
+                        default: "2026-10-13T17:49:13.521Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -53395,7 +52945,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-10-13T15:38:27.158Z"
+                            default: "2026-10-13T17:49:13.522Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -53465,7 +53015,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-10-13T15:38:27.158Z"
+                        default: "2026-10-13T17:49:13.521Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -53473,7 +53023,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-10-13T15:38:27.158Z"
+                            default: "2026-10-13T17:49:13.522Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -53503,7 +53053,6 @@ paths:
       x-cli-group: "human-review-sets"
       x-cli-name: "get"
       x-cli-hidden: true
-      x-speakeasy-group: "humanReviewSets"
       x-speakeasy-name-override: "get"
       summary: "Get a human review set by ID"
       parameters:
@@ -53568,7 +53117,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-10-13T15:38:27.158Z"
+                        default: "2026-10-13T17:49:13.521Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -53576,7 +53125,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-10-13T15:38:27.158Z"
+                            default: "2026-10-13T17:49:13.522Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -53646,7 +53195,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-10-13T15:38:27.158Z"
+                        default: "2026-10-13T17:49:13.521Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -53654,7 +53203,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-10-13T15:38:27.158Z"
+                            default: "2026-10-13T17:49:13.522Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -53683,7 +53232,6 @@ paths:
       x-cli-group: "human-review-sets"
       x-cli-name: "update"
       x-cli-hidden: true
-      x-speakeasy-group: "humanReviewSets"
       x-speakeasy-name-override: "update"
       summary: "Update a human review set"
       parameters:
@@ -53839,7 +53387,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-10-13T15:38:27.158Z"
+                        default: "2026-10-13T17:49:13.521Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -53847,7 +53395,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-10-13T15:38:27.158Z"
+                            default: "2026-10-13T17:49:13.522Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -53917,7 +53465,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-10-13T15:38:27.158Z"
+                        default: "2026-10-13T17:49:13.521Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -53925,7 +53473,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-10-13T15:38:27.158Z"
+                            default: "2026-10-13T17:49:13.522Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -53954,7 +53502,6 @@ paths:
       x-cli-group: "human-review-sets"
       x-cli-name: "delete"
       x-cli-hidden: true
-      x-speakeasy-group: "humanReviewSets"
       x-speakeasy-name-override: "delete"
       summary: "Delete a human review set"
       parameters:
@@ -59401,8 +58948,6 @@ paths:
                 $ref: "#/components/schemas/CapabilitiesResponse"
       x-speakeasy-group: "pii"
       x-speakeasy-name-override: "capabilities"
-      x-cli-group: "pii"
-      x-cli-name: "capabilities"
       security:
         - ApiKey: []
   /v2/pii/detect:
@@ -59426,8 +58971,6 @@ paths:
                 $ref: "#/components/schemas/DetectResponse"
       x-speakeasy-group: "pii"
       x-speakeasy-name-override: "detect"
-      x-cli-group: "pii"
-      x-cli-name: "detect"
       x-code-samples:
         - lang: "typescript"
           label: "Node.js"
@@ -59455,8 +58998,6 @@ paths:
                 $ref: "#/components/schemas/RedactResponse"
       x-speakeasy-group: "pii"
       x-speakeasy-name-override: "redact"
-      x-cli-group: "pii"
-      x-cli-name: "redact"
       x-code-samples:
         - lang: "typescript"
           label: "Node.js"
@@ -59484,8 +59025,6 @@ paths:
                 $ref: "#/components/schemas/RestoreResponse"
       x-speakeasy-group: "pii"
       x-speakeasy-name-override: "restore"
-      x-cli-group: "pii"
-      x-cli-name: "restore"
       security:
         - ApiKey: []
   /v2/api-keys:
@@ -59526,8 +59065,6 @@ paths:
       summary: "List API keys"
       tags:
         - "API keys"
-      x-cli-group: "apiKeys"
-      x-cli-name: "list"
       x-speakeasy-group: "apiKeys"
       x-speakeasy-name-override: "list"
       x-code-samples:
@@ -59611,8 +59148,6 @@ paths:
       summary: "Create a new API key"
       tags:
         - "API keys"
-      x-cli-group: "apiKeys"
-      x-cli-name: "create"
       x-speakeasy-group: "apiKeys"
       x-speakeasy-name-override: "create"
       x-code-samples:
@@ -59661,8 +59196,6 @@ paths:
       summary: "List capability catalog"
       tags:
         - "API keys"
-      x-cli-group: "apiKeys"
-      x-cli-name: "listCapabilities"
       x-speakeasy-group: "apiKeys"
       x-speakeasy-name-override: "listCapabilities"
       x-code-samples:
@@ -59701,8 +59234,6 @@ paths:
       summary: "Delete an API key"
       tags:
         - "API keys"
-      x-cli-group: "apiKeys"
-      x-cli-name: "delete"
       x-speakeasy-group: "apiKeys"
       x-speakeasy-name-override: "delete"
       x-code-samples:
@@ -59744,8 +59275,6 @@ paths:
       summary: "Retrieve an API key"
       tags:
         - "API keys"
-      x-cli-group: "apiKeys"
-      x-cli-name: "get"
       x-speakeasy-group: "apiKeys"
       x-speakeasy-name-override: "get"
       x-code-samples:
@@ -59834,8 +59363,6 @@ paths:
       summary: "Update an API key"
       tags:
         - "API keys"
-      x-cli-group: "apiKeys"
-      x-cli-name: "update"
       x-speakeasy-group: "apiKeys"
       x-speakeasy-name-override: "update"
       x-code-samples:
@@ -60245,8 +59772,6 @@ paths:
                 $ref: "#/components/schemas/AggregateLogsResponse"
       x-speakeasy-group: "logs"
       x-speakeasy-name-override: "aggregate"
-      x-cli-group: "logs"
-      x-cli-name: "aggregate"
       security:
         - ApiKey: []
   /v3/logs/facets:
@@ -60271,8 +59796,6 @@ paths:
                 $ref: "#/components/schemas/ListLogFacetsResponse"
       x-speakeasy-group: "logs"
       x-speakeasy-name-override: "listFacets"
-      x-cli-group: "logs"
-      x-cli-name: "listFacets"
       security:
         - ApiKey: []
   /v3/logs/facets/{field}:
@@ -60317,8 +59840,6 @@ paths:
                 $ref: "#/components/schemas/ListLogFacetValuesResponse"
       x-speakeasy-group: "logs"
       x-speakeasy-name-override: "listFacetValues"
-      x-cli-group: "logs"
-      x-cli-name: "listFacetValues"
       security:
         - ApiKey: []
   /v3/logs/fields:
@@ -60337,8 +59858,6 @@ paths:
                 $ref: "#/components/schemas/ListLogFieldsResponse"
       x-speakeasy-group: "logs"
       x-speakeasy-name-override: "listFields"
-      x-cli-group: "logs"
-      x-cli-name: "listFields"
       security:
         - ApiKey: []
   /v3/logs/patterns:
@@ -60363,8 +59882,6 @@ paths:
                 $ref: "#/components/schemas/FindLogPatternsResponse"
       x-speakeasy-group: "logs"
       x-speakeasy-name-override: "findPatterns"
-      x-cli-group: "logs"
-      x-cli-name: "getPatterns"
       security:
         - ApiKey: []
   /v3/logs/query:
@@ -60389,8 +59906,6 @@ paths:
                 $ref: "#/components/schemas/QueryLogsResponse"
       x-speakeasy-group: "logs"
       x-speakeasy-name-override: "query"
-      x-cli-group: "logs"
-      x-cli-name: "query"
       security:
         - ApiKey: []
   /v3/logs/search:
@@ -60415,8 +59930,6 @@ paths:
                 $ref: "#/components/schemas/SearchLogsResponse"
       x-speakeasy-group: "logs"
       x-speakeasy-name-override: "search"
-      x-cli-group: "logs"
-      x-cli-name: "search"
       security:
         - ApiKey: []
   /v3/logs/{id}:
@@ -60441,8 +59954,6 @@ paths:
                 $ref: "#/components/schemas/GetLogResponse"
       x-speakeasy-group: "logs"
       x-speakeasy-name-override: "get"
-      x-cli-group: "logs"
-      x-cli-name: "get"
       security:
         - ApiKey: []
   /v3/logs/{id}/context:
@@ -60473,8 +59984,6 @@ paths:
                 $ref: "#/components/schemas/GetLogContextResponse"
       x-speakeasy-group: "logs"
       x-speakeasy-name-override: "context"
-      x-cli-group: "logs"
-      x-cli-name: "getContext"
       security:
         - ApiKey: []
   /v3/traces/{trace_id}/logs:
@@ -60508,8 +60017,6 @@ paths:
                 $ref: "#/components/schemas/ListTraceLogsResponse"
       x-speakeasy-group: "logs"
       x-speakeasy-name-override: "listTraceLogs"
-      x-cli-group: "logs"
-      x-cli-name: "listTrace"
       security:
         - ApiKey: []
   /v2/reporting:
@@ -60534,8 +60041,6 @@ paths:
                 $ref: "#/components/schemas/QueryReportResponse"
       x-speakeasy-group: "reporting"
       x-speakeasy-name-override: "query"
-      x-cli-group: "reporting"
-      x-cli-name: "query"
       security:
         - ApiKey: []
   /v3/telemetry/capabilities:
@@ -60559,8 +60064,6 @@ paths:
                 $ref: "#/components/schemas/ListTelemetryCapabilitiesResponse"
       x-speakeasy-group: "telemetry"
       x-speakeasy-name-override: "listCapabilities"
-      x-cli-group: "telemetry"
-      x-cli-name: "listCapabilities"
       security:
         - ApiKey: []
   /v3/telemetry/facet-values:
@@ -60585,8 +60088,6 @@ paths:
                 $ref: "#/components/schemas/ListTelemetryFacetValuesResponse"
       x-speakeasy-group: "telemetry"
       x-speakeasy-name-override: "listFacetValues"
-      x-cli-group: "telemetry"
-      x-cli-name: "listFacetValues"
       security:
         - ApiKey: []
   /v3/telemetry/query:
@@ -60611,8 +60112,6 @@ paths:
                 $ref: "#/components/schemas/QueryTelemetryResponse"
       x-speakeasy-group: "telemetry"
       x-speakeasy-name-override: "query"
-      x-cli-group: "telemetry"
-      x-cli-name: "query"
       security:
         - ApiKey: []
   /v3/traces/aggregate:
@@ -60637,8 +60136,6 @@ paths:
                 $ref: "#/components/schemas/AggregateTracesResponse"
       x-speakeasy-group: "traces"
       x-speakeasy-name-override: "aggregate"
-      x-cli-group: "traces"
-      x-cli-name: "aggregate"
       security:
         - ApiKey: []
   /v3/traces/facets:
@@ -60657,8 +60154,6 @@ paths:
                 $ref: "#/components/schemas/ListTraceFacetsResponse"
       x-speakeasy-group: "traces"
       x-speakeasy-name-override: "list_facets"
-      x-cli-group: "traces"
-      x-cli-name: "listFacets"
       security:
         - ApiKey: []
   /v3/traces/facets/{field}:
@@ -60702,8 +60197,6 @@ paths:
                 $ref: "#/components/schemas/ListTraceFacetValuesResponse"
       x-speakeasy-group: "traces"
       x-speakeasy-name-override: "list_facet_values"
-      x-cli-group: "traces"
-      x-cli-name: "listFacetValues"
       security:
         - ApiKey: []
   /v3/traces/fields:
@@ -60722,8 +60215,6 @@ paths:
                 $ref: "#/components/schemas/ListTraceFieldsResponse"
       x-speakeasy-group: "traces"
       x-speakeasy-name-override: "list_fields"
-      x-cli-group: "traces"
-      x-cli-name: "listFields"
       security:
         - ApiKey: []
   /v3/traces/filters:
@@ -60748,8 +60239,6 @@ paths:
                 $ref: "#/components/schemas/ListTraceFiltersResponse"
       x-speakeasy-group: "traces"
       x-speakeasy-name-override: "list_filters"
-      x-cli-group: "traces"
-      x-cli-name: "listFilters"
       security:
         - ApiKey: []
   /v3/traces/query:
@@ -60774,8 +60263,6 @@ paths:
                 $ref: "#/components/schemas/QueryTracesResponse"
       x-speakeasy-group: "traces"
       x-speakeasy-name-override: "query"
-      x-cli-group: "traces"
-      x-cli-name: "queryOql"
       security:
         - ApiKey: []
   /v3/traces/search:
@@ -60800,8 +60287,6 @@ paths:
                 $ref: "#/components/schemas/SearchTracesResponse"
       x-speakeasy-group: "traces"
       x-speakeasy-name-override: "search"
-      x-cli-group: "traces"
-      x-cli-name: "search"
       security:
         - ApiKey: []
   /v3/traces/{trace_id}:
@@ -60826,8 +60311,6 @@ paths:
                 $ref: "#/components/schemas/GetTraceResponse"
       x-speakeasy-group: "traces"
       x-speakeasy-name-override: "get"
-      x-cli-group: "traces"
-      x-cli-name: "get"
       security:
         - ApiKey: []
   /v3/traces/{trace_id}/conversation:
@@ -60857,8 +60340,6 @@ paths:
                 $ref: "#/components/schemas/GetTraceConversationResponse"
       x-speakeasy-group: "traces"
       x-speakeasy-name-override: "get_conversation"
-      x-cli-group: "traces"
-      x-cli-name: "getConversation"
       x-code-samples:
         - lang: "typescript"
           label: "Node.js"
@@ -60896,8 +60377,6 @@ paths:
                 $ref: "#/components/schemas/ListTraceSpansResponse"
       x-speakeasy-group: "traces"
       x-speakeasy-name-override: "list_spans"
-      x-cli-group: "traces"
-      x-cli-name: "listSpans"
       security:
         - ApiKey: []
   /v3/traces/{trace_id}/spans/{span_id}:
@@ -60910,7 +60389,6 @@ paths:
       parameters:
         - name: "trace_id"
           in: "path"
-          description: "Optional: queue items predating trace_id capture only have the span."
           required: true
           schema:
             type: "string"
@@ -60928,8 +60406,6 @@ paths:
                 $ref: "#/components/schemas/GetTraceSpanResponse"
       x-speakeasy-group: "traces"
       x-speakeasy-name-override: "get_span"
-      x-cli-group: "traces"
-      x-cli-name: "getSpan"
       security:
         - ApiKey: []
   /v3/views:
@@ -60965,8 +60441,6 @@ paths:
                 $ref: "#/components/schemas/ListViewsResponse"
       x-speakeasy-group: "views"
       x-speakeasy-name-override: "list"
-      x-cli-group: "views"
-      x-cli-name: "list"
       x-code-samples:
         - lang: "typescript"
           label: "Node.js"
@@ -60993,8 +60467,6 @@ paths:
                 $ref: "#/components/schemas/CreateViewResponse"
       x-speakeasy-group: "views"
       x-speakeasy-name-override: "create"
-      x-cli-group: "views"
-      x-cli-name: "create"
       x-code-samples:
         - lang: "typescript"
           label: "Node.js"
@@ -61022,8 +60494,6 @@ paths:
                 $ref: "#/components/schemas/GetViewResponse"
       x-speakeasy-group: "views"
       x-speakeasy-name-override: "get"
-      x-cli-group: "views"
-      x-cli-name: "get"
       x-code-samples:
         - lang: "typescript"
           label: "Node.js"
@@ -61050,8 +60520,6 @@ paths:
                 $ref: "#/components/schemas/DeleteViewResponse"
       x-speakeasy-group: "views"
       x-speakeasy-name-override: "delete"
-      x-cli-group: "views"
-      x-cli-name: "delete"
       x-code-samples:
         - lang: "typescript"
           label: "Node.js"
@@ -61084,8 +60552,6 @@ paths:
                 $ref: "#/components/schemas/UpdateViewResponse"
       x-speakeasy-group: "views"
       x-speakeasy-name-override: "update"
-      x-cli-group: "views"
-      x-cli-name: "update"
       x-code-samples:
         - lang: "typescript"
           label: "Node.js"
@@ -61134,8 +60600,6 @@ paths:
                 $ref: "#/components/schemas/ListDatasetsResponse"
       x-speakeasy-group: "datasets"
       x-speakeasy-name-override: "list"
-      x-cli-group: "datasets"
-      x-cli-name: "list"
       x-code-samples:
         - lang: "curl"
           label: "Core - List datasets"
@@ -61169,8 +60633,6 @@ paths:
                 $ref: "#/components/schemas/Dataset"
       x-speakeasy-group: "datasets"
       x-speakeasy-name-override: "create"
-      x-cli-group: "datasets"
-      x-cli-name: "create"
       x-code-samples:
         - lang: "curl"
           label: "Core - Create dataset"
@@ -61205,8 +60667,6 @@ paths:
                 $ref: "#/components/schemas/Dataset"
       x-speakeasy-group: "datasets"
       x-speakeasy-name-override: "retrieve"
-      x-cli-group: "datasets"
-      x-cli-name: "retrieve"
       x-code-samples:
         - lang: "curl"
           label: "Core - Retrieve dataset"
@@ -61236,8 +60696,6 @@ paths:
           description: "No content - successful operation"
       x-speakeasy-group: "datasets"
       x-speakeasy-name-override: "delete"
-      x-cli-group: "datasets"
-      x-cli-name: "delete"
       x-code-samples:
         - lang: "curl"
           label: "Core - Delete dataset"
@@ -61271,8 +60729,6 @@ paths:
                 $ref: "#/components/schemas/Dataset"
       x-speakeasy-group: "datasets"
       x-speakeasy-name-override: "update"
-      x-cli-group: "datasets"
-      x-cli-name: "update"
       x-code-samples:
         - lang: "curl"
           label: "Core - Update dataset"
@@ -61297,8 +60753,6 @@ paths:
           description: "No content - successful operation"
       x-speakeasy-group: "datasets"
       x-speakeasy-name-override: "clear"
-      x-cli-group: "datasets"
-      x-cli-name: "clear"
       x-code-samples:
         - lang: "curl"
           label: "Core - Clear dataset"
@@ -61340,8 +60794,6 @@ paths:
                 $ref: "#/components/schemas/ListDatapointsResponse"
       x-speakeasy-group: "datasets"
       x-speakeasy-name-override: "listDatapoints"
-      x-cli-group: "datasets"
-      x-cli-name: "listDatapoints"
       x-code-samples:
         - lang: "curl"
           label: "Core - List datapoints"
@@ -61381,8 +60833,6 @@ paths:
                   $ref: "#/components/schemas/Datapoint"
       x-speakeasy-group: "datasets"
       x-speakeasy-name-override: "createDatapoint"
-      x-cli-group: "datasets"
-      x-cli-name: "createDatapoint"
       x-code-samples:
         - lang: "curl"
           label: "Core - Create datapoints"
@@ -61413,8 +60863,6 @@ paths:
           description: "No content - successful operation"
       x-speakeasy-group: "datasets"
       x-speakeasy-name-override: "deleteDatapoints"
-      x-cli-group: "datasets"
-      x-cli-name: "deleteDatapoints"
       x-code-samples:
         - lang: "curl"
           label: "Core - Delete datapoints"
@@ -61451,8 +60899,6 @@ paths:
                   $ref: "#/components/schemas/Datapoint"
       x-speakeasy-group: "datasets"
       x-speakeasy-name-override: "createDatapoints"
-      x-cli-group: "datasets"
-      x-cli-name: "createDatapoints"
       x-code-samples:
         - lang: "curl"
           label: "Core - Bulk create datapoints"
@@ -61486,8 +60932,6 @@ paths:
                 $ref: "#/components/schemas/Datapoint"
       x-speakeasy-group: "datasets"
       x-speakeasy-name-override: "retrieveDatapoint"
-      x-cli-group: "datasets"
-      x-cli-name: "retrieveDatapoint"
       x-code-samples:
         - lang: "curl"
           label: "Core - Retrieve datapoint"
@@ -61516,8 +60960,6 @@ paths:
           description: "No content - successful operation"
       x-speakeasy-group: "datasets"
       x-speakeasy-name-override: "deleteDatapoint"
-      x-cli-group: "datasets"
-      x-cli-name: "deleteDatapoint"
       x-code-samples:
         - lang: "curl"
           label: "Core - Delete datapoint"
@@ -61556,8 +60998,6 @@ paths:
                 $ref: "#/components/schemas/Datapoint"
       x-speakeasy-group: "datasets"
       x-speakeasy-name-override: "updateDatapoint"
-      x-cli-group: "datasets"
-      x-cli-name: "updateDatapoint"
       x-code-samples:
         - lang: "curl"
           label: "Core - Update datapoint"
@@ -61612,8 +61052,6 @@ paths:
             schema:
               additionalProperties: false
               properties:
-                benchmark_model:
-                  type: "string"
                 configuration:
                   additionalProperties: {}
                   type: "object"
@@ -61812,8 +61250,6 @@ paths:
                 autorouter_id:
                   type: "string"
                 autorouter_version:
-                  type: "string"
-                benchmark_model:
                   type: "string"
                 cache_read_cost:
                   format: "double"
@@ -62079,8 +61515,6 @@ paths:
                 autorouter_id:
                   type: "string"
                 autorouter_version:
-                  type: "string"
-                benchmark_model:
                   type: "string"
                 cache_read_cost:
                   format: "double"
@@ -62413,8 +61847,6 @@ paths:
                   type: "string"
                 base_url:
                   type: "string"
-                benchmark_model:
-                  type: "string"
                 cache_read_cost:
                   format: "double"
                   type: "number"
@@ -62613,8 +62045,6 @@ paths:
               additionalProperties: false
               properties:
                 base_url:
-                  type: "string"
-                benchmark_model:
                   type: "string"
                 cache_read_cost:
                   format: "double"
@@ -62853,8 +62283,6 @@ paths:
             schema:
               additionalProperties: false
               properties:
-                benchmark_model:
-                  type: "string"
                 configuration:
                   $ref: "#/components/schemas/VertexConfiguration"
                 display_name:
@@ -63039,8 +62467,6 @@ paths:
             schema:
               additionalProperties: false
               properties:
-                benchmark_model:
-                  type: "string"
                 display_name:
                   maxLength: 128
                   type: "string"
@@ -63718,8 +63144,6 @@ paths:
                 $ref: "#/components/schemas/ListAlertsResponse"
       x-speakeasy-group: "alerts"
       x-speakeasy-name-override: "list"
-      x-cli-group: "alerts"
-      x-cli-name: "list"
       security:
         - ApiKey: []
     post:
@@ -63743,8 +63167,6 @@ paths:
                 $ref: "#/components/schemas/CreateAlertResponse"
       x-speakeasy-group: "alerts"
       x-speakeasy-name-override: "create"
-      x-cli-group: "alerts"
-      x-cli-name: "create"
       security:
         - ApiKey: []
   /v2/alerts/{alert_id}:
@@ -63770,8 +63192,6 @@ paths:
                 $ref: "#/components/schemas/GetAlertResponse"
       x-speakeasy-group: "alerts"
       x-speakeasy-name-override: "get"
-      x-cli-group: "alerts"
-      x-cli-name: "get"
       security:
         - ApiKey: []
     delete:
@@ -63796,8 +63216,6 @@ paths:
                 $ref: "#/components/schemas/DeleteAlertResponse"
       x-speakeasy-group: "alerts"
       x-speakeasy-name-override: "delete"
-      x-cli-group: "alerts"
-      x-cli-name: "delete"
       security:
         - ApiKey: []
     patch:
@@ -63828,8 +63246,6 @@ paths:
                 $ref: "#/components/schemas/UpdateAlertResponse"
       x-speakeasy-group: "alerts"
       x-speakeasy-name-override: "update"
-      x-cli-group: "alerts"
-      x-cli-name: "update"
       security:
         - ApiKey: []
   /v2/alerts/{alert_id}/triggers:
@@ -63871,8 +63287,6 @@ paths:
                 $ref: "#/components/schemas/ListAlertTriggersResponse"
       x-speakeasy-group: "alerts"
       x-speakeasy-name-override: "listTriggers"
-      x-cli-group: "alerts"
-      x-cli-name: "listTriggers"
       security:
         - ApiKey: []
   /v2/alerts/{alert_id}/triggers/{trigger_id}/events:
@@ -63920,8 +63334,6 @@ paths:
                 $ref: "#/components/schemas/ListAlertTriggerEventsResponse"
       x-speakeasy-group: "alerts"
       x-speakeasy-name-override: "listTriggerEvents"
-      x-cli-group: "alerts"
-      x-cli-name: "listTriggerEvents"
       security:
         - ApiKey: []
   /v2/annotation-queues:
@@ -64397,8 +63809,6 @@ paths:
                 $ref: "#/components/schemas/ListBudgetsResponse"
       x-speakeasy-group: "budgets"
       x-speakeasy-name-override: "list"
-      x-cli-group: "budgets"
-      x-cli-name: "list"
       security:
         - ApiKey: []
     post:
@@ -64422,8 +63832,6 @@ paths:
                 $ref: "#/components/schemas/CreateBudgetResponse"
       x-speakeasy-group: "budgets"
       x-speakeasy-name-override: "create"
-      x-cli-group: "budgets"
-      x-cli-name: "create"
       x-code-samples:
         - lang: "typescript"
           label: "Node.js"
@@ -64453,8 +63861,6 @@ paths:
                 $ref: "#/components/schemas/GetBudgetResponse"
       x-speakeasy-group: "budgets"
       x-speakeasy-name-override: "get"
-      x-cli-group: "budgets"
-      x-cli-name: "get"
       security:
         - ApiKey: []
     delete:
@@ -64479,8 +63885,6 @@ paths:
                 $ref: "#/components/schemas/DeleteBudgetResponse"
       x-speakeasy-group: "budgets"
       x-speakeasy-name-override: "delete"
-      x-cli-group: "budgets"
-      x-cli-name: "delete"
       security:
         - ApiKey: []
     patch:
@@ -64511,8 +63915,6 @@ paths:
                 $ref: "#/components/schemas/UpdateBudgetResponse"
       x-speakeasy-group: "budgets"
       x-speakeasy-name-override: "update"
-      x-cli-group: "budgets"
-      x-cli-name: "update"
       security:
         - ApiKey: []
   /v2/budgets/{budget_id}/reset-consumption:
@@ -64544,8 +63946,6 @@ paths:
                 $ref: "#/components/schemas/ResetBudgetConsumptionResponse"
       x-speakeasy-group: "budgets"
       x-speakeasy-name-override: "resetConsumption"
-      x-cli-group: "budgets"
-      x-cli-name: "resetConsumption"
       security:
         - ApiKey: []
   /v3/environments:
@@ -64586,8 +63986,6 @@ paths:
                 $ref: "#/components/schemas/ListEnvironmentsResponse"
       x-speakeasy-group: "environments"
       x-speakeasy-name-override: "list"
-      x-cli-group: "environments"
-      x-cli-name: "list"
       x-code-samples:
         - lang: "curl"
           label: "Core - List project environments"
@@ -64621,8 +64019,6 @@ paths:
                 $ref: "#/components/schemas/CreateEnvironmentResponse"
       x-speakeasy-group: "environments"
       x-speakeasy-name-override: "create"
-      x-cli-group: "environments"
-      x-cli-name: "create"
       x-code-samples:
         - lang: "curl"
           label: "Core - Create a project environment"
@@ -64657,8 +64053,6 @@ paths:
                 $ref: "#/components/schemas/GetEnvironmentResponse"
       x-speakeasy-group: "environments"
       x-speakeasy-name-override: "get"
-      x-cli-group: "environments"
-      x-cli-name: "get"
       x-code-samples:
         - lang: "curl"
           label: "Core - Retrieve an environment"
@@ -64692,8 +64086,6 @@ paths:
                 $ref: "#/components/schemas/DeleteEnvironmentResponse"
       x-speakeasy-group: "environments"
       x-speakeasy-name-override: "delete"
-      x-cli-group: "environments"
-      x-cli-name: "delete"
       x-code-samples:
         - lang: "curl"
           label: "Core - Delete an environment"
@@ -64733,8 +64125,6 @@ paths:
                 $ref: "#/components/schemas/UpdateEnvironmentResponse"
       x-speakeasy-group: "environments"
       x-speakeasy-name-override: "update"
-      x-cli-group: "environments"
-      x-cli-name: "update"
       x-code-samples:
         - lang: "curl"
           label: "Core - Update an environment"
@@ -64768,8 +64158,6 @@ paths:
                 $ref: "#/components/schemas/SubmitFeedbackResponse"
       x-speakeasy-group: "feedback"
       x-speakeasy-name-override: "submit"
-      x-cli-group: "feedback"
-      x-cli-name: "submit"
       x-code-samples:
         - lang: "TypeScript"
           source: "import { Orq } from '@orq-ai/node';\nconst orq = new Orq({ apiKey: process.env.ORQ_API_KEY });\nawait orq.feedback.submit({ category: 'bug', message: 'The MCP tool returned an unexpected error.', requestId: 'req_example' });\n"
@@ -64817,8 +64205,6 @@ paths:
                 $ref: "#/components/schemas/ListFilesResponse"
       x-speakeasy-group: "files"
       x-speakeasy-name-override: "list"
-      x-cli-group: "files"
-      x-cli-name: "list"
       x-code-samples:
         - lang: "curl"
           label: "Core - List project files"
@@ -64852,8 +64238,6 @@ paths:
                 $ref: "#/components/schemas/CreateFileResponse"
       x-speakeasy-group: "files"
       x-speakeasy-name-override: "create"
-      x-cli-group: "files"
-      x-cli-name: "upload"
       x-code-samples:
         - lang: "curl"
           label: "Core - Upload retrieval file"
@@ -64889,8 +64273,6 @@ paths:
                 $ref: "#/components/schemas/GetFileContentResponse"
       x-speakeasy-group: "files"
       x-speakeasy-name-override: "getContent"
-      x-cli-group: "files"
-      x-cli-name: "content"
       x-code-samples:
         - lang: "curl"
           label: "Core - Get download URL"
@@ -64926,8 +64308,6 @@ paths:
                 $ref: "#/components/schemas/GetFileResponse"
       x-speakeasy-group: "files"
       x-speakeasy-name-override: "get"
-      x-cli-group: "files"
-      x-cli-name: "get"
       x-code-samples:
         - lang: "curl"
           label: "Core - Retrieve file metadata"
@@ -64962,8 +64342,6 @@ paths:
                 $ref: "#/components/schemas/DeleteFileResponse"
       x-speakeasy-group: "files"
       x-speakeasy-name-override: "delete"
-      x-cli-group: "files"
-      x-cli-name: "delete"
       x-code-samples:
         - lang: "curl"
           label: "Core - Delete file"
@@ -65004,8 +64382,6 @@ paths:
                 $ref: "#/components/schemas/UpdateFileResponse"
       x-speakeasy-group: "files"
       x-speakeasy-name-override: "update"
-      x-cli-group: "files"
-      x-cli-name: "update"
       x-code-samples:
         - lang: "curl"
           label: "Core - Rename file"
@@ -65269,8 +64645,6 @@ paths:
                 $ref: "#/components/schemas/SearchHubItemsResponse"
       x-speakeasy-group: "hub"
       x-speakeasy-name-override: "search"
-      x-cli-group: "hub"
-      x-cli-name: "search"
       x-code-samples:
         - lang: "curl"
           label: "Core - Search hub items"
@@ -65305,8 +64679,6 @@ paths:
                 $ref: "#/components/schemas/GetHubItemResponse"
       x-speakeasy-group: "hub"
       x-speakeasy-name-override: "get"
-      x-cli-group: "hub"
-      x-cli-name: "get"
       x-code-samples:
         - lang: "curl"
           label: "Core - Retrieve hub item"
@@ -65616,8 +64988,6 @@ paths:
                 $ref: "#/components/schemas/ListManagementKeysResponse"
       x-speakeasy-group: "managementKeys"
       x-speakeasy-name-override: "list"
-      x-cli-group: "management-keys"
-      x-cli-name: "list"
       security:
         - ApiKey: []
     post:
@@ -65641,8 +65011,6 @@ paths:
                 $ref: "#/components/schemas/CreateManagementKeyResponse"
       x-speakeasy-group: "managementKeys"
       x-speakeasy-name-override: "create"
-      x-cli-group: "management-keys"
-      x-cli-name: "create"
       security:
         - ApiKey: []
   /v2/management-keys/capabilities:
@@ -65661,8 +65029,6 @@ paths:
                 $ref: "#/components/schemas/ListManagementCapabilitiesResponse"
       x-speakeasy-group: "managementKeys"
       x-speakeasy-name-override: "listCapabilities"
-      x-cli-group: "management-keys"
-      x-cli-name: "listCapabilities"
       security:
         - ApiKey: []
   /v2/management-keys/{management_key_id}:
@@ -65688,8 +65054,6 @@ paths:
                 $ref: "#/components/schemas/GetManagementKeyResponse"
       x-speakeasy-group: "managementKeys"
       x-speakeasy-name-override: "get"
-      x-cli-group: "management-keys"
-      x-cli-name: "get"
       security:
         - ApiKey: []
     delete:
@@ -65714,8 +65078,6 @@ paths:
                 $ref: "#/components/schemas/DeleteManagementKeyResponse"
       x-speakeasy-group: "managementKeys"
       x-speakeasy-name-override: "delete"
-      x-cli-group: "management-keys"
-      x-cli-name: "delete"
       security:
         - ApiKey: []
     patch:
@@ -65746,8 +65108,6 @@ paths:
                 $ref: "#/components/schemas/UpdateManagementKeyResponse"
       x-speakeasy-group: "managementKeys"
       x-speakeasy-name-override: "update"
-      x-cli-group: "management-keys"
-      x-cli-name: "update"
       security:
         - ApiKey: []
   /v2/mcp-gateways:
@@ -66421,8 +65781,6 @@ paths:
                 $ref: "#/components/schemas/ListModelCatalogResponse"
       x-speakeasy-group: "modelCatalog"
       x-speakeasy-name-override: "list"
-      x-cli-group: "model-catalog"
-      x-cli-name: "list"
       x-mint:
         metadata:
           sidebarTitle: "List catalog models"
@@ -66548,8 +65906,6 @@ paths:
                 $ref: "#/components/schemas/ListModelCatalogOfferingsResponse"
       x-speakeasy-group: "modelCatalog"
       x-speakeasy-name-override: "listOfferings"
-      x-cli-group: "model-catalog"
-      x-cli-name: "listOfferings"
       x-mint:
         metadata:
           sidebarTitle: "List model offerings"
@@ -66581,8 +65937,6 @@ paths:
                 $ref: "#/components/schemas/GetModelCatalogModelResponse"
       x-speakeasy-group: "modelCatalog"
       x-speakeasy-name-override: "get"
-      x-cli-group: "model-catalog"
-      x-cli-name: "get"
       x-mint:
         metadata:
           sidebarTitle: "Get catalog entry"
@@ -66650,8 +66004,6 @@ paths:
                 $ref: "#/components/schemas/ListModelFusionsResponse"
       x-speakeasy-group: "modelFusions"
       x-speakeasy-name-override: "list"
-      x-cli-group: "model-fusions"
-      x-cli-name: "list"
       security:
         - ApiKey: []
     post:
@@ -66675,8 +66027,6 @@ paths:
                 $ref: "#/components/schemas/CreateModelFusionResponse"
       x-speakeasy-group: "modelFusions"
       x-speakeasy-name-override: "create"
-      x-cli-group: "model-fusions"
-      x-cli-name: "create"
       security:
         - ApiKey: []
   /v3/model-fusions/{model_fusion_id}:
@@ -66701,8 +66051,6 @@ paths:
                 $ref: "#/components/schemas/GetModelFusionResponse"
       x-speakeasy-group: "modelFusions"
       x-speakeasy-name-override: "get"
-      x-cli-group: "model-fusions"
-      x-cli-name: "get"
       security:
         - ApiKey: []
     put:
@@ -66732,8 +66080,6 @@ paths:
                 $ref: "#/components/schemas/UpdateModelFusionResponse"
       x-speakeasy-group: "modelFusions"
       x-speakeasy-name-override: "update"
-      x-cli-group: "model-fusions"
-      x-cli-name: "update"
       security:
         - ApiKey: []
     delete:
@@ -66757,8 +66103,6 @@ paths:
                 $ref: "#/components/schemas/DeleteModelFusionResponse"
       x-speakeasy-group: "modelFusions"
       x-speakeasy-name-override: "delete"
-      x-cli-group: "model-fusions"
-      x-cli-name: "delete"
       security:
         - ApiKey: []
   /v3/model-fusions/{model_fusion_id}/enabled:
@@ -66789,8 +66133,6 @@ paths:
                 $ref: "#/components/schemas/SetModelFusionEnabledResponse"
       x-speakeasy-group: "modelFusions"
       x-speakeasy-name-override: "setEnabled"
-      x-cli-group: "model-fusions"
-      x-cli-name: "setEnabled"
       security:
         - ApiKey: []
   /v2/notifiers:
@@ -66843,8 +66185,6 @@ paths:
                 $ref: "#/components/schemas/ListNotifiersResponse"
       x-speakeasy-group: "notifiers"
       x-speakeasy-name-override: "list"
-      x-cli-group: "notifiers"
-      x-cli-name: "list"
       x-code-samples:
         - lang: "curl"
           label: "Core - List notifiers"
@@ -66878,8 +66218,6 @@ paths:
                 $ref: "#/components/schemas/CreateNotifierResponse"
       x-speakeasy-group: "notifiers"
       x-speakeasy-name-override: "create"
-      x-cli-group: "notifiers"
-      x-cli-name: "create"
       x-code-samples:
         - lang: "curl"
           label: "Core - Create email notifier"
@@ -66914,8 +66252,6 @@ paths:
                 $ref: "#/components/schemas/GetNotifierResponse"
       x-speakeasy-group: "notifiers"
       x-speakeasy-name-override: "get"
-      x-cli-group: "notifiers"
-      x-cli-name: "get"
       x-code-samples:
         - lang: "curl"
           label: "Core - Retrieve notifier"
@@ -66949,8 +66285,6 @@ paths:
                 $ref: "#/components/schemas/DeleteNotifierResponse"
       x-speakeasy-group: "notifiers"
       x-speakeasy-name-override: "delete"
-      x-cli-group: "notifiers"
-      x-cli-name: "delete"
       x-code-samples:
         - lang: "curl"
           label: "Core - Delete notifier"
@@ -66990,8 +66324,6 @@ paths:
                 $ref: "#/components/schemas/UpdateNotifierResponse"
       x-speakeasy-group: "notifiers"
       x-speakeasy-name-override: "update"
-      x-cli-group: "notifiers"
-      x-cli-name: "update"
       x-code-samples:
         - lang: "curl"
           label: "Core - Update notifier"
@@ -67037,8 +66369,6 @@ paths:
                 $ref: "#/components/schemas/ListProjectsResponse"
       x-speakeasy-group: "projects"
       x-speakeasy-name-override: "list"
-      x-cli-group: "projects"
-      x-cli-name: "list"
       x-code-samples:
         - lang: "curl"
           label: "Core - List projects"
@@ -67072,8 +66402,6 @@ paths:
                 $ref: "#/components/schemas/CreateProjectResponse"
       x-speakeasy-group: "projects"
       x-speakeasy-name-override: "create"
-      x-cli-group: "projects"
-      x-cli-name: "create"
       x-code-samples:
         - lang: "curl"
           label: "Core - Create project"
@@ -67109,8 +66437,6 @@ paths:
                 $ref: "#/components/schemas/GetProjectResponse"
       x-speakeasy-group: "projects"
       x-speakeasy-name-override: "get"
-      x-cli-group: "projects"
-      x-cli-name: "get"
       x-code-samples:
         - lang: "curl"
           label: "Core - Retrieve project"
@@ -67145,8 +66471,6 @@ paths:
                 $ref: "#/components/schemas/DeleteProjectResponse"
       x-speakeasy-group: "projects"
       x-speakeasy-name-override: "delete"
-      x-cli-group: "projects"
-      x-cli-name: "delete"
       x-code-samples:
         - lang: "curl"
           label: "Core - Delete project"
@@ -67187,8 +66511,6 @@ paths:
                 $ref: "#/components/schemas/UpdateProjectResponse"
       x-speakeasy-group: "projects"
       x-speakeasy-name-override: "update"
-      x-cli-group: "projects"
-      x-cli-name: "update"
       x-code-samples:
         - lang: "curl"
           label: "Core - Update project"
@@ -67438,13 +66760,13 @@ paths:
       x-code-samples:
         - lang: "curl"
           label: "Core - Configure routing rule"
-          source: "curl --request PATCH \\\n  --url 'https://my.orq.ai/v2/routing-rules/rrl_01HZXW2K7Y8Q9M0N1P2R3S4T5V' \\\n  --header \"Authorization: Bearer $ORQ_API_KEY\" \\\n  --header 'Content-Type: application/json' \\\n  --data '{\n    \"enabled\": true,\n    \"priority\": 10,\n    \"models_config\": {\n      \"mode\": \"fallback\",\n      \"models\": [{\"model\": \"openai/gpt-5\"}],\n      \"fallback_on_codes\": [429, 503]\n    }\n  }'\n"
+          source: "curl --request PATCH \\\n  --url 'https://my.orq.ai/v2/routing-rules/rrl_01HZXW2K7Y8Q9M0N1P2R3S4T5V' \\\n  --header \"Authorization: Bearer $ORQ_API_KEY\" \\\n  --header 'Content-Type: application/json' \\\n  --data '{\n    \"enabled\": true,\n    \"priority\": 10,\n    \"models_config\": {\n      \"mode\": \"fallback\",\n      \"models\": [{\"model\": \"openai/gpt-5\"}]\n    }\n  }'\n"
         - lang: "python"
           label: "Python - Configure routing rule"
-          source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\nrule = client.routing_rules.update(\n    routing_rule_id=\"rrl_01HZXW2K7Y8Q9M0N1P2R3S4T5V\",\n    enabled=True,\n    priority=10,\n    models_config={\n        \"mode\": \"fallback\",\n        \"models\": [{\"model\": \"openai/gpt-5\"}],\n        \"fallback_on_codes\": [429, 503],\n    },\n)\n\nprint(rule.updated_at)\n"
+          source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\nrule = client.routing_rules.update(\n    routing_rule_id=\"rrl_01HZXW2K7Y8Q9M0N1P2R3S4T5V\",\n    enabled=True,\n    priority=10,\n    models_config={\n        \"mode\": \"fallback\",\n        \"models\": [{\"model\": \"openai/gpt-5\"}],\n    },\n)\n\nprint(rule.updated_at)\n"
         - lang: "typescript"
           label: "Node.js - Configure routing rule"
-          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({ apiKey: process.env.ORQ_API_KEY });\nconst rule = await client.routingRules.update({\n  routingRuleId: 'rrl_01HZXW2K7Y8Q9M0N1P2R3S4T5V',\n  enabled: true,\n  priority: 10,\n  modelsConfig: {\n    mode: 'fallback',\n    models: [{ model: 'openai/gpt-5' }],\n    fallbackOnCodes: [429, 503],\n  },\n});\n\nconsole.log(rule.updatedAt);\n"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({ apiKey: process.env.ORQ_API_KEY });\nconst rule = await client.routingRules.update({\n  routingRuleId: 'rrl_01HZXW2K7Y8Q9M0N1P2R3S4T5V',\n  enabled: true,\n  priority: 10,\n  modelsConfig: {\n    mode: 'fallback',\n    models: [{ model: 'openai/gpt-5' }],\n  },\n});\n\nconsole.log(rule.updatedAt);\n"
       security:
         - ApiKey: []
   /v2/sessions:
@@ -67728,8 +67050,6 @@ paths:
                 $ref: "#/components/schemas/ListSkillsResponse"
       x-speakeasy-group: "skills"
       x-speakeasy-name-override: "list"
-      x-cli-group: "skills"
-      x-cli-name: "list"
       x-code-samples:
         - lang: "curl"
           label: "Core - List skills"
@@ -67763,8 +67083,6 @@ paths:
                 $ref: "#/components/schemas/CreateSkillResponse"
       x-speakeasy-group: "skills"
       x-speakeasy-name-override: "create"
-      x-cli-group: "skills"
-      x-cli-name: "create"
       x-code-samples:
         - lang: "curl"
           label: "Core - Create project skill"
@@ -67800,8 +67118,6 @@ paths:
                 $ref: "#/components/schemas/GetSkillResponse"
       x-speakeasy-group: "skills"
       x-speakeasy-name-override: "get"
-      x-cli-group: "skills"
-      x-cli-name: "get"
       x-code-samples:
         - lang: "curl"
           label: "Core - Retrieve skill"
@@ -67836,8 +67152,6 @@ paths:
                 $ref: "#/components/schemas/DeleteSkillResponse"
       x-speakeasy-group: "skills"
       x-speakeasy-name-override: "delete"
-      x-cli-group: "skills"
-      x-cli-name: "delete"
       x-code-samples:
         - lang: "curl"
           label: "Core - Delete skill"
@@ -67878,8 +67192,6 @@ paths:
                 $ref: "#/components/schemas/UpdateSkillResponse"
       x-speakeasy-group: "skills"
       x-speakeasy-name-override: "update"
-      x-cli-group: "skills"
-      x-cli-name: "update"
       x-code-samples:
         - lang: "curl"
           label: "Core - Update skill instructions"
@@ -67936,8 +67248,6 @@ paths:
                 $ref: "#/components/schemas/ListSmartRoutersResponse"
       x-speakeasy-group: "smartRouters"
       x-speakeasy-name-override: "list"
-      x-cli-group: "smart-routers"
-      x-cli-name: "list"
       x-code-samples:
         - lang: "curl"
           label: "Core - List Smart Routers"
@@ -67968,8 +67278,6 @@ paths:
                 $ref: "#/components/schemas/CreateSmartRouterResponse"
       x-speakeasy-group: "smartRouters"
       x-speakeasy-name-override: "create"
-      x-cli-group: "smart-routers"
-      x-cli-name: "create"
       x-code-samples:
         - lang: "curl"
           label: "Core - Create a Smart Router"
@@ -68001,8 +67309,6 @@ paths:
                 $ref: "#/components/schemas/GetSmartRouterResponse"
       x-speakeasy-group: "smartRouters"
       x-speakeasy-name-override: "get"
-      x-cli-group: "smart-routers"
-      x-cli-name: "get"
       x-code-samples:
         - lang: "curl"
           label: "Core - Retrieve a Smart Router"
@@ -68033,8 +67339,6 @@ paths:
                 $ref: "#/components/schemas/DeleteSmartRouterResponse"
       x-speakeasy-group: "smartRouters"
       x-speakeasy-name-override: "delete"
-      x-cli-group: "smart-routers"
-      x-cli-name: "delete"
       x-code-samples:
         - lang: "curl"
           label: "Core - Delete a Smart Router"
@@ -68048,7 +67352,7 @@ paths:
       tags:
         - "Smart Routers"
       summary: "Update a Smart Router"
-      description: "Updates the model pool, routing profile, session affinity, or any combination. Omitted fields retain their current values. The router key and model reference cannot be changed."
+      description: "Updates the model pool, routing profile, or both. Omitted fields retain their current values. The router key and model reference cannot be changed."
       operationId: "SmartRouterUpdate"
       parameters:
         - name: "smart_router_id"
@@ -68071,8 +67375,6 @@ paths:
                 $ref: "#/components/schemas/UpdateSmartRouterResponse"
       x-speakeasy-group: "smartRouters"
       x-speakeasy-name-override: "update"
-      x-cli-group: "smart-routers"
-      x-cli-name: "update"
       x-speakeasy-max-method-params: 3
       x-code-samples:
         - lang: "curl"
@@ -68142,8 +67444,6 @@ paths:
                 $ref: "#/components/schemas/ListWebhooksResponse"
       x-speakeasy-group: "webhooks"
       x-speakeasy-name-override: "list"
-      x-cli-group: "webhooks"
-      x-cli-name: "list"
       x-code-samples:
         - lang: "curl"
           label: "Core - List filtered webhooks"
@@ -68177,8 +67477,6 @@ paths:
                 $ref: "#/components/schemas/Webhook"
       x-speakeasy-group: "webhooks"
       x-speakeasy-name-override: "create"
-      x-cli-group: "webhooks"
-      x-cli-name: "create"
       x-code-samples:
         - lang: "curl"
           label: "Core - Create webhook"
@@ -68201,8 +67499,6 @@ paths:
                 $ref: "#/components/schemas/CountWebhooksResponse"
       x-speakeasy-group: "webhooks"
       x-speakeasy-name-override: "count"
-      x-cli-group: "webhooks"
-      x-cli-name: "count"
       x-code-samples:
         - lang: "curl"
           label: "Core - Count webhooks"
@@ -68232,8 +67528,6 @@ paths:
       deprecated: true
       x-speakeasy-group: "webhooks"
       x-speakeasy-name-override: "query"
-      x-cli-group: "webhooks"
-      x-cli-name: "query"
       x-code-samples:
         - lang: "curl"
           label: "Core - Query webhooks"
@@ -68256,8 +67550,6 @@ paths:
                 $ref: "#/components/schemas/GenerateWebhookSecretResponse"
       x-speakeasy-group: "webhooks"
       x-speakeasy-name-override: "generateSecret"
-      x-cli-group: "webhooks"
-      x-cli-name: "generateSecret"
       x-code-samples:
         - lang: "curl"
           label: "Core - Generate webhook secret"
@@ -68286,8 +67578,6 @@ paths:
                 $ref: "#/components/schemas/Webhook"
       x-speakeasy-group: "webhooks"
       x-speakeasy-name-override: "get"
-      x-cli-group: "webhooks"
-      x-cli-name: "get"
       x-code-samples:
         - lang: "curl"
           label: "Core - Retrieve webhook"
@@ -68315,8 +67605,6 @@ paths:
                 $ref: "#/components/schemas/DeleteWebhookResponse"
       x-speakeasy-group: "webhooks"
       x-speakeasy-name-override: "delete"
-      x-cli-group: "webhooks"
-      x-cli-name: "delete"
       x-code-samples:
         - lang: "curl"
           label: "Core - Delete webhook"
@@ -68350,8 +67638,6 @@ paths:
                 type: "object"
       x-speakeasy-group: "webhooks"
       x-speakeasy-name-override: "update"
-      x-cli-group: "webhooks"
-      x-cli-name: "update"
       x-code-samples:
         - lang: "curl"
           label: "Core - Update webhook"
@@ -68397,8 +67683,6 @@ paths:
                 $ref: "#/components/schemas/ListWikisResponse"
       x-speakeasy-group: "wikis"
       x-speakeasy-name-override: "list"
-      x-cli-group: "wikis"
-      x-cli-name: "list"
       x-code-samples:
         - lang: "TypeScript"
           source: "import { Orq } from '@orq-ai/node';\nconst orq = new Orq({ apiKey: process.env.ORQ_API_KEY });\nawait orq.wikis.list({ factoryId: 'fac_01J81V5RZPVTDHXBV6M2YVJHRB' });\n"
@@ -68422,8 +67706,6 @@ paths:
                 $ref: "#/components/schemas/CreateWikiResponse"
       x-speakeasy-group: "wikis"
       x-speakeasy-name-override: "create"
-      x-cli-group: "wikis"
-      x-cli-name: "create"
       x-code-samples:
         - lang: "TypeScript"
           source: "import { Orq } from '@orq-ai/node';\nconst orq = new Orq({ apiKey: process.env.ORQ_API_KEY });\nawait orq.wikis.create({ factoryId: 'fac_01J81V5RZPVTDHXBV6M2YVJHRB', displayName: 'Example repository', repository: { provider: 'github', owner: 'octocat', name: 'Hello-World', url: 'https://github.com/octocat/Hello-World', defaultBranch: 'main' }, branch: 'main', scmConnectionId: 'scmc_01J81V5RZPVTDHXBV6M2YVJHRB', settings: { depth: 'concise', refreshCadence: 'manual', publishToRepository: false } });\n"
@@ -68448,8 +67730,6 @@ paths:
                 $ref: "#/components/schemas/InspectRepositoryWikiResponse"
       x-speakeasy-group: "wikis"
       x-speakeasy-name-override: "inspectRepository"
-      x-cli-group: "wikis"
-      x-cli-name: "inspectRepository"
       x-code-samples:
         - lang: "TypeScript"
           source: "import { Orq } from '@orq-ai/node';\nconst orq = new Orq({ apiKey: process.env.ORQ_API_KEY });\nawait orq.wikis.inspectRepository({ scmConnectionId: 'scmc_01J81V5RZPVTDHXBV6M2YVJHRB', repositoryUrl: 'https://github.com/octocat/Hello-World', branch: 'main' });\n"
@@ -68474,8 +67754,6 @@ paths:
                 $ref: "#/components/schemas/GetWikiResponse"
       x-speakeasy-group: "wikis"
       x-speakeasy-name-override: "get"
-      x-cli-group: "wikis"
-      x-cli-name: "get"
       x-code-samples:
         - lang: "TypeScript"
           source: "import { Orq } from '@orq-ai/node';\nconst orq = new Orq({ apiKey: process.env.ORQ_API_KEY });\nawait orq.wikis.get({ wikiId: 'wiki_01J81V5RZPVTDHXBV6M2YVJHRA' });\n"
@@ -68499,8 +67777,6 @@ paths:
                 $ref: "#/components/schemas/DeleteWikiResponse"
       x-speakeasy-group: "wikis"
       x-speakeasy-name-override: "delete"
-      x-cli-group: "wikis"
-      x-cli-name: "delete"
       x-code-samples:
         - lang: "TypeScript"
           source: "import { Orq } from '@orq-ai/node';\nconst orq = new Orq({ apiKey: process.env.ORQ_API_KEY });\nawait orq.wikis.delete({ wikiId: 'wiki_01J81V5RZPVTDHXBV6M2YVJHRA' });\n"
@@ -68530,8 +67806,6 @@ paths:
                 $ref: "#/components/schemas/UpdateWikiResponse"
       x-speakeasy-group: "wikis"
       x-speakeasy-name-override: "update"
-      x-cli-group: "wikis"
-      x-cli-name: "update"
       x-code-samples:
         - lang: "TypeScript"
           source: "import { Orq } from '@orq-ai/node';\nconst orq = new Orq({ apiKey: process.env.ORQ_API_KEY });\nawait orq.wikis.update({ wikiId: 'wiki_01J81V5RZPVTDHXBV6M2YVJHRA', settings: { depth: 'extensive', refreshCadence: 'weekly', publishToRepository: false } });\n"
@@ -68564,8 +67838,6 @@ paths:
                 $ref: "#/components/schemas/GetWikiPageResponse"
       x-speakeasy-group: "wikis"
       x-speakeasy-name-override: "getPage"
-      x-cli-group: "wikis"
-      x-cli-name: "getPage"
       x-code-samples:
         - lang: "TypeScript"
           source: "import { Orq } from '@orq-ai/node';\nconst orq = new Orq({ apiKey: process.env.ORQ_API_KEY });\nawait orq.wikis.getPage({ wikiId: 'wiki_01J81V5RZPVTDHXBV6M2YVJHRA', path: 'index.md' });\n"
@@ -68595,8 +67867,6 @@ paths:
                 $ref: "#/components/schemas/UpdateWikiPageResponse"
       x-speakeasy-group: "wikis"
       x-speakeasy-name-override: "updatePage"
-      x-cli-group: "wikis"
-      x-cli-name: "updatePage"
       x-code-samples:
         - lang: "TypeScript"
           source: "import { Orq } from '@orq-ai/node';\nconst orq = new Orq({ apiKey: process.env.ORQ_API_KEY });\nconst { page } = await orq.wikis.getPage({ wikiId: 'wiki_01J81V5RZPVTDHXBV6M2YVJHRA', path: 'index.md' });\nawait orq.wikis.updatePage({ wikiId: 'wiki_01J81V5RZPVTDHXBV6M2YVJHRA', path: 'index.md', markdown: '# Overview\\nUpdated documentation.', expectedContentHash: page.contentHash });\n"
@@ -68627,8 +67897,6 @@ paths:
                 $ref: "#/components/schemas/RefreshWikiResponse"
       x-speakeasy-group: "wikis"
       x-speakeasy-name-override: "refresh"
-      x-cli-group: "wikis"
-      x-cli-name: "refresh"
       x-code-samples:
         - lang: "TypeScript"
           source: "import { Orq } from '@orq-ai/node';\nconst orq = new Orq({ apiKey: process.env.ORQ_API_KEY });\nawait orq.wikis.refresh({ wikiId: 'wiki_01J81V5RZPVTDHXBV6M2YVJHRA', full: false });\n"
@@ -68658,8 +67926,6 @@ paths:
                 $ref: "#/components/schemas/ListWikiRunsResponse"
       x-speakeasy-group: "wikis"
       x-speakeasy-name-override: "listRuns"
-      x-cli-group: "wikis"
-      x-cli-name: "listRuns"
       x-code-samples:
         - lang: "TypeScript"
           source: "import { Orq } from '@orq-ai/node';\nconst orq = new Orq({ apiKey: process.env.ORQ_API_KEY });\nawait orq.wikis.listRuns({ wikiId: 'wiki_01J81V5RZPVTDHXBV6M2YVJHRA', limit: 20 });\n"
@@ -68693,8 +67959,6 @@ paths:
                 $ref: "#/components/schemas/SearchWikiResponse"
       x-speakeasy-group: "wikis"
       x-speakeasy-name-override: "search"
-      x-cli-group: "wikis"
-      x-cli-name: "search"
       x-code-samples:
         - lang: "TypeScript"
           source: "import { Orq } from '@orq-ai/node';\nconst orq = new Orq({ apiKey: process.env.ORQ_API_KEY });\nawait orq.wikis.search({ wikiId: 'wiki_01J81V5RZPVTDHXBV6M2YVJHRA', query: 'installation', limit: 20 });\n"
@@ -68719,8 +67983,6 @@ paths:
                 $ref: "#/components/schemas/GetWikiTreeResponse"
       x-speakeasy-group: "wikis"
       x-speakeasy-name-override: "getTree"
-      x-cli-group: "wikis"
-      x-cli-name: "getTree"
       x-code-samples:
         - lang: "TypeScript"
           source: "import { Orq } from '@orq-ai/node';\nconst orq = new Orq({ apiKey: process.env.ORQ_API_KEY });\nawait orq.wikis.getTree({ wikiId: 'wiki_01J81V5RZPVTDHXBV6M2YVJHRA' });\n"
@@ -68756,8 +68018,6 @@ paths:
                 $ref: "#/components/schemas/ListWorkspacesResponse"
       x-speakeasy-group: "workspaces"
       x-speakeasy-name-override: "list"
-      x-cli-group: "workspaces"
-      x-cli-name: "list"
       security:
         - ApiKey: []
   /v2/workspaces/{key}:
@@ -68782,8 +68042,6 @@ paths:
                 $ref: "#/components/schemas/GetWorkspaceResponse"
       x-speakeasy-group: "workspaces"
       x-speakeasy-name-override: "get"
-      x-cli-group: "workspaces"
-      x-cli-name: "get"
       security:
         - ApiKey: []
     patch:
@@ -68813,8 +68071,6 @@ paths:
                 $ref: "#/components/schemas/UpdateWorkspaceResponse"
       x-speakeasy-group: "workspaces"
       x-speakeasy-name-override: "update"
-      x-cli-group: "workspaces"
-      x-cli-name: "update"
       security:
         - ApiKey: []
   /v2/workspaces/{workspace_key}/domains:
@@ -68839,8 +68095,6 @@ paths:
                 $ref: "#/components/schemas/ListDomainsResponse"
       x-speakeasy-group: "workspaceSecurity"
       x-speakeasy-name-override: "listDomains"
-      x-cli-group: "workspace-security"
-      x-cli-name: "listDomains"
       security:
         - ApiKey: []
     post:
@@ -68870,8 +68124,6 @@ paths:
                 $ref: "#/components/schemas/CreateDomainResponse"
       x-speakeasy-group: "workspaceSecurity"
       x-speakeasy-name-override: "createDomain"
-      x-cli-group: "workspace-security"
-      x-cli-name: "createDomain"
       security:
         - ApiKey: []
   /v2/workspaces/{workspace_key}/domains/{domain_id}:
@@ -68898,8 +68150,6 @@ paths:
           content: {}
       x-speakeasy-group: "workspaceSecurity"
       x-speakeasy-name-override: "deleteDomain"
-      x-cli-group: "workspace-security"
-      x-cli-name: "deleteDomain"
       security:
         - ApiKey: []
   /v2/workspaces/{workspace_key}/domains/{domain_id}/verify:
@@ -68929,8 +68179,6 @@ paths:
                 $ref: "#/components/schemas/VerifyDomainResponse"
       x-speakeasy-group: "workspaceSecurity"
       x-speakeasy-name-override: "verifyDomain"
-      x-cli-group: "workspace-security"
-      x-cli-name: "verifyDomain"
       security:
         - ApiKey: []
   /v2/workspaces/{workspace_key}/ip-allowlist:
@@ -68955,8 +68203,6 @@ paths:
                 $ref: "#/components/schemas/GetIPAllowlistResponse"
       x-speakeasy-group: "workspaceSecurity"
       x-speakeasy-name-override: "getIPAllowlist"
-      x-cli-group: "workspace-security"
-      x-cli-name: "getIpAllowlist"
       security:
         - ApiKey: []
     patch:
@@ -68986,8 +68232,6 @@ paths:
                 $ref: "#/components/schemas/UpdateIPAllowlistResponse"
       x-speakeasy-group: "workspaceSecurity"
       x-speakeasy-name-override: "updateIPAllowlist"
-      x-cli-group: "workspace-security"
-      x-cli-name: "updateIpAllowlist"
       security:
         - ApiKey: []
   /v2/workspaces/{workspace_key}/ip-allowlist/entries:
@@ -69018,8 +68262,6 @@ paths:
                 $ref: "#/components/schemas/AddIPRangeResponse"
       x-speakeasy-group: "workspaceSecurity"
       x-speakeasy-name-override: "addIPRange"
-      x-cli-group: "workspace-security"
-      x-cli-name: "addIpRange"
       security:
         - ApiKey: []
   /v2/workspaces/{workspace_key}/ip-allowlist/entries/{range_id}:
@@ -69046,8 +68288,6 @@ paths:
           content: {}
       x-speakeasy-group: "workspaceSecurity"
       x-speakeasy-name-override: "deleteIPRange"
-      x-cli-group: "workspace-security"
-      x-cli-name: "deleteIpRange"
       security:
         - ApiKey: []
   /v2/workspace-settings:
@@ -69066,8 +68306,6 @@ paths:
                 $ref: "#/components/schemas/GetWorkspaceSettingsResponse"
       x-speakeasy-group: "workspaceSettings"
       x-speakeasy-name-override: "get"
-      x-cli-group: "workspace-settings"
-      x-cli-name: "get"
       security:
         - ApiKey: []
     patch:
@@ -69091,13 +68329,11 @@ paths:
                 $ref: "#/components/schemas/UpdateWorkspaceSettingsResponse"
       x-speakeasy-group: "workspaceSettings"
       x-speakeasy-name-override: "update"
-      x-cli-group: "workspace-settings"
-      x-cli-name: "update"
       security:
         - ApiKey: []
   /v1/responses/compact:
     post:
-      description: "Compacts a conversation by summarizing older items to free up context window space. Returns the next context window: a compaction item containing the generated summary, followed by the most recent items verbatim."
+      description: "Compacts a conversation by summarizing older items to free up context window space. Returns a compaction item containing the generated summary."
       operationId: "compact-response"
       requestBody:
         content:
@@ -69162,7 +68398,7 @@ paths:
                   description: "The model to use for compaction in provider/model format (e.g. openai/gpt-4o). Required."
                   type: "string"
                 previous_response_id:
-                  description: "The ID of a stored response whose conversation is compacted; input is appended after it."
+                  description: "The ID of a previous response to continue from."
                   type: "string"
                 prompt_cache_key:
                   description: "Key for prompt caching across requests."
@@ -69189,8 +68425,9 @@ paths:
                       - "response.compaction"
                     type: "string"
                   output:
-                    description: "The next context window: a compaction item summarizing older items, followed by the most recent items verbatim. Pass it as the input of the next request, without previous_response_id."
-                    items: {}
+                    description: "The compacted list of output items."
+                    items:
+                      $ref: "#/components/schemas/PublicCompactionItem"
                     type:
                       - "array"
                       - "null"
@@ -69294,15 +68531,6 @@ paths:
                     - "float"
                     - "base64"
                   type: "string"
-                fallback_on_codes:
-                  description: "HTTP status codes that trigger fallback. Defaults to [408,429,500,502,503,504,529]. Each code must be unique and between 400 and 599."
-                  items:
-                    format: "int64"
-                    type: "integer"
-                  maxItems: 20
-                  type:
-                    - "array"
-                    - "null"
                 fallbacks:
                   description: "Array of fallback models to use if primary model fails."
                   items:
@@ -70130,15 +69358,6 @@ paths:
                 cache:
                   $ref: "#/components/schemas/ClassifyCacheConfig"
                   description: "Exact-match response cache for this request. An identical request body from the same workspace and project is served from the stored response, with the X-Cache header reporting HIT or MISS."
-                fallback_on_codes:
-                  description: "HTTP status codes that trigger fallback. Defaults to [408,429,500,502,503,504,529]. Each code must be unique and between 400 and 599."
-                  items:
-                    format: "int64"
-                    type: "integer"
-                  maxItems: 20
-                  type:
-                    - "array"
-                    - "null"
                 fallbacks:
                   description: "Up to 10 fallback models in order. The gateway retries a model for matching error codes before trying the next model. Every model must support classification and satisfy access checks. Image requests require native OpenAI image-capable fallbacks."
                   items:
@@ -70641,15 +69860,6 @@ paths:
                 cache:
                   $ref: "#/components/schemas/ClassifyCacheConfig"
                   description: "Exact-match response cache for this request. An identical request body from the same workspace and project is served from the stored response, with the X-Cache header reporting HIT or MISS."
-                fallback_on_codes:
-                  description: "HTTP status codes that trigger fallback. Defaults to [408,429,500,502,503,504,529]. Each code must be unique and between 400 and 599."
-                  items:
-                    format: "int64"
-                    type: "integer"
-                  maxItems: 20
-                  type:
-                    - "array"
-                    - "null"
                 fallbacks:
                   description: "Up to 10 fallback models in order. The gateway retries a model for matching error codes before trying the next model. Every model must support classification and satisfy access checks. Image requests require native OpenAI image-capable fallbacks."
                   items:
@@ -71109,15 +70319,6 @@ paths:
                 conversation:
                   $ref: "#/components/schemas/ConversationParam"
                   description: "Conversation context for multi-turn interactions."
-                fallback_on_codes:
-                  description: "HTTP status codes that trigger fallback. Defaults to [408,429,500,502,503,504,529]. Each code must be unique and between 400 and 599."
-                  items:
-                    format: "int64"
-                    type: "integer"
-                  maxItems: 20
-                  type:
-                    - "array"
-                    - "null"
                 fallbacks:
                   description: "Fallback models to try if the primary model fails. Each entry specifies a model in provider/model format."
                   items:
