@@ -1486,6 +1486,10 @@ export type ListPromptVersionsPromptField = {
     >
     | undefined;
   /**
+   * HTTP status codes that trigger fallback. Enter up to 20 unique integers from 400 to 599. When omitted or empty, defaults to [408, 429, 500, 502, 503, 504, 529].
+   */
+  fallbackOnCodes?: Array<number> | undefined;
+  /**
    * Array of fallback models to use if primary model fails
    */
   fallbacks?: Array<ListPromptVersionsFallbacks> | undefined;
@@ -3415,6 +3419,7 @@ export const ListPromptVersionsPromptField$inboundSchema: z.ZodType<
       components.TraceScrubbingPlugin$inboundSchema,
     ]),
   ).optional(),
+  fallback_on_codes: z.array(z.number().int()).optional(),
   fallbacks: z.array(z.lazy(() => ListPromptVersionsFallbacks$inboundSchema))
     .optional(),
   retry: z.lazy(() => ListPromptVersionsRetry$inboundSchema).optional(),
@@ -3449,6 +3454,7 @@ export const ListPromptVersionsPromptField$inboundSchema: z.ZodType<
     "top_k": "topK",
     "tool_choice": "toolChoice",
     "parallel_tool_calls": "parallelToolCalls",
+    "fallback_on_codes": "fallbackOnCodes",
     "load_balancer": "loadBalancer",
     "cache_control": "cacheControl",
     "prompt_cache_key": "promptCacheKey",

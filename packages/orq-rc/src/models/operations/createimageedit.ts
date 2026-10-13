@@ -233,6 +233,10 @@ export type CreateImageEditOrq = {
    */
   retry?: CreateImageEditRouterImagesEditsRetry | undefined;
   /**
+   * HTTP status codes that trigger fallback. Enter up to 20 unique integers from 400 to 599. When omitted or empty, defaults to [408, 429, 500, 502, 503, 504, 529].
+   */
+  fallbackOnCodes?: Array<number> | undefined;
+  /**
    * Array of fallback models to use if primary model fails
    */
   fallbacks?: Array<CreateImageEditRouterImagesEditsFallbacks> | undefined;
@@ -301,6 +305,10 @@ export type CreateImageEditRequestBody = {
    * The name to display on the trace. If not specified, the default system name will be used.
    */
   name?: string | undefined;
+  /**
+   * HTTP status codes that trigger fallback. Enter up to 20 unique integers from 400 to 599. When omitted or empty, defaults to [408, 429, 500, 502, 503, 504, 529].
+   */
+  fallbackOnCodes?: Array<number> | undefined;
   /**
    * Array of fallback models to use if primary model fails
    */
@@ -861,6 +869,7 @@ export function createImageEditRouterImagesEditsTimeoutToJSON(
 export type CreateImageEditOrq$Outbound = {
   name?: string | undefined;
   retry?: CreateImageEditRouterImagesEditsRetry$Outbound | undefined;
+  fallback_on_codes?: Array<number> | undefined;
   fallbacks?:
     | Array<CreateImageEditRouterImagesEditsFallbacks$Outbound>
     | undefined;
@@ -883,6 +892,7 @@ export const CreateImageEditOrq$outboundSchema: z.ZodType<
   name: z.string().optional(),
   retry: z.lazy(() => CreateImageEditRouterImagesEditsRetry$outboundSchema)
     .optional(),
+  fallbackOnCodes: z.array(z.number().int()).optional(),
   fallbacks: z.array(
     z.lazy(() => CreateImageEditRouterImagesEditsFallbacks$outboundSchema),
   ).optional(),
@@ -898,6 +908,7 @@ export const CreateImageEditOrq$outboundSchema: z.ZodType<
     .optional(),
 }).transform((v) => {
   return remap$(v, {
+    fallbackOnCodes: "fallback_on_codes",
     loadBalancer: "load_balancer",
   });
 });
@@ -921,6 +932,7 @@ export type CreateImageEditRequestBody$Outbound = {
   response_format?: string | undefined;
   user?: string | undefined;
   name?: string | undefined;
+  fallback_on_codes?: Array<number> | undefined;
   fallbacks?: Array<CreateImageEditFallbacks$Outbound> | undefined;
   retry?: CreateImageEditRetry$Outbound | undefined;
   cache?: CreateImageEditCache$Outbound | undefined;
@@ -944,6 +956,7 @@ export const CreateImageEditRequestBody$outboundSchema: z.ZodType<
   responseFormat: CreateImageEditResponseFormat$outboundSchema.optional(),
   user: z.string().optional(),
   name: z.string().optional(),
+  fallbackOnCodes: z.array(z.number().int()).optional(),
   fallbacks: z.array(z.lazy(() => CreateImageEditFallbacks$outboundSchema))
     .optional(),
   retry: z.lazy(() => CreateImageEditRetry$outboundSchema).optional(),
@@ -955,6 +968,7 @@ export const CreateImageEditRequestBody$outboundSchema: z.ZodType<
 }).transform((v) => {
   return remap$(v, {
     responseFormat: "response_format",
+    fallbackOnCodes: "fallback_on_codes",
     loadBalancer: "load_balancer",
   });
 });

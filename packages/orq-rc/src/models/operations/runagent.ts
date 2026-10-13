@@ -433,6 +433,10 @@ export type RunAgentModelConfigurationParameters = {
     >
     | undefined;
   /**
+   * HTTP status codes that trigger fallback. Enter up to 20 unique integers from 400 to 599. When omitted or empty, defaults to [408, 429, 500, 502, 503, 504, 529].
+   */
+  fallbackOnCodes?: Array<number> | undefined;
+  /**
    * Array of fallback models to use if primary model fails
    */
   fallbacks?: Array<RunAgentModelConfigurationFallbacks> | undefined;
@@ -932,6 +936,10 @@ export type RunAgentFallbackModelConfigurationParameters = {
       | components.TraceScrubbingPlugin
     >
     | undefined;
+  /**
+   * HTTP status codes that trigger fallback. Enter up to 20 unique integers from 400 to 599. When omitted or empty, defaults to [408, 429, 500, 502, 503, 504, 529].
+   */
+  fallbackOnCodes?: Array<number> | undefined;
   /**
    * Array of fallback models to use if primary model fails
    */
@@ -2549,6 +2557,7 @@ export type RunAgentModelConfigurationParameters$Outbound = {
       | components.TraceScrubbingPlugin$Outbound
     >
     | undefined;
+  fallback_on_codes?: Array<number> | undefined;
   fallbacks?: Array<RunAgentModelConfigurationFallbacks$Outbound> | undefined;
   cache?: RunAgentModelConfigurationCache$Outbound | undefined;
   load_balancer?: RunAgentLoadBalancer1$Outbound | undefined;
@@ -2606,6 +2615,7 @@ export const RunAgentModelConfigurationParameters$outboundSchema: z.ZodType<
       components.TraceScrubbingPlugin$outboundSchema,
     ]),
   ).optional(),
+  fallbackOnCodes: z.array(z.number().int()).optional(),
   fallbacks: z.array(
     z.lazy(() => RunAgentModelConfigurationFallbacks$outboundSchema),
   ).optional(),
@@ -2630,6 +2640,7 @@ export const RunAgentModelConfigurationParameters$outboundSchema: z.ZodType<
     topK: "top_k",
     toolChoice: "tool_choice",
     parallelToolCalls: "parallel_tool_calls",
+    fallbackOnCodes: "fallback_on_codes",
     loadBalancer: "load_balancer",
     cacheControl: "cache_control",
     promptCacheKey: "prompt_cache_key",
@@ -3361,6 +3372,7 @@ export type RunAgentFallbackModelConfigurationParameters$Outbound = {
       | components.TraceScrubbingPlugin$Outbound
     >
     | undefined;
+  fallback_on_codes?: Array<number> | undefined;
   fallbacks?:
     | Array<RunAgentFallbackModelConfigurationFallbacks$Outbound>
     | undefined;
@@ -3426,6 +3438,7 @@ export const RunAgentFallbackModelConfigurationParameters$outboundSchema:
         components.TraceScrubbingPlugin$outboundSchema,
       ]),
     ).optional(),
+    fallbackOnCodes: z.array(z.number().int()).optional(),
     fallbacks: z.array(
       z.lazy(() => RunAgentFallbackModelConfigurationFallbacks$outboundSchema),
     ).optional(),
@@ -3452,6 +3465,7 @@ export const RunAgentFallbackModelConfigurationParameters$outboundSchema:
       topK: "top_k",
       toolChoice: "tool_choice",
       parallelToolCalls: "parallel_tool_calls",
+      fallbackOnCodes: "fallback_on_codes",
       loadBalancer: "load_balancer",
       cacheControl: "cache_control",
       promptCacheKey: "prompt_cache_key",
@@ -3890,7 +3904,7 @@ export const Tools$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Tools
 > = z.object({
-  id: z.string().default("01M4RT71WPMDXETNG4NA5G5F2X"),
+  id: z.string().default("01M4SEDAYBJN3MGP82223CBAN5"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() => AgentToolInputRunSchema$outboundSchema),

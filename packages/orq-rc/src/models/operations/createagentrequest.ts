@@ -412,6 +412,10 @@ export type ParametersT = {
     >
     | undefined;
   /**
+   * HTTP status codes that trigger fallback. Enter up to 20 unique integers from 400 to 599. When omitted or empty, defaults to [408, 429, 500, 502, 503, 504, 529].
+   */
+  fallbackOnCodes?: Array<number> | undefined;
+  /**
    * Array of fallback models to use if primary model fails
    */
   fallbacks?: Array<Fallbacks> | undefined;
@@ -906,6 +910,10 @@ export type FallbackModelConfigurationParameters = {
       | components.TraceScrubbingPlugin
     >
     | undefined;
+  /**
+   * HTTP status codes that trigger fallback. Enter up to 20 unique integers from 400 to 599. When omitted or empty, defaults to [408, 429, 500, 502, 503, 504, 529].
+   */
+  fallbackOnCodes?: Array<number> | undefined;
   /**
    * Array of fallback models to use if primary model fails
    */
@@ -1848,6 +1856,10 @@ export type CreateAgentRequestParameters = {
     >
     | undefined;
   /**
+   * HTTP status codes that trigger fallback. Enter up to 20 unique integers from 400 to 599. When omitted or empty, defaults to [408, 429, 500, 502, 503, 504, 529].
+   */
+  fallbackOnCodes?: Array<number> | undefined;
+  /**
    * Array of fallback models to use if primary model fails
    */
   fallbacks?: Array<CreateAgentRequestFallbacks> | undefined;
@@ -2335,6 +2347,10 @@ export type CreateAgentRequestFallbackModelConfigurationParameters = {
       | components.TraceScrubbingPlugin
     >
     | undefined;
+  /**
+   * HTTP status codes that trigger fallback. Enter up to 20 unique integers from 400 to 599. When omitted or empty, defaults to [408, 429, 500, 502, 503, 504, 529].
+   */
+  fallbackOnCodes?: Array<number> | undefined;
   /**
    * Array of fallback models to use if primary model fails
    */
@@ -2978,6 +2994,7 @@ export type ParametersT$Outbound = {
       | components.TraceScrubbingPlugin$Outbound
     >
     | undefined;
+  fallback_on_codes?: Array<number> | undefined;
   fallbacks?: Array<Fallbacks$Outbound> | undefined;
   cache?: Cache$Outbound | undefined;
   load_balancer?: LoadBalancer1$Outbound | undefined;
@@ -3030,6 +3047,7 @@ export const ParametersT$outboundSchema: z.ZodType<
       components.TraceScrubbingPlugin$outboundSchema,
     ]),
   ).optional(),
+  fallbackOnCodes: z.array(z.number().int()).optional(),
   fallbacks: z.array(z.lazy(() => Fallbacks$outboundSchema)).optional(),
   cache: z.lazy(() => Cache$outboundSchema).optional(),
   loadBalancer: z.lazy(() => LoadBalancer1$outboundSchema).optional(),
@@ -3049,6 +3067,7 @@ export const ParametersT$outboundSchema: z.ZodType<
     topK: "top_k",
     toolChoice: "tool_choice",
     parallelToolCalls: "parallel_tool_calls",
+    fallbackOnCodes: "fallback_on_codes",
     loadBalancer: "load_balancer",
     cacheControl: "cache_control",
     promptCacheKey: "prompt_cache_key",
@@ -3730,6 +3749,7 @@ export type FallbackModelConfigurationParameters$Outbound = {
       | components.TraceScrubbingPlugin$Outbound
     >
     | undefined;
+  fallback_on_codes?: Array<number> | undefined;
   fallbacks?: Array<FallbackModelConfigurationFallbacks$Outbound> | undefined;
   cache?: FallbackModelConfigurationCache$Outbound | undefined;
   load_balancer?: CreateAgentRequestLoadBalancer1$Outbound | undefined;
@@ -3787,6 +3807,7 @@ export const FallbackModelConfigurationParameters$outboundSchema: z.ZodType<
       components.TraceScrubbingPlugin$outboundSchema,
     ]),
   ).optional(),
+  fallbackOnCodes: z.array(z.number().int()).optional(),
   fallbacks: z.array(
     z.lazy(() => FallbackModelConfigurationFallbacks$outboundSchema),
   ).optional(),
@@ -3812,6 +3833,7 @@ export const FallbackModelConfigurationParameters$outboundSchema: z.ZodType<
     topK: "top_k",
     toolChoice: "tool_choice",
     parallelToolCalls: "parallel_tool_calls",
+    fallbackOnCodes: "fallback_on_codes",
     loadBalancer: "load_balancer",
     cacheControl: "cache_control",
     promptCacheKey: "prompt_cache_key",
@@ -4972,6 +4994,7 @@ export const CreateAgentRequestParameters$inboundSchema: z.ZodType<
       components.TraceScrubbingPlugin$inboundSchema,
     ]),
   ).optional(),
+  fallback_on_codes: z.array(z.number().int()).optional(),
   fallbacks: z.array(z.lazy(() => CreateAgentRequestFallbacks$inboundSchema))
     .optional(),
   cache: z.lazy(() => CreateAgentRequestCache$inboundSchema).optional(),
@@ -4994,6 +5017,7 @@ export const CreateAgentRequestParameters$inboundSchema: z.ZodType<
     "top_k": "topK",
     "tool_choice": "toolChoice",
     "parallel_tool_calls": "parallelToolCalls",
+    "fallback_on_codes": "fallbackOnCodes",
     "load_balancer": "loadBalancer",
     "cache_control": "cacheControl",
     "prompt_cache_key": "promptCacheKey",
@@ -5700,6 +5724,7 @@ export const CreateAgentRequestFallbackModelConfigurationParameters$inboundSchem
         components.TraceScrubbingPlugin$inboundSchema,
       ]),
     ).optional(),
+    fallback_on_codes: z.array(z.number().int()).optional(),
     fallbacks: z.array(
       z.lazy(() =>
         CreateAgentRequestFallbackModelConfigurationFallbacks$inboundSchema
@@ -5730,6 +5755,7 @@ export const CreateAgentRequestFallbackModelConfigurationParameters$inboundSchem
       "top_k": "topK",
       "tool_choice": "toolChoice",
       "parallel_tool_calls": "parallelToolCalls",
+      "fallback_on_codes": "fallbackOnCodes",
       "load_balancer": "loadBalancer",
       "cache_control": "cacheControl",
       "prompt_cache_key": "promptCacheKey",

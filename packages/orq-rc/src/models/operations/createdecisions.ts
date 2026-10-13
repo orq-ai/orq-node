@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
@@ -96,6 +97,10 @@ export type CreateDecisionsState = string | { [k: string]: any } | Array<any>;
 
 export type CreateDecisionsRequestBody = {
   cache?: components.ClassifyCacheConfig | undefined;
+  /**
+   * HTTP status codes that trigger fallback. Defaults to [408,429,500,502,503,504,529]. Each code must be unique and between 400 and 599.
+   */
+  fallbackOnCodes?: Array<number> | null | undefined;
   /**
    * Up to 10 fallback models in order. The gateway retries a model for matching error codes before trying the next model. Every model must support classification and satisfy access checks. Image requests require native OpenAI image-capable fallbacks.
    */
@@ -368,6 +373,7 @@ export function createDecisionsStateToJSON(
 /** @internal */
 export type CreateDecisionsRequestBody$Outbound = {
   cache?: components.ClassifyCacheConfig$Outbound | undefined;
+  fallback_on_codes?: Array<number> | null | undefined;
   fallbacks?: Array<components.FallbackConfig$Outbound> | null | undefined;
   identity?: components.ResponseIdentity$Outbound | undefined;
   metadata?: { [k: string]: string } | undefined;
@@ -391,6 +397,7 @@ export const CreateDecisionsRequestBody$outboundSchema: z.ZodType<
   CreateDecisionsRequestBody
 > = z.object({
   cache: components.ClassifyCacheConfig$outboundSchema.optional(),
+  fallbackOnCodes: z.nullable(z.array(z.number().int())).optional(),
   fallbacks: z.nullable(z.array(components.FallbackConfig$outboundSchema))
     .optional(),
   identity: components.ResponseIdentity$outboundSchema.optional(),
@@ -407,6 +414,10 @@ export const CreateDecisionsRequestBody$outboundSchema: z.ZodType<
   retry: components.ClassifyRetryConfig$outboundSchema.optional(),
   state: z.union([z.string(), z.record(z.any()), z.array(z.any())]),
   timeout: components.ClassifyTimeoutConfig$outboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    fallbackOnCodes: "fallback_on_codes",
+  });
 });
 
 export function createDecisionsRequestBodyToJSON(

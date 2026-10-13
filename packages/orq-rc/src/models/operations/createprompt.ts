@@ -934,6 +934,10 @@ export type PromptInput = {
     >
     | undefined;
   /**
+   * HTTP status codes that trigger fallback. Enter up to 20 unique integers from 400 to 599. When omitted or empty, defaults to [408, 429, 500, 502, 503, 504, 529].
+   */
+  fallbackOnCodes?: Array<number> | undefined;
+  /**
    * Array of fallback models to use if primary model fails
    */
   fallbacks?: Array<CreatePromptFallbacks> | undefined;
@@ -2455,6 +2459,10 @@ export type PromptField = {
     >
     | undefined;
   /**
+   * HTTP status codes that trigger fallback. Enter up to 20 unique integers from 400 to 599. When omitted or empty, defaults to [408, 429, 500, 502, 503, 504, 529].
+   */
+  fallbackOnCodes?: Array<number> | undefined;
+  /**
    * Array of fallback models to use if primary model fails
    */
   fallbacks?: Array<CreatePromptPromptsFallbacks> | undefined;
@@ -3950,6 +3958,7 @@ export type PromptInput$Outbound = {
       | components.TraceScrubbingPlugin$Outbound
     >
     | undefined;
+  fallback_on_codes?: Array<number> | undefined;
   fallbacks?: Array<CreatePromptFallbacks$Outbound> | undefined;
   retry?: CreatePromptRetry$Outbound | undefined;
   cache?: CreatePromptCache$Outbound | undefined;
@@ -4020,6 +4029,7 @@ export const PromptInput$outboundSchema: z.ZodType<
       components.TraceScrubbingPlugin$outboundSchema,
     ]),
   ).optional(),
+  fallbackOnCodes: z.array(z.number().int()).optional(),
   fallbacks: z.array(z.lazy(() => CreatePromptFallbacks$outboundSchema))
     .optional(),
   retry: z.lazy(() => CreatePromptRetry$outboundSchema).optional(),
@@ -4044,6 +4054,7 @@ export const PromptInput$outboundSchema: z.ZodType<
     topK: "top_k",
     toolChoice: "tool_choice",
     parallelToolCalls: "parallel_tool_calls",
+    fallbackOnCodes: "fallback_on_codes",
     loadBalancer: "load_balancer",
     cacheControl: "cache_control",
     promptCacheKey: "prompt_cache_key",
@@ -5891,6 +5902,7 @@ export const PromptField$inboundSchema: z.ZodType<
       components.TraceScrubbingPlugin$inboundSchema,
     ]),
   ).optional(),
+  fallback_on_codes: z.array(z.number().int()).optional(),
   fallbacks: z.array(z.lazy(() => CreatePromptPromptsFallbacks$inboundSchema))
     .optional(),
   retry: z.lazy(() => CreatePromptPromptsRetry$inboundSchema).optional(),
@@ -5925,6 +5937,7 @@ export const PromptField$inboundSchema: z.ZodType<
     "top_k": "topK",
     "tool_choice": "toolChoice",
     "parallel_tool_calls": "parallelToolCalls",
+    "fallback_on_codes": "fallbackOnCodes",
     "load_balancer": "loadBalancer",
     "cache_control": "cacheControl",
     "prompt_cache_key": "promptCacheKey",

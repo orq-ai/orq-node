@@ -444,6 +444,10 @@ export type StreamRunAgentModelConfigurationParameters = {
     >
     | undefined;
   /**
+   * HTTP status codes that trigger fallback. Enter up to 20 unique integers from 400 to 599. When omitted or empty, defaults to [408, 429, 500, 502, 503, 504, 529].
+   */
+  fallbackOnCodes?: Array<number> | undefined;
+  /**
    * Array of fallback models to use if primary model fails
    */
   fallbacks?: Array<StreamRunAgentModelConfigurationFallbacks> | undefined;
@@ -952,6 +956,10 @@ export type StreamRunAgentFallbackModelConfigurationParameters = {
       | components.TraceScrubbingPlugin
     >
     | undefined;
+  /**
+   * HTTP status codes that trigger fallback. Enter up to 20 unique integers from 400 to 599. When omitted or empty, defaults to [408, 429, 500, 502, 503, 504, 529].
+   */
+  fallbackOnCodes?: Array<number> | undefined;
   /**
    * Array of fallback models to use if primary model fails
    */
@@ -2541,6 +2549,7 @@ export type StreamRunAgentModelConfigurationParameters$Outbound = {
       | components.TraceScrubbingPlugin$Outbound
     >
     | undefined;
+  fallback_on_codes?: Array<number> | undefined;
   fallbacks?:
     | Array<StreamRunAgentModelConfigurationFallbacks$Outbound>
     | undefined;
@@ -2603,6 +2612,7 @@ export const StreamRunAgentModelConfigurationParameters$outboundSchema:
         components.TraceScrubbingPlugin$outboundSchema,
       ]),
     ).optional(),
+    fallbackOnCodes: z.array(z.number().int()).optional(),
     fallbacks: z.array(
       z.lazy(() => StreamRunAgentModelConfigurationFallbacks$outboundSchema),
     ).optional(),
@@ -2629,6 +2639,7 @@ export const StreamRunAgentModelConfigurationParameters$outboundSchema:
       topK: "top_k",
       toolChoice: "tool_choice",
       parallelToolCalls: "parallel_tool_calls",
+      fallbackOnCodes: "fallback_on_codes",
       loadBalancer: "load_balancer",
       cacheControl: "cache_control",
       promptCacheKey: "prompt_cache_key",
@@ -3380,6 +3391,7 @@ export type StreamRunAgentFallbackModelConfigurationParameters$Outbound = {
       | components.TraceScrubbingPlugin$Outbound
     >
     | undefined;
+  fallback_on_codes?: Array<number> | undefined;
   fallbacks?:
     | Array<StreamRunAgentFallbackModelConfigurationFallbacks$Outbound>
     | undefined;
@@ -3451,6 +3463,7 @@ export const StreamRunAgentFallbackModelConfigurationParameters$outboundSchema:
         components.TraceScrubbingPlugin$outboundSchema,
       ]),
     ).optional(),
+    fallbackOnCodes: z.array(z.number().int()).optional(),
     fallbacks: z.array(
       z.lazy(() =>
         StreamRunAgentFallbackModelConfigurationFallbacks$outboundSchema
@@ -3480,6 +3493,7 @@ export const StreamRunAgentFallbackModelConfigurationParameters$outboundSchema:
       topK: "top_k",
       toolChoice: "tool_choice",
       parallelToolCalls: "parallel_tool_calls",
+      fallbackOnCodes: "fallback_on_codes",
       loadBalancer: "load_balancer",
       cacheControl: "cache_control",
       promptCacheKey: "prompt_cache_key",
@@ -3949,7 +3963,7 @@ export const AgentToolInputRunTools$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AgentToolInputRunTools
 > = z.object({
-  id: z.string().default("01M4RT71X76AQHVQRRR3NQZ1AD"),
+  id: z.string().default("01M4SEDAYV7W5214CKH1NN4JKT"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() =>

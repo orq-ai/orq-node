@@ -884,6 +884,10 @@ export type UpdatePromptPromptInput = {
     >
     | undefined;
   /**
+   * HTTP status codes that trigger fallback. Enter up to 20 unique integers from 400 to 599. When omitted or empty, defaults to [408, 429, 500, 502, 503, 504, 529].
+   */
+  fallbackOnCodes?: Array<number> | undefined;
+  /**
    * Array of fallback models to use if primary model fails
    */
   fallbacks?: Array<UpdatePromptFallbacks> | undefined;
@@ -2479,6 +2483,10 @@ export type UpdatePromptPromptField = {
     >
     | undefined;
   /**
+   * HTTP status codes that trigger fallback. Enter up to 20 unique integers from 400 to 599. When omitted or empty, defaults to [408, 429, 500, 502, 503, 504, 529].
+   */
+  fallbackOnCodes?: Array<number> | undefined;
+  /**
    * Array of fallback models to use if primary model fails
    */
   fallbacks?: Array<UpdatePromptPromptsFallbacks> | undefined;
@@ -3946,6 +3954,7 @@ export type UpdatePromptPromptInput$Outbound = {
       | components.TraceScrubbingPlugin$Outbound
     >
     | undefined;
+  fallback_on_codes?: Array<number> | undefined;
   fallbacks?: Array<UpdatePromptFallbacks$Outbound> | undefined;
   retry?: UpdatePromptRetry$Outbound | undefined;
   cache?: UpdatePromptCache$Outbound | undefined;
@@ -4017,6 +4026,7 @@ export const UpdatePromptPromptInput$outboundSchema: z.ZodType<
       components.TraceScrubbingPlugin$outboundSchema,
     ]),
   ).optional(),
+  fallbackOnCodes: z.array(z.number().int()).optional(),
   fallbacks: z.array(z.lazy(() => UpdatePromptFallbacks$outboundSchema))
     .optional(),
   retry: z.lazy(() => UpdatePromptRetry$outboundSchema).optional(),
@@ -4041,6 +4051,7 @@ export const UpdatePromptPromptInput$outboundSchema: z.ZodType<
     topK: "top_k",
     toolChoice: "tool_choice",
     parallelToolCalls: "parallel_tool_calls",
+    fallbackOnCodes: "fallback_on_codes",
     loadBalancer: "load_balancer",
     cacheControl: "cache_control",
     promptCacheKey: "prompt_cache_key",
@@ -5977,6 +5988,7 @@ export const UpdatePromptPromptField$inboundSchema: z.ZodType<
       components.TraceScrubbingPlugin$inboundSchema,
     ]),
   ).optional(),
+  fallback_on_codes: z.array(z.number().int()).optional(),
   fallbacks: z.array(z.lazy(() => UpdatePromptPromptsFallbacks$inboundSchema))
     .optional(),
   retry: z.lazy(() => UpdatePromptPromptsRetry$inboundSchema).optional(),
@@ -6011,6 +6023,7 @@ export const UpdatePromptPromptField$inboundSchema: z.ZodType<
     "top_k": "topK",
     "tool_choice": "toolChoice",
     "parallel_tool_calls": "parallelToolCalls",
+    "fallback_on_codes": "fallbackOnCodes",
     "load_balancer": "loadBalancer",
     "cache_control": "cacheControl",
     "prompt_cache_key": "promptCacheKey",

@@ -103,6 +103,9 @@ async function $do(
       encodeJSON("cache", payload.cache, { explode: true }),
     );
   }
+  if (payload.fallback_on_codes !== undefined) {
+    appendForm(body, "fallback_on_codes", payload.fallback_on_codes);
+  }
   if (payload.fallbacks !== undefined) {
     appendForm(
       body,

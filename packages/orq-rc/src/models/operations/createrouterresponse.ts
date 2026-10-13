@@ -884,6 +884,10 @@ export type CreateRouterResponseRequestBody = {
   cacheControl?: CreateRouterResponseCacheControl | undefined;
   conversation?: components.ConversationParam | undefined;
   /**
+   * HTTP status codes that trigger fallback. Defaults to [408,429,500,502,503,504,529]. Each code must be unique and between 400 and 599.
+   */
+  fallbackOnCodes?: Array<number> | null | undefined;
+  /**
    * Fallback models to try if the primary model fails. Each entry specifies a model in provider/model format.
    */
   fallbacks?: Array<components.FallbackConfig> | null | undefined;
@@ -2097,6 +2101,7 @@ export type CreateRouterResponseRequestBody$Outbound = {
   cache?: components.CacheConfig$Outbound | undefined;
   cache_control?: CreateRouterResponseCacheControl$Outbound | undefined;
   conversation?: components.ConversationParam$Outbound | undefined;
+  fallback_on_codes?: Array<number> | null | undefined;
   fallbacks?: Array<components.FallbackConfig$Outbound> | null | undefined;
   frequency_penalty?: number | undefined;
   guardrails?: Array<components.EvaluatorRef$Outbound> | undefined;
@@ -2179,6 +2184,7 @@ export const CreateRouterResponseRequestBody$outboundSchema: z.ZodType<
   cacheControl: z.lazy(() => CreateRouterResponseCacheControl$outboundSchema)
     .optional(),
   conversation: components.ConversationParam$outboundSchema.optional(),
+  fallbackOnCodes: z.nullable(z.array(z.number().int())).optional(),
   fallbacks: z.nullable(z.array(components.FallbackConfig$outboundSchema))
     .optional(),
   frequencyPenalty: z.number().optional(),
@@ -2298,6 +2304,7 @@ export const CreateRouterResponseRequestBody$outboundSchema: z.ZodType<
 }).transform((v) => {
   return remap$(v, {
     cacheControl: "cache_control",
+    fallbackOnCodes: "fallback_on_codes",
     frequencyPenalty: "frequency_penalty",
     integrationId: "integration_id",
     loadBalancer: "load_balancer",

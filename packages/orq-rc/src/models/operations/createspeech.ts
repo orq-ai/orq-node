@@ -168,6 +168,10 @@ export type CreateSpeechOrq = {
    */
   fallbacks?: Array<CreateSpeechRouterAudioSpeechFallbacks> | undefined;
   /**
+   * HTTP status codes that trigger fallback. Enter up to 20 unique integers from 400 to 599. When omitted or empty, defaults to [408, 429, 500, 502, 503, 504, 529].
+   */
+  fallbackOnCodes?: Array<number> | undefined;
+  /**
    * The name to display on the trace. If not specified, the default system name will be used.
    */
   name?: string | undefined;
@@ -233,6 +237,10 @@ export type CreateSpeechRequestBody = {
    * The name to display on the trace. If not specified, the default system name will be used.
    */
   name?: string | undefined;
+  /**
+   * HTTP status codes that trigger fallback. Enter up to 20 unique integers from 400 to 599. When omitted or empty, defaults to [408, 429, 500, 502, 503, 504, 529].
+   */
+  fallbackOnCodes?: Array<number> | undefined;
   /**
    * Array of fallback models to use if primary model fails
    */
@@ -608,6 +616,7 @@ export type CreateSpeechOrq$Outbound = {
   fallbacks?:
     | Array<CreateSpeechRouterAudioSpeechFallbacks$Outbound>
     | undefined;
+  fallback_on_codes?: Array<number> | undefined;
   name?: string | undefined;
   identity?: components.PublicIdentity$Outbound | undefined;
   contact?: components.PublicContact$Outbound | undefined;
@@ -629,6 +638,7 @@ export const CreateSpeechOrq$outboundSchema: z.ZodType<
   fallbacks: z.array(
     z.lazy(() => CreateSpeechRouterAudioSpeechFallbacks$outboundSchema),
   ).optional(),
+  fallbackOnCodes: z.array(z.number().int()).optional(),
   name: z.string().optional(),
   identity: components.PublicIdentity$outboundSchema.optional(),
   contact: components.PublicContact$outboundSchema.optional(),
@@ -640,6 +650,7 @@ export const CreateSpeechOrq$outboundSchema: z.ZodType<
     .optional(),
 }).transform((v) => {
   return remap$(v, {
+    fallbackOnCodes: "fallback_on_codes",
     loadBalancer: "load_balancer",
   });
 });
@@ -658,6 +669,7 @@ export type CreateSpeechRequestBody$Outbound = {
   response_format: string;
   speed: number;
   name?: string | undefined;
+  fallback_on_codes?: Array<number> | undefined;
   fallbacks?: Array<CreateSpeechFallbacks$Outbound> | undefined;
   retry?: CreateSpeechRetry$Outbound | undefined;
   load_balancer?: CreateSpeechLoadBalancer1$Outbound | undefined;
@@ -677,6 +689,7 @@ export const CreateSpeechRequestBody$outboundSchema: z.ZodType<
   responseFormat: CreateSpeechResponseFormat$outboundSchema.default("mp3"),
   speed: z.number().default(1),
   name: z.string().optional(),
+  fallbackOnCodes: z.array(z.number().int()).optional(),
   fallbacks: z.array(z.lazy(() => CreateSpeechFallbacks$outboundSchema))
     .optional(),
   retry: z.lazy(() => CreateSpeechRetry$outboundSchema).optional(),
@@ -687,6 +700,7 @@ export const CreateSpeechRequestBody$outboundSchema: z.ZodType<
 }).transform((v) => {
   return remap$(v, {
     responseFormat: "response_format",
+    fallbackOnCodes: "fallback_on_codes",
     loadBalancer: "load_balancer",
   });
 });

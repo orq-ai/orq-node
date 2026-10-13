@@ -1409,6 +1409,10 @@ export type Orq = {
    */
   retry?: CreateChatCompletionRouterChatCompletionsRetry | undefined;
   /**
+   * HTTP status codes that trigger fallback. Enter up to 20 unique integers from 400 to 599. When omitted or empty, defaults to [408, 429, 500, 502, 503, 504, 529].
+   */
+  fallbackOnCodes?: Array<number> | undefined;
+  /**
    * Array of fallback models to use if primary model fails
    */
   fallbacks?:
@@ -1601,6 +1605,10 @@ export type CreateChatCompletionRequestBody = {
       | components.TraceScrubbingPlugin
     >
     | undefined;
+  /**
+   * HTTP status codes that trigger fallback. Enter up to 20 unique integers from 400 to 599. When omitted or empty, defaults to [408, 429, 500, 502, 503, 504, 529].
+   */
+  fallbackOnCodes?: Array<number> | undefined;
   /**
    * Array of fallback models to use if primary model fails
    */
@@ -5304,6 +5312,7 @@ export function createChatCompletionRouterChatCompletionsTimeoutToJSON(
 export type Orq$Outbound = {
   name?: string | undefined;
   retry?: CreateChatCompletionRouterChatCompletionsRetry$Outbound | undefined;
+  fallback_on_codes?: Array<number> | undefined;
   fallbacks?:
     | Array<CreateChatCompletionRouterChatCompletionsFallbacks$Outbound>
     | undefined;
@@ -5331,6 +5340,7 @@ export const Orq$outboundSchema: z.ZodType<Orq$Outbound, z.ZodTypeDef, Orq> = z
     retry: z.lazy(() =>
       CreateChatCompletionRouterChatCompletionsRetry$outboundSchema
     ).optional(),
+    fallbackOnCodes: z.array(z.number().int()).optional(),
     fallbacks: z.array(
       z.lazy(() =>
         CreateChatCompletionRouterChatCompletionsFallbacks$outboundSchema
@@ -5358,6 +5368,7 @@ export const Orq$outboundSchema: z.ZodType<Orq$Outbound, z.ZodTypeDef, Orq> = z
     ).optional(),
   }).transform((v) => {
     return remap$(v, {
+      fallbackOnCodes: "fallback_on_codes",
       knowledgeBases: "knowledge_bases",
       loadBalancer: "load_balancer",
     });
@@ -5420,6 +5431,7 @@ export type CreateChatCompletionRequestBody$Outbound = {
       | components.TraceScrubbingPlugin$Outbound
     >
     | undefined;
+  fallback_on_codes?: Array<number> | undefined;
   fallbacks?: Array<CreateChatCompletionFallbacks$Outbound> | undefined;
   retry?: CreateChatCompletionRetry$Outbound | undefined;
   cache?: CreateChatCompletionCache$Outbound | undefined;
@@ -5503,6 +5515,7 @@ export const CreateChatCompletionRequestBody$outboundSchema: z.ZodType<
       components.TraceScrubbingPlugin$outboundSchema,
     ]),
   ).optional(),
+  fallbackOnCodes: z.array(z.number().int()).optional(),
   fallbacks: z.array(z.lazy(() => CreateChatCompletionFallbacks$outboundSchema))
     .optional(),
   retry: z.lazy(() => CreateChatCompletionRetry$outboundSchema).optional(),
@@ -5530,6 +5543,7 @@ export const CreateChatCompletionRequestBody$outboundSchema: z.ZodType<
     topK: "top_k",
     toolChoice: "tool_choice",
     parallelToolCalls: "parallel_tool_calls",
+    fallbackOnCodes: "fallback_on_codes",
     loadBalancer: "load_balancer",
     cacheControl: "cache_control",
     promptCacheKey: "prompt_cache_key",
