@@ -21,6 +21,7 @@ let value: ModelCreateOpenAILikeRequestBody = {
 | --------------------- | --------------------- | --------------------- | --------------------- |
 | `apiKey`              | *string*              | :heavy_check_mark:    | N/A                   |
 | `baseUrl`             | *string*              | :heavy_check_mark:    | N/A                   |
+| `benchmarkModel`      | *string*              | :heavy_minus_sign:    | N/A                   |
 | `cacheReadCost`       | *number*              | :heavy_minus_sign:    | N/A                   |
 | `cacheWriteCost`      | *number*              | :heavy_minus_sign:    | N/A                   |
 | `costPerImage`        | *number*              | :heavy_minus_sign:    | N/A                   |

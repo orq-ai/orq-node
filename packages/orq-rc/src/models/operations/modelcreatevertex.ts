@@ -10,6 +10,7 @@ import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ModelCreateVertexRequestBody = {
+  benchmarkModel?: string | undefined;
   configuration: components.VertexConfiguration;
   displayName: string;
 };
@@ -51,6 +52,7 @@ export type ModelCreateVertexResponseBody = {
 
 /** @internal */
 export type ModelCreateVertexRequestBody$Outbound = {
+  benchmark_model?: string | undefined;
   configuration: components.VertexConfiguration$Outbound;
   display_name: string;
 };
@@ -61,10 +63,12 @@ export const ModelCreateVertexRequestBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ModelCreateVertexRequestBody
 > = z.object({
+  benchmarkModel: z.string().optional(),
   configuration: components.VertexConfiguration$outboundSchema,
   displayName: z.string(),
 }).transform((v) => {
   return remap$(v, {
+    benchmarkModel: "benchmark_model",
     displayName: "display_name",
   });
 });

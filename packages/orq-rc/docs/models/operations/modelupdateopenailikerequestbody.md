@@ -17,6 +17,7 @@ let value: ModelUpdateOpenAILikeRequestBody = {
 | Field                 | Type                  | Required              | Description           |
 | --------------------- | --------------------- | --------------------- | --------------------- |
 | `baseUrl`             | *string*              | :heavy_minus_sign:    | N/A                   |
+| `benchmarkModel`      | *string*              | :heavy_minus_sign:    | N/A                   |
 | `cacheReadCost`       | *number*              | :heavy_minus_sign:    | N/A                   |
 | `cacheWriteCost`      | *number*              | :heavy_minus_sign:    | N/A                   |
 | `costPerImage`        | *number*              | :heavy_minus_sign:    | N/A                   |

@@ -10,6 +10,7 @@ import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ModelCreateRequestBody = {
+  benchmarkModel?: string | undefined;
   configuration: { [k: string]: any };
   displayName: string;
   hasFunctions: boolean;
@@ -62,6 +63,7 @@ export type ModelCreateResponseBody = {
 
 /** @internal */
 export type ModelCreateRequestBody$Outbound = {
+  benchmark_model?: string | undefined;
   configuration: { [k: string]: any };
   display_name: string;
   has_functions: boolean;
@@ -83,6 +85,7 @@ export const ModelCreateRequestBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ModelCreateRequestBody
 > = z.object({
+  benchmarkModel: z.string().optional(),
   configuration: z.record(z.any()),
   displayName: z.string(),
   hasFunctions: z.boolean(),
@@ -100,6 +103,7 @@ export const ModelCreateRequestBody$outboundSchema: z.ZodType<
   provider: z.string(),
 }).transform((v) => {
   return remap$(v, {
+    benchmarkModel: "benchmark_model",
     displayName: "display_name",
     hasFunctions: "has_functions",
     inputCost: "input_cost",

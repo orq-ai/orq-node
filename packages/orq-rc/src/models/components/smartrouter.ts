@@ -11,6 +11,10 @@ import {
   SmartRouterProfile,
   SmartRouterProfile$inboundSchema,
 } from "./smartrouterprofile.js";
+import {
+  SmartRouterSessionAffinity,
+  SmartRouterSessionAffinity$inboundSchema,
+} from "./smartroutersessionaffinity.js";
 
 export type SmartRouter = {
   /**
@@ -42,6 +46,7 @@ export type SmartRouter = {
    * Date and time when the Smart Router was last updated.
    */
   updatedAt: Date;
+  sessionAffinity?: SmartRouterSessionAffinity | undefined;
 };
 
 /** @internal */
@@ -58,12 +63,14 @@ export const SmartRouter$inboundSchema: z.ZodType<
   enabled: z.boolean(),
   created_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
   updated_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  session_affinity: SmartRouterSessionAffinity$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "smart_router_id": "smartRouterId",
     "model_ref": "modelRef",
     "created_at": "createdAt",
     "updated_at": "updatedAt",
+    "session_affinity": "sessionAffinity",
   });
 });
 

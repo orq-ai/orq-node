@@ -10,6 +10,7 @@ import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ModelUpdateRequestBody = {
+  benchmarkModel?: string | undefined;
   displayName?: string | undefined;
   hasFunctions?: boolean | undefined;
   inputCost?: number | undefined;
@@ -64,6 +65,7 @@ export type ModelUpdateResponseBody = {
 
 /** @internal */
 export type ModelUpdateRequestBody$Outbound = {
+  benchmark_model?: string | undefined;
   display_name?: string | undefined;
   has_functions?: boolean | undefined;
   input_cost?: number | undefined;
@@ -79,6 +81,7 @@ export const ModelUpdateRequestBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ModelUpdateRequestBody
 > = z.object({
+  benchmarkModel: z.string().optional(),
   displayName: z.string().optional(),
   hasFunctions: z.boolean().optional(),
   inputCost: z.number().optional(),
@@ -89,6 +92,7 @@ export const ModelUpdateRequestBody$outboundSchema: z.ZodType<
     .optional(),
 }).transform((v) => {
   return remap$(v, {
+    benchmarkModel: "benchmark_model",
     displayName: "display_name",
     hasFunctions: "has_functions",
     inputCost: "input_cost",

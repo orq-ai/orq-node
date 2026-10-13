@@ -23,6 +23,7 @@ let value: ModelCreateAwsBedrockRequestBody = {
 | `authMode`                  | *string*                    | :heavy_check_mark:          | N/A                         |
 | `autorouterId`              | *string*                    | :heavy_minus_sign:          | N/A                         |
 | `autorouterVersion`         | *string*                    | :heavy_minus_sign:          | N/A                         |
+| `benchmarkModel`            | *string*                    | :heavy_minus_sign:          | N/A                         |
 | `cacheReadCost`             | *number*                    | :heavy_minus_sign:          | N/A                         |
 | `cacheWriteCost`            | *number*                    | :heavy_minus_sign:          | N/A                         |
 | `description`               | *string*                    | :heavy_minus_sign:          | N/A                         |

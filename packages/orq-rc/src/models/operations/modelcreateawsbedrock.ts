@@ -15,6 +15,7 @@ export type ModelCreateAwsBedrockRequestBody = {
   authMode: string;
   autorouterId?: string | undefined;
   autorouterVersion?: string | undefined;
+  benchmarkModel?: string | undefined;
   cacheReadCost?: number | undefined;
   cacheWriteCost?: number | undefined;
   description?: string | undefined;
@@ -81,6 +82,7 @@ export type ModelCreateAwsBedrockRequestBody$Outbound = {
   auth_mode: string;
   autorouter_id?: string | undefined;
   autorouter_version?: string | undefined;
+  benchmark_model?: string | undefined;
   cache_read_cost?: number | undefined;
   cache_write_cost?: number | undefined;
   description?: string | undefined;
@@ -116,6 +118,7 @@ export const ModelCreateAwsBedrockRequestBody$outboundSchema: z.ZodType<
   authMode: z.string(),
   autorouterId: z.string().optional(),
   autorouterVersion: z.string().optional(),
+  benchmarkModel: z.string().optional(),
   cacheReadCost: z.number().optional(),
   cacheWriteCost: z.number().optional(),
   description: z.string().optional(),
@@ -145,6 +148,7 @@ export const ModelCreateAwsBedrockRequestBody$outboundSchema: z.ZodType<
     authMode: "auth_mode",
     autorouterId: "autorouter_id",
     autorouterVersion: "autorouter_version",
+    benchmarkModel: "benchmark_model",
     cacheReadCost: "cache_read_cost",
     cacheWriteCost: "cache_write_cost",
     displayName: "display_name",

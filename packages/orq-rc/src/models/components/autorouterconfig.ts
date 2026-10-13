@@ -13,12 +13,20 @@ import {
   AutoRouterV2Config$Outbound,
   AutoRouterV2Config$outboundSchema,
 } from "./autorouterv2config.js";
+import {
+  SessionAffinityConfig,
+  SessionAffinityConfig$inboundSchema,
+  SessionAffinityConfig$Outbound,
+  SessionAffinityConfig$outboundSchema,
+} from "./sessionaffinityconfig.js";
 
 export type AutoRouterConfig = {
+  benchmarkModel?: string | undefined;
   economicalModel?: string | undefined;
   id?: string | undefined;
   models?: Array<string> | null | undefined;
   profile?: string | undefined;
+  sessionAffinity?: SessionAffinityConfig | undefined;
   strongModel?: string | undefined;
   v2?: AutoRouterV2Config | undefined;
   version?: string | undefined;
@@ -30,25 +38,31 @@ export const AutoRouterConfig$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
+  benchmark_model: z.string().optional(),
   economical_model: z.string().optional(),
   id: z.string().optional(),
   models: z.nullable(z.array(z.string())).optional(),
   profile: z.string().optional(),
+  session_affinity: SessionAffinityConfig$inboundSchema.optional(),
   strong_model: z.string().optional(),
   v2: AutoRouterV2Config$inboundSchema.optional(),
   version: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
+    "benchmark_model": "benchmarkModel",
     "economical_model": "economicalModel",
+    "session_affinity": "sessionAffinity",
     "strong_model": "strongModel",
   });
 });
 /** @internal */
 export type AutoRouterConfig$Outbound = {
+  benchmark_model?: string | undefined;
   economical_model?: string | undefined;
   id?: string | undefined;
   models?: Array<string> | null | undefined;
   profile?: string | undefined;
+  session_affinity?: SessionAffinityConfig$Outbound | undefined;
   strong_model?: string | undefined;
   v2?: AutoRouterV2Config$Outbound | undefined;
   version?: string | undefined;
@@ -60,16 +74,20 @@ export const AutoRouterConfig$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AutoRouterConfig
 > = z.object({
+  benchmarkModel: z.string().optional(),
   economicalModel: z.string().optional(),
   id: z.string().optional(),
   models: z.nullable(z.array(z.string())).optional(),
   profile: z.string().optional(),
+  sessionAffinity: SessionAffinityConfig$outboundSchema.optional(),
   strongModel: z.string().optional(),
   v2: AutoRouterV2Config$outboundSchema.optional(),
   version: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
+    benchmarkModel: "benchmark_model",
     economicalModel: "economical_model",
+    sessionAffinity: "session_affinity",
     strongModel: "strong_model",
   });
 });

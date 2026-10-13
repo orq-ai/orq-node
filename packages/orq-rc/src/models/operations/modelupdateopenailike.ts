@@ -11,6 +11,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ModelUpdateOpenAILikeRequestBody = {
   baseUrl?: string | undefined;
+  benchmarkModel?: string | undefined;
   cacheReadCost?: number | undefined;
   cacheWriteCost?: number | undefined;
   costPerImage?: number | undefined;
@@ -76,6 +77,7 @@ export type ModelUpdateOpenAILikeResponseBody = {
 /** @internal */
 export type ModelUpdateOpenAILikeRequestBody$Outbound = {
   base_url?: string | undefined;
+  benchmark_model?: string | undefined;
   cache_read_cost?: number | undefined;
   cache_write_cost?: number | undefined;
   cost_per_image?: number | undefined;
@@ -102,6 +104,7 @@ export const ModelUpdateOpenAILikeRequestBody$outboundSchema: z.ZodType<
   ModelUpdateOpenAILikeRequestBody
 > = z.object({
   baseUrl: z.string().optional(),
+  benchmarkModel: z.string().optional(),
   cacheReadCost: z.number().optional(),
   cacheWriteCost: z.number().optional(),
   costPerImage: z.number().optional(),
@@ -122,6 +125,7 @@ export const ModelUpdateOpenAILikeRequestBody$outboundSchema: z.ZodType<
 }).transform((v) => {
   return remap$(v, {
     baseUrl: "base_url",
+    benchmarkModel: "benchmark_model",
     cacheReadCost: "cache_read_cost",
     cacheWriteCost: "cache_write_cost",
     costPerImage: "cost_per_image",
