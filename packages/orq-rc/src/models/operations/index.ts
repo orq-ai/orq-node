@@ -138,6 +138,7 @@ export * from "./listchunkspaginated.js";
 export * from "./listdatasetdatapoints.js";
 export * from "./listdatasets.js";
 export * from "./listdatasources.js";
+export * from "./listdeploymentversions.js";
 export * from "./listevalversions.js";
 export * from "./listfiles.js";
 export * from "./listfilesystems.js";

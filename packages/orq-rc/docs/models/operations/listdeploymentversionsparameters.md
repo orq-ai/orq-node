@@ -1,0 +1,25 @@
+# ListDeploymentVersionsParameters
+
+The parameters the functions accepts, described as a JSON Schema object. 
+
+ Omitting `parameters` defines a function with an empty parameter list.
+
+## Example Usage
+
+```typescript
+import { ListDeploymentVersionsParameters } from "@orq-ai/node/models/operations";
+
+let value: ListDeploymentVersionsParameters = {
+  type: "object",
+  properties: {},
+};
+```
+
+## Fields
+
+| Field                                                                                                                                                                    | Type                                                                                                                                                                     | Required                                                                                                                                                                 | Description                                                                                                                                                              |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `type`                                                                                                                                                                   | [operations.ListDeploymentVersionsDeploymentsResponse200ApplicationJSONType](../../models/operations/listdeploymentversionsdeploymentsresponse200applicationjsontype.md) | :heavy_check_mark:                                                                                                                                                       | N/A                                                                                                                                                                      |
+| `properties`                                                                                                                                                             | Record<string, *any*>                                                                                                                                                    | :heavy_check_mark:                                                                                                                                                       | N/A                                                                                                                                                                      |
+| `required`                                                                                                                                                               | *string*[]                                                                                                                                                               | :heavy_minus_sign:                                                                                                                                                       | N/A                                                                                                                                                                      |
+| `additionalProperties`                                                                                                                                                   | *false*                                                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                       | N/A                                                                                                                                                                      |

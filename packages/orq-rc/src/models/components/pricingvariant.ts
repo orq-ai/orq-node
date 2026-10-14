@@ -17,6 +17,7 @@ import {
 export type PricingVariant = {
   audioInput?: Price | undefined;
   audioOutput?: Price | undefined;
+  audioSession?: Price | undefined;
   cacheRead?: Price | undefined;
   cacheWrite1h?: Price | undefined;
   cacheWrite5m?: Price | undefined;
@@ -25,6 +26,7 @@ export type PricingVariant = {
   output?: Price | undefined;
   reasoning?: Price | undefined;
   search?: Price | undefined;
+  textInput?: Price | undefined;
   when: string;
 };
 
@@ -36,6 +38,7 @@ export const PricingVariant$inboundSchema: z.ZodType<
 > = z.object({
   audio_input: Price$inboundSchema.optional(),
   audio_output: Price$inboundSchema.optional(),
+  audio_session: Price$inboundSchema.optional(),
   cache_read: Price$inboundSchema.optional(),
   cache_write_1h: Price$inboundSchema.optional(),
   cache_write_5m: Price$inboundSchema.optional(),
@@ -44,20 +47,24 @@ export const PricingVariant$inboundSchema: z.ZodType<
   output: Price$inboundSchema.optional(),
   reasoning: Price$inboundSchema.optional(),
   search: Price$inboundSchema.optional(),
+  text_input: Price$inboundSchema.optional(),
   when: z.string(),
 }).transform((v) => {
   return remap$(v, {
     "audio_input": "audioInput",
     "audio_output": "audioOutput",
+    "audio_session": "audioSession",
     "cache_read": "cacheRead",
     "cache_write_1h": "cacheWrite1h",
     "cache_write_5m": "cacheWrite5m",
+    "text_input": "textInput",
   });
 });
 /** @internal */
 export type PricingVariant$Outbound = {
   audio_input?: Price$Outbound | undefined;
   audio_output?: Price$Outbound | undefined;
+  audio_session?: Price$Outbound | undefined;
   cache_read?: Price$Outbound | undefined;
   cache_write_1h?: Price$Outbound | undefined;
   cache_write_5m?: Price$Outbound | undefined;
@@ -66,6 +73,7 @@ export type PricingVariant$Outbound = {
   output?: Price$Outbound | undefined;
   reasoning?: Price$Outbound | undefined;
   search?: Price$Outbound | undefined;
+  text_input?: Price$Outbound | undefined;
   when: string;
 };
 
@@ -77,6 +85,7 @@ export const PricingVariant$outboundSchema: z.ZodType<
 > = z.object({
   audioInput: Price$outboundSchema.optional(),
   audioOutput: Price$outboundSchema.optional(),
+  audioSession: Price$outboundSchema.optional(),
   cacheRead: Price$outboundSchema.optional(),
   cacheWrite1h: Price$outboundSchema.optional(),
   cacheWrite5m: Price$outboundSchema.optional(),
@@ -85,14 +94,17 @@ export const PricingVariant$outboundSchema: z.ZodType<
   output: Price$outboundSchema.optional(),
   reasoning: Price$outboundSchema.optional(),
   search: Price$outboundSchema.optional(),
+  textInput: Price$outboundSchema.optional(),
   when: z.string(),
 }).transform((v) => {
   return remap$(v, {
     audioInput: "audio_input",
     audioOutput: "audio_output",
+    audioSession: "audio_session",
     cacheRead: "cache_read",
     cacheWrite1h: "cache_write_1h",
     cacheWrite5m: "cache_write_5m",
+    textInput: "text_input",
   });
 });
 
