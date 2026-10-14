@@ -47,7 +47,7 @@ export type SearchWebPlugins = {
    */
   id: SearchWebId;
   /**
-   * Language used by the PII detector. Defaults to en; supported languages depend on the detector capabilities.
+   * Language used by the PII detector. Omitting the field defaults to auto, which detects the language per request; supported languages depend on the detector capabilities.
    */
   language?: string | undefined;
   /**
