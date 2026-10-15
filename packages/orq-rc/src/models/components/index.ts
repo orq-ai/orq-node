@@ -397,6 +397,8 @@ export * from "./mcpauthconfigoutput.js";
 export * from "./mcpauthtype.js";
 export * from "./mcpconnection.js";
 export * from "./mcpconnectiontype.js";
+export * from "./mcpenterpriseauthconfig.js";
+export * from "./mcpenterpriseauthconfigoutput.js";
 export * from "./mcpgateway.js";
 export * from "./mcpgatewaymode.js";
 export * from "./mcpgatewayplugin.js";

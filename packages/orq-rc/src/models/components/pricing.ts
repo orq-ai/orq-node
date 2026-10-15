@@ -26,6 +26,7 @@ export type Pricing = {
   audioSession?: Price | undefined;
   cacheRead?: Price | undefined;
   cacheWrite1h?: Price | undefined;
+  cacheWrite30m?: Price | undefined;
   cacheWrite5m?: Price | undefined;
   fetch?: Price | undefined;
   input?: Price | undefined;
@@ -44,6 +45,7 @@ export const Pricing$inboundSchema: z.ZodType<Pricing, z.ZodTypeDef, unknown> =
     audio_session: Price$inboundSchema.optional(),
     cache_read: Price$inboundSchema.optional(),
     cache_write_1h: Price$inboundSchema.optional(),
+    cache_write_30m: Price$inboundSchema.optional(),
     cache_write_5m: Price$inboundSchema.optional(),
     fetch: Price$inboundSchema.optional(),
     input: Price$inboundSchema.optional(),
@@ -59,6 +61,7 @@ export const Pricing$inboundSchema: z.ZodType<Pricing, z.ZodTypeDef, unknown> =
       "audio_session": "audioSession",
       "cache_read": "cacheRead",
       "cache_write_1h": "cacheWrite1h",
+      "cache_write_30m": "cacheWrite30m",
       "cache_write_5m": "cacheWrite5m",
       "text_input": "textInput",
     });
@@ -70,6 +73,7 @@ export type Pricing$Outbound = {
   audio_session?: Price$Outbound | undefined;
   cache_read?: Price$Outbound | undefined;
   cache_write_1h?: Price$Outbound | undefined;
+  cache_write_30m?: Price$Outbound | undefined;
   cache_write_5m?: Price$Outbound | undefined;
   fetch?: Price$Outbound | undefined;
   input?: Price$Outbound | undefined;
@@ -91,6 +95,7 @@ export const Pricing$outboundSchema: z.ZodType<
   audioSession: Price$outboundSchema.optional(),
   cacheRead: Price$outboundSchema.optional(),
   cacheWrite1h: Price$outboundSchema.optional(),
+  cacheWrite30m: Price$outboundSchema.optional(),
   cacheWrite5m: Price$outboundSchema.optional(),
   fetch: Price$outboundSchema.optional(),
   input: Price$outboundSchema.optional(),
@@ -106,6 +111,7 @@ export const Pricing$outboundSchema: z.ZodType<
     audioSession: "audio_session",
     cacheRead: "cache_read",
     cacheWrite1h: "cache_write_1h",
+    cacheWrite30m: "cache_write_30m",
     cacheWrite5m: "cache_write_5m",
     textInput: "text_input",
   });

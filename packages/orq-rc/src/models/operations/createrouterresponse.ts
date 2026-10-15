@@ -492,6 +492,18 @@ export const ServiceTier = {
 export type ServiceTier = ClosedEnum<typeof ServiceTier>;
 
 /**
+ * Inference speed for direct Anthropic models. Fast mode is available on Claude Opus 4.8, Opus 5, and Opus 5.5 at premium pricing, and cannot be combined with batch or priority processing.
+ */
+export const Speed = {
+  Standard: "standard",
+  Fast: "fast",
+} as const;
+/**
+ * Inference speed for direct Anthropic models. Fast mode is available on Claude Opus 4.8, Opus 5, and Opus 5.5 at premium pricing, and cannot be combined with batch or priority processing.
+ */
+export type Speed = ClosedEnum<typeof Speed>;
+
+/**
  * Template engine for variable substitution in instructions. Defaults to the agent manifest's engine when invoking an agent, otherwise text.
  */
 export const TemplateEngine = {
@@ -974,6 +986,10 @@ export type CreateRouterResponseRequestBody = {
    * Processing mode for the request. Ultrafast is available for GPT-6 Astra on US/global processing. Fast uses premium low-latency processing; priority remains a backward-compatible alias.
    */
   serviceTier?: ServiceTier | undefined;
+  /**
+   * Inference speed for direct Anthropic models. Fast mode is available on Claude Opus 4.8, Opus 5, and Opus 5.5 at premium pricing, and cannot be combined with batch or priority processing.
+   */
+  speed?: Speed | undefined;
   /**
    * Custom text sequences that cause the model to stop generating. Forwarded to providers that support it (e.g. Anthropic); ignored otherwise.
    */
@@ -1598,6 +1614,11 @@ export const ServiceTier$outboundSchema: z.ZodNativeEnum<typeof ServiceTier> = z
   .nativeEnum(ServiceTier);
 
 /** @internal */
+export const Speed$outboundSchema: z.ZodNativeEnum<typeof Speed> = z.nativeEnum(
+  Speed,
+);
+
+/** @internal */
 export const TemplateEngine$outboundSchema: z.ZodNativeEnum<
   typeof TemplateEngine
 > = z.nativeEnum(TemplateEngine);
@@ -2146,6 +2167,7 @@ export type CreateRouterResponseRequestBody$Outbound = {
   safety_identifier?: string | undefined;
   security?: components.SecurityConfig$Outbound | undefined;
   service_tier?: string | undefined;
+  speed?: string | undefined;
   stop_sequences?: Array<string> | undefined;
   store?: boolean | undefined;
   stream?: boolean | undefined;
@@ -2238,6 +2260,7 @@ export const CreateRouterResponseRequestBody$outboundSchema: z.ZodType<
   safetyIdentifier: z.string().optional(),
   security: components.SecurityConfig$outboundSchema.optional(),
   serviceTier: ServiceTier$outboundSchema.optional(),
+  speed: Speed$outboundSchema.optional(),
   stopSequences: z.array(z.string()).optional(),
   store: z.boolean().optional(),
   stream: z.boolean().optional(),
