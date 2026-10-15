@@ -18,6 +18,9 @@
 - `noul`: estimate the probability that a statement is true.
 - `choice`: select an option from a set.
 - `score`: rate the content on an ordered scale.
+- `box`: locate one target in an image and return its bounding box. Beta, TypeSafe `jev-preview` only.
+
+Instructions and criteria accept strings or structured JSON. TypeSafe models also accept inline images through `assets` (beta).
 
 Use a native decision model or a supported chat model. Configure ordered `fallbacks`, optional `retry`, `timeout.call_timeout` in milliseconds, and an exact-match `cache`. Each retry and fallback gets a fresh timeout; omit `retry` to move directly to the next fallback on timeout. The response identifies the model that answered.
 
@@ -582,6 +585,95 @@ async function run() {
       },
     },
     state: "The parcel arrived two days late and the box was crushed.",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("routerClassifyCreate failed:", res.error);
+  }
+}
+
+run();
+```
+### Example Usage: typesafe_image_box
+
+<!-- UsageSnippet language="typescript" operationID="CreateClassify" method="post" path="/v3/router/classify" example="typesafe_image_box" -->
+```typescript
+import { Orq } from "@orq-ai/node";
+
+const orq = new Orq({
+  apiKey: process.env["ORQ_API_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await orq.router.classify.create({
+    assets: {
+      "kitchen-photo": {
+        dataBase64: "<base64 JPEG>",
+        format: "jpg",
+        type: "image",
+      },
+    },
+    model: "typesafe/jev-preview",
+    questions: {
+      "mug": {
+        instructions: "the coffee mug in `photo`",
+        type: "box",
+      },
+      "mug_visible": {
+        instructions: "Is there a coffee mug in `photo`?",
+        type: "noul",
+      },
+    },
+    state: {
+      "photo": "kitchen-photo",
+    },
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { OrqCore } from "@orq-ai/node/core.js";
+import { routerClassifyCreate } from "@orq-ai/node/funcs/routerClassifyCreate.js";
+
+// Use `OrqCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const orq = new OrqCore({
+  apiKey: process.env["ORQ_API_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await routerClassifyCreate(orq, {
+    assets: {
+      "kitchen-photo": {
+        dataBase64: "<base64 JPEG>",
+        format: "jpg",
+        type: "image",
+      },
+    },
+    model: "typesafe/jev-preview",
+    questions: {
+      "mug": {
+        instructions: "the coffee mug in `photo`",
+        type: "box",
+      },
+      "mug_visible": {
+        instructions: "Is there a coffee mug in `photo`?",
+        type: "noul",
+      },
+    },
+    state: {
+      "photo": "kitchen-photo",
+    },
   });
   if (res.ok) {
     const { value: result } = res;

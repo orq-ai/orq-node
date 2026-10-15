@@ -5,6 +5,7 @@
 import { deploymentsGetConfig } from "../funcs/deploymentsGetConfig.js";
 import { deploymentsInvoke } from "../funcs/deploymentsInvoke.js";
 import { deploymentsList } from "../funcs/deploymentsList.js";
+import { deploymentsListVersions } from "../funcs/deploymentsListVersions.js";
 import { deploymentsStream } from "../funcs/deploymentsStream.js";
 import { EventStream } from "../lib/event-streams.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
@@ -58,6 +59,23 @@ export class Deployments extends ClientSDK {
     options?: RequestOptions,
   ): Promise<operations.DeploymentsResponseBody> {
     return unwrapAsync(deploymentsList(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * List deployment versions
+   *
+   * @remarks
+   * List saved versions across deployment variants, including drafts, newest first. Resolve the deployment by key or ID. Optionally filter by variant_id. Use the version _id with starting_after or ending_before to paginate.
+   */
+  async listVersions(
+    request: operations.ListDeploymentVersionsRequest,
+    options?: RequestOptions,
+  ): Promise<operations.ListDeploymentVersionsResponseBody> {
+    return unwrapAsync(deploymentsListVersions(
       this,
       request,
       options,

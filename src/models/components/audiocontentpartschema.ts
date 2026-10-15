@@ -12,14 +12,16 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 /**
  * The format of the encoded audio data. Currently supports `wav` and `mp3`.
  */
-export const Format = {
+export const AudioContentPartSchemaFormat = {
   Mp3: "mp3",
   Wav: "wav",
 } as const;
 /**
  * The format of the encoded audio data. Currently supports `wav` and `mp3`.
  */
-export type Format = ClosedEnum<typeof Format>;
+export type AudioContentPartSchemaFormat = ClosedEnum<
+  typeof AudioContentPartSchemaFormat
+>;
 
 export type InputAudio = {
   /**
@@ -29,7 +31,7 @@ export type InputAudio = {
   /**
    * The format of the encoded audio data. Currently supports `wav` and `mp3`.
    */
-  format: Format;
+  format: AudioContentPartSchemaFormat;
 };
 
 /**
@@ -41,11 +43,13 @@ export type AudioContentPartSchema = {
 };
 
 /** @internal */
-export const Format$inboundSchema: z.ZodNativeEnum<typeof Format> = z
-  .nativeEnum(Format);
+export const AudioContentPartSchemaFormat$inboundSchema: z.ZodNativeEnum<
+  typeof AudioContentPartSchemaFormat
+> = z.nativeEnum(AudioContentPartSchemaFormat);
 /** @internal */
-export const Format$outboundSchema: z.ZodNativeEnum<typeof Format> =
-  Format$inboundSchema;
+export const AudioContentPartSchemaFormat$outboundSchema: z.ZodNativeEnum<
+  typeof AudioContentPartSchemaFormat
+> = AudioContentPartSchemaFormat$inboundSchema;
 
 /** @internal */
 export const InputAudio$inboundSchema: z.ZodType<
@@ -54,7 +58,7 @@ export const InputAudio$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   data: z.string(),
-  format: Format$inboundSchema,
+  format: AudioContentPartSchemaFormat$inboundSchema,
 });
 /** @internal */
 export type InputAudio$Outbound = {
@@ -69,7 +73,7 @@ export const InputAudio$outboundSchema: z.ZodType<
   InputAudio
 > = z.object({
   data: z.string(),
-  format: Format$outboundSchema,
+  format: AudioContentPartSchemaFormat$outboundSchema,
 });
 
 export function inputAudioToJSON(inputAudio: InputAudio): string {

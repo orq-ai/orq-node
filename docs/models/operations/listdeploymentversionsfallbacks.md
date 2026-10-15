@@ -1,0 +1,27 @@
+# ListDeploymentVersionsFallbacks
+
+## Example Usage
+
+```typescript
+import { ListDeploymentVersionsFallbacks } from "@orq-ai/node/models/operations";
+
+let value: ListDeploymentVersionsFallbacks = {
+  model: "Wrangler",
+  modelDbId: "<id>",
+  modelType: "embedding",
+  modelParameters: {},
+  provider: "azure",
+};
+```
+
+## Fields
+
+| Field                                                                                                                                      | Type                                                                                                                                       | Required                                                                                                                                   | Description                                                                                                                                |
+| ------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| `model`                                                                                                                                    | *string*                                                                                                                                   | :heavy_check_mark:                                                                                                                         | N/A                                                                                                                                        |
+| `modelDbId`                                                                                                                                | *string*                                                                                                                                   | :heavy_check_mark:                                                                                                                         | N/A                                                                                                                                        |
+| `modelType`                                                                                                                                | [operations.ListDeploymentVersionsDeploymentsModelType](../../models/operations/listdeploymentversionsdeploymentsmodeltype.md)             | :heavy_check_mark:                                                                                                                         | The modality of the model                                                                                                                  |
+| `modelParameters`                                                                                                                          | [operations.ListDeploymentVersionsDeploymentsModelParameters](../../models/operations/listdeploymentversionsdeploymentsmodelparameters.md) | :heavy_check_mark:                                                                                                                         | Model Parameters: Not all parameters apply to every model                                                                                  |
+| `provider`                                                                                                                                 | [operations.ListDeploymentVersionsDeploymentsProvider](../../models/operations/listdeploymentversionsdeploymentsprovider.md)               | :heavy_check_mark:                                                                                                                         | N/A                                                                                                                                        |
+| `integrationId`                                                                                                                            | *string*                                                                                                                                   | :heavy_minus_sign:                                                                                                                         | The ID of the integration to use                                                                                                           |
+| `version`                                                                                                                                  | *string*                                                                                                                                   | :heavy_minus_sign:                                                                                                                         | N/A                                                                                                                                        |

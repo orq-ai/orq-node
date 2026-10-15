@@ -36,3 +36,12 @@ const value: operations.ScoreQuestion = {
 };
 ```
 
+### `operations.BoxQuestion`
+
+```typescript
+const value: operations.BoxQuestion = {
+  instructions: {},
+  type: "box",
+};
+```
+

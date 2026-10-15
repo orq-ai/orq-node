@@ -5,6 +5,20 @@ One answer to a classification question. The type selects the answer fields. A r
 
 ## Supported Types
 
+### `components.ClassifyBoxAnswer`
+
+```typescript
+const value: components.ClassifyBoxAnswer = {
+  box: {
+    bottom: 5088.18,
+    left: 6889.1,
+    right: 4459.51,
+    top: 178.25,
+  },
+  type: "box",
+};
+```
+
 ### `components.ClassifyChoiceAnswer`
 
 ```typescript

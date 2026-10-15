@@ -1,18 +1,33 @@
 # QuestionsCriteria
 
-Optional descriptions of what true and false mean.
+The option description, or null.
 
-## Example Usage
+
+## Supported Types
+
+### `string`
 
 ```typescript
-import { QuestionsCriteria } from "@orq-ai/node/models/operations";
-
-let value: QuestionsCriteria = {};
+const value: string = "<value>";
 ```
 
-## Fields
+### `{ [k: string]: any }`
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `false`            | *string*           | :heavy_minus_sign: | N/A                |
-| `true`             | *string*           | :heavy_minus_sign: | N/A                |
+```typescript
+const value: { [k: string]: any } = {
+  "key": "<value>",
+  "key1": "<value>",
+  "key2": "<value>",
+};
+```
+
+### `any[]`
+
+```typescript
+const value: any[] = [
+  "<value 1>",
+  "<value 2>",
+  "<value 3>",
+];
+```
+

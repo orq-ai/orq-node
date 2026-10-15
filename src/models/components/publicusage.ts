@@ -5,6 +5,7 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -19,6 +20,18 @@ import {
   ServerToolUseDetails,
   ServerToolUseDetails$inboundSchema,
 } from "./servertoolusedetails.js";
+
+/**
+ * Inference speed reported by Anthropic and used for billing.
+ */
+export const Speed = {
+  Standard: "standard",
+  Fast: "fast",
+} as const;
+/**
+ * Inference speed reported by Anthropic and used for billing.
+ */
+export type Speed = ClosedEnum<typeof Speed>;
 
 export type PublicUsage = {
   /**
@@ -35,12 +48,21 @@ export type PublicUsage = {
   outputTokensDetails: OutputTokensDetails;
   serverToolUse?: ServerToolUseDetails | undefined;
   /**
+   * Inference speed reported by Anthropic and used for billing.
+   */
+  speed?: Speed | undefined;
+  /**
    * Total cost (USD) of the response. Present when billing was computed for this response.
    */
   totalCost?: number | undefined;
   totalTokens: number;
   webSearchRequests?: number | undefined;
 };
+
+/** @internal */
+export const Speed$inboundSchema: z.ZodNativeEnum<typeof Speed> = z.nativeEnum(
+  Speed,
+);
 
 /** @internal */
 export const PublicUsage$inboundSchema: z.ZodType<
@@ -55,6 +77,7 @@ export const PublicUsage$inboundSchema: z.ZodType<
   output_tokens: z.number().int(),
   output_tokens_details: OutputTokensDetails$inboundSchema,
   server_tool_use: ServerToolUseDetails$inboundSchema.optional(),
+  speed: Speed$inboundSchema.optional(),
   total_cost: z.number().optional(),
   total_tokens: z.number().int(),
   web_search_requests: z.number().int().optional(),
