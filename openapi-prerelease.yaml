@@ -2558,7 +2558,7 @@ components:
           properties:
             _id:
               type: "string"
-              default: "reasoning_01m4y63thjmaw4720vyk8bwm61"
+              default: "reasoning_01m4ye1r4j3x0g0nb34b9zr5tf"
               description: "Unique identifier for the part. Format: reasoning_{ulid} (e.g., reasoning_01hxyz...)"
               example: "reasoning_01hxyz123abc"
             kind:
@@ -22609,6 +22609,29 @@ components:
       required:
         - "id"
       type: "object"
+    ErrorResponse:
+      type: "object"
+      properties:
+        message:
+          type: "string"
+          description: "Human-readable error message."
+        code:
+          type: "integer"
+          description: "gRPC status code, when the service reports one."
+        details:
+          type: "array"
+          items: {}
+          description: "Additional error details, when the service reports any."
+      required:
+        - "message"
+    APIErrorResponse:
+      type: "object"
+      additionalProperties: false
+      properties:
+        error:
+          $ref: "#/components/schemas/APIError"
+      required:
+        - "error"
     ApiKeyRestResponse:
       type: object
       required:
@@ -23037,6 +23060,12 @@ paths:
                   - "choices"
         "204":
           description: "No content - successful operation"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       security:
         - ApiKey: []
   /v2/deployments/stream:
@@ -24316,6 +24345,12 @@ paths:
                       - telemetry
                       - choices
               x-speakeasy-sse-sentinel: "[DONE]"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       security:
         - ApiKey: []
   /v2/deployments:
@@ -24837,6 +24872,12 @@ paths:
                   - "object"
                   - "data"
                   - "has_more"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
         "500":
           description: "Internal Server Error"
           content:
@@ -25698,7 +25739,7 @@ paths:
                                 type: "string"
                                 format: "ulid"
                                 pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                                default: "01M4Y63TGD18J2HNY1WT4ZRXWR"
+                                default: "01M4YE1R3XCTAZ2RP0HRJMD3KM"
                                 readOnly: true
                                 description: "The unique identifier of the playground knowledge base"
                               knowledge_id:
@@ -30278,6 +30319,12 @@ paths:
                   data:
                     $ref: "#/components/schemas/ResponseStreamingEvent"
               x-speakeasy-sse-sentinel: "[DONE]"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       security:
         - ApiKey: []
   /v2/agents/{agent_key}/responses/{task_id}:
@@ -33697,6 +33744,12 @@ paths:
                   - "status"
                 title: "A2A Task Response"
                 description: "Response format following the Agent-to-Agent (A2A) protocol. Returned when starting or continuing an agent task execution."
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       security:
         - ApiKey: []
   /v2/agents/run:
@@ -35043,7 +35096,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01M4Y63TK2FCA0NZZ00H7MTNAB"
+                                          default: "01M4YE1R5H13DBKD14VZDTW83J"
                                         name:
                                           type: "string"
                                         description:
@@ -35310,6 +35363,12 @@ paths:
                   - "status"
                 title: "A2A Task Response"
                 description: "Response format following the Agent-to-Agent (A2A) protocol. Returned when starting or continuing an agent task execution."
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       security:
         - ApiKey: []
   /v2/agents/stream-run:
@@ -36656,7 +36715,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01M4Y63TKM41KPVE02DPPYV4JA"
+                                          default: "01M4YE1R5X4Q99QDVXW56Q4YSF"
                                         name:
                                           type: "string"
                                         description:
@@ -38354,6 +38413,12 @@ paths:
                   - "object"
                   - "data"
                   - "has_more"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       security:
         - ApiKey: []
     post:
@@ -40202,6 +40267,12 @@ paths:
                   - "prompt"
                 title: "Prompt"
                 description: "A prompt entity with configuration, metadata, and versioning."
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       security:
         - ApiKey: []
   /v2/prompts/{id}:
@@ -41349,6 +41420,18 @@ paths:
                   - "prompt"
                 title: "Prompt"
                 description: "A prompt entity with configuration, metadata, and versioning."
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: "The resource does not exist. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       security:
         - ApiKey: []
     patch:
@@ -44430,6 +44513,18 @@ paths:
                   - "object"
                   - "data"
                   - "has_more"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: "The resource does not exist. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       security:
         - ApiKey: []
   /v2/prompts/{prompt_id}/versions/{version_id}:
@@ -45634,7 +45729,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M4Y63TMXKWNA4FW853BCPZTR"
+                              default: "tool_01M4YE1R6S0BJDJM2ASWHN6X4N"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -45735,7 +45830,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M4Y63TMYS4M2C9SVVBMZGD7B"
+                              default: "tool_01M4YE1R6SF3PC0WCCAH14J505"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -45838,7 +45933,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M4Y63TMY6Z7DNDGAJXZKJ0Y9"
+                              default: "tool_01M4YE1R6SDYJ2YYSZFKQDKDWR"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -45982,7 +46077,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M4Y63TMZ2H6G2T96J0RE94HJ"
+                              default: "tool_01M4YE1R6THN2ETF7CV2GSPPNR"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -46469,7 +46564,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M4Y63TN2Y6CYSZBEX58WA9YF"
+                        default: "tool_01M4YE1R6W59PHN66V7XW74TT7"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -46570,7 +46665,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M4Y63TN3E094SDVXN8XBSW26"
+                        default: "tool_01M4YE1R6X3NZFMAPC7G2264A0"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -46673,7 +46768,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M4Y63TN3P0Q9F767VC4SKYY9"
+                        default: "tool_01M4YE1R6XV45WCCYMH432W0Z8"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -46817,7 +46912,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M4Y63TN4TJC9GR48ZDS18A77"
+                        default: "tool_01M4YE1R6X395Z1SCZSH7JKTXA"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -46914,6 +47009,12 @@ paths:
                       - "code_tool"
                     title: "Code Execution Tool"
                     description: "Executes code snippets in a sandboxed environment, currently supporting Python."
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       security:
         - ApiKey: []
   /v2/tools/{tool_id}:
@@ -47315,7 +47416,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M4Y63TN6VHAR1W9RMJW87N66"
+                        default: "tool_01M4YE1R6ZB2419D7SJ7XABWHP"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -47416,7 +47517,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M4Y63TN6FC1V1KMHG6W9AC80"
+                        default: "tool_01M4YE1R6Z78HJFZHCKK820AKM"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -47519,7 +47620,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M4Y63TN7QKKSKEAVNFQK4JSQ"
+                        default: "tool_01M4YE1R6ZBS5GWN7HQP45AVK9"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -47663,7 +47764,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M4Y63TN8HA7HFP79DRX730RP"
+                        default: "tool_01M4YE1R70H1Z8VHK09TP3TYS7"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -47795,6 +47896,12 @@ paths:
       responses:
         "200":
           description: "Successfully deleted the tool."
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       security:
         - ApiKey: []
     get:
@@ -47824,7 +47931,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M4Y63TNE066JKVCHHPG43CV6"
+                        default: "tool_01M4YE1R74E2FSY82JE8D2C4EC"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -47925,7 +48032,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M4Y63TNE8677QGBV1B1SVWRS"
+                        default: "tool_01M4YE1R751WB3FJ208KJHF21P"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -48028,7 +48135,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M4Y63TNF141H3F4Z88EFRXQK"
+                        default: "tool_01M4YE1R75B7WJ7F65H3ENW18Q"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -48172,7 +48279,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M4Y63TNGDW5PDQP6Q1PM6MF1"
+                        default: "tool_01M4YE1R75YQ471N97MYHHZWN4"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -48269,6 +48376,18 @@ paths:
                       - "code_tool"
                     title: "Code Execution Tool"
                     description: "Executes code snippets in a sandboxed environment, currently supporting Python."
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: "The resource does not exist. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       security:
         - ApiKey: []
   /v2/tools/{tool_id}/versions:
@@ -50428,6 +50547,24 @@ paths:
                     description: Represents a streamed chunk of a chat completion response returned by model, based on the provided input.
                 description: "Represents a streamed chunk of a chat completion response returned by model, based on the provided input."
               x-speakeasy-sse-sentinel: "[DONE]"
+        "400":
+          description: "The request is invalid. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+        "404":
+          description: "The resource does not exist. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
       security:
         - ApiKey: []
   /v2/router/moderations:
@@ -51144,6 +51281,12 @@ paths:
                 required:
                   - "object"
                   - "results"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
       security:
         - ApiKey: []
   /v2/router/audio/speech:
@@ -51407,6 +51550,12 @@ paths:
       responses:
         "200":
           description: "The audio file content."
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
       security:
         - ApiKey: []
   /v2/router/completions:
@@ -52470,6 +52619,12 @@ paths:
                       - model
                       - object
               x-speakeasy-sse-sentinel: "[DONE]"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
       security:
         - ApiKey: []
   /v2/router/images/generations:
@@ -52867,6 +53022,12 @@ paths:
                 required:
                   - "created"
                   - "data"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
       security:
         - ApiKey: []
   /v2/router/images/edits:
@@ -53244,6 +53405,12 @@ paths:
                 required:
                   - "created"
                   - "data"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
       security:
         - ApiKey: []
   /v2/router/images/variations:
@@ -53610,6 +53777,12 @@ paths:
                 required:
                   - "created"
                   - "data"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
       security:
         - ApiKey: []
   /v2/router/audio/transcriptions:
@@ -54551,6 +54724,12 @@ paths:
                   - "model"
                   - "pages"
                   - "usage"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
       security:
         - ApiKey: []
   /v2/feedback/evaluation/remove:
@@ -54579,6 +54758,12 @@ paths:
       responses:
         "200":
           description: "Event has been dispatched to delete the evaluation"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       security:
         - ApiKey: []
   /v2/feedback/evaluation:
@@ -54620,7 +54805,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-10-14T21:46:52.499Z"
+                      default: "2026-10-15T00:05:33.053Z"
                       deprecated: true
                       description: "Deprecated. The date and time the item was reviewed"
                     type:
@@ -54662,7 +54847,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-10-14T21:46:52.499Z"
+                      default: "2026-10-15T00:05:33.053Z"
                       deprecated: true
                       description: "Deprecated. The date and time the item was reviewed"
                     type:
@@ -54704,7 +54889,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-10-14T21:46:52.500Z"
+                      default: "2026-10-15T00:05:33.053Z"
                       deprecated: true
                       description: "Deprecated. The date and time the item was reviewed"
                     type:
@@ -54746,7 +54931,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-10-14T21:46:52.500Z"
+                      default: "2026-10-15T00:05:33.053Z"
                       deprecated: true
                       description: "Deprecated. The date and time the item was reviewed"
                     type:
@@ -54768,6 +54953,12 @@ paths:
       responses:
         "200":
           description: "Event has been dispatched to report the feedback"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       security:
         - ApiKey: []
   /v2/human-eval-sets:
@@ -54850,7 +55041,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-10-14T21:46:45.808Z"
+                          default: "2026-10-15T00:05:28.030Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -54858,7 +55049,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-10-14T21:46:45.809Z"
+                              default: "2026-10-15T00:05:28.031Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -54928,7 +55119,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-10-14T21:46:45.808Z"
+                          default: "2026-10-15T00:05:28.030Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -54936,7 +55127,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-10-14T21:46:45.809Z"
+                              default: "2026-10-15T00:05:28.031Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -54957,6 +55148,12 @@ paths:
                         - "workspace_id"
                         - "filter_type"
                         - "filter_value"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       security:
         - ApiKey: []
     post:
@@ -55113,7 +55310,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-10-14T21:46:45.808Z"
+                        default: "2026-10-15T00:05:28.030Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -55121,7 +55318,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-10-14T21:46:45.809Z"
+                            default: "2026-10-15T00:05:28.031Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -55191,7 +55388,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-10-14T21:46:45.808Z"
+                        default: "2026-10-15T00:05:28.030Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -55199,7 +55396,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-10-14T21:46:45.809Z"
+                            default: "2026-10-15T00:05:28.031Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -55220,6 +55417,12 @@ paths:
                       - "workspace_id"
                       - "filter_type"
                       - "filter_value"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       security:
         - ApiKey: []
   /v2/human-eval-sets/{id}:
@@ -55294,7 +55497,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-10-14T21:46:45.808Z"
+                        default: "2026-10-15T00:05:28.030Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -55302,7 +55505,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-10-14T21:46:45.809Z"
+                            default: "2026-10-15T00:05:28.031Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -55372,7 +55575,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-10-14T21:46:45.808Z"
+                        default: "2026-10-15T00:05:28.030Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -55380,7 +55583,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-10-14T21:46:45.809Z"
+                            default: "2026-10-15T00:05:28.031Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -55401,6 +55604,18 @@ paths:
                       - "workspace_id"
                       - "filter_type"
                       - "filter_value"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: "The resource does not exist. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       security:
         - ApiKey: []
     patch:
@@ -55565,7 +55780,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-10-14T21:46:45.808Z"
+                        default: "2026-10-15T00:05:28.030Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -55573,7 +55788,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-10-14T21:46:45.809Z"
+                            default: "2026-10-15T00:05:28.031Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -55643,7 +55858,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-10-14T21:46:45.808Z"
+                        default: "2026-10-15T00:05:28.030Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -55651,7 +55866,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-10-14T21:46:45.809Z"
+                            default: "2026-10-15T00:05:28.031Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -55672,6 +55887,12 @@ paths:
                       - "workspace_id"
                       - "filter_type"
                       - "filter_value"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       security:
         - ApiKey: []
     delete:
@@ -55694,6 +55915,12 @@ paths:
       responses:
         "200":
           description: "Successfully deleted the human review set"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       security:
         - ApiKey: []
   /v2/chunking:
@@ -56089,6 +56316,12 @@ paths:
                       start_index: 45
                       end_index: 108
                       token_count: 12
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "chunking"
       x-speakeasy-name-override: "parse"
       x-cli-group: "chunking"
@@ -56195,6 +56428,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/FileSystem"
+        "403":
+          description: "Not permitted for this key, project or workspace. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
         "404":
           description: "File system not found."
       x-speakeasy-group: "fileSystems"
@@ -56299,6 +56538,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ListFileSystemFilesResponse"
+        "403":
+          description: "Not permitted for this key, project or workspace. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
         "404":
           description: "File system or path not found."
       x-speakeasy-group: "fileSystems"
@@ -56402,6 +56647,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/StatFileSystemFileResponse"
+        "400":
+          description: "The request is invalid. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
         "404":
           description: "File system or path not found."
       x-speakeasy-group: "fileSystems"
@@ -56723,6 +56974,18 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/DatasourcesServiceListResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: "The resource does not exist. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "knowledge"
       x-speakeasy-name-override: "listDatasources"
       x-cli-group: "knowledge-bases"
@@ -56758,6 +57021,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Datasource"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
         "500":
           description: "Failed to create datasource"
       x-speakeasy-group: "knowledge"
@@ -56796,6 +57065,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/DatasourcesServicePreviewChunksResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "knowledge"
       x-speakeasy-name-override: "previewChunks"
       x-cli-group: "knowledge-bases"
@@ -56827,6 +57102,18 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Datasource"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: "The resource does not exist. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "knowledge"
       x-speakeasy-name-override: "retrieveDatasource"
       x-cli-group: "knowledge-bases"
@@ -56857,6 +57144,12 @@ paths:
       responses:
         "204":
           description: "Datasource successfully deleted"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "knowledge"
       x-speakeasy-name-override: "deleteDatasource"
       x-cli-group: "knowledge-bases"
@@ -56897,6 +57190,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Datasource"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "knowledge"
       x-speakeasy-name-override: "updateDatasource"
       x-cli-group: "knowledge-bases"
@@ -56994,6 +57293,18 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ChunksServiceListResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: "The resource does not exist. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "knowledge"
       x-speakeasy-name-override: "listChunks"
       x-cli-group: "knowledge-bases"
@@ -57042,6 +57353,12 @@ paths:
                 items:
                   $ref: "#/components/schemas/KnowledgeChunk"
                 description: "Array of created chunks"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
         "500":
           description: "Failed to create chunk"
       x-speakeasy-group: "knowledge"
@@ -57084,6 +57401,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ChunksServiceDeleteManyResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "knowledge"
       x-speakeasy-name-override: "deleteChunks"
       x-cli-group: "knowledge-bases"
@@ -57125,6 +57448,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ChunksServiceCountResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "knowledge"
       x-speakeasy-name-override: "getChunksCount"
       x-cli-group: "knowledge-bases"
@@ -57166,6 +57495,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ChunksServiceListPaginatedResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "knowledge"
       x-speakeasy-name-override: "listChunksPaginated"
       x-cli-group: "knowledge-bases"
@@ -57206,6 +57541,18 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/KnowledgeChunk"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: "The resource does not exist. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "knowledge"
       x-speakeasy-name-override: "retrieveChunk"
       x-cli-group: "knowledge-bases"
@@ -57241,6 +57588,12 @@ paths:
       responses:
         "204":
           description: "Chunk successfully deleted"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "knowledge"
       x-speakeasy-name-override: "deleteChunk"
       x-cli-group: "knowledge-bases"
@@ -57286,6 +57639,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/KnowledgeChunk"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "knowledge"
       x-speakeasy-name-override: "updateChunk"
       x-cli-group: "knowledge-bases"
@@ -57332,6 +57691,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/KnowledgeChunk"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "knowledge"
       x-speakeasy-name-override: "toggleChunk"
       x-cli-group: "knowledge-bases"
@@ -57367,6 +57732,18 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/DatasourcesServiceGetProcessingStatusResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: "The resource does not exist. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "knowledge"
       x-speakeasy-name-override: "retrieveProcessingStatus"
       x-cli-group: "knowledge-bases"
@@ -57461,6 +57838,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GetUploadFileUrlResponse"
+        "400":
+          description: "The request is invalid. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
         "401":
           description: "Unauthorized - Bearer token is missing or invalid."
         "500":
@@ -57569,6 +57952,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/MemoryStore"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "memoryStores"
       x-speakeasy-name-override: "create"
       x-cli-group: "memory-stores"
@@ -57742,6 +58131,12 @@ paths:
           description: "Unauthorized - Bearer token is missing or invalid"
         "403":
           description: "Forbidden - Insufficient permissions to access memories"
+        "404":
+          description: "The resource does not exist. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "memoryStores"
       x-speakeasy-name-override: "listMemories"
       x-cli-group: "memory-stores"
@@ -60986,6 +61381,12 @@ paths:
             application/json:
               schema:
                 type: "object"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "evals"
       x-speakeasy-name-override: "duplicate"
       x-cli-group: "evals"
@@ -61028,6 +61429,18 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ListEvaluatorVersionsResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: "The resource does not exist. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "evals"
       x-speakeasy-name-override: "listVersions"
       x-cli-group: "evals"
@@ -61059,6 +61472,18 @@ paths:
             application/json:
               schema:
                 type: "object"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: "The resource does not exist. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "evals"
       x-speakeasy-name-override: "getVersion"
       x-cli-group: "evals"
@@ -61093,6 +61518,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/EvaluationResult"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "evals"
       x-speakeasy-name-override: "invoke"
       x-cli-group: "evals"
@@ -61125,6 +61556,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/CapabilitiesResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "pii"
       x-speakeasy-name-override: "capabilities"
       x-cli-group: "pii"
@@ -61150,6 +61587,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/DetectResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "pii"
       x-speakeasy-name-override: "detect"
       x-cli-group: "pii"
@@ -61179,6 +61622,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/RedactResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "pii"
       x-speakeasy-name-override: "redact"
       x-cli-group: "pii"
@@ -61208,6 +61657,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/RestoreResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "pii"
       x-speakeasy-name-override: "restore"
       x-cli-group: "pii"
@@ -61384,6 +61839,12 @@ paths:
                   - "domains"
                 type: "object"
           description: "The capability catalog"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       summary: "List capability catalog"
       tags:
         - "API keys"
@@ -61664,6 +62125,12 @@ paths:
       responses:
         "200":
           description: "Span annotated"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "annotations"
       x-speakeasy-name-override: "create"
       x-cli-group: "traces"
@@ -61715,6 +62182,12 @@ paths:
       responses:
         "200":
           description: "Annotation removed"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "annotations"
       x-speakeasy-name-override: "delete"
       x-cli-group: "traces"
@@ -61969,6 +62442,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/AggregateLogsResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "logs"
       x-speakeasy-name-override: "aggregate"
       x-cli-group: "logs"
@@ -61995,6 +62474,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ListLogFacetsResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "logs"
       x-speakeasy-name-override: "listFacets"
       x-cli-group: "logs"
@@ -62041,6 +62526,18 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ListLogFacetValuesResponse"
+        "400":
+          description: "The request is invalid. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "logs"
       x-speakeasy-name-override: "listFacetValues"
       x-cli-group: "logs"
@@ -62061,6 +62558,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ListLogFieldsResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "logs"
       x-speakeasy-name-override: "listFields"
       x-cli-group: "logs"
@@ -62087,6 +62590,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/FindLogPatternsResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "logs"
       x-speakeasy-name-override: "findPatterns"
       x-cli-group: "logs"
@@ -62113,6 +62622,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/QueryLogsResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "logs"
       x-speakeasy-name-override: "query"
       x-cli-group: "logs"
@@ -62139,6 +62654,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/SearchLogsResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "logs"
       x-speakeasy-name-override: "search"
       x-cli-group: "logs"
@@ -62165,6 +62686,18 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GetLogResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: "The resource does not exist. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "logs"
       x-speakeasy-name-override: "get"
       x-cli-group: "logs"
@@ -62197,6 +62730,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GetLogContextResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "logs"
       x-speakeasy-name-override: "context"
       x-cli-group: "logs"
@@ -62232,6 +62771,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ListTraceLogsResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "logs"
       x-speakeasy-name-override: "listTraceLogs"
       x-cli-group: "logs"
@@ -62258,6 +62803,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/QueryReportResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "reporting"
       x-speakeasy-name-override: "query"
       x-cli-group: "reporting"
@@ -62283,6 +62834,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ListTelemetryCapabilitiesResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "telemetry"
       x-speakeasy-name-override: "listCapabilities"
       x-cli-group: "telemetry"
@@ -62309,6 +62866,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ListTelemetryFacetValuesResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "telemetry"
       x-speakeasy-name-override: "listFacetValues"
       x-cli-group: "telemetry"
@@ -62335,6 +62898,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/QueryTelemetryResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "telemetry"
       x-speakeasy-name-override: "query"
       x-cli-group: "telemetry"
@@ -62361,6 +62930,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/AggregateTracesResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "traces"
       x-speakeasy-name-override: "aggregate"
       x-cli-group: "traces"
@@ -62381,6 +62956,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ListTraceFacetsResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "traces"
       x-speakeasy-name-override: "list_facets"
       x-cli-group: "traces"
@@ -62426,6 +63007,18 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ListTraceFacetValuesResponse"
+        "400":
+          description: "The request is invalid. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "traces"
       x-speakeasy-name-override: "list_facet_values"
       x-cli-group: "traces"
@@ -62446,6 +63039,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ListTraceFieldsResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "traces"
       x-speakeasy-name-override: "list_fields"
       x-cli-group: "traces"
@@ -62472,6 +63071,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ListTraceFiltersResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "traces"
       x-speakeasy-name-override: "list_filters"
       x-cli-group: "traces"
@@ -62498,6 +63103,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/QueryTracesResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "traces"
       x-speakeasy-name-override: "query"
       x-cli-group: "traces"
@@ -62524,6 +63135,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/SearchTracesResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "traces"
       x-speakeasy-name-override: "search"
       x-cli-group: "traces"
@@ -62550,6 +63167,18 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GetTraceResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: "The resource does not exist. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "traces"
       x-speakeasy-name-override: "get"
       x-cli-group: "traces"
@@ -62581,6 +63210,18 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GetTraceConversationResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: "The resource does not exist. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "traces"
       x-speakeasy-name-override: "get_conversation"
       x-cli-group: "traces"
@@ -62620,6 +63261,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ListTraceSpansResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "traces"
       x-speakeasy-name-override: "list_spans"
       x-cli-group: "traces"
@@ -62652,6 +63299,18 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GetTraceSpanResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: "The resource does not exist. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "traces"
       x-speakeasy-name-override: "get_span"
       x-cli-group: "traces"
@@ -62689,6 +63348,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ListViewsResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "views"
       x-speakeasy-name-override: "list"
       x-cli-group: "views"
@@ -62717,6 +63382,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/CreateViewResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "views"
       x-speakeasy-name-override: "create"
       x-cli-group: "views"
@@ -62746,6 +63417,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GetViewResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "views"
       x-speakeasy-name-override: "get"
       x-cli-group: "views"
@@ -62774,6 +63451,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/DeleteViewResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "views"
       x-speakeasy-name-override: "delete"
       x-cli-group: "views"
@@ -62808,6 +63491,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/UpdateViewResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "views"
       x-speakeasy-name-override: "update"
       x-cli-group: "views"
@@ -62858,6 +63547,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ListDatasetsResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "datasets"
       x-speakeasy-name-override: "list"
       x-cli-group: "datasets"
@@ -62893,6 +63588,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Dataset"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "datasets"
       x-speakeasy-name-override: "create"
       x-cli-group: "datasets"
@@ -62929,6 +63630,18 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Dataset"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: "The resource does not exist. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "datasets"
       x-speakeasy-name-override: "retrieve"
       x-cli-group: "datasets"
@@ -62960,6 +63673,12 @@ paths:
       responses:
         "204":
           description: "No content - successful operation"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "datasets"
       x-speakeasy-name-override: "delete"
       x-cli-group: "datasets"
@@ -62995,6 +63714,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Dataset"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "datasets"
       x-speakeasy-name-override: "update"
       x-cli-group: "datasets"
@@ -63021,6 +63746,12 @@ paths:
       responses:
         "204":
           description: "No content - successful operation"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "datasets"
       x-speakeasy-name-override: "clear"
       x-cli-group: "datasets"
@@ -63064,6 +63795,18 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ListDatapointsResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: "The resource does not exist. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "datasets"
       x-speakeasy-name-override: "listDatapoints"
       x-cli-group: "datasets"
@@ -63105,6 +63848,12 @@ paths:
                 type: "array"
                 items:
                   $ref: "#/components/schemas/Datapoint"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "datasets"
       x-speakeasy-name-override: "createDatapoint"
       x-cli-group: "datasets"
@@ -63137,6 +63886,12 @@ paths:
       responses:
         "204":
           description: "No content - successful operation"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "datasets"
       x-speakeasy-name-override: "deleteDatapoints"
       x-cli-group: "datasets"
@@ -63175,6 +63930,12 @@ paths:
                 type: "array"
                 items:
                   $ref: "#/components/schemas/Datapoint"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "datasets"
       x-speakeasy-name-override: "createDatapoints"
       x-cli-group: "datasets"
@@ -63210,6 +63971,18 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Datapoint"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: "The resource does not exist. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "datasets"
       x-speakeasy-name-override: "retrieveDatapoint"
       x-cli-group: "datasets"
@@ -63240,6 +64013,12 @@ paths:
       responses:
         "204":
           description: "No content - successful operation"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "datasets"
       x-speakeasy-name-override: "deleteDatapoint"
       x-cli-group: "datasets"
@@ -63280,6 +64059,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Datapoint"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "datasets"
       x-speakeasy-name-override: "updateDatapoint"
       x-cli-group: "datasets"
@@ -64974,6 +65759,12 @@ paths:
                   - "has_more"
                 type: "object"
           description: "Policies retrieved successfully"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       summary: "List policies"
       tags:
         - "Policies"
@@ -65434,6 +66225,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ListExternalAgentsResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "agents.external"
       x-speakeasy-name-override: "list"
       x-code-samples:
@@ -65467,6 +66264,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/CreateExternalAgentResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "agents.external"
       x-speakeasy-name-override: "create"
       x-code-samples:
@@ -65501,6 +66304,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GetExternalAgentResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "agents.external"
       x-speakeasy-name-override: "retrieve"
       x-code-samples:
@@ -65534,6 +66343,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/DeleteExternalAgentResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "agents.external"
       x-speakeasy-name-override: "delete"
       x-code-samples:
@@ -65573,6 +66388,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/UpdateExternalAgentResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "agents.external"
       x-speakeasy-name-override: "update"
       x-code-samples:
@@ -65613,6 +66434,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/RefreshExternalAgentCardResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "agents.external"
       x-speakeasy-name-override: "refreshCard"
       x-code-samples:
@@ -65653,6 +66480,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/TestExternalAgentConnectionResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "agents.external"
       x-speakeasy-name-override: "testConnection"
       x-code-samples:
@@ -65703,6 +66536,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ListAlertsResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "alerts"
       x-speakeasy-name-override: "list"
       x-cli-group: "alerts"
@@ -65728,6 +66567,18 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/CreateAlertResponse"
+        "400":
+          description: "The request is invalid. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "alerts"
       x-speakeasy-name-override: "create"
       x-cli-group: "alerts"
@@ -65755,6 +66606,18 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GetAlertResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: "The resource does not exist. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "alerts"
       x-speakeasy-name-override: "get"
       x-cli-group: "alerts"
@@ -65781,6 +66644,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/DeleteAlertResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "alerts"
       x-speakeasy-name-override: "delete"
       x-cli-group: "alerts"
@@ -65813,6 +66682,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/UpdateAlertResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "alerts"
       x-speakeasy-name-override: "update"
       x-cli-group: "alerts"
@@ -65856,6 +66731,18 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ListAlertTriggersResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: "The resource does not exist. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "alerts"
       x-speakeasy-name-override: "listTriggers"
       x-cli-group: "alerts"
@@ -65905,6 +66792,18 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ListAlertTriggerEventsResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: "The resource does not exist. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "alerts"
       x-speakeasy-name-override: "listTriggerEvents"
       x-cli-group: "alerts"
@@ -65952,6 +66851,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ListAnnotationQueuesResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "annotationQueues"
       x-speakeasy-name-override: "list"
       x-cli-group: "annotation-queues"
@@ -65987,6 +66892,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/AnnotationQueue"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "annotationQueues"
       x-speakeasy-name-override: "create"
       x-cli-group: "annotation-queues"
@@ -66023,6 +66934,18 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/AnnotationQueue"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: "The resource does not exist. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "annotationQueues"
       x-speakeasy-name-override: "retrieve"
       x-cli-group: "annotation-queues"
@@ -66054,6 +66977,12 @@ paths:
       responses:
         "204":
           description: "No content - Annotation queue successfully deleted"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "annotationQueues"
       x-speakeasy-name-override: "delete"
       x-cli-group: "annotation-queues"
@@ -66095,6 +67024,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/AnnotationQueue"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "annotationQueues"
       x-speakeasy-name-override: "update"
       x-cli-group: "annotation-queues"
@@ -66127,6 +67062,12 @@ paths:
       responses:
         "204":
           description: "No content - successful operation"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "annotationQueues"
       x-speakeasy-name-override: "clear"
       x-cli-group: "annotation-queues"
@@ -66179,6 +67120,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ListAnnotationQueueItemsResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "annotationQueues"
       x-speakeasy-name-override: "listItems"
       x-cli-group: "annotation-queues"
@@ -66222,6 +67169,12 @@ paths:
                 type: "array"
                 items:
                   $ref: "#/components/schemas/AnnotationQueueItem"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "annotationQueues"
       x-speakeasy-name-override: "addItems"
       x-cli-group: "annotation-queues"
@@ -66260,6 +67213,12 @@ paths:
       responses:
         "204":
           description: "No content - Annotation queue items successfully removed"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "annotationQueues"
       x-speakeasy-name-override: "removeItems"
       x-cli-group: "annotation-queues"
@@ -66301,6 +67260,18 @@ paths:
             application/json:
               schema:
                 type: "object"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: "The resource does not exist. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "annotationQueues"
       x-speakeasy-name-override: "retrieveItem"
       x-cli-group: "annotation-queues"
@@ -66382,6 +67353,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ListBudgetsResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "budgets"
       x-speakeasy-name-override: "list"
       x-cli-group: "budgets"
@@ -66407,6 +67384,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/CreateBudgetResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "budgets"
       x-speakeasy-name-override: "create"
       x-cli-group: "budgets"
@@ -66438,6 +67421,18 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GetBudgetResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "403":
+          description: "Not permitted for this key, project or workspace. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "budgets"
       x-speakeasy-name-override: "get"
       x-cli-group: "budgets"
@@ -66464,6 +67459,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/DeleteBudgetResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "budgets"
       x-speakeasy-name-override: "delete"
       x-cli-group: "budgets"
@@ -66496,6 +67497,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/UpdateBudgetResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "budgets"
       x-speakeasy-name-override: "update"
       x-cli-group: "budgets"
@@ -66529,6 +67536,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResetBudgetConsumptionResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "budgets"
       x-speakeasy-name-override: "resetConsumption"
       x-cli-group: "budgets"
@@ -66571,6 +67584,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ListEnvironmentsResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "environments"
       x-speakeasy-name-override: "list"
       x-cli-group: "environments"
@@ -66606,6 +67625,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/CreateEnvironmentResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "environments"
       x-speakeasy-name-override: "create"
       x-cli-group: "environments"
@@ -66642,6 +67667,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GetEnvironmentResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "environments"
       x-speakeasy-name-override: "get"
       x-cli-group: "environments"
@@ -66677,6 +67708,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/DeleteEnvironmentResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "environments"
       x-speakeasy-name-override: "delete"
       x-cli-group: "environments"
@@ -66718,6 +67755,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/UpdateEnvironmentResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "environments"
       x-speakeasy-name-override: "update"
       x-cli-group: "environments"
@@ -66753,6 +67796,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/SubmitFeedbackResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "feedback"
       x-speakeasy-name-override: "submit"
       x-cli-group: "feedback"
@@ -66802,6 +67851,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ListFilesResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "files"
       x-speakeasy-name-override: "list"
       x-cli-group: "files"
@@ -66837,6 +67892,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/CreateFileResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "files"
       x-speakeasy-name-override: "create"
       x-cli-group: "files"
@@ -66874,6 +67935,18 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GetFileContentResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: "The resource does not exist. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "files"
       x-speakeasy-name-override: "getContent"
       x-cli-group: "files"
@@ -66911,6 +67984,18 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GetFileResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: "The resource does not exist. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "files"
       x-speakeasy-name-override: "get"
       x-cli-group: "files"
@@ -66947,6 +68032,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/DeleteFileResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "files"
       x-speakeasy-name-override: "delete"
       x-cli-group: "files"
@@ -66989,6 +68080,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/UpdateFileResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "files"
       x-speakeasy-name-override: "update"
       x-cli-group: "files"
@@ -67055,6 +68152,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ListGuardrailRulesResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "guardrailRules"
       x-speakeasy-name-override: "list"
       x-cli-hidden: true
@@ -67085,6 +68188,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/CreateGuardrailRuleResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "guardrailRules"
       x-speakeasy-name-override: "create"
       x-cli-hidden: true
@@ -67121,6 +68230,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ListGuardrailRuleUsedGuardrailsResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "guardrailRules"
       x-speakeasy-name-override: "listUsedGuardrails"
       x-cli-hidden: true
@@ -67152,6 +68267,18 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GetGuardrailRuleResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "403":
+          description: "Not permitted for this key, project or workspace. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "guardrailRules"
       x-speakeasy-name-override: "retrieve"
       x-cli-hidden: true
@@ -67182,6 +68309,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/DeleteGuardrailRuleResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "guardrailRules"
       x-speakeasy-name-override: "delete"
       x-cli-hidden: true
@@ -67218,6 +68351,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/UpdateGuardrailRuleResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "guardrailRules"
       x-speakeasy-name-override: "update"
       x-cli-hidden: true
@@ -67254,6 +68393,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/SearchHubItemsResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "hub"
       x-speakeasy-name-override: "search"
       x-cli-group: "hub"
@@ -67290,6 +68435,18 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GetHubItemResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "403":
+          description: "Not permitted for this key, project or workspace. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "hub"
       x-speakeasy-name-override: "get"
       x-cli-group: "hub"
@@ -67363,6 +68520,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ListIdentitiesResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "identities"
       x-speakeasy-name-override: "list"
       x-cli-group: "identities"
@@ -67403,6 +68566,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/CreateIdentityResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "identities"
       x-speakeasy-name-override: "create"
       x-cli-group: "identities"
@@ -67459,6 +68628,18 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/RetrieveIdentityResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: "The resource does not exist. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "identities"
       x-speakeasy-name-override: "retrieve"
       x-cli-group: "identities"
@@ -67495,6 +68676,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/DeleteIdentityResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "identities"
       x-speakeasy-name-override: "delete"
       x-cli-group: "identities"
@@ -67537,6 +68724,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/UpdateIdentityResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "identities"
       x-speakeasy-name-override: "update"
       x-cli-group: "identities"
@@ -67601,6 +68794,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ListManagementKeysResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "managementKeys"
       x-speakeasy-name-override: "list"
       x-cli-group: "management-keys"
@@ -67626,6 +68825,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/CreateManagementKeyResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "managementKeys"
       x-speakeasy-name-override: "create"
       x-cli-group: "management-keys"
@@ -67646,6 +68851,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ListManagementCapabilitiesResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "managementKeys"
       x-speakeasy-name-override: "listCapabilities"
       x-cli-group: "management-keys"
@@ -67673,6 +68884,18 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GetManagementKeyResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "403":
+          description: "Not permitted for this key, project or workspace. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "managementKeys"
       x-speakeasy-name-override: "get"
       x-cli-group: "management-keys"
@@ -67699,6 +68922,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/DeleteManagementKeyResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "managementKeys"
       x-speakeasy-name-override: "delete"
       x-cli-group: "management-keys"
@@ -67731,6 +68960,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/UpdateManagementKeyResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "managementKeys"
       x-speakeasy-name-override: "update"
       x-cli-group: "management-keys"
@@ -67778,6 +69013,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ListMcpGatewaysResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "mcpGateways"
       x-speakeasy-name-override: "list"
       x-cli-group: "mcpGateways"
@@ -67813,6 +69054,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/CreateMcpGatewayResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "mcpGateways"
       x-speakeasy-name-override: "create"
       x-cli-group: "mcpGateways"
@@ -67871,6 +69118,18 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ListMcpGatewayToolsResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: "The resource does not exist. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "mcpGateways"
       x-speakeasy-name-override: "listTools"
       x-cli-group: "mcpGateways"
@@ -67911,6 +69170,18 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GetMcpGatewayResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: "The resource does not exist. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "mcpGateways"
       x-speakeasy-name-override: "retrieve"
       x-cli-group: "mcpGateways"
@@ -67947,6 +69218,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/DeleteMcpGatewayResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "mcpGateways"
       x-speakeasy-name-override: "delete"
       x-cli-group: "mcpGateways"
@@ -67989,6 +69266,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/UpdateMcpGatewayResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "mcpGateways"
       x-speakeasy-name-override: "update"
       x-cli-group: "mcpGateways"
@@ -68044,6 +69327,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ListMcpServersResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "mcpServers"
       x-speakeasy-name-override: "list"
       x-cli-group: "mcpServers"
@@ -68079,6 +69368,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/CreateMcpServerResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "mcpServers"
       x-speakeasy-name-override: "create"
       x-cli-group: "mcpServers"
@@ -68116,6 +69411,18 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GetMcpServerResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: "The resource does not exist. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "mcpServers"
       x-speakeasy-name-override: "retrieve"
       x-cli-group: "mcpServers"
@@ -68152,6 +69459,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/DeleteMcpServerResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "mcpServers"
       x-speakeasy-name-override: "delete"
       x-cli-group: "mcpServers"
@@ -68194,6 +69507,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/UpdateMcpServerResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "mcpServers"
       x-speakeasy-name-override: "update"
       x-cli-group: "mcpServers"
@@ -68237,6 +69556,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/TestMcpServerToolResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "mcpServers"
       x-speakeasy-name-override: "testTool"
       x-cli-group: "mcpServers"
@@ -68280,6 +69605,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/SyncMcpServerResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "mcpServers"
       x-speakeasy-name-override: "sync"
       x-cli-group: "mcpServers"
@@ -68406,6 +69737,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ListModelCatalogResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "modelCatalog"
       x-speakeasy-name-override: "list"
       x-cli-group: "model-catalog"
@@ -68533,6 +69870,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ListModelCatalogOfferingsResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "modelCatalog"
       x-speakeasy-name-override: "listOfferings"
       x-cli-group: "model-catalog"
@@ -68566,6 +69909,18 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GetModelCatalogModelResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: "The resource does not exist. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "modelCatalog"
       x-speakeasy-name-override: "get"
       x-cli-group: "model-catalog"
@@ -68635,6 +69990,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ListModelFusionsResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "modelFusions"
       x-speakeasy-name-override: "list"
       x-cli-group: "model-fusions"
@@ -68660,6 +70021,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/CreateModelFusionResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "modelFusions"
       x-speakeasy-name-override: "create"
       x-cli-group: "model-fusions"
@@ -68686,6 +70053,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GetModelFusionResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "modelFusions"
       x-speakeasy-name-override: "get"
       x-cli-group: "model-fusions"
@@ -68717,6 +70090,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/UpdateModelFusionResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "modelFusions"
       x-speakeasy-name-override: "update"
       x-cli-group: "model-fusions"
@@ -68742,6 +70121,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/DeleteModelFusionResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "modelFusions"
       x-speakeasy-name-override: "delete"
       x-cli-group: "model-fusions"
@@ -68774,6 +70159,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/SetModelFusionEnabledResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "modelFusions"
       x-speakeasy-name-override: "setEnabled"
       x-cli-group: "model-fusions"
@@ -68826,6 +70217,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ListMonitorsResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "monitors"
       x-speakeasy-name-override: "list"
       x-code-samples:
@@ -68852,6 +70249,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/CreateMonitorResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "monitors"
       x-speakeasy-name-override: "create"
       x-code-samples:
@@ -68873,6 +70276,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ListMonitorPresetsResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "monitors"
       x-speakeasy-name-override: "listPresets"
       x-code-samples:
@@ -68901,6 +70310,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GetMonitorResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "monitors"
       x-speakeasy-name-override: "get"
       x-code-samples:
@@ -68928,6 +70343,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/DeleteMonitorResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "monitors"
       x-speakeasy-name-override: "delete"
       x-code-samples:
@@ -68961,6 +70382,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/UpdateMonitorResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "monitors"
       x-speakeasy-name-override: "update"
       x-code-samples:
@@ -69016,6 +70443,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ListNotifiersResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "notifiers"
       x-speakeasy-name-override: "list"
       x-cli-group: "notifiers"
@@ -69051,6 +70484,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/CreateNotifierResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "notifiers"
       x-speakeasy-name-override: "create"
       x-cli-group: "notifiers"
@@ -69087,6 +70526,18 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GetNotifierResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: "The resource does not exist. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "notifiers"
       x-speakeasy-name-override: "get"
       x-cli-group: "notifiers"
@@ -69122,6 +70573,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/DeleteNotifierResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "notifiers"
       x-speakeasy-name-override: "delete"
       x-cli-group: "notifiers"
@@ -69163,6 +70620,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/UpdateNotifierResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "notifiers"
       x-speakeasy-name-override: "update"
       x-cli-group: "notifiers"
@@ -69210,6 +70673,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ListProjectsResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "projects"
       x-speakeasy-name-override: "list"
       x-cli-group: "projects"
@@ -69245,6 +70714,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/CreateProjectResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "projects"
       x-speakeasy-name-override: "create"
       x-cli-group: "projects"
@@ -69282,6 +70757,18 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GetProjectResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "403":
+          description: "Not permitted for this key, project or workspace. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "projects"
       x-speakeasy-name-override: "get"
       x-cli-group: "projects"
@@ -69318,6 +70805,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/DeleteProjectResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "projects"
       x-speakeasy-name-override: "delete"
       x-cli-group: "projects"
@@ -69360,6 +70853,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/UpdateProjectResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "projects"
       x-speakeasy-name-override: "update"
       x-cli-group: "projects"
@@ -69422,6 +70921,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ListRoutingRulesResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "routingRules"
       x-speakeasy-name-override: "list"
       x-cli-hidden: true
@@ -69458,6 +70963,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/RoutingRule"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "routingRules"
       x-speakeasy-name-override: "create"
       x-cli-hidden: true
@@ -69494,6 +71005,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ListRoutingRuleUsedModelsResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "routingRules"
       x-speakeasy-name-override: "listUsedModels"
       x-cli-hidden: true
@@ -69531,6 +71048,18 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/RoutingRule"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "403":
+          description: "Not permitted for this key, project or workspace. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "routingRules"
       x-speakeasy-name-override: "retrieve"
       x-cli-hidden: true
@@ -69563,6 +71092,12 @@ paths:
       responses:
         "204":
           description: "Routing rule deleted successfully"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "routingRules"
       x-speakeasy-name-override: "delete"
       x-cli-hidden: true
@@ -69605,6 +71140,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/RoutingRule"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "routingRules"
       x-speakeasy-name-override: "update"
       x-cli-hidden: true
@@ -69642,6 +71183,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Thread"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "sessions"
       x-speakeasy-name-override: "create"
       x-cli-group: "sessions"
@@ -69678,6 +71225,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GetThreadCountResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "sessions"
       x-speakeasy-name-override: "getCount"
       x-cli-group: "sessions"
@@ -69714,6 +71267,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ListThreadsResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "sessions"
       x-speakeasy-name-override: "list"
       x-cli-group: "sessions"
@@ -69746,6 +71305,12 @@ paths:
                 type: "array"
                 items:
                   type: "string"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "sessions"
       x-speakeasy-name-override: "listTags"
       x-cli-group: "sessions"
@@ -69782,6 +71347,18 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Thread"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: "The resource does not exist. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "sessions"
       x-speakeasy-name-override: "get"
       x-cli-group: "sessions"
@@ -69813,6 +71390,12 @@ paths:
       responses:
         "204":
           description: "No Content"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "sessions"
       x-speakeasy-name-override: "delete"
       x-cli-group: "sessions"
@@ -69854,6 +71437,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Thread"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "sessions"
       x-speakeasy-name-override: "update"
       x-cli-group: "sessions"
@@ -69901,6 +71490,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ListSkillsResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "skills"
       x-speakeasy-name-override: "list"
       x-cli-group: "skills"
@@ -69936,6 +71531,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/CreateSkillResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "skills"
       x-speakeasy-name-override: "create"
       x-cli-group: "skills"
@@ -69973,6 +71574,18 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GetSkillResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: "The resource does not exist. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "skills"
       x-speakeasy-name-override: "get"
       x-cli-group: "skills"
@@ -70009,6 +71622,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/DeleteSkillResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "skills"
       x-speakeasy-name-override: "delete"
       x-cli-group: "skills"
@@ -70051,6 +71670,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/UpdateSkillResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "skills"
       x-speakeasy-name-override: "update"
       x-cli-group: "skills"
@@ -70109,6 +71734,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ListSmartRoutersResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "smartRouters"
       x-speakeasy-name-override: "list"
       x-cli-group: "smart-routers"
@@ -70141,6 +71772,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/CreateSmartRouterResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "smartRouters"
       x-speakeasy-name-override: "create"
       x-cli-group: "smart-routers"
@@ -70174,6 +71811,18 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GetSmartRouterResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "403":
+          description: "Not permitted for this key, project or workspace. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "smartRouters"
       x-speakeasy-name-override: "get"
       x-cli-group: "smart-routers"
@@ -70206,6 +71855,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/DeleteSmartRouterResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "smartRouters"
       x-speakeasy-name-override: "delete"
       x-cli-group: "smart-routers"
@@ -70244,6 +71899,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/UpdateSmartRouterResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "smartRouters"
       x-speakeasy-name-override: "update"
       x-cli-group: "smart-routers"
@@ -70272,6 +71933,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ListUsersResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "users"
       x-speakeasy-name-override: "list"
       x-code-samples:
@@ -70306,6 +71973,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GetUserResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "users"
       x-speakeasy-name-override: "get"
       x-code-samples:
@@ -70339,6 +72012,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/DeleteUserResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "users"
       x-speakeasy-name-override: "delete"
       x-code-samples:
@@ -70378,6 +72057,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/UpdateUserResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "users"
       x-speakeasy-name-override: "update"
       x-code-samples:
@@ -70417,6 +72102,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/CreateUsersResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "users"
       x-speakeasy-name-override: "create"
       x-code-samples:
@@ -70485,6 +72176,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ListWebhooksResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "webhooks"
       x-speakeasy-name-override: "list"
       x-cli-group: "webhooks"
@@ -70520,6 +72217,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Webhook"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "webhooks"
       x-speakeasy-name-override: "create"
       x-cli-group: "webhooks"
@@ -70544,6 +72247,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/CountWebhooksResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "webhooks"
       x-speakeasy-name-override: "count"
       x-cli-group: "webhooks"
@@ -70574,6 +72283,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/QueryWebhooksResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       deprecated: true
       x-speakeasy-group: "webhooks"
       x-speakeasy-name-override: "query"
@@ -70599,6 +72314,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GenerateWebhookSecretResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "webhooks"
       x-speakeasy-name-override: "generateSecret"
       x-cli-group: "webhooks"
@@ -70629,6 +72350,18 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Webhook"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: "The resource does not exist. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "webhooks"
       x-speakeasy-name-override: "get"
       x-cli-group: "webhooks"
@@ -70658,6 +72391,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/DeleteWebhookResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "webhooks"
       x-speakeasy-name-override: "delete"
       x-cli-group: "webhooks"
@@ -70693,6 +72432,12 @@ paths:
             application/json:
               schema:
                 type: "object"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "webhooks"
       x-speakeasy-name-override: "update"
       x-cli-group: "webhooks"
@@ -70740,6 +72485,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ListWikisResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "wikis"
       x-speakeasy-name-override: "list"
       x-cli-group: "wikis"
@@ -70765,6 +72516,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/CreateWikiResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "wikis"
       x-speakeasy-name-override: "create"
       x-cli-group: "wikis"
@@ -70791,6 +72548,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/InspectRepositoryWikiResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "wikis"
       x-speakeasy-name-override: "inspectRepository"
       x-cli-group: "wikis"
@@ -70817,6 +72580,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GetWikiResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "wikis"
       x-speakeasy-name-override: "get"
       x-cli-group: "wikis"
@@ -70842,6 +72611,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/DeleteWikiResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "wikis"
       x-speakeasy-name-override: "delete"
       x-cli-group: "wikis"
@@ -70873,6 +72648,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/UpdateWikiResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "wikis"
       x-speakeasy-name-override: "update"
       x-cli-group: "wikis"
@@ -70907,6 +72688,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GetWikiPageResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "wikis"
       x-speakeasy-name-override: "getPage"
       x-cli-group: "wikis"
@@ -70938,6 +72725,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/UpdateWikiPageResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "wikis"
       x-speakeasy-name-override: "updatePage"
       x-cli-group: "wikis"
@@ -70970,6 +72763,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/RefreshWikiResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "wikis"
       x-speakeasy-name-override: "refresh"
       x-cli-group: "wikis"
@@ -71001,6 +72800,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ListWikiRunsResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "wikis"
       x-speakeasy-name-override: "listRuns"
       x-cli-group: "wikis"
@@ -71036,6 +72841,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/SearchWikiResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "wikis"
       x-speakeasy-name-override: "search"
       x-cli-group: "wikis"
@@ -71062,6 +72873,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GetWikiTreeResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "wikis"
       x-speakeasy-name-override: "getTree"
       x-cli-group: "wikis"
@@ -71099,6 +72916,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ListWorkspacesResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "workspaces"
       x-speakeasy-name-override: "list"
       x-cli-group: "workspaces"
@@ -71125,6 +72948,18 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GetWorkspaceResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "403":
+          description: "Not permitted for this key, project or workspace. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "workspaces"
       x-speakeasy-name-override: "get"
       x-cli-group: "workspaces"
@@ -71156,6 +72991,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/UpdateWorkspaceResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "workspaces"
       x-speakeasy-name-override: "update"
       x-cli-group: "workspaces"
@@ -71182,6 +73023,18 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ListDomainsResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: "The resource does not exist. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "workspaceSecurity"
       x-speakeasy-name-override: "listDomains"
       x-cli-group: "workspace-security"
@@ -71213,6 +73066,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/CreateDomainResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "workspaceSecurity"
       x-speakeasy-name-override: "createDomain"
       x-cli-group: "workspace-security"
@@ -71241,6 +73100,12 @@ paths:
         "200":
           description: "OK"
           content: {}
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "workspaceSecurity"
       x-speakeasy-name-override: "deleteDomain"
       x-cli-group: "workspace-security"
@@ -71272,6 +73137,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/VerifyDomainResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "workspaceSecurity"
       x-speakeasy-name-override: "verifyDomain"
       x-cli-group: "workspace-security"
@@ -71298,6 +73169,18 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GetIPAllowlistResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: "The resource does not exist. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "workspaceSecurity"
       x-speakeasy-name-override: "getIPAllowlist"
       x-cli-group: "workspace-security"
@@ -71329,6 +73212,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/UpdateIPAllowlistResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "workspaceSecurity"
       x-speakeasy-name-override: "updateIPAllowlist"
       x-cli-group: "workspace-security"
@@ -71361,6 +73250,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/AddIPRangeResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "workspaceSecurity"
       x-speakeasy-name-override: "addIPRange"
       x-cli-group: "workspace-security"
@@ -71389,6 +73284,12 @@ paths:
         "200":
           description: "OK"
           content: {}
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "workspaceSecurity"
       x-speakeasy-name-override: "deleteIPRange"
       x-cli-group: "workspace-security"
@@ -71409,6 +73310,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GetWorkspaceSettingsResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "workspaceSettings"
       x-speakeasy-name-override: "get"
       x-cli-group: "workspace-settings"
@@ -71434,6 +73341,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/UpdateWorkspaceSettingsResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "workspaceSettings"
       x-speakeasy-name-override: "update"
       x-cli-group: "workspace-settings"
@@ -71733,6 +73646,12 @@ paths:
                   - "usage"
                 type: "object"
           description: "Returns the embedding vector."
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
       summary: "Create embeddings"
       tags:
         - "Embeddings"
@@ -71772,6 +73691,18 @@ paths:
                   - "schedules"
                 type: "object"
           description: "Schedules listed (empty array if none)."
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: "The resource does not exist. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
       summary: "List schedules"
       tags:
         - "Agent Schedules"
@@ -73406,6 +75337,12 @@ paths:
                   - "data"
                 type: "object"
           description: "Models listed."
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
       summary: "List models"
       tags:
         - "Models"
@@ -74301,6 +76238,18 @@ paths:
                     $ref: "#/components/schemas/ResponseStreamEvent"
               x-speakeasy-sse-sentinel: "[DONE]"
           description: "Returns a response object or a stream of events."
+        "400":
+          description: "The request is invalid. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
       summary: "Create response"
       tags:
         - "Responses"
