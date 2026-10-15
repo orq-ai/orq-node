@@ -2558,7 +2558,7 @@ components:
           properties:
             _id:
               type: "string"
-              default: "reasoning_01m4zegtrp6vaqsfbygd7rac0n"
+              default: "reasoning_01m50dv9x8vm9xxs8f8jwj2zq5"
               description: "Unique identifier for the part. Format: reasoning_{ulid} (e.g., reasoning_01hxyz...)"
               example: "reasoning_01hxyz123abc"
             kind:
@@ -12805,6 +12805,12 @@ components:
           type: "string"
         encrypted:
           type: "boolean"
+    AlertScope:
+      type: "string"
+      enum:
+        - "ALERT_SCOPE_UNSPECIFIED"
+        - "ALERT_SCOPE_PROJECT"
+        - "ALERT_SCOPE_WORKSPACE"
     ListAlertsResponse:
       required:
         - "object"
@@ -12826,7 +12832,6 @@ components:
     CreateAlertRequest:
       required:
         - "display_name"
-        - "project_id"
         - "query"
         - "condition"
       type: "object"
@@ -12839,7 +12844,7 @@ components:
           description: "Short human-readable summary of what the alert watches."
         project_id:
           type: "string"
-          description: "Project that owns the alert. Required."
+          description: "Project that owns a project alert. Empty for a workspace alert."
         signal:
           type: "string"
           description: "UI signal preset the alert is created from. Defaults to `custom`."
@@ -12863,6 +12868,9 @@ components:
           allOf:
             - $ref: "#/components/schemas/AlertDisplay"
           description: "Display options for the alert activity chart."
+        scope:
+          description: "Ownership and telemetry evaluation boundary. Unspecified remains a\n project alert for compatibility with existing clients."
+          $ref: "#/components/schemas/AlertScope"
     CreateAlertResponse:
       required:
         - "alert"
@@ -12900,7 +12908,7 @@ components:
         query:
           allOf:
             - $ref: "#/components/schemas/AlertQuery"
-          description: "Replacement query. Omit to keep the current query."
+          description: "Replacement query. Metric, operation, and filters may change within the\n current telemetry source. Source changes require creating a new alert."
         condition:
           allOf:
             - $ref: "#/components/schemas/AlertCondition"
@@ -12967,6 +12975,7 @@ components:
         - "alert_id"
         - "display_name"
         - "description"
+        - "scope"
         - "project_id"
         - "signal"
         - "query"
@@ -12991,7 +13000,7 @@ components:
           description: "Short human-readable summary of what the alert watches."
         project_id:
           type: "string"
-          description: "Project that owns the alert. Immutable after creation."
+          description: "Project that owns a project-scoped alert. Empty for workspace alerts. Immutable after creation."
         signal:
           enum:
             - "cost"
@@ -13055,6 +13064,9 @@ components:
             - allOf:
                 - $ref: "#/components/schemas/AlertDisplay"
             - type: "null"
+        scope:
+          description: "Immutable ownership and telemetry evaluation boundary."
+          $ref: "#/components/schemas/AlertScope"
     AlertQuery:
       required:
         - "metric"
@@ -13062,12 +13074,18 @@ components:
       properties:
         metric:
           type: "string"
-          description: "Reporting API catalogue metric, e.g. `genai.cost` or\n `genai.latency.avg`. Validated against the catalogue when the alert\n is saved."
+          description: "Source-owned metric identifier. Trace metrics are validated against the\n Reporting catalogue; runtime metrics are validated against telemetry\n capabilities in the alert's scope."
         filters:
           type: "array"
           items:
             $ref: "#/components/schemas/MonitorFilter"
-          description: "Reporting filters combined with AND."
+          description: "Source-owned filters combined with AND."
+        source:
+          description: "Telemetry source. Unspecified is accepted for compatibility and\n normalizes to traces when the alert is saved or read."
+          $ref: "#/components/schemas/AlertTelemetrySource"
+        operation:
+          type: "string"
+          description: "Aggregation operation advertised by the selected metric capability.\n Existing trace queries may omit it; the server resolves their canonical\n Reporting operation."
     AlertCondition:
       required:
         - "comparator"
@@ -13202,6 +13220,10 @@ components:
           type: "integer"
           description: "Number of evaluation events recorded on this trigger."
           format: "int32"
+        query:
+          allOf:
+            - $ref: "#/components/schemas/AlertQuery"
+          description: "Query evaluated for this incident. Older incidents may omit it and\n inherit the alert's current query for display compatibility."
     AlertTriggerEvent:
       required:
         - "event_id"
@@ -13292,6 +13314,12 @@ components:
           items:
             type: "string"
           description: "Values compared against the selected field."
+    AlertTelemetrySource:
+      type: "string"
+      enum:
+        - "ALERT_TELEMETRY_SOURCE_UNSPECIFIED"
+        - "ALERT_TELEMETRY_SOURCE_TRACES"
+        - "ALERT_TELEMETRY_SOURCE_METRICS"
     AlertEvidence:
       required:
         - "trace_id"
@@ -18515,6 +18543,7 @@ components:
       description: "One answer to a classification question. The type selects the answer fields. A refusal contains only type."
       discriminator:
         mapping:
+          box: "#/components/schemas/ClassifyBoxAnswer"
           choice: "#/components/schemas/ClassifyChoiceAnswer"
           noul: "#/components/schemas/ClassifyNoulAnswer"
           refusal: "#/components/schemas/ClassifyRefusalAnswer"
@@ -18524,7 +18553,82 @@ components:
         - $ref: "#/components/schemas/ClassifyNoulAnswer"
         - $ref: "#/components/schemas/ClassifyChoiceAnswer"
         - $ref: "#/components/schemas/ClassifyScoreAnswer"
+        - $ref: "#/components/schemas/ClassifyBoxAnswer"
         - $ref: "#/components/schemas/ClassifyRefusalAnswer"
+    ClassifyAsset:
+      additionalProperties: false
+      properties:
+        data_base64:
+          description: "Standard base64 with padding, without whitespace or a data: prefix. PNG or JPEG still images, 256 to 1568 px per side, at most 16 MiB each."
+          type: "string"
+        format:
+          description: "The image format."
+          enum:
+            - "png"
+            - "jpg"
+            - "jpeg"
+          type: "string"
+        type:
+          description: "The asset type. Only image is supported."
+          enum:
+            - "image"
+          type: "string"
+      required:
+        - "data_base64"
+        - "format"
+      type: "object"
+    ClassifyBox:
+      additionalProperties: false
+      properties:
+        bottom:
+          description: "Distance of the bottom edge from the top of the image, as a fraction of the image height."
+          format: "double"
+          maximum: 1
+          minimum: 0
+          type: "number"
+        left:
+          description: "Distance of the left edge from the left of the image, as a fraction of the image width."
+          format: "double"
+          maximum: 1
+          minimum: 0
+          type: "number"
+        right:
+          description: "Distance of the right edge from the left of the image, as a fraction of the image width."
+          format: "double"
+          maximum: 1
+          minimum: 0
+          type: "number"
+        top:
+          description: "Distance of the top edge from the top of the image, as a fraction of the image height."
+          format: "double"
+          maximum: 1
+          minimum: 0
+          type: "number"
+      required:
+        - "top"
+        - "bottom"
+        - "left"
+        - "right"
+      type: "object"
+    ClassifyBoxAnswer:
+      additionalProperties: false
+      properties:
+        box:
+          $ref: "#/components/schemas/ClassifyBox"
+          description: "The bounding box of the target. Present for box answers."
+        confidence:
+          description: "How sure the model is of the answer it selected: on emulated chat models the largest value in probabilities, so it adds nothing the distribution does not; native providers return their own confidence value, which can sit below the largest probability. Present for choice, score and box answers."
+          format: "double"
+          type: "number"
+        type:
+          enum:
+            - "box"
+          type: "string"
+      required:
+        - "type"
+        - "box"
+      title: "ClassifyBoxAnswer"
+      type: "object"
     ClassifyCacheConfig:
       additionalProperties: false
       properties:
@@ -18549,7 +18653,7 @@ components:
           description: "The selected option. Present for choice answers."
           type: "string"
         confidence:
-          description: "How sure the model is of the answer it selected: on emulated chat models the largest value in probabilities, so it adds nothing the distribution does not; native providers return their own confidence value, which can sit below the largest probability. Present for choice and score answers."
+          description: "How sure the model is of the answer it selected: on emulated chat models the largest value in probabilities, so it adds nothing the distribution does not; native providers return their own confidence value, which can sit below the largest probability. Present for choice, score and box answers."
           format: "double"
           type: "number"
         probabilities:
@@ -18635,7 +18739,7 @@ components:
       additionalProperties: false
       properties:
         confidence:
-          description: "How sure the model is of the answer it selected: on emulated chat models the largest value in probabilities, so it adds nothing the distribution does not; native providers return their own confidence value, which can sit below the largest probability. Present for choice and score answers."
+          description: "How sure the model is of the answer it selected: on emulated chat models the largest value in probabilities, so it adds nothing the distribution does not; native providers return their own confidence value, which can sit below the largest probability. Present for choice, score and box answers."
           format: "double"
           type: "number"
         legend:
@@ -18714,6 +18818,11 @@ components:
     CreateClassifyRequest:
       additionalProperties: false
       properties:
+        assets:
+          additionalProperties:
+            $ref: "#/components/schemas/ClassifyAsset"
+          description: "Beta, TypeSafe models only. Inline images keyed by a reference string. Write the reference in state, instructions or criteria wherever the image belongs; every asset must be referenced. Required for box questions."
+          type: "object"
         cache:
           $ref: "#/components/schemas/ClassifyCacheConfig"
           description: "Exact-match response cache for this request. An identical request body from the same workspace and project is served from the stored response, with the X-Cache header reporting HIT or MISS."
@@ -18727,7 +18836,7 @@ components:
             - "array"
             - "null"
         fallbacks:
-          description: "Up to 10 fallback models in order. The gateway retries a model for matching error codes before trying the next model. Every model must support classification and satisfy access checks. Image requests require native OpenAI image-capable fallbacks."
+          description: "Up to 10 fallback models in order. The gateway retries a model for matching error codes before trying the next model. Every model must support classification and satisfy access checks. Requests with images in state require native OpenAI image-capable fallbacks; requests with assets or box questions require TypeSafe fallbacks."
           items:
             $ref: "#/components/schemas/FallbackConfig"
           maxItems: 10
@@ -18757,9 +18866,27 @@ components:
                     description: "Optional descriptions of what true and false mean."
                     properties:
                       "false":
-                        type: "string"
+                        anyOf:
+                          - title: "String"
+                            type: "string"
+                          - additionalProperties: true
+                            title: "Object"
+                            type: "object"
+                          - items: {}
+                            title: "Array"
+                            type: "array"
+                        description: "What false means. A string, an object or an array."
                       "true":
-                        type: "string"
+                        anyOf:
+                          - title: "String"
+                            type: "string"
+                          - additionalProperties: true
+                            title: "Object"
+                            type: "object"
+                          - items: {}
+                            title: "Array"
+                            type: "array"
+                        description: "What true means. A string, an object or an array."
                     type: "object"
                   instructions:
                     anyOf:
@@ -18785,10 +18912,19 @@ components:
                 properties:
                   criteria:
                     additionalProperties:
-                      type:
-                        - "string"
-                        - "null"
-                    description: "Options keyed by name, each mapped to a description or null."
+                      anyOf:
+                        - title: "String"
+                          type: "string"
+                        - additionalProperties: true
+                          title: "Object"
+                          type: "object"
+                        - items: {}
+                          title: "Array"
+                          type: "array"
+                        - title: "Null"
+                          type: "null"
+                      description: "The option description, or null."
+                    description: "Options keyed by name, each mapped to a description or null. A description can be a string, an object or an array."
                     minProperties: 1
                     type: "object"
                   instructions:
@@ -18815,9 +18951,8 @@ components:
               - description: "Places the state on an ordered scale and returns the probability of each level."
                 properties:
                   criteria:
-                    description: "Ordered level descriptions from lowest to highest. At least two levels."
-                    items:
-                      type: "string"
+                    description: "Ordered level descriptions from lowest to highest. At least two levels. Each level can be a string, an object or an array."
+                    items: {}
                     minItems: 2
                     type: "array"
                   instructions:
@@ -18841,6 +18976,28 @@ components:
                   - "criteria"
                 title: "ScoreQuestion"
                 type: "object"
+              - description: "Beta, TypeSafe jev-preview only. Locates one target in an image from assets and returns its bounding box. Always returns a box; pair it with a noul question to check presence."
+                properties:
+                  instructions:
+                    anyOf:
+                      - title: "String"
+                        type: "string"
+                      - additionalProperties: true
+                        title: "Object"
+                        type: "object"
+                      - items: {}
+                        title: "Array"
+                        type: "array"
+                    description: "The evaluation prompt for this question. A string, an object or an array."
+                  type:
+                    enum:
+                      - "box"
+                    type: "string"
+                required:
+                  - "type"
+                  - "instructions"
+                title: "BoxQuestion"
+                type: "object"
           description: "Typed questions keyed by an identifier of your choice. Each answer is returned under the same key."
           minProperties: 1
           type: "object"
@@ -18857,7 +19014,7 @@ components:
             - items: {}
               title: "Array"
               type: "array"
-          description: "The content to evaluate. A string, an object or an array. For OpenAI GPT-6 Luna, strings are passed as text and objects or ordinary JSON arrays are serialized as text. User-message arrays accept string content or input_text/input_image parts. Images must be inline base64 data URLs, with at most 128 images across the request. Remote image URLs, file IDs, audio, non-user roles, bare content parts and tool items are rejected."
+          description: "The content to evaluate. A string, an object or an array. For TypeSafe models, reference images declared in assets by writing their reference string. For OpenAI GPT-6 Luna, strings are passed as text and objects or ordinary JSON arrays are serialized as text. User-message arrays accept string content or input_text/input_image parts. Images must be inline base64 data URLs, with at most 128 images across the request. Remote image URLs, file IDs, audio, non-user roles, bare content parts and tool items are rejected."
         timeout:
           $ref: "#/components/schemas/ClassifyTimeoutConfig"
           description: "Timeout for each model call, including every retry and fallback. A timed-out call returns 408 and advances to the next fallback after configured retries are exhausted."
@@ -25739,7 +25896,7 @@ paths:
                                 type: "string"
                                 format: "ulid"
                                 pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                                default: "01M4ZEGTQQKFVG43D7DKSY5MNF"
+                                default: "01M50DV9WF9QR929Z8CMJNNC8B"
                                 readOnly: true
                                 description: "The unique identifier of the playground knowledge base"
                               knowledge_id:
@@ -35096,7 +35253,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01M4ZEGTT2KZFEXGT02NX0Z4J9"
+                                          default: "01M50DV9YF7PTKJAWS0TCDKJS0"
                                         name:
                                           type: "string"
                                         description:
@@ -36715,7 +36872,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01M4ZEGTTM3MQPXMWGDSCMPA1H"
+                                          default: "01M50DV9YXEKA2JZB34B173EDN"
                                         name:
                                           type: "string"
                                         description:
@@ -45729,7 +45886,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M4ZEGTVXJRDPPV7TM3M3E1WJ"
+                              default: "tool_01M50DV9ZT75FVE6FWSAHBEKD5"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -45830,7 +45987,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M4ZEGTVXWN47DJ1S0A8YP8P2"
+                              default: "tool_01M50DV9ZT65N48HEJCAD2BBVS"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -45933,7 +46090,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M4ZEGTVYW7V57EPCZ013MXAV"
+                              default: "tool_01M50DV9ZTY0S1CJ56WZTBFH5A"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -46077,7 +46234,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M4ZEGTVZPMVGS8H16R3HF2XJ"
+                              default: "tool_01M50DV9ZVY8AC804NC1M0KPVF"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -46564,7 +46721,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M4ZEGTW2KPCPTHBJRS6RKJ7K"
+                        default: "tool_01M50DV9ZXDC77PN0C340SHQ7X"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -46665,7 +46822,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M4ZEGTW3Y8AYQFQQDGRX1ZAP"
+                        default: "tool_01M50DV9ZY4KZT0C1CE738J4T5"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -46768,7 +46925,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M4ZEGTW3MQDZ94SJB3S5GFSK"
+                        default: "tool_01M50DV9ZYYDNPTKVSP4C33K5E"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -46912,7 +47069,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M4ZEGTW4JH4Q0GW5DYG05AXB"
+                        default: "tool_01M50DV9ZY0ZERFE6E0FE8KVBV"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -47416,7 +47573,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M4ZEGTW6G5BDZR9174EG9N5T"
+                        default: "tool_01M50DVA0024YXY19BTWRXPANH"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -47517,7 +47674,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M4ZEGTW68XZFE8KDZNEF13YH"
+                        default: "tool_01M50DVA008KYFB1GFY9ETFR6R"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -47620,7 +47777,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M4ZEGTW7H0JREXHQWGZGQ6B7"
+                        default: "tool_01M50DVA00AADD86VVXKTHWVR8"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -47764,7 +47921,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M4ZEGTW70YMW1EPK3KHG9REV"
+                        default: "tool_01M50DVA01KASEV6CJKTXBJ0BN"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -47931,7 +48088,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M4ZEGTWE24B2GD3PZ4XPGBMR"
+                        default: "tool_01M50DVA055ZQEDJC8FNAKQT89"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -48032,7 +48189,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M4ZEGTWFKX58C44MFH5GX4HQ"
+                        default: "tool_01M50DVA067K6EVC2QJWX8BAK3"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -48135,7 +48292,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M4ZEGTWFZ0XG7SP3JNDV4FX1"
+                        default: "tool_01M50DVA06TZC8VZXG55Y15FA1"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -48279,7 +48436,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M4ZEGTWG6HM224PX51W8S9V7"
+                        default: "tool_01M50DVA0737B9EZACQNG00QFW"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -54805,7 +54962,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-10-15T09:33:01.745Z"
+                      default: "2026-10-15T18:40:30.751Z"
                       deprecated: true
                       description: "Deprecated. The date and time the item was reviewed"
                     type:
@@ -54847,7 +55004,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-10-15T09:33:01.745Z"
+                      default: "2026-10-15T18:40:30.751Z"
                       deprecated: true
                       description: "Deprecated. The date and time the item was reviewed"
                     type:
@@ -54889,7 +55046,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-10-15T09:33:01.746Z"
+                      default: "2026-10-15T18:40:30.751Z"
                       deprecated: true
                       description: "Deprecated. The date and time the item was reviewed"
                     type:
@@ -54931,7 +55088,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-10-15T09:33:01.746Z"
+                      default: "2026-10-15T18:40:30.751Z"
                       deprecated: true
                       description: "Deprecated. The date and time the item was reviewed"
                     type:
@@ -55041,7 +55198,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-10-15T09:32:54.925Z"
+                          default: "2026-10-15T18:40:25.711Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -55049,7 +55206,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-10-15T09:32:54.926Z"
+                              default: "2026-10-15T18:40:25.712Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -55119,7 +55276,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-10-15T09:32:54.925Z"
+                          default: "2026-10-15T18:40:25.711Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -55127,7 +55284,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-10-15T09:32:54.926Z"
+                              default: "2026-10-15T18:40:25.712Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -55310,7 +55467,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-10-15T09:32:54.925Z"
+                        default: "2026-10-15T18:40:25.711Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -55318,7 +55475,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-10-15T09:32:54.926Z"
+                            default: "2026-10-15T18:40:25.712Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -55388,7 +55545,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-10-15T09:32:54.925Z"
+                        default: "2026-10-15T18:40:25.711Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -55396,7 +55553,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-10-15T09:32:54.926Z"
+                            default: "2026-10-15T18:40:25.712Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -55497,7 +55654,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-10-15T09:32:54.925Z"
+                        default: "2026-10-15T18:40:25.711Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -55505,7 +55662,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-10-15T09:32:54.926Z"
+                            default: "2026-10-15T18:40:25.712Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -55575,7 +55732,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-10-15T09:32:54.925Z"
+                        default: "2026-10-15T18:40:25.711Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -55583,7 +55740,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-10-15T09:32:54.926Z"
+                            default: "2026-10-15T18:40:25.712Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -55780,7 +55937,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-10-15T09:32:54.925Z"
+                        default: "2026-10-15T18:40:25.711Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -55788,7 +55945,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-10-15T09:32:54.926Z"
+                            default: "2026-10-15T18:40:25.712Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -55858,7 +56015,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-10-15T09:32:54.925Z"
+                        default: "2026-10-15T18:40:25.711Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -55866,7 +56023,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-10-15T09:32:54.926Z"
+                            default: "2026-10-15T18:40:25.712Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -62827,6 +62984,16 @@ paths:
           in: "query"
           schema:
             $ref: "#/components/schemas/TelemetrySource"
+        - name: "project_id"
+          in: "query"
+          description: "Restricts discovered runtime metrics to records attributed to this exact\n project. Projectless workspace metrics are excluded."
+          schema:
+            type: "string"
+        - name: "workspace_wide"
+          in: "query"
+          description: "Discovers runtime metrics across the complete workspace, including\n project-attributed and projectless records. Workspace-admin only."
+          schema:
+            type: "boolean"
       responses:
         "200":
           description: "OK"
@@ -66529,6 +66696,11 @@ paths:
           description: "Restrict results to one project."
           schema:
             type: "string"
+        - name: "scope"
+          in: "query"
+          description: "Restrict results by ownership boundary. Unspecified returns all alerts\n visible to the caller; non-admin callers never see workspace alerts."
+          schema:
+            $ref: "#/components/schemas/AlertScope"
       responses:
         "200":
           description: "OK"
@@ -66552,7 +66724,7 @@ paths:
       tags:
         - "Alerts"
       summary: "Create an alert"
-      description: "Creates a threshold alert in a project. The alert's query is validated against the Reporting API metric catalogue and the evaluation schedule starts immediately when `enabled` is true. Plan limits apply to the number of alerts and the minimum evaluation interval."
+      description: "Creates a project- or workspace-scoped threshold alert. The alert's query is validated against the selected telemetry source and the evaluation schedule starts immediately when `enabled` is true. Plan limits apply to the number of alerts and the minimum evaluation interval."
       operationId: "AlertCreate"
       requestBody:
         content:
@@ -66660,7 +66832,7 @@ paths:
       tags:
         - "Alerts"
       summary: "Update an alert"
-      description: "Updates alert metadata, query, condition, notifiers, or enabled state. Query and condition changes restart the evaluation schedule; disabling stops it. `project_id` is immutable."
+      description: "Updates alert metadata, query, condition, notifiers, or enabled state. Query and condition changes restart the evaluation schedule; disabling stops it. Alert scope, `project_id`, and telemetry source are immutable."
       operationId: "AlertUpdate"
       parameters:
         - name: "alert_id"
@@ -74289,7 +74461,7 @@ paths:
   /v3/router/classify:
     post:
       deprecated: true
-      description: "**Deprecated.** Use `POST /v3/router/decisions` and `orq.router.decisions.create()` for new integrations. This endpoint remains available for backward compatibility with the same request and response contract.\n\n**Beta.** Evaluate content against named questions and receive structured answers, probabilities, and usage costs. Send the content as `state` and define each entry in `questions` as:\n\n- `noul`: estimate the probability that a statement is true.\n- `choice`: select an option from a set.\n- `score`: rate the content on an ordered scale.\n\nUse a native decision model or a supported chat model. Configure ordered `fallbacks`, optional `retry`, `timeout.call_timeout` in milliseconds, and an exact-match `cache`. Each retry and fallback gets a fresh timeout; omit `retry` to move directly to the next fallback on timeout. The response identifies the model that answered.\n\nRequires the `classify` API-key permission. PII plugins and guardrails are not applied. See the [Decisions guide](/ai-gateway/features/decisions) for supported models, probability interpretation, and refusals."
+      description: "**Deprecated.** Use `POST /v3/router/decisions` and `orq.router.decisions.create()` for new integrations. This endpoint remains available for backward compatibility with the same request and response contract.\n\n**Beta.** Evaluate content against named questions and receive structured answers, probabilities, and usage costs. Send the content as `state` and define each entry in `questions` as:\n\n- `noul`: estimate the probability that a statement is true.\n- `choice`: select an option from a set.\n- `score`: rate the content on an ordered scale.\n- `box`: locate one target in an image and return its bounding box. Beta, TypeSafe `jev-preview` only.\n\nInstructions and criteria accept strings or structured JSON. TypeSafe models also accept inline images through `assets` (beta).\n\nUse a native decision model or a supported chat model. Configure ordered `fallbacks`, optional `retry`, `timeout.call_timeout` in milliseconds, and an exact-match `cache`. Each retry and fallback gets a fresh timeout; omit `retry` to move directly to the next fallback on timeout. The response identifies the model that answered.\n\nRequires the `classify` API-key permission. PII plugins and guardrails are not applied. See the [Decisions guide](/ai-gateway/features/decisions) for supported models, probability interpretation, and refusals."
       operationId: "CreateClassify"
       requestBody:
         content:
@@ -74400,9 +74572,33 @@ paths:
                       instructions: "What is the message mainly about?"
                       type: "choice"
                   state: "The parcel arrived two days late and the box was crushed."
+              typesafe_image_box:
+                description: "Beta. Replace data_base64 with your own PNG or JPEG of 256 to 1568 px per side."
+                summary: "Locate an object in an image with TypeSafe"
+                value:
+                  assets:
+                    kitchen-photo:
+                      type: "image"
+                      data_base64: "<base64 JPEG>"
+                      format: "jpg"
+                  model: "typesafe/jev-preview"
+                  questions:
+                    mug:
+                      instructions: "the coffee mug in `photo`"
+                      type: "box"
+                    mug_visible:
+                      instructions: "Is there a coffee mug in `photo`?"
+                      type: "noul"
+                  state:
+                    photo: "kitchen-photo"
             schema:
               additionalProperties: false
               properties:
+                assets:
+                  additionalProperties:
+                    $ref: "#/components/schemas/ClassifyAsset"
+                  description: "Beta, TypeSafe models only. Inline images keyed by a reference string. Write the reference in state, instructions or criteria wherever the image belongs; every asset must be referenced. Required for box questions."
+                  type: "object"
                 cache:
                   $ref: "#/components/schemas/ClassifyCacheConfig"
                   description: "Exact-match response cache for this request. An identical request body from the same workspace and project is served from the stored response, with the X-Cache header reporting HIT or MISS."
@@ -74416,7 +74612,7 @@ paths:
                     - "array"
                     - "null"
                 fallbacks:
-                  description: "Up to 10 fallback models in order. The gateway retries a model for matching error codes before trying the next model. Every model must support classification and satisfy access checks. Image requests require native OpenAI image-capable fallbacks."
+                  description: "Up to 10 fallback models in order. The gateway retries a model for matching error codes before trying the next model. Every model must support classification and satisfy access checks. Requests with images in state require native OpenAI image-capable fallbacks; requests with assets or box questions require TypeSafe fallbacks."
                   items:
                     $ref: "#/components/schemas/FallbackConfig"
                   maxItems: 10
@@ -74446,9 +74642,27 @@ paths:
                             description: "Optional descriptions of what true and false mean."
                             properties:
                               "false":
-                                type: "string"
+                                anyOf:
+                                  - title: "String"
+                                    type: "string"
+                                  - additionalProperties: true
+                                    title: "Object"
+                                    type: "object"
+                                  - items: {}
+                                    title: "Array"
+                                    type: "array"
+                                description: "What false means. A string, an object or an array."
                               "true":
-                                type: "string"
+                                anyOf:
+                                  - title: "String"
+                                    type: "string"
+                                  - additionalProperties: true
+                                    title: "Object"
+                                    type: "object"
+                                  - items: {}
+                                    title: "Array"
+                                    type: "array"
+                                description: "What true means. A string, an object or an array."
                             type: "object"
                           instructions:
                             anyOf:
@@ -74474,10 +74688,19 @@ paths:
                         properties:
                           criteria:
                             additionalProperties:
-                              type:
-                                - "string"
-                                - "null"
-                            description: "Options keyed by name, each mapped to a description or null."
+                              anyOf:
+                                - title: "String"
+                                  type: "string"
+                                - additionalProperties: true
+                                  title: "Object"
+                                  type: "object"
+                                - items: {}
+                                  title: "Array"
+                                  type: "array"
+                                - title: "Null"
+                                  type: "null"
+                              description: "The option description, or null."
+                            description: "Options keyed by name, each mapped to a description or null. A description can be a string, an object or an array."
                             minProperties: 1
                             type: "object"
                           instructions:
@@ -74504,9 +74727,8 @@ paths:
                       - description: "Places the state on an ordered scale and returns the probability of each level."
                         properties:
                           criteria:
-                            description: "Ordered level descriptions from lowest to highest. At least two levels."
-                            items:
-                              type: "string"
+                            description: "Ordered level descriptions from lowest to highest. At least two levels. Each level can be a string, an object or an array."
+                            items: {}
                             minItems: 2
                             type: "array"
                           instructions:
@@ -74530,6 +74752,28 @@ paths:
                           - "criteria"
                         title: "ScoreQuestion"
                         type: "object"
+                      - description: "Beta, TypeSafe jev-preview only. Locates one target in an image from assets and returns its bounding box. Always returns a box; pair it with a noul question to check presence."
+                        properties:
+                          instructions:
+                            anyOf:
+                              - title: "String"
+                                type: "string"
+                              - additionalProperties: true
+                                title: "Object"
+                                type: "object"
+                              - items: {}
+                                title: "Array"
+                                type: "array"
+                            description: "The evaluation prompt for this question. A string, an object or an array."
+                          type:
+                            enum:
+                              - "box"
+                            type: "string"
+                        required:
+                          - "type"
+                          - "instructions"
+                        title: "BoxQuestion"
+                        type: "object"
                   description: "Typed questions keyed by an identifier of your choice. Each answer is returned under the same key."
                   minProperties: 1
                   type: "object"
@@ -74546,7 +74790,7 @@ paths:
                     - items: {}
                       title: "Array"
                       type: "array"
-                  description: "The content to evaluate. A string, an object or an array. For OpenAI GPT-6 Luna, strings are passed as text and objects or ordinary JSON arrays are serialized as text. User-message arrays accept string content or input_text/input_image parts. Images must be inline base64 data URLs, with at most 128 images across the request. Remote image URLs, file IDs, audio, non-user roles, bare content parts and tool items are rejected."
+                  description: "The content to evaluate. A string, an object or an array. For TypeSafe models, reference images declared in assets by writing their reference string. For OpenAI GPT-6 Luna, strings are passed as text and objects or ordinary JSON arrays are serialized as text. User-message arrays accept string content or input_text/input_image parts. Images must be inline base64 data URLs, with at most 128 images across the request. Remote image URLs, file IDs, audio, non-user roles, bare content parts and tool items are rejected."
                 timeout:
                   $ref: "#/components/schemas/ClassifyTimeoutConfig"
                   description: "Timeout for each model call, including every retry and fallback. A timed-out call returns 408 and advances to the next fallback after configured retries are exhausted."
@@ -74800,7 +75044,7 @@ paths:
         - ApiKey: []
   /v3/router/decisions:
     post:
-      description: "**Beta.** Evaluate content against named questions and receive structured answers, probabilities, and usage costs. Send the content as `state` and define each entry in `questions` as:\n\n- `noul`: estimate the probability that a statement is true.\n- `choice`: select an option from a set.\n- `score`: rate the content on an ordered scale.\n\nUse a native decision model or a supported chat model. Configure ordered `fallbacks`, optional `retry`, `timeout.call_timeout` in milliseconds, and an exact-match `cache`. Each retry and fallback gets a fresh timeout; omit `retry` to move directly to the next fallback on timeout. The response identifies the model that answered.\n\nRequires the `classify` API-key permission. PII plugins and guardrails are not applied. See the [Decisions guide](/ai-gateway/features/decisions) for supported models, probability interpretation, and refusals."
+      description: "**Beta.** Evaluate content against named questions and receive structured answers, probabilities, and usage costs. Send the content as `state` and define each entry in `questions` as:\n\n- `noul`: estimate the probability that a statement is true.\n- `choice`: select an option from a set.\n- `score`: rate the content on an ordered scale.\n- `box`: locate one target in an image and return its bounding box. Beta, TypeSafe `jev-preview` only.\n\nInstructions and criteria accept strings or structured JSON. TypeSafe models also accept inline images through `assets` (beta).\n\nUse a native decision model or a supported chat model. Configure ordered `fallbacks`, optional `retry`, `timeout.call_timeout` in milliseconds, and an exact-match `cache`. Each retry and fallback gets a fresh timeout; omit `retry` to move directly to the next fallback on timeout. The response identifies the model that answered.\n\nRequires the `classify` API-key permission. PII plugins and guardrails are not applied. See the [Decisions guide](/ai-gateway/features/decisions) for supported models, probability interpretation, and refusals."
       operationId: "CreateDecisions"
       requestBody:
         content:
@@ -74911,9 +75155,33 @@ paths:
                       instructions: "What is the message mainly about?"
                       type: "choice"
                   state: "The parcel arrived two days late and the box was crushed."
+              typesafe_image_box:
+                description: "Beta. Replace data_base64 with your own PNG or JPEG of 256 to 1568 px per side."
+                summary: "Locate an object in an image with TypeSafe"
+                value:
+                  assets:
+                    kitchen-photo:
+                      type: "image"
+                      data_base64: "<base64 JPEG>"
+                      format: "jpg"
+                  model: "typesafe/jev-preview"
+                  questions:
+                    mug:
+                      instructions: "the coffee mug in `photo`"
+                      type: "box"
+                    mug_visible:
+                      instructions: "Is there a coffee mug in `photo`?"
+                      type: "noul"
+                  state:
+                    photo: "kitchen-photo"
             schema:
               additionalProperties: false
               properties:
+                assets:
+                  additionalProperties:
+                    $ref: "#/components/schemas/ClassifyAsset"
+                  description: "Beta, TypeSafe models only. Inline images keyed by a reference string. Write the reference in state, instructions or criteria wherever the image belongs; every asset must be referenced. Required for box questions."
+                  type: "object"
                 cache:
                   $ref: "#/components/schemas/ClassifyCacheConfig"
                   description: "Exact-match response cache for this request. An identical request body from the same workspace and project is served from the stored response, with the X-Cache header reporting HIT or MISS."
@@ -74927,7 +75195,7 @@ paths:
                     - "array"
                     - "null"
                 fallbacks:
-                  description: "Up to 10 fallback models in order. The gateway retries a model for matching error codes before trying the next model. Every model must support classification and satisfy access checks. Image requests require native OpenAI image-capable fallbacks."
+                  description: "Up to 10 fallback models in order. The gateway retries a model for matching error codes before trying the next model. Every model must support classification and satisfy access checks. Requests with images in state require native OpenAI image-capable fallbacks; requests with assets or box questions require TypeSafe fallbacks."
                   items:
                     $ref: "#/components/schemas/FallbackConfig"
                   maxItems: 10
@@ -74957,9 +75225,27 @@ paths:
                             description: "Optional descriptions of what true and false mean."
                             properties:
                               "false":
-                                type: "string"
+                                anyOf:
+                                  - title: "String"
+                                    type: "string"
+                                  - additionalProperties: true
+                                    title: "Object"
+                                    type: "object"
+                                  - items: {}
+                                    title: "Array"
+                                    type: "array"
+                                description: "What false means. A string, an object or an array."
                               "true":
-                                type: "string"
+                                anyOf:
+                                  - title: "String"
+                                    type: "string"
+                                  - additionalProperties: true
+                                    title: "Object"
+                                    type: "object"
+                                  - items: {}
+                                    title: "Array"
+                                    type: "array"
+                                description: "What true means. A string, an object or an array."
                             type: "object"
                           instructions:
                             anyOf:
@@ -74985,10 +75271,19 @@ paths:
                         properties:
                           criteria:
                             additionalProperties:
-                              type:
-                                - "string"
-                                - "null"
-                            description: "Options keyed by name, each mapped to a description or null."
+                              anyOf:
+                                - title: "String"
+                                  type: "string"
+                                - additionalProperties: true
+                                  title: "Object"
+                                  type: "object"
+                                - items: {}
+                                  title: "Array"
+                                  type: "array"
+                                - title: "Null"
+                                  type: "null"
+                              description: "The option description, or null."
+                            description: "Options keyed by name, each mapped to a description or null. A description can be a string, an object or an array."
                             minProperties: 1
                             type: "object"
                           instructions:
@@ -75015,9 +75310,8 @@ paths:
                       - description: "Places the state on an ordered scale and returns the probability of each level."
                         properties:
                           criteria:
-                            description: "Ordered level descriptions from lowest to highest. At least two levels."
-                            items:
-                              type: "string"
+                            description: "Ordered level descriptions from lowest to highest. At least two levels. Each level can be a string, an object or an array."
+                            items: {}
                             minItems: 2
                             type: "array"
                           instructions:
@@ -75041,6 +75335,28 @@ paths:
                           - "criteria"
                         title: "ScoreQuestion"
                         type: "object"
+                      - description: "Beta, TypeSafe jev-preview only. Locates one target in an image from assets and returns its bounding box. Always returns a box; pair it with a noul question to check presence."
+                        properties:
+                          instructions:
+                            anyOf:
+                              - title: "String"
+                                type: "string"
+                              - additionalProperties: true
+                                title: "Object"
+                                type: "object"
+                              - items: {}
+                                title: "Array"
+                                type: "array"
+                            description: "The evaluation prompt for this question. A string, an object or an array."
+                          type:
+                            enum:
+                              - "box"
+                            type: "string"
+                        required:
+                          - "type"
+                          - "instructions"
+                        title: "BoxQuestion"
+                        type: "object"
                   description: "Typed questions keyed by an identifier of your choice. Each answer is returned under the same key."
                   minProperties: 1
                   type: "object"
@@ -75057,7 +75373,7 @@ paths:
                     - items: {}
                       title: "Array"
                       type: "array"
-                  description: "The content to evaluate. A string, an object or an array. For OpenAI GPT-6 Luna, strings are passed as text and objects or ordinary JSON arrays are serialized as text. User-message arrays accept string content or input_text/input_image parts. Images must be inline base64 data URLs, with at most 128 images across the request. Remote image URLs, file IDs, audio, non-user roles, bare content parts and tool items are rejected."
+                  description: "The content to evaluate. A string, an object or an array. For TypeSafe models, reference images declared in assets by writing their reference string. For OpenAI GPT-6 Luna, strings are passed as text and objects or ordinary JSON arrays are serialized as text. User-message arrays accept string content or input_text/input_image parts. Images must be inline base64 data URLs, with at most 128 images across the request. Remote image URLs, file IDs, audio, non-user roles, bare content parts and tool items are rejected."
                 timeout:
                   $ref: "#/components/schemas/ClassifyTimeoutConfig"
                   description: "Timeout for each model call, including every retry and fallback. A timed-out call returns 408 and advances to the next fallback after configured retries are exhausted."
@@ -76900,7 +77216,7 @@ tags:
   - name: "Agents"
     description: "External A2A agents registered for invocation through the ORQ AI Gateway."
   - name: "Alerts"
-    description: "Alerts evaluate a Reporting API metric on a fixed interval and fire notifications through notifiers when the value breaches a threshold. Each breach opens a trigger that tracks the incident until the value recovers."
+    description: "Alerts evaluate a telemetry metric on a fixed interval and fire notifications through notifiers when the value breaches a threshold. Each breach opens a trigger that tracks the incident until the value recovers."
   - name: "Annotation Queues"
     description: "Annotation queues collect spans for human review."
   - name: "Budgets"
