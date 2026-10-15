@@ -95,7 +95,9 @@ async function $do(
   const path = pathToFunc("/v3/telemetry/capabilities")();
 
   const query = encodeFormQuery({
+    "project_id": payload?.project_id,
     "source": payload?.source,
+    "workspace_wide": payload?.workspace_wide,
   });
 
   const headers = new Headers(compactMap({

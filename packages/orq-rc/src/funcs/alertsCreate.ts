@@ -30,7 +30,7 @@ import { Result } from "../types/fp.js";
  * Create an alert
  *
  * @remarks
- * Creates a threshold alert in a project. The alert's query is validated against the Reporting API metric catalogue and the evaluation schedule starts immediately when `enabled` is true. Plan limits apply to the number of alerts and the minimum evaluation interval.
+ * Creates a project- or workspace-scoped threshold alert. The alert's query is validated against the selected telemetry source and the evaluation schedule starts immediately when `enabled` is true. Plan limits apply to the number of alerts and the minimum evaluation interval.
  */
 export function alertsCreate(
   client: OrqCore,

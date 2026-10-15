@@ -19,6 +19,9 @@ export class Classify extends ClientSDK {
    * - `noul`: estimate the probability that a statement is true.
    * - `choice`: select an option from a set.
    * - `score`: rate the content on an ordered scale.
+   * - `box`: locate one target in an image and return its bounding box. Beta, TypeSafe `jev-preview` only.
+   *
+   * Instructions and criteria accept strings or structured JSON. TypeSafe models also accept inline images through `assets` (beta).
    *
    * Use a native decision model or a supported chat model. Configure ordered `fallbacks`, optional `retry`, `timeout.call_timeout` in milliseconds, and an exact-match `cache`. Each retry and fallback gets a fresh timeout; omit `retry` to move directly to the next fallback on timeout. The response identifies the model that answered.
    *

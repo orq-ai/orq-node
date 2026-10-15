@@ -31,7 +31,7 @@ import { Result } from "../types/fp.js";
  * Update an alert
  *
  * @remarks
- * Updates alert metadata, query, condition, notifiers, or enabled state. Query and condition changes restart the evaluation schedule; disabling stops it. `project_id` is immutable.
+ * Updates alert metadata, query, condition, notifiers, or enabled state. Query and condition changes restart the evaluation schedule; disabling stops it. Alert scope, `project_id`, and telemetry source are immutable.
  */
 export function alertsUpdate(
   client: OrqCore,

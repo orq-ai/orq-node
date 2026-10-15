@@ -12,6 +12,25 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 /**
  * The evaluation prompt for this question. A string, an object or an array.
  */
+export type CreateDecisionsQuestionsRouterDecisionsRequestRequestBodyInstructions =
+  | string
+  | { [k: string]: any }
+  | Array<any>;
+
+/**
+ * Beta, TypeSafe jev-preview only. Locates one target in an image from assets and returns its bounding box. Always returns a box; pair it with a noul question to check presence.
+ */
+export type QuestionsBoxQuestion = {
+  /**
+   * The evaluation prompt for this question. A string, an object or an array.
+   */
+  instructions: string | { [k: string]: any } | Array<any>;
+  type: "box";
+};
+
+/**
+ * The evaluation prompt for this question. A string, an object or an array.
+ */
 export type CreateDecisionsQuestionsRouterDecisionsRequestInstructions =
   | string
   | { [k: string]: any }
@@ -22,15 +41,22 @@ export type CreateDecisionsQuestionsRouterDecisionsRequestInstructions =
  */
 export type QuestionsScoreQuestion = {
   /**
-   * Ordered level descriptions from lowest to highest. At least two levels.
+   * Ordered level descriptions from lowest to highest. At least two levels. Each level can be a string, an object or an array.
    */
-  criteria: Array<string>;
+  criteria: Array<any>;
   /**
    * The evaluation prompt for this question. A string, an object or an array.
    */
   instructions: string | { [k: string]: any } | Array<any>;
   type: "score";
 };
+
+/**
+ * The option description, or null.
+ */
+export type CreateDecisionsQuestionsRouterDecisionsCriteria = string | {
+  [k: string]: any;
+} | Array<any>;
 
 /**
  * The evaluation prompt for this question. A string, an object or an array.
@@ -44,9 +70,9 @@ export type CreateDecisionsQuestionsRouterDecisionsInstructions = string | {
  */
 export type QuestionsChoiceQuestion = {
   /**
-   * Options keyed by name, each mapped to a description or null.
+   * Options keyed by name, each mapped to a description or null. A description can be a string, an object or an array.
    */
-  criteria: { [k: string]: string | null };
+  criteria: { [k: string]: string | { [k: string]: any } | Array<any> | null };
   /**
    * The evaluation prompt for this question. A string, an object or an array.
    */
@@ -55,11 +81,27 @@ export type QuestionsChoiceQuestion = {
 };
 
 /**
+ * What false means. A string, an object or an array.
+ */
+export type QuestionsFalse = string | { [k: string]: any } | Array<any>;
+
+/**
+ * What true means. A string, an object or an array.
+ */
+export type QuestionsTrue = string | { [k: string]: any } | Array<any>;
+
+/**
  * Optional descriptions of what true and false mean.
  */
-export type QuestionsCriteria = {
-  false?: string | undefined;
-  true?: string | undefined;
+export type CreateDecisionsQuestionsCriteria = {
+  /**
+   * What false means. A string, an object or an array.
+   */
+  false?: string | { [k: string]: any } | Array<any> | undefined;
+  /**
+   * What true means. A string, an object or an array.
+   */
+  true?: string | { [k: string]: any } | Array<any> | undefined;
 };
 
 /**
@@ -77,7 +119,7 @@ export type QuestionsNoulQuestion = {
   /**
    * Optional descriptions of what true and false mean.
    */
-  criteria?: QuestionsCriteria | undefined;
+  criteria?: CreateDecisionsQuestionsCriteria | undefined;
   /**
    * The evaluation prompt for this question. A string, an object or an array.
    */
@@ -88,21 +130,26 @@ export type QuestionsNoulQuestion = {
 export type CreateDecisionsQuestions =
   | QuestionsNoulQuestion
   | QuestionsChoiceQuestion
-  | QuestionsScoreQuestion;
+  | QuestionsScoreQuestion
+  | QuestionsBoxQuestion;
 
 /**
- * The content to evaluate. A string, an object or an array. For OpenAI GPT-6 Luna, strings are passed as text and objects or ordinary JSON arrays are serialized as text. User-message arrays accept string content or input_text/input_image parts. Images must be inline base64 data URLs, with at most 128 images across the request. Remote image URLs, file IDs, audio, non-user roles, bare content parts and tool items are rejected.
+ * The content to evaluate. A string, an object or an array. For TypeSafe models, reference images declared in assets by writing their reference string. For OpenAI GPT-6 Luna, strings are passed as text and objects or ordinary JSON arrays are serialized as text. User-message arrays accept string content or input_text/input_image parts. Images must be inline base64 data URLs, with at most 128 images across the request. Remote image URLs, file IDs, audio, non-user roles, bare content parts and tool items are rejected.
  */
 export type CreateDecisionsState = string | { [k: string]: any } | Array<any>;
 
 export type CreateDecisionsRequestBody = {
+  /**
+   * Beta, TypeSafe models only. Inline images keyed by a reference string. Write the reference in state, instructions or criteria wherever the image belongs; every asset must be referenced. Required for box questions.
+   */
+  assets?: { [k: string]: components.ClassifyAsset } | undefined;
   cache?: components.ClassifyCacheConfig | undefined;
   /**
    * HTTP status codes that trigger fallback. Defaults to [408,429,500,502,503,504,529]. Each code must be unique and between 400 and 599.
    */
   fallbackOnCodes?: Array<number> | null | undefined;
   /**
-   * Up to 10 fallback models in order. The gateway retries a model for matching error codes before trying the next model. Every model must support classification and satisfy access checks. Image requests require native OpenAI image-capable fallbacks.
+   * Up to 10 fallback models in order. The gateway retries a model for matching error codes before trying the next model. Every model must support classification and satisfy access checks. Requests with images in state require native OpenAI image-capable fallbacks; requests with assets or box questions require TypeSafe fallbacks.
    */
   fallbacks?: Array<components.FallbackConfig> | null | undefined;
   identity?: components.ResponseIdentity | undefined;
@@ -125,11 +172,12 @@ export type CreateDecisionsRequestBody = {
     [k: string]:
       | QuestionsNoulQuestion
       | QuestionsChoiceQuestion
-      | QuestionsScoreQuestion;
+      | QuestionsScoreQuestion
+      | QuestionsBoxQuestion;
   };
   retry?: components.ClassifyRetryConfig | undefined;
   /**
-   * The content to evaluate. A string, an object or an array. For OpenAI GPT-6 Luna, strings are passed as text and objects or ordinary JSON arrays are serialized as text. User-message arrays accept string content or input_text/input_image parts. Images must be inline base64 data URLs, with at most 128 images across the request. Remote image URLs, file IDs, audio, non-user roles, bare content parts and tool items are rejected.
+   * The content to evaluate. A string, an object or an array. For TypeSafe models, reference images declared in assets by writing their reference string. For OpenAI GPT-6 Luna, strings are passed as text and objects or ordinary JSON arrays are serialized as text. User-message arrays accept string content or input_text/input_image parts. Images must be inline base64 data URLs, with at most 128 images across the request. Remote image URLs, file IDs, audio, non-user roles, bare content parts and tool items are rejected.
    */
   state: string | { [k: string]: any } | Array<any>;
   timeout?: components.ClassifyTimeoutConfig | undefined;
@@ -150,6 +198,56 @@ export type CreateDecisionsResponseBody = {
   telemetry?: components.ResponseTelemetry | undefined;
   usage: components.ClassifyUsage;
 };
+
+/** @internal */
+export type CreateDecisionsQuestionsRouterDecisionsRequestRequestBodyInstructions$Outbound =
+  | string
+  | { [k: string]: any }
+  | Array<any>;
+
+/** @internal */
+export const CreateDecisionsQuestionsRouterDecisionsRequestRequestBodyInstructions$outboundSchema:
+  z.ZodType<
+    CreateDecisionsQuestionsRouterDecisionsRequestRequestBodyInstructions$Outbound,
+    z.ZodTypeDef,
+    CreateDecisionsQuestionsRouterDecisionsRequestRequestBodyInstructions
+  > = z.union([z.string(), z.record(z.any()), z.array(z.any())]);
+
+export function createDecisionsQuestionsRouterDecisionsRequestRequestBodyInstructionsToJSON(
+  createDecisionsQuestionsRouterDecisionsRequestRequestBodyInstructions:
+    CreateDecisionsQuestionsRouterDecisionsRequestRequestBodyInstructions,
+): string {
+  return JSON.stringify(
+    CreateDecisionsQuestionsRouterDecisionsRequestRequestBodyInstructions$outboundSchema
+      .parse(
+        createDecisionsQuestionsRouterDecisionsRequestRequestBodyInstructions,
+      ),
+  );
+}
+
+/** @internal */
+export type QuestionsBoxQuestion$Outbound = {
+  instructions: string | { [k: string]: any } | Array<any>;
+  type: "box";
+};
+
+/** @internal */
+export const QuestionsBoxQuestion$outboundSchema: z.ZodType<
+  QuestionsBoxQuestion$Outbound,
+  z.ZodTypeDef,
+  QuestionsBoxQuestion
+> = z.object({
+  instructions: z.union([z.string(), z.record(z.any()), z.array(z.any())]),
+  type: z.literal("box"),
+});
+
+export function questionsBoxQuestionToJSON(
+  questionsBoxQuestion: QuestionsBoxQuestion,
+): string {
+  return JSON.stringify(
+    QuestionsBoxQuestion$outboundSchema.parse(questionsBoxQuestion),
+  );
+}
 
 /** @internal */
 export type CreateDecisionsQuestionsRouterDecisionsRequestInstructions$Outbound =
@@ -177,7 +275,7 @@ export function createDecisionsQuestionsRouterDecisionsRequestInstructionsToJSON
 
 /** @internal */
 export type QuestionsScoreQuestion$Outbound = {
-  criteria: Array<string>;
+  criteria: Array<any>;
   instructions: string | { [k: string]: any } | Array<any>;
   type: "score";
 };
@@ -188,7 +286,7 @@ export const QuestionsScoreQuestion$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   QuestionsScoreQuestion
 > = z.object({
-  criteria: z.array(z.string()),
+  criteria: z.array(z.any()),
   instructions: z.union([z.string(), z.record(z.any()), z.array(z.any())]),
   type: z.literal("score"),
 });
@@ -198,6 +296,31 @@ export function questionsScoreQuestionToJSON(
 ): string {
   return JSON.stringify(
     QuestionsScoreQuestion$outboundSchema.parse(questionsScoreQuestion),
+  );
+}
+
+/** @internal */
+export type CreateDecisionsQuestionsRouterDecisionsCriteria$Outbound =
+  | string
+  | { [k: string]: any }
+  | Array<any>;
+
+/** @internal */
+export const CreateDecisionsQuestionsRouterDecisionsCriteria$outboundSchema:
+  z.ZodType<
+    CreateDecisionsQuestionsRouterDecisionsCriteria$Outbound,
+    z.ZodTypeDef,
+    CreateDecisionsQuestionsRouterDecisionsCriteria
+  > = z.union([z.string(), z.record(z.any()), z.array(z.any())]);
+
+export function createDecisionsQuestionsRouterDecisionsCriteriaToJSON(
+  createDecisionsQuestionsRouterDecisionsCriteria:
+    CreateDecisionsQuestionsRouterDecisionsCriteria,
+): string {
+  return JSON.stringify(
+    CreateDecisionsQuestionsRouterDecisionsCriteria$outboundSchema.parse(
+      createDecisionsQuestionsRouterDecisionsCriteria,
+    ),
   );
 }
 
@@ -228,7 +351,7 @@ export function createDecisionsQuestionsRouterDecisionsInstructionsToJSON(
 
 /** @internal */
 export type QuestionsChoiceQuestion$Outbound = {
-  criteria: { [k: string]: string | null };
+  criteria: { [k: string]: string | { [k: string]: any } | Array<any> | null };
   instructions: string | { [k: string]: any } | Array<any>;
   type: "choice";
 };
@@ -239,7 +362,9 @@ export const QuestionsChoiceQuestion$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   QuestionsChoiceQuestion
 > = z.object({
-  criteria: z.record(z.nullable(z.string())),
+  criteria: z.record(
+    z.nullable(z.union([z.string(), z.record(z.any()), z.array(z.any())])),
+  ),
   instructions: z.union([z.string(), z.record(z.any()), z.array(z.any())]),
   type: z.literal("choice"),
 });
@@ -253,26 +378,59 @@ export function questionsChoiceQuestionToJSON(
 }
 
 /** @internal */
-export type QuestionsCriteria$Outbound = {
-  false?: string | undefined;
-  true?: string | undefined;
+export type QuestionsFalse$Outbound =
+  | string
+  | { [k: string]: any }
+  | Array<any>;
+
+/** @internal */
+export const QuestionsFalse$outboundSchema: z.ZodType<
+  QuestionsFalse$Outbound,
+  z.ZodTypeDef,
+  QuestionsFalse
+> = z.union([z.string(), z.record(z.any()), z.array(z.any())]);
+
+export function questionsFalseToJSON(questionsFalse: QuestionsFalse): string {
+  return JSON.stringify(QuestionsFalse$outboundSchema.parse(questionsFalse));
+}
+
+/** @internal */
+export type QuestionsTrue$Outbound = string | { [k: string]: any } | Array<any>;
+
+/** @internal */
+export const QuestionsTrue$outboundSchema: z.ZodType<
+  QuestionsTrue$Outbound,
+  z.ZodTypeDef,
+  QuestionsTrue
+> = z.union([z.string(), z.record(z.any()), z.array(z.any())]);
+
+export function questionsTrueToJSON(questionsTrue: QuestionsTrue): string {
+  return JSON.stringify(QuestionsTrue$outboundSchema.parse(questionsTrue));
+}
+
+/** @internal */
+export type CreateDecisionsQuestionsCriteria$Outbound = {
+  false?: string | { [k: string]: any } | Array<any> | undefined;
+  true?: string | { [k: string]: any } | Array<any> | undefined;
 };
 
 /** @internal */
-export const QuestionsCriteria$outboundSchema: z.ZodType<
-  QuestionsCriteria$Outbound,
+export const CreateDecisionsQuestionsCriteria$outboundSchema: z.ZodType<
+  CreateDecisionsQuestionsCriteria$Outbound,
   z.ZodTypeDef,
-  QuestionsCriteria
+  CreateDecisionsQuestionsCriteria
 > = z.object({
-  false: z.string().optional(),
-  true: z.string().optional(),
+  false: z.union([z.string(), z.record(z.any()), z.array(z.any())]).optional(),
+  true: z.union([z.string(), z.record(z.any()), z.array(z.any())]).optional(),
 });
 
-export function questionsCriteriaToJSON(
-  questionsCriteria: QuestionsCriteria,
+export function createDecisionsQuestionsCriteriaToJSON(
+  createDecisionsQuestionsCriteria: CreateDecisionsQuestionsCriteria,
 ): string {
   return JSON.stringify(
-    QuestionsCriteria$outboundSchema.parse(questionsCriteria),
+    CreateDecisionsQuestionsCriteria$outboundSchema.parse(
+      createDecisionsQuestionsCriteria,
+    ),
   );
 }
 
@@ -300,7 +458,7 @@ export function createDecisionsQuestionsInstructionsToJSON(
 
 /** @internal */
 export type QuestionsNoulQuestion$Outbound = {
-  criteria?: QuestionsCriteria$Outbound | undefined;
+  criteria?: CreateDecisionsQuestionsCriteria$Outbound | undefined;
   instructions: string | { [k: string]: any } | Array<any>;
   type: "noul";
 };
@@ -311,7 +469,8 @@ export const QuestionsNoulQuestion$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   QuestionsNoulQuestion
 > = z.object({
-  criteria: z.lazy(() => QuestionsCriteria$outboundSchema).optional(),
+  criteria: z.lazy(() => CreateDecisionsQuestionsCriteria$outboundSchema)
+    .optional(),
   instructions: z.union([z.string(), z.record(z.any()), z.array(z.any())]),
   type: z.literal("noul"),
 });
@@ -328,7 +487,8 @@ export function questionsNoulQuestionToJSON(
 export type CreateDecisionsQuestions$Outbound =
   | QuestionsNoulQuestion$Outbound
   | QuestionsChoiceQuestion$Outbound
-  | QuestionsScoreQuestion$Outbound;
+  | QuestionsScoreQuestion$Outbound
+  | QuestionsBoxQuestion$Outbound;
 
 /** @internal */
 export const CreateDecisionsQuestions$outboundSchema: z.ZodType<
@@ -339,6 +499,7 @@ export const CreateDecisionsQuestions$outboundSchema: z.ZodType<
   z.lazy(() => QuestionsNoulQuestion$outboundSchema),
   z.lazy(() => QuestionsChoiceQuestion$outboundSchema),
   z.lazy(() => QuestionsScoreQuestion$outboundSchema),
+  z.lazy(() => QuestionsBoxQuestion$outboundSchema),
 ]);
 
 export function createDecisionsQuestionsToJSON(
@@ -372,6 +533,7 @@ export function createDecisionsStateToJSON(
 
 /** @internal */
 export type CreateDecisionsRequestBody$Outbound = {
+  assets?: { [k: string]: components.ClassifyAsset$Outbound } | undefined;
   cache?: components.ClassifyCacheConfig$Outbound | undefined;
   fallback_on_codes?: Array<number> | null | undefined;
   fallbacks?: Array<components.FallbackConfig$Outbound> | null | undefined;
@@ -383,7 +545,8 @@ export type CreateDecisionsRequestBody$Outbound = {
     [k: string]:
       | QuestionsNoulQuestion$Outbound
       | QuestionsChoiceQuestion$Outbound
-      | QuestionsScoreQuestion$Outbound;
+      | QuestionsScoreQuestion$Outbound
+      | QuestionsBoxQuestion$Outbound;
   };
   retry?: components.ClassifyRetryConfig$Outbound | undefined;
   state: string | { [k: string]: any } | Array<any>;
@@ -396,6 +559,7 @@ export const CreateDecisionsRequestBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateDecisionsRequestBody
 > = z.object({
+  assets: z.record(components.ClassifyAsset$outboundSchema).optional(),
   cache: components.ClassifyCacheConfig$outboundSchema.optional(),
   fallbackOnCodes: z.nullable(z.array(z.number().int())).optional(),
   fallbacks: z.nullable(z.array(components.FallbackConfig$outboundSchema))
@@ -409,6 +573,7 @@ export const CreateDecisionsRequestBody$outboundSchema: z.ZodType<
       z.lazy(() => QuestionsNoulQuestion$outboundSchema),
       z.lazy(() => QuestionsChoiceQuestion$outboundSchema),
       z.lazy(() => QuestionsScoreQuestion$outboundSchema),
+      z.lazy(() => QuestionsBoxQuestion$outboundSchema),
     ]),
   ),
   retry: components.ClassifyRetryConfig$outboundSchema.optional(),

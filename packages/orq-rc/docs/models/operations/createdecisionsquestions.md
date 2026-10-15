@@ -18,10 +18,8 @@ const value: operations.QuestionsNoulQuestion = {
 const value: operations.QuestionsChoiceQuestion = {
   criteria: {
     "key": "<value>",
-    "key1": "<value>",
-    "key2": "<value>",
   },
-  instructions: "<value>",
+  instructions: {},
   type: "choice",
 };
 ```
@@ -38,6 +36,17 @@ const value: operations.QuestionsScoreQuestion = {
     "1": "<value 2>",
   },
   type: "score",
+};
+```
+
+### `operations.QuestionsBoxQuestion`
+
+```typescript
+const value: operations.QuestionsBoxQuestion = {
+  instructions: {
+    "key": "<value>",
+  },
+  type: "box",
 };
 ```
 

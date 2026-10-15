@@ -7,6 +7,10 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
+  ClassifyBoxAnswer,
+  ClassifyBoxAnswer$inboundSchema,
+} from "./classifyboxanswer.js";
+import {
   ClassifyChoiceAnswer,
   ClassifyChoiceAnswer$inboundSchema,
 } from "./classifychoiceanswer.js";
@@ -27,6 +31,7 @@ import {
  * One answer to a classification question. The type selects the answer fields. A refusal contains only type.
  */
 export type ClassifyAnswer =
+  | ClassifyBoxAnswer
   | ClassifyChoiceAnswer
   | ClassifyNoulAnswer
   | ClassifyRefusalAnswer
@@ -38,6 +43,7 @@ export const ClassifyAnswer$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.union([
+  ClassifyBoxAnswer$inboundSchema,
   ClassifyChoiceAnswer$inboundSchema,
   ClassifyNoulAnswer$inboundSchema,
   ClassifyRefusalAnswer$inboundSchema,

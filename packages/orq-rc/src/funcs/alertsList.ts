@@ -97,6 +97,7 @@ async function $do(
     "ending_before": payload?.ending_before,
     "limit": payload?.limit,
     "project_id": payload?.project_id,
+    "scope": payload?.scope,
     "starting_after": payload?.starting_after,
   });
 

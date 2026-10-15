@@ -12,6 +12,24 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 /**
  * The evaluation prompt for this question. A string, an object or an array.
  */
+export type CreateClassifyQuestionsRouterClassifyInstructions = string | {
+  [k: string]: any;
+} | Array<any>;
+
+/**
+ * Beta, TypeSafe jev-preview only. Locates one target in an image from assets and returns its bounding box. Always returns a box; pair it with a noul question to check presence.
+ */
+export type BoxQuestion = {
+  /**
+   * The evaluation prompt for this question. A string, an object or an array.
+   */
+  instructions: string | { [k: string]: any } | Array<any>;
+  type: "box";
+};
+
+/**
+ * The evaluation prompt for this question. A string, an object or an array.
+ */
 export type CreateClassifyQuestionsInstructions =
   | string
   | { [k: string]: any }
@@ -22,15 +40,20 @@ export type CreateClassifyQuestionsInstructions =
  */
 export type ScoreQuestion = {
   /**
-   * Ordered level descriptions from lowest to highest. At least two levels.
+   * Ordered level descriptions from lowest to highest. At least two levels. Each level can be a string, an object or an array.
    */
-  criteria: Array<string>;
+  criteria: Array<any>;
   /**
    * The evaluation prompt for this question. A string, an object or an array.
    */
   instructions: string | { [k: string]: any } | Array<any>;
   type: "score";
 };
+
+/**
+ * The option description, or null.
+ */
+export type QuestionsCriteria = string | { [k: string]: any } | Array<any>;
 
 /**
  * The evaluation prompt for this question. A string, an object or an array.
@@ -42,9 +65,9 @@ export type QuestionsInstructions = string | { [k: string]: any } | Array<any>;
  */
 export type ChoiceQuestion = {
   /**
-   * Options keyed by name, each mapped to a description or null.
+   * Options keyed by name, each mapped to a description or null. A description can be a string, an object or an array.
    */
-  criteria: { [k: string]: string | null };
+  criteria: { [k: string]: string | { [k: string]: any } | Array<any> | null };
   /**
    * The evaluation prompt for this question. A string, an object or an array.
    */
@@ -53,11 +76,27 @@ export type ChoiceQuestion = {
 };
 
 /**
+ * What false means. A string, an object or an array.
+ */
+export type False = string | { [k: string]: any } | Array<any>;
+
+/**
+ * What true means. A string, an object or an array.
+ */
+export type True = string | { [k: string]: any } | Array<any>;
+
+/**
  * Optional descriptions of what true and false mean.
  */
 export type Criteria = {
-  false?: string | undefined;
-  true?: string | undefined;
+  /**
+   * What false means. A string, an object or an array.
+   */
+  false?: string | { [k: string]: any } | Array<any> | undefined;
+  /**
+   * What true means. A string, an object or an array.
+   */
+  true?: string | { [k: string]: any } | Array<any> | undefined;
 };
 
 /**
@@ -80,21 +119,29 @@ export type NoulQuestion = {
   type: "noul";
 };
 
-export type Questions = NoulQuestion | ChoiceQuestion | ScoreQuestion;
+export type Questions =
+  | NoulQuestion
+  | ChoiceQuestion
+  | ScoreQuestion
+  | BoxQuestion;
 
 /**
- * The content to evaluate. A string, an object or an array. For OpenAI GPT-6 Luna, strings are passed as text and objects or ordinary JSON arrays are serialized as text. User-message arrays accept string content or input_text/input_image parts. Images must be inline base64 data URLs, with at most 128 images across the request. Remote image URLs, file IDs, audio, non-user roles, bare content parts and tool items are rejected.
+ * The content to evaluate. A string, an object or an array. For TypeSafe models, reference images declared in assets by writing their reference string. For OpenAI GPT-6 Luna, strings are passed as text and objects or ordinary JSON arrays are serialized as text. User-message arrays accept string content or input_text/input_image parts. Images must be inline base64 data URLs, with at most 128 images across the request. Remote image URLs, file IDs, audio, non-user roles, bare content parts and tool items are rejected.
  */
 export type State = string | { [k: string]: any } | Array<any>;
 
 export type CreateClassifyRequestBody = {
+  /**
+   * Beta, TypeSafe models only. Inline images keyed by a reference string. Write the reference in state, instructions or criteria wherever the image belongs; every asset must be referenced. Required for box questions.
+   */
+  assets?: { [k: string]: components.ClassifyAsset } | undefined;
   cache?: components.ClassifyCacheConfig | undefined;
   /**
    * HTTP status codes that trigger fallback. Defaults to [408,429,500,502,503,504,529]. Each code must be unique and between 400 and 599.
    */
   fallbackOnCodes?: Array<number> | null | undefined;
   /**
-   * Up to 10 fallback models in order. The gateway retries a model for matching error codes before trying the next model. Every model must support classification and satisfy access checks. Image requests require native OpenAI image-capable fallbacks.
+   * Up to 10 fallback models in order. The gateway retries a model for matching error codes before trying the next model. Every model must support classification and satisfy access checks. Requests with images in state require native OpenAI image-capable fallbacks; requests with assets or box questions require TypeSafe fallbacks.
    */
   fallbacks?: Array<components.FallbackConfig> | null | undefined;
   identity?: components.ResponseIdentity | undefined;
@@ -113,10 +160,12 @@ export type CreateClassifyRequestBody = {
   /**
    * Typed questions keyed by an identifier of your choice. Each answer is returned under the same key.
    */
-  questions: { [k: string]: NoulQuestion | ChoiceQuestion | ScoreQuestion };
+  questions: {
+    [k: string]: NoulQuestion | ChoiceQuestion | ScoreQuestion | BoxQuestion;
+  };
   retry?: components.ClassifyRetryConfig | undefined;
   /**
-   * The content to evaluate. A string, an object or an array. For OpenAI GPT-6 Luna, strings are passed as text and objects or ordinary JSON arrays are serialized as text. User-message arrays accept string content or input_text/input_image parts. Images must be inline base64 data URLs, with at most 128 images across the request. Remote image URLs, file IDs, audio, non-user roles, bare content parts and tool items are rejected.
+   * The content to evaluate. A string, an object or an array. For TypeSafe models, reference images declared in assets by writing their reference string. For OpenAI GPT-6 Luna, strings are passed as text and objects or ordinary JSON arrays are serialized as text. User-message arrays accept string content or input_text/input_image parts. Images must be inline base64 data URLs, with at most 128 images across the request. Remote image URLs, file IDs, audio, non-user roles, bare content parts and tool items are rejected.
    */
   state: string | { [k: string]: any } | Array<any>;
   timeout?: components.ClassifyTimeoutConfig | undefined;
@@ -137,6 +186,51 @@ export type CreateClassifyResponseBody = {
   telemetry?: components.ResponseTelemetry | undefined;
   usage: components.ClassifyUsage;
 };
+
+/** @internal */
+export type CreateClassifyQuestionsRouterClassifyInstructions$Outbound =
+  | string
+  | { [k: string]: any }
+  | Array<any>;
+
+/** @internal */
+export const CreateClassifyQuestionsRouterClassifyInstructions$outboundSchema:
+  z.ZodType<
+    CreateClassifyQuestionsRouterClassifyInstructions$Outbound,
+    z.ZodTypeDef,
+    CreateClassifyQuestionsRouterClassifyInstructions
+  > = z.union([z.string(), z.record(z.any()), z.array(z.any())]);
+
+export function createClassifyQuestionsRouterClassifyInstructionsToJSON(
+  createClassifyQuestionsRouterClassifyInstructions:
+    CreateClassifyQuestionsRouterClassifyInstructions,
+): string {
+  return JSON.stringify(
+    CreateClassifyQuestionsRouterClassifyInstructions$outboundSchema.parse(
+      createClassifyQuestionsRouterClassifyInstructions,
+    ),
+  );
+}
+
+/** @internal */
+export type BoxQuestion$Outbound = {
+  instructions: string | { [k: string]: any } | Array<any>;
+  type: "box";
+};
+
+/** @internal */
+export const BoxQuestion$outboundSchema: z.ZodType<
+  BoxQuestion$Outbound,
+  z.ZodTypeDef,
+  BoxQuestion
+> = z.object({
+  instructions: z.union([z.string(), z.record(z.any()), z.array(z.any())]),
+  type: z.literal("box"),
+});
+
+export function boxQuestionToJSON(boxQuestion: BoxQuestion): string {
+  return JSON.stringify(BoxQuestion$outboundSchema.parse(boxQuestion));
+}
 
 /** @internal */
 export type CreateClassifyQuestionsInstructions$Outbound = string | {
@@ -162,7 +256,7 @@ export function createClassifyQuestionsInstructionsToJSON(
 
 /** @internal */
 export type ScoreQuestion$Outbound = {
-  criteria: Array<string>;
+  criteria: Array<any>;
   instructions: string | { [k: string]: any } | Array<any>;
   type: "score";
 };
@@ -173,13 +267,34 @@ export const ScoreQuestion$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ScoreQuestion
 > = z.object({
-  criteria: z.array(z.string()),
+  criteria: z.array(z.any()),
   instructions: z.union([z.string(), z.record(z.any()), z.array(z.any())]),
   type: z.literal("score"),
 });
 
 export function scoreQuestionToJSON(scoreQuestion: ScoreQuestion): string {
   return JSON.stringify(ScoreQuestion$outboundSchema.parse(scoreQuestion));
+}
+
+/** @internal */
+export type QuestionsCriteria$Outbound =
+  | string
+  | { [k: string]: any }
+  | Array<any>;
+
+/** @internal */
+export const QuestionsCriteria$outboundSchema: z.ZodType<
+  QuestionsCriteria$Outbound,
+  z.ZodTypeDef,
+  QuestionsCriteria
+> = z.union([z.string(), z.record(z.any()), z.array(z.any())]);
+
+export function questionsCriteriaToJSON(
+  questionsCriteria: QuestionsCriteria,
+): string {
+  return JSON.stringify(
+    QuestionsCriteria$outboundSchema.parse(questionsCriteria),
+  );
 }
 
 /** @internal */
@@ -205,7 +320,7 @@ export function questionsInstructionsToJSON(
 
 /** @internal */
 export type ChoiceQuestion$Outbound = {
-  criteria: { [k: string]: string | null };
+  criteria: { [k: string]: string | { [k: string]: any } | Array<any> | null };
   instructions: string | { [k: string]: any } | Array<any>;
   type: "choice";
 };
@@ -216,7 +331,9 @@ export const ChoiceQuestion$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ChoiceQuestion
 > = z.object({
-  criteria: z.record(z.nullable(z.string())),
+  criteria: z.record(
+    z.nullable(z.union([z.string(), z.record(z.any()), z.array(z.any())])),
+  ),
   instructions: z.union([z.string(), z.record(z.any()), z.array(z.any())]),
   type: z.literal("choice"),
 });
@@ -226,9 +343,34 @@ export function choiceQuestionToJSON(choiceQuestion: ChoiceQuestion): string {
 }
 
 /** @internal */
+export type False$Outbound = string | { [k: string]: any } | Array<any>;
+
+/** @internal */
+export const False$outboundSchema: z.ZodType<
+  False$Outbound,
+  z.ZodTypeDef,
+  False
+> = z.union([z.string(), z.record(z.any()), z.array(z.any())]);
+
+export function falseToJSON(value: False): string {
+  return JSON.stringify(False$outboundSchema.parse(value));
+}
+
+/** @internal */
+export type True$Outbound = string | { [k: string]: any } | Array<any>;
+
+/** @internal */
+export const True$outboundSchema: z.ZodType<True$Outbound, z.ZodTypeDef, True> =
+  z.union([z.string(), z.record(z.any()), z.array(z.any())]);
+
+export function trueToJSON(value: True): string {
+  return JSON.stringify(True$outboundSchema.parse(value));
+}
+
+/** @internal */
 export type Criteria$Outbound = {
-  false?: string | undefined;
-  true?: string | undefined;
+  false?: string | { [k: string]: any } | Array<any> | undefined;
+  true?: string | { [k: string]: any } | Array<any> | undefined;
 };
 
 /** @internal */
@@ -237,8 +379,8 @@ export const Criteria$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Criteria
 > = z.object({
-  false: z.string().optional(),
-  true: z.string().optional(),
+  false: z.union([z.string(), z.record(z.any()), z.array(z.any())]).optional(),
+  true: z.union([z.string(), z.record(z.any()), z.array(z.any())]).optional(),
 });
 
 export function criteriaToJSON(criteria: Criteria): string {
@@ -285,7 +427,8 @@ export function noulQuestionToJSON(noulQuestion: NoulQuestion): string {
 export type Questions$Outbound =
   | NoulQuestion$Outbound
   | ChoiceQuestion$Outbound
-  | ScoreQuestion$Outbound;
+  | ScoreQuestion$Outbound
+  | BoxQuestion$Outbound;
 
 /** @internal */
 export const Questions$outboundSchema: z.ZodType<
@@ -296,6 +439,7 @@ export const Questions$outboundSchema: z.ZodType<
   z.lazy(() => NoulQuestion$outboundSchema),
   z.lazy(() => ChoiceQuestion$outboundSchema),
   z.lazy(() => ScoreQuestion$outboundSchema),
+  z.lazy(() => BoxQuestion$outboundSchema),
 ]);
 
 export function questionsToJSON(questions: Questions): string {
@@ -318,6 +462,7 @@ export function stateToJSON(state: State): string {
 
 /** @internal */
 export type CreateClassifyRequestBody$Outbound = {
+  assets?: { [k: string]: components.ClassifyAsset$Outbound } | undefined;
   cache?: components.ClassifyCacheConfig$Outbound | undefined;
   fallback_on_codes?: Array<number> | null | undefined;
   fallbacks?: Array<components.FallbackConfig$Outbound> | null | undefined;
@@ -329,7 +474,8 @@ export type CreateClassifyRequestBody$Outbound = {
     [k: string]:
       | NoulQuestion$Outbound
       | ChoiceQuestion$Outbound
-      | ScoreQuestion$Outbound;
+      | ScoreQuestion$Outbound
+      | BoxQuestion$Outbound;
   };
   retry?: components.ClassifyRetryConfig$Outbound | undefined;
   state: string | { [k: string]: any } | Array<any>;
@@ -342,6 +488,7 @@ export const CreateClassifyRequestBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateClassifyRequestBody
 > = z.object({
+  assets: z.record(components.ClassifyAsset$outboundSchema).optional(),
   cache: components.ClassifyCacheConfig$outboundSchema.optional(),
   fallbackOnCodes: z.nullable(z.array(z.number().int())).optional(),
   fallbacks: z.nullable(z.array(components.FallbackConfig$outboundSchema))
@@ -355,6 +502,7 @@ export const CreateClassifyRequestBody$outboundSchema: z.ZodType<
       z.lazy(() => NoulQuestion$outboundSchema),
       z.lazy(() => ChoiceQuestion$outboundSchema),
       z.lazy(() => ScoreQuestion$outboundSchema),
+      z.lazy(() => BoxQuestion$outboundSchema),
     ]),
   ),
   retry: components.ClassifyRetryConfig$outboundSchema.optional(),

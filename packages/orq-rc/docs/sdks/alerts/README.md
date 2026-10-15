@@ -84,7 +84,7 @@ run();
 
 ## create
 
-Creates a threshold alert in a project. The alert's query is validated against the Reporting API metric catalogue and the evaluation schedule starts immediately when `enabled` is true. Plan limits apply to the number of alerts and the minimum evaluation interval.
+Creates a project- or workspace-scoped threshold alert. The alert's query is validated against the selected telemetry source and the evaluation schedule starts immediately when `enabled` is true. Plan limits apply to the number of alerts and the minimum evaluation interval.
 
 ### Example Usage
 
@@ -99,7 +99,6 @@ const orq = new Orq({
 async function run() {
   const result = await orq.alerts.create({
     displayName: "Freeman80",
-    projectId: "<id>",
     query: {
       metric: "<value>",
     },
@@ -134,7 +133,6 @@ const orq = new OrqCore({
 async function run() {
   const res = await alertsCreate(orq, {
     displayName: "Freeman80",
-    projectId: "<id>",
     query: {
       metric: "<value>",
     },
@@ -326,7 +324,7 @@ run();
 
 ## update
 
-Updates alert metadata, query, condition, notifiers, or enabled state. Query and condition changes restart the evaluation schedule; disabling stops it. `project_id` is immutable.
+Updates alert metadata, query, condition, notifiers, or enabled state. Query and condition changes restart the evaluation schedule; disabling stops it. Alert scope, `project_id`, and telemetry source are immutable.
 
 ### Example Usage
 

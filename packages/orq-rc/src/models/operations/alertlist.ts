@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import * as components from "../components/index.js";
 
 export type AlertListRequest = {
   /**
@@ -28,6 +29,13 @@ export type AlertListRequest = {
    * Restrict results to one project.
    */
   projectId?: string | undefined;
+  /**
+   * Restrict results by ownership boundary. Unspecified returns all alerts
+   *
+   * @remarks
+   *  visible to the caller; non-admin callers never see workspace alerts.
+   */
+  scope?: components.AlertScope | undefined;
 };
 
 /** @internal */
@@ -36,6 +44,7 @@ export type AlertListRequest$Outbound = {
   starting_after?: string | undefined;
   ending_before?: string | undefined;
   project_id?: string | undefined;
+  scope?: string | undefined;
 };
 
 /** @internal */
@@ -48,6 +57,7 @@ export const AlertListRequest$outboundSchema: z.ZodType<
   startingAfter: z.string().optional(),
   endingBefore: z.string().optional(),
   projectId: z.string().optional(),
+  scope: components.AlertScope$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     startingAfter: "starting_after",

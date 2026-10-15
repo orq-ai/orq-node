@@ -12,7 +12,7 @@ let value: Criteria = {};
 
 ## Fields
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `false`            | *string*           | :heavy_minus_sign: | N/A                |
-| `true`             | *string*           | :heavy_minus_sign: | N/A                |
+| Field                                              | Type                                               | Required                                           | Description                                        |
+| -------------------------------------------------- | -------------------------------------------------- | -------------------------------------------------- | -------------------------------------------------- |
+| `false`                                            | *operations.False*                                 | :heavy_minus_sign:                                 | What false means. A string, an object or an array. |
+| `true`                                             | *operations.True*                                  | :heavy_minus_sign:                                 | What true means. A string, an object or an array.  |
