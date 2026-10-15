@@ -40,6 +40,7 @@ export function knowledgeRetrieveFileUrl(
 ): APIPromise<
   Result<
     components.GetUploadFileUrlResponse,
+    | errors.ErrorResponse
     | errors.KnowledgeApiError
     | OrqError
     | ResponseValidationError
@@ -66,6 +67,7 @@ async function $do(
   [
     Result<
       components.GetUploadFileUrlResponse,
+      | errors.ErrorResponse
       | errors.KnowledgeApiError
       | OrqError
       | ResponseValidationError
@@ -164,6 +166,7 @@ async function $do(
 
   const [result] = await M.match<
     components.GetUploadFileUrlResponse,
+    | errors.ErrorResponse
     | errors.KnowledgeApiError
     | OrqError
     | ResponseValidationError
@@ -175,6 +178,7 @@ async function $do(
     | SDKValidationError
   >(
     M.json(200, components.GetUploadFileUrlResponse$inboundSchema),
+    M.jsonErr(400, errors.ErrorResponse$inboundSchema),
     M.jsonErr(500, errors.KnowledgeApiError$inboundSchema),
     M.fail([401, "4XX"]),
     M.fail("5XX"),

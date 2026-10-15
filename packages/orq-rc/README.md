@@ -1478,7 +1478,43 @@ const orq = new Orq({
 
 async function run() {
   try {
-    const result = await orq.deployments.list({});
+    const result = await orq.deployments.invoke({
+      key: "<key>",
+      identity: {
+        id: "contact_01ARZ3NDEKTSV4RRFFQ69G5FAV",
+        displayName: "Jane Doe",
+        email: "jane.doe@example.com",
+        metadata: [
+          {
+            "department": "Engineering",
+            "role": "Senior Developer",
+          },
+        ],
+        logoUrl: "https://example.com/avatars/jane-doe.jpg",
+        tags: [
+          "hr",
+          "engineering",
+        ],
+      },
+      documents: [
+        {
+          text:
+            "The refund policy allows customers to return items within 30 days of purchase for a full refund.",
+          metadata: {
+            fileName: "refund_policy.pdf",
+            fileType: "application/pdf",
+            pageNumber: 1,
+          },
+        },
+        {
+          text: "Premium members receive free shipping on all orders over $50.",
+          metadata: {
+            fileName: "membership_benefits.md",
+            fileType: "text/markdown",
+          },
+        },
+      ],
+    });
 
     console.log(result);
   } catch (error) {
@@ -1490,9 +1526,10 @@ async function run() {
       console.log(error.headers);
 
       // Depending on the method different errors may be thrown
-      if (error instanceof errors.HonoApiError) {
-        console.log(error.data$.code); // string
+      if (error instanceof errors.ErrorResponse) {
         console.log(error.data$.message); // string
+        console.log(error.data$.code); // number
+        console.log(error.data$.details); // any[]
       }
     }
   }
@@ -1506,7 +1543,7 @@ run();
 **Primary error:**
 * [`OrqError`](./src/models/errors/orqerror.ts): The base class for HTTP error responses.
 
-<details><summary>Less common errors (70)</summary>
+<details><summary>Less common errors (72)</summary>
 
 <br />
 
@@ -1519,6 +1556,8 @@ run();
 
 
 **Inherit from [`OrqError`](./src/models/errors/orqerror.ts)**:
+* [`ErrorResponse`](./src/models/errors/errorresponse.ts): Applicable to 258 of 356 methods.*
+* [`APIErrorResponse`](./src/models/errors/apierrorresponse.ts): Applicable to 12 of 356 methods.*
 * [`HonoApiError`](./src/models/errors/honoapierror.ts): Applicable to 5 of 356 methods.*
 * [`PostV2FeedbackResponseBody`](./src/models/errors/postv2feedbackresponsebody.ts): Bad Request. Status code `400`. Applicable to 1 of 356 methods.*
 * [`CompactResponseResponseBody`](./src/models/errors/compactresponseresponsebody.ts): Model is required or request is invalid. Status code `400`. Applicable to 1 of 356 methods.*

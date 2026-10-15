@@ -19,6 +19,7 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import * as errors from "../models/errors/index.js";
 import { OrqError } from "../models/errors/orqerror.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
@@ -39,6 +40,7 @@ export function identitiesCreate(
 ): APIPromise<
   Result<
     operations.CreateIdentityResponse,
+    | errors.ErrorResponse
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -64,6 +66,7 @@ async function $do(
   [
     Result<
       operations.CreateIdentityResponse,
+      | errors.ErrorResponse
       | OrqError
       | ResponseValidationError
       | ConnectionError
@@ -146,6 +149,7 @@ async function $do(
 
   const [result] = await M.match<
     operations.CreateIdentityResponse,
+    | errors.ErrorResponse
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -159,6 +163,7 @@ async function $do(
       hdrs: true,
       key: "Result",
     }),
+    M.jsonErr(401, errors.ErrorResponse$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });

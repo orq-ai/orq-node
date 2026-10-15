@@ -630,9 +630,10 @@ run();
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type           | Status Code          | Content Type         |
+| -------------------- | -------------------- | -------------------- |
+| errors.ErrorResponse | 401                  | application/json     |
+| errors.APIError      | 4XX, 5XX             | \*/\*                |
 
 ## ~~run~~
 
@@ -799,9 +800,10 @@ run();
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type           | Status Code          | Content Type         |
+| -------------------- | -------------------- | -------------------- |
+| errors.ErrorResponse | 401                  | application/json     |
+| errors.APIError      | 4XX, 5XX             | \*/\*                |
 
 ## ~~streamRun~~
 

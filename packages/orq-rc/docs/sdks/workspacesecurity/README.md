@@ -82,9 +82,10 @@ run();
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type           | Status Code          | Content Type         |
+| -------------------- | -------------------- | -------------------- |
+| errors.ErrorResponse | 401, 404             | application/json     |
+| errors.APIError      | 4XX, 5XX             | \*/\*                |
 
 ## createDomain
 
@@ -157,9 +158,10 @@ run();
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type           | Status Code          | Content Type         |
+| -------------------- | -------------------- | -------------------- |
+| errors.ErrorResponse | 401                  | application/json     |
+| errors.APIError      | 4XX, 5XX             | \*/\*                |
 
 ## deleteDomain
 
@@ -232,9 +234,10 @@ run();
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type           | Status Code          | Content Type         |
+| -------------------- | -------------------- | -------------------- |
+| errors.ErrorResponse | 401                  | application/json     |
+| errors.APIError      | 4XX, 5XX             | \*/\*                |
 
 ## verifyDomain
 
@@ -307,9 +310,10 @@ run();
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type           | Status Code          | Content Type         |
+| -------------------- | -------------------- | -------------------- |
+| errors.ErrorResponse | 401                  | application/json     |
+| errors.APIError      | 4XX, 5XX             | \*/\*                |
 
 ## getIPAllowlist
 
@@ -380,9 +384,10 @@ run();
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type           | Status Code          | Content Type         |
+| -------------------- | -------------------- | -------------------- |
+| errors.ErrorResponse | 401, 404             | application/json     |
+| errors.APIError      | 4XX, 5XX             | \*/\*                |
 
 ## updateIPAllowlist
 
@@ -455,9 +460,10 @@ run();
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type           | Status Code          | Content Type         |
+| -------------------- | -------------------- | -------------------- |
+| errors.ErrorResponse | 401                  | application/json     |
+| errors.APIError      | 4XX, 5XX             | \*/\*                |
 
 ## addIPRange
 
@@ -530,9 +536,10 @@ run();
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type           | Status Code          | Content Type         |
+| -------------------- | -------------------- | -------------------- |
+| errors.ErrorResponse | 401                  | application/json     |
+| errors.APIError      | 4XX, 5XX             | \*/\*                |
 
 ## deleteIPRange
 
@@ -605,6 +612,7 @@ run();
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type           | Status Code          | Content Type         |
+| -------------------- | -------------------- | -------------------- |
+| errors.ErrorResponse | 401                  | application/json     |
+| errors.APIError      | 4XX, 5XX             | \*/\*                |
