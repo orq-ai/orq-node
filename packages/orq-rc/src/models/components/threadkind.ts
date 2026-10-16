@@ -6,7 +6,6 @@ import * as z from "zod/v3";
 import { ClosedEnum } from "../../types/enums.js";
 
 export const ThreadKind = {
-  ThreadKindUnspecified: "THREAD_KIND_UNSPECIFIED",
   ThreadKindConversation: "THREAD_KIND_CONVERSATION",
   ThreadKindCodingAgent: "THREAD_KIND_CODING_AGENT",
 } as const;

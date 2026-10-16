@@ -108,7 +108,7 @@ async function run() {
       type: "MCP_AUTH_TYPE_OAUTH_CLIENT_CREDENTIALS",
     },
     defaultToolExposure: {
-      mode: "MCP_TOOL_EXPOSURE_MODE_UNSPECIFIED",
+      mode: "MCP_TOOL_EXPOSURE_MODE_SELECTED",
     },
   });
 
@@ -144,7 +144,7 @@ async function run() {
       type: "MCP_AUTH_TYPE_OAUTH_CLIENT_CREDENTIALS",
     },
     defaultToolExposure: {
-      mode: "MCP_TOOL_EXPOSURE_MODE_UNSPECIFIED",
+      mode: "MCP_TOOL_EXPOSURE_MODE_SELECTED",
     },
   });
   if (res.ok) {

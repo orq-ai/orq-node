@@ -27,11 +27,10 @@ export type CreateManagementKeyRequest = {
    */
   access?: { [k: string]: AccessLevel } | undefined;
   /**
-   * Optional expiration. When set, the authenticate hot-path rejects
+   * Optional expiration. The key is rejected once `expires_at` is in the
    *
    * @remarks
-   *  the key once `expires_at` is in the past. Unset means the key
-   *  never expires.
+   *  past. Unset means the key never expires.
    */
   expiresAt?: Date | undefined;
 };

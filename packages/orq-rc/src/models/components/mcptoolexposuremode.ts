@@ -6,7 +6,6 @@ import * as z from "zod/v3";
 import { ClosedEnum } from "../../types/enums.js";
 
 export const McpToolExposureMode = {
-  McpToolExposureModeUnspecified: "MCP_TOOL_EXPOSURE_MODE_UNSPECIFIED",
   McpToolExposureModeAll: "MCP_TOOL_EXPOSURE_MODE_ALL",
   McpToolExposureModeSelected: "MCP_TOOL_EXPOSURE_MODE_SELECTED",
   McpToolExposureModeNone: "MCP_TOOL_EXPOSURE_MODE_NONE",

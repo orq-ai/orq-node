@@ -6,7 +6,6 @@ import * as z from "zod/v3";
 import { ClosedEnum } from "../../types/enums.js";
 
 export const AlertScope = {
-  AlertScopeUnspecified: "ALERT_SCOPE_UNSPECIFIED",
   AlertScopeProject: "ALERT_SCOPE_PROJECT",
   AlertScopeWorkspace: "ALERT_SCOPE_WORKSPACE",
 } as const;

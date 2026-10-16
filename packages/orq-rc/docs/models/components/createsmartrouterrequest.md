@@ -8,7 +8,7 @@ import { CreateSmartRouterRequest } from "@orq-ai/node/models/components";
 let value: CreateSmartRouterRequest = {
   key: "<key>",
   models: [],
-  profile: "SMART_ROUTER_PROFILE_QUALITY",
+  profile: "SMART_ROUTER_PROFILE_BALANCED",
 };
 ```
 

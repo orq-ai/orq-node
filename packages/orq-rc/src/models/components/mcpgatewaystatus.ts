@@ -6,7 +6,6 @@ import * as z from "zod/v3";
 import { ClosedEnum } from "../../types/enums.js";
 
 export const McpGatewayStatus = {
-  McpGatewayStatusUnspecified: "MCP_GATEWAY_STATUS_UNSPECIFIED",
   McpGatewayStatusActive: "MCP_GATEWAY_STATUS_ACTIVE",
   McpGatewayStatusDisabled: "MCP_GATEWAY_STATUS_DISABLED",
 } as const;

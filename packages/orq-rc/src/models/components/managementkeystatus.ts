@@ -6,7 +6,6 @@ import * as z from "zod/v3";
 import { ClosedEnum } from "../../types/enums.js";
 
 export const ManagementKeyStatus = {
-  ManagementKeyStatusUnspecified: "MANAGEMENT_KEY_STATUS_UNSPECIFIED",
   ManagementKeyStatusActive: "MANAGEMENT_KEY_STATUS_ACTIVE",
   ManagementKeyStatusDisabled: "MANAGEMENT_KEY_STATUS_DISABLED",
   ManagementKeyStatusRevoked: "MANAGEMENT_KEY_STATUS_REVOKED",

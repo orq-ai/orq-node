@@ -6,7 +6,6 @@ import * as z from "zod/v3";
 import { ClosedEnum } from "../../types/enums.js";
 
 export const MonitorTelemetrySource = {
-  MonitorTelemetrySourceUnspecified: "MONITOR_TELEMETRY_SOURCE_UNSPECIFIED",
   MonitorTelemetrySourceTraces: "MONITOR_TELEMETRY_SOURCE_TRACES",
   MonitorTelemetrySourceMetrics: "MONITOR_TELEMETRY_SOURCE_METRICS",
   MonitorTelemetrySourceLogs: "MONITOR_TELEMETRY_SOURCE_LOGS",

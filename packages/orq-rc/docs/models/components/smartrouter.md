@@ -10,7 +10,7 @@ let value: SmartRouter = {
   key: "<key>",
   modelRef: "<value>",
   models: [],
-  profile: "SMART_ROUTER_PROFILE_UNSPECIFIED",
+  profile: "SMART_ROUTER_PROFILE_QUALITY",
   enabled: true,
   createdAt: new Date("2025-05-21T03:19:23.758Z"),
   updatedAt: new Date("2024-11-21T02:46:58.049Z"),

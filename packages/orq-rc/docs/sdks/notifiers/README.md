@@ -96,7 +96,7 @@ const orq = new Orq({
 
 async function run() {
   const result = await orq.notifiers.create({
-    type: "NOTIFIER_TYPE_UNSPECIFIED",
+    type: "NOTIFIER_TYPE_EMAIL",
     incomingWebhookUrl: "https://far-wear.org/",
     displayName: "Dennis48",
   });
@@ -123,7 +123,7 @@ const orq = new OrqCore({
 
 async function run() {
   const res = await notifiersCreate(orq, {
-    type: "NOTIFIER_TYPE_UNSPECIFIED",
+    type: "NOTIFIER_TYPE_EMAIL",
     incomingWebhookUrl: "https://far-wear.org/",
     displayName: "Dennis48",
   });

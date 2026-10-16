@@ -6,7 +6,6 @@ import * as z from "zod/v3";
 import { ClosedEnum } from "../../types/enums.js";
 
 export const AlertTelemetrySource = {
-  AlertTelemetrySourceUnspecified: "ALERT_TELEMETRY_SOURCE_UNSPECIFIED",
   AlertTelemetrySourceTraces: "ALERT_TELEMETRY_SOURCE_TRACES",
   AlertTelemetrySourceMetrics: "ALERT_TELEMETRY_SOURCE_METRICS",
 } as const;

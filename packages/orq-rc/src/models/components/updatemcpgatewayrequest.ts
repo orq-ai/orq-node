@@ -68,6 +68,14 @@ export type UpdateMcpGatewayRequest = {
    * Plugins run on every tool call this gateway serves.
    */
   plugins?: Array<McpGatewayPlugin> | undefined;
+  /**
+   * Replaces the served workspace skills. An empty array is treated as no change; use `clear_skill_ids` to remove them all.
+   */
+  skillIds?: Array<string> | undefined;
+  /**
+   * Set true to stop serving every workspace skill; cannot be combined with `skill_ids`.
+   */
+  clearSkillIds?: boolean | undefined;
 };
 
 /** @internal */
@@ -82,6 +90,8 @@ export type UpdateMcpGatewayRequest$Outbound = {
   sharing?: Sharing$Outbound | undefined;
   clear_server_links?: boolean | undefined;
   plugins?: Array<McpGatewayPlugin$Outbound> | undefined;
+  skill_ids?: Array<string> | undefined;
+  clear_skill_ids?: boolean | undefined;
 };
 
 /** @internal */
@@ -100,12 +110,16 @@ export const UpdateMcpGatewayRequest$outboundSchema: z.ZodType<
   sharing: Sharing$outboundSchema.optional(),
   clearServerLinks: z.boolean().optional(),
   plugins: z.array(McpGatewayPlugin$outboundSchema).optional(),
+  skillIds: z.array(z.string()).optional(),
+  clearSkillIds: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
     displayName: "display_name",
     serverLinks: "server_links",
     toolNaming: "tool_naming",
     clearServerLinks: "clear_server_links",
+    skillIds: "skill_ids",
+    clearSkillIds: "clear_skill_ids",
   });
 });
 

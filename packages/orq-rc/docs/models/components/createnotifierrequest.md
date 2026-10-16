@@ -9,7 +9,7 @@ Create notifier request. `project_id`, `display_name`, and `type` are always req
 
 ```typescript
 const value: components.EmailNotifierCreateRequest = {
-  type: "NOTIFIER_TYPE_UNSPECIFIED",
+  type: "NOTIFIER_TYPE_EMAIL",
   emails: [
     "<value 1>",
     "<value 2>",
@@ -33,7 +33,7 @@ const value: components.SlackWebhookNotifierCreateRequest = {
 
 ```typescript
 const value: components.GenericWebhookNotifierCreateRequest = {
-  type: "NOTIFIER_TYPE_SLACK_WEBHOOK",
+  type: "NOTIFIER_TYPE_WEBHOOK",
   webhookUrl: "https://squiggly-zen.name/",
   displayName: "Laverne99",
 };

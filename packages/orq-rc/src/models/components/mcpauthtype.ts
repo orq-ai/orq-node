@@ -6,7 +6,6 @@ import * as z from "zod/v3";
 import { ClosedEnum } from "../../types/enums.js";
 
 export const McpAuthType = {
-  McpAuthTypeUnspecified: "MCP_AUTH_TYPE_UNSPECIFIED",
   McpAuthTypeNone: "MCP_AUTH_TYPE_NONE",
   McpAuthTypeStaticHeaders: "MCP_AUTH_TYPE_STATIC_HEADERS",
   McpAuthTypeOauthClientCredentials: "MCP_AUTH_TYPE_OAUTH_CLIENT_CREDENTIALS",

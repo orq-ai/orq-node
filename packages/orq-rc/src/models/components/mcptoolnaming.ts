@@ -6,7 +6,6 @@ import * as z from "zod/v3";
 import { ClosedEnum } from "../../types/enums.js";
 
 export const McpToolNaming = {
-  McpToolNamingUnspecified: "MCP_TOOL_NAMING_UNSPECIFIED",
   McpToolNamingPrefixWithServerKey: "MCP_TOOL_NAMING_PREFIX_WITH_SERVER_KEY",
   McpToolNamingPrefixOnCollision: "MCP_TOOL_NAMING_PREFIX_ON_COLLISION",
 } as const;

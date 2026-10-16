@@ -29,7 +29,7 @@ let value: Alert = {
   updatedAt: new Date("2026-08-05T17:17:08.407Z"),
   createdById: "<id>",
   updatedById: "<id>",
-  scope: "ALERT_SCOPE_UNSPECIFIED",
+  scope: "ALERT_SCOPE_PROJECT",
 };
 ```
 

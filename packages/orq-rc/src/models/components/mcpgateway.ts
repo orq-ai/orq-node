@@ -74,6 +74,10 @@ export type McpGateway = {
    * Plugins run on every tool call this gateway serves.
    */
   plugins?: Array<McpGatewayPlugin> | undefined;
+  /**
+   * Workspace skills this gateway serves to MCP clients through the MCP Skills extension.
+   */
+  skillIds?: Array<string> | undefined;
 };
 
 /** @internal */
@@ -96,6 +100,7 @@ export const McpGateway$inboundSchema: z.ZodType<
   mode: McpGatewayMode$inboundSchema.optional(),
   sharing: Sharing$inboundSchema.optional(),
   plugins: z.array(McpGatewayPlugin$inboundSchema).optional(),
+  skill_ids: z.array(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "display_name": "displayName",
@@ -103,6 +108,7 @@ export const McpGateway$inboundSchema: z.ZodType<
     "tool_naming": "toolNaming",
     "public_url": "publicUrl",
     "exposed_tools_count": "exposedToolsCount",
+    "skill_ids": "skillIds",
   });
 });
 

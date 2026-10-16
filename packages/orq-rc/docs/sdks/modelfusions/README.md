@@ -101,7 +101,7 @@ async function run() {
     panelModels: [],
     judgeModel: "<value>",
     synthesisMode: "MODEL_FUSION_SYNTHESIS_MODE_JUDGE_WRITES_FINAL",
-    preset: "MODEL_FUSION_PRESET_UNSPECIFIED",
+    preset: "MODEL_FUSION_PRESET_GENERAL",
   });
 
   console.log(result);
@@ -130,7 +130,7 @@ async function run() {
     panelModels: [],
     judgeModel: "<value>",
     synthesisMode: "MODEL_FUSION_SYNTHESIS_MODE_JUDGE_WRITES_FINAL",
-    preset: "MODEL_FUSION_PRESET_UNSPECIFIED",
+    preset: "MODEL_FUSION_PRESET_GENERAL",
   });
   if (res.ok) {
     const { value: result } = res;

@@ -33,6 +33,9 @@ export type ModelCreateVertexResponseBody = {
   inputCost: number | null;
   inputCurrency: string;
   isActive: boolean;
+  /**
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
+   */
   legacyUuid?: string | undefined;
   metadata: components.ModelMetadata;
   modelDeveloper?: string | undefined;

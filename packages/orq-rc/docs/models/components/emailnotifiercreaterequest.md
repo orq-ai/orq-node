@@ -8,7 +8,7 @@
 import { EmailNotifierCreateRequest } from "@orq-ai/node/models/components";
 
 let value: EmailNotifierCreateRequest = {
-  type: "NOTIFIER_TYPE_UNSPECIFIED",
+  type: "NOTIFIER_TYPE_EMAIL",
   emails: [
     "<value 1>",
     "<value 2>",

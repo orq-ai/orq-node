@@ -8,7 +8,7 @@
 import { GenericWebhookNotifierCreateRequest } from "@orq-ai/node/models/components";
 
 let value: GenericWebhookNotifierCreateRequest = {
-  type: "NOTIFIER_TYPE_SLACK_WEBHOOK",
+  type: "NOTIFIER_TYPE_WEBHOOK",
   webhookUrl: "https://squiggly-zen.name/",
   displayName: "Laverne99",
 };

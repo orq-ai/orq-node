@@ -9,7 +9,7 @@ let value: CreateMcpServerRequest = {
   key: "<key>",
   displayName: "Clarissa.Beier27",
   connection: {
-    type: "MCP_CONNECTION_TYPE_UNSPECIFIED",
+    type: "MCP_CONNECTION_TYPE_HTTP",
     url: "https://deficient-permafrost.net/",
   },
   auth: {

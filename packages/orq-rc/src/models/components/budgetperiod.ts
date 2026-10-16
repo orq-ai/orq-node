@@ -6,7 +6,6 @@ import * as z from "zod/v3";
 import { ClosedEnum } from "../../types/enums.js";
 
 export const BudgetPeriod = {
-  BudgetPeriodUnspecified: "BUDGET_PERIOD_UNSPECIFIED",
   BudgetPeriodDaily: "BUDGET_PERIOD_DAILY",
   BudgetPeriodWeekly: "BUDGET_PERIOD_WEEKLY",
   BudgetPeriodMonthly: "BUDGET_PERIOD_MONTHLY",

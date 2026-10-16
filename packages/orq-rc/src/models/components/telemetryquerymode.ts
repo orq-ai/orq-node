@@ -6,7 +6,6 @@ import * as z from "zod/v3";
 import { ClosedEnum } from "../../types/enums.js";
 
 export const TelemetryQueryMode = {
-  TelemetryQueryModeUnspecified: "TELEMETRY_QUERY_MODE_UNSPECIFIED",
   TelemetryQueryModeScalar: "TELEMETRY_QUERY_MODE_SCALAR",
   TelemetryQueryModeTimeSeries: "TELEMETRY_QUERY_MODE_TIME_SERIES",
 } as const;

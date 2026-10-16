@@ -16,10 +16,8 @@ import {
  * @remarks
  *  and an omitted field is left unchanged.
  *
- *  There is deliberately no `key` / `slug` field. The workspace slug is
- *  immutable through this service (it is embedded in resource URLs and API
- *  credentials), mirroring the dashboard's WorkspaceUpdateGuard, which rejects a
- *  `key` in the PATCH /workspaces/:key body. Do not add one.
+ *  The workspace slug is immutable through this service: it is embedded in
+ *  resource URLs and API credentials.
  */
 export type UpdateWorkspaceSettingsRequest = {
   /**

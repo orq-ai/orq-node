@@ -6,7 +6,7 @@
 import { McpConnection } from "@orq-ai/node/models/components";
 
 let value: McpConnection = {
-  type: "MCP_CONNECTION_TYPE_UNSPECIFIED",
+  type: "MCP_CONNECTION_TYPE_HTTP",
   url: "https://perky-cruelty.com",
 };
 ```

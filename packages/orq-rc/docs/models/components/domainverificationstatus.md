@@ -5,11 +5,11 @@
 ```typescript
 import { DomainVerificationStatus } from "@orq-ai/node/models/components";
 
-let value: DomainVerificationStatus = "DOMAIN_VERIFICATION_STATUS_UNSPECIFIED";
+let value: DomainVerificationStatus = "DOMAIN_VERIFICATION_STATUS_PENDING";
 ```
 
 ## Values
 
 ```typescript
-"DOMAIN_VERIFICATION_STATUS_UNSPECIFIED" | "DOMAIN_VERIFICATION_STATUS_PENDING" | "DOMAIN_VERIFICATION_STATUS_VERIFIED"
+"DOMAIN_VERIFICATION_STATUS_PENDING" | "DOMAIN_VERIFICATION_STATUS_VERIFIED"
 ```

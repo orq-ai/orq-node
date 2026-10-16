@@ -12,6 +12,7 @@ import {
   McpAuthConfigOutput$inboundSchema,
 } from "./mcpauthconfigoutput.js";
 import { McpConnection, McpConnection$inboundSchema } from "./mcpconnection.js";
+import { McpSkill, McpSkill$inboundSchema } from "./mcpskill.js";
 import { McpSyncState, McpSyncState$inboundSchema } from "./mcpsyncstate.js";
 import { McpTool, McpTool$inboundSchema } from "./mcptool.js";
 import {
@@ -73,6 +74,10 @@ export type McpServer = {
    * Account that created the server.
    */
   createdById?: string | undefined;
+  /**
+   * Skills the upstream publishes through the MCP Skills extension, discovered by the last successful `:sync`.
+   */
+  skills?: Array<McpSkill> | undefined;
 };
 
 /** @internal */
@@ -94,6 +99,7 @@ export const McpServer$inboundSchema: z.ZodType<
   updated: z.string().optional(),
   sharing: Sharing$inboundSchema.optional(),
   created_by_id: z.string().optional(),
+  skills: z.array(McpSkill$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "display_name": "displayName",

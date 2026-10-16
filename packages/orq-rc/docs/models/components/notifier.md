@@ -26,7 +26,7 @@ const value: components.EmailNotifier = {
 
 ```typescript
 const value: components.SlackWebhookNotifier = {
-  type: "NOTIFIER_TYPE_UNSPECIFIED",
+  type: "NOTIFIER_TYPE_EMAIL",
   incomingWebhookUrl: "https://rundown-polyester.name/",
   id: "<id>",
   displayName: "Michele.Hintz",
