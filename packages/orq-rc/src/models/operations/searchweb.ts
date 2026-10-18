@@ -75,6 +75,7 @@ export const Provider = {
   Serper: "serper",
   Openai: "openai",
   Perplexity: "perplexity",
+  Deepseek: "deepseek",
 } as const;
 /**
  * Provider to run this search. Exa uses auto, Linkup uses standard depth, Tavily uses basic depth, and OpenAI runs one web_search tool call on gpt-5.6-luna. Workspace credentials are selected automatically for this provider.
@@ -102,7 +103,7 @@ export type SearchWebRequestBody = {
    */
   provider: Provider;
   /**
-   * Search text. Must not be blank or exceed 10,000 characters. Ceramic accepts at most 50 words.
+   * Search text. Must not be blank or exceed 10,000 characters. Ceramic accepts at most 50 words and DeepSeek at most 128 characters.
    */
   query: string;
 };
@@ -133,6 +134,7 @@ export const SearchWebProvider = {
   Serper: "serper",
   Openai: "openai",
   Perplexity: "perplexity",
+  Deepseek: "deepseek",
 } as const;
 /**
  * Provider that executed the search.

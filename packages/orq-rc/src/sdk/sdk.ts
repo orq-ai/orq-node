@@ -8,6 +8,7 @@ import { Alerts } from "./alerts.js";
 import { AnnotationQueues } from "./annotationqueues.js";
 import { Annotations } from "./annotations.js";
 import { ApiKeys } from "./apikeys.js";
+import { AuditLogDestinations } from "./auditlogdestinations.js";
 import { Budgets } from "./budgets.js";
 import { Chunking } from "./chunking.js";
 import { Datasets } from "./datasets.js";
@@ -180,6 +181,13 @@ export class Orq extends ClientSDK {
   private _annotationQueues?: AnnotationQueues;
   get annotationQueues(): AnnotationQueues {
     return (this._annotationQueues ??= new AnnotationQueues(this._options));
+  }
+
+  private _auditLogDestinations?: AuditLogDestinations;
+  get auditLogDestinations(): AuditLogDestinations {
+    return (this._auditLogDestinations ??= new AuditLogDestinations(
+      this._options,
+    ));
   }
 
   private _budgets?: Budgets;
