@@ -13,5 +13,5 @@ let value: SearchWebProvider = "serper";
 ## Values
 
 ```typescript
-"exa" | "ceramic" | "linkup" | "tavily" | "serper" | "openai" | "perplexity"
+"exa" | "ceramic" | "linkup" | "tavily" | "serper" | "openai" | "perplexity" | "deepseek"
 ```
