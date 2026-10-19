@@ -41,7 +41,6 @@ let value: CreateCompletionOrq = {
     "issue_type": "billing",
   },
   cache: {
-    ttl: 3600,
     type: "exact_match",
   },
   knowledgeBases: [

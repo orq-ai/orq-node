@@ -37,7 +37,6 @@ let value: CreateImageOrq = {
     ],
   },
   cache: {
-    ttl: 3600,
     type: "exact_match",
   },
   loadBalancer: {

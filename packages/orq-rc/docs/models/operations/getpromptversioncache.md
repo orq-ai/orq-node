@@ -8,7 +8,6 @@ Cache configuration for the request.
 import { GetPromptVersionCache } from "@orq-ai/node/models/operations";
 
 let value: GetPromptVersionCache = {
-  ttl: 3600,
   type: "exact_match",
 };
 ```

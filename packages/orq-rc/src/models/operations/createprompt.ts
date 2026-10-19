@@ -3765,7 +3765,7 @@ export const CreatePromptCache$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreatePromptCache
 > = z.object({
-  ttl: z.number().default(1800),
+  ttl: z.number().default(3600),
   type: CreatePromptType$outboundSchema,
 });
 
@@ -5118,7 +5118,7 @@ export const CreatePromptPromptsCache$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  ttl: z.number().default(1800),
+  ttl: z.number().default(3600),
   type: CreatePromptPromptsResponse200Type$inboundSchema,
 });
 

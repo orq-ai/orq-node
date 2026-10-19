@@ -1095,7 +1095,7 @@ export const CreateCompletionCache$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateCompletionCache
 > = z.object({
-  ttl: z.number().default(1800),
+  ttl: z.number().default(3600),
   type: CreateCompletionType$outboundSchema,
 });
 
@@ -1419,7 +1419,7 @@ export const CreateCompletionRouterCompletionsCache$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateCompletionRouterCompletionsCache
 > = z.object({
-  ttl: z.number().default(1800),
+  ttl: z.number().default(3600),
   type: CreateCompletionRouterCompletionsType$outboundSchema,
 });
 

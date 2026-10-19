@@ -8,7 +8,6 @@ Cache configuration for the request.
 import { CreateRerankRouterRerankCache } from "@orq-ai/node/models/operations";
 
 let value: CreateRerankRouterRerankCache = {
-  ttl: 3600,
   type: "exact_match",
 };
 ```

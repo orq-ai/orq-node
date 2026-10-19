@@ -506,7 +506,7 @@ export const CreateImageCache$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateImageCache
 > = z.object({
-  ttl: z.number().default(1800),
+  ttl: z.number().default(3600),
   type: CreateImageType$outboundSchema,
 });
 
@@ -693,7 +693,7 @@ export const CreateImageRouterImagesGenerationsCache$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateImageRouterImagesGenerationsCache
 > = z.object({
-  ttl: z.number().default(1800),
+  ttl: z.number().default(3600),
   type: CreateImageRouterImagesGenerationsType$outboundSchema,
 });
 

@@ -2935,7 +2935,7 @@ export const ModelConfigurationCache$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ModelConfigurationCache
 > = z.object({
-  ttl: z.number().default(1800),
+  ttl: z.number().default(3600),
   type: UpdateAgentModelConfigurationType$outboundSchema,
 });
 
@@ -3737,7 +3737,7 @@ export const UpdateAgentFallbackModelConfigurationCache$outboundSchema:
     z.ZodTypeDef,
     UpdateAgentFallbackModelConfigurationCache
   > = z.object({
-    ttl: z.number().default(1800),
+    ttl: z.number().default(3600),
     type: UpdateAgentFallbackModelConfigurationType$outboundSchema,
   });
 
@@ -5112,7 +5112,7 @@ export const UpdateAgentCache$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  ttl: z.number().default(1800),
+  ttl: z.number().default(3600),
   type: UpdateAgentAgentsType$inboundSchema,
 });
 
@@ -5798,7 +5798,7 @@ export const UpdateAgentFallbackModelConfigurationAgentsCache$inboundSchema:
     z.ZodTypeDef,
     unknown
   > = z.object({
-    ttl: z.number().default(1800),
+    ttl: z.number().default(3600),
     type: UpdateAgentFallbackModelConfigurationAgentsResponseType$inboundSchema,
   });
 

@@ -2348,7 +2348,7 @@ export const StreamRunAgentModelConfigurationCache$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   StreamRunAgentModelConfigurationCache
 > = z.object({
-  ttl: z.number().default(1800),
+  ttl: z.number().default(3600),
   type: StreamRunAgentModelConfigurationType$outboundSchema,
 });
 
@@ -3185,7 +3185,7 @@ export const StreamRunAgentFallbackModelConfigurationCache$outboundSchema:
     z.ZodTypeDef,
     StreamRunAgentFallbackModelConfigurationCache
   > = z.object({
-    ttl: z.number().default(1800),
+    ttl: z.number().default(3600),
     type: StreamRunAgentFallbackModelConfigurationType$outboundSchema,
   });
 
@@ -3963,7 +3963,7 @@ export const AgentToolInputRunTools$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AgentToolInputRunTools
 > = z.object({
-  id: z.string().default("01M59QP506GMJW7M49136VWG5J"),
+  id: z.string().default("01M5A0YX056Z2HGH122E2W9N3N"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() =>

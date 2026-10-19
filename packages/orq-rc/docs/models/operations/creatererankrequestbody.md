@@ -25,7 +25,6 @@ let value: CreateRerankRequestBody = {
     ],
   },
   cache: {
-    ttl: 3600,
     type: "exact_match",
   },
   loadBalancer: {
@@ -42,7 +41,6 @@ let value: CreateRerankRequestBody = {
       },
     ],
     cache: {
-      ttl: 3600,
       type: "exact_match",
     },
     retry: {

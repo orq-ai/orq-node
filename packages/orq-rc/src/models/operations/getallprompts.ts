@@ -2635,7 +2635,7 @@ export const GetAllPromptsCache$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  ttl: z.number().default(1800),
+  ttl: z.number().default(3600),
   type: GetAllPromptsPromptsType$inboundSchema,
 });
 

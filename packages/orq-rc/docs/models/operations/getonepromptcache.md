@@ -8,7 +8,6 @@ Cache configuration for the request.
 import { GetOnePromptCache } from "@orq-ai/node/models/operations";
 
 let value: GetOnePromptCache = {
-  ttl: 3600,
   type: "exact_match",
 };
 ```

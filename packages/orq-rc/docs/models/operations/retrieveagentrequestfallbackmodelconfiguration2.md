@@ -16,7 +16,6 @@ let value: RetrieveAgentRequestFallbackModelConfiguration2 = {
       },
     ],
     cache: {
-      ttl: 3600,
       type: "exact_match",
     },
     loadBalancer: {

@@ -23,7 +23,6 @@ let value: PromptField = {
     ],
   },
   cache: {
-    ttl: 3600,
     type: "exact_match",
   },
   loadBalancer: {

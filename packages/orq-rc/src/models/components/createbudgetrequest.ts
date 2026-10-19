@@ -37,7 +37,7 @@ export type CreateBudgetRequest = {
    * @remarks
    *  for the six canonical kinds (the server derives the matching CEL),
    *  or provide `match` for a dynamic budget. Exactly one of the two
-   *  must be set; the handler enforces that invariant.
+   *  must be set.
    */
   scope?: BudgetScope | undefined;
   /**
@@ -52,7 +52,7 @@ export type CreateBudgetRequest = {
    * At least one of amount / token_limit / rate_limit.requests_per_minute
    *
    * @remarks
-   *  must be provided on the budget; the handler enforces that invariant.
+   *  must be provided on the budget.
    */
   limits?: BudgetLimits | undefined;
   /**
@@ -63,7 +63,7 @@ export type CreateBudgetRequest = {
    * Whether the budget should be active immediately. Defaults to true
    *
    * @remarks
-   *  when omitted (handler enforces).
+   *  when omitted.
    */
   isActive?: boolean | undefined;
   /**

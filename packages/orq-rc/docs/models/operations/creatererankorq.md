@@ -12,7 +12,6 @@ let value: CreateRerankOrq = {
     },
   ],
   cache: {
-    ttl: 3600,
     type: "exact_match",
   },
   retry: {

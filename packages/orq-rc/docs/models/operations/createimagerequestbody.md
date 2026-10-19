@@ -20,7 +20,6 @@ let value: CreateImageRequestBody = {
     ],
   },
   cache: {
-    ttl: 3600,
     type: "exact_match",
   },
   loadBalancer: {
@@ -67,7 +66,6 @@ let value: CreateImageRequestBody = {
       ],
     },
     cache: {
-      ttl: 3600,
       type: "exact_match",
     },
     loadBalancer: {

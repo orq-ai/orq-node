@@ -14,7 +14,6 @@ let value: ModelConfigurationParameters = {
     },
   ],
   cache: {
-    ttl: 3600,
     type: "exact_match",
   },
   loadBalancer: {

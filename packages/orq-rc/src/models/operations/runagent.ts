@@ -2367,7 +2367,7 @@ export const RunAgentModelConfigurationCache$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   RunAgentModelConfigurationCache
 > = z.object({
-  ttl: z.number().default(1800),
+  ttl: z.number().default(3600),
   type: RunAgentModelConfigurationType$outboundSchema,
 });
 
@@ -3169,7 +3169,7 @@ export const RunAgentFallbackModelConfigurationCache$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   RunAgentFallbackModelConfigurationCache
 > = z.object({
-  ttl: z.number().default(1800),
+  ttl: z.number().default(3600),
   type: RunAgentFallbackModelConfigurationType$outboundSchema,
 });
 
@@ -3904,7 +3904,7 @@ export const Tools$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Tools
 > = z.object({
-  id: z.string().default("01M59QP4ZFAR78BQPFM9DT0A6K"),
+  id: z.string().default("01M5A0YWZM9XDN3ZNHNGTXSYKA"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() => AgentToolInputRunSchema$outboundSchema),

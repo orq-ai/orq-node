@@ -8,7 +8,6 @@ Cache configuration for the request.
 import { Cache } from "@orq-ai/node/models/operations";
 
 let value: Cache = {
-  ttl: 3600,
   type: "exact_match",
 };
 ```

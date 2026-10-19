@@ -39,7 +39,6 @@ async function run() {
       ],
     },
     cache: {
-      ttl: 3600,
       type: "exact_match",
     },
     loadBalancer: {
@@ -103,7 +102,6 @@ async function run() {
       ],
     },
     cache: {
-      ttl: 3600,
       type: "exact_match",
     },
     loadBalancer: {

@@ -404,7 +404,7 @@ export const CreateRerankCache$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateRerankCache
 > = z.object({
-  ttl: z.number().default(1800),
+  ttl: z.number().default(3600),
   type: CreateRerankType$outboundSchema,
 });
 
@@ -557,7 +557,7 @@ export const CreateRerankRouterRerankCache$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateRerankRouterRerankCache
 > = z.object({
-  ttl: z.number().default(1800),
+  ttl: z.number().default(3600),
   type: CreateRerankRouterRerankType$outboundSchema,
 });
 

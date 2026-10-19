@@ -14,7 +14,6 @@ let value: ParametersT = {
     },
   ],
   cache: {
-    ttl: 3600,
     type: "exact_match",
   },
   loadBalancer: {

@@ -14,7 +14,6 @@ let value: StreamRunAgentFallbackModelConfigurationParameters = {
     },
   ],
   cache: {
-    ttl: 3600,
     type: "exact_match",
   },
   loadBalancer: {

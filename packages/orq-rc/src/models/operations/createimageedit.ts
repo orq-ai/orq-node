@@ -511,7 +511,7 @@ export const CreateImageEditCache$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateImageEditCache
 > = z.object({
-  ttl: z.number().default(1800),
+  ttl: z.number().default(3600),
   type: CreateImageEditType$outboundSchema,
 });
 
@@ -732,7 +732,7 @@ export const CreateImageEditRouterImagesEditsCache$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateImageEditRouterImagesEditsCache
 > = z.object({
-  ttl: z.number().default(1800),
+  ttl: z.number().default(3600),
   type: CreateImageEditRouterImagesEditsType$outboundSchema,
 });
 

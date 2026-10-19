@@ -3630,7 +3630,7 @@ export const CreateChatCompletionCache$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateChatCompletionCache
 > = z.object({
-  ttl: z.number().default(1800),
+  ttl: z.number().default(3600),
   type: CreateChatCompletionRouterChatCompletionsRequestType$outboundSchema,
 });
 
@@ -3959,7 +3959,7 @@ export const CreateChatCompletionRouterChatCompletionsCache$outboundSchema:
     z.ZodTypeDef,
     CreateChatCompletionRouterChatCompletionsCache
   > = z.object({
-    ttl: z.number().default(1800),
+    ttl: z.number().default(3600),
     type:
       CreateChatCompletionRouterChatCompletionsRequestRequestBodyOrqType$outboundSchema,
   });
