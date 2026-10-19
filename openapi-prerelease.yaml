@@ -2558,7 +2558,7 @@ components:
           properties:
             _id:
               type: "string"
-              default: "reasoning_01m59qp4x89pzqqqgkj2m2brwn"
+              default: "reasoning_01m5a0ywy9ncc4hch9s2n1k02w"
               description: "Unique identifier for the part. Format: reasoning_{ulid} (e.g., reasoning_01hxyz...)"
               example: "reasoning_01hxyz123abc"
             kind:
@@ -13823,7 +13823,7 @@ components:
         scope:
           allOf:
             - $ref: "#/components/schemas/BudgetScope"
-          description: "Structured scope. Mutually exclusive with `match`: provide a scope\n for the six canonical kinds (the server derives the matching CEL),\n or provide `match` for a dynamic budget. Exactly one of the two\n must be set; the handler enforces that invariant."
+          description: "Structured scope. Mutually exclusive with `match`: provide a scope\n for the six canonical kinds (the server derives the matching CEL),\n or provide `match` for a dynamic budget. Exactly one of the two\n must be set."
         match:
           allOf:
             - $ref: "#/components/schemas/BudgetMatch"
@@ -13831,14 +13831,14 @@ components:
         limits:
           allOf:
             - $ref: "#/components/schemas/BudgetLimits"
-          description: "At least one of amount / token_limit / rate_limit.requests_per_minute\n must be provided on the budget; the handler enforces that invariant."
+          description: "At least one of amount / token_limit / rate_limit.requests_per_minute\n must be provided on the budget."
         rate_limit:
           allOf:
             - $ref: "#/components/schemas/RateLimit"
           description: "Optional rate limit."
         is_active:
           type: "boolean"
-          description: "Whether the budget should be active immediately. Defaults to true\n when omitted (handler enforces)."
+          description: "Whether the budget should be active immediately. Defaults to true\n when omitted."
         expires_at:
           type: "string"
           description: "Optional expiration. When set in combination with is_active=true,\n the value MUST be in the future; the handler rejects past values."
@@ -14635,7 +14635,7 @@ components:
           description: "Plugin discriminator."
         language:
           type: "string"
-          description: "Languages, regions and entity types are checked against the live\n pii-detection capabilities catalog when the rule is saved, not pinned\n here, so a language or region the detector gains becomes writable without\n a proto change."
+          description: "Languages, regions and entity types are checked against the live\n pii-detection capabilities catalog when the rule is saved, not pinned\n here, so a language or region the detector gains becomes writable without\n a future update."
         entities:
           type: "array"
           items:
@@ -17213,7 +17213,7 @@ components:
           description: "Plugin discriminator."
         language:
           type: "string"
-          description: "Languages, regions and entity types are checked against the live\n pii-detection capabilities catalog when the rule is saved, not pinned\n here, so a language or region the detector gains becomes writable without\n a proto change."
+          description: "Languages, regions and entity types are checked against the live\n pii-detection capabilities catalog when the rule is saved, not pinned\n here, so a language or region the detector gains becomes writable without\n a future update."
         entities:
           type: "array"
           items:
@@ -26244,7 +26244,7 @@ paths:
                                 type: "string"
                                 format: "ulid"
                                 pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                                default: "01M59QP4VTHHMZNQCFVCAW3351"
+                                default: "01M5A0YWXCEX68JDB3PM05J00F"
                                 readOnly: true
                                 description: "The unique identifier of the playground knowledge base"
                               knowledge_id:
@@ -28032,7 +28032,7 @@ paths:
                                   type: "number"
                                   minimum: 1
                                   maximum: 259200
-                                  default: 1800
+                                  default: 3600
                                   description: "Time to live for cached responses in seconds. Maximum 259200 seconds (3 days)."
                                   example: 3600
                                 type:
@@ -28388,7 +28388,7 @@ paths:
                                     type: "number"
                                     minimum: 1
                                     maximum: 259200
-                                    default: 1800
+                                    default: 3600
                                     description: "Time to live for cached responses in seconds. Maximum 259200 seconds (3 days)."
                                     example: 3600
                                   type:
@@ -29209,7 +29209,7 @@ paths:
                                 type: "number"
                                 minimum: 1
                                 maximum: 259200
-                                default: 1800
+                                default: 3600
                                 description: "Time to live for cached responses in seconds. Maximum 259200 seconds (3 days)."
                                 example: 3600
                               type:
@@ -29562,7 +29562,7 @@ paths:
                                           type: "number"
                                           minimum: 1
                                           maximum: 259200
-                                          default: 1800
+                                          default: 3600
                                           description: "Time to live for cached responses in seconds. Maximum 259200 seconds (3 days)."
                                           example: 3600
                                         type:
@@ -30288,7 +30288,7 @@ paths:
                                       type: "number"
                                       minimum: 1
                                       maximum: 259200
-                                      default: 1800
+                                      default: 3600
                                       description: "Time to live for cached responses in seconds. Maximum 259200 seconds (3 days)."
                                       example: 3600
                                     type:
@@ -30641,7 +30641,7 @@ paths:
                                                 type: "number"
                                                 minimum: 1
                                                 maximum: 259200
-                                                default: 1800
+                                                default: 3600
                                                 description: "Time to live for cached responses in seconds. Maximum 259200 seconds (3 days)."
                                                 example: 3600
                                               type:
@@ -31479,7 +31479,7 @@ paths:
                                 type: "number"
                                 minimum: 1
                                 maximum: 259200
-                                default: 1800
+                                default: 3600
                                 description: "Time to live for cached responses in seconds. Maximum 259200 seconds (3 days)."
                                 example: 3600
                               type:
@@ -31832,7 +31832,7 @@ paths:
                                           type: "number"
                                           minimum: 1
                                           maximum: 259200
-                                          default: 1800
+                                          default: 3600
                                           description: "Time to live for cached responses in seconds. Maximum 259200 seconds (3 days)."
                                           example: 3600
                                         type:
@@ -32262,7 +32262,7 @@ paths:
                                   type: "number"
                                   minimum: 1
                                   maximum: 259200
-                                  default: 1800
+                                  default: 3600
                                   description: "Time to live for cached responses in seconds. Maximum 259200 seconds (3 days)."
                                   example: 3600
                                 type:
@@ -32618,7 +32618,7 @@ paths:
                                     type: "number"
                                     minimum: 1
                                     maximum: 259200
-                                    default: 1800
+                                    default: 3600
                                     description: "Time to live for cached responses in seconds. Maximum 259200 seconds (3 days)."
                                     example: 3600
                                   type:
@@ -33441,7 +33441,7 @@ paths:
                                 type: "number"
                                 minimum: 1
                                 maximum: 259200
-                                default: 1800
+                                default: 3600
                                 description: "Time to live for cached responses in seconds. Maximum 259200 seconds (3 days)."
                                 example: 3600
                               type:
@@ -33794,7 +33794,7 @@ paths:
                                           type: "number"
                                           minimum: 1
                                           maximum: 259200
-                                          default: 1800
+                                          default: 3600
                                           description: "Time to live for cached responses in seconds. Maximum 259200 seconds (3 days)."
                                           example: 3600
                                         type:
@@ -34529,7 +34529,7 @@ paths:
                                   type: "number"
                                   minimum: 1
                                   maximum: 259200
-                                  default: 1800
+                                  default: 3600
                                   description: "Time to live for cached responses in seconds. Maximum 259200 seconds (3 days)."
                                   example: 3600
                                 type:
@@ -34885,7 +34885,7 @@ paths:
                                     type: "number"
                                     minimum: 1
                                     maximum: 259200
-                                    default: 1800
+                                    default: 3600
                                     description: "Time to live for cached responses in seconds. Maximum 259200 seconds (3 days)."
                                     example: 3600
                                   type:
@@ -35601,7 +35601,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01M59QP4ZFAR78BQPFM9DT0A6K"
+                                          default: "01M5A0YWZM9XDN3ZNHNGTXSYKA"
                                         name:
                                           type: "string"
                                         description:
@@ -36148,7 +36148,7 @@ paths:
                                   type: "number"
                                   minimum: 1
                                   maximum: 259200
-                                  default: 1800
+                                  default: 3600
                                   description: "Time to live for cached responses in seconds. Maximum 259200 seconds (3 days)."
                                   example: 3600
                                 type:
@@ -36504,7 +36504,7 @@ paths:
                                     type: "number"
                                     minimum: 1
                                     maximum: 259200
-                                    default: 1800
+                                    default: 3600
                                     description: "Time to live for cached responses in seconds. Maximum 259200 seconds (3 days)."
                                     example: 3600
                                   type:
@@ -37220,7 +37220,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01M59QP506GMJW7M49136VWG5J"
+                                          default: "01M5A0YX056Z2HGH122E2W9N3N"
                                         name:
                                           type: "string"
                                         description:
@@ -38543,7 +38543,7 @@ paths:
                                   type: "number"
                                   minimum: 1
                                   maximum: 259200
-                                  default: 1800
+                                  default: 3600
                                   description: "Time to live for cached responses in seconds. Maximum 259200 seconds (3 days)."
                                   example: 3600
                                 type:
@@ -39544,7 +39544,7 @@ paths:
                           type: "number"
                           minimum: 1
                           maximum: 259200
-                          default: 1800
+                          default: 3600
                           description: "Time to live for cached responses in seconds. Maximum 259200 seconds (3 days)."
                           example: 3600
                         type:
@@ -40403,7 +40403,7 @@ paths:
                             type: "number"
                             minimum: 1
                             maximum: 259200
-                            default: 1800
+                            default: 3600
                             description: "Time to live for cached responses in seconds. Maximum 259200 seconds (3 days)."
                             example: 3600
                           type:
@@ -41556,7 +41556,7 @@ paths:
                             type: "number"
                             minimum: 1
                             maximum: 259200
-                            default: 1800
+                            default: 3600
                             description: "Time to live for cached responses in seconds. Maximum 259200 seconds (3 days)."
                             example: 3600
                           type:
@@ -42541,7 +42541,7 @@ paths:
                           type: "number"
                           minimum: 1
                           maximum: 259200
-                          default: 1800
+                          default: 3600
                           description: "Time to live for cached responses in seconds. Maximum 259200 seconds (3 days)."
                           example: 3600
                         type:
@@ -43438,7 +43438,7 @@ paths:
                             type: "number"
                             minimum: 1
                             maximum: 259200
-                            default: 1800
+                            default: 3600
                             description: "Time to live for cached responses in seconds. Maximum 259200 seconds (3 days)."
                             example: 3600
                           type:
@@ -44645,7 +44645,7 @@ paths:
                                       type: "number"
                                       minimum: 1
                                       maximum: 259200
-                                      default: 1800
+                                      default: 3600
                                       description: "Time to live for cached responses in seconds. Maximum 259200 seconds (3 days)."
                                       example: 3600
                                     type:
@@ -45799,7 +45799,7 @@ paths:
                                 type: "number"
                                 minimum: 1
                                 maximum: 259200
-                                default: 1800
+                                default: 3600
                                 description: "Time to live for cached responses in seconds. Maximum 259200 seconds (3 days)."
                                 example: 3600
                               type:
@@ -46234,7 +46234,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M59QP524AQ5BE8W2T4NGZ7KD"
+                              default: "tool_01M5A0YX1CT4ZP347FW48EBNC3"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -46335,7 +46335,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M59QP525HS5NB86X4ZMVWTT9"
+                              default: "tool_01M5A0YX1DWFWTPBH6EGG8CYNN"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -46438,7 +46438,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M59QP525ZB1M72J8Z8XHGPE6"
+                              default: "tool_01M5A0YX1EY6DN44KZ1B9TTFG2"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -46582,7 +46582,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M59QP527NEDS0H7HKG3F020W"
+                              default: "tool_01M5A0YX1E8HHEXW8ME3BQDPYD"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -47069,7 +47069,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M59QP52BQ40EFP8F6Z03Q617"
+                        default: "tool_01M5A0YX1KTKD1489B5PC7SJ7B"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -47170,7 +47170,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M59QP52CWHAJ0EJHW4AF1V2F"
+                        default: "tool_01M5A0YX1MYDG1VKJ27DZX3GR2"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -47273,7 +47273,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M59QP52DD73BY47F4FCQV8GA"
+                        default: "tool_01M5A0YX1M0DZA18E0KHESAQWE"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -47417,7 +47417,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M59QP52E3RS23WAAKB9KVQZQ"
+                        default: "tool_01M5A0YX1N96309G75E2FTXH9K"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -47921,7 +47921,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M59QP52HERHQ44XWBH4EXC5H"
+                        default: "tool_01M5A0YX1QKVH3VMYT0EX7J347"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -48022,7 +48022,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M59QP52JKMVBWESM7QFW25AG"
+                        default: "tool_01M5A0YX1R08KB381CWG3WPDY9"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -48125,7 +48125,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M59QP52KJRF2RK64Q6BCMF3J"
+                        default: "tool_01M5A0YX1RD7BEJJVCSGXE0ZD7"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -48269,7 +48269,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M59QP52M95CCPSR3TTDEA95X"
+                        default: "tool_01M5A0YX1S5R5S9XTVHEEB38B6"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -48436,7 +48436,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M59QP52VNQYX29PAGKJVPJNX"
+                        default: "tool_01M5A0YX1YFXXXKW9SQFD73KGM"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -48537,7 +48537,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M59QP52V9XSZWTN75A6KBXGM"
+                        default: "tool_01M5A0YX1Y3QE1BM0SQBR8E1Q0"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -48640,7 +48640,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M59QP52WFX66THCB54WVEV4K"
+                        default: "tool_01M5A0YX1Z2VN61NA8YFNSNKT2"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -48784,7 +48784,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M59QP52X34EW2GX631W6TSG0"
+                        default: "tool_01M5A0YX1ZZJRNT3J982XHSKDV"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -49720,7 +49720,7 @@ paths:
                           type: "number"
                           minimum: 1
                           maximum: 259200
-                          default: 1800
+                          default: 3600
                           description: "Time to live for cached responses in seconds. Maximum 259200 seconds (3 days)."
                           example: 3600
                         type:
@@ -49924,7 +49924,7 @@ paths:
                               type: "number"
                               minimum: 1
                               maximum: 259200
-                              default: 1800
+                              default: 3600
                               description: "Time to live for cached responses in seconds. Maximum 259200 seconds (3 days)."
                               example: 3600
                             type:
@@ -51550,7 +51550,7 @@ paths:
                       type: "number"
                       minimum: 1
                       maximum: 259200
-                      default: 1800
+                      default: 3600
                       description: "Time to live for cached responses in seconds. Maximum 259200 seconds (3 days)."
                       example: 3600
                     type:
@@ -51639,7 +51639,7 @@ paths:
                           type: "number"
                           minimum: 1
                           maximum: 259200
-                          default: 1800
+                          default: 3600
                           description: "Time to live for cached responses in seconds. Maximum 259200 seconds (3 days)."
                           example: 3600
                         type:
@@ -52205,7 +52205,7 @@ paths:
                           type: "number"
                           minimum: 1
                           maximum: 259200
-                          default: 1800
+                          default: 3600
                           description: "Time to live for cached responses in seconds. Maximum 259200 seconds (3 days)."
                           example: 3600
                         type:
@@ -52386,7 +52386,7 @@ paths:
                               type: "number"
                               minimum: 1
                               maximum: 259200
-                              default: 1800
+                              default: 3600
                               description: "Time to live for cached responses in seconds. Maximum 259200 seconds (3 days)."
                               example: 3600
                             type:
@@ -53299,7 +53299,7 @@ paths:
                       type: "number"
                       minimum: 1
                       maximum: 259200
-                      default: 1800
+                      default: 3600
                       description: "Time to live for cached responses in seconds. Maximum 259200 seconds (3 days)."
                       example: 3600
                     type:
@@ -53417,7 +53417,7 @@ paths:
                           type: "number"
                           minimum: 1
                           maximum: 259200
-                          default: 1800
+                          default: 3600
                           description: "Time to live for cached responses in seconds. Maximum 259200 seconds (3 days)."
                           example: 3600
                         type:
@@ -53653,7 +53653,7 @@ paths:
                       type: "number"
                       minimum: 1
                       maximum: 259200
-                      default: 1800
+                      default: 3600
                       description: "Time to live for cached responses in seconds. Maximum 259200 seconds (3 days)."
                       example: 3600
                     type:
@@ -53783,7 +53783,7 @@ paths:
                           type: "number"
                           minimum: 1
                           maximum: 259200
-                          default: 1800
+                          default: 3600
                           description: "Time to live for cached responses in seconds. Maximum 259200 seconds (3 days)."
                           example: 3600
                         type:
@@ -54026,7 +54026,7 @@ paths:
                       type: "number"
                       minimum: 1
                       maximum: 259200
-                      default: 1800
+                      default: 3600
                       description: "Time to live for cached responses in seconds. Maximum 259200 seconds (3 days)."
                       example: 3600
                     type:
@@ -54156,7 +54156,7 @@ paths:
                           type: "number"
                           minimum: 1
                           maximum: 259200
-                          default: 1800
+                          default: 3600
                           description: "Time to live for cached responses in seconds. Maximum 259200 seconds (3 days)."
                           example: 3600
                         type:
@@ -55310,7 +55310,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-10-19T09:25:37.556Z"
+                      default: "2026-10-19T12:07:41.410Z"
                       deprecated: true
                       description: "Deprecated. The date and time the item was reviewed"
                     type:
@@ -55352,7 +55352,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-10-19T09:25:37.556Z"
+                      default: "2026-10-19T12:07:41.410Z"
                       deprecated: true
                       description: "Deprecated. The date and time the item was reviewed"
                     type:
@@ -55394,7 +55394,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-10-19T09:25:37.556Z"
+                      default: "2026-10-19T12:07:41.410Z"
                       deprecated: true
                       description: "Deprecated. The date and time the item was reviewed"
                     type:
@@ -55436,7 +55436,7 @@ paths:
                     reviewed_at:
                       type: "string"
                       format: "date-time"
-                      default: "2026-10-19T09:25:37.557Z"
+                      default: "2026-10-19T12:07:41.411Z"
                       deprecated: true
                       description: "Deprecated. The date and time the item was reviewed"
                     type:
@@ -55546,7 +55546,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-10-19T09:25:29.419Z"
+                          default: "2026-10-19T12:07:35.119Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -55554,7 +55554,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-10-19T09:25:29.420Z"
+                              default: "2026-10-19T12:07:35.119Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -55624,7 +55624,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-10-19T09:25:29.419Z"
+                          default: "2026-10-19T12:07:35.119Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -55632,7 +55632,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-10-19T09:25:29.420Z"
+                              default: "2026-10-19T12:07:35.119Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -55815,7 +55815,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-10-19T09:25:29.419Z"
+                        default: "2026-10-19T12:07:35.119Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -55823,7 +55823,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-10-19T09:25:29.420Z"
+                            default: "2026-10-19T12:07:35.119Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -55893,7 +55893,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-10-19T09:25:29.419Z"
+                        default: "2026-10-19T12:07:35.119Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -55901,7 +55901,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-10-19T09:25:29.420Z"
+                            default: "2026-10-19T12:07:35.119Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -56002,7 +56002,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-10-19T09:25:29.419Z"
+                        default: "2026-10-19T12:07:35.119Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -56010,7 +56010,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-10-19T09:25:29.420Z"
+                            default: "2026-10-19T12:07:35.119Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -56080,7 +56080,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-10-19T09:25:29.419Z"
+                        default: "2026-10-19T12:07:35.119Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -56088,7 +56088,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-10-19T09:25:29.420Z"
+                            default: "2026-10-19T12:07:35.119Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -56285,7 +56285,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-10-19T09:25:29.419Z"
+                        default: "2026-10-19T12:07:35.119Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -56293,7 +56293,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-10-19T09:25:29.420Z"
+                            default: "2026-10-19T12:07:35.119Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -56363,7 +56363,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-10-19T09:25:29.419Z"
+                        default: "2026-10-19T12:07:35.119Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -56371,7 +56371,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-10-19T09:25:29.420Z"
+                            default: "2026-10-19T12:07:35.119Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -56834,7 +56834,7 @@ paths:
       x-code-samples:
         - lang: "typescript"
           label: "Node.js"
-          source: "import { Orq } from \"@orq-ai/node\";\n\nconst orq = new Orq({\n  apiKey: process.env[\"ORQ_API_KEY\"]\n});\n\nconst result = await orq.chunking.parse({\n  text: \"Your long text content here...\",\n  strategy: \"semantic\",\n  chunk_size: 256,\n  threshold: 0.8,\n  embedding_model: \"openai/text-embedding-3-small\",\n  dimensions: 512\n});\n\nconsole.log(result.chunks);"
+          source: "import { Orq } from \"@orq-ai/node\";\n\nconst orq = new Orq({\n  apiKey: process.env[\"ORQ_API_KEY\"]\n});\n\nconst result = await orq.chunking.parse({\n  text: \"Your long text content here...\",\n  strategy: \"semantic\",\n  chunkSize: 256,\n  threshold: 0.8,\n  embeddingModel: \"openai/text-embedding-3-small\",\n  dimensions: 512\n});\n\nconsole.log(result.chunks);"
         - lang: "python"
           label: "Python"
           source: "from orq_ai_sdk import Orq\n\norq = Orq(api_key=os.getenv(\"ORQ_API_KEY\"))\n\nresult = orq.chunking.parse(\n    text=\"Your long text content here...\",\n    strategy=\"semantic\",\n    chunk_size=256,\n    threshold=0.8,\n    embedding_model=\"openai/text-embedding-3-small\",\n    dimensions=512\n)\n\nfor chunk in result.chunks:\n    print(f\"Chunk {chunk.index}: {chunk.text[:50]}...\")"
@@ -64815,7 +64815,7 @@ paths:
       x-code-samples:
         - label: "Node.js"
           lang: "typescript"
-          source: "await orq.models.create({\n  id: \"...\",\n  display_name: \"My custom model\",\n  model_id: \"my-model\",\n  provider: \"openai\",\n  model_type: \"chat\",\n  model_developer: \"openai\",\n  model_family: \"gpt\",\n  input_cost: 0,\n  output_cost: 0,\n  has_functions: false,\n  metadata: { is_private: true, region: \"us\" },\n  parameters: [],\n  configuration: { provider: \"openai\", api_key: \"sk-...\" },\n});"
+          source: "await orq.models.create({\n  id: \"...\",\n  displayName: \"My custom model\",\n  modelId: \"my-model\",\n  provider: \"openai\",\n  modelType: \"chat\",\n  modelDeveloper: \"openai\",\n  modelFamily: \"gpt\",\n  inputCost: 0,\n  outputCost: 0,\n  hasFunctions: false,\n  metadata: { isPrivate: true, region: \"us\" },\n  parameters: [],\n  configuration: { provider: \"openai\", api_key: \"sk-...\" },\n});"
       x-speakeasy-group: "models"
       x-speakeasy-name-override: "create"
       security:
@@ -65025,7 +65025,7 @@ paths:
       x-code-samples:
         - label: "Node.js"
           lang: "typescript"
-          source: "await orq.models.createAwsBedrock({\n  display_name: \"My Bedrock Model\",\n  model_id: \"arn:aws:bedrock:us-east-1:123456789012:inference-profile/anthropic.claude-3-sonnet-20240229-v1:0\",\n  region: \"us-east-1\",\n  model_developer: \"anthropic\",\n  auth_mode: \"integration\",\n  integration_id: \"int_...\",\n});"
+          source: "await orq.models.createAwsBedrock({\n  displayName: \"My Bedrock Model\",\n  modelId: \"arn:aws:bedrock:us-east-1:123456789012:inference-profile/anthropic.claude-3-sonnet-20240229-v1:0\",\n  region: \"us-east-1\",\n  modelDeveloper: \"anthropic\",\n  authMode: \"integration\",\n  integrationId: \"int_...\",\n});"
       x-speakeasy-group: "models"
       x-speakeasy-name-override: "createAwsBedrock"
       security:
@@ -65077,7 +65077,7 @@ paths:
       x-code-samples:
         - label: "Node.js"
           lang: "typescript"
-          source: "await orq.models.validateAwsBedrock({\n  inference_profile_arn: \"arn:aws:bedrock:us-east-1:123456789012:inference-profile/anthropic.claude-3-sonnet-20240229-v1:0\",\n  region: \"us-east-1\",\n  auth_mode: \"pod-identity\",\n});"
+          source: "await orq.models.validateAwsBedrock({\n  inferenceProfileArn: \"arn:aws:bedrock:us-east-1:123456789012:inference-profile/anthropic.claude-3-sonnet-20240229-v1:0\",\n  region: \"us-east-1\",\n  authMode: \"pod-identity\",\n});"
       x-speakeasy-group: "models"
       x-speakeasy-name-override: "validateAwsBedrock"
       security:
@@ -65283,7 +65283,7 @@ paths:
       x-code-samples:
         - label: "Node.js"
           lang: "typescript"
-          source: "await orq.models.updateAwsBedrock({\n  id: \"019d...\",\n  display_name: \"Updated name\",\n  region: \"us-east-1\",\n});"
+          source: "await orq.models.updateAwsBedrock({\n  id: \"019d...\",\n  displayName: \"Updated name\",\n  region: \"us-east-1\",\n});"
       x-speakeasy-group: "models"
       x-speakeasy-name-override: "updateAwsBedrock"
       security:
@@ -65344,7 +65344,7 @@ paths:
       x-code-samples:
         - label: "Node.js"
           lang: "typescript"
-          source: "await orq.models.azureFoundryDeployments({\n  provider: \"azure\",\n  base_url: \"https://my-resource.openai.azure.com/openai/v1\",\n  api_key: \"...\",\n});"
+          source: "await orq.models.azureFoundryDeployments({\n  provider: \"azure\",\n  baseUrl: \"https://my-resource.openai.azure.com/openai/v1\",\n  apiKey: \"...\",\n});"
       x-speakeasy-group: "models"
       x-speakeasy-name-override: "azureFoundryDeployments"
       security:
@@ -65388,7 +65388,7 @@ paths:
       x-code-samples:
         - label: "Node.js"
           lang: "typescript"
-          source: "await orq.models.importLitellm([\n  {\n    model_name: \"gpt-4o-proxy\",\n    litellm_params: {\n      use_in_pass_through: false,\n      use_litellm_proxy: true,\n      merge_reasoning_content_in_choices: false,\n      model: \"openai/gpt-4o\",\n    },\n    model_info: {\n      id: null, db_model: null, key: null, litellm_provider: \"openai\", mode: \"chat\",\n      input_cost_per_token: 0.0000025, output_cost_per_token: 0.00001,\n      supports_function_calling: true,\n      supported_openai_params: [\"temperature\", \"max_tokens\", \"top_p\"],\n    },\n  },\n]);"
+          source: "await orq.models.importLitellm([\n  {\n    modelName: \"gpt-4o-proxy\",\n    litellmParams: {\n      useInPassThrough: false,\n      useLitellmProxy: true,\n      mergeReasoningContentInChoices: false,\n      model: \"openai/gpt-4o\",\n    },\n    modelInfo: {\n      id: null, dbModel: null, key: null, litellmProvider: \"openai\", mode: \"chat\",\n      inputCostPerToken: 0.0000025, outputCostPerToken: 0.00001,\n      supportsFunctionCalling: true,\n      supportedOpenaiParams: [\"temperature\", \"max_tokens\", \"top_p\"],\n    },\n  },\n]);"
       x-speakeasy-group: "models"
       x-speakeasy-name-override: "importLitellm"
       security:
@@ -65619,7 +65619,7 @@ paths:
       x-code-samples:
         - label: "Node.js"
           lang: "typescript"
-          source: "await orq.models.createOpenaiLike({\n  display_name: \"My Local Model\",\n  region: \"us\",\n  base_url: \"https://api.example.com\",\n  model_id: \"my-model\",\n  api_key: \"sk-...\",\n  model_type: \"chat\",\n  input_cost: 0,\n  output_cost: 0,\n});"
+          source: "await orq.models.createOpenaiLike({\n  displayName: \"My Local Model\",\n  region: \"us\",\n  baseUrl: \"https://api.example.com\",\n  modelId: \"my-model\",\n  apiKey: \"sk-...\",\n  modelType: \"chat\",\n  inputCost: 0,\n  outputCost: 0,\n});"
       x-speakeasy-group: "models"
       x-speakeasy-name-override: "createOpenaiLike"
       security:
@@ -65818,7 +65818,7 @@ paths:
       x-code-samples:
         - label: "Node.js"
           lang: "typescript"
-          source: "await orq.models.updateOpenaiLike({\n  id: \"019d...\",\n  display_name: \"My Renamed Model\",\n  region: \"us\",\n  model_type: \"chat\",\n  input_cost: 0.002,\n  output_cost: 0.004,\n});"
+          source: "await orq.models.updateOpenaiLike({\n  id: \"019d...\",\n  displayName: \"My Renamed Model\",\n  region: \"us\",\n  modelType: \"chat\",\n  inputCost: 0.002,\n  outputCost: 0.004,\n});"
       x-speakeasy-group: "models"
       x-speakeasy-name-override: "updateOpenaiLike"
       security:
@@ -65869,7 +65869,7 @@ paths:
       x-code-samples:
         - label: "Node.js"
           lang: "typescript"
-          source: "await orq.models.validate({\n  provider: \"azure\",\n  endpoint: \"https://my-deployment.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-06-01\",\n  api_key: \"...\",\n});"
+          source: "await orq.models.validate({\n  provider: \"azure\",\n  endpoint: \"https://my-deployment.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2024-06-01\",\n  apiKey: \"...\",\n});"
       x-speakeasy-group: "models"
       x-speakeasy-name-override: "validate"
       security:
@@ -66019,7 +66019,7 @@ paths:
       x-code-samples:
         - label: "Node.js"
           lang: "typescript"
-          source: "await orq.models.createVertex({\n  display_name: \"My Vertex Gemini\",\n  configuration: {\n    projectId: \"my-gcp-project\",\n    location: \"us-central1\",\n    serviceAccount: { type: \"service_account\", project_id: \"...\" },\n    modelConfiguration: {\n      id: \"gemini-2.0-flash\",\n      inputCost: 0,\n      outputCost: 0,\n      parameters: {\n        temperature: { min: 0, max: 2 },\n        maxTokens: { min: 1, max: 8192 },\n        topP: { min: 0, max: 1 },\n      },\n      capabilities: { supportToolCalling: true, structuredOutput: true, vision: false },\n    },\n  },\n});"
+          source: "await orq.models.createVertex({\n  displayName: \"My Vertex Gemini\",\n  configuration: {\n    projectId: \"my-gcp-project\",\n    location: \"us-central1\",\n    serviceAccount: { type: \"service_account\", project_id: \"...\" },\n    modelConfiguration: {\n      id: \"gemini-2.0-flash\",\n      inputCost: 0,\n      outputCost: 0,\n      parameters: {\n        temperature: { min: 0, max: 2 },\n        maxTokens: { min: 1, max: 8192 },\n        topP: { min: 0, max: 1 },\n      },\n      capabilities: { supportToolCalling: true, structuredOutput: true, vision: false },\n    },\n  },\n});"
       x-speakeasy-group: "models"
       x-speakeasy-name-override: "createVertex"
       security:
