@@ -1,6 +1,6 @@
 # BudgetScopeRestResponse
 
-Closed oneof of workspace, project, identity, api_key, provider, or model. Exactly one variant must be set. Variants are ordered by enforcement precedence (most specific to most general).
+Closed oneof of workspace, project, identity, api_key, provider, or model. Exactly one variant must be set.
 
 ## Example Usage
 
