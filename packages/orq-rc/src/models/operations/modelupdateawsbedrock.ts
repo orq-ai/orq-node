@@ -17,6 +17,7 @@ export type ModelUpdateAwsBedrockRequestBody = {
   benchmarkModel?: string | undefined;
   cacheReadCost?: number | undefined;
   cacheWriteCost?: number | undefined;
+  configuration?: components.PrivateModelConfiguration | undefined;
   description?: string | undefined;
   displayName?: string | undefined;
   hasReasoning?: boolean | undefined;
@@ -92,6 +93,7 @@ export type ModelUpdateAwsBedrockRequestBody$Outbound = {
   benchmark_model?: string | undefined;
   cache_read_cost?: number | undefined;
   cache_write_cost?: number | undefined;
+  configuration?: components.PrivateModelConfiguration$Outbound | undefined;
   description?: string | undefined;
   display_name?: string | undefined;
   has_reasoning?: boolean | undefined;
@@ -125,6 +127,7 @@ export const ModelUpdateAwsBedrockRequestBody$outboundSchema: z.ZodType<
   benchmarkModel: z.string().optional(),
   cacheReadCost: z.number().optional(),
   cacheWriteCost: z.number().optional(),
+  configuration: components.PrivateModelConfiguration$outboundSchema.optional(),
   description: z.string().optional(),
   displayName: z.string().optional(),
   hasReasoning: z.boolean().optional(),

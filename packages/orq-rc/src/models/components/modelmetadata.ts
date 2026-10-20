@@ -43,6 +43,7 @@ export type ModelMetadata = {
   contextWindow?: number | undefined;
   costEfficiencyRating?: number | undefined;
   costPerImage?: number | undefined;
+  defaultSpeechResponseFormat?: string | undefined;
   deprecationDate?: string | undefined;
   embeddingDimensions?: number | undefined;
   extendedContextPricingMode?: string | undefined;
@@ -179,6 +180,7 @@ export const ModelMetadata$inboundSchema: z.ZodType<
   context_window: z.number().int().optional(),
   cost_efficiency_rating: z.number().int().optional(),
   cost_per_image: z.number().optional(),
+  default_speech_response_format: z.string().optional(),
   deprecation_date: z.string().optional(),
   embedding_dimensions: z.number().int().optional(),
   extended_context_pricing_mode: z.string().optional(),
@@ -309,6 +311,7 @@ export const ModelMetadata$inboundSchema: z.ZodType<
     "context_window": "contextWindow",
     "cost_efficiency_rating": "costEfficiencyRating",
     "cost_per_image": "costPerImage",
+    "default_speech_response_format": "defaultSpeechResponseFormat",
     "deprecation_date": "deprecationDate",
     "embedding_dimensions": "embeddingDimensions",
     "extended_context_pricing_mode": "extendedContextPricingMode",
@@ -440,6 +443,7 @@ export type ModelMetadata$Outbound = {
   context_window?: number | undefined;
   cost_efficiency_rating?: number | undefined;
   cost_per_image?: number | undefined;
+  default_speech_response_format?: string | undefined;
   deprecation_date?: string | undefined;
   embedding_dimensions?: number | undefined;
   extended_context_pricing_mode?: string | undefined;
@@ -578,6 +582,7 @@ export const ModelMetadata$outboundSchema: z.ZodType<
   contextWindow: z.number().int().optional(),
   costEfficiencyRating: z.number().int().optional(),
   costPerImage: z.number().optional(),
+  defaultSpeechResponseFormat: z.string().optional(),
   deprecationDate: z.string().optional(),
   embeddingDimensions: z.number().int().optional(),
   extendedContextPricingMode: z.string().optional(),
@@ -708,6 +713,7 @@ export const ModelMetadata$outboundSchema: z.ZodType<
     contextWindow: "context_window",
     costEfficiencyRating: "cost_efficiency_rating",
     costPerImage: "cost_per_image",
+    defaultSpeechResponseFormat: "default_speech_response_format",
     deprecationDate: "deprecation_date",
     embeddingDimensions: "embedding_dimensions",
     extendedContextPricingMode: "extended_context_pricing_mode",

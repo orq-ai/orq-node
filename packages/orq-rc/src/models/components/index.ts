@@ -488,6 +488,7 @@ export * from "./previewchunksmetadata.js";
 export * from "./price.js";
 export * from "./pricing.js";
 export * from "./pricingvariant.js";
+export * from "./privatemodelconfiguration.js";
 export * from "./processingattempt.js";
 export * from "./processingerror.js";
 export * from "./project.js";

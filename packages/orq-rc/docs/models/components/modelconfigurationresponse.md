@@ -26,6 +26,7 @@ let value: ModelConfigurationResponse = {
 | `isOpenaiCompatible`    | *boolean*               | :heavy_minus_sign:      | N/A                     |
 | `isTunedModel`          | *boolean*               | :heavy_minus_sign:      | N/A                     |
 | `location`              | *string*                | :heavy_minus_sign:      | N/A                     |
+| `modelId`               | *string*                | :heavy_minus_sign:      | N/A                     |
 | `projectId`             | *string*                | :heavy_minus_sign:      | N/A                     |
 | `provider`              | *string*                | :heavy_check_mark:      | N/A                     |
 | `region`                | *string*                | :heavy_minus_sign:      | N/A                     |

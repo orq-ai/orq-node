@@ -18,6 +18,7 @@ export type ModelCreateAwsBedrockRequestBody = {
   benchmarkModel?: string | undefined;
   cacheReadCost?: number | undefined;
   cacheWriteCost?: number | undefined;
+  configuration?: components.PrivateModelConfiguration | undefined;
   description?: string | undefined;
   displayName: string;
   hasReasoning?: boolean | undefined;
@@ -26,6 +27,9 @@ export type ModelCreateAwsBedrockRequestBody = {
   maxTokens?: number | undefined;
   modelDeveloper: string;
   modelFamily?: string | undefined;
+  /**
+   * Immutable workspace-unique slug when configuration.model_id is supplied.
+   */
   modelId: string;
   modelType?: string | undefined;
   outputCost?: number | undefined;
@@ -88,6 +92,7 @@ export type ModelCreateAwsBedrockRequestBody$Outbound = {
   benchmark_model?: string | undefined;
   cache_read_cost?: number | undefined;
   cache_write_cost?: number | undefined;
+  configuration?: components.PrivateModelConfiguration$Outbound | undefined;
   description?: string | undefined;
   display_name: string;
   has_reasoning?: boolean | undefined;
@@ -124,6 +129,7 @@ export const ModelCreateAwsBedrockRequestBody$outboundSchema: z.ZodType<
   benchmarkModel: z.string().optional(),
   cacheReadCost: z.number().optional(),
   cacheWriteCost: z.number().optional(),
+  configuration: components.PrivateModelConfiguration$outboundSchema.optional(),
   description: z.string().optional(),
   displayName: z.string(),
   hasReasoning: z.boolean().optional(),

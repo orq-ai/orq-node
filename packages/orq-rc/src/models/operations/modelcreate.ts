@@ -19,6 +19,9 @@ export type ModelCreateRequestBody = {
   metadata: components.ModelMetadata;
   modelDeveloper: string;
   modelFamily: string;
+  /**
+   * Immutable workspace-unique slug when configuration.model_id is supplied.
+   */
   modelId: string;
   modelType: string;
   outputCost: number;

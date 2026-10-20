@@ -15,6 +15,10 @@ export type ModelUpdateRequestBody = {
   hasFunctions?: boolean | undefined;
   inputCost?: number | undefined;
   metadata?: components.ModelMetadata | undefined;
+  /**
+   * Immutable private-model slug.
+   */
+  modelId?: string | undefined;
   modelType?: string | undefined;
   outputCost?: number | undefined;
   parameters?: Array<components.UpdateModelParameter> | undefined;
@@ -73,6 +77,7 @@ export type ModelUpdateRequestBody$Outbound = {
   has_functions?: boolean | undefined;
   input_cost?: number | undefined;
   metadata?: components.ModelMetadata$Outbound | undefined;
+  model_id?: string | undefined;
   model_type?: string | undefined;
   output_cost?: number | undefined;
   parameters?: Array<components.UpdateModelParameter$Outbound> | undefined;
@@ -89,6 +94,7 @@ export const ModelUpdateRequestBody$outboundSchema: z.ZodType<
   hasFunctions: z.boolean().optional(),
   inputCost: z.number().optional(),
   metadata: components.ModelMetadata$outboundSchema.optional(),
+  modelId: z.string().optional(),
   modelType: z.string().optional(),
   outputCost: z.number().optional(),
   parameters: z.array(components.UpdateModelParameter$outboundSchema)
@@ -99,6 +105,7 @@ export const ModelUpdateRequestBody$outboundSchema: z.ZodType<
     displayName: "display_name",
     hasFunctions: "has_functions",
     inputCost: "input_cost",
+    modelId: "model_id",
     modelType: "model_type",
     outputCost: "output_cost",
   });

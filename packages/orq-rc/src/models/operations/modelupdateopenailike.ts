@@ -14,6 +14,7 @@ export type ModelUpdateOpenAILikeRequestBody = {
   benchmarkModel?: string | undefined;
   cacheReadCost?: number | undefined;
   cacheWriteCost?: number | undefined;
+  configuration?: components.PrivateModelConfiguration | undefined;
   costPerImage?: number | undefined;
   description?: string | undefined;
   displayName: string;
@@ -83,6 +84,7 @@ export type ModelUpdateOpenAILikeRequestBody$Outbound = {
   benchmark_model?: string | undefined;
   cache_read_cost?: number | undefined;
   cache_write_cost?: number | undefined;
+  configuration?: components.PrivateModelConfiguration$Outbound | undefined;
   cost_per_image?: number | undefined;
   description?: string | undefined;
   display_name: string;
@@ -110,6 +112,7 @@ export const ModelUpdateOpenAILikeRequestBody$outboundSchema: z.ZodType<
   benchmarkModel: z.string().optional(),
   cacheReadCost: z.number().optional(),
   cacheWriteCost: z.number().optional(),
+  configuration: components.PrivateModelConfiguration$outboundSchema.optional(),
   costPerImage: z.number().optional(),
   description: z.string().optional(),
   displayName: z.string(),

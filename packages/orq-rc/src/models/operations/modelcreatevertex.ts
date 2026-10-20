@@ -13,6 +13,10 @@ export type ModelCreateVertexRequestBody = {
   benchmarkModel?: string | undefined;
   configuration: components.VertexConfiguration;
   displayName: string;
+  /**
+   * Immutable private-model slug; defaults to display_name.
+   */
+  modelId?: string | undefined;
 };
 
 /**
@@ -58,6 +62,7 @@ export type ModelCreateVertexRequestBody$Outbound = {
   benchmark_model?: string | undefined;
   configuration: components.VertexConfiguration$Outbound;
   display_name: string;
+  model_id?: string | undefined;
 };
 
 /** @internal */
@@ -69,10 +74,12 @@ export const ModelCreateVertexRequestBody$outboundSchema: z.ZodType<
   benchmarkModel: z.string().optional(),
   configuration: components.VertexConfiguration$outboundSchema,
   displayName: z.string(),
+  modelId: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     benchmarkModel: "benchmark_model",
     displayName: "display_name",
+    modelId: "model_id",
   });
 });
 
