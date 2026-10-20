@@ -211,8 +211,6 @@ export * from "./policyget.js";
 export * from "./policylist.js";
 export * from "./policyupdate.js";
 export * from "./postv2feedback.js";
-export * from "./postv2feedbackevaluation.js";
-export * from "./postv2feedbackevaluationremove.js";
 export * from "./postv2feedbackremove.js";
 export * from "./postv2humanevalsets.js";
 export * from "./postv2routerocr.js";

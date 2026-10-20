@@ -168,7 +168,7 @@ export type DeploymentInvokeMessageRole = ClosedEnum<
   typeof DeploymentInvokeMessageRole
 >;
 
-export type Message3 = {
+export type Three = {
   type: "image";
   /**
    * The role of the prompt message
@@ -282,11 +282,11 @@ export type Message1 = {
   redactedReasoning?: string | undefined;
 };
 
-export type Message = Message1 | Message2 | Message3;
+export type Message = Message1 | Message2 | Three;
 
 export type Choices = {
   index: number;
-  message: Message1 | Message2 | Message3;
+  message: Message1 | Message2 | Three;
   finishReason?: string | null | undefined;
 };
 
@@ -517,23 +517,20 @@ export const DeploymentInvokeMessageRole$inboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(DeploymentInvokeMessageRole);
 
 /** @internal */
-export const Message3$inboundSchema: z.ZodType<
-  Message3,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  type: z.literal("image"),
-  role: DeploymentInvokeMessageRole$inboundSchema,
-  url: z.string(),
-});
+export const Three$inboundSchema: z.ZodType<Three, z.ZodTypeDef, unknown> = z
+  .object({
+    type: z.literal("image"),
+    role: DeploymentInvokeMessageRole$inboundSchema,
+    url: z.string(),
+  });
 
-export function message3FromJSON(
+export function threeFromJSON(
   jsonString: string,
-): SafeParseResult<Message3, SDKValidationError> {
+): SafeParseResult<Three, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Message3$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Message3' from JSON`,
+    (x) => Three$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Three' from JSON`,
   );
 }
 
@@ -659,7 +656,7 @@ export const Message$inboundSchema: z.ZodType<Message, z.ZodTypeDef, unknown> =
   z.union([
     z.lazy(() => Message1$inboundSchema),
     z.lazy(() => Message2$inboundSchema),
-    z.lazy(() => Message3$inboundSchema),
+    z.lazy(() => Three$inboundSchema),
   ]);
 
 export function messageFromJSON(
@@ -679,7 +676,7 @@ export const Choices$inboundSchema: z.ZodType<Choices, z.ZodTypeDef, unknown> =
     message: z.union([
       z.lazy(() => Message1$inboundSchema),
       z.lazy(() => Message2$inboundSchema),
-      z.lazy(() => Message3$inboundSchema),
+      z.lazy(() => Three$inboundSchema),
     ]),
     finish_reason: z.nullable(z.string()).optional(),
   }).transform((v) => {

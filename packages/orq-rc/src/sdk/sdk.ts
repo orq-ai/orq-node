@@ -83,11 +83,6 @@ export class Orq extends ClientSDK {
     return (this._router ??= new Router(this._options));
   }
 
-  private _feedback?: Feedback;
-  get feedback(): Feedback {
-    return (this._feedback ??= new Feedback(this._options));
-  }
-
   private _humanReviewSets?: HumanReviewSets;
   get humanReviewSets(): HumanReviewSets {
     return (this._humanReviewSets ??= new HumanReviewSets(this._options));
@@ -131,6 +126,11 @@ export class Orq extends ClientSDK {
   private _annotations?: Annotations;
   get annotations(): Annotations {
     return (this._annotations ??= new Annotations(this._options));
+  }
+
+  private _feedback?: Feedback;
+  get feedback(): Feedback {
+    return (this._feedback ??= new Feedback(this._options));
   }
 
   private _logs?: Logs;

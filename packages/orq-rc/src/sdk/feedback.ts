@@ -3,9 +3,7 @@
  */
 
 import { feedbackCreate } from "../funcs/feedbackCreate.js";
-import { feedbackCreateEvaluation } from "../funcs/feedbackCreateEvaluation.js";
 import { feedbackRemove } from "../funcs/feedbackRemove.js";
-import { feedbackRemoveEvaluation } from "../funcs/feedbackRemoveEvaluation.js";
 import { feedbackSubmit } from "../funcs/feedbackSubmit.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as components from "../models/components/index.js";
@@ -13,34 +11,6 @@ import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
 export class Feedback extends ClientSDK {
-  /**
-   * @deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
-   */
-  async removeEvaluation(
-    request?: operations.PostV2FeedbackEvaluationRemoveRequestBody | undefined,
-    options?: RequestOptions,
-  ): Promise<void> {
-    return unwrapAsync(feedbackRemoveEvaluation(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * @deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
-   */
-  async createEvaluation(
-    request?: operations.PostV2FeedbackEvaluationRequestBody | undefined,
-    options?: RequestOptions,
-  ): Promise<void> {
-    return unwrapAsync(feedbackCreateEvaluation(
-      this,
-      request,
-      options,
-    ));
-  }
-
   async create(
     request?: operations.PostV2FeedbackRequestBody | undefined,
     options?: RequestOptions,

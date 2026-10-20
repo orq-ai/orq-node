@@ -28,6 +28,11 @@ import { Result } from "../types/fp.js";
 
 /**
  * Get a human review set by ID
+ *
+ * @remarks
+ * Deprecated: Human Review Sets are replaced by project-level human reviews (Annotations) and will be removed in release 4.18.
+ *
+ * @deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
  */
 export function humanReviewSetsGet(
   client: OrqCore,
