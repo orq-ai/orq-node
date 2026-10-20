@@ -2558,7 +2558,7 @@ components:
           properties:
             _id:
               type: "string"
-              default: "reasoning_01m5c9y94taxk6dax1ex04fybz"
+              default: "reasoning_01m5ca2hngr00qzqmm7qc861bq"
               description: "Unique identifier for the part. Format: reasoning_{ulid} (e.g., reasoning_01hxyz...)"
               example: "reasoning_01hxyz123abc"
             kind:
@@ -26249,7 +26249,7 @@ paths:
                                 type: "string"
                                 format: "ulid"
                                 pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                                default: "01M5C9Y93EFHXH4MHQKD328HFE"
+                                default: "01M5CA2HM4Z6GQ3PKXHXG7P6P3"
                                 readOnly: true
                                 description: "The unique identifier of the playground knowledge base"
                               knowledge_id:
@@ -35606,7 +35606,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01M5C9Y96Q72X7NFNJRMX251HK"
+                                          default: "01M5CA2HQFAEQD8DJGJ5WT12P3"
                                         name:
                                           type: "string"
                                         description:
@@ -37225,7 +37225,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01M5C9Y97FC4VCP8F5KFETZ3WA"
+                                          default: "01M5CA2HR7707BRHC6W26CAJR8"
                                         name:
                                           type: "string"
                                         description:
@@ -46239,7 +46239,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M5C9Y9995YR6YCNYXDM5BYXB"
+                              default: "tool_01M5CA2HT1Y8PY9H7AVWTZCAP9"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -46340,7 +46340,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M5C9Y99ARXWNAHMEWB304EX5"
+                              default: "tool_01M5CA2HT2VWMWVR07C6CTBN2G"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -46443,7 +46443,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M5C9Y99B13N2HB4115NQMF39"
+                              default: "tool_01M5CA2HT37A81Z54YNZ88CZPM"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -46587,7 +46587,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M5C9Y99CQB8HZ3VMPFWJ52X4"
+                              default: "tool_01M5CA2HT4ZD43J103VMM62DTR"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -47074,7 +47074,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M5C9Y99HKDMWBG1C458C9ERZ"
+                        default: "tool_01M5CA2HTBB450S99S6VVQZXAZ"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -47175,7 +47175,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M5C9Y99KF8ZF3JZYK4Y1PSMF"
+                        default: "tool_01M5CA2HTBD9X3JRNE4RFQBHCE"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -47278,7 +47278,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M5C9Y99M58VG6N95H67X2FTQ"
+                        default: "tool_01M5CA2HTC099X2VE2474PCD0X"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -47422,7 +47422,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M5C9Y99NFST48JN9DXM38BRQ"
+                        default: "tool_01M5CA2HTDMSGC0DT6CEP5VFA6"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -47926,7 +47926,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M5C9Y99RXZFTAE287QG6FCYN"
+                        default: "tool_01M5CA2HTGB5XWC9WCH81ZPY8K"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -48027,7 +48027,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M5C9Y99SN3AYDP188GPH20BR"
+                        default: "tool_01M5CA2HTHXB5NHK7Y4KX19NKX"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -48130,7 +48130,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M5C9Y99SVJBJXQ5APVF3DAJY"
+                        default: "tool_01M5CA2HTJXND9ZWRTEJ0NNQ2K"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -48274,7 +48274,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M5C9Y99TZVY44XQHRSVR43Z3"
+                        default: "tool_01M5CA2HTK7J3JGJVNGMD1CYFJ"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -48441,7 +48441,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M5C9Y9A13863FNXNSQ7BM8TR"
+                        default: "tool_01M5CA2HTTAWT44443T01ZYMHN"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -48542,7 +48542,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M5C9Y9A2QFRATYYX8Z7FBG8E"
+                        default: "tool_01M5CA2HTV8GNHF9XDGK2DPCBS"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -48645,7 +48645,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M5C9Y9A3T1VSQ8ASNHA7YPCA"
+                        default: "tool_01M5CA2HTWN8NAVJF2B9VA6EQS"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -48789,7 +48789,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M5C9Y9A4JKB1YN0Q1V6YMDT5"
+                        default: "tool_01M5CA2HTX35ED4D7RTGHGF9CQ"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -55242,235 +55242,6 @@ paths:
                 $ref: "#/components/schemas/APIErrorResponse"
       security:
         - ApiKey: []
-  /v2/feedback/evaluation/remove:
-    post:
-      tags:
-        - "Feedback"
-      deprecated: true
-      x-speakeasy-group: "feedback"
-      x-speakeasy-name-override: "removeEvaluation"
-      x-cli-group: "feedback"
-      x-cli-name: "evaluationRemove"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: "object"
-              properties:
-                id:
-                  type: "string"
-                  format: "ulid"
-                trace_id:
-                  type: "string"
-              required:
-                - "id"
-                - "trace_id"
-      responses:
-        "200":
-          description: "Event has been dispatched to delete the evaluation"
-        "401":
-          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
-      security:
-        - ApiKey: []
-  /v2/feedback/evaluation:
-    post:
-      tags:
-        - "Feedback"
-      deprecated: true
-      x-speakeasy-group: "feedback"
-      x-speakeasy-name-override: "createEvaluation"
-      x-cli-group: "feedback"
-      x-cli-name: "evaluation"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              oneOf:
-                - type: "object"
-                  properties:
-                    id:
-                      type: "string"
-                      description: "The unique identifier of the human evaluation"
-                    evaluation_type:
-                      type: "string"
-                      enum:
-                        - "human_review"
-                      description: "The type of evaluation"
-                    human_review_id:
-                      type: "string"
-                      description: "The unique identifier of the human review. Omitted on corrections, which inherit the parent evaluator output schema."
-                    source:
-                      type: "string"
-                      enum:
-                        - "orq"
-                        - "external"
-                      default: "orq"
-                    explanation:
-                      type: "string"
-                      description: "Optional free-text explanation of the value"
-                    reviewed_at:
-                      type: "string"
-                      format: "date-time"
-                      default: "2026-10-20T09:23:07.253Z"
-                      deprecated: true
-                      description: "Deprecated. The date and time the item was reviewed"
-                    type:
-                      type: "string"
-                      enum:
-                        - "string"
-                    value:
-                      type: "string"
-                    trace_id:
-                      type: "string"
-                  required:
-                    - "id"
-                    - "evaluation_type"
-                    - "type"
-                    - "value"
-                    - "trace_id"
-                - type: "object"
-                  properties:
-                    id:
-                      type: "string"
-                      description: "The unique identifier of the human evaluation"
-                    evaluation_type:
-                      type: "string"
-                      enum:
-                        - "human_review"
-                      description: "The type of evaluation"
-                    human_review_id:
-                      type: "string"
-                      description: "The unique identifier of the human review. Omitted on corrections, which inherit the parent evaluator output schema."
-                    source:
-                      type: "string"
-                      enum:
-                        - "orq"
-                        - "external"
-                      default: "orq"
-                    explanation:
-                      type: "string"
-                      description: "Optional free-text explanation of the value"
-                    reviewed_at:
-                      type: "string"
-                      format: "date-time"
-                      default: "2026-10-20T09:23:07.253Z"
-                      deprecated: true
-                      description: "Deprecated. The date and time the item was reviewed"
-                    type:
-                      type: "string"
-                      enum:
-                        - "number"
-                    value:
-                      type: "number"
-                    trace_id:
-                      type: "string"
-                  required:
-                    - "id"
-                    - "evaluation_type"
-                    - "type"
-                    - "value"
-                    - "trace_id"
-                - type: "object"
-                  properties:
-                    id:
-                      type: "string"
-                      description: "The unique identifier of the human evaluation"
-                    evaluation_type:
-                      type: "string"
-                      enum:
-                        - "human_review"
-                      description: "The type of evaluation"
-                    human_review_id:
-                      type: "string"
-                      description: "The unique identifier of the human review. Omitted on corrections, which inherit the parent evaluator output schema."
-                    source:
-                      type: "string"
-                      enum:
-                        - "orq"
-                        - "external"
-                      default: "orq"
-                    explanation:
-                      type: "string"
-                      description: "Optional free-text explanation of the value"
-                    reviewed_at:
-                      type: "string"
-                      format: "date-time"
-                      default: "2026-10-20T09:23:07.253Z"
-                      deprecated: true
-                      description: "Deprecated. The date and time the item was reviewed"
-                    type:
-                      type: "string"
-                      enum:
-                        - "boolean"
-                    value:
-                      type: "boolean"
-                    trace_id:
-                      type: "string"
-                  required:
-                    - "id"
-                    - "evaluation_type"
-                    - "type"
-                    - "value"
-                    - "trace_id"
-                - type: "object"
-                  properties:
-                    id:
-                      type: "string"
-                      description: "The unique identifier of the human evaluation"
-                    evaluation_type:
-                      type: "string"
-                      enum:
-                        - "human_review"
-                      description: "The type of evaluation"
-                    human_review_id:
-                      type: "string"
-                      description: "The unique identifier of the human review. Omitted on corrections, which inherit the parent evaluator output schema."
-                    source:
-                      type: "string"
-                      enum:
-                        - "orq"
-                        - "external"
-                      default: "orq"
-                    explanation:
-                      type: "string"
-                      description: "Optional free-text explanation of the value"
-                    reviewed_at:
-                      type: "string"
-                      format: "date-time"
-                      default: "2026-10-20T09:23:07.253Z"
-                      deprecated: true
-                      description: "Deprecated. The date and time the item was reviewed"
-                    type:
-                      type: "string"
-                      enum:
-                        - "string_array"
-                    values:
-                      type: "array"
-                      items:
-                        type: "string"
-                    trace_id:
-                      type: "string"
-                  required:
-                    - "id"
-                    - "evaluation_type"
-                    - "type"
-                    - "values"
-                    - "trace_id"
-      responses:
-        "200":
-          description: "Event has been dispatched to report the feedback"
-        "401":
-          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
-      security:
-        - ApiKey: []
   /v2/human-eval-sets:
     get:
       tags:
@@ -55478,6 +55249,8 @@ paths:
       x-cli-group: "human-review-sets"
       x-cli-name: "getAll"
       x-cli-hidden: true
+      deprecated: true
+      description: "Deprecated: Human Review Sets are replaced by project-level human reviews (Annotations) and will be removed in release 4.18."
       x-speakeasy-group: "humanReviewSets"
       x-speakeasy-name-override: "list"
       summary: "Get all human review sets"
@@ -55551,7 +55324,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-10-20T09:22:59.127Z"
+                          default: "2026-10-20T09:25:18.711Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -55559,7 +55332,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-10-20T09:22:59.127Z"
+                              default: "2026-10-20T09:25:18.712Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -55629,7 +55402,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-10-20T09:22:59.127Z"
+                          default: "2026-10-20T09:25:18.711Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -55637,7 +55410,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-10-20T09:22:59.127Z"
+                              default: "2026-10-20T09:25:18.712Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -55672,6 +55445,8 @@ paths:
       x-cli-group: "human-review-sets"
       x-cli-name: "create"
       x-cli-hidden: true
+      deprecated: true
+      description: "Deprecated: Human Review Sets are replaced by project-level human reviews (Annotations) and will be removed in release 4.18."
       x-speakeasy-group: "humanReviewSets"
       x-speakeasy-name-override: "create"
       summary: "Create a human review set"
@@ -55820,7 +55595,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-10-20T09:22:59.127Z"
+                        default: "2026-10-20T09:25:18.711Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -55828,7 +55603,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-10-20T09:22:59.127Z"
+                            default: "2026-10-20T09:25:18.712Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -55898,7 +55673,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-10-20T09:22:59.127Z"
+                        default: "2026-10-20T09:25:18.711Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -55906,7 +55681,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-10-20T09:22:59.127Z"
+                            default: "2026-10-20T09:25:18.712Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -55942,6 +55717,8 @@ paths:
       x-cli-group: "human-review-sets"
       x-cli-name: "get"
       x-cli-hidden: true
+      deprecated: true
+      description: "Deprecated: Human Review Sets are replaced by project-level human reviews (Annotations) and will be removed in release 4.18."
       x-speakeasy-group: "humanReviewSets"
       x-speakeasy-name-override: "get"
       summary: "Get a human review set by ID"
@@ -56007,7 +55784,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-10-20T09:22:59.127Z"
+                        default: "2026-10-20T09:25:18.711Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -56015,7 +55792,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-10-20T09:22:59.127Z"
+                            default: "2026-10-20T09:25:18.712Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -56085,7 +55862,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-10-20T09:22:59.127Z"
+                        default: "2026-10-20T09:25:18.711Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -56093,7 +55870,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-10-20T09:22:59.127Z"
+                            default: "2026-10-20T09:25:18.712Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -56134,6 +55911,8 @@ paths:
       x-cli-group: "human-review-sets"
       x-cli-name: "update"
       x-cli-hidden: true
+      deprecated: true
+      description: "Deprecated: Human Review Sets are replaced by project-level human reviews (Annotations) and will be removed in release 4.18."
       x-speakeasy-group: "humanReviewSets"
       x-speakeasy-name-override: "update"
       summary: "Update a human review set"
@@ -56290,7 +56069,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-10-20T09:22:59.127Z"
+                        default: "2026-10-20T09:25:18.711Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -56298,7 +56077,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-10-20T09:22:59.127Z"
+                            default: "2026-10-20T09:25:18.712Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -56368,7 +56147,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-10-20T09:22:59.127Z"
+                        default: "2026-10-20T09:25:18.711Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -56376,7 +56155,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-10-20T09:22:59.127Z"
+                            default: "2026-10-20T09:25:18.712Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -56411,6 +56190,8 @@ paths:
       x-cli-group: "human-review-sets"
       x-cli-name: "delete"
       x-cli-hidden: true
+      deprecated: true
+      description: "Deprecated: Human Review Sets are replaced by project-level human reviews (Annotations) and will be removed in release 4.18."
       x-speakeasy-group: "humanReviewSets"
       x-speakeasy-name-override: "delete"
       summary: "Delete a human review set"
