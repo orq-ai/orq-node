@@ -947,11 +947,11 @@ export type CreateRouterResponseRequestBody = {
   maxToolCalls?: number | undefined;
   memory?: components.MemoryParam | undefined;
   /**
-   * Developer-defined key-value pairs attached to the response (OpenAI spec: Map<string, string>). Non-string values are rejected with a 400.
+   * Developer-defined key-value pairs attached to the response (OpenAI spec: `Map<string, string>`). Non-string values are rejected with a 400.
    */
   metadata?: { [k: string]: string } | undefined;
   /**
-   * The model to use in provider/model format (e.g. openai/gpt-4o). Use agent/<key> to invoke a pre-configured agent from the orq.ai platform.
+   * The model to use in provider/model format (e.g. openai/gpt-4o). Use `agent/<key>` to invoke a pre-configured agent from the orq.ai platform.
    */
   model?: string | undefined;
   /**
@@ -1132,7 +1132,7 @@ export type CreateRouterResponseResponseBody = {
   maxToolCalls: number | null;
   memory?: components.MemoryParam | undefined;
   /**
-   * Developer-defined key-value pairs attached to the response (OpenAI spec: Map<string, string>).
+   * Developer-defined key-value pairs attached to the response (OpenAI spec: `Map<string, string>`).
    */
   metadata: { [k: string]: string };
   model: string;

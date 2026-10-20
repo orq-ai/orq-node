@@ -489,7 +489,7 @@ export type ListDeploymentVersionsRole = ClosedEnum<
 
 export type ListDeploymentVersions2File = {
   /**
-   * The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'
+   * The file data as a data URI string in the format `data:<mime-type>;base64,<base64-encoded-data>`. Example: `data:image/png;base64,iVBORw0KGgoAAAANS...`
    */
   fileData?: string | undefined;
   /**
@@ -2525,7 +2525,7 @@ export const ListDeploymentVersionsKnowledgeBases$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  id: z.string().default("01M5CA2HM4Z6GQ3PKXHXG7P6P3"),
+  id: z.string().default("01M5CCJQ1E45QMEEDH9EP6YB2F"),
   knowledge_id: z.string(),
   configuration: z.union([
     z.lazy(() => KnowledgeBaseLastUserMessage$inboundSchema),
