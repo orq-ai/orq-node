@@ -19,10 +19,6 @@ import {
   McpGatewayServerLink,
   McpGatewayServerLink$inboundSchema,
 } from "./mcpgatewayserverlink.js";
-import {
-  McpGatewayStatus,
-  McpGatewayStatus$inboundSchema,
-} from "./mcpgatewaystatus.js";
 import { McpToolNaming, McpToolNaming$inboundSchema } from "./mcptoolnaming.js";
 import { Sharing, Sharing$inboundSchema } from "./sharing.js";
 
@@ -48,7 +44,6 @@ export type McpGateway = {
    */
   serverLinks?: Array<McpGatewayServerLink> | undefined;
   toolNaming?: McpToolNaming | undefined;
-  status?: McpGatewayStatus | undefined;
   /**
    * Endpoint MCP clients connect to; relative when the deployment has no public base URL configured.
    */
@@ -92,7 +87,6 @@ export const McpGateway$inboundSchema: z.ZodType<
   description: z.string().optional(),
   server_links: z.array(McpGatewayServerLink$inboundSchema).optional(),
   tool_naming: McpToolNaming$inboundSchema.optional(),
-  status: McpGatewayStatus$inboundSchema.optional(),
   public_url: z.string().optional(),
   created: z.string().optional(),
   updated: z.string().optional(),

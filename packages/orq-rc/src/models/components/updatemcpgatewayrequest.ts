@@ -19,10 +19,6 @@ import {
   McpGatewayServerLink$outboundSchema,
 } from "./mcpgatewayserverlink.js";
 import {
-  McpGatewayStatus,
-  McpGatewayStatus$outboundSchema,
-} from "./mcpgatewaystatus.js";
-import {
   McpToolNaming,
   McpToolNaming$outboundSchema,
 } from "./mcptoolnaming.js";
@@ -54,7 +50,6 @@ export type UpdateMcpGatewayRequest = {
    */
   serverLinks?: Array<McpGatewayServerLink> | undefined;
   toolNaming?: McpToolNaming | undefined;
-  status?: McpGatewayStatus | undefined;
   mode?: McpGatewayMode | undefined;
   /**
    * Which projects in the workspace may use this gateway. Defaults to every project.
@@ -85,7 +80,6 @@ export type UpdateMcpGatewayRequest$Outbound = {
   description?: string | undefined;
   server_links?: Array<McpGatewayServerLink$Outbound> | undefined;
   tool_naming?: string | undefined;
-  status?: string | undefined;
   mode?: string | undefined;
   sharing?: Sharing$Outbound | undefined;
   clear_server_links?: boolean | undefined;
@@ -105,7 +99,6 @@ export const UpdateMcpGatewayRequest$outboundSchema: z.ZodType<
   description: z.string().optional(),
   serverLinks: z.array(McpGatewayServerLink$outboundSchema).optional(),
   toolNaming: McpToolNaming$outboundSchema.optional(),
-  status: McpGatewayStatus$outboundSchema.optional(),
   mode: McpGatewayMode$outboundSchema.optional(),
   sharing: Sharing$outboundSchema.optional(),
   clearServerLinks: z.boolean().optional(),
