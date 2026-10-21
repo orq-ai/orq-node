@@ -83,7 +83,7 @@ export type CreateRouterResponseCacheControl = {
  *
  * Defaults to `5m`. Only supported by Anthropic Claude models.
  */
-export const CreateRouterResponse2ResponsesRequestTtl = {
+export const CreateRouterResponse2ResponsesRequestRequestBodyInputTtl = {
   Fivem: "5m",
   Oneh: "1h",
 } as const;
@@ -97,9 +97,8 @@ export const CreateRouterResponse2ResponsesRequestTtl = {
  *
  * Defaults to `5m`. Only supported by Anthropic Claude models.
  */
-export type CreateRouterResponse2ResponsesRequestTtl = ClosedEnum<
-  typeof CreateRouterResponse2ResponsesRequestTtl
->;
+export type CreateRouterResponse2ResponsesRequestRequestBodyInputTtl =
+  ClosedEnum<typeof CreateRouterResponse2ResponsesRequestRequestBodyInputTtl>;
 
 /**
  * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
@@ -124,11 +123,33 @@ export type CreateRouterResponse2ResponsesRequestCacheControl = {
    *
    * Defaults to `5m`. Only supported by Anthropic Claude models.
    */
-  ttl?: CreateRouterResponse2ResponsesRequestTtl | undefined;
+  ttl?: CreateRouterResponse2ResponsesRequestRequestBodyInputTtl | undefined;
   /**
    * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
    */
   type: CreateRouterResponse2ResponsesRequestRequestBodyInputType;
+};
+
+export const CreateRouterResponse2ResponsesMode = {
+  Explicit: "explicit",
+} as const;
+export type CreateRouterResponse2ResponsesMode = ClosedEnum<
+  typeof CreateRouterResponse2ResponsesMode
+>;
+
+export const CreateRouterResponse2ResponsesRequestRequestBodyInput2Ttl = {
+  Thirtym: "30m",
+  Twelveh: "12h",
+} as const;
+export type CreateRouterResponse2ResponsesRequestRequestBodyInput2Ttl =
+  ClosedEnum<typeof CreateRouterResponse2ResponsesRequestRequestBodyInput2Ttl>;
+
+/**
+ * An explicit OpenAI cache boundary for GPT-5.6 and later. Omitted ttl inherits prompt_cache_options.ttl.
+ */
+export type CreateRouterResponse2PromptCacheBreakpoint = {
+  mode: CreateRouterResponse2ResponsesMode;
+  ttl?: CreateRouterResponse2ResponsesRequestRequestBodyInput2Ttl | undefined;
 };
 
 /**
@@ -156,6 +177,12 @@ export type TwoFile = {
    * The MIME type of the file (e.g., application/pdf).
    */
   mimeType?: string | undefined;
+  /**
+   * An explicit OpenAI cache boundary for GPT-5.6 and later. Omitted ttl inherits prompt_cache_options.ttl.
+   */
+  promptCacheBreakpoint?:
+    | CreateRouterResponse2PromptCacheBreakpoint
+    | undefined;
   type: "input_file";
 };
 
@@ -169,7 +196,7 @@ export type TwoFile = {
  *
  * Defaults to `5m`. Only supported by Anthropic Claude models.
  */
-export const CreateRouterResponse2ResponsesTtl = {
+export const CreateRouterResponse2ResponsesRequestTtl = {
   Fivem: "5m",
   Oneh: "1h",
 } as const;
@@ -183,8 +210,8 @@ export const CreateRouterResponse2ResponsesTtl = {
  *
  * Defaults to `5m`. Only supported by Anthropic Claude models.
  */
-export type CreateRouterResponse2ResponsesTtl = ClosedEnum<
-  typeof CreateRouterResponse2ResponsesTtl
+export type CreateRouterResponse2ResponsesRequestTtl = ClosedEnum<
+  typeof CreateRouterResponse2ResponsesRequestTtl
 >;
 
 /**
@@ -211,7 +238,7 @@ export type CreateRouterResponse2ResponsesCacheControl = {
    *
    * Defaults to `5m`. Only supported by Anthropic Claude models.
    */
-  ttl?: CreateRouterResponse2ResponsesTtl | undefined;
+  ttl?: CreateRouterResponse2ResponsesRequestTtl | undefined;
   /**
    * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
    */
@@ -231,6 +258,29 @@ export const Detail = {
  */
 export type Detail = ClosedEnum<typeof Detail>;
 
+export const CreateRouterResponse2Mode = {
+  Explicit: "explicit",
+} as const;
+export type CreateRouterResponse2Mode = ClosedEnum<
+  typeof CreateRouterResponse2Mode
+>;
+
+export const CreateRouterResponse2ResponsesRequestRequestBodyTtl = {
+  Thirtym: "30m",
+  Twelveh: "12h",
+} as const;
+export type CreateRouterResponse2ResponsesRequestRequestBodyTtl = ClosedEnum<
+  typeof CreateRouterResponse2ResponsesRequestRequestBodyTtl
+>;
+
+/**
+ * An explicit OpenAI cache boundary for GPT-5.6 and later. Omitted ttl inherits prompt_cache_options.ttl.
+ */
+export type TwoPromptCacheBreakpoint = {
+  mode: CreateRouterResponse2Mode;
+  ttl?: CreateRouterResponse2ResponsesRequestRequestBodyTtl | undefined;
+};
+
 /**
  * An image content part.
  */
@@ -248,6 +298,10 @@ export type TwoImage = {
    * The URL of the image.
    */
   imageUrl?: string | undefined;
+  /**
+   * An explicit OpenAI cache boundary for GPT-5.6 and later. Omitted ttl inherits prompt_cache_options.ttl.
+   */
+  promptCacheBreakpoint?: TwoPromptCacheBreakpoint | undefined;
   type: "input_image";
 };
 
@@ -310,11 +364,36 @@ export type CreateRouterResponse2CacheControl = {
   type: CreateRouterResponse2Type;
 };
 
+export const TwoMode = {
+  Explicit: "explicit",
+} as const;
+export type TwoMode = ClosedEnum<typeof TwoMode>;
+
+export const CreateRouterResponse2ResponsesTtl = {
+  Thirtym: "30m",
+  Twelveh: "12h",
+} as const;
+export type CreateRouterResponse2ResponsesTtl = ClosedEnum<
+  typeof CreateRouterResponse2ResponsesTtl
+>;
+
+/**
+ * An explicit OpenAI cache boundary for GPT-5.6 and later. Omitted ttl inherits prompt_cache_options.ttl.
+ */
+export type PromptCacheBreakpoint = {
+  mode: TwoMode;
+  ttl?: CreateRouterResponse2ResponsesTtl | undefined;
+};
+
 /**
  * A text content part.
  */
 export type TwoText = {
   cacheControl?: CreateRouterResponse2CacheControl | undefined;
+  /**
+   * An explicit OpenAI cache boundary for GPT-5.6 and later. Omitted ttl inherits prompt_cache_options.ttl.
+   */
+  promptCacheBreakpoint?: PromptCacheBreakpoint | undefined;
   /**
    * The text content.
    */
@@ -1222,9 +1301,10 @@ export function createRouterResponseCacheControlToJSON(
 }
 
 /** @internal */
-export const CreateRouterResponse2ResponsesRequestTtl$outboundSchema:
-  z.ZodNativeEnum<typeof CreateRouterResponse2ResponsesRequestTtl> = z
-    .nativeEnum(CreateRouterResponse2ResponsesRequestTtl);
+export const CreateRouterResponse2ResponsesRequestRequestBodyInputTtl$outboundSchema:
+  z.ZodNativeEnum<
+    typeof CreateRouterResponse2ResponsesRequestRequestBodyInputTtl
+  > = z.nativeEnum(CreateRouterResponse2ResponsesRequestRequestBodyInputTtl);
 
 /** @internal */
 export const CreateRouterResponse2ResponsesRequestRequestBodyInputType$outboundSchema:
@@ -1245,7 +1325,8 @@ export const CreateRouterResponse2ResponsesRequestCacheControl$outboundSchema:
     z.ZodTypeDef,
     CreateRouterResponse2ResponsesRequestCacheControl
   > = z.object({
-    ttl: CreateRouterResponse2ResponsesRequestTtl$outboundSchema.default("5m"),
+    ttl: CreateRouterResponse2ResponsesRequestRequestBodyInputTtl$outboundSchema
+      .default("5m"),
     type:
       CreateRouterResponse2ResponsesRequestRequestBodyInputType$outboundSchema,
   });
@@ -1262,6 +1343,47 @@ export function createRouterResponse2ResponsesRequestCacheControlToJSON(
 }
 
 /** @internal */
+export const CreateRouterResponse2ResponsesMode$outboundSchema: z.ZodNativeEnum<
+  typeof CreateRouterResponse2ResponsesMode
+> = z.nativeEnum(CreateRouterResponse2ResponsesMode);
+
+/** @internal */
+export const CreateRouterResponse2ResponsesRequestRequestBodyInput2Ttl$outboundSchema:
+  z.ZodNativeEnum<
+    typeof CreateRouterResponse2ResponsesRequestRequestBodyInput2Ttl
+  > = z.nativeEnum(CreateRouterResponse2ResponsesRequestRequestBodyInput2Ttl);
+
+/** @internal */
+export type CreateRouterResponse2PromptCacheBreakpoint$Outbound = {
+  mode: string;
+  ttl?: string | undefined;
+};
+
+/** @internal */
+export const CreateRouterResponse2PromptCacheBreakpoint$outboundSchema:
+  z.ZodType<
+    CreateRouterResponse2PromptCacheBreakpoint$Outbound,
+    z.ZodTypeDef,
+    CreateRouterResponse2PromptCacheBreakpoint
+  > = z.object({
+    mode: CreateRouterResponse2ResponsesMode$outboundSchema,
+    ttl:
+      CreateRouterResponse2ResponsesRequestRequestBodyInput2Ttl$outboundSchema
+        .optional(),
+  });
+
+export function createRouterResponse2PromptCacheBreakpointToJSON(
+  createRouterResponse2PromptCacheBreakpoint:
+    CreateRouterResponse2PromptCacheBreakpoint,
+): string {
+  return JSON.stringify(
+    CreateRouterResponse2PromptCacheBreakpoint$outboundSchema.parse(
+      createRouterResponse2PromptCacheBreakpoint,
+    ),
+  );
+}
+
+/** @internal */
 export type TwoFile$Outbound = {
   cache_control?:
     | CreateRouterResponse2ResponsesRequestCacheControl$Outbound
@@ -1271,6 +1393,9 @@ export type TwoFile$Outbound = {
   file_url?: string | undefined;
   filename?: string | undefined;
   mime_type?: string | undefined;
+  prompt_cache_breakpoint?:
+    | CreateRouterResponse2PromptCacheBreakpoint$Outbound
+    | undefined;
   type: "input_file";
 };
 
@@ -1288,6 +1413,9 @@ export const TwoFile$outboundSchema: z.ZodType<
   fileUrl: z.string().optional(),
   filename: z.string().optional(),
   mimeType: z.string().optional(),
+  promptCacheBreakpoint: z.lazy(() =>
+    CreateRouterResponse2PromptCacheBreakpoint$outboundSchema
+  ).optional(),
   type: z.literal("input_file"),
 }).transform((v) => {
   return remap$(v, {
@@ -1296,6 +1424,7 @@ export const TwoFile$outboundSchema: z.ZodType<
     fileId: "file_id",
     fileUrl: "file_url",
     mimeType: "mime_type",
+    promptCacheBreakpoint: "prompt_cache_breakpoint",
   });
 });
 
@@ -1304,9 +1433,9 @@ export function twoFileToJSON(twoFile: TwoFile): string {
 }
 
 /** @internal */
-export const CreateRouterResponse2ResponsesTtl$outboundSchema: z.ZodNativeEnum<
-  typeof CreateRouterResponse2ResponsesTtl
-> = z.nativeEnum(CreateRouterResponse2ResponsesTtl);
+export const CreateRouterResponse2ResponsesRequestTtl$outboundSchema:
+  z.ZodNativeEnum<typeof CreateRouterResponse2ResponsesRequestTtl> = z
+    .nativeEnum(CreateRouterResponse2ResponsesRequestTtl);
 
 /** @internal */
 export const CreateRouterResponse2ResponsesRequestType$outboundSchema:
@@ -1326,7 +1455,7 @@ export const CreateRouterResponse2ResponsesCacheControl$outboundSchema:
     z.ZodTypeDef,
     CreateRouterResponse2ResponsesCacheControl
   > = z.object({
-    ttl: CreateRouterResponse2ResponsesTtl$outboundSchema.default("5m"),
+    ttl: CreateRouterResponse2ResponsesRequestTtl$outboundSchema.default("5m"),
     type: CreateRouterResponse2ResponsesRequestType$outboundSchema,
   });
 
@@ -1346,6 +1475,41 @@ export const Detail$outboundSchema: z.ZodNativeEnum<typeof Detail> = z
   .nativeEnum(Detail);
 
 /** @internal */
+export const CreateRouterResponse2Mode$outboundSchema: z.ZodNativeEnum<
+  typeof CreateRouterResponse2Mode
+> = z.nativeEnum(CreateRouterResponse2Mode);
+
+/** @internal */
+export const CreateRouterResponse2ResponsesRequestRequestBodyTtl$outboundSchema:
+  z.ZodNativeEnum<typeof CreateRouterResponse2ResponsesRequestRequestBodyTtl> =
+    z.nativeEnum(CreateRouterResponse2ResponsesRequestRequestBodyTtl);
+
+/** @internal */
+export type TwoPromptCacheBreakpoint$Outbound = {
+  mode: string;
+  ttl?: string | undefined;
+};
+
+/** @internal */
+export const TwoPromptCacheBreakpoint$outboundSchema: z.ZodType<
+  TwoPromptCacheBreakpoint$Outbound,
+  z.ZodTypeDef,
+  TwoPromptCacheBreakpoint
+> = z.object({
+  mode: CreateRouterResponse2Mode$outboundSchema,
+  ttl: CreateRouterResponse2ResponsesRequestRequestBodyTtl$outboundSchema
+    .optional(),
+});
+
+export function twoPromptCacheBreakpointToJSON(
+  twoPromptCacheBreakpoint: TwoPromptCacheBreakpoint,
+): string {
+  return JSON.stringify(
+    TwoPromptCacheBreakpoint$outboundSchema.parse(twoPromptCacheBreakpoint),
+  );
+}
+
+/** @internal */
 export type TwoImage$Outbound = {
   cache_control?:
     | CreateRouterResponse2ResponsesCacheControl$Outbound
@@ -1353,6 +1517,7 @@ export type TwoImage$Outbound = {
   detail?: string | undefined;
   file_id?: string | undefined;
   image_url?: string | undefined;
+  prompt_cache_breakpoint?: TwoPromptCacheBreakpoint$Outbound | undefined;
   type: "input_image";
 };
 
@@ -1368,12 +1533,15 @@ export const TwoImage$outboundSchema: z.ZodType<
   detail: Detail$outboundSchema.optional(),
   fileId: z.string().optional(),
   imageUrl: z.string().optional(),
+  promptCacheBreakpoint: z.lazy(() => TwoPromptCacheBreakpoint$outboundSchema)
+    .optional(),
   type: z.literal("input_image"),
 }).transform((v) => {
   return remap$(v, {
     cacheControl: "cache_control",
     fileId: "file_id",
     imageUrl: "image_url",
+    promptCacheBreakpoint: "prompt_cache_breakpoint",
   });
 });
 
@@ -1418,8 +1586,42 @@ export function createRouterResponse2CacheControlToJSON(
 }
 
 /** @internal */
+export const TwoMode$outboundSchema: z.ZodNativeEnum<typeof TwoMode> = z
+  .nativeEnum(TwoMode);
+
+/** @internal */
+export const CreateRouterResponse2ResponsesTtl$outboundSchema: z.ZodNativeEnum<
+  typeof CreateRouterResponse2ResponsesTtl
+> = z.nativeEnum(CreateRouterResponse2ResponsesTtl);
+
+/** @internal */
+export type PromptCacheBreakpoint$Outbound = {
+  mode: string;
+  ttl?: string | undefined;
+};
+
+/** @internal */
+export const PromptCacheBreakpoint$outboundSchema: z.ZodType<
+  PromptCacheBreakpoint$Outbound,
+  z.ZodTypeDef,
+  PromptCacheBreakpoint
+> = z.object({
+  mode: TwoMode$outboundSchema,
+  ttl: CreateRouterResponse2ResponsesTtl$outboundSchema.optional(),
+});
+
+export function promptCacheBreakpointToJSON(
+  promptCacheBreakpoint: PromptCacheBreakpoint,
+): string {
+  return JSON.stringify(
+    PromptCacheBreakpoint$outboundSchema.parse(promptCacheBreakpoint),
+  );
+}
+
+/** @internal */
 export type TwoText$Outbound = {
   cache_control?: CreateRouterResponse2CacheControl$Outbound | undefined;
+  prompt_cache_breakpoint?: PromptCacheBreakpoint$Outbound | undefined;
   text: string;
   type: "input_text";
 };
@@ -1432,11 +1634,14 @@ export const TwoText$outboundSchema: z.ZodType<
 > = z.object({
   cacheControl: z.lazy(() => CreateRouterResponse2CacheControl$outboundSchema)
     .optional(),
+  promptCacheBreakpoint: z.lazy(() => PromptCacheBreakpoint$outboundSchema)
+    .optional(),
   text: z.string(),
   type: z.literal("input_text"),
 }).transform((v) => {
   return remap$(v, {
     cacheControl: "cache_control",
+    promptCacheBreakpoint: "prompt_cache_breakpoint",
   });
 });
 

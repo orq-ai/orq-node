@@ -19,6 +19,7 @@ export type PricingVariant = {
   audioOutput?: Price | undefined;
   audioSession?: Price | undefined;
   cacheRead?: Price | undefined;
+  cacheWrite12h?: Price | undefined;
   cacheWrite1h?: Price | undefined;
   cacheWrite30m?: Price | undefined;
   cacheWrite5m?: Price | undefined;
@@ -41,6 +42,7 @@ export const PricingVariant$inboundSchema: z.ZodType<
   audio_output: Price$inboundSchema.optional(),
   audio_session: Price$inboundSchema.optional(),
   cache_read: Price$inboundSchema.optional(),
+  cache_write_12h: Price$inboundSchema.optional(),
   cache_write_1h: Price$inboundSchema.optional(),
   cache_write_30m: Price$inboundSchema.optional(),
   cache_write_5m: Price$inboundSchema.optional(),
@@ -57,6 +59,7 @@ export const PricingVariant$inboundSchema: z.ZodType<
     "audio_output": "audioOutput",
     "audio_session": "audioSession",
     "cache_read": "cacheRead",
+    "cache_write_12h": "cacheWrite12h",
     "cache_write_1h": "cacheWrite1h",
     "cache_write_30m": "cacheWrite30m",
     "cache_write_5m": "cacheWrite5m",
@@ -69,6 +72,7 @@ export type PricingVariant$Outbound = {
   audio_output?: Price$Outbound | undefined;
   audio_session?: Price$Outbound | undefined;
   cache_read?: Price$Outbound | undefined;
+  cache_write_12h?: Price$Outbound | undefined;
   cache_write_1h?: Price$Outbound | undefined;
   cache_write_30m?: Price$Outbound | undefined;
   cache_write_5m?: Price$Outbound | undefined;
@@ -91,6 +95,7 @@ export const PricingVariant$outboundSchema: z.ZodType<
   audioOutput: Price$outboundSchema.optional(),
   audioSession: Price$outboundSchema.optional(),
   cacheRead: Price$outboundSchema.optional(),
+  cacheWrite12h: Price$outboundSchema.optional(),
   cacheWrite1h: Price$outboundSchema.optional(),
   cacheWrite30m: Price$outboundSchema.optional(),
   cacheWrite5m: Price$outboundSchema.optional(),
@@ -107,6 +112,7 @@ export const PricingVariant$outboundSchema: z.ZodType<
     audioOutput: "audio_output",
     audioSession: "audio_session",
     cacheRead: "cache_read",
+    cacheWrite12h: "cache_write_12h",
     cacheWrite1h: "cache_write_1h",
     cacheWrite30m: "cache_write_30m",
     cacheWrite5m: "cache_write_5m",
