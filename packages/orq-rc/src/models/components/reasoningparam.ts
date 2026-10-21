@@ -10,6 +10,7 @@ import { ClosedEnum } from "../../types/enums.js";
  */
 export const Effort = {
   None: "none",
+  Instant: "instant",
   Minimal: "minimal",
   Low: "low",
   Medium: "medium",

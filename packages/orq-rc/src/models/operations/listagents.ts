@@ -329,7 +329,7 @@ export type ListAgentsResponseFormat =
   | ListAgentsResponseFormatAgentsJSONSchema;
 
 /**
- * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, `xhigh`, and `max`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+ * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `instant`, `minimal`, `low`, `medium`, `high`, `xhigh`, and `max`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
  *
  * @remarks
  *
@@ -338,10 +338,11 @@ export type ListAgentsResponseFormat =
  * - The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.
  * - `xhigh` is currently only supported for `gpt-5.1-codex-max`.
  *
- * Any of "none", "minimal", "low", "medium", "high", "xhigh", "max".
+ * Any of "none", "instant", "minimal", "low", "medium", "high", "xhigh", "max".
  */
 export const ListAgentsReasoningEffort = {
   None: "none",
+  Instant: "instant",
   Minimal: "minimal",
   Low: "low",
   Medium: "medium",
@@ -350,7 +351,7 @@ export const ListAgentsReasoningEffort = {
   Max: "max",
 } as const;
 /**
- * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, `xhigh`, and `max`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+ * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `instant`, `minimal`, `low`, `medium`, `high`, `xhigh`, and `max`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
  *
  * @remarks
  *
@@ -359,7 +360,7 @@ export const ListAgentsReasoningEffort = {
  * - The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.
  * - `xhigh` is currently only supported for `gpt-5.1-codex-max`.
  *
- * Any of "none", "minimal", "low", "medium", "high", "xhigh", "max".
+ * Any of "none", "instant", "minimal", "low", "medium", "high", "xhigh", "max".
  */
 export type ListAgentsReasoningEffort = ClosedEnum<
   typeof ListAgentsReasoningEffort
@@ -624,7 +625,7 @@ export type ListAgentsParameters = {
     | ListAgentsResponseFormatAgentsJSONSchema
     | undefined;
   /**
-   * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, `xhigh`, and `max`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+   * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `instant`, `minimal`, `low`, `medium`, `high`, `xhigh`, and `max`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
    *
    * @remarks
    *
@@ -633,7 +634,7 @@ export type ListAgentsParameters = {
    * - The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.
    * - `xhigh` is currently only supported for `gpt-5.1-codex-max`.
    *
-   * Any of "none", "minimal", "low", "medium", "high", "xhigh", "max".
+   * Any of "none", "instant", "minimal", "low", "medium", "high", "xhigh", "max".
    */
   reasoningEffort?: ListAgentsReasoningEffort | undefined;
   /**
@@ -791,7 +792,7 @@ export type ListAgentsFallbackModelConfigurationResponseFormat =
   | ListAgentsResponseFormatAgentsResponse200JSONSchema;
 
 /**
- * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, `xhigh`, and `max`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+ * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `instant`, `minimal`, `low`, `medium`, `high`, `xhigh`, and `max`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
  *
  * @remarks
  *
@@ -800,10 +801,11 @@ export type ListAgentsFallbackModelConfigurationResponseFormat =
  * - The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.
  * - `xhigh` is currently only supported for `gpt-5.1-codex-max`.
  *
- * Any of "none", "minimal", "low", "medium", "high", "xhigh", "max".
+ * Any of "none", "instant", "minimal", "low", "medium", "high", "xhigh", "max".
  */
 export const ListAgentsFallbackModelConfigurationReasoningEffort = {
   None: "none",
+  Instant: "instant",
   Minimal: "minimal",
   Low: "low",
   Medium: "medium",
@@ -812,7 +814,7 @@ export const ListAgentsFallbackModelConfigurationReasoningEffort = {
   Max: "max",
 } as const;
 /**
- * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, `xhigh`, and `max`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+ * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `instant`, `minimal`, `low`, `medium`, `high`, `xhigh`, and `max`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
  *
  * @remarks
  *
@@ -821,7 +823,7 @@ export const ListAgentsFallbackModelConfigurationReasoningEffort = {
  * - The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.
  * - `xhigh` is currently only supported for `gpt-5.1-codex-max`.
  *
- * Any of "none", "minimal", "low", "medium", "high", "xhigh", "max".
+ * Any of "none", "instant", "minimal", "low", "medium", "high", "xhigh", "max".
  */
 export type ListAgentsFallbackModelConfigurationReasoningEffort = ClosedEnum<
   typeof ListAgentsFallbackModelConfigurationReasoningEffort
@@ -1097,7 +1099,7 @@ export type ListAgentsFallbackModelConfigurationParameters = {
     | ListAgentsResponseFormatAgentsResponse200JSONSchema
     | undefined;
   /**
-   * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, `xhigh`, and `max`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+   * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `instant`, `minimal`, `low`, `medium`, `high`, `xhigh`, and `max`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
    *
    * @remarks
    *
@@ -1106,7 +1108,7 @@ export type ListAgentsFallbackModelConfigurationParameters = {
    * - The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.
    * - `xhigh` is currently only supported for `gpt-5.1-codex-max`.
    *
-   * Any of "none", "minimal", "low", "medium", "high", "xhigh", "max".
+   * Any of "none", "instant", "minimal", "low", "medium", "high", "xhigh", "max".
    */
   reasoningEffort?:
     | ListAgentsFallbackModelConfigurationReasoningEffort

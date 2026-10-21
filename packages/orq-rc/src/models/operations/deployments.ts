@@ -488,6 +488,7 @@ export const DeploymentsProvider = {
   Tensorix: "tensorix",
   Scaleway: "scaleway",
   Hcompany: "hcompany",
+  Inception: "inception",
   Inceptron: "inceptron",
   Wafer: "wafer",
   Poolside: "poolside",

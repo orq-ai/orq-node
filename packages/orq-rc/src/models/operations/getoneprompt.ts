@@ -423,6 +423,7 @@ export const GetOnePromptProvider = {
   Tensorix: "tensorix",
   Scaleway: "scaleway",
   Hcompany: "hcompany",
+  Inception: "inception",
   Inceptron: "inceptron",
   Wafer: "wafer",
   Poolside: "poolside",
@@ -698,7 +699,7 @@ export type GetOnePromptResponseFormat =
   | GetOnePromptResponseFormatPromptsJSONSchema;
 
 /**
- * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, `xhigh`, and `max`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+ * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `instant`, `minimal`, `low`, `medium`, `high`, `xhigh`, and `max`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
  *
  * @remarks
  *
@@ -707,10 +708,11 @@ export type GetOnePromptResponseFormat =
  * - The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.
  * - `xhigh` is currently only supported for `gpt-5.1-codex-max`.
  *
- * Any of "none", "minimal", "low", "medium", "high", "xhigh", "max".
+ * Any of "none", "instant", "minimal", "low", "medium", "high", "xhigh", "max".
  */
 export const GetOnePromptReasoningEffort = {
   None: "none",
+  Instant: "instant",
   Minimal: "minimal",
   Low: "low",
   Medium: "medium",
@@ -719,7 +721,7 @@ export const GetOnePromptReasoningEffort = {
   Max: "max",
 } as const;
 /**
- * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, `xhigh`, and `max`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+ * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `instant`, `minimal`, `low`, `medium`, `high`, `xhigh`, and `max`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
  *
  * @remarks
  *
@@ -728,7 +730,7 @@ export const GetOnePromptReasoningEffort = {
  * - The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.
  * - `xhigh` is currently only supported for `gpt-5.1-codex-max`.
  *
- * Any of "none", "minimal", "low", "medium", "high", "xhigh", "max".
+ * Any of "none", "instant", "minimal", "low", "medium", "high", "xhigh", "max".
  */
 export type GetOnePromptReasoningEffort = ClosedEnum<
   typeof GetOnePromptReasoningEffort
@@ -1386,7 +1388,7 @@ export type GetOnePromptPromptField = {
     | GetOnePromptResponseFormatPromptsJSONSchema
     | undefined;
   /**
-   * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, `xhigh`, and `max`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+   * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `instant`, `minimal`, `low`, `medium`, `high`, `xhigh`, and `max`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
    *
    * @remarks
    *
@@ -1395,7 +1397,7 @@ export type GetOnePromptPromptField = {
    * - The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.
    * - `xhigh` is currently only supported for `gpt-5.1-codex-max`.
    *
-   * Any of "none", "minimal", "low", "medium", "high", "xhigh", "max".
+   * Any of "none", "instant", "minimal", "low", "medium", "high", "xhigh", "max".
    */
   reasoningEffort?: GetOnePromptReasoningEffort | undefined;
   /**
