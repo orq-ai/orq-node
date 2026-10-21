@@ -2558,7 +2558,7 @@ components:
           properties:
             _id:
               type: "string"
-              default: "reasoning_01m5chhncjnsp9j84m1049t3ky"
+              default: "reasoning_01m5ec3xazmx11jcc5pf949f24"
               description: "Unique identifier for the part. Format: reasoning_{ulid} (e.g., reasoning_01hxyz...)"
               example: "reasoning_01hxyz123abc"
             kind:
@@ -12211,6 +12211,8 @@ components:
           $ref: "#/components/schemas/Price"
         cache_read:
           $ref: "#/components/schemas/Price"
+        cache_write_12h:
+          $ref: "#/components/schemas/Price"
         cache_write_1h:
           $ref: "#/components/schemas/Price"
         cache_write_30m:
@@ -12246,6 +12248,8 @@ components:
         audio_session:
           $ref: "#/components/schemas/Price"
         cache_read:
+          $ref: "#/components/schemas/Price"
+        cache_write_12h:
           $ref: "#/components/schemas/Price"
         cache_write_1h:
           $ref: "#/components/schemas/Price"
@@ -18914,6 +18918,19 @@ components:
       required:
         - "type"
       type: "object"
+    CacheWriteTokensDetails:
+      additionalProperties: false
+      properties:
+        ttl_12h_tokens:
+          format: "int64"
+          type: "integer"
+        ttl_30m_tokens:
+          format: "int64"
+          type: "integer"
+      required:
+        - "ttl_30m_tokens"
+        - "ttl_12h_tokens"
+      type: "object"
     ClassifyAnswer:
       description: "One answer to a classification question. The type selects the answer fields. A refusal contains only type."
       discriminator:
@@ -19563,6 +19580,8 @@ components:
         cache_write_tokens:
           format: "int64"
           type: "integer"
+        cache_write_tokens_details:
+          $ref: "#/components/schemas/CacheWriteTokensDetails"
         cached_tokens:
           format: "int64"
           type: "integer"
@@ -19672,6 +19691,7 @@ components:
         ttl:
           enum:
             - "30m"
+            - "12h"
           type: "string"
       type: "object"
     OrqAdvisorTool:
@@ -20050,6 +20070,21 @@ components:
                                     - "type"
                                   title: "Cache control"
                                   type: "object"
+                                prompt_cache_breakpoint:
+                                  description: "An explicit OpenAI cache boundary for GPT-5.6 and later. Omitted ttl inherits prompt_cache_options.ttl."
+                                  properties:
+                                    mode:
+                                      enum:
+                                        - "explicit"
+                                      type: "string"
+                                    ttl:
+                                      enum:
+                                        - "30m"
+                                        - "12h"
+                                      type: "string"
+                                  required:
+                                    - "mode"
+                                  type: "object"
                                 text:
                                   description: "The text content."
                                   type: "string"
@@ -20095,6 +20130,21 @@ components:
                                 image_url:
                                   description: "The URL of the image."
                                   type: "string"
+                                prompt_cache_breakpoint:
+                                  description: "An explicit OpenAI cache boundary for GPT-5.6 and later. Omitted ttl inherits prompt_cache_options.ttl."
+                                  properties:
+                                    mode:
+                                      enum:
+                                        - "explicit"
+                                      type: "string"
+                                    ttl:
+                                      enum:
+                                        - "30m"
+                                        - "12h"
+                                      type: "string"
+                                  required:
+                                    - "mode"
+                                  type: "object"
                                 type:
                                   enum:
                                     - "input_image"
@@ -20138,6 +20188,21 @@ components:
                                 mime_type:
                                   description: "The MIME type of the file (e.g., application/pdf)."
                                   type: "string"
+                                prompt_cache_breakpoint:
+                                  description: "An explicit OpenAI cache boundary for GPT-5.6 and later. Omitted ttl inherits prompt_cache_options.ttl."
+                                  properties:
+                                    mode:
+                                      enum:
+                                        - "explicit"
+                                      type: "string"
+                                    ttl:
+                                      enum:
+                                        - "30m"
+                                        - "12h"
+                                      type: "string"
+                                  required:
+                                    - "mode"
+                                  type: "object"
                                 type:
                                   enum:
                                     - "input_file"
@@ -20275,7 +20340,7 @@ components:
           type: "string"
         prompt_cache_options:
           $ref: "#/components/schemas/OpenAIPromptCacheOptions"
-          description: "OpenAI prompt cache options. GPT-5.6 and later support ttl=30m."
+          description: "OpenAI prompt cache options. GPT-5.6 and later support ttl=30m (default) or 12h. 12h cache writes cost twice the 30m rate."
         reasoning:
           $ref: "#/components/schemas/ReasoningParam"
           description: "Configure reasoning behavior. Set effort (none, minimal, low, medium, high, xhigh, max) to control how much the model thinks before answering. Higher effort means more reasoning tokens and better answers for complex tasks, at higher cost."
@@ -26283,7 +26348,7 @@ paths:
                                 type: "string"
                                 format: "ulid"
                                 pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                                default: "01M5CHHNBVM9HPK40GGZHZNT33"
+                                default: "01M5EC3XA07S3K08CNSJ6VN60S"
                                 readOnly: true
                                 description: "The unique identifier of the playground knowledge base"
                               knowledge_id:
@@ -35640,7 +35705,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01M5CHHNDPPSBVD2MQB4BTGA74"
+                                          default: "01M5EC3XCBW9P1ZBKDKKRXA5SG"
                                         name:
                                           type: "string"
                                         description:
@@ -37259,7 +37324,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01M5CHHNE3TMR0KK2EYQ0SV7WS"
+                                          default: "01M5EC3XCW2HJ6XPHVMHB7WS8P"
                                         name:
                                           type: "string"
                                         description:
@@ -46273,7 +46338,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M5CHHNF46BY52XTSQVTRAND7"
+                              default: "tool_01M5EC3XE3NNKZ2R23HB05H22S"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -46374,7 +46439,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M5CHHNF491BDJ5117KF98BX4"
+                              default: "tool_01M5EC3XE3QHF80HSTW2WMBDJT"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -46477,7 +46542,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M5CHHNF5P1TKMEN8AH0XEEHR"
+                              default: "tool_01M5EC3XE43CPAW4S7KS0SJK3K"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -46621,7 +46686,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M5CHHNF5R3BMDBF0M7JW1BEJ"
+                              default: "tool_01M5EC3XE550CAFNFHWGTGJAMD"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -47108,7 +47173,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M5CHHNF97KN0R9T51RTSPTHG"
+                        default: "tool_01M5EC3XE8R8F2RT7M6JN2TZQ4"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -47209,7 +47274,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M5CHHNF95E8SVK420KGQGRKP"
+                        default: "tool_01M5EC3XE8M4BD9XZ0DZPZ254V"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -47312,7 +47377,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M5CHHNFA70F3W2VAN6CPJGA1"
+                        default: "tool_01M5EC3XEAQ34HMF3B64S64HN5"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -47456,7 +47521,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M5CHHNFAZ2DZ06KPAAAB4TBF"
+                        default: "tool_01M5EC3XEB5N79WXXQ9AE4DP11"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -47960,7 +48025,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M5CHHNFCYKH9K4ZYK4PVPH60"
+                        default: "tool_01M5EC3XEDKDCF7AKEEYH9ZH9R"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -48061,7 +48126,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M5CHHNFDNJAFPTN4HNQGWNPY"
+                        default: "tool_01M5EC3XEDS07FG2BV1N741RDP"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -48164,7 +48229,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M5CHHNFGHA054QFS9XC1VR7F"
+                        default: "tool_01M5EC3XEE69EJTVQC9X3RJV3D"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -48308,7 +48373,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M5CHHNFG97929Y3X32KJDQP8"
+                        default: "tool_01M5EC3XEFGRVMAMW82TH0B2MR"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -48475,7 +48540,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M5CHHNFMVZSDEP6V67JBDTCW"
+                        default: "tool_01M5EC3XEK0H7CWY09HQYPQC75"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -48576,7 +48641,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M5CHHNFMBGWSQZPGRAYZ2GN3"
+                        default: "tool_01M5EC3XEMMFJGA12RFJC08X3E"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -48679,7 +48744,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M5CHHNFME6TYFJDHK42NE52K"
+                        default: "tool_01M5EC3XEM8VP25QBKKQ799X72"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -48823,7 +48888,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M5CHHNFNQQT7GP1ABNHM011D"
+                        default: "tool_01M5EC3XENB5NE1XGEG6KACERS"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -55358,7 +55423,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-10-20T11:35:57.378Z"
+                          default: "2026-10-21T04:39:31.242Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -55366,7 +55431,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-10-20T11:35:57.378Z"
+                              default: "2026-10-21T04:39:31.242Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -55436,7 +55501,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-10-20T11:35:57.378Z"
+                          default: "2026-10-21T04:39:31.242Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -55444,7 +55509,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-10-20T11:35:57.378Z"
+                              default: "2026-10-21T04:39:31.242Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -55629,7 +55694,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-10-20T11:35:57.378Z"
+                        default: "2026-10-21T04:39:31.242Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -55637,7 +55702,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-10-20T11:35:57.378Z"
+                            default: "2026-10-21T04:39:31.242Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -55707,7 +55772,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-10-20T11:35:57.378Z"
+                        default: "2026-10-21T04:39:31.242Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -55715,7 +55780,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-10-20T11:35:57.378Z"
+                            default: "2026-10-21T04:39:31.242Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -55818,7 +55883,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-10-20T11:35:57.378Z"
+                        default: "2026-10-21T04:39:31.242Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -55826,7 +55891,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-10-20T11:35:57.378Z"
+                            default: "2026-10-21T04:39:31.242Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -55896,7 +55961,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-10-20T11:35:57.378Z"
+                        default: "2026-10-21T04:39:31.242Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -55904,7 +55969,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-10-20T11:35:57.378Z"
+                            default: "2026-10-21T04:39:31.242Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -56103,7 +56168,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-10-20T11:35:57.378Z"
+                        default: "2026-10-21T04:39:31.242Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -56111,7 +56176,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-10-20T11:35:57.378Z"
+                            default: "2026-10-21T04:39:31.242Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -56181,7 +56246,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-10-20T11:35:57.378Z"
+                        default: "2026-10-21T04:39:31.242Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -56189,7 +56254,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-10-20T11:35:57.378Z"
+                            default: "2026-10-21T04:39:31.242Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -76381,6 +76446,21 @@ paths:
                                             - "type"
                                           title: "Cache control"
                                           type: "object"
+                                        prompt_cache_breakpoint:
+                                          description: "An explicit OpenAI cache boundary for GPT-5.6 and later. Omitted ttl inherits prompt_cache_options.ttl."
+                                          properties:
+                                            mode:
+                                              enum:
+                                                - "explicit"
+                                              type: "string"
+                                            ttl:
+                                              enum:
+                                                - "30m"
+                                                - "12h"
+                                              type: "string"
+                                          required:
+                                            - "mode"
+                                          type: "object"
                                         text:
                                           description: "The text content."
                                           type: "string"
@@ -76426,6 +76506,21 @@ paths:
                                         image_url:
                                           description: "The URL of the image."
                                           type: "string"
+                                        prompt_cache_breakpoint:
+                                          description: "An explicit OpenAI cache boundary for GPT-5.6 and later. Omitted ttl inherits prompt_cache_options.ttl."
+                                          properties:
+                                            mode:
+                                              enum:
+                                                - "explicit"
+                                              type: "string"
+                                            ttl:
+                                              enum:
+                                                - "30m"
+                                                - "12h"
+                                              type: "string"
+                                          required:
+                                            - "mode"
+                                          type: "object"
                                         type:
                                           enum:
                                             - "input_image"
@@ -76469,6 +76564,21 @@ paths:
                                         mime_type:
                                           description: "The MIME type of the file (e.g., application/pdf)."
                                           type: "string"
+                                        prompt_cache_breakpoint:
+                                          description: "An explicit OpenAI cache boundary for GPT-5.6 and later. Omitted ttl inherits prompt_cache_options.ttl."
+                                          properties:
+                                            mode:
+                                              enum:
+                                                - "explicit"
+                                              type: "string"
+                                            ttl:
+                                              enum:
+                                                - "30m"
+                                                - "12h"
+                                              type: "string"
+                                          required:
+                                            - "mode"
+                                          type: "object"
                                         type:
                                           enum:
                                             - "input_file"
@@ -76606,7 +76716,7 @@ paths:
                   type: "string"
                 prompt_cache_options:
                   $ref: "#/components/schemas/OpenAIPromptCacheOptions"
-                  description: "OpenAI prompt cache options. GPT-5.6 and later support ttl=30m."
+                  description: "OpenAI prompt cache options. GPT-5.6 and later support ttl=30m (default) or 12h. 12h cache writes cost twice the 30m rate."
                 reasoning:
                   $ref: "#/components/schemas/ReasoningParam"
                   description: "Configure reasoning behavior. Set effort (none, minimal, low, medium, high, xhigh, max) to control how much the model thinks before answering. Higher effort means more reasoning tokens and better answers for complex tasks, at higher cost."
