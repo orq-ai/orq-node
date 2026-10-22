@@ -10,7 +10,7 @@
 
 ## compact
 
-Compacts a conversation by summarizing older items to free up context window space. Returns a compaction item containing the generated summary.
+Compacts a conversation by summarizing older items to free up context window space. Returns the next context window: a compaction item containing the generated summary, followed by the most recent items verbatim.
 
 ### Example Usage
 
@@ -173,9 +173,10 @@ run();
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type              | Status Code             | Content Type            |
+| ----------------------- | ----------------------- | ----------------------- |
+| errors.APIErrorResponse | 400, 401                | application/json        |
+| errors.APIError         | 4XX, 5XX                | \*/\*                   |
 
 ## get
 

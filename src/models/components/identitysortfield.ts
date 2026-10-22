@@ -6,7 +6,6 @@ import * as z from "zod/v3";
 import { ClosedEnum } from "../../types/enums.js";
 
 export const IdentitySortField = {
-  IdentitySortFieldUnspecified: "IDENTITY_SORT_FIELD_UNSPECIFIED",
   IdentitySortFieldDisplayName: "IDENTITY_SORT_FIELD_DISPLAY_NAME",
   IdentitySortFieldUpdated: "IDENTITY_SORT_FIELD_UPDATED",
 } as const;

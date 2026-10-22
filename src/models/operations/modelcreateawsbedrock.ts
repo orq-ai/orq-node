@@ -15,8 +15,10 @@ export type ModelCreateAwsBedrockRequestBody = {
   authMode: string;
   autorouterId?: string | undefined;
   autorouterVersion?: string | undefined;
+  benchmarkModel?: string | undefined;
   cacheReadCost?: number | undefined;
   cacheWriteCost?: number | undefined;
+  configuration?: components.PrivateModelConfiguration | undefined;
   description?: string | undefined;
   displayName: string;
   hasReasoning?: boolean | undefined;
@@ -25,6 +27,9 @@ export type ModelCreateAwsBedrockRequestBody = {
   maxTokens?: number | undefined;
   modelDeveloper: string;
   modelFamily?: string | undefined;
+  /**
+   * Immutable workspace-unique slug when configuration.model_id is supplied.
+   */
   modelId: string;
   modelType?: string | undefined;
   outputCost?: number | undefined;
@@ -33,6 +38,7 @@ export type ModelCreateAwsBedrockRequestBody = {
   supportsExtendedThinking?: boolean | undefined;
   supportsJsonMode?: boolean | undefined;
   supportsJsonSchema?: boolean | undefined;
+  supportsMidConversationSystem?: boolean | undefined;
   supportsStrictTool?: boolean | undefined;
   supportsToolCalling?: boolean | undefined;
   supportsVision?: boolean | undefined;
@@ -57,6 +63,9 @@ export type ModelCreateAwsBedrockResponseBody = {
   inputCost: number | null;
   inputCurrency: string;
   isActive: boolean;
+  /**
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
+   */
   legacyUuid?: string | undefined;
   metadata: components.ModelMetadata;
   modelDeveloper?: string | undefined;
@@ -81,8 +90,10 @@ export type ModelCreateAwsBedrockRequestBody$Outbound = {
   auth_mode: string;
   autorouter_id?: string | undefined;
   autorouter_version?: string | undefined;
+  benchmark_model?: string | undefined;
   cache_read_cost?: number | undefined;
   cache_write_cost?: number | undefined;
+  configuration?: components.PrivateModelConfiguration$Outbound | undefined;
   description?: string | undefined;
   display_name: string;
   has_reasoning?: boolean | undefined;
@@ -99,6 +110,7 @@ export type ModelCreateAwsBedrockRequestBody$Outbound = {
   supports_extended_thinking?: boolean | undefined;
   supports_json_mode?: boolean | undefined;
   supports_json_schema?: boolean | undefined;
+  supports_mid_conversation_system?: boolean | undefined;
   supports_strict_tool?: boolean | undefined;
   supports_tool_calling?: boolean | undefined;
   supports_vision?: boolean | undefined;
@@ -116,8 +128,10 @@ export const ModelCreateAwsBedrockRequestBody$outboundSchema: z.ZodType<
   authMode: z.string(),
   autorouterId: z.string().optional(),
   autorouterVersion: z.string().optional(),
+  benchmarkModel: z.string().optional(),
   cacheReadCost: z.number().optional(),
   cacheWriteCost: z.number().optional(),
+  configuration: components.PrivateModelConfiguration$outboundSchema.optional(),
   description: z.string().optional(),
   displayName: z.string(),
   hasReasoning: z.boolean().optional(),
@@ -134,6 +148,7 @@ export const ModelCreateAwsBedrockRequestBody$outboundSchema: z.ZodType<
   supportsExtendedThinking: z.boolean().optional(),
   supportsJsonMode: z.boolean().optional(),
   supportsJsonSchema: z.boolean().optional(),
+  supportsMidConversationSystem: z.boolean().optional(),
   supportsStrictTool: z.boolean().optional(),
   supportsToolCalling: z.boolean().optional(),
   supportsVision: z.boolean().optional(),
@@ -145,6 +160,7 @@ export const ModelCreateAwsBedrockRequestBody$outboundSchema: z.ZodType<
     authMode: "auth_mode",
     autorouterId: "autorouter_id",
     autorouterVersion: "autorouter_version",
+    benchmarkModel: "benchmark_model",
     cacheReadCost: "cache_read_cost",
     cacheWriteCost: "cache_write_cost",
     displayName: "display_name",
@@ -161,6 +177,7 @@ export const ModelCreateAwsBedrockRequestBody$outboundSchema: z.ZodType<
     supportsExtendedThinking: "supports_extended_thinking",
     supportsJsonMode: "supports_json_mode",
     supportsJsonSchema: "supports_json_schema",
+    supportsMidConversationSystem: "supports_mid_conversation_system",
     supportsStrictTool: "supports_strict_tool",
     supportsToolCalling: "supports_tool_calling",
     supportsVision: "supports_vision",

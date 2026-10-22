@@ -11,7 +11,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 export type RedactResponse = {
   redactedText?: string | undefined;
   /**
-   * Maps each placeholder (e.g. "<PERSON_1>") to the original value it replaced.
+   * Maps each placeholder (e.g. `<PERSON_1>`) to the original value it replaced.
    */
   mappings?: { [k: string]: string } | undefined;
 };

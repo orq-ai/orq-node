@@ -39,7 +39,6 @@ async function run() {
       ],
     },
     cache: {
-      ttl: 3600,
       type: "exact_match",
     },
     loadBalancer: {
@@ -103,7 +102,6 @@ async function run() {
       ],
     },
     cache: {
-      ttl: 3600,
       type: "exact_match",
     },
     loadBalancer: {
@@ -153,6 +151,7 @@ run();
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type              | Status Code             | Content Type            |
+| ----------------------- | ----------------------- | ----------------------- |
+| errors.APIErrorResponse | 400, 401, 404           | application/json        |
+| errors.APIError         | 4XX, 5XX                | \*/\*                   |

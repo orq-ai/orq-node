@@ -6,6 +6,11 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { McpAuthType, McpAuthType$outboundSchema } from "./mcpauthtype.js";
 import {
+  McpEnterpriseAuthConfig,
+  McpEnterpriseAuthConfig$Outbound,
+  McpEnterpriseAuthConfig$outboundSchema,
+} from "./mcpenterpriseauthconfig.js";
+import {
   McpHeaderSecret,
   McpHeaderSecret$Outbound,
   McpHeaderSecret$outboundSchema,
@@ -26,6 +31,10 @@ export type McpAuthConfig = {
    * OAuth client credentials the gateway presents to the upstream authorization server; set when type is OAUTH_CLIENT_CREDENTIALS.
    */
   oauth?: McpOAuthConfig | undefined;
+  /**
+   * Client for the upstream authorization server; set when type is ENTERPRISE_MANAGED.
+   */
+  enterprise?: McpEnterpriseAuthConfig | undefined;
 };
 
 /** @internal */
@@ -33,6 +42,7 @@ export type McpAuthConfig$Outbound = {
   type: string;
   static_headers?: Array<McpHeaderSecret$Outbound> | undefined;
   oauth?: McpOAuthConfig$Outbound | undefined;
+  enterprise?: McpEnterpriseAuthConfig$Outbound | undefined;
 };
 
 /** @internal */
@@ -44,6 +54,7 @@ export const McpAuthConfig$outboundSchema: z.ZodType<
   type: McpAuthType$outboundSchema,
   staticHeaders: z.array(McpHeaderSecret$outboundSchema).optional(),
   oauth: McpOAuthConfig$outboundSchema.optional(),
+  enterprise: McpEnterpriseAuthConfig$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     staticHeaders: "static_headers",

@@ -11,7 +11,7 @@ let value: ListManagementKeysResponse = {
     {
       managementKeyId: "<id>",
       name: "<value>",
-      permissionMode: "MANAGEMENT_PERMISSION_MODE_UNSPECIFIED",
+      permissionMode: "MANAGEMENT_PERMISSION_MODE_ALL",
       tokenPrefix: "<value>",
       status: "MANAGEMENT_KEY_STATUS_DISABLED",
       createdAt: new Date("2024-05-03T01:19:06.489Z"),

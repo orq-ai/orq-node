@@ -3,31 +3,32 @@
 
 ## Supported Types
 
-### `operations.PostV2HumanEvalSetsRequestBody1`
+### `operations.RequestBody1`
 
 ```typescript
-const value: operations.PostV2HumanEvalSetsRequestBody1 = {
-  displayName: "Cristal54",
+const value: operations.RequestBody1 = {
+  displayName: "Abagail.Frami",
   humanEvalIds: [
     "<id 1>",
-    "<id 2>",
-    "<id 3>",
   ],
   filterType: "span_type",
   filterValues: [
     "<value 1>",
+    "<value 2>",
+    "<value 3>",
   ],
 };
 ```
 
-### `operations.PostV2HumanEvalSetsRequestBody2`
+### `operations.RequestBody2`
 
 ```typescript
-const value: operations.PostV2HumanEvalSetsRequestBody2 = {
-  displayName: "Reyes.Kertzmann58",
+const value: operations.RequestBody2 = {
+  displayName: "Ambrose98",
   humanEvalIds: [
     "<id 1>",
     "<id 2>",
+    "<id 3>",
   ],
   filterType: "name",
   filterValue: "<value>",

@@ -6,7 +6,6 @@ import * as z from "zod/v3";
 import { ClosedEnum } from "../../types/enums.js";
 
 export const McpConnectionType = {
-  McpConnectionTypeUnspecified: "MCP_CONNECTION_TYPE_UNSPECIFIED",
   McpConnectionTypeHttp: "MCP_CONNECTION_TYPE_HTTP",
   McpConnectionTypeSse: "MCP_CONNECTION_TYPE_SSE",
   McpConnectionTypeStdio: "MCP_CONNECTION_TYPE_STDIO",

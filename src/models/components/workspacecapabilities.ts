@@ -3,13 +3,19 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import {
+  EffectiveUserPermissions,
+  EffectiveUserPermissions$inboundSchema,
+} from "./effectiveuserpermissions.js";
 
 export type WorkspaceCapabilities = {
   roles?: Array<string> | undefined;
   projects?: Array<string> | undefined;
+  userPermissions?: EffectiveUserPermissions | undefined;
 };
 
 /** @internal */
@@ -20,6 +26,11 @@ export const WorkspaceCapabilities$inboundSchema: z.ZodType<
 > = z.object({
   roles: z.array(z.string()).optional(),
   projects: z.array(z.string()).optional(),
+  user_permissions: EffectiveUserPermissions$inboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "user_permissions": "userPermissions",
+  });
 });
 
 export function workspaceCapabilitiesFromJSON(

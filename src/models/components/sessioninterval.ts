@@ -6,7 +6,6 @@ import * as z from "zod/v3";
 import { ClosedEnum } from "../../types/enums.js";
 
 export const SessionInterval = {
-  SessionIntervalUnspecified: "SESSION_INTERVAL_UNSPECIFIED",
   SessionIntervalAllTime: "SESSION_INTERVAL_ALL_TIME",
   SessionIntervalLast30Minutes: "SESSION_INTERVAL_LAST_30_MINUTES",
   SessionIntervalLast1Hour: "SESSION_INTERVAL_LAST_1_HOUR",

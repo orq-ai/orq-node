@@ -493,7 +493,7 @@ export type CreateChatCompletionResponseFormat =
   | CreateChatCompletionResponseFormatJSONSchema;
 
 /**
- * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, `xhigh`, and `max`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+ * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `instant`, `minimal`, `low`, `medium`, `high`, `xhigh`, and `max`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
  *
  * @remarks
  *
@@ -502,10 +502,11 @@ export type CreateChatCompletionResponseFormat =
  * - The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.
  * - `xhigh` is currently only supported for `gpt-5.1-codex-max`.
  *
- * Any of "none", "minimal", "low", "medium", "high", "xhigh", "max".
+ * Any of "none", "instant", "minimal", "low", "medium", "high", "xhigh", "max".
  */
 export const CreateChatCompletionReasoningEffort = {
   None: "none",
+  Instant: "instant",
   Minimal: "minimal",
   Low: "low",
   Medium: "medium",
@@ -514,7 +515,7 @@ export const CreateChatCompletionReasoningEffort = {
   Max: "max",
 } as const;
 /**
- * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, `xhigh`, and `max`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+ * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `instant`, `minimal`, `low`, `medium`, `high`, `xhigh`, and `max`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
  *
  * @remarks
  *
@@ -523,7 +524,7 @@ export const CreateChatCompletionReasoningEffort = {
  * - The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.
  * - `xhigh` is currently only supported for `gpt-5.1-codex-max`.
  *
- * Any of "none", "minimal", "low", "medium", "high", "xhigh", "max".
+ * Any of "none", "instant", "minimal", "low", "medium", "high", "xhigh", "max".
  */
 export type CreateChatCompletionReasoningEffort = ClosedEnum<
   typeof CreateChatCompletionReasoningEffort
@@ -1409,6 +1410,10 @@ export type Orq = {
    */
   retry?: CreateChatCompletionRouterChatCompletionsRetry | undefined;
   /**
+   * HTTP status codes that trigger fallback. Enter up to 20 unique integers from 400 to 599. When omitted or empty, defaults to [408, 429, 500, 502, 503, 504, 529].
+   */
+  fallbackOnCodes?: Array<number> | undefined;
+  /**
    * Array of fallback models to use if primary model fails
    */
   fallbacks?:
@@ -1523,7 +1528,7 @@ export type CreateChatCompletionRequestBody = {
     | CreateChatCompletionResponseFormatJSONSchema
     | undefined;
   /**
-   * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, `xhigh`, and `max`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+   * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `instant`, `minimal`, `low`, `medium`, `high`, `xhigh`, and `max`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
    *
    * @remarks
    *
@@ -1532,7 +1537,7 @@ export type CreateChatCompletionRequestBody = {
    * - The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.
    * - `xhigh` is currently only supported for `gpt-5.1-codex-max`.
    *
-   * Any of "none", "minimal", "low", "medium", "high", "xhigh", "max".
+   * Any of "none", "instant", "minimal", "low", "medium", "high", "xhigh", "max".
    */
   reasoningEffort?: CreateChatCompletionReasoningEffort | undefined;
   /**
@@ -1601,6 +1606,10 @@ export type CreateChatCompletionRequestBody = {
       | components.TraceScrubbingPlugin
     >
     | undefined;
+  /**
+   * HTTP status codes that trigger fallback. Enter up to 20 unique integers from 400 to 599. When omitted or empty, defaults to [408, 429, 500, 502, 503, 504, 529].
+   */
+  fallbackOnCodes?: Array<number> | undefined;
   /**
    * Array of fallback models to use if primary model fails
    */
@@ -3622,7 +3631,7 @@ export const CreateChatCompletionCache$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateChatCompletionCache
 > = z.object({
-  ttl: z.number().default(1800),
+  ttl: z.number().default(3600),
   type: CreateChatCompletionRouterChatCompletionsRequestType$outboundSchema,
 });
 
@@ -3951,7 +3960,7 @@ export const CreateChatCompletionRouterChatCompletionsCache$outboundSchema:
     z.ZodTypeDef,
     CreateChatCompletionRouterChatCompletionsCache
   > = z.object({
-    ttl: z.number().default(1800),
+    ttl: z.number().default(3600),
     type:
       CreateChatCompletionRouterChatCompletionsRequestRequestBodyOrqType$outboundSchema,
   });
@@ -5304,6 +5313,7 @@ export function createChatCompletionRouterChatCompletionsTimeoutToJSON(
 export type Orq$Outbound = {
   name?: string | undefined;
   retry?: CreateChatCompletionRouterChatCompletionsRetry$Outbound | undefined;
+  fallback_on_codes?: Array<number> | undefined;
   fallbacks?:
     | Array<CreateChatCompletionRouterChatCompletionsFallbacks$Outbound>
     | undefined;
@@ -5331,6 +5341,7 @@ export const Orq$outboundSchema: z.ZodType<Orq$Outbound, z.ZodTypeDef, Orq> = z
     retry: z.lazy(() =>
       CreateChatCompletionRouterChatCompletionsRetry$outboundSchema
     ).optional(),
+    fallbackOnCodes: z.array(z.number().int()).optional(),
     fallbacks: z.array(
       z.lazy(() =>
         CreateChatCompletionRouterChatCompletionsFallbacks$outboundSchema
@@ -5358,6 +5369,7 @@ export const Orq$outboundSchema: z.ZodType<Orq$Outbound, z.ZodTypeDef, Orq> = z
     ).optional(),
   }).transform((v) => {
     return remap$(v, {
+      fallbackOnCodes: "fallback_on_codes",
       knowledgeBases: "knowledge_bases",
       loadBalancer: "load_balancer",
     });
@@ -5420,6 +5432,7 @@ export type CreateChatCompletionRequestBody$Outbound = {
       | components.TraceScrubbingPlugin$Outbound
     >
     | undefined;
+  fallback_on_codes?: Array<number> | undefined;
   fallbacks?: Array<CreateChatCompletionFallbacks$Outbound> | undefined;
   retry?: CreateChatCompletionRetry$Outbound | undefined;
   cache?: CreateChatCompletionCache$Outbound | undefined;
@@ -5503,6 +5516,7 @@ export const CreateChatCompletionRequestBody$outboundSchema: z.ZodType<
       components.TraceScrubbingPlugin$outboundSchema,
     ]),
   ).optional(),
+  fallbackOnCodes: z.array(z.number().int()).optional(),
   fallbacks: z.array(z.lazy(() => CreateChatCompletionFallbacks$outboundSchema))
     .optional(),
   retry: z.lazy(() => CreateChatCompletionRetry$outboundSchema).optional(),
@@ -5530,6 +5544,7 @@ export const CreateChatCompletionRequestBody$outboundSchema: z.ZodType<
     topK: "top_k",
     toolChoice: "tool_choice",
     parallelToolCalls: "parallel_tool_calls",
+    fallbackOnCodes: "fallback_on_codes",
     loadBalancer: "load_balancer",
     cacheControl: "cache_control",
     promptCacheKey: "prompt_cache_key",

@@ -29,7 +29,7 @@ import { Result } from "../types/fp.js";
  * List Azure Foundry deployments under a resource
  *
  * @remarks
- * Lists Azure Foundry deployments under the given base_url and joins each entry with the Orq master-data row. Only OpenAI-developed deployments in succeeded state with chat/completion/embedding/vision model types are returned.
+ * Lists Azure Foundry deployments under the given base_url and merges each entry with the matching Orq model catalog entry. Only OpenAI-developed deployments in succeeded state with chat/completion/embedding/vision model types are returned.
  */
 export function modelsAzureFoundryDeployments(
   client: OrqCore,

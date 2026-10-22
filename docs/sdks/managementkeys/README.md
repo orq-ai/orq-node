@@ -76,9 +76,10 @@ run();
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type           | Status Code          | Content Type         |
+| -------------------- | -------------------- | -------------------- |
+| errors.ErrorResponse | 401                  | application/json     |
+| errors.APIError      | 4XX, 5XX             | \*/\*                |
 
 ## create
 
@@ -97,7 +98,7 @@ const orq = new Orq({
 async function run() {
   const result = await orq.managementKeys.create({
     name: "<value>",
-    permissionMode: "MANAGEMENT_PERMISSION_MODE_UNSPECIFIED",
+    permissionMode: "MANAGEMENT_PERMISSION_MODE_ALL",
   });
 
   console.log(result);
@@ -123,7 +124,7 @@ const orq = new OrqCore({
 async function run() {
   const res = await managementKeysCreate(orq, {
     name: "<value>",
-    permissionMode: "MANAGEMENT_PERMISSION_MODE_UNSPECIFIED",
+    permissionMode: "MANAGEMENT_PERMISSION_MODE_ALL",
   });
   if (res.ok) {
     const { value: result } = res;
@@ -151,9 +152,10 @@ run();
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type           | Status Code          | Content Type         |
+| -------------------- | -------------------- | -------------------- |
+| errors.ErrorResponse | 401                  | application/json     |
+| errors.APIError      | 4XX, 5XX             | \*/\*                |
 
 ## listCapabilities
 
@@ -219,9 +221,10 @@ run();
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type           | Status Code          | Content Type         |
+| -------------------- | -------------------- | -------------------- |
+| errors.ErrorResponse | 401                  | application/json     |
+| errors.APIError      | 4XX, 5XX             | \*/\*                |
 
 ## get
 
@@ -292,9 +295,10 @@ run();
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type           | Status Code          | Content Type         |
+| -------------------- | -------------------- | -------------------- |
+| errors.ErrorResponse | 401, 403             | application/json     |
+| errors.APIError      | 4XX, 5XX             | \*/\*                |
 
 ## delete
 
@@ -365,9 +369,10 @@ run();
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type           | Status Code          | Content Type         |
+| -------------------- | -------------------- | -------------------- |
+| errors.ErrorResponse | 401                  | application/json     |
+| errors.APIError      | 4XX, 5XX             | \*/\*                |
 
 ## update
 
@@ -440,6 +445,7 @@ run();
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type           | Status Code          | Content Type         |
+| -------------------- | -------------------- | -------------------- |
+| errors.ErrorResponse | 401                  | application/json     |
+| errors.APIError      | 4XX, 5XX             | \*/\*                |

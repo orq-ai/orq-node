@@ -6,7 +6,6 @@ import * as z from "zod/v3";
 import { ClosedEnum } from "../../types/enums.js";
 
 export const BudgetSortField = {
-  BudgetSortFieldUnspecified: "BUDGET_SORT_FIELD_UNSPECIFIED",
   BudgetSortFieldExpiresAt: "BUDGET_SORT_FIELD_EXPIRES_AT",
   BudgetSortFieldCreatedAt: "BUDGET_SORT_FIELD_CREATED_AT",
   BudgetSortFieldUpdatedAt: "BUDGET_SORT_FIELD_UPDATED_AT",

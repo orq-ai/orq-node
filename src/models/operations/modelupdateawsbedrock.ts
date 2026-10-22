@@ -14,8 +14,10 @@ export type ModelUpdateAwsBedrockRequestBody = {
   assumeRoleExternalId?: string | undefined;
   autorouterId?: string | undefined;
   autorouterVersion?: string | undefined;
+  benchmarkModel?: string | undefined;
   cacheReadCost?: number | undefined;
   cacheWriteCost?: number | undefined;
+  configuration?: components.PrivateModelConfiguration | undefined;
   description?: string | undefined;
   displayName?: string | undefined;
   hasReasoning?: boolean | undefined;
@@ -30,6 +32,7 @@ export type ModelUpdateAwsBedrockRequestBody = {
   supportsExtendedThinking?: boolean | undefined;
   supportsJsonMode?: boolean | undefined;
   supportsJsonSchema?: boolean | undefined;
+  supportsMidConversationSystem?: boolean | undefined;
   supportsStrictTool?: boolean | undefined;
   supportsToolCalling?: boolean | undefined;
   supportsVision?: boolean | undefined;
@@ -62,6 +65,9 @@ export type ModelUpdateAwsBedrockResponseBody = {
   inputCost: number | null;
   inputCurrency: string;
   isActive: boolean;
+  /**
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
+   */
   legacyUuid?: string | undefined;
   metadata: components.ModelMetadata;
   modelDeveloper?: string | undefined;
@@ -85,8 +91,10 @@ export type ModelUpdateAwsBedrockRequestBody$Outbound = {
   assume_role_external_id?: string | undefined;
   autorouter_id?: string | undefined;
   autorouter_version?: string | undefined;
+  benchmark_model?: string | undefined;
   cache_read_cost?: number | undefined;
   cache_write_cost?: number | undefined;
+  configuration?: components.PrivateModelConfiguration$Outbound | undefined;
   description?: string | undefined;
   display_name?: string | undefined;
   has_reasoning?: boolean | undefined;
@@ -101,6 +109,7 @@ export type ModelUpdateAwsBedrockRequestBody$Outbound = {
   supports_extended_thinking?: boolean | undefined;
   supports_json_mode?: boolean | undefined;
   supports_json_schema?: boolean | undefined;
+  supports_mid_conversation_system?: boolean | undefined;
   supports_strict_tool?: boolean | undefined;
   supports_tool_calling?: boolean | undefined;
   supports_vision?: boolean | undefined;
@@ -117,8 +126,10 @@ export const ModelUpdateAwsBedrockRequestBody$outboundSchema: z.ZodType<
   assumeRoleExternalId: z.string().optional(),
   autorouterId: z.string().optional(),
   autorouterVersion: z.string().optional(),
+  benchmarkModel: z.string().optional(),
   cacheReadCost: z.number().optional(),
   cacheWriteCost: z.number().optional(),
+  configuration: components.PrivateModelConfiguration$outboundSchema.optional(),
   description: z.string().optional(),
   displayName: z.string().optional(),
   hasReasoning: z.boolean().optional(),
@@ -133,6 +144,7 @@ export const ModelUpdateAwsBedrockRequestBody$outboundSchema: z.ZodType<
   supportsExtendedThinking: z.boolean().optional(),
   supportsJsonMode: z.boolean().optional(),
   supportsJsonSchema: z.boolean().optional(),
+  supportsMidConversationSystem: z.boolean().optional(),
   supportsStrictTool: z.boolean().optional(),
   supportsToolCalling: z.boolean().optional(),
   supportsVision: z.boolean().optional(),
@@ -143,6 +155,7 @@ export const ModelUpdateAwsBedrockRequestBody$outboundSchema: z.ZodType<
     assumeRoleExternalId: "assume_role_external_id",
     autorouterId: "autorouter_id",
     autorouterVersion: "autorouter_version",
+    benchmarkModel: "benchmark_model",
     cacheReadCost: "cache_read_cost",
     cacheWriteCost: "cache_write_cost",
     displayName: "display_name",
@@ -157,6 +170,7 @@ export const ModelUpdateAwsBedrockRequestBody$outboundSchema: z.ZodType<
     supportsExtendedThinking: "supports_extended_thinking",
     supportsJsonMode: "supports_json_mode",
     supportsJsonSchema: "supports_json_schema",
+    supportsMidConversationSystem: "supports_mid_conversation_system",
     supportsStrictTool: "supports_strict_tool",
     supportsToolCalling: "supports_tool_calling",
     supportsVision: "supports_vision",

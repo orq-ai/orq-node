@@ -146,6 +146,10 @@ export type RetrieveAgentRequestTools = {
    * Nested tool ID for MCP tools (identifies specific tool within MCP server)
    */
   toolId?: string | undefined;
+  /**
+   * Set by the API on MCP tools resolved from a whole MCP server or gateway; they are resolved again on every save.
+   */
+  wholeServer?: boolean | undefined;
   conditions?: Array<RetrieveAgentRequestConditions> | undefined;
   /**
    * Tool execution timeout in seconds for this agent (max: 10 minutes). Overrides the timeout configured on the tool definition.
@@ -307,7 +311,7 @@ export type RetrieveAgentRequestResponseFormat =
   | RetrieveAgentRequestResponseFormatAgentsJSONSchema;
 
 /**
- * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, `xhigh`, and `max`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+ * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `instant`, `minimal`, `low`, `medium`, `high`, `xhigh`, and `max`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
  *
  * @remarks
  *
@@ -316,10 +320,11 @@ export type RetrieveAgentRequestResponseFormat =
  * - The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.
  * - `xhigh` is currently only supported for `gpt-5.1-codex-max`.
  *
- * Any of "none", "minimal", "low", "medium", "high", "xhigh", "max".
+ * Any of "none", "instant", "minimal", "low", "medium", "high", "xhigh", "max".
  */
 export const RetrieveAgentRequestReasoningEffort = {
   None: "none",
+  Instant: "instant",
   Minimal: "minimal",
   Low: "low",
   Medium: "medium",
@@ -328,7 +333,7 @@ export const RetrieveAgentRequestReasoningEffort = {
   Max: "max",
 } as const;
 /**
- * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, `xhigh`, and `max`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+ * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `instant`, `minimal`, `low`, `medium`, `high`, `xhigh`, and `max`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
  *
  * @remarks
  *
@@ -337,7 +342,7 @@ export const RetrieveAgentRequestReasoningEffort = {
  * - The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.
  * - `xhigh` is currently only supported for `gpt-5.1-codex-max`.
  *
- * Any of "none", "minimal", "low", "medium", "high", "xhigh", "max".
+ * Any of "none", "instant", "minimal", "low", "medium", "high", "xhigh", "max".
  */
 export type RetrieveAgentRequestReasoningEffort = ClosedEnum<
   typeof RetrieveAgentRequestReasoningEffort
@@ -613,7 +618,7 @@ export type RetrieveAgentRequestParameters = {
     | RetrieveAgentRequestResponseFormatAgentsJSONSchema
     | undefined;
   /**
-   * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, `xhigh`, and `max`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+   * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `instant`, `minimal`, `low`, `medium`, `high`, `xhigh`, and `max`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
    *
    * @remarks
    *
@@ -622,7 +627,7 @@ export type RetrieveAgentRequestParameters = {
    * - The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.
    * - `xhigh` is currently only supported for `gpt-5.1-codex-max`.
    *
-   * Any of "none", "minimal", "low", "medium", "high", "xhigh", "max".
+   * Any of "none", "instant", "minimal", "low", "medium", "high", "xhigh", "max".
    */
   reasoningEffort?: RetrieveAgentRequestReasoningEffort | undefined;
   /**
@@ -683,6 +688,10 @@ export type RetrieveAgentRequestParameters = {
       | components.TraceScrubbingPlugin
     >
     | undefined;
+  /**
+   * HTTP status codes that trigger fallback. Enter up to 20 unique integers from 400 to 599. When omitted or empty, defaults to [408, 429, 500, 502, 503, 504, 529].
+   */
+  fallbackOnCodes?: Array<number> | undefined;
   /**
    * Array of fallback models to use if primary model fails
    */
@@ -779,7 +788,7 @@ export type RetrieveAgentRequestFallbackModelConfigurationResponseFormat =
   | RetrieveAgentRequestResponseFormatAgentsResponse200JSONSchema;
 
 /**
- * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, `xhigh`, and `max`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+ * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `instant`, `minimal`, `low`, `medium`, `high`, `xhigh`, and `max`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
  *
  * @remarks
  *
@@ -788,10 +797,11 @@ export type RetrieveAgentRequestFallbackModelConfigurationResponseFormat =
  * - The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.
  * - `xhigh` is currently only supported for `gpt-5.1-codex-max`.
  *
- * Any of "none", "minimal", "low", "medium", "high", "xhigh", "max".
+ * Any of "none", "instant", "minimal", "low", "medium", "high", "xhigh", "max".
  */
 export const RetrieveAgentRequestFallbackModelConfigurationReasoningEffort = {
   None: "none",
+  Instant: "instant",
   Minimal: "minimal",
   Low: "low",
   Medium: "medium",
@@ -800,7 +810,7 @@ export const RetrieveAgentRequestFallbackModelConfigurationReasoningEffort = {
   Max: "max",
 } as const;
 /**
- * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, `xhigh`, and `max`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+ * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `instant`, `minimal`, `low`, `medium`, `high`, `xhigh`, and `max`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
  *
  * @remarks
  *
@@ -809,7 +819,7 @@ export const RetrieveAgentRequestFallbackModelConfigurationReasoningEffort = {
  * - The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.
  * - `xhigh` is currently only supported for `gpt-5.1-codex-max`.
  *
- * Any of "none", "minimal", "low", "medium", "high", "xhigh", "max".
+ * Any of "none", "instant", "minimal", "low", "medium", "high", "xhigh", "max".
  */
 export type RetrieveAgentRequestFallbackModelConfigurationReasoningEffort =
   ClosedEnum<
@@ -1087,7 +1097,7 @@ export type RetrieveAgentRequestFallbackModelConfigurationParameters = {
     | RetrieveAgentRequestResponseFormatAgentsResponse200JSONSchema
     | undefined;
   /**
-   * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `minimal`, `low`, `medium`, `high`, `xhigh`, and `max`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
+   * Constrains effort on reasoning for [reasoning models](https://platform.openai.com/docs/guides/reasoning). Currently supported values are `none`, `instant`, `minimal`, `low`, `medium`, `high`, `xhigh`, and `max`. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
    *
    * @remarks
    *
@@ -1096,7 +1106,7 @@ export type RetrieveAgentRequestFallbackModelConfigurationParameters = {
    * - The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.
    * - `xhigh` is currently only supported for `gpt-5.1-codex-max`.
    *
-   * Any of "none", "minimal", "low", "medium", "high", "xhigh", "max".
+   * Any of "none", "instant", "minimal", "low", "medium", "high", "xhigh", "max".
    */
   reasoningEffort?:
     | RetrieveAgentRequestFallbackModelConfigurationReasoningEffort
@@ -1164,6 +1174,10 @@ export type RetrieveAgentRequestFallbackModelConfigurationParameters = {
       | components.TraceScrubbingPlugin
     >
     | undefined;
+  /**
+   * HTTP status codes that trigger fallback. Enter up to 20 unique integers from 400 to 599. When omitted or empty, defaults to [408, 429, 500, 502, 503, 504, 529].
+   */
+  fallbackOnCodes?: Array<number> | undefined;
   /**
    * Array of fallback models to use if primary model fails
    */
@@ -1505,6 +1519,7 @@ export const RetrieveAgentRequestTools$inboundSchema: z.ZodType<
   configuration: z.record(z.any()).optional(),
   requires_approval: z.boolean().default(false),
   tool_id: z.string().optional(),
+  whole_server: z.boolean().optional(),
   conditions: z.array(
     z.lazy(() => RetrieveAgentRequestConditions$inboundSchema),
   ).optional(),
@@ -1515,6 +1530,7 @@ export const RetrieveAgentRequestTools$inboundSchema: z.ZodType<
     "display_name": "displayName",
     "requires_approval": "requiresApproval",
     "tool_id": "toolId",
+    "whole_server": "wholeServer",
   });
 });
 
@@ -1987,7 +2003,7 @@ export const RetrieveAgentRequestCache$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  ttl: z.number().default(1800),
+  ttl: z.number().default(3600),
   type: RetrieveAgentRequestAgentsType$inboundSchema,
 });
 
@@ -2171,6 +2187,7 @@ export const RetrieveAgentRequestParameters$inboundSchema: z.ZodType<
       components.TraceScrubbingPlugin$inboundSchema,
     ]),
   ).optional(),
+  fallback_on_codes: z.array(z.number().int()).optional(),
   fallbacks: z.array(z.lazy(() => RetrieveAgentRequestFallbacks$inboundSchema))
     .optional(),
   cache: z.lazy(() => RetrieveAgentRequestCache$inboundSchema).optional(),
@@ -2192,6 +2209,7 @@ export const RetrieveAgentRequestParameters$inboundSchema: z.ZodType<
     "top_k": "topK",
     "tool_choice": "toolChoice",
     "parallel_tool_calls": "parallelToolCalls",
+    "fallback_on_codes": "fallbackOnCodes",
     "load_balancer": "loadBalancer",
     "cache_control": "cacheControl",
     "prompt_cache_key": "promptCacheKey",
@@ -2659,7 +2677,7 @@ export const RetrieveAgentRequestFallbackModelConfigurationCache$inboundSchema:
     z.ZodTypeDef,
     unknown
   > = z.object({
-    ttl: z.number().default(1800),
+    ttl: z.number().default(3600),
     type: RetrieveAgentRequestFallbackModelConfigurationType$inboundSchema,
   });
 
@@ -2890,6 +2908,7 @@ export const RetrieveAgentRequestFallbackModelConfigurationParameters$inboundSch
         components.TraceScrubbingPlugin$inboundSchema,
       ]),
     ).optional(),
+    fallback_on_codes: z.array(z.number().int()).optional(),
     fallbacks: z.array(
       z.lazy(() =>
         RetrieveAgentRequestFallbackModelConfigurationFallbacks$inboundSchema
@@ -2920,6 +2939,7 @@ export const RetrieveAgentRequestFallbackModelConfigurationParameters$inboundSch
       "top_k": "topK",
       "tool_choice": "toolChoice",
       "parallel_tool_calls": "parallelToolCalls",
+      "fallback_on_codes": "fallbackOnCodes",
       "load_balancer": "loadBalancer",
       "cache_control": "cacheControl",
       "prompt_cache_key": "promptCacheKey",

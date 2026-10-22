@@ -173,6 +173,10 @@ export type CreateRerankOrq = {
    */
   fallbacks?: Array<CreateRerankRouterRerankFallbacks> | undefined;
   /**
+   * HTTP status codes that trigger fallback. Enter up to 20 unique integers from 400 to 599. When omitted or empty, defaults to [408, 429, 500, 502, 503, 504, 529].
+   */
+  fallbackOnCodes?: Array<number> | undefined;
+  /**
    * Cache configuration for the request.
    */
   cache?: CreateRerankRouterRerankCache | undefined;
@@ -232,6 +236,10 @@ export type CreateRerankRequestBody = {
    * The name to display on the trace. If not specified, the default system name will be used.
    */
   name?: string | undefined;
+  /**
+   * HTTP status codes that trigger fallback. Enter up to 20 unique integers from 400 to 599. When omitted or empty, defaults to [408, 429, 500, 502, 503, 504, 529].
+   */
+  fallbackOnCodes?: Array<number> | undefined;
   /**
    * Array of fallback models to use if primary model fails
    */
@@ -396,7 +404,7 @@ export const CreateRerankCache$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateRerankCache
 > = z.object({
-  ttl: z.number().default(1800),
+  ttl: z.number().default(3600),
   type: CreateRerankType$outboundSchema,
 });
 
@@ -549,7 +557,7 @@ export const CreateRerankRouterRerankCache$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateRerankRouterRerankCache
 > = z.object({
-  ttl: z.number().default(1800),
+  ttl: z.number().default(3600),
   type: CreateRerankRouterRerankType$outboundSchema,
 });
 
@@ -707,6 +715,7 @@ export function createRerankRouterRerankTimeoutToJSON(
 export type CreateRerankOrq$Outbound = {
   name?: string | undefined;
   fallbacks?: Array<CreateRerankRouterRerankFallbacks$Outbound> | undefined;
+  fallback_on_codes?: Array<number> | undefined;
   cache?: CreateRerankRouterRerankCache$Outbound | undefined;
   retry?: CreateRerankRouterRerankRetry$Outbound | undefined;
   identity?: components.PublicIdentity$Outbound | undefined;
@@ -725,6 +734,7 @@ export const CreateRerankOrq$outboundSchema: z.ZodType<
   fallbacks: z.array(
     z.lazy(() => CreateRerankRouterRerankFallbacks$outboundSchema),
   ).optional(),
+  fallbackOnCodes: z.array(z.number().int()).optional(),
   cache: z.lazy(() => CreateRerankRouterRerankCache$outboundSchema).optional(),
   retry: z.lazy(() => CreateRerankRouterRerankRetry$outboundSchema).optional(),
   identity: components.PublicIdentity$outboundSchema.optional(),
@@ -736,6 +746,7 @@ export const CreateRerankOrq$outboundSchema: z.ZodType<
     .optional(),
 }).transform((v) => {
   return remap$(v, {
+    fallbackOnCodes: "fallback_on_codes",
     loadBalancer: "load_balancer",
   });
 });
@@ -755,6 +766,7 @@ export type CreateRerankRequestBody$Outbound = {
   return_documents?: boolean | undefined;
   filename?: string | null | undefined;
   name?: string | undefined;
+  fallback_on_codes?: Array<number> | undefined;
   fallbacks?: Array<CreateRerankFallbacks$Outbound> | undefined;
   retry?: CreateRerankRetry$Outbound | undefined;
   cache?: CreateRerankCache$Outbound | undefined;
@@ -777,6 +789,7 @@ export const CreateRerankRequestBody$outboundSchema: z.ZodType<
   returnDocuments: z.boolean().optional(),
   filename: z.nullable(z.string()).optional(),
   name: z.string().optional(),
+  fallbackOnCodes: z.array(z.number().int()).optional(),
   fallbacks: z.array(z.lazy(() => CreateRerankFallbacks$outboundSchema))
     .optional(),
   retry: z.lazy(() => CreateRerankRetry$outboundSchema).optional(),
@@ -790,6 +803,7 @@ export const CreateRerankRequestBody$outboundSchema: z.ZodType<
   return remap$(v, {
     topN: "top_n",
     returnDocuments: "return_documents",
+    fallbackOnCodes: "fallback_on_codes",
     loadBalancer: "load_balancer",
   });
 });

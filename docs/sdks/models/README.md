@@ -379,7 +379,7 @@ run();
 
 ## azureFoundryDeployments
 
-Lists Azure Foundry deployments under the given base_url and joins each entry with the Orq master-data row. Only OpenAI-developed deployments in succeeded state with chat/completion/embedding/vision model types are returned.
+Lists Azure Foundry deployments under the given base_url and merges each entry with the matching Orq model catalog entry. Only OpenAI-developed deployments in succeeded state with chat/completion/embedding/vision model types are returned.
 
 ### Example Usage
 
@@ -1080,7 +1080,7 @@ run();
 
 ## update
 
-Updates a custom model. Only fields present in the request body are modified, except for `metadata` and `parameters`, which are fully replaced when present (preserved from the legacy handler's behavior).
+Updates a custom model. Only fields present in the request body are modified, except for `metadata` and `parameters`, which are fully replaced when present.
 
 ### Example Usage
 
@@ -1363,6 +1363,7 @@ run();
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type              | Status Code             | Content Type            |
+| ----------------------- | ----------------------- | ----------------------- |
+| errors.APIErrorResponse | 401                     | application/json        |
+| errors.APIError         | 4XX, 5XX                | \*/\*                   |

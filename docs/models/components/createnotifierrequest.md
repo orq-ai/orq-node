@@ -13,7 +13,7 @@ const value: components.EmailNotifierCreateRequest = {
   emails: [],
   displayName: "Deployment alerts",
   incomingWebhookUrl:
-    "https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX",
+    "https://hooks.slack.com/services/T0000/B0000/example-token",
 };
 ```
 
@@ -23,7 +23,7 @@ const value: components.EmailNotifierCreateRequest = {
 const value: components.SlackWebhookNotifierCreateRequest = {
   type: "NOTIFIER_TYPE_SLACK_WEBHOOK",
   incomingWebhookUrl:
-    "https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX",
+    "https://hooks.slack.com/services/T0000/B0000/example-token",
   displayName: "Deployment alerts",
 };
 ```
@@ -36,7 +36,7 @@ const value: components.GenericWebhookNotifierCreateRequest = {
   webhookUrl: "https://discrete-scratch.org",
   displayName: "Deployment alerts",
   incomingWebhookUrl:
-    "https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX",
+    "https://hooks.slack.com/services/T0000/B0000/example-token",
 };
 ```
 

@@ -7,11 +7,11 @@ import { McpServer } from "@orq-ai/node/models/components";
 
 let value: McpServer = {
   connection: {
-    type: "MCP_CONNECTION_TYPE_HTTP",
+    type: "MCP_CONNECTION_TYPE_SSE",
     url: "https://api.githubcopilot.com/mcp/",
   },
   auth: {
-    type: "MCP_AUTH_TYPE_STATIC_HEADERS",
+    type: "MCP_AUTH_TYPE_OAUTH_CLIENT_CREDENTIALS",
     staticHeaders: [
       {
         key: "Authorization",
@@ -41,3 +41,4 @@ let value: McpServer = {
 | `updated`                                                                                                                                           | *string*                                                                                                                                            | :heavy_minus_sign:                                                                                                                                  | ISO 8601 timestamp of the most recent change to the server.                                                                                         |
 | `sharing`                                                                                                                                           | [components.Sharing](../../models/components/sharing.md)                                                                                            | :heavy_minus_sign:                                                                                                                                  | Which projects in the workspace may use this server.                                                                                                |
 | `createdById`                                                                                                                                       | *string*                                                                                                                                            | :heavy_minus_sign:                                                                                                                                  | Account that created the server.                                                                                                                    |
+| `skills`                                                                                                                                            | [components.McpSkill](../../models/components/mcpskill.md)[]                                                                                        | :heavy_minus_sign:                                                                                                                                  | Skills the upstream publishes through the MCP Skills extension, discovered by the last successful `:sync`.                                          |

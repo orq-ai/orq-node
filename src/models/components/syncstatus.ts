@@ -6,7 +6,6 @@ import * as z from "zod/v3";
 import { ClosedEnum } from "../../types/enums.js";
 
 export const SyncStatus = {
-  SyncStatusUnspecified: "SYNC_STATUS_UNSPECIFIED",
   SyncStatusSynced: "SYNC_STATUS_SYNCED",
   SyncStatusFailed: "SYNC_STATUS_FAILED",
   SyncStatusPending: "SYNC_STATUS_PENDING",

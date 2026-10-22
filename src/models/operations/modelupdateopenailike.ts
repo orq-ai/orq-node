@@ -11,8 +11,10 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ModelUpdateOpenAILikeRequestBody = {
   baseUrl?: string | undefined;
+  benchmarkModel?: string | undefined;
   cacheReadCost?: number | undefined;
   cacheWriteCost?: number | undefined;
+  configuration?: components.PrivateModelConfiguration | undefined;
   costPerImage?: number | undefined;
   description?: string | undefined;
   displayName: string;
@@ -56,6 +58,9 @@ export type ModelUpdateOpenAILikeResponseBody = {
   inputCost: number | null;
   inputCurrency: string;
   isActive: boolean;
+  /**
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
+   */
   legacyUuid?: string | undefined;
   metadata: components.ModelMetadata;
   modelDeveloper?: string | undefined;
@@ -76,8 +81,10 @@ export type ModelUpdateOpenAILikeResponseBody = {
 /** @internal */
 export type ModelUpdateOpenAILikeRequestBody$Outbound = {
   base_url?: string | undefined;
+  benchmark_model?: string | undefined;
   cache_read_cost?: number | undefined;
   cache_write_cost?: number | undefined;
+  configuration?: components.PrivateModelConfiguration$Outbound | undefined;
   cost_per_image?: number | undefined;
   description?: string | undefined;
   display_name: string;
@@ -102,8 +109,10 @@ export const ModelUpdateOpenAILikeRequestBody$outboundSchema: z.ZodType<
   ModelUpdateOpenAILikeRequestBody
 > = z.object({
   baseUrl: z.string().optional(),
+  benchmarkModel: z.string().optional(),
   cacheReadCost: z.number().optional(),
   cacheWriteCost: z.number().optional(),
+  configuration: components.PrivateModelConfiguration$outboundSchema.optional(),
   costPerImage: z.number().optional(),
   description: z.string().optional(),
   displayName: z.string(),
@@ -122,6 +131,7 @@ export const ModelUpdateOpenAILikeRequestBody$outboundSchema: z.ZodType<
 }).transform((v) => {
   return remap$(v, {
     baseUrl: "base_url",
+    benchmarkModel: "benchmark_model",
     cacheReadCost: "cache_read_cost",
     cacheWriteCost: "cache_write_cost",
     costPerImage: "cost_per_image",

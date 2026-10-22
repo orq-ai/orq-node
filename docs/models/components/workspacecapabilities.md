@@ -10,7 +10,8 @@ let value: WorkspaceCapabilities = {};
 
 ## Fields
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `roles`            | *string*[]         | :heavy_minus_sign: | N/A                |
-| `projects`         | *string*[]         | :heavy_minus_sign: | N/A                |
+| Field                                                                                      | Type                                                                                       | Required                                                                                   | Description                                                                                |
+| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
+| `roles`                                                                                    | *string*[]                                                                                 | :heavy_minus_sign:                                                                         | N/A                                                                                        |
+| `projects`                                                                                 | *string*[]                                                                                 | :heavy_minus_sign:                                                                         | N/A                                                                                        |
+| `userPermissions`                                                                          | [components.EffectiveUserPermissions](../../models/components/effectiveuserpermissions.md) | :heavy_minus_sign:                                                                         | N/A                                                                                        |

@@ -15,12 +15,18 @@ import { EventStream } from "../lib/event-streams.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
+import { External } from "./external.js";
 import { OrqResponses } from "./orqresponses.js";
 
 export class Agents extends ClientSDK {
   private _responses?: OrqResponses;
   get responses(): OrqResponses {
     return (this._responses ??= new OrqResponses(this._options));
+  }
+
+  private _external?: External;
+  get external(): External {
+    return (this._external ??= new External(this._options));
   }
 
   /**
@@ -104,7 +110,7 @@ export class Agents extends ClientSDK {
    * Partially update an existing agent configuration including models, instructions, tools, knowledge bases, and execution parameters.
    */
   async update(
-    requestBody: operations.UpdateAgentRequestBody,
+    requestBody: operations.UpdateAgentUpdateAgentRequest,
     agentKey: string,
     options?: RequestOptions,
   ): Promise<operations.UpdateAgentResponseBody> {

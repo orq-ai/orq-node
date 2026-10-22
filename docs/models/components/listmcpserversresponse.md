@@ -9,11 +9,11 @@ let value: ListMcpServersResponse = {
   data: [
     {
       connection: {
-        type: "MCP_CONNECTION_TYPE_HTTP",
+        type: "MCP_CONNECTION_TYPE_SSE",
         url: "https://api.githubcopilot.com/mcp/",
       },
       auth: {
-        type: "MCP_AUTH_TYPE_STATIC_HEADERS",
+        type: "MCP_AUTH_TYPE_OAUTH_CLIENT_CREDENTIALS",
         staticHeaders: [
           {
             key: "Authorization",

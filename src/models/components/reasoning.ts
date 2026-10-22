@@ -13,6 +13,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
  */
 export const ReasoningEffort1 = {
   None: "none",
+  Instant: "instant",
   Minimal: "minimal",
   Low: "low",
   Medium: "medium",

@@ -21,6 +21,7 @@ export type ModelConfigurationResponse = {
   isOpenaiCompatible?: boolean | undefined;
   isTunedModel?: boolean | undefined;
   location?: string | undefined;
+  modelId?: string | undefined;
   projectId?: string | undefined;
   provider: string;
   region?: string | undefined;
@@ -47,6 +48,7 @@ export const ModelConfigurationResponse$inboundSchema: z.ZodType<
   is_openai_compatible: z.boolean().optional(),
   is_tuned_model: z.boolean().optional(),
   location: z.string().optional(),
+  model_id: z.string().optional(),
   project_id: z.string().optional(),
   provider: z.string(),
   region: z.string().optional(),
@@ -65,6 +67,7 @@ export const ModelConfigurationResponse$inboundSchema: z.ZodType<
     "integration_id": "integrationId",
     "is_openai_compatible": "isOpenaiCompatible",
     "is_tuned_model": "isTunedModel",
+    "model_id": "modelId",
     "project_id": "projectId",
     "should_use_beta_features": "shouldUseBetaFeatures",
     "workspace_id": "workspaceId",

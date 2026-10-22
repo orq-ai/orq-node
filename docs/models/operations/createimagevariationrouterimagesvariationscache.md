@@ -8,7 +8,6 @@ Cache configuration for the request.
 import { CreateImageVariationRouterImagesVariationsCache } from "@orq-ai/node/models/operations";
 
 let value: CreateImageVariationRouterImagesVariationsCache = {
-  ttl: 3600,
   type: "exact_match",
 };
 ```

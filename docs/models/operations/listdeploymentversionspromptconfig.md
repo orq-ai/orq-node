@@ -10,7 +10,7 @@ let value: ListDeploymentVersionsPromptConfig = {
   modelDbId: "<id>",
   modelType: "moderation",
   modelParameters: {},
-  provider: "tensorix",
+  provider: "scaleway",
   messages: [
     {
       role: "tool",

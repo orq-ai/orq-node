@@ -8,7 +8,6 @@ Cache configuration for the request.
 import { StreamRunAgentModelConfigurationCache } from "@orq-ai/node/models/operations";
 
 let value: StreamRunAgentModelConfigurationCache = {
-  ttl: 3600,
   type: "exact_match",
 };
 ```

@@ -6,7 +6,6 @@ import * as z from "zod/v3";
 import { ClosedEnum } from "../../types/enums.js";
 
 export const McpGatewayMode = {
-  McpGatewayModeUnspecified: "MCP_GATEWAY_MODE_UNSPECIFIED",
   McpGatewayModeCode: "MCP_GATEWAY_MODE_CODE",
   McpGatewayModeDirect: "MCP_GATEWAY_MODE_DIRECT",
 } as const;

@@ -83,7 +83,7 @@ export type CreateRouterResponseCacheControl = {
  *
  * Defaults to `5m`. Only supported by Anthropic Claude models.
  */
-export const CreateRouterResponse2ResponsesRequestTtl = {
+export const CreateRouterResponse2ResponsesRequestRequestBodyInputTtl = {
   Fivem: "5m",
   Oneh: "1h",
 } as const;
@@ -97,9 +97,8 @@ export const CreateRouterResponse2ResponsesRequestTtl = {
  *
  * Defaults to `5m`. Only supported by Anthropic Claude models.
  */
-export type CreateRouterResponse2ResponsesRequestTtl = ClosedEnum<
-  typeof CreateRouterResponse2ResponsesRequestTtl
->;
+export type CreateRouterResponse2ResponsesRequestRequestBodyInputTtl =
+  ClosedEnum<typeof CreateRouterResponse2ResponsesRequestRequestBodyInputTtl>;
 
 /**
  * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
@@ -124,11 +123,33 @@ export type CreateRouterResponse2ResponsesRequestCacheControl = {
    *
    * Defaults to `5m`. Only supported by Anthropic Claude models.
    */
-  ttl?: CreateRouterResponse2ResponsesRequestTtl | undefined;
+  ttl?: CreateRouterResponse2ResponsesRequestRequestBodyInputTtl | undefined;
   /**
    * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
    */
   type: CreateRouterResponse2ResponsesRequestRequestBodyInputType;
+};
+
+export const CreateRouterResponse2ResponsesMode = {
+  Explicit: "explicit",
+} as const;
+export type CreateRouterResponse2ResponsesMode = ClosedEnum<
+  typeof CreateRouterResponse2ResponsesMode
+>;
+
+export const CreateRouterResponse2ResponsesRequestRequestBodyInput2Ttl = {
+  Thirtym: "30m",
+  Twelveh: "12h",
+} as const;
+export type CreateRouterResponse2ResponsesRequestRequestBodyInput2Ttl =
+  ClosedEnum<typeof CreateRouterResponse2ResponsesRequestRequestBodyInput2Ttl>;
+
+/**
+ * An explicit OpenAI cache boundary for GPT-5.6 and later. Omitted ttl inherits prompt_cache_options.ttl.
+ */
+export type CreateRouterResponse2PromptCacheBreakpoint = {
+  mode: CreateRouterResponse2ResponsesMode;
+  ttl?: CreateRouterResponse2ResponsesRequestRequestBodyInput2Ttl | undefined;
 };
 
 /**
@@ -156,6 +177,12 @@ export type TwoFile = {
    * The MIME type of the file (e.g., application/pdf).
    */
   mimeType?: string | undefined;
+  /**
+   * An explicit OpenAI cache boundary for GPT-5.6 and later. Omitted ttl inherits prompt_cache_options.ttl.
+   */
+  promptCacheBreakpoint?:
+    | CreateRouterResponse2PromptCacheBreakpoint
+    | undefined;
   type: "input_file";
 };
 
@@ -169,7 +196,7 @@ export type TwoFile = {
  *
  * Defaults to `5m`. Only supported by Anthropic Claude models.
  */
-export const CreateRouterResponse2ResponsesTtl = {
+export const CreateRouterResponse2ResponsesRequestTtl = {
   Fivem: "5m",
   Oneh: "1h",
 } as const;
@@ -183,8 +210,8 @@ export const CreateRouterResponse2ResponsesTtl = {
  *
  * Defaults to `5m`. Only supported by Anthropic Claude models.
  */
-export type CreateRouterResponse2ResponsesTtl = ClosedEnum<
-  typeof CreateRouterResponse2ResponsesTtl
+export type CreateRouterResponse2ResponsesRequestTtl = ClosedEnum<
+  typeof CreateRouterResponse2ResponsesRequestTtl
 >;
 
 /**
@@ -211,7 +238,7 @@ export type CreateRouterResponse2ResponsesCacheControl = {
    *
    * Defaults to `5m`. Only supported by Anthropic Claude models.
    */
-  ttl?: CreateRouterResponse2ResponsesTtl | undefined;
+  ttl?: CreateRouterResponse2ResponsesRequestTtl | undefined;
   /**
    * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
    */
@@ -231,6 +258,29 @@ export const Detail = {
  */
 export type Detail = ClosedEnum<typeof Detail>;
 
+export const CreateRouterResponse2Mode = {
+  Explicit: "explicit",
+} as const;
+export type CreateRouterResponse2Mode = ClosedEnum<
+  typeof CreateRouterResponse2Mode
+>;
+
+export const CreateRouterResponse2ResponsesRequestRequestBodyTtl = {
+  Thirtym: "30m",
+  Twelveh: "12h",
+} as const;
+export type CreateRouterResponse2ResponsesRequestRequestBodyTtl = ClosedEnum<
+  typeof CreateRouterResponse2ResponsesRequestRequestBodyTtl
+>;
+
+/**
+ * An explicit OpenAI cache boundary for GPT-5.6 and later. Omitted ttl inherits prompt_cache_options.ttl.
+ */
+export type TwoPromptCacheBreakpoint = {
+  mode: CreateRouterResponse2Mode;
+  ttl?: CreateRouterResponse2ResponsesRequestRequestBodyTtl | undefined;
+};
+
 /**
  * An image content part.
  */
@@ -248,6 +298,10 @@ export type TwoImage = {
    * The URL of the image.
    */
   imageUrl?: string | undefined;
+  /**
+   * An explicit OpenAI cache boundary for GPT-5.6 and later. Omitted ttl inherits prompt_cache_options.ttl.
+   */
+  promptCacheBreakpoint?: TwoPromptCacheBreakpoint | undefined;
   type: "input_image";
 };
 
@@ -310,11 +364,36 @@ export type CreateRouterResponse2CacheControl = {
   type: CreateRouterResponse2Type;
 };
 
+export const TwoMode = {
+  Explicit: "explicit",
+} as const;
+export type TwoMode = ClosedEnum<typeof TwoMode>;
+
+export const CreateRouterResponse2ResponsesTtl = {
+  Thirtym: "30m",
+  Twelveh: "12h",
+} as const;
+export type CreateRouterResponse2ResponsesTtl = ClosedEnum<
+  typeof CreateRouterResponse2ResponsesTtl
+>;
+
+/**
+ * An explicit OpenAI cache boundary for GPT-5.6 and later. Omitted ttl inherits prompt_cache_options.ttl.
+ */
+export type PromptCacheBreakpoint = {
+  mode: TwoMode;
+  ttl?: CreateRouterResponse2ResponsesTtl | undefined;
+};
+
 /**
  * A text content part.
  */
 export type TwoText = {
   cacheControl?: CreateRouterResponse2CacheControl | undefined;
+  /**
+   * An explicit OpenAI cache boundary for GPT-5.6 and later. Omitted ttl inherits prompt_cache_options.ttl.
+   */
+  promptCacheBreakpoint?: PromptCacheBreakpoint | undefined;
   /**
    * The text content.
    */
@@ -894,7 +973,18 @@ export type CreateRouterResponseRequestBody = {
    * Top-level cache control automatically applies a cache_control marker to the last cacheable block in the request.
    */
   cacheControl?: CreateRouterResponseCacheControl | undefined;
+  /**
+   * Context management entries. One compaction entry summarizes history older than compact_threshold into a single item. See the [Context Compaction](https://docs.orq.ai/ai-gateway/features/context-compaction) guide.
+   */
+  contextManagement?:
+    | Array<components.OpenAIContextManagement>
+    | null
+    | undefined;
   conversation?: components.ConversationParam | undefined;
+  /**
+   * HTTP status codes that trigger fallback. Defaults to [408,429,500,502,503,504,529]. Each code must be unique and between 400 and 599.
+   */
+  fallbackOnCodes?: Array<number> | null | undefined;
   /**
    * Fallback models to try if the primary model fails. Each entry specifies a model in provider/model format.
    */
@@ -908,6 +998,10 @@ export type CreateRouterResponseRequestBody = {
    */
   guardrails?: Array<components.EvaluatorRef> | undefined;
   identity?: components.ResponseIdentity | undefined;
+  /**
+   * Additional fields to include in the response. Use web_search_call.action.sources to add source URLs and titles to a web search action, or web_search_call.results for detailed results. See the [Web search](https://docs.orq.ai/ai-gateway/features/web-search) guide for the supported values.
+   */
+  include?: Array<string> | undefined;
   /**
    * Input to the model: a string or an array of input items (messages, files, etc.).
    */
@@ -932,11 +1026,11 @@ export type CreateRouterResponseRequestBody = {
   maxToolCalls?: number | undefined;
   memory?: components.MemoryParam | undefined;
   /**
-   * Developer-defined key-value pairs attached to the response (OpenAI spec: Map<string, string>). Non-string values are rejected with a 400.
+   * Developer-defined key-value pairs attached to the response (OpenAI spec: `Map<string, string>`). Non-string values are rejected with a 400.
    */
   metadata?: { [k: string]: string } | undefined;
   /**
-   * The model to use in provider/model format (e.g. openai/gpt-4o). Use agent/<key> to invoke a pre-configured agent from the orq.ai platform.
+   * The model to use in provider/model format (e.g. openai/gpt-4o). Use `agent/<key>` to invoke a pre-configured agent from the orq.ai platform.
    */
   model?: string | undefined;
   /**
@@ -1000,6 +1094,7 @@ export type CreateRouterResponseRequestBody = {
    * Configuration for text output.
    */
   text?: CreateRouterResponseText | undefined;
+  thinking?: components.ThinkingParam | undefined;
   thread?: components.ResponseThread | undefined;
   timeout?: components.TimeoutConfig | undefined;
   /**
@@ -1116,7 +1211,7 @@ export type CreateRouterResponseResponseBody = {
   maxToolCalls: number | null;
   memory?: components.MemoryParam | undefined;
   /**
-   * Developer-defined key-value pairs attached to the response (OpenAI spec: Map<string, string>).
+   * Developer-defined key-value pairs attached to the response (OpenAI spec: `Map<string, string>`).
    */
   metadata: { [k: string]: string };
   model: string;
@@ -1206,9 +1301,10 @@ export function createRouterResponseCacheControlToJSON(
 }
 
 /** @internal */
-export const CreateRouterResponse2ResponsesRequestTtl$outboundSchema:
-  z.ZodNativeEnum<typeof CreateRouterResponse2ResponsesRequestTtl> = z
-    .nativeEnum(CreateRouterResponse2ResponsesRequestTtl);
+export const CreateRouterResponse2ResponsesRequestRequestBodyInputTtl$outboundSchema:
+  z.ZodNativeEnum<
+    typeof CreateRouterResponse2ResponsesRequestRequestBodyInputTtl
+  > = z.nativeEnum(CreateRouterResponse2ResponsesRequestRequestBodyInputTtl);
 
 /** @internal */
 export const CreateRouterResponse2ResponsesRequestRequestBodyInputType$outboundSchema:
@@ -1229,7 +1325,8 @@ export const CreateRouterResponse2ResponsesRequestCacheControl$outboundSchema:
     z.ZodTypeDef,
     CreateRouterResponse2ResponsesRequestCacheControl
   > = z.object({
-    ttl: CreateRouterResponse2ResponsesRequestTtl$outboundSchema.default("5m"),
+    ttl: CreateRouterResponse2ResponsesRequestRequestBodyInputTtl$outboundSchema
+      .default("5m"),
     type:
       CreateRouterResponse2ResponsesRequestRequestBodyInputType$outboundSchema,
   });
@@ -1246,6 +1343,47 @@ export function createRouterResponse2ResponsesRequestCacheControlToJSON(
 }
 
 /** @internal */
+export const CreateRouterResponse2ResponsesMode$outboundSchema: z.ZodNativeEnum<
+  typeof CreateRouterResponse2ResponsesMode
+> = z.nativeEnum(CreateRouterResponse2ResponsesMode);
+
+/** @internal */
+export const CreateRouterResponse2ResponsesRequestRequestBodyInput2Ttl$outboundSchema:
+  z.ZodNativeEnum<
+    typeof CreateRouterResponse2ResponsesRequestRequestBodyInput2Ttl
+  > = z.nativeEnum(CreateRouterResponse2ResponsesRequestRequestBodyInput2Ttl);
+
+/** @internal */
+export type CreateRouterResponse2PromptCacheBreakpoint$Outbound = {
+  mode: string;
+  ttl?: string | undefined;
+};
+
+/** @internal */
+export const CreateRouterResponse2PromptCacheBreakpoint$outboundSchema:
+  z.ZodType<
+    CreateRouterResponse2PromptCacheBreakpoint$Outbound,
+    z.ZodTypeDef,
+    CreateRouterResponse2PromptCacheBreakpoint
+  > = z.object({
+    mode: CreateRouterResponse2ResponsesMode$outboundSchema,
+    ttl:
+      CreateRouterResponse2ResponsesRequestRequestBodyInput2Ttl$outboundSchema
+        .optional(),
+  });
+
+export function createRouterResponse2PromptCacheBreakpointToJSON(
+  createRouterResponse2PromptCacheBreakpoint:
+    CreateRouterResponse2PromptCacheBreakpoint,
+): string {
+  return JSON.stringify(
+    CreateRouterResponse2PromptCacheBreakpoint$outboundSchema.parse(
+      createRouterResponse2PromptCacheBreakpoint,
+    ),
+  );
+}
+
+/** @internal */
 export type TwoFile$Outbound = {
   cache_control?:
     | CreateRouterResponse2ResponsesRequestCacheControl$Outbound
@@ -1255,6 +1393,9 @@ export type TwoFile$Outbound = {
   file_url?: string | undefined;
   filename?: string | undefined;
   mime_type?: string | undefined;
+  prompt_cache_breakpoint?:
+    | CreateRouterResponse2PromptCacheBreakpoint$Outbound
+    | undefined;
   type: "input_file";
 };
 
@@ -1272,6 +1413,9 @@ export const TwoFile$outboundSchema: z.ZodType<
   fileUrl: z.string().optional(),
   filename: z.string().optional(),
   mimeType: z.string().optional(),
+  promptCacheBreakpoint: z.lazy(() =>
+    CreateRouterResponse2PromptCacheBreakpoint$outboundSchema
+  ).optional(),
   type: z.literal("input_file"),
 }).transform((v) => {
   return remap$(v, {
@@ -1280,6 +1424,7 @@ export const TwoFile$outboundSchema: z.ZodType<
     fileId: "file_id",
     fileUrl: "file_url",
     mimeType: "mime_type",
+    promptCacheBreakpoint: "prompt_cache_breakpoint",
   });
 });
 
@@ -1288,9 +1433,9 @@ export function twoFileToJSON(twoFile: TwoFile): string {
 }
 
 /** @internal */
-export const CreateRouterResponse2ResponsesTtl$outboundSchema: z.ZodNativeEnum<
-  typeof CreateRouterResponse2ResponsesTtl
-> = z.nativeEnum(CreateRouterResponse2ResponsesTtl);
+export const CreateRouterResponse2ResponsesRequestTtl$outboundSchema:
+  z.ZodNativeEnum<typeof CreateRouterResponse2ResponsesRequestTtl> = z
+    .nativeEnum(CreateRouterResponse2ResponsesRequestTtl);
 
 /** @internal */
 export const CreateRouterResponse2ResponsesRequestType$outboundSchema:
@@ -1310,7 +1455,7 @@ export const CreateRouterResponse2ResponsesCacheControl$outboundSchema:
     z.ZodTypeDef,
     CreateRouterResponse2ResponsesCacheControl
   > = z.object({
-    ttl: CreateRouterResponse2ResponsesTtl$outboundSchema.default("5m"),
+    ttl: CreateRouterResponse2ResponsesRequestTtl$outboundSchema.default("5m"),
     type: CreateRouterResponse2ResponsesRequestType$outboundSchema,
   });
 
@@ -1330,6 +1475,41 @@ export const Detail$outboundSchema: z.ZodNativeEnum<typeof Detail> = z
   .nativeEnum(Detail);
 
 /** @internal */
+export const CreateRouterResponse2Mode$outboundSchema: z.ZodNativeEnum<
+  typeof CreateRouterResponse2Mode
+> = z.nativeEnum(CreateRouterResponse2Mode);
+
+/** @internal */
+export const CreateRouterResponse2ResponsesRequestRequestBodyTtl$outboundSchema:
+  z.ZodNativeEnum<typeof CreateRouterResponse2ResponsesRequestRequestBodyTtl> =
+    z.nativeEnum(CreateRouterResponse2ResponsesRequestRequestBodyTtl);
+
+/** @internal */
+export type TwoPromptCacheBreakpoint$Outbound = {
+  mode: string;
+  ttl?: string | undefined;
+};
+
+/** @internal */
+export const TwoPromptCacheBreakpoint$outboundSchema: z.ZodType<
+  TwoPromptCacheBreakpoint$Outbound,
+  z.ZodTypeDef,
+  TwoPromptCacheBreakpoint
+> = z.object({
+  mode: CreateRouterResponse2Mode$outboundSchema,
+  ttl: CreateRouterResponse2ResponsesRequestRequestBodyTtl$outboundSchema
+    .optional(),
+});
+
+export function twoPromptCacheBreakpointToJSON(
+  twoPromptCacheBreakpoint: TwoPromptCacheBreakpoint,
+): string {
+  return JSON.stringify(
+    TwoPromptCacheBreakpoint$outboundSchema.parse(twoPromptCacheBreakpoint),
+  );
+}
+
+/** @internal */
 export type TwoImage$Outbound = {
   cache_control?:
     | CreateRouterResponse2ResponsesCacheControl$Outbound
@@ -1337,6 +1517,7 @@ export type TwoImage$Outbound = {
   detail?: string | undefined;
   file_id?: string | undefined;
   image_url?: string | undefined;
+  prompt_cache_breakpoint?: TwoPromptCacheBreakpoint$Outbound | undefined;
   type: "input_image";
 };
 
@@ -1352,12 +1533,15 @@ export const TwoImage$outboundSchema: z.ZodType<
   detail: Detail$outboundSchema.optional(),
   fileId: z.string().optional(),
   imageUrl: z.string().optional(),
+  promptCacheBreakpoint: z.lazy(() => TwoPromptCacheBreakpoint$outboundSchema)
+    .optional(),
   type: z.literal("input_image"),
 }).transform((v) => {
   return remap$(v, {
     cacheControl: "cache_control",
     fileId: "file_id",
     imageUrl: "image_url",
+    promptCacheBreakpoint: "prompt_cache_breakpoint",
   });
 });
 
@@ -1402,8 +1586,42 @@ export function createRouterResponse2CacheControlToJSON(
 }
 
 /** @internal */
+export const TwoMode$outboundSchema: z.ZodNativeEnum<typeof TwoMode> = z
+  .nativeEnum(TwoMode);
+
+/** @internal */
+export const CreateRouterResponse2ResponsesTtl$outboundSchema: z.ZodNativeEnum<
+  typeof CreateRouterResponse2ResponsesTtl
+> = z.nativeEnum(CreateRouterResponse2ResponsesTtl);
+
+/** @internal */
+export type PromptCacheBreakpoint$Outbound = {
+  mode: string;
+  ttl?: string | undefined;
+};
+
+/** @internal */
+export const PromptCacheBreakpoint$outboundSchema: z.ZodType<
+  PromptCacheBreakpoint$Outbound,
+  z.ZodTypeDef,
+  PromptCacheBreakpoint
+> = z.object({
+  mode: TwoMode$outboundSchema,
+  ttl: CreateRouterResponse2ResponsesTtl$outboundSchema.optional(),
+});
+
+export function promptCacheBreakpointToJSON(
+  promptCacheBreakpoint: PromptCacheBreakpoint,
+): string {
+  return JSON.stringify(
+    PromptCacheBreakpoint$outboundSchema.parse(promptCacheBreakpoint),
+  );
+}
+
+/** @internal */
 export type TwoText$Outbound = {
   cache_control?: CreateRouterResponse2CacheControl$Outbound | undefined;
+  prompt_cache_breakpoint?: PromptCacheBreakpoint$Outbound | undefined;
   text: string;
   type: "input_text";
 };
@@ -1416,11 +1634,14 @@ export const TwoText$outboundSchema: z.ZodType<
 > = z.object({
   cacheControl: z.lazy(() => CreateRouterResponse2CacheControl$outboundSchema)
     .optional(),
+  promptCacheBreakpoint: z.lazy(() => PromptCacheBreakpoint$outboundSchema)
+    .optional(),
   text: z.string(),
   type: z.literal("input_text"),
 }).transform((v) => {
   return remap$(v, {
     cacheControl: "cache_control",
+    promptCacheBreakpoint: "prompt_cache_breakpoint",
   });
 });
 
@@ -2117,11 +2338,17 @@ export type CreateRouterResponseRequestBody$Outbound = {
   background?: boolean | undefined;
   cache?: components.CacheConfig$Outbound | undefined;
   cache_control?: CreateRouterResponseCacheControl$Outbound | undefined;
+  context_management?:
+    | Array<components.OpenAIContextManagement$Outbound>
+    | null
+    | undefined;
   conversation?: components.ConversationParam$Outbound | undefined;
+  fallback_on_codes?: Array<number> | null | undefined;
   fallbacks?: Array<components.FallbackConfig$Outbound> | null | undefined;
   frequency_penalty?: number | undefined;
   guardrails?: Array<components.EvaluatorRef$Outbound> | undefined;
   identity?: components.ResponseIdentity$Outbound | undefined;
+  include?: Array<string> | undefined;
   input?: string | Array<CreateRouterResponseInput2$Outbound> | undefined;
   instructions?: string | undefined;
   integration_id?: string | undefined;
@@ -2153,6 +2380,7 @@ export type CreateRouterResponseRequestBody$Outbound = {
   temperature?: number | undefined;
   template_engine?: string | undefined;
   text?: CreateRouterResponseText$Outbound | undefined;
+  thinking?: components.ThinkingParam$Outbound | undefined;
   thread?: components.ResponseThread$Outbound | undefined;
   timeout?: components.TimeoutConfig$Outbound | undefined;
   tool_choice?: SpecificFunction$Outbound | string | undefined;
@@ -2200,12 +2428,17 @@ export const CreateRouterResponseRequestBody$outboundSchema: z.ZodType<
   cache: components.CacheConfig$outboundSchema.optional(),
   cacheControl: z.lazy(() => CreateRouterResponseCacheControl$outboundSchema)
     .optional(),
+  contextManagement: z.nullable(
+    z.array(components.OpenAIContextManagement$outboundSchema),
+  ).optional(),
   conversation: components.ConversationParam$outboundSchema.optional(),
+  fallbackOnCodes: z.nullable(z.array(z.number().int())).optional(),
   fallbacks: z.nullable(z.array(components.FallbackConfig$outboundSchema))
     .optional(),
   frequencyPenalty: z.number().optional(),
   guardrails: z.array(components.EvaluatorRef$outboundSchema).optional(),
   identity: components.ResponseIdentity$outboundSchema.optional(),
+  include: z.array(z.string()).optional(),
   input: z.union([
     z.string(),
     z.array(z.lazy(() => CreateRouterResponseInput2$outboundSchema)),
@@ -2240,6 +2473,7 @@ export const CreateRouterResponseRequestBody$outboundSchema: z.ZodType<
   temperature: z.number().optional(),
   templateEngine: TemplateEngine$outboundSchema.optional(),
   text: z.lazy(() => CreateRouterResponseText$outboundSchema).optional(),
+  thinking: components.ThinkingParam$outboundSchema.optional(),
   thread: components.ResponseThread$outboundSchema.optional(),
   timeout: components.TimeoutConfig$outboundSchema.optional(),
   toolChoice: z.union([
@@ -2321,6 +2555,8 @@ export const CreateRouterResponseRequestBody$outboundSchema: z.ZodType<
 }).transform((v) => {
   return remap$(v, {
     cacheControl: "cache_control",
+    contextManagement: "context_management",
+    fallbackOnCodes: "fallback_on_codes",
     frequencyPenalty: "frequency_penalty",
     integrationId: "integration_id",
     loadBalancer: "load_balancer",

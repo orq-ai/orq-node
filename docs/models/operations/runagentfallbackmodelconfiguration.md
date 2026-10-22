@@ -23,7 +23,6 @@ const value: operations.RunAgentFallbackModelConfiguration2 = {
       },
     ],
     cache: {
-      ttl: 3600,
       type: "exact_match",
     },
     loadBalancer: {
