@@ -32,6 +32,7 @@ export type ModelUpdateAwsBedrockRequestBody = {
   supportsExtendedThinking?: boolean | undefined;
   supportsJsonMode?: boolean | undefined;
   supportsJsonSchema?: boolean | undefined;
+  supportsMidConversationSystem?: boolean | undefined;
   supportsStrictTool?: boolean | undefined;
   supportsToolCalling?: boolean | undefined;
   supportsVision?: boolean | undefined;
@@ -108,6 +109,7 @@ export type ModelUpdateAwsBedrockRequestBody$Outbound = {
   supports_extended_thinking?: boolean | undefined;
   supports_json_mode?: boolean | undefined;
   supports_json_schema?: boolean | undefined;
+  supports_mid_conversation_system?: boolean | undefined;
   supports_strict_tool?: boolean | undefined;
   supports_tool_calling?: boolean | undefined;
   supports_vision?: boolean | undefined;
@@ -142,6 +144,7 @@ export const ModelUpdateAwsBedrockRequestBody$outboundSchema: z.ZodType<
   supportsExtendedThinking: z.boolean().optional(),
   supportsJsonMode: z.boolean().optional(),
   supportsJsonSchema: z.boolean().optional(),
+  supportsMidConversationSystem: z.boolean().optional(),
   supportsStrictTool: z.boolean().optional(),
   supportsToolCalling: z.boolean().optional(),
   supportsVision: z.boolean().optional(),
@@ -167,6 +170,7 @@ export const ModelUpdateAwsBedrockRequestBody$outboundSchema: z.ZodType<
     supportsExtendedThinking: "supports_extended_thinking",
     supportsJsonMode: "supports_json_mode",
     supportsJsonSchema: "supports_json_schema",
+    supportsMidConversationSystem: "supports_mid_conversation_system",
     supportsStrictTool: "supports_strict_tool",
     supportsToolCalling: "supports_tool_calling",
     supportsVision: "supports_vision",
