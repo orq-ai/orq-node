@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 3baee63a-7726-4981-8d07-d0517b903b46
 management:
-  docChecksum: 571029c936dc2feb0ec1806f974415b6
+  docChecksum: 98ae98a2de92d270a54bdee732d32702
   docVersion: "2.0"
   speakeasyVersion: 1.803.2
   generationVersion: 2.950.13
-  releaseVersion: 4.17.1
-  configChecksum: 87796ddbfe2ddf4a189dce5c8df627db
+  releaseVersion: 4.17.2
+  configChecksum: ec0ed4a32209846d3f05579ab784a552
   repoURL: https://github.com/orq-ai/orq-node.git
   installationURL: https://github.com/orq-ai/orq-node
   published: true
 persistentEdits:
-  generation_id: e3f4ea16-9cd8-45da-a8c5-f8c4cae81d63
-  pristine_commit_hash: f1535879752b4a9f820cfa8835eef4e5273180f0
-  pristine_tree_hash: 0d812c3d0818f822e187b397459287bd1016a86c
+  generation_id: 2b1ac1c0-c894-423b-a396-c5587a1fbb7e
+  pristine_commit_hash: 675aa0111a4240adf648d916e5b40e2933b84dcd
+  pristine_tree_hash: 7931e51decf35bc7df9e001eb9cf93d2337c7ad7
 features:
   typescript:
     acceptHeaders: 2.81.2
@@ -11016,8 +11016,8 @@ trackedFiles:
     pristine_git_object: 23a669305bf3290ce5de6da811c66eb739df8827
   docs/models/operations/getalltoolsresponsebody.md:
     id: 21315a96cb5b
-    last_write_checksum: sha1:3b825db2b232348eff1d3c9560b286f6fd617e11
-    pristine_git_object: 42b37a480fd205cf728c44e7968b3dc0a9924e1a
+    last_write_checksum: sha1:e7964c0f000f97787a01fc1328d228868645e54f
+    pristine_git_object: 5571f9a74abc1fb36c678a95277deb3b07d4edbe
   docs/models/operations/getchunkscountrequest.md:
     id: ac37b515e111
     last_write_checksum: sha1:5c3ac8ae830ef265634da7d51655fa872afb31d6
@@ -18764,12 +18764,12 @@ trackedFiles:
     pristine_git_object: 4cf0d2ceb6acaa225a9f3afe05e2913f263c3462
   jsr.json:
     id: 7f6ab7767282
-    last_write_checksum: sha1:95a1912a5b80e26922618a15fa4f0acf61e6d32c
-    pristine_git_object: b19f08028d01a46b5c0bfab56646cdb1f1ec4cef
+    last_write_checksum: sha1:87f85b3f7ba0568b8dc608a3ef01b0a5c0414ef6
+    pristine_git_object: ffcde9f9d913ac34893af4525c3523fb875721f1
   package.json:
     id: 7030d0b2f71b
-    last_write_checksum: sha1:5f2503a8bce3f1e2c4421b0ff559e2386aa0ea1c
-    pristine_git_object: 19fbd20c5ded41c38bf7f7ea5e44ad2986b4a202
+    last_write_checksum: sha1:9bda8645ec79eaab31a408060e1c298a0c8a73ed
+    pristine_git_object: 259616f41aa0098f2fb08fa5c3519015b8414428
   src/core.ts:
     id: f431fdbcd144
     last_write_checksum: sha1:06cbcf678f38adf43f7fa3f7c1cfbb7a536903c9
@@ -20248,8 +20248,8 @@ trackedFiles:
     pristine_git_object: 0aebd8b0a4867e35cb3348fc52921c3c0b4725b7
   src/lib/config.ts:
     id: 320761608fb3
-    last_write_checksum: sha1:79cbaa286942b0a8397603a429f6c8a7d79a836b
-    pristine_git_object: 54c83ab9d9d2aa062076f726a6a377fddc0e0a81
+    last_write_checksum: sha1:37eb105f24fc6dc17683a58a943ad498b5d2b637
+    pristine_git_object: 64b9414d960038301203c96f40cca1f4a9d65c15
   src/lib/encodings.ts:
     id: 3bd8ead98afd
     last_write_checksum: sha1:a257d6f6108693db2197617c579400bc8f0da914
@@ -22412,8 +22412,8 @@ trackedFiles:
     pristine_git_object: ce1be4d58dfdc4468e60213dd1edad50531fa5a9
   src/models/components/reasoningpart.ts:
     id: 60c791422ccb
-    last_write_checksum: sha1:8ee3bdacf255143923a1f5f3d0ad73fba9162e98
-    pristine_git_object: c9dab19ff9c69fb4886e741359076b96ed5d5943
+    last_write_checksum: sha1:0df597ac735e38db7b234bf66f038daafd08498b
+    pristine_git_object: b57a0dd2194548eb1b23cbed6272b3a74f86d6a2
   src/models/components/reasoningpartschema.ts:
     id: 51d31d0f4f79
     last_write_checksum: sha1:b1655ea3101450cb67a1bfd56d22980dfe3e22e3
@@ -23944,8 +23944,8 @@ trackedFiles:
     pristine_git_object: 450b2f833ffa6ae9beceff9b3b7d83ff8f40e70a
   src/models/operations/createtool.ts:
     id: a60d92110eae
-    last_write_checksum: sha1:2a9febf60b219cfdc3d77767556e7ba2544e99e2
-    pristine_git_object: 9483962be4ddfbd07b87ce5523d70222ff8fdf67
+    last_write_checksum: sha1:3fb423aad52fe303f48d07b4a0fb508914e1c1f3
+    pristine_git_object: d0933f54a785b9374851cba409668fd50bb58b3b
   src/models/operations/createtranscription.ts:
     id: 9a143abb247e
     last_write_checksum: sha1:d9b7b97184776aa9b117c9116fe60305968b3026
@@ -24144,8 +24144,8 @@ trackedFiles:
     pristine_git_object: 34e6123c85751fb9d3e8d4908038de3dd4df8a9b
   src/models/operations/getalltools.ts:
     id: b61aae342581
-    last_write_checksum: sha1:3471d3ce25a5240a6061b7b2a05b79917a7f872b
-    pristine_git_object: a55aab27314a80db00e8a48e43b4b44c13ae97b0
+    last_write_checksum: sha1:b8a7b8ed1f05c1baf1227fe7f75d92a7f6045d91
+    pristine_git_object: 5c74a5d023752c410880a1ce189da692283a0165
   src/models/operations/getchunkscount.ts:
     id: 5df96041413a
     last_write_checksum: sha1:2f5df1ac159ff592468ec45c81a5589d1bfc2d75
@@ -24200,12 +24200,12 @@ trackedFiles:
     pristine_git_object: f59afe04b40a6b804d3aa2c462289db249db7216
   src/models/operations/getv2humanevalsets.ts:
     id: cdbced4ec510
-    last_write_checksum: sha1:1b1700afdd1b77f217a71bd9c86fc56bb8b55e4b
-    pristine_git_object: 27588570a553bb18e4bcb3422ff521a950bf1b50
+    last_write_checksum: sha1:8841d0dd214e2b14fe820a3c2512c89c7725e2fd
+    pristine_git_object: f19091d6137406348100b49b6ebb9d6ebc986fff
   src/models/operations/getv2humanevalsetsid.ts:
     id: bba83e08158f
-    last_write_checksum: sha1:3257ca6d276d621cfeaea283755e1e946dc865df
-    pristine_git_object: 6b43ce57fe7f8a4f7fc64c95e10634174fc1e965
+    last_write_checksum: sha1:037a76d109b00d709f41c7ce619aa88471c0bb85
+    pristine_git_object: f6f524ac2018c782c9b19c9c2204a7a5cabbf048
   src/models/operations/getv2toolstoolidversions.ts:
     id: aacc7424ce4e
     last_write_checksum: sha1:95ac145a162dcfbbb42489d006d9f25d61cbe0de
@@ -24304,8 +24304,8 @@ trackedFiles:
     pristine_git_object: 2d2a63f5f9fe4b7554bdcf5aeb71839c766fdbf6
   src/models/operations/listdeploymentversions.ts:
     id: 2bfb276c96ea
-    last_write_checksum: sha1:e46596fcaf1c9ed8729df31f88cbe6fa802490d0
-    pristine_git_object: aa4e7b81320abeca48743236861203f8911433dc
+    last_write_checksum: sha1:8e55d8af6cb8ed0da8819fe4daef55741660492a
+    pristine_git_object: 35dcb5576500a25129802787d67d071215fd70a0
   src/models/operations/listevalversions.ts:
     id: 3fa6392bb676
     last_write_checksum: sha1:d9e2c0f4487c257284b727bb556818c8222c419e
@@ -24536,8 +24536,8 @@ trackedFiles:
     pristine_git_object: 67a66e89fe99382242b7fda115f99b6f9e7decd4
   src/models/operations/patchv2humanevalsetsid.ts:
     id: 07cbb1bc8ccb
-    last_write_checksum: sha1:88ab0435a2559f39ff4ef98a5381e0b0ae39a372
-    pristine_git_object: 17baf4404c15421b62ae979ef37c9542b5c03189
+    last_write_checksum: sha1:0282c9754274d8b90de17319034d7084d3449d8f
+    pristine_git_object: 001af4d84bb644a54ec6a1efdb4d8d22e8c6d917
   src/models/operations/policycreate.ts:
     id: a68fda0920e9
     last_write_checksum: sha1:204ba4344d4783a17b795e00d5e1035884173f5b
@@ -24568,8 +24568,8 @@ trackedFiles:
     pristine_git_object: b8ad5401d9ce6e087eed648e340d105d8db866d8
   src/models/operations/postv2humanevalsets.ts:
     id: 1a6666d6e86a
-    last_write_checksum: sha1:f932097b0c3746499aa1f0059318dbc26be1e890
-    pristine_git_object: e5d310fb4768187f31040909a76898786f51b218
+    last_write_checksum: sha1:48eb902c8ad6fcdad12d7d1c5a19a99e8d011e4f
+    pristine_git_object: a30c5c37054ed80e8e4203cee061b05939778b8c
   src/models/operations/postv2routerocr.ts:
     id: f68f6afb85d5
     last_write_checksum: sha1:308f1c5cbaaeb6a2b77e2d24c58fb9f913ff4623
@@ -24656,8 +24656,8 @@ trackedFiles:
     pristine_git_object: cb12feaae183c660de95dab1ec1033d211d00455
   src/models/operations/retrievetool.ts:
     id: 5e769769390f
-    last_write_checksum: sha1:42d525d29087b0b6076181086de8cd043fcdfd8e
-    pristine_git_object: 9bbdcd8adbfc04813cd5fb62ff91ecef5c9b8904
+    last_write_checksum: sha1:7f8228d0e6c0e320e1b3b2b00dca72097f726e42
+    pristine_git_object: 7f1882929cfa003f5695088e2b04649856454a0e
   src/models/operations/routingruledelete.ts:
     id: 77bfe37edd40
     last_write_checksum: sha1:94e292fd0d9c576eccc3ed17b4774f83a7b429ce
@@ -24680,8 +24680,8 @@ trackedFiles:
     pristine_git_object: be729275df0664ea006d10cdafae6ac400624471
   src/models/operations/runagent.ts:
     id: 58a38d9df148
-    last_write_checksum: sha1:d189f66942aaff35735fc47f5306a16518a9ed2b
-    pristine_git_object: ec17153c160046e0da7c72f2ee4f249f3abc4ed7
+    last_write_checksum: sha1:d624809e3db98638eb4d9042bffe108cc05932a9
+    pristine_git_object: d04bc93f543826123dbd8d31b7b6ca09b6c19193
   src/models/operations/searchknowledge.ts:
     id: b675baf944c8
     last_write_checksum: sha1:7af8cc4d4c50b18972abbf549d7503cdd80a6ac1
@@ -24736,8 +24736,8 @@ trackedFiles:
     pristine_git_object: 6b874af002c8938c956f1f37d5ffe6fdf9a85355
   src/models/operations/streamrunagent.ts:
     id: 575f8e1a1e6e
-    last_write_checksum: sha1:bc637207ef79de293da18ed5d05f34470165e8d3
-    pristine_git_object: 24396c25e7d49691b2828683cb1002c0e0e2f55c
+    last_write_checksum: sha1:3fd28d34ed1ab14bb62274855d74a29011e616f2
+    pristine_git_object: 1d27102a354a22b865d3788da7f7ae41c37d5f48
   src/models/operations/telemetrylistcapabilities.ts:
     id: df21ed3c4b5e
     last_write_checksum: sha1:ff39db15455ec0829b8913fa68e7fefe2e73f00c
@@ -24840,8 +24840,8 @@ trackedFiles:
     pristine_git_object: 2c7c7fb293d7db3d7c2617e13402f816a58e34b7
   src/models/operations/updatetool.ts:
     id: f8c4ba69e202
-    last_write_checksum: sha1:98bb6b6ea5f88b06e21ed586a9abc800e3eb87c3
-    pristine_git_object: 8c3025c6483926cfdf3b5764786bc3a083dccb70
+    last_write_checksum: sha1:2212a65773d251b49c27a9de62c4cc67d484a81d
+    pristine_git_object: dd3b49973a5fa5757e4bfbd4d1d21364667c349f
   src/models/operations/updatewiki.ts:
     id: acbc72237165
     last_write_checksum: sha1:cc5af9628337fb6004b0f8e72f4537f9445e7bf1
@@ -30228,7 +30228,6 @@ examples:
           application/json: {"message": "<value>"}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Typescript SDK Changes:\n* `orq.telemetry.listCapabilities()`: \n  *  `request` **Changed** (Breaking ⚠️)\n  *  `response.sources[]` **Changed** (Breaking ⚠️)\n  *  `error.status[401]` **Added**\n* `orq.deployments.list()`: \n  *  `response.data[].promptConfig.provider.enum(inception)` **Added** (Breaking ⚠️)\n  *  `error.status[401]` **Added**\n* `orq.deployments.listVersions()`:  `response.data[]` **Changed** (Breaking ⚠️)\n* `orq.agents.create()`: \n  *  `request` **Changed**\n  *  `response` **Changed** (Breaking ⚠️)\n* `orq.agents.list()`:  `response.data[]` **Changed** (Breaking ⚠️)\n* `orq.responses.get()`:  `response` **Changed** (Breaking ⚠️)\n* `orq.responses.compact()`:  `response` **Changed** (Breaking ⚠️)\n* `orq.workspaceSecurity.verifyDomain()`: \n  *  `response.domain.status.enum(domainVerificationStatusUnspecified)` **Removed** (Breaking ⚠️)\n  *  `error.status[401]` **Added**\n* `orq.workspaceSecurity.createDomain()`: \n  *  `response.domain.status.enum(domainVerificationStatusUnspecified)` **Removed** (Breaking ⚠️)\n  *  `error.status[401]` **Added**\n* `orq.workspaceSecurity.listDomains()`: \n  *  `response.domains[].status.enum(domainVerificationStatusUnspecified)` **Removed** (Breaking ⚠️)\n  *  `error` **Changed**\n* `orq.smartRouters.update()`: \n  *  `request.updateSmartRouterRequest` **Changed** (Breaking ⚠️)\n  *  `response.smartRouter` **Changed** (Breaking ⚠️)\n  *  `error.status[401]` **Added**\n* `orq.smartRouters.get()`: \n  *  `response.smartRouter` **Changed** (Breaking ⚠️)\n  *  `error` **Changed**\n* `orq.smartRouters.create()`: \n  *  `request` **Changed** (Breaking ⚠️)\n  *  `response.smartRouter` **Changed** (Breaking ⚠️)\n  *  `error.status[401]` **Added**\n* `orq.smartRouters.list()`: \n  *  `request.profile` **Changed** (Breaking ⚠️)\n  *  `response.data[]` **Changed** (Breaking ⚠️)\n  *  `error.status[401]` **Added**\n* `orq.sessions.update()`: \n  *  `request.updateThreadRequest.kind.enum(threadKindUnspecified)` **Removed** (Breaking ⚠️)\n  *  `response.kind.enum(threadKindUnspecified)` **Removed** (Breaking ⚠️)\n  *  `error.status[401]` **Added**\n* `orq.sessions.get()`: \n  *  `response.kind.enum(threadKindUnspecified)` **Removed** (Breaking ⚠️)\n  *  `error` **Changed**\n* `orq.sessions.list()`: \n  *  `request.filters` **Changed** (Breaking ⚠️)\n  *  `response.data[].kind.enum(threadKindUnspecified)` **Removed** (Breaking ⚠️)\n  *  `error.status[401]` **Added**\n* `orq.sessions.getCount()`: \n  *  `request.filters` **Changed** (Breaking ⚠️)\n  *  `error.status[401]` **Added**\n* `orq.sessions.create()`: \n  *  `request.kind.enum(threadKindUnspecified)` **Removed** (Breaking ⚠️)\n  *  `response.kind.enum(threadKindUnspecified)` **Removed** (Breaking ⚠️)\n  *  `error.status[401]` **Added**\n* `orq.notifiers.update()`: \n  *  `request.updateNotifierRequest.type.enum(notifierTypeUnspecified)` **Removed** (Breaking ⚠️)\n  *  `response.notifier.union(Email notifier).type.enum(notifierTypeUnspecified)` **Removed** (Breaking ⚠️)\n  *  `error.status[401]` **Added**\n* `orq.notifiers.get()`: \n  *  `response.notifier.union(Generic webhook notifier).type.enum(notifierTypeUnspecified)` **Removed** (Breaking ⚠️)\n  *  `error` **Changed**\n* `orq.notifiers.create()`: \n  *  `request.union(Email notifier create request).type.enum(notifierTypeUnspecified)` **Removed** (Breaking ⚠️)\n  *  `response.notifier.union(Email notifier).type.enum(notifierTypeUnspecified)` **Removed** (Breaking ⚠️)\n  *  `error.status[401]` **Added**\n* `orq.notifiers.list()`: \n  *  `request.type` **Changed** (Breaking ⚠️)\n  *  `response.data[].union(Email notifier).type.enum(notifierTypeUnspecified)` **Removed** (Breaking ⚠️)\n  *  `error.status[401]` **Added**\n* `orq.modelFusions.setEnabled()`: \n  *  `response.modelFusion` **Changed** (Breaking ⚠️)\n  *  `error.status[401]` **Added**\n* `orq.modelFusions.update()`: \n  *  `request.updateModelFusionRequest` **Changed** (Breaking ⚠️)\n  *  `response.modelFusion` **Changed** (Breaking ⚠️)\n  *  `error.status[401]` **Added**\n* `orq.modelFusions.get()`: \n  *  `response.modelFusion` **Changed** (Breaking ⚠️)\n  *  `error.status[401]` **Added**\n* `orq.modelFusions.create()`: \n  *  `request` **Changed** (Breaking ⚠️)\n  *  `response.modelFusion` **Changed** (Breaking ⚠️)\n  *  `error.status[401]` **Added**\n* `orq.modelFusions.list()`: \n  *  `request.preset` **Changed** (Breaking ⚠️)\n  *  `response.data[]` **Changed** (Breaking ⚠️)\n  *  `error.status[401]` **Added**\n* `orq.mcpServers.sync()`: \n  *  `response.mcpServer` **Changed** (Breaking ⚠️)\n  *  `error.status[401]` **Added**\n* `orq.mcpServers.update()`: \n  *  `request.updateMcpServerRequest` **Changed** (Breaking ⚠️)\n  *  `response.mcpServer` **Changed** (Breaking ⚠️)\n  *  `error.status[401]` **Added**\n* `orq.mcpServers.retrieve()`: \n  *  `response.mcpServer` **Changed** (Breaking ⚠️)\n  *  `error` **Changed**\n* `orq.mcpServers.create()`: \n  *  `request` **Changed** (Breaking ⚠️)\n  *  `response.mcpServer` **Changed** (Breaking ⚠️)\n  *  `error.status[401]` **Added**\n* `orq.mcpServers.list()`: \n  *  `response.data[]` **Changed** (Breaking ⚠️)\n  *  `error.status[401]` **Added**\n* `orq.mcpGateways.update()`: \n  *  `request.updateMcpGatewayRequest` **Changed** (Breaking ⚠️)\n  *  `response.mcpGateway` **Changed** (Breaking ⚠️)\n  *  `error.status[401]` **Added**\n* `orq.mcpGateways.retrieve()`: \n  *  `response.mcpGateway` **Changed** (Breaking ⚠️)\n  *  `error` **Changed**\n* `orq.mcpGateways.create()`: \n  *  `request` **Changed** (Breaking ⚠️)\n  *  `response.mcpGateway` **Changed** (Breaking ⚠️)\n  *  `error.status[401]` **Added**\n* `orq.mcpGateways.list()`: \n  *  `request.status` **Removed** (Breaking ⚠️)\n  *  `response.data[]` **Changed** (Breaking ⚠️)\n  *  `error.status[401]` **Added**\n* `orq.managementKeys.update()`: \n  *  `request.updateManagementKeyRequest` **Changed** (Breaking ⚠️)\n  *  `response.managementKey` **Changed** (Breaking ⚠️)\n  *  `error.status[401]` **Added**\n* `orq.managementKeys.get()`: \n  *  `response.managementKey` **Changed** (Breaking ⚠️)\n  *  `error` **Changed**\n* `orq.managementKeys.create()`: \n  *  `request.permissionMode.enum(managementPermissionModeUnspecified)` **Removed** (Breaking ⚠️)\n  *  `response.managementKey` **Changed** (Breaking ⚠️)\n  *  `error.status[401]` **Added**\n* `orq.managementKeys.list()`: \n  *  `request` **Changed** (Breaking ⚠️)\n  *  `response.data[]` **Changed** (Breaking ⚠️)\n  *  `error.status[401]` **Added**\n* `orq.identities.update()`: \n  *  `response.identity.budget` **Changed** (Breaking ⚠️)\n  *  `error.status[401]` **Added**\n* `orq.identities.retrieve()`: \n  *  `response.identity.budget` **Changed** (Breaking ⚠️)\n  *  `error` **Changed**\n* `orq.identities.create()`: \n  *  `response.identity.budget` **Changed** (Breaking ⚠️)\n  *  `error.status[401]` **Added**\n* `orq.identities.list()`: \n  *  `request.sortBy` **Changed** (Breaking ⚠️)\n  *  `response.data[].budget` **Changed** (Breaking ⚠️)\n  *  `error.status[401]` **Added**\n* `orq.agents.retrieve()`:  `response` **Changed** (Breaking ⚠️)\n* `orq.agents.update()`: \n  *  `requestBody` **Changed**\n  *  `response` **Changed** (Breaking ⚠️)\n* `orq.files.update()`: \n  *  `response.file.purpose.enum(filePurposeUnspecified)` **Removed** (Breaking ⚠️)\n  *  `error.status[401]` **Added**\n* `orq.files.get()`: \n  *  `response.file.purpose.enum(filePurposeUnspecified)` **Removed** (Breaking ⚠️)\n  *  `error` **Changed**\n* `orq.files.create()`: \n  *  `request.purpose.enum(filePurposeUnspecified)` **Removed** (Breaking ⚠️)\n  *  `response.file.purpose.enum(filePurposeUnspecified)` **Removed** (Breaking ⚠️)\n  *  `error.status[401]` **Added**\n* `orq.files.list()`: \n  *  `response.data[].purpose.enum(filePurposeUnspecified)` **Removed** (Breaking ⚠️)\n  *  `error.status[401]` **Added**\n* `orq.budgets.resetConsumption()`: \n  *  `response.budget` **Changed** (Breaking ⚠️)\n  *  `error.status[401]` **Added**\n* `orq.budgets.update()`: \n  *  `request.updateBudgetRequest` **Changed** (Breaking ⚠️)\n  *  `response.budget` **Changed** (Breaking ⚠️)\n  *  `error.status[401]` **Added**\n* `orq.budgets.get()`: \n  *  `response.budget` **Changed** (Breaking ⚠️)\n  *  `error` **Changed**\n* `orq.prompts.list()`: \n  *  `response.data[]` **Changed** (Breaking ⚠️)\n  *  `error.status[401]` **Added**\n* `orq.prompts.create()`: \n  *  `request.prompt` **Changed**\n  *  `response` **Changed** (Breaking ⚠️)\n  *  `error.status[401]` **Added**\n* `orq.prompts.retrieve()`: \n  *  `response` **Changed** (Breaking ⚠️)\n  *  `error` **Changed**\n* `orq.prompts.update()`: \n  *  `request.requestBody.prompt` **Changed**\n  *  `response` **Changed** (Breaking ⚠️)\n* `orq.prompts.listVersions()`: \n  *  `response.data[]` **Changed** (Breaking ⚠️)\n  *  `error` **Changed**\n* `orq.prompts.getVersion()`:  `response` **Changed** (Breaking ⚠️)\n* `orq.budgets.create()`: \n  *  `request` **Changed** (Breaking ⚠️)\n  *  `response.budget` **Changed** (Breaking ⚠️)\n  *  `error.status[401]` **Added**\n* `orq.budgets.list()`: \n  *  `request` **Changed** (Breaking ⚠️)\n  *  `response.data[]` **Changed** (Breaking ⚠️)\n  *  `error.status[401]` **Added**\n* `orq.deployments.invoke()`: \n  *  `response.provider.enum(inception)` **Added** (Breaking ⚠️)\n  *  `error.status[401]` **Added**\n* `orq.telemetry.query()`: \n  *  `request.source.enum(telemetrySourceUnspecified)` **Removed** (Breaking ⚠️)\n  *  `response.request.source.enum(telemetrySourceUnspecified)` **Removed** (Breaking ⚠️)\n  *  `error.status[401]` **Added**\n* `orq.router.moderations.create()`: \n  *  `request.model` **Changed**\n  *  `error` **Changed** (Breaking ⚠️)\n* `orq.telemetry.listFacetValues()`: \n  *  `request.source.enum(telemetrySourceUnspecified)` **Removed** (Breaking ⚠️)\n  *  `error.status[401]` **Added**\n* `orq.models.importLitellm()`: \n  *  `request[].modelId` **Added**\n  *  `response.[]` **Changed**\n* `orq.environments.list()`:  `error.status[401]` **Added**\n* `orq.router.audio.translations.create()`:  `request` **Changed**\n* `orq.router.images.generations.create()`: \n  *  `request` **Changed**\n  *  `error.status[401]` **Added**\n* `orq.router.images.edits.create()`: \n  *  `request` **Changed**\n  *  `error.status[401]` **Added**\n* `orq.router.images.variations.create()`: \n  *  `request` **Changed**\n  *  `error.status[401]` **Added**\n* `orq.router.embeddings.create()`: \n  *  `request` **Changed**\n  *  `error.status[401]` **Added**\n* `orq.router.classify.create()`:  `request` **Changed**\n* `orq.router.decisions.create()`:  `request` **Changed**\n* `orq.chunking.parse()`:  `error.status[401]` **Added**\n* `orq.fileSystems.retrieve()`:  `error.status[403]` **Added**\n* `orq.fileSystems.listFiles()`:  `error.status[403]` **Added**\n* `orq.fileSystems.statFile()`:  `error.status[400]` **Added**\n* `orq.knowledge.listDatasources()`:  `error` **Changed**\n* `orq.knowledge.createDatasource()`:  `error.status[401]` **Added**\n* `orq.knowledge.previewChunks()`:  `error.status[401]` **Added**\n* `orq.knowledge.retrieveDatasource()`:  `error` **Changed**\n* `orq.knowledge.deleteDatasource()`:  `error.status[401]` **Added**\n* `orq.knowledge.updateDatasource()`:  `error.status[401]` **Added**\n* `orq.knowledge.listChunks()`:  `error` **Changed**\n* `orq.knowledge.createChunks()`:  `error.status[401]` **Added**\n* `orq.knowledge.deleteChunks()`:  `error.status[401]` **Added**\n* `orq.knowledge.getChunksCount()`:  `error.status[401]` **Added**\n* `orq.knowledge.listChunksPaginated()`:  `error.status[401]` **Added**\n* `orq.knowledge.retrieveChunk()`:  `error` **Changed**\n* `orq.knowledge.deleteChunk()`:  `error.status[401]` **Added**\n* `orq.knowledge.updateChunk()`:  `error.status[401]` **Added**\n* `orq.knowledge.toggleChunk()`:  `error.status[401]` **Added**\n* `orq.knowledge.retrieveProcessingStatus()`:  `error` **Changed**\n* `orq.knowledge.retrieveFileUrl()`:  `error.status[400]` **Added**\n* `orq.memoryStores.create()`:  `error.status[401]` **Added**\n* `orq.memoryStores.listMemories()`:  `error.status[404]` **Added**\n* `orq.evals.listVersions()`:  `error` **Changed**\n* `orq.evals.getVersion()`:  `error` **Changed**\n* `orq.evals.invoke()`: \n  *  `request.invokeEvaluatorRequest` **Changed**\n  *  `error.status[401]` **Added**\n* `orq.pii.capabilities()`:  `error.status[401]` **Added**\n* `orq.pii.detect()`:  `error.status[401]` **Added**\n* `orq.pii.redact()`:  `error.status[401]` **Added**\n* `orq.pii.restore()`:  `error.status[401]` **Added**\n* `orq.apiKeys.listCapabilities()`:  `error.status[401]` **Added**\n* `orq.annotations.create()`:  `error.status[401]` **Added**\n* `orq.annotations.delete()`:  `error.status[401]` **Added**\n* `orq.logs.aggregate()`:  `error.status[401]` **Added**\n* `orq.logs.listFacets()`:  `error.status[401]` **Added**\n* `orq.logs.listFacetValues()`:  `error` **Changed**\n* `orq.logs.listFields()`:  `error.status[401]` **Added**\n* `orq.logs.findPatterns()`:  `error.status[401]` **Added**\n* `orq.logs.query()`:  `error.status[401]` **Added**\n* `orq.logs.search()`:  `error.status[401]` **Added**\n* `orq.logs.get()`:  `error` **Changed**\n* `orq.logs.context()`:  `error.status[401]` **Added**\n* `orq.logs.listTraceLogs()`:  `error.status[401]` **Added**\n* `orq.reporting.query()`:  `error.status[401]` **Added**\n* `orq.router.audio.speech.create()`: \n  *  `request` **Changed**\n  *  `error.status[401]` **Added**\n* `orq.router.rerank.create()`: \n  *  `request` **Changed**\n  *  `error.status[401]` **Added**\n* `orq.router.ocr()`:  `error.status[401]` **Added**\n* `orq.traces.aggregate()`:  `error.status[401]` **Added**\n* `orq.traces.listFacets()`:  `error.status[401]` **Added**\n* `orq.traces.listFacetValues()`:  `error` **Changed**\n* `orq.traces.listFields()`:  `error.status[401]` **Added**\n* `orq.traces.listFilters()`:  `error.status[401]` **Added**\n* `orq.traces.query()`:  `error.status[401]` **Added**\n* `orq.traces.search()`:  `error.status[401]` **Added**\n* `orq.traces.get()`:  `error` **Changed**\n* `orq.traces.getConversation()`:  `error` **Changed**\n* `orq.traces.listSpans()`: \n  *  `response.data[].finishReasons` **Added**\n  *  `error.status[401]` **Added**\n* `orq.traces.getSpan()`: \n  *  `response.span.summary.finishReasons` **Added**\n  *  `error` **Changed**\n* `orq.views.list()`:  `error.status[401]` **Added**\n* `orq.views.create()`:  `error.status[401]` **Added**\n* `orq.views.get()`:  `error.status[401]` **Added**\n* `orq.views.delete()`:  `error.status[401]` **Added**\n* `orq.views.update()`:  `error.status[401]` **Added**\n* `orq.datasets.list()`:  `error.status[401]` **Added**\n* `orq.datasets.create()`:  `error.status[401]` **Added**\n* `orq.datasets.retrieve()`:  `error` **Changed**\n* `orq.datasets.delete()`:  `error.status[401]` **Added**\n* `orq.datasets.update()`:  `error.status[401]` **Added**\n* `orq.datasets.clear()`:  `error.status[401]` **Added**\n* `orq.datasets.listDatapoints()`:  `error` **Changed**\n* `orq.datasets.createDatapoint()`:  `error.status[401]` **Added**\n* `orq.datasets.deleteDatapoints()`:  `error.status[401]` **Added**\n* `orq.datasets.createDatapoints()`:  `error.status[401]` **Added**\n* `orq.datasets.retrieveDatapoint()`:  `error` **Changed**\n* `orq.datasets.deleteDatapoint()`:  `error.status[401]` **Added**\n* `orq.datasets.updateDatapoint()`:  `error.status[401]` **Added**\n* `orq.models.create()`: \n  *  `request` **Changed**\n  *  `response` **Changed**\n* `orq.models.createAwsBedrock()`: \n  *  `request` **Changed**\n  *  `response` **Changed**\n* `orq.models.updateAwsBedrock()`: \n  *  `request.requestBody` **Changed**\n  *  `response` **Changed**\n* `orq.tools.retrieve()`:  `error` **Changed**\n* `orq.models.createOpenaiLike()`: \n  *  `request` **Changed**\n  *  `response` **Changed**\n* `orq.models.updateOpenaiLike()`: \n  *  `request.requestBody` **Changed**\n  *  `response` **Changed**\n* `orq.models.createVertex()`: \n  *  `request` **Changed**\n  *  `response` **Changed**\n* `orq.models.update()`: \n  *  `request.requestBody` **Changed**\n  *  `response` **Changed**\n* `orq.models.list()`:  `error.status[401]` **Added**\n* `orq.policies.list()`: \n  *  `response.data[].modelsConfig.fallbackOnCodes` **Added**\n  *  `error.status[401]` **Added**\n* `orq.policies.create()`: \n  *  `request.modelsConfig.fallbackOnCodes` **Added**\n  *  `response.modelsConfig.fallbackOnCodes` **Added**\n* `orq.policies.retrieve()`:  `response.modelsConfig.fallbackOnCodes` **Added**\n* `orq.policies.update()`: \n  *  `request.requestBody.modelsConfig.fallbackOnCodes` **Added**\n  *  `response.modelsConfig.fallbackOnCodes` **Added**\n* `orq.alerts.list()`: \n  *  `request.scope` **Added**\n  *  `response.data[]` **Changed**\n  *  `error.status[401]` **Added**\n* `orq.alerts.create()`: \n  *  `request` **Changed**\n  *  `response.alert` **Changed**\n  *  `error` **Changed**\n* `orq.alerts.get()`: \n  *  `response.alert` **Changed**\n  *  `error` **Changed**\n* `orq.alerts.delete()`:  `error.status[401]` **Added**\n* `orq.alerts.update()`: \n  *  `request.updateAlertRequest.query` **Changed**\n  *  `response.alert` **Changed**\n  *  `error.status[401]` **Added**\n* `orq.alerts.listTriggers()`: \n  *  `response.data[].query` **Added**\n  *  `error` **Changed**\n* `orq.alerts.listTriggerEvents()`:  `error` **Changed**\n* `orq.annotationQueues.list()`:  `error.status[401]` **Added**\n* `orq.annotationQueues.create()`:  `error.status[401]` **Added**\n* `orq.annotationQueues.retrieve()`:  `error` **Changed**\n* `orq.annotationQueues.delete()`:  `error.status[401]` **Added**\n* `orq.annotationQueues.update()`:  `error.status[401]` **Added**\n* `orq.annotationQueues.clear()`:  `error.status[401]` **Added**\n* `orq.annotationQueues.listItems()`:  `error.status[401]` **Added**\n* `orq.annotationQueues.addItems()`:  `error.status[401]` **Added**\n* `orq.annotationQueues.removeItems()`:  `error.status[401]` **Added**\n* `orq.annotationQueues.retrieveItem()`:  `error` **Changed**\n* `orq.tools.delete()`:  `error.status[401]` **Added**\n* `orq.tools.create()`:  `error.status[401]` **Added**\n* `orq.agents.run()`: \n  *  `request` **Changed**\n  *  `error.status[401]` **Added**\n* `orq.budgets.delete()`:  `error.status[401]` **Added**\n* `orq.agents.invoke()`:  `error.status[401]` **Added**\n* `orq.humanReviewSets.delete()`: **Removed** (Breaking ⚠️)\n* `orq.router.audio.transcriptions.create()`:  `request` **Changed**\n* `orq.environments.create()`:  `error.status[401]` **Added**\n* `orq.environments.get()`:  `error.status[401]` **Added**\n* `orq.environments.delete()`:  `error.status[401]` **Added**\n* `orq.environments.update()`:  `error.status[401]` **Added**\n* `orq.humanReviewSets.update()`: **Removed** (Breaking ⚠️)\n* `orq.humanReviewSets.get()`: **Removed** (Breaking ⚠️)\n* `orq.files.getContent()`:  `error` **Changed**\n* `orq.humanReviewSets.create()`: **Removed** (Breaking ⚠️)\n* `orq.files.delete()`:  `error.status[401]` **Added**\n* `orq.humanReviewSets.list()`: **Removed** (Breaking ⚠️)\n* `orq.guardrailRules.list()`:  `error.status[401]` **Added**\n* `orq.guardrailRules.create()`:  `error.status[401]` **Added**\n* `orq.guardrailRules.listUsedGuardrails()`:  `error.status[401]` **Added**\n* `orq.guardrailRules.retrieve()`:  `error` **Changed**\n* `orq.guardrailRules.delete()`:  `error.status[401]` **Added**\n* `orq.guardrailRules.update()`:  `error.status[401]` **Added**\n* `orq.hub.search()`:  `error.status[401]` **Added**\n* `orq.hub.get()`:  `error` **Changed**\n* `orq.feedback.submit()`: **Removed** (Breaking ⚠️)\n* `orq.feedback.remove()`: **Removed** (Breaking ⚠️)\n* `orq.feedback.create()`: **Removed** (Breaking ⚠️)\n* `orq.identities.delete()`:  `error.status[401]` **Added**\n* `orq.feedback.createEvaluation()`: **Removed** (Breaking ⚠️)\n* `orq.feedback.removeEvaluation()`: **Removed** (Breaking ⚠️)\n* `orq.users.create()`: **Added**\n* `orq.managementKeys.listCapabilities()`:  `error.status[401]` **Added**\n* `orq.users.update()`: **Added**\n* `orq.managementKeys.delete()`:  `error.status[401]` **Added**\n* `orq.users.delete()`: **Added**\n* `orq.users.get()`: **Added**\n* `orq.users.list()`: **Added**\n* `orq.mcpGateways.listTools()`:  `error` **Changed**\n* `orq.monitors.update()`: **Added**\n* `orq.mcpGateways.delete()`:  `error.status[401]` **Added**\n* `orq.monitors.delete()`: **Added**\n* `orq.monitors.get()`: **Added**\n* `orq.monitors.listPresets()`: **Added**\n* `orq.monitors.create()`: **Added**\n* `orq.mcpServers.delete()`:  `error.status[401]` **Added**\n* `orq.monitors.list()`: **Added**\n* `orq.mcpServers.testTool()`:  `error.status[401]` **Added**\n* `orq.auditLogDestinations.test()`: **Added**\n* `orq.modelCatalog.list()`:  `error.status[401]` **Added**\n* `orq.modelCatalog.listOfferings()`:  `error.status[401]` **Added**\n* `orq.modelCatalog.get()`:  `error` **Changed**\n* `orq.auditLogDestinations.rotateSecret()`: **Added**\n* `orq.auditLogDestinations.replay()`: **Added**\n* `orq.auditLogDestinations.listDeliveries()`: **Added**\n* `orq.auditLogDestinations.update()`: **Added**\n* `orq.modelFusions.delete()`:  `error.status[401]` **Added**\n* `orq.auditLogDestinations.delete()`: **Added**\n* `orq.auditLogDestinations.get()`: **Added**\n* `orq.auditLogDestinations.create()`: **Added**\n* `orq.auditLogDestinations.list()`: **Added**\n* `orq.notifiers.delete()`:  `error.status[401]` **Added**\n* `orq.feedback.submit()`: **Added**\n* `orq.projects.list()`:  `error.status[401]` **Added**\n* `orq.projects.create()`:  `error.status[401]` **Added**\n* `orq.projects.get()`:  `error` **Changed**\n* `orq.projects.delete()`:  `error.status[401]` **Added**\n* `orq.projects.update()`:  `error.status[401]` **Added**\n* `orq.routingRules.list()`: \n  *  `response.data[]` **Changed**\n  *  `error.status[401]` **Added**\n* `orq.routingRules.create()`: \n  *  `request` **Changed**\n  *  `response` **Changed**\n  *  `error.status[401]` **Added**\n* `orq.routingRules.listUsedModels()`:  `error.status[401]` **Added**\n* `orq.routingRules.retrieve()`: \n  *  `response` **Changed**\n  *  `error` **Changed**\n* `orq.routingRules.delete()`:  `error.status[401]` **Added**\n* `orq.routingRules.update()`: \n  *  `request.updateRoutingRuleRequest` **Changed**\n  *  `response` **Changed**\n  *  `error.status[401]` **Added**\n* `orq.feedback.remove()`: **Added**\n* `orq.feedback.create()`: **Added**\n* `orq.humanReviewSets.delete()`: **Added**\n* `orq.sessions.listTags()`:  `error.status[401]` **Added**\n* `orq.humanReviewSets.update()`: **Added**\n* `orq.sessions.delete()`:  `error.status[401]` **Added**\n* `orq.humanReviewSets.get()`: **Added**\n* `orq.skills.list()`:  `error.status[401]` **Added**\n* `orq.skills.create()`:  `error.status[401]` **Added**\n* `orq.skills.get()`:  `error` **Changed**\n* `orq.skills.delete()`:  `error.status[401]` **Added**\n* `orq.skills.update()`:  `error.status[401]` **Added**\n* `orq.humanReviewSets.create()`: **Added**\n* `orq.humanReviewSets.list()`: **Added**\n* `orq.agents.external.testConnection()`: **Added**\n* `orq.smartRouters.delete()`:  `error.status[401]` **Added**\n* `orq.agents.external.refreshCard()`: **Added**\n* `orq.webhooks.list()`:  `error.status[401]` **Added**\n* `orq.webhooks.create()`:  `error.status[401]` **Added**\n* `orq.webhooks.count()`:  `error.status[401]` **Added**\n* `orq.webhooks.query()`:  `error.status[401]` **Added**\n* `orq.webhooks.generateSecret()`:  `error.status[401]` **Added**\n* `orq.webhooks.get()`:  `error` **Changed**\n* `orq.webhooks.delete()`:  `error.status[401]` **Added**\n* `orq.webhooks.update()`:  `error.status[401]` **Added**\n* `orq.wikis.list()`:  `error.status[401]` **Added**\n* `orq.wikis.create()`:  `error.status[401]` **Added**\n* `orq.wikis.inspectRepository()`:  `error.status[401]` **Added**\n* `orq.wikis.get()`:  `error.status[401]` **Added**\n* `orq.wikis.delete()`:  `error.status[401]` **Added**\n* `orq.wikis.update()`:  `error.status[401]` **Added**\n* `orq.wikis.getPage()`:  `error.status[401]` **Added**\n* `orq.wikis.updatePage()`:  `error.status[401]` **Added**\n* `orq.wikis.refresh()`:  `error.status[401]` **Added**\n* `orq.wikis.listRuns()`:  `error.status[401]` **Added**\n* `orq.wikis.search()`:  `error.status[401]` **Added**\n* `orq.wikis.getTree()`:  `error.status[401]` **Added**\n* `orq.workspaces.list()`: \n  *  `response.data[].capabilities.userPermissions` **Added**\n  *  `error.status[401]` **Added**\n* `orq.workspaces.get()`: \n  *  `response.workspace.capabilities.userPermissions` **Added**\n  *  `error` **Changed**\n* `orq.workspaces.update()`: \n  *  `request.updateWorkspaceRequest.tracingEnabled` **Added**\n  *  `response.workspace.capabilities.userPermissions` **Added**\n  *  `error.status[401]` **Added**\n* `orq.agents.external.update()`: **Added**\n* `orq.agents.external.delete()`: **Added**\n* `orq.workspaceSecurity.deleteDomain()`:  `error.status[401]` **Added**\n* `orq.agents.external.retrieve()`: **Added**\n* `orq.workspaceSecurity.getIpAllowlist()`:  `error` **Changed**\n* `orq.workspaceSecurity.updateIpAllowlist()`:  `error.status[401]` **Added**\n* `orq.workspaceSecurity.addIpRange()`:  `error.status[401]` **Added**\n* `orq.workspaceSecurity.deleteIpRange()`:  `error.status[401]` **Added**\n* `orq.workspaceSettings.get()`:  `error.status[401]` **Added**\n* `orq.workspaceSettings.update()`:  `error.status[401]` **Added**\n* `orq.agents.external.create()`: **Added**\n* `orq.agents.external.list()`: **Added**\n* `orq.schedules.list()`:  `error` **Changed**\n"
 generatedFiles:
   - .gitattributes
   - .npmignore
