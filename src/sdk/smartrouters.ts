@@ -85,7 +85,7 @@ export class SmartRouters extends ClientSDK {
    * Update a Smart Router
    *
    * @remarks
-   * Updates the model pool, routing profile, session affinity, or any combination. Omitted fields retain their current values. The router key and model reference cannot be changed.
+   * Updates the model pool, routing profile, or both. Omitted fields retain their current values. The router key and model reference cannot be changed.
    */
   async update(
     updateSmartRouterRequest: components.UpdateSmartRouterRequest,

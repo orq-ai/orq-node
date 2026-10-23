@@ -6,6 +6,7 @@ import * as z from "zod/v3";
 import { ClosedEnum } from "../../types/enums.js";
 
 export const BudgetScopeKind = {
+  BudgetScopeKindUnspecified: "BUDGET_SCOPE_KIND_UNSPECIFIED",
   BudgetScopeKindWorkspace: "BUDGET_SCOPE_KIND_WORKSPACE",
   BudgetScopeKindProject: "BUDGET_SCOPE_KIND_PROJECT",
   BudgetScopeKindIdentity: "BUDGET_SCOPE_KIND_IDENTITY",

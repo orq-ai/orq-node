@@ -1,6 +1,6 @@
 # McpToolInput
 
-Executes tools from Model Context Protocol (MCP) servers and gateways. Reference the server or gateway using "key" or "id"; add "tool_id" to attach a single tool, or omit it to attach every tool it exposes.
+Executes tools from Model Context Protocol (MCP) servers. Specify the parent MCP tool using "key" or "id", and the specific nested tool using "tool_id".
 
 ## Example Usage
 
@@ -16,10 +16,10 @@ let value: McpToolInput = {
 
 ## Fields
 
-| Field                                                                                                     | Type                                                                                                      | Required                                                                                                  | Description                                                                                               |
-| --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
-| `type`                                                                                                    | *"mcp"*                                                                                                   | :heavy_check_mark:                                                                                        | MCP tool type                                                                                             |
-| `key`                                                                                                     | *string*                                                                                                  | :heavy_minus_sign:                                                                                        | The key of the MCP server or MCP gateway                                                                  |
-| `id`                                                                                                      | *string*                                                                                                  | :heavy_minus_sign:                                                                                        | The ID of the MCP server or MCP gateway                                                                   |
-| `toolId`                                                                                                  | *string*                                                                                                  | :heavy_minus_sign:                                                                                        | The ID of a specific tool within the MCP server. Omit to attach every tool the server or gateway exposes. |
-| `requiresApproval`                                                                                        | *boolean*                                                                                                 | :heavy_minus_sign:                                                                                        | Whether this tool requires approval before execution                                                      |
+| Field                                                    | Type                                                     | Required                                                 | Description                                              |
+| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
+| `type`                                                   | *"mcp"*                                                  | :heavy_check_mark:                                       | MCP tool type                                            |
+| `key`                                                    | *string*                                                 | :heavy_minus_sign:                                       | The key of the parent MCP tool                           |
+| `id`                                                     | *string*                                                 | :heavy_minus_sign:                                       | The ID of the parent MCP tool                            |
+| `toolId`                                                 | *string*                                                 | :heavy_check_mark:                                       | The ID of the specific nested tool within the MCP server |
+| `requiresApproval`                                       | *boolean*                                                | :heavy_minus_sign:                                       | Whether this tool requires approval before execution     |

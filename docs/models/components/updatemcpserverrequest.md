@@ -7,11 +7,11 @@ import { UpdateMcpServerRequest } from "@orq-ai/node/models/components";
 
 let value: UpdateMcpServerRequest = {
   connection: {
-    type: "MCP_CONNECTION_TYPE_SSE",
+    type: "MCP_CONNECTION_TYPE_HTTP",
     url: "https://api.githubcopilot.com/mcp/",
   },
   auth: {
-    type: "MCP_AUTH_TYPE_PER_USER_OAUTH",
+    type: "MCP_AUTH_TYPE_OAUTH_CLIENT_CREDENTIALS",
     staticHeaders: [
       {
         key: "Authorization",

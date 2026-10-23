@@ -636,10 +636,6 @@ export type CreateCompletionOrq = {
    */
   retry?: CreateCompletionRouterCompletionsRetry | undefined;
   /**
-   * HTTP status codes that trigger fallback. Enter up to 20 unique integers from 400 to 599. When omitted or empty, defaults to [408, 429, 500, 502, 503, 504, 529].
-   */
-  fallbackOnCodes?: Array<number> | undefined;
-  /**
    * Array of fallback models to use if primary model fails
    */
   fallbacks?: Array<CreateCompletionRouterCompletionsFallbacks> | undefined;
@@ -735,10 +731,6 @@ export type CreateCompletionRequestBody = {
    * The name to display on the trace. If not specified, the default system name will be used.
    */
   name?: string | undefined;
-  /**
-   * HTTP status codes that trigger fallback. Enter up to 20 unique integers from 400 to 599. When omitted or empty, defaults to [408, 429, 500, 502, 503, 504, 529].
-   */
-  fallbackOnCodes?: Array<number> | undefined;
   /**
    * Array of fallback models to use if primary model fails
    */
@@ -1095,7 +1087,7 @@ export const CreateCompletionCache$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateCompletionCache
 > = z.object({
-  ttl: z.number().default(3600),
+  ttl: z.number().default(1800),
   type: CreateCompletionType$outboundSchema,
 });
 
@@ -1419,7 +1411,7 @@ export const CreateCompletionRouterCompletionsCache$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateCompletionRouterCompletionsCache
 > = z.object({
-  ttl: z.number().default(3600),
+  ttl: z.number().default(1800),
   type: CreateCompletionRouterCompletionsType$outboundSchema,
 });
 
@@ -2795,7 +2787,6 @@ export function createCompletionRouterCompletionsTimeoutToJSON(
 export type CreateCompletionOrq$Outbound = {
   name?: string | undefined;
   retry?: CreateCompletionRouterCompletionsRetry$Outbound | undefined;
-  fallback_on_codes?: Array<number> | undefined;
   fallbacks?:
     | Array<CreateCompletionRouterCompletionsFallbacks$Outbound>
     | undefined;
@@ -2824,7 +2815,6 @@ export const CreateCompletionOrq$outboundSchema: z.ZodType<
   name: z.string().optional(),
   retry: z.lazy(() => CreateCompletionRouterCompletionsRetry$outboundSchema)
     .optional(),
-  fallbackOnCodes: z.array(z.number().int()).optional(),
   fallbacks: z.array(
     z.lazy(() => CreateCompletionRouterCompletionsFallbacks$outboundSchema),
   ).optional(),
@@ -2848,7 +2838,6 @@ export const CreateCompletionOrq$outboundSchema: z.ZodType<
     .optional(),
 }).transform((v) => {
   return remap$(v, {
-    fallbackOnCodes: "fallback_on_codes",
     knowledgeBases: "knowledge_bases",
     loadBalancer: "load_balancer",
   });
@@ -2877,7 +2866,6 @@ export type CreateCompletionRequestBody$Outbound = {
   n: number | null;
   user?: string | undefined;
   name?: string | undefined;
-  fallback_on_codes?: Array<number> | undefined;
   fallbacks?: Array<CreateCompletionFallbacks$Outbound> | undefined;
   retry?: CreateCompletionRetry$Outbound | undefined;
   cache?: CreateCompletionCache$Outbound | undefined;
@@ -2913,7 +2901,6 @@ export const CreateCompletionRequestBody$outboundSchema: z.ZodType<
   n: z.nullable(z.number().int().default(1)),
   user: z.string().optional(),
   name: z.string().optional(),
-  fallbackOnCodes: z.array(z.number().int()).optional(),
   fallbacks: z.array(z.lazy(() => CreateCompletionFallbacks$outboundSchema))
     .optional(),
   retry: z.lazy(() => CreateCompletionRetry$outboundSchema).optional(),
@@ -2937,7 +2924,6 @@ export const CreateCompletionRequestBody$outboundSchema: z.ZodType<
     maxTokens: "max_tokens",
     presencePenalty: "presence_penalty",
     topP: "top_p",
-    fallbackOnCodes: "fallback_on_codes",
     loadBalancer: "load_balancer",
   });
 });

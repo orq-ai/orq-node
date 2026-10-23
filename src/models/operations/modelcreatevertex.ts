@@ -10,13 +10,8 @@ import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ModelCreateVertexRequestBody = {
-  benchmarkModel?: string | undefined;
   configuration: components.VertexConfiguration;
   displayName: string;
-  /**
-   * Immutable private-model slug; defaults to display_name.
-   */
-  modelId?: string | undefined;
 };
 
 /**
@@ -37,9 +32,6 @@ export type ModelCreateVertexResponseBody = {
   inputCost: number | null;
   inputCurrency: string;
   isActive: boolean;
-  /**
-   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
-   */
   legacyUuid?: string | undefined;
   metadata: components.ModelMetadata;
   modelDeveloper?: string | undefined;
@@ -59,10 +51,8 @@ export type ModelCreateVertexResponseBody = {
 
 /** @internal */
 export type ModelCreateVertexRequestBody$Outbound = {
-  benchmark_model?: string | undefined;
   configuration: components.VertexConfiguration$Outbound;
   display_name: string;
-  model_id?: string | undefined;
 };
 
 /** @internal */
@@ -71,15 +61,11 @@ export const ModelCreateVertexRequestBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ModelCreateVertexRequestBody
 > = z.object({
-  benchmarkModel: z.string().optional(),
   configuration: components.VertexConfiguration$outboundSchema,
   displayName: z.string(),
-  modelId: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
-    benchmarkModel: "benchmark_model",
     displayName: "display_name",
-    modelId: "model_id",
   });
 });
 

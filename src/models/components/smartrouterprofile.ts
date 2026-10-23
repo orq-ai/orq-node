@@ -6,6 +6,7 @@ import * as z from "zod/v3";
 import { ClosedEnum } from "../../types/enums.js";
 
 export const SmartRouterProfile = {
+  SmartRouterProfileUnspecified: "SMART_ROUTER_PROFILE_UNSPECIFIED",
   SmartRouterProfileQuality: "SMART_ROUTER_PROFILE_QUALITY",
   SmartRouterProfileBalanced: "SMART_ROUTER_PROFILE_BALANCED",
   SmartRouterProfileCost: "SMART_ROUTER_PROFILE_COST",

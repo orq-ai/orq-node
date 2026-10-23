@@ -8,7 +8,7 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type RequestBody2 = {
+export type PostV2HumanEvalSetsRequestBody2 = {
   /**
    * Display name of the human review set
    */
@@ -32,7 +32,7 @@ export type RequestBody2 = {
   filterValue: string;
 };
 
-export type RequestBody1 = {
+export type PostV2HumanEvalSetsRequestBody1 = {
   /**
    * Display name of the human review set
    */
@@ -56,7 +56,9 @@ export type RequestBody1 = {
   filterValues: Array<string>;
 };
 
-export type PostV2HumanEvalSetsRequestBody = RequestBody1 | RequestBody2;
+export type PostV2HumanEvalSetsRequestBody =
+  | PostV2HumanEvalSetsRequestBody1
+  | PostV2HumanEvalSetsRequestBody2;
 
 export type PostV2HumanEvalSetsResponseBody2 = {
   /**
@@ -144,7 +146,7 @@ export type PostV2HumanEvalSetsResponseBody =
   | PostV2HumanEvalSetsResponseBody2;
 
 /** @internal */
-export type RequestBody2$Outbound = {
+export type PostV2HumanEvalSetsRequestBody2$Outbound = {
   display_name: string;
   description?: string | undefined;
   human_eval_ids: Array<string>;
@@ -154,10 +156,10 @@ export type RequestBody2$Outbound = {
 };
 
 /** @internal */
-export const RequestBody2$outboundSchema: z.ZodType<
-  RequestBody2$Outbound,
+export const PostV2HumanEvalSetsRequestBody2$outboundSchema: z.ZodType<
+  PostV2HumanEvalSetsRequestBody2$Outbound,
   z.ZodTypeDef,
-  RequestBody2
+  PostV2HumanEvalSetsRequestBody2
 > = z.object({
   displayName: z.string(),
   description: z.string().optional(),
@@ -175,12 +177,18 @@ export const RequestBody2$outboundSchema: z.ZodType<
   });
 });
 
-export function requestBody2ToJSON(requestBody2: RequestBody2): string {
-  return JSON.stringify(RequestBody2$outboundSchema.parse(requestBody2));
+export function postV2HumanEvalSetsRequestBody2ToJSON(
+  postV2HumanEvalSetsRequestBody2: PostV2HumanEvalSetsRequestBody2,
+): string {
+  return JSON.stringify(
+    PostV2HumanEvalSetsRequestBody2$outboundSchema.parse(
+      postV2HumanEvalSetsRequestBody2,
+    ),
+  );
 }
 
 /** @internal */
-export type RequestBody1$Outbound = {
+export type PostV2HumanEvalSetsRequestBody1$Outbound = {
   display_name: string;
   description?: string | undefined;
   human_eval_ids: Array<string>;
@@ -190,10 +198,10 @@ export type RequestBody1$Outbound = {
 };
 
 /** @internal */
-export const RequestBody1$outboundSchema: z.ZodType<
-  RequestBody1$Outbound,
+export const PostV2HumanEvalSetsRequestBody1$outboundSchema: z.ZodType<
+  PostV2HumanEvalSetsRequestBody1$Outbound,
   z.ZodTypeDef,
-  RequestBody1
+  PostV2HumanEvalSetsRequestBody1
 > = z.object({
   displayName: z.string(),
   description: z.string().optional(),
@@ -211,14 +219,20 @@ export const RequestBody1$outboundSchema: z.ZodType<
   });
 });
 
-export function requestBody1ToJSON(requestBody1: RequestBody1): string {
-  return JSON.stringify(RequestBody1$outboundSchema.parse(requestBody1));
+export function postV2HumanEvalSetsRequestBody1ToJSON(
+  postV2HumanEvalSetsRequestBody1: PostV2HumanEvalSetsRequestBody1,
+): string {
+  return JSON.stringify(
+    PostV2HumanEvalSetsRequestBody1$outboundSchema.parse(
+      postV2HumanEvalSetsRequestBody1,
+    ),
+  );
 }
 
 /** @internal */
 export type PostV2HumanEvalSetsRequestBody$Outbound =
-  | RequestBody1$Outbound
-  | RequestBody2$Outbound;
+  | PostV2HumanEvalSetsRequestBody1$Outbound
+  | PostV2HumanEvalSetsRequestBody2$Outbound;
 
 /** @internal */
 export const PostV2HumanEvalSetsRequestBody$outboundSchema: z.ZodType<
@@ -226,8 +240,8 @@ export const PostV2HumanEvalSetsRequestBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   PostV2HumanEvalSetsRequestBody
 > = z.union([
-  z.lazy(() => RequestBody1$outboundSchema),
-  z.lazy(() => RequestBody2$outboundSchema),
+  z.lazy(() => PostV2HumanEvalSetsRequestBody1$outboundSchema),
+  z.lazy(() => PostV2HumanEvalSetsRequestBody2$outboundSchema),
 ]);
 
 export function postV2HumanEvalSetsRequestBodyToJSON(
@@ -257,7 +271,7 @@ export const PostV2HumanEvalSetsResponseBody2$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2026-10-22T20:46:09.166Z",
+    "2026-10-23T11:29:20.647Z",
   ).transform(v => new Date(v)),
   filter_type: z.literal("name"),
   filter_value: z.string(),
@@ -302,7 +316,7 @@ export const PostV2HumanEvalSetsResponseBody1$inboundSchema: z.ZodType<
   created: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
   updated: z.string().datetime({ offset: true }).default(
-    "2026-10-22T20:46:09.166Z",
+    "2026-10-23T11:29:20.647Z",
   ).transform(v => new Date(v)),
   filter_type: z.literal("span_type"),
   filter_values: z.array(z.string()),

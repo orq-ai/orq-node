@@ -7,11 +7,11 @@ Constrains effort on reasoning for reasoning models. Reducing reasoning effort c
 ```typescript
 import { ReasoningEffort1 } from "@orq-ai/node/models/components";
 
-let value: ReasoningEffort1 = "instant";
+let value: ReasoningEffort1 = "minimal";
 ```
 
 ## Values
 
 ```typescript
-"none" | "instant" | "minimal" | "low" | "medium" | "high" | "xhigh" | "max"
+"none" | "minimal" | "low" | "medium" | "high" | "xhigh" | "max"
 ```

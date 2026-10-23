@@ -6,6 +6,8 @@ import * as z from "zod/v3";
 import { ClosedEnum } from "../../types/enums.js";
 
 export const ModelFusionSynthesisMode = {
+  ModelFusionSynthesisModeUnspecified:
+    "MODEL_FUSION_SYNTHESIS_MODE_UNSPECIFIED",
   ModelFusionSynthesisModeAnalysis: "MODEL_FUSION_SYNTHESIS_MODE_ANALYSIS",
   ModelFusionSynthesisModeJudgeWritesFinal:
     "MODEL_FUSION_SYNTHESIS_MODE_JUDGE_WRITES_FINAL",

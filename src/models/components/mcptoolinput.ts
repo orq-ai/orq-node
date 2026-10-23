@@ -6,7 +6,7 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 
 /**
- * Executes tools from Model Context Protocol (MCP) servers and gateways. Reference the server or gateway using "key" or "id"; add "tool_id" to attach a single tool, or omit it to attach every tool it exposes.
+ * Executes tools from Model Context Protocol (MCP) servers. Specify the parent MCP tool using "key" or "id", and the specific nested tool using "tool_id".
  */
 export type McpToolInput = {
   /**
@@ -14,17 +14,17 @@ export type McpToolInput = {
    */
   type: "mcp";
   /**
-   * The key of the MCP server or MCP gateway
+   * The key of the parent MCP tool
    */
   key?: string | undefined;
   /**
-   * The ID of the MCP server or MCP gateway
+   * The ID of the parent MCP tool
    */
   id?: string | undefined;
   /**
-   * The ID of a specific tool within the MCP server. Omit to attach every tool the server or gateway exposes.
+   * The ID of the specific nested tool within the MCP server
    */
-  toolId?: string | undefined;
+  toolId: string;
   /**
    * Whether this tool requires approval before execution
    */
@@ -36,7 +36,7 @@ export type McpToolInput$Outbound = {
   type: "mcp";
   key?: string | undefined;
   id?: string | undefined;
-  tool_id?: string | undefined;
+  tool_id: string;
   requires_approval: boolean;
 };
 
@@ -49,7 +49,7 @@ export const McpToolInput$outboundSchema: z.ZodType<
   type: z.literal("mcp"),
   key: z.string().optional(),
   id: z.string().optional(),
-  toolId: z.string().optional(),
+  toolId: z.string(),
   requiresApproval: z.boolean().default(false),
 }).transform((v) => {
   return remap$(v, {

@@ -12,7 +12,7 @@ export type ErrorT = {
   message: string;
   type: string;
   param: string | null;
-  code: string | null;
+  code: string;
 };
 
 /**
@@ -51,7 +51,7 @@ export const ErrorT$inboundSchema: z.ZodType<ErrorT, z.ZodTypeDef, unknown> = z
     message: z.string(),
     type: z.string(),
     param: z.nullable(z.string()),
-    code: z.nullable(z.string()),
+    code: z.string(),
   });
 
 export function errorFromJSON(

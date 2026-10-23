@@ -1161,7 +1161,6 @@ export const DeploymentStreamProvider = {
   Tensorix: "tensorix",
   Scaleway: "scaleway",
   Hcompany: "hcompany",
-  Inception: "inception",
   Inceptron: "inceptron",
   Wafer: "wafer",
   Poolside: "poolside",
@@ -1277,7 +1276,7 @@ export type DeploymentStreamMessageDeploymentsResponseRole = ClosedEnum<
   typeof DeploymentStreamMessageDeploymentsResponseRole
 >;
 
-export type Message3 = {
+export type DeploymentStreamMessage3 = {
   type: "image";
   /**
    * The role of the prompt message
@@ -1396,11 +1395,14 @@ export type DeploymentStreamMessage1 = {
 export type DeploymentStreamMessage =
   | DeploymentStreamMessage1
   | DeploymentStreamMessage2
-  | Message3;
+  | DeploymentStreamMessage3;
 
 export type DeploymentStreamChoices = {
   index: number;
-  message: DeploymentStreamMessage1 | DeploymentStreamMessage2 | Message3;
+  message:
+    | DeploymentStreamMessage1
+    | DeploymentStreamMessage2
+    | DeploymentStreamMessage3;
   finishReason?: string | null | undefined;
 };
 
@@ -3972,8 +3974,8 @@ export const DeploymentStreamMessageDeploymentsResponseRole$inboundSchema:
     .nativeEnum(DeploymentStreamMessageDeploymentsResponseRole);
 
 /** @internal */
-export const Message3$inboundSchema: z.ZodType<
-  Message3,
+export const DeploymentStreamMessage3$inboundSchema: z.ZodType<
+  DeploymentStreamMessage3,
   z.ZodTypeDef,
   unknown
 > = z.object({
@@ -3982,13 +3984,13 @@ export const Message3$inboundSchema: z.ZodType<
   url: z.string(),
 });
 
-export function message3FromJSON(
+export function deploymentStreamMessage3FromJSON(
   jsonString: string,
-): SafeParseResult<Message3, SDKValidationError> {
+): SafeParseResult<DeploymentStreamMessage3, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Message3$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Message3' from JSON`,
+    (x) => DeploymentStreamMessage3$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeploymentStreamMessage3' from JSON`,
   );
 }
 
@@ -4120,7 +4122,7 @@ export const DeploymentStreamMessage$inboundSchema: z.ZodType<
 > = z.union([
   z.lazy(() => DeploymentStreamMessage1$inboundSchema),
   z.lazy(() => DeploymentStreamMessage2$inboundSchema),
-  z.lazy(() => Message3$inboundSchema),
+  z.lazy(() => DeploymentStreamMessage3$inboundSchema),
 ]);
 
 export function deploymentStreamMessageFromJSON(
@@ -4143,7 +4145,7 @@ export const DeploymentStreamChoices$inboundSchema: z.ZodType<
   message: z.union([
     z.lazy(() => DeploymentStreamMessage1$inboundSchema),
     z.lazy(() => DeploymentStreamMessage2$inboundSchema),
-    z.lazy(() => Message3$inboundSchema),
+    z.lazy(() => DeploymentStreamMessage3$inboundSchema),
   ]),
   finish_reason: z.nullable(z.string()).optional(),
 }).transform((v) => {

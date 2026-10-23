@@ -3,7 +3,6 @@
  */
 
 export * from "./apierror.js";
-export * from "./apierrorresponse.js";
 export * from "./compactresponse.js";
 export * from "./createagentschedule.js";
 export * from "./createclassify.js";
@@ -16,7 +15,6 @@ export * from "./deleteagent.js";
 export * from "./deleteagentschedule.js";
 export * from "./deleteeval.js";
 export * from "./deleteprompt.js";
-export * from "./errorresponse.js";
 export * from "./geteval.js";
 export * from "./getevals.js";
 export * from "./getpromptversion.js";

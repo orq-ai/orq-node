@@ -10,7 +10,7 @@ let value: Data = {
   created: new Date("2025-09-30T23:27:03.384Z"),
   object: "completion",
   model: "Model X",
-  provider: "groq",
+  provider: "openai",
   isFinal: false,
   telemetry: {
     traceId: "<id>",

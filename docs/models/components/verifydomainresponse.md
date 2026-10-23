@@ -9,7 +9,7 @@ let value: VerifyDomainResponse = {
   domain: {
     id: "<id>",
     domain: "silver-minor.biz",
-    status: "DOMAIN_VERIFICATION_STATUS_VERIFIED",
+    status: "DOMAIN_VERIFICATION_STATUS_PENDING",
     txtName: "<value>",
     txtValue: "<value>",
     createdAt: new Date("2025-06-13T16:20:04.957Z"),

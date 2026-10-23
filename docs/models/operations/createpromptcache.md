@@ -8,6 +8,7 @@ Cache configuration for the request.
 import { CreatePromptCache } from "@orq-ai/node/models/operations";
 
 let value: CreatePromptCache = {
+  ttl: 3600,
   type: "exact_match",
 };
 ```

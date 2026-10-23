@@ -9,10 +9,6 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { McpAuthType, McpAuthType$inboundSchema } from "./mcpauthtype.js";
 import {
-  McpEnterpriseAuthConfigOutput,
-  McpEnterpriseAuthConfigOutput$inboundSchema,
-} from "./mcpenterpriseauthconfigoutput.js";
-import {
   McpHeaderSecretOutput,
   McpHeaderSecretOutput$inboundSchema,
 } from "./mcpheadersecretoutput.js";
@@ -31,10 +27,6 @@ export type McpAuthConfigOutput = {
    * OAuth client credentials the gateway presents to the upstream authorization server; set when type is OAUTH_CLIENT_CREDENTIALS.
    */
   oauth?: McpOAuthConfigOutput | undefined;
-  /**
-   * Client for the upstream authorization server; set when type is ENTERPRISE_MANAGED.
-   */
-  enterprise?: McpEnterpriseAuthConfigOutput | undefined;
 };
 
 /** @internal */
@@ -46,7 +38,6 @@ export const McpAuthConfigOutput$inboundSchema: z.ZodType<
   type: McpAuthType$inboundSchema,
   static_headers: z.array(McpHeaderSecretOutput$inboundSchema).optional(),
   oauth: McpOAuthConfigOutput$inboundSchema.optional(),
-  enterprise: McpEnterpriseAuthConfigOutput$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "static_headers": "staticHeaders",

@@ -8,7 +8,6 @@ import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import { AlertQuery, AlertQuery$inboundSchema } from "./alertquery.js";
 
 /**
  * Whether the breach is ongoing or recovered.
@@ -91,13 +90,6 @@ export type AlertTrigger = {
    * Number of evaluation events recorded on this trigger.
    */
   eventCount: number;
-  /**
-   * Query evaluated for this incident. Older incidents may omit it and
-   *
-   * @remarks
-   *  inherit the alert's current query for display compatibility.
-   */
-  query?: AlertQuery | undefined;
 };
 
 /** @internal */
@@ -133,7 +125,6 @@ export const AlertTrigger$inboundSchema: z.ZodType<
   peak_value: z.number(),
   last_value: z.number(),
   event_count: z.number().int(),
-  query: AlertQuery$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "trigger_id": "triggerId",

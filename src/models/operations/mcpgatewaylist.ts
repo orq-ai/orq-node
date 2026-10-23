@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import * as components from "../components/index.js";
 
 export type McpGatewayListRequest = {
   /**
@@ -22,6 +23,10 @@ export type McpGatewayListRequest = {
    * Case-insensitive match against the gateway key and display name.
    */
   search?: string | undefined;
+  /**
+   * Returns only gateways in this status.
+   */
+  status?: components.McpGatewayStatus | undefined;
 };
 
 /** @internal */
@@ -30,6 +35,7 @@ export type McpGatewayListRequest$Outbound = {
   starting_after?: string | undefined;
   ending_before?: string | undefined;
   search?: string | undefined;
+  status?: string | undefined;
 };
 
 /** @internal */
@@ -42,6 +48,7 @@ export const McpGatewayListRequest$outboundSchema: z.ZodType<
   startingAfter: z.string().optional(),
   endingBefore: z.string().optional(),
   search: z.string().optional(),
+  status: components.McpGatewayStatus$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     startingAfter: "starting_after",

@@ -11,8 +11,8 @@ let value: CreateModelFusionRequest = {
     "<value 1>",
   ],
   judgeModel: "<value>",
-  synthesisMode: "MODEL_FUSION_SYNTHESIS_MODE_ANALYSIS",
-  preset: "MODEL_FUSION_PRESET_GENERAL",
+  synthesisMode: "MODEL_FUSION_SYNTHESIS_MODE_UNSPECIFIED",
+  preset: "MODEL_FUSION_PRESET_UNSPECIFIED",
 };
 ```
 

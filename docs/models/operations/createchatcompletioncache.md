@@ -8,6 +8,7 @@ Cache configuration for the request.
 import { CreateChatCompletionCache } from "@orq-ai/node/models/operations";
 
 let value: CreateChatCompletionCache = {
+  ttl: 3600,
   type: "exact_match",
 };
 ```

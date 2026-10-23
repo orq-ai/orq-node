@@ -10,7 +10,7 @@ let value: ListFilesResponse = {
   data: [
     {
       fileId: "<id>",
-      purpose: "FILE_PURPOSE_BATCH",
+      purpose: "FILE_PURPOSE_KNOWLEDGE_DATASOURCE",
       fileName: "example.file",
       bytes: "<value>",
       createdAt: new Date("2025-04-09T01:43:48.728Z"),

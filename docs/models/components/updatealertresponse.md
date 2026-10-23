@@ -30,7 +30,6 @@ let value: UpdateAlertResponse = {
     updatedAt: new Date("2024-12-02T12:12:11.676Z"),
     createdById: "<id>",
     updatedById: "<id>",
-    scope: "ALERT_SCOPE_WORKSPACE",
   },
 };
 ```

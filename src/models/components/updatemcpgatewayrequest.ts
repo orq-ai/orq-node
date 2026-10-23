@@ -19,6 +19,10 @@ import {
   McpGatewayServerLink$outboundSchema,
 } from "./mcpgatewayserverlink.js";
 import {
+  McpGatewayStatus,
+  McpGatewayStatus$outboundSchema,
+} from "./mcpgatewaystatus.js";
+import {
   McpToolNaming,
   McpToolNaming$outboundSchema,
 } from "./mcptoolnaming.js";
@@ -50,6 +54,7 @@ export type UpdateMcpGatewayRequest = {
    */
   serverLinks?: Array<McpGatewayServerLink> | undefined;
   toolNaming?: McpToolNaming | undefined;
+  status?: McpGatewayStatus | undefined;
   mode?: McpGatewayMode | undefined;
   /**
    * Which projects in the workspace may use this gateway. Defaults to every project.
@@ -63,14 +68,6 @@ export type UpdateMcpGatewayRequest = {
    * Plugins run on every tool call this gateway serves.
    */
   plugins?: Array<McpGatewayPlugin> | undefined;
-  /**
-   * Replaces the served workspace skills. An empty array is treated as no change; use `clear_skill_ids` to remove them all.
-   */
-  skillIds?: Array<string> | undefined;
-  /**
-   * Set true to stop serving every workspace skill; cannot be combined with `skill_ids`.
-   */
-  clearSkillIds?: boolean | undefined;
 };
 
 /** @internal */
@@ -80,12 +77,11 @@ export type UpdateMcpGatewayRequest$Outbound = {
   description?: string | undefined;
   server_links?: Array<McpGatewayServerLink$Outbound> | undefined;
   tool_naming?: string | undefined;
+  status?: string | undefined;
   mode?: string | undefined;
   sharing?: Sharing$Outbound | undefined;
   clear_server_links?: boolean | undefined;
   plugins?: Array<McpGatewayPlugin$Outbound> | undefined;
-  skill_ids?: Array<string> | undefined;
-  clear_skill_ids?: boolean | undefined;
 };
 
 /** @internal */
@@ -99,20 +95,17 @@ export const UpdateMcpGatewayRequest$outboundSchema: z.ZodType<
   description: z.string().optional(),
   serverLinks: z.array(McpGatewayServerLink$outboundSchema).optional(),
   toolNaming: McpToolNaming$outboundSchema.optional(),
+  status: McpGatewayStatus$outboundSchema.optional(),
   mode: McpGatewayMode$outboundSchema.optional(),
   sharing: Sharing$outboundSchema.optional(),
   clearServerLinks: z.boolean().optional(),
   plugins: z.array(McpGatewayPlugin$outboundSchema).optional(),
-  skillIds: z.array(z.string()).optional(),
-  clearSkillIds: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
     displayName: "display_name",
     serverLinks: "server_links",
     toolNaming: "tool_naming",
     clearServerLinks: "clear_server_links",
-    skillIds: "skill_ids",
-    clearSkillIds: "clear_skill_ids",
   });
 });
 

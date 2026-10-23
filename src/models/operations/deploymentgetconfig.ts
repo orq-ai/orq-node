@@ -1220,7 +1220,7 @@ export type DeploymentGetConfigRole = ClosedEnum<
 
 export type DeploymentGetConfig2File = {
   /**
-   * The file data as a data URI string in the format `data:<mime-type>;base64,<base64-encoded-data>`. Example: `data:image/png;base64,iVBORw0KGgoAAAANS...`
+   * The file data as a data URI string in the format 'data:<mime-type>;base64,<base64-encoded-data>'. Example: 'data:image/png;base64,iVBORw0KGgoAAAANS...'
    */
   fileData?: string | undefined;
   /**

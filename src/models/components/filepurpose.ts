@@ -6,6 +6,7 @@ import * as z from "zod/v3";
 import { ClosedEnum } from "../../types/enums.js";
 
 export const FilePurpose = {
+  FilePurposeUnspecified: "FILE_PURPOSE_UNSPECIFIED",
   FilePurposeRetrieval: "FILE_PURPOSE_RETRIEVAL",
   FilePurposeKnowledgeDatasource: "FILE_PURPOSE_KNOWLEDGE_DATASOURCE",
   FilePurposeBatch: "FILE_PURPOSE_BATCH",

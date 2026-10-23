@@ -14,7 +14,7 @@ let value: UpdateModelFusionResponse = {
       "<value 1>",
     ],
     judgeModel: "<value>",
-    synthesisMode: "MODEL_FUSION_SYNTHESIS_MODE_ANALYSIS",
+    synthesisMode: "MODEL_FUSION_SYNTHESIS_MODE_UNSPECIFIED",
     preset: "MODEL_FUSION_PRESET_SAFETY",
     webTools: false,
     maxToolCalls: 895151,

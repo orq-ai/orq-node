@@ -8,6 +8,7 @@ Cache configuration for the request.
 import { CreateImageVariationCache } from "@orq-ai/node/models/operations";
 
 let value: CreateImageVariationCache = {
+  ttl: 3600,
   type: "exact_match",
 };
 ```

@@ -14,11 +14,6 @@ import { unwrapAsync } from "../types/fp.js";
 export class HumanReviewSets extends ClientSDK {
   /**
    * Get all human review sets
-   *
-   * @remarks
-   * Deprecated: Human Review Sets are replaced by project-level human reviews (Annotations) and will be removed in release 4.18.
-   *
-   * @deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   async list(
     request?: operations.GetV2HumanEvalSetsRequest | undefined,
@@ -33,11 +28,6 @@ export class HumanReviewSets extends ClientSDK {
 
   /**
    * Create a human review set
-   *
-   * @remarks
-   * Deprecated: Human Review Sets are replaced by project-level human reviews (Annotations) and will be removed in release 4.18.
-   *
-   * @deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   async create(
     request?: operations.PostV2HumanEvalSetsRequestBody | undefined,
@@ -52,11 +42,6 @@ export class HumanReviewSets extends ClientSDK {
 
   /**
    * Get a human review set by ID
-   *
-   * @remarks
-   * Deprecated: Human Review Sets are replaced by project-level human reviews (Annotations) and will be removed in release 4.18.
-   *
-   * @deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   async get(
     request: operations.GetV2HumanEvalSetsIdRequest,
@@ -71,11 +56,6 @@ export class HumanReviewSets extends ClientSDK {
 
   /**
    * Update a human review set
-   *
-   * @remarks
-   * Deprecated: Human Review Sets are replaced by project-level human reviews (Annotations) and will be removed in release 4.18.
-   *
-   * @deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   async update(
     request: operations.PatchV2HumanEvalSetsIdRequest,
@@ -90,11 +70,6 @@ export class HumanReviewSets extends ClientSDK {
 
   /**
    * Delete a human review set
-   *
-   * @remarks
-   * Deprecated: Human Review Sets are replaced by project-level human reviews (Annotations) and will be removed in release 4.18.
-   *
-   * @deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   async delete(
     request: operations.DeleteV2HumanEvalSetsIdRequest,

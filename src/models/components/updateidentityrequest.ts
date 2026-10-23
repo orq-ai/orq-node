@@ -11,7 +11,7 @@ export type UpdateIdentityRequest = {
    */
   displayName?: string | undefined;
   /**
-   * New email address. Omit to keep the current email, or send an empty string to clear it.
+   * New email address. Omit to keep the current email.
    */
   email?: string | undefined;
   /**

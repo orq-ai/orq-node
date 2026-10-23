@@ -38,7 +38,7 @@ export type PIIRedactionPlugin = {
    */
   id: Id;
   /**
-   * Detector language. Accepts "auto" to detect the language per request; GET /v2/pii/capabilities lists the concrete languages and does not include "auto". Omitting the field defaults to "auto".
+   * Detector language. Accepts "auto" to detect the language per request; GET /v2/pii/capabilities lists the concrete languages and does not include "auto". Omitting the field falls back to en.
    */
   language?: string | undefined;
   /**

@@ -6,6 +6,7 @@ import * as z from "zod/v3";
 import { ClosedEnum } from "../../types/enums.js";
 
 export const NotifierType = {
+  NotifierTypeUnspecified: "NOTIFIER_TYPE_UNSPECIFIED",
   NotifierTypeEmail: "NOTIFIER_TYPE_EMAIL",
   NotifierTypeSlackWebhook: "NOTIFIER_TYPE_SLACK_WEBHOOK",
   NotifierTypeWebhook: "NOTIFIER_TYPE_WEBHOOK",

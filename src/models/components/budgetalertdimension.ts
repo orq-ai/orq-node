@@ -6,6 +6,7 @@ import * as z from "zod/v3";
 import { ClosedEnum } from "../../types/enums.js";
 
 export const BudgetAlertDimension = {
+  BudgetAlertDimensionUnspecified: "BUDGET_ALERT_DIMENSION_UNSPECIFIED",
   BudgetAlertDimensionCost: "BUDGET_ALERT_DIMENSION_COST",
   BudgetAlertDimensionTokens: "BUDGET_ALERT_DIMENSION_TOKENS",
 } as const;

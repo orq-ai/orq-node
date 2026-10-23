@@ -6,6 +6,7 @@ import * as z from "zod/v3";
 import { ClosedEnum } from "../../types/enums.js";
 
 export const DomainVerificationStatus = {
+  DomainVerificationStatusUnspecified: "DOMAIN_VERIFICATION_STATUS_UNSPECIFIED",
   DomainVerificationStatusPending: "DOMAIN_VERIFICATION_STATUS_PENDING",
   DomainVerificationStatusVerified: "DOMAIN_VERIFICATION_STATUS_VERIFIED",
 } as const;

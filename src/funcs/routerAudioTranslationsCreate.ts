@@ -104,9 +104,6 @@ async function $do(
   if (payload.enable_logging !== undefined) {
     appendForm(body, "enable_logging", payload.enable_logging);
   }
-  if (payload.fallback_on_codes !== undefined) {
-    appendForm(body, "fallback_on_codes", payload.fallback_on_codes);
-  }
   if (payload.fallbacks !== undefined) {
     appendForm(
       body,

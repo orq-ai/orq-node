@@ -10,7 +10,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 export type AutoRouterV2CreatorConfig = {
   id: string;
   name: string;
-  slug?: string | undefined;
+  slug: string;
 };
 
 /** @internal */
@@ -21,13 +21,13 @@ export const AutoRouterV2CreatorConfig$inboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   name: z.string(),
-  slug: z.string().optional(),
+  slug: z.string(),
 });
 /** @internal */
 export type AutoRouterV2CreatorConfig$Outbound = {
   id: string;
   name: string;
-  slug?: string | undefined;
+  slug: string;
 };
 
 /** @internal */
@@ -38,7 +38,7 @@ export const AutoRouterV2CreatorConfig$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   name: z.string(),
-  slug: z.string().optional(),
+  slug: z.string(),
 });
 
 export function autoRouterV2CreatorConfigToJSON(

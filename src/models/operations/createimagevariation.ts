@@ -235,10 +235,6 @@ export type CreateImageVariationOrq = {
    */
   retry?: CreateImageVariationRouterImagesVariationsRetry | undefined;
   /**
-   * HTTP status codes that trigger fallback. Enter up to 20 unique integers from 400 to 599. When omitted or empty, defaults to [408, 429, 500, 502, 503, 504, 529].
-   */
-  fallbackOnCodes?: Array<number> | undefined;
-  /**
    * Array of fallback models to use if primary model fails
    */
   fallbacks?:
@@ -306,10 +302,6 @@ export type CreateImageVariationRequestBody = {
    * The name to display on the trace. If not specified, the default system name will be used.
    */
   name?: string | undefined;
-  /**
-   * HTTP status codes that trigger fallback. Enter up to 20 unique integers from 400 to 599. When omitted or empty, defaults to [408, 429, 500, 502, 503, 504, 529].
-   */
-  fallbackOnCodes?: Array<number> | undefined;
   /**
    * Array of fallback models to use if primary model fails
    */
@@ -518,7 +510,7 @@ export const CreateImageVariationCache$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateImageVariationCache
 > = z.object({
-  ttl: z.number().default(3600),
+  ttl: z.number().default(1800),
   type: CreateImageVariationType$outboundSchema,
 });
 
@@ -745,7 +737,7 @@ export const CreateImageVariationRouterImagesVariationsCache$outboundSchema:
     z.ZodTypeDef,
     CreateImageVariationRouterImagesVariationsCache
   > = z.object({
-    ttl: z.number().default(3600),
+    ttl: z.number().default(1800),
     type: CreateImageVariationRouterImagesVariationsType$outboundSchema,
   });
 
@@ -887,7 +879,6 @@ export function createImageVariationRouterImagesVariationsTimeoutToJSON(
 export type CreateImageVariationOrq$Outbound = {
   name?: string | undefined;
   retry?: CreateImageVariationRouterImagesVariationsRetry$Outbound | undefined;
-  fallback_on_codes?: Array<number> | undefined;
   fallbacks?:
     | Array<CreateImageVariationRouterImagesVariationsFallbacks$Outbound>
     | undefined;
@@ -913,7 +904,6 @@ export const CreateImageVariationOrq$outboundSchema: z.ZodType<
   retry: z.lazy(() =>
     CreateImageVariationRouterImagesVariationsRetry$outboundSchema
   ).optional(),
-  fallbackOnCodes: z.array(z.number().int()).optional(),
   fallbacks: z.array(
     z.lazy(() =>
       CreateImageVariationRouterImagesVariationsFallbacks$outboundSchema
@@ -933,7 +923,6 @@ export const CreateImageVariationOrq$outboundSchema: z.ZodType<
   ).optional(),
 }).transform((v) => {
   return remap$(v, {
-    fallbackOnCodes: "fallback_on_codes",
     loadBalancer: "load_balancer",
   });
 });
@@ -955,7 +944,6 @@ export type CreateImageVariationRequestBody$Outbound = {
   size: string;
   user?: string | undefined;
   name?: string | undefined;
-  fallback_on_codes?: Array<number> | undefined;
   fallbacks?: Array<CreateImageVariationFallbacks$Outbound> | undefined;
   retry?: CreateImageVariationRetry$Outbound | undefined;
   cache?: CreateImageVariationCache$Outbound | undefined;
@@ -981,7 +969,6 @@ export const CreateImageVariationRequestBody$outboundSchema: z.ZodType<
   size: Size$outboundSchema.default("1024x1024"),
   user: z.string().optional(),
   name: z.string().optional(),
-  fallbackOnCodes: z.array(z.number().int()).optional(),
   fallbacks: z.array(z.lazy(() => CreateImageVariationFallbacks$outboundSchema))
     .optional(),
   retry: z.lazy(() => CreateImageVariationRetry$outboundSchema).optional(),
@@ -993,7 +980,6 @@ export const CreateImageVariationRequestBody$outboundSchema: z.ZodType<
 }).transform((v) => {
   return remap$(v, {
     responseFormat: "response_format",
-    fallbackOnCodes: "fallback_on_codes",
     loadBalancer: "load_balancer",
   });
 });

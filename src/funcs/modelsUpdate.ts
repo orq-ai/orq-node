@@ -29,7 +29,7 @@ import { Result } from "../types/fp.js";
  * Update custom model
  *
  * @remarks
- * Updates a custom model. Only fields present in the request body are modified, except for `metadata` and `parameters`, which are fully replaced when present.
+ * Updates a custom model. Only fields present in the request body are modified, except for `metadata` and `parameters`, which are fully replaced when present (preserved from the legacy handler's behavior).
  */
 export function modelsUpdate(
   client: OrqCore,

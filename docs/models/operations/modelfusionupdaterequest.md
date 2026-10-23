@@ -12,7 +12,7 @@ let value: ModelFusionUpdateRequest = {
       "<value 1>",
     ],
     judgeModel: "<value>",
-    synthesisMode: "MODEL_FUSION_SYNTHESIS_MODE_JUDGE_WRITES_FINAL",
+    synthesisMode: "MODEL_FUSION_SYNTHESIS_MODE_ANALYSIS",
     preset: "MODEL_FUSION_PRESET_SAFETY",
     webTools: false,
     maxToolCalls: 669668,

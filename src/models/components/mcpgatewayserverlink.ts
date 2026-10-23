@@ -8,12 +8,6 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
-  McpSkillExposure,
-  McpSkillExposure$inboundSchema,
-  McpSkillExposure$Outbound,
-  McpSkillExposure$outboundSchema,
-} from "./mcpskillexposure.js";
-import {
   McpToolExposure,
   McpToolExposure$inboundSchema,
   McpToolExposure$Outbound,
@@ -37,10 +31,6 @@ export type McpGatewayServerLink = {
    * Narrows which of the server's tools this gateway exposes.
    */
   toolExposure: McpToolExposure;
-  /**
-   * Which of the server's skills this gateway serves. Unset serves none.
-   */
-  skillExposure?: McpSkillExposure | undefined;
 };
 
 /** @internal */
@@ -53,12 +43,10 @@ export const McpGatewayServerLink$inboundSchema: z.ZodType<
   alias: z.string(),
   enabled: z.boolean().optional(),
   tool_exposure: McpToolExposure$inboundSchema,
-  skill_exposure: McpSkillExposure$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "mcp_server_id": "mcpServerId",
     "tool_exposure": "toolExposure",
-    "skill_exposure": "skillExposure",
   });
 });
 /** @internal */
@@ -67,7 +55,6 @@ export type McpGatewayServerLink$Outbound = {
   alias: string;
   enabled?: boolean | undefined;
   tool_exposure: McpToolExposure$Outbound;
-  skill_exposure?: McpSkillExposure$Outbound | undefined;
 };
 
 /** @internal */
@@ -80,12 +67,10 @@ export const McpGatewayServerLink$outboundSchema: z.ZodType<
   alias: z.string(),
   enabled: z.boolean().optional(),
   toolExposure: McpToolExposure$outboundSchema,
-  skillExposure: McpSkillExposure$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     mcpServerId: "mcp_server_id",
     toolExposure: "tool_exposure",
-    skillExposure: "skill_exposure",
   });
 });
 

@@ -23,20 +23,15 @@ import {
 export type AutoRouterV2Config = {
   aaCreator?: AutoRouterV2CreatorConfig | undefined;
   aaEvaluations?: { [k: string]: number | null } | undefined;
-  aaIndexIsEstimated?: boolean | undefined;
-  aaIndexVersion?: string | undefined;
-  aaIsReasoning?: boolean | undefined;
   aaMedianOutputTokensPerSecond?: number | undefined;
   aaMedianTimeToFirstAnswerToken?: number | undefined;
   aaMedianTimeToFirstTokenSeconds?: number | undefined;
   aaModelId?: string | undefined;
   aaName?: string | undefined;
   aaPricing?: { [k: string]: number | null } | undefined;
-  aaReasoningEffort?: string | undefined;
   aaReleaseDate?: string | undefined;
   aaSlug?: string | undefined;
   defaultEffort?: string | undefined;
-  defaultEffortScored?: boolean | undefined;
   intelligenceIndex: number;
   price: number;
   reasoningEfforts?: { [k: string]: AutoRouterV2EffortConfig } | undefined;
@@ -50,20 +45,15 @@ export const AutoRouterV2Config$inboundSchema: z.ZodType<
 > = z.object({
   aa_creator: AutoRouterV2CreatorConfig$inboundSchema.optional(),
   aa_evaluations: z.record(z.nullable(z.number())).optional(),
-  aa_index_is_estimated: z.boolean().optional(),
-  aa_index_version: z.string().optional(),
-  aa_is_reasoning: z.boolean().optional(),
   aa_median_output_tokens_per_second: z.number().optional(),
   aa_median_time_to_first_answer_token: z.number().optional(),
   aa_median_time_to_first_token_seconds: z.number().optional(),
   aa_model_id: z.string().optional(),
   aa_name: z.string().optional(),
   aa_pricing: z.record(z.nullable(z.number())).optional(),
-  aa_reasoning_effort: z.string().optional(),
   aa_release_date: z.string().optional(),
   aa_slug: z.string().optional(),
   default_effort: z.string().optional(),
-  default_effort_scored: z.boolean().optional(),
   intelligence_index: z.number(),
   price: z.number(),
   reasoning_efforts: z.record(AutoRouterV2EffortConfig$inboundSchema)
@@ -72,20 +62,15 @@ export const AutoRouterV2Config$inboundSchema: z.ZodType<
   return remap$(v, {
     "aa_creator": "aaCreator",
     "aa_evaluations": "aaEvaluations",
-    "aa_index_is_estimated": "aaIndexIsEstimated",
-    "aa_index_version": "aaIndexVersion",
-    "aa_is_reasoning": "aaIsReasoning",
     "aa_median_output_tokens_per_second": "aaMedianOutputTokensPerSecond",
     "aa_median_time_to_first_answer_token": "aaMedianTimeToFirstAnswerToken",
     "aa_median_time_to_first_token_seconds": "aaMedianTimeToFirstTokenSeconds",
     "aa_model_id": "aaModelId",
     "aa_name": "aaName",
     "aa_pricing": "aaPricing",
-    "aa_reasoning_effort": "aaReasoningEffort",
     "aa_release_date": "aaReleaseDate",
     "aa_slug": "aaSlug",
     "default_effort": "defaultEffort",
-    "default_effort_scored": "defaultEffortScored",
     "intelligence_index": "intelligenceIndex",
     "reasoning_efforts": "reasoningEfforts",
   });
@@ -94,20 +79,15 @@ export const AutoRouterV2Config$inboundSchema: z.ZodType<
 export type AutoRouterV2Config$Outbound = {
   aa_creator?: AutoRouterV2CreatorConfig$Outbound | undefined;
   aa_evaluations?: { [k: string]: number | null } | undefined;
-  aa_index_is_estimated?: boolean | undefined;
-  aa_index_version?: string | undefined;
-  aa_is_reasoning?: boolean | undefined;
   aa_median_output_tokens_per_second?: number | undefined;
   aa_median_time_to_first_answer_token?: number | undefined;
   aa_median_time_to_first_token_seconds?: number | undefined;
   aa_model_id?: string | undefined;
   aa_name?: string | undefined;
   aa_pricing?: { [k: string]: number | null } | undefined;
-  aa_reasoning_effort?: string | undefined;
   aa_release_date?: string | undefined;
   aa_slug?: string | undefined;
   default_effort?: string | undefined;
-  default_effort_scored?: boolean | undefined;
   intelligence_index: number;
   price: number;
   reasoning_efforts?:
@@ -123,20 +103,15 @@ export const AutoRouterV2Config$outboundSchema: z.ZodType<
 > = z.object({
   aaCreator: AutoRouterV2CreatorConfig$outboundSchema.optional(),
   aaEvaluations: z.record(z.nullable(z.number())).optional(),
-  aaIndexIsEstimated: z.boolean().optional(),
-  aaIndexVersion: z.string().optional(),
-  aaIsReasoning: z.boolean().optional(),
   aaMedianOutputTokensPerSecond: z.number().optional(),
   aaMedianTimeToFirstAnswerToken: z.number().optional(),
   aaMedianTimeToFirstTokenSeconds: z.number().optional(),
   aaModelId: z.string().optional(),
   aaName: z.string().optional(),
   aaPricing: z.record(z.nullable(z.number())).optional(),
-  aaReasoningEffort: z.string().optional(),
   aaReleaseDate: z.string().optional(),
   aaSlug: z.string().optional(),
   defaultEffort: z.string().optional(),
-  defaultEffortScored: z.boolean().optional(),
   intelligenceIndex: z.number(),
   price: z.number(),
   reasoningEfforts: z.record(AutoRouterV2EffortConfig$outboundSchema)
@@ -145,20 +120,15 @@ export const AutoRouterV2Config$outboundSchema: z.ZodType<
   return remap$(v, {
     aaCreator: "aa_creator",
     aaEvaluations: "aa_evaluations",
-    aaIndexIsEstimated: "aa_index_is_estimated",
-    aaIndexVersion: "aa_index_version",
-    aaIsReasoning: "aa_is_reasoning",
     aaMedianOutputTokensPerSecond: "aa_median_output_tokens_per_second",
     aaMedianTimeToFirstAnswerToken: "aa_median_time_to_first_answer_token",
     aaMedianTimeToFirstTokenSeconds: "aa_median_time_to_first_token_seconds",
     aaModelId: "aa_model_id",
     aaName: "aa_name",
     aaPricing: "aa_pricing",
-    aaReasoningEffort: "aa_reasoning_effort",
     aaReleaseDate: "aa_release_date",
     aaSlug: "aa_slug",
     defaultEffort: "default_effort",
-    defaultEffortScored: "default_effort_scored",
     intelligenceIndex: "intelligence_index",
     reasoningEfforts: "reasoning_efforts",
   });

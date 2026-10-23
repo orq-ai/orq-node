@@ -6,7 +6,7 @@
 import { ThreadFilters } from "@orq-ai/node/models/components";
 
 let value: ThreadFilters = {
-  interval: "SESSION_INTERVAL_LAST_24_HOURS",
+  interval: "SESSION_INTERVAL_LAST_6_HOURS",
 };
 ```
 

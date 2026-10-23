@@ -44,7 +44,7 @@ export type ModelFusion = {
    */
   orchestratorModel?: string | undefined;
   /**
-   * Whether panel and judge phases get the provider-native web search tool. Models without native web search run without it.
+   * Whether the Fusion-managed ORQ web tools are available to panel and judge phases.
    */
   webTools: boolean;
   /**

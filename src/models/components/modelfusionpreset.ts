@@ -6,6 +6,7 @@ import * as z from "zod/v3";
 import { ClosedEnum } from "../../types/enums.js";
 
 export const ModelFusionPreset = {
+  ModelFusionPresetUnspecified: "MODEL_FUSION_PRESET_UNSPECIFIED",
   ModelFusionPresetGeneral: "MODEL_FUSION_PRESET_GENERAL",
   ModelFusionPresetQuality: "MODEL_FUSION_PRESET_QUALITY",
   ModelFusionPresetBudget: "MODEL_FUSION_PRESET_BUDGET",

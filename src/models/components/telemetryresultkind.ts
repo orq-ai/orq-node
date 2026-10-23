@@ -6,6 +6,7 @@ import * as z from "zod/v3";
 import { ClosedEnum } from "../../types/enums.js";
 
 export const TelemetryResultKind = {
+  TelemetryResultKindUnspecified: "TELEMETRY_RESULT_KIND_UNSPECIFIED",
   TelemetryResultKindScalar: "TELEMETRY_RESULT_KIND_SCALAR",
   TelemetryResultKindGroupedScalar: "TELEMETRY_RESULT_KIND_GROUPED_SCALAR",
   TelemetryResultKindTimeSeries: "TELEMETRY_RESULT_KIND_TIME_SERIES",

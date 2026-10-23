@@ -7,7 +7,7 @@ import { FileT } from "@orq-ai/node/models/components";
 
 let value: FileT = {
   fileId: "<id>",
-  purpose: "FILE_PURPOSE_CODE_INTERPRETER",
+  purpose: "FILE_PURPOSE_BATCH",
   fileName: "example.file",
   bytes: "<value>",
   createdAt: new Date("2026-12-01T08:48:25.391Z"),

@@ -8,6 +8,7 @@ Cache configuration for the request.
 import { RetrieveAgentRequestFallbackModelConfigurationCache } from "@orq-ai/node/models/operations";
 
 let value: RetrieveAgentRequestFallbackModelConfigurationCache = {
+  ttl: 3600,
   type: "exact_match",
 };
 ```

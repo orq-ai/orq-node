@@ -22,11 +22,10 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
  */
 export type PiiRedactionConfig = {
   /**
-   * Detector language. Accepts "auto" to detect the language per request; the
+   * Detector language. One of "en" or "nl"; omit for the gateway default
    *
    * @remarks
-   *  concrete languages come from GET /v2/pii/capabilities. Omitting the field
-   *  defaults to "auto". The valid entity catalog depends on this value.
+   *  ("en"). The valid entity catalog depends on this value.
    */
   language?: string | undefined;
   /**

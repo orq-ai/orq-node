@@ -34,10 +34,7 @@ export type UpdateAlertRequest = {
    */
   signal?: string | undefined;
   /**
-   * Replacement query. Metric, operation, and filters may change within the
-   *
-   * @remarks
-   *  current telemetry source. Source changes require creating a new alert.
+   * Replacement query. Omit to keep the current query.
    */
   query?: AlertQuery | undefined;
   /**

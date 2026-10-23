@@ -106,10 +106,6 @@ export type Tools = {
    * Nested tool ID for MCP tools (identifies specific tool within MCP server)
    */
   toolId?: string | undefined;
-  /**
-   * Set by the API on MCP tools resolved from a whole MCP server or gateway; they are resolved again on every save.
-   */
-  wholeServer?: boolean | undefined;
   conditions?: Array<AgentStartedStreamingEventConditions> | undefined;
   /**
    * Tool execution timeout in seconds for this agent (max: 10 minutes). Overrides the timeout configured on the tool definition.
@@ -351,7 +347,6 @@ export const Tools$inboundSchema: z.ZodType<Tools, z.ZodTypeDef, unknown> = z
     configuration: z.record(z.any()).optional(),
     requires_approval: z.boolean().default(false),
     tool_id: z.string().optional(),
-    whole_server: z.boolean().optional(),
     conditions: z.array(
       z.lazy(() => AgentStartedStreamingEventConditions$inboundSchema),
     ).optional(),
@@ -362,7 +357,6 @@ export const Tools$inboundSchema: z.ZodType<Tools, z.ZodTypeDef, unknown> = z
       "display_name": "displayName",
       "requires_approval": "requiresApproval",
       "tool_id": "toolId",
-      "whole_server": "wholeServer",
     });
   });
 

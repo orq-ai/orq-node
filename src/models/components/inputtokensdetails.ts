@@ -7,17 +7,12 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import {
-  CacheWriteTokensDetails,
-  CacheWriteTokensDetails$inboundSchema,
-} from "./cachewritetokensdetails.js";
 
 export type InputTokensDetails = {
   cacheCreation1hTokens?: number | undefined;
   cacheCreation5mTokens?: number | undefined;
   cacheCreationTokens: number;
   cacheWriteTokens: number;
-  cacheWriteTokensDetails?: CacheWriteTokensDetails | undefined;
   cachedTokens: number;
 };
 
@@ -31,7 +26,6 @@ export const InputTokensDetails$inboundSchema: z.ZodType<
   cache_creation_5m_tokens: z.number().int().optional(),
   cache_creation_tokens: z.number().int(),
   cache_write_tokens: z.number().int(),
-  cache_write_tokens_details: CacheWriteTokensDetails$inboundSchema.optional(),
   cached_tokens: z.number().int(),
 }).transform((v) => {
   return remap$(v, {
@@ -39,7 +33,6 @@ export const InputTokensDetails$inboundSchema: z.ZodType<
     "cache_creation_5m_tokens": "cacheCreation5mTokens",
     "cache_creation_tokens": "cacheCreationTokens",
     "cache_write_tokens": "cacheWriteTokens",
-    "cache_write_tokens_details": "cacheWriteTokensDetails",
     "cached_tokens": "cachedTokens",
   });
 });

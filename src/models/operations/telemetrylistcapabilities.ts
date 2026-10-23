@@ -3,32 +3,15 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../lib/primitives.js";
 import * as components from "../components/index.js";
 
 export type TelemetryListCapabilitiesRequest = {
   source?: components.TelemetrySource | undefined;
-  /**
-   * Restricts discovered runtime metrics to records attributed to this exact
-   *
-   * @remarks
-   *  project. Projectless workspace metrics are excluded.
-   */
-  projectId?: string | undefined;
-  /**
-   * Discovers runtime metrics across the complete workspace, including
-   *
-   * @remarks
-   *  project-attributed and projectless records. Workspace-admin only.
-   */
-  workspaceWide?: boolean | undefined;
 };
 
 /** @internal */
 export type TelemetryListCapabilitiesRequest$Outbound = {
   source?: string | undefined;
-  project_id?: string | undefined;
-  workspace_wide?: boolean | undefined;
 };
 
 /** @internal */
@@ -38,13 +21,6 @@ export const TelemetryListCapabilitiesRequest$outboundSchema: z.ZodType<
   TelemetryListCapabilitiesRequest
 > = z.object({
   source: components.TelemetrySource$outboundSchema.optional(),
-  projectId: z.string().optional(),
-  workspaceWide: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    projectId: "project_id",
-    workspaceWide: "workspace_wide",
-  });
 });
 
 export function telemetryListCapabilitiesRequestToJSON(

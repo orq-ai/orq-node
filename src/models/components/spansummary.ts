@@ -39,10 +39,6 @@ export type SpanSummary = {
   traceFramework?: string | undefined;
   leadingSpanType?: string | undefined;
   guardrailEnabled?: boolean | undefined;
-  /**
-   * Why the span's generation stopped, for example stop, length or content_filter.
-   */
-  finishReasons?: Array<string> | undefined;
 };
 
 /** @internal */
@@ -74,7 +70,6 @@ export const SpanSummary$inboundSchema: z.ZodType<
   trace_framework: z.string().optional(),
   leading_span_type: z.string().optional(),
   guardrail_enabled: z.boolean().optional(),
-  finish_reasons: z.array(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "trace_id": "traceId",
@@ -88,7 +83,6 @@ export const SpanSummary$inboundSchema: z.ZodType<
     "trace_framework": "traceFramework",
     "leading_span_type": "leadingSpanType",
     "guardrail_enabled": "guardrailEnabled",
-    "finish_reasons": "finishReasons",
   });
 });
 

@@ -19,7 +19,6 @@ import {
   AlertQuery$Outbound,
   AlertQuery$outboundSchema,
 } from "./alertquery.js";
-import { AlertScope, AlertScope$outboundSchema } from "./alertscope.js";
 
 export type CreateAlertRequest = {
   /**
@@ -31,9 +30,9 @@ export type CreateAlertRequest = {
    */
   description?: string | undefined;
   /**
-   * Project that owns a project alert. Empty for a workspace alert.
+   * Project that owns the alert. Required.
    */
-  projectId?: string | undefined;
+  projectId: string;
   /**
    * UI signal preset the alert is created from. Defaults to `custom`.
    */
@@ -61,21 +60,19 @@ export type CreateAlertRequest = {
    * Display options for the alert activity chart.
    */
   display?: AlertDisplay | undefined;
-  scope?: AlertScope | undefined;
 };
 
 /** @internal */
 export type CreateAlertRequest$Outbound = {
   display_name: string;
   description?: string | undefined;
-  project_id?: string | undefined;
+  project_id: string;
   signal?: string | undefined;
   query: AlertQuery$Outbound;
   condition: AlertCondition$Outbound;
   notifier_ids?: Array<string> | undefined;
   enabled?: boolean | undefined;
   display?: AlertDisplay$Outbound | undefined;
-  scope?: string | undefined;
 };
 
 /** @internal */
@@ -86,14 +83,13 @@ export const CreateAlertRequest$outboundSchema: z.ZodType<
 > = z.object({
   displayName: z.string(),
   description: z.string().optional(),
-  projectId: z.string().optional(),
+  projectId: z.string(),
   signal: z.string().optional(),
   query: AlertQuery$outboundSchema,
   condition: AlertCondition$outboundSchema,
   notifierIds: z.array(z.string()).optional(),
   enabled: z.boolean().optional(),
   display: AlertDisplay$outboundSchema.optional(),
-  scope: AlertScope$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     displayName: "display_name",

@@ -8,6 +8,7 @@ Cache configuration for the request.
 import { GetAllPromptsCache } from "@orq-ai/node/models/operations";
 
 let value: GetAllPromptsCache = {
+  ttl: 3600,
   type: "exact_match",
 };
 ```

@@ -36,7 +36,7 @@ export class Alerts extends ClientSDK {
    * Create an alert
    *
    * @remarks
-   * Creates a project- or workspace-scoped threshold alert. The alert's query is validated against the selected telemetry source and the evaluation schedule starts immediately when `enabled` is true. Plan limits apply to the number of alerts and the minimum evaluation interval.
+   * Creates a threshold alert in a project. The alert's query is validated against the Reporting API metric catalogue and the evaluation schedule starts immediately when `enabled` is true. Plan limits apply to the number of alerts and the minimum evaluation interval.
    */
   async create(
     request: components.CreateAlertRequest,
@@ -87,7 +87,7 @@ export class Alerts extends ClientSDK {
    * Update an alert
    *
    * @remarks
-   * Updates alert metadata, query, condition, notifiers, or enabled state. Query and condition changes restart the evaluation schedule; disabling stops it. Alert scope, `project_id`, and telemetry source are immutable.
+   * Updates alert metadata, query, condition, notifiers, or enabled state. Query and condition changes restart the evaluation schedule; disabling stops it. `project_id` is immutable.
    */
   async update(
     request: operations.AlertUpdateRequest,

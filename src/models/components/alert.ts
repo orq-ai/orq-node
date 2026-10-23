@@ -15,7 +15,6 @@ import {
 import { AlertDisplay, AlertDisplay$inboundSchema } from "./alertdisplay.js";
 import { AlertQuery, AlertQuery$inboundSchema } from "./alertquery.js";
 import { AlertRun, AlertRun$inboundSchema } from "./alertrun.js";
-import { AlertScope, AlertScope$inboundSchema } from "./alertscope.js";
 
 /**
  * UI signal preset the alert was created from.
@@ -62,7 +61,7 @@ export type Alert = {
    */
   description: string;
   /**
-   * Project that owns a project-scoped alert. Empty for workspace alerts. Immutable after creation.
+   * Project that owns the alert. Immutable after creation.
    */
   projectId: string;
   /**
@@ -126,7 +125,6 @@ export type Alert = {
    * Display options for the alert activity chart. `null` when none are saved.
    */
   display?: AlertDisplay | null | undefined;
-  scope: AlertScope;
 };
 
 /** @internal */
@@ -163,7 +161,6 @@ export const Alert$inboundSchema: z.ZodType<Alert, z.ZodTypeDef, unknown> = z
     created_by_id: z.string(),
     updated_by_id: z.string(),
     display: z.nullable(AlertDisplay$inboundSchema).optional(),
-    scope: AlertScope$inboundSchema,
   }).transform((v) => {
     return remap$(v, {
       "alert_id": "alertId",

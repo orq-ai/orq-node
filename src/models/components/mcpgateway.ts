@@ -19,6 +19,10 @@ import {
   McpGatewayServerLink,
   McpGatewayServerLink$inboundSchema,
 } from "./mcpgatewayserverlink.js";
+import {
+  McpGatewayStatus,
+  McpGatewayStatus$inboundSchema,
+} from "./mcpgatewaystatus.js";
 import { McpToolNaming, McpToolNaming$inboundSchema } from "./mcptoolnaming.js";
 import { Sharing, Sharing$inboundSchema } from "./sharing.js";
 
@@ -44,6 +48,7 @@ export type McpGateway = {
    */
   serverLinks?: Array<McpGatewayServerLink> | undefined;
   toolNaming?: McpToolNaming | undefined;
+  status?: McpGatewayStatus | undefined;
   /**
    * Endpoint MCP clients connect to; relative when the deployment has no public base URL configured.
    */
@@ -69,10 +74,6 @@ export type McpGateway = {
    * Plugins run on every tool call this gateway serves.
    */
   plugins?: Array<McpGatewayPlugin> | undefined;
-  /**
-   * Workspace skills this gateway serves to MCP clients through the MCP Skills extension.
-   */
-  skillIds?: Array<string> | undefined;
 };
 
 /** @internal */
@@ -87,6 +88,7 @@ export const McpGateway$inboundSchema: z.ZodType<
   description: z.string().optional(),
   server_links: z.array(McpGatewayServerLink$inboundSchema).optional(),
   tool_naming: McpToolNaming$inboundSchema.optional(),
+  status: McpGatewayStatus$inboundSchema.optional(),
   public_url: z.string().optional(),
   created: z.string().optional(),
   updated: z.string().optional(),
@@ -94,7 +96,6 @@ export const McpGateway$inboundSchema: z.ZodType<
   mode: McpGatewayMode$inboundSchema.optional(),
   sharing: Sharing$inboundSchema.optional(),
   plugins: z.array(McpGatewayPlugin$inboundSchema).optional(),
-  skill_ids: z.array(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "display_name": "displayName",
@@ -102,7 +103,6 @@ export const McpGateway$inboundSchema: z.ZodType<
     "tool_naming": "toolNaming",
     "public_url": "publicUrl",
     "exposed_tools_count": "exposedToolsCount",
-    "skill_ids": "skillIds",
   });
 });
 

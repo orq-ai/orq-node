@@ -13,5 +13,5 @@ let value: ReasoningEffort = "none";
 ## Values
 
 ```typescript
-"none" | "instant" | "minimal" | "low" | "medium" | "high" | "xhigh" | "max"
+"none" | "minimal" | "low" | "medium" | "high" | "xhigh" | "max"
 ```

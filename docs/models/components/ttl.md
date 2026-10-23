@@ -11,5 +11,5 @@ let value: Ttl = "30m";
 ## Values
 
 ```typescript
-"30m" | "12h"
+"30m"
 ```

@@ -6,6 +6,8 @@ import * as z from "zod/v3";
 import { ClosedEnum } from "../../types/enums.js";
 
 export const TelemetryValueCardinality = {
+  TelemetryValueCardinalityUnspecified:
+    "TELEMETRY_VALUE_CARDINALITY_UNSPECIFIED",
   TelemetryValueCardinalitySingle: "TELEMETRY_VALUE_CARDINALITY_SINGLE",
   TelemetryValueCardinalityMultiple: "TELEMETRY_VALUE_CARDINALITY_MULTIPLE",
 } as const;

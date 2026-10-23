@@ -173,10 +173,6 @@ export type CreateTranslationOrq = {
     | Array<CreateTranslationRouterAudioTranslationsFallbacks>
     | undefined;
   /**
-   * HTTP status codes that trigger fallback. Enter up to 20 unique integers from 400 to 599. When omitted or empty, defaults to [408, 429, 500, 502, 503, 504, 529].
-   */
-  fallbackOnCodes?: Array<number> | undefined;
-  /**
    * Retry configuration for the request
    */
   retry?: CreateTranslationRouterAudioTranslationsRetry | undefined;
@@ -251,10 +247,6 @@ export type CreateTranslationRequestBody = {
    * The name to display on the trace. If not specified, the default system name will be used.
    */
   name?: string | undefined;
-  /**
-   * HTTP status codes that trigger fallback. Enter up to 20 unique integers from 400 to 599. When omitted or empty, defaults to [408, 429, 500, 502, 503, 504, 529].
-   */
-  fallbackOnCodes?: Array<number> | undefined;
   /**
    * Array of fallback models to use if primary model fails
    */
@@ -673,7 +665,6 @@ export type CreateTranslationOrq$Outbound = {
   fallbacks?:
     | Array<CreateTranslationRouterAudioTranslationsFallbacks$Outbound>
     | undefined;
-  fallback_on_codes?: Array<number> | undefined;
   retry?: CreateTranslationRouterAudioTranslationsRetry$Outbound | undefined;
   identity?: components.PublicIdentity$Outbound | undefined;
   contact?: components.PublicContact$Outbound | undefined;
@@ -697,7 +688,6 @@ export const CreateTranslationOrq$outboundSchema: z.ZodType<
       CreateTranslationRouterAudioTranslationsFallbacks$outboundSchema
     ),
   ).optional(),
-  fallbackOnCodes: z.array(z.number().int()).optional(),
   retry: z.lazy(() =>
     CreateTranslationRouterAudioTranslationsRetry$outboundSchema
   ).optional(),
@@ -711,7 +701,6 @@ export const CreateTranslationOrq$outboundSchema: z.ZodType<
   ).optional(),
 }).transform((v) => {
   return remap$(v, {
-    fallbackOnCodes: "fallback_on_codes",
     loadBalancer: "load_balancer",
   });
 });
@@ -765,7 +754,6 @@ export type CreateTranslationRequestBody$Outbound = {
   timestamps_granularity: string;
   temperature?: number | undefined;
   name?: string | undefined;
-  fallback_on_codes?: Array<number> | undefined;
   fallbacks?: Array<CreateTranslationFallbacks$Outbound> | undefined;
   retry?: CreateTranslationRetry$Outbound | undefined;
   load_balancer?: CreateTranslationLoadBalancer1$Outbound | undefined;
@@ -791,7 +779,6 @@ export const CreateTranslationRequestBody$outboundSchema: z.ZodType<
     .default("word"),
   temperature: z.number().optional(),
   name: z.string().optional(),
-  fallbackOnCodes: z.array(z.number().int()).optional(),
   fallbacks: z.array(z.lazy(() => CreateTranslationFallbacks$outboundSchema))
     .optional(),
   retry: z.lazy(() => CreateTranslationRetry$outboundSchema).optional(),
@@ -808,7 +795,6 @@ export const CreateTranslationRequestBody$outboundSchema: z.ZodType<
     tagAudioEvents: "tag_audio_events",
     numSpeakers: "num_speakers",
     timestampsGranularity: "timestamps_granularity",
-    fallbackOnCodes: "fallback_on_codes",
     loadBalancer: "load_balancer",
   });
 });

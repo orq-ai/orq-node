@@ -40,10 +40,6 @@ export type CreateEmbeddingRequestBody = {
    */
   encodingFormat?: EncodingFormat | undefined;
   /**
-   * HTTP status codes that trigger fallback. Defaults to [408,429,500,502,503,504,529]. Each code must be unique and between 400 and 599.
-   */
-  fallbackOnCodes?: Array<number> | null | undefined;
-  /**
    * Array of fallback models to use if primary model fails.
    */
   fallbacks?: Array<components.FallbackConfig> | null | undefined;
@@ -150,7 +146,6 @@ export type CreateEmbeddingRequestBody$Outbound = {
   cache?: components.EmbeddingCacheConfig$Outbound | undefined;
   dimensions?: number | undefined;
   encoding_format?: string | undefined;
-  fallback_on_codes?: Array<number> | null | undefined;
   fallbacks?: Array<components.FallbackConfig$Outbound> | null | undefined;
   input: string | Array<string | Array<number>>;
   load_balancer?: components.EmbeddingLoadBalancerConfig$Outbound | undefined;
@@ -171,7 +166,6 @@ export const CreateEmbeddingRequestBody$outboundSchema: z.ZodType<
   cache: components.EmbeddingCacheConfig$outboundSchema.optional(),
   dimensions: z.number().int().optional(),
   encodingFormat: EncodingFormat$outboundSchema.optional(),
-  fallbackOnCodes: z.nullable(z.array(z.number().int())).optional(),
   fallbacks: z.nullable(z.array(components.FallbackConfig$outboundSchema))
     .optional(),
   input: z.union([
@@ -189,7 +183,6 @@ export const CreateEmbeddingRequestBody$outboundSchema: z.ZodType<
 }).transform((v) => {
   return remap$(v, {
     encodingFormat: "encoding_format",
-    fallbackOnCodes: "fallback_on_codes",
     loadBalancer: "load_balancer",
   });
 });

@@ -8,6 +8,7 @@ Cache configuration for the request.
 import { FallbackModelConfigurationCache } from "@orq-ai/node/models/operations";
 
 let value: FallbackModelConfigurationCache = {
+  ttl: 3600,
   type: "exact_match",
 };
 ```

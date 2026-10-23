@@ -1,6 +1,6 @@
 # Log
 
-Log is a log record returned by the log endpoints.
+Log is the canonical wire representation of an otel_logs row.
 
 ## Example Usage
 

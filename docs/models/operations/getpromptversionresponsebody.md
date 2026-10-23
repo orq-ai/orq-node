@@ -25,6 +25,7 @@ let value: GetPromptVersionResponseBody = {
       ],
     },
     cache: {
+      ttl: 3600,
       type: "exact_match",
     },
     loadBalancer: {

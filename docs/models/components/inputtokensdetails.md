@@ -14,11 +14,10 @@ let value: InputTokensDetails = {
 
 ## Fields
 
-| Field                                                                                    | Type                                                                                     | Required                                                                                 | Description                                                                              |
-| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
-| `cacheCreation1hTokens`                                                                  | *number*                                                                                 | :heavy_minus_sign:                                                                       | N/A                                                                                      |
-| `cacheCreation5mTokens`                                                                  | *number*                                                                                 | :heavy_minus_sign:                                                                       | N/A                                                                                      |
-| `cacheCreationTokens`                                                                    | *number*                                                                                 | :heavy_check_mark:                                                                       | N/A                                                                                      |
-| `cacheWriteTokens`                                                                       | *number*                                                                                 | :heavy_check_mark:                                                                       | N/A                                                                                      |
-| `cacheWriteTokensDetails`                                                                | [components.CacheWriteTokensDetails](../../models/components/cachewritetokensdetails.md) | :heavy_minus_sign:                                                                       | N/A                                                                                      |
-| `cachedTokens`                                                                           | *number*                                                                                 | :heavy_check_mark:                                                                       | N/A                                                                                      |
+| Field                   | Type                    | Required                | Description             |
+| ----------------------- | ----------------------- | ----------------------- | ----------------------- |
+| `cacheCreation1hTokens` | *number*                | :heavy_minus_sign:      | N/A                     |
+| `cacheCreation5mTokens` | *number*                | :heavy_minus_sign:      | N/A                     |
+| `cacheCreationTokens`   | *number*                | :heavy_check_mark:      | N/A                     |
+| `cacheWriteTokens`      | *number*                | :heavy_check_mark:      | N/A                     |
+| `cachedTokens`          | *number*                | :heavy_check_mark:      | N/A                     |

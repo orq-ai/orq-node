@@ -8,6 +8,7 @@ Cache configuration for the request.
 import { CreateImageEditRouterImagesEditsCache } from "@orq-ai/node/models/operations";
 
 let value: CreateImageEditRouterImagesEditsCache = {
+  ttl: 3600,
   type: "exact_match",
 };
 ```

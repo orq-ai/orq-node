@@ -6,6 +6,7 @@ import * as z from "zod/v3";
 import { ClosedEnum } from "../../types/enums.js";
 
 export const ManagementPermissionMode = {
+  ManagementPermissionModeUnspecified: "MANAGEMENT_PERMISSION_MODE_UNSPECIFIED",
   ManagementPermissionModeAll: "MANAGEMENT_PERMISSION_MODE_ALL",
   ManagementPermissionModeRestricted: "MANAGEMENT_PERMISSION_MODE_RESTRICTED",
   ManagementPermissionModeReadOnly: "MANAGEMENT_PERMISSION_MODE_READ_ONLY",

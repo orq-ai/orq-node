@@ -3,7 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -20,10 +19,6 @@ export type RoutingRuleModelsConfig = {
    */
   mode?: string | undefined;
   models?: Array<RoutingRuleModel> | undefined;
-  /**
-   * HTTP error status codes that trigger fallback. Only allowed in fallback mode. Empty uses the default: 408, 429, 500, 502, 503, 504, 529.
-   */
-  fallbackOnCodes?: Array<number> | undefined;
 };
 
 /** @internal */
@@ -34,17 +29,11 @@ export const RoutingRuleModelsConfig$inboundSchema: z.ZodType<
 > = z.object({
   mode: z.string().optional(),
   models: z.array(RoutingRuleModel$inboundSchema).optional(),
-  fallback_on_codes: z.array(z.number().int()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "fallback_on_codes": "fallbackOnCodes",
-  });
 });
 /** @internal */
 export type RoutingRuleModelsConfig$Outbound = {
   mode?: string | undefined;
   models?: Array<RoutingRuleModel$Outbound> | undefined;
-  fallback_on_codes?: Array<number> | undefined;
 };
 
 /** @internal */
@@ -55,11 +44,6 @@ export const RoutingRuleModelsConfig$outboundSchema: z.ZodType<
 > = z.object({
   mode: z.string().optional(),
   models: z.array(RoutingRuleModel$outboundSchema).optional(),
-  fallbackOnCodes: z.array(z.number().int()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    fallbackOnCodes: "fallback_on_codes",
-  });
 });
 
 export function routingRuleModelsConfigToJSON(

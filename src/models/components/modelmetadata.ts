@@ -43,7 +43,6 @@ export type ModelMetadata = {
   contextWindow?: number | undefined;
   costEfficiencyRating?: number | undefined;
   costPerImage?: number | undefined;
-  defaultSpeechResponseFormat?: string | undefined;
   deprecationDate?: string | undefined;
   embeddingDimensions?: number | undefined;
   extendedContextPricingMode?: string | undefined;
@@ -132,7 +131,6 @@ export type ModelMetadata = {
   supportsReasoning?: boolean | undefined;
   supportsReasoningEffortDefault?: boolean | undefined;
   supportsReasoningEffortHigh?: boolean | undefined;
-  supportsReasoningEffortInstant?: boolean | undefined;
   supportsReasoningEffortLow?: boolean | undefined;
   supportsReasoningEffortMax?: boolean | undefined;
   supportsReasoningEffortMedium?: boolean | undefined;
@@ -182,7 +180,6 @@ export const ModelMetadata$inboundSchema: z.ZodType<
   context_window: z.number().int().optional(),
   cost_efficiency_rating: z.number().int().optional(),
   cost_per_image: z.number().optional(),
-  default_speech_response_format: z.string().optional(),
   deprecation_date: z.string().optional(),
   embedding_dimensions: z.number().int().optional(),
   extended_context_pricing_mode: z.string().optional(),
@@ -272,7 +269,6 @@ export const ModelMetadata$inboundSchema: z.ZodType<
   supports_reasoning: z.boolean().optional(),
   supports_reasoning_effort_default: z.boolean().optional(),
   supports_reasoning_effort_high: z.boolean().optional(),
-  supports_reasoning_effort_instant: z.boolean().optional(),
   supports_reasoning_effort_low: z.boolean().optional(),
   supports_reasoning_effort_max: z.boolean().optional(),
   supports_reasoning_effort_medium: z.boolean().optional(),
@@ -315,7 +311,6 @@ export const ModelMetadata$inboundSchema: z.ZodType<
     "context_window": "contextWindow",
     "cost_efficiency_rating": "costEfficiencyRating",
     "cost_per_image": "costPerImage",
-    "default_speech_response_format": "defaultSpeechResponseFormat",
     "deprecation_date": "deprecationDate",
     "embedding_dimensions": "embeddingDimensions",
     "extended_context_pricing_mode": "extendedContextPricingMode",
@@ -403,7 +398,6 @@ export const ModelMetadata$inboundSchema: z.ZodType<
     "supports_reasoning": "supportsReasoning",
     "supports_reasoning_effort_default": "supportsReasoningEffortDefault",
     "supports_reasoning_effort_high": "supportsReasoningEffortHigh",
-    "supports_reasoning_effort_instant": "supportsReasoningEffortInstant",
     "supports_reasoning_effort_low": "supportsReasoningEffortLow",
     "supports_reasoning_effort_max": "supportsReasoningEffortMax",
     "supports_reasoning_effort_medium": "supportsReasoningEffortMedium",
@@ -449,7 +443,6 @@ export type ModelMetadata$Outbound = {
   context_window?: number | undefined;
   cost_efficiency_rating?: number | undefined;
   cost_per_image?: number | undefined;
-  default_speech_response_format?: string | undefined;
   deprecation_date?: string | undefined;
   embedding_dimensions?: number | undefined;
   extended_context_pricing_mode?: string | undefined;
@@ -540,7 +533,6 @@ export type ModelMetadata$Outbound = {
   supports_reasoning?: boolean | undefined;
   supports_reasoning_effort_default?: boolean | undefined;
   supports_reasoning_effort_high?: boolean | undefined;
-  supports_reasoning_effort_instant?: boolean | undefined;
   supports_reasoning_effort_low?: boolean | undefined;
   supports_reasoning_effort_max?: boolean | undefined;
   supports_reasoning_effort_medium?: boolean | undefined;
@@ -590,7 +582,6 @@ export const ModelMetadata$outboundSchema: z.ZodType<
   contextWindow: z.number().int().optional(),
   costEfficiencyRating: z.number().int().optional(),
   costPerImage: z.number().optional(),
-  defaultSpeechResponseFormat: z.string().optional(),
   deprecationDate: z.string().optional(),
   embeddingDimensions: z.number().int().optional(),
   extendedContextPricingMode: z.string().optional(),
@@ -680,7 +671,6 @@ export const ModelMetadata$outboundSchema: z.ZodType<
   supportsReasoning: z.boolean().optional(),
   supportsReasoningEffortDefault: z.boolean().optional(),
   supportsReasoningEffortHigh: z.boolean().optional(),
-  supportsReasoningEffortInstant: z.boolean().optional(),
   supportsReasoningEffortLow: z.boolean().optional(),
   supportsReasoningEffortMax: z.boolean().optional(),
   supportsReasoningEffortMedium: z.boolean().optional(),
@@ -723,7 +713,6 @@ export const ModelMetadata$outboundSchema: z.ZodType<
     contextWindow: "context_window",
     costEfficiencyRating: "cost_efficiency_rating",
     costPerImage: "cost_per_image",
-    defaultSpeechResponseFormat: "default_speech_response_format",
     deprecationDate: "deprecation_date",
     embeddingDimensions: "embedding_dimensions",
     extendedContextPricingMode: "extended_context_pricing_mode",
@@ -811,7 +800,6 @@ export const ModelMetadata$outboundSchema: z.ZodType<
     supportsReasoning: "supports_reasoning",
     supportsReasoningEffortDefault: "supports_reasoning_effort_default",
     supportsReasoningEffortHigh: "supports_reasoning_effort_high",
-    supportsReasoningEffortInstant: "supports_reasoning_effort_instant",
     supportsReasoningEffortLow: "supports_reasoning_effort_low",
     supportsReasoningEffortMax: "supports_reasoning_effort_max",
     supportsReasoningEffortMedium: "supports_reasoning_effort_medium",

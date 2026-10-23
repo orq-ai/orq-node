@@ -179,10 +179,6 @@ export type CreateTranscriptionOrq = {
     | Array<CreateTranscriptionRouterAudioTranscriptionsFallbacks>
     | undefined;
   /**
-   * HTTP status codes that trigger fallback. Enter up to 20 unique integers from 400 to 599. When omitted or empty, defaults to [408, 429, 500, 502, 503, 504, 529].
-   */
-  fallbackOnCodes?: Array<number> | undefined;
-  /**
    * Retry configuration for the request
    */
   retry?: CreateTranscriptionRouterAudioTranscriptionsRetry | undefined;
@@ -265,10 +261,6 @@ export type CreateTranscriptionRequestBody = {
    * The name to display on the trace. If not specified, the default system name will be used.
    */
   name?: string | undefined;
-  /**
-   * HTTP status codes that trigger fallback. Enter up to 20 unique integers from 400 to 599. When omitted or empty, defaults to [408, 429, 500, 502, 503, 504, 529].
-   */
-  fallbackOnCodes?: Array<number> | undefined;
   /**
    * Array of fallback models to use if primary model fails
    */
@@ -695,7 +687,6 @@ export type CreateTranscriptionOrq$Outbound = {
   fallbacks?:
     | Array<CreateTranscriptionRouterAudioTranscriptionsFallbacks$Outbound>
     | undefined;
-  fallback_on_codes?: Array<number> | undefined;
   retry?:
     | CreateTranscriptionRouterAudioTranscriptionsRetry$Outbound
     | undefined;
@@ -721,7 +712,6 @@ export const CreateTranscriptionOrq$outboundSchema: z.ZodType<
       CreateTranscriptionRouterAudioTranscriptionsFallbacks$outboundSchema
     ),
   ).optional(),
-  fallbackOnCodes: z.array(z.number().int()).optional(),
   retry: z.lazy(() =>
     CreateTranscriptionRouterAudioTranscriptionsRetry$outboundSchema
   ).optional(),
@@ -735,7 +725,6 @@ export const CreateTranscriptionOrq$outboundSchema: z.ZodType<
   ).optional(),
 }).transform((v) => {
   return remap$(v, {
-    fallbackOnCodes: "fallback_on_codes",
     loadBalancer: "load_balancer",
   });
 });
@@ -787,7 +776,6 @@ export type CreateTranscriptionRequestBody$Outbound = {
   language?: string | undefined;
   timestamp_granularities?: Array<string> | undefined;
   name?: string | undefined;
-  fallback_on_codes?: Array<number> | undefined;
   fallbacks?: Array<CreateTranscriptionFallbacks$Outbound> | undefined;
   retry?: CreateTranscriptionRetry$Outbound | undefined;
   load_balancer?: CreateTranscriptionLoadBalancer1$Outbound | undefined;
@@ -815,7 +803,6 @@ export const CreateTranscriptionRequestBody$outboundSchema: z.ZodType<
   timestampGranularities: z.array(TimestampGranularities$outboundSchema)
     .optional(),
   name: z.string().optional(),
-  fallbackOnCodes: z.array(z.number().int()).optional(),
   fallbacks: z.array(z.lazy(() => CreateTranscriptionFallbacks$outboundSchema))
     .optional(),
   retry: z.lazy(() => CreateTranscriptionRetry$outboundSchema).optional(),
@@ -832,7 +819,6 @@ export const CreateTranscriptionRequestBody$outboundSchema: z.ZodType<
     numSpeakers: "num_speakers",
     timestampsGranularity: "timestamps_granularity",
     timestampGranularities: "timestamp_granularities",
-    fallbackOnCodes: "fallback_on_codes",
     loadBalancer: "load_balancer",
   });
 });

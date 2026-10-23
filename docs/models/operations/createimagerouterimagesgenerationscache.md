@@ -8,6 +8,7 @@ Cache configuration for the request.
 import { CreateImageRouterImagesGenerationsCache } from "@orq-ai/node/models/operations";
 
 let value: CreateImageRouterImagesGenerationsCache = {
+  ttl: 3600,
   type: "exact_match",
 };
 ```
