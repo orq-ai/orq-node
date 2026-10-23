@@ -18,6 +18,7 @@ export type OpenAIPromptCacheOptionsMode = ClosedEnum<
 
 export const Ttl = {
   Thirtym: "30m",
+  Twelveh: "12h",
 } as const;
 export type Ttl = ClosedEnum<typeof Ttl>;
 

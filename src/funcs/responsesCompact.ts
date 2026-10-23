@@ -30,7 +30,7 @@ import { Result } from "../types/fp.js";
  * Compact response
  *
  * @remarks
- * Compacts a conversation by summarizing older items to free up context window space. Returns a compaction item containing the generated summary.
+ * Compacts a conversation by summarizing older items to free up context window space. Returns the next context window: a compaction item containing the generated summary, followed by the most recent items verbatim.
  */
 export function responsesCompact(
   client: OrqCore,

@@ -19,7 +19,7 @@ export type GuardrailRulePlugin = {
    * @remarks
    *  pii-detection capabilities catalog when the rule is saved, not pinned
    *  here, so a language or region the detector gains becomes writable without
-   *  a proto change.
+   *  a future update.
    */
   language?: string | undefined;
   /**

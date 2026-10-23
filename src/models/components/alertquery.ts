@@ -7,6 +7,11 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
+  AlertTelemetrySource,
+  AlertTelemetrySource$inboundSchema,
+  AlertTelemetrySource$outboundSchema,
+} from "./alerttelemetrysource.js";
+import {
   MonitorFilter,
   MonitorFilter$inboundSchema,
   MonitorFilter$Outbound,
@@ -15,17 +20,26 @@ import {
 
 export type AlertQuery = {
   /**
-   * Reporting API catalogue metric, e.g. `genai.cost` or
+   * Source-owned metric identifier. Trace metrics are validated against the
    *
    * @remarks
-   *  `genai.latency.avg`. Validated against the catalogue when the alert
-   *  is saved.
+   *  Reporting catalogue; runtime metrics are validated against telemetry
+   *  capabilities in the alert's scope.
    */
   metric: string;
   /**
-   * Reporting filters combined with AND.
+   * Source-owned filters combined with AND.
    */
   filters?: Array<MonitorFilter> | undefined;
+  source?: AlertTelemetrySource | undefined;
+  /**
+   * Aggregation operation advertised by the selected metric capability.
+   *
+   * @remarks
+   *  Existing trace queries may omit it; the server resolves their canonical
+   *  Reporting operation.
+   */
+  operation?: string | undefined;
 };
 
 /** @internal */
@@ -36,11 +50,15 @@ export const AlertQuery$inboundSchema: z.ZodType<
 > = z.object({
   metric: z.string(),
   filters: z.array(MonitorFilter$inboundSchema).optional(),
+  source: AlertTelemetrySource$inboundSchema.optional(),
+  operation: z.string().optional(),
 });
 /** @internal */
 export type AlertQuery$Outbound = {
   metric: string;
   filters?: Array<MonitorFilter$Outbound> | undefined;
+  source?: string | undefined;
+  operation?: string | undefined;
 };
 
 /** @internal */
@@ -51,6 +69,8 @@ export const AlertQuery$outboundSchema: z.ZodType<
 > = z.object({
   metric: z.string(),
   filters: z.array(MonitorFilter$outboundSchema).optional(),
+  source: AlertTelemetrySource$outboundSchema.optional(),
+  operation: z.string().optional(),
 });
 
 export function alertQueryToJSON(alertQuery: AlertQuery): string {

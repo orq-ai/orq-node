@@ -31,6 +31,7 @@ let value: ListAlertsResponse = {
       updatedAt: new Date("2025-11-26T11:40:47.469Z"),
       createdById: "<id>",
       updatedById: "<id>",
+      scope: "ALERT_SCOPE_WORKSPACE",
     },
   ],
   hasMore: false,

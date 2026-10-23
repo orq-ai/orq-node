@@ -79,5 +79,5 @@ run();
 
 | Error Type                          | Status Code                         | Content Type                        |
 | ----------------------------------- | ----------------------------------- | ----------------------------------- |
-| errors.CreateModerationResponseBody | 422                                 | application/json                    |
+| errors.CreateModerationResponseBody | 400                                 | application/json                    |
 | errors.APIError                     | 4XX, 5XX                            | \*/\*                               |

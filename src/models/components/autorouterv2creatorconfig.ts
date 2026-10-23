@@ -8,9 +8,18 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type AutoRouterV2CreatorConfig = {
+  /**
+   * Artificial Analysis identifier of the creator.
+   */
   id: string;
+  /**
+   * Creator name reported by Artificial Analysis.
+   */
   name: string;
-  slug: string;
+  /**
+   * Artificial Analysis slug of the creator.
+   */
+  slug?: string | undefined;
 };
 
 /** @internal */
@@ -21,13 +30,13 @@ export const AutoRouterV2CreatorConfig$inboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   name: z.string(),
-  slug: z.string(),
+  slug: z.string().optional(),
 });
 /** @internal */
 export type AutoRouterV2CreatorConfig$Outbound = {
   id: string;
   name: string;
-  slug: string;
+  slug?: string | undefined;
 };
 
 /** @internal */
@@ -38,7 +47,7 @@ export const AutoRouterV2CreatorConfig$outboundSchema: z.ZodType<
 > = z.object({
   id: z.string(),
   name: z.string(),
-  slug: z.string(),
+  slug: z.string().optional(),
 });
 
 export function autoRouterV2CreatorConfigToJSON(

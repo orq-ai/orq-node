@@ -28,7 +28,6 @@ let value: ListPromptVersionsResponseBody = {
           ],
         },
         cache: {
-          ttl: 3600,
           type: "exact_match",
         },
         loadBalancer: {

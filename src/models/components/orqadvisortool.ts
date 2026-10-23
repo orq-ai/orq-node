@@ -11,6 +11,7 @@ import { ClosedEnum } from "../../types/enums.js";
  */
 export const ReasoningEffort = {
   None: "none",
+  Instant: "instant",
   Minimal: "minimal",
   Low: "low",
   Medium: "medium",

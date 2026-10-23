@@ -8,6 +8,7 @@ import { Alerts } from "./alerts.js";
 import { AnnotationQueues } from "./annotationqueues.js";
 import { Annotations } from "./annotations.js";
 import { ApiKeys } from "./apikeys.js";
+import { AuditLogDestinations } from "./auditlogdestinations.js";
 import { Budgets } from "./budgets.js";
 import { Chunking } from "./chunking.js";
 import { Datasets } from "./datasets.js";
@@ -30,6 +31,7 @@ import { MemoryStores } from "./memorystores.js";
 import { ModelCatalog } from "./modelcatalog.js";
 import { ModelFusions } from "./modelfusions.js";
 import { Models } from "./models.js";
+import { Monitors } from "./monitors.js";
 import { Notifiers } from "./notifiers.js";
 import { Pii } from "./pii.js";
 import { Policies } from "./policies.js";
@@ -46,6 +48,7 @@ import { SmartRouters } from "./smartrouters.js";
 import { Telemetry } from "./telemetry.js";
 import { Tools } from "./tools.js";
 import { Traces } from "./traces.js";
+import { Users } from "./users.js";
 import { Views } from "./views.js";
 import { Webhooks } from "./webhooks.js";
 import { Websearch } from "./websearch.js";
@@ -78,11 +81,6 @@ export class Orq extends ClientSDK {
   private _router?: Router;
   get router(): Router {
     return (this._router ??= new Router(this._options));
-  }
-
-  private _feedback?: Feedback;
-  get feedback(): Feedback {
-    return (this._feedback ??= new Feedback(this._options));
   }
 
   private _humanReviewSets?: HumanReviewSets;
@@ -128,6 +126,11 @@ export class Orq extends ClientSDK {
   private _annotations?: Annotations;
   get annotations(): Annotations {
     return (this._annotations ??= new Annotations(this._options));
+  }
+
+  private _feedback?: Feedback;
+  get feedback(): Feedback {
+    return (this._feedback ??= new Feedback(this._options));
   }
 
   private _logs?: Logs;
@@ -178,6 +181,13 @@ export class Orq extends ClientSDK {
   private _annotationQueues?: AnnotationQueues;
   get annotationQueues(): AnnotationQueues {
     return (this._annotationQueues ??= new AnnotationQueues(this._options));
+  }
+
+  private _auditLogDestinations?: AuditLogDestinations;
+  get auditLogDestinations(): AuditLogDestinations {
+    return (this._auditLogDestinations ??= new AuditLogDestinations(
+      this._options,
+    ));
   }
 
   private _budgets?: Budgets;
@@ -235,6 +245,11 @@ export class Orq extends ClientSDK {
     return (this._modelFusions ??= new ModelFusions(this._options));
   }
 
+  private _monitors?: Monitors;
+  get monitors(): Monitors {
+    return (this._monitors ??= new Monitors(this._options));
+  }
+
   private _notifiers?: Notifiers;
   get notifiers(): Notifiers {
     return (this._notifiers ??= new Notifiers(this._options));
@@ -263,6 +278,11 @@ export class Orq extends ClientSDK {
   private _smartRouters?: SmartRouters;
   get smartRouters(): SmartRouters {
     return (this._smartRouters ??= new SmartRouters(this._options));
+  }
+
+  private _users?: Users;
+  get users(): Users {
+    return (this._users ??= new Users(this._options));
   }
 
   private _webhooks?: Webhooks;

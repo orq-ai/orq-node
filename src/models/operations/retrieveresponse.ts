@@ -68,7 +68,7 @@ export type RetrieveResponseResponseBody = {
   maxToolCalls: number | null;
   memory?: components.MemoryParam | undefined;
   /**
-   * Developer-defined key-value pairs attached to the response (OpenAI spec: Map<string, string>).
+   * Developer-defined key-value pairs attached to the response (OpenAI spec: `Map<string, string>`).
    */
   metadata: { [k: string]: string };
   model: string;

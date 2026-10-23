@@ -17,6 +17,7 @@ import {
 
 export type LiteLLMModel = {
   litellmParams: LiteLLMParams;
+  modelId?: string | undefined;
   modelInfo: LiteLLMModelInfo;
   modelName: string;
 };
@@ -24,6 +25,7 @@ export type LiteLLMModel = {
 /** @internal */
 export type LiteLLMModel$Outbound = {
   litellm_params: LiteLLMParams$Outbound;
+  model_id?: string | undefined;
   model_info: LiteLLMModelInfo$Outbound;
   model_name: string;
 };
@@ -35,11 +37,13 @@ export const LiteLLMModel$outboundSchema: z.ZodType<
   LiteLLMModel
 > = z.object({
   litellmParams: LiteLLMParams$outboundSchema,
+  modelId: z.string().optional(),
   modelInfo: LiteLLMModelInfo$outboundSchema,
   modelName: z.string(),
 }).transform((v) => {
   return remap$(v, {
     litellmParams: "litellm_params",
+    modelId: "model_id",
     modelInfo: "model_info",
     modelName: "model_name",
   });

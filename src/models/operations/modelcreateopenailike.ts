@@ -12,14 +12,19 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 export type ModelCreateOpenAILikeRequestBody = {
   apiKey: string;
   baseUrl: string;
+  benchmarkModel?: string | undefined;
   cacheReadCost?: number | undefined;
   cacheWriteCost?: number | undefined;
+  configuration?: components.PrivateModelConfiguration | undefined;
   costPerImage?: number | undefined;
   description?: string | undefined;
   displayName: string;
   hasReasoning?: boolean | undefined;
   inputCost?: number | undefined;
   maxTokens?: number | undefined;
+  /**
+   * Immutable workspace-unique slug when configuration.model_id is supplied.
+   */
   modelId: string;
   modelType: string;
   outputCost?: number | undefined;
@@ -49,6 +54,9 @@ export type ModelCreateOpenAILikeResponseBody = {
   inputCost: number | null;
   inputCurrency: string;
   isActive: boolean;
+  /**
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
+   */
   legacyUuid?: string | undefined;
   metadata: components.ModelMetadata;
   modelDeveloper?: string | undefined;
@@ -70,8 +78,10 @@ export type ModelCreateOpenAILikeResponseBody = {
 export type ModelCreateOpenAILikeRequestBody$Outbound = {
   api_key: string;
   base_url: string;
+  benchmark_model?: string | undefined;
   cache_read_cost?: number | undefined;
   cache_write_cost?: number | undefined;
+  configuration?: components.PrivateModelConfiguration$Outbound | undefined;
   cost_per_image?: number | undefined;
   description?: string | undefined;
   display_name: string;
@@ -97,8 +107,10 @@ export const ModelCreateOpenAILikeRequestBody$outboundSchema: z.ZodType<
 > = z.object({
   apiKey: z.string(),
   baseUrl: z.string(),
+  benchmarkModel: z.string().optional(),
   cacheReadCost: z.number().optional(),
   cacheWriteCost: z.number().optional(),
+  configuration: components.PrivateModelConfiguration$outboundSchema.optional(),
   costPerImage: z.number().optional(),
   description: z.string().optional(),
   displayName: z.string(),
@@ -118,6 +130,7 @@ export const ModelCreateOpenAILikeRequestBody$outboundSchema: z.ZodType<
   return remap$(v, {
     apiKey: "api_key",
     baseUrl: "base_url",
+    benchmarkModel: "benchmark_model",
     cacheReadCost: "cache_read_cost",
     cacheWriteCost: "cache_write_cost",
     costPerImage: "cost_per_image",

@@ -25,6 +25,7 @@ export type UpdateWorkspaceRequest = {
   metadata?: UpdateWorkspaceRequestMetadata | undefined;
   enforceEnabledModels?: boolean | undefined;
   chatKit?: ChatKitResources | undefined;
+  tracingEnabled?: boolean | undefined;
 };
 
 /** @internal */
@@ -56,6 +57,7 @@ export type UpdateWorkspaceRequest$Outbound = {
   metadata?: UpdateWorkspaceRequestMetadata$Outbound | undefined;
   enforce_enabled_models?: boolean | undefined;
   chat_kit?: ChatKitResources$Outbound | undefined;
+  tracing_enabled?: boolean | undefined;
 };
 
 /** @internal */
@@ -72,12 +74,14 @@ export const UpdateWorkspaceRequest$outboundSchema: z.ZodType<
     .optional(),
   enforceEnabledModels: z.boolean().optional(),
   chatKit: ChatKitResources$outboundSchema.optional(),
+  tracingEnabled: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
     displayName: "display_name",
     logoUrl: "logo_url",
     enforceEnabledModels: "enforce_enabled_models",
     chatKit: "chat_kit",
+    tracingEnabled: "tracing_enabled",
   });
 });
 

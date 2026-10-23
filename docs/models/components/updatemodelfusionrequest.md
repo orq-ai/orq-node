@@ -8,8 +8,8 @@ import { UpdateModelFusionRequest } from "@orq-ai/node/models/components";
 let value: UpdateModelFusionRequest = {
   panelModels: [],
   judgeModel: "<value>",
-  synthesisMode: "MODEL_FUSION_SYNTHESIS_MODE_ANALYSIS",
-  preset: "MODEL_FUSION_PRESET_BUDGET",
+  synthesisMode: "MODEL_FUSION_SYNTHESIS_MODE_JUDGE_WRITES_FINAL",
+  preset: "MODEL_FUSION_PRESET_CODE",
   webTools: false,
   maxToolCalls: 757128,
   feedRawToSynth: true,

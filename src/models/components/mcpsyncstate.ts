@@ -31,6 +31,10 @@ export type McpSyncState = {
    * Failures reported by the last sync.
    */
   errors?: Array<string> | undefined;
+  /**
+   * Skills in the catalog after the last sync.
+   */
+  skillsTotal?: number | undefined;
 };
 
 /** @internal */
@@ -45,12 +49,14 @@ export const McpSyncState$inboundSchema: z.ZodType<
   tools_removed: z.number().int().optional(),
   last_synced_at: z.string().optional(),
   errors: z.array(z.string()).optional(),
+  skills_total: z.number().int().optional(),
 }).transform((v) => {
   return remap$(v, {
     "tools_total": "toolsTotal",
     "tools_added": "toolsAdded",
     "tools_removed": "toolsRemoved",
     "last_synced_at": "lastSyncedAt",
+    "skills_total": "skillsTotal",
   });
 });
 

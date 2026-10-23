@@ -13,7 +13,7 @@ let value: TracesGetSpanRequest = {
 
 ## Fields
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `traceId`          | *string*           | :heavy_check_mark: | N/A                |
-| `spanId`           | *string*           | :heavy_check_mark: | N/A                |
+| Field                                                                | Type                                                                 | Required                                                             | Description                                                          |
+| -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- |
+| `traceId`                                                            | *string*                                                             | :heavy_check_mark:                                                   | Optional: queue items predating trace_id capture only have the span. |
+| `spanId`                                                             | *string*                                                             | :heavy_check_mark:                                                   | N/A                                                                  |

@@ -10,10 +10,15 @@ import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ModelUpdateRequestBody = {
+  benchmarkModel?: string | undefined;
   displayName?: string | undefined;
   hasFunctions?: boolean | undefined;
   inputCost?: number | undefined;
   metadata?: components.ModelMetadata | undefined;
+  /**
+   * Immutable private-model slug.
+   */
+  modelId?: string | undefined;
   modelType?: string | undefined;
   outputCost?: number | undefined;
   parameters?: Array<components.UpdateModelParameter> | undefined;
@@ -45,6 +50,9 @@ export type ModelUpdateResponseBody = {
   inputCost: number | null;
   inputCurrency: string;
   isActive: boolean;
+  /**
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
+   */
   legacyUuid?: string | undefined;
   metadata: components.ModelMetadata;
   modelDeveloper?: string | undefined;
@@ -64,10 +72,12 @@ export type ModelUpdateResponseBody = {
 
 /** @internal */
 export type ModelUpdateRequestBody$Outbound = {
+  benchmark_model?: string | undefined;
   display_name?: string | undefined;
   has_functions?: boolean | undefined;
   input_cost?: number | undefined;
   metadata?: components.ModelMetadata$Outbound | undefined;
+  model_id?: string | undefined;
   model_type?: string | undefined;
   output_cost?: number | undefined;
   parameters?: Array<components.UpdateModelParameter$Outbound> | undefined;
@@ -79,19 +89,23 @@ export const ModelUpdateRequestBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ModelUpdateRequestBody
 > = z.object({
+  benchmarkModel: z.string().optional(),
   displayName: z.string().optional(),
   hasFunctions: z.boolean().optional(),
   inputCost: z.number().optional(),
   metadata: components.ModelMetadata$outboundSchema.optional(),
+  modelId: z.string().optional(),
   modelType: z.string().optional(),
   outputCost: z.number().optional(),
   parameters: z.array(components.UpdateModelParameter$outboundSchema)
     .optional(),
 }).transform((v) => {
   return remap$(v, {
+    benchmarkModel: "benchmark_model",
     displayName: "display_name",
     hasFunctions: "has_functions",
     inputCost: "input_cost",
+    modelId: "model_id",
     modelType: "model_type",
     outputCost: "output_cost",
   });

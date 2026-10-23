@@ -77,10 +77,10 @@ export type ManagementKey = {
    */
   lastUsedAt?: Date | undefined;
   /**
-   * Optional expiration. The authenticate hot-path rejects keys whose
+   * Optional expiration. Keys whose `expires_at` is in the past are
    *
    * @remarks
-   *  `expires_at` is in the past. Unset means the key never expires.
+   *  rejected when used. Unset means the key never expires.
    */
   expiresAt?: Date | undefined;
 };

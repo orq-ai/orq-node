@@ -10,7 +10,7 @@ import { Log, Log$inboundSchema } from "./log.js";
 
 export type GetLogResponse = {
   /**
-   * Log is the canonical wire representation of an otel_logs row.
+   * Log is a log record returned by the log endpoints.
    */
   log?: Log | undefined;
 };

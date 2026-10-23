@@ -9,7 +9,7 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * Log is the canonical wire representation of an otel_logs row.
+ * Log is a log record returned by the log endpoints.
  */
 export type Log = {
   id?: string | undefined;

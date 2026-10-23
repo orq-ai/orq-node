@@ -10,6 +10,7 @@ import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ModelCreateRequestBody = {
+  benchmarkModel?: string | undefined;
   configuration: { [k: string]: any };
   displayName: string;
   hasFunctions: boolean;
@@ -18,6 +19,9 @@ export type ModelCreateRequestBody = {
   metadata: components.ModelMetadata;
   modelDeveloper: string;
   modelFamily: string;
+  /**
+   * Immutable workspace-unique slug when configuration.model_id is supplied.
+   */
   modelId: string;
   modelType: string;
   outputCost: number;
@@ -43,6 +47,9 @@ export type ModelCreateResponseBody = {
   inputCost: number | null;
   inputCurrency: string;
   isActive: boolean;
+  /**
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
+   */
   legacyUuid?: string | undefined;
   metadata: components.ModelMetadata;
   modelDeveloper?: string | undefined;
@@ -62,6 +69,7 @@ export type ModelCreateResponseBody = {
 
 /** @internal */
 export type ModelCreateRequestBody$Outbound = {
+  benchmark_model?: string | undefined;
   configuration: { [k: string]: any };
   display_name: string;
   has_functions: boolean;
@@ -83,6 +91,7 @@ export const ModelCreateRequestBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ModelCreateRequestBody
 > = z.object({
+  benchmarkModel: z.string().optional(),
   configuration: z.record(z.any()),
   displayName: z.string(),
   hasFunctions: z.boolean(),
@@ -100,6 +109,7 @@ export const ModelCreateRequestBody$outboundSchema: z.ZodType<
   provider: z.string(),
 }).transform((v) => {
   return remap$(v, {
+    benchmarkModel: "benchmark_model",
     displayName: "display_name",
     hasFunctions: "has_functions",
     inputCost: "input_cost",

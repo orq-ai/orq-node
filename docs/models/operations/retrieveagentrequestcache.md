@@ -8,7 +8,6 @@ Cache configuration for the request.
 import { RetrieveAgentRequestCache } from "@orq-ai/node/models/operations";
 
 let value: RetrieveAgentRequestCache = {
-  ttl: 3600,
   type: "exact_match",
 };
 ```

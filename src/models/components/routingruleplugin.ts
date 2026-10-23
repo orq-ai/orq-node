@@ -7,6 +7,18 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import {
+  RoutingRuleModelsConfig,
+  RoutingRuleModelsConfig$inboundSchema,
+  RoutingRuleModelsConfig$Outbound,
+  RoutingRuleModelsConfig$outboundSchema,
+} from "./routingrulemodelsconfig.js";
+import {
+  SignalsCheck,
+  SignalsCheck$inboundSchema,
+  SignalsCheck$Outbound,
+  SignalsCheck$outboundSchema,
+} from "./signalscheck.js";
 
 export type RoutingRulePlugin = {
   /**
@@ -19,7 +31,7 @@ export type RoutingRulePlugin = {
    * @remarks
    *  pii-detection capabilities catalog when the rule is saved, not pinned
    *  here, so a language or region the detector gains becomes writable without
-   *  a proto change.
+   *  a future update.
    */
   language?: string | undefined;
   /**
@@ -37,6 +49,8 @@ export type RoutingRulePlugin = {
    * Per-entity-type confidence cutoff. Every key must also appear in entities.
    */
   entityThresholds?: { [k: string]: number } | undefined;
+  modelsConfig?: RoutingRuleModelsConfig | undefined;
+  checks?: { [k: string]: SignalsCheck } | undefined;
 };
 
 /** @internal */
@@ -53,10 +67,13 @@ export const RoutingRulePlugin$inboundSchema: z.ZodType<
   mask: z.array(z.string()).optional(),
   regions: z.array(z.string()).optional(),
   entity_thresholds: z.record(z.number()).optional(),
+  models_config: RoutingRuleModelsConfig$inboundSchema.optional(),
+  checks: z.record(SignalsCheck$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "on_failure": "onFailure",
     "entity_thresholds": "entityThresholds",
+    "models_config": "modelsConfig",
   });
 });
 /** @internal */
@@ -69,6 +86,8 @@ export type RoutingRulePlugin$Outbound = {
   mask?: Array<string> | undefined;
   regions?: Array<string> | undefined;
   entity_thresholds?: { [k: string]: number } | undefined;
+  models_config?: RoutingRuleModelsConfig$Outbound | undefined;
+  checks?: { [k: string]: SignalsCheck$Outbound } | undefined;
 };
 
 /** @internal */
@@ -85,10 +104,13 @@ export const RoutingRulePlugin$outboundSchema: z.ZodType<
   mask: z.array(z.string()).optional(),
   regions: z.array(z.string()).optional(),
   entityThresholds: z.record(z.number()).optional(),
+  modelsConfig: RoutingRuleModelsConfig$outboundSchema.optional(),
+  checks: z.record(SignalsCheck$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     onFailure: "on_failure",
     entityThresholds: "entity_thresholds",
+    modelsConfig: "models_config",
   });
 });
 

@@ -9,7 +9,29 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type AutoRouterV2EffortConfig = {
+  /**
+   * Whether the score at this effort is estimated.
+   */
+  aaIndexIsEstimated?: boolean | undefined;
+  /**
+   * Version of the intelligence index measured at this effort.
+   */
+  aaIndexVersion?: string | undefined;
+  /**
+   * Whether the model runs as a reasoning model at this effort.
+   */
+  aaIsReasoning?: boolean | undefined;
+  /**
+   * Reasoning effort label Artificial Analysis reports for this entry.
+   */
+  aaReasoningEffort?: string | undefined;
+  /**
+   * Artificial Analysis slug of the model at this effort.
+   */
   aaSlug?: string | undefined;
+  /**
+   * Intelligence index measured at this effort.
+   */
   intelligenceIndex: number;
 };
 
@@ -19,16 +41,28 @@ export const AutoRouterV2EffortConfig$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
+  aa_index_is_estimated: z.boolean().optional(),
+  aa_index_version: z.string().optional(),
+  aa_is_reasoning: z.boolean().optional(),
+  aa_reasoning_effort: z.string().optional(),
   aa_slug: z.string().optional(),
   intelligence_index: z.number(),
 }).transform((v) => {
   return remap$(v, {
+    "aa_index_is_estimated": "aaIndexIsEstimated",
+    "aa_index_version": "aaIndexVersion",
+    "aa_is_reasoning": "aaIsReasoning",
+    "aa_reasoning_effort": "aaReasoningEffort",
     "aa_slug": "aaSlug",
     "intelligence_index": "intelligenceIndex",
   });
 });
 /** @internal */
 export type AutoRouterV2EffortConfig$Outbound = {
+  aa_index_is_estimated?: boolean | undefined;
+  aa_index_version?: string | undefined;
+  aa_is_reasoning?: boolean | undefined;
+  aa_reasoning_effort?: string | undefined;
   aa_slug?: string | undefined;
   intelligence_index: number;
 };
@@ -39,10 +73,18 @@ export const AutoRouterV2EffortConfig$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AutoRouterV2EffortConfig
 > = z.object({
+  aaIndexIsEstimated: z.boolean().optional(),
+  aaIndexVersion: z.string().optional(),
+  aaIsReasoning: z.boolean().optional(),
+  aaReasoningEffort: z.string().optional(),
   aaSlug: z.string().optional(),
   intelligenceIndex: z.number(),
 }).transform((v) => {
   return remap$(v, {
+    aaIndexIsEstimated: "aa_index_is_estimated",
+    aaIndexVersion: "aa_index_version",
+    aaIsReasoning: "aa_is_reasoning",
+    aaReasoningEffort: "aa_reasoning_effort",
     aaSlug: "aa_slug",
     intelligenceIndex: "intelligence_index",
   });

@@ -3,10 +3,16 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../lib/primitives.js";
 import {
   SmartRouterProfile,
   SmartRouterProfile$outboundSchema,
 } from "./smartrouterprofile.js";
+import {
+  SmartRouterSessionAffinity,
+  SmartRouterSessionAffinity$Outbound,
+  SmartRouterSessionAffinity$outboundSchema,
+} from "./smartroutersessionaffinity.js";
 
 export type CreateSmartRouterRequest = {
   /**
@@ -18,6 +24,7 @@ export type CreateSmartRouterRequest = {
    */
   models: Array<string>;
   profile: SmartRouterProfile;
+  sessionAffinity?: SmartRouterSessionAffinity | undefined;
 };
 
 /** @internal */
@@ -25,6 +32,7 @@ export type CreateSmartRouterRequest$Outbound = {
   key: string;
   models: Array<string>;
   profile: string;
+  session_affinity?: SmartRouterSessionAffinity$Outbound | undefined;
 };
 
 /** @internal */
@@ -36,6 +44,11 @@ export const CreateSmartRouterRequest$outboundSchema: z.ZodType<
   key: z.string(),
   models: z.array(z.string()),
   profile: SmartRouterProfile$outboundSchema,
+  sessionAffinity: SmartRouterSessionAffinity$outboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    sessionAffinity: "session_affinity",
+  });
 });
 
 export function createSmartRouterRequestToJSON(

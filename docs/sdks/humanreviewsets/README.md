@@ -1,18 +1,23 @@
-# HumanReviewSets
+# ~~HumanReviewSets~~
+
+> [!WARNING]
+> This SDK is **DEPRECATED**
 
 ## Overview
 
 ### Available Operations
 
-* [list](#list) - Get all human review sets
-* [create](#create) - Create a human review set
-* [get](#get) - Get a human review set by ID
-* [update](#update) - Update a human review set
-* [delete](#delete) - Delete a human review set
+* [~~list~~](#list) - Get all human review sets :warning: **Deprecated**
+* [~~create~~](#create) - Create a human review set :warning: **Deprecated**
+* [~~get~~](#get) - Get a human review set by ID :warning: **Deprecated**
+* [~~update~~](#update) - Update a human review set :warning: **Deprecated**
+* [~~delete~~](#delete) - Delete a human review set :warning: **Deprecated**
 
-## list
+## ~~list~~
 
-Get all human review sets
+Deprecated: Human Review Sets are replaced by project-level human reviews (Annotations) and will be removed in release 4.18.
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 
@@ -75,13 +80,16 @@ run();
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type           | Status Code          | Content Type         |
+| -------------------- | -------------------- | -------------------- |
+| errors.ErrorResponse | 401                  | application/json     |
+| errors.APIError      | 4XX, 5XX             | \*/\*                |
 
-## create
+## ~~create~~
 
-Create a human review set
+Deprecated: Human Review Sets are replaced by project-level human reviews (Annotations) and will be removed in release 4.18.
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 
@@ -144,13 +152,16 @@ run();
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type           | Status Code          | Content Type         |
+| -------------------- | -------------------- | -------------------- |
+| errors.ErrorResponse | 401                  | application/json     |
+| errors.APIError      | 4XX, 5XX             | \*/\*                |
 
-## get
+## ~~get~~
 
-Get a human review set by ID
+Deprecated: Human Review Sets are replaced by project-level human reviews (Annotations) and will be removed in release 4.18.
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 
@@ -217,13 +228,16 @@ run();
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type           | Status Code          | Content Type         |
+| -------------------- | -------------------- | -------------------- |
+| errors.ErrorResponse | 401, 404             | application/json     |
+| errors.APIError      | 4XX, 5XX             | \*/\*                |
 
-## update
+## ~~update~~
 
-Update a human review set
+Deprecated: Human Review Sets are replaced by project-level human reviews (Annotations) and will be removed in release 4.18.
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 
@@ -290,13 +304,16 @@ run();
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type           | Status Code          | Content Type         |
+| -------------------- | -------------------- | -------------------- |
+| errors.ErrorResponse | 401                  | application/json     |
+| errors.APIError      | 4XX, 5XX             | \*/\*                |
 
-## delete
+## ~~delete~~
 
-Delete a human review set
+Deprecated: Human Review Sets are replaced by project-level human reviews (Annotations) and will be removed in release 4.18.
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 
@@ -363,6 +380,7 @@ run();
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type           | Status Code          | Content Type         |
+| -------------------- | -------------------- | -------------------- |
+| errors.ErrorResponse | 401                  | application/json     |
+| errors.APIError      | 4XX, 5XX             | \*/\*                |

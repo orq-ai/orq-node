@@ -5,11 +5,19 @@
 import * as z from "zod/v3";
 import { ClosedEnum } from "../../types/enums.js";
 
+export const Context = {
+  Auto: "auto",
+  CurrentTurn: "current_turn",
+  AllTurns: "all_turns",
+} as const;
+export type Context = ClosedEnum<typeof Context>;
+
 /**
  * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
  */
 export const Effort = {
   None: "none",
+  Instant: "instant",
   Minimal: "minimal",
   Low: "low",
   Medium: "medium",
@@ -36,6 +44,7 @@ export const Summary = {
 export type Summary = ClosedEnum<typeof Summary>;
 
 export type ReasoningParam = {
+  context?: Context | undefined;
   /**
    * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
    */
@@ -47,6 +56,10 @@ export type ReasoningParam = {
 };
 
 /** @internal */
+export const Context$outboundSchema: z.ZodNativeEnum<typeof Context> = z
+  .nativeEnum(Context);
+
+/** @internal */
 export const Effort$outboundSchema: z.ZodNativeEnum<typeof Effort> = z
   .nativeEnum(Effort);
 
@@ -56,6 +69,7 @@ export const Summary$outboundSchema: z.ZodNativeEnum<typeof Summary> = z
 
 /** @internal */
 export type ReasoningParam$Outbound = {
+  context?: string | undefined;
   effort?: string | undefined;
   summary?: string | undefined;
 };
@@ -66,6 +80,7 @@ export const ReasoningParam$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ReasoningParam
 > = z.object({
+  context: Context$outboundSchema.optional(),
   effort: Effort$outboundSchema.optional(),
   summary: Summary$outboundSchema.optional(),
 });

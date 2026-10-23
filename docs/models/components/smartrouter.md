@@ -10,7 +10,7 @@ let value: SmartRouter = {
   key: "<key>",
   modelRef: "<value>",
   models: [],
-  profile: "SMART_ROUTER_PROFILE_UNSPECIFIED",
+  profile: "SMART_ROUTER_PROFILE_QUALITY",
   enabled: true,
   createdAt: new Date("2025-05-21T03:19:23.758Z"),
   updatedAt: new Date("2024-11-21T02:46:58.049Z"),
@@ -29,3 +29,4 @@ let value: SmartRouter = {
 | `enabled`                                                                                                           | *boolean*                                                                                                           | :heavy_check_mark:                                                                                                  | Whether the Smart Router can be used in AI Gateway requests.                                                        |
 | `createdAt`                                                                                                         | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)                       | :heavy_check_mark:                                                                                                  | Date and time when the Smart Router was created.                                                                    |
 | `updatedAt`                                                                                                         | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)                       | :heavy_check_mark:                                                                                                  | Date and time when the Smart Router was last updated.                                                               |
+| `sessionAffinity`                                                                                                   | [components.SmartRouterSessionAffinity](../../models/components/smartroutersessionaffinity.md)                      | :heavy_minus_sign:                                                                                                  | N/A                                                                                                                 |

@@ -15,6 +15,9 @@ let value: GetMcpGatewayResponse = {
         toolExposure: {
           mode: "MCP_TOOL_EXPOSURE_MODE_ALL",
         },
+        skillExposure: {
+          mode: "MCP_TOOL_EXPOSURE_MODE_ALL",
+        },
       },
     ],
   },
