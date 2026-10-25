@@ -8,8 +8,17 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type AutoRouterV2CreatorConfig = {
+  /**
+   * Artificial Analysis identifier of the creator.
+   */
   id: string;
+  /**
+   * Creator name reported by Artificial Analysis.
+   */
   name: string;
+  /**
+   * Artificial Analysis slug of the creator.
+   */
   slug?: string | undefined;
 };
 

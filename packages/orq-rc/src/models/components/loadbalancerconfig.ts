@@ -3,16 +3,38 @@
  */
 
 import * as z from "zod/v3";
+import { ClosedEnum } from "../../types/enums.js";
 import {
   LoadBalancerModelConfig,
   LoadBalancerModelConfig$Outbound,
   LoadBalancerModelConfig$outboundSchema,
 } from "./loadbalancermodelconfig.js";
 
+/**
+ * Strategy used to pick a model: weight_based splits traffic by weight, round_robin rotates through the list, latency_based favors the fastest model. An unrecognized value falls back to weight_based.
+ */
+export const LoadBalancerConfigType = {
+  WeightBased: "weight_based",
+  RoundRobin: "round_robin",
+  LatencyBased: "latency_based",
+} as const;
+/**
+ * Strategy used to pick a model: weight_based splits traffic by weight, round_robin rotates through the list, latency_based favors the fastest model. An unrecognized value falls back to weight_based.
+ */
+export type LoadBalancerConfigType = ClosedEnum<typeof LoadBalancerConfigType>;
+
 export type LoadBalancerConfig = {
   models: Array<LoadBalancerModelConfig> | null;
-  type: string;
+  /**
+   * Strategy used to pick a model: weight_based splits traffic by weight, round_robin rotates through the list, latency_based favors the fastest model. An unrecognized value falls back to weight_based.
+   */
+  type: LoadBalancerConfigType;
 };
+
+/** @internal */
+export const LoadBalancerConfigType$outboundSchema: z.ZodNativeEnum<
+  typeof LoadBalancerConfigType
+> = z.nativeEnum(LoadBalancerConfigType);
 
 /** @internal */
 export type LoadBalancerConfig$Outbound = {
@@ -27,7 +49,7 @@ export const LoadBalancerConfig$outboundSchema: z.ZodType<
   LoadBalancerConfig
 > = z.object({
   models: z.nullable(z.array(LoadBalancerModelConfig$outboundSchema)),
-  type: z.string(),
+  type: LoadBalancerConfigType$outboundSchema,
 });
 
 export function loadBalancerConfigToJSON(

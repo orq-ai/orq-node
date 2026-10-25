@@ -27,7 +27,7 @@ let value: DeploymentsData = {
     model: "LeBaron",
     modelType: "ocr",
     modelParameters: {},
-    provider: "huggingface",
+    provider: "togetherai",
     messages: [],
   },
   version: "<value>",

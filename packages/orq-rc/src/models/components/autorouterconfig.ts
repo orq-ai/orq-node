@@ -21,14 +21,35 @@ import {
 } from "./sessionaffinityconfig.js";
 
 export type AutoRouterConfig = {
+  /**
+   * Catalog model whose benchmarks this private model copies to join Smart Router pools.
+   */
   benchmarkModel?: string | undefined;
+  /**
+   * Model used when the router classifies a request as simple.
+   */
   economicalModel?: string | undefined;
+  /**
+   * Identifier of the Smart Router configuration.
+   */
   id?: string | undefined;
+  /**
+   * Models the router chooses from, written as provider/model_id.
+   */
   models?: Array<string> | null | undefined;
+  /**
+   * Routing preference: quality, balanced, or cost.
+   */
   profile?: string | undefined;
   sessionAffinity?: SessionAffinityConfig | undefined;
+  /**
+   * Model used when the router classifies a request as complex.
+   */
   strongModel?: string | undefined;
   v2?: AutoRouterV2Config | undefined;
+  /**
+   * Version of the Smart Router configuration format.
+   */
   version?: string | undefined;
 };
 

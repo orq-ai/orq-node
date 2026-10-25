@@ -9,11 +9,29 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type AutoRouterV2EffortConfig = {
+  /**
+   * Whether the score at this effort is estimated.
+   */
   aaIndexIsEstimated?: boolean | undefined;
+  /**
+   * Version of the intelligence index measured at this effort.
+   */
   aaIndexVersion?: string | undefined;
+  /**
+   * Whether the model runs as a reasoning model at this effort.
+   */
   aaIsReasoning?: boolean | undefined;
+  /**
+   * Reasoning effort label Artificial Analysis reports for this entry.
+   */
   aaReasoningEffort?: string | undefined;
+  /**
+   * Artificial Analysis slug of the model at this effort.
+   */
   aaSlug?: string | undefined;
+  /**
+   * Intelligence index measured at this effort.
+   */
   intelligenceIndex: number;
 };
 

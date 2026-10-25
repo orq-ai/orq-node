@@ -9,6 +9,7 @@ export const McpConnectionType = {
   McpConnectionTypeHttp: "MCP_CONNECTION_TYPE_HTTP",
   McpConnectionTypeSse: "MCP_CONNECTION_TYPE_SSE",
   McpConnectionTypeStdio: "MCP_CONNECTION_TYPE_STDIO",
+  McpConnectionTypeOpenapi: "MCP_CONNECTION_TYPE_OPENAPI",
 } as const;
 export type McpConnectionType = ClosedEnum<typeof McpConnectionType>;
 

@@ -19,6 +19,11 @@ import {
   McpGatewayServerLink$outboundSchema,
 } from "./mcpgatewayserverlink.js";
 import {
+  McpIcon,
+  McpIcon$Outbound,
+  McpIcon$outboundSchema,
+} from "./mcpicon.js";
+import {
   McpToolNaming,
   McpToolNaming$outboundSchema,
 } from "./mcptoolnaming.js";
@@ -71,6 +76,18 @@ export type UpdateMcpGatewayRequest = {
    * Set true to stop serving every workspace skill; cannot be combined with `skill_ids`.
    */
   clearSkillIds?: boolean | undefined;
+  /**
+   * Replaces the advertised icons when nonempty or when replace_icons is true.
+   */
+  icons?: Array<McpIcon> | undefined;
+  /**
+   * Set true with an empty icons list to restore default ORQ branding.
+   */
+  replaceIcons?: boolean | undefined;
+  /**
+   * Empty restores the default ORQ documentation website.
+   */
+  websiteUrl?: string | undefined;
 };
 
 /** @internal */
@@ -86,6 +103,9 @@ export type UpdateMcpGatewayRequest$Outbound = {
   plugins?: Array<McpGatewayPlugin$Outbound> | undefined;
   skill_ids?: Array<string> | undefined;
   clear_skill_ids?: boolean | undefined;
+  icons?: Array<McpIcon$Outbound> | undefined;
+  replace_icons?: boolean | undefined;
+  website_url?: string | undefined;
 };
 
 /** @internal */
@@ -105,6 +125,9 @@ export const UpdateMcpGatewayRequest$outboundSchema: z.ZodType<
   plugins: z.array(McpGatewayPlugin$outboundSchema).optional(),
   skillIds: z.array(z.string()).optional(),
   clearSkillIds: z.boolean().optional(),
+  icons: z.array(McpIcon$outboundSchema).optional(),
+  replaceIcons: z.boolean().optional(),
+  websiteUrl: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     displayName: "display_name",
@@ -113,6 +136,8 @@ export const UpdateMcpGatewayRequest$outboundSchema: z.ZodType<
     clearServerLinks: "clear_server_links",
     skillIds: "skill_ids",
     clearSkillIds: "clear_skill_ids",
+    replaceIcons: "replace_icons",
+    websiteUrl: "website_url",
   });
 });
 

@@ -12,6 +12,11 @@ import {
   McpAuthConfigOutput$inboundSchema,
 } from "./mcpauthconfigoutput.js";
 import { McpConnection, McpConnection$inboundSchema } from "./mcpconnection.js";
+import { McpIcon, McpIcon$inboundSchema } from "./mcpicon.js";
+import {
+  McpOpenApiConfig,
+  McpOpenApiConfig$inboundSchema,
+} from "./mcpopenapiconfig.js";
 import { McpSkill, McpSkill$inboundSchema } from "./mcpskill.js";
 import { McpSyncState, McpSyncState$inboundSchema } from "./mcpsyncstate.js";
 import { McpTool, McpTool$inboundSchema } from "./mcptool.js";
@@ -78,6 +83,18 @@ export type McpServer = {
    * Skills the upstream publishes through the MCP Skills extension, discovered by the last successful `:sync`.
    */
   skills?: Array<McpSkill> | undefined;
+  /**
+   * Source of the tools of an `MCP_CONNECTION_TYPE_OPENAPI` server.
+   */
+  openapi?: McpOpenApiConfig | undefined;
+  /**
+   * Icons advertised by the upstream server during discovery.
+   */
+  icons?: Array<McpIcon> | undefined;
+  /**
+   * Website advertised by the upstream server during discovery.
+   */
+  websiteUrl?: string | undefined;
 };
 
 /** @internal */
@@ -100,12 +117,16 @@ export const McpServer$inboundSchema: z.ZodType<
   sharing: Sharing$inboundSchema.optional(),
   created_by_id: z.string().optional(),
   skills: z.array(McpSkill$inboundSchema).optional(),
+  openapi: McpOpenApiConfig$inboundSchema.optional(),
+  icons: z.array(McpIcon$inboundSchema).optional(),
+  website_url: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "display_name": "displayName",
     "default_tool_exposure": "defaultToolExposure",
     "sync_state": "syncState",
     "created_by_id": "createdById",
+    "website_url": "websiteUrl",
   });
 });
 

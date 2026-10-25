@@ -446,6 +446,7 @@ export const ListDeploymentVersionsProvider = {
   Scaleway: "scaleway",
   Hcompany: "hcompany",
   Inception: "inception",
+  Munito: "munito",
   Inceptron: "inceptron",
   Wafer: "wafer",
   Poolside: "poolside",
@@ -1048,6 +1049,7 @@ export const ListDeploymentVersionsDeploymentsProvider = {
   Scaleway: "scaleway",
   Hcompany: "hcompany",
   Inception: "inception",
+  Munito: "munito",
   Inceptron: "inceptron",
   Wafer: "wafer",
   Poolside: "poolside",
@@ -2527,7 +2529,7 @@ export const ListDeploymentVersionsKnowledgeBases$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  id: z.string().default("01M5K1VK0T4MAFCCEM2YPZJH9G"),
+  id: z.string().default("01M5SNB5PJCG7MXAR036DDWCEC"),
   knowledge_id: z.string(),
   configuration: z.union([
     z.lazy(() => KnowledgeBaseLastUserMessage$inboundSchema),

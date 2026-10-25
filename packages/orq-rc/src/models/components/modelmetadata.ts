@@ -155,6 +155,7 @@ export type ModelMetadata = {
   supportsThinkingLevelMinimal?: boolean | undefined;
   supportsToolCalling?: boolean | undefined;
   supportsToolChoice?: boolean | undefined;
+  supportsTranscription?: boolean | undefined;
   supportsUrlContext?: boolean | undefined;
   supportsUrlResponseFormat?: boolean | undefined;
   supportsVideoInput?: boolean | undefined;
@@ -295,6 +296,7 @@ export const ModelMetadata$inboundSchema: z.ZodType<
   supports_thinking_level_minimal: z.boolean().optional(),
   supports_tool_calling: z.boolean().optional(),
   supports_tool_choice: z.boolean().optional(),
+  supports_transcription: z.boolean().optional(),
   supports_url_context: z.boolean().optional(),
   supports_url_response_format: z.boolean().optional(),
   supports_video_input: z.boolean().optional(),
@@ -426,6 +428,7 @@ export const ModelMetadata$inboundSchema: z.ZodType<
     "supports_thinking_level_minimal": "supportsThinkingLevelMinimal",
     "supports_tool_calling": "supportsToolCalling",
     "supports_tool_choice": "supportsToolChoice",
+    "supports_transcription": "supportsTranscription",
     "supports_url_context": "supportsUrlContext",
     "supports_url_response_format": "supportsUrlResponseFormat",
     "supports_video_input": "supportsVideoInput",
@@ -563,6 +566,7 @@ export type ModelMetadata$Outbound = {
   supports_thinking_level_minimal?: boolean | undefined;
   supports_tool_calling?: boolean | undefined;
   supports_tool_choice?: boolean | undefined;
+  supports_transcription?: boolean | undefined;
   supports_url_context?: boolean | undefined;
   supports_url_response_format?: boolean | undefined;
   supports_video_input?: boolean | undefined;
@@ -703,6 +707,7 @@ export const ModelMetadata$outboundSchema: z.ZodType<
   supportsThinkingLevelMinimal: z.boolean().optional(),
   supportsToolCalling: z.boolean().optional(),
   supportsToolChoice: z.boolean().optional(),
+  supportsTranscription: z.boolean().optional(),
   supportsUrlContext: z.boolean().optional(),
   supportsUrlResponseFormat: z.boolean().optional(),
   supportsVideoInput: z.boolean().optional(),
@@ -834,6 +839,7 @@ export const ModelMetadata$outboundSchema: z.ZodType<
     supportsThinkingLevelMinimal: "supports_thinking_level_minimal",
     supportsToolCalling: "supports_tool_calling",
     supportsToolChoice: "supports_tool_choice",
+    supportsTranscription: "supports_transcription",
     supportsUrlContext: "supports_url_context",
     supportsUrlResponseFormat: "supports_url_response_format",
     supportsVideoInput: "supports_video_input",

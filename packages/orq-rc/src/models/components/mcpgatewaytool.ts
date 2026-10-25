@@ -7,6 +7,7 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import { McpIcon, McpIcon$inboundSchema } from "./mcpicon.js";
 import {
   McpToolAnnotations,
   McpToolAnnotations$inboundSchema,
@@ -54,6 +55,10 @@ export type McpGatewayTool = {
    * Behaviour hints claimed by the upstream server.
    */
   annotations?: McpToolAnnotations | undefined;
+  /**
+   * Icons advertised by the upstream tool.
+   */
+  icons?: Array<McpIcon> | undefined;
 };
 
 /** @internal */
@@ -88,6 +93,7 @@ export const McpGatewayTool$inboundSchema: z.ZodType<
   upstream_tool_name: z.string().optional(),
   title: z.string().optional(),
   annotations: McpToolAnnotations$inboundSchema.optional(),
+  icons: z.array(McpIcon$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "server_key": "serverKey",

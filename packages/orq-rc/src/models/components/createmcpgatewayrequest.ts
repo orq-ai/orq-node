@@ -19,6 +19,11 @@ import {
   McpGatewayServerLink$outboundSchema,
 } from "./mcpgatewayserverlink.js";
 import {
+  McpIcon,
+  McpIcon$Outbound,
+  McpIcon$outboundSchema,
+} from "./mcpicon.js";
+import {
   McpToolNaming,
   McpToolNaming$outboundSchema,
 } from "./mcptoolnaming.js";
@@ -59,6 +64,14 @@ export type CreateMcpGatewayRequest = {
    * Workspace skills this gateway serves to MCP clients through the MCP Skills extension.
    */
   skillIds?: Array<string> | undefined;
+  /**
+   * Icons advertised to MCP clients; defaults to ORQ branding when empty.
+   */
+  icons?: Array<McpIcon> | undefined;
+  /**
+   * Website advertised to MCP clients; defaults to ORQ documentation when empty.
+   */
+  websiteUrl?: string | undefined;
 };
 
 /** @internal */
@@ -72,6 +85,8 @@ export type CreateMcpGatewayRequest$Outbound = {
   sharing?: Sharing$Outbound | undefined;
   plugins?: Array<McpGatewayPlugin$Outbound> | undefined;
   skill_ids?: Array<string> | undefined;
+  icons?: Array<McpIcon$Outbound> | undefined;
+  website_url?: string | undefined;
 };
 
 /** @internal */
@@ -89,12 +104,15 @@ export const CreateMcpGatewayRequest$outboundSchema: z.ZodType<
   sharing: Sharing$outboundSchema.optional(),
   plugins: z.array(McpGatewayPlugin$outboundSchema).optional(),
   skillIds: z.array(z.string()).optional(),
+  icons: z.array(McpIcon$outboundSchema).optional(),
+  websiteUrl: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     displayName: "display_name",
     serverLinks: "server_links",
     toolNaming: "tool_naming",
     skillIds: "skill_ids",
+    websiteUrl: "website_url",
   });
 });
 

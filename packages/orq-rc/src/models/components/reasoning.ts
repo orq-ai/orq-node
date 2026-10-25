@@ -8,6 +8,13 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+export const ReasoningContext = {
+  Auto: "auto",
+  CurrentTurn: "current_turn",
+  AllTurns: "all_turns",
+} as const;
+export type ReasoningContext = ClosedEnum<typeof ReasoningContext>;
+
 /**
  * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
  */
@@ -40,6 +47,7 @@ export const ReasoningSummary = {
 export type ReasoningSummary = ClosedEnum<typeof ReasoningSummary>;
 
 export type Reasoning = {
+  context?: ReasoningContext | undefined;
   /**
    * Constrains effort on reasoning for reasoning models. Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
    */
@@ -49,6 +57,11 @@ export type Reasoning = {
    */
   summary?: ReasoningSummary | null | undefined;
 };
+
+/** @internal */
+export const ReasoningContext$inboundSchema: z.ZodNativeEnum<
+  typeof ReasoningContext
+> = z.nativeEnum(ReasoningContext);
 
 /** @internal */
 export const ReasoningEffort1$inboundSchema: z.ZodNativeEnum<
@@ -66,6 +79,7 @@ export const Reasoning$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
+  context: ReasoningContext$inboundSchema.optional(),
   effort: ReasoningEffort1$inboundSchema.optional(),
   summary: z.nullable(ReasoningSummary$inboundSchema).optional(),
 });

@@ -22,23 +22,77 @@ import {
 
 export type AutoRouterV2Config = {
   aaCreator?: AutoRouterV2CreatorConfig | undefined;
+  /**
+   * Benchmark scores reported by Artificial Analysis, keyed by evaluation.
+   */
   aaEvaluations?: { [k: string]: number | null } | undefined;
+  /**
+   * Whether the intelligence index is estimated rather than measured.
+   */
   aaIndexIsEstimated?: boolean | undefined;
+  /**
+   * Version of the intelligence index the score came from.
+   */
   aaIndexVersion?: string | undefined;
+  /**
+   * Whether Artificial Analysis classifies the model as a reasoning model.
+   */
   aaIsReasoning?: boolean | undefined;
+  /**
+   * Median output tokens per second measured by Artificial Analysis.
+   */
   aaMedianOutputTokensPerSecond?: number | undefined;
+  /**
+   * Median time to the first answer token measured by Artificial Analysis.
+   */
   aaMedianTimeToFirstAnswerToken?: number | undefined;
+  /**
+   * Median time to first token in seconds measured by Artificial Analysis.
+   */
   aaMedianTimeToFirstTokenSeconds?: number | undefined;
+  /**
+   * Artificial Analysis model identifier.
+   */
   aaModelId?: string | undefined;
+  /**
+   * Model name reported by Artificial Analysis.
+   */
   aaName?: string | undefined;
+  /**
+   * Token prices reported by Artificial Analysis, keyed by price type.
+   */
   aaPricing?: { [k: string]: number | null } | undefined;
+  /**
+   * Reasoning effort the benchmarked score applies to.
+   */
   aaReasoningEffort?: string | undefined;
+  /**
+   * Model release date reported by Artificial Analysis.
+   */
   aaReleaseDate?: string | undefined;
+  /**
+   * Artificial Analysis slug of the model.
+   */
   aaSlug?: string | undefined;
+  /**
+   * Reasoning effort applied when a request does not set one.
+   */
   defaultEffort?: string | undefined;
+  /**
+   * Whether the default effort has a benchmarked score.
+   */
   defaultEffortScored?: boolean | undefined;
+  /**
+   * Artificial Analysis intelligence index the router ranks the model by.
+   */
   intelligenceIndex: number;
+  /**
+   * Blended price per million tokens, in USD.
+   */
   price: number;
+  /**
+   * Benchmark data for each reasoning effort the model exposes.
+   */
   reasoningEfforts?: { [k: string]: AutoRouterV2EffortConfig } | undefined;
 };
 

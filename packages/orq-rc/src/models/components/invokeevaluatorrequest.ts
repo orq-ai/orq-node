@@ -8,6 +8,16 @@ import {
   EvaluationContext$Outbound,
   EvaluationContext$outboundSchema,
 } from "./evaluationcontext.js";
+import {
+  EvaluatorCallTimeout,
+  EvaluatorCallTimeout$Outbound,
+  EvaluatorCallTimeout$outboundSchema,
+} from "./evaluatorcalltimeout.js";
+import {
+  EvaluatorRetryConfig,
+  EvaluatorRetryConfig$Outbound,
+  EvaluatorRetryConfig$outboundSchema,
+} from "./evaluatorretryconfig.js";
 
 /**
  * Accepts two shapes. `context` names its fields after the template variables
@@ -71,6 +81,11 @@ export type InvokeEvaluatorRequest = {
    *  `context.variables`.
    */
   variables?: { [k: string]: any } | undefined;
+  /**
+   * Overrides llm_eval provider retries for this invocation, including every jury judge.
+   */
+  retry?: EvaluatorRetryConfig | undefined;
+  timeout?: EvaluatorCallTimeout | undefined;
 };
 
 /** @internal */
@@ -83,6 +98,8 @@ export type InvokeEvaluatorRequest$Outbound = {
   retrievals?: Array<string> | undefined;
   messages?: Array<{ [k: string]: any }> | undefined;
   variables?: { [k: string]: any } | undefined;
+  retry?: EvaluatorRetryConfig$Outbound | undefined;
+  timeout?: EvaluatorCallTimeout$Outbound | undefined;
 };
 
 /** @internal */
@@ -99,6 +116,8 @@ export const InvokeEvaluatorRequest$outboundSchema: z.ZodType<
   retrievals: z.array(z.string()).optional(),
   messages: z.array(z.record(z.any())).optional(),
   variables: z.record(z.any()).optional(),
+  retry: EvaluatorRetryConfig$outboundSchema.optional(),
+  timeout: EvaluatorCallTimeout$outboundSchema.optional(),
 });
 
 export function invokeEvaluatorRequestToJSON(

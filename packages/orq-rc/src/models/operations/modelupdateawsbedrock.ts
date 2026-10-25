@@ -12,7 +12,13 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 export type ModelUpdateAwsBedrockRequestBody = {
   assumeRoleArn?: string | undefined;
   assumeRoleExternalId?: string | undefined;
+  /**
+   * Smart Router catalog identifier of the model. Set it together with autorouter_version to make the private model eligible for Smart Router pools.
+   */
   autorouterId?: string | undefined;
+  /**
+   * Version of the Smart Router catalog entry, set with autorouter_id.
+   */
   autorouterVersion?: string | undefined;
   benchmarkModel?: string | undefined;
   cacheReadCost?: number | undefined;

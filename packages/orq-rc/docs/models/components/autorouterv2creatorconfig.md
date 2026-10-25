@@ -13,8 +13,8 @@ let value: AutoRouterV2CreatorConfig = {
 
 ## Fields
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `id`               | *string*           | :heavy_check_mark: | N/A                |
-| `name`             | *string*           | :heavy_check_mark: | N/A                |
-| `slug`             | *string*           | :heavy_minus_sign: | N/A                |
+| Field                                          | Type                                           | Required                                       | Description                                    |
+| ---------------------------------------------- | ---------------------------------------------- | ---------------------------------------------- | ---------------------------------------------- |
+| `id`                                           | *string*                                       | :heavy_check_mark:                             | Artificial Analysis identifier of the creator. |
+| `name`                                         | *string*                                       | :heavy_check_mark:                             | Creator name reported by Artificial Analysis.  |
+| `slug`                                         | *string*                                       | :heavy_minus_sign:                             | Artificial Analysis slug of the creator.       |

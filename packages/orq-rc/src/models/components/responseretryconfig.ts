@@ -7,19 +7,19 @@ import { remap as remap$ } from "../../lib/primitives.js";
 
 export type ResponseRetryConfig = {
   /**
-   * Number of retries (1-5).
+   * Number of retries per model after the initial attempt (0-5). Set 0 to disable retries. When retry is omitted, the gateway retries twice.
    */
   count: number;
   /**
-   * HTTP status codes that trigger a retry (e.g. [429, 500, 502, 503]).
+   * HTTP status codes that trigger a retry. Defaults to [408, 429, 500, 502, 503, 504, 529].
    */
-  onCodes: Array<number> | null;
+  onCodes?: Array<number> | null | undefined;
 };
 
 /** @internal */
 export type ResponseRetryConfig$Outbound = {
   count: number;
-  on_codes: Array<number> | null;
+  on_codes?: Array<number> | null | undefined;
 };
 
 /** @internal */
@@ -29,7 +29,7 @@ export const ResponseRetryConfig$outboundSchema: z.ZodType<
   ResponseRetryConfig
 > = z.object({
   count: z.number().int(),
-  onCodes: z.nullable(z.array(z.number().int())),
+  onCodes: z.nullable(z.array(z.number().int())).optional(),
 }).transform((v) => {
   return remap$(v, {
     onCodes: "on_codes",
