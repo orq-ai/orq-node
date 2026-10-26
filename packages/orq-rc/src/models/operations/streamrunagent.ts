@@ -1747,7 +1747,7 @@ export type StreamRunAgentSettings = {
    */
   toolApprovalRequired?: StreamRunAgentToolApprovalRequired | undefined;
   /**
-   * Maximum iterations(llm calls) before the agent will stop executing.
+   * Maximum iterations (LLM calls) before the agent will stop executing.
    */
   maxIterations?: number | undefined;
   /**
@@ -3965,7 +3965,7 @@ export const AgentToolInputRunTools$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AgentToolInputRunTools
 > = z.object({
-  id: z.string().default("01M5SNB5SBXM19CG74EWTD6GF1"),
+  id: z.string().default("01M5VC3K8D2S06JTRQAR065MXK"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() =>

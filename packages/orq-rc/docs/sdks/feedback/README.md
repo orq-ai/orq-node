@@ -4,11 +4,13 @@
 
 ### Available Operations
 
-* [create](#create)
-* [remove](#remove)
+* [create](#create) - Submit feedback
+* [remove](#remove) - Remove feedback
 * [submit](#submit) - Submit feedback
 
 ## create
+
+Submit feedback
 
 ### Example Usage
 
@@ -78,6 +80,8 @@ run();
 | errors.APIError                           | 4XX, 5XX                                  | \*/\*                                     |
 
 ## remove
+
+Remove feedback
 
 ### Example Usage
 

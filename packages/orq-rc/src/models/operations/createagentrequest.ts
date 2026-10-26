@@ -1063,7 +1063,7 @@ export type CreateAgentRequestGuardrails = {
  */
 export type Settings = {
   /**
-   * Maximum iterations(llm calls) before the agent will stop executing.
+   * Maximum iterations (LLM calls) before the agent will stop executing.
    */
   maxIterations?: number | undefined;
   /**
@@ -1400,7 +1400,7 @@ export type CreateAgentRequestAgentsGuardrails = {
 
 export type CreateAgentRequestSettings = {
   /**
-   * Maximum iterations(llm calls) before the agent will stop executing.
+   * Maximum iterations (LLM calls) before the agent will stop executing.
    */
   maxIterations: number;
   /**

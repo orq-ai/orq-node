@@ -11,6 +11,9 @@ import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
 export class Feedback extends ClientSDK {
+  /**
+   * Submit feedback
+   */
   async create(
     request?: operations.PostV2FeedbackRequestBody | undefined,
     options?: RequestOptions,
@@ -22,6 +25,9 @@ export class Feedback extends ClientSDK {
     ));
   }
 
+  /**
+   * Remove feedback
+   */
   async remove(
     request?: operations.PostV2FeedbackRemoveRequestBody | undefined,
     options?: RequestOptions,

@@ -668,7 +668,7 @@ export type DeploymentsData = {
   description: string;
   promptConfig: DeploymentsPromptConfig;
   /**
-   * THe version of the deployment
+   * The version of the deployment
    */
   version: string;
 };

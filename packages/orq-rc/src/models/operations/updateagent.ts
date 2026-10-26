@@ -1428,7 +1428,7 @@ export type UpdateAgentAgentsGuardrails = {
 
 export type UpdateAgentAgentsSettings = {
   /**
-   * Maximum iterations(llm calls) before the agent will stop executing.
+   * Maximum iterations (LLM calls) before the agent will stop executing.
    */
   maxIterations: number;
   /**

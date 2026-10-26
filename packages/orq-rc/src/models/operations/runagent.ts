@@ -1705,7 +1705,7 @@ export type RunAgentSettings = {
    */
   toolApprovalRequired?: RunAgentToolApprovalRequired | undefined;
   /**
-   * Maximum iterations(llm calls) before the agent will stop executing.
+   * Maximum iterations (LLM calls) before the agent will stop executing.
    */
   maxIterations?: number | undefined;
   /**
@@ -3906,7 +3906,7 @@ export const Tools$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Tools
 > = z.object({
-  id: z.string().default("01M5SNB5RTYFX34S77FE23QYCJ"),
+  id: z.string().default("01M5VC3K7ZDWEX9XKF2R3YP7VQ"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() => AgentToolInputRunSchema$outboundSchema),

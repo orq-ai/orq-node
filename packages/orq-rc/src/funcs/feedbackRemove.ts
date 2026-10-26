@@ -26,6 +26,9 @@ import * as operations from "../models/operations/index.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
+/**
+ * Remove feedback
+ */
 export function feedbackRemove(
   client: OrqCore,
   request?: operations.PostV2FeedbackRemoveRequestBody | undefined,

@@ -341,8 +341,8 @@ run();
 
 ### [Feedback](docs/sdks/feedback/README.md)
 
-* [create](docs/sdks/feedback/README.md#create)
-* [remove](docs/sdks/feedback/README.md#remove)
+* [create](docs/sdks/feedback/README.md#create) - Submit feedback
+* [remove](docs/sdks/feedback/README.md#remove) - Remove feedback
 * [submit](docs/sdks/feedback/README.md#submit) - Submit feedback
 
 ### [Files](docs/sdks/files/README.md)
@@ -876,8 +876,8 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`evalsInvoke`](docs/sdks/evals/README.md#invoke) - Invoke a Custom Evaluator
 - [`evalsListVersions`](docs/sdks/evals/README.md#listversions) - List evaluator versions
 - [`evalsUpdate`](docs/sdks/evals/README.md#update) - Update an Evaluator
-- [`feedbackCreate`](docs/sdks/feedback/README.md#create)
-- [`feedbackRemove`](docs/sdks/feedback/README.md#remove)
+- [`feedbackCreate`](docs/sdks/feedback/README.md#create) - Submit feedback
+- [`feedbackRemove`](docs/sdks/feedback/README.md#remove) - Remove feedback
 - [`feedbackSubmit`](docs/sdks/feedback/README.md#submit) - Submit feedback
 - [`filesCreate`](docs/sdks/files/README.md#create) - Upload a file
 - [`filesDelete`](docs/sdks/files/README.md#delete) - Delete a file

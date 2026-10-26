@@ -225,7 +225,7 @@ export type RetrieveAgentRequestGuardrails = {
 
 export type RetrieveAgentRequestSettings = {
   /**
-   * Maximum iterations(llm calls) before the agent will stop executing.
+   * Maximum iterations (LLM calls) before the agent will stop executing.
    */
   maxIterations: number;
   /**
