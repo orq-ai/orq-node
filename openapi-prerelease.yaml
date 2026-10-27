@@ -2591,7 +2591,7 @@ components:
           properties:
             _id:
               type: "string"
-              default: "reasoning_01m5z3t7828arejtvfzyvfj8wy"
+              default: "reasoning_01m5zkhbcza739m8kwq2t8f9em"
               description: "Unique identifier for the part. Format: reasoning_{ulid} (e.g., reasoning_01hxyz...)"
               example: "reasoning_01hxyz123abc"
             kind:
@@ -15906,7 +15906,7 @@ components:
       type: "object"
       properties:
         type:
-          description: "Credential scheme: NONE, STATIC_HEADERS, OAUTH_CLIENT_CREDENTIALS or ENTERPRISE_MANAGED. Create, update and Test connection reject PER_USER_OAUTH."
+          description: "Credential scheme used to authenticate to this upstream server."
           $ref: "#/components/schemas/McpAuthType"
         static_headers:
           type: "array"
@@ -15916,11 +15916,12 @@ components:
         oauth:
           allOf:
             - $ref: "#/components/schemas/McpOAuthConfig"
-          description: "OAuth client credentials the gateway presents to the upstream authorization server; set when type is OAUTH_CLIENT_CREDENTIALS."
+          description: "OAuth client for the upstream authorization server; set when type is OAUTH_CLIENT_CREDENTIALS, PER_USER_OAUTH or ENTERPRISE_MANAGED."
         enterprise:
+          deprecated: true
           allOf:
             - $ref: "#/components/schemas/McpEnterpriseAuthConfig"
-          description: "Client for the upstream authorization server; set when type is ENTERPRISE_MANAGED."
+          description: "Superseded by `oauth` for ENTERPRISE_MANAGED; accepted on write and mirrored on read."
     McpOpenApiConfig:
       type: "object"
       properties:
@@ -16095,7 +16096,7 @@ components:
           description: "OAuth client secret; accepted on write and never returned."
         token_url:
           type: "string"
-          description: "Token endpoint the gateway calls to mint upstream access tokens."
+          description: "Token endpoint for OAUTH_CLIENT_CREDENTIALS; PER_USER_OAUTH and ENTERPRISE_MANAGED discover it from `resource`."
         scopes:
           type: "array"
           items:
@@ -16104,7 +16105,15 @@ components:
         masked_value:
           type: "string"
           description: "Redacted preview of `client_secret`, returned in its place."
+        issuer:
+          type: "string"
+          description: "Exact authorization-server issuer; pins discovery for PER_USER_OAUTH and ENTERPRISE_MANAGED."
+        resource:
+          type: "string"
+          description: "Protected resource identifier; defaults to the upstream connection URL."
+      description: "McpOAuthConfig is the OAuth client orq presents to the upstream authorization\n server for OAUTH_CLIENT_CREDENTIALS, PER_USER_OAUTH and ENTERPRISE_MANAGED."
     McpEnterpriseAuthConfig:
+      deprecated: true
       type: "object"
       properties:
         resource:
@@ -16125,7 +16134,7 @@ components:
           items:
             type: "string"
           description: "Scopes requested when redeeming the identity assertion grant."
-      description: "McpEnterpriseAuthConfig is the client orq registered at the upstream's authorization\n server for enterprise-managed authorization (ID-JAG). Access policy lives in the\n workspace's SSO identity provider; users must sign in through SSO to use the server."
+      description: "McpEnterpriseAuthConfig is superseded by McpOAuthConfig: ENTERPRISE_MANAGED servers\n read and write `oauth`. It is still accepted on write and mirrored on read."
     SyncStatus:
       type: "string"
       enum:
@@ -18449,300 +18458,6 @@ components:
         key:
           type: "string"
         direction:
-          type: "string"
-    ListWikisResponse:
-      type: "object"
-      properties:
-        data:
-          type: "array"
-          items:
-            $ref: "#/components/schemas/Wiki"
-        has_more:
-          type: "boolean"
-    CreateWikiRequest:
-      type: "object"
-      properties:
-        display_name:
-          type: "string"
-        repository:
-          $ref: "#/components/schemas/WikiRepository"
-        branch:
-          type: "string"
-        scm_connection_id:
-          type: "string"
-        settings:
-          $ref: "#/components/schemas/WikiSettings"
-        import_existing:
-          type: "boolean"
-        factory_id:
-          type: "string"
-    CreateWikiResponse:
-      type: "object"
-      properties:
-        wiki:
-          $ref: "#/components/schemas/Wiki"
-    InspectRepositoryWikiRequest:
-      type: "object"
-      properties:
-        scm_connection_id:
-          type: "string"
-        repository_url:
-          type: "string"
-        branch:
-          type: "string"
-    InspectRepositoryWikiResponse:
-      type: "object"
-      properties:
-        available:
-          type: "boolean"
-        page_count:
-          type: "integer"
-          format: "int32"
-    GetWikiResponse:
-      type: "object"
-      properties:
-        wiki:
-          $ref: "#/components/schemas/Wiki"
-    DeleteWikiResponse:
-      type: "object"
-      properties: {}
-    UpdateWikiRequest:
-      type: "object"
-      properties:
-        display_name:
-          type: "string"
-        scm_connection_id:
-          type: "string"
-        settings:
-          $ref: "#/components/schemas/WikiSettings"
-    UpdateWikiResponse:
-      type: "object"
-      properties:
-        wiki:
-          $ref: "#/components/schemas/Wiki"
-    GetWikiPageResponse:
-      type: "object"
-      properties:
-        page:
-          $ref: "#/components/schemas/WikiPage"
-    UpdateWikiPageRequest:
-      type: "object"
-      properties:
-        path:
-          type: "string"
-        markdown:
-          type: "string"
-        expected_content_hash:
-          type: "string"
-    UpdateWikiPageResponse:
-      type: "object"
-      properties:
-        page:
-          $ref: "#/components/schemas/WikiPage"
-    RefreshWikiRequest:
-      type: "object"
-      properties:
-        full:
-          type: "boolean"
-    RefreshWikiResponse:
-      type: "object"
-      properties:
-        run:
-          $ref: "#/components/schemas/WikiRun"
-    ListWikiRunsResponse:
-      type: "object"
-      properties:
-        data:
-          type: "array"
-          items:
-            $ref: "#/components/schemas/WikiRun"
-    SearchWikiResponse:
-      type: "object"
-      properties:
-        hits:
-          type: "array"
-          items:
-            $ref: "#/components/schemas/WikiSearchHit"
-    GetWikiTreeResponse:
-      type: "object"
-      properties:
-        pages:
-          type: "array"
-          items:
-            $ref: "#/components/schemas/WikiTreePage"
-    Wiki:
-      type: "object"
-      properties:
-        wiki_id:
-          type: "string"
-        workspace_id:
-          type: "string"
-        created_by_id:
-          type: "string"
-        display_name:
-          type: "string"
-        repository_key:
-          type: "string"
-        repository:
-          $ref: "#/components/schemas/WikiRepository"
-        branch:
-          type: "string"
-        scm_connection_id:
-          type: "string"
-        settings:
-          $ref: "#/components/schemas/WikiSettings"
-        loop_id:
-          type: "string"
-        status:
-          type: "string"
-        current_run_id:
-          type: "string"
-        last_generated_commit:
-          type: "string"
-        last_generated_at:
-          type: "string"
-          format: "date-time"
-        page_count:
-          type: "integer"
-          format: "int32"
-        created_at:
-          type: "string"
-          format: "date-time"
-        updated_at:
-          type: "string"
-          format: "date-time"
-        factory_id:
-          type: "string"
-    WikiRepository:
-      type: "object"
-      properties:
-        provider:
-          type: "string"
-        owner:
-          type: "string"
-        name:
-          type: "string"
-        url:
-          type: "string"
-        default_branch:
-          type: "string"
-    WikiSettings:
-      type: "object"
-      properties:
-        model:
-          type: "string"
-        computer_template:
-          type: "string"
-        depth:
-          type: "string"
-        refresh_cadence:
-          type: "string"
-        publish_to_repository:
-          type: "boolean"
-    WikiPage:
-      type: "object"
-      properties:
-        path:
-          type: "string"
-        title:
-          type: "string"
-        section:
-          type: "string"
-        order:
-          type: "integer"
-          format: "int32"
-        content_hash:
-          type: "string"
-        edited_by_id:
-          type: "string"
-        markdown:
-          type: "string"
-        run_id:
-          type: "string"
-        links:
-          type: "array"
-          items:
-            type: "string"
-        edited_at:
-          type: "string"
-          format: "date-time"
-    WikiRun:
-      type: "object"
-      properties:
-        run_id:
-          type: "string"
-        workspace_id:
-          type: "string"
-        wiki_id:
-          type: "string"
-        agent_session_id:
-          type: "string"
-        agent_session_run_id:
-          type: "string"
-        kind:
-          type: "string"
-        trigger:
-          type: "string"
-        pull_request_url:
-          type: "string"
-        base_commit:
-          type: "string"
-        head_commit:
-          type: "string"
-        status:
-          type: "string"
-        error:
-          type: "string"
-        stats:
-          $ref: "#/components/schemas/WikiRunStats"
-        started:
-          type: "string"
-          format: "date-time"
-        finished:
-          type: "string"
-          format: "date-time"
-    WikiSearchHit:
-      type: "object"
-      properties:
-        path:
-          type: "string"
-        page_title:
-          type: "string"
-        heading_path:
-          type: "string"
-        anchor:
-          type: "string"
-        snippet:
-          type: "string"
-    WikiTreePage:
-      type: "object"
-      properties:
-        path:
-          type: "string"
-        title:
-          type: "string"
-        section:
-          type: "string"
-        order:
-          type: "integer"
-          format: "int32"
-        content_hash:
-          type: "string"
-        edited_by_id:
-          type: "string"
-    WikiRunStats:
-      type: "object"
-      properties:
-        page_count:
-          type: "integer"
-          format: "int32"
-        section_count:
-          type: "integer"
-          format: "int32"
-        mermaid_count:
-          type: "integer"
-          format: "int32"
-        bytes:
           type: "string"
     ListWorkspacesResponse:
       required:
@@ -26624,7 +26339,7 @@ paths:
                                 type: "string"
                                 format: "ulid"
                                 pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                                default: "01M5Z3T76ZSGQKVNPV595KJE92"
+                                default: "01M5ZKHBC7CNAQRHREGSMSNNA1"
                                 readOnly: true
                                 description: "The unique identifier of the playground knowledge base"
                               knowledge_id:
@@ -36039,7 +35754,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01M5Z3T79W2H1WW9JR3QP42SMR"
+                                          default: "01M5ZKHBDZZ75JWR6JAS078X78"
                                         name:
                                           type: "string"
                                         description:
@@ -37665,7 +37380,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01M5Z3T7ADR4PF9GV8NTZQT10T"
+                                          default: "01M5ZKHBEB7CD5D72HBRMS3741"
                                         name:
                                           type: "string"
                                         description:
@@ -46716,7 +46431,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M5Z3T7BNDFE4G2D8SBWP2BRW"
+                              default: "tool_01M5ZKHBF7QFDRRPP8WS9V6FX1"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -46817,7 +46532,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M5Z3T7BPP6GRMF92EDTNQ638"
+                              default: "tool_01M5ZKHBF8WA33GBK8FFANG00F"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -46920,7 +46635,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M5Z3T7BQQJ8D3S80X9VZFW69"
+                              default: "tool_01M5ZKHBF8S4ZR76V00DANMM68"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -47064,7 +46779,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M5Z3T7BQAG810PZPRQKMVMAB"
+                              default: "tool_01M5ZKHBF9ZW36MAHKK6HKFEAJ"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -47551,7 +47266,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M5Z3T7BVHPZNGQYMMP43BT0B"
+                        default: "tool_01M5ZKHBFBTKCWYFAVB32GWX7F"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -47652,7 +47367,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M5Z3T7BVCHVE43JQ2TKGHFT2"
+                        default: "tool_01M5ZKHBFBR3D85NNG6D1ZHZH3"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -47755,7 +47470,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M5Z3T7BV6WFSFBCF5XE8TJAS"
+                        default: "tool_01M5ZKHBFC8PGRHZJQV3N0Y8FP"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -47899,7 +47614,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M5Z3T7BWNHSC9M97FQHRSB8S"
+                        default: "tool_01M5ZKHBFCP1W6GS6874FWYEMH"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -48403,7 +48118,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M5Z3T7BYJPY9NFBAR5B1BJ1C"
+                        default: "tool_01M5ZKHBFDG16XDSDWY707FBMT"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -48504,7 +48219,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M5Z3T7BYZRG3S7YJ2D3J52F1"
+                        default: "tool_01M5ZKHBFEYB8KTHFGGGJ1GWN3"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -48607,7 +48322,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M5Z3T7BZZ3CYZW99PT2F1DMW"
+                        default: "tool_01M5ZKHBFEX16H50K72VBC0M52"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -48751,7 +48466,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M5Z3T7BZ9GSTS14VP722EAGZ"
+                        default: "tool_01M5ZKHBFEW0YGKWAY83ZTQ82D"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -48918,7 +48633,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M5Z3T7C46FNBMNFQYTMCEPM7"
+                        default: "tool_01M5ZKHBFJC0MDBY4BT1D5FTF6"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -49019,7 +48734,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M5Z3T7C43YEPGFFH92DVHP3K"
+                        default: "tool_01M5ZKHBFJ48FDP49FYZY2D20G"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -49122,7 +48837,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M5Z3T7C4G0JVAP2K106Z0F8M"
+                        default: "tool_01M5ZKHBFJFRCQDPGS4E15DMHZ"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -49266,7 +48981,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M5Z3T7C5VK3NVAQCS8KFRBT8"
+                        default: "tool_01M5ZKHBFKF622M8YRWJYFK5FJ"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -55805,7 +55520,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-10-27T16:41:28.851Z"
+                          default: "2026-10-27T21:16:17.245Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -55813,7 +55528,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-10-27T16:41:28.851Z"
+                              default: "2026-10-27T21:16:17.246Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -55883,7 +55598,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-10-27T16:41:28.851Z"
+                          default: "2026-10-27T21:16:17.245Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -55891,7 +55606,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-10-27T16:41:28.851Z"
+                              default: "2026-10-27T21:16:17.246Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -56076,7 +55791,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-10-27T16:41:28.851Z"
+                        default: "2026-10-27T21:16:17.245Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -56084,7 +55799,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-10-27T16:41:28.851Z"
+                            default: "2026-10-27T21:16:17.246Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -56154,7 +55869,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-10-27T16:41:28.851Z"
+                        default: "2026-10-27T21:16:17.245Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -56162,7 +55877,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-10-27T16:41:28.851Z"
+                            default: "2026-10-27T21:16:17.246Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -56265,7 +55980,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-10-27T16:41:28.851Z"
+                        default: "2026-10-27T21:16:17.245Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -56273,7 +55988,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-10-27T16:41:28.851Z"
+                            default: "2026-10-27T21:16:17.246Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -56343,7 +56058,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-10-27T16:41:28.851Z"
+                        default: "2026-10-27T21:16:17.245Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -56351,7 +56066,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-10-27T16:41:28.851Z"
+                            default: "2026-10-27T21:16:17.246Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -56550,7 +56265,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-10-27T16:41:28.851Z"
+                        default: "2026-10-27T21:16:17.245Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -56558,7 +56273,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-10-27T16:41:28.851Z"
+                            default: "2026-10-27T21:16:17.246Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -56628,7 +56343,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-10-27T16:41:28.851Z"
+                        default: "2026-10-27T21:16:17.245Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -56636,7 +56351,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-10-27T16:41:28.851Z"
+                            default: "2026-10-27T21:16:17.246Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -73656,446 +73371,6 @@ paths:
         - lang: "curl"
           label: "Core - Update webhook"
           source: "curl --request PATCH \\\n  --url 'https://my.orq.ai/v2/webhooks/webhook_01HZXW2K7Y8Q9M0N1P2R3S4T5V' \\\n  --header \"Authorization: Bearer $ORQ_API_KEY\" \\\n  --header 'Content-Type: application/json' \\\n  --data '{\n    \"display_name\": \"Updated alerts\",\n    \"enabled\": false\n  }'\n"
-      security:
-        - ApiKey: []
-  /v2/wikis:
-    get:
-      tags: []
-      operationId: "ListWikis"
-      parameters:
-        - name: "limit"
-          in: "query"
-          schema:
-            type: "integer"
-            format: "int32"
-        - name: "starting_after"
-          in: "query"
-          schema:
-            type: "string"
-        - name: "ending_before"
-          in: "query"
-          schema:
-            type: "string"
-        - name: "repository_key"
-          in: "query"
-          schema:
-            type: "string"
-        - name: "branch"
-          in: "query"
-          schema:
-            type: "string"
-        - name: "factory_id"
-          in: "query"
-          schema:
-            type: "string"
-      responses:
-        "200":
-          description: "OK"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ListWikisResponse"
-        "401":
-          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
-      x-speakeasy-group: "wikis"
-      x-speakeasy-name-override: "list"
-      x-cli-group: "wikis"
-      x-cli-name: "list"
-      x-code-samples:
-        - lang: "TypeScript"
-          source: "import { Orq } from '@orq-ai/node';\nconst orq = new Orq({ apiKey: process.env.ORQ_API_KEY });\nawait orq.wikis.list({ factoryId: 'fac_01J81V5RZPVTDHXBV6M2YVJHRB' });\n"
-      security:
-        - ApiKey: []
-    post:
-      tags: []
-      operationId: "CreateWiki"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/CreateWikiRequest"
-        required: true
-      responses:
-        "200":
-          description: "OK"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/CreateWikiResponse"
-        "401":
-          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
-      x-speakeasy-group: "wikis"
-      x-speakeasy-name-override: "create"
-      x-cli-group: "wikis"
-      x-cli-name: "create"
-      x-code-samples:
-        - lang: "TypeScript"
-          source: "import { Orq } from '@orq-ai/node';\nconst orq = new Orq({ apiKey: process.env.ORQ_API_KEY });\nawait orq.wikis.create({ factoryId: 'fac_01J81V5RZPVTDHXBV6M2YVJHRB', displayName: 'Example repository', repository: { provider: 'github', owner: 'octocat', name: 'Hello-World', url: 'https://github.com/octocat/Hello-World', defaultBranch: 'main' }, branch: 'main', scmConnectionId: 'scmc_01J81V5RZPVTDHXBV6M2YVJHRB', settings: { depth: 'concise', refreshCadence: 'manual', publishToRepository: false } });\n"
-      security:
-        - ApiKey: []
-  /v2/wikis/inspect-repository:
-    post:
-      tags: []
-      operationId: "InspectRepositoryWiki"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/InspectRepositoryWikiRequest"
-        required: true
-      responses:
-        "200":
-          description: "OK"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/InspectRepositoryWikiResponse"
-        "401":
-          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
-      x-speakeasy-group: "wikis"
-      x-speakeasy-name-override: "inspectRepository"
-      x-cli-group: "wikis"
-      x-cli-name: "inspectRepository"
-      x-code-samples:
-        - lang: "TypeScript"
-          source: "import { Orq } from '@orq-ai/node';\nconst orq = new Orq({ apiKey: process.env.ORQ_API_KEY });\nawait orq.wikis.inspectRepository({ scmConnectionId: 'scmc_01J81V5RZPVTDHXBV6M2YVJHRB', repositoryUrl: 'https://github.com/octocat/Hello-World', branch: 'main' });\n"
-      security:
-        - ApiKey: []
-  /v2/wikis/{wiki_id}:
-    get:
-      tags: []
-      operationId: "GetWiki"
-      parameters:
-        - name: "wiki_id"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
-      responses:
-        "200":
-          description: "OK"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GetWikiResponse"
-        "401":
-          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
-      x-speakeasy-group: "wikis"
-      x-speakeasy-name-override: "get"
-      x-cli-group: "wikis"
-      x-cli-name: "get"
-      x-code-samples:
-        - lang: "TypeScript"
-          source: "import { Orq } from '@orq-ai/node';\nconst orq = new Orq({ apiKey: process.env.ORQ_API_KEY });\nawait orq.wikis.get({ wikiId: 'wiki_01J81V5RZPVTDHXBV6M2YVJHRA' });\n"
-      security:
-        - ApiKey: []
-    delete:
-      tags: []
-      operationId: "DeleteWiki"
-      parameters:
-        - name: "wiki_id"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
-      responses:
-        "200":
-          description: "OK"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/DeleteWikiResponse"
-        "401":
-          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
-      x-speakeasy-group: "wikis"
-      x-speakeasy-name-override: "delete"
-      x-cli-group: "wikis"
-      x-cli-name: "delete"
-      x-code-samples:
-        - lang: "TypeScript"
-          source: "import { Orq } from '@orq-ai/node';\nconst orq = new Orq({ apiKey: process.env.ORQ_API_KEY });\nawait orq.wikis.delete({ wikiId: 'wiki_01J81V5RZPVTDHXBV6M2YVJHRA' });\n"
-      security:
-        - ApiKey: []
-    patch:
-      tags: []
-      operationId: "UpdateWiki"
-      parameters:
-        - name: "wiki_id"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/UpdateWikiRequest"
-        required: true
-      responses:
-        "200":
-          description: "OK"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/UpdateWikiResponse"
-        "401":
-          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
-      x-speakeasy-group: "wikis"
-      x-speakeasy-name-override: "update"
-      x-cli-group: "wikis"
-      x-cli-name: "update"
-      x-code-samples:
-        - lang: "TypeScript"
-          source: "import { Orq } from '@orq-ai/node';\nconst orq = new Orq({ apiKey: process.env.ORQ_API_KEY });\nawait orq.wikis.update({ wikiId: 'wiki_01J81V5RZPVTDHXBV6M2YVJHRA', settings: { depth: 'extensive', refreshCadence: 'weekly', publishToRepository: false } });\n"
-      security:
-        - ApiKey: []
-  /v2/wikis/{wiki_id}/page:
-    get:
-      tags: []
-      operationId: "GetWikiPage"
-      parameters:
-        - name: "wiki_id"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
-        - name: "path"
-          in: "query"
-          schema:
-            type: "string"
-        - name: "run_id"
-          in: "query"
-          schema:
-            type: "string"
-      responses:
-        "200":
-          description: "OK"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GetWikiPageResponse"
-        "401":
-          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
-      x-speakeasy-group: "wikis"
-      x-speakeasy-name-override: "getPage"
-      x-cli-group: "wikis"
-      x-cli-name: "getPage"
-      x-code-samples:
-        - lang: "TypeScript"
-          source: "import { Orq } from '@orq-ai/node';\nconst orq = new Orq({ apiKey: process.env.ORQ_API_KEY });\nawait orq.wikis.getPage({ wikiId: 'wiki_01J81V5RZPVTDHXBV6M2YVJHRA', path: 'index.md' });\n"
-      security:
-        - ApiKey: []
-    patch:
-      tags: []
-      operationId: "UpdateWikiPage"
-      parameters:
-        - name: "wiki_id"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/UpdateWikiPageRequest"
-        required: true
-      responses:
-        "200":
-          description: "OK"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/UpdateWikiPageResponse"
-        "401":
-          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
-      x-speakeasy-group: "wikis"
-      x-speakeasy-name-override: "updatePage"
-      x-cli-group: "wikis"
-      x-cli-name: "updatePage"
-      x-code-samples:
-        - lang: "TypeScript"
-          source: "import { Orq } from '@orq-ai/node';\nconst orq = new Orq({ apiKey: process.env.ORQ_API_KEY });\nconst { page } = await orq.wikis.getPage({ wikiId: 'wiki_01J81V5RZPVTDHXBV6M2YVJHRA', path: 'index.md' });\nawait orq.wikis.updatePage({ wikiId: 'wiki_01J81V5RZPVTDHXBV6M2YVJHRA', path: 'index.md', markdown: '# Overview\\nUpdated documentation.', expectedContentHash: page.contentHash });\n"
-      security:
-        - ApiKey: []
-  /v2/wikis/{wiki_id}/refresh:
-    post:
-      tags: []
-      operationId: "RefreshWiki"
-      parameters:
-        - name: "wiki_id"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/RefreshWikiRequest"
-        required: true
-      responses:
-        "200":
-          description: "OK"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/RefreshWikiResponse"
-        "401":
-          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
-      x-speakeasy-group: "wikis"
-      x-speakeasy-name-override: "refresh"
-      x-cli-group: "wikis"
-      x-cli-name: "refresh"
-      x-code-samples:
-        - lang: "TypeScript"
-          source: "import { Orq } from '@orq-ai/node';\nconst orq = new Orq({ apiKey: process.env.ORQ_API_KEY });\nawait orq.wikis.refresh({ wikiId: 'wiki_01J81V5RZPVTDHXBV6M2YVJHRA', full: false });\n"
-      security:
-        - ApiKey: []
-  /v2/wikis/{wiki_id}/runs:
-    get:
-      tags: []
-      operationId: "ListWikiRuns"
-      parameters:
-        - name: "wiki_id"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
-        - name: "limit"
-          in: "query"
-          schema:
-            type: "integer"
-            format: "int32"
-      responses:
-        "200":
-          description: "OK"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ListWikiRunsResponse"
-        "401":
-          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
-      x-speakeasy-group: "wikis"
-      x-speakeasy-name-override: "listRuns"
-      x-cli-group: "wikis"
-      x-cli-name: "listRuns"
-      x-code-samples:
-        - lang: "TypeScript"
-          source: "import { Orq } from '@orq-ai/node';\nconst orq = new Orq({ apiKey: process.env.ORQ_API_KEY });\nawait orq.wikis.listRuns({ wikiId: 'wiki_01J81V5RZPVTDHXBV6M2YVJHRA', limit: 20 });\n"
-      security:
-        - ApiKey: []
-  /v2/wikis/{wiki_id}/search:
-    get:
-      tags: []
-      operationId: "SearchWiki"
-      parameters:
-        - name: "wiki_id"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
-        - name: "query"
-          in: "query"
-          schema:
-            type: "string"
-        - name: "limit"
-          in: "query"
-          schema:
-            type: "integer"
-            format: "int32"
-      responses:
-        "200":
-          description: "OK"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/SearchWikiResponse"
-        "401":
-          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
-      x-speakeasy-group: "wikis"
-      x-speakeasy-name-override: "search"
-      x-cli-group: "wikis"
-      x-cli-name: "search"
-      x-code-samples:
-        - lang: "TypeScript"
-          source: "import { Orq } from '@orq-ai/node';\nconst orq = new Orq({ apiKey: process.env.ORQ_API_KEY });\nawait orq.wikis.search({ wikiId: 'wiki_01J81V5RZPVTDHXBV6M2YVJHRA', query: 'installation', limit: 20 });\n"
-      security:
-        - ApiKey: []
-  /v2/wikis/{wiki_id}/tree:
-    get:
-      tags: []
-      operationId: "GetWikiTree"
-      parameters:
-        - name: "wiki_id"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
-      responses:
-        "200":
-          description: "OK"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GetWikiTreeResponse"
-        "401":
-          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
-      x-speakeasy-group: "wikis"
-      x-speakeasy-name-override: "getTree"
-      x-cli-group: "wikis"
-      x-cli-name: "getTree"
-      x-code-samples:
-        - lang: "TypeScript"
-          source: "import { Orq } from '@orq-ai/node';\nconst orq = new Orq({ apiKey: process.env.ORQ_API_KEY });\nawait orq.wikis.getTree({ wikiId: 'wiki_01J81V5RZPVTDHXBV6M2YVJHRA' });\n"
       security:
         - ApiKey: []
   /v2/workspaces:
