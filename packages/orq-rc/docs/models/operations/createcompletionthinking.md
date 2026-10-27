@@ -30,3 +30,11 @@ const value: components.ThinkingConfigAdaptiveSchema = {
 };
 ```
 
+### `components.ThinkingConfigBetweenToolsSchema`
+
+```typescript
+const value: components.ThinkingConfigBetweenToolsSchema = {
+  type: "between_tools",
+};
+```
+

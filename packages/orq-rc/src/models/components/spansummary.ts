@@ -30,14 +30,16 @@ export type SpanSummary = {
   level?: number | undefined;
   hasChildren?: boolean | undefined;
   /**
-   * Row badge inputs, so the tree does not need a detail fetch per span:
-   *
-   * @remarks
-   *  trace_framework is set on the trace root, leading_span_type where the
-   *  ingest marked one, guardrail_enabled on evaluator spans run as guardrails.
+   * Framework that produced the trace, recorded on the root span.
    */
   traceFramework?: string | undefined;
+  /**
+   * Span type assigned at ingest when the trace has one.
+   */
   leadingSpanType?: string | undefined;
+  /**
+   * Whether the span is an evaluator span running as a guardrail.
+   */
   guardrailEnabled?: boolean | undefined;
   /**
    * Why the span's generation stopped, for example stop, length or content_filter.

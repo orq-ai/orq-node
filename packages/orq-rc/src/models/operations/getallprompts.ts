@@ -771,7 +771,8 @@ export type GetAllPromptsStreamOptions = {
 export type GetAllPromptsThinking =
   | components.ThinkingConfigDisabledSchema
   | components.ThinkingConfigEnabledSchema
-  | components.ThinkingConfigAdaptiveSchema;
+  | components.ThinkingConfigAdaptiveSchema
+  | components.ThinkingConfigBetweenToolsSchema;
 
 /**
  * The type of the tool. Currently, only function is supported.
@@ -1439,6 +1440,7 @@ export type GetAllPromptsPromptField = {
     | components.ThinkingConfigDisabledSchema
     | components.ThinkingConfigEnabledSchema
     | components.ThinkingConfigAdaptiveSchema
+    | components.ThinkingConfigBetweenToolsSchema
     | undefined;
   /**
    * What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
@@ -2424,6 +2426,7 @@ export const GetAllPromptsThinking$inboundSchema: z.ZodType<
   components.ThinkingConfigDisabledSchema$inboundSchema,
   components.ThinkingConfigEnabledSchema$inboundSchema,
   components.ThinkingConfigAdaptiveSchema$inboundSchema,
+  components.ThinkingConfigBetweenToolsSchema$inboundSchema,
 ]);
 
 export function getAllPromptsThinkingFromJSON(
@@ -3343,6 +3346,7 @@ export const GetAllPromptsPromptField$inboundSchema: z.ZodType<
     components.ThinkingConfigDisabledSchema$inboundSchema,
     components.ThinkingConfigEnabledSchema$inboundSchema,
     components.ThinkingConfigAdaptiveSchema$inboundSchema,
+    components.ThinkingConfigBetweenToolsSchema$inboundSchema,
   ]).optional(),
   temperature: z.nullable(z.number()).optional(),
   top_p: z.nullable(z.number()).optional(),

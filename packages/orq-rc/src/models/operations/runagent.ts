@@ -111,7 +111,8 @@ export type RunAgentModelConfigurationStop = string | Array<string>;
 export type RunAgentModelConfigurationThinking =
   | components.ThinkingConfigDisabledSchema
   | components.ThinkingConfigEnabledSchema
-  | components.ThinkingConfigAdaptiveSchema;
+  | components.ThinkingConfigAdaptiveSchema
+  | components.ThinkingConfigBetweenToolsSchema;
 
 /**
  * The type of the tool. Currently, only function is supported.
@@ -394,6 +395,7 @@ export type RunAgentModelConfigurationParameters = {
     | components.ThinkingConfigDisabledSchema
     | components.ThinkingConfigEnabledSchema
     | components.ThinkingConfigAdaptiveSchema
+    | components.ThinkingConfigBetweenToolsSchema
     | undefined;
   /**
    * What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
@@ -603,7 +605,8 @@ export type RunAgentFallbackModelConfigurationStop = string | Array<string>;
 export type RunAgentFallbackModelConfigurationThinking =
   | components.ThinkingConfigDisabledSchema
   | components.ThinkingConfigEnabledSchema
-  | components.ThinkingConfigAdaptiveSchema;
+  | components.ThinkingConfigAdaptiveSchema
+  | components.ThinkingConfigBetweenToolsSchema;
 
 /**
  * The type of the tool. Currently, only function is supported.
@@ -893,6 +896,7 @@ export type RunAgentFallbackModelConfigurationParameters = {
     | components.ThinkingConfigDisabledSchema
     | components.ThinkingConfigEnabledSchema
     | components.ThinkingConfigAdaptiveSchema
+    | components.ThinkingConfigBetweenToolsSchema
     | undefined;
   /**
    * What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
@@ -2129,7 +2133,8 @@ export function runAgentModelConfigurationStopToJSON(
 export type RunAgentModelConfigurationThinking$Outbound =
   | components.ThinkingConfigDisabledSchema$Outbound
   | components.ThinkingConfigEnabledSchema$Outbound
-  | components.ThinkingConfigAdaptiveSchema$Outbound;
+  | components.ThinkingConfigAdaptiveSchema$Outbound
+  | components.ThinkingConfigBetweenToolsSchema$Outbound;
 
 /** @internal */
 export const RunAgentModelConfigurationThinking$outboundSchema: z.ZodType<
@@ -2140,6 +2145,7 @@ export const RunAgentModelConfigurationThinking$outboundSchema: z.ZodType<
   components.ThinkingConfigDisabledSchema$outboundSchema,
   components.ThinkingConfigEnabledSchema$outboundSchema,
   components.ThinkingConfigAdaptiveSchema$outboundSchema,
+  components.ThinkingConfigBetweenToolsSchema$outboundSchema,
 ]);
 
 export function runAgentModelConfigurationThinkingToJSON(
@@ -2544,6 +2550,7 @@ export type RunAgentModelConfigurationParameters$Outbound = {
     | components.ThinkingConfigDisabledSchema$Outbound
     | components.ThinkingConfigEnabledSchema$Outbound
     | components.ThinkingConfigAdaptiveSchema$Outbound
+    | components.ThinkingConfigBetweenToolsSchema$Outbound
     | undefined;
   temperature?: number | null | undefined;
   top_p?: number | null | undefined;
@@ -2593,6 +2600,7 @@ export const RunAgentModelConfigurationParameters$outboundSchema: z.ZodType<
     components.ThinkingConfigDisabledSchema$outboundSchema,
     components.ThinkingConfigEnabledSchema$outboundSchema,
     components.ThinkingConfigAdaptiveSchema$outboundSchema,
+    components.ThinkingConfigBetweenToolsSchema$outboundSchema,
   ]).optional(),
   temperature: z.nullable(z.number()).optional(),
   topP: z.nullable(z.number()).optional(),
@@ -2919,7 +2927,8 @@ export function runAgentFallbackModelConfigurationStopToJSON(
 export type RunAgentFallbackModelConfigurationThinking$Outbound =
   | components.ThinkingConfigDisabledSchema$Outbound
   | components.ThinkingConfigEnabledSchema$Outbound
-  | components.ThinkingConfigAdaptiveSchema$Outbound;
+  | components.ThinkingConfigAdaptiveSchema$Outbound
+  | components.ThinkingConfigBetweenToolsSchema$Outbound;
 
 /** @internal */
 export const RunAgentFallbackModelConfigurationThinking$outboundSchema:
@@ -2931,6 +2940,7 @@ export const RunAgentFallbackModelConfigurationThinking$outboundSchema:
     components.ThinkingConfigDisabledSchema$outboundSchema,
     components.ThinkingConfigEnabledSchema$outboundSchema,
     components.ThinkingConfigAdaptiveSchema$outboundSchema,
+    components.ThinkingConfigBetweenToolsSchema$outboundSchema,
   ]);
 
 export function runAgentFallbackModelConfigurationThinkingToJSON(
@@ -3357,6 +3367,7 @@ export type RunAgentFallbackModelConfigurationParameters$Outbound = {
     | components.ThinkingConfigDisabledSchema$Outbound
     | components.ThinkingConfigEnabledSchema$Outbound
     | components.ThinkingConfigAdaptiveSchema$Outbound
+    | components.ThinkingConfigBetweenToolsSchema$Outbound
     | undefined;
   temperature?: number | null | undefined;
   top_p?: number | null | undefined;
@@ -3416,6 +3427,7 @@ export const RunAgentFallbackModelConfigurationParameters$outboundSchema:
       components.ThinkingConfigDisabledSchema$outboundSchema,
       components.ThinkingConfigEnabledSchema$outboundSchema,
       components.ThinkingConfigAdaptiveSchema$outboundSchema,
+      components.ThinkingConfigBetweenToolsSchema$outboundSchema,
     ]).optional(),
     temperature: z.nullable(z.number()).optional(),
     topP: z.nullable(z.number()).optional(),
@@ -3906,7 +3918,7 @@ export const Tools$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Tools
 > = z.object({
-  id: z.string().default("01M5VRFSPWMDGXKRKTK271SQ3K"),
+  id: z.string().default("01M5Y34EMPSP3SQSXN7XHSH8YB"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() => AgentToolInputRunSchema$outboundSchema),

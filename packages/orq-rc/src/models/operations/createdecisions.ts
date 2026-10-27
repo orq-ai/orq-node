@@ -10,7 +10,7 @@ import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * The evaluation prompt for this question. A string, an object or an array.
+ * The evaluation prompt for this question. A string, an object or an array. Native OpenAI also accepts arrays of input_text, input_image and input_json parts. Question parts cannot contain prompt cache breakpoints.
  */
 export type CreateDecisionsQuestionsRouterDecisionsRequestRequestBodyInstructions =
   | string
@@ -22,14 +22,14 @@ export type CreateDecisionsQuestionsRouterDecisionsRequestRequestBodyInstruction
  */
 export type QuestionsBoxQuestion = {
   /**
-   * The evaluation prompt for this question. A string, an object or an array.
+   * The evaluation prompt for this question. A string, an object or an array. Native OpenAI also accepts arrays of input_text, input_image and input_json parts. Question parts cannot contain prompt cache breakpoints.
    */
   instructions: string | { [k: string]: any } | Array<any>;
   type: "box";
 };
 
 /**
- * The evaluation prompt for this question. A string, an object or an array.
+ * The evaluation prompt for this question. A string, an object or an array. Native OpenAI also accepts arrays of input_text, input_image and input_json parts. Question parts cannot contain prompt cache breakpoints.
  */
 export type CreateDecisionsQuestionsRouterDecisionsRequestInstructions =
   | string
@@ -45,7 +45,7 @@ export type QuestionsScoreQuestion = {
    */
   criteria: Array<any>;
   /**
-   * The evaluation prompt for this question. A string, an object or an array.
+   * The evaluation prompt for this question. A string, an object or an array. Native OpenAI also accepts arrays of input_text, input_image and input_json parts. Question parts cannot contain prompt cache breakpoints.
    */
   instructions: string | { [k: string]: any } | Array<any>;
   type: "score";
@@ -59,7 +59,7 @@ export type CreateDecisionsQuestionsRouterDecisionsCriteria = string | {
 } | Array<any>;
 
 /**
- * The evaluation prompt for this question. A string, an object or an array.
+ * The evaluation prompt for this question. A string, an object or an array. Native OpenAI also accepts arrays of input_text, input_image and input_json parts. Question parts cannot contain prompt cache breakpoints.
  */
 export type CreateDecisionsQuestionsRouterDecisionsInstructions = string | {
   [k: string]: any;
@@ -74,7 +74,7 @@ export type QuestionsChoiceQuestion = {
    */
   criteria: { [k: string]: string | { [k: string]: any } | Array<any> | null };
   /**
-   * The evaluation prompt for this question. A string, an object or an array.
+   * The evaluation prompt for this question. A string, an object or an array. Native OpenAI also accepts arrays of input_text, input_image and input_json parts. Question parts cannot contain prompt cache breakpoints.
    */
   instructions: string | { [k: string]: any } | Array<any>;
   type: "choice";
@@ -105,7 +105,7 @@ export type CreateDecisionsQuestionsCriteria = {
 };
 
 /**
- * The evaluation prompt for this question. A string, an object or an array.
+ * The evaluation prompt for this question. A string, an object or an array. Native OpenAI also accepts arrays of input_text, input_image and input_json parts. Question parts cannot contain prompt cache breakpoints.
  */
 export type CreateDecisionsQuestionsInstructions =
   | string
@@ -121,7 +121,7 @@ export type QuestionsNoulQuestion = {
    */
   criteria?: CreateDecisionsQuestionsCriteria | undefined;
   /**
-   * The evaluation prompt for this question. A string, an object or an array.
+   * The evaluation prompt for this question. A string, an object or an array. Native OpenAI also accepts arrays of input_text, input_image and input_json parts. Question parts cannot contain prompt cache breakpoints.
    */
   instructions: string | { [k: string]: any } | Array<any>;
   type: "noul";
@@ -134,7 +134,7 @@ export type CreateDecisionsQuestions =
   | QuestionsBoxQuestion;
 
 /**
- * The content to evaluate. A string, an object or an array. For TypeSafe models, reference images declared in assets by writing their reference string. For OpenAI GPT-6 Luna, strings are passed as text and objects or ordinary JSON arrays are serialized as text. User-message arrays accept string content or input_text/input_image parts. Images must be inline base64 data URLs, with at most 128 images across the request. Remote image URLs, file IDs, audio, non-user roles, bare content parts and tool items are rejected.
+ * The content to evaluate. A string, an object or an array. For TypeSafe models, reference images declared in assets by writing their reference string. Native OpenAI accepts messages and function/custom-tool history. User messages support input_text, input_image and input_json; images can use inline base64 data URLs or public HTTP(S) URLs. At most 128 images across state and question instructions. Shared text/image parts support explicit prompt_cache_breakpoint markers. File IDs, audio, item references and bare content parts are unsupported. Other objects and arrays are serialized as text.
  */
 export type CreateDecisionsState = string | { [k: string]: any } | Array<any>;
 
@@ -166,7 +166,12 @@ export type CreateDecisionsRequestBody = {
    */
   name?: string | undefined;
   /**
-   * Typed questions keyed by an identifier of your choice. Each answer is returned under the same key.
+   * Native OpenAI only. Partitions reuse of shared input across requests.
+   */
+  promptCacheKey?: string | undefined;
+  promptCacheOptions?: components.ClassifyPromptCacheOptions | undefined;
+  /**
+   * Typed questions keyed by an identifier of your choice. Each answer is returned under the same key. Native OpenAI accepts 1 to 400 questions.
    */
   questions: {
     [k: string]:
@@ -177,7 +182,7 @@ export type CreateDecisionsRequestBody = {
   };
   retry?: components.ClassifyRetryConfig | undefined;
   /**
-   * The content to evaluate. A string, an object or an array. For TypeSafe models, reference images declared in assets by writing their reference string. For OpenAI GPT-6 Luna, strings are passed as text and objects or ordinary JSON arrays are serialized as text. User-message arrays accept string content or input_text/input_image parts. Images must be inline base64 data URLs, with at most 128 images across the request. Remote image URLs, file IDs, audio, non-user roles, bare content parts and tool items are rejected.
+   * The content to evaluate. A string, an object or an array. For TypeSafe models, reference images declared in assets by writing their reference string. Native OpenAI accepts messages and function/custom-tool history. User messages support input_text, input_image and input_json; images can use inline base64 data URLs or public HTTP(S) URLs. At most 128 images across state and question instructions. Shared text/image parts support explicit prompt_cache_breakpoint markers. File IDs, audio, item references and bare content parts are unsupported. Other objects and arrays are serialized as text.
    */
   state: string | { [k: string]: any } | Array<any>;
   timeout?: components.ClassifyTimeoutConfig | undefined;
@@ -541,6 +546,10 @@ export type CreateDecisionsRequestBody$Outbound = {
   metadata?: { [k: string]: string } | undefined;
   model: string;
   name?: string | undefined;
+  prompt_cache_key?: string | undefined;
+  prompt_cache_options?:
+    | components.ClassifyPromptCacheOptions$Outbound
+    | undefined;
   questions: {
     [k: string]:
       | QuestionsNoulQuestion$Outbound
@@ -568,6 +577,9 @@ export const CreateDecisionsRequestBody$outboundSchema: z.ZodType<
   metadata: z.record(z.string()).optional(),
   model: z.string(),
   name: z.string().optional(),
+  promptCacheKey: z.string().optional(),
+  promptCacheOptions: components.ClassifyPromptCacheOptions$outboundSchema
+    .optional(),
   questions: z.record(
     z.union([
       z.lazy(() => QuestionsNoulQuestion$outboundSchema),
@@ -582,6 +594,8 @@ export const CreateDecisionsRequestBody$outboundSchema: z.ZodType<
 }).transform((v) => {
   return remap$(v, {
     fallbackOnCodes: "fallback_on_codes",
+    promptCacheKey: "prompt_cache_key",
+    promptCacheOptions: "prompt_cache_options",
   });
 });
 

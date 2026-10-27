@@ -13,7 +13,7 @@ import {
 
 export type QueryLogsResponse = {
   /**
-   * Object discriminator; always "query". Mirrors QueryTracesResponse.
+   * Object discriminator; always "query".
    */
   object?: string | undefined;
   search?: SearchLogsResponse | undefined;

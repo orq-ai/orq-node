@@ -97,7 +97,8 @@ export type CreateCompletionTimeout = {
 export type CreateCompletionThinking =
   | components.ThinkingConfigDisabledSchema
   | components.ThinkingConfigEnabledSchema
-  | components.ThinkingConfigAdaptiveSchema;
+  | components.ThinkingConfigAdaptiveSchema
+  | components.ThinkingConfigBetweenToolsSchema;
 
 /**
  * Retry configuration for the request
@@ -766,6 +767,7 @@ export type CreateCompletionRequestBody = {
     | components.ThinkingConfigDisabledSchema
     | components.ThinkingConfigEnabledSchema
     | components.ThinkingConfigAdaptiveSchema
+    | components.ThinkingConfigBetweenToolsSchema
     | null
     | undefined;
   /**
@@ -1217,7 +1219,8 @@ export function createCompletionTimeoutToJSON(
 export type CreateCompletionThinking$Outbound =
   | components.ThinkingConfigDisabledSchema$Outbound
   | components.ThinkingConfigEnabledSchema$Outbound
-  | components.ThinkingConfigAdaptiveSchema$Outbound;
+  | components.ThinkingConfigAdaptiveSchema$Outbound
+  | components.ThinkingConfigBetweenToolsSchema$Outbound;
 
 /** @internal */
 export const CreateCompletionThinking$outboundSchema: z.ZodType<
@@ -1228,6 +1231,7 @@ export const CreateCompletionThinking$outboundSchema: z.ZodType<
   components.ThinkingConfigDisabledSchema$outboundSchema,
   components.ThinkingConfigEnabledSchema$outboundSchema,
   components.ThinkingConfigAdaptiveSchema$outboundSchema,
+  components.ThinkingConfigBetweenToolsSchema$outboundSchema,
 ]);
 
 export function createCompletionThinkingToJSON(
@@ -2887,6 +2891,7 @@ export type CreateCompletionRequestBody$Outbound = {
     | components.ThinkingConfigDisabledSchema$Outbound
     | components.ThinkingConfigEnabledSchema$Outbound
     | components.ThinkingConfigAdaptiveSchema$Outbound
+    | components.ThinkingConfigBetweenToolsSchema$Outbound
     | null
     | undefined;
   plugins?: Array<components.PIIRedactionPlugin$Outbound> | undefined;
@@ -2926,6 +2931,7 @@ export const CreateCompletionRequestBody$outboundSchema: z.ZodType<
       components.ThinkingConfigDisabledSchema$outboundSchema,
       components.ThinkingConfigEnabledSchema$outboundSchema,
       components.ThinkingConfigAdaptiveSchema$outboundSchema,
+      components.ThinkingConfigBetweenToolsSchema$outboundSchema,
     ]),
   ).optional(),
   plugins: z.array(components.PIIRedactionPlugin$outboundSchema).optional(),

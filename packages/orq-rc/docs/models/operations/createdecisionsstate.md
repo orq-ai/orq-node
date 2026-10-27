@@ -1,6 +1,6 @@
 # CreateDecisionsState
 
-The content to evaluate. A string, an object or an array. For TypeSafe models, reference images declared in assets by writing their reference string. For OpenAI GPT-6 Luna, strings are passed as text and objects or ordinary JSON arrays are serialized as text. User-message arrays accept string content or input_text/input_image parts. Images must be inline base64 data URLs, with at most 128 images across the request. Remote image URLs, file IDs, audio, non-user roles, bare content parts and tool items are rejected.
+The content to evaluate. A string, an object or an array. For TypeSafe models, reference images declared in assets by writing their reference string. Native OpenAI accepts messages and function/custom-tool history. User messages support input_text, input_image and input_json; images can use inline base64 data URLs or public HTTP(S) URLs. At most 128 images across state and question instructions. Shared text/image parts support explicit prompt_cache_breakpoint markers. File IDs, audio, item references and bare content parts are unsupported. Other objects and arrays are serialized as text.
 
 
 ## Supported Types

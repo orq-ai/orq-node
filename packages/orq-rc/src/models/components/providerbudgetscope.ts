@@ -8,10 +8,10 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * Per-provider cap. The value is the provider enum string (e.g.
+ * Per-provider cap. The value is the provider identifier, for example
  *
  * @remarks
- *  "openai", "anthropic") drawn from ModelIntegrationIdentifier.
+ *  "openai" or "anthropic".
  */
 export type ProviderBudgetScope = {
   provider?: string | undefined;

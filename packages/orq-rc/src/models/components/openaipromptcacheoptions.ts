@@ -16,15 +16,17 @@ export type OpenAIPromptCacheOptionsMode = ClosedEnum<
   typeof OpenAIPromptCacheOptionsMode
 >;
 
-export const Ttl = {
+export const OpenAIPromptCacheOptionsTtl = {
   Thirtym: "30m",
   Twelveh: "12h",
 } as const;
-export type Ttl = ClosedEnum<typeof Ttl>;
+export type OpenAIPromptCacheOptionsTtl = ClosedEnum<
+  typeof OpenAIPromptCacheOptionsTtl
+>;
 
 export type OpenAIPromptCacheOptions = {
   mode?: OpenAIPromptCacheOptionsMode | undefined;
-  ttl?: Ttl | undefined;
+  ttl?: OpenAIPromptCacheOptionsTtl | undefined;
 };
 
 /** @internal */
@@ -37,10 +39,13 @@ export const OpenAIPromptCacheOptionsMode$outboundSchema: z.ZodNativeEnum<
 > = OpenAIPromptCacheOptionsMode$inboundSchema;
 
 /** @internal */
-export const Ttl$inboundSchema: z.ZodNativeEnum<typeof Ttl> = z.nativeEnum(Ttl);
+export const OpenAIPromptCacheOptionsTtl$inboundSchema: z.ZodNativeEnum<
+  typeof OpenAIPromptCacheOptionsTtl
+> = z.nativeEnum(OpenAIPromptCacheOptionsTtl);
 /** @internal */
-export const Ttl$outboundSchema: z.ZodNativeEnum<typeof Ttl> =
-  Ttl$inboundSchema;
+export const OpenAIPromptCacheOptionsTtl$outboundSchema: z.ZodNativeEnum<
+  typeof OpenAIPromptCacheOptionsTtl
+> = OpenAIPromptCacheOptionsTtl$inboundSchema;
 
 /** @internal */
 export const OpenAIPromptCacheOptions$inboundSchema: z.ZodType<
@@ -49,7 +54,7 @@ export const OpenAIPromptCacheOptions$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   mode: OpenAIPromptCacheOptionsMode$inboundSchema.optional(),
-  ttl: Ttl$inboundSchema.optional(),
+  ttl: OpenAIPromptCacheOptionsTtl$inboundSchema.optional(),
 });
 /** @internal */
 export type OpenAIPromptCacheOptions$Outbound = {
@@ -64,7 +69,7 @@ export const OpenAIPromptCacheOptions$outboundSchema: z.ZodType<
   OpenAIPromptCacheOptions
 > = z.object({
   mode: OpenAIPromptCacheOptionsMode$outboundSchema.optional(),
-  ttl: Ttl$outboundSchema.optional(),
+  ttl: OpenAIPromptCacheOptionsTtl$outboundSchema.optional(),
 });
 
 export function openAIPromptCacheOptionsToJSON(

@@ -23,10 +23,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 export type BudgetUsage = {
   amount?: number | undefined;
   /**
-   * Carried as a double (not int64) so it serializes as a JSON number
-   *
-   * @remarks
-   *  rather than a quoted string, matching limits.token_limit.
+   * Tokens accumulated in the current period.
    */
   tokens?: number | undefined;
   requests?: number | undefined;
