@@ -5,6 +5,12 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 
+/**
+ * McpOAuthConfig is the OAuth client orq presents to the upstream authorization
+ *
+ * @remarks
+ *  server for OAUTH_CLIENT_CREDENTIALS, PER_USER_OAUTH and ENTERPRISE_MANAGED.
+ */
 export type McpOAuthConfig = {
   /**
    * OAuth client identifier presented to the upstream authorization server.
@@ -15,7 +21,7 @@ export type McpOAuthConfig = {
    */
   clientSecret?: string | undefined;
   /**
-   * Token endpoint the gateway calls to mint upstream access tokens.
+   * Token endpoint for OAUTH_CLIENT_CREDENTIALS; PER_USER_OAUTH and ENTERPRISE_MANAGED discover it from `resource`.
    */
   tokenUrl?: string | undefined;
   /**
@@ -26,6 +32,14 @@ export type McpOAuthConfig = {
    * Redacted preview of `client_secret`, returned in its place.
    */
   maskedValue?: string | undefined;
+  /**
+   * Exact authorization-server issuer; pins discovery for PER_USER_OAUTH and ENTERPRISE_MANAGED.
+   */
+  issuer?: string | undefined;
+  /**
+   * Protected resource identifier; defaults to the upstream connection URL.
+   */
+  resource?: string | undefined;
 };
 
 /** @internal */
@@ -35,6 +49,8 @@ export type McpOAuthConfig$Outbound = {
   token_url?: string | undefined;
   scopes?: Array<string> | undefined;
   masked_value?: string | undefined;
+  issuer?: string | undefined;
+  resource?: string | undefined;
 };
 
 /** @internal */
@@ -48,6 +64,8 @@ export const McpOAuthConfig$outboundSchema: z.ZodType<
   tokenUrl: z.string().optional(),
   scopes: z.array(z.string()).optional(),
   maskedValue: z.string().optional(),
+  issuer: z.string().optional(),
+  resource: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     clientId: "client_id",

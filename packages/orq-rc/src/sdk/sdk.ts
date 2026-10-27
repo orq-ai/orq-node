@@ -52,7 +52,6 @@ import { Users } from "./users.js";
 import { Views } from "./views.js";
 import { Webhooks } from "./webhooks.js";
 import { Websearch } from "./websearch.js";
-import { Wikis } from "./wikis.js";
 import { Workspaces } from "./workspaces.js";
 import { WorkspaceSecurity } from "./workspacesecurity.js";
 import { WorkspaceSettings } from "./workspacesettings.js";
@@ -288,11 +287,6 @@ export class Orq extends ClientSDK {
   private _webhooks?: Webhooks;
   get webhooks(): Webhooks {
     return (this._webhooks ??= new Webhooks(this._options));
-  }
-
-  private _wikis?: Wikis;
-  get wikis(): Wikis {
-    return (this._wikis ??= new Wikis(this._options));
   }
 
   private _workspaces?: Workspaces;

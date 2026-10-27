@@ -6,11 +6,6 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { McpAuthType, McpAuthType$outboundSchema } from "./mcpauthtype.js";
 import {
-  McpEnterpriseAuthConfig,
-  McpEnterpriseAuthConfig$Outbound,
-  McpEnterpriseAuthConfig$outboundSchema,
-} from "./mcpenterpriseauthconfig.js";
-import {
   McpHeaderSecret,
   McpHeaderSecret$Outbound,
   McpHeaderSecret$outboundSchema,
@@ -21,6 +16,34 @@ import {
   McpOAuthConfig$outboundSchema,
 } from "./mcpoauthconfig.js";
 
+/**
+ * Superseded by `oauth` for ENTERPRISE_MANAGED; accepted on write and mirrored on read.
+ *
+ * @deprecated class: This will be removed in a future release, please migrate away from it as soon as possible.
+ */
+export type Enterprise = {
+  /**
+   * RFC 9728 resource identifier the tokens are bound to; defaults to the connection URL.
+   */
+  resource?: string | undefined;
+  /**
+   * OAuth client identifier registered at the upstream authorization server.
+   */
+  clientId?: string | undefined;
+  /**
+   * OAuth client secret; accepted on write and never returned.
+   */
+  clientSecret?: string | undefined;
+  /**
+   * Redacted preview of `client_secret`, returned in its place.
+   */
+  maskedValue?: string | undefined;
+  /**
+   * Scopes requested when redeeming the identity assertion grant.
+   */
+  scopes?: Array<string> | undefined;
+};
+
 export type McpAuthConfig = {
   type: McpAuthType;
   /**
@@ -28,21 +51,55 @@ export type McpAuthConfig = {
    */
   staticHeaders?: Array<McpHeaderSecret> | undefined;
   /**
-   * OAuth client credentials the gateway presents to the upstream authorization server; set when type is OAUTH_CLIENT_CREDENTIALS.
+   * OAuth client for the upstream authorization server; set when type is OAUTH_CLIENT_CREDENTIALS, PER_USER_OAUTH or ENTERPRISE_MANAGED.
    */
   oauth?: McpOAuthConfig | undefined;
   /**
-   * Client for the upstream authorization server; set when type is ENTERPRISE_MANAGED.
+   * Superseded by `oauth` for ENTERPRISE_MANAGED; accepted on write and mirrored on read.
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
    */
-  enterprise?: McpEnterpriseAuthConfig | undefined;
+  enterprise?: Enterprise | undefined;
 };
+
+/** @internal */
+export type Enterprise$Outbound = {
+  resource?: string | undefined;
+  client_id?: string | undefined;
+  client_secret?: string | undefined;
+  masked_value?: string | undefined;
+  scopes?: Array<string> | undefined;
+};
+
+/** @internal */
+export const Enterprise$outboundSchema: z.ZodType<
+  Enterprise$Outbound,
+  z.ZodTypeDef,
+  Enterprise
+> = z.object({
+  resource: z.string().optional(),
+  clientId: z.string().optional(),
+  clientSecret: z.string().optional(),
+  maskedValue: z.string().optional(),
+  scopes: z.array(z.string()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    clientId: "client_id",
+    clientSecret: "client_secret",
+    maskedValue: "masked_value",
+  });
+});
+
+export function enterpriseToJSON(enterprise: Enterprise): string {
+  return JSON.stringify(Enterprise$outboundSchema.parse(enterprise));
+}
 
 /** @internal */
 export type McpAuthConfig$Outbound = {
   type: string;
   static_headers?: Array<McpHeaderSecret$Outbound> | undefined;
   oauth?: McpOAuthConfig$Outbound | undefined;
-  enterprise?: McpEnterpriseAuthConfig$Outbound | undefined;
+  enterprise?: Enterprise$Outbound | undefined;
 };
 
 /** @internal */
@@ -54,7 +111,7 @@ export const McpAuthConfig$outboundSchema: z.ZodType<
   type: McpAuthType$outboundSchema,
   staticHeaders: z.array(McpHeaderSecret$outboundSchema).optional(),
   oauth: McpOAuthConfig$outboundSchema.optional(),
-  enterprise: McpEnterpriseAuthConfig$outboundSchema.optional(),
+  enterprise: z.lazy(() => Enterprise$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     staticHeaders: "static_headers",
