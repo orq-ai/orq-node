@@ -8,6 +8,10 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
+  GuardrailRuleGuardrail,
+  GuardrailRuleGuardrail$inboundSchema,
+} from "./guardrailruleguardrail.js";
+import {
   McpGatewayMode,
   McpGatewayMode$inboundSchema,
 } from "./mcpgatewaymode.js";
@@ -82,6 +86,10 @@ export type McpGateway = {
    * Website advertised to MCP clients; defaults to ORQ documentation when empty.
    */
   websiteUrl?: string | undefined;
+  /**
+   * Guardrails run on the arguments and result of every tool call this gateway serves.
+   */
+  guardrails?: Array<GuardrailRuleGuardrail> | undefined;
 };
 
 /** @internal */
@@ -106,6 +114,7 @@ export const McpGateway$inboundSchema: z.ZodType<
   skill_ids: z.array(z.string()).optional(),
   icons: z.array(McpIcon$inboundSchema).optional(),
   website_url: z.string().optional(),
+  guardrails: z.array(GuardrailRuleGuardrail$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "display_name": "displayName",

@@ -10,6 +10,8 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { TraceCost, TraceCost$inboundSchema } from "./tracecost.js";
 import { TraceUsage, TraceUsage$inboundSchema } from "./traceusage.js";
 
+export type RuleAttributes = {};
+
 export type SpanSummary = {
   object?: string | undefined;
   traceId?: string | undefined;
@@ -45,7 +47,25 @@ export type SpanSummary = {
    * Why the span's generation stopped, for example stop, length or content_filter.
    */
   finishReasons?: Array<string> | undefined;
+  ruleAttributes?: RuleAttributes | undefined;
 };
+
+/** @internal */
+export const RuleAttributes$inboundSchema: z.ZodType<
+  RuleAttributes,
+  z.ZodTypeDef,
+  unknown
+> = z.object({});
+
+export function ruleAttributesFromJSON(
+  jsonString: string,
+): SafeParseResult<RuleAttributes, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => RuleAttributes$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RuleAttributes' from JSON`,
+  );
+}
 
 /** @internal */
 export const SpanSummary$inboundSchema: z.ZodType<
@@ -77,6 +97,7 @@ export const SpanSummary$inboundSchema: z.ZodType<
   leading_span_type: z.string().optional(),
   guardrail_enabled: z.boolean().optional(),
   finish_reasons: z.array(z.string()).optional(),
+  rule_attributes: z.lazy(() => RuleAttributes$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "trace_id": "traceId",
@@ -91,6 +112,7 @@ export const SpanSummary$inboundSchema: z.ZodType<
     "leading_span_type": "leadingSpanType",
     "guardrail_enabled": "guardrailEnabled",
     "finish_reasons": "finishReasons",
+    "rule_attributes": "ruleAttributes",
   });
 });
 

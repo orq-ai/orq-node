@@ -5,6 +5,11 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import {
+  GuardrailRuleGuardrail,
+  GuardrailRuleGuardrail$Outbound,
+  GuardrailRuleGuardrail$outboundSchema,
+} from "./guardrailruleguardrail.js";
+import {
   McpGatewayMode,
   McpGatewayMode$outboundSchema,
 } from "./mcpgatewaymode.js";
@@ -88,6 +93,10 @@ export type UpdateMcpGatewayRequest = {
    * Empty restores the default ORQ documentation website.
    */
   websiteUrl?: string | undefined;
+  /**
+   * Guardrails run on the arguments and result of every tool call this gateway serves.
+   */
+  guardrails?: Array<GuardrailRuleGuardrail> | undefined;
 };
 
 /** @internal */
@@ -106,6 +115,7 @@ export type UpdateMcpGatewayRequest$Outbound = {
   icons?: Array<McpIcon$Outbound> | undefined;
   replace_icons?: boolean | undefined;
   website_url?: string | undefined;
+  guardrails?: Array<GuardrailRuleGuardrail$Outbound> | undefined;
 };
 
 /** @internal */
@@ -128,6 +138,7 @@ export const UpdateMcpGatewayRequest$outboundSchema: z.ZodType<
   icons: z.array(McpIcon$outboundSchema).optional(),
   replaceIcons: z.boolean().optional(),
   websiteUrl: z.string().optional(),
+  guardrails: z.array(GuardrailRuleGuardrail$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     displayName: "display_name",
