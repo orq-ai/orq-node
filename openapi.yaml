@@ -1211,13 +1211,6 @@ components:
             - "medium"
             - "high"
           description: "The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored."
-        display:
-          type: "string"
-          enum:
-            - "summarized"
-            - "omitted"
-            - "updates"
-          description: "Controls how Anthropic thinking content appears in the response. Use updates for progress summaries on supported models."
       required:
         - "type"
         - "budget_tokens"
@@ -1231,38 +1224,10 @@ components:
           enum:
             - "adaptive"
           description: "Lets the model dynamically determine when and how much to use extended thinking based on the complexity of each request. Supported on Claude Opus 4.6 and Sonnet 4.6."
-        display:
-          type: "string"
-          enum:
-            - "summarized"
-            - "omitted"
-            - "updates"
-          description: "Controls how Anthropic thinking content appears in the response. Use updates for progress summaries on supported models."
       required:
         - "type"
       title: "Thinking config adaptive"
       description: "Enables adaptive thinking mode where the model dynamically determines thinking depth"
-    ThinkingConfigBetweenToolsSchema:
-      type: "object"
-      properties:
-        type:
-          type: "string"
-          enum:
-            - "between_tools"
-          description: "Returns Sonnet 5.5 progress updates between tool calls without extended thinking."
-        budget_tokens:
-          type: "number"
-        display:
-          type: "string"
-          enum:
-            - "summarized"
-            - "omitted"
-            - "updates"
-          description: "Controls how Anthropic thinking content appears in the response. Use updates for progress summaries on supported models."
-      required:
-        - "type"
-      title: "Thinking config between tools"
-      description: "Enables progress updates between tool calls on Sonnet 5.5."
     PIIRedactionPlugin:
       type: "object"
       properties:
@@ -2592,7 +2557,7 @@ components:
           properties:
             _id:
               type: "string"
-              default: "reasoning_01m613cwnch2h1s6nsn6f6k1kt"
+              default: "reasoning_01m619xvhxv05xcm1kwj6vn3w4"
               description: "Unique identifier for the part. Format: reasoning_{ulid} (e.g., reasoning_01hxyz...)"
               example: "reasoning_01hxyz123abc"
             kind:
@@ -3048,7 +3013,7 @@ components:
                   maximum: 100
                   minimum: 1
                   default: 100
-                  description: "Maximum iterations (LLM calls) before the agent will stop executing."
+                  description: "Maximum iterations(llm calls) before the agent will stop executing."
                 max_execution_time:
                   type: "integer"
                   minimum: 2
@@ -6922,7 +6887,7 @@ components:
           minLength: 1
           pattern: "^[A-Za-z]([A-Za-z0-9]*([._][A-Za-z0-9]+)*)?$"
           type: "string"
-          description: "The unique key of the memory store. The key is unique and immutable and cannot be repeated within the same workspace."
+          description: "The unique key of the memory store. The key is unique and inmmutable and cannot be repeated within the same workspace."
         embedding_config:
           $ref: "#/components/schemas/MemoryStoreEmbeddingConfig"
         description:
@@ -6950,7 +6915,7 @@ components:
           minLength: 1
           pattern: "^[A-Za-z]([A-Za-z0-9]*([._][A-Za-z0-9]+)*)?$"
           type: "string"
-          description: "The unique key of the memory store. The key is unique and immutable and cannot be repeated within the same workspace."
+          description: "The unique key of the memory store. The key is unique and inmmutable and cannot be repeated within the same workspace."
         description:
           type: "string"
           description: "The description of the memory store. Be as precise as possible to help the AI to understand the purpose of the memory store."
@@ -9185,7 +9150,7 @@ components:
       properties:
         object:
           type: "string"
-          description: "Object discriminator; always \"query\"."
+          description: "Object discriminator; always \"query\". Mirrors QueryTracesResponse."
         search:
           $ref: "#/components/schemas/SearchLogsResponse"
     SearchLogsRequest:
@@ -10449,20 +10414,16 @@ components:
           type: "boolean"
         trace_framework:
           type: "string"
-          description: "Framework that produced the trace, recorded on the root span."
+          description: "Row badge inputs, so the tree does not need a detail fetch per span:\n trace_framework is set on the trace root, leading_span_type where the\n ingest marked one, guardrail_enabled on evaluator spans run as guardrails."
         leading_span_type:
           type: "string"
-          description: "Span type assigned at ingest when the trace has one."
         guardrail_enabled:
           type: "boolean"
-          description: "Whether the span is an evaluator span running as a guardrail."
         finish_reasons:
           type: "array"
           items:
             type: "string"
           description: "Why the span's generation stopped, for example stop, length or content_filter."
-        rule_attributes:
-          type: "object"
     SpanDetail:
       type: "object"
       properties:
@@ -11822,9 +11783,6 @@ components:
         cost_per_image:
           format: "double"
           type: "number"
-        default_max_output_tokens:
-          format: "int64"
-          type: "integer"
         default_speech_response_format:
           type: "string"
         deprecation_date:
@@ -12105,8 +12063,6 @@ components:
         supports_tool_calling:
           type: "boolean"
         supports_tool_choice:
-          type: "boolean"
-        supports_transcription:
           type: "boolean"
         supports_url_context:
           type: "boolean"
@@ -14212,7 +14168,7 @@ components:
           format: "double"
         tokens:
           type: "number"
-          description: "Tokens accumulated in the current period."
+          description: "Carried as a double (not int64) so it serializes as a JSON number\n rather than a quoted string, matching limits.token_limit."
           format: "double"
         requests:
           type: "integer"
@@ -14245,7 +14201,7 @@ components:
       properties:
         provider:
           type: "string"
-      description: "Per-provider cap. The value is the provider identifier, for example\n \"openai\" or \"anthropic\"."
+      description: "Per-provider cap. The value is the provider enum string (e.g.\n \"openai\", \"anthropic\") drawn from ModelIntegrationIdentifier."
     ModelBudgetScope:
       required:
         - "model_id"
@@ -14545,7 +14501,7 @@ components:
           description: "Base64-encoded file contents."
           format: "bytes"
         purpose:
-          description: "Intended usage category for the uploaded file. Defaults to retrieval when omitted. Accepts either the alias (`retrieval`, `knowledge_datasource`, `batch`, `code_interpreter`) or the prefixed value. A JSON upload returns the prefixed form in the response, and a multipart upload returns the lowercase alias."
+          description: "Intended usage category for the uploaded file. Defaults to retrieval\n when omitted."
           $ref: "#/components/schemas/FilePurpose"
         content_type:
           type: "string"
@@ -15359,19 +15315,6 @@ components:
           items:
             type: "string"
           description: "Workspace skills this gateway serves to MCP clients through the MCP Skills extension."
-        icons:
-          type: "array"
-          items:
-            $ref: "#/components/schemas/McpIcon"
-          description: "Icons advertised to MCP clients; defaults to ORQ branding when empty."
-        website_url:
-          type: "string"
-          description: "Website advertised to MCP clients; defaults to ORQ documentation when empty."
-        guardrails:
-          type: "array"
-          items:
-            $ref: "#/components/schemas/GuardrailRuleGuardrail"
-          description: "Guardrails run on the arguments and result of every tool call this gateway serves."
     CreateMcpGatewayResponse:
       type: "object"
       properties:
@@ -15444,22 +15387,6 @@ components:
         clear_skill_ids:
           type: "boolean"
           description: "Set true to stop serving every workspace skill; cannot be combined with `skill_ids`."
-        icons:
-          type: "array"
-          items:
-            $ref: "#/components/schemas/McpIcon"
-          description: "Replaces the advertised icons when nonempty or when replace_icons is true."
-        replace_icons:
-          type: "boolean"
-          description: "Set true with an empty icons list to restore default ORQ branding."
-        website_url:
-          type: "string"
-          description: "Empty restores the default ORQ documentation website."
-        guardrails:
-          type: "array"
-          items:
-            $ref: "#/components/schemas/GuardrailRuleGuardrail"
-          description: "Guardrails run on the arguments and result of every tool call this gateway serves."
     UpdateMcpGatewayResponse:
       type: "object"
       properties:
@@ -15519,23 +15446,6 @@ components:
           items:
             type: "string"
           description: "Workspace skills this gateway serves to MCP clients through the MCP Skills extension."
-        icons:
-          type: "array"
-          items:
-            $ref: "#/components/schemas/McpIcon"
-          description: "Icons advertised to MCP clients; defaults to ORQ branding when empty."
-        website_url:
-          type: "string"
-          description: "Website advertised to MCP clients; defaults to ORQ documentation when empty."
-        guardrails:
-          type: "array"
-          items:
-            $ref: "#/components/schemas/GuardrailRuleGuardrail"
-          description: "Guardrails run on the arguments and result of every tool call this gateway serves."
-        created_by_id:
-          readOnly: true
-          type: "string"
-          description: "Account that created the gateway."
     McpGatewayServerLink:
       required:
         - "mcp_server_id"
@@ -15602,23 +15512,6 @@ components:
             type: "number"
             format: "double"
           description: "Per-entity-type confidence cutoff. Every key must also appear in entities."
-    McpIcon:
-      type: "object"
-      properties:
-        src:
-          type: "string"
-          description: "Icon URI, including HTTPS URLs and base64 data URIs."
-        mime_type:
-          type: "string"
-          description: "Optional MIME type override."
-        sizes:
-          type: "array"
-          items:
-            type: "string"
-          description: "Supported sizes such as \"48x48\" or \"any\"."
-        theme:
-          type: "string"
-          description: "Optional background theme this icon was designed for."
     McpGatewayTool:
       type: "object"
       properties:
@@ -15650,11 +15543,6 @@ components:
           allOf:
             - $ref: "#/components/schemas/McpToolAnnotations"
           description: "Behaviour hints claimed by the upstream server."
-        icons:
-          type: "array"
-          items:
-            $ref: "#/components/schemas/McpIcon"
-          description: "Icons advertised by the upstream tool."
     McpToolExposure:
       required:
         - "mode"
@@ -15757,10 +15645,6 @@ components:
           allOf:
             - $ref: "#/components/schemas/Sharing"
           description: "Which projects in the workspace may use this server. Defaults to every project."
-        openapi:
-          allOf:
-            - $ref: "#/components/schemas/McpOpenApiConfig"
-          description: "Required when `connection.type` is `MCP_CONNECTION_TYPE_OPENAPI`; set `document` or `document_url`."
     CreateMcpServerResponse:
       type: "object"
       properties:
@@ -15804,10 +15688,6 @@ components:
           allOf:
             - $ref: "#/components/schemas/Sharing"
           description: "Which projects in the workspace may use this server. Defaults to every project."
-        openapi:
-          allOf:
-            - $ref: "#/components/schemas/McpOpenApiConfig"
-          description: "Recompiles the tools of an OpenAPI server; without `document` the stored `document_url` is fetched again."
     UpdateMcpServerResponse:
       type: "object"
       properties:
@@ -15911,20 +15791,6 @@ components:
           items:
             $ref: "#/components/schemas/McpSkill"
           description: "Skills the upstream publishes through the MCP Skills extension, discovered by the last successful `:sync`."
-        openapi:
-          allOf:
-            - $ref: "#/components/schemas/McpOpenApiConfig"
-          description: "Source of the tools of an `MCP_CONNECTION_TYPE_OPENAPI` server."
-        icons:
-          readOnly: true
-          type: "array"
-          items:
-            $ref: "#/components/schemas/McpIcon"
-          description: "Icons advertised by the upstream server during discovery."
-        website_url:
-          readOnly: true
-          type: "string"
-          description: "Website advertised by the upstream server during discovery."
     McpConnection:
       required:
         - "type"
@@ -15945,7 +15811,7 @@ components:
       type: "object"
       properties:
         type:
-          description: "Credential scheme used to authenticate to this upstream server."
+          description: "Credential scheme: NONE, STATIC_HEADERS, OAUTH_CLIENT_CREDENTIALS or ENTERPRISE_MANAGED. Create, update and Test connection reject PER_USER_OAUTH."
           $ref: "#/components/schemas/McpAuthType"
           example: MCP_AUTH_TYPE_STATIC_HEADERS
         static_headers:
@@ -15956,35 +15822,11 @@ components:
         oauth:
           allOf:
             - $ref: "#/components/schemas/McpOAuthConfig"
-          description: "OAuth client for the upstream authorization server; set when type is OAUTH_CLIENT_CREDENTIALS, PER_USER_OAUTH or ENTERPRISE_MANAGED."
+          description: "OAuth client credentials the gateway presents to the upstream authorization server; set when type is OAUTH_CLIENT_CREDENTIALS."
         enterprise:
-          deprecated: true
           allOf:
             - $ref: "#/components/schemas/McpEnterpriseAuthConfig"
-          description: "Superseded by `oauth` for ENTERPRISE_MANAGED; accepted on write and mirrored on read."
-    McpOpenApiConfig:
-      type: "object"
-      properties:
-        document:
-          writeOnly: true
-          type: "string"
-          description: "OpenAPI 3.x document as JSON or YAML; accepted on write and never stored or returned."
-        document_url:
-          type: "string"
-          description: "URL the document is fetched from; `:sync` fetches it again."
-        operations:
-          type: "array"
-          items:
-            type: "string"
-          description: "Tool names of the operations to expose; empty exposes every operation."
-        title:
-          readOnly: true
-          type: "string"
-          description: "`info.title` of the compiled document."
-        version:
-          readOnly: true
-          type: "string"
-          description: "`info.version` of the compiled document."
+          description: "Client for the upstream authorization server; set when type is ENTERPRISE_MANAGED."
     McpGatewayToolTestResult:
       type: "object"
       properties:
@@ -16062,16 +15904,6 @@ components:
           allOf:
             - $ref: "#/components/schemas/McpToolAnnotations"
           description: "Behaviour hints claimed by the upstream server."
-        http_operation:
-          readOnly: true
-          allOf:
-            - $ref: "#/components/schemas/McpHttpOperation"
-          description: "OpenAPI operation the tool calls, for `MCP_CONNECTION_TYPE_OPENAPI` servers."
-        icons:
-          type: "array"
-          items:
-            $ref: "#/components/schemas/McpIcon"
-          description: "Icons advertised by the upstream tool."
     McpSkill:
       type: "object"
       properties:
@@ -16102,7 +15934,6 @@ components:
         - "MCP_CONNECTION_TYPE_HTTP"
         - "MCP_CONNECTION_TYPE_SSE"
         - "MCP_CONNECTION_TYPE_STDIO"
-        - "MCP_CONNECTION_TYPE_OPENAPI"
     McpAuthType:
       type: "string"
       enum:
@@ -16138,7 +15969,7 @@ components:
           description: "OAuth client secret; accepted on write and never returned."
         token_url:
           type: "string"
-          description: "Token endpoint for OAUTH_CLIENT_CREDENTIALS; PER_USER_OAUTH and ENTERPRISE_MANAGED discover it from `resource`."
+          description: "Token endpoint the gateway calls to mint upstream access tokens."
         scopes:
           type: "array"
           items:
@@ -16147,15 +15978,7 @@ components:
         masked_value:
           type: "string"
           description: "Redacted preview of `client_secret`, returned in its place."
-        issuer:
-          type: "string"
-          description: "Exact authorization-server issuer; pins discovery for PER_USER_OAUTH and ENTERPRISE_MANAGED."
-        resource:
-          type: "string"
-          description: "Protected resource identifier; defaults to the upstream connection URL."
-      description: "McpOAuthConfig is the OAuth client orq presents to the upstream authorization\n server for OAUTH_CLIENT_CREDENTIALS, PER_USER_OAUTH and ENTERPRISE_MANAGED."
     McpEnterpriseAuthConfig:
-      deprecated: true
       type: "object"
       properties:
         resource:
@@ -16176,22 +15999,13 @@ components:
           items:
             type: "string"
           description: "Scopes requested when redeeming the identity assertion grant."
-      description: "McpEnterpriseAuthConfig is superseded by McpOAuthConfig: ENTERPRISE_MANAGED servers\n read and write `oauth`. It is still accepted on write and mirrored on read."
+      description: "McpEnterpriseAuthConfig is the client orq registered at the upstream's authorization\n server for enterprise-managed authorization (ID-JAG). Access policy lives in the\n workspace's SSO identity provider; users must sign in through SSO to use the server."
     SyncStatus:
       type: "string"
       enum:
         - "SYNC_STATUS_SYNCED"
         - "SYNC_STATUS_FAILED"
         - "SYNC_STATUS_PENDING"
-    McpHttpOperation:
-      type: "object"
-      properties:
-        method:
-          type: "string"
-          description: "HTTP method, upper case."
-        path:
-          type: "string"
-          description: "Path template relative to the server base URL."
     McpSkillFile:
       type: "object"
       properties:
@@ -18509,6 +18323,300 @@ components:
           type: "string"
         direction:
           type: "string"
+    ListWikisResponse:
+      type: "object"
+      properties:
+        data:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/Wiki"
+        has_more:
+          type: "boolean"
+    CreateWikiRequest:
+      type: "object"
+      properties:
+        display_name:
+          type: "string"
+        repository:
+          $ref: "#/components/schemas/WikiRepository"
+        branch:
+          type: "string"
+        scm_connection_id:
+          type: "string"
+        settings:
+          $ref: "#/components/schemas/WikiSettings"
+        import_existing:
+          type: "boolean"
+        factory_id:
+          type: "string"
+    CreateWikiResponse:
+      type: "object"
+      properties:
+        wiki:
+          $ref: "#/components/schemas/Wiki"
+    InspectRepositoryWikiRequest:
+      type: "object"
+      properties:
+        scm_connection_id:
+          type: "string"
+        repository_url:
+          type: "string"
+        branch:
+          type: "string"
+    InspectRepositoryWikiResponse:
+      type: "object"
+      properties:
+        available:
+          type: "boolean"
+        page_count:
+          type: "integer"
+          format: "int32"
+    GetWikiResponse:
+      type: "object"
+      properties:
+        wiki:
+          $ref: "#/components/schemas/Wiki"
+    DeleteWikiResponse:
+      type: "object"
+      properties: {}
+    UpdateWikiRequest:
+      type: "object"
+      properties:
+        display_name:
+          type: "string"
+        scm_connection_id:
+          type: "string"
+        settings:
+          $ref: "#/components/schemas/WikiSettings"
+    UpdateWikiResponse:
+      type: "object"
+      properties:
+        wiki:
+          $ref: "#/components/schemas/Wiki"
+    GetWikiPageResponse:
+      type: "object"
+      properties:
+        page:
+          $ref: "#/components/schemas/WikiPage"
+    UpdateWikiPageRequest:
+      type: "object"
+      properties:
+        path:
+          type: "string"
+        markdown:
+          type: "string"
+        expected_content_hash:
+          type: "string"
+    UpdateWikiPageResponse:
+      type: "object"
+      properties:
+        page:
+          $ref: "#/components/schemas/WikiPage"
+    RefreshWikiRequest:
+      type: "object"
+      properties:
+        full:
+          type: "boolean"
+    RefreshWikiResponse:
+      type: "object"
+      properties:
+        run:
+          $ref: "#/components/schemas/WikiRun"
+    ListWikiRunsResponse:
+      type: "object"
+      properties:
+        data:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/WikiRun"
+    SearchWikiResponse:
+      type: "object"
+      properties:
+        hits:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/WikiSearchHit"
+    GetWikiTreeResponse:
+      type: "object"
+      properties:
+        pages:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/WikiTreePage"
+    Wiki:
+      type: "object"
+      properties:
+        wiki_id:
+          type: "string"
+        workspace_id:
+          type: "string"
+        created_by_id:
+          type: "string"
+        display_name:
+          type: "string"
+        repository_key:
+          type: "string"
+        repository:
+          $ref: "#/components/schemas/WikiRepository"
+        branch:
+          type: "string"
+        scm_connection_id:
+          type: "string"
+        settings:
+          $ref: "#/components/schemas/WikiSettings"
+        loop_id:
+          type: "string"
+        status:
+          type: "string"
+        current_run_id:
+          type: "string"
+        last_generated_commit:
+          type: "string"
+        last_generated_at:
+          type: "string"
+          format: "date-time"
+        page_count:
+          type: "integer"
+          format: "int32"
+        created_at:
+          type: "string"
+          format: "date-time"
+        updated_at:
+          type: "string"
+          format: "date-time"
+        factory_id:
+          type: "string"
+    WikiRepository:
+      type: "object"
+      properties:
+        provider:
+          type: "string"
+        owner:
+          type: "string"
+        name:
+          type: "string"
+        url:
+          type: "string"
+        default_branch:
+          type: "string"
+    WikiSettings:
+      type: "object"
+      properties:
+        model:
+          type: "string"
+        computer_template:
+          type: "string"
+        depth:
+          type: "string"
+        refresh_cadence:
+          type: "string"
+        publish_to_repository:
+          type: "boolean"
+    WikiPage:
+      type: "object"
+      properties:
+        path:
+          type: "string"
+        title:
+          type: "string"
+        section:
+          type: "string"
+        order:
+          type: "integer"
+          format: "int32"
+        content_hash:
+          type: "string"
+        edited_by_id:
+          type: "string"
+        markdown:
+          type: "string"
+        run_id:
+          type: "string"
+        links:
+          type: "array"
+          items:
+            type: "string"
+        edited_at:
+          type: "string"
+          format: "date-time"
+    WikiRun:
+      type: "object"
+      properties:
+        run_id:
+          type: "string"
+        workspace_id:
+          type: "string"
+        wiki_id:
+          type: "string"
+        agent_session_id:
+          type: "string"
+        agent_session_run_id:
+          type: "string"
+        kind:
+          type: "string"
+        trigger:
+          type: "string"
+        pull_request_url:
+          type: "string"
+        base_commit:
+          type: "string"
+        head_commit:
+          type: "string"
+        status:
+          type: "string"
+        error:
+          type: "string"
+        stats:
+          $ref: "#/components/schemas/WikiRunStats"
+        started:
+          type: "string"
+          format: "date-time"
+        finished:
+          type: "string"
+          format: "date-time"
+    WikiSearchHit:
+      type: "object"
+      properties:
+        path:
+          type: "string"
+        page_title:
+          type: "string"
+        heading_path:
+          type: "string"
+        anchor:
+          type: "string"
+        snippet:
+          type: "string"
+    WikiTreePage:
+      type: "object"
+      properties:
+        path:
+          type: "string"
+        title:
+          type: "string"
+        section:
+          type: "string"
+        order:
+          type: "integer"
+          format: "int32"
+        content_hash:
+          type: "string"
+        edited_by_id:
+          type: "string"
+    WikiRunStats:
+      type: "object"
+      properties:
+        page_count:
+          type: "integer"
+          format: "int32"
+        section_count:
+          type: "integer"
+          format: "int32"
+        mermaid_count:
+          type: "integer"
+          format: "int32"
+        bytes:
+          type: "string"
     ListWorkspacesResponse:
       required:
         - "object"
@@ -18551,9 +18659,6 @@ components:
           $ref: "#/components/schemas/ChatKitResources"
         tracing_enabled:
           type: "boolean"
-        retention_period:
-          type: "integer"
-          format: "uint32"
     UpdateWorkspaceResponse:
       required:
         - "workspace"
@@ -19086,21 +19191,6 @@ components:
         - "noul"
       title: "ClassifyNoulAnswer"
       type: "object"
-    ClassifyPromptCacheOptions:
-      additionalProperties: false
-      properties:
-        mode:
-          description: "Implicit uses the shared input boundary by default; explicit uses only marked input boundaries."
-          enum:
-            - "implicit"
-            - "explicit"
-          type: "string"
-        ttl:
-          description: "Minimum cache lifetime. Only 30m is supported by native OpenAI Decisions."
-          enum:
-            - "30m"
-          type: "string"
-      type: "object"
     ClassifyRefusalAnswer:
       additionalProperties: false
       properties:
@@ -19187,7 +19277,7 @@ components:
           type: "integer"
         input_tokens_details:
           $ref: "#/components/schemas/ClassifyInputTokensDetails"
-          description: "Provider-reported cache token usage. OpenAI Decisions charges cache reads and writes at the model cache rates; these tokens are included in input_tokens."
+          description: "Provider-reported cache token usage. OpenAI Decisions does not charge for cache reads or writes."
         output_cost:
           description: "Cost (USD) of output tokens. 0 for native classify providers, including OpenAI Decisions. Present when billing was computed for this request."
           format: "double"
@@ -19254,13 +19344,6 @@ components:
         name:
           description: "The name to display on the trace. If not specified, the default system name will be used."
           type: "string"
-        prompt_cache_key:
-          description: "Native OpenAI only. Partitions reuse of shared input across requests."
-          maxLength: 64
-          type: "string"
-        prompt_cache_options:
-          $ref: "#/components/schemas/ClassifyPromptCacheOptions"
-          description: "Native OpenAI prompt caching controls. Separate from the gateway exact-match response cache."
         questions:
           additionalProperties:
             oneOf:
@@ -19302,7 +19385,7 @@ components:
                       - items: {}
                         title: "Array"
                         type: "array"
-                    description: "The evaluation prompt for this question. A string, an object or an array. Native OpenAI also accepts arrays of input_text, input_image and input_json parts. Question parts cannot contain prompt cache breakpoints."
+                    description: "The evaluation prompt for this question. A string, an object or an array."
                   type:
                     enum:
                       - "noul"
@@ -19341,7 +19424,7 @@ components:
                       - items: {}
                         title: "Array"
                         type: "array"
-                    description: "The evaluation prompt for this question. A string, an object or an array. Native OpenAI also accepts arrays of input_text, input_image and input_json parts. Question parts cannot contain prompt cache breakpoints."
+                    description: "The evaluation prompt for this question. A string, an object or an array."
                   type:
                     enum:
                       - "choice"
@@ -19369,7 +19452,7 @@ components:
                       - items: {}
                         title: "Array"
                         type: "array"
-                    description: "The evaluation prompt for this question. A string, an object or an array. Native OpenAI also accepts arrays of input_text, input_image and input_json parts. Question parts cannot contain prompt cache breakpoints."
+                    description: "The evaluation prompt for this question. A string, an object or an array."
                   type:
                     enum:
                       - "score"
@@ -19392,7 +19475,7 @@ components:
                       - items: {}
                         title: "Array"
                         type: "array"
-                    description: "The evaluation prompt for this question. A string, an object or an array. Native OpenAI also accepts arrays of input_text, input_image and input_json parts. Question parts cannot contain prompt cache breakpoints."
+                    description: "The evaluation prompt for this question. A string, an object or an array."
                   type:
                     enum:
                       - "box"
@@ -19402,7 +19485,7 @@ components:
                   - "instructions"
                 title: "BoxQuestion"
                 type: "object"
-          description: "Typed questions keyed by an identifier of your choice. Each answer is returned under the same key. Native OpenAI accepts 1 to 400 questions."
+          description: "Typed questions keyed by an identifier of your choice. Each answer is returned under the same key."
           minProperties: 1
           type: "object"
         retry:
@@ -19418,7 +19501,7 @@ components:
             - items: {}
               title: "Array"
               type: "array"
-          description: "The content to evaluate. A string, an object or an array. For TypeSafe models, reference images declared in assets by writing their reference string. Native OpenAI accepts messages and function/custom-tool history. User messages support input_text, input_image and input_json; images can use inline base64 data URLs or public HTTP(S) URLs. At most 128 images across state and question instructions. Shared text/image parts support explicit prompt_cache_breakpoint markers. File IDs, audio, item references and bare content parts are unsupported. Other objects and arrays are serialized as text."
+          description: "The content to evaluate. A string, an object or an array. For TypeSafe models, reference images declared in assets by writing their reference string. For OpenAI GPT-6 Luna, strings are passed as text and objects or ordinary JSON arrays are serialized as text. User-message arrays accept string content or input_text/input_image parts. Images must be inline base64 data URLs, with at most 128 images across the request. Remote image URLs, file IDs, audio, non-user roles, bare content parts and tool items are rejected."
         timeout:
           $ref: "#/components/schemas/ClassifyTimeoutConfig"
           description: "Timeout for each model call, including every retry and fallback. A timed-out call returns 408 and advances to the next fallback after configured retries are exhausted."
@@ -23437,7 +23520,6 @@ paths:
                       - "scaleway"
                       - "hcompany"
                       - "inception"
-                      - "munito"
                       - "inceptron"
                       - "wafer"
                       - "poolside"
@@ -24725,7 +24807,6 @@ paths:
                           - scaleway
                           - hcompany
                           - inception
-                          - munito
                           - inceptron
                           - wafer
                           - poolside
@@ -25350,7 +25431,6 @@ paths:
                                 - "scaleway"
                                 - "hcompany"
                                 - "inception"
-                                - "munito"
                                 - "inceptron"
                                 - "wafer"
                                 - "poolside"
@@ -25503,7 +25583,7 @@ paths:
                             - "messages"
                         version:
                           type: "string"
-                          description: "The version of the deployment"
+                          description: "THe version of the deployment"
                       required:
                         - "id"
                         - "created"
@@ -25851,7 +25931,6 @@ paths:
                                 - "scaleway"
                                 - "hcompany"
                                 - "inception"
-                                - "munito"
                                 - "inceptron"
                                 - "wafer"
                                 - "poolside"
@@ -26252,7 +26331,6 @@ paths:
                                   - "scaleway"
                                   - "hcompany"
                                   - "inception"
-                                  - "munito"
                                   - "inceptron"
                                   - "wafer"
                                   - "poolside"
@@ -26389,7 +26467,7 @@ paths:
                                 type: "string"
                                 format: "ulid"
                                 pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                                default: "01M613CWMMCD47WY7ZVAP14021"
+                                default: "01M619XVH6A5HZ7K9HVK0TY9CX"
                                 readOnly: true
                                 description: "The unique identifier of the playground knowledge base"
                               knowledge_id:
@@ -28056,14 +28134,12 @@ paths:
                                 - $ref: "#/components/schemas/ThinkingConfigDisabledSchema"
                                 - $ref: "#/components/schemas/ThinkingConfigEnabledSchema"
                                 - $ref: "#/components/schemas/ThinkingConfigAdaptiveSchema"
-                                - $ref: "#/components/schemas/ThinkingConfigBetweenToolsSchema"
                               discriminator:
                                 propertyName: "type"
                                 mapping:
                                   disabled: "#/components/schemas/ThinkingConfigDisabledSchema"
                                   enabled: "#/components/schemas/ThinkingConfigEnabledSchema"
                                   adaptive: "#/components/schemas/ThinkingConfigAdaptiveSchema"
-                                  between_tools: "#/components/schemas/ThinkingConfigBetweenToolsSchema"
                             temperature:
                               type:
                                 - "number"
@@ -28415,14 +28491,12 @@ paths:
                                   - $ref: "#/components/schemas/ThinkingConfigDisabledSchema"
                                   - $ref: "#/components/schemas/ThinkingConfigEnabledSchema"
                                   - $ref: "#/components/schemas/ThinkingConfigAdaptiveSchema"
-                                  - $ref: "#/components/schemas/ThinkingConfigBetweenToolsSchema"
                                 discriminator:
                                   propertyName: "type"
                                   mapping:
                                     disabled: "#/components/schemas/ThinkingConfigDisabledSchema"
                                     enabled: "#/components/schemas/ThinkingConfigEnabledSchema"
                                     adaptive: "#/components/schemas/ThinkingConfigAdaptiveSchema"
-                                    between_tools: "#/components/schemas/ThinkingConfigBetweenToolsSchema"
                               temperature:
                                 type:
                                   - "number"
@@ -28661,7 +28735,7 @@ paths:
                       maximum: 100
                       minimum: 1
                       default: 100
-                      description: "Maximum iterations (LLM calls) before the agent will stop executing."
+                      description: "Maximum iterations(llm calls) before the agent will stop executing."
                     max_execution_time:
                       type: "integer"
                       minimum: 2
@@ -28967,7 +29041,7 @@ paths:
                         maximum: 100
                         minimum: 1
                         default: 100
-                        description: "Maximum iterations (LLM calls) before the agent will stop executing."
+                        description: "Maximum iterations(llm calls) before the agent will stop executing."
                       max_execution_time:
                         type: "integer"
                         minimum: 2
@@ -29242,14 +29316,12 @@ paths:
                               - $ref: "#/components/schemas/ThinkingConfigDisabledSchema"
                               - $ref: "#/components/schemas/ThinkingConfigEnabledSchema"
                               - $ref: "#/components/schemas/ThinkingConfigAdaptiveSchema"
-                              - $ref: "#/components/schemas/ThinkingConfigBetweenToolsSchema"
                             discriminator:
                               propertyName: "type"
                               mapping:
                                 disabled: "#/components/schemas/ThinkingConfigDisabledSchema"
                                 enabled: "#/components/schemas/ThinkingConfigEnabledSchema"
                                 adaptive: "#/components/schemas/ThinkingConfigAdaptiveSchema"
-                                between_tools: "#/components/schemas/ThinkingConfigBetweenToolsSchema"
                           temperature:
                             type:
                               - "number"
@@ -29598,14 +29670,12 @@ paths:
                                         - $ref: "#/components/schemas/ThinkingConfigDisabledSchema"
                                         - $ref: "#/components/schemas/ThinkingConfigEnabledSchema"
                                         - $ref: "#/components/schemas/ThinkingConfigAdaptiveSchema"
-                                        - $ref: "#/components/schemas/ThinkingConfigBetweenToolsSchema"
                                       discriminator:
                                         propertyName: "type"
                                         mapping:
                                           disabled: "#/components/schemas/ThinkingConfigDisabledSchema"
                                           enabled: "#/components/schemas/ThinkingConfigEnabledSchema"
                                           adaptive: "#/components/schemas/ThinkingConfigAdaptiveSchema"
-                                          between_tools: "#/components/schemas/ThinkingConfigBetweenToolsSchema"
                                     temperature:
                                       type:
                                         - "number"
@@ -30055,7 +30125,7 @@ paths:
                               maximum: 100
                               minimum: 1
                               default: 100
-                              description: "Maximum iterations (LLM calls) before the agent will stop executing."
+                              description: "Maximum iterations(llm calls) before the agent will stop executing."
                             max_execution_time:
                               type: "integer"
                               minimum: 2
@@ -30330,14 +30400,12 @@ paths:
                                     - $ref: "#/components/schemas/ThinkingConfigDisabledSchema"
                                     - $ref: "#/components/schemas/ThinkingConfigEnabledSchema"
                                     - $ref: "#/components/schemas/ThinkingConfigAdaptiveSchema"
-                                    - $ref: "#/components/schemas/ThinkingConfigBetweenToolsSchema"
                                   discriminator:
                                     propertyName: "type"
                                     mapping:
                                       disabled: "#/components/schemas/ThinkingConfigDisabledSchema"
                                       enabled: "#/components/schemas/ThinkingConfigEnabledSchema"
                                       adaptive: "#/components/schemas/ThinkingConfigAdaptiveSchema"
-                                      between_tools: "#/components/schemas/ThinkingConfigBetweenToolsSchema"
                                 temperature:
                                   type:
                                     - "number"
@@ -30686,14 +30754,12 @@ paths:
                                               - $ref: "#/components/schemas/ThinkingConfigDisabledSchema"
                                               - $ref: "#/components/schemas/ThinkingConfigEnabledSchema"
                                               - $ref: "#/components/schemas/ThinkingConfigAdaptiveSchema"
-                                              - $ref: "#/components/schemas/ThinkingConfigBetweenToolsSchema"
                                             discriminator:
                                               propertyName: "type"
                                               mapping:
                                                 disabled: "#/components/schemas/ThinkingConfigDisabledSchema"
                                                 enabled: "#/components/schemas/ThinkingConfigEnabledSchema"
                                                 adaptive: "#/components/schemas/ThinkingConfigAdaptiveSchema"
-                                                between_tools: "#/components/schemas/ThinkingConfigBetweenToolsSchema"
                                           temperature:
                                             type:
                                               - "number"
@@ -31257,7 +31323,7 @@ paths:
                         maximum: 100
                         minimum: 1
                         default: 100
-                        description: "Maximum iterations (LLM calls) before the agent will stop executing."
+                        description: "Maximum iterations(llm calls) before the agent will stop executing."
                       max_execution_time:
                         type: "integer"
                         minimum: 2
@@ -31532,14 +31598,12 @@ paths:
                               - $ref: "#/components/schemas/ThinkingConfigDisabledSchema"
                               - $ref: "#/components/schemas/ThinkingConfigEnabledSchema"
                               - $ref: "#/components/schemas/ThinkingConfigAdaptiveSchema"
-                              - $ref: "#/components/schemas/ThinkingConfigBetweenToolsSchema"
                             discriminator:
                               propertyName: "type"
                               mapping:
                                 disabled: "#/components/schemas/ThinkingConfigDisabledSchema"
                                 enabled: "#/components/schemas/ThinkingConfigEnabledSchema"
                                 adaptive: "#/components/schemas/ThinkingConfigAdaptiveSchema"
-                                between_tools: "#/components/schemas/ThinkingConfigBetweenToolsSchema"
                           temperature:
                             type:
                               - "number"
@@ -31888,14 +31952,12 @@ paths:
                                         - $ref: "#/components/schemas/ThinkingConfigDisabledSchema"
                                         - $ref: "#/components/schemas/ThinkingConfigEnabledSchema"
                                         - $ref: "#/components/schemas/ThinkingConfigAdaptiveSchema"
-                                        - $ref: "#/components/schemas/ThinkingConfigBetweenToolsSchema"
                                       discriminator:
                                         propertyName: "type"
                                         mapping:
                                           disabled: "#/components/schemas/ThinkingConfigDisabledSchema"
                                           enabled: "#/components/schemas/ThinkingConfigEnabledSchema"
                                           adaptive: "#/components/schemas/ThinkingConfigAdaptiveSchema"
-                                          between_tools: "#/components/schemas/ThinkingConfigBetweenToolsSchema"
                                     temperature:
                                       type:
                                         - "number"
@@ -32322,14 +32384,12 @@ paths:
                                 - $ref: "#/components/schemas/ThinkingConfigDisabledSchema"
                                 - $ref: "#/components/schemas/ThinkingConfigEnabledSchema"
                                 - $ref: "#/components/schemas/ThinkingConfigAdaptiveSchema"
-                                - $ref: "#/components/schemas/ThinkingConfigBetweenToolsSchema"
                               discriminator:
                                 propertyName: "type"
                                 mapping:
                                   disabled: "#/components/schemas/ThinkingConfigDisabledSchema"
                                   enabled: "#/components/schemas/ThinkingConfigEnabledSchema"
                                   adaptive: "#/components/schemas/ThinkingConfigAdaptiveSchema"
-                                  between_tools: "#/components/schemas/ThinkingConfigBetweenToolsSchema"
                             temperature:
                               type:
                                 - "number"
@@ -32681,14 +32741,12 @@ paths:
                                   - $ref: "#/components/schemas/ThinkingConfigDisabledSchema"
                                   - $ref: "#/components/schemas/ThinkingConfigEnabledSchema"
                                   - $ref: "#/components/schemas/ThinkingConfigAdaptiveSchema"
-                                  - $ref: "#/components/schemas/ThinkingConfigBetweenToolsSchema"
                                 discriminator:
                                   propertyName: "type"
                                   mapping:
                                     disabled: "#/components/schemas/ThinkingConfigDisabledSchema"
                                     enabled: "#/components/schemas/ThinkingConfigEnabledSchema"
                                     adaptive: "#/components/schemas/ThinkingConfigAdaptiveSchema"
-                                    between_tools: "#/components/schemas/ThinkingConfigBetweenToolsSchema"
                               temperature:
                                 type:
                                   - "number"
@@ -33235,7 +33293,7 @@ paths:
                         maximum: 100
                         minimum: 1
                         default: 100
-                        description: "Maximum iterations (LLM calls) before the agent will stop executing."
+                        description: "Maximum iterations(llm calls) before the agent will stop executing."
                       max_execution_time:
                         type: "integer"
                         minimum: 2
@@ -33510,14 +33568,12 @@ paths:
                               - $ref: "#/components/schemas/ThinkingConfigDisabledSchema"
                               - $ref: "#/components/schemas/ThinkingConfigEnabledSchema"
                               - $ref: "#/components/schemas/ThinkingConfigAdaptiveSchema"
-                              - $ref: "#/components/schemas/ThinkingConfigBetweenToolsSchema"
                             discriminator:
                               propertyName: "type"
                               mapping:
                                 disabled: "#/components/schemas/ThinkingConfigDisabledSchema"
                                 enabled: "#/components/schemas/ThinkingConfigEnabledSchema"
                                 adaptive: "#/components/schemas/ThinkingConfigAdaptiveSchema"
-                                between_tools: "#/components/schemas/ThinkingConfigBetweenToolsSchema"
                           temperature:
                             type:
                               - "number"
@@ -33866,14 +33922,12 @@ paths:
                                         - $ref: "#/components/schemas/ThinkingConfigDisabledSchema"
                                         - $ref: "#/components/schemas/ThinkingConfigEnabledSchema"
                                         - $ref: "#/components/schemas/ThinkingConfigAdaptiveSchema"
-                                        - $ref: "#/components/schemas/ThinkingConfigBetweenToolsSchema"
                                       discriminator:
                                         propertyName: "type"
                                         mapping:
                                           disabled: "#/components/schemas/ThinkingConfigDisabledSchema"
                                           enabled: "#/components/schemas/ThinkingConfigEnabledSchema"
                                           adaptive: "#/components/schemas/ThinkingConfigAdaptiveSchema"
-                                          between_tools: "#/components/schemas/ThinkingConfigBetweenToolsSchema"
                                     temperature:
                                       type:
                                         - "number"
@@ -34607,14 +34661,12 @@ paths:
                                 - $ref: "#/components/schemas/ThinkingConfigDisabledSchema"
                                 - $ref: "#/components/schemas/ThinkingConfigEnabledSchema"
                                 - $ref: "#/components/schemas/ThinkingConfigAdaptiveSchema"
-                                - $ref: "#/components/schemas/ThinkingConfigBetweenToolsSchema"
                               discriminator:
                                 propertyName: "type"
                                 mapping:
                                   disabled: "#/components/schemas/ThinkingConfigDisabledSchema"
                                   enabled: "#/components/schemas/ThinkingConfigEnabledSchema"
                                   adaptive: "#/components/schemas/ThinkingConfigAdaptiveSchema"
-                                  between_tools: "#/components/schemas/ThinkingConfigBetweenToolsSchema"
                             temperature:
                               type:
                                 - "number"
@@ -34966,14 +35018,12 @@ paths:
                                   - $ref: "#/components/schemas/ThinkingConfigDisabledSchema"
                                   - $ref: "#/components/schemas/ThinkingConfigEnabledSchema"
                                   - $ref: "#/components/schemas/ThinkingConfigAdaptiveSchema"
-                                  - $ref: "#/components/schemas/ThinkingConfigBetweenToolsSchema"
                                 discriminator:
                                   propertyName: "type"
                                   mapping:
                                     disabled: "#/components/schemas/ThinkingConfigDisabledSchema"
                                     enabled: "#/components/schemas/ThinkingConfigEnabledSchema"
                                     adaptive: "#/components/schemas/ThinkingConfigAdaptiveSchema"
-                                    between_tools: "#/components/schemas/ThinkingConfigBetweenToolsSchema"
                               temperature:
                                 type:
                                   - "number"
@@ -35808,7 +35858,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01M613CWPDTWJ2BK4D2Y1G3CCK"
+                                          default: "01M619XVJXRVR8PFHNSP4BN8PC"
                                         name:
                                           type: "string"
                                         description:
@@ -35879,7 +35929,7 @@ paths:
                       maximum: 100
                       minimum: 1
                       default: 100
-                      description: "Maximum iterations (LLM calls) before the agent will stop executing."
+                      description: "Maximum iterations(llm calls) before the agent will stop executing."
                     max_execution_time:
                       type: "integer"
                       minimum: 2
@@ -36234,14 +36284,12 @@ paths:
                                 - $ref: "#/components/schemas/ThinkingConfigDisabledSchema"
                                 - $ref: "#/components/schemas/ThinkingConfigEnabledSchema"
                                 - $ref: "#/components/schemas/ThinkingConfigAdaptiveSchema"
-                                - $ref: "#/components/schemas/ThinkingConfigBetweenToolsSchema"
                               discriminator:
                                 propertyName: "type"
                                 mapping:
                                   disabled: "#/components/schemas/ThinkingConfigDisabledSchema"
                                   enabled: "#/components/schemas/ThinkingConfigEnabledSchema"
                                   adaptive: "#/components/schemas/ThinkingConfigAdaptiveSchema"
-                                  between_tools: "#/components/schemas/ThinkingConfigBetweenToolsSchema"
                             temperature:
                               type:
                                 - "number"
@@ -36593,14 +36641,12 @@ paths:
                                   - $ref: "#/components/schemas/ThinkingConfigDisabledSchema"
                                   - $ref: "#/components/schemas/ThinkingConfigEnabledSchema"
                                   - $ref: "#/components/schemas/ThinkingConfigAdaptiveSchema"
-                                  - $ref: "#/components/schemas/ThinkingConfigBetweenToolsSchema"
                                 discriminator:
                                   propertyName: "type"
                                   mapping:
                                     disabled: "#/components/schemas/ThinkingConfigDisabledSchema"
                                     enabled: "#/components/schemas/ThinkingConfigEnabledSchema"
                                     adaptive: "#/components/schemas/ThinkingConfigAdaptiveSchema"
-                                    between_tools: "#/components/schemas/ThinkingConfigBetweenToolsSchema"
                               temperature:
                                 type:
                                   - "number"
@@ -37435,7 +37481,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01M613CWPSMDNFGD141YK5888W"
+                                          default: "01M619XVK867SMSXKTM8YT715H"
                                         name:
                                           type: "string"
                                         description:
@@ -37506,7 +37552,7 @@ paths:
                       maximum: 100
                       minimum: 1
                       default: 100
-                      description: "Maximum iterations (LLM calls) before the agent will stop executing."
+                      description: "Maximum iterations(llm calls) before the agent will stop executing."
                     max_execution_time:
                       type: "integer"
                       minimum: 2
@@ -38285,7 +38331,6 @@ paths:
                                 - "scaleway"
                                 - "hcompany"
                                 - "inception"
-                                - "munito"
                                 - "inceptron"
                                 - "wafer"
                                 - "poolside"
@@ -38613,14 +38658,12 @@ paths:
                                 - $ref: "#/components/schemas/ThinkingConfigDisabledSchema"
                                 - $ref: "#/components/schemas/ThinkingConfigEnabledSchema"
                                 - $ref: "#/components/schemas/ThinkingConfigAdaptiveSchema"
-                                - $ref: "#/components/schemas/ThinkingConfigBetweenToolsSchema"
                               discriminator:
                                 propertyName: "type"
                                 mapping:
                                   disabled: "#/components/schemas/ThinkingConfigDisabledSchema"
                                   enabled: "#/components/schemas/ThinkingConfigEnabledSchema"
                                   adaptive: "#/components/schemas/ThinkingConfigAdaptiveSchema"
-                                  between_tools: "#/components/schemas/ThinkingConfigBetweenToolsSchema"
                             temperature:
                               type:
                                 - "number"
@@ -39618,14 +39661,12 @@ paths:
                         - $ref: "#/components/schemas/ThinkingConfigDisabledSchema"
                         - $ref: "#/components/schemas/ThinkingConfigEnabledSchema"
                         - $ref: "#/components/schemas/ThinkingConfigAdaptiveSchema"
-                        - $ref: "#/components/schemas/ThinkingConfigBetweenToolsSchema"
                       discriminator:
                         propertyName: "type"
                         mapping:
                           disabled: "#/components/schemas/ThinkingConfigDisabledSchema"
                           enabled: "#/components/schemas/ThinkingConfigEnabledSchema"
                           adaptive: "#/components/schemas/ThinkingConfigAdaptiveSchema"
-                          between_tools: "#/components/schemas/ThinkingConfigBetweenToolsSchema"
                     temperature:
                       type:
                         - "number"
@@ -40154,7 +40195,6 @@ paths:
                           - "scaleway"
                           - "hcompany"
                           - "inception"
-                          - "munito"
                           - "inceptron"
                           - "wafer"
                           - "poolside"
@@ -40482,14 +40522,12 @@ paths:
                           - $ref: "#/components/schemas/ThinkingConfigDisabledSchema"
                           - $ref: "#/components/schemas/ThinkingConfigEnabledSchema"
                           - $ref: "#/components/schemas/ThinkingConfigAdaptiveSchema"
-                          - $ref: "#/components/schemas/ThinkingConfigBetweenToolsSchema"
                         discriminator:
                           propertyName: "type"
                           mapping:
                             disabled: "#/components/schemas/ThinkingConfigDisabledSchema"
                             enabled: "#/components/schemas/ThinkingConfigEnabledSchema"
                             adaptive: "#/components/schemas/ThinkingConfigAdaptiveSchema"
-                            between_tools: "#/components/schemas/ThinkingConfigBetweenToolsSchema"
                       temperature:
                         type:
                           - "number"
@@ -41312,7 +41350,6 @@ paths:
                           - "scaleway"
                           - "hcompany"
                           - "inception"
-                          - "munito"
                           - "inceptron"
                           - "wafer"
                           - "poolside"
@@ -41640,14 +41677,12 @@ paths:
                           - $ref: "#/components/schemas/ThinkingConfigDisabledSchema"
                           - $ref: "#/components/schemas/ThinkingConfigEnabledSchema"
                           - $ref: "#/components/schemas/ThinkingConfigAdaptiveSchema"
-                          - $ref: "#/components/schemas/ThinkingConfigBetweenToolsSchema"
                         discriminator:
                           propertyName: "type"
                           mapping:
                             disabled: "#/components/schemas/ThinkingConfigDisabledSchema"
                             enabled: "#/components/schemas/ThinkingConfigEnabledSchema"
                             adaptive: "#/components/schemas/ThinkingConfigAdaptiveSchema"
-                            between_tools: "#/components/schemas/ThinkingConfigBetweenToolsSchema"
                       temperature:
                         type:
                           - "number"
@@ -42628,14 +42663,12 @@ paths:
                         - $ref: "#/components/schemas/ThinkingConfigDisabledSchema"
                         - $ref: "#/components/schemas/ThinkingConfigEnabledSchema"
                         - $ref: "#/components/schemas/ThinkingConfigAdaptiveSchema"
-                        - $ref: "#/components/schemas/ThinkingConfigBetweenToolsSchema"
                       discriminator:
                         propertyName: "type"
                         mapping:
                           disabled: "#/components/schemas/ThinkingConfigDisabledSchema"
                           enabled: "#/components/schemas/ThinkingConfigEnabledSchema"
                           adaptive: "#/components/schemas/ThinkingConfigAdaptiveSchema"
-                          between_tools: "#/components/schemas/ThinkingConfigBetweenToolsSchema"
                     temperature:
                       type:
                         - "number"
@@ -43202,7 +43235,6 @@ paths:
                           - "scaleway"
                           - "hcompany"
                           - "inception"
-                          - "munito"
                           - "inceptron"
                           - "wafer"
                           - "poolside"
@@ -43530,14 +43562,12 @@ paths:
                           - $ref: "#/components/schemas/ThinkingConfigDisabledSchema"
                           - $ref: "#/components/schemas/ThinkingConfigEnabledSchema"
                           - $ref: "#/components/schemas/ThinkingConfigAdaptiveSchema"
-                          - $ref: "#/components/schemas/ThinkingConfigBetweenToolsSchema"
                         discriminator:
                           propertyName: "type"
                           mapping:
                             disabled: "#/components/schemas/ThinkingConfigDisabledSchema"
                             enabled: "#/components/schemas/ThinkingConfigEnabledSchema"
                             adaptive: "#/components/schemas/ThinkingConfigAdaptiveSchema"
-                            between_tools: "#/components/schemas/ThinkingConfigBetweenToolsSchema"
                       temperature:
                         type:
                           - "number"
@@ -44414,7 +44444,6 @@ paths:
                                     - "scaleway"
                                     - "hcompany"
                                     - "inception"
-                                    - "munito"
                                     - "inceptron"
                                     - "wafer"
                                     - "poolside"
@@ -44742,14 +44771,12 @@ paths:
                                     - $ref: "#/components/schemas/ThinkingConfigDisabledSchema"
                                     - $ref: "#/components/schemas/ThinkingConfigEnabledSchema"
                                     - $ref: "#/components/schemas/ThinkingConfigAdaptiveSchema"
-                                    - $ref: "#/components/schemas/ThinkingConfigBetweenToolsSchema"
                                   discriminator:
                                     propertyName: "type"
                                     mapping:
                                       disabled: "#/components/schemas/ThinkingConfigDisabledSchema"
                                       enabled: "#/components/schemas/ThinkingConfigEnabledSchema"
                                       adaptive: "#/components/schemas/ThinkingConfigAdaptiveSchema"
-                                      between_tools: "#/components/schemas/ThinkingConfigBetweenToolsSchema"
                                 temperature:
                                   type:
                                     - "number"
@@ -45573,7 +45600,6 @@ paths:
                               - "scaleway"
                               - "hcompany"
                               - "inception"
-                              - "munito"
                               - "inceptron"
                               - "wafer"
                               - "poolside"
@@ -45901,14 +45927,12 @@ paths:
                               - $ref: "#/components/schemas/ThinkingConfigDisabledSchema"
                               - $ref: "#/components/schemas/ThinkingConfigEnabledSchema"
                               - $ref: "#/components/schemas/ThinkingConfigAdaptiveSchema"
-                              - $ref: "#/components/schemas/ThinkingConfigBetweenToolsSchema"
                             discriminator:
                               propertyName: "type"
                               mapping:
                                 disabled: "#/components/schemas/ThinkingConfigDisabledSchema"
                                 enabled: "#/components/schemas/ThinkingConfigEnabledSchema"
                                 adaptive: "#/components/schemas/ThinkingConfigAdaptiveSchema"
-                                between_tools: "#/components/schemas/ThinkingConfigBetweenToolsSchema"
                           temperature:
                             type:
                               - "number"
@@ -46487,7 +46511,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M613CWQPNY4EKEAYD57ZF4CA"
+                              default: "tool_01M619XVM6Y9KSQ308M3V3JN6R"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -46588,7 +46612,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M613CWQPHE82HW35Q1F52FVN"
+                              default: "tool_01M619XVM62P0D6MZ5W52D6WNB"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -46691,7 +46715,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M613CWQQFVA0ZPCTJGA6RD5H"
+                              default: "tool_01M619XVM8XEG78V8E15E4XFTH"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -46835,7 +46859,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M613CWQQRKH81DCNX5EFEFA3"
+                              default: "tool_01M619XVM88GSSTG3FRXG77MPP"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -47326,7 +47350,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M613CWQTM5Z6ZH7CXMRNGMTY"
+                        default: "tool_01M619XVMBY85DJ4ZC1K5GWVEM"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -47427,7 +47451,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M613CWQTFQ82JJNMEDNV7SQJ"
+                        default: "tool_01M619XVMBM411SN3RBP1ZKCDC"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -47530,7 +47554,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M613CWQTF50EK8E5WN64SR5K"
+                        default: "tool_01M619XVMC8RFD62R78F9H57SX"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -47674,7 +47698,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M613CWQVJAW5SNHSBA19Y52M"
+                        default: "tool_01M619XVMC8ZMJ3PJJXY3NWXRC"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -48178,7 +48202,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M613CWQWMP7BBWY84PG19AQ6"
+                        default: "tool_01M619XVMENRJYM7PC8A9423JS"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -48279,7 +48303,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M613CWQXGEE3B2YD7QMS2P4Z"
+                        default: "tool_01M619XVMENYNN9W939WFGG6S8"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -48382,7 +48406,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M613CWQXZXV8QD3Z0GWRHBA6"
+                        default: "tool_01M619XVMEZQ9XWJE3YKVK4BAC"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -48526,7 +48550,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M613CWQXN4YWQ2KCVTN5XCR3"
+                        default: "tool_01M619XVMF7Y47TVF1T0C75PSQ"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -48693,7 +48717,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M613CWR1MKZVEA72B81JV90R"
+                        default: "tool_01M619XVMJX2HPVDC8C59RNH3W"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -48794,7 +48818,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M613CWR32W4A24GBZ48KQVDN"
+                        default: "tool_01M619XVMK979B6F0GGXP496Q6"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -48897,7 +48921,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M613CWR3Q3A8FNRFTZYX85V6"
+                        default: "tool_01M619XVMKKBQWM3QD49Y27XH2"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -49041,7 +49065,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M613CWR3ZREJXKS80680ZXPX"
+                        default: "tool_01M619XVMK47VERQDZX5YYNQEY"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -49783,14 +49807,12 @@ paths:
                         - $ref: "#/components/schemas/ThinkingConfigDisabledSchema"
                         - $ref: "#/components/schemas/ThinkingConfigEnabledSchema"
                         - $ref: "#/components/schemas/ThinkingConfigAdaptiveSchema"
-                        - $ref: "#/components/schemas/ThinkingConfigBetweenToolsSchema"
                       discriminator:
                         propertyName: "type"
                         mapping:
                           disabled: "#/components/schemas/ThinkingConfigDisabledSchema"
                           enabled: "#/components/schemas/ThinkingConfigEnabledSchema"
                           adaptive: "#/components/schemas/ThinkingConfigAdaptiveSchema"
-                          between_tools: "#/components/schemas/ThinkingConfigBetweenToolsSchema"
                     temperature:
                       type:
                         - "number"
@@ -52526,7 +52548,6 @@ paths:
                         - $ref: "#/components/schemas/ThinkingConfigDisabledSchema"
                         - $ref: "#/components/schemas/ThinkingConfigEnabledSchema"
                         - $ref: "#/components/schemas/ThinkingConfigAdaptiveSchema"
-                        - $ref: "#/components/schemas/ThinkingConfigBetweenToolsSchema"
                         - type: "null"
                       description: "Configuration for the thinking mode capability. Set type to `adaptive` for models that support adaptive thinking (e.g. Claude Opus 4.6, Sonnet 4.6), or `enabled` with `budget_tokens` for manual control."
                     plugins:
@@ -55592,7 +55613,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-10-28T11:12:42.541Z"
+                          default: "2026-10-28T13:06:51.109Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -55600,7 +55621,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-10-28T11:12:42.542Z"
+                              default: "2026-10-28T13:06:51.109Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -55670,7 +55691,7 @@ paths:
                               format: "date-time"
                             - type: "string"
                               format: "date-time"
-                          default: "2026-10-28T11:12:42.541Z"
+                          default: "2026-10-28T13:06:51.109Z"
                           readOnly: true
                           format: "date-time"
                           description: "The date and time the resource was created"
@@ -55678,7 +55699,7 @@ paths:
                           anyOf:
                             - type: "string"
                               format: "date-time"
-                              default: "2026-10-28T11:12:42.542Z"
+                              default: "2026-10-28T13:06:51.109Z"
                             - type: "string"
                               format: "date-time"
                           readOnly: true
@@ -55863,7 +55884,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-10-28T11:12:42.541Z"
+                        default: "2026-10-28T13:06:51.109Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -55871,7 +55892,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-10-28T11:12:42.542Z"
+                            default: "2026-10-28T13:06:51.109Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -55941,7 +55962,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-10-28T11:12:42.541Z"
+                        default: "2026-10-28T13:06:51.109Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -55949,7 +55970,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-10-28T11:12:42.542Z"
+                            default: "2026-10-28T13:06:51.109Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -56052,7 +56073,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-10-28T11:12:42.541Z"
+                        default: "2026-10-28T13:06:51.109Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -56060,7 +56081,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-10-28T11:12:42.542Z"
+                            default: "2026-10-28T13:06:51.109Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -56130,7 +56151,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-10-28T11:12:42.541Z"
+                        default: "2026-10-28T13:06:51.109Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -56138,7 +56159,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-10-28T11:12:42.542Z"
+                            default: "2026-10-28T13:06:51.109Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -56337,7 +56358,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-10-28T11:12:42.541Z"
+                        default: "2026-10-28T13:06:51.109Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -56345,7 +56366,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-10-28T11:12:42.542Z"
+                            default: "2026-10-28T13:06:51.109Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -56415,7 +56436,7 @@ paths:
                             format: "date-time"
                           - type: "string"
                             format: "date-time"
-                        default: "2026-10-28T11:12:42.541Z"
+                        default: "2026-10-28T13:06:51.109Z"
                         readOnly: true
                         format: "date-time"
                         description: "The date and time the resource was created"
@@ -56423,7 +56444,7 @@ paths:
                         anyOf:
                           - type: "string"
                             format: "date-time"
-                            default: "2026-10-28T11:12:42.542Z"
+                            default: "2026-10-28T13:06:51.109Z"
                           - type: "string"
                             format: "date-time"
                         readOnly: true
@@ -62756,7 +62777,6 @@ paths:
   /v2/feedback:
     post:
       tags: []
-      summary: "Submit feedback"
       requestBody:
         content:
           application/json:
@@ -62891,7 +62911,6 @@ paths:
   /v2/feedback/remove:
     post:
       tags: []
-      summary: "Remove feedback"
       requestBody:
         content:
           application/json:
@@ -68405,7 +68424,7 @@ paths:
       x-code-samples:
         - lang: "typescript"
           label: "Node.js"
-          source: "await orq.budgets.create({ scope: { workspace: {} }, limits: { period: \"BUDGET_PERIOD_MONTHLY\", amount: 1000 } });\n"
+          source: "await orq.budgets.create({ scope: { kind: \"workspace\" }, limits: { period: \"MONTHLY\", amount: 1000 } });\n"
       security:
         - ApiKey: []
   /v2/budgets/{budget_id}:
@@ -73449,6 +73468,446 @@ paths:
           source: "curl --request PATCH \\\n  --url 'https://my.orq.ai/v2/webhooks/webhook_01HZXW2K7Y8Q9M0N1P2R3S4T5V' \\\n  --header \"Authorization: Bearer $ORQ_API_KEY\" \\\n  --header 'Content-Type: application/json' \\\n  --data '{\n    \"display_name\": \"Updated alerts\",\n    \"enabled\": false\n  }'\n"
       security:
         - ApiKey: []
+  /v2/wikis:
+    get:
+      tags: []
+      operationId: "ListWikis"
+      parameters:
+        - name: "limit"
+          in: "query"
+          schema:
+            type: "integer"
+            format: "int32"
+        - name: "starting_after"
+          in: "query"
+          schema:
+            type: "string"
+        - name: "ending_before"
+          in: "query"
+          schema:
+            type: "string"
+        - name: "repository_key"
+          in: "query"
+          schema:
+            type: "string"
+        - name: "branch"
+          in: "query"
+          schema:
+            type: "string"
+        - name: "factory_id"
+          in: "query"
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListWikisResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      x-speakeasy-group: "wikis"
+      x-speakeasy-name-override: "list"
+      x-cli-group: "wikis"
+      x-cli-name: "list"
+      x-code-samples:
+        - lang: "TypeScript"
+          source: "import { Orq } from '@orq-ai/node';\nconst orq = new Orq({ apiKey: process.env.ORQ_API_KEY });\nawait orq.wikis.list({ factoryId: 'fac_01J81V5RZPVTDHXBV6M2YVJHRB' });\n"
+      security:
+        - ApiKey: []
+    post:
+      tags: []
+      operationId: "CreateWiki"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateWikiRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreateWikiResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      x-speakeasy-group: "wikis"
+      x-speakeasy-name-override: "create"
+      x-cli-group: "wikis"
+      x-cli-name: "create"
+      x-code-samples:
+        - lang: "TypeScript"
+          source: "import { Orq } from '@orq-ai/node';\nconst orq = new Orq({ apiKey: process.env.ORQ_API_KEY });\nawait orq.wikis.create({ factoryId: 'fac_01J81V5RZPVTDHXBV6M2YVJHRB', displayName: 'Example repository', repository: { provider: 'github', owner: 'octocat', name: 'Hello-World', url: 'https://github.com/octocat/Hello-World', defaultBranch: 'main' }, branch: 'main', scmConnectionId: 'scmc_01J81V5RZPVTDHXBV6M2YVJHRB', settings: { depth: 'concise', refreshCadence: 'manual', publishToRepository: false } });\n"
+      security:
+        - ApiKey: []
+  /v2/wikis/inspect-repository:
+    post:
+      tags: []
+      operationId: "InspectRepositoryWiki"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InspectRepositoryWikiRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InspectRepositoryWikiResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      x-speakeasy-group: "wikis"
+      x-speakeasy-name-override: "inspectRepository"
+      x-cli-group: "wikis"
+      x-cli-name: "inspectRepository"
+      x-code-samples:
+        - lang: "TypeScript"
+          source: "import { Orq } from '@orq-ai/node';\nconst orq = new Orq({ apiKey: process.env.ORQ_API_KEY });\nawait orq.wikis.inspectRepository({ scmConnectionId: 'scmc_01J81V5RZPVTDHXBV6M2YVJHRB', repositoryUrl: 'https://github.com/octocat/Hello-World', branch: 'main' });\n"
+      security:
+        - ApiKey: []
+  /v2/wikis/{wiki_id}:
+    get:
+      tags: []
+      operationId: "GetWiki"
+      parameters:
+        - name: "wiki_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetWikiResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      x-speakeasy-group: "wikis"
+      x-speakeasy-name-override: "get"
+      x-cli-group: "wikis"
+      x-cli-name: "get"
+      x-code-samples:
+        - lang: "TypeScript"
+          source: "import { Orq } from '@orq-ai/node';\nconst orq = new Orq({ apiKey: process.env.ORQ_API_KEY });\nawait orq.wikis.get({ wikiId: 'wiki_01J81V5RZPVTDHXBV6M2YVJHRA' });\n"
+      security:
+        - ApiKey: []
+    delete:
+      tags: []
+      operationId: "DeleteWiki"
+      parameters:
+        - name: "wiki_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeleteWikiResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      x-speakeasy-group: "wikis"
+      x-speakeasy-name-override: "delete"
+      x-cli-group: "wikis"
+      x-cli-name: "delete"
+      x-code-samples:
+        - lang: "TypeScript"
+          source: "import { Orq } from '@orq-ai/node';\nconst orq = new Orq({ apiKey: process.env.ORQ_API_KEY });\nawait orq.wikis.delete({ wikiId: 'wiki_01J81V5RZPVTDHXBV6M2YVJHRA' });\n"
+      security:
+        - ApiKey: []
+    patch:
+      tags: []
+      operationId: "UpdateWiki"
+      parameters:
+        - name: "wiki_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateWikiRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UpdateWikiResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      x-speakeasy-group: "wikis"
+      x-speakeasy-name-override: "update"
+      x-cli-group: "wikis"
+      x-cli-name: "update"
+      x-code-samples:
+        - lang: "TypeScript"
+          source: "import { Orq } from '@orq-ai/node';\nconst orq = new Orq({ apiKey: process.env.ORQ_API_KEY });\nawait orq.wikis.update({ wikiId: 'wiki_01J81V5RZPVTDHXBV6M2YVJHRA', settings: { depth: 'extensive', refreshCadence: 'weekly', publishToRepository: false } });\n"
+      security:
+        - ApiKey: []
+  /v2/wikis/{wiki_id}/page:
+    get:
+      tags: []
+      operationId: "GetWikiPage"
+      parameters:
+        - name: "wiki_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+        - name: "path"
+          in: "query"
+          schema:
+            type: "string"
+        - name: "run_id"
+          in: "query"
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetWikiPageResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      x-speakeasy-group: "wikis"
+      x-speakeasy-name-override: "getPage"
+      x-cli-group: "wikis"
+      x-cli-name: "getPage"
+      x-code-samples:
+        - lang: "TypeScript"
+          source: "import { Orq } from '@orq-ai/node';\nconst orq = new Orq({ apiKey: process.env.ORQ_API_KEY });\nawait orq.wikis.getPage({ wikiId: 'wiki_01J81V5RZPVTDHXBV6M2YVJHRA', path: 'index.md' });\n"
+      security:
+        - ApiKey: []
+    patch:
+      tags: []
+      operationId: "UpdateWikiPage"
+      parameters:
+        - name: "wiki_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateWikiPageRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UpdateWikiPageResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      x-speakeasy-group: "wikis"
+      x-speakeasy-name-override: "updatePage"
+      x-cli-group: "wikis"
+      x-cli-name: "updatePage"
+      x-code-samples:
+        - lang: "TypeScript"
+          source: "import { Orq } from '@orq-ai/node';\nconst orq = new Orq({ apiKey: process.env.ORQ_API_KEY });\nconst { page } = await orq.wikis.getPage({ wikiId: 'wiki_01J81V5RZPVTDHXBV6M2YVJHRA', path: 'index.md' });\nawait orq.wikis.updatePage({ wikiId: 'wiki_01J81V5RZPVTDHXBV6M2YVJHRA', path: 'index.md', markdown: '# Overview\\nUpdated documentation.', expectedContentHash: page.contentHash });\n"
+      security:
+        - ApiKey: []
+  /v2/wikis/{wiki_id}/refresh:
+    post:
+      tags: []
+      operationId: "RefreshWiki"
+      parameters:
+        - name: "wiki_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RefreshWikiRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RefreshWikiResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      x-speakeasy-group: "wikis"
+      x-speakeasy-name-override: "refresh"
+      x-cli-group: "wikis"
+      x-cli-name: "refresh"
+      x-code-samples:
+        - lang: "TypeScript"
+          source: "import { Orq } from '@orq-ai/node';\nconst orq = new Orq({ apiKey: process.env.ORQ_API_KEY });\nawait orq.wikis.refresh({ wikiId: 'wiki_01J81V5RZPVTDHXBV6M2YVJHRA', full: false });\n"
+      security:
+        - ApiKey: []
+  /v2/wikis/{wiki_id}/runs:
+    get:
+      tags: []
+      operationId: "ListWikiRuns"
+      parameters:
+        - name: "wiki_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+        - name: "limit"
+          in: "query"
+          schema:
+            type: "integer"
+            format: "int32"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListWikiRunsResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      x-speakeasy-group: "wikis"
+      x-speakeasy-name-override: "listRuns"
+      x-cli-group: "wikis"
+      x-cli-name: "listRuns"
+      x-code-samples:
+        - lang: "TypeScript"
+          source: "import { Orq } from '@orq-ai/node';\nconst orq = new Orq({ apiKey: process.env.ORQ_API_KEY });\nawait orq.wikis.listRuns({ wikiId: 'wiki_01J81V5RZPVTDHXBV6M2YVJHRA', limit: 20 });\n"
+      security:
+        - ApiKey: []
+  /v2/wikis/{wiki_id}/search:
+    get:
+      tags: []
+      operationId: "SearchWiki"
+      parameters:
+        - name: "wiki_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+        - name: "query"
+          in: "query"
+          schema:
+            type: "string"
+        - name: "limit"
+          in: "query"
+          schema:
+            type: "integer"
+            format: "int32"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SearchWikiResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      x-speakeasy-group: "wikis"
+      x-speakeasy-name-override: "search"
+      x-cli-group: "wikis"
+      x-cli-name: "search"
+      x-code-samples:
+        - lang: "TypeScript"
+          source: "import { Orq } from '@orq-ai/node';\nconst orq = new Orq({ apiKey: process.env.ORQ_API_KEY });\nawait orq.wikis.search({ wikiId: 'wiki_01J81V5RZPVTDHXBV6M2YVJHRA', query: 'installation', limit: 20 });\n"
+      security:
+        - ApiKey: []
+  /v2/wikis/{wiki_id}/tree:
+    get:
+      tags: []
+      operationId: "GetWikiTree"
+      parameters:
+        - name: "wiki_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetWikiTreeResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      x-speakeasy-group: "wikis"
+      x-speakeasy-name-override: "getTree"
+      x-cli-group: "wikis"
+      x-cli-name: "getTree"
+      x-code-samples:
+        - lang: "TypeScript"
+          source: "import { Orq } from '@orq-ai/node';\nconst orq = new Orq({ apiKey: process.env.ORQ_API_KEY });\nawait orq.wikis.getTree({ wikiId: 'wiki_01J81V5RZPVTDHXBV6M2YVJHRA' });\n"
+      security:
+        - ApiKey: []
   /v2/workspaces:
     get:
       tags:
@@ -75022,13 +75481,6 @@ paths:
                 name:
                   description: "The name to display on the trace. If not specified, the default system name will be used."
                   type: "string"
-                prompt_cache_key:
-                  description: "Native OpenAI only. Partitions reuse of shared input across requests."
-                  maxLength: 64
-                  type: "string"
-                prompt_cache_options:
-                  $ref: "#/components/schemas/ClassifyPromptCacheOptions"
-                  description: "Native OpenAI prompt caching controls. Separate from the gateway exact-match response cache."
                 questions:
                   additionalProperties:
                     oneOf:
@@ -75070,7 +75522,7 @@ paths:
                               - items: {}
                                 title: "Array"
                                 type: "array"
-                            description: "The evaluation prompt for this question. A string, an object or an array. Native OpenAI also accepts arrays of input_text, input_image and input_json parts. Question parts cannot contain prompt cache breakpoints."
+                            description: "The evaluation prompt for this question. A string, an object or an array."
                           type:
                             enum:
                               - "noul"
@@ -75109,7 +75561,7 @@ paths:
                               - items: {}
                                 title: "Array"
                                 type: "array"
-                            description: "The evaluation prompt for this question. A string, an object or an array. Native OpenAI also accepts arrays of input_text, input_image and input_json parts. Question parts cannot contain prompt cache breakpoints."
+                            description: "The evaluation prompt for this question. A string, an object or an array."
                           type:
                             enum:
                               - "choice"
@@ -75137,7 +75589,7 @@ paths:
                               - items: {}
                                 title: "Array"
                                 type: "array"
-                            description: "The evaluation prompt for this question. A string, an object or an array. Native OpenAI also accepts arrays of input_text, input_image and input_json parts. Question parts cannot contain prompt cache breakpoints."
+                            description: "The evaluation prompt for this question. A string, an object or an array."
                           type:
                             enum:
                               - "score"
@@ -75160,7 +75612,7 @@ paths:
                               - items: {}
                                 title: "Array"
                                 type: "array"
-                            description: "The evaluation prompt for this question. A string, an object or an array. Native OpenAI also accepts arrays of input_text, input_image and input_json parts. Question parts cannot contain prompt cache breakpoints."
+                            description: "The evaluation prompt for this question. A string, an object or an array."
                           type:
                             enum:
                               - "box"
@@ -75170,7 +75622,7 @@ paths:
                           - "instructions"
                         title: "BoxQuestion"
                         type: "object"
-                  description: "Typed questions keyed by an identifier of your choice. Each answer is returned under the same key. Native OpenAI accepts 1 to 400 questions."
+                  description: "Typed questions keyed by an identifier of your choice. Each answer is returned under the same key."
                   minProperties: 1
                   type: "object"
                 retry:
@@ -75186,7 +75638,7 @@ paths:
                     - items: {}
                       title: "Array"
                       type: "array"
-                  description: "The content to evaluate. A string, an object or an array. For TypeSafe models, reference images declared in assets by writing their reference string. Native OpenAI accepts messages and function/custom-tool history. User messages support input_text, input_image and input_json; images can use inline base64 data URLs or public HTTP(S) URLs. At most 128 images across state and question instructions. Shared text/image parts support explicit prompt_cache_breakpoint markers. File IDs, audio, item references and bare content parts are unsupported. Other objects and arrays are serialized as text."
+                  description: "The content to evaluate. A string, an object or an array. For TypeSafe models, reference images declared in assets by writing their reference string. For OpenAI GPT-6 Luna, strings are passed as text and objects or ordinary JSON arrays are serialized as text. User-message arrays accept string content or input_text/input_image parts. Images must be inline base64 data URLs, with at most 128 images across the request. Remote image URLs, file IDs, audio, non-user roles, bare content parts and tool items are rejected."
                 timeout:
                   $ref: "#/components/schemas/ClassifyTimeoutConfig"
                   description: "Timeout for each model call, including every retry and fallback. A timed-out call returns 408 and advances to the next fallback after configured retries are exhausted."
@@ -75613,13 +76065,6 @@ paths:
                 name:
                   description: "The name to display on the trace. If not specified, the default system name will be used."
                   type: "string"
-                prompt_cache_key:
-                  description: "Native OpenAI only. Partitions reuse of shared input across requests."
-                  maxLength: 64
-                  type: "string"
-                prompt_cache_options:
-                  $ref: "#/components/schemas/ClassifyPromptCacheOptions"
-                  description: "Native OpenAI prompt caching controls. Separate from the gateway exact-match response cache."
                 questions:
                   additionalProperties:
                     oneOf:
@@ -75661,7 +76106,7 @@ paths:
                               - items: {}
                                 title: "Array"
                                 type: "array"
-                            description: "The evaluation prompt for this question. A string, an object or an array. Native OpenAI also accepts arrays of input_text, input_image and input_json parts. Question parts cannot contain prompt cache breakpoints."
+                            description: "The evaluation prompt for this question. A string, an object or an array."
                           type:
                             enum:
                               - "noul"
@@ -75700,7 +76145,7 @@ paths:
                               - items: {}
                                 title: "Array"
                                 type: "array"
-                            description: "The evaluation prompt for this question. A string, an object or an array. Native OpenAI also accepts arrays of input_text, input_image and input_json parts. Question parts cannot contain prompt cache breakpoints."
+                            description: "The evaluation prompt for this question. A string, an object or an array."
                           type:
                             enum:
                               - "choice"
@@ -75728,7 +76173,7 @@ paths:
                               - items: {}
                                 title: "Array"
                                 type: "array"
-                            description: "The evaluation prompt for this question. A string, an object or an array. Native OpenAI also accepts arrays of input_text, input_image and input_json parts. Question parts cannot contain prompt cache breakpoints."
+                            description: "The evaluation prompt for this question. A string, an object or an array."
                           type:
                             enum:
                               - "score"
@@ -75751,7 +76196,7 @@ paths:
                               - items: {}
                                 title: "Array"
                                 type: "array"
-                            description: "The evaluation prompt for this question. A string, an object or an array. Native OpenAI also accepts arrays of input_text, input_image and input_json parts. Question parts cannot contain prompt cache breakpoints."
+                            description: "The evaluation prompt for this question. A string, an object or an array."
                           type:
                             enum:
                               - "box"
@@ -75761,7 +76206,7 @@ paths:
                           - "instructions"
                         title: "BoxQuestion"
                         type: "object"
-                  description: "Typed questions keyed by an identifier of your choice. Each answer is returned under the same key. Native OpenAI accepts 1 to 400 questions."
+                  description: "Typed questions keyed by an identifier of your choice. Each answer is returned under the same key."
                   minProperties: 1
                   type: "object"
                 retry:
@@ -75777,7 +76222,7 @@ paths:
                     - items: {}
                       title: "Array"
                       type: "array"
-                  description: "The content to evaluate. A string, an object or an array. For TypeSafe models, reference images declared in assets by writing their reference string. Native OpenAI accepts messages and function/custom-tool history. User messages support input_text, input_image and input_json; images can use inline base64 data URLs or public HTTP(S) URLs. At most 128 images across state and question instructions. Shared text/image parts support explicit prompt_cache_breakpoint markers. File IDs, audio, item references and bare content parts are unsupported. Other objects and arrays are serialized as text."
+                  description: "The content to evaluate. A string, an object or an array. For TypeSafe models, reference images declared in assets by writing their reference string. For OpenAI GPT-6 Luna, strings are passed as text and objects or ordinary JSON arrays are serialized as text. User-message arrays accept string content or input_text/input_image parts. Images must be inline base64 data URLs, with at most 128 images across the request. Remote image URLs, file IDs, audio, non-user roles, bare content parts and tool items are rejected."
                 timeout:
                   $ref: "#/components/schemas/ClassifyTimeoutConfig"
                   description: "Timeout for each model call, including every retry and fallback. A timed-out call returns 408 and advances to the next fallback after configured retries are exhausted."
