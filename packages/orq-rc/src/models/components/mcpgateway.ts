@@ -90,6 +90,10 @@ export type McpGateway = {
    * Guardrails run on the arguments and result of every tool call this gateway serves.
    */
   guardrails?: Array<GuardrailRuleGuardrail> | undefined;
+  /**
+   * Account that created the gateway.
+   */
+  createdById?: string | undefined;
 };
 
 /** @internal */
@@ -115,6 +119,7 @@ export const McpGateway$inboundSchema: z.ZodType<
   icons: z.array(McpIcon$inboundSchema).optional(),
   website_url: z.string().optional(),
   guardrails: z.array(GuardrailRuleGuardrail$inboundSchema).optional(),
+  created_by_id: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "display_name": "displayName",
@@ -124,6 +129,7 @@ export const McpGateway$inboundSchema: z.ZodType<
     "exposed_tools_count": "exposedToolsCount",
     "skill_ids": "skillIds",
     "website_url": "websiteUrl",
+    "created_by_id": "createdById",
   });
 });
 
