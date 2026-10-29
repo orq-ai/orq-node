@@ -43,6 +43,7 @@ export type ModelMetadata = {
   contextWindow?: number | undefined;
   costEfficiencyRating?: number | undefined;
   costPerImage?: number | undefined;
+  defaultMaxOutputTokens?: number | undefined;
   defaultSpeechResponseFormat?: string | undefined;
   deprecationDate?: string | undefined;
   embeddingDimensions?: number | undefined;
@@ -182,6 +183,7 @@ export const ModelMetadata$inboundSchema: z.ZodType<
   context_window: z.number().int().optional(),
   cost_efficiency_rating: z.number().int().optional(),
   cost_per_image: z.number().optional(),
+  default_max_output_tokens: z.number().int().optional(),
   default_speech_response_format: z.string().optional(),
   deprecation_date: z.string().optional(),
   embedding_dimensions: z.number().int().optional(),
@@ -315,6 +317,7 @@ export const ModelMetadata$inboundSchema: z.ZodType<
     "context_window": "contextWindow",
     "cost_efficiency_rating": "costEfficiencyRating",
     "cost_per_image": "costPerImage",
+    "default_max_output_tokens": "defaultMaxOutputTokens",
     "default_speech_response_format": "defaultSpeechResponseFormat",
     "deprecation_date": "deprecationDate",
     "embedding_dimensions": "embeddingDimensions",
@@ -449,6 +452,7 @@ export type ModelMetadata$Outbound = {
   context_window?: number | undefined;
   cost_efficiency_rating?: number | undefined;
   cost_per_image?: number | undefined;
+  default_max_output_tokens?: number | undefined;
   default_speech_response_format?: string | undefined;
   deprecation_date?: string | undefined;
   embedding_dimensions?: number | undefined;
@@ -590,6 +594,7 @@ export const ModelMetadata$outboundSchema: z.ZodType<
   contextWindow: z.number().int().optional(),
   costEfficiencyRating: z.number().int().optional(),
   costPerImage: z.number().optional(),
+  defaultMaxOutputTokens: z.number().int().optional(),
   defaultSpeechResponseFormat: z.string().optional(),
   deprecationDate: z.string().optional(),
   embeddingDimensions: z.number().int().optional(),
@@ -723,6 +728,7 @@ export const ModelMetadata$outboundSchema: z.ZodType<
     contextWindow: "context_window",
     costEfficiencyRating: "cost_efficiency_rating",
     costPerImage: "cost_per_image",
+    defaultMaxOutputTokens: "default_max_output_tokens",
     defaultSpeechResponseFormat: "default_speech_response_format",
     deprecationDate: "deprecation_date",
     embeddingDimensions: "embedding_dimensions",
