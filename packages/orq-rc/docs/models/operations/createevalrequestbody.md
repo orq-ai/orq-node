@@ -3,10 +3,10 @@
 
 ## Supported Types
 
-### `operations.CreateEvalRequestBody1`
+### `operations.RequestBody1`
 
 ```typescript
-const value: operations.CreateEvalRequestBody1 = {
+const value: operations.RequestBody1 = {
   type: "llm_eval",
   prompt: "<value>",
   description: "",

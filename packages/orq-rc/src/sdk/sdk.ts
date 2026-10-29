@@ -20,7 +20,6 @@ import { Files } from "./files.js";
 import { FileSystems } from "./filesystems.js";
 import { GuardrailRules } from "./guardrailrules.js";
 import { Hub } from "./hub.js";
-import { HumanReviewSets } from "./humanreviewsets.js";
 import { Identities } from "./identities.js";
 import { Knowledge } from "./knowledge.js";
 import { Logs } from "./logs.js";
@@ -80,11 +79,6 @@ export class Orq extends ClientSDK {
   private _router?: Router;
   get router(): Router {
     return (this._router ??= new Router(this._options));
-  }
-
-  private _humanReviewSets?: HumanReviewSets;
-  get humanReviewSets(): HumanReviewSets {
-    return (this._humanReviewSets ??= new HumanReviewSets(this._options));
   }
 
   private _chunking?: Chunking;

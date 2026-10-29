@@ -182,7 +182,7 @@ export type Llm = {
   model: string;
 };
 
-export type CreateEvalRequestBody1 = Llm | LLMJury;
+export type RequestBody1 = Llm | LLMJury;
 
 export type CreateEvalRequestBody = Python | Llm | LLMJury;
 
@@ -599,24 +599,20 @@ export function llmToJSON(llm: Llm): string {
 }
 
 /** @internal */
-export type CreateEvalRequestBody1$Outbound = Llm$Outbound | LLMJury$Outbound;
+export type RequestBody1$Outbound = Llm$Outbound | LLMJury$Outbound;
 
 /** @internal */
-export const CreateEvalRequestBody1$outboundSchema: z.ZodType<
-  CreateEvalRequestBody1$Outbound,
+export const RequestBody1$outboundSchema: z.ZodType<
+  RequestBody1$Outbound,
   z.ZodTypeDef,
-  CreateEvalRequestBody1
+  RequestBody1
 > = z.union([
   z.lazy(() => Llm$outboundSchema),
   z.lazy(() => LLMJury$outboundSchema),
 ]);
 
-export function createEvalRequestBody1ToJSON(
-  createEvalRequestBody1: CreateEvalRequestBody1,
-): string {
-  return JSON.stringify(
-    CreateEvalRequestBody1$outboundSchema.parse(createEvalRequestBody1),
-  );
+export function requestBody1ToJSON(requestBody1: RequestBody1): string {
+  return JSON.stringify(RequestBody1$outboundSchema.parse(requestBody1));
 }
 
 /** @internal */

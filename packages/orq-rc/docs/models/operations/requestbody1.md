@@ -1,31 +1,39 @@
 # RequestBody1
 
-## Example Usage
+
+## Supported Types
+
+### `operations.Llm`
 
 ```typescript
-import { RequestBody1 } from "@orq-ai/node/models/operations";
-
-let value: RequestBody1 = {
-  displayName: "Abagail.Frami",
-  humanEvalIds: [
-    "<id 1>",
-  ],
-  filterType: "span_type",
-  filterValues: [
-    "<value 1>",
-    "<value 2>",
-    "<value 3>",
-  ],
+const value: operations.Llm = {
+  type: "llm_eval",
+  prompt: "<value>",
+  path: "Default",
+  projectId: "01JMDPA3QW5C1V0NJ1PW34T4E5",
+  key: "<key>",
+  mode: "single",
+  model: "Model S",
 };
 ```
 
-## Fields
+### `operations.LLMJury`
 
-| Field                                                                    | Type                                                                     | Required                                                                 | Description                                                              |
-| ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
-| `displayName`                                                            | *string*                                                                 | :heavy_check_mark:                                                       | Display name of the human review set                                     |
-| `description`                                                            | *string*                                                                 | :heavy_minus_sign:                                                       | Detailed description of the human review set                             |
-| `humanEvalIds`                                                           | *string*[]                                                               | :heavy_check_mark:                                                       | Array of human review IDs to be applied to matching spans                |
-| `projectId`                                                              | *string*                                                                 | :heavy_minus_sign:                                                       | Optional project ID to scope this human review set to a specific project |
-| `filterType`                                                             | *"span_type"*                                                            | :heavy_check_mark:                                                       | N/A                                                                      |
-| `filterValues`                                                           | *string*[]                                                               | :heavy_check_mark:                                                       | Array of span types to match                                             |
+```typescript
+const value: operations.LLMJury = {
+  type: "llm_eval",
+  prompt: "<value>",
+  path: "Default",
+  projectId: "01JMDPA3QW5C1V0NJ1PW34T4E5",
+  key: "<key>",
+  mode: "jury",
+  jury: {
+    judges: [
+      {
+        model: "A8",
+      },
+    ],
+  },
+};
+```
+
