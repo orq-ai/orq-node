@@ -430,6 +430,7 @@ export const GetPromptVersionProvider = {
   Scaleway: "scaleway",
   Hcompany: "hcompany",
   Inception: "inception",
+  Particle: "particle",
   Munito: "munito",
   Inceptron: "inceptron",
   Wafer: "wafer",

@@ -444,6 +444,7 @@ export const ListPromptVersionsProvider = {
   Scaleway: "scaleway",
   Hcompany: "hcompany",
   Inception: "inception",
+  Particle: "particle",
   Munito: "munito",
   Inceptron: "inceptron",
   Wafer: "wafer",

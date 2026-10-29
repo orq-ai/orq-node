@@ -10,7 +10,7 @@ let value: ListDeploymentVersionsFallbacks = {
   modelDbId: "<id>",
   modelType: "embedding",
   modelParameters: {},
-  provider: "azure",
+  provider: "aws",
 };
 ```
 
