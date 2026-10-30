@@ -8,12 +8,17 @@ import { remap as remap$ } from "../../lib/primitives.js";
 export type UpdateDatasetRequest = {
   displayName?: string | undefined;
   projectId?: string | undefined;
+  /**
+   * Project path to move the dataset to, in the format `project/folder/subfolder`. With a project-scoped API key the path is relative to that project. Takes precedence over `project_id`.
+   */
+  path?: string | undefined;
 };
 
 /** @internal */
 export type UpdateDatasetRequest$Outbound = {
   display_name?: string | undefined;
   project_id?: string | undefined;
+  path?: string | undefined;
 };
 
 /** @internal */
@@ -24,6 +29,7 @@ export const UpdateDatasetRequest$outboundSchema: z.ZodType<
 > = z.object({
   displayName: z.string().optional(),
   projectId: z.string().optional(),
+  path: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     displayName: "display_name",
