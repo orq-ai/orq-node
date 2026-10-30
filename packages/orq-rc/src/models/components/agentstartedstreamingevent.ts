@@ -82,7 +82,7 @@ export type AgentStartedStreamingEventConditions = {
   value: string;
 };
 
-export type Tools = {
+export type AgentStartedStreamingEventTools = {
   /**
    * The id of the resource
    */
@@ -204,7 +204,7 @@ export type Settings = {
    * When enabled, this agent is exposed as a selectable target in AI Chat for users to consume.
    */
   chatExposed?: boolean | undefined;
-  tools?: Array<Tools> | undefined;
+  tools?: Array<AgentStartedStreamingEventTools> | undefined;
   /**
    * Configuration for an evaluator applied to the agent
    */
@@ -341,38 +341,41 @@ export function agentStartedStreamingEventConditionsFromJSON(
 }
 
 /** @internal */
-export const Tools$inboundSchema: z.ZodType<Tools, z.ZodTypeDef, unknown> = z
-  .object({
-    id: z.string(),
-    key: z.string().optional(),
-    action_type: z.string(),
-    display_name: z.string().optional(),
-    description: z.string().optional(),
-    configuration: z.record(z.any()).optional(),
-    requires_approval: z.boolean().default(false),
-    tool_id: z.string().optional(),
-    whole_server: z.boolean().optional(),
-    conditions: z.array(
-      z.lazy(() => AgentStartedStreamingEventConditions$inboundSchema),
-    ).optional(),
-    timeout: z.number().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "action_type": "actionType",
-      "display_name": "displayName",
-      "requires_approval": "requiresApproval",
-      "tool_id": "toolId",
-      "whole_server": "wholeServer",
-    });
+export const AgentStartedStreamingEventTools$inboundSchema: z.ZodType<
+  AgentStartedStreamingEventTools,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  id: z.string(),
+  key: z.string().optional(),
+  action_type: z.string(),
+  display_name: z.string().optional(),
+  description: z.string().optional(),
+  configuration: z.record(z.any()).optional(),
+  requires_approval: z.boolean().default(false),
+  tool_id: z.string().optional(),
+  whole_server: z.boolean().optional(),
+  conditions: z.array(
+    z.lazy(() => AgentStartedStreamingEventConditions$inboundSchema),
+  ).optional(),
+  timeout: z.number().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "action_type": "actionType",
+    "display_name": "displayName",
+    "requires_approval": "requiresApproval",
+    "tool_id": "toolId",
+    "whole_server": "wholeServer",
   });
+});
 
-export function toolsFromJSON(
+export function agentStartedStreamingEventToolsFromJSON(
   jsonString: string,
-): SafeParseResult<Tools, SDKValidationError> {
+): SafeParseResult<AgentStartedStreamingEventTools, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Tools$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Tools' from JSON`,
+    (x) => AgentStartedStreamingEventTools$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'AgentStartedStreamingEventTools' from JSON`,
   );
 }
 
@@ -453,7 +456,8 @@ export const Settings$inboundSchema: z.ZodType<
     "respect_tool",
   ),
   chat_exposed: z.boolean().optional(),
-  tools: z.array(z.lazy(() => Tools$inboundSchema)).optional(),
+  tools: z.array(z.lazy(() => AgentStartedStreamingEventTools$inboundSchema))
+    .optional(),
   evaluators: z.array(z.lazy(() => Evaluators$inboundSchema)).optional(),
   guardrails: z.array(z.lazy(() => Guardrails$inboundSchema)).optional(),
 }).transform((v) => {

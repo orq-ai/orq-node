@@ -18,7 +18,7 @@ export class Files extends ClientSDK {
    * List all files
    *
    * @remarks
-   * Returns a list of the files that your account has access to. orq.ai sorts and returns the files by their creation dates, placing the most recently created files at the top.
+   * Returns a list of the files that your account has access to, sorted by creation date. Set `order` to `desc` to return the most recently created files first.
    */
   async list(
     request?: operations.FileListRequest | undefined,

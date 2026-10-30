@@ -15,6 +15,7 @@ import { Datasets } from "./datasets.js";
 import { Deployments } from "./deployments.js";
 import { Environments } from "./environments.js";
 import { Evals } from "./evals.js";
+import { Experiments } from "./experiments.js";
 import { Feedback } from "./feedback.js";
 import { Files } from "./files.js";
 import { FileSystems } from "./filesystems.js";
@@ -154,6 +155,11 @@ export class Orq extends ClientSDK {
   private _datasets?: Datasets;
   get datasets(): Datasets {
     return (this._datasets ??= new Datasets(this._options));
+  }
+
+  private _experiments?: Experiments;
+  get experiments(): Experiments {
+    return (this._experiments ??= new Experiments(this._options));
   }
 
   private _models?: Models;

@@ -1,0 +1,22 @@
+# QueryRunRequest
+
+## Example Usage
+
+```typescript
+import { QueryRunRequest } from "@orq-ai/node/models/components";
+
+let value: QueryRunRequest = {};
+```
+
+## Fields
+
+| Field                                                                                                | Type                                                                                                 | Required                                                                                             | Description                                                                                          |
+| ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| `rows`                                                                                               | *string*[]                                                                                           | :heavy_minus_sign:                                                                                   | N/A                                                                                                  |
+| `columns`                                                                                            | *string*[]                                                                                           | :heavy_minus_sign:                                                                                   | N/A                                                                                                  |
+| `repeatIndex`                                                                                        | *number*                                                                                             | :heavy_minus_sign:                                                                                   | N/A                                                                                                  |
+| `limit`                                                                                              | *number*                                                                                             | :heavy_minus_sign:                                                                                   | N/A                                                                                                  |
+| `startingAfter`                                                                                      | *string*                                                                                             | :heavy_minus_sign:                                                                                   | N/A                                                                                                  |
+| `updatedAfter`                                                                                       | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)        | :heavy_minus_sign:                                                                                   | Incremental refresh: returns running rows plus completed or failed rows<br/> updated after this instant. |
+| `partialRows`                                                                                        | *boolean*                                                                                            | :heavy_minus_sign:                                                                                   | N/A                                                                                                  |
+| `excludeStaticCells`                                                                                 | *boolean*                                                                                            | :heavy_minus_sign:                                                                                   | N/A                                                                                                  |
