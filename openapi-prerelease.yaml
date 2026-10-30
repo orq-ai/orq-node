@@ -2591,7 +2591,7 @@ components:
           properties:
             _id:
               type: "string"
-              default: "reasoning_01m65mvwq3cjvmh7k36xh6q84q"
+              default: "reasoning_01m66bvsywvvc3ymkh28chdhvz"
               description: "Unique identifier for the part. Format: reasoning_{ulid} (e.g., reasoning_01hxyz...)"
               example: "reasoning_01hxyz123abc"
             kind:
@@ -10899,6 +10899,788 @@ components:
           description: "Number of datapoints currently in the dataset."
           format: "int32"
       description: "Dataset counters maintained by the API."
+    ListExperimentsResponse:
+      type: "object"
+      properties:
+        data:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/Experiment"
+        has_more:
+          type: "boolean"
+    CreateExperimentRequest:
+      type: "object"
+      properties:
+        display_name:
+          type: "string"
+        project_id:
+          type: "string"
+          description: "Project the experiment is created in; defaults to the API key's project when omitted."
+        dataset_id:
+          type: "string"
+        dataset_version_id:
+          type: "string"
+        source_run:
+          allOf:
+            - $ref: "#/components/schemas/RunRef"
+          description: "Copies the task, evaluator and review columns of an existing run into the\n new experiment's first run (fork)."
+    UpdateExperimentRequest:
+      type: "object"
+      properties:
+        display_name:
+          type: "string"
+        selected_run_id:
+          type: "string"
+        row_height_level:
+          type: "integer"
+          format: "int32"
+        project_id:
+          type: "string"
+    ListExperimentRunsResponse:
+      type: "object"
+      properties:
+        data:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/Run"
+        has_more:
+          type: "boolean"
+    CreateRunRequest:
+      type: "object"
+      properties:
+        key:
+          type: "string"
+        settings:
+          $ref: "#/components/schemas/RunSettings"
+    UpdateRunRequest:
+      type: "object"
+      properties:
+        key:
+          type: "string"
+        settings:
+          $ref: "#/components/schemas/RunSettings"
+    CancelExperimentRunRequest:
+      type: "object"
+      properties:
+        row_ids:
+          type: "array"
+          items:
+            type: "string"
+    UpdateRunColumnLayoutRequest:
+      type: "object"
+      properties:
+        columns:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/ColumnLayout"
+    ListEvalColumnsResponse:
+      type: "object"
+      properties:
+        data:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/Column"
+    CreateEvalColumnRequest:
+      type: "object"
+      properties:
+        evaluator_id:
+          type: "string"
+        position:
+          type: "integer"
+          format: "int32"
+    PatchEvalCellRequest:
+      type: "object"
+      properties:
+        value:
+          type: "object"
+    ExecuteRunRequest:
+      type: "object"
+      properties:
+        scope:
+          $ref: "#/components/schemas/ExecuteScope"
+        targets:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/ExecuteTarget"
+        constraints:
+          $ref: "#/components/schemas/ExecuteConstraints"
+        repeat_count:
+          type: "integer"
+          format: "uint32"
+    GetRunMetricsResponse:
+      type: "object"
+      properties:
+        metrics:
+          type: "object"
+          additionalProperties:
+            $ref: "#/components/schemas/MetricSummary"
+          description: "Keyed \"{task_column_id}_{metric_id}\" like Run.metrics."
+    QueryRunRequest:
+      type: "object"
+      properties:
+        rows:
+          type: "array"
+          items:
+            type: "string"
+        columns:
+          type: "array"
+          items:
+            type: "string"
+        repeat_index:
+          type: "integer"
+          format: "uint32"
+        limit:
+          type: "integer"
+          format: "int32"
+        starting_after:
+          type: "string"
+        updated_after:
+          type: "string"
+          description: "Incremental refresh: returns running rows plus completed or failed rows\n updated after this instant."
+          format: "date-time"
+        partial_rows:
+          type: "boolean"
+        exclude_static_cells:
+          type: "boolean"
+    QueryRunResponse:
+      type: "object"
+      properties:
+        rows:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/QueryRow"
+        has_more:
+          type: "boolean"
+        server_timestamp:
+          type: "string"
+          description: "Cursor for the next incremental query (server clock minus a skew buffer)."
+          format: "date-time"
+    ListReviewColumnsResponse:
+      type: "object"
+      properties:
+        data:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/Column"
+    CreateReviewColumnRequest:
+      type: "object"
+      properties:
+        human_eval_id:
+          type: "string"
+        display_name:
+          type: "string"
+        human_eval_type:
+          type: "string"
+        position:
+          type: "integer"
+          format: "int32"
+    UpdateReviewColumnRequest:
+      type: "object"
+      properties:
+        display_name:
+          type: "string"
+    PatchReviewCellRequest:
+      type: "object"
+      properties:
+        value:
+          type: "object"
+    DeleteRowsRequest:
+      type: "object"
+      properties:
+        row_ids:
+          type: "array"
+          items:
+            type: "string"
+    UpdateRunCellRequest:
+      type: "object"
+      properties:
+        value:
+          type: "object"
+    DuplicateRowRequest:
+      type: "object"
+      properties: {}
+    ListTaskColumnsResponse:
+      type: "object"
+      properties:
+        data:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/Column"
+    CreateTaskColumnRequest:
+      type: "object"
+      properties:
+        display_name:
+          type: "string"
+        prompt:
+          $ref: "#/components/schemas/PromptTaskConfig"
+        agent:
+          $ref: "#/components/schemas/AgentTaskConfig"
+        harness:
+          $ref: "#/components/schemas/HarnessTaskConfig"
+        openresponse:
+          $ref: "#/components/schemas/OpenResponseTaskConfig"
+        position:
+          type: "integer"
+          format: "int32"
+    UpdateTaskColumnRequest:
+      type: "object"
+      properties:
+        display_name:
+          type: "string"
+        prompt:
+          $ref: "#/components/schemas/PromptTaskConfig"
+        agent:
+          $ref: "#/components/schemas/AgentTaskConfig"
+        harness:
+          $ref: "#/components/schemas/HarnessTaskConfig"
+    PatchTaskCellRequest:
+      type: "object"
+      properties:
+        repeat_index:
+          type: "integer"
+          format: "uint32"
+        value:
+          type: "object"
+        artifacts:
+          $ref: "#/components/schemas/ArtifactRefs"
+    Experiment:
+      type: "object"
+      properties:
+        experiment_id:
+          type: "string"
+        display_name:
+          type: "string"
+        project_id:
+          type: "string"
+        dataset_id:
+          type: "string"
+        dataset_version_id:
+          type: "string"
+        selected_run_id:
+          type: "string"
+        created_at:
+          type: "string"
+          format: "date-time"
+        updated_at:
+          type: "string"
+          format: "date-time"
+        source:
+          type: "string"
+          description: "Origin of the experiment: \"manual\" or \"evaluatorq\"."
+        row_height_level:
+          type: "integer"
+          format: "int32"
+        unique_evaluators:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/UniqueEvaluator"
+        created_by_id:
+          type: "string"
+    RunRef:
+      type: "object"
+      properties:
+        experiment_id:
+          type: "string"
+        run_id:
+          type: "string"
+    Run:
+      type: "object"
+      properties:
+        run_id:
+          type: "string"
+        experiment_id:
+          type: "string"
+        key:
+          type: "string"
+        status:
+          $ref: "#/components/schemas/RunStatus"
+        dataset_id:
+          type: "string"
+        dataset_version_id:
+          type: "string"
+        row_count:
+          type: "integer"
+          format: "int32"
+        cell_status_counts:
+          $ref: "#/components/schemas/CellStatusCounts"
+        columns:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/Column"
+        settings:
+          $ref: "#/components/schemas/RunSettings"
+        started_at:
+          type: "string"
+          format: "date-time"
+        completed_at:
+          type: "string"
+          format: "date-time"
+        created_at:
+          type: "string"
+          format: "date-time"
+        updated_at:
+          type: "string"
+          format: "date-time"
+        metrics:
+          type: "object"
+          additionalProperties:
+            type: "number"
+            format: "double"
+          description: "Averages per task column and metric, keyed \"{task_column_id}_{metric_id}\"\n (\"{run_id}_{metric_id}\" for run-level metrics). Only set when requested."
+        stats:
+          $ref: "#/components/schemas/RunStats"
+        created_by_id:
+          type: "string"
+    RunSettings:
+      type: "object"
+      properties:
+        concurrency:
+          type: "integer"
+          format: "int32"
+        timeout:
+          pattern: "^-?(?:0|[1-9][0-9]{0,11})(?:\\.[0-9]{1,9})?s$"
+          type: "string"
+        max_turns:
+          type: "integer"
+          format: "int32"
+        hidden_column_ids:
+          type: "array"
+          items:
+            type: "string"
+    ColumnLayout:
+      type: "object"
+      properties:
+        column_id:
+          type: "string"
+        position:
+          type: "integer"
+          format: "int32"
+        width:
+          type: "integer"
+          format: "int32"
+        active:
+          type: "boolean"
+    Column:
+      type: "object"
+      properties:
+        column_id:
+          type: "string"
+        key:
+          type: "string"
+        display_name:
+          type: "string"
+        position:
+          type: "integer"
+          format: "int32"
+        active:
+          type: "boolean"
+        prompt:
+          $ref: "#/components/schemas/PromptTaskConfig"
+        agent:
+          $ref: "#/components/schemas/AgentTaskConfig"
+        harness:
+          $ref: "#/components/schemas/HarnessTaskConfig"
+        openresponse:
+          $ref: "#/components/schemas/OpenResponseTaskConfig"
+        evaluator:
+          $ref: "#/components/schemas/EvalColumnConfig"
+        review:
+          $ref: "#/components/schemas/ReviewColumnConfig"
+        dataset:
+          $ref: "#/components/schemas/DatasetColumnConfig"
+        metric:
+          $ref: "#/components/schemas/MetricColumnConfig"
+        width:
+          type: "integer"
+          format: "int32"
+    Cell:
+      type: "object"
+      properties:
+        cell_id:
+          type: "string"
+        row_id:
+          type: "string"
+        column_id:
+          type: "string"
+        repeat_index:
+          type: "integer"
+          format: "uint32"
+        status:
+          $ref: "#/components/schemas/CellStatus"
+        value:
+          type: "object"
+          description: "Stored documents are returned as-is; strings are wrapped as {\"text\"},\n arrays as {\"messages\"} on messages cells and {\"items\"} elsewhere, other\n scalars as {\"value\"}."
+        artifacts:
+          $ref: "#/components/schemas/ArtifactRefs"
+        progress:
+          $ref: "#/components/schemas/CellProgress"
+        error_message:
+          type: "string"
+        type:
+          $ref: "#/components/schemas/CellType"
+        task_column_id:
+          type: "string"
+          description: "Task column an evaluator, metric or review cell belongs to."
+        created_at:
+          type: "string"
+          format: "date-time"
+        updated_at:
+          type: "string"
+          format: "date-time"
+    ExecuteScope:
+      type: "string"
+      enum:
+        - "EXECUTE_SCOPE_UNSPECIFIED"
+        - "EXECUTE_SCOPE_CELL"
+        - "EXECUTE_SCOPE_ROW"
+        - "EXECUTE_SCOPE_COLUMN"
+        - "EXECUTE_SCOPE_PARTIAL"
+        - "EXECUTE_SCOPE_FULL"
+    ExecuteTarget:
+      type: "object"
+      properties:
+        row_id:
+          type: "string"
+        column_id:
+          type: "string"
+        column_key:
+          type: "string"
+        repeat_index:
+          type: "integer"
+          format: "uint32"
+    ExecuteConstraints:
+      type: "object"
+      properties:
+        llm:
+          $ref: "#/components/schemas/LlmConstraints"
+        harness:
+          $ref: "#/components/schemas/HarnessConstraints"
+    MetricSummary:
+      type: "object"
+      properties:
+        number:
+          $ref: "#/components/schemas/NumberMetricSummary"
+        boolean:
+          $ref: "#/components/schemas/BooleanMetricSummary"
+        categorical:
+          $ref: "#/components/schemas/CategoricalMetricSummary"
+        baseline:
+          $ref: "#/components/schemas/MetricBaseline"
+    QueryRow:
+      type: "object"
+      properties:
+        row_id:
+          type: "string"
+        display_name:
+          type: "string"
+        cells:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/Cell"
+        status:
+          $ref: "#/components/schemas/RowStatus"
+        created_at:
+          type: "string"
+          format: "date-time"
+        updated_at:
+          type: "string"
+          format: "date-time"
+    PromptTaskConfig:
+      type: "object"
+      properties:
+        prompt_config:
+          type: "object"
+        messages_source:
+          $ref: "#/components/schemas/MessagesSource"
+        engine:
+          type: "string"
+        tools:
+          type: "array"
+          items:
+            type: "object"
+        knowledge_bases:
+          type: "array"
+          items:
+            type: "object"
+        metadata:
+          type: "object"
+        entity_configuration:
+          type: "object"
+    AgentTaskConfig:
+      type: "object"
+      properties:
+        agent_key:
+          type: "string"
+        messages_source:
+          $ref: "#/components/schemas/MessagesSource"
+        messages:
+          type: "array"
+          items:
+            type: "object"
+        engine:
+          type: "string"
+        parent_id:
+          type: "string"
+        agent_tag:
+          type: "string"
+    HarnessTaskConfig:
+      type: "object"
+      properties:
+        harness_config_id:
+          type: "string"
+    OpenResponseTaskConfig:
+      type: "object"
+      properties: {}
+    ArtifactRefs:
+      type: "object"
+      properties:
+        trace_id:
+          type: "string"
+        response_id:
+          type: "string"
+        session_id:
+          type: "string"
+        session_run_id:
+          type: "string"
+        pull_request_url:
+          type: "string"
+        patch_object_key:
+          type: "string"
+    UniqueEvaluator:
+      type: "object"
+      properties:
+        evaluator_id:
+          type: "string"
+        evaluator_type:
+          type: "string"
+        evaluator_name:
+          type: "string"
+        evaluator_key:
+          type: "string"
+    RunStatus:
+      type: "string"
+      enum:
+        - "RUN_STATUS_UNSPECIFIED"
+        - "RUN_STATUS_DRAFT"
+        - "RUN_STATUS_QUEUED"
+        - "RUN_STATUS_RUNNING"
+        - "RUN_STATUS_COMPLETED"
+        - "RUN_STATUS_FAILED"
+        - "RUN_STATUS_CANCELED"
+    CellStatusCounts:
+      type: "object"
+      properties:
+        not_run:
+          type: "integer"
+          format: "int32"
+        queued:
+          type: "integer"
+          format: "int32"
+        running:
+          type: "integer"
+          format: "int32"
+        completed:
+          type: "integer"
+          format: "int32"
+        failed:
+          type: "integer"
+          format: "int32"
+        canceled:
+          type: "integer"
+          format: "int32"
+    RunStats:
+      type: "object"
+      properties:
+        total_cost:
+          type: "number"
+          format: "double"
+        total_runs:
+          type: "integer"
+          format: "int32"
+        total_errors:
+          type: "integer"
+          format: "int32"
+        total_done:
+          type: "integer"
+          format: "int32"
+    EvalColumnConfig:
+      type: "object"
+      properties:
+        evaluator_id:
+          type: "string"
+        evaluator_name:
+          type: "string"
+        evaluator_type:
+          type: "string"
+        evaluator_output_type:
+          type: "string"
+    ReviewColumnConfig:
+      type: "object"
+      properties:
+        human_eval_id:
+          type: "string"
+        human_eval_name:
+          type: "string"
+        human_eval_type:
+          type: "string"
+    DatasetColumnConfig:
+      type: "object"
+      properties:
+        column_type:
+          type: "string"
+    MetricColumnConfig:
+      type: "object"
+      properties:
+        metric_key:
+          type: "string"
+    CellStatus:
+      type: "string"
+      enum:
+        - "CELL_STATUS_UNSPECIFIED"
+        - "CELL_STATUS_NOT_RUN"
+        - "CELL_STATUS_QUEUED"
+        - "CELL_STATUS_RUNNING"
+        - "CELL_STATUS_COMPLETED"
+        - "CELL_STATUS_FAILED"
+        - "CELL_STATUS_CANCELED"
+    CellProgress:
+      type: "object"
+      properties:
+        elapsed:
+          pattern: "^-?(?:0|[1-9][0-9]{0,11})(?:\\.[0-9]{1,9})?s$"
+          type: "string"
+        spend_usd:
+          type: "number"
+          format: "double"
+        activity:
+          type: "string"
+    CellType:
+      type: "string"
+      enum:
+        - "CELL_TYPE_UNSPECIFIED"
+        - "CELL_TYPE_TEXT"
+        - "CELL_TYPE_NUMBER"
+        - "CELL_TYPE_INPUTS"
+        - "CELL_TYPE_MESSAGES"
+        - "CELL_TYPE_RESPONSE"
+        - "CELL_TYPE_AGENT_RESPONSE"
+        - "CELL_TYPE_EVALUATOR"
+        - "CELL_TYPE_METRIC"
+        - "CELL_TYPE_HUMAN_EVAL"
+        - "CELL_TYPE_OPENRESPONSE"
+    LlmConstraints:
+      type: "object"
+      properties:
+        max_turns:
+          type: "integer"
+          format: "int32"
+        timeout:
+          pattern: "^-?(?:0|[1-9][0-9]{0,11})(?:\\.[0-9]{1,9})?s$"
+          type: "string"
+        concurrency:
+          type: "integer"
+          format: "int32"
+    HarnessConstraints:
+      type: "object"
+      properties:
+        wall_clock_value:
+          type: "integer"
+          format: "uint32"
+        wall_clock_unit:
+          $ref: "#/components/schemas/WallClockUnit"
+        spend_cap_usd:
+          type: "number"
+          format: "double"
+        spend_cap_tokens:
+          type: "string"
+        concurrency:
+          type: "integer"
+          format: "int32"
+    NumberMetricSummary:
+      type: "object"
+      properties:
+        min:
+          type: "number"
+          format: "double"
+        max:
+          type: "number"
+          format: "double"
+        avg:
+          type: "number"
+          format: "double"
+        sum:
+          type: "number"
+          format: "double"
+        median:
+          type: "number"
+          format: "double"
+        range:
+          type: "number"
+          format: "double"
+        std_dev:
+          type: "number"
+          format: "double"
+        count:
+          type: "integer"
+          format: "int32"
+    BooleanMetricSummary:
+      type: "object"
+      properties:
+        passed_rate:
+          type: "number"
+          format: "double"
+        count:
+          type: "integer"
+          format: "int32"
+    CategoricalMetricSummary:
+      type: "object"
+      properties:
+        labels:
+          type: "object"
+          additionalProperties:
+            type: "integer"
+            format: "int32"
+        count:
+          type: "integer"
+          format: "int32"
+    MetricBaseline:
+      type: "object"
+      properties:
+        avg:
+          type: "number"
+          format: "double"
+        delta:
+          type: "number"
+          format: "double"
+        pct_change:
+          type: "number"
+          format: "double"
+        direction:
+          type: "string"
+          description: "\"up\", \"down\" or \"flat\"."
+    RowStatus:
+      type: "string"
+      enum:
+        - "ROW_STATUS_UNSPECIFIED"
+        - "ROW_STATUS_NOT_RUN"
+        - "ROW_STATUS_QUEUED"
+        - "ROW_STATUS_RUNNING"
+        - "ROW_STATUS_COMPLETED"
+        - "ROW_STATUS_FAILED"
+        - "ROW_STATUS_CANCELED"
+    MessagesSource:
+      type: "string"
+      enum:
+        - "MESSAGES_SOURCE_UNSPECIFIED"
+        - "MESSAGES_SOURCE_PROMPT_CONFIG"
+        - "MESSAGES_SOURCE_MESSAGES_COLUMN"
+        - "MESSAGES_SOURCE_COMBINED"
+    WallClockUnit:
+      type: "string"
+      enum:
+        - "WALL_CLOCK_UNIT_UNSPECIFIED"
+        - "WALL_CLOCK_UNIT_MINUTES"
+        - "WALL_CLOCK_UNIT_HOURS"
     AutoRouterConfig:
       additionalProperties: false
       properties:
@@ -26377,7 +27159,7 @@ paths:
                                 type: "string"
                                 format: "ulid"
                                 pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                                default: "01M65MVWP8WTRHGGABAK8FWGDG"
+                                default: "01M66BVSXSTAGEVQJXE4BJ4BVB"
                                 readOnly: true
                                 description: "The unique identifier of the playground knowledge base"
                               knowledge_id:
@@ -35792,7 +36574,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01M65MVWR5DQQR4250PXV7QEFH"
+                                          default: "01M66BVT0G3BB9YN3HFTTJPNAK"
                                         name:
                                           type: "string"
                                         description:
@@ -37418,7 +38200,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01M65MVWRHMFSEMEGPNZ1MZ2YP"
+                                          default: "01M66BVT14ZK20TR13KYX30HEA"
                                         name:
                                           type: "string"
                                         description:
@@ -46475,7 +47257,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M65MVWSFY6YGRX232XSMW80B"
+                              default: "tool_01M66BVT2CTM02J5RF7V0K51KM"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -46576,7 +47358,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M65MVWSGCHDKK9V48707BV57"
+                              default: "tool_01M66BVT2C9XAASA4WYXA3K8QM"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -46679,7 +47461,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M65MVWSGDBMVACVGKZ9BEWT2"
+                              default: "tool_01M66BVT2DYCCWRQ6HCS1T317C"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -46823,7 +47605,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M65MVWSH24SWAE9YS4C2SN73"
+                              default: "tool_01M66BVT2EZ0PTRMAMAARJN42P"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -47310,7 +48092,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M65MVWSN4BVT1GVJRPMQM63P"
+                        default: "tool_01M66BVT2HY4F4W608NJQG702E"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -47411,7 +48193,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M65MVWSPA1ZBG54Z0NBV3TE1"
+                        default: "tool_01M66BVT2HMC4PVVNZHJA137B5"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -47514,7 +48296,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M65MVWSP7EKM18KEPNZF8VM9"
+                        default: "tool_01M66BVT2J77ZHY9SWQWFVCKXX"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -47658,7 +48440,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M65MVWSPDPF3PHT8B6MG4A5K"
+                        default: "tool_01M66BVT2JTMJZDE4MV2SWMXA7"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -48162,7 +48944,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M65MVWSR1191D6CKE6QAS8K5"
+                        default: "tool_01M66BVT2N71FMT6WMJDVBQEWT"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -48263,7 +49045,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M65MVWSRE3DB6C9GQESPXV49"
+                        default: "tool_01M66BVT2PA4EJMM3V1XP01DYJ"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -48366,7 +49148,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M65MVWSR68J4SM6DAKKD3JEW"
+                        default: "tool_01M66BVT2QBX9A79PZYWAZE51C"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -48510,7 +49292,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M65MVWSSMWFC56TRWNX2JMSA"
+                        default: "tool_01M66BVT2T702665KMJFWJCVE0"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -48677,7 +49459,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M65MVWSWFBQ6BD8W7283F7R9"
+                        default: "tool_01M66BVT3184SXMPSRPJ0HE0TE"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -48778,7 +49560,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M65MVWSW1SC6XFH5YRXRA8XH"
+                        default: "tool_01M66BVT31YBFTVGM85XCA9NYV"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -48881,7 +49663,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M65MVWSXTTSVC1KJE6YDS985"
+                        default: "tool_01M66BVT32VPNM2QP9RSGDM222"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -49025,7 +49807,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M65MVWSXMXGDWKD94XG16S47"
+                        default: "tool_01M66BVT331M3B01F7NAD1PEPK"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -63646,6 +64428,1559 @@ paths:
           source: "curl --request PATCH \\\n  --url 'https://api.orq.ai/v2/datasets/01J6V6G8M4F5N8P9Q0R1S2T3U4/datapoints/01J6V6H1Z2A3B4C5D6E7F8G9H0' \\\n  --header 'Authorization: Bearer $ORQ_API_KEY' \\\n  --header 'Content-Type: application/json' \\\n  --data '{\n    \"expected_output\": \"Confirm the invoice email address before resending the invoice.\"\n  }'\n"
       security:
         - ApiKey: []
+  /v3/experiments:
+    get:
+      tags:
+        - "Experiments"
+      summary: "List experiments"
+      description: "Lists experiments in the workspace, newest first."
+      operationId: "ExperimentList"
+      parameters:
+        - name: "limit"
+          in: "query"
+          schema:
+            type: "integer"
+            format: "int32"
+        - name: "starting_after"
+          in: "query"
+          schema:
+            type: "string"
+        - name: "ending_before"
+          in: "query"
+          schema:
+            type: "string"
+        - name: "project_id"
+          in: "query"
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListExperimentsResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      x-speakeasy-group: "experiments"
+      x-speakeasy-name-override: "list"
+      x-cli-group: "experiments"
+      x-cli-name: "list"
+      x-code-samples:
+        - lang: "curl"
+          label: "Core - List experiments"
+          source: "curl --get 'https://api.orq.ai/v3/experiments' \\\n  --header 'Authorization: Bearer $ORQ_API_KEY' \\\n  --data-urlencode 'limit=25'\n"
+        - lang: "python"
+          label: "Python - List experiments"
+          source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\npage = client.experiments.list(limit=25)\n\nfor experiment in page.data:\n    print(experiment.experiment_id, experiment.display_name)\n"
+        - lang: "typescript"
+          label: "Node.js - List experiments"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({ apiKey: process.env.ORQ_API_KEY });\n\nconst page = await client.experiments.list({ limit: 25 });\n\nfor (const experiment of page.data) {\n  console.log(experiment.experimentId, experiment.displayName);\n}\n"
+      security:
+        - ApiKey: []
+    post:
+      tags:
+        - "Experiments"
+      summary: "Create an experiment"
+      description: "Creates an experiment. project_id defaults to the API key's project and is required for keys that span several projects. When dataset_id is set, a draft run is created with rows from that dataset."
+      operationId: "ExperimentCreate"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateExperimentRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Experiment"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      x-speakeasy-group: "experiments"
+      x-speakeasy-name-override: "create"
+      x-cli-group: "experiments"
+      x-cli-name: "create"
+      x-code-samples:
+        - lang: "curl"
+          label: "Core - Create an experiment"
+          source: "curl 'https://api.orq.ai/v3/experiments' \\\n  --header 'Authorization: Bearer $ORQ_API_KEY' \\\n  --header 'Content-Type: application/json' \\\n  --data '{\n    \"display_name\": \"Support replies v2\",\n    \"project_id\": \"<project_id>\",\n    \"dataset_id\": \"<dataset_id>\"\n  }'\n"
+        - lang: "python"
+          label: "Python - Create an experiment"
+          source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\nexperiment = client.experiments.create(\n    display_name=\"Support replies v2\",\n    project_id=\"<project_id>\",\n    dataset_id=\"<dataset_id>\",\n)\n\nprint(experiment.experiment_id, experiment.selected_run_id)\n"
+        - lang: "typescript"
+          label: "Node.js - Create an experiment"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({ apiKey: process.env.ORQ_API_KEY });\n\nconst experiment = await client.experiments.create({\n  displayName: 'Support replies v2',\n  projectId: '<project_id>',\n  datasetId: '<dataset_id>',\n});\n\nconsole.log(experiment.experimentId, experiment.selectedRunId);\n"
+      security:
+        - ApiKey: []
+  /v3/experiments/{experiment_id}:
+    get:
+      tags:
+        - "Experiments"
+      summary: "Get an experiment"
+      description: "Returns experiment metadata. Runs and cell data are separate resources."
+      operationId: "ExperimentGet"
+      parameters:
+        - name: "experiment_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Experiment"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      x-speakeasy-group: "experiments"
+      x-speakeasy-name-override: "get"
+      x-cli-group: "experiments"
+      x-cli-name: "get"
+      x-code-samples:
+        - lang: "curl"
+          label: "Core - Get an experiment"
+          source: "curl 'https://api.orq.ai/v3/experiments/<experiment_id>' \\\n  --header 'Authorization: Bearer $ORQ_API_KEY'\n"
+        - lang: "python"
+          label: "Python - Get an experiment"
+          source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\nexperiment = client.experiments.get(experiment_id=\"<experiment_id>\")\n\nprint(experiment.display_name)\n"
+        - lang: "typescript"
+          label: "Node.js - Get an experiment"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({ apiKey: process.env.ORQ_API_KEY });\n\nconst experiment = await client.experiments.get({ experimentId: '<experiment_id>' });\n\nconsole.log(experiment.displayName);\n"
+      security:
+        - ApiKey: []
+    delete:
+      tags:
+        - "Experiments"
+      summary: "Delete an experiment"
+      description: "Deletes an experiment and its runs."
+      operationId: "ExperimentDelete"
+      parameters:
+        - name: "experiment_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "204":
+          description: "No content - successful operation"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      x-speakeasy-group: "experiments"
+      x-speakeasy-name-override: "delete"
+      x-cli-group: "experiments"
+      x-cli-name: "delete"
+      x-code-samples:
+        - lang: "curl"
+          label: "Core - Delete an experiment"
+          source: "curl --request DELETE 'https://api.orq.ai/v3/experiments/<experiment_id>' \\\n  --header 'Authorization: Bearer $ORQ_API_KEY'\n"
+        - lang: "python"
+          label: "Python - Delete an experiment"
+          source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\nclient.experiments.delete(experiment_id=\"<experiment_id>\")\n"
+        - lang: "typescript"
+          label: "Node.js - Delete an experiment"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({ apiKey: process.env.ORQ_API_KEY });\n\nawait client.experiments.delete({ experimentId: '<experiment_id>' });\n"
+      security:
+        - ApiKey: []
+    patch:
+      tags:
+        - "Experiments"
+      summary: "Update an experiment"
+      description: "Updates experiment metadata. Omitted optional fields keep their current values."
+      operationId: "ExperimentUpdate"
+      parameters:
+        - name: "experiment_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateExperimentRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Experiment"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      x-speakeasy-group: "experiments"
+      x-speakeasy-name-override: "update"
+      x-cli-group: "experiments"
+      x-cli-name: "update"
+      x-code-samples:
+        - lang: "curl"
+          label: "Core - Rename an experiment"
+          source: "curl --request PATCH 'https://api.orq.ai/v3/experiments/<experiment_id>' \\\n  --header 'Authorization: Bearer $ORQ_API_KEY' \\\n  --header 'Content-Type: application/json' \\\n  --data '{ \"display_name\": \"Support replies v3\" }'\n"
+        - lang: "python"
+          label: "Python - Rename an experiment"
+          source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\nexperiment = client.experiments.update(\n    experiment_id=\"<experiment_id>\",\n    display_name=\"Support replies v3\",\n)\n"
+        - lang: "typescript"
+          label: "Node.js - Rename an experiment"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({ apiKey: process.env.ORQ_API_KEY });\n\nawait client.experiments.update({\n  experimentId: '<experiment_id>',\n  displayName: 'Support replies v3',\n});\n"
+      security:
+        - ApiKey: []
+  /v3/experiments/{experiment_id}/runs:
+    get:
+      tags:
+        - "Experiments"
+      summary: "List runs"
+      description: "Lists runs for an experiment, newest first. Each run is metadata only."
+      operationId: "ExperimentRunList"
+      parameters:
+        - name: "experiment_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+        - name: "limit"
+          in: "query"
+          schema:
+            type: "integer"
+            format: "int32"
+        - name: "starting_after"
+          in: "query"
+          schema:
+            type: "string"
+        - name: "ending_before"
+          in: "query"
+          schema:
+            type: "string"
+        - name: "include_metrics"
+          in: "query"
+          schema:
+            type: "boolean"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListExperimentRunsResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      x-speakeasy-group: "experiments"
+      x-speakeasy-name-override: "listRuns"
+      x-cli-group: "experiments"
+      x-cli-name: "listRuns"
+      x-code-samples:
+        - lang: "curl"
+          label: "Core - List runs"
+          source: "curl 'https://api.orq.ai/v3/experiments/<experiment_id>/runs' \\\n  --header 'Authorization: Bearer $ORQ_API_KEY'\n"
+        - lang: "python"
+          label: "Python - List runs"
+          source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\npage = client.experiments.list_runs(experiment_id=\"<experiment_id>\")\n\nfor run in page.data:\n    print(run.run_id, run.status, run.cell_status_counts)\n"
+        - lang: "typescript"
+          label: "Node.js - List runs"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({ apiKey: process.env.ORQ_API_KEY });\n\nconst page = await client.experiments.listRuns({ experimentId: '<experiment_id>' });\n\nfor (const run of page.data) {\n  console.log(run.runId, run.status, run.cellStatusCounts);\n}\n"
+      security:
+        - ApiKey: []
+    post:
+      tags:
+        - "Experiments"
+      summary: "Create a run"
+      description: "Creates a new run, copying columns from the selected run when present. A rerun is a new run."
+      operationId: "ExperimentRunCreate"
+      parameters:
+        - name: "experiment_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateRunRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Run"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      x-speakeasy-group: "experiments"
+      x-speakeasy-name-override: "createRun"
+      x-cli-group: "experiments"
+      x-cli-name: "createRun"
+      x-code-samples:
+        - lang: "curl"
+          label: "Core - Create a run"
+          source: "curl 'https://api.orq.ai/v3/experiments/<experiment_id>/runs' \\\n  --header 'Authorization: Bearer $ORQ_API_KEY' \\\n  --header 'Content-Type: application/json' \\\n  --data '{ \"key\": \"Run 2\", \"settings\": { \"concurrency\": 5 } }'\n"
+        - lang: "python"
+          label: "Python - Create a run"
+          source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\nrun = client.experiments.create_run(\n    experiment_id=\"<experiment_id>\",\n    key=\"Run 2\",\n    settings={\"concurrency\": 5},\n)\n\nprint(run.run_id, run.row_count)\n"
+        - lang: "typescript"
+          label: "Node.js - Create a run"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({ apiKey: process.env.ORQ_API_KEY });\n\nconst run = await client.experiments.createRun({\n  experimentId: '<experiment_id>',\n  key: 'Run 2',\n  settings: { concurrency: 5 },\n});\n\nconsole.log(run.runId, run.rowCount);\n"
+      security:
+        - ApiKey: []
+  /v3/experiments/{experiment_id}/runs/{run_id}:
+    get:
+      tags:
+        - "Experiments"
+      summary: "Get a run"
+      description: "Returns run status, per-cell status counts, row count, and column configs. Does not return the cell matrix."
+      operationId: "ExperimentRunGet"
+      parameters:
+        - name: "experiment_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+        - name: "run_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Run"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      x-speakeasy-group: "experiments"
+      x-speakeasy-name-override: "getRun"
+      x-cli-group: "experiments"
+      x-cli-name: "getRun"
+      x-code-samples:
+        - lang: "curl"
+          label: "Core - Get a run"
+          source: "curl 'https://api.orq.ai/v3/experiments/<experiment_id>/runs/<run_id>' \\\n  --header 'Authorization: Bearer $ORQ_API_KEY'\n"
+        - lang: "python"
+          label: "Python - Get a run"
+          source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\nrun = client.experiments.get_run(experiment_id=\"<experiment_id>\", run_id=\"<run_id>\")\n\nprint(run.status, run.cell_status_counts.completed)\n"
+        - lang: "typescript"
+          label: "Node.js - Get a run"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({ apiKey: process.env.ORQ_API_KEY });\n\nconst run = await client.experiments.getRun({ experimentId: '<experiment_id>', runId: '<run_id>' });\n\nconsole.log(run.status, run.cellStatusCounts?.completed);\n"
+      security:
+        - ApiKey: []
+    delete:
+      tags:
+        - "Experiments"
+      summary: "Delete a run"
+      description: "Deletes a run and its cell data. Distinct from cancel, which keeps completed cells."
+      operationId: "ExperimentRunDelete"
+      parameters:
+        - name: "experiment_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+        - name: "run_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "204":
+          description: "No content - successful operation"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      x-speakeasy-group: "experiments"
+      x-speakeasy-name-override: "deleteRun"
+      x-cli-group: "experiments"
+      x-cli-name: "deleteRun"
+      security:
+        - ApiKey: []
+    patch:
+      tags:
+        - "Experiments"
+      summary: "Update a run"
+      description: "Updates run key and execution settings. Does not execute the run."
+      operationId: "ExperimentRunUpdate"
+      parameters:
+        - name: "experiment_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+        - name: "run_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateRunRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Run"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      x-speakeasy-group: "experiments"
+      x-speakeasy-name-override: "updateRun"
+      x-cli-group: "experiments"
+      x-cli-name: "updateRun"
+      security:
+        - ApiKey: []
+  /v3/experiments/{experiment_id}/runs/{run_id}/cancel:
+    post:
+      tags:
+        - "Experiments"
+      summary: "Cancel a run"
+      description: "Stops queued and running cells and moves the run to canceled. A cell whose execution is already in flight may still write its result."
+      operationId: "ExperimentRunCancel"
+      parameters:
+        - name: "experiment_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+        - name: "run_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CancelExperimentRunRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Run"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      x-speakeasy-group: "experiments"
+      x-speakeasy-name-override: "cancelRun"
+      x-cli-group: "experiments"
+      x-cli-name: "cancelRun"
+      x-code-samples:
+        - lang: "curl"
+          label: "Core - Cancel a run"
+          source: "curl 'https://api.orq.ai/v3/experiments/<experiment_id>/runs/<run_id>/cancel' \\\n  --header 'Authorization: Bearer $ORQ_API_KEY' \\\n  --header 'Content-Type: application/json' \\\n  --data '{}'\n"
+        - lang: "python"
+          label: "Python - Cancel a run"
+          source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\nrun = client.experiments.cancel_run(experiment_id=\"<experiment_id>\", run_id=\"<run_id>\")\n\nprint(run.status)\n"
+        - lang: "typescript"
+          label: "Node.js - Cancel a run"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({ apiKey: process.env.ORQ_API_KEY });\n\nconst run = await client.experiments.cancelRun({ experimentId: '<experiment_id>', runId: '<run_id>' });\n\nconsole.log(run.status);\n"
+      security:
+        - ApiKey: []
+  /v3/experiments/{experiment_id}/runs/{run_id}/columns/layout:
+    patch:
+      tags:
+        - "Experiments"
+      summary: "Update column layout"
+      description: "Reorders, resizes, hides or shows columns of a run in one call. Columns not listed keep their layout."
+      operationId: "ExperimentRunColumnLayoutUpdate"
+      parameters:
+        - name: "experiment_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+        - name: "run_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateRunColumnLayoutRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Run"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      x-speakeasy-group: "experiments"
+      x-speakeasy-name-override: "updateRunColumnLayout"
+      x-cli-group: "experiments"
+      x-cli-name: "updateRunColumnLayout"
+      x-code-samples:
+        - lang: "curl"
+          label: "Core - Reorder and resize columns"
+          source: "curl --request PATCH 'https://api.orq.ai/v3/experiments/<experiment_id>/runs/<run_id>/columns/layout' \\\n  --header 'Authorization: Bearer $ORQ_API_KEY' \\\n  --header 'Content-Type: application/json' \\\n  --data '{ \"columns\": [{ \"column_id\": \"<column_id>\", \"position\": 3, \"width\": 320 }] }'\n"
+        - lang: "python"
+          label: "Python - Reorder and resize columns"
+          source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\nrun = client.experiments.update_run_column_layout(\n    experiment_id=\"<experiment_id>\",\n    run_id=\"<run_id>\",\n    columns=[{\"column_id\": \"<column_id>\", \"position\": 3, \"width\": 320}],\n)\n\nprint([column.display_name for column in run.columns])\n"
+        - lang: "typescript"
+          label: "Node.js - Reorder and resize columns"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({ apiKey: process.env.ORQ_API_KEY });\n\nconst run = await client.experiments.updateRunColumnLayout({\n  experimentId: '<experiment_id>',\n  runId: '<run_id>',\n  columns: [{ columnId: '<column_id>', position: 3, width: 320 }],\n});\n\nconsole.log(run.columns.map((column) => column.displayName));\n"
+      security:
+        - ApiKey: []
+  /v3/experiments/{experiment_id}/runs/{run_id}/evaluators:
+    get:
+      tags:
+        - "Experiments"
+      summary: "List eval columns"
+      operationId: "ExperimentEvalList"
+      parameters:
+        - name: "experiment_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+        - name: "run_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListEvalColumnsResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      x-speakeasy-group: "experiments"
+      x-speakeasy-name-override: "listEvals"
+      x-cli-group: "experiments"
+      x-cli-name: "listEvals"
+      security:
+        - ApiKey: []
+    post:
+      tags:
+        - "Experiments"
+      summary: "Add an eval column"
+      description: "Links an existing evaluator. Config is updated at the evaluator source, not here."
+      operationId: "ExperimentEvalCreate"
+      parameters:
+        - name: "experiment_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+        - name: "run_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateEvalColumnRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Column"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      x-speakeasy-group: "experiments"
+      x-speakeasy-name-override: "createEval"
+      x-cli-group: "experiments"
+      x-cli-name: "createEval"
+      x-code-samples:
+        - lang: "curl"
+          label: "Core - Add an evaluator column"
+          source: "curl 'https://api.orq.ai/v3/experiments/<experiment_id>/runs/<run_id>/evaluators' \\\n  --header 'Authorization: Bearer $ORQ_API_KEY' \\\n  --header 'Content-Type: application/json' \\\n  --data '{ \"evaluator_id\": \"<evaluator_id>\" }'\n"
+        - lang: "python"
+          label: "Python - Add an evaluator column"
+          source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\ncolumn = client.experiments.create_eval(\n    experiment_id=\"<experiment_id>\",\n    run_id=\"<run_id>\",\n    evaluator_id=\"<evaluator_id>\",\n)\n"
+        - lang: "typescript"
+          label: "Node.js - Add an evaluator column"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({ apiKey: process.env.ORQ_API_KEY });\n\nawait client.experiments.createEval({\n  experimentId: '<experiment_id>',\n  runId: '<run_id>',\n  evaluatorId: '<evaluator_id>',\n});\n"
+      security:
+        - ApiKey: []
+  /v3/experiments/{experiment_id}/runs/{run_id}/evaluators/{eval_id}:
+    delete:
+      tags:
+        - "Experiments"
+      summary: "Remove an eval column"
+      operationId: "ExperimentEvalDelete"
+      parameters:
+        - name: "experiment_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+        - name: "run_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+        - name: "eval_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "204":
+          description: "No content - successful operation"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      x-speakeasy-group: "experiments"
+      x-speakeasy-name-override: "deleteEval"
+      x-cli-group: "experiments"
+      x-cli-name: "deleteEval"
+      security:
+        - ApiKey: []
+  /v3/experiments/{experiment_id}/runs/{run_id}/evaluators/{eval_id}/cells/{datapoint_id}:
+    patch:
+      tags:
+        - "Experiments"
+      summary: "Correct an eval cell"
+      description: "Human override of an automated evaluator verdict on one datapoint."
+      operationId: "ExperimentEvalCellPatch"
+      parameters:
+        - name: "experiment_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+        - name: "run_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+        - name: "eval_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+        - name: "datapoint_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PatchEvalCellRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Cell"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      x-speakeasy-group: "experiments"
+      x-speakeasy-name-override: "patchEvalCell"
+      x-cli-group: "experiments"
+      x-cli-name: "patchEvalCell"
+      security:
+        - ApiKey: []
+  /v3/experiments/{experiment_id}/runs/{run_id}/execute:
+    post:
+      tags:
+        - "Experiments"
+      summary: "Execute a run"
+      description: "Executes cells at the requested scope. FULL, PARTIAL, ROW and COLUMN queue the matching cells (a task column also queues its linked evaluator, metric and review cells) and start the orchestrator, which also re-runs failed cells of every row it picks up; a run that is already running accepts new work. CELL re-runs one task or evaluator cell in place. Re-executing does not require creating a new run."
+      operationId: "ExperimentRunExecute"
+      parameters:
+        - name: "experiment_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+        - name: "run_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ExecuteRunRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Run"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      x-speakeasy-group: "experiments"
+      x-speakeasy-name-override: "executeRun"
+      x-cli-group: "experiments"
+      x-cli-name: "executeRun"
+      x-code-samples:
+        - lang: "curl"
+          label: "Core - Execute a run"
+          source: "curl 'https://api.orq.ai/v3/experiments/<experiment_id>/runs/<run_id>/execute' \\\n  --header 'Authorization: Bearer $ORQ_API_KEY' \\\n  --header 'Content-Type: application/json' \\\n  --data '{\n    \"scope\": \"EXECUTE_SCOPE_FULL\",\n    \"constraints\": { \"llm\": { \"concurrency\": 5, \"timeout\": \"300s\" } }\n  }'\n"
+        - lang: "python"
+          label: "Python - Execute a run"
+          source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\nrun = client.experiments.execute_run(\n    experiment_id=\"<experiment_id>\",\n    run_id=\"<run_id>\",\n    scope=\"EXECUTE_SCOPE_FULL\",\n    constraints={\"llm\": {\"concurrency\": 5, \"timeout\": \"300s\"}},\n)\n\nprint(run.status)\n"
+        - lang: "typescript"
+          label: "Node.js - Execute a run"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({ apiKey: process.env.ORQ_API_KEY });\n\nconst run = await client.experiments.executeRun({\n  experimentId: '<experiment_id>',\n  runId: '<run_id>',\n  scope: 'EXECUTE_SCOPE_FULL',\n  constraints: { llm: { concurrency: 5, timeout: '300s' } },\n});\n\nconsole.log(run.status);\n"
+      security:
+        - ApiKey: []
+  /v3/experiments/{experiment_id}/runs/{run_id}/metrics:
+    get:
+      tags:
+        - "Experiments"
+      summary: "Get run metrics"
+      description: "Returns aggregated evaluator and built-in metrics for a run, keyed by task column and metric. Pass baseline_run_id to include the delta against another run."
+      operationId: "ExperimentRunMetricsGet"
+      parameters:
+        - name: "experiment_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+        - name: "run_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+        - name: "baseline_run_id"
+          in: "query"
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetRunMetricsResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      x-speakeasy-group: "experiments"
+      x-speakeasy-name-override: "getRunMetrics"
+      x-cli-group: "experiments"
+      x-cli-name: "getRunMetrics"
+      x-code-samples:
+        - lang: "curl"
+          label: "Core - Get run metrics"
+          source: "curl --get 'https://api.orq.ai/v3/experiments/<experiment_id>/runs/<run_id>/metrics' \\\n  --header 'Authorization: Bearer $ORQ_API_KEY'\n"
+        - lang: "python"
+          label: "Python - Get run metrics"
+          source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\nsummary = client.experiments.get_run_metrics(\n    experiment_id=\"<experiment_id>\",\n    run_id=\"<run_id>\",\n)\n\nfor key, metric in summary.metrics.items():\n    print(key, metric)\n"
+        - lang: "typescript"
+          label: "Node.js - Get run metrics"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({ apiKey: process.env.ORQ_API_KEY });\n\nconst summary = await client.experiments.getRunMetrics({\n  experimentId: '<experiment_id>',\n  runId: '<run_id>',\n});\n\nfor (const [key, metric] of Object.entries(summary.metrics)) {\n  console.log(key, metric);\n}\n"
+      security:
+        - ApiKey: []
+  /v3/experiments/{experiment_id}/runs/{run_id}/query:
+    post:
+      tags:
+        - "Experiments"
+      summary: "Query run cells"
+      description: "Returns selected cells by row and column name. POST because selections can exceed URL limits."
+      operationId: "ExperimentRunQuery"
+      parameters:
+        - name: "experiment_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+        - name: "run_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/QueryRunRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/QueryRunResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      x-speakeasy-group: "experiments"
+      x-speakeasy-name-override: "queryRun"
+      x-cli-group: "experiments"
+      x-cli-name: "queryRun"
+      x-code-samples:
+        - lang: "curl"
+          label: "Core - Query run cells"
+          source: "curl 'https://api.orq.ai/v3/experiments/<experiment_id>/runs/<run_id>/query' \\\n  --header 'Authorization: Bearer $ORQ_API_KEY' \\\n  --header 'Content-Type: application/json' \\\n  --data '{ \"columns\": [\"GPT-4o reply\"], \"limit\": 50 }'\n"
+        - lang: "python"
+          label: "Python - Query run cells"
+          source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\npage = client.experiments.query_run(\n    experiment_id=\"<experiment_id>\",\n    run_id=\"<run_id>\",\n    columns=[\"GPT-4o reply\"],\n    limit=50,\n)\n\nfor row in page.rows:\n    for cell in row.cells:\n        print(row.row_id, cell.status, cell.value)\n"
+        - lang: "typescript"
+          label: "Node.js - Query run cells"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({ apiKey: process.env.ORQ_API_KEY });\n\nconst page = await client.experiments.queryRun({\n  experimentId: '<experiment_id>',\n  runId: '<run_id>',\n  columns: ['GPT-4o reply'],\n  limit: 50,\n});\n\nfor (const row of page.rows) {\n  for (const cell of row.cells) {\n    console.log(row.rowId, cell.status, cell.value);\n  }\n}\n"
+      security:
+        - ApiKey: []
+  /v3/experiments/{experiment_id}/runs/{run_id}/reviews:
+    get:
+      tags:
+        - "Experiments"
+      summary: "List human review columns"
+      operationId: "ExperimentReviewList"
+      parameters:
+        - name: "experiment_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+        - name: "run_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListReviewColumnsResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      x-speakeasy-group: "experiments"
+      x-speakeasy-name-override: "listReviews"
+      x-cli-group: "experiments"
+      x-cli-name: "listReviews"
+      security:
+        - ApiKey: []
+    post:
+      tags:
+        - "Experiments"
+      summary: "Add a human review column"
+      operationId: "ExperimentReviewCreate"
+      parameters:
+        - name: "experiment_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+        - name: "run_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateReviewColumnRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Column"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      x-speakeasy-group: "experiments"
+      x-speakeasy-name-override: "createReview"
+      x-cli-group: "experiments"
+      x-cli-name: "createReview"
+      security:
+        - ApiKey: []
+  /v3/experiments/{experiment_id}/runs/{run_id}/reviews/{review_id}:
+    delete:
+      tags:
+        - "Experiments"
+      summary: "Remove a human review column"
+      operationId: "ExperimentReviewDelete"
+      parameters:
+        - name: "experiment_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+        - name: "run_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+        - name: "review_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "204":
+          description: "No content - successful operation"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      x-speakeasy-group: "experiments"
+      x-speakeasy-name-override: "deleteReview"
+      x-cli-group: "experiments"
+      x-cli-name: "deleteReview"
+      security:
+        - ApiKey: []
+    patch:
+      tags:
+        - "Experiments"
+      summary: "Update review column metadata"
+      description: "Updates display fields on the column. The human-eval definition is updated at source."
+      operationId: "ExperimentReviewUpdate"
+      parameters:
+        - name: "experiment_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+        - name: "run_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+        - name: "review_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateReviewColumnRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Column"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      x-speakeasy-group: "experiments"
+      x-speakeasy-name-override: "updateReview"
+      x-cli-group: "experiments"
+      x-cli-name: "updateReview"
+      security:
+        - ApiKey: []
+  /v3/experiments/{experiment_id}/runs/{run_id}/reviews/{review_id}/cells/{datapoint_id}:
+    patch:
+      tags:
+        - "Experiments"
+      summary: "Set a human review cell"
+      operationId: "ExperimentReviewCellPatch"
+      parameters:
+        - name: "experiment_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+        - name: "run_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+        - name: "review_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+        - name: "datapoint_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PatchReviewCellRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Cell"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      x-speakeasy-group: "experiments"
+      x-speakeasy-name-override: "patchReviewCell"
+      x-cli-group: "experiments"
+      x-cli-name: "patchReviewCell"
+      security:
+        - ApiKey: []
+  /v3/experiments/{experiment_id}/runs/{run_id}/rows/bulk-delete:
+    post:
+      tags:
+        - "Experiments"
+      summary: "Delete rows"
+      description: "Deletes the given rows of a run and their cells."
+      operationId: "ExperimentRunRowsDelete"
+      parameters:
+        - name: "experiment_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+        - name: "run_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DeleteRowsRequest"
+        required: true
+      responses:
+        "204":
+          description: "No content - successful operation"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      x-speakeasy-group: "experiments"
+      x-speakeasy-name-override: "deleteRows"
+      x-cli-group: "experiments"
+      x-cli-name: "deleteRows"
+      x-code-samples:
+        - lang: "curl"
+          label: "Core - Delete rows"
+          source: "curl --request POST 'https://api.orq.ai/v3/experiments/<experiment_id>/runs/<run_id>/rows/bulk-delete' \\\n  --header 'Authorization: Bearer $ORQ_API_KEY' \\\n  --header 'Content-Type: application/json' \\\n  --data '{ \"row_ids\": [\"<row_id>\"] }'\n"
+        - lang: "python"
+          label: "Python - Delete rows"
+          source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\nclient.experiments.delete_rows(\n    experiment_id=\"<experiment_id>\",\n    run_id=\"<run_id>\",\n    row_ids=[\"<row_id>\"],\n)\n"
+        - lang: "typescript"
+          label: "Node.js - Delete rows"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({ apiKey: process.env.ORQ_API_KEY });\n\nawait client.experiments.deleteRows({\n  experimentId: '<experiment_id>',\n  runId: '<run_id>',\n  rowIds: ['<row_id>'],\n});\n"
+      security:
+        - ApiKey: []
+  /v3/experiments/{experiment_id}/runs/{run_id}/rows/{row_id}/cells/{cell_id}:
+    patch:
+      tags:
+        - "Experiments"
+      summary: "Update a cell"
+      description: "Writes a cell value by cell id, including dataset and review cells. An empty value clears the cell. Running cells cannot be changed."
+      operationId: "ExperimentRunCellUpdate"
+      parameters:
+        - name: "experiment_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+        - name: "run_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+        - name: "row_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+        - name: "cell_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateRunCellRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Cell"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      x-speakeasy-group: "experiments"
+      x-speakeasy-name-override: "updateRunCell"
+      x-cli-group: "experiments"
+      x-cli-name: "updateRunCell"
+      x-code-samples:
+        - lang: "curl"
+          label: "Core - Update a cell"
+          source: "curl --request PATCH 'https://api.orq.ai/v3/experiments/<experiment_id>/runs/<run_id>/rows/<row_id>/cells/<cell_id>' \\\n  --header 'Authorization: Bearer $ORQ_API_KEY' \\\n  --header 'Content-Type: application/json' \\\n  --data '{ \"value\": { \"text\": \"Corrected expected output\" } }'\n"
+        - lang: "python"
+          label: "Python - Update a cell"
+          source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\ncell = client.experiments.update_run_cell(\n    experiment_id=\"<experiment_id>\",\n    run_id=\"<run_id>\",\n    row_id=\"<row_id>\",\n    cell_id=\"<cell_id>\",\n    value={\"text\": \"Corrected expected output\"},\n)\n\nprint(cell.cell_id, cell.value)\n"
+        - lang: "typescript"
+          label: "Node.js - Update a cell"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({ apiKey: process.env.ORQ_API_KEY });\n\nconst cell = await client.experiments.updateRunCell({\n  experimentId: '<experiment_id>',\n  runId: '<run_id>',\n  rowId: '<row_id>',\n  cellId: '<cell_id>',\n  value: { text: 'Corrected expected output' },\n});\n\nconsole.log(cell.cellId, cell.value);\n"
+      security:
+        - ApiKey: []
+  /v3/experiments/{experiment_id}/runs/{run_id}/rows/{row_id}/duplicate:
+    post:
+      tags:
+        - "Experiments"
+      summary: "Duplicate a row"
+      description: "Copies a row's dataset cells into a new row placed after the source. Task, evaluator, metric and review cells start empty."
+      operationId: "ExperimentRunRowDuplicate"
+      parameters:
+        - name: "experiment_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+        - name: "run_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+        - name: "row_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DuplicateRowRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/QueryRow"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      x-speakeasy-group: "experiments"
+      x-speakeasy-name-override: "duplicateRow"
+      x-cli-group: "experiments"
+      x-cli-name: "duplicateRow"
+      x-code-samples:
+        - lang: "curl"
+          label: "Core - Duplicate a row"
+          source: "curl --request POST 'https://api.orq.ai/v3/experiments/<experiment_id>/runs/<run_id>/rows/<row_id>/duplicate' \\\n  --header 'Authorization: Bearer $ORQ_API_KEY' \\\n  --header 'Content-Type: application/json' \\\n  --data '{}'\n"
+        - lang: "python"
+          label: "Python - Duplicate a row"
+          source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\nrow = client.experiments.duplicate_row(\n    experiment_id=\"<experiment_id>\",\n    run_id=\"<run_id>\",\n    row_id=\"<row_id>\",\n)\n\nprint(row.row_id, len(row.cells))\n"
+        - lang: "typescript"
+          label: "Node.js - Duplicate a row"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({ apiKey: process.env.ORQ_API_KEY });\n\nconst row = await client.experiments.duplicateRow({\n  experimentId: '<experiment_id>',\n  runId: '<run_id>',\n  rowId: '<row_id>',\n});\n\nconsole.log(row.rowId, row.cells.length);\n"
+      security:
+        - ApiKey: []
+  /v3/experiments/{experiment_id}/runs/{run_id}/tasks:
+    get:
+      tags:
+        - "Experiments"
+      summary: "List task columns"
+      operationId: "ExperimentTaskList"
+      parameters:
+        - name: "experiment_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+        - name: "run_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListTaskColumnsResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      x-speakeasy-group: "experiments"
+      x-speakeasy-name-override: "listTasks"
+      x-cli-group: "experiments"
+      x-cli-name: "listTasks"
+      security:
+        - ApiKey: []
+    post:
+      tags:
+        - "Experiments"
+      summary: "Add a task column"
+      description: "Attaches a prompt, orq agent, or (reserved) harness config as a task column. Input mapping is required."
+      operationId: "ExperimentTaskCreate"
+      parameters:
+        - name: "experiment_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+        - name: "run_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateTaskColumnRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Column"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      x-speakeasy-group: "experiments"
+      x-speakeasy-name-override: "createTask"
+      x-cli-group: "experiments"
+      x-cli-name: "createTask"
+      x-code-samples:
+        - lang: "curl"
+          label: "Core - Add a prompt task column"
+          source: "curl 'https://api.orq.ai/v3/experiments/<experiment_id>/runs/<run_id>/tasks' \\\n  --header 'Authorization: Bearer $ORQ_API_KEY' \\\n  --header 'Content-Type: application/json' \\\n  --data '{\n    \"display_name\": \"GPT-4o reply\",\n    \"prompt\": {\n      \"messages_source\": \"MESSAGES_SOURCE_MESSAGES_COLUMN\",\n      \"prompt_config\": { \"model\": \"openai/gpt-4o\", \"messages\": [] }\n    }\n  }'\n"
+        - lang: "python"
+          label: "Python - Add a prompt task column"
+          source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\ncolumn = client.experiments.create_task(\n    experiment_id=\"<experiment_id>\",\n    run_id=\"<run_id>\",\n    display_name=\"GPT-4o reply\",\n    prompt={\n        \"messages_source\": \"MESSAGES_SOURCE_MESSAGES_COLUMN\",\n        \"prompt_config\": {\"model\": \"openai/gpt-4o\", \"messages\": []},\n    },\n)\n\nprint(column.column_id)\n"
+        - lang: "typescript"
+          label: "Node.js - Add a prompt task column"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({ apiKey: process.env.ORQ_API_KEY });\n\nconst column = await client.experiments.createTask({\n  experimentId: '<experiment_id>',\n  runId: '<run_id>',\n  displayName: 'GPT-4o reply',\n  prompt: {\n    messagesSource: 'MESSAGES_SOURCE_MESSAGES_COLUMN',\n    promptConfig: { model: 'openai/gpt-4o', messages: [] },\n  },\n});\n\nconsole.log(column.columnId);\n"
+      security:
+        - ApiKey: []
+  /v3/experiments/{experiment_id}/runs/{run_id}/tasks/{task_id}:
+    delete:
+      tags:
+        - "Experiments"
+      summary: "Delete a task column"
+      operationId: "ExperimentTaskDelete"
+      parameters:
+        - name: "experiment_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+        - name: "run_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+        - name: "task_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "204":
+          description: "No content - successful operation"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      x-speakeasy-group: "experiments"
+      x-speakeasy-name-override: "deleteTask"
+      x-cli-group: "experiments"
+      x-cli-name: "deleteTask"
+      security:
+        - ApiKey: []
+    patch:
+      tags:
+        - "Experiments"
+      summary: "Update a task column"
+      description: "Updates an unlinked task column in place."
+      operationId: "ExperimentTaskUpdate"
+      parameters:
+        - name: "experiment_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+        - name: "run_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+        - name: "task_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateTaskColumnRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Column"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      x-speakeasy-group: "experiments"
+      x-speakeasy-name-override: "updateTask"
+      x-cli-group: "experiments"
+      x-cli-name: "updateTask"
+      security:
+        - ApiKey: []
+  /v3/experiments/{experiment_id}/runs/{run_id}/tasks/{task_id}/cells/{datapoint_id}:
+    patch:
+      tags:
+        - "Experiments"
+      summary: "Ingest a task cell"
+      description: "Writes a cell result, including externally executed or harness cells."
+      operationId: "ExperimentTaskCellPatch"
+      parameters:
+        - name: "experiment_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+        - name: "run_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+        - name: "task_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+        - name: "datapoint_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PatchTaskCellRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Cell"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      x-speakeasy-group: "experiments"
+      x-speakeasy-name-override: "patchTaskCell"
+      x-cli-group: "experiments"
+      x-cli-name: "patchTaskCell"
+      security:
+        - ApiKey: []
+  /v3/experiments/{experiment_id}/runs/{run_id}/export:
+    get:
+      tags:
+        - "Experiments"
+      summary: "Export a run"
+      description: "Downloads the run as a file, including human review and evaluator corrections made after an earlier export."
+      operationId: "ExperimentRunExport"
+      parameters:
+        - name: "experiment_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+        - name: "run_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+        - name: "format"
+          in: "query"
+          required: false
+          schema:
+            type: "string"
+            enum:
+              - "csv"
+              - "json"
+              - "jsonl"
+            default: "json"
+      responses:
+        "200":
+          description: "The run as a file in the requested format"
+          content:
+            text/csv:
+              schema:
+                type: "string"
+                format: "binary"
+            application/json:
+              schema:
+                type: "string"
+                format: "binary"
+            application/jsonl:
+              schema:
+                type: "string"
+                format: "binary"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      x-speakeasy-group: "experiments"
+      x-speakeasy-name-override: "exportRun"
+      x-cli-group: "experiments"
+      x-cli-name: "exportRun"
+      security:
+        - ApiKey: []
   /v2/models:
     get:
       description: "Lists all available models for the workspace, including system and custom models with their enabled status."
@@ -67821,7 +70156,7 @@ paths:
       tags:
         - "Files"
       summary: "List all files"
-      description: "Returns a list of the files that your account has access to. orq.ai sorts and returns the files by their creation dates, placing the most recently created files at the top."
+      description: "Returns a list of the files that your account has access to, sorted by creation date. Set `order` to `desc` to return the most recently created files first."
       operationId: "FileList"
       parameters:
         - name: "limit"
@@ -67847,6 +70182,11 @@ paths:
         - name: "purpose"
           in: "query"
           description: "Restrict results to files declared with this purpose. Accepts a purpose\n alias (`retrieval`, `knowledge_datasource`, `batch`, `code_interpreter`)\n or canonical `FILE_PURPOSE_*` name case-insensitively. Omit to list files\n of every purpose."
+          schema:
+            type: "string"
+        - name: "order"
+          in: "query"
+          description: "Sort order by creation. Defaults to ascending (oldest first)."
           schema:
             type: "string"
       responses:
@@ -76663,6 +79003,8 @@ tags:
     description: "Saved filters and columns for workspace observability pages."
   - name: "Datasets"
     description: "Datasets store test cases and expected outputs used for evaluation and optimization workflows."
+  - name: "Experiments"
+    description: "Create and run experiments: dataset rows against task columns, evaluators, and human review."
   - description: "List models available through the AI Router."
     name: "Models"
   - name: "Policies"
