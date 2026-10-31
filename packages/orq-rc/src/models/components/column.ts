@@ -24,6 +24,10 @@ import {
   HarnessTaskConfig$inboundSchema,
 } from "./harnesstaskconfig.js";
 import {
+  JobOutputColumnConfig,
+  JobOutputColumnConfig$inboundSchema,
+} from "./joboutputcolumnconfig.js";
+import {
   MetricColumnConfig,
   MetricColumnConfig$inboundSchema,
 } from "./metriccolumnconfig.js";
@@ -54,6 +58,10 @@ export type Column = {
   review?: ReviewColumnConfig | undefined;
   dataset?: DatasetColumnConfig | undefined;
   metric?: MetricColumnConfig | undefined;
+  /**
+   * Output of one evaluatorq job; the column holds the text each job produced.
+   */
+  jobOutput?: JobOutputColumnConfig | undefined;
   width?: number | undefined;
 };
 
@@ -73,11 +81,13 @@ export const Column$inboundSchema: z.ZodType<Column, z.ZodTypeDef, unknown> = z
     review: ReviewColumnConfig$inboundSchema.optional(),
     dataset: DatasetColumnConfig$inboundSchema.optional(),
     metric: MetricColumnConfig$inboundSchema.optional(),
+    job_output: JobOutputColumnConfig$inboundSchema.optional(),
     width: z.number().int().optional(),
   }).transform((v) => {
     return remap$(v, {
       "column_id": "columnId",
       "display_name": "displayName",
+      "job_output": "jobOutput",
     });
   });
 

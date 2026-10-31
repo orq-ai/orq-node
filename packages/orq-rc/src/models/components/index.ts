@@ -347,6 +347,7 @@ export * from "./invokedeploymentrequest.js";
 export * from "./invokeevaluatorrequest.js";
 export * from "./ipallowlist.js";
 export * from "./iprange.js";
+export * from "./joboutputcolumnconfig.js";
 export * from "./jsonschematoolinput.js";
 export * from "./knowledge.js";
 export * from "./knowledgebasesservicecreaterequest.js";
