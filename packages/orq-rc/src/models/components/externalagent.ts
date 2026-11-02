@@ -12,8 +12,6 @@ import {
   ExternalAgentHeader$inboundSchema,
 } from "./externalagentheader.js";
 
-export type CachedCard = {};
-
 export type ExternalAgent = {
   agentId: string;
   key: string;
@@ -26,7 +24,7 @@ export type ExternalAgent = {
   headers: { [k: string]: ExternalAgentHeader };
   protocolVersion: string;
   preferredTransport: string;
-  cachedCard: CachedCard;
+  cachedCard: { [k: string]: any };
   cardRefreshedAt?: Date | undefined;
   createdAt: Date;
   updatedAt: Date;
@@ -34,23 +32,6 @@ export type ExternalAgent = {
   updatedById: string;
   version: string;
 };
-
-/** @internal */
-export const CachedCard$inboundSchema: z.ZodType<
-  CachedCard,
-  z.ZodTypeDef,
-  unknown
-> = z.object({});
-
-export function cachedCardFromJSON(
-  jsonString: string,
-): SafeParseResult<CachedCard, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CachedCard$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CachedCard' from JSON`,
-  );
-}
 
 /** @internal */
 export const ExternalAgent$inboundSchema: z.ZodType<
@@ -69,7 +50,7 @@ export const ExternalAgent$inboundSchema: z.ZodType<
   headers: z.record(ExternalAgentHeader$inboundSchema),
   protocol_version: z.string(),
   preferred_transport: z.string(),
-  cached_card: z.lazy(() => CachedCard$inboundSchema),
+  cached_card: z.record(z.any()),
   card_refreshed_at: z.string().datetime({ offset: true }).transform(v =>
     new Date(v)
   ).optional(),

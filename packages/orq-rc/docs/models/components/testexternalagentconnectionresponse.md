@@ -10,7 +10,7 @@ let value: TestExternalAgentConnectionResponse = {};
 
 ## Fields
 
-| Field                                              | Type                                               | Required                                           | Description                                        |
-| -------------------------------------------------- | -------------------------------------------------- | -------------------------------------------------- | -------------------------------------------------- |
-| `reachable`                                        | *boolean*                                          | :heavy_minus_sign:                                 | N/A                                                |
-| `card`                                             | [components.Card](../../models/components/card.md) | :heavy_minus_sign:                                 | N/A                                                |
+| Field                 | Type                  | Required              | Description           |
+| --------------------- | --------------------- | --------------------- | --------------------- |
+| `reachable`           | *boolean*             | :heavy_minus_sign:    | N/A                   |
+| `card`                | Record<string, *any*> | :heavy_minus_sign:    | N/A                   |

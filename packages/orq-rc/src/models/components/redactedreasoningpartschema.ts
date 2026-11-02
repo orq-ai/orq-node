@@ -12,7 +12,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
  */
 export type RedactedReasoningPartSchema = {
   /**
-   * The type of the content part. Always `reasoning`.
+   * The type of the content part. Always `redacted_reasoning`.
    */
   type: "redacted_reasoning";
   /**

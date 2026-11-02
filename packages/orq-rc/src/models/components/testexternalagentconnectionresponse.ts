@@ -7,26 +7,10 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type Card = {};
-
 export type TestExternalAgentConnectionResponse = {
   reachable?: boolean | undefined;
-  card?: Card | undefined;
+  card?: { [k: string]: any } | undefined;
 };
-
-/** @internal */
-export const Card$inboundSchema: z.ZodType<Card, z.ZodTypeDef, unknown> = z
-  .object({});
-
-export function cardFromJSON(
-  jsonString: string,
-): SafeParseResult<Card, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => Card$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Card' from JSON`,
-  );
-}
 
 /** @internal */
 export const TestExternalAgentConnectionResponse$inboundSchema: z.ZodType<
@@ -35,7 +19,7 @@ export const TestExternalAgentConnectionResponse$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   reachable: z.boolean().optional(),
-  card: z.lazy(() => Card$inboundSchema).optional(),
+  card: z.record(z.any()).optional(),
 });
 
 export function testExternalAgentConnectionResponseFromJSON(
