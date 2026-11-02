@@ -1120,7 +1120,7 @@ components:
           type: "string"
           enum:
             - "redacted_reasoning"
-          description: "The type of the content part. Always `reasoning`."
+          description: "The type of the content part. Always `redacted_reasoning`."
         data:
           type: "string"
           description: "The encrypted reasoning or thought process behind the response. Used for chain-of-thought or extended thinking."
@@ -2592,7 +2592,7 @@ components:
           properties:
             _id:
               type: "string"
-              default: "reasoning_01m6dqtdpmzrv39fktpfbveyhv"
+              default: "reasoning_01m6e5cqsw8bqxrt5nrh4hxfcd"
               description: "Unique identifier for the part. Format: reasoning_{ulid} (e.g., reasoning_01hxyz...)"
               example: "reasoning_01hxyz123abc"
             kind:
@@ -7168,7 +7168,7 @@ components:
       properties:
         model:
           type: "string"
-          description: "The embeddings model to use for the knowledge base in the format \"provider/model\" for public models or \"workspaceKey@provider/model\" for private workspace models. This model will be used to embed the chunks when they are added to the knowledge base. Refer to the [Supported models](/ai-gateway/supported-models) to browse available models."
+          description: "The embeddings model to use for the memory store in the format \"provider/model\" for public models or \"workspaceKey@provider/model\" for private workspace models. This model is used to embed entries when they are written to the memory store. Refer to the [Supported models](/ai-gateway/supported-models) to browse available models."
     ListEvaluatorsResponse:
       required:
         - "object"
@@ -13706,6 +13706,7 @@ components:
           type: "boolean"
         card:
           type: "object"
+          additionalProperties: true
     ExternalAgent:
       required:
         - "agent_id"
@@ -13752,6 +13753,7 @@ components:
           type: "string"
         cached_card:
           type: "object"
+          additionalProperties: true
         card_refreshed_at:
           type: "string"
           format: "date-time"
@@ -27196,7 +27198,7 @@ paths:
                                 type: "string"
                                 format: "ulid"
                                 pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                                default: "01M6DQTDNWFRQZFX67TDGT24PT"
+                                default: "01M6E5CQS9JS09NTF3NFH2SM1N"
                                 readOnly: true
                                 description: "The unique identifier of the playground knowledge base"
                               knowledge_id:
@@ -36615,7 +36617,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01M6DQTDQNJQHZC03BZSDTYX55"
+                                          default: "01M6E5CQTT5M6RQBQ1X3P9W8N2"
                                         name:
                                           type: "string"
                                         description:
@@ -38242,7 +38244,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01M6DQTDR1RZW23C74FF5R5DBN"
+                                          default: "01M6E5CQV3NSX201E0W0PVHGJZ"
                                         name:
                                           type: "string"
                                         description:
@@ -47300,7 +47302,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M6DQTDRXTB4PET1390M7DBZY"
+                              default: "tool_01M6E5CQVRV6H9645X1CHB72ZX"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -47401,7 +47403,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M6DQTDRXZK24CR85TBS4AVND"
+                              default: "tool_01M6E5CQVRTZ6D0AP9RRNW3WHD"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -47504,7 +47506,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M6DQTDRYD1DJFWRJQGBHQ2BK"
+                              default: "tool_01M6E5CQVRW36VY4GYH5H35ZJ0"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -47648,7 +47650,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M6DQTDRYJRGZ23PV6MY568XA"
+                              default: "tool_01M6E5CQVS71D06D966TH1D83M"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -48139,7 +48141,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M6DQTDS15K65YGV3RWRFJP9N"
+                        default: "tool_01M6E5CQVTJ4F8CQWREYNT4XEJ"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -48240,7 +48242,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M6DQTDS1VAFHNWBM91TTNFAA"
+                        default: "tool_01M6E5CQVT793V0V3BD4FTF2XW"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -48343,7 +48345,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M6DQTDS1SGWAG087RMBWYENH"
+                        default: "tool_01M6E5CQVTT4FD48VKARY0C5J6"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -48487,7 +48489,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M6DQTDS2NBSZS3K22CE38JKC"
+                        default: "tool_01M6E5CQVVDQPBK1HQFYZAZR2E"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -48991,7 +48993,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M6DQTDS34HQRX234WN17HJBV"
+                        default: "tool_01M6E5CQVV9QPBAB7C3N0GYSRA"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -49092,7 +49094,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M6DQTDS3X7A79W022SF7BXQQ"
+                        default: "tool_01M6E5CQVWNFSQB2YKQB85TMWG"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -49195,7 +49197,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M6DQTDS3HSW54DQDD6H54NJS"
+                        default: "tool_01M6E5CQVWK6STGJTFQ66BQSFY"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -49339,7 +49341,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M6DQTDS4EKSEG9DF6ACV0TR1"
+                        default: "tool_01M6E5CQVWNJBXSN3AEXARJR0W"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -49506,7 +49508,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M6DQTDS7NP5GWWKWXP98R5J0"
+                        default: "tool_01M6E5CQVYPC04VX5K3KHRD0VG"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -49607,7 +49609,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M6DQTDS73NWYTKC12C1BN9V4"
+                        default: "tool_01M6E5CQVYA7DB53GQ8DMMH4S1"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -49710,7 +49712,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M6DQTDS84C2NRREMX0YY9NK5"
+                        default: "tool_01M6E5CQVYMYX3JBJG9B9YP2SV"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -49854,7 +49856,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M6DQTDS8JWPHA3ZAHP8NB64Z"
+                        default: "tool_01M6E5CQVZ5113NYKC1CP0RS59"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -55023,7 +55025,7 @@ paths:
                 image:
                   type: "string"
                   format: "binary"
-                  description: "The image to edit. Must be a supported image file. It should be a png, webp, or jpg file less than 50MB."
+                  description: "The image to vary. Must be a supported image file. It should be a png, webp, or jpg file less than 50MB."
                 model:
                   type: "string"
                   description: "The model to use for image generation."
@@ -76252,7 +76254,7 @@ paths:
   /v3/router/classify:
     post:
       deprecated: true
-      description: "**Deprecated.** Use `POST /v3/router/decisions` and `orq.router.decisions.create()` for new integrations. This endpoint remains available for backward compatibility with the same request and response contract.\n\n**Beta.** Evaluate content against named questions and receive structured answers, probabilities, and usage costs. Send the content as `state` and define each entry in `questions` as:\n\n- `noul`: estimate the probability that a statement is true.\n- `choice`: select an option from a set.\n- `score`: rate the content on an ordered scale.\n- `box`: locate one target in an image and return its bounding box. Beta, TypeSafe `jev-preview` only.\n\nInstructions and criteria accept strings or structured JSON. TypeSafe models also accept inline images through `assets` (beta).\n\nUse a native decision model or a supported chat model. Configure ordered `fallbacks`, optional `retry`, `timeout.call_timeout` in milliseconds, and an exact-match `cache`. Each retry and fallback gets a fresh timeout; omit `retry` to move directly to the next fallback on timeout. The response identifies the model that answered.\n\nRequires the `classify` API-key permission. PII plugins and guardrails are not applied. See the [Decisions guide](/ai-gateway/features/decisions) for supported models, probability interpretation, and refusals."
+      description: "**Deprecated.** Use `POST /v3/router/decisions` and `orq.router.decisions.create()` for new integrations. This endpoint remains available for backward compatibility with the same request and response contract.\n\n**Beta.** Evaluate content against named questions and receive structured answers, probabilities, and usage costs. Send the content as `state` and define each entry in `questions` as:\n\n- `noul`: estimate the probability that a statement is true.\n- `choice`: select an option from a set.\n- `score`: rate the content on an ordered scale.\n- `box`: locate one target in an image and return its bounding box. Beta, TypeSafe `jev-preview` only.\n\nInstructions and criteria accept strings or structured JSON. TypeSafe models also accept inline images through `assets` (beta).\n\nUse a native decision model or a supported chat model. Configure ordered `fallbacks`, optional `retry`, `timeout.call_timeout` in milliseconds, and an exact-match `cache`. Each retry and fallback gets a fresh timeout; when `retry` is omitted, the gateway retries twice before moving to the next fallback. The response identifies the model that answered.\n\nRequires the `classify` API-key permission. PII plugins and guardrails are not applied. See the [Decisions guide](/ai-gateway/features/decisions) for supported models, probability interpretation, and refusals."
       operationId: "CreateClassify"
       requestBody:
         content:
@@ -76843,7 +76845,7 @@ paths:
         - ApiKey: []
   /v3/router/decisions:
     post:
-      description: "**Beta.** Evaluate content against named questions and receive structured answers, probabilities, and usage costs. Send the content as `state` and define each entry in `questions` as:\n\n- `noul`: estimate the probability that a statement is true.\n- `choice`: select an option from a set.\n- `score`: rate the content on an ordered scale.\n- `box`: locate one target in an image and return its bounding box. Beta, TypeSafe `jev-preview` only.\n\nInstructions and criteria accept strings or structured JSON. TypeSafe models also accept inline images through `assets` (beta).\n\nUse a native decision model or a supported chat model. Configure ordered `fallbacks`, optional `retry`, `timeout.call_timeout` in milliseconds, and an exact-match `cache`. Each retry and fallback gets a fresh timeout; omit `retry` to move directly to the next fallback on timeout. The response identifies the model that answered.\n\nRequires the `classify` API-key permission. PII plugins and guardrails are not applied. See the [Decisions guide](/ai-gateway/features/decisions) for supported models, probability interpretation, and refusals."
+      description: "**Beta.** Evaluate content against named questions and receive structured answers, probabilities, and usage costs. Send the content as `state` and define each entry in `questions` as:\n\n- `noul`: estimate the probability that a statement is true.\n- `choice`: select an option from a set.\n- `score`: rate the content on an ordered scale.\n- `box`: locate one target in an image and return its bounding box. Beta, TypeSafe `jev-preview` only.\n\nInstructions and criteria accept strings or structured JSON. TypeSafe models also accept inline images through `assets` (beta).\n\nUse a native decision model or a supported chat model. Configure ordered `fallbacks`, optional `retry`, `timeout.call_timeout` in milliseconds, and an exact-match `cache`. Each retry and fallback gets a fresh timeout; when `retry` is omitted, the gateway retries twice before moving to the next fallback. The response identifies the model that answered.\n\nRequires the `classify` API-key permission. PII plugins and guardrails are not applied. See the [Decisions guide](/ai-gateway/features/decisions) for supported models, probability interpretation, and refusals."
       operationId: "CreateDecisions"
       requestBody:
         content:
