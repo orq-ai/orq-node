@@ -5419,3 +5419,13 @@ Based on:
 - [typescript v4.17.24] .
 ### Releases
 - [NPM v4.17.24] https://www.npmjs.com/package/@orq-ai/node/v/4.17.24 - .
+
+## 2026-11-03 21:15:23
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.806.0 (2.956.1) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [typescript v4.17.25] .
+### Releases
+- [NPM v4.17.25] https://www.npmjs.com/package/@orq-ai/node/v/4.17.25 - .
