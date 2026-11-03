@@ -1330,9 +1330,6 @@ export type UpdateAgentConditions = {
 };
 
 export type UpdateAgentTools = {
-  /**
-   * The id of the resource
-   */
   id: string;
   /**
    * Optional tool key for custom tools

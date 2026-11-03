@@ -1302,9 +1302,6 @@ export type Conditions = {
 };
 
 export type CreateAgentRequestTools = {
-  /**
-   * The id of the resource
-   */
   id: string;
   /**
    * Optional tool key for custom tools

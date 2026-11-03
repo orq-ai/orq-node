@@ -83,9 +83,6 @@ export type AgentStartedStreamingEventConditions = {
 };
 
 export type Tools = {
-  /**
-   * The id of the resource
-   */
   id: string;
   /**
    * Optional tool key for custom tools

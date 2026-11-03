@@ -14,13 +14,19 @@ import {
 } from "./messagessource.js";
 
 export type PromptTaskConfig = {
-  promptConfig?: { [k: string]: any } | undefined;
+  promptConfig: { [k: string]: any };
   messagesSource?: MessagesSource | undefined;
   engine?: string | undefined;
   tools?: Array<{ [k: string]: any }> | undefined;
   knowledgeBases?: Array<{ [k: string]: any }> | undefined;
-  metadata?: { [k: string]: any } | undefined;
-  entityConfiguration?: { [k: string]: any } | undefined;
+  /**
+   * Null when the column was saved without metadata.
+   */
+  metadata?: { [k: string]: any } | null | undefined;
+  /**
+   * Null when the column was saved without an entity configuration.
+   */
+  entityConfiguration?: { [k: string]: any } | null | undefined;
 };
 
 /** @internal */
@@ -29,13 +35,13 @@ export const PromptTaskConfig$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  prompt_config: z.record(z.any()).optional(),
+  prompt_config: z.record(z.any()),
   messages_source: MessagesSource$inboundSchema.optional(),
   engine: z.string().optional(),
   tools: z.array(z.record(z.any())).optional(),
   knowledge_bases: z.array(z.record(z.any())).optional(),
-  metadata: z.record(z.any()).optional(),
-  entity_configuration: z.record(z.any()).optional(),
+  metadata: z.nullable(z.record(z.any())).optional(),
+  entity_configuration: z.nullable(z.record(z.any())).optional(),
 }).transform((v) => {
   return remap$(v, {
     "prompt_config": "promptConfig",
@@ -46,13 +52,13 @@ export const PromptTaskConfig$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type PromptTaskConfig$Outbound = {
-  prompt_config?: { [k: string]: any } | undefined;
+  prompt_config: { [k: string]: any };
   messages_source?: string | undefined;
   engine?: string | undefined;
   tools?: Array<{ [k: string]: any }> | undefined;
   knowledge_bases?: Array<{ [k: string]: any }> | undefined;
-  metadata?: { [k: string]: any } | undefined;
-  entity_configuration?: { [k: string]: any } | undefined;
+  metadata?: { [k: string]: any } | null | undefined;
+  entity_configuration?: { [k: string]: any } | null | undefined;
 };
 
 /** @internal */
@@ -61,13 +67,13 @@ export const PromptTaskConfig$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   PromptTaskConfig
 > = z.object({
-  promptConfig: z.record(z.any()).optional(),
+  promptConfig: z.record(z.any()),
   messagesSource: MessagesSource$outboundSchema.optional(),
   engine: z.string().optional(),
   tools: z.array(z.record(z.any())).optional(),
   knowledgeBases: z.array(z.record(z.any())).optional(),
-  metadata: z.record(z.any()).optional(),
-  entityConfiguration: z.record(z.any()).optional(),
+  metadata: z.nullable(z.record(z.any())).optional(),
+  entityConfiguration: z.nullable(z.record(z.any())).optional(),
 }).transform((v) => {
   return remap$(v, {
     promptConfig: "prompt_config",

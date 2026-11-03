@@ -123,9 +123,6 @@ export type RetrieveAgentRequestConditions = {
 };
 
 export type RetrieveAgentRequestTools = {
-  /**
-   * The id of the resource
-   */
   id: string;
   /**
    * Optional tool key for custom tools

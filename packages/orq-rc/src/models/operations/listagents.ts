@@ -143,9 +143,6 @@ export type ListAgentsConditions = {
 };
 
 export type ListAgentsTools = {
-  /**
-   * The id of the resource
-   */
   id: string;
   /**
    * Optional tool key for custom tools
