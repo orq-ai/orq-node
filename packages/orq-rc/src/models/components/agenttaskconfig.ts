@@ -13,49 +13,14 @@ import {
   MessagesSource$outboundSchema,
 } from "./messagessource.js";
 
-export type AgentTaskConfigMessages = {};
-
 export type AgentTaskConfig = {
   agentKey?: string | undefined;
   messagesSource?: MessagesSource | undefined;
-  messages?: Array<AgentTaskConfigMessages> | undefined;
+  messages?: Array<{ [k: string]: any }> | undefined;
   engine?: string | undefined;
   parentId?: string | undefined;
   agentTag?: string | undefined;
 };
-
-/** @internal */
-export const AgentTaskConfigMessages$inboundSchema: z.ZodType<
-  AgentTaskConfigMessages,
-  z.ZodTypeDef,
-  unknown
-> = z.object({});
-/** @internal */
-export type AgentTaskConfigMessages$Outbound = {};
-
-/** @internal */
-export const AgentTaskConfigMessages$outboundSchema: z.ZodType<
-  AgentTaskConfigMessages$Outbound,
-  z.ZodTypeDef,
-  AgentTaskConfigMessages
-> = z.object({});
-
-export function agentTaskConfigMessagesToJSON(
-  agentTaskConfigMessages: AgentTaskConfigMessages,
-): string {
-  return JSON.stringify(
-    AgentTaskConfigMessages$outboundSchema.parse(agentTaskConfigMessages),
-  );
-}
-export function agentTaskConfigMessagesFromJSON(
-  jsonString: string,
-): SafeParseResult<AgentTaskConfigMessages, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => AgentTaskConfigMessages$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'AgentTaskConfigMessages' from JSON`,
-  );
-}
 
 /** @internal */
 export const AgentTaskConfig$inboundSchema: z.ZodType<
@@ -65,8 +30,7 @@ export const AgentTaskConfig$inboundSchema: z.ZodType<
 > = z.object({
   agent_key: z.string().optional(),
   messages_source: MessagesSource$inboundSchema.optional(),
-  messages: z.array(z.lazy(() => AgentTaskConfigMessages$inboundSchema))
-    .optional(),
+  messages: z.array(z.record(z.any())).optional(),
   engine: z.string().optional(),
   parent_id: z.string().optional(),
   agent_tag: z.string().optional(),
@@ -82,7 +46,7 @@ export const AgentTaskConfig$inboundSchema: z.ZodType<
 export type AgentTaskConfig$Outbound = {
   agent_key?: string | undefined;
   messages_source?: string | undefined;
-  messages?: Array<AgentTaskConfigMessages$Outbound> | undefined;
+  messages?: Array<{ [k: string]: any }> | undefined;
   engine?: string | undefined;
   parent_id?: string | undefined;
   agent_tag?: string | undefined;
@@ -96,8 +60,7 @@ export const AgentTaskConfig$outboundSchema: z.ZodType<
 > = z.object({
   agentKey: z.string().optional(),
   messagesSource: MessagesSource$outboundSchema.optional(),
-  messages: z.array(z.lazy(() => AgentTaskConfigMessages$outboundSchema))
-    .optional(),
+  messages: z.array(z.record(z.any())).optional(),
   engine: z.string().optional(),
   parentId: z.string().optional(),
   agentTag: z.string().optional(),

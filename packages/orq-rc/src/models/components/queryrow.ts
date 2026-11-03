@@ -15,8 +15,11 @@ export type QueryRow = {
   displayName?: string | undefined;
   cells?: Array<Cell> | undefined;
   status?: RowStatus | undefined;
-  createdAt?: Date | undefined;
-  updatedAt?: Date | undefined;
+  /**
+   * Null on rows written before timestamps were recorded.
+   */
+  createdAt?: Date | null | undefined;
+  updatedAt?: Date | null | undefined;
 };
 
 /** @internal */
@@ -29,10 +32,12 @@ export const QueryRow$inboundSchema: z.ZodType<
   display_name: z.string().optional(),
   cells: z.array(Cell$inboundSchema).optional(),
   status: RowStatus$inboundSchema.optional(),
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  updated_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
+  created_at: z.nullable(
+    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  ).optional(),
+  updated_at: z.nullable(
+    z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  ).optional(),
 }).transform((v) => {
   return remap$(v, {
     "row_id": "rowId",

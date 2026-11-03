@@ -12,15 +12,6 @@ import { CellProgress, CellProgress$inboundSchema } from "./cellprogress.js";
 import { CellStatus, CellStatus$inboundSchema } from "./cellstatus.js";
 import { CellType, CellType$inboundSchema } from "./celltype.js";
 
-/**
- * Stored documents are returned as-is; strings are wrapped as {"text"},
- *
- * @remarks
- *  arrays as {"messages"} on messages cells and {"items"} elsewhere, other
- *  scalars as {"value"}.
- */
-export type CellValue = {};
-
 export type Cell = {
   cellId?: string | undefined;
   rowId?: string | undefined;
@@ -32,37 +23,29 @@ export type Cell = {
    *
    * @remarks
    *  arrays as {"messages"} on messages cells and {"items"} elsewhere, other
-   *  scalars as {"value"}.
+   *  scalars as {"value"}. Null for a cell that has no value yet.
    */
-  value?: CellValue | undefined;
-  artifacts?: ArtifactRefs | undefined;
-  progress?: CellProgress | undefined;
+  value?: { [k: string]: any } | null | undefined;
+  /**
+   * Null when the cell holds no trace, response or session references.
+   */
+  artifacts?: ArtifactRefs | null | undefined;
+  /**
+   * Only present while the cell is running.
+   */
+  progress?: CellProgress | null | undefined;
   errorMessage?: string | undefined;
   type?: CellType | undefined;
   /**
    * Task column an evaluator, metric or review cell belongs to.
    */
   taskColumnId?: string | undefined;
-  createdAt?: Date | undefined;
-  updatedAt?: Date | undefined;
+  /**
+   * Null on cells written before timestamps were recorded.
+   */
+  createdAt?: Date | null | undefined;
+  updatedAt?: Date | null | undefined;
 };
-
-/** @internal */
-export const CellValue$inboundSchema: z.ZodType<
-  CellValue,
-  z.ZodTypeDef,
-  unknown
-> = z.object({});
-
-export function cellValueFromJSON(
-  jsonString: string,
-): SafeParseResult<CellValue, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CellValue$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CellValue' from JSON`,
-  );
-}
 
 /** @internal */
 export const Cell$inboundSchema: z.ZodType<Cell, z.ZodTypeDef, unknown> = z
@@ -72,17 +55,17 @@ export const Cell$inboundSchema: z.ZodType<Cell, z.ZodTypeDef, unknown> = z
     column_id: z.string().optional(),
     repeat_index: z.number().int().optional(),
     status: CellStatus$inboundSchema.optional(),
-    value: z.lazy(() => CellValue$inboundSchema).optional(),
-    artifacts: ArtifactRefs$inboundSchema.optional(),
-    progress: CellProgress$inboundSchema.optional(),
+    value: z.nullable(z.record(z.any())).optional(),
+    artifacts: z.nullable(ArtifactRefs$inboundSchema).optional(),
+    progress: z.nullable(CellProgress$inboundSchema).optional(),
     error_message: z.string().optional(),
     type: CellType$inboundSchema.optional(),
     task_column_id: z.string().optional(),
-    created_at: z.string().datetime({ offset: true }).transform(v =>
-      new Date(v)
+    created_at: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
     ).optional(),
-    updated_at: z.string().datetime({ offset: true }).transform(v =>
-      new Date(v)
+    updated_at: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
     ).optional(),
   }).transform((v) => {
     return remap$(v, {

@@ -13,175 +13,15 @@ import {
   MessagesSource$outboundSchema,
 } from "./messagessource.js";
 
-export type PromptConfig = {};
-
-export type Tools = {};
-
-export type KnowledgeBases = {};
-
-export type PromptTaskConfigMetadata = {};
-
-export type EntityConfiguration = {};
-
 export type PromptTaskConfig = {
-  promptConfig?: PromptConfig | undefined;
+  promptConfig?: { [k: string]: any } | undefined;
   messagesSource?: MessagesSource | undefined;
   engine?: string | undefined;
-  tools?: Array<Tools> | undefined;
-  knowledgeBases?: Array<KnowledgeBases> | undefined;
-  metadata?: PromptTaskConfigMetadata | undefined;
-  entityConfiguration?: EntityConfiguration | undefined;
+  tools?: Array<{ [k: string]: any }> | undefined;
+  knowledgeBases?: Array<{ [k: string]: any }> | undefined;
+  metadata?: { [k: string]: any } | undefined;
+  entityConfiguration?: { [k: string]: any } | undefined;
 };
-
-/** @internal */
-export const PromptConfig$inboundSchema: z.ZodType<
-  PromptConfig,
-  z.ZodTypeDef,
-  unknown
-> = z.object({});
-/** @internal */
-export type PromptConfig$Outbound = {};
-
-/** @internal */
-export const PromptConfig$outboundSchema: z.ZodType<
-  PromptConfig$Outbound,
-  z.ZodTypeDef,
-  PromptConfig
-> = z.object({});
-
-export function promptConfigToJSON(promptConfig: PromptConfig): string {
-  return JSON.stringify(PromptConfig$outboundSchema.parse(promptConfig));
-}
-export function promptConfigFromJSON(
-  jsonString: string,
-): SafeParseResult<PromptConfig, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => PromptConfig$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PromptConfig' from JSON`,
-  );
-}
-
-/** @internal */
-export const Tools$inboundSchema: z.ZodType<Tools, z.ZodTypeDef, unknown> = z
-  .object({});
-/** @internal */
-export type Tools$Outbound = {};
-
-/** @internal */
-export const Tools$outboundSchema: z.ZodType<
-  Tools$Outbound,
-  z.ZodTypeDef,
-  Tools
-> = z.object({});
-
-export function toolsToJSON(tools: Tools): string {
-  return JSON.stringify(Tools$outboundSchema.parse(tools));
-}
-export function toolsFromJSON(
-  jsonString: string,
-): SafeParseResult<Tools, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => Tools$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Tools' from JSON`,
-  );
-}
-
-/** @internal */
-export const KnowledgeBases$inboundSchema: z.ZodType<
-  KnowledgeBases,
-  z.ZodTypeDef,
-  unknown
-> = z.object({});
-/** @internal */
-export type KnowledgeBases$Outbound = {};
-
-/** @internal */
-export const KnowledgeBases$outboundSchema: z.ZodType<
-  KnowledgeBases$Outbound,
-  z.ZodTypeDef,
-  KnowledgeBases
-> = z.object({});
-
-export function knowledgeBasesToJSON(knowledgeBases: KnowledgeBases): string {
-  return JSON.stringify(KnowledgeBases$outboundSchema.parse(knowledgeBases));
-}
-export function knowledgeBasesFromJSON(
-  jsonString: string,
-): SafeParseResult<KnowledgeBases, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => KnowledgeBases$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'KnowledgeBases' from JSON`,
-  );
-}
-
-/** @internal */
-export const PromptTaskConfigMetadata$inboundSchema: z.ZodType<
-  PromptTaskConfigMetadata,
-  z.ZodTypeDef,
-  unknown
-> = z.object({});
-/** @internal */
-export type PromptTaskConfigMetadata$Outbound = {};
-
-/** @internal */
-export const PromptTaskConfigMetadata$outboundSchema: z.ZodType<
-  PromptTaskConfigMetadata$Outbound,
-  z.ZodTypeDef,
-  PromptTaskConfigMetadata
-> = z.object({});
-
-export function promptTaskConfigMetadataToJSON(
-  promptTaskConfigMetadata: PromptTaskConfigMetadata,
-): string {
-  return JSON.stringify(
-    PromptTaskConfigMetadata$outboundSchema.parse(promptTaskConfigMetadata),
-  );
-}
-export function promptTaskConfigMetadataFromJSON(
-  jsonString: string,
-): SafeParseResult<PromptTaskConfigMetadata, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => PromptTaskConfigMetadata$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PromptTaskConfigMetadata' from JSON`,
-  );
-}
-
-/** @internal */
-export const EntityConfiguration$inboundSchema: z.ZodType<
-  EntityConfiguration,
-  z.ZodTypeDef,
-  unknown
-> = z.object({});
-/** @internal */
-export type EntityConfiguration$Outbound = {};
-
-/** @internal */
-export const EntityConfiguration$outboundSchema: z.ZodType<
-  EntityConfiguration$Outbound,
-  z.ZodTypeDef,
-  EntityConfiguration
-> = z.object({});
-
-export function entityConfigurationToJSON(
-  entityConfiguration: EntityConfiguration,
-): string {
-  return JSON.stringify(
-    EntityConfiguration$outboundSchema.parse(entityConfiguration),
-  );
-}
-export function entityConfigurationFromJSON(
-  jsonString: string,
-): SafeParseResult<EntityConfiguration, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => EntityConfiguration$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'EntityConfiguration' from JSON`,
-  );
-}
 
 /** @internal */
 export const PromptTaskConfig$inboundSchema: z.ZodType<
@@ -189,15 +29,13 @@ export const PromptTaskConfig$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  prompt_config: z.lazy(() => PromptConfig$inboundSchema).optional(),
+  prompt_config: z.record(z.any()).optional(),
   messages_source: MessagesSource$inboundSchema.optional(),
   engine: z.string().optional(),
-  tools: z.array(z.lazy(() => Tools$inboundSchema)).optional(),
-  knowledge_bases: z.array(z.lazy(() => KnowledgeBases$inboundSchema))
-    .optional(),
-  metadata: z.lazy(() => PromptTaskConfigMetadata$inboundSchema).optional(),
-  entity_configuration: z.lazy(() => EntityConfiguration$inboundSchema)
-    .optional(),
+  tools: z.array(z.record(z.any())).optional(),
+  knowledge_bases: z.array(z.record(z.any())).optional(),
+  metadata: z.record(z.any()).optional(),
+  entity_configuration: z.record(z.any()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "prompt_config": "promptConfig",
@@ -208,13 +46,13 @@ export const PromptTaskConfig$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type PromptTaskConfig$Outbound = {
-  prompt_config?: PromptConfig$Outbound | undefined;
+  prompt_config?: { [k: string]: any } | undefined;
   messages_source?: string | undefined;
   engine?: string | undefined;
-  tools?: Array<Tools$Outbound> | undefined;
-  knowledge_bases?: Array<KnowledgeBases$Outbound> | undefined;
-  metadata?: PromptTaskConfigMetadata$Outbound | undefined;
-  entity_configuration?: EntityConfiguration$Outbound | undefined;
+  tools?: Array<{ [k: string]: any }> | undefined;
+  knowledge_bases?: Array<{ [k: string]: any }> | undefined;
+  metadata?: { [k: string]: any } | undefined;
+  entity_configuration?: { [k: string]: any } | undefined;
 };
 
 /** @internal */
@@ -223,15 +61,13 @@ export const PromptTaskConfig$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   PromptTaskConfig
 > = z.object({
-  promptConfig: z.lazy(() => PromptConfig$outboundSchema).optional(),
+  promptConfig: z.record(z.any()).optional(),
   messagesSource: MessagesSource$outboundSchema.optional(),
   engine: z.string().optional(),
-  tools: z.array(z.lazy(() => Tools$outboundSchema)).optional(),
-  knowledgeBases: z.array(z.lazy(() => KnowledgeBases$outboundSchema))
-    .optional(),
-  metadata: z.lazy(() => PromptTaskConfigMetadata$outboundSchema).optional(),
-  entityConfiguration: z.lazy(() => EntityConfiguration$outboundSchema)
-    .optional(),
+  tools: z.array(z.record(z.any())).optional(),
+  knowledgeBases: z.array(z.record(z.any())).optional(),
+  metadata: z.record(z.any()).optional(),
+  entityConfiguration: z.record(z.any()).optional(),
 }).transform((v) => {
   return remap$(v, {
     promptConfig: "prompt_config",

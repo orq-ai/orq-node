@@ -4,33 +4,13 @@
 
 import * as z from "zod/v3";
 
-export type UpdateRunCellRequestValue = {};
-
 export type UpdateRunCellRequest = {
-  value?: UpdateRunCellRequestValue | undefined;
+  value?: { [k: string]: any } | undefined;
 };
 
 /** @internal */
-export type UpdateRunCellRequestValue$Outbound = {};
-
-/** @internal */
-export const UpdateRunCellRequestValue$outboundSchema: z.ZodType<
-  UpdateRunCellRequestValue$Outbound,
-  z.ZodTypeDef,
-  UpdateRunCellRequestValue
-> = z.object({});
-
-export function updateRunCellRequestValueToJSON(
-  updateRunCellRequestValue: UpdateRunCellRequestValue,
-): string {
-  return JSON.stringify(
-    UpdateRunCellRequestValue$outboundSchema.parse(updateRunCellRequestValue),
-  );
-}
-
-/** @internal */
 export type UpdateRunCellRequest$Outbound = {
-  value?: UpdateRunCellRequestValue$Outbound | undefined;
+  value?: { [k: string]: any } | undefined;
 };
 
 /** @internal */
@@ -39,7 +19,7 @@ export const UpdateRunCellRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateRunCellRequest
 > = z.object({
-  value: z.lazy(() => UpdateRunCellRequestValue$outboundSchema).optional(),
+  value: z.record(z.any()).optional(),
 });
 
 export function updateRunCellRequestToJSON(

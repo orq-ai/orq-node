@@ -27,7 +27,10 @@ export type MetricSummary = {
   number?: NumberMetricSummary | undefined;
   boolean?: BooleanMetricSummary | undefined;
   categorical?: CategoricalMetricSummary | undefined;
-  baseline?: MetricBaseline | undefined;
+  /**
+   * Null unless a baseline run was requested.
+   */
+  baseline?: MetricBaseline | null | undefined;
 };
 
 /** @internal */
@@ -39,7 +42,7 @@ export const MetricSummary$inboundSchema: z.ZodType<
   number: NumberMetricSummary$inboundSchema.optional(),
   boolean: BooleanMetricSummary$inboundSchema.optional(),
   categorical: CategoricalMetricSummary$inboundSchema.optional(),
-  baseline: MetricBaseline$inboundSchema.optional(),
+  baseline: z.nullable(MetricBaseline$inboundSchema).optional(),
 });
 
 export function metricSummaryFromJSON(

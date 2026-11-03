@@ -4,29 +4,13 @@
 
 import * as z from "zod/v3";
 
-export type Value = {};
-
 export type PatchEvalCellRequest = {
-  value?: Value | undefined;
+  value?: { [k: string]: any } | undefined;
 };
 
 /** @internal */
-export type Value$Outbound = {};
-
-/** @internal */
-export const Value$outboundSchema: z.ZodType<
-  Value$Outbound,
-  z.ZodTypeDef,
-  Value
-> = z.object({});
-
-export function valueToJSON(value: Value): string {
-  return JSON.stringify(Value$outboundSchema.parse(value));
-}
-
-/** @internal */
 export type PatchEvalCellRequest$Outbound = {
-  value?: Value$Outbound | undefined;
+  value?: { [k: string]: any } | undefined;
 };
 
 /** @internal */
@@ -35,7 +19,7 @@ export const PatchEvalCellRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   PatchEvalCellRequest
 > = z.object({
-  value: z.lazy(() => Value$outboundSchema).optional(),
+  value: z.record(z.any()).optional(),
 });
 
 export function patchEvalCellRequestToJSON(

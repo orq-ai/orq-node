@@ -10,36 +10,16 @@ import {
   ArtifactRefs$outboundSchema,
 } from "./artifactrefs.js";
 
-export type PatchTaskCellRequestValue = {};
-
 export type PatchTaskCellRequest = {
   repeatIndex?: number | undefined;
-  value?: PatchTaskCellRequestValue | undefined;
+  value?: { [k: string]: any } | undefined;
   artifacts?: ArtifactRefs | undefined;
 };
 
 /** @internal */
-export type PatchTaskCellRequestValue$Outbound = {};
-
-/** @internal */
-export const PatchTaskCellRequestValue$outboundSchema: z.ZodType<
-  PatchTaskCellRequestValue$Outbound,
-  z.ZodTypeDef,
-  PatchTaskCellRequestValue
-> = z.object({});
-
-export function patchTaskCellRequestValueToJSON(
-  patchTaskCellRequestValue: PatchTaskCellRequestValue,
-): string {
-  return JSON.stringify(
-    PatchTaskCellRequestValue$outboundSchema.parse(patchTaskCellRequestValue),
-  );
-}
-
-/** @internal */
 export type PatchTaskCellRequest$Outbound = {
   repeat_index?: number | undefined;
-  value?: PatchTaskCellRequestValue$Outbound | undefined;
+  value?: { [k: string]: any } | undefined;
   artifacts?: ArtifactRefs$Outbound | undefined;
 };
 
@@ -50,7 +30,7 @@ export const PatchTaskCellRequest$outboundSchema: z.ZodType<
   PatchTaskCellRequest
 > = z.object({
   repeatIndex: z.number().int().optional(),
-  value: z.lazy(() => PatchTaskCellRequestValue$outboundSchema).optional(),
+  value: z.record(z.any()).optional(),
   artifacts: ArtifactRefs$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {

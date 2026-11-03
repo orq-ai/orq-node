@@ -26,9 +26,15 @@ export type Run = {
   rowCount?: number | undefined;
   cellStatusCounts?: CellStatusCounts | undefined;
   columns?: Array<Column> | undefined;
-  settings?: RunSettings | undefined;
-  startedAt?: Date | undefined;
-  completedAt?: Date | undefined;
+  /**
+   * Null on runs created without settings, such as evaluatorq uploads.
+   */
+  settings?: RunSettings | null | undefined;
+  /**
+   * Null until the run is executed.
+   */
+  startedAt?: Date | null | undefined;
+  completedAt?: Date | null | undefined;
   createdAt?: Date | undefined;
   updatedAt?: Date | undefined;
   /**
@@ -54,12 +60,12 @@ export const Run$inboundSchema: z.ZodType<Run, z.ZodTypeDef, unknown> = z
     row_count: z.number().int().optional(),
     cell_status_counts: CellStatusCounts$inboundSchema.optional(),
     columns: z.array(Column$inboundSchema).optional(),
-    settings: RunSettings$inboundSchema.optional(),
-    started_at: z.string().datetime({ offset: true }).transform(v =>
-      new Date(v)
+    settings: z.nullable(RunSettings$inboundSchema).optional(),
+    started_at: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
     ).optional(),
-    completed_at: z.string().datetime({ offset: true }).transform(v =>
-      new Date(v)
+    completed_at: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
     ).optional(),
     created_at: z.string().datetime({ offset: true }).transform(v =>
       new Date(v)

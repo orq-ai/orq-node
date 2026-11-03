@@ -4,35 +4,13 @@
 
 import * as z from "zod/v3";
 
-export type PatchReviewCellRequestValue = {};
-
 export type PatchReviewCellRequest = {
-  value?: PatchReviewCellRequestValue | undefined;
+  value?: { [k: string]: any } | undefined;
 };
 
 /** @internal */
-export type PatchReviewCellRequestValue$Outbound = {};
-
-/** @internal */
-export const PatchReviewCellRequestValue$outboundSchema: z.ZodType<
-  PatchReviewCellRequestValue$Outbound,
-  z.ZodTypeDef,
-  PatchReviewCellRequestValue
-> = z.object({});
-
-export function patchReviewCellRequestValueToJSON(
-  patchReviewCellRequestValue: PatchReviewCellRequestValue,
-): string {
-  return JSON.stringify(
-    PatchReviewCellRequestValue$outboundSchema.parse(
-      patchReviewCellRequestValue,
-    ),
-  );
-}
-
-/** @internal */
 export type PatchReviewCellRequest$Outbound = {
-  value?: PatchReviewCellRequestValue$Outbound | undefined;
+  value?: { [k: string]: any } | undefined;
 };
 
 /** @internal */
@@ -41,7 +19,7 @@ export const PatchReviewCellRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   PatchReviewCellRequest
 > = z.object({
-  value: z.lazy(() => PatchReviewCellRequestValue$outboundSchema).optional(),
+  value: z.record(z.any()).optional(),
 });
 
 export function patchReviewCellRequestToJSON(
