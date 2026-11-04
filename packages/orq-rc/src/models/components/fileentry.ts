@@ -24,11 +24,11 @@ export const FileEntryType = {
 export type FileEntryType = ClosedEnum<typeof FileEntryType>;
 
 /**
- * The file content messages below mirror the tools-pod JSON contract one for
+ * The file content messages below share one shape. `path` is always relative
  *
  * @remarks
- *  one. `path` is always relative to the file system root; an absolute path or a
- *  `..` segment is refused rather than clamped.
+ *  to the file system root; an absolute path or a `..` segment is refused rather
+ *  than clamped.
  */
 export type FileEntry = {
   /**

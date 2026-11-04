@@ -70,7 +70,7 @@ export type CreateBudgetRequest = {
    * Optional expiration. When set in combination with is_active=true,
    *
    * @remarks
-   *  the value MUST be in the future; the handler rejects past values.
+   *  the value MUST be in the future; the API rejects a past value.
    */
   expiresAt?: Date | undefined;
   /**
