@@ -24,6 +24,10 @@ export type CreateEvalRequestBodyType = ClosedEnum<
 >;
 
 export type Python = {
+  /**
+   * Maximum time in milliseconds the evaluator may run. A request can shorten it but not extend it. Defaults to 60000.
+   */
+  timeout?: number | null | undefined;
   guardrailConfig?: any | undefined;
   outputType?: OutputType | undefined;
   code: string;
@@ -107,6 +111,10 @@ export type OneJury = {
 };
 
 export type LLMJury = {
+  /**
+   * Maximum time in milliseconds the evaluator may run. A request can shorten it but not extend it. Defaults to 60000.
+   */
+  timeout?: number | null | undefined;
   guardrailConfig?: any | undefined;
   /**
    * The type of output expected from the evaluator
@@ -157,6 +165,10 @@ export type CreateEval1CategoricalLabels = {
 };
 
 export type Llm = {
+  /**
+   * Maximum time in milliseconds the evaluator may run. A request can shorten it but not extend it. Defaults to 60000.
+   */
+  timeout?: number | null | undefined;
   guardrailConfig?: any | undefined;
   /**
    * The type of output expected from the evaluator
@@ -209,6 +221,7 @@ export const CreateEvalRequestBodyType$outboundSchema: z.ZodNativeEnum<
 
 /** @internal */
 export type Python$Outbound = {
+  timeout?: number | null | undefined;
   guardrail_config?: any | undefined;
   output_type?: string | undefined;
   code: string;
@@ -225,6 +238,7 @@ export const Python$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Python
 > = z.object({
+  timeout: z.nullable(z.number().int()).optional(),
   guardrailConfig: z.any().optional(),
   outputType: OutputType$outboundSchema.optional(),
   code: z.string(),
@@ -457,6 +471,7 @@ export function oneJuryToJSON(oneJury: OneJury): string {
 
 /** @internal */
 export type LLMJury$Outbound = {
+  timeout?: number | null | undefined;
   guardrail_config?: any | undefined;
   output_type?: string | undefined;
   type: string;
@@ -479,6 +494,7 @@ export const LLMJury$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   LLMJury
 > = z.object({
+  timeout: z.nullable(z.number().int()).optional(),
   guardrailConfig: z.any().optional(),
   outputType: OneOutputType$outboundSchema.optional(),
   type: CreateEval1Type$outboundSchema,
@@ -546,6 +562,7 @@ export function createEval1CategoricalLabelsToJSON(
 
 /** @internal */
 export type Llm$Outbound = {
+  timeout?: number | null | undefined;
   guardrail_config?: any | undefined;
   output_type?: string | undefined;
   type: string;
@@ -568,6 +585,7 @@ export type Llm$Outbound = {
 /** @internal */
 export const Llm$outboundSchema: z.ZodType<Llm$Outbound, z.ZodTypeDef, Llm> = z
   .object({
+    timeout: z.nullable(z.number().int()).optional(),
     guardrailConfig: z.any().optional(),
     outputType: CreateEval1OutputType$outboundSchema.optional(),
     type: OneType$outboundSchema,

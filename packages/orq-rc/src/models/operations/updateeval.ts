@@ -102,6 +102,10 @@ export type UpdateEvalRequestBody = {
   headers?: { [k: string]: string } | undefined;
   payload?: { [k: string]: any } | undefined;
   code?: string | undefined;
+  /**
+   * Maximum time in milliseconds the evaluator may run. A request can shorten it but not extend it. Defaults to 60000.
+   */
+  timeout?: number | null | undefined;
   guardrailConfig?: any | undefined;
   versionIncrement?: UpdateEvalVersionIncrement | undefined;
   versionDescription?: string | undefined;
@@ -360,6 +364,7 @@ export type UpdateEvalRequestBody$Outbound = {
   headers?: { [k: string]: string } | undefined;
   payload?: { [k: string]: any } | undefined;
   code?: string | undefined;
+  timeout?: number | null | undefined;
   guardrail_config?: any | undefined;
   versionIncrement?: string | undefined;
   versionDescription?: string | undefined;
@@ -393,6 +398,7 @@ export const UpdateEvalRequestBody$outboundSchema: z.ZodType<
   headers: z.record(z.string()).optional(),
   payload: z.record(z.any()).optional(),
   code: z.string().optional(),
+  timeout: z.nullable(z.number().int()).optional(),
   guardrailConfig: z.any().optional(),
   versionIncrement: UpdateEvalVersionIncrement$outboundSchema.optional(),
   versionDescription: z.string().optional(),
