@@ -2591,7 +2591,7 @@ components:
           properties:
             _id:
               type: "string"
-              default: "reasoning_01m6kq43bgbqek5q40052jzm8k"
+              default: "reasoning_01m6n2dbrhx22reh3qt2edfgse"
               description: "Unique identifier for the part. Format: reasoning_{ulid} (e.g., reasoning_01hxyz...)"
               example: "reasoning_01hxyz123abc"
             kind:
@@ -7365,6 +7365,13 @@ components:
         project_id:
           type: "string"
           description: "Unique identifier of the project owning this evaluator."
+        timeout:
+          type:
+            - "integer"
+            - "null"
+          minimum: 1000
+          maximum: 120000
+          description: "Maximum time in milliseconds the evaluator may run. A request can shorten it but not extend it. Defaults to 60000."
         guardrail_config:
           anyOf:
             - type: "object"
@@ -7782,6 +7789,13 @@ components:
         project_id:
           type: "string"
           description: "Unique identifier of the project owning this evaluator."
+        timeout:
+          type:
+            - "integer"
+            - "null"
+          minimum: 1000
+          maximum: 120000
+          description: "Maximum time in milliseconds the evaluator may run. A request can shorten it but not extend it. Defaults to 60000."
         guardrail_config:
           anyOf:
             - type: "object"
@@ -7914,6 +7928,13 @@ components:
         project_id:
           type: "string"
           description: "Unique identifier of the project owning this evaluator."
+        timeout:
+          type:
+            - "integer"
+            - "null"
+          minimum: 1000
+          maximum: 120000
+          description: "Maximum time in milliseconds the evaluator may run. A request can shorten it but not extend it. Defaults to 60000."
         guardrail_config:
           anyOf:
             - type: "object"
@@ -8031,6 +8052,13 @@ components:
         project_id:
           type: "string"
           description: "Unique identifier of the project owning this evaluator."
+        timeout:
+          type:
+            - "integer"
+            - "null"
+          minimum: 1000
+          maximum: 120000
+          description: "Maximum time in milliseconds the evaluator may run. A request can shorten it but not extend it. Defaults to 60000."
         guardrail_config:
           anyOf:
             - type: "object"
@@ -8282,6 +8310,13 @@ components:
         project_id:
           type: "string"
           description: "Unique identifier of the project owning this evaluator."
+        timeout:
+          type:
+            - "integer"
+            - "null"
+          minimum: 1000
+          maximum: 120000
+          description: "Maximum time in milliseconds the evaluator may run. A request can shorten it but not extend it. Defaults to 60000."
         guardrail_config:
           anyOf:
             - type: "object"
@@ -8399,6 +8434,13 @@ components:
         project_id:
           type: "string"
           description: "Unique identifier of the project owning this evaluator."
+        timeout:
+          type:
+            - "integer"
+            - "null"
+          minimum: 1000
+          maximum: 120000
+          description: "Maximum time in milliseconds the evaluator may run. A request can shorten it but not extend it. Defaults to 60000."
         guardrail_config:
           anyOf:
             - type: "object"
@@ -8532,6 +8574,13 @@ components:
         project_id:
           type: "string"
           description: "Unique identifier of the project owning this evaluator."
+        timeout:
+          type:
+            - "integer"
+            - "null"
+          minimum: 1000
+          maximum: 120000
+          description: "Maximum time in milliseconds the evaluator may run. A request can shorten it but not extend it. Defaults to 60000."
         guardrail_config:
           anyOf:
             - type: "object"
@@ -27219,7 +27268,7 @@ paths:
                                 type: "string"
                                 format: "ulid"
                                 pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                                default: "01M6KQ43AP407HR206N00A3E8N"
+                                default: "01M6N2DBQTENRSR56RZ85QC3XG"
                                 readOnly: true
                                 description: "The unique identifier of the playground knowledge base"
                               knowledge_id:
@@ -36618,7 +36667,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01M6KQ43CK9RSMH54YDWM3QB6J"
+                                          default: "01M6N2DBSJJ7KYS9S93H5K7Y1V"
                                         name:
                                           type: "string"
                                         description:
@@ -38244,7 +38293,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01M6KQ43CXYR9T3JA2MEXWRP85"
+                                          default: "01M6N2DBSW29M5NA6QBAX7GW8R"
                                         name:
                                           type: "string"
                                         description:
@@ -47301,7 +47350,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M6KQ43DTYH68GY6E25E8CFDR"
+                              default: "tool_01M6N2DBTRFSJ3Y4W86D7PGNQB"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -47402,7 +47451,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M6KQ43DVRF835CGX1AF178RX"
+                              default: "tool_01M6N2DBTT5AQMX2YBYPTVT177"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -47505,7 +47554,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M6KQ43DVYQB3R14R3Q308PRH"
+                              default: "tool_01M6N2DBTVWTKCK6CHC1AQH388"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -47649,7 +47698,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M6KQ43DWX12V282HF6R9H45X"
+                              default: "tool_01M6N2DBTV39VMKFHFDAZD0CMR"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -48136,7 +48185,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M6KQ43E01F90VBRNKCGWRBA1"
+                        default: "tool_01M6N2DBTYVE54TK3EKM4T3T14"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -48237,7 +48286,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M6KQ43E0MDQFJJG7416ZTJAZ"
+                        default: "tool_01M6N2DBTYE2F9M2QX1RJ6BEKH"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -48340,7 +48389,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M6KQ43E0CGQ9MDD7B01GSEYV"
+                        default: "tool_01M6N2DBTYG58BH2X7E104T5PZ"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -48484,7 +48533,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M6KQ43E1RPTCF2PTVTYBR3WW"
+                        default: "tool_01M6N2DBTZA9HWZB52PKCVJN9V"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -48988,7 +49037,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M6KQ43E2KSRDGXC4GTA9CPZJ"
+                        default: "tool_01M6N2DBV06443RA700XE228P5"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -49089,7 +49138,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M6KQ43E2ST4AWE82VWJTZW71"
+                        default: "tool_01M6N2DBV0QFPX5KABA6SR9C6A"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -49192,7 +49241,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M6KQ43E3WRX0G3861T63P0NR"
+                        default: "tool_01M6N2DBV1H16B7BQPHDK17KNB"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -49336,7 +49385,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M6KQ43E3W2PT14KQ7HVG27F4"
+                        default: "tool_01M6N2DBV18DH5T4QXWDFF1H3N"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -49503,7 +49552,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M6KQ43E6GQN26G8ACS0TXGHG"
+                        default: "tool_01M6N2DBV4QJZPGWR7R67S6XTE"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -49604,7 +49653,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M6KQ43E68MPPGRZJ7S7DZ0ZF"
+                        default: "tool_01M6N2DBV5GF0TYHCFQ2M9G18W"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -49707,7 +49756,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M6KQ43E7T9M8C08SWVW0ZZ6N"
+                        default: "tool_01M6N2DBV5JV4ZS5356RGPN007"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -49851,7 +49900,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M6KQ43E7962D9JKWYG9QMM57"
+                        default: "tool_01M6N2DBV5M2483YM72DZAQ2ZZ"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -59056,6 +59105,13 @@ paths:
                 - oneOf:
                     - type: "object"
                       properties:
+                        timeout:
+                          type:
+                            - "integer"
+                            - "null"
+                          minimum: 1000
+                          maximum: 120000
+                          description: "Maximum time in milliseconds the evaluator may run. A request can shorten it but not extend it. Defaults to 60000."
                         guardrail_config:
                           anyOf:
                             - type: "object"
@@ -59202,6 +59258,13 @@ paths:
                       title: "LLM"
                     - type: "object"
                       properties:
+                        timeout:
+                          type:
+                            - "integer"
+                            - "null"
+                          minimum: 1000
+                          maximum: 120000
+                          description: "Maximum time in milliseconds the evaluator may run. A request can shorten it but not extend it. Defaults to 60000."
                         guardrail_config:
                           anyOf:
                             - type: "object"
@@ -59442,6 +59505,13 @@ paths:
                       title: "LLM Jury"
                 - type: "object"
                   properties:
+                    timeout:
+                      type:
+                        - "integer"
+                        - "null"
+                      minimum: 1000
+                      maximum: 120000
+                      description: "Maximum time in milliseconds the evaluator may run. A request can shorten it but not extend it. Defaults to 60000."
                     guardrail_config:
                       anyOf:
                         - type: "object"
@@ -59659,6 +59729,13 @@ paths:
                       project_id:
                         type: "string"
                         description: "Unique identifier of the project owning this evaluator."
+                      timeout:
+                        type:
+                          - "integer"
+                          - "null"
+                        minimum: 1000
+                        maximum: 120000
+                        description: "Maximum time in milliseconds the evaluator may run. A request can shorten it but not extend it. Defaults to 60000."
                       guardrail_config:
                         anyOf:
                           - type: "object"
@@ -60079,6 +60156,13 @@ paths:
                       project_id:
                         type: "string"
                         description: "Unique identifier of the project owning this evaluator."
+                      timeout:
+                        type:
+                          - "integer"
+                          - "null"
+                        minimum: 1000
+                        maximum: 120000
+                        description: "Maximum time in milliseconds the evaluator may run. A request can shorten it but not extend it. Defaults to 60000."
                       guardrail_config:
                         anyOf:
                           - type: "object"
@@ -60521,6 +60605,13 @@ paths:
                       project_id:
                         type: "string"
                         description: "Unique identifier of the project owning this evaluator."
+                      timeout:
+                        type:
+                          - "integer"
+                          - "null"
+                        minimum: 1000
+                        maximum: 120000
+                        description: "Maximum time in milliseconds the evaluator may run. A request can shorten it but not extend it. Defaults to 60000."
                       guardrail_config:
                         anyOf:
                           - type: "object"
@@ -60684,6 +60775,13 @@ paths:
                       project_id:
                         type: "string"
                         description: "Unique identifier of the project owning this evaluator."
+                      timeout:
+                        type:
+                          - "integer"
+                          - "null"
+                        minimum: 1000
+                        maximum: 120000
+                        description: "Maximum time in milliseconds the evaluator may run. A request can shorten it but not extend it. Defaults to 60000."
                       guardrail_config:
                         anyOf:
                           - type: "object"
@@ -60822,6 +60920,13 @@ paths:
                       project_id:
                         type: "string"
                         description: "Unique identifier of the project owning this evaluator."
+                      timeout:
+                        type:
+                          - "integer"
+                          - "null"
+                        minimum: 1000
+                        maximum: 120000
+                        description: "Maximum time in milliseconds the evaluator may run. A request can shorten it but not extend it. Defaults to 60000."
                       guardrail_config:
                         anyOf:
                           - type: "object"
@@ -60979,6 +61084,13 @@ paths:
                       project_id:
                         type: "string"
                         description: "Unique identifier of the project owning this evaluator."
+                      timeout:
+                        type:
+                          - "integer"
+                          - "null"
+                        minimum: 1000
+                        maximum: 120000
+                        description: "Maximum time in milliseconds the evaluator may run. A request can shorten it but not extend it. Defaults to 60000."
                       guardrail_config:
                         anyOf:
                           - type: "object"
@@ -61118,6 +61230,13 @@ paths:
                       project_id:
                         type: "string"
                         description: "Unique identifier of the project owning this evaluator."
+                      timeout:
+                        type:
+                          - "integer"
+                          - "null"
+                        minimum: 1000
+                        maximum: 120000
+                        description: "Maximum time in milliseconds the evaluator may run. A request can shorten it but not extend it. Defaults to 60000."
                       guardrail_config:
                         anyOf:
                           - type: "object"
@@ -61260,6 +61379,13 @@ paths:
                       project_id:
                         type: "string"
                         description: "Unique identifier of the project owning this evaluator."
+                      timeout:
+                        type:
+                          - "integer"
+                          - "null"
+                        minimum: 1000
+                        maximum: 120000
+                        description: "Maximum time in milliseconds the evaluator may run. A request can shorten it but not extend it. Defaults to 60000."
                       guardrail_config:
                         anyOf:
                           - type: "object"
@@ -61616,6 +61742,13 @@ paths:
                   additionalProperties: {}
                 code:
                   type: "string"
+                timeout:
+                  type:
+                    - "integer"
+                    - "null"
+                  minimum: 1000
+                  maximum: 120000
+                  description: "Maximum time in milliseconds the evaluator may run. A request can shorten it but not extend it. Defaults to 60000."
                 guardrail_config:
                   anyOf:
                     - type: "object"
@@ -65216,7 +65349,7 @@ paths:
       tags:
         - "Experiments"
       summary: "Execute a run"
-      description: "Executes cells at the requested scope. FULL, PARTIAL, ROW and COLUMN queue the matching cells (a task column also queues its linked evaluator, metric and review cells) and start the orchestrator, which also re-runs failed cells of every row it picks up; a run that is already running accepts new work. CELL re-runs one task or evaluator cell in place. Re-executing does not require creating a new run."
+      description: "Executes cells at the requested scope. FULL, PARTIAL, ROW and COLUMN queue the matching cells (a task column also queues its linked evaluator, metric and review cells) and start the orchestrator, which also re-runs failed cells of every row it picks up. A run that is already queued or running rejects new execution until it finishes or is cancelled. CELL re-runs one task or evaluator cell in place. Re-executing a terminal run does not require creating a new run."
       operationId: "ExperimentRunExecute"
       parameters:
         - name: "experiment_id"
