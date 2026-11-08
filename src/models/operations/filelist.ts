@@ -34,6 +34,10 @@ export type FileListRequest = {
    *  of every purpose.
    */
   purpose?: string | undefined;
+  /**
+   * Sort order by creation. Defaults to ascending (oldest first).
+   */
+  order?: string | undefined;
 };
 
 /** @internal */
@@ -43,6 +47,7 @@ export type FileListRequest$Outbound = {
   ending_before?: string | undefined;
   project_id?: string | undefined;
   purpose?: string | undefined;
+  order?: string | undefined;
 };
 
 /** @internal */
@@ -56,6 +61,7 @@ export const FileListRequest$outboundSchema: z.ZodType<
   endingBefore: z.string().optional(),
   projectId: z.string().optional(),
   purpose: z.string().optional(),
+  order: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     startingAfter: "starting_after",

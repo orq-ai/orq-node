@@ -29,7 +29,7 @@ import { Result } from "../types/fp.js";
  * Create OpenAI-compatible custom model
  *
  * @remarks
- * Creates a custom model backed by any OpenAI-compatible endpoint. The handler probes the target API with the supplied credentials before persisting the model.
+ * Creates a custom model backed by any OpenAI-compatible endpoint. The platform calls the target API with the supplied credentials before saving the model.
  */
 export function modelsCreateOpenaiLike(
   client: OrqCore,

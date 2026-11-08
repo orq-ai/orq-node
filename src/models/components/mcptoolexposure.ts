@@ -23,6 +23,10 @@ export type McpToolExposure = {
    * `McpTool.id` values to expose when mode is SELECTED; a tool renamed upstream gets a new id on the next sync.
    */
   toolIds?: Array<string> | undefined;
+  /**
+   * `McpTool.id` values deliberately left unexposed when mode is SELECTED; an active tool in neither list is new to this selection.
+   */
+  excludedToolIds?: Array<string> | undefined;
 };
 
 /** @internal */
@@ -34,10 +38,12 @@ export const McpToolExposure$inboundSchema: z.ZodType<
   mode: McpToolExposureMode$inboundSchema,
   read_only: z.boolean().optional(),
   tool_ids: z.array(z.string()).optional(),
+  excluded_tool_ids: z.array(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "read_only": "readOnly",
     "tool_ids": "toolIds",
+    "excluded_tool_ids": "excludedToolIds",
   });
 });
 /** @internal */
@@ -45,6 +51,7 @@ export type McpToolExposure$Outbound = {
   mode: string;
   read_only?: boolean | undefined;
   tool_ids?: Array<string> | undefined;
+  excluded_tool_ids?: Array<string> | undefined;
 };
 
 /** @internal */
@@ -56,10 +63,12 @@ export const McpToolExposure$outboundSchema: z.ZodType<
   mode: McpToolExposureMode$outboundSchema,
   readOnly: z.boolean().optional(),
   toolIds: z.array(z.string()).optional(),
+  excludedToolIds: z.array(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     readOnly: "read_only",
     toolIds: "tool_ids",
+    excludedToolIds: "excluded_tool_ids",
   });
 });
 

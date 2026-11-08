@@ -424,6 +424,8 @@ export const GetOnePromptProvider = {
   Scaleway: "scaleway",
   Hcompany: "hcompany",
   Inception: "inception",
+  Particle: "particle",
+  Munito: "munito",
   Inceptron: "inceptron",
   Wafer: "wafer",
   Poolside: "poolside",
@@ -754,7 +756,8 @@ export type GetOnePromptStreamOptions = {
 export type GetOnePromptThinking =
   | components.ThinkingConfigDisabledSchema
   | components.ThinkingConfigEnabledSchema
-  | components.ThinkingConfigAdaptiveSchema;
+  | components.ThinkingConfigAdaptiveSchema
+  | components.ThinkingConfigBetweenToolsSchema;
 
 /**
  * The type of the tool. Currently, only function is supported.
@@ -1420,6 +1423,7 @@ export type GetOnePromptPromptField = {
     | components.ThinkingConfigDisabledSchema
     | components.ThinkingConfigEnabledSchema
     | components.ThinkingConfigAdaptiveSchema
+    | components.ThinkingConfigBetweenToolsSchema
     | undefined;
   /**
    * What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
@@ -2381,6 +2385,7 @@ export const GetOnePromptThinking$inboundSchema: z.ZodType<
   components.ThinkingConfigDisabledSchema$inboundSchema,
   components.ThinkingConfigEnabledSchema$inboundSchema,
   components.ThinkingConfigAdaptiveSchema$inboundSchema,
+  components.ThinkingConfigBetweenToolsSchema$inboundSchema,
 ]);
 
 export function getOnePromptThinkingFromJSON(
@@ -3290,6 +3295,7 @@ export const GetOnePromptPromptField$inboundSchema: z.ZodType<
     components.ThinkingConfigDisabledSchema$inboundSchema,
     components.ThinkingConfigEnabledSchema$inboundSchema,
     components.ThinkingConfigAdaptiveSchema$inboundSchema,
+    components.ThinkingConfigBetweenToolsSchema$inboundSchema,
   ]).optional(),
   temperature: z.nullable(z.number()).optional(),
   top_p: z.nullable(z.number()).optional(),

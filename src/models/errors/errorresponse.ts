@@ -11,7 +11,7 @@ export type ErrorResponseData = {
    */
   message: string;
   /**
-   * gRPC status code, when the service reports one.
+   * Numeric error code, when one is available.
    */
   code?: number | undefined;
   /**
@@ -22,7 +22,7 @@ export type ErrorResponseData = {
 
 export class ErrorResponse extends OrqError {
   /**
-   * gRPC status code, when the service reports one.
+   * Numeric error code, when one is available.
    */
   code?: number | undefined;
   /**

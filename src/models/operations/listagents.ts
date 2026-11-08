@@ -143,9 +143,6 @@ export type ListAgentsConditions = {
 };
 
 export type ListAgentsTools = {
-  /**
-   * The id of the resource
-   */
   id: string;
   /**
    * Optional tool key for custom tools
@@ -243,7 +240,7 @@ export type ListAgentsGuardrails = {
 
 export type ListAgentsSettings = {
   /**
-   * Maximum iterations(llm calls) before the agent will stop executing.
+   * Maximum iterations (LLM calls) before the agent will stop executing.
    */
   maxIterations: number;
   /**
@@ -374,7 +371,8 @@ export type ListAgentsStop = string | Array<string>;
 export type ListAgentsThinking =
   | components.ThinkingConfigDisabledSchema
   | components.ThinkingConfigEnabledSchema
-  | components.ThinkingConfigAdaptiveSchema;
+  | components.ThinkingConfigAdaptiveSchema
+  | components.ThinkingConfigBetweenToolsSchema;
 
 /**
  * The type of the tool. Currently, only function is supported.
@@ -653,6 +651,7 @@ export type ListAgentsParameters = {
     | components.ThinkingConfigDisabledSchema
     | components.ThinkingConfigEnabledSchema
     | components.ThinkingConfigAdaptiveSchema
+    | components.ThinkingConfigBetweenToolsSchema
     | undefined;
   /**
    * What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
@@ -837,7 +836,8 @@ export type ListAgentsFallbackModelConfigurationStop = string | Array<string>;
 export type ListAgentsFallbackModelConfigurationThinking =
   | components.ThinkingConfigDisabledSchema
   | components.ThinkingConfigEnabledSchema
-  | components.ThinkingConfigAdaptiveSchema;
+  | components.ThinkingConfigAdaptiveSchema
+  | components.ThinkingConfigBetweenToolsSchema;
 
 /**
  * The type of the tool. Currently, only function is supported.
@@ -1129,6 +1129,7 @@ export type ListAgentsFallbackModelConfigurationParameters = {
     | components.ThinkingConfigDisabledSchema
     | components.ThinkingConfigEnabledSchema
     | components.ThinkingConfigAdaptiveSchema
+    | components.ThinkingConfigBetweenToolsSchema
     | undefined;
   /**
    * What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
@@ -1804,6 +1805,7 @@ export const ListAgentsThinking$inboundSchema: z.ZodType<
   components.ThinkingConfigDisabledSchema$inboundSchema,
   components.ThinkingConfigEnabledSchema$inboundSchema,
   components.ThinkingConfigAdaptiveSchema$inboundSchema,
+  components.ThinkingConfigBetweenToolsSchema$inboundSchema,
 ]);
 
 export function listAgentsThinkingFromJSON(
@@ -2147,6 +2149,7 @@ export const ListAgentsParameters$inboundSchema: z.ZodType<
     components.ThinkingConfigDisabledSchema$inboundSchema,
     components.ThinkingConfigEnabledSchema$inboundSchema,
     components.ThinkingConfigAdaptiveSchema$inboundSchema,
+    components.ThinkingConfigBetweenToolsSchema$inboundSchema,
   ]).optional(),
   temperature: z.nullable(z.number()).optional(),
   top_p: z.nullable(z.number()).optional(),
@@ -2405,6 +2408,7 @@ export const ListAgentsFallbackModelConfigurationThinking$inboundSchema:
     components.ThinkingConfigDisabledSchema$inboundSchema,
     components.ThinkingConfigEnabledSchema$inboundSchema,
     components.ThinkingConfigAdaptiveSchema$inboundSchema,
+    components.ThinkingConfigBetweenToolsSchema$inboundSchema,
   ]);
 
 export function listAgentsFallbackModelConfigurationThinkingFromJSON(
@@ -2819,6 +2823,7 @@ export const ListAgentsFallbackModelConfigurationParameters$inboundSchema:
       components.ThinkingConfigDisabledSchema$inboundSchema,
       components.ThinkingConfigEnabledSchema$inboundSchema,
       components.ThinkingConfigAdaptiveSchema$inboundSchema,
+      components.ThinkingConfigBetweenToolsSchema$inboundSchema,
     ]).optional(),
     temperature: z.nullable(z.number()).optional(),
     top_p: z.nullable(z.number()).optional(),

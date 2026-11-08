@@ -9,7 +9,7 @@ import { ClosedEnum } from "../../types/enums.js";
 /**
  * Controls how Anthropic thinking content appears in the response. Use updates for progress summaries on supported models.
  */
-export const Display = {
+export const ThinkingParamDisplay = {
   Summarized: "summarized",
   Omitted: "omitted",
   Updates: "updates",
@@ -17,7 +17,7 @@ export const Display = {
 /**
  * Controls how Anthropic thinking content appears in the response. Use updates for progress summaries on supported models.
  */
-export type Display = ClosedEnum<typeof Display>;
+export type ThinkingParamDisplay = ClosedEnum<typeof ThinkingParamDisplay>;
 
 /**
  * The level of thinking to use for the model. Only supported by Google AI.
@@ -57,7 +57,7 @@ export type ThinkingParam = {
   /**
    * Controls how Anthropic thinking content appears in the response. Use updates for progress summaries on supported models.
    */
-  display?: Display | undefined;
+  display?: ThinkingParamDisplay | undefined;
   /**
    * The level of thinking to use for the model. Only supported by Google AI.
    */
@@ -69,8 +69,9 @@ export type ThinkingParam = {
 };
 
 /** @internal */
-export const Display$outboundSchema: z.ZodNativeEnum<typeof Display> = z
-  .nativeEnum(Display);
+export const ThinkingParamDisplay$outboundSchema: z.ZodNativeEnum<
+  typeof ThinkingParamDisplay
+> = z.nativeEnum(ThinkingParamDisplay);
 
 /** @internal */
 export const ThinkingParamThinkingLevel$outboundSchema: z.ZodNativeEnum<
@@ -97,7 +98,7 @@ export const ThinkingParam$outboundSchema: z.ZodType<
   ThinkingParam
 > = z.object({
   budgetTokens: z.nullable(z.number().int()),
-  display: Display$outboundSchema.optional(),
+  display: ThinkingParamDisplay$outboundSchema.optional(),
   thinkingLevel: ThinkingParamThinkingLevel$outboundSchema.optional(),
   type: z.nullable(ThinkingParamType$outboundSchema),
 }).transform((v) => {

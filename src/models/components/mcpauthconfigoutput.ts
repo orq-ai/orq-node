@@ -9,10 +9,6 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { McpAuthType, McpAuthType$inboundSchema } from "./mcpauthtype.js";
 import {
-  McpEnterpriseAuthConfigOutput,
-  McpEnterpriseAuthConfigOutput$inboundSchema,
-} from "./mcpenterpriseauthconfigoutput.js";
-import {
   McpHeaderSecretOutput,
   McpHeaderSecretOutput$inboundSchema,
 } from "./mcpheadersecretoutput.js";
@@ -21,6 +17,30 @@ import {
   McpOAuthConfigOutput$inboundSchema,
 } from "./mcpoauthconfigoutput.js";
 
+/**
+ * Superseded by `oauth` for ENTERPRISE_MANAGED; accepted on write and mirrored on read.
+ *
+ * @deprecated class: This will be removed in a future release, please migrate away from it as soon as possible.
+ */
+export type McpAuthConfigEnterprise = {
+  /**
+   * RFC 9728 resource identifier the tokens are bound to; defaults to the connection URL.
+   */
+  resource?: string | undefined;
+  /**
+   * OAuth client identifier registered at the upstream authorization server.
+   */
+  clientId?: string | undefined;
+  /**
+   * Redacted preview of `client_secret`, returned in its place.
+   */
+  maskedValue?: string | undefined;
+  /**
+   * Scopes requested when redeeming the identity assertion grant.
+   */
+  scopes?: Array<string> | undefined;
+};
+
 export type McpAuthConfigOutput = {
   type: McpAuthType;
   /**
@@ -28,14 +48,43 @@ export type McpAuthConfigOutput = {
    */
   staticHeaders?: Array<McpHeaderSecretOutput> | undefined;
   /**
-   * OAuth client credentials the gateway presents to the upstream authorization server; set when type is OAUTH_CLIENT_CREDENTIALS.
+   * OAuth client for the upstream authorization server; set when type is OAUTH_CLIENT_CREDENTIALS, PER_USER_OAUTH or ENTERPRISE_MANAGED.
    */
   oauth?: McpOAuthConfigOutput | undefined;
   /**
-   * Client for the upstream authorization server; set when type is ENTERPRISE_MANAGED.
+   * Superseded by `oauth` for ENTERPRISE_MANAGED; accepted on write and mirrored on read.
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
    */
-  enterprise?: McpEnterpriseAuthConfigOutput | undefined;
+  enterprise?: McpAuthConfigEnterprise | undefined;
 };
+
+/** @internal */
+export const McpAuthConfigEnterprise$inboundSchema: z.ZodType<
+  McpAuthConfigEnterprise,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  resource: z.string().optional(),
+  client_id: z.string().optional(),
+  masked_value: z.string().optional(),
+  scopes: z.array(z.string()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "client_id": "clientId",
+    "masked_value": "maskedValue",
+  });
+});
+
+export function mcpAuthConfigEnterpriseFromJSON(
+  jsonString: string,
+): SafeParseResult<McpAuthConfigEnterprise, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => McpAuthConfigEnterprise$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'McpAuthConfigEnterprise' from JSON`,
+  );
+}
 
 /** @internal */
 export const McpAuthConfigOutput$inboundSchema: z.ZodType<
@@ -46,7 +95,7 @@ export const McpAuthConfigOutput$inboundSchema: z.ZodType<
   type: McpAuthType$inboundSchema,
   static_headers: z.array(McpHeaderSecretOutput$inboundSchema).optional(),
   oauth: McpOAuthConfigOutput$inboundSchema.optional(),
-  enterprise: McpEnterpriseAuthConfigOutput$inboundSchema.optional(),
+  enterprise: z.lazy(() => McpAuthConfigEnterprise$inboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     "static_headers": "staticHeaders",

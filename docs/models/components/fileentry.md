@@ -1,8 +1,8 @@
 # FileEntry
 
-The file content messages below mirror the tools-pod JSON contract one for
- one. `path` is always relative to the file system root; an absolute path or a
- `..` segment is refused rather than clamped.
+The file content messages below share one shape. `path` is always relative
+ to the file system root; an absolute path or a `..` segment is refused rather
+ than clamped.
 
 ## Example Usage
 

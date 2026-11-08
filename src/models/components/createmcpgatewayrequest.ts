@@ -5,6 +5,11 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import {
+  GuardrailRuleGuardrail,
+  GuardrailRuleGuardrail$Outbound,
+  GuardrailRuleGuardrail$outboundSchema,
+} from "./guardrailruleguardrail.js";
+import {
   McpGatewayMode,
   McpGatewayMode$outboundSchema,
 } from "./mcpgatewaymode.js";
@@ -18,6 +23,11 @@ import {
   McpGatewayServerLink$Outbound,
   McpGatewayServerLink$outboundSchema,
 } from "./mcpgatewayserverlink.js";
+import {
+  McpIcon,
+  McpIcon$Outbound,
+  McpIcon$outboundSchema,
+} from "./mcpicon.js";
 import {
   McpToolNaming,
   McpToolNaming$outboundSchema,
@@ -59,6 +69,18 @@ export type CreateMcpGatewayRequest = {
    * Workspace skills this gateway serves to MCP clients through the MCP Skills extension.
    */
   skillIds?: Array<string> | undefined;
+  /**
+   * Icons advertised to MCP clients; defaults to ORQ branding when empty.
+   */
+  icons?: Array<McpIcon> | undefined;
+  /**
+   * Website advertised to MCP clients; defaults to ORQ documentation when empty.
+   */
+  websiteUrl?: string | undefined;
+  /**
+   * Guardrails run on the arguments and result of every tool call this gateway serves.
+   */
+  guardrails?: Array<GuardrailRuleGuardrail> | undefined;
 };
 
 /** @internal */
@@ -72,6 +94,9 @@ export type CreateMcpGatewayRequest$Outbound = {
   sharing?: Sharing$Outbound | undefined;
   plugins?: Array<McpGatewayPlugin$Outbound> | undefined;
   skill_ids?: Array<string> | undefined;
+  icons?: Array<McpIcon$Outbound> | undefined;
+  website_url?: string | undefined;
+  guardrails?: Array<GuardrailRuleGuardrail$Outbound> | undefined;
 };
 
 /** @internal */
@@ -89,12 +114,16 @@ export const CreateMcpGatewayRequest$outboundSchema: z.ZodType<
   sharing: Sharing$outboundSchema.optional(),
   plugins: z.array(McpGatewayPlugin$outboundSchema).optional(),
   skillIds: z.array(z.string()).optional(),
+  icons: z.array(McpIcon$outboundSchema).optional(),
+  websiteUrl: z.string().optional(),
+  guardrails: z.array(GuardrailRuleGuardrail$outboundSchema).optional(),
 }).transform((v) => {
   return remap$(v, {
     displayName: "display_name",
     serverLinks: "server_links",
     toolNaming: "tool_naming",
     skillIds: "skill_ids",
+    websiteUrl: "website_url",
   });
 });
 

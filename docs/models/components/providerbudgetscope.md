@@ -1,7 +1,7 @@
 # ProviderBudgetScope
 
-Per-provider cap. The value is the provider enum string (e.g.
- "openai", "anthropic") drawn from ModelIntegrationIdentifier.
+Per-provider cap. The value is the provider identifier, for example
+ "openai" or "anthropic".
 
 ## Example Usage
 

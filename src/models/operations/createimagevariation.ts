@@ -279,7 +279,7 @@ export type CreateImageVariationOrq = {
  */
 export type CreateImageVariationRequestBody = {
   /**
-   * The image to edit. Must be a supported image file. It should be a png, webp, or jpg file less than 50MB.
+   * The image to vary. Must be a supported image file. It should be a png, webp, or jpg file less than 50MB.
    */
   image?: CreateImageVariationImage | Blob | undefined;
   /**

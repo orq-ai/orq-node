@@ -24,9 +24,6 @@ export type Conditions = {
 };
 
 export type Tool = {
-  /**
-   * The id of the resource
-   */
   id: string;
   /**
    * Optional tool key for custom tools

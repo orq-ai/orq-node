@@ -15,6 +15,11 @@ import {
   McpConnection$outboundSchema,
 } from "./mcpconnection.js";
 import {
+  McpOpenApiConfigInput,
+  McpOpenApiConfigInput$Outbound,
+  McpOpenApiConfigInput$outboundSchema,
+} from "./mcpopenapiconfiginput.js";
+import {
   McpToolExposure,
   McpToolExposure$Outbound,
   McpToolExposure$outboundSchema,
@@ -54,6 +59,10 @@ export type CreateMcpServerRequest = {
    * Which projects in the workspace may use this server. Defaults to every project.
    */
   sharing?: Sharing | undefined;
+  /**
+   * Required when `connection.type` is `MCP_CONNECTION_TYPE_OPENAPI`; set `document` or `document_url`.
+   */
+  openapi?: McpOpenApiConfigInput | undefined;
 };
 
 /** @internal */
@@ -65,6 +74,7 @@ export type CreateMcpServerRequest$Outbound = {
   auth: McpAuthConfig$Outbound;
   default_tool_exposure: McpToolExposure$Outbound;
   sharing?: Sharing$Outbound | undefined;
+  openapi?: McpOpenApiConfigInput$Outbound | undefined;
 };
 
 /** @internal */
@@ -80,6 +90,7 @@ export const CreateMcpServerRequest$outboundSchema: z.ZodType<
   auth: McpAuthConfig$outboundSchema,
   defaultToolExposure: McpToolExposure$outboundSchema,
   sharing: Sharing$outboundSchema.optional(),
+  openapi: McpOpenApiConfigInput$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     displayName: "display_name",

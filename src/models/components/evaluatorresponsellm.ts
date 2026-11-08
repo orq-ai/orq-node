@@ -86,6 +86,10 @@ export type EvaluatorResponseLlm = {
    * Unique identifier of the project owning this evaluator.
    */
   projectId?: string | undefined;
+  /**
+   * Maximum time in milliseconds the evaluator may run. A request can shorten it but not extend it. Defaults to 60000.
+   */
+  timeout?: number | null | undefined;
   guardrailConfig?: any | undefined;
   type: "llm_eval";
   /**
@@ -297,6 +301,7 @@ export const EvaluatorResponseLlm$inboundSchema: z.ZodType<
   updated: z.string().default("2026-08-05T15:12:51.947Z"),
   updated_by_id: z.nullable(z.string()).optional(),
   project_id: z.string().optional(),
+  timeout: z.nullable(z.number().int()).optional(),
   guardrail_config: z.any().optional(),
   type: z.literal("llm_eval"),
   output_type: OutputType$inboundSchema,

@@ -58,10 +58,10 @@ export type BudgetScopeRestResponse = {
    */
   apiKey?: ApiKeyBudgetScopeRestResponse | undefined;
   /**
-   * Per-provider cap. The value is the provider enum string (e.g.
+   * Per-provider cap. The value is the provider identifier, for example
    *
    * @remarks
-   *  "openai", "anthropic") drawn from ModelIntegrationIdentifier.
+   *  "openai" or "anthropic".
    */
   provider?: ProviderBudgetScope | undefined;
   /**

@@ -17,9 +17,13 @@ let value: ExternalAgent = {
   headers: {},
   protocolVersion: "<value>",
   preferredTransport: "<value>",
-  cachedCard: {},
-  createdAt: new Date("2026-09-15T10:33:50.607Z"),
-  updatedAt: new Date("2026-12-28T09:26:29.781Z"),
+  cachedCard: {
+    "key": "<value>",
+    "key1": "<value>",
+    "key2": "<value>",
+  },
+  createdAt: new Date("2026-12-28T09:26:29.781Z"),
+  updatedAt: new Date("2025-12-21T08:28:35.365Z"),
   createdById: "<id>",
   updatedById: "<id>",
   version: "<value>",
@@ -41,7 +45,7 @@ let value: ExternalAgent = {
 | `headers`                                                                                        | Record<string, [components.ExternalAgentHeader](../../models/components/externalagentheader.md)> | :heavy_check_mark:                                                                               | N/A                                                                                              |
 | `protocolVersion`                                                                                | *string*                                                                                         | :heavy_check_mark:                                                                               | N/A                                                                                              |
 | `preferredTransport`                                                                             | *string*                                                                                         | :heavy_check_mark:                                                                               | N/A                                                                                              |
-| `cachedCard`                                                                                     | [components.CachedCard](../../models/components/cachedcard.md)                                   | :heavy_check_mark:                                                                               | N/A                                                                                              |
+| `cachedCard`                                                                                     | Record<string, *any*>                                                                            | :heavy_check_mark:                                                                               | N/A                                                                                              |
 | `cardRefreshedAt`                                                                                | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)    | :heavy_minus_sign:                                                                               | N/A                                                                                              |
 | `createdAt`                                                                                      | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)    | :heavy_check_mark:                                                                               | N/A                                                                                              |
 | `updatedAt`                                                                                      | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)    | :heavy_check_mark:                                                                               | N/A                                                                                              |

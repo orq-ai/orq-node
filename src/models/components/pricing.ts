@@ -30,6 +30,8 @@ export type Pricing = {
   cacheWrite30m?: Price | undefined;
   cacheWrite5m?: Price | undefined;
   fetch?: Price | undefined;
+  imageCacheRead?: Price | undefined;
+  imageInput?: Price | undefined;
   input?: Price | undefined;
   output?: Price | undefined;
   reasoning?: Price | undefined;
@@ -50,6 +52,8 @@ export const Pricing$inboundSchema: z.ZodType<Pricing, z.ZodTypeDef, unknown> =
     cache_write_30m: Price$inboundSchema.optional(),
     cache_write_5m: Price$inboundSchema.optional(),
     fetch: Price$inboundSchema.optional(),
+    image_cache_read: Price$inboundSchema.optional(),
+    image_input: Price$inboundSchema.optional(),
     input: Price$inboundSchema.optional(),
     output: Price$inboundSchema.optional(),
     reasoning: Price$inboundSchema.optional(),
@@ -66,6 +70,8 @@ export const Pricing$inboundSchema: z.ZodType<Pricing, z.ZodTypeDef, unknown> =
       "cache_write_1h": "cacheWrite1h",
       "cache_write_30m": "cacheWrite30m",
       "cache_write_5m": "cacheWrite5m",
+      "image_cache_read": "imageCacheRead",
+      "image_input": "imageInput",
       "text_input": "textInput",
     });
   });
@@ -80,6 +86,8 @@ export type Pricing$Outbound = {
   cache_write_30m?: Price$Outbound | undefined;
   cache_write_5m?: Price$Outbound | undefined;
   fetch?: Price$Outbound | undefined;
+  image_cache_read?: Price$Outbound | undefined;
+  image_input?: Price$Outbound | undefined;
   input?: Price$Outbound | undefined;
   output?: Price$Outbound | undefined;
   reasoning?: Price$Outbound | undefined;
@@ -103,6 +111,8 @@ export const Pricing$outboundSchema: z.ZodType<
   cacheWrite30m: Price$outboundSchema.optional(),
   cacheWrite5m: Price$outboundSchema.optional(),
   fetch: Price$outboundSchema.optional(),
+  imageCacheRead: Price$outboundSchema.optional(),
+  imageInput: Price$outboundSchema.optional(),
   input: Price$outboundSchema.optional(),
   output: Price$outboundSchema.optional(),
   reasoning: Price$outboundSchema.optional(),
@@ -119,6 +129,8 @@ export const Pricing$outboundSchema: z.ZodType<
     cacheWrite1h: "cache_write_1h",
     cacheWrite30m: "cache_write_30m",
     cacheWrite5m: "cache_write_5m",
+    imageCacheRead: "image_cache_read",
+    imageInput: "image_input",
     textInput: "text_input",
   });
 });

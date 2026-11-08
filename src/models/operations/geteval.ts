@@ -46,6 +46,10 @@ export type BedrockGuardrail = {
    * Unique identifier of the project owning this evaluator.
    */
   projectId?: string | undefined;
+  /**
+   * Maximum time in milliseconds the evaluator may run. A request can shorten it but not extend it. Defaults to 60000.
+   */
+  timeout?: number | null | undefined;
   guardrailConfig?: any | undefined;
   outputType?:
     | GetEvalResponseBodyEvalsResponse200ApplicationJson8OutputType
@@ -99,6 +103,10 @@ export type Typescript = {
    * Unique identifier of the project owning this evaluator.
    */
   projectId?: string | undefined;
+  /**
+   * Maximum time in milliseconds the evaluator may run. A request can shorten it but not extend it. Defaults to 60000.
+   */
+  timeout?: number | null | undefined;
   guardrailConfig?: any | undefined;
   /**
    * The type of output expected from the evaluator
@@ -144,6 +152,10 @@ export type ResponseBodyPython = {
    * Unique identifier of the project owning this evaluator.
    */
   projectId?: string | undefined;
+  /**
+   * Maximum time in milliseconds the evaluator may run. A request can shorten it but not extend it. Defaults to 60000.
+   */
+  timeout?: number | null | undefined;
   guardrailConfig?: any | undefined;
   outputType?:
     | GetEvalResponseBodyEvalsResponse200ApplicationJSONOutputType
@@ -199,6 +211,10 @@ export type GetEvalResponseBodyHTTP = {
    * Unique identifier of the project owning this evaluator.
    */
   projectId?: string | undefined;
+  /**
+   * Maximum time in milliseconds the evaluator may run. A request can shorten it but not extend it. Defaults to 60000.
+   */
+  timeout?: number | null | undefined;
   guardrailConfig?: any | undefined;
   /**
    * The type of output expected from the evaluator
@@ -243,6 +259,10 @@ export type Json = {
    * Unique identifier of the project owning this evaluator.
    */
   projectId?: string | undefined;
+  /**
+   * Maximum time in milliseconds the evaluator may run. A request can shorten it but not extend it. Defaults to 60000.
+   */
+  timeout?: number | null | undefined;
   guardrailConfig?: any | undefined;
   outputType?: GetEvalResponseBodyEvalsResponseOutputType | undefined;
   type: "json_schema";
@@ -302,6 +322,10 @@ export type Ragas = {
    * Unique identifier of the project owning this evaluator.
    */
   projectId?: string | undefined;
+  /**
+   * Maximum time in milliseconds the evaluator may run. A request can shorten it but not extend it. Defaults to 60000.
+   */
+  timeout?: number | null | undefined;
   guardrailConfig?: any | undefined;
   outputType?: GetEvalResponseBodyEvalsOutputType | undefined;
   type: "ragas";
@@ -518,6 +542,10 @@ export type GetEvalResponseBodyFunction = {
    * Unique identifier of the project owning this evaluator.
    */
   projectId?: string | undefined;
+  /**
+   * Maximum time in milliseconds the evaluator may run. A request can shorten it but not extend it. Defaults to 60000.
+   */
+  timeout?: number | null | undefined;
   guardrailConfig?: any | undefined;
   outputType: GetEvalResponseBodyOutputType;
   type: "function_eval";
@@ -735,6 +763,10 @@ export type ResponseBodyLLM = {
    * Unique identifier of the project owning this evaluator.
    */
   projectId?: string | undefined;
+  /**
+   * Maximum time in milliseconds the evaluator may run. A request can shorten it but not extend it. Defaults to 60000.
+   */
+  timeout?: number | null | undefined;
   guardrailConfig?: any | undefined;
   /**
    * The type of output expected from the evaluator
@@ -849,6 +881,7 @@ export const BedrockGuardrail$inboundSchema: z.ZodType<
   updated_by_id: z.nullable(z.string()).optional(),
   domain_id: z.string(),
   project_id: z.string().optional(),
+  timeout: z.nullable(z.number().int()).optional(),
   guardrail_config: z.any().optional(),
   output_type:
     GetEvalResponseBodyEvalsResponse200ApplicationJson8OutputType$inboundSchema
@@ -952,6 +985,7 @@ export const Typescript$inboundSchema: z.ZodType<
   updated_by_id: z.nullable(z.string()).optional(),
   domain_id: z.string(),
   project_id: z.string().optional(),
+  timeout: z.nullable(z.number().int()).optional(),
   guardrail_config: z.any().optional(),
   output_type:
     GetEvalResponseBodyEvalsResponse200ApplicationJson7OutputType$inboundSchema
@@ -1048,6 +1082,7 @@ export const ResponseBodyPython$inboundSchema: z.ZodType<
   updated_by_id: z.nullable(z.string()).optional(),
   domain_id: z.string(),
   project_id: z.string().optional(),
+  timeout: z.nullable(z.number().int()).optional(),
   guardrail_config: z.any().optional(),
   output_type:
     GetEvalResponseBodyEvalsResponse200ApplicationJSONOutputType$inboundSchema
@@ -1147,6 +1182,7 @@ export const GetEvalResponseBodyHTTP$inboundSchema: z.ZodType<
   updated_by_id: z.nullable(z.string()).optional(),
   domain_id: z.string(),
   project_id: z.string().optional(),
+  timeout: z.nullable(z.number().int()).optional(),
   guardrail_config: z.any().optional(),
   output_type: GetEvalResponseBodyEvalsResponse200OutputType$inboundSchema
     .optional(),
@@ -1239,6 +1275,7 @@ export const Json$inboundSchema: z.ZodType<Json, z.ZodTypeDef, unknown> = z
     updated_by_id: z.nullable(z.string()).optional(),
     domain_id: z.string(),
     project_id: z.string().optional(),
+    timeout: z.nullable(z.number().int()).optional(),
     guardrail_config: z.any().optional(),
     output_type: GetEvalResponseBodyEvalsResponseOutputType$inboundSchema
       .optional(),
@@ -1348,6 +1385,7 @@ export const Ragas$inboundSchema: z.ZodType<Ragas, z.ZodTypeDef, unknown> = z
     updated_by_id: z.nullable(z.string()).optional(),
     domain_id: z.string(),
     project_id: z.string().optional(),
+    timeout: z.nullable(z.number().int()).optional(),
     guardrail_config: z.any().optional(),
     output_type: GetEvalResponseBodyEvalsOutputType$inboundSchema.optional(),
     type: z.literal("ragas"),
@@ -2073,6 +2111,7 @@ export const GetEvalResponseBodyFunction$inboundSchema: z.ZodType<
   updated_by_id: z.nullable(z.string()).optional(),
   domain_id: z.string(),
   project_id: z.string().optional(),
+  timeout: z.nullable(z.number().int()).optional(),
   guardrail_config: z.any().optional(),
   output_type: GetEvalResponseBodyOutputType$inboundSchema,
   type: z.literal("function_eval"),
@@ -2735,6 +2774,7 @@ export const ResponseBodyLLM$inboundSchema: z.ZodType<
   updated_by_id: z.nullable(z.string()).optional(),
   domain_id: z.string(),
   project_id: z.string().optional(),
+  timeout: z.nullable(z.number().int()).optional(),
   guardrail_config: z.any().optional(),
   output_type: ResponseBodyOutputType$inboundSchema.optional(),
   type: z.literal("llm_eval"),

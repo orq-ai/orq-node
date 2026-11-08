@@ -517,7 +517,8 @@ export type UpdatePromptStreamOptions = {
 export type UpdatePromptThinking =
   | components.ThinkingConfigDisabledSchema
   | components.ThinkingConfigEnabledSchema
-  | components.ThinkingConfigAdaptiveSchema;
+  | components.ThinkingConfigAdaptiveSchema
+  | components.ThinkingConfigBetweenToolsSchema;
 
 /**
  * The type of the tool. Currently, only function is supported.
@@ -845,6 +846,7 @@ export type UpdatePromptPromptInput = {
     | components.ThinkingConfigDisabledSchema
     | components.ThinkingConfigEnabledSchema
     | components.ThinkingConfigAdaptiveSchema
+    | components.ThinkingConfigBetweenToolsSchema
     | undefined;
   /**
    * What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
@@ -1434,6 +1436,8 @@ export const UpdatePromptProvider = {
   Scaleway: "scaleway",
   Hcompany: "hcompany",
   Inception: "inception",
+  Particle: "particle",
+  Munito: "munito",
   Inceptron: "inceptron",
   Wafer: "wafer",
   Poolside: "poolside",
@@ -1769,7 +1773,8 @@ export type UpdatePromptPromptsStreamOptions = {
 export type UpdatePromptPromptsThinking =
   | components.ThinkingConfigDisabledSchema
   | components.ThinkingConfigEnabledSchema
-  | components.ThinkingConfigAdaptiveSchema;
+  | components.ThinkingConfigAdaptiveSchema
+  | components.ThinkingConfigBetweenToolsSchema;
 
 /**
  * The type of the tool. Currently, only function is supported.
@@ -2443,6 +2448,7 @@ export type UpdatePromptPromptField = {
     | components.ThinkingConfigDisabledSchema
     | components.ThinkingConfigEnabledSchema
     | components.ThinkingConfigAdaptiveSchema
+    | components.ThinkingConfigBetweenToolsSchema
     | undefined;
   /**
    * What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
@@ -3509,7 +3515,8 @@ export function updatePromptStreamOptionsToJSON(
 export type UpdatePromptThinking$Outbound =
   | components.ThinkingConfigDisabledSchema$Outbound
   | components.ThinkingConfigEnabledSchema$Outbound
-  | components.ThinkingConfigAdaptiveSchema$Outbound;
+  | components.ThinkingConfigAdaptiveSchema$Outbound
+  | components.ThinkingConfigBetweenToolsSchema$Outbound;
 
 /** @internal */
 export const UpdatePromptThinking$outboundSchema: z.ZodType<
@@ -3520,6 +3527,7 @@ export const UpdatePromptThinking$outboundSchema: z.ZodType<
   components.ThinkingConfigDisabledSchema$outboundSchema,
   components.ThinkingConfigEnabledSchema$outboundSchema,
   components.ThinkingConfigAdaptiveSchema$outboundSchema,
+  components.ThinkingConfigBetweenToolsSchema$outboundSchema,
 ]);
 
 export function updatePromptThinkingToJSON(
@@ -3942,6 +3950,7 @@ export type UpdatePromptPromptInput$Outbound = {
     | components.ThinkingConfigDisabledSchema$Outbound
     | components.ThinkingConfigEnabledSchema$Outbound
     | components.ThinkingConfigAdaptiveSchema$Outbound
+    | components.ThinkingConfigBetweenToolsSchema$Outbound
     | undefined;
   temperature?: number | null | undefined;
   top_p?: number | null | undefined;
@@ -4007,6 +4016,7 @@ export const UpdatePromptPromptInput$outboundSchema: z.ZodType<
     components.ThinkingConfigDisabledSchema$outboundSchema,
     components.ThinkingConfigEnabledSchema$outboundSchema,
     components.ThinkingConfigAdaptiveSchema$outboundSchema,
+    components.ThinkingConfigBetweenToolsSchema$outboundSchema,
   ]).optional(),
   temperature: z.nullable(z.number()).optional(),
   topP: z.nullable(z.number()).optional(),
@@ -4992,6 +5002,7 @@ export const UpdatePromptPromptsThinking$inboundSchema: z.ZodType<
   components.ThinkingConfigDisabledSchema$inboundSchema,
   components.ThinkingConfigEnabledSchema$inboundSchema,
   components.ThinkingConfigAdaptiveSchema$inboundSchema,
+  components.ThinkingConfigBetweenToolsSchema$inboundSchema,
 ]);
 
 export function updatePromptPromptsThinkingFromJSON(
@@ -5969,6 +5980,7 @@ export const UpdatePromptPromptField$inboundSchema: z.ZodType<
     components.ThinkingConfigDisabledSchema$inboundSchema,
     components.ThinkingConfigEnabledSchema$inboundSchema,
     components.ThinkingConfigAdaptiveSchema$inboundSchema,
+    components.ThinkingConfigBetweenToolsSchema$inboundSchema,
   ]).optional(),
   temperature: z.nullable(z.number()).optional(),
   top_p: z.nullable(z.number()).optional(),

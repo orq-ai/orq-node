@@ -15,12 +15,12 @@ import { Datasets } from "./datasets.js";
 import { Deployments } from "./deployments.js";
 import { Environments } from "./environments.js";
 import { Evals } from "./evals.js";
+import { Experiments } from "./experiments.js";
 import { Feedback } from "./feedback.js";
 import { Files } from "./files.js";
 import { FileSystems } from "./filesystems.js";
 import { GuardrailRules } from "./guardrailrules.js";
 import { Hub } from "./hub.js";
-import { HumanReviewSets } from "./humanreviewsets.js";
 import { Identities } from "./identities.js";
 import { Knowledge } from "./knowledge.js";
 import { Logs } from "./logs.js";
@@ -52,7 +52,6 @@ import { Users } from "./users.js";
 import { Views } from "./views.js";
 import { Webhooks } from "./webhooks.js";
 import { Websearch } from "./websearch.js";
-import { Wikis } from "./wikis.js";
 import { Workspaces } from "./workspaces.js";
 import { WorkspaceSecurity } from "./workspacesecurity.js";
 import { WorkspaceSettings } from "./workspacesettings.js";
@@ -81,11 +80,6 @@ export class Orq extends ClientSDK {
   private _router?: Router;
   get router(): Router {
     return (this._router ??= new Router(this._options));
-  }
-
-  private _humanReviewSets?: HumanReviewSets;
-  get humanReviewSets(): HumanReviewSets {
-    return (this._humanReviewSets ??= new HumanReviewSets(this._options));
   }
 
   private _chunking?: Chunking;
@@ -161,6 +155,11 @@ export class Orq extends ClientSDK {
   private _datasets?: Datasets;
   get datasets(): Datasets {
     return (this._datasets ??= new Datasets(this._options));
+  }
+
+  private _experiments?: Experiments;
+  get experiments(): Experiments {
+    return (this._experiments ??= new Experiments(this._options));
   }
 
   private _models?: Models;
@@ -288,11 +287,6 @@ export class Orq extends ClientSDK {
   private _webhooks?: Webhooks;
   get webhooks(): Webhooks {
     return (this._webhooks ??= new Webhooks(this._options));
-  }
-
-  private _wikis?: Wikis;
-  get wikis(): Wikis {
-    return (this._wikis ??= new Wikis(this._options));
   }
 
   private _workspaces?: Workspaces;

@@ -66,10 +66,6 @@ export type PublicResponseResource = {
   frequencyPenalty: number;
   id: string;
   incompleteDetails: IncompleteDetails | null;
-  /**
-   * Array of input items (messages, function call outputs, etc.)
-   */
-  input: Array<any> | null;
   instructions: string | null;
   maxOutputTokens: number | null;
   maxToolCalls: number | null;
@@ -151,7 +147,6 @@ export const PublicResponseResource$inboundSchema: z.ZodType<
   frequency_penalty: z.number(),
   id: z.string(),
   incomplete_details: z.nullable(IncompleteDetails$inboundSchema),
-  input: z.nullable(z.array(z.any())),
   instructions: z.nullable(z.string()),
   max_output_tokens: z.nullable(z.number().int()),
   max_tool_calls: z.nullable(z.number().int()),

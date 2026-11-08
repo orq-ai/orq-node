@@ -769,7 +769,7 @@ export type Network = {
 };
 
 /**
- * The orq.ai tool type. orq:web_search, orq:web_fetch, and orq:datetime are the canonical names for orq:google_search, orq:web_scraper, and orq:current_date.
+ * The platform tool type. orq:web_search, orq:web_fetch, and orq:datetime are the canonical names for orq:google_search, orq:web_scraper, and orq:current_date.
  */
 export const CreateRouterResponseToolsResponsesRequestType = {
   OrqWebSearch: "orq:web_search",
@@ -792,14 +792,14 @@ export const CreateRouterResponseToolsResponsesRequestType = {
   OrqFunction: "orq:function",
 } as const;
 /**
- * The orq.ai tool type. orq:web_search, orq:web_fetch, and orq:datetime are the canonical names for orq:google_search, orq:web_scraper, and orq:current_date.
+ * The platform tool type. orq:web_search, orq:web_fetch, and orq:datetime are the canonical names for orq:google_search, orq:web_scraper, and orq:current_date.
  */
 export type CreateRouterResponseToolsResponsesRequestType = ClosedEnum<
   typeof CreateRouterResponseToolsResponsesRequestType
 >;
 
 /**
- * An orq.ai platform tool reference. For MCP tools, prefer type 'mcp' with 'key' instead of 'orq:mcp' with 'tool_id'.
+ * A platform tool reference. For MCP tools, prefer type 'mcp' with 'key' instead of 'orq:mcp' with 'tool_id'.
  */
 export type OrqAiTool = {
   /**
@@ -823,7 +823,7 @@ export type OrqAiTool = {
    */
   toolId?: string | undefined;
   /**
-   * The orq.ai tool type. orq:web_search, orq:web_fetch, and orq:datetime are the canonical names for orq:google_search, orq:web_scraper, and orq:current_date.
+   * The platform tool type. orq:web_search, orq:web_fetch, and orq:datetime are the canonical names for orq:google_search, orq:web_scraper, and orq:current_date.
    */
   type: CreateRouterResponseToolsResponsesRequestType;
 };
@@ -999,7 +999,7 @@ export type CreateRouterResponseRequestBody = {
   guardrails?: Array<components.EvaluatorRef> | undefined;
   identity?: components.ResponseIdentity | undefined;
   /**
-   * Additional fields to include in the response. Use web_search_call.action.sources to add source URLs and titles to a web search action, or web_search_call.results for detailed results. See the [Web search](https://docs.orq.ai/ai-gateway/features/web-search) guide for the supported values.
+   * Additional fields to include in the response. Use web_search_call.action.sources to add source URLs and titles to a web search action, or web_search_call.results for detailed results. See the [Web search](https://docs.orq.ai/ai-gateway/features/web-search) guide.
    */
   include?: Array<string> | undefined;
   /**
@@ -1030,7 +1030,7 @@ export type CreateRouterResponseRequestBody = {
    */
   metadata?: { [k: string]: string } | undefined;
   /**
-   * The model to use in provider/model format (e.g. openai/gpt-4o). Use `agent/<key>` to invoke a pre-configured agent from the orq.ai platform.
+   * The model to use in provider/model format (e.g. openai/gpt-4o). Use `agent/<key>` to invoke a pre-configured agent from this platform.
    */
   model?: string | undefined;
   /**
@@ -1202,10 +1202,6 @@ export type CreateRouterResponseResponseBody = {
   frequencyPenalty: number;
   id: string;
   incompleteDetails: components.IncompleteDetails | null;
-  /**
-   * Array of input items (messages, function call outputs, etc.)
-   */
-  input: Array<any> | null;
   instructions: string | null;
   maxOutputTokens: number | null;
   maxToolCalls: number | null;
@@ -2651,7 +2647,6 @@ export const CreateRouterResponseResponseBody$inboundSchema: z.ZodType<
   frequency_penalty: z.number(),
   id: z.string(),
   incomplete_details: z.nullable(components.IncompleteDetails$inboundSchema),
-  input: z.nullable(z.array(z.any())),
   instructions: z.nullable(z.string()),
   max_output_tokens: z.nullable(z.number().int()),
   max_tool_calls: z.nullable(z.number().int()),

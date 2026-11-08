@@ -20,43 +20,36 @@ let value: CreateRouterResponseResponseBody = {
   incompleteDetails: {
     reason: "<value>",
   },
-  input: [
-    "<value 1>",
-    "<value 2>",
-  ],
   instructions: "<value>",
-  maxOutputTokens: 873699,
-  maxToolCalls: 800452,
+  maxOutputTokens: 942879,
+  maxToolCalls: 873699,
   metadata: {
     "key": "<value>",
+    "key1": "<value>",
+    "key2": "<value>",
   },
-  model: "Aventador",
+  model: "Prius",
   object: "<value>",
-  output: [
-    "<value 1>",
-    "<value 2>",
-    "<value 3>",
-  ],
+  output: [],
   parallelToolCalls: true,
-  presencePenalty: 5582.27,
-  previousResponseId: null,
+  presencePenalty: 7643.11,
+  previousResponseId: "<id>",
   promptCacheKey: "<value>",
-  promptCacheOptions: {},
+  promptCacheOptions: null,
   promptCacheRetention: "<value>",
   reasoning: {},
   safetyIdentifier: "<value>",
   serviceTier: "fast",
-  status: "in_progress",
-  store: true,
-  temperature: 3507.41,
+  status: "queued",
+  store: false,
+  temperature: 3140.67,
   text: "<value>",
   toolChoice: "<value>",
   tools: [
     "<value 1>",
-    "<value 2>",
   ],
-  topLogprobs: 221916,
-  topP: 9592.24,
+  topLogprobs: 228365,
+  topP: 6709.08,
   truncation: "disabled",
   usage: {
     inputTokens: 276387,
@@ -71,7 +64,7 @@ let value: CreateRouterResponseResponseBody = {
     },
     totalTokens: 938481,
   },
-  user: "Mossie.Heller84",
+  user: "Paige.Reynolds",
 };
 ```
 
@@ -87,7 +80,6 @@ let value: CreateRouterResponseResponseBody = {
 | `frequencyPenalty`                                                                                       | *number*                                                                                                 | :heavy_check_mark:                                                                                       | N/A                                                                                                      |
 | `id`                                                                                                     | *string*                                                                                                 | :heavy_check_mark:                                                                                       | N/A                                                                                                      |
 | `incompleteDetails`                                                                                      | [components.IncompleteDetails](../../models/components/incompletedetails.md)                             | :heavy_check_mark:                                                                                       | N/A                                                                                                      |
-| `input`                                                                                                  | *any*[]                                                                                                  | :heavy_check_mark:                                                                                       | Array of input items (messages, function call outputs, etc.)                                             |
 | `instructions`                                                                                           | *string*                                                                                                 | :heavy_check_mark:                                                                                       | N/A                                                                                                      |
 | `maxOutputTokens`                                                                                        | *number*                                                                                                 | :heavy_check_mark:                                                                                       | N/A                                                                                                      |
 | `maxToolCalls`                                                                                           | *number*                                                                                                 | :heavy_check_mark:                                                                                       | N/A                                                                                                      |

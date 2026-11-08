@@ -4,8 +4,24 @@
 
 import * as z from "zod/v3";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+
+/**
+ * Controls how Anthropic thinking content appears in the response. Use updates for progress summaries on supported models.
+ */
+export const ThinkingConfigAdaptiveSchemaDisplay = {
+  Summarized: "summarized",
+  Omitted: "omitted",
+  Updates: "updates",
+} as const;
+/**
+ * Controls how Anthropic thinking content appears in the response. Use updates for progress summaries on supported models.
+ */
+export type ThinkingConfigAdaptiveSchemaDisplay = ClosedEnum<
+  typeof ThinkingConfigAdaptiveSchemaDisplay
+>;
 
 /**
  * Enables adaptive thinking mode where the model dynamically determines thinking depth
@@ -15,7 +31,20 @@ export type ThinkingConfigAdaptiveSchema = {
    * Lets the model dynamically determine when and how much to use extended thinking based on the complexity of each request. Supported on Claude Opus 4.6 and Sonnet 4.6.
    */
   type: "adaptive";
+  /**
+   * Controls how Anthropic thinking content appears in the response. Use updates for progress summaries on supported models.
+   */
+  display?: ThinkingConfigAdaptiveSchemaDisplay | undefined;
 };
+
+/** @internal */
+export const ThinkingConfigAdaptiveSchemaDisplay$inboundSchema: z.ZodNativeEnum<
+  typeof ThinkingConfigAdaptiveSchemaDisplay
+> = z.nativeEnum(ThinkingConfigAdaptiveSchemaDisplay);
+/** @internal */
+export const ThinkingConfigAdaptiveSchemaDisplay$outboundSchema:
+  z.ZodNativeEnum<typeof ThinkingConfigAdaptiveSchemaDisplay> =
+    ThinkingConfigAdaptiveSchemaDisplay$inboundSchema;
 
 /** @internal */
 export const ThinkingConfigAdaptiveSchema$inboundSchema: z.ZodType<
@@ -24,10 +53,12 @@ export const ThinkingConfigAdaptiveSchema$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   type: z.literal("adaptive"),
+  display: ThinkingConfigAdaptiveSchemaDisplay$inboundSchema.optional(),
 });
 /** @internal */
 export type ThinkingConfigAdaptiveSchema$Outbound = {
   type: "adaptive";
+  display?: string | undefined;
 };
 
 /** @internal */
@@ -37,6 +68,7 @@ export const ThinkingConfigAdaptiveSchema$outboundSchema: z.ZodType<
   ThinkingConfigAdaptiveSchema
 > = z.object({
   type: z.literal("adaptive"),
+  display: ThinkingConfigAdaptiveSchemaDisplay$outboundSchema.optional(),
 });
 
 export function thinkingConfigAdaptiveSchemaToJSON(

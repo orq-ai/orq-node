@@ -18,7 +18,7 @@ import {
  *
  * @remarks
  *  of `amount`, `token_limit`, or RateLimit.requests_per_minute MUST be
- *  set on a Budget; that invariant is enforced by the handler.
+ *  set on a Budget; the API rejects a budget that sets none of the three.
  */
 export type BudgetLimits = {
   period?: BudgetPeriod | undefined;

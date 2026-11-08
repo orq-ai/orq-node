@@ -24,6 +24,19 @@ export const ThinkingLevel = {
 export type ThinkingLevel = ClosedEnum<typeof ThinkingLevel>;
 
 /**
+ * Controls how Anthropic thinking content appears in the response. Use updates for progress summaries on supported models.
+ */
+export const Display = {
+  Summarized: "summarized",
+  Omitted: "omitted",
+  Updates: "updates",
+} as const;
+/**
+ * Controls how Anthropic thinking content appears in the response. Use updates for progress summaries on supported models.
+ */
+export type Display = ClosedEnum<typeof Display>;
+
+/**
  * Enables the thinking mode capability
  */
 export type ThinkingConfigEnabledSchema = {
@@ -39,6 +52,10 @@ export type ThinkingConfigEnabledSchema = {
    * The level of reasoning the model should use. This setting is supported only by `gemini-3` models. If budget_tokens is specified and `thinking_level` is available, `budget_tokens` will be ignored.
    */
   thinkingLevel?: ThinkingLevel | undefined;
+  /**
+   * Controls how Anthropic thinking content appears in the response. Use updates for progress summaries on supported models.
+   */
+  display?: Display | undefined;
 };
 
 /** @internal */
@@ -51,6 +68,13 @@ export const ThinkingLevel$outboundSchema: z.ZodNativeEnum<
 > = ThinkingLevel$inboundSchema;
 
 /** @internal */
+export const Display$inboundSchema: z.ZodNativeEnum<typeof Display> = z
+  .nativeEnum(Display);
+/** @internal */
+export const Display$outboundSchema: z.ZodNativeEnum<typeof Display> =
+  Display$inboundSchema;
+
+/** @internal */
 export const ThinkingConfigEnabledSchema$inboundSchema: z.ZodType<
   ThinkingConfigEnabledSchema,
   z.ZodTypeDef,
@@ -59,6 +83,7 @@ export const ThinkingConfigEnabledSchema$inboundSchema: z.ZodType<
   type: z.literal("enabled"),
   budget_tokens: z.number(),
   thinking_level: ThinkingLevel$inboundSchema.optional(),
+  display: Display$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "budget_tokens": "budgetTokens",
@@ -70,6 +95,7 @@ export type ThinkingConfigEnabledSchema$Outbound = {
   type: "enabled";
   budget_tokens: number;
   thinking_level?: string | undefined;
+  display?: string | undefined;
 };
 
 /** @internal */
@@ -81,6 +107,7 @@ export const ThinkingConfigEnabledSchema$outboundSchema: z.ZodType<
   type: z.literal("enabled"),
   budgetTokens: z.number(),
   thinkingLevel: ThinkingLevel$outboundSchema.optional(),
+  display: Display$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     budgetTokens: "budget_tokens",

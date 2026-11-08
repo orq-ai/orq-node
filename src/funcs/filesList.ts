@@ -31,7 +31,7 @@ import { Result } from "../types/fp.js";
  * List all files
  *
  * @remarks
- * Returns a list of the files that your account has access to. orq.ai sorts and returns the files by their creation dates, placing the most recently created files at the top.
+ * Returns a list of the files that your account has access to, sorted by creation date. Set `order` to `desc` to return the most recently created files first.
  */
 export function filesList(
   client: OrqCore,
@@ -96,6 +96,7 @@ async function $do(
   const query = encodeFormQuery({
     "ending_before": payload?.ending_before,
     "limit": payload?.limit,
+    "order": payload?.order,
     "project_id": payload?.project_id,
     "purpose": payload?.purpose,
     "starting_after": payload?.starting_after,

@@ -1,5 +1,7 @@
 # Ttl
 
+Minimum cache lifetime. Only 30m is supported by native OpenAI Decisions.
+
 ## Example Usage
 
 ```typescript
@@ -11,5 +13,5 @@ let value: Ttl = "30m";
 ## Values
 
 ```typescript
-"30m" | "12h"
+"30m"
 ```

@@ -2,7 +2,7 @@
 
 BudgetLimits is the per-period spend and token ceiling. At least one
  of `amount`, `token_limit`, or RateLimit.requests_per_minute MUST be
- set on a Budget; that invariant is enforced by the handler.
+ set on a Budget; the API rejects a budget that sets none of the three.
 
 ## Example Usage
 

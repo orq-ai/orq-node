@@ -8,13 +8,19 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+/**
+ * McpOAuthConfig is the OAuth client orq presents to the upstream authorization
+ *
+ * @remarks
+ *  server for OAUTH_CLIENT_CREDENTIALS, PER_USER_OAUTH and ENTERPRISE_MANAGED.
+ */
 export type McpOAuthConfigOutput = {
   /**
    * OAuth client identifier presented to the upstream authorization server.
    */
   clientId?: string | undefined;
   /**
-   * Token endpoint the gateway calls to mint upstream access tokens.
+   * Token endpoint for OAUTH_CLIENT_CREDENTIALS; PER_USER_OAUTH and ENTERPRISE_MANAGED discover it from `resource`.
    */
   tokenUrl?: string | undefined;
   /**
@@ -25,6 +31,14 @@ export type McpOAuthConfigOutput = {
    * Redacted preview of `client_secret`, returned in its place.
    */
   maskedValue?: string | undefined;
+  /**
+   * Exact authorization-server issuer; pins discovery for PER_USER_OAUTH and ENTERPRISE_MANAGED.
+   */
+  issuer?: string | undefined;
+  /**
+   * Protected resource identifier; defaults to the upstream connection URL.
+   */
+  resource?: string | undefined;
 };
 
 /** @internal */
@@ -37,6 +51,8 @@ export const McpOAuthConfigOutput$inboundSchema: z.ZodType<
   token_url: z.string().optional(),
   scopes: z.array(z.string()).optional(),
   masked_value: z.string().optional(),
+  issuer: z.string().optional(),
+  resource: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "client_id": "clientId",

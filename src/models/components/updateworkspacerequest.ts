@@ -26,6 +26,7 @@ export type UpdateWorkspaceRequest = {
   enforceEnabledModels?: boolean | undefined;
   chatKit?: ChatKitResources | undefined;
   tracingEnabled?: boolean | undefined;
+  retentionPeriod?: number | undefined;
 };
 
 /** @internal */
@@ -58,6 +59,7 @@ export type UpdateWorkspaceRequest$Outbound = {
   enforce_enabled_models?: boolean | undefined;
   chat_kit?: ChatKitResources$Outbound | undefined;
   tracing_enabled?: boolean | undefined;
+  retention_period?: number | undefined;
 };
 
 /** @internal */
@@ -75,6 +77,7 @@ export const UpdateWorkspaceRequest$outboundSchema: z.ZodType<
   enforceEnabledModels: z.boolean().optional(),
   chatKit: ChatKitResources$outboundSchema.optional(),
   tracingEnabled: z.boolean().optional(),
+  retentionPeriod: z.number().int().optional(),
 }).transform((v) => {
   return remap$(v, {
     displayName: "display_name",
@@ -82,6 +85,7 @@ export const UpdateWorkspaceRequest$outboundSchema: z.ZodType<
     enforceEnabledModels: "enforce_enabled_models",
     chatKit: "chat_kit",
     tracingEnabled: "tracing_enabled",
+    retentionPeriod: "retention_period",
   });
 });
 

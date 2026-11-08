@@ -27,7 +27,7 @@ let value: DeploymentsData = {
     model: "LeBaron",
     modelType: "ocr",
     modelParameters: {},
-    provider: "huggingface",
+    provider: "togetherai",
     messages: [],
   },
   version: "<value>",
@@ -44,4 +44,4 @@ let value: DeploymentsData = {
 | `key`                                                                                    | *string*                                                                                 | :heavy_check_mark:                                                                       | The deployment unique key                                                                |
 | `description`                                                                            | *string*                                                                                 | :heavy_check_mark:                                                                       | An arbitrary string attached to the object. Often useful for displaying to users.        |
 | `promptConfig`                                                                           | [operations.DeploymentsPromptConfig](../../models/operations/deploymentspromptconfig.md) | :heavy_check_mark:                                                                       | N/A                                                                                      |
-| `version`                                                                                | *string*                                                                                 | :heavy_check_mark:                                                                       | THe version of the deployment                                                            |
+| `version`                                                                                | *string*                                                                                 | :heavy_check_mark:                                                                       | The version of the deployment                                                            |

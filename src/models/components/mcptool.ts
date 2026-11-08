@@ -7,6 +7,7 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import { McpIcon, McpIcon$inboundSchema } from "./mcpicon.js";
 import {
   McpToolAnnotations,
   McpToolAnnotations$inboundSchema,
@@ -16,6 +17,30 @@ import {
  * JSON Schema for the tool arguments, as advertised upstream.
  */
 export type McpToolInputSchema = {};
+
+/**
+ * OpenAPI operation the tool calls, for `MCP_CONNECTION_TYPE_OPENAPI` servers.
+ */
+export type HttpOperation = {
+  /**
+   * HTTP method, upper case.
+   */
+  method?: string | undefined;
+  /**
+   * Path template relative to the server base URL.
+   */
+  path?: string | undefined;
+};
+
+/**
+ * JSON Schema for the tool's structured result, as advertised upstream; omitted when the upstream sent an invalid one.
+ */
+export type OutputSchema = {};
+
+/**
+ * Tool `_meta` advertised upstream.
+ */
+export type Meta = {};
 
 export type McpTool = {
   /**
@@ -46,6 +71,22 @@ export type McpTool = {
    * Behaviour hints claimed by the upstream server.
    */
   annotations?: McpToolAnnotations | undefined;
+  /**
+   * OpenAPI operation the tool calls, for `MCP_CONNECTION_TYPE_OPENAPI` servers.
+   */
+  httpOperation?: HttpOperation | undefined;
+  /**
+   * Icons advertised by the upstream tool.
+   */
+  icons?: Array<McpIcon> | undefined;
+  /**
+   * JSON Schema for the tool's structured result, as advertised upstream; omitted when the upstream sent an invalid one.
+   */
+  outputSchema?: OutputSchema | undefined;
+  /**
+   * Tool `_meta` advertised upstream.
+   */
+  meta?: Meta | undefined;
 };
 
 /** @internal */
@@ -66,6 +107,57 @@ export function mcpToolInputSchemaFromJSON(
 }
 
 /** @internal */
+export const HttpOperation$inboundSchema: z.ZodType<
+  HttpOperation,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  method: z.string().optional(),
+  path: z.string().optional(),
+});
+
+export function httpOperationFromJSON(
+  jsonString: string,
+): SafeParseResult<HttpOperation, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => HttpOperation$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'HttpOperation' from JSON`,
+  );
+}
+
+/** @internal */
+export const OutputSchema$inboundSchema: z.ZodType<
+  OutputSchema,
+  z.ZodTypeDef,
+  unknown
+> = z.object({});
+
+export function outputSchemaFromJSON(
+  jsonString: string,
+): SafeParseResult<OutputSchema, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => OutputSchema$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'OutputSchema' from JSON`,
+  );
+}
+
+/** @internal */
+export const Meta$inboundSchema: z.ZodType<Meta, z.ZodTypeDef, unknown> = z
+  .object({});
+
+export function metaFromJSON(
+  jsonString: string,
+): SafeParseResult<Meta, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Meta$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Meta' from JSON`,
+  );
+}
+
+/** @internal */
 export const McpTool$inboundSchema: z.ZodType<McpTool, z.ZodTypeDef, unknown> =
   z.object({
     name: z.string().optional(),
@@ -75,9 +167,15 @@ export const McpTool$inboundSchema: z.ZodType<McpTool, z.ZodTypeDef, unknown> =
     id: z.string().optional(),
     title: z.string().optional(),
     annotations: McpToolAnnotations$inboundSchema.optional(),
+    http_operation: z.lazy(() => HttpOperation$inboundSchema).optional(),
+    icons: z.array(McpIcon$inboundSchema).optional(),
+    output_schema: z.lazy(() => OutputSchema$inboundSchema).optional(),
+    meta: z.lazy(() => Meta$inboundSchema).optional(),
   }).transform((v) => {
     return remap$(v, {
       "input_schema": "inputSchema",
+      "http_operation": "httpOperation",
+      "output_schema": "outputSchema",
     });
   });
 

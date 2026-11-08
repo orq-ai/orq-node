@@ -17,7 +17,7 @@ export type McpToolAnnotations = {
    */
   readOnly?: boolean | undefined;
   /**
-   * Upstream claims the tool can perform destructive updates.
+   * Upstream claims the tool can perform destructive updates; unset when the upstream sent no hint, which MCP reads as true.
    */
   destructive?: boolean | undefined;
   /**
@@ -25,9 +25,13 @@ export type McpToolAnnotations = {
    */
   idempotent?: boolean | undefined;
   /**
-   * Upstream claims the tool reaches systems outside its own domain.
+   * Upstream claims the tool reaches systems outside its own domain; unset when the upstream sent no hint, which MCP reads as true.
    */
   openWorld?: boolean | undefined;
+  /**
+   * Display name the upstream sent in its annotations.
+   */
+  title?: string | undefined;
 };
 
 /** @internal */
@@ -40,6 +44,7 @@ export const McpToolAnnotations$inboundSchema: z.ZodType<
   destructive: z.boolean().optional(),
   idempotent: z.boolean().optional(),
   open_world: z.boolean().optional(),
+  title: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "read_only": "readOnly",

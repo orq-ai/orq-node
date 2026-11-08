@@ -489,6 +489,8 @@ export const DeploymentsProvider = {
   Scaleway: "scaleway",
   Hcompany: "hcompany",
   Inception: "inception",
+  Particle: "particle",
+  Munito: "munito",
   Inceptron: "inceptron",
   Wafer: "wafer",
   Poolside: "poolside",
@@ -667,7 +669,7 @@ export type DeploymentsData = {
   description: string;
   promptConfig: DeploymentsPromptConfig;
   /**
-   * THe version of the deployment
+   * The version of the deployment
    */
   version: string;
 };

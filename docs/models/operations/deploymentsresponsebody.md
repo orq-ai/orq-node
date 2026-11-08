@@ -32,7 +32,7 @@ let value: DeploymentsResponseBody = {
         model: "LeBaron",
         modelType: "ocr",
         modelParameters: {},
-        provider: "huggingface",
+        provider: "togetherai",
         messages: [],
       },
       version: "<value>",
