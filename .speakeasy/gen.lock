@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 3baee63a-7726-4981-8d07-d0517b903b46
 management:
-  docChecksum: 3f030c26464ccae468afbbc9b2f3b0dd
+  docChecksum: aa0b3b5cb80e7bd4757472f2105485b3
   docVersion: "2.0"
   speakeasyVersion: 1.806.0
   generationVersion: 2.956.1
-  releaseVersion: 4.18.1
-  configChecksum: f1605c428b8c8a5ef48c0047af08a6cd
+  releaseVersion: 4.18.2
+  configChecksum: 8f8b2fa2fab6d8023776100a085917de
   repoURL: https://github.com/orq-ai/orq-node.git
   installationURL: https://github.com/orq-ai/orq-node
   published: true
 persistentEdits:
-  generation_id: 15345233-6785-423b-ab55-c12126953290
-  pristine_commit_hash: df8c3d07370fc16ead23050d05b5e85d0346a7c7
-  pristine_tree_hash: d53a53c2356836af6a1addfd08d64c6049ce2e70
+  generation_id: 9124b16d-6cad-4c38-8290-f2669f245cbf
+  pristine_commit_hash: 9811e1e640d5b5297c338ca370e27ea975f61641
+  pristine_tree_hash: 85f9ba436b7e5809a71197123241602f710bcd7e
 features:
   typescript:
     acceptHeaders: 2.81.2
@@ -11341,8 +11341,8 @@ trackedFiles:
     pristine_git_object: 23a669305bf3290ce5de6da811c66eb739df8827
   docs/models/operations/getalltoolsresponsebody.md:
     id: 21315a96cb5b
-    last_write_checksum: sha1:257506a7d8c4b0d0916c583ffbf6337b401735b9
-    pristine_git_object: b9d1661074e0d25068c462265c229eb4608833e7
+    last_write_checksum: sha1:5bf05227f58dbcb7d330cbf36af766f45775d36e
+    pristine_git_object: 53f95973878c506be35115fe80d1486fb2dba5b8
   docs/models/operations/getchunkscountrequest.md:
     id: ac37b515e111
     last_write_checksum: sha1:5c3ac8ae830ef265634da7d51655fa872afb31d6
@@ -18973,12 +18973,12 @@ trackedFiles:
     pristine_git_object: 4cf0d2ceb6acaa225a9f3afe05e2913f263c3462
   jsr.json:
     id: 7f6ab7767282
-    last_write_checksum: sha1:05a65dad32c4c2761730f277cc3ecce58623e340
-    pristine_git_object: da98601b2b66502aaf4dc58751f3da0dbf5bac7f
+    last_write_checksum: sha1:3a1c1a867023b12eabde3dc1cef4e107e2d84bb7
+    pristine_git_object: ff8098f73ffe46b167279158012319d7396e6628
   package.json:
     id: 7030d0b2f71b
-    last_write_checksum: sha1:f52102886e0780402e851a1cccd9fe2616c17512
-    pristine_git_object: 42305d5c6631d06cca5a0f0f745c3a142d072705
+    last_write_checksum: sha1:b49a44ebbbdb00c159363df57d0d28ddb91d83b2
+    pristine_git_object: f81861756b5fb99b136bfe7097581ab4be2f5aa2
   src/core.ts:
     id: f431fdbcd144
     last_write_checksum: sha1:06cbcf678f38adf43f7fa3f7c1cfbb7a536903c9
@@ -20521,8 +20521,8 @@ trackedFiles:
     pristine_git_object: 0aebd8b0a4867e35cb3348fc52921c3c0b4725b7
   src/lib/config.ts:
     id: 320761608fb3
-    last_write_checksum: sha1:a41ba1a1ba5afa771f03dc8e2af779864f353d04
-    pristine_git_object: 6bdeb455ba3c0b5b40fe9d306889d3ee9adf3722
+    last_write_checksum: sha1:97ae44ad54f9cddfc6234c70a1cf0c4db7c8853f
+    pristine_git_object: d413f6da2c79a0c22c35785813bd022772f3885b
   src/lib/encodings.ts:
     id: 3bd8ead98afd
     last_write_checksum: sha1:a257d6f6108693db2197617c579400bc8f0da914
@@ -22849,8 +22849,8 @@ trackedFiles:
     pristine_git_object: ce1be4d58dfdc4468e60213dd1edad50531fa5a9
   src/models/components/reasoningpart.ts:
     id: 60c791422ccb
-    last_write_checksum: sha1:600fd3f3c98d05e256fb8e4410575302830b44e2
-    pristine_git_object: d9114384f7c3e15c0b39a60a9894c69dcc7eec07
+    last_write_checksum: sha1:c82951e6d6e24e75fb03dd4928d2e62f12f3cf0f
+    pristine_git_object: 9fb8da3b3c8919a034777dc45c4ee0c7688af219
   src/models/components/reasoningpartschema.ts:
     id: 51d31d0f4f79
     last_write_checksum: sha1:b1655ea3101450cb67a1bfd56d22980dfe3e22e3
@@ -24385,8 +24385,8 @@ trackedFiles:
     pristine_git_object: 450b2f833ffa6ae9beceff9b3b7d83ff8f40e70a
   src/models/operations/createtool.ts:
     id: a60d92110eae
-    last_write_checksum: sha1:f64ec7aaa4e756816ff8a409137efd122f732464
-    pristine_git_object: db4e36d4c1ba49e7a0a55579f75dea0176f3c377
+    last_write_checksum: sha1:a14aec348e9be83b72f2ee0a6eff714f0c1e12c3
+    pristine_git_object: 4b8e26f9d10bf056ee6521f35e22a82c420e2849
   src/models/operations/createtranscription.ts:
     id: 9a143abb247e
     last_write_checksum: sha1:d9b7b97184776aa9b117c9116fe60305968b3026
@@ -24705,8 +24705,8 @@ trackedFiles:
     pristine_git_object: 7d0e69e6fd8eb9fecc7fdbf1db2f7fb94fc73cd6
   src/models/operations/getalltools.ts:
     id: b61aae342581
-    last_write_checksum: sha1:cc87e2fb0a58e9de5c443e68062ee7353064c0e9
-    pristine_git_object: 7ea974a8defbfb2deb81481ca3ddcd2e613388c0
+    last_write_checksum: sha1:2bbf7e8986b25cc57c4074c584b8ea96e20427a2
+    pristine_git_object: d96ca4dbe5c098be1563f6faac8a57e17ec81c76
   src/models/operations/getchunkscount.ts:
     id: 5df96041413a
     last_write_checksum: sha1:2f5df1ac159ff592468ec45c81a5589d1bfc2d75
@@ -24845,8 +24845,8 @@ trackedFiles:
     pristine_git_object: 2d2a63f5f9fe4b7554bdcf5aeb71839c766fdbf6
   src/models/operations/listdeploymentversions.ts:
     id: 2bfb276c96ea
-    last_write_checksum: sha1:666f6da5e48d2e1f7c28dbd459beb045eb9e478e
-    pristine_git_object: ec2bbda2d51972acbb34b0d95bc1bc8715cfe37a
+    last_write_checksum: sha1:1cdbacffe5671bb0bbe7822bafdb1424e734008f
+    pristine_git_object: fc41877f1d24c3823d2704062d36386ea5cdd1b4
   src/models/operations/listevalversions.ts:
     id: 3fa6392bb676
     last_write_checksum: sha1:d9e2c0f4487c257284b727bb556818c8222c419e
@@ -25177,8 +25177,8 @@ trackedFiles:
     pristine_git_object: d1d4a04a12018bb2a10a308bc91f669a2a02bda6
   src/models/operations/retrievetool.ts:
     id: 5e769769390f
-    last_write_checksum: sha1:34f5624df9c0cb5d5f8487e1f0358c1313a60194
-    pristine_git_object: d6fa1dfe41871b0436988fc86151752ed9f2af0d
+    last_write_checksum: sha1:25cf40ea021f8d3fdda22ae0fe198d0b1dd687b5
+    pristine_git_object: 9fb5f300fa3f3de8aef0eecc7a8457a0c48ba78f
   src/models/operations/routingruledelete.ts:
     id: 77bfe37edd40
     last_write_checksum: sha1:94e292fd0d9c576eccc3ed17b4774f83a7b429ce
@@ -25201,8 +25201,8 @@ trackedFiles:
     pristine_git_object: be729275df0664ea006d10cdafae6ac400624471
   src/models/operations/runagent.ts:
     id: 58a38d9df148
-    last_write_checksum: sha1:7a0969de4caa719322341874cfeadd84bb8ac6d0
-    pristine_git_object: 261991187318df8af86bf6ba20da6a8969504395
+    last_write_checksum: sha1:e345a8459a37c23b9a65d21c7feced3c1d8ccd84
+    pristine_git_object: 5ef92967eb47f0a949725a08c2c8af97308a9871
   src/models/operations/searchknowledge.ts:
     id: b675baf944c8
     last_write_checksum: sha1:7af8cc4d4c50b18972abbf549d7503cdd80a6ac1
@@ -25253,8 +25253,8 @@ trackedFiles:
     pristine_git_object: 6b874af002c8938c956f1f37d5ffe6fdf9a85355
   src/models/operations/streamrunagent.ts:
     id: 575f8e1a1e6e
-    last_write_checksum: sha1:b63c7258b828409eb0e825b3c5f673036da06283
-    pristine_git_object: 3cbd5315bf098d65f0794b2081111c93f3e6779c
+    last_write_checksum: sha1:db6da709fafb8569c4160b16e17fdba3b6488e72
+    pristine_git_object: a93e66809a74b2268b4c2b6603dcd7314ad5f763
   src/models/operations/telemetrylistcapabilities.ts:
     id: df21ed3c4b5e
     last_write_checksum: sha1:ff39db15455ec0829b8913fa68e7fefe2e73f00c
@@ -25357,8 +25357,8 @@ trackedFiles:
     pristine_git_object: 2c7c7fb293d7db3d7c2617e13402f816a58e34b7
   src/models/operations/updatetool.ts:
     id: f8c4ba69e202
-    last_write_checksum: sha1:ddf428ca7023441b0d8f7a386dc775a30c6e99d8
-    pristine_git_object: f8d2a9557dff8715d6407b3239d5a387bfe0fe00
+    last_write_checksum: sha1:37e5c478b44a8a89e5d1a5d58aad1eb1d07cded4
+    pristine_git_object: 507be69dd3988e15abd9c2fae4e6abd4677e362d
   src/models/operations/usercreate.ts:
     id: ebf0df76f000
     last_write_checksum: sha1:0e078270c6fd50c2d258c05061c203f438ad3318
@@ -31127,7 +31127,6 @@ examples:
           application/json: {"message": "<value>"}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Typescript SDK Changes:\n* `orq.deployments.invoke()`:  `response.provider` **Changed** (Breaking ⚠️)\n* `orq.responses.get()`:  `response.input` **Removed** (Breaking ⚠️)\n* `orq.responses.create()`:  `response` **Changed** (Breaking ⚠️)\n* `orq.mcpServers.sync()`:  `response.mcpServer` **Changed** (Breaking ⚠️)\n* `orq.mcpServers.update()`: \n  *  `request.updateMcpServerRequest` **Changed**\n  *  `response.mcpServer` **Changed** (Breaking ⚠️)\n* `orq.mcpServers.retrieve()`:  `response.mcpServer` **Changed** (Breaking ⚠️)\n* `orq.mcpServers.create()`: \n  *  `request` **Changed**\n  *  `response.mcpServer` **Changed** (Breaking ⚠️)\n* `orq.mcpServers.list()`:  `response.data[]` **Changed** (Breaking ⚠️)\n* `orq.prompts.getVersion()`:  `response` **Changed** (Breaking ⚠️)\n* `orq.prompts.listVersions()`:  `response.data[]` **Changed** (Breaking ⚠️)\n* `orq.prompts.update()`: \n  *  `request.requestBody.prompt.thinking` **Changed**\n  *  `response` **Changed** (Breaking ⚠️)\n* `orq.prompts.retrieve()`:  `response` **Changed** (Breaking ⚠️)\n* `orq.prompts.create()`: \n  *  `request.prompt.thinking` **Changed**\n  *  `response` **Changed** (Breaking ⚠️)\n* `orq.prompts.list()`:  `response.data[]` **Changed** (Breaking ⚠️)\n* `orq.agents.external.testConnection()`:  `response.card` **Changed** (Breaking ⚠️)\n* `orq.agents.external.refreshCard()`:  `response.agent.cachedCard` **Changed** (Breaking ⚠️)\n* `orq.agents.external.update()`:  `response.agent.cachedCard` **Changed** (Breaking ⚠️)\n* `orq.agents.external.retrieve()`:  `response.agent.cachedCard` **Changed** (Breaking ⚠️)\n* `orq.agents.external.create()`:  `response.agent.cachedCard` **Changed** (Breaking ⚠️)\n* `orq.agents.external.list()`:  `response.data[].cachedCard` **Changed** (Breaking ⚠️)\n* `orq.agents.update()`: \n  *  `requestBody` **Changed**\n  *  `response.model` **Changed** (Breaking ⚠️)\n* `orq.agents.retrieve()`:  `response.model` **Changed** (Breaking ⚠️)\n* `orq.agents.list()`:  `response.data[].model` **Changed** (Breaking ⚠️)\n* `orq.agents.create()`: \n  *  `request` **Changed**\n  *  `response.model` **Changed** (Breaking ⚠️)\n* `orq.deployments.listVersions()`:  `response.data[]` **Changed** (Breaking ⚠️)\n* `orq.deployments.list()`:  `response.data[].promptConfig.provider` **Changed** (Breaking ⚠️)\n* `orq.deployments.stream()`:  `response.[].data.provider` **Changed** (Breaking ⚠️)\n* `orq.experiments.duplicateRow()`: **Added**\n* `orq.experiments.createEval()`: **Added**\n* `orq.experiments.deleteTask()`: **Added**\n* `orq.experiments.updateTask()`: **Added**\n* `orq.experiments.patchTaskCell()`: **Added**\n* `orq.experiments.exportRun()`: **Added**\n* `orq.humanReviewSets.list()`: **Removed** (Breaking ⚠️)\n* `orq.humanReviewSets.create()`: **Removed** (Breaking ⚠️)\n* `orq.humanReviewSets.get()`: **Removed** (Breaking ⚠️)\n* `orq.humanReviewSets.update()`: **Removed** (Breaking ⚠️)\n* `orq.humanReviewSets.delete()`: **Removed** (Breaking ⚠️)\n* `orq.wikis.list()`: **Removed** (Breaking ⚠️)\n* `orq.wikis.create()`: **Removed** (Breaking ⚠️)\n* `orq.wikis.inspectRepository()`: **Removed** (Breaking ⚠️)\n* `orq.wikis.get()`: **Removed** (Breaking ⚠️)\n* `orq.wikis.delete()`: **Removed** (Breaking ⚠️)\n* `orq.wikis.update()`: **Removed** (Breaking ⚠️)\n* `orq.wikis.getPage()`: **Removed** (Breaking ⚠️)\n* `orq.wikis.updatePage()`: **Removed** (Breaking ⚠️)\n* `orq.wikis.refresh()`: **Removed** (Breaking ⚠️)\n* `orq.wikis.listRuns()`: **Removed** (Breaking ⚠️)\n* `orq.wikis.search()`: **Removed** (Breaking ⚠️)\n* `orq.wikis.getTree()`: **Removed** (Breaking ⚠️)\n* `orq.experiments.listTasks()`: **Added**\n* `orq.experiments.list()`: **Added**\n* `orq.experiments.updateRunCell()`: **Added**\n* `orq.experiments.deleteRows()`: **Added**\n* `orq.experiments.patchReviewCell()`: **Added**\n* `orq.experiments.updateReview()`: **Added**\n* `orq.experiments.deleteReview()`: **Added**\n* `orq.experiments.createReview()`: **Added**\n* `orq.agents.run()`:  `request` **Changed**\n* `orq.agents.streamRun()`:  `request` **Changed**\n* `orq.experiments.listReviews()`: **Added**\n* `orq.experiments.queryRun()`: **Added**\n* `orq.experiments.getRunMetrics()`: **Added**\n* `orq.experiments.executeRun()`: **Added**\n* `orq.experiments.patchEvalCell()`: **Added**\n* `orq.experiments.deleteEval()`: **Added**\n* `orq.experiments.createTask()`: **Added**\n* `orq.experiments.listEvals()`: **Added**\n* `orq.experiments.updateRunColumnLayout()`: **Added**\n* `orq.experiments.cancelRun()`: **Added**\n* `orq.experiments.updateRun()`: **Added**\n* `orq.experiments.deleteRun()`: **Added**\n* `orq.router.chat.completions.create()`: \n  *  `request.thinking` **Changed**\n* `orq.router.completions.create()`: \n  *  `request.thinking` **Changed**\n* `orq.router.classify.create()`:  `request` **Changed**\n* `orq.router.decisions.create()`:  `request` **Changed**\n* `orq.evals.all()`:  `response.data[]` **Changed**\n* `orq.evals.create()`: \n  *  `request` **Changed**\n  *  `response` **Changed**\n* `orq.evals.get()`:  `response` **Changed**\n* `orq.evals.update()`: \n  *  `request.requestBody.timeout` **Added**\n  *  `response` **Changed**\n* `orq.traces.listSpans()`:  `response.data[].ruleAttributes` **Added**\n* `orq.traces.getSpan()`:  `response.span.summary.ruleAttributes` **Added**\n* `orq.datasets.update()`: \n  *  `request.updateDatasetRequest.path` **Added**\n* `orq.models.create()`: \n  *  `request.metadata` **Changed**\n  *  `response.metadata` **Changed**\n* `orq.models.createAwsBedrock()`:  `response.metadata` **Changed**\n* `orq.models.updateAwsBedrock()`:  `response.metadata` **Changed**\n* `orq.models.importLitellm()`:  `response.[].metadata` **Changed**\n* `orq.models.createOpenaiLike()`:  `response.metadata` **Changed**\n* `orq.models.updateOpenaiLike()`:  `response.metadata` **Changed**\n* `orq.models.createVertex()`:  `response.metadata` **Changed**\n* `orq.models.update()`: \n  *  `request.requestBody.metadata` **Changed**\n  *  `response.metadata` **Changed**\n* `orq.files.list()`: \n  *  `request.order` **Added**\n* `orq.mcpGateways.list()`:  `response.data[]` **Changed**\n* `orq.mcpGateways.create()`: \n  *  `request` **Changed**\n  *  `response.mcpGateway` **Changed**\n* `orq.mcpGateways.listTools()`:  `response.data[]` **Changed**\n* `orq.mcpGateways.retrieve()`:  `response.mcpGateway` **Changed**\n* `orq.mcpGateways.update()`: \n  *  `request.updateMcpGatewayRequest` **Changed**\n  *  `response.mcpGateway` **Changed**\n* `orq.experiments.getRun()`: **Added**\n* `orq.experiments.createRun()`: **Added**\n* `orq.experiments.listRuns()`: **Added**\n* `orq.experiments.update()`: **Added**\n* `orq.experiments.delete()`: **Added**\n* `orq.workspaces.update()`: \n  *  `request.updateWorkspaceRequest.retentionPeriod` **Added**\n* `orq.experiments.get()`: **Added**\n* `orq.experiments.create()`: **Added**\n"
 generatedFiles:
   - .gitattributes
   - .npmignore
