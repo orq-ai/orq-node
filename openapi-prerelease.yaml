@@ -2591,7 +2591,7 @@ components:
           properties:
             _id:
               type: "string"
-              default: "reasoning_01m6xg8mtppd41rf82hvp035nq"
+              default: "reasoning_01m6yhwr4nzh1ndagg0tw5ybz3"
               description: "Unique identifier for the part. Format: reasoning_{ulid} (e.g., reasoning_01hxyz...)"
               example: "reasoning_01hxyz123abc"
             kind:
@@ -20841,7 +20841,7 @@ components:
           type: "string"
         orq:
           $ref: "#/components/schemas/EmbeddingOrqParams"
-          description: "Orq platform extension parameters. Top-level equivalents take priority when both are set."
+          description: "Platform extension parameters. Top-level equivalents take priority when both are set."
         retry:
           $ref: "#/components/schemas/EmbeddingRetryConfig"
           description: "Retry configuration for the request."
@@ -20922,7 +20922,7 @@ components:
           $ref: "#/components/schemas/ResponseIdentity"
           description: "Identity/contact information for the end-user."
         include:
-          description: "Additional fields to include in the response. Use web_search_call.action.sources to add source URLs and titles to a web search action, or web_search_call.results for detailed results. See the [Web search](https://docs.orq.ai/ai-gateway/features/web-search) guide for the supported values."
+          description: "Additional fields to include in the response. Use web_search_call.action.sources to add source URLs and titles to a web search action, or web_search_call.results for detailed results. See the [Web search](https://docs.orq.ai/ai-gateway/features/web-search) guide."
           items:
             type: "string"
           type: "array"
@@ -21216,7 +21216,7 @@ components:
           description: "Developer-defined key-value pairs attached to the response (OpenAI spec: `Map<string, string>`). Non-string values are rejected with a 400."
           type: "object"
         model:
-          description: "The model to use in provider/model format (e.g. openai/gpt-4o). Use `agent/<key>` to invoke a pre-configured agent from the orq.ai platform."
+          description: "The model to use in provider/model format (e.g. openai/gpt-4o). Use `agent/<key>` to invoke a pre-configured agent from this platform."
           type: "string"
         parallel_tool_calls:
           description: "Whether to allow parallel tool calls."
@@ -21451,7 +21451,7 @@ components:
                 type: "object"
               - $ref: "#/components/schemas/OrqAdvisorTool"
               - $ref: "#/components/schemas/OrqSidekickTool"
-              - description: "An orq.ai platform tool reference. For MCP tools, prefer type 'mcp' with 'key' instead of 'orq:mcp' with 'tool_id'."
+              - description: "A platform tool reference. For MCP tools, prefer type 'mcp' with 'key' instead of 'orq:mcp' with 'tool_id'."
                 properties:
                   files:
                     description: "Files to stage in /workspace for orq:code_interpreter. Maximum 10 files."
@@ -21497,7 +21497,7 @@ components:
                     description: "The tool ID (for orq:mcp, orq:http, orq:function)."
                     type: "string"
                   type:
-                    description: "The orq.ai tool type. orq:web_search, orq:web_fetch, and orq:datetime are the canonical names for orq:google_search, orq:web_scraper, and orq:current_date."
+                    description: "The platform tool type. orq:web_search, orq:web_fetch, and orq:datetime are the canonical names for orq:google_search, orq:web_scraper, and orq:current_date."
                     enum:
                       - "orq:web_search"
                       - "orq:web_fetch"
@@ -21520,7 +21520,7 @@ components:
                     type: "string"
                 required:
                   - "type"
-                title: "orq.ai Tool"
+                title: "Orq.ai Tool"
                 type: "object"
               - description: "An MCP (Model Context Protocol) server tool. Provide server_url for inline mode, or key to reference a pre-configured MCP server."
                 properties:
@@ -27269,7 +27269,7 @@ paths:
                                 type: "string"
                                 format: "ulid"
                                 pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                                default: "01M6XG8MT61MPS42JYF7WQ3R08"
+                                default: "01M6YHWR3NN7MDTN3JB5KT0BQT"
                                 readOnly: true
                                 description: "The unique identifier of the playground knowledge base"
                               knowledge_id:
@@ -36668,7 +36668,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01M6XG8MVFEQNZYK6VVYVA5RDB"
+                                          default: "01M6YHWR60XJW0ZSNE9TT6AWBG"
                                         name:
                                           type: "string"
                                         description:
@@ -38294,7 +38294,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01M6XG8MVRNW2WDBCG9HM9F99A"
+                                          default: "01M6YHWR6GZMTT9W46X4J6SY04"
                                         name:
                                           type: "string"
                                         description:
@@ -47351,7 +47351,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M6XG8MWD50PG0X8END4MW6S7"
+                              default: "tool_01M6YHWR7PHP653PRZQV5FK9A5"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -47452,7 +47452,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M6XG8MWDN74HRWX785NSCAEP"
+                              default: "tool_01M6YHWR7PG0Y94V05150R0NGN"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -47555,7 +47555,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M6XG8MWDQYBB2QWKZ7XFPEDV"
+                              default: "tool_01M6YHWR7QCAND9FZQ6GWPJZW0"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -47699,7 +47699,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M6XG8MWEM6QG4N0E0GFAC1TM"
+                              default: "tool_01M6YHWR7RQDK3BJ256J7CGCMX"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -48186,7 +48186,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M6XG8MWFBN0AV865XC1F735D"
+                        default: "tool_01M6YHWR7TY2TDZ7J7MG0765JA"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -48287,7 +48287,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M6XG8MWFVCZW8F3MWBCK3YBG"
+                        default: "tool_01M6YHWR7VTSZMP3JR2BF6V8VD"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -48390,7 +48390,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M6XG8MWG9WHGHFFNFD6AATZX"
+                        default: "tool_01M6YHWR7VHD04JKSGWTS6DNQ8"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -48534,7 +48534,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M6XG8MWGR9S0RBK998Y0KXJZ"
+                        default: "tool_01M6YHWR7WHSHF2EEDPS9PGKKV"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -49038,7 +49038,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M6XG8MWHEWCGKP7BE7KCTMK6"
+                        default: "tool_01M6YHWR7YRXMPXG36XTB08MAV"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -49139,7 +49139,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M6XG8MWH6CMMZ3XCKJBPD0B6"
+                        default: "tool_01M6YHWR7YRFJ81ASFYDHP9MFR"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -49242,7 +49242,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M6XG8MWHDQ9X5YBG3RYYT7R9"
+                        default: "tool_01M6YHWR7YGSDJKQSZR18EPTE3"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -49386,7 +49386,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M6XG8MWJZFT8RPNN9FHEY8Q2"
+                        default: "tool_01M6YHWR7ZBRB7JKQPHYHE2P0B"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -49553,7 +49553,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M6XG8MWNH5EHBT65WYHAP8KV"
+                        default: "tool_01M6YHWR83BM2THG5SMXP8K27N"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -49654,7 +49654,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M6XG8MWN11DNP2ZK06ETPS5M"
+                        default: "tool_01M6YHWR84Y1T20QG7VCTEKNAB"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -49757,7 +49757,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M6XG8MWN29FVP1C5PFT5TKHG"
+                        default: "tool_01M6YHWR84P0EGPAFSF20RTX69"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -49901,7 +49901,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M6XG8MWP3D55E2TNQ0JVS4WK"
+                        default: "tool_01M6YHWR851S8HW2MYS0PRA2CV"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -66880,7 +66880,7 @@ paths:
         - ApiKey: []
   /v2/models/azure-foundry/deployments:
     post:
-      description: "Lists Azure Foundry deployments under the given base_url and merges each entry with the matching Orq model catalog entry. Only OpenAI-developed deployments in succeeded state with chat/completion/embedding/vision model types are returned."
+      description: "Lists Azure Foundry deployments under the given base_url and merges each entry with the matching model catalog entry. Only OpenAI-developed deployments in succeeded state with chat/completion/embedding/vision model types are returned."
       operationId: "ModelAzureFoundryDeployments"
       requestBody:
         content:
@@ -67020,7 +67020,7 @@ paths:
         - ApiKey: []
   /v2/models/openai-like:
     post:
-      description: "Creates a custom model backed by any OpenAI-compatible endpoint. Orq.ai calls the target API with the supplied credentials before saving the model."
+      description: "Creates a custom model backed by any OpenAI-compatible endpoint. The platform calls the target API with the supplied credentials before saving the model."
       operationId: "ModelCreateOpenAILike"
       requestBody:
         content:
@@ -75683,7 +75683,7 @@ paths:
                   type: "string"
                 orq:
                   $ref: "#/components/schemas/EmbeddingOrqParams"
-                  description: "Orq platform extension parameters. Top-level equivalents take priority when both are set."
+                  description: "Platform extension parameters. Top-level equivalents take priority when both are set."
                 retry:
                   $ref: "#/components/schemas/EmbeddingRetryConfig"
                   description: "Retry configuration for the request."
@@ -76933,31 +76933,31 @@ paths:
           source: "result = client.router.classify.create(\n    model=\"typesafe/jev-latest\",\n    state=\"The parcel arrived two days late and the box was crushed.\",\n    questions={\n        \"is_complaint\": {\"type\": \"noul\", \"instructions\": \"Is the customer complaining?\"},\n        \"topic\": {\n            \"type\": \"choice\",\n            \"instructions\": \"What is the message mainly about?\",\n            \"criteria\": {\"delivery\": \"Shipping or delivery issues\", \"product\": \"Product quality\", \"other\": None},\n        },\n        \"severity\": {\"type\": \"score\", \"instructions\": \"How severe is the issue?\", \"criteria\": [\"Minor\", \"Moderate\", \"Severe\"]},\n    },\n)"
         - label: "Node.js: OpenAI text"
           lang: "typescript"
-          source: "import { Orq } from \"@orq-ai/node\";\n\nconst orq = new Orq({ apiKey: process.env[\"ORQ_API_KEY\"] ?? \"\" });\nconst result = await orq.router.classify.create({\n  \"model\": \"openai/gpt-6-luna\",\n  \"questions\": {\n    \"positive\": {\n      \"criteria\": {\n        \"false\": \"The customer is unhappy.\",\n        \"true\": \"The customer is happy.\"\n      },\n      \"instructions\": \"Is the sentiment positive?\",\n      \"type\": \"noul\"\n    },\n    \"rating\": {\n      \"criteria\": [\n        \"Negative\",\n        \"Neutral\",\n        \"Positive\"\n      ],\n      \"instructions\": \"Rate sentiment.\",\n      \"type\": \"score\"\n    },\n    \"sentiment\": {\n      \"criteria\": {\n        \"negative\": \"Negative sentiment\",\n        \"neutral\": null,\n        \"positive\": \"Positive sentiment\"\n      },\n      \"instructions\": \"Classify sentiment.\",\n      \"type\": \"choice\"\n    }\n  },\n  \"state\": \"The customer says: I love this product. It is wonderful!\"\n});\n\nfor (const [name, answer] of Object.entries(result.answers)) {\n  if (answer.type === \"refusal\") {\n    console.log(name, \"refused\");\n    continue;\n  }\n  console.log(name, answer);\n}"
+          source: "import { Orq } from \"@orq-ai/node\";\n\nconst orq = new Orq({ apiKey: process.env[\"ORQ_API_KEY\"] ?? \"\", serverURL: \"https://my.orq.ai\" });\nconst result = await orq.router.classify.create({\n  \"model\": \"openai/gpt-6-luna\",\n  \"questions\": {\n    \"positive\": {\n      \"criteria\": {\n        \"false\": \"The customer is unhappy.\",\n        \"true\": \"The customer is happy.\"\n      },\n      \"instructions\": \"Is the sentiment positive?\",\n      \"type\": \"noul\"\n    },\n    \"rating\": {\n      \"criteria\": [\n        \"Negative\",\n        \"Neutral\",\n        \"Positive\"\n      ],\n      \"instructions\": \"Rate sentiment.\",\n      \"type\": \"score\"\n    },\n    \"sentiment\": {\n      \"criteria\": {\n        \"negative\": \"Negative sentiment\",\n        \"neutral\": null,\n        \"positive\": \"Positive sentiment\"\n      },\n      \"instructions\": \"Classify sentiment.\",\n      \"type\": \"choice\"\n    }\n  },\n  \"state\": \"The customer says: I love this product. It is wonderful!\"\n});\n\nfor (const [name, answer] of Object.entries(result.answers)) {\n  if (answer.type === \"refusal\") {\n    console.log(name, \"refused\");\n    continue;\n  }\n  console.log(name, answer);\n}"
         - label: "Python: OpenAI text"
           lang: "python"
-          source: "import json\nimport os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\nrequest = json.loads(\"{\\n  \\\"model\\\": \\\"openai/gpt-6-luna\\\",\\n  \\\"questions\\\": {\\n    \\\"positive\\\": {\\n      \\\"criteria\\\": {\\n        \\\"false\\\": \\\"The customer is unhappy.\\\",\\n        \\\"true\\\": \\\"The customer is happy.\\\"\\n      },\\n      \\\"instructions\\\": \\\"Is the sentiment positive?\\\",\\n      \\\"type\\\": \\\"noul\\\"\\n    },\\n    \\\"rating\\\": {\\n      \\\"criteria\\\": [\\n        \\\"Negative\\\",\\n        \\\"Neutral\\\",\\n        \\\"Positive\\\"\\n      ],\\n      \\\"instructions\\\": \\\"Rate sentiment.\\\",\\n      \\\"type\\\": \\\"score\\\"\\n    },\\n    \\\"sentiment\\\": {\\n      \\\"criteria\\\": {\\n        \\\"negative\\\": \\\"Negative sentiment\\\",\\n        \\\"neutral\\\": null,\\n        \\\"positive\\\": \\\"Positive sentiment\\\"\\n      },\\n      \\\"instructions\\\": \\\"Classify sentiment.\\\",\\n      \\\"type\\\": \\\"choice\\\"\\n    }\\n  },\\n  \\\"state\\\": \\\"The customer says: I love this product. It is wonderful!\\\"\\n}\")\nresult = client.router.classify.create(**request)\n\nfor name, answer in result.answers.items():\n    if answer.type == \"refusal\":\n        print(name, \"refused\")\n        continue\n    print(name, answer)"
+          source: "import json\nimport os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"], server_url=\"https://my.orq.ai\")\nrequest = json.loads(\"{\\n  \\\"model\\\": \\\"openai/gpt-6-luna\\\",\\n  \\\"questions\\\": {\\n    \\\"positive\\\": {\\n      \\\"criteria\\\": {\\n        \\\"false\\\": \\\"The customer is unhappy.\\\",\\n        \\\"true\\\": \\\"The customer is happy.\\\"\\n      },\\n      \\\"instructions\\\": \\\"Is the sentiment positive?\\\",\\n      \\\"type\\\": \\\"noul\\\"\\n    },\\n    \\\"rating\\\": {\\n      \\\"criteria\\\": [\\n        \\\"Negative\\\",\\n        \\\"Neutral\\\",\\n        \\\"Positive\\\"\\n      ],\\n      \\\"instructions\\\": \\\"Rate sentiment.\\\",\\n      \\\"type\\\": \\\"score\\\"\\n    },\\n    \\\"sentiment\\\": {\\n      \\\"criteria\\\": {\\n        \\\"negative\\\": \\\"Negative sentiment\\\",\\n        \\\"neutral\\\": null,\\n        \\\"positive\\\": \\\"Positive sentiment\\\"\\n      },\\n      \\\"instructions\\\": \\\"Classify sentiment.\\\",\\n      \\\"type\\\": \\\"choice\\\"\\n    }\\n  },\\n  \\\"state\\\": \\\"The customer says: I love this product. It is wonderful!\\\"\\n}\")\nresult = client.router.classify.create(**request)\n\nfor name, answer in result.answers.items():\n    if answer.type == \"refusal\":\n        print(name, \"refused\")\n        continue\n    print(name, answer)"
         - label: "cURL: OpenAI text"
           lang: "bash"
-          source: "curl https://my.orq.ai/v3/router/classify \\\n  -H \"Authorization: Bearer $ORQ_API_KEY\" \\\n  -H \"Content-Type: application/json\" \\\n  --data-binary @- <<'JSON'\n{\n  \"model\": \"openai/gpt-6-luna\",\n  \"questions\": {\n    \"positive\": {\n      \"criteria\": {\n        \"false\": \"The customer is unhappy.\",\n        \"true\": \"The customer is happy.\"\n      },\n      \"instructions\": \"Is the sentiment positive?\",\n      \"type\": \"noul\"\n    },\n    \"rating\": {\n      \"criteria\": [\n        \"Negative\",\n        \"Neutral\",\n        \"Positive\"\n      ],\n      \"instructions\": \"Rate sentiment.\",\n      \"type\": \"score\"\n    },\n    \"sentiment\": {\n      \"criteria\": {\n        \"negative\": \"Negative sentiment\",\n        \"neutral\": null,\n        \"positive\": \"Positive sentiment\"\n      },\n      \"instructions\": \"Classify sentiment.\",\n      \"type\": \"choice\"\n    }\n  },\n  \"state\": \"The customer says: I love this product. It is wonderful!\"\n}\nJSON"
+          source: "curl https://my.orq.ai/v3/router/classify \\\n  -H \"Authorization: Bearer ${ORQ_API_KEY}\" \\\n  -H \"Content-Type: application/json\" \\\n  --data-binary @- <<'JSON'\n{\n  \"model\": \"openai/gpt-6-luna\",\n  \"questions\": {\n    \"positive\": {\n      \"criteria\": {\n        \"false\": \"The customer is unhappy.\",\n        \"true\": \"The customer is happy.\"\n      },\n      \"instructions\": \"Is the sentiment positive?\",\n      \"type\": \"noul\"\n    },\n    \"rating\": {\n      \"criteria\": [\n        \"Negative\",\n        \"Neutral\",\n        \"Positive\"\n      ],\n      \"instructions\": \"Rate sentiment.\",\n      \"type\": \"score\"\n    },\n    \"sentiment\": {\n      \"criteria\": {\n        \"negative\": \"Negative sentiment\",\n        \"neutral\": null,\n        \"positive\": \"Positive sentiment\"\n      },\n      \"instructions\": \"Classify sentiment.\",\n      \"type\": \"choice\"\n    }\n  },\n  \"state\": \"The customer says: I love this product. It is wonderful!\"\n}\nJSON"
         - label: "Node.js: OpenAI inline image"
           lang: "typescript"
-          source: "import { Orq } from \"@orq-ai/node\";\n\nconst orq = new Orq({ apiKey: process.env[\"ORQ_API_KEY\"] ?? \"\" });\nconst result = await orq.router.classify.create({\n  \"model\": \"openai/gpt-6-luna\",\n  \"questions\": {\n    \"contains_text\": {\n      \"instructions\": \"Does the image contain text?\",\n      \"type\": \"noul\"\n    }\n  },\n  \"state\": [\n    {\n      \"content\": [\n        {\n          \"text\": \"Evaluate this image.\",\n          \"type\": \"input_text\"\n        },\n        {\n          \"image_url\": \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAACLSURBVHgBdY8NDYAgEIXBBEQgAhG0gRGMYBNtoA2M4EygDYygDfCxvdMbk7d9A453f8ZQMcYAWuBVzIHujeGyxE8nYz7dJWYl01p749zxDKABEzhYfDNaMPZSAUymJLZLuvSsSVUhx4G7VM2xpSzQ5YYhLUHDCGoad47ixXjxY84qi1a9QPgZpdYLPVkbtsfywz3jAAAAAElFTkSuQmCC\",\n          \"type\": \"input_image\"\n        }\n      ],\n      \"role\": \"user\"\n    }\n  ]\n});\n\nfor (const [name, answer] of Object.entries(result.answers)) {\n  if (answer.type === \"refusal\") {\n    console.log(name, \"refused\");\n    continue;\n  }\n  console.log(name, answer);\n}"
+          source: "import { Orq } from \"@orq-ai/node\";\n\nconst orq = new Orq({ apiKey: process.env[\"ORQ_API_KEY\"] ?? \"\", serverURL: \"https://my.orq.ai\" });\nconst result = await orq.router.classify.create({\n  \"model\": \"openai/gpt-6-luna\",\n  \"questions\": {\n    \"contains_text\": {\n      \"instructions\": \"Does the image contain text?\",\n      \"type\": \"noul\"\n    }\n  },\n  \"state\": [\n    {\n      \"content\": [\n        {\n          \"text\": \"Evaluate this image.\",\n          \"type\": \"input_text\"\n        },\n        {\n          \"image_url\": \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAACLSURBVHgBdY8NDYAgEIXBBEQgAhG0gRGMYBNtoA2M4EygDYygDfCxvdMbk7d9A453f8ZQMcYAWuBVzIHujeGyxE8nYz7dJWYl01p749zxDKABEzhYfDNaMPZSAUymJLZLuvSsSVUhx4G7VM2xpSzQ5YYhLUHDCGoad47ixXjxY84qi1a9QPgZpdYLPVkbtsfywz3jAAAAAElFTkSuQmCC\",\n          \"type\": \"input_image\"\n        }\n      ],\n      \"role\": \"user\"\n    }\n  ]\n});\n\nfor (const [name, answer] of Object.entries(result.answers)) {\n  if (answer.type === \"refusal\") {\n    console.log(name, \"refused\");\n    continue;\n  }\n  console.log(name, answer);\n}"
         - label: "Python: OpenAI inline image"
           lang: "python"
-          source: "import json\nimport os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\nrequest = json.loads(\"{\\n  \\\"model\\\": \\\"openai/gpt-6-luna\\\",\\n  \\\"questions\\\": {\\n    \\\"contains_text\\\": {\\n      \\\"instructions\\\": \\\"Does the image contain text?\\\",\\n      \\\"type\\\": \\\"noul\\\"\\n    }\\n  },\\n  \\\"state\\\": [\\n    {\\n      \\\"content\\\": [\\n        {\\n          \\\"text\\\": \\\"Evaluate this image.\\\",\\n          \\\"type\\\": \\\"input_text\\\"\\n        },\\n        {\\n          \\\"image_url\\\": \\\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAACLSURBVHgBdY8NDYAgEIXBBEQgAhG0gRGMYBNtoA2M4EygDYygDfCxvdMbk7d9A453f8ZQMcYAWuBVzIHujeGyxE8nYz7dJWYl01p749zxDKABEzhYfDNaMPZSAUymJLZLuvSsSVUhx4G7VM2xpSzQ5YYhLUHDCGoad47ixXjxY84qi1a9QPgZpdYLPVkbtsfywz3jAAAAAElFTkSuQmCC\\\",\\n          \\\"type\\\": \\\"input_image\\\"\\n        }\\n      ],\\n      \\\"role\\\": \\\"user\\\"\\n    }\\n  ]\\n}\")\nresult = client.router.classify.create(**request)\n\nfor name, answer in result.answers.items():\n    if answer.type == \"refusal\":\n        print(name, \"refused\")\n        continue\n    print(name, answer)"
+          source: "import json\nimport os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"], server_url=\"https://my.orq.ai\")\nrequest = json.loads(\"{\\n  \\\"model\\\": \\\"openai/gpt-6-luna\\\",\\n  \\\"questions\\\": {\\n    \\\"contains_text\\\": {\\n      \\\"instructions\\\": \\\"Does the image contain text?\\\",\\n      \\\"type\\\": \\\"noul\\\"\\n    }\\n  },\\n  \\\"state\\\": [\\n    {\\n      \\\"content\\\": [\\n        {\\n          \\\"text\\\": \\\"Evaluate this image.\\\",\\n          \\\"type\\\": \\\"input_text\\\"\\n        },\\n        {\\n          \\\"image_url\\\": \\\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAACLSURBVHgBdY8NDYAgEIXBBEQgAhG0gRGMYBNtoA2M4EygDYygDfCxvdMbk7d9A453f8ZQMcYAWuBVzIHujeGyxE8nYz7dJWYl01p749zxDKABEzhYfDNaMPZSAUymJLZLuvSsSVUhx4G7VM2xpSzQ5YYhLUHDCGoad47ixXjxY84qi1a9QPgZpdYLPVkbtsfywz3jAAAAAElFTkSuQmCC\\\",\\n          \\\"type\\\": \\\"input_image\\\"\\n        }\\n      ],\\n      \\\"role\\\": \\\"user\\\"\\n    }\\n  ]\\n}\")\nresult = client.router.classify.create(**request)\n\nfor name, answer in result.answers.items():\n    if answer.type == \"refusal\":\n        print(name, \"refused\")\n        continue\n    print(name, answer)"
         - label: "cURL: OpenAI inline image"
           lang: "bash"
-          source: "curl https://my.orq.ai/v3/router/classify \\\n  -H \"Authorization: Bearer $ORQ_API_KEY\" \\\n  -H \"Content-Type: application/json\" \\\n  --data-binary @- <<'JSON'\n{\n  \"model\": \"openai/gpt-6-luna\",\n  \"questions\": {\n    \"contains_text\": {\n      \"instructions\": \"Does the image contain text?\",\n      \"type\": \"noul\"\n    }\n  },\n  \"state\": [\n    {\n      \"content\": [\n        {\n          \"text\": \"Evaluate this image.\",\n          \"type\": \"input_text\"\n        },\n        {\n          \"image_url\": \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAACLSURBVHgBdY8NDYAgEIXBBEQgAhG0gRGMYBNtoA2M4EygDYygDfCxvdMbk7d9A453f8ZQMcYAWuBVzIHujeGyxE8nYz7dJWYl01p749zxDKABEzhYfDNaMPZSAUymJLZLuvSsSVUhx4G7VM2xpSzQ5YYhLUHDCGoad47ixXjxY84qi1a9QPgZpdYLPVkbtsfywz3jAAAAAElFTkSuQmCC\",\n          \"type\": \"input_image\"\n        }\n      ],\n      \"role\": \"user\"\n    }\n  ]\n}\nJSON"
+          source: "curl https://my.orq.ai/v3/router/classify \\\n  -H \"Authorization: Bearer ${ORQ_API_KEY}\" \\\n  -H \"Content-Type: application/json\" \\\n  --data-binary @- <<'JSON'\n{\n  \"model\": \"openai/gpt-6-luna\",\n  \"questions\": {\n    \"contains_text\": {\n      \"instructions\": \"Does the image contain text?\",\n      \"type\": \"noul\"\n    }\n  },\n  \"state\": [\n    {\n      \"content\": [\n        {\n          \"text\": \"Evaluate this image.\",\n          \"type\": \"input_text\"\n        },\n        {\n          \"image_url\": \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAACLSURBVHgBdY8NDYAgEIXBBEQgAhG0gRGMYBNtoA2M4EygDYygDfCxvdMbk7d9A453f8ZQMcYAWuBVzIHujeGyxE8nYz7dJWYl01p749zxDKABEzhYfDNaMPZSAUymJLZLuvSsSVUhx4G7VM2xpSzQ5YYhLUHDCGoad47ixXjxY84qi1a9QPgZpdYLPVkbtsfywz3jAAAAAElFTkSuQmCC\",\n          \"type\": \"input_image\"\n        }\n      ],\n      \"role\": \"user\"\n    }\n  ]\n}\nJSON"
         - label: "Node.js: Fallbacks, retries and identity"
           lang: "typescript"
-          source: "import { Orq } from \"@orq-ai/node\";\n\nconst orq = new Orq({ apiKey: process.env[\"ORQ_API_KEY\"] ?? \"\" });\nconst result = await orq.router.classify.create({\n  \"fallbacks\": [\n    {\n      \"model\": \"openai/gpt-5.6-luna\"\n    }\n  ],\n  \"identity\": {\n    \"displayName\": \"Sample customer\",\n    \"id\": \"customer-demo\"\n  },\n  \"model\": \"openai/gpt-6-luna\",\n  \"questions\": {\n    \"positive\": {\n      \"criteria\": {\n        \"false\": \"The customer is unhappy.\",\n        \"true\": \"The customer is happy.\"\n      },\n      \"instructions\": \"Is the sentiment positive?\",\n      \"type\": \"noul\"\n    },\n    \"rating\": {\n      \"criteria\": [\n        \"Negative\",\n        \"Neutral\",\n        \"Positive\"\n      ],\n      \"instructions\": \"Rate sentiment.\",\n      \"type\": \"score\"\n    },\n    \"sentiment\": {\n      \"criteria\": {\n        \"negative\": \"Negative sentiment\",\n        \"neutral\": null,\n        \"positive\": \"Positive sentiment\"\n      },\n      \"instructions\": \"Classify sentiment.\",\n      \"type\": \"choice\"\n    }\n  },\n  \"retry\": {\n    \"count\": 2,\n    \"onCodes\": [\n      429,\n      502,\n      503,\n      504\n    ]\n  },\n  \"state\": \"The customer says: I love this product. It is wonderful!\",\n  \"timeout\": {\n    \"callTimeout\": 2000\n  }\n});\n\nfor (const [name, answer] of Object.entries(result.answers)) {\n  if (answer.type === \"refusal\") {\n    console.log(name, \"refused\");\n    continue;\n  }\n  console.log(name, answer);\n}"
+          source: "import { Orq } from \"@orq-ai/node\";\n\nconst orq = new Orq({ apiKey: process.env[\"ORQ_API_KEY\"] ?? \"\", serverURL: \"https://my.orq.ai\" });\nconst result = await orq.router.classify.create({\n  \"fallbacks\": [\n    {\n      \"model\": \"openai/gpt-5.6-luna\"\n    }\n  ],\n  \"identity\": {\n    \"displayName\": \"Sample customer\",\n    \"id\": \"customer-demo\"\n  },\n  \"model\": \"openai/gpt-6-luna\",\n  \"questions\": {\n    \"positive\": {\n      \"criteria\": {\n        \"false\": \"The customer is unhappy.\",\n        \"true\": \"The customer is happy.\"\n      },\n      \"instructions\": \"Is the sentiment positive?\",\n      \"type\": \"noul\"\n    },\n    \"rating\": {\n      \"criteria\": [\n        \"Negative\",\n        \"Neutral\",\n        \"Positive\"\n      ],\n      \"instructions\": \"Rate sentiment.\",\n      \"type\": \"score\"\n    },\n    \"sentiment\": {\n      \"criteria\": {\n        \"negative\": \"Negative sentiment\",\n        \"neutral\": null,\n        \"positive\": \"Positive sentiment\"\n      },\n      \"instructions\": \"Classify sentiment.\",\n      \"type\": \"choice\"\n    }\n  },\n  \"retry\": {\n    \"count\": 2,\n    \"onCodes\": [\n      429,\n      502,\n      503,\n      504\n    ]\n  },\n  \"state\": \"The customer says: I love this product. It is wonderful!\",\n  \"timeout\": {\n    \"callTimeout\": 2000\n  }\n});\n\nfor (const [name, answer] of Object.entries(result.answers)) {\n  if (answer.type === \"refusal\") {\n    console.log(name, \"refused\");\n    continue;\n  }\n  console.log(name, answer);\n}"
         - label: "Python: Fallbacks, retries and identity"
           lang: "python"
-          source: "import json\nimport os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\nrequest = json.loads(\"{\\n  \\\"fallbacks\\\": [\\n    {\\n      \\\"model\\\": \\\"openai/gpt-5.6-luna\\\"\\n    }\\n  ],\\n  \\\"identity\\\": {\\n    \\\"id\\\": \\\"customer-demo\\\",\\n    \\\"display_name\\\": \\\"Sample customer\\\"\\n  },\\n  \\\"model\\\": \\\"openai/gpt-6-luna\\\",\\n  \\\"questions\\\": {\\n    \\\"positive\\\": {\\n      \\\"criteria\\\": {\\n        \\\"false\\\": \\\"The customer is unhappy.\\\",\\n        \\\"true\\\": \\\"The customer is happy.\\\"\\n      },\\n      \\\"instructions\\\": \\\"Is the sentiment positive?\\\",\\n      \\\"type\\\": \\\"noul\\\"\\n    },\\n    \\\"rating\\\": {\\n      \\\"criteria\\\": [\\n        \\\"Negative\\\",\\n        \\\"Neutral\\\",\\n        \\\"Positive\\\"\\n      ],\\n      \\\"instructions\\\": \\\"Rate sentiment.\\\",\\n      \\\"type\\\": \\\"score\\\"\\n    },\\n    \\\"sentiment\\\": {\\n      \\\"criteria\\\": {\\n        \\\"negative\\\": \\\"Negative sentiment\\\",\\n        \\\"neutral\\\": null,\\n        \\\"positive\\\": \\\"Positive sentiment\\\"\\n      },\\n      \\\"instructions\\\": \\\"Classify sentiment.\\\",\\n      \\\"type\\\": \\\"choice\\\"\\n    }\\n  },\\n  \\\"retry\\\": {\\n    \\\"count\\\": 2,\\n    \\\"on_codes\\\": [\\n      429,\\n      502,\\n      503,\\n      504\\n    ]\\n  },\\n  \\\"state\\\": \\\"The customer says: I love this product. It is wonderful!\\\",\\n  \\\"timeout\\\": {\\n    \\\"call_timeout\\\": 2000\\n  }\\n}\")\nresult = client.router.classify.create(**request)\n\nfor name, answer in result.answers.items():\n    if answer.type == \"refusal\":\n        print(name, \"refused\")\n        continue\n    print(name, answer)"
+          source: "import json\nimport os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"], server_url=\"https://my.orq.ai\")\nrequest = json.loads(\"{\\n  \\\"fallbacks\\\": [\\n    {\\n      \\\"model\\\": \\\"openai/gpt-5.6-luna\\\"\\n    }\\n  ],\\n  \\\"identity\\\": {\\n    \\\"id\\\": \\\"customer-demo\\\",\\n    \\\"display_name\\\": \\\"Sample customer\\\"\\n  },\\n  \\\"model\\\": \\\"openai/gpt-6-luna\\\",\\n  \\\"questions\\\": {\\n    \\\"positive\\\": {\\n      \\\"criteria\\\": {\\n        \\\"false\\\": \\\"The customer is unhappy.\\\",\\n        \\\"true\\\": \\\"The customer is happy.\\\"\\n      },\\n      \\\"instructions\\\": \\\"Is the sentiment positive?\\\",\\n      \\\"type\\\": \\\"noul\\\"\\n    },\\n    \\\"rating\\\": {\\n      \\\"criteria\\\": [\\n        \\\"Negative\\\",\\n        \\\"Neutral\\\",\\n        \\\"Positive\\\"\\n      ],\\n      \\\"instructions\\\": \\\"Rate sentiment.\\\",\\n      \\\"type\\\": \\\"score\\\"\\n    },\\n    \\\"sentiment\\\": {\\n      \\\"criteria\\\": {\\n        \\\"negative\\\": \\\"Negative sentiment\\\",\\n        \\\"neutral\\\": null,\\n        \\\"positive\\\": \\\"Positive sentiment\\\"\\n      },\\n      \\\"instructions\\\": \\\"Classify sentiment.\\\",\\n      \\\"type\\\": \\\"choice\\\"\\n    }\\n  },\\n  \\\"retry\\\": {\\n    \\\"count\\\": 2,\\n    \\\"on_codes\\\": [\\n      429,\\n      502,\\n      503,\\n      504\\n    ]\\n  },\\n  \\\"state\\\": \\\"The customer says: I love this product. It is wonderful!\\\",\\n  \\\"timeout\\\": {\\n    \\\"call_timeout\\\": 2000\\n  }\\n}\")\nresult = client.router.classify.create(**request)\n\nfor name, answer in result.answers.items():\n    if answer.type == \"refusal\":\n        print(name, \"refused\")\n        continue\n    print(name, answer)"
         - label: "cURL: Fallbacks, retries and identity"
           lang: "bash"
-          source: "curl https://my.orq.ai/v3/router/classify \\\n  -H \"Authorization: Bearer $ORQ_API_KEY\" \\\n  -H \"Content-Type: application/json\" \\\n  --data-binary @- <<'JSON'\n{\n  \"fallbacks\": [\n    {\n      \"model\": \"openai/gpt-5.6-luna\"\n    }\n  ],\n  \"identity\": {\n    \"id\": \"customer-demo\",\n    \"display_name\": \"Sample customer\"\n  },\n  \"model\": \"openai/gpt-6-luna\",\n  \"questions\": {\n    \"positive\": {\n      \"criteria\": {\n        \"false\": \"The customer is unhappy.\",\n        \"true\": \"The customer is happy.\"\n      },\n      \"instructions\": \"Is the sentiment positive?\",\n      \"type\": \"noul\"\n    },\n    \"rating\": {\n      \"criteria\": [\n        \"Negative\",\n        \"Neutral\",\n        \"Positive\"\n      ],\n      \"instructions\": \"Rate sentiment.\",\n      \"type\": \"score\"\n    },\n    \"sentiment\": {\n      \"criteria\": {\n        \"negative\": \"Negative sentiment\",\n        \"neutral\": null,\n        \"positive\": \"Positive sentiment\"\n      },\n      \"instructions\": \"Classify sentiment.\",\n      \"type\": \"choice\"\n    }\n  },\n  \"retry\": {\n    \"count\": 2,\n    \"on_codes\": [\n      429,\n      502,\n      503,\n      504\n    ]\n  },\n  \"state\": \"The customer says: I love this product. It is wonderful!\",\n  \"timeout\": {\n    \"call_timeout\": 2000\n  }\n}\nJSON"
+          source: "curl https://my.orq.ai/v3/router/classify \\\n  -H \"Authorization: Bearer ${ORQ_API_KEY}\" \\\n  -H \"Content-Type: application/json\" \\\n  --data-binary @- <<'JSON'\n{\n  \"fallbacks\": [\n    {\n      \"model\": \"openai/gpt-5.6-luna\"\n    }\n  ],\n  \"identity\": {\n    \"id\": \"customer-demo\",\n    \"display_name\": \"Sample customer\"\n  },\n  \"model\": \"openai/gpt-6-luna\",\n  \"questions\": {\n    \"positive\": {\n      \"criteria\": {\n        \"false\": \"The customer is unhappy.\",\n        \"true\": \"The customer is happy.\"\n      },\n      \"instructions\": \"Is the sentiment positive?\",\n      \"type\": \"noul\"\n    },\n    \"rating\": {\n      \"criteria\": [\n        \"Negative\",\n        \"Neutral\",\n        \"Positive\"\n      ],\n      \"instructions\": \"Rate sentiment.\",\n      \"type\": \"score\"\n    },\n    \"sentiment\": {\n      \"criteria\": {\n        \"negative\": \"Negative sentiment\",\n        \"neutral\": null,\n        \"positive\": \"Positive sentiment\"\n      },\n      \"instructions\": \"Classify sentiment.\",\n      \"type\": \"choice\"\n    }\n  },\n  \"retry\": {\n    \"count\": 2,\n    \"on_codes\": [\n      429,\n      502,\n      503,\n      504\n    ]\n  },\n  \"state\": \"The customer says: I love this product. It is wonderful!\",\n  \"timeout\": {\n    \"call_timeout\": 2000\n  }\n}\nJSON"
       x-orq-gateway-group: true
       x-speakeasy-group: "router.classify"
       x-speakeasy-name-override: "create"
@@ -77523,31 +77523,31 @@ paths:
           source: "result = client.router.decisions.create(\n    model=\"typesafe/jev-latest\",\n    state=\"The parcel arrived two days late and the box was crushed.\",\n    questions={\n        \"is_complaint\": {\"type\": \"noul\", \"instructions\": \"Is the customer complaining?\"},\n        \"topic\": {\n            \"type\": \"choice\",\n            \"instructions\": \"What is the message mainly about?\",\n            \"criteria\": {\"delivery\": \"Shipping or delivery issues\", \"product\": \"Product quality\", \"other\": None},\n        },\n        \"severity\": {\"type\": \"score\", \"instructions\": \"How severe is the issue?\", \"criteria\": [\"Minor\", \"Moderate\", \"Severe\"]},\n    },\n)"
         - label: "Node.js: OpenAI text"
           lang: "typescript"
-          source: "import { Orq } from \"@orq-ai/node\";\n\nconst orq = new Orq({ apiKey: process.env[\"ORQ_API_KEY\"] ?? \"\" });\nconst result = await orq.router.decisions.create({\n  \"model\": \"openai/gpt-6-luna\",\n  \"questions\": {\n    \"positive\": {\n      \"criteria\": {\n        \"false\": \"The customer is unhappy.\",\n        \"true\": \"The customer is happy.\"\n      },\n      \"instructions\": \"Is the sentiment positive?\",\n      \"type\": \"noul\"\n    },\n    \"rating\": {\n      \"criteria\": [\n        \"Negative\",\n        \"Neutral\",\n        \"Positive\"\n      ],\n      \"instructions\": \"Rate sentiment.\",\n      \"type\": \"score\"\n    },\n    \"sentiment\": {\n      \"criteria\": {\n        \"negative\": \"Negative sentiment\",\n        \"neutral\": null,\n        \"positive\": \"Positive sentiment\"\n      },\n      \"instructions\": \"Classify sentiment.\",\n      \"type\": \"choice\"\n    }\n  },\n  \"state\": \"The customer says: I love this product. It is wonderful!\"\n});\n\nfor (const [name, answer] of Object.entries(result.answers)) {\n  if (answer.type === \"refusal\") {\n    console.log(name, \"refused\");\n    continue;\n  }\n  console.log(name, answer);\n}"
+          source: "import { Orq } from \"@orq-ai/node\";\n\nconst orq = new Orq({ apiKey: process.env[\"ORQ_API_KEY\"] ?? \"\", serverURL: \"https://my.orq.ai\" });\nconst result = await orq.router.decisions.create({\n  \"model\": \"openai/gpt-6-luna\",\n  \"questions\": {\n    \"positive\": {\n      \"criteria\": {\n        \"false\": \"The customer is unhappy.\",\n        \"true\": \"The customer is happy.\"\n      },\n      \"instructions\": \"Is the sentiment positive?\",\n      \"type\": \"noul\"\n    },\n    \"rating\": {\n      \"criteria\": [\n        \"Negative\",\n        \"Neutral\",\n        \"Positive\"\n      ],\n      \"instructions\": \"Rate sentiment.\",\n      \"type\": \"score\"\n    },\n    \"sentiment\": {\n      \"criteria\": {\n        \"negative\": \"Negative sentiment\",\n        \"neutral\": null,\n        \"positive\": \"Positive sentiment\"\n      },\n      \"instructions\": \"Classify sentiment.\",\n      \"type\": \"choice\"\n    }\n  },\n  \"state\": \"The customer says: I love this product. It is wonderful!\"\n});\n\nfor (const [name, answer] of Object.entries(result.answers)) {\n  if (answer.type === \"refusal\") {\n    console.log(name, \"refused\");\n    continue;\n  }\n  console.log(name, answer);\n}"
         - label: "Python: OpenAI text"
           lang: "python"
-          source: "import json\nimport os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\nrequest = json.loads(\"{\\n  \\\"model\\\": \\\"openai/gpt-6-luna\\\",\\n  \\\"questions\\\": {\\n    \\\"positive\\\": {\\n      \\\"criteria\\\": {\\n        \\\"false\\\": \\\"The customer is unhappy.\\\",\\n        \\\"true\\\": \\\"The customer is happy.\\\"\\n      },\\n      \\\"instructions\\\": \\\"Is the sentiment positive?\\\",\\n      \\\"type\\\": \\\"noul\\\"\\n    },\\n    \\\"rating\\\": {\\n      \\\"criteria\\\": [\\n        \\\"Negative\\\",\\n        \\\"Neutral\\\",\\n        \\\"Positive\\\"\\n      ],\\n      \\\"instructions\\\": \\\"Rate sentiment.\\\",\\n      \\\"type\\\": \\\"score\\\"\\n    },\\n    \\\"sentiment\\\": {\\n      \\\"criteria\\\": {\\n        \\\"negative\\\": \\\"Negative sentiment\\\",\\n        \\\"neutral\\\": null,\\n        \\\"positive\\\": \\\"Positive sentiment\\\"\\n      },\\n      \\\"instructions\\\": \\\"Classify sentiment.\\\",\\n      \\\"type\\\": \\\"choice\\\"\\n    }\\n  },\\n  \\\"state\\\": \\\"The customer says: I love this product. It is wonderful!\\\"\\n}\")\nresult = client.router.decisions.create(**request)\n\nfor name, answer in result.answers.items():\n    if answer.type == \"refusal\":\n        print(name, \"refused\")\n        continue\n    print(name, answer)"
+          source: "import json\nimport os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"], server_url=\"https://my.orq.ai\")\nrequest = json.loads(\"{\\n  \\\"model\\\": \\\"openai/gpt-6-luna\\\",\\n  \\\"questions\\\": {\\n    \\\"positive\\\": {\\n      \\\"criteria\\\": {\\n        \\\"false\\\": \\\"The customer is unhappy.\\\",\\n        \\\"true\\\": \\\"The customer is happy.\\\"\\n      },\\n      \\\"instructions\\\": \\\"Is the sentiment positive?\\\",\\n      \\\"type\\\": \\\"noul\\\"\\n    },\\n    \\\"rating\\\": {\\n      \\\"criteria\\\": [\\n        \\\"Negative\\\",\\n        \\\"Neutral\\\",\\n        \\\"Positive\\\"\\n      ],\\n      \\\"instructions\\\": \\\"Rate sentiment.\\\",\\n      \\\"type\\\": \\\"score\\\"\\n    },\\n    \\\"sentiment\\\": {\\n      \\\"criteria\\\": {\\n        \\\"negative\\\": \\\"Negative sentiment\\\",\\n        \\\"neutral\\\": null,\\n        \\\"positive\\\": \\\"Positive sentiment\\\"\\n      },\\n      \\\"instructions\\\": \\\"Classify sentiment.\\\",\\n      \\\"type\\\": \\\"choice\\\"\\n    }\\n  },\\n  \\\"state\\\": \\\"The customer says: I love this product. It is wonderful!\\\"\\n}\")\nresult = client.router.decisions.create(**request)\n\nfor name, answer in result.answers.items():\n    if answer.type == \"refusal\":\n        print(name, \"refused\")\n        continue\n    print(name, answer)"
         - label: "cURL: OpenAI text"
           lang: "bash"
-          source: "curl https://my.orq.ai/v3/router/decisions \\\n  -H \"Authorization: Bearer $ORQ_API_KEY\" \\\n  -H \"Content-Type: application/json\" \\\n  --data-binary @- <<'JSON'\n{\n  \"model\": \"openai/gpt-6-luna\",\n  \"questions\": {\n    \"positive\": {\n      \"criteria\": {\n        \"false\": \"The customer is unhappy.\",\n        \"true\": \"The customer is happy.\"\n      },\n      \"instructions\": \"Is the sentiment positive?\",\n      \"type\": \"noul\"\n    },\n    \"rating\": {\n      \"criteria\": [\n        \"Negative\",\n        \"Neutral\",\n        \"Positive\"\n      ],\n      \"instructions\": \"Rate sentiment.\",\n      \"type\": \"score\"\n    },\n    \"sentiment\": {\n      \"criteria\": {\n        \"negative\": \"Negative sentiment\",\n        \"neutral\": null,\n        \"positive\": \"Positive sentiment\"\n      },\n      \"instructions\": \"Classify sentiment.\",\n      \"type\": \"choice\"\n    }\n  },\n  \"state\": \"The customer says: I love this product. It is wonderful!\"\n}\nJSON"
+          source: "curl https://my.orq.ai/v3/router/decisions \\\n  -H \"Authorization: Bearer ${ORQ_API_KEY}\" \\\n  -H \"Content-Type: application/json\" \\\n  --data-binary @- <<'JSON'\n{\n  \"model\": \"openai/gpt-6-luna\",\n  \"questions\": {\n    \"positive\": {\n      \"criteria\": {\n        \"false\": \"The customer is unhappy.\",\n        \"true\": \"The customer is happy.\"\n      },\n      \"instructions\": \"Is the sentiment positive?\",\n      \"type\": \"noul\"\n    },\n    \"rating\": {\n      \"criteria\": [\n        \"Negative\",\n        \"Neutral\",\n        \"Positive\"\n      ],\n      \"instructions\": \"Rate sentiment.\",\n      \"type\": \"score\"\n    },\n    \"sentiment\": {\n      \"criteria\": {\n        \"negative\": \"Negative sentiment\",\n        \"neutral\": null,\n        \"positive\": \"Positive sentiment\"\n      },\n      \"instructions\": \"Classify sentiment.\",\n      \"type\": \"choice\"\n    }\n  },\n  \"state\": \"The customer says: I love this product. It is wonderful!\"\n}\nJSON"
         - label: "Node.js: OpenAI inline image"
           lang: "typescript"
-          source: "import { Orq } from \"@orq-ai/node\";\n\nconst orq = new Orq({ apiKey: process.env[\"ORQ_API_KEY\"] ?? \"\" });\nconst result = await orq.router.decisions.create({\n  \"model\": \"openai/gpt-6-luna\",\n  \"questions\": {\n    \"contains_text\": {\n      \"instructions\": \"Does the image contain text?\",\n      \"type\": \"noul\"\n    }\n  },\n  \"state\": [\n    {\n      \"content\": [\n        {\n          \"text\": \"Evaluate this image.\",\n          \"type\": \"input_text\"\n        },\n        {\n          \"image_url\": \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAACLSURBVHgBdY8NDYAgEIXBBEQgAhG0gRGMYBNtoA2M4EygDYygDfCxvdMbk7d9A453f8ZQMcYAWuBVzIHujeGyxE8nYz7dJWYl01p749zxDKABEzhYfDNaMPZSAUymJLZLuvSsSVUhx4G7VM2xpSzQ5YYhLUHDCGoad47ixXjxY84qi1a9QPgZpdYLPVkbtsfywz3jAAAAAElFTkSuQmCC\",\n          \"type\": \"input_image\"\n        }\n      ],\n      \"role\": \"user\"\n    }\n  ]\n});\n\nfor (const [name, answer] of Object.entries(result.answers)) {\n  if (answer.type === \"refusal\") {\n    console.log(name, \"refused\");\n    continue;\n  }\n  console.log(name, answer);\n}"
+          source: "import { Orq } from \"@orq-ai/node\";\n\nconst orq = new Orq({ apiKey: process.env[\"ORQ_API_KEY\"] ?? \"\", serverURL: \"https://my.orq.ai\" });\nconst result = await orq.router.decisions.create({\n  \"model\": \"openai/gpt-6-luna\",\n  \"questions\": {\n    \"contains_text\": {\n      \"instructions\": \"Does the image contain text?\",\n      \"type\": \"noul\"\n    }\n  },\n  \"state\": [\n    {\n      \"content\": [\n        {\n          \"text\": \"Evaluate this image.\",\n          \"type\": \"input_text\"\n        },\n        {\n          \"image_url\": \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAACLSURBVHgBdY8NDYAgEIXBBEQgAhG0gRGMYBNtoA2M4EygDYygDfCxvdMbk7d9A453f8ZQMcYAWuBVzIHujeGyxE8nYz7dJWYl01p749zxDKABEzhYfDNaMPZSAUymJLZLuvSsSVUhx4G7VM2xpSzQ5YYhLUHDCGoad47ixXjxY84qi1a9QPgZpdYLPVkbtsfywz3jAAAAAElFTkSuQmCC\",\n          \"type\": \"input_image\"\n        }\n      ],\n      \"role\": \"user\"\n    }\n  ]\n});\n\nfor (const [name, answer] of Object.entries(result.answers)) {\n  if (answer.type === \"refusal\") {\n    console.log(name, \"refused\");\n    continue;\n  }\n  console.log(name, answer);\n}"
         - label: "Python: OpenAI inline image"
           lang: "python"
-          source: "import json\nimport os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\nrequest = json.loads(\"{\\n  \\\"model\\\": \\\"openai/gpt-6-luna\\\",\\n  \\\"questions\\\": {\\n    \\\"contains_text\\\": {\\n      \\\"instructions\\\": \\\"Does the image contain text?\\\",\\n      \\\"type\\\": \\\"noul\\\"\\n    }\\n  },\\n  \\\"state\\\": [\\n    {\\n      \\\"content\\\": [\\n        {\\n          \\\"text\\\": \\\"Evaluate this image.\\\",\\n          \\\"type\\\": \\\"input_text\\\"\\n        },\\n        {\\n          \\\"image_url\\\": \\\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAACLSURBVHgBdY8NDYAgEIXBBEQgAhG0gRGMYBNtoA2M4EygDYygDfCxvdMbk7d9A453f8ZQMcYAWuBVzIHujeGyxE8nYz7dJWYl01p749zxDKABEzhYfDNaMPZSAUymJLZLuvSsSVUhx4G7VM2xpSzQ5YYhLUHDCGoad47ixXjxY84qi1a9QPgZpdYLPVkbtsfywz3jAAAAAElFTkSuQmCC\\\",\\n          \\\"type\\\": \\\"input_image\\\"\\n        }\\n      ],\\n      \\\"role\\\": \\\"user\\\"\\n    }\\n  ]\\n}\")\nresult = client.router.decisions.create(**request)\n\nfor name, answer in result.answers.items():\n    if answer.type == \"refusal\":\n        print(name, \"refused\")\n        continue\n    print(name, answer)"
+          source: "import json\nimport os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"], server_url=\"https://my.orq.ai\")\nrequest = json.loads(\"{\\n  \\\"model\\\": \\\"openai/gpt-6-luna\\\",\\n  \\\"questions\\\": {\\n    \\\"contains_text\\\": {\\n      \\\"instructions\\\": \\\"Does the image contain text?\\\",\\n      \\\"type\\\": \\\"noul\\\"\\n    }\\n  },\\n  \\\"state\\\": [\\n    {\\n      \\\"content\\\": [\\n        {\\n          \\\"text\\\": \\\"Evaluate this image.\\\",\\n          \\\"type\\\": \\\"input_text\\\"\\n        },\\n        {\\n          \\\"image_url\\\": \\\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAACLSURBVHgBdY8NDYAgEIXBBEQgAhG0gRGMYBNtoA2M4EygDYygDfCxvdMbk7d9A453f8ZQMcYAWuBVzIHujeGyxE8nYz7dJWYl01p749zxDKABEzhYfDNaMPZSAUymJLZLuvSsSVUhx4G7VM2xpSzQ5YYhLUHDCGoad47ixXjxY84qi1a9QPgZpdYLPVkbtsfywz3jAAAAAElFTkSuQmCC\\\",\\n          \\\"type\\\": \\\"input_image\\\"\\n        }\\n      ],\\n      \\\"role\\\": \\\"user\\\"\\n    }\\n  ]\\n}\")\nresult = client.router.decisions.create(**request)\n\nfor name, answer in result.answers.items():\n    if answer.type == \"refusal\":\n        print(name, \"refused\")\n        continue\n    print(name, answer)"
         - label: "cURL: OpenAI inline image"
           lang: "bash"
-          source: "curl https://my.orq.ai/v3/router/decisions \\\n  -H \"Authorization: Bearer $ORQ_API_KEY\" \\\n  -H \"Content-Type: application/json\" \\\n  --data-binary @- <<'JSON'\n{\n  \"model\": \"openai/gpt-6-luna\",\n  \"questions\": {\n    \"contains_text\": {\n      \"instructions\": \"Does the image contain text?\",\n      \"type\": \"noul\"\n    }\n  },\n  \"state\": [\n    {\n      \"content\": [\n        {\n          \"text\": \"Evaluate this image.\",\n          \"type\": \"input_text\"\n        },\n        {\n          \"image_url\": \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAACLSURBVHgBdY8NDYAgEIXBBEQgAhG0gRGMYBNtoA2M4EygDYygDfCxvdMbk7d9A453f8ZQMcYAWuBVzIHujeGyxE8nYz7dJWYl01p749zxDKABEzhYfDNaMPZSAUymJLZLuvSsSVUhx4G7VM2xpSzQ5YYhLUHDCGoad47ixXjxY84qi1a9QPgZpdYLPVkbtsfywz3jAAAAAElFTkSuQmCC\",\n          \"type\": \"input_image\"\n        }\n      ],\n      \"role\": \"user\"\n    }\n  ]\n}\nJSON"
+          source: "curl https://my.orq.ai/v3/router/decisions \\\n  -H \"Authorization: Bearer ${ORQ_API_KEY}\" \\\n  -H \"Content-Type: application/json\" \\\n  --data-binary @- <<'JSON'\n{\n  \"model\": \"openai/gpt-6-luna\",\n  \"questions\": {\n    \"contains_text\": {\n      \"instructions\": \"Does the image contain text?\",\n      \"type\": \"noul\"\n    }\n  },\n  \"state\": [\n    {\n      \"content\": [\n        {\n          \"text\": \"Evaluate this image.\",\n          \"type\": \"input_text\"\n        },\n        {\n          \"image_url\": \"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAACLSURBVHgBdY8NDYAgEIXBBEQgAhG0gRGMYBNtoA2M4EygDYygDfCxvdMbk7d9A453f8ZQMcYAWuBVzIHujeGyxE8nYz7dJWYl01p749zxDKABEzhYfDNaMPZSAUymJLZLuvSsSVUhx4G7VM2xpSzQ5YYhLUHDCGoad47ixXjxY84qi1a9QPgZpdYLPVkbtsfywz3jAAAAAElFTkSuQmCC\",\n          \"type\": \"input_image\"\n        }\n      ],\n      \"role\": \"user\"\n    }\n  ]\n}\nJSON"
         - label: "Node.js: Fallbacks, retries and identity"
           lang: "typescript"
-          source: "import { Orq } from \"@orq-ai/node\";\n\nconst orq = new Orq({ apiKey: process.env[\"ORQ_API_KEY\"] ?? \"\" });\nconst result = await orq.router.decisions.create({\n  \"fallbacks\": [\n    {\n      \"model\": \"openai/gpt-5.6-luna\"\n    }\n  ],\n  \"identity\": {\n    \"displayName\": \"Sample customer\",\n    \"id\": \"customer-demo\"\n  },\n  \"model\": \"openai/gpt-6-luna\",\n  \"questions\": {\n    \"positive\": {\n      \"criteria\": {\n        \"false\": \"The customer is unhappy.\",\n        \"true\": \"The customer is happy.\"\n      },\n      \"instructions\": \"Is the sentiment positive?\",\n      \"type\": \"noul\"\n    },\n    \"rating\": {\n      \"criteria\": [\n        \"Negative\",\n        \"Neutral\",\n        \"Positive\"\n      ],\n      \"instructions\": \"Rate sentiment.\",\n      \"type\": \"score\"\n    },\n    \"sentiment\": {\n      \"criteria\": {\n        \"negative\": \"Negative sentiment\",\n        \"neutral\": null,\n        \"positive\": \"Positive sentiment\"\n      },\n      \"instructions\": \"Classify sentiment.\",\n      \"type\": \"choice\"\n    }\n  },\n  \"retry\": {\n    \"count\": 2,\n    \"onCodes\": [\n      429,\n      502,\n      503,\n      504\n    ]\n  },\n  \"state\": \"The customer says: I love this product. It is wonderful!\",\n  \"timeout\": {\n    \"callTimeout\": 2000\n  }\n});\n\nfor (const [name, answer] of Object.entries(result.answers)) {\n  if (answer.type === \"refusal\") {\n    console.log(name, \"refused\");\n    continue;\n  }\n  console.log(name, answer);\n}"
+          source: "import { Orq } from \"@orq-ai/node\";\n\nconst orq = new Orq({ apiKey: process.env[\"ORQ_API_KEY\"] ?? \"\", serverURL: \"https://my.orq.ai\" });\nconst result = await orq.router.decisions.create({\n  \"fallbacks\": [\n    {\n      \"model\": \"openai/gpt-5.6-luna\"\n    }\n  ],\n  \"identity\": {\n    \"displayName\": \"Sample customer\",\n    \"id\": \"customer-demo\"\n  },\n  \"model\": \"openai/gpt-6-luna\",\n  \"questions\": {\n    \"positive\": {\n      \"criteria\": {\n        \"false\": \"The customer is unhappy.\",\n        \"true\": \"The customer is happy.\"\n      },\n      \"instructions\": \"Is the sentiment positive?\",\n      \"type\": \"noul\"\n    },\n    \"rating\": {\n      \"criteria\": [\n        \"Negative\",\n        \"Neutral\",\n        \"Positive\"\n      ],\n      \"instructions\": \"Rate sentiment.\",\n      \"type\": \"score\"\n    },\n    \"sentiment\": {\n      \"criteria\": {\n        \"negative\": \"Negative sentiment\",\n        \"neutral\": null,\n        \"positive\": \"Positive sentiment\"\n      },\n      \"instructions\": \"Classify sentiment.\",\n      \"type\": \"choice\"\n    }\n  },\n  \"retry\": {\n    \"count\": 2,\n    \"onCodes\": [\n      429,\n      502,\n      503,\n      504\n    ]\n  },\n  \"state\": \"The customer says: I love this product. It is wonderful!\",\n  \"timeout\": {\n    \"callTimeout\": 2000\n  }\n});\n\nfor (const [name, answer] of Object.entries(result.answers)) {\n  if (answer.type === \"refusal\") {\n    console.log(name, \"refused\");\n    continue;\n  }\n  console.log(name, answer);\n}"
         - label: "Python: Fallbacks, retries and identity"
           lang: "python"
-          source: "import json\nimport os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\nrequest = json.loads(\"{\\n  \\\"fallbacks\\\": [\\n    {\\n      \\\"model\\\": \\\"openai/gpt-5.6-luna\\\"\\n    }\\n  ],\\n  \\\"identity\\\": {\\n    \\\"id\\\": \\\"customer-demo\\\",\\n    \\\"display_name\\\": \\\"Sample customer\\\"\\n  },\\n  \\\"model\\\": \\\"openai/gpt-6-luna\\\",\\n  \\\"questions\\\": {\\n    \\\"positive\\\": {\\n      \\\"criteria\\\": {\\n        \\\"false\\\": \\\"The customer is unhappy.\\\",\\n        \\\"true\\\": \\\"The customer is happy.\\\"\\n      },\\n      \\\"instructions\\\": \\\"Is the sentiment positive?\\\",\\n      \\\"type\\\": \\\"noul\\\"\\n    },\\n    \\\"rating\\\": {\\n      \\\"criteria\\\": [\\n        \\\"Negative\\\",\\n        \\\"Neutral\\\",\\n        \\\"Positive\\\"\\n      ],\\n      \\\"instructions\\\": \\\"Rate sentiment.\\\",\\n      \\\"type\\\": \\\"score\\\"\\n    },\\n    \\\"sentiment\\\": {\\n      \\\"criteria\\\": {\\n        \\\"negative\\\": \\\"Negative sentiment\\\",\\n        \\\"neutral\\\": null,\\n        \\\"positive\\\": \\\"Positive sentiment\\\"\\n      },\\n      \\\"instructions\\\": \\\"Classify sentiment.\\\",\\n      \\\"type\\\": \\\"choice\\\"\\n    }\\n  },\\n  \\\"retry\\\": {\\n    \\\"count\\\": 2,\\n    \\\"on_codes\\\": [\\n      429,\\n      502,\\n      503,\\n      504\\n    ]\\n  },\\n  \\\"state\\\": \\\"The customer says: I love this product. It is wonderful!\\\",\\n  \\\"timeout\\\": {\\n    \\\"call_timeout\\\": 2000\\n  }\\n}\")\nresult = client.router.decisions.create(**request)\n\nfor name, answer in result.answers.items():\n    if answer.type == \"refusal\":\n        print(name, \"refused\")\n        continue\n    print(name, answer)"
+          source: "import json\nimport os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"], server_url=\"https://my.orq.ai\")\nrequest = json.loads(\"{\\n  \\\"fallbacks\\\": [\\n    {\\n      \\\"model\\\": \\\"openai/gpt-5.6-luna\\\"\\n    }\\n  ],\\n  \\\"identity\\\": {\\n    \\\"id\\\": \\\"customer-demo\\\",\\n    \\\"display_name\\\": \\\"Sample customer\\\"\\n  },\\n  \\\"model\\\": \\\"openai/gpt-6-luna\\\",\\n  \\\"questions\\\": {\\n    \\\"positive\\\": {\\n      \\\"criteria\\\": {\\n        \\\"false\\\": \\\"The customer is unhappy.\\\",\\n        \\\"true\\\": \\\"The customer is happy.\\\"\\n      },\\n      \\\"instructions\\\": \\\"Is the sentiment positive?\\\",\\n      \\\"type\\\": \\\"noul\\\"\\n    },\\n    \\\"rating\\\": {\\n      \\\"criteria\\\": [\\n        \\\"Negative\\\",\\n        \\\"Neutral\\\",\\n        \\\"Positive\\\"\\n      ],\\n      \\\"instructions\\\": \\\"Rate sentiment.\\\",\\n      \\\"type\\\": \\\"score\\\"\\n    },\\n    \\\"sentiment\\\": {\\n      \\\"criteria\\\": {\\n        \\\"negative\\\": \\\"Negative sentiment\\\",\\n        \\\"neutral\\\": null,\\n        \\\"positive\\\": \\\"Positive sentiment\\\"\\n      },\\n      \\\"instructions\\\": \\\"Classify sentiment.\\\",\\n      \\\"type\\\": \\\"choice\\\"\\n    }\\n  },\\n  \\\"retry\\\": {\\n    \\\"count\\\": 2,\\n    \\\"on_codes\\\": [\\n      429,\\n      502,\\n      503,\\n      504\\n    ]\\n  },\\n  \\\"state\\\": \\\"The customer says: I love this product. It is wonderful!\\\",\\n  \\\"timeout\\\": {\\n    \\\"call_timeout\\\": 2000\\n  }\\n}\")\nresult = client.router.decisions.create(**request)\n\nfor name, answer in result.answers.items():\n    if answer.type == \"refusal\":\n        print(name, \"refused\")\n        continue\n    print(name, answer)"
         - label: "cURL: Fallbacks, retries and identity"
           lang: "bash"
-          source: "curl https://my.orq.ai/v3/router/decisions \\\n  -H \"Authorization: Bearer $ORQ_API_KEY\" \\\n  -H \"Content-Type: application/json\" \\\n  --data-binary @- <<'JSON'\n{\n  \"fallbacks\": [\n    {\n      \"model\": \"openai/gpt-5.6-luna\"\n    }\n  ],\n  \"identity\": {\n    \"id\": \"customer-demo\",\n    \"display_name\": \"Sample customer\"\n  },\n  \"model\": \"openai/gpt-6-luna\",\n  \"questions\": {\n    \"positive\": {\n      \"criteria\": {\n        \"false\": \"The customer is unhappy.\",\n        \"true\": \"The customer is happy.\"\n      },\n      \"instructions\": \"Is the sentiment positive?\",\n      \"type\": \"noul\"\n    },\n    \"rating\": {\n      \"criteria\": [\n        \"Negative\",\n        \"Neutral\",\n        \"Positive\"\n      ],\n      \"instructions\": \"Rate sentiment.\",\n      \"type\": \"score\"\n    },\n    \"sentiment\": {\n      \"criteria\": {\n        \"negative\": \"Negative sentiment\",\n        \"neutral\": null,\n        \"positive\": \"Positive sentiment\"\n      },\n      \"instructions\": \"Classify sentiment.\",\n      \"type\": \"choice\"\n    }\n  },\n  \"retry\": {\n    \"count\": 2,\n    \"on_codes\": [\n      429,\n      502,\n      503,\n      504\n    ]\n  },\n  \"state\": \"The customer says: I love this product. It is wonderful!\",\n  \"timeout\": {\n    \"call_timeout\": 2000\n  }\n}\nJSON"
+          source: "curl https://my.orq.ai/v3/router/decisions \\\n  -H \"Authorization: Bearer ${ORQ_API_KEY}\" \\\n  -H \"Content-Type: application/json\" \\\n  --data-binary @- <<'JSON'\n{\n  \"fallbacks\": [\n    {\n      \"model\": \"openai/gpt-5.6-luna\"\n    }\n  ],\n  \"identity\": {\n    \"id\": \"customer-demo\",\n    \"display_name\": \"Sample customer\"\n  },\n  \"model\": \"openai/gpt-6-luna\",\n  \"questions\": {\n    \"positive\": {\n      \"criteria\": {\n        \"false\": \"The customer is unhappy.\",\n        \"true\": \"The customer is happy.\"\n      },\n      \"instructions\": \"Is the sentiment positive?\",\n      \"type\": \"noul\"\n    },\n    \"rating\": {\n      \"criteria\": [\n        \"Negative\",\n        \"Neutral\",\n        \"Positive\"\n      ],\n      \"instructions\": \"Rate sentiment.\",\n      \"type\": \"score\"\n    },\n    \"sentiment\": {\n      \"criteria\": {\n        \"negative\": \"Negative sentiment\",\n        \"neutral\": null,\n        \"positive\": \"Positive sentiment\"\n      },\n      \"instructions\": \"Classify sentiment.\",\n      \"type\": \"choice\"\n    }\n  },\n  \"retry\": {\n    \"count\": 2,\n    \"on_codes\": [\n      429,\n      502,\n      503,\n      504\n    ]\n  },\n  \"state\": \"The customer says: I love this product. It is wonderful!\",\n  \"timeout\": {\n    \"call_timeout\": 2000\n  }\n}\nJSON"
       x-orq-gateway-group: true
       x-speakeasy-group: "router.decisions"
       x-speakeasy-name-override: "create"
@@ -77671,7 +77671,7 @@ paths:
                   $ref: "#/components/schemas/ResponseIdentity"
                   description: "Identity/contact information for the end-user."
                 include:
-                  description: "Additional fields to include in the response. Use web_search_call.action.sources to add source URLs and titles to a web search action, or web_search_call.results for detailed results. See the [Web search](https://docs.orq.ai/ai-gateway/features/web-search) guide for the supported values."
+                  description: "Additional fields to include in the response. Use web_search_call.action.sources to add source URLs and titles to a web search action, or web_search_call.results for detailed results. See the [Web search](https://docs.orq.ai/ai-gateway/features/web-search) guide."
                   items:
                     type: "string"
                   type: "array"
@@ -77965,7 +77965,7 @@ paths:
                   description: "Developer-defined key-value pairs attached to the response (OpenAI spec: `Map<string, string>`). Non-string values are rejected with a 400."
                   type: "object"
                 model:
-                  description: "The model to use in provider/model format (e.g. openai/gpt-4o). Use `agent/<key>` to invoke a pre-configured agent from the orq.ai platform."
+                  description: "The model to use in provider/model format (e.g. openai/gpt-4o). Use `agent/<key>` to invoke a pre-configured agent from this platform."
                   type: "string"
                 parallel_tool_calls:
                   description: "Whether to allow parallel tool calls."
@@ -78200,7 +78200,7 @@ paths:
                         type: "object"
                       - $ref: "#/components/schemas/OrqAdvisorTool"
                       - $ref: "#/components/schemas/OrqSidekickTool"
-                      - description: "An orq.ai platform tool reference. For MCP tools, prefer type 'mcp' with 'key' instead of 'orq:mcp' with 'tool_id'."
+                      - description: "A platform tool reference. For MCP tools, prefer type 'mcp' with 'key' instead of 'orq:mcp' with 'tool_id'."
                         properties:
                           files:
                             description: "Files to stage in /workspace for orq:code_interpreter. Maximum 10 files."
@@ -78246,7 +78246,7 @@ paths:
                             description: "The tool ID (for orq:mcp, orq:http, orq:function)."
                             type: "string"
                           type:
-                            description: "The orq.ai tool type. orq:web_search, orq:web_fetch, and orq:datetime are the canonical names for orq:google_search, orq:web_scraper, and orq:current_date."
+                            description: "The platform tool type. orq:web_search, orq:web_fetch, and orq:datetime are the canonical names for orq:google_search, orq:web_scraper, and orq:current_date."
                             enum:
                               - "orq:web_search"
                               - "orq:web_fetch"
@@ -78269,7 +78269,7 @@ paths:
                             type: "string"
                         required:
                           - "type"
-                        title: "orq.ai Tool"
+                        title: "Orq.ai Tool"
                         type: "object"
                       - description: "An MCP (Model Context Protocol) server tool. Provide server_url for inline mode, or key to reference a pre-configured MCP server."
                         properties:
@@ -78776,7 +78776,7 @@ paths:
         - ApiKey: []
   /v3/websearch:
     post:
-      description: "Search with Exa, Ceramic, Linkup, Tavily, Serper, OpenAI, Perplexity, or DeepSeek and return page URLs, titles, and descriptions in one response format. Authenticate with an API key that grants **websearch.execute** and send **Content-Type: application/json**.\n\n### Provider and credentials\n\nEach request uses the selected provider. Exa uses **auto** search, Linkup uses **standard** depth, Tavily uses **basic** depth, and Perplexity and DeepSeek use their standard Search APIs. DeepSeek accepts queries of at most 128 characters. OpenAI runs one forced **web_search** tool call on gpt-5.6-luna through the Responses API and returns the raw search results.\n\nCredentials are selected from the authenticated workspace. A configured provider integration takes precedence over ORQ-managed credentials: the default integration is used, or the first configured integration if no default is set. Configure BYOK in the workspace integrations settings. Invalid integration credentials cause an error.\n\n### Billing\n\nManaged searches use the same credits as the **AI Gateway** and charge the provider cost plus **US$0.001 per search** (US$1 per 1,000 searches). BYOK searches consume no ORQ credits and add no ORQ markup; the provider bills the integration owner directly.\n\nExa's published auto rate is **US$7 per 1,000 requests** for up to 10 results, or **US$8 per 1,000** including the ORQ markup. Exa charges use the actual cost reported by the provider.\n\nPerplexity's published Search API rate is **US$5 per 1,000 requests** and DeepSeek's is **US$0.75 per 1,000 requests**. OpenAI web search costs **US$10 per 1,000 tool calls** plus the gpt-5.6-luna tokens of the Responses call, computed from the usage reported by OpenAI, so each search is typically US$0.012 to US$0.015 before the ORQ markup.\n\nA successful managed search is billable even if an output guardrail or output redaction failure prevents the results from being returned.\n\n### Policies and observability\n\nPII Redaction is the only supported request plugin. Workspace PII settings and matching guardrail rules also apply. Query redaction runs before input guardrails and the provider call; result redaction runs before output guardrails and the response.\n\nSearch spans and metrics record the provider, latency, result count, and cost. Use the **x-orq-trace-id** response header to find the trace."
+      description: "Search with Exa, Ceramic, Linkup, Tavily, Serper, OpenAI, Perplexity, or DeepSeek and return page URLs, titles, and descriptions in one response format. Authenticate with an API key that grants **websearch.execute** and send **Content-Type: application/json**.\n\n### Provider and credentials\n\nEach request uses the selected provider. Exa uses **auto** search, Linkup uses **standard** depth, Tavily uses **basic** depth, and Perplexity and DeepSeek use their standard Search APIs. DeepSeek accepts queries of at most 128 characters. OpenAI runs one forced **web_search** tool call on gpt-5.6-luna through the Responses API and returns the raw search results.\n\nCredentials are selected from the authenticated workspace. A configured provider integration takes precedence over platform-managed credentials: the default integration is used, or the first configured integration if no default is set. Configure BYOK in the workspace integrations settings. Invalid integration credentials cause an error.\n\n### Billing\n\nManaged searches use the same credits as the **AI Gateway** and charge the provider cost plus **US$0.001 per search** (US$1 per 1,000 searches). BYOK searches consume no platform credits and add no platform markup; the provider bills the integration owner directly.\n\nExa's published auto rate is **US$7 per 1,000 requests** for up to 10 results, or **US$8 per 1,000** including the platform markup. Exa charges use the actual cost reported by the provider.\n\nPerplexity's published Search API rate is **US$5 per 1,000 requests** and DeepSeek's is **US$0.75 per 1,000 requests**. OpenAI web search costs **US$10 per 1,000 tool calls** plus the gpt-5.6-luna tokens of the Responses call, computed from the usage reported by OpenAI, so each search is typically US$0.012 to US$0.015 before the platform markup.\n\nA successful managed search is billable even if an output guardrail or output redaction failure prevents the results from being returned.\n\n### Policies and observability\n\nPII Redaction is the only supported request plugin. Workspace PII settings and matching guardrail rules also apply. Query redaction runs before input guardrails and the provider call; result redaction runs before output guardrails and the response.\n\nSearch spans and metrics record the provider, latency, result count, and cost. Use the **x-orq-trace-id** response header to find the trace."
       operationId: "search-web"
       requestBody:
         content:
@@ -78965,7 +78965,7 @@ paths:
                         description: "Query sent to the provider after any required PII redaction."
                         type: "string"
                       requestId:
-                        description: "ORQ-generated identifier for this search request. Distinct from the trace ID in the response headers."
+                        description: "Platform-generated identifier for this search request. Distinct from the trace ID in the response headers."
                         type: "string"
                     required:
                       - "query"
@@ -79025,7 +79025,7 @@ paths:
             application/json:
               examples:
                 insufficient_credits:
-                  summary: "Managed search has no available ORQ credits"
+                  summary: "Managed search has no available platform credits"
                   value:
                     error:
                       message: "insufficient credits for managed web search"
@@ -79040,7 +79040,7 @@ paths:
                 required:
                   - "error"
                 type: "object"
-          description: "Managed search requires a positive ORQ credit balance. Add credits before retrying. BYOK does not require ORQ credits."
+          description: "Managed search requires a positive platform credit balance. Add credits before retrying. BYOK does not require platform credits."
         "403":
           content:
             application/json:
@@ -79145,7 +79145,7 @@ paths:
       x-code-samples:
         - label: "Node.js"
           lang: "typescript"
-          source: "import { Orq } from \"@orq-ai/node\";\n\nconst orq = new Orq({ apiKey: process.env.ORQ_API_KEY });\nconst result = await orq.websearch.search({\n  query: \"Things to do in Salt Lake City in fall\",\n  provider: \"exa\",\n  limit: 10,\n  identity: { id: \"customer-123\" },\n});"
+          source: "import { Orq } from \"@orq-ai/node\";\n\nconst orq = new Orq({ apiKey: process.env[\"ORQ_API_KEY\"], serverURL: \"https://my.orq.ai\" });\nconst result = await orq.websearch.search({\n  query: \"Things to do in Salt Lake City in fall\",\n  provider: \"exa\",\n  limit: 10,\n  identity: { id: \"customer-123\" },\n});"
       x-orq-gateway-group: true
       x-speakeasy-group: "websearch"
       x-speakeasy-name-override: "search"
