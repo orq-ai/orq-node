@@ -2592,7 +2592,7 @@ components:
           properties:
             _id:
               type: "string"
-              default: "reasoning_01m6yn4ps3eaxtbfkdcfneqt4g"
+              default: "reasoning_01m6zh2tmrs4tjc8fpz30qw1n7"
               description: "Unique identifier for the part. Format: reasoning_{ulid} (e.g., reasoning_01hxyz...)"
               example: "reasoning_01hxyz123abc"
             kind:
@@ -18877,6 +18877,67 @@ components:
           allOf:
             - $ref: "#/components/schemas/Skill"
           description: "Newly created skill."
+    DeleteSkillFileResponse:
+      required:
+        - "skill"
+      type: "object"
+      properties:
+        skill:
+          allOf:
+            - $ref: "#/components/schemas/Skill"
+          description: "Updated skill."
+    GetSkillFileContentResponse:
+      required:
+        - "download_url"
+      type: "object"
+      properties:
+        download_url:
+          type: "string"
+          description: "Time-limited presigned URL for downloading the file content."
+    ImportSkillBundleRequest:
+      required:
+        - "bundle"
+      type: "object"
+      properties:
+        project_id:
+          type: "string"
+          description: "Project that should contain the skill when creating a new skill.\n Import creates a new skill; a conflicting name returns AlreadyExists."
+        path:
+          type: "string"
+          description: "Project path where the new skill should be stored."
+        bundle:
+          type: "string"
+          description: "Zip archive containing SKILL.md at the root and optional supporting\n files. In JSON requests the bytes are base64 encoded.\n Operating-system archive metadata (`__MACOSX`, `._*` AppleDouble\n sidecars, `.DS_Store`, `Thumbs.db`, `desktop.ini`) is ignored."
+          format: "bytes"
+    ImportSkillBundleResponse:
+      required:
+        - "skill"
+      type: "object"
+      properties:
+        skill:
+          allOf:
+            - $ref: "#/components/schemas/Skill"
+          description: "Created skill."
+    ImportSkillFromRepositoryRequest:
+      type: "object"
+      properties:
+        connection_id:
+          type: "string"
+        repository_url:
+          type: "string"
+        ref:
+          type: "string"
+        subdirectory:
+          type: "string"
+        project_id:
+          type: "string"
+        path:
+          type: "string"
+    ImportSkillFromRepositoryResponse:
+      type: "object"
+      properties:
+        skill:
+          $ref: "#/components/schemas/Skill"
     GetSkillResponse:
       required:
         - "skill"
@@ -18923,6 +18984,119 @@ components:
           allOf:
             - $ref: "#/components/schemas/Skill"
           description: "Updated skill."
+    ReplaceSkillBundleRequest:
+      type: "object"
+      properties:
+        bundle:
+          type: "string"
+          format: "bytes"
+    ReplaceSkillBundleResponse:
+      type: "object"
+      properties:
+        skill:
+          $ref: "#/components/schemas/Skill"
+    PutSkillFileRequest:
+      required:
+        - "path"
+        - "content"
+      type: "object"
+      properties:
+        path:
+          type: "string"
+          description: "Relative path within the skill bundle, including subdirectory\n components (e.g. \"scripts/extract.py\")."
+        content:
+          type: "string"
+          description: "Raw file content. The MIME type is derived from the path extension."
+          format: "bytes"
+    PutSkillFileResponse:
+      required:
+        - "skill"
+      type: "object"
+      properties:
+        skill:
+          allOf:
+            - $ref: "#/components/schemas/Skill"
+          description: "Updated skill."
+    RenameSkillFileRequest:
+      required:
+        - "old_path"
+        - "new_path"
+      type: "object"
+      properties:
+        old_path:
+          type: "string"
+          description: "Current relative path of the file within the skill bundle."
+        new_path:
+          type: "string"
+          description: "New relative path for the file within the skill bundle, including any\n subdirectory components (e.g. \"scripts/extract.py\")."
+    RenameSkillFileResponse:
+      required:
+        - "skill"
+      type: "object"
+      properties:
+        skill:
+          allOf:
+            - $ref: "#/components/schemas/Skill"
+          description: "Updated skill."
+    SaveSkillFilesRequest:
+      type: "object"
+      properties:
+        files:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/SkillFileWrite"
+        display_name:
+          type: "string"
+        description:
+          type: "string"
+        instructions:
+          type: "string"
+    SaveSkillFilesResponse:
+      type: "object"
+      properties:
+        skill:
+          $ref: "#/components/schemas/Skill"
+    ListSkillVersionsResponse:
+      type: "object"
+      properties:
+        object:
+          type: "string"
+        data:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/SkillVersion"
+        has_more:
+          type: "boolean"
+    ExportSkillBundleResponse:
+      type: "object"
+      properties:
+        bundle:
+          type: "string"
+          description: "Zip archive bytes, base64 encoded in JSON responses."
+          format: "bytes"
+        content_type:
+          type: "string"
+          description: "Content type of the bundle response."
+        filename:
+          type: "string"
+          description: "Suggested filename for the downloaded archive."
+    RestoreSkillVersionRequest:
+      required:
+        - "version_id"
+      type: "object"
+      properties:
+        version_id:
+          type: "string"
+          description: "Version ID (activity ID) to restore to."
+    RestoreSkillVersionResponse:
+      required:
+        - "skill"
+      type: "object"
+      properties:
+        skill:
+          allOf:
+            - $ref: "#/components/schemas/Skill"
+          description: "Restored skill."
     Skill:
       required:
         - "skill_id"
@@ -18980,6 +19154,69 @@ components:
         version:
           type: "string"
           description: "Latest semver for the skill. It advances when the skill's definition\n changes and is returned on every read."
+        files:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/SkillFile"
+        has_files:
+          type: "boolean"
+        repository_source:
+          $ref: "#/components/schemas/SkillRepositorySource"
+    SkillFileWrite:
+      type: "object"
+      properties:
+        path:
+          type: "string"
+        content:
+          type: "string"
+          format: "bytes"
+    SkillVersion:
+      type: "object"
+      properties:
+        version_id:
+          type: "string"
+        version:
+          type: "string"
+        created_at:
+          type: "string"
+          format: "date-time"
+        files:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/SkillFile"
+    SkillFile:
+      required:
+        - "path"
+        - "size_bytes"
+        - "sha256"
+        - "content_type"
+      type: "object"
+      properties:
+        path:
+          type: "string"
+          description: "Relative path within the skill bundle, including any subdirectory\n components (e.g. \"scripts/extract.py\")."
+        size_bytes:
+          type: "string"
+          description: "Size of the file in bytes."
+        sha256:
+          type: "string"
+          description: "SHA-256 hex digest of the file content; used as the content-addressed\n storage key."
+        content_type:
+          type: "string"
+          description: "MIME type of the file content."
+    SkillRepositorySource:
+      type: "object"
+      properties:
+        connection_id:
+          type: "string"
+        repository_url:
+          type: "string"
+        ref:
+          type: "string"
+        subdirectory:
+          type: "string"
+        commit_sha:
+          type: "string"
     SmartRouterProfile:
       type: "string"
       enum:
@@ -27298,7 +27535,7 @@ paths:
                                 type: "string"
                                 format: "ulid"
                                 pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                                default: "01M6YN4PRJB7F9Z1AAMXAM621P"
+                                default: "01M6ZH2TM2S0C1YE95JB5RVM08"
                                 readOnly: true
                                 description: "The unique identifier of the playground knowledge base"
                               knowledge_id:
@@ -36701,7 +36938,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01M6YN4PSTPGKEBSXENRVM7Y8J"
+                                          default: "01M6ZH2TNK5TMGR5VDTNDV9XJT"
                                         name:
                                           type: "string"
                                         description:
@@ -38328,7 +38565,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01M6YN4PT1RBSWCFS56D63GW5A"
+                                          default: "01M6ZH2TNXVYXHQVPTW4602CKK"
                                         name:
                                           type: "string"
                                         description:
@@ -47386,7 +47623,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M6YN4PTNWBZAMYQV3Y17WP33"
+                              default: "tool_01M6ZH2TPMH3CZSS77KWVBPKMT"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -47487,7 +47724,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M6YN4PTPNBBTH8YD4SQ297Z9"
+                              default: "tool_01M6ZH2TPMNA1M9WW76XF4W99M"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -47590,7 +47827,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M6YN4PTPPNFMSNJV2XCDGZG4"
+                              default: "tool_01M6ZH2TPM9SG8YHQZHVYEP9VH"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -47734,7 +47971,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M6YN4PTQMYPEM2EF2J6VCS1S"
+                              default: "tool_01M6ZH2TPN59YZSH4144E4VMPB"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -48225,7 +48462,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M6YN4PTRATGY6QYWQHGJE386"
+                        default: "tool_01M6ZH2TPP5327B9MP3QJ37960"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -48326,7 +48563,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M6YN4PTRSBSR95QG8XWQA316"
+                        default: "tool_01M6ZH2TPQ9BMKCHB7KQA0AR6S"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -48429,7 +48666,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M6YN4PTR3TX5WEBHVH8MEWZ5"
+                        default: "tool_01M6ZH2TPQTBBKPTKGRRKFZ89B"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -48573,7 +48810,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M6YN4PTS1H8APC8SXR5GAV4Y"
+                        default: "tool_01M6ZH2TPRBHG3YQ0VPT1P9GTC"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -49077,7 +49314,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M6YN4PTTQRHB8NQKJ7FZDDCT"
+                        default: "tool_01M6ZH2TPT8EKBSZPPDY6BZ084"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -49178,7 +49415,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M6YN4PTTQ73MX7M7A48393F3"
+                        default: "tool_01M6ZH2TPTRGSY5VY4BNWKPGVC"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -49281,7 +49518,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M6YN4PTTKB5A5GBZGZXPNQZE"
+                        default: "tool_01M6ZH2TPT7WKF0EKK4RVTVHNP"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -49425,7 +49662,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M6YN4PTTNHNAN19Z33KX8K3Z"
+                        default: "tool_01M6ZH2TPVE0ZBNQ4EX5XRAPX6"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -49592,7 +49829,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M6YN4PTWWNR61PYG9B8BJH5P"
+                        default: "tool_01M6ZH2TPYYQSFY1G6XXFCNWZM"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -49693,7 +49930,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M6YN4PTXG04B0W152Q21BCT7"
+                        default: "tool_01M6ZH2TPYR52M47XJD4MF5WSK"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -49796,7 +50033,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M6YN4PTXQ88PPYVS14JKDAD9"
+                        default: "tool_01M6ZH2TPYM560413EJGNAJ5BT"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -49940,7 +50177,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M6YN4PTX8FY4ZZV0C4WV4YQ1"
+                        default: "tool_01M6ZH2TPZBY7GGZHPPGWXZC44"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -74133,6 +74370,153 @@ paths:
           source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\nconst result = await client.skills.create({\n  displayName: 'summarize_support_ticket',\n  description: 'Summarize support tickets into concise resolution notes.',\n  projectId: 'proj_01HZXW2K7Y8Q9M0N1P2R3S4T5V',\n  path: '/customer-success/skills/summarize-support-ticket',\n  tags: ['support', 'summarization'],\n  instructions:\n    'Read the ticket conversation and return the problem, customer sentiment, and proposed next step.',\n});\n\nconsole.log(result.skill.skillId);\n"
       security:
         - ApiKey: []
+  /v2/skills/**:
+    delete:
+      tags:
+        - "Skills"
+      summary: "Delete a skill file"
+      description: "Removes a file from a skill's bundle by its relative path. SKILL.md cannot be deleted."
+      operationId: "SkillDeleteFile"
+      parameters:
+        - name: "skill_id"
+          in: "path"
+          description: "Skill ID or display name to update."
+          required: true
+          schema:
+            type: "string"
+        - name: "path"
+          in: "query"
+          description: "Relative path of the file to delete within the skill bundle."
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeleteSkillFileResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      x-speakeasy-group: "skills"
+      x-speakeasy-name-override: "deleteFile"
+      x-code-samples:
+        - lang: "typescript"
+          label: "Node.js - Delete a skill file"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst orq = new Orq({ apiKey: process.env.ORQ_API_KEY });\nawait orq.skills.deleteFile({\n  skillId: 'skill_01HZXW2K7Y8Q9M0N1P2R3S4T5V',\n  path: 'references/guide.md',\n});\n"
+      security:
+        - ApiKey: []
+  /v2/skills/**:presign:
+    get:
+      tags:
+        - "Skills"
+      summary: "Get a presigned URL for a skill file"
+      description: "Returns a time-limited presigned URL that can be used to download the raw content of a file in the skill bundle."
+      operationId: "SkillGetFileContent"
+      parameters:
+        - name: "skill_id"
+          in: "path"
+          description: "Skill ID or display name."
+          required: true
+          schema:
+            type: "string"
+        - name: "path"
+          in: "query"
+          description: "Relative path of the file within the skill bundle."
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetSkillFileContentResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      x-speakeasy-group: "skills"
+      x-speakeasy-name-override: "getFileContent"
+      x-code-samples:
+        - lang: "typescript"
+          label: "Node.js - Download a skill file"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst orq = new Orq({ apiKey: process.env.ORQ_API_KEY });\nconst result = await orq.skills.getFileContent({\n  skillId: 'skill_01HZXW2K7Y8Q9M0N1P2R3S4T5V',\n  path: 'references/guide.md',\n});\nconst response = await fetch(result.downloadUrl);\nconsole.log(await response.text());\n"
+      security:
+        - ApiKey: []
+  /v2/skills/import:
+    post:
+      tags:
+        - "Skills"
+      summary: "Import a skill bundle"
+      description: "Uploads a zip archive containing a SKILL.md file and optional supporting files. Creates a new file-bearing skill. An existing display name returns AlreadyExists. Operating-system archive metadata is ignored: `__MACOSX` entries, AppleDouble sidecars (`._*`), and per-directory metadata such as `.DS_Store`, `Thumbs.db`, and `desktop.ini` are dropped and do not count toward the per-skill file limit."
+      operationId: "SkillImportBundle"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ImportSkillBundleRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ImportSkillBundleResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      x-speakeasy-group: "skills"
+      x-speakeasy-name-override: "importBundle"
+      x-code-samples:
+        - lang: "typescript"
+          label: "Node.js - ImportBundle"
+          source: "import { Orq } from '@orq-ai/node';\nimport { readFile } from 'node:fs/promises';\n\nconst orq = new Orq({ apiKey: process.env.ORQ_API_KEY });\nconst result = await orq.skills.importBundle({\n  projectId: 'proj_01HZXW2K7Y8Q9M0N1P2R3S4T5V',\n  bundle: (await readFile('skill.zip')).toString('base64'),\n});\nconsole.log(result);\n"
+      security:
+        - ApiKey: []
+  /v2/skills/import/repository:
+    post:
+      tags:
+        - "Skills"
+      summary: "Import a skill from a repository"
+      description: "Creates an editable skill snapshot from a repository directory using a workspace source control connection. The source commit is retained; subsequent repository changes are not synchronized."
+      operationId: "SkillImportFromRepository"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ImportSkillFromRepositoryRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ImportSkillFromRepositoryResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      x-speakeasy-group: "skills"
+      x-speakeasy-name-override: "importFromRepository"
+      x-code-samples:
+        - lang: "TypeScript"
+          source: "import { Orq } from '@orq-ai/node';\nconst orq = new Orq({ apiKey: process.env.ORQ_API_KEY });\nawait orq.skills.importFromRepository({ connectionId: 'connection-id', repositoryUrl: 'https://github.com/example/skills', ref: 'main', subdirectory: 'skills/review', projectId: 'project-id' });\n"
+      security:
+        - ApiKey: []
   /v2/skills/{skill_id}:
     get:
       tags:
@@ -74270,6 +74654,289 @@ paths:
         - lang: "typescript"
           label: "Node.js - Update skill instructions"
           source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\nconst result = await client.skills.update({\n  skillId: 'skill_01HZXW2K7Y8Q9M0N1P2R3S4T5V',\n  description: 'Summarize support tickets for escalation handoff.',\n  tags: ['support', 'handoff'],\n  instructions:\n    'Return the issue summary, urgency, attempted fixes, and recommended owner.',\n});\n\nconsole.log(result.skill.version);\n"
+      security:
+        - ApiKey: []
+  /v2/skills/{skill_id}/bundle:
+    put:
+      tags:
+        - "Skills"
+      summary: "Replace a skill bundle"
+      operationId: "SkillReplaceBundle"
+      parameters:
+        - name: "skill_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ReplaceSkillBundleRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReplaceSkillBundleResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      x-speakeasy-group: "skills"
+      x-speakeasy-name-override: "replaceBundle"
+      x-code-samples:
+        - lang: "typescript"
+          label: "Node.js - ReplaceBundle"
+          source: "import { Orq } from '@orq-ai/node';\nimport { readFile } from 'node:fs/promises';\n\nconst orq = new Orq({ apiKey: process.env.ORQ_API_KEY });\nconst result = await orq.skills.replaceBundle({\n  skillId: 'skill_01HZXW2K7Y8Q9M0N1P2R3S4T5V',\n  bundle: (await readFile('skill.zip')).toString('base64'),\n});\nconsole.log(result);\n"
+      security:
+        - ApiKey: []
+  /v2/skills/{skill_id}/files:
+    put:
+      tags:
+        - "Skills"
+      summary: "Add or replace a skill file"
+      description: "Uploads a single file to a skill's bundle. If the path already exists the file is replaced; otherwise it is added to the manifest."
+      operationId: "SkillPutFile"
+      parameters:
+        - name: "skill_id"
+          in: "path"
+          description: "Skill ID or display name to update."
+          required: true
+          schema:
+            type: "string"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PutSkillFileRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PutSkillFileResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      x-speakeasy-group: "skills"
+      x-speakeasy-name-override: "putFile"
+      x-code-samples:
+        - lang: "typescript"
+          label: "Node.js - Put a skill file"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst orq = new Orq({ apiKey: process.env.ORQ_API_KEY });\nconst result = await orq.skills.putFile({\n  skillId: 'skill_01HZXW2K7Y8Q9M0N1P2R3S4T5V',\n  path: 'references/guide.md',\n  content: Buffer.from('# Reference\\n').toString('base64'),\n});\nconsole.log(result.skill.files);\n"
+      security:
+        - ApiKey: []
+  /v2/skills/{skill_id}/files/rename:
+    post:
+      tags:
+        - "Skills"
+      summary: "Rename a skill file"
+      description: "Changes a file's path within a skill's bundle. The file content is unchanged. SKILL.md cannot be renamed."
+      operationId: "SkillRenameFile"
+      parameters:
+        - name: "skill_id"
+          in: "path"
+          description: "Skill ID or display name to update."
+          required: true
+          schema:
+            type: "string"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RenameSkillFileRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RenameSkillFileResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      x-speakeasy-group: "skills"
+      x-speakeasy-name-override: "renameFile"
+      x-code-samples:
+        - lang: "typescript"
+          label: "Node.js - Rename a skill file"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst orq = new Orq({ apiKey: process.env.ORQ_API_KEY });\nawait orq.skills.renameFile({\n  skillId: 'skill_01HZXW2K7Y8Q9M0N1P2R3S4T5V',\n  oldPath: 'references/guide.md',\n  newPath: 'references/overview.md',\n});\n"
+      security:
+        - ApiKey: []
+  /v2/skills/{skill_id}/files:save:
+    post:
+      tags:
+        - "Skills"
+      summary: "Save skill files atomically"
+      description: "Saves file drafts and optional skill metadata as one version."
+      operationId: "SkillSaveFiles"
+      parameters:
+        - name: "skill_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SaveSkillFilesRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SaveSkillFilesResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      x-speakeasy-group: "skills"
+      x-speakeasy-name-override: "saveFiles"
+      x-code-samples:
+        - lang: "typescript"
+          label: "Node.js - Save skill files"
+          source: "import { Orq } from '@orq-ai/node';\nimport { readFile } from 'node:fs/promises';\n\nconst orq = new Orq({ apiKey: process.env.ORQ_API_KEY });\nawait orq.skills.saveFiles({\n  skillId: 'skill_01HZXW2K7Y8Q9M0N1P2R3S4T5V',\n  files: [{ path: 'SKILL.md', content: (await readFile('SKILL.md')).toString('base64') }],\n});\n"
+      security:
+        - ApiKey: []
+  /v2/skills/{skill_id}/versions:
+    get:
+      tags:
+        - "Skills"
+      summary: "List skill versions"
+      operationId: "SkillListVersions"
+      parameters:
+        - name: "skill_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+        - name: "limit"
+          in: "query"
+          schema:
+            type: "integer"
+            format: "int32"
+        - name: "starting_after"
+          in: "query"
+          schema:
+            type: "string"
+        - name: "ending_before"
+          in: "query"
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListSkillVersionsResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      x-speakeasy-group: "skills"
+      x-speakeasy-name-override: "listVersions"
+      x-code-samples:
+        - lang: "typescript"
+          label: "Node.js - ListVersions"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst orq = new Orq({ apiKey: process.env.ORQ_API_KEY });\nconst result = await orq.skills.listVersions({\n  skillId: 'skill_01HZXW2K7Y8Q9M0N1P2R3S4T5V',\n  limit: 25,\n});\nconsole.log(result);\n"
+      security:
+        - ApiKey: []
+  /v2/skills/{skill_id}:export:
+    get:
+      tags:
+        - "Skills"
+      summary: "Export a skill bundle"
+      description: "Downloads the skill as a zip archive containing the SKILL.md file and all files in the manifest. Basic Skills receive a synthesized SKILL.md."
+      operationId: "SkillExportBundle"
+      parameters:
+        - name: "skill_id"
+          in: "path"
+          description: "Skill ID or display name to export."
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ExportSkillBundleResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      x-speakeasy-group: "skills"
+      x-speakeasy-name-override: "exportBundle"
+      x-code-samples:
+        - lang: "typescript"
+          label: "Node.js - ExportBundle"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst orq = new Orq({ apiKey: process.env.ORQ_API_KEY });\nconst result = await orq.skills.exportBundle({\n  skillId: 'skill_01HZXW2K7Y8Q9M0N1P2R3S4T5V',\n});\nconsole.log(result);\n"
+      security:
+        - ApiKey: []
+  /v2/skills/{skill_id}:restore:
+    post:
+      tags:
+        - "Skills"
+      summary: "Restore a skill version"
+      description: "Restores a skill to a previous version recorded in the activity log. The restored state becomes a new version."
+      operationId: "SkillRestoreVersion"
+      parameters:
+        - name: "skill_id"
+          in: "path"
+          description: "Skill ID or display name to restore."
+          required: true
+          schema:
+            type: "string"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RestoreSkillVersionRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RestoreSkillVersionResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      x-speakeasy-group: "skills"
+      x-speakeasy-name-override: "restoreVersion"
+      x-code-samples:
+        - lang: "typescript"
+          label: "Node.js - RestoreVersion"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst orq = new Orq({ apiKey: process.env.ORQ_API_KEY });\nconst result = await orq.skills.restoreVersion({\n  skillId: 'skill_01HZXW2K7Y8Q9M0N1P2R3S4T5V',\n  versionId: '01HZXW2K7Y8Q9M0N1P2R3S4T5V',\n});\nconsole.log(result);\n"
       security:
         - ApiKey: []
   /v2/smart-routers:
