@@ -59,6 +59,10 @@ export type RetrieveResponseResponseBody = {
   frequencyPenalty: number;
   id: string;
   incompleteDetails: components.IncompleteDetails | null;
+  /**
+   * Always null. Retained for compatibility with older SDKs; input content is not returned.
+   */
+  input: Array<any> | null;
   instructions: string | null;
   maxOutputTokens: number | null;
   maxToolCalls: number | null;
@@ -168,6 +172,7 @@ export const RetrieveResponseResponseBody$inboundSchema: z.ZodType<
   frequency_penalty: z.number(),
   id: z.string(),
   incomplete_details: z.nullable(components.IncompleteDetails$inboundSchema),
+  input: z.nullable(z.array(z.any())),
   instructions: z.nullable(z.string()),
   max_output_tokens: z.nullable(z.number().int()),
   max_tool_calls: z.nullable(z.number().int()),

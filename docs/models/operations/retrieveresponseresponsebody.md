@@ -20,34 +20,40 @@ let value: RetrieveResponseResponseBody = {
   incompleteDetails: {
     reason: "<value>",
   },
+  input: [
+    "<value 1>",
+  ],
   instructions: "<value>",
-  maxOutputTokens: 832610,
-  maxToolCalls: null,
+  maxOutputTokens: null,
+  maxToolCalls: 264764,
   metadata: {
     "key": "<value>",
-    "key1": "<value>",
   },
-  model: "Challenger",
+  model: "A8",
   object: "<value>",
-  output: [],
-  parallelToolCalls: true,
-  presencePenalty: 9086.53,
+  output: [
+    "<value 1>",
+    "<value 2>",
+    "<value 3>",
+  ],
+  parallelToolCalls: false,
+  presencePenalty: 6082.87,
   previousResponseId: "<id>",
   promptCacheKey: "<value>",
   promptCacheOptions: {},
   promptCacheRetention: "<value>",
   reasoning: {},
-  safetyIdentifier: "<value>",
-  serviceTier: "flex",
-  status: "queued",
+  safetyIdentifier: null,
+  serviceTier: "ultrafast",
+  status: "failed",
   store: false,
-  temperature: 7616.96,
+  temperature: 1686.88,
   text: "<value>",
   toolChoice: "<value>",
   tools: [],
-  topLogprobs: 147106,
-  topP: 289.93,
-  truncation: "disabled",
+  topLogprobs: 295476,
+  topP: 8427.85,
+  truncation: "auto",
   usage: {
     inputTokens: 276387,
     inputTokensDetails: {
@@ -61,7 +67,7 @@ let value: RetrieveResponseResponseBody = {
     },
     totalTokens: 938481,
   },
-  user: "Florence_Donnelly",
+  user: "Clinton9",
 };
 ```
 
@@ -77,6 +83,7 @@ let value: RetrieveResponseResponseBody = {
 | `frequencyPenalty`                                                                                  | *number*                                                                                            | :heavy_check_mark:                                                                                  | N/A                                                                                                 |
 | `id`                                                                                                | *string*                                                                                            | :heavy_check_mark:                                                                                  | N/A                                                                                                 |
 | `incompleteDetails`                                                                                 | [components.IncompleteDetails](../../models/components/incompletedetails.md)                        | :heavy_check_mark:                                                                                  | N/A                                                                                                 |
+| `input`                                                                                             | *any*[]                                                                                             | :heavy_check_mark:                                                                                  | Always null. Retained for compatibility with older SDKs; input content is not returned.             |
 | `instructions`                                                                                      | *string*                                                                                            | :heavy_check_mark:                                                                                  | N/A                                                                                                 |
 | `maxOutputTokens`                                                                                   | *number*                                                                                            | :heavy_check_mark:                                                                                  | N/A                                                                                                 |
 | `maxToolCalls`                                                                                      | *number*                                                                                            | :heavy_check_mark:                                                                                  | N/A                                                                                                 |
