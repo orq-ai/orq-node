@@ -1249,7 +1249,7 @@ components:
           type: "string"
           enum:
             - "between_tools"
-          description: "Returns Sonnet 5.5 progress updates between tool calls without extended thinking."
+          description: "Returns progress updates between tool calls without extended thinking."
         budget_tokens:
           type: "number"
         display:
@@ -1262,7 +1262,7 @@ components:
       required:
         - "type"
       title: "Thinking config between tools"
-      description: "Enables progress updates between tool calls on Sonnet 5.5."
+      description: "Enables progress updates between tool calls on models that support it."
     PIIRedactionPlugin:
       type: "object"
       properties:
@@ -2591,7 +2591,7 @@ components:
           properties:
             _id:
               type: "string"
-              default: "reasoning_01m728askavnqw8xsgc78t38th"
+              default: "reasoning_01m72av1y03xq5dswj77jshctc"
               description: "Unique identifier for the part. Format: reasoning_{ulid} (e.g., reasoning_01hxyz...)"
               example: "reasoning_01hxyz123abc"
             kind:
@@ -21202,8 +21202,176 @@ components:
                 description: "An input item. The \"type\" field determines the item kind."
                 properties:
                   content:
-                    description: "The content of the item."
-                    type: "string"
+                    anyOf:
+                      - title: "Text"
+                        type: "string"
+                      - items:
+                          anyOf:
+                            - description: "A text content part."
+                              properties:
+                                cache_control:
+                                  properties:
+                                    ttl:
+                                      default: "5m"
+                                      description: "The time-to-live for the cache control breakpoint. This may be one of the following values:\n\n- `5m`: 5 minutes\n- `1h`: 1 hour\n\nDefaults to `5m`. Only supported by Anthropic Claude models."
+                                      enum:
+                                        - "5m"
+                                        - "1h"
+                                      type: "string"
+                                    type:
+                                      description: "Create a cache control breakpoint at this content block. Accepts only the value \"ephemeral\"."
+                                      enum:
+                                        - "ephemeral"
+                                      type: "string"
+                                  required:
+                                    - "type"
+                                  title: "Cache control"
+                                  type: "object"
+                                prompt_cache_breakpoint:
+                                  description: "An explicit OpenAI cache boundary for GPT-5.6 and later. Omitted ttl inherits prompt_cache_options.ttl."
+                                  properties:
+                                    mode:
+                                      enum:
+                                        - "explicit"
+                                      type: "string"
+                                    ttl:
+                                      enum:
+                                        - "30m"
+                                        - "12h"
+                                      type: "string"
+                                  required:
+                                    - "mode"
+                                  type: "object"
+                                text:
+                                  description: "The text content."
+                                  type: "string"
+                                type:
+                                  enum:
+                                    - "input_text"
+                                  type: "string"
+                              required:
+                                - "type"
+                                - "text"
+                              title: "Text"
+                              type: "object"
+                            - description: "An image content part."
+                              properties:
+                                cache_control:
+                                  properties:
+                                    ttl:
+                                      default: "5m"
+                                      description: "The time-to-live for the cache control breakpoint. This may be one of the following values:\n\n- `5m`: 5 minutes\n- `1h`: 1 hour\n\nDefaults to `5m`. Only supported by Anthropic Claude models."
+                                      enum:
+                                        - "5m"
+                                        - "1h"
+                                      type: "string"
+                                    type:
+                                      description: "Create a cache control breakpoint at this content block. Accepts only the value \"ephemeral\"."
+                                      enum:
+                                        - "ephemeral"
+                                      type: "string"
+                                  required:
+                                    - "type"
+                                  title: "Cache control"
+                                  type: "object"
+                                detail:
+                                  description: "The detail level for image understanding."
+                                  enum:
+                                    - "auto"
+                                    - "low"
+                                    - "high"
+                                  type: "string"
+                                file_id:
+                                  description: "The ID of a previously uploaded file."
+                                  type: "string"
+                                image_url:
+                                  description: "The URL of the image."
+                                  type: "string"
+                                prompt_cache_breakpoint:
+                                  description: "An explicit OpenAI cache boundary for GPT-5.6 and later. Omitted ttl inherits prompt_cache_options.ttl."
+                                  properties:
+                                    mode:
+                                      enum:
+                                        - "explicit"
+                                      type: "string"
+                                    ttl:
+                                      enum:
+                                        - "30m"
+                                        - "12h"
+                                      type: "string"
+                                  required:
+                                    - "mode"
+                                  type: "object"
+                                type:
+                                  enum:
+                                    - "input_image"
+                                  type: "string"
+                              required:
+                                - "type"
+                              title: "Image"
+                              type: "object"
+                            - description: "A file content part. Provide file_id, file_data (base64), or file_url."
+                              properties:
+                                cache_control:
+                                  properties:
+                                    ttl:
+                                      default: "5m"
+                                      description: "The time-to-live for the cache control breakpoint. This may be one of the following values:\n\n- `5m`: 5 minutes\n- `1h`: 1 hour\n\nDefaults to `5m`. Only supported by Anthropic Claude models."
+                                      enum:
+                                        - "5m"
+                                        - "1h"
+                                      type: "string"
+                                    type:
+                                      description: "Create a cache control breakpoint at this content block. Accepts only the value \"ephemeral\"."
+                                      enum:
+                                        - "ephemeral"
+                                      type: "string"
+                                  required:
+                                    - "type"
+                                  title: "Cache control"
+                                  type: "object"
+                                file_data:
+                                  description: "Base64-encoded file content."
+                                  type: "string"
+                                file_id:
+                                  description: "The ID of a previously uploaded file."
+                                  type: "string"
+                                file_url:
+                                  description: "A URL to fetch the file from."
+                                  type: "string"
+                                filename:
+                                  description: "The name of the file."
+                                  type: "string"
+                                mime_type:
+                                  description: "The MIME type of the file (e.g., application/pdf)."
+                                  type: "string"
+                                prompt_cache_breakpoint:
+                                  description: "An explicit OpenAI cache boundary for GPT-5.6 and later. Omitted ttl inherits prompt_cache_options.ttl."
+                                  properties:
+                                    mode:
+                                      enum:
+                                        - "explicit"
+                                      type: "string"
+                                    ttl:
+                                      enum:
+                                        - "30m"
+                                        - "12h"
+                                      type: "string"
+                                  required:
+                                    - "mode"
+                                  type: "object"
+                                type:
+                                  enum:
+                                    - "input_file"
+                                  type: "string"
+                              required:
+                                - "type"
+                              title: "File"
+                              type: "object"
+                          description: "A content part within a message."
+                        title: "Content parts"
+                        type: "array"
+                    description: "The content of the item: a string or an array of content parts."
                   id:
                     description: "The ID of the item."
                     type: "string"
@@ -24534,7 +24702,7 @@ components:
             - "high"
           type: "string"
         type:
-          description: "The thinking mode to use for the model. Sonnet 5.5 supports between_tools for progress updates without extended thinking."
+          description: "The thinking mode to use for the model. between_tools returns progress updates between tool calls without extended thinking on models that support it."
           enum:
             - "enabled"
             - "disabled"
@@ -27745,7 +27913,7 @@ paths:
                                 type: "string"
                                 format: "ulid"
                                 pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                                default: "01M728ASJJTJFCP65CZT1H0D70"
+                                default: "01M72AV1X7DCRNXEC4J50Q6VDH"
                                 readOnly: true
                                 description: "The unique identifier of the playground knowledge base"
                               knowledge_id:
@@ -37144,7 +37312,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01M728ASMA4PMYHGG68FEWE8N6"
+                                          default: "01M72AV1Z9QP7BV410MHJVST5W"
                                         name:
                                           type: "string"
                                         description:
@@ -38770,7 +38938,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01M728ASMM517562VXK1VP6Z2T"
+                                          default: "01M72AV1ZPPCGX75ZBJGKD08JB"
                                         name:
                                           type: "string"
                                         description:
@@ -47827,7 +47995,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M728ASNGHF4E2RQFT62EJWM2"
+                              default: "tool_01M72AV20PC76PGJXS9RTBPJ5W"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -47928,7 +48096,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M728ASNJ9H94VQT1CCC321FZ"
+                              default: "tool_01M72AV20PT76BMN2R0ZW196DH"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -48031,7 +48199,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M728ASNJBHD8MG32E6SVZX28"
+                              default: "tool_01M72AV20QKATNT6RK14FBA4ED"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -48175,7 +48343,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M728ASNKY71QEMT7DHTJW8NR"
+                              default: "tool_01M72AV20QSJM21NHBEZVTVQTX"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -48662,7 +48830,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M728ASNN906TBD5PH9JJABTW"
+                        default: "tool_01M72AV20TQY3EF9F8SMKNXC4M"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -48763,7 +48931,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M728ASNNCWDET8NEKMN32DPY"
+                        default: "tool_01M72AV20TW2R27MEMHP8TRHPD"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -48866,7 +49034,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M728ASNP6PGH1KPMKTFQ6Q2V"
+                        default: "tool_01M72AV20TM69AHAA21SP4YC81"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -49010,7 +49178,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M728ASNP8Q6TK79JFNEDR05J"
+                        default: "tool_01M72AV20VYRX4RVFC1JM6SE6K"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -49514,7 +49682,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M728ASNQ8CREZSCHA4E5M0C2"
+                        default: "tool_01M72AV20Z49DHEE50ED32W625"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -49615,7 +49783,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M728ASNR3JX4Z7BJKHEQ9CT7"
+                        default: "tool_01M72AV20Z72VPAJQ5VXWY0BTD"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -49718,7 +49886,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M728ASNRHF8ENGFZQCAR6NN6"
+                        default: "tool_01M72AV210F86K794SSPWPNTSS"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -49862,7 +50030,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M728ASNRWH0S8P33BJAHGGZM"
+                        default: "tool_01M72AV211ZT7E1PMECZRJKGNA"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -50029,7 +50197,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M728ASNV7VRS54E7C0YPWM6F"
+                        default: "tool_01M72AV216GTPEZ4X99Y94DBK2"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -50130,7 +50298,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M728ASNWV9YRQW24FMMH6B28"
+                        default: "tool_01M72AV2160DY561SC90YPEBZM"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -50233,7 +50401,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M728ASNWBN9SQR7AKZNF93MK"
+                        default: "tool_01M72AV2177E3YDTDQ7Q7AK0EP"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -50377,7 +50545,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M728ASNW6Y4GAEMCKZGDPG77"
+                        default: "tool_01M72AV217HTXN4WGGWB0HD5HF"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -64181,6 +64349,11 @@ paths:
           in: "query"
           schema:
             type: "string"
+        - name: "all_accessible_projects"
+          in: "query"
+          description: "Spans every project the caller belongs to instead of the active one."
+          schema:
+            type: "boolean"
       responses:
         "200":
           description: "OK"
@@ -64213,6 +64386,12 @@ paths:
       summary: "List trace fields"
       description: "List currently supported static trace fields."
       operationId: "TracesListFields"
+      parameters:
+        - name: "all_accessible_projects"
+          in: "query"
+          description: "Spans every project the caller belongs to instead of the active one."
+          schema:
+            type: "boolean"
       responses:
         "200":
           description: "OK"
@@ -64341,6 +64520,11 @@ paths:
           required: true
           schema:
             type: "string"
+        - name: "all_accessible_projects"
+          in: "query"
+          description: "Spans every project the caller belongs to instead of the active one."
+          schema:
+            type: "boolean"
       responses:
         "200":
           description: "OK"
@@ -64435,6 +64619,11 @@ paths:
           in: "query"
           schema:
             type: "string"
+        - name: "all_accessible_projects"
+          in: "query"
+          description: "Spans every project the caller belongs to instead of the active one."
+          schema:
+            type: "boolean"
       responses:
         "200":
           description: "OK"
@@ -64473,6 +64662,11 @@ paths:
           required: true
           schema:
             type: "string"
+        - name: "all_accessible_projects"
+          in: "query"
+          description: "Spans every project the caller belongs to instead of the active one."
+          schema:
+            type: "boolean"
       responses:
         "200":
           description: "OK"
@@ -71751,6 +71945,11 @@ paths:
           description: "Case-insensitive match against the gateway key and display name."
           schema:
             type: "string"
+        - name: "all_accessible_projects"
+          in: "query"
+          description: "Spans every project the caller belongs to instead of the active one."
+          schema:
+            type: "boolean"
       responses:
         "200":
           description: "OK"
@@ -72062,6 +72261,11 @@ paths:
           description: "Case-insensitive match against the server key and display name."
           schema:
             type: "string"
+        - name: "all_accessible_projects"
+          in: "query"
+          description: "Spans every project the caller belongs to instead of the active one."
+          schema:
+            type: "boolean"
       responses:
         "200":
           description: "OK"
@@ -76159,8 +76363,176 @@ paths:
                         description: "An input item. The \"type\" field determines the item kind."
                         properties:
                           content:
-                            description: "The content of the item."
-                            type: "string"
+                            anyOf:
+                              - title: "Text"
+                                type: "string"
+                              - items:
+                                  anyOf:
+                                    - description: "A text content part."
+                                      properties:
+                                        cache_control:
+                                          properties:
+                                            ttl:
+                                              default: "5m"
+                                              description: "The time-to-live for the cache control breakpoint. This may be one of the following values:\n\n- `5m`: 5 minutes\n- `1h`: 1 hour\n\nDefaults to `5m`. Only supported by Anthropic Claude models."
+                                              enum:
+                                                - "5m"
+                                                - "1h"
+                                              type: "string"
+                                            type:
+                                              description: "Create a cache control breakpoint at this content block. Accepts only the value \"ephemeral\"."
+                                              enum:
+                                                - "ephemeral"
+                                              type: "string"
+                                          required:
+                                            - "type"
+                                          title: "Cache control"
+                                          type: "object"
+                                        prompt_cache_breakpoint:
+                                          description: "An explicit OpenAI cache boundary for GPT-5.6 and later. Omitted ttl inherits prompt_cache_options.ttl."
+                                          properties:
+                                            mode:
+                                              enum:
+                                                - "explicit"
+                                              type: "string"
+                                            ttl:
+                                              enum:
+                                                - "30m"
+                                                - "12h"
+                                              type: "string"
+                                          required:
+                                            - "mode"
+                                          type: "object"
+                                        text:
+                                          description: "The text content."
+                                          type: "string"
+                                        type:
+                                          enum:
+                                            - "input_text"
+                                          type: "string"
+                                      required:
+                                        - "type"
+                                        - "text"
+                                      title: "Text"
+                                      type: "object"
+                                    - description: "An image content part."
+                                      properties:
+                                        cache_control:
+                                          properties:
+                                            ttl:
+                                              default: "5m"
+                                              description: "The time-to-live for the cache control breakpoint. This may be one of the following values:\n\n- `5m`: 5 minutes\n- `1h`: 1 hour\n\nDefaults to `5m`. Only supported by Anthropic Claude models."
+                                              enum:
+                                                - "5m"
+                                                - "1h"
+                                              type: "string"
+                                            type:
+                                              description: "Create a cache control breakpoint at this content block. Accepts only the value \"ephemeral\"."
+                                              enum:
+                                                - "ephemeral"
+                                              type: "string"
+                                          required:
+                                            - "type"
+                                          title: "Cache control"
+                                          type: "object"
+                                        detail:
+                                          description: "The detail level for image understanding."
+                                          enum:
+                                            - "auto"
+                                            - "low"
+                                            - "high"
+                                          type: "string"
+                                        file_id:
+                                          description: "The ID of a previously uploaded file."
+                                          type: "string"
+                                        image_url:
+                                          description: "The URL of the image."
+                                          type: "string"
+                                        prompt_cache_breakpoint:
+                                          description: "An explicit OpenAI cache boundary for GPT-5.6 and later. Omitted ttl inherits prompt_cache_options.ttl."
+                                          properties:
+                                            mode:
+                                              enum:
+                                                - "explicit"
+                                              type: "string"
+                                            ttl:
+                                              enum:
+                                                - "30m"
+                                                - "12h"
+                                              type: "string"
+                                          required:
+                                            - "mode"
+                                          type: "object"
+                                        type:
+                                          enum:
+                                            - "input_image"
+                                          type: "string"
+                                      required:
+                                        - "type"
+                                      title: "Image"
+                                      type: "object"
+                                    - description: "A file content part. Provide file_id, file_data (base64), or file_url."
+                                      properties:
+                                        cache_control:
+                                          properties:
+                                            ttl:
+                                              default: "5m"
+                                              description: "The time-to-live for the cache control breakpoint. This may be one of the following values:\n\n- `5m`: 5 minutes\n- `1h`: 1 hour\n\nDefaults to `5m`. Only supported by Anthropic Claude models."
+                                              enum:
+                                                - "5m"
+                                                - "1h"
+                                              type: "string"
+                                            type:
+                                              description: "Create a cache control breakpoint at this content block. Accepts only the value \"ephemeral\"."
+                                              enum:
+                                                - "ephemeral"
+                                              type: "string"
+                                          required:
+                                            - "type"
+                                          title: "Cache control"
+                                          type: "object"
+                                        file_data:
+                                          description: "Base64-encoded file content."
+                                          type: "string"
+                                        file_id:
+                                          description: "The ID of a previously uploaded file."
+                                          type: "string"
+                                        file_url:
+                                          description: "A URL to fetch the file from."
+                                          type: "string"
+                                        filename:
+                                          description: "The name of the file."
+                                          type: "string"
+                                        mime_type:
+                                          description: "The MIME type of the file (e.g., application/pdf)."
+                                          type: "string"
+                                        prompt_cache_breakpoint:
+                                          description: "An explicit OpenAI cache boundary for GPT-5.6 and later. Omitted ttl inherits prompt_cache_options.ttl."
+                                          properties:
+                                            mode:
+                                              enum:
+                                                - "explicit"
+                                              type: "string"
+                                            ttl:
+                                              enum:
+                                                - "30m"
+                                                - "12h"
+                                              type: "string"
+                                          required:
+                                            - "mode"
+                                          type: "object"
+                                        type:
+                                          enum:
+                                            - "input_file"
+                                          type: "string"
+                                      required:
+                                        - "type"
+                                      title: "File"
+                                      type: "object"
+                                  description: "A content part within a message."
+                                title: "Content parts"
+                                type: "array"
+                            description: "The content of the item: a string or an array of content parts."
                           id:
                             description: "The ID of the item."
                             type: "string"
@@ -77087,12 +77459,12 @@ paths:
           schema:
             description: "Cursor: return batches before this batch id. Cannot be combined with after."
             type: "string"
-        - description: "Free-text match on the batch id."
+        - description: "Case-insensitive match on batch id, model, or endpoint."
           explode: false
           in: "query"
           name: "search"
           schema:
-            description: "Free-text match on the batch id."
+            description: "Case-insensitive match on batch id, model, or endpoint."
             type: "string"
         - description: "Comma-separated statuses to include: validating, in_progress, finalizing, completed, failed, expired, cancelling, cancelled."
           explode: false
