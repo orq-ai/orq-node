@@ -2591,7 +2591,7 @@ components:
           properties:
             _id:
               type: "string"
-              default: "reasoning_01m72av1y03xq5dswj77jshctc"
+              default: "reasoning_01m72n6dw28ykmdjaz3pe6db1j"
               description: "Unique identifier for the part. Format: reasoning_{ulid} (e.g., reasoning_01hxyz...)"
               example: "reasoning_01hxyz123abc"
             kind:
@@ -11044,36 +11044,44 @@ components:
           type: "array"
           items:
             $ref: "#/components/schemas/Experiment"
+          description: "Page of experiments, newest first."
         has_more:
           type: "boolean"
+          description: "Whether more experiments are available in the selected pagination\n direction."
     CreateExperimentRequest:
+      required:
+        - "display_name"
       type: "object"
       properties:
         display_name:
           type: "string"
+          description: "Experiment name, 1 to 255 characters."
         project_id:
           type: "string"
-          description: "Project the experiment is created in; defaults to the API key's project when omitted."
+          description: "Project the experiment is created in. Defaults to the caller's project:\n the API key's project, or the project open in the AI Studio. Required for\n API keys that span several projects."
         dataset_id:
           type: "string"
-        dataset_version_id:
-          type: "string"
+          description: "Dataset whose datapoints become the rows of the first run, at most 1000.\n Must be in the experiment's project. Omit to start with an empty run."
         source_run:
           allOf:
             - $ref: "#/components/schemas/RunRef"
-          description: "Copies the task, evaluator and review columns of an existing run into the\n new experiment's first run (fork)."
+          description: "Run to fork. Its task, metric, evaluator and review columns are copied\n into the new experiment's first run; rows still come from `dataset_id`.\n Must be in the same project as the new experiment."
     UpdateExperimentRequest:
       type: "object"
       properties:
         display_name:
           type: "string"
+          description: "New experiment name, 1 to 255 characters."
         selected_run_id:
           type: "string"
+          description: "Run to show by default. Must be a run of this experiment."
         row_height_level:
           type: "integer"
+          description: "Row height in the AI Studio grid: 1 (compact), 2 or 3 (tallest)."
           format: "int32"
         project_id:
           type: "string"
+          description: "Moves the experiment to another project the caller can access. The\n dataset stays where it is, so new runs need a dataset in the new project."
     ListExperimentRunsResponse:
       type: "object"
       properties:
@@ -11081,22 +11089,30 @@ components:
           type: "array"
           items:
             $ref: "#/components/schemas/Run"
+          description: "Page of runs, newest first."
         has_more:
           type: "boolean"
+          description: "Whether more runs are available in the selected pagination direction."
     CreateRunRequest:
       type: "object"
       properties:
         key:
           type: "string"
+          description: "Run name. Defaults to `Run ` plus the last four characters of the run ID."
         settings:
-          $ref: "#/components/schemas/RunSettings"
+          allOf:
+            - $ref: "#/components/schemas/RunSettings"
+          description: "Execution settings. Concurrency defaults to 10."
     UpdateRunRequest:
       type: "object"
       properties:
         key:
           type: "string"
+          description: "New run name. Must not be empty."
         settings:
-          $ref: "#/components/schemas/RunSettings"
+          allOf:
+            - $ref: "#/components/schemas/RunSettings"
+          description: "Settings to change. `concurrency`, `timeout` and `max_turns` change only\n when set. `hidden_column_ids` is replaced, and cleared when omitted."
     CancelExperimentRunRequest:
       type: "object"
       properties:
@@ -11104,13 +11120,17 @@ components:
           type: "array"
           items:
             type: "string"
+          description: "Rows whose queued and running cells are canceled. Empty cancels every row.\n The run moves to canceled either way."
     UpdateRunColumnLayoutRequest:
+      required:
+        - "columns"
       type: "object"
       properties:
         columns:
           type: "array"
           items:
             $ref: "#/components/schemas/ColumnLayout"
+          description: "Layout changes, at least one. Columns not listed keep their layout."
     ListEvalColumnsResponse:
       type: "object"
       properties:
@@ -11118,34 +11138,36 @@ components:
           type: "array"
           items:
             $ref: "#/components/schemas/Column"
+          description: "Evaluator columns of the run, in column order."
     CreateEvalColumnRequest:
+      required:
+        - "evaluator_id"
       type: "object"
       properties:
         evaluator_id:
           type: "string"
+          description: "ID of the evaluator to add. Each row gets one evaluator cell per task\n column."
         position:
           type: "integer"
+          description: "0-based position among the run's columns. Defaults to the end."
           format: "int32"
-    PatchEvalCellRequest:
-      type: "object"
-      properties:
-        value:
-          type: "object"
-          additionalProperties: true
     ExecuteRunRequest:
+      required:
+        - "scope"
       type: "object"
       properties:
         scope:
+          description: "What to execute. `EXECUTE_SCOPE_FULL`: every executable cell.\n `EXECUTE_SCOPE_PARTIAL`: like full, but skips completed and running cells.\n `EXECUTE_SCOPE_ROW`: the cells of the rows in `targets`.\n `EXECUTE_SCOPE_COLUMN`: the cells of the columns in `targets`.\n `EXECUTE_SCOPE_CELL`: each combination of a target row and a target\n column. Targets also narrow full and partial executions."
           $ref: "#/components/schemas/ExecuteScope"
         targets:
           type: "array"
           items:
             $ref: "#/components/schemas/ExecuteTarget"
+          description: "Rows and columns to execute. Required for row, column and cell scope."
         constraints:
-          $ref: "#/components/schemas/ExecuteConstraints"
-        repeat_count:
-          type: "integer"
-          format: "uint32"
+          allOf:
+            - $ref: "#/components/schemas/ExecuteConstraints"
+          description: "Limits for this execution, saved into the run's settings."
     GetRunMetricsResponse:
       type: "object"
       properties:
@@ -11153,7 +11175,7 @@ components:
           type: "object"
           additionalProperties:
             $ref: "#/components/schemas/MetricSummary"
-          description: "Keyed \"{task_column_id}_{metric_id}\" like Run.metrics."
+          description: "Metrics keyed `{task_column_id}_{evaluator_id}` for evaluators and\n `{task_column_id}_orq_{metric}` for usage metrics such as `orq_cost` and\n `orq_latency`. Empty when the run has no data."
     QueryRunRequest:
       type: "object"
       properties:
@@ -11161,26 +11183,29 @@ components:
           type: "array"
           items:
             type: "string"
+          description: "Row IDs to return. Unknown IDs are ignored. Omit for every row."
         columns:
           type: "array"
           items:
             type: "string"
-        repeat_index:
-          type: "integer"
-          format: "uint32"
+          description: "Columns to return, matched against column ID, key and display name. Every\n matching column is used, and an entry that matches nothing is rejected.\n Omit for every column."
         limit:
           type: "integer"
+          description: "Page size, 1 to 1000. Defaults to 25."
           format: "int32"
         starting_after:
           type: "string"
+          description: "Cursor for forward pagination. Set to the `row_id` of the last row from\n the previous page."
         updated_after:
           type: "string"
-          description: "Incremental refresh: returns running rows plus completed or failed rows\n updated after this instant."
+          description: "Incremental refresh: return only rows updated after this instant. Pass the\n previous response's `server_timestamp`. With `partial_rows`, running rows\n are returned as well."
           format: "date-time"
         partial_rows:
           type: "boolean"
+          description: "Return only running, completed and failed rows."
         exclude_static_cells:
           type: "boolean"
+          description: "Leave out data cells: inputs, messages, expected output and job output."
     QueryRunResponse:
       type: "object"
       properties:
@@ -11188,11 +11213,13 @@ components:
           type: "array"
           items:
             $ref: "#/components/schemas/QueryRow"
+          description: "Page of rows, in creation order."
         has_more:
           type: "boolean"
+          description: "Whether more rows follow this page."
         server_timestamp:
           type: "string"
-          description: "Cursor for the next incremental query (server clock minus a skew buffer)."
+          description: "Value to pass as `updated_after` in the next incremental query: the\n server clock minus 3 seconds."
           format: "date-time"
     ListReviewColumnsResponse:
       type: "object"
@@ -11201,43 +11228,41 @@ components:
           type: "array"
           items:
             $ref: "#/components/schemas/Column"
+          description: "Human review columns of the run, in column order."
     CreateReviewColumnRequest:
+      required:
+        - "human_eval_id"
       type: "object"
       properties:
         human_eval_id:
           type: "string"
+          description: "ID of the human review definition. Each row gets one review cell per task\n column."
         display_name:
           type: "string"
+          description: "Column name. Defaults to `human_eval_id`."
         human_eval_type:
           type: "string"
+          description: "Value type the review accepts: `range`, `single_select`, `multi_select`, `text` or `correction`. Empty accepts\n any value."
         position:
           type: "integer"
+          description: "0-based position among the run's columns. Defaults to the end."
           format: "int32"
     UpdateReviewColumnRequest:
       type: "object"
       properties:
         display_name:
           type: "string"
-    PatchReviewCellRequest:
-      type: "object"
-      properties:
-        value:
-          type: "object"
-          additionalProperties: true
-          description: "Human review value. type is required: range uses {type: range, value: number}; single- and multi-select use {type: categorical, value: string} or {type: categorical, values: [{value: string, sentiment: string}]}; text and correction use {type: free_form_text, text: string}."
+          description: "New column name. Must not be empty."
     DeleteRowsRequest:
+      required:
+        - "row_ids"
       type: "object"
       properties:
         row_ids:
           type: "array"
           items:
             type: "string"
-    UpdateRunCellRequest:
-      type: "object"
-      properties:
-        value:
-          type: "object"
-          additionalProperties: true
+          description: "Rows to delete, at least one. Unknown IDs are ignored as long as one row\n matches."
     DuplicateRowRequest:
       type: "object"
       properties: {}
@@ -11248,108 +11273,131 @@ components:
           type: "array"
           items:
             $ref: "#/components/schemas/Column"
+          description: "Task columns of the run, in column order."
     CreateTaskColumnRequest:
+      required:
+        - "display_name"
       type: "object"
       properties:
         display_name:
           type: "string"
+          description: "Column name."
         prompt:
-          $ref: "#/components/schemas/PromptTaskConfig"
+          allOf:
+            - $ref: "#/components/schemas/PromptTaskConfig"
+          description: "Runs a prompt. Set exactly one of `prompt`, `agent` or `openresponse`."
         agent:
-          $ref: "#/components/schemas/AgentTaskConfig"
-        harness:
-          $ref: "#/components/schemas/HarnessTaskConfig"
+          allOf:
+            - $ref: "#/components/schemas/AgentTaskConfig"
+          description: "Runs an agent."
         openresponse:
-          $ref: "#/components/schemas/OpenResponseTaskConfig"
+          allOf:
+            - $ref: "#/components/schemas/OpenResponseTaskConfig"
+          description: "Creates a column whose cells are filled outside orq.ai."
         position:
           type: "integer"
+          description: "0-based position among the run's columns. Defaults to the end."
           format: "int32"
     UpdateTaskColumnRequest:
       type: "object"
       properties:
         display_name:
           type: "string"
+          description: "New column name. Must not be empty."
         prompt:
-          $ref: "#/components/schemas/PromptTaskConfig"
+          allOf:
+            - $ref: "#/components/schemas/PromptTaskConfig"
+          description: "Replaces the column's source with this prompt. A new source replaces the\n whole config and can change the column type; existing cells are not\n changed."
         agent:
-          $ref: "#/components/schemas/AgentTaskConfig"
-        harness:
-          $ref: "#/components/schemas/HarnessTaskConfig"
-    PatchTaskCellRequest:
-      type: "object"
-      properties:
-        repeat_index:
-          type: "integer"
-          format: "uint32"
-        value:
-          type: "object"
-          additionalProperties: true
-        artifacts:
-          $ref: "#/components/schemas/ArtifactRefs"
+          allOf:
+            - $ref: "#/components/schemas/AgentTaskConfig"
+          description: "Replaces the column's source with this agent."
     Experiment:
       type: "object"
       properties:
         experiment_id:
           type: "string"
+          description: "Experiment ID (ULID)."
         display_name:
           type: "string"
+          description: "Experiment name."
         project_id:
           type: "string"
+          description: "Project that owns the experiment."
         dataset_id:
           type: "string"
-        dataset_version_id:
-          type: "string"
+          description: "Dataset whose datapoints become the rows of each new run. Empty when the\n experiment was created without a dataset."
         selected_run_id:
           type: "string"
+          description: "Run shown by default in the AI Studio, and the run whose columns Create a\n run copies. Create a run selects the new run; deleting the selected run\n selects the newest remaining one."
         created_at:
           type: "string"
+          description: "Creation time."
           format: "date-time"
         updated_at:
           type: "string"
+          description: "Time of the last update to the experiment."
           format: "date-time"
         source:
           type: "string"
-          description: "Origin of the experiment: \"manual\" or \"evaluatorq\"."
+          description: "Origin of the experiment: `evaluatorq` for results uploaded by the\n evaluatorq framework; empty or `manual` otherwise."
         row_height_level:
           type: "integer"
+          description: "Row height in the AI Studio grid: 1 (compact), 2 or 3 (tallest). Set to 1\n on create."
           format: "int32"
         unique_evaluators:
           type: "array"
           items:
             $ref: "#/components/schemas/UniqueEvaluator"
+          description: "Evaluators used by the experiment's evaluator columns, one entry per\n evaluator."
         created_by_id:
           type: "string"
+          description: "ID of the user or API key that created the experiment."
+      description: "An experiment: a dataset evaluated by one or more runs."
     RunRef:
+      required:
+        - "experiment_id"
+        - "run_id"
       type: "object"
       properties:
         experiment_id:
           type: "string"
+          description: "ID of the experiment the run belongs to."
         run_id:
           type: "string"
+          description: "ID of the run."
+      description: "Identifies a run by experiment and run ID."
     Run:
       type: "object"
       properties:
         run_id:
           type: "string"
+          description: "Run ID (ULID)."
         experiment_id:
           type: "string"
+          description: "Experiment the run belongs to."
         key:
           type: "string"
+          description: "Run name. `Run 1` for the first run; `Run ` plus the last four characters\n of the run ID when a run is created without a key."
         status:
+          description: "Run state. `RUN_STATUS_DRAFT`: created, never executed.\n `RUN_STATUS_RUNNING`: executing. `RUN_STATUS_COMPLETED`: no rows left to\n execute, although individual cells may have failed. `RUN_STATUS_FAILED`:\n execution stopped on an internal error. `RUN_STATUS_CANCELED`: stopped by\n Cancel a run. `RUN_STATUS_QUEUED` counts as active, like running."
           $ref: "#/components/schemas/RunStatus"
         dataset_id:
           type: "string"
-        dataset_version_id:
-          type: "string"
+          description: "Dataset the rows were copied from, taken from the experiment when the run\n was created. Empty for evaluatorq uploads."
         row_count:
           type: "integer"
+          description: "Number of rows in the run."
           format: "int32"
         cell_status_counts:
-          $ref: "#/components/schemas/CellStatusCounts"
+          allOf:
+            - $ref: "#/components/schemas/CellStatusCounts"
+          description: "Number of cells in each status."
         columns:
           type: "array"
           items:
             $ref: "#/components/schemas/Column"
+          description: "Columns of the run, hidden ones included with `active` false. Get, create\n and update order them as dataset, task, job output, metric, evaluator and\n review columns."
         settings:
           description: "Null on runs created without settings, such as evaluatorq uploads."
           anyOf:
@@ -11360,143 +11408,133 @@ components:
           type:
             - "string"
             - "null"
-          description: "Null until the run is executed."
+          description: "Time the latest execution started. Null until the run is executed."
           format: "date-time"
         completed_at:
           type:
             - "string"
             - "null"
+          description: "Time the run completed or was canceled. Null until then, and kept when the\n run is executed again."
           format: "date-time"
         created_at:
           type: "string"
+          description: "Creation time."
           format: "date-time"
         updated_at:
           type: "string"
+          description: "Time of the last change to the run."
           format: "date-time"
         metrics:
           type: "object"
           additionalProperties:
             type: "number"
             format: "double"
-          description: "Averages per task column and metric, keyed \"{task_column_id}_{metric_id}\"\n (\"{run_id}_{metric_id}\" for run-level metrics). Only set when requested."
+          description: "Average evaluator results per task column, keyed\n `{task_column_id}_{evaluator_id}` (the run ID replaces the task column ID\n for run-level values). Only returned by List runs with `include_metrics`;\n categorical evaluators are left out."
         stats:
-          $ref: "#/components/schemas/RunStats"
+          allOf:
+            - $ref: "#/components/schemas/RunStats"
+          description: "Execution totals of the run."
         created_by_id:
           type: "string"
+          description: "ID of the user or API key that created the run."
+      description: "A run: one pass of the experiment's columns over a copy of its dataset rows."
     RunSettings:
       type: "object"
       properties:
         concurrency:
           type: "integer"
+          description: "Maximum number of cells the run executes at the same time, 1 to 100.\n Defaults to 10."
           format: "int32"
         timeout:
           pattern: "^-?(?:0|[1-9][0-9]{0,11})(?:\\.[0-9]{1,9})?s$"
           type: "string"
+          description: "Wall-clock limit for each prompt or agent cell, as a duration string such\n as `90s`. Fractions of a second are dropped, and a cell that exceeds the\n limit fails. When unset, the agent's own limit or the platform default\n applies."
         max_turns:
           type: "integer"
+          description: "Maximum number of model calls in a cell's agent loop, at least 1. When\n unset, the agent's own limit or the platform default (10) applies."
           format: "int32"
         hidden_column_ids:
           type: "array"
           items:
             type: "string"
+          description: "Columns hidden in the AI Studio grid. Display only: hidden columns still\n execute."
+      description: "Execution settings of a run."
     ColumnLayout:
+      required:
+        - "column_id"
       type: "object"
       properties:
         column_id:
           type: "string"
+          description: "ID of the column to change."
         position:
           type: "integer"
+          description: "New 0-based position. The other columns shift to make room."
           format: "int32"
         width:
           type: "integer"
+          description: "New width, at least 1."
           format: "int32"
         active:
           type: "boolean"
+          description: "False hides the column; true shows it."
+      description: "Layout change for one column."
     Column:
       type: "object"
       properties:
         column_id:
           type: "string"
+          description: "Column ID. Dataset, prompt, evaluator and review columns keep their ID in\n new runs; agent columns get a new one."
         key:
           type: "string"
+          description: "Column key, derived from the display name: lowercased, with spaces\n replaced by underscores."
         display_name:
           type: "string"
+          description: "Column name."
         position:
           type: "integer"
+          description: "0-based position in the run, after the columns are grouped as dataset,\n task, job output, metric, evaluator and review columns."
           format: "int32"
         active:
           type: "boolean"
+          description: "Whether the column is shown in the AI Studio grid. False for hidden\n columns, such as the token metric columns."
         prompt:
-          $ref: "#/components/schemas/PromptTaskConfig"
+          allOf:
+            - $ref: "#/components/schemas/PromptTaskConfig"
+          description: "Set on prompt task columns."
         agent:
-          $ref: "#/components/schemas/AgentTaskConfig"
-        harness:
-          $ref: "#/components/schemas/HarnessTaskConfig"
+          allOf:
+            - $ref: "#/components/schemas/AgentTaskConfig"
+          description: "Set on agent task columns."
         openresponse:
-          $ref: "#/components/schemas/OpenResponseTaskConfig"
+          allOf:
+            - $ref: "#/components/schemas/OpenResponseTaskConfig"
+          description: "Set on task columns whose cells are filled outside orq.ai."
         evaluator:
-          $ref: "#/components/schemas/EvalColumnConfig"
+          allOf:
+            - $ref: "#/components/schemas/EvalColumnConfig"
+          description: "Set on evaluator columns."
         review:
-          $ref: "#/components/schemas/ReviewColumnConfig"
+          allOf:
+            - $ref: "#/components/schemas/ReviewColumnConfig"
+          description: "Set on human review columns."
         dataset:
-          $ref: "#/components/schemas/DatasetColumnConfig"
+          allOf:
+            - $ref: "#/components/schemas/DatasetColumnConfig"
+          description: "Set on the dataset columns: inputs, messages and expected output."
         metric:
-          $ref: "#/components/schemas/MetricColumnConfig"
+          allOf:
+            - $ref: "#/components/schemas/MetricColumnConfig"
+          description: "Set on metric columns: cost, latency and token counts."
         job_output:
-          $ref: "#/components/schemas/JobOutputColumnConfig"
+          allOf:
+            - $ref: "#/components/schemas/JobOutputColumnConfig"
+          description: "Set on evaluatorq job output columns."
         width:
           type: "integer"
+          description: "Column width in the AI Studio grid. Task columns default to 280;\n evaluator, review and metric columns to 200. 0 when unset."
           format: "int32"
-    Cell:
-      type: "object"
-      properties:
-        cell_id:
-          type: "string"
-        row_id:
-          type: "string"
-        column_id:
-          type: "string"
-        repeat_index:
-          type: "integer"
-          format: "uint32"
-        status:
-          $ref: "#/components/schemas/CellStatus"
-        value:
-          type:
-            - "object"
-            - "null"
-          additionalProperties: true
-          description: "Stored documents are returned as-is; strings are wrapped as {\"text\"},\n arrays as {\"messages\"} on messages cells and {\"items\"} elsewhere, other\n scalars as {\"value\"}. Null for a cell that has no value yet."
-        artifacts:
-          description: "Null when the cell holds no trace, response or session references."
-          anyOf:
-            - allOf:
-                - $ref: "#/components/schemas/ArtifactRefs"
-            - type: "null"
-        progress:
-          description: "Only present while the cell is running."
-          anyOf:
-            - allOf:
-                - $ref: "#/components/schemas/CellProgress"
-            - type: "null"
-        error_message:
-          type: "string"
-        type:
-          $ref: "#/components/schemas/CellType"
-        task_column_id:
-          type: "string"
-          description: "Task column an evaluator, metric or review cell belongs to."
-        created_at:
-          type:
-            - "string"
-            - "null"
-          description: "Null on cells written before timestamps were recorded."
-          format: "date-time"
-        updated_at:
-          type:
-            - "string"
-            - "null"
-          format: "date-time"
+      description: "A column of a run. Exactly one of the config fields is set, matching the\n column type."
     ExecuteScope:
       type: "string"
       enum:
@@ -11511,50 +11549,60 @@ components:
       properties:
         row_id:
           type: "string"
+          description: "Row to execute."
         column_id:
           type: "string"
+          description: "Column to execute, by column ID."
         column_key:
           type: "string"
-        repeat_index:
-          type: "integer"
-          format: "uint32"
+          description: "Column to execute, matched against column ID, key and display name. Every\n matching column is used."
         source_column_id:
           type: "string"
           description: "Limits an evaluator column target to the cells grading this task column."
+      description: "Selects rows and columns for Execute a run."
     ExecuteConstraints:
       type: "object"
       properties:
         llm:
-          $ref: "#/components/schemas/LlmConstraints"
-        harness:
-          $ref: "#/components/schemas/HarnessConstraints"
+          allOf:
+            - $ref: "#/components/schemas/LlmConstraints"
+          description: "Limits for prompt and agent cells."
+      description: "Limits for one execution, saved into the run's settings."
     MetricSummary:
       type: "object"
       properties:
         number:
-          $ref: "#/components/schemas/NumberMetricSummary"
+          allOf:
+            - $ref: "#/components/schemas/NumberMetricSummary"
+          description: "Set for numeric metrics."
         boolean:
-          $ref: "#/components/schemas/BooleanMetricSummary"
+          allOf:
+            - $ref: "#/components/schemas/BooleanMetricSummary"
+          description: "Set for pass or fail evaluators."
         categorical:
-          $ref: "#/components/schemas/CategoricalMetricSummary"
+          allOf:
+            - $ref: "#/components/schemas/CategoricalMetricSummary"
+          description: "Set for evaluators that return labels."
         baseline:
-          description: "Null unless a baseline run was requested."
+          description: "Comparison with the baseline run. Null unless `baseline_run_id` was given, and for categorical metrics or a baseline without values."
           anyOf:
             - allOf:
                 - $ref: "#/components/schemas/MetricBaseline"
             - type: "null"
+      description: "Summary of one metric. Exactly one of `number`, `boolean` and `categorical`\n is set, depending on the metric's output type."
     QueryRow:
       type: "object"
       properties:
         row_id:
           type: "string"
-        display_name:
-          type: "string"
+          description: "Row ID (ULID)."
         cells:
           type: "array"
           items:
             $ref: "#/components/schemas/Cell"
+          description: "Cells of the row, including the derived token metric cells."
         status:
+          description: "Execution state. `ROW_STATUS_NOT_RUN`: never executed.\n `ROW_STATUS_QUEUED`: waiting to execute. `ROW_STATUS_RUNNING`: executing,\n or one of its cells is running. `ROW_STATUS_COMPLETED`: all its tasks\n finished. `ROW_STATUS_FAILED`: a task failed. `ROW_STATUS_CANCELED`:\n canceled."
           $ref: "#/components/schemas/RowStatus"
         created_at:
           type:
@@ -11566,7 +11614,9 @@ components:
           type:
             - "string"
             - "null"
+          description: "Time of the last change to the row. Null on rows written before\n timestamps were recorded."
           format: "date-time"
+      description: "A row of a run with its cells."
     PromptTaskConfig:
       required:
         - "prompt_config"
@@ -11575,84 +11625,77 @@ components:
         prompt_config:
           type: "object"
           additionalProperties: true
+          description: "Prompt to execute. Execution reads `model` (required), `provider`,\n `messages` and `model_parameters` such as `temperature`, `max_tokens` and\n `response_format`."
         messages_source:
+          description: "Messages sent to the model. `MESSAGES_SOURCE_PROMPT_CONFIG`: the prompt's\n messages only. `MESSAGES_SOURCE_MESSAGES_COLUMN`: the row's dataset\n messages only. `MESSAGES_SOURCE_COMBINED`: the prompt's messages followed\n by the row's messages. Defaults to `MESSAGES_SOURCE_PROMPT_CONFIG`."
           $ref: "#/components/schemas/MessagesSource"
         engine:
           type: "string"
+          description: "Template engine for variables in the messages: `text` (default), `jinja`\n or `mustache`."
         tools:
           type: "array"
           items:
             type: "object"
             additionalProperties: true
+          description: "Tools saved with the column."
         knowledge_bases:
           type: "array"
           items:
             type: "object"
             additionalProperties: true
+          description: "Knowledge bases searched on each execution, as `{knowledge_id,\n configuration}` with a configuration `type` of `last_user_message` or\n `query`. The retrieved context is available as `{{knowledge_retrieval}}`;\n when the prompt does not use it, it is appended to the system message."
         metadata:
           type:
             - "object"
             - "null"
           additionalProperties: true
-          description: "Null when the column was saved without metadata."
-        entity_configuration:
-          type:
-            - "object"
-            - "null"
-          additionalProperties: true
-          description: "Null when the column was saved without an entity configuration."
+          description: "Metadata saved with the column. Null when the column was saved without\n metadata."
+      description: "Configuration of a prompt task column."
     AgentTaskConfig:
       type: "object"
       properties:
         agent_key:
           type: "string"
+          description: "Key of the agent to run. Required."
         messages_source:
+          description: "Messages sent to the agent. `MESSAGES_SOURCE_MESSAGES_COLUMN`: the row's\n dataset messages. Any other value: `messages` from this config. System\n messages are dropped, since the agent's instructions provide them."
           $ref: "#/components/schemas/MessagesSource"
         messages:
           type: "array"
           items:
             type: "object"
             additionalProperties: true
+          description: "Conversation sent to the agent when `messages_source` is not the messages\n column."
         engine:
           type: "string"
+          description: "Template engine for variables in the messages: `text` (default), `jinja`\n or `mustache`."
         parent_id:
           type: "string"
+          description: "Saved with the column; not used during execution."
         agent_tag:
           type: "string"
-    HarnessTaskConfig:
-      type: "object"
-      properties:
-        harness_config_id:
-          type: "string"
+          description: "Agent version tag. When set, the column runs that tagged version."
+      description: "Configuration of an agent task column."
     OpenResponseTaskConfig:
       type: "object"
       properties: {}
-    ArtifactRefs:
-      type: "object"
-      properties:
-        trace_id:
-          type: "string"
-        response_id:
-          type: "string"
-        session_id:
-          type: "string"
-        session_run_id:
-          type: "string"
-        pull_request_url:
-          type: "string"
-        patch_object_key:
-          type: "string"
+      description: "A task column whose cells are filled outside orq.ai, such as by an\n evaluatorq upload. It is never executed."
     UniqueEvaluator:
       type: "object"
       properties:
         evaluator_id:
           type: "string"
+          description: "Evaluator ID."
         evaluator_type:
           type: "string"
+          description: "Evaluator type, taken from the evaluator's definition."
         evaluator_name:
           type: "string"
+          description: "Evaluator display name."
         evaluator_key:
           type: "string"
+          description: "Column key of the evaluator in an evaluatorq upload. Empty for evaluators\n added through Add an eval column."
+      description: "An evaluator used by the experiment."
     RunStatus:
       type: "string"
       enum:
@@ -11668,172 +11711,159 @@ components:
       properties:
         not_run:
           type: "integer"
+          description: "Cells that have never executed, including cells without a status."
           format: "int32"
         queued:
           type: "integer"
+          description: "Cells waiting to execute."
           format: "int32"
         running:
           type: "integer"
+          description: "Cells executing now."
           format: "int32"
         completed:
           type: "integer"
+          description: "Cells that finished successfully."
           format: "int32"
         failed:
           type: "integer"
+          description: "Cells whose execution failed."
           format: "int32"
         canceled:
           type: "integer"
+          description: "Cells canceled before they finished."
           format: "int32"
+      description: "Number of cells in each status, across every row and column of the run,\n dataset and review cells included."
     RunStats:
       type: "object"
       properties:
         total_cost:
           type: "number"
+          description: "Total cost in USD of the successful prompt and agent cell executions."
           format: "double"
-        total_runs:
-          type: "integer"
-          format: "int32"
         total_errors:
           type: "integer"
+          description: "Number of failed prompt and agent cell executions."
           format: "int32"
         total_done:
           type: "integer"
+          description: "Number of successful prompt and agent cell executions."
           format: "int32"
+      description: "Execution totals of a run. Not reset when the run is executed again."
     EvalColumnConfig:
       type: "object"
       properties:
         evaluator_id:
           type: "string"
+          description: "ID of the evaluator."
         evaluator_name:
           type: "string"
+          description: "Evaluator display name."
         evaluator_type:
           type: "string"
+          description: "Evaluator type, such as `llm_eval` or `python_eval`."
         evaluator_output_type:
           type: "string"
+          description: "Type of value the evaluator returns, such as `number`."
+      description: "Configuration of an evaluator column. Name and types are read from the\n evaluator."
     ReviewColumnConfig:
       type: "object"
       properties:
         human_eval_id:
           type: "string"
+          description: "ID of the human review definition."
         human_eval_name:
           type: "string"
+          description: "Review name; the same as the column's display name."
         human_eval_type:
           type: "string"
+          description: "Value type the review accepts: `range`, `single_select`, `multi_select`, `text` or `correction`. Empty accepts\n any value."
+      description: "Configuration of a human review column."
     DatasetColumnConfig:
       type: "object"
       properties:
         column_type:
           type: "string"
+          description: "`inputs`, `messages` or `expected_output`. Dataset cells are read-only."
+      description: "Configuration of a dataset column."
     MetricColumnConfig:
       type: "object"
       properties:
         metric_key:
           type: "string"
+          description: "Metric shown: `cost`, `latency`, `ttft`, `input_tokens`, `output_tokens`\n or `reasoning_tokens`."
+      description: "Configuration of a metric column."
     JobOutputColumnConfig:
       type: "object"
       properties:
         job_name:
           type: "string"
+          description: "Name of the evaluatorq job."
       description: "Output of one evaluatorq job; the column holds the text each job produced."
-    CellStatus:
-      type: "string"
-      enum:
-        - "CELL_STATUS_UNSPECIFIED"
-        - "CELL_STATUS_NOT_RUN"
-        - "CELL_STATUS_QUEUED"
-        - "CELL_STATUS_RUNNING"
-        - "CELL_STATUS_COMPLETED"
-        - "CELL_STATUS_FAILED"
-        - "CELL_STATUS_CANCELED"
-    CellProgress:
-      type: "object"
-      properties:
-        elapsed:
-          pattern: "^-?(?:0|[1-9][0-9]{0,11})(?:\\.[0-9]{1,9})?s$"
-          type: "string"
-        spend_usd:
-          type: "number"
-          format: "double"
-        activity:
-          type: "string"
-    CellType:
-      type: "string"
-      enum:
-        - "CELL_TYPE_UNSPECIFIED"
-        - "CELL_TYPE_TEXT"
-        - "CELL_TYPE_NUMBER"
-        - "CELL_TYPE_INPUTS"
-        - "CELL_TYPE_MESSAGES"
-        - "CELL_TYPE_RESPONSE"
-        - "CELL_TYPE_AGENT_RESPONSE"
-        - "CELL_TYPE_EVALUATOR"
-        - "CELL_TYPE_METRIC"
-        - "CELL_TYPE_HUMAN_EVAL"
-        - "CELL_TYPE_OPENRESPONSE"
     LlmConstraints:
       type: "object"
       properties:
         max_turns:
           type: "integer"
+          description: "Maximum number of model calls in a cell's agent loop."
           format: "int32"
         timeout:
           pattern: "^-?(?:0|[1-9][0-9]{0,11})(?:\\.[0-9]{1,9})?s$"
           type: "string"
+          description: "Wall-clock limit for each cell, as a duration string such as `90s`. Must\n not be shorter than the timeout of any agent used by the run's agent\n columns."
         concurrency:
           type: "integer"
+          description: "Maximum number of cells executing at the same time, 1 to 100."
           format: "int32"
-    HarnessConstraints:
-      type: "object"
-      properties:
-        wall_clock_value:
-          type: "integer"
-          format: "uint32"
-        wall_clock_unit:
-          $ref: "#/components/schemas/WallClockUnit"
-        spend_cap_usd:
-          type: "number"
-          format: "double"
-        spend_cap_tokens:
-          type: "string"
-        concurrency:
-          type: "integer"
-          format: "int32"
+      description: "Limits for prompt and agent cells, saved into the run's settings."
     NumberMetricSummary:
       type: "object"
       properties:
         min:
           type: "number"
+          description: "Lowest value."
           format: "double"
         max:
           type: "number"
+          description: "Highest value."
           format: "double"
         avg:
           type: "number"
+          description: "Average value."
           format: "double"
         sum:
           type: "number"
+          description: "Sum of the values."
           format: "double"
         median:
           type: "number"
+          description: "Approximate median."
           format: "double"
         range:
           type: "number"
+          description: "`max` minus `min`."
           format: "double"
         std_dev:
           type: "number"
+          description: "Population standard deviation."
           format: "double"
         count:
           type: "integer"
+          description: "Number of rows with a value."
           format: "int32"
+      description: "Statistics of a numeric metric."
     BooleanMetricSummary:
       type: "object"
       properties:
         passed_rate:
           type: "number"
+          description: "Percentage of rows that passed, 0 to 100, rounded to a whole number."
           format: "double"
         count:
           type: "integer"
+          description: "Number of rows with a value."
           format: "int32"
+      description: "Statistics of a pass or fail metric."
     CategoricalMetricSummary:
       type: "object"
       properties:
@@ -11842,24 +11872,80 @@ components:
           additionalProperties:
             type: "integer"
             format: "int32"
+          description: "Number of rows per label."
         count:
           type: "integer"
+          description: "Number of rows with a label."
           format: "int32"
+      description: "Statistics of a metric that returns labels."
     MetricBaseline:
       type: "object"
       properties:
         avg:
           type: "number"
+          description: "Average of the baseline run."
           format: "double"
         delta:
           type: "number"
+          description: "This run's average minus the baseline average."
           format: "double"
         pct_change:
           type: "number"
+          description: "`delta` as a percentage of the baseline average; 0 when the baseline\n average is 0."
           format: "double"
         direction:
           type: "string"
-          description: "\"up\", \"down\" or \"flat\"."
+          description: "`up`, `down` or `same`, by the sign of `delta`."
+      description: "Comparison with the baseline run."
+    Cell:
+      type: "object"
+      properties:
+        cell_id:
+          type: "string"
+          description: "Cell ID. Token metric cells are derived when read and use\n `{row_id}_{task_column_id}_{metric_key}`."
+        row_id:
+          type: "string"
+          description: "Row the cell belongs to."
+        column_id:
+          type: "string"
+          description: "Column the cell belongs to."
+        status:
+          description: "Execution state. `CELL_STATUS_NOT_RUN`: never executed, which includes\n dataset cells. `CELL_STATUS_QUEUED`: waiting to execute.\n `CELL_STATUS_RUNNING`: executing. `CELL_STATUS_COMPLETED`: finished with a\n value. `CELL_STATUS_FAILED`: execution failed, see `error_message`.\n `CELL_STATUS_CANCELED`: canceled before it finished."
+          $ref: "#/components/schemas/CellStatus"
+        value:
+          type:
+            - "object"
+            - "null"
+          additionalProperties: true
+          description: "Stored documents are returned as-is; strings are wrapped as {\"text\"},\n arrays as {\"messages\"} on messages cells and {\"items\"} elsewhere, other\n scalars as {\"value\"}. Null for a cell that has no value yet. Prompt and\n agent cells hold the response with `last_message`, `model`, `usage`,\n `latency` and `total_cost`; evaluator and review cells hold `type` and\n `value` (or `text`), with an optional `explanation`."
+        artifacts:
+          description: "Null when the cell holds no trace or response reference."
+          anyOf:
+            - allOf:
+                - $ref: "#/components/schemas/ArtifactRefs"
+            - type: "null"
+        error_message:
+          type: "string"
+          description: "Reason the cell failed. Cleared when the cell is queued again by Execute a\n run."
+        type:
+          description: "Kind of cell, set by its column. `CELL_TYPE_INPUTS`, `CELL_TYPE_MESSAGES`\n and `CELL_TYPE_TEXT` hold data (expected output and job output are text).\n `CELL_TYPE_RESPONSE`: prompt column. `CELL_TYPE_AGENT_RESPONSE`: agent\n column. `CELL_TYPE_OPENRESPONSE`: openresponse column.\n `CELL_TYPE_EVALUATOR`, `CELL_TYPE_METRIC` and `CELL_TYPE_HUMAN_EVAL`:\n evaluator, metric and review columns."
+          $ref: "#/components/schemas/CellType"
+        task_column_id:
+          type: "string"
+          description: "Task column an evaluator, metric or review cell belongs to. Empty on the\n placeholder cells of a run without task columns."
+        created_at:
+          type:
+            - "string"
+            - "null"
+          description: "Null on cells written before timestamps were recorded."
+          format: "date-time"
+        updated_at:
+          type:
+            - "string"
+            - "null"
+          description: "Time of the last write to the cell. Null on cells written before\n timestamps were recorded."
+          format: "date-time"
+      description: "A cell: the value of one column in one row."
     RowStatus:
       type: "string"
       enum:
@@ -11877,12 +11963,40 @@ components:
         - "MESSAGES_SOURCE_PROMPT_CONFIG"
         - "MESSAGES_SOURCE_MESSAGES_COLUMN"
         - "MESSAGES_SOURCE_COMBINED"
-    WallClockUnit:
+    CellStatus:
       type: "string"
       enum:
-        - "WALL_CLOCK_UNIT_UNSPECIFIED"
-        - "WALL_CLOCK_UNIT_MINUTES"
-        - "WALL_CLOCK_UNIT_HOURS"
+        - "CELL_STATUS_UNSPECIFIED"
+        - "CELL_STATUS_NOT_RUN"
+        - "CELL_STATUS_QUEUED"
+        - "CELL_STATUS_RUNNING"
+        - "CELL_STATUS_COMPLETED"
+        - "CELL_STATUS_FAILED"
+        - "CELL_STATUS_CANCELED"
+    ArtifactRefs:
+      type: "object"
+      properties:
+        trace_id:
+          type: "string"
+          description: "Trace of the execution that produced the value."
+        response_id:
+          type: "string"
+          description: "Response produced by a prompt or agent cell."
+      description: "References read from the cell's value."
+    CellType:
+      type: "string"
+      enum:
+        - "CELL_TYPE_UNSPECIFIED"
+        - "CELL_TYPE_TEXT"
+        - "CELL_TYPE_NUMBER"
+        - "CELL_TYPE_INPUTS"
+        - "CELL_TYPE_MESSAGES"
+        - "CELL_TYPE_RESPONSE"
+        - "CELL_TYPE_AGENT_RESPONSE"
+        - "CELL_TYPE_EVALUATOR"
+        - "CELL_TYPE_METRIC"
+        - "CELL_TYPE_HUMAN_EVAL"
+        - "CELL_TYPE_OPENRESPONSE"
     AutoRouterConfig:
       additionalProperties: false
       properties:
@@ -27913,7 +28027,7 @@ paths:
                                 type: "string"
                                 format: "ulid"
                                 pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                                default: "01M72AV1X7DCRNXEC4J50Q6VDH"
+                                default: "01M72N6DV9AK1HJED7RXAF2QM8"
                                 readOnly: true
                                 description: "The unique identifier of the playground knowledge base"
                               knowledge_id:
@@ -37312,7 +37426,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01M72AV1Z9QP7BV410MHJVST5W"
+                                          default: "01M72N6DX970XNTD0BX2C0B7D2"
                                         name:
                                           type: "string"
                                         description:
@@ -38938,7 +39052,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01M72AV1ZPPCGX75ZBJGKD08JB"
+                                          default: "01M72N6DXM3F0901YTGDFQMZKC"
                                         name:
                                           type: "string"
                                         description:
@@ -47995,7 +48109,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M72AV20PC76PGJXS9RTBPJ5W"
+                              default: "tool_01M72N6DYHPABANGXB1ZN9Z120"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -48096,7 +48210,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M72AV20PT76BMN2R0ZW196DH"
+                              default: "tool_01M72N6DYJC13K3YFDFR1NYZ41"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -48199,7 +48313,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M72AV20QKATNT6RK14FBA4ED"
+                              default: "tool_01M72N6DYJDM5YZC1A5ZTBESCZ"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -48343,7 +48457,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M72AV20QSJM21NHBEZVTVQTX"
+                              default: "tool_01M72N6DYMCEFNRAHNQPKNQWVH"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -48830,7 +48944,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M72AV20TQY3EF9F8SMKNXC4M"
+                        default: "tool_01M72N6DYQH2M27Z1JXZ2DA5RQ"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -48931,7 +49045,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M72AV20TW2R27MEMHP8TRHPD"
+                        default: "tool_01M72N6DYQ62C0T6611XRJSTAP"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -49034,7 +49148,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M72AV20TM69AHAA21SP4YC81"
+                        default: "tool_01M72N6DYQZ9H2GQMK3RETPNE0"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -49178,7 +49292,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M72AV20VYRX4RVFC1JM6SE6K"
+                        default: "tool_01M72N6DYRVEC9C5Y7V2AND521"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -49682,7 +49796,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M72AV20Z49DHEE50ED32W625"
+                        default: "tool_01M72N6DYS4060QNDGJWNE231S"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -49783,7 +49897,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M72AV20Z72VPAJQ5VXWY0BTD"
+                        default: "tool_01M72N6DYS6YGFAEG2K0KM3A3Q"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -49886,7 +50000,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M72AV210F86K794SSPWPNTSS"
+                        default: "tool_01M72N6DYTE9ES8GEJTKBTGDWK"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -50030,7 +50144,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M72AV211ZT7E1PMECZRJKGNA"
+                        default: "tool_01M72N6DYTGM9CSE9JJ41CS9EA"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -50197,7 +50311,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M72AV216GTPEZ4X99Y94DBK2"
+                        default: "tool_01M72N6DYY3NP9EAZ9X966CYJ0"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -50298,7 +50412,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M72AV2160DY561SC90YPEBZM"
+                        default: "tool_01M72N6DYYYRHKP20Z7592461M"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -50401,7 +50515,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M72AV2177E3YDTDQ7Q7AK0EP"
+                        default: "tool_01M72N6DYYPZ2ZNNVBEY67587S"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -50545,7 +50659,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M72AV217HTXN4WGGWB0HD5HF"
+                        default: "tool_01M72N6DYZ8CS146A6V19J2N3B"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -65460,19 +65574,23 @@ paths:
       parameters:
         - name: "limit"
           in: "query"
+          description: "Page size, 1 to 200. Defaults to 25."
           schema:
             type: "integer"
             format: "int32"
         - name: "starting_after"
           in: "query"
+          description: "Cursor for forward pagination. Set to the `experiment_id` of the last item\n from the previous page."
           schema:
             type: "string"
         - name: "ending_before"
           in: "query"
+          description: "Cursor for backward pagination. Set to the `experiment_id` of the first\n item from the previous page."
           schema:
             type: "string"
         - name: "project_id"
           in: "query"
+          description: "Restrict results to one project. Omit to list every project the caller\n can access."
           schema:
             type: "string"
       responses:
@@ -65495,7 +65613,7 @@ paths:
       x-code-samples:
         - lang: "curl"
           label: "Core - List experiments"
-          source: "curl --get 'https://api.orq.ai/v3/experiments' \\\n  --header 'Authorization: Bearer $ORQ_API_KEY' \\\n  --data-urlencode 'limit=25'\n"
+          source: "curl --get 'https://my.orq.ai/v3/experiments' \\\n  --header 'Authorization: Bearer $ORQ_API_KEY' \\\n  --data-urlencode 'limit=25'\n"
         - lang: "python"
           label: "Python - List experiments"
           source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\npage = client.experiments.list(limit=25)\n\nfor experiment in page.data:\n    print(experiment.experiment_id, experiment.display_name)\n"
@@ -65508,7 +65626,7 @@ paths:
       tags:
         - "Experiments"
       summary: "Create an experiment"
-      description: "Creates an experiment. project_id defaults to the API key's project and is required for keys that span several projects. When dataset_id is set, a draft run is created with rows from that dataset."
+      description: "Creates an experiment and its first run, a draft named Run 1. When dataset_id is set, the run gets one row per datapoint, up to 1000. project_id defaults to the caller's project and is required for API keys that span several projects."
       operationId: "ExperimentCreate"
       requestBody:
         content:
@@ -65536,7 +65654,7 @@ paths:
       x-code-samples:
         - lang: "curl"
           label: "Core - Create an experiment"
-          source: "curl 'https://api.orq.ai/v3/experiments' \\\n  --header 'Authorization: Bearer $ORQ_API_KEY' \\\n  --header 'Content-Type: application/json' \\\n  --data '{\n    \"display_name\": \"Support replies v2\",\n    \"project_id\": \"<project_id>\",\n    \"dataset_id\": \"<dataset_id>\"\n  }'\n"
+          source: "curl 'https://my.orq.ai/v3/experiments' \\\n  --header 'Authorization: Bearer $ORQ_API_KEY' \\\n  --header 'Content-Type: application/json' \\\n  --data '{\n    \"display_name\": \"Support replies v2\",\n    \"project_id\": \"<project_id>\",\n    \"dataset_id\": \"<dataset_id>\"\n  }'\n"
         - lang: "python"
           label: "Python - Create an experiment"
           source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\nexperiment = client.experiments.create(\n    display_name=\"Support replies v2\",\n    project_id=\"<project_id>\",\n    dataset_id=\"<dataset_id>\",\n)\n\nprint(experiment.experiment_id, experiment.selected_run_id)\n"
@@ -65555,6 +65673,7 @@ paths:
       parameters:
         - name: "experiment_id"
           in: "path"
+          description: "ID of the experiment."
           required: true
           schema:
             type: "string"
@@ -65578,7 +65697,7 @@ paths:
       x-code-samples:
         - lang: "curl"
           label: "Core - Get an experiment"
-          source: "curl 'https://api.orq.ai/v3/experiments/<experiment_id>' \\\n  --header 'Authorization: Bearer $ORQ_API_KEY'\n"
+          source: "curl 'https://my.orq.ai/v3/experiments/<experiment_id>' \\\n  --header 'Authorization: Bearer $ORQ_API_KEY'\n"
         - lang: "python"
           label: "Python - Get an experiment"
           source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\nexperiment = client.experiments.get(experiment_id=\"<experiment_id>\")\n\nprint(experiment.display_name)\n"
@@ -65591,11 +65710,12 @@ paths:
       tags:
         - "Experiments"
       summary: "Delete an experiment"
-      description: "Deletes an experiment and its runs."
+      description: "Deletes an experiment with all its runs, rows and cells."
       operationId: "ExperimentDelete"
       parameters:
         - name: "experiment_id"
           in: "path"
+          description: "ID of the experiment."
           required: true
           schema:
             type: "string"
@@ -65615,7 +65735,7 @@ paths:
       x-code-samples:
         - lang: "curl"
           label: "Core - Delete an experiment"
-          source: "curl --request DELETE 'https://api.orq.ai/v3/experiments/<experiment_id>' \\\n  --header 'Authorization: Bearer $ORQ_API_KEY'\n"
+          source: "curl --request DELETE 'https://my.orq.ai/v3/experiments/<experiment_id>' \\\n  --header 'Authorization: Bearer $ORQ_API_KEY'\n"
         - lang: "python"
           label: "Python - Delete an experiment"
           source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\nclient.experiments.delete(experiment_id=\"<experiment_id>\")\n"
@@ -65633,6 +65753,7 @@ paths:
       parameters:
         - name: "experiment_id"
           in: "path"
+          description: "ID of the experiment."
           required: true
           schema:
             type: "string"
@@ -65662,7 +65783,7 @@ paths:
       x-code-samples:
         - lang: "curl"
           label: "Core - Rename an experiment"
-          source: "curl --request PATCH 'https://api.orq.ai/v3/experiments/<experiment_id>' \\\n  --header 'Authorization: Bearer $ORQ_API_KEY' \\\n  --header 'Content-Type: application/json' \\\n  --data '{ \"display_name\": \"Support replies v3\" }'\n"
+          source: "curl --request PATCH 'https://my.orq.ai/v3/experiments/<experiment_id>' \\\n  --header 'Authorization: Bearer $ORQ_API_KEY' \\\n  --header 'Content-Type: application/json' \\\n  --data '{ \"display_name\": \"Support replies v3\" }'\n"
         - lang: "python"
           label: "Python - Rename an experiment"
           source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\nexperiment = client.experiments.update(\n    experiment_id=\"<experiment_id>\",\n    display_name=\"Support replies v3\",\n)\n"
@@ -65681,24 +65802,29 @@ paths:
       parameters:
         - name: "experiment_id"
           in: "path"
+          description: "ID of the experiment."
           required: true
           schema:
             type: "string"
         - name: "limit"
           in: "query"
+          description: "Page size, 1 to 200. Defaults to 25."
           schema:
             type: "integer"
             format: "int32"
         - name: "starting_after"
           in: "query"
+          description: "Cursor for forward pagination. Set to the `run_id` of the last item from\n the previous page."
           schema:
             type: "string"
         - name: "ending_before"
           in: "query"
+          description: "Cursor for backward pagination. Set to the `run_id` of the first item from\n the previous page."
           schema:
             type: "string"
         - name: "include_metrics"
           in: "query"
+          description: "Include each run's average evaluator results in `metrics`."
           schema:
             type: "boolean"
       responses:
@@ -65721,7 +65847,7 @@ paths:
       x-code-samples:
         - lang: "curl"
           label: "Core - List runs"
-          source: "curl 'https://api.orq.ai/v3/experiments/<experiment_id>/runs' \\\n  --header 'Authorization: Bearer $ORQ_API_KEY'\n"
+          source: "curl 'https://my.orq.ai/v3/experiments/<experiment_id>/runs' \\\n  --header 'Authorization: Bearer $ORQ_API_KEY'\n"
         - lang: "python"
           label: "Python - List runs"
           source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\npage = client.experiments.list_runs(experiment_id=\"<experiment_id>\")\n\nfor run in page.data:\n    print(run.run_id, run.status, run.cell_status_counts)\n"
@@ -65739,6 +65865,7 @@ paths:
       parameters:
         - name: "experiment_id"
           in: "path"
+          description: "ID of the experiment."
           required: true
           schema:
             type: "string"
@@ -65768,7 +65895,7 @@ paths:
       x-code-samples:
         - lang: "curl"
           label: "Core - Create a run"
-          source: "curl 'https://api.orq.ai/v3/experiments/<experiment_id>/runs' \\\n  --header 'Authorization: Bearer $ORQ_API_KEY' \\\n  --header 'Content-Type: application/json' \\\n  --data '{ \"key\": \"Run 2\", \"settings\": { \"concurrency\": 5 } }'\n"
+          source: "curl 'https://my.orq.ai/v3/experiments/<experiment_id>/runs' \\\n  --header 'Authorization: Bearer $ORQ_API_KEY' \\\n  --header 'Content-Type: application/json' \\\n  --data '{ \"key\": \"Run 2\", \"settings\": { \"concurrency\": 5 } }'\n"
         - lang: "python"
           label: "Python - Create a run"
           source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\nrun = client.experiments.create_run(\n    experiment_id=\"<experiment_id>\",\n    key=\"Run 2\",\n    settings={\"concurrency\": 5},\n)\n\nprint(run.run_id, run.row_count)\n"
@@ -65787,11 +65914,13 @@ paths:
       parameters:
         - name: "experiment_id"
           in: "path"
+          description: "ID of the experiment."
           required: true
           schema:
             type: "string"
         - name: "run_id"
           in: "path"
+          description: "ID of the run."
           required: true
           schema:
             type: "string"
@@ -65815,7 +65944,7 @@ paths:
       x-code-samples:
         - lang: "curl"
           label: "Core - Get a run"
-          source: "curl 'https://api.orq.ai/v3/experiments/<experiment_id>/runs/<run_id>' \\\n  --header 'Authorization: Bearer $ORQ_API_KEY'\n"
+          source: "curl 'https://my.orq.ai/v3/experiments/<experiment_id>/runs/<run_id>' \\\n  --header 'Authorization: Bearer $ORQ_API_KEY'\n"
         - lang: "python"
           label: "Python - Get a run"
           source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\nrun = client.experiments.get_run(experiment_id=\"<experiment_id>\", run_id=\"<run_id>\")\n\nprint(run.status, run.cell_status_counts.completed)\n"
@@ -65828,16 +65957,18 @@ paths:
       tags:
         - "Experiments"
       summary: "Delete a run"
-      description: "Deletes a run and its cell data. Distinct from cancel, which keeps completed cells."
+      description: "Deletes a run and its cell data. The last run of an experiment cannot be deleted. Distinct from cancel, which keeps completed cells."
       operationId: "ExperimentRunDelete"
       parameters:
         - name: "experiment_id"
           in: "path"
+          description: "ID of the experiment."
           required: true
           schema:
             type: "string"
         - name: "run_id"
           in: "path"
+          description: "ID of the run."
           required: true
           schema:
             type: "string"
@@ -65865,11 +65996,13 @@ paths:
       parameters:
         - name: "experiment_id"
           in: "path"
+          description: "ID of the experiment."
           required: true
           schema:
             type: "string"
         - name: "run_id"
           in: "path"
+          description: "ID of the run."
           required: true
           schema:
             type: "string"
@@ -65908,11 +66041,13 @@ paths:
       parameters:
         - name: "experiment_id"
           in: "path"
+          description: "ID of the experiment."
           required: true
           schema:
             type: "string"
         - name: "run_id"
           in: "path"
+          description: "ID of the run."
           required: true
           schema:
             type: "string"
@@ -65942,7 +66077,7 @@ paths:
       x-code-samples:
         - lang: "curl"
           label: "Core - Cancel a run"
-          source: "curl 'https://api.orq.ai/v3/experiments/<experiment_id>/runs/<run_id>/cancel' \\\n  --header 'Authorization: Bearer $ORQ_API_KEY' \\\n  --header 'Content-Type: application/json' \\\n  --data '{}'\n"
+          source: "curl 'https://my.orq.ai/v3/experiments/<experiment_id>/runs/<run_id>/cancel' \\\n  --header 'Authorization: Bearer $ORQ_API_KEY' \\\n  --header 'Content-Type: application/json' \\\n  --data '{}'\n"
         - lang: "python"
           label: "Python - Cancel a run"
           source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\nrun = client.experiments.cancel_run(experiment_id=\"<experiment_id>\", run_id=\"<run_id>\")\n\nprint(run.status)\n"
@@ -65961,11 +66096,13 @@ paths:
       parameters:
         - name: "experiment_id"
           in: "path"
+          description: "ID of the experiment."
           required: true
           schema:
             type: "string"
         - name: "run_id"
           in: "path"
+          description: "ID of the run."
           required: true
           schema:
             type: "string"
@@ -65995,7 +66132,7 @@ paths:
       x-code-samples:
         - lang: "curl"
           label: "Core - Reorder and resize columns"
-          source: "curl --request PATCH 'https://api.orq.ai/v3/experiments/<experiment_id>/runs/<run_id>/columns/layout' \\\n  --header 'Authorization: Bearer $ORQ_API_KEY' \\\n  --header 'Content-Type: application/json' \\\n  --data '{ \"columns\": [{ \"column_id\": \"<column_id>\", \"position\": 3, \"width\": 320 }] }'\n"
+          source: "curl --request PATCH 'https://my.orq.ai/v3/experiments/<experiment_id>/runs/<run_id>/columns/layout' \\\n  --header 'Authorization: Bearer $ORQ_API_KEY' \\\n  --header 'Content-Type: application/json' \\\n  --data '{ \"columns\": [{ \"column_id\": \"<column_id>\", \"position\": 3, \"width\": 320 }] }'\n"
         - lang: "python"
           label: "Python - Reorder and resize columns"
           source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\nrun = client.experiments.update_run_column_layout(\n    experiment_id=\"<experiment_id>\",\n    run_id=\"<run_id>\",\n    columns=[{\"column_id\": \"<column_id>\", \"position\": 3, \"width\": 320}],\n)\n\nprint([column.display_name for column in run.columns])\n"
@@ -66009,15 +66146,18 @@ paths:
       tags:
         - "Experiments"
       summary: "List eval columns"
+      description: "Lists the evaluator columns of a run."
       operationId: "ExperimentEvalList"
       parameters:
         - name: "experiment_id"
           in: "path"
+          description: "ID of the experiment."
           required: true
           schema:
             type: "string"
         - name: "run_id"
           in: "path"
+          description: "ID of the run."
           required: true
           schema:
             type: "string"
@@ -66044,16 +66184,18 @@ paths:
       tags:
         - "Experiments"
       summary: "Add an eval column"
-      description: "Links an existing evaluator. Config is updated at the evaluator source, not here."
+      description: "Links an existing evaluator. Each row gets one evaluator cell per task column. Config is updated at the evaluator source, not here."
       operationId: "ExperimentEvalCreate"
       parameters:
         - name: "experiment_id"
           in: "path"
+          description: "ID of the experiment."
           required: true
           schema:
             type: "string"
         - name: "run_id"
           in: "path"
+          description: "ID of the run."
           required: true
           schema:
             type: "string"
@@ -66083,7 +66225,7 @@ paths:
       x-code-samples:
         - lang: "curl"
           label: "Core - Add an evaluator column"
-          source: "curl 'https://api.orq.ai/v3/experiments/<experiment_id>/runs/<run_id>/evaluators' \\\n  --header 'Authorization: Bearer $ORQ_API_KEY' \\\n  --header 'Content-Type: application/json' \\\n  --data '{ \"evaluator_id\": \"<evaluator_id>\" }'\n"
+          source: "curl 'https://my.orq.ai/v3/experiments/<experiment_id>/runs/<run_id>/evaluators' \\\n  --header 'Authorization: Bearer $ORQ_API_KEY' \\\n  --header 'Content-Type: application/json' \\\n  --data '{ \"evaluator_id\": \"<evaluator_id>\" }'\n"
         - lang: "python"
           label: "Python - Add an evaluator column"
           source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\ncolumn = client.experiments.create_eval(\n    experiment_id=\"<experiment_id>\",\n    run_id=\"<run_id>\",\n    evaluator_id=\"<evaluator_id>\",\n)\n"
@@ -66097,20 +66239,24 @@ paths:
       tags:
         - "Experiments"
       summary: "Remove an eval column"
+      description: "Removes an evaluator column and all its cells."
       operationId: "ExperimentEvalDelete"
       parameters:
         - name: "experiment_id"
           in: "path"
+          description: "ID of the experiment."
           required: true
           schema:
             type: "string"
         - name: "run_id"
           in: "path"
+          description: "ID of the run."
           required: true
           schema:
             type: "string"
         - name: "eval_id"
           in: "path"
+          description: "ID of the evaluator column."
           required: true
           schema:
             type: "string"
@@ -66129,74 +66275,23 @@ paths:
       x-cli-name: "deleteEval"
       security:
         - ApiKey: []
-  /v3/experiments/{experiment_id}/runs/{run_id}/evaluators/{eval_id}/cells/{datapoint_id}:
-    patch:
-      tags:
-        - "Experiments"
-      summary: "Correct an eval cell"
-      description: "Human override of an automated evaluator verdict on one datapoint."
-      operationId: "ExperimentEvalCellPatch"
-      parameters:
-        - name: "experiment_id"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
-        - name: "run_id"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
-        - name: "eval_id"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
-        - name: "datapoint_id"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/PatchEvalCellRequest"
-        required: true
-      responses:
-        "200":
-          description: "OK"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Cell"
-        "401":
-          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
-      x-speakeasy-group: "experiments"
-      x-speakeasy-name-override: "patchEvalCell"
-      x-cli-group: "experiments"
-      x-cli-name: "patchEvalCell"
-      security:
-        - ApiKey: []
   /v3/experiments/{experiment_id}/runs/{run_id}/execute:
     post:
       tags:
         - "Experiments"
       summary: "Execute a run"
-      description: "Executes cells at the requested scope. FULL, PARTIAL, ROW and COLUMN queue the matching cells (a task column also queues its linked evaluator, metric and review cells) and start the orchestrator, which also re-runs failed cells of every row it picks up. A run that is already queued or running rejects new execution until it finishes or is cancelled. CELL re-runs one task or evaluator cell in place. Re-executing a terminal run does not require creating a new run."
+      description: "Executes cells at the requested scope. FULL, PARTIAL, ROW and COLUMN queue the matching cells (a task column also queues its linked evaluator and metric cells) and start the orchestrator, which also re-runs failed cells of every row it picks up. A run that is already queued or running rejects new execution until it finishes or is cancelled. CELL re-runs one task or evaluator cell in place. Re-executing a terminal run does not require creating a new run."
       operationId: "ExperimentRunExecute"
       parameters:
         - name: "experiment_id"
           in: "path"
+          description: "ID of the experiment."
           required: true
           schema:
             type: "string"
         - name: "run_id"
           in: "path"
+          description: "ID of the run."
           required: true
           schema:
             type: "string"
@@ -66226,7 +66321,7 @@ paths:
       x-code-samples:
         - lang: "curl"
           label: "Core - Execute a run"
-          source: "curl 'https://api.orq.ai/v3/experiments/<experiment_id>/runs/<run_id>/execute' \\\n  --header 'Authorization: Bearer $ORQ_API_KEY' \\\n  --header 'Content-Type: application/json' \\\n  --data '{\n    \"scope\": \"EXECUTE_SCOPE_FULL\",\n    \"constraints\": { \"llm\": { \"concurrency\": 5, \"timeout\": \"300s\" } }\n  }'\n"
+          source: "curl 'https://my.orq.ai/v3/experiments/<experiment_id>/runs/<run_id>/execute' \\\n  --header 'Authorization: Bearer $ORQ_API_KEY' \\\n  --header 'Content-Type: application/json' \\\n  --data '{\n    \"scope\": \"EXECUTE_SCOPE_FULL\",\n    \"constraints\": { \"llm\": { \"concurrency\": 5, \"timeout\": \"300s\" } }\n  }'\n"
         - lang: "python"
           label: "Python - Execute a run"
           source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\nrun = client.experiments.execute_run(\n    experiment_id=\"<experiment_id>\",\n    run_id=\"<run_id>\",\n    scope=\"EXECUTE_SCOPE_FULL\",\n    constraints={\"llm\": {\"concurrency\": 5, \"timeout\": \"300s\"}},\n)\n\nprint(run.status)\n"
@@ -66245,16 +66340,19 @@ paths:
       parameters:
         - name: "experiment_id"
           in: "path"
+          description: "ID of the experiment."
           required: true
           schema:
             type: "string"
         - name: "run_id"
           in: "path"
+          description: "ID of the run."
           required: true
           schema:
             type: "string"
         - name: "baseline_run_id"
           in: "query"
+          description: "Run of the same experiment to compare against. A run without values\n returns no baseline."
           schema:
             type: "string"
       responses:
@@ -66277,7 +66375,7 @@ paths:
       x-code-samples:
         - lang: "curl"
           label: "Core - Get run metrics"
-          source: "curl --get 'https://api.orq.ai/v3/experiments/<experiment_id>/runs/<run_id>/metrics' \\\n  --header 'Authorization: Bearer $ORQ_API_KEY'\n"
+          source: "curl --get 'https://my.orq.ai/v3/experiments/<experiment_id>/runs/<run_id>/metrics' \\\n  --header 'Authorization: Bearer $ORQ_API_KEY'\n"
         - lang: "python"
           label: "Python - Get run metrics"
           source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\nsummary = client.experiments.get_run_metrics(\n    experiment_id=\"<experiment_id>\",\n    run_id=\"<run_id>\",\n)\n\nfor key, metric in summary.metrics.items():\n    print(key, metric)\n"
@@ -66291,16 +66389,18 @@ paths:
       tags:
         - "Experiments"
       summary: "Query run cells"
-      description: "Returns selected cells by row and column name. POST because selections can exceed URL limits."
+      description: "Returns the rows of a run with their cells, filtered by row and column. POST because selections can exceed URL limits."
       operationId: "ExperimentRunQuery"
       parameters:
         - name: "experiment_id"
           in: "path"
+          description: "ID of the experiment."
           required: true
           schema:
             type: "string"
         - name: "run_id"
           in: "path"
+          description: "ID of the run."
           required: true
           schema:
             type: "string"
@@ -66330,7 +66430,7 @@ paths:
       x-code-samples:
         - lang: "curl"
           label: "Core - Query run cells"
-          source: "curl 'https://api.orq.ai/v3/experiments/<experiment_id>/runs/<run_id>/query' \\\n  --header 'Authorization: Bearer $ORQ_API_KEY' \\\n  --header 'Content-Type: application/json' \\\n  --data '{ \"columns\": [\"GPT-4o reply\"], \"limit\": 50 }'\n"
+          source: "curl 'https://my.orq.ai/v3/experiments/<experiment_id>/runs/<run_id>/query' \\\n  --header 'Authorization: Bearer $ORQ_API_KEY' \\\n  --header 'Content-Type: application/json' \\\n  --data '{ \"columns\": [\"GPT-4o reply\"], \"limit\": 50 }'\n"
         - lang: "python"
           label: "Python - Query run cells"
           source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\npage = client.experiments.query_run(\n    experiment_id=\"<experiment_id>\",\n    run_id=\"<run_id>\",\n    columns=[\"GPT-4o reply\"],\n    limit=50,\n)\n\nfor row in page.rows:\n    for cell in row.cells:\n        print(row.row_id, cell.status, cell.value)\n"
@@ -66344,15 +66444,18 @@ paths:
       tags:
         - "Experiments"
       summary: "List human review columns"
+      description: "Lists the human review columns of a run."
       operationId: "ExperimentReviewList"
       parameters:
         - name: "experiment_id"
           in: "path"
+          description: "ID of the experiment."
           required: true
           schema:
             type: "string"
         - name: "run_id"
           in: "path"
+          description: "ID of the run."
           required: true
           schema:
             type: "string"
@@ -66379,15 +66482,18 @@ paths:
       tags:
         - "Experiments"
       summary: "Add a human review column"
+      description: "Adds a human review column. Each row gets one review cell per task column."
       operationId: "ExperimentReviewCreate"
       parameters:
         - name: "experiment_id"
           in: "path"
+          description: "ID of the experiment."
           required: true
           schema:
             type: "string"
         - name: "run_id"
           in: "path"
+          description: "ID of the run."
           required: true
           schema:
             type: "string"
@@ -66421,20 +66527,24 @@ paths:
       tags:
         - "Experiments"
       summary: "Remove a human review column"
+      description: "Removes a human review column and all its cells."
       operationId: "ExperimentReviewDelete"
       parameters:
         - name: "experiment_id"
           in: "path"
+          description: "ID of the experiment."
           required: true
           schema:
             type: "string"
         - name: "run_id"
           in: "path"
+          description: "ID of the run."
           required: true
           schema:
             type: "string"
         - name: "review_id"
           in: "path"
+          description: "ID of the review column."
           required: true
           schema:
             type: "string"
@@ -66462,16 +66572,19 @@ paths:
       parameters:
         - name: "experiment_id"
           in: "path"
+          description: "ID of the experiment."
           required: true
           schema:
             type: "string"
         - name: "run_id"
           in: "path"
+          description: "ID of the run."
           required: true
           schema:
             type: "string"
         - name: "review_id"
           in: "path"
+          description: "ID of the review column."
           required: true
           schema:
             type: "string"
@@ -66500,58 +66613,6 @@ paths:
       x-cli-name: "updateReview"
       security:
         - ApiKey: []
-  /v3/experiments/{experiment_id}/runs/{run_id}/reviews/{review_id}/cells/{datapoint_id}:
-    patch:
-      tags:
-        - "Experiments"
-      summary: "Set a human review cell"
-      operationId: "ExperimentReviewCellPatch"
-      parameters:
-        - name: "experiment_id"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
-        - name: "run_id"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
-        - name: "review_id"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
-        - name: "datapoint_id"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/PatchReviewCellRequest"
-        required: true
-      responses:
-        "200":
-          description: "OK"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Cell"
-        "401":
-          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
-      x-speakeasy-group: "experiments"
-      x-speakeasy-name-override: "patchReviewCell"
-      x-cli-group: "experiments"
-      x-cli-name: "patchReviewCell"
-      security:
-        - ApiKey: []
   /v3/experiments/{experiment_id}/runs/{run_id}/rows/bulk-delete:
     post:
       tags:
@@ -66562,11 +66623,13 @@ paths:
       parameters:
         - name: "experiment_id"
           in: "path"
+          description: "ID of the experiment."
           required: true
           schema:
             type: "string"
         - name: "run_id"
           in: "path"
+          description: "ID of the run."
           required: true
           schema:
             type: "string"
@@ -66592,7 +66655,7 @@ paths:
       x-code-samples:
         - lang: "curl"
           label: "Core - Delete rows"
-          source: "curl --request POST 'https://api.orq.ai/v3/experiments/<experiment_id>/runs/<run_id>/rows/bulk-delete' \\\n  --header 'Authorization: Bearer $ORQ_API_KEY' \\\n  --header 'Content-Type: application/json' \\\n  --data '{ \"row_ids\": [\"<row_id>\"] }'\n"
+          source: "curl --request POST 'https://my.orq.ai/v3/experiments/<experiment_id>/runs/<run_id>/rows/bulk-delete' \\\n  --header 'Authorization: Bearer $ORQ_API_KEY' \\\n  --header 'Content-Type: application/json' \\\n  --data '{ \"row_ids\": [\"<row_id>\"] }'\n"
         - lang: "python"
           label: "Python - Delete rows"
           source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\nclient.experiments.delete_rows(\n    experiment_id=\"<experiment_id>\",\n    run_id=\"<run_id>\",\n    row_ids=[\"<row_id>\"],\n)\n"
@@ -66601,89 +66664,29 @@ paths:
           source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({ apiKey: process.env.ORQ_API_KEY });\n\nawait client.experiments.deleteRows({\n  experimentId: '<experiment_id>',\n  runId: '<run_id>',\n  rowIds: ['<row_id>'],\n});\n"
       security:
         - ApiKey: []
-  /v3/experiments/{experiment_id}/runs/{run_id}/rows/{row_id}/cells/{cell_id}:
-    patch:
-      tags:
-        - "Experiments"
-      summary: "Update a cell"
-      description: "Writes a cell value by cell id, including dataset and review cells. An empty value clears the cell. Running cells cannot be changed."
-      operationId: "ExperimentRunCellUpdate"
-      parameters:
-        - name: "experiment_id"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
-        - name: "run_id"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
-        - name: "row_id"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
-        - name: "cell_id"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/UpdateRunCellRequest"
-        required: true
-      responses:
-        "200":
-          description: "OK"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Cell"
-        "401":
-          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
-      x-speakeasy-group: "experiments"
-      x-speakeasy-name-override: "updateRunCell"
-      x-cli-group: "experiments"
-      x-cli-name: "updateRunCell"
-      x-code-samples:
-        - lang: "curl"
-          label: "Core - Update a cell"
-          source: "curl --request PATCH 'https://api.orq.ai/v3/experiments/<experiment_id>/runs/<run_id>/rows/<row_id>/cells/<cell_id>' \\\n  --header 'Authorization: Bearer $ORQ_API_KEY' \\\n  --header 'Content-Type: application/json' \\\n  --data '{ \"value\": { \"text\": \"Corrected expected output\" } }'\n"
-        - lang: "python"
-          label: "Python - Update a cell"
-          source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\ncell = client.experiments.update_run_cell(\n    experiment_id=\"<experiment_id>\",\n    run_id=\"<run_id>\",\n    row_id=\"<row_id>\",\n    cell_id=\"<cell_id>\",\n    value={\"text\": \"Corrected expected output\"},\n)\n\nprint(cell.cell_id, cell.value)\n"
-        - lang: "typescript"
-          label: "Node.js - Update a cell"
-          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({ apiKey: process.env.ORQ_API_KEY });\n\nconst cell = await client.experiments.updateRunCell({\n  experimentId: '<experiment_id>',\n  runId: '<run_id>',\n  rowId: '<row_id>',\n  cellId: '<cell_id>',\n  value: { text: 'Corrected expected output' },\n});\n\nconsole.log(cell.cellId, cell.value);\n"
-      security:
-        - ApiKey: []
   /v3/experiments/{experiment_id}/runs/{run_id}/rows/{row_id}/duplicate:
     post:
       tags:
         - "Experiments"
       summary: "Duplicate a row"
-      description: "Copies a row's dataset cells into a new row placed after the source. Task, evaluator, metric and review cells start empty."
+      description: "Copies a row into a new row at the end of the run. Dataset and review cells keep their values; task, evaluator and metric cells start empty."
       operationId: "ExperimentRunRowDuplicate"
       parameters:
         - name: "experiment_id"
           in: "path"
+          description: "ID of the experiment."
           required: true
           schema:
             type: "string"
         - name: "run_id"
           in: "path"
+          description: "ID of the run."
           required: true
           schema:
             type: "string"
         - name: "row_id"
           in: "path"
+          description: "ID of the row to copy."
           required: true
           schema:
             type: "string"
@@ -66713,7 +66716,7 @@ paths:
       x-code-samples:
         - lang: "curl"
           label: "Core - Duplicate a row"
-          source: "curl --request POST 'https://api.orq.ai/v3/experiments/<experiment_id>/runs/<run_id>/rows/<row_id>/duplicate' \\\n  --header 'Authorization: Bearer $ORQ_API_KEY' \\\n  --header 'Content-Type: application/json' \\\n  --data '{}'\n"
+          source: "curl --request POST 'https://my.orq.ai/v3/experiments/<experiment_id>/runs/<run_id>/rows/<row_id>/duplicate' \\\n  --header 'Authorization: Bearer $ORQ_API_KEY' \\\n  --header 'Content-Type: application/json' \\\n  --data '{}'\n"
         - lang: "python"
           label: "Python - Duplicate a row"
           source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\nrow = client.experiments.duplicate_row(\n    experiment_id=\"<experiment_id>\",\n    run_id=\"<run_id>\",\n    row_id=\"<row_id>\",\n)\n\nprint(row.row_id, len(row.cells))\n"
@@ -66727,15 +66730,18 @@ paths:
       tags:
         - "Experiments"
       summary: "List task columns"
+      description: "Lists the task columns of a run: prompt, agent and openresponse columns."
       operationId: "ExperimentTaskList"
       parameters:
         - name: "experiment_id"
           in: "path"
+          description: "ID of the experiment."
           required: true
           schema:
             type: "string"
         - name: "run_id"
           in: "path"
+          description: "ID of the run."
           required: true
           schema:
             type: "string"
@@ -66762,16 +66768,18 @@ paths:
       tags:
         - "Experiments"
       summary: "Add a task column"
-      description: "Attaches a prompt, orq agent, or (reserved) harness config as a task column. Input mapping is required."
+      description: "Adds a task column with one source: a prompt, an agent, or an openresponse column filled outside orq.ai. Every existing row gets a cell for it, and the first task column also adds cost and latency metric columns."
       operationId: "ExperimentTaskCreate"
       parameters:
         - name: "experiment_id"
           in: "path"
+          description: "ID of the experiment."
           required: true
           schema:
             type: "string"
         - name: "run_id"
           in: "path"
+          description: "ID of the run."
           required: true
           schema:
             type: "string"
@@ -66801,7 +66809,7 @@ paths:
       x-code-samples:
         - lang: "curl"
           label: "Core - Add a prompt task column"
-          source: "curl 'https://api.orq.ai/v3/experiments/<experiment_id>/runs/<run_id>/tasks' \\\n  --header 'Authorization: Bearer $ORQ_API_KEY' \\\n  --header 'Content-Type: application/json' \\\n  --data '{\n    \"display_name\": \"GPT-4o reply\",\n    \"prompt\": {\n      \"messages_source\": \"MESSAGES_SOURCE_MESSAGES_COLUMN\",\n      \"prompt_config\": { \"model\": \"openai/gpt-4o\", \"messages\": [] }\n    }\n  }'\n"
+          source: "curl 'https://my.orq.ai/v3/experiments/<experiment_id>/runs/<run_id>/tasks' \\\n  --header 'Authorization: Bearer $ORQ_API_KEY' \\\n  --header 'Content-Type: application/json' \\\n  --data '{\n    \"display_name\": \"GPT-4o reply\",\n    \"prompt\": {\n      \"messages_source\": \"MESSAGES_SOURCE_MESSAGES_COLUMN\",\n      \"prompt_config\": { \"model\": \"openai/gpt-4o\", \"messages\": [] }\n    }\n  }'\n"
         - lang: "python"
           label: "Python - Add a prompt task column"
           source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\ncolumn = client.experiments.create_task(\n    experiment_id=\"<experiment_id>\",\n    run_id=\"<run_id>\",\n    display_name=\"GPT-4o reply\",\n    prompt={\n        \"messages_source\": \"MESSAGES_SOURCE_MESSAGES_COLUMN\",\n        \"prompt_config\": {\"model\": \"openai/gpt-4o\", \"messages\": []},\n    },\n)\n\nprint(column.column_id)\n"
@@ -66815,20 +66823,24 @@ paths:
       tags:
         - "Experiments"
       summary: "Delete a task column"
+      description: "Deletes a task column with its cells and the evaluator, metric and review cells linked to it. Deleting the last task column also removes the metric columns."
       operationId: "ExperimentTaskDelete"
       parameters:
         - name: "experiment_id"
           in: "path"
+          description: "ID of the experiment."
           required: true
           schema:
             type: "string"
         - name: "run_id"
           in: "path"
+          description: "ID of the run."
           required: true
           schema:
             type: "string"
         - name: "task_id"
           in: "path"
+          description: "ID of the task column."
           required: true
           schema:
             type: "string"
@@ -66851,21 +66863,24 @@ paths:
       tags:
         - "Experiments"
       summary: "Update a task column"
-      description: "Updates an unlinked task column in place."
+      description: "Renames a task column or replaces its source. Existing cells are not changed."
       operationId: "ExperimentTaskUpdate"
       parameters:
         - name: "experiment_id"
           in: "path"
+          description: "ID of the experiment."
           required: true
           schema:
             type: "string"
         - name: "run_id"
           in: "path"
+          description: "ID of the run."
           required: true
           schema:
             type: "string"
         - name: "task_id"
           in: "path"
+          description: "ID of the task column."
           required: true
           schema:
             type: "string"
@@ -66894,59 +66909,6 @@ paths:
       x-cli-name: "updateTask"
       security:
         - ApiKey: []
-  /v3/experiments/{experiment_id}/runs/{run_id}/tasks/{task_id}/cells/{datapoint_id}:
-    patch:
-      tags:
-        - "Experiments"
-      summary: "Ingest a task cell"
-      description: "Writes a cell result, including externally executed or harness cells."
-      operationId: "ExperimentTaskCellPatch"
-      parameters:
-        - name: "experiment_id"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
-        - name: "run_id"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
-        - name: "task_id"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
-        - name: "datapoint_id"
-          in: "path"
-          required: true
-          schema:
-            type: "string"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/PatchTaskCellRequest"
-        required: true
-      responses:
-        "200":
-          description: "OK"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Cell"
-        "401":
-          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
-      x-speakeasy-group: "experiments"
-      x-speakeasy-name-override: "patchTaskCell"
-      x-cli-group: "experiments"
-      x-cli-name: "patchTaskCell"
-      security:
-        - ApiKey: []
   /v3/experiments/{experiment_id}/runs/{run_id}/export:
     get:
       tags:
@@ -66957,16 +66919,19 @@ paths:
       parameters:
         - name: "experiment_id"
           in: "path"
+          description: "ID of the experiment."
           required: true
           schema:
             type: "string"
         - name: "run_id"
           in: "path"
+          description: "ID of the run."
           required: true
           schema:
             type: "string"
         - name: "format"
           in: "query"
+          description: "File format: `json` (an array of records), `jsonl` (one record per line) or `csv`. Each record is one row and task column."
           required: false
           schema:
             type: "string"
