@@ -27,6 +27,7 @@ export const ThinkingParamThinkingLevel = {
   Low: "low",
   Medium: "medium",
   High: "high",
+  Xhigh: "xhigh",
 } as const;
 /**
  * The level of thinking to use for the model. Only supported by Google AI.
