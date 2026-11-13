@@ -2592,7 +2592,7 @@ components:
           properties:
             _id:
               type: "string"
-              default: "reasoning_01m7abgg8e7wasafnkfb19tz38"
+              default: "reasoning_01m7af4rrp44c1qkmrmjqrqrbw"
               description: "Unique identifier for the part. Format: reasoning_{ulid} (e.g., reasoning_01hxyz...)"
               example: "reasoning_01hxyz123abc"
             kind:
@@ -28347,7 +28347,7 @@ paths:
                                 type: "string"
                                 format: "ulid"
                                 pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                                default: "01M7ABGG7VNWS13QBABN9NHFGF"
+                                default: "01M7AF4RQYCPKPWCV6GM8MN08T"
                                 readOnly: true
                                 description: "The unique identifier of the playground knowledge base"
                               knowledge_id:
@@ -37750,7 +37750,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01M7ABGG9EN4TZVPFWV44WC2AC"
+                                          default: "01M7AF4RSQZ4C2GEHPZ4T9WVX2"
                                         name:
                                           type: "string"
                                         description:
@@ -39377,7 +39377,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01M7ABGG9RZW6B2BQ5YKJC202F"
+                                          default: "01M7AF4RT2R9A4038QQ74FK0FN"
                                         name:
                                           type: "string"
                                         description:
@@ -48435,7 +48435,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M7ABGGAD4SDVAT7PN800B10V"
+                              default: "tool_01M7AF4RTYS3KYFX9XASDST6DN"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -48536,7 +48536,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M7ABGGADRR2G8143SVZDT8NR"
+                              default: "tool_01M7AF4RV05CVSP6VW6JQ5R0R3"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -48639,7 +48639,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M7ABGGAEM5XMYBZM1V4D8SSX"
+                              default: "tool_01M7AF4RV0P88NQVB24KC6R8PV"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -48783,7 +48783,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M7ABGGAEB2QYGBSSHHEPMPRJ"
+                              default: "tool_01M7AF4RV1R4Z4JAF341B8856A"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -49274,7 +49274,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M7ABGGAG773ZSNWZYCCZVMZB"
+                        default: "tool_01M7AF4RV394EKBKP5NXCM67EN"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -49375,7 +49375,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M7ABGGAGFF6ZJKBK5E22WRPM"
+                        default: "tool_01M7AF4RV3M2W96XYWT761KFD9"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -49478,7 +49478,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M7ABGGAH3TS6VNWRJG943232"
+                        default: "tool_01M7AF4RV3JT9WD2SQR3JECMWW"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -49622,7 +49622,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M7ABGGAH0AFH03VPYSFSNHMP"
+                        default: "tool_01M7AF4RV43WGTW0768TD32XEK"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -50126,7 +50126,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M7ABGGAJHPQPA9VC9WKYCG20"
+                        default: "tool_01M7AF4RV5DCX8TSC2J7WXZQXQ"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -50227,7 +50227,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M7ABGGAK8PGH6H5HX0E2PEV0"
+                        default: "tool_01M7AF4RV558R31RP9A1BY998B"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -50330,7 +50330,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M7ABGGAKRZG4V97YAVA7DPZH"
+                        default: "tool_01M7AF4RV6P6TSXKJC449PY303"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -50474,7 +50474,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M7ABGGAKFWCZJGBBBJCSVDHJ"
+                        default: "tool_01M7AF4RV6N3CAGDCDMPBDPQ6S"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -50641,7 +50641,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M7ABGGANZPWQJ34377QSVQG8"
+                        default: "tool_01M7AF4RV980SSQCDG985RYHSN"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -50742,7 +50742,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M7ABGGAPSY346ECA7E3P213R"
+                        default: "tool_01M7AF4RVAKYBEF9A6EMXKYE8M"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -50845,7 +50845,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M7ABGGAPS29VAY53F9ANJ2BQ"
+                        default: "tool_01M7AF4RVANS2T1Y5R5DFMWYRY"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -50989,7 +50989,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M7ABGGAPXV0NF094V4CHEQ1A"
+                        default: "tool_01M7AF4RVAGHMDM2STW2AZA5RX"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
