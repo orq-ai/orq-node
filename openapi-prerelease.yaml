@@ -2591,7 +2591,7 @@ components:
           properties:
             _id:
               type: "string"
-              default: "reasoning_01m7hcy7tbnpds71e8v7709s1c"
+              default: "reasoning_01m7j6mb1m5cxef6fwjqw4ds8d"
               description: "Unique identifier for the part. Format: reasoning_{ulid} (e.g., reasoning_01hxyz...)"
               example: "reasoning_01hxyz123abc"
             kind:
@@ -4903,7 +4903,7 @@ components:
                       minimum: 1
                       maximum: 100
                       default: 5
-                      description: "The number of results to return by the reranking model"
+                      description: "The number of results to return by the reranking model, 1 to 100. Stored as the knowledge base rerank setting, 5 when omitted."
                     rerank_threshold:
                       type: "number"
                       minimum: 0
@@ -5049,7 +5049,7 @@ components:
                       minimum: 1
                       maximum: 100
                       default: 5
-                      description: "The number of results to return by the reranking model"
+                      description: "The number of results to return by the reranking model, 1 to 100. Stored as the knowledge base rerank setting, 5 when omitted."
                     rerank_threshold:
                       type: "number"
                       minimum: 0
@@ -5155,7 +5155,7 @@ components:
                       minimum: 1
                       maximum: 100
                       default: 5
-                      description: "The number of results to return by the reranking model"
+                      description: "The number of results to return by the reranking model, 1 to 100. Stored as the knowledge base rerank setting, 5 when omitted."
                     rerank_threshold:
                       type: "number"
                       minimum: 0
@@ -5243,7 +5243,7 @@ components:
                       minimum: 1
                       maximum: 100
                       default: 5
-                      description: "The number of results to return by the reranking model"
+                      description: "The number of results to return by the reranking model, 1 to 100. Stored as the knowledge base rerank setting, 5 when omitted."
                     rerank_threshold:
                       type: "number"
                       minimum: 0
@@ -5337,7 +5337,7 @@ components:
                       minimum: 1
                       maximum: 100
                       default: 5
-                      description: "The number of results to return by the reranking model"
+                      description: "The number of results to return by the reranking model, 1 to 100. Stored as the knowledge base rerank setting, 5 when omitted."
                     rerank_threshold:
                       type: "number"
                       minimum: 0
@@ -6451,8 +6451,7 @@ components:
           maximum: 100
           minimum: 1
           type: "integer"
-          default: 10
-          description: "The number of top results to return after reranking. If not provided, will default to the knowledge base configured `top_k`."
+          description: "The number of top results to return after reranking, 1 to 100. Without a `rerank_config` in the request, the knowledge base setting applies (5 by default); with one, omitting `top_k` here falls back to 10."
           format: "int32"
     SearchRetrievalConfig:
       type: "object"
@@ -10909,6 +10908,7 @@ components:
           type: "array"
           items:
             type: "string"
+          minItems: 1
     DeleteDatapointsResponse:
       type: "object"
       properties: {}
@@ -15049,7 +15049,7 @@ components:
         requests:
           type: "integer"
           format: "int32"
-      description: "BudgetUsage is the latest available current-period consumption used\n for budget enforcement, not an exact billing ledger. Each dimension is\n the consumed side of the matching limit dimension: `amount` is the\n accumulated cost in USD (vs limits.amount), `tokens` is the accumulated\n token count (vs limits.token_limit), and `requests` is the count in the\n rolling 60-second window (vs rate_limit.requests_per_minute). All three\n are explicit-presence so the triple is always emitted in full, zeros\n included — a never-spent budget serializes {amount:0, tokens:0,\n requests:0} rather than dropping its zero dimensions."
+      description: "BudgetUsage is the latest available current-period consumption used\n for budget enforcement, not an exact billing ledger. Each dimension is\n the consumed side of the matching limit dimension: `amount` is the\n accumulated cost in USD (vs limits.amount), `tokens` is the accumulated\n token count (vs limits.token_limit), and `requests` is the count in the\n fixed 60-second window that starts with the first request (vs\n rate_limit.requests_per_minute). All three\n are explicit-presence so the triple is always emitted in full, zeros\n included — a never-spent budget serializes {amount:0, tokens:0,\n requests:0} rather than dropping its zero dimensions."
     WorkspaceBudgetScope:
       type: "object"
       properties: {}
@@ -20692,7 +20692,7 @@ components:
           description: "The content to evaluate. A string, an object or an array. For TypeSafe models, reference images declared in assets by writing their reference string. Native OpenAI accepts messages and function/custom-tool history. User messages support input_text, input_image and input_json; images can use inline base64 data URLs or public HTTP(S) URLs. At most 128 images across state and question instructions. Shared text/image parts support explicit prompt_cache_breakpoint markers. File IDs, audio, item references and bare content parts are unsupported. Other objects and arrays are serialized as text."
         timeout:
           $ref: "#/components/schemas/ClassifyTimeoutConfig"
-          description: "Timeout for each model call, including every retry and fallback. A timed-out call returns 408 and advances to the next fallback after configured retries are exhausted."
+          description: "Timeout for each model call. Each retry and fallback gets a fresh timeout. A timed-out call returns 408 and advances to the next fallback after configured retries are exhausted."
       required:
         - "model"
         - "state"
@@ -22933,6 +22933,7 @@ components:
             - "completed"
             - "failed"
             - "incomplete"
+            - "cancelled"
           type: "string"
         store:
           type: "boolean"
@@ -28379,7 +28380,7 @@ paths:
                                 type: "string"
                                 format: "ulid"
                                 pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                                default: "01M7HCY7ST8J3SYRS3BVGW4ZN9"
+                                default: "01M7J6MB134V88YSYTBY6TMZZP"
                                 readOnly: true
                                 description: "The unique identifier of the playground knowledge base"
                               knowledge_id:
@@ -37778,7 +37779,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01M7HCY7V0137W8Q6ADNJ9T0JP"
+                                          default: "01M7J6MB29V0N4QEK71YQ2WKG0"
                                         name:
                                           type: "string"
                                         description:
@@ -39404,7 +39405,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01M7HCY7V7TKFVH6JWZF8GBYWF"
+                                          default: "01M7J6MB2FXJFZ64DVYS19GVV3"
                                         name:
                                           type: "string"
                                         description:
@@ -48461,7 +48462,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M7HCY7VSDFY7DMCQ044XBCM8"
+                              default: "tool_01M7J6MB312QHE1XJMF9GVVYE8"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -48562,7 +48563,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M7HCY7VTPKX033WYSZT1EM9K"
+                              default: "tool_01M7J6MB32CSV4WZ50GGPGY5DS"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -48665,7 +48666,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M7HCY7VT6W0DS0WGP4STAR9B"
+                              default: "tool_01M7J6MB32JMV52CR812C6J4HC"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -48809,7 +48810,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M7HCY7VTSEWXD9NT7GPKGSKD"
+                              default: "tool_01M7J6MB3221ZCMT7J2FTC06MP"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -49296,7 +49297,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M7HCY7VWTNR340A541THA5KF"
+                        default: "tool_01M7J6MB34WVGVEXFJBM5BM0X8"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -49397,7 +49398,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M7HCY7VW7HQ2WPKTDTH4QG10"
+                        default: "tool_01M7J6MB34SP6BPZKSS17W87YT"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -49500,7 +49501,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M7HCY7VW3Y1HSWZ4AVYT00HZ"
+                        default: "tool_01M7J6MB34C50R6R9M22T2QZ9P"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -49644,7 +49645,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M7HCY7VXZYYP263VK0F9PYXZ"
+                        default: "tool_01M7J6MB34SX9JN9W210WRPTB2"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -50148,7 +50149,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M7HCY7VXWANMRY715BDH2HW6"
+                        default: "tool_01M7J6MB35T4RPQRE8956R6WHY"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -50249,7 +50250,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M7HCY7VY4X6CCKFBN7ZTK2VZ"
+                        default: "tool_01M7J6MB35FK82D0HEDHWV64HE"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -50352,7 +50353,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M7HCY7VYXSSFSK2DC2S2BXGQ"
+                        default: "tool_01M7J6MB369XKVPCW3G8N4RE90"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -50496,7 +50497,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M7HCY7VYMZ76Q1S1FJ86ECR0"
+                        default: "tool_01M7J6MB36JHHTQXE6E9HG04FN"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -50663,7 +50664,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M7HCY7W0T7C6NXDQKYQV23ZM"
+                        default: "tool_01M7J6MB38ZSD3S86XXQGN1A6T"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -50764,7 +50765,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M7HCY7W0VK7NQPTHASMM8JW1"
+                        default: "tool_01M7J6MB38ZFH6V7R9DZ18C4C8"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -50867,7 +50868,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M7HCY7W0V7JTW6HDXWB3BXZH"
+                        default: "tool_01M7J6MB380NHWTT50KKJCFRWY"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -51011,7 +51012,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M7HCY7W0EV8NV0MPSDRCSC4F"
+                        default: "tool_01M7J6MB38M3QGCD8R3N3BTN19"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -64586,10 +64587,6 @@ paths:
                 $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "telemetryDestinations"
       x-speakeasy-name-override: "list"
-      x-code-samples:
-        - lang: "typescript"
-          label: "Node.js"
-          source: "import { Orq } from '@orq-ai/node';\n\nconst orq = new Orq({ apiKey: process.env.ORQ_MANAGEMENT_KEY });\nconst result = await orq.telemetryDestinations.list({ limit: 100 });\n"
       security:
         - ApiKey: []
     post:
@@ -64618,10 +64615,6 @@ paths:
                 $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "telemetryDestinations"
       x-speakeasy-name-override: "create"
-      x-code-samples:
-        - lang: "typescript"
-          label: "Node.js"
-          source: "import { Orq } from '@orq-ai/node';\n\nconst orq = new Orq({ apiKey: process.env.ORQ_MANAGEMENT_KEY });\nconst result = await orq.telemetryDestinations.create({ destination: { displayName: 'Production', provider: 'custom', endpointUrl: 'https://otel.example.com/v1/traces', requestHeaders: {}, settings: {}, contentMode: 'TELEMETRY_CONTENT_MODE_METADATA_ONLY', projectScope: 'TELEMETRY_PROJECT_SCOPE_ALL', projectIds: [], enabled: true } });\n"
       security:
         - ApiKey: []
   /v3/telemetry-destinations/{destination_id}:
@@ -64651,10 +64644,6 @@ paths:
                 $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "telemetryDestinations"
       x-speakeasy-name-override: "get"
-      x-code-samples:
-        - lang: "typescript"
-          label: "Node.js"
-          source: "import { Orq } from '@orq-ai/node';\n\nconst orq = new Orq({ apiKey: process.env.ORQ_MANAGEMENT_KEY });\nconst result = await orq.telemetryDestinations.get({ destinationId: '01HZXW2K7Y8Q9M0N1P2R3S4T5V' });\n"
       security:
         - ApiKey: []
     put:
@@ -64689,10 +64678,6 @@ paths:
                 $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "telemetryDestinations"
       x-speakeasy-name-override: "update"
-      x-code-samples:
-        - lang: "typescript"
-          label: "Node.js"
-          source: "import { Orq } from '@orq-ai/node';\n\nconst orq = new Orq({ apiKey: process.env.ORQ_MANAGEMENT_KEY });\n// Updates replace the whole destination. Send every header key to keep, with an empty value to retain its stored secret.\nconst result = await orq.telemetryDestinations.update({ destinationId: '01HZXW2K7Y8Q9M0N1P2R3S4T5V', destination: { displayName: 'Production', provider: 'custom', endpointUrl: 'https://otel.example.com/v1/traces', requestHeaders: { authorization: '' }, contentMode: 'TELEMETRY_CONTENT_MODE_METADATA_ONLY', projectScope: 'TELEMETRY_PROJECT_SCOPE_ALL', enabled: true } });\n"
       security:
         - ApiKey: []
     delete:
@@ -64721,10 +64706,6 @@ paths:
                 $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "telemetryDestinations"
       x-speakeasy-name-override: "delete"
-      x-code-samples:
-        - lang: "typescript"
-          label: "Node.js"
-          source: "import { Orq } from '@orq-ai/node';\n\nconst orq = new Orq({ apiKey: process.env.ORQ_MANAGEMENT_KEY });\nconst result = await orq.telemetryDestinations.delete({ destinationId: '01HZXW2K7Y8Q9M0N1P2R3S4T5V' });\n"
       security:
         - ApiKey: []
   /v3/traces/aggregate:
@@ -65409,10 +65390,10 @@ paths:
           source: "curl --get 'https://api.orq.ai/v2/datasets' \\\n  --header \"Authorization: Bearer $ORQ_API_KEY\" \\\n  --data-urlencode 'limit=25'\n"
         - lang: "python"
           label: "Python - List datasets"
-          source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\npage = client.datasets.list(\n    limit=25,\n)\n\nfor dataset in page.data:\n    print(dataset.dataset_id, dataset.display_name)\n"
+          source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\npage = client.datasets.list(\n    limit=25,\n)\n\nfor dataset in page.data:\n    print(dataset.id, dataset.display_name)\n"
         - lang: "typescript"
           label: "Node.js - List datasets"
-          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\nconst page = await client.datasets.list({\n  limit: 25,\n});\n\nfor (const dataset of page.data) {\n  console.log(dataset.datasetId, dataset.displayName);\n}\n"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\nconst page = await client.datasets.list({\n  limit: 25,\n});\n\nfor (const dataset of page.data) {\n  console.log(dataset.id, dataset.displayName);\n}\n"
       security:
         - ApiKey: []
     post:
@@ -65450,10 +65431,10 @@ paths:
           source: "curl --request POST \\\n  --url 'https://api.orq.ai/v2/datasets' \\\n  --header \"Authorization: Bearer $ORQ_API_KEY\" \\\n  --header 'Content-Type: application/json' \\\n  --data '{\n    \"display_name\": \"support_quality_eval\",\n    \"path\": \"/customer-success/datasets/support-quality-eval\"\n  }'\n"
         - lang: "python"
           label: "Python - Create dataset"
-          source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\ndataset = client.datasets.create(\n    display_name=\"support_quality_eval\",\n    path=\"/customer-success/datasets/support-quality-eval\",\n)\n\nprint(dataset.dataset_id)\n"
+          source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\ndataset = client.datasets.create(\n    display_name=\"support_quality_eval\",\n    path=\"/customer-success/datasets/support-quality-eval\",\n)\n\nprint(dataset.id)\n"
         - lang: "typescript"
           label: "Node.js - Create dataset"
-          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\nconst dataset = await client.datasets.create({\n  displayName: 'support_quality_eval',\n  path: '/customer-success/datasets/support-quality-eval',\n});\n\nconsole.log(dataset.datasetId);\n"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\nconst dataset = await client.datasets.create({\n  displayName: 'support_quality_eval',\n  path: '/customer-success/datasets/support-quality-eval',\n});\n\nconsole.log(dataset.id);\n"
       security:
         - ApiKey: []
   /v2/datasets/{dataset_id}:
@@ -65746,6 +65727,12 @@ paths:
         - lang: "curl"
           label: "Core - Delete datapoints"
           source: "curl --request POST \\\n  --url 'https://api.orq.ai/v2/datasets/01J6V6G8M4F5N8P9Q0R1S2T3U4/datapoints-bulk-delete' \\\n  --header \"Authorization: Bearer $ORQ_API_KEY\" \\\n  --header 'Content-Type: application/json' \\\n  --data '{\n    \"item_ids\": [\n      \"01J6V6H1Z2A3B4C5D6E7F8G9H0\"\n    ]\n  }'\n"
+        - lang: "python"
+          label: "Python - Delete datapoints"
+          source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\nclient.datasets.delete_datapoints(\n    dataset_id=\"01J6V6G8M4F5N8P9Q0R1S2T3U4\",\n    item_ids=[\n        \"01J6V6H1Z2A3B4C5D6E7F8G9H0\",\n    ],\n)\n"
+        - lang: "typescript"
+          label: "Node.js - Delete datapoints"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\nawait client.datasets.deleteDatapoints({\n  datasetId: '01J6V6G8M4F5N8P9Q0R1S2T3U4',\n  deleteDatapointsRequest: {\n    itemIds: ['01J6V6H1Z2A3B4C5D6E7F8G9H0'],\n  },\n});\n"
       security:
         - ApiKey: []
   /v2/datasets/{dataset_id}/datapoints/bulk:
@@ -65790,6 +65777,12 @@ paths:
         - lang: "curl"
           label: "Core - Bulk create datapoints"
           source: "curl --request POST \\\n  --url 'https://api.orq.ai/v2/datasets/01J6V6G8M4F5N8P9Q0R1S2T3U4/datapoints/bulk' \\\n  --header \"Authorization: Bearer $ORQ_API_KEY\" \\\n  --header 'Content-Type: application/json' \\\n  --data '{\n    \"items\": [\n      {\n        \"inputs\": {\n          \"ticket\": \"Customer asks for an invoice copy.\"\n        },\n        \"expected_output\": \"Explain where invoices are available and offer to resend it.\"\n      }\n    ]\n  }'\n"
+        - lang: "python"
+          label: "Python - Bulk create datapoints"
+          source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\ndatapoints = client.datasets.create_datapoints(\n    dataset_id=\"01J6V6G8M4F5N8P9Q0R1S2T3U4\",\n    items=[\n        {\n            \"inputs\": {\"ticket\": \"Customer asks for an invoice copy.\"},\n            \"expected_output\": \"Explain where invoices are available and offer to resend it.\",\n        }\n    ],\n)\n\nfor datapoint in datapoints:\n    print(datapoint.id)\n"
+        - lang: "typescript"
+          label: "Node.js - Bulk create datapoints"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\nconst datapoints = await client.datasets.createDatapoints({\n  datasetId: '01J6V6G8M4F5N8P9Q0R1S2T3U4',\n  bulkCreateDatapointsRequest: {\n    items: [\n      {\n        inputs: { ticket: 'Customer asks for an invoice copy.' },\n        expectedOutput: 'Explain where invoices are available and offer to resend it.',\n      },\n    ],\n  },\n});\n\nfor (const datapoint of datapoints) {\n  console.log(datapoint.id);\n}\n"
       security:
         - ApiKey: []
   /v2/datasets/{dataset_id}/datapoints/{datapoint_id}:
@@ -66217,7 +66210,7 @@ paths:
       tags:
         - "Experiments"
       summary: "Create a run"
-      description: "Creates a new run, copying columns from the selected run when present. A rerun is a new run."
+      description: "Creates a new run, copying columns from the selected run when present. A new run starts with empty output cells; executing cells on an existing run does not create one."
       operationId: "ExperimentRunCreate"
       parameters:
         - name: "experiment_id"
@@ -66621,12 +66614,6 @@ paths:
         - lang: "curl"
           label: "Core - Set an annotation cell"
           source: "curl --request PATCH 'https://my.orq.ai/v3/experiments/<experiment_id>/runs/<run_id>/annotations/<annotation_column_id>/cells/<row_id>' \\\n  --header \"Authorization: Bearer $ORQ_API_KEY\" \\\n  --header 'Content-Type: application/json' \\\n  --data '{ \"task_id\": \"<task_id>\", \"value\": { \"type\": \"range\", \"value\": 4 } }'\n"
-        - lang: "python"
-          label: "Python - Set an annotation cell"
-          source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\ncell = client.experiments.patch_annotation_cell(\n    experiment_id=\"<experiment_id>\",\n    run_id=\"<run_id>\",\n    annotation_column_id=\"<annotation_column_id>\",\n    datapoint_id=\"<row_id>\",\n    task_id=\"<task_id>\",\n    value={\"type\": \"range\", \"value\": 4},\n)\n\nprint(cell.cell_id, cell.value)\n"
-        - lang: "typescript"
-          label: "Node.js - Set an annotation cell"
-          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({ apiKey: process.env.ORQ_API_KEY });\n\nconst cell = await client.experiments.patchAnnotationCell({\n  experimentId: '<experiment_id>',\n  runId: '<run_id>',\n  annotationColumnId: '<annotation_column_id>',\n  datapointId: '<row_id>',\n  taskId: '<task_id>',\n  value: { type: 'range', value: 4 },\n});\n\nconsole.log(cell.cellId, cell.value);\n"
       security:
         - ApiKey: []
   /v3/experiments/{experiment_id}/runs/{run_id}/cancel:
@@ -67093,7 +67080,7 @@ paths:
       tags:
         - "Experiments"
       summary: "Duplicate a row"
-      description: "Copies a row into a new row at the end of the run. Dataset and annotation cells keep their values; task, evaluator and metric cells start empty."
+      description: "Copies a row into a new row at the end of the run. Dataset and annotation cells keep their values; response, agent response, open response, evaluator and metric cells start empty."
       operationId: "ExperimentRunRowDuplicate"
       parameters:
         - name: "experiment_id"
@@ -68445,7 +68432,7 @@ paths:
         - ApiKey: []
   /v2/models/openai-like/{id}:
     patch:
-      description: "Updates an OpenAI-compatible custom model. Live-re-probes the target API when base_url or model_id changes, using the stored encrypted api_key. Metadata is merged (existing preserved, new overrides)."
+      description: "Updates an OpenAI-compatible custom model. `display_name`, `region` and `model_type` are required on every update. Live-re-probes the target API when `base_url` or `configuration.model_id` changes, using the stored encrypted api_key. The body carries no `metadata` field: metadata keys already stored on the model are preserved."
       operationId: "ModelUpdateOpenAILike"
       parameters:
         - description: "The ID of the model"
@@ -77963,19 +77950,19 @@ paths:
             description: "Maximum number of batches to return, 1 to 100. Defaults to 20."
             format: "int64"
             type: "integer"
-        - description: "Cursor: return batches after this batch id."
+        - description: "Cursor: return batches older than this batch id, still newest first."
           explode: false
           in: "query"
           name: "after"
           schema:
-            description: "Cursor: return batches after this batch id."
+            description: "Cursor: return batches older than this batch id, still newest first."
             type: "string"
-        - description: "Cursor: return batches before this batch id. Cannot be combined with after."
+        - description: "Cursor: return batches newer than this batch id. Cannot be combined with after."
           explode: false
           in: "query"
           name: "before"
           schema:
-            description: "Cursor: return batches before this batch id. Cannot be combined with after."
+            description: "Cursor: return batches newer than this batch id. Cannot be combined with after."
             type: "string"
         - description: "Case-insensitive match on batch id, model, or endpoint."
           explode: false
@@ -78071,10 +78058,6 @@ paths:
         - "Batches"
       x-cli-group: "batches"
       x-cli-name: "list"
-      x-code-samples:
-        - label: "Node.js"
-          lang: "typescript"
-          source: "const batches = await orq.batches.list({ limit: 20, status: \"in_progress\" });"
       x-orq-gateway-group: true
       x-speakeasy-group: "batches"
       x-speakeasy-name-override: "list"
@@ -78287,10 +78270,6 @@ paths:
         - "Batches"
       x-cli-group: "batches"
       x-cli-name: "create"
-      x-code-samples:
-        - label: "Node.js"
-          lang: "typescript"
-          source: "const batch = await orq.batches.create({\n  inputFileId: \"file-abc123\",\n  endpoint: \"/v1/chat/completions\",\n  completionWindow: \"24h\",\n});"
       x-orq-gateway-group: true
       x-speakeasy-group: "batches"
       x-speakeasy-name-override: "create"
@@ -78465,10 +78444,6 @@ paths:
         - "Batches"
       x-cli-group: "batches"
       x-cli-name: "retrieve"
-      x-code-samples:
-        - label: "Node.js"
-          lang: "typescript"
-          source: "const batch = await orq.batches.retrieve({ batchId: \"batch_abc123\" });"
       x-orq-gateway-group: true
       x-speakeasy-group: "batches"
       x-speakeasy-name-override: "retrieve"
@@ -78643,10 +78618,6 @@ paths:
         - "Batches"
       x-cli-group: "batches"
       x-cli-name: "cancel"
-      x-code-samples:
-        - label: "Node.js"
-          lang: "typescript"
-          source: "const batch = await orq.batches.cancel({ batchId: \"batch_abc123\" });"
       x-orq-gateway-group: true
       x-speakeasy-group: "batches"
       x-speakeasy-name-override: "cancel"
@@ -78664,12 +78635,12 @@ paths:
           schema:
             description: "The batch's identifier, as returned from create."
             type: "string"
-        - description: "Which result file to download: output holds successful responses, errors holds the per-line failures. Defaults to output."
+        - description: "Which result file to download: output holds successful responses, errors holds the per-line failures. Defaults to output, and answers the errors file when the batch produced no output file. Requesting errors on a batch with no error file returns 409 output_unavailable."
           explode: false
           in: "query"
           name: "file"
           schema:
-            description: "Which result file to download: output holds successful responses, errors holds the per-line failures. Defaults to output."
+            description: "Which result file to download: output holds successful responses, errors holds the per-line failures. Defaults to output, and answers the errors file when the batch produced no output file. Requesting errors on a batch with no error file returns 409 output_unavailable."
             enum:
               - "output"
               - "errors"
@@ -78728,7 +78699,7 @@ paths:
                 required:
                   - "error"
                 type: "object"
-          description: "The batch has not reached a terminal status yet, or it has no result file."
+          description: "The batch has not reached a terminal status yet (`invalid_request`), or it has no result file (`output_unavailable` for a missing error or output file)."
         "500":
           content:
             application/json:
@@ -78746,10 +78717,6 @@ paths:
         - "Batches"
       x-cli-group: "batches"
       x-cli-name: "downloadResults"
-      x-code-samples:
-        - label: "Node.js"
-          lang: "typescript"
-          source: "const results = await orq.batches.downloadResults({ batchId: \"batch_abc123\", file: \"output\" });"
       x-orq-gateway-group: true
       x-speakeasy-group: "batches"
       x-speakeasy-name-override: "downloadResults"
@@ -79097,7 +79064,7 @@ paths:
                   description: "The content to evaluate. A string, an object or an array. For TypeSafe models, reference images declared in assets by writing their reference string. Native OpenAI accepts messages and function/custom-tool history. User messages support input_text, input_image and input_json; images can use inline base64 data URLs or public HTTP(S) URLs. At most 128 images across state and question instructions. Shared text/image parts support explicit prompt_cache_breakpoint markers. File IDs, audio, item references and bare content parts are unsupported. Other objects and arrays are serialized as text."
                 timeout:
                   $ref: "#/components/schemas/ClassifyTimeoutConfig"
-                  description: "Timeout for each model call, including every retry and fallback. A timed-out call returns 408 and advances to the next fallback after configured retries are exhausted."
+                  description: "Timeout for each model call. Each retry and fallback gets a fresh timeout. A timed-out call returns 408 and advances to the next fallback after configured retries are exhausted."
               required:
                 - "model"
                 - "state"
@@ -79688,7 +79655,7 @@ paths:
                   description: "The content to evaluate. A string, an object or an array. For TypeSafe models, reference images declared in assets by writing their reference string. Native OpenAI accepts messages and function/custom-tool history. User messages support input_text, input_image and input_json; images can use inline base64 data URLs or public HTTP(S) URLs. At most 128 images across state and question instructions. Shared text/image parts support explicit prompt_cache_breakpoint markers. File IDs, audio, item references and bare content parts are unsupported. Other objects and arrays are serialized as text."
                 timeout:
                   $ref: "#/components/schemas/ClassifyTimeoutConfig"
-                  description: "Timeout for each model call, including every retry and fallback. A timed-out call returns 408 and advances to the next fallback after configured retries are exhausted."
+                  description: "Timeout for each model call. Each retry and fallback gets a fresh timeout. A timed-out call returns 408 and advances to the next fallback after configured retries are exhausted."
               required:
                 - "model"
                 - "state"
@@ -80956,6 +80923,7 @@ paths:
                       - "completed"
                       - "failed"
                       - "incomplete"
+                      - "cancelled"
                     type: "string"
                   store:
                     type: "boolean"
@@ -81196,6 +81164,7 @@ paths:
                       - "completed"
                       - "failed"
                       - "incomplete"
+                      - "cancelled"
                     type: "string"
                   store:
                     type: "boolean"
