@@ -7,6 +7,9 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import * as components from "../components/index.js";
 
 export type ExperimentRunCreateRequest = {
+  /**
+   * ID of the experiment.
+   */
   experimentId: string;
   createRunRequest: components.CreateRunRequest;
 };

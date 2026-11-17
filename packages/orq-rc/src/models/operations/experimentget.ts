@@ -6,6 +6,9 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 
 export type ExperimentGetRequest = {
+  /**
+   * ID of the experiment.
+   */
   experimentId: string;
 };
 

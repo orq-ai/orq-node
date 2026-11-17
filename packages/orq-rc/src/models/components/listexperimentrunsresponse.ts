@@ -10,7 +10,13 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { Run, Run$inboundSchema } from "./run.js";
 
 export type ListExperimentRunsResponse = {
+  /**
+   * Page of runs, newest first.
+   */
   data?: Array<Run> | undefined;
+  /**
+   * Whether more runs are available in the selected pagination direction.
+   */
   hasMore?: boolean | undefined;
 };
 

@@ -29,7 +29,7 @@ import { Result } from "../types/fp.js";
  * Update OpenAI-compatible custom model
  *
  * @remarks
- * Updates an OpenAI-compatible custom model. Live-re-probes the target API when base_url or model_id changes, using the stored encrypted api_key. Metadata is merged (existing preserved, new overrides).
+ * Updates an OpenAI-compatible custom model. `display_name`, `region` and `model_type` are required on every update. Live-re-probes the target API when `base_url` or `configuration.model_id` changes, using the stored encrypted api_key. The body carries no `metadata` field: metadata keys already stored on the model are preserved.
  */
 export function modelsUpdateOpenaiLike(
   client: OrqCore,

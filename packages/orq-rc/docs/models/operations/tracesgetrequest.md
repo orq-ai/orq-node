@@ -12,6 +12,7 @@ let value: TracesGetRequest = {
 
 ## Fields
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `traceId`          | *string*           | :heavy_check_mark: | N/A                |
+| Field                                                                | Type                                                                 | Required                                                             | Description                                                          |
+| -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- |
+| `traceId`                                                            | *string*                                                             | :heavy_check_mark:                                                   | N/A                                                                  |
+| `allAccessibleProjects`                                              | *boolean*                                                            | :heavy_minus_sign:                                                   | Spans every project the caller belongs to instead of the active one. |

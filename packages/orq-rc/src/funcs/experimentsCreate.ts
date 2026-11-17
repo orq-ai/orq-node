@@ -30,7 +30,7 @@ import { Result } from "../types/fp.js";
  * Create an experiment
  *
  * @remarks
- * Creates an experiment. project_id defaults to the API key's project and is required for keys that span several projects. When dataset_id is set, a draft run is created with rows from that dataset.
+ * Creates an experiment and its first run, a draft named Run 1. When dataset_id is set, the run gets one row per datapoint, up to 1000. project_id defaults to the caller's project and is required for API keys that span several projects.
  */
 export function experimentsCreate(
   client: OrqCore,

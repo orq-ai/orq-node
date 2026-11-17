@@ -5,16 +5,31 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 
+/**
+ * Layout change for one column.
+ */
 export type ColumnLayout = {
-  columnId?: string | undefined;
+  /**
+   * ID of the column to change.
+   */
+  columnId: string;
+  /**
+   * New 0-based position. The other columns shift to make room.
+   */
   position?: number | undefined;
+  /**
+   * New width, at least 1.
+   */
   width?: number | undefined;
+  /**
+   * False hides the column; true shows it.
+   */
   active?: boolean | undefined;
 };
 
 /** @internal */
 export type ColumnLayout$Outbound = {
-  column_id?: string | undefined;
+  column_id: string;
   position?: number | undefined;
   width?: number | undefined;
   active?: boolean | undefined;
@@ -26,7 +41,7 @@ export const ColumnLayout$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ColumnLayout
 > = z.object({
-  columnId: z.string().optional(),
+  columnId: z.string(),
   position: z.number().int().optional(),
   width: z.number().int().optional(),
   active: z.boolean().optional(),

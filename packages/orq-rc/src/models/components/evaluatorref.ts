@@ -4,10 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
-import { Result as SafeParseResult } from "../../types/fp.js";
-import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export const ExecuteOn = {
   Input: "input",
@@ -26,31 +23,9 @@ export type EvaluatorRef = {
 };
 
 /** @internal */
-export const ExecuteOn$inboundSchema: z.ZodNativeEnum<typeof ExecuteOn> = z
+export const ExecuteOn$outboundSchema: z.ZodNativeEnum<typeof ExecuteOn> = z
   .nativeEnum(ExecuteOn);
-/** @internal */
-export const ExecuteOn$outboundSchema: z.ZodNativeEnum<typeof ExecuteOn> =
-  ExecuteOn$inboundSchema;
 
-/** @internal */
-export const EvaluatorRef$inboundSchema: z.ZodType<
-  EvaluatorRef,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  execute_on: ExecuteOn$inboundSchema,
-  id: z.string(),
-  is_guardrail: z.boolean().optional(),
-  options: z.record(z.any()).optional(),
-  sample_rate: z.number().optional(),
-  timeout: z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "execute_on": "executeOn",
-    "is_guardrail": "isGuardrail",
-    "sample_rate": "sampleRate",
-  });
-});
 /** @internal */
 export type EvaluatorRef$Outbound = {
   execute_on: string;
@@ -83,13 +58,4 @@ export const EvaluatorRef$outboundSchema: z.ZodType<
 
 export function evaluatorRefToJSON(evaluatorRef: EvaluatorRef): string {
   return JSON.stringify(EvaluatorRef$outboundSchema.parse(evaluatorRef));
-}
-export function evaluatorRefFromJSON(
-  jsonString: string,
-): SafeParseResult<EvaluatorRef, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => EvaluatorRef$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'EvaluatorRef' from JSON`,
-  );
 }

@@ -31,7 +31,7 @@ import { Result } from "../types/fp.js";
  * Create a run
  *
  * @remarks
- * Creates a new run, copying columns from the selected run when present. A rerun is a new run.
+ * Creates a new run, copying columns from the selected run when present. A new run starts with empty output cells; executing cells on an existing run does not create one.
  */
 export function experimentsCreateRun(
   client: OrqCore,

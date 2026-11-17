@@ -10,7 +10,13 @@ import {
 } from "./runsettings.js";
 
 export type CreateRunRequest = {
+  /**
+   * Run name. Defaults to `Run ` plus the last four characters of the run ID.
+   */
   key?: string | undefined;
+  /**
+   * Execution settings. Concurrency defaults to 10.
+   */
   settings?: RunSettings | undefined;
 };
 

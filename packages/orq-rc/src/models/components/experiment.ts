@@ -12,21 +12,69 @@ import {
   UniqueEvaluator$inboundSchema,
 } from "./uniqueevaluator.js";
 
+/**
+ * An experiment: a dataset evaluated by one or more runs.
+ */
 export type Experiment = {
+  /**
+   * Experiment ID (ULID).
+   */
   experimentId?: string | undefined;
+  /**
+   * Experiment name.
+   */
   displayName?: string | undefined;
+  /**
+   * Project that owns the experiment.
+   */
   projectId?: string | undefined;
+  /**
+   * Dataset whose datapoints become the rows of each new run. Empty when the
+   *
+   * @remarks
+   *  experiment was created without a dataset.
+   */
   datasetId?: string | undefined;
-  datasetVersionId?: string | undefined;
+  /**
+   * Run shown by default in the AI Studio, and the run whose columns Create a
+   *
+   * @remarks
+   *  run copies. Create a run selects the new run; deleting the selected run
+   *  selects the newest remaining one.
+   */
   selectedRunId?: string | undefined;
+  /**
+   * Creation time.
+   */
   createdAt?: Date | undefined;
+  /**
+   * Time of the last update to the experiment.
+   */
   updatedAt?: Date | undefined;
   /**
-   * Origin of the experiment: "manual" or "evaluatorq".
+   * Origin of the experiment: `evaluatorq` for results uploaded by the
+   *
+   * @remarks
+   *  evaluatorq framework; empty or `manual` otherwise.
    */
   source?: string | undefined;
+  /**
+   * Row height in the AI Studio grid: 1 (compact), 2 or 3 (tallest). Set to 1
+   *
+   * @remarks
+   *  on create.
+   */
   rowHeightLevel?: number | undefined;
+  /**
+   * Evaluators used by the experiment's evaluator columns, one entry per
+   *
+   * @remarks
+   *  evaluator.
+   */
   uniqueEvaluators?: Array<UniqueEvaluator> | undefined;
+  /**
+   * ID of the user or API key that created the experiment.
+   */
   createdById?: string | undefined;
 };
 
@@ -40,7 +88,6 @@ export const Experiment$inboundSchema: z.ZodType<
   display_name: z.string().optional(),
   project_id: z.string().optional(),
   dataset_id: z.string().optional(),
-  dataset_version_id: z.string().optional(),
   selected_run_id: z.string().optional(),
   created_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
     .optional(),
@@ -56,7 +103,6 @@ export const Experiment$inboundSchema: z.ZodType<
     "display_name": "displayName",
     "project_id": "projectId",
     "dataset_id": "datasetId",
-    "dataset_version_id": "datasetVersionId",
     "selected_run_id": "selectedRunId",
     "created_at": "createdAt",
     "updated_at": "updatedAt",

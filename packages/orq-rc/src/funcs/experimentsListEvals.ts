@@ -29,6 +29,9 @@ import { Result } from "../types/fp.js";
 
 /**
  * List eval columns
+ *
+ * @remarks
+ * Lists the evaluator columns of a run.
  */
 export function experimentsListEvals(
   client: OrqCore,

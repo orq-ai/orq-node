@@ -100,6 +100,7 @@ export type ModelMetadata = {
   supportedVideoResolutions?: Array<string> | null | undefined;
   supportedVideoSizes?: Array<string> | null | undefined;
   supportsAdaptiveReasoning?: boolean | undefined;
+  supportsAgentMessageItemType?: boolean | undefined;
   supportsAudioInput?: boolean | undefined;
   supportsAudioOutput?: boolean | undefined;
   supportsB64JsonResponseFormat?: boolean | undefined;
@@ -242,6 +243,7 @@ export const ModelMetadata$inboundSchema: z.ZodType<
   supported_video_resolutions: z.nullable(z.array(z.string())).optional(),
   supported_video_sizes: z.nullable(z.array(z.string())).optional(),
   supports_adaptive_reasoning: z.boolean().optional(),
+  supports_agent_message_item_type: z.boolean().optional(),
   supports_audio_input: z.boolean().optional(),
   supports_audio_output: z.boolean().optional(),
   supports_b64_json_response_format: z.boolean().optional(),
@@ -375,6 +377,7 @@ export const ModelMetadata$inboundSchema: z.ZodType<
     "supported_video_resolutions": "supportedVideoResolutions",
     "supported_video_sizes": "supportedVideoSizes",
     "supports_adaptive_reasoning": "supportsAdaptiveReasoning",
+    "supports_agent_message_item_type": "supportsAgentMessageItemType",
     "supports_audio_input": "supportsAudioInput",
     "supports_audio_output": "supportsAudioOutput",
     "supports_b64_json_response_format": "supportsB64JsonResponseFormat",
@@ -514,6 +517,7 @@ export type ModelMetadata$Outbound = {
   supported_video_resolutions?: Array<string> | null | undefined;
   supported_video_sizes?: Array<string> | null | undefined;
   supports_adaptive_reasoning?: boolean | undefined;
+  supports_agent_message_item_type?: boolean | undefined;
   supports_audio_input?: boolean | undefined;
   supports_audio_output?: boolean | undefined;
   supports_b64_json_response_format?: boolean | undefined;
@@ -656,6 +660,7 @@ export const ModelMetadata$outboundSchema: z.ZodType<
   supportedVideoResolutions: z.nullable(z.array(z.string())).optional(),
   supportedVideoSizes: z.nullable(z.array(z.string())).optional(),
   supportsAdaptiveReasoning: z.boolean().optional(),
+  supportsAgentMessageItemType: z.boolean().optional(),
   supportsAudioInput: z.boolean().optional(),
   supportsAudioOutput: z.boolean().optional(),
   supportsB64JsonResponseFormat: z.boolean().optional(),
@@ -789,6 +794,7 @@ export const ModelMetadata$outboundSchema: z.ZodType<
     supportedVideoResolutions: "supported_video_resolutions",
     supportedVideoSizes: "supported_video_sizes",
     supportsAdaptiveReasoning: "supports_adaptive_reasoning",
+    supportsAgentMessageItemType: "supports_agent_message_item_type",
     supportsAudioInput: "supports_audio_input",
     supportsAudioOutput: "supports_audio_output",
     supportsB64JsonResponseFormat: "supports_b64_json_response_format",

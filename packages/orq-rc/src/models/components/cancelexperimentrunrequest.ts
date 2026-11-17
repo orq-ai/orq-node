@@ -6,6 +6,12 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 
 export type CancelExperimentRunRequest = {
+  /**
+   * Rows whose queued and running cells are canceled. Empty cancels every row.
+   *
+   * @remarks
+   *  The run moves to canceled either way.
+   */
   rowIds?: Array<string> | undefined;
 };
 

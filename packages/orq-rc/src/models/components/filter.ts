@@ -31,7 +31,6 @@ export const Field = {
   Evaluator: "evaluator",
   Dataset: "dataset",
   Prompt: "prompt",
-  Policy: "policy",
   Conversation: "conversation",
   Thread: "thread",
   MemoryStore: "memory_store",

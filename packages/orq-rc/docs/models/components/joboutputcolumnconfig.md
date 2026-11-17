@@ -12,6 +12,6 @@ let value: JobOutputColumnConfig = {};
 
 ## Fields
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `jobName`          | *string*           | :heavy_minus_sign: | N/A                |
+| Field                       | Type                        | Required                    | Description                 |
+| --------------------------- | --------------------------- | --------------------------- | --------------------------- |
+| `jobName`                   | *string*                    | :heavy_minus_sign:          | Name of the evaluatorq job. |

@@ -12,6 +12,6 @@ let value: ExperimentDeleteRequest = {
 
 ## Fields
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `experimentId`     | *string*           | :heavy_check_mark: | N/A                |
+| Field                 | Type                  | Required              | Description           |
+| --------------------- | --------------------- | --------------------- | --------------------- |
+| `experimentId`        | *string*              | :heavy_check_mark:    | ID of the experiment. |

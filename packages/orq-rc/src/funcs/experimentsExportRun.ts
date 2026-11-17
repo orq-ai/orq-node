@@ -36,7 +36,7 @@ export enum ExportRunAcceptEnum {
  * Export a run
  *
  * @remarks
- * Downloads the run as a file, including human review and evaluator corrections made after an earlier export.
+ * Downloads the run as a file, including annotations and evaluator corrections made after an earlier export.
  */
 export function experimentsExportRun(
   client: OrqCore,

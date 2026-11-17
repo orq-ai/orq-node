@@ -14,8 +14,8 @@ let value: ExperimentTaskDeleteRequest = {
 
 ## Fields
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `experimentId`     | *string*           | :heavy_check_mark: | N/A                |
-| `runId`            | *string*           | :heavy_check_mark: | N/A                |
-| `taskId`           | *string*           | :heavy_check_mark: | N/A                |
+| Field                  | Type                   | Required               | Description            |
+| ---------------------- | ---------------------- | ---------------------- | ---------------------- |
+| `experimentId`         | *string*               | :heavy_check_mark:     | ID of the experiment.  |
+| `runId`                | *string*               | :heavy_check_mark:     | ID of the run.         |
+| `taskId`               | *string*               | :heavy_check_mark:     | ID of the task column. |

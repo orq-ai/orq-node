@@ -27,7 +27,7 @@ export type Knowledge2Type = ClosedEnum<typeof Knowledge2Type>;
  */
 export type Knowledge2RerankConfig = {
   /**
-   * The number of results to return by the reranking model
+   * The number of results to return by the reranking model, 1 to 100. Stored as the knowledge base rerank setting, 5 when omitted.
    */
   topK: number;
   /**
@@ -156,7 +156,7 @@ export type RetrievalType = ClosedEnum<typeof RetrievalType>;
  */
 export type KnowledgeRerankConfig = {
   /**
-   * The number of results to return by the reranking model
+   * The number of results to return by the reranking model, 1 to 100. Stored as the knowledge base rerank setting, 5 when omitted.
    */
   topK: number;
   /**

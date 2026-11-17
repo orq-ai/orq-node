@@ -477,7 +477,7 @@ export type StreamRunAgentModelConfigurationParameters = {
 };
 
 /**
- * Retry configuration for model requests. Retries are triggered for specific HTTP status codes (e.g., 500, 429, 502, 503, 504). Supports configurable retry count (1-5) and custom status codes.
+ * Retry configuration for model requests. Allows customizing retry count (1-5) and HTTP status codes that trigger retries. Default codes: 408, 429, 500, 502, 503, 504, 529.
  */
 export type StreamRunAgentModelConfigurationRetry = {
   /**
@@ -505,7 +505,7 @@ export type StreamRunAgentModelConfiguration2 = {
    */
   parameters?: StreamRunAgentModelConfigurationParameters | undefined;
   /**
-   * Retry configuration for model requests. Retries are triggered for specific HTTP status codes (e.g., 500, 429, 502, 503, 504). Supports configurable retry count (1-5) and custom status codes.
+   * Retry configuration for model requests. Allows customizing retry count (1-5) and HTTP status codes that trigger retries. Default codes: 408, 429, 500, 502, 503, 504, 529.
    */
   retry?: StreamRunAgentModelConfigurationRetry | undefined;
 };
@@ -3977,7 +3977,7 @@ export const AgentToolInputRunTools$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   AgentToolInputRunTools
 > = z.object({
-  id: z.string().default("01M6S0V2W5JA3JSA33BWGEYJXG"),
+  id: z.string().default("01M7KYXNQHQ2H0PEP25Q2W75A6"),
   name: z.string(),
   description: z.string().optional(),
   schema: z.lazy(() =>

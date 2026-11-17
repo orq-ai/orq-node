@@ -5,11 +5,29 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 
+/**
+ * Selects rows and columns for Execute a run.
+ */
 export type ExecuteTarget = {
+  /**
+   * Row to execute.
+   */
   rowId?: string | undefined;
+  /**
+   * Column to execute, by column ID.
+   */
   columnId?: string | undefined;
+  /**
+   * Column to execute, matched against column ID, key and display name. Every
+   *
+   * @remarks
+   *  matching column is used.
+   */
   columnKey?: string | undefined;
-  repeatIndex?: number | undefined;
+  /**
+   * Limits an evaluator column target to the cells grading this task column.
+   */
+  sourceColumnId?: string | undefined;
 };
 
 /** @internal */
@@ -17,7 +35,7 @@ export type ExecuteTarget$Outbound = {
   row_id?: string | undefined;
   column_id?: string | undefined;
   column_key?: string | undefined;
-  repeat_index?: number | undefined;
+  source_column_id?: string | undefined;
 };
 
 /** @internal */
@@ -29,13 +47,13 @@ export const ExecuteTarget$outboundSchema: z.ZodType<
   rowId: z.string().optional(),
   columnId: z.string().optional(),
   columnKey: z.string().optional(),
-  repeatIndex: z.number().int().optional(),
+  sourceColumnId: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     rowId: "row_id",
     columnId: "column_id",
     columnKey: "column_key",
-    repeatIndex: "repeat_index",
+    sourceColumnId: "source_column_id",
   });
 });
 

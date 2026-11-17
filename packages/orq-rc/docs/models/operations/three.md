@@ -1,21 +1,33 @@
 # Three
 
-## Example Usage
+A content part within an agent_message item.
+
+
+## Supported Types
+
+### `operations.ThreeText`
 
 ```typescript
-import { Three } from "@orq-ai/node/models/operations";
-
-let value: Three = {
-  type: "image",
-  role: "correction",
-  url: "https://essential-tabletop.org/",
+const value: operations.ThreeText = {
+  text: "<value>",
+  type: "input_text",
 };
 ```
 
-## Fields
+### `operations.ThreeImage`
 
-| Field                                                                                            | Type                                                                                             | Required                                                                                         | Description                                                                                      |
-| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
-| `type`                                                                                           | *"image"*                                                                                        | :heavy_check_mark:                                                                               | N/A                                                                                              |
-| `role`                                                                                           | [operations.DeploymentInvokeMessageRole](../../models/operations/deploymentinvokemessagerole.md) | :heavy_check_mark:                                                                               | The role of the prompt message                                                                   |
-| `url`                                                                                            | *string*                                                                                         | :heavy_check_mark:                                                                               | N/A                                                                                              |
+```typescript
+const value: operations.ThreeImage = {
+  type: "input_image",
+};
+```
+
+### `operations.EncryptedContent`
+
+```typescript
+const value: operations.EncryptedContent = {
+  encryptedContent: "<value>",
+  type: "encrypted_content",
+};
+```
+

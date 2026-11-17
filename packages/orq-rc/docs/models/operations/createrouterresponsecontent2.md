@@ -5,27 +5,27 @@ A content part within a message.
 
 ## Supported Types
 
-### `operations.TwoText`
+### `operations.CreateRouterResponse2Text`
 
 ```typescript
-const value: operations.TwoText = {
+const value: operations.CreateRouterResponse2Text = {
   text: "<value>",
   type: "input_text",
 };
 ```
 
-### `operations.TwoImage`
+### `operations.CreateRouterResponse2Image`
 
 ```typescript
-const value: operations.TwoImage = {
+const value: operations.CreateRouterResponse2Image = {
   type: "input_image",
 };
 ```
 
-### `operations.TwoFile`
+### `operations.CreateRouterResponse2File`
 
 ```typescript
-const value: operations.TwoFile = {
+const value: operations.CreateRouterResponse2File = {
   type: "input_file",
 };
 ```

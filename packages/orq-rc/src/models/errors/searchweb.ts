@@ -247,14 +247,14 @@ export class SearchWebWebsearchResponse403ResponseBody extends OrqError {
 }
 
 /**
- * Managed search requires a positive ORQ credit balance. Add credits before retrying. BYOK does not require ORQ credits.
+ * Managed search requires a positive platform credit balance. Add credits before retrying. BYOK does not require platform credits.
  */
 export type SearchWebWebsearchResponseResponseBodyData = {
   error: components.APIError;
 };
 
 /**
- * Managed search requires a positive ORQ credit balance. Add credits before retrying. BYOK does not require ORQ credits.
+ * Managed search requires a positive platform credit balance. Add credits before retrying. BYOK does not require platform credits.
  */
 export class SearchWebWebsearchResponseResponseBody extends OrqError {
   error: components.APIError;

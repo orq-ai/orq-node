@@ -29,6 +29,9 @@ import { Result } from "../types/fp.js";
 
 /**
  * Delete a task column
+ *
+ * @remarks
+ * Deletes a task column with its cells and the evaluator, metric and annotation cells linked to it. Deleting the last task column also removes the metric columns.
  */
 export function experimentsDeleteTask(
   client: OrqCore,

@@ -1,5 +1,7 @@
 # NumberMetricSummary
 
+Statistics of a numeric metric.
+
 ## Example Usage
 
 ```typescript
@@ -10,13 +12,13 @@ let value: NumberMetricSummary = {};
 
 ## Fields
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `min`              | *number*           | :heavy_minus_sign: | N/A                |
-| `max`              | *number*           | :heavy_minus_sign: | N/A                |
-| `avg`              | *number*           | :heavy_minus_sign: | N/A                |
-| `sum`              | *number*           | :heavy_minus_sign: | N/A                |
-| `median`           | *number*           | :heavy_minus_sign: | N/A                |
-| `range`            | *number*           | :heavy_minus_sign: | N/A                |
-| `stdDev`           | *number*           | :heavy_minus_sign: | N/A                |
-| `count`            | *number*           | :heavy_minus_sign: | N/A                |
+| Field                          | Type                           | Required                       | Description                    |
+| ------------------------------ | ------------------------------ | ------------------------------ | ------------------------------ |
+| `min`                          | *number*                       | :heavy_minus_sign:             | Lowest value.                  |
+| `max`                          | *number*                       | :heavy_minus_sign:             | Highest value.                 |
+| `avg`                          | *number*                       | :heavy_minus_sign:             | Average value.                 |
+| `sum`                          | *number*                       | :heavy_minus_sign:             | Sum of the values.             |
+| `median`                       | *number*                       | :heavy_minus_sign:             | Approximate median.            |
+| `range`                        | *number*                       | :heavy_minus_sign:             | `max` minus `min`.             |
+| `stdDev`                       | *number*                       | :heavy_minus_sign:             | Population standard deviation. |
+| `count`                        | *number*                       | :heavy_minus_sign:             | Number of rows with a value.   |

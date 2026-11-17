@@ -9,6 +9,7 @@ import { AnnotationQueues } from "./annotationqueues.js";
 import { Annotations } from "./annotations.js";
 import { ApiKeys } from "./apikeys.js";
 import { AuditLogDestinations } from "./auditlogdestinations.js";
+import { Batches } from "./batches.js";
 import { Budgets } from "./budgets.js";
 import { Chunking } from "./chunking.js";
 import { Datasets } from "./datasets.js";
@@ -34,7 +35,6 @@ import { Models } from "./models.js";
 import { Monitors } from "./monitors.js";
 import { Notifiers } from "./notifiers.js";
 import { Pii } from "./pii.js";
-import { Policies } from "./policies.js";
 import { Projects } from "./projects.js";
 import { Prompts } from "./prompts.js";
 import { Reporting } from "./reporting.js";
@@ -46,6 +46,7 @@ import { Sessions } from "./sessions.js";
 import { Skills } from "./skills.js";
 import { SmartRouters } from "./smartrouters.js";
 import { Telemetry } from "./telemetry.js";
+import { TelemetryDestinations } from "./telemetrydestinations.js";
 import { Tools } from "./tools.js";
 import { Traces } from "./traces.js";
 import { Users } from "./users.js";
@@ -142,6 +143,13 @@ export class Orq extends ClientSDK {
     return (this._telemetry ??= new Telemetry(this._options));
   }
 
+  private _telemetryDestinations?: TelemetryDestinations;
+  get telemetryDestinations(): TelemetryDestinations {
+    return (this._telemetryDestinations ??= new TelemetryDestinations(
+      this._options,
+    ));
+  }
+
   private _traces?: Traces;
   get traces(): Traces {
     return (this._traces ??= new Traces(this._options));
@@ -165,11 +173,6 @@ export class Orq extends ClientSDK {
   private _models?: Models;
   get models(): Models {
     return (this._models ??= new Models(this._options));
-  }
-
-  private _policies?: Policies;
-  get policies(): Policies {
-    return (this._policies ??= new Policies(this._options));
   }
 
   private _alerts?: Alerts;
@@ -312,6 +315,11 @@ export class Orq extends ClientSDK {
   private _schedules?: Schedules;
   get schedules(): Schedules {
     return (this._schedules ??= new Schedules(this._options));
+  }
+
+  private _batches?: Batches;
+  get batches(): Batches {
+    return (this._batches ??= new Batches(this._options));
   }
 
   private _websearch?: Websearch;

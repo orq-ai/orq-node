@@ -18,11 +18,18 @@ let value: PublicResponseResource = {
   incompleteDetails: {
     reason: "<value>",
   },
+  input: [
+    "<value 1>",
+    "<value 2>",
+    "<value 3>",
+  ],
   instructions: "<value>",
-  maxOutputTokens: 230062,
-  maxToolCalls: 743254,
-  metadata: {},
-  model: "Jetta",
+  maxOutputTokens: 743254,
+  maxToolCalls: 611499,
+  metadata: {
+    "key": "<value>",
+  },
+  model: "Mustang",
   object: "<value>",
   output: [
     "<value 1>",
@@ -30,22 +37,22 @@ let value: PublicResponseResource = {
     "<value 3>",
   ],
   parallelToolCalls: true,
-  presencePenalty: 9268.37,
+  presencePenalty: 2988.81,
   previousResponseId: "<id>",
   promptCacheKey: "<value>",
   promptCacheOptions: {},
   promptCacheRetention: "<value>",
   reasoning: {},
   safetyIdentifier: "<value>",
-  serviceTier: "flex",
-  status: "failed",
-  store: false,
-  temperature: 2538.3,
+  serviceTier: "scale",
+  status: "in_progress",
+  store: true,
+  temperature: 138.17,
   text: "<value>",
   toolChoice: "<value>",
-  tools: null,
-  topLogprobs: 13817,
-  topP: 3651.77,
+  tools: [],
+  topLogprobs: 377524,
+  topP: 8436.75,
   truncation: "disabled",
   usage: {
     inputTokens: 276387,
@@ -60,7 +67,7 @@ let value: PublicResponseResource = {
     },
     totalTokens: 938481,
   },
-  user: "Deon92",
+  user: "Mervin18",
 };
 ```
 
@@ -76,6 +83,7 @@ let value: PublicResponseResource = {
 | `frequencyPenalty`                                                                                  | *number*                                                                                            | :heavy_check_mark:                                                                                  | N/A                                                                                                 |
 | `id`                                                                                                | *string*                                                                                            | :heavy_check_mark:                                                                                  | N/A                                                                                                 |
 | `incompleteDetails`                                                                                 | [components.IncompleteDetails](../../models/components/incompletedetails.md)                        | :heavy_check_mark:                                                                                  | N/A                                                                                                 |
+| `input`                                                                                             | *any*[]                                                                                             | :heavy_check_mark:                                                                                  | Always null. Retained for compatibility with older SDKs; input content is not returned.             |
 | `instructions`                                                                                      | *string*                                                                                            | :heavy_check_mark:                                                                                  | N/A                                                                                                 |
 | `maxOutputTokens`                                                                                   | *number*                                                                                            | :heavy_check_mark:                                                                                  | N/A                                                                                                 |
 | `maxToolCalls`                                                                                      | *number*                                                                                            | :heavy_check_mark:                                                                                  | N/A                                                                                                 |

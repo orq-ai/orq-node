@@ -8,7 +8,16 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+/**
+ * Configuration of a metric column.
+ */
 export type MetricColumnConfig = {
+  /**
+   * Metric shown: `cost`, `latency`, `ttft`, `input_tokens`, `output_tokens`
+   *
+   * @remarks
+   *  or `reasoning_tokens`.
+   */
   metricKey?: string | undefined;
 };
 

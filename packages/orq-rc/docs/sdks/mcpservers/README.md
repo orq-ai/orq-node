@@ -484,7 +484,7 @@ run();
 
 ## sync
 
-Connects to an upstream MCP server, discovers tools, and persists the tool list and sync state on the server record.
+Syncs the upstream catalogs and returns discovery outcomes. Resource catalogs and capabilities discovered with user-specific credentials or discovery variables are returned only to the caller.
 
 ### Example Usage
 

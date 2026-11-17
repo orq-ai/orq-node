@@ -1,6 +1,6 @@
 # SearchWebWebsearchResponseResponseBody
 
-Managed search requires a positive ORQ credit balance. Add credits before retrying. BYOK does not require ORQ credits.
+Managed search requires a positive platform credit balance. Add credits before retrying. BYOK does not require platform credits.
 
 ## Example Usage
 

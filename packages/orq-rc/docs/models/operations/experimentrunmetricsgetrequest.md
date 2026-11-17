@@ -13,8 +13,8 @@ let value: ExperimentRunMetricsGetRequest = {
 
 ## Fields
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `experimentId`     | *string*           | :heavy_check_mark: | N/A                |
-| `runId`            | *string*           | :heavy_check_mark: | N/A                |
-| `baselineRunId`    | *string*           | :heavy_minus_sign: | N/A                |
+| Field                                                                                     | Type                                                                                      | Required                                                                                  | Description                                                                               |
+| ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| `experimentId`                                                                            | *string*                                                                                  | :heavy_check_mark:                                                                        | ID of the experiment.                                                                     |
+| `runId`                                                                                   | *string*                                                                                  | :heavy_check_mark:                                                                        | ID of the run.                                                                            |
+| `baselineRunId`                                                                           | *string*                                                                                  | :heavy_minus_sign:                                                                        | Run of the same experiment to compare against. A run without values<br/> returns no baseline. |

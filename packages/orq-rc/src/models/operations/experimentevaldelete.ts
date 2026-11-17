@@ -6,8 +6,17 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 
 export type ExperimentEvalDeleteRequest = {
+  /**
+   * ID of the experiment.
+   */
   experimentId: string;
+  /**
+   * ID of the run.
+   */
   runId: string;
+  /**
+   * ID of the evaluator column.
+   */
   evalId: string;
 };
 

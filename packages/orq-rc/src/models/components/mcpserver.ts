@@ -12,11 +12,24 @@ import {
   McpAuthConfigOutput$inboundSchema,
 } from "./mcpauthconfigoutput.js";
 import { McpConnection, McpConnection$inboundSchema } from "./mcpconnection.js";
+import {
+  McpDiscoveryStatus,
+  McpDiscoveryStatus$inboundSchema,
+} from "./mcpdiscoverystatus.js";
 import { McpIcon, McpIcon$inboundSchema } from "./mcpicon.js";
 import {
   McpOpenApiConfig,
   McpOpenApiConfig$inboundSchema,
 } from "./mcpopenapiconfig.js";
+import {
+  McpPromptCatalog,
+  McpPromptCatalog$inboundSchema,
+} from "./mcppromptcatalog.js";
+import { McpResource, McpResource$inboundSchema } from "./mcpresource.js";
+import {
+  McpResourceTemplate,
+  McpResourceTemplate$inboundSchema,
+} from "./mcpresourcetemplate.js";
 import { McpSkill, McpSkill$inboundSchema } from "./mcpskill.js";
 import { McpSyncState, McpSyncState$inboundSchema } from "./mcpsyncstate.js";
 import { McpTool, McpTool$inboundSchema } from "./mcptool.js";
@@ -25,6 +38,26 @@ import {
   McpToolExposure$inboundSchema,
 } from "./mcptoolexposure.js";
 import { Sharing, Sharing$inboundSchema } from "./sharing.js";
+
+/**
+ * Capabilities from shared MCP discovery or the caller's current sync.
+ */
+export type Capabilities = {
+  tools?: boolean | undefined;
+  resources?: boolean | undefined;
+  prompts?: boolean | undefined;
+  completions?: boolean | undefined;
+};
+
+/**
+ * Get returns the shared catalog. Sync returns the caller's catalog for user-specific credentials or discovery variables. List omits this field.
+ */
+export type ResourceCatalog = {
+  resources?: Array<McpResource> | undefined;
+  resourceTemplates?: Array<McpResourceTemplate> | undefined;
+  resourcesStatus?: McpDiscoveryStatus | undefined;
+  resourceTemplatesStatus?: McpDiscoveryStatus | undefined;
+};
 
 export type McpServer = {
   /**
@@ -95,7 +128,66 @@ export type McpServer = {
    * Website advertised by the upstream server during discovery.
    */
   websiteUrl?: string | undefined;
+  /**
+   * Capabilities from shared MCP discovery or the caller's current sync.
+   */
+  capabilities?: Capabilities | undefined;
+  /**
+   * Get returns the shared catalog. Sync returns the caller's catalog for user-specific credentials or discovery variables. List omits this field.
+   */
+  resourceCatalog?: ResourceCatalog | undefined;
+  promptCatalog?: McpPromptCatalog | undefined;
 };
+
+/** @internal */
+export const Capabilities$inboundSchema: z.ZodType<
+  Capabilities,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  tools: z.boolean().optional(),
+  resources: z.boolean().optional(),
+  prompts: z.boolean().optional(),
+  completions: z.boolean().optional(),
+});
+
+export function capabilitiesFromJSON(
+  jsonString: string,
+): SafeParseResult<Capabilities, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Capabilities$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Capabilities' from JSON`,
+  );
+}
+
+/** @internal */
+export const ResourceCatalog$inboundSchema: z.ZodType<
+  ResourceCatalog,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  resources: z.array(McpResource$inboundSchema).optional(),
+  resource_templates: z.array(McpResourceTemplate$inboundSchema).optional(),
+  resources_status: McpDiscoveryStatus$inboundSchema.optional(),
+  resource_templates_status: McpDiscoveryStatus$inboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "resource_templates": "resourceTemplates",
+    "resources_status": "resourcesStatus",
+    "resource_templates_status": "resourceTemplatesStatus",
+  });
+});
+
+export function resourceCatalogFromJSON(
+  jsonString: string,
+): SafeParseResult<ResourceCatalog, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ResourceCatalog$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ResourceCatalog' from JSON`,
+  );
+}
 
 /** @internal */
 export const McpServer$inboundSchema: z.ZodType<
@@ -120,6 +212,9 @@ export const McpServer$inboundSchema: z.ZodType<
   openapi: McpOpenApiConfig$inboundSchema.optional(),
   icons: z.array(McpIcon$inboundSchema).optional(),
   website_url: z.string().optional(),
+  capabilities: z.lazy(() => Capabilities$inboundSchema).optional(),
+  resource_catalog: z.lazy(() => ResourceCatalog$inboundSchema).optional(),
+  prompt_catalog: McpPromptCatalog$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "display_name": "displayName",
@@ -127,6 +222,8 @@ export const McpServer$inboundSchema: z.ZodType<
     "sync_state": "syncState",
     "created_by_id": "createdById",
     "website_url": "websiteUrl",
+    "resource_catalog": "resourceCatalog",
+    "prompt_catalog": "promptCatalog",
   });
 });
 

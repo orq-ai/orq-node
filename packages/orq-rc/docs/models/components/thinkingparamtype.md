@@ -1,6 +1,6 @@
 # ThinkingParamType
 
-The thinking mode to use for the model. Sonnet 5.5 supports between_tools for progress updates without extended thinking.
+The thinking mode to use for the model. between_tools returns progress updates between tool calls without extended thinking on models that support it.
 
 ## Example Usage
 

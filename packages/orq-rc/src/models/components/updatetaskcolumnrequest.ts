@@ -10,21 +10,28 @@ import {
   AgentTaskConfig$outboundSchema,
 } from "./agenttaskconfig.js";
 import {
-  HarnessTaskConfig,
-  HarnessTaskConfig$Outbound,
-  HarnessTaskConfig$outboundSchema,
-} from "./harnesstaskconfig.js";
-import {
   PromptTaskConfig,
   PromptTaskConfig$Outbound,
   PromptTaskConfig$outboundSchema,
 } from "./prompttaskconfig.js";
 
 export type UpdateTaskColumnRequest = {
+  /**
+   * New column name. Must not be empty.
+   */
   displayName?: string | undefined;
+  /**
+   * Replaces the column's source with this prompt. A new source replaces the
+   *
+   * @remarks
+   *  whole config and can change the column type; existing cells are not
+   *  changed.
+   */
   prompt?: PromptTaskConfig | undefined;
+  /**
+   * Replaces the column's source with this agent.
+   */
   agent?: AgentTaskConfig | undefined;
-  harness?: HarnessTaskConfig | undefined;
 };
 
 /** @internal */
@@ -32,7 +39,6 @@ export type UpdateTaskColumnRequest$Outbound = {
   display_name?: string | undefined;
   prompt?: PromptTaskConfig$Outbound | undefined;
   agent?: AgentTaskConfig$Outbound | undefined;
-  harness?: HarnessTaskConfig$Outbound | undefined;
 };
 
 /** @internal */
@@ -44,7 +50,6 @@ export const UpdateTaskColumnRequest$outboundSchema: z.ZodType<
   displayName: z.string().optional(),
   prompt: PromptTaskConfig$outboundSchema.optional(),
   agent: AgentTaskConfig$outboundSchema.optional(),
-  harness: HarnessTaskConfig$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     displayName: "display_name",

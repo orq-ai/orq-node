@@ -99,6 +99,7 @@ async function $do(
   const path = pathToFunc("/v3/traces/{trace_id}/spans")(pathParams);
 
   const query = encodeFormQuery({
+    "all_accessible_projects": payload.all_accessible_projects,
     "limit": payload.limit,
     "page_token": payload.page_token,
   });

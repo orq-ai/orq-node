@@ -94,6 +94,7 @@ async function $do(
   const path = pathToFunc("/v2/mcp-gateways")();
 
   const query = encodeFormQuery({
+    "all_accessible_projects": payload?.all_accessible_projects,
     "ending_before": payload?.ending_before,
     "limit": payload?.limit,
     "search": payload?.search,

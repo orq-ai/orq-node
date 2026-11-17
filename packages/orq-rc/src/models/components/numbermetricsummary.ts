@@ -8,14 +8,41 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+/**
+ * Statistics of a numeric metric.
+ */
 export type NumberMetricSummary = {
+  /**
+   * Lowest value.
+   */
   min?: number | undefined;
+  /**
+   * Highest value.
+   */
   max?: number | undefined;
+  /**
+   * Average value.
+   */
   avg?: number | undefined;
+  /**
+   * Sum of the values.
+   */
   sum?: number | undefined;
+  /**
+   * Approximate median.
+   */
   median?: number | undefined;
+  /**
+   * `max` minus `min`.
+   */
   range?: number | undefined;
+  /**
+   * Population standard deviation.
+   */
   stdDev?: number | undefined;
+  /**
+   * Number of rows with a value.
+   */
   count?: number | undefined;
 };
 

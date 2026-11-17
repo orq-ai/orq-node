@@ -23,13 +23,13 @@ const value: operations.DeploymentStreamMessage2 = {
 };
 ```
 
-### `operations.Message3`
+### `operations.DeploymentStreamMessage3`
 
 ```typescript
-const value: operations.Message3 = {
+const value: operations.DeploymentStreamMessage3 = {
   type: "image",
-  role: "assistant",
-  url: "https://massive-hunt.biz",
+  role: "exception",
+  url: "https://unhappy-restaurant.info/",
 };
 ```
 

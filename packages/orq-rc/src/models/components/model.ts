@@ -33,6 +33,15 @@ export type ModelPricing = {};
  */
 export type ArtificialIntelligence = {};
 
+/**
+ * Artificial Analysis intelligence index per reasoning effort, keyed by
+ *
+ * @remarks
+ *  effort name. Each value has `intelligence_index`, plus `index_version`
+ *  and `index_is_estimated` when known. Absent when there is no effort ladder.
+ */
+export type ReasoningEfforts = {};
+
 export type Model = {
   /**
    * Catalog identifier, `<provider>/<model>` (for example `openai/gpt-4o`).
@@ -129,6 +138,38 @@ export type Model = {
    * True when this offering guarantees zero data retention.
    */
   zdr: boolean;
+  /**
+   * Reasoning effort that the `artificial_intelligence` scores are measured
+   *
+   * @remarks
+   *  at. Absent when the model has no default effort.
+   */
+  defaultEffort?: string | undefined;
+  /**
+   * Artificial Analysis intelligence index per reasoning effort, keyed by
+   *
+   * @remarks
+   *  effort name. Each value has `intelligence_index`, plus `index_version`
+   *  and `index_is_estimated` when known. Absent when there is no effort ladder.
+   */
+  reasoningEfforts?: ReasoningEfforts | undefined;
+  /**
+   * Blended price in USD per 1M tokens, weighting input to output 3:1. It uses
+   *
+   * @remarks
+   *  base pricing only, so service tiers and conditional prices are ignored.
+   *  Absent when the model has no Artificial Analysis data.
+   */
+  blendedPrice?: number | undefined;
+  /**
+   * False when `artificial_intelligence` is not the `default_effort` score:
+   *
+   * @remarks
+   *  the default effort has no scored rung, so the score of the model's
+   *  Artificial Analysis slug is used instead. Absent when the model has no
+   *  default effort.
+   */
+  defaultEffortScored?: boolean | undefined;
 };
 
 /** @internal */
@@ -166,6 +207,23 @@ export function artificialIntelligenceFromJSON(
 }
 
 /** @internal */
+export const ReasoningEfforts$inboundSchema: z.ZodType<
+  ReasoningEfforts,
+  z.ZodTypeDef,
+  unknown
+> = z.object({});
+
+export function reasoningEffortsFromJSON(
+  jsonString: string,
+): SafeParseResult<ReasoningEfforts, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ReasoningEfforts$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ReasoningEfforts' from JSON`,
+  );
+}
+
+/** @internal */
 export const Model$inboundSchema: z.ZodType<Model, z.ZodTypeDef, unknown> = z
   .object({
     id: z.string(),
@@ -189,6 +247,10 @@ export const Model$inboundSchema: z.ZodType<Model, z.ZodTypeDef, unknown> = z
     features: z.array(z.string()),
     deprecated: z.boolean(),
     zdr: z.boolean(),
+    default_effort: z.string().optional(),
+    reasoning_efforts: z.lazy(() => ReasoningEfforts$inboundSchema).optional(),
+    blended_price: z.number().optional(),
+    default_effort_scored: z.boolean().optional(),
   }).transform((v) => {
     return remap$(v, {
       "offering_of": "offeringOf",
@@ -196,6 +258,10 @@ export const Model$inboundSchema: z.ZodType<Model, z.ZodTypeDef, unknown> = z
       "supported_tiers": "supportedTiers",
       "context_window": "contextWindow",
       "artificial_intelligence": "artificialIntelligence",
+      "default_effort": "defaultEffort",
+      "reasoning_efforts": "reasoningEfforts",
+      "blended_price": "blendedPrice",
+      "default_effort_scored": "defaultEffortScored",
     });
   });
 

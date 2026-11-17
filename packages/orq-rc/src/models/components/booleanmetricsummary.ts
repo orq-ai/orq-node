@@ -8,8 +8,17 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+/**
+ * Statistics of a pass or fail metric.
+ */
 export type BooleanMetricSummary = {
+  /**
+   * Percentage of rows that passed, 0 to 100, rounded to a whole number.
+   */
   passedRate?: number | undefined;
+  /**
+   * Number of rows with a value.
+   */
   count?: number | undefined;
 };
 

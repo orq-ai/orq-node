@@ -72,7 +72,7 @@ export type KnowledgeBasesServiceCreateRequestRetrievalType = ClosedEnum<
  */
 export type KnowledgeBasesServiceCreateRequestRerankConfig = {
   /**
-   * The number of results to return by the reranking model
+   * The number of results to return by the reranking model, 1 to 100. Stored as the knowledge base rerank setting, 5 when omitted.
    */
   topK?: number | undefined;
   /**

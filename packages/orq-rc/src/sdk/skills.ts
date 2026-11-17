@@ -4,8 +4,19 @@
 
 import { skillsCreate } from "../funcs/skillsCreate.js";
 import { skillsDelete } from "../funcs/skillsDelete.js";
+import { skillsDeleteFile } from "../funcs/skillsDeleteFile.js";
+import { skillsExportBundle } from "../funcs/skillsExportBundle.js";
 import { skillsGet } from "../funcs/skillsGet.js";
+import { skillsGetFileContent } from "../funcs/skillsGetFileContent.js";
+import { skillsImportBundle } from "../funcs/skillsImportBundle.js";
+import { skillsImportFromRepository } from "../funcs/skillsImportFromRepository.js";
 import { skillsList } from "../funcs/skillsList.js";
+import { skillsListVersions } from "../funcs/skillsListVersions.js";
+import { skillsPutFile } from "../funcs/skillsPutFile.js";
+import { skillsRenameFile } from "../funcs/skillsRenameFile.js";
+import { skillsReplaceBundle } from "../funcs/skillsReplaceBundle.js";
+import { skillsRestoreVersion } from "../funcs/skillsRestoreVersion.js";
+import { skillsSaveFiles } from "../funcs/skillsSaveFiles.js";
 import { skillsUpdate } from "../funcs/skillsUpdate.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as components from "../models/components/index.js";
@@ -41,6 +52,40 @@ export class Skills extends ClientSDK {
     options?: RequestOptions,
   ): Promise<components.CreateSkillResponse> {
     return unwrapAsync(skillsCreate(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Import a skill bundle
+   *
+   * @remarks
+   * Uploads a zip archive containing a SKILL.md file and optional supporting files. Creates a new file-bearing skill. An existing display name returns AlreadyExists. Operating-system archive metadata is ignored: `__MACOSX` entries, AppleDouble sidecars (`._*`), and per-directory metadata such as `.DS_Store`, `Thumbs.db`, and `desktop.ini` are dropped and do not count toward the per-skill file limit.
+   */
+  async importBundle(
+    request: components.ImportSkillBundleRequest,
+    options?: RequestOptions,
+  ): Promise<components.ImportSkillBundleResponse> {
+    return unwrapAsync(skillsImportBundle(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Import a skill from a repository
+   *
+   * @remarks
+   * Creates an editable skill snapshot from a repository directory using a workspace source control connection. The source commit is retained; subsequent repository changes are not synchronized.
+   */
+  async importFromRepository(
+    request: components.ImportSkillFromRepositoryRequest,
+    options?: RequestOptions,
+  ): Promise<components.ImportSkillFromRepositoryResponse> {
+    return unwrapAsync(skillsImportFromRepository(
       this,
       request,
       options,
@@ -92,6 +137,153 @@ export class Skills extends ClientSDK {
     options?: RequestOptions,
   ): Promise<components.UpdateSkillResponse> {
     return unwrapAsync(skillsUpdate(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Replace a skill bundle
+   */
+  async replaceBundle(
+    request: operations.SkillReplaceBundleRequest,
+    options?: RequestOptions,
+  ): Promise<components.ReplaceSkillBundleResponse> {
+    return unwrapAsync(skillsReplaceBundle(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Add or replace a skill file
+   *
+   * @remarks
+   * Uploads a single file to a skill's bundle. If the path already exists the file is replaced; otherwise it is added to the manifest.
+   */
+  async putFile(
+    request: operations.SkillPutFileRequest,
+    options?: RequestOptions,
+  ): Promise<components.PutSkillFileResponse> {
+    return unwrapAsync(skillsPutFile(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Rename a skill file
+   *
+   * @remarks
+   * Changes a file's path within a skill's bundle. The file content is unchanged. SKILL.md cannot be renamed.
+   */
+  async renameFile(
+    request: operations.SkillRenameFileRequest,
+    options?: RequestOptions,
+  ): Promise<components.RenameSkillFileResponse> {
+    return unwrapAsync(skillsRenameFile(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Save skill files atomically
+   *
+   * @remarks
+   * Saves file drafts and optional skill metadata as one version.
+   */
+  async saveFiles(
+    request: operations.SkillSaveFilesRequest,
+    options?: RequestOptions,
+  ): Promise<components.SaveSkillFilesResponse> {
+    return unwrapAsync(skillsSaveFiles(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * List skill versions
+   */
+  async listVersions(
+    request: operations.SkillListVersionsRequest,
+    options?: RequestOptions,
+  ): Promise<components.ListSkillVersionsResponse> {
+    return unwrapAsync(skillsListVersions(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Export a skill bundle
+   *
+   * @remarks
+   * Downloads the skill as a zip archive containing the SKILL.md file and all files in the manifest. Basic Skills receive a synthesized SKILL.md.
+   */
+  async exportBundle(
+    request: operations.SkillExportBundleRequest,
+    options?: RequestOptions,
+  ): Promise<components.ExportSkillBundleResponse> {
+    return unwrapAsync(skillsExportBundle(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Restore a skill version
+   *
+   * @remarks
+   * Restores a skill to a previous version recorded in the activity log. The restored state becomes a new version.
+   */
+  async restoreVersion(
+    request: operations.SkillRestoreVersionRequest,
+    options?: RequestOptions,
+  ): Promise<components.RestoreSkillVersionResponse> {
+    return unwrapAsync(skillsRestoreVersion(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Delete a skill file
+   *
+   * @remarks
+   * Removes a file from a skill's bundle by its relative path. SKILL.md cannot be deleted.
+   */
+  async deleteFile(
+    request: operations.SkillDeleteFileRequest,
+    options?: RequestOptions,
+  ): Promise<components.DeleteSkillFileResponse> {
+    return unwrapAsync(skillsDeleteFile(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Get a presigned URL for a skill file
+   *
+   * @remarks
+   * Returns a time-limited presigned URL that can be used to download the raw content of a file in the skill bundle.
+   */
+  async getFileContent(
+    request: operations.SkillGetFileContentRequest,
+    options?: RequestOptions,
+  ): Promise<components.GetSkillFileContentResponse> {
+    return unwrapAsync(skillsGetFileContent(
       this,
       request,
       options,

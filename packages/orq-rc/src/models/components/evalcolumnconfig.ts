@@ -8,10 +8,28 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+/**
+ * Configuration of an evaluator column. Name and types are read from the
+ *
+ * @remarks
+ *  evaluator.
+ */
 export type EvalColumnConfig = {
+  /**
+   * ID of the evaluator.
+   */
   evaluatorId?: string | undefined;
+  /**
+   * Evaluator display name.
+   */
   evaluatorName?: string | undefined;
+  /**
+   * Evaluator type, such as `llm_eval` or `python_eval`.
+   */
   evaluatorType?: string | undefined;
+  /**
+   * Type of value the evaluator returns, such as `number`.
+   */
   evaluatorOutputType?: string | undefined;
 };
 

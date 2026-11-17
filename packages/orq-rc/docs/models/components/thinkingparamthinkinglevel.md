@@ -7,11 +7,11 @@ The level of thinking to use for the model. Only supported by Google AI.
 ```typescript
 import { ThinkingParamThinkingLevel } from "@orq-ai/node/models/components";
 
-let value: ThinkingParamThinkingLevel = "medium";
+let value: ThinkingParamThinkingLevel = "high";
 ```
 
 ## Values
 
 ```typescript
-"minimal" | "low" | "medium" | "high"
+"minimal" | "low" | "medium" | "high" | "xhigh"
 ```

@@ -1,5 +1,7 @@
 # BooleanMetricSummary
 
+Statistics of a pass or fail metric.
+
 ## Example Usage
 
 ```typescript
@@ -10,7 +12,7 @@ let value: BooleanMetricSummary = {};
 
 ## Fields
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `passedRate`       | *number*           | :heavy_minus_sign: | N/A                |
-| `count`            | *number*           | :heavy_minus_sign: | N/A                |
+| Field                                                                | Type                                                                 | Required                                                             | Description                                                          |
+| -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- |
+| `passedRate`                                                         | *number*                                                             | :heavy_minus_sign:                                                   | Percentage of rows that passed, 0 to 100, rounded to a whole number. |
+| `count`                                                              | *number*                                                             | :heavy_minus_sign:                                                   | Number of rows with a value.                                         |

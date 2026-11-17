@@ -10,12 +10,15 @@ import {
 } from "./columnlayout.js";
 
 export type UpdateRunColumnLayoutRequest = {
-  columns?: Array<ColumnLayout> | undefined;
+  /**
+   * Layout changes, at least one. Columns not listed keep their layout.
+   */
+  columns: Array<ColumnLayout>;
 };
 
 /** @internal */
 export type UpdateRunColumnLayoutRequest$Outbound = {
-  columns?: Array<ColumnLayout$Outbound> | undefined;
+  columns: Array<ColumnLayout$Outbound>;
 };
 
 /** @internal */
@@ -24,7 +27,7 @@ export const UpdateRunColumnLayoutRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateRunColumnLayoutRequest
 > = z.object({
-  columns: z.array(ColumnLayout$outboundSchema).optional(),
+  columns: z.array(ColumnLayout$outboundSchema),
 });
 
 export function updateRunColumnLayoutRequestToJSON(

@@ -1,6 +1,6 @@
 # CreateRouterResponseToolsResponsesRequestType
 
-The orq.ai tool type. orq:web_search, orq:web_fetch, and orq:datetime are the canonical names for orq:google_search, orq:web_scraper, and orq:current_date.
+The platform tool type. orq:web_search, orq:web_fetch, and orq:datetime are the canonical names for orq:google_search, orq:web_scraper, and orq:current_date.
 
 ## Example Usage
 

@@ -13,12 +13,36 @@ import {
   MessagesSource$outboundSchema,
 } from "./messagessource.js";
 
+/**
+ * Configuration of an agent task column.
+ */
 export type AgentTaskConfig = {
+  /**
+   * Key of the agent to run. Required.
+   */
   agentKey?: string | undefined;
   messagesSource?: MessagesSource | undefined;
+  /**
+   * Conversation sent to the agent when `messages_source` is not the messages
+   *
+   * @remarks
+   *  column.
+   */
   messages?: Array<{ [k: string]: any }> | undefined;
+  /**
+   * Template engine for variables in the messages: `text` (default), `jinja`
+   *
+   * @remarks
+   *  or `mustache`.
+   */
   engine?: string | undefined;
+  /**
+   * Saved with the column; not used during execution.
+   */
   parentId?: string | undefined;
+  /**
+   * Agent version tag. When set, the column runs that tagged version.
+   */
   agentTag?: string | undefined;
 };
 

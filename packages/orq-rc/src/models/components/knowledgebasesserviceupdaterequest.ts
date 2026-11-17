@@ -31,7 +31,7 @@ export type KnowledgeBasesServiceUpdateRequestRetrievalType = ClosedEnum<
  */
 export type KnowledgeBasesServiceUpdateRequest2RerankConfig = {
   /**
-   * The number of results to return by the reranking model
+   * The number of results to return by the reranking model, 1 to 100. Stored as the knowledge base rerank setting, 5 when omitted.
    */
   topK?: number | undefined;
   /**
@@ -128,7 +128,7 @@ export type KnowledgeBasesServiceUpdateRequest2 = {
  */
 export type KnowledgeBasesServiceUpdateRequestRerankConfig = {
   /**
-   * The number of results to return by the reranking model
+   * The number of results to return by the reranking model, 1 to 100. Stored as the knowledge base rerank setting, 5 when omitted.
    */
   topK?: number | undefined;
   /**

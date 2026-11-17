@@ -31,7 +31,7 @@ import { Result } from "../types/fp.js";
  * Query run cells
  *
  * @remarks
- * Returns selected cells by row and column name. POST because selections can exceed URL limits.
+ * Returns the rows of a run with their cells, filtered by row and column. POST because selections can exceed URL limits.
  */
 export function experimentsQueryRun(
   client: OrqCore,

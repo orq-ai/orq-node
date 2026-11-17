@@ -1,5 +1,7 @@
 # ExecuteConstraints
 
+Limits for one execution, saved into the run's settings.
+
 ## Example Usage
 
 ```typescript
@@ -10,7 +12,6 @@ let value: ExecuteConstraints = {};
 
 ## Fields
 
-| Field                                                                          | Type                                                                           | Required                                                                       | Description                                                                    |
-| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
-| `llm`                                                                          | [components.LlmConstraints](../../models/components/llmconstraints.md)         | :heavy_minus_sign:                                                             | N/A                                                                            |
-| `harness`                                                                      | [components.HarnessConstraints](../../models/components/harnessconstraints.md) | :heavy_minus_sign:                                                             | N/A                                                                            |
+| Field                                                                  | Type                                                                   | Required                                                               | Description                                                            |
+| ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| `llm`                                                                  | [components.LlmConstraints](../../models/components/llmconstraints.md) | :heavy_minus_sign:                                                     | Limits for prompt and agent cells.                                     |

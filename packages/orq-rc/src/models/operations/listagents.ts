@@ -722,7 +722,7 @@ export type ListAgentsParameters = {
 };
 
 /**
- * Retry configuration for model requests. Allows customizing retry count (1-5) and HTTP status codes that trigger retries. Default codes: [429]. Common codes: 500 (internal error), 429 (rate limit), 502/503/504 (gateway errors).
+ * Retry configuration for model requests. Allows customizing retry count (1-5) and HTTP status codes that trigger retries. Default codes: 408, 429, 500, 502, 503, 504, 529.
  */
 export type ListAgentsRetry = {
   /**
@@ -1260,7 +1260,7 @@ export type ListAgentsModel = {
    */
   parameters?: ListAgentsParameters | null | undefined;
   /**
-   * Retry configuration for model requests. Allows customizing retry count (1-5) and HTTP status codes that trigger retries. Default codes: [429]. Common codes: 500 (internal error), 429 (rate limit), 502/503/504 (gateway errors).
+   * Retry configuration for model requests. Allows customizing retry count (1-5) and HTTP status codes that trigger retries. Default codes: 408, 429, 500, 502, 503, 504, 529.
    */
   retry?: ListAgentsRetry | undefined;
   /**

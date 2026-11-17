@@ -11,6 +11,10 @@ export type TracesListFacetValuesRequest = {
   to?: Date | undefined;
   limit?: number | undefined;
   filterOperator?: string | undefined;
+  /**
+   * Spans every project the caller belongs to instead of the active one.
+   */
+  allAccessibleProjects?: boolean | undefined;
 };
 
 /** @internal */
@@ -20,6 +24,7 @@ export type TracesListFacetValuesRequest$Outbound = {
   to?: string | undefined;
   limit?: number | undefined;
   filter_operator?: string | undefined;
+  all_accessible_projects?: boolean | undefined;
 };
 
 /** @internal */
@@ -33,9 +38,11 @@ export const TracesListFacetValuesRequest$outboundSchema: z.ZodType<
   to: z.date().transform(v => v.toISOString()).optional(),
   limit: z.number().int().optional(),
   filterOperator: z.string().optional(),
+  allAccessibleProjects: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
     filterOperator: "filter_operator",
+    allAccessibleProjects: "all_accessible_projects",
   });
 });
 

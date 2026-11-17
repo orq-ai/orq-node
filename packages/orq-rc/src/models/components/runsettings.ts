@@ -8,10 +8,39 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+/**
+ * Execution settings of a run.
+ */
 export type RunSettings = {
+  /**
+   * Maximum number of cells the run executes at the same time, 1 to 100.
+   *
+   * @remarks
+   *  Defaults to 10.
+   */
   concurrency?: number | undefined;
+  /**
+   * Wall-clock limit for each prompt or agent cell, as a duration string such
+   *
+   * @remarks
+   *  as `90s`. Fractions of a second are dropped, and a cell that exceeds the
+   *  limit fails. When unset, the agent's own limit or the platform default
+   *  applies.
+   */
   timeout?: string | undefined;
+  /**
+   * Maximum number of model calls in a cell's agent loop, at least 1. When
+   *
+   * @remarks
+   *  unset, the agent's own limit or the platform default (10) applies.
+   */
   maxTurns?: number | undefined;
+  /**
+   * Columns hidden in the AI Studio grid. Display only: hidden columns still
+   *
+   * @remarks
+   *  execute.
+   */
   hiddenColumnIds?: Array<string> | undefined;
 };
 

@@ -158,7 +158,7 @@ export type SearchWebMetadata = {
    */
   query: string;
   /**
-   * ORQ-generated identifier for this search request. Distinct from the trace ID in the response headers.
+   * Platform-generated identifier for this search request. Distinct from the trace ID in the response headers.
    */
   requestId: string;
 };

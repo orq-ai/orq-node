@@ -23,12 +23,27 @@ import {
   NumberMetricSummary$inboundSchema,
 } from "./numbermetricsummary.js";
 
+/**
+ * Summary of one metric. Exactly one of `number`, `boolean` and `categorical`
+ *
+ * @remarks
+ *  is set, depending on the metric's output type.
+ */
 export type MetricSummary = {
+  /**
+   * Set for numeric metrics.
+   */
   number?: NumberMetricSummary | undefined;
+  /**
+   * Set for pass or fail evaluators.
+   */
   boolean?: BooleanMetricSummary | undefined;
+  /**
+   * Set for evaluators that return labels.
+   */
   categorical?: CategoricalMetricSummary | undefined;
   /**
-   * Null unless a baseline run was requested.
+   * Comparison with the baseline run. Null unless `baseline_run_id` was given, and for categorical metrics or a baseline without values.
    */
   baseline?: MetricBaseline | null | undefined;
 };

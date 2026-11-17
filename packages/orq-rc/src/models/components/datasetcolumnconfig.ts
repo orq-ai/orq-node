@@ -8,7 +8,13 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+/**
+ * Configuration of a dataset column.
+ */
 export type DatasetColumnConfig = {
+  /**
+   * `inputs`, `messages` or `expected_output`. Dataset cells are read-only.
+   */
   columnType?: string | undefined;
 };
 

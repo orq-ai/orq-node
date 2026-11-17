@@ -31,7 +31,7 @@ import { Result } from "../types/fp.js";
  * Update a task column
  *
  * @remarks
- * Updates an unlinked task column in place.
+ * Renames a task column or replaces its source. Existing cells are not changed.
  */
 export function experimentsUpdateTask(
   client: OrqCore,

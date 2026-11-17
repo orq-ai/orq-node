@@ -6,8 +6,20 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 
 export type ExperimentRunMetricsGetRequest = {
+  /**
+   * ID of the experiment.
+   */
   experimentId: string;
+  /**
+   * ID of the run.
+   */
   runId: string;
+  /**
+   * Run of the same experiment to compare against. A run without values
+   *
+   * @remarks
+   *  returns no baseline.
+   */
   baselineRunId?: string | undefined;
 };
 

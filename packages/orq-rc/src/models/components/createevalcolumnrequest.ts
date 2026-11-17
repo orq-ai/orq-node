@@ -6,13 +6,22 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 
 export type CreateEvalColumnRequest = {
-  evaluatorId?: string | undefined;
+  /**
+   * ID of the evaluator to add. Each row gets one evaluator cell per task
+   *
+   * @remarks
+   *  column.
+   */
+  evaluatorId: string;
+  /**
+   * 0-based position among the run's columns. Defaults to the end.
+   */
   position?: number | undefined;
 };
 
 /** @internal */
 export type CreateEvalColumnRequest$Outbound = {
-  evaluator_id?: string | undefined;
+  evaluator_id: string;
   position?: number | undefined;
 };
 
@@ -22,7 +31,7 @@ export const CreateEvalColumnRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateEvalColumnRequest
 > = z.object({
-  evaluatorId: z.string().optional(),
+  evaluatorId: z.string(),
   position: z.number().int().optional(),
 }).transform((v) => {
   return remap$(v, {

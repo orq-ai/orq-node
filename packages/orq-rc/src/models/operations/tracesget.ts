@@ -7,11 +7,16 @@ import { remap as remap$ } from "../../lib/primitives.js";
 
 export type TracesGetRequest = {
   traceId: string;
+  /**
+   * Spans every project the caller belongs to instead of the active one.
+   */
+  allAccessibleProjects?: boolean | undefined;
 };
 
 /** @internal */
 export type TracesGetRequest$Outbound = {
   trace_id: string;
+  all_accessible_projects?: boolean | undefined;
 };
 
 /** @internal */
@@ -21,9 +26,11 @@ export const TracesGetRequest$outboundSchema: z.ZodType<
   TracesGetRequest
 > = z.object({
   traceId: z.string(),
+  allAccessibleProjects: z.boolean().optional(),
 }).transform((v) => {
   return remap$(v, {
     traceId: "trace_id",
+    allAccessibleProjects: "all_accessible_projects",
   });
 });
 
