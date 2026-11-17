@@ -2592,7 +2592,7 @@ components:
           properties:
             _id:
               type: "string"
-              default: "reasoning_01m7m9ekm11s6kx1yp52xp1aj6"
+              default: "reasoning_01m7md36bn07rw1ay9f6zn79ja"
               description: "Unique identifier for the part. Format: reasoning_{ulid} (e.g., reasoning_01hxyz...)"
               example: "reasoning_01hxyz123abc"
             kind:
@@ -12662,6 +12662,7 @@ components:
       additionalProperties: false
       properties:
         api_key_env:
+          description: "Environment variable the gateway reads the provider API key from when the model stores no key. Platform-managed offerings set it; custom models normally store the key instead."
           type: "string"
         api_version:
           type: "string"
@@ -12742,6 +12743,7 @@ components:
           type: "boolean"
         legacy_uuid:
           deprecated: true
+          description: "Identifier this model had in the legacy model catalog. Deprecated: use id."
           type: "string"
         metadata:
           $ref: "#/components/schemas/ModelMetadata"
@@ -12775,6 +12777,7 @@ components:
         provider:
           type: "string"
         refId:
+          description: "Reference the gateway accepts for this model in requests: provider/model_id, or workspace@provider/model_id for a private model."
           type: "string"
         sharing:
           $ref: "#/components/schemas/ModelSharingConfig"
@@ -28460,7 +28463,7 @@ paths:
                                 type: "string"
                                 format: "ulid"
                                 pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                                default: "01M7M9EKKA3V4VTARDK7SQK4C9"
+                                default: "01M7MD36ANCES6KQ56Y1VAE77E"
                                 readOnly: true
                                 description: "The unique identifier of the playground knowledge base"
                               knowledge_id:
@@ -37863,7 +37866,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01M7M9EKMYYH7QEYAXHGXZPPMY"
+                                          default: "01M7MD36CZ50QVG6RVF1A45AHS"
                                         name:
                                           type: "string"
                                         description:
@@ -39490,7 +39493,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01M7M9EKN7KV2JZRH4YXT3SFKF"
+                                          default: "01M7MD36DEDSG8DKYJGDKYCAPD"
                                         name:
                                           type: "string"
                                         description:
@@ -48548,7 +48551,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M7M9EKP12J4Y75M8R2G0E69E"
+                              default: "tool_01M7MD36ERJ84ZKBPZJPXT72ZZ"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -48649,7 +48652,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M7M9EKP1FRMSDZKPAFQGEPXJ"
+                              default: "tool_01M7MD36ER2S08THM0SRN31ABS"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -48752,7 +48755,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M7M9EKP2M5ZNK8EEF2517WKV"
+                              default: "tool_01M7MD36ESXVXV632X69PKB4ZR"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -48896,7 +48899,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M7M9EKP26EV6CBFQFG6ZKEJK"
+                              default: "tool_01M7MD36ESZHN9FV979YKNSVT9"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -49387,7 +49390,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M7M9EKP4Q0KW7BP657B9421M"
+                        default: "tool_01M7MD36EWA8SKYJS0BHNX0B1B"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -49488,7 +49491,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M7M9EKP5A88EHHMRXXMQ0M3C"
+                        default: "tool_01M7MD36EXKQ6EGC20WN7T7G9J"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -49591,7 +49594,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M7M9EKP5DMJ6CF33MPNB92XE"
+                        default: "tool_01M7MD36EYXWT7B0WBX70TH48J"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -49735,7 +49738,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M7M9EKP6D5H9PDXPMJ79GN0W"
+                        default: "tool_01M7MD36EY0HEFCFKQ1FB6HVNT"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -50239,7 +50242,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M7M9EKP7750T3G1WHEG69XM7"
+                        default: "tool_01M7MD36F0CV6Z3EV5CHWQCVJG"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -50340,7 +50343,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M7M9EKP76J9RVFMR4PX99Z5M"
+                        default: "tool_01M7MD36F1N8DSJHTR5HC4Z72F"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -50443,7 +50446,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M7M9EKP7ZNCKGD528KVTZZMQ"
+                        default: "tool_01M7MD36F17WB7SN9QKKXRP21Z"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -50587,7 +50590,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M7M9EKP8FJ4Y8EF7DE53MDQ6"
+                        default: "tool_01M7MD36F1EN4D5BGDCJMZ1RCF"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -50754,7 +50757,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M7M9EKPAD42R2R58HVNHSMCY"
+                        default: "tool_01M7MD36F5ECG5M0JATY2KBZ5V"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -50855,7 +50858,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M7M9EKPBEXVTW8P7DX2VVQH0"
+                        default: "tool_01M7MD36F6Z7Y1Y6NSC5981FYT"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -50958,7 +50961,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M7M9EKPB4ENGHRH7MD0XBCEF"
+                        default: "tool_01M7MD36F6H415B5M4ASXGPBAR"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -51102,7 +51105,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M7M9EKPBMRZKHT299BA1X8H6"
+                        default: "tool_01M7MD36FAYYEJBQDKMR019HVN"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -67627,6 +67630,7 @@ paths:
                     type: "boolean"
                   legacy_uuid:
                     deprecated: true
+                    description: "Identifier this model had in the legacy model catalog. Deprecated: use id."
                     type: "string"
                   metadata:
                     $ref: "#/components/schemas/ModelMetadata"
@@ -67660,6 +67664,7 @@ paths:
                   provider:
                     type: "string"
                   refId:
+                    description: "Reference the gateway accepts for this model in requests: provider/model_id, or workspace@provider/model_id for a private model."
                     type: "string"
                   sharing:
                     $ref: "#/components/schemas/ModelSharingConfig"
@@ -67697,8 +67702,12 @@ paths:
           description: "Invalid model configuration"
         "401":
           description: "Unauthorized"
+        "403":
+          description: "The caller may not create models, or the license does not cover the provider"
         "404":
           description: "Workspace not found"
+        "409":
+          description: "A model with this display name or id already exists in the workspace"
       summary: "Create custom model"
       tags:
         - "Models"
@@ -67844,6 +67853,7 @@ paths:
                     type: "boolean"
                   legacy_uuid:
                     deprecated: true
+                    description: "Identifier this model had in the legacy model catalog. Deprecated: use id."
                     type: "string"
                   metadata:
                     $ref: "#/components/schemas/ModelMetadata"
@@ -67877,6 +67887,7 @@ paths:
                   provider:
                     type: "string"
                   refId:
+                    description: "Reference the gateway accepts for this model in requests: provider/model_id, or workspace@provider/model_id for a private model."
                     type: "string"
                   sharing:
                     $ref: "#/components/schemas/ModelSharingConfig"
@@ -67914,8 +67925,12 @@ paths:
           description: "Invalid model configuration"
         "401":
           description: "Unauthorized"
+        "403":
+          description: "The caller may not create models, or the license does not cover the provider"
         "404":
           description: "Workspace not found"
+        "409":
+          description: "A model with this display name or id already exists in the workspace"
       summary: "Create AWS Bedrock custom model"
       tags:
         - "Models"
@@ -68108,6 +68123,7 @@ paths:
                     type: "boolean"
                   legacy_uuid:
                     deprecated: true
+                    description: "Identifier this model had in the legacy model catalog. Deprecated: use id."
                     type: "string"
                   metadata:
                     $ref: "#/components/schemas/ModelMetadata"
@@ -68141,6 +68157,7 @@ paths:
                   provider:
                     type: "string"
                   refId:
+                    description: "Reference the gateway accepts for this model in requests: provider/model_id, or workspace@provider/model_id for a private model."
                     type: "string"
                   sharing:
                     $ref: "#/components/schemas/ModelSharingConfig"
@@ -68448,6 +68465,7 @@ paths:
                     type: "boolean"
                   legacy_uuid:
                     deprecated: true
+                    description: "Identifier this model had in the legacy model catalog. Deprecated: use id."
                     type: "string"
                   metadata:
                     $ref: "#/components/schemas/ModelMetadata"
@@ -68481,6 +68499,7 @@ paths:
                   provider:
                     type: "string"
                   refId:
+                    description: "Reference the gateway accepts for this model in requests: provider/model_id, or workspace@provider/model_id for a private model."
                     type: "string"
                   sharing:
                     $ref: "#/components/schemas/ModelSharingConfig"
@@ -68518,8 +68537,12 @@ paths:
           description: "Invalid model configuration or validation failed"
         "401":
           description: "Unauthorized"
+        "403":
+          description: "The caller may not create models, or the license does not cover the provider"
         "404":
           description: "Workspace not found"
+        "409":
+          description: "A model with this display name or id already exists in the workspace"
       summary: "Create OpenAI-compatible custom model"
       tags:
         - "Models"
@@ -68650,6 +68673,7 @@ paths:
                     type: "boolean"
                   legacy_uuid:
                     deprecated: true
+                    description: "Identifier this model had in the legacy model catalog. Deprecated: use id."
                     type: "string"
                   metadata:
                     $ref: "#/components/schemas/ModelMetadata"
@@ -68683,6 +68707,7 @@ paths:
                   provider:
                     type: "string"
                   refId:
+                    description: "Reference the gateway accepts for this model in requests: provider/model_id, or workspace@provider/model_id for a private model."
                     type: "string"
                   sharing:
                     $ref: "#/components/schemas/ModelSharingConfig"
@@ -68855,6 +68880,7 @@ paths:
                     type: "boolean"
                   legacy_uuid:
                     deprecated: true
+                    description: "Identifier this model had in the legacy model catalog. Deprecated: use id."
                     type: "string"
                   metadata:
                     $ref: "#/components/schemas/ModelMetadata"
@@ -68888,6 +68914,7 @@ paths:
                   provider:
                     type: "string"
                   refId:
+                    description: "Reference the gateway accepts for this model in requests: provider/model_id, or workspace@provider/model_id for a private model."
                     type: "string"
                   sharing:
                     $ref: "#/components/schemas/ModelSharingConfig"
@@ -68925,8 +68952,12 @@ paths:
           description: "Invalid model configuration or validation failed"
         "401":
           description: "Unauthorized"
+        "403":
+          description: "The caller may not create models, or the license does not cover the provider"
         "404":
           description: "Workspace not found"
+        "409":
+          description: "A model with this display name or id already exists in the workspace"
       summary: "Create Vertex AI custom model"
       tags:
         - "Models"
@@ -69057,6 +69088,7 @@ paths:
                     type: "boolean"
                   legacy_uuid:
                     deprecated: true
+                    description: "Identifier this model had in the legacy model catalog. Deprecated: use id."
                     type: "string"
                   metadata:
                     $ref: "#/components/schemas/ModelMetadata"
@@ -69090,6 +69122,7 @@ paths:
                   provider:
                     type: "string"
                   refId:
+                    description: "Reference the gateway accepts for this model in requests: provider/model_id, or workspace@provider/model_id for a private model."
                     type: "string"
                   sharing:
                     $ref: "#/components/schemas/ModelSharingConfig"
