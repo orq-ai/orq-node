@@ -7,6 +7,7 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import { Sharing, Sharing$inboundSchema } from "./sharing.js";
 import { SkillFile, SkillFile$inboundSchema } from "./skillfile.js";
 import {
   SkillRepositorySource,
@@ -72,6 +73,10 @@ export type Skill = {
   files?: Array<SkillFile> | undefined;
   hasFiles?: boolean | undefined;
   repositorySource?: SkillRepositorySource | undefined;
+  /**
+   * Which projects in the workspace may use this skill.
+   */
+  sharing?: Sharing | undefined;
 };
 
 /** @internal */
@@ -96,6 +101,7 @@ export const Skill$inboundSchema: z.ZodType<Skill, z.ZodTypeDef, unknown> = z
     files: z.array(SkillFile$inboundSchema).optional(),
     has_files: z.boolean().optional(),
     repository_source: SkillRepositorySource$inboundSchema.optional(),
+    sharing: Sharing$inboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
       "skill_id": "skillId",

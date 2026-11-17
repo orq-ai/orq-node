@@ -4,6 +4,11 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import {
+  Sharing,
+  Sharing$Outbound,
+  Sharing$outboundSchema,
+} from "./sharing.js";
 
 export type ImportSkillBundleRequest = {
   /**
@@ -26,6 +31,10 @@ export type ImportSkillBundleRequest = {
    *  sidecars, `.DS_Store`, `Thumbs.db`, `desktop.ini`) is ignored.
    */
   bundle: string;
+  /**
+   * Which projects in the workspace may use this skill. A skill imported without a project defaults to every project.
+   */
+  sharing?: Sharing | undefined;
 };
 
 /** @internal */
@@ -33,6 +42,7 @@ export type ImportSkillBundleRequest$Outbound = {
   project_id?: string | undefined;
   path?: string | undefined;
   bundle: string;
+  sharing?: Sharing$Outbound | undefined;
 };
 
 /** @internal */
@@ -44,6 +54,7 @@ export const ImportSkillBundleRequest$outboundSchema: z.ZodType<
   projectId: z.string().optional(),
   path: z.string().optional(),
   bundle: z.string(),
+  sharing: Sharing$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     projectId: "project_id",

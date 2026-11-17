@@ -4,6 +4,11 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import {
+  Sharing,
+  Sharing$Outbound,
+  Sharing$outboundSchema,
+} from "./sharing.js";
 
 export type UpdateSkillRequest = {
   /**
@@ -30,6 +35,10 @@ export type UpdateSkillRequest = {
    * New containing project. Omit to keep the current project.
    */
   projectId?: string | undefined;
+  /**
+   * Which projects in the workspace may use this skill.
+   */
+  sharing?: Sharing | undefined;
 };
 
 /** @internal */
@@ -40,6 +49,7 @@ export type UpdateSkillRequest$Outbound = {
   path?: string | undefined;
   instructions?: string | undefined;
   project_id?: string | undefined;
+  sharing?: Sharing$Outbound | undefined;
 };
 
 /** @internal */
@@ -54,6 +64,7 @@ export const UpdateSkillRequest$outboundSchema: z.ZodType<
   path: z.string().optional(),
   instructions: z.string().optional(),
   projectId: z.string().optional(),
+  sharing: Sharing$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     displayName: "display_name",

@@ -13,11 +13,16 @@ export type SkillGetRequest = {
    *  name. Display names are unique within a workspace.
    */
   skillId: string;
+  /**
+   * Resolve the skill as one factory sees it: the skills of its project plus the workspace-level skills shared with it.
+   */
+  factoryId?: string | undefined;
 };
 
 /** @internal */
 export type SkillGetRequest$Outbound = {
   skill_id: string;
+  factory_id?: string | undefined;
 };
 
 /** @internal */
@@ -27,9 +32,11 @@ export const SkillGetRequest$outboundSchema: z.ZodType<
   SkillGetRequest
 > = z.object({
   skillId: z.string(),
+  factoryId: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     skillId: "skill_id",
+    factoryId: "factory_id",
   });
 });
 

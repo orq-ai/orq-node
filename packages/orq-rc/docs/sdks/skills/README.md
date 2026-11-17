@@ -108,7 +108,6 @@ const orq = new Orq({
 async function run() {
   const result = await orq.skills.create({
     displayName: "Josefina_Conn",
-    projectId: "<id>",
   });
 
   console.log(result);
@@ -134,7 +133,6 @@ const orq = new OrqCore({
 async function run() {
   const res = await skillsCreate(orq, {
     displayName: "Josefina_Conn",
-    projectId: "<id>",
   });
   if (res.ok) {
     const { value: result } = res;

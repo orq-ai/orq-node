@@ -1,23 +1,23 @@
 # CreateSkillRequest
 
-
-## Supported Types
-
-### `components.CreateSkillRequest1`
+## Example Usage
 
 ```typescript
-const value: components.CreateSkillRequest1 = {
-  displayName: "Lura.Koss-Schroeder",
-  path: "/usr/ports",
+import { CreateSkillRequest } from "@orq-ai/node/models/components";
+
+let value: CreateSkillRequest = {
+  displayName: "Cali.Romaguera",
 };
 ```
 
-### `components.CreateSkillRequest2`
+## Fields
 
-```typescript
-const value: components.CreateSkillRequest2 = {
-  displayName: "Clifton_Schiller-Kutch",
-  projectId: "<id>",
-};
-```
-
+| Field                                                                                                                                    | Type                                                                                                                                     | Required                                                                                                                                 | Description                                                                                                                              |
+| ---------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| `displayName`                                                                                                                            | *string*                                                                                                                                 | :heavy_check_mark:                                                                                                                       | Workspace-unique display name. Must start with a letter and may contain letters, numbers, dashes, and underscores. Dots are not allowed. |
+| `description`                                                                                                                            | *string*                                                                                                                                 | :heavy_minus_sign:                                                                                                                       | Short human-readable summary of what the skill is for.                                                                                   |
+| `tags`                                                                                                                                   | *string*[]                                                                                                                               | :heavy_minus_sign:                                                                                                                       | Free-form labels for organizing the skill.                                                                                               |
+| `path`                                                                                                                                   | *string*                                                                                                                                 | :heavy_minus_sign:                                                                                                                       | Project path where the skill should be stored.                                                                                           |
+| `projectId`                                                                                                                              | *string*                                                                                                                                 | :heavy_minus_sign:                                                                                                                       | Project that should contain the skill.                                                                                                   |
+| `instructions`                                                                                                                           | *string*                                                                                                                                 | :heavy_minus_sign:                                                                                                                       | Instruction body for the skill. Omit to create metadata first and fill instructions later.                                               |
+| `sharing`                                                                                                                                | [components.Sharing](../../models/components/sharing.md)                                                                                 | :heavy_minus_sign:                                                                                                                       | Which projects in the workspace may use this skill. A skill created without a project defaults to every project.                         |

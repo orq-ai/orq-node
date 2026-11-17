@@ -4,8 +4,13 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import {
+  Sharing,
+  Sharing$Outbound,
+  Sharing$outboundSchema,
+} from "./sharing.js";
 
-export type CreateSkillRequest2 = {
+export type CreateSkillRequest = {
   /**
    * Workspace-unique display name. Must start with a letter and may contain letters, numbers, dashes, and underscores. Dots are not allowed.
    */
@@ -22,33 +27,6 @@ export type CreateSkillRequest2 = {
    * Project path where the skill should be stored.
    */
   path?: string | undefined;
-  /**
-   * Project that should contain the skill.
-   */
-  projectId: string;
-  /**
-   * Instruction body for the skill. Omit to create metadata first and fill instructions later.
-   */
-  instructions?: string | undefined;
-};
-
-export type CreateSkillRequest1 = {
-  /**
-   * Workspace-unique display name. Must start with a letter and may contain letters, numbers, dashes, and underscores. Dots are not allowed.
-   */
-  displayName: string;
-  /**
-   * Short human-readable summary of what the skill is for.
-   */
-  description?: string | undefined;
-  /**
-   * Free-form labels for organizing the skill.
-   */
-  tags?: Array<string> | undefined;
-  /**
-   * Project path where the skill should be stored.
-   */
-  path: string;
   /**
    * Project that should contain the skill.
    */
@@ -57,98 +35,42 @@ export type CreateSkillRequest1 = {
    * Instruction body for the skill. Omit to create metadata first and fill instructions later.
    */
   instructions?: string | undefined;
+  /**
+   * Which projects in the workspace may use this skill. A skill created without a project defaults to every project.
+   */
+  sharing?: Sharing | undefined;
 };
 
-export type CreateSkillRequest = CreateSkillRequest1 | CreateSkillRequest2;
-
 /** @internal */
-export type CreateSkillRequest2$Outbound = {
+export type CreateSkillRequest$Outbound = {
   display_name: string;
   description?: string | undefined;
   tags?: Array<string> | undefined;
   path?: string | undefined;
-  project_id: string;
-  instructions?: string | undefined;
-};
-
-/** @internal */
-export const CreateSkillRequest2$outboundSchema: z.ZodType<
-  CreateSkillRequest2$Outbound,
-  z.ZodTypeDef,
-  CreateSkillRequest2
-> = z.object({
-  displayName: z.string(),
-  description: z.string().optional(),
-  tags: z.array(z.string()).optional(),
-  path: z.string().optional(),
-  projectId: z.string(),
-  instructions: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    displayName: "display_name",
-    projectId: "project_id",
-  });
-});
-
-export function createSkillRequest2ToJSON(
-  createSkillRequest2: CreateSkillRequest2,
-): string {
-  return JSON.stringify(
-    CreateSkillRequest2$outboundSchema.parse(createSkillRequest2),
-  );
-}
-
-/** @internal */
-export type CreateSkillRequest1$Outbound = {
-  display_name: string;
-  description?: string | undefined;
-  tags?: Array<string> | undefined;
-  path: string;
   project_id?: string | undefined;
   instructions?: string | undefined;
+  sharing?: Sharing$Outbound | undefined;
 };
-
-/** @internal */
-export const CreateSkillRequest1$outboundSchema: z.ZodType<
-  CreateSkillRequest1$Outbound,
-  z.ZodTypeDef,
-  CreateSkillRequest1
-> = z.object({
-  displayName: z.string(),
-  description: z.string().optional(),
-  tags: z.array(z.string()).optional(),
-  path: z.string(),
-  projectId: z.string().optional(),
-  instructions: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    displayName: "display_name",
-    projectId: "project_id",
-  });
-});
-
-export function createSkillRequest1ToJSON(
-  createSkillRequest1: CreateSkillRequest1,
-): string {
-  return JSON.stringify(
-    CreateSkillRequest1$outboundSchema.parse(createSkillRequest1),
-  );
-}
-
-/** @internal */
-export type CreateSkillRequest$Outbound =
-  | CreateSkillRequest1$Outbound
-  | CreateSkillRequest2$Outbound;
 
 /** @internal */
 export const CreateSkillRequest$outboundSchema: z.ZodType<
   CreateSkillRequest$Outbound,
   z.ZodTypeDef,
   CreateSkillRequest
-> = z.union([
-  z.lazy(() => CreateSkillRequest1$outboundSchema),
-  z.lazy(() => CreateSkillRequest2$outboundSchema),
-]);
+> = z.object({
+  displayName: z.string(),
+  description: z.string().optional(),
+  tags: z.array(z.string()).optional(),
+  path: z.string().optional(),
+  projectId: z.string().optional(),
+  instructions: z.string().optional(),
+  sharing: Sharing$outboundSchema.optional(),
+}).transform((v) => {
+  return remap$(v, {
+    displayName: "display_name",
+    projectId: "project_id",
+  });
+});
 
 export function createSkillRequestToJSON(
   createSkillRequest: CreateSkillRequest,
