@@ -1631,7 +1631,7 @@ run();
 
 
 **Inherit from [`OrqError`](./src/models/errors/orqerror.ts)**:
-* [`ErrorResponse`](./src/models/errors/errorresponse.ts): Applicable to 293 of 392 methods.*
+* [`ErrorResponse`](./src/models/errors/errorresponse.ts): Applicable to 290 of 392 methods.*
 * [`APIErrorResponse`](./src/models/errors/apierrorresponse.ts): Applicable to 12 of 392 methods.*
 * [`HonoApiError`](./src/models/errors/honoapierror.ts): Applicable to 5 of 392 methods.*
 * [`PostV2FeedbackResponseBody`](./src/models/errors/postv2feedbackresponsebody.ts): Bad Request. Status code `400`. Applicable to 1 of 392 methods.*

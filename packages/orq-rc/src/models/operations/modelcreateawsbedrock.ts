@@ -5,14 +5,30 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+/**
+ * Where the AWS credentials come from. integration reads static AWS access keys from the integration named by integration_id, which is required with it. pod-identity resolves credentials from the AWS default credential chain of the deployment, such as EKS Pod Identity, IAM Roles for Service Accounts or the instance metadata service, and ignores integration_id; set assume_role_arn to assume a role in another account and assume_role_external_id to pass the external ID that role's trust policy requires.
+ */
+export const AuthMode = {
+  Integration: "integration",
+  PodIdentity: "pod-identity",
+} as const;
+/**
+ * Where the AWS credentials come from. integration reads static AWS access keys from the integration named by integration_id, which is required with it. pod-identity resolves credentials from the AWS default credential chain of the deployment, such as EKS Pod Identity, IAM Roles for Service Accounts or the instance metadata service, and ignores integration_id; set assume_role_arn to assume a role in another account and assume_role_external_id to pass the external ID that role's trust policy requires.
+ */
+export type AuthMode = ClosedEnum<typeof AuthMode>;
+
 export type ModelCreateAwsBedrockRequestBody = {
   assumeRoleArn?: string | undefined;
   assumeRoleExternalId?: string | undefined;
-  authMode: string;
+  /**
+   * Where the AWS credentials come from. integration reads static AWS access keys from the integration named by integration_id, which is required with it. pod-identity resolves credentials from the AWS default credential chain of the deployment, such as EKS Pod Identity, IAM Roles for Service Accounts or the instance metadata service, and ignores integration_id; set assume_role_arn to assume a role in another account and assume_role_external_id to pass the external ID that role's trust policy requires.
+   */
+  authMode: AuthMode;
   /**
    * Smart Router catalog identifier of the model. Set it together with autorouter_version to make the private model eligible for Smart Router pools.
    */
@@ -31,14 +47,20 @@ export type ModelCreateAwsBedrockRequestBody = {
   inputCost?: number | undefined;
   integrationId?: string | undefined;
   maxTokens?: number | undefined;
+  /**
+   * Developer of the model behind the inference profile, such as anthropic or amazon.
+   */
   modelDeveloper: string;
   modelFamily?: string | undefined;
   /**
-   * Immutable workspace-unique slug when configuration.model_id is supplied.
+   * Bedrock inference profile ARN to invoke, for example arn:aws:bedrock:us-east-1:123456789012:inference-profile/anthropic.claude-3-sonnet-20240229-v1:0. When configuration.model_id is supplied, this field is instead the immutable workspace-unique slug and the ARN comes from configuration.model_id.
    */
   modelId: string;
   modelType?: string | undefined;
   outputCost?: number | undefined;
+  /**
+   * AWS region that serves the inference profile, such as us-east-1.
+   */
   region: string;
   supportsAdaptiveReasoning?: boolean | undefined;
   supportsExtendedThinking?: boolean | undefined;
@@ -95,6 +117,10 @@ export type ModelCreateAwsBedrockResponseBody = {
 };
 
 /** @internal */
+export const AuthMode$outboundSchema: z.ZodNativeEnum<typeof AuthMode> = z
+  .nativeEnum(AuthMode);
+
+/** @internal */
 export type ModelCreateAwsBedrockRequestBody$Outbound = {
   assume_role_arn?: string | undefined;
   assume_role_external_id?: string | undefined;
@@ -136,7 +162,7 @@ export const ModelCreateAwsBedrockRequestBody$outboundSchema: z.ZodType<
 > = z.object({
   assumeRoleArn: z.string().optional(),
   assumeRoleExternalId: z.string().optional(),
-  authMode: z.string(),
+  authMode: AuthMode$outboundSchema,
   autorouterId: z.string().optional(),
   autorouterVersion: z.string().optional(),
   benchmarkModel: z.string().optional(),

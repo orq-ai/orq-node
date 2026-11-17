@@ -160,7 +160,7 @@ const orq = new Orq({
 
 async function run() {
   const result = await orq.models.createAwsBedrock({
-    authMode: "<value>",
+    authMode: "pod-identity",
     displayName: "Shanon.Wintheiser",
     modelDeveloper: "<value>",
     modelId: "<id>",
@@ -189,7 +189,7 @@ const orq = new OrqCore({
 
 async function run() {
   const res = await modelsCreateAwsBedrock(orq, {
-    authMode: "<value>",
+    authMode: "pod-identity",
     displayName: "Shanon.Wintheiser",
     modelDeveloper: "<value>",
     modelId: "<id>",

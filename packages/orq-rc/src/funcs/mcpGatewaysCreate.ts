@@ -159,7 +159,7 @@ async function $do(
     | SDKValidationError
   >(
     M.json(200, components.CreateMcpGatewayResponse$inboundSchema),
-    M.jsonErr(401, errors.ErrorResponse$inboundSchema),
+    M.jsonErr([400, 401, 409], errors.ErrorResponse$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });
