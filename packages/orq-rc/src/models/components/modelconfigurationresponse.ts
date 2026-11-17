@@ -9,6 +9,9 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ModelConfigurationResponse = {
+  /**
+   * Environment variable the gateway reads the provider API key from when the model stores no key. Platform-managed offerings set it; custom models normally store the key instead.
+   */
   apiKeyEnv?: string | undefined;
   apiVersion?: string | undefined;
   authMode?: string | undefined;
