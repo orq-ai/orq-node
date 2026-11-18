@@ -1,22 +1,24 @@
 # ResponseOutputReasoningContent
 
-A piece of reasoning text.
 
-## Example Usage
+## Supported Types
+
+### `components.ReasoningText`
 
 ```typescript
-import { ResponseOutputReasoningContent } from "@orq-ai/node/models/components";
-
-let value: ResponseOutputReasoningContent = {
+const value: components.ReasoningText = {
   text: "<value>",
   type: "reasoning_text",
 };
 ```
 
-## Fields
+### `{ [k: string]: any }`
 
-| Field                                                                                                          | Type                                                                                                           | Required                                                                                                       | Description                                                                                                    |
-| -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
-| `text`                                                                                                         | *string*                                                                                                       | :heavy_check_mark:                                                                                             | The text.                                                                                                      |
-| `type`                                                                                                         | [components.ResponseOutputReasoningContentType](../../models/components/responseoutputreasoningcontenttype.md) | :heavy_check_mark:                                                                                             | The part type.                                                                                                 |
-| `additionalProperties`                                                                                         | Record<string, *any*>                                                                                          | :heavy_minus_sign:                                                                                             | N/A                                                                                                            |
+```typescript
+const value: { [k: string]: any } = {
+  "key": "<value>",
+  "key1": "<value>",
+  "key2": "<value>",
+};
+```
+

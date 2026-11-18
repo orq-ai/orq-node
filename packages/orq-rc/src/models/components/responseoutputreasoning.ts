@@ -28,7 +28,7 @@ export type ResponseOutputReasoningContentType = ClosedEnum<
 /**
  * A piece of reasoning text.
  */
-export type ResponseOutputReasoningContent = {
+export type ReasoningText = {
   /**
    * The text.
    */
@@ -40,23 +40,25 @@ export type ResponseOutputReasoningContent = {
   additionalProperties?: { [k: string]: any } | undefined;
 };
 
+export type ResponseOutputReasoningContent = ReasoningText | {
+  [k: string]: any;
+};
+
 /**
  * The part type.
  */
-export const ResponseOutputReasoningSummaryType = {
+export const SummaryType = {
   SummaryText: "summary_text",
 } as const;
 /**
  * The part type.
  */
-export type ResponseOutputReasoningSummaryType = ClosedEnum<
-  typeof ResponseOutputReasoningSummaryType
->;
+export type SummaryType = ClosedEnum<typeof SummaryType>;
 
 /**
  * A piece of the reasoning summary.
  */
-export type ResponseOutputReasoningSummary = {
+export type SummaryText = {
   /**
    * The text.
    */
@@ -64,9 +66,11 @@ export type ResponseOutputReasoningSummary = {
   /**
    * The part type.
    */
-  type: ResponseOutputReasoningSummaryType;
+  type: SummaryType;
   additionalProperties?: { [k: string]: any } | undefined;
 };
+
+export type ResponseOutputReasoningSummary = SummaryText | { [k: string]: any };
 
 /**
  * The item type. Discriminates the item.
@@ -88,7 +92,7 @@ export type ResponseOutputReasoning = {
   /**
    * The reasoning text, when the model returns it.
    */
-  content?: Array<ResponseOutputReasoningContent> | undefined;
+  content?: Array<ReasoningText | { [k: string]: any }> | undefined;
   /**
    * The reasoning in encrypted form. Send the item back unchanged to continue the turn.
    */
@@ -108,7 +112,7 @@ export type ResponseOutputReasoning = {
   /**
    * A summary of the reasoning.
    */
-  summary?: Array<ResponseOutputReasoningSummary> | undefined;
+  summary?: Array<SummaryText | { [k: string]: any }> | undefined;
   /**
    * The item type. Discriminates the item.
    */
@@ -122,8 +126,8 @@ export const ResponseOutputReasoningContentType$inboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(ResponseOutputReasoningContentType);
 
 /** @internal */
-export const ResponseOutputReasoningContent$inboundSchema: z.ZodType<
-  ResponseOutputReasoningContent,
+export const ReasoningText$inboundSchema: z.ZodType<
+  ReasoningText,
   z.ZodTypeDef,
   unknown
 > = collectExtraKeys$(
@@ -134,6 +138,23 @@ export const ResponseOutputReasoningContent$inboundSchema: z.ZodType<
   "additionalProperties",
   true,
 );
+
+export function reasoningTextFromJSON(
+  jsonString: string,
+): SafeParseResult<ReasoningText, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ReasoningText$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ReasoningText' from JSON`,
+  );
+}
+
+/** @internal */
+export const ResponseOutputReasoningContent$inboundSchema: z.ZodType<
+  ResponseOutputReasoningContent,
+  z.ZodTypeDef,
+  unknown
+> = z.union([z.lazy(() => ReasoningText$inboundSchema), z.record(z.any())]);
 
 export function responseOutputReasoningContentFromJSON(
   jsonString: string,
@@ -146,23 +167,39 @@ export function responseOutputReasoningContentFromJSON(
 }
 
 /** @internal */
-export const ResponseOutputReasoningSummaryType$inboundSchema: z.ZodNativeEnum<
-  typeof ResponseOutputReasoningSummaryType
-> = z.nativeEnum(ResponseOutputReasoningSummaryType);
+export const SummaryType$inboundSchema: z.ZodNativeEnum<typeof SummaryType> = z
+  .nativeEnum(SummaryType);
+
+/** @internal */
+export const SummaryText$inboundSchema: z.ZodType<
+  SummaryText,
+  z.ZodTypeDef,
+  unknown
+> = collectExtraKeys$(
+  z.object({
+    text: z.string(),
+    type: SummaryType$inboundSchema,
+  }).catchall(z.any()),
+  "additionalProperties",
+  true,
+);
+
+export function summaryTextFromJSON(
+  jsonString: string,
+): SafeParseResult<SummaryText, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => SummaryText$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SummaryText' from JSON`,
+  );
+}
 
 /** @internal */
 export const ResponseOutputReasoningSummary$inboundSchema: z.ZodType<
   ResponseOutputReasoningSummary,
   z.ZodTypeDef,
   unknown
-> = collectExtraKeys$(
-  z.object({
-    text: z.string(),
-    type: ResponseOutputReasoningSummaryType$inboundSchema,
-  }).catchall(z.any()),
-  "additionalProperties",
-  true,
-);
+> = z.union([z.lazy(() => SummaryText$inboundSchema), z.record(z.any())]);
 
 export function responseOutputReasoningSummaryFromJSON(
   jsonString: string,
@@ -186,14 +223,16 @@ export const ResponseOutputReasoning$inboundSchema: z.ZodType<
   unknown
 > = collectExtraKeys$(
   z.object({
-    content: z.array(z.lazy(() => ResponseOutputReasoningContent$inboundSchema))
-      .optional(),
+    content: z.array(
+      z.union([z.lazy(() => ReasoningText$inboundSchema), z.record(z.any())]),
+    ).optional(),
     encrypted_content: z.string().optional(),
     id: z.string().optional(),
     signature: z.string().optional(),
     status: z.string().optional(),
-    summary: z.array(z.lazy(() => ResponseOutputReasoningSummary$inboundSchema))
-      .optional(),
+    summary: z.array(
+      z.union([z.lazy(() => SummaryText$inboundSchema), z.record(z.any())]),
+    ).optional(),
     type: ResponseOutputReasoningType$inboundSchema,
   }).catchall(z.any()),
   "additionalProperties",

@@ -49,7 +49,7 @@ const value: components.ResponseOutputReasoning = {
 const value: components.ResponseOutputOrqToolCall = {
   callId: "<id>",
   name: "<value>",
-  type: "<value>",
+  type: "orq:call_sub_agent",
 };
 ```
 

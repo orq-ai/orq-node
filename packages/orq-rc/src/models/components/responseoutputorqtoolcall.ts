@@ -8,11 +8,48 @@ import {
   collectExtraKeys as collectExtraKeys$,
   safeParse,
 } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
- * A call to a tool that Orq hosts and ran for you, with its result. The `type` is `orq:` followed by the tool name, for example `orq:current_date`.
+ * The item type: `orq:` followed by the tool name.
+ */
+export const ResponseOutputOrqToolCallType = {
+  OrqAdvisor: "orq:advisor",
+  OrqCallSubAgent: "orq:call_sub_agent",
+  OrqCodeInterpreter: "orq:code_interpreter",
+  OrqCurrentDate: "orq:current_date",
+  OrqDatetime: "orq:datetime",
+  OrqDeleteMemoryDocument: "orq:delete_memory_document",
+  OrqFusion: "orq:fusion",
+  OrqGoogleSearch: "orq:google_search",
+  OrqImageGeneration: "orq:image_generation",
+  OrqQueryKnowledgeBase: "orq:query_knowledge_base",
+  OrqQueryMemoryStore: "orq:query_memory_store",
+  OrqReadSkill: "orq:read_skill",
+  OrqRetrieveAgents: "orq:retrieve_agents",
+  OrqRetrieveKnowledgeBases: "orq:retrieve_knowledge_bases",
+  OrqRetrieveMemoryStores: "orq:retrieve_memory_stores",
+  OrqSearchModels: "orq:search_models",
+  OrqShell: "orq:shell",
+  OrqSidekick: "orq:sidekick",
+  OrqSubagent: "orq:subagent",
+  OrqToolSearch: "orq:tool_search",
+  OrqWebFetch: "orq:web_fetch",
+  OrqWebScraper: "orq:web_scraper",
+  OrqWebSearch: "orq:web_search",
+  OrqWriteMemoryStore: "orq:write_memory_store",
+} as const;
+/**
+ * The item type: `orq:` followed by the tool name.
+ */
+export type ResponseOutputOrqToolCallType = ClosedEnum<
+  typeof ResponseOutputOrqToolCallType
+>;
+
+/**
+ * A call to an Orq built-in or server tool that Orq ran for you, with its result. The `type` is `orq:` followed by the tool name, for example `orq:current_date`. Calls to tools you defined yourself arrive as an open object.
  */
 export type ResponseOutputOrqToolCall = {
   /**
@@ -46,9 +83,14 @@ export type ResponseOutputOrqToolCall = {
   /**
    * The item type: `orq:` followed by the tool name.
    */
-  type: string;
+  type: ResponseOutputOrqToolCallType;
   additionalProperties?: { [k: string]: any } | undefined;
 };
+
+/** @internal */
+export const ResponseOutputOrqToolCallType$inboundSchema: z.ZodNativeEnum<
+  typeof ResponseOutputOrqToolCallType
+> = z.nativeEnum(ResponseOutputOrqToolCallType);
 
 /** @internal */
 export const ResponseOutputOrqToolCall$inboundSchema: z.ZodType<
@@ -64,7 +106,7 @@ export const ResponseOutputOrqToolCall$inboundSchema: z.ZodType<
     response_id: z.string().optional(),
     result: z.any().optional(),
     status: z.string().optional(),
-    type: z.string(),
+    type: ResponseOutputOrqToolCallType$inboundSchema,
   }).catchall(z.any()),
   "additionalProperties",
   true,
