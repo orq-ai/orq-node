@@ -16,6 +16,10 @@ import {
   McpDiscoveryStatus,
   McpDiscoveryStatus$inboundSchema,
 } from "./mcpdiscoverystatus.js";
+import {
+  McpHealthCheckConfig,
+  McpHealthCheckConfig$inboundSchema,
+} from "./mcphealthcheckconfig.js";
 import { McpIcon, McpIcon$inboundSchema } from "./mcpicon.js";
 import {
   McpOpenApiConfig,
@@ -30,6 +34,10 @@ import {
   McpResourceTemplate,
   McpResourceTemplate$inboundSchema,
 } from "./mcpresourcetemplate.js";
+import {
+  McpServerHealth,
+  McpServerHealth$inboundSchema,
+} from "./mcpserverhealth.js";
 import { McpSkill, McpSkill$inboundSchema } from "./mcpskill.js";
 import { McpSyncState, McpSyncState$inboundSchema } from "./mcpsyncstate.js";
 import { McpTool, McpTool$inboundSchema } from "./mcptool.js";
@@ -137,6 +145,8 @@ export type McpServer = {
    */
   resourceCatalog?: ResourceCatalog | undefined;
   promptCatalog?: McpPromptCatalog | undefined;
+  health?: McpServerHealth | undefined;
+  healthCheck?: McpHealthCheckConfig | undefined;
 };
 
 /** @internal */
@@ -215,6 +225,8 @@ export const McpServer$inboundSchema: z.ZodType<
   capabilities: z.lazy(() => Capabilities$inboundSchema).optional(),
   resource_catalog: z.lazy(() => ResourceCatalog$inboundSchema).optional(),
   prompt_catalog: McpPromptCatalog$inboundSchema.optional(),
+  health: McpServerHealth$inboundSchema.optional(),
+  health_check: McpHealthCheckConfig$inboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     "display_name": "displayName",
@@ -224,6 +236,7 @@ export const McpServer$inboundSchema: z.ZodType<
     "website_url": "websiteUrl",
     "resource_catalog": "resourceCatalog",
     "prompt_catalog": "promptCatalog",
+    "health_check": "healthCheck",
   });
 });
 

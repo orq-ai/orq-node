@@ -33,31 +33,29 @@ let value: CreateRouterResponseResponseBody = {
   model: "Aventador",
   object: "<value>",
   output: [
-    "<value 1>",
-    "<value 2>",
-    "<value 3>",
+    {
+      "call_id": "<id>",
+      "type": "function_call_output",
+    },
   ],
-  parallelToolCalls: true,
-  presencePenalty: 5582.27,
-  previousResponseId: null,
+  parallelToolCalls: false,
+  presencePenalty: 592.22,
+  previousResponseId: "<id>",
   promptCacheKey: "<value>",
   promptCacheOptions: {},
   promptCacheRetention: "<value>",
   reasoning: {},
   safetyIdentifier: "<value>",
-  serviceTier: "fast",
-  status: "in_progress",
+  serviceTier: "flex",
+  status: "completed",
   store: true,
-  temperature: 3507.41,
+  temperature: 2283.65,
   text: "<value>",
   toolChoice: "<value>",
-  tools: [
-    "<value 1>",
-    "<value 2>",
-  ],
-  topLogprobs: 221916,
-  topP: 9592.24,
-  truncation: "disabled",
+  tools: [],
+  topLogprobs: 959224,
+  topP: 3496.76,
+  truncation: "auto",
   usage: {
     inputTokens: 276387,
     inputTokensDetails: {
@@ -71,7 +69,7 @@ let value: CreateRouterResponseResponseBody = {
     },
     totalTokens: 938481,
   },
-  user: "Mossie.Heller84",
+  user: "Garry8",
 };
 ```
 
@@ -95,7 +93,7 @@ let value: CreateRouterResponseResponseBody = {
 | `metadata`                                                                                               | Record<string, *string*>                                                                                 | :heavy_check_mark:                                                                                       | Developer-defined key-value pairs attached to the response (OpenAI spec: `Map<string, string>`).         |
 | `model`                                                                                                  | *string*                                                                                                 | :heavy_check_mark:                                                                                       | N/A                                                                                                      |
 | `object`                                                                                                 | *string*                                                                                                 | :heavy_check_mark:                                                                                       | Always "response"                                                                                        |
-| `output`                                                                                                 | *any*[]                                                                                                  | :heavy_check_mark:                                                                                       | Array of output items (messages, function calls, reasoning, etc.)                                        |
+| `output`                                                                                                 | *components.ResponseOutputItem*[]                                                                        | :heavy_check_mark:                                                                                       | Array of output items (messages, function calls, reasoning, etc.)                                        |
 | `parallelToolCalls`                                                                                      | *boolean*                                                                                                | :heavy_check_mark:                                                                                       | N/A                                                                                                      |
 | `presencePenalty`                                                                                        | *number*                                                                                                 | :heavy_check_mark:                                                                                       | N/A                                                                                                      |
 | `previousResponseId`                                                                                     | *string*                                                                                                 | :heavy_check_mark:                                                                                       | N/A                                                                                                      |

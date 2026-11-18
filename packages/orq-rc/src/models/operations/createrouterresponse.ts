@@ -1506,7 +1506,7 @@ export type CreateRouterResponseResponseBody = {
   /**
    * Array of output items (messages, function calls, reasoning, etc.)
    */
-  output: Array<any> | null;
+  output: Array<components.ResponseOutputItem> | null;
   parallelToolCalls: boolean;
   presencePenalty: number;
   previousResponseId: string | null;
@@ -3302,7 +3302,7 @@ export const CreateRouterResponseResponseBody$inboundSchema: z.ZodType<
   metadata: z.record(z.string()),
   model: z.string(),
   object: z.string(),
-  output: z.nullable(z.array(z.any())),
+  output: z.nullable(z.array(components.ResponseOutputItem$inboundSchema)),
   parallel_tool_calls: z.boolean(),
   presence_penalty: z.number(),
   previous_response_id: z.nullable(z.string()),

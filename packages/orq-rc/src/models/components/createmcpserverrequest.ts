@@ -15,6 +15,11 @@ import {
   McpConnection$outboundSchema,
 } from "./mcpconnection.js";
 import {
+  McpHealthCheckConfigInput,
+  McpHealthCheckConfigInput$Outbound,
+  McpHealthCheckConfigInput$outboundSchema,
+} from "./mcphealthcheckconfiginput.js";
+import {
   McpOpenApiConfigInput,
   McpOpenApiConfigInput$Outbound,
   McpOpenApiConfigInput$outboundSchema,
@@ -63,6 +68,7 @@ export type CreateMcpServerRequest = {
    * Required when `connection.type` is `MCP_CONNECTION_TYPE_OPENAPI`; set `document` or `document_url`.
    */
   openapi?: McpOpenApiConfigInput | undefined;
+  healthCheck?: McpHealthCheckConfigInput | undefined;
 };
 
 /** @internal */
@@ -75,6 +81,7 @@ export type CreateMcpServerRequest$Outbound = {
   default_tool_exposure: McpToolExposure$Outbound;
   sharing?: Sharing$Outbound | undefined;
   openapi?: McpOpenApiConfigInput$Outbound | undefined;
+  health_check?: McpHealthCheckConfigInput$Outbound | undefined;
 };
 
 /** @internal */
@@ -91,10 +98,12 @@ export const CreateMcpServerRequest$outboundSchema: z.ZodType<
   defaultToolExposure: McpToolExposure$outboundSchema,
   sharing: Sharing$outboundSchema.optional(),
   openapi: McpOpenApiConfigInput$outboundSchema.optional(),
+  healthCheck: McpHealthCheckConfigInput$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
     displayName: "display_name",
     defaultToolExposure: "default_tool_exposure",
+    healthCheck: "health_check",
   });
 });
 

@@ -384,7 +384,9 @@ export type DeveloperMessage = {
 /**
  * The contents of the system message.
  */
-export type Content = string | Array<TextContentPartSchema>;
+export type InvokeDeploymentRequestPrefixMessages1Content =
+  | string
+  | Array<TextContentPartSchema>;
 
 /**
  * Developer-provided instructions that the model should follow, regardless of messages sent by the user.
@@ -1770,17 +1772,27 @@ export function developerMessageToJSON(
 }
 
 /** @internal */
-export type Content$Outbound = string | Array<TextContentPartSchema$Outbound>;
+export type InvokeDeploymentRequestPrefixMessages1Content$Outbound =
+  | string
+  | Array<TextContentPartSchema$Outbound>;
 
 /** @internal */
-export const Content$outboundSchema: z.ZodType<
-  Content$Outbound,
-  z.ZodTypeDef,
-  Content
-> = z.union([z.string(), z.array(TextContentPartSchema$outboundSchema)]);
+export const InvokeDeploymentRequestPrefixMessages1Content$outboundSchema:
+  z.ZodType<
+    InvokeDeploymentRequestPrefixMessages1Content$Outbound,
+    z.ZodTypeDef,
+    InvokeDeploymentRequestPrefixMessages1Content
+  > = z.union([z.string(), z.array(TextContentPartSchema$outboundSchema)]);
 
-export function contentToJSON(content: Content): string {
-  return JSON.stringify(Content$outboundSchema.parse(content));
+export function invokeDeploymentRequestPrefixMessages1ContentToJSON(
+  invokeDeploymentRequestPrefixMessages1Content:
+    InvokeDeploymentRequestPrefixMessages1Content,
+): string {
+  return JSON.stringify(
+    InvokeDeploymentRequestPrefixMessages1Content$outboundSchema.parse(
+      invokeDeploymentRequestPrefixMessages1Content,
+    ),
+  );
 }
 
 /** @internal */

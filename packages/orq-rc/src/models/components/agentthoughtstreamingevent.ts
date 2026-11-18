@@ -204,7 +204,7 @@ export type AgentThoughtStreamingEventTopLogprobs = {
   bytes: Array<number> | null;
 };
 
-export type Refusal = {
+export type AgentThoughtStreamingEventRefusal = {
   /**
    * The token.
    */
@@ -234,7 +234,7 @@ export type Logprobs = {
   /**
    * A list of message refusal tokens with log probability information.
    */
-  refusal: Array<Refusal> | null;
+  refusal: Array<AgentThoughtStreamingEventRefusal> | null;
 };
 
 export type Choice = {
@@ -641,27 +641,30 @@ export function agentThoughtStreamingEventTopLogprobsFromJSON(
 }
 
 /** @internal */
-export const Refusal$inboundSchema: z.ZodType<Refusal, z.ZodTypeDef, unknown> =
-  z.object({
-    token: z.string(),
-    logprob: z.number(),
-    bytes: z.nullable(z.array(z.number())),
-    top_logprobs: z.array(
-      z.lazy(() => AgentThoughtStreamingEventTopLogprobs$inboundSchema),
-    ),
-  }).transform((v) => {
-    return remap$(v, {
-      "top_logprobs": "topLogprobs",
-    });
+export const AgentThoughtStreamingEventRefusal$inboundSchema: z.ZodType<
+  AgentThoughtStreamingEventRefusal,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  token: z.string(),
+  logprob: z.number(),
+  bytes: z.nullable(z.array(z.number())),
+  top_logprobs: z.array(
+    z.lazy(() => AgentThoughtStreamingEventTopLogprobs$inboundSchema),
+  ),
+}).transform((v) => {
+  return remap$(v, {
+    "top_logprobs": "topLogprobs",
   });
+});
 
-export function refusalFromJSON(
+export function agentThoughtStreamingEventRefusalFromJSON(
   jsonString: string,
-): SafeParseResult<Refusal, SDKValidationError> {
+): SafeParseResult<AgentThoughtStreamingEventRefusal, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Refusal$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Refusal' from JSON`,
+    (x) => AgentThoughtStreamingEventRefusal$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'AgentThoughtStreamingEventRefusal' from JSON`,
   );
 }
 
@@ -674,7 +677,9 @@ export const Logprobs$inboundSchema: z.ZodType<
   content: z.nullable(
     z.array(z.lazy(() => AgentThoughtStreamingEventContent$inboundSchema)),
   ),
-  refusal: z.nullable(z.array(z.lazy(() => Refusal$inboundSchema))),
+  refusal: z.nullable(
+    z.array(z.lazy(() => AgentThoughtStreamingEventRefusal$inboundSchema)),
+  ),
 });
 
 export function logprobsFromJSON(

@@ -32,25 +32,25 @@ let value: RetrieveResponseResponseBody = {
   model: "A8",
   object: "<value>",
   output: [
-    "<value 1>",
-    "<value 2>",
-    "<value 3>",
+    {
+      "type": "reasoning",
+    },
   ],
   parallelToolCalls: false,
-  presencePenalty: 6082.87,
+  presencePenalty: 9799.32,
   previousResponseId: "<id>",
   promptCacheKey: "<value>",
   promptCacheOptions: {},
   promptCacheRetention: "<value>",
-  reasoning: {},
-  safetyIdentifier: null,
-  serviceTier: "ultrafast",
-  status: "incomplete",
-  store: false,
-  temperature: 1686.88,
+  reasoning: null,
+  safetyIdentifier: "<value>",
+  serviceTier: "scale",
+  status: "failed",
+  store: true,
+  temperature: 1471.06,
   text: "<value>",
   toolChoice: "<value>",
-  tools: [],
+  tools: null,
   topLogprobs: 295476,
   topP: 8427.85,
   truncation: "auto",
@@ -91,7 +91,7 @@ let value: RetrieveResponseResponseBody = {
 | `metadata`                                                                                          | Record<string, *string*>                                                                            | :heavy_check_mark:                                                                                  | Developer-defined key-value pairs attached to the response (OpenAI spec: `Map<string, string>`).    |
 | `model`                                                                                             | *string*                                                                                            | :heavy_check_mark:                                                                                  | N/A                                                                                                 |
 | `object`                                                                                            | *string*                                                                                            | :heavy_check_mark:                                                                                  | Always "response"                                                                                   |
-| `output`                                                                                            | *any*[]                                                                                             | :heavy_check_mark:                                                                                  | Array of output items (messages, function calls, reasoning, etc.)                                   |
+| `output`                                                                                            | *components.ResponseOutputItem*[]                                                                   | :heavy_check_mark:                                                                                  | Array of output items (messages, function calls, reasoning, etc.)                                   |
 | `parallelToolCalls`                                                                                 | *boolean*                                                                                           | :heavy_check_mark:                                                                                  | N/A                                                                                                 |
 | `presencePenalty`                                                                                   | *number*                                                                                            | :heavy_check_mark:                                                                                  | N/A                                                                                                 |
 | `previousResponseId`                                                                                | *string*                                                                                            | :heavy_check_mark:                                                                                  | N/A                                                                                                 |

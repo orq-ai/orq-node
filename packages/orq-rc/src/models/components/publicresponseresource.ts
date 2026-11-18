@@ -25,6 +25,10 @@ import { PublicUsage, PublicUsage$inboundSchema } from "./publicusage.js";
 import { Reasoning, Reasoning$inboundSchema } from "./reasoning.js";
 import { ResponseError, ResponseError$inboundSchema } from "./responseerror.js";
 import {
+  ResponseOutputItem,
+  ResponseOutputItem$inboundSchema,
+} from "./responseoutputitem.js";
+import {
   ResponseTelemetry,
   ResponseTelemetry$inboundSchema,
 } from "./responsetelemetry.js";
@@ -87,7 +91,7 @@ export type PublicResponseResource = {
   /**
    * Array of output items (messages, function calls, reasoning, etc.)
    */
-  output: Array<any> | null;
+  output: Array<ResponseOutputItem> | null;
   parallelToolCalls: boolean;
   presencePenalty: number;
   previousResponseId: string | null;
@@ -160,7 +164,7 @@ export const PublicResponseResource$inboundSchema: z.ZodType<
   metadata: z.record(z.string()),
   model: z.string(),
   object: z.string(),
-  output: z.nullable(z.array(z.any())),
+  output: z.nullable(z.array(ResponseOutputItem$inboundSchema)),
   parallel_tool_calls: z.boolean(),
   presence_penalty: z.number(),
   previous_response_id: z.nullable(z.string()),

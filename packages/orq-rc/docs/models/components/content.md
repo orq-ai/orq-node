@@ -1,19 +1,33 @@
 # Content
 
-The contents of the system message.
-
 
 ## Supported Types
 
-### `string`
+### `components.OutputText`
 
 ```typescript
-const value: string = "<value>";
+const value: components.OutputText = {
+  text: "<value>",
+  type: "output_text",
+};
 ```
 
-### `components.TextContentPartSchema[]`
+### `components.Refusal`
 
 ```typescript
-const value: components.TextContentPartSchema[] = [];
+const value: components.Refusal = {
+  refusal: "<value>",
+  type: "refusal",
+};
+```
+
+### `{ [k: string]: any }`
+
+```typescript
+const value: { [k: string]: any } = {
+  "key": "<value>",
+  "key1": "<value>",
+  "key2": "<value>",
+};
 ```
 

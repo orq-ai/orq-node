@@ -1,0 +1,26 @@
+# ResponseOutputReasoning
+
+Reasoning the model did before answering.
+
+## Example Usage
+
+```typescript
+import { ResponseOutputReasoning } from "@orq-ai/node/models/components";
+
+let value: ResponseOutputReasoning = {
+  type: "reasoning",
+};
+```
+
+## Fields
+
+| Field                                                                                                    | Type                                                                                                     | Required                                                                                                 | Description                                                                                              |
+| -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| `content`                                                                                                | [components.ResponseOutputReasoningContent](../../models/components/responseoutputreasoningcontent.md)[] | :heavy_minus_sign:                                                                                       | The reasoning text, when the model returns it.                                                           |
+| `encryptedContent`                                                                                       | *string*                                                                                                 | :heavy_minus_sign:                                                                                       | The reasoning in encrypted form. Send the item back unchanged to continue the turn.                      |
+| `id`                                                                                                     | *string*                                                                                                 | :heavy_minus_sign:                                                                                       | The unique ID of the item.                                                                               |
+| `signature`                                                                                              | *string*                                                                                                 | :heavy_minus_sign:                                                                                       | A provider signature over the reasoning content.                                                         |
+| `status`                                                                                                 | *string*                                                                                                 | :heavy_minus_sign:                                                                                       | The item status, such as `completed`, `in_progress` or `incomplete`.                                     |
+| `summary`                                                                                                | [components.ResponseOutputReasoningSummary](../../models/components/responseoutputreasoningsummary.md)[] | :heavy_minus_sign:                                                                                       | A summary of the reasoning.                                                                              |
+| `type`                                                                                                   | [components.ResponseOutputReasoningType](../../models/components/responseoutputreasoningtype.md)         | :heavy_check_mark:                                                                                       | The item type. Discriminates the item.                                                                   |
+| `additionalProperties`                                                                                   | Record<string, *any*>                                                                                    | :heavy_minus_sign:                                                                                       | N/A                                                                                                      |
