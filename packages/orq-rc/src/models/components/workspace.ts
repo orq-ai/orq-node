@@ -12,6 +12,10 @@ import {
   WorkspaceCapabilities$inboundSchema,
 } from "./workspacecapabilities.js";
 import {
+  WorkspaceFeatures,
+  WorkspaceFeatures$inboundSchema,
+} from "./workspacefeatures.js";
+import {
   WorkspaceOrganization,
   WorkspaceOrganization$inboundSchema,
 } from "./workspaceorganization.js";
@@ -19,8 +23,6 @@ import {
   WorkspaceSettingsFields,
   WorkspaceSettingsFields$inboundSchema,
 } from "./workspacesettingsfields.js";
-
-export type Features = {};
 
 export type WorkspaceMetadata = {};
 
@@ -34,28 +36,11 @@ export type Workspace = {
   organization?: WorkspaceOrganization | undefined;
   settings?: WorkspaceSettingsFields | undefined;
   sidebarVersion?: string | undefined;
-  features?: Features | undefined;
+  features?: WorkspaceFeatures | undefined;
   totalMembers?: number | undefined;
   metadata?: WorkspaceMetadata | undefined;
   capabilities?: WorkspaceCapabilities | undefined;
 };
-
-/** @internal */
-export const Features$inboundSchema: z.ZodType<
-  Features,
-  z.ZodTypeDef,
-  unknown
-> = z.object({});
-
-export function featuresFromJSON(
-  jsonString: string,
-): SafeParseResult<Features, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => Features$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Features' from JSON`,
-  );
-}
 
 /** @internal */
 export const WorkspaceMetadata$inboundSchema: z.ZodType<
@@ -90,7 +75,7 @@ export const Workspace$inboundSchema: z.ZodType<
   organization: WorkspaceOrganization$inboundSchema.optional(),
   settings: WorkspaceSettingsFields$inboundSchema.optional(),
   sidebar_version: z.string().optional(),
-  features: z.lazy(() => Features$inboundSchema).optional(),
+  features: WorkspaceFeatures$inboundSchema.optional(),
   total_members: z.number().int().optional(),
   metadata: z.lazy(() => WorkspaceMetadata$inboundSchema).optional(),
   capabilities: WorkspaceCapabilities$inboundSchema.optional(),

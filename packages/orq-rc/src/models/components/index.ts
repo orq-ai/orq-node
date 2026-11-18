@@ -899,6 +899,7 @@ export * from "./webscrapertoolinput.js";
 export * from "./workspace.js";
 export * from "./workspacebudgetscope.js";
 export * from "./workspacecapabilities.js";
+export * from "./workspacefeatures.js";
 export * from "./workspaceorganization.js";
 export * from "./workspacesettings.js";
 export * from "./workspacesettingsfields.js";
