@@ -141,6 +141,7 @@ export type ModelMetadata = {
   supportsReasoningEffortMinimal?: boolean | undefined;
   supportsReasoningEffortNone?: boolean | undefined;
   supportsReasoningEffortXhigh?: boolean | undefined;
+  supportsResponseSchemaWithTools?: boolean | undefined;
   supportsResponsesApi?: boolean | undefined;
   supportsSamplingParams?: boolean | undefined;
   supportsServiceTier?: boolean | undefined;
@@ -284,6 +285,7 @@ export const ModelMetadata$inboundSchema: z.ZodType<
   supports_reasoning_effort_minimal: z.boolean().optional(),
   supports_reasoning_effort_none: z.boolean().optional(),
   supports_reasoning_effort_xhigh: z.boolean().optional(),
+  supports_response_schema_with_tools: z.boolean().optional(),
   supports_responses_api: z.boolean().optional(),
   supports_sampling_params: z.boolean().optional(),
   supports_service_tier: z.boolean().optional(),
@@ -418,6 +420,7 @@ export const ModelMetadata$inboundSchema: z.ZodType<
     "supports_reasoning_effort_minimal": "supportsReasoningEffortMinimal",
     "supports_reasoning_effort_none": "supportsReasoningEffortNone",
     "supports_reasoning_effort_xhigh": "supportsReasoningEffortXhigh",
+    "supports_response_schema_with_tools": "supportsResponseSchemaWithTools",
     "supports_responses_api": "supportsResponsesApi",
     "supports_sampling_params": "supportsSamplingParams",
     "supports_service_tier": "supportsServiceTier",
@@ -558,6 +561,7 @@ export type ModelMetadata$Outbound = {
   supports_reasoning_effort_minimal?: boolean | undefined;
   supports_reasoning_effort_none?: boolean | undefined;
   supports_reasoning_effort_xhigh?: boolean | undefined;
+  supports_response_schema_with_tools?: boolean | undefined;
   supports_responses_api?: boolean | undefined;
   supports_sampling_params?: boolean | undefined;
   supports_service_tier?: boolean | undefined;
@@ -701,6 +705,7 @@ export const ModelMetadata$outboundSchema: z.ZodType<
   supportsReasoningEffortMinimal: z.boolean().optional(),
   supportsReasoningEffortNone: z.boolean().optional(),
   supportsReasoningEffortXhigh: z.boolean().optional(),
+  supportsResponseSchemaWithTools: z.boolean().optional(),
   supportsResponsesApi: z.boolean().optional(),
   supportsSamplingParams: z.boolean().optional(),
   supportsServiceTier: z.boolean().optional(),
@@ -835,6 +840,7 @@ export const ModelMetadata$outboundSchema: z.ZodType<
     supportsReasoningEffortMinimal: "supports_reasoning_effort_minimal",
     supportsReasoningEffortNone: "supports_reasoning_effort_none",
     supportsReasoningEffortXhigh: "supports_reasoning_effort_xhigh",
+    supportsResponseSchemaWithTools: "supports_response_schema_with_tools",
     supportsResponsesApi: "supports_responses_api",
     supportsSamplingParams: "supports_sampling_params",
     supportsServiceTier: "supports_service_tier",
