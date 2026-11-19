@@ -10,9 +10,16 @@ import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ModelAzureFoundryDeploymentsRequestBody = {
-  apiKey: string;
+  /**
+   * Required unless integration_id is set.
+   */
+  apiKey?: string | undefined;
   apiVersion?: string | undefined;
   baseUrl: string;
+  /**
+   * Azure workload identity federation integration that authenticates the listing with an Entra access token instead of api_key.
+   */
+  integrationId?: string | undefined;
   provider: string;
 };
 
@@ -26,9 +33,10 @@ export type ModelAzureFoundryDeploymentsResponseBody = {
 
 /** @internal */
 export type ModelAzureFoundryDeploymentsRequestBody$Outbound = {
-  api_key: string;
+  api_key?: string | undefined;
   api_version?: string | undefined;
   base_url: string;
+  integration_id?: string | undefined;
   provider: string;
 };
 
@@ -38,15 +46,17 @@ export const ModelAzureFoundryDeploymentsRequestBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ModelAzureFoundryDeploymentsRequestBody
 > = z.object({
-  apiKey: z.string(),
+  apiKey: z.string().optional(),
   apiVersion: z.string().optional(),
   baseUrl: z.string(),
+  integrationId: z.string().optional(),
   provider: z.string(),
 }).transform((v) => {
   return remap$(v, {
     apiKey: "api_key",
     apiVersion: "api_version",
     baseUrl: "base_url",
+    integrationId: "integration_id",
   });
 });
 

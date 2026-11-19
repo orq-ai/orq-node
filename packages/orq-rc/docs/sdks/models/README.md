@@ -393,7 +393,6 @@ const orq = new Orq({
 
 async function run() {
   const result = await orq.models.azureFoundryDeployments({
-    apiKey: "<value>",
     baseUrl: "https://admired-overcoat.info",
     provider: "<value>",
   });
@@ -420,7 +419,6 @@ const orq = new OrqCore({
 
 async function run() {
   const res = await modelsAzureFoundryDeployments(orq, {
-    apiKey: "<value>",
     baseUrl: "https://admired-overcoat.info",
     provider: "<value>",
   });
@@ -807,7 +805,6 @@ const orq = new Orq({
 
 async function run() {
   await orq.models.validate({
-    apiKey: "<value>",
     provider: "<value>",
   });
 
@@ -833,7 +830,6 @@ const orq = new OrqCore({
 
 async function run() {
   const res = await modelsValidate(orq, {
-    apiKey: "<value>",
     provider: "<value>",
   });
   if (res.ok) {

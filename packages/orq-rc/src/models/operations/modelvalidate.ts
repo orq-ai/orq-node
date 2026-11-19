@@ -6,22 +6,30 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 
 export type ModelValidateRequestBody = {
-  apiKey: string;
+  /**
+   * Required unless integration_id is set.
+   */
+  apiKey?: string | undefined;
   apiVersion?: string | undefined;
   baseUrl?: string | undefined;
   deploymentName?: string | undefined;
   endpoint?: string | undefined;
+  /**
+   * Azure workload identity federation integration that authenticates the probe with an Entra access token instead of api_key.
+   */
+  integrationId?: string | undefined;
   provider: string;
   subtype?: string | undefined;
 };
 
 /** @internal */
 export type ModelValidateRequestBody$Outbound = {
-  api_key: string;
+  api_key?: string | undefined;
   api_version?: string | undefined;
   base_url?: string | undefined;
   deployment_name?: string | undefined;
   endpoint?: string | undefined;
+  integration_id?: string | undefined;
   provider: string;
   subtype?: string | undefined;
 };
@@ -32,11 +40,12 @@ export const ModelValidateRequestBody$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ModelValidateRequestBody
 > = z.object({
-  apiKey: z.string(),
+  apiKey: z.string().optional(),
   apiVersion: z.string().optional(),
   baseUrl: z.string().optional(),
   deploymentName: z.string().optional(),
   endpoint: z.string().optional(),
+  integrationId: z.string().optional(),
   provider: z.string(),
   subtype: z.string().optional(),
 }).transform((v) => {
@@ -45,6 +54,7 @@ export const ModelValidateRequestBody$outboundSchema: z.ZodType<
     apiVersion: "api_version",
     baseUrl: "base_url",
     deploymentName: "deployment_name",
+    integrationId: "integration_id",
   });
 });
 
