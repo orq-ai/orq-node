@@ -2591,7 +2591,7 @@ components:
           properties:
             _id:
               type: "string"
-              default: "reasoning_01m7t38ag1ac2nbdzdecq0gbz2"
+              default: "reasoning_01m7tz6qwtcgyg66fw5ashjfdq"
               description: "Unique identifier for the part. Format: reasoning_{ulid} (e.g., reasoning_01hxyz...)"
               example: "reasoning_01hxyz123abc"
             kind:
@@ -25823,6 +25823,7 @@ paths:
       x-speakeasy-name-override: "invoke"
       x-cli-group: "deployments"
       x-cli-name: "invoke"
+      x-cli-help-section: "Managed agents"
       x-code-samples:
         - lang: "TypeScript"
           source: "import { Orq } from '@orq-ai/node';\n\nconst orq = new Orq({ apiKey: process.env.ORQ_API_KEY ?? '' });\nconst response = await orq.deployments.invoke({\n  key: 'customer-support',\n  inputs: { question: 'What is your refund policy?' },\n});"
@@ -26179,6 +26180,7 @@ paths:
       x-speakeasy-name-override: "stream"
       x-cli-group: "deployments"
       x-cli-name: "stream"
+      x-cli-help-section: "Managed agents"
       x-code-samples:
         - lang: "TypeScript"
           source: "import { Orq } from '@orq-ai/node';\n\nconst orq = new Orq({ apiKey: process.env.ORQ_API_KEY ?? '' });\nconst stream = await orq.deployments.stream({\n  key: 'customer-support',\n  inputs: { question: 'What is your refund policy?' },\n});\nfor await (const event of stream) {\n  console.log(event);\n}"
@@ -27464,6 +27466,7 @@ paths:
       x-speakeasy-name-override: "list"
       x-cli-group: "deployments"
       x-cli-name: "list"
+      x-cli-help-section: "Managed agents"
       operationId: "Deployments"
       description: "Returns a list of your deployments. The deployments are returned sorted by creation date, with the most recent deployments appearing first."
       summary: "List all deployments"
@@ -28000,6 +28003,7 @@ paths:
       x-speakeasy-name-override: "listVersions"
       x-cli-group: "deployments"
       x-cli-name: "listVersions"
+      x-cli-help-section: "Managed agents"
       x-code-samples:
         - lang: "typescript"
           label: "TypeScript"
@@ -28851,7 +28855,7 @@ paths:
                                 type: "string"
                                 format: "ulid"
                                 pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                                default: "01M7T38AFC56QNX7YT399AC45R"
+                                default: "01M7TZ6QVV5FZ4C39EWJDDHZBM"
                                 readOnly: true
                                 description: "The unique identifier of the playground knowledge base"
                               knowledge_id:
@@ -29027,6 +29031,7 @@ paths:
       x-speakeasy-name-override: "getConfig"
       x-cli-group: "deployments"
       x-cli-name: "getConfig"
+      x-cli-help-section: "Managed agents"
       operationId: "DeploymentGetConfig"
       description: "Retrieve the deployment configuration"
       summary: "Get config"
@@ -30353,6 +30358,7 @@ paths:
       x-speakeasy-name-override: "create"
       x-cli-group: "agents"
       x-cli-name: "create"
+      x-cli-help-section: "Managed agents"
       x-speakeasy-max-method-params: 17
       operationId: "CreateAgentRequest"
       summary: "Create agent"
@@ -32316,6 +32322,7 @@ paths:
       x-speakeasy-name-override: "list"
       x-cli-group: "agents"
       x-cli-name: "list"
+      x-cli-help-section: "Managed agents"
       x-cli-list-fields:
         - "key"
         - "model.id"
@@ -33412,6 +33419,7 @@ paths:
       x-speakeasy-max-method-params: 13
       x-cli-group: "agents-responses"
       x-cli-name: "create"
+      x-cli-help-section: "Managed agents"
       x-cli-hidden: true
       x-code-samples:
         - lang: "curl"
@@ -33471,6 +33479,7 @@ paths:
       x-speakeasy-name-override: "get"
       x-cli-group: "agents"
       x-cli-name: "getResponse"
+      x-cli-help-section: "Managed agents"
       x-cli-hidden: true
       operationId: "GetAgentResponse"
       summary: "Get response"
@@ -33515,6 +33524,7 @@ paths:
       x-speakeasy-name-override: "delete"
       x-cli-group: "agents"
       x-cli-name: "delete"
+      x-cli-help-section: "Managed agents"
       x-speakeasy-max-method-params: 1
       operationId: "DeleteAgent"
       summary: "Delete agent"
@@ -33552,6 +33562,7 @@ paths:
       x-speakeasy-name-override: "retrieve"
       x-cli-group: "agents"
       x-cli-name: "retrieve"
+      x-cli-help-section: "Managed agents"
       x-speakeasy-max-method-params: 1
       operationId: "RetrieveAgentRequest"
       summary: "Retrieve agent"
@@ -34613,6 +34624,7 @@ paths:
       x-speakeasy-name-override: "update"
       x-cli-group: "agents"
       x-cli-name: "update"
+      x-cli-help-section: "Managed agents"
       x-speakeasy-max-method-params: 21
       operationId: "UpdateAgent"
       summary: "Update agent"
@@ -36585,6 +36597,7 @@ paths:
         - "Agents"
       x-cli-group: "agents"
       x-cli-name: "invoke"
+      x-cli-help-section: "Managed agents"
       x-cli-hidden: true
       deprecated: true
       x-speakeasy-group: "agents"
@@ -36911,6 +36924,7 @@ paths:
         - "Agents"
       x-cli-group: "agents"
       x-cli-name: "run"
+      x-cli-help-section: "Managed agents"
       x-cli-hidden: true
       deprecated: true
       x-speakeasy-group: "agents"
@@ -38256,7 +38270,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01M7T38AH0NZHAPGWHC8Y83JWM"
+                                          default: "01M7TZ6QY4TB2SRTHSXKH4MDXR"
                                         name:
                                           type: "string"
                                         description:
@@ -38537,6 +38551,7 @@ paths:
         - "Agents"
       x-cli-group: "agents"
       x-cli-name: "streamRun"
+      x-cli-help-section: "Managed agents"
       x-cli-hidden: true
       deprecated: true
       x-speakeasy-group: "agents"
@@ -39882,7 +39897,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01M7T38AHE25Y3RF4CBCEF3E9Z"
+                                          default: "01M7TZ6QYPAN0NG6GYATVMXSKZ"
                                         name:
                                           type: "string"
                                         description:
@@ -40123,6 +40138,7 @@ paths:
         - "Agents"
       x-cli-group: "agents"
       x-cli-name: "stream"
+      x-cli-help-section: "Managed agents"
       x-cli-hidden: true
       deprecated: true
       x-speakeasy-group: "agents"
@@ -40412,6 +40428,7 @@ paths:
       x-speakeasy-name-override: "list"
       x-cli-group: "prompts"
       x-cli-name: "list"
+      x-cli-help-section: "Managed agents"
       operationId: "GetAllPrompts"
       summary: "List all prompts"
       description: "Returns a list of your prompts. The prompts are returned sorted by creation date, with the most recent prompts appearing first"
@@ -41602,6 +41619,7 @@ paths:
       x-speakeasy-name-override: "create"
       x-cli-group: "prompts"
       x-cli-name: "create"
+      x-cli-help-section: "Managed agents"
       operationId: "CreatePrompt"
       summary: "Create a prompt"
       description: "Create a new prompt in the workspace."
@@ -43466,6 +43484,7 @@ paths:
       x-speakeasy-name-override: "retrieve"
       x-cli-group: "prompts"
       x-cli-name: "retrieve"
+      x-cli-help-section: "Managed agents"
       operationId: "GetOnePrompt"
       summary: "Retrieve a prompt"
       description: "Retrieves a prompt object"
@@ -44630,6 +44649,7 @@ paths:
       x-speakeasy-name-override: "update"
       x-cli-group: "prompts"
       x-cli-name: "update"
+      x-cli-help-section: "Managed agents"
       operationId: "UpdatePrompt"
       summary: "Update a prompt"
       description: "Update a prompt by ID with the provided fields."
@@ -46520,6 +46540,7 @@ paths:
       x-speakeasy-name-override: "delete"
       x-cli-group: "prompts"
       x-cli-name: "delete"
+      x-cli-help-section: "Managed agents"
       operationId: "DeletePrompt"
       summary: "Delete a prompt"
       description: "Delete a prompt and all its versions by ID."
@@ -46555,6 +46576,7 @@ paths:
       x-speakeasy-name-override: "listVersions"
       x-cli-group: "prompts"
       x-cli-name: "listVersions"
+      x-cli-help-section: "Managed agents"
       operationId: "ListPromptVersions"
       summary: "List all prompt versions"
       description: "Returns a list of your prompt versions. The prompt versions are returned sorted by creation date, with the most recent prompt versions appearing first"
@@ -47739,6 +47761,7 @@ paths:
       x-speakeasy-name-override: "getVersion"
       x-cli-group: "prompts"
       x-cli-name: "getVersion"
+      x-cli-help-section: "Managed agents"
       operationId: "GetPromptVersion"
       summary: "Retrieve a prompt version"
       description: "Retrieves a specific version of a prompt by its ID and version ID."
@@ -48892,6 +48915,7 @@ paths:
       x-speakeasy-name-override: "list"
       x-cli-group: "tools"
       x-cli-name: "list"
+      x-cli-help-section: "Managed agents"
       operationId: "GetAllTools"
       summary: "List tools"
       description: "List all workspace tools. By default returns all tools in one response. Set `limit` for cursor-based pagination."
@@ -48939,7 +48963,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M7T38AJCYV5N9C8TB47CZHMD"
+                              default: "tool_01M7TZ6QZTH893QBQ1W5GXWA8E"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -49040,7 +49064,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M7T38AJDAADCPC95ED65CVN6"
+                              default: "tool_01M7TZ6QZT9RXJ4BAJG0NRWMYM"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -49143,7 +49167,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M7T38AJDT1BNMZ1A6MKJT910"
+                              default: "tool_01M7TZ6QZVCQW2TKRN2EPVRD95"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -49287,7 +49311,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M7T38AJEAK45MNA2C675R9NX"
+                              default: "tool_01M7TZ6QZVQZ402NQYT9157XK2"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -49405,6 +49429,7 @@ paths:
       x-speakeasy-name-override: "create"
       x-cli-group: "tools"
       x-cli-name: "create"
+      x-cli-help-section: "Managed agents"
       operationId: "CreateTool"
       summary: "Create tool"
       description: "Creates a new tool in the workspace."
@@ -49774,7 +49799,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M7T38AJGXTN8VPX7BF0REPJE"
+                        default: "tool_01M7TZ6QZZBST76M1QFMND0YVX"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -49875,7 +49900,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M7T38AJGXPDWG46KJF6N8BXT"
+                        default: "tool_01M7TZ6QZZCQWA46Q2W3V56FVE"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -49978,7 +50003,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M7T38AJH8GNM1VC91BJ2Z8TE"
+                        default: "tool_01M7TZ6QZZBK2QEXXW3DEKJMGG"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -50122,7 +50147,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M7T38AJHJFN6DZ6RAQY1ZGCV"
+                        default: "tool_01M7TZ6R002BY2WDSNXMERSAD8"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -50235,6 +50260,7 @@ paths:
       x-speakeasy-name-override: "update"
       x-cli-group: "tools"
       x-cli-name: "update"
+      x-cli-help-section: "Managed agents"
       operationId: "UpdateTool"
       summary: "Update tool"
       description: "Updates a tool in the workspace."
@@ -50626,7 +50652,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M7T38AJKKZ96NFQ6MYZ3YFMS"
+                        default: "tool_01M7TZ6R02VR3GFAZ7SBARYEE1"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -50727,7 +50753,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M7T38AJKVGJ503ETTH5WSPNE"
+                        default: "tool_01M7TZ6R02WEZK0P2B2D690QCQ"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -50830,7 +50856,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M7T38AJK8C6BRFQSB0EHGX62"
+                        default: "tool_01M7TZ6R03JSA19PWSMX4Q88KQ"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -50974,7 +51000,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M7T38AJMM5Q1DG1QQCZXZCC1"
+                        default: "tool_01M7TZ6R03PHG8NQN72SKD5TQW"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -51094,6 +51120,7 @@ paths:
       x-speakeasy-name-override: "delete"
       x-cli-group: "tools"
       x-cli-name: "delete"
+      x-cli-help-section: "Managed agents"
       operationId: "DeleteTool"
       summary: "Delete tool"
       description: "Deletes a tool by key."
@@ -51121,6 +51148,7 @@ paths:
       x-speakeasy-name-override: "retrieve"
       x-cli-group: "tools"
       x-cli-name: "retrieve"
+      x-cli-help-section: "Managed agents"
       operationId: "RetrieveTool"
       summary: "Retrieve tool"
       description: "Retrieves a tool by id."
@@ -51141,7 +51169,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M7T38AJP893VDQB93Y11G6B3"
+                        default: "tool_01M7TZ6R07WD9K8JM48NH40A23"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -51242,7 +51270,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M7T38AJQHBFDR7VG04BCN49B"
+                        default: "tool_01M7TZ6R07QE1H8P976ACVD452"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -51345,7 +51373,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M7T38AJQNK2P4HEBHBGDP834"
+                        default: "tool_01M7TZ6R08S8C021PNSD5Z97D9"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -51489,7 +51517,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M7T38AJQ7VKJD1V9DWAD5KYD"
+                        default: "tool_01M7TZ6R08VYV7Q1VM191XVWNG"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -51606,6 +51634,7 @@ paths:
         - "Tools"
       x-cli-group: "tools"
       x-cli-name: "listVersions"
+      x-cli-help-section: "Managed agents"
       x-speakeasy-group: "tools"
       x-speakeasy-name-override: "listVersions"
       summary: "List tool versions"
@@ -51717,6 +51746,7 @@ paths:
         - "Tools"
       x-cli-group: "tools"
       x-cli-name: "getVersion"
+      x-cli-help-section: "Managed agents"
       x-speakeasy-group: "tools"
       x-speakeasy-name-override: "getVersion"
       summary: "Get tool version"
@@ -51796,6 +51826,7 @@ paths:
       x-speakeasy-name-override: "create"
       x-cli-group: "chat"
       x-cli-name: "create"
+      x-cli-help-section: "AI Gateway"
       x-speakeasy-ignore: false
       x-orq-gateway-group: "true"
       operationId: "createChatCompletion"
@@ -53791,6 +53822,7 @@ paths:
       x-speakeasy-name-override: "create"
       x-cli-group: "moderations"
       x-cli-name: "create"
+      x-cli-help-section: "AI Gateway"
       x-speakeasy-ignore: false
       x-orq-gateway-group: "true"
       requestBody:
@@ -54170,6 +54202,7 @@ paths:
       x-speakeasy-name-override: "create"
       x-cli-group: "rerank"
       x-cli-name: "create"
+      x-cli-help-section: "AI Gateway"
       x-speakeasy-ignore: false
       x-orq-gateway-group: "true"
       description: "Rerank a list of documents based on their relevance to a query."
@@ -54512,6 +54545,7 @@ paths:
       x-speakeasy-name-override: "create"
       x-cli-group: "speech"
       x-cli-name: "create"
+      x-cli-help-section: "AI Gateway"
       x-speakeasy-ignore: false
       x-orq-gateway-group: "true"
       description: "Generates audio from the input text."
@@ -54781,6 +54815,7 @@ paths:
       x-speakeasy-name-override: "create"
       x-cli-group: "completions"
       x-cli-name: "create"
+      x-cli-help-section: "AI Gateway"
       x-speakeasy-ignore: false
       x-orq-gateway-group: "true"
       description: "For sending requests to legacy completion models"
@@ -55851,6 +55886,7 @@ paths:
       x-speakeasy-name-override: "create"
       x-cli-group: "images"
       x-cli-name: "generate"
+      x-cli-help-section: "AI Gateway"
       x-speakeasy-ignore: false
       x-orq-gateway-group: "true"
       description: "Create an Image"
@@ -56254,6 +56290,7 @@ paths:
       x-speakeasy-name-override: "create"
       x-cli-group: "images"
       x-cli-name: "edit"
+      x-cli-help-section: "AI Gateway"
       x-speakeasy-ignore: false
       x-orq-gateway-group: "true"
       description: "Edit an Image"
@@ -56637,6 +56674,7 @@ paths:
       x-speakeasy-name-override: "create"
       x-cli-group: "images"
       x-cli-name: "variation"
+      x-cli-help-section: "AI Gateway"
       x-speakeasy-ignore: false
       x-orq-gateway-group: "true"
       description: "Create an Image Variation"
@@ -57010,6 +57048,7 @@ paths:
       x-speakeasy-name-override: "create"
       x-cli-group: "transcriptions"
       x-cli-name: "create"
+      x-cli-help-section: "AI Gateway"
       x-speakeasy-ignore: false
       x-orq-gateway-group: "true"
       requestBody:
@@ -57388,6 +57427,7 @@ paths:
       x-speakeasy-name-override: "create"
       x-cli-group: "translations"
       x-cli-name: "create"
+      x-cli-help-section: "AI Gateway"
       x-speakeasy-ignore: false
       x-orq-gateway-group: "true"
       requestBody:
@@ -57751,6 +57791,7 @@ paths:
       x-cli-name: "create"
       x-cli-aliases:
         - "ocr"
+      x-cli-help-section: "AI Gateway"
       description: "Extracts text content while maintaining document structure and hierarchy"
       requestBody:
         required: true
@@ -58351,6 +58392,7 @@ paths:
       x-speakeasy-name-override: "parse"
       x-cli-group: "chunking"
       x-cli-name: "parse"
+      x-cli-help-section: "AI Gateway"
       x-code-samples:
         - lang: "typescript"
           label: "Node.js"
@@ -58402,6 +58444,7 @@ paths:
       x-speakeasy-name-override: "list"
       x-cli-group: "file-systems"
       x-cli-name: "list"
+      x-cli-help-section: "Factory"
       security:
         - ApiKey: []
     post:
@@ -58431,6 +58474,7 @@ paths:
       x-speakeasy-name-override: "create"
       x-cli-group: "file-systems"
       x-cli-name: "create"
+      x-cli-help-section: "Factory"
       security:
         - ApiKey: []
   /v2/file-systems/{file_system_key}:
@@ -58465,6 +58509,7 @@ paths:
       x-speakeasy-name-override: "retrieve"
       x-cli-group: "file-systems"
       x-cli-name: "retrieve"
+      x-cli-help-section: "Factory"
       security:
         - ApiKey: []
     delete:
@@ -58494,6 +58539,7 @@ paths:
       x-speakeasy-name-override: "delete"
       x-cli-group: "file-systems"
       x-cli-name: "delete"
+      x-cli-help-section: "Factory"
       security:
         - ApiKey: []
     patch:
@@ -58527,6 +58573,7 @@ paths:
       x-speakeasy-name-override: "update"
       x-cli-group: "file-systems"
       x-cli-name: "update"
+      x-cli-help-section: "Factory"
       security:
         - ApiKey: []
   /v2/file-systems/{file_system_key}/files:
@@ -58575,6 +58622,7 @@ paths:
       x-speakeasy-name-override: "listFiles"
       x-cli-group: "file-systems"
       x-cli-name: "listFiles"
+      x-cli-help-section: "Factory"
       security:
         - ApiKey: []
     delete:
@@ -58612,6 +58660,7 @@ paths:
       x-speakeasy-name-override: "deleteFile"
       x-cli-group: "file-systems"
       x-cli-name: "deleteFile"
+      x-cli-help-section: "Factory"
       security:
         - ApiKey: []
   /v2/file-systems/{file_system_key}/files/move:
@@ -58646,6 +58695,7 @@ paths:
       x-speakeasy-name-override: "moveFile"
       x-cli-group: "file-systems"
       x-cli-name: "moveFile"
+      x-cli-help-section: "Factory"
       security:
         - ApiKey: []
   /v2/file-systems/{file_system_key}/files/stat:
@@ -58684,6 +58734,7 @@ paths:
       x-speakeasy-name-override: "statFile"
       x-cli-group: "file-systems"
       x-cli-name: "statFile"
+      x-cli-help-section: "Factory"
       security:
         - ApiKey: []
   /v2/file-systems/{file_system_key}/folders:
@@ -58718,6 +58769,7 @@ paths:
       x-speakeasy-name-override: "createFolder"
       x-cli-group: "file-systems"
       x-cli-name: "createFolder"
+      x-cli-help-section: "Factory"
       security:
         - ApiKey: []
   /v2/knowledge:
@@ -58796,6 +58848,7 @@ paths:
       x-speakeasy-name-override: "list"
       x-cli-group: "knowledge-bases"
       x-cli-name: "list"
+      x-cli-help-section: "Managed agents"
       x-code-samples:
         - lang: "curl"
           label: "Core - List knowledge bases"
@@ -58827,6 +58880,7 @@ paths:
       x-speakeasy-name-override: "create"
       x-cli-group: "knowledge-bases"
       x-cli-name: "create"
+      x-cli-help-section: "Managed agents"
       x-code-samples:
         - lang: "curl"
           label: "Core - Create knowledge base"
@@ -58861,6 +58915,7 @@ paths:
       x-speakeasy-name-override: "retrieve"
       x-cli-group: "knowledge-bases"
       x-cli-name: "retrieve"
+      x-cli-help-section: "Managed agents"
       x-code-samples:
         - lang: "curl"
           label: "Core - Retrieve knowledge base"
@@ -58888,6 +58943,7 @@ paths:
       x-speakeasy-name-override: "delete"
       x-cli-group: "knowledge-bases"
       x-cli-name: "delete"
+      x-cli-help-section: "Managed agents"
       x-code-samples:
         - lang: "curl"
           label: "Core - Delete knowledge base"
@@ -58925,6 +58981,7 @@ paths:
       x-speakeasy-name-override: "update"
       x-cli-group: "knowledge-bases"
       x-cli-name: "update"
+      x-cli-help-section: "Managed agents"
       x-code-samples:
         - lang: "curl"
           label: "Core - Update knowledge base"
@@ -59015,6 +59072,7 @@ paths:
       x-speakeasy-name-override: "listDatasources"
       x-cli-group: "knowledge-bases"
       x-cli-name: "listDatasources"
+      x-cli-help-section: "Managed agents"
       x-code-samples:
         - lang: "curl"
           label: "Core - List datasources"
@@ -59058,6 +59116,7 @@ paths:
       x-speakeasy-name-override: "createDatasource"
       x-cli-group: "knowledge-bases"
       x-cli-name: "createDatasource"
+      x-cli-help-section: "Managed agents"
       x-code-samples:
         - lang: "curl"
           label: "Core - Create datasource"
@@ -59100,6 +59159,7 @@ paths:
       x-speakeasy-name-override: "previewChunks"
       x-cli-group: "knowledge-bases"
       x-cli-name: "previewChunks"
+      x-cli-help-section: "Managed agents"
       security:
         - ApiKey: []
   /v2/knowledge/{knowledge_id}/datasources/{datasource_id}:
@@ -59143,6 +59203,7 @@ paths:
       x-speakeasy-name-override: "retrieveDatasource"
       x-cli-group: "knowledge-bases"
       x-cli-name: "retrieveDatasource"
+      x-cli-help-section: "Managed agents"
       x-code-samples:
         - lang: "curl"
           label: "Core - Retrieve datasource"
@@ -59179,6 +59240,7 @@ paths:
       x-speakeasy-name-override: "deleteDatasource"
       x-cli-group: "knowledge-bases"
       x-cli-name: "deleteDatasource"
+      x-cli-help-section: "Managed agents"
       x-code-samples:
         - lang: "curl"
           label: "Core - Delete datasource"
@@ -59225,6 +59287,7 @@ paths:
       x-speakeasy-name-override: "updateDatasource"
       x-cli-group: "knowledge-bases"
       x-cli-name: "updateDatasource"
+      x-cli-help-section: "Managed agents"
       x-code-samples:
         - lang: "curl"
           label: "Core - Update datasource"
@@ -59334,6 +59397,7 @@ paths:
       x-speakeasy-name-override: "listChunks"
       x-cli-group: "knowledge-bases"
       x-cli-name: "listChunks"
+      x-cli-help-section: "Managed agents"
       x-code-samples:
         - lang: "curl"
           label: "Core - List chunks"
@@ -59390,6 +59454,7 @@ paths:
       x-speakeasy-name-override: "createChunks"
       x-cli-group: "knowledge-bases"
       x-cli-name: "createChunks"
+      x-cli-help-section: "Managed agents"
       x-code-samples:
         - lang: "curl"
           label: "Core - Create chunks"
@@ -59436,6 +59501,7 @@ paths:
       x-speakeasy-name-override: "deleteChunks"
       x-cli-group: "knowledge-bases"
       x-cli-name: "deleteChunks"
+      x-cli-help-section: "Managed agents"
       x-code-samples:
         - lang: "curl"
           label: "Core - Delete multiple chunks"
@@ -59483,6 +59549,7 @@ paths:
       x-speakeasy-name-override: "getChunksCount"
       x-cli-group: "knowledge-bases"
       x-cli-name: "getChunksCount"
+      x-cli-help-section: "Managed agents"
       x-code-samples:
         - lang: "curl"
           label: "Core - Count chunks"
@@ -59530,6 +59597,7 @@ paths:
       x-speakeasy-name-override: "listChunksPaginated"
       x-cli-group: "knowledge-bases"
       x-cli-name: "listChunksPaginated"
+      x-cli-help-section: "Managed agents"
       x-code-samples:
         - lang: "curl"
           label: "Core - List a page of chunks"
@@ -59582,6 +59650,7 @@ paths:
       x-speakeasy-name-override: "retrieveChunk"
       x-cli-group: "knowledge-bases"
       x-cli-name: "retrieveChunk"
+      x-cli-help-section: "Managed agents"
       x-code-samples:
         - lang: "curl"
           label: "Core - Retrieve chunk"
@@ -59623,6 +59692,7 @@ paths:
       x-speakeasy-name-override: "deleteChunk"
       x-cli-group: "knowledge-bases"
       x-cli-name: "deleteChunk"
+      x-cli-help-section: "Managed agents"
       x-code-samples:
         - lang: "curl"
           label: "Core - Delete chunk"
@@ -59674,6 +59744,7 @@ paths:
       x-speakeasy-name-override: "updateChunk"
       x-cli-group: "knowledge-bases"
       x-cli-name: "updateChunk"
+      x-cli-help-section: "Managed agents"
       x-code-samples:
         - lang: "curl"
           label: "Core - Update chunk"
@@ -59726,6 +59797,7 @@ paths:
       x-speakeasy-name-override: "toggleChunk"
       x-cli-group: "knowledge-bases"
       x-cli-name: "toggleChunk"
+      x-cli-help-section: "Managed agents"
       x-code-samples:
         - lang: "curl"
           label: "Core - Set chunk enabled status"
@@ -59773,6 +59845,7 @@ paths:
       x-speakeasy-name-override: "retrieveProcessingStatus"
       x-cli-group: "knowledge-bases"
       x-cli-name: "retrieveProcessingStatus"
+      x-cli-help-section: "Managed agents"
       x-code-samples:
         - lang: "curl"
           label: "Core - Retrieve datasource processing status"
@@ -59813,6 +59886,7 @@ paths:
       x-speakeasy-name-override: "search"
       x-cli-group: "knowledge-bases"
       x-cli-name: "search"
+      x-cli-help-section: "Managed agents"
       x-code-samples:
         - lang: "curl"
           label: "Core"
@@ -59881,6 +59955,7 @@ paths:
       x-speakeasy-name-override: "retrieveFileUrl"
       x-cli-group: "knowledge-bases"
       x-cli-name: "retrieveFileUrl"
+      x-cli-help-section: "Managed agents"
       x-code-samples:
         - lang: "curl"
           label: "Core - Create file upload policy"
@@ -59957,6 +60032,7 @@ paths:
       x-speakeasy-name-override: "list"
       x-cli-group: "memory-stores"
       x-cli-name: "list"
+      x-cli-help-section: "Managed agents"
       security:
         - ApiKey: []
     post:
@@ -59987,6 +60063,7 @@ paths:
       x-speakeasy-name-override: "create"
       x-cli-group: "memory-stores"
       x-cli-name: "create"
+      x-cli-help-section: "Managed agents"
       security:
         - ApiKey: []
   /v2/memory-stores/{memory_store_key}:
@@ -60031,6 +60108,7 @@ paths:
       x-speakeasy-name-override: "retrieve"
       x-cli-group: "memory-stores"
       x-cli-name: "retrieve"
+      x-cli-help-section: "Managed agents"
       security:
         - ApiKey: []
     delete:
@@ -60058,6 +60136,7 @@ paths:
       x-speakeasy-name-override: "delete"
       x-cli-group: "memory-stores"
       x-cli-name: "delete"
+      x-cli-help-section: "Managed agents"
       security:
         - ApiKey: []
     patch:
@@ -60097,6 +60176,7 @@ paths:
       x-speakeasy-name-override: "update"
       x-cli-group: "memory-stores"
       x-cli-name: "update"
+      x-cli-help-section: "Managed agents"
       security:
         - ApiKey: []
   /v2/memory-stores/{memory_store_key}/memories:
@@ -60166,6 +60246,7 @@ paths:
       x-speakeasy-name-override: "listMemories"
       x-cli-group: "memory-stores"
       x-cli-name: "listMemories"
+      x-cli-help-section: "Managed agents"
       security:
         - ApiKey: []
     post:
@@ -60203,6 +60284,7 @@ paths:
       x-speakeasy-name-override: "createMemory"
       x-cli-group: "memory-stores"
       x-cli-name: "createMemory"
+      x-cli-help-section: "Managed agents"
       security:
         - ApiKey: []
   /v2/memory-stores/{memory_store_key}/memories/{memory_entity_id}:
@@ -60240,6 +60322,7 @@ paths:
       x-speakeasy-name-override: "retrieveMemory"
       x-cli-group: "memory-stores"
       x-cli-name: "retrieveMemory"
+      x-cli-help-section: "Managed agents"
       security:
         - ApiKey: []
     delete:
@@ -60272,6 +60355,7 @@ paths:
       x-speakeasy-name-override: "deleteMemory"
       x-cli-group: "memory-stores"
       x-cli-name: "deleteMemory"
+      x-cli-help-section: "Managed agents"
       security:
         - ApiKey: []
     patch:
@@ -60316,6 +60400,7 @@ paths:
       x-speakeasy-name-override: "updateMemory"
       x-cli-group: "memory-stores"
       x-cli-name: "updateMemory"
+      x-cli-help-section: "Managed agents"
       security:
         - ApiKey: []
   /v2/memory-stores/{memory_store_key}/memories/{memory_entity_id}/documents:
@@ -60397,6 +60482,7 @@ paths:
       x-speakeasy-name-override: "listDocuments"
       x-cli-group: "memory-stores"
       x-cli-name: "listDocuments"
+      x-cli-help-section: "Managed agents"
       security:
         - ApiKey: []
     post:
@@ -60441,6 +60527,7 @@ paths:
       x-speakeasy-name-override: "createDocument"
       x-cli-group: "memory-stores"
       x-cli-name: "createDocument"
+      x-cli-help-section: "Managed agents"
       security:
         - ApiKey: []
   /v2/memory-stores/{memory_store_key}/memories/{memory_entity_id}/documents/{document_id}:
@@ -60483,6 +60570,7 @@ paths:
       x-speakeasy-name-override: "retrieveDocument"
       x-cli-group: "memory-stores"
       x-cli-name: "retrieveDocument"
+      x-cli-help-section: "Managed agents"
       security:
         - ApiKey: []
     delete:
@@ -60520,6 +60608,7 @@ paths:
       x-speakeasy-name-override: "deleteDocument"
       x-cli-group: "memory-stores"
       x-cli-name: "deleteDocument"
+      x-cli-help-section: "Managed agents"
       security:
         - ApiKey: []
     patch:
@@ -60569,6 +60658,7 @@ paths:
       x-speakeasy-name-override: "updateDocument"
       x-cli-group: "memory-stores"
       x-cli-name: "updateDocument"
+      x-cli-help-section: "Managed agents"
       security:
         - ApiKey: []
   /v2/evaluators:
@@ -60676,6 +60766,7 @@ paths:
       x-speakeasy-name-override: "all"
       x-cli-group: "evals"
       x-cli-name: "all"
+      x-cli-help-section: "Optimization"
       x-code-samples:
         - lang: "typescript"
           label: "Node.js - List evaluators"
@@ -61247,6 +61338,7 @@ paths:
       x-speakeasy-name-override: "create"
       x-cli-group: "evals"
       x-cli-name: "create"
+      x-cli-help-section: "Optimization"
       x-code-samples:
         - lang: "typescript"
           label: "Node.js - Create an evaluator"
@@ -63096,6 +63188,7 @@ paths:
       x-speakeasy-name-override: "get"
       x-cli-group: "evals"
       x-cli-name: "get"
+      x-cli-help-section: "Optimization"
       x-code-samples:
         - lang: "typescript"
           label: "Node.js - Retrieve an evaluator"
@@ -63143,6 +63236,7 @@ paths:
       x-speakeasy-name-override: "delete"
       x-cli-group: "evals"
       x-cli-name: "delete"
+      x-cli-help-section: "Optimization"
       x-code-samples:
         - lang: "typescript"
           label: "Node.js - Delete an evaluator"
@@ -63458,6 +63552,7 @@ paths:
       x-speakeasy-name-override: "update"
       x-cli-group: "evals"
       x-cli-name: "update"
+      x-cli-help-section: "Optimization"
       x-code-samples:
         - lang: "typescript"
           label: "Node.js - Update an evaluator"
@@ -63500,6 +63595,7 @@ paths:
       x-speakeasy-name-override: "duplicate"
       x-cli-group: "evals"
       x-cli-name: "duplicate"
+      x-cli-help-section: "Optimization"
       x-cli-ignore: true
       x-speakeasy-ignore: true
       security:
@@ -63554,6 +63650,7 @@ paths:
       x-speakeasy-name-override: "listVersions"
       x-cli-group: "evals"
       x-cli-name: "listVersions"
+      x-cli-help-section: "Optimization"
       security:
         - ApiKey: []
   /v2/evaluators/{id}/versions/{version_id}:
@@ -63597,6 +63694,7 @@ paths:
       x-speakeasy-name-override: "getVersion"
       x-cli-group: "evals"
       x-cli-name: "getVersion"
+      x-cli-help-section: "Optimization"
       x-cli-hidden: true
       security:
         - ApiKey: []
@@ -63637,6 +63735,7 @@ paths:
       x-speakeasy-name-override: "invoke"
       x-cli-group: "evals"
       x-cli-name: "invoke"
+      x-cli-help-section: "Optimization"
       x-code-samples:
         - lang: "curl"
           label: "Core - Run an evaluator"
@@ -63675,6 +63774,7 @@ paths:
       x-speakeasy-name-override: "capabilities"
       x-cli-group: "pii"
       x-cli-name: "capabilities"
+      x-cli-help-section: "AI Gateway"
       security:
         - ApiKey: []
   /v2/pii/detect:
@@ -63706,6 +63806,7 @@ paths:
       x-speakeasy-name-override: "detect"
       x-cli-group: "pii"
       x-cli-name: "detect"
+      x-cli-help-section: "AI Gateway"
       x-code-samples:
         - lang: "typescript"
           label: "Node.js"
@@ -63741,6 +63842,7 @@ paths:
       x-speakeasy-name-override: "redact"
       x-cli-group: "pii"
       x-cli-name: "redact"
+      x-cli-help-section: "AI Gateway"
       x-code-samples:
         - lang: "typescript"
           label: "Node.js"
@@ -63776,6 +63878,7 @@ paths:
       x-speakeasy-name-override: "restore"
       x-cli-group: "pii"
       x-cli-name: "restore"
+      x-cli-help-section: "AI Gateway"
       security:
         - ApiKey: []
   /v2/api-keys:
@@ -63817,6 +63920,7 @@ paths:
       tags:
         - "API keys"
       x-cli-group: "apiKeys"
+      x-cli-help-section: "Administration"
       x-cli-name: "list"
       x-speakeasy-group: "apiKeys"
       x-speakeasy-name-override: "list"
@@ -63902,6 +64006,7 @@ paths:
       tags:
         - "API keys"
       x-cli-group: "apiKeys"
+      x-cli-help-section: "Administration"
       x-cli-name: "create"
       x-speakeasy-group: "apiKeys"
       x-speakeasy-name-override: "create"
@@ -63952,6 +64057,7 @@ paths:
       tags:
         - "API keys"
       x-cli-group: "apiKeys"
+      x-cli-help-section: "Administration"
       x-cli-name: "listCapabilities"
       x-speakeasy-group: "apiKeys"
       x-speakeasy-name-override: "listCapabilities"
@@ -63992,6 +64098,7 @@ paths:
       tags:
         - "API keys"
       x-cli-group: "apiKeys"
+      x-cli-help-section: "Administration"
       x-cli-name: "delete"
       x-speakeasy-group: "apiKeys"
       x-speakeasy-name-override: "delete"
@@ -64035,6 +64142,7 @@ paths:
       tags:
         - "API keys"
       x-cli-group: "apiKeys"
+      x-cli-help-section: "Administration"
       x-cli-name: "get"
       x-speakeasy-group: "apiKeys"
       x-speakeasy-name-override: "get"
@@ -64125,6 +64233,7 @@ paths:
       tags:
         - "API keys"
       x-cli-group: "apiKeys"
+      x-cli-help-section: "Administration"
       x-cli-name: "update"
       x-speakeasy-group: "apiKeys"
       x-speakeasy-name-override: "update"
@@ -64238,6 +64347,7 @@ paths:
       x-speakeasy-name-override: "create"
       x-cli-group: "traces"
       x-cli-name: "create"
+      x-cli-help-section: "Observability"
       security:
         - ApiKey: []
     delete:
@@ -64295,6 +64405,7 @@ paths:
       x-speakeasy-name-override: "delete"
       x-cli-group: "traces"
       x-cli-name: "delete"
+      x-cli-help-section: "Observability"
       security:
         - ApiKey: []
   /v2/feedback:
@@ -64430,6 +64541,7 @@ paths:
       x-speakeasy-name-override: "create"
       x-cli-group: "feedback"
       x-cli-name: "create"
+      x-cli-help-section: "Observability"
       security:
         - ApiKey: []
   /v2/feedback/remove:
@@ -64525,6 +64637,7 @@ paths:
       x-speakeasy-name-override: "remove"
       x-cli-group: "feedback"
       x-cli-name: "delete"
+      x-cli-help-section: "Observability"
       security:
         - ApiKey: []
   /v3/logs/aggregate:
@@ -64557,6 +64670,7 @@ paths:
       x-speakeasy-name-override: "aggregate"
       x-cli-group: "logs"
       x-cli-name: "aggregate"
+      x-cli-help-section: "Observability"
       x-cli-list-fields:
         - "timestamp"
         - "total_count"
@@ -64593,6 +64707,7 @@ paths:
       x-speakeasy-name-override: "listFacets"
       x-cli-group: "logs"
       x-cli-name: "listFacets"
+      x-cli-help-section: "Observability"
       security:
         - ApiKey: []
   /v3/logs/facets/{field}:
@@ -64651,6 +64766,7 @@ paths:
       x-speakeasy-name-override: "listFacetValues"
       x-cli-group: "logs"
       x-cli-name: "listFacetValues"
+      x-cli-help-section: "Observability"
       security:
         - ApiKey: []
   /v3/logs/fields:
@@ -64677,6 +64793,7 @@ paths:
       x-speakeasy-name-override: "listFields"
       x-cli-group: "logs"
       x-cli-name: "listFields"
+      x-cli-help-section: "Observability"
       security:
         - ApiKey: []
   /v3/logs/patterns:
@@ -64709,6 +64826,7 @@ paths:
       x-speakeasy-name-override: "findPatterns"
       x-cli-group: "logs"
       x-cli-name: "getPatterns"
+      x-cli-help-section: "Observability"
       security:
         - ApiKey: []
   /v3/logs/query:
@@ -64741,6 +64859,7 @@ paths:
       x-speakeasy-name-override: "query"
       x-cli-group: "logs"
       x-cli-name: "query"
+      x-cli-help-section: "Observability"
       security:
         - ApiKey: []
   /v3/logs/search:
@@ -64773,6 +64892,7 @@ paths:
       x-speakeasy-name-override: "search"
       x-cli-group: "logs"
       x-cli-name: "search"
+      x-cli-help-section: "Observability"
       x-cli-list-fields:
         - "timestamp"
         - "severity_text"
@@ -64817,6 +64937,7 @@ paths:
       x-speakeasy-name-override: "get"
       x-cli-group: "logs"
       x-cli-name: "get"
+      x-cli-help-section: "Observability"
       security:
         - ApiKey: []
   /v3/logs/{id}/context:
@@ -64855,6 +64976,7 @@ paths:
       x-speakeasy-name-override: "context"
       x-cli-group: "logs"
       x-cli-name: "getContext"
+      x-cli-help-section: "Observability"
       security:
         - ApiKey: []
   /v3/traces/{trace_id}/logs:
@@ -64896,6 +65018,7 @@ paths:
       x-speakeasy-name-override: "listTraceLogs"
       x-cli-group: "logs"
       x-cli-name: "listTrace"
+      x-cli-help-section: "Observability"
       x-cli-list-fields:
         - "timestamp"
         - "severity_text"
@@ -64934,6 +65057,7 @@ paths:
       x-speakeasy-name-override: "query"
       x-cli-group: "reporting"
       x-cli-name: "query"
+      x-cli-help-section: "Administration"
       security:
         - ApiKey: []
   /v3/telemetry/capabilities:
@@ -64975,6 +65099,7 @@ paths:
       x-speakeasy-name-override: "listCapabilities"
       x-cli-group: "telemetry"
       x-cli-name: "listCapabilities"
+      x-cli-help-section: "Observability"
       security:
         - ApiKey: []
   /v3/telemetry/facet-values:
@@ -65007,6 +65132,7 @@ paths:
       x-speakeasy-name-override: "listFacetValues"
       x-cli-group: "telemetry"
       x-cli-name: "listFacetValues"
+      x-cli-help-section: "Observability"
       security:
         - ApiKey: []
   /v3/telemetry/query:
@@ -65039,6 +65165,7 @@ paths:
       x-speakeasy-name-override: "query"
       x-cli-group: "telemetry"
       x-cli-name: "query"
+      x-cli-help-section: "Observability"
       security:
         - ApiKey: []
   /v3/telemetry-destinations:
@@ -65072,6 +65199,8 @@ paths:
                 $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "telemetryDestinations"
       x-speakeasy-name-override: "list"
+      x-cli-help-section: "Observability"
+      x-cli-hidden: true
       security:
         - ApiKey: []
     post:
@@ -65100,6 +65229,8 @@ paths:
                 $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "telemetryDestinations"
       x-speakeasy-name-override: "create"
+      x-cli-help-section: "Observability"
+      x-cli-hidden: true
       security:
         - ApiKey: []
   /v3/telemetry-destinations/{destination_id}:
@@ -65129,6 +65260,8 @@ paths:
                 $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "telemetryDestinations"
       x-speakeasy-name-override: "get"
+      x-cli-help-section: "Observability"
+      x-cli-hidden: true
       security:
         - ApiKey: []
     put:
@@ -65163,6 +65296,8 @@ paths:
                 $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "telemetryDestinations"
       x-speakeasy-name-override: "update"
+      x-cli-help-section: "Observability"
+      x-cli-hidden: true
       security:
         - ApiKey: []
     delete:
@@ -65191,6 +65326,8 @@ paths:
                 $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "telemetryDestinations"
       x-speakeasy-name-override: "delete"
+      x-cli-help-section: "Observability"
+      x-cli-hidden: true
       security:
         - ApiKey: []
   /v3/traces/aggregate:
@@ -65223,6 +65360,7 @@ paths:
       x-speakeasy-name-override: "aggregate"
       x-cli-group: "traces"
       x-cli-name: "aggregate"
+      x-cli-help-section: "Observability"
       x-cli-list-fields:
         - "group"
         - "metrics"
@@ -65252,6 +65390,7 @@ paths:
       x-speakeasy-name-override: "list_facets"
       x-cli-group: "traces"
       x-cli-name: "listFacets"
+      x-cli-help-section: "Observability"
       security:
         - ApiKey: []
   /v3/traces/facets/{field}:
@@ -65314,6 +65453,7 @@ paths:
       x-speakeasy-name-override: "list_facet_values"
       x-cli-group: "traces"
       x-cli-name: "listFacetValues"
+      x-cli-help-section: "Observability"
       security:
         - ApiKey: []
   /v3/traces/fields:
@@ -65346,6 +65486,7 @@ paths:
       x-speakeasy-name-override: "list_fields"
       x-cli-group: "traces"
       x-cli-name: "listFields"
+      x-cli-help-section: "Observability"
       security:
         - ApiKey: []
   /v3/traces/filters:
@@ -65378,6 +65519,7 @@ paths:
       x-speakeasy-name-override: "list_filters"
       x-cli-group: "traces"
       x-cli-name: "listFilters"
+      x-cli-help-section: "Observability"
       security:
         - ApiKey: []
   /v3/traces/query:
@@ -65410,6 +65552,7 @@ paths:
       x-speakeasy-name-override: "query"
       x-cli-group: "traces"
       x-cli-name: "queryOql"
+      x-cli-help-section: "Observability"
       security:
         - ApiKey: []
   /v3/traces/search:
@@ -65442,6 +65585,7 @@ paths:
       x-speakeasy-name-override: "search"
       x-cli-group: "traces"
       x-cli-name: "search"
+      x-cli-help-section: "Observability"
       x-cli-list-fields:
         - "trace_id"
         - "name"
@@ -65492,6 +65636,7 @@ paths:
       x-speakeasy-name-override: "get"
       x-cli-group: "traces"
       x-cli-name: "get"
+      x-cli-help-section: "Observability"
       security:
         - ApiKey: []
   /v3/traces/{trace_id}/conversation:
@@ -65535,6 +65680,7 @@ paths:
       x-speakeasy-name-override: "get_conversation"
       x-cli-group: "traces"
       x-cli-name: "getConversation"
+      x-cli-help-section: "Observability"
       x-code-samples:
         - lang: "typescript"
           label: "Node.js"
@@ -65585,6 +65731,7 @@ paths:
       x-speakeasy-name-override: "list_spans"
       x-cli-group: "traces"
       x-cli-name: "listSpans"
+      x-cli-help-section: "Observability"
       x-cli-list-fields:
         - "span_id"
         - "name"
@@ -65642,6 +65789,7 @@ paths:
       x-speakeasy-name-override: "get_span"
       x-cli-group: "traces"
       x-cli-name: "getSpan"
+      x-cli-help-section: "Observability"
       security:
         - ApiKey: []
   /v3/views:
@@ -65685,6 +65833,7 @@ paths:
       x-speakeasy-name-override: "list"
       x-cli-group: "views"
       x-cli-name: "list"
+      x-cli-help-section: "Observability"
       x-code-samples:
         - lang: "typescript"
           label: "Node.js"
@@ -65719,6 +65868,7 @@ paths:
       x-speakeasy-name-override: "create"
       x-cli-group: "views"
       x-cli-name: "create"
+      x-cli-help-section: "Observability"
       x-code-samples:
         - lang: "typescript"
           label: "Node.js"
@@ -65754,6 +65904,7 @@ paths:
       x-speakeasy-name-override: "get"
       x-cli-group: "views"
       x-cli-name: "get"
+      x-cli-help-section: "Observability"
       x-code-samples:
         - lang: "typescript"
           label: "Node.js"
@@ -65788,6 +65939,7 @@ paths:
       x-speakeasy-name-override: "delete"
       x-cli-group: "views"
       x-cli-name: "delete"
+      x-cli-help-section: "Observability"
       x-code-samples:
         - lang: "typescript"
           label: "Node.js"
@@ -65828,6 +65980,7 @@ paths:
       x-speakeasy-name-override: "update"
       x-cli-group: "views"
       x-cli-name: "update"
+      x-cli-help-section: "Observability"
       x-code-samples:
         - lang: "typescript"
           label: "Node.js"
@@ -65884,6 +66037,7 @@ paths:
       x-speakeasy-name-override: "list"
       x-cli-group: "datasets"
       x-cli-name: "list"
+      x-cli-help-section: "Optimization"
       x-code-samples:
         - lang: "curl"
           label: "Core - List datasets"
@@ -65925,6 +66079,7 @@ paths:
       x-speakeasy-name-override: "create"
       x-cli-group: "datasets"
       x-cli-name: "create"
+      x-cli-help-section: "Optimization"
       x-code-samples:
         - lang: "curl"
           label: "Core - Create dataset"
@@ -65973,6 +66128,7 @@ paths:
       x-speakeasy-name-override: "retrieve"
       x-cli-group: "datasets"
       x-cli-name: "retrieve"
+      x-cli-help-section: "Optimization"
       x-code-samples:
         - lang: "curl"
           label: "Core - Retrieve dataset"
@@ -66010,6 +66166,7 @@ paths:
       x-speakeasy-name-override: "delete"
       x-cli-group: "datasets"
       x-cli-name: "delete"
+      x-cli-help-section: "Optimization"
       x-code-samples:
         - lang: "curl"
           label: "Core - Delete dataset"
@@ -66051,6 +66208,7 @@ paths:
       x-speakeasy-name-override: "update"
       x-cli-group: "datasets"
       x-cli-name: "update"
+      x-cli-help-section: "Optimization"
       x-code-samples:
         - lang: "curl"
           label: "Core - Update dataset"
@@ -66083,6 +66241,7 @@ paths:
       x-speakeasy-name-override: "clear"
       x-cli-group: "datasets"
       x-cli-name: "clear"
+      x-cli-help-section: "Optimization"
       x-code-samples:
         - lang: "curl"
           label: "Core - Clear dataset"
@@ -66138,6 +66297,7 @@ paths:
       x-speakeasy-name-override: "listDatapoints"
       x-cli-group: "datasets"
       x-cli-name: "listDatapoints"
+      x-cli-help-section: "Optimization"
       x-code-samples:
         - lang: "curl"
           label: "Core - List datapoints"
@@ -66185,6 +66345,7 @@ paths:
       x-speakeasy-name-override: "createDatapoint"
       x-cli-group: "datasets"
       x-cli-name: "createDatapoint"
+      x-cli-help-section: "Optimization"
       x-code-samples:
         - lang: "curl"
           label: "Core - Create datapoints"
@@ -66223,6 +66384,7 @@ paths:
       x-speakeasy-name-override: "deleteDatapoints"
       x-cli-group: "datasets"
       x-cli-name: "deleteDatapoints"
+      x-cli-help-section: "Optimization"
       x-code-samples:
         - lang: "curl"
           label: "Core - Delete datapoints"
@@ -66273,6 +66435,7 @@ paths:
       x-speakeasy-name-override: "createDatapoints"
       x-cli-group: "datasets"
       x-cli-name: "createDatapoints"
+      x-cli-help-section: "Optimization"
       x-code-samples:
         - lang: "curl"
           label: "Core - Bulk create datapoints"
@@ -66326,6 +66489,7 @@ paths:
       x-speakeasy-name-override: "retrieveDatapoint"
       x-cli-group: "datasets"
       x-cli-name: "retrieveDatapoint"
+      x-cli-help-section: "Optimization"
       x-code-samples:
         - lang: "curl"
           label: "Core - Retrieve datapoint"
@@ -66362,6 +66526,7 @@ paths:
       x-speakeasy-name-override: "deleteDatapoint"
       x-cli-group: "datasets"
       x-cli-name: "deleteDatapoint"
+      x-cli-help-section: "Optimization"
       x-code-samples:
         - lang: "curl"
           label: "Core - Delete datapoint"
@@ -66408,6 +66573,7 @@ paths:
       x-speakeasy-name-override: "updateDatapoint"
       x-cli-group: "datasets"
       x-cli-name: "updateDatapoint"
+      x-cli-help-section: "Optimization"
       x-code-samples:
         - lang: "curl"
           label: "Core - Update datapoint"
@@ -66460,6 +66626,7 @@ paths:
       x-speakeasy-name-override: "list"
       x-cli-group: "experiments"
       x-cli-name: "list"
+      x-cli-help-section: "Optimization"
       x-code-samples:
         - lang: "curl"
           label: "Core - List experiments"
@@ -66501,6 +66668,7 @@ paths:
       x-speakeasy-name-override: "create"
       x-cli-group: "experiments"
       x-cli-name: "create"
+      x-cli-help-section: "Optimization"
       x-code-samples:
         - lang: "curl"
           label: "Core - Create an experiment"
@@ -66544,6 +66712,7 @@ paths:
       x-speakeasy-name-override: "get"
       x-cli-group: "experiments"
       x-cli-name: "get"
+      x-cli-help-section: "Optimization"
       x-code-samples:
         - lang: "curl"
           label: "Core - Get an experiment"
@@ -66582,6 +66751,7 @@ paths:
       x-speakeasy-name-override: "delete"
       x-cli-group: "experiments"
       x-cli-name: "delete"
+      x-cli-help-section: "Optimization"
       x-code-samples:
         - lang: "curl"
           label: "Core - Delete an experiment"
@@ -66630,6 +66800,7 @@ paths:
       x-speakeasy-name-override: "update"
       x-cli-group: "experiments"
       x-cli-name: "update"
+      x-cli-help-section: "Optimization"
       x-code-samples:
         - lang: "curl"
           label: "Core - Rename an experiment"
@@ -66694,6 +66865,7 @@ paths:
       x-speakeasy-name-override: "listRuns"
       x-cli-group: "experiments"
       x-cli-name: "listRuns"
+      x-cli-help-section: "Optimization"
       x-code-samples:
         - lang: "curl"
           label: "Core - List runs"
@@ -66742,6 +66914,7 @@ paths:
       x-speakeasy-name-override: "createRun"
       x-cli-group: "experiments"
       x-cli-name: "createRun"
+      x-cli-help-section: "Optimization"
       x-code-samples:
         - lang: "curl"
           label: "Core - Create a run"
@@ -66791,6 +66964,7 @@ paths:
       x-speakeasy-name-override: "getRun"
       x-cli-group: "experiments"
       x-cli-name: "getRun"
+      x-cli-help-section: "Optimization"
       x-code-samples:
         - lang: "curl"
           label: "Core - Get a run"
@@ -66835,6 +67009,7 @@ paths:
       x-speakeasy-name-override: "deleteRun"
       x-cli-group: "experiments"
       x-cli-name: "deleteRun"
+      x-cli-help-section: "Optimization"
       security:
         - ApiKey: []
     patch:
@@ -66879,6 +67054,7 @@ paths:
       x-speakeasy-name-override: "updateRun"
       x-cli-group: "experiments"
       x-cli-name: "updateRun"
+      x-cli-help-section: "Optimization"
       security:
         - ApiKey: []
   /v3/experiments/{experiment_id}/runs/{run_id}/annotations:
@@ -66918,6 +67094,7 @@ paths:
       x-speakeasy-name-override: "listAnnotations"
       x-cli-group: "experiments"
       x-cli-name: "listAnnotations"
+      x-cli-help-section: "Optimization"
       security:
         - ApiKey: []
     post:
@@ -66962,6 +67139,7 @@ paths:
       x-speakeasy-name-override: "createAnnotation"
       x-cli-group: "experiments"
       x-cli-name: "createAnnotation"
+      x-cli-help-section: "Optimization"
       security:
         - ApiKey: []
   /v3/experiments/{experiment_id}/runs/{run_id}/annotations/{annotation_column_id}:
@@ -67003,6 +67181,7 @@ paths:
       x-speakeasy-name-override: "deleteAnnotation"
       x-cli-group: "experiments"
       x-cli-name: "deleteAnnotation"
+      x-cli-help-section: "Optimization"
       security:
         - ApiKey: []
     patch:
@@ -67053,6 +67232,7 @@ paths:
       x-speakeasy-name-override: "updateAnnotation"
       x-cli-group: "experiments"
       x-cli-name: "updateAnnotation"
+      x-cli-help-section: "Optimization"
       security:
         - ApiKey: []
   /v3/experiments/{experiment_id}/runs/{run_id}/annotations/{annotation_column_id}/cells/{datapoint_id}:
@@ -67110,6 +67290,7 @@ paths:
       x-speakeasy-name-override: "patchAnnotationCell"
       x-cli-group: "experiments"
       x-cli-name: "patchAnnotationCell"
+      x-cli-help-section: "Optimization"
       x-code-samples:
         - lang: "curl"
           label: "Core - Set an annotation cell"
@@ -67159,6 +67340,7 @@ paths:
       x-speakeasy-name-override: "cancelRun"
       x-cli-group: "experiments"
       x-cli-name: "cancelRun"
+      x-cli-help-section: "Optimization"
       x-code-samples:
         - lang: "curl"
           label: "Core - Cancel a run"
@@ -67214,6 +67396,7 @@ paths:
       x-speakeasy-name-override: "updateRunColumnLayout"
       x-cli-group: "experiments"
       x-cli-name: "updateRunColumnLayout"
+      x-cli-help-section: "Optimization"
       x-code-samples:
         - lang: "curl"
           label: "Core - Reorder and resize columns"
@@ -67263,6 +67446,7 @@ paths:
       x-speakeasy-name-override: "listEvals"
       x-cli-group: "experiments"
       x-cli-name: "listEvals"
+      x-cli-help-section: "Optimization"
       security:
         - ApiKey: []
     post:
@@ -67307,6 +67491,7 @@ paths:
       x-speakeasy-name-override: "createEval"
       x-cli-group: "experiments"
       x-cli-name: "createEval"
+      x-cli-help-section: "Optimization"
       x-code-samples:
         - lang: "curl"
           label: "Core - Add an evaluator column"
@@ -67358,6 +67543,7 @@ paths:
       x-speakeasy-name-override: "deleteEval"
       x-cli-group: "experiments"
       x-cli-name: "deleteEval"
+      x-cli-help-section: "Optimization"
       security:
         - ApiKey: []
   /v3/experiments/{experiment_id}/runs/{run_id}/execute:
@@ -67403,6 +67589,7 @@ paths:
       x-speakeasy-name-override: "executeRun"
       x-cli-group: "experiments"
       x-cli-name: "executeRun"
+      x-cli-help-section: "Optimization"
       x-code-samples:
         - lang: "curl"
           label: "Core - Execute a run"
@@ -67457,6 +67644,7 @@ paths:
       x-speakeasy-name-override: "getRunMetrics"
       x-cli-group: "experiments"
       x-cli-name: "getRunMetrics"
+      x-cli-help-section: "Optimization"
       x-code-samples:
         - lang: "curl"
           label: "Core - Get run metrics"
@@ -67512,6 +67700,7 @@ paths:
       x-speakeasy-name-override: "queryRun"
       x-cli-group: "experiments"
       x-cli-name: "queryRun"
+      x-cli-help-section: "Optimization"
       x-code-samples:
         - lang: "curl"
           label: "Core - Query run cells"
@@ -67563,6 +67752,7 @@ paths:
       x-speakeasy-name-override: "deleteRows"
       x-cli-group: "experiments"
       x-cli-name: "deleteRows"
+      x-cli-help-section: "Optimization"
       x-code-samples:
         - lang: "curl"
           label: "Core - Delete rows"
@@ -67624,6 +67814,7 @@ paths:
       x-speakeasy-name-override: "duplicateRow"
       x-cli-group: "experiments"
       x-cli-name: "duplicateRow"
+      x-cli-help-section: "Optimization"
       x-code-samples:
         - lang: "curl"
           label: "Core - Duplicate a row"
@@ -67673,6 +67864,7 @@ paths:
       x-speakeasy-name-override: "listTasks"
       x-cli-group: "experiments"
       x-cli-name: "listTasks"
+      x-cli-help-section: "Optimization"
       security:
         - ApiKey: []
     post:
@@ -67717,6 +67909,7 @@ paths:
       x-speakeasy-name-override: "createTask"
       x-cli-group: "experiments"
       x-cli-name: "createTask"
+      x-cli-help-section: "Optimization"
       x-code-samples:
         - lang: "curl"
           label: "Core - Add a prompt task column"
@@ -67768,6 +67961,7 @@ paths:
       x-speakeasy-name-override: "deleteTask"
       x-cli-group: "experiments"
       x-cli-name: "deleteTask"
+      x-cli-help-section: "Optimization"
       security:
         - ApiKey: []
     patch:
@@ -67818,6 +68012,7 @@ paths:
       x-speakeasy-name-override: "updateTask"
       x-cli-group: "experiments"
       x-cli-name: "updateTask"
+      x-cli-help-section: "Optimization"
       security:
         - ApiKey: []
   /v3/experiments/{experiment_id}/runs/{run_id}/export:
@@ -67877,6 +68072,7 @@ paths:
       x-speakeasy-name-override: "exportRun"
       x-cli-group: "experiments"
       x-cli-name: "exportRun"
+      x-cli-help-section: "Optimization"
       security:
         - ApiKey: []
   /v2/models:
@@ -67900,6 +68096,7 @@ paths:
       tags:
         - "Models"
       x-cli-group: "models"
+      x-cli-help-section: "AI Gateway"
       x-cli-list-fields:
         - "refId"
         - "model_type"
@@ -68107,6 +68304,7 @@ paths:
       tags:
         - "Models"
       x-cli-group: "models"
+      x-cli-help-section: "AI Gateway"
       x-cli-name: "create"
       x-code-samples:
         - label: "Node.js"
@@ -68336,6 +68534,7 @@ paths:
       tags:
         - "Models"
       x-cli-group: "models"
+      x-cli-help-section: "AI Gateway"
       x-cli-name: "createAwsBedrock"
       x-code-samples:
         - label: "Node.js"
@@ -68391,6 +68590,7 @@ paths:
       tags:
         - "Models"
       x-cli-group: "models"
+      x-cli-help-section: "AI Gateway"
       x-cli-name: "validateAwsBedrock"
       x-code-samples:
         - label: "Node.js"
@@ -68605,6 +68805,7 @@ paths:
       tags:
         - "Models"
       x-cli-group: "models"
+      x-cli-help-section: "AI Gateway"
       x-cli-name: "updateAwsBedrock"
       x-code-samples:
         - label: "Node.js"
@@ -68669,6 +68870,7 @@ paths:
       tags:
         - "Models"
       x-cli-group: "models"
+      x-cli-help-section: "AI Gateway"
       x-cli-name: "azureFoundryDeployments"
       x-code-samples:
         - label: "Node.js"
@@ -68713,6 +68915,7 @@ paths:
       tags:
         - "Models"
       x-cli-group: "models"
+      x-cli-help-section: "AI Gateway"
       x-cli-name: "importLitellm"
       x-code-samples:
         - label: "Node.js"
@@ -68748,6 +68951,7 @@ paths:
       tags:
         - "Models"
       x-cli-group: "models"
+      x-cli-help-section: "AI Gateway"
       x-cli-name: "listLitellm"
       x-code-samples:
         - label: "Node.js"
@@ -68953,6 +69157,7 @@ paths:
       tags:
         - "Models"
       x-cli-group: "models"
+      x-cli-help-section: "AI Gateway"
       x-cli-name: "createOpenaiLike"
       x-code-samples:
         - label: "Node.js"
@@ -69156,6 +69361,7 @@ paths:
       tags:
         - "Models"
       x-cli-group: "models"
+      x-cli-help-section: "AI Gateway"
       x-cli-name: "updateOpenaiLike"
       x-code-samples:
         - label: "Node.js"
@@ -69210,6 +69416,7 @@ paths:
       tags:
         - "Models"
       x-cli-group: "models"
+      x-cli-help-section: "AI Gateway"
       x-cli-name: "validate"
       x-code-samples:
         - label: "Node.js"
@@ -69370,6 +69577,7 @@ paths:
       tags:
         - "Models"
       x-cli-group: "models"
+      x-cli-help-section: "AI Gateway"
       x-cli-name: "createVertex"
       x-code-samples:
         - label: "Node.js"
@@ -69400,6 +69608,7 @@ paths:
       tags:
         - "Models"
       x-cli-group: "models"
+      x-cli-help-section: "AI Gateway"
       x-cli-name: "delete"
       x-code-samples:
         - label: "Node.js"
@@ -69574,6 +69783,7 @@ paths:
       tags:
         - "Models"
       x-cli-group: "models"
+      x-cli-help-section: "AI Gateway"
       x-cli-name: "update"
       x-code-samples:
         - label: "Node.js"
@@ -69612,6 +69822,7 @@ paths:
       tags:
         - "Models"
       x-cli-group: "models"
+      x-cli-help-section: "AI Gateway"
       x-cli-name: "enable"
       x-code-samples:
         - label: "Node.js"
@@ -69644,6 +69855,7 @@ paths:
       tags:
         - "Models"
       x-cli-group: "models"
+      x-cli-help-section: "AI Gateway"
       x-cli-name: "disable"
       x-code-samples:
         - label: "Node.js"
@@ -69689,6 +69901,7 @@ paths:
                 $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "agents.external"
       x-speakeasy-name-override: "list"
+      x-cli-help-section: "Managed agents"
       x-code-samples:
         - lang: "curl"
           label: "Core - List external agents"
@@ -69728,6 +69941,7 @@ paths:
                 $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "agents.external"
       x-speakeasy-name-override: "create"
+      x-cli-help-section: "Managed agents"
       x-code-samples:
         - lang: "curl"
           label: "Core - Create external agent"
@@ -69768,6 +69982,7 @@ paths:
                 $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "agents.external"
       x-speakeasy-name-override: "retrieve"
+      x-cli-help-section: "Managed agents"
       x-code-samples:
         - lang: "curl"
           label: "Core - Retrieve external agent"
@@ -69807,6 +70022,7 @@ paths:
                 $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "agents.external"
       x-speakeasy-name-override: "delete"
+      x-cli-help-section: "Managed agents"
       x-code-samples:
         - lang: "curl"
           label: "Core - Delete external agent"
@@ -69852,6 +70068,7 @@ paths:
                 $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "agents.external"
       x-speakeasy-name-override: "update"
+      x-cli-help-section: "Managed agents"
       x-code-samples:
         - lang: "curl"
           label: "Core - Update external agent"
@@ -69898,6 +70115,7 @@ paths:
                 $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "agents.external"
       x-speakeasy-name-override: "refreshCard"
+      x-cli-help-section: "Managed agents"
       x-code-samples:
         - lang: "curl"
           label: "Core - Refresh external agent card"
@@ -69944,6 +70162,7 @@ paths:
                 $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "agents.external"
       x-speakeasy-name-override: "testConnection"
+      x-cli-help-section: "Managed agents"
       x-code-samples:
         - lang: "curl"
           label: "Core - Test external agent connection"
@@ -70007,6 +70226,7 @@ paths:
       x-speakeasy-name-override: "list"
       x-cli-group: "alerts"
       x-cli-name: "list"
+      x-cli-help-section: "Observability"
       security:
         - ApiKey: []
     post:
@@ -70044,6 +70264,7 @@ paths:
       x-speakeasy-name-override: "create"
       x-cli-group: "alerts"
       x-cli-name: "create"
+      x-cli-help-section: "Observability"
       security:
         - ApiKey: []
   /v2/alerts/{alert_id}:
@@ -70083,6 +70304,7 @@ paths:
       x-speakeasy-name-override: "get"
       x-cli-group: "alerts"
       x-cli-name: "get"
+      x-cli-help-section: "Observability"
       security:
         - ApiKey: []
     delete:
@@ -70115,6 +70337,7 @@ paths:
       x-speakeasy-name-override: "delete"
       x-cli-group: "alerts"
       x-cli-name: "delete"
+      x-cli-help-section: "Observability"
       security:
         - ApiKey: []
     patch:
@@ -70153,6 +70376,7 @@ paths:
       x-speakeasy-name-override: "update"
       x-cli-group: "alerts"
       x-cli-name: "update"
+      x-cli-help-section: "Observability"
       security:
         - ApiKey: []
   /v2/alerts/{alert_id}/triggers:
@@ -70208,6 +70432,7 @@ paths:
       x-speakeasy-name-override: "listTriggers"
       x-cli-group: "alerts"
       x-cli-name: "listTriggers"
+      x-cli-help-section: "Observability"
       security:
         - ApiKey: []
   /v2/alerts/{alert_id}/triggers/{trigger_id}/events:
@@ -70269,6 +70494,7 @@ paths:
       x-speakeasy-name-override: "listTriggerEvents"
       x-cli-group: "alerts"
       x-cli-name: "listTriggerEvents"
+      x-cli-help-section: "Observability"
       security:
         - ApiKey: []
   /v2/annotation-queues:
@@ -70322,6 +70548,7 @@ paths:
       x-speakeasy-name-override: "list"
       x-cli-group: "annotation-queues"
       x-cli-name: "list"
+      x-cli-help-section: "Optimization"
       x-code-samples:
         - lang: "curl"
           label: "Core - List annotation queues"
@@ -70363,6 +70590,7 @@ paths:
       x-speakeasy-name-override: "create"
       x-cli-group: "annotation-queues"
       x-cli-name: "create"
+      x-cli-help-section: "Optimization"
       x-code-samples:
         - lang: "curl"
           label: "Core - Create an annotation queue"
@@ -70411,6 +70639,7 @@ paths:
       x-speakeasy-name-override: "retrieve"
       x-cli-group: "annotation-queues"
       x-cli-name: "get"
+      x-cli-help-section: "Optimization"
       x-code-samples:
         - lang: "curl"
           label: "Core - Retrieve an annotation queue"
@@ -70448,6 +70677,7 @@ paths:
       x-speakeasy-name-override: "delete"
       x-cli-group: "annotation-queues"
       x-cli-name: "delete"
+      x-cli-help-section: "Optimization"
       x-code-samples:
         - lang: "curl"
           label: "Core - Delete an annotation queue"
@@ -70495,6 +70725,7 @@ paths:
       x-speakeasy-name-override: "update"
       x-cli-group: "annotation-queues"
       x-cli-name: "update"
+      x-cli-help-section: "Optimization"
       x-code-samples:
         - lang: "curl"
           label: "Core - Update an annotation queue"
@@ -70533,6 +70764,7 @@ paths:
       x-speakeasy-name-override: "clear"
       x-cli-group: "annotation-queues"
       x-cli-name: "clear"
+      x-cli-help-section: "Optimization"
       x-code-samples:
         - lang: "curl"
           label: "Core - Remove all items from a queue"
@@ -70591,6 +70823,7 @@ paths:
       x-speakeasy-name-override: "listItems"
       x-cli-group: "annotation-queues"
       x-cli-name: "queryItems"
+      x-cli-help-section: "Optimization"
       x-code-samples:
         - lang: "curl"
           label: "Core - List items in a queue"
@@ -70640,6 +70873,7 @@ paths:
       x-speakeasy-name-override: "addItems"
       x-cli-group: "annotation-queues"
       x-cli-name: "addItems"
+      x-cli-help-section: "Optimization"
       x-code-samples:
         - lang: "curl"
           label: "Core - Add span items to a queue"
@@ -70684,6 +70918,7 @@ paths:
       x-speakeasy-name-override: "removeItems"
       x-cli-group: "annotation-queues"
       x-cli-name: "removeItems"
+      x-cli-help-section: "Optimization"
       x-code-samples:
         - lang: "curl"
           label: "Core - Remove span items from a queue"
@@ -70737,6 +70972,7 @@ paths:
       x-speakeasy-name-override: "retrieveItem"
       x-cli-group: "annotation-queues"
       x-cli-name: "getItem"
+      x-cli-help-section: "Optimization"
       x-code-samples:
         - lang: "curl"
           label: "Core - Retrieve a queue item"
@@ -70785,6 +71021,8 @@ paths:
                 $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "auditLogDestinations"
       x-speakeasy-name-override: "list"
+      x-cli-help-section: "Administration"
+      x-cli-hidden: true
       x-code-samples:
         - lang: "curl"
           label: "Core - List audit log destinations"
@@ -70824,6 +71062,8 @@ paths:
                 $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "auditLogDestinations"
       x-speakeasy-name-override: "create"
+      x-cli-help-section: "Administration"
+      x-cli-hidden: true
       x-code-samples:
         - lang: "curl"
           label: "Core - Create an audit log destination"
@@ -70864,6 +71104,8 @@ paths:
                 $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "auditLogDestinations"
       x-speakeasy-name-override: "get"
+      x-cli-help-section: "Administration"
+      x-cli-hidden: true
       x-code-samples:
         - lang: "curl"
           label: "Core - Retrieve an audit log destination"
@@ -70903,6 +71145,8 @@ paths:
                 $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "auditLogDestinations"
       x-speakeasy-name-override: "delete"
+      x-cli-help-section: "Administration"
+      x-cli-hidden: true
       x-code-samples:
         - lang: "curl"
           label: "Core - Delete an audit log destination"
@@ -70948,6 +71192,8 @@ paths:
                 $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "auditLogDestinations"
       x-speakeasy-name-override: "update"
+      x-cli-help-section: "Administration"
+      x-cli-hidden: true
       x-code-samples:
         - lang: "curl"
           label: "Core - Pause an audit log destination"
@@ -71007,6 +71253,8 @@ paths:
                 $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "auditLogDestinations"
       x-speakeasy-name-override: "listDeliveries"
+      x-cli-help-section: "Administration"
+      x-cli-hidden: true
       x-code-samples:
         - lang: "curl"
           label: "Core - List failed deliveries"
@@ -71053,6 +71301,8 @@ paths:
                 $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "auditLogDestinations"
       x-speakeasy-name-override: "replay"
+      x-cli-help-section: "Administration"
+      x-cli-hidden: true
       x-code-samples:
         - lang: "curl"
           label: "Core - Replay a day of events"
@@ -71093,6 +71343,8 @@ paths:
                 $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "auditLogDestinations"
       x-speakeasy-name-override: "rotateSecret"
+      x-cli-help-section: "Administration"
+      x-cli-hidden: true
       x-code-samples:
         - lang: "curl"
           label: "Core - Rotate the signing secret"
@@ -71133,6 +71385,8 @@ paths:
                 $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "auditLogDestinations"
       x-speakeasy-name-override: "test"
+      x-cli-help-section: "Administration"
+      x-cli-hidden: true
       x-code-samples:
         - lang: "curl"
           label: "Core - Send a test event"
@@ -71220,6 +71474,7 @@ paths:
       x-speakeasy-name-override: "list"
       x-cli-group: "budgets"
       x-cli-name: "list"
+      x-cli-help-section: "AI Gateway"
       security:
         - ApiKey: []
     post:
@@ -71251,6 +71506,7 @@ paths:
       x-speakeasy-name-override: "create"
       x-cli-group: "budgets"
       x-cli-name: "create"
+      x-cli-help-section: "AI Gateway"
       x-code-samples:
         - lang: "curl"
           label: "cURL"
@@ -71297,6 +71553,7 @@ paths:
       x-speakeasy-name-override: "get"
       x-cli-group: "budgets"
       x-cli-name: "get"
+      x-cli-help-section: "AI Gateway"
       security:
         - ApiKey: []
     delete:
@@ -71329,6 +71586,7 @@ paths:
       x-speakeasy-name-override: "delete"
       x-cli-group: "budgets"
       x-cli-name: "delete"
+      x-cli-help-section: "AI Gateway"
       security:
         - ApiKey: []
     patch:
@@ -71367,6 +71625,7 @@ paths:
       x-speakeasy-name-override: "update"
       x-cli-group: "budgets"
       x-cli-name: "update"
+      x-cli-help-section: "AI Gateway"
       security:
         - ApiKey: []
   /v2/budgets/{budget_id}/reset-consumption:
@@ -71406,6 +71665,7 @@ paths:
       x-speakeasy-name-override: "resetConsumption"
       x-cli-group: "budgets"
       x-cli-name: "resetConsumption"
+      x-cli-help-section: "AI Gateway"
       security:
         - ApiKey: []
   /v3/environments:
@@ -71454,6 +71714,7 @@ paths:
       x-speakeasy-name-override: "list"
       x-cli-group: "environments"
       x-cli-name: "list"
+      x-cli-help-section: "Administration"
       x-code-samples:
         - lang: "curl"
           label: "Core - List project environments"
@@ -71495,6 +71756,7 @@ paths:
       x-speakeasy-name-override: "create"
       x-cli-group: "environments"
       x-cli-name: "create"
+      x-cli-help-section: "Administration"
       x-code-samples:
         - lang: "curl"
           label: "Core - Create a project environment"
@@ -71537,6 +71799,7 @@ paths:
       x-speakeasy-name-override: "get"
       x-cli-group: "environments"
       x-cli-name: "get"
+      x-cli-help-section: "Administration"
       x-code-samples:
         - lang: "curl"
           label: "Core - Retrieve an environment"
@@ -71578,6 +71841,7 @@ paths:
       x-speakeasy-name-override: "delete"
       x-cli-group: "environments"
       x-cli-name: "delete"
+      x-cli-help-section: "Administration"
       x-code-samples:
         - lang: "curl"
           label: "Core - Delete an environment"
@@ -71625,6 +71889,7 @@ paths:
       x-speakeasy-name-override: "update"
       x-cli-group: "environments"
       x-cli-name: "update"
+      x-cli-help-section: "Administration"
       x-code-samples:
         - lang: "curl"
           label: "Core - Update an environment"
@@ -71666,6 +71931,7 @@ paths:
       x-speakeasy-name-override: "submit"
       x-cli-group: "feedback"
       x-cli-name: "submit"
+      x-cli-help-section: "Observability"
       x-code-samples:
         - lang: "TypeScript"
           source: "import { Orq } from '@orq-ai/node';\nconst orq = new Orq({ apiKey: process.env.ORQ_API_KEY });\nawait orq.feedback.submit({ category: 'bug', message: 'The MCP tool returned an unexpected error.', requestId: 'req_example' });\n"
@@ -71726,6 +71992,7 @@ paths:
       x-speakeasy-name-override: "list"
       x-cli-group: "files"
       x-cli-name: "list"
+      x-cli-help-section: "Administration"
       x-code-samples:
         - lang: "curl"
           label: "Core - List project files"
@@ -71767,6 +72034,7 @@ paths:
       x-speakeasy-name-override: "create"
       x-cli-group: "files"
       x-cli-name: "upload"
+      x-cli-help-section: "Administration"
       x-code-samples:
         - lang: "curl"
           label: "Core - Upload retrieval file"
@@ -71816,6 +72084,7 @@ paths:
       x-speakeasy-name-override: "getContent"
       x-cli-group: "files"
       x-cli-name: "content"
+      x-cli-help-section: "Administration"
       x-code-samples:
         - lang: "curl"
           label: "Core - Get download URL"
@@ -71865,6 +72134,7 @@ paths:
       x-speakeasy-name-override: "get"
       x-cli-group: "files"
       x-cli-name: "get"
+      x-cli-help-section: "Administration"
       x-code-samples:
         - lang: "curl"
           label: "Core - Retrieve file metadata"
@@ -71907,6 +72177,7 @@ paths:
       x-speakeasy-name-override: "delete"
       x-cli-group: "files"
       x-cli-name: "delete"
+      x-cli-help-section: "Administration"
       x-code-samples:
         - lang: "curl"
           label: "Core - Delete file"
@@ -71955,6 +72226,7 @@ paths:
       x-speakeasy-name-override: "update"
       x-cli-group: "files"
       x-cli-name: "update"
+      x-cli-help-section: "Administration"
       x-code-samples:
         - lang: "curl"
           label: "Core - Rename file"
@@ -72028,6 +72300,7 @@ paths:
       x-cli-hidden: true
       x-cli-group: "guardrailRules"
       x-cli-name: "list"
+      x-cli-help-section: "AI Gateway"
       x-code-samples:
         - lang: "curl"
           label: "Core - List guardrail rules"
@@ -72064,6 +72337,7 @@ paths:
       x-cli-hidden: true
       x-cli-group: "guardrailRules"
       x-cli-name: "create"
+      x-cli-help-section: "AI Gateway"
       x-code-samples:
         - lang: "curl"
           label: "Core - Create guardrail rule"
@@ -72106,6 +72380,7 @@ paths:
       x-cli-hidden: true
       x-cli-group: "guardrailRules"
       x-cli-name: "listUsedGuardrails"
+      x-cli-help-section: "AI Gateway"
       x-code-samples:
         - lang: "curl"
           label: "Core - List guardrails used by rules"
@@ -72149,6 +72424,7 @@ paths:
       x-cli-hidden: true
       x-cli-group: "guardrailRules"
       x-cli-name: "retrieve"
+      x-cli-help-section: "AI Gateway"
       x-code-samples:
         - lang: "curl"
           label: "Core - Retrieve guardrail rule"
@@ -72185,6 +72461,7 @@ paths:
       x-cli-hidden: true
       x-cli-group: "guardrailRules"
       x-cli-name: "delete"
+      x-cli-help-section: "AI Gateway"
       x-code-samples:
         - lang: "curl"
           label: "Core - Delete guardrail rule"
@@ -72227,6 +72504,7 @@ paths:
       x-cli-hidden: true
       x-cli-group: "guardrailRules"
       x-cli-name: "update"
+      x-cli-help-section: "AI Gateway"
       x-code-samples:
         - lang: "curl"
           label: "Core - Configure guardrail rule"
@@ -72268,6 +72546,7 @@ paths:
       x-speakeasy-name-override: "search"
       x-cli-group: "hub"
       x-cli-name: "search"
+      x-cli-help-section: "AI Gateway"
       x-code-samples:
         - lang: "curl"
           label: "Core - Search hub items"
@@ -72316,6 +72595,7 @@ paths:
       x-speakeasy-name-override: "get"
       x-cli-group: "hub"
       x-cli-name: "get"
+      x-cli-help-section: "AI Gateway"
       x-code-samples:
         - lang: "curl"
           label: "Core - Retrieve hub item"
@@ -72395,6 +72675,7 @@ paths:
       x-speakeasy-name-override: "list"
       x-cli-group: "identities"
       x-cli-name: "list"
+      x-cli-help-section: "Observability"
       x-code-samples:
         - lang: "curl"
           label: "Core - List identities by tag"
@@ -72441,6 +72722,7 @@ paths:
       x-speakeasy-name-override: "create"
       x-cli-group: "identities"
       x-cli-name: "create"
+      x-cli-help-section: "Observability"
       x-code-samples:
         - lang: "curl"
           label: "Core - Create customer identity"
@@ -72509,6 +72791,7 @@ paths:
       x-speakeasy-name-override: "retrieve"
       x-cli-group: "identities"
       x-cli-name: "retrieve"
+      x-cli-help-section: "Observability"
       x-code-samples:
         - lang: "curl"
           label: "Core - Retrieve identity with metrics"
@@ -72551,6 +72834,7 @@ paths:
       x-speakeasy-name-override: "delete"
       x-cli-group: "identities"
       x-cli-name: "delete"
+      x-cli-help-section: "Observability"
       x-code-samples:
         - lang: "curl"
           label: "Core - Delete identity"
@@ -72599,6 +72883,7 @@ paths:
       x-speakeasy-name-override: "update"
       x-cli-group: "identities"
       x-cli-name: "update"
+      x-cli-help-section: "Observability"
       x-code-samples:
         - lang: "curl"
           label: "Core - Update identity profile"
@@ -72669,6 +72954,7 @@ paths:
       x-speakeasy-name-override: "list"
       x-cli-group: "management-keys"
       x-cli-name: "list"
+      x-cli-help-section: "Administration"
       security:
         - ApiKey: []
     post:
@@ -72700,6 +72986,7 @@ paths:
       x-speakeasy-name-override: "create"
       x-cli-group: "management-keys"
       x-cli-name: "create"
+      x-cli-help-section: "Administration"
       security:
         - ApiKey: []
   /v2/management-keys/capabilities:
@@ -72726,6 +73013,7 @@ paths:
       x-speakeasy-name-override: "listCapabilities"
       x-cli-group: "management-keys"
       x-cli-name: "listCapabilities"
+      x-cli-help-section: "Administration"
       security:
         - ApiKey: []
   /v2/management-keys/{management_key_id}:
@@ -72765,6 +73053,7 @@ paths:
       x-speakeasy-name-override: "get"
       x-cli-group: "management-keys"
       x-cli-name: "get"
+      x-cli-help-section: "Administration"
       security:
         - ApiKey: []
     delete:
@@ -72797,6 +73086,7 @@ paths:
       x-speakeasy-name-override: "delete"
       x-cli-group: "management-keys"
       x-cli-name: "delete"
+      x-cli-help-section: "Administration"
       security:
         - ApiKey: []
     patch:
@@ -72835,6 +73125,7 @@ paths:
       x-speakeasy-name-override: "update"
       x-cli-group: "management-keys"
       x-cli-name: "update"
+      x-cli-help-section: "Administration"
       security:
         - ApiKey: []
   /v2/mcp-gateways:
@@ -72888,6 +73179,7 @@ paths:
       x-speakeasy-name-override: "list"
       x-cli-group: "mcpGateways"
       x-cli-name: "list"
+      x-cli-help-section: "AI Gateway"
       x-code-samples:
         - lang: "curl"
           label: "Core - List MCP gateways"
@@ -72941,6 +73233,7 @@ paths:
       x-speakeasy-name-override: "create"
       x-cli-group: "mcpGateways"
       x-cli-name: "create"
+      x-cli-help-section: "AI Gateway"
       x-code-samples:
         - lang: "curl"
           label: "Core - Create MCP gateway"
@@ -73011,6 +73304,7 @@ paths:
       x-speakeasy-name-override: "listTools"
       x-cli-group: "mcpGateways"
       x-cli-name: "listTools"
+      x-cli-help-section: "AI Gateway"
       x-code-samples:
         - lang: "curl"
           label: "Core - List the tools a gateway exposes"
@@ -73063,6 +73357,7 @@ paths:
       x-speakeasy-name-override: "retrieve"
       x-cli-group: "mcpGateways"
       x-cli-name: "retrieve"
+      x-cli-help-section: "AI Gateway"
       x-code-samples:
         - lang: "curl"
           label: "Core - Retrieve an MCP gateway"
@@ -73105,6 +73400,7 @@ paths:
       x-speakeasy-name-override: "delete"
       x-cli-group: "mcpGateways"
       x-cli-name: "delete"
+      x-cli-help-section: "AI Gateway"
       x-code-samples:
         - lang: "curl"
           label: "Core - Delete an MCP gateway"
@@ -73171,6 +73467,7 @@ paths:
       x-speakeasy-name-override: "update"
       x-cli-group: "mcpGateways"
       x-cli-name: "update"
+      x-cli-help-section: "AI Gateway"
       x-code-samples:
         - lang: "curl"
           label: "Core - Narrow the tools a gateway exposes"
@@ -73234,6 +73531,7 @@ paths:
       x-speakeasy-name-override: "list"
       x-cli-group: "mcpServers"
       x-cli-name: "list"
+      x-cli-help-section: "AI Gateway"
       x-code-samples:
         - lang: "curl"
           label: "Core - List MCP servers"
@@ -73275,6 +73573,7 @@ paths:
       x-speakeasy-name-override: "create"
       x-cli-group: "mcpServers"
       x-cli-name: "create"
+      x-cli-help-section: "AI Gateway"
       x-code-samples:
         - lang: "curl"
           label: "Core - Create MCP server"
@@ -73324,6 +73623,7 @@ paths:
       x-speakeasy-name-override: "retrieve"
       x-cli-group: "mcpServers"
       x-cli-name: "retrieve"
+      x-cli-help-section: "AI Gateway"
       x-code-samples:
         - lang: "curl"
           label: "Core - Retrieve an MCP server"
@@ -73366,6 +73666,7 @@ paths:
       x-speakeasy-name-override: "delete"
       x-cli-group: "mcpServers"
       x-cli-name: "delete"
+      x-cli-help-section: "AI Gateway"
       x-code-samples:
         - lang: "curl"
           label: "Core - Delete an MCP server"
@@ -73432,6 +73733,7 @@ paths:
       x-speakeasy-name-override: "update"
       x-cli-group: "mcpServers"
       x-cli-name: "update"
+      x-cli-help-section: "AI Gateway"
       x-code-samples:
         - lang: "curl"
           label: "Core - Update an MCP server"
@@ -73481,6 +73783,7 @@ paths:
       x-speakeasy-name-override: "testTool"
       x-cli-group: "mcpServers"
       x-cli-name: "testTool"
+      x-cli-help-section: "AI Gateway"
       x-code-samples:
         - lang: "curl"
           label: "Core - Test a single tool"
@@ -73548,6 +73851,7 @@ paths:
       x-speakeasy-name-override: "sync"
       x-cli-group: "mcpServers"
       x-cli-name: "sync"
+      x-cli-help-section: "AI Gateway"
       x-code-samples:
         - lang: "curl"
           label: "Core - Sync the tool catalog"
@@ -73674,6 +73978,7 @@ paths:
       x-speakeasy-name-override: "list"
       x-cli-group: "model-catalog"
       x-cli-name: "list"
+      x-cli-help-section: "AI Gateway"
       x-mint:
         metadata:
           sidebarTitle: "List catalog models"
@@ -73801,6 +74106,7 @@ paths:
       x-speakeasy-name-override: "listOfferings"
       x-cli-group: "model-catalog"
       x-cli-name: "listOfferings"
+      x-cli-help-section: "AI Gateway"
       x-mint:
         metadata:
           sidebarTitle: "List model offerings"
@@ -73840,6 +74146,7 @@ paths:
       x-speakeasy-name-override: "get"
       x-cli-group: "model-catalog"
       x-cli-name: "get"
+      x-cli-help-section: "AI Gateway"
       x-mint:
         metadata:
           sidebarTitle: "Get catalog entry"
@@ -73915,6 +74222,7 @@ paths:
       x-speakeasy-name-override: "list"
       x-cli-group: "model-fusions"
       x-cli-name: "list"
+      x-cli-help-section: "AI Gateway"
       x-code-samples:
         - lang: "curl"
           label: "Core - List Model Fusions"
@@ -73953,6 +74261,7 @@ paths:
       x-speakeasy-name-override: "create"
       x-cli-group: "model-fusions"
       x-cli-name: "create"
+      x-cli-help-section: "AI Gateway"
       x-code-samples:
         - lang: "curl"
           label: "Core - Create a Model Fusion"
@@ -73992,6 +74301,7 @@ paths:
       x-speakeasy-name-override: "get"
       x-cli-group: "model-fusions"
       x-cli-name: "get"
+      x-cli-help-section: "AI Gateway"
       x-code-samples:
         - lang: "curl"
           label: "Core - Retrieve a Model Fusion"
@@ -74036,6 +74346,7 @@ paths:
       x-speakeasy-name-override: "update"
       x-cli-group: "model-fusions"
       x-cli-name: "update"
+      x-cli-help-section: "AI Gateway"
       x-code-samples:
         - lang: "curl"
           label: "Core - Replace a Model Fusion"
@@ -74074,6 +74385,7 @@ paths:
       x-speakeasy-name-override: "delete"
       x-cli-group: "model-fusions"
       x-cli-name: "delete"
+      x-cli-help-section: "AI Gateway"
       x-code-samples:
         - lang: "curl"
           label: "Core - Delete a Model Fusion"
@@ -74119,6 +74431,7 @@ paths:
       x-speakeasy-name-override: "setEnabled"
       x-cli-group: "model-fusions"
       x-cli-name: "setEnabled"
+      x-cli-help-section: "AI Gateway"
       x-code-samples:
         - lang: "curl"
           label: "Core - Enable or disable a Model Fusion"
@@ -74182,6 +74495,7 @@ paths:
                 $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "monitors"
       x-speakeasy-name-override: "list"
+      x-cli-help-section: "Observability"
       x-code-samples:
         - lang: "TypeScript"
           source: "import { Orq } from '@orq-ai/node';\nconst orq = new Orq({ apiKey: process.env.ORQ_API_KEY });\nawait orq.monitors.list({ projectId: 'proj_01J81V5RZPVTDHXBV6M2YVJHRB', limit: 25 });\n"
@@ -74214,6 +74528,7 @@ paths:
                 $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "monitors"
       x-speakeasy-name-override: "create"
+      x-cli-help-section: "Observability"
       x-code-samples:
         - lang: "TypeScript"
           source: "import { Orq } from '@orq-ai/node';\nconst orq = new Orq({ apiKey: process.env.ORQ_API_KEY });\nawait orq.monitors.create({ displayName: 'LLM cost', projectId: 'proj_01J81V5RZPVTDHXBV6M2YVJHRB', defaultRange: '7d', widgets: [{ widgetId: 'cost', type: 'timeseries', title: 'Cost by model', queries: [{ metric: 'genai.cost', groupBy: ['model'] }], layout: { x: 0, y: 0, w: 12, h: 4 } }] });\n"
@@ -74241,6 +74556,7 @@ paths:
                 $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "monitors"
       x-speakeasy-name-override: "listPresets"
+      x-cli-help-section: "Observability"
       x-code-samples:
         - lang: "TypeScript"
           source: "import { Orq } from '@orq-ai/node';\nconst orq = new Orq({ apiKey: process.env.ORQ_API_KEY });\nawait orq.monitors.listPresets();\n"
@@ -74275,6 +74591,7 @@ paths:
                 $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "monitors"
       x-speakeasy-name-override: "get"
+      x-cli-help-section: "Observability"
       x-code-samples:
         - lang: "TypeScript"
           source: "import { Orq } from '@orq-ai/node';\nconst orq = new Orq({ apiKey: process.env.ORQ_API_KEY });\nawait orq.monitors.get({ monitorId: 'monitor_01J81V5RZPVTDHXBV6M2YVJHRA' });\n"
@@ -74308,6 +74625,7 @@ paths:
                 $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "monitors"
       x-speakeasy-name-override: "delete"
+      x-cli-help-section: "Observability"
       x-code-samples:
         - lang: "TypeScript"
           source: "import { Orq } from '@orq-ai/node';\nconst orq = new Orq({ apiKey: process.env.ORQ_API_KEY });\nawait orq.monitors.delete({ monitorId: 'monitor_01J81V5RZPVTDHXBV6M2YVJHRA' });\n"
@@ -74347,6 +74665,7 @@ paths:
                 $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "monitors"
       x-speakeasy-name-override: "update"
+      x-cli-help-section: "Observability"
       x-code-samples:
         - lang: "TypeScript"
           source: "import { Orq } from '@orq-ai/node';\nconst orq = new Orq({ apiKey: process.env.ORQ_API_KEY });\nawait orq.monitors.update({ monitorId: 'monitor_01J81V5RZPVTDHXBV6M2YVJHRA', displayName: 'LLM cost (weekly)', defaultRange: '30d' });\n"
@@ -74410,6 +74729,7 @@ paths:
       x-speakeasy-name-override: "list"
       x-cli-group: "notifiers"
       x-cli-name: "list"
+      x-cli-help-section: "Observability"
       x-code-samples:
         - lang: "curl"
           label: "Core - List notifiers"
@@ -74451,6 +74771,7 @@ paths:
       x-speakeasy-name-override: "create"
       x-cli-group: "notifiers"
       x-cli-name: "create"
+      x-cli-help-section: "Observability"
       x-code-samples:
         - lang: "curl"
           label: "Core - Create email notifier"
@@ -74499,6 +74820,7 @@ paths:
       x-speakeasy-name-override: "get"
       x-cli-group: "notifiers"
       x-cli-name: "get"
+      x-cli-help-section: "Observability"
       x-code-samples:
         - lang: "curl"
           label: "Core - Retrieve notifier"
@@ -74540,6 +74862,7 @@ paths:
       x-speakeasy-name-override: "delete"
       x-cli-group: "notifiers"
       x-cli-name: "delete"
+      x-cli-help-section: "Observability"
       x-code-samples:
         - lang: "curl"
           label: "Core - Delete notifier"
@@ -74587,6 +74910,7 @@ paths:
       x-speakeasy-name-override: "update"
       x-cli-group: "notifiers"
       x-cli-name: "update"
+      x-cli-help-section: "Observability"
       x-code-samples:
         - lang: "curl"
           label: "Core - Update notifier"
@@ -74640,6 +74964,7 @@ paths:
       x-speakeasy-name-override: "list"
       x-cli-group: "projects"
       x-cli-name: "list"
+      x-cli-help-section: "Administration"
       x-code-samples:
         - lang: "curl"
           label: "Core - List projects"
@@ -74681,6 +75006,7 @@ paths:
       x-speakeasy-name-override: "create"
       x-cli-group: "projects"
       x-cli-name: "create"
+      x-cli-help-section: "Administration"
       x-code-samples:
         - lang: "curl"
           label: "Core - Create project"
@@ -74730,6 +75056,7 @@ paths:
       x-speakeasy-name-override: "get"
       x-cli-group: "projects"
       x-cli-name: "get"
+      x-cli-help-section: "Administration"
       x-code-samples:
         - lang: "curl"
           label: "Core - Retrieve project"
@@ -74772,6 +75099,7 @@ paths:
       x-speakeasy-name-override: "delete"
       x-cli-group: "projects"
       x-cli-name: "delete"
+      x-cli-help-section: "Administration"
       x-code-samples:
         - lang: "curl"
           label: "Core - Delete project"
@@ -74820,6 +75148,7 @@ paths:
       x-speakeasy-name-override: "update"
       x-cli-group: "projects"
       x-cli-name: "update"
+      x-cli-help-section: "Administration"
       x-code-samples:
         - lang: "curl"
           label: "Core - Update project"
@@ -74889,6 +75218,7 @@ paths:
       x-cli-hidden: true
       x-cli-group: "routingRules"
       x-cli-name: "list"
+      x-cli-help-section: "AI Gateway"
       x-code-samples:
         - lang: "curl"
           label: "Core - List routing rules"
@@ -74931,6 +75261,7 @@ paths:
       x-cli-hidden: true
       x-cli-group: "routingRules"
       x-cli-name: "create"
+      x-cli-help-section: "AI Gateway"
       x-code-samples:
         - lang: "curl"
           label: "Core - Create routing rule"
@@ -74973,6 +75304,7 @@ paths:
       x-cli-hidden: true
       x-cli-group: "routingRules"
       x-cli-name: "listUsedModels"
+      x-cli-help-section: "AI Gateway"
       x-code-samples:
         - lang: "curl"
           label: "Core - List models used by routing rules"
@@ -75022,6 +75354,7 @@ paths:
       x-cli-hidden: true
       x-cli-group: "routingRules"
       x-cli-name: "retrieve"
+      x-cli-help-section: "AI Gateway"
       x-code-samples:
         - lang: "curl"
           label: "Core - Retrieve routing rule"
@@ -75060,6 +75393,7 @@ paths:
       x-cli-hidden: true
       x-cli-group: "routingRules"
       x-cli-name: "delete"
+      x-cli-help-section: "AI Gateway"
       x-code-samples:
         - lang: "curl"
           label: "Core - Delete routing rule"
@@ -75108,6 +75442,7 @@ paths:
       x-cli-hidden: true
       x-cli-group: "routingRules"
       x-cli-name: "update"
+      x-cli-help-section: "AI Gateway"
       x-code-samples:
         - lang: "curl"
           label: "Core - Configure routing rule"
@@ -75150,6 +75485,7 @@ paths:
       x-speakeasy-name-override: "create"
       x-cli-group: "sessions"
       x-cli-name: "create"
+      x-cli-help-section: "Observability"
       x-code-samples:
         - lang: "curl"
           label: "Core - Create session"
@@ -75192,6 +75528,7 @@ paths:
       x-speakeasy-name-override: "getCount"
       x-cli-group: "sessions"
       x-cli-name: "getCount"
+      x-cli-help-section: "Observability"
       x-code-samples:
         - lang: "curl"
           label: "Core - Count sessions"
@@ -75234,6 +75571,7 @@ paths:
       x-speakeasy-name-override: "list"
       x-cli-group: "sessions"
       x-cli-name: "list"
+      x-cli-help-section: "Observability"
       x-code-samples:
         - lang: "curl"
           label: "Core - List sessions"
@@ -75272,6 +75610,7 @@ paths:
       x-speakeasy-name-override: "listTags"
       x-cli-group: "sessions"
       x-cli-name: "listTags"
+      x-cli-help-section: "Observability"
       x-code-samples:
         - lang: "curl"
           label: "Core - List session tags"
@@ -75320,6 +75659,7 @@ paths:
       x-speakeasy-name-override: "get"
       x-cli-group: "sessions"
       x-cli-name: "get"
+      x-cli-help-section: "Observability"
       x-code-samples:
         - lang: "curl"
           label: "Core - Retrieve session"
@@ -75357,6 +75697,7 @@ paths:
       x-speakeasy-name-override: "delete"
       x-cli-group: "sessions"
       x-cli-name: "delete"
+      x-cli-help-section: "Observability"
       x-code-samples:
         - lang: "curl"
           label: "Core - Delete session"
@@ -75404,6 +75745,7 @@ paths:
       x-speakeasy-name-override: "update"
       x-cli-group: "sessions"
       x-cli-name: "update"
+      x-cli-help-section: "Observability"
       x-code-samples:
         - lang: "curl"
           label: "Core - Update session"
@@ -75467,6 +75809,7 @@ paths:
       x-speakeasy-name-override: "list"
       x-cli-group: "skills"
       x-cli-name: "list"
+      x-cli-help-section: "Managed agents"
       x-code-samples:
         - lang: "curl"
           label: "Core - List skills"
@@ -75508,6 +75851,7 @@ paths:
       x-speakeasy-name-override: "create"
       x-cli-group: "skills"
       x-cli-name: "create"
+      x-cli-help-section: "Managed agents"
       x-code-samples:
         - lang: "curl"
           label: "Core - Create project skill"
@@ -75548,6 +75892,7 @@ paths:
                 $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "skills"
       x-speakeasy-name-override: "importBundle"
+      x-cli-help-section: "Managed agents"
       x-code-samples:
         - lang: "typescript"
           label: "Node.js - ImportBundle"
@@ -75582,6 +75927,7 @@ paths:
                 $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "skills"
       x-speakeasy-name-override: "importFromRepository"
+      x-cli-help-section: "Managed agents"
       x-code-samples:
         - lang: "TypeScript"
           source: "import { Orq } from '@orq-ai/node';\nconst orq = new Orq({ apiKey: process.env.ORQ_API_KEY });\nawait orq.skills.importFromRepository({ connectionId: 'connection-id', repositoryUrl: 'https://github.com/example/skills', ref: 'main', subdirectory: 'skills/review', projectId: 'project-id' });\n"
@@ -75629,6 +75975,7 @@ paths:
       x-speakeasy-name-override: "get"
       x-cli-group: "skills"
       x-cli-name: "get"
+      x-cli-help-section: "Managed agents"
       x-code-samples:
         - lang: "curl"
           label: "Core - Retrieve skill"
@@ -75671,6 +76018,7 @@ paths:
       x-speakeasy-name-override: "delete"
       x-cli-group: "skills"
       x-cli-name: "delete"
+      x-cli-help-section: "Managed agents"
       x-code-samples:
         - lang: "curl"
           label: "Core - Delete skill"
@@ -75719,6 +76067,7 @@ paths:
       x-speakeasy-name-override: "update"
       x-cli-group: "skills"
       x-cli-name: "update"
+      x-cli-help-section: "Managed agents"
       x-code-samples:
         - lang: "curl"
           label: "Core - Update skill instructions"
@@ -75764,6 +76113,7 @@ paths:
                 $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "skills"
       x-speakeasy-name-override: "replaceBundle"
+      x-cli-help-section: "Managed agents"
       x-code-samples:
         - lang: "typescript"
           label: "Node.js - ReplaceBundle"
@@ -75805,6 +76155,7 @@ paths:
                 $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "skills"
       x-speakeasy-name-override: "putFile"
+      x-cli-help-section: "Managed agents"
       x-code-samples:
         - lang: "typescript"
           label: "Node.js - Put a skill file"
@@ -75846,6 +76197,7 @@ paths:
                 $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "skills"
       x-speakeasy-name-override: "renameFile"
+      x-cli-help-section: "Managed agents"
       x-code-samples:
         - lang: "typescript"
           label: "Node.js - Rename a skill file"
@@ -75886,6 +76238,7 @@ paths:
                 $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "skills"
       x-speakeasy-name-override: "saveFiles"
+      x-cli-help-section: "Managed agents"
       x-code-samples:
         - lang: "typescript"
           label: "Node.js - Save skill files"
@@ -75932,6 +76285,7 @@ paths:
                 $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "skills"
       x-speakeasy-name-override: "listVersions"
+      x-cli-help-section: "Managed agents"
       x-code-samples:
         - lang: "typescript"
           label: "Node.js - ListVersions"
@@ -75967,6 +76321,7 @@ paths:
                 $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "skills"
       x-speakeasy-name-override: "exportBundle"
+      x-cli-help-section: "Managed agents"
       x-code-samples:
         - lang: "typescript"
           label: "Node.js - ExportBundle"
@@ -76008,6 +76363,7 @@ paths:
                 $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "skills"
       x-speakeasy-name-override: "restoreVersion"
+      x-cli-help-section: "Managed agents"
       x-code-samples:
         - lang: "typescript"
           label: "Node.js - RestoreVersion"
@@ -76049,6 +76405,7 @@ paths:
                 $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "skills"
       x-speakeasy-name-override: "deleteFile"
+      x-cli-help-section: "Managed agents"
       x-code-samples:
         - lang: "typescript"
           label: "Node.js - Delete a skill file"
@@ -76090,6 +76447,7 @@ paths:
                 $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "skills"
       x-speakeasy-name-override: "getFileContent"
+      x-cli-help-section: "Managed agents"
       x-code-samples:
         - lang: "typescript"
           label: "Node.js - Download a skill file"
@@ -76148,6 +76506,7 @@ paths:
       x-speakeasy-name-override: "list"
       x-cli-group: "smart-routers"
       x-cli-name: "list"
+      x-cli-help-section: "AI Gateway"
       x-code-samples:
         - lang: "curl"
           label: "Core - List Smart Routers"
@@ -76186,6 +76545,7 @@ paths:
       x-speakeasy-name-override: "create"
       x-cli-group: "smart-routers"
       x-cli-name: "create"
+      x-cli-help-section: "AI Gateway"
       x-code-samples:
         - lang: "curl"
           label: "Core - Create a Smart Router"
@@ -76231,6 +76591,7 @@ paths:
       x-speakeasy-name-override: "get"
       x-cli-group: "smart-routers"
       x-cli-name: "get"
+      x-cli-help-section: "AI Gateway"
       x-code-samples:
         - lang: "curl"
           label: "Core - Retrieve a Smart Router"
@@ -76269,6 +76630,7 @@ paths:
       x-speakeasy-name-override: "delete"
       x-cli-group: "smart-routers"
       x-cli-name: "delete"
+      x-cli-help-section: "AI Gateway"
       x-code-samples:
         - lang: "curl"
           label: "Core - Delete a Smart Router"
@@ -76313,6 +76675,7 @@ paths:
       x-speakeasy-name-override: "update"
       x-cli-group: "smart-routers"
       x-cli-name: "update"
+      x-cli-help-section: "AI Gateway"
       x-speakeasy-max-method-params: 3
       x-code-samples:
         - lang: "curl"
@@ -76345,6 +76708,7 @@ paths:
                 $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "users"
       x-speakeasy-name-override: "list"
+      x-cli-help-section: "Administration"
       x-code-samples:
         - lang: "curl"
           label: "cURL"
@@ -76385,6 +76749,7 @@ paths:
                 $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "users"
       x-speakeasy-name-override: "get"
+      x-cli-help-section: "Administration"
       x-code-samples:
         - lang: "curl"
           label: "cURL"
@@ -76424,6 +76789,7 @@ paths:
                 $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "users"
       x-speakeasy-name-override: "delete"
+      x-cli-help-section: "Administration"
       x-code-samples:
         - lang: "curl"
           label: "cURL"
@@ -76469,6 +76835,7 @@ paths:
                 $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "users"
       x-speakeasy-name-override: "update"
+      x-cli-help-section: "Administration"
       x-code-samples:
         - lang: "curl"
           label: "cURL"
@@ -76514,6 +76881,7 @@ paths:
                 $ref: "#/components/schemas/ErrorResponse"
       x-speakeasy-group: "users"
       x-speakeasy-name-override: "create"
+      x-cli-help-section: "Administration"
       x-code-samples:
         - lang: "curl"
           label: "cURL"
@@ -76590,6 +76958,7 @@ paths:
       x-speakeasy-name-override: "list"
       x-cli-group: "webhooks"
       x-cli-name: "list"
+      x-cli-help-section: "Administration"
       x-code-samples:
         - lang: "curl"
           label: "Core - List filtered webhooks"
@@ -76631,6 +77000,7 @@ paths:
       x-speakeasy-name-override: "create"
       x-cli-group: "webhooks"
       x-cli-name: "create"
+      x-cli-help-section: "Administration"
       x-code-samples:
         - lang: "curl"
           label: "Core - Create webhook"
@@ -76661,6 +77031,7 @@ paths:
       x-speakeasy-name-override: "count"
       x-cli-group: "webhooks"
       x-cli-name: "count"
+      x-cli-help-section: "Administration"
       x-code-samples:
         - lang: "curl"
           label: "Core - Count webhooks"
@@ -76698,6 +77069,7 @@ paths:
       x-speakeasy-name-override: "query"
       x-cli-group: "webhooks"
       x-cli-name: "query"
+      x-cli-help-section: "Administration"
       x-code-samples:
         - lang: "curl"
           label: "Core - Query webhooks"
@@ -76728,6 +77100,7 @@ paths:
       x-speakeasy-name-override: "generateSecret"
       x-cli-group: "webhooks"
       x-cli-name: "generateSecret"
+      x-cli-help-section: "Administration"
       x-code-samples:
         - lang: "curl"
           label: "Core - Generate webhook secret"
@@ -76770,6 +77143,7 @@ paths:
       x-speakeasy-name-override: "get"
       x-cli-group: "webhooks"
       x-cli-name: "get"
+      x-cli-help-section: "Administration"
       x-code-samples:
         - lang: "curl"
           label: "Core - Retrieve webhook"
@@ -76805,6 +77179,7 @@ paths:
       x-speakeasy-name-override: "delete"
       x-cli-group: "webhooks"
       x-cli-name: "delete"
+      x-cli-help-section: "Administration"
       x-code-samples:
         - lang: "curl"
           label: "Core - Delete webhook"
@@ -76846,6 +77221,7 @@ paths:
       x-speakeasy-name-override: "update"
       x-cli-group: "webhooks"
       x-cli-name: "update"
+      x-cli-help-section: "Administration"
       x-code-samples:
         - lang: "curl"
           label: "Core - Update webhook"
@@ -76890,6 +77266,7 @@ paths:
       x-speakeasy-name-override: "list"
       x-cli-group: "workspaces"
       x-cli-name: "list"
+      x-cli-help-section: "Administration"
       security:
         - ApiKey: []
   /v2/workspaces/{key}:
@@ -76928,6 +77305,7 @@ paths:
       x-speakeasy-name-override: "get"
       x-cli-group: "workspaces"
       x-cli-name: "get"
+      x-cli-help-section: "Administration"
       security:
         - ApiKey: []
     patch:
@@ -76965,6 +77343,7 @@ paths:
       x-speakeasy-name-override: "update"
       x-cli-group: "workspaces"
       x-cli-name: "update"
+      x-cli-help-section: "Administration"
       security:
         - ApiKey: []
   /v2/workspaces/{workspace_key}/domains:
@@ -77003,6 +77382,7 @@ paths:
       x-speakeasy-name-override: "listDomains"
       x-cli-group: "workspace-security"
       x-cli-name: "listDomains"
+      x-cli-help-section: "Administration"
       security:
         - ApiKey: []
     post:
@@ -77040,6 +77420,7 @@ paths:
       x-speakeasy-name-override: "createDomain"
       x-cli-group: "workspace-security"
       x-cli-name: "createDomain"
+      x-cli-help-section: "Administration"
       security:
         - ApiKey: []
   /v2/workspaces/{workspace_key}/domains/{domain_id}:
@@ -77074,6 +77455,7 @@ paths:
       x-speakeasy-name-override: "deleteDomain"
       x-cli-group: "workspace-security"
       x-cli-name: "deleteDomain"
+      x-cli-help-section: "Administration"
       security:
         - ApiKey: []
   /v2/workspaces/{workspace_key}/domains/{domain_id}/verify:
@@ -77111,6 +77493,7 @@ paths:
       x-speakeasy-name-override: "verifyDomain"
       x-cli-group: "workspace-security"
       x-cli-name: "verifyDomain"
+      x-cli-help-section: "Administration"
       security:
         - ApiKey: []
   /v2/workspaces/{workspace_key}/ip-allowlist:
@@ -77149,6 +77532,7 @@ paths:
       x-speakeasy-name-override: "getIPAllowlist"
       x-cli-group: "workspace-security"
       x-cli-name: "getIpAllowlist"
+      x-cli-help-section: "Administration"
       security:
         - ApiKey: []
     patch:
@@ -77186,6 +77570,7 @@ paths:
       x-speakeasy-name-override: "updateIPAllowlist"
       x-cli-group: "workspace-security"
       x-cli-name: "updateIpAllowlist"
+      x-cli-help-section: "Administration"
       security:
         - ApiKey: []
   /v2/workspaces/{workspace_key}/ip-allowlist/entries:
@@ -77224,6 +77609,7 @@ paths:
       x-speakeasy-name-override: "addIPRange"
       x-cli-group: "workspace-security"
       x-cli-name: "addIpRange"
+      x-cli-help-section: "Administration"
       security:
         - ApiKey: []
   /v2/workspaces/{workspace_key}/ip-allowlist/entries/{range_id}:
@@ -77258,6 +77644,7 @@ paths:
       x-speakeasy-name-override: "deleteIPRange"
       x-cli-group: "workspace-security"
       x-cli-name: "deleteIpRange"
+      x-cli-help-section: "Administration"
       security:
         - ApiKey: []
   /v2/workspace-settings:
@@ -77284,6 +77671,7 @@ paths:
       x-speakeasy-name-override: "get"
       x-cli-group: "workspace-settings"
       x-cli-name: "get"
+      x-cli-help-section: "Administration"
       security:
         - ApiKey: []
     patch:
@@ -77315,6 +77703,7 @@ paths:
       x-speakeasy-name-override: "update"
       x-cli-group: "workspace-settings"
       x-cli-name: "update"
+      x-cli-help-section: "Administration"
       security:
         - ApiKey: []
   /v1/responses/compact:
@@ -77764,6 +78153,7 @@ paths:
       tags:
         - "Responses"
       x-cli-group: "responses"
+      x-cli-help-section: "AI Gateway"
       x-cli-name: "compact"
       x-code-samples:
         - label: "Node.js"
@@ -77917,6 +78307,7 @@ paths:
       tags:
         - "Embeddings"
       x-cli-group: "embeddings"
+      x-cli-help-section: "AI Gateway"
       x-cli-name: "create"
       x-orq-gateway-group: true
       x-speakeasy-group: "router.embeddings"
@@ -77968,6 +78359,7 @@ paths:
       tags:
         - "Agent Schedules"
       x-cli-group: "schedules"
+      x-cli-help-section: "Managed agents"
       x-cli-name: "list"
       x-orq-gateway-group: true
       x-speakeasy-group: "schedules"
@@ -78145,6 +78537,7 @@ paths:
       tags:
         - "Agent Schedules"
       x-cli-group: "schedules"
+      x-cli-help-section: "Managed agents"
       x-cli-name: "create"
       x-orq-gateway-group: true
       x-speakeasy-group: "schedules"
@@ -78189,6 +78582,7 @@ paths:
       tags:
         - "Agent Schedules"
       x-cli-group: "schedules"
+      x-cli-help-section: "Managed agents"
       x-cli-name: "delete"
       x-orq-gateway-group: true
       x-speakeasy-group: "schedules"
@@ -78300,6 +78694,7 @@ paths:
       tags:
         - "Agent Schedules"
       x-cli-group: "schedules"
+      x-cli-help-section: "Managed agents"
       x-cli-name: "retrieve"
       x-orq-gateway-group: true
       x-speakeasy-group: "schedules"
@@ -78471,6 +78866,7 @@ paths:
       tags:
         - "Agent Schedules"
       x-cli-group: "schedules"
+      x-cli-help-section: "Managed agents"
       x-cli-name: "update"
       x-orq-gateway-group: true
       x-speakeasy-group: "schedules"
@@ -78541,6 +78937,7 @@ paths:
       tags:
         - "Agent Schedules"
       x-cli-group: "schedules"
+      x-cli-help-section: "Managed agents"
       x-cli-name: "trigger"
       x-orq-gateway-group: true
       x-speakeasy-group: "schedules"
@@ -78667,6 +79064,7 @@ paths:
       tags:
         - "Batches"
       x-cli-group: "batches"
+      x-cli-help-section: "AI Gateway"
       x-cli-name: "list"
       x-orq-gateway-group: true
       x-speakeasy-group: "batches"
@@ -78879,6 +79277,7 @@ paths:
       tags:
         - "Batches"
       x-cli-group: "batches"
+      x-cli-help-section: "AI Gateway"
       x-cli-name: "create"
       x-orq-gateway-group: true
       x-speakeasy-group: "batches"
@@ -79053,6 +79452,7 @@ paths:
       tags:
         - "Batches"
       x-cli-group: "batches"
+      x-cli-help-section: "AI Gateway"
       x-cli-name: "retrieve"
       x-orq-gateway-group: true
       x-speakeasy-group: "batches"
@@ -79227,6 +79627,7 @@ paths:
       tags:
         - "Batches"
       x-cli-group: "batches"
+      x-cli-help-section: "AI Gateway"
       x-cli-name: "cancel"
       x-orq-gateway-group: true
       x-speakeasy-group: "batches"
@@ -79326,6 +79727,7 @@ paths:
       tags:
         - "Batches"
       x-cli-group: "batches"
+      x-cli-help-section: "AI Gateway"
       x-cli-name: "downloadResults"
       x-orq-gateway-group: true
       x-speakeasy-group: "batches"
@@ -79883,6 +80285,7 @@ paths:
       tags:
         - "Classify"
       x-cli-group: "classify"
+      x-cli-help-section: "AI Gateway"
       x-cli-hidden: true
       x-cli-name: "create"
       x-code-samples:
@@ -80474,6 +80877,7 @@ paths:
       tags:
         - "Decisions"
       x-cli-group: "decisions"
+      x-cli-help-section: "AI Gateway"
       x-cli-name: "create"
       x-code-samples:
         - label: "Node.js"
@@ -80552,6 +80956,7 @@ paths:
       tags:
         - "Models"
       x-cli-group: "models"
+      x-cli-help-section: "AI Gateway"
       x-cli-name: "list"
       x-orq-gateway-group: true
       x-speakeasy-group: "models"
@@ -81641,6 +82046,7 @@ paths:
       tags:
         - "Responses"
       x-cli-group: "responses"
+      x-cli-help-section: "AI Gateway"
       x-cli-name: "create"
       x-orq-gateway-group: true
       x-speakeasy-group: "responses"
@@ -81876,6 +82282,7 @@ paths:
       tags:
         - "Responses"
       x-cli-group: "responses"
+      x-cli-help-section: "AI Gateway"
       x-cli-name: "get"
       x-orq-gateway-group: true
       x-speakeasy-group: "responses"
@@ -82249,6 +82656,7 @@ paths:
       tags:
         - "Web Search"
       x-cli-group: "websearch"
+      x-cli-help-section: "AI Gateway"
       x-cli-name: "search"
       x-code-samples:
         - label: "Node.js"
