@@ -5,21 +5,22 @@ The output format: plain text or structured JSON schema.
 
 ## Supported Types
 
-### `operations.PlainText`
+### `operations.FormatPlainText`
 
 ```typescript
-const value: operations.PlainText = {
+const value: operations.FormatPlainText = {
   type: "text",
 };
 ```
 
-### `operations.FormatJSONSchema`
+### `operations.CreateRouterResponseFormatJSONSchema`
 
 ```typescript
-const value: operations.FormatJSONSchema = {
+const value: operations.CreateRouterResponseFormatJSONSchema = {
   name: "<value>",
   schema: {
     "key": "<value>",
+    "key1": "<value>",
   },
   type: "json_schema",
 };

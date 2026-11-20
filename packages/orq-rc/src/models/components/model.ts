@@ -170,6 +170,27 @@ export type Model = {
    *  default effort.
    */
   defaultEffortScored?: boolean | undefined;
+  /**
+   * Artificial Analysis cost in USD to run the whole Intelligence Index.
+   *
+   * @remarks
+   *  Absent when Artificial Analysis has not published it for this model.
+   */
+  intelligenceIndexTotalCost?: number | undefined;
+  /**
+   * Artificial Analysis cost in USD per Intelligence Index task. Absent when
+   *
+   * @remarks
+   *  Artificial Analysis has not published it for this model.
+   */
+  intelligenceIndexCostPerTask?: number | undefined;
+  /**
+   * Artificial Analysis median end-to-end response time in seconds. Absent
+   *
+   * @remarks
+   *  when unmeasured.
+   */
+  medianEndToEndResponseTimeSeconds?: number | undefined;
 };
 
 /** @internal */
@@ -251,6 +272,9 @@ export const Model$inboundSchema: z.ZodType<Model, z.ZodTypeDef, unknown> = z
     reasoning_efforts: z.lazy(() => ReasoningEfforts$inboundSchema).optional(),
     blended_price: z.number().optional(),
     default_effort_scored: z.boolean().optional(),
+    intelligence_index_total_cost: z.number().optional(),
+    intelligence_index_cost_per_task: z.number().optional(),
+    median_end_to_end_response_time_seconds: z.number().optional(),
   }).transform((v) => {
     return remap$(v, {
       "offering_of": "offeringOf",
@@ -262,6 +286,10 @@ export const Model$inboundSchema: z.ZodType<Model, z.ZodTypeDef, unknown> = z
       "reasoning_efforts": "reasoningEfforts",
       "blended_price": "blendedPrice",
       "default_effort_scored": "defaultEffortScored",
+      "intelligence_index_total_cost": "intelligenceIndexTotalCost",
+      "intelligence_index_cost_per_task": "intelligenceIndexCostPerTask",
+      "median_end_to_end_response_time_seconds":
+        "medianEndToEndResponseTimeSeconds",
     });
   });
 

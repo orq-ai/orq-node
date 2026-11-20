@@ -64,6 +64,13 @@ export type RetrieveResponseResponseBody = {
    * Always null. Retained for compatibility with older SDKs; input content is not returned.
    */
   input: Array<any> | null;
+  /**
+   * Reasoning items removed by OpenAI and the reason for each removal, in input order.
+   */
+  inputTransformations?:
+    | Array<components.InputTransformation>
+    | null
+    | undefined;
   instructions: string | null;
   maxOutputTokens: number | null;
   maxToolCalls: number | null;
@@ -84,6 +91,7 @@ export type RetrieveResponseResponseBody = {
   parallelToolCalls: boolean;
   presencePenalty: number;
   previousResponseId: string | null;
+  promptCacheDiagnostics?: components.PromptCacheDiagnostics | undefined;
   promptCacheKey: string | null;
   promptCacheOptions: components.OpenAIPromptCacheOptions | null;
   promptCacheRetention: string | null;
@@ -174,6 +182,9 @@ export const RetrieveResponseResponseBody$inboundSchema: z.ZodType<
   id: z.string(),
   incomplete_details: z.nullable(components.IncompleteDetails$inboundSchema),
   input: z.nullable(z.array(z.any())),
+  input_transformations: z.nullable(
+    z.array(components.InputTransformation$inboundSchema),
+  ).optional(),
   instructions: z.nullable(z.string()),
   max_output_tokens: z.nullable(z.number().int()),
   max_tool_calls: z.nullable(z.number().int()),
@@ -185,6 +196,8 @@ export const RetrieveResponseResponseBody$inboundSchema: z.ZodType<
   parallel_tool_calls: z.boolean(),
   presence_penalty: z.number(),
   previous_response_id: z.nullable(z.string()),
+  prompt_cache_diagnostics: components.PromptCacheDiagnostics$inboundSchema
+    .optional(),
   prompt_cache_key: z.nullable(z.string()),
   prompt_cache_options: z.nullable(
     components.OpenAIPromptCacheOptions$inboundSchema,
@@ -213,11 +226,13 @@ export const RetrieveResponseResponseBody$inboundSchema: z.ZodType<
     "created_at": "createdAt",
     "frequency_penalty": "frequencyPenalty",
     "incomplete_details": "incompleteDetails",
+    "input_transformations": "inputTransformations",
     "max_output_tokens": "maxOutputTokens",
     "max_tool_calls": "maxToolCalls",
     "parallel_tool_calls": "parallelToolCalls",
     "presence_penalty": "presencePenalty",
     "previous_response_id": "previousResponseId",
+    "prompt_cache_diagnostics": "promptCacheDiagnostics",
     "prompt_cache_key": "promptCacheKey",
     "prompt_cache_options": "promptCacheOptions",
     "prompt_cache_retention": "promptCacheRetention",

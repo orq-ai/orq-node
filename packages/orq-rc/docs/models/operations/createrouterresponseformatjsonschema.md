@@ -1,0 +1,26 @@
+# CreateRouterResponseFormatJSONSchema
+
+## Example Usage
+
+```typescript
+import { CreateRouterResponseFormatJSONSchema } from "@orq-ai/node/models/operations";
+
+let value: CreateRouterResponseFormatJSONSchema = {
+  name: "<value>",
+  schema: {
+    "key": "<value>",
+    "key1": "<value>",
+  },
+  type: "json_schema",
+};
+```
+
+## Fields
+
+| Field                                                                                                                                                              | Type                                                                                                                                                               | Required                                                                                                                                                           | Description                                                                                                                                                        |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `description`                                                                                                                                                      | *string*                                                                                                                                                           | :heavy_minus_sign:                                                                                                                                                 | A description of what the response format is for, used by the model to determine how to respond in the format.                                                     |
+| `name`                                                                                                                                                             | *string*                                                                                                                                                           | :heavy_check_mark:                                                                                                                                                 | The name of the response format. Must be a-z, A-Z, 0-9, or contain underscores and dashes, with a maximum length of 64.                                            |
+| `schema`                                                                                                                                                           | Record<string, *any*>                                                                                                                                              | :heavy_check_mark:                                                                                                                                                 | The schema for the response format, described as a JSON Schema object.                                                                                             |
+| `strict`                                                                                                                                                           | *boolean*                                                                                                                                                          | :heavy_minus_sign:                                                                                                                                                 | Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the `schema` field. |
+| `type`                                                                                                                                                             | *"json_schema"*                                                                                                                                                    | :heavy_check_mark:                                                                                                                                                 | The type of response format being defined. Always `json_schema`.                                                                                                   |

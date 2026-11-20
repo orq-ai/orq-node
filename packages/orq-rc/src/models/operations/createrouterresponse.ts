@@ -720,6 +720,48 @@ export const InputStatus = {
  */
 export type InputStatus = ClosedEnum<typeof InputStatus>;
 
+export type FormatJSONSchema = {
+  /**
+   * A description of what the response format is for, used by the model to determine how to respond in the format.
+   */
+  description?: string | undefined;
+  /**
+   * The name of the response format. Must be a-z, A-Z, 0-9, or contain underscores and dashes, with a maximum length of 64.
+   */
+  name: string;
+  /**
+   * The schema for the response format, described as a JSON Schema object.
+   */
+  schema: { [k: string]: any };
+  /**
+   * Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the `schema` field.
+   */
+  strict?: boolean | undefined;
+  /**
+   * The type of response format being defined. Always `json_schema`.
+   */
+  type: "json_schema";
+};
+
+export type PlainText = {
+  type: "text";
+};
+
+/**
+ * The output format: plain text or structured JSON schema.
+ */
+export type InputFormat = PlainText | FormatJSONSchema;
+
+/**
+ * Response format applied by a configuration_update item.
+ */
+export type InputText = {
+  /**
+   * The output format: plain text or structured JSON schema.
+   */
+  format: PlainText | FormatJSONSchema;
+};
+
 /**
  * The type of item.
  */
@@ -824,6 +866,10 @@ export type CreateRouterResponseInput2 = {
    */
   status?: InputStatus | undefined;
   /**
+   * Response format applied by a configuration_update item.
+   */
+  text?: InputText | undefined;
+  /**
    * The type of item.
    */
   type?: CreateRouterResponseInputType | undefined;
@@ -878,7 +924,7 @@ export const TemplateEngine = {
  */
 export type TemplateEngine = ClosedEnum<typeof TemplateEngine>;
 
-export type FormatJSONSchema = {
+export type CreateRouterResponseFormatJSONSchema = {
   /**
    * A description of what the response format is for, used by the model to determine how to respond in the format.
    */
@@ -901,14 +947,16 @@ export type FormatJSONSchema = {
   type: "json_schema";
 };
 
-export type PlainText = {
+export type FormatPlainText = {
   type: "text";
 };
 
 /**
  * The output format: plain text or structured JSON schema.
  */
-export type CreateRouterResponseFormat = PlainText | FormatJSONSchema;
+export type CreateRouterResponseFormat =
+  | FormatPlainText
+  | CreateRouterResponseFormatJSONSchema;
 
 /**
  * Controls the verbosity of the model output.
@@ -930,11 +978,40 @@ export type CreateRouterResponseText = {
   /**
    * The output format: plain text or structured JSON schema.
    */
-  format?: PlainText | FormatJSONSchema | undefined;
+  format?: FormatPlainText | CreateRouterResponseFormatJSONSchema | undefined;
   /**
    * Controls the verbosity of the model output.
    */
   verbosity?: Verbosity | undefined;
+};
+
+export const ToolChoiceMode = {
+  Auto: "auto",
+  Required: "required",
+} as const;
+export type ToolChoiceMode = ClosedEnum<typeof ToolChoiceMode>;
+
+export type ToolChoiceTools = {
+  name?: string | undefined;
+  serverLabel?: string | undefined;
+  type: string;
+  additionalProperties?: { [k: string]: any } | undefined;
+};
+
+export const CreateRouterResponseToolChoiceResponsesType = {
+  AllowedTools: "allowed_tools",
+} as const;
+export type CreateRouterResponseToolChoiceResponsesType = ClosedEnum<
+  typeof CreateRouterResponseToolChoiceResponsesType
+>;
+
+/**
+ * Restrict callable tools without changing their definitions. Native OpenAI Responses API only.
+ */
+export type AllowedTools = {
+  mode: ToolChoiceMode;
+  tools: Array<ToolChoiceTools>;
+  type: CreateRouterResponseToolChoiceResponsesType;
 };
 
 export const CreateRouterResponseToolChoiceType = {
@@ -969,14 +1046,17 @@ export const Shorthand = {
 export type Shorthand = ClosedEnum<typeof Shorthand>;
 
 /**
- * How the model should use the provided tools. Can be a string shorthand or a specific function selector.
+ * How the model should use the provided tools. Native OpenAI requests can restrict the allowed tools.
  */
-export type CreateRouterResponseToolChoice = SpecificFunction | Shorthand;
+export type CreateRouterResponseToolChoice =
+  | AllowedTools
+  | SpecificFunction
+  | Shorthand;
 
 /**
  * Filter which tools from the MCP server are exposed.
  */
-export type AllowedTools = {
+export type ToolsAllowedTools = {
   /**
    * Only expose tools with readOnlyHint annotation.
    */
@@ -994,7 +1074,7 @@ export type MCPTool = {
   /**
    * Filter which tools from the MCP server are exposed.
    */
-  allowedTools?: AllowedTools | undefined;
+  allowedTools?: ToolsAllowedTools | undefined;
   /**
    * Custom headers to send with MCP requests. Values support {{variable}} templates.
    */
@@ -1381,9 +1461,9 @@ export type CreateRouterResponseRequestBody = {
   thread?: components.ResponseThread | undefined;
   timeout?: components.TimeoutConfig | undefined;
   /**
-   * How the model should use the provided tools. Can be a string shorthand or a specific function selector.
+   * How the model should use the provided tools. Native OpenAI requests can restrict the allowed tools.
    */
-  toolChoice?: SpecificFunction | Shorthand | undefined;
+  toolChoice?: AllowedTools | SpecificFunction | Shorthand | undefined;
   /**
    * Tools available to the model.
    */
@@ -1490,6 +1570,13 @@ export type CreateRouterResponseResponseBody = {
    * Always null. Retained for compatibility with older SDKs; input content is not returned.
    */
   input: Array<any> | null;
+  /**
+   * Reasoning items removed by OpenAI and the reason for each removal, in input order.
+   */
+  inputTransformations?:
+    | Array<components.InputTransformation>
+    | null
+    | undefined;
   instructions: string | null;
   maxOutputTokens: number | null;
   maxToolCalls: number | null;
@@ -1510,6 +1597,7 @@ export type CreateRouterResponseResponseBody = {
   parallelToolCalls: boolean;
   presencePenalty: number;
   previousResponseId: string | null;
+  promptCacheDiagnostics?: components.PromptCacheDiagnostics | undefined;
   promptCacheKey: string | null;
   promptCacheOptions: components.OpenAIPromptCacheOptions | null;
   promptCacheRetention: string | null;
@@ -2354,6 +2442,94 @@ export const InputStatus$outboundSchema: z.ZodNativeEnum<typeof InputStatus> = z
   .nativeEnum(InputStatus);
 
 /** @internal */
+export type FormatJSONSchema$Outbound = {
+  description?: string | undefined;
+  name: string;
+  schema: { [k: string]: any };
+  strict?: boolean | undefined;
+  type: "json_schema";
+};
+
+/** @internal */
+export const FormatJSONSchema$outboundSchema: z.ZodType<
+  FormatJSONSchema$Outbound,
+  z.ZodTypeDef,
+  FormatJSONSchema
+> = z.object({
+  description: z.string().optional(),
+  name: z.string(),
+  schema: z.record(z.any()),
+  strict: z.boolean().optional(),
+  type: z.literal("json_schema"),
+});
+
+export function formatJSONSchemaToJSON(
+  formatJSONSchema: FormatJSONSchema,
+): string {
+  return JSON.stringify(
+    FormatJSONSchema$outboundSchema.parse(formatJSONSchema),
+  );
+}
+
+/** @internal */
+export type PlainText$Outbound = {
+  type: "text";
+};
+
+/** @internal */
+export const PlainText$outboundSchema: z.ZodType<
+  PlainText$Outbound,
+  z.ZodTypeDef,
+  PlainText
+> = z.object({
+  type: z.literal("text"),
+});
+
+export function plainTextToJSON(plainText: PlainText): string {
+  return JSON.stringify(PlainText$outboundSchema.parse(plainText));
+}
+
+/** @internal */
+export type InputFormat$Outbound =
+  | PlainText$Outbound
+  | FormatJSONSchema$Outbound;
+
+/** @internal */
+export const InputFormat$outboundSchema: z.ZodType<
+  InputFormat$Outbound,
+  z.ZodTypeDef,
+  InputFormat
+> = z.union([
+  z.lazy(() => PlainText$outboundSchema),
+  z.lazy(() => FormatJSONSchema$outboundSchema),
+]);
+
+export function inputFormatToJSON(inputFormat: InputFormat): string {
+  return JSON.stringify(InputFormat$outboundSchema.parse(inputFormat));
+}
+
+/** @internal */
+export type InputText$Outbound = {
+  format: PlainText$Outbound | FormatJSONSchema$Outbound;
+};
+
+/** @internal */
+export const InputText$outboundSchema: z.ZodType<
+  InputText$Outbound,
+  z.ZodTypeDef,
+  InputText
+> = z.object({
+  format: z.union([
+    z.lazy(() => PlainText$outboundSchema),
+    z.lazy(() => FormatJSONSchema$outboundSchema),
+  ]),
+});
+
+export function inputTextToJSON(inputText: InputText): string {
+  return JSON.stringify(InputText$outboundSchema.parse(inputText));
+}
+
+/** @internal */
 export const CreateRouterResponseInputType$outboundSchema: z.ZodNativeEnum<
   typeof CreateRouterResponseInputType
 > = z.nativeEnum(CreateRouterResponseInputType);
@@ -2384,6 +2560,7 @@ export type CreateRouterResponseInput2$Outbound = {
   recipient?: string | undefined;
   role?: string | undefined;
   status?: string | undefined;
+  text?: InputText$Outbound | undefined;
   type?: string | undefined;
 };
 
@@ -2419,6 +2596,7 @@ export const CreateRouterResponseInput2$outboundSchema: z.ZodType<
   recipient: z.string().optional(),
   role: CreateRouterResponseInputRole$outboundSchema.optional(),
   status: InputStatus$outboundSchema.optional(),
+  text: z.lazy(() => InputText$outboundSchema).optional(),
   type: CreateRouterResponseInputType$outboundSchema.optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -2472,7 +2650,7 @@ export const TemplateEngine$outboundSchema: z.ZodNativeEnum<
 > = z.nativeEnum(TemplateEngine);
 
 /** @internal */
-export type FormatJSONSchema$Outbound = {
+export type CreateRouterResponseFormatJSONSchema$Outbound = {
   description?: string | undefined;
   name: string;
   schema: { [k: string]: any };
@@ -2481,10 +2659,10 @@ export type FormatJSONSchema$Outbound = {
 };
 
 /** @internal */
-export const FormatJSONSchema$outboundSchema: z.ZodType<
-  FormatJSONSchema$Outbound,
+export const CreateRouterResponseFormatJSONSchema$outboundSchema: z.ZodType<
+  CreateRouterResponseFormatJSONSchema$Outbound,
   z.ZodTypeDef,
-  FormatJSONSchema
+  CreateRouterResponseFormatJSONSchema
 > = z.object({
   description: z.string().optional(),
   name: z.string(),
@@ -2493,36 +2671,40 @@ export const FormatJSONSchema$outboundSchema: z.ZodType<
   type: z.literal("json_schema"),
 });
 
-export function formatJSONSchemaToJSON(
-  formatJSONSchema: FormatJSONSchema,
+export function createRouterResponseFormatJSONSchemaToJSON(
+  createRouterResponseFormatJSONSchema: CreateRouterResponseFormatJSONSchema,
 ): string {
   return JSON.stringify(
-    FormatJSONSchema$outboundSchema.parse(formatJSONSchema),
+    CreateRouterResponseFormatJSONSchema$outboundSchema.parse(
+      createRouterResponseFormatJSONSchema,
+    ),
   );
 }
 
 /** @internal */
-export type PlainText$Outbound = {
+export type FormatPlainText$Outbound = {
   type: "text";
 };
 
 /** @internal */
-export const PlainText$outboundSchema: z.ZodType<
-  PlainText$Outbound,
+export const FormatPlainText$outboundSchema: z.ZodType<
+  FormatPlainText$Outbound,
   z.ZodTypeDef,
-  PlainText
+  FormatPlainText
 > = z.object({
   type: z.literal("text"),
 });
 
-export function plainTextToJSON(plainText: PlainText): string {
-  return JSON.stringify(PlainText$outboundSchema.parse(plainText));
+export function formatPlainTextToJSON(
+  formatPlainText: FormatPlainText,
+): string {
+  return JSON.stringify(FormatPlainText$outboundSchema.parse(formatPlainText));
 }
 
 /** @internal */
 export type CreateRouterResponseFormat$Outbound =
-  | PlainText$Outbound
-  | FormatJSONSchema$Outbound;
+  | FormatPlainText$Outbound
+  | CreateRouterResponseFormatJSONSchema$Outbound;
 
 /** @internal */
 export const CreateRouterResponseFormat$outboundSchema: z.ZodType<
@@ -2530,8 +2712,8 @@ export const CreateRouterResponseFormat$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateRouterResponseFormat
 > = z.union([
-  z.lazy(() => PlainText$outboundSchema),
-  z.lazy(() => FormatJSONSchema$outboundSchema),
+  z.lazy(() => FormatPlainText$outboundSchema),
+  z.lazy(() => CreateRouterResponseFormatJSONSchema$outboundSchema),
 ]);
 
 export function createRouterResponseFormatToJSON(
@@ -2548,7 +2730,10 @@ export const Verbosity$outboundSchema: z.ZodNativeEnum<typeof Verbosity> = z
 
 /** @internal */
 export type CreateRouterResponseText$Outbound = {
-  format?: PlainText$Outbound | FormatJSONSchema$Outbound | undefined;
+  format?:
+    | FormatPlainText$Outbound
+    | CreateRouterResponseFormatJSONSchema$Outbound
+    | undefined;
   verbosity?: string | undefined;
 };
 
@@ -2559,8 +2744,8 @@ export const CreateRouterResponseText$outboundSchema: z.ZodType<
   CreateRouterResponseText
 > = z.object({
   format: z.union([
-    z.lazy(() => PlainText$outboundSchema),
-    z.lazy(() => FormatJSONSchema$outboundSchema),
+    z.lazy(() => FormatPlainText$outboundSchema),
+    z.lazy(() => CreateRouterResponseFormatJSONSchema$outboundSchema),
   ]).optional(),
   verbosity: Verbosity$outboundSchema.optional(),
 });
@@ -2571,6 +2756,72 @@ export function createRouterResponseTextToJSON(
   return JSON.stringify(
     CreateRouterResponseText$outboundSchema.parse(createRouterResponseText),
   );
+}
+
+/** @internal */
+export const ToolChoiceMode$outboundSchema: z.ZodNativeEnum<
+  typeof ToolChoiceMode
+> = z.nativeEnum(ToolChoiceMode);
+
+/** @internal */
+export type ToolChoiceTools$Outbound = {
+  name?: string | undefined;
+  server_label?: string | undefined;
+  type: string;
+  [additionalProperties: string]: unknown;
+};
+
+/** @internal */
+export const ToolChoiceTools$outboundSchema: z.ZodType<
+  ToolChoiceTools$Outbound,
+  z.ZodTypeDef,
+  ToolChoiceTools
+> = z.object({
+  name: z.string().optional(),
+  serverLabel: z.string().optional(),
+  type: z.string(),
+  additionalProperties: z.record(z.any()).optional(),
+}).transform((v) => {
+  return {
+    ...v.additionalProperties,
+    ...remap$(v, {
+      serverLabel: "server_label",
+      additionalProperties: null,
+    }),
+  };
+});
+
+export function toolChoiceToolsToJSON(
+  toolChoiceTools: ToolChoiceTools,
+): string {
+  return JSON.stringify(ToolChoiceTools$outboundSchema.parse(toolChoiceTools));
+}
+
+/** @internal */
+export const CreateRouterResponseToolChoiceResponsesType$outboundSchema:
+  z.ZodNativeEnum<typeof CreateRouterResponseToolChoiceResponsesType> = z
+    .nativeEnum(CreateRouterResponseToolChoiceResponsesType);
+
+/** @internal */
+export type AllowedTools$Outbound = {
+  mode: string;
+  tools: Array<ToolChoiceTools$Outbound>;
+  type: string;
+};
+
+/** @internal */
+export const AllowedTools$outboundSchema: z.ZodType<
+  AllowedTools$Outbound,
+  z.ZodTypeDef,
+  AllowedTools
+> = z.object({
+  mode: ToolChoiceMode$outboundSchema,
+  tools: z.array(z.lazy(() => ToolChoiceTools$outboundSchema)),
+  type: CreateRouterResponseToolChoiceResponsesType$outboundSchema,
+});
+
+export function allowedToolsToJSON(allowedTools: AllowedTools): string {
+  return JSON.stringify(AllowedTools$outboundSchema.parse(allowedTools));
 }
 
 /** @internal */
@@ -2608,6 +2859,7 @@ export const Shorthand$outboundSchema: z.ZodNativeEnum<typeof Shorthand> = z
 
 /** @internal */
 export type CreateRouterResponseToolChoice$Outbound =
+  | AllowedTools$Outbound
   | SpecificFunction$Outbound
   | string;
 
@@ -2617,6 +2869,7 @@ export const CreateRouterResponseToolChoice$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateRouterResponseToolChoice
 > = z.union([
+  z.lazy(() => AllowedTools$outboundSchema),
   z.lazy(() => SpecificFunction$outboundSchema),
   Shorthand$outboundSchema,
 ]);
@@ -2632,16 +2885,16 @@ export function createRouterResponseToolChoiceToJSON(
 }
 
 /** @internal */
-export type AllowedTools$Outbound = {
+export type ToolsAllowedTools$Outbound = {
   read_only?: boolean | undefined;
   tool_names?: Array<string> | undefined;
 };
 
 /** @internal */
-export const AllowedTools$outboundSchema: z.ZodType<
-  AllowedTools$Outbound,
+export const ToolsAllowedTools$outboundSchema: z.ZodType<
+  ToolsAllowedTools$Outbound,
   z.ZodTypeDef,
-  AllowedTools
+  ToolsAllowedTools
 > = z.object({
   readOnly: z.boolean().optional(),
   toolNames: z.array(z.string()).optional(),
@@ -2652,13 +2905,17 @@ export const AllowedTools$outboundSchema: z.ZodType<
   });
 });
 
-export function allowedToolsToJSON(allowedTools: AllowedTools): string {
-  return JSON.stringify(AllowedTools$outboundSchema.parse(allowedTools));
+export function toolsAllowedToolsToJSON(
+  toolsAllowedTools: ToolsAllowedTools,
+): string {
+  return JSON.stringify(
+    ToolsAllowedTools$outboundSchema.parse(toolsAllowedTools),
+  );
 }
 
 /** @internal */
 export type MCPTool$Outbound = {
-  allowed_tools?: AllowedTools$Outbound | undefined;
+  allowed_tools?: ToolsAllowedTools$Outbound | undefined;
   headers?: { [k: string]: string } | undefined;
   key?: string | undefined;
   server_description?: string | undefined;
@@ -2672,7 +2929,7 @@ export const MCPTool$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   MCPTool
 > = z.object({
-  allowedTools: z.lazy(() => AllowedTools$outboundSchema).optional(),
+  allowedTools: z.lazy(() => ToolsAllowedTools$outboundSchema).optional(),
   headers: z.record(z.string()).optional(),
   key: z.string().optional(),
   serverDescription: z.string().optional(),
@@ -3026,7 +3283,11 @@ export type CreateRouterResponseRequestBody$Outbound = {
   thinking?: components.ThinkingParam$Outbound | undefined;
   thread?: components.ResponseThread$Outbound | undefined;
   timeout?: components.TimeoutConfig$Outbound | undefined;
-  tool_choice?: SpecificFunction$Outbound | string | undefined;
+  tool_choice?:
+    | AllowedTools$Outbound
+    | SpecificFunction$Outbound
+    | string
+    | undefined;
   tools?:
     | Array<
       | ToolsFunction$Outbound
@@ -3120,6 +3381,7 @@ export const CreateRouterResponseRequestBody$outboundSchema: z.ZodType<
   thread: components.ResponseThread$outboundSchema.optional(),
   timeout: components.TimeoutConfig$outboundSchema.optional(),
   toolChoice: z.union([
+    z.lazy(() => AllowedTools$outboundSchema),
     z.lazy(() => SpecificFunction$outboundSchema),
     Shorthand$outboundSchema,
   ]).optional(),
@@ -3295,6 +3557,9 @@ export const CreateRouterResponseResponseBody$inboundSchema: z.ZodType<
   id: z.string(),
   incomplete_details: z.nullable(components.IncompleteDetails$inboundSchema),
   input: z.nullable(z.array(z.any())),
+  input_transformations: z.nullable(
+    z.array(components.InputTransformation$inboundSchema),
+  ).optional(),
   instructions: z.nullable(z.string()),
   max_output_tokens: z.nullable(z.number().int()),
   max_tool_calls: z.nullable(z.number().int()),
@@ -3306,6 +3571,8 @@ export const CreateRouterResponseResponseBody$inboundSchema: z.ZodType<
   parallel_tool_calls: z.boolean(),
   presence_penalty: z.number(),
   previous_response_id: z.nullable(z.string()),
+  prompt_cache_diagnostics: components.PromptCacheDiagnostics$inboundSchema
+    .optional(),
   prompt_cache_key: z.nullable(z.string()),
   prompt_cache_options: z.nullable(
     components.OpenAIPromptCacheOptions$inboundSchema,
@@ -3334,11 +3601,13 @@ export const CreateRouterResponseResponseBody$inboundSchema: z.ZodType<
     "created_at": "createdAt",
     "frequency_penalty": "frequencyPenalty",
     "incomplete_details": "incompleteDetails",
+    "input_transformations": "inputTransformations",
     "max_output_tokens": "maxOutputTokens",
     "max_tool_calls": "maxToolCalls",
     "parallel_tool_calls": "parallelToolCalls",
     "presence_penalty": "presencePenalty",
     "previous_response_id": "previousResponseId",
+    "prompt_cache_diagnostics": "promptCacheDiagnostics",
     "prompt_cache_key": "promptCacheKey",
     "prompt_cache_options": "promptCacheOptions",
     "prompt_cache_retention": "promptCacheRetention",
