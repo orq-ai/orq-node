@@ -2592,7 +2592,7 @@ components:
           properties:
             _id:
               type: "string"
-              default: "reasoning_01m7vqxtqtskv6apdde32a32xp"
+              default: "reasoning_01m7wkm85qvd4dbvxnmajvdtxy"
               description: "Unique identifier for the part. Format: reasoning_{ulid} (e.g., reasoning_01hxyz...)"
               example: "reasoning_01hxyz123abc"
             kind:
@@ -17526,6 +17526,18 @@ components:
         default_effort_scored:
           type: "boolean"
           description: "False when `artificial_intelligence` is not the `default_effort` score:\n the default effort has no scored rung, so the score of the model's\n Artificial Analysis slug is used instead. Absent when the model has no\n default effort."
+        intelligence_index_total_cost:
+          type: "number"
+          description: "Artificial Analysis cost in USD to run the whole Intelligence Index.\n Absent when Artificial Analysis has not published it for this model."
+          format: "double"
+        intelligence_index_cost_per_task:
+          type: "number"
+          description: "Artificial Analysis cost in USD per Intelligence Index task. Absent when\n Artificial Analysis has not published it for this model."
+          format: "double"
+        median_end_to_end_response_time_seconds:
+          type: "number"
+          description: "Artificial Analysis median end-to-end response time in seconds. Absent\n when unmeasured."
+          format: "double"
     ModelProvider:
       required:
         - "id"
@@ -21113,6 +21125,34 @@ components:
         - "cache_write_tokens"
         - "cache_creation_tokens"
       type: "object"
+    InputTransformation:
+      additionalProperties: false
+      properties:
+        action:
+          enum:
+            - "removed"
+          type: "string"
+        id:
+          description: "Original reasoning item ID."
+          type: "string"
+        reason:
+          enum:
+            - "organization_mismatch"
+            - "end_user_mismatch"
+            - "model_mismatch"
+            - "prefix_mismatch"
+            - "turn_boundary"
+          type: "string"
+        type:
+          enum:
+            - "reasoning"
+          type: "string"
+      required:
+        - "id"
+        - "action"
+        - "reason"
+        - "type"
+      type: "object"
     LoadBalancerConfig:
       additionalProperties: false
       properties:
@@ -21211,6 +21251,9 @@ components:
     OpenAIPromptCacheOptions:
       additionalProperties: false
       properties:
+        comparison_response_id:
+          description: "ID of a stored Orq response to compare for OpenAI prompt cache diagnostics."
+          type: "string"
         mode:
           enum:
             - "implicit"
@@ -21336,6 +21379,27 @@ components:
           type: "integer"
       required:
         - "reasoning_tokens"
+      type: "object"
+    PromptCacheDiagnostics:
+      additionalProperties: false
+      properties:
+        cache_missed_tokens:
+          format: "int64"
+          type: "integer"
+        comparison_reusable_tokens:
+          format: "int64"
+          type: "integer"
+        reason:
+          type: "string"
+        type:
+          enum:
+            - "cache_hit"
+            - "cache_miss"
+            - "comparison_response_not_found"
+            - "unavailable"
+          type: "string"
+      required:
+        - "type"
       type: "object"
     PublicBatch:
       additionalProperties: false
@@ -22459,6 +22523,51 @@ components:
                       - "completed"
                       - "incomplete"
                     type: "string"
+                  text:
+                    description: "Response format applied by a configuration_update item."
+                    properties:
+                      format:
+                        anyOf:
+                          - properties:
+                              type:
+                                enum:
+                                  - "text"
+                                type: "string"
+                            required:
+                              - "type"
+                            title: "Plain text"
+                            type: "object"
+                          - properties:
+                              description:
+                                description: "A description of what the response format is for, used by the model to determine how to respond in the format."
+                                type: "string"
+                              name:
+                                description: "The name of the response format. Must be a-z, A-Z, 0-9, or contain underscores and dashes, with a maximum length of 64."
+                                maxLength: 64
+                                pattern: "^[a-zA-Z0-9_-]+$"
+                                type: "string"
+                              schema:
+                                additionalProperties: true
+                                description: "The schema for the response format, described as a JSON Schema object."
+                                type: "object"
+                              strict:
+                                description: "Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the `schema` field."
+                                type: "boolean"
+                              type:
+                                description: "The type of response format being defined. Always `json_schema`."
+                                enum:
+                                  - "json_schema"
+                                type: "string"
+                            required:
+                              - "type"
+                              - "name"
+                              - "schema"
+                            title: "JSON Schema"
+                            type: "object"
+                        description: "The output format: plain text or structured JSON schema."
+                    required:
+                      - "format"
+                    type: "object"
                   type:
                     description: "The type of item."
                     enum:
@@ -22683,7 +22792,38 @@ components:
                 - "name"
               title: "Specific function"
               type: "object"
-          description: "How the model should use the provided tools. Can be a string shorthand or a specific function selector."
+            - description: "Restrict callable tools without changing their definitions. Native OpenAI Responses API only."
+              properties:
+                mode:
+                  enum:
+                    - "auto"
+                    - "required"
+                  type: "string"
+                tools:
+                  items:
+                    additionalProperties: true
+                    properties:
+                      name:
+                        type: "string"
+                      server_label:
+                        type: "string"
+                      type:
+                        type: "string"
+                    required:
+                      - "type"
+                    type: "object"
+                  type: "array"
+                type:
+                  enum:
+                    - "allowed_tools"
+                  type: "string"
+              required:
+                - "type"
+                - "mode"
+                - "tools"
+              title: "Allowed tools"
+              type: "object"
+          description: "How the model should use the provided tools. Native OpenAI requests can restrict the allowed tools."
         tools:
           description: "Tools available to the model."
           items:
@@ -23065,6 +23205,13 @@ components:
           type:
             - "array"
             - "null"
+        input_transformations:
+          description: "Reasoning items removed by OpenAI and the reason for each removal, in input order."
+          items:
+            $ref: "#/components/schemas/InputTransformation"
+          type:
+            - "array"
+            - "null"
         instructions:
           type:
             - "string"
@@ -23107,6 +23254,9 @@ components:
           type:
             - "string"
             - "null"
+        prompt_cache_diagnostics:
+          $ref: "#/components/schemas/PromptCacheDiagnostics"
+          description: "OpenAI prompt cache comparison result, when available."
         prompt_cache_key:
           type:
             - "string"
@@ -28884,7 +29034,7 @@ paths:
                                 type: "string"
                                 format: "ulid"
                                 pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                                default: "01M7VQXTQ40830TRMJKGMRTKX3"
+                                default: "01M7WKM84S5DQRFEYE0TD9V8JB"
                                 readOnly: true
                                 description: "The unique identifier of the playground knowledge base"
                               knowledge_id:
@@ -38303,7 +38453,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01M7VQXTRQW2NBBC2AG06EY0VB"
+                                          default: "01M7WKM86Z0RX8HWG8E92RBXQG"
                                         name:
                                           type: "string"
                                         description:
@@ -39931,7 +40081,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01M7VQXTS11J52ZD1NK6VK0DEA"
+                                          default: "01M7WKM87F1MZK6YVEG9TBGK14"
                                         name:
                                           type: "string"
                                         description:
@@ -48998,7 +49148,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M7VQXTST76RX5RPNX7PQ49TS"
+                              default: "tool_01M7WKM88JYTC535CHFSND6KX3"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -49099,7 +49249,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M7VQXTSTNMHMDSR1Y96SQHSN"
+                              default: "tool_01M7WKM88J1Z8MGV9KVC8QZBFW"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -49202,7 +49352,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M7VQXTST4MYXGNYAXN25DD2T"
+                              default: "tool_01M7WKM88KCX5ZW0KYNKRM7YP6"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -49346,7 +49496,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M7VQXTSV974592VVTNN5Q6DF"
+                              default: "tool_01M7WKM88KY8AQ9507K3K1SMSS"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -49838,7 +49988,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M7VQXTT0QNAR1MTP53PWY3VT"
+                        default: "tool_01M7WKM88PKMJ8M44Z744DFWDN"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -49939,7 +50089,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M7VQXTT1E6EK9BFWSW7CV94M"
+                        default: "tool_01M7WKM88QBTWW2NNWHCKC0TP6"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -50042,7 +50192,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M7VQXTT1ZNKK383BM4MFBFWY"
+                        default: "tool_01M7WKM88Q4FJSJJZ9Z5JBH3D2"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -50186,7 +50336,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M7VQXTT18Q2MGAWQ92R0KRD2"
+                        default: "tool_01M7WKM88RV0APFD3NM6NHE2XM"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -50691,7 +50841,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M7VQXTT2FDYGRPEBZRMNS53X"
+                        default: "tool_01M7WKM88SC5CSXQ2J0K002KGT"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -50792,7 +50942,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M7VQXTT39CN29GZB7BHNERQX"
+                        default: "tool_01M7WKM88T6APYCXPEMQPGRG6V"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -50895,7 +51045,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M7VQXTT335SKCWH9JPHJWHNE"
+                        default: "tool_01M7WKM88TV3NFS98EXYV137BG"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -51039,7 +51189,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M7VQXTT3M695CKT85RNYT969"
+                        default: "tool_01M7WKM88V23EQJVAS8KWY65DE"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -51208,7 +51358,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M7VQXTT6WK8VJA9F1MBQ9REV"
+                        default: "tool_01M7WKM88Y4SA6FS3VX0TZFC44"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -51309,7 +51459,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M7VQXTT6MCSW49A5QPACP4QC"
+                        default: "tool_01M7WKM88ZENX2C79ADRMY08CT"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -51412,7 +51562,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M7VQXTT7Q8AZ08C50MBGTMQ4"
+                        default: "tool_01M7WKM88ZRM02T4AXMQ81CWTK"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -51556,7 +51706,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M7VQXTT70C3P5MBJNHVP6ZQK"
+                        default: "tool_01M7WKM890PMXHPSESFRA7V9QS"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -81450,6 +81600,51 @@ paths:
                               - "completed"
                               - "incomplete"
                             type: "string"
+                          text:
+                            description: "Response format applied by a configuration_update item."
+                            properties:
+                              format:
+                                anyOf:
+                                  - properties:
+                                      type:
+                                        enum:
+                                          - "text"
+                                        type: "string"
+                                    required:
+                                      - "type"
+                                    title: "Plain text"
+                                    type: "object"
+                                  - properties:
+                                      description:
+                                        description: "A description of what the response format is for, used by the model to determine how to respond in the format."
+                                        type: "string"
+                                      name:
+                                        description: "The name of the response format. Must be a-z, A-Z, 0-9, or contain underscores and dashes, with a maximum length of 64."
+                                        maxLength: 64
+                                        pattern: "^[a-zA-Z0-9_-]+$"
+                                        type: "string"
+                                      schema:
+                                        additionalProperties: true
+                                        description: "The schema for the response format, described as a JSON Schema object."
+                                        type: "object"
+                                      strict:
+                                        description: "Whether to enable strict schema adherence when generating the output. If set to true, the model will always follow the exact schema defined in the `schema` field."
+                                        type: "boolean"
+                                      type:
+                                        description: "The type of response format being defined. Always `json_schema`."
+                                        enum:
+                                          - "json_schema"
+                                        type: "string"
+                                    required:
+                                      - "type"
+                                      - "name"
+                                      - "schema"
+                                    title: "JSON Schema"
+                                    type: "object"
+                                description: "The output format: plain text or structured JSON schema."
+                            required:
+                              - "format"
+                            type: "object"
                           type:
                             description: "The type of item."
                             enum:
@@ -81674,7 +81869,38 @@ paths:
                         - "name"
                       title: "Specific function"
                       type: "object"
-                  description: "How the model should use the provided tools. Can be a string shorthand or a specific function selector."
+                    - description: "Restrict callable tools without changing their definitions. Native OpenAI Responses API only."
+                      properties:
+                        mode:
+                          enum:
+                            - "auto"
+                            - "required"
+                          type: "string"
+                        tools:
+                          items:
+                            additionalProperties: true
+                            properties:
+                              name:
+                                type: "string"
+                              server_label:
+                                type: "string"
+                              type:
+                                type: "string"
+                            required:
+                              - "type"
+                            type: "object"
+                          type: "array"
+                        type:
+                          enum:
+                            - "allowed_tools"
+                          type: "string"
+                      required:
+                        - "type"
+                        - "mode"
+                        - "tools"
+                      title: "Allowed tools"
+                      type: "object"
+                  description: "How the model should use the provided tools. Native OpenAI requests can restrict the allowed tools."
                 tools:
                   description: "Tools available to the model."
                   items:
@@ -81914,6 +82140,13 @@ paths:
                     type:
                       - "array"
                       - "null"
+                  input_transformations:
+                    description: "Reasoning items removed by OpenAI and the reason for each removal, in input order."
+                    items:
+                      $ref: "#/components/schemas/InputTransformation"
+                    type:
+                      - "array"
+                      - "null"
                   instructions:
                     type:
                       - "string"
@@ -81956,6 +82189,9 @@ paths:
                     type:
                       - "string"
                       - "null"
+                  prompt_cache_diagnostics:
+                    $ref: "#/components/schemas/PromptCacheDiagnostics"
+                    description: "OpenAI prompt cache comparison result, when available."
                   prompt_cache_key:
                     type:
                       - "string"
@@ -82157,6 +82393,13 @@ paths:
                     type:
                       - "array"
                       - "null"
+                  input_transformations:
+                    description: "Reasoning items removed by OpenAI and the reason for each removal, in input order."
+                    items:
+                      $ref: "#/components/schemas/InputTransformation"
+                    type:
+                      - "array"
+                      - "null"
                   instructions:
                     type:
                       - "string"
@@ -82199,6 +82442,9 @@ paths:
                     type:
                       - "string"
                       - "null"
+                  prompt_cache_diagnostics:
+                    $ref: "#/components/schemas/PromptCacheDiagnostics"
+                    description: "OpenAI prompt cache comparison result, when available."
                   prompt_cache_key:
                     type:
                       - "string"
