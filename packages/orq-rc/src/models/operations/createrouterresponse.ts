@@ -74,6 +74,11 @@ export type CreateRouterResponseCacheControl = {
 };
 
 /**
+ * A JSON string for function calls, or an object for OpenAI tool search calls.
+ */
+export type InputArguments = string | { [k: string]: any };
+
+/**
  * An encrypted content part of an agent_message item.
  */
 export type ThreeEncryptedContent = {
@@ -779,6 +784,18 @@ export type CreateRouterResponseInputContent =
     | ThreeEncryptedContent
   >;
 
+/**
+ * Execution mode of a tool search item.
+ */
+export const Execution = {
+  Server: "server",
+  Client: "client",
+} as const;
+/**
+ * Execution mode of a tool search item.
+ */
+export type Execution = ClosedEnum<typeof Execution>;
+
 export const Effort = {
   None: "none",
   Minimal: "minimal",
@@ -930,9 +947,9 @@ export type CreateRouterResponseInputResponsesType = ClosedEnum<
  */
 export type CreateRouterResponseInput2 = {
   /**
-   * The function arguments as a JSON string (for function_call items).
+   * A JSON string for function calls, or an object for OpenAI tool search calls.
    */
-  arguments?: string | undefined;
+  arguments?: string | { [k: string]: any } | undefined;
   /**
    * Whether a function or custom tool call runs asynchronously.
    */
@@ -942,9 +959,9 @@ export type CreateRouterResponseInput2 = {
    */
   author?: string | undefined;
   /**
-   * The function call identifier (for function_call and function_call_output items).
+   * The call identifier. Hosted tool search can return null.
    */
-  callId?: string | undefined;
+  callId?: string | null | undefined;
   /**
    * The content of the item: a string or an array of content parts.
    */
@@ -968,6 +985,10 @@ export type CreateRouterResponseInput2 = {
    */
   encryptedContent?: string | undefined;
   /**
+   * Execution mode of a tool search item.
+   */
+  execution?: Execution | undefined;
+  /**
    * The ID of the item. For item_reference items, this identifies the referenced item.
    */
   id?: string | undefined;
@@ -975,6 +996,10 @@ export type CreateRouterResponseInput2 = {
    * The name of the function that was called (for function_call items).
    */
   name?: string | undefined;
+  /**
+   * Namespace of the function call.
+   */
+  namespace?: string | undefined;
   /**
    * The output of the function call (for function_call_output type).
    */
@@ -1011,6 +1036,10 @@ export type CreateRouterResponseInput2 = {
    * An opaque signature some providers, such as Google Gemini, attach to their output. Send it back unchanged with the item so the model can continue its reasoning.
    */
   thoughtSignature?: string | undefined;
+  /**
+   * Tool definitions returned in tool_search_output or provided by additional_tools.
+   */
+  tools?: Array<{ [k: string]: any }> | undefined;
   /**
    * The type of item.
    */
@@ -1198,7 +1227,7 @@ export type CreateRouterResponseToolChoice =
 /**
  * Filter which tools from the MCP server are exposed.
  */
-export type ToolsAllowedTools = {
+export type CreateRouterResponseToolsAllowedTools = {
   /**
    * Only expose tools with readOnlyHint annotation.
    */
@@ -1209,6 +1238,12 @@ export type ToolsAllowedTools = {
   toolNames?: Array<string> | undefined;
 };
 
+export const CreateRouterResponseToolsResponsesRequestRequestBody9Type = {
+  Mcp: "mcp",
+} as const;
+export type CreateRouterResponseToolsResponsesRequestRequestBody9Type =
+  ClosedEnum<typeof CreateRouterResponseToolsResponsesRequestRequestBody9Type>;
+
 /**
  * An MCP (Model Context Protocol) server tool. Provide server_url for inline mode, or key to reference a pre-configured MCP server.
  */
@@ -1216,7 +1251,7 @@ export type MCPTool = {
   /**
    * Filter which tools from the MCP server are exposed.
    */
-  allowedTools?: ToolsAllowedTools | undefined;
+  allowedTools?: CreateRouterResponseToolsAllowedTools | undefined;
   /**
    * Custom headers to send with MCP requests. Values support {{variable}} templates.
    */
@@ -1233,7 +1268,7 @@ export type MCPTool = {
    * The MCP server endpoint URL (inline mode).
    */
   serverUrl?: string | undefined;
-  type: "mcp";
+  type: CreateRouterResponseToolsResponsesRequestRequestBody9Type;
 };
 
 export type Files = {
@@ -1276,7 +1311,7 @@ export type Network = {
 /**
  * The platform tool type. orq:web_search, orq:web_fetch, and orq:datetime are the canonical names for orq:google_search, orq:web_scraper, and orq:current_date.
  */
-export const CreateRouterResponseToolsResponsesRequestType = {
+export const CreateRouterResponseToolsResponsesRequestRequestBody8Type = {
   OrqWebSearch: "orq:web_search",
   OrqWebFetch: "orq:web_fetch",
   OrqDatetime: "orq:datetime",
@@ -1299,9 +1334,8 @@ export const CreateRouterResponseToolsResponsesRequestType = {
 /**
  * The platform tool type. orq:web_search, orq:web_fetch, and orq:datetime are the canonical names for orq:google_search, orq:web_scraper, and orq:current_date.
  */
-export type CreateRouterResponseToolsResponsesRequestType = ClosedEnum<
-  typeof CreateRouterResponseToolsResponsesRequestType
->;
+export type CreateRouterResponseToolsResponsesRequestRequestBody8Type =
+  ClosedEnum<typeof CreateRouterResponseToolsResponsesRequestRequestBody8Type>;
 
 /**
  * A platform tool reference. For MCP tools, prefer type 'mcp' with 'key' instead of 'orq:mcp' with 'tool_id'.
@@ -1330,7 +1364,71 @@ export type OrqAiTool = {
   /**
    * The platform tool type. orq:web_search, orq:web_fetch, and orq:datetime are the canonical names for orq:google_search, orq:web_scraper, and orq:current_date.
    */
-  type: CreateRouterResponseToolsResponsesRequestType;
+  type: CreateRouterResponseToolsResponsesRequestRequestBody8Type;
+};
+
+export const CreateRouterResponseToolsResponsesRequestRequestBody5Type = {
+  Custom: "custom",
+} as const;
+export type CreateRouterResponseToolsResponsesRequestRequestBody5Type =
+  ClosedEnum<typeof CreateRouterResponseToolsResponsesRequestRequestBody5Type>;
+
+/**
+ * A custom tool that accepts free-form input.
+ */
+export type ToolsCustom = {
+  /**
+   * Whether the tool response can be returned asynchronously.
+   */
+  async?: boolean | undefined;
+  /**
+   * Load this custom tool on demand using native OpenAI tool_search.
+   */
+  deferLoading?: boolean | undefined;
+  /**
+   * A description of what the custom tool does.
+   */
+  description?: string | undefined;
+  /**
+   * The name of the custom tool.
+   */
+  name: string;
+  type: CreateRouterResponseToolsResponsesRequestRequestBody5Type;
+};
+
+export type ToolsAllowedTools = Array<string> | { [k: string]: any };
+
+export const RequireApproval1 = {
+  Always: "always",
+  Never: "never",
+} as const;
+export type RequireApproval1 = ClosedEnum<typeof RequireApproval1>;
+
+export type RequireApproval = RequireApproval1 | { [k: string]: any };
+
+export const CreateRouterResponseToolsResponsesRequestRequestBody4Type = {
+  Mcp: "mcp",
+} as const;
+export type CreateRouterResponseToolsResponsesRequestRequestBody4Type =
+  ClosedEnum<typeof CreateRouterResponseToolsResponsesRequestRequestBody4Type>;
+
+/**
+ * A remote MCP server or connector called by the native OpenAI Responses API.
+ */
+export type OpenAIMCPTool = {
+  allowedTools?: Array<string> | { [k: string]: any } | undefined;
+  authorization?: string | undefined;
+  connectorId?: string | undefined;
+  /**
+   * Load tools from this server on demand when native tool_search is available.
+   */
+  deferLoading?: boolean | undefined;
+  headers?: { [k: string]: string } | undefined;
+  requireApproval?: RequireApproval1 | { [k: string]: any } | undefined;
+  serverDescription?: string | undefined;
+  serverLabel: string;
+  serverUrl?: string | undefined;
+  type: CreateRouterResponseToolsResponsesRequestRequestBody4Type;
 };
 
 /**
@@ -1342,6 +1440,10 @@ export type Custom = {
    */
   async?: boolean | undefined;
   /**
+   * Load this custom tool on demand using native OpenAI tool_search.
+   */
+  deferLoading?: boolean | undefined;
+  /**
    * A description of what the custom tool does.
    */
   description?: string | undefined;
@@ -1350,6 +1452,153 @@ export type Custom = {
    */
   name: string;
   type: "custom";
+};
+
+/**
+ * The time-to-live for the cache control breakpoint. This may be one of the following values:
+ *
+ * @remarks
+ *
+ * - `5m`: 5 minutes
+ * - `1h`: 1 hour
+ *
+ * Defaults to `5m`. Only supported by Anthropic Claude models.
+ */
+export const CreateRouterResponseToolsTtl = {
+  Fivem: "5m",
+  Oneh: "1h",
+} as const;
+/**
+ * The time-to-live for the cache control breakpoint. This may be one of the following values:
+ *
+ * @remarks
+ *
+ * - `5m`: 5 minutes
+ * - `1h`: 1 hour
+ *
+ * Defaults to `5m`. Only supported by Anthropic Claude models.
+ */
+export type CreateRouterResponseToolsTtl = ClosedEnum<
+  typeof CreateRouterResponseToolsTtl
+>;
+
+/**
+ * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+ */
+export const CreateRouterResponseToolsResponsesRequestType = {
+  Ephemeral: "ephemeral",
+} as const;
+/**
+ * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+ */
+export type CreateRouterResponseToolsResponsesRequestType = ClosedEnum<
+  typeof CreateRouterResponseToolsResponsesRequestType
+>;
+
+export type CreateRouterResponseToolsCacheControl = {
+  /**
+   * The time-to-live for the cache control breakpoint. This may be one of the following values:
+   *
+   * @remarks
+   *
+   * - `5m`: 5 minutes
+   * - `1h`: 1 hour
+   *
+   * Defaults to `5m`. Only supported by Anthropic Claude models.
+   */
+  ttl?: CreateRouterResponseToolsTtl | undefined;
+  /**
+   * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+   */
+  type: CreateRouterResponseToolsResponsesRequestType;
+};
+
+/**
+ * A function tool the model can call.
+ */
+export type CreateRouterResponseToolsFunction = {
+  /**
+   * Whether the tool response can be returned asynchronously.
+   */
+  async?: boolean | undefined;
+  cacheControl?: CreateRouterResponseToolsCacheControl | undefined;
+  /**
+   * Load this function on demand using tool_search on supported OpenAI models or orq:tool_search on the gateway.
+   */
+  deferLoading?: boolean | undefined;
+  /**
+   * A description of what the function does.
+   */
+  description?: string | undefined;
+  /**
+   * The name of the function.
+   */
+  name: string;
+  /**
+   * The parameters the function accepts, as a JSON Schema object.
+   */
+  parameters?: { [k: string]: any } | undefined;
+  /**
+   * Whether to enforce strict parameter validation.
+   */
+  strict?: boolean | undefined;
+  type: "function";
+};
+
+export type ToolsTools = CreateRouterResponseToolsFunction | Custom;
+
+export const CreateRouterResponseToolsResponsesRequestRequestBody3Type = {
+  Namespace: "namespace",
+} as const;
+export type CreateRouterResponseToolsResponsesRequestRequestBody3Type =
+  ClosedEnum<typeof CreateRouterResponseToolsResponsesRequestRequestBody3Type>;
+
+/**
+ * Group related OpenAI function and custom tools. Set defer_loading on individual functions to use native tool search.
+ */
+export type OpenAIToolNamespace = {
+  description: string;
+  name: string;
+  tools: Array<CreateRouterResponseToolsFunction | Custom>;
+  type: CreateRouterResponseToolsResponsesRequestRequestBody3Type;
+};
+
+/**
+ * Defaults to server. In client mode, return the matching tools in a tool_search_output item.
+ */
+export const ToolsExecution = {
+  Server: "server",
+  Client: "client",
+} as const;
+/**
+ * Defaults to server. In client mode, return the matching tools in a tool_search_output item.
+ */
+export type ToolsExecution = ClosedEnum<typeof ToolsExecution>;
+
+export const CreateRouterResponseToolsResponsesType = {
+  ToolSearch: "tool_search",
+} as const;
+export type CreateRouterResponseToolsResponsesType = ClosedEnum<
+  typeof CreateRouterResponseToolsResponsesType
+>;
+
+/**
+ * Load deferred tools on demand through the native OpenAI Responses API.
+ */
+export type OpenAIToolSearch = {
+  /**
+   * Describe the search performed by a client-executed tool.
+   */
+  description?: string | undefined;
+  /**
+   * Defaults to server. In client mode, return the matching tools in a tool_search_output item.
+   */
+  execution?: ToolsExecution | undefined;
+  /**
+   * JSON Schema for the client-executed search arguments.
+   */
+  parameters?: { [k: string]: any } | undefined;
+  type: CreateRouterResponseToolsResponsesType;
 };
 
 /**
@@ -1407,6 +1656,13 @@ export type ToolsCacheControl = {
   type: ToolsType;
 };
 
+export const CreateRouterResponseToolsType = {
+  Function: "function",
+} as const;
+export type CreateRouterResponseToolsType = ClosedEnum<
+  typeof CreateRouterResponseToolsType
+>;
+
 /**
  * A function tool the model can call.
  */
@@ -1417,7 +1673,7 @@ export type ToolsFunction = {
   async?: boolean | undefined;
   cacheControl?: ToolsCacheControl | undefined;
   /**
-   * Hide this tool from the model until an orq:tool_search call reveals it. Requires an orq:tool_search tool in the same request.
+   * Load this function on demand using tool_search on supported OpenAI models or orq:tool_search on the gateway.
    */
   deferLoading?: boolean | undefined;
   /**
@@ -1436,36 +1692,21 @@ export type ToolsFunction = {
    * Whether to enforce strict parameter validation.
    */
   strict?: boolean | undefined;
-  type: "function";
+  type: CreateRouterResponseToolsType;
 };
 
 /**
  * A tool definition. The "type" field determines the tool kind.
  */
 export type CreateRouterResponseTools =
+  | OpenAIToolNamespace
   | ToolsFunction
-  | Custom
+  | OpenAIMCPTool
+  | ToolsCustom
   | components.OrqAdvisorTool
-  | (components.OrqSidekickTool & { type: "orq:subagent" })
-  | (components.OrqSidekickTool & { type: "orq:sidekick" })
-  | (OrqAiTool & { type: "orq:web_search" })
-  | (OrqAiTool & { type: "orq:web_fetch" })
-  | (OrqAiTool & { type: "orq:datetime" })
-  | (OrqAiTool & { type: "orq:search_models" })
-  | (OrqAiTool & { type: "orq:tool_search" })
-  | (OrqAiTool & { type: "orq:image_generation" })
-  | (OrqAiTool & { type: "orq:apply_patch" })
-  | (OrqAiTool & { type: "orq:fusion" })
-  | (OrqAiTool & { type: "orq:shell" })
-  | (OrqAiTool & { type: "orq:query_knowledge_base" })
-  | (OrqAiTool & { type: "orq:retrieve_knowledge_bases" })
-  | (OrqAiTool & { type: "orq:current_date" })
-  | (OrqAiTool & { type: "orq:google_search" })
-  | (OrqAiTool & { type: "orq:web_scraper" })
-  | (OrqAiTool & { type: "orq:code_interpreter" })
-  | (OrqAiTool & { type: "orq:mcp" })
-  | (OrqAiTool & { type: "orq:http" })
-  | (OrqAiTool & { type: "orq:function" })
+  | components.OrqSidekickTool
+  | OpenAIToolSearch
+  | OrqAiTool
   | MCPTool;
 
 export type CreateRouterResponseRequestBody = {
@@ -1611,29 +1852,14 @@ export type CreateRouterResponseRequestBody = {
    */
   tools?:
     | Array<
+      | OpenAIToolNamespace
       | ToolsFunction
-      | Custom
+      | OpenAIMCPTool
+      | ToolsCustom
       | components.OrqAdvisorTool
-      | (components.OrqSidekickTool & { type: "orq:subagent" })
-      | (components.OrqSidekickTool & { type: "orq:sidekick" })
-      | (OrqAiTool & { type: "orq:web_search" })
-      | (OrqAiTool & { type: "orq:web_fetch" })
-      | (OrqAiTool & { type: "orq:datetime" })
-      | (OrqAiTool & { type: "orq:search_models" })
-      | (OrqAiTool & { type: "orq:tool_search" })
-      | (OrqAiTool & { type: "orq:image_generation" })
-      | (OrqAiTool & { type: "orq:apply_patch" })
-      | (OrqAiTool & { type: "orq:fusion" })
-      | (OrqAiTool & { type: "orq:shell" })
-      | (OrqAiTool & { type: "orq:query_knowledge_base" })
-      | (OrqAiTool & { type: "orq:retrieve_knowledge_bases" })
-      | (OrqAiTool & { type: "orq:current_date" })
-      | (OrqAiTool & { type: "orq:google_search" })
-      | (OrqAiTool & { type: "orq:web_scraper" })
-      | (OrqAiTool & { type: "orq:code_interpreter" })
-      | (OrqAiTool & { type: "orq:mcp" })
-      | (OrqAiTool & { type: "orq:http" })
-      | (OrqAiTool & { type: "orq:function" })
+      | components.OrqSidekickTool
+      | OpenAIToolSearch
+      | OrqAiTool
       | MCPTool
     >
     | undefined;
@@ -1814,6 +2040,20 @@ export function createRouterResponseCacheControlToJSON(
       createRouterResponseCacheControl,
     ),
   );
+}
+
+/** @internal */
+export type InputArguments$Outbound = string | { [k: string]: any };
+
+/** @internal */
+export const InputArguments$outboundSchema: z.ZodType<
+  InputArguments$Outbound,
+  z.ZodTypeDef,
+  InputArguments
+> = /* @__PURE__ */ lazySchema$(() => z.union([z.string(), z.record(z.any())]));
+
+export function inputArgumentsToJSON(inputArguments: InputArguments): string {
+  return JSON.stringify(InputArguments$outboundSchema.parse(inputArguments));
 }
 
 /** @internal */
@@ -2754,6 +2994,10 @@ export function createRouterResponseInputContentToJSON(
 }
 
 /** @internal */
+export const Execution$outboundSchema: z.ZodNativeEnum<typeof Execution> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Execution));
+
+/** @internal */
 export const Effort$outboundSchema: z.ZodNativeEnum<typeof Effort> =
   /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Effort));
 
@@ -2922,10 +3166,10 @@ export const CreateRouterResponseInputResponsesType$outboundSchema:
 
 /** @internal */
 export type CreateRouterResponseInput2$Outbound = {
-  arguments?: string | undefined;
+  arguments?: string | { [k: string]: any } | undefined;
   async?: boolean | undefined;
   author?: string | undefined;
-  call_id?: string | undefined;
+  call_id?: string | null | undefined;
   content?:
     | string
     | Array<
@@ -2942,8 +3186,10 @@ export type CreateRouterResponseInput2$Outbound = {
     >
     | undefined;
   encrypted_content?: string | undefined;
+  execution?: string | undefined;
   id?: string | undefined;
   name?: string | undefined;
+  namespace?: string | undefined;
   output?: string | undefined;
   reasoning?: Reasoning$Outbound | undefined;
   recipient?: string | undefined;
@@ -2953,6 +3199,7 @@ export type CreateRouterResponseInput2$Outbound = {
   summary?: Array<SummaryText$Outbound> | undefined;
   text?: InputText$Outbound | undefined;
   thought_signature?: string | undefined;
+  tools?: Array<{ [k: string]: any }> | undefined;
   type?: string | undefined;
 };
 
@@ -2963,10 +3210,10 @@ export const CreateRouterResponseInput2$outboundSchema: z.ZodType<
   CreateRouterResponseInput2
 > = /* @__PURE__ */ lazySchema$(() =>
   z.object({
-    arguments: z.string().optional(),
+    arguments: z.union([z.string(), z.record(z.any())]).optional(),
     async: z.boolean().optional(),
     author: z.string().optional(),
-    callId: z.string().optional(),
+    callId: z.nullable(z.string()).optional(),
     content: z.union([
       z.string(),
       z.array(
@@ -2987,8 +3234,10 @@ export const CreateRouterResponseInput2$outboundSchema: z.ZodType<
       ),
     ]).optional(),
     encryptedContent: z.string().optional(),
+    execution: Execution$outboundSchema.optional(),
     id: z.string().optional(),
     name: z.string().optional(),
+    namespace: z.string().optional(),
     output: z.string().optional(),
     reasoning: z.lazy(() => Reasoning$outboundSchema).optional(),
     recipient: z.string().optional(),
@@ -2998,6 +3247,7 @@ export const CreateRouterResponseInput2$outboundSchema: z.ZodType<
     summary: z.array(z.lazy(() => SummaryText$outboundSchema)).optional(),
     text: z.lazy(() => InputText$outboundSchema).optional(),
     thoughtSignature: z.string().optional(),
+    tools: z.array(z.record(z.any())).optional(),
     type: CreateRouterResponseInputResponsesType$outboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
@@ -3310,16 +3560,16 @@ export function createRouterResponseToolChoiceToJSON(
 }
 
 /** @internal */
-export type ToolsAllowedTools$Outbound = {
+export type CreateRouterResponseToolsAllowedTools$Outbound = {
   read_only?: boolean | undefined;
   tool_names?: Array<string> | undefined;
 };
 
 /** @internal */
-export const ToolsAllowedTools$outboundSchema: z.ZodType<
-  ToolsAllowedTools$Outbound,
+export const CreateRouterResponseToolsAllowedTools$outboundSchema: z.ZodType<
+  CreateRouterResponseToolsAllowedTools$Outbound,
   z.ZodTypeDef,
-  ToolsAllowedTools
+  CreateRouterResponseToolsAllowedTools
 > = /* @__PURE__ */ lazySchema$(() =>
   z.object({
     readOnly: z.boolean().optional(),
@@ -3332,22 +3582,32 @@ export const ToolsAllowedTools$outboundSchema: z.ZodType<
   })
 );
 
-export function toolsAllowedToolsToJSON(
-  toolsAllowedTools: ToolsAllowedTools,
+export function createRouterResponseToolsAllowedToolsToJSON(
+  createRouterResponseToolsAllowedTools: CreateRouterResponseToolsAllowedTools,
 ): string {
   return JSON.stringify(
-    ToolsAllowedTools$outboundSchema.parse(toolsAllowedTools),
+    CreateRouterResponseToolsAllowedTools$outboundSchema.parse(
+      createRouterResponseToolsAllowedTools,
+    ),
   );
 }
 
 /** @internal */
+export const CreateRouterResponseToolsResponsesRequestRequestBody9Type$outboundSchema:
+  z.ZodNativeEnum<
+    typeof CreateRouterResponseToolsResponsesRequestRequestBody9Type
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.nativeEnum(CreateRouterResponseToolsResponsesRequestRequestBody9Type)
+  );
+
+/** @internal */
 export type MCPTool$Outbound = {
-  allowed_tools?: ToolsAllowedTools$Outbound | undefined;
+  allowed_tools?: CreateRouterResponseToolsAllowedTools$Outbound | undefined;
   headers?: { [k: string]: string } | undefined;
   key?: string | undefined;
   server_description?: string | undefined;
   server_url?: string | undefined;
-  type: "mcp";
+  type: string;
 };
 
 /** @internal */
@@ -3357,12 +3617,15 @@ export const MCPTool$outboundSchema: z.ZodType<
   MCPTool
 > = /* @__PURE__ */ lazySchema$(() =>
   z.object({
-    allowedTools: z.lazy(() => ToolsAllowedTools$outboundSchema).optional(),
+    allowedTools: z.lazy(() =>
+      CreateRouterResponseToolsAllowedTools$outboundSchema
+    ).optional(),
     headers: z.record(z.string()).optional(),
     key: z.string().optional(),
     serverDescription: z.string().optional(),
     serverUrl: z.string().optional(),
-    type: z.literal("mcp"),
+    type:
+      CreateRouterResponseToolsResponsesRequestRequestBody9Type$outboundSchema,
   }).transform((v) => {
     return remap$(v, {
       allowedTools: "allowed_tools",
@@ -3429,11 +3692,12 @@ export function networkToJSON(network: Network): string {
 }
 
 /** @internal */
-export const CreateRouterResponseToolsResponsesRequestType$outboundSchema:
-  z.ZodNativeEnum<typeof CreateRouterResponseToolsResponsesRequestType> =
-    /* @__PURE__ */ lazySchema$(() =>
-      z.nativeEnum(CreateRouterResponseToolsResponsesRequestType)
-    );
+export const CreateRouterResponseToolsResponsesRequestRequestBody8Type$outboundSchema:
+  z.ZodNativeEnum<
+    typeof CreateRouterResponseToolsResponsesRequestRequestBody8Type
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.nativeEnum(CreateRouterResponseToolsResponsesRequestRequestBody8Type)
+  );
 
 /** @internal */
 export type OrqAiTool$Outbound = {
@@ -3457,7 +3721,8 @@ export const OrqAiTool$outboundSchema: z.ZodType<
     network: z.lazy(() => Network$outboundSchema).optional(),
     timezone: z.string().optional(),
     toolId: z.string().optional(),
-    type: CreateRouterResponseToolsResponsesRequestType$outboundSchema,
+    type:
+      CreateRouterResponseToolsResponsesRequestRequestBody8Type$outboundSchema,
   }).transform((v) => {
     return remap$(v, {
       maxResults: "max_results",
@@ -3471,8 +3736,153 @@ export function orqAiToolToJSON(orqAiTool: OrqAiTool): string {
 }
 
 /** @internal */
+export const CreateRouterResponseToolsResponsesRequestRequestBody5Type$outboundSchema:
+  z.ZodNativeEnum<
+    typeof CreateRouterResponseToolsResponsesRequestRequestBody5Type
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.nativeEnum(CreateRouterResponseToolsResponsesRequestRequestBody5Type)
+  );
+
+/** @internal */
+export type ToolsCustom$Outbound = {
+  async?: boolean | undefined;
+  defer_loading?: boolean | undefined;
+  description?: string | undefined;
+  name: string;
+  type: string;
+};
+
+/** @internal */
+export const ToolsCustom$outboundSchema: z.ZodType<
+  ToolsCustom$Outbound,
+  z.ZodTypeDef,
+  ToolsCustom
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    async: z.boolean().optional(),
+    deferLoading: z.boolean().optional(),
+    description: z.string().optional(),
+    name: z.string(),
+    type:
+      CreateRouterResponseToolsResponsesRequestRequestBody5Type$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      deferLoading: "defer_loading",
+    });
+  })
+);
+
+export function toolsCustomToJSON(toolsCustom: ToolsCustom): string {
+  return JSON.stringify(ToolsCustom$outboundSchema.parse(toolsCustom));
+}
+
+/** @internal */
+export type ToolsAllowedTools$Outbound = Array<string> | { [k: string]: any };
+
+/** @internal */
+export const ToolsAllowedTools$outboundSchema: z.ZodType<
+  ToolsAllowedTools$Outbound,
+  z.ZodTypeDef,
+  ToolsAllowedTools
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.array(z.string()), z.record(z.any())])
+);
+
+export function toolsAllowedToolsToJSON(
+  toolsAllowedTools: ToolsAllowedTools,
+): string {
+  return JSON.stringify(
+    ToolsAllowedTools$outboundSchema.parse(toolsAllowedTools),
+  );
+}
+
+/** @internal */
+export const RequireApproval1$outboundSchema: z.ZodNativeEnum<
+  typeof RequireApproval1
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(RequireApproval1));
+
+/** @internal */
+export type RequireApproval$Outbound = string | { [k: string]: any };
+
+/** @internal */
+export const RequireApproval$outboundSchema: z.ZodType<
+  RequireApproval$Outbound,
+  z.ZodTypeDef,
+  RequireApproval
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([RequireApproval1$outboundSchema, z.record(z.any())])
+);
+
+export function requireApprovalToJSON(
+  requireApproval: RequireApproval,
+): string {
+  return JSON.stringify(RequireApproval$outboundSchema.parse(requireApproval));
+}
+
+/** @internal */
+export const CreateRouterResponseToolsResponsesRequestRequestBody4Type$outboundSchema:
+  z.ZodNativeEnum<
+    typeof CreateRouterResponseToolsResponsesRequestRequestBody4Type
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.nativeEnum(CreateRouterResponseToolsResponsesRequestRequestBody4Type)
+  );
+
+/** @internal */
+export type OpenAIMCPTool$Outbound = {
+  allowed_tools?: Array<string> | { [k: string]: any } | undefined;
+  authorization?: string | undefined;
+  connector_id?: string | undefined;
+  defer_loading?: boolean | undefined;
+  headers?: { [k: string]: string } | undefined;
+  require_approval?: string | { [k: string]: any } | undefined;
+  server_description?: string | undefined;
+  server_label: string;
+  server_url?: string | undefined;
+  type: string;
+};
+
+/** @internal */
+export const OpenAIMCPTool$outboundSchema: z.ZodType<
+  OpenAIMCPTool$Outbound,
+  z.ZodTypeDef,
+  OpenAIMCPTool
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    allowedTools: z.union([z.array(z.string()), z.record(z.any())]).optional(),
+    authorization: z.string().optional(),
+    connectorId: z.string().optional(),
+    deferLoading: z.boolean().optional(),
+    headers: z.record(z.string()).optional(),
+    requireApproval: z.union([
+      RequireApproval1$outboundSchema,
+      z.record(z.any()),
+    ]).optional(),
+    serverDescription: z.string().optional(),
+    serverLabel: z.string(),
+    serverUrl: z.string().optional(),
+    type:
+      CreateRouterResponseToolsResponsesRequestRequestBody4Type$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      allowedTools: "allowed_tools",
+      connectorId: "connector_id",
+      deferLoading: "defer_loading",
+      requireApproval: "require_approval",
+      serverDescription: "server_description",
+      serverLabel: "server_label",
+      serverUrl: "server_url",
+    });
+  })
+);
+
+export function openAIMCPToolToJSON(openAIMCPTool: OpenAIMCPTool): string {
+  return JSON.stringify(OpenAIMCPTool$outboundSchema.parse(openAIMCPTool));
+}
+
+/** @internal */
 export type Custom$Outbound = {
   async?: boolean | undefined;
+  defer_loading?: boolean | undefined;
   description?: string | undefined;
   name: string;
   type: "custom";
@@ -3486,14 +3896,213 @@ export const Custom$outboundSchema: z.ZodType<
 > = /* @__PURE__ */ lazySchema$(() =>
   z.object({
     async: z.boolean().optional(),
+    deferLoading: z.boolean().optional(),
     description: z.string().optional(),
     name: z.string(),
     type: z.literal("custom"),
+  }).transform((v) => {
+    return remap$(v, {
+      deferLoading: "defer_loading",
+    });
   })
 );
 
 export function customToJSON(custom: Custom): string {
   return JSON.stringify(Custom$outboundSchema.parse(custom));
+}
+
+/** @internal */
+export const CreateRouterResponseToolsTtl$outboundSchema: z.ZodNativeEnum<
+  typeof CreateRouterResponseToolsTtl
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(CreateRouterResponseToolsTtl)
+);
+
+/** @internal */
+export const CreateRouterResponseToolsResponsesRequestType$outboundSchema:
+  z.ZodNativeEnum<typeof CreateRouterResponseToolsResponsesRequestType> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(CreateRouterResponseToolsResponsesRequestType)
+    );
+
+/** @internal */
+export type CreateRouterResponseToolsCacheControl$Outbound = {
+  ttl: string;
+  type: string;
+};
+
+/** @internal */
+export const CreateRouterResponseToolsCacheControl$outboundSchema: z.ZodType<
+  CreateRouterResponseToolsCacheControl$Outbound,
+  z.ZodTypeDef,
+  CreateRouterResponseToolsCacheControl
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ttl: CreateRouterResponseToolsTtl$outboundSchema.default("5m"),
+    type: CreateRouterResponseToolsResponsesRequestType$outboundSchema,
+  })
+);
+
+export function createRouterResponseToolsCacheControlToJSON(
+  createRouterResponseToolsCacheControl: CreateRouterResponseToolsCacheControl,
+): string {
+  return JSON.stringify(
+    CreateRouterResponseToolsCacheControl$outboundSchema.parse(
+      createRouterResponseToolsCacheControl,
+    ),
+  );
+}
+
+/** @internal */
+export type CreateRouterResponseToolsFunction$Outbound = {
+  async?: boolean | undefined;
+  cache_control?: CreateRouterResponseToolsCacheControl$Outbound | undefined;
+  defer_loading?: boolean | undefined;
+  description?: string | undefined;
+  name: string;
+  parameters?: { [k: string]: any } | undefined;
+  strict?: boolean | undefined;
+  type: "function";
+};
+
+/** @internal */
+export const CreateRouterResponseToolsFunction$outboundSchema: z.ZodType<
+  CreateRouterResponseToolsFunction$Outbound,
+  z.ZodTypeDef,
+  CreateRouterResponseToolsFunction
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    async: z.boolean().optional(),
+    cacheControl: z.lazy(() =>
+      CreateRouterResponseToolsCacheControl$outboundSchema
+    ).optional(),
+    deferLoading: z.boolean().optional(),
+    description: z.string().optional(),
+    name: z.string(),
+    parameters: z.record(z.any()).optional(),
+    strict: z.boolean().optional(),
+    type: z.literal("function"),
+  }).transform((v) => {
+    return remap$(v, {
+      cacheControl: "cache_control",
+      deferLoading: "defer_loading",
+    });
+  })
+);
+
+export function createRouterResponseToolsFunctionToJSON(
+  createRouterResponseToolsFunction: CreateRouterResponseToolsFunction,
+): string {
+  return JSON.stringify(
+    CreateRouterResponseToolsFunction$outboundSchema.parse(
+      createRouterResponseToolsFunction,
+    ),
+  );
+}
+
+/** @internal */
+export type ToolsTools$Outbound =
+  | CreateRouterResponseToolsFunction$Outbound
+  | Custom$Outbound;
+
+/** @internal */
+export const ToolsTools$outboundSchema: z.ZodType<
+  ToolsTools$Outbound,
+  z.ZodTypeDef,
+  ToolsTools
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => CreateRouterResponseToolsFunction$outboundSchema),
+    z.lazy(() => Custom$outboundSchema),
+  ])
+);
+
+export function toolsToolsToJSON(toolsTools: ToolsTools): string {
+  return JSON.stringify(ToolsTools$outboundSchema.parse(toolsTools));
+}
+
+/** @internal */
+export const CreateRouterResponseToolsResponsesRequestRequestBody3Type$outboundSchema:
+  z.ZodNativeEnum<
+    typeof CreateRouterResponseToolsResponsesRequestRequestBody3Type
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.nativeEnum(CreateRouterResponseToolsResponsesRequestRequestBody3Type)
+  );
+
+/** @internal */
+export type OpenAIToolNamespace$Outbound = {
+  description: string;
+  name: string;
+  tools: Array<CreateRouterResponseToolsFunction$Outbound | Custom$Outbound>;
+  type: string;
+};
+
+/** @internal */
+export const OpenAIToolNamespace$outboundSchema: z.ZodType<
+  OpenAIToolNamespace$Outbound,
+  z.ZodTypeDef,
+  OpenAIToolNamespace
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    description: z.string(),
+    name: z.string(),
+    tools: z.array(z.union([
+      z.lazy(() => CreateRouterResponseToolsFunction$outboundSchema),
+      z.lazy(() => Custom$outboundSchema),
+    ])),
+    type:
+      CreateRouterResponseToolsResponsesRequestRequestBody3Type$outboundSchema,
+  })
+);
+
+export function openAIToolNamespaceToJSON(
+  openAIToolNamespace: OpenAIToolNamespace,
+): string {
+  return JSON.stringify(
+    OpenAIToolNamespace$outboundSchema.parse(openAIToolNamespace),
+  );
+}
+
+/** @internal */
+export const ToolsExecution$outboundSchema: z.ZodNativeEnum<
+  typeof ToolsExecution
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ToolsExecution));
+
+/** @internal */
+export const CreateRouterResponseToolsResponsesType$outboundSchema:
+  z.ZodNativeEnum<typeof CreateRouterResponseToolsResponsesType> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(CreateRouterResponseToolsResponsesType)
+    );
+
+/** @internal */
+export type OpenAIToolSearch$Outbound = {
+  description?: string | undefined;
+  execution?: string | undefined;
+  parameters?: { [k: string]: any } | undefined;
+  type: string;
+};
+
+/** @internal */
+export const OpenAIToolSearch$outboundSchema: z.ZodType<
+  OpenAIToolSearch$Outbound,
+  z.ZodTypeDef,
+  OpenAIToolSearch
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    description: z.string().optional(),
+    execution: ToolsExecution$outboundSchema.optional(),
+    parameters: z.record(z.any()).optional(),
+    type: CreateRouterResponseToolsResponsesType$outboundSchema,
+  })
+);
+
+export function openAIToolSearchToJSON(
+  openAIToolSearch: OpenAIToolSearch,
+): string {
+  return JSON.stringify(
+    OpenAIToolSearch$outboundSchema.parse(openAIToolSearch),
+  );
 }
 
 /** @internal */
@@ -3531,6 +4140,13 @@ export function toolsCacheControlToJSON(
 }
 
 /** @internal */
+export const CreateRouterResponseToolsType$outboundSchema: z.ZodNativeEnum<
+  typeof CreateRouterResponseToolsType
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(CreateRouterResponseToolsType)
+);
+
+/** @internal */
 export type ToolsFunction$Outbound = {
   async?: boolean | undefined;
   cache_control?: ToolsCacheControl$Outbound | undefined;
@@ -3539,7 +4155,7 @@ export type ToolsFunction$Outbound = {
   name: string;
   parameters?: { [k: string]: any } | undefined;
   strict?: boolean | undefined;
-  type: "function";
+  type: string;
 };
 
 /** @internal */
@@ -3556,7 +4172,7 @@ export const ToolsFunction$outboundSchema: z.ZodType<
     name: z.string(),
     parameters: z.record(z.any()).optional(),
     strict: z.boolean().optional(),
-    type: z.literal("function"),
+    type: CreateRouterResponseToolsType$outboundSchema,
   }).transform((v) => {
     return remap$(v, {
       cacheControl: "cache_control",
@@ -3571,29 +4187,14 @@ export function toolsFunctionToJSON(toolsFunction: ToolsFunction): string {
 
 /** @internal */
 export type CreateRouterResponseTools$Outbound =
+  | OpenAIToolNamespace$Outbound
   | ToolsFunction$Outbound
-  | Custom$Outbound
+  | OpenAIMCPTool$Outbound
+  | ToolsCustom$Outbound
   | components.OrqAdvisorTool$Outbound
-  | (components.OrqSidekickTool$Outbound & { type: "orq:subagent" })
-  | (components.OrqSidekickTool$Outbound & { type: "orq:sidekick" })
-  | (OrqAiTool$Outbound & { type: "orq:web_search" })
-  | (OrqAiTool$Outbound & { type: "orq:web_fetch" })
-  | (OrqAiTool$Outbound & { type: "orq:datetime" })
-  | (OrqAiTool$Outbound & { type: "orq:search_models" })
-  | (OrqAiTool$Outbound & { type: "orq:tool_search" })
-  | (OrqAiTool$Outbound & { type: "orq:image_generation" })
-  | (OrqAiTool$Outbound & { type: "orq:apply_patch" })
-  | (OrqAiTool$Outbound & { type: "orq:fusion" })
-  | (OrqAiTool$Outbound & { type: "orq:shell" })
-  | (OrqAiTool$Outbound & { type: "orq:query_knowledge_base" })
-  | (OrqAiTool$Outbound & { type: "orq:retrieve_knowledge_bases" })
-  | (OrqAiTool$Outbound & { type: "orq:current_date" })
-  | (OrqAiTool$Outbound & { type: "orq:google_search" })
-  | (OrqAiTool$Outbound & { type: "orq:web_scraper" })
-  | (OrqAiTool$Outbound & { type: "orq:code_interpreter" })
-  | (OrqAiTool$Outbound & { type: "orq:mcp" })
-  | (OrqAiTool$Outbound & { type: "orq:http" })
-  | (OrqAiTool$Outbound & { type: "orq:function" })
+  | components.OrqSidekickTool$Outbound
+  | OpenAIToolSearch$Outbound
+  | OrqAiTool$Outbound
   | MCPTool$Outbound;
 
 /** @internal */
@@ -3603,69 +4204,14 @@ export const CreateRouterResponseTools$outboundSchema: z.ZodType<
   CreateRouterResponseTools
 > = /* @__PURE__ */ lazySchema$(() =>
   z.union([
+    z.lazy(() => OpenAIToolNamespace$outboundSchema),
     z.lazy(() => ToolsFunction$outboundSchema),
-    z.lazy(() => Custom$outboundSchema),
+    z.lazy(() => OpenAIMCPTool$outboundSchema),
+    z.lazy(() => ToolsCustom$outboundSchema),
     components.OrqAdvisorTool$outboundSchema,
-    components.OrqSidekickTool$outboundSchema.and(
-      z.object({ type: z.literal("orq:subagent") }),
-    ),
-    components.OrqSidekickTool$outboundSchema.and(
-      z.object({ type: z.literal("orq:sidekick") }),
-    ),
-    z.lazy(() => OrqAiTool$outboundSchema).and(
-      z.object({ type: z.literal("orq:web_search") }),
-    ),
-    z.lazy(() => OrqAiTool$outboundSchema).and(
-      z.object({ type: z.literal("orq:web_fetch") }),
-    ),
-    z.lazy(() => OrqAiTool$outboundSchema).and(
-      z.object({ type: z.literal("orq:datetime") }),
-    ),
-    z.lazy(() => OrqAiTool$outboundSchema).and(
-      z.object({ type: z.literal("orq:search_models") }),
-    ),
-    z.lazy(() => OrqAiTool$outboundSchema).and(
-      z.object({ type: z.literal("orq:tool_search") }),
-    ),
-    z.lazy(() => OrqAiTool$outboundSchema).and(
-      z.object({ type: z.literal("orq:image_generation") }),
-    ),
-    z.lazy(() => OrqAiTool$outboundSchema).and(
-      z.object({ type: z.literal("orq:apply_patch") }),
-    ),
-    z.lazy(() => OrqAiTool$outboundSchema).and(
-      z.object({ type: z.literal("orq:fusion") }),
-    ),
-    z.lazy(() => OrqAiTool$outboundSchema).and(
-      z.object({ type: z.literal("orq:shell") }),
-    ),
-    z.lazy(() => OrqAiTool$outboundSchema).and(
-      z.object({ type: z.literal("orq:query_knowledge_base") }),
-    ),
-    z.lazy(() => OrqAiTool$outboundSchema).and(
-      z.object({ type: z.literal("orq:retrieve_knowledge_bases") }),
-    ),
-    z.lazy(() => OrqAiTool$outboundSchema).and(
-      z.object({ type: z.literal("orq:current_date") }),
-    ),
-    z.lazy(() => OrqAiTool$outboundSchema).and(
-      z.object({ type: z.literal("orq:google_search") }),
-    ),
-    z.lazy(() => OrqAiTool$outboundSchema).and(
-      z.object({ type: z.literal("orq:web_scraper") }),
-    ),
-    z.lazy(() => OrqAiTool$outboundSchema).and(
-      z.object({ type: z.literal("orq:code_interpreter") }),
-    ),
-    z.lazy(() => OrqAiTool$outboundSchema).and(
-      z.object({ type: z.literal("orq:mcp") }),
-    ),
-    z.lazy(() => OrqAiTool$outboundSchema).and(
-      z.object({ type: z.literal("orq:http") }),
-    ),
-    z.lazy(() => OrqAiTool$outboundSchema).and(
-      z.object({ type: z.literal("orq:function") }),
-    ),
+    components.OrqSidekickTool$outboundSchema,
+    z.lazy(() => OpenAIToolSearch$outboundSchema),
+    z.lazy(() => OrqAiTool$outboundSchema),
     z.lazy(() => MCPTool$outboundSchema),
   ])
 );
@@ -3735,29 +4281,14 @@ export type CreateRouterResponseRequestBody$Outbound = {
     | undefined;
   tools?:
     | Array<
+      | OpenAIToolNamespace$Outbound
       | ToolsFunction$Outbound
-      | Custom$Outbound
+      | OpenAIMCPTool$Outbound
+      | ToolsCustom$Outbound
       | components.OrqAdvisorTool$Outbound
-      | (components.OrqSidekickTool$Outbound & { type: "orq:subagent" })
-      | (components.OrqSidekickTool$Outbound & { type: "orq:sidekick" })
-      | (OrqAiTool$Outbound & { type: "orq:web_search" })
-      | (OrqAiTool$Outbound & { type: "orq:web_fetch" })
-      | (OrqAiTool$Outbound & { type: "orq:datetime" })
-      | (OrqAiTool$Outbound & { type: "orq:search_models" })
-      | (OrqAiTool$Outbound & { type: "orq:tool_search" })
-      | (OrqAiTool$Outbound & { type: "orq:image_generation" })
-      | (OrqAiTool$Outbound & { type: "orq:apply_patch" })
-      | (OrqAiTool$Outbound & { type: "orq:fusion" })
-      | (OrqAiTool$Outbound & { type: "orq:shell" })
-      | (OrqAiTool$Outbound & { type: "orq:query_knowledge_base" })
-      | (OrqAiTool$Outbound & { type: "orq:retrieve_knowledge_bases" })
-      | (OrqAiTool$Outbound & { type: "orq:current_date" })
-      | (OrqAiTool$Outbound & { type: "orq:google_search" })
-      | (OrqAiTool$Outbound & { type: "orq:web_scraper" })
-      | (OrqAiTool$Outbound & { type: "orq:code_interpreter" })
-      | (OrqAiTool$Outbound & { type: "orq:mcp" })
-      | (OrqAiTool$Outbound & { type: "orq:http" })
-      | (OrqAiTool$Outbound & { type: "orq:function" })
+      | components.OrqSidekickTool$Outbound
+      | OpenAIToolSearch$Outbound
+      | OrqAiTool$Outbound
       | MCPTool$Outbound
     >
     | undefined;
@@ -3832,69 +4363,14 @@ export const CreateRouterResponseRequestBody$outboundSchema: z.ZodType<
       Shorthand$outboundSchema,
     ]).optional(),
     tools: z.array(z.union([
+      z.lazy(() => OpenAIToolNamespace$outboundSchema),
       z.lazy(() => ToolsFunction$outboundSchema),
-      z.lazy(() => Custom$outboundSchema),
+      z.lazy(() => OpenAIMCPTool$outboundSchema),
+      z.lazy(() => ToolsCustom$outboundSchema),
       components.OrqAdvisorTool$outboundSchema,
-      components.OrqSidekickTool$outboundSchema.and(
-        z.object({ type: z.literal("orq:subagent") }),
-      ),
-      components.OrqSidekickTool$outboundSchema.and(
-        z.object({ type: z.literal("orq:sidekick") }),
-      ),
-      z.lazy(() => OrqAiTool$outboundSchema).and(
-        z.object({ type: z.literal("orq:web_search") }),
-      ),
-      z.lazy(() => OrqAiTool$outboundSchema).and(
-        z.object({ type: z.literal("orq:web_fetch") }),
-      ),
-      z.lazy(() => OrqAiTool$outboundSchema).and(
-        z.object({ type: z.literal("orq:datetime") }),
-      ),
-      z.lazy(() => OrqAiTool$outboundSchema).and(
-        z.object({ type: z.literal("orq:search_models") }),
-      ),
-      z.lazy(() => OrqAiTool$outboundSchema).and(
-        z.object({ type: z.literal("orq:tool_search") }),
-      ),
-      z.lazy(() => OrqAiTool$outboundSchema).and(
-        z.object({ type: z.literal("orq:image_generation") }),
-      ),
-      z.lazy(() => OrqAiTool$outboundSchema).and(
-        z.object({ type: z.literal("orq:apply_patch") }),
-      ),
-      z.lazy(() => OrqAiTool$outboundSchema).and(
-        z.object({ type: z.literal("orq:fusion") }),
-      ),
-      z.lazy(() => OrqAiTool$outboundSchema).and(
-        z.object({ type: z.literal("orq:shell") }),
-      ),
-      z.lazy(() => OrqAiTool$outboundSchema).and(
-        z.object({ type: z.literal("orq:query_knowledge_base") }),
-      ),
-      z.lazy(() => OrqAiTool$outboundSchema).and(
-        z.object({ type: z.literal("orq:retrieve_knowledge_bases") }),
-      ),
-      z.lazy(() => OrqAiTool$outboundSchema).and(
-        z.object({ type: z.literal("orq:current_date") }),
-      ),
-      z.lazy(() => OrqAiTool$outboundSchema).and(
-        z.object({ type: z.literal("orq:google_search") }),
-      ),
-      z.lazy(() => OrqAiTool$outboundSchema).and(
-        z.object({ type: z.literal("orq:web_scraper") }),
-      ),
-      z.lazy(() => OrqAiTool$outboundSchema).and(
-        z.object({ type: z.literal("orq:code_interpreter") }),
-      ),
-      z.lazy(() => OrqAiTool$outboundSchema).and(
-        z.object({ type: z.literal("orq:mcp") }),
-      ),
-      z.lazy(() => OrqAiTool$outboundSchema).and(
-        z.object({ type: z.literal("orq:http") }),
-      ),
-      z.lazy(() => OrqAiTool$outboundSchema).and(
-        z.object({ type: z.literal("orq:function") }),
-      ),
+      components.OrqSidekickTool$outboundSchema,
+      z.lazy(() => OpenAIToolSearch$outboundSchema),
+      z.lazy(() => OrqAiTool$outboundSchema),
       z.lazy(() => MCPTool$outboundSchema),
     ])).optional(),
     topK: z.number().int().optional(),

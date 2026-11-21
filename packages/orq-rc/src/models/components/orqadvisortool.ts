@@ -26,6 +26,17 @@ export const ReasoningEffort = {
 export type ReasoningEffort = ClosedEnum<typeof ReasoningEffort>;
 
 /**
+ * Advisor tool discriminator.
+ */
+export const OrqAdvisorToolType = {
+  OrqAdvisor: "orq:advisor",
+} as const;
+/**
+ * Advisor tool discriminator.
+ */
+export type OrqAdvisorToolType = ClosedEnum<typeof OrqAdvisorToolType>;
+
+/**
  * Lets the primary model consult a configured secondary model for advice.
  */
 export type OrqAdvisorTool = {
@@ -56,13 +67,18 @@ export type OrqAdvisorTool = {
   /**
    * Advisor tool discriminator.
    */
-  type: "orq:advisor";
+  type: OrqAdvisorToolType;
 };
 
 /** @internal */
 export const ReasoningEffort$outboundSchema: z.ZodNativeEnum<
   typeof ReasoningEffort
 > = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ReasoningEffort));
+
+/** @internal */
+export const OrqAdvisorToolType$outboundSchema: z.ZodNativeEnum<
+  typeof OrqAdvisorToolType
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(OrqAdvisorToolType));
 
 /** @internal */
 export type OrqAdvisorTool$Outbound = {
@@ -72,7 +88,7 @@ export type OrqAdvisorTool$Outbound = {
   model: string;
   reasoning_effort?: string | undefined;
   temperature?: number | undefined;
-  type: "orq:advisor";
+  type: string;
 };
 
 /** @internal */
@@ -88,7 +104,7 @@ export const OrqAdvisorTool$outboundSchema: z.ZodType<
     model: z.string(),
     reasoningEffort: ReasoningEffort$outboundSchema.optional(),
     temperature: z.number().optional(),
-    type: z.literal("orq:advisor"),
+    type: OrqAdvisorToolType$outboundSchema,
   }).transform((v) => {
     return remap$(v, {
       maxTokens: "max_tokens",

@@ -1,0 +1,24 @@
+# ToolsCustom
+
+A custom tool that accepts free-form input.
+
+## Example Usage
+
+```typescript
+import { ToolsCustom } from "@orq-ai/node/models/operations";
+
+let value: ToolsCustom = {
+  name: "<value>",
+  type: "custom",
+};
+```
+
+## Fields
+
+| Field                                                                                                                                                        | Type                                                                                                                                                         | Required                                                                                                                                                     | Description                                                                                                                                                  |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `async`                                                                                                                                                      | *boolean*                                                                                                                                                    | :heavy_minus_sign:                                                                                                                                           | Whether the tool response can be returned asynchronously.                                                                                                    |
+| `deferLoading`                                                                                                                                               | *boolean*                                                                                                                                                    | :heavy_minus_sign:                                                                                                                                           | Load this custom tool on demand using native OpenAI tool_search.                                                                                             |
+| `description`                                                                                                                                                | *string*                                                                                                                                                     | :heavy_minus_sign:                                                                                                                                           | A description of what the custom tool does.                                                                                                                  |
+| `name`                                                                                                                                                       | *string*                                                                                                                                                     | :heavy_check_mark:                                                                                                                                           | The name of the custom tool.                                                                                                                                 |
+| `type`                                                                                                                                                       | [operations.CreateRouterResponseToolsResponsesRequestRequestBody5Type](../../models/operations/createrouterresponsetoolsresponsesrequestrequestbody5type.md) | :heavy_check_mark:                                                                                                                                           | N/A                                                                                                                                                          |

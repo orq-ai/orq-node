@@ -1,18 +1,24 @@
 # ToolsAllowedTools
 
-Filter which tools from the MCP server are exposed.
 
-## Example Usage
+## Supported Types
+
+### `string[]`
 
 ```typescript
-import { ToolsAllowedTools } from "@orq-ai/node/models/operations";
-
-let value: ToolsAllowedTools = {};
+const value: string[] = [
+  "<value 1>",
+  "<value 2>",
+];
 ```
 
-## Fields
+### `{ [k: string]: any }`
 
-| Field                                           | Type                                            | Required                                        | Description                                     |
-| ----------------------------------------------- | ----------------------------------------------- | ----------------------------------------------- | ----------------------------------------------- |
-| `readOnly`                                      | *boolean*                                       | :heavy_minus_sign:                              | Only expose tools with readOnlyHint annotation. |
-| `toolNames`                                     | *string*[]                                      | :heavy_minus_sign:                              | List of allowed tool names.                     |
+```typescript
+const value: { [k: string]: any } = {
+  "key": "<value>",
+  "key1": "<value>",
+  "key2": "<value>",
+};
+```
+
