@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -39,18 +39,20 @@ export type PublicEmbeddingData = {
 /** @internal */
 export const PublicEmbeddingDataObject$inboundSchema: z.ZodNativeEnum<
   typeof PublicEmbeddingDataObject
-> = z.nativeEnum(PublicEmbeddingDataObject);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(PublicEmbeddingDataObject));
 
 /** @internal */
 export const PublicEmbeddingData$inboundSchema: z.ZodType<
   PublicEmbeddingData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  embedding: z.any().optional(),
-  index: z.number().int(),
-  object: PublicEmbeddingDataObject$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    embedding: z.any().optional(),
+    index: z.number().int(),
+    object: PublicEmbeddingDataObject$inboundSchema,
+  })
+);
 
 export function publicEmbeddingDataFromJSON(
   jsonString: string,

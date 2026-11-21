@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import * as components from "../components/index.js";
 
 export type CreateFolderRequest = {
@@ -23,16 +24,18 @@ export const CreateFolderRequest$outboundSchema: z.ZodType<
   CreateFolderRequest$Outbound,
   z.ZodTypeDef,
   CreateFolderRequest
-> = z.object({
-  fileSystemKey: z.string(),
-  createFileSystemFolderRequest:
-    components.CreateFileSystemFolderRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    fileSystemKey: "file_system_key",
-    createFileSystemFolderRequest: "CreateFileSystemFolderRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    fileSystemKey: z.string(),
+    createFileSystemFolderRequest:
+      components.CreateFileSystemFolderRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      fileSystemKey: "file_system_key",
+      createFileSystemFolderRequest: "CreateFileSystemFolderRequest",
+    });
+  })
+);
 
 export function createFolderRequestToJSON(
   createFolderRequest: CreateFolderRequest,

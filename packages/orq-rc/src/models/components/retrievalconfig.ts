@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { RerankConfig, RerankConfig$inboundSchema } from "./rerankconfig.js";
@@ -21,17 +21,19 @@ export const RetrievalConfig$inboundSchema: z.ZodType<
   RetrievalConfig,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.string().optional(),
-  top_k: z.number().int().optional(),
-  threshold: z.number().optional(),
-  rerank_config: RerankConfig$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "top_k": "topK",
-    "rerank_config": "rerankConfig",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.string().optional(),
+    top_k: z.number().int().optional(),
+    threshold: z.number().optional(),
+    rerank_config: RerankConfig$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "top_k": "topK",
+      "rerank_config": "rerankConfig",
+    });
+  })
+);
 
 export function retrievalConfigFromJSON(
   jsonString: string,

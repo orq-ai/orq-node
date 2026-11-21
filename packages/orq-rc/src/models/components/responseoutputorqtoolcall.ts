@@ -6,6 +6,7 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import {
   collectExtraKeys as collectExtraKeys$,
+  lazySchema as lazySchema$,
   safeParse,
 } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
@@ -90,32 +91,36 @@ export type ResponseOutputOrqToolCall = {
 /** @internal */
 export const ResponseOutputOrqToolCallType$inboundSchema: z.ZodNativeEnum<
   typeof ResponseOutputOrqToolCallType
-> = z.nativeEnum(ResponseOutputOrqToolCallType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(ResponseOutputOrqToolCallType)
+);
 
 /** @internal */
 export const ResponseOutputOrqToolCall$inboundSchema: z.ZodType<
   ResponseOutputOrqToolCall,
   z.ZodTypeDef,
   unknown
-> = collectExtraKeys$(
-  z.object({
-    arguments: z.string().optional(),
-    call_id: z.string(),
-    id: z.string().optional(),
-    name: z.string(),
-    response_id: z.string().optional(),
-    result: z.any().optional(),
-    status: z.string().optional(),
-    type: ResponseOutputOrqToolCallType$inboundSchema,
-  }).catchall(z.any()),
-  "additionalProperties",
-  true,
-).transform((v) => {
-  return remap$(v, {
-    "call_id": "callId",
-    "response_id": "responseId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  collectExtraKeys$(
+    z.object({
+      arguments: z.string().optional(),
+      call_id: z.string(),
+      id: z.string().optional(),
+      name: z.string(),
+      response_id: z.string().optional(),
+      result: z.any().optional(),
+      status: z.string().optional(),
+      type: ResponseOutputOrqToolCallType$inboundSchema,
+    }).catchall(z.any()),
+    "additionalProperties",
+    true,
+  ).transform((v) => {
+    return remap$(v, {
+      "call_id": "callId",
+      "response_id": "responseId",
+    });
+  })
+);
 
 export function responseOutputOrqToolCallFromJSON(
   jsonString: string,

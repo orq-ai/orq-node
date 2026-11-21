@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import * as components from "../components/index.js";
 import { OrqError } from "./orqerror.js";
 
@@ -264,123 +265,7 @@ export const CreateDecisionsRouterDecisionsResponse502ResponseBody$inboundSchema
     CreateDecisionsRouterDecisionsResponse502ResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    error: components.APIError$inboundSchema,
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-    .transform((v) => {
-      return new CreateDecisionsRouterDecisionsResponse502ResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
-      });
-    });
-
-/** @internal */
-export const CreateDecisionsRouterDecisionsResponse500ResponseBody$inboundSchema:
-  z.ZodType<
-    CreateDecisionsRouterDecisionsResponse500ResponseBody,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    error: components.APIError$inboundSchema,
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-    .transform((v) => {
-      return new CreateDecisionsRouterDecisionsResponse500ResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
-      });
-    });
-
-/** @internal */
-export const CreateDecisionsRouterDecisionsResponse429ResponseBody$inboundSchema:
-  z.ZodType<
-    CreateDecisionsRouterDecisionsResponse429ResponseBody,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    error: components.APIError$inboundSchema,
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-    .transform((v) => {
-      return new CreateDecisionsRouterDecisionsResponse429ResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
-      });
-    });
-
-/** @internal */
-export const CreateDecisionsRouterDecisionsResponse422ResponseBody$inboundSchema:
-  z.ZodType<
-    CreateDecisionsRouterDecisionsResponse422ResponseBody,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    error: components.APIError$inboundSchema,
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-    .transform((v) => {
-      return new CreateDecisionsRouterDecisionsResponse422ResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
-      });
-    });
-
-/** @internal */
-export const CreateDecisionsRouterDecisionsResponse408ResponseBody$inboundSchema:
-  z.ZodType<
-    CreateDecisionsRouterDecisionsResponse408ResponseBody,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    error: components.APIError$inboundSchema,
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-    .transform((v) => {
-      return new CreateDecisionsRouterDecisionsResponse408ResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
-      });
-    });
-
-/** @internal */
-export const CreateDecisionsRouterDecisionsResponseResponseBody$inboundSchema:
-  z.ZodType<
-    CreateDecisionsRouterDecisionsResponseResponseBody,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
-    error: components.APIError$inboundSchema,
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-    .transform((v) => {
-      return new CreateDecisionsRouterDecisionsResponseResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
-      });
-    });
-
-/** @internal */
-export const CreateDecisionsRouterDecisionsResponseBody$inboundSchema:
-  z.ZodType<CreateDecisionsRouterDecisionsResponseBody, z.ZodTypeDef, unknown> =
+  > = /* @__PURE__ */ lazySchema$(() =>
     z.object({
       error: components.APIError$inboundSchema,
       request$: z.instanceof(Request),
@@ -388,28 +273,160 @@ export const CreateDecisionsRouterDecisionsResponseBody$inboundSchema:
       body$: z.string(),
     })
       .transform((v) => {
-        return new CreateDecisionsRouterDecisionsResponseBody(v, {
+        return new CreateDecisionsRouterDecisionsResponse502ResponseBody(v, {
           request: v.request$,
           response: v.response$,
           body: v.body$,
         });
-      });
+      })
+  );
+
+/** @internal */
+export const CreateDecisionsRouterDecisionsResponse500ResponseBody$inboundSchema:
+  z.ZodType<
+    CreateDecisionsRouterDecisionsResponse500ResponseBody,
+    z.ZodTypeDef,
+    unknown
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      error: components.APIError$inboundSchema,
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new CreateDecisionsRouterDecisionsResponse500ResponseBody(v, {
+          request: v.request$,
+          response: v.response$,
+          body: v.body$,
+        });
+      })
+  );
+
+/** @internal */
+export const CreateDecisionsRouterDecisionsResponse429ResponseBody$inboundSchema:
+  z.ZodType<
+    CreateDecisionsRouterDecisionsResponse429ResponseBody,
+    z.ZodTypeDef,
+    unknown
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      error: components.APIError$inboundSchema,
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new CreateDecisionsRouterDecisionsResponse429ResponseBody(v, {
+          request: v.request$,
+          response: v.response$,
+          body: v.body$,
+        });
+      })
+  );
+
+/** @internal */
+export const CreateDecisionsRouterDecisionsResponse422ResponseBody$inboundSchema:
+  z.ZodType<
+    CreateDecisionsRouterDecisionsResponse422ResponseBody,
+    z.ZodTypeDef,
+    unknown
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      error: components.APIError$inboundSchema,
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new CreateDecisionsRouterDecisionsResponse422ResponseBody(v, {
+          request: v.request$,
+          response: v.response$,
+          body: v.body$,
+        });
+      })
+  );
+
+/** @internal */
+export const CreateDecisionsRouterDecisionsResponse408ResponseBody$inboundSchema:
+  z.ZodType<
+    CreateDecisionsRouterDecisionsResponse408ResponseBody,
+    z.ZodTypeDef,
+    unknown
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      error: components.APIError$inboundSchema,
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new CreateDecisionsRouterDecisionsResponse408ResponseBody(v, {
+          request: v.request$,
+          response: v.response$,
+          body: v.body$,
+        });
+      })
+  );
+
+/** @internal */
+export const CreateDecisionsRouterDecisionsResponseResponseBody$inboundSchema:
+  z.ZodType<
+    CreateDecisionsRouterDecisionsResponseResponseBody,
+    z.ZodTypeDef,
+    unknown
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      error: components.APIError$inboundSchema,
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new CreateDecisionsRouterDecisionsResponseResponseBody(v, {
+          request: v.request$,
+          response: v.response$,
+          body: v.body$,
+        });
+      })
+  );
+
+/** @internal */
+export const CreateDecisionsRouterDecisionsResponseBody$inboundSchema:
+  z.ZodType<CreateDecisionsRouterDecisionsResponseBody, z.ZodTypeDef, unknown> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.object({
+        error: components.APIError$inboundSchema,
+        request$: z.instanceof(Request),
+        response$: z.instanceof(Response),
+        body$: z.string(),
+      })
+        .transform((v) => {
+          return new CreateDecisionsRouterDecisionsResponseBody(v, {
+            request: v.request$,
+            response: v.response$,
+            body: v.body$,
+          });
+        })
+    );
 
 /** @internal */
 export const CreateDecisionsResponseBody$inboundSchema: z.ZodType<
   CreateDecisionsResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  error: components.APIError$inboundSchema,
-  request$: z.instanceof(Request),
-  response$: z.instanceof(Response),
-  body$: z.string(),
-})
-  .transform((v) => {
-    return new CreateDecisionsResponseBody(v, {
-      request: v.request$,
-      response: v.response$,
-      body: v.body$,
-    });
-  });
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    error: components.APIError$inboundSchema,
+    request$: z.instanceof(Request),
+    response$: z.instanceof(Response),
+    body$: z.string(),
+  })
+    .transform((v) => {
+      return new CreateDecisionsResponseBody(v, {
+        request: v.request$,
+        response: v.response$,
+        body: v.body$,
+      });
+    })
+);

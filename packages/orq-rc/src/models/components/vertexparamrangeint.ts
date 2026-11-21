@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type VertexParamRangeInt = {
   max: number;
@@ -20,10 +21,12 @@ export const VertexParamRangeInt$outboundSchema: z.ZodType<
   VertexParamRangeInt$Outbound,
   z.ZodTypeDef,
   VertexParamRangeInt
-> = z.object({
-  max: z.number().int(),
-  min: z.number().int(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    max: z.number().int(),
+    min: z.number().int(),
+  })
+);
 
 export function vertexParamRangeIntToJSON(
   vertexParamRangeInt: VertexParamRangeInt,

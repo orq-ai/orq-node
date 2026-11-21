@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type CreateEvalColumnRequest = {
   /**
@@ -30,14 +31,16 @@ export const CreateEvalColumnRequest$outboundSchema: z.ZodType<
   CreateEvalColumnRequest$Outbound,
   z.ZodTypeDef,
   CreateEvalColumnRequest
-> = z.object({
-  evaluatorId: z.string(),
-  position: z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    evaluatorId: "evaluator_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    evaluatorId: z.string(),
+    position: z.number().int().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      evaluatorId: "evaluator_id",
+    });
+  })
+);
 
 export function createEvalColumnRequestToJSON(
   createEvalColumnRequest: CreateEvalColumnRequest,

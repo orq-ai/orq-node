@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import {
   TraceFilter,
   TraceFilter$Outbound,
@@ -37,18 +38,20 @@ export const FindLogPatternsRequest$outboundSchema: z.ZodType<
   FindLogPatternsRequest$Outbound,
   z.ZodTypeDef,
   FindLogPatternsRequest
-> = z.object({
-  from: z.date().transform(v => v.toISOString()),
-  to: z.date().transform(v => v.toISOString()),
-  query: z.string().optional(),
-  filterOperator: z.string().optional(),
-  filters: z.array(TraceFilter$outboundSchema).optional(),
-  limit: z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    filterOperator: "filter_operator",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    from: z.date().transform(v => v.toISOString()),
+    to: z.date().transform(v => v.toISOString()),
+    query: z.string().optional(),
+    filterOperator: z.string().optional(),
+    filters: z.array(TraceFilter$outboundSchema).optional(),
+    limit: z.number().int().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      filterOperator: "filter_operator",
+    });
+  })
+);
 
 export function findLogPatternsRequestToJSON(
   findLogPatternsRequest: FindLogPatternsRequest,

@@ -6,6 +6,7 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import {
   collectExtraKeys as collectExtraKeys$,
+  lazySchema as lazySchema$,
   safeParse,
 } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
@@ -114,6 +115,10 @@ export type ResponseOutputReasoning = {
    */
   summary?: Array<SummaryText | { [k: string]: any }> | undefined;
   /**
+   * An opaque signature some providers, such as Google Gemini, attach to their output. Send it back unchanged with the item so the model can continue its reasoning.
+   */
+  thoughtSignature?: string | undefined;
+  /**
    * The item type. Discriminates the item.
    */
   type: ResponseOutputReasoningType;
@@ -123,20 +128,24 @@ export type ResponseOutputReasoning = {
 /** @internal */
 export const ResponseOutputReasoningContentType$inboundSchema: z.ZodNativeEnum<
   typeof ResponseOutputReasoningContentType
-> = z.nativeEnum(ResponseOutputReasoningContentType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(ResponseOutputReasoningContentType)
+);
 
 /** @internal */
 export const ReasoningText$inboundSchema: z.ZodType<
   ReasoningText,
   z.ZodTypeDef,
   unknown
-> = collectExtraKeys$(
-  z.object({
-    text: z.string(),
-    type: ResponseOutputReasoningContentType$inboundSchema,
-  }).catchall(z.any()),
-  "additionalProperties",
-  true,
+> = /* @__PURE__ */ lazySchema$(() =>
+  collectExtraKeys$(
+    z.object({
+      text: z.string(),
+      type: ResponseOutputReasoningContentType$inboundSchema,
+    }).catchall(z.any()),
+    "additionalProperties",
+    true,
+  )
 );
 
 export function reasoningTextFromJSON(
@@ -154,7 +163,9 @@ export const ResponseOutputReasoningContent$inboundSchema: z.ZodType<
   ResponseOutputReasoningContent,
   z.ZodTypeDef,
   unknown
-> = z.union([z.lazy(() => ReasoningText$inboundSchema), z.record(z.any())]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.lazy(() => ReasoningText$inboundSchema), z.record(z.any())])
+);
 
 export function responseOutputReasoningContentFromJSON(
   jsonString: string,
@@ -167,21 +178,23 @@ export function responseOutputReasoningContentFromJSON(
 }
 
 /** @internal */
-export const SummaryType$inboundSchema: z.ZodNativeEnum<typeof SummaryType> = z
-  .nativeEnum(SummaryType);
+export const SummaryType$inboundSchema: z.ZodNativeEnum<typeof SummaryType> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(SummaryType));
 
 /** @internal */
 export const SummaryText$inboundSchema: z.ZodType<
   SummaryText,
   z.ZodTypeDef,
   unknown
-> = collectExtraKeys$(
-  z.object({
-    text: z.string(),
-    type: SummaryType$inboundSchema,
-  }).catchall(z.any()),
-  "additionalProperties",
-  true,
+> = /* @__PURE__ */ lazySchema$(() =>
+  collectExtraKeys$(
+    z.object({
+      text: z.string(),
+      type: SummaryType$inboundSchema,
+    }).catchall(z.any()),
+    "additionalProperties",
+    true,
+  )
 );
 
 export function summaryTextFromJSON(
@@ -199,7 +212,9 @@ export const ResponseOutputReasoningSummary$inboundSchema: z.ZodType<
   ResponseOutputReasoningSummary,
   z.ZodTypeDef,
   unknown
-> = z.union([z.lazy(() => SummaryText$inboundSchema), z.record(z.any())]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.lazy(() => SummaryText$inboundSchema), z.record(z.any())])
+);
 
 export function responseOutputReasoningSummaryFromJSON(
   jsonString: string,
@@ -214,34 +229,40 @@ export function responseOutputReasoningSummaryFromJSON(
 /** @internal */
 export const ResponseOutputReasoningType$inboundSchema: z.ZodNativeEnum<
   typeof ResponseOutputReasoningType
-> = z.nativeEnum(ResponseOutputReasoningType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(ResponseOutputReasoningType)
+);
 
 /** @internal */
 export const ResponseOutputReasoning$inboundSchema: z.ZodType<
   ResponseOutputReasoning,
   z.ZodTypeDef,
   unknown
-> = collectExtraKeys$(
-  z.object({
-    content: z.array(
-      z.union([z.lazy(() => ReasoningText$inboundSchema), z.record(z.any())]),
-    ).optional(),
-    encrypted_content: z.string().optional(),
-    id: z.string().optional(),
-    signature: z.string().optional(),
-    status: z.string().optional(),
-    summary: z.array(
-      z.union([z.lazy(() => SummaryText$inboundSchema), z.record(z.any())]),
-    ).optional(),
-    type: ResponseOutputReasoningType$inboundSchema,
-  }).catchall(z.any()),
-  "additionalProperties",
-  true,
-).transform((v) => {
-  return remap$(v, {
-    "encrypted_content": "encryptedContent",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  collectExtraKeys$(
+    z.object({
+      content: z.array(
+        z.union([z.lazy(() => ReasoningText$inboundSchema), z.record(z.any())]),
+      ).optional(),
+      encrypted_content: z.string().optional(),
+      id: z.string().optional(),
+      signature: z.string().optional(),
+      status: z.string().optional(),
+      summary: z.array(
+        z.union([z.lazy(() => SummaryText$inboundSchema), z.record(z.any())]),
+      ).optional(),
+      thought_signature: z.string().optional(),
+      type: ResponseOutputReasoningType$inboundSchema,
+    }).catchall(z.any()),
+    "additionalProperties",
+    true,
+  ).transform((v) => {
+    return remap$(v, {
+      "encrypted_content": "encryptedContent",
+      "thought_signature": "thoughtSignature",
+    });
+  })
+);
 
 export function responseOutputReasoningFromJSON(
   jsonString: string,

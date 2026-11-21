@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 /**
  * Executes tools from Model Context Protocol (MCP) servers and gateways. Reference the server or gateway using "key" or "id"; add "tool_id" to attach a single tool, or omit it to attach every tool it exposes.
@@ -45,18 +46,20 @@ export const McpToolInput$outboundSchema: z.ZodType<
   McpToolInput$Outbound,
   z.ZodTypeDef,
   McpToolInput
-> = z.object({
-  type: z.literal("mcp"),
-  key: z.string().optional(),
-  id: z.string().optional(),
-  toolId: z.string().optional(),
-  requiresApproval: z.boolean().default(false),
-}).transform((v) => {
-  return remap$(v, {
-    toolId: "tool_id",
-    requiresApproval: "requires_approval",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("mcp"),
+    key: z.string().optional(),
+    id: z.string().optional(),
+    toolId: z.string().optional(),
+    requiresApproval: z.boolean().default(false),
+  }).transform((v) => {
+    return remap$(v, {
+      toolId: "tool_id",
+      requiresApproval: "requires_approval",
+    });
+  })
+);
 
 export function mcpToolInputToJSON(mcpToolInput: McpToolInput): string {
   return JSON.stringify(McpToolInput$outboundSchema.parse(mcpToolInput));

@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import {
   PiiRedaction,
   PiiRedaction$Outbound,
@@ -53,17 +54,19 @@ export const UpdateWorkspaceSettingsRequest$outboundSchema: z.ZodType<
   UpdateWorkspaceSettingsRequest$Outbound,
   z.ZodTypeDef,
   UpdateWorkspaceSettingsRequest
-> = z.object({
-  displayName: z.string().optional(),
-  enforceEnabledModels: z.boolean().optional(),
-  piiRedaction: PiiRedaction$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    displayName: "display_name",
-    enforceEnabledModels: "enforce_enabled_models",
-    piiRedaction: "pii_redaction",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    displayName: z.string().optional(),
+    enforceEnabledModels: z.boolean().optional(),
+    piiRedaction: PiiRedaction$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      displayName: "display_name",
+      enforceEnabledModels: "enforce_enabled_models",
+      piiRedaction: "pii_redaction",
+    });
+  })
+);
 
 export function updateWorkspaceSettingsRequestToJSON(
   updateWorkspaceSettingsRequest: UpdateWorkspaceSettingsRequest,

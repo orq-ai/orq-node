@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import {
   AlertCondition,
   AlertCondition$Outbound,
@@ -75,21 +76,23 @@ export const UpdateAlertRequest$outboundSchema: z.ZodType<
   UpdateAlertRequest$Outbound,
   z.ZodTypeDef,
   UpdateAlertRequest
-> = z.object({
-  displayName: z.string().optional(),
-  description: z.string().optional(),
-  signal: z.string().optional(),
-  query: AlertQuery$outboundSchema.optional(),
-  condition: AlertCondition$outboundSchema.optional(),
-  notifierIds: z.array(z.string()).optional(),
-  enabled: z.boolean().optional(),
-  display: AlertDisplay$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    displayName: "display_name",
-    notifierIds: "notifier_ids",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    displayName: z.string().optional(),
+    description: z.string().optional(),
+    signal: z.string().optional(),
+    query: AlertQuery$outboundSchema.optional(),
+    condition: AlertCondition$outboundSchema.optional(),
+    notifierIds: z.array(z.string()).optional(),
+    enabled: z.boolean().optional(),
+    display: AlertDisplay$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      displayName: "display_name",
+      notifierIds: "notifier_ids",
+    });
+  })
+);
 
 export function updateAlertRequestToJSON(
   updateAlertRequest: UpdateAlertRequest,

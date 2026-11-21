@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type ClassifyRetryConfig = {
   /**
@@ -27,14 +28,16 @@ export const ClassifyRetryConfig$outboundSchema: z.ZodType<
   ClassifyRetryConfig$Outbound,
   z.ZodTypeDef,
   ClassifyRetryConfig
-> = z.object({
-  count: z.number().int(),
-  onCodes: z.array(z.number().int()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    onCodes: "on_codes",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    count: z.number().int(),
+    onCodes: z.array(z.number().int()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      onCodes: "on_codes",
+    });
+  })
+);
 
 export function classifyRetryConfigToJSON(
   classifyRetryConfig: ClassifyRetryConfig,

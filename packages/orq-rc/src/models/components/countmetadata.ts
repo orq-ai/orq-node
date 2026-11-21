@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -22,23 +22,25 @@ export const CountMetadata$inboundSchema: z.ZodType<
   CountMetadata,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  words_count: z.number().optional(),
-  sentences_count: z.number().optional(),
-  paragraphs_count: z.number().optional(),
-  tokens_count: z.number().optional(),
-  characters_count: z.number().optional(),
-  chunks_count: z.number().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "words_count": "wordsCount",
-    "sentences_count": "sentencesCount",
-    "paragraphs_count": "paragraphsCount",
-    "tokens_count": "tokensCount",
-    "characters_count": "charactersCount",
-    "chunks_count": "chunksCount",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    words_count: z.number().optional(),
+    sentences_count: z.number().optional(),
+    paragraphs_count: z.number().optional(),
+    tokens_count: z.number().optional(),
+    characters_count: z.number().optional(),
+    chunks_count: z.number().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "words_count": "wordsCount",
+      "sentences_count": "sentencesCount",
+      "paragraphs_count": "paragraphsCount",
+      "tokens_count": "tokensCount",
+      "characters_count": "charactersCount",
+      "chunks_count": "chunksCount",
+    });
+  })
+);
 /** @internal */
 export type CountMetadata$Outbound = {
   words_count?: number | undefined;
@@ -54,23 +56,25 @@ export const CountMetadata$outboundSchema: z.ZodType<
   CountMetadata$Outbound,
   z.ZodTypeDef,
   CountMetadata
-> = z.object({
-  wordsCount: z.number().optional(),
-  sentencesCount: z.number().optional(),
-  paragraphsCount: z.number().optional(),
-  tokensCount: z.number().optional(),
-  charactersCount: z.number().optional(),
-  chunksCount: z.number().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    wordsCount: "words_count",
-    sentencesCount: "sentences_count",
-    paragraphsCount: "paragraphs_count",
-    tokensCount: "tokens_count",
-    charactersCount: "characters_count",
-    chunksCount: "chunks_count",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    wordsCount: z.number().optional(),
+    sentencesCount: z.number().optional(),
+    paragraphsCount: z.number().optional(),
+    tokensCount: z.number().optional(),
+    charactersCount: z.number().optional(),
+    chunksCount: z.number().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      wordsCount: "words_count",
+      sentencesCount: "sentences_count",
+      paragraphsCount: "paragraphs_count",
+      tokensCount: "tokens_count",
+      charactersCount: "characters_count",
+      chunksCount: "chunks_count",
+    });
+  })
+);
 
 export function countMetadataToJSON(countMetadata: CountMetadata): string {
   return JSON.stringify(CountMetadata$outboundSchema.parse(countMetadata));

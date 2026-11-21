@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import {
   AnnotationQueueItemRef,
   AnnotationQueueItemRef$Outbound,
@@ -26,9 +27,11 @@ export const AddAnnotationQueueItemsRequest$outboundSchema: z.ZodType<
   AddAnnotationQueueItemsRequest$Outbound,
   z.ZodTypeDef,
   AddAnnotationQueueItemsRequest
-> = z.object({
-  items: z.array(AnnotationQueueItemRef$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    items: z.array(AnnotationQueueItemRef$outboundSchema),
+  })
+);
 
 export function addAnnotationQueueItemsRequestToJSON(
   addAnnotationQueueItemsRequest: AddAnnotationQueueItemsRequest,

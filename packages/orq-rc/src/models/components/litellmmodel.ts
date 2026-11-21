@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import {
   LiteLLMModelInfo,
   LiteLLMModelInfo$Outbound,
@@ -35,19 +36,21 @@ export const LiteLLMModel$outboundSchema: z.ZodType<
   LiteLLMModel$Outbound,
   z.ZodTypeDef,
   LiteLLMModel
-> = z.object({
-  litellmParams: LiteLLMParams$outboundSchema,
-  modelId: z.string().optional(),
-  modelInfo: LiteLLMModelInfo$outboundSchema,
-  modelName: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    litellmParams: "litellm_params",
-    modelId: "model_id",
-    modelInfo: "model_info",
-    modelName: "model_name",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    litellmParams: LiteLLMParams$outboundSchema,
+    modelId: z.string().optional(),
+    modelInfo: LiteLLMModelInfo$outboundSchema,
+    modelName: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      litellmParams: "litellm_params",
+      modelId: "model_id",
+      modelInfo: "model_info",
+      modelName: "model_name",
+    });
+  })
+);
 
 export function liteLLMModelToJSON(liteLLMModel: LiteLLMModel): string {
   return JSON.stringify(LiteLLMModel$outboundSchema.parse(liteLLMModel));

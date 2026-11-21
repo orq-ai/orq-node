@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import {
   ExecuteConstraints,
   ExecuteConstraints$Outbound,
@@ -39,11 +40,13 @@ export const ExecuteRunRequest$outboundSchema: z.ZodType<
   ExecuteRunRequest$Outbound,
   z.ZodTypeDef,
   ExecuteRunRequest
-> = z.object({
-  scope: ExecuteScope$outboundSchema,
-  targets: z.array(ExecuteTarget$outboundSchema).optional(),
-  constraints: ExecuteConstraints$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    scope: ExecuteScope$outboundSchema,
+    targets: z.array(ExecuteTarget$outboundSchema).optional(),
+    constraints: ExecuteConstraints$outboundSchema.optional(),
+  })
+);
 
 export function executeRunRequestToJSON(
   executeRunRequest: ExecuteRunRequest,

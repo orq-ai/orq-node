@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { McpIcon, McpIcon$inboundSchema } from "./mcpicon.js";
@@ -44,7 +44,7 @@ export const McpResourceTemplateMeta$inboundSchema: z.ZodType<
   McpResourceTemplateMeta,
   z.ZodTypeDef,
   unknown
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function mcpResourceTemplateMetaFromJSON(
   jsonString: string,
@@ -61,23 +61,25 @@ export const McpResourceTemplate$inboundSchema: z.ZodType<
   McpResourceTemplate,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  uri_template: z.string().optional(),
-  name: z.string().optional(),
-  title: z.string().optional(),
-  description: z.string().optional(),
-  mime_type: z.string().optional(),
-  annotations: McpResourceAnnotations$inboundSchema.optional(),
-  icons: z.array(McpIcon$inboundSchema).optional(),
-  meta: z.lazy(() => McpResourceTemplateMeta$inboundSchema).optional(),
-  selection_id: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "uri_template": "uriTemplate",
-    "mime_type": "mimeType",
-    "selection_id": "selectionId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    uri_template: z.string().optional(),
+    name: z.string().optional(),
+    title: z.string().optional(),
+    description: z.string().optional(),
+    mime_type: z.string().optional(),
+    annotations: McpResourceAnnotations$inboundSchema.optional(),
+    icons: z.array(McpIcon$inboundSchema).optional(),
+    meta: z.lazy(() => McpResourceTemplateMeta$inboundSchema).optional(),
+    selection_id: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "uri_template": "uriTemplate",
+      "mime_type": "mimeType",
+      "selection_id": "selectionId",
+    });
+  })
+);
 
 export function mcpResourceTemplateFromJSON(
   jsonString: string,

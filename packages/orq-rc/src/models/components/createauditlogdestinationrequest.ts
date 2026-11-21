@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type CreateAuditLogDestinationRequest = {
   /**
@@ -32,15 +33,17 @@ export const CreateAuditLogDestinationRequest$outboundSchema: z.ZodType<
   CreateAuditLogDestinationRequest$Outbound,
   z.ZodTypeDef,
   CreateAuditLogDestinationRequest
-> = z.object({
-  displayName: z.string(),
-  description: z.string().optional(),
-  url: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    displayName: "display_name",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    displayName: z.string(),
+    description: z.string().optional(),
+    url: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      displayName: "display_name",
+    });
+  })
+);
 
 export function createAuditLogDestinationRequestToJSON(
   createAuditLogDestinationRequest: CreateAuditLogDestinationRequest,

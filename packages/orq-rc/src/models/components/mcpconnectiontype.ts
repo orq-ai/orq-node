@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 
 export const McpConnectionType = {
@@ -16,7 +17,7 @@ export type McpConnectionType = ClosedEnum<typeof McpConnectionType>;
 /** @internal */
 export const McpConnectionType$inboundSchema: z.ZodNativeEnum<
   typeof McpConnectionType
-> = z.nativeEnum(McpConnectionType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(McpConnectionType));
 /** @internal */
 export const McpConnectionType$outboundSchema: z.ZodNativeEnum<
   typeof McpConnectionType

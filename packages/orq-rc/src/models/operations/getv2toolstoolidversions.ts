@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -69,18 +69,20 @@ export const GetV2ToolsToolIdVersionsRequest$outboundSchema: z.ZodType<
   GetV2ToolsToolIdVersionsRequest$Outbound,
   z.ZodTypeDef,
   GetV2ToolsToolIdVersionsRequest
-> = z.object({
-  toolId: z.string(),
-  limit: z.number().int().default(10),
-  startingAfter: z.string().optional(),
-  endingBefore: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    toolId: "tool_id",
-    startingAfter: "starting_after",
-    endingBefore: "ending_before",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    toolId: z.string(),
+    limit: z.number().int().default(10),
+    startingAfter: z.string().optional(),
+    endingBefore: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      toolId: "tool_id",
+      startingAfter: "starting_after",
+      endingBefore: "ending_before",
+    });
+  })
+);
 
 export function getV2ToolsToolIdVersionsRequestToJSON(
   getV2ToolsToolIdVersionsRequest: GetV2ToolsToolIdVersionsRequest,
@@ -95,36 +97,40 @@ export function getV2ToolsToolIdVersionsRequestToJSON(
 /** @internal */
 export const GetV2ToolsToolIdVersionsObject$inboundSchema: z.ZodNativeEnum<
   typeof GetV2ToolsToolIdVersionsObject
-> = z.nativeEnum(GetV2ToolsToolIdVersionsObject);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(GetV2ToolsToolIdVersionsObject)
+);
 
 /** @internal */
 export const GetV2ToolsToolIdVersionsData$inboundSchema: z.ZodType<
   GetV2ToolsToolIdVersionsData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  _id: z.string(),
-  created_at: z.string(),
-  updated_at: z.string(),
-  created_by_id: z.string().optional(),
-  updated_by_id: z.string().optional(),
-  version: z.string(),
-  description: z.string().optional(),
-  checksum: z.string(),
-  entityType: z.string(),
-  entityId: z.string(),
-  data: z.record(z.any()),
-  workspace_id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "_id": "id",
-    "created_at": "createdAt",
-    "updated_at": "updatedAt",
-    "created_by_id": "createdById",
-    "updated_by_id": "updatedById",
-    "workspace_id": "workspaceId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    _id: z.string(),
+    created_at: z.string(),
+    updated_at: z.string(),
+    created_by_id: z.string().optional(),
+    updated_by_id: z.string().optional(),
+    version: z.string(),
+    description: z.string().optional(),
+    checksum: z.string(),
+    entityType: z.string(),
+    entityId: z.string(),
+    data: z.record(z.any()),
+    workspace_id: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "_id": "id",
+      "created_at": "createdAt",
+      "updated_at": "updatedAt",
+      "created_by_id": "createdById",
+      "updated_by_id": "updatedById",
+      "workspace_id": "workspaceId",
+    });
+  })
+);
 
 export function getV2ToolsToolIdVersionsDataFromJSON(
   jsonString: string,
@@ -141,15 +147,17 @@ export const GetV2ToolsToolIdVersionsResponseBody$inboundSchema: z.ZodType<
   GetV2ToolsToolIdVersionsResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: GetV2ToolsToolIdVersionsObject$inboundSchema,
-  data: z.array(z.lazy(() => GetV2ToolsToolIdVersionsData$inboundSchema)),
-  has_more: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    "has_more": "hasMore",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: GetV2ToolsToolIdVersionsObject$inboundSchema,
+    data: z.array(z.lazy(() => GetV2ToolsToolIdVersionsData$inboundSchema)),
+    has_more: z.boolean(),
+  }).transform((v) => {
+    return remap$(v, {
+      "has_more": "hasMore",
+    });
+  })
+);
 
 export function getV2ToolsToolIdVersionsResponseBodyFromJSON(
   jsonString: string,

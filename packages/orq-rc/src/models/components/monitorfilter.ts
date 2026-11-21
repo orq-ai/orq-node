@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -51,7 +51,7 @@ export type MonitorFilter = {
 /** @internal */
 export const MonitorFilterOp$inboundSchema: z.ZodNativeEnum<
   typeof MonitorFilterOp
-> = z.nativeEnum(MonitorFilterOp);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(MonitorFilterOp));
 /** @internal */
 export const MonitorFilterOp$outboundSchema: z.ZodNativeEnum<
   typeof MonitorFilterOp
@@ -62,11 +62,13 @@ export const MonitorFilter$inboundSchema: z.ZodType<
   MonitorFilter,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  field: z.string(),
-  op: MonitorFilterOp$inboundSchema,
-  values: z.array(z.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    field: z.string(),
+    op: MonitorFilterOp$inboundSchema,
+    values: z.array(z.string()),
+  })
+);
 /** @internal */
 export type MonitorFilter$Outbound = {
   field: string;
@@ -79,11 +81,13 @@ export const MonitorFilter$outboundSchema: z.ZodType<
   MonitorFilter$Outbound,
   z.ZodTypeDef,
   MonitorFilter
-> = z.object({
-  field: z.string(),
-  op: MonitorFilterOp$outboundSchema,
-  values: z.array(z.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    field: z.string(),
+    op: MonitorFilterOp$outboundSchema,
+    values: z.array(z.string()),
+  })
+);
 
 export function monitorFilterToJSON(monitorFilter: MonitorFilter): string {
   return JSON.stringify(MonitorFilter$outboundSchema.parse(monitorFilter));

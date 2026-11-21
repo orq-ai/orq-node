@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -92,18 +92,20 @@ export const BudgetScope$inboundSchema: z.ZodType<
   BudgetScope,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  workspace: WorkspaceBudgetScope$inboundSchema.optional(),
-  project: ProjectBudgetScope$inboundSchema.optional(),
-  identity: IdentityBudgetScope$inboundSchema.optional(),
-  api_key: ApiKeyBudgetScope$inboundSchema.optional(),
-  provider: ProviderBudgetScope$inboundSchema.optional(),
-  model: ModelBudgetScope$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "api_key": "apiKey",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    workspace: WorkspaceBudgetScope$inboundSchema.optional(),
+    project: ProjectBudgetScope$inboundSchema.optional(),
+    identity: IdentityBudgetScope$inboundSchema.optional(),
+    api_key: ApiKeyBudgetScope$inboundSchema.optional(),
+    provider: ProviderBudgetScope$inboundSchema.optional(),
+    model: ModelBudgetScope$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "api_key": "apiKey",
+    });
+  })
+);
 /** @internal */
 export type BudgetScope$Outbound = {
   workspace?: WorkspaceBudgetScope$Outbound | undefined;
@@ -119,18 +121,20 @@ export const BudgetScope$outboundSchema: z.ZodType<
   BudgetScope$Outbound,
   z.ZodTypeDef,
   BudgetScope
-> = z.object({
-  workspace: WorkspaceBudgetScope$outboundSchema.optional(),
-  project: ProjectBudgetScope$outboundSchema.optional(),
-  identity: IdentityBudgetScope$outboundSchema.optional(),
-  apiKey: ApiKeyBudgetScope$outboundSchema.optional(),
-  provider: ProviderBudgetScope$outboundSchema.optional(),
-  model: ModelBudgetScope$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    apiKey: "api_key",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    workspace: WorkspaceBudgetScope$outboundSchema.optional(),
+    project: ProjectBudgetScope$outboundSchema.optional(),
+    identity: IdentityBudgetScope$outboundSchema.optional(),
+    apiKey: ApiKeyBudgetScope$outboundSchema.optional(),
+    provider: ProviderBudgetScope$outboundSchema.optional(),
+    model: ModelBudgetScope$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      apiKey: "api_key",
+    });
+  })
+);
 
 export function budgetScopeToJSON(budgetScope: BudgetScope): string {
   return JSON.stringify(BudgetScope$outboundSchema.parse(budgetScope));

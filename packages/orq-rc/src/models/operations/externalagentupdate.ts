@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import * as components from "../components/index.js";
 
 export type ExternalAgentUpdateRequest = {
@@ -22,16 +23,18 @@ export const ExternalAgentUpdateRequest$outboundSchema: z.ZodType<
   ExternalAgentUpdateRequest$Outbound,
   z.ZodTypeDef,
   ExternalAgentUpdateRequest
-> = z.object({
-  agentKey: z.string(),
-  updateExternalAgentRequest:
-    components.UpdateExternalAgentRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    agentKey: "agent_key",
-    updateExternalAgentRequest: "UpdateExternalAgentRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    agentKey: z.string(),
+    updateExternalAgentRequest:
+      components.UpdateExternalAgentRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      agentKey: "agent_key",
+      updateExternalAgentRequest: "UpdateExternalAgentRequest",
+    });
+  })
+);
 
 export function externalAgentUpdateRequestToJSON(
   externalAgentUpdateRequest: ExternalAgentUpdateRequest,

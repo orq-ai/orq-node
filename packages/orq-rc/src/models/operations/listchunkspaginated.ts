@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import * as components from "../components/index.js";
 
 export type ListChunksPaginatedRequest = {
@@ -26,18 +27,20 @@ export const ListChunksPaginatedRequest$outboundSchema: z.ZodType<
   ListChunksPaginatedRequest$Outbound,
   z.ZodTypeDef,
   ListChunksPaginatedRequest
-> = z.object({
-  knowledgeId: z.string(),
-  datasourceId: z.string(),
-  chunksServiceListPaginatedRequest:
-    components.ChunksServiceListPaginatedRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    knowledgeId: "knowledge_id",
-    datasourceId: "datasource_id",
-    chunksServiceListPaginatedRequest: "ChunksServiceListPaginatedRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    knowledgeId: z.string(),
+    datasourceId: z.string(),
+    chunksServiceListPaginatedRequest:
+      components.ChunksServiceListPaginatedRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      knowledgeId: "knowledge_id",
+      datasourceId: "datasource_id",
+      chunksServiceListPaginatedRequest: "ChunksServiceListPaginatedRequest",
+    });
+  })
+);
 
 export function listChunksPaginatedRequestToJSON(
   listChunksPaginatedRequest: ListChunksPaginatedRequest,

@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 /**
  * Lists available knowledge bases
@@ -32,15 +33,17 @@ export const RetrieveKnowledgeBasesToolInput$outboundSchema: z.ZodType<
   RetrieveKnowledgeBasesToolInput$Outbound,
   z.ZodTypeDef,
   RetrieveKnowledgeBasesToolInput
-> = z.object({
-  type: z.literal("retrieve_knowledge_bases"),
-  requiresApproval: z.boolean().optional(),
-  configuration: z.record(z.any()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    requiresApproval: "requires_approval",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("retrieve_knowledge_bases"),
+    requiresApproval: z.boolean().optional(),
+    configuration: z.record(z.any()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      requiresApproval: "requires_approval",
+    });
+  })
+);
 
 export function retrieveKnowledgeBasesToolInputToJSON(
   retrieveKnowledgeBasesToolInput: RetrieveKnowledgeBasesToolInput,

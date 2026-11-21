@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
@@ -66,9 +66,8 @@ export type GetEvalsResponseBody = {
 };
 
 /** @internal */
-export const Sort$outboundSchema: z.ZodNativeEnum<typeof Sort> = z.nativeEnum(
-  Sort,
-);
+export const Sort$outboundSchema: z.ZodNativeEnum<typeof Sort> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Sort));
 
 /** @internal */
 export type GetEvalsRequest$Outbound = {
@@ -85,20 +84,22 @@ export const GetEvalsRequest$outboundSchema: z.ZodType<
   GetEvalsRequest$Outbound,
   z.ZodTypeDef,
   GetEvalsRequest
-> = z.object({
-  limit: z.number().int().default(10),
-  startingAfter: z.string().optional(),
-  endingBefore: z.string().optional(),
-  search: z.string().optional(),
-  sort: Sort$outboundSchema.optional(),
-  projectId: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    startingAfter: "starting_after",
-    endingBefore: "ending_before",
-    projectId: "project_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    limit: z.number().int().default(10),
+    startingAfter: z.string().optional(),
+    endingBefore: z.string().optional(),
+    search: z.string().optional(),
+    sort: Sort$outboundSchema.optional(),
+    projectId: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      startingAfter: "starting_after",
+      endingBefore: "ending_before",
+      projectId: "project_id",
+    });
+  })
+);
 
 export function getEvalsRequestToJSON(
   getEvalsRequest: GetEvalsRequest,
@@ -109,22 +110,24 @@ export function getEvalsRequestToJSON(
 /** @internal */
 export const GetEvalsObject$inboundSchema: z.ZodNativeEnum<
   typeof GetEvalsObject
-> = z.nativeEnum(GetEvalsObject);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(GetEvalsObject));
 
 /** @internal */
 export const GetEvalsData$inboundSchema: z.ZodType<
   GetEvalsData,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  components.EvaluatorResponseLlm$inboundSchema,
-  components.EvaluatorResponseJsonSchema$inboundSchema,
-  components.EvaluatorResponseHttp$inboundSchema,
-  components.EvaluatorResponsePython$inboundSchema,
-  components.EvaluatorResponseFunction$inboundSchema,
-  components.EvaluatorResponseRagas$inboundSchema,
-  components.EvaluatorResponseTypescript$inboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    components.EvaluatorResponseLlm$inboundSchema,
+    components.EvaluatorResponseJsonSchema$inboundSchema,
+    components.EvaluatorResponseHttp$inboundSchema,
+    components.EvaluatorResponsePython$inboundSchema,
+    components.EvaluatorResponseFunction$inboundSchema,
+    components.EvaluatorResponseRagas$inboundSchema,
+    components.EvaluatorResponseTypescript$inboundSchema,
+  ])
+);
 
 export function getEvalsDataFromJSON(
   jsonString: string,
@@ -141,25 +144,27 @@ export const GetEvalsResponseBody$inboundSchema: z.ZodType<
   GetEvalsResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: GetEvalsObject$inboundSchema,
-  data: z.array(
-    z.union([
-      components.EvaluatorResponseLlm$inboundSchema,
-      components.EvaluatorResponseJsonSchema$inboundSchema,
-      components.EvaluatorResponseHttp$inboundSchema,
-      components.EvaluatorResponsePython$inboundSchema,
-      components.EvaluatorResponseFunction$inboundSchema,
-      components.EvaluatorResponseRagas$inboundSchema,
-      components.EvaluatorResponseTypescript$inboundSchema,
-    ]),
-  ),
-  has_more: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    "has_more": "hasMore",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: GetEvalsObject$inboundSchema,
+    data: z.array(
+      z.union([
+        components.EvaluatorResponseLlm$inboundSchema,
+        components.EvaluatorResponseJsonSchema$inboundSchema,
+        components.EvaluatorResponseHttp$inboundSchema,
+        components.EvaluatorResponsePython$inboundSchema,
+        components.EvaluatorResponseFunction$inboundSchema,
+        components.EvaluatorResponseRagas$inboundSchema,
+        components.EvaluatorResponseTypescript$inboundSchema,
+      ]),
+    ),
+    has_more: z.boolean(),
+  }).transform((v) => {
+    return remap$(v, {
+      "has_more": "hasMore",
+    });
+  })
+);
 
 export function getEvalsResponseBodyFromJSON(
   jsonString: string,

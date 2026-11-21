@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type TracesListFacetValuesRequest = {
   field: string;
@@ -32,19 +33,21 @@ export const TracesListFacetValuesRequest$outboundSchema: z.ZodType<
   TracesListFacetValuesRequest$Outbound,
   z.ZodTypeDef,
   TracesListFacetValuesRequest
-> = z.object({
-  field: z.string(),
-  from: z.date().transform(v => v.toISOString()).optional(),
-  to: z.date().transform(v => v.toISOString()).optional(),
-  limit: z.number().int().optional(),
-  filterOperator: z.string().optional(),
-  allAccessibleProjects: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    filterOperator: "filter_operator",
-    allAccessibleProjects: "all_accessible_projects",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    field: z.string(),
+    from: z.date().transform(v => v.toISOString()).optional(),
+    to: z.date().transform(v => v.toISOString()).optional(),
+    limit: z.number().int().optional(),
+    filterOperator: z.string().optional(),
+    allAccessibleProjects: z.boolean().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      filterOperator: "filter_operator",
+      allAccessibleProjects: "all_accessible_projects",
+    });
+  })
+);
 
 export function tracesListFacetValuesRequestToJSON(
   tracesListFacetValuesRequest: TracesListFacetValuesRequest,

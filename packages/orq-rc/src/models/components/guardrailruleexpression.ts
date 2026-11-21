@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -18,8 +18,8 @@ export type GuardrailRuleExpression = {
 };
 
 /** @internal */
-export const Config$inboundSchema: z.ZodType<Config, z.ZodTypeDef, unknown> = z
-  .object({});
+export const Config$inboundSchema: z.ZodType<Config, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() => z.object({}));
 /** @internal */
 export type Config$Outbound = {};
 
@@ -28,7 +28,7 @@ export const Config$outboundSchema: z.ZodType<
   Config$Outbound,
   z.ZodTypeDef,
   Config
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function configToJSON(config: Config): string {
   return JSON.stringify(Config$outboundSchema.parse(config));
@@ -48,10 +48,12 @@ export const GuardrailRuleExpression$inboundSchema: z.ZodType<
   GuardrailRuleExpression,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  config: z.lazy(() => Config$inboundSchema).optional(),
-  cel: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    config: z.lazy(() => Config$inboundSchema).optional(),
+    cel: z.string().optional(),
+  })
+);
 /** @internal */
 export type GuardrailRuleExpression$Outbound = {
   config?: Config$Outbound | undefined;
@@ -63,10 +65,12 @@ export const GuardrailRuleExpression$outboundSchema: z.ZodType<
   GuardrailRuleExpression$Outbound,
   z.ZodTypeDef,
   GuardrailRuleExpression
-> = z.object({
-  config: z.lazy(() => Config$outboundSchema).optional(),
-  cel: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    config: z.lazy(() => Config$outboundSchema).optional(),
+    cel: z.string().optional(),
+  })
+);
 
 export function guardrailRuleExpressionToJSON(
   guardrailRuleExpression: GuardrailRuleExpression,

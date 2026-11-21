@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -39,33 +39,35 @@ export type ActionReviewedStreamingEvent = {
 };
 
 /** @internal */
-export const Review$inboundSchema: z.ZodNativeEnum<typeof Review> = z
-  .nativeEnum(Review);
+export const Review$inboundSchema: z.ZodNativeEnum<typeof Review> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Review));
 
 /** @internal */
 export const ActionReviewedStreamingEventData$inboundSchema: z.ZodType<
   ActionReviewedStreamingEventData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  agent_id: z.string(),
-  action_id: z.string(),
-  agent_tool_call_id: z.string(),
-  review: Review$inboundSchema,
-  mock_output: z.record(z.any()).optional(),
-  review_source: z.string().optional(),
-  reviewed_by_id: z.string().optional(),
-  workflowRunId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "agent_id": "agentId",
-    "action_id": "actionId",
-    "agent_tool_call_id": "agentToolCallId",
-    "mock_output": "mockOutput",
-    "review_source": "reviewSource",
-    "reviewed_by_id": "reviewedById",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    agent_id: z.string(),
+    action_id: z.string(),
+    agent_tool_call_id: z.string(),
+    review: Review$inboundSchema,
+    mock_output: z.record(z.any()).optional(),
+    review_source: z.string().optional(),
+    reviewed_by_id: z.string().optional(),
+    workflowRunId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "agent_id": "agentId",
+      "action_id": "actionId",
+      "agent_tool_call_id": "agentToolCallId",
+      "mock_output": "mockOutput",
+      "review_source": "reviewSource",
+      "reviewed_by_id": "reviewedById",
+    });
+  })
+);
 
 export function actionReviewedStreamingEventDataFromJSON(
   jsonString: string,
@@ -82,11 +84,13 @@ export const ActionReviewedStreamingEvent$inboundSchema: z.ZodType<
   ActionReviewedStreamingEvent,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("event.agents.action_reviewed"),
-  timestamp: z.string(),
-  data: z.lazy(() => ActionReviewedStreamingEventData$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("event.agents.action_reviewed"),
+    timestamp: z.string(),
+    data: z.lazy(() => ActionReviewedStreamingEventData$inboundSchema),
+  })
+);
 
 export function actionReviewedStreamingEventFromJSON(
   jsonString: string,

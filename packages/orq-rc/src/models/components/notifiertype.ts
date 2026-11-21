@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 
 export const NotifierType = {
@@ -14,7 +15,7 @@ export type NotifierType = ClosedEnum<typeof NotifierType>;
 
 /** @internal */
 export const NotifierType$inboundSchema: z.ZodNativeEnum<typeof NotifierType> =
-  z.nativeEnum(NotifierType);
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(NotifierType));
 /** @internal */
 export const NotifierType$outboundSchema: z.ZodNativeEnum<typeof NotifierType> =
   NotifierType$inboundSchema;

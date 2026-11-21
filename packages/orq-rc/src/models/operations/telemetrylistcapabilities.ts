@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import * as components from "../components/index.js";
 
 export type TelemetryListCapabilitiesRequest = {
@@ -36,16 +37,18 @@ export const TelemetryListCapabilitiesRequest$outboundSchema: z.ZodType<
   TelemetryListCapabilitiesRequest$Outbound,
   z.ZodTypeDef,
   TelemetryListCapabilitiesRequest
-> = z.object({
-  source: components.TelemetrySource$outboundSchema.optional(),
-  projectId: z.string().optional(),
-  workspaceWide: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    projectId: "project_id",
-    workspaceWide: "workspace_wide",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    source: components.TelemetrySource$outboundSchema.optional(),
+    projectId: z.string().optional(),
+    workspaceWide: z.boolean().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      projectId: "project_id",
+      workspaceWide: "workspace_wide",
+    });
+  })
+);
 
 export function telemetryListCapabilitiesRequestToJSON(
   telemetryListCapabilitiesRequest: TelemetryListCapabilitiesRequest,

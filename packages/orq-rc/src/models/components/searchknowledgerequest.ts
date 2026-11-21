@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import {
   SearchOptions,
   SearchOptions$Outbound,
@@ -436,9 +437,11 @@ export const OrExists$outboundSchema: z.ZodType<
   OrExists$Outbound,
   z.ZodTypeDef,
   OrExists
-> = z.object({
-  exists: z.boolean(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    exists: z.boolean(),
+  })
+);
 
 export function orExistsToJSON(orExists: OrExists): string {
   return JSON.stringify(OrExists$outboundSchema.parse(orExists));
@@ -452,7 +455,9 @@ export const SearchKnowledgeRequestOrNin$outboundSchema: z.ZodType<
   SearchKnowledgeRequestOrNin$Outbound,
   z.ZodTypeDef,
   SearchKnowledgeRequestOrNin
-> = z.union([z.string(), z.number(), z.boolean()]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.number(), z.boolean()])
+);
 
 export function searchKnowledgeRequestOrNinToJSON(
   searchKnowledgeRequestOrNin: SearchKnowledgeRequestOrNin,
@@ -474,9 +479,11 @@ export const SearchKnowledgeRequestOrFilterByNin$outboundSchema: z.ZodType<
   SearchKnowledgeRequestOrFilterByNin$Outbound,
   z.ZodTypeDef,
   SearchKnowledgeRequestOrFilterByNin
-> = z.object({
-  nin: z.array(z.union([z.string(), z.number(), z.boolean()])),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    nin: z.array(z.union([z.string(), z.number(), z.boolean()])),
+  })
+);
 
 export function searchKnowledgeRequestOrFilterByNinToJSON(
   searchKnowledgeRequestOrFilterByNin: SearchKnowledgeRequestOrFilterByNin,
@@ -496,7 +503,9 @@ export const SearchKnowledgeRequestOrIn$outboundSchema: z.ZodType<
   SearchKnowledgeRequestOrIn$Outbound,
   z.ZodTypeDef,
   SearchKnowledgeRequestOrIn
-> = z.union([z.string(), z.number(), z.boolean()]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.number(), z.boolean()])
+);
 
 export function searchKnowledgeRequestOrInToJSON(
   searchKnowledgeRequestOrIn: SearchKnowledgeRequestOrIn,
@@ -516,9 +525,11 @@ export const SearchKnowledgeRequestOrFilterByIn$outboundSchema: z.ZodType<
   SearchKnowledgeRequestOrFilterByIn$Outbound,
   z.ZodTypeDef,
   SearchKnowledgeRequestOrFilterByIn
-> = z.object({
-  in: z.array(z.union([z.string(), z.number(), z.boolean()])),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    in: z.array(z.union([z.string(), z.number(), z.boolean()])),
+  })
+);
 
 export function searchKnowledgeRequestOrFilterByInToJSON(
   searchKnowledgeRequestOrFilterByIn: SearchKnowledgeRequestOrFilterByIn,
@@ -540,9 +551,11 @@ export const SearchKnowledgeRequestOrLte$outboundSchema: z.ZodType<
   SearchKnowledgeRequestOrLte$Outbound,
   z.ZodTypeDef,
   SearchKnowledgeRequestOrLte
-> = z.object({
-  lte: z.number(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    lte: z.number(),
+  })
+);
 
 export function searchKnowledgeRequestOrLteToJSON(
   searchKnowledgeRequestOrLte: SearchKnowledgeRequestOrLte,
@@ -564,9 +577,11 @@ export const SearchKnowledgeRequestOrLt$outboundSchema: z.ZodType<
   SearchKnowledgeRequestOrLt$Outbound,
   z.ZodTypeDef,
   SearchKnowledgeRequestOrLt
-> = z.object({
-  lt: z.number(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    lt: z.number(),
+  })
+);
 
 export function searchKnowledgeRequestOrLtToJSON(
   searchKnowledgeRequestOrLt: SearchKnowledgeRequestOrLt,
@@ -586,9 +601,11 @@ export const SearchKnowledgeRequestOrGte$outboundSchema: z.ZodType<
   SearchKnowledgeRequestOrGte$Outbound,
   z.ZodTypeDef,
   SearchKnowledgeRequestOrGte
-> = z.object({
-  gte: z.number(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    gte: z.number(),
+  })
+);
 
 export function searchKnowledgeRequestOrGteToJSON(
   searchKnowledgeRequestOrGte: SearchKnowledgeRequestOrGte,
@@ -610,9 +627,11 @@ export const SearchKnowledgeRequestOrGt$outboundSchema: z.ZodType<
   SearchKnowledgeRequestOrGt$Outbound,
   z.ZodTypeDef,
   SearchKnowledgeRequestOrGt
-> = z.object({
-  gt: z.number(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    gt: z.number(),
+  })
+);
 
 export function searchKnowledgeRequestOrGtToJSON(
   searchKnowledgeRequestOrGt: SearchKnowledgeRequestOrGt,
@@ -630,7 +649,9 @@ export const SearchKnowledgeRequestOrNe$outboundSchema: z.ZodType<
   SearchKnowledgeRequestOrNe$Outbound,
   z.ZodTypeDef,
   SearchKnowledgeRequestOrNe
-> = z.union([z.string(), z.number(), z.boolean()]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.number(), z.boolean()])
+);
 
 export function searchKnowledgeRequestOrNeToJSON(
   searchKnowledgeRequestOrNe: SearchKnowledgeRequestOrNe,
@@ -650,9 +671,11 @@ export const SearchKnowledgeRequestOrFilterByNe$outboundSchema: z.ZodType<
   SearchKnowledgeRequestOrFilterByNe$Outbound,
   z.ZodTypeDef,
   SearchKnowledgeRequestOrFilterByNe
-> = z.object({
-  ne: z.union([z.string(), z.number(), z.boolean()]),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ne: z.union([z.string(), z.number(), z.boolean()]),
+  })
+);
 
 export function searchKnowledgeRequestOrFilterByNeToJSON(
   searchKnowledgeRequestOrFilterByNe: SearchKnowledgeRequestOrFilterByNe,
@@ -672,7 +695,9 @@ export const SearchKnowledgeRequestOrEq$outboundSchema: z.ZodType<
   SearchKnowledgeRequestOrEq$Outbound,
   z.ZodTypeDef,
   SearchKnowledgeRequestOrEq
-> = z.union([z.string(), z.number(), z.boolean()]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.number(), z.boolean()])
+);
 
 export function searchKnowledgeRequestOrEqToJSON(
   searchKnowledgeRequestOrEq: SearchKnowledgeRequestOrEq,
@@ -692,9 +717,11 @@ export const SearchKnowledgeRequestOrFilterByEq$outboundSchema: z.ZodType<
   SearchKnowledgeRequestOrFilterByEq$Outbound,
   z.ZodTypeDef,
   SearchKnowledgeRequestOrFilterByEq
-> = z.object({
-  eq: z.union([z.string(), z.number(), z.boolean()]),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    eq: z.union([z.string(), z.number(), z.boolean()]),
+  })
+);
 
 export function searchKnowledgeRequestOrFilterByEqToJSON(
   searchKnowledgeRequestOrFilterByEq: SearchKnowledgeRequestOrFilterByEq,
@@ -723,17 +750,19 @@ export const FilterByOr$outboundSchema: z.ZodType<
   FilterByOr$Outbound,
   z.ZodTypeDef,
   FilterByOr
-> = z.union([
-  z.lazy(() => SearchKnowledgeRequestOrFilterByEq$outboundSchema),
-  z.lazy(() => SearchKnowledgeRequestOrFilterByNe$outboundSchema),
-  z.lazy(() => SearchKnowledgeRequestOrGt$outboundSchema),
-  z.lazy(() => SearchKnowledgeRequestOrGte$outboundSchema),
-  z.lazy(() => SearchKnowledgeRequestOrLt$outboundSchema),
-  z.lazy(() => SearchKnowledgeRequestOrLte$outboundSchema),
-  z.lazy(() => SearchKnowledgeRequestOrFilterByIn$outboundSchema),
-  z.lazy(() => SearchKnowledgeRequestOrFilterByNin$outboundSchema),
-  z.lazy(() => OrExists$outboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => SearchKnowledgeRequestOrFilterByEq$outboundSchema),
+    z.lazy(() => SearchKnowledgeRequestOrFilterByNe$outboundSchema),
+    z.lazy(() => SearchKnowledgeRequestOrGt$outboundSchema),
+    z.lazy(() => SearchKnowledgeRequestOrGte$outboundSchema),
+    z.lazy(() => SearchKnowledgeRequestOrLt$outboundSchema),
+    z.lazy(() => SearchKnowledgeRequestOrLte$outboundSchema),
+    z.lazy(() => SearchKnowledgeRequestOrFilterByIn$outboundSchema),
+    z.lazy(() => SearchKnowledgeRequestOrFilterByNin$outboundSchema),
+    z.lazy(() => OrExists$outboundSchema),
+  ])
+);
 
 export function filterByOrToJSON(filterByOr: FilterByOr): string {
   return JSON.stringify(FilterByOr$outboundSchema.parse(filterByOr));
@@ -762,9 +791,9 @@ export const SearchKnowledgeRequestFilterByOr$outboundSchema: z.ZodType<
   SearchKnowledgeRequestFilterByOr$Outbound,
   z.ZodTypeDef,
   SearchKnowledgeRequestFilterByOr
-> = z.object({
-  or: z.array(
-    z.record(z.union([
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    or: z.array(z.record(z.union([
       z.lazy(() => SearchKnowledgeRequestOrFilterByEq$outboundSchema),
       z.lazy(() =>
         SearchKnowledgeRequestOrFilterByNe$outboundSchema
@@ -776,9 +805,9 @@ export const SearchKnowledgeRequestFilterByOr$outboundSchema: z.ZodType<
       z.lazy(() => SearchKnowledgeRequestOrFilterByIn$outboundSchema),
       z.lazy(() => SearchKnowledgeRequestOrFilterByNin$outboundSchema),
       z.lazy(() => OrExists$outboundSchema),
-    ])),
-  ),
-});
+    ]))),
+  })
+);
 
 export function searchKnowledgeRequestFilterByOrToJSON(
   searchKnowledgeRequestFilterByOr: SearchKnowledgeRequestFilterByOr,
@@ -800,9 +829,11 @@ export const AndExists$outboundSchema: z.ZodType<
   AndExists$Outbound,
   z.ZodTypeDef,
   AndExists
-> = z.object({
-  exists: z.boolean(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    exists: z.boolean(),
+  })
+);
 
 export function andExistsToJSON(andExists: AndExists): string {
   return JSON.stringify(AndExists$outboundSchema.parse(andExists));
@@ -816,7 +847,9 @@ export const SearchKnowledgeRequestAndNin$outboundSchema: z.ZodType<
   SearchKnowledgeRequestAndNin$Outbound,
   z.ZodTypeDef,
   SearchKnowledgeRequestAndNin
-> = z.union([z.string(), z.number(), z.boolean()]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.number(), z.boolean()])
+);
 
 export function searchKnowledgeRequestAndNinToJSON(
   searchKnowledgeRequestAndNin: SearchKnowledgeRequestAndNin,
@@ -838,9 +871,11 @@ export const SearchKnowledgeRequestAndFilterByNin$outboundSchema: z.ZodType<
   SearchKnowledgeRequestAndFilterByNin$Outbound,
   z.ZodTypeDef,
   SearchKnowledgeRequestAndFilterByNin
-> = z.object({
-  nin: z.array(z.union([z.string(), z.number(), z.boolean()])),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    nin: z.array(z.union([z.string(), z.number(), z.boolean()])),
+  })
+);
 
 export function searchKnowledgeRequestAndFilterByNinToJSON(
   searchKnowledgeRequestAndFilterByNin: SearchKnowledgeRequestAndFilterByNin,
@@ -860,7 +895,9 @@ export const SearchKnowledgeRequestAndIn$outboundSchema: z.ZodType<
   SearchKnowledgeRequestAndIn$Outbound,
   z.ZodTypeDef,
   SearchKnowledgeRequestAndIn
-> = z.union([z.string(), z.number(), z.boolean()]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.number(), z.boolean()])
+);
 
 export function searchKnowledgeRequestAndInToJSON(
   searchKnowledgeRequestAndIn: SearchKnowledgeRequestAndIn,
@@ -882,9 +919,11 @@ export const SearchKnowledgeRequestAndFilterByIn$outboundSchema: z.ZodType<
   SearchKnowledgeRequestAndFilterByIn$Outbound,
   z.ZodTypeDef,
   SearchKnowledgeRequestAndFilterByIn
-> = z.object({
-  in: z.array(z.union([z.string(), z.number(), z.boolean()])),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    in: z.array(z.union([z.string(), z.number(), z.boolean()])),
+  })
+);
 
 export function searchKnowledgeRequestAndFilterByInToJSON(
   searchKnowledgeRequestAndFilterByIn: SearchKnowledgeRequestAndFilterByIn,
@@ -906,9 +945,11 @@ export const SearchKnowledgeRequestAndLte$outboundSchema: z.ZodType<
   SearchKnowledgeRequestAndLte$Outbound,
   z.ZodTypeDef,
   SearchKnowledgeRequestAndLte
-> = z.object({
-  lte: z.number(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    lte: z.number(),
+  })
+);
 
 export function searchKnowledgeRequestAndLteToJSON(
   searchKnowledgeRequestAndLte: SearchKnowledgeRequestAndLte,
@@ -930,9 +971,11 @@ export const SearchKnowledgeRequestAndLt$outboundSchema: z.ZodType<
   SearchKnowledgeRequestAndLt$Outbound,
   z.ZodTypeDef,
   SearchKnowledgeRequestAndLt
-> = z.object({
-  lt: z.number(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    lt: z.number(),
+  })
+);
 
 export function searchKnowledgeRequestAndLtToJSON(
   searchKnowledgeRequestAndLt: SearchKnowledgeRequestAndLt,
@@ -954,9 +997,11 @@ export const SearchKnowledgeRequestAndGte$outboundSchema: z.ZodType<
   SearchKnowledgeRequestAndGte$Outbound,
   z.ZodTypeDef,
   SearchKnowledgeRequestAndGte
-> = z.object({
-  gte: z.number(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    gte: z.number(),
+  })
+);
 
 export function searchKnowledgeRequestAndGteToJSON(
   searchKnowledgeRequestAndGte: SearchKnowledgeRequestAndGte,
@@ -978,9 +1023,11 @@ export const SearchKnowledgeRequestAndGt$outboundSchema: z.ZodType<
   SearchKnowledgeRequestAndGt$Outbound,
   z.ZodTypeDef,
   SearchKnowledgeRequestAndGt
-> = z.object({
-  gt: z.number(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    gt: z.number(),
+  })
+);
 
 export function searchKnowledgeRequestAndGtToJSON(
   searchKnowledgeRequestAndGt: SearchKnowledgeRequestAndGt,
@@ -1000,7 +1047,9 @@ export const SearchKnowledgeRequestAndNe$outboundSchema: z.ZodType<
   SearchKnowledgeRequestAndNe$Outbound,
   z.ZodTypeDef,
   SearchKnowledgeRequestAndNe
-> = z.union([z.string(), z.number(), z.boolean()]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.number(), z.boolean()])
+);
 
 export function searchKnowledgeRequestAndNeToJSON(
   searchKnowledgeRequestAndNe: SearchKnowledgeRequestAndNe,
@@ -1022,9 +1071,11 @@ export const SearchKnowledgeRequestAndFilterByNe$outboundSchema: z.ZodType<
   SearchKnowledgeRequestAndFilterByNe$Outbound,
   z.ZodTypeDef,
   SearchKnowledgeRequestAndFilterByNe
-> = z.object({
-  ne: z.union([z.string(), z.number(), z.boolean()]),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ne: z.union([z.string(), z.number(), z.boolean()]),
+  })
+);
 
 export function searchKnowledgeRequestAndFilterByNeToJSON(
   searchKnowledgeRequestAndFilterByNe: SearchKnowledgeRequestAndFilterByNe,
@@ -1044,7 +1095,9 @@ export const SearchKnowledgeRequestAndEq$outboundSchema: z.ZodType<
   SearchKnowledgeRequestAndEq$Outbound,
   z.ZodTypeDef,
   SearchKnowledgeRequestAndEq
-> = z.union([z.string(), z.number(), z.boolean()]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.number(), z.boolean()])
+);
 
 export function searchKnowledgeRequestAndEqToJSON(
   searchKnowledgeRequestAndEq: SearchKnowledgeRequestAndEq,
@@ -1066,9 +1119,11 @@ export const SearchKnowledgeRequestAndFilterByEq$outboundSchema: z.ZodType<
   SearchKnowledgeRequestAndFilterByEq$Outbound,
   z.ZodTypeDef,
   SearchKnowledgeRequestAndFilterByEq
-> = z.object({
-  eq: z.union([z.string(), z.number(), z.boolean()]),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    eq: z.union([z.string(), z.number(), z.boolean()]),
+  })
+);
 
 export function searchKnowledgeRequestAndFilterByEqToJSON(
   searchKnowledgeRequestAndFilterByEq: SearchKnowledgeRequestAndFilterByEq,
@@ -1097,17 +1152,19 @@ export const FilterByAnd$outboundSchema: z.ZodType<
   FilterByAnd$Outbound,
   z.ZodTypeDef,
   FilterByAnd
-> = z.union([
-  z.lazy(() => SearchKnowledgeRequestAndFilterByEq$outboundSchema),
-  z.lazy(() => SearchKnowledgeRequestAndFilterByNe$outboundSchema),
-  z.lazy(() => SearchKnowledgeRequestAndGt$outboundSchema),
-  z.lazy(() => SearchKnowledgeRequestAndGte$outboundSchema),
-  z.lazy(() => SearchKnowledgeRequestAndLt$outboundSchema),
-  z.lazy(() => SearchKnowledgeRequestAndLte$outboundSchema),
-  z.lazy(() => SearchKnowledgeRequestAndFilterByIn$outboundSchema),
-  z.lazy(() => SearchKnowledgeRequestAndFilterByNin$outboundSchema),
-  z.lazy(() => AndExists$outboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => SearchKnowledgeRequestAndFilterByEq$outboundSchema),
+    z.lazy(() => SearchKnowledgeRequestAndFilterByNe$outboundSchema),
+    z.lazy(() => SearchKnowledgeRequestAndGt$outboundSchema),
+    z.lazy(() => SearchKnowledgeRequestAndGte$outboundSchema),
+    z.lazy(() => SearchKnowledgeRequestAndLt$outboundSchema),
+    z.lazy(() => SearchKnowledgeRequestAndLte$outboundSchema),
+    z.lazy(() => SearchKnowledgeRequestAndFilterByIn$outboundSchema),
+    z.lazy(() => SearchKnowledgeRequestAndFilterByNin$outboundSchema),
+    z.lazy(() => AndExists$outboundSchema),
+  ])
+);
 
 export function filterByAndToJSON(filterByAnd: FilterByAnd): string {
   return JSON.stringify(FilterByAnd$outboundSchema.parse(filterByAnd));
@@ -1136,9 +1193,9 @@ export const SearchKnowledgeRequestFilterByAnd$outboundSchema: z.ZodType<
   SearchKnowledgeRequestFilterByAnd$Outbound,
   z.ZodTypeDef,
   SearchKnowledgeRequestFilterByAnd
-> = z.object({
-  and: z.array(
-    z.record(z.union([
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    and: z.array(z.record(z.union([
       z.lazy(() => SearchKnowledgeRequestAndFilterByEq$outboundSchema),
       z.lazy(() =>
         SearchKnowledgeRequestAndFilterByNe$outboundSchema
@@ -1150,9 +1207,9 @@ export const SearchKnowledgeRequestFilterByAnd$outboundSchema: z.ZodType<
       z.lazy(() => SearchKnowledgeRequestAndFilterByIn$outboundSchema),
       z.lazy(() => SearchKnowledgeRequestAndFilterByNin$outboundSchema),
       z.lazy(() => AndExists$outboundSchema),
-    ])),
-  ),
-});
+    ]))),
+  })
+);
 
 export function searchKnowledgeRequestFilterByAndToJSON(
   searchKnowledgeRequestFilterByAnd: SearchKnowledgeRequestFilterByAnd,
@@ -1174,9 +1231,11 @@ export const Exists$outboundSchema: z.ZodType<
   Exists$Outbound,
   z.ZodTypeDef,
   Exists
-> = z.object({
-  exists: z.boolean(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    exists: z.boolean(),
+  })
+);
 
 export function existsToJSON(exists: Exists): string {
   return JSON.stringify(Exists$outboundSchema.parse(exists));
@@ -1190,7 +1249,9 @@ export const OneNin$outboundSchema: z.ZodType<
   OneNin$Outbound,
   z.ZodTypeDef,
   OneNin
-> = z.union([z.string(), z.number(), z.boolean()]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.number(), z.boolean()])
+);
 
 export function oneNinToJSON(oneNin: OneNin): string {
   return JSON.stringify(OneNin$outboundSchema.parse(oneNin));
@@ -1206,9 +1267,11 @@ export const SearchKnowledgeRequest1Nin$outboundSchema: z.ZodType<
   SearchKnowledgeRequest1Nin$Outbound,
   z.ZodTypeDef,
   SearchKnowledgeRequest1Nin
-> = z.object({
-  nin: z.array(z.union([z.string(), z.number(), z.boolean()])),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    nin: z.array(z.union([z.string(), z.number(), z.boolean()])),
+  })
+);
 
 export function searchKnowledgeRequest1NinToJSON(
   searchKnowledgeRequest1Nin: SearchKnowledgeRequest1Nin,
@@ -1226,7 +1289,9 @@ export const OneIn$outboundSchema: z.ZodType<
   OneIn$Outbound,
   z.ZodTypeDef,
   OneIn
-> = z.union([z.string(), z.number(), z.boolean()]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.number(), z.boolean()])
+);
 
 export function oneInToJSON(oneIn: OneIn): string {
   return JSON.stringify(OneIn$outboundSchema.parse(oneIn));
@@ -1242,9 +1307,11 @@ export const SearchKnowledgeRequest1In$outboundSchema: z.ZodType<
   SearchKnowledgeRequest1In$Outbound,
   z.ZodTypeDef,
   SearchKnowledgeRequest1In
-> = z.object({
-  in: z.array(z.union([z.string(), z.number(), z.boolean()])),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    in: z.array(z.union([z.string(), z.number(), z.boolean()])),
+  })
+);
 
 export function searchKnowledgeRequest1InToJSON(
   searchKnowledgeRequest1In: SearchKnowledgeRequest1In,
@@ -1264,9 +1331,11 @@ export const OneLte$outboundSchema: z.ZodType<
   OneLte$Outbound,
   z.ZodTypeDef,
   OneLte
-> = z.object({
-  lte: z.number(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    lte: z.number(),
+  })
+);
 
 export function oneLteToJSON(oneLte: OneLte): string {
   return JSON.stringify(OneLte$outboundSchema.parse(oneLte));
@@ -1282,9 +1351,11 @@ export const OneLt$outboundSchema: z.ZodType<
   OneLt$Outbound,
   z.ZodTypeDef,
   OneLt
-> = z.object({
-  lt: z.number(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    lt: z.number(),
+  })
+);
 
 export function oneLtToJSON(oneLt: OneLt): string {
   return JSON.stringify(OneLt$outboundSchema.parse(oneLt));
@@ -1300,9 +1371,11 @@ export const OneGte$outboundSchema: z.ZodType<
   OneGte$Outbound,
   z.ZodTypeDef,
   OneGte
-> = z.object({
-  gte: z.number(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    gte: z.number(),
+  })
+);
 
 export function oneGteToJSON(oneGte: OneGte): string {
   return JSON.stringify(OneGte$outboundSchema.parse(oneGte));
@@ -1318,9 +1391,11 @@ export const OneGt$outboundSchema: z.ZodType<
   OneGt$Outbound,
   z.ZodTypeDef,
   OneGt
-> = z.object({
-  gt: z.number(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    gt: z.number(),
+  })
+);
 
 export function oneGtToJSON(oneGt: OneGt): string {
   return JSON.stringify(OneGt$outboundSchema.parse(oneGt));
@@ -1334,7 +1409,9 @@ export const OneNe$outboundSchema: z.ZodType<
   OneNe$Outbound,
   z.ZodTypeDef,
   OneNe
-> = z.union([z.string(), z.number(), z.boolean()]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.number(), z.boolean()])
+);
 
 export function oneNeToJSON(oneNe: OneNe): string {
   return JSON.stringify(OneNe$outboundSchema.parse(oneNe));
@@ -1350,9 +1427,11 @@ export const SearchKnowledgeRequest1Ne$outboundSchema: z.ZodType<
   SearchKnowledgeRequest1Ne$Outbound,
   z.ZodTypeDef,
   SearchKnowledgeRequest1Ne
-> = z.object({
-  ne: z.union([z.string(), z.number(), z.boolean()]),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ne: z.union([z.string(), z.number(), z.boolean()]),
+  })
+);
 
 export function searchKnowledgeRequest1NeToJSON(
   searchKnowledgeRequest1Ne: SearchKnowledgeRequest1Ne,
@@ -1370,7 +1449,9 @@ export const OneEq$outboundSchema: z.ZodType<
   OneEq$Outbound,
   z.ZodTypeDef,
   OneEq
-> = z.union([z.string(), z.number(), z.boolean()]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.number(), z.boolean()])
+);
 
 export function oneEqToJSON(oneEq: OneEq): string {
   return JSON.stringify(OneEq$outboundSchema.parse(oneEq));
@@ -1386,9 +1467,11 @@ export const SearchKnowledgeRequest1Eq$outboundSchema: z.ZodType<
   SearchKnowledgeRequest1Eq$Outbound,
   z.ZodTypeDef,
   SearchKnowledgeRequest1Eq
-> = z.object({
-  eq: z.union([z.string(), z.number(), z.boolean()]),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    eq: z.union([z.string(), z.number(), z.boolean()]),
+  })
+);
 
 export function searchKnowledgeRequest1EqToJSON(
   searchKnowledgeRequest1Eq: SearchKnowledgeRequest1Eq,
@@ -1415,17 +1498,19 @@ export const FilterBy1$outboundSchema: z.ZodType<
   FilterBy1$Outbound,
   z.ZodTypeDef,
   FilterBy1
-> = z.union([
-  z.lazy(() => SearchKnowledgeRequest1Eq$outboundSchema),
-  z.lazy(() => SearchKnowledgeRequest1Ne$outboundSchema),
-  z.lazy(() => OneGt$outboundSchema),
-  z.lazy(() => OneGte$outboundSchema),
-  z.lazy(() => OneLt$outboundSchema),
-  z.lazy(() => OneLte$outboundSchema),
-  z.lazy(() => SearchKnowledgeRequest1In$outboundSchema),
-  z.lazy(() => SearchKnowledgeRequest1Nin$outboundSchema),
-  z.lazy(() => Exists$outboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => SearchKnowledgeRequest1Eq$outboundSchema),
+    z.lazy(() => SearchKnowledgeRequest1Ne$outboundSchema),
+    z.lazy(() => OneGt$outboundSchema),
+    z.lazy(() => OneGte$outboundSchema),
+    z.lazy(() => OneLt$outboundSchema),
+    z.lazy(() => OneLte$outboundSchema),
+    z.lazy(() => SearchKnowledgeRequest1In$outboundSchema),
+    z.lazy(() => SearchKnowledgeRequest1Nin$outboundSchema),
+    z.lazy(() => Exists$outboundSchema),
+  ])
+);
 
 export function filterBy1ToJSON(filterBy1: FilterBy1): string {
   return JSON.stringify(FilterBy1$outboundSchema.parse(filterBy1));
@@ -1453,21 +1538,23 @@ export const FilterBy$outboundSchema: z.ZodType<
   FilterBy$Outbound,
   z.ZodTypeDef,
   FilterBy
-> = z.union([
-  z.lazy(() => SearchKnowledgeRequestFilterByAnd$outboundSchema),
-  z.lazy(() => SearchKnowledgeRequestFilterByOr$outboundSchema),
-  z.record(z.union([
-    z.lazy(() => SearchKnowledgeRequest1Eq$outboundSchema),
-    z.lazy(() => SearchKnowledgeRequest1Ne$outboundSchema),
-    z.lazy(() => OneGt$outboundSchema),
-    z.lazy(() => OneGte$outboundSchema),
-    z.lazy(() => OneLt$outboundSchema),
-    z.lazy(() => OneLte$outboundSchema),
-    z.lazy(() => SearchKnowledgeRequest1In$outboundSchema),
-    z.lazy(() => SearchKnowledgeRequest1Nin$outboundSchema),
-    z.lazy(() => Exists$outboundSchema),
-  ])),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => SearchKnowledgeRequestFilterByAnd$outboundSchema),
+    z.lazy(() => SearchKnowledgeRequestFilterByOr$outboundSchema),
+    z.record(z.union([
+      z.lazy(() => SearchKnowledgeRequest1Eq$outboundSchema),
+      z.lazy(() => SearchKnowledgeRequest1Ne$outboundSchema),
+      z.lazy(() => OneGt$outboundSchema),
+      z.lazy(() => OneGte$outboundSchema),
+      z.lazy(() => OneLt$outboundSchema),
+      z.lazy(() => OneLte$outboundSchema),
+      z.lazy(() => SearchKnowledgeRequest1In$outboundSchema),
+      z.lazy(() => SearchKnowledgeRequest1Nin$outboundSchema),
+      z.lazy(() => Exists$outboundSchema),
+    ])),
+  ])
+);
 
 export function filterByToJSON(filterBy: FilterBy): string {
   return JSON.stringify(FilterBy$outboundSchema.parse(filterBy));
@@ -1482,18 +1569,20 @@ export type Two$Outbound = {
 };
 
 /** @internal */
-export const Two$outboundSchema: z.ZodType<Two$Outbound, z.ZodTypeDef, Two> = z
-  .object({
-    model: z.string().optional(),
-    modelDbId: z.string(),
-    provider: z.string(),
-    integrationId: z.nullable(z.string()).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      modelDbId: "model_db_id",
-      integrationId: "integration_id",
-    });
-  });
+export const Two$outboundSchema: z.ZodType<Two$Outbound, z.ZodTypeDef, Two> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      model: z.string().optional(),
+      modelDbId: z.string(),
+      provider: z.string(),
+      integrationId: z.nullable(z.string()).optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        modelDbId: "model_db_id",
+        integrationId: "integration_id",
+      });
+    })
+  );
 
 export function twoToJSON(two: Two): string {
   return JSON.stringify(Two$outboundSchema.parse(two));
@@ -1512,17 +1601,19 @@ export const AgenticRagConfig1$outboundSchema: z.ZodType<
   AgenticRagConfig1$Outbound,
   z.ZodTypeDef,
   AgenticRagConfig1
-> = z.object({
-  model: z.string(),
-  modelDbId: z.string().optional(),
-  provider: z.string().optional(),
-  integrationId: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    modelDbId: "model_db_id",
-    integrationId: "integration_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model: z.string(),
+    modelDbId: z.string().optional(),
+    provider: z.string().optional(),
+    integrationId: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      modelDbId: "model_db_id",
+      integrationId: "integration_id",
+    });
+  })
+);
 
 export function agenticRagConfig1ToJSON(
   agenticRagConfig1: AgenticRagConfig1,
@@ -1542,10 +1633,12 @@ export const SearchKnowledgeRequestAgenticRagConfig$outboundSchema: z.ZodType<
   SearchKnowledgeRequestAgenticRagConfig$Outbound,
   z.ZodTypeDef,
   SearchKnowledgeRequestAgenticRagConfig
-> = z.union([
-  z.lazy(() => Two$outboundSchema),
-  z.lazy(() => AgenticRagConfig1$outboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => Two$outboundSchema),
+    z.lazy(() => AgenticRagConfig1$outboundSchema),
+  ])
+);
 
 export function searchKnowledgeRequestAgenticRagConfigToJSON(
   searchKnowledgeRequestAgenticRagConfig:
@@ -1595,16 +1688,16 @@ export const SearchKnowledgeRequest$outboundSchema: z.ZodType<
   SearchKnowledgeRequest$Outbound,
   z.ZodTypeDef,
   SearchKnowledgeRequest
-> = z.object({
-  query: z.string(),
-  topK: z.number().int().optional(),
-  threshold: z.number().optional(),
-  searchType: SearchType$outboundSchema.optional(),
-  filterBy: z.union([
-    z.lazy(() => SearchKnowledgeRequestFilterByAnd$outboundSchema),
-    z.lazy(() => SearchKnowledgeRequestFilterByOr$outboundSchema),
-    z.record(
-      z.union([
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    query: z.string(),
+    topK: z.number().int().optional(),
+    threshold: z.number().optional(),
+    searchType: SearchType$outboundSchema.optional(),
+    filterBy: z.union([
+      z.lazy(() => SearchKnowledgeRequestFilterByAnd$outboundSchema),
+      z.lazy(() => SearchKnowledgeRequestFilterByOr$outboundSchema),
+      z.record(z.union([
         z.lazy(() => SearchKnowledgeRequest1Eq$outboundSchema),
         z.lazy(() => SearchKnowledgeRequest1Ne$outboundSchema),
         z.lazy(() => OneGt$outboundSchema),
@@ -1614,29 +1707,29 @@ export const SearchKnowledgeRequest$outboundSchema: z.ZodType<
         z.lazy(() => SearchKnowledgeRequest1In$outboundSchema),
         z.lazy(() => SearchKnowledgeRequest1Nin$outboundSchema),
         z.lazy(() => Exists$outboundSchema),
-      ]),
-    ),
-  ]).optional(),
-  searchOptions: SearchOptions$outboundSchema.optional(),
-  rerankConfig: SearchRerankConfig$outboundSchema.optional(),
-  agenticRagConfig: z.nullable(
-    z.union([
+      ])),
+    ]).optional(),
+    searchOptions: SearchOptions$outboundSchema.optional(),
+    rerankConfig: SearchRerankConfig$outboundSchema.optional(),
+    agenticRagConfig: z.nullable(z.union([
       z.lazy(() => Two$outboundSchema),
-      z.lazy(() => AgenticRagConfig1$outboundSchema),
-    ]),
-  ).optional(),
-  retrievalConfig: SearchRetrievalConfig$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    topK: "top_k",
-    searchType: "search_type",
-    filterBy: "filter_by",
-    searchOptions: "search_options",
-    rerankConfig: "rerank_config",
-    agenticRagConfig: "agentic_rag_config",
-    retrievalConfig: "retrieval_config",
-  });
-});
+      z.lazy(() =>
+        AgenticRagConfig1$outboundSchema
+      ),
+    ])).optional(),
+    retrievalConfig: SearchRetrievalConfig$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      topK: "top_k",
+      searchType: "search_type",
+      filterBy: "filter_by",
+      searchOptions: "search_options",
+      rerankConfig: "rerank_config",
+      agenticRagConfig: "agentic_rag_config",
+      retrievalConfig: "retrieval_config",
+    });
+  })
+);
 
 export function searchKnowledgeRequestToJSON(
   searchKnowledgeRequest: SearchKnowledgeRequest,

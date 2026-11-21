@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 
 /**
@@ -57,7 +58,9 @@ export type CreateWebhookRequest = {
 /** @internal */
 export const CreateWebhookRequestContentType$outboundSchema: z.ZodNativeEnum<
   typeof CreateWebhookRequestContentType
-> = z.nativeEnum(CreateWebhookRequestContentType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(CreateWebhookRequestContentType)
+);
 
 /** @internal */
 export type CreateWebhookRequest$Outbound = {
@@ -75,21 +78,23 @@ export const CreateWebhookRequest$outboundSchema: z.ZodType<
   CreateWebhookRequest$Outbound,
   z.ZodTypeDef,
   CreateWebhookRequest
-> = z.object({
-  id: z.string(),
-  url: z.string(),
-  contentType: CreateWebhookRequestContentType$outboundSchema,
-  displayName: z.string(),
-  events: z.array(z.string()),
-  secret: z.string(),
-  enabled: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    id: "_id",
-    contentType: "content_type",
-    displayName: "display_name",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    url: z.string(),
+    contentType: CreateWebhookRequestContentType$outboundSchema,
+    displayName: z.string(),
+    events: z.array(z.string()),
+    secret: z.string(),
+    enabled: z.boolean().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      id: "_id",
+      contentType: "content_type",
+      displayName: "display_name",
+    });
+  })
+);
 
 export function createWebhookRequestToJSON(
   createWebhookRequest: CreateWebhookRequest,

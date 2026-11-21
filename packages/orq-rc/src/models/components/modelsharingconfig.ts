@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -21,20 +21,22 @@ export const ModelSharingConfig$inboundSchema: z.ZodType<
   ModelSharingConfig,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  allow_fork: z.boolean(),
-  allow_version_pin: z.boolean(),
-  auto_grant_new_projects: z.boolean(),
-  mode: z.string(),
-  project_ids: z.nullable(z.array(z.string())).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "allow_fork": "allowFork",
-    "allow_version_pin": "allowVersionPin",
-    "auto_grant_new_projects": "autoGrantNewProjects",
-    "project_ids": "projectIds",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    allow_fork: z.boolean(),
+    allow_version_pin: z.boolean(),
+    auto_grant_new_projects: z.boolean(),
+    mode: z.string(),
+    project_ids: z.nullable(z.array(z.string())).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "allow_fork": "allowFork",
+      "allow_version_pin": "allowVersionPin",
+      "auto_grant_new_projects": "autoGrantNewProjects",
+      "project_ids": "projectIds",
+    });
+  })
+);
 
 export function modelSharingConfigFromJSON(
   jsonString: string,

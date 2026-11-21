@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type AlertListTriggerEventsRequest = {
   /**
@@ -48,20 +49,22 @@ export const AlertListTriggerEventsRequest$outboundSchema: z.ZodType<
   AlertListTriggerEventsRequest$Outbound,
   z.ZodTypeDef,
   AlertListTriggerEventsRequest
-> = z.object({
-  alertId: z.string(),
-  triggerId: z.string(),
-  limit: z.number().int().optional(),
-  startingAfter: z.string().optional(),
-  endingBefore: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    alertId: "alert_id",
-    triggerId: "trigger_id",
-    startingAfter: "starting_after",
-    endingBefore: "ending_before",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    alertId: z.string(),
+    triggerId: z.string(),
+    limit: z.number().int().optional(),
+    startingAfter: z.string().optional(),
+    endingBefore: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      alertId: "alert_id",
+      triggerId: "trigger_id",
+      startingAfter: "starting_after",
+      endingBefore: "ending_before",
+    });
+  })
+);
 
 export function alertListTriggerEventsRequestToJSON(
   alertListTriggerEventsRequest: AlertListTriggerEventsRequest,

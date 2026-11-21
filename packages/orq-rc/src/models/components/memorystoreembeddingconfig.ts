@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -19,9 +19,11 @@ export const MemoryStoreEmbeddingConfig$inboundSchema: z.ZodType<
   MemoryStoreEmbeddingConfig,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  model: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model: z.string(),
+  })
+);
 /** @internal */
 export type MemoryStoreEmbeddingConfig$Outbound = {
   model: string;
@@ -32,9 +34,11 @@ export const MemoryStoreEmbeddingConfig$outboundSchema: z.ZodType<
   MemoryStoreEmbeddingConfig$Outbound,
   z.ZodTypeDef,
   MemoryStoreEmbeddingConfig
-> = z.object({
-  model: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model: z.string(),
+  })
+);
 
 export function memoryStoreEmbeddingConfigToJSON(
   memoryStoreEmbeddingConfig: MemoryStoreEmbeddingConfig,

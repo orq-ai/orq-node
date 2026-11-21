@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -114,30 +114,29 @@ export type AlertCondition = {
 };
 
 /** @internal */
-export const Comparator$inboundSchema: z.ZodNativeEnum<typeof Comparator> = z
-  .nativeEnum(Comparator);
+export const Comparator$inboundSchema: z.ZodNativeEnum<typeof Comparator> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Comparator));
 /** @internal */
 export const Comparator$outboundSchema: z.ZodNativeEnum<typeof Comparator> =
   Comparator$inboundSchema;
 
 /** @internal */
-export const Window$inboundSchema: z.ZodNativeEnum<typeof Window> = z
-  .nativeEnum(Window);
+export const Window$inboundSchema: z.ZodNativeEnum<typeof Window> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Window));
 /** @internal */
 export const Window$outboundSchema: z.ZodNativeEnum<typeof Window> =
   Window$inboundSchema;
 
 /** @internal */
-export const Interval$inboundSchema: z.ZodNativeEnum<typeof Interval> = z
-  .nativeEnum(Interval);
+export const Interval$inboundSchema: z.ZodNativeEnum<typeof Interval> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Interval));
 /** @internal */
 export const Interval$outboundSchema: z.ZodNativeEnum<typeof Interval> =
   Interval$inboundSchema;
 
 /** @internal */
-export const Delay$inboundSchema: z.ZodNativeEnum<typeof Delay> = z.nativeEnum(
-  Delay,
-);
+export const Delay$inboundSchema: z.ZodNativeEnum<typeof Delay> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Delay));
 /** @internal */
 export const Delay$outboundSchema: z.ZodNativeEnum<typeof Delay> =
   Delay$inboundSchema;
@@ -147,20 +146,22 @@ export const AlertCondition$inboundSchema: z.ZodType<
   AlertCondition,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  comparator: Comparator$inboundSchema,
-  threshold: z.number(),
-  degraded_threshold: z.number().optional(),
-  resolve_threshold: z.number().optional(),
-  window: Window$inboundSchema,
-  interval: Interval$inboundSchema,
-  delay: Delay$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "degraded_threshold": "degradedThreshold",
-    "resolve_threshold": "resolveThreshold",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    comparator: Comparator$inboundSchema,
+    threshold: z.number(),
+    degraded_threshold: z.number().optional(),
+    resolve_threshold: z.number().optional(),
+    window: Window$inboundSchema,
+    interval: Interval$inboundSchema,
+    delay: Delay$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "degraded_threshold": "degradedThreshold",
+      "resolve_threshold": "resolveThreshold",
+    });
+  })
+);
 /** @internal */
 export type AlertCondition$Outbound = {
   comparator: string;
@@ -177,20 +178,22 @@ export const AlertCondition$outboundSchema: z.ZodType<
   AlertCondition$Outbound,
   z.ZodTypeDef,
   AlertCondition
-> = z.object({
-  comparator: Comparator$outboundSchema,
-  threshold: z.number(),
-  degradedThreshold: z.number().optional(),
-  resolveThreshold: z.number().optional(),
-  window: Window$outboundSchema,
-  interval: Interval$outboundSchema,
-  delay: Delay$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    degradedThreshold: "degraded_threshold",
-    resolveThreshold: "resolve_threshold",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    comparator: Comparator$outboundSchema,
+    threshold: z.number(),
+    degradedThreshold: z.number().optional(),
+    resolveThreshold: z.number().optional(),
+    window: Window$outboundSchema,
+    interval: Interval$outboundSchema,
+    delay: Delay$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      degradedThreshold: "degraded_threshold",
+      resolveThreshold: "resolve_threshold",
+    });
+  })
+);
 
 export function alertConditionToJSON(alertCondition: AlertCondition): string {
   return JSON.stringify(AlertCondition$outboundSchema.parse(alertCondition));

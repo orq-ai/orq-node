@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type PutSkillFileRequest = {
   /**
@@ -29,10 +30,12 @@ export const PutSkillFileRequest$outboundSchema: z.ZodType<
   PutSkillFileRequest$Outbound,
   z.ZodTypeDef,
   PutSkillFileRequest
-> = z.object({
-  path: z.string(),
-  content: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    path: z.string(),
+    content: z.string(),
+  })
+);
 
 export function putSkillFileRequestToJSON(
   putSkillFileRequest: PutSkillFileRequest,

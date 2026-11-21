@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import * as components from "../components/index.js";
 
 export type ExternalAgentRefreshCardRequest = {
@@ -23,16 +24,18 @@ export const ExternalAgentRefreshCardRequest$outboundSchema: z.ZodType<
   ExternalAgentRefreshCardRequest$Outbound,
   z.ZodTypeDef,
   ExternalAgentRefreshCardRequest
-> = z.object({
-  agentKey: z.string(),
-  refreshExternalAgentCardRequest:
-    components.RefreshExternalAgentCardRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    agentKey: "agent_key",
-    refreshExternalAgentCardRequest: "RefreshExternalAgentCardRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    agentKey: z.string(),
+    refreshExternalAgentCardRequest:
+      components.RefreshExternalAgentCardRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      agentKey: "agent_key",
+      refreshExternalAgentCardRequest: "RefreshExternalAgentCardRequest",
+    });
+  })
+);
 
 export function externalAgentRefreshCardRequestToJSON(
   externalAgentRefreshCardRequest: ExternalAgentRefreshCardRequest,

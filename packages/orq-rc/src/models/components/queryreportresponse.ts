@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -68,25 +68,27 @@ export type QueryReportResponse = {
 /** @internal */
 export const QueryReportResponseObject$inboundSchema: z.ZodNativeEnum<
   typeof QueryReportResponseObject
-> = z.nativeEnum(QueryReportResponseObject);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(QueryReportResponseObject));
 
 /** @internal */
 export const QueryReportResponse$inboundSchema: z.ZodType<
   QueryReportResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: QueryReportResponseObject$inboundSchema.optional(),
-  request: QueryReportRequest$inboundSchema.optional(),
-  data: z.array(DataPoint$inboundSchema).optional(),
-  totals: Totals$inboundSchema.optional(),
-  has_more: z.boolean().optional(),
-  meta: ResponseMeta$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "has_more": "hasMore",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: QueryReportResponseObject$inboundSchema.optional(),
+    request: QueryReportRequest$inboundSchema.optional(),
+    data: z.array(DataPoint$inboundSchema).optional(),
+    totals: Totals$inboundSchema.optional(),
+    has_more: z.boolean().optional(),
+    meta: ResponseMeta$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "has_more": "hasMore",
+    });
+  })
+);
 
 export function queryReportResponseFromJSON(
   jsonString: string,

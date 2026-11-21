@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type SkillFileWrite = {
   path?: string | undefined;
@@ -20,10 +21,12 @@ export const SkillFileWrite$outboundSchema: z.ZodType<
   SkillFileWrite$Outbound,
   z.ZodTypeDef,
   SkillFileWrite
-> = z.object({
-  path: z.string().optional(),
-  content: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    path: z.string().optional(),
+    content: z.string().optional(),
+  })
+);
 
 export function skillFileWriteToJSON(skillFileWrite: SkillFileWrite): string {
   return JSON.stringify(SkillFileWrite$outboundSchema.parse(skillFileWrite));

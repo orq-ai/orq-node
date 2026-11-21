@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -82,21 +82,25 @@ export type ToolExecutionFinishedStreamingEvent = {
 
 /** @internal */
 export const ToolExecutionFinishedStreamingEventProduct$inboundSchema:
-  z.ZodNativeEnum<typeof ToolExecutionFinishedStreamingEventProduct> = z
-    .nativeEnum(ToolExecutionFinishedStreamingEventProduct);
+  z.ZodNativeEnum<typeof ToolExecutionFinishedStreamingEventProduct> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(ToolExecutionFinishedStreamingEventProduct)
+    );
 
 /** @internal */
 export const ToolExecutionFinishedStreamingEventMemory$inboundSchema: z.ZodType<
   ToolExecutionFinishedStreamingEventMemory,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  entity_id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "entity_id": "entityId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    entity_id: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "entity_id": "entityId",
+    });
+  })
+);
 
 export function toolExecutionFinishedStreamingEventMemoryFromJSON(
   jsonString: string,
@@ -120,30 +124,32 @@ export const ToolExecutionFinishedStreamingEventToolExecutionContext$inboundSche
     ToolExecutionFinishedStreamingEventToolExecutionContext,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    action_id: z.string(),
-    agent_tool_call_id: z.string(),
-    workspace_id: z.string(),
-    agent_manifest_id: z.string(),
-    agent_execution_id: z.string(),
-    product: ToolExecutionFinishedStreamingEventProduct$inboundSchema,
-    memory: z.lazy(() =>
-      ToolExecutionFinishedStreamingEventMemory$inboundSchema
-    ).optional(),
-    parent_id: z.string().optional(),
-    variables: z.record(z.any()).optional(),
-    secret_keys: z.array(z.string()).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "action_id": "actionId",
-      "agent_tool_call_id": "agentToolCallId",
-      "workspace_id": "workspaceId",
-      "agent_manifest_id": "agentManifestId",
-      "agent_execution_id": "agentExecutionId",
-      "parent_id": "parentId",
-      "secret_keys": "secretKeys",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      action_id: z.string(),
+      agent_tool_call_id: z.string(),
+      workspace_id: z.string(),
+      agent_manifest_id: z.string(),
+      agent_execution_id: z.string(),
+      product: ToolExecutionFinishedStreamingEventProduct$inboundSchema,
+      memory: z.lazy(() =>
+        ToolExecutionFinishedStreamingEventMemory$inboundSchema
+      ).optional(),
+      parent_id: z.string().optional(),
+      variables: z.record(z.any()).optional(),
+      secret_keys: z.array(z.string()).optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "action_id": "actionId",
+        "agent_tool_call_id": "agentToolCallId",
+        "workspace_id": "workspaceId",
+        "agent_manifest_id": "agentManifestId",
+        "agent_execution_id": "agentExecutionId",
+        "parent_id": "parentId",
+        "secret_keys": "secretKeys",
+      });
+    })
+  );
 
 export function toolExecutionFinishedStreamingEventToolExecutionContextFromJSON(
   jsonString: string,
@@ -165,21 +171,23 @@ export const ToolExecutionFinishedStreamingEventData$inboundSchema: z.ZodType<
   ToolExecutionFinishedStreamingEventData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  result: z.any().optional(),
-  action_type: z.string(),
-  tool_execution_context: z.lazy(() =>
-    ToolExecutionFinishedStreamingEventToolExecutionContext$inboundSchema
-  ),
-  responseId: z.string().optional(),
-  workflowRunId: z.string(),
-  stream: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "action_type": "actionType",
-    "tool_execution_context": "toolExecutionContext",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    result: z.any().optional(),
+    action_type: z.string(),
+    tool_execution_context: z.lazy(() =>
+      ToolExecutionFinishedStreamingEventToolExecutionContext$inboundSchema
+    ),
+    responseId: z.string().optional(),
+    workflowRunId: z.string(),
+    stream: z.boolean().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "action_type": "actionType",
+      "tool_execution_context": "toolExecutionContext",
+    });
+  })
+);
 
 export function toolExecutionFinishedStreamingEventDataFromJSON(
   jsonString: string,
@@ -202,11 +210,13 @@ export const ToolExecutionFinishedStreamingEvent$inboundSchema: z.ZodType<
   ToolExecutionFinishedStreamingEvent,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("event.workflow_events.tool_execution_finished"),
-  timestamp: z.string(),
-  data: z.lazy(() => ToolExecutionFinishedStreamingEventData$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("event.workflow_events.tool_execution_finished"),
+    timestamp: z.string(),
+    data: z.lazy(() => ToolExecutionFinishedStreamingEventData$inboundSchema),
+  })
+);
 
 export function toolExecutionFinishedStreamingEventFromJSON(
   jsonString: string,

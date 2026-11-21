@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type AllProjectsScope = {};
 
@@ -14,7 +15,7 @@ export const AllProjectsScope$outboundSchema: z.ZodType<
   AllProjectsScope$Outbound,
   z.ZodTypeDef,
   AllProjectsScope
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function allProjectsScopeToJSON(
   allProjectsScope: AllProjectsScope,

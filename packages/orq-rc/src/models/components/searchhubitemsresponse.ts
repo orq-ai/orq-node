@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { HubSearchHit, HubSearchHit$inboundSchema } from "./hubsearchhit.js";
@@ -17,9 +17,11 @@ export const SearchHubItemsResponse$inboundSchema: z.ZodType<
   SearchHubItemsResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  hits: z.array(HubSearchHit$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    hits: z.array(HubSearchHit$inboundSchema),
+  })
+);
 
 export function searchHubItemsResponseFromJSON(
   jsonString: string,

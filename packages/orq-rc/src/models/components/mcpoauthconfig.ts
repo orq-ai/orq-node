@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 /**
  * McpOAuthConfig is the OAuth client orq presents to the upstream authorization
@@ -58,22 +59,24 @@ export const McpOAuthConfig$outboundSchema: z.ZodType<
   McpOAuthConfig$Outbound,
   z.ZodTypeDef,
   McpOAuthConfig
-> = z.object({
-  clientId: z.string().optional(),
-  clientSecret: z.string().optional(),
-  tokenUrl: z.string().optional(),
-  scopes: z.array(z.string()).optional(),
-  maskedValue: z.string().optional(),
-  issuer: z.string().optional(),
-  resource: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    clientId: "client_id",
-    clientSecret: "client_secret",
-    tokenUrl: "token_url",
-    maskedValue: "masked_value",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    clientId: z.string().optional(),
+    clientSecret: z.string().optional(),
+    tokenUrl: z.string().optional(),
+    scopes: z.array(z.string()).optional(),
+    maskedValue: z.string().optional(),
+    issuer: z.string().optional(),
+    resource: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      clientId: "client_id",
+      clientSecret: "client_secret",
+      tokenUrl: "token_url",
+      maskedValue: "masked_value",
+    });
+  })
+);
 
 export function mcpOAuthConfigToJSON(mcpOAuthConfig: McpOAuthConfig): string {
   return JSON.stringify(McpOAuthConfig$outboundSchema.parse(mcpOAuthConfig));

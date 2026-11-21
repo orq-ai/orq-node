@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -20,17 +20,19 @@ export const EvaluatorFilter$inboundSchema: z.ZodType<
   EvaluatorFilter,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  display_name: z.string().optional(),
-  type: z.string().optional(),
-  output_type: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "display_name": "displayName",
-    "output_type": "outputType",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    display_name: z.string().optional(),
+    type: z.string().optional(),
+    output_type: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "display_name": "displayName",
+      "output_type": "outputType",
+    });
+  })
+);
 
 export function evaluatorFilterFromJSON(
   jsonString: string,

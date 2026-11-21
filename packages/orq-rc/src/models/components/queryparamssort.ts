@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type QueryParamsSort = {
   key?: string | undefined;
@@ -20,10 +21,12 @@ export const QueryParamsSort$outboundSchema: z.ZodType<
   QueryParamsSort$Outbound,
   z.ZodTypeDef,
   QueryParamsSort
-> = z.object({
-  key: z.string().optional(),
-  direction: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    key: z.string().optional(),
+    direction: z.string().optional(),
+  })
+);
 
 export function queryParamsSortToJSON(
   queryParamsSort: QueryParamsSort,

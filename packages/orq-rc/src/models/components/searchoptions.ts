@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type SearchOptions = {
   /**
@@ -32,17 +33,19 @@ export const SearchOptions$outboundSchema: z.ZodType<
   SearchOptions$Outbound,
   z.ZodTypeDef,
   SearchOptions
-> = z.object({
-  includeVectors: z.boolean().optional(),
-  includeMetadata: z.boolean().optional(),
-  includeScores: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    includeVectors: "include_vectors",
-    includeMetadata: "include_metadata",
-    includeScores: "include_scores",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    includeVectors: z.boolean().optional(),
+    includeMetadata: z.boolean().optional(),
+    includeScores: z.boolean().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      includeVectors: "include_vectors",
+      includeMetadata: "include_metadata",
+      includeScores: "include_scores",
+    });
+  })
+);
 
 export function searchOptionsToJSON(searchOptions: SearchOptions): string {
   return JSON.stringify(SearchOptions$outboundSchema.parse(searchOptions));

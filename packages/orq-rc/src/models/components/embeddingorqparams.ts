@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import {
   EmbeddingCacheConfig,
   EmbeddingCacheConfig$Outbound,
@@ -74,20 +75,22 @@ export const EmbeddingOrqParams$outboundSchema: z.ZodType<
   EmbeddingOrqParams$Outbound,
   z.ZodTypeDef,
   EmbeddingOrqParams
-> = z.object({
-  cache: EmbeddingCacheConfig$outboundSchema.optional(),
-  contact: EmbeddingContactParams$outboundSchema.optional(),
-  fallbacks: z.nullable(z.array(FallbackConfig$outboundSchema)).optional(),
-  identity: ResponseIdentity$outboundSchema.optional(),
-  loadBalancer: EmbeddingLoadBalancerConfig$outboundSchema.optional(),
-  name: z.string().optional(),
-  retry: EmbeddingRetryConfig$outboundSchema.optional(),
-  timeout: EmbeddingTimeoutConfig$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    loadBalancer: "load_balancer",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    cache: EmbeddingCacheConfig$outboundSchema.optional(),
+    contact: EmbeddingContactParams$outboundSchema.optional(),
+    fallbacks: z.nullable(z.array(FallbackConfig$outboundSchema)).optional(),
+    identity: ResponseIdentity$outboundSchema.optional(),
+    loadBalancer: EmbeddingLoadBalancerConfig$outboundSchema.optional(),
+    name: z.string().optional(),
+    retry: EmbeddingRetryConfig$outboundSchema.optional(),
+    timeout: EmbeddingTimeoutConfig$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      loadBalancer: "load_balancer",
+    });
+  })
+);
 
 export function embeddingOrqParamsToJSON(
   embeddingOrqParams: EmbeddingOrqParams,

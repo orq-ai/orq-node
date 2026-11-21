@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { McpSkillFile, McpSkillFile$inboundSchema } from "./mcpskillfile.js";
@@ -48,7 +48,7 @@ export const Frontmatter$inboundSchema: z.ZodType<
   Frontmatter,
   z.ZodTypeDef,
   unknown
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function frontmatterFromJSON(
   jsonString: string,
@@ -65,14 +65,16 @@ export const McpSkill$inboundSchema: z.ZodType<
   McpSkill,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  uri: z.string().optional(),
-  name: z.string().optional(),
-  description: z.string().optional(),
-  frontmatter: z.lazy(() => Frontmatter$inboundSchema).optional(),
-  files: z.array(McpSkillFile$inboundSchema).optional(),
-  dynamic: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    uri: z.string().optional(),
+    name: z.string().optional(),
+    description: z.string().optional(),
+    frontmatter: z.lazy(() => Frontmatter$inboundSchema).optional(),
+    files: z.array(McpSkillFile$inboundSchema).optional(),
+    dynamic: z.boolean().optional(),
+  })
+);
 
 export function mcpSkillFromJSON(
   jsonString: string,

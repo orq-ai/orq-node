@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -41,23 +41,25 @@ export const ClassifyUsage$inboundSchema: z.ZodType<
   ClassifyUsage,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  input_cost: z.number().optional(),
-  input_tokens: z.number().int(),
-  input_tokens_details: ClassifyInputTokensDetails$inboundSchema.optional(),
-  output_cost: z.number().optional(),
-  output_tokens: z.number().int(),
-  total_cost: z.number().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "input_cost": "inputCost",
-    "input_tokens": "inputTokens",
-    "input_tokens_details": "inputTokensDetails",
-    "output_cost": "outputCost",
-    "output_tokens": "outputTokens",
-    "total_cost": "totalCost",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    input_cost: z.number().optional(),
+    input_tokens: z.number().int(),
+    input_tokens_details: ClassifyInputTokensDetails$inboundSchema.optional(),
+    output_cost: z.number().optional(),
+    output_tokens: z.number().int(),
+    total_cost: z.number().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "input_cost": "inputCost",
+      "input_tokens": "inputTokens",
+      "input_tokens_details": "inputTokensDetails",
+      "output_cost": "outputCost",
+      "output_tokens": "outputTokens",
+      "total_cost": "totalCost",
+    });
+  })
+);
 
 export function classifyUsageFromJSON(
   jsonString: string,

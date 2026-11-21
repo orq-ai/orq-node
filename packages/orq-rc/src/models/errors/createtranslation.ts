@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { OrqError } from "./orqerror.js";
 import { SDKValidationError } from "./sdkvalidationerror.js";
@@ -50,12 +50,14 @@ export const CreateTranslationError$inboundSchema: z.ZodType<
   CreateTranslationError,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  message: z.string(),
-  type: z.string(),
-  param: z.nullable(z.string()),
-  code: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    message: z.string(),
+    type: z.string(),
+    param: z.nullable(z.string()),
+    code: z.string(),
+  })
+);
 
 export function createTranslationErrorFromJSON(
   jsonString: string,
@@ -72,16 +74,18 @@ export const CreateTranslationResponseBody$inboundSchema: z.ZodType<
   CreateTranslationResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  error: z.lazy(() => CreateTranslationError$inboundSchema),
-  request$: z.instanceof(Request),
-  response$: z.instanceof(Response),
-  body$: z.string(),
-})
-  .transform((v) => {
-    return new CreateTranslationResponseBody(v, {
-      request: v.request$,
-      response: v.response$,
-      body: v.body$,
-    });
-  });
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    error: z.lazy(() => CreateTranslationError$inboundSchema),
+    request$: z.instanceof(Request),
+    response$: z.instanceof(Response),
+    body$: z.string(),
+  })
+    .transform((v) => {
+      return new CreateTranslationResponseBody(v, {
+        request: v.request$,
+        response: v.response$,
+        body: v.body$,
+      });
+    })
+);

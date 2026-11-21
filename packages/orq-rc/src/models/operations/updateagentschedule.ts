@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
@@ -131,7 +131,7 @@ export type UpdateAgentScheduleResponseBody = {
 /** @internal */
 export const UpdateAgentScheduleType$outboundSchema: z.ZodNativeEnum<
   typeof UpdateAgentScheduleType
-> = z.nativeEnum(UpdateAgentScheduleType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(UpdateAgentScheduleType));
 
 /** @internal */
 export type UpdateAgentScheduleRequestBody$Outbound = {
@@ -148,20 +148,22 @@ export const UpdateAgentScheduleRequestBody$outboundSchema: z.ZodType<
   UpdateAgentScheduleRequestBody$Outbound,
   z.ZodTypeDef,
   UpdateAgentScheduleRequestBody
-> = z.object({
-  agentTag: z.string().optional(),
-  displayName: z.string().optional(),
-  expression: z.string().optional(),
-  isActive: z.boolean().optional(),
-  payload: components.PublicSchedulePayload$outboundSchema.optional(),
-  type: UpdateAgentScheduleType$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    agentTag: "agent_tag",
-    displayName: "display_name",
-    isActive: "is_active",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    agentTag: z.string().optional(),
+    displayName: z.string().optional(),
+    expression: z.string().optional(),
+    isActive: z.boolean().optional(),
+    payload: components.PublicSchedulePayload$outboundSchema.optional(),
+    type: UpdateAgentScheduleType$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      agentTag: "agent_tag",
+      displayName: "display_name",
+      isActive: "is_active",
+    });
+  })
+);
 
 export function updateAgentScheduleRequestBodyToJSON(
   updateAgentScheduleRequestBody: UpdateAgentScheduleRequestBody,
@@ -185,17 +187,19 @@ export const UpdateAgentScheduleRequest$outboundSchema: z.ZodType<
   UpdateAgentScheduleRequest$Outbound,
   z.ZodTypeDef,
   UpdateAgentScheduleRequest
-> = z.object({
-  agentKey: z.string(),
-  scheduleId: z.string(),
-  requestBody: z.lazy(() => UpdateAgentScheduleRequestBody$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    agentKey: "agent_key",
-    scheduleId: "schedule_id",
-    requestBody: "RequestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    agentKey: z.string(),
+    scheduleId: z.string(),
+    requestBody: z.lazy(() => UpdateAgentScheduleRequestBody$outboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      agentKey: "agent_key",
+      scheduleId: "schedule_id",
+      requestBody: "RequestBody",
+    });
+  })
+);
 
 export function updateAgentScheduleRequestToJSON(
   updateAgentScheduleRequest: UpdateAgentScheduleRequest,
@@ -208,44 +212,48 @@ export function updateAgentScheduleRequestToJSON(
 /** @internal */
 export const UpdateAgentScheduleSchedulesType$inboundSchema: z.ZodNativeEnum<
   typeof UpdateAgentScheduleSchedulesType
-> = z.nativeEnum(UpdateAgentScheduleSchedulesType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(UpdateAgentScheduleSchedulesType)
+);
 
 /** @internal */
 export const UpdateAgentScheduleResponseBody$inboundSchema: z.ZodType<
   UpdateAgentScheduleResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  _id: z.string(),
-  agent_key: z.string(),
-  agent_tag: z.string().optional(),
-  created: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  created_by_id: z.string(),
-  display_name: z.string().optional(),
-  expression: z.string(),
-  generation: z.number().int(),
-  is_active: z.boolean(),
-  last_triggered_at: z.string().datetime({ offset: true }).transform(v =>
-    new Date(v)
-  ).optional(),
-  payload: components.PublicSchedulePayload$inboundSchema,
-  trigger_count: z.number().int(),
-  type: UpdateAgentScheduleSchedulesType$inboundSchema,
-  updated: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  updated_by_id: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "_id": "id",
-    "agent_key": "agentKey",
-    "agent_tag": "agentTag",
-    "created_by_id": "createdById",
-    "display_name": "displayName",
-    "is_active": "isActive",
-    "last_triggered_at": "lastTriggeredAt",
-    "trigger_count": "triggerCount",
-    "updated_by_id": "updatedById",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    _id: z.string(),
+    agent_key: z.string(),
+    agent_tag: z.string().optional(),
+    created: z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    created_by_id: z.string(),
+    display_name: z.string().optional(),
+    expression: z.string(),
+    generation: z.number().int(),
+    is_active: z.boolean(),
+    last_triggered_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ).optional(),
+    payload: components.PublicSchedulePayload$inboundSchema,
+    trigger_count: z.number().int(),
+    type: UpdateAgentScheduleSchedulesType$inboundSchema,
+    updated: z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    updated_by_id: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "_id": "id",
+      "agent_key": "agentKey",
+      "agent_tag": "agentTag",
+      "created_by_id": "createdById",
+      "display_name": "displayName",
+      "is_active": "isActive",
+      "last_triggered_at": "lastTriggeredAt",
+      "trigger_count": "triggerCount",
+      "updated_by_id": "updatedById",
+    });
+  })
+);
 
 export function updateAgentScheduleResponseBodyFromJSON(
   jsonString: string,

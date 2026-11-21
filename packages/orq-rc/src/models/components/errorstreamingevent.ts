@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -29,10 +29,12 @@ export const ErrorStreamingEventData$inboundSchema: z.ZodType<
   ErrorStreamingEventData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  error: z.string(),
-  code: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    error: z.string(),
+    code: z.string(),
+  })
+);
 
 export function errorStreamingEventDataFromJSON(
   jsonString: string,
@@ -49,11 +51,13 @@ export const ErrorStreamingEvent$inboundSchema: z.ZodType<
   ErrorStreamingEvent,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("agents.error"),
-  timestamp: z.string(),
-  data: z.lazy(() => ErrorStreamingEventData$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("agents.error"),
+    timestamp: z.string(),
+    data: z.lazy(() => ErrorStreamingEventData$inboundSchema),
+  })
+);
 
 export function errorStreamingEventFromJSON(
   jsonString: string,

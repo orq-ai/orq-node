@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import * as components from "../components/index.js";
 
 export type SkillRestoreVersionRequest = {
@@ -25,16 +26,18 @@ export const SkillRestoreVersionRequest$outboundSchema: z.ZodType<
   SkillRestoreVersionRequest$Outbound,
   z.ZodTypeDef,
   SkillRestoreVersionRequest
-> = z.object({
-  skillId: z.string(),
-  restoreSkillVersionRequest:
-    components.RestoreSkillVersionRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    skillId: "skill_id",
-    restoreSkillVersionRequest: "RestoreSkillVersionRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    skillId: z.string(),
+    restoreSkillVersionRequest:
+      components.RestoreSkillVersionRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      skillId: "skill_id",
+      restoreSkillVersionRequest: "RestoreSkillVersionRequest",
+    });
+  })
+);
 
 export function skillRestoreVersionRequestToJSON(
   skillRestoreVersionRequest: SkillRestoreVersionRequest,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -22,7 +22,7 @@ export const RoutingRuleExpressionConfig$inboundSchema: z.ZodType<
   RoutingRuleExpressionConfig,
   z.ZodTypeDef,
   unknown
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 /** @internal */
 export type RoutingRuleExpressionConfig$Outbound = {};
 
@@ -31,7 +31,7 @@ export const RoutingRuleExpressionConfig$outboundSchema: z.ZodType<
   RoutingRuleExpressionConfig$Outbound,
   z.ZodTypeDef,
   RoutingRuleExpressionConfig
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function routingRuleExpressionConfigToJSON(
   routingRuleExpressionConfig: RoutingRuleExpressionConfig,
@@ -57,10 +57,12 @@ export const RoutingRuleExpression$inboundSchema: z.ZodType<
   RoutingRuleExpression,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  config: z.lazy(() => RoutingRuleExpressionConfig$inboundSchema).optional(),
-  cel: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    config: z.lazy(() => RoutingRuleExpressionConfig$inboundSchema).optional(),
+    cel: z.string().optional(),
+  })
+);
 /** @internal */
 export type RoutingRuleExpression$Outbound = {
   config?: RoutingRuleExpressionConfig$Outbound | undefined;
@@ -72,10 +74,12 @@ export const RoutingRuleExpression$outboundSchema: z.ZodType<
   RoutingRuleExpression$Outbound,
   z.ZodTypeDef,
   RoutingRuleExpression
-> = z.object({
-  config: z.lazy(() => RoutingRuleExpressionConfig$outboundSchema).optional(),
-  cel: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    config: z.lazy(() => RoutingRuleExpressionConfig$outboundSchema).optional(),
+    cel: z.string().optional(),
+  })
+);
 
 export function routingRuleExpressionToJSON(
   routingRuleExpression: RoutingRuleExpression,

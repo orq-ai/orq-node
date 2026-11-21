@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type McpHeaderSecret = {
   /**
@@ -32,15 +33,17 @@ export const McpHeaderSecret$outboundSchema: z.ZodType<
   McpHeaderSecret$Outbound,
   z.ZodTypeDef,
   McpHeaderSecret
-> = z.object({
-  key: z.string().optional(),
-  value: z.string().optional(),
-  maskedValue: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    maskedValue: "masked_value",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    key: z.string().optional(),
+    value: z.string().optional(),
+    maskedValue: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      maskedValue: "masked_value",
+    });
+  })
+);
 
 export function mcpHeaderSecretToJSON(
   mcpHeaderSecret: McpHeaderSecret,

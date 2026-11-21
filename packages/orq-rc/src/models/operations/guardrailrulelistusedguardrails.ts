@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type GuardrailRuleListUsedGuardrailsRequest = {
   projectId?: string | undefined;
@@ -19,13 +20,15 @@ export const GuardrailRuleListUsedGuardrailsRequest$outboundSchema: z.ZodType<
   GuardrailRuleListUsedGuardrailsRequest$Outbound,
   z.ZodTypeDef,
   GuardrailRuleListUsedGuardrailsRequest
-> = z.object({
-  projectId: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    projectId: "project_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    projectId: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      projectId: "project_id",
+    });
+  })
+);
 
 export function guardrailRuleListUsedGuardrailsRequestToJSON(
   guardrailRuleListUsedGuardrailsRequest:

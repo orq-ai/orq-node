@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 
 /**
@@ -32,7 +33,7 @@ export type DownloadBatchResultsRequest = {
 /** @internal */
 export const QueryParamFile$outboundSchema: z.ZodNativeEnum<
   typeof QueryParamFile
-> = z.nativeEnum(QueryParamFile);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(QueryParamFile));
 
 /** @internal */
 export type DownloadBatchResultsRequest$Outbound = {
@@ -45,14 +46,16 @@ export const DownloadBatchResultsRequest$outboundSchema: z.ZodType<
   DownloadBatchResultsRequest$Outbound,
   z.ZodTypeDef,
   DownloadBatchResultsRequest
-> = z.object({
-  batchId: z.string(),
-  file: QueryParamFile$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    batchId: "batch_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    batchId: z.string(),
+    file: QueryParamFile$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      batchId: "batch_id",
+    });
+  })
+);
 
 export function downloadBatchResultsRequestToJSON(
   downloadBatchResultsRequest: DownloadBatchResultsRequest,

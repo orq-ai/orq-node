@@ -6,6 +6,7 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import {
   collectExtraKeys as collectExtraKeys$,
+  lazySchema as lazySchema$,
   safeParse,
 } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -43,23 +44,25 @@ export const ResponseMCPCallArgumentsDeltaStreamEvent$inboundSchema: z.ZodType<
   ResponseMCPCallArgumentsDeltaStreamEvent,
   z.ZodTypeDef,
   unknown
-> = collectExtraKeys$(
-  z.object({
-    delta: z.string(),
-    item_id: z.string(),
-    output_index: z.number().int(),
-    sequence_number: z.number().int(),
-    type: z.literal("response.mcp_call_arguments.delta"),
-  }).catchall(z.any()),
-  "additionalProperties",
-  true,
-).transform((v) => {
-  return remap$(v, {
-    "item_id": "itemId",
-    "output_index": "outputIndex",
-    "sequence_number": "sequenceNumber",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  collectExtraKeys$(
+    z.object({
+      delta: z.string(),
+      item_id: z.string(),
+      output_index: z.number().int(),
+      sequence_number: z.number().int(),
+      type: z.literal("response.mcp_call_arguments.delta"),
+    }).catchall(z.any()),
+    "additionalProperties",
+    true,
+  ).transform((v) => {
+    return remap$(v, {
+      "item_id": "itemId",
+      "output_index": "outputIndex",
+      "sequence_number": "sequenceNumber",
+    });
+  })
+);
 
 export function responseMCPCallArgumentsDeltaStreamEventFromJSON(
   jsonString: string,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
@@ -117,8 +117,8 @@ export type ModelCreateAwsBedrockResponseBody = {
 };
 
 /** @internal */
-export const AuthMode$outboundSchema: z.ZodNativeEnum<typeof AuthMode> = z
-  .nativeEnum(AuthMode);
+export const AuthMode$outboundSchema: z.ZodNativeEnum<typeof AuthMode> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(AuthMode));
 
 /** @internal */
 export type ModelCreateAwsBedrockRequestBody$Outbound = {
@@ -159,67 +159,70 @@ export const ModelCreateAwsBedrockRequestBody$outboundSchema: z.ZodType<
   ModelCreateAwsBedrockRequestBody$Outbound,
   z.ZodTypeDef,
   ModelCreateAwsBedrockRequestBody
-> = z.object({
-  assumeRoleArn: z.string().optional(),
-  assumeRoleExternalId: z.string().optional(),
-  authMode: AuthMode$outboundSchema,
-  autorouterId: z.string().optional(),
-  autorouterVersion: z.string().optional(),
-  benchmarkModel: z.string().optional(),
-  cacheReadCost: z.number().optional(),
-  cacheWriteCost: z.number().optional(),
-  configuration: components.PrivateModelConfiguration$outboundSchema.optional(),
-  description: z.string().optional(),
-  displayName: z.string(),
-  hasReasoning: z.boolean().optional(),
-  inputCost: z.number().optional(),
-  integrationId: z.string().optional(),
-  maxTokens: z.number().int().optional(),
-  modelDeveloper: z.string(),
-  modelFamily: z.string().optional(),
-  modelId: z.string(),
-  modelType: z.string().optional(),
-  outputCost: z.number().optional(),
-  region: z.string(),
-  supportsAdaptiveReasoning: z.boolean().optional(),
-  supportsExtendedThinking: z.boolean().optional(),
-  supportsJsonMode: z.boolean().optional(),
-  supportsJsonSchema: z.boolean().optional(),
-  supportsMidConversationSystem: z.boolean().optional(),
-  supportsStrictTool: z.boolean().optional(),
-  supportsToolCalling: z.boolean().optional(),
-  supportsVision: z.boolean().optional(),
-  temperature: z.number().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    assumeRoleArn: "assume_role_arn",
-    assumeRoleExternalId: "assume_role_external_id",
-    authMode: "auth_mode",
-    autorouterId: "autorouter_id",
-    autorouterVersion: "autorouter_version",
-    benchmarkModel: "benchmark_model",
-    cacheReadCost: "cache_read_cost",
-    cacheWriteCost: "cache_write_cost",
-    displayName: "display_name",
-    hasReasoning: "has_reasoning",
-    inputCost: "input_cost",
-    integrationId: "integration_id",
-    maxTokens: "max_tokens",
-    modelDeveloper: "model_developer",
-    modelFamily: "model_family",
-    modelId: "model_id",
-    modelType: "model_type",
-    outputCost: "output_cost",
-    supportsAdaptiveReasoning: "supports_adaptive_reasoning",
-    supportsExtendedThinking: "supports_extended_thinking",
-    supportsJsonMode: "supports_json_mode",
-    supportsJsonSchema: "supports_json_schema",
-    supportsMidConversationSystem: "supports_mid_conversation_system",
-    supportsStrictTool: "supports_strict_tool",
-    supportsToolCalling: "supports_tool_calling",
-    supportsVision: "supports_vision",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    assumeRoleArn: z.string().optional(),
+    assumeRoleExternalId: z.string().optional(),
+    authMode: AuthMode$outboundSchema,
+    autorouterId: z.string().optional(),
+    autorouterVersion: z.string().optional(),
+    benchmarkModel: z.string().optional(),
+    cacheReadCost: z.number().optional(),
+    cacheWriteCost: z.number().optional(),
+    configuration: components.PrivateModelConfiguration$outboundSchema
+      .optional(),
+    description: z.string().optional(),
+    displayName: z.string(),
+    hasReasoning: z.boolean().optional(),
+    inputCost: z.number().optional(),
+    integrationId: z.string().optional(),
+    maxTokens: z.number().int().optional(),
+    modelDeveloper: z.string(),
+    modelFamily: z.string().optional(),
+    modelId: z.string(),
+    modelType: z.string().optional(),
+    outputCost: z.number().optional(),
+    region: z.string(),
+    supportsAdaptiveReasoning: z.boolean().optional(),
+    supportsExtendedThinking: z.boolean().optional(),
+    supportsJsonMode: z.boolean().optional(),
+    supportsJsonSchema: z.boolean().optional(),
+    supportsMidConversationSystem: z.boolean().optional(),
+    supportsStrictTool: z.boolean().optional(),
+    supportsToolCalling: z.boolean().optional(),
+    supportsVision: z.boolean().optional(),
+    temperature: z.number().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      assumeRoleArn: "assume_role_arn",
+      assumeRoleExternalId: "assume_role_external_id",
+      authMode: "auth_mode",
+      autorouterId: "autorouter_id",
+      autorouterVersion: "autorouter_version",
+      benchmarkModel: "benchmark_model",
+      cacheReadCost: "cache_read_cost",
+      cacheWriteCost: "cache_write_cost",
+      displayName: "display_name",
+      hasReasoning: "has_reasoning",
+      inputCost: "input_cost",
+      integrationId: "integration_id",
+      maxTokens: "max_tokens",
+      modelDeveloper: "model_developer",
+      modelFamily: "model_family",
+      modelId: "model_id",
+      modelType: "model_type",
+      outputCost: "output_cost",
+      supportsAdaptiveReasoning: "supports_adaptive_reasoning",
+      supportsExtendedThinking: "supports_extended_thinking",
+      supportsJsonMode: "supports_json_mode",
+      supportsJsonSchema: "supports_json_schema",
+      supportsMidConversationSystem: "supports_mid_conversation_system",
+      supportsStrictTool: "supports_strict_tool",
+      supportsToolCalling: "supports_tool_calling",
+      supportsVision: "supports_vision",
+    });
+  })
+);
 
 export function modelCreateAwsBedrockRequestBodyToJSON(
   modelCreateAwsBedrockRequestBody: ModelCreateAwsBedrockRequestBody,
@@ -236,59 +239,61 @@ export const ModelCreateAwsBedrockResponseBody$inboundSchema: z.ZodType<
   ModelCreateAwsBedrockResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  configuration: components.ModelConfigurationResponse$inboundSchema,
-  created: z.string(),
-  description: z.nullable(z.string()),
-  display_name: z.string(),
-  docs_url: z.nullable(z.string()),
-  enabled: z.boolean(),
-  enabled_for_endpoints: z.boolean(),
-  enabled_for_playground: z.boolean(),
-  has_cpu_pricing: z.boolean(),
-  has_functions: z.boolean(),
-  id: z.string(),
-  input_cost: z.nullable(z.number()),
-  input_currency: z.string(),
-  is_active: z.boolean(),
-  legacy_uuid: z.string().optional(),
-  metadata: components.ModelMetadata$inboundSchema,
-  model_developer: z.string().optional(),
-  model_family: z.string().optional(),
-  model_id: z.string(),
-  model_type: z.string(),
-  output_cost: z.nullable(z.number()),
-  output_currency: z.string(),
-  owner: z.string(),
-  parameters: z.nullable(
-    z.array(components.ModelParameterDocument$inboundSchema),
-  ),
-  pricing_url: z.nullable(z.string()),
-  provider: z.string(),
-  refId: z.string(),
-  sharing: components.ModelSharingConfig$inboundSchema.optional(),
-  updated: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "display_name": "displayName",
-    "docs_url": "docsUrl",
-    "enabled_for_endpoints": "enabledForEndpoints",
-    "enabled_for_playground": "enabledForPlayground",
-    "has_cpu_pricing": "hasCpuPricing",
-    "has_functions": "hasFunctions",
-    "input_cost": "inputCost",
-    "input_currency": "inputCurrency",
-    "is_active": "isActive",
-    "legacy_uuid": "legacyUuid",
-    "model_developer": "modelDeveloper",
-    "model_family": "modelFamily",
-    "model_id": "modelId",
-    "model_type": "modelType",
-    "output_cost": "outputCost",
-    "output_currency": "outputCurrency",
-    "pricing_url": "pricingUrl",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    configuration: components.ModelConfigurationResponse$inboundSchema,
+    created: z.string(),
+    description: z.nullable(z.string()),
+    display_name: z.string(),
+    docs_url: z.nullable(z.string()),
+    enabled: z.boolean(),
+    enabled_for_endpoints: z.boolean(),
+    enabled_for_playground: z.boolean(),
+    has_cpu_pricing: z.boolean(),
+    has_functions: z.boolean(),
+    id: z.string(),
+    input_cost: z.nullable(z.number()),
+    input_currency: z.string(),
+    is_active: z.boolean(),
+    legacy_uuid: z.string().optional(),
+    metadata: components.ModelMetadata$inboundSchema,
+    model_developer: z.string().optional(),
+    model_family: z.string().optional(),
+    model_id: z.string(),
+    model_type: z.string(),
+    output_cost: z.nullable(z.number()),
+    output_currency: z.string(),
+    owner: z.string(),
+    parameters: z.nullable(
+      z.array(components.ModelParameterDocument$inboundSchema),
+    ),
+    pricing_url: z.nullable(z.string()),
+    provider: z.string(),
+    refId: z.string(),
+    sharing: components.ModelSharingConfig$inboundSchema.optional(),
+    updated: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "display_name": "displayName",
+      "docs_url": "docsUrl",
+      "enabled_for_endpoints": "enabledForEndpoints",
+      "enabled_for_playground": "enabledForPlayground",
+      "has_cpu_pricing": "hasCpuPricing",
+      "has_functions": "hasFunctions",
+      "input_cost": "inputCost",
+      "input_currency": "inputCurrency",
+      "is_active": "isActive",
+      "legacy_uuid": "legacyUuid",
+      "model_developer": "modelDeveloper",
+      "model_family": "modelFamily",
+      "model_id": "modelId",
+      "model_type": "modelType",
+      "output_cost": "outputCost",
+      "output_currency": "outputCurrency",
+      "pricing_url": "pricingUrl",
+    });
+  })
+);
 
 export function modelCreateAwsBedrockResponseBodyFromJSON(
   jsonString: string,

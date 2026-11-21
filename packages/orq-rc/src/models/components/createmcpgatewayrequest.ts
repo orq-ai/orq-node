@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import {
   GuardrailRuleGuardrail,
   GuardrailRuleGuardrail$Outbound,
@@ -104,28 +105,30 @@ export const CreateMcpGatewayRequest$outboundSchema: z.ZodType<
   CreateMcpGatewayRequest$Outbound,
   z.ZodTypeDef,
   CreateMcpGatewayRequest
-> = z.object({
-  key: z.string(),
-  displayName: z.string(),
-  description: z.string().optional(),
-  serverLinks: z.array(McpGatewayServerLink$outboundSchema).optional(),
-  toolNaming: McpToolNaming$outboundSchema.optional(),
-  mode: McpGatewayMode$outboundSchema.optional(),
-  sharing: Sharing$outboundSchema.optional(),
-  plugins: z.array(McpGatewayPlugin$outboundSchema).optional(),
-  skillIds: z.array(z.string()).optional(),
-  icons: z.array(McpIcon$outboundSchema).optional(),
-  websiteUrl: z.string().optional(),
-  guardrails: z.array(GuardrailRuleGuardrail$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    displayName: "display_name",
-    serverLinks: "server_links",
-    toolNaming: "tool_naming",
-    skillIds: "skill_ids",
-    websiteUrl: "website_url",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    key: z.string(),
+    displayName: z.string(),
+    description: z.string().optional(),
+    serverLinks: z.array(McpGatewayServerLink$outboundSchema).optional(),
+    toolNaming: McpToolNaming$outboundSchema.optional(),
+    mode: McpGatewayMode$outboundSchema.optional(),
+    sharing: Sharing$outboundSchema.optional(),
+    plugins: z.array(McpGatewayPlugin$outboundSchema).optional(),
+    skillIds: z.array(z.string()).optional(),
+    icons: z.array(McpIcon$outboundSchema).optional(),
+    websiteUrl: z.string().optional(),
+    guardrails: z.array(GuardrailRuleGuardrail$outboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      displayName: "display_name",
+      serverLinks: "server_links",
+      toolNaming: "tool_naming",
+      skillIds: "skill_ids",
+      websiteUrl: "website_url",
+    });
+  })
+);
 
 export function createMcpGatewayRequestToJSON(
   createMcpGatewayRequest: CreateMcpGatewayRequest,

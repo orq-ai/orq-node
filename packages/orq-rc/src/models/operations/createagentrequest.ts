@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
@@ -2543,12 +2543,14 @@ export const ResponseFormatJsonSchema$outboundSchema: z.ZodType<
   ResponseFormatJsonSchema$Outbound,
   z.ZodTypeDef,
   ResponseFormatJsonSchema
-> = z.object({
-  description: z.string().optional(),
-  name: z.string(),
-  schema: z.any().optional(),
-  strict: z.boolean().default(false),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    description: z.string().optional(),
+    name: z.string(),
+    schema: z.any().optional(),
+    strict: z.boolean().default(false),
+  })
+);
 
 export function responseFormatJsonSchemaToJSON(
   responseFormatJsonSchema: ResponseFormatJsonSchema,
@@ -2569,14 +2571,16 @@ export const JSONSchema$outboundSchema: z.ZodType<
   JSONSchema$Outbound,
   z.ZodTypeDef,
   JSONSchema
-> = z.object({
-  type: z.literal("json_schema"),
-  jsonSchema: z.lazy(() => ResponseFormatJsonSchema$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    jsonSchema: "json_schema",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("json_schema"),
+    jsonSchema: z.lazy(() => ResponseFormatJsonSchema$outboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      jsonSchema: "json_schema",
+    });
+  })
+);
 
 export function jsonSchemaToJSON(jsonSchema: JSONSchema): string {
   return JSON.stringify(JSONSchema$outboundSchema.parse(jsonSchema));
@@ -2592,9 +2596,11 @@ export const JSONObject$outboundSchema: z.ZodType<
   JSONObject$Outbound,
   z.ZodTypeDef,
   JSONObject
-> = z.object({
-  type: z.literal("json_object"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("json_object"),
+  })
+);
 
 export function jsonObjectToJSON(jsonObject: JSONObject): string {
   return JSON.stringify(JSONObject$outboundSchema.parse(jsonObject));
@@ -2607,9 +2613,11 @@ export type Text$Outbound = {
 
 /** @internal */
 export const Text$outboundSchema: z.ZodType<Text$Outbound, z.ZodTypeDef, Text> =
-  z.object({
-    type: z.literal("text"),
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type: z.literal("text"),
+    })
+  );
 
 export function textToJSON(text: Text): string {
   return JSON.stringify(Text$outboundSchema.parse(text));
@@ -2626,11 +2634,13 @@ export const ResponseFormat$outboundSchema: z.ZodType<
   ResponseFormat$Outbound,
   z.ZodTypeDef,
   ResponseFormat
-> = z.union([
-  z.lazy(() => Text$outboundSchema),
-  z.lazy(() => JSONObject$outboundSchema),
-  z.lazy(() => JSONSchema$outboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => Text$outboundSchema),
+    z.lazy(() => JSONObject$outboundSchema),
+    z.lazy(() => JSONSchema$outboundSchema),
+  ])
+);
 
 export function responseFormatToJSON(responseFormat: ResponseFormat): string {
   return JSON.stringify(ResponseFormat$outboundSchema.parse(responseFormat));
@@ -2639,14 +2649,14 @@ export function responseFormatToJSON(responseFormat: ResponseFormat): string {
 /** @internal */
 export const ReasoningEffort$outboundSchema: z.ZodNativeEnum<
   typeof ReasoningEffort
-> = z.nativeEnum(ReasoningEffort);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ReasoningEffort));
 
 /** @internal */
 export type Stop$Outbound = string | Array<string>;
 
 /** @internal */
 export const Stop$outboundSchema: z.ZodType<Stop$Outbound, z.ZodTypeDef, Stop> =
-  z.union([z.string(), z.array(z.string())]);
+  /* @__PURE__ */ lazySchema$(() => z.union([z.string(), z.array(z.string())]));
 
 export function stopToJSON(stop: Stop): string {
   return JSON.stringify(Stop$outboundSchema.parse(stop));
@@ -2664,12 +2674,14 @@ export const Thinking$outboundSchema: z.ZodType<
   Thinking$Outbound,
   z.ZodTypeDef,
   Thinking
-> = z.union([
-  components.ThinkingConfigDisabledSchema$outboundSchema,
-  components.ThinkingConfigEnabledSchema$outboundSchema,
-  components.ThinkingConfigAdaptiveSchema$outboundSchema,
-  components.ThinkingConfigBetweenToolsSchema$outboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    components.ThinkingConfigDisabledSchema$outboundSchema,
+    components.ThinkingConfigEnabledSchema$outboundSchema,
+    components.ThinkingConfigAdaptiveSchema$outboundSchema,
+    components.ThinkingConfigBetweenToolsSchema$outboundSchema,
+  ])
+);
 
 export function thinkingToJSON(thinking: Thinking): string {
   return JSON.stringify(Thinking$outboundSchema.parse(thinking));
@@ -2678,7 +2690,7 @@ export function thinkingToJSON(thinking: Thinking): string {
 /** @internal */
 export const ToolChoiceType$outboundSchema: z.ZodNativeEnum<
   typeof ToolChoiceType
-> = z.nativeEnum(ToolChoiceType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ToolChoiceType));
 
 /** @internal */
 export type ToolChoiceFunction$Outbound = {
@@ -2690,9 +2702,11 @@ export const ToolChoiceFunction$outboundSchema: z.ZodType<
   ToolChoiceFunction$Outbound,
   z.ZodTypeDef,
   ToolChoiceFunction
-> = z.object({
-  name: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+  })
+);
 
 export function toolChoiceFunctionToJSON(
   toolChoiceFunction: ToolChoiceFunction,
@@ -2713,18 +2727,20 @@ export const ToolChoice2$outboundSchema: z.ZodType<
   ToolChoice2$Outbound,
   z.ZodTypeDef,
   ToolChoice2
-> = z.object({
-  type: ToolChoiceType$outboundSchema.optional(),
-  function: z.lazy(() => ToolChoiceFunction$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: ToolChoiceType$outboundSchema.optional(),
+    function: z.lazy(() => ToolChoiceFunction$outboundSchema),
+  })
+);
 
 export function toolChoice2ToJSON(toolChoice2: ToolChoice2): string {
   return JSON.stringify(ToolChoice2$outboundSchema.parse(toolChoice2));
 }
 
 /** @internal */
-export const ToolChoice1$outboundSchema: z.ZodNativeEnum<typeof ToolChoice1> = z
-  .nativeEnum(ToolChoice1);
+export const ToolChoice1$outboundSchema: z.ZodNativeEnum<typeof ToolChoice1> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ToolChoice1));
 
 /** @internal */
 export type ToolChoice$Outbound = ToolChoice2$Outbound | string;
@@ -2734,38 +2750,39 @@ export const ToolChoice$outboundSchema: z.ZodType<
   ToolChoice$Outbound,
   z.ZodTypeDef,
   ToolChoice
-> = z.union([
-  z.lazy(() => ToolChoice2$outboundSchema),
-  ToolChoice1$outboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => ToolChoice2$outboundSchema),
+    ToolChoice1$outboundSchema,
+  ])
+);
 
 export function toolChoiceToJSON(toolChoice: ToolChoice): string {
   return JSON.stringify(ToolChoice$outboundSchema.parse(toolChoice));
 }
 
 /** @internal */
-export const Modalities$outboundSchema: z.ZodNativeEnum<typeof Modalities> = z
-  .nativeEnum(Modalities);
+export const Modalities$outboundSchema: z.ZodNativeEnum<typeof Modalities> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Modalities));
 
 /** @internal */
-export const Id1$outboundSchema: z.ZodNativeEnum<typeof Id1> = z.nativeEnum(
-  Id1,
-);
+export const Id1$outboundSchema: z.ZodNativeEnum<typeof Id1> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Id1));
 
 /** @internal */
 export type Id$Outbound = string | string;
 
 /** @internal */
-export const Id$outboundSchema: z.ZodType<Id$Outbound, z.ZodTypeDef, Id> = z
-  .union([Id1$outboundSchema, z.string()]);
+export const Id$outboundSchema: z.ZodType<Id$Outbound, z.ZodTypeDef, Id> =
+  /* @__PURE__ */ lazySchema$(() => z.union([Id1$outboundSchema, z.string()]));
 
 export function idToJSON(id: Id): string {
   return JSON.stringify(Id$outboundSchema.parse(id));
 }
 
 /** @internal */
-export const ExecuteOn$outboundSchema: z.ZodNativeEnum<typeof ExecuteOn> = z
-  .nativeEnum(ExecuteOn);
+export const ExecuteOn$outboundSchema: z.ZodNativeEnum<typeof ExecuteOn> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ExecuteOn));
 
 /** @internal */
 export type Guardrails$Outbound = {
@@ -2778,14 +2795,16 @@ export const Guardrails$outboundSchema: z.ZodType<
   Guardrails$Outbound,
   z.ZodTypeDef,
   Guardrails
-> = z.object({
-  id: z.union([Id1$outboundSchema, z.string()]),
-  executeOn: ExecuteOn$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    executeOn: "execute_on",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.union([Id1$outboundSchema, z.string()]),
+    executeOn: ExecuteOn$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      executeOn: "execute_on",
+    });
+  })
+);
 
 export function guardrailsToJSON(guardrails: Guardrails): string {
   return JSON.stringify(Guardrails$outboundSchema.parse(guardrails));
@@ -2802,13 +2821,15 @@ export const Plugins$outboundSchema: z.ZodType<
   Plugins$Outbound,
   z.ZodTypeDef,
   Plugins
-> = z.union([
-  components.PIIRedactionPlugin$outboundSchema.and(
-    z.object({ id: z.literal("pii_redaction") }),
-  ),
-  components.ResponseHealingPlugin$outboundSchema,
-  components.TraceScrubbingPlugin$outboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    components.PIIRedactionPlugin$outboundSchema.and(
+      z.object({ id: z.literal("pii_redaction") }),
+    ),
+    components.ResponseHealingPlugin$outboundSchema,
+    components.TraceScrubbingPlugin$outboundSchema,
+  ])
+);
 
 export function pluginsToJSON(plugins: Plugins): string {
   return JSON.stringify(Plugins$outboundSchema.parse(plugins));
@@ -2824,9 +2845,11 @@ export const Fallbacks$outboundSchema: z.ZodType<
   Fallbacks$Outbound,
   z.ZodTypeDef,
   Fallbacks
-> = z.object({
-  model: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model: z.string(),
+  })
+);
 
 export function fallbacksToJSON(fallbacks: Fallbacks): string {
   return JSON.stringify(Fallbacks$outboundSchema.parse(fallbacks));
@@ -2835,7 +2858,7 @@ export function fallbacksToJSON(fallbacks: Fallbacks): string {
 /** @internal */
 export const ModelConfigurationType$outboundSchema: z.ZodNativeEnum<
   typeof ModelConfigurationType
-> = z.nativeEnum(ModelConfigurationType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ModelConfigurationType));
 
 /** @internal */
 export type Cache$Outbound = {
@@ -2848,10 +2871,12 @@ export const Cache$outboundSchema: z.ZodType<
   Cache$Outbound,
   z.ZodTypeDef,
   Cache
-> = z.object({
-  ttl: z.number().default(3600),
-  type: ModelConfigurationType$outboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ttl: z.number().default(3600),
+    type: ModelConfigurationType$outboundSchema,
+  })
+);
 
 export function cacheToJSON(cache: Cache): string {
   return JSON.stringify(Cache$outboundSchema.parse(cache));
@@ -2860,7 +2885,7 @@ export function cacheToJSON(cache: Cache): string {
 /** @internal */
 export const LoadBalancerType$outboundSchema: z.ZodNativeEnum<
   typeof LoadBalancerType
-> = z.nativeEnum(LoadBalancerType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(LoadBalancerType));
 
 /** @internal */
 export type Models$Outbound = {
@@ -2873,10 +2898,12 @@ export const Models$outboundSchema: z.ZodType<
   Models$Outbound,
   z.ZodTypeDef,
   Models
-> = z.object({
-  model: z.string(),
-  weight: z.number().default(0.5),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model: z.string(),
+    weight: z.number().default(0.5),
+  })
+);
 
 export function modelsToJSON(models: Models): string {
   return JSON.stringify(Models$outboundSchema.parse(models));
@@ -2893,10 +2920,12 @@ export const LoadBalancer1$outboundSchema: z.ZodType<
   LoadBalancer1$Outbound,
   z.ZodTypeDef,
   LoadBalancer1
-> = z.object({
-  type: LoadBalancerType$outboundSchema,
-  models: z.array(z.lazy(() => Models$outboundSchema)),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: LoadBalancerType$outboundSchema,
+    models: z.array(z.lazy(() => Models$outboundSchema)),
+  })
+);
 
 export function loadBalancer1ToJSON(loadBalancer1: LoadBalancer1): string {
   return JSON.stringify(LoadBalancer1$outboundSchema.parse(loadBalancer1));
@@ -2910,7 +2939,9 @@ export const LoadBalancer$outboundSchema: z.ZodType<
   LoadBalancer$Outbound,
   z.ZodTypeDef,
   LoadBalancer
-> = z.lazy(() => LoadBalancer1$outboundSchema);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.lazy(() => LoadBalancer1$outboundSchema)
+);
 
 export function loadBalancerToJSON(loadBalancer: LoadBalancer): string {
   return JSON.stringify(LoadBalancer$outboundSchema.parse(loadBalancer));
@@ -2926,13 +2957,15 @@ export const Timeout$outboundSchema: z.ZodType<
   Timeout$Outbound,
   z.ZodTypeDef,
   Timeout
-> = z.object({
-  callTimeout: z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    callTimeout: "call_timeout",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    callTimeout: z.number(),
+  }).transform((v) => {
+    return remap$(v, {
+      callTimeout: "call_timeout",
+    });
+  })
+);
 
 export function timeoutToJSON(timeout: Timeout): string {
   return JSON.stringify(Timeout$outboundSchema.parse(timeout));
@@ -2940,13 +2973,15 @@ export function timeoutToJSON(timeout: Timeout): string {
 
 /** @internal */
 export const CreateAgentRequestModelConfigurationType$outboundSchema:
-  z.ZodNativeEnum<typeof CreateAgentRequestModelConfigurationType> = z
-    .nativeEnum(CreateAgentRequestModelConfigurationType);
+  z.ZodNativeEnum<typeof CreateAgentRequestModelConfigurationType> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(CreateAgentRequestModelConfigurationType)
+    );
 
 /** @internal */
 export const ModelConfigurationTtl$outboundSchema: z.ZodNativeEnum<
   typeof ModelConfigurationTtl
-> = z.nativeEnum(ModelConfigurationTtl);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ModelConfigurationTtl));
 
 /** @internal */
 export type ModelConfigurationCacheControl$Outbound = {
@@ -2959,10 +2994,12 @@ export const ModelConfigurationCacheControl$outboundSchema: z.ZodType<
   ModelConfigurationCacheControl$Outbound,
   z.ZodTypeDef,
   ModelConfigurationCacheControl
-> = z.object({
-  type: CreateAgentRequestModelConfigurationType$outboundSchema,
-  ttl: ModelConfigurationTtl$outboundSchema.default("5m"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: CreateAgentRequestModelConfigurationType$outboundSchema,
+    ttl: ModelConfigurationTtl$outboundSchema.default("5m"),
+  })
+);
 
 export function modelConfigurationCacheControlToJSON(
   modelConfigurationCacheControl: ModelConfigurationCacheControl,
@@ -3024,72 +3061,74 @@ export const ParametersT$outboundSchema: z.ZodType<
   ParametersT$Outbound,
   z.ZodTypeDef,
   ParametersT
-> = z.object({
-  name: z.string().optional(),
-  frequencyPenalty: z.nullable(z.number()).optional(),
-  maxTokens: z.nullable(z.number().int()).optional(),
-  maxCompletionTokens: z.nullable(z.number().int()).optional(),
-  presencePenalty: z.nullable(z.number()).optional(),
-  responseFormat: z.union([
-    z.lazy(() => Text$outboundSchema),
-    z.lazy(() => JSONObject$outboundSchema),
-    z.lazy(() => JSONSchema$outboundSchema),
-  ]).optional(),
-  reasoningEffort: ReasoningEffort$outboundSchema.optional(),
-  verbosity: z.string().optional(),
-  seed: z.nullable(z.number()).optional(),
-  stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
-  thinking: z.union([
-    components.ThinkingConfigDisabledSchema$outboundSchema,
-    components.ThinkingConfigEnabledSchema$outboundSchema,
-    components.ThinkingConfigAdaptiveSchema$outboundSchema,
-    components.ThinkingConfigBetweenToolsSchema$outboundSchema,
-  ]).optional(),
-  temperature: z.nullable(z.number()).optional(),
-  topP: z.nullable(z.number()).optional(),
-  topK: z.nullable(z.number()).optional(),
-  toolChoice: z.union([
-    z.lazy(() => ToolChoice2$outboundSchema),
-    ToolChoice1$outboundSchema,
-  ]).optional(),
-  parallelToolCalls: z.boolean().optional(),
-  modalities: z.nullable(z.array(Modalities$outboundSchema)).optional(),
-  guardrails: z.array(z.lazy(() => Guardrails$outboundSchema)).optional(),
-  plugins: z.array(
-    z.union([
-      components.PIIRedactionPlugin$outboundSchema.and(
-        z.object({ id: z.literal("pii_redaction") }),
-      ),
-      components.ResponseHealingPlugin$outboundSchema,
-      components.TraceScrubbingPlugin$outboundSchema,
-    ]),
-  ).optional(),
-  fallbackOnCodes: z.array(z.number().int()).optional(),
-  fallbacks: z.array(z.lazy(() => Fallbacks$outboundSchema)).optional(),
-  cache: z.lazy(() => Cache$outboundSchema).optional(),
-  loadBalancer: z.lazy(() => LoadBalancer1$outboundSchema).optional(),
-  timeout: z.lazy(() => Timeout$outboundSchema).optional(),
-  cacheControl: z.lazy(() => ModelConfigurationCacheControl$outboundSchema)
-    .optional(),
-  promptCacheKey: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    frequencyPenalty: "frequency_penalty",
-    maxTokens: "max_tokens",
-    maxCompletionTokens: "max_completion_tokens",
-    presencePenalty: "presence_penalty",
-    responseFormat: "response_format",
-    reasoningEffort: "reasoning_effort",
-    topP: "top_p",
-    topK: "top_k",
-    toolChoice: "tool_choice",
-    parallelToolCalls: "parallel_tool_calls",
-    fallbackOnCodes: "fallback_on_codes",
-    loadBalancer: "load_balancer",
-    cacheControl: "cache_control",
-    promptCacheKey: "prompt_cache_key",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    frequencyPenalty: z.nullable(z.number()).optional(),
+    maxTokens: z.nullable(z.number().int()).optional(),
+    maxCompletionTokens: z.nullable(z.number().int()).optional(),
+    presencePenalty: z.nullable(z.number()).optional(),
+    responseFormat: z.union([
+      z.lazy(() => Text$outboundSchema),
+      z.lazy(() => JSONObject$outboundSchema),
+      z.lazy(() => JSONSchema$outboundSchema),
+    ]).optional(),
+    reasoningEffort: ReasoningEffort$outboundSchema.optional(),
+    verbosity: z.string().optional(),
+    seed: z.nullable(z.number()).optional(),
+    stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
+    thinking: z.union([
+      components.ThinkingConfigDisabledSchema$outboundSchema,
+      components.ThinkingConfigEnabledSchema$outboundSchema,
+      components.ThinkingConfigAdaptiveSchema$outboundSchema,
+      components.ThinkingConfigBetweenToolsSchema$outboundSchema,
+    ]).optional(),
+    temperature: z.nullable(z.number()).optional(),
+    topP: z.nullable(z.number()).optional(),
+    topK: z.nullable(z.number()).optional(),
+    toolChoice: z.union([
+      z.lazy(() => ToolChoice2$outboundSchema),
+      ToolChoice1$outboundSchema,
+    ]).optional(),
+    parallelToolCalls: z.boolean().optional(),
+    modalities: z.nullable(z.array(Modalities$outboundSchema)).optional(),
+    guardrails: z.array(z.lazy(() => Guardrails$outboundSchema)).optional(),
+    plugins: z.array(
+      z.union([
+        components.PIIRedactionPlugin$outboundSchema.and(
+          z.object({ id: z.literal("pii_redaction") }),
+        ),
+        components.ResponseHealingPlugin$outboundSchema,
+        components.TraceScrubbingPlugin$outboundSchema,
+      ]),
+    ).optional(),
+    fallbackOnCodes: z.array(z.number().int()).optional(),
+    fallbacks: z.array(z.lazy(() => Fallbacks$outboundSchema)).optional(),
+    cache: z.lazy(() => Cache$outboundSchema).optional(),
+    loadBalancer: z.lazy(() => LoadBalancer1$outboundSchema).optional(),
+    timeout: z.lazy(() => Timeout$outboundSchema).optional(),
+    cacheControl: z.lazy(() => ModelConfigurationCacheControl$outboundSchema)
+      .optional(),
+    promptCacheKey: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      frequencyPenalty: "frequency_penalty",
+      maxTokens: "max_tokens",
+      maxCompletionTokens: "max_completion_tokens",
+      presencePenalty: "presence_penalty",
+      responseFormat: "response_format",
+      reasoningEffort: "reasoning_effort",
+      topP: "top_p",
+      topK: "top_k",
+      toolChoice: "tool_choice",
+      parallelToolCalls: "parallel_tool_calls",
+      fallbackOnCodes: "fallback_on_codes",
+      loadBalancer: "load_balancer",
+      cacheControl: "cache_control",
+      promptCacheKey: "prompt_cache_key",
+    });
+  })
+);
 
 export function parametersToJSON(parametersT: ParametersT): string {
   return JSON.stringify(ParametersT$outboundSchema.parse(parametersT));
@@ -3106,14 +3145,16 @@ export const Retry$outboundSchema: z.ZodType<
   Retry$Outbound,
   z.ZodTypeDef,
   Retry
-> = z.object({
-  count: z.number().default(3),
-  onCodes: z.array(z.number()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    onCodes: "on_codes",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    count: z.number().default(3),
+    onCodes: z.array(z.number()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      onCodes: "on_codes",
+    });
+  })
+);
 
 export function retryToJSON(retry: Retry): string {
   return JSON.stringify(Retry$outboundSchema.parse(retry));
@@ -3131,11 +3172,13 @@ export const ModelConfiguration2$outboundSchema: z.ZodType<
   ModelConfiguration2$Outbound,
   z.ZodTypeDef,
   ModelConfiguration2
-> = z.object({
-  id: z.string(),
-  parameters: z.lazy(() => ParametersT$outboundSchema).optional(),
-  retry: z.lazy(() => Retry$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    parameters: z.lazy(() => ParametersT$outboundSchema).optional(),
+    retry: z.lazy(() => Retry$outboundSchema).optional(),
+  })
+);
 
 export function modelConfiguration2ToJSON(
   modelConfiguration2: ModelConfiguration2,
@@ -3153,7 +3196,9 @@ export const ModelConfiguration$outboundSchema: z.ZodType<
   ModelConfiguration$Outbound,
   z.ZodTypeDef,
   ModelConfiguration
-> = z.union([z.lazy(() => ModelConfiguration2$outboundSchema), z.string()]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.lazy(() => ModelConfiguration2$outboundSchema), z.string()])
+);
 
 export function modelConfigurationToJSON(
   modelConfiguration: ModelConfiguration,
@@ -3177,12 +3222,14 @@ export const CreateAgentRequestResponseFormatAgentsJsonSchema$outboundSchema:
     CreateAgentRequestResponseFormatAgentsJsonSchema$Outbound,
     z.ZodTypeDef,
     CreateAgentRequestResponseFormatAgentsJsonSchema
-  > = z.object({
-    description: z.string().optional(),
-    name: z.string(),
-    schema: z.any().optional(),
-    strict: z.boolean().default(false),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      description: z.string().optional(),
+      name: z.string(),
+      schema: z.any().optional(),
+      strict: z.boolean().default(false),
+    })
+  );
 
 export function createAgentRequestResponseFormatAgentsJsonSchemaToJSON(
   createAgentRequestResponseFormatAgentsJsonSchema:
@@ -3207,16 +3254,18 @@ export const CreateAgentRequestResponseFormatJSONSchema$outboundSchema:
     CreateAgentRequestResponseFormatJSONSchema$Outbound,
     z.ZodTypeDef,
     CreateAgentRequestResponseFormatJSONSchema
-  > = z.object({
-    type: z.literal("json_schema"),
-    jsonSchema: z.lazy(() =>
-      CreateAgentRequestResponseFormatAgentsJsonSchema$outboundSchema
-    ),
-  }).transform((v) => {
-    return remap$(v, {
-      jsonSchema: "json_schema",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type: z.literal("json_schema"),
+      jsonSchema: z.lazy(() =>
+        CreateAgentRequestResponseFormatAgentsJsonSchema$outboundSchema
+      ),
+    }).transform((v) => {
+      return remap$(v, {
+        jsonSchema: "json_schema",
+      });
+    })
+  );
 
 export function createAgentRequestResponseFormatJSONSchemaToJSON(
   createAgentRequestResponseFormatJSONSchema:
@@ -3239,9 +3288,11 @@ export const ResponseFormatJSONObject$outboundSchema: z.ZodType<
   ResponseFormatJSONObject$Outbound,
   z.ZodTypeDef,
   ResponseFormatJSONObject
-> = z.object({
-  type: z.literal("json_object"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("json_object"),
+  })
+);
 
 export function responseFormatJSONObjectToJSON(
   responseFormatJSONObject: ResponseFormatJSONObject,
@@ -3261,9 +3312,11 @@ export const ResponseFormatText$outboundSchema: z.ZodType<
   ResponseFormatText$Outbound,
   z.ZodTypeDef,
   ResponseFormatText
-> = z.object({
-  type: z.literal("text"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("text"),
+  })
+);
 
 export function responseFormatTextToJSON(
   responseFormatText: ResponseFormatText,
@@ -3284,11 +3337,13 @@ export const FallbackModelConfigurationResponseFormat$outboundSchema: z.ZodType<
   FallbackModelConfigurationResponseFormat$Outbound,
   z.ZodTypeDef,
   FallbackModelConfigurationResponseFormat
-> = z.union([
-  z.lazy(() => ResponseFormatText$outboundSchema),
-  z.lazy(() => ResponseFormatJSONObject$outboundSchema),
-  z.lazy(() => CreateAgentRequestResponseFormatJSONSchema$outboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => ResponseFormatText$outboundSchema),
+    z.lazy(() => ResponseFormatJSONObject$outboundSchema),
+    z.lazy(() => CreateAgentRequestResponseFormatJSONSchema$outboundSchema),
+  ])
+);
 
 export function fallbackModelConfigurationResponseFormatToJSON(
   fallbackModelConfigurationResponseFormat:
@@ -3303,8 +3358,10 @@ export function fallbackModelConfigurationResponseFormatToJSON(
 
 /** @internal */
 export const FallbackModelConfigurationReasoningEffort$outboundSchema:
-  z.ZodNativeEnum<typeof FallbackModelConfigurationReasoningEffort> = z
-    .nativeEnum(FallbackModelConfigurationReasoningEffort);
+  z.ZodNativeEnum<typeof FallbackModelConfigurationReasoningEffort> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(FallbackModelConfigurationReasoningEffort)
+    );
 
 /** @internal */
 export type FallbackModelConfigurationStop$Outbound = string | Array<string>;
@@ -3314,7 +3371,9 @@ export const FallbackModelConfigurationStop$outboundSchema: z.ZodType<
   FallbackModelConfigurationStop$Outbound,
   z.ZodTypeDef,
   FallbackModelConfigurationStop
-> = z.union([z.string(), z.array(z.string())]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.array(z.string())])
+);
 
 export function fallbackModelConfigurationStopToJSON(
   fallbackModelConfigurationStop: FallbackModelConfigurationStop,
@@ -3338,12 +3397,14 @@ export const FallbackModelConfigurationThinking$outboundSchema: z.ZodType<
   FallbackModelConfigurationThinking$Outbound,
   z.ZodTypeDef,
   FallbackModelConfigurationThinking
-> = z.union([
-  components.ThinkingConfigDisabledSchema$outboundSchema,
-  components.ThinkingConfigEnabledSchema$outboundSchema,
-  components.ThinkingConfigAdaptiveSchema$outboundSchema,
-  components.ThinkingConfigBetweenToolsSchema$outboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    components.ThinkingConfigDisabledSchema$outboundSchema,
+    components.ThinkingConfigEnabledSchema$outboundSchema,
+    components.ThinkingConfigAdaptiveSchema$outboundSchema,
+    components.ThinkingConfigBetweenToolsSchema$outboundSchema,
+  ])
+);
 
 export function fallbackModelConfigurationThinkingToJSON(
   fallbackModelConfigurationThinking: FallbackModelConfigurationThinking,
@@ -3358,7 +3419,9 @@ export function fallbackModelConfigurationThinkingToJSON(
 /** @internal */
 export const CreateAgentRequestToolChoiceType$outboundSchema: z.ZodNativeEnum<
   typeof CreateAgentRequestToolChoiceType
-> = z.nativeEnum(CreateAgentRequestToolChoiceType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(CreateAgentRequestToolChoiceType)
+);
 
 /** @internal */
 export type CreateAgentRequestToolChoiceFunction$Outbound = {
@@ -3370,9 +3433,11 @@ export const CreateAgentRequestToolChoiceFunction$outboundSchema: z.ZodType<
   CreateAgentRequestToolChoiceFunction$Outbound,
   z.ZodTypeDef,
   CreateAgentRequestToolChoiceFunction
-> = z.object({
-  name: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+  })
+);
 
 export function createAgentRequestToolChoiceFunctionToJSON(
   createAgentRequestToolChoiceFunction: CreateAgentRequestToolChoiceFunction,
@@ -3395,10 +3460,12 @@ export const CreateAgentRequestToolChoice2$outboundSchema: z.ZodType<
   CreateAgentRequestToolChoice2$Outbound,
   z.ZodTypeDef,
   CreateAgentRequestToolChoice2
-> = z.object({
-  type: CreateAgentRequestToolChoiceType$outboundSchema.optional(),
-  function: z.lazy(() => CreateAgentRequestToolChoiceFunction$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: CreateAgentRequestToolChoiceType$outboundSchema.optional(),
+    function: z.lazy(() => CreateAgentRequestToolChoiceFunction$outboundSchema),
+  })
+);
 
 export function createAgentRequestToolChoice2ToJSON(
   createAgentRequestToolChoice2: CreateAgentRequestToolChoice2,
@@ -3413,7 +3480,9 @@ export function createAgentRequestToolChoice2ToJSON(
 /** @internal */
 export const CreateAgentRequestToolChoice1$outboundSchema: z.ZodNativeEnum<
   typeof CreateAgentRequestToolChoice1
-> = z.nativeEnum(CreateAgentRequestToolChoice1);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(CreateAgentRequestToolChoice1)
+);
 
 /** @internal */
 export type FallbackModelConfigurationToolChoice$Outbound =
@@ -3425,10 +3494,12 @@ export const FallbackModelConfigurationToolChoice$outboundSchema: z.ZodType<
   FallbackModelConfigurationToolChoice$Outbound,
   z.ZodTypeDef,
   FallbackModelConfigurationToolChoice
-> = z.union([
-  z.lazy(() => CreateAgentRequestToolChoice2$outboundSchema),
-  CreateAgentRequestToolChoice1$outboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => CreateAgentRequestToolChoice2$outboundSchema),
+    CreateAgentRequestToolChoice1$outboundSchema,
+  ])
+);
 
 export function fallbackModelConfigurationToolChoiceToJSON(
   fallbackModelConfigurationToolChoice: FallbackModelConfigurationToolChoice,
@@ -3442,14 +3513,15 @@ export function fallbackModelConfigurationToolChoiceToJSON(
 
 /** @internal */
 export const FallbackModelConfigurationModalities$outboundSchema:
-  z.ZodNativeEnum<typeof FallbackModelConfigurationModalities> = z.nativeEnum(
-    FallbackModelConfigurationModalities,
-  );
+  z.ZodNativeEnum<typeof FallbackModelConfigurationModalities> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(FallbackModelConfigurationModalities)
+    );
 
 /** @internal */
 export const CreateAgentRequestId1$outboundSchema: z.ZodNativeEnum<
   typeof CreateAgentRequestId1
-> = z.nativeEnum(CreateAgentRequestId1);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(CreateAgentRequestId1));
 
 /** @internal */
 export type FallbackModelConfigurationId$Outbound = string | string;
@@ -3459,7 +3531,9 @@ export const FallbackModelConfigurationId$outboundSchema: z.ZodType<
   FallbackModelConfigurationId$Outbound,
   z.ZodTypeDef,
   FallbackModelConfigurationId
-> = z.union([CreateAgentRequestId1$outboundSchema, z.string()]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([CreateAgentRequestId1$outboundSchema, z.string()])
+);
 
 export function fallbackModelConfigurationIdToJSON(
   fallbackModelConfigurationId: FallbackModelConfigurationId,
@@ -3473,9 +3547,10 @@ export function fallbackModelConfigurationIdToJSON(
 
 /** @internal */
 export const FallbackModelConfigurationExecuteOn$outboundSchema:
-  z.ZodNativeEnum<typeof FallbackModelConfigurationExecuteOn> = z.nativeEnum(
-    FallbackModelConfigurationExecuteOn,
-  );
+  z.ZodNativeEnum<typeof FallbackModelConfigurationExecuteOn> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(FallbackModelConfigurationExecuteOn)
+    );
 
 /** @internal */
 export type FallbackModelConfigurationGuardrails$Outbound = {
@@ -3488,14 +3563,16 @@ export const FallbackModelConfigurationGuardrails$outboundSchema: z.ZodType<
   FallbackModelConfigurationGuardrails$Outbound,
   z.ZodTypeDef,
   FallbackModelConfigurationGuardrails
-> = z.object({
-  id: z.union([CreateAgentRequestId1$outboundSchema, z.string()]),
-  executeOn: FallbackModelConfigurationExecuteOn$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    executeOn: "execute_on",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.union([CreateAgentRequestId1$outboundSchema, z.string()]),
+    executeOn: FallbackModelConfigurationExecuteOn$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      executeOn: "execute_on",
+    });
+  })
+);
 
 export function fallbackModelConfigurationGuardrailsToJSON(
   fallbackModelConfigurationGuardrails: FallbackModelConfigurationGuardrails,
@@ -3518,13 +3595,15 @@ export const FallbackModelConfigurationPlugins$outboundSchema: z.ZodType<
   FallbackModelConfigurationPlugins$Outbound,
   z.ZodTypeDef,
   FallbackModelConfigurationPlugins
-> = z.union([
-  components.PIIRedactionPlugin$outboundSchema.and(
-    z.object({ id: z.literal("pii_redaction") }),
-  ),
-  components.ResponseHealingPlugin$outboundSchema,
-  components.TraceScrubbingPlugin$outboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    components.PIIRedactionPlugin$outboundSchema.and(
+      z.object({ id: z.literal("pii_redaction") }),
+    ),
+    components.ResponseHealingPlugin$outboundSchema,
+    components.TraceScrubbingPlugin$outboundSchema,
+  ])
+);
 
 export function fallbackModelConfigurationPluginsToJSON(
   fallbackModelConfigurationPlugins: FallbackModelConfigurationPlugins,
@@ -3546,9 +3625,11 @@ export const FallbackModelConfigurationFallbacks$outboundSchema: z.ZodType<
   FallbackModelConfigurationFallbacks$Outbound,
   z.ZodTypeDef,
   FallbackModelConfigurationFallbacks
-> = z.object({
-  model: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model: z.string(),
+  })
+);
 
 export function fallbackModelConfigurationFallbacksToJSON(
   fallbackModelConfigurationFallbacks: FallbackModelConfigurationFallbacks,
@@ -3563,7 +3644,9 @@ export function fallbackModelConfigurationFallbacksToJSON(
 /** @internal */
 export const FallbackModelConfigurationType$outboundSchema: z.ZodNativeEnum<
   typeof FallbackModelConfigurationType
-> = z.nativeEnum(FallbackModelConfigurationType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(FallbackModelConfigurationType)
+);
 
 /** @internal */
 export type FallbackModelConfigurationCache$Outbound = {
@@ -3576,10 +3659,12 @@ export const FallbackModelConfigurationCache$outboundSchema: z.ZodType<
   FallbackModelConfigurationCache$Outbound,
   z.ZodTypeDef,
   FallbackModelConfigurationCache
-> = z.object({
-  ttl: z.number().default(3600),
-  type: FallbackModelConfigurationType$outboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ttl: z.number().default(3600),
+    type: FallbackModelConfigurationType$outboundSchema,
+  })
+);
 
 export function fallbackModelConfigurationCacheToJSON(
   fallbackModelConfigurationCache: FallbackModelConfigurationCache,
@@ -3594,7 +3679,9 @@ export function fallbackModelConfigurationCacheToJSON(
 /** @internal */
 export const CreateAgentRequestLoadBalancerType$outboundSchema: z.ZodNativeEnum<
   typeof CreateAgentRequestLoadBalancerType
-> = z.nativeEnum(CreateAgentRequestLoadBalancerType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(CreateAgentRequestLoadBalancerType)
+);
 
 /** @internal */
 export type LoadBalancerModels$Outbound = {
@@ -3607,10 +3694,12 @@ export const LoadBalancerModels$outboundSchema: z.ZodType<
   LoadBalancerModels$Outbound,
   z.ZodTypeDef,
   LoadBalancerModels
-> = z.object({
-  model: z.string(),
-  weight: z.number().default(0.5),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model: z.string(),
+    weight: z.number().default(0.5),
+  })
+);
 
 export function loadBalancerModelsToJSON(
   loadBalancerModels: LoadBalancerModels,
@@ -3631,10 +3720,12 @@ export const CreateAgentRequestLoadBalancer1$outboundSchema: z.ZodType<
   CreateAgentRequestLoadBalancer1$Outbound,
   z.ZodTypeDef,
   CreateAgentRequestLoadBalancer1
-> = z.object({
-  type: CreateAgentRequestLoadBalancerType$outboundSchema,
-  models: z.array(z.lazy(() => LoadBalancerModels$outboundSchema)),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: CreateAgentRequestLoadBalancerType$outboundSchema,
+    models: z.array(z.lazy(() => LoadBalancerModels$outboundSchema)),
+  })
+);
 
 export function createAgentRequestLoadBalancer1ToJSON(
   createAgentRequestLoadBalancer1: CreateAgentRequestLoadBalancer1,
@@ -3655,7 +3746,9 @@ export const FallbackModelConfigurationLoadBalancer$outboundSchema: z.ZodType<
   FallbackModelConfigurationLoadBalancer$Outbound,
   z.ZodTypeDef,
   FallbackModelConfigurationLoadBalancer
-> = z.lazy(() => CreateAgentRequestLoadBalancer1$outboundSchema);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.lazy(() => CreateAgentRequestLoadBalancer1$outboundSchema)
+);
 
 export function fallbackModelConfigurationLoadBalancerToJSON(
   fallbackModelConfigurationLoadBalancer:
@@ -3678,13 +3771,15 @@ export const FallbackModelConfigurationTimeout$outboundSchema: z.ZodType<
   FallbackModelConfigurationTimeout$Outbound,
   z.ZodTypeDef,
   FallbackModelConfigurationTimeout
-> = z.object({
-  callTimeout: z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    callTimeout: "call_timeout",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    callTimeout: z.number(),
+  }).transform((v) => {
+    return remap$(v, {
+      callTimeout: "call_timeout",
+    });
+  })
+);
 
 export function fallbackModelConfigurationTimeoutToJSON(
   fallbackModelConfigurationTimeout: FallbackModelConfigurationTimeout,
@@ -3698,13 +3793,17 @@ export function fallbackModelConfigurationTimeoutToJSON(
 
 /** @internal */
 export const CreateAgentRequestFallbackModelConfigurationType$outboundSchema:
-  z.ZodNativeEnum<typeof CreateAgentRequestFallbackModelConfigurationType> = z
-    .nativeEnum(CreateAgentRequestFallbackModelConfigurationType);
+  z.ZodNativeEnum<typeof CreateAgentRequestFallbackModelConfigurationType> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(CreateAgentRequestFallbackModelConfigurationType)
+    );
 
 /** @internal */
 export const FallbackModelConfigurationTtl$outboundSchema: z.ZodNativeEnum<
   typeof FallbackModelConfigurationTtl
-> = z.nativeEnum(FallbackModelConfigurationTtl);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(FallbackModelConfigurationTtl)
+);
 
 /** @internal */
 export type FallbackModelConfigurationCacheControl$Outbound = {
@@ -3717,10 +3816,12 @@ export const FallbackModelConfigurationCacheControl$outboundSchema: z.ZodType<
   FallbackModelConfigurationCacheControl$Outbound,
   z.ZodTypeDef,
   FallbackModelConfigurationCacheControl
-> = z.object({
-  type: CreateAgentRequestFallbackModelConfigurationType$outboundSchema,
-  ttl: FallbackModelConfigurationTtl$outboundSchema.default("5m"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: CreateAgentRequestFallbackModelConfigurationType$outboundSchema,
+    ttl: FallbackModelConfigurationTtl$outboundSchema.default("5m"),
+  })
+);
 
 export function fallbackModelConfigurationCacheControlToJSON(
   fallbackModelConfigurationCacheControl:
@@ -3783,83 +3884,85 @@ export const FallbackModelConfigurationParameters$outboundSchema: z.ZodType<
   FallbackModelConfigurationParameters$Outbound,
   z.ZodTypeDef,
   FallbackModelConfigurationParameters
-> = z.object({
-  name: z.string().optional(),
-  frequencyPenalty: z.nullable(z.number()).optional(),
-  maxTokens: z.nullable(z.number().int()).optional(),
-  maxCompletionTokens: z.nullable(z.number().int()).optional(),
-  presencePenalty: z.nullable(z.number()).optional(),
-  responseFormat: z.union([
-    z.lazy(() => ResponseFormatText$outboundSchema),
-    z.lazy(() => ResponseFormatJSONObject$outboundSchema),
-    z.lazy(() => CreateAgentRequestResponseFormatJSONSchema$outboundSchema),
-  ]).optional(),
-  reasoningEffort: FallbackModelConfigurationReasoningEffort$outboundSchema
-    .optional(),
-  verbosity: z.string().optional(),
-  seed: z.nullable(z.number()).optional(),
-  stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
-  thinking: z.union([
-    components.ThinkingConfigDisabledSchema$outboundSchema,
-    components.ThinkingConfigEnabledSchema$outboundSchema,
-    components.ThinkingConfigAdaptiveSchema$outboundSchema,
-    components.ThinkingConfigBetweenToolsSchema$outboundSchema,
-  ]).optional(),
-  temperature: z.nullable(z.number()).optional(),
-  topP: z.nullable(z.number()).optional(),
-  topK: z.nullable(z.number()).optional(),
-  toolChoice: z.union([
-    z.lazy(() => CreateAgentRequestToolChoice2$outboundSchema),
-    CreateAgentRequestToolChoice1$outboundSchema,
-  ]).optional(),
-  parallelToolCalls: z.boolean().optional(),
-  modalities: z.nullable(
-    z.array(FallbackModelConfigurationModalities$outboundSchema),
-  ).optional(),
-  guardrails: z.array(
-    z.lazy(() => FallbackModelConfigurationGuardrails$outboundSchema),
-  ).optional(),
-  plugins: z.array(
-    z.union([
-      components.PIIRedactionPlugin$outboundSchema.and(
-        z.object({ id: z.literal("pii_redaction") }),
-      ),
-      components.ResponseHealingPlugin$outboundSchema,
-      components.TraceScrubbingPlugin$outboundSchema,
-    ]),
-  ).optional(),
-  fallbackOnCodes: z.array(z.number().int()).optional(),
-  fallbacks: z.array(
-    z.lazy(() => FallbackModelConfigurationFallbacks$outboundSchema),
-  ).optional(),
-  cache: z.lazy(() => FallbackModelConfigurationCache$outboundSchema)
-    .optional(),
-  loadBalancer: z.lazy(() => CreateAgentRequestLoadBalancer1$outboundSchema)
-    .optional(),
-  timeout: z.lazy(() => FallbackModelConfigurationTimeout$outboundSchema)
-    .optional(),
-  cacheControl: z.lazy(() =>
-    FallbackModelConfigurationCacheControl$outboundSchema
-  ).optional(),
-  promptCacheKey: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    frequencyPenalty: "frequency_penalty",
-    maxTokens: "max_tokens",
-    maxCompletionTokens: "max_completion_tokens",
-    presencePenalty: "presence_penalty",
-    responseFormat: "response_format",
-    reasoningEffort: "reasoning_effort",
-    topP: "top_p",
-    topK: "top_k",
-    toolChoice: "tool_choice",
-    parallelToolCalls: "parallel_tool_calls",
-    fallbackOnCodes: "fallback_on_codes",
-    loadBalancer: "load_balancer",
-    cacheControl: "cache_control",
-    promptCacheKey: "prompt_cache_key",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    frequencyPenalty: z.nullable(z.number()).optional(),
+    maxTokens: z.nullable(z.number().int()).optional(),
+    maxCompletionTokens: z.nullable(z.number().int()).optional(),
+    presencePenalty: z.nullable(z.number()).optional(),
+    responseFormat: z.union([
+      z.lazy(() => ResponseFormatText$outboundSchema),
+      z.lazy(() => ResponseFormatJSONObject$outboundSchema),
+      z.lazy(() => CreateAgentRequestResponseFormatJSONSchema$outboundSchema),
+    ]).optional(),
+    reasoningEffort: FallbackModelConfigurationReasoningEffort$outboundSchema
+      .optional(),
+    verbosity: z.string().optional(),
+    seed: z.nullable(z.number()).optional(),
+    stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
+    thinking: z.union([
+      components.ThinkingConfigDisabledSchema$outboundSchema,
+      components.ThinkingConfigEnabledSchema$outboundSchema,
+      components.ThinkingConfigAdaptiveSchema$outboundSchema,
+      components.ThinkingConfigBetweenToolsSchema$outboundSchema,
+    ]).optional(),
+    temperature: z.nullable(z.number()).optional(),
+    topP: z.nullable(z.number()).optional(),
+    topK: z.nullable(z.number()).optional(),
+    toolChoice: z.union([
+      z.lazy(() => CreateAgentRequestToolChoice2$outboundSchema),
+      CreateAgentRequestToolChoice1$outboundSchema,
+    ]).optional(),
+    parallelToolCalls: z.boolean().optional(),
+    modalities: z.nullable(
+      z.array(FallbackModelConfigurationModalities$outboundSchema),
+    ).optional(),
+    guardrails: z.array(
+      z.lazy(() => FallbackModelConfigurationGuardrails$outboundSchema),
+    ).optional(),
+    plugins: z.array(
+      z.union([
+        components.PIIRedactionPlugin$outboundSchema.and(
+          z.object({ id: z.literal("pii_redaction") }),
+        ),
+        components.ResponseHealingPlugin$outboundSchema,
+        components.TraceScrubbingPlugin$outboundSchema,
+      ]),
+    ).optional(),
+    fallbackOnCodes: z.array(z.number().int()).optional(),
+    fallbacks: z.array(
+      z.lazy(() => FallbackModelConfigurationFallbacks$outboundSchema),
+    ).optional(),
+    cache: z.lazy(() => FallbackModelConfigurationCache$outboundSchema)
+      .optional(),
+    loadBalancer: z.lazy(() => CreateAgentRequestLoadBalancer1$outboundSchema)
+      .optional(),
+    timeout: z.lazy(() => FallbackModelConfigurationTimeout$outboundSchema)
+      .optional(),
+    cacheControl: z.lazy(() =>
+      FallbackModelConfigurationCacheControl$outboundSchema
+    ).optional(),
+    promptCacheKey: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      frequencyPenalty: "frequency_penalty",
+      maxTokens: "max_tokens",
+      maxCompletionTokens: "max_completion_tokens",
+      presencePenalty: "presence_penalty",
+      responseFormat: "response_format",
+      reasoningEffort: "reasoning_effort",
+      topP: "top_p",
+      topK: "top_k",
+      toolChoice: "tool_choice",
+      parallelToolCalls: "parallel_tool_calls",
+      fallbackOnCodes: "fallback_on_codes",
+      loadBalancer: "load_balancer",
+      cacheControl: "cache_control",
+      promptCacheKey: "prompt_cache_key",
+    });
+  })
+);
 
 export function fallbackModelConfigurationParametersToJSON(
   fallbackModelConfigurationParameters: FallbackModelConfigurationParameters,
@@ -3882,14 +3985,16 @@ export const FallbackModelConfigurationRetry$outboundSchema: z.ZodType<
   FallbackModelConfigurationRetry$Outbound,
   z.ZodTypeDef,
   FallbackModelConfigurationRetry
-> = z.object({
-  count: z.number().default(3),
-  onCodes: z.array(z.number()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    onCodes: "on_codes",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    count: z.number().default(3),
+    onCodes: z.array(z.number()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      onCodes: "on_codes",
+    });
+  })
+);
 
 export function fallbackModelConfigurationRetryToJSON(
   fallbackModelConfigurationRetry: FallbackModelConfigurationRetry,
@@ -3913,13 +4018,16 @@ export const FallbackModelConfiguration2$outboundSchema: z.ZodType<
   FallbackModelConfiguration2$Outbound,
   z.ZodTypeDef,
   FallbackModelConfiguration2
-> = z.object({
-  id: z.string(),
-  parameters: z.lazy(() => FallbackModelConfigurationParameters$outboundSchema)
-    .optional(),
-  retry: z.lazy(() => FallbackModelConfigurationRetry$outboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    parameters: z.lazy(() =>
+      FallbackModelConfigurationParameters$outboundSchema
+    ).optional(),
+    retry: z.lazy(() => FallbackModelConfigurationRetry$outboundSchema)
+      .optional(),
+  })
+);
 
 export function fallbackModelConfiguration2ToJSON(
   fallbackModelConfiguration2: FallbackModelConfiguration2,
@@ -3941,10 +4049,12 @@ export const FallbackModelConfiguration$outboundSchema: z.ZodType<
   FallbackModelConfiguration$Outbound,
   z.ZodTypeDef,
   FallbackModelConfiguration
-> = z.union([
-  z.lazy(() => FallbackModelConfiguration2$outboundSchema),
-  z.string(),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => FallbackModelConfiguration2$outboundSchema),
+    z.string(),
+  ])
+);
 
 export function fallbackModelConfigurationToJSON(
   fallbackModelConfiguration: FallbackModelConfiguration,
@@ -3957,12 +4067,14 @@ export function fallbackModelConfigurationToJSON(
 /** @internal */
 export const ToolApprovalRequired$outboundSchema: z.ZodNativeEnum<
   typeof ToolApprovalRequired
-> = z.nativeEnum(ToolApprovalRequired);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ToolApprovalRequired));
 
 /** @internal */
 export const CreateAgentRequestExecuteOn$outboundSchema: z.ZodNativeEnum<
   typeof CreateAgentRequestExecuteOn
-> = z.nativeEnum(CreateAgentRequestExecuteOn);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(CreateAgentRequestExecuteOn)
+);
 
 /** @internal */
 export type Evaluators$Outbound = {
@@ -3977,17 +4089,19 @@ export const Evaluators$outboundSchema: z.ZodType<
   Evaluators$Outbound,
   z.ZodTypeDef,
   Evaluators
-> = z.object({
-  id: z.string(),
-  sampleRate: z.number().default(50),
-  executeOn: CreateAgentRequestExecuteOn$outboundSchema,
-  options: z.record(z.any()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    sampleRate: "sample_rate",
-    executeOn: "execute_on",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    sampleRate: z.number().default(50),
+    executeOn: CreateAgentRequestExecuteOn$outboundSchema,
+    options: z.record(z.any()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      sampleRate: "sample_rate",
+      executeOn: "execute_on",
+    });
+  })
+);
 
 export function evaluatorsToJSON(evaluators: Evaluators): string {
   return JSON.stringify(Evaluators$outboundSchema.parse(evaluators));
@@ -3996,7 +4110,9 @@ export function evaluatorsToJSON(evaluators: Evaluators): string {
 /** @internal */
 export const CreateAgentRequestAgentsExecuteOn$outboundSchema: z.ZodNativeEnum<
   typeof CreateAgentRequestAgentsExecuteOn
-> = z.nativeEnum(CreateAgentRequestAgentsExecuteOn);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(CreateAgentRequestAgentsExecuteOn)
+);
 
 /** @internal */
 export type CreateAgentRequestGuardrails$Outbound = {
@@ -4011,17 +4127,19 @@ export const CreateAgentRequestGuardrails$outboundSchema: z.ZodType<
   CreateAgentRequestGuardrails$Outbound,
   z.ZodTypeDef,
   CreateAgentRequestGuardrails
-> = z.object({
-  id: z.string(),
-  sampleRate: z.number().default(50),
-  executeOn: CreateAgentRequestAgentsExecuteOn$outboundSchema,
-  options: z.record(z.any()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    sampleRate: "sample_rate",
-    executeOn: "execute_on",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    sampleRate: z.number().default(50),
+    executeOn: CreateAgentRequestAgentsExecuteOn$outboundSchema,
+    options: z.record(z.any()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      sampleRate: "sample_rate",
+      executeOn: "execute_on",
+    });
+  })
+);
 
 export function createAgentRequestGuardrailsToJSON(
   createAgentRequestGuardrails: CreateAgentRequestGuardrails,
@@ -4050,27 +4168,30 @@ export const Settings$outboundSchema: z.ZodType<
   Settings$Outbound,
   z.ZodTypeDef,
   Settings
-> = z.object({
-  maxIterations: z.number().int().default(100),
-  maxExecutionTime: z.number().int().default(600),
-  maxCost: z.number().default(0),
-  toolApprovalRequired: ToolApprovalRequired$outboundSchema.default(
-    "respect_tool",
-  ),
-  chatExposed: z.boolean().optional(),
-  tools: z.array(components.AgentToolInputCRUD$outboundSchema).optional(),
-  evaluators: z.array(z.lazy(() => Evaluators$outboundSchema)).optional(),
-  guardrails: z.array(z.lazy(() => CreateAgentRequestGuardrails$outboundSchema))
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    maxIterations: "max_iterations",
-    maxExecutionTime: "max_execution_time",
-    maxCost: "max_cost",
-    toolApprovalRequired: "tool_approval_required",
-    chatExposed: "chat_exposed",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    maxIterations: z.number().int().default(100),
+    maxExecutionTime: z.number().int().default(600),
+    maxCost: z.number().default(0),
+    toolApprovalRequired: ToolApprovalRequired$outboundSchema.default(
+      "respect_tool",
+    ),
+    chatExposed: z.boolean().optional(),
+    tools: z.array(components.AgentToolInputCRUD$outboundSchema).optional(),
+    evaluators: z.array(z.lazy(() => Evaluators$outboundSchema)).optional(),
+    guardrails: z.array(
+      z.lazy(() => CreateAgentRequestGuardrails$outboundSchema),
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      maxIterations: "max_iterations",
+      maxExecutionTime: "max_execution_time",
+      maxCost: "max_cost",
+      toolApprovalRequired: "tool_approval_required",
+      chatExposed: "chat_exposed",
+    });
+  })
+);
 
 export function settingsToJSON(settings: Settings): string {
   return JSON.stringify(Settings$outboundSchema.parse(settings));
@@ -4086,13 +4207,15 @@ export const KnowledgeBases$outboundSchema: z.ZodType<
   KnowledgeBases$Outbound,
   z.ZodTypeDef,
   KnowledgeBases
-> = z.object({
-  knowledgeId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    knowledgeId: "knowledge_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    knowledgeId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      knowledgeId: "knowledge_id",
+    });
+  })
+);
 
 export function knowledgeBasesToJSON(knowledgeBases: KnowledgeBases): string {
   return JSON.stringify(KnowledgeBases$outboundSchema.parse(knowledgeBases));
@@ -4109,22 +4232,24 @@ export const TeamOfAgents$outboundSchema: z.ZodType<
   TeamOfAgents$Outbound,
   z.ZodTypeDef,
   TeamOfAgents
-> = z.object({
-  key: z.string(),
-  role: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    key: z.string(),
+    role: z.string().optional(),
+  })
+);
 
 export function teamOfAgentsToJSON(teamOfAgents: TeamOfAgents): string {
   return JSON.stringify(TeamOfAgents$outboundSchema.parse(teamOfAgents));
 }
 
 /** @internal */
-export const Source$outboundSchema: z.ZodNativeEnum<typeof Source> = z
-  .nativeEnum(Source);
+export const Source$outboundSchema: z.ZodNativeEnum<typeof Source> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Source));
 
 /** @internal */
-export const Engine$outboundSchema: z.ZodNativeEnum<typeof Engine> = z
-  .nativeEnum(Engine);
+export const Engine$outboundSchema: z.ZodNativeEnum<typeof Engine> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Engine));
 
 /** @internal */
 export type CreateAgentRequestRequestBody$Outbound = {
@@ -4154,43 +4279,45 @@ export const CreateAgentRequestRequestBody$outboundSchema: z.ZodType<
   CreateAgentRequestRequestBody$Outbound,
   z.ZodTypeDef,
   CreateAgentRequestRequestBody
-> = z.object({
-  key: z.string(),
-  displayName: z.string().optional(),
-  role: z.string(),
-  description: z.string(),
-  instructions: z.string(),
-  systemPrompt: z.nullable(z.string()).optional(),
-  path: z.string(),
-  model: z.union([
-    z.lazy(() => ModelConfiguration2$outboundSchema),
-    z.string(),
-  ]),
-  fallbackModels: z.array(
-    z.union([
-      z.lazy(() => FallbackModelConfiguration2$outboundSchema),
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    key: z.string(),
+    displayName: z.string().optional(),
+    role: z.string(),
+    description: z.string(),
+    instructions: z.string(),
+    systemPrompt: z.nullable(z.string()).optional(),
+    path: z.string(),
+    model: z.union([
+      z.lazy(() => ModelConfiguration2$outboundSchema),
       z.string(),
     ]),
-  ).optional(),
-  settings: z.lazy(() => Settings$outboundSchema),
-  memoryStores: z.array(z.string()).optional(),
-  knowledgeBases: z.array(z.lazy(() => KnowledgeBases$outboundSchema))
-    .optional(),
-  teamOfAgents: z.array(z.lazy(() => TeamOfAgents$outboundSchema)).optional(),
-  skills: z.nullable(z.array(z.string())).optional(),
-  variables: z.record(z.any()).optional(),
-  source: Source$outboundSchema.optional(),
-  engine: Engine$outboundSchema.default("text"),
-}).transform((v) => {
-  return remap$(v, {
-    displayName: "display_name",
-    systemPrompt: "system_prompt",
-    fallbackModels: "fallback_models",
-    memoryStores: "memory_stores",
-    knowledgeBases: "knowledge_bases",
-    teamOfAgents: "team_of_agents",
-  });
-});
+    fallbackModels: z.array(z.union([
+      z.lazy(() => FallbackModelConfiguration2$outboundSchema),
+      z.string(),
+    ])).optional(),
+    settings: z.lazy(() =>
+      Settings$outboundSchema
+    ),
+    memoryStores: z.array(z.string()).optional(),
+    knowledgeBases: z.array(z.lazy(() => KnowledgeBases$outboundSchema))
+      .optional(),
+    teamOfAgents: z.array(z.lazy(() => TeamOfAgents$outboundSchema)).optional(),
+    skills: z.nullable(z.array(z.string())).optional(),
+    variables: z.record(z.any()).optional(),
+    source: Source$outboundSchema.optional(),
+    engine: Engine$outboundSchema.default("text"),
+  }).transform((v) => {
+    return remap$(v, {
+      displayName: "display_name",
+      systemPrompt: "system_prompt",
+      fallbackModels: "fallback_models",
+      memoryStores: "memory_stores",
+      knowledgeBases: "knowledge_bases",
+      teamOfAgents: "team_of_agents",
+    });
+  })
+);
 
 export function createAgentRequestRequestBodyToJSON(
   createAgentRequestRequestBody: CreateAgentRequestRequestBody,
@@ -4205,17 +4332,19 @@ export function createAgentRequestRequestBodyToJSON(
 /** @internal */
 export const CreateAgentRequestStatus$inboundSchema: z.ZodNativeEnum<
   typeof CreateAgentRequestStatus
-> = z.nativeEnum(CreateAgentRequestStatus);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(CreateAgentRequestStatus));
 
 /** @internal */
 export const CreateAgentRequestTeamOfAgents$inboundSchema: z.ZodType<
   CreateAgentRequestTeamOfAgents,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  key: z.string(),
-  role: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    key: z.string(),
+    role: z.string().optional(),
+  })
+);
 
 export function createAgentRequestTeamOfAgentsFromJSON(
   jsonString: string,
@@ -4232,10 +4361,12 @@ export const CreateAgentRequestAgentPlugins$inboundSchema: z.ZodType<
   CreateAgentRequestAgentPlugins,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  version: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    version: z.string(),
+  })
+);
 
 export function createAgentRequestAgentPluginsFromJSON(
   jsonString: string,
@@ -4249,13 +4380,15 @@ export function createAgentRequestAgentPluginsFromJSON(
 
 /** @internal */
 export const Metrics$inboundSchema: z.ZodType<Metrics, z.ZodTypeDef, unknown> =
-  z.object({
-    total_cost: z.number().default(0),
-  }).transform((v) => {
-    return remap$(v, {
-      "total_cost": "totalCost",
-    });
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      total_cost: z.number().default(0),
+    }).transform((v) => {
+      return remap$(v, {
+        "total_cost": "totalCost",
+      });
+    })
+  );
 
 export function metricsFromJSON(
   jsonString: string,
@@ -4272,13 +4405,15 @@ export const CreateAgentRequestKnowledgeBases$inboundSchema: z.ZodType<
   CreateAgentRequestKnowledgeBases,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  knowledge_id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "knowledge_id": "knowledgeId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    knowledge_id: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "knowledge_id": "knowledgeId",
+    });
+  })
+);
 
 export function createAgentRequestKnowledgeBasesFromJSON(
   jsonString: string,
@@ -4293,34 +4428,37 @@ export function createAgentRequestKnowledgeBasesFromJSON(
 /** @internal */
 export const CreateAgentRequestSource$inboundSchema: z.ZodNativeEnum<
   typeof CreateAgentRequestSource
-> = z.nativeEnum(CreateAgentRequestSource);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(CreateAgentRequestSource));
 
 /** @internal */
 export const CreateAgentRequestEngine$inboundSchema: z.ZodNativeEnum<
   typeof CreateAgentRequestEngine
-> = z.nativeEnum(CreateAgentRequestEngine);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(CreateAgentRequestEngine));
 
 /** @internal */
 export const CreateAgentRequestType$inboundSchema: z.ZodNativeEnum<
   typeof CreateAgentRequestType
-> = z.nativeEnum(CreateAgentRequestType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(CreateAgentRequestType));
 
 /** @internal */
 export const CreateAgentRequestToolApprovalRequired$inboundSchema:
-  z.ZodNativeEnum<typeof CreateAgentRequestToolApprovalRequired> = z.nativeEnum(
-    CreateAgentRequestToolApprovalRequired,
-  );
+  z.ZodNativeEnum<typeof CreateAgentRequestToolApprovalRequired> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(CreateAgentRequestToolApprovalRequired)
+    );
 
 /** @internal */
 export const Conditions$inboundSchema: z.ZodType<
   Conditions,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  condition: z.string(),
-  operator: z.string(),
-  value: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    condition: z.string(),
+    operator: z.string(),
+    value: z.string(),
+  })
+);
 
 export function conditionsFromJSON(
   jsonString: string,
@@ -4337,27 +4475,29 @@ export const CreateAgentRequestTools$inboundSchema: z.ZodType<
   CreateAgentRequestTools,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  key: z.string().optional(),
-  action_type: z.string(),
-  display_name: z.string().optional(),
-  description: z.string().optional(),
-  configuration: z.record(z.any()).optional(),
-  requires_approval: z.boolean().default(false),
-  tool_id: z.string().optional(),
-  whole_server: z.boolean().optional(),
-  conditions: z.array(z.lazy(() => Conditions$inboundSchema)).optional(),
-  timeout: z.number().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "action_type": "actionType",
-    "display_name": "displayName",
-    "requires_approval": "requiresApproval",
-    "tool_id": "toolId",
-    "whole_server": "wholeServer",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    key: z.string().optional(),
+    action_type: z.string(),
+    display_name: z.string().optional(),
+    description: z.string().optional(),
+    configuration: z.record(z.any()).optional(),
+    requires_approval: z.boolean().default(false),
+    tool_id: z.string().optional(),
+    whole_server: z.boolean().optional(),
+    conditions: z.array(z.lazy(() => Conditions$inboundSchema)).optional(),
+    timeout: z.number().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "action_type": "actionType",
+      "display_name": "displayName",
+      "requires_approval": "requiresApproval",
+      "tool_id": "toolId",
+      "whole_server": "wholeServer",
+    });
+  })
+);
 
 export function createAgentRequestToolsFromJSON(
   jsonString: string,
@@ -4371,25 +4511,29 @@ export function createAgentRequestToolsFromJSON(
 
 /** @internal */
 export const CreateAgentRequestAgentsResponseExecuteOn$inboundSchema:
-  z.ZodNativeEnum<typeof CreateAgentRequestAgentsResponseExecuteOn> = z
-    .nativeEnum(CreateAgentRequestAgentsResponseExecuteOn);
+  z.ZodNativeEnum<typeof CreateAgentRequestAgentsResponseExecuteOn> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(CreateAgentRequestAgentsResponseExecuteOn)
+    );
 
 /** @internal */
 export const CreateAgentRequestEvaluators$inboundSchema: z.ZodType<
   CreateAgentRequestEvaluators,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  sample_rate: z.number().default(50),
-  execute_on: CreateAgentRequestAgentsResponseExecuteOn$inboundSchema,
-  options: z.record(z.any()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "sample_rate": "sampleRate",
-    "execute_on": "executeOn",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    sample_rate: z.number().default(50),
+    execute_on: CreateAgentRequestAgentsResponseExecuteOn$inboundSchema,
+    options: z.record(z.any()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "sample_rate": "sampleRate",
+      "execute_on": "executeOn",
+    });
+  })
+);
 
 export function createAgentRequestEvaluatorsFromJSON(
   jsonString: string,
@@ -4403,25 +4547,29 @@ export function createAgentRequestEvaluatorsFromJSON(
 
 /** @internal */
 export const CreateAgentRequestAgentsResponse201ExecuteOn$inboundSchema:
-  z.ZodNativeEnum<typeof CreateAgentRequestAgentsResponse201ExecuteOn> = z
-    .nativeEnum(CreateAgentRequestAgentsResponse201ExecuteOn);
+  z.ZodNativeEnum<typeof CreateAgentRequestAgentsResponse201ExecuteOn> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(CreateAgentRequestAgentsResponse201ExecuteOn)
+    );
 
 /** @internal */
 export const CreateAgentRequestAgentsGuardrails$inboundSchema: z.ZodType<
   CreateAgentRequestAgentsGuardrails,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  sample_rate: z.number().default(50),
-  execute_on: CreateAgentRequestAgentsResponse201ExecuteOn$inboundSchema,
-  options: z.record(z.any()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "sample_rate": "sampleRate",
-    "execute_on": "executeOn",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    sample_rate: z.number().default(50),
+    execute_on: CreateAgentRequestAgentsResponse201ExecuteOn$inboundSchema,
+    options: z.record(z.any()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "sample_rate": "sampleRate",
+      "execute_on": "executeOn",
+    });
+  })
+);
 
 export function createAgentRequestAgentsGuardrailsFromJSON(
   jsonString: string,
@@ -4439,29 +4587,32 @@ export const CreateAgentRequestSettings$inboundSchema: z.ZodType<
   CreateAgentRequestSettings,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  max_iterations: z.number().int().default(100),
-  max_execution_time: z.number().int().default(600),
-  max_cost: z.number().default(0),
-  tool_approval_required: CreateAgentRequestToolApprovalRequired$inboundSchema
-    .default("respect_tool"),
-  chat_exposed: z.boolean().optional(),
-  tools: z.array(z.lazy(() => CreateAgentRequestTools$inboundSchema))
-    .optional(),
-  evaluators: z.array(z.lazy(() => CreateAgentRequestEvaluators$inboundSchema))
-    .optional(),
-  guardrails: z.array(
-    z.lazy(() => CreateAgentRequestAgentsGuardrails$inboundSchema),
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "max_iterations": "maxIterations",
-    "max_execution_time": "maxExecutionTime",
-    "max_cost": "maxCost",
-    "tool_approval_required": "toolApprovalRequired",
-    "chat_exposed": "chatExposed",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    max_iterations: z.number().int().default(100),
+    max_execution_time: z.number().int().default(600),
+    max_cost: z.number().default(0),
+    tool_approval_required: CreateAgentRequestToolApprovalRequired$inboundSchema
+      .default("respect_tool"),
+    chat_exposed: z.boolean().optional(),
+    tools: z.array(z.lazy(() => CreateAgentRequestTools$inboundSchema))
+      .optional(),
+    evaluators: z.array(
+      z.lazy(() => CreateAgentRequestEvaluators$inboundSchema),
+    ).optional(),
+    guardrails: z.array(
+      z.lazy(() => CreateAgentRequestAgentsGuardrails$inboundSchema),
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "max_iterations": "maxIterations",
+      "max_execution_time": "maxExecutionTime",
+      "max_cost": "maxCost",
+      "tool_approval_required": "toolApprovalRequired",
+      "chat_exposed": "chatExposed",
+    });
+  })
+);
 
 export function createAgentRequestSettingsFromJSON(
   jsonString: string,
@@ -4479,12 +4630,14 @@ export const CreateAgentRequestResponseFormatAgentsResponseJsonSchema$inboundSch
     CreateAgentRequestResponseFormatAgentsResponseJsonSchema,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    description: z.string().optional(),
-    name: z.string(),
-    schema: z.any().optional(),
-    strict: z.boolean().default(false),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      description: z.string().optional(),
+      name: z.string(),
+      schema: z.any().optional(),
+      strict: z.boolean().default(false),
+    })
+  );
 
 export function createAgentRequestResponseFormatAgentsResponseJsonSchemaFromJSON(
   jsonString: string,
@@ -4507,16 +4660,18 @@ export const CreateAgentRequestResponseFormatAgentsResponse201JSONSchema$inbound
     CreateAgentRequestResponseFormatAgentsResponse201JSONSchema,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    type: z.literal("json_schema"),
-    json_schema: z.lazy(() =>
-      CreateAgentRequestResponseFormatAgentsResponseJsonSchema$inboundSchema
-    ),
-  }).transform((v) => {
-    return remap$(v, {
-      "json_schema": "jsonSchema",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type: z.literal("json_schema"),
+      json_schema: z.lazy(() =>
+        CreateAgentRequestResponseFormatAgentsResponseJsonSchema$inboundSchema
+      ),
+    }).transform((v) => {
+      return remap$(v, {
+        "json_schema": "jsonSchema",
+      });
+    })
+  );
 
 export function createAgentRequestResponseFormatAgentsResponse201JSONSchemaFromJSON(
   jsonString: string,
@@ -4536,9 +4691,11 @@ export function createAgentRequestResponseFormatAgentsResponse201JSONSchemaFromJ
 /** @internal */
 export const CreateAgentRequestResponseFormatJSONObject$inboundSchema:
   z.ZodType<CreateAgentRequestResponseFormatJSONObject, z.ZodTypeDef, unknown> =
-    z.object({
-      type: z.literal("json_object"),
-    });
+    /* @__PURE__ */ lazySchema$(() =>
+      z.object({
+        type: z.literal("json_object"),
+      })
+    );
 
 export function createAgentRequestResponseFormatJSONObjectFromJSON(
   jsonString: string,
@@ -4561,9 +4718,11 @@ export const CreateAgentRequestResponseFormatText$inboundSchema: z.ZodType<
   CreateAgentRequestResponseFormatText,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("text"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("text"),
+  })
+);
 
 export function createAgentRequestResponseFormatTextFromJSON(
   jsonString: string,
@@ -4581,13 +4740,15 @@ export const CreateAgentRequestResponseFormat$inboundSchema: z.ZodType<
   CreateAgentRequestResponseFormat,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  z.lazy(() => CreateAgentRequestResponseFormatText$inboundSchema),
-  z.lazy(() => CreateAgentRequestResponseFormatJSONObject$inboundSchema),
-  z.lazy(() =>
-    CreateAgentRequestResponseFormatAgentsResponse201JSONSchema$inboundSchema
-  ),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => CreateAgentRequestResponseFormatText$inboundSchema),
+    z.lazy(() => CreateAgentRequestResponseFormatJSONObject$inboundSchema),
+    z.lazy(() =>
+      CreateAgentRequestResponseFormatAgentsResponse201JSONSchema$inboundSchema
+    ),
+  ])
+);
 
 export function createAgentRequestResponseFormatFromJSON(
   jsonString: string,
@@ -4602,14 +4763,18 @@ export function createAgentRequestResponseFormatFromJSON(
 /** @internal */
 export const CreateAgentRequestReasoningEffort$inboundSchema: z.ZodNativeEnum<
   typeof CreateAgentRequestReasoningEffort
-> = z.nativeEnum(CreateAgentRequestReasoningEffort);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(CreateAgentRequestReasoningEffort)
+);
 
 /** @internal */
 export const CreateAgentRequestStop$inboundSchema: z.ZodType<
   CreateAgentRequestStop,
   z.ZodTypeDef,
   unknown
-> = z.union([z.string(), z.array(z.string())]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.array(z.string())])
+);
 
 export function createAgentRequestStopFromJSON(
   jsonString: string,
@@ -4626,12 +4791,14 @@ export const CreateAgentRequestThinking$inboundSchema: z.ZodType<
   CreateAgentRequestThinking,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  components.ThinkingConfigDisabledSchema$inboundSchema,
-  components.ThinkingConfigEnabledSchema$inboundSchema,
-  components.ThinkingConfigAdaptiveSchema$inboundSchema,
-  components.ThinkingConfigBetweenToolsSchema$inboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    components.ThinkingConfigDisabledSchema$inboundSchema,
+    components.ThinkingConfigEnabledSchema$inboundSchema,
+    components.ThinkingConfigAdaptiveSchema$inboundSchema,
+    components.ThinkingConfigBetweenToolsSchema$inboundSchema,
+  ])
+);
 
 export function createAgentRequestThinkingFromJSON(
   jsonString: string,
@@ -4645,16 +4812,19 @@ export function createAgentRequestThinkingFromJSON(
 
 /** @internal */
 export const CreateAgentRequestToolChoiceAgentsType$inboundSchema:
-  z.ZodNativeEnum<typeof CreateAgentRequestToolChoiceAgentsType> = z.nativeEnum(
-    CreateAgentRequestToolChoiceAgentsType,
-  );
+  z.ZodNativeEnum<typeof CreateAgentRequestToolChoiceAgentsType> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(CreateAgentRequestToolChoiceAgentsType)
+    );
 
 /** @internal */
 export const CreateAgentRequestToolChoiceAgentsFunction$inboundSchema:
   z.ZodType<CreateAgentRequestToolChoiceAgentsFunction, z.ZodTypeDef, unknown> =
-    z.object({
-      name: z.string(),
-    });
+    /* @__PURE__ */ lazySchema$(() =>
+      z.object({
+        name: z.string(),
+      })
+    );
 
 export function createAgentRequestToolChoiceAgentsFunctionFromJSON(
   jsonString: string,
@@ -4677,12 +4847,14 @@ export const CreateAgentRequestToolChoiceAgents2$inboundSchema: z.ZodType<
   CreateAgentRequestToolChoiceAgents2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: CreateAgentRequestToolChoiceAgentsType$inboundSchema.optional(),
-  function: z.lazy(() =>
-    CreateAgentRequestToolChoiceAgentsFunction$inboundSchema
-  ),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: CreateAgentRequestToolChoiceAgentsType$inboundSchema.optional(),
+    function: z.lazy(() =>
+      CreateAgentRequestToolChoiceAgentsFunction$inboundSchema
+    ),
+  })
+);
 
 export function createAgentRequestToolChoiceAgents2FromJSON(
   jsonString: string,
@@ -4698,17 +4870,21 @@ export function createAgentRequestToolChoiceAgents2FromJSON(
 /** @internal */
 export const CreateAgentRequestToolChoiceAgents1$inboundSchema: z.ZodNativeEnum<
   typeof CreateAgentRequestToolChoiceAgents1
-> = z.nativeEnum(CreateAgentRequestToolChoiceAgents1);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(CreateAgentRequestToolChoiceAgents1)
+);
 
 /** @internal */
 export const CreateAgentRequestToolChoice$inboundSchema: z.ZodType<
   CreateAgentRequestToolChoice,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  z.lazy(() => CreateAgentRequestToolChoiceAgents2$inboundSchema),
-  CreateAgentRequestToolChoiceAgents1$inboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => CreateAgentRequestToolChoiceAgents2$inboundSchema),
+    CreateAgentRequestToolChoiceAgents1$inboundSchema,
+  ])
+);
 
 export function createAgentRequestToolChoiceFromJSON(
   jsonString: string,
@@ -4723,19 +4899,25 @@ export function createAgentRequestToolChoiceFromJSON(
 /** @internal */
 export const CreateAgentRequestModalities$inboundSchema: z.ZodNativeEnum<
   typeof CreateAgentRequestModalities
-> = z.nativeEnum(CreateAgentRequestModalities);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(CreateAgentRequestModalities)
+);
 
 /** @internal */
 export const CreateAgentRequestIdAgents1$inboundSchema: z.ZodNativeEnum<
   typeof CreateAgentRequestIdAgents1
-> = z.nativeEnum(CreateAgentRequestIdAgents1);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(CreateAgentRequestIdAgents1)
+);
 
 /** @internal */
 export const CreateAgentRequestId$inboundSchema: z.ZodType<
   CreateAgentRequestId,
   z.ZodTypeDef,
   unknown
-> = z.union([CreateAgentRequestIdAgents1$inboundSchema, z.string()]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([CreateAgentRequestIdAgents1$inboundSchema, z.string()])
+);
 
 export function createAgentRequestIdFromJSON(
   jsonString: string,
@@ -4751,20 +4933,24 @@ export function createAgentRequestIdFromJSON(
 export const CreateAgentRequestAgentsResponse201ApplicationJSONExecuteOn$inboundSchema:
   z.ZodNativeEnum<
     typeof CreateAgentRequestAgentsResponse201ApplicationJSONExecuteOn
-  > = z.nativeEnum(CreateAgentRequestAgentsResponse201ApplicationJSONExecuteOn);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.nativeEnum(CreateAgentRequestAgentsResponse201ApplicationJSONExecuteOn)
+  );
 
 /** @internal */
 export const CreateAgentRequestAgentsResponseGuardrails$inboundSchema:
   z.ZodType<CreateAgentRequestAgentsResponseGuardrails, z.ZodTypeDef, unknown> =
-    z.object({
-      id: z.union([CreateAgentRequestIdAgents1$inboundSchema, z.string()]),
-      execute_on:
-        CreateAgentRequestAgentsResponse201ApplicationJSONExecuteOn$inboundSchema,
-    }).transform((v) => {
-      return remap$(v, {
-        "execute_on": "executeOn",
-      });
-    });
+    /* @__PURE__ */ lazySchema$(() =>
+      z.object({
+        id: z.union([CreateAgentRequestIdAgents1$inboundSchema, z.string()]),
+        execute_on:
+          CreateAgentRequestAgentsResponse201ApplicationJSONExecuteOn$inboundSchema,
+      }).transform((v) => {
+        return remap$(v, {
+          "execute_on": "executeOn",
+        });
+      })
+    );
 
 export function createAgentRequestAgentsResponseGuardrailsFromJSON(
   jsonString: string,
@@ -4787,13 +4973,15 @@ export const CreateAgentRequestPlugins$inboundSchema: z.ZodType<
   CreateAgentRequestPlugins,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  components.PIIRedactionPlugin$inboundSchema.and(
-    z.object({ id: z.literal("pii_redaction") }),
-  ),
-  components.ResponseHealingPlugin$inboundSchema,
-  components.TraceScrubbingPlugin$inboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    components.PIIRedactionPlugin$inboundSchema.and(
+      z.object({ id: z.literal("pii_redaction") }),
+    ),
+    components.ResponseHealingPlugin$inboundSchema,
+    components.TraceScrubbingPlugin$inboundSchema,
+  ])
+);
 
 export function createAgentRequestPluginsFromJSON(
   jsonString: string,
@@ -4810,9 +4998,11 @@ export const CreateAgentRequestFallbacks$inboundSchema: z.ZodType<
   CreateAgentRequestFallbacks,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  model: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model: z.string(),
+  })
+);
 
 export function createAgentRequestFallbacksFromJSON(
   jsonString: string,
@@ -4827,17 +5017,21 @@ export function createAgentRequestFallbacksFromJSON(
 /** @internal */
 export const CreateAgentRequestAgentsType$inboundSchema: z.ZodNativeEnum<
   typeof CreateAgentRequestAgentsType
-> = z.nativeEnum(CreateAgentRequestAgentsType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(CreateAgentRequestAgentsType)
+);
 
 /** @internal */
 export const CreateAgentRequestCache$inboundSchema: z.ZodType<
   CreateAgentRequestCache,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  ttl: z.number().default(3600),
-  type: CreateAgentRequestAgentsType$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ttl: z.number().default(3600),
+    type: CreateAgentRequestAgentsType$inboundSchema,
+  })
+);
 
 export function createAgentRequestCacheFromJSON(
   jsonString: string,
@@ -4851,18 +5045,22 @@ export function createAgentRequestCacheFromJSON(
 
 /** @internal */
 export const CreateAgentRequestLoadBalancerAgentsType$inboundSchema:
-  z.ZodNativeEnum<typeof CreateAgentRequestLoadBalancerAgentsType> = z
-    .nativeEnum(CreateAgentRequestLoadBalancerAgentsType);
+  z.ZodNativeEnum<typeof CreateAgentRequestLoadBalancerAgentsType> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(CreateAgentRequestLoadBalancerAgentsType)
+    );
 
 /** @internal */
 export const CreateAgentRequestLoadBalancerModels$inboundSchema: z.ZodType<
   CreateAgentRequestLoadBalancerModels,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  model: z.string(),
-  weight: z.number().default(0.5),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model: z.string(),
+    weight: z.number().default(0.5),
+  })
+);
 
 export function createAgentRequestLoadBalancerModelsFromJSON(
   jsonString: string,
@@ -4880,12 +5078,14 @@ export const CreateAgentRequestLoadBalancerAgents1$inboundSchema: z.ZodType<
   CreateAgentRequestLoadBalancerAgents1,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: CreateAgentRequestLoadBalancerAgentsType$inboundSchema,
-  models: z.array(
-    z.lazy(() => CreateAgentRequestLoadBalancerModels$inboundSchema),
-  ),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: CreateAgentRequestLoadBalancerAgentsType$inboundSchema,
+    models: z.array(
+      z.lazy(() => CreateAgentRequestLoadBalancerModels$inboundSchema),
+    ),
+  })
+);
 
 export function createAgentRequestLoadBalancerAgents1FromJSON(
   jsonString: string,
@@ -4903,7 +5103,9 @@ export const CreateAgentRequestLoadBalancer$inboundSchema: z.ZodType<
   CreateAgentRequestLoadBalancer,
   z.ZodTypeDef,
   unknown
-> = z.lazy(() => CreateAgentRequestLoadBalancerAgents1$inboundSchema);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.lazy(() => CreateAgentRequestLoadBalancerAgents1$inboundSchema)
+);
 
 export function createAgentRequestLoadBalancerFromJSON(
   jsonString: string,
@@ -4920,13 +5122,15 @@ export const CreateAgentRequestTimeout$inboundSchema: z.ZodType<
   CreateAgentRequestTimeout,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  call_timeout: z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    "call_timeout": "callTimeout",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    call_timeout: z.number(),
+  }).transform((v) => {
+    return remap$(v, {
+      "call_timeout": "callTimeout",
+    });
+  })
+);
 
 export function createAgentRequestTimeoutFromJSON(
   jsonString: string,
@@ -4940,24 +5144,27 @@ export function createAgentRequestTimeoutFromJSON(
 
 /** @internal */
 export const CreateAgentRequestAgentsResponseType$inboundSchema:
-  z.ZodNativeEnum<typeof CreateAgentRequestAgentsResponseType> = z.nativeEnum(
-    CreateAgentRequestAgentsResponseType,
-  );
+  z.ZodNativeEnum<typeof CreateAgentRequestAgentsResponseType> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(CreateAgentRequestAgentsResponseType)
+    );
 
 /** @internal */
 export const CreateAgentRequestTtl$inboundSchema: z.ZodNativeEnum<
   typeof CreateAgentRequestTtl
-> = z.nativeEnum(CreateAgentRequestTtl);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(CreateAgentRequestTtl));
 
 /** @internal */
 export const CreateAgentRequestCacheControl$inboundSchema: z.ZodType<
   CreateAgentRequestCacheControl,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: CreateAgentRequestAgentsResponseType$inboundSchema,
-  ttl: CreateAgentRequestTtl$inboundSchema.default("5m"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: CreateAgentRequestAgentsResponseType$inboundSchema,
+    ttl: CreateAgentRequestTtl$inboundSchema.default("5m"),
+  })
+);
 
 export function createAgentRequestCacheControlFromJSON(
   jsonString: string,
@@ -4974,80 +5181,83 @@ export const CreateAgentRequestParameters$inboundSchema: z.ZodType<
   CreateAgentRequestParameters,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string().optional(),
-  frequency_penalty: z.nullable(z.number()).optional(),
-  max_tokens: z.nullable(z.number().int()).optional(),
-  max_completion_tokens: z.nullable(z.number().int()).optional(),
-  presence_penalty: z.nullable(z.number()).optional(),
-  response_format: z.union([
-    z.lazy(() => CreateAgentRequestResponseFormatText$inboundSchema),
-    z.lazy(() => CreateAgentRequestResponseFormatJSONObject$inboundSchema),
-    z.lazy(() =>
-      CreateAgentRequestResponseFormatAgentsResponse201JSONSchema$inboundSchema
-    ),
-  ]).optional(),
-  reasoning_effort: CreateAgentRequestReasoningEffort$inboundSchema.optional(),
-  verbosity: z.string().optional(),
-  seed: z.nullable(z.number()).optional(),
-  stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
-  thinking: z.union([
-    components.ThinkingConfigDisabledSchema$inboundSchema,
-    components.ThinkingConfigEnabledSchema$inboundSchema,
-    components.ThinkingConfigAdaptiveSchema$inboundSchema,
-    components.ThinkingConfigBetweenToolsSchema$inboundSchema,
-  ]).optional(),
-  temperature: z.nullable(z.number()).optional(),
-  top_p: z.nullable(z.number()).optional(),
-  top_k: z.nullable(z.number()).optional(),
-  tool_choice: z.union([
-    z.lazy(() => CreateAgentRequestToolChoiceAgents2$inboundSchema),
-    CreateAgentRequestToolChoiceAgents1$inboundSchema,
-  ]).optional(),
-  parallel_tool_calls: z.boolean().optional(),
-  modalities: z.nullable(z.array(CreateAgentRequestModalities$inboundSchema))
-    .optional(),
-  guardrails: z.array(
-    z.lazy(() => CreateAgentRequestAgentsResponseGuardrails$inboundSchema),
-  ).optional(),
-  plugins: z.array(
-    z.union([
-      components.PIIRedactionPlugin$inboundSchema.and(
-        z.object({ id: z.literal("pii_redaction") }),
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    frequency_penalty: z.nullable(z.number()).optional(),
+    max_tokens: z.nullable(z.number().int()).optional(),
+    max_completion_tokens: z.nullable(z.number().int()).optional(),
+    presence_penalty: z.nullable(z.number()).optional(),
+    response_format: z.union([
+      z.lazy(() => CreateAgentRequestResponseFormatText$inboundSchema),
+      z.lazy(() => CreateAgentRequestResponseFormatJSONObject$inboundSchema),
+      z.lazy(() =>
+        CreateAgentRequestResponseFormatAgentsResponse201JSONSchema$inboundSchema
       ),
-      components.ResponseHealingPlugin$inboundSchema,
-      components.TraceScrubbingPlugin$inboundSchema,
-    ]),
-  ).optional(),
-  fallback_on_codes: z.array(z.number().int()).optional(),
-  fallbacks: z.array(z.lazy(() => CreateAgentRequestFallbacks$inboundSchema))
-    .optional(),
-  cache: z.lazy(() => CreateAgentRequestCache$inboundSchema).optional(),
-  load_balancer: z.lazy(() =>
-    CreateAgentRequestLoadBalancerAgents1$inboundSchema
-  ).optional(),
-  timeout: z.lazy(() => CreateAgentRequestTimeout$inboundSchema).optional(),
-  cache_control: z.lazy(() => CreateAgentRequestCacheControl$inboundSchema)
-    .optional(),
-  prompt_cache_key: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "frequency_penalty": "frequencyPenalty",
-    "max_tokens": "maxTokens",
-    "max_completion_tokens": "maxCompletionTokens",
-    "presence_penalty": "presencePenalty",
-    "response_format": "responseFormat",
-    "reasoning_effort": "reasoningEffort",
-    "top_p": "topP",
-    "top_k": "topK",
-    "tool_choice": "toolChoice",
-    "parallel_tool_calls": "parallelToolCalls",
-    "fallback_on_codes": "fallbackOnCodes",
-    "load_balancer": "loadBalancer",
-    "cache_control": "cacheControl",
-    "prompt_cache_key": "promptCacheKey",
-  });
-});
+    ]).optional(),
+    reasoning_effort: CreateAgentRequestReasoningEffort$inboundSchema
+      .optional(),
+    verbosity: z.string().optional(),
+    seed: z.nullable(z.number()).optional(),
+    stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
+    thinking: z.union([
+      components.ThinkingConfigDisabledSchema$inboundSchema,
+      components.ThinkingConfigEnabledSchema$inboundSchema,
+      components.ThinkingConfigAdaptiveSchema$inboundSchema,
+      components.ThinkingConfigBetweenToolsSchema$inboundSchema,
+    ]).optional(),
+    temperature: z.nullable(z.number()).optional(),
+    top_p: z.nullable(z.number()).optional(),
+    top_k: z.nullable(z.number()).optional(),
+    tool_choice: z.union([
+      z.lazy(() => CreateAgentRequestToolChoiceAgents2$inboundSchema),
+      CreateAgentRequestToolChoiceAgents1$inboundSchema,
+    ]).optional(),
+    parallel_tool_calls: z.boolean().optional(),
+    modalities: z.nullable(z.array(CreateAgentRequestModalities$inboundSchema))
+      .optional(),
+    guardrails: z.array(
+      z.lazy(() => CreateAgentRequestAgentsResponseGuardrails$inboundSchema),
+    ).optional(),
+    plugins: z.array(
+      z.union([
+        components.PIIRedactionPlugin$inboundSchema.and(
+          z.object({ id: z.literal("pii_redaction") }),
+        ),
+        components.ResponseHealingPlugin$inboundSchema,
+        components.TraceScrubbingPlugin$inboundSchema,
+      ]),
+    ).optional(),
+    fallback_on_codes: z.array(z.number().int()).optional(),
+    fallbacks: z.array(z.lazy(() => CreateAgentRequestFallbacks$inboundSchema))
+      .optional(),
+    cache: z.lazy(() => CreateAgentRequestCache$inboundSchema).optional(),
+    load_balancer: z.lazy(() =>
+      CreateAgentRequestLoadBalancerAgents1$inboundSchema
+    ).optional(),
+    timeout: z.lazy(() => CreateAgentRequestTimeout$inboundSchema).optional(),
+    cache_control: z.lazy(() => CreateAgentRequestCacheControl$inboundSchema)
+      .optional(),
+    prompt_cache_key: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "frequency_penalty": "frequencyPenalty",
+      "max_tokens": "maxTokens",
+      "max_completion_tokens": "maxCompletionTokens",
+      "presence_penalty": "presencePenalty",
+      "response_format": "responseFormat",
+      "reasoning_effort": "reasoningEffort",
+      "top_p": "topP",
+      "top_k": "topK",
+      "tool_choice": "toolChoice",
+      "parallel_tool_calls": "parallelToolCalls",
+      "fallback_on_codes": "fallbackOnCodes",
+      "load_balancer": "loadBalancer",
+      "cache_control": "cacheControl",
+      "prompt_cache_key": "promptCacheKey",
+    });
+  })
+);
 
 export function createAgentRequestParametersFromJSON(
   jsonString: string,
@@ -5064,14 +5274,16 @@ export const CreateAgentRequestRetry$inboundSchema: z.ZodType<
   CreateAgentRequestRetry,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  count: z.number().default(3),
-  on_codes: z.array(z.number()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "on_codes": "onCodes",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    count: z.number().default(3),
+    on_codes: z.array(z.number()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "on_codes": "onCodes",
+    });
+  })
+);
 
 export function createAgentRequestRetryFromJSON(
   jsonString: string,
@@ -5089,12 +5301,14 @@ export const CreateAgentRequestResponseFormatAgentsResponse201ApplicationJSONJSO
     CreateAgentRequestResponseFormatAgentsResponse201ApplicationJSONJSONSchema,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    description: z.string().optional(),
-    name: z.string(),
-    schema: z.any().optional(),
-    strict: z.boolean().default(false),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      description: z.string().optional(),
+      name: z.string(),
+      schema: z.any().optional(),
+      strict: z.boolean().default(false),
+    })
+  );
 
 export function createAgentRequestResponseFormatAgentsResponse201ApplicationJSONJSONSchemaFromJSON(
   jsonString: string,
@@ -5117,16 +5331,18 @@ export const CreateAgentRequestResponseFormatAgentsResponse201ApplicationJSONRes
     CreateAgentRequestResponseFormatAgentsResponse201ApplicationJSONResponseBodyJSONSchema,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    type: z.literal("json_schema"),
-    json_schema: z.lazy(() =>
-      CreateAgentRequestResponseFormatAgentsResponse201ApplicationJSONJSONSchema$inboundSchema
-    ),
-  }).transform((v) => {
-    return remap$(v, {
-      "json_schema": "jsonSchema",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type: z.literal("json_schema"),
+      json_schema: z.lazy(() =>
+        CreateAgentRequestResponseFormatAgentsResponse201ApplicationJSONJSONSchema$inboundSchema
+      ),
+    }).transform((v) => {
+      return remap$(v, {
+        "json_schema": "jsonSchema",
+      });
+    })
+  );
 
 export function createAgentRequestResponseFormatAgentsResponse201ApplicationJSONResponseBodyJSONSchemaFromJSON(
   jsonString: string,
@@ -5149,9 +5365,11 @@ export const CreateAgentRequestResponseFormatAgentsJSONObject$inboundSchema:
     CreateAgentRequestResponseFormatAgentsJSONObject,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    type: z.literal("json_object"),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type: z.literal("json_object"),
+    })
+  );
 
 export function createAgentRequestResponseFormatAgentsJSONObjectFromJSON(
   jsonString: string,
@@ -5172,9 +5390,11 @@ export function createAgentRequestResponseFormatAgentsJSONObjectFromJSON(
 /** @internal */
 export const CreateAgentRequestResponseFormatAgentsText$inboundSchema:
   z.ZodType<CreateAgentRequestResponseFormatAgentsText, z.ZodTypeDef, unknown> =
-    z.object({
-      type: z.literal("text"),
-    });
+    /* @__PURE__ */ lazySchema$(() =>
+      z.object({
+        type: z.literal("text"),
+      })
+    );
 
 export function createAgentRequestResponseFormatAgentsTextFromJSON(
   jsonString: string,
@@ -5198,15 +5418,17 @@ export const CreateAgentRequestFallbackModelConfigurationResponseFormat$inboundS
     CreateAgentRequestFallbackModelConfigurationResponseFormat,
     z.ZodTypeDef,
     unknown
-  > = z.union([
-    z.lazy(() => CreateAgentRequestResponseFormatAgentsText$inboundSchema),
-    z.lazy(() =>
-      CreateAgentRequestResponseFormatAgentsJSONObject$inboundSchema
-    ),
-    z.lazy(() =>
-      CreateAgentRequestResponseFormatAgentsResponse201ApplicationJSONResponseBodyJSONSchema$inboundSchema
-    ),
-  ]);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.union([
+      z.lazy(() => CreateAgentRequestResponseFormatAgentsText$inboundSchema),
+      z.lazy(() =>
+        CreateAgentRequestResponseFormatAgentsJSONObject$inboundSchema
+      ),
+      z.lazy(() =>
+        CreateAgentRequestResponseFormatAgentsResponse201ApplicationJSONResponseBodyJSONSchema$inboundSchema
+      ),
+    ])
+  );
 
 export function createAgentRequestFallbackModelConfigurationResponseFormatFromJSON(
   jsonString: string,
@@ -5227,7 +5449,9 @@ export function createAgentRequestFallbackModelConfigurationResponseFormatFromJS
 export const CreateAgentRequestFallbackModelConfigurationReasoningEffort$inboundSchema:
   z.ZodNativeEnum<
     typeof CreateAgentRequestFallbackModelConfigurationReasoningEffort
-  > = z.nativeEnum(CreateAgentRequestFallbackModelConfigurationReasoningEffort);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.nativeEnum(CreateAgentRequestFallbackModelConfigurationReasoningEffort)
+  );
 
 /** @internal */
 export const CreateAgentRequestFallbackModelConfigurationStop$inboundSchema:
@@ -5235,7 +5459,9 @@ export const CreateAgentRequestFallbackModelConfigurationStop$inboundSchema:
     CreateAgentRequestFallbackModelConfigurationStop,
     z.ZodTypeDef,
     unknown
-  > = z.union([z.string(), z.array(z.string())]);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.union([z.string(), z.array(z.string())])
+  );
 
 export function createAgentRequestFallbackModelConfigurationStopFromJSON(
   jsonString: string,
@@ -5259,12 +5485,14 @@ export const CreateAgentRequestFallbackModelConfigurationThinking$inboundSchema:
     CreateAgentRequestFallbackModelConfigurationThinking,
     z.ZodTypeDef,
     unknown
-  > = z.union([
-    components.ThinkingConfigDisabledSchema$inboundSchema,
-    components.ThinkingConfigEnabledSchema$inboundSchema,
-    components.ThinkingConfigAdaptiveSchema$inboundSchema,
-    components.ThinkingConfigBetweenToolsSchema$inboundSchema,
-  ]);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.union([
+      components.ThinkingConfigDisabledSchema$inboundSchema,
+      components.ThinkingConfigEnabledSchema$inboundSchema,
+      components.ThinkingConfigAdaptiveSchema$inboundSchema,
+      components.ThinkingConfigBetweenToolsSchema$inboundSchema,
+    ])
+  );
 
 export function createAgentRequestFallbackModelConfigurationThinkingFromJSON(
   jsonString: string,
@@ -5284,8 +5512,10 @@ export function createAgentRequestFallbackModelConfigurationThinkingFromJSON(
 
 /** @internal */
 export const CreateAgentRequestToolChoiceAgentsResponseType$inboundSchema:
-  z.ZodNativeEnum<typeof CreateAgentRequestToolChoiceAgentsResponseType> = z
-    .nativeEnum(CreateAgentRequestToolChoiceAgentsResponseType);
+  z.ZodNativeEnum<typeof CreateAgentRequestToolChoiceAgentsResponseType> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(CreateAgentRequestToolChoiceAgentsResponseType)
+    );
 
 /** @internal */
 export const CreateAgentRequestToolChoiceAgentsResponseFunction$inboundSchema:
@@ -5293,9 +5523,11 @@ export const CreateAgentRequestToolChoiceAgentsResponseFunction$inboundSchema:
     CreateAgentRequestToolChoiceAgentsResponseFunction,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    name: z.string(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      name: z.string(),
+    })
+  );
 
 export function createAgentRequestToolChoiceAgentsResponseFunctionFromJSON(
   jsonString: string,
@@ -5319,13 +5551,15 @@ export const CreateAgentRequestToolChoiceAgentsResponse2$inboundSchema:
     CreateAgentRequestToolChoiceAgentsResponse2,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    type: CreateAgentRequestToolChoiceAgentsResponseType$inboundSchema
-      .optional(),
-    function: z.lazy(() =>
-      CreateAgentRequestToolChoiceAgentsResponseFunction$inboundSchema
-    ),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type: CreateAgentRequestToolChoiceAgentsResponseType$inboundSchema
+        .optional(),
+      function: z.lazy(() =>
+        CreateAgentRequestToolChoiceAgentsResponseFunction$inboundSchema
+      ),
+    })
+  );
 
 export function createAgentRequestToolChoiceAgentsResponse2FromJSON(
   jsonString: string,
@@ -5345,8 +5579,10 @@ export function createAgentRequestToolChoiceAgentsResponse2FromJSON(
 
 /** @internal */
 export const CreateAgentRequestToolChoiceAgentsResponse1$inboundSchema:
-  z.ZodNativeEnum<typeof CreateAgentRequestToolChoiceAgentsResponse1> = z
-    .nativeEnum(CreateAgentRequestToolChoiceAgentsResponse1);
+  z.ZodNativeEnum<typeof CreateAgentRequestToolChoiceAgentsResponse1> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(CreateAgentRequestToolChoiceAgentsResponse1)
+    );
 
 /** @internal */
 export const CreateAgentRequestFallbackModelConfigurationToolChoice$inboundSchema:
@@ -5354,10 +5590,12 @@ export const CreateAgentRequestFallbackModelConfigurationToolChoice$inboundSchem
     CreateAgentRequestFallbackModelConfigurationToolChoice,
     z.ZodTypeDef,
     unknown
-  > = z.union([
-    z.lazy(() => CreateAgentRequestToolChoiceAgentsResponse2$inboundSchema),
-    CreateAgentRequestToolChoiceAgentsResponse1$inboundSchema,
-  ]);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.union([
+      z.lazy(() => CreateAgentRequestToolChoiceAgentsResponse2$inboundSchema),
+      CreateAgentRequestToolChoiceAgentsResponse1$inboundSchema,
+    ])
+  );
 
 export function createAgentRequestFallbackModelConfigurationToolChoiceFromJSON(
   jsonString: string,
@@ -5378,12 +5616,16 @@ export function createAgentRequestFallbackModelConfigurationToolChoiceFromJSON(
 export const CreateAgentRequestFallbackModelConfigurationModalities$inboundSchema:
   z.ZodNativeEnum<
     typeof CreateAgentRequestFallbackModelConfigurationModalities
-  > = z.nativeEnum(CreateAgentRequestFallbackModelConfigurationModalities);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.nativeEnum(CreateAgentRequestFallbackModelConfigurationModalities)
+  );
 
 /** @internal */
 export const CreateAgentRequestIdAgentsResponse1$inboundSchema: z.ZodNativeEnum<
   typeof CreateAgentRequestIdAgentsResponse1
-> = z.nativeEnum(CreateAgentRequestIdAgentsResponse1);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(CreateAgentRequestIdAgentsResponse1)
+);
 
 /** @internal */
 export const CreateAgentRequestFallbackModelConfigurationId$inboundSchema:
@@ -5391,7 +5633,9 @@ export const CreateAgentRequestFallbackModelConfigurationId$inboundSchema:
     CreateAgentRequestFallbackModelConfigurationId,
     z.ZodTypeDef,
     unknown
-  > = z.union([CreateAgentRequestIdAgentsResponse1$inboundSchema, z.string()]);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.union([CreateAgentRequestIdAgentsResponse1$inboundSchema, z.string()])
+  );
 
 export function createAgentRequestFallbackModelConfigurationIdFromJSON(
   jsonString: string,
@@ -5413,7 +5657,9 @@ export function createAgentRequestFallbackModelConfigurationIdFromJSON(
 export const CreateAgentRequestFallbackModelConfigurationExecuteOn$inboundSchema:
   z.ZodNativeEnum<
     typeof CreateAgentRequestFallbackModelConfigurationExecuteOn
-  > = z.nativeEnum(CreateAgentRequestFallbackModelConfigurationExecuteOn);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.nativeEnum(CreateAgentRequestFallbackModelConfigurationExecuteOn)
+  );
 
 /** @internal */
 export const CreateAgentRequestFallbackModelConfigurationGuardrails$inboundSchema:
@@ -5421,18 +5667,20 @@ export const CreateAgentRequestFallbackModelConfigurationGuardrails$inboundSchem
     CreateAgentRequestFallbackModelConfigurationGuardrails,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    id: z.union([
-      CreateAgentRequestIdAgentsResponse1$inboundSchema,
-      z.string(),
-    ]),
-    execute_on:
-      CreateAgentRequestFallbackModelConfigurationExecuteOn$inboundSchema,
-  }).transform((v) => {
-    return remap$(v, {
-      "execute_on": "executeOn",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.union([
+        CreateAgentRequestIdAgentsResponse1$inboundSchema,
+        z.string(),
+      ]),
+      execute_on:
+        CreateAgentRequestFallbackModelConfigurationExecuteOn$inboundSchema,
+    }).transform((v) => {
+      return remap$(v, {
+        "execute_on": "executeOn",
+      });
+    })
+  );
 
 export function createAgentRequestFallbackModelConfigurationGuardrailsFromJSON(
   jsonString: string,
@@ -5455,13 +5703,15 @@ export const CreateAgentRequestFallbackModelConfigurationPlugins$inboundSchema:
     CreateAgentRequestFallbackModelConfigurationPlugins,
     z.ZodTypeDef,
     unknown
-  > = z.union([
-    components.PIIRedactionPlugin$inboundSchema.and(
-      z.object({ id: z.literal("pii_redaction") }),
-    ),
-    components.ResponseHealingPlugin$inboundSchema,
-    components.TraceScrubbingPlugin$inboundSchema,
-  ]);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.union([
+      components.PIIRedactionPlugin$inboundSchema.and(
+        z.object({ id: z.literal("pii_redaction") }),
+      ),
+      components.ResponseHealingPlugin$inboundSchema,
+      components.TraceScrubbingPlugin$inboundSchema,
+    ])
+  );
 
 export function createAgentRequestFallbackModelConfigurationPluginsFromJSON(
   jsonString: string,
@@ -5485,9 +5735,11 @@ export const CreateAgentRequestFallbackModelConfigurationFallbacks$inboundSchema
     CreateAgentRequestFallbackModelConfigurationFallbacks,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    model: z.string(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      model: z.string(),
+    })
+  );
 
 export function createAgentRequestFallbackModelConfigurationFallbacksFromJSON(
   jsonString: string,
@@ -5509,7 +5761,9 @@ export function createAgentRequestFallbackModelConfigurationFallbacksFromJSON(
 export const CreateAgentRequestFallbackModelConfigurationAgentsType$inboundSchema:
   z.ZodNativeEnum<
     typeof CreateAgentRequestFallbackModelConfigurationAgentsType
-  > = z.nativeEnum(CreateAgentRequestFallbackModelConfigurationAgentsType);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.nativeEnum(CreateAgentRequestFallbackModelConfigurationAgentsType)
+  );
 
 /** @internal */
 export const CreateAgentRequestFallbackModelConfigurationCache$inboundSchema:
@@ -5517,10 +5771,13 @@ export const CreateAgentRequestFallbackModelConfigurationCache$inboundSchema:
     CreateAgentRequestFallbackModelConfigurationCache,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ttl: z.number().default(3600),
-    type: CreateAgentRequestFallbackModelConfigurationAgentsType$inboundSchema,
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ttl: z.number().default(3600),
+      type:
+        CreateAgentRequestFallbackModelConfigurationAgentsType$inboundSchema,
+    })
+  );
 
 export function createAgentRequestFallbackModelConfigurationCacheFromJSON(
   jsonString: string,
@@ -5540,16 +5797,20 @@ export function createAgentRequestFallbackModelConfigurationCacheFromJSON(
 
 /** @internal */
 export const CreateAgentRequestLoadBalancerAgentsResponseType$inboundSchema:
-  z.ZodNativeEnum<typeof CreateAgentRequestLoadBalancerAgentsResponseType> = z
-    .nativeEnum(CreateAgentRequestLoadBalancerAgentsResponseType);
+  z.ZodNativeEnum<typeof CreateAgentRequestLoadBalancerAgentsResponseType> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(CreateAgentRequestLoadBalancerAgentsResponseType)
+    );
 
 /** @internal */
 export const CreateAgentRequestLoadBalancerAgentsModels$inboundSchema:
   z.ZodType<CreateAgentRequestLoadBalancerAgentsModels, z.ZodTypeDef, unknown> =
-    z.object({
-      model: z.string(),
-      weight: z.number().default(0.5),
-    });
+    /* @__PURE__ */ lazySchema$(() =>
+      z.object({
+        model: z.string(),
+        weight: z.number().default(0.5),
+      })
+    );
 
 export function createAgentRequestLoadBalancerAgentsModelsFromJSON(
   jsonString: string,
@@ -5573,12 +5834,14 @@ export const CreateAgentRequestLoadBalancerAgentsResponse1$inboundSchema:
     CreateAgentRequestLoadBalancerAgentsResponse1,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    type: CreateAgentRequestLoadBalancerAgentsResponseType$inboundSchema,
-    models: z.array(
-      z.lazy(() => CreateAgentRequestLoadBalancerAgentsModels$inboundSchema),
-    ),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type: CreateAgentRequestLoadBalancerAgentsResponseType$inboundSchema,
+      models: z.array(
+        z.lazy(() => CreateAgentRequestLoadBalancerAgentsModels$inboundSchema),
+      ),
+    })
+  );
 
 export function createAgentRequestLoadBalancerAgentsResponse1FromJSON(
   jsonString: string,
@@ -5602,7 +5865,9 @@ export const CreateAgentRequestFallbackModelConfigurationLoadBalancer$inboundSch
     CreateAgentRequestFallbackModelConfigurationLoadBalancer,
     z.ZodTypeDef,
     unknown
-  > = z.lazy(() => CreateAgentRequestLoadBalancerAgentsResponse1$inboundSchema);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.lazy(() => CreateAgentRequestLoadBalancerAgentsResponse1$inboundSchema)
+  );
 
 export function createAgentRequestFallbackModelConfigurationLoadBalancerFromJSON(
   jsonString: string,
@@ -5625,13 +5890,15 @@ export const CreateAgentRequestFallbackModelConfigurationTimeout$inboundSchema:
     CreateAgentRequestFallbackModelConfigurationTimeout,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    call_timeout: z.number(),
-  }).transform((v) => {
-    return remap$(v, {
-      "call_timeout": "callTimeout",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      call_timeout: z.number(),
+    }).transform((v) => {
+      return remap$(v, {
+        "call_timeout": "callTimeout",
+      });
+    })
+  );
 
 export function createAgentRequestFallbackModelConfigurationTimeoutFromJSON(
   jsonString: string,
@@ -5653,14 +5920,16 @@ export function createAgentRequestFallbackModelConfigurationTimeoutFromJSON(
 export const CreateAgentRequestFallbackModelConfigurationAgentsResponseType$inboundSchema:
   z.ZodNativeEnum<
     typeof CreateAgentRequestFallbackModelConfigurationAgentsResponseType
-  > = z.nativeEnum(
-    CreateAgentRequestFallbackModelConfigurationAgentsResponseType,
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.nativeEnum(CreateAgentRequestFallbackModelConfigurationAgentsResponseType)
   );
 
 /** @internal */
 export const CreateAgentRequestFallbackModelConfigurationTtl$inboundSchema:
-  z.ZodNativeEnum<typeof CreateAgentRequestFallbackModelConfigurationTtl> = z
-    .nativeEnum(CreateAgentRequestFallbackModelConfigurationTtl);
+  z.ZodNativeEnum<typeof CreateAgentRequestFallbackModelConfigurationTtl> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(CreateAgentRequestFallbackModelConfigurationTtl)
+    );
 
 /** @internal */
 export const CreateAgentRequestFallbackModelConfigurationCacheControl$inboundSchema:
@@ -5668,13 +5937,14 @@ export const CreateAgentRequestFallbackModelConfigurationCacheControl$inboundSch
     CreateAgentRequestFallbackModelConfigurationCacheControl,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    type:
-      CreateAgentRequestFallbackModelConfigurationAgentsResponseType$inboundSchema,
-    ttl: CreateAgentRequestFallbackModelConfigurationTtl$inboundSchema.default(
-      "5m",
-    ),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type:
+        CreateAgentRequestFallbackModelConfigurationAgentsResponseType$inboundSchema,
+      ttl: CreateAgentRequestFallbackModelConfigurationTtl$inboundSchema
+        .default("5m"),
+    })
+  );
 
 export function createAgentRequestFallbackModelConfigurationCacheControlFromJSON(
   jsonString: string,
@@ -5697,97 +5967,95 @@ export const CreateAgentRequestFallbackModelConfigurationParameters$inboundSchem
     CreateAgentRequestFallbackModelConfigurationParameters,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    name: z.string().optional(),
-    frequency_penalty: z.nullable(z.number()).optional(),
-    max_tokens: z.nullable(z.number().int()).optional(),
-    max_completion_tokens: z.nullable(z.number().int()).optional(),
-    presence_penalty: z.nullable(z.number()).optional(),
-    response_format: z.union([
-      z.lazy(() => CreateAgentRequestResponseFormatAgentsText$inboundSchema),
-      z.lazy(() =>
-        CreateAgentRequestResponseFormatAgentsJSONObject$inboundSchema
-      ),
-      z.lazy(() =>
-        CreateAgentRequestResponseFormatAgentsResponse201ApplicationJSONResponseBodyJSONSchema$inboundSchema
-      ),
-    ]).optional(),
-    reasoning_effort:
-      CreateAgentRequestFallbackModelConfigurationReasoningEffort$inboundSchema
-        .optional(),
-    verbosity: z.string().optional(),
-    seed: z.nullable(z.number()).optional(),
-    stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
-    thinking: z.union([
-      components.ThinkingConfigDisabledSchema$inboundSchema,
-      components.ThinkingConfigEnabledSchema$inboundSchema,
-      components.ThinkingConfigAdaptiveSchema$inboundSchema,
-      components.ThinkingConfigBetweenToolsSchema$inboundSchema,
-    ]).optional(),
-    temperature: z.nullable(z.number()).optional(),
-    top_p: z.nullable(z.number()).optional(),
-    top_k: z.nullable(z.number()).optional(),
-    tool_choice: z.union([
-      z.lazy(() => CreateAgentRequestToolChoiceAgentsResponse2$inboundSchema),
-      CreateAgentRequestToolChoiceAgentsResponse1$inboundSchema,
-    ]).optional(),
-    parallel_tool_calls: z.boolean().optional(),
-    modalities: z.nullable(
-      z.array(
-        CreateAgentRequestFallbackModelConfigurationModalities$inboundSchema,
-      ),
-    ).optional(),
-    guardrails: z.array(
-      z.lazy(() =>
-        CreateAgentRequestFallbackModelConfigurationGuardrails$inboundSchema
-      ),
-    ).optional(),
-    plugins: z.array(
-      z.union([
-        components.PIIRedactionPlugin$inboundSchema.and(
-          z.object({ id: z.literal("pii_redaction") }),
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      name: z.string().optional(),
+      frequency_penalty: z.nullable(z.number()).optional(),
+      max_tokens: z.nullable(z.number().int()).optional(),
+      max_completion_tokens: z.nullable(z.number().int()).optional(),
+      presence_penalty: z.nullable(z.number()).optional(),
+      response_format: z.union([
+        z.lazy(() => CreateAgentRequestResponseFormatAgentsText$inboundSchema),
+        z.lazy(() =>
+          CreateAgentRequestResponseFormatAgentsJSONObject$inboundSchema
         ),
-        components.ResponseHealingPlugin$inboundSchema,
-        components.TraceScrubbingPlugin$inboundSchema,
-      ]),
-    ).optional(),
-    fallback_on_codes: z.array(z.number().int()).optional(),
-    fallbacks: z.array(
-      z.lazy(() =>
+        z.lazy(() =>
+          CreateAgentRequestResponseFormatAgentsResponse201ApplicationJSONResponseBodyJSONSchema$inboundSchema
+        ),
+      ]).optional(),
+      reasoning_effort:
+        CreateAgentRequestFallbackModelConfigurationReasoningEffort$inboundSchema
+          .optional(),
+      verbosity: z.string().optional(),
+      seed: z.nullable(z.number()).optional(),
+      stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
+      thinking: z.union([
+        components.ThinkingConfigDisabledSchema$inboundSchema,
+        components.ThinkingConfigEnabledSchema$inboundSchema,
+        components.ThinkingConfigAdaptiveSchema$inboundSchema,
+        components.ThinkingConfigBetweenToolsSchema$inboundSchema,
+      ]).optional(),
+      temperature: z.nullable(z.number()).optional(),
+      top_p: z.nullable(z.number()).optional(),
+      top_k: z.nullable(z.number()).optional(),
+      tool_choice: z.union([
+        z.lazy(() => CreateAgentRequestToolChoiceAgentsResponse2$inboundSchema),
+        CreateAgentRequestToolChoiceAgentsResponse1$inboundSchema,
+      ]).optional(),
+      parallel_tool_calls: z.boolean().optional(),
+      modalities: z.nullable(
+        z.array(
+          CreateAgentRequestFallbackModelConfigurationModalities$inboundSchema,
+        ),
+      ).optional(),
+      guardrails: z.array(z.lazy(() =>
+        CreateAgentRequestFallbackModelConfigurationGuardrails$inboundSchema
+      )).optional(),
+      plugins: z.array(
+        z.union([
+          components.PIIRedactionPlugin$inboundSchema.and(
+            z.object({ id: z.literal("pii_redaction") }),
+          ),
+          components.ResponseHealingPlugin$inboundSchema,
+          components.TraceScrubbingPlugin$inboundSchema,
+        ]),
+      ).optional(),
+      fallback_on_codes: z.array(z.number().int()).optional(),
+      fallbacks: z.array(z.lazy(() =>
         CreateAgentRequestFallbackModelConfigurationFallbacks$inboundSchema
-      ),
-    ).optional(),
-    cache: z.lazy(() =>
-      CreateAgentRequestFallbackModelConfigurationCache$inboundSchema
-    ).optional(),
-    load_balancer: z.lazy(() =>
-      CreateAgentRequestLoadBalancerAgentsResponse1$inboundSchema
-    ).optional(),
-    timeout: z.lazy(() =>
-      CreateAgentRequestFallbackModelConfigurationTimeout$inboundSchema
-    ).optional(),
-    cache_control: z.lazy(() =>
-      CreateAgentRequestFallbackModelConfigurationCacheControl$inboundSchema
-    ).optional(),
-    prompt_cache_key: z.string().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "frequency_penalty": "frequencyPenalty",
-      "max_tokens": "maxTokens",
-      "max_completion_tokens": "maxCompletionTokens",
-      "presence_penalty": "presencePenalty",
-      "response_format": "responseFormat",
-      "reasoning_effort": "reasoningEffort",
-      "top_p": "topP",
-      "top_k": "topK",
-      "tool_choice": "toolChoice",
-      "parallel_tool_calls": "parallelToolCalls",
-      "fallback_on_codes": "fallbackOnCodes",
-      "load_balancer": "loadBalancer",
-      "cache_control": "cacheControl",
-      "prompt_cache_key": "promptCacheKey",
-    });
-  });
+      )).optional(),
+      cache: z.lazy(() =>
+        CreateAgentRequestFallbackModelConfigurationCache$inboundSchema
+      ).optional(),
+      load_balancer: z.lazy(() =>
+        CreateAgentRequestLoadBalancerAgentsResponse1$inboundSchema
+      ).optional(),
+      timeout: z.lazy(() =>
+        CreateAgentRequestFallbackModelConfigurationTimeout$inboundSchema
+      ).optional(),
+      cache_control: z.lazy(() =>
+        CreateAgentRequestFallbackModelConfigurationCacheControl$inboundSchema
+      ).optional(),
+      prompt_cache_key: z.string().optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "frequency_penalty": "frequencyPenalty",
+        "max_tokens": "maxTokens",
+        "max_completion_tokens": "maxCompletionTokens",
+        "presence_penalty": "presencePenalty",
+        "response_format": "responseFormat",
+        "reasoning_effort": "reasoningEffort",
+        "top_p": "topP",
+        "top_k": "topK",
+        "tool_choice": "toolChoice",
+        "parallel_tool_calls": "parallelToolCalls",
+        "fallback_on_codes": "fallbackOnCodes",
+        "load_balancer": "loadBalancer",
+        "cache_control": "cacheControl",
+        "prompt_cache_key": "promptCacheKey",
+      });
+    })
+  );
 
 export function createAgentRequestFallbackModelConfigurationParametersFromJSON(
   jsonString: string,
@@ -5810,14 +6078,16 @@ export const CreateAgentRequestFallbackModelConfigurationRetry$inboundSchema:
     CreateAgentRequestFallbackModelConfigurationRetry,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    count: z.number().default(3),
-    on_codes: z.array(z.number()).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "on_codes": "onCodes",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      count: z.number().default(3),
+      on_codes: z.array(z.number()).optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "on_codes": "onCodes",
+      });
+    })
+  );
 
 export function createAgentRequestFallbackModelConfigurationRetryFromJSON(
   jsonString: string,
@@ -5841,15 +6111,17 @@ export const CreateAgentRequestFallbackModelConfiguration2$inboundSchema:
     CreateAgentRequestFallbackModelConfiguration2,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    id: z.string(),
-    parameters: z.lazy(() =>
-      CreateAgentRequestFallbackModelConfigurationParameters$inboundSchema
-    ).optional(),
-    retry: z.lazy(() =>
-      CreateAgentRequestFallbackModelConfigurationRetry$inboundSchema
-    ).optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string(),
+      parameters: z.lazy(() =>
+        CreateAgentRequestFallbackModelConfigurationParameters$inboundSchema
+      ).optional(),
+      retry: z.lazy(() =>
+        CreateAgentRequestFallbackModelConfigurationRetry$inboundSchema
+      ).optional(),
+    })
+  );
 
 export function createAgentRequestFallbackModelConfiguration2FromJSON(
   jsonString: string,
@@ -5873,10 +6145,12 @@ export const CreateAgentRequestFallbackModelConfiguration$inboundSchema:
     CreateAgentRequestFallbackModelConfiguration,
     z.ZodTypeDef,
     unknown
-  > = z.union([
-    z.lazy(() => CreateAgentRequestFallbackModelConfiguration2$inboundSchema),
-    z.string(),
-  ]);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.union([
+      z.lazy(() => CreateAgentRequestFallbackModelConfiguration2$inboundSchema),
+      z.string(),
+    ])
+  );
 
 export function createAgentRequestFallbackModelConfigurationFromJSON(
   jsonString: string,
@@ -5895,28 +6169,28 @@ export function createAgentRequestFallbackModelConfigurationFromJSON(
 }
 
 /** @internal */
-export const Model$inboundSchema: z.ZodType<Model, z.ZodTypeDef, unknown> = z
-  .object({
-    id: z.string(),
-    integration_id: z.nullable(z.string()).optional(),
-    parameters: z.nullable(
-      z.lazy(() => CreateAgentRequestParameters$inboundSchema),
-    ).optional(),
-    retry: z.lazy(() => CreateAgentRequestRetry$inboundSchema).optional(),
-    fallback_models: z.nullable(
-      z.array(z.union([
+export const Model$inboundSchema: z.ZodType<Model, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string(),
+      integration_id: z.nullable(z.string()).optional(),
+      parameters: z.nullable(
+        z.lazy(() => CreateAgentRequestParameters$inboundSchema),
+      ).optional(),
+      retry: z.lazy(() => CreateAgentRequestRetry$inboundSchema).optional(),
+      fallback_models: z.nullable(z.array(z.union([
         z.lazy(() =>
           CreateAgentRequestFallbackModelConfiguration2$inboundSchema
         ),
         z.string(),
-      ])),
-    ).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "integration_id": "integrationId",
-      "fallback_models": "fallbackModels",
-    });
-  });
+      ]))).optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "integration_id": "integrationId",
+        "fallback_models": "fallbackModels",
+      });
+    })
+  );
 
 export function modelFromJSON(
   jsonString: string,
@@ -5933,54 +6207,56 @@ export const CreateAgentRequestResponseBody$inboundSchema: z.ZodType<
   CreateAgentRequestResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  _id: z.string(),
-  key: z.string(),
-  display_name: z.string().optional(),
-  project_id: z.string(),
-  created_by_id: z.nullable(z.string()).optional(),
-  updated_by_id: z.nullable(z.string()).optional(),
-  created: z.string().optional(),
-  updated: z.string().optional(),
-  status: CreateAgentRequestStatus$inboundSchema,
-  version: z.string().optional(),
-  path: z.string(),
-  memory_stores: z.array(z.string()).optional(),
-  team_of_agents: z.array(
-    z.lazy(() => CreateAgentRequestTeamOfAgents$inboundSchema),
-  ).optional(),
-  skills: z.array(z.string()).optional(),
-  agent_plugins: z.array(
-    z.lazy(() => CreateAgentRequestAgentPlugins$inboundSchema),
-  ).optional(),
-  metrics: z.lazy(() => Metrics$inboundSchema).optional(),
-  variables: z.record(z.any()).optional(),
-  knowledge_bases: z.array(
-    z.lazy(() => CreateAgentRequestKnowledgeBases$inboundSchema),
-  ).optional(),
-  source: CreateAgentRequestSource$inboundSchema.optional(),
-  engine: CreateAgentRequestEngine$inboundSchema.default("text"),
-  type: CreateAgentRequestType$inboundSchema.default("internal"),
-  role: z.string(),
-  description: z.string(),
-  system_prompt: z.nullable(z.string()).optional(),
-  instructions: z.string(),
-  settings: z.lazy(() => CreateAgentRequestSettings$inboundSchema).optional(),
-  model: z.lazy(() => Model$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "_id": "id",
-    "display_name": "displayName",
-    "project_id": "projectId",
-    "created_by_id": "createdById",
-    "updated_by_id": "updatedById",
-    "memory_stores": "memoryStores",
-    "team_of_agents": "teamOfAgents",
-    "agent_plugins": "agentPlugins",
-    "knowledge_bases": "knowledgeBases",
-    "system_prompt": "systemPrompt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    _id: z.string(),
+    key: z.string(),
+    display_name: z.string().optional(),
+    project_id: z.string(),
+    created_by_id: z.nullable(z.string()).optional(),
+    updated_by_id: z.nullable(z.string()).optional(),
+    created: z.string().optional(),
+    updated: z.string().optional(),
+    status: CreateAgentRequestStatus$inboundSchema,
+    version: z.string().optional(),
+    path: z.string(),
+    memory_stores: z.array(z.string()).optional(),
+    team_of_agents: z.array(
+      z.lazy(() => CreateAgentRequestTeamOfAgents$inboundSchema),
+    ).optional(),
+    skills: z.array(z.string()).optional(),
+    agent_plugins: z.array(
+      z.lazy(() => CreateAgentRequestAgentPlugins$inboundSchema),
+    ).optional(),
+    metrics: z.lazy(() => Metrics$inboundSchema).optional(),
+    variables: z.record(z.any()).optional(),
+    knowledge_bases: z.array(
+      z.lazy(() => CreateAgentRequestKnowledgeBases$inboundSchema),
+    ).optional(),
+    source: CreateAgentRequestSource$inboundSchema.optional(),
+    engine: CreateAgentRequestEngine$inboundSchema.default("text"),
+    type: CreateAgentRequestType$inboundSchema.default("internal"),
+    role: z.string(),
+    description: z.string(),
+    system_prompt: z.nullable(z.string()).optional(),
+    instructions: z.string(),
+    settings: z.lazy(() => CreateAgentRequestSettings$inboundSchema).optional(),
+    model: z.lazy(() => Model$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "_id": "id",
+      "display_name": "displayName",
+      "project_id": "projectId",
+      "created_by_id": "createdById",
+      "updated_by_id": "updatedById",
+      "memory_stores": "memoryStores",
+      "team_of_agents": "teamOfAgents",
+      "agent_plugins": "agentPlugins",
+      "knowledge_bases": "knowledgeBases",
+      "system_prompt": "systemPrompt",
+    });
+  })
+);
 
 export function createAgentRequestResponseBodyFromJSON(
   jsonString: string,

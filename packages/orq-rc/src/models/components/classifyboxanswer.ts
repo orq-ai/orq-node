@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { ClassifyBox, ClassifyBox$inboundSchema } from "./classifybox.js";
@@ -22,11 +22,13 @@ export const ClassifyBoxAnswer$inboundSchema: z.ZodType<
   ClassifyBoxAnswer,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  box: ClassifyBox$inboundSchema,
-  confidence: z.number().optional(),
-  type: z.literal("box"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    box: ClassifyBox$inboundSchema,
+    confidence: z.number().optional(),
+    type: z.literal("box"),
+  })
+);
 
 export function classifyBoxAnswerFromJSON(
   jsonString: string,

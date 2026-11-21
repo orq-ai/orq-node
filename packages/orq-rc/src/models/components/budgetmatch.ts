@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -19,9 +19,11 @@ export const BudgetMatch$inboundSchema: z.ZodType<
   BudgetMatch,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  cel: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    cel: z.string().optional(),
+  })
+);
 /** @internal */
 export type BudgetMatch$Outbound = {
   cel?: string | undefined;
@@ -32,9 +34,11 @@ export const BudgetMatch$outboundSchema: z.ZodType<
   BudgetMatch$Outbound,
   z.ZodTypeDef,
   BudgetMatch
-> = z.object({
-  cel: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    cel: z.string().optional(),
+  })
+);
 
 export function budgetMatchToJSON(budgetMatch: BudgetMatch): string {
   return JSON.stringify(BudgetMatch$outboundSchema.parse(budgetMatch));

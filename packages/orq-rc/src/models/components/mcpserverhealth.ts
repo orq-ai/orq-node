@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -39,25 +39,27 @@ export const McpServerHealth$inboundSchema: z.ZodType<
   McpServerHealth,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  status: McpHealthStatus$inboundSchema.optional(),
-  coverage: McpHealthCoverage$inboundSchema.optional(),
-  last_checked_at: z.string().optional(),
-  last_healthy_at: z.string().optional(),
-  latency_ms: z.number().int().optional(),
-  consecutive_failures: z.number().int().optional(),
-  error_message: z.string().optional(),
-  recent_checks: z.array(McpHealthCheckResult$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "last_checked_at": "lastCheckedAt",
-    "last_healthy_at": "lastHealthyAt",
-    "latency_ms": "latencyMs",
-    "consecutive_failures": "consecutiveFailures",
-    "error_message": "errorMessage",
-    "recent_checks": "recentChecks",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    status: McpHealthStatus$inboundSchema.optional(),
+    coverage: McpHealthCoverage$inboundSchema.optional(),
+    last_checked_at: z.string().optional(),
+    last_healthy_at: z.string().optional(),
+    latency_ms: z.number().int().optional(),
+    consecutive_failures: z.number().int().optional(),
+    error_message: z.string().optional(),
+    recent_checks: z.array(McpHealthCheckResult$inboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "last_checked_at": "lastCheckedAt",
+      "last_healthy_at": "lastHealthyAt",
+      "latency_ms": "latencyMs",
+      "consecutive_failures": "consecutiveFailures",
+      "error_message": "errorMessage",
+      "recent_checks": "recentChecks",
+    });
+  })
+);
 
 export function mcpServerHealthFromJSON(
   jsonString: string,

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 
 export const ThreadKind = {
@@ -12,8 +13,8 @@ export const ThreadKind = {
 export type ThreadKind = ClosedEnum<typeof ThreadKind>;
 
 /** @internal */
-export const ThreadKind$inboundSchema: z.ZodNativeEnum<typeof ThreadKind> = z
-  .nativeEnum(ThreadKind);
+export const ThreadKind$inboundSchema: z.ZodNativeEnum<typeof ThreadKind> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ThreadKind));
 /** @internal */
 export const ThreadKind$outboundSchema: z.ZodNativeEnum<typeof ThreadKind> =
   ThreadKind$inboundSchema;

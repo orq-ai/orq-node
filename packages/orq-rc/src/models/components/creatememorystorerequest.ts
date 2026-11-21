@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import {
   MemoryStoreEmbeddingConfig,
   MemoryStoreEmbeddingConfig$Outbound,
@@ -38,17 +39,19 @@ export const CreateMemoryStoreRequest$outboundSchema: z.ZodType<
   CreateMemoryStoreRequest$Outbound,
   z.ZodTypeDef,
   CreateMemoryStoreRequest
-> = z.object({
-  key: z.string(),
-  embeddingConfig: MemoryStoreEmbeddingConfig$outboundSchema,
-  description: z.string(),
-  ttl: z.nullable(z.number()).optional(),
-  path: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    embeddingConfig: "embedding_config",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    key: z.string(),
+    embeddingConfig: MemoryStoreEmbeddingConfig$outboundSchema,
+    description: z.string(),
+    ttl: z.nullable(z.number()).optional(),
+    path: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      embeddingConfig: "embedding_config",
+    });
+  })
+);
 
 export function createMemoryStoreRequestToJSON(
   createMemoryStoreRequest: CreateMemoryStoreRequest,

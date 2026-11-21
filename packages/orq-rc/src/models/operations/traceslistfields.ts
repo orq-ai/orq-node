@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type TracesListFieldsRequest = {
   /**
@@ -22,13 +23,15 @@ export const TracesListFieldsRequest$outboundSchema: z.ZodType<
   TracesListFieldsRequest$Outbound,
   z.ZodTypeDef,
   TracesListFieldsRequest
-> = z.object({
-  allAccessibleProjects: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    allAccessibleProjects: "all_accessible_projects",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    allAccessibleProjects: z.boolean().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      allAccessibleProjects: "all_accessible_projects",
+    });
+  })
+);
 
 export function tracesListFieldsRequestToJSON(
   tracesListFieldsRequest: TracesListFieldsRequest,

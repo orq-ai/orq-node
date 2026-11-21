@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -23,9 +23,11 @@ export const ModelBudgetScopeRestResponse$inboundSchema: z.ZodType<
   ModelBudgetScopeRestResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  modelId: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    modelId: z.string(),
+  })
+);
 
 export function modelBudgetScopeRestResponseFromJSON(
   jsonString: string,

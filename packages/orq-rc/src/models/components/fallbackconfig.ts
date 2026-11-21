@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type FallbackConfig = {
   model: string;
@@ -18,9 +19,11 @@ export const FallbackConfig$outboundSchema: z.ZodType<
   FallbackConfig$Outbound,
   z.ZodTypeDef,
   FallbackConfig
-> = z.object({
-  model: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model: z.string(),
+  })
+);
 
 export function fallbackConfigToJSON(fallbackConfig: FallbackConfig): string {
   return JSON.stringify(FallbackConfig$outboundSchema.parse(fallbackConfig));

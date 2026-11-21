@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 
 export const ManagementDomainGroup = {
@@ -13,4 +14,4 @@ export type ManagementDomainGroup = ClosedEnum<typeof ManagementDomainGroup>;
 /** @internal */
 export const ManagementDomainGroup$inboundSchema: z.ZodNativeEnum<
   typeof ManagementDomainGroup
-> = z.nativeEnum(ManagementDomainGroup);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ManagementDomainGroup));

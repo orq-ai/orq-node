@@ -3,8 +3,10 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../lib/primitives.js";
 import {
   collectExtraKeys as collectExtraKeys$,
+  lazySchema as lazySchema$,
   safeParse,
 } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
@@ -69,6 +71,10 @@ export type OutputText = {
    */
   text: string;
   /**
+   * An opaque signature some providers, such as Google Gemini, attach to their output. Send it back unchanged with the item so the model can continue its reasoning.
+   */
+  thoughtSignature?: string | undefined;
+  /**
    * The part type.
    */
   type: ResponseOutputMessageContentType;
@@ -124,17 +130,21 @@ export type ResponseOutputMessage = {
 /** @internal */
 export const ResponseOutputMessageContent2Type$inboundSchema: z.ZodNativeEnum<
   typeof ResponseOutputMessageContent2Type
-> = z.nativeEnum(ResponseOutputMessageContent2Type);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(ResponseOutputMessageContent2Type)
+);
 
 /** @internal */
 export const Refusal$inboundSchema: z.ZodType<Refusal, z.ZodTypeDef, unknown> =
-  collectExtraKeys$(
-    z.object({
-      refusal: z.string(),
-      type: ResponseOutputMessageContent2Type$inboundSchema,
-    }).catchall(z.any()),
-    "additionalProperties",
-    true,
+  /* @__PURE__ */ lazySchema$(() =>
+    collectExtraKeys$(
+      z.object({
+        refusal: z.string(),
+        type: ResponseOutputMessageContent2Type$inboundSchema,
+      }).catchall(z.any()),
+      "additionalProperties",
+      true,
+    )
   );
 
 export function refusalFromJSON(
@@ -150,22 +160,31 @@ export function refusalFromJSON(
 /** @internal */
 export const ResponseOutputMessageContentType$inboundSchema: z.ZodNativeEnum<
   typeof ResponseOutputMessageContentType
-> = z.nativeEnum(ResponseOutputMessageContentType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(ResponseOutputMessageContentType)
+);
 
 /** @internal */
 export const OutputText$inboundSchema: z.ZodType<
   OutputText,
   z.ZodTypeDef,
   unknown
-> = collectExtraKeys$(
-  z.object({
-    annotations: z.array(z.record(z.any())).optional(),
-    logprobs: z.array(z.record(z.any())).optional(),
-    text: z.string(),
-    type: ResponseOutputMessageContentType$inboundSchema,
-  }).catchall(z.any()),
-  "additionalProperties",
-  true,
+> = /* @__PURE__ */ lazySchema$(() =>
+  collectExtraKeys$(
+    z.object({
+      annotations: z.array(z.record(z.any())).optional(),
+      logprobs: z.array(z.record(z.any())).optional(),
+      text: z.string(),
+      thought_signature: z.string().optional(),
+      type: ResponseOutputMessageContentType$inboundSchema,
+    }).catchall(z.any()),
+    "additionalProperties",
+    true,
+  ).transform((v) => {
+    return remap$(v, {
+      "thought_signature": "thoughtSignature",
+    });
+  })
 );
 
 export function outputTextFromJSON(
@@ -180,11 +199,13 @@ export function outputTextFromJSON(
 
 /** @internal */
 export const Content$inboundSchema: z.ZodType<Content, z.ZodTypeDef, unknown> =
-  z.union([
-    z.lazy(() => OutputText$inboundSchema),
-    z.lazy(() => Refusal$inboundSchema),
-    z.record(z.any()),
-  ]);
+  /* @__PURE__ */ lazySchema$(() =>
+    z.union([
+      z.lazy(() => OutputText$inboundSchema),
+      z.lazy(() => Refusal$inboundSchema),
+      z.record(z.any()),
+    ])
+  );
 
 export function contentFromJSON(
   jsonString: string,
@@ -199,28 +220,32 @@ export function contentFromJSON(
 /** @internal */
 export const ResponseOutputMessageType$inboundSchema: z.ZodNativeEnum<
   typeof ResponseOutputMessageType
-> = z.nativeEnum(ResponseOutputMessageType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ResponseOutputMessageType));
 
 /** @internal */
 export const ResponseOutputMessage$inboundSchema: z.ZodType<
   ResponseOutputMessage,
   z.ZodTypeDef,
   unknown
-> = collectExtraKeys$(
-  z.object({
-    content: z.array(z.union([
-      z.lazy(() => OutputText$inboundSchema),
-      z.lazy(() => Refusal$inboundSchema),
-      z.record(z.any()),
-    ])),
-    id: z.string().optional(),
-    phase: z.string().optional(),
-    role: z.string(),
-    status: z.string().optional(),
-    type: ResponseOutputMessageType$inboundSchema,
-  }).catchall(z.any()),
-  "additionalProperties",
-  true,
+> = /* @__PURE__ */ lazySchema$(() =>
+  collectExtraKeys$(
+    z.object({
+      content: z.array(
+        z.union([
+          z.lazy(() => OutputText$inboundSchema),
+          z.lazy(() => Refusal$inboundSchema),
+          z.record(z.any()),
+        ]),
+      ),
+      id: z.string().optional(),
+      phase: z.string().optional(),
+      role: z.string(),
+      status: z.string().optional(),
+      type: ResponseOutputMessageType$inboundSchema,
+    }).catchall(z.any()),
+    "additionalProperties",
+    true,
+  )
 );
 
 export function responseOutputMessageFromJSON(

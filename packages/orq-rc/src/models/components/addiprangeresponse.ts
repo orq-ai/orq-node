@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { IPRange, IPRange$inboundSchema } from "./iprange.js";
@@ -17,9 +17,11 @@ export const AddIPRangeResponse$inboundSchema: z.ZodType<
   AddIPRangeResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  range: IPRange$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    range: IPRange$inboundSchema,
+  })
+);
 
 export function addIPRangeResponseFromJSON(
   jsonString: string,

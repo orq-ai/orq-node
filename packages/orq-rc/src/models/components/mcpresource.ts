@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { McpIcon, McpIcon$inboundSchema } from "./mcpicon.js";
@@ -45,7 +45,7 @@ export const McpResourceMeta$inboundSchema: z.ZodType<
   McpResourceMeta,
   z.ZodTypeDef,
   unknown
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function mcpResourceMetaFromJSON(
   jsonString: string,
@@ -62,23 +62,25 @@ export const McpResource$inboundSchema: z.ZodType<
   McpResource,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  uri: z.string().optional(),
-  name: z.string().optional(),
-  title: z.string().optional(),
-  description: z.string().optional(),
-  mime_type: z.string().optional(),
-  size: z.string().optional(),
-  annotations: McpResourceAnnotations$inboundSchema.optional(),
-  icons: z.array(McpIcon$inboundSchema).optional(),
-  meta: z.lazy(() => McpResourceMeta$inboundSchema).optional(),
-  selection_id: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "mime_type": "mimeType",
-    "selection_id": "selectionId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    uri: z.string().optional(),
+    name: z.string().optional(),
+    title: z.string().optional(),
+    description: z.string().optional(),
+    mime_type: z.string().optional(),
+    size: z.string().optional(),
+    annotations: McpResourceAnnotations$inboundSchema.optional(),
+    icons: z.array(McpIcon$inboundSchema).optional(),
+    meta: z.lazy(() => McpResourceMeta$inboundSchema).optional(),
+    selection_id: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "mime_type": "mimeType",
+      "selection_id": "selectionId",
+    });
+  })
+);
 
 export function mcpResourceFromJSON(
   jsonString: string,

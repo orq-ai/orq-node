@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -17,10 +17,12 @@ export const TraceCompute$inboundSchema: z.ZodType<
   TraceCompute,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  metric: z.string().optional(),
-  op: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    metric: z.string().optional(),
+    op: z.string().optional(),
+  })
+);
 /** @internal */
 export type TraceCompute$Outbound = {
   metric?: string | undefined;
@@ -32,10 +34,12 @@ export const TraceCompute$outboundSchema: z.ZodType<
   TraceCompute$Outbound,
   z.ZodTypeDef,
   TraceCompute
-> = z.object({
-  metric: z.string().optional(),
-  op: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    metric: z.string().optional(),
+    op: z.string().optional(),
+  })
+);
 
 export function traceComputeToJSON(traceCompute: TraceCompute): string {
   return JSON.stringify(TraceCompute$outboundSchema.parse(traceCompute));

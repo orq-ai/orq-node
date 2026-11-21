@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import * as components from "../components/index.js";
 
 export type WorkspaceSecurityAddIPRangeRequest = {
@@ -22,15 +23,17 @@ export const WorkspaceSecurityAddIPRangeRequest$outboundSchema: z.ZodType<
   WorkspaceSecurityAddIPRangeRequest$Outbound,
   z.ZodTypeDef,
   WorkspaceSecurityAddIPRangeRequest
-> = z.object({
-  workspaceKey: z.string(),
-  addIPRangeRequest: components.AddIPRangeRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    workspaceKey: "workspace_key",
-    addIPRangeRequest: "AddIPRangeRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    workspaceKey: z.string(),
+    addIPRangeRequest: components.AddIPRangeRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      workspaceKey: "workspace_key",
+      addIPRangeRequest: "AddIPRangeRequest",
+    });
+  })
+);
 
 export function workspaceSecurityAddIPRangeRequestToJSON(
   workspaceSecurityAddIPRangeRequest: WorkspaceSecurityAddIPRangeRequest,

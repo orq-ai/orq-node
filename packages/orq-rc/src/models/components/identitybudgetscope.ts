@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -23,13 +23,15 @@ export const IdentityBudgetScope$inboundSchema: z.ZodType<
   IdentityBudgetScope,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  identity_external_id: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "identity_external_id": "identityExternalId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    identity_external_id: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "identity_external_id": "identityExternalId",
+    });
+  })
+);
 /** @internal */
 export type IdentityBudgetScope$Outbound = {
   identity_external_id?: string | undefined;
@@ -40,13 +42,15 @@ export const IdentityBudgetScope$outboundSchema: z.ZodType<
   IdentityBudgetScope$Outbound,
   z.ZodTypeDef,
   IdentityBudgetScope
-> = z.object({
-  identityExternalId: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    identityExternalId: "identity_external_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    identityExternalId: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      identityExternalId: "identity_external_id",
+    });
+  })
+);
 
 export function identityBudgetScopeToJSON(
   identityBudgetScope: IdentityBudgetScope,

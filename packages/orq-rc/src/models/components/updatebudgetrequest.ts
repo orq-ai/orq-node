@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import {
   BudgetAlert,
   BudgetAlert$Outbound,
@@ -87,24 +88,26 @@ export const UpdateBudgetRequest$outboundSchema: z.ZodType<
   UpdateBudgetRequest$Outbound,
   z.ZodTypeDef,
   UpdateBudgetRequest
-> = z.object({
-  limits: BudgetLimits$outboundSchema.optional(),
-  rateLimit: RateLimit$outboundSchema.optional(),
-  isActive: z.boolean().optional(),
-  expiresAt: z.date().transform(v => v.toISOString()).optional(),
-  clearExpiresAt: z.boolean().optional(),
-  match: BudgetMatch$outboundSchema.optional(),
-  alerts: z.array(BudgetAlert$outboundSchema).optional(),
-  clearAlerts: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    rateLimit: "rate_limit",
-    isActive: "is_active",
-    expiresAt: "expires_at",
-    clearExpiresAt: "clear_expires_at",
-    clearAlerts: "clear_alerts",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    limits: BudgetLimits$outboundSchema.optional(),
+    rateLimit: RateLimit$outboundSchema.optional(),
+    isActive: z.boolean().optional(),
+    expiresAt: z.date().transform(v => v.toISOString()).optional(),
+    clearExpiresAt: z.boolean().optional(),
+    match: BudgetMatch$outboundSchema.optional(),
+    alerts: z.array(BudgetAlert$outboundSchema).optional(),
+    clearAlerts: z.boolean().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      rateLimit: "rate_limit",
+      isActive: "is_active",
+      expiresAt: "expires_at",
+      clearExpiresAt: "clear_expires_at",
+      clearAlerts: "clear_alerts",
+    });
+  })
+);
 
 export function updateBudgetRequestToJSON(
   updateBudgetRequest: UpdateBudgetRequest,

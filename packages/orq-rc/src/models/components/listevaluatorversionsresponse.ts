@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -21,7 +21,7 @@ export const ListEvaluatorVersionsResponseData$inboundSchema: z.ZodType<
   ListEvaluatorVersionsResponseData,
   z.ZodTypeDef,
   unknown
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function listEvaluatorVersionsResponseDataFromJSON(
   jsonString: string,
@@ -38,15 +38,19 @@ export const ListEvaluatorVersionsResponse$inboundSchema: z.ZodType<
   ListEvaluatorVersionsResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: z.string(),
-  data: z.array(z.lazy(() => ListEvaluatorVersionsResponseData$inboundSchema)),
-  has_more: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    "has_more": "hasMore",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.string(),
+    data: z.array(
+      z.lazy(() => ListEvaluatorVersionsResponseData$inboundSchema),
+    ),
+    has_more: z.boolean(),
+  }).transform((v) => {
+    return remap$(v, {
+      "has_more": "hasMore",
+    });
+  })
+);
 
 export function listEvaluatorVersionsResponseFromJSON(
   jsonString: string,

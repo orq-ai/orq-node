@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 /**
  * StructuredInput names its fields after the template variables they feed, so
@@ -31,18 +32,20 @@ export const StructuredInput$outboundSchema: z.ZodType<
   StructuredInput$Outbound,
   z.ZodTypeDef,
   StructuredInput
-> = z.object({
-  systemInstructions: z.string().optional(),
-  userQuery: z.string().optional(),
-  retrievals: z.array(z.string()).optional(),
-  expectedOutput: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    systemInstructions: "system_instructions",
-    userQuery: "user_query",
-    expectedOutput: "expected_output",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    systemInstructions: z.string().optional(),
+    userQuery: z.string().optional(),
+    retrievals: z.array(z.string()).optional(),
+    expectedOutput: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      systemInstructions: "system_instructions",
+      userQuery: "user_query",
+      expectedOutput: "expected_output",
+    });
+  })
+);
 
 export function structuredInputToJSON(
   structuredInput: StructuredInput,

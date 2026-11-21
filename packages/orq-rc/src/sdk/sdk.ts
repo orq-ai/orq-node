@@ -24,6 +24,7 @@ import { GuardrailRules } from "./guardrailrules.js";
 import { Hub } from "./hub.js";
 import { Identities } from "./identities.js";
 import { Knowledge } from "./knowledge.js";
+import { Live } from "./live.js";
 import { Logs } from "./logs.js";
 import { ManagementKeys } from "./managementkeys.js";
 import { McpGateways } from "./mcpgateways.js";
@@ -51,6 +52,7 @@ import { Tools } from "./tools.js";
 import { Traces } from "./traces.js";
 import { Users } from "./users.js";
 import { Views } from "./views.js";
+import { VirtualModels } from "./virtualmodels.js";
 import { Webhooks } from "./webhooks.js";
 import { Websearch } from "./websearch.js";
 import { Workspaces } from "./workspaces.js";
@@ -287,6 +289,11 @@ export class Orq extends ClientSDK {
     return (this._users ??= new Users(this._options));
   }
 
+  private _virtualModels?: VirtualModels;
+  get virtualModels(): VirtualModels {
+    return (this._virtualModels ??= new VirtualModels(this._options));
+  }
+
   private _webhooks?: Webhooks;
   get webhooks(): Webhooks {
     return (this._webhooks ??= new Webhooks(this._options));
@@ -320,6 +327,11 @@ export class Orq extends ClientSDK {
   private _batches?: Batches;
   get batches(): Batches {
     return (this._batches ??= new Batches(this._options));
+  }
+
+  private _live?: Live;
+  get live(): Live {
+    return (this._live ??= new Live(this._options));
   }
 
   private _websearch?: Websearch;

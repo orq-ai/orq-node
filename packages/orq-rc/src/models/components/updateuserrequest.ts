@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type UpdateUserRequest = {
   lastActivity?: Date | undefined;
@@ -24,14 +25,16 @@ export const UpdateUserRequest$outboundSchema: z.ZodType<
   UpdateUserRequest$Outbound,
   z.ZodTypeDef,
   UpdateUserRequest
-> = z.object({
-  lastActivity: z.date().transform(v => v.toISOString()).optional(),
-  role: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    lastActivity: "last_activity",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    lastActivity: z.date().transform(v => v.toISOString()).optional(),
+    role: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      lastActivity: "last_activity",
+    });
+  })
+);
 
 export function updateUserRequestToJSON(
   updateUserRequest: UpdateUserRequest,

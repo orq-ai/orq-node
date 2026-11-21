@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type SearchRerankConfig = {
   /**
@@ -32,15 +33,17 @@ export const SearchRerankConfig$outboundSchema: z.ZodType<
   SearchRerankConfig$Outbound,
   z.ZodTypeDef,
   SearchRerankConfig
-> = z.object({
-  model: z.string(),
-  threshold: z.number().default(0),
-  topK: z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    topK: "top_k",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model: z.string(),
+    threshold: z.number().default(0),
+    topK: z.number().int().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      topK: "top_k",
+    });
+  })
+);
 
 export function searchRerankConfigToJSON(
   searchRerankConfig: SearchRerankConfig,

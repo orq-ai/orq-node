@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import * as components from "../components/index.js";
 
 export type ModelFusionSetEnabledRequest = {
@@ -23,16 +24,18 @@ export const ModelFusionSetEnabledRequest$outboundSchema: z.ZodType<
   ModelFusionSetEnabledRequest$Outbound,
   z.ZodTypeDef,
   ModelFusionSetEnabledRequest
-> = z.object({
-  modelFusionId: z.string(),
-  setModelFusionEnabledRequest:
-    components.SetModelFusionEnabledRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    modelFusionId: "model_fusion_id",
-    setModelFusionEnabledRequest: "SetModelFusionEnabledRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    modelFusionId: z.string(),
+    setModelFusionEnabledRequest:
+      components.SetModelFusionEnabledRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      modelFusionId: "model_fusion_id",
+      setModelFusionEnabledRequest: "SetModelFusionEnabledRequest",
+    });
+  })
+);
 
 export function modelFusionSetEnabledRequestToJSON(
   modelFusionSetEnabledRequest: ModelFusionSetEnabledRequest,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -22,9 +22,11 @@ export const ProviderBudgetScope$inboundSchema: z.ZodType<
   ProviderBudgetScope,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  provider: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    provider: z.string().optional(),
+  })
+);
 /** @internal */
 export type ProviderBudgetScope$Outbound = {
   provider?: string | undefined;
@@ -35,9 +37,11 @@ export const ProviderBudgetScope$outboundSchema: z.ZodType<
   ProviderBudgetScope$Outbound,
   z.ZodTypeDef,
   ProviderBudgetScope
-> = z.object({
-  provider: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    provider: z.string().optional(),
+  })
+);
 
 export function providerBudgetScopeToJSON(
   providerBudgetScope: ProviderBudgetScope,

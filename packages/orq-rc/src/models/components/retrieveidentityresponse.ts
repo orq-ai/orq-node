@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { Identity, Identity$inboundSchema } from "./identity.js";
@@ -20,9 +20,11 @@ export const RetrieveIdentityResponse$inboundSchema: z.ZodType<
   RetrieveIdentityResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  identity: Identity$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    identity: Identity$inboundSchema,
+  })
+);
 
 export function retrieveIdentityResponseFromJSON(
   jsonString: string,

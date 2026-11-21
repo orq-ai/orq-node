@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type AlertDeleteRequest = {
   /**
@@ -22,13 +23,15 @@ export const AlertDeleteRequest$outboundSchema: z.ZodType<
   AlertDeleteRequest$Outbound,
   z.ZodTypeDef,
   AlertDeleteRequest
-> = z.object({
-  alertId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    alertId: "alert_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    alertId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      alertId: "alert_id",
+    });
+  })
+);
 
 export function alertDeleteRequestToJSON(
   alertDeleteRequest: AlertDeleteRequest,

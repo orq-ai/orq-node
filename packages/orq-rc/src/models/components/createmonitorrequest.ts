@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import {
   MonitorWidget,
@@ -65,8 +66,8 @@ export type CreateMonitorRequest = {
 };
 
 /** @internal */
-export const PresetKey$outboundSchema: z.ZodNativeEnum<typeof PresetKey> = z
-  .nativeEnum(PresetKey);
+export const PresetKey$outboundSchema: z.ZodNativeEnum<typeof PresetKey> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(PresetKey));
 
 /** @internal */
 export type CreateMonitorRequest$Outbound = {
@@ -83,21 +84,23 @@ export const CreateMonitorRequest$outboundSchema: z.ZodType<
   CreateMonitorRequest$Outbound,
   z.ZodTypeDef,
   CreateMonitorRequest
-> = z.object({
-  displayName: z.string(),
-  description: z.string().optional(),
-  projectId: z.string().optional(),
-  widgets: z.array(MonitorWidget$outboundSchema).optional(),
-  defaultRange: z.string().optional(),
-  presetKey: PresetKey$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    displayName: "display_name",
-    projectId: "project_id",
-    defaultRange: "default_range",
-    presetKey: "preset_key",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    displayName: z.string(),
+    description: z.string().optional(),
+    projectId: z.string().optional(),
+    widgets: z.array(MonitorWidget$outboundSchema).optional(),
+    defaultRange: z.string().optional(),
+    presetKey: PresetKey$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      displayName: "display_name",
+      projectId: "project_id",
+      defaultRange: "default_range",
+      presetKey: "preset_key",
+    });
+  })
+);
 
 export function createMonitorRequestToJSON(
   createMonitorRequest: CreateMonitorRequest,

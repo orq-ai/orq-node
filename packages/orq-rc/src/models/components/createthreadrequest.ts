@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import {
   ThreadBilling,
   ThreadBilling$Outbound,
@@ -56,31 +57,33 @@ export const CreateThreadRequest$outboundSchema: z.ZodType<
   CreateThreadRequest$Outbound,
   z.ZodTypeDef,
   CreateThreadRequest
-> = z.object({
-  externalId: z.string(),
-  duration: z.number(),
-  contactIds: z.array(z.string()),
-  billing: ThreadBilling$outboundSchema,
-  usage: ThreadUsage$outboundSchema,
-  tracesCount: z.number().int(),
-  tags: z.array(z.string()),
-  projectId: z.string().optional(),
-  startedAt: z.date().transform(v => v.toISOString()).optional(),
-  updatedAt: z.date().transform(v => v.toISOString()).optional(),
-  title: z.string().optional(),
-  client: z.string().optional(),
-  repo: z.string().optional(),
-  kind: ThreadKind$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    externalId: "external_id",
-    contactIds: "contact_ids",
-    tracesCount: "traces_count",
-    projectId: "project_id",
-    startedAt: "started_at",
-    updatedAt: "updated_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    externalId: z.string(),
+    duration: z.number(),
+    contactIds: z.array(z.string()),
+    billing: ThreadBilling$outboundSchema,
+    usage: ThreadUsage$outboundSchema,
+    tracesCount: z.number().int(),
+    tags: z.array(z.string()),
+    projectId: z.string().optional(),
+    startedAt: z.date().transform(v => v.toISOString()).optional(),
+    updatedAt: z.date().transform(v => v.toISOString()).optional(),
+    title: z.string().optional(),
+    client: z.string().optional(),
+    repo: z.string().optional(),
+    kind: ThreadKind$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      externalId: "external_id",
+      contactIds: "contact_ids",
+      tracesCount: "traces_count",
+      projectId: "project_id",
+      startedAt: "started_at",
+      updatedAt: "updated_at",
+    });
+  })
+);
 
 export function createThreadRequestToJSON(
   createThreadRequest: CreateThreadRequest,

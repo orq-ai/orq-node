@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -26,33 +26,35 @@ export const TraceUsage$inboundSchema: z.ZodType<
   TraceUsage,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  prompt_tokens: z.number().int().optional(),
-  completion_tokens: z.number().int().optional(),
-  total_tokens: z.number().int().optional(),
-  prompt_cached_tokens: z.number().int().optional(),
-  prompt_audio_tokens: z.number().int().optional(),
-  completion_reasoning_tokens: z.number().int().optional(),
-  completion_audio_tokens: z.number().int().optional(),
-  completion_accepted_prediction_tokens: z.number().int().optional(),
-  completion_rejected_prediction_tokens: z.number().int().optional(),
-  prompt_cache_creation_tokens: z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "prompt_tokens": "promptTokens",
-    "completion_tokens": "completionTokens",
-    "total_tokens": "totalTokens",
-    "prompt_cached_tokens": "promptCachedTokens",
-    "prompt_audio_tokens": "promptAudioTokens",
-    "completion_reasoning_tokens": "completionReasoningTokens",
-    "completion_audio_tokens": "completionAudioTokens",
-    "completion_accepted_prediction_tokens":
-      "completionAcceptedPredictionTokens",
-    "completion_rejected_prediction_tokens":
-      "completionRejectedPredictionTokens",
-    "prompt_cache_creation_tokens": "promptCacheCreationTokens",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    prompt_tokens: z.number().int().optional(),
+    completion_tokens: z.number().int().optional(),
+    total_tokens: z.number().int().optional(),
+    prompt_cached_tokens: z.number().int().optional(),
+    prompt_audio_tokens: z.number().int().optional(),
+    completion_reasoning_tokens: z.number().int().optional(),
+    completion_audio_tokens: z.number().int().optional(),
+    completion_accepted_prediction_tokens: z.number().int().optional(),
+    completion_rejected_prediction_tokens: z.number().int().optional(),
+    prompt_cache_creation_tokens: z.number().int().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "prompt_tokens": "promptTokens",
+      "completion_tokens": "completionTokens",
+      "total_tokens": "totalTokens",
+      "prompt_cached_tokens": "promptCachedTokens",
+      "prompt_audio_tokens": "promptAudioTokens",
+      "completion_reasoning_tokens": "completionReasoningTokens",
+      "completion_audio_tokens": "completionAudioTokens",
+      "completion_accepted_prediction_tokens":
+        "completionAcceptedPredictionTokens",
+      "completion_rejected_prediction_tokens":
+        "completionRejectedPredictionTokens",
+      "prompt_cache_creation_tokens": "promptCacheCreationTokens",
+    });
+  })
+);
 
 export function traceUsageFromJSON(
   jsonString: string,

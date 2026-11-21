@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 /**
  * Span reference accepted by AddAnnotationQueueItems.
@@ -24,15 +25,17 @@ export const AnnotationQueueItemRef$outboundSchema: z.ZodType<
   AnnotationQueueItemRef$Outbound,
   z.ZodTypeDef,
   AnnotationQueueItemRef
-> = z.object({
-  spanId: z.string(),
-  traceId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    spanId: "span_id",
-    traceId: "trace_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    spanId: z.string(),
+    traceId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      spanId: "span_id",
+      traceId: "trace_id",
+    });
+  })
+);
 
 export function annotationQueueItemRefToJSON(
   annotationQueueItemRef: AnnotationQueueItemRef,

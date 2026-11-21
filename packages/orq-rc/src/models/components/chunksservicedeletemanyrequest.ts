@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type ChunksServiceDeleteManyRequest = {
   /**
@@ -22,13 +23,15 @@ export const ChunksServiceDeleteManyRequest$outboundSchema: z.ZodType<
   ChunksServiceDeleteManyRequest$Outbound,
   z.ZodTypeDef,
   ChunksServiceDeleteManyRequest
-> = z.object({
-  chunkIds: z.array(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    chunkIds: "chunk_ids",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    chunkIds: z.array(z.string()),
+  }).transform((v) => {
+    return remap$(v, {
+      chunkIds: "chunk_ids",
+    });
+  })
+);
 
 export function chunksServiceDeleteManyRequestToJSON(
   chunksServiceDeleteManyRequest: ChunksServiceDeleteManyRequest,

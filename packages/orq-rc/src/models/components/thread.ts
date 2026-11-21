@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { ThreadBilling, ThreadBilling$inboundSchema } from "./threadbilling.js";
@@ -57,38 +57,40 @@ export type Thread = {
 };
 
 /** @internal */
-export const Thread$inboundSchema: z.ZodType<Thread, z.ZodTypeDef, unknown> = z
-  .object({
-    _id: z.string(),
-    external_id: z.string(),
-    duration: z.number(),
-    contact_ids: z.array(z.string()),
-    billing: ThreadBilling$inboundSchema,
-    usage: ThreadUsage$inboundSchema,
-    traces_count: z.number().int(),
-    tags: z.array(z.string()),
-    project_id: z.string().optional(),
-    started_at: z.string().datetime({ offset: true }).transform(v =>
-      new Date(v)
-    ).optional(),
-    updated_at: z.string().datetime({ offset: true }).transform(v =>
-      new Date(v)
-    ).optional(),
-    title: z.string().optional(),
-    client: z.string().optional(),
-    repo: z.string().optional(),
-    kind: ThreadKind$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "_id": "id",
-      "external_id": "externalId",
-      "contact_ids": "contactIds",
-      "traces_count": "tracesCount",
-      "project_id": "projectId",
-      "started_at": "startedAt",
-      "updated_at": "updatedAt",
-    });
-  });
+export const Thread$inboundSchema: z.ZodType<Thread, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      _id: z.string(),
+      external_id: z.string(),
+      duration: z.number(),
+      contact_ids: z.array(z.string()),
+      billing: ThreadBilling$inboundSchema,
+      usage: ThreadUsage$inboundSchema,
+      traces_count: z.number().int(),
+      tags: z.array(z.string()),
+      project_id: z.string().optional(),
+      started_at: z.string().datetime({ offset: true }).transform(v =>
+        new Date(v)
+      ).optional(),
+      updated_at: z.string().datetime({ offset: true }).transform(v =>
+        new Date(v)
+      ).optional(),
+      title: z.string().optional(),
+      client: z.string().optional(),
+      repo: z.string().optional(),
+      kind: ThreadKind$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "_id": "id",
+        "external_id": "externalId",
+        "contact_ids": "contactIds",
+        "traces_count": "tracesCount",
+        "project_id": "projectId",
+        "started_at": "startedAt",
+        "updated_at": "updatedAt",
+      });
+    })
+  );
 
 export function threadFromJSON(
   jsonString: string,

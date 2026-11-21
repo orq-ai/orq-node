@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { IPRange, IPRange$inboundSchema } from "./iprange.js";
@@ -18,10 +18,12 @@ export const IPAllowlist$inboundSchema: z.ZodType<
   IPAllowlist,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  enabled: z.boolean(),
-  ranges: z.array(IPRange$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    enabled: z.boolean(),
+    ranges: z.array(IPRange$inboundSchema),
+  })
+);
 
 export function ipAllowlistFromJSON(
   jsonString: string,

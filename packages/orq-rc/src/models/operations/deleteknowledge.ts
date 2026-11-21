@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type DeleteKnowledgeRequest = {
   knowledgeId: string;
@@ -19,13 +20,15 @@ export const DeleteKnowledgeRequest$outboundSchema: z.ZodType<
   DeleteKnowledgeRequest$Outbound,
   z.ZodTypeDef,
   DeleteKnowledgeRequest
-> = z.object({
-  knowledgeId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    knowledgeId: "knowledge_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    knowledgeId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      knowledgeId: "knowledge_id",
+    });
+  })
+);
 
 export function deleteKnowledgeRequestToJSON(
   deleteKnowledgeRequest: DeleteKnowledgeRequest,

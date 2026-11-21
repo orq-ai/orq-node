@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -21,19 +21,21 @@ export const QueryTelemetryMeta$inboundSchema: z.ZodType<
   QueryTelemetryMeta,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  effective_grain: z.string().optional(),
-  warnings: z.array(z.string()).optional(),
-  row_count: z.number().int().optional(),
-  request_id: z.string().optional(),
-  currency: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "effective_grain": "effectiveGrain",
-    "row_count": "rowCount",
-    "request_id": "requestId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    effective_grain: z.string().optional(),
+    warnings: z.array(z.string()).optional(),
+    row_count: z.number().int().optional(),
+    request_id: z.string().optional(),
+    currency: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "effective_grain": "effectiveGrain",
+      "row_count": "rowCount",
+      "request_id": "requestId",
+    });
+  })
+);
 
 export function queryTelemetryMetaFromJSON(
   jsonString: string,

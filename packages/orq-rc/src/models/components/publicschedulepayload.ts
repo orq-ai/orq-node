@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -32,16 +32,18 @@ export const PublicSchedulePayload$inboundSchema: z.ZodType<
   PublicSchedulePayload,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  input: z.any().optional(),
-  memory_entity_id: z.string().optional(),
-  metadata: z.record(z.string()).optional(),
-  variables: z.record(z.any()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "memory_entity_id": "memoryEntityId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    input: z.any().optional(),
+    memory_entity_id: z.string().optional(),
+    metadata: z.record(z.string()).optional(),
+    variables: z.record(z.any()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "memory_entity_id": "memoryEntityId",
+    });
+  })
+);
 /** @internal */
 export type PublicSchedulePayload$Outbound = {
   input?: any | undefined;
@@ -55,16 +57,18 @@ export const PublicSchedulePayload$outboundSchema: z.ZodType<
   PublicSchedulePayload$Outbound,
   z.ZodTypeDef,
   PublicSchedulePayload
-> = z.object({
-  input: z.any().optional(),
-  memoryEntityId: z.string().optional(),
-  metadata: z.record(z.string()).optional(),
-  variables: z.record(z.any()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    memoryEntityId: "memory_entity_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    input: z.any().optional(),
+    memoryEntityId: z.string().optional(),
+    metadata: z.record(z.string()).optional(),
+    variables: z.record(z.any()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      memoryEntityId: "memory_entity_id",
+    });
+  })
+);
 
 export function publicSchedulePayloadToJSON(
   publicSchedulePayload: PublicSchedulePayload,

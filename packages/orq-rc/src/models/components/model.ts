@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -198,7 +198,7 @@ export const ModelPricing$inboundSchema: z.ZodType<
   ModelPricing,
   z.ZodTypeDef,
   unknown
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function modelPricingFromJSON(
   jsonString: string,
@@ -215,7 +215,7 @@ export const ArtificialIntelligence$inboundSchema: z.ZodType<
   ArtificialIntelligence,
   z.ZodTypeDef,
   unknown
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function artificialIntelligenceFromJSON(
   jsonString: string,
@@ -232,7 +232,7 @@ export const ReasoningEfforts$inboundSchema: z.ZodType<
   ReasoningEfforts,
   z.ZodTypeDef,
   unknown
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function reasoningEffortsFromJSON(
   jsonString: string,
@@ -245,53 +245,59 @@ export function reasoningEffortsFromJSON(
 }
 
 /** @internal */
-export const Model$inboundSchema: z.ZodType<Model, z.ZodTypeDef, unknown> = z
-  .object({
-    id: z.string(),
-    created: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-    deprecation: z.string().datetime({ offset: true }).transform(v =>
-      new Date(v)
-    ).optional(),
-    name: z.string(),
-    description: z.string(),
-    provider: ModelProvider$inboundSchema,
-    endpoints: z.array(z.string()),
-    modalities: ModelModalities$inboundSchema,
-    offering_of: z.string(),
-    pricing: z.lazy(() => ModelPricing$inboundSchema).optional(),
-    supported_parameters: z.array(z.string()),
-    supported_tiers: z.array(z.string()),
-    context_window: z.string().optional(),
-    location: z.array(z.string()),
-    artificial_intelligence: z.lazy(() => ArtificialIntelligence$inboundSchema)
-      .optional(),
-    features: z.array(z.string()),
-    deprecated: z.boolean(),
-    zdr: z.boolean(),
-    default_effort: z.string().optional(),
-    reasoning_efforts: z.lazy(() => ReasoningEfforts$inboundSchema).optional(),
-    blended_price: z.number().optional(),
-    default_effort_scored: z.boolean().optional(),
-    intelligence_index_total_cost: z.number().optional(),
-    intelligence_index_cost_per_task: z.number().optional(),
-    median_end_to_end_response_time_seconds: z.number().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "offering_of": "offeringOf",
-      "supported_parameters": "supportedParameters",
-      "supported_tiers": "supportedTiers",
-      "context_window": "contextWindow",
-      "artificial_intelligence": "artificialIntelligence",
-      "default_effort": "defaultEffort",
-      "reasoning_efforts": "reasoningEfforts",
-      "blended_price": "blendedPrice",
-      "default_effort_scored": "defaultEffortScored",
-      "intelligence_index_total_cost": "intelligenceIndexTotalCost",
-      "intelligence_index_cost_per_task": "intelligenceIndexCostPerTask",
-      "median_end_to_end_response_time_seconds":
-        "medianEndToEndResponseTimeSeconds",
-    });
-  });
+export const Model$inboundSchema: z.ZodType<Model, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string(),
+      created: z.string().datetime({ offset: true }).transform(v =>
+        new Date(v)
+      ),
+      deprecation: z.string().datetime({ offset: true }).transform(v =>
+        new Date(v)
+      ).optional(),
+      name: z.string(),
+      description: z.string(),
+      provider: ModelProvider$inboundSchema,
+      endpoints: z.array(z.string()),
+      modalities: ModelModalities$inboundSchema,
+      offering_of: z.string(),
+      pricing: z.lazy(() => ModelPricing$inboundSchema).optional(),
+      supported_parameters: z.array(z.string()),
+      supported_tiers: z.array(z.string()),
+      context_window: z.string().optional(),
+      location: z.array(z.string()),
+      artificial_intelligence: z.lazy(() =>
+        ArtificialIntelligence$inboundSchema
+      ).optional(),
+      features: z.array(z.string()),
+      deprecated: z.boolean(),
+      zdr: z.boolean(),
+      default_effort: z.string().optional(),
+      reasoning_efforts: z.lazy(() => ReasoningEfforts$inboundSchema)
+        .optional(),
+      blended_price: z.number().optional(),
+      default_effort_scored: z.boolean().optional(),
+      intelligence_index_total_cost: z.number().optional(),
+      intelligence_index_cost_per_task: z.number().optional(),
+      median_end_to_end_response_time_seconds: z.number().optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "offering_of": "offeringOf",
+        "supported_parameters": "supportedParameters",
+        "supported_tiers": "supportedTiers",
+        "context_window": "contextWindow",
+        "artificial_intelligence": "artificialIntelligence",
+        "default_effort": "defaultEffort",
+        "reasoning_efforts": "reasoningEfforts",
+        "blended_price": "blendedPrice",
+        "default_effort_scored": "defaultEffortScored",
+        "intelligence_index_total_cost": "intelligenceIndexTotalCost",
+        "intelligence_index_cost_per_task": "intelligenceIndexCostPerTask",
+        "median_end_to_end_response_time_seconds":
+          "medianEndToEndResponseTimeSeconds",
+      });
+    })
+  );
 
 export function modelFromJSON(
   jsonString: string,

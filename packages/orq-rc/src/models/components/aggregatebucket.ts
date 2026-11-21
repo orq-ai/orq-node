@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -22,17 +22,19 @@ export const AggregateBucket$inboundSchema: z.ZodType<
   AggregateBucket,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  timestamp: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  severity_counts: z.record(z.string()).optional(),
-  total_count: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "severity_counts": "severityCounts",
-    "total_count": "totalCount",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    timestamp: z.string().datetime({ offset: true }).transform(v => new Date(v))
+      .optional(),
+    severity_counts: z.record(z.string()).optional(),
+    total_count: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "severity_counts": "severityCounts",
+      "total_count": "totalCount",
+    });
+  })
+);
 
 export function aggregateBucketFromJSON(
   jsonString: string,

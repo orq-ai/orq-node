@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import {
   EmbeddingsConfig,
   EmbeddingsConfig$Outbound,
@@ -34,17 +35,19 @@ export const KnowledgeUpdateSettings$outboundSchema: z.ZodType<
   KnowledgeUpdateSettings$Outbound,
   z.ZodTypeDef,
   KnowledgeUpdateSettings
-> = z.object({
-  embeddingsConfig: EmbeddingsConfig$outboundSchema.optional(),
-  retrievalConfig: z.any().optional(),
-  agenticRagConfig: z.any().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    embeddingsConfig: "embeddings_config",
-    retrievalConfig: "retrieval_config",
-    agenticRagConfig: "agentic_rag_config",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    embeddingsConfig: EmbeddingsConfig$outboundSchema.optional(),
+    retrievalConfig: z.any().optional(),
+    agenticRagConfig: z.any().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      embeddingsConfig: "embeddings_config",
+      retrievalConfig: "retrieval_config",
+      agenticRagConfig: "agentic_rag_config",
+    });
+  })
+);
 
 export function knowledgeUpdateSettingsToJSON(
   knowledgeUpdateSettings: KnowledgeUpdateSettings,

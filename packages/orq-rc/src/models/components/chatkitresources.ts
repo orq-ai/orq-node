@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import {
   ChatKitResource,
   ChatKitResource$Outbound,
@@ -23,9 +24,11 @@ export const ChatKitResources$outboundSchema: z.ZodType<
   ChatKitResources$Outbound,
   z.ZodTypeDef,
   ChatKitResources
-> = z.object({
-  items: z.array(ChatKitResource$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    items: z.array(ChatKitResource$outboundSchema).optional(),
+  })
+);
 
 export function chatKitResourcesToJSON(
   chatKitResources: ChatKitResources,

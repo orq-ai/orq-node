@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -47,12 +47,14 @@ export const AlertQuery$inboundSchema: z.ZodType<
   AlertQuery,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  metric: z.string(),
-  filters: z.array(MonitorFilter$inboundSchema).optional(),
-  source: AlertTelemetrySource$inboundSchema.optional(),
-  operation: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    metric: z.string(),
+    filters: z.array(MonitorFilter$inboundSchema).optional(),
+    source: AlertTelemetrySource$inboundSchema.optional(),
+    operation: z.string().optional(),
+  })
+);
 /** @internal */
 export type AlertQuery$Outbound = {
   metric: string;
@@ -66,12 +68,14 @@ export const AlertQuery$outboundSchema: z.ZodType<
   AlertQuery$Outbound,
   z.ZodTypeDef,
   AlertQuery
-> = z.object({
-  metric: z.string(),
-  filters: z.array(MonitorFilter$outboundSchema).optional(),
-  source: AlertTelemetrySource$outboundSchema.optional(),
-  operation: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    metric: z.string(),
+    filters: z.array(MonitorFilter$outboundSchema).optional(),
+    source: AlertTelemetrySource$outboundSchema.optional(),
+    operation: z.string().optional(),
+  })
+);
 
 export function alertQueryToJSON(alertQuery: AlertQuery): string {
   return JSON.stringify(AlertQuery$outboundSchema.parse(alertQuery));

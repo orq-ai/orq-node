@@ -6,6 +6,7 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import {
   collectExtraKeys as collectExtraKeys$,
+  lazySchema as lazySchema$,
   safeParse,
 } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -64,31 +65,33 @@ export const ResponseImageGenerationCallPartialImageStreamEvent$inboundSchema:
     ResponseImageGenerationCallPartialImageStreamEvent,
     z.ZodTypeDef,
     unknown
-  > = collectExtraKeys$(
-    z.object({
-      background: z.string().optional(),
-      item_id: z.string(),
-      output_format: z.string().optional(),
-      output_index: z.number().int(),
-      partial_image_b64: z.string(),
-      partial_image_index: z.number().int(),
-      quality: z.string().optional(),
-      sequence_number: z.number().int(),
-      size: z.string().optional(),
-      type: z.literal("response.image_generation_call.partial_image"),
-    }).catchall(z.any()),
-    "additionalProperties",
-    true,
-  ).transform((v) => {
-    return remap$(v, {
-      "item_id": "itemId",
-      "output_format": "outputFormat",
-      "output_index": "outputIndex",
-      "partial_image_b64": "partialImageB64",
-      "partial_image_index": "partialImageIndex",
-      "sequence_number": "sequenceNumber",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    collectExtraKeys$(
+      z.object({
+        background: z.string().optional(),
+        item_id: z.string(),
+        output_format: z.string().optional(),
+        output_index: z.number().int(),
+        partial_image_b64: z.string(),
+        partial_image_index: z.number().int(),
+        quality: z.string().optional(),
+        sequence_number: z.number().int(),
+        size: z.string().optional(),
+        type: z.literal("response.image_generation_call.partial_image"),
+      }).catchall(z.any()),
+      "additionalProperties",
+      true,
+    ).transform((v) => {
+      return remap$(v, {
+        "item_id": "itemId",
+        "output_format": "outputFormat",
+        "output_index": "outputIndex",
+        "partial_image_b64": "partialImageB64",
+        "partial_image_index": "partialImageIndex",
+        "sequence_number": "sequenceNumber",
+      });
+    })
+  );
 
 export function responseImageGenerationCallPartialImageStreamEventFromJSON(
   jsonString: string,

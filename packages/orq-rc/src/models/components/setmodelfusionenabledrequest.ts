@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type SetModelFusionEnabledRequest = {
   enabled: boolean;
@@ -18,9 +19,11 @@ export const SetModelFusionEnabledRequest$outboundSchema: z.ZodType<
   SetModelFusionEnabledRequest$Outbound,
   z.ZodTypeDef,
   SetModelFusionEnabledRequest
-> = z.object({
-  enabled: z.boolean(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    enabled: z.boolean(),
+  })
+);
 
 export function setModelFusionEnabledRequestToJSON(
   setModelFusionEnabledRequest: SetModelFusionEnabledRequest,

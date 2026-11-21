@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { SpanSummary, SpanSummary$inboundSchema } from "./spansummary.js";
@@ -20,7 +20,7 @@ export const SpanDetailAttributes$inboundSchema: z.ZodType<
   SpanDetailAttributes,
   z.ZodTypeDef,
   unknown
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function spanDetailAttributesFromJSON(
   jsonString: string,
@@ -37,10 +37,12 @@ export const SpanDetail$inboundSchema: z.ZodType<
   SpanDetail,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  summary: SpanSummary$inboundSchema.optional(),
-  attributes: z.lazy(() => SpanDetailAttributes$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    summary: SpanSummary$inboundSchema.optional(),
+    attributes: z.lazy(() => SpanDetailAttributes$inboundSchema).optional(),
+  })
+);
 
 export function spanDetailFromJSON(
   jsonString: string,

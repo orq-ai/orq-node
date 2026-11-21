@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -34,18 +34,20 @@ export const McpToolExposure$inboundSchema: z.ZodType<
   McpToolExposure,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  mode: McpToolExposureMode$inboundSchema,
-  read_only: z.boolean().optional(),
-  tool_ids: z.array(z.string()).optional(),
-  excluded_tool_ids: z.array(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "read_only": "readOnly",
-    "tool_ids": "toolIds",
-    "excluded_tool_ids": "excludedToolIds",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    mode: McpToolExposureMode$inboundSchema,
+    read_only: z.boolean().optional(),
+    tool_ids: z.array(z.string()).optional(),
+    excluded_tool_ids: z.array(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "read_only": "readOnly",
+      "tool_ids": "toolIds",
+      "excluded_tool_ids": "excludedToolIds",
+    });
+  })
+);
 /** @internal */
 export type McpToolExposure$Outbound = {
   mode: string;
@@ -59,18 +61,20 @@ export const McpToolExposure$outboundSchema: z.ZodType<
   McpToolExposure$Outbound,
   z.ZodTypeDef,
   McpToolExposure
-> = z.object({
-  mode: McpToolExposureMode$outboundSchema,
-  readOnly: z.boolean().optional(),
-  toolIds: z.array(z.string()).optional(),
-  excludedToolIds: z.array(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    readOnly: "read_only",
-    toolIds: "tool_ids",
-    excludedToolIds: "excluded_tool_ids",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    mode: McpToolExposureMode$outboundSchema,
+    readOnly: z.boolean().optional(),
+    toolIds: z.array(z.string()).optional(),
+    excludedToolIds: z.array(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      readOnly: "read_only",
+      toolIds: "tool_ids",
+      excludedToolIds: "excluded_tool_ids",
+    });
+  })
+);
 
 export function mcpToolExposureToJSON(
   mcpToolExposure: McpToolExposure,

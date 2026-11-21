@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type WebhookGetRequest = {
   id: string;
@@ -18,9 +19,11 @@ export const WebhookGetRequest$outboundSchema: z.ZodType<
   WebhookGetRequest$Outbound,
   z.ZodTypeDef,
   WebhookGetRequest
-> = z.object({
-  id: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+  })
+);
 
 export function webhookGetRequestToJSON(
   webhookGetRequest: WebhookGetRequest,

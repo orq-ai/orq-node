@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -37,15 +37,17 @@ export const BudgetLimits$inboundSchema: z.ZodType<
   BudgetLimits,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  period: BudgetPeriod$inboundSchema.optional(),
-  amount: z.number().optional(),
-  token_limit: z.number().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "token_limit": "tokenLimit",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    period: BudgetPeriod$inboundSchema.optional(),
+    amount: z.number().optional(),
+    token_limit: z.number().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "token_limit": "tokenLimit",
+    });
+  })
+);
 /** @internal */
 export type BudgetLimits$Outbound = {
   period?: string | undefined;
@@ -58,15 +60,17 @@ export const BudgetLimits$outboundSchema: z.ZodType<
   BudgetLimits$Outbound,
   z.ZodTypeDef,
   BudgetLimits
-> = z.object({
-  period: BudgetPeriod$outboundSchema.optional(),
-  amount: z.number().optional(),
-  tokenLimit: z.number().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    tokenLimit: "token_limit",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    period: BudgetPeriod$outboundSchema.optional(),
+    amount: z.number().optional(),
+    tokenLimit: z.number().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      tokenLimit: "token_limit",
+    });
+  })
+);
 
 export function budgetLimitsToJSON(budgetLimits: BudgetLimits): string {
   return JSON.stringify(BudgetLimits$outboundSchema.parse(budgetLimits));

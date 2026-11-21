@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -25,24 +25,27 @@ export type DatasourcesServiceListResponse = {
 
 /** @internal */
 export const DatasourcesServiceListResponseObject$inboundSchema:
-  z.ZodNativeEnum<typeof DatasourcesServiceListResponseObject> = z.nativeEnum(
-    DatasourcesServiceListResponseObject,
-  );
+  z.ZodNativeEnum<typeof DatasourcesServiceListResponseObject> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(DatasourcesServiceListResponseObject)
+    );
 
 /** @internal */
 export const DatasourcesServiceListResponse$inboundSchema: z.ZodType<
   DatasourcesServiceListResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: DatasourcesServiceListResponseObject$inboundSchema,
-  data: z.array(Datasource$inboundSchema),
-  has_more: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    "has_more": "hasMore",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: DatasourcesServiceListResponseObject$inboundSchema,
+    data: z.array(Datasource$inboundSchema),
+    has_more: z.boolean(),
+  }).transform((v) => {
+    return remap$(v, {
+      "has_more": "hasMore",
+    });
+  })
+);
 
 export function datasourcesServiceListResponseFromJSON(
   jsonString: string,

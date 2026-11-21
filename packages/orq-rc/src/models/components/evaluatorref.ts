@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 
 export const ExecuteOn = {
@@ -23,8 +24,8 @@ export type EvaluatorRef = {
 };
 
 /** @internal */
-export const ExecuteOn$outboundSchema: z.ZodNativeEnum<typeof ExecuteOn> = z
-  .nativeEnum(ExecuteOn);
+export const ExecuteOn$outboundSchema: z.ZodNativeEnum<typeof ExecuteOn> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ExecuteOn));
 
 /** @internal */
 export type EvaluatorRef$Outbound = {
@@ -41,20 +42,22 @@ export const EvaluatorRef$outboundSchema: z.ZodType<
   EvaluatorRef$Outbound,
   z.ZodTypeDef,
   EvaluatorRef
-> = z.object({
-  executeOn: ExecuteOn$outboundSchema,
-  id: z.string(),
-  isGuardrail: z.boolean().optional(),
-  options: z.record(z.any()).optional(),
-  sampleRate: z.number().optional(),
-  timeout: z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    executeOn: "execute_on",
-    isGuardrail: "is_guardrail",
-    sampleRate: "sample_rate",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    executeOn: ExecuteOn$outboundSchema,
+    id: z.string(),
+    isGuardrail: z.boolean().optional(),
+    options: z.record(z.any()).optional(),
+    sampleRate: z.number().optional(),
+    timeout: z.number().int().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      executeOn: "execute_on",
+      isGuardrail: "is_guardrail",
+      sampleRate: "sample_rate",
+    });
+  })
+);
 
 export function evaluatorRefToJSON(evaluatorRef: EvaluatorRef): string {
   return JSON.stringify(EvaluatorRef$outboundSchema.parse(evaluatorRef));

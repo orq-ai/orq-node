@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -46,18 +46,20 @@ export const CellStatusCounts$inboundSchema: z.ZodType<
   CellStatusCounts,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  not_run: z.number().int().optional(),
-  queued: z.number().int().optional(),
-  running: z.number().int().optional(),
-  completed: z.number().int().optional(),
-  failed: z.number().int().optional(),
-  canceled: z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "not_run": "notRun",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    not_run: z.number().int().optional(),
+    queued: z.number().int().optional(),
+    running: z.number().int().optional(),
+    completed: z.number().int().optional(),
+    failed: z.number().int().optional(),
+    canceled: z.number().int().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "not_run": "notRun",
+    });
+  })
+);
 
 export function cellStatusCountsFromJSON(
   jsonString: string,

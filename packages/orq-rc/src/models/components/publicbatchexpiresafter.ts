@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 
 /**
@@ -28,8 +29,8 @@ export type PublicBatchExpiresAfter = {
 };
 
 /** @internal */
-export const Anchor$outboundSchema: z.ZodNativeEnum<typeof Anchor> = z
-  .nativeEnum(Anchor);
+export const Anchor$outboundSchema: z.ZodNativeEnum<typeof Anchor> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Anchor));
 
 /** @internal */
 export type PublicBatchExpiresAfter$Outbound = {
@@ -42,10 +43,12 @@ export const PublicBatchExpiresAfter$outboundSchema: z.ZodType<
   PublicBatchExpiresAfter$Outbound,
   z.ZodTypeDef,
   PublicBatchExpiresAfter
-> = z.object({
-  anchor: Anchor$outboundSchema.optional(),
-  seconds: z.number().int(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    anchor: Anchor$outboundSchema.optional(),
+    seconds: z.number().int(),
+  })
+);
 
 export function publicBatchExpiresAfterToJSON(
   publicBatchExpiresAfter: PublicBatchExpiresAfter,

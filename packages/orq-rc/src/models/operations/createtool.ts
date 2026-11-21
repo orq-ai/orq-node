@@ -6,6 +6,7 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import {
   collectExtraKeys as collectExtraKeys$,
+  lazySchema as lazySchema$,
   safeParse,
 } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
@@ -951,13 +952,16 @@ export type CreateToolResponseBody =
 /** @internal */
 export const CreateToolRequestBodyToolsStatus$outboundSchema: z.ZodNativeEnum<
   typeof CreateToolRequestBodyToolsStatus
-> = z.nativeEnum(CreateToolRequestBodyToolsStatus);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(CreateToolRequestBodyToolsStatus)
+);
 
 /** @internal */
 export const CreateToolRequestBodyToolsRequest4Type$outboundSchema:
-  z.ZodNativeEnum<typeof CreateToolRequestBodyToolsRequest4Type> = z.nativeEnum(
-    CreateToolRequestBodyToolsRequest4Type,
-  );
+  z.ZodNativeEnum<typeof CreateToolRequestBodyToolsRequest4Type> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(CreateToolRequestBodyToolsRequest4Type)
+    );
 
 /** @internal */
 export type CreateToolRequestBodyParameters$Outbound = {
@@ -972,19 +976,21 @@ export const CreateToolRequestBodyParameters$outboundSchema: z.ZodType<
   CreateToolRequestBodyParameters$Outbound,
   z.ZodTypeDef,
   CreateToolRequestBodyParameters
-> = z.object({
-  type: CreateToolRequestBodyToolsRequest4Type$outboundSchema,
-  properties: z.record(z.any()),
-  required: z.array(z.string()),
-  additionalProperties: z.record(z.any()).optional(),
-}).transform((v) => {
-  return {
-    ...v.additionalProperties,
-    ...remap$(v, {
-      additionalProperties: null,
-    }),
-  };
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: CreateToolRequestBodyToolsRequest4Type$outboundSchema,
+    properties: z.record(z.any()),
+    required: z.array(z.string()),
+    additionalProperties: z.record(z.any()).optional(),
+  }).transform((v) => {
+    return {
+      ...v.additionalProperties,
+      ...remap$(v, {
+        additionalProperties: null,
+      }),
+    };
+  })
+);
 
 export function createToolRequestBodyParametersToJSON(
   createToolRequestBodyParameters: CreateToolRequestBodyParameters,
@@ -999,7 +1005,7 @@ export function createToolRequestBodyParametersToJSON(
 /** @internal */
 export const RequestBodyLanguage$outboundSchema: z.ZodNativeEnum<
   typeof RequestBodyLanguage
-> = z.nativeEnum(RequestBodyLanguage);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(RequestBodyLanguage));
 
 /** @internal */
 export type RequestBodyCodeTool$Outbound = {
@@ -1013,12 +1019,14 @@ export const RequestBodyCodeTool$outboundSchema: z.ZodType<
   RequestBodyCodeTool$Outbound,
   z.ZodTypeDef,
   RequestBodyCodeTool
-> = z.object({
-  parameters: z.lazy(() => CreateToolRequestBodyParameters$outboundSchema)
-    .optional(),
-  language: RequestBodyLanguage$outboundSchema,
-  code: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    parameters: z.lazy(() => CreateToolRequestBodyParameters$outboundSchema)
+      .optional(),
+    language: RequestBodyLanguage$outboundSchema,
+    code: z.string(),
+  })
+);
 
 export function requestBodyCodeToolToJSON(
   requestBodyCodeTool: RequestBodyCodeTool,
@@ -1044,20 +1052,22 @@ export const CodeExecutionTool$outboundSchema: z.ZodType<
   CodeExecutionTool$Outbound,
   z.ZodTypeDef,
   CodeExecutionTool
-> = z.object({
-  path: z.string(),
-  key: z.string(),
-  displayName: z.string().optional(),
-  description: z.string(),
-  status: CreateToolRequestBodyToolsStatus$outboundSchema.default("live"),
-  type: z.literal("code"),
-  codeTool: z.lazy(() => RequestBodyCodeTool$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    displayName: "display_name",
-    codeTool: "code_tool",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    path: z.string(),
+    key: z.string(),
+    displayName: z.string().optional(),
+    description: z.string(),
+    status: CreateToolRequestBodyToolsStatus$outboundSchema.default("live"),
+    type: z.literal("code"),
+    codeTool: z.lazy(() => RequestBodyCodeTool$outboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      displayName: "display_name",
+      codeTool: "code_tool",
+    });
+  })
+);
 
 export function codeExecutionToolToJSON(
   codeExecutionTool: CodeExecutionTool,
@@ -1070,12 +1080,14 @@ export function codeExecutionToolToJSON(
 /** @internal */
 export const CreateToolRequestBodyStatus$outboundSchema: z.ZodNativeEnum<
   typeof CreateToolRequestBodyStatus
-> = z.nativeEnum(CreateToolRequestBodyStatus);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(CreateToolRequestBodyStatus)
+);
 
 /** @internal */
 export const RequestBodyMethod$outboundSchema: z.ZodNativeEnum<
   typeof RequestBodyMethod
-> = z.nativeEnum(RequestBodyMethod);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(RequestBodyMethod));
 
 /** @internal */
 export type CreateToolHeaders2$Outbound = {
@@ -1088,10 +1100,12 @@ export const CreateToolHeaders2$outboundSchema: z.ZodType<
   CreateToolHeaders2$Outbound,
   z.ZodTypeDef,
   CreateToolHeaders2
-> = z.object({
-  value: z.string(),
-  encrypted: z.boolean().default(false),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    value: z.string(),
+    encrypted: z.boolean().default(false),
+  })
+);
 
 export function createToolHeaders2ToJSON(
   createToolHeaders2: CreateToolHeaders2,
@@ -1109,7 +1123,9 @@ export const RequestBodyHeaders$outboundSchema: z.ZodType<
   RequestBodyHeaders$Outbound,
   z.ZodTypeDef,
   RequestBodyHeaders
-> = z.union([z.lazy(() => CreateToolHeaders2$outboundSchema), z.string()]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.lazy(() => CreateToolHeaders2$outboundSchema), z.string()])
+);
 
 export function requestBodyHeadersToJSON(
   requestBodyHeaders: RequestBodyHeaders,
@@ -1133,15 +1149,17 @@ export const RequestBodyBlueprint$outboundSchema: z.ZodType<
   RequestBodyBlueprint$Outbound,
   z.ZodTypeDef,
   RequestBodyBlueprint
-> = z.object({
-  url: z.string(),
-  method: RequestBodyMethod$outboundSchema,
-  headers: z.record(
-    z.union([z.lazy(() => CreateToolHeaders2$outboundSchema), z.string()]),
-  ).optional(),
-  body: z.record(z.any()).optional(),
-  timeout: z.number().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    url: z.string(),
+    method: RequestBodyMethod$outboundSchema,
+    headers: z.record(
+      z.union([z.lazy(() => CreateToolHeaders2$outboundSchema), z.string()]),
+    ).optional(),
+    body: z.record(z.any()).optional(),
+    timeout: z.number().optional(),
+  })
+);
 
 export function requestBodyBlueprintToJSON(
   requestBodyBlueprint: RequestBodyBlueprint,
@@ -1153,9 +1171,10 @@ export function requestBodyBlueprintToJSON(
 
 /** @internal */
 export const CreateToolRequestBodyToolsRequest3Type$outboundSchema:
-  z.ZodNativeEnum<typeof CreateToolRequestBodyToolsRequest3Type> = z.nativeEnum(
-    CreateToolRequestBodyToolsRequest3Type,
-  );
+  z.ZodNativeEnum<typeof CreateToolRequestBodyToolsRequest3Type> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(CreateToolRequestBodyToolsRequest3Type)
+    );
 
 /** @internal */
 export type RequestBodyDefaultValue$Outbound = string | number | boolean;
@@ -1165,7 +1184,9 @@ export const RequestBodyDefaultValue$outboundSchema: z.ZodType<
   RequestBodyDefaultValue$Outbound,
   z.ZodTypeDef,
   RequestBodyDefaultValue
-> = z.union([z.string(), z.number(), z.boolean()]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.number(), z.boolean()])
+);
 
 export function requestBodyDefaultValueToJSON(
   requestBodyDefaultValue: RequestBodyDefaultValue,
@@ -1188,17 +1209,19 @@ export const RequestBodyArguments$outboundSchema: z.ZodType<
   RequestBodyArguments$Outbound,
   z.ZodTypeDef,
   RequestBodyArguments
-> = z.object({
-  type: CreateToolRequestBodyToolsRequest3Type$outboundSchema,
-  description: z.string(),
-  sendToModel: z.boolean().default(true),
-  defaultValue: z.union([z.string(), z.number(), z.boolean()]).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    sendToModel: "send_to_model",
-    defaultValue: "default_value",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: CreateToolRequestBodyToolsRequest3Type$outboundSchema,
+    description: z.string(),
+    sendToModel: z.boolean().default(true),
+    defaultValue: z.union([z.string(), z.number(), z.boolean()]).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      sendToModel: "send_to_model",
+      defaultValue: "default_value",
+    });
+  })
+);
 
 export function requestBodyArgumentsToJSON(
   requestBodyArguments: RequestBodyArguments,
@@ -1219,11 +1242,13 @@ export const RequestBodyHttp$outboundSchema: z.ZodType<
   RequestBodyHttp$Outbound,
   z.ZodTypeDef,
   RequestBodyHttp
-> = z.object({
-  blueprint: z.lazy(() => RequestBodyBlueprint$outboundSchema),
-  arguments: z.record(z.lazy(() => RequestBodyArguments$outboundSchema))
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    blueprint: z.lazy(() => RequestBodyBlueprint$outboundSchema),
+    arguments: z.record(z.lazy(() => RequestBodyArguments$outboundSchema))
+      .optional(),
+  })
+);
 
 export function requestBodyHttpToJSON(
   requestBodyHttp: RequestBodyHttp,
@@ -1247,19 +1272,21 @@ export const HTTPTool$outboundSchema: z.ZodType<
   HTTPTool$Outbound,
   z.ZodTypeDef,
   HTTPTool
-> = z.object({
-  path: z.string(),
-  key: z.string(),
-  displayName: z.string().optional(),
-  description: z.string(),
-  status: CreateToolRequestBodyStatus$outboundSchema.default("live"),
-  type: z.literal("http"),
-  http: z.lazy(() => RequestBodyHttp$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    displayName: "display_name",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    path: z.string(),
+    key: z.string(),
+    displayName: z.string().optional(),
+    description: z.string(),
+    status: CreateToolRequestBodyStatus$outboundSchema.default("live"),
+    type: z.literal("http"),
+    http: z.lazy(() => RequestBodyHttp$outboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      displayName: "display_name",
+    });
+  })
+);
 
 export function httpToolToJSON(httpTool: HTTPTool): string {
   return JSON.stringify(HTTPTool$outboundSchema.parse(httpTool));
@@ -1268,7 +1295,7 @@ export function httpToolToJSON(httpTool: HTTPTool): string {
 /** @internal */
 export const RequestBodyStatus$outboundSchema: z.ZodNativeEnum<
   typeof RequestBodyStatus
-> = z.nativeEnum(RequestBodyStatus);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(RequestBodyStatus));
 
 /** @internal */
 export type RequestBodySchema$Outbound = {
@@ -1283,19 +1310,21 @@ export const RequestBodySchema$outboundSchema: z.ZodType<
   RequestBodySchema$Outbound,
   z.ZodTypeDef,
   RequestBodySchema
-> = z.object({
-  type: z.string(),
-  properties: z.record(z.any()),
-  required: z.array(z.string()),
-  additionalProperties: z.record(z.any()).optional(),
-}).transform((v) => {
-  return {
-    ...v.additionalProperties,
-    ...remap$(v, {
-      additionalProperties: null,
-    }),
-  };
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.string(),
+    properties: z.record(z.any()),
+    required: z.array(z.string()),
+    additionalProperties: z.record(z.any()).optional(),
+  }).transform((v) => {
+    return {
+      ...v.additionalProperties,
+      ...remap$(v, {
+        additionalProperties: null,
+      }),
+    };
+  })
+);
 
 export function requestBodySchemaToJSON(
   requestBodySchema: RequestBodySchema,
@@ -1318,12 +1347,14 @@ export const RequestBodyJsonSchema$outboundSchema: z.ZodType<
   RequestBodyJsonSchema$Outbound,
   z.ZodTypeDef,
   RequestBodyJsonSchema
-> = z.object({
-  name: z.string(),
-  description: z.string(),
-  schema: z.lazy(() => RequestBodySchema$outboundSchema),
-  strict: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+    description: z.string(),
+    schema: z.lazy(() => RequestBodySchema$outboundSchema),
+    strict: z.boolean().optional(),
+  })
+);
 
 export function requestBodyJsonSchemaToJSON(
   requestBodyJsonSchema: RequestBodyJsonSchema,
@@ -1349,20 +1380,22 @@ export const JSONSchemaTool$outboundSchema: z.ZodType<
   JSONSchemaTool$Outbound,
   z.ZodTypeDef,
   JSONSchemaTool
-> = z.object({
-  path: z.string(),
-  key: z.string(),
-  displayName: z.string().optional(),
-  description: z.string(),
-  status: RequestBodyStatus$outboundSchema.default("live"),
-  type: z.literal("json_schema"),
-  jsonSchema: z.lazy(() => RequestBodyJsonSchema$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    displayName: "display_name",
-    jsonSchema: "json_schema",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    path: z.string(),
+    key: z.string(),
+    displayName: z.string().optional(),
+    description: z.string(),
+    status: RequestBodyStatus$outboundSchema.default("live"),
+    type: z.literal("json_schema"),
+    jsonSchema: z.lazy(() => RequestBodyJsonSchema$outboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      displayName: "display_name",
+      jsonSchema: "json_schema",
+    });
+  })
+);
 
 export function jsonSchemaToolToJSON(jsonSchemaTool: JSONSchemaTool): string {
   return JSON.stringify(JSONSchemaTool$outboundSchema.parse(jsonSchemaTool));
@@ -1370,14 +1403,17 @@ export function jsonSchemaToolToJSON(jsonSchemaTool: JSONSchemaTool): string {
 
 /** @internal */
 export const CreateToolRequestBodyToolsRequestStatus$outboundSchema:
-  z.ZodNativeEnum<typeof CreateToolRequestBodyToolsRequestStatus> = z
-    .nativeEnum(CreateToolRequestBodyToolsRequestStatus);
+  z.ZodNativeEnum<typeof CreateToolRequestBodyToolsRequestStatus> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(CreateToolRequestBodyToolsRequestStatus)
+    );
 
 /** @internal */
 export const CreateToolRequestBodyToolsRequest1Type$outboundSchema:
-  z.ZodNativeEnum<typeof CreateToolRequestBodyToolsRequest1Type> = z.nativeEnum(
-    CreateToolRequestBodyToolsRequest1Type,
-  );
+  z.ZodNativeEnum<typeof CreateToolRequestBodyToolsRequest1Type> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(CreateToolRequestBodyToolsRequest1Type)
+    );
 
 /** @internal */
 export type RequestBodyParameters$Outbound = {
@@ -1392,19 +1428,21 @@ export const RequestBodyParameters$outboundSchema: z.ZodType<
   RequestBodyParameters$Outbound,
   z.ZodTypeDef,
   RequestBodyParameters
-> = z.object({
-  type: CreateToolRequestBodyToolsRequest1Type$outboundSchema,
-  properties: z.record(z.any()),
-  required: z.array(z.string()),
-  additionalProperties: z.record(z.any()).optional(),
-}).transform((v) => {
-  return {
-    ...v.additionalProperties,
-    ...remap$(v, {
-      additionalProperties: null,
-    }),
-  };
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: CreateToolRequestBodyToolsRequest1Type$outboundSchema,
+    properties: z.record(z.any()),
+    required: z.array(z.string()),
+    additionalProperties: z.record(z.any()).optional(),
+  }).transform((v) => {
+    return {
+      ...v.additionalProperties,
+      ...remap$(v, {
+        additionalProperties: null,
+      }),
+    };
+  })
+);
 
 export function requestBodyParametersToJSON(
   requestBodyParameters: RequestBodyParameters,
@@ -1427,12 +1465,14 @@ export const RequestBodyFunction$outboundSchema: z.ZodType<
   RequestBodyFunction$Outbound,
   z.ZodTypeDef,
   RequestBodyFunction
-> = z.object({
-  name: z.string(),
-  description: z.string().optional(),
-  strict: z.boolean().optional(),
-  parameters: z.lazy(() => RequestBodyParameters$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+    description: z.string().optional(),
+    strict: z.boolean().optional(),
+    parameters: z.lazy(() => RequestBodyParameters$outboundSchema).optional(),
+  })
+);
 
 export function requestBodyFunctionToJSON(
   requestBodyFunction: RequestBodyFunction,
@@ -1458,21 +1498,23 @@ export const FunctionTool$outboundSchema: z.ZodType<
   FunctionTool$Outbound,
   z.ZodTypeDef,
   FunctionTool
-> = z.object({
-  path: z.string(),
-  key: z.string(),
-  displayName: z.string().optional(),
-  description: z.string(),
-  status: CreateToolRequestBodyToolsRequestStatus$outboundSchema.default(
-    "live",
-  ),
-  type: z.literal("function"),
-  function: z.lazy(() => RequestBodyFunction$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    displayName: "display_name",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    path: z.string(),
+    key: z.string(),
+    displayName: z.string().optional(),
+    description: z.string(),
+    status: CreateToolRequestBodyToolsRequestStatus$outboundSchema.default(
+      "live",
+    ),
+    type: z.literal("function"),
+    function: z.lazy(() => RequestBodyFunction$outboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      displayName: "display_name",
+    });
+  })
+);
 
 export function functionToolToJSON(functionTool: FunctionTool): string {
   return JSON.stringify(FunctionTool$outboundSchema.parse(functionTool));
@@ -1490,12 +1532,14 @@ export const CreateToolRequestBody$outboundSchema: z.ZodType<
   CreateToolRequestBody$Outbound,
   z.ZodTypeDef,
   CreateToolRequestBody
-> = z.union([
-  z.lazy(() => FunctionTool$outboundSchema),
-  z.lazy(() => JSONSchemaTool$outboundSchema),
-  z.lazy(() => HTTPTool$outboundSchema),
-  z.lazy(() => CodeExecutionTool$outboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => FunctionTool$outboundSchema),
+    z.lazy(() => JSONSchemaTool$outboundSchema),
+    z.lazy(() => HTTPTool$outboundSchema),
+    z.lazy(() => CodeExecutionTool$outboundSchema),
+  ])
+);
 
 export function createToolRequestBodyToJSON(
   createToolRequestBody: CreateToolRequestBody,
@@ -1507,29 +1551,35 @@ export function createToolRequestBodyToJSON(
 
 /** @internal */
 export const CreateToolResponseBodyToolsResponseStatus$inboundSchema:
-  z.ZodNativeEnum<typeof CreateToolResponseBodyToolsResponseStatus> = z
-    .nativeEnum(CreateToolResponseBodyToolsResponseStatus);
+  z.ZodNativeEnum<typeof CreateToolResponseBodyToolsResponseStatus> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(CreateToolResponseBodyToolsResponseStatus)
+    );
 
 /** @internal */
 export const CreateToolResponseBodyToolsResponse200ApplicationJson4Type$inboundSchema:
   z.ZodNativeEnum<
     typeof CreateToolResponseBodyToolsResponse200ApplicationJson4Type
-  > = z.nativeEnum(CreateToolResponseBodyToolsResponse200ApplicationJson4Type);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.nativeEnum(CreateToolResponseBodyToolsResponse200ApplicationJson4Type)
+  );
 
 /** @internal */
 export const CreateToolResponseBodyParameters$inboundSchema: z.ZodType<
   CreateToolResponseBodyParameters,
   z.ZodTypeDef,
   unknown
-> = collectExtraKeys$(
-  z.object({
-    type:
-      CreateToolResponseBodyToolsResponse200ApplicationJson4Type$inboundSchema,
-    properties: z.record(z.any()),
-    required: z.array(z.string()),
-  }).catchall(z.any()),
-  "additionalProperties",
-  true,
+> = /* @__PURE__ */ lazySchema$(() =>
+  collectExtraKeys$(
+    z.object({
+      type:
+        CreateToolResponseBodyToolsResponse200ApplicationJson4Type$inboundSchema,
+      properties: z.record(z.any()),
+      required: z.array(z.string()),
+    }).catchall(z.any()),
+    "additionalProperties",
+    true,
+  )
 );
 
 export function createToolResponseBodyParametersFromJSON(
@@ -1545,19 +1595,21 @@ export function createToolResponseBodyParametersFromJSON(
 /** @internal */
 export const ResponseBodyLanguage$inboundSchema: z.ZodNativeEnum<
   typeof ResponseBodyLanguage
-> = z.nativeEnum(ResponseBodyLanguage);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ResponseBodyLanguage));
 
 /** @internal */
 export const ResponseBodyCodeTool$inboundSchema: z.ZodType<
   ResponseBodyCodeTool,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  parameters: z.lazy(() => CreateToolResponseBodyParameters$inboundSchema)
-    .optional(),
-  language: ResponseBodyLanguage$inboundSchema,
-  code: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    parameters: z.lazy(() => CreateToolResponseBodyParameters$inboundSchema)
+      .optional(),
+    language: ResponseBodyLanguage$inboundSchema,
+    code: z.string(),
+  })
+);
 
 export function responseBodyCodeToolFromJSON(
   jsonString: string,
@@ -1574,34 +1626,36 @@ export const ResponseBodyCodeExecutionTool$inboundSchema: z.ZodType<
   ResponseBodyCodeExecutionTool,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  _id: z.string().default("tool_01M7WKM88RV0APFD3NM6NHE2XM"),
-  path: z.string(),
-  key: z.string(),
-  display_name: z.string().optional(),
-  description: z.string(),
-  created_by_id: z.nullable(z.string()).optional(),
-  updated_by_id: z.nullable(z.string()).optional(),
-  project_id: z.string(),
-  workspace_id: z.string(),
-  created: z.string(),
-  updated: z.string(),
-  status: CreateToolResponseBodyToolsResponseStatus$inboundSchema.default(
-    "live",
-  ),
-  type: z.literal("code"),
-  code_tool: z.lazy(() => ResponseBodyCodeTool$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "_id": "id",
-    "display_name": "displayName",
-    "created_by_id": "createdById",
-    "updated_by_id": "updatedById",
-    "project_id": "projectId",
-    "workspace_id": "workspaceId",
-    "code_tool": "codeTool",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    _id: z.string().default("tool_01M7YVSPAWQKZ0M200P2X38Y6V"),
+    path: z.string(),
+    key: z.string(),
+    display_name: z.string().optional(),
+    description: z.string(),
+    created_by_id: z.nullable(z.string()).optional(),
+    updated_by_id: z.nullable(z.string()).optional(),
+    project_id: z.string(),
+    workspace_id: z.string(),
+    created: z.string(),
+    updated: z.string(),
+    status: CreateToolResponseBodyToolsResponseStatus$inboundSchema.default(
+      "live",
+    ),
+    type: z.literal("code"),
+    code_tool: z.lazy(() => ResponseBodyCodeTool$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "_id": "id",
+      "display_name": "displayName",
+      "created_by_id": "createdById",
+      "updated_by_id": "updatedById",
+      "project_id": "projectId",
+      "workspace_id": "workspaceId",
+      "code_tool": "codeTool",
+    });
+  })
+);
 
 export function responseBodyCodeExecutionToolFromJSON(
   jsonString: string,
@@ -1616,22 +1670,28 @@ export function responseBodyCodeExecutionToolFromJSON(
 /** @internal */
 export const CreateToolResponseBodyToolsStatus$inboundSchema: z.ZodNativeEnum<
   typeof CreateToolResponseBodyToolsStatus
-> = z.nativeEnum(CreateToolResponseBodyToolsStatus);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(CreateToolResponseBodyToolsStatus)
+);
 
 /** @internal */
 export const CreateToolResponseBodyMethod$inboundSchema: z.ZodNativeEnum<
   typeof CreateToolResponseBodyMethod
-> = z.nativeEnum(CreateToolResponseBodyMethod);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(CreateToolResponseBodyMethod)
+);
 
 /** @internal */
 export const CreateToolHeadersTools2$inboundSchema: z.ZodType<
   CreateToolHeadersTools2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  value: z.string(),
-  encrypted: z.boolean().default(false),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    value: z.string(),
+    encrypted: z.boolean().default(false),
+  })
+);
 
 export function createToolHeadersTools2FromJSON(
   jsonString: string,
@@ -1648,7 +1708,9 @@ export const ResponseBodyHeaders$inboundSchema: z.ZodType<
   ResponseBodyHeaders,
   z.ZodTypeDef,
   unknown
-> = z.union([z.lazy(() => CreateToolHeadersTools2$inboundSchema), z.string()]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.lazy(() => CreateToolHeadersTools2$inboundSchema), z.string()])
+);
 
 export function responseBodyHeadersFromJSON(
   jsonString: string,
@@ -1665,15 +1727,20 @@ export const ResponseBodyBlueprint$inboundSchema: z.ZodType<
   ResponseBodyBlueprint,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  url: z.string(),
-  method: CreateToolResponseBodyMethod$inboundSchema,
-  headers: z.record(
-    z.union([z.lazy(() => CreateToolHeadersTools2$inboundSchema), z.string()]),
-  ).optional(),
-  body: z.record(z.any()).optional(),
-  timeout: z.number().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    url: z.string(),
+    method: CreateToolResponseBodyMethod$inboundSchema,
+    headers: z.record(
+      z.union([
+        z.lazy(() => CreateToolHeadersTools2$inboundSchema),
+        z.string(),
+      ]),
+    ).optional(),
+    body: z.record(z.any()).optional(),
+    timeout: z.number().optional(),
+  })
+);
 
 export function responseBodyBlueprintFromJSON(
   jsonString: string,
@@ -1687,15 +1754,19 @@ export function responseBodyBlueprintFromJSON(
 
 /** @internal */
 export const CreateToolResponseBodyToolsResponse200Type$inboundSchema:
-  z.ZodNativeEnum<typeof CreateToolResponseBodyToolsResponse200Type> = z
-    .nativeEnum(CreateToolResponseBodyToolsResponse200Type);
+  z.ZodNativeEnum<typeof CreateToolResponseBodyToolsResponse200Type> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(CreateToolResponseBodyToolsResponse200Type)
+    );
 
 /** @internal */
 export const ResponseBodyDefaultValue$inboundSchema: z.ZodType<
   ResponseBodyDefaultValue,
   z.ZodTypeDef,
   unknown
-> = z.union([z.string(), z.number(), z.boolean()]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.number(), z.boolean()])
+);
 
 export function responseBodyDefaultValueFromJSON(
   jsonString: string,
@@ -1712,17 +1783,19 @@ export const ResponseBodyArguments$inboundSchema: z.ZodType<
   ResponseBodyArguments,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: CreateToolResponseBodyToolsResponse200Type$inboundSchema,
-  description: z.string(),
-  send_to_model: z.boolean().default(true),
-  default_value: z.union([z.string(), z.number(), z.boolean()]).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "send_to_model": "sendToModel",
-    "default_value": "defaultValue",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: CreateToolResponseBodyToolsResponse200Type$inboundSchema,
+    description: z.string(),
+    send_to_model: z.boolean().default(true),
+    default_value: z.union([z.string(), z.number(), z.boolean()]).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "send_to_model": "sendToModel",
+      "default_value": "defaultValue",
+    });
+  })
+);
 
 export function responseBodyArgumentsFromJSON(
   jsonString: string,
@@ -1739,11 +1812,13 @@ export const ResponseBodyHttp$inboundSchema: z.ZodType<
   ResponseBodyHttp,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  blueprint: z.lazy(() => ResponseBodyBlueprint$inboundSchema),
-  arguments: z.record(z.lazy(() => ResponseBodyArguments$inboundSchema))
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    blueprint: z.lazy(() => ResponseBodyBlueprint$inboundSchema),
+    arguments: z.record(z.lazy(() => ResponseBodyArguments$inboundSchema))
+      .optional(),
+  })
+);
 
 export function responseBodyHttpFromJSON(
   jsonString: string,
@@ -1760,31 +1835,33 @@ export const ResponseBodyHTTPTool$inboundSchema: z.ZodType<
   ResponseBodyHTTPTool,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  _id: z.string().default("tool_01M7WKM88Q4FJSJJZ9Z5JBH3D2"),
-  path: z.string(),
-  key: z.string(),
-  display_name: z.string().optional(),
-  description: z.string(),
-  created_by_id: z.nullable(z.string()).optional(),
-  updated_by_id: z.nullable(z.string()).optional(),
-  project_id: z.string(),
-  workspace_id: z.string(),
-  created: z.string(),
-  updated: z.string(),
-  status: CreateToolResponseBodyToolsStatus$inboundSchema.default("live"),
-  type: z.literal("http"),
-  http: z.lazy(() => ResponseBodyHttp$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "_id": "id",
-    "display_name": "displayName",
-    "created_by_id": "createdById",
-    "updated_by_id": "updatedById",
-    "project_id": "projectId",
-    "workspace_id": "workspaceId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    _id: z.string().default("tool_01M7YVSPAVWHQA509CGR467QZT"),
+    path: z.string(),
+    key: z.string(),
+    display_name: z.string().optional(),
+    description: z.string(),
+    created_by_id: z.nullable(z.string()).optional(),
+    updated_by_id: z.nullable(z.string()).optional(),
+    project_id: z.string(),
+    workspace_id: z.string(),
+    created: z.string(),
+    updated: z.string(),
+    status: CreateToolResponseBodyToolsStatus$inboundSchema.default("live"),
+    type: z.literal("http"),
+    http: z.lazy(() => ResponseBodyHttp$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "_id": "id",
+      "display_name": "displayName",
+      "created_by_id": "createdById",
+      "updated_by_id": "updatedById",
+      "project_id": "projectId",
+      "workspace_id": "workspaceId",
+    });
+  })
+);
 
 export function responseBodyHTTPToolFromJSON(
   jsonString: string,
@@ -1799,21 +1876,25 @@ export function responseBodyHTTPToolFromJSON(
 /** @internal */
 export const CreateToolResponseBodyStatus$inboundSchema: z.ZodNativeEnum<
   typeof CreateToolResponseBodyStatus
-> = z.nativeEnum(CreateToolResponseBodyStatus);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(CreateToolResponseBodyStatus)
+);
 
 /** @internal */
 export const ResponseBodySchema$inboundSchema: z.ZodType<
   ResponseBodySchema,
   z.ZodTypeDef,
   unknown
-> = collectExtraKeys$(
-  z.object({
-    type: z.string(),
-    properties: z.record(z.any()),
-    required: z.array(z.string()),
-  }).catchall(z.any()),
-  "additionalProperties",
-  true,
+> = /* @__PURE__ */ lazySchema$(() =>
+  collectExtraKeys$(
+    z.object({
+      type: z.string(),
+      properties: z.record(z.any()),
+      required: z.array(z.string()),
+    }).catchall(z.any()),
+    "additionalProperties",
+    true,
+  )
 );
 
 export function responseBodySchemaFromJSON(
@@ -1831,12 +1912,14 @@ export const ResponseBodyJsonSchema$inboundSchema: z.ZodType<
   ResponseBodyJsonSchema,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string(),
-  description: z.string(),
-  schema: z.lazy(() => ResponseBodySchema$inboundSchema),
-  strict: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+    description: z.string(),
+    schema: z.lazy(() => ResponseBodySchema$inboundSchema),
+    strict: z.boolean().optional(),
+  })
+);
 
 export function responseBodyJsonSchemaFromJSON(
   jsonString: string,
@@ -1853,32 +1936,34 @@ export const ResponseBodyJSONSchemaTool$inboundSchema: z.ZodType<
   ResponseBodyJSONSchemaTool,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  _id: z.string().default("tool_01M7WKM88QBTWW2NNWHCKC0TP6"),
-  path: z.string(),
-  key: z.string(),
-  display_name: z.string().optional(),
-  description: z.string(),
-  created_by_id: z.nullable(z.string()).optional(),
-  updated_by_id: z.nullable(z.string()).optional(),
-  project_id: z.string(),
-  workspace_id: z.string(),
-  created: z.string(),
-  updated: z.string(),
-  status: CreateToolResponseBodyStatus$inboundSchema.default("live"),
-  type: z.literal("json_schema"),
-  json_schema: z.lazy(() => ResponseBodyJsonSchema$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "_id": "id",
-    "display_name": "displayName",
-    "created_by_id": "createdById",
-    "updated_by_id": "updatedById",
-    "project_id": "projectId",
-    "workspace_id": "workspaceId",
-    "json_schema": "jsonSchema",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    _id: z.string().default("tool_01M7YVSPAVMM7HPKF79Y2VFHZ6"),
+    path: z.string(),
+    key: z.string(),
+    display_name: z.string().optional(),
+    description: z.string(),
+    created_by_id: z.nullable(z.string()).optional(),
+    updated_by_id: z.nullable(z.string()).optional(),
+    project_id: z.string(),
+    workspace_id: z.string(),
+    created: z.string(),
+    updated: z.string(),
+    status: CreateToolResponseBodyStatus$inboundSchema.default("live"),
+    type: z.literal("json_schema"),
+    json_schema: z.lazy(() => ResponseBodyJsonSchema$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "_id": "id",
+      "display_name": "displayName",
+      "created_by_id": "createdById",
+      "updated_by_id": "updatedById",
+      "project_id": "projectId",
+      "workspace_id": "workspaceId",
+      "json_schema": "jsonSchema",
+    });
+  })
+);
 
 export function responseBodyJSONSchemaToolFromJSON(
   jsonString: string,
@@ -1893,28 +1978,32 @@ export function responseBodyJSONSchemaToolFromJSON(
 /** @internal */
 export const ResponseBodyStatus$inboundSchema: z.ZodNativeEnum<
   typeof ResponseBodyStatus
-> = z.nativeEnum(ResponseBodyStatus);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ResponseBodyStatus));
 
 /** @internal */
 export const CreateToolResponseBodyToolsResponse200ApplicationJSONType$inboundSchema:
   z.ZodNativeEnum<
     typeof CreateToolResponseBodyToolsResponse200ApplicationJSONType
-  > = z.nativeEnum(CreateToolResponseBodyToolsResponse200ApplicationJSONType);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.nativeEnum(CreateToolResponseBodyToolsResponse200ApplicationJSONType)
+  );
 
 /** @internal */
 export const ResponseBodyParameters$inboundSchema: z.ZodType<
   ResponseBodyParameters,
   z.ZodTypeDef,
   unknown
-> = collectExtraKeys$(
-  z.object({
-    type:
-      CreateToolResponseBodyToolsResponse200ApplicationJSONType$inboundSchema,
-    properties: z.record(z.any()),
-    required: z.array(z.string()),
-  }).catchall(z.any()),
-  "additionalProperties",
-  true,
+> = /* @__PURE__ */ lazySchema$(() =>
+  collectExtraKeys$(
+    z.object({
+      type:
+        CreateToolResponseBodyToolsResponse200ApplicationJSONType$inboundSchema,
+      properties: z.record(z.any()),
+      required: z.array(z.string()),
+    }).catchall(z.any()),
+    "additionalProperties",
+    true,
+  )
 );
 
 export function responseBodyParametersFromJSON(
@@ -1932,12 +2021,14 @@ export const ResponseBodyFunction$inboundSchema: z.ZodType<
   ResponseBodyFunction,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string(),
-  description: z.string().optional(),
-  strict: z.boolean().optional(),
-  parameters: z.lazy(() => ResponseBodyParameters$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+    description: z.string().optional(),
+    strict: z.boolean().optional(),
+    parameters: z.lazy(() => ResponseBodyParameters$inboundSchema).optional(),
+  })
+);
 
 export function responseBodyFunctionFromJSON(
   jsonString: string,
@@ -1954,31 +2045,33 @@ export const ResponseBodyFunctionTool$inboundSchema: z.ZodType<
   ResponseBodyFunctionTool,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  _id: z.string().default("tool_01M7WKM88PKMJ8M44Z744DFWDN"),
-  path: z.string(),
-  key: z.string(),
-  display_name: z.string().optional(),
-  description: z.string(),
-  created_by_id: z.nullable(z.string()).optional(),
-  updated_by_id: z.nullable(z.string()).optional(),
-  project_id: z.string(),
-  workspace_id: z.string(),
-  created: z.string(),
-  updated: z.string(),
-  status: ResponseBodyStatus$inboundSchema.default("live"),
-  type: z.literal("function"),
-  function: z.lazy(() => ResponseBodyFunction$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "_id": "id",
-    "display_name": "displayName",
-    "created_by_id": "createdById",
-    "updated_by_id": "updatedById",
-    "project_id": "projectId",
-    "workspace_id": "workspaceId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    _id: z.string().default("tool_01M7YVSPAVDX46N9F25857T68E"),
+    path: z.string(),
+    key: z.string(),
+    display_name: z.string().optional(),
+    description: z.string(),
+    created_by_id: z.nullable(z.string()).optional(),
+    updated_by_id: z.nullable(z.string()).optional(),
+    project_id: z.string(),
+    workspace_id: z.string(),
+    created: z.string(),
+    updated: z.string(),
+    status: ResponseBodyStatus$inboundSchema.default("live"),
+    type: z.literal("function"),
+    function: z.lazy(() => ResponseBodyFunction$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "_id": "id",
+      "display_name": "displayName",
+      "created_by_id": "createdById",
+      "updated_by_id": "updatedById",
+      "project_id": "projectId",
+      "workspace_id": "workspaceId",
+    });
+  })
+);
 
 export function responseBodyFunctionToolFromJSON(
   jsonString: string,
@@ -1995,12 +2088,14 @@ export const CreateToolResponseBody$inboundSchema: z.ZodType<
   CreateToolResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  z.lazy(() => ResponseBodyFunctionTool$inboundSchema),
-  z.lazy(() => ResponseBodyJSONSchemaTool$inboundSchema),
-  z.lazy(() => ResponseBodyHTTPTool$inboundSchema),
-  z.lazy(() => ResponseBodyCodeExecutionTool$inboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => ResponseBodyFunctionTool$inboundSchema),
+    z.lazy(() => ResponseBodyJSONSchemaTool$inboundSchema),
+    z.lazy(() => ResponseBodyHTTPTool$inboundSchema),
+    z.lazy(() => ResponseBodyCodeExecutionTool$inboundSchema),
+  ])
+);
 
 export function createToolResponseBodyFromJSON(
   jsonString: string,

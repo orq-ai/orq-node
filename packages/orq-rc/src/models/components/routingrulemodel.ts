@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -20,17 +20,19 @@ export const RoutingRuleModel$inboundSchema: z.ZodType<
   RoutingRuleModel,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  model: z.string().optional(),
-  display_name: z.string().optional(),
-  weight: z.number().optional(),
-  integration_id: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "display_name": "displayName",
-    "integration_id": "integrationId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model: z.string().optional(),
+    display_name: z.string().optional(),
+    weight: z.number().optional(),
+    integration_id: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "display_name": "displayName",
+      "integration_id": "integrationId",
+    });
+  })
+);
 /** @internal */
 export type RoutingRuleModel$Outbound = {
   model?: string | undefined;
@@ -44,17 +46,19 @@ export const RoutingRuleModel$outboundSchema: z.ZodType<
   RoutingRuleModel$Outbound,
   z.ZodTypeDef,
   RoutingRuleModel
-> = z.object({
-  model: z.string().optional(),
-  displayName: z.string().optional(),
-  weight: z.number().optional(),
-  integrationId: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    displayName: "display_name",
-    integrationId: "integration_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model: z.string().optional(),
+    displayName: z.string().optional(),
+    weight: z.number().optional(),
+    integrationId: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      displayName: "display_name",
+      integrationId: "integration_id",
+    });
+  })
+);
 
 export function routingRuleModelToJSON(
   routingRuleModel: RoutingRuleModel,

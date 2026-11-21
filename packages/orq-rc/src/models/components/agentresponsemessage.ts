@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -46,20 +46,21 @@ export type AgentResponseMessage = {
 };
 
 /** @internal */
-export const Role$inboundSchema: z.ZodNativeEnum<typeof Role> = z.nativeEnum(
-  Role,
-);
+export const Role$inboundSchema: z.ZodNativeEnum<typeof Role> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Role));
 
 /** @internal */
-export const Parts$inboundSchema: z.ZodType<Parts, z.ZodTypeDef, unknown> = z
-  .union([
-    TextPart$inboundSchema,
-    ErrorPart$inboundSchema,
-    DataPart$inboundSchema,
-    FilePart$inboundSchema,
-    ToolCallPart$inboundSchema,
-    ToolResultPart$inboundSchema,
-  ]);
+export const Parts$inboundSchema: z.ZodType<Parts, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.union([
+      TextPart$inboundSchema,
+      ErrorPart$inboundSchema,
+      DataPart$inboundSchema,
+      FilePart$inboundSchema,
+      ToolCallPart$inboundSchema,
+      ToolResultPart$inboundSchema,
+    ])
+  );
 
 export function partsFromJSON(
   jsonString: string,
@@ -76,21 +77,23 @@ export const AgentResponseMessage$inboundSchema: z.ZodType<
   AgentResponseMessage,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  messageId: z.string(),
-  role: Role$inboundSchema,
-  parts: z.array(
-    z.union([
-      TextPart$inboundSchema,
-      ErrorPart$inboundSchema,
-      DataPart$inboundSchema,
-      FilePart$inboundSchema,
-      ToolCallPart$inboundSchema,
-      ToolResultPart$inboundSchema,
-    ]),
-  ),
-  metadata: z.record(z.any()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    messageId: z.string(),
+    role: Role$inboundSchema,
+    parts: z.array(
+      z.union([
+        TextPart$inboundSchema,
+        ErrorPart$inboundSchema,
+        DataPart$inboundSchema,
+        FilePart$inboundSchema,
+        ToolCallPart$inboundSchema,
+        ToolResultPart$inboundSchema,
+      ]),
+    ),
+    metadata: z.record(z.any()).optional(),
+  })
+);
 
 export function agentResponseMessageFromJSON(
   jsonString: string,

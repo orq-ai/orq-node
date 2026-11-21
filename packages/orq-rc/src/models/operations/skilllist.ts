@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type SkillListRequest = {
   /**
@@ -35,6 +36,7 @@ export type SkillListRequest = {
    * Restrict results to one project: its own skills plus the workspace-level skills shared with it.
    */
   projectId?: string | undefined;
+  updatedBy?: string | undefined;
 };
 
 /** @internal */
@@ -44,6 +46,7 @@ export type SkillListRequest$Outbound = {
   ending_before?: string | undefined;
   search?: string | undefined;
   project_id?: string | undefined;
+  updated_by?: string | undefined;
 };
 
 /** @internal */
@@ -51,19 +54,23 @@ export const SkillListRequest$outboundSchema: z.ZodType<
   SkillListRequest$Outbound,
   z.ZodTypeDef,
   SkillListRequest
-> = z.object({
-  limit: z.number().int().optional(),
-  startingAfter: z.string().optional(),
-  endingBefore: z.string().optional(),
-  search: z.string().optional(),
-  projectId: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    startingAfter: "starting_after",
-    endingBefore: "ending_before",
-    projectId: "project_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    limit: z.number().int().optional(),
+    startingAfter: z.string().optional(),
+    endingBefore: z.string().optional(),
+    search: z.string().optional(),
+    projectId: z.string().optional(),
+    updatedBy: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      startingAfter: "starting_after",
+      endingBefore: "ending_before",
+      projectId: "project_id",
+      updatedBy: "updated_by",
+    });
+  })
+);
 
 export function skillListRequestToJSON(
   skillListRequest: SkillListRequest,

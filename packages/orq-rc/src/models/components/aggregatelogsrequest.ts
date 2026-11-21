@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import {
   TraceFilter,
   TraceFilter$Outbound,
@@ -36,12 +37,14 @@ export const AggregateLogsRequest$outboundSchema: z.ZodType<
   AggregateLogsRequest$Outbound,
   z.ZodTypeDef,
   AggregateLogsRequest
-> = z.object({
-  from: z.date().transform(v => v.toISOString()).optional(),
-  to: z.date().transform(v => v.toISOString()).optional(),
-  grain: z.string().optional(),
-  filters: z.array(TraceFilter$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    from: z.date().transform(v => v.toISOString()).optional(),
+    to: z.date().transform(v => v.toISOString()).optional(),
+    grain: z.string().optional(),
+    filters: z.array(TraceFilter$outboundSchema).optional(),
+  })
+);
 
 export function aggregateLogsRequestToJSON(
   aggregateLogsRequest: AggregateLogsRequest,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -38,21 +38,23 @@ export const PublicBatchUsage$inboundSchema: z.ZodType<
   PublicBatchUsage,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  input_tokens: z.number().int(),
-  input_tokens_details: PublicBatchUsageInputTokenDetails$inboundSchema,
-  output_tokens: z.number().int(),
-  output_tokens_details: PublicBatchUsageOutputTokenDetails$inboundSchema,
-  total_tokens: z.number().int(),
-}).transform((v) => {
-  return remap$(v, {
-    "input_tokens": "inputTokens",
-    "input_tokens_details": "inputTokensDetails",
-    "output_tokens": "outputTokens",
-    "output_tokens_details": "outputTokensDetails",
-    "total_tokens": "totalTokens",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    input_tokens: z.number().int(),
+    input_tokens_details: PublicBatchUsageInputTokenDetails$inboundSchema,
+    output_tokens: z.number().int(),
+    output_tokens_details: PublicBatchUsageOutputTokenDetails$inboundSchema,
+    total_tokens: z.number().int(),
+  }).transform((v) => {
+    return remap$(v, {
+      "input_tokens": "inputTokens",
+      "input_tokens_details": "inputTokensDetails",
+      "output_tokens": "outputTokens",
+      "output_tokens_details": "outputTokensDetails",
+      "total_tokens": "totalTokens",
+    });
+  })
+);
 
 export function publicBatchUsageFromJSON(
   jsonString: string,

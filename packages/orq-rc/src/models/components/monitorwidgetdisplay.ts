@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -100,16 +100,17 @@ export type MonitorWidgetDisplay = {
 /** @internal */
 export const MonitorWidgetDisplayVisualization$inboundSchema: z.ZodNativeEnum<
   typeof MonitorWidgetDisplayVisualization
-> = z.nativeEnum(MonitorWidgetDisplayVisualization);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(MonitorWidgetDisplayVisualization)
+);
 /** @internal */
 export const MonitorWidgetDisplayVisualization$outboundSchema: z.ZodNativeEnum<
   typeof MonitorWidgetDisplayVisualization
 > = MonitorWidgetDisplayVisualization$inboundSchema;
 
 /** @internal */
-export const Unit$inboundSchema: z.ZodNativeEnum<typeof Unit> = z.nativeEnum(
-  Unit,
-);
+export const Unit$inboundSchema: z.ZodNativeEnum<typeof Unit> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Unit));
 /** @internal */
 export const Unit$outboundSchema: z.ZodNativeEnum<typeof Unit> =
   Unit$inboundSchema;
@@ -117,7 +118,7 @@ export const Unit$outboundSchema: z.ZodNativeEnum<typeof Unit> =
 /** @internal */
 export const MonitorWidgetDisplaySort$inboundSchema: z.ZodNativeEnum<
   typeof MonitorWidgetDisplaySort
-> = z.nativeEnum(MonitorWidgetDisplaySort);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(MonitorWidgetDisplaySort));
 /** @internal */
 export const MonitorWidgetDisplaySort$outboundSchema: z.ZodNativeEnum<
   typeof MonitorWidgetDisplaySort
@@ -128,22 +129,24 @@ export const MonitorWidgetDisplay$inboundSchema: z.ZodType<
   MonitorWidgetDisplay,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  visualization: MonitorWidgetDisplayVisualization$inboundSchema.optional(),
-  unit: Unit$inboundSchema.optional(),
-  sort: MonitorWidgetDisplaySort$inboundSchema.optional(),
-  show_overall: z.boolean().optional(),
-  target: z.number().optional(),
-  decimals: z.number().int().optional(),
-  show_others: z.boolean().optional(),
-  show_percentages: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "show_overall": "showOverall",
-    "show_others": "showOthers",
-    "show_percentages": "showPercentages",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    visualization: MonitorWidgetDisplayVisualization$inboundSchema.optional(),
+    unit: Unit$inboundSchema.optional(),
+    sort: MonitorWidgetDisplaySort$inboundSchema.optional(),
+    show_overall: z.boolean().optional(),
+    target: z.number().optional(),
+    decimals: z.number().int().optional(),
+    show_others: z.boolean().optional(),
+    show_percentages: z.boolean().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "show_overall": "showOverall",
+      "show_others": "showOthers",
+      "show_percentages": "showPercentages",
+    });
+  })
+);
 /** @internal */
 export type MonitorWidgetDisplay$Outbound = {
   visualization?: string | undefined;
@@ -161,22 +164,24 @@ export const MonitorWidgetDisplay$outboundSchema: z.ZodType<
   MonitorWidgetDisplay$Outbound,
   z.ZodTypeDef,
   MonitorWidgetDisplay
-> = z.object({
-  visualization: MonitorWidgetDisplayVisualization$outboundSchema.optional(),
-  unit: Unit$outboundSchema.optional(),
-  sort: MonitorWidgetDisplaySort$outboundSchema.optional(),
-  showOverall: z.boolean().optional(),
-  target: z.number().optional(),
-  decimals: z.number().int().optional(),
-  showOthers: z.boolean().optional(),
-  showPercentages: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    showOverall: "show_overall",
-    showOthers: "show_others",
-    showPercentages: "show_percentages",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    visualization: MonitorWidgetDisplayVisualization$outboundSchema.optional(),
+    unit: Unit$outboundSchema.optional(),
+    sort: MonitorWidgetDisplaySort$outboundSchema.optional(),
+    showOverall: z.boolean().optional(),
+    target: z.number().optional(),
+    decimals: z.number().int().optional(),
+    showOthers: z.boolean().optional(),
+    showPercentages: z.boolean().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      showOverall: "show_overall",
+      showOthers: "show_others",
+      showPercentages: "show_percentages",
+    });
+  })
+);
 
 export function monitorWidgetDisplayToJSON(
   monitorWidgetDisplay: MonitorWidgetDisplay,

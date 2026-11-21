@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import * as components from "../components/index.js";
 
 export type UpdateKnowledgeRequest = {
@@ -24,16 +25,18 @@ export const UpdateKnowledgeRequest$outboundSchema: z.ZodType<
   UpdateKnowledgeRequest$Outbound,
   z.ZodTypeDef,
   UpdateKnowledgeRequest
-> = z.object({
-  knowledgeId: z.string(),
-  knowledgeBasesServiceUpdateRequest:
-    components.KnowledgeBasesServiceUpdateRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    knowledgeId: "knowledge_id",
-    knowledgeBasesServiceUpdateRequest: "KnowledgeBasesServiceUpdateRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    knowledgeId: z.string(),
+    knowledgeBasesServiceUpdateRequest:
+      components.KnowledgeBasesServiceUpdateRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      knowledgeId: "knowledge_id",
+      knowledgeBasesServiceUpdateRequest: "KnowledgeBasesServiceUpdateRequest",
+    });
+  })
+);
 
 export function updateKnowledgeRequestToJSON(
   updateKnowledgeRequest: UpdateKnowledgeRequest,

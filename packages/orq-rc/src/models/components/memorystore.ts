@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -50,24 +50,26 @@ export const MemoryStore$inboundSchema: z.ZodType<
   MemoryStore,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  key: z.string(),
-  description: z.string(),
-  created_by_id: z.nullable(z.string()).optional(),
-  updated_by_id: z.nullable(z.string()).optional(),
-  created: z.string(),
-  updated: z.string(),
-  ttl: z.nullable(z.number()).optional(),
-  embedding_config: MemoryStoreEmbeddingConfig$inboundSchema,
-  _id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "created_by_id": "createdById",
-    "updated_by_id": "updatedById",
-    "embedding_config": "embeddingConfig",
-    "_id": "id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    key: z.string(),
+    description: z.string(),
+    created_by_id: z.nullable(z.string()).optional(),
+    updated_by_id: z.nullable(z.string()).optional(),
+    created: z.string(),
+    updated: z.string(),
+    ttl: z.nullable(z.number()).optional(),
+    embedding_config: MemoryStoreEmbeddingConfig$inboundSchema,
+    _id: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "created_by_id": "createdById",
+      "updated_by_id": "updatedById",
+      "embedding_config": "embeddingConfig",
+      "_id": "id",
+    });
+  })
+);
 
 export function memoryStoreFromJSON(
   jsonString: string,

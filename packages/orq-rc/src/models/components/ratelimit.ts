@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -23,13 +23,15 @@ export const RateLimit$inboundSchema: z.ZodType<
   RateLimit,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  requests_per_minute: z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "requests_per_minute": "requestsPerMinute",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    requests_per_minute: z.number().int().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "requests_per_minute": "requestsPerMinute",
+    });
+  })
+);
 /** @internal */
 export type RateLimit$Outbound = {
   requests_per_minute?: number | undefined;
@@ -40,13 +42,15 @@ export const RateLimit$outboundSchema: z.ZodType<
   RateLimit$Outbound,
   z.ZodTypeDef,
   RateLimit
-> = z.object({
-  requestsPerMinute: z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    requestsPerMinute: "requests_per_minute",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    requestsPerMinute: z.number().int().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      requestsPerMinute: "requests_per_minute",
+    });
+  })
+);
 
 export function rateLimitToJSON(rateLimit: RateLimit): string {
   return JSON.stringify(RateLimit$outboundSchema.parse(rateLimit));

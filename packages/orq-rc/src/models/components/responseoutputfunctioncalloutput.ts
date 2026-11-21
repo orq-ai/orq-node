@@ -6,6 +6,7 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import {
   collectExtraKeys as collectExtraKeys$,
+  lazySchema as lazySchema$,
   safeParse,
 } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
@@ -58,8 +59,10 @@ export type ResponseOutputFunctionCallOutput = {
 };
 
 /** @internal */
-export const Output$inboundSchema: z.ZodType<Output, z.ZodTypeDef, unknown> = z
-  .union([z.string(), z.array(z.record(z.any()))]);
+export const Output$inboundSchema: z.ZodType<Output, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.union([z.string(), z.array(z.record(z.any()))])
+  );
 
 export function outputFromJSON(
   jsonString: string,
@@ -73,30 +76,33 @@ export function outputFromJSON(
 
 /** @internal */
 export const ResponseOutputFunctionCallOutputType$inboundSchema:
-  z.ZodNativeEnum<typeof ResponseOutputFunctionCallOutputType> = z.nativeEnum(
-    ResponseOutputFunctionCallOutputType,
-  );
+  z.ZodNativeEnum<typeof ResponseOutputFunctionCallOutputType> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(ResponseOutputFunctionCallOutputType)
+    );
 
 /** @internal */
 export const ResponseOutputFunctionCallOutput$inboundSchema: z.ZodType<
   ResponseOutputFunctionCallOutput,
   z.ZodTypeDef,
   unknown
-> = collectExtraKeys$(
-  z.object({
-    call_id: z.string(),
-    id: z.string().optional(),
-    output: z.union([z.string(), z.array(z.record(z.any()))]).optional(),
-    status: z.string().optional(),
-    type: ResponseOutputFunctionCallOutputType$inboundSchema,
-  }).catchall(z.any()),
-  "additionalProperties",
-  true,
-).transform((v) => {
-  return remap$(v, {
-    "call_id": "callId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  collectExtraKeys$(
+    z.object({
+      call_id: z.string(),
+      id: z.string().optional(),
+      output: z.union([z.string(), z.array(z.record(z.any()))]).optional(),
+      status: z.string().optional(),
+      type: ResponseOutputFunctionCallOutputType$inboundSchema,
+    }).catchall(z.any()),
+    "additionalProperties",
+    true,
+  ).transform((v) => {
+    return remap$(v, {
+      "call_id": "callId",
+    });
+  })
+);
 
 export function responseOutputFunctionCallOutputFromJSON(
   jsonString: string,

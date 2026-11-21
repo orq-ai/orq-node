@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -20,17 +20,19 @@ export const AgenticRagConfig$inboundSchema: z.ZodType<
   AgenticRagConfig,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  model_db_id: z.string().optional(),
-  provider: z.string().optional(),
-  integration_id: z.string().optional(),
-  model: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "model_db_id": "modelDbId",
-    "integration_id": "integrationId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model_db_id: z.string().optional(),
+    provider: z.string().optional(),
+    integration_id: z.string().optional(),
+    model: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "model_db_id": "modelDbId",
+      "integration_id": "integrationId",
+    });
+  })
+);
 
 export function agenticRagConfigFromJSON(
   jsonString: string,

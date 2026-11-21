@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type QueryLogsRequest = {
   /**
@@ -39,17 +40,19 @@ export const QueryLogsRequest$outboundSchema: z.ZodType<
   QueryLogsRequest$Outbound,
   z.ZodTypeDef,
   QueryLogsRequest
-> = z.object({
-  oql: z.string(),
-  limit: z.number().int().optional(),
-  from: z.date().transform(v => v.toISOString()),
-  to: z.date().transform(v => v.toISOString()),
-  pageToken: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    pageToken: "page_token",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    oql: z.string(),
+    limit: z.number().int().optional(),
+    from: z.date().transform(v => v.toISOString()),
+    to: z.date().transform(v => v.toISOString()),
+    pageToken: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      pageToken: "page_token",
+    });
+  })
+);
 
 export function queryLogsRequestToJSON(
   queryLogsRequest: QueryLogsRequest,

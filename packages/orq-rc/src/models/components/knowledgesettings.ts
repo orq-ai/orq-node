@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -31,17 +31,19 @@ export const KnowledgeSettings$inboundSchema: z.ZodType<
   KnowledgeSettings,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  embeddings_config: EmbeddingsConfig$inboundSchema.optional(),
-  retrieval_config: RetrievalConfig$inboundSchema.optional(),
-  agentic_rag_config: AgenticRagConfig$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "embeddings_config": "embeddingsConfig",
-    "retrieval_config": "retrievalConfig",
-    "agentic_rag_config": "agenticRagConfig",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    embeddings_config: EmbeddingsConfig$inboundSchema.optional(),
+    retrieval_config: RetrievalConfig$inboundSchema.optional(),
+    agentic_rag_config: AgenticRagConfig$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "embeddings_config": "embeddingsConfig",
+      "retrieval_config": "retrievalConfig",
+      "agentic_rag_config": "agenticRagConfig",
+    });
+  })
+);
 
 export function knowledgeSettingsFromJSON(
   jsonString: string,

@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type McpHealthCheckConfigInput = {
   enabled?: boolean | undefined;
@@ -34,17 +35,19 @@ export const McpHealthCheckConfigInput$outboundSchema: z.ZodType<
   McpHealthCheckConfigInput$Outbound,
   z.ZodTypeDef,
   McpHealthCheckConfigInput
-> = z.object({
-  enabled: z.boolean().optional(),
-  interval: z.string().optional(),
-  notifierIds: z.array(z.string()).optional(),
-  recoveryPeriod: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    notifierIds: "notifier_ids",
-    recoveryPeriod: "recovery_period",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    enabled: z.boolean().optional(),
+    interval: z.string().optional(),
+    notifierIds: z.array(z.string()).optional(),
+    recoveryPeriod: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      notifierIds: "notifier_ids",
+      recoveryPeriod: "recovery_period",
+    });
+  })
+);
 
 export function mcpHealthCheckConfigInputToJSON(
   mcpHealthCheckConfigInput: McpHealthCheckConfigInput,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -31,21 +31,23 @@ export const McpHealthCheckConfig$inboundSchema: z.ZodType<
   McpHealthCheckConfig,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  enabled: z.boolean().optional(),
-  interval: z.string().optional(),
-  min_interval: z.string().optional(),
-  default_interval: z.string().optional(),
-  notifier_ids: z.array(z.string()).optional(),
-  recovery_period: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "min_interval": "minInterval",
-    "default_interval": "defaultInterval",
-    "notifier_ids": "notifierIds",
-    "recovery_period": "recoveryPeriod",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    enabled: z.boolean().optional(),
+    interval: z.string().optional(),
+    min_interval: z.string().optional(),
+    default_interval: z.string().optional(),
+    notifier_ids: z.array(z.string()).optional(),
+    recovery_period: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "min_interval": "minInterval",
+      "default_interval": "defaultInterval",
+      "notifier_ids": "notifierIds",
+      "recovery_period": "recoveryPeriod",
+    });
+  })
+);
 
 export function mcpHealthCheckConfigFromJSON(
   jsonString: string,

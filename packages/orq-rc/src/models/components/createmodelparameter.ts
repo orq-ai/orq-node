@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type CreateModelParameter = {
   config: { [k: string]: any };
@@ -31,19 +32,21 @@ export const CreateModelParameter$outboundSchema: z.ZodType<
   CreateModelParameter$Outbound,
   z.ZodTypeDef,
   CreateModelParameter
-> = z.object({
-  config: z.record(z.any()),
-  description: z.string().optional(),
-  hints: z.string().optional(),
-  name: z.string(),
-  parameter: z.string(),
-  parameterType: z.string(),
-  position: z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    parameterType: "parameter_type",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    config: z.record(z.any()),
+    description: z.string().optional(),
+    hints: z.string().optional(),
+    name: z.string(),
+    parameter: z.string(),
+    parameterType: z.string(),
+    position: z.number().int().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      parameterType: "parameter_type",
+    });
+  })
+);
 
 export function createModelParameterToJSON(
   createModelParameter: CreateModelParameter,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -18,20 +18,22 @@ export type IPRange = {
 
 /** @internal */
 export const IPRange$inboundSchema: z.ZodType<IPRange, z.ZodTypeDef, unknown> =
-  z.object({
-    id: z.string(),
-    cidr: z.string(),
-    description: z.string(),
-    created_at: z.string().datetime({ offset: true }).transform(v =>
-      new Date(v)
-    ),
-    created_by_id: z.string().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "created_at": "createdAt",
-      "created_by_id": "createdById",
-    });
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string(),
+      cidr: z.string(),
+      description: z.string(),
+      created_at: z.string().datetime({ offset: true }).transform(v =>
+        new Date(v)
+      ),
+      created_by_id: z.string().optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "created_at": "createdAt",
+        "created_by_id": "createdById",
+      });
+    })
+  );
 
 export function ipRangeFromJSON(
   jsonString: string,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -28,21 +28,23 @@ export const EmbeddingsConfig$inboundSchema: z.ZodType<
   EmbeddingsConfig,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  provider: z.string().optional(),
-  model: z.string().optional(),
-  model_db_id: z.string().optional(),
-  model_type: z.string().optional(),
-  model_parameters: EmbeddingsModelParameters$inboundSchema.optional(),
-  integration_id: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "model_db_id": "modelDbId",
-    "model_type": "modelType",
-    "model_parameters": "modelParameters",
-    "integration_id": "integrationId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    provider: z.string().optional(),
+    model: z.string().optional(),
+    model_db_id: z.string().optional(),
+    model_type: z.string().optional(),
+    model_parameters: EmbeddingsModelParameters$inboundSchema.optional(),
+    integration_id: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "model_db_id": "modelDbId",
+      "model_type": "modelType",
+      "model_parameters": "modelParameters",
+      "integration_id": "integrationId",
+    });
+  })
+);
 /** @internal */
 export type EmbeddingsConfig$Outbound = {
   provider?: string | undefined;
@@ -58,21 +60,23 @@ export const EmbeddingsConfig$outboundSchema: z.ZodType<
   EmbeddingsConfig$Outbound,
   z.ZodTypeDef,
   EmbeddingsConfig
-> = z.object({
-  provider: z.string().optional(),
-  model: z.string().optional(),
-  modelDbId: z.string().optional(),
-  modelType: z.string().optional(),
-  modelParameters: EmbeddingsModelParameters$outboundSchema.optional(),
-  integrationId: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    modelDbId: "model_db_id",
-    modelType: "model_type",
-    modelParameters: "model_parameters",
-    integrationId: "integration_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    provider: z.string().optional(),
+    model: z.string().optional(),
+    modelDbId: z.string().optional(),
+    modelType: z.string().optional(),
+    modelParameters: EmbeddingsModelParameters$outboundSchema.optional(),
+    integrationId: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      modelDbId: "model_db_id",
+      modelType: "model_type",
+      modelParameters: "model_parameters",
+      integrationId: "integration_id",
+    });
+  })
+);
 
 export function embeddingsConfigToJSON(
   embeddingsConfig: EmbeddingsConfig,

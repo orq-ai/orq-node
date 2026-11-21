@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import {
   SmartRouterProfile,
   SmartRouterProfile$outboundSchema,
@@ -40,16 +41,18 @@ export const CreateSmartRouterRequest$outboundSchema: z.ZodType<
   CreateSmartRouterRequest$Outbound,
   z.ZodTypeDef,
   CreateSmartRouterRequest
-> = z.object({
-  key: z.string(),
-  models: z.array(z.string()),
-  profile: SmartRouterProfile$outboundSchema,
-  sessionAffinity: SmartRouterSessionAffinity$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    sessionAffinity: "session_affinity",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    key: z.string(),
+    models: z.array(z.string()),
+    profile: SmartRouterProfile$outboundSchema,
+    sessionAffinity: SmartRouterSessionAffinity$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      sessionAffinity: "session_affinity",
+    });
+  })
+);
 
 export function createSmartRouterRequestToJSON(
   createSmartRouterRequest: CreateSmartRouterRequest,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -22,15 +22,17 @@ export const McpResourceAnnotations$inboundSchema: z.ZodType<
   McpResourceAnnotations,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  audience: z.array(z.string()).optional(),
-  last_modified: z.string().optional(),
-  priority: z.number().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "last_modified": "lastModified",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    audience: z.array(z.string()).optional(),
+    last_modified: z.string().optional(),
+    priority: z.number().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "last_modified": "lastModified",
+    });
+  })
+);
 
 export function mcpResourceAnnotationsFromJSON(
   jsonString: string,

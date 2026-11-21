@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type QueryParamsPagination = {
   page?: number | undefined;
@@ -24,12 +25,14 @@ export const QueryParamsPagination$outboundSchema: z.ZodType<
   QueryParamsPagination$Outbound,
   z.ZodTypeDef,
   QueryParamsPagination
-> = z.object({
-  page: z.number().int().optional(),
-  limit: z.number().int().optional(),
-  lastId: z.string().optional(),
-  firstId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    page: z.number().int().optional(),
+    limit: z.number().int().optional(),
+    lastId: z.string().optional(),
+    firstId: z.string().optional(),
+  })
+);
 
 export function queryParamsPaginationToJSON(
   queryParamsPagination: QueryParamsPagination,

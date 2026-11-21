@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -47,27 +47,29 @@ export const TelemetryMetricCapability$inboundSchema: z.ZodType<
   TelemetryMetricCapability,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string().optional(),
-  label: z.string().optional(),
-  description: z.string().optional(),
-  unit: z.string().optional(),
-  operations: z.array(z.string()).optional(),
-  default_operation: z.string().optional(),
-  modes: z.array(TelemetryQueryMode$inboundSchema).optional(),
-  result_kinds: z.array(TelemetryResultKind$inboundSchema).optional(),
-  value_cardinality: TelemetryValueCardinality$inboundSchema.optional(),
-  dimensions: z.array(TelemetryDimensionCapability$inboundSchema).optional(),
-  dimension_sets: z.array(TelemetryDimensionSetCapability$inboundSchema)
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "default_operation": "defaultOperation",
-    "result_kinds": "resultKinds",
-    "value_cardinality": "valueCardinality",
-    "dimension_sets": "dimensionSets",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    label: z.string().optional(),
+    description: z.string().optional(),
+    unit: z.string().optional(),
+    operations: z.array(z.string()).optional(),
+    default_operation: z.string().optional(),
+    modes: z.array(TelemetryQueryMode$inboundSchema).optional(),
+    result_kinds: z.array(TelemetryResultKind$inboundSchema).optional(),
+    value_cardinality: TelemetryValueCardinality$inboundSchema.optional(),
+    dimensions: z.array(TelemetryDimensionCapability$inboundSchema).optional(),
+    dimension_sets: z.array(TelemetryDimensionSetCapability$inboundSchema)
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "default_operation": "defaultOperation",
+      "result_kinds": "resultKinds",
+      "value_cardinality": "valueCardinality",
+      "dimension_sets": "dimensionSets",
+    });
+  })
+);
 
 export function telemetryMetricCapabilityFromJSON(
   jsonString: string,

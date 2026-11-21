@@ -99,6 +99,7 @@ async function $do(
     "project_id": payload?.project_id,
     "search": payload?.search,
     "starting_after": payload?.starting_after,
+    "updated_by": payload?.updated_by,
   });
 
   const headers = new Headers(compactMap({

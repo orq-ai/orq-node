@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
@@ -1944,12 +1944,14 @@ export const StreamRunAgentResponseFormatAgentsJsonSchema$outboundSchema:
     StreamRunAgentResponseFormatAgentsJsonSchema$Outbound,
     z.ZodTypeDef,
     StreamRunAgentResponseFormatAgentsJsonSchema
-  > = z.object({
-    description: z.string().optional(),
-    name: z.string(),
-    schema: z.any().optional(),
-    strict: z.boolean().default(false),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      description: z.string().optional(),
+      name: z.string(),
+      schema: z.any().optional(),
+      strict: z.boolean().default(false),
+    })
+  );
 
 export function streamRunAgentResponseFormatAgentsJsonSchemaToJSON(
   streamRunAgentResponseFormatAgentsJsonSchema:
@@ -1973,16 +1975,18 @@ export const StreamRunAgentResponseFormatJSONSchema$outboundSchema: z.ZodType<
   StreamRunAgentResponseFormatJSONSchema$Outbound,
   z.ZodTypeDef,
   StreamRunAgentResponseFormatJSONSchema
-> = z.object({
-  type: z.literal("json_schema"),
-  jsonSchema: z.lazy(() =>
-    StreamRunAgentResponseFormatAgentsJsonSchema$outboundSchema
-  ),
-}).transform((v) => {
-  return remap$(v, {
-    jsonSchema: "json_schema",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("json_schema"),
+    jsonSchema: z.lazy(() =>
+      StreamRunAgentResponseFormatAgentsJsonSchema$outboundSchema
+    ),
+  }).transform((v) => {
+    return remap$(v, {
+      jsonSchema: "json_schema",
+    });
+  })
+);
 
 export function streamRunAgentResponseFormatJSONSchemaToJSON(
   streamRunAgentResponseFormatJSONSchema:
@@ -2005,9 +2009,11 @@ export const StreamRunAgentResponseFormatJSONObject$outboundSchema: z.ZodType<
   StreamRunAgentResponseFormatJSONObject$Outbound,
   z.ZodTypeDef,
   StreamRunAgentResponseFormatJSONObject
-> = z.object({
-  type: z.literal("json_object"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("json_object"),
+  })
+);
 
 export function streamRunAgentResponseFormatJSONObjectToJSON(
   streamRunAgentResponseFormatJSONObject:
@@ -2030,9 +2036,11 @@ export const StreamRunAgentResponseFormatText$outboundSchema: z.ZodType<
   StreamRunAgentResponseFormatText$Outbound,
   z.ZodTypeDef,
   StreamRunAgentResponseFormatText
-> = z.object({
-  type: z.literal("text"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("text"),
+  })
+);
 
 export function streamRunAgentResponseFormatTextToJSON(
   streamRunAgentResponseFormatText: StreamRunAgentResponseFormatText,
@@ -2056,11 +2064,13 @@ export const StreamRunAgentModelConfigurationResponseFormat$outboundSchema:
     StreamRunAgentModelConfigurationResponseFormat$Outbound,
     z.ZodTypeDef,
     StreamRunAgentModelConfigurationResponseFormat
-  > = z.union([
-    z.lazy(() => StreamRunAgentResponseFormatText$outboundSchema),
-    z.lazy(() => StreamRunAgentResponseFormatJSONObject$outboundSchema),
-    z.lazy(() => StreamRunAgentResponseFormatJSONSchema$outboundSchema),
-  ]);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.union([
+      z.lazy(() => StreamRunAgentResponseFormatText$outboundSchema),
+      z.lazy(() => StreamRunAgentResponseFormatJSONObject$outboundSchema),
+      z.lazy(() => StreamRunAgentResponseFormatJSONSchema$outboundSchema),
+    ])
+  );
 
 export function streamRunAgentModelConfigurationResponseFormatToJSON(
   streamRunAgentModelConfigurationResponseFormat:
@@ -2075,8 +2085,10 @@ export function streamRunAgentModelConfigurationResponseFormatToJSON(
 
 /** @internal */
 export const StreamRunAgentModelConfigurationReasoningEffort$outboundSchema:
-  z.ZodNativeEnum<typeof StreamRunAgentModelConfigurationReasoningEffort> = z
-    .nativeEnum(StreamRunAgentModelConfigurationReasoningEffort);
+  z.ZodNativeEnum<typeof StreamRunAgentModelConfigurationReasoningEffort> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(StreamRunAgentModelConfigurationReasoningEffort)
+    );
 
 /** @internal */
 export type StreamRunAgentModelConfigurationStop$Outbound =
@@ -2088,7 +2100,9 @@ export const StreamRunAgentModelConfigurationStop$outboundSchema: z.ZodType<
   StreamRunAgentModelConfigurationStop$Outbound,
   z.ZodTypeDef,
   StreamRunAgentModelConfigurationStop
-> = z.union([z.string(), z.array(z.string())]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.array(z.string())])
+);
 
 export function streamRunAgentModelConfigurationStopToJSON(
   streamRunAgentModelConfigurationStop: StreamRunAgentModelConfigurationStop,
@@ -2112,12 +2126,14 @@ export const StreamRunAgentModelConfigurationThinking$outboundSchema: z.ZodType<
   StreamRunAgentModelConfigurationThinking$Outbound,
   z.ZodTypeDef,
   StreamRunAgentModelConfigurationThinking
-> = z.union([
-  components.ThinkingConfigDisabledSchema$outboundSchema,
-  components.ThinkingConfigEnabledSchema$outboundSchema,
-  components.ThinkingConfigAdaptiveSchema$outboundSchema,
-  components.ThinkingConfigBetweenToolsSchema$outboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    components.ThinkingConfigDisabledSchema$outboundSchema,
+    components.ThinkingConfigEnabledSchema$outboundSchema,
+    components.ThinkingConfigAdaptiveSchema$outboundSchema,
+    components.ThinkingConfigBetweenToolsSchema$outboundSchema,
+  ])
+);
 
 export function streamRunAgentModelConfigurationThinkingToJSON(
   streamRunAgentModelConfigurationThinking:
@@ -2133,7 +2149,9 @@ export function streamRunAgentModelConfigurationThinkingToJSON(
 /** @internal */
 export const StreamRunAgentToolChoiceType$outboundSchema: z.ZodNativeEnum<
   typeof StreamRunAgentToolChoiceType
-> = z.nativeEnum(StreamRunAgentToolChoiceType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(StreamRunAgentToolChoiceType)
+);
 
 /** @internal */
 export type StreamRunAgentToolChoiceFunction$Outbound = {
@@ -2145,9 +2163,11 @@ export const StreamRunAgentToolChoiceFunction$outboundSchema: z.ZodType<
   StreamRunAgentToolChoiceFunction$Outbound,
   z.ZodTypeDef,
   StreamRunAgentToolChoiceFunction
-> = z.object({
-  name: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+  })
+);
 
 export function streamRunAgentToolChoiceFunctionToJSON(
   streamRunAgentToolChoiceFunction: StreamRunAgentToolChoiceFunction,
@@ -2170,10 +2190,12 @@ export const StreamRunAgentToolChoice2$outboundSchema: z.ZodType<
   StreamRunAgentToolChoice2$Outbound,
   z.ZodTypeDef,
   StreamRunAgentToolChoice2
-> = z.object({
-  type: StreamRunAgentToolChoiceType$outboundSchema.optional(),
-  function: z.lazy(() => StreamRunAgentToolChoiceFunction$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: StreamRunAgentToolChoiceType$outboundSchema.optional(),
+    function: z.lazy(() => StreamRunAgentToolChoiceFunction$outboundSchema),
+  })
+);
 
 export function streamRunAgentToolChoice2ToJSON(
   streamRunAgentToolChoice2: StreamRunAgentToolChoice2,
@@ -2186,7 +2208,7 @@ export function streamRunAgentToolChoice2ToJSON(
 /** @internal */
 export const StreamRunAgentToolChoice1$outboundSchema: z.ZodNativeEnum<
   typeof StreamRunAgentToolChoice1
-> = z.nativeEnum(StreamRunAgentToolChoice1);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(StreamRunAgentToolChoice1));
 
 /** @internal */
 export type StreamRunAgentModelConfigurationToolChoice$Outbound =
@@ -2199,10 +2221,12 @@ export const StreamRunAgentModelConfigurationToolChoice$outboundSchema:
     StreamRunAgentModelConfigurationToolChoice$Outbound,
     z.ZodTypeDef,
     StreamRunAgentModelConfigurationToolChoice
-  > = z.union([
-    z.lazy(() => StreamRunAgentToolChoice2$outboundSchema),
-    StreamRunAgentToolChoice1$outboundSchema,
-  ]);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.union([
+      z.lazy(() => StreamRunAgentToolChoice2$outboundSchema),
+      StreamRunAgentToolChoice1$outboundSchema,
+    ])
+  );
 
 export function streamRunAgentModelConfigurationToolChoiceToJSON(
   streamRunAgentModelConfigurationToolChoice:
@@ -2217,13 +2241,15 @@ export function streamRunAgentModelConfigurationToolChoiceToJSON(
 
 /** @internal */
 export const StreamRunAgentModelConfigurationModalities$outboundSchema:
-  z.ZodNativeEnum<typeof StreamRunAgentModelConfigurationModalities> = z
-    .nativeEnum(StreamRunAgentModelConfigurationModalities);
+  z.ZodNativeEnum<typeof StreamRunAgentModelConfigurationModalities> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(StreamRunAgentModelConfigurationModalities)
+    );
 
 /** @internal */
 export const StreamRunAgentId1$outboundSchema: z.ZodNativeEnum<
   typeof StreamRunAgentId1
-> = z.nativeEnum(StreamRunAgentId1);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(StreamRunAgentId1));
 
 /** @internal */
 export type StreamRunAgentModelConfigurationId$Outbound = string | string;
@@ -2233,7 +2259,9 @@ export const StreamRunAgentModelConfigurationId$outboundSchema: z.ZodType<
   StreamRunAgentModelConfigurationId$Outbound,
   z.ZodTypeDef,
   StreamRunAgentModelConfigurationId
-> = z.union([StreamRunAgentId1$outboundSchema, z.string()]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([StreamRunAgentId1$outboundSchema, z.string()])
+);
 
 export function streamRunAgentModelConfigurationIdToJSON(
   streamRunAgentModelConfigurationId: StreamRunAgentModelConfigurationId,
@@ -2247,8 +2275,10 @@ export function streamRunAgentModelConfigurationIdToJSON(
 
 /** @internal */
 export const StreamRunAgentModelConfigurationExecuteOn$outboundSchema:
-  z.ZodNativeEnum<typeof StreamRunAgentModelConfigurationExecuteOn> = z
-    .nativeEnum(StreamRunAgentModelConfigurationExecuteOn);
+  z.ZodNativeEnum<typeof StreamRunAgentModelConfigurationExecuteOn> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(StreamRunAgentModelConfigurationExecuteOn)
+    );
 
 /** @internal */
 export type StreamRunAgentModelConfigurationGuardrails$Outbound = {
@@ -2262,14 +2292,16 @@ export const StreamRunAgentModelConfigurationGuardrails$outboundSchema:
     StreamRunAgentModelConfigurationGuardrails$Outbound,
     z.ZodTypeDef,
     StreamRunAgentModelConfigurationGuardrails
-  > = z.object({
-    id: z.union([StreamRunAgentId1$outboundSchema, z.string()]),
-    executeOn: StreamRunAgentModelConfigurationExecuteOn$outboundSchema,
-  }).transform((v) => {
-    return remap$(v, {
-      executeOn: "execute_on",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.union([StreamRunAgentId1$outboundSchema, z.string()]),
+      executeOn: StreamRunAgentModelConfigurationExecuteOn$outboundSchema,
+    }).transform((v) => {
+      return remap$(v, {
+        executeOn: "execute_on",
+      });
+    })
+  );
 
 export function streamRunAgentModelConfigurationGuardrailsToJSON(
   streamRunAgentModelConfigurationGuardrails:
@@ -2293,13 +2325,15 @@ export const StreamRunAgentModelConfigurationPlugins$outboundSchema: z.ZodType<
   StreamRunAgentModelConfigurationPlugins$Outbound,
   z.ZodTypeDef,
   StreamRunAgentModelConfigurationPlugins
-> = z.union([
-  components.PIIRedactionPlugin$outboundSchema.and(
-    z.object({ id: z.literal("pii_redaction") }),
-  ),
-  components.ResponseHealingPlugin$outboundSchema,
-  components.TraceScrubbingPlugin$outboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    components.PIIRedactionPlugin$outboundSchema.and(
+      z.object({ id: z.literal("pii_redaction") }),
+    ),
+    components.ResponseHealingPlugin$outboundSchema,
+    components.TraceScrubbingPlugin$outboundSchema,
+  ])
+);
 
 export function streamRunAgentModelConfigurationPluginsToJSON(
   streamRunAgentModelConfigurationPlugins:
@@ -2323,9 +2357,11 @@ export const StreamRunAgentModelConfigurationFallbacks$outboundSchema:
     StreamRunAgentModelConfigurationFallbacks$Outbound,
     z.ZodTypeDef,
     StreamRunAgentModelConfigurationFallbacks
-  > = z.object({
-    model: z.string(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      model: z.string(),
+    })
+  );
 
 export function streamRunAgentModelConfigurationFallbacksToJSON(
   streamRunAgentModelConfigurationFallbacks:
@@ -2340,9 +2376,10 @@ export function streamRunAgentModelConfigurationFallbacksToJSON(
 
 /** @internal */
 export const StreamRunAgentModelConfigurationType$outboundSchema:
-  z.ZodNativeEnum<typeof StreamRunAgentModelConfigurationType> = z.nativeEnum(
-    StreamRunAgentModelConfigurationType,
-  );
+  z.ZodNativeEnum<typeof StreamRunAgentModelConfigurationType> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(StreamRunAgentModelConfigurationType)
+    );
 
 /** @internal */
 export type StreamRunAgentModelConfigurationCache$Outbound = {
@@ -2355,10 +2392,12 @@ export const StreamRunAgentModelConfigurationCache$outboundSchema: z.ZodType<
   StreamRunAgentModelConfigurationCache$Outbound,
   z.ZodTypeDef,
   StreamRunAgentModelConfigurationCache
-> = z.object({
-  ttl: z.number().default(3600),
-  type: StreamRunAgentModelConfigurationType$outboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ttl: z.number().default(3600),
+    type: StreamRunAgentModelConfigurationType$outboundSchema,
+  })
+);
 
 export function streamRunAgentModelConfigurationCacheToJSON(
   streamRunAgentModelConfigurationCache: StreamRunAgentModelConfigurationCache,
@@ -2373,7 +2412,9 @@ export function streamRunAgentModelConfigurationCacheToJSON(
 /** @internal */
 export const StreamRunAgentLoadBalancerType$outboundSchema: z.ZodNativeEnum<
   typeof StreamRunAgentLoadBalancerType
-> = z.nativeEnum(StreamRunAgentLoadBalancerType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(StreamRunAgentLoadBalancerType)
+);
 
 /** @internal */
 export type StreamRunAgentLoadBalancerModels$Outbound = {
@@ -2386,10 +2427,12 @@ export const StreamRunAgentLoadBalancerModels$outboundSchema: z.ZodType<
   StreamRunAgentLoadBalancerModels$Outbound,
   z.ZodTypeDef,
   StreamRunAgentLoadBalancerModels
-> = z.object({
-  model: z.string(),
-  weight: z.number().default(0.5),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model: z.string(),
+    weight: z.number().default(0.5),
+  })
+);
 
 export function streamRunAgentLoadBalancerModelsToJSON(
   streamRunAgentLoadBalancerModels: StreamRunAgentLoadBalancerModels,
@@ -2412,12 +2455,14 @@ export const StreamRunAgentLoadBalancer1$outboundSchema: z.ZodType<
   StreamRunAgentLoadBalancer1$Outbound,
   z.ZodTypeDef,
   StreamRunAgentLoadBalancer1
-> = z.object({
-  type: StreamRunAgentLoadBalancerType$outboundSchema,
-  models: z.array(
-    z.lazy(() => StreamRunAgentLoadBalancerModels$outboundSchema),
-  ),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: StreamRunAgentLoadBalancerType$outboundSchema,
+    models: z.array(
+      z.lazy(() => StreamRunAgentLoadBalancerModels$outboundSchema),
+    ),
+  })
+);
 
 export function streamRunAgentLoadBalancer1ToJSON(
   streamRunAgentLoadBalancer1: StreamRunAgentLoadBalancer1,
@@ -2439,7 +2484,9 @@ export const StreamRunAgentModelConfigurationLoadBalancer$outboundSchema:
     StreamRunAgentModelConfigurationLoadBalancer$Outbound,
     z.ZodTypeDef,
     StreamRunAgentModelConfigurationLoadBalancer
-  > = z.lazy(() => StreamRunAgentLoadBalancer1$outboundSchema);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.lazy(() => StreamRunAgentLoadBalancer1$outboundSchema)
+  );
 
 export function streamRunAgentModelConfigurationLoadBalancerToJSON(
   streamRunAgentModelConfigurationLoadBalancer:
@@ -2462,13 +2509,15 @@ export const StreamRunAgentModelConfigurationTimeout$outboundSchema: z.ZodType<
   StreamRunAgentModelConfigurationTimeout$Outbound,
   z.ZodTypeDef,
   StreamRunAgentModelConfigurationTimeout
-> = z.object({
-  callTimeout: z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    callTimeout: "call_timeout",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    callTimeout: z.number(),
+  }).transform((v) => {
+    return remap$(v, {
+      callTimeout: "call_timeout",
+    });
+  })
+);
 
 export function streamRunAgentModelConfigurationTimeoutToJSON(
   streamRunAgentModelConfigurationTimeout:
@@ -2483,14 +2532,17 @@ export function streamRunAgentModelConfigurationTimeoutToJSON(
 
 /** @internal */
 export const StreamRunAgentModelConfigurationAgentsType$outboundSchema:
-  z.ZodNativeEnum<typeof StreamRunAgentModelConfigurationAgentsType> = z
-    .nativeEnum(StreamRunAgentModelConfigurationAgentsType);
+  z.ZodNativeEnum<typeof StreamRunAgentModelConfigurationAgentsType> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(StreamRunAgentModelConfigurationAgentsType)
+    );
 
 /** @internal */
 export const StreamRunAgentModelConfigurationTtl$outboundSchema:
-  z.ZodNativeEnum<typeof StreamRunAgentModelConfigurationTtl> = z.nativeEnum(
-    StreamRunAgentModelConfigurationTtl,
-  );
+  z.ZodNativeEnum<typeof StreamRunAgentModelConfigurationTtl> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(StreamRunAgentModelConfigurationTtl)
+    );
 
 /** @internal */
 export type StreamRunAgentModelConfigurationCacheControl$Outbound = {
@@ -2504,10 +2556,12 @@ export const StreamRunAgentModelConfigurationCacheControl$outboundSchema:
     StreamRunAgentModelConfigurationCacheControl$Outbound,
     z.ZodTypeDef,
     StreamRunAgentModelConfigurationCacheControl
-  > = z.object({
-    type: StreamRunAgentModelConfigurationAgentsType$outboundSchema,
-    ttl: StreamRunAgentModelConfigurationTtl$outboundSchema.default("5m"),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type: StreamRunAgentModelConfigurationAgentsType$outboundSchema,
+      ttl: StreamRunAgentModelConfigurationTtl$outboundSchema.default("5m"),
+    })
+  );
 
 export function streamRunAgentModelConfigurationCacheControlToJSON(
   streamRunAgentModelConfigurationCacheControl:
@@ -2577,84 +2631,87 @@ export const StreamRunAgentModelConfigurationParameters$outboundSchema:
     StreamRunAgentModelConfigurationParameters$Outbound,
     z.ZodTypeDef,
     StreamRunAgentModelConfigurationParameters
-  > = z.object({
-    name: z.string().optional(),
-    frequencyPenalty: z.nullable(z.number()).optional(),
-    maxTokens: z.nullable(z.number().int()).optional(),
-    maxCompletionTokens: z.nullable(z.number().int()).optional(),
-    presencePenalty: z.nullable(z.number()).optional(),
-    responseFormat: z.union([
-      z.lazy(() => StreamRunAgentResponseFormatText$outboundSchema),
-      z.lazy(() => StreamRunAgentResponseFormatJSONObject$outboundSchema),
-      z.lazy(() => StreamRunAgentResponseFormatJSONSchema$outboundSchema),
-    ]).optional(),
-    reasoningEffort:
-      StreamRunAgentModelConfigurationReasoningEffort$outboundSchema.optional(),
-    verbosity: z.string().optional(),
-    seed: z.nullable(z.number()).optional(),
-    stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
-    thinking: z.union([
-      components.ThinkingConfigDisabledSchema$outboundSchema,
-      components.ThinkingConfigEnabledSchema$outboundSchema,
-      components.ThinkingConfigAdaptiveSchema$outboundSchema,
-      components.ThinkingConfigBetweenToolsSchema$outboundSchema,
-    ]).optional(),
-    temperature: z.nullable(z.number()).optional(),
-    topP: z.nullable(z.number()).optional(),
-    topK: z.nullable(z.number()).optional(),
-    toolChoice: z.union([
-      z.lazy(() => StreamRunAgentToolChoice2$outboundSchema),
-      StreamRunAgentToolChoice1$outboundSchema,
-    ]).optional(),
-    parallelToolCalls: z.boolean().optional(),
-    modalities: z.nullable(
-      z.array(StreamRunAgentModelConfigurationModalities$outboundSchema),
-    ).optional(),
-    guardrails: z.array(
-      z.lazy(() => StreamRunAgentModelConfigurationGuardrails$outboundSchema),
-    ).optional(),
-    plugins: z.array(
-      z.union([
-        components.PIIRedactionPlugin$outboundSchema.and(
-          z.object({ id: z.literal("pii_redaction") }),
-        ),
-        components.ResponseHealingPlugin$outboundSchema,
-        components.TraceScrubbingPlugin$outboundSchema,
-      ]),
-    ).optional(),
-    fallbackOnCodes: z.array(z.number().int()).optional(),
-    fallbacks: z.array(
-      z.lazy(() => StreamRunAgentModelConfigurationFallbacks$outboundSchema),
-    ).optional(),
-    cache: z.lazy(() => StreamRunAgentModelConfigurationCache$outboundSchema)
-      .optional(),
-    loadBalancer: z.lazy(() => StreamRunAgentLoadBalancer1$outboundSchema)
-      .optional(),
-    timeout: z.lazy(() =>
-      StreamRunAgentModelConfigurationTimeout$outboundSchema
-    ).optional(),
-    cacheControl: z.lazy(() =>
-      StreamRunAgentModelConfigurationCacheControl$outboundSchema
-    ).optional(),
-    promptCacheKey: z.string().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      frequencyPenalty: "frequency_penalty",
-      maxTokens: "max_tokens",
-      maxCompletionTokens: "max_completion_tokens",
-      presencePenalty: "presence_penalty",
-      responseFormat: "response_format",
-      reasoningEffort: "reasoning_effort",
-      topP: "top_p",
-      topK: "top_k",
-      toolChoice: "tool_choice",
-      parallelToolCalls: "parallel_tool_calls",
-      fallbackOnCodes: "fallback_on_codes",
-      loadBalancer: "load_balancer",
-      cacheControl: "cache_control",
-      promptCacheKey: "prompt_cache_key",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      name: z.string().optional(),
+      frequencyPenalty: z.nullable(z.number()).optional(),
+      maxTokens: z.nullable(z.number().int()).optional(),
+      maxCompletionTokens: z.nullable(z.number().int()).optional(),
+      presencePenalty: z.nullable(z.number()).optional(),
+      responseFormat: z.union([
+        z.lazy(() => StreamRunAgentResponseFormatText$outboundSchema),
+        z.lazy(() => StreamRunAgentResponseFormatJSONObject$outboundSchema),
+        z.lazy(() => StreamRunAgentResponseFormatJSONSchema$outboundSchema),
+      ]).optional(),
+      reasoningEffort:
+        StreamRunAgentModelConfigurationReasoningEffort$outboundSchema
+          .optional(),
+      verbosity: z.string().optional(),
+      seed: z.nullable(z.number()).optional(),
+      stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
+      thinking: z.union([
+        components.ThinkingConfigDisabledSchema$outboundSchema,
+        components.ThinkingConfigEnabledSchema$outboundSchema,
+        components.ThinkingConfigAdaptiveSchema$outboundSchema,
+        components.ThinkingConfigBetweenToolsSchema$outboundSchema,
+      ]).optional(),
+      temperature: z.nullable(z.number()).optional(),
+      topP: z.nullable(z.number()).optional(),
+      topK: z.nullable(z.number()).optional(),
+      toolChoice: z.union([
+        z.lazy(() => StreamRunAgentToolChoice2$outboundSchema),
+        StreamRunAgentToolChoice1$outboundSchema,
+      ]).optional(),
+      parallelToolCalls: z.boolean().optional(),
+      modalities: z.nullable(
+        z.array(StreamRunAgentModelConfigurationModalities$outboundSchema),
+      ).optional(),
+      guardrails: z.array(
+        z.lazy(() => StreamRunAgentModelConfigurationGuardrails$outboundSchema),
+      ).optional(),
+      plugins: z.array(
+        z.union([
+          components.PIIRedactionPlugin$outboundSchema.and(
+            z.object({ id: z.literal("pii_redaction") }),
+          ),
+          components.ResponseHealingPlugin$outboundSchema,
+          components.TraceScrubbingPlugin$outboundSchema,
+        ]),
+      ).optional(),
+      fallbackOnCodes: z.array(z.number().int()).optional(),
+      fallbacks: z.array(
+        z.lazy(() => StreamRunAgentModelConfigurationFallbacks$outboundSchema),
+      ).optional(),
+      cache: z.lazy(() => StreamRunAgentModelConfigurationCache$outboundSchema)
+        .optional(),
+      loadBalancer: z.lazy(() => StreamRunAgentLoadBalancer1$outboundSchema)
+        .optional(),
+      timeout: z.lazy(() =>
+        StreamRunAgentModelConfigurationTimeout$outboundSchema
+      ).optional(),
+      cacheControl: z.lazy(() =>
+        StreamRunAgentModelConfigurationCacheControl$outboundSchema
+      ).optional(),
+      promptCacheKey: z.string().optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        frequencyPenalty: "frequency_penalty",
+        maxTokens: "max_tokens",
+        maxCompletionTokens: "max_completion_tokens",
+        presencePenalty: "presence_penalty",
+        responseFormat: "response_format",
+        reasoningEffort: "reasoning_effort",
+        topP: "top_p",
+        topK: "top_k",
+        toolChoice: "tool_choice",
+        parallelToolCalls: "parallel_tool_calls",
+        fallbackOnCodes: "fallback_on_codes",
+        loadBalancer: "load_balancer",
+        cacheControl: "cache_control",
+        promptCacheKey: "prompt_cache_key",
+      });
+    })
+  );
 
 export function streamRunAgentModelConfigurationParametersToJSON(
   streamRunAgentModelConfigurationParameters:
@@ -2678,14 +2735,16 @@ export const StreamRunAgentModelConfigurationRetry$outboundSchema: z.ZodType<
   StreamRunAgentModelConfigurationRetry$Outbound,
   z.ZodTypeDef,
   StreamRunAgentModelConfigurationRetry
-> = z.object({
-  count: z.number().default(3),
-  onCodes: z.array(z.number()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    onCodes: "on_codes",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    count: z.number().default(3),
+    onCodes: z.array(z.number()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      onCodes: "on_codes",
+    });
+  })
+);
 
 export function streamRunAgentModelConfigurationRetryToJSON(
   streamRunAgentModelConfigurationRetry: StreamRunAgentModelConfigurationRetry,
@@ -2709,14 +2768,16 @@ export const StreamRunAgentModelConfiguration2$outboundSchema: z.ZodType<
   StreamRunAgentModelConfiguration2$Outbound,
   z.ZodTypeDef,
   StreamRunAgentModelConfiguration2
-> = z.object({
-  id: z.string(),
-  parameters: z.lazy(() =>
-    StreamRunAgentModelConfigurationParameters$outboundSchema
-  ).optional(),
-  retry: z.lazy(() => StreamRunAgentModelConfigurationRetry$outboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    parameters: z.lazy(() =>
+      StreamRunAgentModelConfigurationParameters$outboundSchema
+    ).optional(),
+    retry: z.lazy(() => StreamRunAgentModelConfigurationRetry$outboundSchema)
+      .optional(),
+  })
+);
 
 export function streamRunAgentModelConfiguration2ToJSON(
   streamRunAgentModelConfiguration2: StreamRunAgentModelConfiguration2,
@@ -2738,10 +2799,12 @@ export const StreamRunAgentModelConfiguration$outboundSchema: z.ZodType<
   StreamRunAgentModelConfiguration$Outbound,
   z.ZodTypeDef,
   StreamRunAgentModelConfiguration
-> = z.union([
-  z.lazy(() => StreamRunAgentModelConfiguration2$outboundSchema),
-  z.string(),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => StreamRunAgentModelConfiguration2$outboundSchema),
+    z.string(),
+  ])
+);
 
 export function streamRunAgentModelConfigurationToJSON(
   streamRunAgentModelConfiguration: StreamRunAgentModelConfiguration,
@@ -2768,12 +2831,14 @@ export const StreamRunAgentResponseFormatAgentsRequestRequestBodyJsonSchema$outb
     StreamRunAgentResponseFormatAgentsRequestRequestBodyJsonSchema$Outbound,
     z.ZodTypeDef,
     StreamRunAgentResponseFormatAgentsRequestRequestBodyJsonSchema
-  > = z.object({
-    description: z.string().optional(),
-    name: z.string(),
-    schema: z.any().optional(),
-    strict: z.boolean().default(false),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      description: z.string().optional(),
+      name: z.string(),
+      schema: z.any().optional(),
+      strict: z.boolean().default(false),
+    })
+  );
 
 export function streamRunAgentResponseFormatAgentsRequestRequestBodyJsonSchemaToJSON(
   streamRunAgentResponseFormatAgentsRequestRequestBodyJsonSchema:
@@ -2798,16 +2863,18 @@ export const StreamRunAgentResponseFormatAgentsRequestJSONSchema$outboundSchema:
     StreamRunAgentResponseFormatAgentsRequestJSONSchema$Outbound,
     z.ZodTypeDef,
     StreamRunAgentResponseFormatAgentsRequestJSONSchema
-  > = z.object({
-    type: z.literal("json_schema"),
-    jsonSchema: z.lazy(() =>
-      StreamRunAgentResponseFormatAgentsRequestRequestBodyJsonSchema$outboundSchema
-    ),
-  }).transform((v) => {
-    return remap$(v, {
-      jsonSchema: "json_schema",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type: z.literal("json_schema"),
+      jsonSchema: z.lazy(() =>
+        StreamRunAgentResponseFormatAgentsRequestRequestBodyJsonSchema$outboundSchema
+      ),
+    }).transform((v) => {
+      return remap$(v, {
+        jsonSchema: "json_schema",
+      });
+    })
+  );
 
 export function streamRunAgentResponseFormatAgentsRequestJSONSchemaToJSON(
   streamRunAgentResponseFormatAgentsRequestJSONSchema:
@@ -2831,9 +2898,11 @@ export const StreamRunAgentResponseFormatAgentsJSONObject$outboundSchema:
     StreamRunAgentResponseFormatAgentsJSONObject$Outbound,
     z.ZodTypeDef,
     StreamRunAgentResponseFormatAgentsJSONObject
-  > = z.object({
-    type: z.literal("json_object"),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type: z.literal("json_object"),
+    })
+  );
 
 export function streamRunAgentResponseFormatAgentsJSONObjectToJSON(
   streamRunAgentResponseFormatAgentsJSONObject:
@@ -2856,9 +2925,11 @@ export const StreamRunAgentResponseFormatAgentsText$outboundSchema: z.ZodType<
   StreamRunAgentResponseFormatAgentsText$Outbound,
   z.ZodTypeDef,
   StreamRunAgentResponseFormatAgentsText
-> = z.object({
-  type: z.literal("text"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("text"),
+  })
+);
 
 export function streamRunAgentResponseFormatAgentsTextToJSON(
   streamRunAgentResponseFormatAgentsText:
@@ -2883,13 +2954,15 @@ export const StreamRunAgentFallbackModelConfigurationResponseFormat$outboundSche
     StreamRunAgentFallbackModelConfigurationResponseFormat$Outbound,
     z.ZodTypeDef,
     StreamRunAgentFallbackModelConfigurationResponseFormat
-  > = z.union([
-    z.lazy(() => StreamRunAgentResponseFormatAgentsText$outboundSchema),
-    z.lazy(() => StreamRunAgentResponseFormatAgentsJSONObject$outboundSchema),
-    z.lazy(() =>
-      StreamRunAgentResponseFormatAgentsRequestJSONSchema$outboundSchema
-    ),
-  ]);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.union([
+      z.lazy(() => StreamRunAgentResponseFormatAgentsText$outboundSchema),
+      z.lazy(() => StreamRunAgentResponseFormatAgentsJSONObject$outboundSchema),
+      z.lazy(() =>
+        StreamRunAgentResponseFormatAgentsRequestJSONSchema$outboundSchema
+      ),
+    ])
+  );
 
 export function streamRunAgentFallbackModelConfigurationResponseFormatToJSON(
   streamRunAgentFallbackModelConfigurationResponseFormat:
@@ -2906,7 +2979,9 @@ export function streamRunAgentFallbackModelConfigurationResponseFormatToJSON(
 export const StreamRunAgentFallbackModelConfigurationReasoningEffort$outboundSchema:
   z.ZodNativeEnum<
     typeof StreamRunAgentFallbackModelConfigurationReasoningEffort
-  > = z.nativeEnum(StreamRunAgentFallbackModelConfigurationReasoningEffort);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.nativeEnum(StreamRunAgentFallbackModelConfigurationReasoningEffort)
+  );
 
 /** @internal */
 export type StreamRunAgentFallbackModelConfigurationStop$Outbound =
@@ -2919,7 +2994,9 @@ export const StreamRunAgentFallbackModelConfigurationStop$outboundSchema:
     StreamRunAgentFallbackModelConfigurationStop$Outbound,
     z.ZodTypeDef,
     StreamRunAgentFallbackModelConfigurationStop
-  > = z.union([z.string(), z.array(z.string())]);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.union([z.string(), z.array(z.string())])
+  );
 
 export function streamRunAgentFallbackModelConfigurationStopToJSON(
   streamRunAgentFallbackModelConfigurationStop:
@@ -2945,12 +3022,14 @@ export const StreamRunAgentFallbackModelConfigurationThinking$outboundSchema:
     StreamRunAgentFallbackModelConfigurationThinking$Outbound,
     z.ZodTypeDef,
     StreamRunAgentFallbackModelConfigurationThinking
-  > = z.union([
-    components.ThinkingConfigDisabledSchema$outboundSchema,
-    components.ThinkingConfigEnabledSchema$outboundSchema,
-    components.ThinkingConfigAdaptiveSchema$outboundSchema,
-    components.ThinkingConfigBetweenToolsSchema$outboundSchema,
-  ]);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.union([
+      components.ThinkingConfigDisabledSchema$outboundSchema,
+      components.ThinkingConfigEnabledSchema$outboundSchema,
+      components.ThinkingConfigAdaptiveSchema$outboundSchema,
+      components.ThinkingConfigBetweenToolsSchema$outboundSchema,
+    ])
+  );
 
 export function streamRunAgentFallbackModelConfigurationThinkingToJSON(
   streamRunAgentFallbackModelConfigurationThinking:
@@ -2966,7 +3045,9 @@ export function streamRunAgentFallbackModelConfigurationThinkingToJSON(
 /** @internal */
 export const StreamRunAgentToolChoiceAgentsType$outboundSchema: z.ZodNativeEnum<
   typeof StreamRunAgentToolChoiceAgentsType
-> = z.nativeEnum(StreamRunAgentToolChoiceAgentsType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(StreamRunAgentToolChoiceAgentsType)
+);
 
 /** @internal */
 export type StreamRunAgentToolChoiceAgentsFunction$Outbound = {
@@ -2978,9 +3059,11 @@ export const StreamRunAgentToolChoiceAgentsFunction$outboundSchema: z.ZodType<
   StreamRunAgentToolChoiceAgentsFunction$Outbound,
   z.ZodTypeDef,
   StreamRunAgentToolChoiceAgentsFunction
-> = z.object({
-  name: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+  })
+);
 
 export function streamRunAgentToolChoiceAgentsFunctionToJSON(
   streamRunAgentToolChoiceAgentsFunction:
@@ -3004,10 +3087,14 @@ export const StreamRunAgentToolChoiceAgents2$outboundSchema: z.ZodType<
   StreamRunAgentToolChoiceAgents2$Outbound,
   z.ZodTypeDef,
   StreamRunAgentToolChoiceAgents2
-> = z.object({
-  type: StreamRunAgentToolChoiceAgentsType$outboundSchema.optional(),
-  function: z.lazy(() => StreamRunAgentToolChoiceAgentsFunction$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: StreamRunAgentToolChoiceAgentsType$outboundSchema.optional(),
+    function: z.lazy(() =>
+      StreamRunAgentToolChoiceAgentsFunction$outboundSchema
+    ),
+  })
+);
 
 export function streamRunAgentToolChoiceAgents2ToJSON(
   streamRunAgentToolChoiceAgents2: StreamRunAgentToolChoiceAgents2,
@@ -3022,7 +3109,9 @@ export function streamRunAgentToolChoiceAgents2ToJSON(
 /** @internal */
 export const StreamRunAgentToolChoiceAgents1$outboundSchema: z.ZodNativeEnum<
   typeof StreamRunAgentToolChoiceAgents1
-> = z.nativeEnum(StreamRunAgentToolChoiceAgents1);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(StreamRunAgentToolChoiceAgents1)
+);
 
 /** @internal */
 export type StreamRunAgentFallbackModelConfigurationToolChoice$Outbound =
@@ -3035,10 +3124,12 @@ export const StreamRunAgentFallbackModelConfigurationToolChoice$outboundSchema:
     StreamRunAgentFallbackModelConfigurationToolChoice$Outbound,
     z.ZodTypeDef,
     StreamRunAgentFallbackModelConfigurationToolChoice
-  > = z.union([
-    z.lazy(() => StreamRunAgentToolChoiceAgents2$outboundSchema),
-    StreamRunAgentToolChoiceAgents1$outboundSchema,
-  ]);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.union([
+      z.lazy(() => StreamRunAgentToolChoiceAgents2$outboundSchema),
+      StreamRunAgentToolChoiceAgents1$outboundSchema,
+    ])
+  );
 
 export function streamRunAgentFallbackModelConfigurationToolChoiceToJSON(
   streamRunAgentFallbackModelConfigurationToolChoice:
@@ -3053,13 +3144,15 @@ export function streamRunAgentFallbackModelConfigurationToolChoiceToJSON(
 
 /** @internal */
 export const StreamRunAgentFallbackModelConfigurationModalities$outboundSchema:
-  z.ZodNativeEnum<typeof StreamRunAgentFallbackModelConfigurationModalities> = z
-    .nativeEnum(StreamRunAgentFallbackModelConfigurationModalities);
+  z.ZodNativeEnum<typeof StreamRunAgentFallbackModelConfigurationModalities> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(StreamRunAgentFallbackModelConfigurationModalities)
+    );
 
 /** @internal */
 export const StreamRunAgentIdAgents1$outboundSchema: z.ZodNativeEnum<
   typeof StreamRunAgentIdAgents1
-> = z.nativeEnum(StreamRunAgentIdAgents1);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(StreamRunAgentIdAgents1));
 
 /** @internal */
 export type StreamRunAgentFallbackModelConfigurationId$Outbound =
@@ -3072,7 +3165,9 @@ export const StreamRunAgentFallbackModelConfigurationId$outboundSchema:
     StreamRunAgentFallbackModelConfigurationId$Outbound,
     z.ZodTypeDef,
     StreamRunAgentFallbackModelConfigurationId
-  > = z.union([StreamRunAgentIdAgents1$outboundSchema, z.string()]);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.union([StreamRunAgentIdAgents1$outboundSchema, z.string()])
+  );
 
 export function streamRunAgentFallbackModelConfigurationIdToJSON(
   streamRunAgentFallbackModelConfigurationId:
@@ -3087,8 +3182,10 @@ export function streamRunAgentFallbackModelConfigurationIdToJSON(
 
 /** @internal */
 export const StreamRunAgentFallbackModelConfigurationExecuteOn$outboundSchema:
-  z.ZodNativeEnum<typeof StreamRunAgentFallbackModelConfigurationExecuteOn> = z
-    .nativeEnum(StreamRunAgentFallbackModelConfigurationExecuteOn);
+  z.ZodNativeEnum<typeof StreamRunAgentFallbackModelConfigurationExecuteOn> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(StreamRunAgentFallbackModelConfigurationExecuteOn)
+    );
 
 /** @internal */
 export type StreamRunAgentFallbackModelConfigurationGuardrails$Outbound = {
@@ -3102,14 +3199,17 @@ export const StreamRunAgentFallbackModelConfigurationGuardrails$outboundSchema:
     StreamRunAgentFallbackModelConfigurationGuardrails$Outbound,
     z.ZodTypeDef,
     StreamRunAgentFallbackModelConfigurationGuardrails
-  > = z.object({
-    id: z.union([StreamRunAgentIdAgents1$outboundSchema, z.string()]),
-    executeOn: StreamRunAgentFallbackModelConfigurationExecuteOn$outboundSchema,
-  }).transform((v) => {
-    return remap$(v, {
-      executeOn: "execute_on",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.union([StreamRunAgentIdAgents1$outboundSchema, z.string()]),
+      executeOn:
+        StreamRunAgentFallbackModelConfigurationExecuteOn$outboundSchema,
+    }).transform((v) => {
+      return remap$(v, {
+        executeOn: "execute_on",
+      });
+    })
+  );
 
 export function streamRunAgentFallbackModelConfigurationGuardrailsToJSON(
   streamRunAgentFallbackModelConfigurationGuardrails:
@@ -3134,13 +3234,15 @@ export const StreamRunAgentFallbackModelConfigurationPlugins$outboundSchema:
     StreamRunAgentFallbackModelConfigurationPlugins$Outbound,
     z.ZodTypeDef,
     StreamRunAgentFallbackModelConfigurationPlugins
-  > = z.union([
-    components.PIIRedactionPlugin$outboundSchema.and(
-      z.object({ id: z.literal("pii_redaction") }),
-    ),
-    components.ResponseHealingPlugin$outboundSchema,
-    components.TraceScrubbingPlugin$outboundSchema,
-  ]);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.union([
+      components.PIIRedactionPlugin$outboundSchema.and(
+        z.object({ id: z.literal("pii_redaction") }),
+      ),
+      components.ResponseHealingPlugin$outboundSchema,
+      components.TraceScrubbingPlugin$outboundSchema,
+    ])
+  );
 
 export function streamRunAgentFallbackModelConfigurationPluginsToJSON(
   streamRunAgentFallbackModelConfigurationPlugins:
@@ -3164,9 +3266,11 @@ export const StreamRunAgentFallbackModelConfigurationFallbacks$outboundSchema:
     StreamRunAgentFallbackModelConfigurationFallbacks$Outbound,
     z.ZodTypeDef,
     StreamRunAgentFallbackModelConfigurationFallbacks
-  > = z.object({
-    model: z.string(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      model: z.string(),
+    })
+  );
 
 export function streamRunAgentFallbackModelConfigurationFallbacksToJSON(
   streamRunAgentFallbackModelConfigurationFallbacks:
@@ -3181,8 +3285,10 @@ export function streamRunAgentFallbackModelConfigurationFallbacksToJSON(
 
 /** @internal */
 export const StreamRunAgentFallbackModelConfigurationType$outboundSchema:
-  z.ZodNativeEnum<typeof StreamRunAgentFallbackModelConfigurationType> = z
-    .nativeEnum(StreamRunAgentFallbackModelConfigurationType);
+  z.ZodNativeEnum<typeof StreamRunAgentFallbackModelConfigurationType> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(StreamRunAgentFallbackModelConfigurationType)
+    );
 
 /** @internal */
 export type StreamRunAgentFallbackModelConfigurationCache$Outbound = {
@@ -3196,10 +3302,12 @@ export const StreamRunAgentFallbackModelConfigurationCache$outboundSchema:
     StreamRunAgentFallbackModelConfigurationCache$Outbound,
     z.ZodTypeDef,
     StreamRunAgentFallbackModelConfigurationCache
-  > = z.object({
-    ttl: z.number().default(3600),
-    type: StreamRunAgentFallbackModelConfigurationType$outboundSchema,
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ttl: z.number().default(3600),
+      type: StreamRunAgentFallbackModelConfigurationType$outboundSchema,
+    })
+  );
 
 export function streamRunAgentFallbackModelConfigurationCacheToJSON(
   streamRunAgentFallbackModelConfigurationCache:
@@ -3214,9 +3322,10 @@ export function streamRunAgentFallbackModelConfigurationCacheToJSON(
 
 /** @internal */
 export const StreamRunAgentLoadBalancerAgentsType$outboundSchema:
-  z.ZodNativeEnum<typeof StreamRunAgentLoadBalancerAgentsType> = z.nativeEnum(
-    StreamRunAgentLoadBalancerAgentsType,
-  );
+  z.ZodNativeEnum<typeof StreamRunAgentLoadBalancerAgentsType> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(StreamRunAgentLoadBalancerAgentsType)
+    );
 
 /** @internal */
 export type StreamRunAgentLoadBalancerAgentsModels$Outbound = {
@@ -3229,10 +3338,12 @@ export const StreamRunAgentLoadBalancerAgentsModels$outboundSchema: z.ZodType<
   StreamRunAgentLoadBalancerAgentsModels$Outbound,
   z.ZodTypeDef,
   StreamRunAgentLoadBalancerAgentsModels
-> = z.object({
-  model: z.string(),
-  weight: z.number().default(0.5),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model: z.string(),
+    weight: z.number().default(0.5),
+  })
+);
 
 export function streamRunAgentLoadBalancerAgentsModelsToJSON(
   streamRunAgentLoadBalancerAgentsModels:
@@ -3256,12 +3367,14 @@ export const StreamRunAgentLoadBalancerAgents1$outboundSchema: z.ZodType<
   StreamRunAgentLoadBalancerAgents1$Outbound,
   z.ZodTypeDef,
   StreamRunAgentLoadBalancerAgents1
-> = z.object({
-  type: StreamRunAgentLoadBalancerAgentsType$outboundSchema,
-  models: z.array(
-    z.lazy(() => StreamRunAgentLoadBalancerAgentsModels$outboundSchema),
-  ),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: StreamRunAgentLoadBalancerAgentsType$outboundSchema,
+    models: z.array(
+      z.lazy(() => StreamRunAgentLoadBalancerAgentsModels$outboundSchema),
+    ),
+  })
+);
 
 export function streamRunAgentLoadBalancerAgents1ToJSON(
   streamRunAgentLoadBalancerAgents1: StreamRunAgentLoadBalancerAgents1,
@@ -3283,7 +3396,9 @@ export const StreamRunAgentFallbackModelConfigurationLoadBalancer$outboundSchema
     StreamRunAgentFallbackModelConfigurationLoadBalancer$Outbound,
     z.ZodTypeDef,
     StreamRunAgentFallbackModelConfigurationLoadBalancer
-  > = z.lazy(() => StreamRunAgentLoadBalancerAgents1$outboundSchema);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.lazy(() => StreamRunAgentLoadBalancerAgents1$outboundSchema)
+  );
 
 export function streamRunAgentFallbackModelConfigurationLoadBalancerToJSON(
   streamRunAgentFallbackModelConfigurationLoadBalancer:
@@ -3307,13 +3422,15 @@ export const StreamRunAgentFallbackModelConfigurationTimeout$outboundSchema:
     StreamRunAgentFallbackModelConfigurationTimeout$Outbound,
     z.ZodTypeDef,
     StreamRunAgentFallbackModelConfigurationTimeout
-  > = z.object({
-    callTimeout: z.number(),
-  }).transform((v) => {
-    return remap$(v, {
-      callTimeout: "call_timeout",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      callTimeout: z.number(),
+    }).transform((v) => {
+      return remap$(v, {
+        callTimeout: "call_timeout",
+      });
+    })
+  );
 
 export function streamRunAgentFallbackModelConfigurationTimeoutToJSON(
   streamRunAgentFallbackModelConfigurationTimeout:
@@ -3328,13 +3445,17 @@ export function streamRunAgentFallbackModelConfigurationTimeoutToJSON(
 
 /** @internal */
 export const StreamRunAgentFallbackModelConfigurationAgentsType$outboundSchema:
-  z.ZodNativeEnum<typeof StreamRunAgentFallbackModelConfigurationAgentsType> = z
-    .nativeEnum(StreamRunAgentFallbackModelConfigurationAgentsType);
+  z.ZodNativeEnum<typeof StreamRunAgentFallbackModelConfigurationAgentsType> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(StreamRunAgentFallbackModelConfigurationAgentsType)
+    );
 
 /** @internal */
 export const StreamRunAgentFallbackModelConfigurationTtl$outboundSchema:
-  z.ZodNativeEnum<typeof StreamRunAgentFallbackModelConfigurationTtl> = z
-    .nativeEnum(StreamRunAgentFallbackModelConfigurationTtl);
+  z.ZodNativeEnum<typeof StreamRunAgentFallbackModelConfigurationTtl> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(StreamRunAgentFallbackModelConfigurationTtl)
+    );
 
 /** @internal */
 export type StreamRunAgentFallbackModelConfigurationCacheControl$Outbound = {
@@ -3348,12 +3469,14 @@ export const StreamRunAgentFallbackModelConfigurationCacheControl$outboundSchema
     StreamRunAgentFallbackModelConfigurationCacheControl$Outbound,
     z.ZodTypeDef,
     StreamRunAgentFallbackModelConfigurationCacheControl
-  > = z.object({
-    type: StreamRunAgentFallbackModelConfigurationAgentsType$outboundSchema,
-    ttl: StreamRunAgentFallbackModelConfigurationTtl$outboundSchema.default(
-      "5m",
-    ),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type: StreamRunAgentFallbackModelConfigurationAgentsType$outboundSchema,
+      ttl: StreamRunAgentFallbackModelConfigurationTtl$outboundSchema.default(
+        "5m",
+      ),
+    })
+  );
 
 export function streamRunAgentFallbackModelConfigurationCacheControlToJSON(
   streamRunAgentFallbackModelConfigurationCacheControl:
@@ -3425,94 +3548,99 @@ export const StreamRunAgentFallbackModelConfigurationParameters$outboundSchema:
     StreamRunAgentFallbackModelConfigurationParameters$Outbound,
     z.ZodTypeDef,
     StreamRunAgentFallbackModelConfigurationParameters
-  > = z.object({
-    name: z.string().optional(),
-    frequencyPenalty: z.nullable(z.number()).optional(),
-    maxTokens: z.nullable(z.number().int()).optional(),
-    maxCompletionTokens: z.nullable(z.number().int()).optional(),
-    presencePenalty: z.nullable(z.number()).optional(),
-    responseFormat: z.union([
-      z.lazy(() => StreamRunAgentResponseFormatAgentsText$outboundSchema),
-      z.lazy(() => StreamRunAgentResponseFormatAgentsJSONObject$outboundSchema),
-      z.lazy(() =>
-        StreamRunAgentResponseFormatAgentsRequestJSONSchema$outboundSchema
-      ),
-    ]).optional(),
-    reasoningEffort:
-      StreamRunAgentFallbackModelConfigurationReasoningEffort$outboundSchema
-        .optional(),
-    verbosity: z.string().optional(),
-    seed: z.nullable(z.number()).optional(),
-    stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
-    thinking: z.union([
-      components.ThinkingConfigDisabledSchema$outboundSchema,
-      components.ThinkingConfigEnabledSchema$outboundSchema,
-      components.ThinkingConfigAdaptiveSchema$outboundSchema,
-      components.ThinkingConfigBetweenToolsSchema$outboundSchema,
-    ]).optional(),
-    temperature: z.nullable(z.number()).optional(),
-    topP: z.nullable(z.number()).optional(),
-    topK: z.nullable(z.number()).optional(),
-    toolChoice: z.union([
-      z.lazy(() => StreamRunAgentToolChoiceAgents2$outboundSchema),
-      StreamRunAgentToolChoiceAgents1$outboundSchema,
-    ]).optional(),
-    parallelToolCalls: z.boolean().optional(),
-    modalities: z.nullable(
-      z.array(
-        StreamRunAgentFallbackModelConfigurationModalities$outboundSchema,
-      ),
-    ).optional(),
-    guardrails: z.array(
-      z.lazy(() =>
-        StreamRunAgentFallbackModelConfigurationGuardrails$outboundSchema
-      ),
-    ).optional(),
-    plugins: z.array(
-      z.union([
-        components.PIIRedactionPlugin$outboundSchema.and(
-          z.object({ id: z.literal("pii_redaction") }),
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      name: z.string().optional(),
+      frequencyPenalty: z.nullable(z.number()).optional(),
+      maxTokens: z.nullable(z.number().int()).optional(),
+      maxCompletionTokens: z.nullable(z.number().int()).optional(),
+      presencePenalty: z.nullable(z.number()).optional(),
+      responseFormat: z.union([
+        z.lazy(() => StreamRunAgentResponseFormatAgentsText$outboundSchema),
+        z.lazy(() =>
+          StreamRunAgentResponseFormatAgentsJSONObject$outboundSchema
         ),
-        components.ResponseHealingPlugin$outboundSchema,
-        components.TraceScrubbingPlugin$outboundSchema,
-      ]),
-    ).optional(),
-    fallbackOnCodes: z.array(z.number().int()).optional(),
-    fallbacks: z.array(
-      z.lazy(() =>
-        StreamRunAgentFallbackModelConfigurationFallbacks$outboundSchema
-      ),
-    ).optional(),
-    cache: z.lazy(() =>
-      StreamRunAgentFallbackModelConfigurationCache$outboundSchema
-    ).optional(),
-    loadBalancer: z.lazy(() => StreamRunAgentLoadBalancerAgents1$outboundSchema)
-      .optional(),
-    timeout: z.lazy(() =>
-      StreamRunAgentFallbackModelConfigurationTimeout$outboundSchema
-    ).optional(),
-    cacheControl: z.lazy(() =>
-      StreamRunAgentFallbackModelConfigurationCacheControl$outboundSchema
-    ).optional(),
-    promptCacheKey: z.string().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      frequencyPenalty: "frequency_penalty",
-      maxTokens: "max_tokens",
-      maxCompletionTokens: "max_completion_tokens",
-      presencePenalty: "presence_penalty",
-      responseFormat: "response_format",
-      reasoningEffort: "reasoning_effort",
-      topP: "top_p",
-      topK: "top_k",
-      toolChoice: "tool_choice",
-      parallelToolCalls: "parallel_tool_calls",
-      fallbackOnCodes: "fallback_on_codes",
-      loadBalancer: "load_balancer",
-      cacheControl: "cache_control",
-      promptCacheKey: "prompt_cache_key",
-    });
-  });
+        z.lazy(() =>
+          StreamRunAgentResponseFormatAgentsRequestJSONSchema$outboundSchema
+        ),
+      ]).optional(),
+      reasoningEffort:
+        StreamRunAgentFallbackModelConfigurationReasoningEffort$outboundSchema
+          .optional(),
+      verbosity: z.string().optional(),
+      seed: z.nullable(z.number()).optional(),
+      stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
+      thinking: z.union([
+        components.ThinkingConfigDisabledSchema$outboundSchema,
+        components.ThinkingConfigEnabledSchema$outboundSchema,
+        components.ThinkingConfigAdaptiveSchema$outboundSchema,
+        components.ThinkingConfigBetweenToolsSchema$outboundSchema,
+      ]).optional(),
+      temperature: z.nullable(z.number()).optional(),
+      topP: z.nullable(z.number()).optional(),
+      topK: z.nullable(z.number()).optional(),
+      toolChoice: z.union([
+        z.lazy(() => StreamRunAgentToolChoiceAgents2$outboundSchema),
+        StreamRunAgentToolChoiceAgents1$outboundSchema,
+      ]).optional(),
+      parallelToolCalls: z.boolean().optional(),
+      modalities: z.nullable(
+        z.array(
+          StreamRunAgentFallbackModelConfigurationModalities$outboundSchema,
+        ),
+      ).optional(),
+      guardrails: z.array(
+        z.lazy(() =>
+          StreamRunAgentFallbackModelConfigurationGuardrails$outboundSchema
+        ),
+      ).optional(),
+      plugins: z.array(
+        z.union([
+          components.PIIRedactionPlugin$outboundSchema.and(
+            z.object({ id: z.literal("pii_redaction") }),
+          ),
+          components.ResponseHealingPlugin$outboundSchema,
+          components.TraceScrubbingPlugin$outboundSchema,
+        ]),
+      ).optional(),
+      fallbackOnCodes: z.array(z.number().int()).optional(),
+      fallbacks: z.array(
+        z.lazy(() =>
+          StreamRunAgentFallbackModelConfigurationFallbacks$outboundSchema
+        ),
+      ).optional(),
+      cache: z.lazy(() =>
+        StreamRunAgentFallbackModelConfigurationCache$outboundSchema
+      ).optional(),
+      loadBalancer: z.lazy(() =>
+        StreamRunAgentLoadBalancerAgents1$outboundSchema
+      ).optional(),
+      timeout: z.lazy(() =>
+        StreamRunAgentFallbackModelConfigurationTimeout$outboundSchema
+      ).optional(),
+      cacheControl: z.lazy(() =>
+        StreamRunAgentFallbackModelConfigurationCacheControl$outboundSchema
+      ).optional(),
+      promptCacheKey: z.string().optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        frequencyPenalty: "frequency_penalty",
+        maxTokens: "max_tokens",
+        maxCompletionTokens: "max_completion_tokens",
+        presencePenalty: "presence_penalty",
+        responseFormat: "response_format",
+        reasoningEffort: "reasoning_effort",
+        topP: "top_p",
+        topK: "top_k",
+        toolChoice: "tool_choice",
+        parallelToolCalls: "parallel_tool_calls",
+        fallbackOnCodes: "fallback_on_codes",
+        loadBalancer: "load_balancer",
+        cacheControl: "cache_control",
+        promptCacheKey: "prompt_cache_key",
+      });
+    })
+  );
 
 export function streamRunAgentFallbackModelConfigurationParametersToJSON(
   streamRunAgentFallbackModelConfigurationParameters:
@@ -3537,14 +3665,16 @@ export const StreamRunAgentFallbackModelConfigurationRetry$outboundSchema:
     StreamRunAgentFallbackModelConfigurationRetry$Outbound,
     z.ZodTypeDef,
     StreamRunAgentFallbackModelConfigurationRetry
-  > = z.object({
-    count: z.number().default(3),
-    onCodes: z.array(z.number()).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      onCodes: "on_codes",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      count: z.number().default(3),
+      onCodes: z.array(z.number()).optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        onCodes: "on_codes",
+      });
+    })
+  );
 
 export function streamRunAgentFallbackModelConfigurationRetryToJSON(
   streamRunAgentFallbackModelConfigurationRetry:
@@ -3572,15 +3702,17 @@ export const StreamRunAgentFallbackModelConfiguration2$outboundSchema:
     StreamRunAgentFallbackModelConfiguration2$Outbound,
     z.ZodTypeDef,
     StreamRunAgentFallbackModelConfiguration2
-  > = z.object({
-    id: z.string(),
-    parameters: z.lazy(() =>
-      StreamRunAgentFallbackModelConfigurationParameters$outboundSchema
-    ).optional(),
-    retry: z.lazy(() =>
-      StreamRunAgentFallbackModelConfigurationRetry$outboundSchema
-    ).optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string(),
+      parameters: z.lazy(() =>
+        StreamRunAgentFallbackModelConfigurationParameters$outboundSchema
+      ).optional(),
+      retry: z.lazy(() =>
+        StreamRunAgentFallbackModelConfigurationRetry$outboundSchema
+      ).optional(),
+    })
+  );
 
 export function streamRunAgentFallbackModelConfiguration2ToJSON(
   streamRunAgentFallbackModelConfiguration2:
@@ -3603,10 +3735,12 @@ export const StreamRunAgentFallbackModelConfiguration$outboundSchema: z.ZodType<
   StreamRunAgentFallbackModelConfiguration$Outbound,
   z.ZodTypeDef,
   StreamRunAgentFallbackModelConfiguration
-> = z.union([
-  z.lazy(() => StreamRunAgentFallbackModelConfiguration2$outboundSchema),
-  z.string(),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => StreamRunAgentFallbackModelConfiguration2$outboundSchema),
+    z.string(),
+  ])
+);
 
 export function streamRunAgentFallbackModelConfigurationToJSON(
   streamRunAgentFallbackModelConfiguration:
@@ -3622,12 +3756,16 @@ export function streamRunAgentFallbackModelConfigurationToJSON(
 /** @internal */
 export const StreamRunAgentRoleToolMessage$outboundSchema: z.ZodNativeEnum<
   typeof StreamRunAgentRoleToolMessage
-> = z.nativeEnum(StreamRunAgentRoleToolMessage);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(StreamRunAgentRoleToolMessage)
+);
 
 /** @internal */
 export const StreamRunAgentRoleUserMessage$outboundSchema: z.ZodNativeEnum<
   typeof StreamRunAgentRoleUserMessage
-> = z.nativeEnum(StreamRunAgentRoleUserMessage);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(StreamRunAgentRoleUserMessage)
+);
 
 /** @internal */
 export type StreamRunAgentRole$Outbound = string | string;
@@ -3637,10 +3775,12 @@ export const StreamRunAgentRole$outboundSchema: z.ZodType<
   StreamRunAgentRole$Outbound,
   z.ZodTypeDef,
   StreamRunAgentRole
-> = z.union([
-  StreamRunAgentRoleUserMessage$outboundSchema,
-  StreamRunAgentRoleToolMessage$outboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    StreamRunAgentRoleUserMessage$outboundSchema,
+    StreamRunAgentRoleToolMessage$outboundSchema,
+  ])
+);
 
 export function streamRunAgentRoleToJSON(
   streamRunAgentRole: StreamRunAgentRole,
@@ -3662,12 +3802,14 @@ export const StreamRunAgentPublicMessagePart$outboundSchema: z.ZodType<
   StreamRunAgentPublicMessagePart$Outbound,
   z.ZodTypeDef,
   StreamRunAgentPublicMessagePart
-> = z.union([
-  components.TextPart$outboundSchema,
-  components.FilePart$outboundSchema,
-  components.ToolResultPart$outboundSchema,
-  components.ErrorPart$outboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    components.TextPart$outboundSchema,
+    components.FilePart$outboundSchema,
+    components.ToolResultPart$outboundSchema,
+    components.ErrorPart$outboundSchema,
+  ])
+);
 
 export function streamRunAgentPublicMessagePartToJSON(
   streamRunAgentPublicMessagePart: StreamRunAgentPublicMessagePart,
@@ -3696,21 +3838,23 @@ export const StreamRunAgentA2AMessage$outboundSchema: z.ZodType<
   StreamRunAgentA2AMessage$Outbound,
   z.ZodTypeDef,
   StreamRunAgentA2AMessage
-> = z.object({
-  messageId: z.string().optional(),
-  role: z.union([
-    StreamRunAgentRoleUserMessage$outboundSchema,
-    StreamRunAgentRoleToolMessage$outboundSchema,
-  ]),
-  parts: z.array(
-    z.union([
-      components.TextPart$outboundSchema,
-      components.FilePart$outboundSchema,
-      components.ToolResultPart$outboundSchema,
-      components.ErrorPart$outboundSchema,
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    messageId: z.string().optional(),
+    role: z.union([
+      StreamRunAgentRoleUserMessage$outboundSchema,
+      StreamRunAgentRoleToolMessage$outboundSchema,
     ]),
-  ),
-});
+    parts: z.array(
+      z.union([
+        components.TextPart$outboundSchema,
+        components.FilePart$outboundSchema,
+        components.ToolResultPart$outboundSchema,
+        components.ErrorPart$outboundSchema,
+      ]),
+    ),
+  })
+);
 
 export function streamRunAgentA2AMessageToJSON(
   streamRunAgentA2AMessage: StreamRunAgentA2AMessage,
@@ -3735,19 +3879,21 @@ export const StreamRunAgentIdentity$outboundSchema: z.ZodType<
   StreamRunAgentIdentity$Outbound,
   z.ZodTypeDef,
   StreamRunAgentIdentity
-> = z.object({
-  id: z.string(),
-  displayName: z.string().optional(),
-  email: z.string().optional(),
-  metadata: z.array(z.record(z.any())).optional(),
-  logoUrl: z.string().optional(),
-  tags: z.array(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    displayName: "display_name",
-    logoUrl: "logo_url",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    displayName: z.string().optional(),
+    email: z.string().optional(),
+    metadata: z.array(z.record(z.any())).optional(),
+    logoUrl: z.string().optional(),
+    tags: z.array(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      displayName: "display_name",
+      logoUrl: "logo_url",
+    });
+  })
+);
 
 export function streamRunAgentIdentityToJSON(
   streamRunAgentIdentity: StreamRunAgentIdentity,
@@ -3772,19 +3918,21 @@ export const StreamRunAgentContact$outboundSchema: z.ZodType<
   StreamRunAgentContact$Outbound,
   z.ZodTypeDef,
   StreamRunAgentContact
-> = z.object({
-  id: z.string(),
-  displayName: z.string().optional(),
-  email: z.string().optional(),
-  metadata: z.array(z.record(z.any())).optional(),
-  logoUrl: z.string().optional(),
-  tags: z.array(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    displayName: "display_name",
-    logoUrl: "logo_url",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    displayName: z.string().optional(),
+    email: z.string().optional(),
+    metadata: z.array(z.record(z.any())).optional(),
+    logoUrl: z.string().optional(),
+    tags: z.array(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      displayName: "display_name",
+      logoUrl: "logo_url",
+    });
+  })
+);
 
 export function streamRunAgentContactToJSON(
   streamRunAgentContact: StreamRunAgentContact,
@@ -3805,10 +3953,12 @@ export const StreamRunAgentThread$outboundSchema: z.ZodType<
   StreamRunAgentThread$Outbound,
   z.ZodTypeDef,
   StreamRunAgentThread
-> = z.object({
-  id: z.string(),
-  tags: z.array(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    tags: z.array(z.string()).optional(),
+  })
+);
 
 export function streamRunAgentThreadToJSON(
   streamRunAgentThread: StreamRunAgentThread,
@@ -3828,13 +3978,15 @@ export const StreamRunAgentMemory$outboundSchema: z.ZodType<
   StreamRunAgentMemory$Outbound,
   z.ZodTypeDef,
   StreamRunAgentMemory
-> = z.object({
-  entityId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    entityId: "entity_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    entityId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      entityId: "entity_id",
+    });
+  })
+);
 
 export function streamRunAgentMemoryToJSON(
   streamRunAgentMemory: StreamRunAgentMemory,
@@ -3854,13 +4006,15 @@ export const StreamRunAgentKnowledgeBases$outboundSchema: z.ZodType<
   StreamRunAgentKnowledgeBases$Outbound,
   z.ZodTypeDef,
   StreamRunAgentKnowledgeBases
-> = z.object({
-  knowledgeId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    knowledgeId: "knowledge_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    knowledgeId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      knowledgeId: "knowledge_id",
+    });
+  })
+);
 
 export function streamRunAgentKnowledgeBasesToJSON(
   streamRunAgentKnowledgeBases: StreamRunAgentKnowledgeBases,
@@ -3883,10 +4037,12 @@ export const StreamRunAgentTeamOfAgents$outboundSchema: z.ZodType<
   StreamRunAgentTeamOfAgents$Outbound,
   z.ZodTypeDef,
   StreamRunAgentTeamOfAgents
-> = z.object({
-  key: z.string(),
-  role: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    key: z.string(),
+    role: z.string().optional(),
+  })
+);
 
 export function streamRunAgentTeamOfAgentsToJSON(
   streamRunAgentTeamOfAgents: StreamRunAgentTeamOfAgents,
@@ -3908,10 +4064,12 @@ export const StreamRunAgentAgentToolInputRunAgentsHeaders$outboundSchema:
     StreamRunAgentAgentToolInputRunAgentsHeaders$Outbound,
     z.ZodTypeDef,
     StreamRunAgentAgentToolInputRunAgentsHeaders
-  > = z.object({
-    value: z.string(),
-    encrypted: z.boolean().default(false),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      value: z.string(),
+      encrypted: z.boolean().default(false),
+    })
+  );
 
 export function streamRunAgentAgentToolInputRunAgentsHeadersToJSON(
   streamRunAgentAgentToolInputRunAgentsHeaders:
@@ -3928,8 +4086,10 @@ export function streamRunAgentAgentToolInputRunAgentsHeadersToJSON(
 export const StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools20McpType$outboundSchema:
   z.ZodNativeEnum<
     typeof StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools20McpType
-  > = z.nativeEnum(
-    StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools20McpType,
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.nativeEnum(
+      StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools20McpType,
+    )
   );
 
 /** @internal */
@@ -3945,12 +4105,14 @@ export const StreamRunAgentAgentToolInputRunAgentsSchema$outboundSchema:
     StreamRunAgentAgentToolInputRunAgentsSchema$Outbound,
     z.ZodTypeDef,
     StreamRunAgentAgentToolInputRunAgentsSchema
-  > = z.object({
-    type:
-      StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools20McpType$outboundSchema,
-    properties: z.record(z.any()).optional(),
-    required: z.array(z.string()).optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type:
+        StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsTools20McpType$outboundSchema,
+      properties: z.record(z.any()).optional(),
+      required: z.array(z.string()).optional(),
+    })
+  );
 
 export function streamRunAgentAgentToolInputRunAgentsSchemaToJSON(
   streamRunAgentAgentToolInputRunAgentsSchema:
@@ -3976,14 +4138,16 @@ export const AgentToolInputRunTools$outboundSchema: z.ZodType<
   AgentToolInputRunTools$Outbound,
   z.ZodTypeDef,
   AgentToolInputRunTools
-> = z.object({
-  id: z.string().default("01M7WKM87F1MZK6YVEG9TBGK14"),
-  name: z.string(),
-  description: z.string().optional(),
-  schema: z.lazy(() =>
-    StreamRunAgentAgentToolInputRunAgentsSchema$outboundSchema
-  ),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().default("01M7YVSP9V8FD0GXVPD190VVHS"),
+    name: z.string(),
+    description: z.string().optional(),
+    schema: z.lazy(() =>
+      StreamRunAgentAgentToolInputRunAgentsSchema$outboundSchema
+    ),
+  })
+);
 
 export function agentToolInputRunToolsToJSON(
   agentToolInputRunTools: AgentToolInputRunTools,
@@ -3996,7 +4160,9 @@ export function agentToolInputRunToolsToJSON(
 /** @internal */
 export const AgentToolInputRunConnectionType$outboundSchema: z.ZodNativeEnum<
   typeof AgentToolInputRunConnectionType
-> = z.nativeEnum(AgentToolInputRunConnectionType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(AgentToolInputRunConnectionType)
+);
 
 /** @internal */
 export type AgentToolInputRunMcp$Outbound = {
@@ -4013,19 +4179,21 @@ export const AgentToolInputRunMcp$outboundSchema: z.ZodType<
   AgentToolInputRunMcp$Outbound,
   z.ZodTypeDef,
   AgentToolInputRunMcp
-> = z.object({
-  serverUrl: z.string(),
-  headers: z.record(
-    z.lazy(() => StreamRunAgentAgentToolInputRunAgentsHeaders$outboundSchema),
-  ).optional(),
-  tools: z.array(z.lazy(() => AgentToolInputRunTools$outboundSchema)),
-  connectionType: AgentToolInputRunConnectionType$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    serverUrl: "server_url",
-    connectionType: "connection_type",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    serverUrl: z.string(),
+    headers: z.record(
+      z.lazy(() => StreamRunAgentAgentToolInputRunAgentsHeaders$outboundSchema),
+    ).optional(),
+    tools: z.array(z.lazy(() => AgentToolInputRunTools$outboundSchema)),
+    connectionType: AgentToolInputRunConnectionType$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      serverUrl: "server_url",
+      connectionType: "connection_type",
+    });
+  })
+);
 
 export function agentToolInputRunMcpToJSON(
   agentToolInputRunMcp: AgentToolInputRunMcp,
@@ -4051,21 +4219,23 @@ export const AgentToolInputRunMCPToolRun$outboundSchema: z.ZodType<
   AgentToolInputRunMCPToolRun$Outbound,
   z.ZodTypeDef,
   AgentToolInputRunMCPToolRun
-> = z.object({
-  type: z.literal("mcp"),
-  key: z.string(),
-  id: z.string().optional(),
-  displayName: z.string().optional(),
-  description: z.string(),
-  mcp: z.lazy(() => AgentToolInputRunMcp$outboundSchema),
-  requiresApproval: z.boolean().default(false),
-}).transform((v) => {
-  return remap$(v, {
-    id: "_id",
-    displayName: "display_name",
-    requiresApproval: "requires_approval",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("mcp"),
+    key: z.string(),
+    id: z.string().optional(),
+    displayName: z.string().optional(),
+    description: z.string(),
+    mcp: z.lazy(() => AgentToolInputRunMcp$outboundSchema),
+    requiresApproval: z.boolean().default(false),
+  }).transform((v) => {
+    return remap$(v, {
+      id: "_id",
+      displayName: "display_name",
+      requiresApproval: "requires_approval",
+    });
+  })
+);
 
 export function agentToolInputRunMCPToolRunToJSON(
   agentToolInputRunMCPToolRun: AgentToolInputRunMCPToolRun,
@@ -4090,19 +4260,21 @@ export const StreamRunAgentAgentToolInputRunSchema$outboundSchema: z.ZodType<
   StreamRunAgentAgentToolInputRunSchema$Outbound,
   z.ZodTypeDef,
   StreamRunAgentAgentToolInputRunSchema
-> = z.object({
-  type: z.string(),
-  properties: z.record(z.any()),
-  required: z.array(z.string()),
-  additionalProperties: z.record(z.any()).optional(),
-}).transform((v) => {
-  return {
-    ...v.additionalProperties,
-    ...remap$(v, {
-      additionalProperties: null,
-    }),
-  };
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.string(),
+    properties: z.record(z.any()),
+    required: z.array(z.string()),
+    additionalProperties: z.record(z.any()).optional(),
+  }).transform((v) => {
+    return {
+      ...v.additionalProperties,
+      ...remap$(v, {
+        additionalProperties: null,
+      }),
+    };
+  })
+);
 
 export function streamRunAgentAgentToolInputRunSchemaToJSON(
   streamRunAgentAgentToolInputRunSchema: StreamRunAgentAgentToolInputRunSchema,
@@ -4128,12 +4300,16 @@ export const StreamRunAgentAgentToolInputRunJsonSchema$outboundSchema:
     StreamRunAgentAgentToolInputRunJsonSchema$Outbound,
     z.ZodTypeDef,
     StreamRunAgentAgentToolInputRunJsonSchema
-  > = z.object({
-    name: z.string(),
-    description: z.string(),
-    schema: z.lazy(() => StreamRunAgentAgentToolInputRunSchema$outboundSchema),
-    strict: z.boolean().optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      name: z.string(),
+      description: z.string(),
+      schema: z.lazy(() =>
+        StreamRunAgentAgentToolInputRunSchema$outboundSchema
+      ),
+      strict: z.boolean().optional(),
+    })
+  );
 
 export function streamRunAgentAgentToolInputRunJsonSchemaToJSON(
   streamRunAgentAgentToolInputRunJsonSchema:
@@ -4162,24 +4338,26 @@ export const AgentToolInputRunJSONSchemaToolRun$outboundSchema: z.ZodType<
   AgentToolInputRunJSONSchemaToolRun$Outbound,
   z.ZodTypeDef,
   AgentToolInputRunJSONSchemaToolRun
-> = z.object({
-  type: z.literal("json_schema"),
-  key: z.string(),
-  id: z.string().optional(),
-  displayName: z.string().optional(),
-  description: z.string(),
-  jsonSchema: z.lazy(() =>
-    StreamRunAgentAgentToolInputRunJsonSchema$outboundSchema
-  ),
-  requiresApproval: z.boolean().default(false),
-}).transform((v) => {
-  return remap$(v, {
-    id: "_id",
-    displayName: "display_name",
-    jsonSchema: "json_schema",
-    requiresApproval: "requires_approval",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("json_schema"),
+    key: z.string(),
+    id: z.string().optional(),
+    displayName: z.string().optional(),
+    description: z.string(),
+    jsonSchema: z.lazy(() =>
+      StreamRunAgentAgentToolInputRunJsonSchema$outboundSchema
+    ),
+    requiresApproval: z.boolean().default(false),
+  }).transform((v) => {
+    return remap$(v, {
+      id: "_id",
+      displayName: "display_name",
+      jsonSchema: "json_schema",
+      requiresApproval: "requires_approval",
+    });
+  })
+);
 
 export function agentToolInputRunJSONSchemaToolRunToJSON(
   agentToolInputRunJSONSchemaToolRun: AgentToolInputRunJSONSchemaToolRun,
@@ -4195,8 +4373,10 @@ export function agentToolInputRunJSONSchemaToolRunToJSON(
 export const StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsToolsType$outboundSchema:
   z.ZodNativeEnum<
     typeof StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsToolsType
-  > = z.nativeEnum(
-    StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsToolsType,
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.nativeEnum(
+      StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsToolsType,
+    )
   );
 
 /** @internal */
@@ -4213,20 +4393,22 @@ export const StreamRunAgentAgentToolInputRunAgentsParameters$outboundSchema:
     StreamRunAgentAgentToolInputRunAgentsParameters$Outbound,
     z.ZodTypeDef,
     StreamRunAgentAgentToolInputRunAgentsParameters
-  > = z.object({
-    type:
-      StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsToolsType$outboundSchema,
-    properties: z.record(z.any()),
-    required: z.array(z.string()),
-    additionalProperties: z.record(z.any()).optional(),
-  }).transform((v) => {
-    return {
-      ...v.additionalProperties,
-      ...remap$(v, {
-        additionalProperties: null,
-      }),
-    };
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type:
+        StreamRunAgentAgentToolInputRunAgentsRequestRequestBodySettingsToolsType$outboundSchema,
+      properties: z.record(z.any()),
+      required: z.array(z.string()),
+      additionalProperties: z.record(z.any()).optional(),
+    }).transform((v) => {
+      return {
+        ...v.additionalProperties,
+        ...remap$(v, {
+          additionalProperties: null,
+        }),
+      };
+    })
+  );
 
 export function streamRunAgentAgentToolInputRunAgentsParametersToJSON(
   streamRunAgentAgentToolInputRunAgentsParameters:
@@ -4254,14 +4436,16 @@ export const StreamRunAgentAgentToolInputRunFunction$outboundSchema: z.ZodType<
   StreamRunAgentAgentToolInputRunFunction$Outbound,
   z.ZodTypeDef,
   StreamRunAgentAgentToolInputRunFunction
-> = z.object({
-  name: z.string(),
-  description: z.string().optional(),
-  strict: z.boolean().optional(),
-  parameters: z.lazy(() =>
-    StreamRunAgentAgentToolInputRunAgentsParameters$outboundSchema
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+    description: z.string().optional(),
+    strict: z.boolean().optional(),
+    parameters: z.lazy(() =>
+      StreamRunAgentAgentToolInputRunAgentsParameters$outboundSchema
+    ).optional(),
+  })
+);
 
 export function streamRunAgentAgentToolInputRunFunctionToJSON(
   streamRunAgentAgentToolInputRunFunction:
@@ -4290,23 +4474,25 @@ export const AgentToolInputRunFunctionToolRun$outboundSchema: z.ZodType<
   AgentToolInputRunFunctionToolRun$Outbound,
   z.ZodTypeDef,
   AgentToolInputRunFunctionToolRun
-> = z.object({
-  type: z.literal("function"),
-  key: z.string(),
-  id: z.string().optional(),
-  displayName: z.string().optional(),
-  description: z.string().optional(),
-  function: z.lazy(() =>
-    StreamRunAgentAgentToolInputRunFunction$outboundSchema
-  ),
-  requiresApproval: z.boolean().default(false),
-}).transform((v) => {
-  return remap$(v, {
-    id: "_id",
-    displayName: "display_name",
-    requiresApproval: "requires_approval",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("function"),
+    key: z.string(),
+    id: z.string().optional(),
+    displayName: z.string().optional(),
+    description: z.string().optional(),
+    function: z.lazy(() =>
+      StreamRunAgentAgentToolInputRunFunction$outboundSchema
+    ),
+    requiresApproval: z.boolean().default(false),
+  }).transform((v) => {
+    return remap$(v, {
+      id: "_id",
+      displayName: "display_name",
+      requiresApproval: "requires_approval",
+    });
+  })
+);
 
 export function agentToolInputRunFunctionToolRunToJSON(
   agentToolInputRunFunctionToolRun: AgentToolInputRunFunctionToolRun,
@@ -4322,7 +4508,9 @@ export function agentToolInputRunFunctionToolRunToJSON(
 export const StreamRunAgentAgentToolInputRunAgentsRequestRequestBodyType$outboundSchema:
   z.ZodNativeEnum<
     typeof StreamRunAgentAgentToolInputRunAgentsRequestRequestBodyType
-  > = z.nativeEnum(StreamRunAgentAgentToolInputRunAgentsRequestRequestBodyType);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.nativeEnum(StreamRunAgentAgentToolInputRunAgentsRequestRequestBodyType)
+  );
 
 /** @internal */
 export type StreamRunAgentAgentToolInputRunParameters$Outbound = {
@@ -4338,20 +4526,22 @@ export const StreamRunAgentAgentToolInputRunParameters$outboundSchema:
     StreamRunAgentAgentToolInputRunParameters$Outbound,
     z.ZodTypeDef,
     StreamRunAgentAgentToolInputRunParameters
-  > = z.object({
-    type:
-      StreamRunAgentAgentToolInputRunAgentsRequestRequestBodyType$outboundSchema,
-    properties: z.record(z.any()),
-    required: z.array(z.string()),
-    additionalProperties: z.record(z.any()).optional(),
-  }).transform((v) => {
-    return {
-      ...v.additionalProperties,
-      ...remap$(v, {
-        additionalProperties: null,
-      }),
-    };
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type:
+        StreamRunAgentAgentToolInputRunAgentsRequestRequestBodyType$outboundSchema,
+      properties: z.record(z.any()),
+      required: z.array(z.string()),
+      additionalProperties: z.record(z.any()).optional(),
+    }).transform((v) => {
+      return {
+        ...v.additionalProperties,
+        ...remap$(v, {
+          additionalProperties: null,
+        }),
+      };
+    })
+  );
 
 export function streamRunAgentAgentToolInputRunParametersToJSON(
   streamRunAgentAgentToolInputRunParameters:
@@ -4367,7 +4557,7 @@ export function streamRunAgentAgentToolInputRunParametersToJSON(
 /** @internal */
 export const AgentToolInputRunLanguage$outboundSchema: z.ZodNativeEnum<
   typeof AgentToolInputRunLanguage
-> = z.nativeEnum(AgentToolInputRunLanguage);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(AgentToolInputRunLanguage));
 
 /** @internal */
 export type AgentToolInputRunCodeTool$Outbound = {
@@ -4381,13 +4571,15 @@ export const AgentToolInputRunCodeTool$outboundSchema: z.ZodType<
   AgentToolInputRunCodeTool$Outbound,
   z.ZodTypeDef,
   AgentToolInputRunCodeTool
-> = z.object({
-  parameters: z.lazy(() =>
-    StreamRunAgentAgentToolInputRunParameters$outboundSchema
-  ).optional(),
-  language: AgentToolInputRunLanguage$outboundSchema,
-  code: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    parameters: z.lazy(() =>
+      StreamRunAgentAgentToolInputRunParameters$outboundSchema
+    ).optional(),
+    language: AgentToolInputRunLanguage$outboundSchema,
+    code: z.string(),
+  })
+);
 
 export function agentToolInputRunCodeToolToJSON(
   agentToolInputRunCodeTool: AgentToolInputRunCodeTool,
@@ -4414,23 +4606,25 @@ export const AgentToolInputRunCodeToolRun$outboundSchema: z.ZodType<
   AgentToolInputRunCodeToolRun$Outbound,
   z.ZodTypeDef,
   AgentToolInputRunCodeToolRun
-> = z.object({
-  type: z.literal("code"),
-  key: z.string(),
-  id: z.string().optional(),
-  displayName: z.string().optional(),
-  description: z.string(),
-  codeTool: z.lazy(() => AgentToolInputRunCodeTool$outboundSchema),
-  requiresApproval: z.boolean().default(false),
-  timeout: z.number().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    id: "_id",
-    displayName: "display_name",
-    codeTool: "code_tool",
-    requiresApproval: "requires_approval",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("code"),
+    key: z.string(),
+    id: z.string().optional(),
+    displayName: z.string().optional(),
+    description: z.string(),
+    codeTool: z.lazy(() => AgentToolInputRunCodeTool$outboundSchema),
+    requiresApproval: z.boolean().default(false),
+    timeout: z.number().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      id: "_id",
+      displayName: "display_name",
+      codeTool: "code_tool",
+      requiresApproval: "requires_approval",
+    });
+  })
+);
 
 export function agentToolInputRunCodeToolRunToJSON(
   agentToolInputRunCodeToolRun: AgentToolInputRunCodeToolRun,
@@ -4445,7 +4639,7 @@ export function agentToolInputRunCodeToolRunToJSON(
 /** @internal */
 export const AgentToolInputRunMethod$outboundSchema: z.ZodNativeEnum<
   typeof AgentToolInputRunMethod
-> = z.nativeEnum(AgentToolInputRunMethod);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(AgentToolInputRunMethod));
 
 /** @internal */
 export type StreamRunAgentHeaders2$Outbound = {
@@ -4458,10 +4652,12 @@ export const StreamRunAgentHeaders2$outboundSchema: z.ZodType<
   StreamRunAgentHeaders2$Outbound,
   z.ZodTypeDef,
   StreamRunAgentHeaders2
-> = z.object({
-  value: z.string(),
-  encrypted: z.boolean().default(false),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    value: z.string(),
+    encrypted: z.boolean().default(false),
+  })
+);
 
 export function streamRunAgentHeaders2ToJSON(
   streamRunAgentHeaders2: StreamRunAgentHeaders2,
@@ -4481,7 +4677,9 @@ export const StreamRunAgentAgentToolInputRunHeaders$outboundSchema: z.ZodType<
   StreamRunAgentAgentToolInputRunHeaders$Outbound,
   z.ZodTypeDef,
   StreamRunAgentAgentToolInputRunHeaders
-> = z.union([z.lazy(() => StreamRunAgentHeaders2$outboundSchema), z.string()]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.lazy(() => StreamRunAgentHeaders2$outboundSchema), z.string()])
+);
 
 export function streamRunAgentAgentToolInputRunHeadersToJSON(
   streamRunAgentAgentToolInputRunHeaders:
@@ -4510,15 +4708,20 @@ export const AgentToolInputRunBlueprint$outboundSchema: z.ZodType<
   AgentToolInputRunBlueprint$Outbound,
   z.ZodTypeDef,
   AgentToolInputRunBlueprint
-> = z.object({
-  url: z.string(),
-  method: AgentToolInputRunMethod$outboundSchema,
-  headers: z.record(
-    z.union([z.lazy(() => StreamRunAgentHeaders2$outboundSchema), z.string()]),
-  ).optional(),
-  body: z.record(z.any()).optional(),
-  timeout: z.number().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    url: z.string(),
+    method: AgentToolInputRunMethod$outboundSchema,
+    headers: z.record(
+      z.union([
+        z.lazy(() => StreamRunAgentHeaders2$outboundSchema),
+        z.string(),
+      ]),
+    ).optional(),
+    body: z.record(z.any()).optional(),
+    timeout: z.number().optional(),
+  })
+);
 
 export function agentToolInputRunBlueprintToJSON(
   agentToolInputRunBlueprint: AgentToolInputRunBlueprint,
@@ -4530,8 +4733,10 @@ export function agentToolInputRunBlueprintToJSON(
 
 /** @internal */
 export const StreamRunAgentAgentToolInputRunAgentsType$outboundSchema:
-  z.ZodNativeEnum<typeof StreamRunAgentAgentToolInputRunAgentsType> = z
-    .nativeEnum(StreamRunAgentAgentToolInputRunAgentsType);
+  z.ZodNativeEnum<typeof StreamRunAgentAgentToolInputRunAgentsType> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(StreamRunAgentAgentToolInputRunAgentsType)
+    );
 
 /** @internal */
 export type AgentToolInputRunDefaultValue$Outbound = string | number | boolean;
@@ -4541,7 +4746,9 @@ export const AgentToolInputRunDefaultValue$outboundSchema: z.ZodType<
   AgentToolInputRunDefaultValue$Outbound,
   z.ZodTypeDef,
   AgentToolInputRunDefaultValue
-> = z.union([z.string(), z.number(), z.boolean()]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.number(), z.boolean()])
+);
 
 export function agentToolInputRunDefaultValueToJSON(
   agentToolInputRunDefaultValue: AgentToolInputRunDefaultValue,
@@ -4566,17 +4773,19 @@ export const AgentToolInputRunArguments$outboundSchema: z.ZodType<
   AgentToolInputRunArguments$Outbound,
   z.ZodTypeDef,
   AgentToolInputRunArguments
-> = z.object({
-  type: StreamRunAgentAgentToolInputRunAgentsType$outboundSchema,
-  description: z.string(),
-  sendToModel: z.boolean().default(true),
-  defaultValue: z.union([z.string(), z.number(), z.boolean()]).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    sendToModel: "send_to_model",
-    defaultValue: "default_value",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: StreamRunAgentAgentToolInputRunAgentsType$outboundSchema,
+    description: z.string(),
+    sendToModel: z.boolean().default(true),
+    defaultValue: z.union([z.string(), z.number(), z.boolean()]).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      sendToModel: "send_to_model",
+      defaultValue: "default_value",
+    });
+  })
+);
 
 export function agentToolInputRunArgumentsToJSON(
   agentToolInputRunArguments: AgentToolInputRunArguments,
@@ -4597,11 +4806,13 @@ export const AgentToolInputRunHttp$outboundSchema: z.ZodType<
   AgentToolInputRunHttp$Outbound,
   z.ZodTypeDef,
   AgentToolInputRunHttp
-> = z.object({
-  blueprint: z.lazy(() => AgentToolInputRunBlueprint$outboundSchema),
-  arguments: z.record(z.lazy(() => AgentToolInputRunArguments$outboundSchema))
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    blueprint: z.lazy(() => AgentToolInputRunBlueprint$outboundSchema),
+    arguments: z.record(z.lazy(() => AgentToolInputRunArguments$outboundSchema))
+      .optional(),
+  })
+);
 
 export function agentToolInputRunHttpToJSON(
   agentToolInputRunHttp: AgentToolInputRunHttp,
@@ -4628,22 +4839,24 @@ export const AgentToolInputRunHTTPToolRun$outboundSchema: z.ZodType<
   AgentToolInputRunHTTPToolRun$Outbound,
   z.ZodTypeDef,
   AgentToolInputRunHTTPToolRun
-> = z.object({
-  type: z.literal("http"),
-  key: z.string(),
-  id: z.string().optional(),
-  displayName: z.string().optional(),
-  description: z.string(),
-  http: z.lazy(() => AgentToolInputRunHttp$outboundSchema),
-  requiresApproval: z.boolean().default(false),
-  timeout: z.number().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    id: "_id",
-    displayName: "display_name",
-    requiresApproval: "requires_approval",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("http"),
+    key: z.string(),
+    id: z.string().optional(),
+    displayName: z.string().optional(),
+    description: z.string(),
+    http: z.lazy(() => AgentToolInputRunHttp$outboundSchema),
+    requiresApproval: z.boolean().default(false),
+    timeout: z.number().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      id: "_id",
+      displayName: "display_name",
+      requiresApproval: "requires_approval",
+    });
+  })
+);
 
 export function agentToolInputRunHTTPToolRunToJSON(
   agentToolInputRunHTTPToolRun: AgentToolInputRunHTTPToolRun,
@@ -4683,28 +4896,30 @@ export const StreamRunAgentAgentToolInputRun$outboundSchema: z.ZodType<
   StreamRunAgentAgentToolInputRun$Outbound,
   z.ZodTypeDef,
   StreamRunAgentAgentToolInputRun
-> = z.union([
-  components.GoogleSearchToolInput$outboundSchema,
-  components.WebScraperToolInput$outboundSchema,
-  components.CallSubAgentToolInput$outboundSchema,
-  components.RetrieveAgentsToolInput$outboundSchema,
-  components.QueryMemoryStoreToolInput$outboundSchema,
-  components.WriteMemoryStoreToolInput$outboundSchema,
-  components.RetrieveMemoryStoresToolInput$outboundSchema,
-  components.DeleteMemoryDocumentToolInput$outboundSchema,
-  components.RetrieveKnowledgeBasesToolInput$outboundSchema,
-  components.QueryKnowledgeBaseToolInput$outboundSchema,
-  components.CurrentDateToolInput$outboundSchema,
-  components.AdvisorToolInput$outboundSchema,
-  components.SidekickToolInput$outboundSchema,
-  components.CodeInterpreterToolInput$outboundSchema,
-  components.FileSystemToolInput$outboundSchema,
-  z.lazy(() => AgentToolInputRunHTTPToolRun$outboundSchema),
-  z.lazy(() => AgentToolInputRunCodeToolRun$outboundSchema),
-  z.lazy(() => AgentToolInputRunFunctionToolRun$outboundSchema),
-  z.lazy(() => AgentToolInputRunJSONSchemaToolRun$outboundSchema),
-  z.lazy(() => AgentToolInputRunMCPToolRun$outboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    components.GoogleSearchToolInput$outboundSchema,
+    components.WebScraperToolInput$outboundSchema,
+    components.CallSubAgentToolInput$outboundSchema,
+    components.RetrieveAgentsToolInput$outboundSchema,
+    components.QueryMemoryStoreToolInput$outboundSchema,
+    components.WriteMemoryStoreToolInput$outboundSchema,
+    components.RetrieveMemoryStoresToolInput$outboundSchema,
+    components.DeleteMemoryDocumentToolInput$outboundSchema,
+    components.RetrieveKnowledgeBasesToolInput$outboundSchema,
+    components.QueryKnowledgeBaseToolInput$outboundSchema,
+    components.CurrentDateToolInput$outboundSchema,
+    components.AdvisorToolInput$outboundSchema,
+    components.SidekickToolInput$outboundSchema,
+    components.CodeInterpreterToolInput$outboundSchema,
+    components.FileSystemToolInput$outboundSchema,
+    z.lazy(() => AgentToolInputRunHTTPToolRun$outboundSchema),
+    z.lazy(() => AgentToolInputRunCodeToolRun$outboundSchema),
+    z.lazy(() => AgentToolInputRunFunctionToolRun$outboundSchema),
+    z.lazy(() => AgentToolInputRunJSONSchemaToolRun$outboundSchema),
+    z.lazy(() => AgentToolInputRunMCPToolRun$outboundSchema),
+  ])
+);
 
 export function streamRunAgentAgentToolInputRunToJSON(
   streamRunAgentAgentToolInputRun: StreamRunAgentAgentToolInputRun,
@@ -4719,12 +4934,14 @@ export function streamRunAgentAgentToolInputRunToJSON(
 /** @internal */
 export const StreamRunAgentToolApprovalRequired$outboundSchema: z.ZodNativeEnum<
   typeof StreamRunAgentToolApprovalRequired
-> = z.nativeEnum(StreamRunAgentToolApprovalRequired);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(StreamRunAgentToolApprovalRequired)
+);
 
 /** @internal */
 export const StreamRunAgentExecuteOn$outboundSchema: z.ZodNativeEnum<
   typeof StreamRunAgentExecuteOn
-> = z.nativeEnum(StreamRunAgentExecuteOn);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(StreamRunAgentExecuteOn));
 
 /** @internal */
 export type StreamRunAgentEvaluators$Outbound = {
@@ -4739,17 +4956,19 @@ export const StreamRunAgentEvaluators$outboundSchema: z.ZodType<
   StreamRunAgentEvaluators$Outbound,
   z.ZodTypeDef,
   StreamRunAgentEvaluators
-> = z.object({
-  id: z.string(),
-  sampleRate: z.number().default(50),
-  executeOn: StreamRunAgentExecuteOn$outboundSchema,
-  options: z.record(z.any()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    sampleRate: "sample_rate",
-    executeOn: "execute_on",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    sampleRate: z.number().default(50),
+    executeOn: StreamRunAgentExecuteOn$outboundSchema,
+    options: z.record(z.any()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      sampleRate: "sample_rate",
+      executeOn: "execute_on",
+    });
+  })
+);
 
 export function streamRunAgentEvaluatorsToJSON(
   streamRunAgentEvaluators: StreamRunAgentEvaluators,
@@ -4762,7 +4981,9 @@ export function streamRunAgentEvaluatorsToJSON(
 /** @internal */
 export const StreamRunAgentAgentsExecuteOn$outboundSchema: z.ZodNativeEnum<
   typeof StreamRunAgentAgentsExecuteOn
-> = z.nativeEnum(StreamRunAgentAgentsExecuteOn);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(StreamRunAgentAgentsExecuteOn)
+);
 
 /** @internal */
 export type StreamRunAgentGuardrails$Outbound = {
@@ -4777,17 +4998,19 @@ export const StreamRunAgentGuardrails$outboundSchema: z.ZodType<
   StreamRunAgentGuardrails$Outbound,
   z.ZodTypeDef,
   StreamRunAgentGuardrails
-> = z.object({
-  id: z.string(),
-  sampleRate: z.number().default(50),
-  executeOn: StreamRunAgentAgentsExecuteOn$outboundSchema,
-  options: z.record(z.any()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    sampleRate: "sample_rate",
-    executeOn: "execute_on",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    sampleRate: z.number().default(50),
+    executeOn: StreamRunAgentAgentsExecuteOn$outboundSchema,
+    options: z.record(z.any()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      sampleRate: "sample_rate",
+      executeOn: "execute_on",
+    });
+  })
+);
 
 export function streamRunAgentGuardrailsToJSON(
   streamRunAgentGuardrails: StreamRunAgentGuardrails,
@@ -4837,50 +5060,52 @@ export const StreamRunAgentSettings$outboundSchema: z.ZodType<
   StreamRunAgentSettings$Outbound,
   z.ZodTypeDef,
   StreamRunAgentSettings
-> = z.object({
-  tools: z.array(
-    z.union([
-      components.GoogleSearchToolInput$outboundSchema,
-      components.WebScraperToolInput$outboundSchema,
-      components.CallSubAgentToolInput$outboundSchema,
-      components.RetrieveAgentsToolInput$outboundSchema,
-      components.QueryMemoryStoreToolInput$outboundSchema,
-      components.WriteMemoryStoreToolInput$outboundSchema,
-      components.RetrieveMemoryStoresToolInput$outboundSchema,
-      components.DeleteMemoryDocumentToolInput$outboundSchema,
-      components.RetrieveKnowledgeBasesToolInput$outboundSchema,
-      components.QueryKnowledgeBaseToolInput$outboundSchema,
-      components.CurrentDateToolInput$outboundSchema,
-      components.AdvisorToolInput$outboundSchema,
-      components.SidekickToolInput$outboundSchema,
-      components.CodeInterpreterToolInput$outboundSchema,
-      components.FileSystemToolInput$outboundSchema,
-      z.lazy(() => AgentToolInputRunHTTPToolRun$outboundSchema),
-      z.lazy(() => AgentToolInputRunCodeToolRun$outboundSchema),
-      z.lazy(() => AgentToolInputRunFunctionToolRun$outboundSchema),
-      z.lazy(() => AgentToolInputRunJSONSchemaToolRun$outboundSchema),
-      z.lazy(() => AgentToolInputRunMCPToolRun$outboundSchema),
-    ]),
-  ).optional(),
-  toolApprovalRequired: StreamRunAgentToolApprovalRequired$outboundSchema
-    .default("none"),
-  maxIterations: z.number().int().default(100),
-  maxExecutionTime: z.number().int().default(600),
-  maxCost: z.number().default(0),
-  chatExposed: z.boolean().optional(),
-  evaluators: z.array(z.lazy(() => StreamRunAgentEvaluators$outboundSchema))
-    .optional(),
-  guardrails: z.array(z.lazy(() => StreamRunAgentGuardrails$outboundSchema))
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    toolApprovalRequired: "tool_approval_required",
-    maxIterations: "max_iterations",
-    maxExecutionTime: "max_execution_time",
-    maxCost: "max_cost",
-    chatExposed: "chat_exposed",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    tools: z.array(
+      z.union([
+        components.GoogleSearchToolInput$outboundSchema,
+        components.WebScraperToolInput$outboundSchema,
+        components.CallSubAgentToolInput$outboundSchema,
+        components.RetrieveAgentsToolInput$outboundSchema,
+        components.QueryMemoryStoreToolInput$outboundSchema,
+        components.WriteMemoryStoreToolInput$outboundSchema,
+        components.RetrieveMemoryStoresToolInput$outboundSchema,
+        components.DeleteMemoryDocumentToolInput$outboundSchema,
+        components.RetrieveKnowledgeBasesToolInput$outboundSchema,
+        components.QueryKnowledgeBaseToolInput$outboundSchema,
+        components.CurrentDateToolInput$outboundSchema,
+        components.AdvisorToolInput$outboundSchema,
+        components.SidekickToolInput$outboundSchema,
+        components.CodeInterpreterToolInput$outboundSchema,
+        components.FileSystemToolInput$outboundSchema,
+        z.lazy(() => AgentToolInputRunHTTPToolRun$outboundSchema),
+        z.lazy(() => AgentToolInputRunCodeToolRun$outboundSchema),
+        z.lazy(() => AgentToolInputRunFunctionToolRun$outboundSchema),
+        z.lazy(() => AgentToolInputRunJSONSchemaToolRun$outboundSchema),
+        z.lazy(() => AgentToolInputRunMCPToolRun$outboundSchema),
+      ]),
+    ).optional(),
+    toolApprovalRequired: StreamRunAgentToolApprovalRequired$outboundSchema
+      .default("none"),
+    maxIterations: z.number().int().default(100),
+    maxExecutionTime: z.number().int().default(600),
+    maxCost: z.number().default(0),
+    chatExposed: z.boolean().optional(),
+    evaluators: z.array(z.lazy(() => StreamRunAgentEvaluators$outboundSchema))
+      .optional(),
+    guardrails: z.array(z.lazy(() => StreamRunAgentGuardrails$outboundSchema))
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      toolApprovalRequired: "tool_approval_required",
+      maxIterations: "max_iterations",
+      maxExecutionTime: "max_execution_time",
+      maxCost: "max_cost",
+      chatExposed: "chat_exposed",
+    });
+  })
+);
 
 export function streamRunAgentSettingsToJSON(
   streamRunAgentSettings: StreamRunAgentSettings,
@@ -4893,7 +5118,7 @@ export function streamRunAgentSettingsToJSON(
 /** @internal */
 export const StreamRunAgentEngine$outboundSchema: z.ZodNativeEnum<
   typeof StreamRunAgentEngine
-> = z.nativeEnum(StreamRunAgentEngine);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(StreamRunAgentEngine));
 
 /** @internal */
 export type StreamRunAgentRequestBody$Outbound = {
@@ -4928,51 +5153,54 @@ export const StreamRunAgentRequestBody$outboundSchema: z.ZodType<
   StreamRunAgentRequestBody$Outbound,
   z.ZodTypeDef,
   StreamRunAgentRequestBody
-> = z.object({
-  key: z.string(),
-  taskId: z.string().optional(),
-  model: z.union([
-    z.lazy(() => StreamRunAgentModelConfiguration2$outboundSchema),
-    z.string(),
-  ]),
-  fallbackModels: z.array(
-    z.union([
-      z.lazy(() => StreamRunAgentFallbackModelConfiguration2$outboundSchema),
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    key: z.string(),
+    taskId: z.string().optional(),
+    model: z.union([
+      z.lazy(() => StreamRunAgentModelConfiguration2$outboundSchema),
       z.string(),
     ]),
-  ).optional(),
-  role: z.string(),
-  instructions: z.string(),
-  message: z.lazy(() => StreamRunAgentA2AMessage$outboundSchema),
-  variables: z.record(z.any()).optional(),
-  identity: z.lazy(() => StreamRunAgentIdentity$outboundSchema).optional(),
-  contact: z.lazy(() => StreamRunAgentContact$outboundSchema).optional(),
-  thread: z.lazy(() => StreamRunAgentThread$outboundSchema).optional(),
-  memory: z.lazy(() => StreamRunAgentMemory$outboundSchema).optional(),
-  path: z.string(),
-  description: z.string().optional(),
-  systemPrompt: z.nullable(z.string()).optional(),
-  memoryStores: z.array(z.string()).optional(),
-  knowledgeBases: z.array(
-    z.lazy(() => StreamRunAgentKnowledgeBases$outboundSchema),
-  ).optional(),
-  teamOfAgents: z.array(z.lazy(() => StreamRunAgentTeamOfAgents$outboundSchema))
-    .optional(),
-  settings: z.lazy(() => StreamRunAgentSettings$outboundSchema),
-  metadata: z.record(z.any()).optional(),
-  engine: StreamRunAgentEngine$outboundSchema.default("text"),
-  streamTimeoutSeconds: z.number().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    taskId: "task_id",
-    fallbackModels: "fallback_models",
-    systemPrompt: "system_prompt",
-    memoryStores: "memory_stores",
-    knowledgeBases: "knowledge_bases",
-    teamOfAgents: "team_of_agents",
-    streamTimeoutSeconds: "stream_timeout_seconds",
-  });
-});
+    fallbackModels: z.array(z.union([
+      z.lazy(() => StreamRunAgentFallbackModelConfiguration2$outboundSchema),
+      z.string(),
+    ])).optional(),
+    role: z.string(),
+    instructions: z.string(),
+    message: z.lazy(() =>
+      StreamRunAgentA2AMessage$outboundSchema
+    ),
+    variables: z.record(z.any()).optional(),
+    identity: z.lazy(() => StreamRunAgentIdentity$outboundSchema).optional(),
+    contact: z.lazy(() => StreamRunAgentContact$outboundSchema).optional(),
+    thread: z.lazy(() => StreamRunAgentThread$outboundSchema).optional(),
+    memory: z.lazy(() => StreamRunAgentMemory$outboundSchema).optional(),
+    path: z.string(),
+    description: z.string().optional(),
+    systemPrompt: z.nullable(z.string()).optional(),
+    memoryStores: z.array(z.string()).optional(),
+    knowledgeBases: z.array(
+      z.lazy(() => StreamRunAgentKnowledgeBases$outboundSchema),
+    ).optional(),
+    teamOfAgents: z.array(
+      z.lazy(() => StreamRunAgentTeamOfAgents$outboundSchema),
+    ).optional(),
+    settings: z.lazy(() => StreamRunAgentSettings$outboundSchema),
+    metadata: z.record(z.any()).optional(),
+    engine: StreamRunAgentEngine$outboundSchema.default("text"),
+    streamTimeoutSeconds: z.number().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      taskId: "task_id",
+      fallbackModels: "fallback_models",
+      systemPrompt: "system_prompt",
+      memoryStores: "memory_stores",
+      knowledgeBases: "knowledge_bases",
+      teamOfAgents: "team_of_agents",
+      streamTimeoutSeconds: "stream_timeout_seconds",
+    });
+  })
+);
 
 export function streamRunAgentRequestBodyToJSON(
   streamRunAgentRequestBody: StreamRunAgentRequestBody,
@@ -4987,25 +5215,27 @@ export const StreamRunAgentData$inboundSchema: z.ZodType<
   StreamRunAgentData,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  components.AgentExecutionStartedStreamingEvent$inboundSchema,
-  components.AgentStartedStreamingEvent$inboundSchema,
-  components.AgentThoughtStreamingEvent$inboundSchema,
-  components.AgentInactiveStreamingEvent$inboundSchema,
-  components.AgentErroredStreamingEvent$inboundSchema,
-  components.ActionReviewRequestedStreamingEvent$inboundSchema,
-  components.ActionReviewedStreamingEvent$inboundSchema,
-  components.ExecutionReviewRequiredStreamingEvent$inboundSchema,
-  components.ExecutionReviewedStreamingEvent$inboundSchema,
-  components.ExecutionNamedStreamingEvent$inboundSchema,
-  components.AgentHandedOffStreamingEvent$inboundSchema,
-  components.AgentMessageCreatedStreamingEvent$inboundSchema,
-  components.ToolExecutionStartedStreamingEvent$inboundSchema,
-  components.ToolExecutionFinishedStreamingEvent$inboundSchema,
-  components.ToolExecutionFailedStreamingEvent$inboundSchema,
-  components.TimeoutStreamingEvent$inboundSchema,
-  components.ErrorStreamingEvent$inboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    components.AgentExecutionStartedStreamingEvent$inboundSchema,
+    components.AgentStartedStreamingEvent$inboundSchema,
+    components.AgentThoughtStreamingEvent$inboundSchema,
+    components.AgentInactiveStreamingEvent$inboundSchema,
+    components.AgentErroredStreamingEvent$inboundSchema,
+    components.ActionReviewRequestedStreamingEvent$inboundSchema,
+    components.ActionReviewedStreamingEvent$inboundSchema,
+    components.ExecutionReviewRequiredStreamingEvent$inboundSchema,
+    components.ExecutionReviewedStreamingEvent$inboundSchema,
+    components.ExecutionNamedStreamingEvent$inboundSchema,
+    components.AgentHandedOffStreamingEvent$inboundSchema,
+    components.AgentMessageCreatedStreamingEvent$inboundSchema,
+    components.ToolExecutionStartedStreamingEvent$inboundSchema,
+    components.ToolExecutionFinishedStreamingEvent$inboundSchema,
+    components.ToolExecutionFailedStreamingEvent$inboundSchema,
+    components.TimeoutStreamingEvent$inboundSchema,
+    components.ErrorStreamingEvent$inboundSchema,
+  ])
+);
 
 export function streamRunAgentDataFromJSON(
   jsonString: string,
@@ -5022,37 +5252,39 @@ export const StreamRunAgentResponseBody$inboundSchema: z.ZodType<
   StreamRunAgentResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.unknown().transform((v, ctx) => {
-    if (typeof v !== "string") return v;
-    try {
-      return JSON.parse(v);
-    } catch (err) {
-      ctx.addIssue({ code: "custom", message: `malformed json: ${err}` });
-      return z.NEVER;
-    }
-  }).pipe(
-    z.union([
-      components.AgentExecutionStartedStreamingEvent$inboundSchema,
-      components.AgentStartedStreamingEvent$inboundSchema,
-      components.AgentThoughtStreamingEvent$inboundSchema,
-      components.AgentInactiveStreamingEvent$inboundSchema,
-      components.AgentErroredStreamingEvent$inboundSchema,
-      components.ActionReviewRequestedStreamingEvent$inboundSchema,
-      components.ActionReviewedStreamingEvent$inboundSchema,
-      components.ExecutionReviewRequiredStreamingEvent$inboundSchema,
-      components.ExecutionReviewedStreamingEvent$inboundSchema,
-      components.ExecutionNamedStreamingEvent$inboundSchema,
-      components.AgentHandedOffStreamingEvent$inboundSchema,
-      components.AgentMessageCreatedStreamingEvent$inboundSchema,
-      components.ToolExecutionStartedStreamingEvent$inboundSchema,
-      components.ToolExecutionFinishedStreamingEvent$inboundSchema,
-      components.ToolExecutionFailedStreamingEvent$inboundSchema,
-      components.TimeoutStreamingEvent$inboundSchema,
-      components.ErrorStreamingEvent$inboundSchema,
-    ]),
-  ),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.unknown().transform((v, ctx) => {
+      if (typeof v !== "string") return v;
+      try {
+        return JSON.parse(v);
+      } catch (err) {
+        ctx.addIssue({ code: "custom", message: `malformed json: ${err}` });
+        return z.NEVER;
+      }
+    }).pipe(
+      z.union([
+        components.AgentExecutionStartedStreamingEvent$inboundSchema,
+        components.AgentStartedStreamingEvent$inboundSchema,
+        components.AgentThoughtStreamingEvent$inboundSchema,
+        components.AgentInactiveStreamingEvent$inboundSchema,
+        components.AgentErroredStreamingEvent$inboundSchema,
+        components.ActionReviewRequestedStreamingEvent$inboundSchema,
+        components.ActionReviewedStreamingEvent$inboundSchema,
+        components.ExecutionReviewRequiredStreamingEvent$inboundSchema,
+        components.ExecutionReviewedStreamingEvent$inboundSchema,
+        components.ExecutionNamedStreamingEvent$inboundSchema,
+        components.AgentHandedOffStreamingEvent$inboundSchema,
+        components.AgentMessageCreatedStreamingEvent$inboundSchema,
+        components.ToolExecutionStartedStreamingEvent$inboundSchema,
+        components.ToolExecutionFinishedStreamingEvent$inboundSchema,
+        components.ToolExecutionFailedStreamingEvent$inboundSchema,
+        components.TimeoutStreamingEvent$inboundSchema,
+        components.ErrorStreamingEvent$inboundSchema,
+      ]),
+    ),
+  })
+);
 
 export function streamRunAgentResponseBodyFromJSON(
   jsonString: string,

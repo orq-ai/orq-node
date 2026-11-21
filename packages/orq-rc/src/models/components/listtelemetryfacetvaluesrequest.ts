@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import {
   TelemetrySource,
   TelemetrySource$outboundSchema,
@@ -42,20 +43,22 @@ export const ListTelemetryFacetValuesRequest$outboundSchema: z.ZodType<
   ListTelemetryFacetValuesRequest$Outbound,
   z.ZodTypeDef,
   ListTelemetryFacetValuesRequest
-> = z.object({
-  source: TelemetrySource$outboundSchema.optional(),
-  metric: z.string().optional(),
-  field: z.string().optional(),
-  from: z.date().transform(v => v.toISOString()).optional(),
-  to: z.date().transform(v => v.toISOString()).optional(),
-  filters: z.array(TraceFilter$outboundSchema).optional(),
-  filterOperator: z.string().optional(),
-  limit: z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    filterOperator: "filter_operator",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    source: TelemetrySource$outboundSchema.optional(),
+    metric: z.string().optional(),
+    field: z.string().optional(),
+    from: z.date().transform(v => v.toISOString()).optional(),
+    to: z.date().transform(v => v.toISOString()).optional(),
+    filters: z.array(TraceFilter$outboundSchema).optional(),
+    filterOperator: z.string().optional(),
+    limit: z.number().int().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      filterOperator: "filter_operator",
+    });
+  })
+);
 
 export function listTelemetryFacetValuesRequestToJSON(
   listTelemetryFacetValuesRequest: ListTelemetryFacetValuesRequest,

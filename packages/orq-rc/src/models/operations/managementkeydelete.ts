@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type ManagementKeyDeleteRequest = {
   /**
@@ -22,13 +23,15 @@ export const ManagementKeyDeleteRequest$outboundSchema: z.ZodType<
   ManagementKeyDeleteRequest$Outbound,
   z.ZodTypeDef,
   ManagementKeyDeleteRequest
-> = z.object({
-  managementKeyId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    managementKeyId: "management_key_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    managementKeyId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      managementKeyId: "management_key_id",
+    });
+  })
+);
 
 export function managementKeyDeleteRequestToJSON(
   managementKeyDeleteRequest: ManagementKeyDeleteRequest,

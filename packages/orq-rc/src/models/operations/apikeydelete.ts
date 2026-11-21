@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type ApiKeyDeleteRequest = {
   /**
@@ -22,13 +23,15 @@ export const ApiKeyDeleteRequest$outboundSchema: z.ZodType<
   ApiKeyDeleteRequest$Outbound,
   z.ZodTypeDef,
   ApiKeyDeleteRequest
-> = z.object({
-  apiKeyId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    apiKeyId: "api_key_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    apiKeyId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      apiKeyId: "api_key_id",
+    });
+  })
+);
 
 export function apiKeyDeleteRequestToJSON(
   apiKeyDeleteRequest: ApiKeyDeleteRequest,

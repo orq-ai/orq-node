@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -59,11 +59,13 @@ export const FileInURIFormat$inboundSchema: z.ZodType<
   FileInURIFormat,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  uri: z.string(),
-  mimeType: z.string().optional(),
-  name: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    uri: z.string(),
+    mimeType: z.string().optional(),
+    name: z.string().optional(),
+  })
+);
 /** @internal */
 export type FileInURIFormat$Outbound = {
   uri: string;
@@ -76,11 +78,13 @@ export const FileInURIFormat$outboundSchema: z.ZodType<
   FileInURIFormat$Outbound,
   z.ZodTypeDef,
   FileInURIFormat
-> = z.object({
-  uri: z.string(),
-  mimeType: z.string().optional(),
-  name: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    uri: z.string(),
+    mimeType: z.string().optional(),
+    name: z.string().optional(),
+  })
+);
 
 export function fileInURIFormatToJSON(
   fileInURIFormat: FileInURIFormat,
@@ -102,11 +106,13 @@ export const BinaryFormat$inboundSchema: z.ZodType<
   BinaryFormat,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  bytes: z.string(),
-  mimeType: z.string().optional(),
-  name: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    bytes: z.string(),
+    mimeType: z.string().optional(),
+    name: z.string().optional(),
+  })
+);
 /** @internal */
 export type BinaryFormat$Outbound = {
   bytes: string;
@@ -119,11 +125,13 @@ export const BinaryFormat$outboundSchema: z.ZodType<
   BinaryFormat$Outbound,
   z.ZodTypeDef,
   BinaryFormat
-> = z.object({
-  bytes: z.string(),
-  mimeType: z.string().optional(),
-  name: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    bytes: z.string(),
+    mimeType: z.string().optional(),
+    name: z.string().optional(),
+  })
+);
 
 export function binaryFormatToJSON(binaryFormat: BinaryFormat): string {
   return JSON.stringify(BinaryFormat$outboundSchema.parse(binaryFormat));
@@ -143,10 +151,12 @@ export const FilePartFile$inboundSchema: z.ZodType<
   FilePartFile,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  z.lazy(() => BinaryFormat$inboundSchema),
-  z.lazy(() => FileInURIFormat$inboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => BinaryFormat$inboundSchema),
+    z.lazy(() => FileInURIFormat$inboundSchema),
+  ])
+);
 /** @internal */
 export type FilePartFile$Outbound =
   | BinaryFormat$Outbound
@@ -157,10 +167,12 @@ export const FilePartFile$outboundSchema: z.ZodType<
   FilePartFile$Outbound,
   z.ZodTypeDef,
   FilePartFile
-> = z.union([
-  z.lazy(() => BinaryFormat$outboundSchema),
-  z.lazy(() => FileInURIFormat$outboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => BinaryFormat$outboundSchema),
+    z.lazy(() => FileInURIFormat$outboundSchema),
+  ])
+);
 
 export function filePartFileToJSON(filePartFile: FilePartFile): string {
   return JSON.stringify(FilePartFile$outboundSchema.parse(filePartFile));
@@ -180,14 +192,16 @@ export const FilePart$inboundSchema: z.ZodType<
   FilePart,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  kind: z.literal("file"),
-  file: z.union([
-    z.lazy(() => BinaryFormat$inboundSchema),
-    z.lazy(() => FileInURIFormat$inboundSchema),
-  ]),
-  metadata: z.record(z.any()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    kind: z.literal("file"),
+    file: z.union([
+      z.lazy(() => BinaryFormat$inboundSchema),
+      z.lazy(() => FileInURIFormat$inboundSchema),
+    ]),
+    metadata: z.record(z.any()).optional(),
+  })
+);
 /** @internal */
 export type FilePart$Outbound = {
   kind: "file";
@@ -200,14 +214,16 @@ export const FilePart$outboundSchema: z.ZodType<
   FilePart$Outbound,
   z.ZodTypeDef,
   FilePart
-> = z.object({
-  kind: z.literal("file"),
-  file: z.union([
-    z.lazy(() => BinaryFormat$outboundSchema),
-    z.lazy(() => FileInURIFormat$outboundSchema),
-  ]),
-  metadata: z.record(z.any()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    kind: z.literal("file"),
+    file: z.union([
+      z.lazy(() => BinaryFormat$outboundSchema),
+      z.lazy(() => FileInURIFormat$outboundSchema),
+    ]),
+    metadata: z.record(z.any()).optional(),
+  })
+);
 
 export function filePartToJSON(filePart: FilePart): string {
   return JSON.stringify(FilePart$outboundSchema.parse(filePart));

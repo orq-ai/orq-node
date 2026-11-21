@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -18,15 +18,17 @@ export const SearchKnowledgeScores$inboundSchema: z.ZodType<
   SearchKnowledgeScores,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  rerank_score: z.number().optional(),
-  search_score: z.number().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "rerank_score": "rerankScore",
-    "search_score": "searchScore",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    rerank_score: z.number().optional(),
+    search_score: z.number().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "rerank_score": "rerankScore",
+      "search_score": "searchScore",
+    });
+  })
+);
 
 export function searchKnowledgeScoresFromJSON(
   jsonString: string,

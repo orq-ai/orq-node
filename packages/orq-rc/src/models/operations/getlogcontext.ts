@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import * as components from "../components/index.js";
 
 export type GetLogContextRequest = {
@@ -22,14 +23,16 @@ export const GetLogContextRequest$outboundSchema: z.ZodType<
   GetLogContextRequest$Outbound,
   z.ZodTypeDef,
   GetLogContextRequest
-> = z.object({
-  id: z.string(),
-  getLogContextRequest: components.GetLogContextRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    getLogContextRequest: "GetLogContextRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    getLogContextRequest: components.GetLogContextRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      getLogContextRequest: "GetLogContextRequest",
+    });
+  })
+);
 
 export function getLogContextRequestToJSON(
   getLogContextRequest: GetLogContextRequest,

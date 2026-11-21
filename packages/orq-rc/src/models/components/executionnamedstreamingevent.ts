@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -30,14 +30,16 @@ export const ExecutionNamedStreamingEventData$inboundSchema: z.ZodType<
   ExecutionNamedStreamingEventData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string(),
-  agent_manifest_id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "agent_manifest_id": "agentManifestId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+    agent_manifest_id: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "agent_manifest_id": "agentManifestId",
+    });
+  })
+);
 
 export function executionNamedStreamingEventDataFromJSON(
   jsonString: string,
@@ -54,11 +56,13 @@ export const ExecutionNamedStreamingEvent$inboundSchema: z.ZodType<
   ExecutionNamedStreamingEvent,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("event.agents.execution_named"),
-  timestamp: z.string(),
-  data: z.lazy(() => ExecutionNamedStreamingEventData$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("event.agents.execution_named"),
+    timestamp: z.string(),
+    data: z.lazy(() => ExecutionNamedStreamingEventData$inboundSchema),
+  })
+);
 
 export function executionNamedStreamingEventFromJSON(
   jsonString: string,

@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import * as components from "../components/index.js";
 
@@ -52,7 +53,7 @@ export type ApiKeyCreateRequestBody = {
 /** @internal */
 export const PermissionMode$outboundSchema: z.ZodNativeEnum<
   typeof PermissionMode
-> = z.nativeEnum(PermissionMode);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(PermissionMode));
 
 /** @internal */
 export type ApiKeyCreateRequestBody$Outbound = {
@@ -71,21 +72,23 @@ export const ApiKeyCreateRequestBody$outboundSchema: z.ZodType<
   ApiKeyCreateRequestBody$Outbound,
   z.ZodTypeDef,
   ApiKeyCreateRequestBody
-> = z.object({
-  access: z.record(z.string()).optional(),
-  constraints: components.Constraints$outboundSchema.optional(),
-  expiration: z.date().transform(v => v.toISOString()).optional(),
-  name: z.string(),
-  owner: components.Owner$outboundSchema.optional(),
-  permissionMode: PermissionMode$outboundSchema.optional(),
-  projectScope: components.RequestProjectScope$outboundSchema.optional(),
-  projects: z.nullable(z.array(z.string())).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    permissionMode: "permission_mode",
-    projectScope: "project_scope",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    access: z.record(z.string()).optional(),
+    constraints: components.Constraints$outboundSchema.optional(),
+    expiration: z.date().transform(v => v.toISOString()).optional(),
+    name: z.string(),
+    owner: components.Owner$outboundSchema.optional(),
+    permissionMode: PermissionMode$outboundSchema.optional(),
+    projectScope: components.RequestProjectScope$outboundSchema.optional(),
+    projects: z.nullable(z.array(z.string())).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      permissionMode: "permission_mode",
+      projectScope: "project_scope",
+    });
+  })
+);
 
 export function apiKeyCreateRequestBodyToJSON(
   apiKeyCreateRequestBody: ApiKeyCreateRequestBody,

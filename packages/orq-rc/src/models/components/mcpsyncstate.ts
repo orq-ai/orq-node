@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { SyncStatus, SyncStatus$inboundSchema } from "./syncstatus.js";
@@ -42,23 +42,25 @@ export const McpSyncState$inboundSchema: z.ZodType<
   McpSyncState,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  status: SyncStatus$inboundSchema.optional(),
-  tools_total: z.number().int().optional(),
-  tools_added: z.number().int().optional(),
-  tools_removed: z.number().int().optional(),
-  last_synced_at: z.string().optional(),
-  errors: z.array(z.string()).optional(),
-  skills_total: z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "tools_total": "toolsTotal",
-    "tools_added": "toolsAdded",
-    "tools_removed": "toolsRemoved",
-    "last_synced_at": "lastSyncedAt",
-    "skills_total": "skillsTotal",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    status: SyncStatus$inboundSchema.optional(),
+    tools_total: z.number().int().optional(),
+    tools_added: z.number().int().optional(),
+    tools_removed: z.number().int().optional(),
+    last_synced_at: z.string().optional(),
+    errors: z.array(z.string()).optional(),
+    skills_total: z.number().int().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "tools_total": "toolsTotal",
+      "tools_added": "toolsAdded",
+      "tools_removed": "toolsRemoved",
+      "last_synced_at": "lastSyncedAt",
+      "skills_total": "skillsTotal",
+    });
+  })
+);
 
 export function mcpSyncStateFromJSON(
   jsonString: string,

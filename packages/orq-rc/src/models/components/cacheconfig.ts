@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type CacheConfig = {
   ttl?: number | undefined;
@@ -20,10 +21,12 @@ export const CacheConfig$outboundSchema: z.ZodType<
   CacheConfig$Outbound,
   z.ZodTypeDef,
   CacheConfig
-> = z.object({
-  ttl: z.number().int().optional(),
-  type: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ttl: z.number().int().optional(),
+    type: z.string(),
+  })
+);
 
 export function cacheConfigToJSON(cacheConfig: CacheConfig): string {
   return JSON.stringify(CacheConfig$outboundSchema.parse(cacheConfig));

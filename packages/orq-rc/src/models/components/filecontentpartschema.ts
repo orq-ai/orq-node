@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -39,18 +39,20 @@ export const FileContentPartSchema$inboundSchema: z.ZodType<
   FileContentPartSchema,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  file_data: z.string().optional(),
-  uri: z.string().optional(),
-  mimeType: z.string().optional(),
-  file_id: z.string().optional(),
-  filename: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "file_data": "fileData",
-    "file_id": "fileId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    file_data: z.string().optional(),
+    uri: z.string().optional(),
+    mimeType: z.string().optional(),
+    file_id: z.string().optional(),
+    filename: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "file_data": "fileData",
+      "file_id": "fileId",
+    });
+  })
+);
 /** @internal */
 export type FileContentPartSchema$Outbound = {
   file_data?: string | undefined;
@@ -65,18 +67,20 @@ export const FileContentPartSchema$outboundSchema: z.ZodType<
   FileContentPartSchema$Outbound,
   z.ZodTypeDef,
   FileContentPartSchema
-> = z.object({
-  fileData: z.string().optional(),
-  uri: z.string().optional(),
-  mimeType: z.string().optional(),
-  fileId: z.string().optional(),
-  filename: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    fileData: "file_data",
-    fileId: "file_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    fileData: z.string().optional(),
+    uri: z.string().optional(),
+    mimeType: z.string().optional(),
+    fileId: z.string().optional(),
+    filename: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      fileData: "file_data",
+      fileId: "file_id",
+    });
+  })
+);
 
 export function fileContentPartSchemaToJSON(
   fileContentPartSchema: FileContentPartSchema,

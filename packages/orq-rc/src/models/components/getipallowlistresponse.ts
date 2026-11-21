@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { IPAllowlist, IPAllowlist$inboundSchema } from "./ipallowlist.js";
@@ -19,15 +19,17 @@ export const GetIPAllowlistResponse$inboundSchema: z.ZodType<
   GetIPAllowlistResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  ip_allowlist: IPAllowlist$inboundSchema,
-  current_ip: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "ip_allowlist": "ipAllowlist",
-    "current_ip": "currentIp",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ip_allowlist: IPAllowlist$inboundSchema,
+    current_ip: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ip_allowlist": "ipAllowlist",
+      "current_ip": "currentIp",
+    });
+  })
+);
 
 export function getIPAllowlistResponseFromJSON(
   jsonString: string,

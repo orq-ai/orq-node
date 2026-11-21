@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -93,28 +93,30 @@ export const ModelUpdateRequestBody$outboundSchema: z.ZodType<
   ModelUpdateRequestBody$Outbound,
   z.ZodTypeDef,
   ModelUpdateRequestBody
-> = z.object({
-  benchmarkModel: z.string().optional(),
-  displayName: z.string().optional(),
-  hasFunctions: z.boolean().optional(),
-  inputCost: z.number().optional(),
-  metadata: components.ModelMetadata$outboundSchema.optional(),
-  modelId: z.string().optional(),
-  modelType: z.string().optional(),
-  outputCost: z.number().optional(),
-  parameters: z.array(components.UpdateModelParameter$outboundSchema)
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    benchmarkModel: "benchmark_model",
-    displayName: "display_name",
-    hasFunctions: "has_functions",
-    inputCost: "input_cost",
-    modelId: "model_id",
-    modelType: "model_type",
-    outputCost: "output_cost",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    benchmarkModel: z.string().optional(),
+    displayName: z.string().optional(),
+    hasFunctions: z.boolean().optional(),
+    inputCost: z.number().optional(),
+    metadata: components.ModelMetadata$outboundSchema.optional(),
+    modelId: z.string().optional(),
+    modelType: z.string().optional(),
+    outputCost: z.number().optional(),
+    parameters: z.array(components.UpdateModelParameter$outboundSchema)
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      benchmarkModel: "benchmark_model",
+      displayName: "display_name",
+      hasFunctions: "has_functions",
+      inputCost: "input_cost",
+      modelId: "model_id",
+      modelType: "model_type",
+      outputCost: "output_cost",
+    });
+  })
+);
 
 export function modelUpdateRequestBodyToJSON(
   modelUpdateRequestBody: ModelUpdateRequestBody,
@@ -135,14 +137,16 @@ export const ModelUpdateRequest$outboundSchema: z.ZodType<
   ModelUpdateRequest$Outbound,
   z.ZodTypeDef,
   ModelUpdateRequest
-> = z.object({
-  id: z.string(),
-  requestBody: z.lazy(() => ModelUpdateRequestBody$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    requestBody: "RequestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    requestBody: z.lazy(() => ModelUpdateRequestBody$outboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      requestBody: "RequestBody",
+    });
+  })
+);
 
 export function modelUpdateRequestToJSON(
   modelUpdateRequest: ModelUpdateRequest,
@@ -157,59 +161,61 @@ export const ModelUpdateResponseBody$inboundSchema: z.ZodType<
   ModelUpdateResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  configuration: components.ModelConfigurationResponse$inboundSchema,
-  created: z.string(),
-  description: z.nullable(z.string()),
-  display_name: z.string(),
-  docs_url: z.nullable(z.string()),
-  enabled: z.boolean(),
-  enabled_for_endpoints: z.boolean(),
-  enabled_for_playground: z.boolean(),
-  has_cpu_pricing: z.boolean(),
-  has_functions: z.boolean(),
-  id: z.string(),
-  input_cost: z.nullable(z.number()),
-  input_currency: z.string(),
-  is_active: z.boolean(),
-  legacy_uuid: z.string().optional(),
-  metadata: components.ModelMetadata$inboundSchema,
-  model_developer: z.string().optional(),
-  model_family: z.string().optional(),
-  model_id: z.string(),
-  model_type: z.string(),
-  output_cost: z.nullable(z.number()),
-  output_currency: z.string(),
-  owner: z.string(),
-  parameters: z.nullable(
-    z.array(components.ModelParameterDocument$inboundSchema),
-  ),
-  pricing_url: z.nullable(z.string()),
-  provider: z.string(),
-  refId: z.string(),
-  sharing: components.ModelSharingConfig$inboundSchema.optional(),
-  updated: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "display_name": "displayName",
-    "docs_url": "docsUrl",
-    "enabled_for_endpoints": "enabledForEndpoints",
-    "enabled_for_playground": "enabledForPlayground",
-    "has_cpu_pricing": "hasCpuPricing",
-    "has_functions": "hasFunctions",
-    "input_cost": "inputCost",
-    "input_currency": "inputCurrency",
-    "is_active": "isActive",
-    "legacy_uuid": "legacyUuid",
-    "model_developer": "modelDeveloper",
-    "model_family": "modelFamily",
-    "model_id": "modelId",
-    "model_type": "modelType",
-    "output_cost": "outputCost",
-    "output_currency": "outputCurrency",
-    "pricing_url": "pricingUrl",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    configuration: components.ModelConfigurationResponse$inboundSchema,
+    created: z.string(),
+    description: z.nullable(z.string()),
+    display_name: z.string(),
+    docs_url: z.nullable(z.string()),
+    enabled: z.boolean(),
+    enabled_for_endpoints: z.boolean(),
+    enabled_for_playground: z.boolean(),
+    has_cpu_pricing: z.boolean(),
+    has_functions: z.boolean(),
+    id: z.string(),
+    input_cost: z.nullable(z.number()),
+    input_currency: z.string(),
+    is_active: z.boolean(),
+    legacy_uuid: z.string().optional(),
+    metadata: components.ModelMetadata$inboundSchema,
+    model_developer: z.string().optional(),
+    model_family: z.string().optional(),
+    model_id: z.string(),
+    model_type: z.string(),
+    output_cost: z.nullable(z.number()),
+    output_currency: z.string(),
+    owner: z.string(),
+    parameters: z.nullable(
+      z.array(components.ModelParameterDocument$inboundSchema),
+    ),
+    pricing_url: z.nullable(z.string()),
+    provider: z.string(),
+    refId: z.string(),
+    sharing: components.ModelSharingConfig$inboundSchema.optional(),
+    updated: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "display_name": "displayName",
+      "docs_url": "docsUrl",
+      "enabled_for_endpoints": "enabledForEndpoints",
+      "enabled_for_playground": "enabledForPlayground",
+      "has_cpu_pricing": "hasCpuPricing",
+      "has_functions": "hasFunctions",
+      "input_cost": "inputCost",
+      "input_currency": "inputCurrency",
+      "is_active": "isActive",
+      "legacy_uuid": "legacyUuid",
+      "model_developer": "modelDeveloper",
+      "model_family": "modelFamily",
+      "model_id": "modelId",
+      "model_type": "modelType",
+      "output_cost": "outputCost",
+      "output_currency": "outputCurrency",
+      "pricing_url": "pricingUrl",
+    });
+  })
+);
 
 export function modelUpdateResponseBodyFromJSON(
   jsonString: string,

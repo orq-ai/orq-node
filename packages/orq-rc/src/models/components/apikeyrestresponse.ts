@@ -6,6 +6,7 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import {
   collectExtraKeys as collectExtraKeys$,
+  lazySchema as lazySchema$,
   safeParse,
 } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -51,62 +52,64 @@ export const ApiKeyRestResponse$inboundSchema: z.ZodType<
   ApiKeyRestResponse,
   z.ZodTypeDef,
   unknown
-> = collectExtraKeys$(
-  z.object({
-    id: z.string(),
-    name: z.string(),
-    workspace_id: z.string(),
-    token: z.string(),
-    active: z.boolean().optional(),
-    is_legacy: z.boolean().optional(),
-    source: z.string().optional(),
-    budget: z.record(z.any()).optional(),
-    expiration: z.string().datetime({ offset: true }).transform(v =>
-      new Date(v)
-    ).optional(),
-    projects: z.array(z.string()).optional(),
-    created_by_id: z.nullable(z.string()).optional(),
-    updated_by_id: z.nullable(z.string()).optional(),
-    created: z.string().datetime({ offset: true }).transform(v => new Date(v))
-      .optional(),
-    updated: z.string().datetime({ offset: true }).transform(v => new Date(v))
-      .optional(),
-    consumption: z.number().optional(),
-    token_consumption: z.number().optional(),
-    requests_per_minute_consumption: z.number().optional(),
-    owner: z.record(z.any()).optional(),
-    project_scope: z.record(z.any()).optional(),
-    permission_mode: z.string().optional(),
-    access: z.record(z.string()).optional(),
-    token_prefix: z.string().optional(),
-    status: z.string().optional(),
-    constraints: z.record(z.any()).optional(),
-    mcp_access: z.record(z.any()).optional(),
-    legacy_token_family: z.string().optional(),
-    legacy_key_id: z.string().optional(),
-    last_used_at: z.string().datetime({ offset: true }).transform(v =>
-      new Date(v)
-    ).optional(),
-  }).catchall(z.any()),
-  "additionalProperties",
-  true,
-).transform((v) => {
-  return remap$(v, {
-    "workspace_id": "workspaceId",
-    "is_legacy": "isLegacy",
-    "created_by_id": "createdById",
-    "updated_by_id": "updatedById",
-    "token_consumption": "tokenConsumption",
-    "requests_per_minute_consumption": "requestsPerMinuteConsumption",
-    "project_scope": "projectScope",
-    "permission_mode": "permissionMode",
-    "token_prefix": "tokenPrefix",
-    "mcp_access": "mcpAccess",
-    "legacy_token_family": "legacyTokenFamily",
-    "legacy_key_id": "legacyKeyId",
-    "last_used_at": "lastUsedAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  collectExtraKeys$(
+    z.object({
+      id: z.string(),
+      name: z.string(),
+      workspace_id: z.string(),
+      token: z.string(),
+      active: z.boolean().optional(),
+      is_legacy: z.boolean().optional(),
+      source: z.string().optional(),
+      budget: z.record(z.any()).optional(),
+      expiration: z.string().datetime({ offset: true }).transform(v =>
+        new Date(v)
+      ).optional(),
+      projects: z.array(z.string()).optional(),
+      created_by_id: z.nullable(z.string()).optional(),
+      updated_by_id: z.nullable(z.string()).optional(),
+      created: z.string().datetime({ offset: true }).transform(v => new Date(v))
+        .optional(),
+      updated: z.string().datetime({ offset: true }).transform(v => new Date(v))
+        .optional(),
+      consumption: z.number().optional(),
+      token_consumption: z.number().optional(),
+      requests_per_minute_consumption: z.number().optional(),
+      owner: z.record(z.any()).optional(),
+      project_scope: z.record(z.any()).optional(),
+      permission_mode: z.string().optional(),
+      access: z.record(z.string()).optional(),
+      token_prefix: z.string().optional(),
+      status: z.string().optional(),
+      constraints: z.record(z.any()).optional(),
+      mcp_access: z.record(z.any()).optional(),
+      legacy_token_family: z.string().optional(),
+      legacy_key_id: z.string().optional(),
+      last_used_at: z.string().datetime({ offset: true }).transform(v =>
+        new Date(v)
+      ).optional(),
+    }).catchall(z.any()),
+    "additionalProperties",
+    true,
+  ).transform((v) => {
+    return remap$(v, {
+      "workspace_id": "workspaceId",
+      "is_legacy": "isLegacy",
+      "created_by_id": "createdById",
+      "updated_by_id": "updatedById",
+      "token_consumption": "tokenConsumption",
+      "requests_per_minute_consumption": "requestsPerMinuteConsumption",
+      "project_scope": "projectScope",
+      "permission_mode": "permissionMode",
+      "token_prefix": "tokenPrefix",
+      "mcp_access": "mcpAccess",
+      "legacy_token_family": "legacyTokenFamily",
+      "legacy_key_id": "legacyKeyId",
+      "last_used_at": "lastUsedAt",
+    });
+  })
+);
 
 export function apiKeyRestResponseFromJSON(
   jsonString: string,

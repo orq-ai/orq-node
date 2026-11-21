@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
@@ -130,13 +130,15 @@ export const CancelBatchRequest$outboundSchema: z.ZodType<
   CancelBatchRequest$Outbound,
   z.ZodTypeDef,
   CancelBatchRequest
-> = z.object({
-  batchId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    batchId: "batch_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    batchId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      batchId: "batch_id",
+    });
+  })
+);
 
 export function cancelBatchRequestToJSON(
   cancelBatchRequest: CancelBatchRequest,
@@ -149,54 +151,56 @@ export function cancelBatchRequestToJSON(
 /** @internal */
 export const CancelBatchStatus$inboundSchema: z.ZodNativeEnum<
   typeof CancelBatchStatus
-> = z.nativeEnum(CancelBatchStatus);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(CancelBatchStatus));
 
 /** @internal */
 export const CancelBatchResponseBody$inboundSchema: z.ZodType<
   CancelBatchResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  cancelled_at: z.number().int().optional(),
-  cancelling_at: z.number().int().optional(),
-  completed_at: z.number().int().optional(),
-  completion_window: z.string(),
-  created_at: z.number().int(),
-  endpoint: z.string(),
-  error_file_id: z.string().optional(),
-  errors: components.PublicBatchErrors$inboundSchema.optional(),
-  expired_at: z.number().int().optional(),
-  expires_at: z.number().int().optional(),
-  failed_at: z.number().int().optional(),
-  finalizing_at: z.number().int().optional(),
-  id: z.string(),
-  in_progress_at: z.number().int().optional(),
-  input_file_id: z.string(),
-  metadata: z.record(z.string()).optional(),
-  model: z.string().optional(),
-  object: z.string(),
-  output_file_id: z.string().optional(),
-  request_counts: components.PublicBatchRequestCounts$inboundSchema,
-  status: CancelBatchStatus$inboundSchema,
-  usage: components.PublicBatchUsage$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "cancelled_at": "cancelledAt",
-    "cancelling_at": "cancellingAt",
-    "completed_at": "completedAt",
-    "completion_window": "completionWindow",
-    "created_at": "createdAt",
-    "error_file_id": "errorFileId",
-    "expired_at": "expiredAt",
-    "expires_at": "expiresAt",
-    "failed_at": "failedAt",
-    "finalizing_at": "finalizingAt",
-    "in_progress_at": "inProgressAt",
-    "input_file_id": "inputFileId",
-    "output_file_id": "outputFileId",
-    "request_counts": "requestCounts",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    cancelled_at: z.number().int().optional(),
+    cancelling_at: z.number().int().optional(),
+    completed_at: z.number().int().optional(),
+    completion_window: z.string(),
+    created_at: z.number().int(),
+    endpoint: z.string(),
+    error_file_id: z.string().optional(),
+    errors: components.PublicBatchErrors$inboundSchema.optional(),
+    expired_at: z.number().int().optional(),
+    expires_at: z.number().int().optional(),
+    failed_at: z.number().int().optional(),
+    finalizing_at: z.number().int().optional(),
+    id: z.string(),
+    in_progress_at: z.number().int().optional(),
+    input_file_id: z.string(),
+    metadata: z.record(z.string()).optional(),
+    model: z.string().optional(),
+    object: z.string(),
+    output_file_id: z.string().optional(),
+    request_counts: components.PublicBatchRequestCounts$inboundSchema,
+    status: CancelBatchStatus$inboundSchema,
+    usage: components.PublicBatchUsage$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "cancelled_at": "cancelledAt",
+      "cancelling_at": "cancellingAt",
+      "completed_at": "completedAt",
+      "completion_window": "completionWindow",
+      "created_at": "createdAt",
+      "error_file_id": "errorFileId",
+      "expired_at": "expiredAt",
+      "expires_at": "expiresAt",
+      "failed_at": "failedAt",
+      "finalizing_at": "finalizingAt",
+      "in_progress_at": "inProgressAt",
+      "input_file_id": "inputFileId",
+      "output_file_id": "outputFileId",
+      "request_counts": "requestCounts",
+    });
+  })
+);
 
 export function cancelBatchResponseBodyFromJSON(
   jsonString: string,

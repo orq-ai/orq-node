@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -53,12 +53,14 @@ export const MetricSummary$inboundSchema: z.ZodType<
   MetricSummary,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  number: NumberMetricSummary$inboundSchema.optional(),
-  boolean: BooleanMetricSummary$inboundSchema.optional(),
-  categorical: CategoricalMetricSummary$inboundSchema.optional(),
-  baseline: z.nullable(MetricBaseline$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    number: NumberMetricSummary$inboundSchema.optional(),
+    boolean: BooleanMetricSummary$inboundSchema.optional(),
+    categorical: CategoricalMetricSummary$inboundSchema.optional(),
+    baseline: z.nullable(MetricBaseline$inboundSchema).optional(),
+  })
+);
 
 export function metricSummaryFromJSON(
   jsonString: string,

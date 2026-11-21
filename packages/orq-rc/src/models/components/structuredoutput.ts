@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import {
   StructuredToolCall,
   StructuredToolCall$Outbound,
@@ -26,14 +27,16 @@ export const StructuredOutput$outboundSchema: z.ZodType<
   StructuredOutput$Outbound,
   z.ZodTypeDef,
   StructuredOutput
-> = z.object({
-  response: z.string().optional(),
-  toolsCalled: z.array(StructuredToolCall$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    toolsCalled: "tools_called",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    response: z.string().optional(),
+    toolsCalled: z.array(StructuredToolCall$outboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      toolsCalled: "tools_called",
+    });
+  })
+);
 
 export function structuredOutputToJSON(
   structuredOutput: StructuredOutput,

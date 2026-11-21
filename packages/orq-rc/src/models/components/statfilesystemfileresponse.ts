@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -33,24 +33,28 @@ export type StatFileSystemFileResponse = {
 /** @internal */
 export const StatFileSystemFileResponseType$inboundSchema: z.ZodNativeEnum<
   typeof StatFileSystemFileResponseType
-> = z.nativeEnum(StatFileSystemFileResponseType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(StatFileSystemFileResponseType)
+);
 
 /** @internal */
 export const StatFileSystemFileResponse$inboundSchema: z.ZodType<
   StatFileSystemFileResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  path: z.string(),
-  type: StatFileSystemFileResponseType$inboundSchema,
-  size_bytes: z.string(),
-  mode: z.string(),
-  modified: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "size_bytes": "sizeBytes",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    path: z.string(),
+    type: StatFileSystemFileResponseType$inboundSchema,
+    size_bytes: z.string(),
+    mode: z.string(),
+    modified: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "size_bytes": "sizeBytes",
+    });
+  })
+);
 
 export function statFileSystemFileResponseFromJSON(
   jsonString: string,

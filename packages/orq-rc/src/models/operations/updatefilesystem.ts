@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import * as components from "../components/index.js";
 
 export type UpdateFileSystemRequest = {
@@ -22,15 +23,17 @@ export const UpdateFileSystemRequest$outboundSchema: z.ZodType<
   UpdateFileSystemRequest$Outbound,
   z.ZodTypeDef,
   UpdateFileSystemRequest
-> = z.object({
-  fileSystemKey: z.string(),
-  updateFileSystemRequest: components.UpdateFileSystemRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    fileSystemKey: "file_system_key",
-    updateFileSystemRequest: "UpdateFileSystemRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    fileSystemKey: z.string(),
+    updateFileSystemRequest: components.UpdateFileSystemRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      fileSystemKey: "file_system_key",
+      updateFileSystemRequest: "UpdateFileSystemRequest",
+    });
+  })
+);
 
 export function updateFileSystemRequestToJSON(
   updateFileSystemRequest: UpdateFileSystemRequest,

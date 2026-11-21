@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -101,37 +101,39 @@ export const McpGateway$inboundSchema: z.ZodType<
   McpGateway,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  key: z.string().optional(),
-  display_name: z.string().optional(),
-  description: z.string().optional(),
-  server_links: z.array(McpGatewayServerLink$inboundSchema).optional(),
-  tool_naming: McpToolNaming$inboundSchema.optional(),
-  public_url: z.string().optional(),
-  created: z.string().optional(),
-  updated: z.string().optional(),
-  exposed_tools_count: z.number().int().optional(),
-  mode: McpGatewayMode$inboundSchema.optional(),
-  sharing: Sharing$inboundSchema.optional(),
-  plugins: z.array(McpGatewayPlugin$inboundSchema).optional(),
-  skill_ids: z.array(z.string()).optional(),
-  icons: z.array(McpIcon$inboundSchema).optional(),
-  website_url: z.string().optional(),
-  guardrails: z.array(GuardrailRuleGuardrail$inboundSchema).optional(),
-  created_by_id: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "display_name": "displayName",
-    "server_links": "serverLinks",
-    "tool_naming": "toolNaming",
-    "public_url": "publicUrl",
-    "exposed_tools_count": "exposedToolsCount",
-    "skill_ids": "skillIds",
-    "website_url": "websiteUrl",
-    "created_by_id": "createdById",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    key: z.string().optional(),
+    display_name: z.string().optional(),
+    description: z.string().optional(),
+    server_links: z.array(McpGatewayServerLink$inboundSchema).optional(),
+    tool_naming: McpToolNaming$inboundSchema.optional(),
+    public_url: z.string().optional(),
+    created: z.string().optional(),
+    updated: z.string().optional(),
+    exposed_tools_count: z.number().int().optional(),
+    mode: McpGatewayMode$inboundSchema.optional(),
+    sharing: Sharing$inboundSchema.optional(),
+    plugins: z.array(McpGatewayPlugin$inboundSchema).optional(),
+    skill_ids: z.array(z.string()).optional(),
+    icons: z.array(McpIcon$inboundSchema).optional(),
+    website_url: z.string().optional(),
+    guardrails: z.array(GuardrailRuleGuardrail$inboundSchema).optional(),
+    created_by_id: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "display_name": "displayName",
+      "server_links": "serverLinks",
+      "tool_naming": "toolNaming",
+      "public_url": "publicUrl",
+      "exposed_tools_count": "exposedToolsCount",
+      "skill_ids": "skillIds",
+      "website_url": "websiteUrl",
+      "created_by_id": "createdById",
+    });
+  })
+);
 
 export function mcpGatewayFromJSON(
   jsonString: string,

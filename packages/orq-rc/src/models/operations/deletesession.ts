@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type DeleteSessionRequest = {
   sessionId: string;
@@ -19,13 +20,15 @@ export const DeleteSessionRequest$outboundSchema: z.ZodType<
   DeleteSessionRequest$Outbound,
   z.ZodTypeDef,
   DeleteSessionRequest
-> = z.object({
-  sessionId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    sessionId: "session_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    sessionId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      sessionId: "session_id",
+    });
+  })
+);
 
 export function deleteSessionRequestToJSON(
   deleteSessionRequest: DeleteSessionRequest,

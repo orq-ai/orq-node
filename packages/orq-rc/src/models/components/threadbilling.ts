@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -19,17 +19,19 @@ export const ThreadBilling$inboundSchema: z.ZodType<
   ThreadBilling,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  input_cost: z.number(),
-  output_cost: z.number(),
-  total_cost: z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    "input_cost": "inputCost",
-    "output_cost": "outputCost",
-    "total_cost": "totalCost",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    input_cost: z.number(),
+    output_cost: z.number(),
+    total_cost: z.number(),
+  }).transform((v) => {
+    return remap$(v, {
+      "input_cost": "inputCost",
+      "output_cost": "outputCost",
+      "total_cost": "totalCost",
+    });
+  })
+);
 /** @internal */
 export type ThreadBilling$Outbound = {
   input_cost: number;
@@ -42,17 +44,19 @@ export const ThreadBilling$outboundSchema: z.ZodType<
   ThreadBilling$Outbound,
   z.ZodTypeDef,
   ThreadBilling
-> = z.object({
-  inputCost: z.number(),
-  outputCost: z.number(),
-  totalCost: z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    inputCost: "input_cost",
-    outputCost: "output_cost",
-    totalCost: "total_cost",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    inputCost: z.number(),
+    outputCost: z.number(),
+    totalCost: z.number(),
+  }).transform((v) => {
+    return remap$(v, {
+      inputCost: "input_cost",
+      outputCost: "output_cost",
+      totalCost: "total_cost",
+    });
+  })
+);
 
 export function threadBillingToJSON(threadBilling: ThreadBilling): string {
   return JSON.stringify(ThreadBilling$outboundSchema.parse(threadBilling));

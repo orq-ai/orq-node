@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -23,14 +23,16 @@ export const McpPromptExposure$inboundSchema: z.ZodType<
   McpPromptExposure,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  mode: McpToolExposureMode$inboundSchema,
-  prompt_ids: z.array(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "prompt_ids": "promptIds",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    mode: McpToolExposureMode$inboundSchema,
+    prompt_ids: z.array(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "prompt_ids": "promptIds",
+    });
+  })
+);
 /** @internal */
 export type McpPromptExposure$Outbound = {
   mode: string;
@@ -42,14 +44,16 @@ export const McpPromptExposure$outboundSchema: z.ZodType<
   McpPromptExposure$Outbound,
   z.ZodTypeDef,
   McpPromptExposure
-> = z.object({
-  mode: McpToolExposureMode$outboundSchema,
-  promptIds: z.array(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    promptIds: "prompt_ids",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    mode: McpToolExposureMode$outboundSchema,
+    promptIds: z.array(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      promptIds: "prompt_ids",
+    });
+  })
+);
 
 export function mcpPromptExposureToJSON(
   mcpPromptExposure: McpPromptExposure,

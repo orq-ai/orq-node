@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -37,56 +37,59 @@ export type Log = {
 };
 
 /** @internal */
-export const Log$inboundSchema: z.ZodType<Log, z.ZodTypeDef, unknown> = z
-  .object({
-    id: z.string().optional(),
-    trace_id: z.string().optional(),
-    span_id: z.string().optional(),
-    timestamp: z.string().datetime({ offset: true }).transform(v => new Date(v))
-      .optional(),
-    observed_timestamp: z.string().datetime({ offset: true }).transform(v =>
-      new Date(v)
-    ).optional(),
-    severity_number: z.number().int().optional(),
-    severity_text: z.string().optional(),
-    body: z.string().optional(),
-    body_is_json: z.boolean().optional(),
-    event_name: z.string().optional(),
-    dropped_attributes_count: z.number().int().optional(),
-    trace_flags: z.number().int().optional(),
-    scope_name: z.string().optional(),
-    scope_version: z.string().optional(),
-    scope_attributes: z.record(z.string()).optional(),
-    log_attributes: z.record(z.string()).optional(),
-    resource_attributes: z.record(z.string()).optional(),
-    service_name: z.string().optional(),
-    service_version: z.string().optional(),
-    deployment_environment: z.string().optional(),
-    host_name: z.string().optional(),
-    project_id: z.string().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "trace_id": "traceId",
-      "span_id": "spanId",
-      "observed_timestamp": "observedTimestamp",
-      "severity_number": "severityNumber",
-      "severity_text": "severityText",
-      "body_is_json": "bodyIsJson",
-      "event_name": "eventName",
-      "dropped_attributes_count": "droppedAttributesCount",
-      "trace_flags": "traceFlags",
-      "scope_name": "scopeName",
-      "scope_version": "scopeVersion",
-      "scope_attributes": "scopeAttributes",
-      "log_attributes": "logAttributes",
-      "resource_attributes": "resourceAttributes",
-      "service_name": "serviceName",
-      "service_version": "serviceVersion",
-      "deployment_environment": "deploymentEnvironment",
-      "host_name": "hostName",
-      "project_id": "projectId",
-    });
-  });
+export const Log$inboundSchema: z.ZodType<Log, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string().optional(),
+      trace_id: z.string().optional(),
+      span_id: z.string().optional(),
+      timestamp: z.string().datetime({ offset: true }).transform(v =>
+        new Date(v)
+      ).optional(),
+      observed_timestamp: z.string().datetime({ offset: true }).transform(v =>
+        new Date(v)
+      ).optional(),
+      severity_number: z.number().int().optional(),
+      severity_text: z.string().optional(),
+      body: z.string().optional(),
+      body_is_json: z.boolean().optional(),
+      event_name: z.string().optional(),
+      dropped_attributes_count: z.number().int().optional(),
+      trace_flags: z.number().int().optional(),
+      scope_name: z.string().optional(),
+      scope_version: z.string().optional(),
+      scope_attributes: z.record(z.string()).optional(),
+      log_attributes: z.record(z.string()).optional(),
+      resource_attributes: z.record(z.string()).optional(),
+      service_name: z.string().optional(),
+      service_version: z.string().optional(),
+      deployment_environment: z.string().optional(),
+      host_name: z.string().optional(),
+      project_id: z.string().optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "trace_id": "traceId",
+        "span_id": "spanId",
+        "observed_timestamp": "observedTimestamp",
+        "severity_number": "severityNumber",
+        "severity_text": "severityText",
+        "body_is_json": "bodyIsJson",
+        "event_name": "eventName",
+        "dropped_attributes_count": "droppedAttributesCount",
+        "trace_flags": "traceFlags",
+        "scope_name": "scopeName",
+        "scope_version": "scopeVersion",
+        "scope_attributes": "scopeAttributes",
+        "log_attributes": "logAttributes",
+        "resource_attributes": "resourceAttributes",
+        "service_name": "serviceName",
+        "service_version": "serviceVersion",
+        "deployment_environment": "deploymentEnvironment",
+        "host_name": "hostName",
+        "project_id": "projectId",
+      });
+    })
+  );
 
 export function logFromJSON(
   jsonString: string,

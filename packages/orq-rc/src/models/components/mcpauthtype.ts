@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 
 export const McpAuthType = {
@@ -15,8 +16,8 @@ export const McpAuthType = {
 export type McpAuthType = ClosedEnum<typeof McpAuthType>;
 
 /** @internal */
-export const McpAuthType$inboundSchema: z.ZodNativeEnum<typeof McpAuthType> = z
-  .nativeEnum(McpAuthType);
+export const McpAuthType$inboundSchema: z.ZodNativeEnum<typeof McpAuthType> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(McpAuthType));
 /** @internal */
 export const McpAuthType$outboundSchema: z.ZodNativeEnum<typeof McpAuthType> =
   McpAuthType$inboundSchema;

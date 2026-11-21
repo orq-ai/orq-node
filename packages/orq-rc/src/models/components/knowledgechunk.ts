@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -65,7 +65,9 @@ export const Metadata$inboundSchema: z.ZodType<
   Metadata,
   z.ZodTypeDef,
   unknown
-> = z.union([z.string(), z.number(), z.boolean()]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.number(), z.boolean()])
+);
 
 export function metadataFromJSON(
   jsonString: string,
@@ -80,34 +82,37 @@ export function metadataFromJSON(
 /** @internal */
 export const KnowledgeChunkStatus$inboundSchema: z.ZodNativeEnum<
   typeof KnowledgeChunkStatus
-> = z.nativeEnum(KnowledgeChunkStatus);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(KnowledgeChunkStatus));
 
 /** @internal */
 export const KnowledgeChunk$inboundSchema: z.ZodType<
   KnowledgeChunk,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  text: z.string(),
-  metadata: z.record(z.union([z.string(), z.number(), z.boolean()])).optional(),
-  enabled: z.boolean(),
-  status: KnowledgeChunkStatus$inboundSchema,
-  created: z.string(),
-  updated: z.string(),
-  created_by_id: z.nullable(z.string()).optional(),
-  update_by_id: z.nullable(z.string()).optional(),
-  processing_attempts: z.array(ProcessingAttempt$inboundSchema).optional(),
-  count_metadata: CountMetadata$inboundSchema.optional(),
-  _id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "created_by_id": "createdById",
-    "update_by_id": "updateById",
-    "processing_attempts": "processingAttempts",
-    "count_metadata": "countMetadata",
-    "_id": "id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    text: z.string(),
+    metadata: z.record(z.union([z.string(), z.number(), z.boolean()]))
+      .optional(),
+    enabled: z.boolean(),
+    status: KnowledgeChunkStatus$inboundSchema,
+    created: z.string(),
+    updated: z.string(),
+    created_by_id: z.nullable(z.string()).optional(),
+    update_by_id: z.nullable(z.string()).optional(),
+    processing_attempts: z.array(ProcessingAttempt$inboundSchema).optional(),
+    count_metadata: CountMetadata$inboundSchema.optional(),
+    _id: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "created_by_id": "createdById",
+      "update_by_id": "updateById",
+      "processing_attempts": "processingAttempts",
+      "count_metadata": "countMetadata",
+      "_id": "id",
+    });
+  })
+);
 
 export function knowledgeChunkFromJSON(
   jsonString: string,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -353,28 +353,30 @@ export type DeploymentInvokeResponseBody = {
 };
 
 /** @internal */
-export const ObjectT$inboundSchema: z.ZodNativeEnum<typeof ObjectT> = z
-  .nativeEnum(ObjectT);
+export const ObjectT$inboundSchema: z.ZodNativeEnum<typeof ObjectT> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ObjectT));
 
 /** @internal */
 export const DeploymentInvokeProvider$inboundSchema: z.ZodNativeEnum<
   typeof DeploymentInvokeProvider
-> = z.nativeEnum(DeploymentInvokeProvider);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(DeploymentInvokeProvider));
 
 /** @internal */
 export const Telemetry$inboundSchema: z.ZodType<
   Telemetry,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  trace_id: z.string(),
-  span_id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "trace_id": "traceId",
-    "span_id": "spanId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    trace_id: z.string(),
+    span_id: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "trace_id": "traceId",
+      "span_id": "spanId",
+    });
+  })
+);
 
 export function telemetryFromJSON(
   jsonString: string,
@@ -391,21 +393,23 @@ export const DeploymentInvokeMetadata$inboundSchema: z.ZodType<
   DeploymentInvokeMetadata,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  file_name: z.string(),
-  page_number: z.nullable(z.number()),
-  file_type: z.string(),
-  rerank_score: z.number().optional(),
-  search_score: z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    "file_name": "fileName",
-    "page_number": "pageNumber",
-    "file_type": "fileType",
-    "rerank_score": "rerankScore",
-    "search_score": "searchScore",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    file_name: z.string(),
+    page_number: z.nullable(z.number()),
+    file_type: z.string(),
+    rerank_score: z.number().optional(),
+    search_score: z.number(),
+  }).transform((v) => {
+    return remap$(v, {
+      "file_name": "fileName",
+      "page_number": "pageNumber",
+      "file_type": "fileType",
+      "rerank_score": "rerankScore",
+      "search_score": "searchScore",
+    });
+  })
+);
 
 export function deploymentInvokeMetadataFromJSON(
   jsonString: string,
@@ -422,10 +426,12 @@ export const Retrievals$inboundSchema: z.ZodType<
   Retrievals,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  document: z.string(),
-  metadata: z.lazy(() => DeploymentInvokeMetadata$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    document: z.string(),
+    metadata: z.lazy(() => DeploymentInvokeMetadata$inboundSchema),
+  })
+);
 
 export function retrievalsFromJSON(
   jsonString: string,
@@ -442,13 +448,15 @@ export const PromptTokensDetails$inboundSchema: z.ZodType<
   PromptTokensDetails,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  cached_tokens: z.nullable(z.number()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "cached_tokens": "cachedTokens",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    cached_tokens: z.nullable(z.number()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "cached_tokens": "cachedTokens",
+    });
+  })
+);
 
 export function promptTokensDetailsFromJSON(
   jsonString: string,
@@ -465,13 +473,15 @@ export const CompletionTokensDetails$inboundSchema: z.ZodType<
   CompletionTokensDetails,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  reasoning_tokens: z.nullable(z.number()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "reasoning_tokens": "reasoningTokens",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    reasoning_tokens: z.nullable(z.number()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "reasoning_tokens": "reasoningTokens",
+    });
+  })
+);
 
 export function completionTokensDetailsFromJSON(
   jsonString: string,
@@ -484,25 +494,27 @@ export function completionTokensDetailsFromJSON(
 }
 
 /** @internal */
-export const Usage$inboundSchema: z.ZodType<Usage, z.ZodTypeDef, unknown> = z
-  .object({
-    total_tokens: z.number().optional(),
-    prompt_tokens: z.number().optional(),
-    completion_tokens: z.number().optional(),
-    prompt_tokens_details: z.lazy(() => PromptTokensDetails$inboundSchema)
-      .optional(),
-    completion_tokens_details: z.nullable(
-      z.lazy(() => CompletionTokensDetails$inboundSchema),
-    ).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "total_tokens": "totalTokens",
-      "prompt_tokens": "promptTokens",
-      "completion_tokens": "completionTokens",
-      "prompt_tokens_details": "promptTokensDetails",
-      "completion_tokens_details": "completionTokensDetails",
-    });
-  });
+export const Usage$inboundSchema: z.ZodType<Usage, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      total_tokens: z.number().optional(),
+      prompt_tokens: z.number().optional(),
+      completion_tokens: z.number().optional(),
+      prompt_tokens_details: z.lazy(() => PromptTokensDetails$inboundSchema)
+        .optional(),
+      completion_tokens_details: z.nullable(
+        z.lazy(() => CompletionTokensDetails$inboundSchema),
+      ).optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "total_tokens": "totalTokens",
+        "prompt_tokens": "promptTokens",
+        "completion_tokens": "completionTokens",
+        "prompt_tokens_details": "promptTokensDetails",
+        "completion_tokens_details": "completionTokensDetails",
+      });
+    })
+  );
 
 export function usageFromJSON(
   jsonString: string,
@@ -517,18 +529,22 @@ export function usageFromJSON(
 /** @internal */
 export const DeploymentInvokeMessageRole$inboundSchema: z.ZodNativeEnum<
   typeof DeploymentInvokeMessageRole
-> = z.nativeEnum(DeploymentInvokeMessageRole);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(DeploymentInvokeMessageRole)
+);
 
 /** @internal */
 export const Message3$inboundSchema: z.ZodType<
   Message3,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("image"),
-  role: DeploymentInvokeMessageRole$inboundSchema,
-  url: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("image"),
+    role: DeploymentInvokeMessageRole$inboundSchema,
+    url: z.string(),
+  })
+);
 
 export function message3FromJSON(
   jsonString: string,
@@ -541,27 +557,29 @@ export function message3FromJSON(
 }
 
 /** @internal */
-export const MessageRole$inboundSchema: z.ZodNativeEnum<typeof MessageRole> = z
-  .nativeEnum(MessageRole);
+export const MessageRole$inboundSchema: z.ZodNativeEnum<typeof MessageRole> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(MessageRole));
 
 /** @internal */
 export const Message2$inboundSchema: z.ZodType<
   Message2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("content"),
-  role: MessageRole$inboundSchema,
-  content: z.nullable(z.string()),
-  reasoning: z.string().optional(),
-  reasoning_signature: z.string().optional(),
-  redacted_reasoning: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "reasoning_signature": "reasoningSignature",
-    "redacted_reasoning": "redactedReasoning",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("content"),
+    role: MessageRole$inboundSchema,
+    content: z.nullable(z.string()),
+    reasoning: z.string().optional(),
+    reasoning_signature: z.string().optional(),
+    redacted_reasoning: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "reasoning_signature": "reasoningSignature",
+      "redacted_reasoning": "redactedReasoning",
+    });
+  })
+);
 
 export function message2FromJSON(
   jsonString: string,
@@ -575,24 +593,29 @@ export function message2FromJSON(
 
 /** @internal */
 export const DeploymentInvokeMessageDeploymentsRole$inboundSchema:
-  z.ZodNativeEnum<typeof DeploymentInvokeMessageDeploymentsRole> = z.nativeEnum(
-    DeploymentInvokeMessageDeploymentsRole,
-  );
+  z.ZodNativeEnum<typeof DeploymentInvokeMessageDeploymentsRole> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(DeploymentInvokeMessageDeploymentsRole)
+    );
 
 /** @internal */
 export const DeploymentInvokeMessageDeploymentsResponseType$inboundSchema:
-  z.ZodNativeEnum<typeof DeploymentInvokeMessageDeploymentsResponseType> = z
-    .nativeEnum(DeploymentInvokeMessageDeploymentsResponseType);
+  z.ZodNativeEnum<typeof DeploymentInvokeMessageDeploymentsResponseType> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(DeploymentInvokeMessageDeploymentsResponseType)
+    );
 
 /** @internal */
 export const MessageFunction$inboundSchema: z.ZodType<
   MessageFunction,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string(),
-  arguments: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+    arguments: z.string(),
+  })
+);
 
 export function messageFunctionFromJSON(
   jsonString: string,
@@ -609,12 +632,14 @@ export const MessageToolCalls$inboundSchema: z.ZodType<
   MessageToolCalls,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  index: z.number().optional(),
-  type: DeploymentInvokeMessageDeploymentsResponseType$inboundSchema,
-  function: z.lazy(() => MessageFunction$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    index: z.number().optional(),
+    type: DeploymentInvokeMessageDeploymentsResponseType$inboundSchema,
+    function: z.lazy(() => MessageFunction$inboundSchema),
+  })
+);
 
 export function messageToolCallsFromJSON(
   jsonString: string,
@@ -631,21 +656,23 @@ export const Message1$inboundSchema: z.ZodType<
   Message1,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("tool_calls"),
-  role: DeploymentInvokeMessageDeploymentsRole$inboundSchema,
-  content: z.nullable(z.string()).optional(),
-  tool_calls: z.array(z.lazy(() => MessageToolCalls$inboundSchema)),
-  reasoning: z.string().optional(),
-  reasoning_signature: z.string().optional(),
-  redacted_reasoning: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "tool_calls": "toolCalls",
-    "reasoning_signature": "reasoningSignature",
-    "redacted_reasoning": "redactedReasoning",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("tool_calls"),
+    role: DeploymentInvokeMessageDeploymentsRole$inboundSchema,
+    content: z.nullable(z.string()).optional(),
+    tool_calls: z.array(z.lazy(() => MessageToolCalls$inboundSchema)),
+    reasoning: z.string().optional(),
+    reasoning_signature: z.string().optional(),
+    redacted_reasoning: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "tool_calls": "toolCalls",
+      "reasoning_signature": "reasoningSignature",
+      "redacted_reasoning": "redactedReasoning",
+    });
+  })
+);
 
 export function message1FromJSON(
   jsonString: string,
@@ -659,11 +686,13 @@ export function message1FromJSON(
 
 /** @internal */
 export const Message$inboundSchema: z.ZodType<Message, z.ZodTypeDef, unknown> =
-  z.union([
-    z.lazy(() => Message1$inboundSchema),
-    z.lazy(() => Message2$inboundSchema),
-    z.lazy(() => Message3$inboundSchema),
-  ]);
+  /* @__PURE__ */ lazySchema$(() =>
+    z.union([
+      z.lazy(() => Message1$inboundSchema),
+      z.lazy(() => Message2$inboundSchema),
+      z.lazy(() => Message3$inboundSchema),
+    ])
+  );
 
 export function messageFromJSON(
   jsonString: string,
@@ -677,19 +706,21 @@ export function messageFromJSON(
 
 /** @internal */
 export const Choices$inboundSchema: z.ZodType<Choices, z.ZodTypeDef, unknown> =
-  z.object({
-    index: z.number(),
-    message: z.union([
-      z.lazy(() => Message1$inboundSchema),
-      z.lazy(() => Message2$inboundSchema),
-      z.lazy(() => Message3$inboundSchema),
-    ]),
-    finish_reason: z.nullable(z.string()).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "finish_reason": "finishReason",
-    });
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      index: z.number(),
+      message: z.union([
+        z.lazy(() => Message1$inboundSchema),
+        z.lazy(() => Message2$inboundSchema),
+        z.lazy(() => Message3$inboundSchema),
+      ]),
+      finish_reason: z.nullable(z.string()).optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "finish_reason": "finishReason",
+      });
+    })
+  );
 
 export function choicesFromJSON(
   jsonString: string,
@@ -706,30 +737,32 @@ export const DeploymentInvokeResponseBody$inboundSchema: z.ZodType<
   DeploymentInvokeResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  created: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  object: ObjectT$inboundSchema,
-  model: z.string(),
-  provider: DeploymentInvokeProvider$inboundSchema,
-  is_final: z.boolean(),
-  integration_id: z.string().optional(),
-  telemetry: z.lazy(() => Telemetry$inboundSchema),
-  finalized: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  system_fingerprint: z.nullable(z.string()).optional(),
-  retrievals: z.array(z.lazy(() => Retrievals$inboundSchema)).optional(),
-  provider_response: z.any().optional(),
-  usage: z.nullable(z.lazy(() => Usage$inboundSchema)).optional(),
-  choices: z.array(z.lazy(() => Choices$inboundSchema)),
-}).transform((v) => {
-  return remap$(v, {
-    "is_final": "isFinal",
-    "integration_id": "integrationId",
-    "system_fingerprint": "systemFingerprint",
-    "provider_response": "providerResponse",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    created: z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    object: ObjectT$inboundSchema,
+    model: z.string(),
+    provider: DeploymentInvokeProvider$inboundSchema,
+    is_final: z.boolean(),
+    integration_id: z.string().optional(),
+    telemetry: z.lazy(() => Telemetry$inboundSchema),
+    finalized: z.string().datetime({ offset: true }).transform(v => new Date(v))
+      .optional(),
+    system_fingerprint: z.nullable(z.string()).optional(),
+    retrievals: z.array(z.lazy(() => Retrievals$inboundSchema)).optional(),
+    provider_response: z.any().optional(),
+    usage: z.nullable(z.lazy(() => Usage$inboundSchema)).optional(),
+    choices: z.array(z.lazy(() => Choices$inboundSchema)),
+  }).transform((v) => {
+    return remap$(v, {
+      "is_final": "isFinal",
+      "integration_id": "integrationId",
+      "system_fingerprint": "systemFingerprint",
+      "provider_response": "providerResponse",
+    });
+  })
+);
 
 export function deploymentInvokeResponseBodyFromJSON(
   jsonString: string,

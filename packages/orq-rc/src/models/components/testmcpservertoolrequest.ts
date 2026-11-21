@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 /**
  * Arguments passed to the tool, matching its `input_schema`.
@@ -33,7 +34,7 @@ export const Arguments$outboundSchema: z.ZodType<
   Arguments$Outbound,
   z.ZodTypeDef,
   Arguments
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function argumentsToJSON(value: Arguments): string {
   return JSON.stringify(Arguments$outboundSchema.parse(value));
@@ -51,16 +52,18 @@ export const TestMcpServerToolRequest$outboundSchema: z.ZodType<
   TestMcpServerToolRequest$Outbound,
   z.ZodTypeDef,
   TestMcpServerToolRequest
-> = z.object({
-  toolName: z.string(),
-  arguments: z.lazy(() => Arguments$outboundSchema).optional(),
-  discoveryVariables: z.record(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    toolName: "tool_name",
-    discoveryVariables: "discovery_variables",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    toolName: z.string(),
+    arguments: z.lazy(() => Arguments$outboundSchema).optional(),
+    discoveryVariables: z.record(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      toolName: "tool_name",
+      discoveryVariables: "discovery_variables",
+    });
+  })
+);
 
 export function testMcpServerToolRequestToJSON(
   testMcpServerToolRequest: TestMcpServerToolRequest,

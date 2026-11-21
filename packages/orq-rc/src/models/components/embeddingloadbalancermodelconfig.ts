@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type EmbeddingLoadBalancerModelConfig = {
   /**
@@ -26,10 +27,12 @@ export const EmbeddingLoadBalancerModelConfig$outboundSchema: z.ZodType<
   EmbeddingLoadBalancerModelConfig$Outbound,
   z.ZodTypeDef,
   EmbeddingLoadBalancerModelConfig
-> = z.object({
-  model: z.string(),
-  weight: z.number(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model: z.string(),
+    weight: z.number(),
+  })
+);
 
 export function embeddingLoadBalancerModelConfigToJSON(
   embeddingLoadBalancerModelConfig: EmbeddingLoadBalancerModelConfig,

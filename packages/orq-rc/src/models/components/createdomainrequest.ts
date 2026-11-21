@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type CreateDomainRequest = {
   domain?: string | undefined;
@@ -18,9 +19,11 @@ export const CreateDomainRequest$outboundSchema: z.ZodType<
   CreateDomainRequest$Outbound,
   z.ZodTypeDef,
   CreateDomainRequest
-> = z.object({
-  domain: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    domain: z.string().optional(),
+  })
+);
 
 export function createDomainRequestToJSON(
   createDomainRequest: CreateDomainRequest,

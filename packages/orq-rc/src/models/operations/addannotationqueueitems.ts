@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import * as components from "../components/index.js";
 
 export type AddAnnotationQueueItemsRequest = {
@@ -23,16 +24,18 @@ export const AddAnnotationQueueItemsRequest$outboundSchema: z.ZodType<
   AddAnnotationQueueItemsRequest$Outbound,
   z.ZodTypeDef,
   AddAnnotationQueueItemsRequest
-> = z.object({
-  annotationQueueId: z.string(),
-  addAnnotationQueueItemsRequest:
-    components.AddAnnotationQueueItemsRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    annotationQueueId: "annotation_queue_id",
-    addAnnotationQueueItemsRequest: "AddAnnotationQueueItemsRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    annotationQueueId: z.string(),
+    addAnnotationQueueItemsRequest:
+      components.AddAnnotationQueueItemsRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      annotationQueueId: "annotation_queue_id",
+      addAnnotationQueueItemsRequest: "AddAnnotationQueueItemsRequest",
+    });
+  })
+);
 
 export function addAnnotationQueueItemsRequestToJSON(
   addAnnotationQueueItemsRequest: AddAnnotationQueueItemsRequest,

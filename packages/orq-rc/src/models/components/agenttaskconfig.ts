@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -51,21 +51,23 @@ export const AgentTaskConfig$inboundSchema: z.ZodType<
   AgentTaskConfig,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  agent_key: z.string().optional(),
-  messages_source: MessagesSource$inboundSchema.optional(),
-  messages: z.array(z.record(z.any())).optional(),
-  engine: z.string().optional(),
-  parent_id: z.string().optional(),
-  agent_tag: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "agent_key": "agentKey",
-    "messages_source": "messagesSource",
-    "parent_id": "parentId",
-    "agent_tag": "agentTag",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    agent_key: z.string().optional(),
+    messages_source: MessagesSource$inboundSchema.optional(),
+    messages: z.array(z.record(z.any())).optional(),
+    engine: z.string().optional(),
+    parent_id: z.string().optional(),
+    agent_tag: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "agent_key": "agentKey",
+      "messages_source": "messagesSource",
+      "parent_id": "parentId",
+      "agent_tag": "agentTag",
+    });
+  })
+);
 /** @internal */
 export type AgentTaskConfig$Outbound = {
   agent_key?: string | undefined;
@@ -81,21 +83,23 @@ export const AgentTaskConfig$outboundSchema: z.ZodType<
   AgentTaskConfig$Outbound,
   z.ZodTypeDef,
   AgentTaskConfig
-> = z.object({
-  agentKey: z.string().optional(),
-  messagesSource: MessagesSource$outboundSchema.optional(),
-  messages: z.array(z.record(z.any())).optional(),
-  engine: z.string().optional(),
-  parentId: z.string().optional(),
-  agentTag: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    agentKey: "agent_key",
-    messagesSource: "messages_source",
-    parentId: "parent_id",
-    agentTag: "agent_tag",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    agentKey: z.string().optional(),
+    messagesSource: MessagesSource$outboundSchema.optional(),
+    messages: z.array(z.record(z.any())).optional(),
+    engine: z.string().optional(),
+    parentId: z.string().optional(),
+    agentTag: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      agentKey: "agent_key",
+      messagesSource: "messages_source",
+      parentId: "parent_id",
+      agentTag: "agent_tag",
+    });
+  })
+);
 
 export function agentTaskConfigToJSON(
   agentTaskConfig: AgentTaskConfig,

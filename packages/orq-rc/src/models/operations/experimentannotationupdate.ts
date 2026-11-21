@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import * as components from "../components/index.js";
 
 export type ExperimentAnnotationUpdateRequest = {
@@ -36,20 +37,22 @@ export const ExperimentAnnotationUpdateRequest$outboundSchema: z.ZodType<
   ExperimentAnnotationUpdateRequest$Outbound,
   z.ZodTypeDef,
   ExperimentAnnotationUpdateRequest
-> = z.object({
-  experimentId: z.string(),
-  runId: z.string(),
-  annotationColumnId: z.string(),
-  updateAnnotationColumnRequest:
-    components.UpdateAnnotationColumnRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    experimentId: "experiment_id",
-    runId: "run_id",
-    annotationColumnId: "annotation_column_id",
-    updateAnnotationColumnRequest: "UpdateAnnotationColumnRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    experimentId: z.string(),
+    runId: z.string(),
+    annotationColumnId: z.string(),
+    updateAnnotationColumnRequest:
+      components.UpdateAnnotationColumnRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      experimentId: "experiment_id",
+      runId: "run_id",
+      annotationColumnId: "annotation_column_id",
+      updateAnnotationColumnRequest: "UpdateAnnotationColumnRequest",
+    });
+  })
+);
 
 export function experimentAnnotationUpdateRequestToJSON(
   experimentAnnotationUpdateRequest: ExperimentAnnotationUpdateRequest,

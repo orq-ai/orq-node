@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 
 /**
@@ -244,21 +245,23 @@ export const ChunkingConfiguration9$outboundSchema: z.ZodType<
   ChunkingConfiguration9$Outbound,
   z.ZodTypeDef,
   ChunkingConfiguration9
-> = z.object({
-  type: z.literal("agentic"),
-  chunkSize: z.number().int().default(1024),
-  model: z.string().default("openai/gpt-4o"),
-  candidateSize: z.number().int().default(128),
-  minCharactersPerChunk: z.number().int().default(24),
-  systemPrompt: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    chunkSize: "chunk_size",
-    candidateSize: "candidate_size",
-    minCharactersPerChunk: "min_characters_per_chunk",
-    systemPrompt: "system_prompt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("agentic"),
+    chunkSize: z.number().int().default(1024),
+    model: z.string().default("openai/gpt-4o"),
+    candidateSize: z.number().int().default(128),
+    minCharactersPerChunk: z.number().int().default(24),
+    systemPrompt: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      chunkSize: "chunk_size",
+      candidateSize: "candidate_size",
+      minCharactersPerChunk: "min_characters_per_chunk",
+      systemPrompt: "system_prompt",
+    });
+  })
+);
 
 export function chunkingConfiguration9ToJSON(
   chunkingConfiguration9: ChunkingConfiguration9,
@@ -283,20 +286,22 @@ export const ChunkingConfiguration8$outboundSchema: z.ZodType<
   ChunkingConfiguration8$Outbound,
   z.ZodTypeDef,
   ChunkingConfiguration8
-> = z.object({
-  type: z.literal("late"),
-  chunkSize: z.number().int().default(512),
-  separators: z.array(z.string()).optional(),
-  minCharactersPerChunk: z.number().int().default(24),
-  embeddingModel: z.string().optional(),
-  dimensions: z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    chunkSize: "chunk_size",
-    minCharactersPerChunk: "min_characters_per_chunk",
-    embeddingModel: "embedding_model",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("late"),
+    chunkSize: z.number().int().default(512),
+    separators: z.array(z.string()).optional(),
+    minCharactersPerChunk: z.number().int().default(24),
+    embeddingModel: z.string().optional(),
+    dimensions: z.number().int().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      chunkSize: "chunk_size",
+      minCharactersPerChunk: "min_characters_per_chunk",
+      embeddingModel: "embedding_model",
+    });
+  })
+);
 
 export function chunkingConfiguration8ToJSON(
   chunkingConfiguration8: ChunkingConfiguration8,
@@ -309,7 +314,7 @@ export function chunkingConfiguration8ToJSON(
 /** @internal */
 export const ChunkingConfigurationMode$outboundSchema: z.ZodNativeEnum<
   typeof ChunkingConfigurationMode
-> = z.nativeEnum(ChunkingConfigurationMode);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ChunkingConfigurationMode));
 
 /** @internal */
 export type ChunkingConfiguration7$Outbound = {
@@ -327,21 +332,23 @@ export const ChunkingConfiguration7$outboundSchema: z.ZodType<
   ChunkingConfiguration7$Outbound,
   z.ZodTypeDef,
   ChunkingConfiguration7
-> = z.object({
-  type: z.literal("semantic"),
-  chunkSize: z.number().int().default(512),
-  embeddingModel: z.string().optional(),
-  dimensions: z.number().int().optional(),
-  threshold: z.string().default("auto"),
-  mode: ChunkingConfigurationMode$outboundSchema.default("window"),
-  similarityWindow: z.number().int().default(1),
-}).transform((v) => {
-  return remap$(v, {
-    chunkSize: "chunk_size",
-    embeddingModel: "embedding_model",
-    similarityWindow: "similarity_window",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("semantic"),
+    chunkSize: z.number().int().default(512),
+    embeddingModel: z.string().optional(),
+    dimensions: z.number().int().optional(),
+    threshold: z.string().default("auto"),
+    mode: ChunkingConfigurationMode$outboundSchema.default("window"),
+    similarityWindow: z.number().int().default(1),
+  }).transform((v) => {
+    return remap$(v, {
+      chunkSize: "chunk_size",
+      embeddingModel: "embedding_model",
+      similarityWindow: "similarity_window",
+    });
+  })
+);
 
 export function chunkingConfiguration7ToJSON(
   chunkingConfiguration7: ChunkingConfiguration7,
@@ -367,20 +374,22 @@ export const ChunkingConfiguration6$outboundSchema: z.ZodType<
   ChunkingConfiguration6$Outbound,
   z.ZodTypeDef,
   ChunkingConfiguration6
-> = z.object({
-  type: z.literal("fast"),
-  targetSize: z.number().int().default(4096),
-  delimiters: z.string().default("\n.?"),
-  pattern: z.string().optional(),
-  prefix: z.boolean().default(false),
-  consecutive: z.boolean().default(false),
-  forwardFallback: z.boolean().default(false),
-}).transform((v) => {
-  return remap$(v, {
-    targetSize: "target_size",
-    forwardFallback: "forward_fallback",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("fast"),
+    targetSize: z.number().int().default(4096),
+    delimiters: z.string().default("\n.?"),
+    pattern: z.string().optional(),
+    prefix: z.boolean().default(false),
+    consecutive: z.boolean().default(false),
+    forwardFallback: z.boolean().default(false),
+  }).transform((v) => {
+    return remap$(v, {
+      targetSize: "target_size",
+      forwardFallback: "forward_fallback",
+    });
+  })
+);
 
 export function chunkingConfiguration6ToJSON(
   chunkingConfiguration6: ChunkingConfiguration6,
@@ -403,17 +412,19 @@ export const ChunkingConfiguration5$outboundSchema: z.ZodType<
   ChunkingConfiguration5$Outbound,
   z.ZodTypeDef,
   ChunkingConfiguration5
-> = z.object({
-  type: z.literal("recursive"),
-  chunkSize: z.number().int().default(512),
-  separators: z.array(z.string()).optional(),
-  minCharactersPerChunk: z.number().int().default(24),
-}).transform((v) => {
-  return remap$(v, {
-    chunkSize: "chunk_size",
-    minCharactersPerChunk: "min_characters_per_chunk",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("recursive"),
+    chunkSize: z.number().int().default(512),
+    separators: z.array(z.string()).optional(),
+    minCharactersPerChunk: z.number().int().default(24),
+  }).transform((v) => {
+    return remap$(v, {
+      chunkSize: "chunk_size",
+      minCharactersPerChunk: "min_characters_per_chunk",
+    });
+  })
+);
 
 export function chunkingConfiguration5ToJSON(
   chunkingConfiguration5: ChunkingConfiguration5,
@@ -436,18 +447,20 @@ export const ChunkingConfiguration4$outboundSchema: z.ZodType<
   ChunkingConfiguration4$Outbound,
   z.ZodTypeDef,
   ChunkingConfiguration4
-> = z.object({
-  type: z.literal("sentence"),
-  chunkSize: z.number().int().default(512),
-  chunkOverlap: z.number().int().default(0),
-  minSentencesPerChunk: z.number().int().default(1),
-}).transform((v) => {
-  return remap$(v, {
-    chunkSize: "chunk_size",
-    chunkOverlap: "chunk_overlap",
-    minSentencesPerChunk: "min_sentences_per_chunk",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("sentence"),
+    chunkSize: z.number().int().default(512),
+    chunkOverlap: z.number().int().default(0),
+    minSentencesPerChunk: z.number().int().default(1),
+  }).transform((v) => {
+    return remap$(v, {
+      chunkSize: "chunk_size",
+      chunkOverlap: "chunk_overlap",
+      minSentencesPerChunk: "min_sentences_per_chunk",
+    });
+  })
+);
 
 export function chunkingConfiguration4ToJSON(
   chunkingConfiguration4: ChunkingConfiguration4,
@@ -469,16 +482,18 @@ export const ChunkingConfiguration3$outboundSchema: z.ZodType<
   ChunkingConfiguration3$Outbound,
   z.ZodTypeDef,
   ChunkingConfiguration3
-> = z.object({
-  type: z.literal("token"),
-  chunkSize: z.number().int().default(512),
-  chunkOverlap: z.number().int().default(0),
-}).transform((v) => {
-  return remap$(v, {
-    chunkSize: "chunk_size",
-    chunkOverlap: "chunk_overlap",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("token"),
+    chunkSize: z.number().int().default(512),
+    chunkOverlap: z.number().int().default(0),
+  }).transform((v) => {
+    return remap$(v, {
+      chunkSize: "chunk_size",
+      chunkOverlap: "chunk_overlap",
+    });
+  })
+);
 
 export function chunkingConfiguration3ToJSON(
   chunkingConfiguration3: ChunkingConfiguration3,
@@ -500,16 +515,18 @@ export const ChunkingConfiguration2$outboundSchema: z.ZodType<
   ChunkingConfiguration2$Outbound,
   z.ZodTypeDef,
   ChunkingConfiguration2
-> = z.object({
-  type: z.literal("advanced"),
-  chunkMaxCharacters: z.number().default(500),
-  chunkOverlap: z.number().default(0),
-}).transform((v) => {
-  return remap$(v, {
-    chunkMaxCharacters: "chunk_max_characters",
-    chunkOverlap: "chunk_overlap",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("advanced"),
+    chunkMaxCharacters: z.number().default(500),
+    chunkOverlap: z.number().default(0),
+  }).transform((v) => {
+    return remap$(v, {
+      chunkMaxCharacters: "chunk_max_characters",
+      chunkOverlap: "chunk_overlap",
+    });
+  })
+);
 
 export function chunkingConfiguration2ToJSON(
   chunkingConfiguration2: ChunkingConfiguration2,
@@ -529,9 +546,11 @@ export const ChunkingConfiguration1$outboundSchema: z.ZodType<
   ChunkingConfiguration1$Outbound,
   z.ZodTypeDef,
   ChunkingConfiguration1
-> = z.object({
-  type: z.literal("default"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("default"),
+  })
+);
 
 export function chunkingConfiguration1ToJSON(
   chunkingConfiguration1: ChunkingConfiguration1,
@@ -558,17 +577,19 @@ export const ChunkingConfiguration$outboundSchema: z.ZodType<
   ChunkingConfiguration$Outbound,
   z.ZodTypeDef,
   ChunkingConfiguration
-> = z.union([
-  z.lazy(() => ChunkingConfiguration1$outboundSchema),
-  z.lazy(() => ChunkingConfiguration2$outboundSchema),
-  z.lazy(() => ChunkingConfiguration3$outboundSchema),
-  z.lazy(() => ChunkingConfiguration4$outboundSchema),
-  z.lazy(() => ChunkingConfiguration5$outboundSchema),
-  z.lazy(() => ChunkingConfiguration6$outboundSchema),
-  z.lazy(() => ChunkingConfiguration7$outboundSchema),
-  z.lazy(() => ChunkingConfiguration8$outboundSchema),
-  z.lazy(() => ChunkingConfiguration9$outboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => ChunkingConfiguration1$outboundSchema),
+    z.lazy(() => ChunkingConfiguration2$outboundSchema),
+    z.lazy(() => ChunkingConfiguration3$outboundSchema),
+    z.lazy(() => ChunkingConfiguration4$outboundSchema),
+    z.lazy(() => ChunkingConfiguration5$outboundSchema),
+    z.lazy(() => ChunkingConfiguration6$outboundSchema),
+    z.lazy(() => ChunkingConfiguration7$outboundSchema),
+    z.lazy(() => ChunkingConfiguration8$outboundSchema),
+    z.lazy(() => ChunkingConfiguration9$outboundSchema),
+  ])
+);
 
 export function chunkingConfigurationToJSON(
   chunkingConfiguration: ChunkingConfiguration,

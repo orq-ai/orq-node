@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 
 export const McpToolNaming = {
@@ -14,7 +15,7 @@ export type McpToolNaming = ClosedEnum<typeof McpToolNaming>;
 /** @internal */
 export const McpToolNaming$inboundSchema: z.ZodNativeEnum<
   typeof McpToolNaming
-> = z.nativeEnum(McpToolNaming);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(McpToolNaming));
 /** @internal */
 export const McpToolNaming$outboundSchema: z.ZodNativeEnum<
   typeof McpToolNaming

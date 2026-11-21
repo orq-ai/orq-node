@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -17,10 +17,12 @@ export const TestExternalAgentConnectionResponse$inboundSchema: z.ZodType<
   TestExternalAgentConnectionResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  reachable: z.boolean().optional(),
-  card: z.record(z.any()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    reachable: z.boolean().optional(),
+    card: z.record(z.any()).optional(),
+  })
+);
 
 export function testExternalAgentConnectionResponseFromJSON(
   jsonString: string,

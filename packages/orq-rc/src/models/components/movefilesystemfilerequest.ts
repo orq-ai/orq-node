@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type MoveFileSystemFileRequest = {
   /**
@@ -26,10 +27,12 @@ export const MoveFileSystemFileRequest$outboundSchema: z.ZodType<
   MoveFileSystemFileRequest$Outbound,
   z.ZodTypeDef,
   MoveFileSystemFileRequest
-> = z.object({
-  from: z.string(),
-  to: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    from: z.string(),
+    to: z.string(),
+  })
+);
 
 export function moveFileSystemFileRequestToJSON(
   moveFileSystemFileRequest: MoveFileSystemFileRequest,

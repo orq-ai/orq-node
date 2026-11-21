@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 /**
  * Identifies a run by experiment and run ID.
@@ -30,15 +31,17 @@ export const RunRef$outboundSchema: z.ZodType<
   RunRef$Outbound,
   z.ZodTypeDef,
   RunRef
-> = z.object({
-  experimentId: z.string(),
-  runId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    experimentId: "experiment_id",
-    runId: "run_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    experimentId: z.string(),
+    runId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      experimentId: "experiment_id",
+      runId: "run_id",
+    });
+  })
+);
 
 export function runRefToJSON(runRef: RunRef): string {
   return JSON.stringify(RunRef$outboundSchema.parse(runRef));

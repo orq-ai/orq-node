@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -27,33 +27,35 @@ export const ServerToolUseDetails$inboundSchema: z.ZodType<
   ServerToolUseDetails,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  advisor_requests: z.number().int().optional(),
-  code_interpreter_sessions: z.number().int().optional(),
-  datetime_requests: z.number().int().optional(),
-  fusion_requests: z.number().int().optional(),
-  image_generation_calls: z.number().int().optional(),
-  search_models_requests: z.number().int().optional(),
-  shell_commands: z.number().int().optional(),
-  subagent_requests: z.number().int().optional(),
-  tool_search_requests: z.number().int().optional(),
-  web_fetch_requests: z.number().int().optional(),
-  web_search_requests: z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "advisor_requests": "advisorRequests",
-    "code_interpreter_sessions": "codeInterpreterSessions",
-    "datetime_requests": "datetimeRequests",
-    "fusion_requests": "fusionRequests",
-    "image_generation_calls": "imageGenerationCalls",
-    "search_models_requests": "searchModelsRequests",
-    "shell_commands": "shellCommands",
-    "subagent_requests": "subagentRequests",
-    "tool_search_requests": "toolSearchRequests",
-    "web_fetch_requests": "webFetchRequests",
-    "web_search_requests": "webSearchRequests",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    advisor_requests: z.number().int().optional(),
+    code_interpreter_sessions: z.number().int().optional(),
+    datetime_requests: z.number().int().optional(),
+    fusion_requests: z.number().int().optional(),
+    image_generation_calls: z.number().int().optional(),
+    search_models_requests: z.number().int().optional(),
+    shell_commands: z.number().int().optional(),
+    subagent_requests: z.number().int().optional(),
+    tool_search_requests: z.number().int().optional(),
+    web_fetch_requests: z.number().int().optional(),
+    web_search_requests: z.number().int().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "advisor_requests": "advisorRequests",
+      "code_interpreter_sessions": "codeInterpreterSessions",
+      "datetime_requests": "datetimeRequests",
+      "fusion_requests": "fusionRequests",
+      "image_generation_calls": "imageGenerationCalls",
+      "search_models_requests": "searchModelsRequests",
+      "shell_commands": "shellCommands",
+      "subagent_requests": "subagentRequests",
+      "tool_search_requests": "toolSearchRequests",
+      "web_fetch_requests": "webFetchRequests",
+      "web_search_requests": "webSearchRequests",
+    });
+  })
+);
 
 export function serverToolUseDetailsFromJSON(
   jsonString: string,

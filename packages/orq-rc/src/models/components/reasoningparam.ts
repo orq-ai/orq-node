@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 
 export const Context = {
@@ -56,16 +57,16 @@ export type ReasoningParam = {
 };
 
 /** @internal */
-export const Context$outboundSchema: z.ZodNativeEnum<typeof Context> = z
-  .nativeEnum(Context);
+export const Context$outboundSchema: z.ZodNativeEnum<typeof Context> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Context));
 
 /** @internal */
-export const Effort$outboundSchema: z.ZodNativeEnum<typeof Effort> = z
-  .nativeEnum(Effort);
+export const Effort$outboundSchema: z.ZodNativeEnum<typeof Effort> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Effort));
 
 /** @internal */
-export const Summary$outboundSchema: z.ZodNativeEnum<typeof Summary> = z
-  .nativeEnum(Summary);
+export const Summary$outboundSchema: z.ZodNativeEnum<typeof Summary> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Summary));
 
 /** @internal */
 export type ReasoningParam$Outbound = {
@@ -79,11 +80,13 @@ export const ReasoningParam$outboundSchema: z.ZodType<
   ReasoningParam$Outbound,
   z.ZodTypeDef,
   ReasoningParam
-> = z.object({
-  context: Context$outboundSchema.optional(),
-  effort: Effort$outboundSchema.optional(),
-  summary: Summary$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    context: Context$outboundSchema.optional(),
+    effort: Effort$outboundSchema.optional(),
+    summary: Summary$outboundSchema.optional(),
+  })
+);
 
 export function reasoningParamToJSON(reasoningParam: ReasoningParam): string {
   return JSON.stringify(ReasoningParam$outboundSchema.parse(reasoningParam));

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -32,16 +32,18 @@ export const McpOpenApiConfig$inboundSchema: z.ZodType<
   McpOpenApiConfig,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  document_url: z.string().optional(),
-  operations: z.array(z.string()).optional(),
-  title: z.string().optional(),
-  version: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "document_url": "documentUrl",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    document_url: z.string().optional(),
+    operations: z.array(z.string()).optional(),
+    title: z.string().optional(),
+    version: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "document_url": "documentUrl",
+    });
+  })
+);
 
 export function mcpOpenApiConfigFromJSON(
   jsonString: string,

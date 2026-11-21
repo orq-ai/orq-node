@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -82,32 +82,34 @@ export type MonitorPreset = {
 /** @internal */
 export const MonitorPresetKind$inboundSchema: z.ZodNativeEnum<
   typeof MonitorPresetKind
-> = z.nativeEnum(MonitorPresetKind);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(MonitorPresetKind));
 
 /** @internal */
 export const MonitorPresetDefaultRange$inboundSchema: z.ZodNativeEnum<
   typeof MonitorPresetDefaultRange
-> = z.nativeEnum(MonitorPresetDefaultRange);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(MonitorPresetDefaultRange));
 
 /** @internal */
 export const MonitorPreset$inboundSchema: z.ZodType<
   MonitorPreset,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  preset_key: z.string(),
-  display_name: z.string(),
-  description: z.string(),
-  kind: MonitorPresetKind$inboundSchema,
-  widgets: z.array(MonitorWidget$inboundSchema),
-  default_range: MonitorPresetDefaultRange$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "preset_key": "presetKey",
-    "display_name": "displayName",
-    "default_range": "defaultRange",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    preset_key: z.string(),
+    display_name: z.string(),
+    description: z.string(),
+    kind: MonitorPresetKind$inboundSchema,
+    widgets: z.array(MonitorWidget$inboundSchema),
+    default_range: MonitorPresetDefaultRange$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "preset_key": "presetKey",
+      "display_name": "displayName",
+      "default_range": "defaultRange",
+    });
+  })
+);
 
 export function monitorPresetFromJSON(
   jsonString: string,

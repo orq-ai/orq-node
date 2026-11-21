@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -60,20 +60,22 @@ export type Sharing = {
 
 /** @internal */
 export const Sharing$inboundSchema: z.ZodType<Sharing, z.ZodTypeDef, unknown> =
-  z.object({
-    all_projects: SharingAllProjects$inboundSchema.optional(),
-    selected: SharingSelectedProjects$inboundSchema.optional(),
-    allow_version_pin: z.boolean().optional(),
-    allow_fork: z.boolean().optional(),
-    auto_grant_new_projects: z.boolean().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "all_projects": "allProjects",
-      "allow_version_pin": "allowVersionPin",
-      "allow_fork": "allowFork",
-      "auto_grant_new_projects": "autoGrantNewProjects",
-    });
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      all_projects: SharingAllProjects$inboundSchema.optional(),
+      selected: SharingSelectedProjects$inboundSchema.optional(),
+      allow_version_pin: z.boolean().optional(),
+      allow_fork: z.boolean().optional(),
+      auto_grant_new_projects: z.boolean().optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "all_projects": "allProjects",
+        "allow_version_pin": "allowVersionPin",
+        "allow_fork": "allowFork",
+        "auto_grant_new_projects": "autoGrantNewProjects",
+      });
+    })
+  );
 /** @internal */
 export type Sharing$Outbound = {
   all_projects?: SharingAllProjects$Outbound | undefined;
@@ -88,20 +90,22 @@ export const Sharing$outboundSchema: z.ZodType<
   Sharing$Outbound,
   z.ZodTypeDef,
   Sharing
-> = z.object({
-  allProjects: SharingAllProjects$outboundSchema.optional(),
-  selected: SharingSelectedProjects$outboundSchema.optional(),
-  allowVersionPin: z.boolean().optional(),
-  allowFork: z.boolean().optional(),
-  autoGrantNewProjects: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    allProjects: "all_projects",
-    allowVersionPin: "allow_version_pin",
-    allowFork: "allow_fork",
-    autoGrantNewProjects: "auto_grant_new_projects",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    allProjects: SharingAllProjects$outboundSchema.optional(),
+    selected: SharingSelectedProjects$outboundSchema.optional(),
+    allowVersionPin: z.boolean().optional(),
+    allowFork: z.boolean().optional(),
+    autoGrantNewProjects: z.boolean().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      allProjects: "all_projects",
+      allowVersionPin: "allow_version_pin",
+      allowFork: "allow_fork",
+      autoGrantNewProjects: "auto_grant_new_projects",
+    });
+  })
+);
 
 export function sharingToJSON(sharing: Sharing): string {
   return JSON.stringify(Sharing$outboundSchema.parse(sharing));

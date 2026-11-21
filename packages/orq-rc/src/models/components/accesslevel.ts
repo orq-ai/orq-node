@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 
 export const AccessLevel = {
@@ -13,8 +14,8 @@ export const AccessLevel = {
 export type AccessLevel = ClosedEnum<typeof AccessLevel>;
 
 /** @internal */
-export const AccessLevel$inboundSchema: z.ZodNativeEnum<typeof AccessLevel> = z
-  .nativeEnum(AccessLevel);
+export const AccessLevel$inboundSchema: z.ZodNativeEnum<typeof AccessLevel> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(AccessLevel));
 /** @internal */
 export const AccessLevel$outboundSchema: z.ZodNativeEnum<typeof AccessLevel> =
   AccessLevel$inboundSchema;

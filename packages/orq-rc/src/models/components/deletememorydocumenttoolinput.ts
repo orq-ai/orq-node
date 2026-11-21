@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 /**
  * Deletes documents from memory stores
@@ -32,15 +33,17 @@ export const DeleteMemoryDocumentToolInput$outboundSchema: z.ZodType<
   DeleteMemoryDocumentToolInput$Outbound,
   z.ZodTypeDef,
   DeleteMemoryDocumentToolInput
-> = z.object({
-  type: z.literal("delete_memory_document"),
-  requiresApproval: z.boolean().optional(),
-  configuration: z.record(z.any()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    requiresApproval: "requires_approval",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("delete_memory_document"),
+    requiresApproval: z.boolean().optional(),
+    configuration: z.record(z.any()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      requiresApproval: "requires_approval",
+    });
+  })
+);
 
 export function deleteMemoryDocumentToolInputToJSON(
   deleteMemoryDocumentToolInput: DeleteMemoryDocumentToolInput,

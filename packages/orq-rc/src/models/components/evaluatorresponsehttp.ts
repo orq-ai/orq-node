@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -61,42 +61,46 @@ export type EvaluatorResponseHttp = {
 /** @internal */
 export const EvaluatorResponseHttpOutputType$inboundSchema: z.ZodNativeEnum<
   typeof EvaluatorResponseHttpOutputType
-> = z.nativeEnum(EvaluatorResponseHttpOutputType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(EvaluatorResponseHttpOutputType)
+);
 
 /** @internal */
-export const Method$inboundSchema: z.ZodNativeEnum<typeof Method> = z
-  .nativeEnum(Method);
+export const Method$inboundSchema: z.ZodNativeEnum<typeof Method> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Method));
 
 /** @internal */
 export const EvaluatorResponseHttp$inboundSchema: z.ZodType<
   EvaluatorResponseHttp,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  _id: z.string(),
-  description: z.string(),
-  created: z.string().default("2026-08-05T15:12:51.947Z"),
-  updated: z.string().default("2026-08-05T15:12:51.947Z"),
-  updated_by_id: z.nullable(z.string()).optional(),
-  project_id: z.string().optional(),
-  timeout: z.nullable(z.number().int()).optional(),
-  guardrail_config: z.any().optional(),
-  type: z.literal("http_eval"),
-  output_type: EvaluatorResponseHttpOutputType$inboundSchema,
-  url: z.string(),
-  method: Method$inboundSchema,
-  headers: z.record(z.string()),
-  payload: z.record(z.any()),
-  key: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "_id": "id",
-    "updated_by_id": "updatedById",
-    "project_id": "projectId",
-    "guardrail_config": "guardrailConfig",
-    "output_type": "outputType",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    _id: z.string(),
+    description: z.string(),
+    created: z.string().default("2026-08-05T15:12:51.947Z"),
+    updated: z.string().default("2026-08-05T15:12:51.947Z"),
+    updated_by_id: z.nullable(z.string()).optional(),
+    project_id: z.string().optional(),
+    timeout: z.nullable(z.number().int()).optional(),
+    guardrail_config: z.any().optional(),
+    type: z.literal("http_eval"),
+    output_type: EvaluatorResponseHttpOutputType$inboundSchema,
+    url: z.string(),
+    method: Method$inboundSchema,
+    headers: z.record(z.string()),
+    payload: z.record(z.any()),
+    key: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "_id": "id",
+      "updated_by_id": "updatedById",
+      "project_id": "projectId",
+      "guardrail_config": "guardrailConfig",
+      "output_type": "outputType",
+    });
+  })
+);
 
 export function evaluatorResponseHttpFromJSON(
   jsonString: string,

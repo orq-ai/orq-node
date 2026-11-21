@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 
 export const FileSystemExternalAccess = {
@@ -17,4 +18,4 @@ export type FileSystemExternalAccess = ClosedEnum<
 /** @internal */
 export const FileSystemExternalAccess$inboundSchema: z.ZodNativeEnum<
   typeof FileSystemExternalAccess
-> = z.nativeEnum(FileSystemExternalAccess);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(FileSystemExternalAccess));

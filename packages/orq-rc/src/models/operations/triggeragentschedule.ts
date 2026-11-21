@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -41,15 +41,17 @@ export const TriggerAgentScheduleRequest$outboundSchema: z.ZodType<
   TriggerAgentScheduleRequest$Outbound,
   z.ZodTypeDef,
   TriggerAgentScheduleRequest
-> = z.object({
-  agentKey: z.string(),
-  scheduleId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    agentKey: "agent_key",
-    scheduleId: "schedule_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    agentKey: z.string(),
+    scheduleId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      agentKey: "agent_key",
+      scheduleId: "schedule_id",
+    });
+  })
+);
 
 export function triggerAgentScheduleRequestToJSON(
   triggerAgentScheduleRequest: TriggerAgentScheduleRequest,
@@ -66,14 +68,16 @@ export const TriggerAgentScheduleResponseBody$inboundSchema: z.ZodType<
   TriggerAgentScheduleResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  schedule_id: z.string(),
-  status: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "schedule_id": "scheduleId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    schedule_id: z.string(),
+    status: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "schedule_id": "scheduleId",
+    });
+  })
+);
 
 export function triggerAgentScheduleResponseBodyFromJSON(
   jsonString: string,

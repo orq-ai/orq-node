@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type McpOpenApiConfigInput = {
   /**
@@ -32,15 +33,17 @@ export const McpOpenApiConfigInput$outboundSchema: z.ZodType<
   McpOpenApiConfigInput$Outbound,
   z.ZodTypeDef,
   McpOpenApiConfigInput
-> = z.object({
-  document: z.string().optional(),
-  documentUrl: z.string().optional(),
-  operations: z.array(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    documentUrl: "document_url",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    document: z.string().optional(),
+    documentUrl: z.string().optional(),
+    operations: z.array(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      documentUrl: "document_url",
+    });
+  })
+);
 
 export function mcpOpenApiConfigInputToJSON(
   mcpOpenApiConfigInput: McpOpenApiConfigInput,

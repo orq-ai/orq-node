@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 /**
  * Filter datasources by status.
@@ -45,7 +46,9 @@ export const ListDatasourcesQueryParamStatus$outboundSchema: z.ZodType<
   ListDatasourcesQueryParamStatus$Outbound,
   z.ZodTypeDef,
   ListDatasourcesQueryParamStatus
-> = z.union([z.array(z.string()), z.string()]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.array(z.string()), z.string()])
+);
 
 export function listDatasourcesQueryParamStatusToJSON(
   listDatasourcesQueryParamStatus: ListDatasourcesQueryParamStatus,
@@ -72,20 +75,22 @@ export const ListDatasourcesRequest$outboundSchema: z.ZodType<
   ListDatasourcesRequest$Outbound,
   z.ZodTypeDef,
   ListDatasourcesRequest
-> = z.object({
-  knowledgeId: z.string(),
-  startingAfter: z.string().optional(),
-  endingBefore: z.string().optional(),
-  q: z.string().optional(),
-  limit: z.number().int().default(50),
-  status: z.union([z.array(z.string()), z.string()]).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    knowledgeId: "knowledge_id",
-    startingAfter: "starting_after",
-    endingBefore: "ending_before",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    knowledgeId: z.string(),
+    startingAfter: z.string().optional(),
+    endingBefore: z.string().optional(),
+    q: z.string().optional(),
+    limit: z.number().int().default(50),
+    status: z.union([z.array(z.string()), z.string()]).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      knowledgeId: "knowledge_id",
+      startingAfter: "starting_after",
+      endingBefore: "ending_before",
+    });
+  })
+);
 
 export function listDatasourcesRequestToJSON(
   listDatasourcesRequest: ListDatasourcesRequest,

@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type ListFilesRequest = {
   fileSystemKey: string;
@@ -25,17 +26,19 @@ export const ListFilesRequest$outboundSchema: z.ZodType<
   ListFilesRequest$Outbound,
   z.ZodTypeDef,
   ListFilesRequest
-> = z.object({
-  fileSystemKey: z.string(),
-  path: z.string().optional(),
-  depth: z.number().int().optional(),
-  maxEntries: z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    fileSystemKey: "file_system_key",
-    maxEntries: "max_entries",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    fileSystemKey: z.string(),
+    path: z.string().optional(),
+    depth: z.number().int().optional(),
+    maxEntries: z.number().int().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      fileSystemKey: "file_system_key",
+      maxEntries: "max_entries",
+    });
+  })
+);
 
 export function listFilesRequestToJSON(
   listFilesRequest: ListFilesRequest,

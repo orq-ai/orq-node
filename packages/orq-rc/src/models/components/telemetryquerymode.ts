@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 
 export const TelemetryQueryMode = {
@@ -14,4 +15,4 @@ export type TelemetryQueryMode = ClosedEnum<typeof TelemetryQueryMode>;
 /** @internal */
 export const TelemetryQueryMode$inboundSchema: z.ZodNativeEnum<
   typeof TelemetryQueryMode
-> = z.nativeEnum(TelemetryQueryMode);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(TelemetryQueryMode));

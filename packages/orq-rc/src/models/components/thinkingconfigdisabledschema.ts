@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -22,9 +22,11 @@ export const ThinkingConfigDisabledSchema$inboundSchema: z.ZodType<
   ThinkingConfigDisabledSchema,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("disabled"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("disabled"),
+  })
+);
 /** @internal */
 export type ThinkingConfigDisabledSchema$Outbound = {
   type: "disabled";
@@ -35,9 +37,11 @@ export const ThinkingConfigDisabledSchema$outboundSchema: z.ZodType<
   ThinkingConfigDisabledSchema$Outbound,
   z.ZodTypeDef,
   ThinkingConfigDisabledSchema
-> = z.object({
-  type: z.literal("disabled"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("disabled"),
+  })
+);
 
 export function thinkingConfigDisabledSchemaToJSON(
   thinkingConfigDisabledSchema: ThinkingConfigDisabledSchema,

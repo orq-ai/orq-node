@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import * as components from "../components/index.js";
 
 export type McpServerTestToolRequest = {
@@ -25,14 +26,17 @@ export const McpServerTestToolRequest$outboundSchema: z.ZodType<
   McpServerTestToolRequest$Outbound,
   z.ZodTypeDef,
   McpServerTestToolRequest
-> = z.object({
-  id: z.string(),
-  testMcpServerToolRequest: components.TestMcpServerToolRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    testMcpServerToolRequest: "TestMcpServerToolRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    testMcpServerToolRequest:
+      components.TestMcpServerToolRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      testMcpServerToolRequest: "TestMcpServerToolRequest",
+    });
+  })
+);
 
 export function mcpServerTestToolRequestToJSON(
   mcpServerTestToolRequest: McpServerTestToolRequest,

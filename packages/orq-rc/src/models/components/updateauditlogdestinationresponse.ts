@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -20,9 +20,11 @@ export const UpdateAuditLogDestinationResponse$inboundSchema: z.ZodType<
   UpdateAuditLogDestinationResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  destination: AuditLogDestination$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    destination: AuditLogDestination$inboundSchema,
+  })
+);
 
 export function updateAuditLogDestinationResponseFromJSON(
   jsonString: string,

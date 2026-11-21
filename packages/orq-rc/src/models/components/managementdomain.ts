@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -47,17 +47,19 @@ export const ManagementDomain$inboundSchema: z.ZodType<
   ManagementDomain,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  display_name: z.string().optional(),
-  group: ManagementDomainGroup$inboundSchema.optional(),
-  readable: z.boolean().optional(),
-  writable: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "display_name": "displayName",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    display_name: z.string().optional(),
+    group: ManagementDomainGroup$inboundSchema.optional(),
+    readable: z.boolean().optional(),
+    writable: z.boolean().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "display_name": "displayName",
+    });
+  })
+);
 
 export function managementDomainFromJSON(
   jsonString: string,

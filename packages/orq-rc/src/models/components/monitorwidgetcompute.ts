@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -23,10 +23,12 @@ export const MonitorWidgetCompute$inboundSchema: z.ZodType<
   MonitorWidgetCompute,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  metric: z.string(),
-  operation: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    metric: z.string(),
+    operation: z.string(),
+  })
+);
 /** @internal */
 export type MonitorWidgetCompute$Outbound = {
   metric: string;
@@ -38,10 +40,12 @@ export const MonitorWidgetCompute$outboundSchema: z.ZodType<
   MonitorWidgetCompute$Outbound,
   z.ZodTypeDef,
   MonitorWidgetCompute
-> = z.object({
-  metric: z.string(),
-  operation: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    metric: z.string(),
+    operation: z.string(),
+  })
+);
 
 export function monitorWidgetComputeToJSON(
   monitorWidgetCompute: MonitorWidgetCompute,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -23,15 +23,17 @@ export const ListTelemetryFacetValuesResponse$inboundSchema: z.ZodType<
   ListTelemetryFacetValuesResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  field: z.string().optional(),
-  values: z.array(TraceFacetValue$inboundSchema).optional(),
-  has_more: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "has_more": "hasMore",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    field: z.string().optional(),
+    values: z.array(TraceFacetValue$inboundSchema).optional(),
+    has_more: z.boolean().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "has_more": "hasMore",
+    });
+  })
+);
 
 export function listTelemetryFacetValuesResponseFromJSON(
   jsonString: string,

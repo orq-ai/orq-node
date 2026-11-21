@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type UpdateViewRequest = {
   displayName?: string | undefined;
@@ -35,26 +36,28 @@ export const UpdateViewRequest$outboundSchema: z.ZodType<
   UpdateViewRequest$Outbound,
   z.ZodTypeDef,
   UpdateViewRequest
-> = z.object({
-  displayName: z.string().optional(),
-  description: z.string().optional(),
-  filterBy: z.string().optional(),
-  columns: z.array(z.string()).optional(),
-  columnLabels: z.record(z.string()).optional(),
-  isDefault: z.boolean().optional(),
-  isPrivate: z.boolean().optional(),
-  version: z.number().int().optional(),
-  updateMask: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    displayName: "display_name",
-    filterBy: "filter_by",
-    columnLabels: "column_labels",
-    isDefault: "is_default",
-    isPrivate: "is_private",
-    updateMask: "update_mask",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    displayName: z.string().optional(),
+    description: z.string().optional(),
+    filterBy: z.string().optional(),
+    columns: z.array(z.string()).optional(),
+    columnLabels: z.record(z.string()).optional(),
+    isDefault: z.boolean().optional(),
+    isPrivate: z.boolean().optional(),
+    version: z.number().int().optional(),
+    updateMask: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      displayName: "display_name",
+      filterBy: "filter_by",
+      columnLabels: "column_labels",
+      isDefault: "is_default",
+      isPrivate: "is_private",
+      updateMask: "update_mask",
+    });
+  })
+);
 
 export function updateViewRequestToJSON(
   updateViewRequest: UpdateViewRequest,

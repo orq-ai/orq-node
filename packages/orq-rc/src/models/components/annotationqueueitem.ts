@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -48,26 +48,28 @@ export const AnnotationQueueItem$inboundSchema: z.ZodType<
   AnnotationQueueItem,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  _id: z.string(),
-  annotation_queue_id: z.string(),
-  workspace_id: z.string(),
-  used_human_review_ids: z.array(z.string()).optional(),
-  type: z.string(),
-  span_id: z.string().optional(),
-  trace_id: z.string().optional(),
-  datapoint_id: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "_id": "id",
-    "annotation_queue_id": "annotationQueueId",
-    "workspace_id": "workspaceId",
-    "used_human_review_ids": "usedHumanReviewIds",
-    "span_id": "spanId",
-    "trace_id": "traceId",
-    "datapoint_id": "datapointId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    _id: z.string(),
+    annotation_queue_id: z.string(),
+    workspace_id: z.string(),
+    used_human_review_ids: z.array(z.string()).optional(),
+    type: z.string(),
+    span_id: z.string().optional(),
+    trace_id: z.string().optional(),
+    datapoint_id: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "_id": "id",
+      "annotation_queue_id": "annotationQueueId",
+      "workspace_id": "workspaceId",
+      "used_human_review_ids": "usedHumanReviewIds",
+      "span_id": "spanId",
+      "trace_id": "traceId",
+      "datapoint_id": "datapointId",
+    });
+  })
+);
 
 export function annotationQueueItemFromJSON(
   jsonString: string,

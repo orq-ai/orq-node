@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 
 /**
@@ -61,7 +62,7 @@ export type OrqAdvisorTool = {
 /** @internal */
 export const ReasoningEffort$outboundSchema: z.ZodNativeEnum<
   typeof ReasoningEffort
-> = z.nativeEnum(ReasoningEffort);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ReasoningEffort));
 
 /** @internal */
 export type OrqAdvisorTool$Outbound = {
@@ -79,22 +80,24 @@ export const OrqAdvisorTool$outboundSchema: z.ZodType<
   OrqAdvisorTool$Outbound,
   z.ZodTypeDef,
   OrqAdvisorTool
-> = z.object({
-  maxTokens: z.number().int().optional(),
-  maxTranscriptTokens: z.number().int().optional(),
-  maxUses: z.number().int().optional(),
-  model: z.string(),
-  reasoningEffort: ReasoningEffort$outboundSchema.optional(),
-  temperature: z.number().optional(),
-  type: z.literal("orq:advisor"),
-}).transform((v) => {
-  return remap$(v, {
-    maxTokens: "max_tokens",
-    maxTranscriptTokens: "max_transcript_tokens",
-    maxUses: "max_uses",
-    reasoningEffort: "reasoning_effort",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    maxTokens: z.number().int().optional(),
+    maxTranscriptTokens: z.number().int().optional(),
+    maxUses: z.number().int().optional(),
+    model: z.string(),
+    reasoningEffort: ReasoningEffort$outboundSchema.optional(),
+    temperature: z.number().optional(),
+    type: z.literal("orq:advisor"),
+  }).transform((v) => {
+    return remap$(v, {
+      maxTokens: "max_tokens",
+      maxTranscriptTokens: "max_transcript_tokens",
+      maxUses: "max_uses",
+      reasoningEffort: "reasoning_effort",
+    });
+  })
+);
 
 export function orqAdvisorToolToJSON(orqAdvisorTool: OrqAdvisorTool): string {
   return JSON.stringify(OrqAdvisorTool$outboundSchema.parse(orqAdvisorTool));

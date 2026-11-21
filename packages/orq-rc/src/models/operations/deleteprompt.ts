@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type DeletePromptRequest = {
   /**
@@ -21,9 +22,11 @@ export const DeletePromptRequest$outboundSchema: z.ZodType<
   DeletePromptRequest$Outbound,
   z.ZodTypeDef,
   DeletePromptRequest
-> = z.object({
-  id: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+  })
+);
 
 export function deletePromptRequestToJSON(
   deletePromptRequest: DeletePromptRequest,

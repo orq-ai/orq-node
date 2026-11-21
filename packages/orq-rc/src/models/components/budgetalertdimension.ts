@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 
 export const BudgetAlertDimension = {
@@ -14,7 +15,7 @@ export type BudgetAlertDimension = ClosedEnum<typeof BudgetAlertDimension>;
 /** @internal */
 export const BudgetAlertDimension$inboundSchema: z.ZodNativeEnum<
   typeof BudgetAlertDimension
-> = z.nativeEnum(BudgetAlertDimension);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(BudgetAlertDimension));
 /** @internal */
 export const BudgetAlertDimension$outboundSchema: z.ZodNativeEnum<
   typeof BudgetAlertDimension

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -22,19 +22,21 @@ export const TelemetryDimensionCapability$inboundSchema: z.ZodType<
   TelemetryDimensionCapability,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string().optional(),
-  label: z.string().optional(),
-  type: z.string().optional(),
-  groupable: z.boolean().optional(),
-  filter_operators: z.array(z.string()).optional(),
-  key_prefix: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "filter_operators": "filterOperators",
-    "key_prefix": "keyPrefix",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    label: z.string().optional(),
+    type: z.string().optional(),
+    groupable: z.boolean().optional(),
+    filter_operators: z.array(z.string()).optional(),
+    key_prefix: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "filter_operators": "filterOperators",
+      "key_prefix": "keyPrefix",
+    });
+  })
+);
 
 export function telemetryDimensionCapabilityFromJSON(
   jsonString: string,

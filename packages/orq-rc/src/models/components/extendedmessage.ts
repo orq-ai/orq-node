@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -80,26 +80,28 @@ export type ExtendedMessage = {
 /** @internal */
 export const ExtendedMessageKind$inboundSchema: z.ZodNativeEnum<
   typeof ExtendedMessageKind
-> = z.nativeEnum(ExtendedMessageKind);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ExtendedMessageKind));
 
 /** @internal */
 export const ExtendedMessageRole$inboundSchema: z.ZodNativeEnum<
   typeof ExtendedMessageRole
-> = z.nativeEnum(ExtendedMessageRole);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ExtendedMessageRole));
 
 /** @internal */
 export const ExtendedMessageParts$inboundSchema: z.ZodType<
   ExtendedMessageParts,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  TextPart$inboundSchema,
-  ErrorPart$inboundSchema,
-  DataPart$inboundSchema,
-  FilePart$inboundSchema,
-  ToolCallPart$inboundSchema,
-  ToolResultPart$inboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    TextPart$inboundSchema,
+    ErrorPart$inboundSchema,
+    DataPart$inboundSchema,
+    FilePart$inboundSchema,
+    ToolCallPart$inboundSchema,
+    ToolResultPart$inboundSchema,
+  ])
+);
 
 export function extendedMessagePartsFromJSON(
   jsonString: string,
@@ -116,24 +118,26 @@ export const ExtendedMessage$inboundSchema: z.ZodType<
   ExtendedMessage,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  kind: ExtendedMessageKind$inboundSchema,
-  messageId: z.string(),
-  role: ExtendedMessageRole$inboundSchema,
-  parts: z.array(
-    z.union([
-      TextPart$inboundSchema,
-      ErrorPart$inboundSchema,
-      DataPart$inboundSchema,
-      FilePart$inboundSchema,
-      ToolCallPart$inboundSchema,
-      ToolResultPart$inboundSchema,
-    ]),
-  ),
-  taskId: z.string().optional(),
-  contextId: z.string().optional(),
-  metadata: z.record(z.any()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    kind: ExtendedMessageKind$inboundSchema,
+    messageId: z.string(),
+    role: ExtendedMessageRole$inboundSchema,
+    parts: z.array(
+      z.union([
+        TextPart$inboundSchema,
+        ErrorPart$inboundSchema,
+        DataPart$inboundSchema,
+        FilePart$inboundSchema,
+        ToolCallPart$inboundSchema,
+        ToolResultPart$inboundSchema,
+      ]),
+    ),
+    taskId: z.string().optional(),
+    contextId: z.string().optional(),
+    metadata: z.record(z.any()).optional(),
+  })
+);
 
 export function extendedMessageFromJSON(
   jsonString: string,

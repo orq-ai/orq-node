@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -45,20 +45,22 @@ export const ModelAzureFoundryDeploymentsRequestBody$outboundSchema: z.ZodType<
   ModelAzureFoundryDeploymentsRequestBody$Outbound,
   z.ZodTypeDef,
   ModelAzureFoundryDeploymentsRequestBody
-> = z.object({
-  apiKey: z.string().optional(),
-  apiVersion: z.string().optional(),
-  baseUrl: z.string(),
-  integrationId: z.string().optional(),
-  provider: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    apiKey: "api_key",
-    apiVersion: "api_version",
-    baseUrl: "base_url",
-    integrationId: "integration_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    apiKey: z.string().optional(),
+    apiVersion: z.string().optional(),
+    baseUrl: z.string(),
+    integrationId: z.string().optional(),
+    provider: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      apiKey: "api_key",
+      apiVersion: "api_version",
+      baseUrl: "base_url",
+      integrationId: "integration_id",
+    });
+  })
+);
 
 export function modelAzureFoundryDeploymentsRequestBodyToJSON(
   modelAzureFoundryDeploymentsRequestBody:
@@ -76,12 +78,14 @@ export const ModelAzureFoundryDeploymentsResponseBody$inboundSchema: z.ZodType<
   ModelAzureFoundryDeploymentsResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  deployments: z.nullable(
-    z.array(components.AzureFoundryDeployment$inboundSchema),
-  ),
-  region: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    deployments: z.nullable(
+      z.array(components.AzureFoundryDeployment$inboundSchema),
+    ),
+    region: z.string(),
+  })
+);
 
 export function modelAzureFoundryDeploymentsResponseBodyFromJSON(
   jsonString: string,

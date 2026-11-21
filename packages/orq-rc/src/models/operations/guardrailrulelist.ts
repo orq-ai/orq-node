@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type GuardrailRuleListRequest = {
   limit?: number | undefined;
@@ -33,24 +34,26 @@ export const GuardrailRuleListRequest$outboundSchema: z.ZodType<
   GuardrailRuleListRequest$Outbound,
   z.ZodTypeDef,
   GuardrailRuleListRequest
-> = z.object({
-  limit: z.number().int().optional(),
-  startingAfter: z.string().optional(),
-  endingBefore: z.string().optional(),
-  projectId: z.string().optional(),
-  search: z.string().optional(),
-  sortBy: z.string().optional(),
-  enabled: z.boolean().optional(),
-  guardrailId: z.array(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    startingAfter: "starting_after",
-    endingBefore: "ending_before",
-    projectId: "project_id",
-    sortBy: "sort_by",
-    guardrailId: "guardrail_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    limit: z.number().int().optional(),
+    startingAfter: z.string().optional(),
+    endingBefore: z.string().optional(),
+    projectId: z.string().optional(),
+    search: z.string().optional(),
+    sortBy: z.string().optional(),
+    enabled: z.boolean().optional(),
+    guardrailId: z.array(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      startingAfter: "starting_after",
+      endingBefore: "ending_before",
+      projectId: "project_id",
+      sortBy: "sort_by",
+      guardrailId: "guardrail_id",
+    });
+  })
+);
 
 export function guardrailRuleListRequestToJSON(
   guardrailRuleListRequest: GuardrailRuleListRequest,

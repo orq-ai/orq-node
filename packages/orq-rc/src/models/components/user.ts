@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -55,29 +55,31 @@ export type User = {
 };
 
 /** @internal */
-export const User$inboundSchema: z.ZodType<User, z.ZodTypeDef, unknown> = z
-  .object({
-    id: z.string().optional(),
-    account_id: z.string().optional(),
-    email: z.string().optional(),
-    display_name: z.string().optional(),
-    logo_url: z.string().optional(),
-    team_ids: z.array(z.string()).optional(),
-    roles: z.array(z.string()).optional(),
-    last_activity: z.string().datetime({ offset: true }).transform(v =>
-      new Date(v)
-    ).optional(),
-    invitation_data: UserInvitationData$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "account_id": "accountId",
-      "display_name": "displayName",
-      "logo_url": "logoUrl",
-      "team_ids": "teamIds",
-      "last_activity": "lastActivity",
-      "invitation_data": "invitationData",
-    });
-  });
+export const User$inboundSchema: z.ZodType<User, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string().optional(),
+      account_id: z.string().optional(),
+      email: z.string().optional(),
+      display_name: z.string().optional(),
+      logo_url: z.string().optional(),
+      team_ids: z.array(z.string()).optional(),
+      roles: z.array(z.string()).optional(),
+      last_activity: z.string().datetime({ offset: true }).transform(v =>
+        new Date(v)
+      ).optional(),
+      invitation_data: UserInvitationData$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "account_id": "accountId",
+        "display_name": "displayName",
+        "logo_url": "logoUrl",
+        "team_ids": "teamIds",
+        "last_activity": "lastActivity",
+        "invitation_data": "invitationData",
+      });
+    })
+  );
 
 export function userFromJSON(
   jsonString: string,

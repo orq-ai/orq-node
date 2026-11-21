@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import * as components from "../components/index.js";
 
 export type MonitorUpdateRequest = {
@@ -25,15 +26,17 @@ export const MonitorUpdateRequest$outboundSchema: z.ZodType<
   MonitorUpdateRequest$Outbound,
   z.ZodTypeDef,
   MonitorUpdateRequest
-> = z.object({
-  monitorId: z.string(),
-  updateMonitorRequest: components.UpdateMonitorRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    monitorId: "monitor_id",
-    updateMonitorRequest: "UpdateMonitorRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    monitorId: z.string(),
+    updateMonitorRequest: components.UpdateMonitorRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      monitorId: "monitor_id",
+      updateMonitorRequest: "UpdateMonitorRequest",
+    });
+  })
+);
 
 export function monitorUpdateRequestToJSON(
   monitorUpdateRequest: MonitorUpdateRequest,

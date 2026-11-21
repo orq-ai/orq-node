@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type UpdateExperimentRequest = {
   /**
@@ -40,19 +41,21 @@ export const UpdateExperimentRequest$outboundSchema: z.ZodType<
   UpdateExperimentRequest$Outbound,
   z.ZodTypeDef,
   UpdateExperimentRequest
-> = z.object({
-  displayName: z.string().optional(),
-  selectedRunId: z.string().optional(),
-  rowHeightLevel: z.number().int().optional(),
-  projectId: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    displayName: "display_name",
-    selectedRunId: "selected_run_id",
-    rowHeightLevel: "row_height_level",
-    projectId: "project_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    displayName: z.string().optional(),
+    selectedRunId: z.string().optional(),
+    rowHeightLevel: z.number().int().optional(),
+    projectId: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      displayName: "display_name",
+      selectedRunId: "selected_run_id",
+      rowHeightLevel: "row_height_level",
+      projectId: "project_id",
+    });
+  })
+);
 
 export function updateExperimentRequestToJSON(
   updateExperimentRequest: UpdateExperimentRequest,

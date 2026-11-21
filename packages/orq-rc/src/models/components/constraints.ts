@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type Constraints = {
   expiresAt?: Date | undefined;
@@ -19,13 +20,15 @@ export const Constraints$outboundSchema: z.ZodType<
   Constraints$Outbound,
   z.ZodTypeDef,
   Constraints
-> = z.object({
-  expiresAt: z.date().transform(v => v.toISOString()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    expiresAt: "expires_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    expiresAt: z.date().transform(v => v.toISOString()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      expiresAt: "expires_at",
+    });
+  })
+);
 
 export function constraintsToJSON(constraints: Constraints): string {
   return JSON.stringify(Constraints$outboundSchema.parse(constraints));

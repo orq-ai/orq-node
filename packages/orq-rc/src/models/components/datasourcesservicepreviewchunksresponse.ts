@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { PreviewChunk, PreviewChunk$inboundSchema } from "./previewchunk.js";
@@ -22,10 +22,12 @@ export const DatasourcesServicePreviewChunksResponse$inboundSchema: z.ZodType<
   DatasourcesServicePreviewChunksResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  chunks: z.array(PreviewChunk$inboundSchema),
-  metadata: PreviewChunksMetadata$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    chunks: z.array(PreviewChunk$inboundSchema),
+    metadata: PreviewChunksMetadata$inboundSchema,
+  })
+);
 
 export function datasourcesServicePreviewChunksResponseFromJSON(
   jsonString: string,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -28,7 +28,7 @@ export const WebhookUpdateRequestBody$outboundSchema: z.ZodType<
   WebhookUpdateRequestBody$Outbound,
   z.ZodTypeDef,
   WebhookUpdateRequestBody
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function webhookUpdateRequestBodyToJSON(
   webhookUpdateRequestBody: WebhookUpdateRequestBody,
@@ -49,14 +49,16 @@ export const WebhookUpdateRequest$outboundSchema: z.ZodType<
   WebhookUpdateRequest$Outbound,
   z.ZodTypeDef,
   WebhookUpdateRequest
-> = z.object({
-  id: z.string(),
-  requestBody: z.lazy(() => WebhookUpdateRequestBody$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    requestBody: "RequestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    requestBody: z.lazy(() => WebhookUpdateRequestBody$outboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      requestBody: "RequestBody",
+    });
+  })
+);
 
 export function webhookUpdateRequestToJSON(
   webhookUpdateRequest: WebhookUpdateRequest,
@@ -71,7 +73,7 @@ export const WebhookUpdateResponseBody$inboundSchema: z.ZodType<
   WebhookUpdateResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function webhookUpdateResponseBodyFromJSON(
   jsonString: string,

@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 /**
  * Consult a secondary model for advice on the current task
@@ -32,15 +33,17 @@ export const AdvisorToolInput$outboundSchema: z.ZodType<
   AdvisorToolInput$Outbound,
   z.ZodTypeDef,
   AdvisorToolInput
-> = z.object({
-  type: z.literal("advisor"),
-  requiresApproval: z.boolean().optional(),
-  configuration: z.record(z.any()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    requiresApproval: "requires_approval",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("advisor"),
+    requiresApproval: z.boolean().optional(),
+    configuration: z.record(z.any()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      requiresApproval: "requires_approval",
+    });
+  })
+);
 
 export function advisorToolInputToJSON(
   advisorToolInput: AdvisorToolInput,

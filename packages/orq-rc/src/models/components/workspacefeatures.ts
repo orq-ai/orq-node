@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -36,39 +36,41 @@ export const WorkspaceFeatures$inboundSchema: z.ZodType<
   WorkspaceFeatures,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  workspace_tier: z.string().optional(),
-  observability_enabled: z.boolean().optional(),
-  insights_enabled: z.boolean().optional(),
-  enforce_enabled_models: z.boolean().optional(),
-  tracing_enabled: z.boolean().optional(),
-  sso_enabled: z.boolean().optional(),
-  rba_enabled: z.boolean().optional(),
-  workload_federation_enabled: z.boolean().optional(),
-  custom_roles_enabled: z.boolean().optional(),
-  sso_provisioning_enabled: z.boolean().optional(),
-  audit_logs_enabled: z.boolean().optional(),
-  file_systems_enabled: z.boolean().optional(),
-  retention_period: z.number().int().optional(),
-  audit_retention_period: z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "workspace_tier": "workspaceTier",
-    "observability_enabled": "observabilityEnabled",
-    "insights_enabled": "insightsEnabled",
-    "enforce_enabled_models": "enforceEnabledModels",
-    "tracing_enabled": "tracingEnabled",
-    "sso_enabled": "ssoEnabled",
-    "rba_enabled": "rbaEnabled",
-    "workload_federation_enabled": "workloadFederationEnabled",
-    "custom_roles_enabled": "customRolesEnabled",
-    "sso_provisioning_enabled": "ssoProvisioningEnabled",
-    "audit_logs_enabled": "auditLogsEnabled",
-    "file_systems_enabled": "fileSystemsEnabled",
-    "retention_period": "retentionPeriod",
-    "audit_retention_period": "auditRetentionPeriod",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    workspace_tier: z.string().optional(),
+    observability_enabled: z.boolean().optional(),
+    insights_enabled: z.boolean().optional(),
+    enforce_enabled_models: z.boolean().optional(),
+    tracing_enabled: z.boolean().optional(),
+    sso_enabled: z.boolean().optional(),
+    rba_enabled: z.boolean().optional(),
+    workload_federation_enabled: z.boolean().optional(),
+    custom_roles_enabled: z.boolean().optional(),
+    sso_provisioning_enabled: z.boolean().optional(),
+    audit_logs_enabled: z.boolean().optional(),
+    file_systems_enabled: z.boolean().optional(),
+    retention_period: z.number().int().optional(),
+    audit_retention_period: z.number().int().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "workspace_tier": "workspaceTier",
+      "observability_enabled": "observabilityEnabled",
+      "insights_enabled": "insightsEnabled",
+      "enforce_enabled_models": "enforceEnabledModels",
+      "tracing_enabled": "tracingEnabled",
+      "sso_enabled": "ssoEnabled",
+      "rba_enabled": "rbaEnabled",
+      "workload_federation_enabled": "workloadFederationEnabled",
+      "custom_roles_enabled": "customRolesEnabled",
+      "sso_provisioning_enabled": "ssoProvisioningEnabled",
+      "audit_logs_enabled": "auditLogsEnabled",
+      "file_systems_enabled": "fileSystemsEnabled",
+      "retention_period": "retentionPeriod",
+      "audit_retention_period": "auditRetentionPeriod",
+    });
+  })
+);
 
 export function workspaceFeaturesFromJSON(
   jsonString: string,

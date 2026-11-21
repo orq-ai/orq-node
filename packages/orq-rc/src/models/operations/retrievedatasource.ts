@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type RetrieveDatasourceRequest = {
   knowledgeId: string;
@@ -21,15 +22,17 @@ export const RetrieveDatasourceRequest$outboundSchema: z.ZodType<
   RetrieveDatasourceRequest$Outbound,
   z.ZodTypeDef,
   RetrieveDatasourceRequest
-> = z.object({
-  knowledgeId: z.string(),
-  datasourceId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    knowledgeId: "knowledge_id",
-    datasourceId: "datasource_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    knowledgeId: z.string(),
+    datasourceId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      knowledgeId: "knowledge_id",
+      datasourceId: "datasource_id",
+    });
+  })
+);
 
 export function retrieveDatasourceRequestToJSON(
   retrieveDatasourceRequest: RetrieveDatasourceRequest,

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type ChunksServiceUpdateRequestMetadata = string | number | boolean;
 
@@ -29,7 +30,9 @@ export const ChunksServiceUpdateRequestMetadata$outboundSchema: z.ZodType<
   ChunksServiceUpdateRequestMetadata$Outbound,
   z.ZodTypeDef,
   ChunksServiceUpdateRequestMetadata
-> = z.union([z.string(), z.number(), z.boolean()]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.number(), z.boolean()])
+);
 
 export function chunksServiceUpdateRequestMetadataToJSON(
   chunksServiceUpdateRequestMetadata: ChunksServiceUpdateRequestMetadata,
@@ -53,11 +56,14 @@ export const ChunksServiceUpdateRequest$outboundSchema: z.ZodType<
   ChunksServiceUpdateRequest$Outbound,
   z.ZodTypeDef,
   ChunksServiceUpdateRequest
-> = z.object({
-  text: z.string().optional(),
-  embedding: z.array(z.number()).optional(),
-  metadata: z.record(z.union([z.string(), z.number(), z.boolean()])).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    text: z.string().optional(),
+    embedding: z.array(z.number()).optional(),
+    metadata: z.record(z.union([z.string(), z.number(), z.boolean()]))
+      .optional(),
+  })
+);
 
 export function chunksServiceUpdateRequestToJSON(
   chunksServiceUpdateRequest: ChunksServiceUpdateRequest,

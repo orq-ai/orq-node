@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import {
   TraceFilter,
   TraceFilter$Outbound,
@@ -36,21 +37,23 @@ export const ListLogFacetsRequest$outboundSchema: z.ZodType<
   ListLogFacetsRequest$Outbound,
   z.ZodTypeDef,
   ListLogFacetsRequest
-> = z.object({
-  from: z.date().transform(v => v.toISOString()).optional(),
-  to: z.date().transform(v => v.toISOString()).optional(),
-  keyLimit: z.number().int().optional(),
-  valueLimit: z.number().int().optional(),
-  query: z.string().optional(),
-  filterOperator: z.string().optional(),
-  filters: z.array(TraceFilter$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    keyLimit: "key_limit",
-    valueLimit: "value_limit",
-    filterOperator: "filter_operator",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    from: z.date().transform(v => v.toISOString()).optional(),
+    to: z.date().transform(v => v.toISOString()).optional(),
+    keyLimit: z.number().int().optional(),
+    valueLimit: z.number().int().optional(),
+    query: z.string().optional(),
+    filterOperator: z.string().optional(),
+    filters: z.array(TraceFilter$outboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      keyLimit: "key_limit",
+      valueLimit: "value_limit",
+      filterOperator: "filter_operator",
+    });
+  })
+);
 
 export function listLogFacetsRequestToJSON(
   listLogFacetsRequest: ListLogFacetsRequest,

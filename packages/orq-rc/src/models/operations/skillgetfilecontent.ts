@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type SkillGetFileContentRequest = {
   /**
@@ -27,14 +28,16 @@ export const SkillGetFileContentRequest$outboundSchema: z.ZodType<
   SkillGetFileContentRequest$Outbound,
   z.ZodTypeDef,
   SkillGetFileContentRequest
-> = z.object({
-  skillId: z.string(),
-  path: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    skillId: "skill_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    skillId: z.string(),
+    path: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      skillId: "skill_id",
+    });
+  })
+);
 
 export function skillGetFileContentRequestToJSON(
   skillGetFileContentRequest: SkillGetFileContentRequest,

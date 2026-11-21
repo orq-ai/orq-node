@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -47,13 +47,15 @@ export const ToolReviewRequestedEventData$inboundSchema: z.ZodType<
   ToolReviewRequestedEventData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  toolId: z.string(),
-  toolCallId: z.string(),
-  toolName: z.string().optional(),
-  arguments: z.record(z.any()),
-  requiresApproval: z.boolean(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    toolId: z.string(),
+    toolCallId: z.string(),
+    toolName: z.string().optional(),
+    arguments: z.record(z.any()),
+    requiresApproval: z.boolean(),
+  })
+);
 
 export function toolReviewRequestedEventDataFromJSON(
   jsonString: string,
@@ -70,11 +72,13 @@ export const ToolReviewRequestedEvent$inboundSchema: z.ZodType<
   ToolReviewRequestedEvent,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("tool.review.requested"),
-  timestamp: z.string(),
-  data: z.lazy(() => ToolReviewRequestedEventData$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("tool.review.requested"),
+    timestamp: z.string(),
+    data: z.lazy(() => ToolReviewRequestedEventData$inboundSchema),
+  })
+);
 
 export function toolReviewRequestedEventFromJSON(
   jsonString: string,

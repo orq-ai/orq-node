@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { McpIcon, McpIcon$inboundSchema } from "./mcpicon.js";
@@ -66,7 +66,7 @@ export const InputSchema$inboundSchema: z.ZodType<
   InputSchema,
   z.ZodTypeDef,
   unknown
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function inputSchemaFromJSON(
   jsonString: string,
@@ -83,26 +83,28 @@ export const McpGatewayTool$inboundSchema: z.ZodType<
   McpGatewayTool,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  server_key: z.string().optional(),
-  alias: z.string().optional(),
-  exposed_name: z.string().optional(),
-  description: z.string().optional(),
-  input_schema: z.lazy(() => InputSchema$inboundSchema).optional(),
-  mcp_server_id: z.string().optional(),
-  upstream_tool_name: z.string().optional(),
-  title: z.string().optional(),
-  annotations: McpToolAnnotations$inboundSchema.optional(),
-  icons: z.array(McpIcon$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "server_key": "serverKey",
-    "exposed_name": "exposedName",
-    "input_schema": "inputSchema",
-    "mcp_server_id": "mcpServerId",
-    "upstream_tool_name": "upstreamToolName",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    server_key: z.string().optional(),
+    alias: z.string().optional(),
+    exposed_name: z.string().optional(),
+    description: z.string().optional(),
+    input_schema: z.lazy(() => InputSchema$inboundSchema).optional(),
+    mcp_server_id: z.string().optional(),
+    upstream_tool_name: z.string().optional(),
+    title: z.string().optional(),
+    annotations: McpToolAnnotations$inboundSchema.optional(),
+    icons: z.array(McpIcon$inboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "server_key": "serverKey",
+      "exposed_name": "exposedName",
+      "input_schema": "inputSchema",
+      "mcp_server_id": "mcpServerId",
+      "upstream_tool_name": "upstreamToolName",
+    });
+  })
+);
 
 export function mcpGatewayToolFromJSON(
   jsonString: string,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -45,7 +45,9 @@ export type AudioContentPartSchema = {
 /** @internal */
 export const AudioContentPartSchemaFormat$inboundSchema: z.ZodNativeEnum<
   typeof AudioContentPartSchemaFormat
-> = z.nativeEnum(AudioContentPartSchemaFormat);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(AudioContentPartSchemaFormat)
+);
 /** @internal */
 export const AudioContentPartSchemaFormat$outboundSchema: z.ZodNativeEnum<
   typeof AudioContentPartSchemaFormat
@@ -56,10 +58,12 @@ export const InputAudio$inboundSchema: z.ZodType<
   InputAudio,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.string(),
-  format: AudioContentPartSchemaFormat$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.string(),
+    format: AudioContentPartSchemaFormat$inboundSchema,
+  })
+);
 /** @internal */
 export type InputAudio$Outbound = {
   data: string;
@@ -71,10 +75,12 @@ export const InputAudio$outboundSchema: z.ZodType<
   InputAudio$Outbound,
   z.ZodTypeDef,
   InputAudio
-> = z.object({
-  data: z.string(),
-  format: AudioContentPartSchemaFormat$outboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.string(),
+    format: AudioContentPartSchemaFormat$outboundSchema,
+  })
+);
 
 export function inputAudioToJSON(inputAudio: InputAudio): string {
   return JSON.stringify(InputAudio$outboundSchema.parse(inputAudio));
@@ -94,14 +100,16 @@ export const AudioContentPartSchema$inboundSchema: z.ZodType<
   AudioContentPartSchema,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("input_audio"),
-  input_audio: z.lazy(() => InputAudio$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "input_audio": "inputAudio",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("input_audio"),
+    input_audio: z.lazy(() => InputAudio$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "input_audio": "inputAudio",
+    });
+  })
+);
 /** @internal */
 export type AudioContentPartSchema$Outbound = {
   type: "input_audio";
@@ -113,14 +121,16 @@ export const AudioContentPartSchema$outboundSchema: z.ZodType<
   AudioContentPartSchema$Outbound,
   z.ZodTypeDef,
   AudioContentPartSchema
-> = z.object({
-  type: z.literal("input_audio"),
-  inputAudio: z.lazy(() => InputAudio$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    inputAudio: "input_audio",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("input_audio"),
+    inputAudio: z.lazy(() => InputAudio$outboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      inputAudio: "input_audio",
+    });
+  })
+);
 
 export function audioContentPartSchemaToJSON(
   audioContentPartSchema: AudioContentPartSchema,

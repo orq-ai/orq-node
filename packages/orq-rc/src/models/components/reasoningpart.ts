@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -39,17 +39,19 @@ export const ReasoningPart$inboundSchema: z.ZodType<
   ReasoningPart,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  _id: z.string().default("reasoning_01m7wkm85qvd4dbvxnmajvdtxy"),
-  metadata: z.record(z.any()).optional(),
-  kind: z.literal("reasoning"),
-  reasoning: z.string(),
-  signature: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "_id": "id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    _id: z.string().default("reasoning_01m7yvsp8nh4d5xvnt0dcvqbsr"),
+    metadata: z.record(z.any()).optional(),
+    kind: z.literal("reasoning"),
+    reasoning: z.string(),
+    signature: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "_id": "id",
+    });
+  })
+);
 
 export function reasoningPartFromJSON(
   jsonString: string,

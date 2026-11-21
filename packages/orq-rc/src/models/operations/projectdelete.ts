@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type ProjectDeleteRequest = {
   /**
@@ -22,13 +23,15 @@ export const ProjectDeleteRequest$outboundSchema: z.ZodType<
   ProjectDeleteRequest$Outbound,
   z.ZodTypeDef,
   ProjectDeleteRequest
-> = z.object({
-  projectId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    projectId: "project_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    projectId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      projectId: "project_id",
+    });
+  })
+);
 
 export function projectDeleteRequestToJSON(
   projectDeleteRequest: ProjectDeleteRequest,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -19,17 +19,19 @@ export const ThreadUsage$inboundSchema: z.ZodType<
   ThreadUsage,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  prompt_tokens: z.number().int(),
-  completion_tokens: z.number().int(),
-  total_tokens: z.number().int(),
-}).transform((v) => {
-  return remap$(v, {
-    "prompt_tokens": "promptTokens",
-    "completion_tokens": "completionTokens",
-    "total_tokens": "totalTokens",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    prompt_tokens: z.number().int(),
+    completion_tokens: z.number().int(),
+    total_tokens: z.number().int(),
+  }).transform((v) => {
+    return remap$(v, {
+      "prompt_tokens": "promptTokens",
+      "completion_tokens": "completionTokens",
+      "total_tokens": "totalTokens",
+    });
+  })
+);
 /** @internal */
 export type ThreadUsage$Outbound = {
   prompt_tokens: number;
@@ -42,17 +44,19 @@ export const ThreadUsage$outboundSchema: z.ZodType<
   ThreadUsage$Outbound,
   z.ZodTypeDef,
   ThreadUsage
-> = z.object({
-  promptTokens: z.number().int(),
-  completionTokens: z.number().int(),
-  totalTokens: z.number().int(),
-}).transform((v) => {
-  return remap$(v, {
-    promptTokens: "prompt_tokens",
-    completionTokens: "completion_tokens",
-    totalTokens: "total_tokens",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    promptTokens: z.number().int(),
+    completionTokens: z.number().int(),
+    totalTokens: z.number().int(),
+  }).transform((v) => {
+    return remap$(v, {
+      promptTokens: "prompt_tokens",
+      completionTokens: "completion_tokens",
+      totalTokens: "total_tokens",
+    });
+  })
+);
 
 export function threadUsageToJSON(threadUsage: ThreadUsage): string {
   return JSON.stringify(ThreadUsage$outboundSchema.parse(threadUsage));

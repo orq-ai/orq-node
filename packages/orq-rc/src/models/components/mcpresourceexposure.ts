@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -30,16 +30,18 @@ export const McpResourceExposure$inboundSchema: z.ZodType<
   McpResourceExposure,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  mode: McpToolExposureMode$inboundSchema,
-  resource_ids: z.array(z.string()).optional(),
-  resource_template_ids: z.array(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "resource_ids": "resourceIds",
-    "resource_template_ids": "resourceTemplateIds",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    mode: McpToolExposureMode$inboundSchema,
+    resource_ids: z.array(z.string()).optional(),
+    resource_template_ids: z.array(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "resource_ids": "resourceIds",
+      "resource_template_ids": "resourceTemplateIds",
+    });
+  })
+);
 /** @internal */
 export type McpResourceExposure$Outbound = {
   mode: string;
@@ -52,16 +54,18 @@ export const McpResourceExposure$outboundSchema: z.ZodType<
   McpResourceExposure$Outbound,
   z.ZodTypeDef,
   McpResourceExposure
-> = z.object({
-  mode: McpToolExposureMode$outboundSchema,
-  resourceIds: z.array(z.string()).optional(),
-  resourceTemplateIds: z.array(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    resourceIds: "resource_ids",
-    resourceTemplateIds: "resource_template_ids",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    mode: McpToolExposureMode$outboundSchema,
+    resourceIds: z.array(z.string()).optional(),
+    resourceTemplateIds: z.array(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      resourceIds: "resource_ids",
+      resourceTemplateIds: "resource_template_ids",
+    });
+  })
+);
 
 export function mcpResourceExposureToJSON(
   mcpResourceExposure: McpResourceExposure,

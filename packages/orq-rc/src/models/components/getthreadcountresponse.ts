@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -16,9 +16,11 @@ export const GetThreadCountResponse$inboundSchema: z.ZodType<
   GetThreadCountResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  count: z.number().int(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    count: z.number().int(),
+  })
+);
 
 export function getThreadCountResponseFromJSON(
   jsonString: string,

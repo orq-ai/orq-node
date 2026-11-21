@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import {
   ThreadFilters,
   ThreadFilters$Outbound,
@@ -27,11 +28,13 @@ export const GetThreadCountRequest$outboundSchema: z.ZodType<
   GetThreadCountRequest$Outbound,
   z.ZodTypeDef,
   GetThreadCountRequest
-> = z.object({
-  filters: ThreadFilters$outboundSchema,
-  limit: z.number().int().optional(),
-  page: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    filters: ThreadFilters$outboundSchema,
+    limit: z.number().int().optional(),
+    page: z.number().int().optional(),
+  })
+);
 
 export function getThreadCountRequestToJSON(
   getThreadCountRequest: GetThreadCountRequest,

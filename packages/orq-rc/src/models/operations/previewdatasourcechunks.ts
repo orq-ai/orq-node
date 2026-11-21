@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import * as components from "../components/index.js";
 
 export type PreviewDatasourceChunksRequest = {
@@ -24,17 +25,19 @@ export const PreviewDatasourceChunksRequest$outboundSchema: z.ZodType<
   PreviewDatasourceChunksRequest$Outbound,
   z.ZodTypeDef,
   PreviewDatasourceChunksRequest
-> = z.object({
-  knowledgeId: z.string(),
-  datasourcesServicePreviewChunksRequest:
-    components.DatasourcesServicePreviewChunksRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    knowledgeId: "knowledge_id",
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    knowledgeId: z.string(),
     datasourcesServicePreviewChunksRequest:
-      "DatasourcesServicePreviewChunksRequest",
-  });
-});
+      components.DatasourcesServicePreviewChunksRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      knowledgeId: "knowledge_id",
+      datasourcesServicePreviewChunksRequest:
+        "DatasourcesServicePreviewChunksRequest",
+    });
+  })
+);
 
 export function previewDatasourceChunksRequestToJSON(
   previewDatasourceChunksRequest: PreviewDatasourceChunksRequest,

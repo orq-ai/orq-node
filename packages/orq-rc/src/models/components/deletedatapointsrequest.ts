@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type DeleteDatapointsRequest = {
   itemIds: Array<string>;
@@ -19,13 +20,15 @@ export const DeleteDatapointsRequest$outboundSchema: z.ZodType<
   DeleteDatapointsRequest$Outbound,
   z.ZodTypeDef,
   DeleteDatapointsRequest
-> = z.object({
-  itemIds: z.array(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    itemIds: "item_ids",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    itemIds: z.array(z.string()),
+  }).transform((v) => {
+    return remap$(v, {
+      itemIds: "item_ids",
+    });
+  })
+);
 
 export function deleteDatapointsRequestToJSON(
   deleteDatapointsRequest: DeleteDatapointsRequest,

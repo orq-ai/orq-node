@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import * as components from "../components/index.js";
 
 export type ModelFusionListRequest = {
@@ -30,19 +31,21 @@ export const ModelFusionListRequest$outboundSchema: z.ZodType<
   ModelFusionListRequest$Outbound,
   z.ZodTypeDef,
   ModelFusionListRequest
-> = z.object({
-  limit: z.number().int().optional(),
-  startingAfter: z.string().optional(),
-  endingBefore: z.string().optional(),
-  search: z.string().optional(),
-  preset: z.array(components.ModelFusionPreset$outboundSchema).optional(),
-  enabled: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    startingAfter: "starting_after",
-    endingBefore: "ending_before",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    limit: z.number().int().optional(),
+    startingAfter: z.string().optional(),
+    endingBefore: z.string().optional(),
+    search: z.string().optional(),
+    preset: z.array(components.ModelFusionPreset$outboundSchema).optional(),
+    enabled: z.boolean().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      startingAfter: "starting_after",
+      endingBefore: "ending_before",
+    });
+  })
+);
 
 export function modelFusionListRequestToJSON(
   modelFusionListRequest: ModelFusionListRequest,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -27,23 +27,25 @@ export const TraceField$inboundSchema: z.ZodType<
   TraceField,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string().optional(),
-  label: z.string().optional(),
-  type: z.string().optional(),
-  scope: z.string().optional(),
-  match: z.string().optional(),
-  operators: z.array(z.string()).optional(),
-  facet: z.boolean().optional(),
-  sortable: z.boolean().optional(),
-  groupable: z.boolean().optional(),
-  aliases: z.array(z.string()).optional(),
-  enum_values: z.array(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "enum_values": "enumValues",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    label: z.string().optional(),
+    type: z.string().optional(),
+    scope: z.string().optional(),
+    match: z.string().optional(),
+    operators: z.array(z.string()).optional(),
+    facet: z.boolean().optional(),
+    sortable: z.boolean().optional(),
+    groupable: z.boolean().optional(),
+    aliases: z.array(z.string()).optional(),
+    enum_values: z.array(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "enum_values": "enumValues",
+    });
+  })
+);
 
 export function traceFieldFromJSON(
   jsonString: string,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -75,18 +75,20 @@ export const ModelCreateVertexRequestBody$outboundSchema: z.ZodType<
   ModelCreateVertexRequestBody$Outbound,
   z.ZodTypeDef,
   ModelCreateVertexRequestBody
-> = z.object({
-  benchmarkModel: z.string().optional(),
-  configuration: components.VertexConfiguration$outboundSchema,
-  displayName: z.string(),
-  modelId: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    benchmarkModel: "benchmark_model",
-    displayName: "display_name",
-    modelId: "model_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    benchmarkModel: z.string().optional(),
+    configuration: components.VertexConfiguration$outboundSchema,
+    displayName: z.string(),
+    modelId: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      benchmarkModel: "benchmark_model",
+      displayName: "display_name",
+      modelId: "model_id",
+    });
+  })
+);
 
 export function modelCreateVertexRequestBodyToJSON(
   modelCreateVertexRequestBody: ModelCreateVertexRequestBody,
@@ -103,59 +105,61 @@ export const ModelCreateVertexResponseBody$inboundSchema: z.ZodType<
   ModelCreateVertexResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  configuration: components.ModelConfigurationResponse$inboundSchema,
-  created: z.string(),
-  description: z.nullable(z.string()),
-  display_name: z.string(),
-  docs_url: z.nullable(z.string()),
-  enabled: z.boolean(),
-  enabled_for_endpoints: z.boolean(),
-  enabled_for_playground: z.boolean(),
-  has_cpu_pricing: z.boolean(),
-  has_functions: z.boolean(),
-  id: z.string(),
-  input_cost: z.nullable(z.number()),
-  input_currency: z.string(),
-  is_active: z.boolean(),
-  legacy_uuid: z.string().optional(),
-  metadata: components.ModelMetadata$inboundSchema,
-  model_developer: z.string().optional(),
-  model_family: z.string().optional(),
-  model_id: z.string(),
-  model_type: z.string(),
-  output_cost: z.nullable(z.number()),
-  output_currency: z.string(),
-  owner: z.string(),
-  parameters: z.nullable(
-    z.array(components.ModelParameterDocument$inboundSchema),
-  ),
-  pricing_url: z.nullable(z.string()),
-  provider: z.string(),
-  refId: z.string(),
-  sharing: components.ModelSharingConfig$inboundSchema.optional(),
-  updated: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "display_name": "displayName",
-    "docs_url": "docsUrl",
-    "enabled_for_endpoints": "enabledForEndpoints",
-    "enabled_for_playground": "enabledForPlayground",
-    "has_cpu_pricing": "hasCpuPricing",
-    "has_functions": "hasFunctions",
-    "input_cost": "inputCost",
-    "input_currency": "inputCurrency",
-    "is_active": "isActive",
-    "legacy_uuid": "legacyUuid",
-    "model_developer": "modelDeveloper",
-    "model_family": "modelFamily",
-    "model_id": "modelId",
-    "model_type": "modelType",
-    "output_cost": "outputCost",
-    "output_currency": "outputCurrency",
-    "pricing_url": "pricingUrl",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    configuration: components.ModelConfigurationResponse$inboundSchema,
+    created: z.string(),
+    description: z.nullable(z.string()),
+    display_name: z.string(),
+    docs_url: z.nullable(z.string()),
+    enabled: z.boolean(),
+    enabled_for_endpoints: z.boolean(),
+    enabled_for_playground: z.boolean(),
+    has_cpu_pricing: z.boolean(),
+    has_functions: z.boolean(),
+    id: z.string(),
+    input_cost: z.nullable(z.number()),
+    input_currency: z.string(),
+    is_active: z.boolean(),
+    legacy_uuid: z.string().optional(),
+    metadata: components.ModelMetadata$inboundSchema,
+    model_developer: z.string().optional(),
+    model_family: z.string().optional(),
+    model_id: z.string(),
+    model_type: z.string(),
+    output_cost: z.nullable(z.number()),
+    output_currency: z.string(),
+    owner: z.string(),
+    parameters: z.nullable(
+      z.array(components.ModelParameterDocument$inboundSchema),
+    ),
+    pricing_url: z.nullable(z.string()),
+    provider: z.string(),
+    refId: z.string(),
+    sharing: components.ModelSharingConfig$inboundSchema.optional(),
+    updated: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "display_name": "displayName",
+      "docs_url": "docsUrl",
+      "enabled_for_endpoints": "enabledForEndpoints",
+      "enabled_for_playground": "enabledForPlayground",
+      "has_cpu_pricing": "hasCpuPricing",
+      "has_functions": "hasFunctions",
+      "input_cost": "inputCost",
+      "input_currency": "inputCurrency",
+      "is_active": "isActive",
+      "legacy_uuid": "legacyUuid",
+      "model_developer": "modelDeveloper",
+      "model_family": "modelFamily",
+      "model_id": "modelId",
+      "model_type": "modelType",
+      "output_cost": "outputCost",
+      "output_currency": "outputCurrency",
+      "pricing_url": "pricingUrl",
+    });
+  })
+);
 
 export function modelCreateVertexResponseBodyFromJSON(
   jsonString: string,

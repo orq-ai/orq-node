@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import * as components from "../components/index.js";
 
 export type ExperimentRunRowDuplicateRequest = {
@@ -35,19 +36,21 @@ export const ExperimentRunRowDuplicateRequest$outboundSchema: z.ZodType<
   ExperimentRunRowDuplicateRequest$Outbound,
   z.ZodTypeDef,
   ExperimentRunRowDuplicateRequest
-> = z.object({
-  experimentId: z.string(),
-  runId: z.string(),
-  rowId: z.string(),
-  duplicateRowRequest: components.DuplicateRowRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    experimentId: "experiment_id",
-    runId: "run_id",
-    rowId: "row_id",
-    duplicateRowRequest: "DuplicateRowRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    experimentId: z.string(),
+    runId: z.string(),
+    rowId: z.string(),
+    duplicateRowRequest: components.DuplicateRowRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      experimentId: "experiment_id",
+      runId: "run_id",
+      rowId: "row_id",
+      duplicateRowRequest: "DuplicateRowRequest",
+    });
+  })
+);
 
 export function experimentRunRowDuplicateRequestToJSON(
   experimentRunRowDuplicateRequest: ExperimentRunRowDuplicateRequest,

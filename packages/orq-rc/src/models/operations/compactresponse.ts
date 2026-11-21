@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
@@ -243,7 +243,7 @@ export type Three = ThreeText | ThreeImage | EncryptedContent;
  *
  * Defaults to `5m`. Only supported by Anthropic Claude models.
  */
-export const CompactResponse2ResponsesRequestRequestBodyInputTtl = {
+export const CompactResponse2ResponsesRequestRequestBodyInput2Ttl = {
   Fivem: "5m",
   Oneh: "1h",
 } as const;
@@ -257,24 +257,25 @@ export const CompactResponse2ResponsesRequestRequestBodyInputTtl = {
  *
  * Defaults to `5m`. Only supported by Anthropic Claude models.
  */
-export type CompactResponse2ResponsesRequestRequestBodyInputTtl = ClosedEnum<
-  typeof CompactResponse2ResponsesRequestRequestBodyInputTtl
+export type CompactResponse2ResponsesRequestRequestBodyInput2Ttl = ClosedEnum<
+  typeof CompactResponse2ResponsesRequestRequestBodyInput2Ttl
 >;
 
 /**
  * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
  */
-export const CompactResponse2ResponsesRequestRequestBodyInputType = {
+export const CompactResponse2ResponsesRequestRequestBodyInput2Content5Type = {
   Ephemeral: "ephemeral",
 } as const;
 /**
  * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
  */
-export type CompactResponse2ResponsesRequestRequestBodyInputType = ClosedEnum<
-  typeof CompactResponse2ResponsesRequestRequestBodyInputType
->;
+export type CompactResponse2ResponsesRequestRequestBodyInput2Content5Type =
+  ClosedEnum<
+    typeof CompactResponse2ResponsesRequestRequestBodyInput2Content5Type
+  >;
 
-export type CompactResponse2ResponsesRequestCacheControl = {
+export type CompactResponse2ResponsesRequestRequestBodyCacheControl = {
   /**
    * The time-to-live for the cache control breakpoint. This may be one of the following values:
    *
@@ -285,11 +286,11 @@ export type CompactResponse2ResponsesRequestCacheControl = {
    *
    * Defaults to `5m`. Only supported by Anthropic Claude models.
    */
-  ttl?: CompactResponse2ResponsesRequestRequestBodyInputTtl | undefined;
+  ttl?: CompactResponse2ResponsesRequestRequestBodyInput2Ttl | undefined;
   /**
    * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
    */
-  type: CompactResponse2ResponsesRequestRequestBodyInputType;
+  type: CompactResponse2ResponsesRequestRequestBodyInput2Content5Type;
 };
 
 export const CompactResponse2ResponsesMode = {
@@ -299,27 +300,30 @@ export type CompactResponse2ResponsesMode = ClosedEnum<
   typeof CompactResponse2ResponsesMode
 >;
 
-export const CompactResponse2ResponsesRequestRequestBodyInput2Ttl = {
+export const CompactResponse2ResponsesRequestRequestBodyInput2ContentTtl = {
   Thirtym: "30m",
   Twelveh: "12h",
 } as const;
-export type CompactResponse2ResponsesRequestRequestBodyInput2Ttl = ClosedEnum<
-  typeof CompactResponse2ResponsesRequestRequestBodyInput2Ttl
->;
+export type CompactResponse2ResponsesRequestRequestBodyInput2ContentTtl =
+  ClosedEnum<
+    typeof CompactResponse2ResponsesRequestRequestBodyInput2ContentTtl
+  >;
 
 /**
  * An explicit OpenAI cache boundary for GPT-5.6 and later. Omitted ttl inherits prompt_cache_options.ttl.
  */
 export type CompactResponse2PromptCacheBreakpoint = {
   mode: CompactResponse2ResponsesMode;
-  ttl?: CompactResponse2ResponsesRequestRequestBodyInput2Ttl | undefined;
+  ttl?: CompactResponse2ResponsesRequestRequestBodyInput2ContentTtl | undefined;
 };
 
 /**
  * A file content part. Provide file_id, file_data (base64), or file_url.
  */
 export type TwoFile = {
-  cacheControl?: CompactResponse2ResponsesRequestCacheControl | undefined;
+  cacheControl?:
+    | CompactResponse2ResponsesRequestRequestBodyCacheControl
+    | undefined;
   /**
    * Base64-encoded file content.
    */
@@ -345,6 +349,134 @@ export type TwoFile = {
    */
   promptCacheBreakpoint?: CompactResponse2PromptCacheBreakpoint | undefined;
   type: "input_file";
+};
+
+/**
+ * The time-to-live for the cache control breakpoint. This may be one of the following values:
+ *
+ * @remarks
+ *
+ * - `5m`: 5 minutes
+ * - `1h`: 1 hour
+ *
+ * Defaults to `5m`. Only supported by Anthropic Claude models.
+ */
+export const CompactResponse2ResponsesRequestRequestBodyTtl = {
+  Fivem: "5m",
+  Oneh: "1h",
+} as const;
+/**
+ * The time-to-live for the cache control breakpoint. This may be one of the following values:
+ *
+ * @remarks
+ *
+ * - `5m`: 5 minutes
+ * - `1h`: 1 hour
+ *
+ * Defaults to `5m`. Only supported by Anthropic Claude models.
+ */
+export type CompactResponse2ResponsesRequestRequestBodyTtl = ClosedEnum<
+  typeof CompactResponse2ResponsesRequestRequestBodyTtl
+>;
+
+/**
+ * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+ */
+export const CompactResponse2ResponsesRequestRequestBodyInput2Type = {
+  Ephemeral: "ephemeral",
+} as const;
+/**
+ * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+ */
+export type CompactResponse2ResponsesRequestRequestBodyInput2Type = ClosedEnum<
+  typeof CompactResponse2ResponsesRequestRequestBodyInput2Type
+>;
+
+export type CompactResponse2ResponsesRequestCacheControl = {
+  /**
+   * The time-to-live for the cache control breakpoint. This may be one of the following values:
+   *
+   * @remarks
+   *
+   * - `5m`: 5 minutes
+   * - `1h`: 1 hour
+   *
+   * Defaults to `5m`. Only supported by Anthropic Claude models.
+   */
+  ttl?: CompactResponse2ResponsesRequestRequestBodyTtl | undefined;
+  /**
+   * Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
+   */
+  type: CompactResponse2ResponsesRequestRequestBodyInput2Type;
+};
+
+/**
+ * The detail level for image understanding.
+ */
+export const Detail = {
+  Auto: "auto",
+  Low: "low",
+  High: "high",
+} as const;
+/**
+ * The detail level for image understanding.
+ */
+export type Detail = ClosedEnum<typeof Detail>;
+
+export const CompactResponse2Mode = {
+  Explicit: "explicit",
+} as const;
+export type CompactResponse2Mode = ClosedEnum<typeof CompactResponse2Mode>;
+
+export const CompactResponse2ResponsesRequestRequestBodyInputTtl = {
+  Thirtym: "30m",
+  Twelveh: "12h",
+} as const;
+export type CompactResponse2ResponsesRequestRequestBodyInputTtl = ClosedEnum<
+  typeof CompactResponse2ResponsesRequestRequestBodyInputTtl
+>;
+
+/**
+ * An explicit OpenAI cache boundary for GPT-5.6 and later. Omitted ttl inherits prompt_cache_options.ttl.
+ */
+export type TwoPromptCacheBreakpoint = {
+  mode: CompactResponse2Mode;
+  ttl?: CompactResponse2ResponsesRequestRequestBodyInputTtl | undefined;
+};
+
+/**
+ * An image content part.
+ */
+export type TwoImage = {
+  cacheControl?: CompactResponse2ResponsesRequestCacheControl | undefined;
+  /**
+   * The detail level for image understanding.
+   */
+  detail?: Detail | undefined;
+  /**
+   * The ID of a previously uploaded file.
+   */
+  fileId?: string | undefined;
+  /**
+   * The URL of the image.
+   */
+  imageUrl?: string | undefined;
+  /**
+   * An explicit OpenAI cache boundary for GPT-5.6 and later. Omitted ttl inherits prompt_cache_options.ttl.
+   */
+  promptCacheBreakpoint?: TwoPromptCacheBreakpoint | undefined;
+  type: "input_image";
+};
+
+/**
+ * A piece of reasoning text on a replayed reasoning item.
+ */
+export type ReasoningText = {
+  /**
+   * The reasoning text.
+   */
+  text: string;
+  type: "reasoning_text";
 };
 
 /**
@@ -407,61 +539,27 @@ export type CompactResponse2ResponsesCacheControl = {
 };
 
 /**
- * The detail level for image understanding.
+ * A model-generated text content part replayed in conversation history.
  */
-export const Detail = {
-  Auto: "auto",
-  Low: "low",
-  High: "high",
-} as const;
-/**
- * The detail level for image understanding.
- */
-export type Detail = ClosedEnum<typeof Detail>;
-
-export const CompactResponse2Mode = {
-  Explicit: "explicit",
-} as const;
-export type CompactResponse2Mode = ClosedEnum<typeof CompactResponse2Mode>;
-
-export const CompactResponse2ResponsesRequestRequestBodyTtl = {
-  Thirtym: "30m",
-  Twelveh: "12h",
-} as const;
-export type CompactResponse2ResponsesRequestRequestBodyTtl = ClosedEnum<
-  typeof CompactResponse2ResponsesRequestRequestBodyTtl
->;
-
-/**
- * An explicit OpenAI cache boundary for GPT-5.6 and later. Omitted ttl inherits prompt_cache_options.ttl.
- */
-export type TwoPromptCacheBreakpoint = {
-  mode: CompactResponse2Mode;
-  ttl?: CompactResponse2ResponsesRequestRequestBodyTtl | undefined;
-};
-
-/**
- * An image content part.
- */
-export type TwoImage = {
+export type OutputText = {
+  /**
+   * Annotations on the text, such as URL citations.
+   */
+  annotations?: Array<{ [k: string]: any }> | undefined;
   cacheControl?: CompactResponse2ResponsesCacheControl | undefined;
   /**
-   * The detail level for image understanding.
+   * Token log probabilities, when present.
    */
-  detail?: Detail | undefined;
+  logprobs?: Array<{ [k: string]: any }> | undefined;
   /**
-   * The ID of a previously uploaded file.
+   * The text content.
    */
-  fileId?: string | undefined;
+  text: string;
   /**
-   * The URL of the image.
+   * An opaque signature some providers, such as Google Gemini, attach to their output. Send it back unchanged with the item so the model can continue its reasoning.
    */
-  imageUrl?: string | undefined;
-  /**
-   * An explicit OpenAI cache boundary for GPT-5.6 and later. Omitted ttl inherits prompt_cache_options.ttl.
-   */
-  promptCacheBreakpoint?: TwoPromptCacheBreakpoint | undefined;
-  type: "input_image";
+  thoughtSignature?: string | undefined;
+  type: "output_text";
 };
 
 /**
@@ -559,14 +657,19 @@ export type TwoText = {
 /**
  * A content part within a message.
  */
-export type CompactResponseContent2 = TwoText | TwoImage | TwoFile;
+export type CompactResponseContent2 =
+  | TwoText
+  | OutputText
+  | ReasoningText
+  | TwoImage
+  | TwoFile;
 
 /**
  * The content of the item: a string or an array of content parts.
  */
 export type InputContent =
   | string
-  | Array<TwoText | TwoImage | TwoFile>
+  | Array<TwoText | OutputText | ReasoningText | TwoImage | TwoFile>
   | Array<ThreeText | ThreeImage | EncryptedContent>;
 
 /**
@@ -614,7 +717,7 @@ export type Input2 = {
    */
   content?:
     | string
-    | Array<TwoText | TwoImage | TwoFile>
+    | Array<TwoText | OutputText | ReasoningText | TwoImage | TwoFile>
     | Array<ThreeText | ThreeImage | EncryptedContent>
     | undefined;
   /**
@@ -708,14 +811,16 @@ export const EncryptedContent$outboundSchema: z.ZodType<
   EncryptedContent$Outbound,
   z.ZodTypeDef,
   EncryptedContent
-> = z.object({
-  encryptedContent: z.string(),
-  type: z.literal("encrypted_content"),
-}).transform((v) => {
-  return remap$(v, {
-    encryptedContent: "encrypted_content",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    encryptedContent: z.string(),
+    type: z.literal("encrypted_content"),
+  }).transform((v) => {
+    return remap$(v, {
+      encryptedContent: "encrypted_content",
+    });
+  })
+);
 
 export function encryptedContentToJSON(
   encryptedContent: EncryptedContent,
@@ -728,12 +833,16 @@ export function encryptedContentToJSON(
 /** @internal */
 export const CompactResponse3ResponsesTtl$outboundSchema: z.ZodNativeEnum<
   typeof CompactResponse3ResponsesTtl
-> = z.nativeEnum(CompactResponse3ResponsesTtl);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(CompactResponse3ResponsesTtl)
+);
 
 /** @internal */
 export const CompactResponse3ResponsesType$outboundSchema: z.ZodNativeEnum<
   typeof CompactResponse3ResponsesType
-> = z.nativeEnum(CompactResponse3ResponsesType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(CompactResponse3ResponsesType)
+);
 
 /** @internal */
 export type CompactResponse3CacheControl$Outbound = {
@@ -746,10 +855,12 @@ export const CompactResponse3CacheControl$outboundSchema: z.ZodType<
   CompactResponse3CacheControl$Outbound,
   z.ZodTypeDef,
   CompactResponse3CacheControl
-> = z.object({
-  ttl: CompactResponse3ResponsesTtl$outboundSchema.default("5m"),
-  type: CompactResponse3ResponsesType$outboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ttl: CompactResponse3ResponsesTtl$outboundSchema.default("5m"),
+    type: CompactResponse3ResponsesType$outboundSchema,
+  })
+);
 
 export function compactResponse3CacheControlToJSON(
   compactResponse3CacheControl: CompactResponse3CacheControl,
@@ -762,19 +873,20 @@ export function compactResponse3CacheControlToJSON(
 }
 
 /** @internal */
-export const ThreeDetail$outboundSchema: z.ZodNativeEnum<typeof ThreeDetail> = z
-  .nativeEnum(ThreeDetail);
+export const ThreeDetail$outboundSchema: z.ZodNativeEnum<typeof ThreeDetail> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ThreeDetail));
 
 /** @internal */
 export const CompactResponse3Mode$outboundSchema: z.ZodNativeEnum<
   typeof CompactResponse3Mode
-> = z.nativeEnum(CompactResponse3Mode);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(CompactResponse3Mode));
 
 /** @internal */
 export const CompactResponse3ResponsesRequestTtl$outboundSchema:
-  z.ZodNativeEnum<typeof CompactResponse3ResponsesRequestTtl> = z.nativeEnum(
-    CompactResponse3ResponsesRequestTtl,
-  );
+  z.ZodNativeEnum<typeof CompactResponse3ResponsesRequestTtl> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(CompactResponse3ResponsesRequestTtl)
+    );
 
 /** @internal */
 export type CompactResponse3PromptCacheBreakpoint$Outbound = {
@@ -787,10 +899,12 @@ export const CompactResponse3PromptCacheBreakpoint$outboundSchema: z.ZodType<
   CompactResponse3PromptCacheBreakpoint$Outbound,
   z.ZodTypeDef,
   CompactResponse3PromptCacheBreakpoint
-> = z.object({
-  mode: CompactResponse3Mode$outboundSchema,
-  ttl: CompactResponse3ResponsesRequestTtl$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    mode: CompactResponse3Mode$outboundSchema,
+    ttl: CompactResponse3ResponsesRequestTtl$outboundSchema.optional(),
+  })
+);
 
 export function compactResponse3PromptCacheBreakpointToJSON(
   compactResponse3PromptCacheBreakpoint: CompactResponse3PromptCacheBreakpoint,
@@ -819,36 +933,38 @@ export const ThreeImage$outboundSchema: z.ZodType<
   ThreeImage$Outbound,
   z.ZodTypeDef,
   ThreeImage
-> = z.object({
-  cacheControl: z.lazy(() => CompactResponse3CacheControl$outboundSchema)
-    .optional(),
-  detail: ThreeDetail$outboundSchema.optional(),
-  fileId: z.string().optional(),
-  imageUrl: z.string().optional(),
-  promptCacheBreakpoint: z.lazy(() =>
-    CompactResponse3PromptCacheBreakpoint$outboundSchema
-  ).optional(),
-  type: z.literal("input_image"),
-}).transform((v) => {
-  return remap$(v, {
-    cacheControl: "cache_control",
-    fileId: "file_id",
-    imageUrl: "image_url",
-    promptCacheBreakpoint: "prompt_cache_breakpoint",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    cacheControl: z.lazy(() => CompactResponse3CacheControl$outboundSchema)
+      .optional(),
+    detail: ThreeDetail$outboundSchema.optional(),
+    fileId: z.string().optional(),
+    imageUrl: z.string().optional(),
+    promptCacheBreakpoint: z.lazy(() =>
+      CompactResponse3PromptCacheBreakpoint$outboundSchema
+    ).optional(),
+    type: z.literal("input_image"),
+  }).transform((v) => {
+    return remap$(v, {
+      cacheControl: "cache_control",
+      fileId: "file_id",
+      imageUrl: "image_url",
+      promptCacheBreakpoint: "prompt_cache_breakpoint",
+    });
+  })
+);
 
 export function threeImageToJSON(threeImage: ThreeImage): string {
   return JSON.stringify(ThreeImage$outboundSchema.parse(threeImage));
 }
 
 /** @internal */
-export const ThreeTtl$outboundSchema: z.ZodNativeEnum<typeof ThreeTtl> = z
-  .nativeEnum(ThreeTtl);
+export const ThreeTtl$outboundSchema: z.ZodNativeEnum<typeof ThreeTtl> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ThreeTtl));
 
 /** @internal */
-export const ThreeType$outboundSchema: z.ZodNativeEnum<typeof ThreeType> = z
-  .nativeEnum(ThreeType);
+export const ThreeType$outboundSchema: z.ZodNativeEnum<typeof ThreeType> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ThreeType));
 
 /** @internal */
 export type ThreeCacheControl$Outbound = {
@@ -861,10 +977,12 @@ export const ThreeCacheControl$outboundSchema: z.ZodType<
   ThreeCacheControl$Outbound,
   z.ZodTypeDef,
   ThreeCacheControl
-> = z.object({
-  ttl: ThreeTtl$outboundSchema.default("5m"),
-  type: ThreeType$outboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ttl: ThreeTtl$outboundSchema.default("5m"),
+    type: ThreeType$outboundSchema,
+  })
+);
 
 export function threeCacheControlToJSON(
   threeCacheControl: ThreeCacheControl,
@@ -875,13 +993,13 @@ export function threeCacheControlToJSON(
 }
 
 /** @internal */
-export const ThreeMode$outboundSchema: z.ZodNativeEnum<typeof ThreeMode> = z
-  .nativeEnum(ThreeMode);
+export const ThreeMode$outboundSchema: z.ZodNativeEnum<typeof ThreeMode> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ThreeMode));
 
 /** @internal */
 export const CompactResponse3Ttl$outboundSchema: z.ZodNativeEnum<
   typeof CompactResponse3Ttl
-> = z.nativeEnum(CompactResponse3Ttl);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(CompactResponse3Ttl));
 
 /** @internal */
 export type ThreePromptCacheBreakpoint$Outbound = {
@@ -894,10 +1012,12 @@ export const ThreePromptCacheBreakpoint$outboundSchema: z.ZodType<
   ThreePromptCacheBreakpoint$Outbound,
   z.ZodTypeDef,
   ThreePromptCacheBreakpoint
-> = z.object({
-  mode: ThreeMode$outboundSchema,
-  ttl: CompactResponse3Ttl$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    mode: ThreeMode$outboundSchema,
+    ttl: CompactResponse3Ttl$outboundSchema.optional(),
+  })
+);
 
 export function threePromptCacheBreakpointToJSON(
   threePromptCacheBreakpoint: ThreePromptCacheBreakpoint,
@@ -920,18 +1040,21 @@ export const ThreeText$outboundSchema: z.ZodType<
   ThreeText$Outbound,
   z.ZodTypeDef,
   ThreeText
-> = z.object({
-  cacheControl: z.lazy(() => ThreeCacheControl$outboundSchema).optional(),
-  promptCacheBreakpoint: z.lazy(() => ThreePromptCacheBreakpoint$outboundSchema)
-    .optional(),
-  text: z.string(),
-  type: z.literal("input_text"),
-}).transform((v) => {
-  return remap$(v, {
-    cacheControl: "cache_control",
-    promptCacheBreakpoint: "prompt_cache_breakpoint",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    cacheControl: z.lazy(() => ThreeCacheControl$outboundSchema).optional(),
+    promptCacheBreakpoint: z.lazy(() =>
+      ThreePromptCacheBreakpoint$outboundSchema
+    ).optional(),
+    text: z.string(),
+    type: z.literal("input_text"),
+  }).transform((v) => {
+    return remap$(v, {
+      cacheControl: "cache_control",
+      promptCacheBreakpoint: "prompt_cache_breakpoint",
+    });
+  })
+);
 
 export function threeTextToJSON(threeText: ThreeText): string {
   return JSON.stringify(ThreeText$outboundSchema.parse(threeText));
@@ -948,64 +1071,78 @@ export const Three$outboundSchema: z.ZodType<
   Three$Outbound,
   z.ZodTypeDef,
   Three
-> = z.union([
-  z.lazy(() => ThreeText$outboundSchema),
-  z.lazy(() => ThreeImage$outboundSchema),
-  z.lazy(() => EncryptedContent$outboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => ThreeText$outboundSchema),
+    z.lazy(() => ThreeImage$outboundSchema),
+    z.lazy(() => EncryptedContent$outboundSchema),
+  ])
+);
 
 export function threeToJSON(three: Three): string {
   return JSON.stringify(Three$outboundSchema.parse(three));
 }
 
 /** @internal */
-export const CompactResponse2ResponsesRequestRequestBodyInputTtl$outboundSchema:
-  z.ZodNativeEnum<typeof CompactResponse2ResponsesRequestRequestBodyInputTtl> =
-    z.nativeEnum(CompactResponse2ResponsesRequestRequestBodyInputTtl);
+export const CompactResponse2ResponsesRequestRequestBodyInput2Ttl$outboundSchema:
+  z.ZodNativeEnum<typeof CompactResponse2ResponsesRequestRequestBodyInput2Ttl> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(CompactResponse2ResponsesRequestRequestBodyInput2Ttl)
+    );
 
 /** @internal */
-export const CompactResponse2ResponsesRequestRequestBodyInputType$outboundSchema:
-  z.ZodNativeEnum<typeof CompactResponse2ResponsesRequestRequestBodyInputType> =
-    z.nativeEnum(CompactResponse2ResponsesRequestRequestBodyInputType);
+export const CompactResponse2ResponsesRequestRequestBodyInput2Content5Type$outboundSchema:
+  z.ZodNativeEnum<
+    typeof CompactResponse2ResponsesRequestRequestBodyInput2Content5Type
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.nativeEnum(CompactResponse2ResponsesRequestRequestBodyInput2Content5Type)
+  );
 
 /** @internal */
-export type CompactResponse2ResponsesRequestCacheControl$Outbound = {
+export type CompactResponse2ResponsesRequestRequestBodyCacheControl$Outbound = {
   ttl: string;
   type: string;
 };
 
 /** @internal */
-export const CompactResponse2ResponsesRequestCacheControl$outboundSchema:
+export const CompactResponse2ResponsesRequestRequestBodyCacheControl$outboundSchema:
   z.ZodType<
-    CompactResponse2ResponsesRequestCacheControl$Outbound,
+    CompactResponse2ResponsesRequestRequestBodyCacheControl$Outbound,
     z.ZodTypeDef,
-    CompactResponse2ResponsesRequestCacheControl
-  > = z.object({
-    ttl: CompactResponse2ResponsesRequestRequestBodyInputTtl$outboundSchema
-      .default("5m"),
-    type: CompactResponse2ResponsesRequestRequestBodyInputType$outboundSchema,
-  });
+    CompactResponse2ResponsesRequestRequestBodyCacheControl
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ttl: CompactResponse2ResponsesRequestRequestBodyInput2Ttl$outboundSchema
+        .default("5m"),
+      type:
+        CompactResponse2ResponsesRequestRequestBodyInput2Content5Type$outboundSchema,
+    })
+  );
 
-export function compactResponse2ResponsesRequestCacheControlToJSON(
-  compactResponse2ResponsesRequestCacheControl:
-    CompactResponse2ResponsesRequestCacheControl,
+export function compactResponse2ResponsesRequestRequestBodyCacheControlToJSON(
+  compactResponse2ResponsesRequestRequestBodyCacheControl:
+    CompactResponse2ResponsesRequestRequestBodyCacheControl,
 ): string {
   return JSON.stringify(
-    CompactResponse2ResponsesRequestCacheControl$outboundSchema.parse(
-      compactResponse2ResponsesRequestCacheControl,
-    ),
+    CompactResponse2ResponsesRequestRequestBodyCacheControl$outboundSchema
+      .parse(compactResponse2ResponsesRequestRequestBodyCacheControl),
   );
 }
 
 /** @internal */
 export const CompactResponse2ResponsesMode$outboundSchema: z.ZodNativeEnum<
   typeof CompactResponse2ResponsesMode
-> = z.nativeEnum(CompactResponse2ResponsesMode);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(CompactResponse2ResponsesMode)
+);
 
 /** @internal */
-export const CompactResponse2ResponsesRequestRequestBodyInput2Ttl$outboundSchema:
-  z.ZodNativeEnum<typeof CompactResponse2ResponsesRequestRequestBodyInput2Ttl> =
-    z.nativeEnum(CompactResponse2ResponsesRequestRequestBodyInput2Ttl);
+export const CompactResponse2ResponsesRequestRequestBodyInput2ContentTtl$outboundSchema:
+  z.ZodNativeEnum<
+    typeof CompactResponse2ResponsesRequestRequestBodyInput2ContentTtl
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.nativeEnum(CompactResponse2ResponsesRequestRequestBodyInput2ContentTtl)
+  );
 
 /** @internal */
 export type CompactResponse2PromptCacheBreakpoint$Outbound = {
@@ -1018,11 +1155,14 @@ export const CompactResponse2PromptCacheBreakpoint$outboundSchema: z.ZodType<
   CompactResponse2PromptCacheBreakpoint$Outbound,
   z.ZodTypeDef,
   CompactResponse2PromptCacheBreakpoint
-> = z.object({
-  mode: CompactResponse2ResponsesMode$outboundSchema,
-  ttl: CompactResponse2ResponsesRequestRequestBodyInput2Ttl$outboundSchema
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    mode: CompactResponse2ResponsesMode$outboundSchema,
+    ttl:
+      CompactResponse2ResponsesRequestRequestBodyInput2ContentTtl$outboundSchema
+        .optional(),
+  })
+);
 
 export function compactResponse2PromptCacheBreakpointToJSON(
   compactResponse2PromptCacheBreakpoint: CompactResponse2PromptCacheBreakpoint,
@@ -1037,7 +1177,7 @@ export function compactResponse2PromptCacheBreakpointToJSON(
 /** @internal */
 export type TwoFile$Outbound = {
   cache_control?:
-    | CompactResponse2ResponsesRequestCacheControl$Outbound
+    | CompactResponse2ResponsesRequestRequestBodyCacheControl$Outbound
     | undefined;
   file_data?: string | undefined;
   file_id?: string | undefined;
@@ -1055,85 +1195,98 @@ export const TwoFile$outboundSchema: z.ZodType<
   TwoFile$Outbound,
   z.ZodTypeDef,
   TwoFile
-> = z.object({
-  cacheControl: z.lazy(() =>
-    CompactResponse2ResponsesRequestCacheControl$outboundSchema
-  ).optional(),
-  fileData: z.string().optional(),
-  fileId: z.string().optional(),
-  fileUrl: z.string().optional(),
-  filename: z.string().optional(),
-  mimeType: z.string().optional(),
-  promptCacheBreakpoint: z.lazy(() =>
-    CompactResponse2PromptCacheBreakpoint$outboundSchema
-  ).optional(),
-  type: z.literal("input_file"),
-}).transform((v) => {
-  return remap$(v, {
-    cacheControl: "cache_control",
-    fileData: "file_data",
-    fileId: "file_id",
-    fileUrl: "file_url",
-    mimeType: "mime_type",
-    promptCacheBreakpoint: "prompt_cache_breakpoint",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    cacheControl: z.lazy(() =>
+      CompactResponse2ResponsesRequestRequestBodyCacheControl$outboundSchema
+    ).optional(),
+    fileData: z.string().optional(),
+    fileId: z.string().optional(),
+    fileUrl: z.string().optional(),
+    filename: z.string().optional(),
+    mimeType: z.string().optional(),
+    promptCacheBreakpoint: z.lazy(() =>
+      CompactResponse2PromptCacheBreakpoint$outboundSchema
+    ).optional(),
+    type: z.literal("input_file"),
+  }).transform((v) => {
+    return remap$(v, {
+      cacheControl: "cache_control",
+      fileData: "file_data",
+      fileId: "file_id",
+      fileUrl: "file_url",
+      mimeType: "mime_type",
+      promptCacheBreakpoint: "prompt_cache_breakpoint",
+    });
+  })
+);
 
 export function twoFileToJSON(twoFile: TwoFile): string {
   return JSON.stringify(TwoFile$outboundSchema.parse(twoFile));
 }
 
 /** @internal */
-export const CompactResponse2ResponsesRequestTtl$outboundSchema:
-  z.ZodNativeEnum<typeof CompactResponse2ResponsesRequestTtl> = z.nativeEnum(
-    CompactResponse2ResponsesRequestTtl,
+export const CompactResponse2ResponsesRequestRequestBodyTtl$outboundSchema:
+  z.ZodNativeEnum<typeof CompactResponse2ResponsesRequestRequestBodyTtl> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(CompactResponse2ResponsesRequestRequestBodyTtl)
+    );
+
+/** @internal */
+export const CompactResponse2ResponsesRequestRequestBodyInput2Type$outboundSchema:
+  z.ZodNativeEnum<
+    typeof CompactResponse2ResponsesRequestRequestBodyInput2Type
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.nativeEnum(CompactResponse2ResponsesRequestRequestBodyInput2Type)
   );
 
 /** @internal */
-export const CompactResponse2ResponsesRequestType$outboundSchema:
-  z.ZodNativeEnum<typeof CompactResponse2ResponsesRequestType> = z.nativeEnum(
-    CompactResponse2ResponsesRequestType,
-  );
-
-/** @internal */
-export type CompactResponse2ResponsesCacheControl$Outbound = {
+export type CompactResponse2ResponsesRequestCacheControl$Outbound = {
   ttl: string;
   type: string;
 };
 
 /** @internal */
-export const CompactResponse2ResponsesCacheControl$outboundSchema: z.ZodType<
-  CompactResponse2ResponsesCacheControl$Outbound,
-  z.ZodTypeDef,
-  CompactResponse2ResponsesCacheControl
-> = z.object({
-  ttl: CompactResponse2ResponsesRequestTtl$outboundSchema.default("5m"),
-  type: CompactResponse2ResponsesRequestType$outboundSchema,
-});
+export const CompactResponse2ResponsesRequestCacheControl$outboundSchema:
+  z.ZodType<
+    CompactResponse2ResponsesRequestCacheControl$Outbound,
+    z.ZodTypeDef,
+    CompactResponse2ResponsesRequestCacheControl
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ttl: CompactResponse2ResponsesRequestRequestBodyTtl$outboundSchema
+        .default("5m"),
+      type:
+        CompactResponse2ResponsesRequestRequestBodyInput2Type$outboundSchema,
+    })
+  );
 
-export function compactResponse2ResponsesCacheControlToJSON(
-  compactResponse2ResponsesCacheControl: CompactResponse2ResponsesCacheControl,
+export function compactResponse2ResponsesRequestCacheControlToJSON(
+  compactResponse2ResponsesRequestCacheControl:
+    CompactResponse2ResponsesRequestCacheControl,
 ): string {
   return JSON.stringify(
-    CompactResponse2ResponsesCacheControl$outboundSchema.parse(
-      compactResponse2ResponsesCacheControl,
+    CompactResponse2ResponsesRequestCacheControl$outboundSchema.parse(
+      compactResponse2ResponsesRequestCacheControl,
     ),
   );
 }
 
 /** @internal */
-export const Detail$outboundSchema: z.ZodNativeEnum<typeof Detail> = z
-  .nativeEnum(Detail);
+export const Detail$outboundSchema: z.ZodNativeEnum<typeof Detail> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Detail));
 
 /** @internal */
 export const CompactResponse2Mode$outboundSchema: z.ZodNativeEnum<
   typeof CompactResponse2Mode
-> = z.nativeEnum(CompactResponse2Mode);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(CompactResponse2Mode));
 
 /** @internal */
-export const CompactResponse2ResponsesRequestRequestBodyTtl$outboundSchema:
-  z.ZodNativeEnum<typeof CompactResponse2ResponsesRequestRequestBodyTtl> = z
-    .nativeEnum(CompactResponse2ResponsesRequestRequestBodyTtl);
+export const CompactResponse2ResponsesRequestRequestBodyInputTtl$outboundSchema:
+  z.ZodNativeEnum<typeof CompactResponse2ResponsesRequestRequestBodyInputTtl> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(CompactResponse2ResponsesRequestRequestBodyInputTtl)
+    );
 
 /** @internal */
 export type TwoPromptCacheBreakpoint$Outbound = {
@@ -1146,10 +1299,13 @@ export const TwoPromptCacheBreakpoint$outboundSchema: z.ZodType<
   TwoPromptCacheBreakpoint$Outbound,
   z.ZodTypeDef,
   TwoPromptCacheBreakpoint
-> = z.object({
-  mode: CompactResponse2Mode$outboundSchema,
-  ttl: CompactResponse2ResponsesRequestRequestBodyTtl$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    mode: CompactResponse2Mode$outboundSchema,
+    ttl: CompactResponse2ResponsesRequestRequestBodyInputTtl$outboundSchema
+      .optional(),
+  })
+);
 
 export function twoPromptCacheBreakpointToJSON(
   twoPromptCacheBreakpoint: TwoPromptCacheBreakpoint,
@@ -1161,7 +1317,9 @@ export function twoPromptCacheBreakpointToJSON(
 
 /** @internal */
 export type TwoImage$Outbound = {
-  cache_control?: CompactResponse2ResponsesCacheControl$Outbound | undefined;
+  cache_control?:
+    | CompactResponse2ResponsesRequestCacheControl$Outbound
+    | undefined;
   detail?: string | undefined;
   file_id?: string | undefined;
   image_url?: string | undefined;
@@ -1174,38 +1332,141 @@ export const TwoImage$outboundSchema: z.ZodType<
   TwoImage$Outbound,
   z.ZodTypeDef,
   TwoImage
-> = z.object({
-  cacheControl: z.lazy(() =>
-    CompactResponse2ResponsesCacheControl$outboundSchema
-  ).optional(),
-  detail: Detail$outboundSchema.optional(),
-  fileId: z.string().optional(),
-  imageUrl: z.string().optional(),
-  promptCacheBreakpoint: z.lazy(() => TwoPromptCacheBreakpoint$outboundSchema)
-    .optional(),
-  type: z.literal("input_image"),
-}).transform((v) => {
-  return remap$(v, {
-    cacheControl: "cache_control",
-    fileId: "file_id",
-    imageUrl: "image_url",
-    promptCacheBreakpoint: "prompt_cache_breakpoint",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    cacheControl: z.lazy(() =>
+      CompactResponse2ResponsesRequestCacheControl$outboundSchema
+    ).optional(),
+    detail: Detail$outboundSchema.optional(),
+    fileId: z.string().optional(),
+    imageUrl: z.string().optional(),
+    promptCacheBreakpoint: z.lazy(() => TwoPromptCacheBreakpoint$outboundSchema)
+      .optional(),
+    type: z.literal("input_image"),
+  }).transform((v) => {
+    return remap$(v, {
+      cacheControl: "cache_control",
+      fileId: "file_id",
+      imageUrl: "image_url",
+      promptCacheBreakpoint: "prompt_cache_breakpoint",
+    });
+  })
+);
 
 export function twoImageToJSON(twoImage: TwoImage): string {
   return JSON.stringify(TwoImage$outboundSchema.parse(twoImage));
 }
 
 /** @internal */
+export type ReasoningText$Outbound = {
+  text: string;
+  type: "reasoning_text";
+};
+
+/** @internal */
+export const ReasoningText$outboundSchema: z.ZodType<
+  ReasoningText$Outbound,
+  z.ZodTypeDef,
+  ReasoningText
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    text: z.string(),
+    type: z.literal("reasoning_text"),
+  })
+);
+
+export function reasoningTextToJSON(reasoningText: ReasoningText): string {
+  return JSON.stringify(ReasoningText$outboundSchema.parse(reasoningText));
+}
+
+/** @internal */
+export const CompactResponse2ResponsesRequestTtl$outboundSchema:
+  z.ZodNativeEnum<typeof CompactResponse2ResponsesRequestTtl> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(CompactResponse2ResponsesRequestTtl)
+    );
+
+/** @internal */
+export const CompactResponse2ResponsesRequestType$outboundSchema:
+  z.ZodNativeEnum<typeof CompactResponse2ResponsesRequestType> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(CompactResponse2ResponsesRequestType)
+    );
+
+/** @internal */
+export type CompactResponse2ResponsesCacheControl$Outbound = {
+  ttl: string;
+  type: string;
+};
+
+/** @internal */
+export const CompactResponse2ResponsesCacheControl$outboundSchema: z.ZodType<
+  CompactResponse2ResponsesCacheControl$Outbound,
+  z.ZodTypeDef,
+  CompactResponse2ResponsesCacheControl
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ttl: CompactResponse2ResponsesRequestTtl$outboundSchema.default("5m"),
+    type: CompactResponse2ResponsesRequestType$outboundSchema,
+  })
+);
+
+export function compactResponse2ResponsesCacheControlToJSON(
+  compactResponse2ResponsesCacheControl: CompactResponse2ResponsesCacheControl,
+): string {
+  return JSON.stringify(
+    CompactResponse2ResponsesCacheControl$outboundSchema.parse(
+      compactResponse2ResponsesCacheControl,
+    ),
+  );
+}
+
+/** @internal */
+export type OutputText$Outbound = {
+  annotations?: Array<{ [k: string]: any }> | undefined;
+  cache_control?: CompactResponse2ResponsesCacheControl$Outbound | undefined;
+  logprobs?: Array<{ [k: string]: any }> | undefined;
+  text: string;
+  thought_signature?: string | undefined;
+  type: "output_text";
+};
+
+/** @internal */
+export const OutputText$outboundSchema: z.ZodType<
+  OutputText$Outbound,
+  z.ZodTypeDef,
+  OutputText
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    annotations: z.array(z.record(z.any())).optional(),
+    cacheControl: z.lazy(() =>
+      CompactResponse2ResponsesCacheControl$outboundSchema
+    ).optional(),
+    logprobs: z.array(z.record(z.any())).optional(),
+    text: z.string(),
+    thoughtSignature: z.string().optional(),
+    type: z.literal("output_text"),
+  }).transform((v) => {
+    return remap$(v, {
+      cacheControl: "cache_control",
+      thoughtSignature: "thought_signature",
+    });
+  })
+);
+
+export function outputTextToJSON(outputText: OutputText): string {
+  return JSON.stringify(OutputText$outboundSchema.parse(outputText));
+}
+
+/** @internal */
 export const CompactResponse2Ttl$outboundSchema: z.ZodNativeEnum<
   typeof CompactResponse2Ttl
-> = z.nativeEnum(CompactResponse2Ttl);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(CompactResponse2Ttl));
 
 /** @internal */
 export const CompactResponse2Type$outboundSchema: z.ZodNativeEnum<
   typeof CompactResponse2Type
-> = z.nativeEnum(CompactResponse2Type);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(CompactResponse2Type));
 
 /** @internal */
 export type CompactResponse2CacheControl$Outbound = {
@@ -1218,10 +1479,12 @@ export const CompactResponse2CacheControl$outboundSchema: z.ZodType<
   CompactResponse2CacheControl$Outbound,
   z.ZodTypeDef,
   CompactResponse2CacheControl
-> = z.object({
-  ttl: CompactResponse2Ttl$outboundSchema.default("5m"),
-  type: CompactResponse2Type$outboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ttl: CompactResponse2Ttl$outboundSchema.default("5m"),
+    type: CompactResponse2Type$outboundSchema,
+  })
+);
 
 export function compactResponse2CacheControlToJSON(
   compactResponse2CacheControl: CompactResponse2CacheControl,
@@ -1234,13 +1497,15 @@ export function compactResponse2CacheControlToJSON(
 }
 
 /** @internal */
-export const TwoMode$outboundSchema: z.ZodNativeEnum<typeof TwoMode> = z
-  .nativeEnum(TwoMode);
+export const TwoMode$outboundSchema: z.ZodNativeEnum<typeof TwoMode> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(TwoMode));
 
 /** @internal */
 export const CompactResponse2ResponsesTtl$outboundSchema: z.ZodNativeEnum<
   typeof CompactResponse2ResponsesTtl
-> = z.nativeEnum(CompactResponse2ResponsesTtl);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(CompactResponse2ResponsesTtl)
+);
 
 /** @internal */
 export type PromptCacheBreakpoint$Outbound = {
@@ -1253,10 +1518,12 @@ export const PromptCacheBreakpoint$outboundSchema: z.ZodType<
   PromptCacheBreakpoint$Outbound,
   z.ZodTypeDef,
   PromptCacheBreakpoint
-> = z.object({
-  mode: TwoMode$outboundSchema,
-  ttl: CompactResponse2ResponsesTtl$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    mode: TwoMode$outboundSchema,
+    ttl: CompactResponse2ResponsesTtl$outboundSchema.optional(),
+  })
+);
 
 export function promptCacheBreakpointToJSON(
   promptCacheBreakpoint: PromptCacheBreakpoint,
@@ -1279,19 +1546,21 @@ export const TwoText$outboundSchema: z.ZodType<
   TwoText$Outbound,
   z.ZodTypeDef,
   TwoText
-> = z.object({
-  cacheControl: z.lazy(() => CompactResponse2CacheControl$outboundSchema)
-    .optional(),
-  promptCacheBreakpoint: z.lazy(() => PromptCacheBreakpoint$outboundSchema)
-    .optional(),
-  text: z.string(),
-  type: z.literal("input_text"),
-}).transform((v) => {
-  return remap$(v, {
-    cacheControl: "cache_control",
-    promptCacheBreakpoint: "prompt_cache_breakpoint",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    cacheControl: z.lazy(() => CompactResponse2CacheControl$outboundSchema)
+      .optional(),
+    promptCacheBreakpoint: z.lazy(() => PromptCacheBreakpoint$outboundSchema)
+      .optional(),
+    text: z.string(),
+    type: z.literal("input_text"),
+  }).transform((v) => {
+    return remap$(v, {
+      cacheControl: "cache_control",
+      promptCacheBreakpoint: "prompt_cache_breakpoint",
+    });
+  })
+);
 
 export function twoTextToJSON(twoText: TwoText): string {
   return JSON.stringify(TwoText$outboundSchema.parse(twoText));
@@ -1300,6 +1569,8 @@ export function twoTextToJSON(twoText: TwoText): string {
 /** @internal */
 export type CompactResponseContent2$Outbound =
   | TwoText$Outbound
+  | OutputText$Outbound
+  | ReasoningText$Outbound
   | TwoImage$Outbound
   | TwoFile$Outbound;
 
@@ -1308,11 +1579,15 @@ export const CompactResponseContent2$outboundSchema: z.ZodType<
   CompactResponseContent2$Outbound,
   z.ZodTypeDef,
   CompactResponseContent2
-> = z.union([
-  z.lazy(() => TwoText$outboundSchema),
-  z.lazy(() => TwoImage$outboundSchema),
-  z.lazy(() => TwoFile$outboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => TwoText$outboundSchema),
+    z.lazy(() => OutputText$outboundSchema),
+    z.lazy(() => ReasoningText$outboundSchema),
+    z.lazy(() => TwoImage$outboundSchema),
+    z.lazy(() => TwoFile$outboundSchema),
+  ])
+);
 
 export function compactResponseContent2ToJSON(
   compactResponseContent2: CompactResponseContent2,
@@ -1325,7 +1600,13 @@ export function compactResponseContent2ToJSON(
 /** @internal */
 export type InputContent$Outbound =
   | string
-  | Array<TwoText$Outbound | TwoImage$Outbound | TwoFile$Outbound>
+  | Array<
+    | TwoText$Outbound
+    | OutputText$Outbound
+    | ReasoningText$Outbound
+    | TwoImage$Outbound
+    | TwoFile$Outbound
+  >
   | Array<ThreeText$Outbound | ThreeImage$Outbound | EncryptedContent$Outbound>;
 
 /** @internal */
@@ -1333,40 +1614,50 @@ export const InputContent$outboundSchema: z.ZodType<
   InputContent$Outbound,
   z.ZodTypeDef,
   InputContent
-> = z.union([
-  z.string(),
-  z.array(z.union([
-    z.lazy(() => TwoText$outboundSchema),
-    z.lazy(() => TwoImage$outboundSchema),
-    z.lazy(() => TwoFile$outboundSchema),
-  ])),
-  z.array(z.union([
-    z.lazy(() => ThreeText$outboundSchema),
-    z.lazy(() =>
-      ThreeImage$outboundSchema
-    ),
-    z.lazy(() => EncryptedContent$outboundSchema),
-  ])),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.string(),
+    z.array(z.union([
+      z.lazy(() => TwoText$outboundSchema),
+      z.lazy(() => OutputText$outboundSchema),
+      z.lazy(() => ReasoningText$outboundSchema),
+      z.lazy(() => TwoImage$outboundSchema),
+      z.lazy(() => TwoFile$outboundSchema),
+    ])),
+    z.array(z.union([
+      z.lazy(() => ThreeText$outboundSchema),
+      z.lazy(() =>
+        ThreeImage$outboundSchema
+      ),
+      z.lazy(() => EncryptedContent$outboundSchema),
+    ])),
+  ])
+);
 
 export function inputContentToJSON(inputContent: InputContent): string {
   return JSON.stringify(InputContent$outboundSchema.parse(inputContent));
 }
 
 /** @internal */
-export const InputRole$outboundSchema: z.ZodNativeEnum<typeof InputRole> = z
-  .nativeEnum(InputRole);
+export const InputRole$outboundSchema: z.ZodNativeEnum<typeof InputRole> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(InputRole));
 
 /** @internal */
-export const InputType$outboundSchema: z.ZodNativeEnum<typeof InputType> = z
-  .nativeEnum(InputType);
+export const InputType$outboundSchema: z.ZodNativeEnum<typeof InputType> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(InputType));
 
 /** @internal */
 export type Input2$Outbound = {
   author?: string | undefined;
   content?:
     | string
-    | Array<TwoText$Outbound | TwoImage$Outbound | TwoFile$Outbound>
+    | Array<
+      | TwoText$Outbound
+      | OutputText$Outbound
+      | ReasoningText$Outbound
+      | TwoImage$Outbound
+      | TwoFile$Outbound
+    >
     | Array<
       ThreeText$Outbound | ThreeImage$Outbound | EncryptedContent$Outbound
     >
@@ -1382,28 +1673,30 @@ export const Input2$outboundSchema: z.ZodType<
   Input2$Outbound,
   z.ZodTypeDef,
   Input2
-> = z.object({
-  author: z.string().optional(),
-  content: z.union([
-    z.string(),
-    z.array(z.union([
-      z.lazy(() => TwoText$outboundSchema),
-      z.lazy(() => TwoImage$outboundSchema),
-      z.lazy(() => TwoFile$outboundSchema),
-    ])),
-    z.array(z.union([
-      z.lazy(() => ThreeText$outboundSchema),
-      z.lazy(() =>
-        ThreeImage$outboundSchema
-      ),
-      z.lazy(() => EncryptedContent$outboundSchema),
-    ])),
-  ]).optional(),
-  id: z.string().optional(),
-  recipient: z.string().optional(),
-  role: InputRole$outboundSchema.optional(),
-  type: InputType$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    author: z.string().optional(),
+    content: z.union([
+      z.string(),
+      z.array(z.union([
+        z.lazy(() => TwoText$outboundSchema),
+        z.lazy(() => OutputText$outboundSchema),
+        z.lazy(() => ReasoningText$outboundSchema),
+        z.lazy(() => TwoImage$outboundSchema),
+        z.lazy(() => TwoFile$outboundSchema),
+      ])),
+      z.array(z.union([
+        z.lazy(() => ThreeText$outboundSchema),
+        z.lazy(() => ThreeImage$outboundSchema),
+        z.lazy(() => EncryptedContent$outboundSchema),
+      ])),
+    ]).optional(),
+    id: z.string().optional(),
+    recipient: z.string().optional(),
+    role: InputRole$outboundSchema.optional(),
+    type: InputType$outboundSchema.optional(),
+  })
+);
 
 export function input2ToJSON(input2: Input2): string {
   return JSON.stringify(Input2$outboundSchema.parse(input2));
@@ -1417,7 +1710,9 @@ export const CompactResponseInput$outboundSchema: z.ZodType<
   CompactResponseInput$Outbound,
   z.ZodTypeDef,
   CompactResponseInput
-> = z.union([z.string(), z.array(z.lazy(() => Input2$outboundSchema))]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.array(z.lazy(() => Input2$outboundSchema))])
+);
 
 export function compactResponseInputToJSON(
   compactResponseInput: CompactResponseInput,
@@ -1441,19 +1736,21 @@ export const CompactResponseRequestBody$outboundSchema: z.ZodType<
   CompactResponseRequestBody$Outbound,
   z.ZodTypeDef,
   CompactResponseRequestBody
-> = z.object({
-  input: z.union([z.string(), z.array(z.lazy(() => Input2$outboundSchema))])
-    .optional(),
-  instructions: z.string().optional(),
-  model: z.string().optional(),
-  previousResponseId: z.string().optional(),
-  promptCacheKey: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    previousResponseId: "previous_response_id",
-    promptCacheKey: "prompt_cache_key",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    input: z.union([z.string(), z.array(z.lazy(() => Input2$outboundSchema))])
+      .optional(),
+    instructions: z.string().optional(),
+    model: z.string().optional(),
+    previousResponseId: z.string().optional(),
+    promptCacheKey: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      previousResponseId: "previous_response_id",
+      promptCacheKey: "prompt_cache_key",
+    });
+  })
+);
 
 export function compactResponseRequestBodyToJSON(
   compactResponseRequestBody: CompactResponseRequestBody,
@@ -1466,24 +1763,26 @@ export function compactResponseRequestBodyToJSON(
 /** @internal */
 export const CompactResponseObject$inboundSchema: z.ZodNativeEnum<
   typeof CompactResponseObject
-> = z.nativeEnum(CompactResponseObject);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(CompactResponseObject));
 
 /** @internal */
 export const CompactResponseResponseBody$inboundSchema: z.ZodType<
   CompactResponseResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  created_at: z.number().int(),
-  id: z.string(),
-  object: CompactResponseObject$inboundSchema,
-  output: z.nullable(z.array(z.any())),
-  usage: components.PublicUsage$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "created_at": "createdAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    created_at: z.number().int(),
+    id: z.string(),
+    object: CompactResponseObject$inboundSchema,
+    output: z.nullable(z.array(z.any())),
+    usage: components.PublicUsage$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "created_at": "createdAt",
+    });
+  })
+);
 
 export function compactResponseResponseBodyFromJSON(
   jsonString: string,

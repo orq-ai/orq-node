@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -29,16 +29,18 @@ export type McpIcon = {
 
 /** @internal */
 export const McpIcon$inboundSchema: z.ZodType<McpIcon, z.ZodTypeDef, unknown> =
-  z.object({
-    src: z.string().optional(),
-    mime_type: z.string().optional(),
-    sizes: z.array(z.string()).optional(),
-    theme: z.string().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "mime_type": "mimeType",
-    });
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      src: z.string().optional(),
+      mime_type: z.string().optional(),
+      sizes: z.array(z.string()).optional(),
+      theme: z.string().optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "mime_type": "mimeType",
+      });
+    })
+  );
 /** @internal */
 export type McpIcon$Outbound = {
   src?: string | undefined;
@@ -52,16 +54,18 @@ export const McpIcon$outboundSchema: z.ZodType<
   McpIcon$Outbound,
   z.ZodTypeDef,
   McpIcon
-> = z.object({
-  src: z.string().optional(),
-  mimeType: z.string().optional(),
-  sizes: z.array(z.string()).optional(),
-  theme: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    mimeType: "mime_type",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    src: z.string().optional(),
+    mimeType: z.string().optional(),
+    sizes: z.array(z.string()).optional(),
+    theme: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      mimeType: "mime_type",
+    });
+  })
+);
 
 export function mcpIconToJSON(mcpIcon: McpIcon): string {
   return JSON.stringify(McpIcon$outboundSchema.parse(mcpIcon));

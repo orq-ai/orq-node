@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -80,7 +80,7 @@ export type MonitorWidget = {
 /** @internal */
 export const MonitorWidgetType$inboundSchema: z.ZodNativeEnum<
   typeof MonitorWidgetType
-> = z.nativeEnum(MonitorWidgetType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(MonitorWidgetType));
 /** @internal */
 export const MonitorWidgetType$outboundSchema: z.ZodNativeEnum<
   typeof MonitorWidgetType
@@ -91,18 +91,20 @@ export const MonitorWidget$inboundSchema: z.ZodType<
   MonitorWidget,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  widget_id: z.string(),
-  type: MonitorWidgetType$inboundSchema,
-  title: z.string(),
-  queries: z.array(MonitorWidgetQuery$inboundSchema),
-  display: z.nullable(MonitorWidgetDisplay$inboundSchema).optional(),
-  layout: MonitorWidgetLayout$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "widget_id": "widgetId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    widget_id: z.string(),
+    type: MonitorWidgetType$inboundSchema,
+    title: z.string(),
+    queries: z.array(MonitorWidgetQuery$inboundSchema),
+    display: z.nullable(MonitorWidgetDisplay$inboundSchema).optional(),
+    layout: MonitorWidgetLayout$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "widget_id": "widgetId",
+    });
+  })
+);
 /** @internal */
 export type MonitorWidget$Outbound = {
   widget_id: string;
@@ -118,18 +120,20 @@ export const MonitorWidget$outboundSchema: z.ZodType<
   MonitorWidget$Outbound,
   z.ZodTypeDef,
   MonitorWidget
-> = z.object({
-  widgetId: z.string(),
-  type: MonitorWidgetType$outboundSchema,
-  title: z.string(),
-  queries: z.array(MonitorWidgetQuery$outboundSchema),
-  display: z.nullable(MonitorWidgetDisplay$outboundSchema).optional(),
-  layout: MonitorWidgetLayout$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    widgetId: "widget_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    widgetId: z.string(),
+    type: MonitorWidgetType$outboundSchema,
+    title: z.string(),
+    queries: z.array(MonitorWidgetQuery$outboundSchema),
+    display: z.nullable(MonitorWidgetDisplay$outboundSchema).optional(),
+    layout: MonitorWidgetLayout$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      widgetId: "widget_id",
+    });
+  })
+);
 
 export function monitorWidgetToJSON(monitorWidget: MonitorWidget): string {
   return JSON.stringify(MonitorWidget$outboundSchema.parse(monitorWidget));

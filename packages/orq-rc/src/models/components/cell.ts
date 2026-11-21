@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { ArtifactRefs, ArtifactRefs$inboundSchema } from "./artifactrefs.js";
@@ -75,34 +75,36 @@ export type Cell = {
 };
 
 /** @internal */
-export const Cell$inboundSchema: z.ZodType<Cell, z.ZodTypeDef, unknown> = z
-  .object({
-    cell_id: z.string().optional(),
-    row_id: z.string().optional(),
-    column_id: z.string().optional(),
-    status: CellStatus$inboundSchema.optional(),
-    value: z.nullable(z.record(z.any())).optional(),
-    artifacts: z.nullable(ArtifactRefs$inboundSchema).optional(),
-    error_message: z.string().optional(),
-    type: CellType$inboundSchema.optional(),
-    task_column_id: z.string().optional(),
-    created_at: z.nullable(
-      z.string().datetime({ offset: true }).transform(v => new Date(v)),
-    ).optional(),
-    updated_at: z.nullable(
-      z.string().datetime({ offset: true }).transform(v => new Date(v)),
-    ).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "cell_id": "cellId",
-      "row_id": "rowId",
-      "column_id": "columnId",
-      "error_message": "errorMessage",
-      "task_column_id": "taskColumnId",
-      "created_at": "createdAt",
-      "updated_at": "updatedAt",
-    });
-  });
+export const Cell$inboundSchema: z.ZodType<Cell, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      cell_id: z.string().optional(),
+      row_id: z.string().optional(),
+      column_id: z.string().optional(),
+      status: CellStatus$inboundSchema.optional(),
+      value: z.nullable(z.record(z.any())).optional(),
+      artifacts: z.nullable(ArtifactRefs$inboundSchema).optional(),
+      error_message: z.string().optional(),
+      type: CellType$inboundSchema.optional(),
+      task_column_id: z.string().optional(),
+      created_at: z.nullable(
+        z.string().datetime({ offset: true }).transform(v => new Date(v)),
+      ).optional(),
+      updated_at: z.nullable(
+        z.string().datetime({ offset: true }).transform(v => new Date(v)),
+      ).optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "cell_id": "cellId",
+        "row_id": "rowId",
+        "column_id": "columnId",
+        "error_message": "errorMessage",
+        "task_column_id": "taskColumnId",
+        "created_at": "createdAt",
+        "updated_at": "updatedAt",
+      });
+    })
+  );
 
 export function cellFromJSON(
   jsonString: string,

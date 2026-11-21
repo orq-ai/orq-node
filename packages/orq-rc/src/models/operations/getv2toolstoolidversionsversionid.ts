@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -42,15 +42,17 @@ export const GetV2ToolsToolIdVersionsVersionIdRequest$outboundSchema: z.ZodType<
   GetV2ToolsToolIdVersionsVersionIdRequest$Outbound,
   z.ZodTypeDef,
   GetV2ToolsToolIdVersionsVersionIdRequest
-> = z.object({
-  toolId: z.string(),
-  versionId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    toolId: "tool_id",
-    versionId: "version_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    toolId: z.string(),
+    versionId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      toolId: "tool_id",
+      versionId: "version_id",
+    });
+  })
+);
 
 export function getV2ToolsToolIdVersionsVersionIdRequestToJSON(
   getV2ToolsToolIdVersionsVersionIdRequest:
@@ -69,29 +71,31 @@ export const GetV2ToolsToolIdVersionsVersionIdResponseBody$inboundSchema:
     GetV2ToolsToolIdVersionsVersionIdResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    _id: z.string(),
-    created_at: z.string(),
-    updated_at: z.string(),
-    created_by_id: z.string().optional(),
-    updated_by_id: z.string().optional(),
-    version: z.string(),
-    description: z.string().optional(),
-    checksum: z.string(),
-    entityType: z.string(),
-    entityId: z.string(),
-    data: z.record(z.any()),
-    workspace_id: z.string(),
-  }).transform((v) => {
-    return remap$(v, {
-      "_id": "id",
-      "created_at": "createdAt",
-      "updated_at": "updatedAt",
-      "created_by_id": "createdById",
-      "updated_by_id": "updatedById",
-      "workspace_id": "workspaceId",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      _id: z.string(),
+      created_at: z.string(),
+      updated_at: z.string(),
+      created_by_id: z.string().optional(),
+      updated_by_id: z.string().optional(),
+      version: z.string(),
+      description: z.string().optional(),
+      checksum: z.string(),
+      entityType: z.string(),
+      entityId: z.string(),
+      data: z.record(z.any()),
+      workspace_id: z.string(),
+    }).transform((v) => {
+      return remap$(v, {
+        "_id": "id",
+        "created_at": "createdAt",
+        "updated_at": "updatedAt",
+        "created_by_id": "createdById",
+        "updated_by_id": "updatedById",
+        "workspace_id": "workspaceId",
+      });
+    })
+  );
 
 export function getV2ToolsToolIdVersionsVersionIdResponseBodyFromJSON(
   jsonString: string,

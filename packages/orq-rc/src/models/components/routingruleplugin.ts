@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -58,24 +58,26 @@ export const RoutingRulePlugin$inboundSchema: z.ZodType<
   RoutingRulePlugin,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  language: z.string().optional(),
-  entities: z.array(z.string()).optional(),
-  on_failure: z.string().optional(),
-  threshold: z.number().optional(),
-  mask: z.array(z.string()).optional(),
-  regions: z.array(z.string()).optional(),
-  entity_thresholds: z.record(z.number()).optional(),
-  models_config: RoutingRuleModelsConfig$inboundSchema.optional(),
-  checks: z.record(SignalsCheck$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "on_failure": "onFailure",
-    "entity_thresholds": "entityThresholds",
-    "models_config": "modelsConfig",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    language: z.string().optional(),
+    entities: z.array(z.string()).optional(),
+    on_failure: z.string().optional(),
+    threshold: z.number().optional(),
+    mask: z.array(z.string()).optional(),
+    regions: z.array(z.string()).optional(),
+    entity_thresholds: z.record(z.number()).optional(),
+    models_config: RoutingRuleModelsConfig$inboundSchema.optional(),
+    checks: z.record(SignalsCheck$inboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "on_failure": "onFailure",
+      "entity_thresholds": "entityThresholds",
+      "models_config": "modelsConfig",
+    });
+  })
+);
 /** @internal */
 export type RoutingRulePlugin$Outbound = {
   id?: string | undefined;
@@ -95,24 +97,26 @@ export const RoutingRulePlugin$outboundSchema: z.ZodType<
   RoutingRulePlugin$Outbound,
   z.ZodTypeDef,
   RoutingRulePlugin
-> = z.object({
-  id: z.string().optional(),
-  language: z.string().optional(),
-  entities: z.array(z.string()).optional(),
-  onFailure: z.string().optional(),
-  threshold: z.number().optional(),
-  mask: z.array(z.string()).optional(),
-  regions: z.array(z.string()).optional(),
-  entityThresholds: z.record(z.number()).optional(),
-  modelsConfig: RoutingRuleModelsConfig$outboundSchema.optional(),
-  checks: z.record(SignalsCheck$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    onFailure: "on_failure",
-    entityThresholds: "entity_thresholds",
-    modelsConfig: "models_config",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    language: z.string().optional(),
+    entities: z.array(z.string()).optional(),
+    onFailure: z.string().optional(),
+    threshold: z.number().optional(),
+    mask: z.array(z.string()).optional(),
+    regions: z.array(z.string()).optional(),
+    entityThresholds: z.record(z.number()).optional(),
+    modelsConfig: RoutingRuleModelsConfig$outboundSchema.optional(),
+    checks: z.record(SignalsCheck$outboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      onFailure: "on_failure",
+      entityThresholds: "entity_thresholds",
+      modelsConfig: "models_config",
+    });
+  })
+);
 
 export function routingRulePluginToJSON(
   routingRulePlugin: RoutingRulePlugin,

@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type SkillDeleteRequest = {
   /**
@@ -22,13 +23,15 @@ export const SkillDeleteRequest$outboundSchema: z.ZodType<
   SkillDeleteRequest$Outbound,
   z.ZodTypeDef,
   SkillDeleteRequest
-> = z.object({
-  skillId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    skillId: "skill_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    skillId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      skillId: "skill_id",
+    });
+  })
+);
 
 export function skillDeleteRequestToJSON(
   skillDeleteRequest: SkillDeleteRequest,

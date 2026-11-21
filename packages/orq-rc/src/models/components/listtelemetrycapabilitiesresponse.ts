@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -20,9 +20,11 @@ export const ListTelemetryCapabilitiesResponse$inboundSchema: z.ZodType<
   ListTelemetryCapabilitiesResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  sources: z.array(TelemetrySourceCapability$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    sources: z.array(TelemetrySourceCapability$inboundSchema).optional(),
+  })
+);
 
 export function listTelemetryCapabilitiesResponseFromJSON(
   jsonString: string,

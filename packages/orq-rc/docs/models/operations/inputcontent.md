@@ -16,7 +16,8 @@ const value: string = "<value>";
 ```typescript
 const value: operations.CompactResponseContent2[] = [
   {
-    type: "input_image",
+    text: "<value>",
+    type: "reasoning_text",
   },
 ];
 ```

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -63,23 +63,26 @@ export type AgentMessageCreatedStreamingEvent = {
 
 /** @internal */
 export const AgentMessageCreatedStreamingEventRole$inboundSchema:
-  z.ZodNativeEnum<typeof AgentMessageCreatedStreamingEventRole> = z.nativeEnum(
-    AgentMessageCreatedStreamingEventRole,
-  );
+  z.ZodNativeEnum<typeof AgentMessageCreatedStreamingEventRole> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(AgentMessageCreatedStreamingEventRole)
+    );
 
 /** @internal */
 export const AgentMessageCreatedStreamingEventParts$inboundSchema: z.ZodType<
   AgentMessageCreatedStreamingEventParts,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  TextPart$inboundSchema,
-  ErrorPart$inboundSchema,
-  DataPart$inboundSchema,
-  FilePart$inboundSchema,
-  ToolCallPart$inboundSchema,
-  ToolResultPart$inboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    TextPart$inboundSchema,
+    ErrorPart$inboundSchema,
+    DataPart$inboundSchema,
+    FilePart$inboundSchema,
+    ToolCallPart$inboundSchema,
+    ToolResultPart$inboundSchema,
+  ])
+);
 
 export function agentMessageCreatedStreamingEventPartsFromJSON(
   jsonString: string,
@@ -94,21 +97,23 @@ export function agentMessageCreatedStreamingEventPartsFromJSON(
 
 /** @internal */
 export const Message$inboundSchema: z.ZodType<Message, z.ZodTypeDef, unknown> =
-  z.object({
-    messageId: z.string().optional(),
-    role: AgentMessageCreatedStreamingEventRole$inboundSchema,
-    parts: z.array(
-      z.union([
-        TextPart$inboundSchema,
-        ErrorPart$inboundSchema,
-        DataPart$inboundSchema,
-        FilePart$inboundSchema,
-        ToolCallPart$inboundSchema,
-        ToolResultPart$inboundSchema,
-      ]),
-    ),
-    metadata: z.record(z.any()).optional(),
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      messageId: z.string().optional(),
+      role: AgentMessageCreatedStreamingEventRole$inboundSchema,
+      parts: z.array(
+        z.union([
+          TextPart$inboundSchema,
+          ErrorPart$inboundSchema,
+          DataPart$inboundSchema,
+          FilePart$inboundSchema,
+          ToolCallPart$inboundSchema,
+          ToolResultPart$inboundSchema,
+        ]),
+      ),
+      metadata: z.record(z.any()).optional(),
+    })
+  );
 
 export function messageFromJSON(
   jsonString: string,
@@ -125,12 +130,14 @@ export const AgentMessageCreatedStreamingEventData$inboundSchema: z.ZodType<
   AgentMessageCreatedStreamingEventData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  workflowRunId: z.string(),
-  spanId: z.string(),
-  parentId: z.string(),
-  message: z.array(z.lazy(() => Message$inboundSchema)),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    workflowRunId: z.string(),
+    spanId: z.string(),
+    parentId: z.string(),
+    message: z.array(z.lazy(() => Message$inboundSchema)),
+  })
+);
 
 export function agentMessageCreatedStreamingEventDataFromJSON(
   jsonString: string,
@@ -148,11 +155,13 @@ export const AgentMessageCreatedStreamingEvent$inboundSchema: z.ZodType<
   AgentMessageCreatedStreamingEvent,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("event.agents.message-created"),
-  timestamp: z.string(),
-  data: z.lazy(() => AgentMessageCreatedStreamingEventData$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("event.agents.message-created"),
+    timestamp: z.string(),
+    data: z.lazy(() => AgentMessageCreatedStreamingEventData$inboundSchema),
+  })
+);
 
 export function agentMessageCreatedStreamingEventFromJSON(
   jsonString: string,

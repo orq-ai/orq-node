@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -85,25 +85,27 @@ export type Filter = {
 };
 
 /** @internal */
-export const Field$inboundSchema: z.ZodNativeEnum<typeof Field> = z.nativeEnum(
-  Field,
-);
+export const Field$inboundSchema: z.ZodNativeEnum<typeof Field> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Field));
 /** @internal */
 export const Field$outboundSchema: z.ZodNativeEnum<typeof Field> =
   Field$inboundSchema;
 
 /** @internal */
-export const Op$inboundSchema: z.ZodNativeEnum<typeof Op> = z.nativeEnum(Op);
+export const Op$inboundSchema: z.ZodNativeEnum<typeof Op> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Op));
 /** @internal */
 export const Op$outboundSchema: z.ZodNativeEnum<typeof Op> = Op$inboundSchema;
 
 /** @internal */
-export const Filter$inboundSchema: z.ZodType<Filter, z.ZodTypeDef, unknown> = z
-  .object({
-    field: Field$inboundSchema.optional(),
-    op: Op$inboundSchema.optional(),
-    values: z.array(z.string()).optional(),
-  });
+export const Filter$inboundSchema: z.ZodType<Filter, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      field: Field$inboundSchema.optional(),
+      op: Op$inboundSchema.optional(),
+      values: z.array(z.string()).optional(),
+    })
+  );
 /** @internal */
 export type Filter$Outbound = {
   field?: string | undefined;
@@ -116,11 +118,13 @@ export const Filter$outboundSchema: z.ZodType<
   Filter$Outbound,
   z.ZodTypeDef,
   Filter
-> = z.object({
-  field: Field$outboundSchema.optional(),
-  op: Op$outboundSchema.optional(),
-  values: z.array(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    field: Field$outboundSchema.optional(),
+    op: Op$outboundSchema.optional(),
+    values: z.array(z.string()).optional(),
+  })
+);
 
 export function filterToJSON(filter: Filter): string {
   return JSON.stringify(Filter$outboundSchema.parse(filter));

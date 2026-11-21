@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import {
   TelemetryDestinationInput,
   TelemetryDestinationInput$Outbound,
@@ -23,9 +24,11 @@ export const CreateTelemetryDestinationRequest$outboundSchema: z.ZodType<
   CreateTelemetryDestinationRequest$Outbound,
   z.ZodTypeDef,
   CreateTelemetryDestinationRequest
-> = z.object({
-  destination: TelemetryDestinationInput$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    destination: TelemetryDestinationInput$outboundSchema.optional(),
+  })
+);
 
 export function createTelemetryDestinationRequestToJSON(
   createTelemetryDestinationRequest: CreateTelemetryDestinationRequest,

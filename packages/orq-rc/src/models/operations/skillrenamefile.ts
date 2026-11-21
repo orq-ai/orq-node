@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import * as components from "../components/index.js";
 
 export type SkillRenameFileRequest = {
@@ -25,15 +26,17 @@ export const SkillRenameFileRequest$outboundSchema: z.ZodType<
   SkillRenameFileRequest$Outbound,
   z.ZodTypeDef,
   SkillRenameFileRequest
-> = z.object({
-  skillId: z.string(),
-  renameSkillFileRequest: components.RenameSkillFileRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    skillId: "skill_id",
-    renameSkillFileRequest: "RenameSkillFileRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    skillId: z.string(),
+    renameSkillFileRequest: components.RenameSkillFileRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      skillId: "skill_id",
+      renameSkillFileRequest: "RenameSkillFileRequest",
+    });
+  })
+);
 
 export function skillRenameFileRequestToJSON(
   skillRenameFileRequest: SkillRenameFileRequest,

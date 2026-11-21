@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -66,30 +66,32 @@ export type ResponseMeta = {
 /** @internal */
 export const EffectiveGrain$inboundSchema: z.ZodNativeEnum<
   typeof EffectiveGrain
-> = z.nativeEnum(EffectiveGrain);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(EffectiveGrain));
 
 /** @internal */
-export const Currency$inboundSchema: z.ZodNativeEnum<typeof Currency> = z
-  .nativeEnum(Currency);
+export const Currency$inboundSchema: z.ZodNativeEnum<typeof Currency> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Currency));
 
 /** @internal */
 export const ResponseMeta$inboundSchema: z.ZodType<
   ResponseMeta,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  effective_grain: EffectiveGrain$inboundSchema.optional(),
-  row_count: z.number().int().optional(),
-  request_id: z.string().optional(),
-  currency: Currency$inboundSchema.optional(),
-  warnings: z.array(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "effective_grain": "effectiveGrain",
-    "row_count": "rowCount",
-    "request_id": "requestId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    effective_grain: EffectiveGrain$inboundSchema.optional(),
+    row_count: z.number().int().optional(),
+    request_id: z.string().optional(),
+    currency: Currency$inboundSchema.optional(),
+    warnings: z.array(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "effective_grain": "effectiveGrain",
+      "row_count": "rowCount",
+      "request_id": "requestId",
+    });
+  })
+);
 
 export function responseMetaFromJSON(
   jsonString: string,

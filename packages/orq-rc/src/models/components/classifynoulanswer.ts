@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -24,11 +24,13 @@ export const ClassifyNoulAnswer$inboundSchema: z.ZodType<
   ClassifyNoulAnswer,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  confidence: z.number().optional(),
-  noul: z.number(),
-  type: z.literal("noul"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    confidence: z.number().optional(),
+    noul: z.number(),
+    type: z.literal("noul"),
+  })
+);
 
 export function classifyNoulAnswerFromJSON(
   jsonString: string,

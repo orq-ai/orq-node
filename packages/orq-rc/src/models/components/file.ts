@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { FilePurpose, FilePurpose$inboundSchema } from "./filepurpose.js";
@@ -34,24 +34,26 @@ export type FileT = {
 };
 
 /** @internal */
-export const FileT$inboundSchema: z.ZodType<FileT, z.ZodTypeDef, unknown> = z
-  .object({
-    file_id: z.string(),
-    purpose: FilePurpose$inboundSchema,
-    file_name: z.string(),
-    bytes: z.string(),
-    created_at: z.string().datetime({ offset: true }).transform(v =>
-      new Date(v)
-    ),
-    project_id: z.string(),
-  }).transform((v) => {
-    return remap$(v, {
-      "file_id": "fileId",
-      "file_name": "fileName",
-      "created_at": "createdAt",
-      "project_id": "projectId",
-    });
-  });
+export const FileT$inboundSchema: z.ZodType<FileT, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      file_id: z.string(),
+      purpose: FilePurpose$inboundSchema,
+      file_name: z.string(),
+      bytes: z.string(),
+      created_at: z.string().datetime({ offset: true }).transform(v =>
+        new Date(v)
+      ),
+      project_id: z.string(),
+    }).transform((v) => {
+      return remap$(v, {
+        "file_id": "fileId",
+        "file_name": "fileName",
+        "created_at": "createdAt",
+        "project_id": "projectId",
+      });
+    })
+  );
 
 export function fileFromJSON(
   jsonString: string,

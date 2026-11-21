@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type ResponseExecutionLimits = {
   /**
@@ -42,21 +43,23 @@ export const ResponseExecutionLimits$outboundSchema: z.ZodType<
   ResponseExecutionLimits$Outbound,
   z.ZodTypeDef,
   ResponseExecutionLimits
-> = z.object({
-  maxCost: z.number().optional(),
-  maxDepth: z.number().int().optional(),
-  maxExecutionTime: z.number().int().optional(),
-  maxIterations: z.number().int().optional(),
-  toolTimeout: z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    maxCost: "max_cost",
-    maxDepth: "max_depth",
-    maxExecutionTime: "max_execution_time",
-    maxIterations: "max_iterations",
-    toolTimeout: "tool_timeout",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    maxCost: z.number().optional(),
+    maxDepth: z.number().int().optional(),
+    maxExecutionTime: z.number().int().optional(),
+    maxIterations: z.number().int().optional(),
+    toolTimeout: z.number().int().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      maxCost: "max_cost",
+      maxDepth: "max_depth",
+      maxExecutionTime: "max_execution_time",
+      maxIterations: "max_iterations",
+      toolTimeout: "tool_timeout",
+    });
+  })
+);
 
 export function responseExecutionLimitsToJSON(
   responseExecutionLimits: ResponseExecutionLimits,

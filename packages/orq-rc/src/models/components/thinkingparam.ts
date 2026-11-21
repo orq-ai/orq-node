@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 
 /**
@@ -72,17 +73,17 @@ export type ThinkingParam = {
 /** @internal */
 export const ThinkingParamDisplay$outboundSchema: z.ZodNativeEnum<
   typeof ThinkingParamDisplay
-> = z.nativeEnum(ThinkingParamDisplay);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ThinkingParamDisplay));
 
 /** @internal */
 export const ThinkingParamThinkingLevel$outboundSchema: z.ZodNativeEnum<
   typeof ThinkingParamThinkingLevel
-> = z.nativeEnum(ThinkingParamThinkingLevel);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ThinkingParamThinkingLevel));
 
 /** @internal */
 export const ThinkingParamType$outboundSchema: z.ZodNativeEnum<
   typeof ThinkingParamType
-> = z.nativeEnum(ThinkingParamType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ThinkingParamType));
 
 /** @internal */
 export type ThinkingParam$Outbound = {
@@ -97,17 +98,19 @@ export const ThinkingParam$outboundSchema: z.ZodType<
   ThinkingParam$Outbound,
   z.ZodTypeDef,
   ThinkingParam
-> = z.object({
-  budgetTokens: z.nullable(z.number().int()),
-  display: ThinkingParamDisplay$outboundSchema.optional(),
-  thinkingLevel: ThinkingParamThinkingLevel$outboundSchema.optional(),
-  type: z.nullable(ThinkingParamType$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    budgetTokens: "budget_tokens",
-    thinkingLevel: "thinking_level",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    budgetTokens: z.nullable(z.number().int()),
+    display: ThinkingParamDisplay$outboundSchema.optional(),
+    thinkingLevel: ThinkingParamThinkingLevel$outboundSchema.optional(),
+    type: z.nullable(ThinkingParamType$outboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      budgetTokens: "budget_tokens",
+      thinkingLevel: "thinking_level",
+    });
+  })
+);
 
 export function thinkingParamToJSON(thinkingParam: ThinkingParam): string {
   return JSON.stringify(ThinkingParam$outboundSchema.parse(thinkingParam));

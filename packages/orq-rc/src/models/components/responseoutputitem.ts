@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -43,14 +43,16 @@ export const ResponseOutputItem$inboundSchema: z.ZodType<
   ResponseOutputItem,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  ResponseOutputFunctionCall$inboundSchema,
-  ResponseOutputMessage$inboundSchema,
-  ResponseOutputOrqToolCall$inboundSchema,
-  ResponseOutputFunctionCallOutput$inboundSchema,
-  ResponseOutputReasoning$inboundSchema,
-  z.record(z.any()),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    ResponseOutputFunctionCall$inboundSchema,
+    ResponseOutputMessage$inboundSchema,
+    ResponseOutputOrqToolCall$inboundSchema,
+    ResponseOutputFunctionCallOutput$inboundSchema,
+    ResponseOutputReasoning$inboundSchema,
+    z.record(z.any()),
+  ])
+);
 
 export function responseOutputItemFromJSON(
   jsonString: string,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
@@ -1608,9 +1608,11 @@ export const GetOnePromptRequest$outboundSchema: z.ZodType<
   GetOnePromptRequest$Outbound,
   z.ZodTypeDef,
   GetOnePromptRequest
-> = z.object({
-  id: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+  })
+);
 
 export function getOnePromptRequestToJSON(
   getOnePromptRequest: GetOnePromptRequest,
@@ -1623,39 +1625,47 @@ export function getOnePromptRequestToJSON(
 /** @internal */
 export const GetOnePromptType$inboundSchema: z.ZodNativeEnum<
   typeof GetOnePromptType
-> = z.nativeEnum(GetOnePromptType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(GetOnePromptType));
 
 /** @internal */
 export const GetOnePromptModelType$inboundSchema: z.ZodNativeEnum<
   typeof GetOnePromptModelType
-> = z.nativeEnum(GetOnePromptModelType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(GetOnePromptModelType));
 
 /** @internal */
 export const GetOnePromptFormat$inboundSchema: z.ZodNativeEnum<
   typeof GetOnePromptFormat
-> = z.nativeEnum(GetOnePromptFormat);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(GetOnePromptFormat));
 
 /** @internal */
 export const GetOnePromptResponseFormat6$inboundSchema: z.ZodNativeEnum<
   typeof GetOnePromptResponseFormat6
-> = z.nativeEnum(GetOnePromptResponseFormat6);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(GetOnePromptResponseFormat6)
+);
 
 /** @internal */
 export const GetOnePromptResponseFormat5$inboundSchema: z.ZodNativeEnum<
   typeof GetOnePromptResponseFormat5
-> = z.nativeEnum(GetOnePromptResponseFormat5);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(GetOnePromptResponseFormat5)
+);
 
 /** @internal */
 export const GetOnePromptResponseFormat4$inboundSchema: z.ZodNativeEnum<
   typeof GetOnePromptResponseFormat4
-> = z.nativeEnum(GetOnePromptResponseFormat4);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(GetOnePromptResponseFormat4)
+);
 
 /** @internal */
 export const GetOnePromptResponseFormatPromptsResponse200ApplicationJSONResponseBodyType$inboundSchema:
   z.ZodNativeEnum<
     typeof GetOnePromptResponseFormatPromptsResponse200ApplicationJSONResponseBodyType
-  > = z.nativeEnum(
-    GetOnePromptResponseFormatPromptsResponse200ApplicationJSONResponseBodyType,
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.nativeEnum(
+      GetOnePromptResponseFormatPromptsResponse200ApplicationJSONResponseBodyType,
+    )
   );
 
 /** @internal */
@@ -1663,10 +1673,12 @@ export const GetOnePromptResponseFormat3$inboundSchema: z.ZodType<
   GetOnePromptResponseFormat3,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type:
-    GetOnePromptResponseFormatPromptsResponse200ApplicationJSONResponseBodyType$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type:
+      GetOnePromptResponseFormatPromptsResponse200ApplicationJSONResponseBodyType$inboundSchema,
+  })
+);
 
 export function getOnePromptResponseFormat3FromJSON(
   jsonString: string,
@@ -1682,8 +1694,10 @@ export function getOnePromptResponseFormat3FromJSON(
 export const GetOnePromptResponseFormatPromptsResponse200ApplicationJSONType$inboundSchema:
   z.ZodNativeEnum<
     typeof GetOnePromptResponseFormatPromptsResponse200ApplicationJSONType
-  > = z.nativeEnum(
-    GetOnePromptResponseFormatPromptsResponse200ApplicationJSONType,
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.nativeEnum(
+      GetOnePromptResponseFormatPromptsResponse200ApplicationJSONType,
+    )
   );
 
 /** @internal */
@@ -1691,10 +1705,12 @@ export const GetOnePromptResponseFormat2$inboundSchema: z.ZodType<
   GetOnePromptResponseFormat2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type:
-    GetOnePromptResponseFormatPromptsResponse200ApplicationJSONType$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type:
+      GetOnePromptResponseFormatPromptsResponse200ApplicationJSONType$inboundSchema,
+  })
+);
 
 export function getOnePromptResponseFormat2FromJSON(
   jsonString: string,
@@ -1708,8 +1724,10 @@ export function getOnePromptResponseFormat2FromJSON(
 
 /** @internal */
 export const GetOnePromptResponseFormatPromptsResponse200Type$inboundSchema:
-  z.ZodNativeEnum<typeof GetOnePromptResponseFormatPromptsResponse200Type> = z
-    .nativeEnum(GetOnePromptResponseFormatPromptsResponse200Type);
+  z.ZodNativeEnum<typeof GetOnePromptResponseFormatPromptsResponse200Type> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(GetOnePromptResponseFormatPromptsResponse200Type)
+    );
 
 /** @internal */
 export const GetOnePromptResponseFormatPromptsResponseJsonSchema$inboundSchema:
@@ -1717,12 +1735,14 @@ export const GetOnePromptResponseFormatPromptsResponseJsonSchema$inboundSchema:
     GetOnePromptResponseFormatPromptsResponseJsonSchema,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    name: z.string(),
-    description: z.nullable(z.string()).optional(),
-    strict: z.boolean().optional(),
-    schema: z.record(z.any()),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      name: z.string(),
+      description: z.nullable(z.string()).optional(),
+      strict: z.boolean().optional(),
+      schema: z.record(z.any()),
+    })
+  );
 
 export function getOnePromptResponseFormatPromptsResponseJsonSchemaFromJSON(
   jsonString: string,
@@ -1745,18 +1765,20 @@ export const GetOnePromptResponseFormat1$inboundSchema: z.ZodType<
   GetOnePromptResponseFormat1,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: GetOnePromptResponseFormatPromptsResponse200Type$inboundSchema,
-  display_name: z.string().optional(),
-  json_schema: z.lazy(() =>
-    GetOnePromptResponseFormatPromptsResponseJsonSchema$inboundSchema
-  ),
-}).transform((v) => {
-  return remap$(v, {
-    "display_name": "displayName",
-    "json_schema": "jsonSchema",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: GetOnePromptResponseFormatPromptsResponse200Type$inboundSchema,
+    display_name: z.string().optional(),
+    json_schema: z.lazy(() =>
+      GetOnePromptResponseFormatPromptsResponseJsonSchema$inboundSchema
+    ),
+  }).transform((v) => {
+    return remap$(v, {
+      "display_name": "displayName",
+      "json_schema": "jsonSchema",
+    });
+  })
+);
 
 export function getOnePromptResponseFormat1FromJSON(
   jsonString: string,
@@ -1773,14 +1795,16 @@ export const GetOnePromptPromptsResponseFormat$inboundSchema: z.ZodType<
   GetOnePromptPromptsResponseFormat,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  z.lazy(() => GetOnePromptResponseFormat1$inboundSchema),
-  z.lazy(() => GetOnePromptResponseFormat2$inboundSchema),
-  z.lazy(() => GetOnePromptResponseFormat3$inboundSchema),
-  GetOnePromptResponseFormat4$inboundSchema,
-  GetOnePromptResponseFormat5$inboundSchema,
-  GetOnePromptResponseFormat6$inboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => GetOnePromptResponseFormat1$inboundSchema),
+    z.lazy(() => GetOnePromptResponseFormat2$inboundSchema),
+    z.lazy(() => GetOnePromptResponseFormat3$inboundSchema),
+    GetOnePromptResponseFormat4$inboundSchema,
+    GetOnePromptResponseFormat5$inboundSchema,
+    GetOnePromptResponseFormat6$inboundSchema,
+  ])
+);
 
 export function getOnePromptPromptsResponseFormatFromJSON(
   jsonString: string,
@@ -1795,22 +1819,26 @@ export function getOnePromptPromptsResponseFormatFromJSON(
 /** @internal */
 export const GetOnePromptPromptsResponse200Type$inboundSchema: z.ZodNativeEnum<
   typeof GetOnePromptPromptsResponse200Type
-> = z.nativeEnum(GetOnePromptPromptsResponse200Type);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(GetOnePromptPromptsResponse200Type)
+);
 
 /** @internal */
 export const GetOnePromptPromptsTtl$inboundSchema: z.ZodNativeEnum<
   typeof GetOnePromptPromptsTtl
-> = z.nativeEnum(GetOnePromptPromptsTtl);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(GetOnePromptPromptsTtl));
 
 /** @internal */
 export const GetOnePromptPromptsCacheControl$inboundSchema: z.ZodType<
   GetOnePromptPromptsCacheControl,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: GetOnePromptPromptsResponse200Type$inboundSchema,
-  ttl: GetOnePromptPromptsTtl$inboundSchema.default("5m"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: GetOnePromptPromptsResponse200Type$inboundSchema,
+    ttl: GetOnePromptPromptsTtl$inboundSchema.default("5m"),
+  })
+);
 
 export function getOnePromptPromptsCacheControlFromJSON(
   jsonString: string,
@@ -1825,70 +1853,75 @@ export function getOnePromptPromptsCacheControlFromJSON(
 /** @internal */
 export const GetOnePromptPhotoRealVersion$inboundSchema: z.ZodNativeEnum<
   typeof GetOnePromptPhotoRealVersion
-> = z.nativeEnum(GetOnePromptPhotoRealVersion);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(GetOnePromptPhotoRealVersion)
+);
 
 /** @internal */
 export const GetOnePromptEncodingFormat$inboundSchema: z.ZodNativeEnum<
   typeof GetOnePromptEncodingFormat
-> = z.nativeEnum(GetOnePromptEncodingFormat);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(GetOnePromptEncodingFormat));
 
 /** @internal */
 export const GetOnePromptPromptsReasoningEffort$inboundSchema: z.ZodNativeEnum<
   typeof GetOnePromptPromptsReasoningEffort
-> = z.nativeEnum(GetOnePromptPromptsReasoningEffort);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(GetOnePromptPromptsReasoningEffort)
+);
 
 /** @internal */
 export const GetOnePromptVerbosity$inboundSchema: z.ZodNativeEnum<
   typeof GetOnePromptVerbosity
-> = z.nativeEnum(GetOnePromptVerbosity);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(GetOnePromptVerbosity));
 
 /** @internal */
 export const GetOnePromptThinkingLevel$inboundSchema: z.ZodNativeEnum<
   typeof GetOnePromptThinkingLevel
-> = z.nativeEnum(GetOnePromptThinkingLevel);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(GetOnePromptThinkingLevel));
 
 /** @internal */
 export const GetOnePromptModelParameters$inboundSchema: z.ZodType<
   GetOnePromptModelParameters,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  temperature: z.number().optional(),
-  maxTokens: z.number().optional(),
-  topK: z.number().optional(),
-  topP: z.number().optional(),
-  frequencyPenalty: z.number().optional(),
-  presencePenalty: z.number().optional(),
-  numImages: z.number().optional(),
-  seed: z.number().optional(),
-  format: GetOnePromptFormat$inboundSchema.optional(),
-  dimensions: z.string().optional(),
-  quality: z.string().optional(),
-  style: z.string().optional(),
-  responseFormat: z.nullable(
-    z.union([
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    temperature: z.number().optional(),
+    maxTokens: z.number().optional(),
+    topK: z.number().optional(),
+    topP: z.number().optional(),
+    frequencyPenalty: z.number().optional(),
+    presencePenalty: z.number().optional(),
+    numImages: z.number().optional(),
+    seed: z.number().optional(),
+    format: GetOnePromptFormat$inboundSchema.optional(),
+    dimensions: z.string().optional(),
+    quality: z.string().optional(),
+    style: z.string().optional(),
+    responseFormat: z.nullable(z.union([
       z.lazy(() => GetOnePromptResponseFormat1$inboundSchema),
       z.lazy(() => GetOnePromptResponseFormat2$inboundSchema),
       z.lazy(() => GetOnePromptResponseFormat3$inboundSchema),
       GetOnePromptResponseFormat4$inboundSchema,
       GetOnePromptResponseFormat5$inboundSchema,
       GetOnePromptResponseFormat6$inboundSchema,
-    ]),
-  ).optional(),
-  cacheControl: z.nullable(
-    z.lazy(() => GetOnePromptPromptsCacheControl$inboundSchema),
-  ).optional(),
-  photoRealVersion: GetOnePromptPhotoRealVersion$inboundSchema.optional(),
-  encoding_format: GetOnePromptEncodingFormat$inboundSchema.optional(),
-  reasoningEffort: GetOnePromptPromptsReasoningEffort$inboundSchema.optional(),
-  budgetTokens: z.number().optional(),
-  verbosity: GetOnePromptVerbosity$inboundSchema.optional(),
-  thinkingLevel: GetOnePromptThinkingLevel$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "encoding_format": "encodingFormat",
-  });
-});
+    ])).optional(),
+    cacheControl: z.nullable(z.lazy(() =>
+      GetOnePromptPromptsCacheControl$inboundSchema
+    )).optional(),
+    photoRealVersion: GetOnePromptPhotoRealVersion$inboundSchema.optional(),
+    encoding_format: GetOnePromptEncodingFormat$inboundSchema.optional(),
+    reasoningEffort: GetOnePromptPromptsReasoningEffort$inboundSchema
+      .optional(),
+    budgetTokens: z.number().optional(),
+    verbosity: GetOnePromptVerbosity$inboundSchema.optional(),
+    thinkingLevel: GetOnePromptThinkingLevel$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "encoding_format": "encodingFormat",
+    });
+  })
+);
 
 export function getOnePromptModelParametersFromJSON(
   jsonString: string,
@@ -1903,28 +1936,30 @@ export function getOnePromptModelParametersFromJSON(
 /** @internal */
 export const GetOnePromptProvider$inboundSchema: z.ZodNativeEnum<
   typeof GetOnePromptProvider
-> = z.nativeEnum(GetOnePromptProvider);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(GetOnePromptProvider));
 
 /** @internal */
 export const GetOnePromptRole$inboundSchema: z.ZodNativeEnum<
   typeof GetOnePromptRole
-> = z.nativeEnum(GetOnePromptRole);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(GetOnePromptRole));
 
 /** @internal */
 export const GetOnePrompt2File$inboundSchema: z.ZodType<
   GetOnePrompt2File,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  file_data: z.string().optional(),
-  uri: z.string().optional(),
-  mimeType: z.string().optional(),
-  filename: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "file_data": "fileData",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    file_data: z.string().optional(),
+    uri: z.string().optional(),
+    mimeType: z.string().optional(),
+    filename: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "file_data": "fileData",
+    });
+  })
+);
 
 export function getOnePrompt2FileFromJSON(
   jsonString: string,
@@ -1941,10 +1976,12 @@ export const GetOnePrompt23$inboundSchema: z.ZodType<
   GetOnePrompt23,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("file"),
-  file: z.lazy(() => GetOnePrompt2File$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("file"),
+    file: z.lazy(() => GetOnePrompt2File$inboundSchema),
+  })
+);
 
 export function getOnePrompt23FromJSON(
   jsonString: string,
@@ -1961,11 +1998,13 @@ export const GetOnePrompt2ImageUrl$inboundSchema: z.ZodType<
   GetOnePrompt2ImageUrl,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  url: z.string(),
-  detail: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    url: z.string(),
+    detail: z.string().optional(),
+  })
+);
 
 export function getOnePrompt2ImageUrlFromJSON(
   jsonString: string,
@@ -1982,14 +2021,16 @@ export const GetOnePrompt22$inboundSchema: z.ZodType<
   GetOnePrompt22,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("image_url"),
-  image_url: z.lazy(() => GetOnePrompt2ImageUrl$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "image_url": "imageUrl",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("image_url"),
+    image_url: z.lazy(() => GetOnePrompt2ImageUrl$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "image_url": "imageUrl",
+    });
+  })
+);
 
 export function getOnePrompt22FromJSON(
   jsonString: string,
@@ -2006,10 +2047,12 @@ export const GetOnePrompt21$inboundSchema: z.ZodType<
   GetOnePrompt21,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("text"),
-  text: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("text"),
+    text: z.string(),
+  })
+);
 
 export function getOnePrompt21FromJSON(
   jsonString: string,
@@ -2026,11 +2069,13 @@ export const GetOnePromptContent2$inboundSchema: z.ZodType<
   GetOnePromptContent2,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  z.lazy(() => GetOnePrompt21$inboundSchema),
-  z.lazy(() => GetOnePrompt22$inboundSchema),
-  z.lazy(() => GetOnePrompt23$inboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => GetOnePrompt21$inboundSchema),
+    z.lazy(() => GetOnePrompt22$inboundSchema),
+    z.lazy(() => GetOnePrompt23$inboundSchema),
+  ])
+);
 
 export function getOnePromptContent2FromJSON(
   jsonString: string,
@@ -2047,14 +2092,16 @@ export const GetOnePromptContent$inboundSchema: z.ZodType<
   GetOnePromptContent,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  z.string(),
-  z.array(z.union([
-    z.lazy(() => GetOnePrompt21$inboundSchema),
-    z.lazy(() => GetOnePrompt22$inboundSchema),
-    z.lazy(() => GetOnePrompt23$inboundSchema),
-  ])),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.string(),
+    z.array(z.union([
+      z.lazy(() => GetOnePrompt21$inboundSchema),
+      z.lazy(() => GetOnePrompt22$inboundSchema),
+      z.lazy(() => GetOnePrompt23$inboundSchema),
+    ])),
+  ])
+);
 
 export function getOnePromptContentFromJSON(
   jsonString: string,
@@ -2068,18 +2115,22 @@ export function getOnePromptContentFromJSON(
 
 /** @internal */
 export const GetOnePromptPromptsResponse200ApplicationJSONType$inboundSchema:
-  z.ZodNativeEnum<typeof GetOnePromptPromptsResponse200ApplicationJSONType> = z
-    .nativeEnum(GetOnePromptPromptsResponse200ApplicationJSONType);
+  z.ZodNativeEnum<typeof GetOnePromptPromptsResponse200ApplicationJSONType> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(GetOnePromptPromptsResponse200ApplicationJSONType)
+    );
 
 /** @internal */
 export const GetOnePromptFunction$inboundSchema: z.ZodType<
   GetOnePromptFunction,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string(),
-  arguments: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+    arguments: z.string(),
+  })
+);
 
 export function getOnePromptFunctionFromJSON(
   jsonString: string,
@@ -2096,12 +2147,14 @@ export const GetOnePromptToolCalls$inboundSchema: z.ZodType<
   GetOnePromptToolCalls,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  index: z.number().optional(),
-  type: GetOnePromptPromptsResponse200ApplicationJSONType$inboundSchema,
-  function: z.lazy(() => GetOnePromptFunction$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    index: z.number().optional(),
+    type: GetOnePromptPromptsResponse200ApplicationJSONType$inboundSchema,
+    function: z.lazy(() => GetOnePromptFunction$inboundSchema),
+  })
+);
 
 export function getOnePromptToolCallsFromJSON(
   jsonString: string,
@@ -2118,27 +2171,28 @@ export const GetOnePromptMessages$inboundSchema: z.ZodType<
   GetOnePromptMessages,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  role: GetOnePromptRole$inboundSchema,
-  content: z.nullable(
-    z.union([
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    role: GetOnePromptRole$inboundSchema,
+    content: z.nullable(z.union([
       z.string(),
       z.array(z.union([
         z.lazy(() => GetOnePrompt21$inboundSchema),
         z.lazy(() => GetOnePrompt22$inboundSchema),
         z.lazy(() => GetOnePrompt23$inboundSchema),
       ])),
-    ]),
-  ),
-  tool_calls: z.array(z.lazy(() => GetOnePromptToolCalls$inboundSchema))
-    .optional(),
-  tool_call_id: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "tool_calls": "toolCalls",
-    "tool_call_id": "toolCallId",
-  });
-});
+    ])),
+    tool_calls: z.array(z.lazy(() =>
+      GetOnePromptToolCalls$inboundSchema
+    )).optional(),
+    tool_call_id: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "tool_calls": "toolCalls",
+      "tool_call_id": "toolCallId",
+    });
+  })
+);
 
 export function getOnePromptMessagesFromJSON(
   jsonString: string,
@@ -2155,25 +2209,27 @@ export const GetOnePromptPromptConfig$inboundSchema: z.ZodType<
   GetOnePromptPromptConfig,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  stream: z.boolean().optional(),
-  model: z.nullable(z.string()).optional(),
-  model_db_id: z.nullable(z.string()).optional(),
-  model_type: z.nullable(GetOnePromptModelType$inboundSchema).optional(),
-  model_parameters: z.lazy(() => GetOnePromptModelParameters$inboundSchema)
-    .optional(),
-  provider: z.nullable(GetOnePromptProvider$inboundSchema).optional(),
-  integration_id: z.nullable(z.string()).optional(),
-  version: z.string().optional(),
-  messages: z.array(z.lazy(() => GetOnePromptMessages$inboundSchema)),
-}).transform((v) => {
-  return remap$(v, {
-    "model_db_id": "modelDbId",
-    "model_type": "modelType",
-    "model_parameters": "modelParameters",
-    "integration_id": "integrationId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    stream: z.boolean().optional(),
+    model: z.nullable(z.string()).optional(),
+    model_db_id: z.nullable(z.string()).optional(),
+    model_type: z.nullable(GetOnePromptModelType$inboundSchema).optional(),
+    model_parameters: z.lazy(() => GetOnePromptModelParameters$inboundSchema)
+      .optional(),
+    provider: z.nullable(GetOnePromptProvider$inboundSchema).optional(),
+    integration_id: z.nullable(z.string()).optional(),
+    version: z.string().optional(),
+    messages: z.array(z.lazy(() => GetOnePromptMessages$inboundSchema)),
+  }).transform((v) => {
+    return remap$(v, {
+      "model_db_id": "modelDbId",
+      "model_type": "modelType",
+      "model_parameters": "modelParameters",
+      "integration_id": "integrationId",
+    });
+  })
+);
 
 export function getOnePromptPromptConfigFromJSON(
   jsonString: string,
@@ -2188,22 +2244,24 @@ export function getOnePromptPromptConfigFromJSON(
 /** @internal */
 export const GetOnePromptVoice$inboundSchema: z.ZodNativeEnum<
   typeof GetOnePromptVoice
-> = z.nativeEnum(GetOnePromptVoice);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(GetOnePromptVoice));
 
 /** @internal */
 export const GetOnePromptPromptsFormat$inboundSchema: z.ZodNativeEnum<
   typeof GetOnePromptPromptsFormat
-> = z.nativeEnum(GetOnePromptPromptsFormat);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(GetOnePromptPromptsFormat));
 
 /** @internal */
 export const GetOnePromptAudio$inboundSchema: z.ZodType<
   GetOnePromptAudio,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  voice: GetOnePromptVoice$inboundSchema,
-  format: GetOnePromptPromptsFormat$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    voice: GetOnePromptVoice$inboundSchema,
+    format: GetOnePromptPromptsFormat$inboundSchema,
+  })
+);
 
 export function getOnePromptAudioFromJSON(
   jsonString: string,
@@ -2220,12 +2278,14 @@ export const GetOnePromptResponseFormatJsonSchema$inboundSchema: z.ZodType<
   GetOnePromptResponseFormatJsonSchema,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  description: z.string().optional(),
-  name: z.string(),
-  schema: z.any().optional(),
-  strict: z.boolean().default(false),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    description: z.string().optional(),
+    name: z.string(),
+    schema: z.any().optional(),
+    strict: z.boolean().default(false),
+  })
+);
 
 export function getOnePromptResponseFormatJsonSchemaFromJSON(
   jsonString: string,
@@ -2244,16 +2304,18 @@ export const GetOnePromptResponseFormatPromptsJSONSchema$inboundSchema:
     GetOnePromptResponseFormatPromptsJSONSchema,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    type: z.literal("json_schema"),
-    json_schema: z.lazy(() =>
-      GetOnePromptResponseFormatJsonSchema$inboundSchema
-    ),
-  }).transform((v) => {
-    return remap$(v, {
-      "json_schema": "jsonSchema",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type: z.literal("json_schema"),
+      json_schema: z.lazy(() =>
+        GetOnePromptResponseFormatJsonSchema$inboundSchema
+      ),
+    }).transform((v) => {
+      return remap$(v, {
+        "json_schema": "jsonSchema",
+      });
+    })
+  );
 
 export function getOnePromptResponseFormatPromptsJSONSchemaFromJSON(
   jsonString: string,
@@ -2276,9 +2338,11 @@ export const GetOnePromptResponseFormatJSONObject$inboundSchema: z.ZodType<
   GetOnePromptResponseFormatJSONObject,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("json_object"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("json_object"),
+  })
+);
 
 export function getOnePromptResponseFormatJSONObjectFromJSON(
   jsonString: string,
@@ -2296,9 +2360,11 @@ export const GetOnePromptResponseFormatText$inboundSchema: z.ZodType<
   GetOnePromptResponseFormatText,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("text"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("text"),
+  })
+);
 
 export function getOnePromptResponseFormatTextFromJSON(
   jsonString: string,
@@ -2315,11 +2381,13 @@ export const GetOnePromptResponseFormat$inboundSchema: z.ZodType<
   GetOnePromptResponseFormat,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  z.lazy(() => GetOnePromptResponseFormatText$inboundSchema),
-  z.lazy(() => GetOnePromptResponseFormatJSONObject$inboundSchema),
-  z.lazy(() => GetOnePromptResponseFormatPromptsJSONSchema$inboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => GetOnePromptResponseFormatText$inboundSchema),
+    z.lazy(() => GetOnePromptResponseFormatJSONObject$inboundSchema),
+    z.lazy(() => GetOnePromptResponseFormatPromptsJSONSchema$inboundSchema),
+  ])
+);
 
 export function getOnePromptResponseFormatFromJSON(
   jsonString: string,
@@ -2334,14 +2402,18 @@ export function getOnePromptResponseFormatFromJSON(
 /** @internal */
 export const GetOnePromptReasoningEffort$inboundSchema: z.ZodNativeEnum<
   typeof GetOnePromptReasoningEffort
-> = z.nativeEnum(GetOnePromptReasoningEffort);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(GetOnePromptReasoningEffort)
+);
 
 /** @internal */
 export const GetOnePromptStop$inboundSchema: z.ZodType<
   GetOnePromptStop,
   z.ZodTypeDef,
   unknown
-> = z.union([z.string(), z.array(z.string())]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.array(z.string())])
+);
 
 export function getOnePromptStopFromJSON(
   jsonString: string,
@@ -2358,13 +2430,15 @@ export const GetOnePromptStreamOptions$inboundSchema: z.ZodType<
   GetOnePromptStreamOptions,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  include_usage: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "include_usage": "includeUsage",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    include_usage: z.boolean().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "include_usage": "includeUsage",
+    });
+  })
+);
 
 export function getOnePromptStreamOptionsFromJSON(
   jsonString: string,
@@ -2381,12 +2455,14 @@ export const GetOnePromptThinking$inboundSchema: z.ZodType<
   GetOnePromptThinking,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  components.ThinkingConfigDisabledSchema$inboundSchema,
-  components.ThinkingConfigEnabledSchema$inboundSchema,
-  components.ThinkingConfigAdaptiveSchema$inboundSchema,
-  components.ThinkingConfigBetweenToolsSchema$inboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    components.ThinkingConfigDisabledSchema$inboundSchema,
+    components.ThinkingConfigEnabledSchema$inboundSchema,
+    components.ThinkingConfigAdaptiveSchema$inboundSchema,
+    components.ThinkingConfigBetweenToolsSchema$inboundSchema,
+  ])
+);
 
 export function getOnePromptThinkingFromJSON(
   jsonString: string,
@@ -2401,16 +2477,18 @@ export function getOnePromptThinkingFromJSON(
 /** @internal */
 export const GetOnePromptToolChoiceType$inboundSchema: z.ZodNativeEnum<
   typeof GetOnePromptToolChoiceType
-> = z.nativeEnum(GetOnePromptToolChoiceType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(GetOnePromptToolChoiceType));
 
 /** @internal */
 export const GetOnePromptToolChoiceFunction$inboundSchema: z.ZodType<
   GetOnePromptToolChoiceFunction,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+  })
+);
 
 export function getOnePromptToolChoiceFunctionFromJSON(
   jsonString: string,
@@ -2427,10 +2505,12 @@ export const GetOnePromptToolChoice2$inboundSchema: z.ZodType<
   GetOnePromptToolChoice2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: GetOnePromptToolChoiceType$inboundSchema.optional(),
-  function: z.lazy(() => GetOnePromptToolChoiceFunction$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: GetOnePromptToolChoiceType$inboundSchema.optional(),
+    function: z.lazy(() => GetOnePromptToolChoiceFunction$inboundSchema),
+  })
+);
 
 export function getOnePromptToolChoice2FromJSON(
   jsonString: string,
@@ -2445,17 +2525,19 @@ export function getOnePromptToolChoice2FromJSON(
 /** @internal */
 export const GetOnePromptToolChoice1$inboundSchema: z.ZodNativeEnum<
   typeof GetOnePromptToolChoice1
-> = z.nativeEnum(GetOnePromptToolChoice1);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(GetOnePromptToolChoice1));
 
 /** @internal */
 export const GetOnePromptToolChoice$inboundSchema: z.ZodType<
   GetOnePromptToolChoice,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  z.lazy(() => GetOnePromptToolChoice2$inboundSchema),
-  GetOnePromptToolChoice1$inboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => GetOnePromptToolChoice2$inboundSchema),
+    GetOnePromptToolChoice1$inboundSchema,
+  ])
+);
 
 export function getOnePromptToolChoiceFromJSON(
   jsonString: string,
@@ -2470,19 +2552,21 @@ export function getOnePromptToolChoiceFromJSON(
 /** @internal */
 export const GetOnePromptModalities$inboundSchema: z.ZodNativeEnum<
   typeof GetOnePromptModalities
-> = z.nativeEnum(GetOnePromptModalities);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(GetOnePromptModalities));
 
 /** @internal */
 export const GetOnePromptId1$inboundSchema: z.ZodNativeEnum<
   typeof GetOnePromptId1
-> = z.nativeEnum(GetOnePromptId1);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(GetOnePromptId1));
 
 /** @internal */
 export const GetOnePromptId$inboundSchema: z.ZodType<
   GetOnePromptId,
   z.ZodTypeDef,
   unknown
-> = z.union([GetOnePromptId1$inboundSchema, z.string()]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([GetOnePromptId1$inboundSchema, z.string()])
+);
 
 export function getOnePromptIdFromJSON(
   jsonString: string,
@@ -2497,21 +2581,23 @@ export function getOnePromptIdFromJSON(
 /** @internal */
 export const GetOnePromptExecuteOn$inboundSchema: z.ZodNativeEnum<
   typeof GetOnePromptExecuteOn
-> = z.nativeEnum(GetOnePromptExecuteOn);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(GetOnePromptExecuteOn));
 
 /** @internal */
 export const GetOnePromptGuardrails$inboundSchema: z.ZodType<
   GetOnePromptGuardrails,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.union([GetOnePromptId1$inboundSchema, z.string()]),
-  execute_on: GetOnePromptExecuteOn$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "execute_on": "executeOn",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.union([GetOnePromptId1$inboundSchema, z.string()]),
+    execute_on: GetOnePromptExecuteOn$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "execute_on": "executeOn",
+    });
+  })
+);
 
 export function getOnePromptGuardrailsFromJSON(
   jsonString: string,
@@ -2528,13 +2614,15 @@ export const GetOnePromptPlugins$inboundSchema: z.ZodType<
   GetOnePromptPlugins,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  components.PIIRedactionPlugin$inboundSchema.and(
-    z.object({ id: z.literal("pii_redaction") }),
-  ),
-  components.ResponseHealingPlugin$inboundSchema,
-  components.TraceScrubbingPlugin$inboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    components.PIIRedactionPlugin$inboundSchema.and(
+      z.object({ id: z.literal("pii_redaction") }),
+    ),
+    components.ResponseHealingPlugin$inboundSchema,
+    components.TraceScrubbingPlugin$inboundSchema,
+  ])
+);
 
 export function getOnePromptPluginsFromJSON(
   jsonString: string,
@@ -2551,9 +2639,11 @@ export const GetOnePromptFallbacks$inboundSchema: z.ZodType<
   GetOnePromptFallbacks,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  model: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model: z.string(),
+  })
+);
 
 export function getOnePromptFallbacksFromJSON(
   jsonString: string,
@@ -2570,14 +2660,16 @@ export const GetOnePromptRetry$inboundSchema: z.ZodType<
   GetOnePromptRetry,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  count: z.number().default(3),
-  on_codes: z.array(z.number()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "on_codes": "onCodes",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    count: z.number().default(3),
+    on_codes: z.array(z.number()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "on_codes": "onCodes",
+    });
+  })
+);
 
 export function getOnePromptRetryFromJSON(
   jsonString: string,
@@ -2592,17 +2684,19 @@ export function getOnePromptRetryFromJSON(
 /** @internal */
 export const GetOnePromptPromptsType$inboundSchema: z.ZodNativeEnum<
   typeof GetOnePromptPromptsType
-> = z.nativeEnum(GetOnePromptPromptsType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(GetOnePromptPromptsType));
 
 /** @internal */
 export const GetOnePromptCache$inboundSchema: z.ZodType<
   GetOnePromptCache,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  ttl: z.number().default(3600),
-  type: GetOnePromptPromptsType$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ttl: z.number().default(3600),
+    type: GetOnePromptPromptsType$inboundSchema,
+  })
+);
 
 export function getOnePromptCacheFromJSON(
   jsonString: string,
@@ -2617,17 +2711,21 @@ export function getOnePromptCacheFromJSON(
 /** @internal */
 export const GetOnePromptLoadBalancerType$inboundSchema: z.ZodNativeEnum<
   typeof GetOnePromptLoadBalancerType
-> = z.nativeEnum(GetOnePromptLoadBalancerType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(GetOnePromptLoadBalancerType)
+);
 
 /** @internal */
 export const GetOnePromptLoadBalancerModels$inboundSchema: z.ZodType<
   GetOnePromptLoadBalancerModels,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  model: z.string(),
-  weight: z.number().default(0.5),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model: z.string(),
+    weight: z.number().default(0.5),
+  })
+);
 
 export function getOnePromptLoadBalancerModelsFromJSON(
   jsonString: string,
@@ -2644,10 +2742,12 @@ export const GetOnePromptLoadBalancer1$inboundSchema: z.ZodType<
   GetOnePromptLoadBalancer1,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: GetOnePromptLoadBalancerType$inboundSchema,
-  models: z.array(z.lazy(() => GetOnePromptLoadBalancerModels$inboundSchema)),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: GetOnePromptLoadBalancerType$inboundSchema,
+    models: z.array(z.lazy(() => GetOnePromptLoadBalancerModels$inboundSchema)),
+  })
+);
 
 export function getOnePromptLoadBalancer1FromJSON(
   jsonString: string,
@@ -2664,7 +2764,9 @@ export const GetOnePromptLoadBalancer$inboundSchema: z.ZodType<
   GetOnePromptLoadBalancer,
   z.ZodTypeDef,
   unknown
-> = z.lazy(() => GetOnePromptLoadBalancer1$inboundSchema);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.lazy(() => GetOnePromptLoadBalancer1$inboundSchema)
+);
 
 export function getOnePromptLoadBalancerFromJSON(
   jsonString: string,
@@ -2681,13 +2783,15 @@ export const GetOnePromptTimeout$inboundSchema: z.ZodType<
   GetOnePromptTimeout,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  call_timeout: z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    "call_timeout": "callTimeout",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    call_timeout: z.number(),
+  }).transform((v) => {
+    return remap$(v, {
+      "call_timeout": "callTimeout",
+    });
+  })
+);
 
 export function getOnePromptTimeoutFromJSON(
   jsonString: string,
@@ -2702,22 +2806,26 @@ export function getOnePromptTimeoutFromJSON(
 /** @internal */
 export const GetOnePromptPromptsResponseType$inboundSchema: z.ZodNativeEnum<
   typeof GetOnePromptPromptsResponseType
-> = z.nativeEnum(GetOnePromptPromptsResponseType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(GetOnePromptPromptsResponseType)
+);
 
 /** @internal */
 export const GetOnePromptTtl$inboundSchema: z.ZodNativeEnum<
   typeof GetOnePromptTtl
-> = z.nativeEnum(GetOnePromptTtl);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(GetOnePromptTtl));
 
 /** @internal */
 export const GetOnePromptCacheControl$inboundSchema: z.ZodType<
   GetOnePromptCacheControl,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: GetOnePromptPromptsResponseType$inboundSchema,
-  ttl: GetOnePromptTtl$inboundSchema.default("5m"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: GetOnePromptPromptsResponseType$inboundSchema,
+    ttl: GetOnePromptTtl$inboundSchema.default("5m"),
+  })
+);
 
 export function getOnePromptCacheControlFromJSON(
   jsonString: string,
@@ -2734,7 +2842,9 @@ export const GetOnePromptContentPromptsResponse2002$inboundSchema: z.ZodType<
   GetOnePromptContentPromptsResponse2002,
   z.ZodTypeDef,
   unknown
-> = components.TextContentPartSchema$inboundSchema;
+> = /* @__PURE__ */ lazySchema$(() =>
+  components.TextContentPartSchema$inboundSchema
+);
 
 export function getOnePromptContentPromptsResponse2002FromJSON(
   jsonString: string,
@@ -2753,10 +2863,12 @@ export const GetOnePromptMessagesPromptsResponse200Content$inboundSchema:
     GetOnePromptMessagesPromptsResponse200Content,
     z.ZodTypeDef,
     unknown
-  > = z.union([
-    z.string(),
-    z.array(components.TextContentPartSchema$inboundSchema),
-  ]);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.union([
+      z.string(),
+      z.array(components.TextContentPartSchema$inboundSchema),
+    ])
+  );
 
 export function getOnePromptMessagesPromptsResponse200ContentFromJSON(
   jsonString: string,
@@ -2777,22 +2889,26 @@ export function getOnePromptMessagesPromptsResponse200ContentFromJSON(
 /** @internal */
 export const GetOnePromptMessagesPromptsType$inboundSchema: z.ZodNativeEnum<
   typeof GetOnePromptMessagesPromptsType
-> = z.nativeEnum(GetOnePromptMessagesPromptsType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(GetOnePromptMessagesPromptsType)
+);
 
 /** @internal */
 export const GetOnePromptMessagesTtl$inboundSchema: z.ZodNativeEnum<
   typeof GetOnePromptMessagesTtl
-> = z.nativeEnum(GetOnePromptMessagesTtl);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(GetOnePromptMessagesTtl));
 
 /** @internal */
 export const GetOnePromptMessagesCacheControl$inboundSchema: z.ZodType<
   GetOnePromptMessagesCacheControl,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: GetOnePromptMessagesPromptsType$inboundSchema,
-  ttl: GetOnePromptMessagesTtl$inboundSchema.default("5m"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: GetOnePromptMessagesPromptsType$inboundSchema,
+    ttl: GetOnePromptMessagesTtl$inboundSchema.default("5m"),
+  })
+);
 
 export function getOnePromptMessagesCacheControlFromJSON(
   jsonString: string,
@@ -2809,21 +2925,23 @@ export const GetOnePromptMessagesToolMessage$inboundSchema: z.ZodType<
   GetOnePromptMessagesToolMessage,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  role: z.literal("tool"),
-  content: z.union([
-    z.string(),
-    z.array(components.TextContentPartSchema$inboundSchema),
-  ]),
-  tool_call_id: z.nullable(z.string()),
-  cache_control: z.lazy(() => GetOnePromptMessagesCacheControl$inboundSchema)
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "tool_call_id": "toolCallId",
-    "cache_control": "cacheControl",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    role: z.literal("tool"),
+    content: z.union([
+      z.string(),
+      z.array(components.TextContentPartSchema$inboundSchema),
+    ]),
+    tool_call_id: z.nullable(z.string()),
+    cache_control: z.lazy(() => GetOnePromptMessagesCacheControl$inboundSchema)
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "tool_call_id": "toolCallId",
+      "cache_control": "cacheControl",
+    });
+  })
+);
 
 export function getOnePromptMessagesToolMessageFromJSON(
   jsonString: string,
@@ -2840,14 +2958,16 @@ export const GetOnePromptContentPromptsResponse2$inboundSchema: z.ZodType<
   GetOnePromptContentPromptsResponse2,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  components.TextContentPartSchema$inboundSchema.and(
-    z.object({ type: z.literal("text") }),
-  ),
-  components.RefusalPartSchema$inboundSchema,
-  components.ReasoningPartSchema$inboundSchema,
-  components.RedactedReasoningPartSchema$inboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    components.TextContentPartSchema$inboundSchema.and(
+      z.object({ type: z.literal("text") }),
+    ),
+    components.RefusalPartSchema$inboundSchema,
+    components.ReasoningPartSchema$inboundSchema,
+    components.RedactedReasoningPartSchema$inboundSchema,
+  ])
+);
 
 export function getOnePromptContentPromptsResponse2FromJSON(
   jsonString: string,
@@ -2863,19 +2983,21 @@ export function getOnePromptContentPromptsResponse2FromJSON(
 /** @internal */
 export const GetOnePromptMessagesPromptsResponseContent$inboundSchema:
   z.ZodType<GetOnePromptMessagesPromptsResponseContent, z.ZodTypeDef, unknown> =
-    z.union([
-      z.string(),
-      z.array(
-        z.union([
-          components.TextContentPartSchema$inboundSchema.and(
-            z.object({ type: z.literal("text") }),
-          ),
-          components.RefusalPartSchema$inboundSchema,
-          components.ReasoningPartSchema$inboundSchema,
-          components.RedactedReasoningPartSchema$inboundSchema,
-        ]),
-      ),
-    ]);
+    /* @__PURE__ */ lazySchema$(() =>
+      z.union([
+        z.string(),
+        z.array(
+          z.union([
+            components.TextContentPartSchema$inboundSchema.and(
+              z.object({ type: z.literal("text") }),
+            ),
+            components.RefusalPartSchema$inboundSchema,
+            components.ReasoningPartSchema$inboundSchema,
+            components.RedactedReasoningPartSchema$inboundSchema,
+          ]),
+        ),
+      ])
+    );
 
 export function getOnePromptMessagesPromptsResponseContentFromJSON(
   jsonString: string,
@@ -2898,9 +3020,11 @@ export const GetOnePromptMessagesAudio$inboundSchema: z.ZodType<
   GetOnePromptMessagesAudio,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+  })
+);
 
 export function getOnePromptMessagesAudioFromJSON(
   jsonString: string,
@@ -2915,17 +3039,19 @@ export function getOnePromptMessagesAudioFromJSON(
 /** @internal */
 export const GetOnePromptMessagesType$inboundSchema: z.ZodNativeEnum<
   typeof GetOnePromptMessagesType
-> = z.nativeEnum(GetOnePromptMessagesType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(GetOnePromptMessagesType));
 
 /** @internal */
 export const GetOnePromptMessagesFunction$inboundSchema: z.ZodType<
   GetOnePromptMessagesFunction,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string().optional(),
-  arguments: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    arguments: z.string().optional(),
+  })
+);
 
 export function getOnePromptMessagesFunctionFromJSON(
   jsonString: string,
@@ -2942,13 +3068,15 @@ export const GetOnePromptMessagesGoogle$inboundSchema: z.ZodType<
   GetOnePromptMessagesGoogle,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  thought_signature: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "thought_signature": "thoughtSignature",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    thought_signature: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "thought_signature": "thoughtSignature",
+    });
+  })
+);
 
 export function getOnePromptMessagesGoogleFromJSON(
   jsonString: string,
@@ -2965,9 +3093,11 @@ export const GetOnePromptMessagesExtraContent$inboundSchema: z.ZodType<
   GetOnePromptMessagesExtraContent,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  google: z.lazy(() => GetOnePromptMessagesGoogle$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    google: z.lazy(() => GetOnePromptMessagesGoogle$inboundSchema).optional(),
+  })
+);
 
 export function getOnePromptMessagesExtraContentFromJSON(
   jsonString: string,
@@ -2984,19 +3114,21 @@ export const GetOnePromptMessagesToolCalls$inboundSchema: z.ZodType<
   GetOnePromptMessagesToolCalls,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  type: GetOnePromptMessagesType$inboundSchema,
-  function: z.lazy(() => GetOnePromptMessagesFunction$inboundSchema),
-  thought_signature: z.string().optional(),
-  extra_content: z.lazy(() => GetOnePromptMessagesExtraContent$inboundSchema)
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "thought_signature": "thoughtSignature",
-    "extra_content": "extraContent",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    type: GetOnePromptMessagesType$inboundSchema,
+    function: z.lazy(() => GetOnePromptMessagesFunction$inboundSchema),
+    thought_signature: z.string().optional(),
+    extra_content: z.lazy(() => GetOnePromptMessagesExtraContent$inboundSchema)
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "thought_signature": "thoughtSignature",
+      "extra_content": "extraContent",
+    });
+  })
+);
 
 export function getOnePromptMessagesToolCallsFromJSON(
   jsonString: string,
@@ -3013,36 +3145,39 @@ export const GetOnePromptMessagesAssistantMessage$inboundSchema: z.ZodType<
   GetOnePromptMessagesAssistantMessage,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  reasoning_content: z.string().optional(),
-  content: z.nullable(
-    z.union([
-      z.string(),
-      z.array(
-        z.union([
-          components.TextContentPartSchema$inboundSchema.and(
-            z.object({ type: z.literal("text") }),
-          ),
-          components.RefusalPartSchema$inboundSchema,
-          components.ReasoningPartSchema$inboundSchema,
-          components.RedactedReasoningPartSchema$inboundSchema,
-        ]),
-      ),
-    ]),
-  ).optional(),
-  refusal: z.nullable(z.string()).optional(),
-  role: z.literal("assistant"),
-  name: z.string().optional(),
-  audio: z.nullable(z.lazy(() => GetOnePromptMessagesAudio$inboundSchema))
-    .optional(),
-  tool_calls: z.array(z.lazy(() => GetOnePromptMessagesToolCalls$inboundSchema))
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "reasoning_content": "reasoningContent",
-    "tool_calls": "toolCalls",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    reasoning_content: z.string().optional(),
+    content: z.nullable(
+      z.union([
+        z.string(),
+        z.array(
+          z.union([
+            components.TextContentPartSchema$inboundSchema.and(
+              z.object({ type: z.literal("text") }),
+            ),
+            components.RefusalPartSchema$inboundSchema,
+            components.ReasoningPartSchema$inboundSchema,
+            components.RedactedReasoningPartSchema$inboundSchema,
+          ]),
+        ),
+      ]),
+    ).optional(),
+    refusal: z.nullable(z.string()).optional(),
+    role: z.literal("assistant"),
+    name: z.string().optional(),
+    audio: z.nullable(z.lazy(() => GetOnePromptMessagesAudio$inboundSchema))
+      .optional(),
+    tool_calls: z.array(
+      z.lazy(() => GetOnePromptMessagesToolCalls$inboundSchema),
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "reasoning_content": "reasoningContent",
+      "tool_calls": "toolCalls",
+    });
+  })
+);
 
 export function getOnePromptMessagesAssistantMessageFromJSON(
   jsonString: string,
@@ -3057,23 +3192,27 @@ export function getOnePromptMessagesAssistantMessageFromJSON(
 
 /** @internal */
 export const GetOnePrompt2PromptsResponse200ApplicationJSONType$inboundSchema:
-  z.ZodNativeEnum<typeof GetOnePrompt2PromptsResponse200ApplicationJSONType> = z
-    .nativeEnum(GetOnePrompt2PromptsResponse200ApplicationJSONType);
+  z.ZodNativeEnum<typeof GetOnePrompt2PromptsResponse200ApplicationJSONType> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(GetOnePrompt2PromptsResponse200ApplicationJSONType)
+    );
 
 /** @internal */
 export const GetOnePrompt2Ttl$inboundSchema: z.ZodNativeEnum<
   typeof GetOnePrompt2Ttl
-> = z.nativeEnum(GetOnePrompt2Ttl);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(GetOnePrompt2Ttl));
 
 /** @internal */
 export const GetOnePrompt2CacheControl$inboundSchema: z.ZodType<
   GetOnePrompt2CacheControl,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: GetOnePrompt2PromptsResponse200ApplicationJSONType$inboundSchema,
-  ttl: GetOnePrompt2Ttl$inboundSchema.default("5m"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: GetOnePrompt2PromptsResponse200ApplicationJSONType$inboundSchema,
+    ttl: GetOnePrompt2Ttl$inboundSchema.default("5m"),
+  })
+);
 
 export function getOnePrompt2CacheControlFromJSON(
   jsonString: string,
@@ -3090,16 +3229,18 @@ export const GetOnePrompt24$inboundSchema: z.ZodType<
   GetOnePrompt24,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("file"),
-  cache_control: z.lazy(() => GetOnePrompt2CacheControl$inboundSchema)
-    .optional(),
-  file: components.FileContentPartSchema$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "cache_control": "cacheControl",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("file"),
+    cache_control: z.lazy(() => GetOnePrompt2CacheControl$inboundSchema)
+      .optional(),
+    file: components.FileContentPartSchema$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "cache_control": "cacheControl",
+    });
+  })
+);
 
 export function getOnePrompt24FromJSON(
   jsonString: string,
@@ -3116,14 +3257,16 @@ export const GetOnePromptContentPrompts2$inboundSchema: z.ZodType<
   GetOnePromptContentPrompts2,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  components.TextContentPartSchema$inboundSchema.and(
-    z.object({ type: z.literal("text") }),
-  ),
-  components.ImageContentPartSchema$inboundSchema,
-  components.AudioContentPartSchema$inboundSchema,
-  z.lazy(() => GetOnePrompt24$inboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    components.TextContentPartSchema$inboundSchema.and(
+      z.object({ type: z.literal("text") }),
+    ),
+    components.ImageContentPartSchema$inboundSchema,
+    components.AudioContentPartSchema$inboundSchema,
+    z.lazy(() => GetOnePrompt24$inboundSchema),
+  ])
+);
 
 export function getOnePromptContentPrompts2FromJSON(
   jsonString: string,
@@ -3140,19 +3283,21 @@ export const GetOnePromptMessagesPromptsContent$inboundSchema: z.ZodType<
   GetOnePromptMessagesPromptsContent,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  z.string(),
-  z.array(
-    z.union([
-      components.TextContentPartSchema$inboundSchema.and(
-        z.object({ type: z.literal("text") }),
-      ),
-      components.ImageContentPartSchema$inboundSchema,
-      components.AudioContentPartSchema$inboundSchema,
-      z.lazy(() => GetOnePrompt24$inboundSchema),
-    ]),
-  ),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.string(),
+    z.array(
+      z.union([
+        components.TextContentPartSchema$inboundSchema.and(
+          z.object({ type: z.literal("text") }),
+        ),
+        components.ImageContentPartSchema$inboundSchema,
+        components.AudioContentPartSchema$inboundSchema,
+        z.lazy(() => GetOnePrompt24$inboundSchema),
+      ]),
+    ),
+  ])
+);
 
 export function getOnePromptMessagesPromptsContentFromJSON(
   jsonString: string,
@@ -3170,23 +3315,25 @@ export const GetOnePromptMessagesUserMessage$inboundSchema: z.ZodType<
   GetOnePromptMessagesUserMessage,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  role: z.literal("user"),
-  name: z.string().optional(),
-  content: z.union([
-    z.string(),
-    z.array(
-      z.union([
-        components.TextContentPartSchema$inboundSchema.and(
-          z.object({ type: z.literal("text") }),
-        ),
-        components.ImageContentPartSchema$inboundSchema,
-        components.AudioContentPartSchema$inboundSchema,
-        z.lazy(() => GetOnePrompt24$inboundSchema),
-      ]),
-    ),
-  ]),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    role: z.literal("user"),
+    name: z.string().optional(),
+    content: z.union([
+      z.string(),
+      z.array(
+        z.union([
+          components.TextContentPartSchema$inboundSchema.and(
+            z.object({ type: z.literal("text") }),
+          ),
+          components.ImageContentPartSchema$inboundSchema,
+          components.AudioContentPartSchema$inboundSchema,
+          z.lazy(() => GetOnePrompt24$inboundSchema),
+        ]),
+      ),
+    ]),
+  })
+);
 
 export function getOnePromptMessagesUserMessageFromJSON(
   jsonString: string,
@@ -3203,10 +3350,9 @@ export const GetOnePromptMessagesContent$inboundSchema: z.ZodType<
   GetOnePromptMessagesContent,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  z.string(),
-  z.array(components.TextContentPartSchema$inboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.array(components.TextContentPartSchema$inboundSchema)])
+);
 
 export function getOnePromptMessagesContentFromJSON(
   jsonString: string,
@@ -3223,14 +3369,16 @@ export const GetOnePromptMessagesSystemMessage$inboundSchema: z.ZodType<
   GetOnePromptMessagesSystemMessage,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  role: z.literal("system"),
-  content: z.union([
-    z.string(),
-    z.array(components.TextContentPartSchema$inboundSchema),
-  ]),
-  name: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    role: z.literal("system"),
+    content: z.union([
+      z.string(),
+      z.array(components.TextContentPartSchema$inboundSchema),
+    ]),
+    name: z.string().optional(),
+  })
+);
 
 export function getOnePromptMessagesSystemMessageFromJSON(
   jsonString: string,
@@ -3247,12 +3395,14 @@ export const GetOnePromptPromptsMessages$inboundSchema: z.ZodType<
   GetOnePromptPromptsMessages,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  z.lazy(() => GetOnePromptMessagesSystemMessage$inboundSchema),
-  z.lazy(() => GetOnePromptMessagesUserMessage$inboundSchema),
-  z.lazy(() => GetOnePromptMessagesAssistantMessage$inboundSchema),
-  z.lazy(() => GetOnePromptMessagesToolMessage$inboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => GetOnePromptMessagesSystemMessage$inboundSchema),
+    z.lazy(() => GetOnePromptMessagesUserMessage$inboundSchema),
+    z.lazy(() => GetOnePromptMessagesAssistantMessage$inboundSchema),
+    z.lazy(() => GetOnePromptMessagesToolMessage$inboundSchema),
+  ])
+);
 
 export function getOnePromptPromptsMessagesFromJSON(
   jsonString: string,
@@ -3269,96 +3419,96 @@ export const GetOnePromptPromptField$inboundSchema: z.ZodType<
   GetOnePromptPromptField,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string().optional(),
-  audio: z.nullable(z.lazy(() => GetOnePromptAudio$inboundSchema)).optional(),
-  frequency_penalty: z.nullable(z.number()).optional(),
-  max_tokens: z.nullable(z.number().int()).optional(),
-  max_completion_tokens: z.nullable(z.number().int()).optional(),
-  logprobs: z.nullable(z.boolean()).optional(),
-  top_logprobs: z.nullable(z.number().int()).optional(),
-  n: z.nullable(z.number().int()).optional(),
-  presence_penalty: z.nullable(z.number()).optional(),
-  response_format: z.union([
-    z.lazy(() => GetOnePromptResponseFormatText$inboundSchema),
-    z.lazy(() => GetOnePromptResponseFormatJSONObject$inboundSchema),
-    z.lazy(() => GetOnePromptResponseFormatPromptsJSONSchema$inboundSchema),
-  ]).optional(),
-  reasoning_effort: GetOnePromptReasoningEffort$inboundSchema.optional(),
-  verbosity: z.string().optional(),
-  seed: z.nullable(z.number()).optional(),
-  stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
-  stream_options: z.nullable(
-    z.lazy(() => GetOnePromptStreamOptions$inboundSchema),
-  ).optional(),
-  thinking: z.union([
-    components.ThinkingConfigDisabledSchema$inboundSchema,
-    components.ThinkingConfigEnabledSchema$inboundSchema,
-    components.ThinkingConfigAdaptiveSchema$inboundSchema,
-    components.ThinkingConfigBetweenToolsSchema$inboundSchema,
-  ]).optional(),
-  temperature: z.nullable(z.number()).optional(),
-  top_p: z.nullable(z.number()).optional(),
-  top_k: z.nullable(z.number()).optional(),
-  tool_choice: z.union([
-    z.lazy(() => GetOnePromptToolChoice2$inboundSchema),
-    GetOnePromptToolChoice1$inboundSchema,
-  ]).optional(),
-  parallel_tool_calls: z.boolean().optional(),
-  modalities: z.nullable(z.array(GetOnePromptModalities$inboundSchema))
-    .optional(),
-  guardrails: z.array(z.lazy(() => GetOnePromptGuardrails$inboundSchema))
-    .optional(),
-  plugins: z.array(
-    z.union([
-      components.PIIRedactionPlugin$inboundSchema.and(
-        z.object({ id: z.literal("pii_redaction") }),
-      ),
-      components.ResponseHealingPlugin$inboundSchema,
-      components.TraceScrubbingPlugin$inboundSchema,
-    ]),
-  ).optional(),
-  fallback_on_codes: z.array(z.number().int()).optional(),
-  fallbacks: z.array(z.lazy(() => GetOnePromptFallbacks$inboundSchema))
-    .optional(),
-  retry: z.lazy(() => GetOnePromptRetry$inboundSchema).optional(),
-  cache: z.lazy(() => GetOnePromptCache$inboundSchema).optional(),
-  load_balancer: z.lazy(() => GetOnePromptLoadBalancer1$inboundSchema)
-    .optional(),
-  timeout: z.lazy(() => GetOnePromptTimeout$inboundSchema).optional(),
-  cache_control: z.lazy(() => GetOnePromptCacheControl$inboundSchema)
-    .optional(),
-  prompt_cache_key: z.string().optional(),
-  messages: z.array(
-    z.union([
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    audio: z.nullable(z.lazy(() => GetOnePromptAudio$inboundSchema)).optional(),
+    frequency_penalty: z.nullable(z.number()).optional(),
+    max_tokens: z.nullable(z.number().int()).optional(),
+    max_completion_tokens: z.nullable(z.number().int()).optional(),
+    logprobs: z.nullable(z.boolean()).optional(),
+    top_logprobs: z.nullable(z.number().int()).optional(),
+    n: z.nullable(z.number().int()).optional(),
+    presence_penalty: z.nullable(z.number()).optional(),
+    response_format: z.union([
+      z.lazy(() => GetOnePromptResponseFormatText$inboundSchema),
+      z.lazy(() => GetOnePromptResponseFormatJSONObject$inboundSchema),
+      z.lazy(() => GetOnePromptResponseFormatPromptsJSONSchema$inboundSchema),
+    ]).optional(),
+    reasoning_effort: GetOnePromptReasoningEffort$inboundSchema.optional(),
+    verbosity: z.string().optional(),
+    seed: z.nullable(z.number()).optional(),
+    stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
+    stream_options: z.nullable(
+      z.lazy(() => GetOnePromptStreamOptions$inboundSchema),
+    ).optional(),
+    thinking: z.union([
+      components.ThinkingConfigDisabledSchema$inboundSchema,
+      components.ThinkingConfigEnabledSchema$inboundSchema,
+      components.ThinkingConfigAdaptiveSchema$inboundSchema,
+      components.ThinkingConfigBetweenToolsSchema$inboundSchema,
+    ]).optional(),
+    temperature: z.nullable(z.number()).optional(),
+    top_p: z.nullable(z.number()).optional(),
+    top_k: z.nullable(z.number()).optional(),
+    tool_choice: z.union([
+      z.lazy(() => GetOnePromptToolChoice2$inboundSchema),
+      GetOnePromptToolChoice1$inboundSchema,
+    ]).optional(),
+    parallel_tool_calls: z.boolean().optional(),
+    modalities: z.nullable(z.array(GetOnePromptModalities$inboundSchema))
+      .optional(),
+    guardrails: z.array(z.lazy(() => GetOnePromptGuardrails$inboundSchema))
+      .optional(),
+    plugins: z.array(
+      z.union([
+        components.PIIRedactionPlugin$inboundSchema.and(
+          z.object({ id: z.literal("pii_redaction") }),
+        ),
+        components.ResponseHealingPlugin$inboundSchema,
+        components.TraceScrubbingPlugin$inboundSchema,
+      ]),
+    ).optional(),
+    fallback_on_codes: z.array(z.number().int()).optional(),
+    fallbacks: z.array(z.lazy(() => GetOnePromptFallbacks$inboundSchema))
+      .optional(),
+    retry: z.lazy(() => GetOnePromptRetry$inboundSchema).optional(),
+    cache: z.lazy(() => GetOnePromptCache$inboundSchema).optional(),
+    load_balancer: z.lazy(() => GetOnePromptLoadBalancer1$inboundSchema)
+      .optional(),
+    timeout: z.lazy(() => GetOnePromptTimeout$inboundSchema).optional(),
+    cache_control: z.lazy(() => GetOnePromptCacheControl$inboundSchema)
+      .optional(),
+    prompt_cache_key: z.string().optional(),
+    messages: z.array(z.union([
       z.lazy(() => GetOnePromptMessagesSystemMessage$inboundSchema),
       z.lazy(() => GetOnePromptMessagesUserMessage$inboundSchema),
       z.lazy(() => GetOnePromptMessagesAssistantMessage$inboundSchema),
       z.lazy(() => GetOnePromptMessagesToolMessage$inboundSchema),
-    ]),
-  ).optional(),
-  model: z.nullable(z.string()).optional(),
-  version: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "frequency_penalty": "frequencyPenalty",
-    "max_tokens": "maxTokens",
-    "max_completion_tokens": "maxCompletionTokens",
-    "top_logprobs": "topLogprobs",
-    "presence_penalty": "presencePenalty",
-    "response_format": "responseFormat",
-    "reasoning_effort": "reasoningEffort",
-    "stream_options": "streamOptions",
-    "top_p": "topP",
-    "top_k": "topK",
-    "tool_choice": "toolChoice",
-    "parallel_tool_calls": "parallelToolCalls",
-    "fallback_on_codes": "fallbackOnCodes",
-    "load_balancer": "loadBalancer",
-    "cache_control": "cacheControl",
-    "prompt_cache_key": "promptCacheKey",
-  });
-});
+    ])).optional(),
+    model: z.nullable(z.string()).optional(),
+    version: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "frequency_penalty": "frequencyPenalty",
+      "max_tokens": "maxTokens",
+      "max_completion_tokens": "maxCompletionTokens",
+      "top_logprobs": "topLogprobs",
+      "presence_penalty": "presencePenalty",
+      "response_format": "responseFormat",
+      "reasoning_effort": "reasoningEffort",
+      "stream_options": "streamOptions",
+      "top_p": "topP",
+      "top_k": "topK",
+      "tool_choice": "toolChoice",
+      "parallel_tool_calls": "parallelToolCalls",
+      "fallback_on_codes": "fallbackOnCodes",
+      "load_balancer": "loadBalancer",
+      "cache_control": "cacheControl",
+      "prompt_cache_key": "promptCacheKey",
+    });
+  })
+);
 
 export function getOnePromptPromptFieldFromJSON(
   jsonString: string,
@@ -3373,26 +3523,28 @@ export function getOnePromptPromptFieldFromJSON(
 /** @internal */
 export const GetOnePromptUseCases$inboundSchema: z.ZodNativeEnum<
   typeof GetOnePromptUseCases
-> = z.nativeEnum(GetOnePromptUseCases);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(GetOnePromptUseCases));
 
 /** @internal */
 export const GetOnePromptLanguage$inboundSchema: z.ZodNativeEnum<
   typeof GetOnePromptLanguage
-> = z.nativeEnum(GetOnePromptLanguage);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(GetOnePromptLanguage));
 
 /** @internal */
 export const GetOnePromptMetadata$inboundSchema: z.ZodType<
   GetOnePromptMetadata,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  use_cases: z.array(GetOnePromptUseCases$inboundSchema).optional(),
-  language: z.nullable(GetOnePromptLanguage$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "use_cases": "useCases",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    use_cases: z.array(GetOnePromptUseCases$inboundSchema).optional(),
+    language: z.nullable(GetOnePromptLanguage$inboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "use_cases": "useCases",
+    });
+  })
+);
 
 export function getOnePromptMetadataFromJSON(
   jsonString: string,
@@ -3409,31 +3561,33 @@ export const GetOnePromptPrompt$inboundSchema: z.ZodType<
   GetOnePromptPrompt,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  _id: z.string(),
-  type: GetOnePromptType$inboundSchema,
-  owner: z.string(),
-  domain_id: z.string(),
-  created: z.string(),
-  updated: z.string(),
-  created_by_id: z.nullable(z.string()).optional(),
-  updated_by_id: z.nullable(z.string()).optional(),
-  display_name: z.string(),
-  description: z.nullable(z.string()).optional(),
-  prompt_config: z.lazy(() => GetOnePromptPromptConfig$inboundSchema)
-    .optional(),
-  prompt: z.lazy(() => GetOnePromptPromptField$inboundSchema),
-  metadata: z.lazy(() => GetOnePromptMetadata$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "_id": "id",
-    "domain_id": "domainId",
-    "created_by_id": "createdById",
-    "updated_by_id": "updatedById",
-    "display_name": "displayName",
-    "prompt_config": "promptConfig",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    _id: z.string(),
+    type: GetOnePromptType$inboundSchema,
+    owner: z.string(),
+    domain_id: z.string(),
+    created: z.string(),
+    updated: z.string(),
+    created_by_id: z.nullable(z.string()).optional(),
+    updated_by_id: z.nullable(z.string()).optional(),
+    display_name: z.string(),
+    description: z.nullable(z.string()).optional(),
+    prompt_config: z.lazy(() => GetOnePromptPromptConfig$inboundSchema)
+      .optional(),
+    prompt: z.lazy(() => GetOnePromptPromptField$inboundSchema),
+    metadata: z.lazy(() => GetOnePromptMetadata$inboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "_id": "id",
+      "domain_id": "domainId",
+      "created_by_id": "createdById",
+      "updated_by_id": "updatedById",
+      "display_name": "displayName",
+      "prompt_config": "promptConfig",
+    });
+  })
+);
 
 export function getOnePromptPromptFromJSON(
   jsonString: string,

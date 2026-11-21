@@ -5,7 +5,7 @@
 import * as z from "zod/v3";
 import { EventStream } from "../../lib/event-streams.js";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
@@ -1020,7 +1020,9 @@ export const CreateCompletionStop$outboundSchema: z.ZodType<
   CreateCompletionStop$Outbound,
   z.ZodTypeDef,
   CreateCompletionStop
-> = z.union([z.string(), z.array(z.string())]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.array(z.string())])
+);
 
 export function createCompletionStopToJSON(
   createCompletionStop: CreateCompletionStop,
@@ -1040,9 +1042,11 @@ export const CreateCompletionFallbacks$outboundSchema: z.ZodType<
   CreateCompletionFallbacks$Outbound,
   z.ZodTypeDef,
   CreateCompletionFallbacks
-> = z.object({
-  model: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model: z.string(),
+  })
+);
 
 export function createCompletionFallbacksToJSON(
   createCompletionFallbacks: CreateCompletionFallbacks,
@@ -1063,14 +1067,16 @@ export const CreateCompletionRetry$outboundSchema: z.ZodType<
   CreateCompletionRetry$Outbound,
   z.ZodTypeDef,
   CreateCompletionRetry
-> = z.object({
-  count: z.number().default(3),
-  onCodes: z.array(z.number()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    onCodes: "on_codes",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    count: z.number().default(3),
+    onCodes: z.array(z.number()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      onCodes: "on_codes",
+    });
+  })
+);
 
 export function createCompletionRetryToJSON(
   createCompletionRetry: CreateCompletionRetry,
@@ -1083,7 +1089,7 @@ export function createCompletionRetryToJSON(
 /** @internal */
 export const CreateCompletionType$outboundSchema: z.ZodNativeEnum<
   typeof CreateCompletionType
-> = z.nativeEnum(CreateCompletionType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(CreateCompletionType));
 
 /** @internal */
 export type CreateCompletionCache$Outbound = {
@@ -1096,10 +1102,12 @@ export const CreateCompletionCache$outboundSchema: z.ZodType<
   CreateCompletionCache$Outbound,
   z.ZodTypeDef,
   CreateCompletionCache
-> = z.object({
-  ttl: z.number().default(3600),
-  type: CreateCompletionType$outboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ttl: z.number().default(3600),
+    type: CreateCompletionType$outboundSchema,
+  })
+);
 
 export function createCompletionCacheToJSON(
   createCompletionCache: CreateCompletionCache,
@@ -1112,7 +1120,9 @@ export function createCompletionCacheToJSON(
 /** @internal */
 export const CreateCompletionLoadBalancerType$outboundSchema: z.ZodNativeEnum<
   typeof CreateCompletionLoadBalancerType
-> = z.nativeEnum(CreateCompletionLoadBalancerType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(CreateCompletionLoadBalancerType)
+);
 
 /** @internal */
 export type CreateCompletionLoadBalancerModels$Outbound = {
@@ -1125,10 +1135,12 @@ export const CreateCompletionLoadBalancerModels$outboundSchema: z.ZodType<
   CreateCompletionLoadBalancerModels$Outbound,
   z.ZodTypeDef,
   CreateCompletionLoadBalancerModels
-> = z.object({
-  model: z.string(),
-  weight: z.number().default(0.5),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model: z.string(),
+    weight: z.number().default(0.5),
+  })
+);
 
 export function createCompletionLoadBalancerModelsToJSON(
   createCompletionLoadBalancerModels: CreateCompletionLoadBalancerModels,
@@ -1151,12 +1163,14 @@ export const CreateCompletionLoadBalancer1$outboundSchema: z.ZodType<
   CreateCompletionLoadBalancer1$Outbound,
   z.ZodTypeDef,
   CreateCompletionLoadBalancer1
-> = z.object({
-  type: CreateCompletionLoadBalancerType$outboundSchema,
-  models: z.array(
-    z.lazy(() => CreateCompletionLoadBalancerModels$outboundSchema),
-  ),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: CreateCompletionLoadBalancerType$outboundSchema,
+    models: z.array(
+      z.lazy(() => CreateCompletionLoadBalancerModels$outboundSchema),
+    ),
+  })
+);
 
 export function createCompletionLoadBalancer1ToJSON(
   createCompletionLoadBalancer1: CreateCompletionLoadBalancer1,
@@ -1177,7 +1191,9 @@ export const CreateCompletionLoadBalancer$outboundSchema: z.ZodType<
   CreateCompletionLoadBalancer$Outbound,
   z.ZodTypeDef,
   CreateCompletionLoadBalancer
-> = z.lazy(() => CreateCompletionLoadBalancer1$outboundSchema);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.lazy(() => CreateCompletionLoadBalancer1$outboundSchema)
+);
 
 export function createCompletionLoadBalancerToJSON(
   createCompletionLoadBalancer: CreateCompletionLoadBalancer,
@@ -1199,13 +1215,15 @@ export const CreateCompletionTimeout$outboundSchema: z.ZodType<
   CreateCompletionTimeout$Outbound,
   z.ZodTypeDef,
   CreateCompletionTimeout
-> = z.object({
-  callTimeout: z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    callTimeout: "call_timeout",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    callTimeout: z.number(),
+  }).transform((v) => {
+    return remap$(v, {
+      callTimeout: "call_timeout",
+    });
+  })
+);
 
 export function createCompletionTimeoutToJSON(
   createCompletionTimeout: CreateCompletionTimeout,
@@ -1227,12 +1245,14 @@ export const CreateCompletionThinking$outboundSchema: z.ZodType<
   CreateCompletionThinking$Outbound,
   z.ZodTypeDef,
   CreateCompletionThinking
-> = z.union([
-  components.ThinkingConfigDisabledSchema$outboundSchema,
-  components.ThinkingConfigEnabledSchema$outboundSchema,
-  components.ThinkingConfigAdaptiveSchema$outboundSchema,
-  components.ThinkingConfigBetweenToolsSchema$outboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    components.ThinkingConfigDisabledSchema$outboundSchema,
+    components.ThinkingConfigEnabledSchema$outboundSchema,
+    components.ThinkingConfigAdaptiveSchema$outboundSchema,
+    components.ThinkingConfigBetweenToolsSchema$outboundSchema,
+  ])
+);
 
 export function createCompletionThinkingToJSON(
   createCompletionThinking: CreateCompletionThinking,
@@ -1253,14 +1273,16 @@ export const CreateCompletionRouterCompletionsRetry$outboundSchema: z.ZodType<
   CreateCompletionRouterCompletionsRetry$Outbound,
   z.ZodTypeDef,
   CreateCompletionRouterCompletionsRetry
-> = z.object({
-  count: z.number().default(3),
-  onCodes: z.array(z.number()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    onCodes: "on_codes",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    count: z.number().default(3),
+    onCodes: z.array(z.number()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      onCodes: "on_codes",
+    });
+  })
+);
 
 export function createCompletionRouterCompletionsRetryToJSON(
   createCompletionRouterCompletionsRetry:
@@ -1284,9 +1306,11 @@ export const CreateCompletionRouterCompletionsFallbacks$outboundSchema:
     CreateCompletionRouterCompletionsFallbacks$Outbound,
     z.ZodTypeDef,
     CreateCompletionRouterCompletionsFallbacks
-  > = z.object({
-    model: z.string(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      model: z.string(),
+    })
+  );
 
 export function createCompletionRouterCompletionsFallbacksToJSON(
   createCompletionRouterCompletionsFallbacks:
@@ -1302,7 +1326,7 @@ export function createCompletionRouterCompletionsFallbacksToJSON(
 /** @internal */
 export const CreateCompletionVersion$outboundSchema: z.ZodNativeEnum<
   typeof CreateCompletionVersion
-> = z.nativeEnum(CreateCompletionVersion);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(CreateCompletionVersion));
 
 /** @internal */
 export type CreateCompletionPrompt$Outbound = {
@@ -1315,10 +1339,12 @@ export const CreateCompletionPrompt$outboundSchema: z.ZodType<
   CreateCompletionPrompt$Outbound,
   z.ZodTypeDef,
   CreateCompletionPrompt
-> = z.object({
-  id: z.string(),
-  version: CreateCompletionVersion$outboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    version: CreateCompletionVersion$outboundSchema,
+  })
+);
 
 export function createCompletionPromptToJSON(
   createCompletionPrompt: CreateCompletionPrompt,
@@ -1339,10 +1365,12 @@ export const CreateCompletionThread$outboundSchema: z.ZodType<
   CreateCompletionThread$Outbound,
   z.ZodTypeDef,
   CreateCompletionThread
-> = z.object({
-  id: z.string(),
-  tags: z.array(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    tags: z.array(z.string()).optional(),
+  })
+);
 
 export function createCompletionThreadToJSON(
   createCompletionThread: CreateCompletionThread,
@@ -1364,15 +1392,17 @@ export const CreateCompletionInputs2$outboundSchema: z.ZodType<
   CreateCompletionInputs2$Outbound,
   z.ZodTypeDef,
   CreateCompletionInputs2
-> = z.object({
-  key: z.string(),
-  value: z.any().optional(),
-  isPii: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    isPii: "is_pii",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    key: z.string(),
+    value: z.any().optional(),
+    isPii: z.boolean().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      isPii: "is_pii",
+    });
+  })
+);
 
 export function createCompletionInputs2ToJSON(
   createCompletionInputs2: CreateCompletionInputs2,
@@ -1392,10 +1422,12 @@ export const CreateCompletionInputs$outboundSchema: z.ZodType<
   CreateCompletionInputs$Outbound,
   z.ZodTypeDef,
   CreateCompletionInputs
-> = z.union([
-  z.record(z.any()),
-  z.array(z.lazy(() => CreateCompletionInputs2$outboundSchema)),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.record(z.any()),
+    z.array(z.lazy(() => CreateCompletionInputs2$outboundSchema)),
+  ])
+);
 
 export function createCompletionInputsToJSON(
   createCompletionInputs: CreateCompletionInputs,
@@ -1407,9 +1439,10 @@ export function createCompletionInputsToJSON(
 
 /** @internal */
 export const CreateCompletionRouterCompletionsType$outboundSchema:
-  z.ZodNativeEnum<typeof CreateCompletionRouterCompletionsType> = z.nativeEnum(
-    CreateCompletionRouterCompletionsType,
-  );
+  z.ZodNativeEnum<typeof CreateCompletionRouterCompletionsType> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(CreateCompletionRouterCompletionsType)
+    );
 
 /** @internal */
 export type CreateCompletionRouterCompletionsCache$Outbound = {
@@ -1422,10 +1455,12 @@ export const CreateCompletionRouterCompletionsCache$outboundSchema: z.ZodType<
   CreateCompletionRouterCompletionsCache$Outbound,
   z.ZodTypeDef,
   CreateCompletionRouterCompletionsCache
-> = z.object({
-  ttl: z.number().default(3600),
-  type: CreateCompletionRouterCompletionsType$outboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ttl: z.number().default(3600),
+    type: CreateCompletionRouterCompletionsType$outboundSchema,
+  })
+);
 
 export function createCompletionRouterCompletionsCacheToJSON(
   createCompletionRouterCompletionsCache:
@@ -1441,7 +1476,7 @@ export function createCompletionRouterCompletionsCacheToJSON(
 /** @internal */
 export const CreateCompletionSearchType$outboundSchema: z.ZodNativeEnum<
   typeof CreateCompletionSearchType
-> = z.nativeEnum(CreateCompletionSearchType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(CreateCompletionSearchType));
 
 /** @internal */
 export type CreateCompletionOrRouterCompletionsNin$Outbound =
@@ -1454,7 +1489,9 @@ export const CreateCompletionOrRouterCompletionsNin$outboundSchema: z.ZodType<
   CreateCompletionOrRouterCompletionsNin$Outbound,
   z.ZodTypeDef,
   CreateCompletionOrRouterCompletionsNin
-> = z.union([z.string(), z.number(), z.boolean()]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.number(), z.boolean()])
+);
 
 export function createCompletionOrRouterCompletionsNinToJSON(
   createCompletionOrRouterCompletionsNin:
@@ -1477,9 +1514,11 @@ export const CreateCompletionOrNin$outboundSchema: z.ZodType<
   CreateCompletionOrNin$Outbound,
   z.ZodTypeDef,
   CreateCompletionOrNin
-> = z.object({
-  nin: z.array(z.union([z.string(), z.number(), z.boolean()])),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    nin: z.array(z.union([z.string(), z.number(), z.boolean()])),
+  })
+);
 
 export function createCompletionOrNinToJSON(
   createCompletionOrNin: CreateCompletionOrNin,
@@ -1500,7 +1539,9 @@ export const CreateCompletionOrRouterCompletionsIn$outboundSchema: z.ZodType<
   CreateCompletionOrRouterCompletionsIn$Outbound,
   z.ZodTypeDef,
   CreateCompletionOrRouterCompletionsIn
-> = z.union([z.string(), z.number(), z.boolean()]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.number(), z.boolean()])
+);
 
 export function createCompletionOrRouterCompletionsInToJSON(
   createCompletionOrRouterCompletionsIn: CreateCompletionOrRouterCompletionsIn,
@@ -1522,9 +1563,11 @@ export const CreateCompletionOrIn$outboundSchema: z.ZodType<
   CreateCompletionOrIn$Outbound,
   z.ZodTypeDef,
   CreateCompletionOrIn
-> = z.object({
-  in: z.array(z.union([z.string(), z.number(), z.boolean()])),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    in: z.array(z.union([z.string(), z.number(), z.boolean()])),
+  })
+);
 
 export function createCompletionOrInToJSON(
   createCompletionOrIn: CreateCompletionOrIn,
@@ -1544,9 +1587,11 @@ export const CreateCompletionOrLte$outboundSchema: z.ZodType<
   CreateCompletionOrLte$Outbound,
   z.ZodTypeDef,
   CreateCompletionOrLte
-> = z.object({
-  lte: z.number(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    lte: z.number(),
+  })
+);
 
 export function createCompletionOrLteToJSON(
   createCompletionOrLte: CreateCompletionOrLte,
@@ -1566,9 +1611,11 @@ export const CreateCompletionOrLt$outboundSchema: z.ZodType<
   CreateCompletionOrLt$Outbound,
   z.ZodTypeDef,
   CreateCompletionOrLt
-> = z.object({
-  lt: z.number(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    lt: z.number(),
+  })
+);
 
 export function createCompletionOrLtToJSON(
   createCompletionOrLt: CreateCompletionOrLt,
@@ -1588,9 +1635,11 @@ export const CreateCompletionOrGte$outboundSchema: z.ZodType<
   CreateCompletionOrGte$Outbound,
   z.ZodTypeDef,
   CreateCompletionOrGte
-> = z.object({
-  gte: z.number(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    gte: z.number(),
+  })
+);
 
 export function createCompletionOrGteToJSON(
   createCompletionOrGte: CreateCompletionOrGte,
@@ -1610,9 +1659,11 @@ export const CreateCompletionOrGt$outboundSchema: z.ZodType<
   CreateCompletionOrGt$Outbound,
   z.ZodTypeDef,
   CreateCompletionOrGt
-> = z.object({
-  gt: z.number(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    gt: z.number(),
+  })
+);
 
 export function createCompletionOrGtToJSON(
   createCompletionOrGt: CreateCompletionOrGt,
@@ -1633,7 +1684,9 @@ export const CreateCompletionOrRouterCompletionsNe$outboundSchema: z.ZodType<
   CreateCompletionOrRouterCompletionsNe$Outbound,
   z.ZodTypeDef,
   CreateCompletionOrRouterCompletionsNe
-> = z.union([z.string(), z.number(), z.boolean()]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.number(), z.boolean()])
+);
 
 export function createCompletionOrRouterCompletionsNeToJSON(
   createCompletionOrRouterCompletionsNe: CreateCompletionOrRouterCompletionsNe,
@@ -1655,9 +1708,11 @@ export const CreateCompletionOrNe$outboundSchema: z.ZodType<
   CreateCompletionOrNe$Outbound,
   z.ZodTypeDef,
   CreateCompletionOrNe
-> = z.object({
-  ne: z.union([z.string(), z.number(), z.boolean()]),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ne: z.union([z.string(), z.number(), z.boolean()]),
+  })
+);
 
 export function createCompletionOrNeToJSON(
   createCompletionOrNe: CreateCompletionOrNe,
@@ -1678,7 +1733,9 @@ export const CreateCompletionOrRouterCompletionsEq$outboundSchema: z.ZodType<
   CreateCompletionOrRouterCompletionsEq$Outbound,
   z.ZodTypeDef,
   CreateCompletionOrRouterCompletionsEq
-> = z.union([z.string(), z.number(), z.boolean()]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.number(), z.boolean()])
+);
 
 export function createCompletionOrRouterCompletionsEqToJSON(
   createCompletionOrRouterCompletionsEq: CreateCompletionOrRouterCompletionsEq,
@@ -1700,9 +1757,11 @@ export const CreateCompletionOrEq$outboundSchema: z.ZodType<
   CreateCompletionOrEq$Outbound,
   z.ZodTypeDef,
   CreateCompletionOrEq
-> = z.object({
-  eq: z.union([z.string(), z.number(), z.boolean()]),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    eq: z.union([z.string(), z.number(), z.boolean()]),
+  })
+);
 
 export function createCompletionOrEqToJSON(
   createCompletionOrEq: CreateCompletionOrEq,
@@ -1729,16 +1788,18 @@ export const CreateCompletionFilterByRouterCompletionsOr$outboundSchema:
     CreateCompletionFilterByRouterCompletionsOr$Outbound,
     z.ZodTypeDef,
     CreateCompletionFilterByRouterCompletionsOr
-  > = z.union([
-    z.lazy(() => CreateCompletionOrEq$outboundSchema),
-    z.lazy(() => CreateCompletionOrNe$outboundSchema),
-    z.lazy(() => CreateCompletionOrGt$outboundSchema),
-    z.lazy(() => CreateCompletionOrGte$outboundSchema),
-    z.lazy(() => CreateCompletionOrLt$outboundSchema),
-    z.lazy(() => CreateCompletionOrLte$outboundSchema),
-    z.lazy(() => CreateCompletionOrIn$outboundSchema),
-    z.lazy(() => CreateCompletionOrNin$outboundSchema),
-  ]);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.union([
+      z.lazy(() => CreateCompletionOrEq$outboundSchema),
+      z.lazy(() => CreateCompletionOrNe$outboundSchema),
+      z.lazy(() => CreateCompletionOrGt$outboundSchema),
+      z.lazy(() => CreateCompletionOrGte$outboundSchema),
+      z.lazy(() => CreateCompletionOrLt$outboundSchema),
+      z.lazy(() => CreateCompletionOrLte$outboundSchema),
+      z.lazy(() => CreateCompletionOrIn$outboundSchema),
+      z.lazy(() => CreateCompletionOrNin$outboundSchema),
+    ])
+  );
 
 export function createCompletionFilterByRouterCompletionsOrToJSON(
   createCompletionFilterByRouterCompletionsOr:
@@ -1773,9 +1834,9 @@ export const CreateCompletionFilterByOr$outboundSchema: z.ZodType<
   CreateCompletionFilterByOr$Outbound,
   z.ZodTypeDef,
   CreateCompletionFilterByOr
-> = z.object({
-  or: z.array(
-    z.record(z.union([
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    or: z.array(z.record(z.union([
       z.lazy(() => CreateCompletionOrEq$outboundSchema),
       z.lazy(() =>
         CreateCompletionOrNe$outboundSchema
@@ -1786,9 +1847,9 @@ export const CreateCompletionFilterByOr$outboundSchema: z.ZodType<
       z.lazy(() => CreateCompletionOrLte$outboundSchema),
       z.lazy(() => CreateCompletionOrIn$outboundSchema),
       z.lazy(() => CreateCompletionOrNin$outboundSchema),
-    ])),
-  ),
-});
+    ]))),
+  })
+);
 
 export function createCompletionFilterByOrToJSON(
   createCompletionFilterByOr: CreateCompletionFilterByOr,
@@ -1809,7 +1870,9 @@ export const CreateCompletionAndRouterCompletionsNin$outboundSchema: z.ZodType<
   CreateCompletionAndRouterCompletionsNin$Outbound,
   z.ZodTypeDef,
   CreateCompletionAndRouterCompletionsNin
-> = z.union([z.string(), z.number(), z.boolean()]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.number(), z.boolean()])
+);
 
 export function createCompletionAndRouterCompletionsNinToJSON(
   createCompletionAndRouterCompletionsNin:
@@ -1832,9 +1895,11 @@ export const CreateCompletionAndNin$outboundSchema: z.ZodType<
   CreateCompletionAndNin$Outbound,
   z.ZodTypeDef,
   CreateCompletionAndNin
-> = z.object({
-  nin: z.array(z.union([z.string(), z.number(), z.boolean()])),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    nin: z.array(z.union([z.string(), z.number(), z.boolean()])),
+  })
+);
 
 export function createCompletionAndNinToJSON(
   createCompletionAndNin: CreateCompletionAndNin,
@@ -1855,7 +1920,9 @@ export const CreateCompletionAndRouterCompletionsIn$outboundSchema: z.ZodType<
   CreateCompletionAndRouterCompletionsIn$Outbound,
   z.ZodTypeDef,
   CreateCompletionAndRouterCompletionsIn
-> = z.union([z.string(), z.number(), z.boolean()]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.number(), z.boolean()])
+);
 
 export function createCompletionAndRouterCompletionsInToJSON(
   createCompletionAndRouterCompletionsIn:
@@ -1878,9 +1945,11 @@ export const CreateCompletionAndIn$outboundSchema: z.ZodType<
   CreateCompletionAndIn$Outbound,
   z.ZodTypeDef,
   CreateCompletionAndIn
-> = z.object({
-  in: z.array(z.union([z.string(), z.number(), z.boolean()])),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    in: z.array(z.union([z.string(), z.number(), z.boolean()])),
+  })
+);
 
 export function createCompletionAndInToJSON(
   createCompletionAndIn: CreateCompletionAndIn,
@@ -1900,9 +1969,11 @@ export const CreateCompletionAndLte$outboundSchema: z.ZodType<
   CreateCompletionAndLte$Outbound,
   z.ZodTypeDef,
   CreateCompletionAndLte
-> = z.object({
-  lte: z.number(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    lte: z.number(),
+  })
+);
 
 export function createCompletionAndLteToJSON(
   createCompletionAndLte: CreateCompletionAndLte,
@@ -1922,9 +1993,11 @@ export const CreateCompletionAndLt$outboundSchema: z.ZodType<
   CreateCompletionAndLt$Outbound,
   z.ZodTypeDef,
   CreateCompletionAndLt
-> = z.object({
-  lt: z.number(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    lt: z.number(),
+  })
+);
 
 export function createCompletionAndLtToJSON(
   createCompletionAndLt: CreateCompletionAndLt,
@@ -1944,9 +2017,11 @@ export const CreateCompletionAndGte$outboundSchema: z.ZodType<
   CreateCompletionAndGte$Outbound,
   z.ZodTypeDef,
   CreateCompletionAndGte
-> = z.object({
-  gte: z.number(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    gte: z.number(),
+  })
+);
 
 export function createCompletionAndGteToJSON(
   createCompletionAndGte: CreateCompletionAndGte,
@@ -1966,9 +2041,11 @@ export const CreateCompletionAndGt$outboundSchema: z.ZodType<
   CreateCompletionAndGt$Outbound,
   z.ZodTypeDef,
   CreateCompletionAndGt
-> = z.object({
-  gt: z.number(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    gt: z.number(),
+  })
+);
 
 export function createCompletionAndGtToJSON(
   createCompletionAndGt: CreateCompletionAndGt,
@@ -1989,7 +2066,9 @@ export const CreateCompletionAndRouterCompletionsNe$outboundSchema: z.ZodType<
   CreateCompletionAndRouterCompletionsNe$Outbound,
   z.ZodTypeDef,
   CreateCompletionAndRouterCompletionsNe
-> = z.union([z.string(), z.number(), z.boolean()]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.number(), z.boolean()])
+);
 
 export function createCompletionAndRouterCompletionsNeToJSON(
   createCompletionAndRouterCompletionsNe:
@@ -2012,9 +2091,11 @@ export const CreateCompletionAndNe$outboundSchema: z.ZodType<
   CreateCompletionAndNe$Outbound,
   z.ZodTypeDef,
   CreateCompletionAndNe
-> = z.object({
-  ne: z.union([z.string(), z.number(), z.boolean()]),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ne: z.union([z.string(), z.number(), z.boolean()]),
+  })
+);
 
 export function createCompletionAndNeToJSON(
   createCompletionAndNe: CreateCompletionAndNe,
@@ -2035,7 +2116,9 @@ export const CreateCompletionAndRouterCompletionsEq$outboundSchema: z.ZodType<
   CreateCompletionAndRouterCompletionsEq$Outbound,
   z.ZodTypeDef,
   CreateCompletionAndRouterCompletionsEq
-> = z.union([z.string(), z.number(), z.boolean()]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.number(), z.boolean()])
+);
 
 export function createCompletionAndRouterCompletionsEqToJSON(
   createCompletionAndRouterCompletionsEq:
@@ -2058,9 +2141,11 @@ export const CreateCompletionAndEq$outboundSchema: z.ZodType<
   CreateCompletionAndEq$Outbound,
   z.ZodTypeDef,
   CreateCompletionAndEq
-> = z.object({
-  eq: z.union([z.string(), z.number(), z.boolean()]),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    eq: z.union([z.string(), z.number(), z.boolean()]),
+  })
+);
 
 export function createCompletionAndEqToJSON(
   createCompletionAndEq: CreateCompletionAndEq,
@@ -2087,16 +2172,18 @@ export const CreateCompletionFilterByRouterCompletionsAnd$outboundSchema:
     CreateCompletionFilterByRouterCompletionsAnd$Outbound,
     z.ZodTypeDef,
     CreateCompletionFilterByRouterCompletionsAnd
-  > = z.union([
-    z.lazy(() => CreateCompletionAndEq$outboundSchema),
-    z.lazy(() => CreateCompletionAndNe$outboundSchema),
-    z.lazy(() => CreateCompletionAndGt$outboundSchema),
-    z.lazy(() => CreateCompletionAndGte$outboundSchema),
-    z.lazy(() => CreateCompletionAndLt$outboundSchema),
-    z.lazy(() => CreateCompletionAndLte$outboundSchema),
-    z.lazy(() => CreateCompletionAndIn$outboundSchema),
-    z.lazy(() => CreateCompletionAndNin$outboundSchema),
-  ]);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.union([
+      z.lazy(() => CreateCompletionAndEq$outboundSchema),
+      z.lazy(() => CreateCompletionAndNe$outboundSchema),
+      z.lazy(() => CreateCompletionAndGt$outboundSchema),
+      z.lazy(() => CreateCompletionAndGte$outboundSchema),
+      z.lazy(() => CreateCompletionAndLt$outboundSchema),
+      z.lazy(() => CreateCompletionAndLte$outboundSchema),
+      z.lazy(() => CreateCompletionAndIn$outboundSchema),
+      z.lazy(() => CreateCompletionAndNin$outboundSchema),
+    ])
+  );
 
 export function createCompletionFilterByRouterCompletionsAndToJSON(
   createCompletionFilterByRouterCompletionsAnd:
@@ -2131,9 +2218,9 @@ export const CreateCompletionFilterByAnd$outboundSchema: z.ZodType<
   CreateCompletionFilterByAnd$Outbound,
   z.ZodTypeDef,
   CreateCompletionFilterByAnd
-> = z.object({
-  and: z.array(
-    z.record(z.union([
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    and: z.array(z.record(z.union([
       z.lazy(() => CreateCompletionAndEq$outboundSchema),
       z.lazy(() =>
         CreateCompletionAndNe$outboundSchema
@@ -2144,9 +2231,9 @@ export const CreateCompletionFilterByAnd$outboundSchema: z.ZodType<
       z.lazy(() => CreateCompletionAndLte$outboundSchema),
       z.lazy(() => CreateCompletionAndIn$outboundSchema),
       z.lazy(() => CreateCompletionAndNin$outboundSchema),
-    ])),
-  ),
-});
+    ]))),
+  })
+);
 
 export function createCompletionFilterByAndToJSON(
   createCompletionFilterByAnd: CreateCompletionFilterByAnd,
@@ -2169,7 +2256,9 @@ export const CreateCompletion1RouterCompletionsNin$outboundSchema: z.ZodType<
   CreateCompletion1RouterCompletionsNin$Outbound,
   z.ZodTypeDef,
   CreateCompletion1RouterCompletionsNin
-> = z.union([z.string(), z.number(), z.boolean()]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.number(), z.boolean()])
+);
 
 export function createCompletion1RouterCompletionsNinToJSON(
   createCompletion1RouterCompletionsNin: CreateCompletion1RouterCompletionsNin,
@@ -2191,9 +2280,11 @@ export const CreateCompletion1Nin$outboundSchema: z.ZodType<
   CreateCompletion1Nin$Outbound,
   z.ZodTypeDef,
   CreateCompletion1Nin
-> = z.object({
-  nin: z.array(z.union([z.string(), z.number(), z.boolean()])),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    nin: z.array(z.union([z.string(), z.number(), z.boolean()])),
+  })
+);
 
 export function createCompletion1NinToJSON(
   createCompletion1Nin: CreateCompletion1Nin,
@@ -2214,7 +2305,9 @@ export const CreateCompletion1RouterCompletionsIn$outboundSchema: z.ZodType<
   CreateCompletion1RouterCompletionsIn$Outbound,
   z.ZodTypeDef,
   CreateCompletion1RouterCompletionsIn
-> = z.union([z.string(), z.number(), z.boolean()]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.number(), z.boolean()])
+);
 
 export function createCompletion1RouterCompletionsInToJSON(
   createCompletion1RouterCompletionsIn: CreateCompletion1RouterCompletionsIn,
@@ -2236,9 +2329,11 @@ export const CreateCompletion1In$outboundSchema: z.ZodType<
   CreateCompletion1In$Outbound,
   z.ZodTypeDef,
   CreateCompletion1In
-> = z.object({
-  in: z.array(z.union([z.string(), z.number(), z.boolean()])),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    in: z.array(z.union([z.string(), z.number(), z.boolean()])),
+  })
+);
 
 export function createCompletion1InToJSON(
   createCompletion1In: CreateCompletion1In,
@@ -2258,9 +2353,11 @@ export const CreateCompletion1Lte$outboundSchema: z.ZodType<
   CreateCompletion1Lte$Outbound,
   z.ZodTypeDef,
   CreateCompletion1Lte
-> = z.object({
-  lte: z.number(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    lte: z.number(),
+  })
+);
 
 export function createCompletion1LteToJSON(
   createCompletion1Lte: CreateCompletion1Lte,
@@ -2280,9 +2377,11 @@ export const CreateCompletion1Lt$outboundSchema: z.ZodType<
   CreateCompletion1Lt$Outbound,
   z.ZodTypeDef,
   CreateCompletion1Lt
-> = z.object({
-  lt: z.number(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    lt: z.number(),
+  })
+);
 
 export function createCompletion1LtToJSON(
   createCompletion1Lt: CreateCompletion1Lt,
@@ -2302,9 +2401,11 @@ export const CreateCompletion1Gte$outboundSchema: z.ZodType<
   CreateCompletion1Gte$Outbound,
   z.ZodTypeDef,
   CreateCompletion1Gte
-> = z.object({
-  gte: z.number(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    gte: z.number(),
+  })
+);
 
 export function createCompletion1GteToJSON(
   createCompletion1Gte: CreateCompletion1Gte,
@@ -2324,9 +2425,11 @@ export const CreateCompletion1Gt$outboundSchema: z.ZodType<
   CreateCompletion1Gt$Outbound,
   z.ZodTypeDef,
   CreateCompletion1Gt
-> = z.object({
-  gt: z.number(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    gt: z.number(),
+  })
+);
 
 export function createCompletion1GtToJSON(
   createCompletion1Gt: CreateCompletion1Gt,
@@ -2347,7 +2450,9 @@ export const CreateCompletion1RouterCompletionsNe$outboundSchema: z.ZodType<
   CreateCompletion1RouterCompletionsNe$Outbound,
   z.ZodTypeDef,
   CreateCompletion1RouterCompletionsNe
-> = z.union([z.string(), z.number(), z.boolean()]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.number(), z.boolean()])
+);
 
 export function createCompletion1RouterCompletionsNeToJSON(
   createCompletion1RouterCompletionsNe: CreateCompletion1RouterCompletionsNe,
@@ -2369,9 +2474,11 @@ export const CreateCompletion1Ne$outboundSchema: z.ZodType<
   CreateCompletion1Ne$Outbound,
   z.ZodTypeDef,
   CreateCompletion1Ne
-> = z.object({
-  ne: z.union([z.string(), z.number(), z.boolean()]),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ne: z.union([z.string(), z.number(), z.boolean()]),
+  })
+);
 
 export function createCompletion1NeToJSON(
   createCompletion1Ne: CreateCompletion1Ne,
@@ -2392,7 +2499,9 @@ export const CreateCompletion1RouterCompletionsEq$outboundSchema: z.ZodType<
   CreateCompletion1RouterCompletionsEq$Outbound,
   z.ZodTypeDef,
   CreateCompletion1RouterCompletionsEq
-> = z.union([z.string(), z.number(), z.boolean()]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.number(), z.boolean()])
+);
 
 export function createCompletion1RouterCompletionsEqToJSON(
   createCompletion1RouterCompletionsEq: CreateCompletion1RouterCompletionsEq,
@@ -2414,9 +2523,11 @@ export const CreateCompletion1Eq$outboundSchema: z.ZodType<
   CreateCompletion1Eq$Outbound,
   z.ZodTypeDef,
   CreateCompletion1Eq
-> = z.object({
-  eq: z.union([z.string(), z.number(), z.boolean()]),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    eq: z.union([z.string(), z.number(), z.boolean()]),
+  })
+);
 
 export function createCompletion1EqToJSON(
   createCompletion1Eq: CreateCompletion1Eq,
@@ -2442,16 +2553,18 @@ export const CreateCompletionFilterBy1$outboundSchema: z.ZodType<
   CreateCompletionFilterBy1$Outbound,
   z.ZodTypeDef,
   CreateCompletionFilterBy1
-> = z.union([
-  z.lazy(() => CreateCompletion1Eq$outboundSchema),
-  z.lazy(() => CreateCompletion1Ne$outboundSchema),
-  z.lazy(() => CreateCompletion1Gt$outboundSchema),
-  z.lazy(() => CreateCompletion1Gte$outboundSchema),
-  z.lazy(() => CreateCompletion1Lt$outboundSchema),
-  z.lazy(() => CreateCompletion1Lte$outboundSchema),
-  z.lazy(() => CreateCompletion1In$outboundSchema),
-  z.lazy(() => CreateCompletion1Nin$outboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => CreateCompletion1Eq$outboundSchema),
+    z.lazy(() => CreateCompletion1Ne$outboundSchema),
+    z.lazy(() => CreateCompletion1Gt$outboundSchema),
+    z.lazy(() => CreateCompletion1Gte$outboundSchema),
+    z.lazy(() => CreateCompletion1Lt$outboundSchema),
+    z.lazy(() => CreateCompletion1Lte$outboundSchema),
+    z.lazy(() => CreateCompletion1In$outboundSchema),
+    z.lazy(() => CreateCompletion1Nin$outboundSchema),
+  ])
+);
 
 export function createCompletionFilterBy1ToJSON(
   createCompletionFilterBy1: CreateCompletionFilterBy1,
@@ -2482,20 +2595,22 @@ export const CreateCompletionFilterBy$outboundSchema: z.ZodType<
   CreateCompletionFilterBy$Outbound,
   z.ZodTypeDef,
   CreateCompletionFilterBy
-> = z.union([
-  z.lazy(() => CreateCompletionFilterByAnd$outboundSchema),
-  z.lazy(() => CreateCompletionFilterByOr$outboundSchema),
-  z.record(z.union([
-    z.lazy(() => CreateCompletion1Eq$outboundSchema),
-    z.lazy(() => CreateCompletion1Ne$outboundSchema),
-    z.lazy(() => CreateCompletion1Gt$outboundSchema),
-    z.lazy(() => CreateCompletion1Gte$outboundSchema),
-    z.lazy(() => CreateCompletion1Lt$outboundSchema),
-    z.lazy(() => CreateCompletion1Lte$outboundSchema),
-    z.lazy(() => CreateCompletion1In$outboundSchema),
-    z.lazy(() => CreateCompletion1Nin$outboundSchema),
-  ])),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => CreateCompletionFilterByAnd$outboundSchema),
+    z.lazy(() => CreateCompletionFilterByOr$outboundSchema),
+    z.record(z.union([
+      z.lazy(() => CreateCompletion1Eq$outboundSchema),
+      z.lazy(() => CreateCompletion1Ne$outboundSchema),
+      z.lazy(() => CreateCompletion1Gt$outboundSchema),
+      z.lazy(() => CreateCompletion1Gte$outboundSchema),
+      z.lazy(() => CreateCompletion1Lt$outboundSchema),
+      z.lazy(() => CreateCompletion1Lte$outboundSchema),
+      z.lazy(() => CreateCompletion1In$outboundSchema),
+      z.lazy(() => CreateCompletion1Nin$outboundSchema),
+    ])),
+  ])
+);
 
 export function createCompletionFilterByToJSON(
   createCompletionFilterBy: CreateCompletionFilterBy,
@@ -2517,17 +2632,19 @@ export const CreateCompletionSearchOptions$outboundSchema: z.ZodType<
   CreateCompletionSearchOptions$Outbound,
   z.ZodTypeDef,
   CreateCompletionSearchOptions
-> = z.object({
-  includeVectors: z.boolean().optional(),
-  includeMetadata: z.boolean().optional(),
-  includeScores: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    includeVectors: "include_vectors",
-    includeMetadata: "include_metadata",
-    includeScores: "include_scores",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    includeVectors: z.boolean().optional(),
+    includeMetadata: z.boolean().optional(),
+    includeScores: z.boolean().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      includeVectors: "include_vectors",
+      includeMetadata: "include_metadata",
+      includeScores: "include_scores",
+    });
+  })
+);
 
 export function createCompletionSearchOptionsToJSON(
   createCompletionSearchOptions: CreateCompletionSearchOptions,
@@ -2551,15 +2668,17 @@ export const CreateCompletionRerankConfig$outboundSchema: z.ZodType<
   CreateCompletionRerankConfig$Outbound,
   z.ZodTypeDef,
   CreateCompletionRerankConfig
-> = z.object({
-  model: z.string(),
-  threshold: z.number().default(0),
-  topK: z.number().int().default(10),
-}).transform((v) => {
-  return remap$(v, {
-    topK: "top_k",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model: z.string(),
+    threshold: z.number().default(0),
+    topK: z.number().int().default(10),
+  }).transform((v) => {
+    return remap$(v, {
+      topK: "top_k",
+    });
+  })
+);
 
 export function createCompletionRerankConfigToJSON(
   createCompletionRerankConfig: CreateCompletionRerankConfig,
@@ -2581,9 +2700,11 @@ export const CreateCompletionAgenticRagConfig$outboundSchema: z.ZodType<
   CreateCompletionAgenticRagConfig$Outbound,
   z.ZodTypeDef,
   CreateCompletionAgenticRagConfig
-> = z.object({
-  model: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model: z.string(),
+  })
+);
 
 export function createCompletionAgenticRagConfigToJSON(
   createCompletionAgenticRagConfig: CreateCompletionAgenticRagConfig,
@@ -2627,44 +2748,47 @@ export const CreateCompletionKnowledgeBases$outboundSchema: z.ZodType<
   CreateCompletionKnowledgeBases$Outbound,
   z.ZodTypeDef,
   CreateCompletionKnowledgeBases
-> = z.object({
-  topK: z.nullable(z.number().int()).optional(),
-  threshold: z.nullable(z.number()).optional(),
-  searchType: z.nullable(CreateCompletionSearchType$outboundSchema).optional(),
-  filterBy: z.union([
-    z.lazy(() => CreateCompletionFilterByAnd$outboundSchema),
-    z.lazy(() => CreateCompletionFilterByOr$outboundSchema),
-    z.record(z.union([
-      z.lazy(() => CreateCompletion1Eq$outboundSchema),
-      z.lazy(() => CreateCompletion1Ne$outboundSchema),
-      z.lazy(() => CreateCompletion1Gt$outboundSchema),
-      z.lazy(() => CreateCompletion1Gte$outboundSchema),
-      z.lazy(() => CreateCompletion1Lt$outboundSchema),
-      z.lazy(() => CreateCompletion1Lte$outboundSchema),
-      z.lazy(() => CreateCompletion1In$outboundSchema),
-      z.lazy(() => CreateCompletion1Nin$outboundSchema),
-    ])),
-  ]).optional(),
-  searchOptions: z.lazy(() => CreateCompletionSearchOptions$outboundSchema)
-    .optional(),
-  rerankConfig: z.lazy(() => CreateCompletionRerankConfig$outboundSchema)
-    .optional(),
-  agenticRagConfig: z.lazy(() =>
-    CreateCompletionAgenticRagConfig$outboundSchema
-  ).optional(),
-  knowledgeId: z.string(),
-  query: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    topK: "top_k",
-    searchType: "search_type",
-    filterBy: "filter_by",
-    searchOptions: "search_options",
-    rerankConfig: "rerank_config",
-    agenticRagConfig: "agentic_rag_config",
-    knowledgeId: "knowledge_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    topK: z.nullable(z.number().int()).optional(),
+    threshold: z.nullable(z.number()).optional(),
+    searchType: z.nullable(CreateCompletionSearchType$outboundSchema)
+      .optional(),
+    filterBy: z.union([
+      z.lazy(() => CreateCompletionFilterByAnd$outboundSchema),
+      z.lazy(() => CreateCompletionFilterByOr$outboundSchema),
+      z.record(z.union([
+        z.lazy(() => CreateCompletion1Eq$outboundSchema),
+        z.lazy(() => CreateCompletion1Ne$outboundSchema),
+        z.lazy(() => CreateCompletion1Gt$outboundSchema),
+        z.lazy(() => CreateCompletion1Gte$outboundSchema),
+        z.lazy(() => CreateCompletion1Lt$outboundSchema),
+        z.lazy(() => CreateCompletion1Lte$outboundSchema),
+        z.lazy(() => CreateCompletion1In$outboundSchema),
+        z.lazy(() => CreateCompletion1Nin$outboundSchema),
+      ])),
+    ]).optional(),
+    searchOptions: z.lazy(() => CreateCompletionSearchOptions$outboundSchema)
+      .optional(),
+    rerankConfig: z.lazy(() => CreateCompletionRerankConfig$outboundSchema)
+      .optional(),
+    agenticRagConfig: z.lazy(() =>
+      CreateCompletionAgenticRagConfig$outboundSchema
+    ).optional(),
+    knowledgeId: z.string(),
+    query: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      topK: "top_k",
+      searchType: "search_type",
+      filterBy: "filter_by",
+      searchOptions: "search_options",
+      rerankConfig: "rerank_config",
+      agenticRagConfig: "agentic_rag_config",
+      knowledgeId: "knowledge_id",
+    });
+  })
+);
 
 export function createCompletionKnowledgeBasesToJSON(
   createCompletionKnowledgeBases: CreateCompletionKnowledgeBases,
@@ -2678,8 +2802,10 @@ export function createCompletionKnowledgeBasesToJSON(
 
 /** @internal */
 export const CreateCompletionLoadBalancerRouterCompletionsType$outboundSchema:
-  z.ZodNativeEnum<typeof CreateCompletionLoadBalancerRouterCompletionsType> = z
-    .nativeEnum(CreateCompletionLoadBalancerRouterCompletionsType);
+  z.ZodNativeEnum<typeof CreateCompletionLoadBalancerRouterCompletionsType> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(CreateCompletionLoadBalancerRouterCompletionsType)
+    );
 
 /** @internal */
 export type CreateCompletionLoadBalancerRouterCompletionsModels$Outbound = {
@@ -2693,10 +2819,12 @@ export const CreateCompletionLoadBalancerRouterCompletionsModels$outboundSchema:
     CreateCompletionLoadBalancerRouterCompletionsModels$Outbound,
     z.ZodTypeDef,
     CreateCompletionLoadBalancerRouterCompletionsModels
-  > = z.object({
-    model: z.string(),
-    weight: z.number().default(0.5),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      model: z.string(),
+      weight: z.number().default(0.5),
+    })
+  );
 
 export function createCompletionLoadBalancerRouterCompletionsModelsToJSON(
   createCompletionLoadBalancerRouterCompletionsModels:
@@ -2721,14 +2849,14 @@ export const CreateCompletionLoadBalancerRouterCompletions1$outboundSchema:
     CreateCompletionLoadBalancerRouterCompletions1$Outbound,
     z.ZodTypeDef,
     CreateCompletionLoadBalancerRouterCompletions1
-  > = z.object({
-    type: CreateCompletionLoadBalancerRouterCompletionsType$outboundSchema,
-    models: z.array(
-      z.lazy(() =>
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type: CreateCompletionLoadBalancerRouterCompletionsType$outboundSchema,
+      models: z.array(z.lazy(() =>
         CreateCompletionLoadBalancerRouterCompletionsModels$outboundSchema
-      ),
-    ),
-  });
+      )),
+    })
+  );
 
 export function createCompletionLoadBalancerRouterCompletions1ToJSON(
   createCompletionLoadBalancerRouterCompletions1:
@@ -2751,8 +2879,8 @@ export const CreateCompletionRouterCompletionsLoadBalancer$outboundSchema:
     CreateCompletionRouterCompletionsLoadBalancer$Outbound,
     z.ZodTypeDef,
     CreateCompletionRouterCompletionsLoadBalancer
-  > = z.lazy(() =>
-    CreateCompletionLoadBalancerRouterCompletions1$outboundSchema
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.lazy(() => CreateCompletionLoadBalancerRouterCompletions1$outboundSchema)
   );
 
 export function createCompletionRouterCompletionsLoadBalancerToJSON(
@@ -2776,13 +2904,15 @@ export const CreateCompletionRouterCompletionsTimeout$outboundSchema: z.ZodType<
   CreateCompletionRouterCompletionsTimeout$Outbound,
   z.ZodTypeDef,
   CreateCompletionRouterCompletionsTimeout
-> = z.object({
-  callTimeout: z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    callTimeout: "call_timeout",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    callTimeout: z.number(),
+  }).transform((v) => {
+    return remap$(v, {
+      callTimeout: "call_timeout",
+    });
+  })
+);
 
 export function createCompletionRouterCompletionsTimeoutToJSON(
   createCompletionRouterCompletionsTimeout:
@@ -2824,39 +2954,42 @@ export const CreateCompletionOrq$outboundSchema: z.ZodType<
   CreateCompletionOrq$Outbound,
   z.ZodTypeDef,
   CreateCompletionOrq
-> = z.object({
-  name: z.string().optional(),
-  retry: z.lazy(() => CreateCompletionRouterCompletionsRetry$outboundSchema)
-    .optional(),
-  fallbackOnCodes: z.array(z.number().int()).optional(),
-  fallbacks: z.array(
-    z.lazy(() => CreateCompletionRouterCompletionsFallbacks$outboundSchema),
-  ).optional(),
-  prompt: z.lazy(() => CreateCompletionPrompt$outboundSchema).optional(),
-  identity: components.PublicIdentity$outboundSchema.optional(),
-  contact: components.PublicContact$outboundSchema.optional(),
-  thread: z.lazy(() => CreateCompletionThread$outboundSchema).optional(),
-  inputs: z.union([
-    z.record(z.any()),
-    z.array(z.lazy(() => CreateCompletionInputs2$outboundSchema)),
-  ]).optional(),
-  cache: z.lazy(() => CreateCompletionRouterCompletionsCache$outboundSchema)
-    .optional(),
-  knowledgeBases: z.array(
-    z.lazy(() => CreateCompletionKnowledgeBases$outboundSchema),
-  ).optional(),
-  loadBalancer: z.lazy(() =>
-    CreateCompletionLoadBalancerRouterCompletions1$outboundSchema
-  ).optional(),
-  timeout: z.lazy(() => CreateCompletionRouterCompletionsTimeout$outboundSchema)
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    fallbackOnCodes: "fallback_on_codes",
-    knowledgeBases: "knowledge_bases",
-    loadBalancer: "load_balancer",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    retry: z.lazy(() => CreateCompletionRouterCompletionsRetry$outboundSchema)
+      .optional(),
+    fallbackOnCodes: z.array(z.number().int()).optional(),
+    fallbacks: z.array(
+      z.lazy(() => CreateCompletionRouterCompletionsFallbacks$outboundSchema),
+    ).optional(),
+    prompt: z.lazy(() => CreateCompletionPrompt$outboundSchema).optional(),
+    identity: components.PublicIdentity$outboundSchema.optional(),
+    contact: components.PublicContact$outboundSchema.optional(),
+    thread: z.lazy(() => CreateCompletionThread$outboundSchema).optional(),
+    inputs: z.union([
+      z.record(z.any()),
+      z.array(z.lazy(() => CreateCompletionInputs2$outboundSchema)),
+    ]).optional(),
+    cache: z.lazy(() => CreateCompletionRouterCompletionsCache$outboundSchema)
+      .optional(),
+    knowledgeBases: z.array(
+      z.lazy(() => CreateCompletionKnowledgeBases$outboundSchema),
+    ).optional(),
+    loadBalancer: z.lazy(() =>
+      CreateCompletionLoadBalancerRouterCompletions1$outboundSchema
+    ).optional(),
+    timeout: z.lazy(() =>
+      CreateCompletionRouterCompletionsTimeout$outboundSchema
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      fallbackOnCodes: "fallback_on_codes",
+      knowledgeBases: "knowledge_bases",
+      loadBalancer: "load_balancer",
+    });
+  })
+);
 
 export function createCompletionOrqToJSON(
   createCompletionOrq: CreateCompletionOrq,
@@ -2904,49 +3037,51 @@ export const CreateCompletionRequestBody$outboundSchema: z.ZodType<
   CreateCompletionRequestBody$Outbound,
   z.ZodTypeDef,
   CreateCompletionRequestBody
-> = z.object({
-  model: z.string(),
-  prompt: z.string(),
-  echo: z.nullable(z.boolean().default(false)),
-  frequencyPenalty: z.nullable(z.number().default(0)),
-  maxTokens: z.nullable(z.number().int().default(16)),
-  presencePenalty: z.nullable(z.number().default(0)),
-  seed: z.nullable(z.number().int()).optional(),
-  stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
-  temperature: z.nullable(z.number().default(1)),
-  topP: z.nullable(z.number().default(1)),
-  n: z.nullable(z.number().int().default(1)),
-  user: z.string().optional(),
-  name: z.string().optional(),
-  fallbackOnCodes: z.array(z.number().int()).optional(),
-  fallbacks: z.array(z.lazy(() => CreateCompletionFallbacks$outboundSchema))
-    .optional(),
-  retry: z.lazy(() => CreateCompletionRetry$outboundSchema).optional(),
-  cache: z.lazy(() => CreateCompletionCache$outboundSchema).optional(),
-  loadBalancer: z.lazy(() => CreateCompletionLoadBalancer1$outboundSchema)
-    .optional(),
-  timeout: z.lazy(() => CreateCompletionTimeout$outboundSchema).optional(),
-  thinking: z.nullable(
-    z.union([
-      components.ThinkingConfigDisabledSchema$outboundSchema,
-      components.ThinkingConfigEnabledSchema$outboundSchema,
-      components.ThinkingConfigAdaptiveSchema$outboundSchema,
-      components.ThinkingConfigBetweenToolsSchema$outboundSchema,
-    ]),
-  ).optional(),
-  plugins: z.array(components.PIIRedactionPlugin$outboundSchema).optional(),
-  orq: z.lazy(() => CreateCompletionOrq$outboundSchema).optional(),
-  stream: z.boolean().default(false),
-}).transform((v) => {
-  return remap$(v, {
-    frequencyPenalty: "frequency_penalty",
-    maxTokens: "max_tokens",
-    presencePenalty: "presence_penalty",
-    topP: "top_p",
-    fallbackOnCodes: "fallback_on_codes",
-    loadBalancer: "load_balancer",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model: z.string(),
+    prompt: z.string(),
+    echo: z.nullable(z.boolean().default(false)),
+    frequencyPenalty: z.nullable(z.number().default(0)),
+    maxTokens: z.nullable(z.number().int().default(16)),
+    presencePenalty: z.nullable(z.number().default(0)),
+    seed: z.nullable(z.number().int()).optional(),
+    stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
+    temperature: z.nullable(z.number().default(1)),
+    topP: z.nullable(z.number().default(1)),
+    n: z.nullable(z.number().int().default(1)),
+    user: z.string().optional(),
+    name: z.string().optional(),
+    fallbackOnCodes: z.array(z.number().int()).optional(),
+    fallbacks: z.array(z.lazy(() => CreateCompletionFallbacks$outboundSchema))
+      .optional(),
+    retry: z.lazy(() => CreateCompletionRetry$outboundSchema).optional(),
+    cache: z.lazy(() => CreateCompletionCache$outboundSchema).optional(),
+    loadBalancer: z.lazy(() => CreateCompletionLoadBalancer1$outboundSchema)
+      .optional(),
+    timeout: z.lazy(() => CreateCompletionTimeout$outboundSchema).optional(),
+    thinking: z.nullable(
+      z.union([
+        components.ThinkingConfigDisabledSchema$outboundSchema,
+        components.ThinkingConfigEnabledSchema$outboundSchema,
+        components.ThinkingConfigAdaptiveSchema$outboundSchema,
+        components.ThinkingConfigBetweenToolsSchema$outboundSchema,
+      ]),
+    ).optional(),
+    plugins: z.array(components.PIIRedactionPlugin$outboundSchema).optional(),
+    orq: z.lazy(() => CreateCompletionOrq$outboundSchema).optional(),
+    stream: z.boolean().default(false),
+  }).transform((v) => {
+    return remap$(v, {
+      frequencyPenalty: "frequency_penalty",
+      maxTokens: "max_tokens",
+      presencePenalty: "presence_penalty",
+      topP: "top_p",
+      fallbackOnCodes: "fallback_on_codes",
+      loadBalancer: "load_balancer",
+    });
+  })
+);
 
 export function createCompletionRequestBodyToJSON(
   createCompletionRequestBody: CreateCompletionRequestBody,
@@ -2960,23 +3095,27 @@ export function createCompletionRequestBodyToJSON(
 
 /** @internal */
 export const CreateCompletionRouterCompletionsFinishReason$inboundSchema:
-  z.ZodNativeEnum<typeof CreateCompletionRouterCompletionsFinishReason> = z
-    .nativeEnum(CreateCompletionRouterCompletionsFinishReason);
+  z.ZodNativeEnum<typeof CreateCompletionRouterCompletionsFinishReason> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(CreateCompletionRouterCompletionsFinishReason)
+    );
 
 /** @internal */
 export const CreateCompletionRouterCompletionsChoices$inboundSchema: z.ZodType<
   CreateCompletionRouterCompletionsChoices,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  finish_reason: CreateCompletionRouterCompletionsFinishReason$inboundSchema,
-  index: z.number(),
-  text: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "finish_reason": "finishReason",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    finish_reason: CreateCompletionRouterCompletionsFinishReason$inboundSchema,
+    index: z.number(),
+    text: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "finish_reason": "finishReason",
+    });
+  })
+);
 
 export function createCompletionRouterCompletionsChoicesFromJSON(
   jsonString: string,
@@ -2999,7 +3138,7 @@ export const CreateCompletionCreated$inboundSchema: z.ZodType<
   CreateCompletionCreated,
   z.ZodTypeDef,
   unknown
-> = z.union([z.string(), z.number()]);
+> = /* @__PURE__ */ lazySchema$(() => z.union([z.string(), z.number()]));
 
 export function createCompletionCreatedFromJSON(
   jsonString: string,
@@ -3017,17 +3156,19 @@ export const CreateCompletionRouterCompletionsPromptTokensDetails$inboundSchema:
     CreateCompletionRouterCompletionsPromptTokensDetails,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    cached_tokens: z.nullable(z.number().int()).optional(),
-    cache_creation_tokens: z.nullable(z.number().int()).optional(),
-    audio_tokens: z.nullable(z.number().int()).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "cached_tokens": "cachedTokens",
-      "cache_creation_tokens": "cacheCreationTokens",
-      "audio_tokens": "audioTokens",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      cached_tokens: z.nullable(z.number().int()).optional(),
+      cache_creation_tokens: z.nullable(z.number().int()).optional(),
+      audio_tokens: z.nullable(z.number().int()).optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "cached_tokens": "cachedTokens",
+        "cache_creation_tokens": "cacheCreationTokens",
+        "audio_tokens": "audioTokens",
+      });
+    })
+  );
 
 export function createCompletionRouterCompletionsPromptTokensDetailsFromJSON(
   jsonString: string,
@@ -3051,19 +3192,21 @@ export const CreateCompletionRouterCompletionsCompletionTokensDetails$inboundSch
     CreateCompletionRouterCompletionsCompletionTokensDetails,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    reasoning_tokens: z.nullable(z.number()).optional(),
-    accepted_prediction_tokens: z.nullable(z.number()).optional(),
-    rejected_prediction_tokens: z.nullable(z.number()).optional(),
-    audio_tokens: z.nullable(z.number().int()).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "reasoning_tokens": "reasoningTokens",
-      "accepted_prediction_tokens": "acceptedPredictionTokens",
-      "rejected_prediction_tokens": "rejectedPredictionTokens",
-      "audio_tokens": "audioTokens",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      reasoning_tokens: z.nullable(z.number()).optional(),
+      accepted_prediction_tokens: z.nullable(z.number()).optional(),
+      rejected_prediction_tokens: z.nullable(z.number()).optional(),
+      audio_tokens: z.nullable(z.number().int()).optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "reasoning_tokens": "reasoningTokens",
+        "accepted_prediction_tokens": "acceptedPredictionTokens",
+        "rejected_prediction_tokens": "rejectedPredictionTokens",
+        "audio_tokens": "audioTokens",
+      });
+    })
+  );
 
 export function createCompletionRouterCompletionsCompletionTokensDetailsFromJSON(
   jsonString: string,
@@ -3085,29 +3228,27 @@ export const CreateCompletionRouterCompletionsUsage$inboundSchema: z.ZodType<
   CreateCompletionRouterCompletionsUsage,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  completion_tokens: z.number().optional(),
-  prompt_tokens: z.number().optional(),
-  total_tokens: z.number().optional(),
-  prompt_tokens_details: z.nullable(
-    z.lazy(() =>
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    completion_tokens: z.number().optional(),
+    prompt_tokens: z.number().optional(),
+    total_tokens: z.number().optional(),
+    prompt_tokens_details: z.nullable(z.lazy(() =>
       CreateCompletionRouterCompletionsPromptTokensDetails$inboundSchema
-    ),
-  ).optional(),
-  completion_tokens_details: z.nullable(
-    z.lazy(() =>
+    )).optional(),
+    completion_tokens_details: z.nullable(z.lazy(() =>
       CreateCompletionRouterCompletionsCompletionTokensDetails$inboundSchema
-    ),
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "completion_tokens": "completionTokens",
-    "prompt_tokens": "promptTokens",
-    "total_tokens": "totalTokens",
-    "prompt_tokens_details": "promptTokensDetails",
-    "completion_tokens_details": "completionTokensDetails",
-  });
-});
+    )).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "completion_tokens": "completionTokens",
+      "prompt_tokens": "promptTokens",
+      "total_tokens": "totalTokens",
+      "prompt_tokens_details": "promptTokensDetails",
+      "completion_tokens_details": "completionTokensDetails",
+    });
+  })
+);
 
 export function createCompletionRouterCompletionsUsageFromJSON(
   jsonString: string,
@@ -3125,22 +3266,24 @@ export const CreateCompletionData$inboundSchema: z.ZodType<
   CreateCompletionData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  choices: z.array(
-    z.lazy(() => CreateCompletionRouterCompletionsChoices$inboundSchema),
-  ),
-  created: z.union([z.string(), z.number()]).optional(),
-  model: z.string(),
-  system_fingerprint: z.string().optional(),
-  object: z.string(),
-  usage: z.lazy(() => CreateCompletionRouterCompletionsUsage$inboundSchema)
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "system_fingerprint": "systemFingerprint",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    choices: z.array(
+      z.lazy(() => CreateCompletionRouterCompletionsChoices$inboundSchema),
+    ),
+    created: z.union([z.string(), z.number()]).optional(),
+    model: z.string(),
+    system_fingerprint: z.string().optional(),
+    object: z.string(),
+    usage: z.lazy(() => CreateCompletionRouterCompletionsUsage$inboundSchema)
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "system_fingerprint": "systemFingerprint",
+    });
+  })
+);
 
 export function createCompletionDataFromJSON(
   jsonString: string,
@@ -3158,18 +3301,20 @@ export const CreateCompletionRouterCompletionsResponseBody$inboundSchema:
     CreateCompletionRouterCompletionsResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    data: z.unknown().optional().transform((v, ctx) => {
-      if (v === undefined) return undefined;
-      if (typeof v !== "string") return v;
-      try {
-        return JSON.parse(v);
-      } catch (err) {
-        ctx.addIssue({ code: "custom", message: `malformed json: ${err}` });
-        return z.NEVER;
-      }
-    }).pipe(z.lazy(() => CreateCompletionData$inboundSchema).optional()),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      data: z.unknown().optional().transform((v, ctx) => {
+        if (v === undefined) return undefined;
+        if (typeof v !== "string") return v;
+        try {
+          return JSON.parse(v);
+        } catch (err) {
+          ctx.addIssue({ code: "custom", message: `malformed json: ${err}` });
+          return z.NEVER;
+        }
+      }).pipe(z.lazy(() => CreateCompletionData$inboundSchema).optional()),
+    })
+  );
 
 export function createCompletionRouterCompletionsResponseBodyFromJSON(
   jsonString: string,
@@ -3190,22 +3335,26 @@ export function createCompletionRouterCompletionsResponseBodyFromJSON(
 /** @internal */
 export const CreateCompletionFinishReason$inboundSchema: z.ZodNativeEnum<
   typeof CreateCompletionFinishReason
-> = z.nativeEnum(CreateCompletionFinishReason);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(CreateCompletionFinishReason)
+);
 
 /** @internal */
 export const CreateCompletionChoices$inboundSchema: z.ZodType<
   CreateCompletionChoices,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  finish_reason: CreateCompletionFinishReason$inboundSchema,
-  index: z.number(),
-  text: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "finish_reason": "finishReason",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    finish_reason: CreateCompletionFinishReason$inboundSchema,
+    index: z.number(),
+    text: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "finish_reason": "finishReason",
+    });
+  })
+);
 
 export function createCompletionChoicesFromJSON(
   jsonString: string,
@@ -3219,7 +3368,7 @@ export function createCompletionChoicesFromJSON(
 
 /** @internal */
 export const Created$inboundSchema: z.ZodType<Created, z.ZodTypeDef, unknown> =
-  z.union([z.string(), z.number()]);
+  /* @__PURE__ */ lazySchema$(() => z.union([z.string(), z.number()]));
 
 export function createdFromJSON(
   jsonString: string,
@@ -3236,17 +3385,19 @@ export const CreateCompletionPromptTokensDetails$inboundSchema: z.ZodType<
   CreateCompletionPromptTokensDetails,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  cached_tokens: z.nullable(z.number().int()).optional(),
-  cache_creation_tokens: z.nullable(z.number().int()).optional(),
-  audio_tokens: z.nullable(z.number().int()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "cached_tokens": "cachedTokens",
-    "cache_creation_tokens": "cacheCreationTokens",
-    "audio_tokens": "audioTokens",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    cached_tokens: z.nullable(z.number().int()).optional(),
+    cache_creation_tokens: z.nullable(z.number().int()).optional(),
+    audio_tokens: z.nullable(z.number().int()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "cached_tokens": "cachedTokens",
+      "cache_creation_tokens": "cacheCreationTokens",
+      "audio_tokens": "audioTokens",
+    });
+  })
+);
 
 export function createCompletionPromptTokensDetailsFromJSON(
   jsonString: string,
@@ -3264,19 +3415,21 @@ export const CreateCompletionCompletionTokensDetails$inboundSchema: z.ZodType<
   CreateCompletionCompletionTokensDetails,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  reasoning_tokens: z.nullable(z.number()).optional(),
-  accepted_prediction_tokens: z.nullable(z.number()).optional(),
-  rejected_prediction_tokens: z.nullable(z.number()).optional(),
-  audio_tokens: z.nullable(z.number().int()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "reasoning_tokens": "reasoningTokens",
-    "accepted_prediction_tokens": "acceptedPredictionTokens",
-    "rejected_prediction_tokens": "rejectedPredictionTokens",
-    "audio_tokens": "audioTokens",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    reasoning_tokens: z.nullable(z.number()).optional(),
+    accepted_prediction_tokens: z.nullable(z.number()).optional(),
+    rejected_prediction_tokens: z.nullable(z.number()).optional(),
+    audio_tokens: z.nullable(z.number().int()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "reasoning_tokens": "reasoningTokens",
+      "accepted_prediction_tokens": "acceptedPredictionTokens",
+      "rejected_prediction_tokens": "rejectedPredictionTokens",
+      "audio_tokens": "audioTokens",
+    });
+  })
+);
 
 export function createCompletionCompletionTokensDetailsFromJSON(
   jsonString: string,
@@ -3299,25 +3452,27 @@ export const CreateCompletionUsage$inboundSchema: z.ZodType<
   CreateCompletionUsage,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  completion_tokens: z.number().optional(),
-  prompt_tokens: z.number().optional(),
-  total_tokens: z.number().optional(),
-  prompt_tokens_details: z.nullable(
-    z.lazy(() => CreateCompletionPromptTokensDetails$inboundSchema),
-  ).optional(),
-  completion_tokens_details: z.nullable(
-    z.lazy(() => CreateCompletionCompletionTokensDetails$inboundSchema),
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "completion_tokens": "completionTokens",
-    "prompt_tokens": "promptTokens",
-    "total_tokens": "totalTokens",
-    "prompt_tokens_details": "promptTokensDetails",
-    "completion_tokens_details": "completionTokensDetails",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    completion_tokens: z.number().optional(),
+    prompt_tokens: z.number().optional(),
+    total_tokens: z.number().optional(),
+    prompt_tokens_details: z.nullable(
+      z.lazy(() => CreateCompletionPromptTokensDetails$inboundSchema),
+    ).optional(),
+    completion_tokens_details: z.nullable(
+      z.lazy(() => CreateCompletionCompletionTokensDetails$inboundSchema),
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "completion_tokens": "completionTokens",
+      "prompt_tokens": "promptTokens",
+      "total_tokens": "totalTokens",
+      "prompt_tokens_details": "promptTokensDetails",
+      "completion_tokens_details": "completionTokensDetails",
+    });
+  })
+);
 
 export function createCompletionUsageFromJSON(
   jsonString: string,
@@ -3334,19 +3489,21 @@ export const CreateCompletionResponseBody$inboundSchema: z.ZodType<
   CreateCompletionResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  choices: z.array(z.lazy(() => CreateCompletionChoices$inboundSchema)),
-  created: z.union([z.string(), z.number()]).optional(),
-  model: z.string(),
-  system_fingerprint: z.string().optional(),
-  object: z.string(),
-  usage: z.lazy(() => CreateCompletionUsage$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "system_fingerprint": "systemFingerprint",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    choices: z.array(z.lazy(() => CreateCompletionChoices$inboundSchema)),
+    created: z.union([z.string(), z.number()]).optional(),
+    model: z.string(),
+    system_fingerprint: z.string().optional(),
+    object: z.string(),
+    usage: z.lazy(() => CreateCompletionUsage$inboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "system_fingerprint": "systemFingerprint",
+    });
+  })
+);
 
 export function createCompletionResponseBodyFromJSON(
   jsonString: string,
@@ -3363,21 +3520,25 @@ export const CreateCompletionResponse$inboundSchema: z.ZodType<
   CreateCompletionResponse,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  z.lazy(() => CreateCompletionResponseBody$inboundSchema),
-  z.instanceof(ReadableStream<Uint8Array>)
-    .transform(stream => {
-      return new EventStream(stream, rawEvent => {
-        if (rawEvent.data === "[DONE]") return { done: true, value: undefined };
-        return {
-          done: false,
-          value: z.lazy(() =>
-            CreateCompletionRouterCompletionsResponseBody$inboundSchema
-          ).parse(rawEvent),
-        };
-      }, { dataRequired: false });
-    }),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => CreateCompletionResponseBody$inboundSchema),
+    z.instanceof(ReadableStream<Uint8Array>)
+      .transform(stream => {
+        return new EventStream(stream, rawEvent => {
+          if (rawEvent.data === "[DONE]") {
+            return { done: true, value: undefined };
+          }
+          return {
+            done: false,
+            value: z.lazy(() =>
+              CreateCompletionRouterCompletionsResponseBody$inboundSchema
+            ).parse(rawEvent),
+          };
+        }, { dataRequired: false });
+      }),
+  ])
+);
 
 export function createCompletionResponseFromJSON(
   jsonString: string,

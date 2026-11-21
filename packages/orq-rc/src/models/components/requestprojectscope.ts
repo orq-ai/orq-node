@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import {
   AllProjectsScope,
@@ -36,7 +37,7 @@ export type RequestProjectScope = {
 /** @internal */
 export const RequestProjectScopeMode$outboundSchema: z.ZodNativeEnum<
   typeof RequestProjectScopeMode
-> = z.nativeEnum(RequestProjectScopeMode);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(RequestProjectScopeMode));
 
 /** @internal */
 export type RequestProjectScope$Outbound = {
@@ -51,16 +52,18 @@ export const RequestProjectScope$outboundSchema: z.ZodType<
   RequestProjectScope$Outbound,
   z.ZodTypeDef,
   RequestProjectScope
-> = z.object({
-  all: AllProjectsScope$outboundSchema.optional(),
-  mode: RequestProjectScopeMode$outboundSchema.optional(),
-  projectId: z.string().optional(),
-  single: SingleProjectScope$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    projectId: "project_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    all: AllProjectsScope$outboundSchema.optional(),
+    mode: RequestProjectScopeMode$outboundSchema.optional(),
+    projectId: z.string().optional(),
+    single: SingleProjectScope$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      projectId: "project_id",
+    });
+  })
+);
 
 export function requestProjectScopeToJSON(
   requestProjectScope: RequestProjectScope,

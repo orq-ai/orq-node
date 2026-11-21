@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -61,15 +61,15 @@ export type ThinkingConfigEnabledSchema = {
 /** @internal */
 export const ThinkingLevel$inboundSchema: z.ZodNativeEnum<
   typeof ThinkingLevel
-> = z.nativeEnum(ThinkingLevel);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ThinkingLevel));
 /** @internal */
 export const ThinkingLevel$outboundSchema: z.ZodNativeEnum<
   typeof ThinkingLevel
 > = ThinkingLevel$inboundSchema;
 
 /** @internal */
-export const Display$inboundSchema: z.ZodNativeEnum<typeof Display> = z
-  .nativeEnum(Display);
+export const Display$inboundSchema: z.ZodNativeEnum<typeof Display> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Display));
 /** @internal */
 export const Display$outboundSchema: z.ZodNativeEnum<typeof Display> =
   Display$inboundSchema;
@@ -79,17 +79,19 @@ export const ThinkingConfigEnabledSchema$inboundSchema: z.ZodType<
   ThinkingConfigEnabledSchema,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("enabled"),
-  budget_tokens: z.number(),
-  thinking_level: ThinkingLevel$inboundSchema.optional(),
-  display: Display$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "budget_tokens": "budgetTokens",
-    "thinking_level": "thinkingLevel",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("enabled"),
+    budget_tokens: z.number(),
+    thinking_level: ThinkingLevel$inboundSchema.optional(),
+    display: Display$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "budget_tokens": "budgetTokens",
+      "thinking_level": "thinkingLevel",
+    });
+  })
+);
 /** @internal */
 export type ThinkingConfigEnabledSchema$Outbound = {
   type: "enabled";
@@ -103,17 +105,19 @@ export const ThinkingConfigEnabledSchema$outboundSchema: z.ZodType<
   ThinkingConfigEnabledSchema$Outbound,
   z.ZodTypeDef,
   ThinkingConfigEnabledSchema
-> = z.object({
-  type: z.literal("enabled"),
-  budgetTokens: z.number(),
-  thinkingLevel: ThinkingLevel$outboundSchema.optional(),
-  display: Display$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    budgetTokens: "budget_tokens",
-    thinkingLevel: "thinking_level",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("enabled"),
+    budgetTokens: z.number(),
+    thinkingLevel: ThinkingLevel$outboundSchema.optional(),
+    display: Display$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      budgetTokens: "budget_tokens",
+      thinkingLevel: "thinking_level",
+    });
+  })
+);
 
 export function thinkingConfigEnabledSchemaToJSON(
   thinkingConfigEnabledSchema: ThinkingConfigEnabledSchema,

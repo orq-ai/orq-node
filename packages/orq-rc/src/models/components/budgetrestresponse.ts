@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -89,20 +89,26 @@ export const BudgetRestResponse$inboundSchema: z.ZodType<
   BudgetRestResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  budgetId: z.string(),
-  scope: BudgetScopeRestResponse$inboundSchema.optional(),
-  match: BudgetMatch$inboundSchema.optional(),
-  limits: BudgetLimitsRestResponse$inboundSchema,
-  rateLimit: RateLimitRestResponse$inboundSchema.optional(),
-  isActive: z.boolean().default(false),
-  expiresAt: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  createdAt: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  updatedAt: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  usage: BudgetUsage$inboundSchema.optional(),
-  alerts: z.array(BudgetAlertRestResponse$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    budgetId: z.string(),
+    scope: BudgetScopeRestResponse$inboundSchema.optional(),
+    match: BudgetMatch$inboundSchema.optional(),
+    limits: BudgetLimitsRestResponse$inboundSchema,
+    rateLimit: RateLimitRestResponse$inboundSchema.optional(),
+    isActive: z.boolean().default(false),
+    expiresAt: z.string().datetime({ offset: true }).transform(v => new Date(v))
+      .optional(),
+    createdAt: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    updatedAt: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    usage: BudgetUsage$inboundSchema.optional(),
+    alerts: z.array(BudgetAlertRestResponse$inboundSchema).optional(),
+  })
+);
 
 export function budgetRestResponseFromJSON(
   jsonString: string,

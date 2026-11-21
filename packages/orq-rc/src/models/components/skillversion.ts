@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { SkillFile, SkillFile$inboundSchema } from "./skillfile.js";
@@ -21,18 +21,21 @@ export const SkillVersion$inboundSchema: z.ZodType<
   SkillVersion,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  version_id: z.string().optional(),
-  version: z.string().optional(),
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  files: z.array(SkillFile$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "version_id": "versionId",
-    "created_at": "createdAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    version_id: z.string().optional(),
+    version: z.string().optional(),
+    created_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ).optional(),
+    files: z.array(SkillFile$inboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "version_id": "versionId",
+      "created_at": "createdAt",
+    });
+  })
+);
 
 export function skillVersionFromJSON(
   jsonString: string,

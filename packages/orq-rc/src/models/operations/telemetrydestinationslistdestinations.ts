@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type TelemetryDestinationsListDestinationsRequest = {
   limit?: number | undefined;
@@ -22,14 +23,16 @@ export const TelemetryDestinationsListDestinationsRequest$outboundSchema:
     TelemetryDestinationsListDestinationsRequest$Outbound,
     z.ZodTypeDef,
     TelemetryDestinationsListDestinationsRequest
-  > = z.object({
-    limit: z.number().int().optional(),
-    startingAfter: z.string().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      startingAfter: "starting_after",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      limit: z.number().int().optional(),
+      startingAfter: z.string().optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        startingAfter: "starting_after",
+      });
+    })
+  );
 
 export function telemetryDestinationsListDestinationsRequestToJSON(
   telemetryDestinationsListDestinationsRequest:

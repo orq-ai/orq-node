@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
@@ -139,10 +139,12 @@ export const CategoricalLabels$outboundSchema: z.ZodType<
   CategoricalLabels$Outbound,
   z.ZodTypeDef,
   CategoricalLabels
-> = z.object({
-  value: z.string(),
-  description: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    value: z.string(),
+    description: z.string().optional(),
+  })
+);
 
 export function categoricalLabelsToJSON(
   categoricalLabels: CategoricalLabels,
@@ -155,7 +157,7 @@ export function categoricalLabelsToJSON(
 /** @internal */
 export const UpdateEvalMode$outboundSchema: z.ZodNativeEnum<
   typeof UpdateEvalMode
-> = z.nativeEnum(UpdateEvalMode);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(UpdateEvalMode));
 
 /** @internal */
 export type UpdateEvalRetry$Outbound = {
@@ -168,14 +170,16 @@ export const UpdateEvalRetry$outboundSchema: z.ZodType<
   UpdateEvalRetry$Outbound,
   z.ZodTypeDef,
   UpdateEvalRetry
-> = z.object({
-  count: z.number().int().default(2),
-  onCodes: z.array(z.number().int()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    onCodes: "on_codes",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    count: z.number().int().default(2),
+    onCodes: z.array(z.number().int()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      onCodes: "on_codes",
+    });
+  })
+);
 
 export function updateEvalRetryToJSON(
   updateEvalRetry: UpdateEvalRetry,
@@ -193,9 +197,11 @@ export const UpdateEvalFallbacks$outboundSchema: z.ZodType<
   UpdateEvalFallbacks$Outbound,
   z.ZodTypeDef,
   UpdateEvalFallbacks
-> = z.object({
-  model: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model: z.string(),
+  })
+);
 
 export function updateEvalFallbacksToJSON(
   updateEvalFallbacks: UpdateEvalFallbacks,
@@ -217,12 +223,14 @@ export const Judges$outboundSchema: z.ZodType<
   Judges$Outbound,
   z.ZodTypeDef,
   Judges
-> = z.object({
-  model: z.string(),
-  retry: z.lazy(() => UpdateEvalRetry$outboundSchema).optional(),
-  fallbacks: z.array(z.lazy(() => UpdateEvalFallbacks$outboundSchema))
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model: z.string(),
+    retry: z.lazy(() => UpdateEvalRetry$outboundSchema).optional(),
+    fallbacks: z.array(z.lazy(() => UpdateEvalFallbacks$outboundSchema))
+      .optional(),
+  })
+);
 
 export function judgesToJSON(judges: Judges): string {
   return JSON.stringify(Judges$outboundSchema.parse(judges));
@@ -239,14 +247,16 @@ export const UpdateEvalEvalsRetry$outboundSchema: z.ZodType<
   UpdateEvalEvalsRetry$Outbound,
   z.ZodTypeDef,
   UpdateEvalEvalsRetry
-> = z.object({
-  count: z.number().int().default(2),
-  onCodes: z.array(z.number().int()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    onCodes: "on_codes",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    count: z.number().int().default(2),
+    onCodes: z.array(z.number().int()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      onCodes: "on_codes",
+    });
+  })
+);
 
 export function updateEvalEvalsRetryToJSON(
   updateEvalEvalsRetry: UpdateEvalEvalsRetry,
@@ -266,9 +276,11 @@ export const UpdateEvalEvalsFallbacks$outboundSchema: z.ZodType<
   UpdateEvalEvalsFallbacks$Outbound,
   z.ZodTypeDef,
   UpdateEvalEvalsFallbacks
-> = z.object({
-  model: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model: z.string(),
+  })
+);
 
 export function updateEvalEvalsFallbacksToJSON(
   updateEvalEvalsFallbacks: UpdateEvalEvalsFallbacks,
@@ -290,12 +302,14 @@ export const ReplacementJudges$outboundSchema: z.ZodType<
   ReplacementJudges$Outbound,
   z.ZodTypeDef,
   ReplacementJudges
-> = z.object({
-  model: z.string(),
-  retry: z.lazy(() => UpdateEvalEvalsRetry$outboundSchema).optional(),
-  fallbacks: z.array(z.lazy(() => UpdateEvalEvalsFallbacks$outboundSchema))
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model: z.string(),
+    retry: z.lazy(() => UpdateEvalEvalsRetry$outboundSchema).optional(),
+    fallbacks: z.array(z.lazy(() => UpdateEvalEvalsFallbacks$outboundSchema))
+      .optional(),
+  })
+);
 
 export function replacementJudgesToJSON(
   replacementJudges: ReplacementJudges,
@@ -306,8 +320,8 @@ export function replacementJudgesToJSON(
 }
 
 /** @internal */
-export const TieValue$outboundSchema: z.ZodNativeEnum<typeof TieValue> = z
-  .nativeEnum(TieValue);
+export const TieValue$outboundSchema: z.ZodNativeEnum<typeof TieValue> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(TieValue));
 
 /** @internal */
 export type Jury$Outbound = {
@@ -319,19 +333,21 @@ export type Jury$Outbound = {
 
 /** @internal */
 export const Jury$outboundSchema: z.ZodType<Jury$Outbound, z.ZodTypeDef, Jury> =
-  z.object({
-    judges: z.array(z.lazy(() => Judges$outboundSchema)),
-    replacementJudges: z.array(z.lazy(() => ReplacementJudges$outboundSchema))
-      .optional(),
-    minSuccessfulJudges: z.number().int().default(2),
-    tieValue: TieValue$outboundSchema.default("Tie"),
-  }).transform((v) => {
-    return remap$(v, {
-      replacementJudges: "replacement_judges",
-      minSuccessfulJudges: "min_successful_judges",
-      tieValue: "tie_value",
-    });
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      judges: z.array(z.lazy(() => Judges$outboundSchema)),
+      replacementJudges: z.array(z.lazy(() => ReplacementJudges$outboundSchema))
+        .optional(),
+      minSuccessfulJudges: z.number().int().default(2),
+      tieValue: TieValue$outboundSchema.default("Tie"),
+    }).transform((v) => {
+      return remap$(v, {
+        replacementJudges: "replacement_judges",
+        minSuccessfulJudges: "min_successful_judges",
+        tieValue: "tie_value",
+      });
+    })
+  );
 
 export function juryToJSON(jury: Jury): string {
   return JSON.stringify(Jury$outboundSchema.parse(jury));
@@ -340,7 +356,7 @@ export function juryToJSON(jury: Jury): string {
 /** @internal */
 export const UpdateEvalVersionIncrement$outboundSchema: z.ZodNativeEnum<
   typeof UpdateEvalVersionIncrement
-> = z.nativeEnum(UpdateEvalVersionIncrement);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(UpdateEvalVersionIncrement));
 
 /** @internal */
 export type UpdateEvalRequestBody$Outbound = {
@@ -375,42 +391,44 @@ export const UpdateEvalRequestBody$outboundSchema: z.ZodType<
   UpdateEvalRequestBody$Outbound,
   z.ZodTypeDef,
   UpdateEvalRequestBody
-> = z.object({
-  type: z.string().optional(),
-  path: z.string().optional(),
-  projectId: z.string().optional(),
-  key: z.string().optional(),
-  description: z.string().optional(),
-  prompt: z.string().optional(),
-  outputType: z.string().optional(),
-  categories: z.nullable(z.array(z.string())).optional(),
-  categoricalLabels: z.nullable(
-    z.array(z.lazy(() => CategoricalLabels$outboundSchema)),
-  ).optional(),
-  datasetId: z.nullable(z.string()).optional(),
-  repetitions: z.number().optional(),
-  mode: UpdateEvalMode$outboundSchema.optional(),
-  model: z.string().optional(),
-  jury: z.lazy(() => Jury$outboundSchema).optional(),
-  schema: z.string().optional(),
-  url: z.string().optional(),
-  method: z.string().optional(),
-  headers: z.record(z.string()).optional(),
-  payload: z.record(z.any()).optional(),
-  code: z.string().optional(),
-  timeout: z.nullable(z.number().int()).optional(),
-  guardrailConfig: z.any().optional(),
-  versionIncrement: UpdateEvalVersionIncrement$outboundSchema.optional(),
-  versionDescription: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    projectId: "project_id",
-    outputType: "output_type",
-    categoricalLabels: "categorical_labels",
-    datasetId: "dataset_id",
-    guardrailConfig: "guardrail_config",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.string().optional(),
+    path: z.string().optional(),
+    projectId: z.string().optional(),
+    key: z.string().optional(),
+    description: z.string().optional(),
+    prompt: z.string().optional(),
+    outputType: z.string().optional(),
+    categories: z.nullable(z.array(z.string())).optional(),
+    categoricalLabels: z.nullable(
+      z.array(z.lazy(() => CategoricalLabels$outboundSchema)),
+    ).optional(),
+    datasetId: z.nullable(z.string()).optional(),
+    repetitions: z.number().optional(),
+    mode: UpdateEvalMode$outboundSchema.optional(),
+    model: z.string().optional(),
+    jury: z.lazy(() => Jury$outboundSchema).optional(),
+    schema: z.string().optional(),
+    url: z.string().optional(),
+    method: z.string().optional(),
+    headers: z.record(z.string()).optional(),
+    payload: z.record(z.any()).optional(),
+    code: z.string().optional(),
+    timeout: z.nullable(z.number().int()).optional(),
+    guardrailConfig: z.any().optional(),
+    versionIncrement: UpdateEvalVersionIncrement$outboundSchema.optional(),
+    versionDescription: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      projectId: "project_id",
+      outputType: "output_type",
+      categoricalLabels: "categorical_labels",
+      datasetId: "dataset_id",
+      guardrailConfig: "guardrail_config",
+    });
+  })
+);
 
 export function updateEvalRequestBodyToJSON(
   updateEvalRequestBody: UpdateEvalRequestBody,
@@ -431,14 +449,16 @@ export const UpdateEvalRequest$outboundSchema: z.ZodType<
   UpdateEvalRequest$Outbound,
   z.ZodTypeDef,
   UpdateEvalRequest
-> = z.object({
-  id: z.string(),
-  requestBody: z.lazy(() => UpdateEvalRequestBody$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    requestBody: "RequestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    requestBody: z.lazy(() => UpdateEvalRequestBody$outboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      requestBody: "RequestBody",
+    });
+  })
+);
 
 export function updateEvalRequestToJSON(
   updateEvalRequest: UpdateEvalRequest,
@@ -453,15 +473,17 @@ export const UpdateEvalResponseBody$inboundSchema: z.ZodType<
   UpdateEvalResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  components.EvaluatorResponseLlm$inboundSchema,
-  components.EvaluatorResponseJsonSchema$inboundSchema,
-  components.EvaluatorResponseHttp$inboundSchema,
-  components.EvaluatorResponsePython$inboundSchema,
-  components.EvaluatorResponseFunction$inboundSchema,
-  components.EvaluatorResponseRagas$inboundSchema,
-  components.EvaluatorResponseTypescript$inboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    components.EvaluatorResponseLlm$inboundSchema,
+    components.EvaluatorResponseJsonSchema$inboundSchema,
+    components.EvaluatorResponseHttp$inboundSchema,
+    components.EvaluatorResponsePython$inboundSchema,
+    components.EvaluatorResponseFunction$inboundSchema,
+    components.EvaluatorResponseRagas$inboundSchema,
+    components.EvaluatorResponseTypescript$inboundSchema,
+  ])
+);
 
 export function updateEvalResponseBodyFromJSON(
   jsonString: string,

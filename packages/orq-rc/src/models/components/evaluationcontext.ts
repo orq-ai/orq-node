@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import {
   StructuredInput,
   StructuredInput$Outbound,
@@ -47,12 +48,14 @@ export const EvaluationContext$outboundSchema: z.ZodType<
   EvaluationContext$Outbound,
   z.ZodTypeDef,
   EvaluationContext
-> = z.object({
-  messages: z.array(z.record(z.any())).optional(),
-  input: StructuredInput$outboundSchema.optional(),
-  output: StructuredOutput$outboundSchema.optional(),
-  variables: z.record(z.any()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    messages: z.array(z.record(z.any())).optional(),
+    input: StructuredInput$outboundSchema.optional(),
+    output: StructuredOutput$outboundSchema.optional(),
+    variables: z.record(z.any()).optional(),
+  })
+);
 
 export function evaluationContextToJSON(
   evaluationContext: EvaluationContext,

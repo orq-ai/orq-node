@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type WorkspaceSecurityDeleteDomainRequest = {
   workspaceKey: string;
@@ -21,15 +22,17 @@ export const WorkspaceSecurityDeleteDomainRequest$outboundSchema: z.ZodType<
   WorkspaceSecurityDeleteDomainRequest$Outbound,
   z.ZodTypeDef,
   WorkspaceSecurityDeleteDomainRequest
-> = z.object({
-  workspaceKey: z.string(),
-  domainId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    workspaceKey: "workspace_key",
-    domainId: "domain_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    workspaceKey: z.string(),
+    domainId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      workspaceKey: "workspace_key",
+      domainId: "domain_id",
+    });
+  })
+);
 
 export function workspaceSecurityDeleteDomainRequestToJSON(
   workspaceSecurityDeleteDomainRequest: WorkspaceSecurityDeleteDomainRequest,

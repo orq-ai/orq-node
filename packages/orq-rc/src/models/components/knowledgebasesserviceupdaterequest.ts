@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import {
   KnowledgeUpdateSettings,
@@ -240,8 +241,10 @@ export type KnowledgeBasesServiceUpdateRequest =
 
 /** @internal */
 export const KnowledgeBasesServiceUpdateRequestRetrievalType$outboundSchema:
-  z.ZodNativeEnum<typeof KnowledgeBasesServiceUpdateRequestRetrievalType> = z
-    .nativeEnum(KnowledgeBasesServiceUpdateRequestRetrievalType);
+  z.ZodNativeEnum<typeof KnowledgeBasesServiceUpdateRequestRetrievalType> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(KnowledgeBasesServiceUpdateRequestRetrievalType)
+    );
 
 /** @internal */
 export type KnowledgeBasesServiceUpdateRequest2RerankConfig$Outbound = {
@@ -256,17 +259,19 @@ export const KnowledgeBasesServiceUpdateRequest2RerankConfig$outboundSchema:
     KnowledgeBasesServiceUpdateRequest2RerankConfig$Outbound,
     z.ZodTypeDef,
     KnowledgeBasesServiceUpdateRequest2RerankConfig
-  > = z.object({
-    topK: z.number().int().default(5),
-    rerankThreshold: z.number().default(0.5),
-    rerankModel: z.string(),
-  }).transform((v) => {
-    return remap$(v, {
-      topK: "top_k",
-      rerankThreshold: "rerank_threshold",
-      rerankModel: "rerank_model",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      topK: z.number().int().default(5),
+      rerankThreshold: z.number().default(0.5),
+      rerankModel: z.string(),
+    }).transform((v) => {
+      return remap$(v, {
+        topK: "top_k",
+        rerankThreshold: "rerank_threshold",
+        rerankModel: "rerank_model",
+      });
+    })
+  );
 
 export function knowledgeBasesServiceUpdateRequest2RerankConfigToJSON(
   knowledgeBasesServiceUpdateRequest2RerankConfig:
@@ -290,9 +295,11 @@ export const KnowledgeBasesServiceUpdateRequest2AgenticRagConfig$outboundSchema:
     KnowledgeBasesServiceUpdateRequest2AgenticRagConfig$Outbound,
     z.ZodTypeDef,
     KnowledgeBasesServiceUpdateRequest2AgenticRagConfig
-  > = z.object({
-    model: z.string(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      model: z.string(),
+    })
+  );
 
 export function knowledgeBasesServiceUpdateRequest2AgenticRagConfigToJSON(
   knowledgeBasesServiceUpdateRequest2AgenticRagConfig:
@@ -326,31 +333,29 @@ export const KnowledgeBasesServiceUpdateRequest2RetrievalSettings$outboundSchema
     KnowledgeBasesServiceUpdateRequest2RetrievalSettings$Outbound,
     z.ZodTypeDef,
     KnowledgeBasesServiceUpdateRequest2RetrievalSettings
-  > = z.object({
-    retrievalType:
-      KnowledgeBasesServiceUpdateRequestRetrievalType$outboundSchema.default(
-        "hybrid_search",
-      ),
-    topK: z.number().int().default(5),
-    threshold: z.number().default(0),
-    rerankConfig: z.nullable(
-      z.lazy(() =>
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      retrievalType:
+        KnowledgeBasesServiceUpdateRequestRetrievalType$outboundSchema.default(
+          "hybrid_search",
+        ),
+      topK: z.number().int().default(5),
+      threshold: z.number().default(0),
+      rerankConfig: z.nullable(z.lazy(() =>
         KnowledgeBasesServiceUpdateRequest2RerankConfig$outboundSchema
-      ),
-    ).optional(),
-    agenticRagConfig: z.nullable(
-      z.lazy(() =>
+      )).optional(),
+      agenticRagConfig: z.nullable(z.lazy(() =>
         KnowledgeBasesServiceUpdateRequest2AgenticRagConfig$outboundSchema
-      ),
-    ).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      retrievalType: "retrieval_type",
-      topK: "top_k",
-      rerankConfig: "rerank_config",
-      agenticRagConfig: "agentic_rag_config",
-    });
-  });
+      )).optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        retrievalType: "retrieval_type",
+        topK: "top_k",
+        rerankConfig: "rerank_config",
+        agenticRagConfig: "agentic_rag_config",
+      });
+    })
+  );
 
 export function knowledgeBasesServiceUpdateRequest2RetrievalSettingsToJSON(
   knowledgeBasesServiceUpdateRequest2RetrievalSettings:
@@ -365,8 +370,10 @@ export function knowledgeBasesServiceUpdateRequest2RetrievalSettingsToJSON(
 
 /** @internal */
 export const KnowledgeBasesServiceUpdateRequest2Type$outboundSchema:
-  z.ZodNativeEnum<typeof KnowledgeBasesServiceUpdateRequest2Type> = z
-    .nativeEnum(KnowledgeBasesServiceUpdateRequest2Type);
+  z.ZodNativeEnum<typeof KnowledgeBasesServiceUpdateRequest2Type> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(KnowledgeBasesServiceUpdateRequest2Type)
+    );
 
 /** @internal */
 export type KnowledgeBasesServiceUpdateRequest2$Outbound = {
@@ -386,25 +393,27 @@ export const KnowledgeBasesServiceUpdateRequest2$outboundSchema: z.ZodType<
   KnowledgeBasesServiceUpdateRequest2$Outbound,
   z.ZodTypeDef,
   KnowledgeBasesServiceUpdateRequest2
-> = z.object({
-  description: z.nullable(z.string()).optional(),
-  embeddingModel: z.string().optional(),
-  path: z.string().optional(),
-  retrievalSettings: z.lazy(() =>
-    KnowledgeBasesServiceUpdateRequest2RetrievalSettings$outboundSchema
-  ).optional(),
-  type: KnowledgeBasesServiceUpdateRequest2Type$outboundSchema.default(
-    "internal",
-  ),
-  settings: KnowledgeUpdateSettings$outboundSchema.optional(),
-  domainId: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    embeddingModel: "embedding_model",
-    retrievalSettings: "retrieval_settings",
-    domainId: "domain_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    description: z.nullable(z.string()).optional(),
+    embeddingModel: z.string().optional(),
+    path: z.string().optional(),
+    retrievalSettings: z.lazy(() =>
+      KnowledgeBasesServiceUpdateRequest2RetrievalSettings$outboundSchema
+    ).optional(),
+    type: KnowledgeBasesServiceUpdateRequest2Type$outboundSchema.default(
+      "internal",
+    ),
+    settings: KnowledgeUpdateSettings$outboundSchema.optional(),
+    domainId: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      embeddingModel: "embedding_model",
+      retrievalSettings: "retrieval_settings",
+      domainId: "domain_id",
+    });
+  })
+);
 
 export function knowledgeBasesServiceUpdateRequest2ToJSON(
   knowledgeBasesServiceUpdateRequest2: KnowledgeBasesServiceUpdateRequest2,
@@ -429,17 +438,19 @@ export const KnowledgeBasesServiceUpdateRequestRerankConfig$outboundSchema:
     KnowledgeBasesServiceUpdateRequestRerankConfig$Outbound,
     z.ZodTypeDef,
     KnowledgeBasesServiceUpdateRequestRerankConfig
-  > = z.object({
-    topK: z.number().int().default(5),
-    rerankThreshold: z.number().default(0.5),
-    rerankModel: z.string(),
-  }).transform((v) => {
-    return remap$(v, {
-      topK: "top_k",
-      rerankThreshold: "rerank_threshold",
-      rerankModel: "rerank_model",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      topK: z.number().int().default(5),
+      rerankThreshold: z.number().default(0.5),
+      rerankModel: z.string(),
+    }).transform((v) => {
+      return remap$(v, {
+        topK: "top_k",
+        rerankThreshold: "rerank_threshold",
+        rerankModel: "rerank_model",
+      });
+    })
+  );
 
 export function knowledgeBasesServiceUpdateRequestRerankConfigToJSON(
   knowledgeBasesServiceUpdateRequestRerankConfig:
@@ -463,9 +474,11 @@ export const KnowledgeBasesServiceUpdateRequestAgenticRagConfig$outboundSchema:
     KnowledgeBasesServiceUpdateRequestAgenticRagConfig$Outbound,
     z.ZodTypeDef,
     KnowledgeBasesServiceUpdateRequestAgenticRagConfig
-  > = z.object({
-    model: z.string(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      model: z.string(),
+    })
+  );
 
 export function knowledgeBasesServiceUpdateRequestAgenticRagConfigToJSON(
   knowledgeBasesServiceUpdateRequestAgenticRagConfig:
@@ -498,26 +511,24 @@ export const KnowledgeBasesServiceUpdateRequestRetrievalSettings$outboundSchema:
     KnowledgeBasesServiceUpdateRequestRetrievalSettings$Outbound,
     z.ZodTypeDef,
     KnowledgeBasesServiceUpdateRequestRetrievalSettings
-  > = z.object({
-    topK: z.number().int().default(5),
-    threshold: z.number().default(0),
-    rerankConfig: z.nullable(
-      z.lazy(() =>
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      topK: z.number().int().default(5),
+      threshold: z.number().default(0),
+      rerankConfig: z.nullable(z.lazy(() =>
         KnowledgeBasesServiceUpdateRequestRerankConfig$outboundSchema
-      ),
-    ).optional(),
-    agenticRagConfig: z.nullable(
-      z.lazy(() =>
+      )).optional(),
+      agenticRagConfig: z.nullable(z.lazy(() =>
         KnowledgeBasesServiceUpdateRequestAgenticRagConfig$outboundSchema
-      ),
-    ).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      topK: "top_k",
-      rerankConfig: "rerank_config",
-      agenticRagConfig: "agentic_rag_config",
-    });
-  });
+      )).optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        topK: "top_k",
+        rerankConfig: "rerank_config",
+        agenticRagConfig: "agentic_rag_config",
+      });
+    })
+  );
 
 export function knowledgeBasesServiceUpdateRequestRetrievalSettingsToJSON(
   knowledgeBasesServiceUpdateRequestRetrievalSettings:
@@ -543,16 +554,18 @@ export const KnowledgeBasesServiceUpdateRequestExternalConfig$outboundSchema:
     KnowledgeBasesServiceUpdateRequestExternalConfig$Outbound,
     z.ZodTypeDef,
     KnowledgeBasesServiceUpdateRequestExternalConfig
-  > = z.object({
-    name: z.string().optional(),
-    apiUrl: z.string().optional(),
-    apiKey: z.string().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      apiUrl: "api_url",
-      apiKey: "api_key",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      name: z.string().optional(),
+      apiUrl: z.string().optional(),
+      apiKey: z.string().optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        apiUrl: "api_url",
+        apiKey: "api_key",
+      });
+    })
+  );
 
 export function knowledgeBasesServiceUpdateRequestExternalConfigToJSON(
   knowledgeBasesServiceUpdateRequestExternalConfig:
@@ -567,9 +580,10 @@ export function knowledgeBasesServiceUpdateRequestExternalConfigToJSON(
 
 /** @internal */
 export const KnowledgeBasesServiceUpdateRequestType$outboundSchema:
-  z.ZodNativeEnum<typeof KnowledgeBasesServiceUpdateRequestType> = z.nativeEnum(
-    KnowledgeBasesServiceUpdateRequestType,
-  );
+  z.ZodNativeEnum<typeof KnowledgeBasesServiceUpdateRequestType> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(KnowledgeBasesServiceUpdateRequestType)
+    );
 
 /** @internal */
 export type KnowledgeBasesServiceUpdateRequest1$Outbound = {
@@ -591,27 +605,29 @@ export const KnowledgeBasesServiceUpdateRequest1$outboundSchema: z.ZodType<
   KnowledgeBasesServiceUpdateRequest1$Outbound,
   z.ZodTypeDef,
   KnowledgeBasesServiceUpdateRequest1
-> = z.object({
-  description: z.nullable(z.string()).optional(),
-  path: z.string().optional(),
-  retrievalSettings: z.lazy(() =>
-    KnowledgeBasesServiceUpdateRequestRetrievalSettings$outboundSchema
-  ).optional(),
-  externalConfig: z.lazy(() =>
-    KnowledgeBasesServiceUpdateRequestExternalConfig$outboundSchema
-  ).optional(),
-  type: KnowledgeBasesServiceUpdateRequestType$outboundSchema.default(
-    "external",
-  ),
-  settings: KnowledgeUpdateSettings$outboundSchema.optional(),
-  domainId: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    retrievalSettings: "retrieval_settings",
-    externalConfig: "external_config",
-    domainId: "domain_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    description: z.nullable(z.string()).optional(),
+    path: z.string().optional(),
+    retrievalSettings: z.lazy(() =>
+      KnowledgeBasesServiceUpdateRequestRetrievalSettings$outboundSchema
+    ).optional(),
+    externalConfig: z.lazy(() =>
+      KnowledgeBasesServiceUpdateRequestExternalConfig$outboundSchema
+    ).optional(),
+    type: KnowledgeBasesServiceUpdateRequestType$outboundSchema.default(
+      "external",
+    ),
+    settings: KnowledgeUpdateSettings$outboundSchema.optional(),
+    domainId: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      retrievalSettings: "retrieval_settings",
+      externalConfig: "external_config",
+      domainId: "domain_id",
+    });
+  })
+);
 
 export function knowledgeBasesServiceUpdateRequest1ToJSON(
   knowledgeBasesServiceUpdateRequest1: KnowledgeBasesServiceUpdateRequest1,
@@ -633,10 +649,12 @@ export const KnowledgeBasesServiceUpdateRequest$outboundSchema: z.ZodType<
   KnowledgeBasesServiceUpdateRequest$Outbound,
   z.ZodTypeDef,
   KnowledgeBasesServiceUpdateRequest
-> = z.union([
-  z.lazy(() => KnowledgeBasesServiceUpdateRequest1$outboundSchema),
-  z.lazy(() => KnowledgeBasesServiceUpdateRequest2$outboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => KnowledgeBasesServiceUpdateRequest1$outboundSchema),
+    z.lazy(() => KnowledgeBasesServiceUpdateRequest2$outboundSchema),
+  ])
+);
 
 export function knowledgeBasesServiceUpdateRequestToJSON(
   knowledgeBasesServiceUpdateRequest: KnowledgeBasesServiceUpdateRequest,

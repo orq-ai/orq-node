@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type BudgetDeleteRequest = {
   /**
@@ -22,13 +23,15 @@ export const BudgetDeleteRequest$outboundSchema: z.ZodType<
   BudgetDeleteRequest$Outbound,
   z.ZodTypeDef,
   BudgetDeleteRequest
-> = z.object({
-  budgetId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    budgetId: "budget_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    budgetId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      budgetId: "budget_id",
+    });
+  })
+);
 
 export function budgetDeleteRequestToJSON(
   budgetDeleteRequest: BudgetDeleteRequest,

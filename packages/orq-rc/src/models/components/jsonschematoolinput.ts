@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 /**
  * Enforces structured output format using JSON Schema. Must reference a pre-created JSON Schema tool by key or id.
@@ -40,16 +41,18 @@ export const JsonSchemaToolInput$outboundSchema: z.ZodType<
   JsonSchemaToolInput$Outbound,
   z.ZodTypeDef,
   JsonSchemaToolInput
-> = z.object({
-  type: z.literal("json_schema"),
-  key: z.string().optional(),
-  id: z.string().optional(),
-  requiresApproval: z.boolean().default(false),
-}).transform((v) => {
-  return remap$(v, {
-    requiresApproval: "requires_approval",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("json_schema"),
+    key: z.string().optional(),
+    id: z.string().optional(),
+    requiresApproval: z.boolean().default(false),
+  }).transform((v) => {
+    return remap$(v, {
+      requiresApproval: "requires_approval",
+    });
+  })
+);
 
 export function jsonSchemaToolInputToJSON(
   jsonSchemaToolInput: JsonSchemaToolInput,

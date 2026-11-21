@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -806,9 +806,11 @@ export const GetEvalRequest$outboundSchema: z.ZodType<
   GetEvalRequest$Outbound,
   z.ZodTypeDef,
   GetEvalRequest
-> = z.object({
-  id: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+  })
+);
 
 export function getEvalRequestToJSON(getEvalRequest: GetEvalRequest): string {
   return JSON.stringify(GetEvalRequest$outboundSchema.parse(getEvalRequest));
@@ -820,23 +822,25 @@ export const GetEvalResponseBodyEvalsResponse200ApplicationJson8Metadata$inbound
     GetEvalResponseBodyEvalsResponse200ApplicationJson8Metadata,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    required_model_with_tools_support: z.boolean().optional(),
-    required_retrieval_context: z.boolean().optional(),
-    required_expected_output: z.boolean().optional(),
-    supported_on_input_type: z.boolean().optional(),
-    supported_on_output_type: z.boolean().optional(),
-    support_use_as_guardrail: z.boolean().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "required_model_with_tools_support": "requiredModelWithToolsSupport",
-      "required_retrieval_context": "requiredRetrievalContext",
-      "required_expected_output": "requiredExpectedOutput",
-      "supported_on_input_type": "supportedOnInputType",
-      "supported_on_output_type": "supportedOnOutputType",
-      "support_use_as_guardrail": "supportUseAsGuardrail",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      required_model_with_tools_support: z.boolean().optional(),
+      required_retrieval_context: z.boolean().optional(),
+      required_expected_output: z.boolean().optional(),
+      supported_on_input_type: z.boolean().optional(),
+      supported_on_output_type: z.boolean().optional(),
+      support_use_as_guardrail: z.boolean().optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "required_model_with_tools_support": "requiredModelWithToolsSupport",
+        "required_retrieval_context": "requiredRetrievalContext",
+        "required_expected_output": "requiredExpectedOutput",
+        "supported_on_input_type": "supportedOnInputType",
+        "supported_on_output_type": "supportedOnOutputType",
+        "support_use_as_guardrail": "supportUseAsGuardrail",
+      });
+    })
+  );
 
 export function getEvalResponseBodyEvalsResponse200ApplicationJSON8MetadataFromJSON(
   jsonString: string,
@@ -857,8 +861,8 @@ export function getEvalResponseBodyEvalsResponse200ApplicationJSON8MetadataFromJ
 export const GetEvalResponseBodyEvalsResponse200ApplicationJson8OutputType$inboundSchema:
   z.ZodNativeEnum<
     typeof GetEvalResponseBodyEvalsResponse200ApplicationJson8OutputType
-  > = z.nativeEnum(
-    GetEvalResponseBodyEvalsResponse200ApplicationJson8OutputType,
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.nativeEnum(GetEvalResponseBodyEvalsResponse200ApplicationJson8OutputType)
   );
 
 /** @internal */
@@ -866,47 +870,49 @@ export const BedrockGuardrail$inboundSchema: z.ZodType<
   BedrockGuardrail,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  enabled: z.boolean().default(true),
-  metadata: z.lazy(() =>
-    GetEvalResponseBodyEvalsResponse200ApplicationJson8Metadata$inboundSchema
-  ),
-  _id: z.string(),
-  display_name: z.string(),
-  description: z.string(),
-  owner: z.string(),
-  created: z.string().default("2026-08-05T15:12:51.947Z"),
-  updated: z.string().default("2026-08-05T15:12:51.947Z"),
-  created_by_id: z.nullable(z.string()).optional(),
-  updated_by_id: z.nullable(z.string()).optional(),
-  domain_id: z.string(),
-  project_id: z.string().optional(),
-  timeout: z.nullable(z.number().int()).optional(),
-  guardrail_config: z.any().optional(),
-  output_type:
-    GetEvalResponseBodyEvalsResponse200ApplicationJson8OutputType$inboundSchema
-      .optional(),
-  type: z.literal("bedrock_eval"),
-  guardrail_identifier: z.string(),
-  guardrail_version: z.string().default("DRAFT"),
-  guardrail_region: z.string().optional(),
-  integration_id: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "_id": "id",
-    "display_name": "displayName",
-    "created_by_id": "createdById",
-    "updated_by_id": "updatedById",
-    "domain_id": "domainId",
-    "project_id": "projectId",
-    "guardrail_config": "guardrailConfig",
-    "output_type": "outputType",
-    "guardrail_identifier": "guardrailIdentifier",
-    "guardrail_version": "guardrailVersion",
-    "guardrail_region": "guardrailRegion",
-    "integration_id": "integrationId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    enabled: z.boolean().default(true),
+    metadata: z.lazy(() =>
+      GetEvalResponseBodyEvalsResponse200ApplicationJson8Metadata$inboundSchema
+    ),
+    _id: z.string(),
+    display_name: z.string(),
+    description: z.string(),
+    owner: z.string(),
+    created: z.string().default("2026-08-05T15:12:51.947Z"),
+    updated: z.string().default("2026-08-05T15:12:51.947Z"),
+    created_by_id: z.nullable(z.string()).optional(),
+    updated_by_id: z.nullable(z.string()).optional(),
+    domain_id: z.string(),
+    project_id: z.string().optional(),
+    timeout: z.nullable(z.number().int()).optional(),
+    guardrail_config: z.any().optional(),
+    output_type:
+      GetEvalResponseBodyEvalsResponse200ApplicationJson8OutputType$inboundSchema
+        .optional(),
+    type: z.literal("bedrock_eval"),
+    guardrail_identifier: z.string(),
+    guardrail_version: z.string().default("DRAFT"),
+    guardrail_region: z.string().optional(),
+    integration_id: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "_id": "id",
+      "display_name": "displayName",
+      "created_by_id": "createdById",
+      "updated_by_id": "updatedById",
+      "domain_id": "domainId",
+      "project_id": "projectId",
+      "guardrail_config": "guardrailConfig",
+      "output_type": "outputType",
+      "guardrail_identifier": "guardrailIdentifier",
+      "guardrail_version": "guardrailVersion",
+      "guardrail_region": "guardrailRegion",
+      "integration_id": "integrationId",
+    });
+  })
+);
 
 export function bedrockGuardrailFromJSON(
   jsonString: string,
@@ -924,23 +930,25 @@ export const GetEvalResponseBodyEvalsResponse200ApplicationJson7Metadata$inbound
     GetEvalResponseBodyEvalsResponse200ApplicationJson7Metadata,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    required_model_with_tools_support: z.boolean().optional(),
-    required_retrieval_context: z.boolean().optional(),
-    required_expected_output: z.boolean().optional(),
-    supported_on_input_type: z.boolean().optional(),
-    supported_on_output_type: z.boolean().optional(),
-    support_use_as_guardrail: z.boolean().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "required_model_with_tools_support": "requiredModelWithToolsSupport",
-      "required_retrieval_context": "requiredRetrievalContext",
-      "required_expected_output": "requiredExpectedOutput",
-      "supported_on_input_type": "supportedOnInputType",
-      "supported_on_output_type": "supportedOnOutputType",
-      "support_use_as_guardrail": "supportUseAsGuardrail",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      required_model_with_tools_support: z.boolean().optional(),
+      required_retrieval_context: z.boolean().optional(),
+      required_expected_output: z.boolean().optional(),
+      supported_on_input_type: z.boolean().optional(),
+      supported_on_output_type: z.boolean().optional(),
+      support_use_as_guardrail: z.boolean().optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "required_model_with_tools_support": "requiredModelWithToolsSupport",
+        "required_retrieval_context": "requiredRetrievalContext",
+        "required_expected_output": "requiredExpectedOutput",
+        "supported_on_input_type": "supportedOnInputType",
+        "supported_on_output_type": "supportedOnOutputType",
+        "support_use_as_guardrail": "supportUseAsGuardrail",
+      });
+    })
+  );
 
 export function getEvalResponseBodyEvalsResponse200ApplicationJSON7MetadataFromJSON(
   jsonString: string,
@@ -961,8 +969,8 @@ export function getEvalResponseBodyEvalsResponse200ApplicationJSON7MetadataFromJ
 export const GetEvalResponseBodyEvalsResponse200ApplicationJson7OutputType$inboundSchema:
   z.ZodNativeEnum<
     typeof GetEvalResponseBodyEvalsResponse200ApplicationJson7OutputType
-  > = z.nativeEnum(
-    GetEvalResponseBodyEvalsResponse200ApplicationJson7OutputType,
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.nativeEnum(GetEvalResponseBodyEvalsResponse200ApplicationJson7OutputType)
   );
 
 /** @internal */
@@ -970,40 +978,42 @@ export const Typescript$inboundSchema: z.ZodType<
   Typescript,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  enabled: z.boolean().default(true),
-  metadata: z.lazy(() =>
-    GetEvalResponseBodyEvalsResponse200ApplicationJson7Metadata$inboundSchema
-  ),
-  _id: z.string(),
-  display_name: z.string(),
-  description: z.string(),
-  owner: z.string(),
-  created: z.string().default("2026-08-05T15:12:51.947Z"),
-  updated: z.string().default("2026-08-05T15:12:51.947Z"),
-  created_by_id: z.nullable(z.string()).optional(),
-  updated_by_id: z.nullable(z.string()).optional(),
-  domain_id: z.string(),
-  project_id: z.string().optional(),
-  timeout: z.nullable(z.number().int()).optional(),
-  guardrail_config: z.any().optional(),
-  output_type:
-    GetEvalResponseBodyEvalsResponse200ApplicationJson7OutputType$inboundSchema
-      .optional(),
-  code: z.string(),
-  type: z.literal("typescript_eval"),
-}).transform((v) => {
-  return remap$(v, {
-    "_id": "id",
-    "display_name": "displayName",
-    "created_by_id": "createdById",
-    "updated_by_id": "updatedById",
-    "domain_id": "domainId",
-    "project_id": "projectId",
-    "guardrail_config": "guardrailConfig",
-    "output_type": "outputType",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    enabled: z.boolean().default(true),
+    metadata: z.lazy(() =>
+      GetEvalResponseBodyEvalsResponse200ApplicationJson7Metadata$inboundSchema
+    ),
+    _id: z.string(),
+    display_name: z.string(),
+    description: z.string(),
+    owner: z.string(),
+    created: z.string().default("2026-08-05T15:12:51.947Z"),
+    updated: z.string().default("2026-08-05T15:12:51.947Z"),
+    created_by_id: z.nullable(z.string()).optional(),
+    updated_by_id: z.nullable(z.string()).optional(),
+    domain_id: z.string(),
+    project_id: z.string().optional(),
+    timeout: z.nullable(z.number().int()).optional(),
+    guardrail_config: z.any().optional(),
+    output_type:
+      GetEvalResponseBodyEvalsResponse200ApplicationJson7OutputType$inboundSchema
+        .optional(),
+    code: z.string(),
+    type: z.literal("typescript_eval"),
+  }).transform((v) => {
+    return remap$(v, {
+      "_id": "id",
+      "display_name": "displayName",
+      "created_by_id": "createdById",
+      "updated_by_id": "updatedById",
+      "domain_id": "domainId",
+      "project_id": "projectId",
+      "guardrail_config": "guardrailConfig",
+      "output_type": "outputType",
+    });
+  })
+);
 
 export function typescriptFromJSON(
   jsonString: string,
@@ -1021,23 +1031,25 @@ export const GetEvalResponseBodyEvalsResponse200ApplicationJSONMetadata$inboundS
     GetEvalResponseBodyEvalsResponse200ApplicationJSONMetadata,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    required_model_with_tools_support: z.boolean().optional(),
-    required_retrieval_context: z.boolean().optional(),
-    required_expected_output: z.boolean().optional(),
-    supported_on_input_type: z.boolean().optional(),
-    supported_on_output_type: z.boolean().optional(),
-    support_use_as_guardrail: z.boolean().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "required_model_with_tools_support": "requiredModelWithToolsSupport",
-      "required_retrieval_context": "requiredRetrievalContext",
-      "required_expected_output": "requiredExpectedOutput",
-      "supported_on_input_type": "supportedOnInputType",
-      "supported_on_output_type": "supportedOnOutputType",
-      "support_use_as_guardrail": "supportUseAsGuardrail",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      required_model_with_tools_support: z.boolean().optional(),
+      required_retrieval_context: z.boolean().optional(),
+      required_expected_output: z.boolean().optional(),
+      supported_on_input_type: z.boolean().optional(),
+      supported_on_output_type: z.boolean().optional(),
+      support_use_as_guardrail: z.boolean().optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "required_model_with_tools_support": "requiredModelWithToolsSupport",
+        "required_retrieval_context": "requiredRetrievalContext",
+        "required_expected_output": "requiredExpectedOutput",
+        "supported_on_input_type": "supportedOnInputType",
+        "supported_on_output_type": "supportedOnOutputType",
+        "support_use_as_guardrail": "supportUseAsGuardrail",
+      });
+    })
+  );
 
 export function getEvalResponseBodyEvalsResponse200ApplicationJSONMetadataFromJSON(
   jsonString: string,
@@ -1058,8 +1070,8 @@ export function getEvalResponseBodyEvalsResponse200ApplicationJSONMetadataFromJS
 export const GetEvalResponseBodyEvalsResponse200ApplicationJSONOutputType$inboundSchema:
   z.ZodNativeEnum<
     typeof GetEvalResponseBodyEvalsResponse200ApplicationJSONOutputType
-  > = z.nativeEnum(
-    GetEvalResponseBodyEvalsResponse200ApplicationJSONOutputType,
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.nativeEnum(GetEvalResponseBodyEvalsResponse200ApplicationJSONOutputType)
   );
 
 /** @internal */
@@ -1067,40 +1079,42 @@ export const ResponseBodyPython$inboundSchema: z.ZodType<
   ResponseBodyPython,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  enabled: z.boolean().default(true),
-  metadata: z.lazy(() =>
-    GetEvalResponseBodyEvalsResponse200ApplicationJSONMetadata$inboundSchema
-  ),
-  _id: z.string(),
-  display_name: z.string(),
-  description: z.string(),
-  owner: z.string(),
-  created: z.string().default("2026-08-05T15:12:51.947Z"),
-  updated: z.string().default("2026-08-05T15:12:51.947Z"),
-  created_by_id: z.nullable(z.string()).optional(),
-  updated_by_id: z.nullable(z.string()).optional(),
-  domain_id: z.string(),
-  project_id: z.string().optional(),
-  timeout: z.nullable(z.number().int()).optional(),
-  guardrail_config: z.any().optional(),
-  output_type:
-    GetEvalResponseBodyEvalsResponse200ApplicationJSONOutputType$inboundSchema
-      .optional(),
-  code: z.string(),
-  type: z.literal("python_eval"),
-}).transform((v) => {
-  return remap$(v, {
-    "_id": "id",
-    "display_name": "displayName",
-    "created_by_id": "createdById",
-    "updated_by_id": "updatedById",
-    "domain_id": "domainId",
-    "project_id": "projectId",
-    "guardrail_config": "guardrailConfig",
-    "output_type": "outputType",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    enabled: z.boolean().default(true),
+    metadata: z.lazy(() =>
+      GetEvalResponseBodyEvalsResponse200ApplicationJSONMetadata$inboundSchema
+    ),
+    _id: z.string(),
+    display_name: z.string(),
+    description: z.string(),
+    owner: z.string(),
+    created: z.string().default("2026-08-05T15:12:51.947Z"),
+    updated: z.string().default("2026-08-05T15:12:51.947Z"),
+    created_by_id: z.nullable(z.string()).optional(),
+    updated_by_id: z.nullable(z.string()).optional(),
+    domain_id: z.string(),
+    project_id: z.string().optional(),
+    timeout: z.nullable(z.number().int()).optional(),
+    guardrail_config: z.any().optional(),
+    output_type:
+      GetEvalResponseBodyEvalsResponse200ApplicationJSONOutputType$inboundSchema
+        .optional(),
+    code: z.string(),
+    type: z.literal("python_eval"),
+  }).transform((v) => {
+    return remap$(v, {
+      "_id": "id",
+      "display_name": "displayName",
+      "created_by_id": "createdById",
+      "updated_by_id": "updatedById",
+      "domain_id": "domainId",
+      "project_id": "projectId",
+      "guardrail_config": "guardrailConfig",
+      "output_type": "outputType",
+    });
+  })
+);
 
 export function responseBodyPythonFromJSON(
   jsonString: string,
@@ -1118,23 +1132,25 @@ export const GetEvalResponseBodyEvalsResponse200Metadata$inboundSchema:
     GetEvalResponseBodyEvalsResponse200Metadata,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    required_model_with_tools_support: z.boolean().optional(),
-    required_retrieval_context: z.boolean().optional(),
-    required_expected_output: z.boolean().optional(),
-    supported_on_input_type: z.boolean().optional(),
-    supported_on_output_type: z.boolean().optional(),
-    support_use_as_guardrail: z.boolean().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "required_model_with_tools_support": "requiredModelWithToolsSupport",
-      "required_retrieval_context": "requiredRetrievalContext",
-      "required_expected_output": "requiredExpectedOutput",
-      "supported_on_input_type": "supportedOnInputType",
-      "supported_on_output_type": "supportedOnOutputType",
-      "support_use_as_guardrail": "supportUseAsGuardrail",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      required_model_with_tools_support: z.boolean().optional(),
+      required_retrieval_context: z.boolean().optional(),
+      required_expected_output: z.boolean().optional(),
+      supported_on_input_type: z.boolean().optional(),
+      supported_on_output_type: z.boolean().optional(),
+      support_use_as_guardrail: z.boolean().optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "required_model_with_tools_support": "requiredModelWithToolsSupport",
+        "required_retrieval_context": "requiredRetrievalContext",
+        "required_expected_output": "requiredExpectedOutput",
+        "supported_on_input_type": "supportedOnInputType",
+        "supported_on_output_type": "supportedOnOutputType",
+        "support_use_as_guardrail": "supportUseAsGuardrail",
+      });
+    })
+  );
 
 export function getEvalResponseBodyEvalsResponse200MetadataFromJSON(
   jsonString: string,
@@ -1154,55 +1170,59 @@ export function getEvalResponseBodyEvalsResponse200MetadataFromJSON(
 
 /** @internal */
 export const GetEvalResponseBodyEvalsResponse200OutputType$inboundSchema:
-  z.ZodNativeEnum<typeof GetEvalResponseBodyEvalsResponse200OutputType> = z
-    .nativeEnum(GetEvalResponseBodyEvalsResponse200OutputType);
+  z.ZodNativeEnum<typeof GetEvalResponseBodyEvalsResponse200OutputType> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(GetEvalResponseBodyEvalsResponse200OutputType)
+    );
 
 /** @internal */
 export const ResponseBodyMethod$inboundSchema: z.ZodNativeEnum<
   typeof ResponseBodyMethod
-> = z.nativeEnum(ResponseBodyMethod);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ResponseBodyMethod));
 
 /** @internal */
 export const GetEvalResponseBodyHTTP$inboundSchema: z.ZodType<
   GetEvalResponseBodyHTTP,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  enabled: z.boolean().default(true),
-  metadata: z.lazy(() =>
-    GetEvalResponseBodyEvalsResponse200Metadata$inboundSchema
-  ),
-  _id: z.string(),
-  display_name: z.string(),
-  description: z.string(),
-  owner: z.string(),
-  created: z.string().default("2026-08-05T15:12:51.947Z"),
-  updated: z.string().default("2026-08-05T15:12:51.947Z"),
-  created_by_id: z.nullable(z.string()).optional(),
-  updated_by_id: z.nullable(z.string()).optional(),
-  domain_id: z.string(),
-  project_id: z.string().optional(),
-  timeout: z.nullable(z.number().int()).optional(),
-  guardrail_config: z.any().optional(),
-  output_type: GetEvalResponseBodyEvalsResponse200OutputType$inboundSchema
-    .optional(),
-  type: z.literal("http_eval"),
-  url: z.string(),
-  method: ResponseBodyMethod$inboundSchema,
-  headers: z.record(z.string()),
-  payload: z.record(z.any()),
-}).transform((v) => {
-  return remap$(v, {
-    "_id": "id",
-    "display_name": "displayName",
-    "created_by_id": "createdById",
-    "updated_by_id": "updatedById",
-    "domain_id": "domainId",
-    "project_id": "projectId",
-    "guardrail_config": "guardrailConfig",
-    "output_type": "outputType",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    enabled: z.boolean().default(true),
+    metadata: z.lazy(() =>
+      GetEvalResponseBodyEvalsResponse200Metadata$inboundSchema
+    ),
+    _id: z.string(),
+    display_name: z.string(),
+    description: z.string(),
+    owner: z.string(),
+    created: z.string().default("2026-08-05T15:12:51.947Z"),
+    updated: z.string().default("2026-08-05T15:12:51.947Z"),
+    created_by_id: z.nullable(z.string()).optional(),
+    updated_by_id: z.nullable(z.string()).optional(),
+    domain_id: z.string(),
+    project_id: z.string().optional(),
+    timeout: z.nullable(z.number().int()).optional(),
+    guardrail_config: z.any().optional(),
+    output_type: GetEvalResponseBodyEvalsResponse200OutputType$inboundSchema
+      .optional(),
+    type: z.literal("http_eval"),
+    url: z.string(),
+    method: ResponseBodyMethod$inboundSchema,
+    headers: z.record(z.string()),
+    payload: z.record(z.any()),
+  }).transform((v) => {
+    return remap$(v, {
+      "_id": "id",
+      "display_name": "displayName",
+      "created_by_id": "createdById",
+      "updated_by_id": "updatedById",
+      "domain_id": "domainId",
+      "project_id": "projectId",
+      "guardrail_config": "guardrailConfig",
+      "output_type": "outputType",
+    });
+  })
+);
 
 export function getEvalResponseBodyHTTPFromJSON(
   jsonString: string,
@@ -1219,23 +1239,25 @@ export const GetEvalResponseBodyEvalsResponseMetadata$inboundSchema: z.ZodType<
   GetEvalResponseBodyEvalsResponseMetadata,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  required_model_with_tools_support: z.boolean().optional(),
-  required_retrieval_context: z.boolean().optional(),
-  required_expected_output: z.boolean().optional(),
-  supported_on_input_type: z.boolean().optional(),
-  supported_on_output_type: z.boolean().optional(),
-  support_use_as_guardrail: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "required_model_with_tools_support": "requiredModelWithToolsSupport",
-    "required_retrieval_context": "requiredRetrievalContext",
-    "required_expected_output": "requiredExpectedOutput",
-    "supported_on_input_type": "supportedOnInputType",
-    "supported_on_output_type": "supportedOnOutputType",
-    "support_use_as_guardrail": "supportUseAsGuardrail",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    required_model_with_tools_support: z.boolean().optional(),
+    required_retrieval_context: z.boolean().optional(),
+    required_expected_output: z.boolean().optional(),
+    supported_on_input_type: z.boolean().optional(),
+    supported_on_output_type: z.boolean().optional(),
+    support_use_as_guardrail: z.boolean().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "required_model_with_tools_support": "requiredModelWithToolsSupport",
+      "required_retrieval_context": "requiredRetrievalContext",
+      "required_expected_output": "requiredExpectedOutput",
+      "supported_on_input_type": "supportedOnInputType",
+      "supported_on_output_type": "supportedOnOutputType",
+      "support_use_as_guardrail": "supportUseAsGuardrail",
+    });
+  })
+);
 
 export function getEvalResponseBodyEvalsResponseMetadataFromJSON(
   jsonString: string,
@@ -1255,44 +1277,48 @@ export function getEvalResponseBodyEvalsResponseMetadataFromJSON(
 
 /** @internal */
 export const GetEvalResponseBodyEvalsResponseOutputType$inboundSchema:
-  z.ZodNativeEnum<typeof GetEvalResponseBodyEvalsResponseOutputType> = z
-    .nativeEnum(GetEvalResponseBodyEvalsResponseOutputType);
+  z.ZodNativeEnum<typeof GetEvalResponseBodyEvalsResponseOutputType> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(GetEvalResponseBodyEvalsResponseOutputType)
+    );
 
 /** @internal */
-export const Json$inboundSchema: z.ZodType<Json, z.ZodTypeDef, unknown> = z
-  .object({
-    enabled: z.boolean().default(true),
-    metadata: z.lazy(() =>
-      GetEvalResponseBodyEvalsResponseMetadata$inboundSchema
-    ),
-    _id: z.string(),
-    display_name: z.string(),
-    description: z.string(),
-    owner: z.string(),
-    created: z.string().default("2026-08-05T15:12:51.947Z"),
-    updated: z.string().default("2026-08-05T15:12:51.947Z"),
-    created_by_id: z.nullable(z.string()).optional(),
-    updated_by_id: z.nullable(z.string()).optional(),
-    domain_id: z.string(),
-    project_id: z.string().optional(),
-    timeout: z.nullable(z.number().int()).optional(),
-    guardrail_config: z.any().optional(),
-    output_type: GetEvalResponseBodyEvalsResponseOutputType$inboundSchema
-      .optional(),
-    type: z.literal("json_schema"),
-    schema: z.string(),
-  }).transform((v) => {
-    return remap$(v, {
-      "_id": "id",
-      "display_name": "displayName",
-      "created_by_id": "createdById",
-      "updated_by_id": "updatedById",
-      "domain_id": "domainId",
-      "project_id": "projectId",
-      "guardrail_config": "guardrailConfig",
-      "output_type": "outputType",
-    });
-  });
+export const Json$inboundSchema: z.ZodType<Json, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      enabled: z.boolean().default(true),
+      metadata: z.lazy(() =>
+        GetEvalResponseBodyEvalsResponseMetadata$inboundSchema
+      ),
+      _id: z.string(),
+      display_name: z.string(),
+      description: z.string(),
+      owner: z.string(),
+      created: z.string().default("2026-08-05T15:12:51.947Z"),
+      updated: z.string().default("2026-08-05T15:12:51.947Z"),
+      created_by_id: z.nullable(z.string()).optional(),
+      updated_by_id: z.nullable(z.string()).optional(),
+      domain_id: z.string(),
+      project_id: z.string().optional(),
+      timeout: z.nullable(z.number().int()).optional(),
+      guardrail_config: z.any().optional(),
+      output_type: GetEvalResponseBodyEvalsResponseOutputType$inboundSchema
+        .optional(),
+      type: z.literal("json_schema"),
+      schema: z.string(),
+    }).transform((v) => {
+      return remap$(v, {
+        "_id": "id",
+        "display_name": "displayName",
+        "created_by_id": "createdById",
+        "updated_by_id": "updatedById",
+        "domain_id": "domainId",
+        "project_id": "projectId",
+        "guardrail_config": "guardrailConfig",
+        "output_type": "outputType",
+      });
+    })
+  );
 
 export function jsonFromJSON(
   jsonString: string,
@@ -1309,23 +1335,25 @@ export const GetEvalResponseBodyEvalsMetadata$inboundSchema: z.ZodType<
   GetEvalResponseBodyEvalsMetadata,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  required_model_with_tools_support: z.boolean().optional(),
-  required_retrieval_context: z.boolean().optional(),
-  required_expected_output: z.boolean().optional(),
-  supported_on_input_type: z.boolean().optional(),
-  supported_on_output_type: z.boolean().optional(),
-  support_use_as_guardrail: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "required_model_with_tools_support": "requiredModelWithToolsSupport",
-    "required_retrieval_context": "requiredRetrievalContext",
-    "required_expected_output": "requiredExpectedOutput",
-    "supported_on_input_type": "supportedOnInputType",
-    "supported_on_output_type": "supportedOnOutputType",
-    "support_use_as_guardrail": "supportUseAsGuardrail",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    required_model_with_tools_support: z.boolean().optional(),
+    required_retrieval_context: z.boolean().optional(),
+    required_expected_output: z.boolean().optional(),
+    supported_on_input_type: z.boolean().optional(),
+    supported_on_output_type: z.boolean().optional(),
+    support_use_as_guardrail: z.boolean().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "required_model_with_tools_support": "requiredModelWithToolsSupport",
+      "required_retrieval_context": "requiredRetrievalContext",
+      "required_expected_output": "requiredExpectedOutput",
+      "supported_on_input_type": "supportedOnInputType",
+      "supported_on_output_type": "supportedOnOutputType",
+      "support_use_as_guardrail": "supportUseAsGuardrail",
+    });
+  })
+);
 
 export function getEvalResponseBodyEvalsMetadataFromJSON(
   jsonString: string,
@@ -1340,21 +1368,25 @@ export function getEvalResponseBodyEvalsMetadataFromJSON(
 /** @internal */
 export const GetEvalResponseBodyEvalsOutputType$inboundSchema: z.ZodNativeEnum<
   typeof GetEvalResponseBodyEvalsOutputType
-> = z.nativeEnum(GetEvalResponseBodyEvalsOutputType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(GetEvalResponseBodyEvalsOutputType)
+);
 
 /** @internal */
 export const GetEvalResponseBodyModel$inboundSchema: z.ZodType<
   GetEvalResponseBodyModel,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  integration_id: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "integration_id": "integrationId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    integration_id: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "integration_id": "integrationId",
+    });
+  })
+);
 
 export function getEvalResponseBodyModelFromJSON(
   jsonString: string,
@@ -1367,43 +1399,45 @@ export function getEvalResponseBodyModelFromJSON(
 }
 
 /** @internal */
-export const RagasMetric$inboundSchema: z.ZodNativeEnum<typeof RagasMetric> = z
-  .nativeEnum(RagasMetric);
+export const RagasMetric$inboundSchema: z.ZodNativeEnum<typeof RagasMetric> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(RagasMetric));
 
 /** @internal */
-export const Ragas$inboundSchema: z.ZodType<Ragas, z.ZodTypeDef, unknown> = z
-  .object({
-    enabled: z.boolean().default(true),
-    metadata: z.lazy(() => GetEvalResponseBodyEvalsMetadata$inboundSchema),
-    _id: z.string(),
-    display_name: z.string(),
-    description: z.string(),
-    owner: z.string(),
-    created: z.string().default("2026-08-05T15:12:51.947Z"),
-    updated: z.string().default("2026-08-05T15:12:51.947Z"),
-    created_by_id: z.nullable(z.string()).optional(),
-    updated_by_id: z.nullable(z.string()).optional(),
-    domain_id: z.string(),
-    project_id: z.string().optional(),
-    timeout: z.nullable(z.number().int()).optional(),
-    guardrail_config: z.any().optional(),
-    output_type: GetEvalResponseBodyEvalsOutputType$inboundSchema.optional(),
-    type: z.literal("ragas"),
-    model: z.lazy(() => GetEvalResponseBodyModel$inboundSchema),
-    ragas_metric: RagasMetric$inboundSchema,
-  }).transform((v) => {
-    return remap$(v, {
-      "_id": "id",
-      "display_name": "displayName",
-      "created_by_id": "createdById",
-      "updated_by_id": "updatedById",
-      "domain_id": "domainId",
-      "project_id": "projectId",
-      "guardrail_config": "guardrailConfig",
-      "output_type": "outputType",
-      "ragas_metric": "ragasMetric",
-    });
-  });
+export const Ragas$inboundSchema: z.ZodType<Ragas, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      enabled: z.boolean().default(true),
+      metadata: z.lazy(() => GetEvalResponseBodyEvalsMetadata$inboundSchema),
+      _id: z.string(),
+      display_name: z.string(),
+      description: z.string(),
+      owner: z.string(),
+      created: z.string().default("2026-08-05T15:12:51.947Z"),
+      updated: z.string().default("2026-08-05T15:12:51.947Z"),
+      created_by_id: z.nullable(z.string()).optional(),
+      updated_by_id: z.nullable(z.string()).optional(),
+      domain_id: z.string(),
+      project_id: z.string().optional(),
+      timeout: z.nullable(z.number().int()).optional(),
+      guardrail_config: z.any().optional(),
+      output_type: GetEvalResponseBodyEvalsOutputType$inboundSchema.optional(),
+      type: z.literal("ragas"),
+      model: z.lazy(() => GetEvalResponseBodyModel$inboundSchema),
+      ragas_metric: RagasMetric$inboundSchema,
+    }).transform((v) => {
+      return remap$(v, {
+        "_id": "id",
+        "display_name": "displayName",
+        "created_by_id": "createdById",
+        "updated_by_id": "updatedById",
+        "domain_id": "domainId",
+        "project_id": "projectId",
+        "guardrail_config": "guardrailConfig",
+        "output_type": "outputType",
+        "ragas_metric": "ragasMetric",
+      });
+    })
+  );
 
 export function ragasFromJSON(
   jsonString: string,
@@ -1420,23 +1454,25 @@ export const GetEvalResponseBodyMetadata$inboundSchema: z.ZodType<
   GetEvalResponseBodyMetadata,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  required_model_with_tools_support: z.boolean().optional(),
-  required_retrieval_context: z.boolean().optional(),
-  required_expected_output: z.boolean().optional(),
-  supported_on_input_type: z.boolean().optional(),
-  supported_on_output_type: z.boolean().optional(),
-  support_use_as_guardrail: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "required_model_with_tools_support": "requiredModelWithToolsSupport",
-    "required_retrieval_context": "requiredRetrievalContext",
-    "required_expected_output": "requiredExpectedOutput",
-    "supported_on_input_type": "supportedOnInputType",
-    "supported_on_output_type": "supportedOnOutputType",
-    "support_use_as_guardrail": "supportUseAsGuardrail",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    required_model_with_tools_support: z.boolean().optional(),
+    required_retrieval_context: z.boolean().optional(),
+    required_expected_output: z.boolean().optional(),
+    supported_on_input_type: z.boolean().optional(),
+    supported_on_output_type: z.boolean().optional(),
+    support_use_as_guardrail: z.boolean().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "required_model_with_tools_support": "requiredModelWithToolsSupport",
+      "required_retrieval_context": "requiredRetrievalContext",
+      "required_expected_output": "requiredExpectedOutput",
+      "supported_on_input_type": "supportedOnInputType",
+      "supported_on_output_type": "supportedOnOutputType",
+      "support_use_as_guardrail": "supportUseAsGuardrail",
+    });
+  })
+);
 
 export function getEvalResponseBodyMetadataFromJSON(
   jsonString: string,
@@ -1451,16 +1487,20 @@ export function getEvalResponseBodyMetadataFromJSON(
 /** @internal */
 export const GetEvalResponseBodyOutputType$inboundSchema: z.ZodNativeEnum<
   typeof GetEvalResponseBodyOutputType
-> = z.nativeEnum(GetEvalResponseBodyOutputType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(GetEvalResponseBodyOutputType)
+);
 
 /** @internal */
 export const ThirtyTwo$inboundSchema: z.ZodType<
   ThirtyTwo,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("grammar_diversity"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("grammar_diversity"),
+  })
+);
 
 export function thirtyTwoFromJSON(
   jsonString: string,
@@ -1477,9 +1517,11 @@ export const ThirtyOne$inboundSchema: z.ZodType<
   ThirtyOne,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("lexical_repetition"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("lexical_repetition"),
+  })
+);
 
 export function thirtyOneFromJSON(
   jsonString: string,
@@ -1492,10 +1534,12 @@ export function thirtyOneFromJSON(
 }
 
 /** @internal */
-export const Thirty$inboundSchema: z.ZodType<Thirty, z.ZodTypeDef, unknown> = z
-  .object({
-    type: z.literal("sentences_count"),
-  });
+export const Thirty$inboundSchema: z.ZodType<Thirty, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type: z.literal("sentences_count"),
+    })
+  );
 
 export function thirtyFromJSON(
   jsonString: string,
@@ -1512,9 +1556,11 @@ export const TwentyNine$inboundSchema: z.ZodType<
   TwentyNine,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("words_count"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("words_count"),
+  })
+);
 
 export function twentyNineFromJSON(
   jsonString: string,
@@ -1531,9 +1577,11 @@ export const TwentyEight$inboundSchema: z.ZodType<
   TwentyEight,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("gse_english_level"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("gse_english_level"),
+  })
+);
 
 export function twentyEightFromJSON(
   jsonString: string,
@@ -1550,9 +1598,11 @@ export const TwentySeven$inboundSchema: z.ZodType<
   TwentySeven,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("flesch_reading_ease"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("flesch_reading_ease"),
+  })
+);
 
 export function twentySevenFromJSON(
   jsonString: string,
@@ -1569,9 +1619,11 @@ export const TwentySix$inboundSchema: z.ZodType<
   TwentySix,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("most_repeated_words"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("most_repeated_words"),
+  })
+);
 
 export function twentySixFromJSON(
   jsonString: string,
@@ -1588,10 +1640,12 @@ export const TwentyFive$inboundSchema: z.ZodType<
   TwentyFive,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("keywords_match"),
-  keywords: z.array(z.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("keywords_match"),
+    keywords: z.array(z.string()),
+  })
+);
 
 export function twentyFiveFromJSON(
   jsonString: string,
@@ -1608,9 +1662,11 @@ export const TwentyFour$inboundSchema: z.ZodType<
   TwentyFour,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("levenshtein_distance"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("levenshtein_distance"),
+  })
+);
 
 export function twentyFourFromJSON(
   jsonString: string,
@@ -1627,9 +1683,11 @@ export const TwentyThree$inboundSchema: z.ZodType<
   TwentyThree,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("cosine_similarity"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("cosine_similarity"),
+  })
+);
 
 export function twentyThreeFromJSON(
   jsonString: string,
@@ -1646,9 +1704,11 @@ export const TwentyTwo$inboundSchema: z.ZodType<
   TwentyTwo,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("meteor_score"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("meteor_score"),
+  })
+);
 
 export function twentyTwoFromJSON(
   jsonString: string,
@@ -1665,9 +1725,11 @@ export const TwentyOne$inboundSchema: z.ZodType<
   TwentyOne,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("rouge_n"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("rouge_n"),
+  })
+);
 
 export function twentyOneFromJSON(
   jsonString: string,
@@ -1680,10 +1742,12 @@ export function twentyOneFromJSON(
 }
 
 /** @internal */
-export const Twenty$inboundSchema: z.ZodType<Twenty, z.ZodTypeDef, unknown> = z
-  .object({
-    type: z.literal("bleu_score"),
-  });
+export const Twenty$inboundSchema: z.ZodType<Twenty, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type: z.literal("bleu_score"),
+    })
+  );
 
 export function twentyFromJSON(
   jsonString: string,
@@ -1700,9 +1764,11 @@ export const Nineteen$inboundSchema: z.ZodType<
   Nineteen,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("bert_score"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("bert_score"),
+  })
+);
 
 export function nineteenFromJSON(
   jsonString: string,
@@ -1719,9 +1785,11 @@ export const Eighteen$inboundSchema: z.ZodType<
   Eighteen,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("moderations_google"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("moderations_google"),
+  })
+);
 
 export function eighteenFromJSON(
   jsonString: string,
@@ -1738,9 +1806,11 @@ export const Seventeen$inboundSchema: z.ZodType<
   Seventeen,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("moderations_openai"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("moderations_openai"),
+  })
+);
 
 export function seventeenFromJSON(
   jsonString: string,
@@ -1754,9 +1824,11 @@ export function seventeenFromJSON(
 
 /** @internal */
 export const Sixteen$inboundSchema: z.ZodType<Sixteen, z.ZodTypeDef, unknown> =
-  z.object({
-    type: z.literal("is_valid_json"),
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type: z.literal("is_valid_json"),
+    })
+  );
 
 export function sixteenFromJSON(
   jsonString: string,
@@ -1770,10 +1842,12 @@ export function sixteenFromJSON(
 
 /** @internal */
 export const Fifteen$inboundSchema: z.ZodType<Fifteen, z.ZodTypeDef, unknown> =
-  z.object({
-    type: z.literal("regex"),
-    pattern: z.string(),
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type: z.literal("regex"),
+      pattern: z.string(),
+    })
+  );
 
 export function fifteenFromJSON(
   jsonString: string,
@@ -1790,9 +1864,11 @@ export const Fourteen$inboundSchema: z.ZodType<
   Fourteen,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("one_line"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("one_line"),
+  })
+);
 
 export function fourteenFromJSON(
   jsonString: string,
@@ -1809,10 +1885,12 @@ export const Thirteen$inboundSchema: z.ZodType<
   Thirteen,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("length_greater_than"),
-  value: z.number(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("length_greater_than"),
+    value: z.number(),
+  })
+);
 
 export function thirteenFromJSON(
   jsonString: string,
@@ -1825,12 +1903,14 @@ export function thirteenFromJSON(
 }
 
 /** @internal */
-export const Twelve$inboundSchema: z.ZodType<Twelve, z.ZodTypeDef, unknown> = z
-  .object({
-    type: z.literal("length_between"),
-    min: z.number(),
-    max: z.number(),
-  });
+export const Twelve$inboundSchema: z.ZodType<Twelve, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type: z.literal("length_between"),
+      min: z.number(),
+      max: z.number(),
+    })
+  );
 
 export function twelveFromJSON(
   jsonString: string,
@@ -1843,11 +1923,13 @@ export function twelveFromJSON(
 }
 
 /** @internal */
-export const Eleven$inboundSchema: z.ZodType<Eleven, z.ZodTypeDef, unknown> = z
-  .object({
-    type: z.literal("length_less_than"),
-    value: z.number(),
-  });
+export const Eleven$inboundSchema: z.ZodType<Eleven, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type: z.literal("length_less_than"),
+      value: z.number(),
+    })
+  );
 
 export function elevenFromJSON(
   jsonString: string,
@@ -1860,10 +1942,12 @@ export function elevenFromJSON(
 }
 
 /** @internal */
-export const Ten$inboundSchema: z.ZodType<Ten, z.ZodTypeDef, unknown> = z
-  .object({
-    type: z.literal("exact_match"),
-  });
+export const Ten$inboundSchema: z.ZodType<Ten, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type: z.literal("exact_match"),
+    })
+  );
 
 export function tenFromJSON(
   jsonString: string,
@@ -1876,11 +1960,13 @@ export function tenFromJSON(
 }
 
 /** @internal */
-export const Nine$inboundSchema: z.ZodType<Nine, z.ZodTypeDef, unknown> = z
-  .object({
-    type: z.literal("ends_with"),
-    value: z.string(),
-  });
+export const Nine$inboundSchema: z.ZodType<Nine, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type: z.literal("ends_with"),
+      value: z.string(),
+    })
+  );
 
 export function nineFromJSON(
   jsonString: string,
@@ -1893,11 +1979,13 @@ export function nineFromJSON(
 }
 
 /** @internal */
-export const Eight$inboundSchema: z.ZodType<Eight, z.ZodTypeDef, unknown> = z
-  .object({
-    type: z.literal("start_with"),
-    value: z.string(),
-  });
+export const Eight$inboundSchema: z.ZodType<Eight, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type: z.literal("start_with"),
+      value: z.string(),
+    })
+  );
 
 export function eightFromJSON(
   jsonString: string,
@@ -1910,10 +1998,12 @@ export function eightFromJSON(
 }
 
 /** @internal */
-export const Seven$inboundSchema: z.ZodType<Seven, z.ZodTypeDef, unknown> = z
-  .object({
-    type: z.literal("contains_valid_link"),
-  });
+export const Seven$inboundSchema: z.ZodType<Seven, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type: z.literal("contains_valid_link"),
+    })
+  );
 
 export function sevenFromJSON(
   jsonString: string,
@@ -1930,9 +2020,11 @@ export const FunctionParams6$inboundSchema: z.ZodType<
   FunctionParams6,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("contains_url"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("contains_url"),
+  })
+);
 
 export function functionParams6FromJSON(
   jsonString: string,
@@ -1949,9 +2041,11 @@ export const FunctionParams5$inboundSchema: z.ZodType<
   FunctionParams5,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("contains_email"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("contains_email"),
+  })
+);
 
 export function functionParams5FromJSON(
   jsonString: string,
@@ -1968,10 +2062,12 @@ export const FunctionParams4$inboundSchema: z.ZodType<
   FunctionParams4,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("contains_any"),
-  keywords: z.array(z.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("contains_any"),
+    keywords: z.array(z.string()),
+  })
+);
 
 export function functionParams4FromJSON(
   jsonString: string,
@@ -1988,10 +2084,12 @@ export const FunctionParams3$inboundSchema: z.ZodType<
   FunctionParams3,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("contains_all"),
-  keywords: z.array(z.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("contains_all"),
+    keywords: z.array(z.string()),
+  })
+);
 
 export function functionParams3FromJSON(
   jsonString: string,
@@ -2008,10 +2106,12 @@ export const FunctionParams2$inboundSchema: z.ZodType<
   FunctionParams2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("contains_none"),
-  keywords: z.array(z.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("contains_none"),
+    keywords: z.array(z.string()),
+  })
+);
 
 export function functionParams2FromJSON(
   jsonString: string,
@@ -2028,10 +2128,12 @@ export const FunctionParams1$inboundSchema: z.ZodType<
   FunctionParams1,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("contains"),
-  value: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("contains"),
+    value: z.string(),
+  })
+);
 
 export function functionParams1FromJSON(
   jsonString: string,
@@ -2048,74 +2150,8 @@ export const FunctionParams$inboundSchema: z.ZodType<
   FunctionParams,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  z.lazy(() => FunctionParams1$inboundSchema),
-  z.lazy(() => FunctionParams2$inboundSchema),
-  z.lazy(() => FunctionParams3$inboundSchema),
-  z.lazy(() => FunctionParams4$inboundSchema),
-  z.lazy(() => FunctionParams5$inboundSchema),
-  z.lazy(() => FunctionParams6$inboundSchema),
-  z.lazy(() => Seven$inboundSchema),
-  z.lazy(() => Eight$inboundSchema),
-  z.lazy(() => Nine$inboundSchema),
-  z.lazy(() => Ten$inboundSchema),
-  z.lazy(() => Eleven$inboundSchema),
-  z.lazy(() => Twelve$inboundSchema),
-  z.lazy(() => Thirteen$inboundSchema),
-  z.lazy(() => Fourteen$inboundSchema),
-  z.lazy(() => Fifteen$inboundSchema),
-  z.lazy(() => Sixteen$inboundSchema),
-  z.lazy(() => Seventeen$inboundSchema),
-  z.lazy(() => Eighteen$inboundSchema),
-  z.lazy(() => Nineteen$inboundSchema),
-  z.lazy(() => Twenty$inboundSchema),
-  z.lazy(() => TwentyOne$inboundSchema),
-  z.lazy(() => TwentyTwo$inboundSchema),
-  z.lazy(() => TwentyThree$inboundSchema),
-  z.lazy(() => TwentyFour$inboundSchema),
-  z.lazy(() => TwentyFive$inboundSchema),
-  z.lazy(() => TwentySix$inboundSchema),
-  z.lazy(() => TwentySeven$inboundSchema),
-  z.lazy(() => TwentyEight$inboundSchema),
-  z.lazy(() => TwentyNine$inboundSchema),
-  z.lazy(() => Thirty$inboundSchema),
-  z.lazy(() => ThirtyOne$inboundSchema),
-  z.lazy(() => ThirtyTwo$inboundSchema),
-]);
-
-export function functionParamsFromJSON(
-  jsonString: string,
-): SafeParseResult<FunctionParams, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => FunctionParams$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'FunctionParams' from JSON`,
-  );
-}
-
-/** @internal */
-export const GetEvalResponseBodyFunction$inboundSchema: z.ZodType<
-  GetEvalResponseBodyFunction,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  enabled: z.boolean().default(true),
-  metadata: z.lazy(() => GetEvalResponseBodyMetadata$inboundSchema),
-  _id: z.string(),
-  display_name: z.string(),
-  description: z.string(),
-  owner: z.string(),
-  created: z.string().default("2026-08-05T15:12:51.947Z"),
-  updated: z.string().default("2026-08-05T15:12:51.947Z"),
-  created_by_id: z.nullable(z.string()).optional(),
-  updated_by_id: z.nullable(z.string()).optional(),
-  domain_id: z.string(),
-  project_id: z.string().optional(),
-  timeout: z.nullable(z.number().int()).optional(),
-  guardrail_config: z.any().optional(),
-  output_type: GetEvalResponseBodyOutputType$inboundSchema,
-  type: z.literal("function_eval"),
-  function_params: z.union([
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
     z.lazy(() => FunctionParams1$inboundSchema),
     z.lazy(() => FunctionParams2$inboundSchema),
     z.lazy(() => FunctionParams3$inboundSchema),
@@ -2148,20 +2184,90 @@ export const GetEvalResponseBodyFunction$inboundSchema: z.ZodType<
     z.lazy(() => Thirty$inboundSchema),
     z.lazy(() => ThirtyOne$inboundSchema),
     z.lazy(() => ThirtyTwo$inboundSchema),
-  ]),
-}).transform((v) => {
-  return remap$(v, {
-    "_id": "id",
-    "display_name": "displayName",
-    "created_by_id": "createdById",
-    "updated_by_id": "updatedById",
-    "domain_id": "domainId",
-    "project_id": "projectId",
-    "guardrail_config": "guardrailConfig",
-    "output_type": "outputType",
-    "function_params": "functionParams",
-  });
-});
+  ])
+);
+
+export function functionParamsFromJSON(
+  jsonString: string,
+): SafeParseResult<FunctionParams, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => FunctionParams$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'FunctionParams' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetEvalResponseBodyFunction$inboundSchema: z.ZodType<
+  GetEvalResponseBodyFunction,
+  z.ZodTypeDef,
+  unknown
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    enabled: z.boolean().default(true),
+    metadata: z.lazy(() => GetEvalResponseBodyMetadata$inboundSchema),
+    _id: z.string(),
+    display_name: z.string(),
+    description: z.string(),
+    owner: z.string(),
+    created: z.string().default("2026-08-05T15:12:51.947Z"),
+    updated: z.string().default("2026-08-05T15:12:51.947Z"),
+    created_by_id: z.nullable(z.string()).optional(),
+    updated_by_id: z.nullable(z.string()).optional(),
+    domain_id: z.string(),
+    project_id: z.string().optional(),
+    timeout: z.nullable(z.number().int()).optional(),
+    guardrail_config: z.any().optional(),
+    output_type: GetEvalResponseBodyOutputType$inboundSchema,
+    type: z.literal("function_eval"),
+    function_params: z.union([
+      z.lazy(() => FunctionParams1$inboundSchema),
+      z.lazy(() => FunctionParams2$inboundSchema),
+      z.lazy(() => FunctionParams3$inboundSchema),
+      z.lazy(() => FunctionParams4$inboundSchema),
+      z.lazy(() => FunctionParams5$inboundSchema),
+      z.lazy(() => FunctionParams6$inboundSchema),
+      z.lazy(() => Seven$inboundSchema),
+      z.lazy(() => Eight$inboundSchema),
+      z.lazy(() => Nine$inboundSchema),
+      z.lazy(() => Ten$inboundSchema),
+      z.lazy(() => Eleven$inboundSchema),
+      z.lazy(() => Twelve$inboundSchema),
+      z.lazy(() => Thirteen$inboundSchema),
+      z.lazy(() => Fourteen$inboundSchema),
+      z.lazy(() => Fifteen$inboundSchema),
+      z.lazy(() => Sixteen$inboundSchema),
+      z.lazy(() => Seventeen$inboundSchema),
+      z.lazy(() => Eighteen$inboundSchema),
+      z.lazy(() => Nineteen$inboundSchema),
+      z.lazy(() => Twenty$inboundSchema),
+      z.lazy(() => TwentyOne$inboundSchema),
+      z.lazy(() => TwentyTwo$inboundSchema),
+      z.lazy(() => TwentyThree$inboundSchema),
+      z.lazy(() => TwentyFour$inboundSchema),
+      z.lazy(() => TwentyFive$inboundSchema),
+      z.lazy(() => TwentySix$inboundSchema),
+      z.lazy(() => TwentySeven$inboundSchema),
+      z.lazy(() => TwentyEight$inboundSchema),
+      z.lazy(() => TwentyNine$inboundSchema),
+      z.lazy(() => Thirty$inboundSchema),
+      z.lazy(() => ThirtyOne$inboundSchema),
+      z.lazy(() => ThirtyTwo$inboundSchema),
+    ]),
+  }).transform((v) => {
+    return remap$(v, {
+      "_id": "id",
+      "display_name": "displayName",
+      "created_by_id": "createdById",
+      "updated_by_id": "updatedById",
+      "domain_id": "domainId",
+      "project_id": "projectId",
+      "guardrail_config": "guardrailConfig",
+      "output_type": "outputType",
+      "function_params": "functionParams",
+    });
+  })
+);
 
 export function getEvalResponseBodyFunctionFromJSON(
   jsonString: string,
@@ -2178,23 +2284,25 @@ export const ResponseBodyMetadata$inboundSchema: z.ZodType<
   ResponseBodyMetadata,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  required_model_with_tools_support: z.boolean().optional(),
-  required_retrieval_context: z.boolean().optional(),
-  required_expected_output: z.boolean().optional(),
-  supported_on_input_type: z.boolean().optional(),
-  supported_on_output_type: z.boolean().optional(),
-  support_use_as_guardrail: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "required_model_with_tools_support": "requiredModelWithToolsSupport",
-    "required_retrieval_context": "requiredRetrievalContext",
-    "required_expected_output": "requiredExpectedOutput",
-    "supported_on_input_type": "supportedOnInputType",
-    "supported_on_output_type": "supportedOnOutputType",
-    "support_use_as_guardrail": "supportUseAsGuardrail",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    required_model_with_tools_support: z.boolean().optional(),
+    required_retrieval_context: z.boolean().optional(),
+    required_expected_output: z.boolean().optional(),
+    supported_on_input_type: z.boolean().optional(),
+    supported_on_output_type: z.boolean().optional(),
+    support_use_as_guardrail: z.boolean().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "required_model_with_tools_support": "requiredModelWithToolsSupport",
+      "required_retrieval_context": "requiredRetrievalContext",
+      "required_expected_output": "requiredExpectedOutput",
+      "supported_on_input_type": "supportedOnInputType",
+      "supported_on_output_type": "supportedOnOutputType",
+      "support_use_as_guardrail": "supportUseAsGuardrail",
+    });
+  })
+);
 
 export function responseBodyMetadataFromJSON(
   jsonString: string,
@@ -2209,173 +2317,20 @@ export function responseBodyMetadataFromJSON(
 /** @internal */
 export const ResponseBodyOutputType$inboundSchema: z.ZodNativeEnum<
   typeof ResponseBodyOutputType
-> = z.nativeEnum(ResponseBodyOutputType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ResponseBodyOutputType));
 
 /** @internal */
 export const ResponseBodyMode$inboundSchema: z.ZodNativeEnum<
   typeof ResponseBodyMode
-> = z.nativeEnum(ResponseBodyMode);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ResponseBodyMode));
 
 /** @internal */
 export const ResponseBodyModelParameters$inboundSchema: z.ZodType<
   ResponseBodyModelParameters,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  temperature: z.number().optional(),
-  max_tokens: z.number().optional(),
-  top_k: z.number().optional(),
-  top_p: z.number().optional(),
-  frequency_penalty: z.number().optional(),
-  presence_penalty: z.number().optional(),
-  reasoning_effort: z.string().optional(),
-  budget_tokens: z.number().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "max_tokens": "maxTokens",
-    "top_k": "topK",
-    "top_p": "topP",
-    "frequency_penalty": "frequencyPenalty",
-    "presence_penalty": "presencePenalty",
-    "reasoning_effort": "reasoningEffort",
-    "budget_tokens": "budgetTokens",
-  });
-});
-
-export function responseBodyModelParametersFromJSON(
-  jsonString: string,
-): SafeParseResult<ResponseBodyModelParameters, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ResponseBodyModelParameters$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ResponseBodyModelParameters' from JSON`,
-  );
-}
-
-/** @internal */
-export const ResponseBodyModel$inboundSchema: z.ZodType<
-  ResponseBodyModel,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  id: z.string(),
-  integration_id: z.nullable(z.string()).optional(),
-  model_parameters: z.lazy(() => ResponseBodyModelParameters$inboundSchema)
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "integration_id": "integrationId",
-    "model_parameters": "modelParameters",
-  });
-});
-
-export function responseBodyModelFromJSON(
-  jsonString: string,
-): SafeParseResult<ResponseBodyModel, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ResponseBodyModel$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ResponseBodyModel' from JSON`,
-  );
-}
-
-/** @internal */
-export const GetEvalResponseBodyModelParameters$inboundSchema: z.ZodType<
-  GetEvalResponseBodyModelParameters,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  temperature: z.number().optional(),
-  max_tokens: z.number().optional(),
-  top_k: z.number().optional(),
-  top_p: z.number().optional(),
-  frequency_penalty: z.number().optional(),
-  presence_penalty: z.number().optional(),
-  reasoning_effort: z.string().optional(),
-  budget_tokens: z.number().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "max_tokens": "maxTokens",
-    "top_k": "topK",
-    "top_p": "topP",
-    "frequency_penalty": "frequencyPenalty",
-    "presence_penalty": "presencePenalty",
-    "reasoning_effort": "reasoningEffort",
-    "budget_tokens": "budgetTokens",
-  });
-});
-
-export function getEvalResponseBodyModelParametersFromJSON(
-  jsonString: string,
-): SafeParseResult<GetEvalResponseBodyModelParameters, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      GetEvalResponseBodyModelParameters$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetEvalResponseBodyModelParameters' from JSON`,
-  );
-}
-
-/** @internal */
-export const GetEvalResponseBodyEvalsResponseModel$inboundSchema: z.ZodType<
-  GetEvalResponseBodyEvalsResponseModel,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  id: z.string(),
-  integration_id: z.nullable(z.string()).optional(),
-  model_parameters: z.lazy(() =>
-    GetEvalResponseBodyModelParameters$inboundSchema
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "integration_id": "integrationId",
-    "model_parameters": "modelParameters",
-  });
-});
-
-export function getEvalResponseBodyEvalsResponseModelFromJSON(
-  jsonString: string,
-): SafeParseResult<GetEvalResponseBodyEvalsResponseModel, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      GetEvalResponseBodyEvalsResponseModel$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetEvalResponseBodyEvalsResponseModel' from JSON`,
-  );
-}
-
-/** @internal */
-export const ResponseBodyRetry$inboundSchema: z.ZodType<
-  ResponseBodyRetry,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  count: z.number().int().default(2),
-  on_codes: z.array(z.number().int()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "on_codes": "onCodes",
-  });
-});
-
-export function responseBodyRetryFromJSON(
-  jsonString: string,
-): SafeParseResult<ResponseBodyRetry, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => ResponseBodyRetry$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ResponseBodyRetry' from JSON`,
-  );
-}
-
-/** @internal */
-export const GetEvalResponseBodyEvalsResponseModelParameters$inboundSchema:
-  z.ZodType<
-    GetEvalResponseBodyEvalsResponseModelParameters,
-    z.ZodTypeDef,
-    unknown
-  > = z.object({
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
     temperature: z.number().optional(),
     max_tokens: z.number().optional(),
     top_k: z.number().optional(),
@@ -2394,7 +2349,172 @@ export const GetEvalResponseBodyEvalsResponseModelParameters$inboundSchema:
       "reasoning_effort": "reasoningEffort",
       "budget_tokens": "budgetTokens",
     });
-  });
+  })
+);
+
+export function responseBodyModelParametersFromJSON(
+  jsonString: string,
+): SafeParseResult<ResponseBodyModelParameters, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ResponseBodyModelParameters$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ResponseBodyModelParameters' from JSON`,
+  );
+}
+
+/** @internal */
+export const ResponseBodyModel$inboundSchema: z.ZodType<
+  ResponseBodyModel,
+  z.ZodTypeDef,
+  unknown
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    integration_id: z.nullable(z.string()).optional(),
+    model_parameters: z.lazy(() => ResponseBodyModelParameters$inboundSchema)
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "integration_id": "integrationId",
+      "model_parameters": "modelParameters",
+    });
+  })
+);
+
+export function responseBodyModelFromJSON(
+  jsonString: string,
+): SafeParseResult<ResponseBodyModel, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ResponseBodyModel$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ResponseBodyModel' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetEvalResponseBodyModelParameters$inboundSchema: z.ZodType<
+  GetEvalResponseBodyModelParameters,
+  z.ZodTypeDef,
+  unknown
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    temperature: z.number().optional(),
+    max_tokens: z.number().optional(),
+    top_k: z.number().optional(),
+    top_p: z.number().optional(),
+    frequency_penalty: z.number().optional(),
+    presence_penalty: z.number().optional(),
+    reasoning_effort: z.string().optional(),
+    budget_tokens: z.number().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "max_tokens": "maxTokens",
+      "top_k": "topK",
+      "top_p": "topP",
+      "frequency_penalty": "frequencyPenalty",
+      "presence_penalty": "presencePenalty",
+      "reasoning_effort": "reasoningEffort",
+      "budget_tokens": "budgetTokens",
+    });
+  })
+);
+
+export function getEvalResponseBodyModelParametersFromJSON(
+  jsonString: string,
+): SafeParseResult<GetEvalResponseBodyModelParameters, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetEvalResponseBodyModelParameters$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetEvalResponseBodyModelParameters' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetEvalResponseBodyEvalsResponseModel$inboundSchema: z.ZodType<
+  GetEvalResponseBodyEvalsResponseModel,
+  z.ZodTypeDef,
+  unknown
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    integration_id: z.nullable(z.string()).optional(),
+    model_parameters: z.lazy(() =>
+      GetEvalResponseBodyModelParameters$inboundSchema
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "integration_id": "integrationId",
+      "model_parameters": "modelParameters",
+    });
+  })
+);
+
+export function getEvalResponseBodyEvalsResponseModelFromJSON(
+  jsonString: string,
+): SafeParseResult<GetEvalResponseBodyEvalsResponseModel, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetEvalResponseBodyEvalsResponseModel$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetEvalResponseBodyEvalsResponseModel' from JSON`,
+  );
+}
+
+/** @internal */
+export const ResponseBodyRetry$inboundSchema: z.ZodType<
+  ResponseBodyRetry,
+  z.ZodTypeDef,
+  unknown
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    count: z.number().int().default(2),
+    on_codes: z.array(z.number().int()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "on_codes": "onCodes",
+    });
+  })
+);
+
+export function responseBodyRetryFromJSON(
+  jsonString: string,
+): SafeParseResult<ResponseBodyRetry, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ResponseBodyRetry$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ResponseBodyRetry' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetEvalResponseBodyEvalsResponseModelParameters$inboundSchema:
+  z.ZodType<
+    GetEvalResponseBodyEvalsResponseModelParameters,
+    z.ZodTypeDef,
+    unknown
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      temperature: z.number().optional(),
+      max_tokens: z.number().optional(),
+      top_k: z.number().optional(),
+      top_p: z.number().optional(),
+      frequency_penalty: z.number().optional(),
+      presence_penalty: z.number().optional(),
+      reasoning_effort: z.string().optional(),
+      budget_tokens: z.number().optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "max_tokens": "maxTokens",
+        "top_k": "topK",
+        "top_p": "topP",
+        "frequency_penalty": "frequencyPenalty",
+        "presence_penalty": "presencePenalty",
+        "reasoning_effort": "reasoningEffort",
+        "budget_tokens": "budgetTokens",
+      });
+    })
+  );
 
 export function getEvalResponseBodyEvalsResponseModelParametersFromJSON(
   jsonString: string,
@@ -2418,18 +2538,20 @@ export const GetEvalResponseBodyEvalsResponse200ApplicationJSONModel$inboundSche
     GetEvalResponseBodyEvalsResponse200ApplicationJSONModel,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    id: z.string(),
-    integration_id: z.nullable(z.string()).optional(),
-    model_parameters: z.lazy(() =>
-      GetEvalResponseBodyEvalsResponseModelParameters$inboundSchema
-    ).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "integration_id": "integrationId",
-      "model_parameters": "modelParameters",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string(),
+      integration_id: z.nullable(z.string()).optional(),
+      model_parameters: z.lazy(() =>
+        GetEvalResponseBodyEvalsResponseModelParameters$inboundSchema
+      ).optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "integration_id": "integrationId",
+        "model_parameters": "modelParameters",
+      });
+    })
+  );
 
 export function getEvalResponseBodyEvalsResponse200ApplicationJSONModelFromJSON(
   jsonString: string,
@@ -2451,11 +2573,13 @@ export const ResponseBodyFallbacks$inboundSchema: z.ZodType<
   ResponseBodyFallbacks,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  model: z.lazy(() =>
-    GetEvalResponseBodyEvalsResponse200ApplicationJSONModel$inboundSchema
-  ),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model: z.lazy(() =>
+      GetEvalResponseBodyEvalsResponse200ApplicationJSONModel$inboundSchema
+    ),
+  })
+);
 
 export function responseBodyFallbacksFromJSON(
   jsonString: string,
@@ -2472,12 +2596,14 @@ export const ResponseBodyJudges$inboundSchema: z.ZodType<
   ResponseBodyJudges,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  model: z.lazy(() => GetEvalResponseBodyEvalsResponseModel$inboundSchema),
-  retry: z.lazy(() => ResponseBodyRetry$inboundSchema).optional(),
-  fallbacks: z.array(z.lazy(() => ResponseBodyFallbacks$inboundSchema))
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model: z.lazy(() => GetEvalResponseBodyEvalsResponseModel$inboundSchema),
+    retry: z.lazy(() => ResponseBodyRetry$inboundSchema).optional(),
+    fallbacks: z.array(z.lazy(() => ResponseBodyFallbacks$inboundSchema))
+      .optional(),
+  })
+);
 
 export function responseBodyJudgesFromJSON(
   jsonString: string,
@@ -2494,26 +2620,28 @@ export const GetEvalResponseBodyEvalsModelParameters$inboundSchema: z.ZodType<
   GetEvalResponseBodyEvalsModelParameters,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  temperature: z.number().optional(),
-  max_tokens: z.number().optional(),
-  top_k: z.number().optional(),
-  top_p: z.number().optional(),
-  frequency_penalty: z.number().optional(),
-  presence_penalty: z.number().optional(),
-  reasoning_effort: z.string().optional(),
-  budget_tokens: z.number().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "max_tokens": "maxTokens",
-    "top_k": "topK",
-    "top_p": "topP",
-    "frequency_penalty": "frequencyPenalty",
-    "presence_penalty": "presencePenalty",
-    "reasoning_effort": "reasoningEffort",
-    "budget_tokens": "budgetTokens",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    temperature: z.number().optional(),
+    max_tokens: z.number().optional(),
+    top_k: z.number().optional(),
+    top_p: z.number().optional(),
+    frequency_penalty: z.number().optional(),
+    presence_penalty: z.number().optional(),
+    reasoning_effort: z.string().optional(),
+    budget_tokens: z.number().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "max_tokens": "maxTokens",
+      "top_k": "topK",
+      "top_p": "topP",
+      "frequency_penalty": "frequencyPenalty",
+      "presence_penalty": "presencePenalty",
+      "reasoning_effort": "reasoningEffort",
+      "budget_tokens": "budgetTokens",
+    });
+  })
+);
 
 export function getEvalResponseBodyEvalsModelParametersFromJSON(
   jsonString: string,
@@ -2536,18 +2664,20 @@ export const GetEvalResponseBodyEvalsModel$inboundSchema: z.ZodType<
   GetEvalResponseBodyEvalsModel,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  integration_id: z.nullable(z.string()).optional(),
-  model_parameters: z.lazy(() =>
-    GetEvalResponseBodyEvalsModelParameters$inboundSchema
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "integration_id": "integrationId",
-    "model_parameters": "modelParameters",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    integration_id: z.nullable(z.string()).optional(),
+    model_parameters: z.lazy(() =>
+      GetEvalResponseBodyEvalsModelParameters$inboundSchema
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "integration_id": "integrationId",
+      "model_parameters": "modelParameters",
+    });
+  })
+);
 
 export function getEvalResponseBodyEvalsModelFromJSON(
   jsonString: string,
@@ -2564,14 +2694,16 @@ export const GetEvalResponseBodyRetry$inboundSchema: z.ZodType<
   GetEvalResponseBodyRetry,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  count: z.number().int().default(2),
-  on_codes: z.array(z.number().int()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "on_codes": "onCodes",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    count: z.number().int().default(2),
+    on_codes: z.array(z.number().int()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "on_codes": "onCodes",
+    });
+  })
+);
 
 export function getEvalResponseBodyRetryFromJSON(
   jsonString: string,
@@ -2589,26 +2721,28 @@ export const GetEvalResponseBodyEvalsResponse200ModelParameters$inboundSchema:
     GetEvalResponseBodyEvalsResponse200ModelParameters,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    temperature: z.number().optional(),
-    max_tokens: z.number().optional(),
-    top_k: z.number().optional(),
-    top_p: z.number().optional(),
-    frequency_penalty: z.number().optional(),
-    presence_penalty: z.number().optional(),
-    reasoning_effort: z.string().optional(),
-    budget_tokens: z.number().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "max_tokens": "maxTokens",
-      "top_k": "topK",
-      "top_p": "topP",
-      "frequency_penalty": "frequencyPenalty",
-      "presence_penalty": "presencePenalty",
-      "reasoning_effort": "reasoningEffort",
-      "budget_tokens": "budgetTokens",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      temperature: z.number().optional(),
+      max_tokens: z.number().optional(),
+      top_k: z.number().optional(),
+      top_p: z.number().optional(),
+      frequency_penalty: z.number().optional(),
+      presence_penalty: z.number().optional(),
+      reasoning_effort: z.string().optional(),
+      budget_tokens: z.number().optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "max_tokens": "maxTokens",
+        "top_k": "topK",
+        "top_p": "topP",
+        "frequency_penalty": "frequencyPenalty",
+        "presence_penalty": "presencePenalty",
+        "reasoning_effort": "reasoningEffort",
+        "budget_tokens": "budgetTokens",
+      });
+    })
+  );
 
 export function getEvalResponseBodyEvalsResponse200ModelParametersFromJSON(
   jsonString: string,
@@ -2631,18 +2765,20 @@ export const GetEvalResponseBodyEvalsResponse200Model$inboundSchema: z.ZodType<
   GetEvalResponseBodyEvalsResponse200Model,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  integration_id: z.nullable(z.string()).optional(),
-  model_parameters: z.lazy(() =>
-    GetEvalResponseBodyEvalsResponse200ModelParameters$inboundSchema
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "integration_id": "integrationId",
-    "model_parameters": "modelParameters",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    integration_id: z.nullable(z.string()).optional(),
+    model_parameters: z.lazy(() =>
+      GetEvalResponseBodyEvalsResponse200ModelParameters$inboundSchema
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "integration_id": "integrationId",
+      "model_parameters": "modelParameters",
+    });
+  })
+);
 
 export function getEvalResponseBodyEvalsResponse200ModelFromJSON(
   jsonString: string,
@@ -2665,9 +2801,11 @@ export const GetEvalResponseBodyFallbacks$inboundSchema: z.ZodType<
   GetEvalResponseBodyFallbacks,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  model: z.lazy(() => GetEvalResponseBodyEvalsResponse200Model$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model: z.lazy(() => GetEvalResponseBodyEvalsResponse200Model$inboundSchema),
+  })
+);
 
 export function getEvalResponseBodyFallbacksFromJSON(
   jsonString: string,
@@ -2684,12 +2822,14 @@ export const ResponseBodyReplacementJudges$inboundSchema: z.ZodType<
   ResponseBodyReplacementJudges,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  model: z.lazy(() => GetEvalResponseBodyEvalsModel$inboundSchema),
-  retry: z.lazy(() => GetEvalResponseBodyRetry$inboundSchema).optional(),
-  fallbacks: z.array(z.lazy(() => GetEvalResponseBodyFallbacks$inboundSchema))
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model: z.lazy(() => GetEvalResponseBodyEvalsModel$inboundSchema),
+    retry: z.lazy(() => GetEvalResponseBodyRetry$inboundSchema).optional(),
+    fallbacks: z.array(z.lazy(() => GetEvalResponseBodyFallbacks$inboundSchema))
+      .optional(),
+  })
+);
 
 export function responseBodyReplacementJudgesFromJSON(
   jsonString: string,
@@ -2704,27 +2844,29 @@ export function responseBodyReplacementJudgesFromJSON(
 /** @internal */
 export const ResponseBodyTieValue$inboundSchema: z.ZodNativeEnum<
   typeof ResponseBodyTieValue
-> = z.nativeEnum(ResponseBodyTieValue);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ResponseBodyTieValue));
 
 /** @internal */
 export const ResponseBodyJury$inboundSchema: z.ZodType<
   ResponseBodyJury,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  judges: z.array(z.lazy(() => ResponseBodyJudges$inboundSchema)),
-  replacement_judges: z.array(
-    z.lazy(() => ResponseBodyReplacementJudges$inboundSchema),
-  ).optional(),
-  min_successful_judges: z.number().int().default(2),
-  tie_value: ResponseBodyTieValue$inboundSchema.default("Tie"),
-}).transform((v) => {
-  return remap$(v, {
-    "replacement_judges": "replacementJudges",
-    "min_successful_judges": "minSuccessfulJudges",
-    "tie_value": "tieValue",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    judges: z.array(z.lazy(() => ResponseBodyJudges$inboundSchema)),
+    replacement_judges: z.array(
+      z.lazy(() => ResponseBodyReplacementJudges$inboundSchema),
+    ).optional(),
+    min_successful_judges: z.number().int().default(2),
+    tie_value: ResponseBodyTieValue$inboundSchema.default("Tie"),
+  }).transform((v) => {
+    return remap$(v, {
+      "replacement_judges": "replacementJudges",
+      "min_successful_judges": "minSuccessfulJudges",
+      "tie_value": "tieValue",
+    });
+  })
+);
 
 export function responseBodyJuryFromJSON(
   jsonString: string,
@@ -2741,10 +2883,12 @@ export const ResponseBodyCategoricalLabels$inboundSchema: z.ZodType<
   ResponseBodyCategoricalLabels,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  value: z.string(),
-  description: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    value: z.string(),
+    description: z.string().optional(),
+  })
+);
 
 export function responseBodyCategoricalLabelsFromJSON(
   jsonString: string,
@@ -2761,47 +2905,49 @@ export const ResponseBodyLLM$inboundSchema: z.ZodType<
   ResponseBodyLLM,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  enabled: z.boolean().default(true),
-  metadata: z.lazy(() => ResponseBodyMetadata$inboundSchema),
-  _id: z.string(),
-  display_name: z.string(),
-  description: z.string(),
-  owner: z.string(),
-  created: z.string().default("2026-08-05T15:12:51.947Z"),
-  updated: z.string().default("2026-08-05T15:12:51.947Z"),
-  created_by_id: z.nullable(z.string()).optional(),
-  updated_by_id: z.nullable(z.string()).optional(),
-  domain_id: z.string(),
-  project_id: z.string().optional(),
-  timeout: z.nullable(z.number().int()).optional(),
-  guardrail_config: z.any().optional(),
-  output_type: ResponseBodyOutputType$inboundSchema.optional(),
-  type: z.literal("llm_eval"),
-  mode: z.nullable(ResponseBodyMode$inboundSchema).optional(),
-  repetitions: z.nullable(z.number().int()).optional(),
-  model: z.lazy(() => ResponseBodyModel$inboundSchema).optional(),
-  jury: z.nullable(z.lazy(() => ResponseBodyJury$inboundSchema)).optional(),
-  prompt: z.string(),
-  categories: z.nullable(z.array(z.string())).optional(),
-  categorical_labels: z.nullable(
-    z.array(z.lazy(() => ResponseBodyCategoricalLabels$inboundSchema)),
-  ).optional(),
-  dataset_id: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "_id": "id",
-    "display_name": "displayName",
-    "created_by_id": "createdById",
-    "updated_by_id": "updatedById",
-    "domain_id": "domainId",
-    "project_id": "projectId",
-    "guardrail_config": "guardrailConfig",
-    "output_type": "outputType",
-    "categorical_labels": "categoricalLabels",
-    "dataset_id": "datasetId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    enabled: z.boolean().default(true),
+    metadata: z.lazy(() => ResponseBodyMetadata$inboundSchema),
+    _id: z.string(),
+    display_name: z.string(),
+    description: z.string(),
+    owner: z.string(),
+    created: z.string().default("2026-08-05T15:12:51.947Z"),
+    updated: z.string().default("2026-08-05T15:12:51.947Z"),
+    created_by_id: z.nullable(z.string()).optional(),
+    updated_by_id: z.nullable(z.string()).optional(),
+    domain_id: z.string(),
+    project_id: z.string().optional(),
+    timeout: z.nullable(z.number().int()).optional(),
+    guardrail_config: z.any().optional(),
+    output_type: ResponseBodyOutputType$inboundSchema.optional(),
+    type: z.literal("llm_eval"),
+    mode: z.nullable(ResponseBodyMode$inboundSchema).optional(),
+    repetitions: z.nullable(z.number().int()).optional(),
+    model: z.lazy(() => ResponseBodyModel$inboundSchema).optional(),
+    jury: z.nullable(z.lazy(() => ResponseBodyJury$inboundSchema)).optional(),
+    prompt: z.string(),
+    categories: z.nullable(z.array(z.string())).optional(),
+    categorical_labels: z.nullable(
+      z.array(z.lazy(() => ResponseBodyCategoricalLabels$inboundSchema)),
+    ).optional(),
+    dataset_id: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "_id": "id",
+      "display_name": "displayName",
+      "created_by_id": "createdById",
+      "updated_by_id": "updatedById",
+      "domain_id": "domainId",
+      "project_id": "projectId",
+      "guardrail_config": "guardrailConfig",
+      "output_type": "outputType",
+      "categorical_labels": "categoricalLabels",
+      "dataset_id": "datasetId",
+    });
+  })
+);
 
 export function responseBodyLLMFromJSON(
   jsonString: string,
@@ -2818,16 +2964,18 @@ export const GetEvalResponseBody$inboundSchema: z.ZodType<
   GetEvalResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  z.lazy(() => ResponseBodyLLM$inboundSchema),
-  z.lazy(() => GetEvalResponseBodyFunction$inboundSchema),
-  z.lazy(() => Ragas$inboundSchema),
-  z.lazy(() => Json$inboundSchema),
-  z.lazy(() => GetEvalResponseBodyHTTP$inboundSchema),
-  z.lazy(() => ResponseBodyPython$inboundSchema),
-  z.lazy(() => Typescript$inboundSchema),
-  z.lazy(() => BedrockGuardrail$inboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => ResponseBodyLLM$inboundSchema),
+    z.lazy(() => GetEvalResponseBodyFunction$inboundSchema),
+    z.lazy(() => Ragas$inboundSchema),
+    z.lazy(() => Json$inboundSchema),
+    z.lazy(() => GetEvalResponseBodyHTTP$inboundSchema),
+    z.lazy(() => ResponseBodyPython$inboundSchema),
+    z.lazy(() => Typescript$inboundSchema),
+    z.lazy(() => BedrockGuardrail$inboundSchema),
+  ])
+);
 
 export function getEvalResponseBodyFromJSON(
   jsonString: string,

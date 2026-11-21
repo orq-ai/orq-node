@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type GetOneFileUploadUrlRequest = {
   knowledgeId: string;
@@ -34,16 +35,18 @@ export const GetOneFileUploadUrlRequest$outboundSchema: z.ZodType<
   GetOneFileUploadUrlRequest$Outbound,
   z.ZodTypeDef,
   GetOneFileUploadUrlRequest
-> = z.object({
-  knowledgeId: z.string(),
-  fileName: z.string(),
-  contentType: z.string(),
-  datasourceId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    knowledgeId: "knowledge_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    knowledgeId: z.string(),
+    fileName: z.string(),
+    contentType: z.string(),
+    datasourceId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      knowledgeId: "knowledge_id",
+    });
+  })
+);
 
 export function getOneFileUploadUrlRequestToJSON(
   getOneFileUploadUrlRequest: GetOneFileUploadUrlRequest,

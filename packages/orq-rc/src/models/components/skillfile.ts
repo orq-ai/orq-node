@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -38,17 +38,19 @@ export const SkillFile$inboundSchema: z.ZodType<
   SkillFile,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  path: z.string(),
-  size_bytes: z.string(),
-  sha256: z.string(),
-  content_type: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "size_bytes": "sizeBytes",
-    "content_type": "contentType",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    path: z.string(),
+    size_bytes: z.string(),
+    sha256: z.string(),
+    content_type: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "size_bytes": "sizeBytes",
+      "content_type": "contentType",
+    });
+  })
+);
 
 export function skillFileFromJSON(
   jsonString: string,

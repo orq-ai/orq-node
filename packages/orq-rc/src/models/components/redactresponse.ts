@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -21,14 +21,16 @@ export const RedactResponse$inboundSchema: z.ZodType<
   RedactResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  redacted_text: z.string().optional(),
-  mappings: z.record(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "redacted_text": "redactedText",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    redacted_text: z.string().optional(),
+    mappings: z.record(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "redacted_text": "redactedText",
+    });
+  })
+);
 
 export function redactResponseFromJSON(
   jsonString: string,

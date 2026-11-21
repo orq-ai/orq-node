@@ -6,6 +6,7 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import {
   collectExtraKeys as collectExtraKeys$,
+  lazySchema as lazySchema$,
   safeParse,
 } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -36,19 +37,21 @@ export const ResponseFailedStreamEvent$inboundSchema: z.ZodType<
   ResponseFailedStreamEvent,
   z.ZodTypeDef,
   unknown
-> = collectExtraKeys$(
-  z.object({
-    response: PublicResponseResource$inboundSchema,
-    sequence_number: z.number().int(),
-    type: z.literal("response.failed"),
-  }).catchall(z.any()),
-  "additionalProperties",
-  true,
-).transform((v) => {
-  return remap$(v, {
-    "sequence_number": "sequenceNumber",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  collectExtraKeys$(
+    z.object({
+      response: PublicResponseResource$inboundSchema,
+      sequence_number: z.number().int(),
+      type: z.literal("response.failed"),
+    }).catchall(z.any()),
+    "additionalProperties",
+    true,
+  ).transform((v) => {
+    return remap$(v, {
+      "sequence_number": "sequenceNumber",
+    });
+  })
+);
 
 export function responseFailedStreamEventFromJSON(
   jsonString: string,

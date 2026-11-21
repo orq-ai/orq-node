@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { GuardrailRule, GuardrailRule$inboundSchema } from "./guardrailrule.js";
@@ -18,13 +18,15 @@ export const GetGuardrailRuleResponse$inboundSchema: z.ZodType<
   GetGuardrailRuleResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  guardrail_rule: GuardrailRule$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "guardrail_rule": "guardrailRule",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    guardrail_rule: GuardrailRule$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "guardrail_rule": "guardrailRule",
+    });
+  })
+);
 
 export function getGuardrailRuleResponseFromJSON(
   jsonString: string,

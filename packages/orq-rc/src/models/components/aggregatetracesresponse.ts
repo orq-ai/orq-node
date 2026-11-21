@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -21,10 +21,12 @@ export const AggregateTracesResponse$inboundSchema: z.ZodType<
   AggregateTracesResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: z.string().optional(),
-  data: z.array(TraceAggregateRow$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.string().optional(),
+    data: z.array(TraceAggregateRow$inboundSchema).optional(),
+  })
+);
 
 export function aggregateTracesResponseFromJSON(
   jsonString: string,

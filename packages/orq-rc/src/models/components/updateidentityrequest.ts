@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type UpdateIdentityRequest = {
   /**
@@ -42,18 +43,20 @@ export const UpdateIdentityRequest$outboundSchema: z.ZodType<
   UpdateIdentityRequest$Outbound,
   z.ZodTypeDef,
   UpdateIdentityRequest
-> = z.object({
-  displayName: z.string().optional(),
-  email: z.string().optional(),
-  avatarUrl: z.string().optional(),
-  tags: z.array(z.string()).optional(),
-  metadata: z.record(z.any()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    displayName: "display_name",
-    avatarUrl: "avatar_url",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    displayName: z.string().optional(),
+    email: z.string().optional(),
+    avatarUrl: z.string().optional(),
+    tags: z.array(z.string()).optional(),
+    metadata: z.record(z.any()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      displayName: "display_name",
+      avatarUrl: "avatar_url",
+    });
+  })
+);
 
 export function updateIdentityRequestToJSON(
   updateIdentityRequest: UpdateIdentityRequest,

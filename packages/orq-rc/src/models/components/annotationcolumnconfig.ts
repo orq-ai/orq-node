@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -34,17 +34,19 @@ export const AnnotationColumnConfig$inboundSchema: z.ZodType<
   AnnotationColumnConfig,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  annotation_id: z.string().optional(),
-  annotation_name: z.string().optional(),
-  annotation_type: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "annotation_id": "annotationId",
-    "annotation_name": "annotationName",
-    "annotation_type": "annotationType",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    annotation_id: z.string().optional(),
+    annotation_name: z.string().optional(),
+    annotation_type: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "annotation_id": "annotationId",
+      "annotation_name": "annotationName",
+      "annotation_type": "annotationType",
+    });
+  })
+);
 
 export function annotationColumnConfigFromJSON(
   jsonString: string,

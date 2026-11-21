@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import {
   VertexParamRange,
   VertexParamRange$Outbound,
@@ -32,11 +33,13 @@ export const VertexParameters$outboundSchema: z.ZodType<
   VertexParameters$Outbound,
   z.ZodTypeDef,
   VertexParameters
-> = z.object({
-  maxTokens: VertexParamRangeInt$outboundSchema,
-  temperature: VertexParamRange$outboundSchema,
-  topP: VertexParamRange$outboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    maxTokens: VertexParamRangeInt$outboundSchema,
+    temperature: VertexParamRange$outboundSchema,
+    topP: VertexParamRange$outboundSchema,
+  })
+);
 
 export function vertexParametersToJSON(
   vertexParameters: VertexParameters,

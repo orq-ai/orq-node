@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type SkillGetRequest = {
   /**
@@ -30,15 +31,17 @@ export const SkillGetRequest$outboundSchema: z.ZodType<
   SkillGetRequest$Outbound,
   z.ZodTypeDef,
   SkillGetRequest
-> = z.object({
-  skillId: z.string(),
-  factoryId: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    skillId: "skill_id",
-    factoryId: "factory_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    skillId: z.string(),
+    factoryId: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      skillId: "skill_id",
+      factoryId: "factory_id",
+    });
+  })
+);
 
 export function skillGetRequestToJSON(
   skillGetRequest: SkillGetRequest,

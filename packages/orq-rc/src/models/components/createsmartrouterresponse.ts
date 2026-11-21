@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { SmartRouter, SmartRouter$inboundSchema } from "./smartrouter.js";
@@ -18,13 +18,15 @@ export const CreateSmartRouterResponse$inboundSchema: z.ZodType<
   CreateSmartRouterResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  smart_router: SmartRouter$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "smart_router": "smartRouter",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    smart_router: SmartRouter$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "smart_router": "smartRouter",
+    });
+  })
+);
 
 export function createSmartRouterResponseFromJSON(
   jsonString: string,

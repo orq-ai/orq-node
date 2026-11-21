@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -24,15 +24,17 @@ export const PublicEmbeddingUsage$inboundSchema: z.ZodType<
   PublicEmbeddingUsage,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  prompt_tokens: z.number().int(),
-  total_tokens: z.number().int(),
-}).transform((v) => {
-  return remap$(v, {
-    "prompt_tokens": "promptTokens",
-    "total_tokens": "totalTokens",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    prompt_tokens: z.number().int(),
+    total_tokens: z.number().int(),
+  }).transform((v) => {
+    return remap$(v, {
+      "prompt_tokens": "promptTokens",
+      "total_tokens": "totalTokens",
+    });
+  })
+);
 
 export function publicEmbeddingUsageFromJSON(
   jsonString: string,

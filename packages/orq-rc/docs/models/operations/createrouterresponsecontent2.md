@@ -14,6 +14,24 @@ const value: operations.CreateRouterResponse2Text = {
 };
 ```
 
+### `operations.TwoOutputText`
+
+```typescript
+const value: operations.TwoOutputText = {
+  text: "<value>",
+  type: "output_text",
+};
+```
+
+### `operations.TwoReasoningText`
+
+```typescript
+const value: operations.TwoReasoningText = {
+  text: "<value>",
+  type: "reasoning_text",
+};
+```
+
 ### `operations.CreateRouterResponse2Image`
 
 ```typescript

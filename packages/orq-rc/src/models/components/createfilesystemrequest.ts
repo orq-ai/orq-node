@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import {
   Sharing,
@@ -54,7 +55,7 @@ export type CreateFileSystemRequest = {
 /** @internal */
 export const ExternalAccess$outboundSchema: z.ZodNativeEnum<
   typeof ExternalAccess
-> = z.nativeEnum(ExternalAccess);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ExternalAccess));
 
 /** @internal */
 export type CreateFileSystemRequest$Outbound = {
@@ -71,19 +72,21 @@ export const CreateFileSystemRequest$outboundSchema: z.ZodType<
   CreateFileSystemRequest$Outbound,
   z.ZodTypeDef,
   CreateFileSystemRequest
-> = z.object({
-  key: z.string(),
-  path: z.string(),
-  displayName: z.string().optional(),
-  description: z.string().optional(),
-  externalAccess: ExternalAccess$outboundSchema.optional(),
-  sharing: Sharing$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    displayName: "display_name",
-    externalAccess: "external_access",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    key: z.string(),
+    path: z.string(),
+    displayName: z.string().optional(),
+    description: z.string().optional(),
+    externalAccess: ExternalAccess$outboundSchema.optional(),
+    sharing: Sharing$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      displayName: "display_name",
+      externalAccess: "external_access",
+    });
+  })
+);
 
 export function createFileSystemRequestToJSON(
   createFileSystemRequest: CreateFileSystemRequest,

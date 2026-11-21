@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import * as components from "../components/index.js";
 
 export type CreateChunkRequest = {
@@ -24,17 +25,19 @@ export const CreateChunkRequest$outboundSchema: z.ZodType<
   CreateChunkRequest$Outbound,
   z.ZodTypeDef,
   CreateChunkRequest
-> = z.object({
-  knowledgeId: z.string(),
-  datasourceId: z.string(),
-  requestBody: z.array(components.UpsertChunk$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    knowledgeId: "knowledge_id",
-    datasourceId: "datasource_id",
-    requestBody: "RequestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    knowledgeId: z.string(),
+    datasourceId: z.string(),
+    requestBody: z.array(components.UpsertChunk$outboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      knowledgeId: "knowledge_id",
+      datasourceId: "datasource_id",
+      requestBody: "RequestBody",
+    });
+  })
+);
 
 export function createChunkRequestToJSON(
   createChunkRequest: CreateChunkRequest,

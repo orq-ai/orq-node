@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { Skill, Skill$inboundSchema } from "./skill.js";
@@ -20,9 +20,11 @@ export const RestoreSkillVersionResponse$inboundSchema: z.ZodType<
   RestoreSkillVersionResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  skill: Skill$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    skill: Skill$inboundSchema,
+  })
+);
 
 export function restoreSkillVersionResponseFromJSON(
   jsonString: string,

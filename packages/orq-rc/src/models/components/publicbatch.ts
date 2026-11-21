@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -124,54 +124,56 @@ export type PublicBatch = {
 /** @internal */
 export const PublicBatchStatus$inboundSchema: z.ZodNativeEnum<
   typeof PublicBatchStatus
-> = z.nativeEnum(PublicBatchStatus);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(PublicBatchStatus));
 
 /** @internal */
 export const PublicBatch$inboundSchema: z.ZodType<
   PublicBatch,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  cancelled_at: z.number().int().optional(),
-  cancelling_at: z.number().int().optional(),
-  completed_at: z.number().int().optional(),
-  completion_window: z.string(),
-  created_at: z.number().int(),
-  endpoint: z.string(),
-  error_file_id: z.string().optional(),
-  errors: PublicBatchErrors$inboundSchema.optional(),
-  expired_at: z.number().int().optional(),
-  expires_at: z.number().int().optional(),
-  failed_at: z.number().int().optional(),
-  finalizing_at: z.number().int().optional(),
-  id: z.string(),
-  in_progress_at: z.number().int().optional(),
-  input_file_id: z.string(),
-  metadata: z.record(z.string()).optional(),
-  model: z.string().optional(),
-  object: z.string(),
-  output_file_id: z.string().optional(),
-  request_counts: PublicBatchRequestCounts$inboundSchema,
-  status: PublicBatchStatus$inboundSchema,
-  usage: PublicBatchUsage$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "cancelled_at": "cancelledAt",
-    "cancelling_at": "cancellingAt",
-    "completed_at": "completedAt",
-    "completion_window": "completionWindow",
-    "created_at": "createdAt",
-    "error_file_id": "errorFileId",
-    "expired_at": "expiredAt",
-    "expires_at": "expiresAt",
-    "failed_at": "failedAt",
-    "finalizing_at": "finalizingAt",
-    "in_progress_at": "inProgressAt",
-    "input_file_id": "inputFileId",
-    "output_file_id": "outputFileId",
-    "request_counts": "requestCounts",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    cancelled_at: z.number().int().optional(),
+    cancelling_at: z.number().int().optional(),
+    completed_at: z.number().int().optional(),
+    completion_window: z.string(),
+    created_at: z.number().int(),
+    endpoint: z.string(),
+    error_file_id: z.string().optional(),
+    errors: PublicBatchErrors$inboundSchema.optional(),
+    expired_at: z.number().int().optional(),
+    expires_at: z.number().int().optional(),
+    failed_at: z.number().int().optional(),
+    finalizing_at: z.number().int().optional(),
+    id: z.string(),
+    in_progress_at: z.number().int().optional(),
+    input_file_id: z.string(),
+    metadata: z.record(z.string()).optional(),
+    model: z.string().optional(),
+    object: z.string(),
+    output_file_id: z.string().optional(),
+    request_counts: PublicBatchRequestCounts$inboundSchema,
+    status: PublicBatchStatus$inboundSchema,
+    usage: PublicBatchUsage$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "cancelled_at": "cancelledAt",
+      "cancelling_at": "cancellingAt",
+      "completed_at": "completedAt",
+      "completion_window": "completionWindow",
+      "created_at": "createdAt",
+      "error_file_id": "errorFileId",
+      "expired_at": "expiredAt",
+      "expires_at": "expiresAt",
+      "failed_at": "failedAt",
+      "finalizing_at": "finalizingAt",
+      "in_progress_at": "inProgressAt",
+      "input_file_id": "inputFileId",
+      "output_file_id": "outputFileId",
+      "request_counts": "requestCounts",
+    });
+  })
+);
 
 export function publicBatchFromJSON(
   jsonString: string,

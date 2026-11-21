@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type ModelDeleteRequest = {
   /**
@@ -21,9 +22,11 @@ export const ModelDeleteRequest$outboundSchema: z.ZodType<
   ModelDeleteRequest$Outbound,
   z.ZodTypeDef,
   ModelDeleteRequest
-> = z.object({
-  id: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+  })
+);
 
 export function modelDeleteRequestToJSON(
   modelDeleteRequest: ModelDeleteRequest,

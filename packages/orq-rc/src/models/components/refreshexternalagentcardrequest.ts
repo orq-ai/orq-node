@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type RefreshExternalAgentCardRequest = {};
 
@@ -14,7 +15,7 @@ export const RefreshExternalAgentCardRequest$outboundSchema: z.ZodType<
   RefreshExternalAgentCardRequest$Outbound,
   z.ZodTypeDef,
   RefreshExternalAgentCardRequest
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function refreshExternalAgentCardRequestToJSON(
   refreshExternalAgentCardRequest: RefreshExternalAgentCardRequest,

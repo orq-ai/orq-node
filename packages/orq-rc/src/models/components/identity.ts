@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { BudgetAlert, BudgetAlert$inboundSchema } from "./budgetalert.js";
@@ -150,35 +150,37 @@ export type Identity = {
 };
 
 /** @internal */
-export const Budget$inboundSchema: z.ZodType<Budget, z.ZodTypeDef, unknown> = z
-  .object({
-    budget_id: z.string(),
-    scope: BudgetScope$inboundSchema.optional(),
-    match: BudgetMatch$inboundSchema.optional(),
-    limits: BudgetLimits$inboundSchema,
-    rate_limit: RateLimit$inboundSchema.optional(),
-    is_active: z.boolean().optional(),
-    expires_at: z.string().datetime({ offset: true }).transform(v =>
-      new Date(v)
-    ).optional(),
-    created_at: z.string().datetime({ offset: true }).transform(v =>
-      new Date(v)
-    ),
-    updated_at: z.string().datetime({ offset: true }).transform(v =>
-      new Date(v)
-    ),
-    usage: BudgetUsage$inboundSchema.optional(),
-    alerts: z.array(BudgetAlert$inboundSchema).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "budget_id": "budgetId",
-      "rate_limit": "rateLimit",
-      "is_active": "isActive",
-      "expires_at": "expiresAt",
-      "created_at": "createdAt",
-      "updated_at": "updatedAt",
-    });
-  });
+export const Budget$inboundSchema: z.ZodType<Budget, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      budget_id: z.string(),
+      scope: BudgetScope$inboundSchema.optional(),
+      match: BudgetMatch$inboundSchema.optional(),
+      limits: BudgetLimits$inboundSchema,
+      rate_limit: RateLimit$inboundSchema.optional(),
+      is_active: z.boolean().optional(),
+      expires_at: z.string().datetime({ offset: true }).transform(v =>
+        new Date(v)
+      ).optional(),
+      created_at: z.string().datetime({ offset: true }).transform(v =>
+        new Date(v)
+      ),
+      updated_at: z.string().datetime({ offset: true }).transform(v =>
+        new Date(v)
+      ),
+      usage: BudgetUsage$inboundSchema.optional(),
+      alerts: z.array(BudgetAlert$inboundSchema).optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "budget_id": "budgetId",
+        "rate_limit": "rateLimit",
+        "is_active": "isActive",
+        "expires_at": "expiresAt",
+        "created_at": "createdAt",
+        "updated_at": "updatedAt",
+      });
+    })
+  );
 
 export function budgetFromJSON(
   jsonString: string,
@@ -195,28 +197,30 @@ export const Identity$inboundSchema: z.ZodType<
   Identity,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  _id: z.string(),
-  external_id: z.string(),
-  workspace_id: z.string(),
-  display_name: z.string().optional(),
-  email: z.string().optional(),
-  avatar_url: z.string().optional(),
-  tags: z.array(z.string()).optional(),
-  metadata: z.record(z.any()).optional(),
-  created: z.string(),
-  updated: z.string(),
-  metrics: IdentityMetrics$inboundSchema.optional(),
-  budget: z.lazy(() => Budget$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "_id": "id",
-    "external_id": "externalId",
-    "workspace_id": "workspaceId",
-    "display_name": "displayName",
-    "avatar_url": "avatarUrl",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    _id: z.string(),
+    external_id: z.string(),
+    workspace_id: z.string(),
+    display_name: z.string().optional(),
+    email: z.string().optional(),
+    avatar_url: z.string().optional(),
+    tags: z.array(z.string()).optional(),
+    metadata: z.record(z.any()).optional(),
+    created: z.string(),
+    updated: z.string(),
+    metrics: IdentityMetrics$inboundSchema.optional(),
+    budget: z.lazy(() => Budget$inboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "_id": "id",
+      "external_id": "externalId",
+      "workspace_id": "workspaceId",
+      "display_name": "displayName",
+      "avatar_url": "avatarUrl",
+    });
+  })
+);
 
 export function identityFromJSON(
   jsonString: string,

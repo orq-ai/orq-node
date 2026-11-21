@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import * as components from "../components/index.js";
 
 export type MoveFileRequest = {
@@ -22,16 +23,18 @@ export const MoveFileRequest$outboundSchema: z.ZodType<
   MoveFileRequest$Outbound,
   z.ZodTypeDef,
   MoveFileRequest
-> = z.object({
-  fileSystemKey: z.string(),
-  moveFileSystemFileRequest:
-    components.MoveFileSystemFileRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    fileSystemKey: "file_system_key",
-    moveFileSystemFileRequest: "MoveFileSystemFileRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    fileSystemKey: z.string(),
+    moveFileSystemFileRequest:
+      components.MoveFileSystemFileRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      fileSystemKey: "file_system_key",
+      moveFileSystemFileRequest: "MoveFileSystemFileRequest",
+    });
+  })
+);
 
 export function moveFileRequestToJSON(
   moveFileRequest: MoveFileRequest,

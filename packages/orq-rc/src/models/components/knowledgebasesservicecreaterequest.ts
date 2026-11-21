@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 
 export const KnowledgeBasesServiceCreateRequest2Type = {
@@ -159,8 +160,10 @@ export type KnowledgeBasesServiceCreateRequest =
 
 /** @internal */
 export const KnowledgeBasesServiceCreateRequest2Type$outboundSchema:
-  z.ZodNativeEnum<typeof KnowledgeBasesServiceCreateRequest2Type> = z
-    .nativeEnum(KnowledgeBasesServiceCreateRequest2Type);
+  z.ZodNativeEnum<typeof KnowledgeBasesServiceCreateRequest2Type> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(KnowledgeBasesServiceCreateRequest2Type)
+    );
 
 /** @internal */
 export type KnowledgeBasesServiceCreateRequestExternalConfig$Outbound = {
@@ -175,16 +178,18 @@ export const KnowledgeBasesServiceCreateRequestExternalConfig$outboundSchema:
     KnowledgeBasesServiceCreateRequestExternalConfig$Outbound,
     z.ZodTypeDef,
     KnowledgeBasesServiceCreateRequestExternalConfig
-  > = z.object({
-    name: z.string(),
-    apiUrl: z.string(),
-    apiKey: z.string(),
-  }).transform((v) => {
-    return remap$(v, {
-      apiUrl: "api_url",
-      apiKey: "api_key",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      name: z.string(),
+      apiUrl: z.string(),
+      apiKey: z.string(),
+    }).transform((v) => {
+      return remap$(v, {
+        apiUrl: "api_url",
+        apiKey: "api_key",
+      });
+    })
+  );
 
 export function knowledgeBasesServiceCreateRequestExternalConfigToJSON(
   knowledgeBasesServiceCreateRequestExternalConfig:
@@ -211,21 +216,23 @@ export const KnowledgeBasesServiceCreateRequest2$outboundSchema: z.ZodType<
   KnowledgeBasesServiceCreateRequest2$Outbound,
   z.ZodTypeDef,
   KnowledgeBasesServiceCreateRequest2
-> = z.object({
-  type: KnowledgeBasesServiceCreateRequest2Type$outboundSchema.default(
-    "external",
-  ),
-  key: z.string(),
-  description: z.nullable(z.string()).optional(),
-  externalConfig: z.lazy(() =>
-    KnowledgeBasesServiceCreateRequestExternalConfig$outboundSchema
-  ),
-  path: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    externalConfig: "external_config",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: KnowledgeBasesServiceCreateRequest2Type$outboundSchema.default(
+      "external",
+    ),
+    key: z.string(),
+    description: z.nullable(z.string()).optional(),
+    externalConfig: z.lazy(() =>
+      KnowledgeBasesServiceCreateRequestExternalConfig$outboundSchema
+    ),
+    path: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      externalConfig: "external_config",
+    });
+  })
+);
 
 export function knowledgeBasesServiceCreateRequest2ToJSON(
   knowledgeBasesServiceCreateRequest2: KnowledgeBasesServiceCreateRequest2,
@@ -239,14 +246,17 @@ export function knowledgeBasesServiceCreateRequest2ToJSON(
 
 /** @internal */
 export const KnowledgeBasesServiceCreateRequestType$outboundSchema:
-  z.ZodNativeEnum<typeof KnowledgeBasesServiceCreateRequestType> = z.nativeEnum(
-    KnowledgeBasesServiceCreateRequestType,
-  );
+  z.ZodNativeEnum<typeof KnowledgeBasesServiceCreateRequestType> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(KnowledgeBasesServiceCreateRequestType)
+    );
 
 /** @internal */
 export const KnowledgeBasesServiceCreateRequestRetrievalType$outboundSchema:
-  z.ZodNativeEnum<typeof KnowledgeBasesServiceCreateRequestRetrievalType> = z
-    .nativeEnum(KnowledgeBasesServiceCreateRequestRetrievalType);
+  z.ZodNativeEnum<typeof KnowledgeBasesServiceCreateRequestRetrievalType> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(KnowledgeBasesServiceCreateRequestRetrievalType)
+    );
 
 /** @internal */
 export type KnowledgeBasesServiceCreateRequestRerankConfig$Outbound = {
@@ -261,17 +271,19 @@ export const KnowledgeBasesServiceCreateRequestRerankConfig$outboundSchema:
     KnowledgeBasesServiceCreateRequestRerankConfig$Outbound,
     z.ZodTypeDef,
     KnowledgeBasesServiceCreateRequestRerankConfig
-  > = z.object({
-    topK: z.number().int().default(5),
-    rerankThreshold: z.number().default(0.5),
-    rerankModel: z.string(),
-  }).transform((v) => {
-    return remap$(v, {
-      topK: "top_k",
-      rerankThreshold: "rerank_threshold",
-      rerankModel: "rerank_model",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      topK: z.number().int().default(5),
+      rerankThreshold: z.number().default(0.5),
+      rerankModel: z.string(),
+    }).transform((v) => {
+      return remap$(v, {
+        topK: "top_k",
+        rerankThreshold: "rerank_threshold",
+        rerankModel: "rerank_model",
+      });
+    })
+  );
 
 export function knowledgeBasesServiceCreateRequestRerankConfigToJSON(
   knowledgeBasesServiceCreateRequestRerankConfig:
@@ -295,9 +307,11 @@ export const KnowledgeBasesServiceCreateRequestAgenticRagConfig$outboundSchema:
     KnowledgeBasesServiceCreateRequestAgenticRagConfig$Outbound,
     z.ZodTypeDef,
     KnowledgeBasesServiceCreateRequestAgenticRagConfig
-  > = z.object({
-    model: z.string(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      model: z.string(),
+    })
+  );
 
 export function knowledgeBasesServiceCreateRequestAgenticRagConfigToJSON(
   knowledgeBasesServiceCreateRequestAgenticRagConfig:
@@ -331,31 +345,29 @@ export const KnowledgeBasesServiceCreateRequestRetrievalSettings$outboundSchema:
     KnowledgeBasesServiceCreateRequestRetrievalSettings$Outbound,
     z.ZodTypeDef,
     KnowledgeBasesServiceCreateRequestRetrievalSettings
-  > = z.object({
-    retrievalType:
-      KnowledgeBasesServiceCreateRequestRetrievalType$outboundSchema.default(
-        "hybrid_search",
-      ),
-    topK: z.number().int().default(5),
-    threshold: z.number().default(0),
-    rerankConfig: z.nullable(
-      z.lazy(() =>
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      retrievalType:
+        KnowledgeBasesServiceCreateRequestRetrievalType$outboundSchema.default(
+          "hybrid_search",
+        ),
+      topK: z.number().int().default(5),
+      threshold: z.number().default(0),
+      rerankConfig: z.nullable(z.lazy(() =>
         KnowledgeBasesServiceCreateRequestRerankConfig$outboundSchema
-      ),
-    ).optional(),
-    agenticRagConfig: z.nullable(
-      z.lazy(() =>
+      )).optional(),
+      agenticRagConfig: z.nullable(z.lazy(() =>
         KnowledgeBasesServiceCreateRequestAgenticRagConfig$outboundSchema
-      ),
-    ).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      retrievalType: "retrieval_type",
-      topK: "top_k",
-      rerankConfig: "rerank_config",
-      agenticRagConfig: "agentic_rag_config",
-    });
-  });
+      )).optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        retrievalType: "retrieval_type",
+        topK: "top_k",
+        rerankConfig: "rerank_config",
+        agenticRagConfig: "agentic_rag_config",
+      });
+    })
+  );
 
 export function knowledgeBasesServiceCreateRequestRetrievalSettingsToJSON(
   knowledgeBasesServiceCreateRequestRetrievalSettings:
@@ -385,23 +397,25 @@ export const KnowledgeBasesServiceCreateRequest1$outboundSchema: z.ZodType<
   KnowledgeBasesServiceCreateRequest1$Outbound,
   z.ZodTypeDef,
   KnowledgeBasesServiceCreateRequest1
-> = z.object({
-  type: KnowledgeBasesServiceCreateRequestType$outboundSchema.default(
-    "internal",
-  ),
-  key: z.string(),
-  description: z.nullable(z.string()).optional(),
-  embeddingModel: z.string(),
-  retrievalSettings: z.lazy(() =>
-    KnowledgeBasesServiceCreateRequestRetrievalSettings$outboundSchema
-  ).optional(),
-  path: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    embeddingModel: "embedding_model",
-    retrievalSettings: "retrieval_settings",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: KnowledgeBasesServiceCreateRequestType$outboundSchema.default(
+      "internal",
+    ),
+    key: z.string(),
+    description: z.nullable(z.string()).optional(),
+    embeddingModel: z.string(),
+    retrievalSettings: z.lazy(() =>
+      KnowledgeBasesServiceCreateRequestRetrievalSettings$outboundSchema
+    ).optional(),
+    path: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      embeddingModel: "embedding_model",
+      retrievalSettings: "retrieval_settings",
+    });
+  })
+);
 
 export function knowledgeBasesServiceCreateRequest1ToJSON(
   knowledgeBasesServiceCreateRequest1: KnowledgeBasesServiceCreateRequest1,
@@ -423,10 +437,12 @@ export const KnowledgeBasesServiceCreateRequest$outboundSchema: z.ZodType<
   KnowledgeBasesServiceCreateRequest$Outbound,
   z.ZodTypeDef,
   KnowledgeBasesServiceCreateRequest
-> = z.union([
-  z.lazy(() => KnowledgeBasesServiceCreateRequest1$outboundSchema),
-  z.lazy(() => KnowledgeBasesServiceCreateRequest2$outboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => KnowledgeBasesServiceCreateRequest1$outboundSchema),
+    z.lazy(() => KnowledgeBasesServiceCreateRequest2$outboundSchema),
+  ])
+);
 
 export function knowledgeBasesServiceCreateRequestToJSON(
   knowledgeBasesServiceCreateRequest: KnowledgeBasesServiceCreateRequest,

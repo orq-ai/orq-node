@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -88,39 +88,41 @@ export type Monitor = {
 
 /** @internal */
 export const DefaultRange$inboundSchema: z.ZodNativeEnum<typeof DefaultRange> =
-  z.nativeEnum(DefaultRange);
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(DefaultRange));
 
 /** @internal */
 export const Monitor$inboundSchema: z.ZodType<Monitor, z.ZodTypeDef, unknown> =
-  z.object({
-    monitor_id: z.string(),
-    display_name: z.string(),
-    description: z.string(),
-    project_id: z.string(),
-    widgets: z.array(MonitorWidget$inboundSchema),
-    default_range: DefaultRange$inboundSchema.optional(),
-    preset_key: z.string(),
-    created_at: z.string().datetime({ offset: true }).transform(v =>
-      new Date(v)
-    ),
-    updated_at: z.string().datetime({ offset: true }).transform(v =>
-      new Date(v)
-    ),
-    created_by_id: z.string(),
-    updated_by_id: z.string(),
-  }).transform((v) => {
-    return remap$(v, {
-      "monitor_id": "monitorId",
-      "display_name": "displayName",
-      "project_id": "projectId",
-      "default_range": "defaultRange",
-      "preset_key": "presetKey",
-      "created_at": "createdAt",
-      "updated_at": "updatedAt",
-      "created_by_id": "createdById",
-      "updated_by_id": "updatedById",
-    });
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      monitor_id: z.string(),
+      display_name: z.string(),
+      description: z.string(),
+      project_id: z.string(),
+      widgets: z.array(MonitorWidget$inboundSchema),
+      default_range: DefaultRange$inboundSchema.optional(),
+      preset_key: z.string(),
+      created_at: z.string().datetime({ offset: true }).transform(v =>
+        new Date(v)
+      ),
+      updated_at: z.string().datetime({ offset: true }).transform(v =>
+        new Date(v)
+      ),
+      created_by_id: z.string(),
+      updated_by_id: z.string(),
+    }).transform((v) => {
+      return remap$(v, {
+        "monitor_id": "monitorId",
+        "display_name": "displayName",
+        "project_id": "projectId",
+        "default_range": "defaultRange",
+        "preset_key": "presetKey",
+        "created_at": "createdAt",
+        "updated_at": "updatedAt",
+        "created_by_id": "createdById",
+        "updated_by_id": "updatedById",
+      });
+    })
+  );
 
 export function monitorFromJSON(
   jsonString: string,

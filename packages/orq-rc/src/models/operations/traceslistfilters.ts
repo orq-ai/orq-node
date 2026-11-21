@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type TracesListFiltersRequest = {
   /**
@@ -22,13 +23,15 @@ export const TracesListFiltersRequest$outboundSchema: z.ZodType<
   TracesListFiltersRequest$Outbound,
   z.ZodTypeDef,
   TracesListFiltersRequest
-> = z.object({
-  includeAll: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    includeAll: "include_all",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    includeAll: z.boolean().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      includeAll: "include_all",
+    });
+  })
+);
 
 export function tracesListFiltersRequestToJSON(
   tracesListFiltersRequest: TracesListFiltersRequest,

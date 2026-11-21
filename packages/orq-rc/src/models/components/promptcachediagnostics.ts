@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -29,24 +29,26 @@ export type PromptCacheDiagnostics = {
 /** @internal */
 export const PromptCacheDiagnosticsType$inboundSchema: z.ZodNativeEnum<
   typeof PromptCacheDiagnosticsType
-> = z.nativeEnum(PromptCacheDiagnosticsType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(PromptCacheDiagnosticsType));
 
 /** @internal */
 export const PromptCacheDiagnostics$inboundSchema: z.ZodType<
   PromptCacheDiagnostics,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  cache_missed_tokens: z.number().int().optional(),
-  comparison_reusable_tokens: z.number().int().optional(),
-  reason: z.string().optional(),
-  type: PromptCacheDiagnosticsType$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "cache_missed_tokens": "cacheMissedTokens",
-    "comparison_reusable_tokens": "comparisonReusableTokens",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    cache_missed_tokens: z.number().int().optional(),
+    comparison_reusable_tokens: z.number().int().optional(),
+    reason: z.string().optional(),
+    type: PromptCacheDiagnosticsType$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "cache_missed_tokens": "cacheMissedTokens",
+      "comparison_reusable_tokens": "comparisonReusableTokens",
+    });
+  })
+);
 
 export function promptCacheDiagnosticsFromJSON(
   jsonString: string,

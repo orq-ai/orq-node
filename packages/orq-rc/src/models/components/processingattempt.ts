@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -26,20 +26,22 @@ export const ProcessingAttempt$inboundSchema: z.ZodType<
   ProcessingAttempt,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  started_at: z.string(),
-  queued_at: z.string().optional(),
-  completed_at: z.string().optional(),
-  errors: z.array(ProcessingError$inboundSchema).optional(),
-  retryable: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "started_at": "startedAt",
-    "queued_at": "queuedAt",
-    "completed_at": "completedAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    started_at: z.string(),
+    queued_at: z.string().optional(),
+    completed_at: z.string().optional(),
+    errors: z.array(ProcessingError$inboundSchema).optional(),
+    retryable: z.boolean().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "started_at": "startedAt",
+      "queued_at": "queuedAt",
+      "completed_at": "completedAt",
+    });
+  })
+);
 
 export function processingAttemptFromJSON(
   jsonString: string,

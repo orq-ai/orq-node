@@ -6,6 +6,7 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import {
   collectExtraKeys as collectExtraKeys$,
+  lazySchema as lazySchema$,
   safeParse,
 } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
@@ -1018,13 +1019,17 @@ export type UpdateToolResponseBody =
 
 /** @internal */
 export const UpdateToolRequestBodyToolsRequest4Status$outboundSchema:
-  z.ZodNativeEnum<typeof UpdateToolRequestBodyToolsRequest4Status> = z
-    .nativeEnum(UpdateToolRequestBodyToolsRequest4Status);
+  z.ZodNativeEnum<typeof UpdateToolRequestBodyToolsRequest4Status> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(UpdateToolRequestBodyToolsRequest4Status)
+    );
 
 /** @internal */
 export const UpdateToolRequestBodyToolsRequest4CodeToolType$outboundSchema:
-  z.ZodNativeEnum<typeof UpdateToolRequestBodyToolsRequest4CodeToolType> = z
-    .nativeEnum(UpdateToolRequestBodyToolsRequest4CodeToolType);
+  z.ZodNativeEnum<typeof UpdateToolRequestBodyToolsRequest4CodeToolType> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(UpdateToolRequestBodyToolsRequest4CodeToolType)
+    );
 
 /** @internal */
 export type UpdateToolRequestBodyToolsParameters$Outbound = {
@@ -1039,19 +1044,21 @@ export const UpdateToolRequestBodyToolsParameters$outboundSchema: z.ZodType<
   UpdateToolRequestBodyToolsParameters$Outbound,
   z.ZodTypeDef,
   UpdateToolRequestBodyToolsParameters
-> = z.object({
-  type: UpdateToolRequestBodyToolsRequest4CodeToolType$outboundSchema,
-  properties: z.record(z.any()),
-  required: z.array(z.string()),
-  additionalProperties: z.record(z.any()).optional(),
-}).transform((v) => {
-  return {
-    ...v.additionalProperties,
-    ...remap$(v, {
-      additionalProperties: null,
-    }),
-  };
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: UpdateToolRequestBodyToolsRequest4CodeToolType$outboundSchema,
+    properties: z.record(z.any()),
+    required: z.array(z.string()),
+    additionalProperties: z.record(z.any()).optional(),
+  }).transform((v) => {
+    return {
+      ...v.additionalProperties,
+      ...remap$(v, {
+        additionalProperties: null,
+      }),
+    };
+  })
+);
 
 export function updateToolRequestBodyToolsParametersToJSON(
   updateToolRequestBodyToolsParameters: UpdateToolRequestBodyToolsParameters,
@@ -1066,7 +1073,9 @@ export function updateToolRequestBodyToolsParametersToJSON(
 /** @internal */
 export const UpdateToolRequestBodyLanguage$outboundSchema: z.ZodNativeEnum<
   typeof UpdateToolRequestBodyLanguage
-> = z.nativeEnum(UpdateToolRequestBodyLanguage);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(UpdateToolRequestBodyLanguage)
+);
 
 /** @internal */
 export type UpdateToolRequestBodyCodeTool$Outbound = {
@@ -1080,12 +1089,15 @@ export const UpdateToolRequestBodyCodeTool$outboundSchema: z.ZodType<
   UpdateToolRequestBodyCodeTool$Outbound,
   z.ZodTypeDef,
   UpdateToolRequestBodyCodeTool
-> = z.object({
-  parameters: z.lazy(() => UpdateToolRequestBodyToolsParameters$outboundSchema)
-    .optional(),
-  language: UpdateToolRequestBodyLanguage$outboundSchema,
-  code: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    parameters: z.lazy(() =>
+      UpdateToolRequestBodyToolsParameters$outboundSchema
+    ).optional(),
+    language: UpdateToolRequestBodyLanguage$outboundSchema,
+    code: z.string(),
+  })
+);
 
 export function updateToolRequestBodyCodeToolToJSON(
   updateToolRequestBodyCodeTool: UpdateToolRequestBodyCodeTool,
@@ -1099,8 +1111,10 @@ export function updateToolRequestBodyCodeToolToJSON(
 
 /** @internal */
 export const UpdateToolRequestBodyToolsRequestVersionIncrement$outboundSchema:
-  z.ZodNativeEnum<typeof UpdateToolRequestBodyToolsRequestVersionIncrement> = z
-    .nativeEnum(UpdateToolRequestBodyToolsRequestVersionIncrement);
+  z.ZodNativeEnum<typeof UpdateToolRequestBodyToolsRequestVersionIncrement> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(UpdateToolRequestBodyToolsRequestVersionIncrement)
+    );
 
 /** @internal */
 export type UpdateCodeExecutionTool$Outbound = {
@@ -1120,26 +1134,29 @@ export const UpdateCodeExecutionTool$outboundSchema: z.ZodType<
   UpdateCodeExecutionTool$Outbound,
   z.ZodTypeDef,
   UpdateCodeExecutionTool
-> = z.object({
-  path: z.string().optional(),
-  key: z.string().optional(),
-  displayName: z.string().optional(),
-  description: z.string().optional(),
-  status: UpdateToolRequestBodyToolsRequest4Status$outboundSchema.default(
-    "live",
-  ),
-  type: z.literal("code"),
-  codeTool: z.lazy(() => UpdateToolRequestBodyCodeTool$outboundSchema)
-    .optional(),
-  versionIncrement:
-    UpdateToolRequestBodyToolsRequestVersionIncrement$outboundSchema.optional(),
-  versionDescription: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    displayName: "display_name",
-    codeTool: "code_tool",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    path: z.string().optional(),
+    key: z.string().optional(),
+    displayName: z.string().optional(),
+    description: z.string().optional(),
+    status: UpdateToolRequestBodyToolsRequest4Status$outboundSchema.default(
+      "live",
+    ),
+    type: z.literal("code"),
+    codeTool: z.lazy(() => UpdateToolRequestBodyCodeTool$outboundSchema)
+      .optional(),
+    versionIncrement:
+      UpdateToolRequestBodyToolsRequestVersionIncrement$outboundSchema
+        .optional(),
+    versionDescription: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      displayName: "display_name",
+      codeTool: "code_tool",
+    });
+  })
+);
 
 export function updateCodeExecutionToolToJSON(
   updateCodeExecutionTool: UpdateCodeExecutionTool,
@@ -1151,13 +1168,17 @@ export function updateCodeExecutionToolToJSON(
 
 /** @internal */
 export const UpdateToolRequestBodyToolsRequestStatus$outboundSchema:
-  z.ZodNativeEnum<typeof UpdateToolRequestBodyToolsRequestStatus> = z
-    .nativeEnum(UpdateToolRequestBodyToolsRequestStatus);
+  z.ZodNativeEnum<typeof UpdateToolRequestBodyToolsRequestStatus> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(UpdateToolRequestBodyToolsRequestStatus)
+    );
 
 /** @internal */
 export const UpdateToolRequestBodyMethod$outboundSchema: z.ZodNativeEnum<
   typeof UpdateToolRequestBodyMethod
-> = z.nativeEnum(UpdateToolRequestBodyMethod);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(UpdateToolRequestBodyMethod)
+);
 
 /** @internal */
 export type UpdateToolHeaders2$Outbound = {
@@ -1170,10 +1191,12 @@ export const UpdateToolHeaders2$outboundSchema: z.ZodType<
   UpdateToolHeaders2$Outbound,
   z.ZodTypeDef,
   UpdateToolHeaders2
-> = z.object({
-  value: z.string(),
-  encrypted: z.boolean().default(false),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    value: z.string(),
+    encrypted: z.boolean().default(false),
+  })
+);
 
 export function updateToolHeaders2ToJSON(
   updateToolHeaders2: UpdateToolHeaders2,
@@ -1193,7 +1216,9 @@ export const UpdateToolRequestBodyHeaders$outboundSchema: z.ZodType<
   UpdateToolRequestBodyHeaders$Outbound,
   z.ZodTypeDef,
   UpdateToolRequestBodyHeaders
-> = z.union([z.lazy(() => UpdateToolHeaders2$outboundSchema), z.string()]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.lazy(() => UpdateToolHeaders2$outboundSchema), z.string()])
+);
 
 export function updateToolRequestBodyHeadersToJSON(
   updateToolRequestBodyHeaders: UpdateToolRequestBodyHeaders,
@@ -1219,15 +1244,17 @@ export const UpdateToolRequestBodyBlueprint$outboundSchema: z.ZodType<
   UpdateToolRequestBodyBlueprint$Outbound,
   z.ZodTypeDef,
   UpdateToolRequestBodyBlueprint
-> = z.object({
-  url: z.string(),
-  method: UpdateToolRequestBodyMethod$outboundSchema,
-  headers: z.record(
-    z.union([z.lazy(() => UpdateToolHeaders2$outboundSchema), z.string()]),
-  ).optional(),
-  body: z.record(z.any()).optional(),
-  timeout: z.number().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    url: z.string(),
+    method: UpdateToolRequestBodyMethod$outboundSchema,
+    headers: z.record(
+      z.union([z.lazy(() => UpdateToolHeaders2$outboundSchema), z.string()]),
+    ).optional(),
+    body: z.record(z.any()).optional(),
+    timeout: z.number().optional(),
+  })
+);
 
 export function updateToolRequestBodyBlueprintToJSON(
   updateToolRequestBodyBlueprint: UpdateToolRequestBodyBlueprint,
@@ -1241,9 +1268,10 @@ export function updateToolRequestBodyBlueprintToJSON(
 
 /** @internal */
 export const UpdateToolRequestBodyToolsRequest3Type$outboundSchema:
-  z.ZodNativeEnum<typeof UpdateToolRequestBodyToolsRequest3Type> = z.nativeEnum(
-    UpdateToolRequestBodyToolsRequest3Type,
-  );
+  z.ZodNativeEnum<typeof UpdateToolRequestBodyToolsRequest3Type> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(UpdateToolRequestBodyToolsRequest3Type)
+    );
 
 /** @internal */
 export type UpdateToolRequestBodyDefaultValue$Outbound =
@@ -1256,7 +1284,9 @@ export const UpdateToolRequestBodyDefaultValue$outboundSchema: z.ZodType<
   UpdateToolRequestBodyDefaultValue$Outbound,
   z.ZodTypeDef,
   UpdateToolRequestBodyDefaultValue
-> = z.union([z.string(), z.number(), z.boolean()]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.number(), z.boolean()])
+);
 
 export function updateToolRequestBodyDefaultValueToJSON(
   updateToolRequestBodyDefaultValue: UpdateToolRequestBodyDefaultValue,
@@ -1281,17 +1311,19 @@ export const UpdateToolRequestBodyArguments$outboundSchema: z.ZodType<
   UpdateToolRequestBodyArguments$Outbound,
   z.ZodTypeDef,
   UpdateToolRequestBodyArguments
-> = z.object({
-  type: UpdateToolRequestBodyToolsRequest3Type$outboundSchema,
-  description: z.string(),
-  sendToModel: z.boolean().default(true),
-  defaultValue: z.union([z.string(), z.number(), z.boolean()]).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    sendToModel: "send_to_model",
-    defaultValue: "default_value",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: UpdateToolRequestBodyToolsRequest3Type$outboundSchema,
+    description: z.string(),
+    sendToModel: z.boolean().default(true),
+    defaultValue: z.union([z.string(), z.number(), z.boolean()]).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      sendToModel: "send_to_model",
+      defaultValue: "default_value",
+    });
+  })
+);
 
 export function updateToolRequestBodyArgumentsToJSON(
   updateToolRequestBodyArguments: UpdateToolRequestBodyArguments,
@@ -1316,12 +1348,14 @@ export const UpdateToolRequestBodyHttp$outboundSchema: z.ZodType<
   UpdateToolRequestBodyHttp$Outbound,
   z.ZodTypeDef,
   UpdateToolRequestBodyHttp
-> = z.object({
-  blueprint: z.lazy(() => UpdateToolRequestBodyBlueprint$outboundSchema),
-  arguments: z.record(
-    z.lazy(() => UpdateToolRequestBodyArguments$outboundSchema),
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    blueprint: z.lazy(() => UpdateToolRequestBodyBlueprint$outboundSchema),
+    arguments: z.record(
+      z.lazy(() => UpdateToolRequestBodyArguments$outboundSchema),
+    ).optional(),
+  })
+);
 
 export function updateToolRequestBodyHttpToJSON(
   updateToolRequestBodyHttp: UpdateToolRequestBodyHttp,
@@ -1333,8 +1367,10 @@ export function updateToolRequestBodyHttpToJSON(
 
 /** @internal */
 export const UpdateToolRequestBodyToolsVersionIncrement$outboundSchema:
-  z.ZodNativeEnum<typeof UpdateToolRequestBodyToolsVersionIncrement> = z
-    .nativeEnum(UpdateToolRequestBodyToolsVersionIncrement);
+  z.ZodNativeEnum<typeof UpdateToolRequestBodyToolsVersionIncrement> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(UpdateToolRequestBodyToolsVersionIncrement)
+    );
 
 /** @internal */
 export type UpdateHTTPTool$Outbound = {
@@ -1354,24 +1390,26 @@ export const UpdateHTTPTool$outboundSchema: z.ZodType<
   UpdateHTTPTool$Outbound,
   z.ZodTypeDef,
   UpdateHTTPTool
-> = z.object({
-  path: z.string().optional(),
-  key: z.string().optional(),
-  displayName: z.string().optional(),
-  description: z.string().optional(),
-  status: UpdateToolRequestBodyToolsRequestStatus$outboundSchema.default(
-    "live",
-  ),
-  type: z.literal("http"),
-  http: z.lazy(() => UpdateToolRequestBodyHttp$outboundSchema).optional(),
-  versionIncrement: UpdateToolRequestBodyToolsVersionIncrement$outboundSchema
-    .optional(),
-  versionDescription: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    displayName: "display_name",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    path: z.string().optional(),
+    key: z.string().optional(),
+    displayName: z.string().optional(),
+    description: z.string().optional(),
+    status: UpdateToolRequestBodyToolsRequestStatus$outboundSchema.default(
+      "live",
+    ),
+    type: z.literal("http"),
+    http: z.lazy(() => UpdateToolRequestBodyHttp$outboundSchema).optional(),
+    versionIncrement: UpdateToolRequestBodyToolsVersionIncrement$outboundSchema
+      .optional(),
+    versionDescription: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      displayName: "display_name",
+    });
+  })
+);
 
 export function updateHTTPToolToJSON(updateHTTPTool: UpdateHTTPTool): string {
   return JSON.stringify(UpdateHTTPTool$outboundSchema.parse(updateHTTPTool));
@@ -1380,7 +1418,9 @@ export function updateHTTPToolToJSON(updateHTTPTool: UpdateHTTPTool): string {
 /** @internal */
 export const UpdateToolRequestBodyToolsStatus$outboundSchema: z.ZodNativeEnum<
   typeof UpdateToolRequestBodyToolsStatus
-> = z.nativeEnum(UpdateToolRequestBodyToolsStatus);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(UpdateToolRequestBodyToolsStatus)
+);
 
 /** @internal */
 export type UpdateToolRequestBodySchema$Outbound = {
@@ -1395,19 +1435,21 @@ export const UpdateToolRequestBodySchema$outboundSchema: z.ZodType<
   UpdateToolRequestBodySchema$Outbound,
   z.ZodTypeDef,
   UpdateToolRequestBodySchema
-> = z.object({
-  type: z.string(),
-  properties: z.record(z.any()),
-  required: z.array(z.string()),
-  additionalProperties: z.record(z.any()).optional(),
-}).transform((v) => {
-  return {
-    ...v.additionalProperties,
-    ...remap$(v, {
-      additionalProperties: null,
-    }),
-  };
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.string(),
+    properties: z.record(z.any()),
+    required: z.array(z.string()),
+    additionalProperties: z.record(z.any()).optional(),
+  }).transform((v) => {
+    return {
+      ...v.additionalProperties,
+      ...remap$(v, {
+        additionalProperties: null,
+      }),
+    };
+  })
+);
 
 export function updateToolRequestBodySchemaToJSON(
   updateToolRequestBodySchema: UpdateToolRequestBodySchema,
@@ -1432,12 +1474,14 @@ export const UpdateToolRequestBodyJsonSchema$outboundSchema: z.ZodType<
   UpdateToolRequestBodyJsonSchema$Outbound,
   z.ZodTypeDef,
   UpdateToolRequestBodyJsonSchema
-> = z.object({
-  name: z.string(),
-  description: z.string(),
-  schema: z.lazy(() => UpdateToolRequestBodySchema$outboundSchema),
-  strict: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+    description: z.string(),
+    schema: z.lazy(() => UpdateToolRequestBodySchema$outboundSchema),
+    strict: z.boolean().optional(),
+  })
+);
 
 export function updateToolRequestBodyJsonSchemaToJSON(
   updateToolRequestBodyJsonSchema: UpdateToolRequestBodyJsonSchema,
@@ -1451,9 +1495,10 @@ export function updateToolRequestBodyJsonSchemaToJSON(
 
 /** @internal */
 export const UpdateToolRequestBodyVersionIncrement$outboundSchema:
-  z.ZodNativeEnum<typeof UpdateToolRequestBodyVersionIncrement> = z.nativeEnum(
-    UpdateToolRequestBodyVersionIncrement,
-  );
+  z.ZodNativeEnum<typeof UpdateToolRequestBodyVersionIncrement> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(UpdateToolRequestBodyVersionIncrement)
+    );
 
 /** @internal */
 export type UpdateJSONSchemaTool$Outbound = {
@@ -1473,24 +1518,26 @@ export const UpdateJSONSchemaTool$outboundSchema: z.ZodType<
   UpdateJSONSchemaTool$Outbound,
   z.ZodTypeDef,
   UpdateJSONSchemaTool
-> = z.object({
-  path: z.string().optional(),
-  key: z.string().optional(),
-  displayName: z.string().optional(),
-  description: z.string().optional(),
-  status: UpdateToolRequestBodyToolsStatus$outboundSchema.default("live"),
-  type: z.literal("json_schema"),
-  jsonSchema: z.lazy(() => UpdateToolRequestBodyJsonSchema$outboundSchema)
-    .optional(),
-  versionIncrement: UpdateToolRequestBodyVersionIncrement$outboundSchema
-    .optional(),
-  versionDescription: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    displayName: "display_name",
-    jsonSchema: "json_schema",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    path: z.string().optional(),
+    key: z.string().optional(),
+    displayName: z.string().optional(),
+    description: z.string().optional(),
+    status: UpdateToolRequestBodyToolsStatus$outboundSchema.default("live"),
+    type: z.literal("json_schema"),
+    jsonSchema: z.lazy(() => UpdateToolRequestBodyJsonSchema$outboundSchema)
+      .optional(),
+    versionIncrement: UpdateToolRequestBodyVersionIncrement$outboundSchema
+      .optional(),
+    versionDescription: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      displayName: "display_name",
+      jsonSchema: "json_schema",
+    });
+  })
+);
 
 export function updateJSONSchemaToolToJSON(
   updateJSONSchemaTool: UpdateJSONSchemaTool,
@@ -1503,13 +1550,16 @@ export function updateJSONSchemaToolToJSON(
 /** @internal */
 export const UpdateToolRequestBodyStatus$outboundSchema: z.ZodNativeEnum<
   typeof UpdateToolRequestBodyStatus
-> = z.nativeEnum(UpdateToolRequestBodyStatus);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(UpdateToolRequestBodyStatus)
+);
 
 /** @internal */
 export const UpdateToolRequestBodyToolsRequest1Type$outboundSchema:
-  z.ZodNativeEnum<typeof UpdateToolRequestBodyToolsRequest1Type> = z.nativeEnum(
-    UpdateToolRequestBodyToolsRequest1Type,
-  );
+  z.ZodNativeEnum<typeof UpdateToolRequestBodyToolsRequest1Type> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(UpdateToolRequestBodyToolsRequest1Type)
+    );
 
 /** @internal */
 export type UpdateToolRequestBodyParameters$Outbound = {
@@ -1524,19 +1574,21 @@ export const UpdateToolRequestBodyParameters$outboundSchema: z.ZodType<
   UpdateToolRequestBodyParameters$Outbound,
   z.ZodTypeDef,
   UpdateToolRequestBodyParameters
-> = z.object({
-  type: UpdateToolRequestBodyToolsRequest1Type$outboundSchema,
-  properties: z.record(z.any()),
-  required: z.array(z.string()),
-  additionalProperties: z.record(z.any()).optional(),
-}).transform((v) => {
-  return {
-    ...v.additionalProperties,
-    ...remap$(v, {
-      additionalProperties: null,
-    }),
-  };
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: UpdateToolRequestBodyToolsRequest1Type$outboundSchema,
+    properties: z.record(z.any()),
+    required: z.array(z.string()),
+    additionalProperties: z.record(z.any()).optional(),
+  }).transform((v) => {
+    return {
+      ...v.additionalProperties,
+      ...remap$(v, {
+        additionalProperties: null,
+      }),
+    };
+  })
+);
 
 export function updateToolRequestBodyParametersToJSON(
   updateToolRequestBodyParameters: UpdateToolRequestBodyParameters,
@@ -1561,13 +1613,15 @@ export const UpdateToolRequestBodyFunction$outboundSchema: z.ZodType<
   UpdateToolRequestBodyFunction$Outbound,
   z.ZodTypeDef,
   UpdateToolRequestBodyFunction
-> = z.object({
-  name: z.string(),
-  description: z.string().optional(),
-  strict: z.boolean().optional(),
-  parameters: z.lazy(() => UpdateToolRequestBodyParameters$outboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+    description: z.string().optional(),
+    strict: z.boolean().optional(),
+    parameters: z.lazy(() => UpdateToolRequestBodyParameters$outboundSchema)
+      .optional(),
+  })
+);
 
 export function updateToolRequestBodyFunctionToJSON(
   updateToolRequestBodyFunction: UpdateToolRequestBodyFunction,
@@ -1582,7 +1636,9 @@ export function updateToolRequestBodyFunctionToJSON(
 /** @internal */
 export const RequestBodyVersionIncrement$outboundSchema: z.ZodNativeEnum<
   typeof RequestBodyVersionIncrement
-> = z.nativeEnum(RequestBodyVersionIncrement);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(RequestBodyVersionIncrement)
+);
 
 /** @internal */
 export type UpdateFunctionTool$Outbound = {
@@ -1602,22 +1658,24 @@ export const UpdateFunctionTool$outboundSchema: z.ZodType<
   UpdateFunctionTool$Outbound,
   z.ZodTypeDef,
   UpdateFunctionTool
-> = z.object({
-  path: z.string().optional(),
-  key: z.string().optional(),
-  displayName: z.string().optional(),
-  description: z.string().optional(),
-  status: UpdateToolRequestBodyStatus$outboundSchema.default("live"),
-  type: z.literal("function"),
-  function: z.lazy(() => UpdateToolRequestBodyFunction$outboundSchema)
-    .optional(),
-  versionIncrement: RequestBodyVersionIncrement$outboundSchema.optional(),
-  versionDescription: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    displayName: "display_name",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    path: z.string().optional(),
+    key: z.string().optional(),
+    displayName: z.string().optional(),
+    description: z.string().optional(),
+    status: UpdateToolRequestBodyStatus$outboundSchema.default("live"),
+    type: z.literal("function"),
+    function: z.lazy(() => UpdateToolRequestBodyFunction$outboundSchema)
+      .optional(),
+    versionIncrement: RequestBodyVersionIncrement$outboundSchema.optional(),
+    versionDescription: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      displayName: "display_name",
+    });
+  })
+);
 
 export function updateFunctionToolToJSON(
   updateFunctionTool: UpdateFunctionTool,
@@ -1639,12 +1697,14 @@ export const UpdateToolRequestBody$outboundSchema: z.ZodType<
   UpdateToolRequestBody$Outbound,
   z.ZodTypeDef,
   UpdateToolRequestBody
-> = z.union([
-  z.lazy(() => UpdateFunctionTool$outboundSchema),
-  z.lazy(() => UpdateJSONSchemaTool$outboundSchema),
-  z.lazy(() => UpdateHTTPTool$outboundSchema),
-  z.lazy(() => UpdateCodeExecutionTool$outboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => UpdateFunctionTool$outboundSchema),
+    z.lazy(() => UpdateJSONSchemaTool$outboundSchema),
+    z.lazy(() => UpdateHTTPTool$outboundSchema),
+    z.lazy(() => UpdateCodeExecutionTool$outboundSchema),
+  ])
+);
 
 export function updateToolRequestBodyToJSON(
   updateToolRequestBody: UpdateToolRequestBody,
@@ -1670,20 +1730,22 @@ export const UpdateToolRequest$outboundSchema: z.ZodType<
   UpdateToolRequest$Outbound,
   z.ZodTypeDef,
   UpdateToolRequest
-> = z.object({
-  toolId: z.string(),
-  requestBody: z.union([
-    z.lazy(() => UpdateFunctionTool$outboundSchema),
-    z.lazy(() => UpdateJSONSchemaTool$outboundSchema),
-    z.lazy(() => UpdateHTTPTool$outboundSchema),
-    z.lazy(() => UpdateCodeExecutionTool$outboundSchema),
-  ]).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    toolId: "tool_id",
-    requestBody: "RequestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    toolId: z.string(),
+    requestBody: z.union([
+      z.lazy(() => UpdateFunctionTool$outboundSchema),
+      z.lazy(() => UpdateJSONSchemaTool$outboundSchema),
+      z.lazy(() => UpdateHTTPTool$outboundSchema),
+      z.lazy(() => UpdateCodeExecutionTool$outboundSchema),
+    ]).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      toolId: "tool_id",
+      requestBody: "RequestBody",
+    });
+  })
+);
 
 export function updateToolRequestToJSON(
   updateToolRequest: UpdateToolRequest,
@@ -1695,29 +1757,35 @@ export function updateToolRequestToJSON(
 
 /** @internal */
 export const UpdateToolResponseBodyToolsResponse200Status$inboundSchema:
-  z.ZodNativeEnum<typeof UpdateToolResponseBodyToolsResponse200Status> = z
-    .nativeEnum(UpdateToolResponseBodyToolsResponse200Status);
+  z.ZodNativeEnum<typeof UpdateToolResponseBodyToolsResponse200Status> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(UpdateToolResponseBodyToolsResponse200Status)
+    );
 
 /** @internal */
 export const UpdateToolResponseBodyToolsResponse200ApplicationJson4Type$inboundSchema:
   z.ZodNativeEnum<
     typeof UpdateToolResponseBodyToolsResponse200ApplicationJson4Type
-  > = z.nativeEnum(UpdateToolResponseBodyToolsResponse200ApplicationJson4Type);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.nativeEnum(UpdateToolResponseBodyToolsResponse200ApplicationJson4Type)
+  );
 
 /** @internal */
 export const UpdateToolResponseBodyToolsParameters$inboundSchema: z.ZodType<
   UpdateToolResponseBodyToolsParameters,
   z.ZodTypeDef,
   unknown
-> = collectExtraKeys$(
-  z.object({
-    type:
-      UpdateToolResponseBodyToolsResponse200ApplicationJson4Type$inboundSchema,
-    properties: z.record(z.any()),
-    required: z.array(z.string()),
-  }).catchall(z.any()),
-  "additionalProperties",
-  true,
+> = /* @__PURE__ */ lazySchema$(() =>
+  collectExtraKeys$(
+    z.object({
+      type:
+        UpdateToolResponseBodyToolsResponse200ApplicationJson4Type$inboundSchema,
+      properties: z.record(z.any()),
+      required: z.array(z.string()),
+    }).catchall(z.any()),
+    "additionalProperties",
+    true,
+  )
 );
 
 export function updateToolResponseBodyToolsParametersFromJSON(
@@ -1734,19 +1802,24 @@ export function updateToolResponseBodyToolsParametersFromJSON(
 /** @internal */
 export const UpdateToolResponseBodyLanguage$inboundSchema: z.ZodNativeEnum<
   typeof UpdateToolResponseBodyLanguage
-> = z.nativeEnum(UpdateToolResponseBodyLanguage);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(UpdateToolResponseBodyLanguage)
+);
 
 /** @internal */
 export const UpdateToolResponseBodyCodeTool$inboundSchema: z.ZodType<
   UpdateToolResponseBodyCodeTool,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  parameters: z.lazy(() => UpdateToolResponseBodyToolsParameters$inboundSchema)
-    .optional(),
-  language: UpdateToolResponseBodyLanguage$inboundSchema,
-  code: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    parameters: z.lazy(() =>
+      UpdateToolResponseBodyToolsParameters$inboundSchema
+    ).optional(),
+    language: UpdateToolResponseBodyLanguage$inboundSchema,
+    code: z.string(),
+  })
+);
 
 export function updateToolResponseBodyCodeToolFromJSON(
   jsonString: string,
@@ -1763,34 +1836,36 @@ export const UpdateToolResponseBodyCodeExecutionTool$inboundSchema: z.ZodType<
   UpdateToolResponseBodyCodeExecutionTool,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  _id: z.string().default("tool_01M7WKM88V23EQJVAS8KWY65DE"),
-  path: z.string(),
-  key: z.string(),
-  display_name: z.string().optional(),
-  description: z.string(),
-  created_by_id: z.nullable(z.string()).optional(),
-  updated_by_id: z.nullable(z.string()).optional(),
-  project_id: z.string(),
-  workspace_id: z.string(),
-  created: z.string(),
-  updated: z.string(),
-  status: UpdateToolResponseBodyToolsResponse200Status$inboundSchema.default(
-    "live",
-  ),
-  type: z.literal("code"),
-  code_tool: z.lazy(() => UpdateToolResponseBodyCodeTool$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "_id": "id",
-    "display_name": "displayName",
-    "created_by_id": "createdById",
-    "updated_by_id": "updatedById",
-    "project_id": "projectId",
-    "workspace_id": "workspaceId",
-    "code_tool": "codeTool",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    _id: z.string().default("tool_01M7YVSPAYT6P6FGDJENEYZAYQ"),
+    path: z.string(),
+    key: z.string(),
+    display_name: z.string().optional(),
+    description: z.string(),
+    created_by_id: z.nullable(z.string()).optional(),
+    updated_by_id: z.nullable(z.string()).optional(),
+    project_id: z.string(),
+    workspace_id: z.string(),
+    created: z.string(),
+    updated: z.string(),
+    status: UpdateToolResponseBodyToolsResponse200Status$inboundSchema.default(
+      "live",
+    ),
+    type: z.literal("code"),
+    code_tool: z.lazy(() => UpdateToolResponseBodyCodeTool$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "_id": "id",
+      "display_name": "displayName",
+      "created_by_id": "createdById",
+      "updated_by_id": "updatedById",
+      "project_id": "projectId",
+      "workspace_id": "workspaceId",
+      "code_tool": "codeTool",
+    });
+  })
+);
 
 export function updateToolResponseBodyCodeExecutionToolFromJSON(
   jsonString: string,
@@ -1810,23 +1885,29 @@ export function updateToolResponseBodyCodeExecutionToolFromJSON(
 
 /** @internal */
 export const UpdateToolResponseBodyToolsResponseStatus$inboundSchema:
-  z.ZodNativeEnum<typeof UpdateToolResponseBodyToolsResponseStatus> = z
-    .nativeEnum(UpdateToolResponseBodyToolsResponseStatus);
+  z.ZodNativeEnum<typeof UpdateToolResponseBodyToolsResponseStatus> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(UpdateToolResponseBodyToolsResponseStatus)
+    );
 
 /** @internal */
 export const UpdateToolResponseBodyMethod$inboundSchema: z.ZodNativeEnum<
   typeof UpdateToolResponseBodyMethod
-> = z.nativeEnum(UpdateToolResponseBodyMethod);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(UpdateToolResponseBodyMethod)
+);
 
 /** @internal */
 export const UpdateToolHeadersTools2$inboundSchema: z.ZodType<
   UpdateToolHeadersTools2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  value: z.string(),
-  encrypted: z.boolean().default(false),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    value: z.string(),
+    encrypted: z.boolean().default(false),
+  })
+);
 
 export function updateToolHeadersTools2FromJSON(
   jsonString: string,
@@ -1843,7 +1924,9 @@ export const UpdateToolResponseBodyHeaders$inboundSchema: z.ZodType<
   UpdateToolResponseBodyHeaders,
   z.ZodTypeDef,
   unknown
-> = z.union([z.lazy(() => UpdateToolHeadersTools2$inboundSchema), z.string()]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.lazy(() => UpdateToolHeadersTools2$inboundSchema), z.string()])
+);
 
 export function updateToolResponseBodyHeadersFromJSON(
   jsonString: string,
@@ -1860,15 +1943,20 @@ export const UpdateToolResponseBodyBlueprint$inboundSchema: z.ZodType<
   UpdateToolResponseBodyBlueprint,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  url: z.string(),
-  method: UpdateToolResponseBodyMethod$inboundSchema,
-  headers: z.record(
-    z.union([z.lazy(() => UpdateToolHeadersTools2$inboundSchema), z.string()]),
-  ).optional(),
-  body: z.record(z.any()).optional(),
-  timeout: z.number().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    url: z.string(),
+    method: UpdateToolResponseBodyMethod$inboundSchema,
+    headers: z.record(
+      z.union([
+        z.lazy(() => UpdateToolHeadersTools2$inboundSchema),
+        z.string(),
+      ]),
+    ).optional(),
+    body: z.record(z.any()).optional(),
+    timeout: z.number().optional(),
+  })
+);
 
 export function updateToolResponseBodyBlueprintFromJSON(
   jsonString: string,
@@ -1884,14 +1972,18 @@ export function updateToolResponseBodyBlueprintFromJSON(
 export const UpdateToolResponseBodyToolsResponse200ApplicationJSONType$inboundSchema:
   z.ZodNativeEnum<
     typeof UpdateToolResponseBodyToolsResponse200ApplicationJSONType
-  > = z.nativeEnum(UpdateToolResponseBodyToolsResponse200ApplicationJSONType);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.nativeEnum(UpdateToolResponseBodyToolsResponse200ApplicationJSONType)
+  );
 
 /** @internal */
 export const UpdateToolResponseBodyDefaultValue$inboundSchema: z.ZodType<
   UpdateToolResponseBodyDefaultValue,
   z.ZodTypeDef,
   unknown
-> = z.union([z.string(), z.number(), z.boolean()]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.number(), z.boolean()])
+);
 
 export function updateToolResponseBodyDefaultValueFromJSON(
   jsonString: string,
@@ -1909,17 +2001,20 @@ export const UpdateToolResponseBodyArguments$inboundSchema: z.ZodType<
   UpdateToolResponseBodyArguments,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: UpdateToolResponseBodyToolsResponse200ApplicationJSONType$inboundSchema,
-  description: z.string(),
-  send_to_model: z.boolean().default(true),
-  default_value: z.union([z.string(), z.number(), z.boolean()]).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "send_to_model": "sendToModel",
-    "default_value": "defaultValue",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type:
+      UpdateToolResponseBodyToolsResponse200ApplicationJSONType$inboundSchema,
+    description: z.string(),
+    send_to_model: z.boolean().default(true),
+    default_value: z.union([z.string(), z.number(), z.boolean()]).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "send_to_model": "sendToModel",
+      "default_value": "defaultValue",
+    });
+  })
+);
 
 export function updateToolResponseBodyArgumentsFromJSON(
   jsonString: string,
@@ -1936,12 +2031,14 @@ export const UpdateToolResponseBodyHttp$inboundSchema: z.ZodType<
   UpdateToolResponseBodyHttp,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  blueprint: z.lazy(() => UpdateToolResponseBodyBlueprint$inboundSchema),
-  arguments: z.record(
-    z.lazy(() => UpdateToolResponseBodyArguments$inboundSchema),
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    blueprint: z.lazy(() => UpdateToolResponseBodyBlueprint$inboundSchema),
+    arguments: z.record(
+      z.lazy(() => UpdateToolResponseBodyArguments$inboundSchema),
+    ).optional(),
+  })
+);
 
 export function updateToolResponseBodyHttpFromJSON(
   jsonString: string,
@@ -1958,33 +2055,35 @@ export const UpdateToolResponseBodyHTTPTool$inboundSchema: z.ZodType<
   UpdateToolResponseBodyHTTPTool,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  _id: z.string().default("tool_01M7WKM88TV3NFS98EXYV137BG"),
-  path: z.string(),
-  key: z.string(),
-  display_name: z.string().optional(),
-  description: z.string(),
-  created_by_id: z.nullable(z.string()).optional(),
-  updated_by_id: z.nullable(z.string()).optional(),
-  project_id: z.string(),
-  workspace_id: z.string(),
-  created: z.string(),
-  updated: z.string(),
-  status: UpdateToolResponseBodyToolsResponseStatus$inboundSchema.default(
-    "live",
-  ),
-  type: z.literal("http"),
-  http: z.lazy(() => UpdateToolResponseBodyHttp$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "_id": "id",
-    "display_name": "displayName",
-    "created_by_id": "createdById",
-    "updated_by_id": "updatedById",
-    "project_id": "projectId",
-    "workspace_id": "workspaceId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    _id: z.string().default("tool_01M7YVSPAX6BR0MAJKGA0T3MZE"),
+    path: z.string(),
+    key: z.string(),
+    display_name: z.string().optional(),
+    description: z.string(),
+    created_by_id: z.nullable(z.string()).optional(),
+    updated_by_id: z.nullable(z.string()).optional(),
+    project_id: z.string(),
+    workspace_id: z.string(),
+    created: z.string(),
+    updated: z.string(),
+    status: UpdateToolResponseBodyToolsResponseStatus$inboundSchema.default(
+      "live",
+    ),
+    type: z.literal("http"),
+    http: z.lazy(() => UpdateToolResponseBodyHttp$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "_id": "id",
+      "display_name": "displayName",
+      "created_by_id": "createdById",
+      "updated_by_id": "updatedById",
+      "project_id": "projectId",
+      "workspace_id": "workspaceId",
+    });
+  })
+);
 
 export function updateToolResponseBodyHTTPToolFromJSON(
   jsonString: string,
@@ -1999,21 +2098,25 @@ export function updateToolResponseBodyHTTPToolFromJSON(
 /** @internal */
 export const UpdateToolResponseBodyToolsStatus$inboundSchema: z.ZodNativeEnum<
   typeof UpdateToolResponseBodyToolsStatus
-> = z.nativeEnum(UpdateToolResponseBodyToolsStatus);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(UpdateToolResponseBodyToolsStatus)
+);
 
 /** @internal */
 export const UpdateToolResponseBodySchema$inboundSchema: z.ZodType<
   UpdateToolResponseBodySchema,
   z.ZodTypeDef,
   unknown
-> = collectExtraKeys$(
-  z.object({
-    type: z.string(),
-    properties: z.record(z.any()),
-    required: z.array(z.string()),
-  }).catchall(z.any()),
-  "additionalProperties",
-  true,
+> = /* @__PURE__ */ lazySchema$(() =>
+  collectExtraKeys$(
+    z.object({
+      type: z.string(),
+      properties: z.record(z.any()),
+      required: z.array(z.string()),
+    }).catchall(z.any()),
+    "additionalProperties",
+    true,
+  )
 );
 
 export function updateToolResponseBodySchemaFromJSON(
@@ -2031,12 +2134,14 @@ export const UpdateToolResponseBodyJsonSchema$inboundSchema: z.ZodType<
   UpdateToolResponseBodyJsonSchema,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string(),
-  description: z.string(),
-  schema: z.lazy(() => UpdateToolResponseBodySchema$inboundSchema),
-  strict: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+    description: z.string(),
+    schema: z.lazy(() => UpdateToolResponseBodySchema$inboundSchema),
+    strict: z.boolean().optional(),
+  })
+);
 
 export function updateToolResponseBodyJsonSchemaFromJSON(
   jsonString: string,
@@ -2053,32 +2158,34 @@ export const UpdateToolResponseBodyJSONSchemaTool$inboundSchema: z.ZodType<
   UpdateToolResponseBodyJSONSchemaTool,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  _id: z.string().default("tool_01M7WKM88T6APYCXPEMQPGRG6V"),
-  path: z.string(),
-  key: z.string(),
-  display_name: z.string().optional(),
-  description: z.string(),
-  created_by_id: z.nullable(z.string()).optional(),
-  updated_by_id: z.nullable(z.string()).optional(),
-  project_id: z.string(),
-  workspace_id: z.string(),
-  created: z.string(),
-  updated: z.string(),
-  status: UpdateToolResponseBodyToolsStatus$inboundSchema.default("live"),
-  type: z.literal("json_schema"),
-  json_schema: z.lazy(() => UpdateToolResponseBodyJsonSchema$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "_id": "id",
-    "display_name": "displayName",
-    "created_by_id": "createdById",
-    "updated_by_id": "updatedById",
-    "project_id": "projectId",
-    "workspace_id": "workspaceId",
-    "json_schema": "jsonSchema",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    _id: z.string().default("tool_01M7YVSPAXFCPTME4E6MZPAQ3A"),
+    path: z.string(),
+    key: z.string(),
+    display_name: z.string().optional(),
+    description: z.string(),
+    created_by_id: z.nullable(z.string()).optional(),
+    updated_by_id: z.nullable(z.string()).optional(),
+    project_id: z.string(),
+    workspace_id: z.string(),
+    created: z.string(),
+    updated: z.string(),
+    status: UpdateToolResponseBodyToolsStatus$inboundSchema.default("live"),
+    type: z.literal("json_schema"),
+    json_schema: z.lazy(() => UpdateToolResponseBodyJsonSchema$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "_id": "id",
+      "display_name": "displayName",
+      "created_by_id": "createdById",
+      "updated_by_id": "updatedById",
+      "project_id": "projectId",
+      "workspace_id": "workspaceId",
+      "json_schema": "jsonSchema",
+    });
+  })
+);
 
 export function updateToolResponseBodyJSONSchemaToolFromJSON(
   jsonString: string,
@@ -2094,28 +2201,34 @@ export function updateToolResponseBodyJSONSchemaToolFromJSON(
 /** @internal */
 export const UpdateToolResponseBodyStatus$inboundSchema: z.ZodNativeEnum<
   typeof UpdateToolResponseBodyStatus
-> = z.nativeEnum(UpdateToolResponseBodyStatus);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(UpdateToolResponseBodyStatus)
+);
 
 /** @internal */
 export const UpdateToolResponseBodyToolsResponse200ApplicationJson1Type$inboundSchema:
   z.ZodNativeEnum<
     typeof UpdateToolResponseBodyToolsResponse200ApplicationJson1Type
-  > = z.nativeEnum(UpdateToolResponseBodyToolsResponse200ApplicationJson1Type);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.nativeEnum(UpdateToolResponseBodyToolsResponse200ApplicationJson1Type)
+  );
 
 /** @internal */
 export const UpdateToolResponseBodyParameters$inboundSchema: z.ZodType<
   UpdateToolResponseBodyParameters,
   z.ZodTypeDef,
   unknown
-> = collectExtraKeys$(
-  z.object({
-    type:
-      UpdateToolResponseBodyToolsResponse200ApplicationJson1Type$inboundSchema,
-    properties: z.record(z.any()),
-    required: z.array(z.string()),
-  }).catchall(z.any()),
-  "additionalProperties",
-  true,
+> = /* @__PURE__ */ lazySchema$(() =>
+  collectExtraKeys$(
+    z.object({
+      type:
+        UpdateToolResponseBodyToolsResponse200ApplicationJson1Type$inboundSchema,
+      properties: z.record(z.any()),
+      required: z.array(z.string()),
+    }).catchall(z.any()),
+    "additionalProperties",
+    true,
+  )
 );
 
 export function updateToolResponseBodyParametersFromJSON(
@@ -2133,13 +2246,15 @@ export const UpdateToolResponseBodyFunction$inboundSchema: z.ZodType<
   UpdateToolResponseBodyFunction,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string(),
-  description: z.string().optional(),
-  strict: z.boolean().optional(),
-  parameters: z.lazy(() => UpdateToolResponseBodyParameters$inboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+    description: z.string().optional(),
+    strict: z.boolean().optional(),
+    parameters: z.lazy(() => UpdateToolResponseBodyParameters$inboundSchema)
+      .optional(),
+  })
+);
 
 export function updateToolResponseBodyFunctionFromJSON(
   jsonString: string,
@@ -2156,31 +2271,33 @@ export const UpdateToolResponseBodyFunctionTool$inboundSchema: z.ZodType<
   UpdateToolResponseBodyFunctionTool,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  _id: z.string().default("tool_01M7WKM88SC5CSXQ2J0K002KGT"),
-  path: z.string(),
-  key: z.string(),
-  display_name: z.string().optional(),
-  description: z.string(),
-  created_by_id: z.nullable(z.string()).optional(),
-  updated_by_id: z.nullable(z.string()).optional(),
-  project_id: z.string(),
-  workspace_id: z.string(),
-  created: z.string(),
-  updated: z.string(),
-  status: UpdateToolResponseBodyStatus$inboundSchema.default("live"),
-  type: z.literal("function"),
-  function: z.lazy(() => UpdateToolResponseBodyFunction$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "_id": "id",
-    "display_name": "displayName",
-    "created_by_id": "createdById",
-    "updated_by_id": "updatedById",
-    "project_id": "projectId",
-    "workspace_id": "workspaceId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    _id: z.string().default("tool_01M7YVSPAXXZPJBZC3A6XVC1J7"),
+    path: z.string(),
+    key: z.string(),
+    display_name: z.string().optional(),
+    description: z.string(),
+    created_by_id: z.nullable(z.string()).optional(),
+    updated_by_id: z.nullable(z.string()).optional(),
+    project_id: z.string(),
+    workspace_id: z.string(),
+    created: z.string(),
+    updated: z.string(),
+    status: UpdateToolResponseBodyStatus$inboundSchema.default("live"),
+    type: z.literal("function"),
+    function: z.lazy(() => UpdateToolResponseBodyFunction$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "_id": "id",
+      "display_name": "displayName",
+      "created_by_id": "createdById",
+      "updated_by_id": "updatedById",
+      "project_id": "projectId",
+      "workspace_id": "workspaceId",
+    });
+  })
+);
 
 export function updateToolResponseBodyFunctionToolFromJSON(
   jsonString: string,
@@ -2198,12 +2315,14 @@ export const UpdateToolResponseBody$inboundSchema: z.ZodType<
   UpdateToolResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  z.lazy(() => UpdateToolResponseBodyFunctionTool$inboundSchema),
-  z.lazy(() => UpdateToolResponseBodyJSONSchemaTool$inboundSchema),
-  z.lazy(() => UpdateToolResponseBodyHTTPTool$inboundSchema),
-  z.lazy(() => UpdateToolResponseBodyCodeExecutionTool$inboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => UpdateToolResponseBodyFunctionTool$inboundSchema),
+    z.lazy(() => UpdateToolResponseBodyJSONSchemaTool$inboundSchema),
+    z.lazy(() => UpdateToolResponseBodyHTTPTool$inboundSchema),
+    z.lazy(() => UpdateToolResponseBodyCodeExecutionTool$inboundSchema),
+  ])
+);
 
 export function updateToolResponseBodyFromJSON(
   jsonString: string,

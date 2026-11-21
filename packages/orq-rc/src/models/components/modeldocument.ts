@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -66,57 +66,59 @@ export const ModelDocument$inboundSchema: z.ZodType<
   ModelDocument,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  configuration: ModelConfigurationResponse$inboundSchema,
-  created: z.string(),
-  description: z.nullable(z.string()),
-  display_name: z.string(),
-  docs_url: z.nullable(z.string()),
-  enabled: z.boolean(),
-  enabled_for_endpoints: z.boolean(),
-  enabled_for_playground: z.boolean(),
-  has_cpu_pricing: z.boolean(),
-  has_functions: z.boolean(),
-  id: z.string(),
-  input_cost: z.nullable(z.number()),
-  input_currency: z.string(),
-  is_active: z.boolean(),
-  legacy_uuid: z.string().optional(),
-  metadata: ModelMetadata$inboundSchema,
-  model_developer: z.string().optional(),
-  model_family: z.string().optional(),
-  model_id: z.string(),
-  model_type: z.string(),
-  output_cost: z.nullable(z.number()),
-  output_currency: z.string(),
-  owner: z.string(),
-  parameters: z.nullable(z.array(ModelParameterDocument$inboundSchema)),
-  pricing_url: z.nullable(z.string()),
-  provider: z.string(),
-  refId: z.string(),
-  sharing: ModelSharingConfig$inboundSchema.optional(),
-  updated: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "display_name": "displayName",
-    "docs_url": "docsUrl",
-    "enabled_for_endpoints": "enabledForEndpoints",
-    "enabled_for_playground": "enabledForPlayground",
-    "has_cpu_pricing": "hasCpuPricing",
-    "has_functions": "hasFunctions",
-    "input_cost": "inputCost",
-    "input_currency": "inputCurrency",
-    "is_active": "isActive",
-    "legacy_uuid": "legacyUuid",
-    "model_developer": "modelDeveloper",
-    "model_family": "modelFamily",
-    "model_id": "modelId",
-    "model_type": "modelType",
-    "output_cost": "outputCost",
-    "output_currency": "outputCurrency",
-    "pricing_url": "pricingUrl",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    configuration: ModelConfigurationResponse$inboundSchema,
+    created: z.string(),
+    description: z.nullable(z.string()),
+    display_name: z.string(),
+    docs_url: z.nullable(z.string()),
+    enabled: z.boolean(),
+    enabled_for_endpoints: z.boolean(),
+    enabled_for_playground: z.boolean(),
+    has_cpu_pricing: z.boolean(),
+    has_functions: z.boolean(),
+    id: z.string(),
+    input_cost: z.nullable(z.number()),
+    input_currency: z.string(),
+    is_active: z.boolean(),
+    legacy_uuid: z.string().optional(),
+    metadata: ModelMetadata$inboundSchema,
+    model_developer: z.string().optional(),
+    model_family: z.string().optional(),
+    model_id: z.string(),
+    model_type: z.string(),
+    output_cost: z.nullable(z.number()),
+    output_currency: z.string(),
+    owner: z.string(),
+    parameters: z.nullable(z.array(ModelParameterDocument$inboundSchema)),
+    pricing_url: z.nullable(z.string()),
+    provider: z.string(),
+    refId: z.string(),
+    sharing: ModelSharingConfig$inboundSchema.optional(),
+    updated: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "display_name": "displayName",
+      "docs_url": "docsUrl",
+      "enabled_for_endpoints": "enabledForEndpoints",
+      "enabled_for_playground": "enabledForPlayground",
+      "has_cpu_pricing": "hasCpuPricing",
+      "has_functions": "hasFunctions",
+      "input_cost": "inputCost",
+      "input_currency": "inputCurrency",
+      "is_active": "isActive",
+      "legacy_uuid": "legacyUuid",
+      "model_developer": "modelDeveloper",
+      "model_family": "modelFamily",
+      "model_id": "modelId",
+      "model_type": "modelType",
+      "output_cost": "outputCost",
+      "output_currency": "outputCurrency",
+      "pricing_url": "pricingUrl",
+    });
+  })
+);
 
 export function modelDocumentFromJSON(
   jsonString: string,

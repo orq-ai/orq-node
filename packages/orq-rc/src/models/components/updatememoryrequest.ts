@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type UpdateMemoryRequest = {
   metadata?: { [k: string]: string } | undefined;
@@ -18,9 +19,11 @@ export const UpdateMemoryRequest$outboundSchema: z.ZodType<
   UpdateMemoryRequest$Outbound,
   z.ZodTypeDef,
   UpdateMemoryRequest
-> = z.object({
-  metadata: z.record(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    metadata: z.record(z.string()).optional(),
+  })
+);
 
 export function updateMemoryRequestToJSON(
   updateMemoryRequest: UpdateMemoryRequest,

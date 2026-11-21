@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -21,19 +21,21 @@ export const SkillRepositorySource$inboundSchema: z.ZodType<
   SkillRepositorySource,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  connection_id: z.string().optional(),
-  repository_url: z.string().optional(),
-  ref: z.string().optional(),
-  subdirectory: z.string().optional(),
-  commit_sha: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "connection_id": "connectionId",
-    "repository_url": "repositoryUrl",
-    "commit_sha": "commitSha",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    connection_id: z.string().optional(),
+    repository_url: z.string().optional(),
+    ref: z.string().optional(),
+    subdirectory: z.string().optional(),
+    commit_sha: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "connection_id": "connectionId",
+      "repository_url": "repositoryUrl",
+      "commit_sha": "commitSha",
+    });
+  })
+);
 
 export function skillRepositorySourceFromJSON(
   jsonString: string,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -19,9 +19,11 @@ export const ResponseHealingPlugin$inboundSchema: z.ZodType<
   ResponseHealingPlugin,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.literal("response_healing"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.literal("response_healing"),
+  })
+);
 /** @internal */
 export type ResponseHealingPlugin$Outbound = {
   id: "response_healing";
@@ -32,9 +34,11 @@ export const ResponseHealingPlugin$outboundSchema: z.ZodType<
   ResponseHealingPlugin$Outbound,
   z.ZodTypeDef,
   ResponseHealingPlugin
-> = z.object({
-  id: z.literal("response_healing"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.literal("response_healing"),
+  })
+);
 
 export function responseHealingPluginToJSON(
   responseHealingPlugin: ResponseHealingPlugin,

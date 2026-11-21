@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import {
   CountMetadata,
   CountMetadata$Outbound,
@@ -52,21 +53,23 @@ export const DatasourcesServiceCreateRequest$outboundSchema: z.ZodType<
   DatasourcesServiceCreateRequest$Outbound,
   z.ZodTypeDef,
   DatasourcesServiceCreateRequest
-> = z.object({
-  displayName: z.string().optional(),
-  description: z.nullable(z.string()).optional(),
-  fileId: z.string().optional(),
-  chunkingOptions: DatasourceChunkingOptions$outboundSchema.optional(),
-  id: z.string().optional(),
-  attachment: DatasourceAttachment$outboundSchema.optional(),
-  metadata: CountMetadata$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    displayName: "display_name",
-    fileId: "file_id",
-    chunkingOptions: "chunking_options",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    displayName: z.string().optional(),
+    description: z.nullable(z.string()).optional(),
+    fileId: z.string().optional(),
+    chunkingOptions: DatasourceChunkingOptions$outboundSchema.optional(),
+    id: z.string().optional(),
+    attachment: DatasourceAttachment$outboundSchema.optional(),
+    metadata: CountMetadata$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      displayName: "display_name",
+      fileId: "file_id",
+      chunkingOptions: "chunking_options",
+    });
+  })
+);
 
 export function datasourcesServiceCreateRequestToJSON(
   datasourcesServiceCreateRequest: DatasourcesServiceCreateRequest,

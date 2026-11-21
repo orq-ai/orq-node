@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -37,7 +37,9 @@ export type OpenAIPromptCacheOptions = {
 /** @internal */
 export const OpenAIPromptCacheOptionsMode$inboundSchema: z.ZodNativeEnum<
   typeof OpenAIPromptCacheOptionsMode
-> = z.nativeEnum(OpenAIPromptCacheOptionsMode);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(OpenAIPromptCacheOptionsMode)
+);
 /** @internal */
 export const OpenAIPromptCacheOptionsMode$outboundSchema: z.ZodNativeEnum<
   typeof OpenAIPromptCacheOptionsMode
@@ -46,7 +48,9 @@ export const OpenAIPromptCacheOptionsMode$outboundSchema: z.ZodNativeEnum<
 /** @internal */
 export const OpenAIPromptCacheOptionsTtl$inboundSchema: z.ZodNativeEnum<
   typeof OpenAIPromptCacheOptionsTtl
-> = z.nativeEnum(OpenAIPromptCacheOptionsTtl);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(OpenAIPromptCacheOptionsTtl)
+);
 /** @internal */
 export const OpenAIPromptCacheOptionsTtl$outboundSchema: z.ZodNativeEnum<
   typeof OpenAIPromptCacheOptionsTtl
@@ -57,15 +61,17 @@ export const OpenAIPromptCacheOptions$inboundSchema: z.ZodType<
   OpenAIPromptCacheOptions,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  comparison_response_id: z.string().optional(),
-  mode: OpenAIPromptCacheOptionsMode$inboundSchema.optional(),
-  ttl: OpenAIPromptCacheOptionsTtl$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "comparison_response_id": "comparisonResponseId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    comparison_response_id: z.string().optional(),
+    mode: OpenAIPromptCacheOptionsMode$inboundSchema.optional(),
+    ttl: OpenAIPromptCacheOptionsTtl$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "comparison_response_id": "comparisonResponseId",
+    });
+  })
+);
 /** @internal */
 export type OpenAIPromptCacheOptions$Outbound = {
   comparison_response_id?: string | undefined;
@@ -78,15 +84,17 @@ export const OpenAIPromptCacheOptions$outboundSchema: z.ZodType<
   OpenAIPromptCacheOptions$Outbound,
   z.ZodTypeDef,
   OpenAIPromptCacheOptions
-> = z.object({
-  comparisonResponseId: z.string().optional(),
-  mode: OpenAIPromptCacheOptionsMode$outboundSchema.optional(),
-  ttl: OpenAIPromptCacheOptionsTtl$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    comparisonResponseId: "comparison_response_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    comparisonResponseId: z.string().optional(),
+    mode: OpenAIPromptCacheOptionsMode$outboundSchema.optional(),
+    ttl: OpenAIPromptCacheOptionsTtl$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      comparisonResponseId: "comparison_response_id",
+    });
+  })
+);
 
 export function openAIPromptCacheOptionsToJSON(
   openAIPromptCacheOptions: OpenAIPromptCacheOptions,

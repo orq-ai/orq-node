@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type SecurityConfig = {
   mask?: Array<string> | null | undefined;
@@ -18,9 +19,11 @@ export const SecurityConfig$outboundSchema: z.ZodType<
   SecurityConfig$Outbound,
   z.ZodTypeDef,
   SecurityConfig
-> = z.object({
-  mask: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    mask: z.nullable(z.array(z.string())).optional(),
+  })
+);
 
 export function securityConfigToJSON(securityConfig: SecurityConfig): string {
   return JSON.stringify(SecurityConfig$outboundSchema.parse(securityConfig));

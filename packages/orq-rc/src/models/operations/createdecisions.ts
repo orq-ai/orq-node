@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -216,7 +216,9 @@ export const CreateDecisionsQuestionsRouterDecisionsRequestRequestBodyInstructio
     CreateDecisionsQuestionsRouterDecisionsRequestRequestBodyInstructions$Outbound,
     z.ZodTypeDef,
     CreateDecisionsQuestionsRouterDecisionsRequestRequestBodyInstructions
-  > = z.union([z.string(), z.record(z.any()), z.array(z.any())]);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.union([z.string(), z.record(z.any()), z.array(z.any())])
+  );
 
 export function createDecisionsQuestionsRouterDecisionsRequestRequestBodyInstructionsToJSON(
   createDecisionsQuestionsRouterDecisionsRequestRequestBodyInstructions:
@@ -241,10 +243,12 @@ export const QuestionsBoxQuestion$outboundSchema: z.ZodType<
   QuestionsBoxQuestion$Outbound,
   z.ZodTypeDef,
   QuestionsBoxQuestion
-> = z.object({
-  instructions: z.union([z.string(), z.record(z.any()), z.array(z.any())]),
-  type: z.literal("box"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    instructions: z.union([z.string(), z.record(z.any()), z.array(z.any())]),
+    type: z.literal("box"),
+  })
+);
 
 export function questionsBoxQuestionToJSON(
   questionsBoxQuestion: QuestionsBoxQuestion,
@@ -266,7 +270,9 @@ export const CreateDecisionsQuestionsRouterDecisionsRequestInstructions$outbound
     CreateDecisionsQuestionsRouterDecisionsRequestInstructions$Outbound,
     z.ZodTypeDef,
     CreateDecisionsQuestionsRouterDecisionsRequestInstructions
-  > = z.union([z.string(), z.record(z.any()), z.array(z.any())]);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.union([z.string(), z.record(z.any()), z.array(z.any())])
+  );
 
 export function createDecisionsQuestionsRouterDecisionsRequestInstructionsToJSON(
   createDecisionsQuestionsRouterDecisionsRequestInstructions:
@@ -290,11 +296,13 @@ export const QuestionsScoreQuestion$outboundSchema: z.ZodType<
   QuestionsScoreQuestion$Outbound,
   z.ZodTypeDef,
   QuestionsScoreQuestion
-> = z.object({
-  criteria: z.array(z.any()),
-  instructions: z.union([z.string(), z.record(z.any()), z.array(z.any())]),
-  type: z.literal("score"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    criteria: z.array(z.any()),
+    instructions: z.union([z.string(), z.record(z.any()), z.array(z.any())]),
+    type: z.literal("score"),
+  })
+);
 
 export function questionsScoreQuestionToJSON(
   questionsScoreQuestion: QuestionsScoreQuestion,
@@ -316,7 +324,9 @@ export const CreateDecisionsQuestionsRouterDecisionsCriteria$outboundSchema:
     CreateDecisionsQuestionsRouterDecisionsCriteria$Outbound,
     z.ZodTypeDef,
     CreateDecisionsQuestionsRouterDecisionsCriteria
-  > = z.union([z.string(), z.record(z.any()), z.array(z.any())]);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.union([z.string(), z.record(z.any()), z.array(z.any())])
+  );
 
 export function createDecisionsQuestionsRouterDecisionsCriteriaToJSON(
   createDecisionsQuestionsRouterDecisionsCriteria:
@@ -341,7 +351,9 @@ export const CreateDecisionsQuestionsRouterDecisionsInstructions$outboundSchema:
     CreateDecisionsQuestionsRouterDecisionsInstructions$Outbound,
     z.ZodTypeDef,
     CreateDecisionsQuestionsRouterDecisionsInstructions
-  > = z.union([z.string(), z.record(z.any()), z.array(z.any())]);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.union([z.string(), z.record(z.any()), z.array(z.any())])
+  );
 
 export function createDecisionsQuestionsRouterDecisionsInstructionsToJSON(
   createDecisionsQuestionsRouterDecisionsInstructions:
@@ -366,13 +378,15 @@ export const QuestionsChoiceQuestion$outboundSchema: z.ZodType<
   QuestionsChoiceQuestion$Outbound,
   z.ZodTypeDef,
   QuestionsChoiceQuestion
-> = z.object({
-  criteria: z.record(
-    z.nullable(z.union([z.string(), z.record(z.any()), z.array(z.any())])),
-  ),
-  instructions: z.union([z.string(), z.record(z.any()), z.array(z.any())]),
-  type: z.literal("choice"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    criteria: z.record(
+      z.nullable(z.union([z.string(), z.record(z.any()), z.array(z.any())])),
+    ),
+    instructions: z.union([z.string(), z.record(z.any()), z.array(z.any())]),
+    type: z.literal("choice"),
+  })
+);
 
 export function questionsChoiceQuestionToJSON(
   questionsChoiceQuestion: QuestionsChoiceQuestion,
@@ -393,7 +407,9 @@ export const QuestionsFalse$outboundSchema: z.ZodType<
   QuestionsFalse$Outbound,
   z.ZodTypeDef,
   QuestionsFalse
-> = z.union([z.string(), z.record(z.any()), z.array(z.any())]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.record(z.any()), z.array(z.any())])
+);
 
 export function questionsFalseToJSON(questionsFalse: QuestionsFalse): string {
   return JSON.stringify(QuestionsFalse$outboundSchema.parse(questionsFalse));
@@ -407,7 +423,9 @@ export const QuestionsTrue$outboundSchema: z.ZodType<
   QuestionsTrue$Outbound,
   z.ZodTypeDef,
   QuestionsTrue
-> = z.union([z.string(), z.record(z.any()), z.array(z.any())]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.record(z.any()), z.array(z.any())])
+);
 
 export function questionsTrueToJSON(questionsTrue: QuestionsTrue): string {
   return JSON.stringify(QuestionsTrue$outboundSchema.parse(questionsTrue));
@@ -424,10 +442,13 @@ export const CreateDecisionsQuestionsCriteria$outboundSchema: z.ZodType<
   CreateDecisionsQuestionsCriteria$Outbound,
   z.ZodTypeDef,
   CreateDecisionsQuestionsCriteria
-> = z.object({
-  false: z.union([z.string(), z.record(z.any()), z.array(z.any())]).optional(),
-  true: z.union([z.string(), z.record(z.any()), z.array(z.any())]).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    false: z.union([z.string(), z.record(z.any()), z.array(z.any())])
+      .optional(),
+    true: z.union([z.string(), z.record(z.any()), z.array(z.any())]).optional(),
+  })
+);
 
 export function createDecisionsQuestionsCriteriaToJSON(
   createDecisionsQuestionsCriteria: CreateDecisionsQuestionsCriteria,
@@ -449,7 +470,9 @@ export const CreateDecisionsQuestionsInstructions$outboundSchema: z.ZodType<
   CreateDecisionsQuestionsInstructions$Outbound,
   z.ZodTypeDef,
   CreateDecisionsQuestionsInstructions
-> = z.union([z.string(), z.record(z.any()), z.array(z.any())]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.record(z.any()), z.array(z.any())])
+);
 
 export function createDecisionsQuestionsInstructionsToJSON(
   createDecisionsQuestionsInstructions: CreateDecisionsQuestionsInstructions,
@@ -473,12 +496,14 @@ export const QuestionsNoulQuestion$outboundSchema: z.ZodType<
   QuestionsNoulQuestion$Outbound,
   z.ZodTypeDef,
   QuestionsNoulQuestion
-> = z.object({
-  criteria: z.lazy(() => CreateDecisionsQuestionsCriteria$outboundSchema)
-    .optional(),
-  instructions: z.union([z.string(), z.record(z.any()), z.array(z.any())]),
-  type: z.literal("noul"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    criteria: z.lazy(() => CreateDecisionsQuestionsCriteria$outboundSchema)
+      .optional(),
+    instructions: z.union([z.string(), z.record(z.any()), z.array(z.any())]),
+    type: z.literal("noul"),
+  })
+);
 
 export function questionsNoulQuestionToJSON(
   questionsNoulQuestion: QuestionsNoulQuestion,
@@ -500,12 +525,14 @@ export const CreateDecisionsQuestions$outboundSchema: z.ZodType<
   CreateDecisionsQuestions$Outbound,
   z.ZodTypeDef,
   CreateDecisionsQuestions
-> = z.union([
-  z.lazy(() => QuestionsNoulQuestion$outboundSchema),
-  z.lazy(() => QuestionsChoiceQuestion$outboundSchema),
-  z.lazy(() => QuestionsScoreQuestion$outboundSchema),
-  z.lazy(() => QuestionsBoxQuestion$outboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => QuestionsNoulQuestion$outboundSchema),
+    z.lazy(() => QuestionsChoiceQuestion$outboundSchema),
+    z.lazy(() => QuestionsScoreQuestion$outboundSchema),
+    z.lazy(() => QuestionsBoxQuestion$outboundSchema),
+  ])
+);
 
 export function createDecisionsQuestionsToJSON(
   createDecisionsQuestions: CreateDecisionsQuestions,
@@ -526,7 +553,9 @@ export const CreateDecisionsState$outboundSchema: z.ZodType<
   CreateDecisionsState$Outbound,
   z.ZodTypeDef,
   CreateDecisionsState
-> = z.union([z.string(), z.record(z.any()), z.array(z.any())]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.record(z.any()), z.array(z.any())])
+);
 
 export function createDecisionsStateToJSON(
   createDecisionsState: CreateDecisionsState,
@@ -567,37 +596,37 @@ export const CreateDecisionsRequestBody$outboundSchema: z.ZodType<
   CreateDecisionsRequestBody$Outbound,
   z.ZodTypeDef,
   CreateDecisionsRequestBody
-> = z.object({
-  assets: z.record(components.ClassifyAsset$outboundSchema).optional(),
-  cache: components.ClassifyCacheConfig$outboundSchema.optional(),
-  fallbackOnCodes: z.nullable(z.array(z.number().int())).optional(),
-  fallbacks: z.nullable(z.array(components.FallbackConfig$outboundSchema))
-    .optional(),
-  identity: components.ResponseIdentity$outboundSchema.optional(),
-  metadata: z.record(z.string()).optional(),
-  model: z.string(),
-  name: z.string().optional(),
-  promptCacheKey: z.string().optional(),
-  promptCacheOptions: components.ClassifyPromptCacheOptions$outboundSchema
-    .optional(),
-  questions: z.record(
-    z.union([
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    assets: z.record(components.ClassifyAsset$outboundSchema).optional(),
+    cache: components.ClassifyCacheConfig$outboundSchema.optional(),
+    fallbackOnCodes: z.nullable(z.array(z.number().int())).optional(),
+    fallbacks: z.nullable(z.array(components.FallbackConfig$outboundSchema))
+      .optional(),
+    identity: components.ResponseIdentity$outboundSchema.optional(),
+    metadata: z.record(z.string()).optional(),
+    model: z.string(),
+    name: z.string().optional(),
+    promptCacheKey: z.string().optional(),
+    promptCacheOptions: components.ClassifyPromptCacheOptions$outboundSchema
+      .optional(),
+    questions: z.record(z.union([
       z.lazy(() => QuestionsNoulQuestion$outboundSchema),
       z.lazy(() => QuestionsChoiceQuestion$outboundSchema),
       z.lazy(() => QuestionsScoreQuestion$outboundSchema),
       z.lazy(() => QuestionsBoxQuestion$outboundSchema),
-    ]),
-  ),
-  retry: components.ClassifyRetryConfig$outboundSchema.optional(),
-  state: z.union([z.string(), z.record(z.any()), z.array(z.any())]),
-  timeout: components.ClassifyTimeoutConfig$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    fallbackOnCodes: "fallback_on_codes",
-    promptCacheKey: "prompt_cache_key",
-    promptCacheOptions: "prompt_cache_options",
-  });
-});
+    ])),
+    retry: components.ClassifyRetryConfig$outboundSchema.optional(),
+    state: z.union([z.string(), z.record(z.any()), z.array(z.any())]),
+    timeout: components.ClassifyTimeoutConfig$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      fallbackOnCodes: "fallback_on_codes",
+      promptCacheKey: "prompt_cache_key",
+      promptCacheOptions: "prompt_cache_options",
+    });
+  })
+);
 
 export function createDecisionsRequestBodyToJSON(
   createDecisionsRequestBody: CreateDecisionsRequestBody,
@@ -612,12 +641,14 @@ export const CreateDecisionsResponseBody$inboundSchema: z.ZodType<
   CreateDecisionsResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  answers: z.record(components.ClassifyAnswer$inboundSchema),
-  model: z.string(),
-  telemetry: components.ResponseTelemetry$inboundSchema.optional(),
-  usage: components.ClassifyUsage$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    answers: z.record(components.ClassifyAnswer$inboundSchema),
+    model: z.string(),
+    telemetry: components.ResponseTelemetry$inboundSchema.optional(),
+    usage: components.ClassifyUsage$inboundSchema,
+  })
+);
 
 export function createDecisionsResponseBodyFromJSON(
   jsonString: string,

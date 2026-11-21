@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 /**
  * Layout change for one column.
@@ -40,16 +41,18 @@ export const ColumnLayout$outboundSchema: z.ZodType<
   ColumnLayout$Outbound,
   z.ZodTypeDef,
   ColumnLayout
-> = z.object({
-  columnId: z.string(),
-  position: z.number().int().optional(),
-  width: z.number().int().optional(),
-  active: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    columnId: "column_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    columnId: z.string(),
+    position: z.number().int().optional(),
+    width: z.number().int().optional(),
+    active: z.boolean().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      columnId: "column_id",
+    });
+  })
+);
 
 export function columnLayoutToJSON(columnLayout: ColumnLayout): string {
   return JSON.stringify(ColumnLayout$outboundSchema.parse(columnLayout));

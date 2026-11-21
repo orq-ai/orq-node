@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type TracesGetConversationRequest = {
   traceId: string;
@@ -24,15 +25,17 @@ export const TracesGetConversationRequest$outboundSchema: z.ZodType<
   TracesGetConversationRequest$Outbound,
   z.ZodTypeDef,
   TracesGetConversationRequest
-> = z.object({
-  traceId: z.string(),
-  spanId: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    traceId: "trace_id",
-    spanId: "span_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    traceId: z.string(),
+    spanId: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      traceId: "trace_id",
+      spanId: "span_id",
+    });
+  })
+);
 
 export function tracesGetConversationRequestToJSON(
   tracesGetConversationRequest: TracesGetConversationRequest,

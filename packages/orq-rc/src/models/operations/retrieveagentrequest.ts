@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
@@ -1355,13 +1355,15 @@ export const RetrieveAgentRequestRequest$outboundSchema: z.ZodType<
   RetrieveAgentRequestRequest$Outbound,
   z.ZodTypeDef,
   RetrieveAgentRequestRequest
-> = z.object({
-  agentKey: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    agentKey: "agent_key",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    agentKey: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      agentKey: "agent_key",
+    });
+  })
+);
 
 export function retrieveAgentRequestRequestToJSON(
   retrieveAgentRequestRequest: RetrieveAgentRequestRequest,
@@ -1376,17 +1378,19 @@ export function retrieveAgentRequestRequestToJSON(
 /** @internal */
 export const RetrieveAgentRequestStatus$inboundSchema: z.ZodNativeEnum<
   typeof RetrieveAgentRequestStatus
-> = z.nativeEnum(RetrieveAgentRequestStatus);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(RetrieveAgentRequestStatus));
 
 /** @internal */
 export const RetrieveAgentRequestTeamOfAgents$inboundSchema: z.ZodType<
   RetrieveAgentRequestTeamOfAgents,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  key: z.string(),
-  role: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    key: z.string(),
+    role: z.string().optional(),
+  })
+);
 
 export function retrieveAgentRequestTeamOfAgentsFromJSON(
   jsonString: string,
@@ -1403,10 +1407,12 @@ export const RetrieveAgentRequestAgentPlugins$inboundSchema: z.ZodType<
   RetrieveAgentRequestAgentPlugins,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  version: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    version: z.string(),
+  })
+);
 
 export function retrieveAgentRequestAgentPluginsFromJSON(
   jsonString: string,
@@ -1423,13 +1429,15 @@ export const RetrieveAgentRequestMetrics$inboundSchema: z.ZodType<
   RetrieveAgentRequestMetrics,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  total_cost: z.number().default(0),
-}).transform((v) => {
-  return remap$(v, {
-    "total_cost": "totalCost",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    total_cost: z.number().default(0),
+  }).transform((v) => {
+    return remap$(v, {
+      "total_cost": "totalCost",
+    });
+  })
+);
 
 export function retrieveAgentRequestMetricsFromJSON(
   jsonString: string,
@@ -1446,13 +1454,15 @@ export const RetrieveAgentRequestKnowledgeBases$inboundSchema: z.ZodType<
   RetrieveAgentRequestKnowledgeBases,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  knowledge_id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "knowledge_id": "knowledgeId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    knowledge_id: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "knowledge_id": "knowledgeId",
+    });
+  })
+);
 
 export function retrieveAgentRequestKnowledgeBasesFromJSON(
   jsonString: string,
@@ -1468,33 +1478,37 @@ export function retrieveAgentRequestKnowledgeBasesFromJSON(
 /** @internal */
 export const RetrieveAgentRequestSource$inboundSchema: z.ZodNativeEnum<
   typeof RetrieveAgentRequestSource
-> = z.nativeEnum(RetrieveAgentRequestSource);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(RetrieveAgentRequestSource));
 
 /** @internal */
 export const RetrieveAgentRequestEngine$inboundSchema: z.ZodNativeEnum<
   typeof RetrieveAgentRequestEngine
-> = z.nativeEnum(RetrieveAgentRequestEngine);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(RetrieveAgentRequestEngine));
 
 /** @internal */
 export const RetrieveAgentRequestType$inboundSchema: z.ZodNativeEnum<
   typeof RetrieveAgentRequestType
-> = z.nativeEnum(RetrieveAgentRequestType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(RetrieveAgentRequestType));
 
 /** @internal */
 export const RetrieveAgentRequestToolApprovalRequired$inboundSchema:
-  z.ZodNativeEnum<typeof RetrieveAgentRequestToolApprovalRequired> = z
-    .nativeEnum(RetrieveAgentRequestToolApprovalRequired);
+  z.ZodNativeEnum<typeof RetrieveAgentRequestToolApprovalRequired> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(RetrieveAgentRequestToolApprovalRequired)
+    );
 
 /** @internal */
 export const RetrieveAgentRequestConditions$inboundSchema: z.ZodType<
   RetrieveAgentRequestConditions,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  condition: z.string(),
-  operator: z.string(),
-  value: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    condition: z.string(),
+    operator: z.string(),
+    value: z.string(),
+  })
+);
 
 export function retrieveAgentRequestConditionsFromJSON(
   jsonString: string,
@@ -1511,29 +1525,31 @@ export const RetrieveAgentRequestTools$inboundSchema: z.ZodType<
   RetrieveAgentRequestTools,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  key: z.string().optional(),
-  action_type: z.string(),
-  display_name: z.string().optional(),
-  description: z.string().optional(),
-  configuration: z.record(z.any()).optional(),
-  requires_approval: z.boolean().default(false),
-  tool_id: z.string().optional(),
-  whole_server: z.boolean().optional(),
-  conditions: z.array(
-    z.lazy(() => RetrieveAgentRequestConditions$inboundSchema),
-  ).optional(),
-  timeout: z.number().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "action_type": "actionType",
-    "display_name": "displayName",
-    "requires_approval": "requiresApproval",
-    "tool_id": "toolId",
-    "whole_server": "wholeServer",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    key: z.string().optional(),
+    action_type: z.string(),
+    display_name: z.string().optional(),
+    description: z.string().optional(),
+    configuration: z.record(z.any()).optional(),
+    requires_approval: z.boolean().default(false),
+    tool_id: z.string().optional(),
+    whole_server: z.boolean().optional(),
+    conditions: z.array(
+      z.lazy(() => RetrieveAgentRequestConditions$inboundSchema),
+    ).optional(),
+    timeout: z.number().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "action_type": "actionType",
+      "display_name": "displayName",
+      "requires_approval": "requiresApproval",
+      "tool_id": "toolId",
+      "whole_server": "wholeServer",
+    });
+  })
+);
 
 export function retrieveAgentRequestToolsFromJSON(
   jsonString: string,
@@ -1548,24 +1564,28 @@ export function retrieveAgentRequestToolsFromJSON(
 /** @internal */
 export const RetrieveAgentRequestExecuteOn$inboundSchema: z.ZodNativeEnum<
   typeof RetrieveAgentRequestExecuteOn
-> = z.nativeEnum(RetrieveAgentRequestExecuteOn);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(RetrieveAgentRequestExecuteOn)
+);
 
 /** @internal */
 export const RetrieveAgentRequestEvaluators$inboundSchema: z.ZodType<
   RetrieveAgentRequestEvaluators,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  sample_rate: z.number().default(50),
-  execute_on: RetrieveAgentRequestExecuteOn$inboundSchema,
-  options: z.record(z.any()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "sample_rate": "sampleRate",
-    "execute_on": "executeOn",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    sample_rate: z.number().default(50),
+    execute_on: RetrieveAgentRequestExecuteOn$inboundSchema,
+    options: z.record(z.any()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "sample_rate": "sampleRate",
+      "execute_on": "executeOn",
+    });
+  })
+);
 
 export function retrieveAgentRequestEvaluatorsFromJSON(
   jsonString: string,
@@ -1580,24 +1600,28 @@ export function retrieveAgentRequestEvaluatorsFromJSON(
 /** @internal */
 export const RetrieveAgentRequestAgentsExecuteOn$inboundSchema: z.ZodNativeEnum<
   typeof RetrieveAgentRequestAgentsExecuteOn
-> = z.nativeEnum(RetrieveAgentRequestAgentsExecuteOn);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(RetrieveAgentRequestAgentsExecuteOn)
+);
 
 /** @internal */
 export const RetrieveAgentRequestGuardrails$inboundSchema: z.ZodType<
   RetrieveAgentRequestGuardrails,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  sample_rate: z.number().default(50),
-  execute_on: RetrieveAgentRequestAgentsExecuteOn$inboundSchema,
-  options: z.record(z.any()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "sample_rate": "sampleRate",
-    "execute_on": "executeOn",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    sample_rate: z.number().default(50),
+    execute_on: RetrieveAgentRequestAgentsExecuteOn$inboundSchema,
+    options: z.record(z.any()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "sample_rate": "sampleRate",
+      "execute_on": "executeOn",
+    });
+  })
+);
 
 export function retrieveAgentRequestGuardrailsFromJSON(
   jsonString: string,
@@ -1614,30 +1638,34 @@ export const RetrieveAgentRequestSettings$inboundSchema: z.ZodType<
   RetrieveAgentRequestSettings,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  max_iterations: z.number().int().default(100),
-  max_execution_time: z.number().int().default(600),
-  max_cost: z.number().default(0),
-  tool_approval_required: RetrieveAgentRequestToolApprovalRequired$inboundSchema
-    .default("respect_tool"),
-  chat_exposed: z.boolean().optional(),
-  tools: z.array(z.lazy(() => RetrieveAgentRequestTools$inboundSchema))
-    .optional(),
-  evaluators: z.array(
-    z.lazy(() => RetrieveAgentRequestEvaluators$inboundSchema),
-  ).optional(),
-  guardrails: z.array(
-    z.lazy(() => RetrieveAgentRequestGuardrails$inboundSchema),
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "max_iterations": "maxIterations",
-    "max_execution_time": "maxExecutionTime",
-    "max_cost": "maxCost",
-    "tool_approval_required": "toolApprovalRequired",
-    "chat_exposed": "chatExposed",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    max_iterations: z.number().int().default(100),
+    max_execution_time: z.number().int().default(600),
+    max_cost: z.number().default(0),
+    tool_approval_required:
+      RetrieveAgentRequestToolApprovalRequired$inboundSchema.default(
+        "respect_tool",
+      ),
+    chat_exposed: z.boolean().optional(),
+    tools: z.array(z.lazy(() => RetrieveAgentRequestTools$inboundSchema))
+      .optional(),
+    evaluators: z.array(
+      z.lazy(() => RetrieveAgentRequestEvaluators$inboundSchema),
+    ).optional(),
+    guardrails: z.array(
+      z.lazy(() => RetrieveAgentRequestGuardrails$inboundSchema),
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "max_iterations": "maxIterations",
+      "max_execution_time": "maxExecutionTime",
+      "max_cost": "maxCost",
+      "tool_approval_required": "toolApprovalRequired",
+      "chat_exposed": "chatExposed",
+    });
+  })
+);
 
 export function retrieveAgentRequestSettingsFromJSON(
   jsonString: string,
@@ -1655,12 +1683,14 @@ export const RetrieveAgentRequestResponseFormatJsonSchema$inboundSchema:
     RetrieveAgentRequestResponseFormatJsonSchema,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    description: z.string().optional(),
-    name: z.string(),
-    schema: z.any().optional(),
-    strict: z.boolean().default(false),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      description: z.string().optional(),
+      name: z.string(),
+      schema: z.any().optional(),
+      strict: z.boolean().default(false),
+    })
+  );
 
 export function retrieveAgentRequestResponseFormatJsonSchemaFromJSON(
   jsonString: string,
@@ -1684,16 +1714,18 @@ export const RetrieveAgentRequestResponseFormatAgentsJSONSchema$inboundSchema:
     RetrieveAgentRequestResponseFormatAgentsJSONSchema,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    type: z.literal("json_schema"),
-    json_schema: z.lazy(() =>
-      RetrieveAgentRequestResponseFormatJsonSchema$inboundSchema
-    ),
-  }).transform((v) => {
-    return remap$(v, {
-      "json_schema": "jsonSchema",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type: z.literal("json_schema"),
+      json_schema: z.lazy(() =>
+        RetrieveAgentRequestResponseFormatJsonSchema$inboundSchema
+      ),
+    }).transform((v) => {
+      return remap$(v, {
+        "json_schema": "jsonSchema",
+      });
+    })
+  );
 
 export function retrieveAgentRequestResponseFormatAgentsJSONSchemaFromJSON(
   jsonString: string,
@@ -1717,9 +1749,11 @@ export const RetrieveAgentRequestResponseFormatJSONObject$inboundSchema:
     RetrieveAgentRequestResponseFormatJSONObject,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    type: z.literal("json_object"),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type: z.literal("json_object"),
+    })
+  );
 
 export function retrieveAgentRequestResponseFormatJSONObjectFromJSON(
   jsonString: string,
@@ -1742,9 +1776,11 @@ export const RetrieveAgentRequestResponseFormatText$inboundSchema: z.ZodType<
   RetrieveAgentRequestResponseFormatText,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("text"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("text"),
+  })
+);
 
 export function retrieveAgentRequestResponseFormatTextFromJSON(
   jsonString: string,
@@ -1762,13 +1798,15 @@ export const RetrieveAgentRequestResponseFormat$inboundSchema: z.ZodType<
   RetrieveAgentRequestResponseFormat,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  z.lazy(() => RetrieveAgentRequestResponseFormatText$inboundSchema),
-  z.lazy(() => RetrieveAgentRequestResponseFormatJSONObject$inboundSchema),
-  z.lazy(() =>
-    RetrieveAgentRequestResponseFormatAgentsJSONSchema$inboundSchema
-  ),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => RetrieveAgentRequestResponseFormatText$inboundSchema),
+    z.lazy(() => RetrieveAgentRequestResponseFormatJSONObject$inboundSchema),
+    z.lazy(() =>
+      RetrieveAgentRequestResponseFormatAgentsJSONSchema$inboundSchema
+    ),
+  ])
+);
 
 export function retrieveAgentRequestResponseFormatFromJSON(
   jsonString: string,
@@ -1784,14 +1822,18 @@ export function retrieveAgentRequestResponseFormatFromJSON(
 /** @internal */
 export const RetrieveAgentRequestReasoningEffort$inboundSchema: z.ZodNativeEnum<
   typeof RetrieveAgentRequestReasoningEffort
-> = z.nativeEnum(RetrieveAgentRequestReasoningEffort);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(RetrieveAgentRequestReasoningEffort)
+);
 
 /** @internal */
 export const RetrieveAgentRequestStop$inboundSchema: z.ZodType<
   RetrieveAgentRequestStop,
   z.ZodTypeDef,
   unknown
-> = z.union([z.string(), z.array(z.string())]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.array(z.string())])
+);
 
 export function retrieveAgentRequestStopFromJSON(
   jsonString: string,
@@ -1808,12 +1850,14 @@ export const RetrieveAgentRequestThinking$inboundSchema: z.ZodType<
   RetrieveAgentRequestThinking,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  components.ThinkingConfigDisabledSchema$inboundSchema,
-  components.ThinkingConfigEnabledSchema$inboundSchema,
-  components.ThinkingConfigAdaptiveSchema$inboundSchema,
-  components.ThinkingConfigBetweenToolsSchema$inboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    components.ThinkingConfigDisabledSchema$inboundSchema,
+    components.ThinkingConfigEnabledSchema$inboundSchema,
+    components.ThinkingConfigAdaptiveSchema$inboundSchema,
+    components.ThinkingConfigBetweenToolsSchema$inboundSchema,
+  ])
+);
 
 export function retrieveAgentRequestThinkingFromJSON(
   jsonString: string,
@@ -1828,16 +1872,20 @@ export function retrieveAgentRequestThinkingFromJSON(
 /** @internal */
 export const RetrieveAgentRequestToolChoiceType$inboundSchema: z.ZodNativeEnum<
   typeof RetrieveAgentRequestToolChoiceType
-> = z.nativeEnum(RetrieveAgentRequestToolChoiceType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(RetrieveAgentRequestToolChoiceType)
+);
 
 /** @internal */
 export const RetrieveAgentRequestToolChoiceFunction$inboundSchema: z.ZodType<
   RetrieveAgentRequestToolChoiceFunction,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+  })
+);
 
 export function retrieveAgentRequestToolChoiceFunctionFromJSON(
   jsonString: string,
@@ -1855,10 +1903,14 @@ export const RetrieveAgentRequestToolChoice2$inboundSchema: z.ZodType<
   RetrieveAgentRequestToolChoice2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: RetrieveAgentRequestToolChoiceType$inboundSchema.optional(),
-  function: z.lazy(() => RetrieveAgentRequestToolChoiceFunction$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: RetrieveAgentRequestToolChoiceType$inboundSchema.optional(),
+    function: z.lazy(() =>
+      RetrieveAgentRequestToolChoiceFunction$inboundSchema
+    ),
+  })
+);
 
 export function retrieveAgentRequestToolChoice2FromJSON(
   jsonString: string,
@@ -1873,17 +1925,21 @@ export function retrieveAgentRequestToolChoice2FromJSON(
 /** @internal */
 export const RetrieveAgentRequestToolChoice1$inboundSchema: z.ZodNativeEnum<
   typeof RetrieveAgentRequestToolChoice1
-> = z.nativeEnum(RetrieveAgentRequestToolChoice1);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(RetrieveAgentRequestToolChoice1)
+);
 
 /** @internal */
 export const RetrieveAgentRequestToolChoice$inboundSchema: z.ZodType<
   RetrieveAgentRequestToolChoice,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  z.lazy(() => RetrieveAgentRequestToolChoice2$inboundSchema),
-  RetrieveAgentRequestToolChoice1$inboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => RetrieveAgentRequestToolChoice2$inboundSchema),
+    RetrieveAgentRequestToolChoice1$inboundSchema,
+  ])
+);
 
 export function retrieveAgentRequestToolChoiceFromJSON(
   jsonString: string,
@@ -1898,19 +1954,23 @@ export function retrieveAgentRequestToolChoiceFromJSON(
 /** @internal */
 export const RetrieveAgentRequestModalities$inboundSchema: z.ZodNativeEnum<
   typeof RetrieveAgentRequestModalities
-> = z.nativeEnum(RetrieveAgentRequestModalities);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(RetrieveAgentRequestModalities)
+);
 
 /** @internal */
 export const RetrieveAgentRequestId1$inboundSchema: z.ZodNativeEnum<
   typeof RetrieveAgentRequestId1
-> = z.nativeEnum(RetrieveAgentRequestId1);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(RetrieveAgentRequestId1));
 
 /** @internal */
 export const RetrieveAgentRequestId$inboundSchema: z.ZodType<
   RetrieveAgentRequestId,
   z.ZodTypeDef,
   unknown
-> = z.union([RetrieveAgentRequestId1$inboundSchema, z.string()]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([RetrieveAgentRequestId1$inboundSchema, z.string()])
+);
 
 export function retrieveAgentRequestIdFromJSON(
   jsonString: string,
@@ -1924,22 +1984,26 @@ export function retrieveAgentRequestIdFromJSON(
 
 /** @internal */
 export const RetrieveAgentRequestAgentsResponseExecuteOn$inboundSchema:
-  z.ZodNativeEnum<typeof RetrieveAgentRequestAgentsResponseExecuteOn> = z
-    .nativeEnum(RetrieveAgentRequestAgentsResponseExecuteOn);
+  z.ZodNativeEnum<typeof RetrieveAgentRequestAgentsResponseExecuteOn> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(RetrieveAgentRequestAgentsResponseExecuteOn)
+    );
 
 /** @internal */
 export const RetrieveAgentRequestAgentsGuardrails$inboundSchema: z.ZodType<
   RetrieveAgentRequestAgentsGuardrails,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.union([RetrieveAgentRequestId1$inboundSchema, z.string()]),
-  execute_on: RetrieveAgentRequestAgentsResponseExecuteOn$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "execute_on": "executeOn",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.union([RetrieveAgentRequestId1$inboundSchema, z.string()]),
+    execute_on: RetrieveAgentRequestAgentsResponseExecuteOn$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "execute_on": "executeOn",
+    });
+  })
+);
 
 export function retrieveAgentRequestAgentsGuardrailsFromJSON(
   jsonString: string,
@@ -1957,13 +2021,15 @@ export const RetrieveAgentRequestPlugins$inboundSchema: z.ZodType<
   RetrieveAgentRequestPlugins,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  components.PIIRedactionPlugin$inboundSchema.and(
-    z.object({ id: z.literal("pii_redaction") }),
-  ),
-  components.ResponseHealingPlugin$inboundSchema,
-  components.TraceScrubbingPlugin$inboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    components.PIIRedactionPlugin$inboundSchema.and(
+      z.object({ id: z.literal("pii_redaction") }),
+    ),
+    components.ResponseHealingPlugin$inboundSchema,
+    components.TraceScrubbingPlugin$inboundSchema,
+  ])
+);
 
 export function retrieveAgentRequestPluginsFromJSON(
   jsonString: string,
@@ -1980,9 +2046,11 @@ export const RetrieveAgentRequestFallbacks$inboundSchema: z.ZodType<
   RetrieveAgentRequestFallbacks,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  model: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model: z.string(),
+  })
+);
 
 export function retrieveAgentRequestFallbacksFromJSON(
   jsonString: string,
@@ -1997,17 +2065,21 @@ export function retrieveAgentRequestFallbacksFromJSON(
 /** @internal */
 export const RetrieveAgentRequestAgentsType$inboundSchema: z.ZodNativeEnum<
   typeof RetrieveAgentRequestAgentsType
-> = z.nativeEnum(RetrieveAgentRequestAgentsType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(RetrieveAgentRequestAgentsType)
+);
 
 /** @internal */
 export const RetrieveAgentRequestCache$inboundSchema: z.ZodType<
   RetrieveAgentRequestCache,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  ttl: z.number().default(3600),
-  type: RetrieveAgentRequestAgentsType$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ttl: z.number().default(3600),
+    type: RetrieveAgentRequestAgentsType$inboundSchema,
+  })
+);
 
 export function retrieveAgentRequestCacheFromJSON(
   jsonString: string,
@@ -2021,19 +2093,22 @@ export function retrieveAgentRequestCacheFromJSON(
 
 /** @internal */
 export const RetrieveAgentRequestLoadBalancerType$inboundSchema:
-  z.ZodNativeEnum<typeof RetrieveAgentRequestLoadBalancerType> = z.nativeEnum(
-    RetrieveAgentRequestLoadBalancerType,
-  );
+  z.ZodNativeEnum<typeof RetrieveAgentRequestLoadBalancerType> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(RetrieveAgentRequestLoadBalancerType)
+    );
 
 /** @internal */
 export const RetrieveAgentRequestLoadBalancerModels$inboundSchema: z.ZodType<
   RetrieveAgentRequestLoadBalancerModels,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  model: z.string(),
-  weight: z.number().default(0.5),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model: z.string(),
+    weight: z.number().default(0.5),
+  })
+);
 
 export function retrieveAgentRequestLoadBalancerModelsFromJSON(
   jsonString: string,
@@ -2051,12 +2126,14 @@ export const RetrieveAgentRequestLoadBalancer1$inboundSchema: z.ZodType<
   RetrieveAgentRequestLoadBalancer1,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: RetrieveAgentRequestLoadBalancerType$inboundSchema,
-  models: z.array(
-    z.lazy(() => RetrieveAgentRequestLoadBalancerModels$inboundSchema),
-  ),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: RetrieveAgentRequestLoadBalancerType$inboundSchema,
+    models: z.array(
+      z.lazy(() => RetrieveAgentRequestLoadBalancerModels$inboundSchema),
+    ),
+  })
+);
 
 export function retrieveAgentRequestLoadBalancer1FromJSON(
   jsonString: string,
@@ -2073,7 +2150,9 @@ export const RetrieveAgentRequestLoadBalancer$inboundSchema: z.ZodType<
   RetrieveAgentRequestLoadBalancer,
   z.ZodTypeDef,
   unknown
-> = z.lazy(() => RetrieveAgentRequestLoadBalancer1$inboundSchema);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.lazy(() => RetrieveAgentRequestLoadBalancer1$inboundSchema)
+);
 
 export function retrieveAgentRequestLoadBalancerFromJSON(
   jsonString: string,
@@ -2090,13 +2169,15 @@ export const RetrieveAgentRequestTimeout$inboundSchema: z.ZodType<
   RetrieveAgentRequestTimeout,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  call_timeout: z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    "call_timeout": "callTimeout",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    call_timeout: z.number(),
+  }).transform((v) => {
+    return remap$(v, {
+      "call_timeout": "callTimeout",
+    });
+  })
+);
 
 export function retrieveAgentRequestTimeoutFromJSON(
   jsonString: string,
@@ -2110,24 +2191,27 @@ export function retrieveAgentRequestTimeoutFromJSON(
 
 /** @internal */
 export const RetrieveAgentRequestAgentsResponseType$inboundSchema:
-  z.ZodNativeEnum<typeof RetrieveAgentRequestAgentsResponseType> = z.nativeEnum(
-    RetrieveAgentRequestAgentsResponseType,
-  );
+  z.ZodNativeEnum<typeof RetrieveAgentRequestAgentsResponseType> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(RetrieveAgentRequestAgentsResponseType)
+    );
 
 /** @internal */
 export const RetrieveAgentRequestTtl$inboundSchema: z.ZodNativeEnum<
   typeof RetrieveAgentRequestTtl
-> = z.nativeEnum(RetrieveAgentRequestTtl);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(RetrieveAgentRequestTtl));
 
 /** @internal */
 export const RetrieveAgentRequestCacheControl$inboundSchema: z.ZodType<
   RetrieveAgentRequestCacheControl,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: RetrieveAgentRequestAgentsResponseType$inboundSchema,
-  ttl: RetrieveAgentRequestTtl$inboundSchema.default("5m"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: RetrieveAgentRequestAgentsResponseType$inboundSchema,
+    ttl: RetrieveAgentRequestTtl$inboundSchema.default("5m"),
+  })
+);
 
 export function retrieveAgentRequestCacheControlFromJSON(
   jsonString: string,
@@ -2144,80 +2228,84 @@ export const RetrieveAgentRequestParameters$inboundSchema: z.ZodType<
   RetrieveAgentRequestParameters,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string().optional(),
-  frequency_penalty: z.nullable(z.number()).optional(),
-  max_tokens: z.nullable(z.number().int()).optional(),
-  max_completion_tokens: z.nullable(z.number().int()).optional(),
-  presence_penalty: z.nullable(z.number()).optional(),
-  response_format: z.union([
-    z.lazy(() => RetrieveAgentRequestResponseFormatText$inboundSchema),
-    z.lazy(() => RetrieveAgentRequestResponseFormatJSONObject$inboundSchema),
-    z.lazy(() =>
-      RetrieveAgentRequestResponseFormatAgentsJSONSchema$inboundSchema
-    ),
-  ]).optional(),
-  reasoning_effort: RetrieveAgentRequestReasoningEffort$inboundSchema
-    .optional(),
-  verbosity: z.string().optional(),
-  seed: z.nullable(z.number()).optional(),
-  stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
-  thinking: z.union([
-    components.ThinkingConfigDisabledSchema$inboundSchema,
-    components.ThinkingConfigEnabledSchema$inboundSchema,
-    components.ThinkingConfigAdaptiveSchema$inboundSchema,
-    components.ThinkingConfigBetweenToolsSchema$inboundSchema,
-  ]).optional(),
-  temperature: z.nullable(z.number()).optional(),
-  top_p: z.nullable(z.number()).optional(),
-  top_k: z.nullable(z.number()).optional(),
-  tool_choice: z.union([
-    z.lazy(() => RetrieveAgentRequestToolChoice2$inboundSchema),
-    RetrieveAgentRequestToolChoice1$inboundSchema,
-  ]).optional(),
-  parallel_tool_calls: z.boolean().optional(),
-  modalities: z.nullable(z.array(RetrieveAgentRequestModalities$inboundSchema))
-    .optional(),
-  guardrails: z.array(
-    z.lazy(() => RetrieveAgentRequestAgentsGuardrails$inboundSchema),
-  ).optional(),
-  plugins: z.array(
-    z.union([
-      components.PIIRedactionPlugin$inboundSchema.and(
-        z.object({ id: z.literal("pii_redaction") }),
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    frequency_penalty: z.nullable(z.number()).optional(),
+    max_tokens: z.nullable(z.number().int()).optional(),
+    max_completion_tokens: z.nullable(z.number().int()).optional(),
+    presence_penalty: z.nullable(z.number()).optional(),
+    response_format: z.union([
+      z.lazy(() => RetrieveAgentRequestResponseFormatText$inboundSchema),
+      z.lazy(() => RetrieveAgentRequestResponseFormatJSONObject$inboundSchema),
+      z.lazy(() =>
+        RetrieveAgentRequestResponseFormatAgentsJSONSchema$inboundSchema
       ),
-      components.ResponseHealingPlugin$inboundSchema,
-      components.TraceScrubbingPlugin$inboundSchema,
-    ]),
-  ).optional(),
-  fallback_on_codes: z.array(z.number().int()).optional(),
-  fallbacks: z.array(z.lazy(() => RetrieveAgentRequestFallbacks$inboundSchema))
-    .optional(),
-  cache: z.lazy(() => RetrieveAgentRequestCache$inboundSchema).optional(),
-  load_balancer: z.lazy(() => RetrieveAgentRequestLoadBalancer1$inboundSchema)
-    .optional(),
-  timeout: z.lazy(() => RetrieveAgentRequestTimeout$inboundSchema).optional(),
-  cache_control: z.lazy(() => RetrieveAgentRequestCacheControl$inboundSchema)
-    .optional(),
-  prompt_cache_key: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "frequency_penalty": "frequencyPenalty",
-    "max_tokens": "maxTokens",
-    "max_completion_tokens": "maxCompletionTokens",
-    "presence_penalty": "presencePenalty",
-    "response_format": "responseFormat",
-    "reasoning_effort": "reasoningEffort",
-    "top_p": "topP",
-    "top_k": "topK",
-    "tool_choice": "toolChoice",
-    "parallel_tool_calls": "parallelToolCalls",
-    "fallback_on_codes": "fallbackOnCodes",
-    "load_balancer": "loadBalancer",
-    "cache_control": "cacheControl",
-    "prompt_cache_key": "promptCacheKey",
-  });
-});
+    ]).optional(),
+    reasoning_effort: RetrieveAgentRequestReasoningEffort$inboundSchema
+      .optional(),
+    verbosity: z.string().optional(),
+    seed: z.nullable(z.number()).optional(),
+    stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
+    thinking: z.union([
+      components.ThinkingConfigDisabledSchema$inboundSchema,
+      components.ThinkingConfigEnabledSchema$inboundSchema,
+      components.ThinkingConfigAdaptiveSchema$inboundSchema,
+      components.ThinkingConfigBetweenToolsSchema$inboundSchema,
+    ]).optional(),
+    temperature: z.nullable(z.number()).optional(),
+    top_p: z.nullable(z.number()).optional(),
+    top_k: z.nullable(z.number()).optional(),
+    tool_choice: z.union([
+      z.lazy(() => RetrieveAgentRequestToolChoice2$inboundSchema),
+      RetrieveAgentRequestToolChoice1$inboundSchema,
+    ]).optional(),
+    parallel_tool_calls: z.boolean().optional(),
+    modalities: z.nullable(
+      z.array(RetrieveAgentRequestModalities$inboundSchema),
+    ).optional(),
+    guardrails: z.array(
+      z.lazy(() => RetrieveAgentRequestAgentsGuardrails$inboundSchema),
+    ).optional(),
+    plugins: z.array(
+      z.union([
+        components.PIIRedactionPlugin$inboundSchema.and(
+          z.object({ id: z.literal("pii_redaction") }),
+        ),
+        components.ResponseHealingPlugin$inboundSchema,
+        components.TraceScrubbingPlugin$inboundSchema,
+      ]),
+    ).optional(),
+    fallback_on_codes: z.array(z.number().int()).optional(),
+    fallbacks: z.array(
+      z.lazy(() => RetrieveAgentRequestFallbacks$inboundSchema),
+    ).optional(),
+    cache: z.lazy(() => RetrieveAgentRequestCache$inboundSchema).optional(),
+    load_balancer: z.lazy(() => RetrieveAgentRequestLoadBalancer1$inboundSchema)
+      .optional(),
+    timeout: z.lazy(() => RetrieveAgentRequestTimeout$inboundSchema).optional(),
+    cache_control: z.lazy(() => RetrieveAgentRequestCacheControl$inboundSchema)
+      .optional(),
+    prompt_cache_key: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "frequency_penalty": "frequencyPenalty",
+      "max_tokens": "maxTokens",
+      "max_completion_tokens": "maxCompletionTokens",
+      "presence_penalty": "presencePenalty",
+      "response_format": "responseFormat",
+      "reasoning_effort": "reasoningEffort",
+      "top_p": "topP",
+      "top_k": "topK",
+      "tool_choice": "toolChoice",
+      "parallel_tool_calls": "parallelToolCalls",
+      "fallback_on_codes": "fallbackOnCodes",
+      "load_balancer": "loadBalancer",
+      "cache_control": "cacheControl",
+      "prompt_cache_key": "promptCacheKey",
+    });
+  })
+);
 
 export function retrieveAgentRequestParametersFromJSON(
   jsonString: string,
@@ -2234,14 +2322,16 @@ export const RetrieveAgentRequestRetry$inboundSchema: z.ZodType<
   RetrieveAgentRequestRetry,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  count: z.number().default(3),
-  on_codes: z.array(z.number()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "on_codes": "onCodes",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    count: z.number().default(3),
+    on_codes: z.array(z.number()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "on_codes": "onCodes",
+    });
+  })
+);
 
 export function retrieveAgentRequestRetryFromJSON(
   jsonString: string,
@@ -2259,12 +2349,14 @@ export const RetrieveAgentRequestResponseFormatAgentsResponseJsonSchema$inboundS
     RetrieveAgentRequestResponseFormatAgentsResponseJsonSchema,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    description: z.string().optional(),
-    name: z.string(),
-    schema: z.any().optional(),
-    strict: z.boolean().default(false),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      description: z.string().optional(),
+      name: z.string(),
+      schema: z.any().optional(),
+      strict: z.boolean().default(false),
+    })
+  );
 
 export function retrieveAgentRequestResponseFormatAgentsResponseJsonSchemaFromJSON(
   jsonString: string,
@@ -2287,16 +2379,18 @@ export const RetrieveAgentRequestResponseFormatAgentsResponse200JSONSchema$inbou
     RetrieveAgentRequestResponseFormatAgentsResponse200JSONSchema,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    type: z.literal("json_schema"),
-    json_schema: z.lazy(() =>
-      RetrieveAgentRequestResponseFormatAgentsResponseJsonSchema$inboundSchema
-    ),
-  }).transform((v) => {
-    return remap$(v, {
-      "json_schema": "jsonSchema",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type: z.literal("json_schema"),
+      json_schema: z.lazy(() =>
+        RetrieveAgentRequestResponseFormatAgentsResponseJsonSchema$inboundSchema
+      ),
+    }).transform((v) => {
+      return remap$(v, {
+        "json_schema": "jsonSchema",
+      });
+    })
+  );
 
 export function retrieveAgentRequestResponseFormatAgentsResponse200JSONSchemaFromJSON(
   jsonString: string,
@@ -2319,9 +2413,11 @@ export const RetrieveAgentRequestResponseFormatAgentsJSONObject$inboundSchema:
     RetrieveAgentRequestResponseFormatAgentsJSONObject,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    type: z.literal("json_object"),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type: z.literal("json_object"),
+    })
+  );
 
 export function retrieveAgentRequestResponseFormatAgentsJSONObjectFromJSON(
   jsonString: string,
@@ -2345,9 +2441,11 @@ export const RetrieveAgentRequestResponseFormatAgentsText$inboundSchema:
     RetrieveAgentRequestResponseFormatAgentsText,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    type: z.literal("text"),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type: z.literal("text"),
+    })
+  );
 
 export function retrieveAgentRequestResponseFormatAgentsTextFromJSON(
   jsonString: string,
@@ -2371,15 +2469,17 @@ export const RetrieveAgentRequestFallbackModelConfigurationResponseFormat$inboun
     RetrieveAgentRequestFallbackModelConfigurationResponseFormat,
     z.ZodTypeDef,
     unknown
-  > = z.union([
-    z.lazy(() => RetrieveAgentRequestResponseFormatAgentsText$inboundSchema),
-    z.lazy(() =>
-      RetrieveAgentRequestResponseFormatAgentsJSONObject$inboundSchema
-    ),
-    z.lazy(() =>
-      RetrieveAgentRequestResponseFormatAgentsResponse200JSONSchema$inboundSchema
-    ),
-  ]);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.union([
+      z.lazy(() => RetrieveAgentRequestResponseFormatAgentsText$inboundSchema),
+      z.lazy(() =>
+        RetrieveAgentRequestResponseFormatAgentsJSONObject$inboundSchema
+      ),
+      z.lazy(() =>
+        RetrieveAgentRequestResponseFormatAgentsResponse200JSONSchema$inboundSchema
+      ),
+    ])
+  );
 
 export function retrieveAgentRequestFallbackModelConfigurationResponseFormatFromJSON(
   jsonString: string,
@@ -2400,8 +2500,8 @@ export function retrieveAgentRequestFallbackModelConfigurationResponseFormatFrom
 export const RetrieveAgentRequestFallbackModelConfigurationReasoningEffort$inboundSchema:
   z.ZodNativeEnum<
     typeof RetrieveAgentRequestFallbackModelConfigurationReasoningEffort
-  > = z.nativeEnum(
-    RetrieveAgentRequestFallbackModelConfigurationReasoningEffort,
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.nativeEnum(RetrieveAgentRequestFallbackModelConfigurationReasoningEffort)
   );
 
 /** @internal */
@@ -2410,7 +2510,9 @@ export const RetrieveAgentRequestFallbackModelConfigurationStop$inboundSchema:
     RetrieveAgentRequestFallbackModelConfigurationStop,
     z.ZodTypeDef,
     unknown
-  > = z.union([z.string(), z.array(z.string())]);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.union([z.string(), z.array(z.string())])
+  );
 
 export function retrieveAgentRequestFallbackModelConfigurationStopFromJSON(
   jsonString: string,
@@ -2434,12 +2536,14 @@ export const RetrieveAgentRequestFallbackModelConfigurationThinking$inboundSchem
     RetrieveAgentRequestFallbackModelConfigurationThinking,
     z.ZodTypeDef,
     unknown
-  > = z.union([
-    components.ThinkingConfigDisabledSchema$inboundSchema,
-    components.ThinkingConfigEnabledSchema$inboundSchema,
-    components.ThinkingConfigAdaptiveSchema$inboundSchema,
-    components.ThinkingConfigBetweenToolsSchema$inboundSchema,
-  ]);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.union([
+      components.ThinkingConfigDisabledSchema$inboundSchema,
+      components.ThinkingConfigEnabledSchema$inboundSchema,
+      components.ThinkingConfigAdaptiveSchema$inboundSchema,
+      components.ThinkingConfigBetweenToolsSchema$inboundSchema,
+    ])
+  );
 
 export function retrieveAgentRequestFallbackModelConfigurationThinkingFromJSON(
   jsonString: string,
@@ -2458,8 +2562,10 @@ export function retrieveAgentRequestFallbackModelConfigurationThinkingFromJSON(
 
 /** @internal */
 export const RetrieveAgentRequestToolChoiceAgentsType$inboundSchema:
-  z.ZodNativeEnum<typeof RetrieveAgentRequestToolChoiceAgentsType> = z
-    .nativeEnum(RetrieveAgentRequestToolChoiceAgentsType);
+  z.ZodNativeEnum<typeof RetrieveAgentRequestToolChoiceAgentsType> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(RetrieveAgentRequestToolChoiceAgentsType)
+    );
 
 /** @internal */
 export const RetrieveAgentRequestToolChoiceAgentsFunction$inboundSchema:
@@ -2467,9 +2573,11 @@ export const RetrieveAgentRequestToolChoiceAgentsFunction$inboundSchema:
     RetrieveAgentRequestToolChoiceAgentsFunction,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    name: z.string(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      name: z.string(),
+    })
+  );
 
 export function retrieveAgentRequestToolChoiceAgentsFunctionFromJSON(
   jsonString: string,
@@ -2492,12 +2600,14 @@ export const RetrieveAgentRequestToolChoiceAgents2$inboundSchema: z.ZodType<
   RetrieveAgentRequestToolChoiceAgents2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: RetrieveAgentRequestToolChoiceAgentsType$inboundSchema.optional(),
-  function: z.lazy(() =>
-    RetrieveAgentRequestToolChoiceAgentsFunction$inboundSchema
-  ),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: RetrieveAgentRequestToolChoiceAgentsType$inboundSchema.optional(),
+    function: z.lazy(() =>
+      RetrieveAgentRequestToolChoiceAgentsFunction$inboundSchema
+    ),
+  })
+);
 
 export function retrieveAgentRequestToolChoiceAgents2FromJSON(
   jsonString: string,
@@ -2512,9 +2622,10 @@ export function retrieveAgentRequestToolChoiceAgents2FromJSON(
 
 /** @internal */
 export const RetrieveAgentRequestToolChoiceAgents1$inboundSchema:
-  z.ZodNativeEnum<typeof RetrieveAgentRequestToolChoiceAgents1> = z.nativeEnum(
-    RetrieveAgentRequestToolChoiceAgents1,
-  );
+  z.ZodNativeEnum<typeof RetrieveAgentRequestToolChoiceAgents1> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(RetrieveAgentRequestToolChoiceAgents1)
+    );
 
 /** @internal */
 export const RetrieveAgentRequestFallbackModelConfigurationToolChoice$inboundSchema:
@@ -2522,10 +2633,12 @@ export const RetrieveAgentRequestFallbackModelConfigurationToolChoice$inboundSch
     RetrieveAgentRequestFallbackModelConfigurationToolChoice,
     z.ZodTypeDef,
     unknown
-  > = z.union([
-    z.lazy(() => RetrieveAgentRequestToolChoiceAgents2$inboundSchema),
-    RetrieveAgentRequestToolChoiceAgents1$inboundSchema,
-  ]);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.union([
+      z.lazy(() => RetrieveAgentRequestToolChoiceAgents2$inboundSchema),
+      RetrieveAgentRequestToolChoiceAgents1$inboundSchema,
+    ])
+  );
 
 export function retrieveAgentRequestFallbackModelConfigurationToolChoiceFromJSON(
   jsonString: string,
@@ -2546,12 +2659,16 @@ export function retrieveAgentRequestFallbackModelConfigurationToolChoiceFromJSON
 export const RetrieveAgentRequestFallbackModelConfigurationModalities$inboundSchema:
   z.ZodNativeEnum<
     typeof RetrieveAgentRequestFallbackModelConfigurationModalities
-  > = z.nativeEnum(RetrieveAgentRequestFallbackModelConfigurationModalities);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.nativeEnum(RetrieveAgentRequestFallbackModelConfigurationModalities)
+  );
 
 /** @internal */
 export const RetrieveAgentRequestIdAgents1$inboundSchema: z.ZodNativeEnum<
   typeof RetrieveAgentRequestIdAgents1
-> = z.nativeEnum(RetrieveAgentRequestIdAgents1);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(RetrieveAgentRequestIdAgents1)
+);
 
 /** @internal */
 export const RetrieveAgentRequestFallbackModelConfigurationId$inboundSchema:
@@ -2559,7 +2676,9 @@ export const RetrieveAgentRequestFallbackModelConfigurationId$inboundSchema:
     RetrieveAgentRequestFallbackModelConfigurationId,
     z.ZodTypeDef,
     unknown
-  > = z.union([RetrieveAgentRequestIdAgents1$inboundSchema, z.string()]);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.union([RetrieveAgentRequestIdAgents1$inboundSchema, z.string()])
+  );
 
 export function retrieveAgentRequestFallbackModelConfigurationIdFromJSON(
   jsonString: string,
@@ -2581,7 +2700,9 @@ export function retrieveAgentRequestFallbackModelConfigurationIdFromJSON(
 export const RetrieveAgentRequestFallbackModelConfigurationExecuteOn$inboundSchema:
   z.ZodNativeEnum<
     typeof RetrieveAgentRequestFallbackModelConfigurationExecuteOn
-  > = z.nativeEnum(RetrieveAgentRequestFallbackModelConfigurationExecuteOn);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.nativeEnum(RetrieveAgentRequestFallbackModelConfigurationExecuteOn)
+  );
 
 /** @internal */
 export const RetrieveAgentRequestFallbackModelConfigurationGuardrails$inboundSchema:
@@ -2589,15 +2710,17 @@ export const RetrieveAgentRequestFallbackModelConfigurationGuardrails$inboundSch
     RetrieveAgentRequestFallbackModelConfigurationGuardrails,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    id: z.union([RetrieveAgentRequestIdAgents1$inboundSchema, z.string()]),
-    execute_on:
-      RetrieveAgentRequestFallbackModelConfigurationExecuteOn$inboundSchema,
-  }).transform((v) => {
-    return remap$(v, {
-      "execute_on": "executeOn",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.union([RetrieveAgentRequestIdAgents1$inboundSchema, z.string()]),
+      execute_on:
+        RetrieveAgentRequestFallbackModelConfigurationExecuteOn$inboundSchema,
+    }).transform((v) => {
+      return remap$(v, {
+        "execute_on": "executeOn",
+      });
+    })
+  );
 
 export function retrieveAgentRequestFallbackModelConfigurationGuardrailsFromJSON(
   jsonString: string,
@@ -2620,13 +2743,15 @@ export const RetrieveAgentRequestFallbackModelConfigurationPlugins$inboundSchema
     RetrieveAgentRequestFallbackModelConfigurationPlugins,
     z.ZodTypeDef,
     unknown
-  > = z.union([
-    components.PIIRedactionPlugin$inboundSchema.and(
-      z.object({ id: z.literal("pii_redaction") }),
-    ),
-    components.ResponseHealingPlugin$inboundSchema,
-    components.TraceScrubbingPlugin$inboundSchema,
-  ]);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.union([
+      components.PIIRedactionPlugin$inboundSchema.and(
+        z.object({ id: z.literal("pii_redaction") }),
+      ),
+      components.ResponseHealingPlugin$inboundSchema,
+      components.TraceScrubbingPlugin$inboundSchema,
+    ])
+  );
 
 export function retrieveAgentRequestFallbackModelConfigurationPluginsFromJSON(
   jsonString: string,
@@ -2650,9 +2775,11 @@ export const RetrieveAgentRequestFallbackModelConfigurationFallbacks$inboundSche
     RetrieveAgentRequestFallbackModelConfigurationFallbacks,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    model: z.string(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      model: z.string(),
+    })
+  );
 
 export function retrieveAgentRequestFallbackModelConfigurationFallbacksFromJSON(
   jsonString: string,
@@ -2671,8 +2798,10 @@ export function retrieveAgentRequestFallbackModelConfigurationFallbacksFromJSON(
 
 /** @internal */
 export const RetrieveAgentRequestFallbackModelConfigurationType$inboundSchema:
-  z.ZodNativeEnum<typeof RetrieveAgentRequestFallbackModelConfigurationType> = z
-    .nativeEnum(RetrieveAgentRequestFallbackModelConfigurationType);
+  z.ZodNativeEnum<typeof RetrieveAgentRequestFallbackModelConfigurationType> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(RetrieveAgentRequestFallbackModelConfigurationType)
+    );
 
 /** @internal */
 export const RetrieveAgentRequestFallbackModelConfigurationCache$inboundSchema:
@@ -2680,10 +2809,12 @@ export const RetrieveAgentRequestFallbackModelConfigurationCache$inboundSchema:
     RetrieveAgentRequestFallbackModelConfigurationCache,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ttl: z.number().default(3600),
-    type: RetrieveAgentRequestFallbackModelConfigurationType$inboundSchema,
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ttl: z.number().default(3600),
+      type: RetrieveAgentRequestFallbackModelConfigurationType$inboundSchema,
+    })
+  );
 
 export function retrieveAgentRequestFallbackModelConfigurationCacheFromJSON(
   jsonString: string,
@@ -2703,8 +2834,10 @@ export function retrieveAgentRequestFallbackModelConfigurationCacheFromJSON(
 
 /** @internal */
 export const RetrieveAgentRequestLoadBalancerAgentsType$inboundSchema:
-  z.ZodNativeEnum<typeof RetrieveAgentRequestLoadBalancerAgentsType> = z
-    .nativeEnum(RetrieveAgentRequestLoadBalancerAgentsType);
+  z.ZodNativeEnum<typeof RetrieveAgentRequestLoadBalancerAgentsType> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(RetrieveAgentRequestLoadBalancerAgentsType)
+    );
 
 /** @internal */
 export const RetrieveAgentRequestLoadBalancerAgentsModels$inboundSchema:
@@ -2712,10 +2845,12 @@ export const RetrieveAgentRequestLoadBalancerAgentsModels$inboundSchema:
     RetrieveAgentRequestLoadBalancerAgentsModels,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    model: z.string(),
-    weight: z.number().default(0.5),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      model: z.string(),
+      weight: z.number().default(0.5),
+    })
+  );
 
 export function retrieveAgentRequestLoadBalancerAgentsModelsFromJSON(
   jsonString: string,
@@ -2738,12 +2873,14 @@ export const RetrieveAgentRequestLoadBalancerAgents1$inboundSchema: z.ZodType<
   RetrieveAgentRequestLoadBalancerAgents1,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: RetrieveAgentRequestLoadBalancerAgentsType$inboundSchema,
-  models: z.array(
-    z.lazy(() => RetrieveAgentRequestLoadBalancerAgentsModels$inboundSchema),
-  ),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: RetrieveAgentRequestLoadBalancerAgentsType$inboundSchema,
+    models: z.array(
+      z.lazy(() => RetrieveAgentRequestLoadBalancerAgentsModels$inboundSchema),
+    ),
+  })
+);
 
 export function retrieveAgentRequestLoadBalancerAgents1FromJSON(
   jsonString: string,
@@ -2767,7 +2904,9 @@ export const RetrieveAgentRequestFallbackModelConfigurationLoadBalancer$inboundS
     RetrieveAgentRequestFallbackModelConfigurationLoadBalancer,
     z.ZodTypeDef,
     unknown
-  > = z.lazy(() => RetrieveAgentRequestLoadBalancerAgents1$inboundSchema);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.lazy(() => RetrieveAgentRequestLoadBalancerAgents1$inboundSchema)
+  );
 
 export function retrieveAgentRequestFallbackModelConfigurationLoadBalancerFromJSON(
   jsonString: string,
@@ -2790,13 +2929,15 @@ export const RetrieveAgentRequestFallbackModelConfigurationTimeout$inboundSchema
     RetrieveAgentRequestFallbackModelConfigurationTimeout,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    call_timeout: z.number(),
-  }).transform((v) => {
-    return remap$(v, {
-      "call_timeout": "callTimeout",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      call_timeout: z.number(),
+    }).transform((v) => {
+      return remap$(v, {
+        "call_timeout": "callTimeout",
+      });
+    })
+  );
 
 export function retrieveAgentRequestFallbackModelConfigurationTimeoutFromJSON(
   jsonString: string,
@@ -2818,12 +2959,16 @@ export function retrieveAgentRequestFallbackModelConfigurationTimeoutFromJSON(
 export const RetrieveAgentRequestFallbackModelConfigurationAgentsType$inboundSchema:
   z.ZodNativeEnum<
     typeof RetrieveAgentRequestFallbackModelConfigurationAgentsType
-  > = z.nativeEnum(RetrieveAgentRequestFallbackModelConfigurationAgentsType);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.nativeEnum(RetrieveAgentRequestFallbackModelConfigurationAgentsType)
+  );
 
 /** @internal */
 export const RetrieveAgentRequestFallbackModelConfigurationTtl$inboundSchema:
-  z.ZodNativeEnum<typeof RetrieveAgentRequestFallbackModelConfigurationTtl> = z
-    .nativeEnum(RetrieveAgentRequestFallbackModelConfigurationTtl);
+  z.ZodNativeEnum<typeof RetrieveAgentRequestFallbackModelConfigurationTtl> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(RetrieveAgentRequestFallbackModelConfigurationTtl)
+    );
 
 /** @internal */
 export const RetrieveAgentRequestFallbackModelConfigurationCacheControl$inboundSchema:
@@ -2831,12 +2976,14 @@ export const RetrieveAgentRequestFallbackModelConfigurationCacheControl$inboundS
     RetrieveAgentRequestFallbackModelConfigurationCacheControl,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    type:
-      RetrieveAgentRequestFallbackModelConfigurationAgentsType$inboundSchema,
-    ttl: RetrieveAgentRequestFallbackModelConfigurationTtl$inboundSchema
-      .default("5m"),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type:
+        RetrieveAgentRequestFallbackModelConfigurationAgentsType$inboundSchema,
+      ttl: RetrieveAgentRequestFallbackModelConfigurationTtl$inboundSchema
+        .default("5m"),
+    })
+  );
 
 export function retrieveAgentRequestFallbackModelConfigurationCacheControlFromJSON(
   jsonString: string,
@@ -2859,97 +3006,101 @@ export const RetrieveAgentRequestFallbackModelConfigurationParameters$inboundSch
     RetrieveAgentRequestFallbackModelConfigurationParameters,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    name: z.string().optional(),
-    frequency_penalty: z.nullable(z.number()).optional(),
-    max_tokens: z.nullable(z.number().int()).optional(),
-    max_completion_tokens: z.nullable(z.number().int()).optional(),
-    presence_penalty: z.nullable(z.number()).optional(),
-    response_format: z.union([
-      z.lazy(() => RetrieveAgentRequestResponseFormatAgentsText$inboundSchema),
-      z.lazy(() =>
-        RetrieveAgentRequestResponseFormatAgentsJSONObject$inboundSchema
-      ),
-      z.lazy(() =>
-        RetrieveAgentRequestResponseFormatAgentsResponse200JSONSchema$inboundSchema
-      ),
-    ]).optional(),
-    reasoning_effort:
-      RetrieveAgentRequestFallbackModelConfigurationReasoningEffort$inboundSchema
-        .optional(),
-    verbosity: z.string().optional(),
-    seed: z.nullable(z.number()).optional(),
-    stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
-    thinking: z.union([
-      components.ThinkingConfigDisabledSchema$inboundSchema,
-      components.ThinkingConfigEnabledSchema$inboundSchema,
-      components.ThinkingConfigAdaptiveSchema$inboundSchema,
-      components.ThinkingConfigBetweenToolsSchema$inboundSchema,
-    ]).optional(),
-    temperature: z.nullable(z.number()).optional(),
-    top_p: z.nullable(z.number()).optional(),
-    top_k: z.nullable(z.number()).optional(),
-    tool_choice: z.union([
-      z.lazy(() => RetrieveAgentRequestToolChoiceAgents2$inboundSchema),
-      RetrieveAgentRequestToolChoiceAgents1$inboundSchema,
-    ]).optional(),
-    parallel_tool_calls: z.boolean().optional(),
-    modalities: z.nullable(
-      z.array(
-        RetrieveAgentRequestFallbackModelConfigurationModalities$inboundSchema,
-      ),
-    ).optional(),
-    guardrails: z.array(
-      z.lazy(() =>
-        RetrieveAgentRequestFallbackModelConfigurationGuardrails$inboundSchema
-      ),
-    ).optional(),
-    plugins: z.array(
-      z.union([
-        components.PIIRedactionPlugin$inboundSchema.and(
-          z.object({ id: z.literal("pii_redaction") }),
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      name: z.string().optional(),
+      frequency_penalty: z.nullable(z.number()).optional(),
+      max_tokens: z.nullable(z.number().int()).optional(),
+      max_completion_tokens: z.nullable(z.number().int()).optional(),
+      presence_penalty: z.nullable(z.number()).optional(),
+      response_format: z.union([
+        z.lazy(() =>
+          RetrieveAgentRequestResponseFormatAgentsText$inboundSchema
         ),
-        components.ResponseHealingPlugin$inboundSchema,
-        components.TraceScrubbingPlugin$inboundSchema,
-      ]),
-    ).optional(),
-    fallback_on_codes: z.array(z.number().int()).optional(),
-    fallbacks: z.array(
-      z.lazy(() =>
-        RetrieveAgentRequestFallbackModelConfigurationFallbacks$inboundSchema
-      ),
-    ).optional(),
-    cache: z.lazy(() =>
-      RetrieveAgentRequestFallbackModelConfigurationCache$inboundSchema
-    ).optional(),
-    load_balancer: z.lazy(() =>
-      RetrieveAgentRequestLoadBalancerAgents1$inboundSchema
-    ).optional(),
-    timeout: z.lazy(() =>
-      RetrieveAgentRequestFallbackModelConfigurationTimeout$inboundSchema
-    ).optional(),
-    cache_control: z.lazy(() =>
-      RetrieveAgentRequestFallbackModelConfigurationCacheControl$inboundSchema
-    ).optional(),
-    prompt_cache_key: z.string().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "frequency_penalty": "frequencyPenalty",
-      "max_tokens": "maxTokens",
-      "max_completion_tokens": "maxCompletionTokens",
-      "presence_penalty": "presencePenalty",
-      "response_format": "responseFormat",
-      "reasoning_effort": "reasoningEffort",
-      "top_p": "topP",
-      "top_k": "topK",
-      "tool_choice": "toolChoice",
-      "parallel_tool_calls": "parallelToolCalls",
-      "fallback_on_codes": "fallbackOnCodes",
-      "load_balancer": "loadBalancer",
-      "cache_control": "cacheControl",
-      "prompt_cache_key": "promptCacheKey",
-    });
-  });
+        z.lazy(() =>
+          RetrieveAgentRequestResponseFormatAgentsJSONObject$inboundSchema
+        ),
+        z.lazy(() =>
+          RetrieveAgentRequestResponseFormatAgentsResponse200JSONSchema$inboundSchema
+        ),
+      ]).optional(),
+      reasoning_effort:
+        RetrieveAgentRequestFallbackModelConfigurationReasoningEffort$inboundSchema
+          .optional(),
+      verbosity: z.string().optional(),
+      seed: z.nullable(z.number()).optional(),
+      stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
+      thinking: z.union([
+        components.ThinkingConfigDisabledSchema$inboundSchema,
+        components.ThinkingConfigEnabledSchema$inboundSchema,
+        components.ThinkingConfigAdaptiveSchema$inboundSchema,
+        components.ThinkingConfigBetweenToolsSchema$inboundSchema,
+      ]).optional(),
+      temperature: z.nullable(z.number()).optional(),
+      top_p: z.nullable(z.number()).optional(),
+      top_k: z.nullable(z.number()).optional(),
+      tool_choice: z.union([
+        z.lazy(() => RetrieveAgentRequestToolChoiceAgents2$inboundSchema),
+        RetrieveAgentRequestToolChoiceAgents1$inboundSchema,
+      ]).optional(),
+      parallel_tool_calls: z.boolean().optional(),
+      modalities: z.nullable(
+        z.array(
+          RetrieveAgentRequestFallbackModelConfigurationModalities$inboundSchema,
+        ),
+      ).optional(),
+      guardrails: z.array(
+        z.lazy(() =>
+          RetrieveAgentRequestFallbackModelConfigurationGuardrails$inboundSchema
+        ),
+      ).optional(),
+      plugins: z.array(
+        z.union([
+          components.PIIRedactionPlugin$inboundSchema.and(
+            z.object({ id: z.literal("pii_redaction") }),
+          ),
+          components.ResponseHealingPlugin$inboundSchema,
+          components.TraceScrubbingPlugin$inboundSchema,
+        ]),
+      ).optional(),
+      fallback_on_codes: z.array(z.number().int()).optional(),
+      fallbacks: z.array(
+        z.lazy(() =>
+          RetrieveAgentRequestFallbackModelConfigurationFallbacks$inboundSchema
+        ),
+      ).optional(),
+      cache: z.lazy(() =>
+        RetrieveAgentRequestFallbackModelConfigurationCache$inboundSchema
+      ).optional(),
+      load_balancer: z.lazy(() =>
+        RetrieveAgentRequestLoadBalancerAgents1$inboundSchema
+      ).optional(),
+      timeout: z.lazy(() =>
+        RetrieveAgentRequestFallbackModelConfigurationTimeout$inboundSchema
+      ).optional(),
+      cache_control: z.lazy(() =>
+        RetrieveAgentRequestFallbackModelConfigurationCacheControl$inboundSchema
+      ).optional(),
+      prompt_cache_key: z.string().optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "frequency_penalty": "frequencyPenalty",
+        "max_tokens": "maxTokens",
+        "max_completion_tokens": "maxCompletionTokens",
+        "presence_penalty": "presencePenalty",
+        "response_format": "responseFormat",
+        "reasoning_effort": "reasoningEffort",
+        "top_p": "topP",
+        "top_k": "topK",
+        "tool_choice": "toolChoice",
+        "parallel_tool_calls": "parallelToolCalls",
+        "fallback_on_codes": "fallbackOnCodes",
+        "load_balancer": "loadBalancer",
+        "cache_control": "cacheControl",
+        "prompt_cache_key": "promptCacheKey",
+      });
+    })
+  );
 
 export function retrieveAgentRequestFallbackModelConfigurationParametersFromJSON(
   jsonString: string,
@@ -2972,14 +3123,16 @@ export const RetrieveAgentRequestFallbackModelConfigurationRetry$inboundSchema:
     RetrieveAgentRequestFallbackModelConfigurationRetry,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    count: z.number().default(3),
-    on_codes: z.array(z.number()).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "on_codes": "onCodes",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      count: z.number().default(3),
+      on_codes: z.array(z.number()).optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "on_codes": "onCodes",
+      });
+    })
+  );
 
 export function retrieveAgentRequestFallbackModelConfigurationRetryFromJSON(
   jsonString: string,
@@ -3003,15 +3156,17 @@ export const RetrieveAgentRequestFallbackModelConfiguration2$inboundSchema:
     RetrieveAgentRequestFallbackModelConfiguration2,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    id: z.string(),
-    parameters: z.lazy(() =>
-      RetrieveAgentRequestFallbackModelConfigurationParameters$inboundSchema
-    ).optional(),
-    retry: z.lazy(() =>
-      RetrieveAgentRequestFallbackModelConfigurationRetry$inboundSchema
-    ).optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string(),
+      parameters: z.lazy(() =>
+        RetrieveAgentRequestFallbackModelConfigurationParameters$inboundSchema
+      ).optional(),
+      retry: z.lazy(() =>
+        RetrieveAgentRequestFallbackModelConfigurationRetry$inboundSchema
+      ).optional(),
+    })
+  );
 
 export function retrieveAgentRequestFallbackModelConfiguration2FromJSON(
   jsonString: string,
@@ -3035,10 +3190,14 @@ export const RetrieveAgentRequestFallbackModelConfiguration$inboundSchema:
     RetrieveAgentRequestFallbackModelConfiguration,
     z.ZodTypeDef,
     unknown
-  > = z.union([
-    z.lazy(() => RetrieveAgentRequestFallbackModelConfiguration2$inboundSchema),
-    z.string(),
-  ]);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.union([
+      z.lazy(() =>
+        RetrieveAgentRequestFallbackModelConfiguration2$inboundSchema
+      ),
+      z.string(),
+    ])
+  );
 
 export function retrieveAgentRequestFallbackModelConfigurationFromJSON(
   jsonString: string,
@@ -3061,27 +3220,27 @@ export const RetrieveAgentRequestModel$inboundSchema: z.ZodType<
   RetrieveAgentRequestModel,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  integration_id: z.nullable(z.string()).optional(),
-  parameters: z.nullable(
-    z.lazy(() => RetrieveAgentRequestParameters$inboundSchema),
-  ).optional(),
-  retry: z.lazy(() => RetrieveAgentRequestRetry$inboundSchema).optional(),
-  fallback_models: z.nullable(
-    z.array(z.union([
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    integration_id: z.nullable(z.string()).optional(),
+    parameters: z.nullable(
+      z.lazy(() => RetrieveAgentRequestParameters$inboundSchema),
+    ).optional(),
+    retry: z.lazy(() => RetrieveAgentRequestRetry$inboundSchema).optional(),
+    fallback_models: z.nullable(z.array(z.union([
       z.lazy(() =>
         RetrieveAgentRequestFallbackModelConfiguration2$inboundSchema
       ),
       z.string(),
-    ])),
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "integration_id": "integrationId",
-    "fallback_models": "fallbackModels",
-  });
-});
+    ]))).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "integration_id": "integrationId",
+      "fallback_models": "fallbackModels",
+    });
+  })
+);
 
 export function retrieveAgentRequestModelFromJSON(
   jsonString: string,
@@ -3098,54 +3257,57 @@ export const RetrieveAgentRequestResponseBody$inboundSchema: z.ZodType<
   RetrieveAgentRequestResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  _id: z.string(),
-  key: z.string(),
-  display_name: z.string().optional(),
-  project_id: z.string(),
-  created_by_id: z.nullable(z.string()).optional(),
-  updated_by_id: z.nullable(z.string()).optional(),
-  created: z.string().optional(),
-  updated: z.string().optional(),
-  status: RetrieveAgentRequestStatus$inboundSchema,
-  version: z.string().optional(),
-  path: z.string(),
-  memory_stores: z.array(z.string()).optional(),
-  team_of_agents: z.array(
-    z.lazy(() => RetrieveAgentRequestTeamOfAgents$inboundSchema),
-  ).optional(),
-  skills: z.array(z.string()).optional(),
-  agent_plugins: z.array(
-    z.lazy(() => RetrieveAgentRequestAgentPlugins$inboundSchema),
-  ).optional(),
-  metrics: z.lazy(() => RetrieveAgentRequestMetrics$inboundSchema).optional(),
-  variables: z.record(z.any()).optional(),
-  knowledge_bases: z.array(
-    z.lazy(() => RetrieveAgentRequestKnowledgeBases$inboundSchema),
-  ).optional(),
-  source: RetrieveAgentRequestSource$inboundSchema.optional(),
-  engine: RetrieveAgentRequestEngine$inboundSchema.default("text"),
-  type: RetrieveAgentRequestType$inboundSchema.default("internal"),
-  role: z.string(),
-  description: z.string(),
-  system_prompt: z.nullable(z.string()).optional(),
-  instructions: z.string(),
-  settings: z.lazy(() => RetrieveAgentRequestSettings$inboundSchema).optional(),
-  model: z.lazy(() => RetrieveAgentRequestModel$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "_id": "id",
-    "display_name": "displayName",
-    "project_id": "projectId",
-    "created_by_id": "createdById",
-    "updated_by_id": "updatedById",
-    "memory_stores": "memoryStores",
-    "team_of_agents": "teamOfAgents",
-    "agent_plugins": "agentPlugins",
-    "knowledge_bases": "knowledgeBases",
-    "system_prompt": "systemPrompt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    _id: z.string(),
+    key: z.string(),
+    display_name: z.string().optional(),
+    project_id: z.string(),
+    created_by_id: z.nullable(z.string()).optional(),
+    updated_by_id: z.nullable(z.string()).optional(),
+    created: z.string().optional(),
+    updated: z.string().optional(),
+    status: RetrieveAgentRequestStatus$inboundSchema,
+    version: z.string().optional(),
+    path: z.string(),
+    memory_stores: z.array(z.string()).optional(),
+    team_of_agents: z.array(
+      z.lazy(() => RetrieveAgentRequestTeamOfAgents$inboundSchema),
+    ).optional(),
+    skills: z.array(z.string()).optional(),
+    agent_plugins: z.array(
+      z.lazy(() => RetrieveAgentRequestAgentPlugins$inboundSchema),
+    ).optional(),
+    metrics: z.lazy(() => RetrieveAgentRequestMetrics$inboundSchema).optional(),
+    variables: z.record(z.any()).optional(),
+    knowledge_bases: z.array(
+      z.lazy(() => RetrieveAgentRequestKnowledgeBases$inboundSchema),
+    ).optional(),
+    source: RetrieveAgentRequestSource$inboundSchema.optional(),
+    engine: RetrieveAgentRequestEngine$inboundSchema.default("text"),
+    type: RetrieveAgentRequestType$inboundSchema.default("internal"),
+    role: z.string(),
+    description: z.string(),
+    system_prompt: z.nullable(z.string()).optional(),
+    instructions: z.string(),
+    settings: z.lazy(() => RetrieveAgentRequestSettings$inboundSchema)
+      .optional(),
+    model: z.lazy(() => RetrieveAgentRequestModel$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "_id": "id",
+      "display_name": "displayName",
+      "project_id": "projectId",
+      "created_by_id": "createdById",
+      "updated_by_id": "updatedById",
+      "memory_stores": "memoryStores",
+      "team_of_agents": "teamOfAgents",
+      "agent_plugins": "agentPlugins",
+      "knowledge_bases": "knowledgeBases",
+      "system_prompt": "systemPrompt",
+    });
+  })
+);
 
 export function retrieveAgentRequestResponseBodyFromJSON(
   jsonString: string,

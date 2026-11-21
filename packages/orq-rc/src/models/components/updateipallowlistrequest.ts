@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type UpdateIPAllowlistRequest = {
   enabled?: boolean | undefined;
@@ -18,9 +19,11 @@ export const UpdateIPAllowlistRequest$outboundSchema: z.ZodType<
   UpdateIPAllowlistRequest$Outbound,
   z.ZodTypeDef,
   UpdateIPAllowlistRequest
-> = z.object({
-  enabled: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    enabled: z.boolean().optional(),
+  })
+);
 
 export function updateIPAllowlistRequestToJSON(
   updateIPAllowlistRequest: UpdateIPAllowlistRequest,

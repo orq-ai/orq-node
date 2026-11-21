@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
@@ -136,13 +136,15 @@ export const RetrieveResponseRequest$outboundSchema: z.ZodType<
   RetrieveResponseRequest$Outbound,
   z.ZodTypeDef,
   RetrieveResponseRequest
-> = z.object({
-  responseId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    responseId: "response_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    responseId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      responseId: "response_id",
+    });
+  })
+);
 
 export function retrieveResponseRequestToJSON(
   retrieveResponseRequest: RetrieveResponseRequest,
@@ -155,95 +157,99 @@ export function retrieveResponseRequestToJSON(
 /** @internal */
 export const RetrieveResponseServiceTier$inboundSchema: z.ZodNativeEnum<
   typeof RetrieveResponseServiceTier
-> = z.nativeEnum(RetrieveResponseServiceTier);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(RetrieveResponseServiceTier)
+);
 
 /** @internal */
 export const RetrieveResponseStatus$inboundSchema: z.ZodNativeEnum<
   typeof RetrieveResponseStatus
-> = z.nativeEnum(RetrieveResponseStatus);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(RetrieveResponseStatus));
 
 /** @internal */
 export const RetrieveResponseTruncation$inboundSchema: z.ZodNativeEnum<
   typeof RetrieveResponseTruncation
-> = z.nativeEnum(RetrieveResponseTruncation);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(RetrieveResponseTruncation));
 
 /** @internal */
 export const RetrieveResponseResponseBody$inboundSchema: z.ZodType<
   RetrieveResponseResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  background: z.boolean(),
-  completed_at: z.nullable(z.number().int()),
-  conversation: components.ConversationParam$inboundSchema.optional(),
-  created_at: z.number().int(),
-  error: z.nullable(components.ResponseError$inboundSchema),
-  frequency_penalty: z.number(),
-  id: z.string(),
-  incomplete_details: z.nullable(components.IncompleteDetails$inboundSchema),
-  input: z.nullable(z.array(z.any())),
-  input_transformations: z.nullable(
-    z.array(components.InputTransformation$inboundSchema),
-  ).optional(),
-  instructions: z.nullable(z.string()),
-  max_output_tokens: z.nullable(z.number().int()),
-  max_tool_calls: z.nullable(z.number().int()),
-  memory: components.MemoryParam$inboundSchema.optional(),
-  metadata: z.record(z.string()),
-  model: z.string(),
-  object: z.string(),
-  output: z.nullable(z.array(components.ResponseOutputItem$inboundSchema)),
-  parallel_tool_calls: z.boolean(),
-  presence_penalty: z.number(),
-  previous_response_id: z.nullable(z.string()),
-  prompt_cache_diagnostics: components.PromptCacheDiagnostics$inboundSchema
-    .optional(),
-  prompt_cache_key: z.nullable(z.string()),
-  prompt_cache_options: z.nullable(
-    components.OpenAIPromptCacheOptions$inboundSchema,
-  ),
-  prompt_cache_retention: z.nullable(z.string()),
-  reasoning: z.nullable(components.Reasoning$inboundSchema),
-  safety_identifier: z.nullable(z.string()),
-  service_tier: RetrieveResponseServiceTier$inboundSchema,
-  status: RetrieveResponseStatus$inboundSchema,
-  store: z.boolean(),
-  telemetry: components.ResponseTelemetry$inboundSchema.optional(),
-  temperature: z.number(),
-  text: z.any().optional(),
-  tool_choice: z.any().optional(),
-  tools: z.nullable(z.array(z.any())),
-  top_k: z.number().int().optional(),
-  top_logprobs: z.number().int(),
-  top_p: z.number(),
-  truncation: RetrieveResponseTruncation$inboundSchema,
-  usage: z.nullable(components.PublicUsage$inboundSchema),
-  user: z.nullable(z.string()),
-  variables: z.record(z.any()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "completed_at": "completedAt",
-    "created_at": "createdAt",
-    "frequency_penalty": "frequencyPenalty",
-    "incomplete_details": "incompleteDetails",
-    "input_transformations": "inputTransformations",
-    "max_output_tokens": "maxOutputTokens",
-    "max_tool_calls": "maxToolCalls",
-    "parallel_tool_calls": "parallelToolCalls",
-    "presence_penalty": "presencePenalty",
-    "previous_response_id": "previousResponseId",
-    "prompt_cache_diagnostics": "promptCacheDiagnostics",
-    "prompt_cache_key": "promptCacheKey",
-    "prompt_cache_options": "promptCacheOptions",
-    "prompt_cache_retention": "promptCacheRetention",
-    "safety_identifier": "safetyIdentifier",
-    "service_tier": "serviceTier",
-    "tool_choice": "toolChoice",
-    "top_k": "topK",
-    "top_logprobs": "topLogprobs",
-    "top_p": "topP",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    background: z.boolean(),
+    completed_at: z.nullable(z.number().int()),
+    conversation: components.ConversationParam$inboundSchema.optional(),
+    created_at: z.number().int(),
+    error: z.nullable(components.ResponseError$inboundSchema),
+    frequency_penalty: z.number(),
+    id: z.string(),
+    incomplete_details: z.nullable(components.IncompleteDetails$inboundSchema),
+    input: z.nullable(z.array(z.any())),
+    input_transformations: z.nullable(
+      z.array(components.InputTransformation$inboundSchema),
+    ).optional(),
+    instructions: z.nullable(z.string()),
+    max_output_tokens: z.nullable(z.number().int()),
+    max_tool_calls: z.nullable(z.number().int()),
+    memory: components.MemoryParam$inboundSchema.optional(),
+    metadata: z.record(z.string()),
+    model: z.string(),
+    object: z.string(),
+    output: z.nullable(z.array(components.ResponseOutputItem$inboundSchema)),
+    parallel_tool_calls: z.boolean(),
+    presence_penalty: z.number(),
+    previous_response_id: z.nullable(z.string()),
+    prompt_cache_diagnostics: components.PromptCacheDiagnostics$inboundSchema
+      .optional(),
+    prompt_cache_key: z.nullable(z.string()),
+    prompt_cache_options: z.nullable(
+      components.OpenAIPromptCacheOptions$inboundSchema,
+    ),
+    prompt_cache_retention: z.nullable(z.string()),
+    reasoning: z.nullable(components.Reasoning$inboundSchema),
+    safety_identifier: z.nullable(z.string()),
+    service_tier: RetrieveResponseServiceTier$inboundSchema,
+    status: RetrieveResponseStatus$inboundSchema,
+    store: z.boolean(),
+    telemetry: components.ResponseTelemetry$inboundSchema.optional(),
+    temperature: z.number(),
+    text: z.any().optional(),
+    tool_choice: z.any().optional(),
+    tools: z.nullable(z.array(z.any())),
+    top_k: z.number().int().optional(),
+    top_logprobs: z.number().int(),
+    top_p: z.number(),
+    truncation: RetrieveResponseTruncation$inboundSchema,
+    usage: z.nullable(components.PublicUsage$inboundSchema),
+    user: z.nullable(z.string()),
+    variables: z.record(z.any()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "completed_at": "completedAt",
+      "created_at": "createdAt",
+      "frequency_penalty": "frequencyPenalty",
+      "incomplete_details": "incompleteDetails",
+      "input_transformations": "inputTransformations",
+      "max_output_tokens": "maxOutputTokens",
+      "max_tool_calls": "maxToolCalls",
+      "parallel_tool_calls": "parallelToolCalls",
+      "presence_penalty": "presencePenalty",
+      "previous_response_id": "previousResponseId",
+      "prompt_cache_diagnostics": "promptCacheDiagnostics",
+      "prompt_cache_key": "promptCacheKey",
+      "prompt_cache_options": "promptCacheOptions",
+      "prompt_cache_retention": "promptCacheRetention",
+      "safety_identifier": "safetyIdentifier",
+      "service_tier": "serviceTier",
+      "tool_choice": "toolChoice",
+      "top_k": "topK",
+      "top_logprobs": "topLogprobs",
+      "top_p": "topP",
+    });
+  })
+);
 
 export function retrieveResponseResponseBodyFromJSON(
   jsonString: string,

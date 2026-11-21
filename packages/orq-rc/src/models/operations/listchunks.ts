@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 
 export const QueryParam2 = {
@@ -61,12 +62,12 @@ export type ListChunksRequest = {
 };
 
 /** @internal */
-export const QueryParam2$outboundSchema: z.ZodNativeEnum<typeof QueryParam2> = z
-  .nativeEnum(QueryParam2);
+export const QueryParam2$outboundSchema: z.ZodNativeEnum<typeof QueryParam2> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(QueryParam2));
 
 /** @internal */
-export const QueryParam1$outboundSchema: z.ZodNativeEnum<typeof QueryParam1> = z
-  .nativeEnum(QueryParam1);
+export const QueryParam1$outboundSchema: z.ZodNativeEnum<typeof QueryParam1> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(QueryParam1));
 
 /** @internal */
 export type QueryParamStatus$Outbound = Array<string> | string;
@@ -76,7 +77,9 @@ export const QueryParamStatus$outboundSchema: z.ZodType<
   QueryParamStatus$Outbound,
   z.ZodTypeDef,
   QueryParamStatus
-> = z.union([z.array(QueryParam1$outboundSchema), QueryParam2$outboundSchema]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.array(QueryParam1$outboundSchema), QueryParam2$outboundSchema])
+);
 
 export function queryParamStatusToJSON(
   queryParamStatus: QueryParamStatus,
@@ -102,25 +105,27 @@ export const ListChunksRequest$outboundSchema: z.ZodType<
   ListChunksRequest$Outbound,
   z.ZodTypeDef,
   ListChunksRequest
-> = z.object({
-  knowledgeId: z.string(),
-  datasourceId: z.string(),
-  limit: z.number().int().default(10),
-  startingAfter: z.string().optional(),
-  endingBefore: z.string().optional(),
-  q: z.string().optional(),
-  status: z.union([
-    z.array(QueryParam1$outboundSchema),
-    QueryParam2$outboundSchema,
-  ]).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    knowledgeId: "knowledge_id",
-    datasourceId: "datasource_id",
-    startingAfter: "starting_after",
-    endingBefore: "ending_before",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    knowledgeId: z.string(),
+    datasourceId: z.string(),
+    limit: z.number().int().default(10),
+    startingAfter: z.string().optional(),
+    endingBefore: z.string().optional(),
+    q: z.string().optional(),
+    status: z.union([
+      z.array(QueryParam1$outboundSchema),
+      QueryParam2$outboundSchema,
+    ]).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      knowledgeId: "knowledge_id",
+      datasourceId: "datasource_id",
+      startingAfter: "starting_after",
+      endingBefore: "ending_before",
+    });
+  })
+);
 
 export function listChunksRequestToJSON(
   listChunksRequest: ListChunksRequest,

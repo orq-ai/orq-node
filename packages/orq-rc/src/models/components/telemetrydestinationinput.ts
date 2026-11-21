@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import {
   TelemetryContentMode,
   TelemetryContentMode$outboundSchema,
@@ -52,26 +53,28 @@ export const TelemetryDestinationInput$outboundSchema: z.ZodType<
   TelemetryDestinationInput$Outbound,
   z.ZodTypeDef,
   TelemetryDestinationInput
-> = z.object({
-  displayName: z.string().optional(),
-  provider: z.string().optional(),
-  endpointUrl: z.string().optional(),
-  requestHeaders: z.record(z.string()).optional(),
-  settings: z.record(z.string()).optional(),
-  contentMode: TelemetryContentMode$outboundSchema.optional(),
-  projectScope: TelemetryProjectScope$outboundSchema.optional(),
-  projectIds: z.array(z.string()).optional(),
-  enabled: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    displayName: "display_name",
-    endpointUrl: "endpoint_url",
-    requestHeaders: "request_headers",
-    contentMode: "content_mode",
-    projectScope: "project_scope",
-    projectIds: "project_ids",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    displayName: z.string().optional(),
+    provider: z.string().optional(),
+    endpointUrl: z.string().optional(),
+    requestHeaders: z.record(z.string()).optional(),
+    settings: z.record(z.string()).optional(),
+    contentMode: TelemetryContentMode$outboundSchema.optional(),
+    projectScope: TelemetryProjectScope$outboundSchema.optional(),
+    projectIds: z.array(z.string()).optional(),
+    enabled: z.boolean().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      displayName: "display_name",
+      endpointUrl: "endpoint_url",
+      requestHeaders: "request_headers",
+      contentMode: "content_mode",
+      projectScope: "project_scope",
+      projectIds: "project_ids",
+    });
+  })
+);
 
 export function telemetryDestinationInputToJSON(
   telemetryDestinationInput: TelemetryDestinationInput,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -330,21 +330,25 @@ export type AgentThoughtStreamingEvent = {
 /** @internal */
 export const AgentThoughtStreamingEventRole$inboundSchema: z.ZodNativeEnum<
   typeof AgentThoughtStreamingEventRole
-> = z.nativeEnum(AgentThoughtStreamingEventRole);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(AgentThoughtStreamingEventRole)
+);
 
 /** @internal */
 export const AgentThoughtStreamingEventParts$inboundSchema: z.ZodType<
   AgentThoughtStreamingEventParts,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  TextPart$inboundSchema,
-  ErrorPart$inboundSchema,
-  DataPart$inboundSchema,
-  FilePart$inboundSchema,
-  ToolCallPart$inboundSchema,
-  ToolResultPart$inboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    TextPart$inboundSchema,
+    ErrorPart$inboundSchema,
+    DataPart$inboundSchema,
+    FilePart$inboundSchema,
+    ToolCallPart$inboundSchema,
+    ToolResultPart$inboundSchema,
+  ])
+);
 
 export function agentThoughtStreamingEventPartsFromJSON(
   jsonString: string,
@@ -361,30 +365,32 @@ export const MessageDifference$inboundSchema: z.ZodType<
   MessageDifference,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  messageId: z.string(),
-  role: AgentThoughtStreamingEventRole$inboundSchema,
-  parts: z.array(
-    z.union([
-      TextPart$inboundSchema,
-      ErrorPart$inboundSchema,
-      DataPart$inboundSchema,
-      FilePart$inboundSchema,
-      ToolCallPart$inboundSchema,
-      ToolResultPart$inboundSchema,
-    ]),
-  ),
-  metadata: z.record(z.any()).optional(),
-  agent_id: z.string(),
-  agent_execution_id: z.string(),
-  workspace_id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "agent_id": "agentId",
-    "agent_execution_id": "agentExecutionId",
-    "workspace_id": "workspaceId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    messageId: z.string(),
+    role: AgentThoughtStreamingEventRole$inboundSchema,
+    parts: z.array(
+      z.union([
+        TextPart$inboundSchema,
+        ErrorPart$inboundSchema,
+        DataPart$inboundSchema,
+        FilePart$inboundSchema,
+        ToolCallPart$inboundSchema,
+        ToolResultPart$inboundSchema,
+      ]),
+    ),
+    metadata: z.record(z.any()).optional(),
+    agent_id: z.string(),
+    agent_execution_id: z.string(),
+    workspace_id: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "agent_id": "agentId",
+      "agent_execution_id": "agentExecutionId",
+      "workspace_id": "workspaceId",
+    });
+  })
+);
 
 export function messageDifferenceFromJSON(
   jsonString: string,
@@ -398,24 +404,29 @@ export function messageDifferenceFromJSON(
 
 /** @internal */
 export const AgentThoughtStreamingEventFinishReason$inboundSchema:
-  z.ZodNativeEnum<typeof AgentThoughtStreamingEventFinishReason> = z.nativeEnum(
-    AgentThoughtStreamingEventFinishReason,
-  );
+  z.ZodNativeEnum<typeof AgentThoughtStreamingEventFinishReason> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(AgentThoughtStreamingEventFinishReason)
+    );
 
 /** @internal */
 export const AgentThoughtStreamingEventDataType$inboundSchema: z.ZodNativeEnum<
   typeof AgentThoughtStreamingEventDataType
-> = z.nativeEnum(AgentThoughtStreamingEventDataType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(AgentThoughtStreamingEventDataType)
+);
 
 /** @internal */
 export const AgentThoughtStreamingEventFunction$inboundSchema: z.ZodType<
   AgentThoughtStreamingEventFunction,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string().optional(),
-  arguments: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    arguments: z.string().optional(),
+  })
+);
 
 export function agentThoughtStreamingEventFunctionFromJSON(
   jsonString: string,
@@ -433,13 +444,15 @@ export const AgentThoughtStreamingEventGoogle$inboundSchema: z.ZodType<
   AgentThoughtStreamingEventGoogle,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  thought_signature: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "thought_signature": "thoughtSignature",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    thought_signature: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "thought_signature": "thoughtSignature",
+    });
+  })
+);
 
 export function agentThoughtStreamingEventGoogleFromJSON(
   jsonString: string,
@@ -456,10 +469,12 @@ export const AgentThoughtStreamingEventExtraContent$inboundSchema: z.ZodType<
   AgentThoughtStreamingEventExtraContent,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  google: z.lazy(() => AgentThoughtStreamingEventGoogle$inboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    google: z.lazy(() => AgentThoughtStreamingEventGoogle$inboundSchema)
+      .optional(),
+  })
+);
 
 export function agentThoughtStreamingEventExtraContentFromJSON(
   jsonString: string,
@@ -477,22 +492,24 @@ export const AgentThoughtStreamingEventToolCalls$inboundSchema: z.ZodType<
   AgentThoughtStreamingEventToolCalls,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  index: z.number().optional(),
-  id: z.string().optional(),
-  type: AgentThoughtStreamingEventDataType$inboundSchema.optional(),
-  function: z.lazy(() => AgentThoughtStreamingEventFunction$inboundSchema)
-    .optional(),
-  thought_signature: z.string().optional(),
-  extra_content: z.lazy(() =>
-    AgentThoughtStreamingEventExtraContent$inboundSchema
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "thought_signature": "thoughtSignature",
-    "extra_content": "extraContent",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    index: z.number().optional(),
+    id: z.string().optional(),
+    type: AgentThoughtStreamingEventDataType$inboundSchema.optional(),
+    function: z.lazy(() => AgentThoughtStreamingEventFunction$inboundSchema)
+      .optional(),
+    thought_signature: z.string().optional(),
+    extra_content: z.lazy(() =>
+      AgentThoughtStreamingEventExtraContent$inboundSchema
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "thought_signature": "thoughtSignature",
+      "extra_content": "extraContent",
+    });
+  })
+);
 
 export function agentThoughtStreamingEventToolCallsFromJSON(
   jsonString: string,
@@ -508,23 +525,27 @@ export function agentThoughtStreamingEventToolCallsFromJSON(
 /** @internal */
 export const AgentThoughtStreamingEventDataRole$inboundSchema: z.ZodNativeEnum<
   typeof AgentThoughtStreamingEventDataRole
-> = z.nativeEnum(AgentThoughtStreamingEventDataRole);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(AgentThoughtStreamingEventDataRole)
+);
 
 /** @internal */
 export const AgentThoughtStreamingEventAudio$inboundSchema: z.ZodType<
   AgentThoughtStreamingEventAudio,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  expires_at: z.number().int(),
-  data: z.string(),
-  transcript: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "expires_at": "expiresAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    expires_at: z.number().int(),
+    data: z.string(),
+    transcript: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "expires_at": "expiresAt",
+    });
+  })
+);
 
 export function agentThoughtStreamingEventAudioFromJSON(
   jsonString: string,
@@ -541,25 +562,28 @@ export const AgentThoughtStreamingEventMessage$inboundSchema: z.ZodType<
   AgentThoughtStreamingEventMessage,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  content: z.nullable(z.string()).optional(),
-  refusal: z.nullable(z.string()).optional(),
-  tool_calls: z.array(
-    z.lazy(() => AgentThoughtStreamingEventToolCalls$inboundSchema),
-  ).optional(),
-  role: AgentThoughtStreamingEventDataRole$inboundSchema.optional(),
-  reasoning: z.nullable(z.string()).optional(),
-  reasoning_signature: z.nullable(z.string()).optional(),
-  redacted_reasoning: z.string().optional(),
-  audio: z.nullable(z.lazy(() => AgentThoughtStreamingEventAudio$inboundSchema))
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "tool_calls": "toolCalls",
-    "reasoning_signature": "reasoningSignature",
-    "redacted_reasoning": "redactedReasoning",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    content: z.nullable(z.string()).optional(),
+    refusal: z.nullable(z.string()).optional(),
+    tool_calls: z.array(
+      z.lazy(() => AgentThoughtStreamingEventToolCalls$inboundSchema),
+    ).optional(),
+    role: AgentThoughtStreamingEventDataRole$inboundSchema.optional(),
+    reasoning: z.nullable(z.string()).optional(),
+    reasoning_signature: z.nullable(z.string()).optional(),
+    redacted_reasoning: z.string().optional(),
+    audio: z.nullable(
+      z.lazy(() => AgentThoughtStreamingEventAudio$inboundSchema),
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "tool_calls": "toolCalls",
+      "reasoning_signature": "reasoningSignature",
+      "redacted_reasoning": "redactedReasoning",
+    });
+  })
+);
 
 export function agentThoughtStreamingEventMessageFromJSON(
   jsonString: string,
@@ -576,11 +600,13 @@ export const TopLogprobs$inboundSchema: z.ZodType<
   TopLogprobs,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  token: z.string(),
-  logprob: z.number(),
-  bytes: z.nullable(z.array(z.number())),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    token: z.string(),
+    logprob: z.number(),
+    bytes: z.nullable(z.array(z.number())),
+  })
+);
 
 export function topLogprobsFromJSON(
   jsonString: string,
@@ -597,16 +623,18 @@ export const AgentThoughtStreamingEventContent$inboundSchema: z.ZodType<
   AgentThoughtStreamingEventContent,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  token: z.string(),
-  logprob: z.number(),
-  bytes: z.nullable(z.array(z.number())),
-  top_logprobs: z.array(z.lazy(() => TopLogprobs$inboundSchema)),
-}).transform((v) => {
-  return remap$(v, {
-    "top_logprobs": "topLogprobs",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    token: z.string(),
+    logprob: z.number(),
+    bytes: z.nullable(z.array(z.number())),
+    top_logprobs: z.array(z.lazy(() => TopLogprobs$inboundSchema)),
+  }).transform((v) => {
+    return remap$(v, {
+      "top_logprobs": "topLogprobs",
+    });
+  })
+);
 
 export function agentThoughtStreamingEventContentFromJSON(
   jsonString: string,
@@ -623,11 +651,13 @@ export const AgentThoughtStreamingEventTopLogprobs$inboundSchema: z.ZodType<
   AgentThoughtStreamingEventTopLogprobs,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  token: z.string(),
-  logprob: z.number(),
-  bytes: z.nullable(z.array(z.number())),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    token: z.string(),
+    logprob: z.number(),
+    bytes: z.nullable(z.array(z.number())),
+  })
+);
 
 export function agentThoughtStreamingEventTopLogprobsFromJSON(
   jsonString: string,
@@ -645,18 +675,20 @@ export const AgentThoughtStreamingEventRefusal$inboundSchema: z.ZodType<
   AgentThoughtStreamingEventRefusal,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  token: z.string(),
-  logprob: z.number(),
-  bytes: z.nullable(z.array(z.number())),
-  top_logprobs: z.array(
-    z.lazy(() => AgentThoughtStreamingEventTopLogprobs$inboundSchema),
-  ),
-}).transform((v) => {
-  return remap$(v, {
-    "top_logprobs": "topLogprobs",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    token: z.string(),
+    logprob: z.number(),
+    bytes: z.nullable(z.array(z.number())),
+    top_logprobs: z.array(
+      z.lazy(() => AgentThoughtStreamingEventTopLogprobs$inboundSchema),
+    ),
+  }).transform((v) => {
+    return remap$(v, {
+      "top_logprobs": "topLogprobs",
+    });
+  })
+);
 
 export function agentThoughtStreamingEventRefusalFromJSON(
   jsonString: string,
@@ -673,14 +705,16 @@ export const Logprobs$inboundSchema: z.ZodType<
   Logprobs,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  content: z.nullable(
-    z.array(z.lazy(() => AgentThoughtStreamingEventContent$inboundSchema)),
-  ),
-  refusal: z.nullable(
-    z.array(z.lazy(() => AgentThoughtStreamingEventRefusal$inboundSchema)),
-  ),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    content: z.nullable(
+      z.array(z.lazy(() => AgentThoughtStreamingEventContent$inboundSchema)),
+    ),
+    refusal: z.nullable(
+      z.array(z.lazy(() => AgentThoughtStreamingEventRefusal$inboundSchema)),
+    ),
+  })
+);
 
 export function logprobsFromJSON(
   jsonString: string,
@@ -693,19 +727,21 @@ export function logprobsFromJSON(
 }
 
 /** @internal */
-export const Choice$inboundSchema: z.ZodType<Choice, z.ZodTypeDef, unknown> = z
-  .object({
-    finish_reason: z.nullable(
-      AgentThoughtStreamingEventFinishReason$inboundSchema,
-    ),
-    index: z.number().default(0),
-    message: z.lazy(() => AgentThoughtStreamingEventMessage$inboundSchema),
-    logprobs: z.nullable(z.lazy(() => Logprobs$inboundSchema)).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "finish_reason": "finishReason",
-    });
-  });
+export const Choice$inboundSchema: z.ZodType<Choice, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      finish_reason: z.nullable(
+        AgentThoughtStreamingEventFinishReason$inboundSchema,
+      ),
+      index: z.number().default(0),
+      message: z.lazy(() => AgentThoughtStreamingEventMessage$inboundSchema),
+      logprobs: z.nullable(z.lazy(() => Logprobs$inboundSchema)).optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "finish_reason": "finishReason",
+      });
+    })
+  );
 
 export function choiceFromJSON(
   jsonString: string,
@@ -723,17 +759,19 @@ export const AgentThoughtStreamingEventPromptTokensDetails$inboundSchema:
     AgentThoughtStreamingEventPromptTokensDetails,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    cached_tokens: z.nullable(z.number().int()).optional(),
-    cache_creation_tokens: z.nullable(z.number().int()).optional(),
-    audio_tokens: z.nullable(z.number().int()).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "cached_tokens": "cachedTokens",
-      "cache_creation_tokens": "cacheCreationTokens",
-      "audio_tokens": "audioTokens",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      cached_tokens: z.nullable(z.number().int()).optional(),
+      cache_creation_tokens: z.nullable(z.number().int()).optional(),
+      audio_tokens: z.nullable(z.number().int()).optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "cached_tokens": "cachedTokens",
+        "cache_creation_tokens": "cacheCreationTokens",
+        "audio_tokens": "audioTokens",
+      });
+    })
+  );
 
 export function agentThoughtStreamingEventPromptTokensDetailsFromJSON(
   jsonString: string,
@@ -757,19 +795,21 @@ export const AgentThoughtStreamingEventCompletionTokensDetails$inboundSchema:
     AgentThoughtStreamingEventCompletionTokensDetails,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    reasoning_tokens: z.nullable(z.number()).optional(),
-    accepted_prediction_tokens: z.nullable(z.number()).optional(),
-    rejected_prediction_tokens: z.nullable(z.number()).optional(),
-    audio_tokens: z.nullable(z.number().int()).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "reasoning_tokens": "reasoningTokens",
-      "accepted_prediction_tokens": "acceptedPredictionTokens",
-      "rejected_prediction_tokens": "rejectedPredictionTokens",
-      "audio_tokens": "audioTokens",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      reasoning_tokens: z.nullable(z.number()).optional(),
+      accepted_prediction_tokens: z.nullable(z.number()).optional(),
+      rejected_prediction_tokens: z.nullable(z.number()).optional(),
+      audio_tokens: z.nullable(z.number().int()).optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "reasoning_tokens": "reasoningTokens",
+        "accepted_prediction_tokens": "acceptedPredictionTokens",
+        "rejected_prediction_tokens": "rejectedPredictionTokens",
+        "audio_tokens": "audioTokens",
+      });
+    })
+  );
 
 export function agentThoughtStreamingEventCompletionTokensDetailsFromJSON(
   jsonString: string,
@@ -792,27 +832,27 @@ export const AgentThoughtStreamingEventUsage$inboundSchema: z.ZodType<
   AgentThoughtStreamingEventUsage,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  completion_tokens: z.number().optional(),
-  prompt_tokens: z.number().optional(),
-  total_tokens: z.number().optional(),
-  prompt_tokens_details: z.nullable(
-    z.lazy(() => AgentThoughtStreamingEventPromptTokensDetails$inboundSchema),
-  ).optional(),
-  completion_tokens_details: z.nullable(
-    z.lazy(() =>
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    completion_tokens: z.number().optional(),
+    prompt_tokens: z.number().optional(),
+    total_tokens: z.number().optional(),
+    prompt_tokens_details: z.nullable(
+      z.lazy(() => AgentThoughtStreamingEventPromptTokensDetails$inboundSchema),
+    ).optional(),
+    completion_tokens_details: z.nullable(z.lazy(() =>
       AgentThoughtStreamingEventCompletionTokensDetails$inboundSchema
-    ),
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "completion_tokens": "completionTokens",
-    "prompt_tokens": "promptTokens",
-    "total_tokens": "totalTokens",
-    "prompt_tokens_details": "promptTokensDetails",
-    "completion_tokens_details": "completionTokensDetails",
-  });
-});
+    )).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "completion_tokens": "completionTokens",
+      "prompt_tokens": "promptTokens",
+      "total_tokens": "totalTokens",
+      "prompt_tokens_details": "promptTokensDetails",
+      "completion_tokens_details": "completionTokensDetails",
+    });
+  })
+);
 
 export function agentThoughtStreamingEventUsageFromJSON(
   jsonString: string,
@@ -829,22 +869,25 @@ export const AgentThoughtStreamingEventData$inboundSchema: z.ZodType<
   AgentThoughtStreamingEventData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  agent_id: z.string(),
-  message_difference: z.record(z.lazy(() => MessageDifference$inboundSchema)),
-  choice: z.lazy(() => Choice$inboundSchema).optional(),
-  choiceIndex: z.number().optional(),
-  iteration: z.number(),
-  accumulated_execution_time: z.number(),
-  responseId: z.string().optional(),
-  usage: z.lazy(() => AgentThoughtStreamingEventUsage$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "agent_id": "agentId",
-    "message_difference": "messageDifference",
-    "accumulated_execution_time": "accumulatedExecutionTime",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    agent_id: z.string(),
+    message_difference: z.record(z.lazy(() => MessageDifference$inboundSchema)),
+    choice: z.lazy(() => Choice$inboundSchema).optional(),
+    choiceIndex: z.number().optional(),
+    iteration: z.number(),
+    accumulated_execution_time: z.number(),
+    responseId: z.string().optional(),
+    usage: z.lazy(() => AgentThoughtStreamingEventUsage$inboundSchema)
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "agent_id": "agentId",
+      "message_difference": "messageDifference",
+      "accumulated_execution_time": "accumulatedExecutionTime",
+    });
+  })
+);
 
 export function agentThoughtStreamingEventDataFromJSON(
   jsonString: string,
@@ -861,11 +904,13 @@ export const AgentThoughtStreamingEvent$inboundSchema: z.ZodType<
   AgentThoughtStreamingEvent,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("event.agents.thought"),
-  timestamp: z.string(),
-  data: z.lazy(() => AgentThoughtStreamingEventData$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("event.agents.thought"),
+    timestamp: z.string(),
+    data: z.lazy(() => AgentThoughtStreamingEventData$inboundSchema),
+  })
+);
 
 export function agentThoughtStreamingEventFromJSON(
   jsonString: string,

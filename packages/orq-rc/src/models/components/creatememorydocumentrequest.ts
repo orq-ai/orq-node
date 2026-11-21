@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type CreateMemoryDocumentRequest = {
   /**
@@ -26,10 +27,12 @@ export const CreateMemoryDocumentRequest$outboundSchema: z.ZodType<
   CreateMemoryDocumentRequest$Outbound,
   z.ZodTypeDef,
   CreateMemoryDocumentRequest
-> = z.object({
-  text: z.string(),
-  metadata: z.record(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    text: z.string(),
+    metadata: z.record(z.string()).optional(),
+  })
+);
 
 export function createMemoryDocumentRequestToJSON(
   createMemoryDocumentRequest: CreateMemoryDocumentRequest,

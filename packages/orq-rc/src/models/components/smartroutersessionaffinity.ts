@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -24,14 +24,16 @@ export const SmartRouterSessionAffinity$inboundSchema: z.ZodType<
   SmartRouterSessionAffinity,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  enabled: z.boolean(),
-  ttl_seconds: z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "ttl_seconds": "ttlSeconds",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    enabled: z.boolean(),
+    ttl_seconds: z.number().int().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ttl_seconds": "ttlSeconds",
+    });
+  })
+);
 /** @internal */
 export type SmartRouterSessionAffinity$Outbound = {
   enabled: boolean;
@@ -43,14 +45,16 @@ export const SmartRouterSessionAffinity$outboundSchema: z.ZodType<
   SmartRouterSessionAffinity$Outbound,
   z.ZodTypeDef,
   SmartRouterSessionAffinity
-> = z.object({
-  enabled: z.boolean(),
-  ttlSeconds: z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    ttlSeconds: "ttl_seconds",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    enabled: z.boolean(),
+    ttlSeconds: z.number().int().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      ttlSeconds: "ttl_seconds",
+    });
+  })
+);
 
 export function smartRouterSessionAffinityToJSON(
   smartRouterSessionAffinity: SmartRouterSessionAffinity,

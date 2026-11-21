@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -26,21 +26,23 @@ export const FindLogPatternsMeta$inboundSchema: z.ZodType<
   FindLogPatternsMeta,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  request_id: z.string(),
-  from: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  to: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  total_count: z.string(),
-  sampled_count: z.string(),
-  truncated: z.boolean(),
-  warnings: z.array(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    "request_id": "requestId",
-    "total_count": "totalCount",
-    "sampled_count": "sampledCount",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    request_id: z.string(),
+    from: z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    to: z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    total_count: z.string(),
+    sampled_count: z.string(),
+    truncated: z.boolean(),
+    warnings: z.array(z.string()),
+  }).transform((v) => {
+    return remap$(v, {
+      "request_id": "requestId",
+      "total_count": "totalCount",
+      "sampled_count": "sampledCount",
+    });
+  })
+);
 
 export function findLogPatternsMetaFromJSON(
   jsonString: string,

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type HubGetRequest = {
   id: string;
@@ -18,9 +19,11 @@ export const HubGetRequest$outboundSchema: z.ZodType<
   HubGetRequest$Outbound,
   z.ZodTypeDef,
   HubGetRequest
-> = z.object({
-  id: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+  })
+);
 
 export function hubGetRequestToJSON(hubGetRequest: HubGetRequest): string {
   return JSON.stringify(HubGetRequest$outboundSchema.parse(hubGetRequest));

@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 
 /**
@@ -32,7 +33,7 @@ export type ApiKeyListRequest = {
 /** @internal */
 export const QueryParamSource$outboundSchema: z.ZodNativeEnum<
   typeof QueryParamSource
-> = z.nativeEnum(QueryParamSource);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(QueryParamSource));
 
 /** @internal */
 export type ApiKeyListRequest$Outbound = {
@@ -45,14 +46,16 @@ export const ApiKeyListRequest$outboundSchema: z.ZodType<
   ApiKeyListRequest$Outbound,
   z.ZodTypeDef,
   ApiKeyListRequest
-> = z.object({
-  projectId: z.string().optional(),
-  source: QueryParamSource$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    projectId: "project_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    projectId: z.string().optional(),
+    source: QueryParamSource$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      projectId: "project_id",
+    });
+  })
+);
 
 export function apiKeyListRequestToJSON(
   apiKeyListRequest: ApiKeyListRequest,

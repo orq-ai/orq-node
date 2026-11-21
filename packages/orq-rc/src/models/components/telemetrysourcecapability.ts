@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -26,11 +26,13 @@ export const TelemetrySourceCapability$inboundSchema: z.ZodType<
   TelemetrySourceCapability,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  source: TelemetrySource$inboundSchema.optional(),
-  label: z.string().optional(),
-  metrics: z.array(TelemetryMetricCapability$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    source: TelemetrySource$inboundSchema.optional(),
+    label: z.string().optional(),
+    metrics: z.array(TelemetryMetricCapability$inboundSchema).optional(),
+  })
+);
 
 export function telemetrySourceCapabilityFromJSON(
   jsonString: string,

@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import {
   ChatKitResources,
   ChatKitResources$Outbound,
@@ -37,7 +38,7 @@ export const UpdateWorkspaceRequestMetadata$outboundSchema: z.ZodType<
   UpdateWorkspaceRequestMetadata$Outbound,
   z.ZodTypeDef,
   UpdateWorkspaceRequestMetadata
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function updateWorkspaceRequestMetadataToJSON(
   updateWorkspaceRequestMetadata: UpdateWorkspaceRequestMetadata,
@@ -67,27 +68,29 @@ export const UpdateWorkspaceRequest$outboundSchema: z.ZodType<
   UpdateWorkspaceRequest$Outbound,
   z.ZodTypeDef,
   UpdateWorkspaceRequest
-> = z.object({
-  displayName: z.string().optional(),
-  logoUrl: z.string().optional(),
-  archived: z.boolean().optional(),
-  settings: WorkspaceSettingsFields$outboundSchema.optional(),
-  metadata: z.lazy(() => UpdateWorkspaceRequestMetadata$outboundSchema)
-    .optional(),
-  enforceEnabledModels: z.boolean().optional(),
-  chatKit: ChatKitResources$outboundSchema.optional(),
-  tracingEnabled: z.boolean().optional(),
-  retentionPeriod: z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    displayName: "display_name",
-    logoUrl: "logo_url",
-    enforceEnabledModels: "enforce_enabled_models",
-    chatKit: "chat_kit",
-    tracingEnabled: "tracing_enabled",
-    retentionPeriod: "retention_period",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    displayName: z.string().optional(),
+    logoUrl: z.string().optional(),
+    archived: z.boolean().optional(),
+    settings: WorkspaceSettingsFields$outboundSchema.optional(),
+    metadata: z.lazy(() => UpdateWorkspaceRequestMetadata$outboundSchema)
+      .optional(),
+    enforceEnabledModels: z.boolean().optional(),
+    chatKit: ChatKitResources$outboundSchema.optional(),
+    tracingEnabled: z.boolean().optional(),
+    retentionPeriod: z.number().int().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      displayName: "display_name",
+      logoUrl: "logo_url",
+      enforceEnabledModels: "enforce_enabled_models",
+      chatKit: "chat_kit",
+      tracingEnabled: "tracing_enabled",
+      retentionPeriod: "retention_period",
+    });
+  })
+);
 
 export function updateWorkspaceRequestToJSON(
   updateWorkspaceRequest: UpdateWorkspaceRequest,

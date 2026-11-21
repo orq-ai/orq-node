@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -26,22 +26,24 @@ export type ListMemoriesResponse = {
 /** @internal */
 export const ListMemoriesResponseObject$inboundSchema: z.ZodNativeEnum<
   typeof ListMemoriesResponseObject
-> = z.nativeEnum(ListMemoriesResponseObject);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ListMemoriesResponseObject));
 
 /** @internal */
 export const ListMemoriesResponse$inboundSchema: z.ZodType<
   ListMemoriesResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: ListMemoriesResponseObject$inboundSchema,
-  data: z.array(Memory$inboundSchema),
-  has_more: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    "has_more": "hasMore",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: ListMemoriesResponseObject$inboundSchema,
+    data: z.array(Memory$inboundSchema),
+    has_more: z.boolean(),
+  }).transform((v) => {
+    return remap$(v, {
+      "has_more": "hasMore",
+    });
+  })
+);
 
 export function listMemoriesResponseFromJSON(
   jsonString: string,

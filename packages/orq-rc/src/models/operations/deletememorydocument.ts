@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type DeleteMemoryDocumentRequest = {
   memoryStoreKey: string;
@@ -23,17 +24,19 @@ export const DeleteMemoryDocumentRequest$outboundSchema: z.ZodType<
   DeleteMemoryDocumentRequest$Outbound,
   z.ZodTypeDef,
   DeleteMemoryDocumentRequest
-> = z.object({
-  memoryStoreKey: z.string(),
-  memoryEntityId: z.string(),
-  documentId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    memoryStoreKey: "memory_store_key",
-    memoryEntityId: "memory_entity_id",
-    documentId: "document_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    memoryStoreKey: z.string(),
+    memoryEntityId: z.string(),
+    documentId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      memoryStoreKey: "memory_store_key",
+      memoryEntityId: "memory_entity_id",
+      documentId: "document_id",
+    });
+  })
+);
 
 export function deleteMemoryDocumentRequestToJSON(
   deleteMemoryDocumentRequest: DeleteMemoryDocumentRequest,

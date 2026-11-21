@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import * as components from "../components/index.js";
 
 export type BulkCreateDatapointsRequest = {
@@ -22,16 +23,18 @@ export const BulkCreateDatapointsRequest$outboundSchema: z.ZodType<
   BulkCreateDatapointsRequest$Outbound,
   z.ZodTypeDef,
   BulkCreateDatapointsRequest
-> = z.object({
-  datasetId: z.string(),
-  bulkCreateDatapointsRequest:
-    components.BulkCreateDatapointsRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    datasetId: "dataset_id",
-    bulkCreateDatapointsRequest: "BulkCreateDatapointsRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    datasetId: z.string(),
+    bulkCreateDatapointsRequest:
+      components.BulkCreateDatapointsRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      datasetId: "dataset_id",
+      bulkCreateDatapointsRequest: "BulkCreateDatapointsRequest",
+    });
+  })
+);
 
 export function bulkCreateDatapointsRequestToJSON(
   bulkCreateDatapointsRequest: BulkCreateDatapointsRequest,

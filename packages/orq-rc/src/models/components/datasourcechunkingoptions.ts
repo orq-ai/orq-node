@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import {
   ChunkingCleanupOptions,
   ChunkingCleanupOptions$Outbound,
@@ -34,15 +35,17 @@ export const DatasourceChunkingOptions$outboundSchema: z.ZodType<
   DatasourceChunkingOptions$Outbound,
   z.ZodTypeDef,
   DatasourceChunkingOptions
-> = z.object({
-  chunkingConfiguration: ChunkingConfiguration$outboundSchema.optional(),
-  chunkingCleanupOptions: ChunkingCleanupOptions$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    chunkingConfiguration: "chunking_configuration",
-    chunkingCleanupOptions: "chunking_cleanup_options",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    chunkingConfiguration: ChunkingConfiguration$outboundSchema.optional(),
+    chunkingCleanupOptions: ChunkingCleanupOptions$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      chunkingConfiguration: "chunking_configuration",
+      chunkingCleanupOptions: "chunking_cleanup_options",
+    });
+  })
+);
 
 export function datasourceChunkingOptionsToJSON(
   datasourceChunkingOptions: DatasourceChunkingOptions,

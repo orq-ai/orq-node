@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -25,23 +25,27 @@ export type KnowledgeBasesServiceListResponse = {
 
 /** @internal */
 export const KnowledgeBasesServiceListResponseObject$inboundSchema:
-  z.ZodNativeEnum<typeof KnowledgeBasesServiceListResponseObject> = z
-    .nativeEnum(KnowledgeBasesServiceListResponseObject);
+  z.ZodNativeEnum<typeof KnowledgeBasesServiceListResponseObject> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(KnowledgeBasesServiceListResponseObject)
+    );
 
 /** @internal */
 export const KnowledgeBasesServiceListResponse$inboundSchema: z.ZodType<
   KnowledgeBasesServiceListResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: KnowledgeBasesServiceListResponseObject$inboundSchema,
-  data: z.array(Knowledge$inboundSchema),
-  has_more: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    "has_more": "hasMore",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: KnowledgeBasesServiceListResponseObject$inboundSchema,
+    data: z.array(Knowledge$inboundSchema),
+    has_more: z.boolean(),
+  }).transform((v) => {
+    return remap$(v, {
+      "has_more": "hasMore",
+    });
+  })
+);
 
 export function knowledgeBasesServiceListResponseFromJSON(
   jsonString: string,

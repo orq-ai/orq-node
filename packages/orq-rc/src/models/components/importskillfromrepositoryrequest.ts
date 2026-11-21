@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import {
   Sharing,
   Sharing$Outbound,
@@ -39,21 +40,23 @@ export const ImportSkillFromRepositoryRequest$outboundSchema: z.ZodType<
   ImportSkillFromRepositoryRequest$Outbound,
   z.ZodTypeDef,
   ImportSkillFromRepositoryRequest
-> = z.object({
-  connectionId: z.string().optional(),
-  repositoryUrl: z.string().optional(),
-  ref: z.string().optional(),
-  subdirectory: z.string().optional(),
-  projectId: z.string().optional(),
-  path: z.string().optional(),
-  sharing: Sharing$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    connectionId: "connection_id",
-    repositoryUrl: "repository_url",
-    projectId: "project_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    connectionId: z.string().optional(),
+    repositoryUrl: z.string().optional(),
+    ref: z.string().optional(),
+    subdirectory: z.string().optional(),
+    projectId: z.string().optional(),
+    path: z.string().optional(),
+    sharing: Sharing$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      connectionId: "connection_id",
+      repositoryUrl: "repository_url",
+      projectId: "project_id",
+    });
+  })
+);
 
 export function importSkillFromRepositoryRequestToJSON(
   importSkillFromRepositoryRequest: ImportSkillFromRepositoryRequest,

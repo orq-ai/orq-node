@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 
 export const McpHealthCoverage = {
@@ -15,4 +16,4 @@ export type McpHealthCoverage = ClosedEnum<typeof McpHealthCoverage>;
 /** @internal */
 export const McpHealthCoverage$inboundSchema: z.ZodNativeEnum<
   typeof McpHealthCoverage
-> = z.nativeEnum(McpHealthCoverage);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(McpHealthCoverage));

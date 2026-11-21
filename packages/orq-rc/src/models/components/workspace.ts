@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -47,7 +47,7 @@ export const WorkspaceMetadata$inboundSchema: z.ZodType<
   WorkspaceMetadata,
   z.ZodTypeDef,
   unknown
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function workspaceMetadataFromJSON(
   jsonString: string,
@@ -64,31 +64,34 @@ export const Workspace$inboundSchema: z.ZodType<
   Workspace,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  key: z.string(),
-  display_name: z.string(),
-  logo_url: z.string().optional(),
-  archived_on: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  archived_by_id: z.string().optional(),
-  organization: WorkspaceOrganization$inboundSchema.optional(),
-  settings: WorkspaceSettingsFields$inboundSchema.optional(),
-  sidebar_version: z.string().optional(),
-  features: WorkspaceFeatures$inboundSchema.optional(),
-  total_members: z.number().int().optional(),
-  metadata: z.lazy(() => WorkspaceMetadata$inboundSchema).optional(),
-  capabilities: WorkspaceCapabilities$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "display_name": "displayName",
-    "logo_url": "logoUrl",
-    "archived_on": "archivedOn",
-    "archived_by_id": "archivedById",
-    "sidebar_version": "sidebarVersion",
-    "total_members": "totalMembers",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    key: z.string(),
+    display_name: z.string(),
+    logo_url: z.string().optional(),
+    archived_on: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ).optional(),
+    archived_by_id: z.string().optional(),
+    organization: WorkspaceOrganization$inboundSchema.optional(),
+    settings: WorkspaceSettingsFields$inboundSchema.optional(),
+    sidebar_version: z.string().optional(),
+    features: WorkspaceFeatures$inboundSchema.optional(),
+    total_members: z.number().int().optional(),
+    metadata: z.lazy(() => WorkspaceMetadata$inboundSchema).optional(),
+    capabilities: WorkspaceCapabilities$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "display_name": "displayName",
+      "logo_url": "logoUrl",
+      "archived_on": "archivedOn",
+      "archived_by_id": "archivedById",
+      "sidebar_version": "sidebarVersion",
+      "total_members": "totalMembers",
+    });
+  })
+);
 
 export function workspaceFromJSON(
   jsonString: string,

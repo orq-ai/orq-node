@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type DuplicateRowRequest = {};
 
@@ -14,7 +15,7 @@ export const DuplicateRowRequest$outboundSchema: z.ZodType<
   DuplicateRowRequest$Outbound,
   z.ZodTypeDef,
   DuplicateRowRequest
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function duplicateRowRequestToJSON(
   duplicateRowRequest: DuplicateRowRequest,

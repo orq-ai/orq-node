@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { blobLikeSchema } from "../../types/blobs.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -335,17 +335,19 @@ export type CreateTranscriptionResponseBody =
 /** @internal */
 export const CreateTranscriptionResponseFormat$outboundSchema: z.ZodNativeEnum<
   typeof CreateTranscriptionResponseFormat
-> = z.nativeEnum(CreateTranscriptionResponseFormat);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(CreateTranscriptionResponseFormat)
+);
 
 /** @internal */
 export const TimestampsGranularity$outboundSchema: z.ZodNativeEnum<
   typeof TimestampsGranularity
-> = z.nativeEnum(TimestampsGranularity);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(TimestampsGranularity));
 
 /** @internal */
 export const TimestampGranularities$outboundSchema: z.ZodNativeEnum<
   typeof TimestampGranularities
-> = z.nativeEnum(TimestampGranularities);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(TimestampGranularities));
 
 /** @internal */
 export type CreateTranscriptionFallbacks$Outbound = {
@@ -357,9 +359,11 @@ export const CreateTranscriptionFallbacks$outboundSchema: z.ZodType<
   CreateTranscriptionFallbacks$Outbound,
   z.ZodTypeDef,
   CreateTranscriptionFallbacks
-> = z.object({
-  model: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model: z.string(),
+  })
+);
 
 export function createTranscriptionFallbacksToJSON(
   createTranscriptionFallbacks: CreateTranscriptionFallbacks,
@@ -382,14 +386,16 @@ export const CreateTranscriptionRetry$outboundSchema: z.ZodType<
   CreateTranscriptionRetry$Outbound,
   z.ZodTypeDef,
   CreateTranscriptionRetry
-> = z.object({
-  count: z.number().default(3),
-  onCodes: z.array(z.number()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    onCodes: "on_codes",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    count: z.number().default(3),
+    onCodes: z.array(z.number()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      onCodes: "on_codes",
+    });
+  })
+);
 
 export function createTranscriptionRetryToJSON(
   createTranscriptionRetry: CreateTranscriptionRetry,
@@ -401,9 +407,10 @@ export function createTranscriptionRetryToJSON(
 
 /** @internal */
 export const CreateTranscriptionLoadBalancerType$outboundSchema:
-  z.ZodNativeEnum<typeof CreateTranscriptionLoadBalancerType> = z.nativeEnum(
-    CreateTranscriptionLoadBalancerType,
-  );
+  z.ZodNativeEnum<typeof CreateTranscriptionLoadBalancerType> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(CreateTranscriptionLoadBalancerType)
+    );
 
 /** @internal */
 export type CreateTranscriptionLoadBalancerModels$Outbound = {
@@ -416,10 +423,12 @@ export const CreateTranscriptionLoadBalancerModels$outboundSchema: z.ZodType<
   CreateTranscriptionLoadBalancerModels$Outbound,
   z.ZodTypeDef,
   CreateTranscriptionLoadBalancerModels
-> = z.object({
-  model: z.string(),
-  weight: z.number().default(0.5),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model: z.string(),
+    weight: z.number().default(0.5),
+  })
+);
 
 export function createTranscriptionLoadBalancerModelsToJSON(
   createTranscriptionLoadBalancerModels: CreateTranscriptionLoadBalancerModels,
@@ -442,12 +451,14 @@ export const CreateTranscriptionLoadBalancer1$outboundSchema: z.ZodType<
   CreateTranscriptionLoadBalancer1$Outbound,
   z.ZodTypeDef,
   CreateTranscriptionLoadBalancer1
-> = z.object({
-  type: CreateTranscriptionLoadBalancerType$outboundSchema,
-  models: z.array(
-    z.lazy(() => CreateTranscriptionLoadBalancerModels$outboundSchema),
-  ),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: CreateTranscriptionLoadBalancerType$outboundSchema,
+    models: z.array(
+      z.lazy(() => CreateTranscriptionLoadBalancerModels$outboundSchema),
+    ),
+  })
+);
 
 export function createTranscriptionLoadBalancer1ToJSON(
   createTranscriptionLoadBalancer1: CreateTranscriptionLoadBalancer1,
@@ -468,7 +479,9 @@ export const CreateTranscriptionLoadBalancer$outboundSchema: z.ZodType<
   CreateTranscriptionLoadBalancer$Outbound,
   z.ZodTypeDef,
   CreateTranscriptionLoadBalancer
-> = z.lazy(() => CreateTranscriptionLoadBalancer1$outboundSchema);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.lazy(() => CreateTranscriptionLoadBalancer1$outboundSchema)
+);
 
 export function createTranscriptionLoadBalancerToJSON(
   createTranscriptionLoadBalancer: CreateTranscriptionLoadBalancer,
@@ -490,13 +503,15 @@ export const CreateTranscriptionTimeout$outboundSchema: z.ZodType<
   CreateTranscriptionTimeout$Outbound,
   z.ZodTypeDef,
   CreateTranscriptionTimeout
-> = z.object({
-  callTimeout: z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    callTimeout: "call_timeout",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    callTimeout: z.number(),
+  }).transform((v) => {
+    return remap$(v, {
+      callTimeout: "call_timeout",
+    });
+  })
+);
 
 export function createTranscriptionTimeoutToJSON(
   createTranscriptionTimeout: CreateTranscriptionTimeout,
@@ -517,9 +532,11 @@ export const CreateTranscriptionRouterAudioTranscriptionsFallbacks$outboundSchem
     CreateTranscriptionRouterAudioTranscriptionsFallbacks$Outbound,
     z.ZodTypeDef,
     CreateTranscriptionRouterAudioTranscriptionsFallbacks
-  > = z.object({
-    model: z.string(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      model: z.string(),
+    })
+  );
 
 export function createTranscriptionRouterAudioTranscriptionsFallbacksToJSON(
   createTranscriptionRouterAudioTranscriptionsFallbacks:
@@ -544,14 +561,16 @@ export const CreateTranscriptionRouterAudioTranscriptionsRetry$outboundSchema:
     CreateTranscriptionRouterAudioTranscriptionsRetry$Outbound,
     z.ZodTypeDef,
     CreateTranscriptionRouterAudioTranscriptionsRetry
-  > = z.object({
-    count: z.number().default(3),
-    onCodes: z.array(z.number()).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      onCodes: "on_codes",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      count: z.number().default(3),
+      onCodes: z.array(z.number()).optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        onCodes: "on_codes",
+      });
+    })
+  );
 
 export function createTranscriptionRouterAudioTranscriptionsRetryToJSON(
   createTranscriptionRouterAudioTranscriptionsRetry:
@@ -568,8 +587,8 @@ export function createTranscriptionRouterAudioTranscriptionsRetryToJSON(
 export const CreateTranscriptionLoadBalancerRouterAudioTranscriptionsType$outboundSchema:
   z.ZodNativeEnum<
     typeof CreateTranscriptionLoadBalancerRouterAudioTranscriptionsType
-  > = z.nativeEnum(
-    CreateTranscriptionLoadBalancerRouterAudioTranscriptionsType,
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.nativeEnum(CreateTranscriptionLoadBalancerRouterAudioTranscriptionsType)
   );
 
 /** @internal */
@@ -585,10 +604,12 @@ export const CreateTranscriptionLoadBalancerRouterAudioTranscriptionsModels$outb
     CreateTranscriptionLoadBalancerRouterAudioTranscriptionsModels$Outbound,
     z.ZodTypeDef,
     CreateTranscriptionLoadBalancerRouterAudioTranscriptionsModels
-  > = z.object({
-    model: z.string(),
-    weight: z.number().default(0.5),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      model: z.string(),
+      weight: z.number().default(0.5),
+    })
+  );
 
 export function createTranscriptionLoadBalancerRouterAudioTranscriptionsModelsToJSON(
   createTranscriptionLoadBalancerRouterAudioTranscriptionsModels:
@@ -615,15 +636,15 @@ export const CreateTranscriptionLoadBalancerRouterAudioTranscriptions1$outboundS
     CreateTranscriptionLoadBalancerRouterAudioTranscriptions1$Outbound,
     z.ZodTypeDef,
     CreateTranscriptionLoadBalancerRouterAudioTranscriptions1
-  > = z.object({
-    type:
-      CreateTranscriptionLoadBalancerRouterAudioTranscriptionsType$outboundSchema,
-    models: z.array(
-      z.lazy(() =>
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type:
+        CreateTranscriptionLoadBalancerRouterAudioTranscriptionsType$outboundSchema,
+      models: z.array(z.lazy(() =>
         CreateTranscriptionLoadBalancerRouterAudioTranscriptionsModels$outboundSchema
-      ),
-    ),
-  });
+      )),
+    })
+  );
 
 export function createTranscriptionLoadBalancerRouterAudioTranscriptions1ToJSON(
   createTranscriptionLoadBalancerRouterAudioTranscriptions1:
@@ -645,8 +666,10 @@ export const CreateTranscriptionRouterAudioTranscriptionsLoadBalancer$outboundSc
     CreateTranscriptionRouterAudioTranscriptionsLoadBalancer$Outbound,
     z.ZodTypeDef,
     CreateTranscriptionRouterAudioTranscriptionsLoadBalancer
-  > = z.lazy(() =>
-    CreateTranscriptionLoadBalancerRouterAudioTranscriptions1$outboundSchema
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.lazy(() =>
+      CreateTranscriptionLoadBalancerRouterAudioTranscriptions1$outboundSchema
+    )
   );
 
 export function createTranscriptionRouterAudioTranscriptionsLoadBalancerToJSON(
@@ -670,13 +693,15 @@ export const CreateTranscriptionRouterAudioTranscriptionsTimeout$outboundSchema:
     CreateTranscriptionRouterAudioTranscriptionsTimeout$Outbound,
     z.ZodTypeDef,
     CreateTranscriptionRouterAudioTranscriptionsTimeout
-  > = z.object({
-    callTimeout: z.number(),
-  }).transform((v) => {
-    return remap$(v, {
-      callTimeout: "call_timeout",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      callTimeout: z.number(),
+    }).transform((v) => {
+      return remap$(v, {
+        callTimeout: "call_timeout",
+      });
+    })
+  );
 
 export function createTranscriptionRouterAudioTranscriptionsTimeoutToJSON(
   createTranscriptionRouterAudioTranscriptionsTimeout:
@@ -714,31 +739,31 @@ export const CreateTranscriptionOrq$outboundSchema: z.ZodType<
   CreateTranscriptionOrq$Outbound,
   z.ZodTypeDef,
   CreateTranscriptionOrq
-> = z.object({
-  name: z.string().optional(),
-  fallbacks: z.array(
-    z.lazy(() =>
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    fallbacks: z.array(z.lazy(() =>
       CreateTranscriptionRouterAudioTranscriptionsFallbacks$outboundSchema
-    ),
-  ).optional(),
-  fallbackOnCodes: z.array(z.number().int()).optional(),
-  retry: z.lazy(() =>
-    CreateTranscriptionRouterAudioTranscriptionsRetry$outboundSchema
-  ).optional(),
-  identity: components.PublicIdentity$outboundSchema.optional(),
-  contact: components.PublicContact$outboundSchema.optional(),
-  loadBalancer: z.lazy(() =>
-    CreateTranscriptionLoadBalancerRouterAudioTranscriptions1$outboundSchema
-  ).optional(),
-  timeout: z.lazy(() =>
-    CreateTranscriptionRouterAudioTranscriptionsTimeout$outboundSchema
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    fallbackOnCodes: "fallback_on_codes",
-    loadBalancer: "load_balancer",
-  });
-});
+    )).optional(),
+    fallbackOnCodes: z.array(z.number().int()).optional(),
+    retry: z.lazy(() =>
+      CreateTranscriptionRouterAudioTranscriptionsRetry$outboundSchema
+    ).optional(),
+    identity: components.PublicIdentity$outboundSchema.optional(),
+    contact: components.PublicContact$outboundSchema.optional(),
+    loadBalancer: z.lazy(() =>
+      CreateTranscriptionLoadBalancerRouterAudioTranscriptions1$outboundSchema
+    ).optional(),
+    timeout: z.lazy(() =>
+      CreateTranscriptionRouterAudioTranscriptionsTimeout$outboundSchema
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      fallbackOnCodes: "fallback_on_codes",
+      loadBalancer: "load_balancer",
+    });
+  })
+);
 
 export function createTranscriptionOrqToJSON(
   createTranscriptionOrq: CreateTranscriptionOrq,
@@ -759,15 +784,17 @@ export const FileT$outboundSchema: z.ZodType<
   FileT$Outbound,
   z.ZodTypeDef,
   FileT
-> = z.object({
-  fileName: z.string(),
-  content: z.union([
-    z.instanceof(ReadableStream<Uint8Array>),
-    z.instanceof(Blob),
-    z.instanceof(ArrayBuffer),
-    z.instanceof(Uint8Array),
-  ]),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    fileName: z.string(),
+    content: z.union([
+      z.instanceof(ReadableStream<Uint8Array>),
+      z.instanceof(Blob),
+      z.instanceof(ArrayBuffer),
+      z.instanceof(Uint8Array),
+    ]),
+  })
+);
 
 export function fileToJSON(fileT: FileT): string {
   return JSON.stringify(FileT$outboundSchema.parse(fileT));
@@ -801,41 +828,44 @@ export const CreateTranscriptionRequestBody$outboundSchema: z.ZodType<
   CreateTranscriptionRequestBody$Outbound,
   z.ZodTypeDef,
   CreateTranscriptionRequestBody
-> = z.object({
-  model: z.string(),
-  prompt: z.string().optional(),
-  enableLogging: z.boolean().default(true),
-  diarize: z.boolean().default(false),
-  responseFormat: CreateTranscriptionResponseFormat$outboundSchema.optional(),
-  tagAudioEvents: z.boolean().default(true),
-  numSpeakers: z.number().optional(),
-  timestampsGranularity: TimestampsGranularity$outboundSchema.default("word"),
-  temperature: z.number().optional(),
-  language: z.string().optional(),
-  timestampGranularities: z.array(TimestampGranularities$outboundSchema)
-    .optional(),
-  name: z.string().optional(),
-  fallbackOnCodes: z.array(z.number().int()).optional(),
-  fallbacks: z.array(z.lazy(() => CreateTranscriptionFallbacks$outboundSchema))
-    .optional(),
-  retry: z.lazy(() => CreateTranscriptionRetry$outboundSchema).optional(),
-  loadBalancer: z.lazy(() => CreateTranscriptionLoadBalancer1$outboundSchema)
-    .optional(),
-  timeout: z.lazy(() => CreateTranscriptionTimeout$outboundSchema).optional(),
-  orq: z.lazy(() => CreateTranscriptionOrq$outboundSchema).optional(),
-  file: z.lazy(() => FileT$outboundSchema).or(blobLikeSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    enableLogging: "enable_logging",
-    responseFormat: "response_format",
-    tagAudioEvents: "tag_audio_events",
-    numSpeakers: "num_speakers",
-    timestampsGranularity: "timestamps_granularity",
-    timestampGranularities: "timestamp_granularities",
-    fallbackOnCodes: "fallback_on_codes",
-    loadBalancer: "load_balancer",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model: z.string(),
+    prompt: z.string().optional(),
+    enableLogging: z.boolean().default(true),
+    diarize: z.boolean().default(false),
+    responseFormat: CreateTranscriptionResponseFormat$outboundSchema.optional(),
+    tagAudioEvents: z.boolean().default(true),
+    numSpeakers: z.number().optional(),
+    timestampsGranularity: TimestampsGranularity$outboundSchema.default("word"),
+    temperature: z.number().optional(),
+    language: z.string().optional(),
+    timestampGranularities: z.array(TimestampGranularities$outboundSchema)
+      .optional(),
+    name: z.string().optional(),
+    fallbackOnCodes: z.array(z.number().int()).optional(),
+    fallbacks: z.array(
+      z.lazy(() => CreateTranscriptionFallbacks$outboundSchema),
+    ).optional(),
+    retry: z.lazy(() => CreateTranscriptionRetry$outboundSchema).optional(),
+    loadBalancer: z.lazy(() => CreateTranscriptionLoadBalancer1$outboundSchema)
+      .optional(),
+    timeout: z.lazy(() => CreateTranscriptionTimeout$outboundSchema).optional(),
+    orq: z.lazy(() => CreateTranscriptionOrq$outboundSchema).optional(),
+    file: z.lazy(() => FileT$outboundSchema).or(blobLikeSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      enableLogging: "enable_logging",
+      responseFormat: "response_format",
+      tagAudioEvents: "tag_audio_events",
+      numSpeakers: "num_speakers",
+      timestampsGranularity: "timestamps_granularity",
+      timestampGranularities: "timestamp_granularities",
+      fallbackOnCodes: "fallback_on_codes",
+      loadBalancer: "load_balancer",
+    });
+  })
+);
 
 export function createTranscriptionRequestBodyToJSON(
   createTranscriptionRequestBody: CreateTranscriptionRequestBody,
@@ -848,12 +878,14 @@ export function createTranscriptionRequestBodyToJSON(
 }
 
 /** @internal */
-export const Words$inboundSchema: z.ZodType<Words, z.ZodTypeDef, unknown> = z
-  .object({
-    word: z.string().optional(),
-    start: z.number().optional(),
-    end: z.number().optional(),
-  });
+export const Words$inboundSchema: z.ZodType<Words, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      word: z.string().optional(),
+      start: z.number().optional(),
+      end: z.number().optional(),
+    })
+  );
 
 export function wordsFromJSON(
   jsonString: string,
@@ -870,24 +902,26 @@ export const Segments$inboundSchema: z.ZodType<
   Segments,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.number(),
-  seek: z.number(),
-  start: z.number(),
-  end: z.number(),
-  text: z.string(),
-  tokens: z.array(z.number()),
-  temperature: z.number(),
-  avg_logprob: z.number(),
-  compression_ratio: z.number(),
-  no_speech_prob: z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    "avg_logprob": "avgLogprob",
-    "compression_ratio": "compressionRatio",
-    "no_speech_prob": "noSpeechProb",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.number(),
+    seek: z.number(),
+    start: z.number(),
+    end: z.number(),
+    text: z.string(),
+    tokens: z.array(z.number()),
+    temperature: z.number(),
+    avg_logprob: z.number(),
+    compression_ratio: z.number(),
+    no_speech_prob: z.number(),
+  }).transform((v) => {
+    return remap$(v, {
+      "avg_logprob": "avgLogprob",
+      "compression_ratio": "compressionRatio",
+      "no_speech_prob": "noSpeechProb",
+    });
+  })
+);
 
 export function segmentsFromJSON(
   jsonString: string,
@@ -904,14 +938,16 @@ export const ResponseBody2$inboundSchema: z.ZodType<
   ResponseBody2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  task: z.string().optional(),
-  language: z.string().optional(),
-  duration: z.number().optional(),
-  text: z.string(),
-  words: z.array(z.lazy(() => Words$inboundSchema)).optional(),
-  segments: z.array(z.lazy(() => Segments$inboundSchema)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    task: z.string().optional(),
+    language: z.string().optional(),
+    duration: z.number().optional(),
+    text: z.string(),
+    words: z.array(z.lazy(() => Words$inboundSchema)).optional(),
+    segments: z.array(z.lazy(() => Segments$inboundSchema)).optional(),
+  })
+);
 
 export function responseBody2FromJSON(
   jsonString: string,
@@ -928,9 +964,11 @@ export const ResponseBody1$inboundSchema: z.ZodType<
   ResponseBody1,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  text: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    text: z.string(),
+  })
+);
 
 export function responseBody1FromJSON(
   jsonString: string,
@@ -947,11 +985,13 @@ export const CreateTranscriptionResponseBody$inboundSchema: z.ZodType<
   CreateTranscriptionResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  z.lazy(() => ResponseBody1$inboundSchema),
-  z.lazy(() => ResponseBody2$inboundSchema),
-  z.string(),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => ResponseBody1$inboundSchema),
+    z.lazy(() => ResponseBody2$inboundSchema),
+    z.string(),
+  ])
+);
 
 export function createTranscriptionResponseBodyFromJSON(
   jsonString: string,

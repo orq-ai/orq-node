@@ -14,6 +14,24 @@ const value: operations.TwoText = {
 };
 ```
 
+### `operations.OutputText`
+
+```typescript
+const value: operations.OutputText = {
+  text: "<value>",
+  type: "output_text",
+};
+```
+
+### `operations.ReasoningText`
+
+```typescript
+const value: operations.ReasoningText = {
+  text: "<value>",
+  type: "reasoning_text",
+};
+```
+
 ### `operations.TwoImage`
 
 ```typescript

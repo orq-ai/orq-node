@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type ReplayAuditLogDeliveriesRequest = {
   /**
@@ -26,10 +27,12 @@ export const ReplayAuditLogDeliveriesRequest$outboundSchema: z.ZodType<
   ReplayAuditLogDeliveriesRequest$Outbound,
   z.ZodTypeDef,
   ReplayAuditLogDeliveriesRequest
-> = z.object({
-  from: z.date().transform(v => v.toISOString()),
-  to: z.date().transform(v => v.toISOString()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    from: z.date().transform(v => v.toISOString()),
+    to: z.date().transform(v => v.toISOString()),
+  })
+);
 
 export function replayAuditLogDeliveriesRequestToJSON(
   replayAuditLogDeliveriesRequest: ReplayAuditLogDeliveriesRequest,

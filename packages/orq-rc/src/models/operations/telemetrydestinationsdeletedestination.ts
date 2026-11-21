@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type TelemetryDestinationsDeleteDestinationRequest = {
   destinationId: string;
@@ -20,13 +21,15 @@ export const TelemetryDestinationsDeleteDestinationRequest$outboundSchema:
     TelemetryDestinationsDeleteDestinationRequest$Outbound,
     z.ZodTypeDef,
     TelemetryDestinationsDeleteDestinationRequest
-  > = z.object({
-    destinationId: z.string(),
-  }).transform((v) => {
-    return remap$(v, {
-      destinationId: "destination_id",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      destinationId: z.string(),
+    }).transform((v) => {
+      return remap$(v, {
+        destinationId: "destination_id",
+      });
+    })
+  );
 
 export function telemetryDestinationsDeleteDestinationRequestToJSON(
   telemetryDestinationsDeleteDestinationRequest:

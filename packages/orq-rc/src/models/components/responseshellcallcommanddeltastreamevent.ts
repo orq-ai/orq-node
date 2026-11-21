@@ -6,6 +6,7 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import {
   collectExtraKeys as collectExtraKeys$,
+  lazySchema as lazySchema$,
   safeParse,
 } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -47,24 +48,26 @@ export const ResponseShellCallCommandDeltaStreamEvent$inboundSchema: z.ZodType<
   ResponseShellCallCommandDeltaStreamEvent,
   z.ZodTypeDef,
   unknown
-> = collectExtraKeys$(
-  z.object({
-    command_index: z.number().int(),
-    delta: z.string(),
-    obfuscation: z.string().optional(),
-    output_index: z.number().int(),
-    sequence_number: z.number().int(),
-    type: z.literal("response.shell_call_command.delta"),
-  }).catchall(z.any()),
-  "additionalProperties",
-  true,
-).transform((v) => {
-  return remap$(v, {
-    "command_index": "commandIndex",
-    "output_index": "outputIndex",
-    "sequence_number": "sequenceNumber",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  collectExtraKeys$(
+    z.object({
+      command_index: z.number().int(),
+      delta: z.string(),
+      obfuscation: z.string().optional(),
+      output_index: z.number().int(),
+      sequence_number: z.number().int(),
+      type: z.literal("response.shell_call_command.delta"),
+    }).catchall(z.any()),
+    "additionalProperties",
+    true,
+  ).transform((v) => {
+    return remap$(v, {
+      "command_index": "commandIndex",
+      "output_index": "outputIndex",
+      "sequence_number": "sequenceNumber",
+    });
+  })
+);
 
 export function responseShellCallCommandDeltaStreamEventFromJSON(
   jsonString: string,

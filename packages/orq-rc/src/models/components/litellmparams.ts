@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type LiteLLMParams = {
   mergeReasoningContentInChoices: boolean;
@@ -25,18 +26,20 @@ export const LiteLLMParams$outboundSchema: z.ZodType<
   LiteLLMParams$Outbound,
   z.ZodTypeDef,
   LiteLLMParams
-> = z.object({
-  mergeReasoningContentInChoices: z.boolean(),
-  model: z.string(),
-  useInPassThrough: z.boolean(),
-  useLitellmProxy: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    mergeReasoningContentInChoices: "merge_reasoning_content_in_choices",
-    useInPassThrough: "use_in_pass_through",
-    useLitellmProxy: "use_litellm_proxy",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    mergeReasoningContentInChoices: z.boolean(),
+    model: z.string(),
+    useInPassThrough: z.boolean(),
+    useLitellmProxy: z.boolean(),
+  }).transform((v) => {
+    return remap$(v, {
+      mergeReasoningContentInChoices: "merge_reasoning_content_in_choices",
+      useInPassThrough: "use_in_pass_through",
+      useLitellmProxy: "use_litellm_proxy",
+    });
+  })
+);
 
 export function liteLLMParamsToJSON(liteLLMParams: LiteLLMParams): string {
   return JSON.stringify(LiteLLMParams$outboundSchema.parse(liteLLMParams));

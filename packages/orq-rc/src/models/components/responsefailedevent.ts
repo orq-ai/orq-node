@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -35,10 +35,12 @@ export const ResponseFailedEventData$inboundSchema: z.ZodType<
   ResponseFailedEventData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  error: z.string(),
-  code: z.number(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    error: z.string(),
+    code: z.number(),
+  })
+);
 
 export function responseFailedEventDataFromJSON(
   jsonString: string,
@@ -55,11 +57,13 @@ export const ResponseFailedEvent$inboundSchema: z.ZodType<
   ResponseFailedEvent,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("response.failed"),
-  timestamp: z.string(),
-  data: z.lazy(() => ResponseFailedEventData$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("response.failed"),
+    timestamp: z.string(),
+    data: z.lazy(() => ResponseFailedEventData$inboundSchema),
+  })
+);
 
 export function responseFailedEventFromJSON(
   jsonString: string,

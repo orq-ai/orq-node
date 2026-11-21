@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type OpenAIContextManagement = {
   compactThreshold?: number | undefined;
@@ -23,16 +24,18 @@ export const OpenAIContextManagement$outboundSchema: z.ZodType<
   OpenAIContextManagement$Outbound,
   z.ZodTypeDef,
   OpenAIContextManagement
-> = z.object({
-  compactThreshold: z.number().int().optional(),
-  providerNative: z.boolean().optional(),
-  type: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    compactThreshold: "compact_threshold",
-    providerNative: "provider_native",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    compactThreshold: z.number().int().optional(),
+    providerNative: z.boolean().optional(),
+    type: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      compactThreshold: "compact_threshold",
+      providerNative: "provider_native",
+    });
+  })
+);
 
 export function openAIContextManagementToJSON(
   openAIContextManagement: OpenAIContextManagement,

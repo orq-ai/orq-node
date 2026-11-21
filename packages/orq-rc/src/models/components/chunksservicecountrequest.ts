@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 
 /**
@@ -34,7 +35,9 @@ export type ChunksServiceCountRequest = {
 /** @internal */
 export const ChunksServiceCountRequestStatus$outboundSchema: z.ZodNativeEnum<
   typeof ChunksServiceCountRequestStatus
-> = z.nativeEnum(ChunksServiceCountRequestStatus);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(ChunksServiceCountRequestStatus)
+);
 
 /** @internal */
 export type ChunksServiceCountRequest$Outbound = {
@@ -48,11 +51,13 @@ export const ChunksServiceCountRequest$outboundSchema: z.ZodType<
   ChunksServiceCountRequest$Outbound,
   z.ZodTypeDef,
   ChunksServiceCountRequest
-> = z.object({
-  q: z.string().default(""),
-  enabled: z.boolean().optional(),
-  status: ChunksServiceCountRequestStatus$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    q: z.string().default(""),
+    enabled: z.boolean().optional(),
+    status: ChunksServiceCountRequestStatus$outboundSchema.optional(),
+  })
+);
 
 export function chunksServiceCountRequestToJSON(
   chunksServiceCountRequest: ChunksServiceCountRequest,

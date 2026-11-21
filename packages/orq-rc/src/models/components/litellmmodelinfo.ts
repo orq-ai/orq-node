@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type LiteLLMModelInfo = {
   dbModel: boolean | null;
@@ -51,42 +52,44 @@ export const LiteLLMModelInfo$outboundSchema: z.ZodType<
   LiteLLMModelInfo$Outbound,
   z.ZodTypeDef,
   LiteLLMModelInfo
-> = z.object({
-  dbModel: z.nullable(z.boolean()),
-  id: z.nullable(z.string()),
-  inputCostPerToken: z.number().optional(),
-  key: z.nullable(z.string()),
-  litellmProvider: z.nullable(z.string()),
-  maxInputTokens: z.number().int().optional(),
-  maxOutputTokens: z.number().int().optional(),
-  mode: z.nullable(z.string()),
-  outputCostPerToken: z.number().optional(),
-  supportedOpenaiParams: z.nullable(z.array(z.string())).optional(),
-  supportsFunctionCalling: z.boolean().optional(),
-  supportsNativeStreaming: z.boolean().optional(),
-  supportsReasoning: z.boolean().optional(),
-  supportsResponseSchema: z.boolean().optional(),
-  supportsSystemMessages: z.boolean().optional(),
-  supportsToolChoice: z.boolean().optional(),
-  supportsVision: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    dbModel: "db_model",
-    inputCostPerToken: "input_cost_per_token",
-    litellmProvider: "litellm_provider",
-    maxInputTokens: "max_input_tokens",
-    maxOutputTokens: "max_output_tokens",
-    outputCostPerToken: "output_cost_per_token",
-    supportedOpenaiParams: "supported_openai_params",
-    supportsFunctionCalling: "supports_function_calling",
-    supportsNativeStreaming: "supports_native_streaming",
-    supportsReasoning: "supports_reasoning",
-    supportsResponseSchema: "supports_response_schema",
-    supportsSystemMessages: "supports_system_messages",
-    supportsToolChoice: "supports_tool_choice",
-    supportsVision: "supports_vision",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    dbModel: z.nullable(z.boolean()),
+    id: z.nullable(z.string()),
+    inputCostPerToken: z.number().optional(),
+    key: z.nullable(z.string()),
+    litellmProvider: z.nullable(z.string()),
+    maxInputTokens: z.number().int().optional(),
+    maxOutputTokens: z.number().int().optional(),
+    mode: z.nullable(z.string()),
+    outputCostPerToken: z.number().optional(),
+    supportedOpenaiParams: z.nullable(z.array(z.string())).optional(),
+    supportsFunctionCalling: z.boolean().optional(),
+    supportsNativeStreaming: z.boolean().optional(),
+    supportsReasoning: z.boolean().optional(),
+    supportsResponseSchema: z.boolean().optional(),
+    supportsSystemMessages: z.boolean().optional(),
+    supportsToolChoice: z.boolean().optional(),
+    supportsVision: z.boolean().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      dbModel: "db_model",
+      inputCostPerToken: "input_cost_per_token",
+      litellmProvider: "litellm_provider",
+      maxInputTokens: "max_input_tokens",
+      maxOutputTokens: "max_output_tokens",
+      outputCostPerToken: "output_cost_per_token",
+      supportedOpenaiParams: "supported_openai_params",
+      supportsFunctionCalling: "supports_function_calling",
+      supportsNativeStreaming: "supports_native_streaming",
+      supportsReasoning: "supports_reasoning",
+      supportsResponseSchema: "supports_response_schema",
+      supportsSystemMessages: "supports_system_messages",
+      supportsToolChoice: "supports_tool_choice",
+      supportsVision: "supports_vision",
+    });
+  })
+);
 
 export function liteLLMModelInfoToJSON(
   liteLLMModelInfo: LiteLLMModelInfo,

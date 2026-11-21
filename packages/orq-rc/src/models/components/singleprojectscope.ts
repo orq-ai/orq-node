@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type SingleProjectScope = {
   projectId: string;
@@ -19,13 +20,15 @@ export const SingleProjectScope$outboundSchema: z.ZodType<
   SingleProjectScope$Outbound,
   z.ZodTypeDef,
   SingleProjectScope
-> = z.object({
-  projectId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    projectId: "project_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    projectId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      projectId: "project_id",
+    });
+  })
+);
 
 export function singleProjectScopeToJSON(
   singleProjectScope: SingleProjectScope,

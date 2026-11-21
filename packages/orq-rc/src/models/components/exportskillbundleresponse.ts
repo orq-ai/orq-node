@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -28,15 +28,17 @@ export const ExportSkillBundleResponse$inboundSchema: z.ZodType<
   ExportSkillBundleResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  bundle: z.string().optional(),
-  content_type: z.string().optional(),
-  filename: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "content_type": "contentType",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    bundle: z.string().optional(),
+    content_type: z.string().optional(),
+    filename: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "content_type": "contentType",
+    });
+  })
+);
 
 export function exportSkillBundleResponseFromJSON(
   jsonString: string,

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type WebhookDeleteRequest = {
   id: string;
@@ -18,9 +19,11 @@ export const WebhookDeleteRequest$outboundSchema: z.ZodType<
   WebhookDeleteRequest$Outbound,
   z.ZodTypeDef,
   WebhookDeleteRequest
-> = z.object({
-  id: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+  })
+);
 
 export function webhookDeleteRequestToJSON(
   webhookDeleteRequest: WebhookDeleteRequest,

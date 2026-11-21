@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type EnvironmentDeleteRequest = {
   environmentId: string;
@@ -19,13 +20,15 @@ export const EnvironmentDeleteRequest$outboundSchema: z.ZodType<
   EnvironmentDeleteRequest$Outbound,
   z.ZodTypeDef,
   EnvironmentDeleteRequest
-> = z.object({
-  environmentId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    environmentId: "environment_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    environmentId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      environmentId: "environment_id",
+    });
+  })
+);
 
 export function environmentDeleteRequestToJSON(
   environmentDeleteRequest: EnvironmentDeleteRequest,

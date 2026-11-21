@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type QueryTracesRequest = {
   from: Date;
@@ -27,17 +28,19 @@ export const QueryTracesRequest$outboundSchema: z.ZodType<
   QueryTracesRequest$Outbound,
   z.ZodTypeDef,
   QueryTracesRequest
-> = z.object({
-  from: z.date().transform(v => v.toISOString()),
-  to: z.date().transform(v => v.toISOString()),
-  oql: z.string(),
-  limit: z.number().int().optional(),
-  pageToken: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    pageToken: "page_token",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    from: z.date().transform(v => v.toISOString()),
+    to: z.date().transform(v => v.toISOString()),
+    oql: z.string(),
+    limit: z.number().int().optional(),
+    pageToken: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      pageToken: "page_token",
+    });
+  })
+);
 
 export function queryTracesRequestToJSON(
   queryTracesRequest: QueryTracesRequest,

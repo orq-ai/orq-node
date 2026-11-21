@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type DeleteToolRequest = {
   toolId: string;
@@ -19,13 +20,15 @@ export const DeleteToolRequest$outboundSchema: z.ZodType<
   DeleteToolRequest$Outbound,
   z.ZodTypeDef,
   DeleteToolRequest
-> = z.object({
-  toolId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    toolId: "tool_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    toolId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      toolId: "tool_id",
+    });
+  })
+);
 
 export function deleteToolRequestToJSON(
   deleteToolRequest: DeleteToolRequest,

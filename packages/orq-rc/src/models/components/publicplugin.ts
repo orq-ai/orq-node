@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 
 /**
@@ -79,17 +80,17 @@ export type PublicPlugin = {
 /** @internal */
 export const PublicPluginId$outboundSchema: z.ZodNativeEnum<
   typeof PublicPluginId
-> = z.nativeEnum(PublicPluginId);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(PublicPluginId));
 
 /** @internal */
 export const PublicPluginMask$outboundSchema: z.ZodNativeEnum<
   typeof PublicPluginMask
-> = z.nativeEnum(PublicPluginMask);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(PublicPluginMask));
 
 /** @internal */
 export const PublicPluginOnFailure$outboundSchema: z.ZodNativeEnum<
   typeof PublicPluginOnFailure
-> = z.nativeEnum(PublicPluginOnFailure);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(PublicPluginOnFailure));
 
 /** @internal */
 export type PublicPlugin$Outbound = {
@@ -108,21 +109,23 @@ export const PublicPlugin$outboundSchema: z.ZodType<
   PublicPlugin$Outbound,
   z.ZodTypeDef,
   PublicPlugin
-> = z.object({
-  entities: z.nullable(z.array(z.string())).optional(),
-  entityThresholds: z.record(z.number()).optional(),
-  id: PublicPluginId$outboundSchema,
-  language: z.string().optional(),
-  mask: z.nullable(z.array(PublicPluginMask$outboundSchema)).optional(),
-  onFailure: PublicPluginOnFailure$outboundSchema.optional(),
-  regions: z.nullable(z.array(z.string())).optional(),
-  threshold: z.number().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    entityThresholds: "entity_thresholds",
-    onFailure: "on_failure",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    entities: z.nullable(z.array(z.string())).optional(),
+    entityThresholds: z.record(z.number()).optional(),
+    id: PublicPluginId$outboundSchema,
+    language: z.string().optional(),
+    mask: z.nullable(z.array(PublicPluginMask$outboundSchema)).optional(),
+    onFailure: PublicPluginOnFailure$outboundSchema.optional(),
+    regions: z.nullable(z.array(z.string())).optional(),
+    threshold: z.number().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      entityThresholds: "entity_thresholds",
+      onFailure: "on_failure",
+    });
+  })
+);
 
 export function publicPluginToJSON(publicPlugin: PublicPlugin): string {
   return JSON.stringify(PublicPlugin$outboundSchema.parse(publicPlugin));

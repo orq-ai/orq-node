@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type ReplaceSkillBundleRequest = {
   bundle?: string | undefined;
@@ -18,9 +19,11 @@ export const ReplaceSkillBundleRequest$outboundSchema: z.ZodType<
   ReplaceSkillBundleRequest$Outbound,
   z.ZodTypeDef,
   ReplaceSkillBundleRequest
-> = z.object({
-  bundle: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    bundle: z.string().optional(),
+  })
+);
 
 export function replaceSkillBundleRequestToJSON(
   replaceSkillBundleRequest: ReplaceSkillBundleRequest,

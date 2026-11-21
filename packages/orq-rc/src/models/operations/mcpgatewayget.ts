@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type McpGatewayGetRequest = {
   /**
@@ -21,9 +22,11 @@ export const McpGatewayGetRequest$outboundSchema: z.ZodType<
   McpGatewayGetRequest$Outbound,
   z.ZodTypeDef,
   McpGatewayGetRequest
-> = z.object({
-  id: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+  })
+);
 
 export function mcpGatewayGetRequestToJSON(
   mcpGatewayGetRequest: McpGatewayGetRequest,

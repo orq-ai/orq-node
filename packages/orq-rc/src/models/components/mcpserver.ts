@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -154,12 +154,14 @@ export const Capabilities$inboundSchema: z.ZodType<
   Capabilities,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  tools: z.boolean().optional(),
-  resources: z.boolean().optional(),
-  prompts: z.boolean().optional(),
-  completions: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    tools: z.boolean().optional(),
+    resources: z.boolean().optional(),
+    prompts: z.boolean().optional(),
+    completions: z.boolean().optional(),
+  })
+);
 
 export function capabilitiesFromJSON(
   jsonString: string,
@@ -176,18 +178,20 @@ export const ResourceCatalog$inboundSchema: z.ZodType<
   ResourceCatalog,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  resources: z.array(McpResource$inboundSchema).optional(),
-  resource_templates: z.array(McpResourceTemplate$inboundSchema).optional(),
-  resources_status: McpDiscoveryStatus$inboundSchema.optional(),
-  resource_templates_status: McpDiscoveryStatus$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "resource_templates": "resourceTemplates",
-    "resources_status": "resourcesStatus",
-    "resource_templates_status": "resourceTemplatesStatus",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    resources: z.array(McpResource$inboundSchema).optional(),
+    resource_templates: z.array(McpResourceTemplate$inboundSchema).optional(),
+    resources_status: McpDiscoveryStatus$inboundSchema.optional(),
+    resource_templates_status: McpDiscoveryStatus$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "resource_templates": "resourceTemplates",
+      "resources_status": "resourcesStatus",
+      "resource_templates_status": "resourceTemplatesStatus",
+    });
+  })
+);
 
 export function resourceCatalogFromJSON(
   jsonString: string,
@@ -204,41 +208,43 @@ export const McpServer$inboundSchema: z.ZodType<
   McpServer,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  key: z.string().optional(),
-  display_name: z.string().optional(),
-  description: z.string().optional(),
-  connection: McpConnection$inboundSchema.optional(),
-  auth: McpAuthConfigOutput$inboundSchema.optional(),
-  default_tool_exposure: McpToolExposure$inboundSchema.optional(),
-  sync_state: McpSyncState$inboundSchema.optional(),
-  tools: z.array(McpTool$inboundSchema).optional(),
-  created: z.string().optional(),
-  updated: z.string().optional(),
-  sharing: Sharing$inboundSchema.optional(),
-  created_by_id: z.string().optional(),
-  skills: z.array(McpSkill$inboundSchema).optional(),
-  openapi: McpOpenApiConfig$inboundSchema.optional(),
-  icons: z.array(McpIcon$inboundSchema).optional(),
-  website_url: z.string().optional(),
-  capabilities: z.lazy(() => Capabilities$inboundSchema).optional(),
-  resource_catalog: z.lazy(() => ResourceCatalog$inboundSchema).optional(),
-  prompt_catalog: McpPromptCatalog$inboundSchema.optional(),
-  health: McpServerHealth$inboundSchema.optional(),
-  health_check: McpHealthCheckConfig$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "display_name": "displayName",
-    "default_tool_exposure": "defaultToolExposure",
-    "sync_state": "syncState",
-    "created_by_id": "createdById",
-    "website_url": "websiteUrl",
-    "resource_catalog": "resourceCatalog",
-    "prompt_catalog": "promptCatalog",
-    "health_check": "healthCheck",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    key: z.string().optional(),
+    display_name: z.string().optional(),
+    description: z.string().optional(),
+    connection: McpConnection$inboundSchema.optional(),
+    auth: McpAuthConfigOutput$inboundSchema.optional(),
+    default_tool_exposure: McpToolExposure$inboundSchema.optional(),
+    sync_state: McpSyncState$inboundSchema.optional(),
+    tools: z.array(McpTool$inboundSchema).optional(),
+    created: z.string().optional(),
+    updated: z.string().optional(),
+    sharing: Sharing$inboundSchema.optional(),
+    created_by_id: z.string().optional(),
+    skills: z.array(McpSkill$inboundSchema).optional(),
+    openapi: McpOpenApiConfig$inboundSchema.optional(),
+    icons: z.array(McpIcon$inboundSchema).optional(),
+    website_url: z.string().optional(),
+    capabilities: z.lazy(() => Capabilities$inboundSchema).optional(),
+    resource_catalog: z.lazy(() => ResourceCatalog$inboundSchema).optional(),
+    prompt_catalog: McpPromptCatalog$inboundSchema.optional(),
+    health: McpServerHealth$inboundSchema.optional(),
+    health_check: McpHealthCheckConfig$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "display_name": "displayName",
+      "default_tool_exposure": "defaultToolExposure",
+      "sync_state": "syncState",
+      "created_by_id": "createdById",
+      "website_url": "websiteUrl",
+      "resource_catalog": "resourceCatalog",
+      "prompt_catalog": "promptCatalog",
+      "health_check": "healthCheck",
+    });
+  })
+);
 
 export function mcpServerFromJSON(
   jsonString: string,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -68,45 +68,49 @@ export const TelemetryDestination$inboundSchema: z.ZodType<
   TelemetryDestination,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  display_name: z.string().optional(),
-  provider: z.string().optional(),
-  endpoint_url: z.string().optional(),
-  request_headers: z.record(z.string()).optional(),
-  settings: z.record(z.string()).optional(),
-  content_mode: TelemetryContentMode$inboundSchema.optional(),
-  project_scope: TelemetryProjectScope$inboundSchema.optional(),
-  project_ids: z.array(z.string()).optional(),
-  enabled: z.boolean().optional(),
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  updated_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  failure_count: z.number().int().optional(),
-  last_error: z.string().optional(),
-  last_status_code: z.number().int().optional(),
-  last_attempt_at: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  disabled_reason: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "display_name": "displayName",
-    "endpoint_url": "endpointUrl",
-    "request_headers": "requestHeaders",
-    "content_mode": "contentMode",
-    "project_scope": "projectScope",
-    "project_ids": "projectIds",
-    "created_at": "createdAt",
-    "updated_at": "updatedAt",
-    "failure_count": "failureCount",
-    "last_error": "lastError",
-    "last_status_code": "lastStatusCode",
-    "last_attempt_at": "lastAttemptAt",
-    "disabled_reason": "disabledReason",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    display_name: z.string().optional(),
+    provider: z.string().optional(),
+    endpoint_url: z.string().optional(),
+    request_headers: z.record(z.string()).optional(),
+    settings: z.record(z.string()).optional(),
+    content_mode: TelemetryContentMode$inboundSchema.optional(),
+    project_scope: TelemetryProjectScope$inboundSchema.optional(),
+    project_ids: z.array(z.string()).optional(),
+    enabled: z.boolean().optional(),
+    created_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ).optional(),
+    updated_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ).optional(),
+    failure_count: z.number().int().optional(),
+    last_error: z.string().optional(),
+    last_status_code: z.number().int().optional(),
+    last_attempt_at: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    disabled_reason: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "display_name": "displayName",
+      "endpoint_url": "endpointUrl",
+      "request_headers": "requestHeaders",
+      "content_mode": "contentMode",
+      "project_scope": "projectScope",
+      "project_ids": "projectIds",
+      "created_at": "createdAt",
+      "updated_at": "updatedAt",
+      "failure_count": "failureCount",
+      "last_error": "lastError",
+      "last_status_code": "lastStatusCode",
+      "last_attempt_at": "lastAttemptAt",
+      "disabled_reason": "disabledReason",
+    });
+  })
+);
 
 export function telemetryDestinationFromJSON(
   jsonString: string,

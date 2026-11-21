@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -77,14 +77,16 @@ export const ListBatchesRequest$outboundSchema: z.ZodType<
   ListBatchesRequest$Outbound,
   z.ZodTypeDef,
   ListBatchesRequest
-> = z.object({
-  limit: z.number().int().optional(),
-  after: z.string().optional(),
-  before: z.string().optional(),
-  search: z.string().optional(),
-  status: z.string().optional(),
-  endpoint: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    limit: z.number().int().optional(),
+    after: z.string().optional(),
+    before: z.string().optional(),
+    search: z.string().optional(),
+    status: z.string().optional(),
+    endpoint: z.string().optional(),
+  })
+);
 
 export function listBatchesRequestToJSON(
   listBatchesRequest: ListBatchesRequest,
@@ -99,19 +101,21 @@ export const ListBatchesResponseBody$inboundSchema: z.ZodType<
   ListBatchesResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.nullable(z.array(components.PublicBatch$inboundSchema)),
-  first_id: z.string().optional(),
-  has_more: z.boolean(),
-  last_id: z.string().optional(),
-  object: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "first_id": "firstId",
-    "has_more": "hasMore",
-    "last_id": "lastId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.nullable(z.array(components.PublicBatch$inboundSchema)),
+    first_id: z.string().optional(),
+    has_more: z.boolean(),
+    last_id: z.string().optional(),
+    object: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "first_id": "firstId",
+      "has_more": "hasMore",
+      "last_id": "lastId",
+    });
+  })
+);
 
 export function listBatchesResponseBodyFromJSON(
   jsonString: string,

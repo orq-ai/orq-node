@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import {
   Sharing,
   Sharing$Outbound,
@@ -50,16 +51,18 @@ export const ImportSkillBundleRequest$outboundSchema: z.ZodType<
   ImportSkillBundleRequest$Outbound,
   z.ZodTypeDef,
   ImportSkillBundleRequest
-> = z.object({
-  projectId: z.string().optional(),
-  path: z.string().optional(),
-  bundle: z.string(),
-  sharing: Sharing$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    projectId: "project_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    projectId: z.string().optional(),
+    path: z.string().optional(),
+    bundle: z.string(),
+    sharing: Sharing$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      projectId: "project_id",
+    });
+  })
+);
 
 export function importSkillBundleRequestToJSON(
   importSkillBundleRequest: ImportSkillBundleRequest,

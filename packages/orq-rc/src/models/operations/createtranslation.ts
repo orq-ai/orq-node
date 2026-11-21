@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { blobLikeSchema } from "../../types/blobs.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -321,13 +321,16 @@ export type CreateTranslationResponseBody =
 /** @internal */
 export const CreateTranslationResponseFormat$outboundSchema: z.ZodNativeEnum<
   typeof CreateTranslationResponseFormat
-> = z.nativeEnum(CreateTranslationResponseFormat);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(CreateTranslationResponseFormat)
+);
 
 /** @internal */
 export const CreateTranslationTimestampsGranularity$outboundSchema:
-  z.ZodNativeEnum<typeof CreateTranslationTimestampsGranularity> = z.nativeEnum(
-    CreateTranslationTimestampsGranularity,
-  );
+  z.ZodNativeEnum<typeof CreateTranslationTimestampsGranularity> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(CreateTranslationTimestampsGranularity)
+    );
 
 /** @internal */
 export type CreateTranslationFallbacks$Outbound = {
@@ -339,9 +342,11 @@ export const CreateTranslationFallbacks$outboundSchema: z.ZodType<
   CreateTranslationFallbacks$Outbound,
   z.ZodTypeDef,
   CreateTranslationFallbacks
-> = z.object({
-  model: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model: z.string(),
+  })
+);
 
 export function createTranslationFallbacksToJSON(
   createTranslationFallbacks: CreateTranslationFallbacks,
@@ -362,14 +367,16 @@ export const CreateTranslationRetry$outboundSchema: z.ZodType<
   CreateTranslationRetry$Outbound,
   z.ZodTypeDef,
   CreateTranslationRetry
-> = z.object({
-  count: z.number().default(3),
-  onCodes: z.array(z.number()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    onCodes: "on_codes",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    count: z.number().default(3),
+    onCodes: z.array(z.number()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      onCodes: "on_codes",
+    });
+  })
+);
 
 export function createTranslationRetryToJSON(
   createTranslationRetry: CreateTranslationRetry,
@@ -382,7 +389,9 @@ export function createTranslationRetryToJSON(
 /** @internal */
 export const CreateTranslationLoadBalancerType$outboundSchema: z.ZodNativeEnum<
   typeof CreateTranslationLoadBalancerType
-> = z.nativeEnum(CreateTranslationLoadBalancerType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(CreateTranslationLoadBalancerType)
+);
 
 /** @internal */
 export type CreateTranslationLoadBalancerModels$Outbound = {
@@ -395,10 +404,12 @@ export const CreateTranslationLoadBalancerModels$outboundSchema: z.ZodType<
   CreateTranslationLoadBalancerModels$Outbound,
   z.ZodTypeDef,
   CreateTranslationLoadBalancerModels
-> = z.object({
-  model: z.string(),
-  weight: z.number().default(0.5),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model: z.string(),
+    weight: z.number().default(0.5),
+  })
+);
 
 export function createTranslationLoadBalancerModelsToJSON(
   createTranslationLoadBalancerModels: CreateTranslationLoadBalancerModels,
@@ -421,12 +432,14 @@ export const CreateTranslationLoadBalancer1$outboundSchema: z.ZodType<
   CreateTranslationLoadBalancer1$Outbound,
   z.ZodTypeDef,
   CreateTranslationLoadBalancer1
-> = z.object({
-  type: CreateTranslationLoadBalancerType$outboundSchema,
-  models: z.array(
-    z.lazy(() => CreateTranslationLoadBalancerModels$outboundSchema),
-  ),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: CreateTranslationLoadBalancerType$outboundSchema,
+    models: z.array(
+      z.lazy(() => CreateTranslationLoadBalancerModels$outboundSchema),
+    ),
+  })
+);
 
 export function createTranslationLoadBalancer1ToJSON(
   createTranslationLoadBalancer1: CreateTranslationLoadBalancer1,
@@ -447,7 +460,9 @@ export const CreateTranslationLoadBalancer$outboundSchema: z.ZodType<
   CreateTranslationLoadBalancer$Outbound,
   z.ZodTypeDef,
   CreateTranslationLoadBalancer
-> = z.lazy(() => CreateTranslationLoadBalancer1$outboundSchema);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.lazy(() => CreateTranslationLoadBalancer1$outboundSchema)
+);
 
 export function createTranslationLoadBalancerToJSON(
   createTranslationLoadBalancer: CreateTranslationLoadBalancer,
@@ -469,13 +484,15 @@ export const CreateTranslationTimeout$outboundSchema: z.ZodType<
   CreateTranslationTimeout$Outbound,
   z.ZodTypeDef,
   CreateTranslationTimeout
-> = z.object({
-  callTimeout: z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    callTimeout: "call_timeout",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    callTimeout: z.number(),
+  }).transform((v) => {
+    return remap$(v, {
+      callTimeout: "call_timeout",
+    });
+  })
+);
 
 export function createTranslationTimeoutToJSON(
   createTranslationTimeout: CreateTranslationTimeout,
@@ -496,9 +513,11 @@ export const CreateTranslationRouterAudioTranslationsFallbacks$outboundSchema:
     CreateTranslationRouterAudioTranslationsFallbacks$Outbound,
     z.ZodTypeDef,
     CreateTranslationRouterAudioTranslationsFallbacks
-  > = z.object({
-    model: z.string(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      model: z.string(),
+    })
+  );
 
 export function createTranslationRouterAudioTranslationsFallbacksToJSON(
   createTranslationRouterAudioTranslationsFallbacks:
@@ -523,14 +542,16 @@ export const CreateTranslationRouterAudioTranslationsRetry$outboundSchema:
     CreateTranslationRouterAudioTranslationsRetry$Outbound,
     z.ZodTypeDef,
     CreateTranslationRouterAudioTranslationsRetry
-  > = z.object({
-    count: z.number().default(3),
-    onCodes: z.array(z.number()).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      onCodes: "on_codes",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      count: z.number().default(3),
+      onCodes: z.array(z.number()).optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        onCodes: "on_codes",
+      });
+    })
+  );
 
 export function createTranslationRouterAudioTranslationsRetryToJSON(
   createTranslationRouterAudioTranslationsRetry:
@@ -547,7 +568,9 @@ export function createTranslationRouterAudioTranslationsRetryToJSON(
 export const CreateTranslationLoadBalancerRouterAudioTranslationsType$outboundSchema:
   z.ZodNativeEnum<
     typeof CreateTranslationLoadBalancerRouterAudioTranslationsType
-  > = z.nativeEnum(CreateTranslationLoadBalancerRouterAudioTranslationsType);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.nativeEnum(CreateTranslationLoadBalancerRouterAudioTranslationsType)
+  );
 
 /** @internal */
 export type CreateTranslationLoadBalancerRouterAudioTranslationsModels$Outbound =
@@ -562,10 +585,12 @@ export const CreateTranslationLoadBalancerRouterAudioTranslationsModels$outbound
     CreateTranslationLoadBalancerRouterAudioTranslationsModels$Outbound,
     z.ZodTypeDef,
     CreateTranslationLoadBalancerRouterAudioTranslationsModels
-  > = z.object({
-    model: z.string(),
-    weight: z.number().default(0.5),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      model: z.string(),
+      weight: z.number().default(0.5),
+    })
+  );
 
 export function createTranslationLoadBalancerRouterAudioTranslationsModelsToJSON(
   createTranslationLoadBalancerRouterAudioTranslationsModels:
@@ -591,15 +616,15 @@ export const CreateTranslationLoadBalancerRouterAudioTranslations1$outboundSchem
     CreateTranslationLoadBalancerRouterAudioTranslations1$Outbound,
     z.ZodTypeDef,
     CreateTranslationLoadBalancerRouterAudioTranslations1
-  > = z.object({
-    type:
-      CreateTranslationLoadBalancerRouterAudioTranslationsType$outboundSchema,
-    models: z.array(
-      z.lazy(() =>
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type:
+        CreateTranslationLoadBalancerRouterAudioTranslationsType$outboundSchema,
+      models: z.array(z.lazy(() =>
         CreateTranslationLoadBalancerRouterAudioTranslationsModels$outboundSchema
-      ),
-    ),
-  });
+      )),
+    })
+  );
 
 export function createTranslationLoadBalancerRouterAudioTranslations1ToJSON(
   createTranslationLoadBalancerRouterAudioTranslations1:
@@ -622,8 +647,10 @@ export const CreateTranslationRouterAudioTranslationsLoadBalancer$outboundSchema
     CreateTranslationRouterAudioTranslationsLoadBalancer$Outbound,
     z.ZodTypeDef,
     CreateTranslationRouterAudioTranslationsLoadBalancer
-  > = z.lazy(() =>
-    CreateTranslationLoadBalancerRouterAudioTranslations1$outboundSchema
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.lazy(() =>
+      CreateTranslationLoadBalancerRouterAudioTranslations1$outboundSchema
+    )
   );
 
 export function createTranslationRouterAudioTranslationsLoadBalancerToJSON(
@@ -648,13 +675,15 @@ export const CreateTranslationRouterAudioTranslationsTimeout$outboundSchema:
     CreateTranslationRouterAudioTranslationsTimeout$Outbound,
     z.ZodTypeDef,
     CreateTranslationRouterAudioTranslationsTimeout
-  > = z.object({
-    callTimeout: z.number(),
-  }).transform((v) => {
-    return remap$(v, {
-      callTimeout: "call_timeout",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      callTimeout: z.number(),
+    }).transform((v) => {
+      return remap$(v, {
+        callTimeout: "call_timeout",
+      });
+    })
+  );
 
 export function createTranslationRouterAudioTranslationsTimeoutToJSON(
   createTranslationRouterAudioTranslationsTimeout:
@@ -690,31 +719,31 @@ export const CreateTranslationOrq$outboundSchema: z.ZodType<
   CreateTranslationOrq$Outbound,
   z.ZodTypeDef,
   CreateTranslationOrq
-> = z.object({
-  name: z.string().optional(),
-  fallbacks: z.array(
-    z.lazy(() =>
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    fallbacks: z.array(z.lazy(() =>
       CreateTranslationRouterAudioTranslationsFallbacks$outboundSchema
-    ),
-  ).optional(),
-  fallbackOnCodes: z.array(z.number().int()).optional(),
-  retry: z.lazy(() =>
-    CreateTranslationRouterAudioTranslationsRetry$outboundSchema
-  ).optional(),
-  identity: components.PublicIdentity$outboundSchema.optional(),
-  contact: components.PublicContact$outboundSchema.optional(),
-  loadBalancer: z.lazy(() =>
-    CreateTranslationLoadBalancerRouterAudioTranslations1$outboundSchema
-  ).optional(),
-  timeout: z.lazy(() =>
-    CreateTranslationRouterAudioTranslationsTimeout$outboundSchema
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    fallbackOnCodes: "fallback_on_codes",
-    loadBalancer: "load_balancer",
-  });
-});
+    )).optional(),
+    fallbackOnCodes: z.array(z.number().int()).optional(),
+    retry: z.lazy(() =>
+      CreateTranslationRouterAudioTranslationsRetry$outboundSchema
+    ).optional(),
+    identity: components.PublicIdentity$outboundSchema.optional(),
+    contact: components.PublicContact$outboundSchema.optional(),
+    loadBalancer: z.lazy(() =>
+      CreateTranslationLoadBalancerRouterAudioTranslations1$outboundSchema
+    ).optional(),
+    timeout: z.lazy(() =>
+      CreateTranslationRouterAudioTranslationsTimeout$outboundSchema
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      fallbackOnCodes: "fallback_on_codes",
+      loadBalancer: "load_balancer",
+    });
+  })
+);
 
 export function createTranslationOrqToJSON(
   createTranslationOrq: CreateTranslationOrq,
@@ -735,15 +764,17 @@ export const CreateTranslationFile$outboundSchema: z.ZodType<
   CreateTranslationFile$Outbound,
   z.ZodTypeDef,
   CreateTranslationFile
-> = z.object({
-  fileName: z.string(),
-  content: z.union([
-    z.instanceof(ReadableStream<Uint8Array>),
-    z.instanceof(Blob),
-    z.instanceof(ArrayBuffer),
-    z.instanceof(Uint8Array),
-  ]),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    fileName: z.string(),
+    content: z.union([
+      z.instanceof(ReadableStream<Uint8Array>),
+      z.instanceof(Blob),
+      z.instanceof(ArrayBuffer),
+      z.instanceof(Uint8Array),
+    ]),
+  })
+);
 
 export function createTranslationFileToJSON(
   createTranslationFile: CreateTranslationFile,
@@ -779,39 +810,41 @@ export const CreateTranslationRequestBody$outboundSchema: z.ZodType<
   CreateTranslationRequestBody$Outbound,
   z.ZodTypeDef,
   CreateTranslationRequestBody
-> = z.object({
-  model: z.string(),
-  prompt: z.string().optional(),
-  enableLogging: z.boolean().default(true),
-  diarize: z.boolean().default(false),
-  responseFormat: CreateTranslationResponseFormat$outboundSchema.optional(),
-  tagAudioEvents: z.boolean().default(true),
-  numSpeakers: z.number().optional(),
-  timestampsGranularity: CreateTranslationTimestampsGranularity$outboundSchema
-    .default("word"),
-  temperature: z.number().optional(),
-  name: z.string().optional(),
-  fallbackOnCodes: z.array(z.number().int()).optional(),
-  fallbacks: z.array(z.lazy(() => CreateTranslationFallbacks$outboundSchema))
-    .optional(),
-  retry: z.lazy(() => CreateTranslationRetry$outboundSchema).optional(),
-  loadBalancer: z.lazy(() => CreateTranslationLoadBalancer1$outboundSchema)
-    .optional(),
-  timeout: z.lazy(() => CreateTranslationTimeout$outboundSchema).optional(),
-  orq: z.lazy(() => CreateTranslationOrq$outboundSchema).optional(),
-  file: z.lazy(() => CreateTranslationFile$outboundSchema).or(blobLikeSchema)
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    enableLogging: "enable_logging",
-    responseFormat: "response_format",
-    tagAudioEvents: "tag_audio_events",
-    numSpeakers: "num_speakers",
-    timestampsGranularity: "timestamps_granularity",
-    fallbackOnCodes: "fallback_on_codes",
-    loadBalancer: "load_balancer",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model: z.string(),
+    prompt: z.string().optional(),
+    enableLogging: z.boolean().default(true),
+    diarize: z.boolean().default(false),
+    responseFormat: CreateTranslationResponseFormat$outboundSchema.optional(),
+    tagAudioEvents: z.boolean().default(true),
+    numSpeakers: z.number().optional(),
+    timestampsGranularity: CreateTranslationTimestampsGranularity$outboundSchema
+      .default("word"),
+    temperature: z.number().optional(),
+    name: z.string().optional(),
+    fallbackOnCodes: z.array(z.number().int()).optional(),
+    fallbacks: z.array(z.lazy(() => CreateTranslationFallbacks$outboundSchema))
+      .optional(),
+    retry: z.lazy(() => CreateTranslationRetry$outboundSchema).optional(),
+    loadBalancer: z.lazy(() => CreateTranslationLoadBalancer1$outboundSchema)
+      .optional(),
+    timeout: z.lazy(() => CreateTranslationTimeout$outboundSchema).optional(),
+    orq: z.lazy(() => CreateTranslationOrq$outboundSchema).optional(),
+    file: z.lazy(() => CreateTranslationFile$outboundSchema).or(blobLikeSchema)
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      enableLogging: "enable_logging",
+      responseFormat: "response_format",
+      tagAudioEvents: "tag_audio_events",
+      numSpeakers: "num_speakers",
+      timestampsGranularity: "timestamps_granularity",
+      fallbackOnCodes: "fallback_on_codes",
+      loadBalancer: "load_balancer",
+    });
+  })
+);
 
 export function createTranslationRequestBodyToJSON(
   createTranslationRequestBody: CreateTranslationRequestBody,
@@ -828,11 +861,13 @@ export const ResponseBodyWords$inboundSchema: z.ZodType<
   ResponseBodyWords,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  word: z.string().optional(),
-  start: z.number().optional(),
-  end: z.number().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    word: z.string().optional(),
+    start: z.number().optional(),
+    end: z.number().optional(),
+  })
+);
 
 export function responseBodyWordsFromJSON(
   jsonString: string,
@@ -849,24 +884,26 @@ export const ResponseBodySegments$inboundSchema: z.ZodType<
   ResponseBodySegments,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.number(),
-  seek: z.number(),
-  start: z.number(),
-  end: z.number(),
-  text: z.string(),
-  tokens: z.array(z.number()),
-  temperature: z.number(),
-  avg_logprob: z.number(),
-  compression_ratio: z.number(),
-  no_speech_prob: z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    "avg_logprob": "avgLogprob",
-    "compression_ratio": "compressionRatio",
-    "no_speech_prob": "noSpeechProb",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.number(),
+    seek: z.number(),
+    start: z.number(),
+    end: z.number(),
+    text: z.string(),
+    tokens: z.array(z.number()),
+    temperature: z.number(),
+    avg_logprob: z.number(),
+    compression_ratio: z.number(),
+    no_speech_prob: z.number(),
+  }).transform((v) => {
+    return remap$(v, {
+      "avg_logprob": "avgLogprob",
+      "compression_ratio": "compressionRatio",
+      "no_speech_prob": "noSpeechProb",
+    });
+  })
+);
 
 export function responseBodySegmentsFromJSON(
   jsonString: string,
@@ -883,15 +920,17 @@ export const CreateTranslationResponseBody2$inboundSchema: z.ZodType<
   CreateTranslationResponseBody2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  task: z.string().optional(),
-  language: z.string().optional(),
-  duration: z.number().optional(),
-  text: z.string(),
-  words: z.array(z.lazy(() => ResponseBodyWords$inboundSchema)).optional(),
-  segments: z.array(z.lazy(() => ResponseBodySegments$inboundSchema))
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    task: z.string().optional(),
+    language: z.string().optional(),
+    duration: z.number().optional(),
+    text: z.string(),
+    words: z.array(z.lazy(() => ResponseBodyWords$inboundSchema)).optional(),
+    segments: z.array(z.lazy(() => ResponseBodySegments$inboundSchema))
+      .optional(),
+  })
+);
 
 export function createTranslationResponseBody2FromJSON(
   jsonString: string,
@@ -908,9 +947,11 @@ export const CreateTranslationResponseBody1$inboundSchema: z.ZodType<
   CreateTranslationResponseBody1,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  text: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    text: z.string(),
+  })
+);
 
 export function createTranslationResponseBody1FromJSON(
   jsonString: string,
@@ -927,11 +968,13 @@ export const CreateTranslationResponseBody$inboundSchema: z.ZodType<
   CreateTranslationResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  z.lazy(() => CreateTranslationResponseBody1$inboundSchema),
-  z.lazy(() => CreateTranslationResponseBody2$inboundSchema),
-  z.string(),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => CreateTranslationResponseBody1$inboundSchema),
+    z.lazy(() => CreateTranslationResponseBody2$inboundSchema),
+    z.string(),
+  ])
+);
 
 export function createTranslationResponseBodyFromJSON(
   jsonString: string,

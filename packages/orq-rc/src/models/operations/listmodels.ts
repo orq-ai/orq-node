@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
@@ -37,17 +37,19 @@ export type ListModelsResponseBody = {
 /** @internal */
 export const ListModelsObject$inboundSchema: z.ZodNativeEnum<
   typeof ListModelsObject
-> = z.nativeEnum(ListModelsObject);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ListModelsObject));
 
 /** @internal */
 export const ListModelsResponseBody$inboundSchema: z.ZodType<
   ListModelsResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.nullable(z.array(components.PublicModelEntry$inboundSchema)),
-  object: ListModelsObject$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.nullable(z.array(components.PublicModelEntry$inboundSchema)),
+    object: ListModelsObject$inboundSchema,
+  })
+);
 
 export function listModelsResponseBodyFromJSON(
   jsonString: string,

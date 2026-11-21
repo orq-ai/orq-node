@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { McpGateway, McpGateway$inboundSchema } from "./mcpgateway.js";
@@ -18,13 +18,15 @@ export const CreateMcpGatewayResponse$inboundSchema: z.ZodType<
   CreateMcpGatewayResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  mcp_gateway: McpGateway$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "mcp_gateway": "mcpGateway",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    mcp_gateway: McpGateway$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "mcp_gateway": "mcpGateway",
+    });
+  })
+);
 
 export function createMcpGatewayResponseFromJSON(
   jsonString: string,

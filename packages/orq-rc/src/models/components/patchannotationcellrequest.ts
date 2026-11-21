@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type PatchAnnotationCellRequest = {
   /**
@@ -30,14 +31,16 @@ export const PatchAnnotationCellRequest$outboundSchema: z.ZodType<
   PatchAnnotationCellRequest$Outbound,
   z.ZodTypeDef,
   PatchAnnotationCellRequest
-> = z.object({
-  value: z.record(z.any()),
-  taskId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    taskId: "task_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    value: z.record(z.any()),
+    taskId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      taskId: "task_id",
+    });
+  })
+);
 
 export function patchAnnotationCellRequestToJSON(
   patchAnnotationCellRequest: PatchAnnotationCellRequest,

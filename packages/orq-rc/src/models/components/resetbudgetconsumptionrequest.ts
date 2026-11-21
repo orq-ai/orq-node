@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type ResetBudgetConsumptionRequest = {};
 
@@ -14,7 +15,7 @@ export const ResetBudgetConsumptionRequest$outboundSchema: z.ZodType<
   ResetBudgetConsumptionRequest$Outbound,
   z.ZodTypeDef,
   ResetBudgetConsumptionRequest
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function resetBudgetConsumptionRequestToJSON(
   resetBudgetConsumptionRequest: ResetBudgetConsumptionRequest,

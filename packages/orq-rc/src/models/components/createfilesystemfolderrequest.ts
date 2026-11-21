@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type CreateFileSystemFolderRequest = {
   /**
@@ -21,9 +22,11 @@ export const CreateFileSystemFolderRequest$outboundSchema: z.ZodType<
   CreateFileSystemFolderRequest$Outbound,
   z.ZodTypeDef,
   CreateFileSystemFolderRequest
-> = z.object({
-  path: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    path: z.string(),
+  })
+);
 
 export function createFileSystemFolderRequestToJSON(
   createFileSystemFolderRequest: CreateFileSystemFolderRequest,

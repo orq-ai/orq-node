@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type DeleteAnnotationMetadata = {
   identityId?: string | undefined;
@@ -43,13 +44,15 @@ export const DeleteAnnotationMetadata$outboundSchema: z.ZodType<
   DeleteAnnotationMetadata$Outbound,
   z.ZodTypeDef,
   DeleteAnnotationMetadata
-> = z.object({
-  identityId: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    identityId: "identity_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    identityId: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      identityId: "identity_id",
+    });
+  })
+);
 
 export function deleteAnnotationMetadataToJSON(
   deleteAnnotationMetadata: DeleteAnnotationMetadata,
@@ -71,15 +74,17 @@ export const DeleteAnnotationRequestBody$outboundSchema: z.ZodType<
   DeleteAnnotationRequestBody$Outbound,
   z.ZodTypeDef,
   DeleteAnnotationRequestBody
-> = z.object({
-  keys: z.array(z.string()).optional(),
-  parentAnnotationIds: z.array(z.string()).optional(),
-  metadata: z.lazy(() => DeleteAnnotationMetadata$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    parentAnnotationIds: "parent_annotation_ids",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    keys: z.array(z.string()).optional(),
+    parentAnnotationIds: z.array(z.string()).optional(),
+    metadata: z.lazy(() => DeleteAnnotationMetadata$outboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      parentAnnotationIds: "parent_annotation_ids",
+    });
+  })
+);
 
 export function deleteAnnotationRequestBodyToJSON(
   deleteAnnotationRequestBody: DeleteAnnotationRequestBody,
@@ -103,17 +108,19 @@ export const DeleteAnnotationRequest$outboundSchema: z.ZodType<
   DeleteAnnotationRequest$Outbound,
   z.ZodTypeDef,
   DeleteAnnotationRequest
-> = z.object({
-  traceId: z.string(),
-  spanId: z.string(),
-  requestBody: z.lazy(() => DeleteAnnotationRequestBody$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    traceId: "trace_id",
-    spanId: "span_id",
-    requestBody: "RequestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    traceId: z.string(),
+    spanId: z.string(),
+    requestBody: z.lazy(() => DeleteAnnotationRequestBody$outboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      traceId: "trace_id",
+      spanId: "span_id",
+      requestBody: "RequestBody",
+    });
+  })
+);
 
 export function deleteAnnotationRequestToJSON(
   deleteAnnotationRequest: DeleteAnnotationRequest,

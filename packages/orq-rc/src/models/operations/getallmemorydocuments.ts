@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type GetAllMemoryDocumentsRequest = {
   /**
@@ -52,24 +53,26 @@ export const GetAllMemoryDocumentsRequest$outboundSchema: z.ZodType<
   GetAllMemoryDocumentsRequest$Outbound,
   z.ZodTypeDef,
   GetAllMemoryDocumentsRequest
-> = z.object({
-  memoryStoreKey: z.string(),
-  memoryEntityId: z.string(),
-  limit: z.number().int().default(10),
-  startingAfter: z.string().optional(),
-  endingBefore: z.string().optional(),
-  updatedAfter: z.date().transform(v => v.toISOString()).optional(),
-  updatedBefore: z.date().transform(v => v.toISOString()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    memoryStoreKey: "memory_store_key",
-    memoryEntityId: "memory_entity_id",
-    startingAfter: "starting_after",
-    endingBefore: "ending_before",
-    updatedAfter: "updated_after",
-    updatedBefore: "updated_before",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    memoryStoreKey: z.string(),
+    memoryEntityId: z.string(),
+    limit: z.number().int().default(10),
+    startingAfter: z.string().optional(),
+    endingBefore: z.string().optional(),
+    updatedAfter: z.date().transform(v => v.toISOString()).optional(),
+    updatedBefore: z.date().transform(v => v.toISOString()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      memoryStoreKey: "memory_store_key",
+      memoryEntityId: "memory_entity_id",
+      startingAfter: "starting_after",
+      endingBefore: "ending_before",
+      updatedAfter: "updated_after",
+      updatedBefore: "updated_before",
+    });
+  })
+);
 
 export function getAllMemoryDocumentsRequestToJSON(
   getAllMemoryDocumentsRequest: GetAllMemoryDocumentsRequest,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -21,14 +21,16 @@ export const ReplayAuditLogDeliveriesResponse$inboundSchema: z.ZodType<
   ReplayAuditLogDeliveriesResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  replay_id: z.string(),
-  queued: z.number().int(),
-}).transform((v) => {
-  return remap$(v, {
-    "replay_id": "replayId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    replay_id: z.string(),
+    queued: z.number().int(),
+  }).transform((v) => {
+    return remap$(v, {
+      "replay_id": "replayId",
+    });
+  })
+);
 
 export function replayAuditLogDeliveriesResponseFromJSON(
   jsonString: string,

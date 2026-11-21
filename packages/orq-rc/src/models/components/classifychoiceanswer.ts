@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -28,12 +28,14 @@ export const ClassifyChoiceAnswer$inboundSchema: z.ZodType<
   ClassifyChoiceAnswer,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  choice: z.string(),
-  confidence: z.number().optional(),
-  probabilities: z.record(z.number()).optional(),
-  type: z.literal("choice"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    choice: z.string(),
+    confidence: z.number().optional(),
+    probabilities: z.record(z.number()).optional(),
+    type: z.literal("choice"),
+  })
+);
 
 export function classifyChoiceAnswerFromJSON(
   jsonString: string,

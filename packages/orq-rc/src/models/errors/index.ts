@@ -11,6 +11,7 @@ export * from "./createbatch.js";
 export * from "./createclassify.js";
 export * from "./createdecisions.js";
 export * from "./createeval.js";
+export * from "./createlivesession.js";
 export * from "./createmoderation.js";
 export * from "./createtranscription.js";
 export * from "./createtranslation.js";

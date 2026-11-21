@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -175,23 +175,22 @@ export type QueryReportRequest = {
 };
 
 /** @internal */
-export const Metric$inboundSchema: z.ZodNativeEnum<typeof Metric> = z
-  .nativeEnum(Metric);
+export const Metric$inboundSchema: z.ZodNativeEnum<typeof Metric> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Metric));
 /** @internal */
 export const Metric$outboundSchema: z.ZodNativeEnum<typeof Metric> =
   Metric$inboundSchema;
 
 /** @internal */
-export const Grain$inboundSchema: z.ZodNativeEnum<typeof Grain> = z.nativeEnum(
-  Grain,
-);
+export const Grain$inboundSchema: z.ZodNativeEnum<typeof Grain> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Grain));
 /** @internal */
 export const Grain$outboundSchema: z.ZodNativeEnum<typeof Grain> =
   Grain$inboundSchema;
 
 /** @internal */
-export const GroupBy$inboundSchema: z.ZodNativeEnum<typeof GroupBy> = z
-  .nativeEnum(GroupBy);
+export const GroupBy$inboundSchema: z.ZodNativeEnum<typeof GroupBy> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(GroupBy));
 /** @internal */
 export const GroupBy$outboundSchema: z.ZodNativeEnum<typeof GroupBy> =
   GroupBy$inboundSchema;
@@ -199,16 +198,15 @@ export const GroupBy$outboundSchema: z.ZodNativeEnum<typeof GroupBy> =
 /** @internal */
 export const QueryReportRequestMode$inboundSchema: z.ZodNativeEnum<
   typeof QueryReportRequestMode
-> = z.nativeEnum(QueryReportRequestMode);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(QueryReportRequestMode));
 /** @internal */
 export const QueryReportRequestMode$outboundSchema: z.ZodNativeEnum<
   typeof QueryReportRequestMode
 > = QueryReportRequestMode$inboundSchema;
 
 /** @internal */
-export const Sort$inboundSchema: z.ZodNativeEnum<typeof Sort> = z.nativeEnum(
-  Sort,
-);
+export const Sort$inboundSchema: z.ZodNativeEnum<typeof Sort> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Sort));
 /** @internal */
 export const Sort$outboundSchema: z.ZodNativeEnum<typeof Sort> =
   Sort$inboundSchema;
@@ -218,25 +216,27 @@ export const QueryReportRequest$inboundSchema: z.ZodType<
   QueryReportRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  metric: Metric$inboundSchema,
-  from: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  to: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  grain: Grain$inboundSchema.optional(),
-  group_by: z.array(GroupBy$inboundSchema).optional(),
-  filters: z.array(Filter$inboundSchema).optional(),
-  limit: z.number().int().optional(),
-  time_zone: z.string().optional(),
-  include_totals: z.boolean().optional(),
-  mode: QueryReportRequestMode$inboundSchema.optional(),
-  sort: Sort$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "group_by": "groupBy",
-    "time_zone": "timeZone",
-    "include_totals": "includeTotals",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    metric: Metric$inboundSchema,
+    from: z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    to: z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    grain: Grain$inboundSchema.optional(),
+    group_by: z.array(GroupBy$inboundSchema).optional(),
+    filters: z.array(Filter$inboundSchema).optional(),
+    limit: z.number().int().optional(),
+    time_zone: z.string().optional(),
+    include_totals: z.boolean().optional(),
+    mode: QueryReportRequestMode$inboundSchema.optional(),
+    sort: Sort$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "group_by": "groupBy",
+      "time_zone": "timeZone",
+      "include_totals": "includeTotals",
+    });
+  })
+);
 /** @internal */
 export type QueryReportRequest$Outbound = {
   metric: string;
@@ -257,25 +257,27 @@ export const QueryReportRequest$outboundSchema: z.ZodType<
   QueryReportRequest$Outbound,
   z.ZodTypeDef,
   QueryReportRequest
-> = z.object({
-  metric: Metric$outboundSchema,
-  from: z.date().transform(v => v.toISOString()),
-  to: z.date().transform(v => v.toISOString()),
-  grain: Grain$outboundSchema.optional(),
-  groupBy: z.array(GroupBy$outboundSchema).optional(),
-  filters: z.array(Filter$outboundSchema).optional(),
-  limit: z.number().int().optional(),
-  timeZone: z.string().optional(),
-  includeTotals: z.boolean().optional(),
-  mode: QueryReportRequestMode$outboundSchema.optional(),
-  sort: Sort$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    groupBy: "group_by",
-    timeZone: "time_zone",
-    includeTotals: "include_totals",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    metric: Metric$outboundSchema,
+    from: z.date().transform(v => v.toISOString()),
+    to: z.date().transform(v => v.toISOString()),
+    grain: Grain$outboundSchema.optional(),
+    groupBy: z.array(GroupBy$outboundSchema).optional(),
+    filters: z.array(Filter$outboundSchema).optional(),
+    limit: z.number().int().optional(),
+    timeZone: z.string().optional(),
+    includeTotals: z.boolean().optional(),
+    mode: QueryReportRequestMode$outboundSchema.optional(),
+    sort: Sort$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      groupBy: "group_by",
+      timeZone: "time_zone",
+      includeTotals: "include_totals",
+    });
+  })
+);
 
 export function queryReportRequestToJSON(
   queryReportRequest: QueryReportRequest,

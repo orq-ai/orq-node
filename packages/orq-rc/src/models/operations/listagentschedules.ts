@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -33,13 +33,15 @@ export const ListAgentSchedulesRequest$outboundSchema: z.ZodType<
   ListAgentSchedulesRequest$Outbound,
   z.ZodTypeDef,
   ListAgentSchedulesRequest
-> = z.object({
-  agentKey: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    agentKey: "agent_key",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    agentKey: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      agentKey: "agent_key",
+    });
+  })
+);
 
 export function listAgentSchedulesRequestToJSON(
   listAgentSchedulesRequest: ListAgentSchedulesRequest,
@@ -54,9 +56,11 @@ export const ListAgentSchedulesResponseBody$inboundSchema: z.ZodType<
   ListAgentSchedulesResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  schedules: z.nullable(z.array(components.PublicSchedule$inboundSchema)),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    schedules: z.nullable(z.array(components.PublicSchedule$inboundSchema)),
+  })
+);
 
 export function listAgentSchedulesResponseBodyFromJSON(
   jsonString: string,

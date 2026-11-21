@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -67,7 +67,7 @@ export const PromptConfigMessages$inboundSchema: z.ZodType<
   PromptConfigMessages,
   z.ZodTypeDef,
   unknown
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 /** @internal */
 export type PromptConfigMessages$Outbound = {};
 
@@ -76,7 +76,7 @@ export const PromptConfigMessages$outboundSchema: z.ZodType<
   PromptConfigMessages$Outbound,
   z.ZodTypeDef,
   PromptConfigMessages
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function promptConfigMessagesToJSON(
   promptConfigMessages: PromptConfigMessages,
@@ -100,25 +100,27 @@ export const PromptConfig$inboundSchema: z.ZodType<
   PromptConfig,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  model: z.string(),
-  provider: z.string().optional(),
-  messages: z.array(z.lazy(() => PromptConfigMessages$inboundSchema))
-    .optional(),
-  model_parameters: z.record(z.any()).optional(),
-  model_db_id: z.string().optional(),
-  model_type: z.string().optional(),
-  integration_id: z.string().optional(),
-  stream: z.boolean().optional(),
-  version: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "model_parameters": "modelParameters",
-    "model_db_id": "modelDbId",
-    "model_type": "modelType",
-    "integration_id": "integrationId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model: z.string(),
+    provider: z.string().optional(),
+    messages: z.array(z.lazy(() => PromptConfigMessages$inboundSchema))
+      .optional(),
+    model_parameters: z.record(z.any()).optional(),
+    model_db_id: z.string().optional(),
+    model_type: z.string().optional(),
+    integration_id: z.string().optional(),
+    stream: z.boolean().optional(),
+    version: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "model_parameters": "modelParameters",
+      "model_db_id": "modelDbId",
+      "model_type": "modelType",
+      "integration_id": "integrationId",
+    });
+  })
+);
 /** @internal */
 export type PromptConfig$Outbound = {
   model: string;
@@ -137,25 +139,27 @@ export const PromptConfig$outboundSchema: z.ZodType<
   PromptConfig$Outbound,
   z.ZodTypeDef,
   PromptConfig
-> = z.object({
-  model: z.string(),
-  provider: z.string().optional(),
-  messages: z.array(z.lazy(() => PromptConfigMessages$outboundSchema))
-    .optional(),
-  modelParameters: z.record(z.any()).optional(),
-  modelDbId: z.string().optional(),
-  modelType: z.string().optional(),
-  integrationId: z.string().optional(),
-  stream: z.boolean().optional(),
-  version: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    modelParameters: "model_parameters",
-    modelDbId: "model_db_id",
-    modelType: "model_type",
-    integrationId: "integration_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model: z.string(),
+    provider: z.string().optional(),
+    messages: z.array(z.lazy(() => PromptConfigMessages$outboundSchema))
+      .optional(),
+    modelParameters: z.record(z.any()).optional(),
+    modelDbId: z.string().optional(),
+    modelType: z.string().optional(),
+    integrationId: z.string().optional(),
+    stream: z.boolean().optional(),
+    version: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      modelParameters: "model_parameters",
+      modelDbId: "model_db_id",
+      modelType: "model_type",
+      integrationId: "integration_id",
+    });
+  })
+);
 
 export function promptConfigToJSON(promptConfig: PromptConfig): string {
   return JSON.stringify(PromptConfig$outboundSchema.parse(promptConfig));

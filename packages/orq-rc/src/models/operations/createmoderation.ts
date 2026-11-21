@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -343,7 +343,9 @@ export const Input$outboundSchema: z.ZodType<
   Input$Outbound,
   z.ZodTypeDef,
   Input
-> = z.union([z.string(), z.array(z.string())]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.array(z.string())])
+);
 
 export function inputToJSON(input: Input): string {
   return JSON.stringify(Input$outboundSchema.parse(input));
@@ -360,10 +362,12 @@ export const CreateModerationRequestBody$outboundSchema: z.ZodType<
   CreateModerationRequestBody$Outbound,
   z.ZodTypeDef,
   CreateModerationRequestBody
-> = z.object({
-  input: z.union([z.string(), z.array(z.string())]),
-  model: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    input: z.union([z.string(), z.array(z.string())]),
+    model: z.string().optional(),
+  })
+);
 
 export function createModerationRequestBodyToJSON(
   createModerationRequestBody: CreateModerationRequestBody,
@@ -380,23 +384,25 @@ export const ResultsCategories$inboundSchema: z.ZodType<
   ResultsCategories,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  sexual: z.boolean(),
-  hate_and_discrimination: z.boolean(),
-  violence_and_threats: z.boolean(),
-  dangerous_and_criminal_content: z.boolean(),
-  selfharm: z.boolean(),
-  health: z.boolean(),
-  financial: z.boolean(),
-  law: z.boolean(),
-  pii: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    "hate_and_discrimination": "hateAndDiscrimination",
-    "violence_and_threats": "violenceAndThreats",
-    "dangerous_and_criminal_content": "dangerousAndCriminalContent",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    sexual: z.boolean(),
+    hate_and_discrimination: z.boolean(),
+    violence_and_threats: z.boolean(),
+    dangerous_and_criminal_content: z.boolean(),
+    selfharm: z.boolean(),
+    health: z.boolean(),
+    financial: z.boolean(),
+    law: z.boolean(),
+    pii: z.boolean(),
+  }).transform((v) => {
+    return remap$(v, {
+      "hate_and_discrimination": "hateAndDiscrimination",
+      "violence_and_threats": "violenceAndThreats",
+      "dangerous_and_criminal_content": "dangerousAndCriminalContent",
+    });
+  })
+);
 
 export function resultsCategoriesFromJSON(
   jsonString: string,
@@ -413,23 +419,25 @@ export const ResultsCategoryScores$inboundSchema: z.ZodType<
   ResultsCategoryScores,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  sexual: z.number(),
-  hate_and_discrimination: z.number(),
-  violence_and_threats: z.number(),
-  dangerous_and_criminal_content: z.number(),
-  selfharm: z.number(),
-  health: z.number(),
-  financial: z.number(),
-  law: z.number(),
-  pii: z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    "hate_and_discrimination": "hateAndDiscrimination",
-    "violence_and_threats": "violenceAndThreats",
-    "dangerous_and_criminal_content": "dangerousAndCriminalContent",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    sexual: z.number(),
+    hate_and_discrimination: z.number(),
+    violence_and_threats: z.number(),
+    dangerous_and_criminal_content: z.number(),
+    selfharm: z.number(),
+    health: z.number(),
+    financial: z.number(),
+    law: z.number(),
+    pii: z.number(),
+  }).transform((v) => {
+    return remap$(v, {
+      "hate_and_discrimination": "hateAndDiscrimination",
+      "violence_and_threats": "violenceAndThreats",
+      "dangerous_and_criminal_content": "dangerousAndCriminalContent",
+    });
+  })
+);
 
 export function resultsCategoryScoresFromJSON(
   jsonString: string,
@@ -446,14 +454,16 @@ export const Results2$inboundSchema: z.ZodType<
   Results2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  categories: z.lazy(() => ResultsCategories$inboundSchema),
-  category_scores: z.lazy(() => ResultsCategoryScores$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "category_scores": "categoryScores",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    categories: z.lazy(() => ResultsCategories$inboundSchema),
+    category_scores: z.lazy(() => ResultsCategoryScores$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "category_scores": "categoryScores",
+    });
+  })
+);
 
 export function results2FromJSON(
   jsonString: string,
@@ -470,32 +480,34 @@ export const Categories$inboundSchema: z.ZodType<
   Categories,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  hate: z.boolean(),
-  "hate/threatening": z.boolean(),
-  harassment: z.boolean(),
-  "harassment/threatening": z.boolean(),
-  illicit: z.boolean(),
-  "illicit/violent": z.boolean(),
-  "self-harm": z.boolean(),
-  "self-harm/intent": z.boolean(),
-  "self-harm/instructions": z.boolean(),
-  sexual: z.boolean(),
-  "sexual/minors": z.boolean(),
-  violence: z.boolean(),
-  "violence/graphic": z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    "hate/threatening": "hateThreatening",
-    "harassment/threatening": "harassmentThreatening",
-    "illicit/violent": "illicitViolent",
-    "self-harm": "selfHarm",
-    "self-harm/intent": "selfHarmIntent",
-    "self-harm/instructions": "selfHarmInstructions",
-    "sexual/minors": "sexualMinors",
-    "violence/graphic": "violenceGraphic",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    hate: z.boolean(),
+    "hate/threatening": z.boolean(),
+    harassment: z.boolean(),
+    "harassment/threatening": z.boolean(),
+    illicit: z.boolean(),
+    "illicit/violent": z.boolean(),
+    "self-harm": z.boolean(),
+    "self-harm/intent": z.boolean(),
+    "self-harm/instructions": z.boolean(),
+    sexual: z.boolean(),
+    "sexual/minors": z.boolean(),
+    violence: z.boolean(),
+    "violence/graphic": z.boolean(),
+  }).transform((v) => {
+    return remap$(v, {
+      "hate/threatening": "hateThreatening",
+      "harassment/threatening": "harassmentThreatening",
+      "illicit/violent": "illicitViolent",
+      "self-harm": "selfHarm",
+      "self-harm/intent": "selfHarmIntent",
+      "self-harm/instructions": "selfHarmInstructions",
+      "sexual/minors": "sexualMinors",
+      "violence/graphic": "violenceGraphic",
+    });
+  })
+);
 
 export function categoriesFromJSON(
   jsonString: string,
@@ -512,32 +524,34 @@ export const CategoryScores$inboundSchema: z.ZodType<
   CategoryScores,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  hate: z.number(),
-  "hate/threatening": z.number(),
-  harassment: z.number(),
-  "harassment/threatening": z.number(),
-  illicit: z.number(),
-  "illicit/violent": z.number(),
-  "self-harm": z.number(),
-  "self-harm/intent": z.number(),
-  "self-harm/instructions": z.number(),
-  sexual: z.number(),
-  "sexual/minors": z.number(),
-  violence: z.number(),
-  "violence/graphic": z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    "hate/threatening": "hateThreatening",
-    "harassment/threatening": "harassmentThreatening",
-    "illicit/violent": "illicitViolent",
-    "self-harm": "selfHarm",
-    "self-harm/intent": "selfHarmIntent",
-    "self-harm/instructions": "selfHarmInstructions",
-    "sexual/minors": "sexualMinors",
-    "violence/graphic": "violenceGraphic",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    hate: z.number(),
+    "hate/threatening": z.number(),
+    harassment: z.number(),
+    "harassment/threatening": z.number(),
+    illicit: z.number(),
+    "illicit/violent": z.number(),
+    "self-harm": z.number(),
+    "self-harm/intent": z.number(),
+    "self-harm/instructions": z.number(),
+    sexual: z.number(),
+    "sexual/minors": z.number(),
+    violence: z.number(),
+    "violence/graphic": z.number(),
+  }).transform((v) => {
+    return remap$(v, {
+      "hate/threatening": "hateThreatening",
+      "harassment/threatening": "harassmentThreatening",
+      "illicit/violent": "illicitViolent",
+      "self-harm": "selfHarm",
+      "self-harm/intent": "selfHarmIntent",
+      "self-harm/instructions": "selfHarmInstructions",
+      "sexual/minors": "sexualMinors",
+      "violence/graphic": "violenceGraphic",
+    });
+  })
+);
 
 export function categoryScoresFromJSON(
   jsonString: string,
@@ -554,32 +568,34 @@ export const CategoryAppliedInputTypes$inboundSchema: z.ZodType<
   CategoryAppliedInputTypes,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  hate: z.array(z.string()),
-  "hate/threatening": z.array(z.string()),
-  harassment: z.array(z.string()),
-  "harassment/threatening": z.array(z.string()),
-  illicit: z.array(z.string()),
-  "illicit/violent": z.array(z.string()),
-  "self-harm": z.array(z.string()),
-  "self-harm/intent": z.array(z.string()),
-  "self-harm/instructions": z.array(z.string()),
-  sexual: z.array(z.string()),
-  "sexual/minors": z.array(z.string()),
-  violence: z.array(z.string()),
-  "violence/graphic": z.array(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    "hate/threatening": "hateThreatening",
-    "harassment/threatening": "harassmentThreatening",
-    "illicit/violent": "illicitViolent",
-    "self-harm": "selfHarm",
-    "self-harm/intent": "selfHarmIntent",
-    "self-harm/instructions": "selfHarmInstructions",
-    "sexual/minors": "sexualMinors",
-    "violence/graphic": "violenceGraphic",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    hate: z.array(z.string()),
+    "hate/threatening": z.array(z.string()),
+    harassment: z.array(z.string()),
+    "harassment/threatening": z.array(z.string()),
+    illicit: z.array(z.string()),
+    "illicit/violent": z.array(z.string()),
+    "self-harm": z.array(z.string()),
+    "self-harm/intent": z.array(z.string()),
+    "self-harm/instructions": z.array(z.string()),
+    sexual: z.array(z.string()),
+    "sexual/minors": z.array(z.string()),
+    violence: z.array(z.string()),
+    "violence/graphic": z.array(z.string()),
+  }).transform((v) => {
+    return remap$(v, {
+      "hate/threatening": "hateThreatening",
+      "harassment/threatening": "harassmentThreatening",
+      "illicit/violent": "illicitViolent",
+      "self-harm": "selfHarm",
+      "self-harm/intent": "selfHarmIntent",
+      "self-harm/instructions": "selfHarmInstructions",
+      "sexual/minors": "sexualMinors",
+      "violence/graphic": "violenceGraphic",
+    });
+  })
+);
 
 export function categoryAppliedInputTypesFromJSON(
   jsonString: string,
@@ -596,19 +612,21 @@ export const Results1$inboundSchema: z.ZodType<
   Results1,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  flagged: z.boolean(),
-  categories: z.lazy(() => Categories$inboundSchema),
-  category_scores: z.lazy(() => CategoryScores$inboundSchema),
-  category_applied_input_types: z.lazy(() =>
-    CategoryAppliedInputTypes$inboundSchema
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "category_scores": "categoryScores",
-    "category_applied_input_types": "categoryAppliedInputTypes",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    flagged: z.boolean(),
+    categories: z.lazy(() => Categories$inboundSchema),
+    category_scores: z.lazy(() => CategoryScores$inboundSchema),
+    category_applied_input_types: z.lazy(() =>
+      CategoryAppliedInputTypes$inboundSchema
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "category_scores": "categoryScores",
+      "category_applied_input_types": "categoryAppliedInputTypes",
+    });
+  })
+);
 
 export function results1FromJSON(
   jsonString: string,
@@ -622,10 +640,12 @@ export function results1FromJSON(
 
 /** @internal */
 export const Results$inboundSchema: z.ZodType<Results, z.ZodTypeDef, unknown> =
-  z.union([
-    z.lazy(() => Results1$inboundSchema),
-    z.lazy(() => Results2$inboundSchema),
-  ]);
+  /* @__PURE__ */ lazySchema$(() =>
+    z.union([
+      z.lazy(() => Results1$inboundSchema),
+      z.lazy(() => Results2$inboundSchema),
+    ])
+  );
 
 export function resultsFromJSON(
   jsonString: string,
@@ -642,16 +662,16 @@ export const CreateModerationResponseBody$inboundSchema: z.ZodType<
   CreateModerationResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  model: z.string(),
-  results: z.array(
-    z.union([
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    model: z.string(),
+    results: z.array(z.union([
       z.lazy(() => Results1$inboundSchema),
       z.lazy(() => Results2$inboundSchema),
-    ]),
-  ),
-});
+    ])),
+  })
+);
 
 export function createModerationResponseBodyFromJSON(
   jsonString: string,

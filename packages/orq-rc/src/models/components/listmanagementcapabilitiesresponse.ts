@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -23,9 +23,11 @@ export const ListManagementCapabilitiesResponse$inboundSchema: z.ZodType<
   ListManagementCapabilitiesResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  domains: z.array(ManagementDomain$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    domains: z.array(ManagementDomain$inboundSchema),
+  })
+);
 
 export function listManagementCapabilitiesResponseFromJSON(
   jsonString: string,

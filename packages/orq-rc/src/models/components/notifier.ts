@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { NotifierType, NotifierType$inboundSchema } from "./notifiertype.js";
@@ -217,7 +217,7 @@ export const Notifier3Metadata$inboundSchema: z.ZodType<
   Notifier3Metadata,
   z.ZodTypeDef,
   unknown
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function notifier3MetadataFromJSON(
   jsonString: string,
@@ -234,7 +234,7 @@ export const Notifier3Headers$inboundSchema: z.ZodType<
   Notifier3Headers,
   z.ZodTypeDef,
   unknown
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function notifier3HeadersFromJSON(
   jsonString: string,
@@ -251,33 +251,39 @@ export const GenericWebhookNotifier$inboundSchema: z.ZodType<
   GenericWebhookNotifier,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: NotifierType$inboundSchema,
-  webhook_url: z.string(),
-  _id: z.string(),
-  project_id: z.string().optional(),
-  display_name: z.string(),
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  updated_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  created_by_id: z.string().optional(),
-  updated_by_id: z.string().optional(),
-  metadata: z.lazy(() => Notifier3Metadata$inboundSchema).optional(),
-  emails: z.array(z.string()).optional(),
-  incoming_webhook_url: z.string().optional(),
-  headers: z.lazy(() => Notifier3Headers$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "webhook_url": "webhookUrl",
-    "_id": "id",
-    "project_id": "projectId",
-    "display_name": "displayName",
-    "created_at": "createdAt",
-    "updated_at": "updatedAt",
-    "created_by_id": "createdById",
-    "updated_by_id": "updatedById",
-    "incoming_webhook_url": "incomingWebhookUrl",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: NotifierType$inboundSchema,
+    webhook_url: z.string(),
+    _id: z.string(),
+    project_id: z.string().optional(),
+    display_name: z.string(),
+    created_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    updated_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    created_by_id: z.string().optional(),
+    updated_by_id: z.string().optional(),
+    metadata: z.lazy(() => Notifier3Metadata$inboundSchema).optional(),
+    emails: z.array(z.string()).optional(),
+    incoming_webhook_url: z.string().optional(),
+    headers: z.lazy(() => Notifier3Headers$inboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "webhook_url": "webhookUrl",
+      "_id": "id",
+      "project_id": "projectId",
+      "display_name": "displayName",
+      "created_at": "createdAt",
+      "updated_at": "updatedAt",
+      "created_by_id": "createdById",
+      "updated_by_id": "updatedById",
+      "incoming_webhook_url": "incomingWebhookUrl",
+    });
+  })
+);
 
 export function genericWebhookNotifierFromJSON(
   jsonString: string,
@@ -294,7 +300,7 @@ export const Notifier2Metadata$inboundSchema: z.ZodType<
   Notifier2Metadata,
   z.ZodTypeDef,
   unknown
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function notifier2MetadataFromJSON(
   jsonString: string,
@@ -311,7 +317,7 @@ export const NotifierHeaders$inboundSchema: z.ZodType<
   NotifierHeaders,
   z.ZodTypeDef,
   unknown
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function notifierHeadersFromJSON(
   jsonString: string,
@@ -328,33 +334,39 @@ export const SlackWebhookNotifier$inboundSchema: z.ZodType<
   SlackWebhookNotifier,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: NotifierType$inboundSchema,
-  incoming_webhook_url: z.string(),
-  _id: z.string(),
-  project_id: z.string().optional(),
-  display_name: z.string(),
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  updated_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  created_by_id: z.string().optional(),
-  updated_by_id: z.string().optional(),
-  metadata: z.lazy(() => Notifier2Metadata$inboundSchema).optional(),
-  emails: z.array(z.string()).optional(),
-  webhook_url: z.string().optional(),
-  headers: z.lazy(() => NotifierHeaders$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "incoming_webhook_url": "incomingWebhookUrl",
-    "_id": "id",
-    "project_id": "projectId",
-    "display_name": "displayName",
-    "created_at": "createdAt",
-    "updated_at": "updatedAt",
-    "created_by_id": "createdById",
-    "updated_by_id": "updatedById",
-    "webhook_url": "webhookUrl",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: NotifierType$inboundSchema,
+    incoming_webhook_url: z.string(),
+    _id: z.string(),
+    project_id: z.string().optional(),
+    display_name: z.string(),
+    created_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    updated_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    created_by_id: z.string().optional(),
+    updated_by_id: z.string().optional(),
+    metadata: z.lazy(() => Notifier2Metadata$inboundSchema).optional(),
+    emails: z.array(z.string()).optional(),
+    webhook_url: z.string().optional(),
+    headers: z.lazy(() => NotifierHeaders$inboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "incoming_webhook_url": "incomingWebhookUrl",
+      "_id": "id",
+      "project_id": "projectId",
+      "display_name": "displayName",
+      "created_at": "createdAt",
+      "updated_at": "updatedAt",
+      "created_by_id": "createdById",
+      "updated_by_id": "updatedById",
+      "webhook_url": "webhookUrl",
+    });
+  })
+);
 
 export function slackWebhookNotifierFromJSON(
   jsonString: string,
@@ -371,7 +383,7 @@ export const NotifierMetadata$inboundSchema: z.ZodType<
   NotifierMetadata,
   z.ZodTypeDef,
   unknown
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function notifierMetadataFromJSON(
   jsonString: string,
@@ -388,7 +400,7 @@ export const Notifier1Headers$inboundSchema: z.ZodType<
   Notifier1Headers,
   z.ZodTypeDef,
   unknown
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function notifier1HeadersFromJSON(
   jsonString: string,
@@ -405,33 +417,39 @@ export const EmailNotifier$inboundSchema: z.ZodType<
   EmailNotifier,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: NotifierType$inboundSchema,
-  emails: z.array(z.string()),
-  _id: z.string(),
-  project_id: z.string().optional(),
-  display_name: z.string(),
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  updated_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  created_by_id: z.string().optional(),
-  updated_by_id: z.string().optional(),
-  metadata: z.lazy(() => NotifierMetadata$inboundSchema).optional(),
-  incoming_webhook_url: z.string().optional(),
-  webhook_url: z.string().optional(),
-  headers: z.lazy(() => Notifier1Headers$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "_id": "id",
-    "project_id": "projectId",
-    "display_name": "displayName",
-    "created_at": "createdAt",
-    "updated_at": "updatedAt",
-    "created_by_id": "createdById",
-    "updated_by_id": "updatedById",
-    "incoming_webhook_url": "incomingWebhookUrl",
-    "webhook_url": "webhookUrl",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: NotifierType$inboundSchema,
+    emails: z.array(z.string()),
+    _id: z.string(),
+    project_id: z.string().optional(),
+    display_name: z.string(),
+    created_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    updated_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    created_by_id: z.string().optional(),
+    updated_by_id: z.string().optional(),
+    metadata: z.lazy(() => NotifierMetadata$inboundSchema).optional(),
+    incoming_webhook_url: z.string().optional(),
+    webhook_url: z.string().optional(),
+    headers: z.lazy(() => Notifier1Headers$inboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "_id": "id",
+      "project_id": "projectId",
+      "display_name": "displayName",
+      "created_at": "createdAt",
+      "updated_at": "updatedAt",
+      "created_by_id": "createdById",
+      "updated_by_id": "updatedById",
+      "incoming_webhook_url": "incomingWebhookUrl",
+      "webhook_url": "webhookUrl",
+    });
+  })
+);
 
 export function emailNotifierFromJSON(
   jsonString: string,
@@ -448,11 +466,13 @@ export const Notifier$inboundSchema: z.ZodType<
   Notifier,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  z.lazy(() => EmailNotifier$inboundSchema),
-  z.lazy(() => SlackWebhookNotifier$inboundSchema),
-  z.lazy(() => GenericWebhookNotifier$inboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => EmailNotifier$inboundSchema),
+    z.lazy(() => SlackWebhookNotifier$inboundSchema),
+    z.lazy(() => GenericWebhookNotifier$inboundSchema),
+  ])
+);
 
 export function notifierFromJSON(
   jsonString: string,

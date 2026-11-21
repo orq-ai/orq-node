@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import * as components from "../components/index.js";
 
 export type TelemetryDestinationsUpdateDestinationRequest = {
@@ -25,16 +26,18 @@ export const TelemetryDestinationsUpdateDestinationRequest$outboundSchema:
     TelemetryDestinationsUpdateDestinationRequest$Outbound,
     z.ZodTypeDef,
     TelemetryDestinationsUpdateDestinationRequest
-  > = z.object({
-    destinationId: z.string(),
-    updateTelemetryDestinationRequest:
-      components.UpdateTelemetryDestinationRequest$outboundSchema,
-  }).transform((v) => {
-    return remap$(v, {
-      destinationId: "destination_id",
-      updateTelemetryDestinationRequest: "UpdateTelemetryDestinationRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      destinationId: z.string(),
+      updateTelemetryDestinationRequest:
+        components.UpdateTelemetryDestinationRequest$outboundSchema,
+    }).transform((v) => {
+      return remap$(v, {
+        destinationId: "destination_id",
+        updateTelemetryDestinationRequest: "UpdateTelemetryDestinationRequest",
+      });
+    })
+  );
 
 export function telemetryDestinationsUpdateDestinationRequestToJSON(
   telemetryDestinationsUpdateDestinationRequest:

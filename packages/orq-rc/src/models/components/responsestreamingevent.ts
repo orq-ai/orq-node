@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -61,18 +61,20 @@ export const ResponseStreamingEvent$inboundSchema: z.ZodType<
   ResponseStreamingEvent,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  ResponseStartedEvent$inboundSchema,
-  ResponseDoneEvent$inboundSchema,
-  ResponseFailedEvent$inboundSchema,
-  ToolStartedEvent$inboundSchema,
-  ToolDoneEvent$inboundSchema,
-  ToolFailedEvent$inboundSchema,
-  ToolReviewRequestedEvent$inboundSchema,
-  ToolReviewDoneEvent$inboundSchema,
-  PartDeltaEvent$inboundSchema,
-  PartDoneEvent$inboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    ResponseStartedEvent$inboundSchema,
+    ResponseDoneEvent$inboundSchema,
+    ResponseFailedEvent$inboundSchema,
+    ToolStartedEvent$inboundSchema,
+    ToolDoneEvent$inboundSchema,
+    ToolFailedEvent$inboundSchema,
+    ToolReviewRequestedEvent$inboundSchema,
+    ToolReviewDoneEvent$inboundSchema,
+    PartDeltaEvent$inboundSchema,
+    PartDoneEvent$inboundSchema,
+  ])
+);
 
 export function responseStreamingEventFromJSON(
   jsonString: string,

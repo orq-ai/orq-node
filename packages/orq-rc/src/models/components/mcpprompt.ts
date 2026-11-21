@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { McpIcon, McpIcon$inboundSchema } from "./mcpicon.js";
@@ -30,7 +30,7 @@ export const McpPromptMeta$inboundSchema: z.ZodType<
   McpPromptMeta,
   z.ZodTypeDef,
   unknown
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function mcpPromptMetaFromJSON(
   jsonString: string,
@@ -47,19 +47,21 @@ export const McpPrompt$inboundSchema: z.ZodType<
   McpPrompt,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string().optional(),
-  title: z.string().optional(),
-  description: z.string().optional(),
-  arguments: z.array(McpPromptArgument$inboundSchema).optional(),
-  icons: z.array(McpIcon$inboundSchema).optional(),
-  meta: z.lazy(() => McpPromptMeta$inboundSchema).optional(),
-  selection_id: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "selection_id": "selectionId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    title: z.string().optional(),
+    description: z.string().optional(),
+    arguments: z.array(McpPromptArgument$inboundSchema).optional(),
+    icons: z.array(McpIcon$inboundSchema).optional(),
+    meta: z.lazy(() => McpPromptMeta$inboundSchema).optional(),
+    selection_id: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "selection_id": "selectionId",
+    });
+  })
+);
 
 export function mcpPromptFromJSON(
   jsonString: string,

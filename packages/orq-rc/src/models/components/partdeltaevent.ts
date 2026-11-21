@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { PartDelta, PartDelta$inboundSchema } from "./partdelta.js";
@@ -36,10 +36,12 @@ export const PartDeltaEventData$inboundSchema: z.ZodType<
   PartDeltaEventData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  partId: z.string(),
-  delta: PartDelta$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    partId: z.string(),
+    delta: PartDelta$inboundSchema,
+  })
+);
 
 export function partDeltaEventDataFromJSON(
   jsonString: string,
@@ -56,11 +58,13 @@ export const PartDeltaEvent$inboundSchema: z.ZodType<
   PartDeltaEvent,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("part.delta"),
-  timestamp: z.string(),
-  data: z.lazy(() => PartDeltaEventData$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("part.delta"),
+    timestamp: z.string(),
+    data: z.lazy(() => PartDeltaEventData$inboundSchema),
+  })
+);
 
 export function partDeltaEventFromJSON(
   jsonString: string,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -19,16 +19,18 @@ export const McpHealthCheckResult$inboundSchema: z.ZodType<
   McpHealthCheckResult,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  checked_at: z.string().optional(),
-  ok: z.boolean().optional(),
-  latency_ms: z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "checked_at": "checkedAt",
-    "latency_ms": "latencyMs",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    checked_at: z.string().optional(),
+    ok: z.boolean().optional(),
+    latency_ms: z.number().int().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "checked_at": "checkedAt",
+      "latency_ms": "latencyMs",
+    });
+  })
+);
 
 export function mcpHealthCheckResultFromJSON(
   jsonString: string,

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import {
   AdvisorToolInput,
   AdvisorToolInput$Outbound,
@@ -157,28 +158,30 @@ export const AgentToolInputCRUD$outboundSchema: z.ZodType<
   AgentToolInputCRUD$Outbound,
   z.ZodTypeDef,
   AgentToolInputCRUD
-> = z.union([
-  GoogleSearchToolInput$outboundSchema,
-  WebScraperToolInput$outboundSchema,
-  CallSubAgentToolInput$outboundSchema,
-  RetrieveAgentsToolInput$outboundSchema,
-  QueryMemoryStoreToolInput$outboundSchema,
-  WriteMemoryStoreToolInput$outboundSchema,
-  RetrieveMemoryStoresToolInput$outboundSchema,
-  DeleteMemoryDocumentToolInput$outboundSchema,
-  RetrieveKnowledgeBasesToolInput$outboundSchema,
-  QueryKnowledgeBaseToolInput$outboundSchema,
-  CurrentDateToolInput$outboundSchema,
-  AdvisorToolInput$outboundSchema,
-  SidekickToolInput$outboundSchema,
-  CodeInterpreterToolInput$outboundSchema,
-  FileSystemToolInput$outboundSchema,
-  HttpToolInput$outboundSchema,
-  CodeToolInput$outboundSchema,
-  FunctionToolInput$outboundSchema,
-  JsonSchemaToolInput$outboundSchema,
-  McpToolInput$outboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    GoogleSearchToolInput$outboundSchema,
+    WebScraperToolInput$outboundSchema,
+    CallSubAgentToolInput$outboundSchema,
+    RetrieveAgentsToolInput$outboundSchema,
+    QueryMemoryStoreToolInput$outboundSchema,
+    WriteMemoryStoreToolInput$outboundSchema,
+    RetrieveMemoryStoresToolInput$outboundSchema,
+    DeleteMemoryDocumentToolInput$outboundSchema,
+    RetrieveKnowledgeBasesToolInput$outboundSchema,
+    QueryKnowledgeBaseToolInput$outboundSchema,
+    CurrentDateToolInput$outboundSchema,
+    AdvisorToolInput$outboundSchema,
+    SidekickToolInput$outboundSchema,
+    CodeInterpreterToolInput$outboundSchema,
+    FileSystemToolInput$outboundSchema,
+    HttpToolInput$outboundSchema,
+    CodeToolInput$outboundSchema,
+    FunctionToolInput$outboundSchema,
+    JsonSchemaToolInput$outboundSchema,
+    McpToolInput$outboundSchema,
+  ])
+);
 
 export function agentToolInputCRUDToJSON(
   agentToolInputCRUD: AgentToolInputCRUD,

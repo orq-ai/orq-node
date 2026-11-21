@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import * as components from "../components/index.js";
 
 export type UpdateMemoryRequest = {
@@ -24,17 +25,19 @@ export const UpdateMemoryRequest$outboundSchema: z.ZodType<
   UpdateMemoryRequest$Outbound,
   z.ZodTypeDef,
   UpdateMemoryRequest
-> = z.object({
-  memoryStoreKey: z.string(),
-  memoryEntityId: z.string(),
-  updateMemoryRequest: components.UpdateMemoryRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    memoryStoreKey: "memory_store_key",
-    memoryEntityId: "memory_entity_id",
-    updateMemoryRequest: "UpdateMemoryRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    memoryStoreKey: z.string(),
+    memoryEntityId: z.string(),
+    updateMemoryRequest: components.UpdateMemoryRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      memoryStoreKey: "memory_store_key",
+      memoryEntityId: "memory_entity_id",
+      updateMemoryRequest: "UpdateMemoryRequest",
+    });
+  })
+);
 
 export function updateMemoryRequestToJSON(
   updateMemoryRequest: UpdateMemoryRequest,

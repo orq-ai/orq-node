@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type CreateAnnotationColumnRequest = {
   /**
@@ -43,18 +44,20 @@ export const CreateAnnotationColumnRequest$outboundSchema: z.ZodType<
   CreateAnnotationColumnRequest$Outbound,
   z.ZodTypeDef,
   CreateAnnotationColumnRequest
-> = z.object({
-  annotationId: z.string(),
-  displayName: z.string().optional(),
-  annotationType: z.string().optional(),
-  position: z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    annotationId: "annotation_id",
-    displayName: "display_name",
-    annotationType: "annotation_type",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    annotationId: z.string(),
+    displayName: z.string().optional(),
+    annotationType: z.string().optional(),
+    position: z.number().int().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      annotationId: "annotation_id",
+      displayName: "display_name",
+      annotationType: "annotation_type",
+    });
+  })
+);
 
 export function createAnnotationColumnRequestToJSON(
   createAnnotationColumnRequest: CreateAnnotationColumnRequest,

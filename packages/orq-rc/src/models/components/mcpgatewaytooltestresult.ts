@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -37,8 +37,8 @@ export type McpGatewayToolTestResult = {
 };
 
 /** @internal */
-export const Result$inboundSchema: z.ZodType<Result, z.ZodTypeDef, unknown> = z
-  .object({});
+export const Result$inboundSchema: z.ZodType<Result, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function resultFromJSON(
   jsonString: string,
@@ -55,18 +55,20 @@ export const McpGatewayToolTestResult$inboundSchema: z.ZodType<
   McpGatewayToolTestResult,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  ok: z.boolean().optional(),
-  result: z.lazy(() => Result$inboundSchema).optional(),
-  latency_ms: z.number().int().optional(),
-  error_message: z.string().optional(),
-  errors: z.array(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "latency_ms": "latencyMs",
-    "error_message": "errorMessage",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ok: z.boolean().optional(),
+    result: z.lazy(() => Result$inboundSchema).optional(),
+    latency_ms: z.number().int().optional(),
+    error_message: z.string().optional(),
+    errors: z.array(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "latency_ms": "latencyMs",
+      "error_message": "errorMessage",
+    });
+  })
+);
 
 export function mcpGatewayToolTestResultFromJSON(
   jsonString: string,

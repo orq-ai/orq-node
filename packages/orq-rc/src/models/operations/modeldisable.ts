@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type ModelDisableRequest = {
   /**
@@ -22,13 +23,15 @@ export const ModelDisableRequest$outboundSchema: z.ZodType<
   ModelDisableRequest$Outbound,
   z.ZodTypeDef,
   ModelDisableRequest
-> = z.object({
-  modelId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    modelId: "model_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    modelId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      modelId: "model_id",
+    });
+  })
+);
 
 export function modelDisableRequestToJSON(
   modelDisableRequest: ModelDisableRequest,

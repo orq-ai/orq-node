@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type UserGetRequest = {
   /**
@@ -22,13 +23,15 @@ export const UserGetRequest$outboundSchema: z.ZodType<
   UserGetRequest$Outbound,
   z.ZodTypeDef,
   UserGetRequest
-> = z.object({
-  userId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    userId: "user_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    userId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      userId: "user_id",
+    });
+  })
+);
 
 export function userGetRequestToJSON(userGetRequest: UserGetRequest): string {
   return JSON.stringify(UserGetRequest$outboundSchema.parse(userGetRequest));

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -49,7 +49,7 @@ export type AlertDisplay = {
 /** @internal */
 export const Visualization$inboundSchema: z.ZodNativeEnum<
   typeof Visualization
-> = z.nativeEnum(Visualization);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Visualization));
 /** @internal */
 export const Visualization$outboundSchema: z.ZodNativeEnum<
   typeof Visualization
@@ -57,7 +57,7 @@ export const Visualization$outboundSchema: z.ZodNativeEnum<
 
 /** @internal */
 export const PreviewRange$inboundSchema: z.ZodNativeEnum<typeof PreviewRange> =
-  z.nativeEnum(PreviewRange);
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(PreviewRange));
 /** @internal */
 export const PreviewRange$outboundSchema: z.ZodNativeEnum<typeof PreviewRange> =
   PreviewRange$inboundSchema;
@@ -67,14 +67,16 @@ export const AlertDisplay$inboundSchema: z.ZodType<
   AlertDisplay,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  visualization: Visualization$inboundSchema.optional(),
-  preview_range: PreviewRange$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "preview_range": "previewRange",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    visualization: Visualization$inboundSchema.optional(),
+    preview_range: PreviewRange$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "preview_range": "previewRange",
+    });
+  })
+);
 /** @internal */
 export type AlertDisplay$Outbound = {
   visualization?: string | undefined;
@@ -86,14 +88,16 @@ export const AlertDisplay$outboundSchema: z.ZodType<
   AlertDisplay$Outbound,
   z.ZodTypeDef,
   AlertDisplay
-> = z.object({
-  visualization: Visualization$outboundSchema.optional(),
-  previewRange: PreviewRange$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    previewRange: "preview_range",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    visualization: Visualization$outboundSchema.optional(),
+    previewRange: PreviewRange$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      previewRange: "preview_range",
+    });
+  })
+);
 
 export function alertDisplayToJSON(alertDisplay: AlertDisplay): string {
   return JSON.stringify(AlertDisplay$outboundSchema.parse(alertDisplay));

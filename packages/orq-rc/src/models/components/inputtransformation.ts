@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -40,29 +40,31 @@ export type InputTransformation = {
 };
 
 /** @internal */
-export const Action$inboundSchema: z.ZodNativeEnum<typeof Action> = z
-  .nativeEnum(Action);
+export const Action$inboundSchema: z.ZodNativeEnum<typeof Action> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Action));
 
 /** @internal */
-export const Reason$inboundSchema: z.ZodNativeEnum<typeof Reason> = z
-  .nativeEnum(Reason);
+export const Reason$inboundSchema: z.ZodNativeEnum<typeof Reason> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Reason));
 
 /** @internal */
 export const InputTransformationType$inboundSchema: z.ZodNativeEnum<
   typeof InputTransformationType
-> = z.nativeEnum(InputTransformationType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(InputTransformationType));
 
 /** @internal */
 export const InputTransformation$inboundSchema: z.ZodType<
   InputTransformation,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  action: Action$inboundSchema,
-  id: z.string(),
-  reason: Reason$inboundSchema,
-  type: InputTransformationType$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    action: Action$inboundSchema,
+    id: z.string(),
+    reason: Reason$inboundSchema,
+    type: InputTransformationType$inboundSchema,
+  })
+);
 
 export function inputTransformationFromJSON(
   jsonString: string,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -22,23 +22,25 @@ export const PreviewChunksMetadata$inboundSchema: z.ZodType<
   PreviewChunksMetadata,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  words_count: z.number().int(),
-  sentences_count: z.number().int(),
-  paragraphs_count: z.number().int(),
-  tokens_count: z.number().int(),
-  characters_count: z.number().int(),
-  chunks_count: z.number().int(),
-}).transform((v) => {
-  return remap$(v, {
-    "words_count": "wordsCount",
-    "sentences_count": "sentencesCount",
-    "paragraphs_count": "paragraphsCount",
-    "tokens_count": "tokensCount",
-    "characters_count": "charactersCount",
-    "chunks_count": "chunksCount",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    words_count: z.number().int(),
+    sentences_count: z.number().int(),
+    paragraphs_count: z.number().int(),
+    tokens_count: z.number().int(),
+    characters_count: z.number().int(),
+    chunks_count: z.number().int(),
+  }).transform((v) => {
+    return remap$(v, {
+      "words_count": "wordsCount",
+      "sentences_count": "sentencesCount",
+      "paragraphs_count": "paragraphsCount",
+      "tokens_count": "tokensCount",
+      "characters_count": "charactersCount",
+      "chunks_count": "chunksCount",
+    });
+  })
+);
 
 export function previewChunksMetadataFromJSON(
   jsonString: string,

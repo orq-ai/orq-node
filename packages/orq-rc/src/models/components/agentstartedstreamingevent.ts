@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -253,21 +253,25 @@ export type AgentStartedStreamingEvent = {
 /** @internal */
 export const AgentStartedStreamingEventRole$inboundSchema: z.ZodNativeEnum<
   typeof AgentStartedStreamingEventRole
-> = z.nativeEnum(AgentStartedStreamingEventRole);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(AgentStartedStreamingEventRole)
+);
 
 /** @internal */
 export const AgentStartedStreamingEventParts$inboundSchema: z.ZodType<
   AgentStartedStreamingEventParts,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  TextPart$inboundSchema,
-  ErrorPart$inboundSchema,
-  DataPart$inboundSchema,
-  FilePart$inboundSchema,
-  ToolCallPart$inboundSchema,
-  ToolResultPart$inboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    TextPart$inboundSchema,
+    ErrorPart$inboundSchema,
+    DataPart$inboundSchema,
+    FilePart$inboundSchema,
+    ToolCallPart$inboundSchema,
+    ToolResultPart$inboundSchema,
+  ])
+);
 
 export function agentStartedStreamingEventPartsFromJSON(
   jsonString: string,
@@ -284,21 +288,23 @@ export const InputMessage$inboundSchema: z.ZodType<
   InputMessage,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  messageId: z.string().optional(),
-  role: AgentStartedStreamingEventRole$inboundSchema,
-  parts: z.array(
-    z.union([
-      TextPart$inboundSchema,
-      ErrorPart$inboundSchema,
-      DataPart$inboundSchema,
-      FilePart$inboundSchema,
-      ToolCallPart$inboundSchema,
-      ToolResultPart$inboundSchema,
-    ]),
-  ),
-  metadata: z.record(z.any()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    messageId: z.string().optional(),
+    role: AgentStartedStreamingEventRole$inboundSchema,
+    parts: z.array(
+      z.union([
+        TextPart$inboundSchema,
+        ErrorPart$inboundSchema,
+        DataPart$inboundSchema,
+        FilePart$inboundSchema,
+        ToolCallPart$inboundSchema,
+        ToolResultPart$inboundSchema,
+      ]),
+    ),
+    metadata: z.record(z.any()).optional(),
+  })
+);
 
 export function inputMessageFromJSON(
   jsonString: string,
@@ -313,18 +319,20 @@ export function inputMessageFromJSON(
 /** @internal */
 export const ToolApprovalRequired$inboundSchema: z.ZodNativeEnum<
   typeof ToolApprovalRequired
-> = z.nativeEnum(ToolApprovalRequired);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ToolApprovalRequired));
 
 /** @internal */
 export const AgentStartedStreamingEventConditions$inboundSchema: z.ZodType<
   AgentStartedStreamingEventConditions,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  condition: z.string(),
-  operator: z.string(),
-  value: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    condition: z.string(),
+    operator: z.string(),
+    value: z.string(),
+  })
+);
 
 export function agentStartedStreamingEventConditionsFromJSON(
   jsonString: string,
@@ -338,30 +346,32 @@ export function agentStartedStreamingEventConditionsFromJSON(
 }
 
 /** @internal */
-export const Tools$inboundSchema: z.ZodType<Tools, z.ZodTypeDef, unknown> = z
-  .object({
-    id: z.string(),
-    key: z.string().optional(),
-    action_type: z.string(),
-    display_name: z.string().optional(),
-    description: z.string().optional(),
-    configuration: z.record(z.any()).optional(),
-    requires_approval: z.boolean().default(false),
-    tool_id: z.string().optional(),
-    whole_server: z.boolean().optional(),
-    conditions: z.array(
-      z.lazy(() => AgentStartedStreamingEventConditions$inboundSchema),
-    ).optional(),
-    timeout: z.number().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "action_type": "actionType",
-      "display_name": "displayName",
-      "requires_approval": "requiresApproval",
-      "tool_id": "toolId",
-      "whole_server": "wholeServer",
-    });
-  });
+export const Tools$inboundSchema: z.ZodType<Tools, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string(),
+      key: z.string().optional(),
+      action_type: z.string(),
+      display_name: z.string().optional(),
+      description: z.string().optional(),
+      configuration: z.record(z.any()).optional(),
+      requires_approval: z.boolean().default(false),
+      tool_id: z.string().optional(),
+      whole_server: z.boolean().optional(),
+      conditions: z.array(
+        z.lazy(() => AgentStartedStreamingEventConditions$inboundSchema),
+      ).optional(),
+      timeout: z.number().optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "action_type": "actionType",
+        "display_name": "displayName",
+        "requires_approval": "requiresApproval",
+        "tool_id": "toolId",
+        "whole_server": "wholeServer",
+      });
+    })
+  );
 
 export function toolsFromJSON(
   jsonString: string,
@@ -375,25 +385,29 @@ export function toolsFromJSON(
 
 /** @internal */
 export const AgentStartedStreamingEventDataExecuteOn$inboundSchema:
-  z.ZodNativeEnum<typeof AgentStartedStreamingEventDataExecuteOn> = z
-    .nativeEnum(AgentStartedStreamingEventDataExecuteOn);
+  z.ZodNativeEnum<typeof AgentStartedStreamingEventDataExecuteOn> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(AgentStartedStreamingEventDataExecuteOn)
+    );
 
 /** @internal */
 export const Evaluators$inboundSchema: z.ZodType<
   Evaluators,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  sample_rate: z.number().default(50),
-  execute_on: AgentStartedStreamingEventDataExecuteOn$inboundSchema,
-  options: z.record(z.any()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "sample_rate": "sampleRate",
-    "execute_on": "executeOn",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    sample_rate: z.number().default(50),
+    execute_on: AgentStartedStreamingEventDataExecuteOn$inboundSchema,
+    options: z.record(z.any()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "sample_rate": "sampleRate",
+      "execute_on": "executeOn",
+    });
+  })
+);
 
 export function evaluatorsFromJSON(
   jsonString: string,
@@ -408,24 +422,28 @@ export function evaluatorsFromJSON(
 /** @internal */
 export const AgentStartedStreamingEventExecuteOn$inboundSchema: z.ZodNativeEnum<
   typeof AgentStartedStreamingEventExecuteOn
-> = z.nativeEnum(AgentStartedStreamingEventExecuteOn);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(AgentStartedStreamingEventExecuteOn)
+);
 
 /** @internal */
 export const Guardrails$inboundSchema: z.ZodType<
   Guardrails,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  sample_rate: z.number().default(50),
-  execute_on: AgentStartedStreamingEventExecuteOn$inboundSchema,
-  options: z.record(z.any()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "sample_rate": "sampleRate",
-    "execute_on": "executeOn",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    sample_rate: z.number().default(50),
+    execute_on: AgentStartedStreamingEventExecuteOn$inboundSchema,
+    options: z.record(z.any()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "sample_rate": "sampleRate",
+      "execute_on": "executeOn",
+    });
+  })
+);
 
 export function guardrailsFromJSON(
   jsonString: string,
@@ -442,26 +460,28 @@ export const Settings$inboundSchema: z.ZodType<
   Settings,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  max_iterations: z.number().int().default(100),
-  max_execution_time: z.number().int().default(600),
-  max_cost: z.number().default(0),
-  tool_approval_required: ToolApprovalRequired$inboundSchema.default(
-    "respect_tool",
-  ),
-  chat_exposed: z.boolean().optional(),
-  tools: z.array(z.lazy(() => Tools$inboundSchema)).optional(),
-  evaluators: z.array(z.lazy(() => Evaluators$inboundSchema)).optional(),
-  guardrails: z.array(z.lazy(() => Guardrails$inboundSchema)).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "max_iterations": "maxIterations",
-    "max_execution_time": "maxExecutionTime",
-    "max_cost": "maxCost",
-    "tool_approval_required": "toolApprovalRequired",
-    "chat_exposed": "chatExposed",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    max_iterations: z.number().int().default(100),
+    max_execution_time: z.number().int().default(600),
+    max_cost: z.number().default(0),
+    tool_approval_required: ToolApprovalRequired$inboundSchema.default(
+      "respect_tool",
+    ),
+    chat_exposed: z.boolean().optional(),
+    tools: z.array(z.lazy(() => Tools$inboundSchema)).optional(),
+    evaluators: z.array(z.lazy(() => Evaluators$inboundSchema)).optional(),
+    guardrails: z.array(z.lazy(() => Guardrails$inboundSchema)).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "max_iterations": "maxIterations",
+      "max_execution_time": "maxExecutionTime",
+      "max_cost": "maxCost",
+      "tool_approval_required": "toolApprovalRequired",
+      "chat_exposed": "chatExposed",
+    });
+  })
+);
 
 export function settingsFromJSON(
   jsonString: string,
@@ -474,43 +494,45 @@ export function settingsFromJSON(
 }
 
 /** @internal */
-export const AgentSource$inboundSchema: z.ZodNativeEnum<typeof AgentSource> = z
-  .nativeEnum(AgentSource);
+export const AgentSource$inboundSchema: z.ZodNativeEnum<typeof AgentSource> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(AgentSource));
 
 /** @internal */
 export const AgentStartedStreamingEventData$inboundSchema: z.ZodType<
   AgentStartedStreamingEventData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  workflowRunId: z.string(),
-  integration_id: z.string().optional(),
-  inputMessage: z.lazy(() => InputMessage$inboundSchema),
-  modelId: z.string(),
-  instructions: z.string(),
-  system_prompt: z.string(),
-  settings: z.lazy(() => Settings$inboundSchema).optional(),
-  agent_manifest_id: z.string(),
-  agent_key: z.string(),
-  agent_description: z.nullable(z.string()).optional(),
-  agent_source: z.nullable(AgentSource$inboundSchema).optional(),
-  variables: z.record(z.any()).optional(),
-  tool_execution_id: z.string().optional(),
-  is_continuation: z.boolean().optional(),
-  stream: z.boolean().optional(),
-  responseId: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "integration_id": "integrationId",
-    "system_prompt": "systemPrompt",
-    "agent_manifest_id": "agentManifestId",
-    "agent_key": "agentKey",
-    "agent_description": "agentDescription",
-    "agent_source": "agentSource",
-    "tool_execution_id": "toolExecutionId",
-    "is_continuation": "isContinuation",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    workflowRunId: z.string(),
+    integration_id: z.string().optional(),
+    inputMessage: z.lazy(() => InputMessage$inboundSchema),
+    modelId: z.string(),
+    instructions: z.string(),
+    system_prompt: z.string(),
+    settings: z.lazy(() => Settings$inboundSchema).optional(),
+    agent_manifest_id: z.string(),
+    agent_key: z.string(),
+    agent_description: z.nullable(z.string()).optional(),
+    agent_source: z.nullable(AgentSource$inboundSchema).optional(),
+    variables: z.record(z.any()).optional(),
+    tool_execution_id: z.string().optional(),
+    is_continuation: z.boolean().optional(),
+    stream: z.boolean().optional(),
+    responseId: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "integration_id": "integrationId",
+      "system_prompt": "systemPrompt",
+      "agent_manifest_id": "agentManifestId",
+      "agent_key": "agentKey",
+      "agent_description": "agentDescription",
+      "agent_source": "agentSource",
+      "tool_execution_id": "toolExecutionId",
+      "is_continuation": "isContinuation",
+    });
+  })
+);
 
 export function agentStartedStreamingEventDataFromJSON(
   jsonString: string,
@@ -527,11 +549,13 @@ export const AgentStartedStreamingEvent$inboundSchema: z.ZodType<
   AgentStartedStreamingEvent,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("event.agents.started"),
-  timestamp: z.string(),
-  data: z.lazy(() => AgentStartedStreamingEventData$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("event.agents.started"),
+    timestamp: z.string(),
+    data: z.lazy(() => AgentStartedStreamingEventData$inboundSchema),
+  })
+);
 
 export function agentStartedStreamingEventFromJSON(
   jsonString: string,

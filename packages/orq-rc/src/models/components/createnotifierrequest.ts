@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { NotifierType, NotifierType$outboundSchema } from "./notifiertype.js";
 
 /**
@@ -157,7 +158,7 @@ export const CreateNotifierRequest3Metadata$outboundSchema: z.ZodType<
   CreateNotifierRequest3Metadata$Outbound,
   z.ZodTypeDef,
   CreateNotifierRequest3Metadata
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function createNotifierRequest3MetadataToJSON(
   createNotifierRequest3Metadata: CreateNotifierRequest3Metadata,
@@ -177,7 +178,7 @@ export const CreateNotifierRequest3Headers$outboundSchema: z.ZodType<
   CreateNotifierRequest3Headers$Outbound,
   z.ZodTypeDef,
   CreateNotifierRequest3Headers
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function createNotifierRequest3HeadersToJSON(
   createNotifierRequest3Headers: CreateNotifierRequest3Headers,
@@ -206,25 +207,27 @@ export const GenericWebhookNotifierCreateRequest$outboundSchema: z.ZodType<
   GenericWebhookNotifierCreateRequest$Outbound,
   z.ZodTypeDef,
   GenericWebhookNotifierCreateRequest
-> = z.object({
-  type: NotifierType$outboundSchema,
-  webhookUrl: z.string(),
-  projectId: z.string().optional(),
-  displayName: z.string(),
-  metadata: z.lazy(() => CreateNotifierRequest3Metadata$outboundSchema)
-    .optional(),
-  emails: z.array(z.string()).optional(),
-  incomingWebhookUrl: z.string().optional(),
-  headers: z.lazy(() => CreateNotifierRequest3Headers$outboundSchema)
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    webhookUrl: "webhook_url",
-    projectId: "project_id",
-    displayName: "display_name",
-    incomingWebhookUrl: "incoming_webhook_url",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: NotifierType$outboundSchema,
+    webhookUrl: z.string(),
+    projectId: z.string().optional(),
+    displayName: z.string(),
+    metadata: z.lazy(() => CreateNotifierRequest3Metadata$outboundSchema)
+      .optional(),
+    emails: z.array(z.string()).optional(),
+    incomingWebhookUrl: z.string().optional(),
+    headers: z.lazy(() => CreateNotifierRequest3Headers$outboundSchema)
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      webhookUrl: "webhook_url",
+      projectId: "project_id",
+      displayName: "display_name",
+      incomingWebhookUrl: "incoming_webhook_url",
+    });
+  })
+);
 
 export function genericWebhookNotifierCreateRequestToJSON(
   genericWebhookNotifierCreateRequest: GenericWebhookNotifierCreateRequest,
@@ -244,7 +247,7 @@ export const CreateNotifierRequest2Metadata$outboundSchema: z.ZodType<
   CreateNotifierRequest2Metadata$Outbound,
   z.ZodTypeDef,
   CreateNotifierRequest2Metadata
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function createNotifierRequest2MetadataToJSON(
   createNotifierRequest2Metadata: CreateNotifierRequest2Metadata,
@@ -264,7 +267,7 @@ export const CreateNotifierRequest2Headers$outboundSchema: z.ZodType<
   CreateNotifierRequest2Headers$Outbound,
   z.ZodTypeDef,
   CreateNotifierRequest2Headers
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function createNotifierRequest2HeadersToJSON(
   createNotifierRequest2Headers: CreateNotifierRequest2Headers,
@@ -293,25 +296,27 @@ export const SlackWebhookNotifierCreateRequest$outboundSchema: z.ZodType<
   SlackWebhookNotifierCreateRequest$Outbound,
   z.ZodTypeDef,
   SlackWebhookNotifierCreateRequest
-> = z.object({
-  type: NotifierType$outboundSchema,
-  incomingWebhookUrl: z.string(),
-  projectId: z.string().optional(),
-  displayName: z.string(),
-  metadata: z.lazy(() => CreateNotifierRequest2Metadata$outboundSchema)
-    .optional(),
-  emails: z.array(z.string()).optional(),
-  webhookUrl: z.string().optional(),
-  headers: z.lazy(() => CreateNotifierRequest2Headers$outboundSchema)
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    incomingWebhookUrl: "incoming_webhook_url",
-    projectId: "project_id",
-    displayName: "display_name",
-    webhookUrl: "webhook_url",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: NotifierType$outboundSchema,
+    incomingWebhookUrl: z.string(),
+    projectId: z.string().optional(),
+    displayName: z.string(),
+    metadata: z.lazy(() => CreateNotifierRequest2Metadata$outboundSchema)
+      .optional(),
+    emails: z.array(z.string()).optional(),
+    webhookUrl: z.string().optional(),
+    headers: z.lazy(() => CreateNotifierRequest2Headers$outboundSchema)
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      incomingWebhookUrl: "incoming_webhook_url",
+      projectId: "project_id",
+      displayName: "display_name",
+      webhookUrl: "webhook_url",
+    });
+  })
+);
 
 export function slackWebhookNotifierCreateRequestToJSON(
   slackWebhookNotifierCreateRequest: SlackWebhookNotifierCreateRequest,
@@ -331,7 +336,7 @@ export const CreateNotifierRequestMetadata$outboundSchema: z.ZodType<
   CreateNotifierRequestMetadata$Outbound,
   z.ZodTypeDef,
   CreateNotifierRequestMetadata
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function createNotifierRequestMetadataToJSON(
   createNotifierRequestMetadata: CreateNotifierRequestMetadata,
@@ -351,7 +356,7 @@ export const CreateNotifierRequestHeaders$outboundSchema: z.ZodType<
   CreateNotifierRequestHeaders$Outbound,
   z.ZodTypeDef,
   CreateNotifierRequestHeaders
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function createNotifierRequestHeadersToJSON(
   createNotifierRequestHeaders: CreateNotifierRequestHeaders,
@@ -380,24 +385,27 @@ export const EmailNotifierCreateRequest$outboundSchema: z.ZodType<
   EmailNotifierCreateRequest$Outbound,
   z.ZodTypeDef,
   EmailNotifierCreateRequest
-> = z.object({
-  type: NotifierType$outboundSchema,
-  emails: z.array(z.string()),
-  projectId: z.string().optional(),
-  displayName: z.string(),
-  metadata: z.lazy(() => CreateNotifierRequestMetadata$outboundSchema)
-    .optional(),
-  incomingWebhookUrl: z.string().optional(),
-  webhookUrl: z.string().optional(),
-  headers: z.lazy(() => CreateNotifierRequestHeaders$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    projectId: "project_id",
-    displayName: "display_name",
-    incomingWebhookUrl: "incoming_webhook_url",
-    webhookUrl: "webhook_url",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: NotifierType$outboundSchema,
+    emails: z.array(z.string()),
+    projectId: z.string().optional(),
+    displayName: z.string(),
+    metadata: z.lazy(() => CreateNotifierRequestMetadata$outboundSchema)
+      .optional(),
+    incomingWebhookUrl: z.string().optional(),
+    webhookUrl: z.string().optional(),
+    headers: z.lazy(() => CreateNotifierRequestHeaders$outboundSchema)
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      projectId: "project_id",
+      displayName: "display_name",
+      incomingWebhookUrl: "incoming_webhook_url",
+      webhookUrl: "webhook_url",
+    });
+  })
+);
 
 export function emailNotifierCreateRequestToJSON(
   emailNotifierCreateRequest: EmailNotifierCreateRequest,
@@ -418,11 +426,13 @@ export const CreateNotifierRequest$outboundSchema: z.ZodType<
   CreateNotifierRequest$Outbound,
   z.ZodTypeDef,
   CreateNotifierRequest
-> = z.union([
-  z.lazy(() => EmailNotifierCreateRequest$outboundSchema),
-  z.lazy(() => SlackWebhookNotifierCreateRequest$outboundSchema),
-  z.lazy(() => GenericWebhookNotifierCreateRequest$outboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => EmailNotifierCreateRequest$outboundSchema),
+    z.lazy(() => SlackWebhookNotifierCreateRequest$outboundSchema),
+    z.lazy(() => GenericWebhookNotifierCreateRequest$outboundSchema),
+  ])
+);
 
 export function createNotifierRequestToJSON(
   createNotifierRequest: CreateNotifierRequest,

@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type DatasourcesServiceUpdateRequest = {
   displayName: string;
@@ -21,14 +22,16 @@ export const DatasourcesServiceUpdateRequest$outboundSchema: z.ZodType<
   DatasourcesServiceUpdateRequest$Outbound,
   z.ZodTypeDef,
   DatasourcesServiceUpdateRequest
-> = z.object({
-  displayName: z.string(),
-  description: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    displayName: "display_name",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    displayName: z.string(),
+    description: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      displayName: "display_name",
+    });
+  })
+);
 
 export function datasourcesServiceUpdateRequestToJSON(
   datasourcesServiceUpdateRequest: DatasourcesServiceUpdateRequest,

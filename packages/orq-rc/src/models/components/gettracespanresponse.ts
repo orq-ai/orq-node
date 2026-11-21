@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { SpanDetail, SpanDetail$inboundSchema } from "./spandetail.js";
@@ -17,9 +17,11 @@ export const GetTraceSpanResponse$inboundSchema: z.ZodType<
   GetTraceSpanResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  span: SpanDetail$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    span: SpanDetail$inboundSchema.optional(),
+  })
+);
 
 export function getTraceSpanResponseFromJSON(
   jsonString: string,

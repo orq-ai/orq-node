@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -29,15 +29,17 @@ export const RetrieveAnnotationQueueItemRequest$outboundSchema: z.ZodType<
   RetrieveAnnotationQueueItemRequest$Outbound,
   z.ZodTypeDef,
   RetrieveAnnotationQueueItemRequest
-> = z.object({
-  annotationQueueId: z.string(),
-  itemId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    annotationQueueId: "annotation_queue_id",
-    itemId: "item_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    annotationQueueId: z.string(),
+    itemId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      annotationQueueId: "annotation_queue_id",
+      itemId: "item_id",
+    });
+  })
+);
 
 export function retrieveAnnotationQueueItemRequestToJSON(
   retrieveAnnotationQueueItemRequest: RetrieveAnnotationQueueItemRequest,
@@ -54,7 +56,7 @@ export const RetrieveAnnotationQueueItemResponseBody$inboundSchema: z.ZodType<
   RetrieveAnnotationQueueItemResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function retrieveAnnotationQueueItemResponseBodyFromJSON(
   jsonString: string,

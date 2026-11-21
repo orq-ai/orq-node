@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -121,29 +121,31 @@ export type Column = {
 };
 
 /** @internal */
-export const Column$inboundSchema: z.ZodType<Column, z.ZodTypeDef, unknown> = z
-  .object({
-    column_id: z.string().optional(),
-    key: z.string().optional(),
-    display_name: z.string().optional(),
-    position: z.number().int().optional(),
-    active: z.boolean().optional(),
-    prompt: PromptTaskConfig$inboundSchema.optional(),
-    agent: AgentTaskConfig$inboundSchema.optional(),
-    openresponse: OpenResponseTaskConfig$inboundSchema.optional(),
-    evaluator: EvalColumnConfig$inboundSchema.optional(),
-    annotation: AnnotationColumnConfig$inboundSchema.optional(),
-    dataset: DatasetColumnConfig$inboundSchema.optional(),
-    metric: MetricColumnConfig$inboundSchema.optional(),
-    job_output: JobOutputColumnConfig$inboundSchema.optional(),
-    width: z.number().int().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "column_id": "columnId",
-      "display_name": "displayName",
-      "job_output": "jobOutput",
-    });
-  });
+export const Column$inboundSchema: z.ZodType<Column, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      column_id: z.string().optional(),
+      key: z.string().optional(),
+      display_name: z.string().optional(),
+      position: z.number().int().optional(),
+      active: z.boolean().optional(),
+      prompt: PromptTaskConfig$inboundSchema.optional(),
+      agent: AgentTaskConfig$inboundSchema.optional(),
+      openresponse: OpenResponseTaskConfig$inboundSchema.optional(),
+      evaluator: EvalColumnConfig$inboundSchema.optional(),
+      annotation: AnnotationColumnConfig$inboundSchema.optional(),
+      dataset: DatasetColumnConfig$inboundSchema.optional(),
+      metric: MetricColumnConfig$inboundSchema.optional(),
+      job_output: JobOutputColumnConfig$inboundSchema.optional(),
+      width: z.number().int().optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "column_id": "columnId",
+        "display_name": "displayName",
+        "job_output": "jobOutput",
+      });
+    })
+  );
 
 export function columnFromJSON(
   jsonString: string,

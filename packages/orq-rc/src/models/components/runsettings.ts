@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -49,17 +49,19 @@ export const RunSettings$inboundSchema: z.ZodType<
   RunSettings,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  concurrency: z.number().int().optional(),
-  timeout: z.string().optional(),
-  max_turns: z.number().int().optional(),
-  hidden_column_ids: z.array(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "max_turns": "maxTurns",
-    "hidden_column_ids": "hiddenColumnIds",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    concurrency: z.number().int().optional(),
+    timeout: z.string().optional(),
+    max_turns: z.number().int().optional(),
+    hidden_column_ids: z.array(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "max_turns": "maxTurns",
+      "hidden_column_ids": "hiddenColumnIds",
+    });
+  })
+);
 /** @internal */
 export type RunSettings$Outbound = {
   concurrency?: number | undefined;
@@ -73,17 +75,19 @@ export const RunSettings$outboundSchema: z.ZodType<
   RunSettings$Outbound,
   z.ZodTypeDef,
   RunSettings
-> = z.object({
-  concurrency: z.number().int().optional(),
-  timeout: z.string().optional(),
-  maxTurns: z.number().int().optional(),
-  hiddenColumnIds: z.array(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    maxTurns: "max_turns",
-    hiddenColumnIds: "hidden_column_ids",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    concurrency: z.number().int().optional(),
+    timeout: z.string().optional(),
+    maxTurns: z.number().int().optional(),
+    hiddenColumnIds: z.array(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      maxTurns: "max_turns",
+      hiddenColumnIds: "hidden_column_ids",
+    });
+  })
+);
 
 export function runSettingsToJSON(runSettings: RunSettings): string {
   return JSON.stringify(RunSettings$outboundSchema.parse(runSettings));

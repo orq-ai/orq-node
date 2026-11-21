@@ -5,7 +5,7 @@
 import * as z from "zod/v3";
 import { EventStream } from "../../lib/event-streams.js";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -43,15 +43,17 @@ export const CreateAgentResponseRequestRequest$outboundSchema: z.ZodType<
   CreateAgentResponseRequestRequest$Outbound,
   z.ZodTypeDef,
   CreateAgentResponseRequestRequest
-> = z.object({
-  agentKey: z.string(),
-  agentResponseRequest: components.AgentResponseRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    agentKey: "agent_key",
-    agentResponseRequest: "AgentResponseRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    agentKey: z.string(),
+    agentResponseRequest: components.AgentResponseRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      agentKey: "agent_key",
+      agentResponseRequest: "AgentResponseRequest",
+    });
+  })
+);
 
 export function createAgentResponseRequestRequestToJSON(
   createAgentResponseRequestRequest: CreateAgentResponseRequestRequest,
@@ -68,18 +70,20 @@ export const CreateAgentResponseRequestResponseBody$inboundSchema: z.ZodType<
   CreateAgentResponseRequestResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.unknown().optional().transform((v, ctx) => {
-    if (v === undefined) return undefined;
-    if (typeof v !== "string") return v;
-    try {
-      return JSON.parse(v);
-    } catch (err) {
-      ctx.addIssue({ code: "custom", message: `malformed json: ${err}` });
-      return z.NEVER;
-    }
-  }).pipe(components.ResponseStreamingEvent$inboundSchema.optional()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.unknown().optional().transform((v, ctx) => {
+      if (v === undefined) return undefined;
+      if (typeof v !== "string") return v;
+      try {
+        return JSON.parse(v);
+      } catch (err) {
+        ctx.addIssue({ code: "custom", message: `malformed json: ${err}` });
+        return z.NEVER;
+      }
+    }).pipe(components.ResponseStreamingEvent$inboundSchema.optional()),
+  })
+);
 
 export function createAgentResponseRequestResponseBodyFromJSON(
   jsonString: string,
@@ -97,21 +101,25 @@ export const CreateAgentResponseRequestResponse$inboundSchema: z.ZodType<
   CreateAgentResponseRequestResponse,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  components.CreateAgentResponse$inboundSchema,
-  z.instanceof(ReadableStream<Uint8Array>)
-    .transform(stream => {
-      return new EventStream(stream, rawEvent => {
-        if (rawEvent.data === "[DONE]") return { done: true, value: undefined };
-        return {
-          done: false,
-          value: z.lazy(() =>
-            CreateAgentResponseRequestResponseBody$inboundSchema
-          ).parse(rawEvent),
-        };
-      }, { dataRequired: false });
-    }),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    components.CreateAgentResponse$inboundSchema,
+    z.instanceof(ReadableStream<Uint8Array>)
+      .transform(stream => {
+        return new EventStream(stream, rawEvent => {
+          if (rawEvent.data === "[DONE]") {
+            return { done: true, value: undefined };
+          }
+          return {
+            done: false,
+            value: z.lazy(() =>
+              CreateAgentResponseRequestResponseBody$inboundSchema
+            ).parse(rawEvent),
+          };
+        }, { dataRequired: false });
+      }),
+  ])
+);
 
 export function createAgentResponseRequestResponseFromJSON(
   jsonString: string,

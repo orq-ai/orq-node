@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -25,10 +25,12 @@ export const McpConnection$inboundSchema: z.ZodType<
   McpConnection,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: McpConnectionType$inboundSchema,
-  url: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: McpConnectionType$inboundSchema,
+    url: z.string(),
+  })
+);
 /** @internal */
 export type McpConnection$Outbound = {
   type: string;
@@ -40,10 +42,12 @@ export const McpConnection$outboundSchema: z.ZodType<
   McpConnection$Outbound,
   z.ZodTypeDef,
   McpConnection
-> = z.object({
-  type: McpConnectionType$outboundSchema,
-  url: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: McpConnectionType$outboundSchema,
+    url: z.string(),
+  })
+);
 
 export function mcpConnectionToJSON(mcpConnection: McpConnection): string {
   return JSON.stringify(McpConnection$outboundSchema.parse(mcpConnection));

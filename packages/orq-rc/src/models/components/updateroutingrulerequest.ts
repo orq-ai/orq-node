@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import {
   RoutingRuleCacheConfig,
   RoutingRuleCacheConfig$Outbound,
@@ -53,22 +54,24 @@ export const UpdateRoutingRuleRequest$outboundSchema: z.ZodType<
   UpdateRoutingRuleRequest$Outbound,
   z.ZodTypeDef,
   UpdateRoutingRuleRequest
-> = z.object({
-  displayName: z.string().optional(),
-  description: z.string().optional(),
-  enabled: z.boolean().optional(),
-  expression: RoutingRuleExpression$outboundSchema.optional(),
-  modelsConfig: RoutingRuleModelsConfig$outboundSchema.optional(),
-  plugins: z.array(RoutingRulePlugin$outboundSchema).optional(),
-  priority: z.number().int().optional(),
-  cacheConfig: RoutingRuleCacheConfig$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    displayName: "display_name",
-    modelsConfig: "models_config",
-    cacheConfig: "cache_config",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    displayName: z.string().optional(),
+    description: z.string().optional(),
+    enabled: z.boolean().optional(),
+    expression: RoutingRuleExpression$outboundSchema.optional(),
+    modelsConfig: RoutingRuleModelsConfig$outboundSchema.optional(),
+    plugins: z.array(RoutingRulePlugin$outboundSchema).optional(),
+    priority: z.number().int().optional(),
+    cacheConfig: RoutingRuleCacheConfig$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      displayName: "display_name",
+      modelsConfig: "models_config",
+      cacheConfig: "cache_config",
+    });
+  })
+);
 
 export function updateRoutingRuleRequestToJSON(
   updateRoutingRuleRequest: UpdateRoutingRuleRequest,

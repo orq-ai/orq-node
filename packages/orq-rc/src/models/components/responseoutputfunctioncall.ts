@@ -6,6 +6,7 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import {
   collectExtraKeys as collectExtraKeys$,
+  lazySchema as lazySchema$,
   safeParse,
 } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
@@ -54,6 +55,10 @@ export type ResponseOutputFunctionCall = {
    */
   status?: string | undefined;
   /**
+   * An opaque signature some providers, such as Google Gemini, attach to their output. Send it back unchanged with the item so the model can continue its reasoning.
+   */
+  thoughtSignature?: string | undefined;
+  /**
    * The item type. Discriminates the item.
    */
   type: ResponseOutputFunctionCallType;
@@ -63,30 +68,36 @@ export type ResponseOutputFunctionCall = {
 /** @internal */
 export const ResponseOutputFunctionCallType$inboundSchema: z.ZodNativeEnum<
   typeof ResponseOutputFunctionCallType
-> = z.nativeEnum(ResponseOutputFunctionCallType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(ResponseOutputFunctionCallType)
+);
 
 /** @internal */
 export const ResponseOutputFunctionCall$inboundSchema: z.ZodType<
   ResponseOutputFunctionCall,
   z.ZodTypeDef,
   unknown
-> = collectExtraKeys$(
-  z.object({
-    arguments: z.string(),
-    call_id: z.string(),
-    id: z.string().optional(),
-    name: z.string(),
-    namespace: z.string().optional(),
-    status: z.string().optional(),
-    type: ResponseOutputFunctionCallType$inboundSchema,
-  }).catchall(z.any()),
-  "additionalProperties",
-  true,
-).transform((v) => {
-  return remap$(v, {
-    "call_id": "callId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  collectExtraKeys$(
+    z.object({
+      arguments: z.string(),
+      call_id: z.string(),
+      id: z.string().optional(),
+      name: z.string(),
+      namespace: z.string().optional(),
+      status: z.string().optional(),
+      thought_signature: z.string().optional(),
+      type: ResponseOutputFunctionCallType$inboundSchema,
+    }).catchall(z.any()),
+    "additionalProperties",
+    true,
+  ).transform((v) => {
+    return remap$(v, {
+      "call_id": "callId",
+      "thought_signature": "thoughtSignature",
+    });
+  })
+);
 
 export function responseOutputFunctionCallFromJSON(
   jsonString: string,

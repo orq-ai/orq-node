@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import * as components from "../components/index.js";
 
 export type ExperimentAnnotationCellPatchRequest = {
@@ -40,22 +41,24 @@ export const ExperimentAnnotationCellPatchRequest$outboundSchema: z.ZodType<
   ExperimentAnnotationCellPatchRequest$Outbound,
   z.ZodTypeDef,
   ExperimentAnnotationCellPatchRequest
-> = z.object({
-  experimentId: z.string(),
-  runId: z.string(),
-  annotationColumnId: z.string(),
-  datapointId: z.string(),
-  patchAnnotationCellRequest:
-    components.PatchAnnotationCellRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    experimentId: "experiment_id",
-    runId: "run_id",
-    annotationColumnId: "annotation_column_id",
-    datapointId: "datapoint_id",
-    patchAnnotationCellRequest: "PatchAnnotationCellRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    experimentId: z.string(),
+    runId: z.string(),
+    annotationColumnId: z.string(),
+    datapointId: z.string(),
+    patchAnnotationCellRequest:
+      components.PatchAnnotationCellRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      experimentId: "experiment_id",
+      runId: "run_id",
+      annotationColumnId: "annotation_column_id",
+      datapointId: "datapoint_id",
+      patchAnnotationCellRequest: "PatchAnnotationCellRequest",
+    });
+  })
+);
 
 export function experimentAnnotationCellPatchRequestToJSON(
   experimentAnnotationCellPatchRequest: ExperimentAnnotationCellPatchRequest,

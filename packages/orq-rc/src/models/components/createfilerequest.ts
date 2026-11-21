@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { FilePurpose, FilePurpose$outboundSchema } from "./filepurpose.js";
 
 export type CreateFileRequest = {
@@ -40,18 +41,20 @@ export const CreateFileRequest$outboundSchema: z.ZodType<
   CreateFileRequest$Outbound,
   z.ZodTypeDef,
   CreateFileRequest
-> = z.object({
-  filename: z.string(),
-  content: z.string(),
-  purpose: FilePurpose$outboundSchema.optional(),
-  contentType: z.string().optional(),
-  projectId: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    contentType: "content_type",
-    projectId: "project_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    filename: z.string(),
+    content: z.string(),
+    purpose: FilePurpose$outboundSchema.optional(),
+    contentType: z.string().optional(),
+    projectId: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      contentType: "content_type",
+      projectId: "project_id",
+    });
+  })
+);
 
 export function createFileRequestToJSON(
   createFileRequest: CreateFileRequest,

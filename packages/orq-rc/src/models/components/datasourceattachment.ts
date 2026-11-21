@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -18,14 +18,16 @@ export const DatasourceAttachment$inboundSchema: z.ZodType<
   DatasourceAttachment,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  object_name: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "object_name": "objectName",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    object_name: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "object_name": "objectName",
+    });
+  })
+);
 /** @internal */
 export type DatasourceAttachment$Outbound = {
   id?: string | undefined;
@@ -37,14 +39,16 @@ export const DatasourceAttachment$outboundSchema: z.ZodType<
   DatasourceAttachment$Outbound,
   z.ZodTypeDef,
   DatasourceAttachment
-> = z.object({
-  id: z.string().optional(),
-  objectName: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    objectName: "object_name",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    objectName: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      objectName: "object_name",
+    });
+  })
+);
 
 export function datasourceAttachmentToJSON(
   datasourceAttachment: DatasourceAttachment,
