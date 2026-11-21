@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 
 /**
@@ -32,7 +33,7 @@ export type EmbeddingCacheConfig = {
 /** @internal */
 export const EmbeddingCacheConfigType$outboundSchema: z.ZodNativeEnum<
   typeof EmbeddingCacheConfigType
-> = z.nativeEnum(EmbeddingCacheConfigType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(EmbeddingCacheConfigType));
 
 /** @internal */
 export type EmbeddingCacheConfig$Outbound = {
@@ -45,10 +46,12 @@ export const EmbeddingCacheConfig$outboundSchema: z.ZodType<
   EmbeddingCacheConfig$Outbound,
   z.ZodTypeDef,
   EmbeddingCacheConfig
-> = z.object({
-  ttl: z.number().int().optional(),
-  type: EmbeddingCacheConfigType$outboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ttl: z.number().int().optional(),
+    type: EmbeddingCacheConfigType$outboundSchema,
+  })
+);
 
 export function embeddingCacheConfigToJSON(
   embeddingCacheConfig: EmbeddingCacheConfig,

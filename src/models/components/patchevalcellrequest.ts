@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type PatchEvalCellRequest = {
   value?: { [k: string]: any } | undefined;
@@ -18,9 +19,11 @@ export const PatchEvalCellRequest$outboundSchema: z.ZodType<
   PatchEvalCellRequest$Outbound,
   z.ZodTypeDef,
   PatchEvalCellRequest
-> = z.object({
-  value: z.record(z.any()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    value: z.record(z.any()).optional(),
+  })
+);
 
 export function patchEvalCellRequestToJSON(
   patchEvalCellRequest: PatchEvalCellRequest,

@@ -6,6 +6,7 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import {
   collectExtraKeys as collectExtraKeys$,
+  lazySchema as lazySchema$,
   safeParse,
 } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -51,26 +52,28 @@ export const ResponseReasoningTextDeltaStreamEvent$inboundSchema: z.ZodType<
   ResponseReasoningTextDeltaStreamEvent,
   z.ZodTypeDef,
   unknown
-> = collectExtraKeys$(
-  z.object({
-    content_index: z.number().int(),
-    delta: z.string(),
-    item_id: z.string(),
-    obfuscation: z.string().optional(),
-    output_index: z.number().int(),
-    sequence_number: z.number().int(),
-    type: z.literal("response.reasoning_text.delta"),
-  }).catchall(z.any()),
-  "additionalProperties",
-  true,
-).transform((v) => {
-  return remap$(v, {
-    "content_index": "contentIndex",
-    "item_id": "itemId",
-    "output_index": "outputIndex",
-    "sequence_number": "sequenceNumber",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  collectExtraKeys$(
+    z.object({
+      content_index: z.number().int(),
+      delta: z.string(),
+      item_id: z.string(),
+      obfuscation: z.string().optional(),
+      output_index: z.number().int(),
+      sequence_number: z.number().int(),
+      type: z.literal("response.reasoning_text.delta"),
+    }).catchall(z.any()),
+    "additionalProperties",
+    true,
+  ).transform((v) => {
+    return remap$(v, {
+      "content_index": "contentIndex",
+      "item_id": "itemId",
+      "output_index": "outputIndex",
+      "sequence_number": "sequenceNumber",
+    });
+  })
+);
 
 export function responseReasoningTextDeltaStreamEventFromJSON(
   jsonString: string,

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import {
   RunSettings,
   RunSettings$Outbound,
@@ -25,10 +26,12 @@ export const UpdateRunRequest$outboundSchema: z.ZodType<
   UpdateRunRequest$Outbound,
   z.ZodTypeDef,
   UpdateRunRequest
-> = z.object({
-  key: z.string().optional(),
-  settings: RunSettings$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    key: z.string().optional(),
+    settings: RunSettings$outboundSchema.optional(),
+  })
+);
 
 export function updateRunRequestToJSON(
   updateRunRequest: UpdateRunRequest,

@@ -6,6 +6,7 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import {
   collectExtraKeys as collectExtraKeys$,
+  lazySchema as lazySchema$,
   safeParse,
 } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -52,27 +53,29 @@ export const ResponseOutputTextAnnotationAddedStreamEvent$inboundSchema:
     ResponseOutputTextAnnotationAddedStreamEvent,
     z.ZodTypeDef,
     unknown
-  > = collectExtraKeys$(
-    z.object({
-      annotation: z.record(z.any()),
-      annotation_index: z.number().int(),
-      content_index: z.number().int(),
-      item_id: z.string(),
-      output_index: z.number().int(),
-      sequence_number: z.number().int(),
-      type: z.literal("response.output_text.annotation.added"),
-    }).catchall(z.any()),
-    "additionalProperties",
-    true,
-  ).transform((v) => {
-    return remap$(v, {
-      "annotation_index": "annotationIndex",
-      "content_index": "contentIndex",
-      "item_id": "itemId",
-      "output_index": "outputIndex",
-      "sequence_number": "sequenceNumber",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    collectExtraKeys$(
+      z.object({
+        annotation: z.record(z.any()),
+        annotation_index: z.number().int(),
+        content_index: z.number().int(),
+        item_id: z.string(),
+        output_index: z.number().int(),
+        sequence_number: z.number().int(),
+        type: z.literal("response.output_text.annotation.added"),
+      }).catchall(z.any()),
+      "additionalProperties",
+      true,
+    ).transform((v) => {
+      return remap$(v, {
+        "annotation_index": "annotationIndex",
+        "content_index": "contentIndex",
+        "item_id": "itemId",
+        "output_index": "outputIndex",
+        "sequence_number": "sequenceNumber",
+      });
+    })
+  );
 
 export function responseOutputTextAnnotationAddedStreamEventFromJSON(
   jsonString: string,

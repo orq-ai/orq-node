@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -103,50 +103,54 @@ export type AlertTrigger = {
 /** @internal */
 export const AlertTriggerStatus$inboundSchema: z.ZodNativeEnum<
   typeof AlertTriggerStatus
-> = z.nativeEnum(AlertTriggerStatus);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(AlertTriggerStatus));
 
 /** @internal */
 export const AlertTriggerSeverity$inboundSchema: z.ZodNativeEnum<
   typeof AlertTriggerSeverity
-> = z.nativeEnum(AlertTriggerSeverity);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(AlertTriggerSeverity));
 
 /** @internal */
 export const PeakSeverity$inboundSchema: z.ZodNativeEnum<typeof PeakSeverity> =
-  z.nativeEnum(PeakSeverity);
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(PeakSeverity));
 
 /** @internal */
 export const AlertTrigger$inboundSchema: z.ZodType<
   AlertTrigger,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  trigger_id: z.string(),
-  alert_id: z.string(),
-  project_id: z.string(),
-  status: AlertTriggerStatus$inboundSchema,
-  severity: AlertTriggerSeverity$inboundSchema.optional(),
-  peak_severity: PeakSeverity$inboundSchema.optional(),
-  opened_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  resolved_at: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  peak_value: z.number(),
-  last_value: z.number(),
-  event_count: z.number().int(),
-  query: AlertQuery$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "trigger_id": "triggerId",
-    "alert_id": "alertId",
-    "project_id": "projectId",
-    "peak_severity": "peakSeverity",
-    "opened_at": "openedAt",
-    "resolved_at": "resolvedAt",
-    "peak_value": "peakValue",
-    "last_value": "lastValue",
-    "event_count": "eventCount",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    trigger_id: z.string(),
+    alert_id: z.string(),
+    project_id: z.string(),
+    status: AlertTriggerStatus$inboundSchema,
+    severity: AlertTriggerSeverity$inboundSchema.optional(),
+    peak_severity: PeakSeverity$inboundSchema.optional(),
+    opened_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    resolved_at: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    peak_value: z.number(),
+    last_value: z.number(),
+    event_count: z.number().int(),
+    query: AlertQuery$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "trigger_id": "triggerId",
+      "alert_id": "alertId",
+      "project_id": "projectId",
+      "peak_severity": "peakSeverity",
+      "opened_at": "openedAt",
+      "resolved_at": "resolvedAt",
+      "peak_value": "peakValue",
+      "last_value": "lastValue",
+      "event_count": "eventCount",
+    });
+  })
+);
 
 export function alertTriggerFromJSON(
   jsonString: string,

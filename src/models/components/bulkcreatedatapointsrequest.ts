@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import {
   DatapointInput,
   DatapointInput$Outbound,
@@ -23,9 +24,11 @@ export const BulkCreateDatapointsRequest$outboundSchema: z.ZodType<
   BulkCreateDatapointsRequest$Outbound,
   z.ZodTypeDef,
   BulkCreateDatapointsRequest
-> = z.object({
-  items: z.array(DatapointInput$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    items: z.array(DatapointInput$outboundSchema),
+  })
+);
 
 export function bulkCreateDatapointsRequestToJSON(
   bulkCreateDatapointsRequest: BulkCreateDatapointsRequest,

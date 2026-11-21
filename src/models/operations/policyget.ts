@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -47,13 +47,15 @@ export const PolicyGetRequest$outboundSchema: z.ZodType<
   PolicyGetRequest$Outbound,
   z.ZodTypeDef,
   PolicyGetRequest
-> = z.object({
-  policyId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    policyId: "policy_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    policyId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      policyId: "policy_id",
+    });
+  })
+);
 
 export function policyGetRequestToJSON(
   policyGetRequest: PolicyGetRequest,
@@ -68,36 +70,42 @@ export const PolicyGetResponseBody$inboundSchema: z.ZodType<
   PolicyGetResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  _id: z.string(),
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  created_by_id: z.string(),
-  description: z.string().optional(),
-  display_name: z.string(),
-  enabled: z.boolean(),
-  evaluators: z.nullable(z.array(components.EvaluatorRef$inboundSchema))
-    .optional(),
-  limits: components.Limits$inboundSchema.optional(),
-  models_config: components.ModelsConfig$inboundSchema.optional(),
-  project_id: z.string(),
-  retry_config: components.PolicyRetryConfig$inboundSchema.optional(),
-  slug: z.string(),
-  timeout: z.number().int(),
-  updated_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  updated_by_id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "_id": "id",
-    "created_at": "createdAt",
-    "created_by_id": "createdById",
-    "display_name": "displayName",
-    "models_config": "modelsConfig",
-    "project_id": "projectId",
-    "retry_config": "retryConfig",
-    "updated_at": "updatedAt",
-    "updated_by_id": "updatedById",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    _id: z.string(),
+    created_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    created_by_id: z.string(),
+    description: z.string().optional(),
+    display_name: z.string(),
+    enabled: z.boolean(),
+    evaluators: z.nullable(z.array(components.EvaluatorRef$inboundSchema))
+      .optional(),
+    limits: components.Limits$inboundSchema.optional(),
+    models_config: components.ModelsConfig$inboundSchema.optional(),
+    project_id: z.string(),
+    retry_config: components.PolicyRetryConfig$inboundSchema.optional(),
+    slug: z.string(),
+    timeout: z.number().int(),
+    updated_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    updated_by_id: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "_id": "id",
+      "created_at": "createdAt",
+      "created_by_id": "createdById",
+      "display_name": "displayName",
+      "models_config": "modelsConfig",
+      "project_id": "projectId",
+      "retry_config": "retryConfig",
+      "updated_at": "updatedAt",
+      "updated_by_id": "updatedById",
+    });
+  })
+);
 
 export function policyGetResponseBodyFromJSON(
   jsonString: string,

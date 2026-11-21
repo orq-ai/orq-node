@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 
 /**
@@ -35,8 +36,10 @@ export type ChunksServiceListPaginatedRequest = {
 
 /** @internal */
 export const ChunksServiceListPaginatedRequestStatus$outboundSchema:
-  z.ZodNativeEnum<typeof ChunksServiceListPaginatedRequestStatus> = z
-    .nativeEnum(ChunksServiceListPaginatedRequestStatus);
+  z.ZodNativeEnum<typeof ChunksServiceListPaginatedRequestStatus> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(ChunksServiceListPaginatedRequestStatus)
+    );
 
 /** @internal */
 export type ChunksServiceListPaginatedRequest$Outbound = {
@@ -52,13 +55,15 @@ export const ChunksServiceListPaginatedRequest$outboundSchema: z.ZodType<
   ChunksServiceListPaginatedRequest$Outbound,
   z.ZodTypeDef,
   ChunksServiceListPaginatedRequest
-> = z.object({
-  q: z.string().default(""),
-  enabled: z.boolean().optional(),
-  status: ChunksServiceListPaginatedRequestStatus$outboundSchema.optional(),
-  limit: z.number().int().default(100),
-  page: z.number().int().default(1),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    q: z.string().default(""),
+    enabled: z.boolean().optional(),
+    status: ChunksServiceListPaginatedRequestStatus$outboundSchema.optional(),
+    limit: z.number().int().default(100),
+    page: z.number().int().default(1),
+  })
+);
 
 export function chunksServiceListPaginatedRequestToJSON(
   chunksServiceListPaginatedRequest: ChunksServiceListPaginatedRequest,

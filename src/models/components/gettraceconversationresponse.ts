@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -23,8 +23,8 @@ export type GetTraceConversationResponse = {
 };
 
 /** @internal */
-export const Items$inboundSchema: z.ZodType<Items, z.ZodTypeDef, unknown> = z
-  .object({});
+export const Items$inboundSchema: z.ZodType<Items, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function itemsFromJSON(
   jsonString: string,
@@ -41,16 +41,18 @@ export const GetTraceConversationResponse$inboundSchema: z.ZodType<
   GetTraceConversationResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  trace_id: z.string().optional(),
-  span_id: z.string().optional(),
-  items: z.array(z.lazy(() => Items$inboundSchema)).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "trace_id": "traceId",
-    "span_id": "spanId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    trace_id: z.string().optional(),
+    span_id: z.string().optional(),
+    items: z.array(z.lazy(() => Items$inboundSchema)).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "trace_id": "traceId",
+      "span_id": "spanId",
+    });
+  })
+);
 
 export function getTraceConversationResponseFromJSON(
   jsonString: string,

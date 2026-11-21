@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -26,14 +26,16 @@ export const McpSkillExposure$inboundSchema: z.ZodType<
   McpSkillExposure,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  mode: McpToolExposureMode$inboundSchema,
-  skill_uris: z.array(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "skill_uris": "skillUris",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    mode: McpToolExposureMode$inboundSchema,
+    skill_uris: z.array(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "skill_uris": "skillUris",
+    });
+  })
+);
 /** @internal */
 export type McpSkillExposure$Outbound = {
   mode: string;
@@ -45,14 +47,16 @@ export const McpSkillExposure$outboundSchema: z.ZodType<
   McpSkillExposure$Outbound,
   z.ZodTypeDef,
   McpSkillExposure
-> = z.object({
-  mode: McpToolExposureMode$outboundSchema,
-  skillUris: z.array(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    skillUris: "skill_uris",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    mode: McpToolExposureMode$outboundSchema,
+    skillUris: z.array(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      skillUris: "skill_uris",
+    });
+  })
+);
 
 export function mcpSkillExposureToJSON(
   mcpSkillExposure: McpSkillExposure,

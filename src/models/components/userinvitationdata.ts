@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -18,14 +18,16 @@ export const UserInvitationData$inboundSchema: z.ZodType<
   UserInvitationData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  email: z.string().optional(),
-  display_name: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "display_name": "displayName",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    email: z.string().optional(),
+    display_name: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "display_name": "displayName",
+    });
+  })
+);
 
 export function userInvitationDataFromJSON(
   jsonString: string,

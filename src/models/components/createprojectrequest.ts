@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type CreateProjectRequest = {
   /**
@@ -31,11 +32,13 @@ export const CreateProjectRequest$outboundSchema: z.ZodType<
   CreateProjectRequest$Outbound,
   z.ZodTypeDef,
   CreateProjectRequest
-> = z.object({
-  name: z.string(),
-  teams: z.array(z.string()).optional(),
-  description: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+    teams: z.array(z.string()).optional(),
+    description: z.string().optional(),
+  })
+);
 
 export function createProjectRequestToJSON(
   createProjectRequest: CreateProjectRequest,

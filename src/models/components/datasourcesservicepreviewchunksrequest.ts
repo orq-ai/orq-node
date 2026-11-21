@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import {
   DatasourceChunkingOptions,
   DatasourceChunkingOptions$Outbound,
@@ -26,15 +27,17 @@ export const DatasourcesServicePreviewChunksRequest$outboundSchema: z.ZodType<
   DatasourcesServicePreviewChunksRequest$Outbound,
   z.ZodTypeDef,
   DatasourcesServicePreviewChunksRequest
-> = z.object({
-  fileId: z.string(),
-  chunkingOptions: DatasourceChunkingOptions$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    fileId: "file_id",
-    chunkingOptions: "chunking_options",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    fileId: z.string(),
+    chunkingOptions: DatasourceChunkingOptions$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      fileId: "file_id",
+      chunkingOptions: "chunking_options",
+    });
+  })
+);
 
 export function datasourcesServicePreviewChunksRequestToJSON(
   datasourcesServicePreviewChunksRequest:

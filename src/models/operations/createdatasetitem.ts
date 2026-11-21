@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import * as components from "../components/index.js";
 
 export type CreateDatasetItemRequest = {
@@ -22,15 +23,17 @@ export const CreateDatasetItemRequest$outboundSchema: z.ZodType<
   CreateDatasetItemRequest$Outbound,
   z.ZodTypeDef,
   CreateDatasetItemRequest
-> = z.object({
-  datasetId: z.string(),
-  requestBody: z.array(components.DatapointInput$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    datasetId: "dataset_id",
-    requestBody: "RequestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    datasetId: z.string(),
+    requestBody: z.array(components.DatapointInput$outboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      datasetId: "dataset_id",
+      requestBody: "RequestBody",
+    });
+  })
+);
 
 export function createDatasetItemRequestToJSON(
   createDatasetItemRequest: CreateDatasetItemRequest,

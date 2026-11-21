@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -25,22 +25,24 @@ export const ModelParameterDocument$inboundSchema: z.ZodType<
   ModelParameterDocument,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  config: z.record(z.any()),
-  description: z.nullable(z.string()),
-  hints: z.string().optional(),
-  id: z.string(),
-  is_active: z.boolean(),
-  name: z.string(),
-  parameter: z.string(),
-  parameter_type: z.string(),
-  position: z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "is_active": "isActive",
-    "parameter_type": "parameterType",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    config: z.record(z.any()),
+    description: z.nullable(z.string()),
+    hints: z.string().optional(),
+    id: z.string(),
+    is_active: z.boolean(),
+    name: z.string(),
+    parameter: z.string(),
+    parameter_type: z.string(),
+    position: z.number().int().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "is_active": "isActive",
+      "parameter_type": "parameterType",
+    });
+  })
+);
 
 export function modelParameterDocumentFromJSON(
   jsonString: string,

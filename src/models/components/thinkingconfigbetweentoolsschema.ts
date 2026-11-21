@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -41,8 +41,10 @@ export type ThinkingConfigBetweenToolsSchema = {
 
 /** @internal */
 export const ThinkingConfigBetweenToolsSchemaDisplay$inboundSchema:
-  z.ZodNativeEnum<typeof ThinkingConfigBetweenToolsSchemaDisplay> = z
-    .nativeEnum(ThinkingConfigBetweenToolsSchemaDisplay);
+  z.ZodNativeEnum<typeof ThinkingConfigBetweenToolsSchemaDisplay> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(ThinkingConfigBetweenToolsSchemaDisplay)
+    );
 /** @internal */
 export const ThinkingConfigBetweenToolsSchemaDisplay$outboundSchema:
   z.ZodNativeEnum<typeof ThinkingConfigBetweenToolsSchemaDisplay> =
@@ -53,15 +55,17 @@ export const ThinkingConfigBetweenToolsSchema$inboundSchema: z.ZodType<
   ThinkingConfigBetweenToolsSchema,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("between_tools"),
-  budget_tokens: z.number().optional(),
-  display: ThinkingConfigBetweenToolsSchemaDisplay$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "budget_tokens": "budgetTokens",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("between_tools"),
+    budget_tokens: z.number().optional(),
+    display: ThinkingConfigBetweenToolsSchemaDisplay$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "budget_tokens": "budgetTokens",
+    });
+  })
+);
 /** @internal */
 export type ThinkingConfigBetweenToolsSchema$Outbound = {
   type: "between_tools";
@@ -74,15 +78,17 @@ export const ThinkingConfigBetweenToolsSchema$outboundSchema: z.ZodType<
   ThinkingConfigBetweenToolsSchema$Outbound,
   z.ZodTypeDef,
   ThinkingConfigBetweenToolsSchema
-> = z.object({
-  type: z.literal("between_tools"),
-  budgetTokens: z.number().optional(),
-  display: ThinkingConfigBetweenToolsSchemaDisplay$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    budgetTokens: "budget_tokens",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("between_tools"),
+    budgetTokens: z.number().optional(),
+    display: ThinkingConfigBetweenToolsSchemaDisplay$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      budgetTokens: "budget_tokens",
+    });
+  })
+);
 
 export function thinkingConfigBetweenToolsSchemaToJSON(
   thinkingConfigBetweenToolsSchema: ThinkingConfigBetweenToolsSchema,

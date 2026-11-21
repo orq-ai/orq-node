@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { AccessLevel, AccessLevel$outboundSchema } from "./accesslevel.js";
 import {
   ManagementPermissionMode,
@@ -48,17 +49,19 @@ export const CreateManagementKeyRequest$outboundSchema: z.ZodType<
   CreateManagementKeyRequest$Outbound,
   z.ZodTypeDef,
   CreateManagementKeyRequest
-> = z.object({
-  name: z.string(),
-  permissionMode: ManagementPermissionMode$outboundSchema,
-  access: z.record(AccessLevel$outboundSchema).optional(),
-  expiresAt: z.date().transform(v => v.toISOString()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    permissionMode: "permission_mode",
-    expiresAt: "expires_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+    permissionMode: ManagementPermissionMode$outboundSchema,
+    access: z.record(AccessLevel$outboundSchema).optional(),
+    expiresAt: z.date().transform(v => v.toISOString()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      permissionMode: "permission_mode",
+      expiresAt: "expires_at",
+    });
+  })
+);
 
 export function createManagementKeyRequestToJSON(
   createManagementKeyRequest: CreateManagementKeyRequest,

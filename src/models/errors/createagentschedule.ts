@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import * as components from "../components/index.js";
 import { OrqError } from "./orqerror.js";
 
@@ -71,35 +72,39 @@ export const CreateAgentScheduleSchedulesResponseBody$inboundSchema: z.ZodType<
   CreateAgentScheduleSchedulesResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  error: components.PublicScheduleErrorDetail$inboundSchema,
-  request$: z.instanceof(Request),
-  response$: z.instanceof(Response),
-  body$: z.string(),
-})
-  .transform((v) => {
-    return new CreateAgentScheduleSchedulesResponseBody(v, {
-      request: v.request$,
-      response: v.response$,
-      body: v.body$,
-    });
-  });
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    error: components.PublicScheduleErrorDetail$inboundSchema,
+    request$: z.instanceof(Request),
+    response$: z.instanceof(Response),
+    body$: z.string(),
+  })
+    .transform((v) => {
+      return new CreateAgentScheduleSchedulesResponseBody(v, {
+        request: v.request$,
+        response: v.response$,
+        body: v.body$,
+      });
+    })
+);
 
 /** @internal */
 export const CreateAgentScheduleResponseBody$inboundSchema: z.ZodType<
   CreateAgentScheduleResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  error: components.PublicScheduleErrorDetail$inboundSchema,
-  request$: z.instanceof(Request),
-  response$: z.instanceof(Response),
-  body$: z.string(),
-})
-  .transform((v) => {
-    return new CreateAgentScheduleResponseBody(v, {
-      request: v.request$,
-      response: v.response$,
-      body: v.body$,
-    });
-  });
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    error: components.PublicScheduleErrorDetail$inboundSchema,
+    request$: z.instanceof(Request),
+    response$: z.instanceof(Response),
+    body$: z.string(),
+  })
+    .transform((v) => {
+      return new CreateAgentScheduleResponseBody(v, {
+        request: v.request$,
+        response: v.response$,
+        body: v.body$,
+      });
+    })
+);

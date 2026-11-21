@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type DeleteFileRequest = {
   fileSystemKey: string;
@@ -23,15 +24,17 @@ export const DeleteFileRequest$outboundSchema: z.ZodType<
   DeleteFileRequest$Outbound,
   z.ZodTypeDef,
   DeleteFileRequest
-> = z.object({
-  fileSystemKey: z.string(),
-  path: z.string().optional(),
-  recursive: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    fileSystemKey: "file_system_key",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    fileSystemKey: z.string(),
+    path: z.string().optional(),
+    recursive: z.boolean().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      fileSystemKey: "file_system_key",
+    });
+  })
+);
 
 export function deleteFileRequestToJSON(
   deleteFileRequest: DeleteFileRequest,

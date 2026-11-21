@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type ViewDeleteRequest = {
   viewId: string;
@@ -19,13 +20,15 @@ export const ViewDeleteRequest$outboundSchema: z.ZodType<
   ViewDeleteRequest$Outbound,
   z.ZodTypeDef,
   ViewDeleteRequest
-> = z.object({
-  viewId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    viewId: "view_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    viewId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      viewId: "view_id",
+    });
+  })
+);
 
 export function viewDeleteRequestToJSON(
   viewDeleteRequest: ViewDeleteRequest,

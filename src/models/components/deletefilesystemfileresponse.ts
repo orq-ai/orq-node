@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -26,17 +26,21 @@ export type DeleteFileSystemFileResponse = {
 /** @internal */
 export const DeleteFileSystemFileResponseType$inboundSchema: z.ZodNativeEnum<
   typeof DeleteFileSystemFileResponseType
-> = z.nativeEnum(DeleteFileSystemFileResponseType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(DeleteFileSystemFileResponseType)
+);
 
 /** @internal */
 export const DeleteFileSystemFileResponse$inboundSchema: z.ZodType<
   DeleteFileSystemFileResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  path: z.string(),
-  type: DeleteFileSystemFileResponseType$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    path: z.string(),
+    type: DeleteFileSystemFileResponseType$inboundSchema,
+  })
+);
 
 export function deleteFileSystemFileResponseFromJSON(
   jsonString: string,

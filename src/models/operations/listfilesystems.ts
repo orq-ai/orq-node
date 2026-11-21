@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type ListFileSystemsRequest = {
   limit?: number | undefined;
@@ -27,19 +28,21 @@ export const ListFileSystemsRequest$outboundSchema: z.ZodType<
   ListFileSystemsRequest$Outbound,
   z.ZodTypeDef,
   ListFileSystemsRequest
-> = z.object({
-  limit: z.number().int().optional(),
-  startingAfter: z.string().optional(),
-  endingBefore: z.string().optional(),
-  search: z.string().optional(),
-  projectId: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    startingAfter: "starting_after",
-    endingBefore: "ending_before",
-    projectId: "project_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    limit: z.number().int().optional(),
+    startingAfter: z.string().optional(),
+    endingBefore: z.string().optional(),
+    search: z.string().optional(),
+    projectId: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      startingAfter: "starting_after",
+      endingBefore: "ending_before",
+      projectId: "project_id",
+    });
+  })
+);
 
 export function listFileSystemsRequestToJSON(
   listFileSystemsRequest: ListFileSystemsRequest,

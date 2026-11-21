@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -26,23 +26,26 @@ export const InputTokensDetails$inboundSchema: z.ZodType<
   InputTokensDetails,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  cache_creation_1h_tokens: z.number().int().optional(),
-  cache_creation_5m_tokens: z.number().int().optional(),
-  cache_creation_tokens: z.number().int(),
-  cache_write_tokens: z.number().int(),
-  cache_write_tokens_details: CacheWriteTokensDetails$inboundSchema.optional(),
-  cached_tokens: z.number().int(),
-}).transform((v) => {
-  return remap$(v, {
-    "cache_creation_1h_tokens": "cacheCreation1hTokens",
-    "cache_creation_5m_tokens": "cacheCreation5mTokens",
-    "cache_creation_tokens": "cacheCreationTokens",
-    "cache_write_tokens": "cacheWriteTokens",
-    "cache_write_tokens_details": "cacheWriteTokensDetails",
-    "cached_tokens": "cachedTokens",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    cache_creation_1h_tokens: z.number().int().optional(),
+    cache_creation_5m_tokens: z.number().int().optional(),
+    cache_creation_tokens: z.number().int(),
+    cache_write_tokens: z.number().int(),
+    cache_write_tokens_details: CacheWriteTokensDetails$inboundSchema
+      .optional(),
+    cached_tokens: z.number().int(),
+  }).transform((v) => {
+    return remap$(v, {
+      "cache_creation_1h_tokens": "cacheCreation1hTokens",
+      "cache_creation_5m_tokens": "cacheCreation5mTokens",
+      "cache_creation_tokens": "cacheCreationTokens",
+      "cache_write_tokens": "cacheWriteTokens",
+      "cache_write_tokens_details": "cacheWriteTokensDetails",
+      "cached_tokens": "cachedTokens",
+    });
+  })
+);
 
 export function inputTokensDetailsFromJSON(
   jsonString: string,

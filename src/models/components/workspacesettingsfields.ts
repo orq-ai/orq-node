@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -23,7 +23,7 @@ export const ModelGardenSettings$inboundSchema: z.ZodType<
   ModelGardenSettings,
   z.ZodTypeDef,
   unknown
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 /** @internal */
 export type ModelGardenSettings$Outbound = {};
 
@@ -32,7 +32,7 @@ export const ModelGardenSettings$outboundSchema: z.ZodType<
   ModelGardenSettings$Outbound,
   z.ZodTypeDef,
   ModelGardenSettings
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function modelGardenSettingsToJSON(
   modelGardenSettings: ModelGardenSettings,
@@ -53,7 +53,7 @@ export function modelGardenSettingsFromJSON(
 
 /** @internal */
 export const Plugins$inboundSchema: z.ZodType<Plugins, z.ZodTypeDef, unknown> =
-  z.object({});
+  /* @__PURE__ */ lazySchema$(() => z.object({}));
 /** @internal */
 export type Plugins$Outbound = {};
 
@@ -62,7 +62,7 @@ export const Plugins$outboundSchema: z.ZodType<
   Plugins$Outbound,
   z.ZodTypeDef,
   Plugins
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function pluginsToJSON(plugins: Plugins): string {
   return JSON.stringify(Plugins$outboundSchema.parse(plugins));
@@ -82,17 +82,19 @@ export const WorkspaceSettingsFields$inboundSchema: z.ZodType<
   WorkspaceSettingsFields,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  same_project_entities_enabled: z.boolean().optional(),
-  model_garden_settings: z.lazy(() => ModelGardenSettings$inboundSchema)
-    .optional(),
-  plugins: z.lazy(() => Plugins$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "same_project_entities_enabled": "sameProjectEntitiesEnabled",
-    "model_garden_settings": "modelGardenSettings",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    same_project_entities_enabled: z.boolean().optional(),
+    model_garden_settings: z.lazy(() => ModelGardenSettings$inboundSchema)
+      .optional(),
+    plugins: z.lazy(() => Plugins$inboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "same_project_entities_enabled": "sameProjectEntitiesEnabled",
+      "model_garden_settings": "modelGardenSettings",
+    });
+  })
+);
 /** @internal */
 export type WorkspaceSettingsFields$Outbound = {
   same_project_entities_enabled?: boolean | undefined;
@@ -105,17 +107,19 @@ export const WorkspaceSettingsFields$outboundSchema: z.ZodType<
   WorkspaceSettingsFields$Outbound,
   z.ZodTypeDef,
   WorkspaceSettingsFields
-> = z.object({
-  sameProjectEntitiesEnabled: z.boolean().optional(),
-  modelGardenSettings: z.lazy(() => ModelGardenSettings$outboundSchema)
-    .optional(),
-  plugins: z.lazy(() => Plugins$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    sameProjectEntitiesEnabled: "same_project_entities_enabled",
-    modelGardenSettings: "model_garden_settings",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    sameProjectEntitiesEnabled: z.boolean().optional(),
+    modelGardenSettings: z.lazy(() => ModelGardenSettings$outboundSchema)
+      .optional(),
+    plugins: z.lazy(() => Plugins$outboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      sameProjectEntitiesEnabled: "same_project_entities_enabled",
+      modelGardenSettings: "model_garden_settings",
+    });
+  })
+);
 
 export function workspaceSettingsFieldsToJSON(
   workspaceSettingsFields: WorkspaceSettingsFields,

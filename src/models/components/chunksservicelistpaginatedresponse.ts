@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -28,23 +28,27 @@ export type ChunksServiceListPaginatedResponse = {
 
 /** @internal */
 export const ChunksServiceListPaginatedResponseObject$inboundSchema:
-  z.ZodNativeEnum<typeof ChunksServiceListPaginatedResponseObject> = z
-    .nativeEnum(ChunksServiceListPaginatedResponseObject);
+  z.ZodNativeEnum<typeof ChunksServiceListPaginatedResponseObject> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(ChunksServiceListPaginatedResponseObject)
+    );
 
 /** @internal */
 export const ChunksServiceListPaginatedResponse$inboundSchema: z.ZodType<
   ChunksServiceListPaginatedResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: ChunksServiceListPaginatedResponseObject$inboundSchema,
-  data: z.array(KnowledgeChunk$inboundSchema),
-  has_more: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    "has_more": "hasMore",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: ChunksServiceListPaginatedResponseObject$inboundSchema,
+    data: z.array(KnowledgeChunk$inboundSchema),
+    has_more: z.boolean(),
+  }).transform((v) => {
+    return remap$(v, {
+      "has_more": "hasMore",
+    });
+  })
+);
 
 export function chunksServiceListPaginatedResponseFromJSON(
   jsonString: string,

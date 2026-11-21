@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 /**
  * Provider-specific built-in tools that are passed through to the provider. Must be prefixed with the provider name (e.g., openai:web_search, anthropic:web_search_20250305, google:google_search).
@@ -50,18 +51,20 @@ export const ProviderToolInput$outboundSchema: z.ZodType<
   ProviderToolInput$Outbound,
   z.ZodTypeDef,
   ProviderToolInput
-> = z.object({
-  type: z.string(),
-  key: z.string().optional(),
-  id: z.string().optional(),
-  timeout: z.number().optional(),
-  requiresApproval: z.boolean().optional(),
-  configuration: z.record(z.any()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    requiresApproval: "requires_approval",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.string(),
+    key: z.string().optional(),
+    id: z.string().optional(),
+    timeout: z.number().optional(),
+    requiresApproval: z.boolean().optional(),
+    configuration: z.record(z.any()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      requiresApproval: "requires_approval",
+    });
+  })
+);
 
 export function providerToolInputToJSON(
   providerToolInput: ProviderToolInput,

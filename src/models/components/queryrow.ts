@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { Cell, Cell$inboundSchema } from "./cell.js";
@@ -27,25 +27,27 @@ export const QueryRow$inboundSchema: z.ZodType<
   QueryRow,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  row_id: z.string().optional(),
-  display_name: z.string().optional(),
-  cells: z.array(Cell$inboundSchema).optional(),
-  status: RowStatus$inboundSchema.optional(),
-  created_at: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  updated_at: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "row_id": "rowId",
-    "display_name": "displayName",
-    "created_at": "createdAt",
-    "updated_at": "updatedAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    row_id: z.string().optional(),
+    display_name: z.string().optional(),
+    cells: z.array(Cell$inboundSchema).optional(),
+    status: RowStatus$inboundSchema.optional(),
+    created_at: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    updated_at: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "row_id": "rowId",
+      "display_name": "displayName",
+      "created_at": "createdAt",
+      "updated_at": "updatedAt",
+    });
+  })
+);
 
 export function queryRowFromJSON(
   jsonString: string,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -20,19 +20,21 @@ export const TraceSearchMeta$inboundSchema: z.ZodType<
   TraceSearchMeta,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  request_id: z.string().optional(),
-  from: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  to: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  row_count: z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "request_id": "requestId",
-    "row_count": "rowCount",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    request_id: z.string().optional(),
+    from: z.string().datetime({ offset: true }).transform(v => new Date(v))
+      .optional(),
+    to: z.string().datetime({ offset: true }).transform(v => new Date(v))
+      .optional(),
+    row_count: z.number().int().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "request_id": "requestId",
+      "row_count": "rowCount",
+    });
+  })
+);
 
 export function traceSearchMetaFromJSON(
   jsonString: string,

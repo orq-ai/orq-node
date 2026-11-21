@@ -6,6 +6,7 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import {
   collectExtraKeys as collectExtraKeys$,
+  lazySchema as lazySchema$,
   safeParse,
 } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -48,24 +49,26 @@ export const ResponseFunctionCallArgumentsDoneStreamEvent$inboundSchema:
     ResponseFunctionCallArgumentsDoneStreamEvent,
     z.ZodTypeDef,
     unknown
-  > = collectExtraKeys$(
-    z.object({
-      arguments: z.string(),
-      item_id: z.string(),
-      name: z.string().optional(),
-      output_index: z.number().int(),
-      sequence_number: z.number().int(),
-      type: z.literal("response.function_call_arguments.done"),
-    }).catchall(z.any()),
-    "additionalProperties",
-    true,
-  ).transform((v) => {
-    return remap$(v, {
-      "item_id": "itemId",
-      "output_index": "outputIndex",
-      "sequence_number": "sequenceNumber",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    collectExtraKeys$(
+      z.object({
+        arguments: z.string(),
+        item_id: z.string(),
+        name: z.string().optional(),
+        output_index: z.number().int(),
+        sequence_number: z.number().int(),
+        type: z.literal("response.function_call_arguments.done"),
+      }).catchall(z.any()),
+      "additionalProperties",
+      true,
+    ).transform((v) => {
+      return remap$(v, {
+        "item_id": "itemId",
+        "output_index": "outputIndex",
+        "sequence_number": "sequenceNumber",
+      });
+    })
+  );
 
 export function responseFunctionCallArgumentsDoneStreamEventFromJSON(
   jsonString: string,

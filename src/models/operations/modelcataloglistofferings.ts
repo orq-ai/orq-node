@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type ModelCatalogListOfferingsRequest = {
   /**
@@ -113,32 +114,34 @@ export const ModelCatalogListOfferingsRequest$outboundSchema: z.ZodType<
   ModelCatalogListOfferingsRequest$Outbound,
   z.ZodTypeDef,
   ModelCatalogListOfferingsRequest
-> = z.object({
-  model: z.string(),
-  limit: z.number().int().optional(),
-  startingAfter: z.string().optional(),
-  endingBefore: z.string().optional(),
-  provider: z.array(z.string()).optional(),
-  endpoint: z.array(z.string()).optional(),
-  inputModality: z.array(z.string()).optional(),
-  outputModality: z.array(z.string()).optional(),
-  location: z.array(z.string()).optional(),
-  feature: z.array(z.string()).optional(),
-  supportedParameter: z.array(z.string()).optional(),
-  tier: z.array(z.string()).optional(),
-  search: z.string().optional(),
-  sortBy: z.string().optional(),
-  order: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    startingAfter: "starting_after",
-    endingBefore: "ending_before",
-    inputModality: "input_modality",
-    outputModality: "output_modality",
-    supportedParameter: "supported_parameter",
-    sortBy: "sort_by",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model: z.string(),
+    limit: z.number().int().optional(),
+    startingAfter: z.string().optional(),
+    endingBefore: z.string().optional(),
+    provider: z.array(z.string()).optional(),
+    endpoint: z.array(z.string()).optional(),
+    inputModality: z.array(z.string()).optional(),
+    outputModality: z.array(z.string()).optional(),
+    location: z.array(z.string()).optional(),
+    feature: z.array(z.string()).optional(),
+    supportedParameter: z.array(z.string()).optional(),
+    tier: z.array(z.string()).optional(),
+    search: z.string().optional(),
+    sortBy: z.string().optional(),
+    order: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      startingAfter: "starting_after",
+      endingBefore: "ending_before",
+      inputModality: "input_modality",
+      outputModality: "output_modality",
+      supportedParameter: "supported_parameter",
+      sortBy: "sort_by",
+    });
+  })
+);
 
 export function modelCatalogListOfferingsRequestToJSON(
   modelCatalogListOfferingsRequest: ModelCatalogListOfferingsRequest,

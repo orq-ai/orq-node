@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -196,10 +196,12 @@ export const ImageUrl2$outboundSchema: z.ZodType<
   ImageUrl2$Outbound,
   z.ZodTypeDef,
   ImageUrl2
-> = z.object({
-  url: z.string(),
-  detail: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    url: z.string(),
+    detail: z.string().optional(),
+  })
+);
 
 export function imageUrl2ToJSON(imageUrl2: ImageUrl2): string {
   return JSON.stringify(ImageUrl2$outboundSchema.parse(imageUrl2));
@@ -213,7 +215,9 @@ export const ImageUrl$outboundSchema: z.ZodType<
   ImageUrl$Outbound,
   z.ZodTypeDef,
   ImageUrl
-> = z.union([z.lazy(() => ImageUrl2$outboundSchema), z.string()]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.lazy(() => ImageUrl2$outboundSchema), z.string()])
+);
 
 export function imageUrlToJSON(imageUrl: ImageUrl): string {
   return JSON.stringify(ImageUrl$outboundSchema.parse(imageUrl));
@@ -230,14 +234,16 @@ export const Document2$outboundSchema: z.ZodType<
   Document2$Outbound,
   z.ZodTypeDef,
   Document2
-> = z.object({
-  type: z.literal("image_url"),
-  imageUrl: z.union([z.lazy(() => ImageUrl2$outboundSchema), z.string()]),
-}).transform((v) => {
-  return remap$(v, {
-    imageUrl: "image_url",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("image_url"),
+    imageUrl: z.union([z.lazy(() => ImageUrl2$outboundSchema), z.string()]),
+  }).transform((v) => {
+    return remap$(v, {
+      imageUrl: "image_url",
+    });
+  })
+);
 
 export function document2ToJSON(document2: Document2): string {
   return JSON.stringify(Document2$outboundSchema.parse(document2));
@@ -255,16 +261,18 @@ export const Document1$outboundSchema: z.ZodType<
   Document1$Outbound,
   z.ZodTypeDef,
   Document1
-> = z.object({
-  type: z.literal("document_url"),
-  documentUrl: z.string(),
-  documentName: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    documentUrl: "document_url",
-    documentName: "document_name",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("document_url"),
+    documentUrl: z.string(),
+    documentName: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      documentUrl: "document_url",
+      documentName: "document_name",
+    });
+  })
+);
 
 export function document1ToJSON(document1: Document1): string {
   return JSON.stringify(Document1$outboundSchema.parse(document1));
@@ -278,10 +286,12 @@ export const Document$outboundSchema: z.ZodType<
   Document$Outbound,
   z.ZodTypeDef,
   Document
-> = z.union([
-  z.lazy(() => Document1$outboundSchema),
-  z.lazy(() => Document2$outboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => Document1$outboundSchema),
+    z.lazy(() => Document2$outboundSchema),
+  ])
+);
 
 export function documentToJSON(document: Document): string {
   return JSON.stringify(Document$outboundSchema.parse(document));
@@ -299,17 +309,19 @@ export const OcrSettings$outboundSchema: z.ZodType<
   OcrSettings$Outbound,
   z.ZodTypeDef,
   OcrSettings
-> = z.object({
-  includeImageBase64: z.nullable(z.boolean()).optional(),
-  maxImagesToInclude: z.number().int().optional(),
-  imageMinSize: z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    includeImageBase64: "include_image_base64",
-    maxImagesToInclude: "max_images_to_include",
-    imageMinSize: "image_min_size",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    includeImageBase64: z.nullable(z.boolean()).optional(),
+    maxImagesToInclude: z.number().int().optional(),
+    imageMinSize: z.number().int().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      includeImageBase64: "include_image_base64",
+      maxImagesToInclude: "max_images_to_include",
+      imageMinSize: "image_min_size",
+    });
+  })
+);
 
 export function ocrSettingsToJSON(ocrSettings: OcrSettings): string {
   return JSON.stringify(OcrSettings$outboundSchema.parse(ocrSettings));
@@ -328,19 +340,21 @@ export const PostV2RouterOcrRequestBody$outboundSchema: z.ZodType<
   PostV2RouterOcrRequestBody$Outbound,
   z.ZodTypeDef,
   PostV2RouterOcrRequestBody
-> = z.object({
-  model: z.string(),
-  document: z.union([
-    z.lazy(() => Document1$outboundSchema),
-    z.lazy(() => Document2$outboundSchema),
-  ]),
-  pages: z.nullable(z.array(z.number().int())).optional(),
-  ocrSettings: z.lazy(() => OcrSettings$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    ocrSettings: "ocr_settings",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model: z.string(),
+    document: z.union([
+      z.lazy(() => Document1$outboundSchema),
+      z.lazy(() => Document2$outboundSchema),
+    ]),
+    pages: z.nullable(z.array(z.number().int())).optional(),
+    ocrSettings: z.lazy(() => OcrSettings$outboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      ocrSettings: "ocr_settings",
+    });
+  })
+);
 
 export function postV2RouterOcrRequestBodyToJSON(
   postV2RouterOcrRequestBody: PostV2RouterOcrRequestBody,
@@ -351,15 +365,17 @@ export function postV2RouterOcrRequestBodyToJSON(
 }
 
 /** @internal */
-export const Images$inboundSchema: z.ZodType<Images, z.ZodTypeDef, unknown> = z
-  .object({
-    id: z.string(),
-    image_base64: z.nullable(z.string()).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "image_base64": "imageBase64",
-    });
-  });
+export const Images$inboundSchema: z.ZodType<Images, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string(),
+      image_base64: z.nullable(z.string()).optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "image_base64": "imageBase64",
+      });
+    })
+  );
 
 export function imagesFromJSON(
   jsonString: string,
@@ -376,11 +392,13 @@ export const Dimensions$inboundSchema: z.ZodType<
   Dimensions,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  dpi: z.number().int(),
-  height: z.number().int(),
-  width: z.number().int(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    dpi: z.number().int(),
+    height: z.number().int(),
+    width: z.number().int(),
+  })
+);
 
 export function dimensionsFromJSON(
   jsonString: string,
@@ -393,13 +411,15 @@ export function dimensionsFromJSON(
 }
 
 /** @internal */
-export const Pages$inboundSchema: z.ZodType<Pages, z.ZodTypeDef, unknown> = z
-  .object({
-    index: z.number(),
-    markdown: z.string(),
-    images: z.array(z.lazy(() => Images$inboundSchema)),
-    dimensions: z.nullable(z.lazy(() => Dimensions$inboundSchema)).optional(),
-  });
+export const Pages$inboundSchema: z.ZodType<Pages, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      index: z.number(),
+      markdown: z.string(),
+      images: z.array(z.lazy(() => Images$inboundSchema)),
+      dimensions: z.nullable(z.lazy(() => Dimensions$inboundSchema)).optional(),
+    })
+  );
 
 export function pagesFromJSON(
   jsonString: string,
@@ -412,21 +432,23 @@ export function pagesFromJSON(
 }
 
 /** @internal */
-export const Usage2$inboundSchema: z.ZodType<Usage2, z.ZodTypeDef, unknown> = z
-  .object({
-    type: z.literal("tokens"),
-    tokens_processed: z.number().int(),
-    input_cost: z.number().optional(),
-    output_cost: z.number().optional(),
-    total_cost: z.number().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "tokens_processed": "tokensProcessed",
-      "input_cost": "inputCost",
-      "output_cost": "outputCost",
-      "total_cost": "totalCost",
-    });
-  });
+export const Usage2$inboundSchema: z.ZodType<Usage2, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type: z.literal("tokens"),
+      tokens_processed: z.number().int(),
+      input_cost: z.number().optional(),
+      output_cost: z.number().optional(),
+      total_cost: z.number().optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "tokens_processed": "tokensProcessed",
+        "input_cost": "inputCost",
+        "output_cost": "outputCost",
+        "total_cost": "totalCost",
+      });
+    })
+  );
 
 export function usage2FromJSON(
   jsonString: string,
@@ -439,21 +461,23 @@ export function usage2FromJSON(
 }
 
 /** @internal */
-export const Usage1$inboundSchema: z.ZodType<Usage1, z.ZodTypeDef, unknown> = z
-  .object({
-    type: z.literal("pages"),
-    pages_processed: z.number().int(),
-    input_cost: z.number().optional(),
-    output_cost: z.number().optional(),
-    total_cost: z.number().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "pages_processed": "pagesProcessed",
-      "input_cost": "inputCost",
-      "output_cost": "outputCost",
-      "total_cost": "totalCost",
-    });
-  });
+export const Usage1$inboundSchema: z.ZodType<Usage1, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type: z.literal("pages"),
+      pages_processed: z.number().int(),
+      input_cost: z.number().optional(),
+      output_cost: z.number().optional(),
+      total_cost: z.number().optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "pages_processed": "pagesProcessed",
+        "input_cost": "inputCost",
+        "output_cost": "outputCost",
+        "total_cost": "totalCost",
+      });
+    })
+  );
 
 export function usage1FromJSON(
   jsonString: string,
@@ -470,10 +494,12 @@ export const PostV2RouterOcrUsage$inboundSchema: z.ZodType<
   PostV2RouterOcrUsage,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  z.lazy(() => Usage1$inboundSchema),
-  z.lazy(() => Usage2$inboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => Usage1$inboundSchema),
+    z.lazy(() => Usage2$inboundSchema),
+  ])
+);
 
 export function postV2RouterOcrUsageFromJSON(
   jsonString: string,
@@ -490,14 +516,16 @@ export const PostV2RouterOcrResponseBody$inboundSchema: z.ZodType<
   PostV2RouterOcrResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  model: z.string(),
-  pages: z.array(z.lazy(() => Pages$inboundSchema)),
-  usage: z.union([
-    z.lazy(() => Usage1$inboundSchema),
-    z.lazy(() => Usage2$inboundSchema),
-  ]),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model: z.string(),
+    pages: z.array(z.lazy(() => Pages$inboundSchema)),
+    usage: z.union([
+      z.lazy(() => Usage1$inboundSchema),
+      z.lazy(() => Usage2$inboundSchema),
+    ]),
+  })
+);
 
 export function postV2RouterOcrResponseBodyFromJSON(
   jsonString: string,

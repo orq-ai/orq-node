@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { AccessLevel, AccessLevel$inboundSchema } from "./accesslevel.js";
@@ -90,35 +90,42 @@ export const ManagementKey$inboundSchema: z.ZodType<
   ManagementKey,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  management_key_id: z.string(),
-  name: z.string(),
-  permission_mode: ManagementPermissionMode$inboundSchema,
-  access: z.record(AccessLevel$inboundSchema).optional(),
-  token_prefix: z.string(),
-  status: ManagementKeyStatus$inboundSchema,
-  created_by_id: z.string().optional(),
-  updated_by_id: z.string().optional(),
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  updated_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  last_used_at: z.string().datetime({ offset: true }).transform(v =>
-    new Date(v)
-  ).optional(),
-  expires_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "management_key_id": "managementKeyId",
-    "permission_mode": "permissionMode",
-    "token_prefix": "tokenPrefix",
-    "created_by_id": "createdById",
-    "updated_by_id": "updatedById",
-    "created_at": "createdAt",
-    "updated_at": "updatedAt",
-    "last_used_at": "lastUsedAt",
-    "expires_at": "expiresAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    management_key_id: z.string(),
+    name: z.string(),
+    permission_mode: ManagementPermissionMode$inboundSchema,
+    access: z.record(AccessLevel$inboundSchema).optional(),
+    token_prefix: z.string(),
+    status: ManagementKeyStatus$inboundSchema,
+    created_by_id: z.string().optional(),
+    updated_by_id: z.string().optional(),
+    created_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    updated_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    last_used_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ).optional(),
+    expires_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "management_key_id": "managementKeyId",
+      "permission_mode": "permissionMode",
+      "token_prefix": "tokenPrefix",
+      "created_by_id": "createdById",
+      "updated_by_id": "updatedById",
+      "created_at": "createdAt",
+      "updated_at": "updatedAt",
+      "last_used_at": "lastUsedAt",
+      "expires_at": "expiresAt",
+    });
+  })
+);
 
 export function managementKeyFromJSON(
   jsonString: string,

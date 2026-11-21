@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 
 export const BudgetSortField = {
@@ -15,4 +16,4 @@ export type BudgetSortField = ClosedEnum<typeof BudgetSortField>;
 /** @internal */
 export const BudgetSortField$outboundSchema: z.ZodNativeEnum<
   typeof BudgetSortField
-> = z.nativeEnum(BudgetSortField);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(BudgetSortField));

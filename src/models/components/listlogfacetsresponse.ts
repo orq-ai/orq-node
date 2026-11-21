@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { FacetGroup, FacetGroup$inboundSchema } from "./facetgroup.js";
@@ -17,9 +17,11 @@ export const ListLogFacetsResponse$inboundSchema: z.ZodType<
   ListLogFacetsResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  groups: z.array(FacetGroup$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    groups: z.array(FacetGroup$inboundSchema).optional(),
+  })
+);
 
 export function listLogFacetsResponseFromJSON(
   jsonString: string,

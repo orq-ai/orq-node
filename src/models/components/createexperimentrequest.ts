@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { RunRef, RunRef$Outbound, RunRef$outboundSchema } from "./runref.js";
 
 export type CreateExperimentRequest = {
@@ -37,21 +38,23 @@ export const CreateExperimentRequest$outboundSchema: z.ZodType<
   CreateExperimentRequest$Outbound,
   z.ZodTypeDef,
   CreateExperimentRequest
-> = z.object({
-  displayName: z.string().optional(),
-  projectId: z.string().optional(),
-  datasetId: z.string().optional(),
-  datasetVersionId: z.string().optional(),
-  sourceRun: RunRef$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    displayName: "display_name",
-    projectId: "project_id",
-    datasetId: "dataset_id",
-    datasetVersionId: "dataset_version_id",
-    sourceRun: "source_run",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    displayName: z.string().optional(),
+    projectId: z.string().optional(),
+    datasetId: z.string().optional(),
+    datasetVersionId: z.string().optional(),
+    sourceRun: RunRef$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      displayName: "display_name",
+      projectId: "project_id",
+      datasetId: "dataset_id",
+      datasetVersionId: "dataset_version_id",
+      sourceRun: "source_run",
+    });
+  })
+);
 
 export function createExperimentRequestToJSON(
   createExperimentRequest: CreateExperimentRequest,

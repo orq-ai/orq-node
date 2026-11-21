@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 
 /**
@@ -32,7 +33,7 @@ export type ClassifyCacheConfig = {
 /** @internal */
 export const ClassifyCacheConfigType$outboundSchema: z.ZodNativeEnum<
   typeof ClassifyCacheConfigType
-> = z.nativeEnum(ClassifyCacheConfigType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ClassifyCacheConfigType));
 
 /** @internal */
 export type ClassifyCacheConfig$Outbound = {
@@ -45,10 +46,12 @@ export const ClassifyCacheConfig$outboundSchema: z.ZodType<
   ClassifyCacheConfig$Outbound,
   z.ZodTypeDef,
   ClassifyCacheConfig
-> = z.object({
-  ttl: z.number().int().optional(),
-  type: ClassifyCacheConfigType$outboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ttl: z.number().int().optional(),
+    type: ClassifyCacheConfigType$outboundSchema,
+  })
+);
 
 export function classifyCacheConfigToJSON(
   classifyCacheConfig: ClassifyCacheConfig,

@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 /**
  * Calls custom function tools defined in the agent configuration. Must reference a pre-created function tool by key or id.
@@ -40,16 +41,18 @@ export const FunctionToolInput$outboundSchema: z.ZodType<
   FunctionToolInput$Outbound,
   z.ZodTypeDef,
   FunctionToolInput
-> = z.object({
-  type: z.literal("function"),
-  key: z.string().optional(),
-  id: z.string().optional(),
-  requiresApproval: z.boolean().default(false),
-}).transform((v) => {
-  return remap$(v, {
-    requiresApproval: "requires_approval",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("function"),
+    key: z.string().optional(),
+    id: z.string().optional(),
+    requiresApproval: z.boolean().default(false),
+  }).transform((v) => {
+    return remap$(v, {
+      requiresApproval: "requires_approval",
+    });
+  })
+);
 
 export function functionToolInputToJSON(
   functionToolInput: FunctionToolInput,

@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import {
   AgentTaskConfig,
   AgentTaskConfig$Outbound,
@@ -49,18 +50,20 @@ export const CreateTaskColumnRequest$outboundSchema: z.ZodType<
   CreateTaskColumnRequest$Outbound,
   z.ZodTypeDef,
   CreateTaskColumnRequest
-> = z.object({
-  displayName: z.string().optional(),
-  prompt: PromptTaskConfig$outboundSchema.optional(),
-  agent: AgentTaskConfig$outboundSchema.optional(),
-  harness: HarnessTaskConfig$outboundSchema.optional(),
-  openresponse: OpenResponseTaskConfig$outboundSchema.optional(),
-  position: z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    displayName: "display_name",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    displayName: z.string().optional(),
+    prompt: PromptTaskConfig$outboundSchema.optional(),
+    agent: AgentTaskConfig$outboundSchema.optional(),
+    harness: HarnessTaskConfig$outboundSchema.optional(),
+    openresponse: OpenResponseTaskConfig$outboundSchema.optional(),
+    position: z.number().int().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      displayName: "display_name",
+    });
+  })
+);
 
 export function createTaskColumnRequestToJSON(
   createTaskColumnRequest: CreateTaskColumnRequest,

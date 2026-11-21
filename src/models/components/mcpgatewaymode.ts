@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 
 export const McpGatewayMode = {
@@ -14,7 +15,7 @@ export type McpGatewayMode = ClosedEnum<typeof McpGatewayMode>;
 /** @internal */
 export const McpGatewayMode$inboundSchema: z.ZodNativeEnum<
   typeof McpGatewayMode
-> = z.nativeEnum(McpGatewayMode);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(McpGatewayMode));
 /** @internal */
 export const McpGatewayMode$outboundSchema: z.ZodNativeEnum<
   typeof McpGatewayMode

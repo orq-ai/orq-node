@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type TestExternalAgentConnectionRequest = {};
 
@@ -14,7 +15,7 @@ export const TestExternalAgentConnectionRequest$outboundSchema: z.ZodType<
   TestExternalAgentConnectionRequest$Outbound,
   z.ZodTypeDef,
   TestExternalAgentConnectionRequest
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function testExternalAgentConnectionRequestToJSON(
   testExternalAgentConnectionRequest: TestExternalAgentConnectionRequest,

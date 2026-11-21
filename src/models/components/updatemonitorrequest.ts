@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import {
   MonitorWidget,
   MonitorWidget$Outbound,
@@ -57,19 +58,21 @@ export const UpdateMonitorRequest$outboundSchema: z.ZodType<
   UpdateMonitorRequest$Outbound,
   z.ZodTypeDef,
   UpdateMonitorRequest
-> = z.object({
-  displayName: z.string().optional(),
-  description: z.string().optional(),
-  widgets: z.array(MonitorWidget$outboundSchema).optional(),
-  defaultRange: z.string().optional(),
-  updateMask: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    displayName: "display_name",
-    defaultRange: "default_range",
-    updateMask: "update_mask",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    displayName: z.string().optional(),
+    description: z.string().optional(),
+    widgets: z.array(MonitorWidget$outboundSchema).optional(),
+    defaultRange: z.string().optional(),
+    updateMask: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      displayName: "display_name",
+      defaultRange: "default_range",
+      updateMask: "update_mask",
+    });
+  })
+);
 
 export function updateMonitorRequestToJSON(
   updateMonitorRequest: UpdateMonitorRequest,

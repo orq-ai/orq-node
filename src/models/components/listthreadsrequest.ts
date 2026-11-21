@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import {
   ThreadFilters,
   ThreadFilters$Outbound,
@@ -27,11 +28,13 @@ export const ListThreadsRequest$outboundSchema: z.ZodType<
   ListThreadsRequest$Outbound,
   z.ZodTypeDef,
   ListThreadsRequest
-> = z.object({
-  filters: ThreadFilters$outboundSchema,
-  limit: z.number().int().optional(),
-  page: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    filters: ThreadFilters$outboundSchema,
+    limit: z.number().int().optional(),
+    page: z.number().int().optional(),
+  })
+);
 
 export function listThreadsRequestToJSON(
   listThreadsRequest: ListThreadsRequest,

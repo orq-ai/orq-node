@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type FileGetRequest = {
   /**
@@ -22,13 +23,15 @@ export const FileGetRequest$outboundSchema: z.ZodType<
   FileGetRequest$Outbound,
   z.ZodTypeDef,
   FileGetRequest
-> = z.object({
-  fileId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    fileId: "file_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    fileId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      fileId: "file_id",
+    });
+  })
+);
 
 export function fileGetRequestToJSON(fileGetRequest: FileGetRequest): string {
   return JSON.stringify(FileGetRequest$outboundSchema.parse(fileGetRequest));

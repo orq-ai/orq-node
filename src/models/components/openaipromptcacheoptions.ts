@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -32,7 +32,9 @@ export type OpenAIPromptCacheOptions = {
 /** @internal */
 export const OpenAIPromptCacheOptionsMode$inboundSchema: z.ZodNativeEnum<
   typeof OpenAIPromptCacheOptionsMode
-> = z.nativeEnum(OpenAIPromptCacheOptionsMode);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(OpenAIPromptCacheOptionsMode)
+);
 /** @internal */
 export const OpenAIPromptCacheOptionsMode$outboundSchema: z.ZodNativeEnum<
   typeof OpenAIPromptCacheOptionsMode
@@ -41,7 +43,9 @@ export const OpenAIPromptCacheOptionsMode$outboundSchema: z.ZodNativeEnum<
 /** @internal */
 export const OpenAIPromptCacheOptionsTtl$inboundSchema: z.ZodNativeEnum<
   typeof OpenAIPromptCacheOptionsTtl
-> = z.nativeEnum(OpenAIPromptCacheOptionsTtl);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(OpenAIPromptCacheOptionsTtl)
+);
 /** @internal */
 export const OpenAIPromptCacheOptionsTtl$outboundSchema: z.ZodNativeEnum<
   typeof OpenAIPromptCacheOptionsTtl
@@ -52,10 +56,12 @@ export const OpenAIPromptCacheOptions$inboundSchema: z.ZodType<
   OpenAIPromptCacheOptions,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  mode: OpenAIPromptCacheOptionsMode$inboundSchema.optional(),
-  ttl: OpenAIPromptCacheOptionsTtl$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    mode: OpenAIPromptCacheOptionsMode$inboundSchema.optional(),
+    ttl: OpenAIPromptCacheOptionsTtl$inboundSchema.optional(),
+  })
+);
 /** @internal */
 export type OpenAIPromptCacheOptions$Outbound = {
   mode?: string | undefined;
@@ -67,10 +73,12 @@ export const OpenAIPromptCacheOptions$outboundSchema: z.ZodType<
   OpenAIPromptCacheOptions$Outbound,
   z.ZodTypeDef,
   OpenAIPromptCacheOptions
-> = z.object({
-  mode: OpenAIPromptCacheOptionsMode$outboundSchema.optional(),
-  ttl: OpenAIPromptCacheOptionsTtl$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    mode: OpenAIPromptCacheOptionsMode$outboundSchema.optional(),
+    ttl: OpenAIPromptCacheOptionsTtl$outboundSchema.optional(),
+  })
+);
 
 export function openAIPromptCacheOptionsToJSON(
   openAIPromptCacheOptions: OpenAIPromptCacheOptions,

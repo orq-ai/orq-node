@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { PiiRedaction, PiiRedaction$inboundSchema } from "./piiredaction.js";
@@ -42,18 +42,20 @@ export const WorkspaceSettings$inboundSchema: z.ZodType<
   WorkspaceSettings,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  key: z.string(),
-  display_name: z.string(),
-  enforce_enabled_models: z.boolean(),
-  pii_redaction: PiiRedaction$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "display_name": "displayName",
-    "enforce_enabled_models": "enforceEnabledModels",
-    "pii_redaction": "piiRedaction",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    key: z.string(),
+    display_name: z.string(),
+    enforce_enabled_models: z.boolean(),
+    pii_redaction: PiiRedaction$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "display_name": "displayName",
+      "enforce_enabled_models": "enforceEnabledModels",
+      "pii_redaction": "piiRedaction",
+    });
+  })
+);
 
 export function workspaceSettingsFromJSON(
   jsonString: string,

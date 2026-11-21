@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type CreateSkillRequest2 = {
   /**
@@ -76,19 +77,21 @@ export const CreateSkillRequest2$outboundSchema: z.ZodType<
   CreateSkillRequest2$Outbound,
   z.ZodTypeDef,
   CreateSkillRequest2
-> = z.object({
-  displayName: z.string(),
-  description: z.string().optional(),
-  tags: z.array(z.string()).optional(),
-  path: z.string().optional(),
-  projectId: z.string(),
-  instructions: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    displayName: "display_name",
-    projectId: "project_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    displayName: z.string(),
+    description: z.string().optional(),
+    tags: z.array(z.string()).optional(),
+    path: z.string().optional(),
+    projectId: z.string(),
+    instructions: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      displayName: "display_name",
+      projectId: "project_id",
+    });
+  })
+);
 
 export function createSkillRequest2ToJSON(
   createSkillRequest2: CreateSkillRequest2,
@@ -113,19 +116,21 @@ export const CreateSkillRequest1$outboundSchema: z.ZodType<
   CreateSkillRequest1$Outbound,
   z.ZodTypeDef,
   CreateSkillRequest1
-> = z.object({
-  displayName: z.string(),
-  description: z.string().optional(),
-  tags: z.array(z.string()).optional(),
-  path: z.string(),
-  projectId: z.string().optional(),
-  instructions: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    displayName: "display_name",
-    projectId: "project_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    displayName: z.string(),
+    description: z.string().optional(),
+    tags: z.array(z.string()).optional(),
+    path: z.string(),
+    projectId: z.string().optional(),
+    instructions: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      displayName: "display_name",
+      projectId: "project_id",
+    });
+  })
+);
 
 export function createSkillRequest1ToJSON(
   createSkillRequest1: CreateSkillRequest1,
@@ -145,10 +150,12 @@ export const CreateSkillRequest$outboundSchema: z.ZodType<
   CreateSkillRequest$Outbound,
   z.ZodTypeDef,
   CreateSkillRequest
-> = z.union([
-  z.lazy(() => CreateSkillRequest1$outboundSchema),
-  z.lazy(() => CreateSkillRequest2$outboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => CreateSkillRequest1$outboundSchema),
+    z.lazy(() => CreateSkillRequest2$outboundSchema),
+  ])
+);
 
 export function createSkillRequestToJSON(
   createSkillRequest: CreateSkillRequest,

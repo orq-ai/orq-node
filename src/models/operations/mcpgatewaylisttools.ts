@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type McpGatewayListToolsRequest = {
   /**
@@ -42,20 +43,22 @@ export const McpGatewayListToolsRequest$outboundSchema: z.ZodType<
   McpGatewayListToolsRequest$Outbound,
   z.ZodTypeDef,
   McpGatewayListToolsRequest
-> = z.object({
-  gatewayId: z.string(),
-  limit: z.number().int().optional(),
-  startingAfter: z.string().optional(),
-  endingBefore: z.string().optional(),
-  mcpServerId: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    gatewayId: "gateway_id",
-    startingAfter: "starting_after",
-    endingBefore: "ending_before",
-    mcpServerId: "mcp_server_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    gatewayId: z.string(),
+    limit: z.number().int().optional(),
+    startingAfter: z.string().optional(),
+    endingBefore: z.string().optional(),
+    mcpServerId: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      gatewayId: "gateway_id",
+      startingAfter: "starting_after",
+      endingBefore: "ending_before",
+      mcpServerId: "mcp_server_id",
+    });
+  })
+);
 
 export function mcpGatewayListToolsRequestToJSON(
   mcpGatewayListToolsRequest: McpGatewayListToolsRequest,

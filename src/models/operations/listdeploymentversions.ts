@@ -3,8 +3,11 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import {
+  matchesPattern as matchesPattern$,
+  remap as remap$,
+} from "../../lib/primitives.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -1361,19 +1364,27 @@ export const ListDeploymentVersionsRequest$outboundSchema: z.ZodType<
   ListDeploymentVersionsRequest$Outbound,
   z.ZodTypeDef,
   ListDeploymentVersionsRequest
-> = z.object({
-  keyOrID: z.string(),
-  limit: z.number().int().default(10),
-  startingAfter: z.string().optional(),
-  endingBefore: z.string().optional(),
-  variantId: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    startingAfter: "starting_after",
-    endingBefore: "ending_before",
-    variantId: "variant_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    keyOrID: z.string(),
+    limit: z.number().int().default(10),
+    startingAfter: z.string().refine(
+      matchesPattern$("^[0-9A-HJKMNP-TV-Z]{26}$"),
+      { message: "Value must match pattern ^[0-9A-HJKMNP-TV-Z]{26}$" },
+    ).optional(),
+    endingBefore: z.string().refine(
+      matchesPattern$("^[0-9A-HJKMNP-TV-Z]{26}$"),
+      { message: "Value must match pattern ^[0-9A-HJKMNP-TV-Z]{26}$" },
+    ).optional(),
+    variantId: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      startingAfter: "starting_after",
+      endingBefore: "ending_before",
+      variantId: "variant_id",
+    });
+  })
+);
 
 export function listDeploymentVersionsRequestToJSON(
   listDeploymentVersionsRequest: ListDeploymentVersionsRequest,
@@ -1388,49 +1399,64 @@ export function listDeploymentVersionsRequestToJSON(
 /** @internal */
 export const ListDeploymentVersionsObject$inboundSchema: z.ZodNativeEnum<
   typeof ListDeploymentVersionsObject
-> = z.nativeEnum(ListDeploymentVersionsObject);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(ListDeploymentVersionsObject)
+);
 
 /** @internal */
 export const ListDeploymentVersionsModelType$inboundSchema: z.ZodNativeEnum<
   typeof ListDeploymentVersionsModelType
-> = z.nativeEnum(ListDeploymentVersionsModelType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(ListDeploymentVersionsModelType)
+);
 
 /** @internal */
 export const ListDeploymentVersionsFormat$inboundSchema: z.ZodNativeEnum<
   typeof ListDeploymentVersionsFormat
-> = z.nativeEnum(ListDeploymentVersionsFormat);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(ListDeploymentVersionsFormat)
+);
 
 /** @internal */
 export const ListDeploymentVersionsResponseFormatDeployments6$inboundSchema:
-  z.ZodNativeEnum<typeof ListDeploymentVersionsResponseFormatDeployments6> = z
-    .nativeEnum(ListDeploymentVersionsResponseFormatDeployments6);
+  z.ZodNativeEnum<typeof ListDeploymentVersionsResponseFormatDeployments6> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(ListDeploymentVersionsResponseFormatDeployments6)
+    );
 
 /** @internal */
 export const ListDeploymentVersionsResponseFormatDeployments5$inboundSchema:
-  z.ZodNativeEnum<typeof ListDeploymentVersionsResponseFormatDeployments5> = z
-    .nativeEnum(ListDeploymentVersionsResponseFormatDeployments5);
+  z.ZodNativeEnum<typeof ListDeploymentVersionsResponseFormatDeployments5> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(ListDeploymentVersionsResponseFormatDeployments5)
+    );
 
 /** @internal */
 export const ListDeploymentVersionsResponseFormat4$inboundSchema:
-  z.ZodNativeEnum<typeof ListDeploymentVersionsResponseFormat4> = z.nativeEnum(
-    ListDeploymentVersionsResponseFormat4,
-  );
+  z.ZodNativeEnum<typeof ListDeploymentVersionsResponseFormat4> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(ListDeploymentVersionsResponseFormat4)
+    );
 
 /** @internal */
 export const ListDeploymentVersionsResponseFormatDeploymentsResponseType$inboundSchema:
   z.ZodNativeEnum<
     typeof ListDeploymentVersionsResponseFormatDeploymentsResponseType
-  > = z.nativeEnum(ListDeploymentVersionsResponseFormatDeploymentsResponseType);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.nativeEnum(ListDeploymentVersionsResponseFormatDeploymentsResponseType)
+  );
 
 /** @internal */
 export const ListDeploymentVersionsResponseFormat3$inboundSchema: z.ZodType<
   ListDeploymentVersionsResponseFormat3,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type:
-    ListDeploymentVersionsResponseFormatDeploymentsResponseType$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type:
+      ListDeploymentVersionsResponseFormatDeploymentsResponseType$inboundSchema,
+  })
+);
 
 export function listDeploymentVersionsResponseFormat3FromJSON(
   jsonString: string,
@@ -1446,16 +1472,20 @@ export function listDeploymentVersionsResponseFormat3FromJSON(
 /** @internal */
 export const ListDeploymentVersionsResponseFormatDeploymentsType$inboundSchema:
   z.ZodNativeEnum<typeof ListDeploymentVersionsResponseFormatDeploymentsType> =
-    z.nativeEnum(ListDeploymentVersionsResponseFormatDeploymentsType);
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(ListDeploymentVersionsResponseFormatDeploymentsType)
+    );
 
 /** @internal */
 export const ListDeploymentVersionsResponseFormat2$inboundSchema: z.ZodType<
   ListDeploymentVersionsResponseFormat2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: ListDeploymentVersionsResponseFormatDeploymentsType$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: ListDeploymentVersionsResponseFormatDeploymentsType$inboundSchema,
+  })
+);
 
 export function listDeploymentVersionsResponseFormat2FromJSON(
   jsonString: string,
@@ -1470,8 +1500,10 @@ export function listDeploymentVersionsResponseFormat2FromJSON(
 
 /** @internal */
 export const ListDeploymentVersionsResponseFormatType$inboundSchema:
-  z.ZodNativeEnum<typeof ListDeploymentVersionsResponseFormatType> = z
-    .nativeEnum(ListDeploymentVersionsResponseFormatType);
+  z.ZodNativeEnum<typeof ListDeploymentVersionsResponseFormatType> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(ListDeploymentVersionsResponseFormatType)
+    );
 
 /** @internal */
 export const ListDeploymentVersionsResponseFormatDeploymentsJsonSchema$inboundSchema:
@@ -1479,12 +1511,14 @@ export const ListDeploymentVersionsResponseFormatDeploymentsJsonSchema$inboundSc
     ListDeploymentVersionsResponseFormatDeploymentsJsonSchema,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    name: z.string(),
-    description: z.nullable(z.string()).optional(),
-    strict: z.boolean().optional(),
-    schema: z.record(z.any()),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      name: z.string(),
+      description: z.nullable(z.string()).optional(),
+      strict: z.boolean().optional(),
+      schema: z.record(z.any()),
+    })
+  );
 
 export function listDeploymentVersionsResponseFormatDeploymentsJsonSchemaFromJSON(
   jsonString: string,
@@ -1506,18 +1540,20 @@ export const ListDeploymentVersionsResponseFormat1$inboundSchema: z.ZodType<
   ListDeploymentVersionsResponseFormat1,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: ListDeploymentVersionsResponseFormatType$inboundSchema,
-  display_name: z.string().optional(),
-  json_schema: z.lazy(() =>
-    ListDeploymentVersionsResponseFormatDeploymentsJsonSchema$inboundSchema
-  ),
-}).transform((v) => {
-  return remap$(v, {
-    "display_name": "displayName",
-    "json_schema": "jsonSchema",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: ListDeploymentVersionsResponseFormatType$inboundSchema,
+    display_name: z.string().optional(),
+    json_schema: z.lazy(() =>
+      ListDeploymentVersionsResponseFormatDeploymentsJsonSchema$inboundSchema
+    ),
+  }).transform((v) => {
+    return remap$(v, {
+      "display_name": "displayName",
+      "json_schema": "jsonSchema",
+    });
+  })
+);
 
 export function listDeploymentVersionsResponseFormat1FromJSON(
   jsonString: string,
@@ -1535,14 +1571,16 @@ export const ListDeploymentVersionsResponseFormat$inboundSchema: z.ZodType<
   ListDeploymentVersionsResponseFormat,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  z.lazy(() => ListDeploymentVersionsResponseFormat1$inboundSchema),
-  z.lazy(() => ListDeploymentVersionsResponseFormat2$inboundSchema),
-  z.lazy(() => ListDeploymentVersionsResponseFormat3$inboundSchema),
-  ListDeploymentVersionsResponseFormat4$inboundSchema,
-  ListDeploymentVersionsResponseFormatDeployments5$inboundSchema,
-  ListDeploymentVersionsResponseFormatDeployments6$inboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => ListDeploymentVersionsResponseFormat1$inboundSchema),
+    z.lazy(() => ListDeploymentVersionsResponseFormat2$inboundSchema),
+    z.lazy(() => ListDeploymentVersionsResponseFormat3$inboundSchema),
+    ListDeploymentVersionsResponseFormat4$inboundSchema,
+    ListDeploymentVersionsResponseFormatDeployments5$inboundSchema,
+    ListDeploymentVersionsResponseFormatDeployments6$inboundSchema,
+  ])
+);
 
 export function listDeploymentVersionsResponseFormatFromJSON(
   jsonString: string,
@@ -1557,23 +1595,27 @@ export function listDeploymentVersionsResponseFormatFromJSON(
 
 /** @internal */
 export const ListDeploymentVersionsDeploymentsResponse200Type$inboundSchema:
-  z.ZodNativeEnum<typeof ListDeploymentVersionsDeploymentsResponse200Type> = z
-    .nativeEnum(ListDeploymentVersionsDeploymentsResponse200Type);
+  z.ZodNativeEnum<typeof ListDeploymentVersionsDeploymentsResponse200Type> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(ListDeploymentVersionsDeploymentsResponse200Type)
+    );
 
 /** @internal */
 export const ListDeploymentVersionsTtl$inboundSchema: z.ZodNativeEnum<
   typeof ListDeploymentVersionsTtl
-> = z.nativeEnum(ListDeploymentVersionsTtl);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ListDeploymentVersionsTtl));
 
 /** @internal */
 export const ListDeploymentVersionsCacheControl$inboundSchema: z.ZodType<
   ListDeploymentVersionsCacheControl,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: ListDeploymentVersionsDeploymentsResponse200Type$inboundSchema,
-  ttl: ListDeploymentVersionsTtl$inboundSchema.default("5m"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: ListDeploymentVersionsDeploymentsResponse200Type$inboundSchema,
+    ttl: ListDeploymentVersionsTtl$inboundSchema.default("5m"),
+  })
+);
 
 export function listDeploymentVersionsCacheControlFromJSON(
   jsonString: string,
@@ -1588,77 +1630,84 @@ export function listDeploymentVersionsCacheControlFromJSON(
 
 /** @internal */
 export const ListDeploymentVersionsPhotoRealVersion$inboundSchema:
-  z.ZodNativeEnum<typeof ListDeploymentVersionsPhotoRealVersion> = z.nativeEnum(
-    ListDeploymentVersionsPhotoRealVersion,
-  );
+  z.ZodNativeEnum<typeof ListDeploymentVersionsPhotoRealVersion> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(ListDeploymentVersionsPhotoRealVersion)
+    );
 
 /** @internal */
 export const ListDeploymentVersionsEncodingFormat$inboundSchema:
-  z.ZodNativeEnum<typeof ListDeploymentVersionsEncodingFormat> = z.nativeEnum(
-    ListDeploymentVersionsEncodingFormat,
-  );
+  z.ZodNativeEnum<typeof ListDeploymentVersionsEncodingFormat> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(ListDeploymentVersionsEncodingFormat)
+    );
 
 /** @internal */
 export const ListDeploymentVersionsReasoningEffort$inboundSchema:
-  z.ZodNativeEnum<typeof ListDeploymentVersionsReasoningEffort> = z.nativeEnum(
-    ListDeploymentVersionsReasoningEffort,
-  );
+  z.ZodNativeEnum<typeof ListDeploymentVersionsReasoningEffort> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(ListDeploymentVersionsReasoningEffort)
+    );
 
 /** @internal */
 export const ListDeploymentVersionsVerbosity$inboundSchema: z.ZodNativeEnum<
   typeof ListDeploymentVersionsVerbosity
-> = z.nativeEnum(ListDeploymentVersionsVerbosity);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(ListDeploymentVersionsVerbosity)
+);
 
 /** @internal */
 export const ListDeploymentVersionsThinkingLevel$inboundSchema: z.ZodNativeEnum<
   typeof ListDeploymentVersionsThinkingLevel
-> = z.nativeEnum(ListDeploymentVersionsThinkingLevel);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(ListDeploymentVersionsThinkingLevel)
+);
 
 /** @internal */
 export const ListDeploymentVersionsModelParameters$inboundSchema: z.ZodType<
   ListDeploymentVersionsModelParameters,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  temperature: z.number().optional(),
-  maxTokens: z.number().optional(),
-  topK: z.number().optional(),
-  topP: z.number().optional(),
-  frequencyPenalty: z.number().optional(),
-  presencePenalty: z.number().optional(),
-  numImages: z.number().optional(),
-  seed: z.number().optional(),
-  format: ListDeploymentVersionsFormat$inboundSchema.optional(),
-  dimensions: z.string().optional(),
-  quality: z.string().optional(),
-  style: z.string().optional(),
-  responseFormat: z.nullable(
-    z.union([
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    temperature: z.number().optional(),
+    maxTokens: z.number().optional(),
+    topK: z.number().optional(),
+    topP: z.number().optional(),
+    frequencyPenalty: z.number().optional(),
+    presencePenalty: z.number().optional(),
+    numImages: z.number().optional(),
+    seed: z.number().optional(),
+    format: ListDeploymentVersionsFormat$inboundSchema.optional(),
+    dimensions: z.string().optional(),
+    quality: z.string().optional(),
+    style: z.string().optional(),
+    responseFormat: z.nullable(z.union([
       z.lazy(() => ListDeploymentVersionsResponseFormat1$inboundSchema),
       z.lazy(() => ListDeploymentVersionsResponseFormat2$inboundSchema),
       z.lazy(() => ListDeploymentVersionsResponseFormat3$inboundSchema),
       ListDeploymentVersionsResponseFormat4$inboundSchema,
       ListDeploymentVersionsResponseFormatDeployments5$inboundSchema,
       ListDeploymentVersionsResponseFormatDeployments6$inboundSchema,
-    ]),
-  ).optional(),
-  cacheControl: z.nullable(
-    z.lazy(() => ListDeploymentVersionsCacheControl$inboundSchema),
-  ).optional(),
-  photoRealVersion: ListDeploymentVersionsPhotoRealVersion$inboundSchema
-    .optional(),
-  encoding_format: ListDeploymentVersionsEncodingFormat$inboundSchema
-    .optional(),
-  reasoningEffort: ListDeploymentVersionsReasoningEffort$inboundSchema
-    .optional(),
-  budgetTokens: z.number().optional(),
-  verbosity: ListDeploymentVersionsVerbosity$inboundSchema.optional(),
-  thinkingLevel: ListDeploymentVersionsThinkingLevel$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "encoding_format": "encodingFormat",
-  });
-});
+    ])).optional(),
+    cacheControl: z.nullable(z.lazy(() =>
+      ListDeploymentVersionsCacheControl$inboundSchema
+    )).optional(),
+    photoRealVersion: ListDeploymentVersionsPhotoRealVersion$inboundSchema
+      .optional(),
+    encoding_format: ListDeploymentVersionsEncodingFormat$inboundSchema
+      .optional(),
+    reasoningEffort: ListDeploymentVersionsReasoningEffort$inboundSchema
+      .optional(),
+    budgetTokens: z.number().optional(),
+    verbosity: ListDeploymentVersionsVerbosity$inboundSchema.optional(),
+    thinkingLevel: ListDeploymentVersionsThinkingLevel$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "encoding_format": "encodingFormat",
+    });
+  })
+);
 
 export function listDeploymentVersionsModelParametersFromJSON(
   jsonString: string,
@@ -1674,28 +1723,32 @@ export function listDeploymentVersionsModelParametersFromJSON(
 /** @internal */
 export const ListDeploymentVersionsProvider$inboundSchema: z.ZodNativeEnum<
   typeof ListDeploymentVersionsProvider
-> = z.nativeEnum(ListDeploymentVersionsProvider);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(ListDeploymentVersionsProvider)
+);
 
 /** @internal */
 export const ListDeploymentVersionsRole$inboundSchema: z.ZodNativeEnum<
   typeof ListDeploymentVersionsRole
-> = z.nativeEnum(ListDeploymentVersionsRole);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ListDeploymentVersionsRole));
 
 /** @internal */
 export const ListDeploymentVersions2File$inboundSchema: z.ZodType<
   ListDeploymentVersions2File,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  file_data: z.string().optional(),
-  uri: z.string().optional(),
-  mimeType: z.string().optional(),
-  filename: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "file_data": "fileData",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    file_data: z.string().optional(),
+    uri: z.string().optional(),
+    mimeType: z.string().optional(),
+    filename: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "file_data": "fileData",
+    });
+  })
+);
 
 export function listDeploymentVersions2FileFromJSON(
   jsonString: string,
@@ -1712,10 +1765,12 @@ export const ListDeploymentVersions23$inboundSchema: z.ZodType<
   ListDeploymentVersions23,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("file"),
-  file: z.lazy(() => ListDeploymentVersions2File$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("file"),
+    file: z.lazy(() => ListDeploymentVersions2File$inboundSchema),
+  })
+);
 
 export function listDeploymentVersions23FromJSON(
   jsonString: string,
@@ -1732,11 +1787,13 @@ export const ListDeploymentVersions2ImageUrl$inboundSchema: z.ZodType<
   ListDeploymentVersions2ImageUrl,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  url: z.string(),
-  detail: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    url: z.string(),
+    detail: z.string().optional(),
+  })
+);
 
 export function listDeploymentVersions2ImageUrlFromJSON(
   jsonString: string,
@@ -1753,14 +1810,16 @@ export const ListDeploymentVersions22$inboundSchema: z.ZodType<
   ListDeploymentVersions22,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("image_url"),
-  image_url: z.lazy(() => ListDeploymentVersions2ImageUrl$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "image_url": "imageUrl",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("image_url"),
+    image_url: z.lazy(() => ListDeploymentVersions2ImageUrl$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "image_url": "imageUrl",
+    });
+  })
+);
 
 export function listDeploymentVersions22FromJSON(
   jsonString: string,
@@ -1777,10 +1836,12 @@ export const ListDeploymentVersions21$inboundSchema: z.ZodType<
   ListDeploymentVersions21,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("text"),
-  text: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("text"),
+    text: z.string(),
+  })
+);
 
 export function listDeploymentVersions21FromJSON(
   jsonString: string,
@@ -1797,11 +1858,13 @@ export const ListDeploymentVersionsContent2$inboundSchema: z.ZodType<
   ListDeploymentVersionsContent2,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  z.lazy(() => ListDeploymentVersions21$inboundSchema),
-  z.lazy(() => ListDeploymentVersions22$inboundSchema),
-  z.lazy(() => ListDeploymentVersions23$inboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => ListDeploymentVersions21$inboundSchema),
+    z.lazy(() => ListDeploymentVersions22$inboundSchema),
+    z.lazy(() => ListDeploymentVersions23$inboundSchema),
+  ])
+);
 
 export function listDeploymentVersionsContent2FromJSON(
   jsonString: string,
@@ -1818,14 +1881,16 @@ export const ListDeploymentVersionsContent$inboundSchema: z.ZodType<
   ListDeploymentVersionsContent,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  z.string(),
-  z.array(z.union([
-    z.lazy(() => ListDeploymentVersions21$inboundSchema),
-    z.lazy(() => ListDeploymentVersions22$inboundSchema),
-    z.lazy(() => ListDeploymentVersions23$inboundSchema),
-  ])),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.string(),
+    z.array(z.union([
+      z.lazy(() => ListDeploymentVersions21$inboundSchema),
+      z.lazy(() => ListDeploymentVersions22$inboundSchema),
+      z.lazy(() => ListDeploymentVersions23$inboundSchema),
+    ])),
+  ])
+);
 
 export function listDeploymentVersionsContentFromJSON(
   jsonString: string,
@@ -1839,19 +1904,22 @@ export function listDeploymentVersionsContentFromJSON(
 
 /** @internal */
 export const ListDeploymentVersionsDeploymentsType$inboundSchema:
-  z.ZodNativeEnum<typeof ListDeploymentVersionsDeploymentsType> = z.nativeEnum(
-    ListDeploymentVersionsDeploymentsType,
-  );
+  z.ZodNativeEnum<typeof ListDeploymentVersionsDeploymentsType> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(ListDeploymentVersionsDeploymentsType)
+    );
 
 /** @internal */
 export const ListDeploymentVersionsDeploymentsFunction$inboundSchema: z.ZodType<
   ListDeploymentVersionsDeploymentsFunction,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string(),
-  arguments: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+    arguments: z.string(),
+  })
+);
 
 export function listDeploymentVersionsDeploymentsFunctionFromJSON(
   jsonString: string,
@@ -1874,14 +1942,16 @@ export const ListDeploymentVersionsToolCalls$inboundSchema: z.ZodType<
   ListDeploymentVersionsToolCalls,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  index: z.number().optional(),
-  type: ListDeploymentVersionsDeploymentsType$inboundSchema,
-  function: z.lazy(() =>
-    ListDeploymentVersionsDeploymentsFunction$inboundSchema
-  ),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    index: z.number().optional(),
+    type: ListDeploymentVersionsDeploymentsType$inboundSchema,
+    function: z.lazy(() =>
+      ListDeploymentVersionsDeploymentsFunction$inboundSchema
+    ),
+  })
+);
 
 export function listDeploymentVersionsToolCallsFromJSON(
   jsonString: string,
@@ -1898,10 +1968,10 @@ export const ListDeploymentVersionsMessages$inboundSchema: z.ZodType<
   ListDeploymentVersionsMessages,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  role: ListDeploymentVersionsRole$inboundSchema,
-  content: z.nullable(
-    z.union([
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    role: ListDeploymentVersionsRole$inboundSchema,
+    content: z.nullable(z.union([
       z.string(),
       z.array(
         z.union([
@@ -1910,19 +1980,19 @@ export const ListDeploymentVersionsMessages$inboundSchema: z.ZodType<
           z.lazy(() => ListDeploymentVersions23$inboundSchema),
         ]),
       ),
-    ]),
-  ),
-  tool_calls: z.array(
-    z.lazy(() => ListDeploymentVersionsToolCalls$inboundSchema),
-  ).optional(),
-  tool_call_id: z.nullable(z.string()).optional(),
-  id: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "tool_calls": "toolCalls",
-    "tool_call_id": "toolCallId",
-  });
-});
+    ])),
+    tool_calls: z.array(z.lazy(() =>
+      ListDeploymentVersionsToolCalls$inboundSchema
+    )).optional(),
+    tool_call_id: z.nullable(z.string()).optional(),
+    id: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "tool_calls": "toolCalls",
+      "tool_call_id": "toolCallId",
+    });
+  })
+);
 
 export function listDeploymentVersionsMessagesFromJSON(
   jsonString: string,
@@ -1939,25 +2009,29 @@ export const ListDeploymentVersionsPromptConfig$inboundSchema: z.ZodType<
   ListDeploymentVersionsPromptConfig,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  model: z.string(),
-  model_db_id: z.string(),
-  model_type: ListDeploymentVersionsModelType$inboundSchema,
-  model_parameters: z.lazy(() =>
-    ListDeploymentVersionsModelParameters$inboundSchema
-  ),
-  provider: ListDeploymentVersionsProvider$inboundSchema,
-  messages: z.array(z.lazy(() => ListDeploymentVersionsMessages$inboundSchema)),
-  integration_id: z.nullable(z.string()).optional(),
-  version: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "model_db_id": "modelDbId",
-    "model_type": "modelType",
-    "model_parameters": "modelParameters",
-    "integration_id": "integrationId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model: z.string(),
+    model_db_id: z.string(),
+    model_type: ListDeploymentVersionsModelType$inboundSchema,
+    model_parameters: z.lazy(() =>
+      ListDeploymentVersionsModelParameters$inboundSchema
+    ),
+    provider: ListDeploymentVersionsProvider$inboundSchema,
+    messages: z.array(
+      z.lazy(() => ListDeploymentVersionsMessages$inboundSchema),
+    ),
+    integration_id: z.nullable(z.string()).optional(),
+    version: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "model_db_id": "modelDbId",
+      "model_type": "modelType",
+      "model_parameters": "modelParameters",
+      "integration_id": "integrationId",
+    });
+  })
+);
 
 export function listDeploymentVersionsPromptConfigFromJSON(
   jsonString: string,
@@ -1972,37 +2046,47 @@ export function listDeploymentVersionsPromptConfigFromJSON(
 
 /** @internal */
 export const ListDeploymentVersionsDeploymentsModelType$inboundSchema:
-  z.ZodNativeEnum<typeof ListDeploymentVersionsDeploymentsModelType> = z
-    .nativeEnum(ListDeploymentVersionsDeploymentsModelType);
+  z.ZodNativeEnum<typeof ListDeploymentVersionsDeploymentsModelType> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(ListDeploymentVersionsDeploymentsModelType)
+    );
 
 /** @internal */
 export const ListDeploymentVersionsDeploymentsFormat$inboundSchema:
-  z.ZodNativeEnum<typeof ListDeploymentVersionsDeploymentsFormat> = z
-    .nativeEnum(ListDeploymentVersionsDeploymentsFormat);
+  z.ZodNativeEnum<typeof ListDeploymentVersionsDeploymentsFormat> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(ListDeploymentVersionsDeploymentsFormat)
+    );
 
 /** @internal */
 export const ListDeploymentVersionsResponseFormat6$inboundSchema:
-  z.ZodNativeEnum<typeof ListDeploymentVersionsResponseFormat6> = z.nativeEnum(
-    ListDeploymentVersionsResponseFormat6,
-  );
+  z.ZodNativeEnum<typeof ListDeploymentVersionsResponseFormat6> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(ListDeploymentVersionsResponseFormat6)
+    );
 
 /** @internal */
 export const ListDeploymentVersionsResponseFormat5$inboundSchema:
-  z.ZodNativeEnum<typeof ListDeploymentVersionsResponseFormat5> = z.nativeEnum(
-    ListDeploymentVersionsResponseFormat5,
-  );
+  z.ZodNativeEnum<typeof ListDeploymentVersionsResponseFormat5> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(ListDeploymentVersionsResponseFormat5)
+    );
 
 /** @internal */
 export const ListDeploymentVersionsResponseFormatDeployments4$inboundSchema:
-  z.ZodNativeEnum<typeof ListDeploymentVersionsResponseFormatDeployments4> = z
-    .nativeEnum(ListDeploymentVersionsResponseFormatDeployments4);
+  z.ZodNativeEnum<typeof ListDeploymentVersionsResponseFormatDeployments4> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(ListDeploymentVersionsResponseFormatDeployments4)
+    );
 
 /** @internal */
 export const ListDeploymentVersionsResponseFormatDeploymentsResponse200ApplicationJSONResponseBodyType$inboundSchema:
   z.ZodNativeEnum<
     typeof ListDeploymentVersionsResponseFormatDeploymentsResponse200ApplicationJSONResponseBodyType
-  > = z.nativeEnum(
-    ListDeploymentVersionsResponseFormatDeploymentsResponse200ApplicationJSONResponseBodyType,
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.nativeEnum(
+      ListDeploymentVersionsResponseFormatDeploymentsResponse200ApplicationJSONResponseBodyType,
+    )
   );
 
 /** @internal */
@@ -2011,10 +2095,12 @@ export const ListDeploymentVersionsResponseFormatDeployments3$inboundSchema:
     ListDeploymentVersionsResponseFormatDeployments3,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    type:
-      ListDeploymentVersionsResponseFormatDeploymentsResponse200ApplicationJSONResponseBodyType$inboundSchema,
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type:
+        ListDeploymentVersionsResponseFormatDeploymentsResponse200ApplicationJSONResponseBodyType$inboundSchema,
+    })
+  );
 
 export function listDeploymentVersionsResponseFormatDeployments3FromJSON(
   jsonString: string,
@@ -2036,8 +2122,10 @@ export function listDeploymentVersionsResponseFormatDeployments3FromJSON(
 export const ListDeploymentVersionsResponseFormatDeploymentsResponse200ApplicationJSONType$inboundSchema:
   z.ZodNativeEnum<
     typeof ListDeploymentVersionsResponseFormatDeploymentsResponse200ApplicationJSONType
-  > = z.nativeEnum(
-    ListDeploymentVersionsResponseFormatDeploymentsResponse200ApplicationJSONType,
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.nativeEnum(
+      ListDeploymentVersionsResponseFormatDeploymentsResponse200ApplicationJSONType,
+    )
   );
 
 /** @internal */
@@ -2046,10 +2134,12 @@ export const ListDeploymentVersionsResponseFormatDeployments2$inboundSchema:
     ListDeploymentVersionsResponseFormatDeployments2,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    type:
-      ListDeploymentVersionsResponseFormatDeploymentsResponse200ApplicationJSONType$inboundSchema,
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type:
+        ListDeploymentVersionsResponseFormatDeploymentsResponse200ApplicationJSONType$inboundSchema,
+    })
+  );
 
 export function listDeploymentVersionsResponseFormatDeployments2FromJSON(
   jsonString: string,
@@ -2071,8 +2161,8 @@ export function listDeploymentVersionsResponseFormatDeployments2FromJSON(
 export const ListDeploymentVersionsResponseFormatDeploymentsResponse200Type$inboundSchema:
   z.ZodNativeEnum<
     typeof ListDeploymentVersionsResponseFormatDeploymentsResponse200Type
-  > = z.nativeEnum(
-    ListDeploymentVersionsResponseFormatDeploymentsResponse200Type,
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.nativeEnum(ListDeploymentVersionsResponseFormatDeploymentsResponse200Type)
   );
 
 /** @internal */
@@ -2081,12 +2171,14 @@ export const ListDeploymentVersionsResponseFormatJsonSchema$inboundSchema:
     ListDeploymentVersionsResponseFormatJsonSchema,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    name: z.string(),
-    description: z.nullable(z.string()).optional(),
-    strict: z.boolean().optional(),
-    schema: z.record(z.any()),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      name: z.string(),
+      description: z.nullable(z.string()).optional(),
+      strict: z.boolean().optional(),
+      schema: z.record(z.any()),
+    })
+  );
 
 export function listDeploymentVersionsResponseFormatJsonSchemaFromJSON(
   jsonString: string,
@@ -2110,19 +2202,21 @@ export const ListDeploymentVersionsResponseFormatDeployments1$inboundSchema:
     ListDeploymentVersionsResponseFormatDeployments1,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    type:
-      ListDeploymentVersionsResponseFormatDeploymentsResponse200Type$inboundSchema,
-    display_name: z.string().optional(),
-    json_schema: z.lazy(() =>
-      ListDeploymentVersionsResponseFormatJsonSchema$inboundSchema
-    ),
-  }).transform((v) => {
-    return remap$(v, {
-      "display_name": "displayName",
-      "json_schema": "jsonSchema",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type:
+        ListDeploymentVersionsResponseFormatDeploymentsResponse200Type$inboundSchema,
+      display_name: z.string().optional(),
+      json_schema: z.lazy(() =>
+        ListDeploymentVersionsResponseFormatJsonSchema$inboundSchema
+      ),
+    }).transform((v) => {
+      return remap$(v, {
+        "display_name": "displayName",
+        "json_schema": "jsonSchema",
+      });
+    })
+  );
 
 export function listDeploymentVersionsResponseFormatDeployments1FromJSON(
   jsonString: string,
@@ -2146,20 +2240,22 @@ export const ListDeploymentVersionsDeploymentsResponseFormat$inboundSchema:
     ListDeploymentVersionsDeploymentsResponseFormat,
     z.ZodTypeDef,
     unknown
-  > = z.union([
-    z.lazy(() =>
-      ListDeploymentVersionsResponseFormatDeployments1$inboundSchema
-    ),
-    z.lazy(() =>
-      ListDeploymentVersionsResponseFormatDeployments2$inboundSchema
-    ),
-    z.lazy(() =>
-      ListDeploymentVersionsResponseFormatDeployments3$inboundSchema
-    ),
-    ListDeploymentVersionsResponseFormatDeployments4$inboundSchema,
-    ListDeploymentVersionsResponseFormat5$inboundSchema,
-    ListDeploymentVersionsResponseFormat6$inboundSchema,
-  ]);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.union([
+      z.lazy(() =>
+        ListDeploymentVersionsResponseFormatDeployments1$inboundSchema
+      ),
+      z.lazy(() =>
+        ListDeploymentVersionsResponseFormatDeployments2$inboundSchema
+      ),
+      z.lazy(() =>
+        ListDeploymentVersionsResponseFormatDeployments3$inboundSchema
+      ),
+      ListDeploymentVersionsResponseFormatDeployments4$inboundSchema,
+      ListDeploymentVersionsResponseFormat5$inboundSchema,
+      ListDeploymentVersionsResponseFormat6$inboundSchema,
+    ])
+  );
 
 export function listDeploymentVersionsDeploymentsResponseFormatFromJSON(
   jsonString: string,
@@ -2179,14 +2275,17 @@ export function listDeploymentVersionsDeploymentsResponseFormatFromJSON(
 
 /** @internal */
 export const ListDeploymentVersionsDeploymentsResponseType$inboundSchema:
-  z.ZodNativeEnum<typeof ListDeploymentVersionsDeploymentsResponseType> = z
-    .nativeEnum(ListDeploymentVersionsDeploymentsResponseType);
+  z.ZodNativeEnum<typeof ListDeploymentVersionsDeploymentsResponseType> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(ListDeploymentVersionsDeploymentsResponseType)
+    );
 
 /** @internal */
 export const ListDeploymentVersionsDeploymentsTtl$inboundSchema:
-  z.ZodNativeEnum<typeof ListDeploymentVersionsDeploymentsTtl> = z.nativeEnum(
-    ListDeploymentVersionsDeploymentsTtl,
-  );
+  z.ZodNativeEnum<typeof ListDeploymentVersionsDeploymentsTtl> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(ListDeploymentVersionsDeploymentsTtl)
+    );
 
 /** @internal */
 export const ListDeploymentVersionsDeploymentsCacheControl$inboundSchema:
@@ -2194,10 +2293,12 @@ export const ListDeploymentVersionsDeploymentsCacheControl$inboundSchema:
     ListDeploymentVersionsDeploymentsCacheControl,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    type: ListDeploymentVersionsDeploymentsResponseType$inboundSchema,
-    ttl: ListDeploymentVersionsDeploymentsTtl$inboundSchema.default("5m"),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type: ListDeploymentVersionsDeploymentsResponseType$inboundSchema,
+      ttl: ListDeploymentVersionsDeploymentsTtl$inboundSchema.default("5m"),
+    })
+  );
 
 export function listDeploymentVersionsDeploymentsCacheControlFromJSON(
   jsonString: string,
@@ -2217,28 +2318,38 @@ export function listDeploymentVersionsDeploymentsCacheControlFromJSON(
 
 /** @internal */
 export const ListDeploymentVersionsDeploymentsPhotoRealVersion$inboundSchema:
-  z.ZodNativeEnum<typeof ListDeploymentVersionsDeploymentsPhotoRealVersion> = z
-    .nativeEnum(ListDeploymentVersionsDeploymentsPhotoRealVersion);
+  z.ZodNativeEnum<typeof ListDeploymentVersionsDeploymentsPhotoRealVersion> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(ListDeploymentVersionsDeploymentsPhotoRealVersion)
+    );
 
 /** @internal */
 export const ListDeploymentVersionsDeploymentsEncodingFormat$inboundSchema:
-  z.ZodNativeEnum<typeof ListDeploymentVersionsDeploymentsEncodingFormat> = z
-    .nativeEnum(ListDeploymentVersionsDeploymentsEncodingFormat);
+  z.ZodNativeEnum<typeof ListDeploymentVersionsDeploymentsEncodingFormat> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(ListDeploymentVersionsDeploymentsEncodingFormat)
+    );
 
 /** @internal */
 export const ListDeploymentVersionsDeploymentsReasoningEffort$inboundSchema:
-  z.ZodNativeEnum<typeof ListDeploymentVersionsDeploymentsReasoningEffort> = z
-    .nativeEnum(ListDeploymentVersionsDeploymentsReasoningEffort);
+  z.ZodNativeEnum<typeof ListDeploymentVersionsDeploymentsReasoningEffort> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(ListDeploymentVersionsDeploymentsReasoningEffort)
+    );
 
 /** @internal */
 export const ListDeploymentVersionsDeploymentsVerbosity$inboundSchema:
-  z.ZodNativeEnum<typeof ListDeploymentVersionsDeploymentsVerbosity> = z
-    .nativeEnum(ListDeploymentVersionsDeploymentsVerbosity);
+  z.ZodNativeEnum<typeof ListDeploymentVersionsDeploymentsVerbosity> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(ListDeploymentVersionsDeploymentsVerbosity)
+    );
 
 /** @internal */
 export const ListDeploymentVersionsDeploymentsThinkingLevel$inboundSchema:
-  z.ZodNativeEnum<typeof ListDeploymentVersionsDeploymentsThinkingLevel> = z
-    .nativeEnum(ListDeploymentVersionsDeploymentsThinkingLevel);
+  z.ZodNativeEnum<typeof ListDeploymentVersionsDeploymentsThinkingLevel> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(ListDeploymentVersionsDeploymentsThinkingLevel)
+    );
 
 /** @internal */
 export const ListDeploymentVersionsDeploymentsModelParameters$inboundSchema:
@@ -2246,21 +2357,21 @@ export const ListDeploymentVersionsDeploymentsModelParameters$inboundSchema:
     ListDeploymentVersionsDeploymentsModelParameters,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    temperature: z.number().optional(),
-    maxTokens: z.number().optional(),
-    topK: z.number().optional(),
-    topP: z.number().optional(),
-    frequencyPenalty: z.number().optional(),
-    presencePenalty: z.number().optional(),
-    numImages: z.number().optional(),
-    seed: z.number().optional(),
-    format: ListDeploymentVersionsDeploymentsFormat$inboundSchema.optional(),
-    dimensions: z.string().optional(),
-    quality: z.string().optional(),
-    style: z.string().optional(),
-    responseFormat: z.nullable(
-      z.union([
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      temperature: z.number().optional(),
+      maxTokens: z.number().optional(),
+      topK: z.number().optional(),
+      topP: z.number().optional(),
+      frequencyPenalty: z.number().optional(),
+      presencePenalty: z.number().optional(),
+      numImages: z.number().optional(),
+      seed: z.number().optional(),
+      format: ListDeploymentVersionsDeploymentsFormat$inboundSchema.optional(),
+      dimensions: z.string().optional(),
+      quality: z.string().optional(),
+      style: z.string().optional(),
+      responseFormat: z.nullable(z.union([
         z.lazy(() =>
           ListDeploymentVersionsResponseFormatDeployments1$inboundSchema
         ),
@@ -2273,28 +2384,30 @@ export const ListDeploymentVersionsDeploymentsModelParameters$inboundSchema:
         ListDeploymentVersionsResponseFormatDeployments4$inboundSchema,
         ListDeploymentVersionsResponseFormat5$inboundSchema,
         ListDeploymentVersionsResponseFormat6$inboundSchema,
-      ]),
-    ).optional(),
-    cacheControl: z.nullable(
-      z.lazy(() => ListDeploymentVersionsDeploymentsCacheControl$inboundSchema),
-    ).optional(),
-    photoRealVersion:
-      ListDeploymentVersionsDeploymentsPhotoRealVersion$inboundSchema
+      ])).optional(),
+      cacheControl: z.nullable(z.lazy(() =>
+        ListDeploymentVersionsDeploymentsCacheControl$inboundSchema
+      )).optional(),
+      photoRealVersion:
+        ListDeploymentVersionsDeploymentsPhotoRealVersion$inboundSchema
+          .optional(),
+      encoding_format:
+        ListDeploymentVersionsDeploymentsEncodingFormat$inboundSchema
+          .optional(),
+      reasoningEffort:
+        ListDeploymentVersionsDeploymentsReasoningEffort$inboundSchema
+          .optional(),
+      budgetTokens: z.number().optional(),
+      verbosity: ListDeploymentVersionsDeploymentsVerbosity$inboundSchema
         .optional(),
-    encoding_format:
-      ListDeploymentVersionsDeploymentsEncodingFormat$inboundSchema.optional(),
-    reasoningEffort:
-      ListDeploymentVersionsDeploymentsReasoningEffort$inboundSchema.optional(),
-    budgetTokens: z.number().optional(),
-    verbosity: ListDeploymentVersionsDeploymentsVerbosity$inboundSchema
-      .optional(),
-    thinkingLevel: ListDeploymentVersionsDeploymentsThinkingLevel$inboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "encoding_format": "encodingFormat",
-    });
-  });
+      thinkingLevel:
+        ListDeploymentVersionsDeploymentsThinkingLevel$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "encoding_format": "encodingFormat",
+      });
+    })
+  );
 
 export function listDeploymentVersionsDeploymentsModelParametersFromJSON(
   jsonString: string,
@@ -2314,32 +2427,36 @@ export function listDeploymentVersionsDeploymentsModelParametersFromJSON(
 
 /** @internal */
 export const ListDeploymentVersionsDeploymentsProvider$inboundSchema:
-  z.ZodNativeEnum<typeof ListDeploymentVersionsDeploymentsProvider> = z
-    .nativeEnum(ListDeploymentVersionsDeploymentsProvider);
+  z.ZodNativeEnum<typeof ListDeploymentVersionsDeploymentsProvider> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(ListDeploymentVersionsDeploymentsProvider)
+    );
 
 /** @internal */
 export const ListDeploymentVersionsFallbacks$inboundSchema: z.ZodType<
   ListDeploymentVersionsFallbacks,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  model: z.string(),
-  model_db_id: z.string(),
-  model_type: ListDeploymentVersionsDeploymentsModelType$inboundSchema,
-  model_parameters: z.lazy(() =>
-    ListDeploymentVersionsDeploymentsModelParameters$inboundSchema
-  ),
-  provider: ListDeploymentVersionsDeploymentsProvider$inboundSchema,
-  integration_id: z.nullable(z.string()).optional(),
-  version: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "model_db_id": "modelDbId",
-    "model_type": "modelType",
-    "model_parameters": "modelParameters",
-    "integration_id": "integrationId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model: z.string(),
+    model_db_id: z.string(),
+    model_type: ListDeploymentVersionsDeploymentsModelType$inboundSchema,
+    model_parameters: z.lazy(() =>
+      ListDeploymentVersionsDeploymentsModelParameters$inboundSchema
+    ),
+    provider: ListDeploymentVersionsDeploymentsProvider$inboundSchema,
+    integration_id: z.nullable(z.string()).optional(),
+    version: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "model_db_id": "modelDbId",
+      "model_type": "modelType",
+      "model_parameters": "modelParameters",
+      "integration_id": "integrationId",
+    });
+  })
+);
 
 export function listDeploymentVersionsFallbacksFromJSON(
   jsonString: string,
@@ -2354,14 +2471,16 @@ export function listDeploymentVersionsFallbacksFromJSON(
 /** @internal */
 export const ListDeploymentVersionsType$inboundSchema: z.ZodNativeEnum<
   typeof ListDeploymentVersionsType
-> = z.nativeEnum(ListDeploymentVersionsType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ListDeploymentVersionsType));
 
 /** @internal */
 export const ListDeploymentVersionsDeploymentsResponse200ApplicationJSONType$inboundSchema:
   z.ZodNativeEnum<
     typeof ListDeploymentVersionsDeploymentsResponse200ApplicationJSONType
-  > = z.nativeEnum(
-    ListDeploymentVersionsDeploymentsResponse200ApplicationJSONType,
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.nativeEnum(
+      ListDeploymentVersionsDeploymentsResponse200ApplicationJSONType,
+    )
   );
 
 /** @internal */
@@ -2369,13 +2488,15 @@ export const ListDeploymentVersionsParameters$inboundSchema: z.ZodType<
   ListDeploymentVersionsParameters,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type:
-    ListDeploymentVersionsDeploymentsResponse200ApplicationJSONType$inboundSchema,
-  properties: z.record(z.any()),
-  required: z.array(z.string()).optional(),
-  additionalProperties: z.literal(false).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type:
+      ListDeploymentVersionsDeploymentsResponse200ApplicationJSONType$inboundSchema,
+    properties: z.record(z.any()),
+    required: z.array(z.string()).optional(),
+    additionalProperties: z.literal(false).optional(),
+  })
+);
 
 export function listDeploymentVersionsParametersFromJSON(
   jsonString: string,
@@ -2392,12 +2513,14 @@ export const ListDeploymentVersionsFunction$inboundSchema: z.ZodType<
   ListDeploymentVersionsFunction,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string(),
-  description: z.string().optional(),
-  strict: z.boolean().optional(),
-  parameters: z.lazy(() => ListDeploymentVersionsParameters$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+    description: z.string().optional(),
+    strict: z.boolean().optional(),
+    parameters: z.lazy(() => ListDeploymentVersionsParameters$inboundSchema),
+  })
+);
 
 export function listDeploymentVersionsFunctionFromJSON(
   jsonString: string,
@@ -2414,16 +2537,18 @@ export const ListDeploymentVersionsTools$inboundSchema: z.ZodType<
   ListDeploymentVersionsTools,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  display_name: z.string().optional(),
-  type: ListDeploymentVersionsType$inboundSchema,
-  function: z.lazy(() => ListDeploymentVersionsFunction$inboundSchema),
-  id: z.number().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "display_name": "displayName",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    display_name: z.string().optional(),
+    type: ListDeploymentVersionsType$inboundSchema,
+    function: z.lazy(() => ListDeploymentVersionsFunction$inboundSchema),
+    id: z.number().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "display_name": "displayName",
+    });
+  })
+);
 
 export function listDeploymentVersionsToolsFromJSON(
   jsonString: string,
@@ -2440,16 +2565,18 @@ export const Variables$inboundSchema: z.ZodType<
   Variables,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  key: z.string(),
-  value: z.any().optional(),
-  is_pii: z.boolean().default(false),
-  description: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "is_pii": "isPii",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    key: z.string(),
+    value: z.any().optional(),
+    is_pii: z.boolean().default(false),
+    description: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "is_pii": "isPii",
+    });
+  })
+);
 
 export function variablesFromJSON(
   jsonString: string,
@@ -2464,17 +2591,21 @@ export function variablesFromJSON(
 /** @internal */
 export const ListDeploymentVersionsStatus$inboundSchema: z.ZodNativeEnum<
   typeof ListDeploymentVersionsStatus
-> = z.nativeEnum(ListDeploymentVersionsStatus);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(ListDeploymentVersionsStatus)
+);
 
 /** @internal */
 export const KnowledgeBaseStaticQuery$inboundSchema: z.ZodType<
   KnowledgeBaseStaticQuery,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("query"),
-  query: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("query"),
+    query: z.string(),
+  })
+);
 
 export function knowledgeBaseStaticQueryFromJSON(
   jsonString: string,
@@ -2491,9 +2622,11 @@ export const KnowledgeBaseLastUserMessage$inboundSchema: z.ZodType<
   KnowledgeBaseLastUserMessage,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("last_user_message"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("last_user_message"),
+  })
+);
 
 export function knowledgeBaseLastUserMessageFromJSON(
   jsonString: string,
@@ -2510,10 +2643,12 @@ export const KnowledgeBaseConfiguration$inboundSchema: z.ZodType<
   KnowledgeBaseConfiguration,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  z.lazy(() => KnowledgeBaseLastUserMessage$inboundSchema),
-  z.lazy(() => KnowledgeBaseStaticQuery$inboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => KnowledgeBaseLastUserMessage$inboundSchema),
+    z.lazy(() => KnowledgeBaseStaticQuery$inboundSchema),
+  ])
+);
 
 export function knowledgeBaseConfigurationFromJSON(
   jsonString: string,
@@ -2530,18 +2665,20 @@ export const ListDeploymentVersionsKnowledgeBases$inboundSchema: z.ZodType<
   ListDeploymentVersionsKnowledgeBases,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().default("01M7SYXWPZWY6PX3CQFWRSM7DM"),
-  knowledge_id: z.string(),
-  configuration: z.union([
-    z.lazy(() => KnowledgeBaseLastUserMessage$inboundSchema),
-    z.lazy(() => KnowledgeBaseStaticQuery$inboundSchema),
-  ]),
-}).transform((v) => {
-  return remap$(v, {
-    "knowledge_id": "knowledgeId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().default("01M805EHVFE6NAVBJERXVMN2RR"),
+    knowledge_id: z.string(),
+    configuration: z.union([
+      z.lazy(() => KnowledgeBaseLastUserMessage$inboundSchema),
+      z.lazy(() => KnowledgeBaseStaticQuery$inboundSchema),
+    ]),
+  }).transform((v) => {
+    return remap$(v, {
+      "knowledge_id": "knowledgeId",
+    });
+  })
+);
 
 export function listDeploymentVersionsKnowledgeBasesFromJSON(
   jsonString: string,
@@ -2556,24 +2693,28 @@ export function listDeploymentVersionsKnowledgeBasesFromJSON(
 
 /** @internal */
 export const ListDeploymentVersionsDeploymentsExecuteOn$inboundSchema:
-  z.ZodNativeEnum<typeof ListDeploymentVersionsDeploymentsExecuteOn> = z
-    .nativeEnum(ListDeploymentVersionsDeploymentsExecuteOn);
+  z.ZodNativeEnum<typeof ListDeploymentVersionsDeploymentsExecuteOn> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(ListDeploymentVersionsDeploymentsExecuteOn)
+    );
 
 /** @internal */
 export const ListDeploymentVersionsGuardrails$inboundSchema: z.ZodType<
   ListDeploymentVersionsGuardrails,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  sample_rate: z.number().default(50),
-  execute_on: ListDeploymentVersionsDeploymentsExecuteOn$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "sample_rate": "sampleRate",
-    "execute_on": "executeOn",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    sample_rate: z.number().default(50),
+    execute_on: ListDeploymentVersionsDeploymentsExecuteOn$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "sample_rate": "sampleRate",
+      "execute_on": "executeOn",
+    });
+  })
+);
 
 export function listDeploymentVersionsGuardrailsFromJSON(
   jsonString: string,
@@ -2588,23 +2729,27 @@ export function listDeploymentVersionsGuardrailsFromJSON(
 /** @internal */
 export const ListDeploymentVersionsExecuteOn$inboundSchema: z.ZodNativeEnum<
   typeof ListDeploymentVersionsExecuteOn
-> = z.nativeEnum(ListDeploymentVersionsExecuteOn);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(ListDeploymentVersionsExecuteOn)
+);
 
 /** @internal */
 export const ListDeploymentVersionsEvaluators$inboundSchema: z.ZodType<
   ListDeploymentVersionsEvaluators,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  sample_rate: z.number().default(50),
-  execute_on: ListDeploymentVersionsExecuteOn$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "sample_rate": "sampleRate",
-    "execute_on": "executeOn",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    sample_rate: z.number().default(50),
+    execute_on: ListDeploymentVersionsExecuteOn$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "sample_rate": "sampleRate",
+      "execute_on": "executeOn",
+    });
+  })
+);
 
 export function listDeploymentVersionsEvaluatorsFromJSON(
   jsonString: string,
@@ -2617,16 +2762,18 @@ export function listDeploymentVersionsEvaluatorsFromJSON(
 }
 
 /** @internal */
-export const CacheType$inboundSchema: z.ZodNativeEnum<typeof CacheType> = z
-  .nativeEnum(CacheType);
+export const CacheType$inboundSchema: z.ZodNativeEnum<typeof CacheType> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(CacheType));
 
 /** @internal */
-export const Cache2$inboundSchema: z.ZodType<Cache2, z.ZodTypeDef, unknown> = z
-  .object({
-    enabled: z.literal(true),
-    type: CacheType$inboundSchema,
-    ttl: z.number(),
-  });
+export const Cache2$inboundSchema: z.ZodType<Cache2, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      enabled: z.literal(true),
+      type: CacheType$inboundSchema,
+      ttl: z.number(),
+    })
+  );
 
 export function cache2FromJSON(
   jsonString: string,
@@ -2639,10 +2786,12 @@ export function cache2FromJSON(
 }
 
 /** @internal */
-export const Cache1$inboundSchema: z.ZodType<Cache1, z.ZodTypeDef, unknown> = z
-  .object({
-    enabled: z.literal(false),
-  });
+export const Cache1$inboundSchema: z.ZodType<Cache1, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      enabled: z.literal(false),
+    })
+  );
 
 export function cache1FromJSON(
   jsonString: string,
@@ -2659,10 +2808,12 @@ export const ListDeploymentVersionsCache$inboundSchema: z.ZodType<
   ListDeploymentVersionsCache,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  z.lazy(() => Cache2$inboundSchema),
-  z.lazy(() => Cache1$inboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => Cache2$inboundSchema),
+    z.lazy(() => Cache1$inboundSchema),
+  ])
+);
 
 export function listDeploymentVersionsCacheFromJSON(
   jsonString: string,
@@ -2677,41 +2828,45 @@ export function listDeploymentVersionsCacheFromJSON(
 /** @internal */
 export const GuardrailBehaviour$inboundSchema: z.ZodNativeEnum<
   typeof GuardrailBehaviour
-> = z.nativeEnum(GuardrailBehaviour);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(GuardrailBehaviour));
 
 /** @internal */
 export const ListDeploymentVersionsEngine$inboundSchema: z.ZodNativeEnum<
   typeof ListDeploymentVersionsEngine
-> = z.nativeEnum(ListDeploymentVersionsEngine);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(ListDeploymentVersionsEngine)
+);
 
 /** @internal */
 export const ListDeploymentVersionsSettings$inboundSchema: z.ZodType<
   ListDeploymentVersionsSettings,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  guardrails: z.array(
-    z.lazy(() => ListDeploymentVersionsGuardrails$inboundSchema),
-  ).optional(),
-  evaluators: z.array(
-    z.lazy(() => ListDeploymentVersionsEvaluators$inboundSchema),
-  ).optional(),
-  cache: z.union([
-    z.lazy(() => Cache2$inboundSchema),
-    z.lazy(() => Cache1$inboundSchema),
-  ]).optional(),
-  guardrailBehaviour: GuardrailBehaviour$inboundSchema.optional(),
-  engine: ListDeploymentVersionsEngine$inboundSchema.optional(),
-  input_masking: z.boolean().default(false),
-  system_masking: z.boolean().default(false),
-  output_masking: z.boolean().default(false),
-}).transform((v) => {
-  return remap$(v, {
-    "input_masking": "inputMasking",
-    "system_masking": "systemMasking",
-    "output_masking": "outputMasking",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    guardrails: z.array(
+      z.lazy(() => ListDeploymentVersionsGuardrails$inboundSchema),
+    ).optional(),
+    evaluators: z.array(
+      z.lazy(() => ListDeploymentVersionsEvaluators$inboundSchema),
+    ).optional(),
+    cache: z.union([
+      z.lazy(() => Cache2$inboundSchema),
+      z.lazy(() => Cache1$inboundSchema),
+    ]).optional(),
+    guardrailBehaviour: GuardrailBehaviour$inboundSchema.optional(),
+    engine: ListDeploymentVersionsEngine$inboundSchema.optional(),
+    input_masking: z.boolean().default(false),
+    system_masking: z.boolean().default(false),
+    output_masking: z.boolean().default(false),
+  }).transform((v) => {
+    return remap$(v, {
+      "input_masking": "inputMasking",
+      "system_masking": "systemMasking",
+      "output_masking": "outputMasking",
+    });
+  })
+);
 
 export function listDeploymentVersionsSettingsFromJSON(
   jsonString: string,
@@ -2728,39 +2883,45 @@ export const ListDeploymentVersionsData$inboundSchema: z.ZodType<
   ListDeploymentVersionsData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  _id: z.string(),
-  deployment_id: z.string(),
-  variant_id: z.string(),
-  prompt_config: z.lazy(() => ListDeploymentVersionsPromptConfig$inboundSchema),
-  fallbacks: z.array(
-    z.lazy(() => ListDeploymentVersionsFallbacks$inboundSchema),
-  ),
-  tools: z.array(z.lazy(() => ListDeploymentVersionsTools$inboundSchema)),
-  variables: z.array(z.lazy(() => Variables$inboundSchema)),
-  notes: z.string().optional(),
-  timestamp: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  retry_count: z.number().optional(),
-  version: z.string(),
-  description: z.string(),
-  status: ListDeploymentVersionsStatus$inboundSchema,
-  user_id: z.nullable(z.string()),
-  knowledge_bases: z.array(
-    z.lazy(() => ListDeploymentVersionsKnowledgeBases$inboundSchema),
-  ).optional(),
-  settings: z.lazy(() => ListDeploymentVersionsSettings$inboundSchema)
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "_id": "id",
-    "deployment_id": "deploymentId",
-    "variant_id": "variantId",
-    "prompt_config": "promptConfig",
-    "retry_count": "retryCount",
-    "user_id": "userId",
-    "knowledge_bases": "knowledgeBases",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    _id: z.string(),
+    deployment_id: z.string(),
+    variant_id: z.string(),
+    prompt_config: z.lazy(() =>
+      ListDeploymentVersionsPromptConfig$inboundSchema
+    ),
+    fallbacks: z.array(
+      z.lazy(() => ListDeploymentVersionsFallbacks$inboundSchema),
+    ),
+    tools: z.array(z.lazy(() => ListDeploymentVersionsTools$inboundSchema)),
+    variables: z.array(z.lazy(() => Variables$inboundSchema)),
+    notes: z.string().optional(),
+    timestamp: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    retry_count: z.number().optional(),
+    version: z.string(),
+    description: z.string(),
+    status: ListDeploymentVersionsStatus$inboundSchema,
+    user_id: z.nullable(z.string()),
+    knowledge_bases: z.array(
+      z.lazy(() => ListDeploymentVersionsKnowledgeBases$inboundSchema),
+    ).optional(),
+    settings: z.lazy(() => ListDeploymentVersionsSettings$inboundSchema)
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "_id": "id",
+      "deployment_id": "deploymentId",
+      "variant_id": "variantId",
+      "prompt_config": "promptConfig",
+      "retry_count": "retryCount",
+      "user_id": "userId",
+      "knowledge_bases": "knowledgeBases",
+    });
+  })
+);
 
 export function listDeploymentVersionsDataFromJSON(
   jsonString: string,
@@ -2777,15 +2938,17 @@ export const ListDeploymentVersionsResponseBody$inboundSchema: z.ZodType<
   ListDeploymentVersionsResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: ListDeploymentVersionsObject$inboundSchema,
-  data: z.array(z.lazy(() => ListDeploymentVersionsData$inboundSchema)),
-  has_more: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    "has_more": "hasMore",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: ListDeploymentVersionsObject$inboundSchema,
+    data: z.array(z.lazy(() => ListDeploymentVersionsData$inboundSchema)),
+    has_more: z.boolean(),
+  }).transform((v) => {
+    return remap$(v, {
+      "has_more": "hasMore",
+    });
+  })
+);
 
 export function listDeploymentVersionsResponseBodyFromJSON(
   jsonString: string,

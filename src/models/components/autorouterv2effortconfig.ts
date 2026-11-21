@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -40,23 +40,25 @@ export const AutoRouterV2EffortConfig$inboundSchema: z.ZodType<
   AutoRouterV2EffortConfig,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  aa_index_is_estimated: z.boolean().optional(),
-  aa_index_version: z.string().optional(),
-  aa_is_reasoning: z.boolean().optional(),
-  aa_reasoning_effort: z.string().optional(),
-  aa_slug: z.string().optional(),
-  intelligence_index: z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    "aa_index_is_estimated": "aaIndexIsEstimated",
-    "aa_index_version": "aaIndexVersion",
-    "aa_is_reasoning": "aaIsReasoning",
-    "aa_reasoning_effort": "aaReasoningEffort",
-    "aa_slug": "aaSlug",
-    "intelligence_index": "intelligenceIndex",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    aa_index_is_estimated: z.boolean().optional(),
+    aa_index_version: z.string().optional(),
+    aa_is_reasoning: z.boolean().optional(),
+    aa_reasoning_effort: z.string().optional(),
+    aa_slug: z.string().optional(),
+    intelligence_index: z.number(),
+  }).transform((v) => {
+    return remap$(v, {
+      "aa_index_is_estimated": "aaIndexIsEstimated",
+      "aa_index_version": "aaIndexVersion",
+      "aa_is_reasoning": "aaIsReasoning",
+      "aa_reasoning_effort": "aaReasoningEffort",
+      "aa_slug": "aaSlug",
+      "intelligence_index": "intelligenceIndex",
+    });
+  })
+);
 /** @internal */
 export type AutoRouterV2EffortConfig$Outbound = {
   aa_index_is_estimated?: boolean | undefined;
@@ -72,23 +74,25 @@ export const AutoRouterV2EffortConfig$outboundSchema: z.ZodType<
   AutoRouterV2EffortConfig$Outbound,
   z.ZodTypeDef,
   AutoRouterV2EffortConfig
-> = z.object({
-  aaIndexIsEstimated: z.boolean().optional(),
-  aaIndexVersion: z.string().optional(),
-  aaIsReasoning: z.boolean().optional(),
-  aaReasoningEffort: z.string().optional(),
-  aaSlug: z.string().optional(),
-  intelligenceIndex: z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    aaIndexIsEstimated: "aa_index_is_estimated",
-    aaIndexVersion: "aa_index_version",
-    aaIsReasoning: "aa_is_reasoning",
-    aaReasoningEffort: "aa_reasoning_effort",
-    aaSlug: "aa_slug",
-    intelligenceIndex: "intelligence_index",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    aaIndexIsEstimated: z.boolean().optional(),
+    aaIndexVersion: z.string().optional(),
+    aaIsReasoning: z.boolean().optional(),
+    aaReasoningEffort: z.string().optional(),
+    aaSlug: z.string().optional(),
+    intelligenceIndex: z.number(),
+  }).transform((v) => {
+    return remap$(v, {
+      aaIndexIsEstimated: "aa_index_is_estimated",
+      aaIndexVersion: "aa_index_version",
+      aaIsReasoning: "aa_is_reasoning",
+      aaReasoningEffort: "aa_reasoning_effort",
+      aaSlug: "aa_slug",
+      intelligenceIndex: "intelligence_index",
+    });
+  })
+);
 
 export function autoRouterV2EffortConfigToJSON(
   autoRouterV2EffortConfig: AutoRouterV2EffortConfig,

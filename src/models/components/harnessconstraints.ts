@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import {
   WallClockUnit,
   WallClockUnit$outboundSchema,
@@ -31,20 +32,22 @@ export const HarnessConstraints$outboundSchema: z.ZodType<
   HarnessConstraints$Outbound,
   z.ZodTypeDef,
   HarnessConstraints
-> = z.object({
-  wallClockValue: z.number().int().optional(),
-  wallClockUnit: WallClockUnit$outboundSchema.optional(),
-  spendCapUsd: z.number().optional(),
-  spendCapTokens: z.string().optional(),
-  concurrency: z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    wallClockValue: "wall_clock_value",
-    wallClockUnit: "wall_clock_unit",
-    spendCapUsd: "spend_cap_usd",
-    spendCapTokens: "spend_cap_tokens",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    wallClockValue: z.number().int().optional(),
+    wallClockUnit: WallClockUnit$outboundSchema.optional(),
+    spendCapUsd: z.number().optional(),
+    spendCapTokens: z.string().optional(),
+    concurrency: z.number().int().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      wallClockValue: "wall_clock_value",
+      wallClockUnit: "wall_clock_unit",
+      spendCapUsd: "spend_cap_usd",
+      spendCapTokens: "spend_cap_tokens",
+    });
+  })
+);
 
 export function harnessConstraintsToJSON(
   harnessConstraints: HarnessConstraints,

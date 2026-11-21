@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type PatchReviewCellRequest = {
   /**
@@ -21,9 +22,11 @@ export const PatchReviewCellRequest$outboundSchema: z.ZodType<
   PatchReviewCellRequest$Outbound,
   z.ZodTypeDef,
   PatchReviewCellRequest
-> = z.object({
-  value: z.record(z.any()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    value: z.record(z.any()).optional(),
+  })
+);
 
 export function patchReviewCellRequestToJSON(
   patchReviewCellRequest: PatchReviewCellRequest,

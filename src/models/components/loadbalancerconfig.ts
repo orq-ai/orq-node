@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import {
   LoadBalancerModelConfig,
@@ -34,7 +35,7 @@ export type LoadBalancerConfig = {
 /** @internal */
 export const LoadBalancerConfigType$outboundSchema: z.ZodNativeEnum<
   typeof LoadBalancerConfigType
-> = z.nativeEnum(LoadBalancerConfigType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(LoadBalancerConfigType));
 
 /** @internal */
 export type LoadBalancerConfig$Outbound = {
@@ -47,10 +48,12 @@ export const LoadBalancerConfig$outboundSchema: z.ZodType<
   LoadBalancerConfig$Outbound,
   z.ZodTypeDef,
   LoadBalancerConfig
-> = z.object({
-  models: z.nullable(z.array(LoadBalancerModelConfig$outboundSchema)),
-  type: LoadBalancerConfigType$outboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    models: z.nullable(z.array(LoadBalancerModelConfig$outboundSchema)),
+    type: LoadBalancerConfigType$outboundSchema,
+  })
+);
 
 export function loadBalancerConfigToJSON(
   loadBalancerConfig: LoadBalancerConfig,

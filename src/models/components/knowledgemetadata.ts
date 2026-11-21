@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -21,21 +21,23 @@ export const KnowledgeMetadata$inboundSchema: z.ZodType<
   KnowledgeMetadata,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  word_count: z.number().int().optional(),
-  document_count: z.number().int().optional(),
-  sentences_count: z.number().int().optional(),
-  support_enabled: z.boolean().optional(),
-  unique_metadata_fields: z.array(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "word_count": "wordCount",
-    "document_count": "documentCount",
-    "sentences_count": "sentencesCount",
-    "support_enabled": "supportEnabled",
-    "unique_metadata_fields": "uniqueMetadataFields",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    word_count: z.number().int().optional(),
+    document_count: z.number().int().optional(),
+    sentences_count: z.number().int().optional(),
+    support_enabled: z.boolean().optional(),
+    unique_metadata_fields: z.array(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "word_count": "wordCount",
+      "document_count": "documentCount",
+      "sentences_count": "sentencesCount",
+      "support_enabled": "supportEnabled",
+      "unique_metadata_fields": "uniqueMetadataFields",
+    });
+  })
+);
 
 export function knowledgeMetadataFromJSON(
   jsonString: string,

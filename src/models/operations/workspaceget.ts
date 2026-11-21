@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type WorkspaceGetRequest = {
   key: string;
@@ -18,9 +19,11 @@ export const WorkspaceGetRequest$outboundSchema: z.ZodType<
   WorkspaceGetRequest$Outbound,
   z.ZodTypeDef,
   WorkspaceGetRequest
-> = z.object({
-  key: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    key: z.string(),
+  })
+);
 
 export function workspaceGetRequestToJSON(
   workspaceGetRequest: WorkspaceGetRequest,

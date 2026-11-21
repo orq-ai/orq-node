@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type PolicyDeleteRequest = {
   /**
@@ -22,13 +23,15 @@ export const PolicyDeleteRequest$outboundSchema: z.ZodType<
   PolicyDeleteRequest$Outbound,
   z.ZodTypeDef,
   PolicyDeleteRequest
-> = z.object({
-  policyId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    policyId: "policy_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    policyId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      policyId: "policy_id",
+    });
+  })
+);
 
 export function policyDeleteRequestToJSON(
   policyDeleteRequest: PolicyDeleteRequest,

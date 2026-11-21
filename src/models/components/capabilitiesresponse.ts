@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { EntityList, EntityList$inboundSchema } from "./entitylist.js";
@@ -65,25 +65,27 @@ export const CapabilitiesResponse$inboundSchema: z.ZodType<
   CapabilitiesResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  languages: z.array(z.string()).optional(),
-  base_entities: z.array(z.string()).optional(),
-  all_entities: z.array(z.string()).optional(),
-  regions: z.array(z.string()).optional(),
-  region_entities: z.record(EntityList$inboundSchema).optional(),
-  entity_thresholds: z.record(z.number()).optional(),
-  default_threshold: z.number().optional(),
-  max_text_chars: z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "base_entities": "baseEntities",
-    "all_entities": "allEntities",
-    "region_entities": "regionEntities",
-    "entity_thresholds": "entityThresholds",
-    "default_threshold": "defaultThreshold",
-    "max_text_chars": "maxTextChars",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    languages: z.array(z.string()).optional(),
+    base_entities: z.array(z.string()).optional(),
+    all_entities: z.array(z.string()).optional(),
+    regions: z.array(z.string()).optional(),
+    region_entities: z.record(EntityList$inboundSchema).optional(),
+    entity_thresholds: z.record(z.number()).optional(),
+    default_threshold: z.number().optional(),
+    max_text_chars: z.number().int().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "base_entities": "baseEntities",
+      "all_entities": "allEntities",
+      "region_entities": "regionEntities",
+      "entity_thresholds": "entityThresholds",
+      "default_threshold": "defaultThreshold",
+      "max_text_chars": "maxTextChars",
+    });
+  })
+);
 
 export function capabilitiesResponseFromJSON(
   jsonString: string,

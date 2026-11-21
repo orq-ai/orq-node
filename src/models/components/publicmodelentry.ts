@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -42,23 +42,25 @@ export type PublicModelEntry = {
 /** @internal */
 export const PublicModelEntryObject$inboundSchema: z.ZodNativeEnum<
   typeof PublicModelEntryObject
-> = z.nativeEnum(PublicModelEntryObject);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(PublicModelEntryObject));
 
 /** @internal */
 export const PublicModelEntry$inboundSchema: z.ZodType<
   PublicModelEntry,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  created: z.number().int(),
-  id: z.string(),
-  object: PublicModelEntryObject$inboundSchema,
-  owned_by: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "owned_by": "ownedBy",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    created: z.number().int(),
+    id: z.string(),
+    object: PublicModelEntryObject$inboundSchema,
+    owned_by: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "owned_by": "ownedBy",
+    });
+  })
+);
 
 export function publicModelEntryFromJSON(
   jsonString: string,

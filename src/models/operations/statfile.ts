@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type StatFileRequest = {
   fileSystemKey: string;
@@ -21,14 +22,16 @@ export const StatFileRequest$outboundSchema: z.ZodType<
   StatFileRequest$Outbound,
   z.ZodTypeDef,
   StatFileRequest
-> = z.object({
-  fileSystemKey: z.string(),
-  path: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    fileSystemKey: "file_system_key",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    fileSystemKey: z.string(),
+    path: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      fileSystemKey: "file_system_key",
+    });
+  })
+);
 
 export function statFileRequestToJSON(
   statFileRequest: StatFileRequest,

@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type ModelValidateRequestBody = {
   apiKey: string;
@@ -31,22 +32,24 @@ export const ModelValidateRequestBody$outboundSchema: z.ZodType<
   ModelValidateRequestBody$Outbound,
   z.ZodTypeDef,
   ModelValidateRequestBody
-> = z.object({
-  apiKey: z.string(),
-  apiVersion: z.string().optional(),
-  baseUrl: z.string().optional(),
-  deploymentName: z.string().optional(),
-  endpoint: z.string().optional(),
-  provider: z.string(),
-  subtype: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    apiKey: "api_key",
-    apiVersion: "api_version",
-    baseUrl: "base_url",
-    deploymentName: "deployment_name",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    apiKey: z.string(),
+    apiVersion: z.string().optional(),
+    baseUrl: z.string().optional(),
+    deploymentName: z.string().optional(),
+    endpoint: z.string().optional(),
+    provider: z.string(),
+    subtype: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      apiKey: "api_key",
+      apiVersion: "api_version",
+      baseUrl: "base_url",
+      deploymentName: "deployment_name",
+    });
+  })
+);
 
 export function modelValidateRequestBodyToJSON(
   modelValidateRequestBody: ModelValidateRequestBody,

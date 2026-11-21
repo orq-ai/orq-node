@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -27,11 +27,13 @@ export const AutoRouterV2CreatorConfig$inboundSchema: z.ZodType<
   AutoRouterV2CreatorConfig,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  name: z.string(),
-  slug: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    name: z.string(),
+    slug: z.string().optional(),
+  })
+);
 /** @internal */
 export type AutoRouterV2CreatorConfig$Outbound = {
   id: string;
@@ -44,11 +46,13 @@ export const AutoRouterV2CreatorConfig$outboundSchema: z.ZodType<
   AutoRouterV2CreatorConfig$Outbound,
   z.ZodTypeDef,
   AutoRouterV2CreatorConfig
-> = z.object({
-  id: z.string(),
-  name: z.string(),
-  slug: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    name: z.string(),
+    slug: z.string().optional(),
+  })
+);
 
 export function autoRouterV2CreatorConfigToJSON(
   autoRouterV2CreatorConfig: AutoRouterV2CreatorConfig,

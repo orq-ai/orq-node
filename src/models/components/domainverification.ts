@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -29,28 +29,34 @@ export const DomainVerification$inboundSchema: z.ZodType<
   DomainVerification,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  domain: z.string(),
-  status: DomainVerificationStatus$inboundSchema,
-  txt_name: z.string(),
-  txt_value: z.string(),
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  expires_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  verified_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  created_by_id: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "txt_name": "txtName",
-    "txt_value": "txtValue",
-    "created_at": "createdAt",
-    "expires_at": "expiresAt",
-    "verified_at": "verifiedAt",
-    "created_by_id": "createdById",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    domain: z.string(),
+    status: DomainVerificationStatus$inboundSchema,
+    txt_name: z.string(),
+    txt_value: z.string(),
+    created_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    expires_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ).optional(),
+    verified_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ).optional(),
+    created_by_id: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "txt_name": "txtName",
+      "txt_value": "txtValue",
+      "created_at": "createdAt",
+      "expires_at": "expiresAt",
+      "verified_at": "verifiedAt",
+      "created_by_id": "createdById",
+    });
+  })
+);
 
 export function domainVerificationFromJSON(
   jsonString: string,

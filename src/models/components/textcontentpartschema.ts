@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -95,9 +95,8 @@ export type TextContentPartSchema = {
 };
 
 /** @internal */
-export const Type$inboundSchema: z.ZodNativeEnum<typeof Type> = z.nativeEnum(
-  Type,
-);
+export const Type$inboundSchema: z.ZodNativeEnum<typeof Type> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Type));
 /** @internal */
 export const Type$outboundSchema: z.ZodNativeEnum<typeof Type> =
   Type$inboundSchema;
@@ -105,7 +104,7 @@ export const Type$outboundSchema: z.ZodNativeEnum<typeof Type> =
 /** @internal */
 export const TextContentPartSchemaType$inboundSchema: z.ZodNativeEnum<
   typeof TextContentPartSchemaType
-> = z.nativeEnum(TextContentPartSchemaType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(TextContentPartSchemaType));
 /** @internal */
 export const TextContentPartSchemaType$outboundSchema: z.ZodNativeEnum<
   typeof TextContentPartSchemaType
@@ -114,7 +113,7 @@ export const TextContentPartSchemaType$outboundSchema: z.ZodNativeEnum<
 /** @internal */
 export const TextContentPartSchemaTtl$inboundSchema: z.ZodNativeEnum<
   typeof TextContentPartSchemaTtl
-> = z.nativeEnum(TextContentPartSchemaTtl);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(TextContentPartSchemaTtl));
 /** @internal */
 export const TextContentPartSchemaTtl$outboundSchema: z.ZodNativeEnum<
   typeof TextContentPartSchemaTtl
@@ -125,10 +124,12 @@ export const CacheControl$inboundSchema: z.ZodType<
   CacheControl,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: TextContentPartSchemaType$inboundSchema,
-  ttl: TextContentPartSchemaTtl$inboundSchema.default("5m"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: TextContentPartSchemaType$inboundSchema,
+    ttl: TextContentPartSchemaTtl$inboundSchema.default("5m"),
+  })
+);
 /** @internal */
 export type CacheControl$Outbound = {
   type: string;
@@ -140,10 +141,12 @@ export const CacheControl$outboundSchema: z.ZodType<
   CacheControl$Outbound,
   z.ZodTypeDef,
   CacheControl
-> = z.object({
-  type: TextContentPartSchemaType$outboundSchema,
-  ttl: TextContentPartSchemaTtl$outboundSchema.default("5m"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: TextContentPartSchemaType$outboundSchema,
+    ttl: TextContentPartSchemaTtl$outboundSchema.default("5m"),
+  })
+);
 
 export function cacheControlToJSON(cacheControl: CacheControl): string {
   return JSON.stringify(CacheControl$outboundSchema.parse(cacheControl));
@@ -163,15 +166,17 @@ export const TextContentPartSchema$inboundSchema: z.ZodType<
   TextContentPartSchema,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: Type$inboundSchema,
-  text: z.string(),
-  cache_control: z.lazy(() => CacheControl$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "cache_control": "cacheControl",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: Type$inboundSchema,
+    text: z.string(),
+    cache_control: z.lazy(() => CacheControl$inboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "cache_control": "cacheControl",
+    });
+  })
+);
 /** @internal */
 export type TextContentPartSchema$Outbound = {
   type: string;
@@ -184,15 +189,17 @@ export const TextContentPartSchema$outboundSchema: z.ZodType<
   TextContentPartSchema$Outbound,
   z.ZodTypeDef,
   TextContentPartSchema
-> = z.object({
-  type: Type$outboundSchema,
-  text: z.string(),
-  cacheControl: z.lazy(() => CacheControl$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    cacheControl: "cache_control",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: Type$outboundSchema,
+    text: z.string(),
+    cacheControl: z.lazy(() => CacheControl$outboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      cacheControl: "cache_control",
+    });
+  })
+);
 
 export function textContentPartSchemaToJSON(
   textContentPartSchema: TextContentPartSchema,

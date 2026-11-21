@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -130,54 +130,56 @@ export type Alert = {
 };
 
 /** @internal */
-export const Signal$inboundSchema: z.ZodNativeEnum<typeof Signal> = z
-  .nativeEnum(Signal);
+export const Signal$inboundSchema: z.ZodNativeEnum<typeof Signal> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Signal));
 
 /** @internal */
-export const AlertStatus$inboundSchema: z.ZodNativeEnum<typeof AlertStatus> = z
-  .nativeEnum(AlertStatus);
+export const AlertStatus$inboundSchema: z.ZodNativeEnum<typeof AlertStatus> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(AlertStatus));
 
 /** @internal */
-export const Alert$inboundSchema: z.ZodType<Alert, z.ZodTypeDef, unknown> = z
-  .object({
-    alert_id: z.string(),
-    display_name: z.string(),
-    description: z.string(),
-    project_id: z.string(),
-    signal: Signal$inboundSchema,
-    query: AlertQuery$inboundSchema,
-    condition: AlertCondition$inboundSchema,
-    notifier_ids: z.array(z.string()),
-    enabled: z.boolean(),
-    status: AlertStatus$inboundSchema,
-    last_triggered_at: z.nullable(
-      z.string().datetime({ offset: true }).transform(v => new Date(v)),
-    ).optional(),
-    recent_runs: z.array(AlertRun$inboundSchema).optional(),
-    created_at: z.string().datetime({ offset: true }).transform(v =>
-      new Date(v)
-    ),
-    updated_at: z.string().datetime({ offset: true }).transform(v =>
-      new Date(v)
-    ),
-    created_by_id: z.string(),
-    updated_by_id: z.string(),
-    display: z.nullable(AlertDisplay$inboundSchema).optional(),
-    scope: AlertScope$inboundSchema,
-  }).transform((v) => {
-    return remap$(v, {
-      "alert_id": "alertId",
-      "display_name": "displayName",
-      "project_id": "projectId",
-      "notifier_ids": "notifierIds",
-      "last_triggered_at": "lastTriggeredAt",
-      "recent_runs": "recentRuns",
-      "created_at": "createdAt",
-      "updated_at": "updatedAt",
-      "created_by_id": "createdById",
-      "updated_by_id": "updatedById",
-    });
-  });
+export const Alert$inboundSchema: z.ZodType<Alert, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      alert_id: z.string(),
+      display_name: z.string(),
+      description: z.string(),
+      project_id: z.string(),
+      signal: Signal$inboundSchema,
+      query: AlertQuery$inboundSchema,
+      condition: AlertCondition$inboundSchema,
+      notifier_ids: z.array(z.string()),
+      enabled: z.boolean(),
+      status: AlertStatus$inboundSchema,
+      last_triggered_at: z.nullable(
+        z.string().datetime({ offset: true }).transform(v => new Date(v)),
+      ).optional(),
+      recent_runs: z.array(AlertRun$inboundSchema).optional(),
+      created_at: z.string().datetime({ offset: true }).transform(v =>
+        new Date(v)
+      ),
+      updated_at: z.string().datetime({ offset: true }).transform(v =>
+        new Date(v)
+      ),
+      created_by_id: z.string(),
+      updated_by_id: z.string(),
+      display: z.nullable(AlertDisplay$inboundSchema).optional(),
+      scope: AlertScope$inboundSchema,
+    }).transform((v) => {
+      return remap$(v, {
+        "alert_id": "alertId",
+        "display_name": "displayName",
+        "project_id": "projectId",
+        "notifier_ids": "notifierIds",
+        "last_triggered_at": "lastTriggeredAt",
+        "recent_runs": "recentRuns",
+        "created_at": "createdAt",
+        "updated_at": "updatedAt",
+        "created_by_id": "createdById",
+        "updated_by_id": "updatedById",
+      });
+    })
+  );
 
 export function alertFromJSON(
   jsonString: string,

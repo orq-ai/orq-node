@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -47,18 +47,20 @@ export const PolicyListRequest$outboundSchema: z.ZodType<
   PolicyListRequest$Outbound,
   z.ZodTypeDef,
   PolicyListRequest
-> = z.object({
-  limit: z.number().int().default(10),
-  startingAfter: z.string().optional(),
-  endingBefore: z.string().optional(),
-  projectId: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    startingAfter: "starting_after",
-    endingBefore: "ending_before",
-    projectId: "project_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    limit: z.number().int().default(10),
+    startingAfter: z.string().optional(),
+    endingBefore: z.string().optional(),
+    projectId: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      startingAfter: "starting_after",
+      endingBefore: "ending_before",
+      projectId: "project_id",
+    });
+  })
+);
 
 export function policyListRequestToJSON(
   policyListRequest: PolicyListRequest,
@@ -73,15 +75,17 @@ export const PolicyListResponseBody$inboundSchema: z.ZodType<
   PolicyListResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.nullable(z.array(components.Policy$inboundSchema)),
-  has_more: z.boolean(),
-  object: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "has_more": "hasMore",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.nullable(z.array(components.Policy$inboundSchema)),
+    has_more: z.boolean(),
+    object: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "has_more": "hasMore",
+    });
+  })
+);
 
 export function policyListResponseBodyFromJSON(
   jsonString: string,

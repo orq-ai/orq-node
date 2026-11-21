@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -114,7 +114,9 @@ export const PostV2FeedbackValue$outboundSchema: z.ZodType<
   PostV2FeedbackValue$Outbound,
   z.ZodTypeDef,
   PostV2FeedbackValue
-> = z.union([z.string(), z.number(), z.array(z.string())]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.number(), z.array(z.string())])
+);
 
 export function postV2FeedbackValueToJSON(
   postV2FeedbackValue: PostV2FeedbackValue,
@@ -125,8 +127,8 @@ export function postV2FeedbackValueToJSON(
 }
 
 /** @internal */
-export const Product$outboundSchema: z.ZodNativeEnum<typeof Product> = z
-  .nativeEnum(Product);
+export const Product$outboundSchema: z.ZodNativeEnum<typeof Product> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Product));
 
 /** @internal */
 export type PostV2FeedbackRequestBody$Outbound = {
@@ -142,18 +144,20 @@ export const PostV2FeedbackRequestBody$outboundSchema: z.ZodType<
   PostV2FeedbackRequestBody$Outbound,
   z.ZodTypeDef,
   PostV2FeedbackRequestBody
-> = z.object({
-  id: z.string().optional(),
-  field: z.string(),
-  value: z.union([z.string(), z.number(), z.array(z.string())]),
-  traceId: z.string(),
-  product: Product$outboundSchema.default("deployments"),
-}).transform((v) => {
-  return remap$(v, {
-    field: "property",
-    traceId: "trace_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    field: z.string(),
+    value: z.union([z.string(), z.number(), z.array(z.string())]),
+    traceId: z.string(),
+    product: Product$outboundSchema.default("deployments"),
+  }).transform((v) => {
+    return remap$(v, {
+      field: "property",
+      traceId: "trace_id",
+    });
+  })
+);
 
 export function postV2FeedbackRequestBodyToJSON(
   postV2FeedbackRequestBody: PostV2FeedbackRequestBody,
@@ -168,7 +172,9 @@ export const PostV2FeedbackFeedbackValue$inboundSchema: z.ZodType<
   PostV2FeedbackFeedbackValue,
   z.ZodTypeDef,
   unknown
-> = z.union([z.string(), z.number(), z.array(z.string())]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.number(), z.array(z.string())])
+);
 
 export function postV2FeedbackFeedbackValueFromJSON(
   jsonString: string,
@@ -183,24 +189,26 @@ export function postV2FeedbackFeedbackValueFromJSON(
 /** @internal */
 export const PostV2FeedbackProduct$inboundSchema: z.ZodNativeEnum<
   typeof PostV2FeedbackProduct
-> = z.nativeEnum(PostV2FeedbackProduct);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(PostV2FeedbackProduct));
 
 /** @internal */
 export const PostV2FeedbackResponseBody$inboundSchema: z.ZodType<
   PostV2FeedbackResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  property: z.string(),
-  value: z.union([z.string(), z.number(), z.array(z.string())]),
-  trace_id: z.string(),
-  product: PostV2FeedbackProduct$inboundSchema.default("deployments"),
-}).transform((v) => {
-  return remap$(v, {
-    "trace_id": "traceId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    property: z.string(),
+    value: z.union([z.string(), z.number(), z.array(z.string())]),
+    trace_id: z.string(),
+    product: PostV2FeedbackProduct$inboundSchema.default("deployments"),
+  }).transform((v) => {
+    return remap$(v, {
+      "trace_id": "traceId",
+    });
+  })
+);
 
 export function postV2FeedbackResponseBodyFromJSON(
   jsonString: string,

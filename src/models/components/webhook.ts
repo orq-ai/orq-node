@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -76,34 +76,40 @@ export type Webhook = {
 };
 
 /** @internal */
-export const ContentType$inboundSchema: z.ZodNativeEnum<typeof ContentType> = z
-  .nativeEnum(ContentType);
+export const ContentType$inboundSchema: z.ZodNativeEnum<typeof ContentType> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ContentType));
 
 /** @internal */
 export const Webhook$inboundSchema: z.ZodType<Webhook, z.ZodTypeDef, unknown> =
-  z.object({
-    _id: z.string(),
-    url: z.string(),
-    content_type: ContentType$inboundSchema,
-    display_name: z.string(),
-    events: z.array(z.string()),
-    secret: z.string(),
-    enabled: z.boolean().optional(),
-    failure_count: z.number().int().optional(),
-    created_by_id: z.string(),
-    updated_by_id: z.string(),
-    created: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-    updated: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  }).transform((v) => {
-    return remap$(v, {
-      "_id": "id",
-      "content_type": "contentType",
-      "display_name": "displayName",
-      "failure_count": "failureCount",
-      "created_by_id": "createdById",
-      "updated_by_id": "updatedById",
-    });
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      _id: z.string(),
+      url: z.string(),
+      content_type: ContentType$inboundSchema,
+      display_name: z.string(),
+      events: z.array(z.string()),
+      secret: z.string(),
+      enabled: z.boolean().optional(),
+      failure_count: z.number().int().optional(),
+      created_by_id: z.string(),
+      updated_by_id: z.string(),
+      created: z.string().datetime({ offset: true }).transform(v =>
+        new Date(v)
+      ),
+      updated: z.string().datetime({ offset: true }).transform(v =>
+        new Date(v)
+      ),
+    }).transform((v) => {
+      return remap$(v, {
+        "_id": "id",
+        "content_type": "contentType",
+        "display_name": "displayName",
+        "failure_count": "failureCount",
+        "created_by_id": "createdById",
+        "updated_by_id": "updatedById",
+      });
+    })
+  );
 
 export function webhookFromJSON(
   jsonString: string,

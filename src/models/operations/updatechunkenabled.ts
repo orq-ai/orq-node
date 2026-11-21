@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import * as components from "../components/index.js";
 
 export type UpdateChunkEnabledRequest = {
@@ -27,20 +28,22 @@ export const UpdateChunkEnabledRequest$outboundSchema: z.ZodType<
   UpdateChunkEnabledRequest$Outbound,
   z.ZodTypeDef,
   UpdateChunkEnabledRequest
-> = z.object({
-  knowledgeId: z.string(),
-  datasourceId: z.string(),
-  chunkId: z.string(),
-  chunksServiceSetEnabledRequest:
-    components.ChunksServiceSetEnabledRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    knowledgeId: "knowledge_id",
-    datasourceId: "datasource_id",
-    chunkId: "chunk_id",
-    chunksServiceSetEnabledRequest: "ChunksServiceSetEnabledRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    knowledgeId: z.string(),
+    datasourceId: z.string(),
+    chunkId: z.string(),
+    chunksServiceSetEnabledRequest:
+      components.ChunksServiceSetEnabledRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      knowledgeId: "knowledge_id",
+      datasourceId: "datasource_id",
+      chunkId: "chunk_id",
+      chunksServiceSetEnabledRequest: "ChunksServiceSetEnabledRequest",
+    });
+  })
+);
 
 export function updateChunkEnabledRequestToJSON(
   updateChunkEnabledRequest: UpdateChunkEnabledRequest,

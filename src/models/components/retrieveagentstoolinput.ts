@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 /**
  * Retrieves available agents in the system
@@ -32,15 +33,17 @@ export const RetrieveAgentsToolInput$outboundSchema: z.ZodType<
   RetrieveAgentsToolInput$Outbound,
   z.ZodTypeDef,
   RetrieveAgentsToolInput
-> = z.object({
-  type: z.literal("retrieve_agents"),
-  requiresApproval: z.boolean().optional(),
-  configuration: z.record(z.any()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    requiresApproval: "requires_approval",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("retrieve_agents"),
+    requiresApproval: z.boolean().optional(),
+    configuration: z.record(z.any()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      requiresApproval: "requires_approval",
+    });
+  })
+);
 
 export function retrieveAgentsToolInputToJSON(
   retrieveAgentsToolInput: RetrieveAgentsToolInput,

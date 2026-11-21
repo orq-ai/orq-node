@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type UpsertChunkMetadata = string | number | boolean;
 
@@ -31,7 +32,9 @@ export const UpsertChunkMetadata$outboundSchema: z.ZodType<
   UpsertChunkMetadata$Outbound,
   z.ZodTypeDef,
   UpsertChunkMetadata
-> = z.union([z.string(), z.number(), z.boolean()]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.number(), z.boolean()])
+);
 
 export function upsertChunkMetadataToJSON(
   upsertChunkMetadata: UpsertChunkMetadata,
@@ -54,16 +57,19 @@ export const UpsertChunk$outboundSchema: z.ZodType<
   UpsertChunk$Outbound,
   z.ZodTypeDef,
   UpsertChunk
-> = z.object({
-  text: z.string(),
-  embedding: z.array(z.number()).optional(),
-  metadata: z.record(z.union([z.string(), z.number(), z.boolean()])).optional(),
-  id: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    id: "_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    text: z.string(),
+    embedding: z.array(z.number()).optional(),
+    metadata: z.record(z.union([z.string(), z.number(), z.boolean()]))
+      .optional(),
+    id: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      id: "_id",
+    });
+  })
+);
 
 export function upsertChunkToJSON(upsertChunk: UpsertChunk): string {
   return JSON.stringify(UpsertChunk$outboundSchema.parse(upsertChunk));

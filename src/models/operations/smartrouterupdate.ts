@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import * as components from "../components/index.js";
 
 export type SmartRouterUpdateRequest = {
@@ -22,15 +23,18 @@ export const SmartRouterUpdateRequest$outboundSchema: z.ZodType<
   SmartRouterUpdateRequest$Outbound,
   z.ZodTypeDef,
   SmartRouterUpdateRequest
-> = z.object({
-  smartRouterId: z.string(),
-  updateSmartRouterRequest: components.UpdateSmartRouterRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    smartRouterId: "smart_router_id",
-    updateSmartRouterRequest: "UpdateSmartRouterRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    smartRouterId: z.string(),
+    updateSmartRouterRequest:
+      components.UpdateSmartRouterRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      smartRouterId: "smart_router_id",
+      updateSmartRouterRequest: "UpdateSmartRouterRequest",
+    });
+  })
+);
 
 export function smartRouterUpdateRequestToJSON(
   smartRouterUpdateRequest: SmartRouterUpdateRequest,

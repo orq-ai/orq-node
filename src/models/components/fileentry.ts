@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -56,24 +56,26 @@ export type FileEntry = {
 /** @internal */
 export const FileEntryType$inboundSchema: z.ZodNativeEnum<
   typeof FileEntryType
-> = z.nativeEnum(FileEntryType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(FileEntryType));
 
 /** @internal */
 export const FileEntry$inboundSchema: z.ZodType<
   FileEntry,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  path: z.string(),
-  name: z.string(),
-  type: FileEntryType$inboundSchema,
-  size_bytes: z.string(),
-  modified: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "size_bytes": "sizeBytes",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    path: z.string(),
+    name: z.string(),
+    type: FileEntryType$inboundSchema,
+    size_bytes: z.string(),
+    modified: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "size_bytes": "sizeBytes",
+    });
+  })
+);
 
 export function fileEntryFromJSON(
   jsonString: string,

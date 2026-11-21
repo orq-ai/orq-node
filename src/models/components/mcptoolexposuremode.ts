@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 
 export const McpToolExposureMode = {
@@ -15,7 +16,7 @@ export type McpToolExposureMode = ClosedEnum<typeof McpToolExposureMode>;
 /** @internal */
 export const McpToolExposureMode$inboundSchema: z.ZodNativeEnum<
   typeof McpToolExposureMode
-> = z.nativeEnum(McpToolExposureMode);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(McpToolExposureMode));
 /** @internal */
 export const McpToolExposureMode$outboundSchema: z.ZodNativeEnum<
   typeof McpToolExposureMode

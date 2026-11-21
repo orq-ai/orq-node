@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -102,8 +102,8 @@ export type ImageContentPartSchema = {
 };
 
 /** @internal */
-export const Detail$inboundSchema: z.ZodNativeEnum<typeof Detail> = z
-  .nativeEnum(Detail);
+export const Detail$inboundSchema: z.ZodNativeEnum<typeof Detail> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Detail));
 /** @internal */
 export const Detail$outboundSchema: z.ZodNativeEnum<typeof Detail> =
   Detail$inboundSchema;
@@ -113,10 +113,12 @@ export const ImageUrl$inboundSchema: z.ZodType<
   ImageUrl,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  url: z.string(),
-  detail: Detail$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    url: z.string(),
+    detail: Detail$inboundSchema.optional(),
+  })
+);
 /** @internal */
 export type ImageUrl$Outbound = {
   url: string;
@@ -128,10 +130,12 @@ export const ImageUrl$outboundSchema: z.ZodType<
   ImageUrl$Outbound,
   z.ZodTypeDef,
   ImageUrl
-> = z.object({
-  url: z.string(),
-  detail: Detail$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    url: z.string(),
+    detail: Detail$outboundSchema.optional(),
+  })
+);
 
 export function imageUrlToJSON(imageUrl: ImageUrl): string {
   return JSON.stringify(ImageUrl$outboundSchema.parse(imageUrl));
@@ -148,9 +152,10 @@ export function imageUrlFromJSON(
 
 /** @internal */
 export const ImageContentPartSchemaCacheControlType$inboundSchema:
-  z.ZodNativeEnum<typeof ImageContentPartSchemaCacheControlType> = z.nativeEnum(
-    ImageContentPartSchemaCacheControlType,
-  );
+  z.ZodNativeEnum<typeof ImageContentPartSchemaCacheControlType> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(ImageContentPartSchemaCacheControlType)
+    );
 /** @internal */
 export const ImageContentPartSchemaCacheControlType$outboundSchema:
   z.ZodNativeEnum<typeof ImageContentPartSchemaCacheControlType> =
@@ -159,7 +164,7 @@ export const ImageContentPartSchemaCacheControlType$outboundSchema:
 /** @internal */
 export const ImageContentPartSchemaTtl$inboundSchema: z.ZodNativeEnum<
   typeof ImageContentPartSchemaTtl
-> = z.nativeEnum(ImageContentPartSchemaTtl);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ImageContentPartSchemaTtl));
 /** @internal */
 export const ImageContentPartSchemaTtl$outboundSchema: z.ZodNativeEnum<
   typeof ImageContentPartSchemaTtl
@@ -170,10 +175,12 @@ export const ImageContentPartSchemaCacheControl$inboundSchema: z.ZodType<
   ImageContentPartSchemaCacheControl,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: ImageContentPartSchemaCacheControlType$inboundSchema,
-  ttl: ImageContentPartSchemaTtl$inboundSchema.default("5m"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: ImageContentPartSchemaCacheControlType$inboundSchema,
+    ttl: ImageContentPartSchemaTtl$inboundSchema.default("5m"),
+  })
+);
 /** @internal */
 export type ImageContentPartSchemaCacheControl$Outbound = {
   type: string;
@@ -185,10 +192,12 @@ export const ImageContentPartSchemaCacheControl$outboundSchema: z.ZodType<
   ImageContentPartSchemaCacheControl$Outbound,
   z.ZodTypeDef,
   ImageContentPartSchemaCacheControl
-> = z.object({
-  type: ImageContentPartSchemaCacheControlType$outboundSchema,
-  ttl: ImageContentPartSchemaTtl$outboundSchema.default("5m"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: ImageContentPartSchemaCacheControlType$outboundSchema,
+    ttl: ImageContentPartSchemaTtl$outboundSchema.default("5m"),
+  })
+);
 
 export function imageContentPartSchemaCacheControlToJSON(
   imageContentPartSchemaCacheControl: ImageContentPartSchemaCacheControl,
@@ -215,17 +224,20 @@ export const ImageContentPartSchema$inboundSchema: z.ZodType<
   ImageContentPartSchema,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("image_url"),
-  image_url: z.lazy(() => ImageUrl$inboundSchema),
-  cache_control: z.lazy(() => ImageContentPartSchemaCacheControl$inboundSchema)
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "image_url": "imageUrl",
-    "cache_control": "cacheControl",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("image_url"),
+    image_url: z.lazy(() => ImageUrl$inboundSchema),
+    cache_control: z.lazy(() =>
+      ImageContentPartSchemaCacheControl$inboundSchema
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "image_url": "imageUrl",
+      "cache_control": "cacheControl",
+    });
+  })
+);
 /** @internal */
 export type ImageContentPartSchema$Outbound = {
   type: "image_url";
@@ -238,17 +250,20 @@ export const ImageContentPartSchema$outboundSchema: z.ZodType<
   ImageContentPartSchema$Outbound,
   z.ZodTypeDef,
   ImageContentPartSchema
-> = z.object({
-  type: z.literal("image_url"),
-  imageUrl: z.lazy(() => ImageUrl$outboundSchema),
-  cacheControl: z.lazy(() => ImageContentPartSchemaCacheControl$outboundSchema)
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    imageUrl: "image_url",
-    cacheControl: "cache_control",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("image_url"),
+    imageUrl: z.lazy(() => ImageUrl$outboundSchema),
+    cacheControl: z.lazy(() =>
+      ImageContentPartSchemaCacheControl$outboundSchema
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      imageUrl: "image_url",
+      cacheControl: "cache_control",
+    });
+  })
+);
 
 export function imageContentPartSchemaToJSON(
   imageContentPartSchema: ImageContentPartSchema,

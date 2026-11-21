@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 /**
  * Executes HTTP requests to interact with external APIs and web services. Must reference a pre-created HTTP tool by key or id.
@@ -45,17 +46,19 @@ export const HttpToolInput$outboundSchema: z.ZodType<
   HttpToolInput$Outbound,
   z.ZodTypeDef,
   HttpToolInput
-> = z.object({
-  type: z.literal("http"),
-  key: z.string().optional(),
-  id: z.string().optional(),
-  requiresApproval: z.boolean().default(false),
-  timeout: z.number().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    requiresApproval: "requires_approval",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("http"),
+    key: z.string().optional(),
+    id: z.string().optional(),
+    requiresApproval: z.boolean().default(false),
+    timeout: z.number().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      requiresApproval: "requires_approval",
+    });
+  })
+);
 
 export function httpToolInputToJSON(httpToolInput: HttpToolInput): string {
   return JSON.stringify(HttpToolInput$outboundSchema.parse(httpToolInput));

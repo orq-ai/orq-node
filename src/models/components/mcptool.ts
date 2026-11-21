@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { McpIcon, McpIcon$inboundSchema } from "./mcpicon.js";
@@ -94,7 +94,7 @@ export const McpToolInputSchema$inboundSchema: z.ZodType<
   McpToolInputSchema,
   z.ZodTypeDef,
   unknown
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function mcpToolInputSchemaFromJSON(
   jsonString: string,
@@ -111,10 +111,12 @@ export const HttpOperation$inboundSchema: z.ZodType<
   HttpOperation,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  method: z.string().optional(),
-  path: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    method: z.string().optional(),
+    path: z.string().optional(),
+  })
+);
 
 export function httpOperationFromJSON(
   jsonString: string,
@@ -131,7 +133,7 @@ export const OutputSchema$inboundSchema: z.ZodType<
   OutputSchema,
   z.ZodTypeDef,
   unknown
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function outputSchemaFromJSON(
   jsonString: string,
@@ -144,8 +146,8 @@ export function outputSchemaFromJSON(
 }
 
 /** @internal */
-export const Meta$inboundSchema: z.ZodType<Meta, z.ZodTypeDef, unknown> = z
-  .object({});
+export const Meta$inboundSchema: z.ZodType<Meta, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function metaFromJSON(
   jsonString: string,
@@ -159,25 +161,27 @@ export function metaFromJSON(
 
 /** @internal */
 export const McpTool$inboundSchema: z.ZodType<McpTool, z.ZodTypeDef, unknown> =
-  z.object({
-    name: z.string().optional(),
-    description: z.string().optional(),
-    input_schema: z.lazy(() => McpToolInputSchema$inboundSchema).optional(),
-    status: z.string().optional(),
-    id: z.string().optional(),
-    title: z.string().optional(),
-    annotations: McpToolAnnotations$inboundSchema.optional(),
-    http_operation: z.lazy(() => HttpOperation$inboundSchema).optional(),
-    icons: z.array(McpIcon$inboundSchema).optional(),
-    output_schema: z.lazy(() => OutputSchema$inboundSchema).optional(),
-    meta: z.lazy(() => Meta$inboundSchema).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "input_schema": "inputSchema",
-      "http_operation": "httpOperation",
-      "output_schema": "outputSchema",
-    });
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      name: z.string().optional(),
+      description: z.string().optional(),
+      input_schema: z.lazy(() => McpToolInputSchema$inboundSchema).optional(),
+      status: z.string().optional(),
+      id: z.string().optional(),
+      title: z.string().optional(),
+      annotations: McpToolAnnotations$inboundSchema.optional(),
+      http_operation: z.lazy(() => HttpOperation$inboundSchema).optional(),
+      icons: z.array(McpIcon$inboundSchema).optional(),
+      output_schema: z.lazy(() => OutputSchema$inboundSchema).optional(),
+      meta: z.lazy(() => Meta$inboundSchema).optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "input_schema": "inputSchema",
+        "http_operation": "httpOperation",
+        "output_schema": "outputSchema",
+      });
+    })
+  );
 
 export function mcpToolFromJSON(
   jsonString: string,

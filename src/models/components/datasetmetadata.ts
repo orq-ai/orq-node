@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -27,15 +27,17 @@ export const DatasetMetadata$inboundSchema: z.ZodType<
   DatasetMetadata,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  total_versions: z.number().int(),
-  datapoints_count: z.number().int(),
-}).transform((v) => {
-  return remap$(v, {
-    "total_versions": "totalVersions",
-    "datapoints_count": "datapointsCount",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    total_versions: z.number().int(),
+    datapoints_count: z.number().int(),
+  }).transform((v) => {
+    return remap$(v, {
+      "total_versions": "totalVersions",
+      "datapoints_count": "datapointsCount",
+    });
+  })
+);
 
 export function datasetMetadataFromJSON(
   jsonString: string,

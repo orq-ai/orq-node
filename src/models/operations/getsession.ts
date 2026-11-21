@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type GetSessionRequest = {
   sessionId: string;
@@ -19,13 +20,15 @@ export const GetSessionRequest$outboundSchema: z.ZodType<
   GetSessionRequest$Outbound,
   z.ZodTypeDef,
   GetSessionRequest
-> = z.object({
-  sessionId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    sessionId: "session_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    sessionId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      sessionId: "session_id",
+    });
+  })
+);
 
 export function getSessionRequestToJSON(
   getSessionRequest: GetSessionRequest,

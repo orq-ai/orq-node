@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import * as components from "../components/index.js";
 
 export type AuditLogDestinationReplayRequest = {
@@ -23,16 +24,18 @@ export const AuditLogDestinationReplayRequest$outboundSchema: z.ZodType<
   AuditLogDestinationReplayRequest$Outbound,
   z.ZodTypeDef,
   AuditLogDestinationReplayRequest
-> = z.object({
-  destinationId: z.string(),
-  replayAuditLogDeliveriesRequest:
-    components.ReplayAuditLogDeliveriesRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    destinationId: "destination_id",
-    replayAuditLogDeliveriesRequest: "ReplayAuditLogDeliveriesRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    destinationId: z.string(),
+    replayAuditLogDeliveriesRequest:
+      components.ReplayAuditLogDeliveriesRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      destinationId: "destination_id",
+      replayAuditLogDeliveriesRequest: "ReplayAuditLogDeliveriesRequest",
+    });
+  })
+);
 
 export function auditLogDestinationReplayRequestToJSON(
   auditLogDestinationReplayRequest: AuditLogDestinationReplayRequest,

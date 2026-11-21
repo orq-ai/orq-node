@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 /**
  * Returns the current date and time
@@ -32,15 +33,17 @@ export const CurrentDateToolInput$outboundSchema: z.ZodType<
   CurrentDateToolInput$Outbound,
   z.ZodTypeDef,
   CurrentDateToolInput
-> = z.object({
-  type: z.literal("current_date"),
-  requiresApproval: z.boolean().optional(),
-  configuration: z.record(z.any()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    requiresApproval: "requires_approval",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("current_date"),
+    requiresApproval: z.boolean().optional(),
+    configuration: z.record(z.any()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      requiresApproval: "requires_approval",
+    });
+  })
+);
 
 export function currentDateToolInputToJSON(
   currentDateToolInput: CurrentDateToolInput,

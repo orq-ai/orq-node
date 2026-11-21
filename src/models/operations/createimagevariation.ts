@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { blobLikeSchema } from "../../types/blobs.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -421,15 +421,17 @@ export const CreateImageVariationImage$outboundSchema: z.ZodType<
   CreateImageVariationImage$Outbound,
   z.ZodTypeDef,
   CreateImageVariationImage
-> = z.object({
-  fileName: z.string(),
-  content: z.union([
-    z.instanceof(ReadableStream<Uint8Array>),
-    z.instanceof(Blob),
-    z.instanceof(ArrayBuffer),
-    z.instanceof(Uint8Array),
-  ]),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    fileName: z.string(),
+    content: z.union([
+      z.instanceof(ReadableStream<Uint8Array>),
+      z.instanceof(Blob),
+      z.instanceof(ArrayBuffer),
+      z.instanceof(Uint8Array),
+    ]),
+  })
+);
 
 export function createImageVariationImageToJSON(
   createImageVariationImage: CreateImageVariationImage,
@@ -442,12 +444,13 @@ export function createImageVariationImageToJSON(
 /** @internal */
 export const CreateImageVariationResponseFormat$outboundSchema: z.ZodNativeEnum<
   typeof CreateImageVariationResponseFormat
-> = z.nativeEnum(CreateImageVariationResponseFormat);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(CreateImageVariationResponseFormat)
+);
 
 /** @internal */
-export const Size$outboundSchema: z.ZodNativeEnum<typeof Size> = z.nativeEnum(
-  Size,
-);
+export const Size$outboundSchema: z.ZodNativeEnum<typeof Size> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Size));
 
 /** @internal */
 export type CreateImageVariationFallbacks$Outbound = {
@@ -459,9 +462,11 @@ export const CreateImageVariationFallbacks$outboundSchema: z.ZodType<
   CreateImageVariationFallbacks$Outbound,
   z.ZodTypeDef,
   CreateImageVariationFallbacks
-> = z.object({
-  model: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model: z.string(),
+  })
+);
 
 export function createImageVariationFallbacksToJSON(
   createImageVariationFallbacks: CreateImageVariationFallbacks,
@@ -484,14 +489,16 @@ export const CreateImageVariationRetry$outboundSchema: z.ZodType<
   CreateImageVariationRetry$Outbound,
   z.ZodTypeDef,
   CreateImageVariationRetry
-> = z.object({
-  count: z.number().default(3),
-  onCodes: z.array(z.number()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    onCodes: "on_codes",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    count: z.number().default(3),
+    onCodes: z.array(z.number()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      onCodes: "on_codes",
+    });
+  })
+);
 
 export function createImageVariationRetryToJSON(
   createImageVariationRetry: CreateImageVariationRetry,
@@ -504,7 +511,7 @@ export function createImageVariationRetryToJSON(
 /** @internal */
 export const CreateImageVariationType$outboundSchema: z.ZodNativeEnum<
   typeof CreateImageVariationType
-> = z.nativeEnum(CreateImageVariationType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(CreateImageVariationType));
 
 /** @internal */
 export type CreateImageVariationCache$Outbound = {
@@ -517,10 +524,12 @@ export const CreateImageVariationCache$outboundSchema: z.ZodType<
   CreateImageVariationCache$Outbound,
   z.ZodTypeDef,
   CreateImageVariationCache
-> = z.object({
-  ttl: z.number().default(3600),
-  type: CreateImageVariationType$outboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ttl: z.number().default(3600),
+    type: CreateImageVariationType$outboundSchema,
+  })
+);
 
 export function createImageVariationCacheToJSON(
   createImageVariationCache: CreateImageVariationCache,
@@ -532,9 +541,10 @@ export function createImageVariationCacheToJSON(
 
 /** @internal */
 export const CreateImageVariationLoadBalancerType$outboundSchema:
-  z.ZodNativeEnum<typeof CreateImageVariationLoadBalancerType> = z.nativeEnum(
-    CreateImageVariationLoadBalancerType,
-  );
+  z.ZodNativeEnum<typeof CreateImageVariationLoadBalancerType> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(CreateImageVariationLoadBalancerType)
+    );
 
 /** @internal */
 export type CreateImageVariationLoadBalancerModels$Outbound = {
@@ -547,10 +557,12 @@ export const CreateImageVariationLoadBalancerModels$outboundSchema: z.ZodType<
   CreateImageVariationLoadBalancerModels$Outbound,
   z.ZodTypeDef,
   CreateImageVariationLoadBalancerModels
-> = z.object({
-  model: z.string(),
-  weight: z.number().default(0.5),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model: z.string(),
+    weight: z.number().default(0.5),
+  })
+);
 
 export function createImageVariationLoadBalancerModelsToJSON(
   createImageVariationLoadBalancerModels:
@@ -574,12 +586,14 @@ export const CreateImageVariationLoadBalancer1$outboundSchema: z.ZodType<
   CreateImageVariationLoadBalancer1$Outbound,
   z.ZodTypeDef,
   CreateImageVariationLoadBalancer1
-> = z.object({
-  type: CreateImageVariationLoadBalancerType$outboundSchema,
-  models: z.array(
-    z.lazy(() => CreateImageVariationLoadBalancerModels$outboundSchema),
-  ),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: CreateImageVariationLoadBalancerType$outboundSchema,
+    models: z.array(
+      z.lazy(() => CreateImageVariationLoadBalancerModels$outboundSchema),
+    ),
+  })
+);
 
 export function createImageVariationLoadBalancer1ToJSON(
   createImageVariationLoadBalancer1: CreateImageVariationLoadBalancer1,
@@ -600,7 +614,9 @@ export const CreateImageVariationLoadBalancer$outboundSchema: z.ZodType<
   CreateImageVariationLoadBalancer$Outbound,
   z.ZodTypeDef,
   CreateImageVariationLoadBalancer
-> = z.lazy(() => CreateImageVariationLoadBalancer1$outboundSchema);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.lazy(() => CreateImageVariationLoadBalancer1$outboundSchema)
+);
 
 export function createImageVariationLoadBalancerToJSON(
   createImageVariationLoadBalancer: CreateImageVariationLoadBalancer,
@@ -622,13 +638,15 @@ export const CreateImageVariationTimeout$outboundSchema: z.ZodType<
   CreateImageVariationTimeout$Outbound,
   z.ZodTypeDef,
   CreateImageVariationTimeout
-> = z.object({
-  callTimeout: z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    callTimeout: "call_timeout",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    callTimeout: z.number(),
+  }).transform((v) => {
+    return remap$(v, {
+      callTimeout: "call_timeout",
+    });
+  })
+);
 
 export function createImageVariationTimeoutToJSON(
   createImageVariationTimeout: CreateImageVariationTimeout,
@@ -652,14 +670,16 @@ export const CreateImageVariationRouterImagesVariationsRetry$outboundSchema:
     CreateImageVariationRouterImagesVariationsRetry$Outbound,
     z.ZodTypeDef,
     CreateImageVariationRouterImagesVariationsRetry
-  > = z.object({
-    count: z.number().default(3),
-    onCodes: z.array(z.number()).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      onCodes: "on_codes",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      count: z.number().default(3),
+      onCodes: z.array(z.number()).optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        onCodes: "on_codes",
+      });
+    })
+  );
 
 export function createImageVariationRouterImagesVariationsRetryToJSON(
   createImageVariationRouterImagesVariationsRetry:
@@ -683,9 +703,11 @@ export const CreateImageVariationRouterImagesVariationsFallbacks$outboundSchema:
     CreateImageVariationRouterImagesVariationsFallbacks$Outbound,
     z.ZodTypeDef,
     CreateImageVariationRouterImagesVariationsFallbacks
-  > = z.object({
-    model: z.string(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      model: z.string(),
+    })
+  );
 
 export function createImageVariationRouterImagesVariationsFallbacksToJSON(
   createImageVariationRouterImagesVariationsFallbacks:
@@ -701,7 +723,9 @@ export function createImageVariationRouterImagesVariationsFallbacksToJSON(
 /** @internal */
 export const CreateImageVariationVersion$outboundSchema: z.ZodNativeEnum<
   typeof CreateImageVariationVersion
-> = z.nativeEnum(CreateImageVariationVersion);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(CreateImageVariationVersion)
+);
 
 /** @internal */
 export type CreateImageVariationPrompt$Outbound = {
@@ -714,10 +738,12 @@ export const CreateImageVariationPrompt$outboundSchema: z.ZodType<
   CreateImageVariationPrompt$Outbound,
   z.ZodTypeDef,
   CreateImageVariationPrompt
-> = z.object({
-  id: z.string(),
-  version: CreateImageVariationVersion$outboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    version: CreateImageVariationVersion$outboundSchema,
+  })
+);
 
 export function createImageVariationPromptToJSON(
   createImageVariationPrompt: CreateImageVariationPrompt,
@@ -729,8 +755,10 @@ export function createImageVariationPromptToJSON(
 
 /** @internal */
 export const CreateImageVariationRouterImagesVariationsType$outboundSchema:
-  z.ZodNativeEnum<typeof CreateImageVariationRouterImagesVariationsType> = z
-    .nativeEnum(CreateImageVariationRouterImagesVariationsType);
+  z.ZodNativeEnum<typeof CreateImageVariationRouterImagesVariationsType> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(CreateImageVariationRouterImagesVariationsType)
+    );
 
 /** @internal */
 export type CreateImageVariationRouterImagesVariationsCache$Outbound = {
@@ -744,10 +772,12 @@ export const CreateImageVariationRouterImagesVariationsCache$outboundSchema:
     CreateImageVariationRouterImagesVariationsCache$Outbound,
     z.ZodTypeDef,
     CreateImageVariationRouterImagesVariationsCache
-  > = z.object({
-    ttl: z.number().default(3600),
-    type: CreateImageVariationRouterImagesVariationsType$outboundSchema,
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ttl: z.number().default(3600),
+      type: CreateImageVariationRouterImagesVariationsType$outboundSchema,
+    })
+  );
 
 export function createImageVariationRouterImagesVariationsCacheToJSON(
   createImageVariationRouterImagesVariationsCache:
@@ -764,7 +794,9 @@ export function createImageVariationRouterImagesVariationsCacheToJSON(
 export const CreateImageVariationLoadBalancerRouterImagesVariationsType$outboundSchema:
   z.ZodNativeEnum<
     typeof CreateImageVariationLoadBalancerRouterImagesVariationsType
-  > = z.nativeEnum(CreateImageVariationLoadBalancerRouterImagesVariationsType);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.nativeEnum(CreateImageVariationLoadBalancerRouterImagesVariationsType)
+  );
 
 /** @internal */
 export type CreateImageVariationLoadBalancerRouterImagesVariationsModels$Outbound =
@@ -779,10 +811,12 @@ export const CreateImageVariationLoadBalancerRouterImagesVariationsModels$outbou
     CreateImageVariationLoadBalancerRouterImagesVariationsModels$Outbound,
     z.ZodTypeDef,
     CreateImageVariationLoadBalancerRouterImagesVariationsModels
-  > = z.object({
-    model: z.string(),
-    weight: z.number().default(0.5),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      model: z.string(),
+      weight: z.number().default(0.5),
+    })
+  );
 
 export function createImageVariationLoadBalancerRouterImagesVariationsModelsToJSON(
   createImageVariationLoadBalancerRouterImagesVariationsModels:
@@ -808,15 +842,15 @@ export const CreateImageVariationLoadBalancerRouterImagesVariations1$outboundSch
     CreateImageVariationLoadBalancerRouterImagesVariations1$Outbound,
     z.ZodTypeDef,
     CreateImageVariationLoadBalancerRouterImagesVariations1
-  > = z.object({
-    type:
-      CreateImageVariationLoadBalancerRouterImagesVariationsType$outboundSchema,
-    models: z.array(
-      z.lazy(() =>
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type:
+        CreateImageVariationLoadBalancerRouterImagesVariationsType$outboundSchema,
+      models: z.array(z.lazy(() =>
         CreateImageVariationLoadBalancerRouterImagesVariationsModels$outboundSchema
-      ),
-    ),
-  });
+      )),
+    })
+  );
 
 export function createImageVariationLoadBalancerRouterImagesVariations1ToJSON(
   createImageVariationLoadBalancerRouterImagesVariations1:
@@ -838,8 +872,10 @@ export const CreateImageVariationRouterImagesVariationsLoadBalancer$outboundSche
     CreateImageVariationRouterImagesVariationsLoadBalancer$Outbound,
     z.ZodTypeDef,
     CreateImageVariationRouterImagesVariationsLoadBalancer
-  > = z.lazy(() =>
-    CreateImageVariationLoadBalancerRouterImagesVariations1$outboundSchema
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.lazy(() =>
+      CreateImageVariationLoadBalancerRouterImagesVariations1$outboundSchema
+    )
   );
 
 export function createImageVariationRouterImagesVariationsLoadBalancerToJSON(
@@ -864,13 +900,15 @@ export const CreateImageVariationRouterImagesVariationsTimeout$outboundSchema:
     CreateImageVariationRouterImagesVariationsTimeout$Outbound,
     z.ZodTypeDef,
     CreateImageVariationRouterImagesVariationsTimeout
-  > = z.object({
-    callTimeout: z.number(),
-  }).transform((v) => {
-    return remap$(v, {
-      callTimeout: "call_timeout",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      callTimeout: z.number(),
+    }).transform((v) => {
+      return remap$(v, {
+        callTimeout: "call_timeout",
+      });
+    })
+  );
 
 export function createImageVariationRouterImagesVariationsTimeoutToJSON(
   createImageVariationRouterImagesVariationsTimeout:
@@ -908,35 +946,37 @@ export const CreateImageVariationOrq$outboundSchema: z.ZodType<
   CreateImageVariationOrq$Outbound,
   z.ZodTypeDef,
   CreateImageVariationOrq
-> = z.object({
-  name: z.string().optional(),
-  retry: z.lazy(() =>
-    CreateImageVariationRouterImagesVariationsRetry$outboundSchema
-  ).optional(),
-  fallbackOnCodes: z.array(z.number().int()).optional(),
-  fallbacks: z.array(
-    z.lazy(() =>
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    retry: z.lazy(() =>
+      CreateImageVariationRouterImagesVariationsRetry$outboundSchema
+    ).optional(),
+    fallbackOnCodes: z.array(z.number().int()).optional(),
+    fallbacks: z.array(z.lazy(() =>
       CreateImageVariationRouterImagesVariationsFallbacks$outboundSchema
-    ),
-  ).optional(),
-  prompt: z.lazy(() => CreateImageVariationPrompt$outboundSchema).optional(),
-  identity: components.PublicIdentity$outboundSchema.optional(),
-  contact: components.PublicContact$outboundSchema.optional(),
-  cache: z.lazy(() =>
-    CreateImageVariationRouterImagesVariationsCache$outboundSchema
-  ).optional(),
-  loadBalancer: z.lazy(() =>
-    CreateImageVariationLoadBalancerRouterImagesVariations1$outboundSchema
-  ).optional(),
-  timeout: z.lazy(() =>
-    CreateImageVariationRouterImagesVariationsTimeout$outboundSchema
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    fallbackOnCodes: "fallback_on_codes",
-    loadBalancer: "load_balancer",
-  });
-});
+    )).optional(),
+    prompt: z.lazy(() =>
+      CreateImageVariationPrompt$outboundSchema
+    ).optional(),
+    identity: components.PublicIdentity$outboundSchema.optional(),
+    contact: components.PublicContact$outboundSchema.optional(),
+    cache: z.lazy(() =>
+      CreateImageVariationRouterImagesVariationsCache$outboundSchema
+    ).optional(),
+    loadBalancer: z.lazy(() =>
+      CreateImageVariationLoadBalancerRouterImagesVariations1$outboundSchema
+    ).optional(),
+    timeout: z.lazy(() =>
+      CreateImageVariationRouterImagesVariationsTimeout$outboundSchema
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      fallbackOnCodes: "fallback_on_codes",
+      loadBalancer: "load_balancer",
+    });
+  })
+);
 
 export function createImageVariationOrqToJSON(
   createImageVariationOrq: CreateImageVariationOrq,
@@ -969,34 +1009,38 @@ export const CreateImageVariationRequestBody$outboundSchema: z.ZodType<
   CreateImageVariationRequestBody$Outbound,
   z.ZodTypeDef,
   CreateImageVariationRequestBody
-> = z.object({
-  image: z.lazy(() => CreateImageVariationImage$outboundSchema).or(
-    blobLikeSchema,
-  ).optional(),
-  model: z.string(),
-  n: z.nullable(z.number().default(1)),
-  responseFormat: CreateImageVariationResponseFormat$outboundSchema.default(
-    "url",
-  ),
-  size: Size$outboundSchema.default("1024x1024"),
-  user: z.string().optional(),
-  name: z.string().optional(),
-  fallbackOnCodes: z.array(z.number().int()).optional(),
-  fallbacks: z.array(z.lazy(() => CreateImageVariationFallbacks$outboundSchema))
-    .optional(),
-  retry: z.lazy(() => CreateImageVariationRetry$outboundSchema).optional(),
-  cache: z.lazy(() => CreateImageVariationCache$outboundSchema).optional(),
-  loadBalancer: z.lazy(() => CreateImageVariationLoadBalancer1$outboundSchema)
-    .optional(),
-  timeout: z.lazy(() => CreateImageVariationTimeout$outboundSchema).optional(),
-  orq: z.lazy(() => CreateImageVariationOrq$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    responseFormat: "response_format",
-    fallbackOnCodes: "fallback_on_codes",
-    loadBalancer: "load_balancer",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    image: z.lazy(() => CreateImageVariationImage$outboundSchema).or(
+      blobLikeSchema,
+    ).optional(),
+    model: z.string(),
+    n: z.nullable(z.number().default(1)),
+    responseFormat: CreateImageVariationResponseFormat$outboundSchema.default(
+      "url",
+    ),
+    size: Size$outboundSchema.default("1024x1024"),
+    user: z.string().optional(),
+    name: z.string().optional(),
+    fallbackOnCodes: z.array(z.number().int()).optional(),
+    fallbacks: z.array(
+      z.lazy(() => CreateImageVariationFallbacks$outboundSchema),
+    ).optional(),
+    retry: z.lazy(() => CreateImageVariationRetry$outboundSchema).optional(),
+    cache: z.lazy(() => CreateImageVariationCache$outboundSchema).optional(),
+    loadBalancer: z.lazy(() => CreateImageVariationLoadBalancer1$outboundSchema)
+      .optional(),
+    timeout: z.lazy(() => CreateImageVariationTimeout$outboundSchema)
+      .optional(),
+    orq: z.lazy(() => CreateImageVariationOrq$outboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      responseFormat: "response_format",
+      fallbackOnCodes: "fallback_on_codes",
+      loadBalancer: "load_balancer",
+    });
+  })
+);
 
 export function createImageVariationRequestBodyToJSON(
   createImageVariationRequestBody: CreateImageVariationRequestBody,
@@ -1013,14 +1057,16 @@ export const CreateImageVariationData$inboundSchema: z.ZodType<
   CreateImageVariationData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  b64_json: z.string().optional(),
-  url: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "b64_json": "b64Json",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    b64_json: z.string().optional(),
+    url: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "b64_json": "b64Json",
+    });
+  })
+);
 
 export function createImageVariationDataFromJSON(
   jsonString: string,
@@ -1037,15 +1083,17 @@ export const CreateImageVariationInputTokensDetails$inboundSchema: z.ZodType<
   CreateImageVariationInputTokensDetails,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  text_tokens: z.number(),
-  image_tokens: z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    "text_tokens": "textTokens",
-    "image_tokens": "imageTokens",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    text_tokens: z.number(),
+    image_tokens: z.number(),
+  }).transform((v) => {
+    return remap$(v, {
+      "text_tokens": "textTokens",
+      "image_tokens": "imageTokens",
+    });
+  })
+);
 
 export function createImageVariationInputTokensDetailsFromJSON(
   jsonString: string,
@@ -1063,21 +1111,23 @@ export const CreateImageVariationUsage$inboundSchema: z.ZodType<
   CreateImageVariationUsage,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  total_tokens: z.number(),
-  input_tokens: z.number(),
-  output_tokens: z.number(),
-  input_tokens_details: z.lazy(() =>
-    CreateImageVariationInputTokensDetails$inboundSchema
-  ),
-}).transform((v) => {
-  return remap$(v, {
-    "total_tokens": "totalTokens",
-    "input_tokens": "inputTokens",
-    "output_tokens": "outputTokens",
-    "input_tokens_details": "inputTokensDetails",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    total_tokens: z.number(),
+    input_tokens: z.number(),
+    output_tokens: z.number(),
+    input_tokens_details: z.lazy(() =>
+      CreateImageVariationInputTokensDetails$inboundSchema
+    ),
+  }).transform((v) => {
+    return remap$(v, {
+      "total_tokens": "totalTokens",
+      "input_tokens": "inputTokens",
+      "output_tokens": "outputTokens",
+      "input_tokens_details": "inputTokensDetails",
+    });
+  })
+);
 
 export function createImageVariationUsageFromJSON(
   jsonString: string,
@@ -1094,18 +1144,20 @@ export const CreateImageVariationResponseBody$inboundSchema: z.ZodType<
   CreateImageVariationResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  created: z.number(),
-  output_format: z.string().optional(),
-  size: z.string().optional(),
-  quality: z.string().optional(),
-  data: z.array(z.lazy(() => CreateImageVariationData$inboundSchema)),
-  usage: z.lazy(() => CreateImageVariationUsage$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "output_format": "outputFormat",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    created: z.number(),
+    output_format: z.string().optional(),
+    size: z.string().optional(),
+    quality: z.string().optional(),
+    data: z.array(z.lazy(() => CreateImageVariationData$inboundSchema)),
+    usage: z.lazy(() => CreateImageVariationUsage$inboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "output_format": "outputFormat",
+    });
+  })
+);
 
 export function createImageVariationResponseBodyFromJSON(
   jsonString: string,

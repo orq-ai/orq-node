@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -39,11 +39,13 @@ export const ToolDoneEventData$inboundSchema: z.ZodType<
   ToolDoneEventData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  toolId: z.string(),
-  toolCallId: z.string(),
-  result: z.any().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    toolId: z.string(),
+    toolCallId: z.string(),
+    result: z.any().optional(),
+  })
+);
 
 export function toolDoneEventDataFromJSON(
   jsonString: string,
@@ -60,11 +62,13 @@ export const ToolDoneEvent$inboundSchema: z.ZodType<
   ToolDoneEvent,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("tool.done"),
-  timestamp: z.string(),
-  data: z.lazy(() => ToolDoneEventData$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("tool.done"),
+    timestamp: z.string(),
+    data: z.lazy(() => ToolDoneEventData$inboundSchema),
+  })
+);
 
 export function toolDoneEventFromJSON(
   jsonString: string,

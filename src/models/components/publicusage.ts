@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -60,41 +60,42 @@ export type PublicUsage = {
 };
 
 /** @internal */
-export const Speed$inboundSchema: z.ZodNativeEnum<typeof Speed> = z.nativeEnum(
-  Speed,
-);
+export const Speed$inboundSchema: z.ZodNativeEnum<typeof Speed> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Speed));
 
 /** @internal */
 export const PublicUsage$inboundSchema: z.ZodType<
   PublicUsage,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  input_cost: z.number().optional(),
-  input_tokens: z.number().int(),
-  input_tokens_details: InputTokensDetails$inboundSchema,
-  output_cost: z.number().optional(),
-  output_tokens: z.number().int(),
-  output_tokens_details: OutputTokensDetails$inboundSchema,
-  server_tool_use: ServerToolUseDetails$inboundSchema.optional(),
-  speed: Speed$inboundSchema.optional(),
-  total_cost: z.number().optional(),
-  total_tokens: z.number().int(),
-  web_search_requests: z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "input_cost": "inputCost",
-    "input_tokens": "inputTokens",
-    "input_tokens_details": "inputTokensDetails",
-    "output_cost": "outputCost",
-    "output_tokens": "outputTokens",
-    "output_tokens_details": "outputTokensDetails",
-    "server_tool_use": "serverToolUse",
-    "total_cost": "totalCost",
-    "total_tokens": "totalTokens",
-    "web_search_requests": "webSearchRequests",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    input_cost: z.number().optional(),
+    input_tokens: z.number().int(),
+    input_tokens_details: InputTokensDetails$inboundSchema,
+    output_cost: z.number().optional(),
+    output_tokens: z.number().int(),
+    output_tokens_details: OutputTokensDetails$inboundSchema,
+    server_tool_use: ServerToolUseDetails$inboundSchema.optional(),
+    speed: Speed$inboundSchema.optional(),
+    total_cost: z.number().optional(),
+    total_tokens: z.number().int(),
+    web_search_requests: z.number().int().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "input_cost": "inputCost",
+      "input_tokens": "inputTokens",
+      "input_tokens_details": "inputTokensDetails",
+      "output_cost": "outputCost",
+      "output_tokens": "outputTokens",
+      "output_tokens_details": "outputTokensDetails",
+      "server_tool_use": "serverToolUse",
+      "total_cost": "totalCost",
+      "total_tokens": "totalTokens",
+      "web_search_requests": "webSearchRequests",
+    });
+  })
+);
 
 export function publicUsageFromJSON(
   jsonString: string,

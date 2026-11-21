@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import * as components from "../components/index.js";
 
 export type ManagementKeyListRequest = {
@@ -60,21 +61,23 @@ export const ManagementKeyListRequest$outboundSchema: z.ZodType<
   ManagementKeyListRequest$Outbound,
   z.ZodTypeDef,
   ManagementKeyListRequest
-> = z.object({
-  limit: z.number().int().optional(),
-  startingAfter: z.string().optional(),
-  endingBefore: z.string().optional(),
-  status: components.ManagementKeyStatus$outboundSchema.optional(),
-  search: z.string().optional(),
-  permissionMode: z.array(components.ManagementPermissionMode$outboundSchema)
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    startingAfter: "starting_after",
-    endingBefore: "ending_before",
-    permissionMode: "permission_mode",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    limit: z.number().int().optional(),
+    startingAfter: z.string().optional(),
+    endingBefore: z.string().optional(),
+    status: components.ManagementKeyStatus$outboundSchema.optional(),
+    search: z.string().optional(),
+    permissionMode: z.array(components.ManagementPermissionMode$outboundSchema)
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      startingAfter: "starting_after",
+      endingBefore: "ending_before",
+      permissionMode: "permission_mode",
+    });
+  })
+);
 
 export function managementKeyListRequestToJSON(
   managementKeyListRequest: ManagementKeyListRequest,

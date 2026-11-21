@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -67,30 +67,32 @@ export const Datapoint1$inboundSchema: z.ZodType<
   Datapoint1,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  inputs: z.record(z.any()).optional(),
-  messages: z.array(z.any()).optional(),
-  expected_output: z.string().optional(),
-  evaluations: z.array(z.any()).optional(),
-  dataset_id: z.string(),
-  snapshot_version: z.string().optional(),
-  created_by_id: z.string(),
-  updated_by_id: z.string(),
-  created: z.string().optional(),
-  updated: z.string().optional(),
-  workspace_id: z.string().optional(),
-  _id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "expected_output": "expectedOutput",
-    "dataset_id": "datasetId",
-    "snapshot_version": "snapshotVersion",
-    "created_by_id": "createdById",
-    "updated_by_id": "updatedById",
-    "workspace_id": "workspaceId",
-    "_id": "id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    inputs: z.record(z.any()).optional(),
+    messages: z.array(z.any()).optional(),
+    expected_output: z.string().optional(),
+    evaluations: z.array(z.any()).optional(),
+    dataset_id: z.string(),
+    snapshot_version: z.string().optional(),
+    created_by_id: z.string(),
+    updated_by_id: z.string(),
+    created: z.string().optional(),
+    updated: z.string().optional(),
+    workspace_id: z.string().optional(),
+    _id: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "expected_output": "expectedOutput",
+      "dataset_id": "datasetId",
+      "snapshot_version": "snapshotVersion",
+      "created_by_id": "createdById",
+      "updated_by_id": "updatedById",
+      "workspace_id": "workspaceId",
+      "_id": "id",
+    });
+  })
+);
 
 export function datapoint1FromJSON(
   jsonString: string,

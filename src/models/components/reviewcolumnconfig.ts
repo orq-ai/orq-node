@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -19,17 +19,19 @@ export const ReviewColumnConfig$inboundSchema: z.ZodType<
   ReviewColumnConfig,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  human_eval_id: z.string().optional(),
-  human_eval_name: z.string().optional(),
-  human_eval_type: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "human_eval_id": "humanEvalId",
-    "human_eval_name": "humanEvalName",
-    "human_eval_type": "humanEvalType",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    human_eval_id: z.string().optional(),
+    human_eval_name: z.string().optional(),
+    human_eval_type: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "human_eval_id": "humanEvalId",
+      "human_eval_name": "humanEvalName",
+      "human_eval_type": "humanEvalType",
+    });
+  })
+);
 
 export function reviewColumnConfigFromJSON(
   jsonString: string,

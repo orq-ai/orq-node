@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 /**
  * Datapoint content submitted by the caller.
@@ -35,15 +36,17 @@ export const DatapointInput$outboundSchema: z.ZodType<
   DatapointInput$Outbound,
   z.ZodTypeDef,
   DatapointInput
-> = z.object({
-  inputs: z.record(z.any()).optional(),
-  messages: z.array(z.any()).optional(),
-  expectedOutput: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    expectedOutput: "expected_output",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    inputs: z.record(z.any()).optional(),
+    messages: z.array(z.any()).optional(),
+    expectedOutput: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      expectedOutput: "expected_output",
+    });
+  })
+);
 
 export function datapointInputToJSON(datapointInput: DatapointInput): string {
   return JSON.stringify(DatapointInput$outboundSchema.parse(datapointInput));

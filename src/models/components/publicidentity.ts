@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 /**
  * Information about the identity making the request. If the identity does not exist, it will be created automatically.
@@ -50,19 +51,21 @@ export const PublicIdentity$outboundSchema: z.ZodType<
   PublicIdentity$Outbound,
   z.ZodTypeDef,
   PublicIdentity
-> = z.object({
-  id: z.string(),
-  displayName: z.string().optional(),
-  email: z.string().optional(),
-  metadata: z.array(z.record(z.any())).optional(),
-  logoUrl: z.string().optional(),
-  tags: z.array(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    displayName: "display_name",
-    logoUrl: "logo_url",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    displayName: z.string().optional(),
+    email: z.string().optional(),
+    metadata: z.array(z.record(z.any())).optional(),
+    logoUrl: z.string().optional(),
+    tags: z.array(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      displayName: "display_name",
+      logoUrl: "logo_url",
+    });
+  })
+);
 
 export function publicIdentityToJSON(publicIdentity: PublicIdentity): string {
   return JSON.stringify(PublicIdentity$outboundSchema.parse(publicIdentity));

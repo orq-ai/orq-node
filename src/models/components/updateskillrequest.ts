@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type UpdateSkillRequest = {
   /**
@@ -47,19 +48,21 @@ export const UpdateSkillRequest$outboundSchema: z.ZodType<
   UpdateSkillRequest$Outbound,
   z.ZodTypeDef,
   UpdateSkillRequest
-> = z.object({
-  displayName: z.string().optional(),
-  description: z.string().optional(),
-  tags: z.array(z.string()).optional(),
-  path: z.string().optional(),
-  instructions: z.string().optional(),
-  projectId: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    displayName: "display_name",
-    projectId: "project_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    displayName: z.string().optional(),
+    description: z.string().optional(),
+    tags: z.array(z.string()).optional(),
+    path: z.string().optional(),
+    instructions: z.string().optional(),
+    projectId: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      displayName: "display_name",
+      projectId: "project_id",
+    });
+  })
+);
 
 export function updateSkillRequestToJSON(
   updateSkillRequest: UpdateSkillRequest,

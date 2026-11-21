@@ -5,7 +5,7 @@
 import * as z from "zod/v3";
 import { EventStream } from "../../lib/event-streams.js";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
@@ -1267,12 +1267,12 @@ export type CreateRouterResponseResponse =
 /** @internal */
 export const CreateRouterResponseTtl$outboundSchema: z.ZodNativeEnum<
   typeof CreateRouterResponseTtl
-> = z.nativeEnum(CreateRouterResponseTtl);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(CreateRouterResponseTtl));
 
 /** @internal */
 export const CreateRouterResponseType$outboundSchema: z.ZodNativeEnum<
   typeof CreateRouterResponseType
-> = z.nativeEnum(CreateRouterResponseType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(CreateRouterResponseType));
 
 /** @internal */
 export type CreateRouterResponseCacheControl$Outbound = {
@@ -1285,10 +1285,12 @@ export const CreateRouterResponseCacheControl$outboundSchema: z.ZodType<
   CreateRouterResponseCacheControl$Outbound,
   z.ZodTypeDef,
   CreateRouterResponseCacheControl
-> = z.object({
-  ttl: CreateRouterResponseTtl$outboundSchema.default("5m"),
-  type: CreateRouterResponseType$outboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ttl: CreateRouterResponseTtl$outboundSchema.default("5m"),
+    type: CreateRouterResponseType$outboundSchema,
+  })
+);
 
 export function createRouterResponseCacheControlToJSON(
   createRouterResponseCacheControl: CreateRouterResponseCacheControl,
@@ -1304,13 +1306,17 @@ export function createRouterResponseCacheControlToJSON(
 export const CreateRouterResponse2ResponsesRequestRequestBodyInputTtl$outboundSchema:
   z.ZodNativeEnum<
     typeof CreateRouterResponse2ResponsesRequestRequestBodyInputTtl
-  > = z.nativeEnum(CreateRouterResponse2ResponsesRequestRequestBodyInputTtl);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.nativeEnum(CreateRouterResponse2ResponsesRequestRequestBodyInputTtl)
+  );
 
 /** @internal */
 export const CreateRouterResponse2ResponsesRequestRequestBodyInputType$outboundSchema:
   z.ZodNativeEnum<
     typeof CreateRouterResponse2ResponsesRequestRequestBodyInputType
-  > = z.nativeEnum(CreateRouterResponse2ResponsesRequestRequestBodyInputType);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.nativeEnum(CreateRouterResponse2ResponsesRequestRequestBodyInputType)
+  );
 
 /** @internal */
 export type CreateRouterResponse2ResponsesRequestCacheControl$Outbound = {
@@ -1324,12 +1330,15 @@ export const CreateRouterResponse2ResponsesRequestCacheControl$outboundSchema:
     CreateRouterResponse2ResponsesRequestCacheControl$Outbound,
     z.ZodTypeDef,
     CreateRouterResponse2ResponsesRequestCacheControl
-  > = z.object({
-    ttl: CreateRouterResponse2ResponsesRequestRequestBodyInputTtl$outboundSchema
-      .default("5m"),
-    type:
-      CreateRouterResponse2ResponsesRequestRequestBodyInputType$outboundSchema,
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ttl:
+        CreateRouterResponse2ResponsesRequestRequestBodyInputTtl$outboundSchema
+          .default("5m"),
+      type:
+        CreateRouterResponse2ResponsesRequestRequestBodyInputType$outboundSchema,
+    })
+  );
 
 export function createRouterResponse2ResponsesRequestCacheControlToJSON(
   createRouterResponse2ResponsesRequestCacheControl:
@@ -1345,13 +1354,17 @@ export function createRouterResponse2ResponsesRequestCacheControlToJSON(
 /** @internal */
 export const CreateRouterResponse2ResponsesMode$outboundSchema: z.ZodNativeEnum<
   typeof CreateRouterResponse2ResponsesMode
-> = z.nativeEnum(CreateRouterResponse2ResponsesMode);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(CreateRouterResponse2ResponsesMode)
+);
 
 /** @internal */
 export const CreateRouterResponse2ResponsesRequestRequestBodyInput2Ttl$outboundSchema:
   z.ZodNativeEnum<
     typeof CreateRouterResponse2ResponsesRequestRequestBodyInput2Ttl
-  > = z.nativeEnum(CreateRouterResponse2ResponsesRequestRequestBodyInput2Ttl);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.nativeEnum(CreateRouterResponse2ResponsesRequestRequestBodyInput2Ttl)
+  );
 
 /** @internal */
 export type CreateRouterResponse2PromptCacheBreakpoint$Outbound = {
@@ -1365,12 +1378,14 @@ export const CreateRouterResponse2PromptCacheBreakpoint$outboundSchema:
     CreateRouterResponse2PromptCacheBreakpoint$Outbound,
     z.ZodTypeDef,
     CreateRouterResponse2PromptCacheBreakpoint
-  > = z.object({
-    mode: CreateRouterResponse2ResponsesMode$outboundSchema,
-    ttl:
-      CreateRouterResponse2ResponsesRequestRequestBodyInput2Ttl$outboundSchema
-        .optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      mode: CreateRouterResponse2ResponsesMode$outboundSchema,
+      ttl:
+        CreateRouterResponse2ResponsesRequestRequestBodyInput2Ttl$outboundSchema
+          .optional(),
+    })
+  );
 
 export function createRouterResponse2PromptCacheBreakpointToJSON(
   createRouterResponse2PromptCacheBreakpoint:
@@ -1404,29 +1419,31 @@ export const TwoFile$outboundSchema: z.ZodType<
   TwoFile$Outbound,
   z.ZodTypeDef,
   TwoFile
-> = z.object({
-  cacheControl: z.lazy(() =>
-    CreateRouterResponse2ResponsesRequestCacheControl$outboundSchema
-  ).optional(),
-  fileData: z.string().optional(),
-  fileId: z.string().optional(),
-  fileUrl: z.string().optional(),
-  filename: z.string().optional(),
-  mimeType: z.string().optional(),
-  promptCacheBreakpoint: z.lazy(() =>
-    CreateRouterResponse2PromptCacheBreakpoint$outboundSchema
-  ).optional(),
-  type: z.literal("input_file"),
-}).transform((v) => {
-  return remap$(v, {
-    cacheControl: "cache_control",
-    fileData: "file_data",
-    fileId: "file_id",
-    fileUrl: "file_url",
-    mimeType: "mime_type",
-    promptCacheBreakpoint: "prompt_cache_breakpoint",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    cacheControl: z.lazy(() =>
+      CreateRouterResponse2ResponsesRequestCacheControl$outboundSchema
+    ).optional(),
+    fileData: z.string().optional(),
+    fileId: z.string().optional(),
+    fileUrl: z.string().optional(),
+    filename: z.string().optional(),
+    mimeType: z.string().optional(),
+    promptCacheBreakpoint: z.lazy(() =>
+      CreateRouterResponse2PromptCacheBreakpoint$outboundSchema
+    ).optional(),
+    type: z.literal("input_file"),
+  }).transform((v) => {
+    return remap$(v, {
+      cacheControl: "cache_control",
+      fileData: "file_data",
+      fileId: "file_id",
+      fileUrl: "file_url",
+      mimeType: "mime_type",
+      promptCacheBreakpoint: "prompt_cache_breakpoint",
+    });
+  })
+);
 
 export function twoFileToJSON(twoFile: TwoFile): string {
   return JSON.stringify(TwoFile$outboundSchema.parse(twoFile));
@@ -1434,13 +1451,17 @@ export function twoFileToJSON(twoFile: TwoFile): string {
 
 /** @internal */
 export const CreateRouterResponse2ResponsesRequestTtl$outboundSchema:
-  z.ZodNativeEnum<typeof CreateRouterResponse2ResponsesRequestTtl> = z
-    .nativeEnum(CreateRouterResponse2ResponsesRequestTtl);
+  z.ZodNativeEnum<typeof CreateRouterResponse2ResponsesRequestTtl> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(CreateRouterResponse2ResponsesRequestTtl)
+    );
 
 /** @internal */
 export const CreateRouterResponse2ResponsesRequestType$outboundSchema:
-  z.ZodNativeEnum<typeof CreateRouterResponse2ResponsesRequestType> = z
-    .nativeEnum(CreateRouterResponse2ResponsesRequestType);
+  z.ZodNativeEnum<typeof CreateRouterResponse2ResponsesRequestType> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(CreateRouterResponse2ResponsesRequestType)
+    );
 
 /** @internal */
 export type CreateRouterResponse2ResponsesCacheControl$Outbound = {
@@ -1454,10 +1475,14 @@ export const CreateRouterResponse2ResponsesCacheControl$outboundSchema:
     CreateRouterResponse2ResponsesCacheControl$Outbound,
     z.ZodTypeDef,
     CreateRouterResponse2ResponsesCacheControl
-  > = z.object({
-    ttl: CreateRouterResponse2ResponsesRequestTtl$outboundSchema.default("5m"),
-    type: CreateRouterResponse2ResponsesRequestType$outboundSchema,
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ttl: CreateRouterResponse2ResponsesRequestTtl$outboundSchema.default(
+        "5m",
+      ),
+      type: CreateRouterResponse2ResponsesRequestType$outboundSchema,
+    })
+  );
 
 export function createRouterResponse2ResponsesCacheControlToJSON(
   createRouterResponse2ResponsesCacheControl:
@@ -1471,18 +1496,20 @@ export function createRouterResponse2ResponsesCacheControlToJSON(
 }
 
 /** @internal */
-export const Detail$outboundSchema: z.ZodNativeEnum<typeof Detail> = z
-  .nativeEnum(Detail);
+export const Detail$outboundSchema: z.ZodNativeEnum<typeof Detail> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Detail));
 
 /** @internal */
 export const CreateRouterResponse2Mode$outboundSchema: z.ZodNativeEnum<
   typeof CreateRouterResponse2Mode
-> = z.nativeEnum(CreateRouterResponse2Mode);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(CreateRouterResponse2Mode));
 
 /** @internal */
 export const CreateRouterResponse2ResponsesRequestRequestBodyTtl$outboundSchema:
   z.ZodNativeEnum<typeof CreateRouterResponse2ResponsesRequestRequestBodyTtl> =
-    z.nativeEnum(CreateRouterResponse2ResponsesRequestRequestBodyTtl);
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(CreateRouterResponse2ResponsesRequestRequestBodyTtl)
+    );
 
 /** @internal */
 export type TwoPromptCacheBreakpoint$Outbound = {
@@ -1495,11 +1522,13 @@ export const TwoPromptCacheBreakpoint$outboundSchema: z.ZodType<
   TwoPromptCacheBreakpoint$Outbound,
   z.ZodTypeDef,
   TwoPromptCacheBreakpoint
-> = z.object({
-  mode: CreateRouterResponse2Mode$outboundSchema,
-  ttl: CreateRouterResponse2ResponsesRequestRequestBodyTtl$outboundSchema
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    mode: CreateRouterResponse2Mode$outboundSchema,
+    ttl: CreateRouterResponse2ResponsesRequestRequestBodyTtl$outboundSchema
+      .optional(),
+  })
+);
 
 export function twoPromptCacheBreakpointToJSON(
   twoPromptCacheBreakpoint: TwoPromptCacheBreakpoint,
@@ -1526,24 +1555,26 @@ export const TwoImage$outboundSchema: z.ZodType<
   TwoImage$Outbound,
   z.ZodTypeDef,
   TwoImage
-> = z.object({
-  cacheControl: z.lazy(() =>
-    CreateRouterResponse2ResponsesCacheControl$outboundSchema
-  ).optional(),
-  detail: Detail$outboundSchema.optional(),
-  fileId: z.string().optional(),
-  imageUrl: z.string().optional(),
-  promptCacheBreakpoint: z.lazy(() => TwoPromptCacheBreakpoint$outboundSchema)
-    .optional(),
-  type: z.literal("input_image"),
-}).transform((v) => {
-  return remap$(v, {
-    cacheControl: "cache_control",
-    fileId: "file_id",
-    imageUrl: "image_url",
-    promptCacheBreakpoint: "prompt_cache_breakpoint",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    cacheControl: z.lazy(() =>
+      CreateRouterResponse2ResponsesCacheControl$outboundSchema
+    ).optional(),
+    detail: Detail$outboundSchema.optional(),
+    fileId: z.string().optional(),
+    imageUrl: z.string().optional(),
+    promptCacheBreakpoint: z.lazy(() => TwoPromptCacheBreakpoint$outboundSchema)
+      .optional(),
+    type: z.literal("input_image"),
+  }).transform((v) => {
+    return remap$(v, {
+      cacheControl: "cache_control",
+      fileId: "file_id",
+      imageUrl: "image_url",
+      promptCacheBreakpoint: "prompt_cache_breakpoint",
+    });
+  })
+);
 
 export function twoImageToJSON(twoImage: TwoImage): string {
   return JSON.stringify(TwoImage$outboundSchema.parse(twoImage));
@@ -1552,12 +1583,12 @@ export function twoImageToJSON(twoImage: TwoImage): string {
 /** @internal */
 export const CreateRouterResponse2Ttl$outboundSchema: z.ZodNativeEnum<
   typeof CreateRouterResponse2Ttl
-> = z.nativeEnum(CreateRouterResponse2Ttl);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(CreateRouterResponse2Ttl));
 
 /** @internal */
 export const CreateRouterResponse2Type$outboundSchema: z.ZodNativeEnum<
   typeof CreateRouterResponse2Type
-> = z.nativeEnum(CreateRouterResponse2Type);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(CreateRouterResponse2Type));
 
 /** @internal */
 export type CreateRouterResponse2CacheControl$Outbound = {
@@ -1570,10 +1601,12 @@ export const CreateRouterResponse2CacheControl$outboundSchema: z.ZodType<
   CreateRouterResponse2CacheControl$Outbound,
   z.ZodTypeDef,
   CreateRouterResponse2CacheControl
-> = z.object({
-  ttl: CreateRouterResponse2Ttl$outboundSchema.default("5m"),
-  type: CreateRouterResponse2Type$outboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ttl: CreateRouterResponse2Ttl$outboundSchema.default("5m"),
+    type: CreateRouterResponse2Type$outboundSchema,
+  })
+);
 
 export function createRouterResponse2CacheControlToJSON(
   createRouterResponse2CacheControl: CreateRouterResponse2CacheControl,
@@ -1586,13 +1619,15 @@ export function createRouterResponse2CacheControlToJSON(
 }
 
 /** @internal */
-export const TwoMode$outboundSchema: z.ZodNativeEnum<typeof TwoMode> = z
-  .nativeEnum(TwoMode);
+export const TwoMode$outboundSchema: z.ZodNativeEnum<typeof TwoMode> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(TwoMode));
 
 /** @internal */
 export const CreateRouterResponse2ResponsesTtl$outboundSchema: z.ZodNativeEnum<
   typeof CreateRouterResponse2ResponsesTtl
-> = z.nativeEnum(CreateRouterResponse2ResponsesTtl);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(CreateRouterResponse2ResponsesTtl)
+);
 
 /** @internal */
 export type PromptCacheBreakpoint$Outbound = {
@@ -1605,10 +1640,12 @@ export const PromptCacheBreakpoint$outboundSchema: z.ZodType<
   PromptCacheBreakpoint$Outbound,
   z.ZodTypeDef,
   PromptCacheBreakpoint
-> = z.object({
-  mode: TwoMode$outboundSchema,
-  ttl: CreateRouterResponse2ResponsesTtl$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    mode: TwoMode$outboundSchema,
+    ttl: CreateRouterResponse2ResponsesTtl$outboundSchema.optional(),
+  })
+);
 
 export function promptCacheBreakpointToJSON(
   promptCacheBreakpoint: PromptCacheBreakpoint,
@@ -1631,19 +1668,21 @@ export const TwoText$outboundSchema: z.ZodType<
   TwoText$Outbound,
   z.ZodTypeDef,
   TwoText
-> = z.object({
-  cacheControl: z.lazy(() => CreateRouterResponse2CacheControl$outboundSchema)
-    .optional(),
-  promptCacheBreakpoint: z.lazy(() => PromptCacheBreakpoint$outboundSchema)
-    .optional(),
-  text: z.string(),
-  type: z.literal("input_text"),
-}).transform((v) => {
-  return remap$(v, {
-    cacheControl: "cache_control",
-    promptCacheBreakpoint: "prompt_cache_breakpoint",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    cacheControl: z.lazy(() => CreateRouterResponse2CacheControl$outboundSchema)
+      .optional(),
+    promptCacheBreakpoint: z.lazy(() => PromptCacheBreakpoint$outboundSchema)
+      .optional(),
+    text: z.string(),
+    type: z.literal("input_text"),
+  }).transform((v) => {
+    return remap$(v, {
+      cacheControl: "cache_control",
+      promptCacheBreakpoint: "prompt_cache_breakpoint",
+    });
+  })
+);
 
 export function twoTextToJSON(twoText: TwoText): string {
   return JSON.stringify(TwoText$outboundSchema.parse(twoText));
@@ -1660,11 +1699,13 @@ export const CreateRouterResponseContent2$outboundSchema: z.ZodType<
   CreateRouterResponseContent2$Outbound,
   z.ZodTypeDef,
   CreateRouterResponseContent2
-> = z.union([
-  z.lazy(() => TwoText$outboundSchema),
-  z.lazy(() => TwoImage$outboundSchema),
-  z.lazy(() => TwoFile$outboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => TwoText$outboundSchema),
+    z.lazy(() => TwoImage$outboundSchema),
+    z.lazy(() => TwoFile$outboundSchema),
+  ])
+);
 
 export function createRouterResponseContent2ToJSON(
   createRouterResponseContent2: CreateRouterResponseContent2,
@@ -1686,22 +1727,24 @@ export const InputContent$outboundSchema: z.ZodType<
   InputContent$Outbound,
   z.ZodTypeDef,
   InputContent
-> = z.union([
-  z.string(),
-  z.array(z.union([
-    z.lazy(() => TwoText$outboundSchema),
-    z.lazy(() => TwoImage$outboundSchema),
-    z.lazy(() => TwoFile$outboundSchema),
-  ])),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.string(),
+    z.array(z.union([
+      z.lazy(() => TwoText$outboundSchema),
+      z.lazy(() => TwoImage$outboundSchema),
+      z.lazy(() => TwoFile$outboundSchema),
+    ])),
+  ])
+);
 
 export function inputContentToJSON(inputContent: InputContent): string {
   return JSON.stringify(InputContent$outboundSchema.parse(inputContent));
 }
 
 /** @internal */
-export const Effort$outboundSchema: z.ZodNativeEnum<typeof Effort> = z
-  .nativeEnum(Effort);
+export const Effort$outboundSchema: z.ZodNativeEnum<typeof Effort> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Effort));
 
 /** @internal */
 export type Reasoning$Outbound = {
@@ -1713,9 +1756,11 @@ export const Reasoning$outboundSchema: z.ZodType<
   Reasoning$Outbound,
   z.ZodTypeDef,
   Reasoning
-> = z.object({
-  effort: Effort$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    effort: Effort$outboundSchema.optional(),
+  })
+);
 
 export function reasoningToJSON(reasoning: Reasoning): string {
   return JSON.stringify(Reasoning$outboundSchema.parse(reasoning));
@@ -1724,16 +1769,20 @@ export function reasoningToJSON(reasoning: Reasoning): string {
 /** @internal */
 export const CreateRouterResponseInputRole$outboundSchema: z.ZodNativeEnum<
   typeof CreateRouterResponseInputRole
-> = z.nativeEnum(CreateRouterResponseInputRole);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(CreateRouterResponseInputRole)
+);
 
 /** @internal */
-export const InputStatus$outboundSchema: z.ZodNativeEnum<typeof InputStatus> = z
-  .nativeEnum(InputStatus);
+export const InputStatus$outboundSchema: z.ZodNativeEnum<typeof InputStatus> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(InputStatus));
 
 /** @internal */
 export const CreateRouterResponseInputType$outboundSchema: z.ZodNativeEnum<
   typeof CreateRouterResponseInputType
-> = z.nativeEnum(CreateRouterResponseInputType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(CreateRouterResponseInputType)
+);
 
 /** @internal */
 export type CreateRouterResponseInput2$Outbound = {
@@ -1758,30 +1807,32 @@ export const CreateRouterResponseInput2$outboundSchema: z.ZodType<
   CreateRouterResponseInput2$Outbound,
   z.ZodTypeDef,
   CreateRouterResponseInput2
-> = z.object({
-  arguments: z.string().optional(),
-  async: z.boolean().optional(),
-  callId: z.string().optional(),
-  content: z.union([
-    z.string(),
-    z.array(z.union([
-      z.lazy(() => TwoText$outboundSchema),
-      z.lazy(() => TwoImage$outboundSchema),
-      z.lazy(() => TwoFile$outboundSchema),
-    ])),
-  ]).optional(),
-  id: z.string().optional(),
-  name: z.string().optional(),
-  output: z.string().optional(),
-  reasoning: z.lazy(() => Reasoning$outboundSchema).optional(),
-  role: CreateRouterResponseInputRole$outboundSchema.optional(),
-  status: InputStatus$outboundSchema.optional(),
-  type: CreateRouterResponseInputType$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    callId: "call_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    arguments: z.string().optional(),
+    async: z.boolean().optional(),
+    callId: z.string().optional(),
+    content: z.union([
+      z.string(),
+      z.array(z.union([
+        z.lazy(() => TwoText$outboundSchema),
+        z.lazy(() => TwoImage$outboundSchema),
+        z.lazy(() => TwoFile$outboundSchema),
+      ])),
+    ]).optional(),
+    id: z.string().optional(),
+    name: z.string().optional(),
+    output: z.string().optional(),
+    reasoning: z.lazy(() => Reasoning$outboundSchema).optional(),
+    role: CreateRouterResponseInputRole$outboundSchema.optional(),
+    status: InputStatus$outboundSchema.optional(),
+    type: CreateRouterResponseInputType$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      callId: "call_id",
+    });
+  })
+);
 
 export function createRouterResponseInput2ToJSON(
   createRouterResponseInput2: CreateRouterResponseInput2,
@@ -1801,10 +1852,12 @@ export const CreateRouterResponseInput$outboundSchema: z.ZodType<
   CreateRouterResponseInput$Outbound,
   z.ZodTypeDef,
   CreateRouterResponseInput
-> = z.union([
-  z.string(),
-  z.array(z.lazy(() => CreateRouterResponseInput2$outboundSchema)),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.string(),
+    z.array(z.lazy(() => CreateRouterResponseInput2$outboundSchema)),
+  ])
+);
 
 export function createRouterResponseInputToJSON(
   createRouterResponseInput: CreateRouterResponseInput,
@@ -1815,18 +1868,17 @@ export function createRouterResponseInputToJSON(
 }
 
 /** @internal */
-export const ServiceTier$outboundSchema: z.ZodNativeEnum<typeof ServiceTier> = z
-  .nativeEnum(ServiceTier);
+export const ServiceTier$outboundSchema: z.ZodNativeEnum<typeof ServiceTier> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ServiceTier));
 
 /** @internal */
-export const Speed$outboundSchema: z.ZodNativeEnum<typeof Speed> = z.nativeEnum(
-  Speed,
-);
+export const Speed$outboundSchema: z.ZodNativeEnum<typeof Speed> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Speed));
 
 /** @internal */
 export const TemplateEngine$outboundSchema: z.ZodNativeEnum<
   typeof TemplateEngine
-> = z.nativeEnum(TemplateEngine);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(TemplateEngine));
 
 /** @internal */
 export type FormatJSONSchema$Outbound = {
@@ -1842,13 +1894,15 @@ export const FormatJSONSchema$outboundSchema: z.ZodType<
   FormatJSONSchema$Outbound,
   z.ZodTypeDef,
   FormatJSONSchema
-> = z.object({
-  description: z.string().optional(),
-  name: z.string(),
-  schema: z.record(z.any()),
-  strict: z.boolean().optional(),
-  type: z.literal("json_schema"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    description: z.string().optional(),
+    name: z.string(),
+    schema: z.record(z.any()),
+    strict: z.boolean().optional(),
+    type: z.literal("json_schema"),
+  })
+);
 
 export function formatJSONSchemaToJSON(
   formatJSONSchema: FormatJSONSchema,
@@ -1868,9 +1922,11 @@ export const PlainText$outboundSchema: z.ZodType<
   PlainText$Outbound,
   z.ZodTypeDef,
   PlainText
-> = z.object({
-  type: z.literal("text"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("text"),
+  })
+);
 
 export function plainTextToJSON(plainText: PlainText): string {
   return JSON.stringify(PlainText$outboundSchema.parse(plainText));
@@ -1886,10 +1942,12 @@ export const CreateRouterResponseFormat$outboundSchema: z.ZodType<
   CreateRouterResponseFormat$Outbound,
   z.ZodTypeDef,
   CreateRouterResponseFormat
-> = z.union([
-  z.lazy(() => PlainText$outboundSchema),
-  z.lazy(() => FormatJSONSchema$outboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => PlainText$outboundSchema),
+    z.lazy(() => FormatJSONSchema$outboundSchema),
+  ])
+);
 
 export function createRouterResponseFormatToJSON(
   createRouterResponseFormat: CreateRouterResponseFormat,
@@ -1900,8 +1958,8 @@ export function createRouterResponseFormatToJSON(
 }
 
 /** @internal */
-export const Verbosity$outboundSchema: z.ZodNativeEnum<typeof Verbosity> = z
-  .nativeEnum(Verbosity);
+export const Verbosity$outboundSchema: z.ZodNativeEnum<typeof Verbosity> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Verbosity));
 
 /** @internal */
 export type CreateRouterResponseText$Outbound = {
@@ -1914,13 +1972,15 @@ export const CreateRouterResponseText$outboundSchema: z.ZodType<
   CreateRouterResponseText$Outbound,
   z.ZodTypeDef,
   CreateRouterResponseText
-> = z.object({
-  format: z.union([
-    z.lazy(() => PlainText$outboundSchema),
-    z.lazy(() => FormatJSONSchema$outboundSchema),
-  ]).optional(),
-  verbosity: Verbosity$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    format: z.union([
+      z.lazy(() => PlainText$outboundSchema),
+      z.lazy(() => FormatJSONSchema$outboundSchema),
+    ]).optional(),
+    verbosity: Verbosity$outboundSchema.optional(),
+  })
+);
 
 export function createRouterResponseTextToJSON(
   createRouterResponseText: CreateRouterResponseText,
@@ -1933,7 +1993,9 @@ export function createRouterResponseTextToJSON(
 /** @internal */
 export const CreateRouterResponseToolChoiceType$outboundSchema: z.ZodNativeEnum<
   typeof CreateRouterResponseToolChoiceType
-> = z.nativeEnum(CreateRouterResponseToolChoiceType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(CreateRouterResponseToolChoiceType)
+);
 
 /** @internal */
 export type SpecificFunction$Outbound = {
@@ -1946,10 +2008,12 @@ export const SpecificFunction$outboundSchema: z.ZodType<
   SpecificFunction$Outbound,
   z.ZodTypeDef,
   SpecificFunction
-> = z.object({
-  name: z.string(),
-  type: CreateRouterResponseToolChoiceType$outboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+    type: CreateRouterResponseToolChoiceType$outboundSchema,
+  })
+);
 
 export function specificFunctionToJSON(
   specificFunction: SpecificFunction,
@@ -1960,8 +2024,8 @@ export function specificFunctionToJSON(
 }
 
 /** @internal */
-export const Shorthand$outboundSchema: z.ZodNativeEnum<typeof Shorthand> = z
-  .nativeEnum(Shorthand);
+export const Shorthand$outboundSchema: z.ZodNativeEnum<typeof Shorthand> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Shorthand));
 
 /** @internal */
 export type CreateRouterResponseToolChoice$Outbound =
@@ -1973,10 +2037,12 @@ export const CreateRouterResponseToolChoice$outboundSchema: z.ZodType<
   CreateRouterResponseToolChoice$Outbound,
   z.ZodTypeDef,
   CreateRouterResponseToolChoice
-> = z.union([
-  z.lazy(() => SpecificFunction$outboundSchema),
-  Shorthand$outboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => SpecificFunction$outboundSchema),
+    Shorthand$outboundSchema,
+  ])
+);
 
 export function createRouterResponseToolChoiceToJSON(
   createRouterResponseToolChoice: CreateRouterResponseToolChoice,
@@ -1999,15 +2065,17 @@ export const AllowedTools$outboundSchema: z.ZodType<
   AllowedTools$Outbound,
   z.ZodTypeDef,
   AllowedTools
-> = z.object({
-  readOnly: z.boolean().optional(),
-  toolNames: z.array(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    readOnly: "read_only",
-    toolNames: "tool_names",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    readOnly: z.boolean().optional(),
+    toolNames: z.array(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      readOnly: "read_only",
+      toolNames: "tool_names",
+    });
+  })
+);
 
 export function allowedToolsToJSON(allowedTools: AllowedTools): string {
   return JSON.stringify(AllowedTools$outboundSchema.parse(allowedTools));
@@ -2028,20 +2096,22 @@ export const MCPTool$outboundSchema: z.ZodType<
   MCPTool$Outbound,
   z.ZodTypeDef,
   MCPTool
-> = z.object({
-  allowedTools: z.lazy(() => AllowedTools$outboundSchema).optional(),
-  headers: z.record(z.string()).optional(),
-  key: z.string().optional(),
-  serverDescription: z.string().optional(),
-  serverUrl: z.string().optional(),
-  type: z.literal("mcp"),
-}).transform((v) => {
-  return remap$(v, {
-    allowedTools: "allowed_tools",
-    serverDescription: "server_description",
-    serverUrl: "server_url",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    allowedTools: z.lazy(() => AllowedTools$outboundSchema).optional(),
+    headers: z.record(z.string()).optional(),
+    key: z.string().optional(),
+    serverDescription: z.string().optional(),
+    serverUrl: z.string().optional(),
+    type: z.literal("mcp"),
+  }).transform((v) => {
+    return remap$(v, {
+      allowedTools: "allowed_tools",
+      serverDescription: "server_description",
+      serverUrl: "server_url",
+    });
+  })
+);
 
 export function mcpToolToJSON(mcpTool: MCPTool): string {
   return JSON.stringify(MCPTool$outboundSchema.parse(mcpTool));
@@ -2058,22 +2128,24 @@ export const Files$outboundSchema: z.ZodType<
   Files$Outbound,
   z.ZodTypeDef,
   Files
-> = z.object({
-  fileId: z.string(),
-  name: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    fileId: "file_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    fileId: z.string(),
+    name: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      fileId: "file_id",
+    });
+  })
+);
 
 export function filesToJSON(files: Files): string {
   return JSON.stringify(Files$outboundSchema.parse(files));
 }
 
 /** @internal */
-export const ToolsMode$outboundSchema: z.ZodNativeEnum<typeof ToolsMode> = z
-  .nativeEnum(ToolsMode);
+export const ToolsMode$outboundSchema: z.ZodNativeEnum<typeof ToolsMode> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ToolsMode));
 
 /** @internal */
 export type Network$Outbound = {
@@ -2086,10 +2158,12 @@ export const Network$outboundSchema: z.ZodType<
   Network$Outbound,
   z.ZodTypeDef,
   Network
-> = z.object({
-  allowlist: z.array(z.string()).optional(),
-  mode: ToolsMode$outboundSchema.default("disabled"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    allowlist: z.array(z.string()).optional(),
+    mode: ToolsMode$outboundSchema.default("disabled"),
+  })
+);
 
 export function networkToJSON(network: Network): string {
   return JSON.stringify(Network$outboundSchema.parse(network));
@@ -2097,8 +2171,10 @@ export function networkToJSON(network: Network): string {
 
 /** @internal */
 export const CreateRouterResponseToolsResponsesRequestType$outboundSchema:
-  z.ZodNativeEnum<typeof CreateRouterResponseToolsResponsesRequestType> = z
-    .nativeEnum(CreateRouterResponseToolsResponsesRequestType);
+  z.ZodNativeEnum<typeof CreateRouterResponseToolsResponsesRequestType> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(CreateRouterResponseToolsResponsesRequestType)
+    );
 
 /** @internal */
 export type OrqAiTool$Outbound = {
@@ -2115,19 +2191,21 @@ export const OrqAiTool$outboundSchema: z.ZodType<
   OrqAiTool$Outbound,
   z.ZodTypeDef,
   OrqAiTool
-> = z.object({
-  files: z.array(z.lazy(() => Files$outboundSchema)).optional(),
-  maxResults: z.number().int().optional(),
-  network: z.lazy(() => Network$outboundSchema).optional(),
-  timezone: z.string().optional(),
-  toolId: z.string().optional(),
-  type: CreateRouterResponseToolsResponsesRequestType$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    maxResults: "max_results",
-    toolId: "tool_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    files: z.array(z.lazy(() => Files$outboundSchema)).optional(),
+    maxResults: z.number().int().optional(),
+    network: z.lazy(() => Network$outboundSchema).optional(),
+    timezone: z.string().optional(),
+    toolId: z.string().optional(),
+    type: CreateRouterResponseToolsResponsesRequestType$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      maxResults: "max_results",
+      toolId: "tool_id",
+    });
+  })
+);
 
 export function orqAiToolToJSON(orqAiTool: OrqAiTool): string {
   return JSON.stringify(OrqAiTool$outboundSchema.parse(orqAiTool));
@@ -2146,24 +2224,26 @@ export const Custom$outboundSchema: z.ZodType<
   Custom$Outbound,
   z.ZodTypeDef,
   Custom
-> = z.object({
-  async: z.boolean().optional(),
-  description: z.string().optional(),
-  name: z.string(),
-  type: z.literal("custom"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    async: z.boolean().optional(),
+    description: z.string().optional(),
+    name: z.string(),
+    type: z.literal("custom"),
+  })
+);
 
 export function customToJSON(custom: Custom): string {
   return JSON.stringify(Custom$outboundSchema.parse(custom));
 }
 
 /** @internal */
-export const ToolsTtl$outboundSchema: z.ZodNativeEnum<typeof ToolsTtl> = z
-  .nativeEnum(ToolsTtl);
+export const ToolsTtl$outboundSchema: z.ZodNativeEnum<typeof ToolsTtl> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ToolsTtl));
 
 /** @internal */
-export const ToolsType$outboundSchema: z.ZodNativeEnum<typeof ToolsType> = z
-  .nativeEnum(ToolsType);
+export const ToolsType$outboundSchema: z.ZodNativeEnum<typeof ToolsType> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ToolsType));
 
 /** @internal */
 export type ToolsCacheControl$Outbound = {
@@ -2176,10 +2256,12 @@ export const ToolsCacheControl$outboundSchema: z.ZodType<
   ToolsCacheControl$Outbound,
   z.ZodTypeDef,
   ToolsCacheControl
-> = z.object({
-  ttl: ToolsTtl$outboundSchema.default("5m"),
-  type: ToolsType$outboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ttl: ToolsTtl$outboundSchema.default("5m"),
+    type: ToolsType$outboundSchema,
+  })
+);
 
 export function toolsCacheControlToJSON(
   toolsCacheControl: ToolsCacheControl,
@@ -2206,21 +2288,23 @@ export const ToolsFunction$outboundSchema: z.ZodType<
   ToolsFunction$Outbound,
   z.ZodTypeDef,
   ToolsFunction
-> = z.object({
-  async: z.boolean().optional(),
-  cacheControl: z.lazy(() => ToolsCacheControl$outboundSchema).optional(),
-  deferLoading: z.boolean().optional(),
-  description: z.string().optional(),
-  name: z.string(),
-  parameters: z.record(z.any()).optional(),
-  strict: z.boolean().optional(),
-  type: z.literal("function"),
-}).transform((v) => {
-  return remap$(v, {
-    cacheControl: "cache_control",
-    deferLoading: "defer_loading",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    async: z.boolean().optional(),
+    cacheControl: z.lazy(() => ToolsCacheControl$outboundSchema).optional(),
+    deferLoading: z.boolean().optional(),
+    description: z.string().optional(),
+    name: z.string(),
+    parameters: z.record(z.any()).optional(),
+    strict: z.boolean().optional(),
+    type: z.literal("function"),
+  }).transform((v) => {
+    return remap$(v, {
+      cacheControl: "cache_control",
+      deferLoading: "defer_loading",
+    });
+  })
+);
 
 export function toolsFunctionToJSON(toolsFunction: ToolsFunction): string {
   return JSON.stringify(ToolsFunction$outboundSchema.parse(toolsFunction));
@@ -2258,72 +2342,74 @@ export const CreateRouterResponseTools$outboundSchema: z.ZodType<
   CreateRouterResponseTools$Outbound,
   z.ZodTypeDef,
   CreateRouterResponseTools
-> = z.union([
-  z.lazy(() => ToolsFunction$outboundSchema),
-  z.lazy(() => Custom$outboundSchema),
-  components.OrqAdvisorTool$outboundSchema,
-  components.OrqSidekickTool$outboundSchema.and(
-    z.object({ type: z.literal("orq:subagent") }),
-  ),
-  components.OrqSidekickTool$outboundSchema.and(
-    z.object({ type: z.literal("orq:sidekick") }),
-  ),
-  z.lazy(() => OrqAiTool$outboundSchema).and(
-    z.object({ type: z.literal("orq:web_search") }),
-  ),
-  z.lazy(() => OrqAiTool$outboundSchema).and(
-    z.object({ type: z.literal("orq:web_fetch") }),
-  ),
-  z.lazy(() => OrqAiTool$outboundSchema).and(
-    z.object({ type: z.literal("orq:datetime") }),
-  ),
-  z.lazy(() => OrqAiTool$outboundSchema).and(
-    z.object({ type: z.literal("orq:search_models") }),
-  ),
-  z.lazy(() => OrqAiTool$outboundSchema).and(
-    z.object({ type: z.literal("orq:tool_search") }),
-  ),
-  z.lazy(() => OrqAiTool$outboundSchema).and(
-    z.object({ type: z.literal("orq:image_generation") }),
-  ),
-  z.lazy(() => OrqAiTool$outboundSchema).and(
-    z.object({ type: z.literal("orq:apply_patch") }),
-  ),
-  z.lazy(() => OrqAiTool$outboundSchema).and(
-    z.object({ type: z.literal("orq:fusion") }),
-  ),
-  z.lazy(() => OrqAiTool$outboundSchema).and(
-    z.object({ type: z.literal("orq:shell") }),
-  ),
-  z.lazy(() => OrqAiTool$outboundSchema).and(
-    z.object({ type: z.literal("orq:query_knowledge_base") }),
-  ),
-  z.lazy(() => OrqAiTool$outboundSchema).and(
-    z.object({ type: z.literal("orq:retrieve_knowledge_bases") }),
-  ),
-  z.lazy(() => OrqAiTool$outboundSchema).and(
-    z.object({ type: z.literal("orq:current_date") }),
-  ),
-  z.lazy(() => OrqAiTool$outboundSchema).and(
-    z.object({ type: z.literal("orq:google_search") }),
-  ),
-  z.lazy(() => OrqAiTool$outboundSchema).and(
-    z.object({ type: z.literal("orq:web_scraper") }),
-  ),
-  z.lazy(() => OrqAiTool$outboundSchema).and(
-    z.object({ type: z.literal("orq:code_interpreter") }),
-  ),
-  z.lazy(() => OrqAiTool$outboundSchema).and(
-    z.object({ type: z.literal("orq:mcp") }),
-  ),
-  z.lazy(() => OrqAiTool$outboundSchema).and(
-    z.object({ type: z.literal("orq:http") }),
-  ),
-  z.lazy(() => OrqAiTool$outboundSchema).and(
-    z.object({ type: z.literal("orq:function") }),
-  ),
-  z.lazy(() => MCPTool$outboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => ToolsFunction$outboundSchema),
+    z.lazy(() => Custom$outboundSchema),
+    components.OrqAdvisorTool$outboundSchema,
+    components.OrqSidekickTool$outboundSchema.and(
+      z.object({ type: z.literal("orq:subagent") }),
+    ),
+    components.OrqSidekickTool$outboundSchema.and(
+      z.object({ type: z.literal("orq:sidekick") }),
+    ),
+    z.lazy(() => OrqAiTool$outboundSchema).and(
+      z.object({ type: z.literal("orq:web_search") }),
+    ),
+    z.lazy(() => OrqAiTool$outboundSchema).and(
+      z.object({ type: z.literal("orq:web_fetch") }),
+    ),
+    z.lazy(() => OrqAiTool$outboundSchema).and(
+      z.object({ type: z.literal("orq:datetime") }),
+    ),
+    z.lazy(() => OrqAiTool$outboundSchema).and(
+      z.object({ type: z.literal("orq:search_models") }),
+    ),
+    z.lazy(() => OrqAiTool$outboundSchema).and(
+      z.object({ type: z.literal("orq:tool_search") }),
+    ),
+    z.lazy(() => OrqAiTool$outboundSchema).and(
+      z.object({ type: z.literal("orq:image_generation") }),
+    ),
+    z.lazy(() => OrqAiTool$outboundSchema).and(
+      z.object({ type: z.literal("orq:apply_patch") }),
+    ),
+    z.lazy(() => OrqAiTool$outboundSchema).and(
+      z.object({ type: z.literal("orq:fusion") }),
+    ),
+    z.lazy(() => OrqAiTool$outboundSchema).and(
+      z.object({ type: z.literal("orq:shell") }),
+    ),
+    z.lazy(() => OrqAiTool$outboundSchema).and(
+      z.object({ type: z.literal("orq:query_knowledge_base") }),
+    ),
+    z.lazy(() => OrqAiTool$outboundSchema).and(
+      z.object({ type: z.literal("orq:retrieve_knowledge_bases") }),
+    ),
+    z.lazy(() => OrqAiTool$outboundSchema).and(
+      z.object({ type: z.literal("orq:current_date") }),
+    ),
+    z.lazy(() => OrqAiTool$outboundSchema).and(
+      z.object({ type: z.literal("orq:google_search") }),
+    ),
+    z.lazy(() => OrqAiTool$outboundSchema).and(
+      z.object({ type: z.literal("orq:web_scraper") }),
+    ),
+    z.lazy(() => OrqAiTool$outboundSchema).and(
+      z.object({ type: z.literal("orq:code_interpreter") }),
+    ),
+    z.lazy(() => OrqAiTool$outboundSchema).and(
+      z.object({ type: z.literal("orq:mcp") }),
+    ),
+    z.lazy(() => OrqAiTool$outboundSchema).and(
+      z.object({ type: z.literal("orq:http") }),
+    ),
+    z.lazy(() => OrqAiTool$outboundSchema).and(
+      z.object({ type: z.literal("orq:function") }),
+    ),
+    z.lazy(() => MCPTool$outboundSchema),
+  ])
+);
 
 export function createRouterResponseToolsToJSON(
   createRouterResponseTools: CreateRouterResponseTools,
@@ -2423,65 +2509,65 @@ export const CreateRouterResponseRequestBody$outboundSchema: z.ZodType<
   CreateRouterResponseRequestBody$Outbound,
   z.ZodTypeDef,
   CreateRouterResponseRequestBody
-> = z.object({
-  background: z.boolean().optional(),
-  cache: components.CacheConfig$outboundSchema.optional(),
-  cacheControl: z.lazy(() => CreateRouterResponseCacheControl$outboundSchema)
-    .optional(),
-  contextManagement: z.nullable(
-    z.array(components.OpenAIContextManagement$outboundSchema),
-  ).optional(),
-  conversation: components.ConversationParam$outboundSchema.optional(),
-  fallbackOnCodes: z.nullable(z.array(z.number().int())).optional(),
-  fallbacks: z.nullable(z.array(components.FallbackConfig$outboundSchema))
-    .optional(),
-  frequencyPenalty: z.number().optional(),
-  guardrails: z.array(components.EvaluatorRef$outboundSchema).optional(),
-  identity: components.ResponseIdentity$outboundSchema.optional(),
-  include: z.array(z.string()).optional(),
-  input: z.union([
-    z.string(),
-    z.array(z.lazy(() => CreateRouterResponseInput2$outboundSchema)),
-  ]).optional(),
-  instructions: z.string().optional(),
-  integrationId: z.string().optional(),
-  limits: components.ResponseExecutionLimits$outboundSchema.optional(),
-  loadBalancer: components.LoadBalancerConfig$outboundSchema.optional(),
-  maxOutputTokens: z.number().int().optional(),
-  maxToolCalls: z.number().int().optional(),
-  memory: components.MemoryParam$outboundSchema.optional(),
-  metadata: z.record(z.string()).optional(),
-  model: z.string().optional(),
-  parallelToolCalls: z.boolean().optional(),
-  plugins: z.nullable(z.array(components.PublicPlugin$outboundSchema))
-    .optional(),
-  presencePenalty: z.number().optional(),
-  previousResponseId: z.string().optional(),
-  promptCacheKey: z.string().optional(),
-  promptCacheOptions: components.OpenAIPromptCacheOptions$outboundSchema
-    .optional(),
-  reasoning: components.ReasoningParam$outboundSchema.optional(),
-  retry: components.ResponseRetryConfig$outboundSchema.optional(),
-  safetyIdentifier: z.string().optional(),
-  security: components.SecurityConfig$outboundSchema.optional(),
-  serviceTier: ServiceTier$outboundSchema.optional(),
-  speed: Speed$outboundSchema.optional(),
-  stopSequences: z.array(z.string()).optional(),
-  store: z.boolean().optional(),
-  stream: z.boolean().optional(),
-  streamOptions: components.StreamOptions$outboundSchema.optional(),
-  temperature: z.number().optional(),
-  templateEngine: TemplateEngine$outboundSchema.optional(),
-  text: z.lazy(() => CreateRouterResponseText$outboundSchema).optional(),
-  thinking: components.ThinkingParam$outboundSchema.optional(),
-  thread: components.ResponseThread$outboundSchema.optional(),
-  timeout: components.TimeoutConfig$outboundSchema.optional(),
-  toolChoice: z.union([
-    z.lazy(() => SpecificFunction$outboundSchema),
-    Shorthand$outboundSchema,
-  ]).optional(),
-  tools: z.array(
-    z.union([
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    background: z.boolean().optional(),
+    cache: components.CacheConfig$outboundSchema.optional(),
+    cacheControl: z.lazy(() => CreateRouterResponseCacheControl$outboundSchema)
+      .optional(),
+    contextManagement: z.nullable(
+      z.array(components.OpenAIContextManagement$outboundSchema),
+    ).optional(),
+    conversation: components.ConversationParam$outboundSchema.optional(),
+    fallbackOnCodes: z.nullable(z.array(z.number().int())).optional(),
+    fallbacks: z.nullable(z.array(components.FallbackConfig$outboundSchema))
+      .optional(),
+    frequencyPenalty: z.number().optional(),
+    guardrails: z.array(components.EvaluatorRef$outboundSchema).optional(),
+    identity: components.ResponseIdentity$outboundSchema.optional(),
+    include: z.array(z.string()).optional(),
+    input: z.union([
+      z.string(),
+      z.array(z.lazy(() => CreateRouterResponseInput2$outboundSchema)),
+    ]).optional(),
+    instructions: z.string().optional(),
+    integrationId: z.string().optional(),
+    limits: components.ResponseExecutionLimits$outboundSchema.optional(),
+    loadBalancer: components.LoadBalancerConfig$outboundSchema.optional(),
+    maxOutputTokens: z.number().int().optional(),
+    maxToolCalls: z.number().int().optional(),
+    memory: components.MemoryParam$outboundSchema.optional(),
+    metadata: z.record(z.string()).optional(),
+    model: z.string().optional(),
+    parallelToolCalls: z.boolean().optional(),
+    plugins: z.nullable(z.array(components.PublicPlugin$outboundSchema))
+      .optional(),
+    presencePenalty: z.number().optional(),
+    previousResponseId: z.string().optional(),
+    promptCacheKey: z.string().optional(),
+    promptCacheOptions: components.OpenAIPromptCacheOptions$outboundSchema
+      .optional(),
+    reasoning: components.ReasoningParam$outboundSchema.optional(),
+    retry: components.ResponseRetryConfig$outboundSchema.optional(),
+    safetyIdentifier: z.string().optional(),
+    security: components.SecurityConfig$outboundSchema.optional(),
+    serviceTier: ServiceTier$outboundSchema.optional(),
+    speed: Speed$outboundSchema.optional(),
+    stopSequences: z.array(z.string()).optional(),
+    store: z.boolean().optional(),
+    stream: z.boolean().optional(),
+    streamOptions: components.StreamOptions$outboundSchema.optional(),
+    temperature: z.number().optional(),
+    templateEngine: TemplateEngine$outboundSchema.optional(),
+    text: z.lazy(() => CreateRouterResponseText$outboundSchema).optional(),
+    thinking: components.ThinkingParam$outboundSchema.optional(),
+    thread: components.ResponseThread$outboundSchema.optional(),
+    timeout: components.TimeoutConfig$outboundSchema.optional(),
+    toolChoice: z.union([
+      z.lazy(() => SpecificFunction$outboundSchema),
+      Shorthand$outboundSchema,
+    ]).optional(),
+    tools: z.array(z.union([
       z.lazy(() => ToolsFunction$outboundSchema),
       z.lazy(() => Custom$outboundSchema),
       components.OrqAdvisorTool$outboundSchema,
@@ -2546,38 +2632,38 @@ export const CreateRouterResponseRequestBody$outboundSchema: z.ZodType<
         z.object({ type: z.literal("orq:function") }),
       ),
       z.lazy(() => MCPTool$outboundSchema),
-    ]),
-  ).optional(),
-  topK: z.number().int().optional(),
-  topLogprobs: z.number().int().optional(),
-  topP: z.number().optional(),
-  variables: z.record(z.any()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    cacheControl: "cache_control",
-    contextManagement: "context_management",
-    fallbackOnCodes: "fallback_on_codes",
-    frequencyPenalty: "frequency_penalty",
-    integrationId: "integration_id",
-    loadBalancer: "load_balancer",
-    maxOutputTokens: "max_output_tokens",
-    maxToolCalls: "max_tool_calls",
-    parallelToolCalls: "parallel_tool_calls",
-    presencePenalty: "presence_penalty",
-    previousResponseId: "previous_response_id",
-    promptCacheKey: "prompt_cache_key",
-    promptCacheOptions: "prompt_cache_options",
-    safetyIdentifier: "safety_identifier",
-    serviceTier: "service_tier",
-    stopSequences: "stop_sequences",
-    streamOptions: "stream_options",
-    templateEngine: "template_engine",
-    toolChoice: "tool_choice",
-    topK: "top_k",
-    topLogprobs: "top_logprobs",
-    topP: "top_p",
-  });
-});
+    ])).optional(),
+    topK: z.number().int().optional(),
+    topLogprobs: z.number().int().optional(),
+    topP: z.number().optional(),
+    variables: z.record(z.any()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      cacheControl: "cache_control",
+      contextManagement: "context_management",
+      fallbackOnCodes: "fallback_on_codes",
+      frequencyPenalty: "frequency_penalty",
+      integrationId: "integration_id",
+      loadBalancer: "load_balancer",
+      maxOutputTokens: "max_output_tokens",
+      maxToolCalls: "max_tool_calls",
+      parallelToolCalls: "parallel_tool_calls",
+      presencePenalty: "presence_penalty",
+      previousResponseId: "previous_response_id",
+      promptCacheKey: "prompt_cache_key",
+      promptCacheOptions: "prompt_cache_options",
+      safetyIdentifier: "safety_identifier",
+      serviceTier: "service_tier",
+      stopSequences: "stop_sequences",
+      streamOptions: "stream_options",
+      templateEngine: "template_engine",
+      toolChoice: "tool_choice",
+      topK: "top_k",
+      topLogprobs: "top_logprobs",
+      topP: "top_p",
+    });
+  })
+);
 
 export function createRouterResponseRequestBodyToJSON(
   createRouterResponseRequestBody: CreateRouterResponseRequestBody,
@@ -2594,18 +2680,20 @@ export const CreateRouterResponseResponsesResponseBody$inboundSchema: z.ZodType<
   CreateRouterResponseResponsesResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.unknown().optional().transform((v, ctx) => {
-    if (v === undefined) return undefined;
-    if (typeof v !== "string") return v;
-    try {
-      return JSON.parse(v);
-    } catch (err) {
-      ctx.addIssue({ code: "custom", message: `malformed json: ${err}` });
-      return z.NEVER;
-    }
-  }).pipe(components.ResponseStreamEvent$inboundSchema.optional()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.unknown().optional().transform((v, ctx) => {
+      if (v === undefined) return undefined;
+      if (typeof v !== "string") return v;
+      try {
+        return JSON.parse(v);
+      } catch (err) {
+        ctx.addIssue({ code: "custom", message: `malformed json: ${err}` });
+        return z.NEVER;
+      }
+    }).pipe(components.ResponseStreamEvent$inboundSchema.optional()),
+  })
+);
 
 export function createRouterResponseResponsesResponseBodyFromJSON(
   jsonString: string,
@@ -2626,87 +2714,91 @@ export function createRouterResponseResponsesResponseBodyFromJSON(
 /** @internal */
 export const CreateRouterResponseServiceTier$inboundSchema: z.ZodNativeEnum<
   typeof CreateRouterResponseServiceTier
-> = z.nativeEnum(CreateRouterResponseServiceTier);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(CreateRouterResponseServiceTier)
+);
 
 /** @internal */
 export const CreateRouterResponseStatus$inboundSchema: z.ZodNativeEnum<
   typeof CreateRouterResponseStatus
-> = z.nativeEnum(CreateRouterResponseStatus);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(CreateRouterResponseStatus));
 
 /** @internal */
-export const Truncation$inboundSchema: z.ZodNativeEnum<typeof Truncation> = z
-  .nativeEnum(Truncation);
+export const Truncation$inboundSchema: z.ZodNativeEnum<typeof Truncation> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Truncation));
 
 /** @internal */
 export const CreateRouterResponseResponseBody$inboundSchema: z.ZodType<
   CreateRouterResponseResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  background: z.boolean(),
-  completed_at: z.nullable(z.number().int()),
-  conversation: components.ConversationParam$inboundSchema.optional(),
-  created_at: z.number().int(),
-  error: z.nullable(components.ResponseError$inboundSchema),
-  frequency_penalty: z.number(),
-  id: z.string(),
-  incomplete_details: z.nullable(components.IncompleteDetails$inboundSchema),
-  input: z.nullable(z.array(z.any())),
-  instructions: z.nullable(z.string()),
-  max_output_tokens: z.nullable(z.number().int()),
-  max_tool_calls: z.nullable(z.number().int()),
-  memory: components.MemoryParam$inboundSchema.optional(),
-  metadata: z.record(z.string()),
-  model: z.string(),
-  object: z.string(),
-  output: z.nullable(z.array(z.any())),
-  parallel_tool_calls: z.boolean(),
-  presence_penalty: z.number(),
-  previous_response_id: z.nullable(z.string()),
-  prompt_cache_key: z.nullable(z.string()),
-  prompt_cache_options: z.nullable(
-    components.OpenAIPromptCacheOptions$inboundSchema,
-  ),
-  prompt_cache_retention: z.nullable(z.string()),
-  reasoning: z.nullable(components.Reasoning$inboundSchema),
-  safety_identifier: z.nullable(z.string()),
-  service_tier: CreateRouterResponseServiceTier$inboundSchema,
-  status: CreateRouterResponseStatus$inboundSchema,
-  store: z.boolean(),
-  telemetry: components.ResponseTelemetry$inboundSchema.optional(),
-  temperature: z.number(),
-  text: z.any().optional(),
-  tool_choice: z.any().optional(),
-  tools: z.nullable(z.array(z.any())),
-  top_k: z.number().int().optional(),
-  top_logprobs: z.number().int(),
-  top_p: z.number(),
-  truncation: Truncation$inboundSchema,
-  usage: z.nullable(components.PublicUsage$inboundSchema),
-  user: z.nullable(z.string()),
-  variables: z.record(z.any()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "completed_at": "completedAt",
-    "created_at": "createdAt",
-    "frequency_penalty": "frequencyPenalty",
-    "incomplete_details": "incompleteDetails",
-    "max_output_tokens": "maxOutputTokens",
-    "max_tool_calls": "maxToolCalls",
-    "parallel_tool_calls": "parallelToolCalls",
-    "presence_penalty": "presencePenalty",
-    "previous_response_id": "previousResponseId",
-    "prompt_cache_key": "promptCacheKey",
-    "prompt_cache_options": "promptCacheOptions",
-    "prompt_cache_retention": "promptCacheRetention",
-    "safety_identifier": "safetyIdentifier",
-    "service_tier": "serviceTier",
-    "tool_choice": "toolChoice",
-    "top_k": "topK",
-    "top_logprobs": "topLogprobs",
-    "top_p": "topP",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    background: z.boolean(),
+    completed_at: z.nullable(z.number().int()),
+    conversation: components.ConversationParam$inboundSchema.optional(),
+    created_at: z.number().int(),
+    error: z.nullable(components.ResponseError$inboundSchema),
+    frequency_penalty: z.number(),
+    id: z.string(),
+    incomplete_details: z.nullable(components.IncompleteDetails$inboundSchema),
+    input: z.nullable(z.array(z.any())),
+    instructions: z.nullable(z.string()),
+    max_output_tokens: z.nullable(z.number().int()),
+    max_tool_calls: z.nullable(z.number().int()),
+    memory: components.MemoryParam$inboundSchema.optional(),
+    metadata: z.record(z.string()),
+    model: z.string(),
+    object: z.string(),
+    output: z.nullable(z.array(z.any())),
+    parallel_tool_calls: z.boolean(),
+    presence_penalty: z.number(),
+    previous_response_id: z.nullable(z.string()),
+    prompt_cache_key: z.nullable(z.string()),
+    prompt_cache_options: z.nullable(
+      components.OpenAIPromptCacheOptions$inboundSchema,
+    ),
+    prompt_cache_retention: z.nullable(z.string()),
+    reasoning: z.nullable(components.Reasoning$inboundSchema),
+    safety_identifier: z.nullable(z.string()),
+    service_tier: CreateRouterResponseServiceTier$inboundSchema,
+    status: CreateRouterResponseStatus$inboundSchema,
+    store: z.boolean(),
+    telemetry: components.ResponseTelemetry$inboundSchema.optional(),
+    temperature: z.number(),
+    text: z.any().optional(),
+    tool_choice: z.any().optional(),
+    tools: z.nullable(z.array(z.any())),
+    top_k: z.number().int().optional(),
+    top_logprobs: z.number().int(),
+    top_p: z.number(),
+    truncation: Truncation$inboundSchema,
+    usage: z.nullable(components.PublicUsage$inboundSchema),
+    user: z.nullable(z.string()),
+    variables: z.record(z.any()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "completed_at": "completedAt",
+      "created_at": "createdAt",
+      "frequency_penalty": "frequencyPenalty",
+      "incomplete_details": "incompleteDetails",
+      "max_output_tokens": "maxOutputTokens",
+      "max_tool_calls": "maxToolCalls",
+      "parallel_tool_calls": "parallelToolCalls",
+      "presence_penalty": "presencePenalty",
+      "previous_response_id": "previousResponseId",
+      "prompt_cache_key": "promptCacheKey",
+      "prompt_cache_options": "promptCacheOptions",
+      "prompt_cache_retention": "promptCacheRetention",
+      "safety_identifier": "safetyIdentifier",
+      "service_tier": "serviceTier",
+      "tool_choice": "toolChoice",
+      "top_k": "topK",
+      "top_logprobs": "topLogprobs",
+      "top_p": "topP",
+    });
+  })
+);
 
 export function createRouterResponseResponseBodyFromJSON(
   jsonString: string,
@@ -2723,21 +2815,25 @@ export const CreateRouterResponseResponse$inboundSchema: z.ZodType<
   CreateRouterResponseResponse,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  z.lazy(() => CreateRouterResponseResponseBody$inboundSchema),
-  z.instanceof(ReadableStream<Uint8Array>)
-    .transform(stream => {
-      return new EventStream(stream, rawEvent => {
-        if (rawEvent.data === "[DONE]") return { done: true, value: undefined };
-        return {
-          done: false,
-          value: z.lazy(() =>
-            CreateRouterResponseResponsesResponseBody$inboundSchema
-          ).parse(rawEvent),
-        };
-      }, { dataRequired: false });
-    }),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => CreateRouterResponseResponseBody$inboundSchema),
+    z.instanceof(ReadableStream<Uint8Array>)
+      .transform(stream => {
+        return new EventStream(stream, rawEvent => {
+          if (rawEvent.data === "[DONE]") {
+            return { done: true, value: undefined };
+          }
+          return {
+            done: false,
+            value: z.lazy(() =>
+              CreateRouterResponseResponsesResponseBody$inboundSchema
+            ).parse(rawEvent),
+          };
+        }, { dataRequired: false });
+      }),
+  ])
+);
 
 export function createRouterResponseResponseFromJSON(
   jsonString: string,

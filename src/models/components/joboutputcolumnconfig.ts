@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -20,13 +20,15 @@ export const JobOutputColumnConfig$inboundSchema: z.ZodType<
   JobOutputColumnConfig,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  job_name: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "job_name": "jobName",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    job_name: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "job_name": "jobName",
+    });
+  })
+);
 
 export function jobOutputColumnConfigFromJSON(
   jsonString: string,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -46,20 +46,22 @@ export const McpOAuthConfigOutput$inboundSchema: z.ZodType<
   McpOAuthConfigOutput,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  client_id: z.string().optional(),
-  token_url: z.string().optional(),
-  scopes: z.array(z.string()).optional(),
-  masked_value: z.string().optional(),
-  issuer: z.string().optional(),
-  resource: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "client_id": "clientId",
-    "token_url": "tokenUrl",
-    "masked_value": "maskedValue",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    client_id: z.string().optional(),
+    token_url: z.string().optional(),
+    scopes: z.array(z.string()).optional(),
+    masked_value: z.string().optional(),
+    issuer: z.string().optional(),
+    resource: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "client_id": "clientId",
+      "token_url": "tokenUrl",
+      "masked_value": "maskedValue",
+    });
+  })
+);
 
 export function mcpOAuthConfigOutputFromJSON(
   jsonString: string,

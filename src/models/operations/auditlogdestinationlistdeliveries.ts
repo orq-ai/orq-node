@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import * as components from "../components/index.js";
 
 export type AuditLogDestinationListDeliveriesRequest = {
@@ -28,19 +29,22 @@ export const AuditLogDestinationListDeliveriesRequest$outboundSchema: z.ZodType<
   AuditLogDestinationListDeliveriesRequest$Outbound,
   z.ZodTypeDef,
   AuditLogDestinationListDeliveriesRequest
-> = z.object({
-  destinationId: z.string(),
-  limit: z.number().int().optional(),
-  startingAfter: z.string().optional(),
-  endingBefore: z.string().optional(),
-  status: z.array(components.AuditLogDeliveryStatus$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    destinationId: "destination_id",
-    startingAfter: "starting_after",
-    endingBefore: "ending_before",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    destinationId: z.string(),
+    limit: z.number().int().optional(),
+    startingAfter: z.string().optional(),
+    endingBefore: z.string().optional(),
+    status: z.array(components.AuditLogDeliveryStatus$outboundSchema)
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      destinationId: "destination_id",
+      startingAfter: "starting_after",
+      endingBefore: "ending_before",
+    });
+  })
+);
 
 export function auditLogDestinationListDeliveriesRequestToJSON(
   auditLogDestinationListDeliveriesRequest:

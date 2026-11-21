@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -55,34 +55,40 @@ export const RoutingRule$inboundSchema: z.ZodType<
   RoutingRule,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  _id: z.string(),
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  updated_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  created_by_id: z.string(),
-  updated_by_id: z.string(),
-  project_id: z.string(),
-  display_name: z.string(),
-  description: z.string(),
-  enabled: z.boolean(),
-  expression: RoutingRuleExpression$inboundSchema.optional(),
-  models_config: RoutingRuleModelsConfig$inboundSchema.optional(),
-  plugins: z.array(RoutingRulePlugin$inboundSchema),
-  priority: z.number().int(),
-  cache_config: RoutingRuleCacheConfig$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "_id": "id",
-    "created_at": "createdAt",
-    "updated_at": "updatedAt",
-    "created_by_id": "createdById",
-    "updated_by_id": "updatedById",
-    "project_id": "projectId",
-    "display_name": "displayName",
-    "models_config": "modelsConfig",
-    "cache_config": "cacheConfig",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    _id: z.string(),
+    created_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    updated_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    created_by_id: z.string(),
+    updated_by_id: z.string(),
+    project_id: z.string(),
+    display_name: z.string(),
+    description: z.string(),
+    enabled: z.boolean(),
+    expression: RoutingRuleExpression$inboundSchema.optional(),
+    models_config: RoutingRuleModelsConfig$inboundSchema.optional(),
+    plugins: z.array(RoutingRulePlugin$inboundSchema),
+    priority: z.number().int(),
+    cache_config: RoutingRuleCacheConfig$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "_id": "id",
+      "created_at": "createdAt",
+      "updated_at": "updatedAt",
+      "created_by_id": "createdById",
+      "updated_by_id": "updatedById",
+      "project_id": "projectId",
+      "display_name": "displayName",
+      "models_config": "modelsConfig",
+      "cache_config": "cacheConfig",
+    });
+  })
+);
 
 export function routingRuleFromJSON(
   jsonString: string,

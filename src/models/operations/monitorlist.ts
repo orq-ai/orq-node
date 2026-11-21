@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type MonitorListRequest = {
   /**
@@ -59,21 +60,23 @@ export const MonitorListRequest$outboundSchema: z.ZodType<
   MonitorListRequest$Outbound,
   z.ZodTypeDef,
   MonitorListRequest
-> = z.object({
-  limit: z.number().int().optional(),
-  startingAfter: z.string().optional(),
-  endingBefore: z.string().optional(),
-  projectId: z.string().optional(),
-  search: z.string().optional(),
-  workspaceWide: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    startingAfter: "starting_after",
-    endingBefore: "ending_before",
-    projectId: "project_id",
-    workspaceWide: "workspace_wide",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    limit: z.number().int().optional(),
+    startingAfter: z.string().optional(),
+    endingBefore: z.string().optional(),
+    projectId: z.string().optional(),
+    search: z.string().optional(),
+    workspaceWide: z.boolean().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      startingAfter: "starting_after",
+      endingBefore: "ending_before",
+      projectId: "project_id",
+      workspaceWide: "workspace_wide",
+    });
+  })
+);
 
 export function monitorListRequestToJSON(
   monitorListRequest: MonitorListRequest,

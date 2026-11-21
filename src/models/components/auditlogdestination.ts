@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -46,31 +46,37 @@ export const AuditLogDestination$inboundSchema: z.ZodType<
   AuditLogDestination,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  display_name: z.string(),
-  description: z.string().optional(),
-  url: z.string(),
-  status: AuditLogDestinationStatus$inboundSchema,
-  signing_secret_hint: z.string().optional(),
-  secret_rotated_at: z.string().datetime({ offset: true }).transform(v =>
-    new Date(v)
-  ).optional(),
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  updated_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  created_by_id: z.string().optional(),
-  updated_by_id: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "display_name": "displayName",
-    "signing_secret_hint": "signingSecretHint",
-    "secret_rotated_at": "secretRotatedAt",
-    "created_at": "createdAt",
-    "updated_at": "updatedAt",
-    "created_by_id": "createdById",
-    "updated_by_id": "updatedById",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    display_name: z.string(),
+    description: z.string().optional(),
+    url: z.string(),
+    status: AuditLogDestinationStatus$inboundSchema,
+    signing_secret_hint: z.string().optional(),
+    secret_rotated_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ).optional(),
+    created_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    updated_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    created_by_id: z.string().optional(),
+    updated_by_id: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "display_name": "displayName",
+      "signing_secret_hint": "signingSecretHint",
+      "secret_rotated_at": "secretRotatedAt",
+      "created_at": "createdAt",
+      "updated_at": "updatedAt",
+      "created_by_id": "createdById",
+      "updated_by_id": "updatedById",
+    });
+  })
+);
 
 export function auditLogDestinationFromJSON(
   jsonString: string,

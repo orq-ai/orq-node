@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -20,7 +20,7 @@ export type GuardrailRuleGuardrail = {
 
 /** @internal */
 export const Options$inboundSchema: z.ZodType<Options, z.ZodTypeDef, unknown> =
-  z.object({});
+  /* @__PURE__ */ lazySchema$(() => z.object({}));
 /** @internal */
 export type Options$Outbound = {};
 
@@ -29,7 +29,7 @@ export const Options$outboundSchema: z.ZodType<
   Options$Outbound,
   z.ZodTypeDef,
   Options
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function optionsToJSON(options: Options): string {
   return JSON.stringify(Options$outboundSchema.parse(options));
@@ -49,19 +49,21 @@ export const GuardrailRuleGuardrail$inboundSchema: z.ZodType<
   GuardrailRuleGuardrail,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  execute_on: z.string(),
-  sample_rate: z.number().optional(),
-  is_guardrail: z.boolean().optional(),
-  options: z.lazy(() => Options$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "execute_on": "executeOn",
-    "sample_rate": "sampleRate",
-    "is_guardrail": "isGuardrail",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    execute_on: z.string(),
+    sample_rate: z.number().optional(),
+    is_guardrail: z.boolean().optional(),
+    options: z.lazy(() => Options$inboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "execute_on": "executeOn",
+      "sample_rate": "sampleRate",
+      "is_guardrail": "isGuardrail",
+    });
+  })
+);
 /** @internal */
 export type GuardrailRuleGuardrail$Outbound = {
   id: string;
@@ -76,19 +78,21 @@ export const GuardrailRuleGuardrail$outboundSchema: z.ZodType<
   GuardrailRuleGuardrail$Outbound,
   z.ZodTypeDef,
   GuardrailRuleGuardrail
-> = z.object({
-  id: z.string(),
-  executeOn: z.string(),
-  sampleRate: z.number().optional(),
-  isGuardrail: z.boolean().optional(),
-  options: z.lazy(() => Options$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    executeOn: "execute_on",
-    sampleRate: "sample_rate",
-    isGuardrail: "is_guardrail",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    executeOn: z.string(),
+    sampleRate: z.number().optional(),
+    isGuardrail: z.boolean().optional(),
+    options: z.lazy(() => Options$outboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      executeOn: "execute_on",
+      sampleRate: "sample_rate",
+      isGuardrail: "is_guardrail",
+    });
+  })
+);
 
 export function guardrailRuleGuardrailToJSON(
   guardrailRuleGuardrail: GuardrailRuleGuardrail,

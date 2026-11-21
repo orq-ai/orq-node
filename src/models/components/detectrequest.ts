@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 /**
  * The workspace is resolved from the API key, never sent in the body.
@@ -84,20 +85,22 @@ export const DetectRequest$outboundSchema: z.ZodType<
   DetectRequest$Outbound,
   z.ZodTypeDef,
   DetectRequest
-> = z.object({
-  text: z.string().optional(),
-  language: z.string().optional(),
-  threshold: z.number().optional(),
-  includeEntities: z.boolean().optional(),
-  regions: z.array(z.string()).optional(),
-  entities: z.array(z.string()).optional(),
-  entityThresholds: z.record(z.number()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    includeEntities: "include_entities",
-    entityThresholds: "entity_thresholds",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    text: z.string().optional(),
+    language: z.string().optional(),
+    threshold: z.number().optional(),
+    includeEntities: z.boolean().optional(),
+    regions: z.array(z.string()).optional(),
+    entities: z.array(z.string()).optional(),
+    entityThresholds: z.record(z.number()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      includeEntities: "include_entities",
+      entityThresholds: "entity_thresholds",
+    });
+  })
+);
 
 export function detectRequestToJSON(detectRequest: DetectRequest): string {
   return JSON.stringify(DetectRequest$outboundSchema.parse(detectRequest));

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -56,26 +56,28 @@ export type Dataset = {
 
 /** @internal */
 export const Dataset$inboundSchema: z.ZodType<Dataset, z.ZodTypeDef, unknown> =
-  z.object({
-    display_name: z.string(),
-    project_id: z.string(),
-    metadata: DatasetMetadata$inboundSchema,
-    created_by_id: z.string(),
-    updated_by_id: z.string(),
-    created: z.string(),
-    updated: z.string(),
-    workspace_id: z.string(),
-    _id: z.string(),
-  }).transform((v) => {
-    return remap$(v, {
-      "display_name": "displayName",
-      "project_id": "projectId",
-      "created_by_id": "createdById",
-      "updated_by_id": "updatedById",
-      "workspace_id": "workspaceId",
-      "_id": "id",
-    });
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      display_name: z.string(),
+      project_id: z.string(),
+      metadata: DatasetMetadata$inboundSchema,
+      created_by_id: z.string(),
+      updated_by_id: z.string(),
+      created: z.string(),
+      updated: z.string(),
+      workspace_id: z.string(),
+      _id: z.string(),
+    }).transform((v) => {
+      return remap$(v, {
+        "display_name": "displayName",
+        "project_id": "projectId",
+        "created_by_id": "createdById",
+        "updated_by_id": "updatedById",
+        "workspace_id": "workspaceId",
+        "_id": "id",
+      });
+    })
+  );
 
 export function datasetFromJSON(
   jsonString: string,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -23,9 +23,11 @@ export const ApiKeyListCapabilitiesResponseBody$inboundSchema: z.ZodType<
   ApiKeyListCapabilitiesResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  domains: z.nullable(z.array(components.Domain$inboundSchema)),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    domains: z.nullable(z.array(components.Domain$inboundSchema)),
+  })
+);
 
 export function apiKeyListCapabilitiesResponseBodyFromJSON(
   jsonString: string,

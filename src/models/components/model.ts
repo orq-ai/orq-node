@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -136,7 +136,7 @@ export const ModelPricing$inboundSchema: z.ZodType<
   ModelPricing,
   z.ZodTypeDef,
   unknown
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function modelPricingFromJSON(
   jsonString: string,
@@ -153,7 +153,7 @@ export const ArtificialIntelligence$inboundSchema: z.ZodType<
   ArtificialIntelligence,
   z.ZodTypeDef,
   unknown
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function artificialIntelligenceFromJSON(
   jsonString: string,
@@ -166,38 +166,43 @@ export function artificialIntelligenceFromJSON(
 }
 
 /** @internal */
-export const Model$inboundSchema: z.ZodType<Model, z.ZodTypeDef, unknown> = z
-  .object({
-    id: z.string(),
-    created: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-    deprecation: z.string().datetime({ offset: true }).transform(v =>
-      new Date(v)
-    ).optional(),
-    name: z.string(),
-    description: z.string(),
-    provider: ModelProvider$inboundSchema,
-    endpoints: z.array(z.string()),
-    modalities: ModelModalities$inboundSchema,
-    offering_of: z.string(),
-    pricing: z.lazy(() => ModelPricing$inboundSchema).optional(),
-    supported_parameters: z.array(z.string()),
-    supported_tiers: z.array(z.string()),
-    context_window: z.string().optional(),
-    location: z.array(z.string()),
-    artificial_intelligence: z.lazy(() => ArtificialIntelligence$inboundSchema)
-      .optional(),
-    features: z.array(z.string()),
-    deprecated: z.boolean(),
-    zdr: z.boolean(),
-  }).transform((v) => {
-    return remap$(v, {
-      "offering_of": "offeringOf",
-      "supported_parameters": "supportedParameters",
-      "supported_tiers": "supportedTiers",
-      "context_window": "contextWindow",
-      "artificial_intelligence": "artificialIntelligence",
-    });
-  });
+export const Model$inboundSchema: z.ZodType<Model, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string(),
+      created: z.string().datetime({ offset: true }).transform(v =>
+        new Date(v)
+      ),
+      deprecation: z.string().datetime({ offset: true }).transform(v =>
+        new Date(v)
+      ).optional(),
+      name: z.string(),
+      description: z.string(),
+      provider: ModelProvider$inboundSchema,
+      endpoints: z.array(z.string()),
+      modalities: ModelModalities$inboundSchema,
+      offering_of: z.string(),
+      pricing: z.lazy(() => ModelPricing$inboundSchema).optional(),
+      supported_parameters: z.array(z.string()),
+      supported_tiers: z.array(z.string()),
+      context_window: z.string().optional(),
+      location: z.array(z.string()),
+      artificial_intelligence: z.lazy(() =>
+        ArtificialIntelligence$inboundSchema
+      ).optional(),
+      features: z.array(z.string()),
+      deprecated: z.boolean(),
+      zdr: z.boolean(),
+    }).transform((v) => {
+      return remap$(v, {
+        "offering_of": "offeringOf",
+        "supported_parameters": "supportedParameters",
+        "supported_tiers": "supportedTiers",
+        "context_window": "contextWindow",
+        "artificial_intelligence": "artificialIntelligence",
+      });
+    })
+  );
 
 export function modelFromJSON(
   jsonString: string,

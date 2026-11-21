@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -38,44 +38,50 @@ export const ExternalAgent$inboundSchema: z.ZodType<
   ExternalAgent,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  agent_id: z.string(),
-  key: z.string(),
-  display_name: z.string(),
-  description: z.string(),
-  path: z.string(),
-  project_id: z.string(),
-  agent_url: z.string(),
-  card_url: z.string().optional(),
-  headers: z.record(ExternalAgentHeader$inboundSchema),
-  protocol_version: z.string(),
-  preferred_transport: z.string(),
-  cached_card: z.record(z.any()),
-  card_refreshed_at: z.string().datetime({ offset: true }).transform(v =>
-    new Date(v)
-  ).optional(),
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  updated_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  created_by_id: z.string(),
-  updated_by_id: z.string(),
-  version: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "agent_id": "agentId",
-    "display_name": "displayName",
-    "project_id": "projectId",
-    "agent_url": "agentUrl",
-    "card_url": "cardUrl",
-    "protocol_version": "protocolVersion",
-    "preferred_transport": "preferredTransport",
-    "cached_card": "cachedCard",
-    "card_refreshed_at": "cardRefreshedAt",
-    "created_at": "createdAt",
-    "updated_at": "updatedAt",
-    "created_by_id": "createdById",
-    "updated_by_id": "updatedById",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    agent_id: z.string(),
+    key: z.string(),
+    display_name: z.string(),
+    description: z.string(),
+    path: z.string(),
+    project_id: z.string(),
+    agent_url: z.string(),
+    card_url: z.string().optional(),
+    headers: z.record(ExternalAgentHeader$inboundSchema),
+    protocol_version: z.string(),
+    preferred_transport: z.string(),
+    cached_card: z.record(z.any()),
+    card_refreshed_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ).optional(),
+    created_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    updated_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    created_by_id: z.string(),
+    updated_by_id: z.string(),
+    version: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "agent_id": "agentId",
+      "display_name": "displayName",
+      "project_id": "projectId",
+      "agent_url": "agentUrl",
+      "card_url": "cardUrl",
+      "protocol_version": "protocolVersion",
+      "preferred_transport": "preferredTransport",
+      "cached_card": "cachedCard",
+      "card_refreshed_at": "cardRefreshedAt",
+      "created_at": "createdAt",
+      "updated_at": "updatedAt",
+      "created_by_id": "createdById",
+      "updated_by_id": "updatedById",
+    });
+  })
+);
 
 export function externalAgentFromJSON(
   jsonString: string,

@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type UpdateAnnotationQueueRequest = {
   /**
@@ -37,18 +38,20 @@ export const UpdateAnnotationQueueRequest$outboundSchema: z.ZodType<
   UpdateAnnotationQueueRequest$Outbound,
   z.ZodTypeDef,
   UpdateAnnotationQueueRequest
-> = z.object({
-  displayName: z.string().optional(),
-  description: z.string().optional(),
-  projectId: z.string().optional(),
-  humanReviewIds: z.array(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    displayName: "display_name",
-    projectId: "project_id",
-    humanReviewIds: "human_review_ids",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    displayName: z.string().optional(),
+    description: z.string().optional(),
+    projectId: z.string().optional(),
+    humanReviewIds: z.array(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      displayName: "display_name",
+      projectId: "project_id",
+      humanReviewIds: "human_review_ids",
+    });
+  })
+);
 
 export function updateAnnotationQueueRequestToJSON(
   updateAnnotationQueueRequest: UpdateAnnotationQueueRequest,

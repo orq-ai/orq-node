@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -19,15 +19,17 @@ export const CellProgress$inboundSchema: z.ZodType<
   CellProgress,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  elapsed: z.string().optional(),
-  spend_usd: z.number().optional(),
-  activity: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "spend_usd": "spendUsd",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    elapsed: z.string().optional(),
+    spend_usd: z.number().optional(),
+    activity: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "spend_usd": "spendUsd",
+    });
+  })
+);
 
 export function cellProgressFromJSON(
   jsonString: string,

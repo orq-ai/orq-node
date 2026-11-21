@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import {
   EvaluationContext,
   EvaluationContext$Outbound,
@@ -107,18 +108,20 @@ export const InvokeEvaluatorRequest$outboundSchema: z.ZodType<
   InvokeEvaluatorRequest$Outbound,
   z.ZodTypeDef,
   InvokeEvaluatorRequest
-> = z.object({
-  context: EvaluationContext$outboundSchema.optional(),
-  model: z.string().optional(),
-  query: z.string().optional(),
-  output: z.string().optional(),
-  reference: z.string().optional(),
-  retrievals: z.array(z.string()).optional(),
-  messages: z.array(z.record(z.any())).optional(),
-  variables: z.record(z.any()).optional(),
-  retry: EvaluatorRetryConfig$outboundSchema.optional(),
-  timeout: EvaluatorCallTimeout$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    context: EvaluationContext$outboundSchema.optional(),
+    model: z.string().optional(),
+    query: z.string().optional(),
+    output: z.string().optional(),
+    reference: z.string().optional(),
+    retrievals: z.array(z.string()).optional(),
+    messages: z.array(z.record(z.any())).optional(),
+    variables: z.record(z.any()).optional(),
+    retry: EvaluatorRetryConfig$outboundSchema.optional(),
+    timeout: EvaluatorCallTimeout$outboundSchema.optional(),
+  })
+);
 
 export function invokeEvaluatorRequestToJSON(
   invokeEvaluatorRequest: InvokeEvaluatorRequest,

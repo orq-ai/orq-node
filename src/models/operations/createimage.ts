@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
@@ -414,30 +414,29 @@ export type CreateImageResponseBody = {
 };
 
 /** @internal */
-export const Background$outboundSchema: z.ZodNativeEnum<typeof Background> = z
-  .nativeEnum(Background);
+export const Background$outboundSchema: z.ZodNativeEnum<typeof Background> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Background));
 
 /** @internal */
-export const Moderation$outboundSchema: z.ZodNativeEnum<typeof Moderation> = z
-  .nativeEnum(Moderation);
+export const Moderation$outboundSchema: z.ZodNativeEnum<typeof Moderation> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Moderation));
 
 /** @internal */
 export const OutputFormat$outboundSchema: z.ZodNativeEnum<typeof OutputFormat> =
-  z.nativeEnum(OutputFormat);
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(OutputFormat));
 
 /** @internal */
-export const Quality$outboundSchema: z.ZodNativeEnum<typeof Quality> = z
-  .nativeEnum(Quality);
+export const Quality$outboundSchema: z.ZodNativeEnum<typeof Quality> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Quality));
 
 /** @internal */
 export const CreateImageResponseFormat$outboundSchema: z.ZodNativeEnum<
   typeof CreateImageResponseFormat
-> = z.nativeEnum(CreateImageResponseFormat);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(CreateImageResponseFormat));
 
 /** @internal */
-export const Style$outboundSchema: z.ZodNativeEnum<typeof Style> = z.nativeEnum(
-  Style,
-);
+export const Style$outboundSchema: z.ZodNativeEnum<typeof Style> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Style));
 
 /** @internal */
 export type CreateImageFallbacks$Outbound = {
@@ -449,9 +448,11 @@ export const CreateImageFallbacks$outboundSchema: z.ZodType<
   CreateImageFallbacks$Outbound,
   z.ZodTypeDef,
   CreateImageFallbacks
-> = z.object({
-  model: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model: z.string(),
+  })
+);
 
 export function createImageFallbacksToJSON(
   createImageFallbacks: CreateImageFallbacks,
@@ -472,14 +473,16 @@ export const CreateImageRetry$outboundSchema: z.ZodType<
   CreateImageRetry$Outbound,
   z.ZodTypeDef,
   CreateImageRetry
-> = z.object({
-  count: z.number().default(3),
-  onCodes: z.array(z.number()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    onCodes: "on_codes",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    count: z.number().default(3),
+    onCodes: z.array(z.number()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      onCodes: "on_codes",
+    });
+  })
+);
 
 export function createImageRetryToJSON(
   createImageRetry: CreateImageRetry,
@@ -492,7 +495,7 @@ export function createImageRetryToJSON(
 /** @internal */
 export const CreateImageType$outboundSchema: z.ZodNativeEnum<
   typeof CreateImageType
-> = z.nativeEnum(CreateImageType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(CreateImageType));
 
 /** @internal */
 export type CreateImageCache$Outbound = {
@@ -505,10 +508,12 @@ export const CreateImageCache$outboundSchema: z.ZodType<
   CreateImageCache$Outbound,
   z.ZodTypeDef,
   CreateImageCache
-> = z.object({
-  ttl: z.number().default(3600),
-  type: CreateImageType$outboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ttl: z.number().default(3600),
+    type: CreateImageType$outboundSchema,
+  })
+);
 
 export function createImageCacheToJSON(
   createImageCache: CreateImageCache,
@@ -521,7 +526,9 @@ export function createImageCacheToJSON(
 /** @internal */
 export const CreateImageLoadBalancerType$outboundSchema: z.ZodNativeEnum<
   typeof CreateImageLoadBalancerType
-> = z.nativeEnum(CreateImageLoadBalancerType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(CreateImageLoadBalancerType)
+);
 
 /** @internal */
 export type CreateImageLoadBalancerModels$Outbound = {
@@ -534,10 +541,12 @@ export const CreateImageLoadBalancerModels$outboundSchema: z.ZodType<
   CreateImageLoadBalancerModels$Outbound,
   z.ZodTypeDef,
   CreateImageLoadBalancerModels
-> = z.object({
-  model: z.string(),
-  weight: z.number().default(0.5),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model: z.string(),
+    weight: z.number().default(0.5),
+  })
+);
 
 export function createImageLoadBalancerModelsToJSON(
   createImageLoadBalancerModels: CreateImageLoadBalancerModels,
@@ -560,10 +569,12 @@ export const CreateImageLoadBalancer1$outboundSchema: z.ZodType<
   CreateImageLoadBalancer1$Outbound,
   z.ZodTypeDef,
   CreateImageLoadBalancer1
-> = z.object({
-  type: CreateImageLoadBalancerType$outboundSchema,
-  models: z.array(z.lazy(() => CreateImageLoadBalancerModels$outboundSchema)),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: CreateImageLoadBalancerType$outboundSchema,
+    models: z.array(z.lazy(() => CreateImageLoadBalancerModels$outboundSchema)),
+  })
+);
 
 export function createImageLoadBalancer1ToJSON(
   createImageLoadBalancer1: CreateImageLoadBalancer1,
@@ -582,7 +593,9 @@ export const CreateImageLoadBalancer$outboundSchema: z.ZodType<
   CreateImageLoadBalancer$Outbound,
   z.ZodTypeDef,
   CreateImageLoadBalancer
-> = z.lazy(() => CreateImageLoadBalancer1$outboundSchema);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.lazy(() => CreateImageLoadBalancer1$outboundSchema)
+);
 
 export function createImageLoadBalancerToJSON(
   createImageLoadBalancer: CreateImageLoadBalancer,
@@ -602,13 +615,15 @@ export const CreateImageTimeout$outboundSchema: z.ZodType<
   CreateImageTimeout$Outbound,
   z.ZodTypeDef,
   CreateImageTimeout
-> = z.object({
-  callTimeout: z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    callTimeout: "call_timeout",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    callTimeout: z.number(),
+  }).transform((v) => {
+    return remap$(v, {
+      callTimeout: "call_timeout",
+    });
+  })
+);
 
 export function createImageTimeoutToJSON(
   createImageTimeout: CreateImageTimeout,
@@ -629,14 +644,16 @@ export const CreateImageRouterImagesGenerationsRetry$outboundSchema: z.ZodType<
   CreateImageRouterImagesGenerationsRetry$Outbound,
   z.ZodTypeDef,
   CreateImageRouterImagesGenerationsRetry
-> = z.object({
-  count: z.number().default(3),
-  onCodes: z.array(z.number()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    onCodes: "on_codes",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    count: z.number().default(3),
+    onCodes: z.array(z.number()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      onCodes: "on_codes",
+    });
+  })
+);
 
 export function createImageRouterImagesGenerationsRetryToJSON(
   createImageRouterImagesGenerationsRetry:
@@ -660,9 +677,11 @@ export const CreateImageRouterImagesGenerationsFallbacks$outboundSchema:
     CreateImageRouterImagesGenerationsFallbacks$Outbound,
     z.ZodTypeDef,
     CreateImageRouterImagesGenerationsFallbacks
-  > = z.object({
-    model: z.string(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      model: z.string(),
+    })
+  );
 
 export function createImageRouterImagesGenerationsFallbacksToJSON(
   createImageRouterImagesGenerationsFallbacks:
@@ -677,9 +696,10 @@ export function createImageRouterImagesGenerationsFallbacksToJSON(
 
 /** @internal */
 export const CreateImageRouterImagesGenerationsType$outboundSchema:
-  z.ZodNativeEnum<typeof CreateImageRouterImagesGenerationsType> = z.nativeEnum(
-    CreateImageRouterImagesGenerationsType,
-  );
+  z.ZodNativeEnum<typeof CreateImageRouterImagesGenerationsType> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(CreateImageRouterImagesGenerationsType)
+    );
 
 /** @internal */
 export type CreateImageRouterImagesGenerationsCache$Outbound = {
@@ -692,10 +712,12 @@ export const CreateImageRouterImagesGenerationsCache$outboundSchema: z.ZodType<
   CreateImageRouterImagesGenerationsCache$Outbound,
   z.ZodTypeDef,
   CreateImageRouterImagesGenerationsCache
-> = z.object({
-  ttl: z.number().default(3600),
-  type: CreateImageRouterImagesGenerationsType$outboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ttl: z.number().default(3600),
+    type: CreateImageRouterImagesGenerationsType$outboundSchema,
+  })
+);
 
 export function createImageRouterImagesGenerationsCacheToJSON(
   createImageRouterImagesGenerationsCache:
@@ -710,8 +732,10 @@ export function createImageRouterImagesGenerationsCacheToJSON(
 
 /** @internal */
 export const CreateImageLoadBalancerRouterImagesGenerationsType$outboundSchema:
-  z.ZodNativeEnum<typeof CreateImageLoadBalancerRouterImagesGenerationsType> = z
-    .nativeEnum(CreateImageLoadBalancerRouterImagesGenerationsType);
+  z.ZodNativeEnum<typeof CreateImageLoadBalancerRouterImagesGenerationsType> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(CreateImageLoadBalancerRouterImagesGenerationsType)
+    );
 
 /** @internal */
 export type CreateImageLoadBalancerRouterImagesGenerationsModels$Outbound = {
@@ -725,10 +749,12 @@ export const CreateImageLoadBalancerRouterImagesGenerationsModels$outboundSchema
     CreateImageLoadBalancerRouterImagesGenerationsModels$Outbound,
     z.ZodTypeDef,
     CreateImageLoadBalancerRouterImagesGenerationsModels
-  > = z.object({
-    model: z.string(),
-    weight: z.number().default(0.5),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      model: z.string(),
+      weight: z.number().default(0.5),
+    })
+  );
 
 export function createImageLoadBalancerRouterImagesGenerationsModelsToJSON(
   createImageLoadBalancerRouterImagesGenerationsModels:
@@ -753,14 +779,14 @@ export const CreateImageLoadBalancerRouterImagesGenerations1$outboundSchema:
     CreateImageLoadBalancerRouterImagesGenerations1$Outbound,
     z.ZodTypeDef,
     CreateImageLoadBalancerRouterImagesGenerations1
-  > = z.object({
-    type: CreateImageLoadBalancerRouterImagesGenerationsType$outboundSchema,
-    models: z.array(
-      z.lazy(() =>
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type: CreateImageLoadBalancerRouterImagesGenerationsType$outboundSchema,
+      models: z.array(z.lazy(() =>
         CreateImageLoadBalancerRouterImagesGenerationsModels$outboundSchema
-      ),
-    ),
-  });
+      )),
+    })
+  );
 
 export function createImageLoadBalancerRouterImagesGenerations1ToJSON(
   createImageLoadBalancerRouterImagesGenerations1:
@@ -783,8 +809,8 @@ export const CreateImageRouterImagesGenerationsLoadBalancer$outboundSchema:
     CreateImageRouterImagesGenerationsLoadBalancer$Outbound,
     z.ZodTypeDef,
     CreateImageRouterImagesGenerationsLoadBalancer
-  > = z.lazy(() =>
-    CreateImageLoadBalancerRouterImagesGenerations1$outboundSchema
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.lazy(() => CreateImageLoadBalancerRouterImagesGenerations1$outboundSchema)
   );
 
 export function createImageRouterImagesGenerationsLoadBalancerToJSON(
@@ -809,13 +835,15 @@ export const CreateImageRouterImagesGenerationsTimeout$outboundSchema:
     CreateImageRouterImagesGenerationsTimeout$Outbound,
     z.ZodTypeDef,
     CreateImageRouterImagesGenerationsTimeout
-  > = z.object({
-    callTimeout: z.number(),
-  }).transform((v) => {
-    return remap$(v, {
-      callTimeout: "call_timeout",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      callTimeout: z.number(),
+    }).transform((v) => {
+      return remap$(v, {
+        callTimeout: "call_timeout",
+      });
+    })
+  );
 
 export function createImageRouterImagesGenerationsTimeoutToJSON(
   createImageRouterImagesGenerationsTimeout:
@@ -850,30 +878,32 @@ export const CreateImageOrq$outboundSchema: z.ZodType<
   CreateImageOrq$Outbound,
   z.ZodTypeDef,
   CreateImageOrq
-> = z.object({
-  name: z.string().optional(),
-  retry: z.lazy(() => CreateImageRouterImagesGenerationsRetry$outboundSchema)
-    .optional(),
-  fallbackOnCodes: z.array(z.number().int()).optional(),
-  fallbacks: z.array(
-    z.lazy(() => CreateImageRouterImagesGenerationsFallbacks$outboundSchema),
-  ).optional(),
-  identity: components.PublicIdentity$outboundSchema.optional(),
-  contact: components.PublicContact$outboundSchema.optional(),
-  cache: z.lazy(() => CreateImageRouterImagesGenerationsCache$outboundSchema)
-    .optional(),
-  loadBalancer: z.lazy(() =>
-    CreateImageLoadBalancerRouterImagesGenerations1$outboundSchema
-  ).optional(),
-  timeout: z.lazy(() =>
-    CreateImageRouterImagesGenerationsTimeout$outboundSchema
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    fallbackOnCodes: "fallback_on_codes",
-    loadBalancer: "load_balancer",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    retry: z.lazy(() => CreateImageRouterImagesGenerationsRetry$outboundSchema)
+      .optional(),
+    fallbackOnCodes: z.array(z.number().int()).optional(),
+    fallbacks: z.array(
+      z.lazy(() => CreateImageRouterImagesGenerationsFallbacks$outboundSchema),
+    ).optional(),
+    identity: components.PublicIdentity$outboundSchema.optional(),
+    contact: components.PublicContact$outboundSchema.optional(),
+    cache: z.lazy(() => CreateImageRouterImagesGenerationsCache$outboundSchema)
+      .optional(),
+    loadBalancer: z.lazy(() =>
+      CreateImageLoadBalancerRouterImagesGenerations1$outboundSchema
+    ).optional(),
+    timeout: z.lazy(() =>
+      CreateImageRouterImagesGenerationsTimeout$outboundSchema
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      fallbackOnCodes: "fallback_on_codes",
+      loadBalancer: "load_balancer",
+    });
+  })
+);
 
 export function createImageOrqToJSON(createImageOrq: CreateImageOrq): string {
   return JSON.stringify(CreateImageOrq$outboundSchema.parse(createImageOrq));
@@ -909,40 +939,42 @@ export const CreateImageRequestBody$outboundSchema: z.ZodType<
   CreateImageRequestBody$Outbound,
   z.ZodTypeDef,
   CreateImageRequestBody
-> = z.object({
-  prompt: z.string(),
-  background: z.nullable(Background$outboundSchema).optional(),
-  model: z.string(),
-  moderation: z.nullable(Moderation$outboundSchema).optional(),
-  n: z.nullable(z.number().int().default(1)),
-  outputCompression: z.nullable(z.number().int()).optional(),
-  outputFormat: z.nullable(OutputFormat$outboundSchema).optional(),
-  quality: z.nullable(Quality$outboundSchema).optional(),
-  responseFormat: z.nullable(CreateImageResponseFormat$outboundSchema)
-    .optional(),
-  size: z.nullable(z.string()).optional(),
-  style: z.nullable(Style$outboundSchema).optional(),
-  metadata: z.record(z.string()).optional(),
-  name: z.string().optional(),
-  fallbackOnCodes: z.array(z.number().int()).optional(),
-  fallbacks: z.array(z.lazy(() => CreateImageFallbacks$outboundSchema))
-    .optional(),
-  retry: z.lazy(() => CreateImageRetry$outboundSchema).optional(),
-  cache: z.lazy(() => CreateImageCache$outboundSchema).optional(),
-  loadBalancer: z.lazy(() => CreateImageLoadBalancer1$outboundSchema)
-    .optional(),
-  timeout: z.lazy(() => CreateImageTimeout$outboundSchema).optional(),
-  plugins: z.array(components.PIIRedactionPlugin$outboundSchema).optional(),
-  orq: z.lazy(() => CreateImageOrq$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    outputCompression: "output_compression",
-    outputFormat: "output_format",
-    responseFormat: "response_format",
-    fallbackOnCodes: "fallback_on_codes",
-    loadBalancer: "load_balancer",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    prompt: z.string(),
+    background: z.nullable(Background$outboundSchema).optional(),
+    model: z.string(),
+    moderation: z.nullable(Moderation$outboundSchema).optional(),
+    n: z.nullable(z.number().int().default(1)),
+    outputCompression: z.nullable(z.number().int()).optional(),
+    outputFormat: z.nullable(OutputFormat$outboundSchema).optional(),
+    quality: z.nullable(Quality$outboundSchema).optional(),
+    responseFormat: z.nullable(CreateImageResponseFormat$outboundSchema)
+      .optional(),
+    size: z.nullable(z.string()).optional(),
+    style: z.nullable(Style$outboundSchema).optional(),
+    metadata: z.record(z.string()).optional(),
+    name: z.string().optional(),
+    fallbackOnCodes: z.array(z.number().int()).optional(),
+    fallbacks: z.array(z.lazy(() => CreateImageFallbacks$outboundSchema))
+      .optional(),
+    retry: z.lazy(() => CreateImageRetry$outboundSchema).optional(),
+    cache: z.lazy(() => CreateImageCache$outboundSchema).optional(),
+    loadBalancer: z.lazy(() => CreateImageLoadBalancer1$outboundSchema)
+      .optional(),
+    timeout: z.lazy(() => CreateImageTimeout$outboundSchema).optional(),
+    plugins: z.array(components.PIIRedactionPlugin$outboundSchema).optional(),
+    orq: z.lazy(() => CreateImageOrq$outboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      outputCompression: "output_compression",
+      outputFormat: "output_format",
+      responseFormat: "response_format",
+      fallbackOnCodes: "fallback_on_codes",
+      loadBalancer: "load_balancer",
+    });
+  })
+);
 
 export function createImageRequestBodyToJSON(
   createImageRequestBody: CreateImageRequestBody,
@@ -957,16 +989,18 @@ export const CreateImageData$inboundSchema: z.ZodType<
   CreateImageData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  revised_prompt: z.nullable(z.string()).optional(),
-  b64_json: z.string().optional(),
-  url: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "revised_prompt": "revisedPrompt",
-    "b64_json": "b64Json",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    revised_prompt: z.nullable(z.string()).optional(),
+    b64_json: z.string().optional(),
+    url: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "revised_prompt": "revisedPrompt",
+      "b64_json": "b64Json",
+    });
+  })
+);
 
 export function createImageDataFromJSON(
   jsonString: string,
@@ -983,15 +1017,17 @@ export const InputTokensDetails$inboundSchema: z.ZodType<
   InputTokensDetails,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  image_tokens: z.number().optional(),
-  text_tokens: z.number().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "image_tokens": "imageTokens",
-    "text_tokens": "textTokens",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    image_tokens: z.number().optional(),
+    text_tokens: z.number().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "image_tokens": "imageTokens",
+      "text_tokens": "textTokens",
+    });
+  })
+);
 
 export function inputTokensDetailsFromJSON(
   jsonString: string,
@@ -1008,19 +1044,21 @@ export const CreateImageUsage$inboundSchema: z.ZodType<
   CreateImageUsage,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  input_tokens: z.number().optional(),
-  input_tokens_details: z.lazy(() => InputTokensDetails$inboundSchema),
-  output_tokens: z.number().optional(),
-  total_tokens: z.number().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "input_tokens": "inputTokens",
-    "input_tokens_details": "inputTokensDetails",
-    "output_tokens": "outputTokens",
-    "total_tokens": "totalTokens",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    input_tokens: z.number().optional(),
+    input_tokens_details: z.lazy(() => InputTokensDetails$inboundSchema),
+    output_tokens: z.number().optional(),
+    total_tokens: z.number().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "input_tokens": "inputTokens",
+      "input_tokens_details": "inputTokensDetails",
+      "output_tokens": "outputTokens",
+      "total_tokens": "totalTokens",
+    });
+  })
+);
 
 export function createImageUsageFromJSON(
   jsonString: string,
@@ -1037,11 +1075,13 @@ export const CreateImageResponseBody$inboundSchema: z.ZodType<
   CreateImageResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  created: z.number(),
-  data: z.array(z.lazy(() => CreateImageData$inboundSchema)),
-  usage: z.lazy(() => CreateImageUsage$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    created: z.number(),
+    data: z.array(z.lazy(() => CreateImageData$inboundSchema)),
+    usage: z.lazy(() => CreateImageUsage$inboundSchema).optional(),
+  })
+);
 
 export function createImageResponseBodyFromJSON(
   jsonString: string,

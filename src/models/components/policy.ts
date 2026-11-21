@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { EvaluatorRef, EvaluatorRef$inboundSchema } from "./evaluatorref.js";
@@ -34,40 +34,42 @@ export type Policy = {
 };
 
 /** @internal */
-export const Policy$inboundSchema: z.ZodType<Policy, z.ZodTypeDef, unknown> = z
-  .object({
-    _id: z.string(),
-    created_at: z.string().datetime({ offset: true }).transform(v =>
-      new Date(v)
-    ),
-    created_by_id: z.string(),
-    description: z.string().optional(),
-    display_name: z.string(),
-    enabled: z.boolean(),
-    evaluators: z.nullable(z.array(EvaluatorRef$inboundSchema)).optional(),
-    limits: Limits$inboundSchema.optional(),
-    models_config: ModelsConfig$inboundSchema.optional(),
-    project_id: z.string(),
-    retry_config: PolicyRetryConfig$inboundSchema.optional(),
-    slug: z.string(),
-    timeout: z.number().int(),
-    updated_at: z.string().datetime({ offset: true }).transform(v =>
-      new Date(v)
-    ),
-    updated_by_id: z.string(),
-  }).transform((v) => {
-    return remap$(v, {
-      "_id": "id",
-      "created_at": "createdAt",
-      "created_by_id": "createdById",
-      "display_name": "displayName",
-      "models_config": "modelsConfig",
-      "project_id": "projectId",
-      "retry_config": "retryConfig",
-      "updated_at": "updatedAt",
-      "updated_by_id": "updatedById",
-    });
-  });
+export const Policy$inboundSchema: z.ZodType<Policy, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      _id: z.string(),
+      created_at: z.string().datetime({ offset: true }).transform(v =>
+        new Date(v)
+      ),
+      created_by_id: z.string(),
+      description: z.string().optional(),
+      display_name: z.string(),
+      enabled: z.boolean(),
+      evaluators: z.nullable(z.array(EvaluatorRef$inboundSchema)).optional(),
+      limits: Limits$inboundSchema.optional(),
+      models_config: ModelsConfig$inboundSchema.optional(),
+      project_id: z.string(),
+      retry_config: PolicyRetryConfig$inboundSchema.optional(),
+      slug: z.string(),
+      timeout: z.number().int(),
+      updated_at: z.string().datetime({ offset: true }).transform(v =>
+        new Date(v)
+      ),
+      updated_by_id: z.string(),
+    }).transform((v) => {
+      return remap$(v, {
+        "_id": "id",
+        "created_at": "createdAt",
+        "created_by_id": "createdById",
+        "display_name": "displayName",
+        "models_config": "modelsConfig",
+        "project_id": "projectId",
+        "retry_config": "retryConfig",
+        "updated_at": "updatedAt",
+        "updated_by_id": "updatedById",
+      });
+    })
+  );
 
 export function policyFromJSON(
   jsonString: string,

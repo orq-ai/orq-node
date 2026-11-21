@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import {
   Sharing,
@@ -42,9 +43,10 @@ export type UpdateFileSystemRequest = {
 
 /** @internal */
 export const UpdateFileSystemRequestExternalAccess$outboundSchema:
-  z.ZodNativeEnum<typeof UpdateFileSystemRequestExternalAccess> = z.nativeEnum(
-    UpdateFileSystemRequestExternalAccess,
-  );
+  z.ZodNativeEnum<typeof UpdateFileSystemRequestExternalAccess> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(UpdateFileSystemRequestExternalAccess)
+    );
 
 /** @internal */
 export type UpdateFileSystemRequest$Outbound = {
@@ -60,19 +62,21 @@ export const UpdateFileSystemRequest$outboundSchema: z.ZodType<
   UpdateFileSystemRequest$Outbound,
   z.ZodTypeDef,
   UpdateFileSystemRequest
-> = z.object({
-  displayName: z.string().optional(),
-  description: z.string().optional(),
-  path: z.string().optional(),
-  externalAccess: UpdateFileSystemRequestExternalAccess$outboundSchema
-    .optional(),
-  sharing: Sharing$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    displayName: "display_name",
-    externalAccess: "external_access",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    displayName: z.string().optional(),
+    description: z.string().optional(),
+    path: z.string().optional(),
+    externalAccess: UpdateFileSystemRequestExternalAccess$outboundSchema
+      .optional(),
+    sharing: Sharing$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      displayName: "display_name",
+      externalAccess: "external_access",
+    });
+  })
+);
 
 export function updateFileSystemRequestToJSON(
   updateFileSystemRequest: UpdateFileSystemRequest,

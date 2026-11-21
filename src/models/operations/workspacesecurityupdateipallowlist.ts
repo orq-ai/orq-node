@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import * as components from "../components/index.js";
 
 export type WorkspaceSecurityUpdateIPAllowlistRequest = {
@@ -23,16 +24,18 @@ export const WorkspaceSecurityUpdateIPAllowlistRequest$outboundSchema:
     WorkspaceSecurityUpdateIPAllowlistRequest$Outbound,
     z.ZodTypeDef,
     WorkspaceSecurityUpdateIPAllowlistRequest
-  > = z.object({
-    workspaceKey: z.string(),
-    updateIPAllowlistRequest:
-      components.UpdateIPAllowlistRequest$outboundSchema,
-  }).transform((v) => {
-    return remap$(v, {
-      workspaceKey: "workspace_key",
-      updateIPAllowlistRequest: "UpdateIPAllowlistRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      workspaceKey: z.string(),
+      updateIPAllowlistRequest:
+        components.UpdateIPAllowlistRequest$outboundSchema,
+    }).transform((v) => {
+      return remap$(v, {
+        workspaceKey: "workspace_key",
+        updateIPAllowlistRequest: "UpdateIPAllowlistRequest",
+      });
+    })
+  );
 
 export function workspaceSecurityUpdateIPAllowlistRequestToJSON(
   workspaceSecurityUpdateIPAllowlistRequest:

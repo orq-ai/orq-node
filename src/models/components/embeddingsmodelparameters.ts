@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -18,14 +18,16 @@ export const EmbeddingsModelParameters$inboundSchema: z.ZodType<
   EmbeddingsModelParameters,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  encoding_format: z.string().optional(),
-  dimensions: z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "encoding_format": "encodingFormat",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    encoding_format: z.string().optional(),
+    dimensions: z.number().int().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "encoding_format": "encodingFormat",
+    });
+  })
+);
 /** @internal */
 export type EmbeddingsModelParameters$Outbound = {
   encoding_format?: string | undefined;
@@ -37,14 +39,16 @@ export const EmbeddingsModelParameters$outboundSchema: z.ZodType<
   EmbeddingsModelParameters$Outbound,
   z.ZodTypeDef,
   EmbeddingsModelParameters
-> = z.object({
-  encodingFormat: z.string().optional(),
-  dimensions: z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    encodingFormat: "encoding_format",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    encodingFormat: z.string().optional(),
+    dimensions: z.number().int().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      encodingFormat: "encoding_format",
+    });
+  })
+);
 
 export function embeddingsModelParametersToJSON(
   embeddingsModelParameters: EmbeddingsModelParameters,

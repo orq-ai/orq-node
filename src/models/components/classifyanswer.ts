@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -42,13 +42,15 @@ export const ClassifyAnswer$inboundSchema: z.ZodType<
   ClassifyAnswer,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  ClassifyBoxAnswer$inboundSchema,
-  ClassifyChoiceAnswer$inboundSchema,
-  ClassifyNoulAnswer$inboundSchema,
-  ClassifyRefusalAnswer$inboundSchema,
-  ClassifyScoreAnswer$inboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    ClassifyBoxAnswer$inboundSchema,
+    ClassifyChoiceAnswer$inboundSchema,
+    ClassifyNoulAnswer$inboundSchema,
+    ClassifyRefusalAnswer$inboundSchema,
+    ClassifyScoreAnswer$inboundSchema,
+  ])
+);
 
 export function classifyAnswerFromJSON(
   jsonString: string,

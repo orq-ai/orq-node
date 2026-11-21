@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -33,38 +33,40 @@ export const TraceCost$inboundSchema: z.ZodType<
   TraceCost,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  input: z.number().optional(),
-  output: z.number().optional(),
-  cache_read: z.number().optional(),
-  cache_write: z.number().optional(),
-  reasoning: z.number().optional(),
-  web_search: z.number().optional(),
-  total: z.number().optional(),
-  currency: z.string().optional(),
-  cached: z.number().optional(),
-  audio_input: z.number().optional(),
-  audio_output: z.number().optional(),
-  accepted_prediction: z.number().optional(),
-  rejected_prediction: z.number().optional(),
-  billable: z.boolean().optional(),
-  pricing_tier: z.string().optional(),
-  threshold_exceeded: z.boolean().optional(),
-  integration_id: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "cache_read": "cacheRead",
-    "cache_write": "cacheWrite",
-    "web_search": "webSearch",
-    "audio_input": "audioInput",
-    "audio_output": "audioOutput",
-    "accepted_prediction": "acceptedPrediction",
-    "rejected_prediction": "rejectedPrediction",
-    "pricing_tier": "pricingTier",
-    "threshold_exceeded": "thresholdExceeded",
-    "integration_id": "integrationId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    input: z.number().optional(),
+    output: z.number().optional(),
+    cache_read: z.number().optional(),
+    cache_write: z.number().optional(),
+    reasoning: z.number().optional(),
+    web_search: z.number().optional(),
+    total: z.number().optional(),
+    currency: z.string().optional(),
+    cached: z.number().optional(),
+    audio_input: z.number().optional(),
+    audio_output: z.number().optional(),
+    accepted_prediction: z.number().optional(),
+    rejected_prediction: z.number().optional(),
+    billable: z.boolean().optional(),
+    pricing_tier: z.string().optional(),
+    threshold_exceeded: z.boolean().optional(),
+    integration_id: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "cache_read": "cacheRead",
+      "cache_write": "cacheWrite",
+      "web_search": "webSearch",
+      "audio_input": "audioInput",
+      "audio_output": "audioOutput",
+      "accepted_prediction": "acceptedPrediction",
+      "rejected_prediction": "rejectedPrediction",
+      "pricing_tier": "pricingTier",
+      "threshold_exceeded": "thresholdExceeded",
+      "integration_id": "integrationId",
+    });
+  })
+);
 
 export function traceCostFromJSON(
   jsonString: string,

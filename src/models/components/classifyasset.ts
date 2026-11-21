@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 
 /**
@@ -46,13 +47,13 @@ export type ClassifyAsset = {
 };
 
 /** @internal */
-export const Format$outboundSchema: z.ZodNativeEnum<typeof Format> = z
-  .nativeEnum(Format);
+export const Format$outboundSchema: z.ZodNativeEnum<typeof Format> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Format));
 
 /** @internal */
 export const ClassifyAssetType$outboundSchema: z.ZodNativeEnum<
   typeof ClassifyAssetType
-> = z.nativeEnum(ClassifyAssetType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ClassifyAssetType));
 
 /** @internal */
 export type ClassifyAsset$Outbound = {
@@ -66,15 +67,17 @@ export const ClassifyAsset$outboundSchema: z.ZodType<
   ClassifyAsset$Outbound,
   z.ZodTypeDef,
   ClassifyAsset
-> = z.object({
-  dataBase64: z.string(),
-  format: Format$outboundSchema,
-  type: ClassifyAssetType$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    dataBase64: "data_base64",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    dataBase64: z.string(),
+    format: Format$outboundSchema,
+    type: ClassifyAssetType$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      dataBase64: "data_base64",
+    });
+  })
+);
 
 export function classifyAssetToJSON(classifyAsset: ClassifyAsset): string {
   return JSON.stringify(ClassifyAsset$outboundSchema.parse(classifyAsset));

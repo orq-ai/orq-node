@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type EvaluatorRetryConfig = {
   /**
@@ -27,14 +28,16 @@ export const EvaluatorRetryConfig$outboundSchema: z.ZodType<
   EvaluatorRetryConfig$Outbound,
   z.ZodTypeDef,
   EvaluatorRetryConfig
-> = z.object({
-  count: z.number().int().optional(),
-  onCodes: z.array(z.number().int()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    onCodes: "on_codes",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    count: z.number().int().optional(),
+    onCodes: z.array(z.number().int()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      onCodes: "on_codes",
+    });
+  })
+);
 
 export function evaluatorRetryConfigToJSON(
   evaluatorRetryConfig: EvaluatorRetryConfig,

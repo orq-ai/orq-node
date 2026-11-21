@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type AddIPRangeRequest = {
   cidr?: string | undefined;
@@ -20,10 +21,12 @@ export const AddIPRangeRequest$outboundSchema: z.ZodType<
   AddIPRangeRequest$Outbound,
   z.ZodTypeDef,
   AddIPRangeRequest
-> = z.object({
-  cidr: z.string().optional(),
-  description: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    cidr: z.string().optional(),
+    description: z.string().optional(),
+  })
+);
 
 export function addIPRangeRequestToJSON(
   addIPRangeRequest: AddIPRangeRequest,

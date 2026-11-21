@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -33,21 +33,23 @@ export const McpGatewayPlugin$inboundSchema: z.ZodType<
   McpGatewayPlugin,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  language: z.string().optional(),
-  entities: z.array(z.string()).optional(),
-  on_failure: z.string().optional(),
-  threshold: z.number().optional(),
-  mask: z.array(z.string()).optional(),
-  regions: z.array(z.string()).optional(),
-  entity_thresholds: z.record(z.number()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "on_failure": "onFailure",
-    "entity_thresholds": "entityThresholds",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    language: z.string().optional(),
+    entities: z.array(z.string()).optional(),
+    on_failure: z.string().optional(),
+    threshold: z.number().optional(),
+    mask: z.array(z.string()).optional(),
+    regions: z.array(z.string()).optional(),
+    entity_thresholds: z.record(z.number()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "on_failure": "onFailure",
+      "entity_thresholds": "entityThresholds",
+    });
+  })
+);
 /** @internal */
 export type McpGatewayPlugin$Outbound = {
   id?: string | undefined;
@@ -65,21 +67,23 @@ export const McpGatewayPlugin$outboundSchema: z.ZodType<
   McpGatewayPlugin$Outbound,
   z.ZodTypeDef,
   McpGatewayPlugin
-> = z.object({
-  id: z.string().optional(),
-  language: z.string().optional(),
-  entities: z.array(z.string()).optional(),
-  onFailure: z.string().optional(),
-  threshold: z.number().optional(),
-  mask: z.array(z.string()).optional(),
-  regions: z.array(z.string()).optional(),
-  entityThresholds: z.record(z.number()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    onFailure: "on_failure",
-    entityThresholds: "entity_thresholds",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    language: z.string().optional(),
+    entities: z.array(z.string()).optional(),
+    onFailure: z.string().optional(),
+    threshold: z.number().optional(),
+    mask: z.array(z.string()).optional(),
+    regions: z.array(z.string()).optional(),
+    entityThresholds: z.record(z.number()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      onFailure: "on_failure",
+      entityThresholds: "entity_thresholds",
+    });
+  })
+);
 
 export function mcpGatewayPluginToJSON(
   mcpGatewayPlugin: McpGatewayPlugin,

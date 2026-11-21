@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type RestoreRequest = {
   redactedText?: string | undefined;
@@ -24,14 +25,16 @@ export const RestoreRequest$outboundSchema: z.ZodType<
   RestoreRequest$Outbound,
   z.ZodTypeDef,
   RestoreRequest
-> = z.object({
-  redactedText: z.string().optional(),
-  mappings: z.record(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    redactedText: "redacted_text",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    redactedText: z.string().optional(),
+    mappings: z.record(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      redactedText: "redacted_text",
+    });
+  })
+);
 
 export function restoreRequestToJSON(restoreRequest: RestoreRequest): string {
   return JSON.stringify(RestoreRequest$outboundSchema.parse(restoreRequest));

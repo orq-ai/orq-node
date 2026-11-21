@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -35,44 +35,46 @@ export const ModelConfigurationResponse$inboundSchema: z.ZodType<
   ModelConfigurationResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  api_key_env: z.string().optional(),
-  api_version: z.string().optional(),
-  auth_mode: z.string().optional(),
-  auth_type: z.string().optional(),
-  base_url: z.string().optional(),
-  deployment_name: z.string().optional(),
-  endpoint: z.string().optional(),
-  inference_profile_arn: z.string().optional(),
-  integration_id: z.string().optional(),
-  is_openai_compatible: z.boolean().optional(),
-  is_tuned_model: z.boolean().optional(),
-  location: z.string().optional(),
-  model_id: z.string().optional(),
-  project_id: z.string().optional(),
-  provider: z.string(),
-  region: z.string().optional(),
-  should_use_beta_features: z.boolean().optional(),
-  subtype: z.string().optional(),
-  workspace_id: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "api_key_env": "apiKeyEnv",
-    "api_version": "apiVersion",
-    "auth_mode": "authMode",
-    "auth_type": "authType",
-    "base_url": "baseUrl",
-    "deployment_name": "deploymentName",
-    "inference_profile_arn": "inferenceProfileArn",
-    "integration_id": "integrationId",
-    "is_openai_compatible": "isOpenaiCompatible",
-    "is_tuned_model": "isTunedModel",
-    "model_id": "modelId",
-    "project_id": "projectId",
-    "should_use_beta_features": "shouldUseBetaFeatures",
-    "workspace_id": "workspaceId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    api_key_env: z.string().optional(),
+    api_version: z.string().optional(),
+    auth_mode: z.string().optional(),
+    auth_type: z.string().optional(),
+    base_url: z.string().optional(),
+    deployment_name: z.string().optional(),
+    endpoint: z.string().optional(),
+    inference_profile_arn: z.string().optional(),
+    integration_id: z.string().optional(),
+    is_openai_compatible: z.boolean().optional(),
+    is_tuned_model: z.boolean().optional(),
+    location: z.string().optional(),
+    model_id: z.string().optional(),
+    project_id: z.string().optional(),
+    provider: z.string(),
+    region: z.string().optional(),
+    should_use_beta_features: z.boolean().optional(),
+    subtype: z.string().optional(),
+    workspace_id: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "api_key_env": "apiKeyEnv",
+      "api_version": "apiVersion",
+      "auth_mode": "authMode",
+      "auth_type": "authType",
+      "base_url": "baseUrl",
+      "deployment_name": "deploymentName",
+      "inference_profile_arn": "inferenceProfileArn",
+      "integration_id": "integrationId",
+      "is_openai_compatible": "isOpenaiCompatible",
+      "is_tuned_model": "isTunedModel",
+      "model_id": "modelId",
+      "project_id": "projectId",
+      "should_use_beta_features": "shouldUseBetaFeatures",
+      "workspace_id": "workspaceId",
+    });
+  })
+);
 
 export function modelConfigurationResponseFromJSON(
   jsonString: string,

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import * as components from "../components/index.js";
 import { OrqError } from "./orqerror.js";
 
@@ -262,19 +263,21 @@ export const CreateClassifyRouterClassifyResponse502ResponseBody$inboundSchema:
     CreateClassifyRouterClassifyResponse502ResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    error: components.APIError$inboundSchema,
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-    .transform((v) => {
-      return new CreateClassifyRouterClassifyResponse502ResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
-      });
-    });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      error: components.APIError$inboundSchema,
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new CreateClassifyRouterClassifyResponse502ResponseBody(v, {
+          request: v.request$,
+          response: v.response$,
+          body: v.body$,
+        });
+      })
+  );
 
 /** @internal */
 export const CreateClassifyRouterClassifyResponse500ResponseBody$inboundSchema:
@@ -282,19 +285,21 @@ export const CreateClassifyRouterClassifyResponse500ResponseBody$inboundSchema:
     CreateClassifyRouterClassifyResponse500ResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    error: components.APIError$inboundSchema,
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-    .transform((v) => {
-      return new CreateClassifyRouterClassifyResponse500ResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
-      });
-    });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      error: components.APIError$inboundSchema,
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new CreateClassifyRouterClassifyResponse500ResponseBody(v, {
+          request: v.request$,
+          response: v.response$,
+          body: v.body$,
+        });
+      })
+  );
 
 /** @internal */
 export const CreateClassifyRouterClassifyResponse429ResponseBody$inboundSchema:
@@ -302,19 +307,21 @@ export const CreateClassifyRouterClassifyResponse429ResponseBody$inboundSchema:
     CreateClassifyRouterClassifyResponse429ResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    error: components.APIError$inboundSchema,
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-    .transform((v) => {
-      return new CreateClassifyRouterClassifyResponse429ResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
-      });
-    });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      error: components.APIError$inboundSchema,
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new CreateClassifyRouterClassifyResponse429ResponseBody(v, {
+          request: v.request$,
+          response: v.response$,
+          body: v.body$,
+        });
+      })
+  );
 
 /** @internal */
 export const CreateClassifyRouterClassifyResponse422ResponseBody$inboundSchema:
@@ -322,19 +329,21 @@ export const CreateClassifyRouterClassifyResponse422ResponseBody$inboundSchema:
     CreateClassifyRouterClassifyResponse422ResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    error: components.APIError$inboundSchema,
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-    .transform((v) => {
-      return new CreateClassifyRouterClassifyResponse422ResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
-      });
-    });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      error: components.APIError$inboundSchema,
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new CreateClassifyRouterClassifyResponse422ResponseBody(v, {
+          request: v.request$,
+          response: v.response$,
+          body: v.body$,
+        });
+      })
+  );
 
 /** @internal */
 export const CreateClassifyRouterClassifyResponse408ResponseBody$inboundSchema:
@@ -342,19 +351,21 @@ export const CreateClassifyRouterClassifyResponse408ResponseBody$inboundSchema:
     CreateClassifyRouterClassifyResponse408ResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    error: components.APIError$inboundSchema,
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-    .transform((v) => {
-      return new CreateClassifyRouterClassifyResponse408ResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
-      });
-    });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      error: components.APIError$inboundSchema,
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new CreateClassifyRouterClassifyResponse408ResponseBody(v, {
+          request: v.request$,
+          response: v.response$,
+          body: v.body$,
+        });
+      })
+  );
 
 /** @internal */
 export const CreateClassifyRouterClassifyResponseResponseBody$inboundSchema:
@@ -362,54 +373,60 @@ export const CreateClassifyRouterClassifyResponseResponseBody$inboundSchema:
     CreateClassifyRouterClassifyResponseResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    error: components.APIError$inboundSchema,
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-    .transform((v) => {
-      return new CreateClassifyRouterClassifyResponseResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
-      });
-    });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      error: components.APIError$inboundSchema,
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new CreateClassifyRouterClassifyResponseResponseBody(v, {
+          request: v.request$,
+          response: v.response$,
+          body: v.body$,
+        });
+      })
+  );
 
 /** @internal */
 export const CreateClassifyRouterClassifyResponseBody$inboundSchema: z.ZodType<
   CreateClassifyRouterClassifyResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  error: components.APIError$inboundSchema,
-  request$: z.instanceof(Request),
-  response$: z.instanceof(Response),
-  body$: z.string(),
-})
-  .transform((v) => {
-    return new CreateClassifyRouterClassifyResponseBody(v, {
-      request: v.request$,
-      response: v.response$,
-      body: v.body$,
-    });
-  });
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    error: components.APIError$inboundSchema,
+    request$: z.instanceof(Request),
+    response$: z.instanceof(Response),
+    body$: z.string(),
+  })
+    .transform((v) => {
+      return new CreateClassifyRouterClassifyResponseBody(v, {
+        request: v.request$,
+        response: v.response$,
+        body: v.body$,
+      });
+    })
+);
 
 /** @internal */
 export const CreateClassifyResponseBody$inboundSchema: z.ZodType<
   CreateClassifyResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  error: components.APIError$inboundSchema,
-  request$: z.instanceof(Request),
-  response$: z.instanceof(Response),
-  body$: z.string(),
-})
-  .transform((v) => {
-    return new CreateClassifyResponseBody(v, {
-      request: v.request$,
-      response: v.response$,
-      body: v.body$,
-    });
-  });
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    error: components.APIError$inboundSchema,
+    request$: z.instanceof(Request),
+    response$: z.instanceof(Response),
+    body$: z.string(),
+  })
+    .transform((v) => {
+      return new CreateClassifyResponseBody(v, {
+        request: v.request$,
+        response: v.response$,
+        body: v.body$,
+      });
+    })
+);

@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import * as components from "../components/index.js";
 
@@ -74,11 +75,11 @@ export type ApiKeyUpdateRequest = {
 /** @internal */
 export const ApiKeyUpdatePermissionMode$outboundSchema: z.ZodNativeEnum<
   typeof ApiKeyUpdatePermissionMode
-> = z.nativeEnum(ApiKeyUpdatePermissionMode);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ApiKeyUpdatePermissionMode));
 
 /** @internal */
-export const Status$outboundSchema: z.ZodNativeEnum<typeof Status> = z
-  .nativeEnum(Status);
+export const Status$outboundSchema: z.ZodNativeEnum<typeof Status> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Status));
 
 /** @internal */
 export type ApiKeyUpdateRequestBody$Outbound = {
@@ -96,20 +97,22 @@ export const ApiKeyUpdateRequestBody$outboundSchema: z.ZodType<
   ApiKeyUpdateRequestBody$Outbound,
   z.ZodTypeDef,
   ApiKeyUpdateRequestBody
-> = z.object({
-  access: z.record(z.string()).optional(),
-  active: z.boolean().optional(),
-  constraints: components.Constraints$outboundSchema.optional(),
-  name: z.string().optional(),
-  permissionMode: ApiKeyUpdatePermissionMode$outboundSchema.optional(),
-  projectScope: components.RequestProjectScope$outboundSchema.optional(),
-  status: Status$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    permissionMode: "permission_mode",
-    projectScope: "project_scope",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    access: z.record(z.string()).optional(),
+    active: z.boolean().optional(),
+    constraints: components.Constraints$outboundSchema.optional(),
+    name: z.string().optional(),
+    permissionMode: ApiKeyUpdatePermissionMode$outboundSchema.optional(),
+    projectScope: components.RequestProjectScope$outboundSchema.optional(),
+    status: Status$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      permissionMode: "permission_mode",
+      projectScope: "project_scope",
+    });
+  })
+);
 
 export function apiKeyUpdateRequestBodyToJSON(
   apiKeyUpdateRequestBody: ApiKeyUpdateRequestBody,
@@ -130,15 +133,17 @@ export const ApiKeyUpdateRequest$outboundSchema: z.ZodType<
   ApiKeyUpdateRequest$Outbound,
   z.ZodTypeDef,
   ApiKeyUpdateRequest
-> = z.object({
-  apiKeyId: z.string(),
-  requestBody: z.lazy(() => ApiKeyUpdateRequestBody$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    apiKeyId: "api_key_id",
-    requestBody: "RequestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    apiKeyId: z.string(),
+    requestBody: z.lazy(() => ApiKeyUpdateRequestBody$outboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      apiKeyId: "api_key_id",
+      requestBody: "RequestBody",
+    });
+  })
+);
 
 export function apiKeyUpdateRequestToJSON(
   apiKeyUpdateRequest: ApiKeyUpdateRequest,

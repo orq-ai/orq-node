@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type EmbeddingTimeoutConfig = {
   /**
@@ -22,13 +23,15 @@ export const EmbeddingTimeoutConfig$outboundSchema: z.ZodType<
   EmbeddingTimeoutConfig$Outbound,
   z.ZodTypeDef,
   EmbeddingTimeoutConfig
-> = z.object({
-  callTimeout: z.number().int(),
-}).transform((v) => {
-  return remap$(v, {
-    callTimeout: "call_timeout",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    callTimeout: z.number().int(),
+  }).transform((v) => {
+    return remap$(v, {
+      callTimeout: "call_timeout",
+    });
+  })
+);
 
 export function embeddingTimeoutConfigToJSON(
   embeddingTimeoutConfig: EmbeddingTimeoutConfig,

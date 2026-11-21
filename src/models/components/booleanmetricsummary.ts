@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -18,14 +18,16 @@ export const BooleanMetricSummary$inboundSchema: z.ZodType<
   BooleanMetricSummary,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  passed_rate: z.number().optional(),
-  count: z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "passed_rate": "passedRate",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    passed_rate: z.number().optional(),
+    count: z.number().int().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "passed_rate": "passedRate",
+    });
+  })
+);
 
 export function booleanMetricSummaryFromJSON(
   jsonString: string,

@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 /**
  * The feedback value. For single-select, provide a string or single-element array. For multi-select, provide an array of strings. For range evaluations, provide a number. For boolean, provide a boolean. For text/correction, provide a string.
@@ -76,7 +77,9 @@ export const AnnotationsValue$outboundSchema: z.ZodType<
   AnnotationsValue$Outbound,
   z.ZodTypeDef,
   AnnotationsValue
-> = z.union([z.string(), z.number(), z.boolean(), z.array(z.string())]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.number(), z.boolean(), z.array(z.string())])
+);
 
 export function annotationsValueToJSON(
   annotationsValue: AnnotationsValue,
@@ -98,15 +101,17 @@ export const Annotations2$outboundSchema: z.ZodType<
   Annotations2$Outbound,
   z.ZodTypeDef,
   Annotations2
-> = z.object({
-  parentAnnotationId: z.string(),
-  value: z.union([z.string(), z.number(), z.boolean(), z.array(z.string())]),
-  explanation: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    parentAnnotationId: "parent_annotation_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    parentAnnotationId: z.string(),
+    value: z.union([z.string(), z.number(), z.boolean(), z.array(z.string())]),
+    explanation: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      parentAnnotationId: "parent_annotation_id",
+    });
+  })
+);
 
 export function annotations2ToJSON(annotations2: Annotations2): string {
   return JSON.stringify(Annotations2$outboundSchema.parse(annotations2));
@@ -120,7 +125,9 @@ export const Value$outboundSchema: z.ZodType<
   Value$Outbound,
   z.ZodTypeDef,
   Value
-> = z.union([z.string(), z.number(), z.boolean(), z.array(z.string())]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.number(), z.boolean(), z.array(z.string())])
+);
 
 export function valueToJSON(value: Value): string {
   return JSON.stringify(Value$outboundSchema.parse(value));
@@ -137,10 +144,12 @@ export const Annotations1$outboundSchema: z.ZodType<
   Annotations1$Outbound,
   z.ZodTypeDef,
   Annotations1
-> = z.object({
-  key: z.string(),
-  value: z.union([z.string(), z.number(), z.boolean(), z.array(z.string())]),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    key: z.string(),
+    value: z.union([z.string(), z.number(), z.boolean(), z.array(z.string())]),
+  })
+);
 
 export function annotations1ToJSON(annotations1: Annotations1): string {
   return JSON.stringify(Annotations1$outboundSchema.parse(annotations1));
@@ -156,10 +165,12 @@ export const Annotations$outboundSchema: z.ZodType<
   Annotations$Outbound,
   z.ZodTypeDef,
   Annotations
-> = z.union([
-  z.lazy(() => Annotations1$outboundSchema),
-  z.lazy(() => Annotations2$outboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => Annotations1$outboundSchema),
+    z.lazy(() => Annotations2$outboundSchema),
+  ])
+);
 
 export function annotationsToJSON(annotations: Annotations): string {
   return JSON.stringify(Annotations$outboundSchema.parse(annotations));
@@ -175,13 +186,15 @@ export const CreateAnnotationMetadata$outboundSchema: z.ZodType<
   CreateAnnotationMetadata$Outbound,
   z.ZodTypeDef,
   CreateAnnotationMetadata
-> = z.object({
-  identityId: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    identityId: "identity_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    identityId: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      identityId: "identity_id",
+    });
+  })
+);
 
 export function createAnnotationMetadataToJSON(
   createAnnotationMetadata: CreateAnnotationMetadata,
@@ -202,15 +215,17 @@ export const CreateAnnotationRequestBody$outboundSchema: z.ZodType<
   CreateAnnotationRequestBody$Outbound,
   z.ZodTypeDef,
   CreateAnnotationRequestBody
-> = z.object({
-  annotations: z.array(
-    z.union([
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    annotations: z.array(z.union([
       z.lazy(() => Annotations1$outboundSchema),
       z.lazy(() => Annotations2$outboundSchema),
-    ]),
-  ),
-  metadata: z.lazy(() => CreateAnnotationMetadata$outboundSchema).optional(),
-});
+    ])),
+    metadata: z.lazy(() =>
+      CreateAnnotationMetadata$outboundSchema
+    ).optional(),
+  })
+);
 
 export function createAnnotationRequestBodyToJSON(
   createAnnotationRequestBody: CreateAnnotationRequestBody,
@@ -234,17 +249,19 @@ export const CreateAnnotationRequest$outboundSchema: z.ZodType<
   CreateAnnotationRequest$Outbound,
   z.ZodTypeDef,
   CreateAnnotationRequest
-> = z.object({
-  traceId: z.string(),
-  spanId: z.string(),
-  requestBody: z.lazy(() => CreateAnnotationRequestBody$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    traceId: "trace_id",
-    spanId: "span_id",
-    requestBody: "RequestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    traceId: z.string(),
+    spanId: z.string(),
+    requestBody: z.lazy(() => CreateAnnotationRequestBody$outboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      traceId: "trace_id",
+      spanId: "span_id",
+      requestBody: "RequestBody",
+    });
+  })
+);
 
 export function createAnnotationRequestToJSON(
   createAnnotationRequest: CreateAnnotationRequest,

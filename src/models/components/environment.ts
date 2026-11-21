@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { Sharing, Sharing$inboundSchema } from "./sharing.js";
@@ -45,27 +45,33 @@ export const Environment$inboundSchema: z.ZodType<
   Environment,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  slug: z.string(),
-  display_name: z.string(),
-  description: z.string(),
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  created_by_id: z.string(),
-  updated_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  updated_by_id: z.string(),
-  project_id: z.string().optional(),
-  sharing: Sharing$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "display_name": "displayName",
-    "created_at": "createdAt",
-    "created_by_id": "createdById",
-    "updated_at": "updatedAt",
-    "updated_by_id": "updatedById",
-    "project_id": "projectId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    slug: z.string(),
+    display_name: z.string(),
+    description: z.string(),
+    created_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    created_by_id: z.string(),
+    updated_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    updated_by_id: z.string(),
+    project_id: z.string().optional(),
+    sharing: Sharing$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "display_name": "displayName",
+      "created_at": "createdAt",
+      "created_by_id": "createdById",
+      "updated_at": "updatedAt",
+      "updated_by_id": "updatedById",
+      "project_id": "projectId",
+    });
+  })
+);
 
 export function environmentFromJSON(
   jsonString: string,

@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type BudgetGetRequest = {
   /**
@@ -22,13 +23,15 @@ export const BudgetGetRequest$outboundSchema: z.ZodType<
   BudgetGetRequest$Outbound,
   z.ZodTypeDef,
   BudgetGetRequest
-> = z.object({
-  budgetId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    budgetId: "budget_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    budgetId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      budgetId: "budget_id",
+    });
+  })
+);
 
 export function budgetGetRequestToJSON(
   budgetGetRequest: BudgetGetRequest,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -30,15 +30,15 @@ export type BudgetLimit = {
 /** @internal */
 export const BudgetLimitCurrency$inboundSchema: z.ZodNativeEnum<
   typeof BudgetLimitCurrency
-> = z.nativeEnum(BudgetLimitCurrency);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(BudgetLimitCurrency));
 /** @internal */
 export const BudgetLimitCurrency$outboundSchema: z.ZodNativeEnum<
   typeof BudgetLimitCurrency
 > = BudgetLimitCurrency$inboundSchema;
 
 /** @internal */
-export const Period$inboundSchema: z.ZodNativeEnum<typeof Period> = z
-  .nativeEnum(Period);
+export const Period$inboundSchema: z.ZodNativeEnum<typeof Period> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Period));
 /** @internal */
 export const Period$outboundSchema: z.ZodNativeEnum<typeof Period> =
   Period$inboundSchema;
@@ -48,11 +48,13 @@ export const BudgetLimit$inboundSchema: z.ZodType<
   BudgetLimit,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  amount: z.number(),
-  currency: BudgetLimitCurrency$inboundSchema,
-  period: Period$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    amount: z.number(),
+    currency: BudgetLimitCurrency$inboundSchema,
+    period: Period$inboundSchema,
+  })
+);
 /** @internal */
 export type BudgetLimit$Outbound = {
   amount: number;
@@ -65,11 +67,13 @@ export const BudgetLimit$outboundSchema: z.ZodType<
   BudgetLimit$Outbound,
   z.ZodTypeDef,
   BudgetLimit
-> = z.object({
-  amount: z.number(),
-  currency: BudgetLimitCurrency$outboundSchema,
-  period: Period$outboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    amount: z.number(),
+    currency: BudgetLimitCurrency$outboundSchema,
+    period: Period$outboundSchema,
+  })
+);
 
 export function budgetLimitToJSON(budgetLimit: BudgetLimit): string {
   return JSON.stringify(BudgetLimit$outboundSchema.parse(budgetLimit));

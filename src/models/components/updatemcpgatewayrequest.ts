@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import {
   GuardrailRuleGuardrail,
   GuardrailRuleGuardrail$Outbound,
@@ -123,34 +124,36 @@ export const UpdateMcpGatewayRequest$outboundSchema: z.ZodType<
   UpdateMcpGatewayRequest$Outbound,
   z.ZodTypeDef,
   UpdateMcpGatewayRequest
-> = z.object({
-  key: z.string().optional(),
-  displayName: z.string().optional(),
-  description: z.string().optional(),
-  serverLinks: z.array(McpGatewayServerLink$outboundSchema).optional(),
-  toolNaming: McpToolNaming$outboundSchema.optional(),
-  mode: McpGatewayMode$outboundSchema.optional(),
-  sharing: Sharing$outboundSchema.optional(),
-  clearServerLinks: z.boolean().optional(),
-  plugins: z.array(McpGatewayPlugin$outboundSchema).optional(),
-  skillIds: z.array(z.string()).optional(),
-  clearSkillIds: z.boolean().optional(),
-  icons: z.array(McpIcon$outboundSchema).optional(),
-  replaceIcons: z.boolean().optional(),
-  websiteUrl: z.string().optional(),
-  guardrails: z.array(GuardrailRuleGuardrail$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    displayName: "display_name",
-    serverLinks: "server_links",
-    toolNaming: "tool_naming",
-    clearServerLinks: "clear_server_links",
-    skillIds: "skill_ids",
-    clearSkillIds: "clear_skill_ids",
-    replaceIcons: "replace_icons",
-    websiteUrl: "website_url",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    key: z.string().optional(),
+    displayName: z.string().optional(),
+    description: z.string().optional(),
+    serverLinks: z.array(McpGatewayServerLink$outboundSchema).optional(),
+    toolNaming: McpToolNaming$outboundSchema.optional(),
+    mode: McpGatewayMode$outboundSchema.optional(),
+    sharing: Sharing$outboundSchema.optional(),
+    clearServerLinks: z.boolean().optional(),
+    plugins: z.array(McpGatewayPlugin$outboundSchema).optional(),
+    skillIds: z.array(z.string()).optional(),
+    clearSkillIds: z.boolean().optional(),
+    icons: z.array(McpIcon$outboundSchema).optional(),
+    replaceIcons: z.boolean().optional(),
+    websiteUrl: z.string().optional(),
+    guardrails: z.array(GuardrailRuleGuardrail$outboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      displayName: "display_name",
+      serverLinks: "server_links",
+      toolNaming: "tool_naming",
+      clearServerLinks: "clear_server_links",
+      skillIds: "skill_ids",
+      clearSkillIds: "clear_skill_ids",
+      replaceIcons: "replace_icons",
+      websiteUrl: "website_url",
+    });
+  })
+);
 
 export function updateMcpGatewayRequestToJSON(
   updateMcpGatewayRequest: UpdateMcpGatewayRequest,

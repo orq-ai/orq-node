@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
@@ -2639,7 +2639,9 @@ export const UpdatePromptContentPromptsRequest2$outboundSchema: z.ZodType<
   UpdatePromptContentPromptsRequest2$Outbound,
   z.ZodTypeDef,
   UpdatePromptContentPromptsRequest2
-> = components.TextContentPartSchema$outboundSchema;
+> = /* @__PURE__ */ lazySchema$(() =>
+  components.TextContentPartSchema$outboundSchema
+);
 
 export function updatePromptContentPromptsRequest2ToJSON(
   updatePromptContentPromptsRequest2: UpdatePromptContentPromptsRequest2,
@@ -2662,10 +2664,12 @@ export const UpdatePromptMessagesPromptsRequestRequestBodyContent$outboundSchema
     UpdatePromptMessagesPromptsRequestRequestBodyContent$Outbound,
     z.ZodTypeDef,
     UpdatePromptMessagesPromptsRequestRequestBodyContent
-  > = z.union([
-    z.string(),
-    z.array(components.TextContentPartSchema$outboundSchema),
-  ]);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.union([
+      z.string(),
+      z.array(components.TextContentPartSchema$outboundSchema),
+    ])
+  );
 
 export function updatePromptMessagesPromptsRequestRequestBodyContentToJSON(
   updatePromptMessagesPromptsRequestRequestBodyContent:
@@ -2681,12 +2685,14 @@ export function updatePromptMessagesPromptsRequestRequestBodyContentToJSON(
 /** @internal */
 export const UpdatePromptMessagesPromptsType$outboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptMessagesPromptsType
-> = z.nativeEnum(UpdatePromptMessagesPromptsType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(UpdatePromptMessagesPromptsType)
+);
 
 /** @internal */
 export const UpdatePromptMessagesTtl$outboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptMessagesTtl
-> = z.nativeEnum(UpdatePromptMessagesTtl);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(UpdatePromptMessagesTtl));
 
 /** @internal */
 export type UpdatePromptMessagesCacheControl$Outbound = {
@@ -2699,10 +2705,12 @@ export const UpdatePromptMessagesCacheControl$outboundSchema: z.ZodType<
   UpdatePromptMessagesCacheControl$Outbound,
   z.ZodTypeDef,
   UpdatePromptMessagesCacheControl
-> = z.object({
-  type: UpdatePromptMessagesPromptsType$outboundSchema,
-  ttl: UpdatePromptMessagesTtl$outboundSchema.default("5m"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: UpdatePromptMessagesPromptsType$outboundSchema,
+    ttl: UpdatePromptMessagesTtl$outboundSchema.default("5m"),
+  })
+);
 
 export function updatePromptMessagesCacheControlToJSON(
   updatePromptMessagesCacheControl: UpdatePromptMessagesCacheControl,
@@ -2727,21 +2735,23 @@ export const UpdatePromptMessagesToolMessage$outboundSchema: z.ZodType<
   UpdatePromptMessagesToolMessage$Outbound,
   z.ZodTypeDef,
   UpdatePromptMessagesToolMessage
-> = z.object({
-  role: z.literal("tool"),
-  content: z.union([
-    z.string(),
-    z.array(components.TextContentPartSchema$outboundSchema),
-  ]),
-  toolCallId: z.nullable(z.string()),
-  cacheControl: z.lazy(() => UpdatePromptMessagesCacheControl$outboundSchema)
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    toolCallId: "tool_call_id",
-    cacheControl: "cache_control",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    role: z.literal("tool"),
+    content: z.union([
+      z.string(),
+      z.array(components.TextContentPartSchema$outboundSchema),
+    ]),
+    toolCallId: z.nullable(z.string()),
+    cacheControl: z.lazy(() => UpdatePromptMessagesCacheControl$outboundSchema)
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      toolCallId: "tool_call_id",
+      cacheControl: "cache_control",
+    });
+  })
+);
 
 export function updatePromptMessagesToolMessageToJSON(
   updatePromptMessagesToolMessage: UpdatePromptMessagesToolMessage,
@@ -2765,14 +2775,16 @@ export const UpdatePromptContentPrompts2$outboundSchema: z.ZodType<
   UpdatePromptContentPrompts2$Outbound,
   z.ZodTypeDef,
   UpdatePromptContentPrompts2
-> = z.union([
-  components.TextContentPartSchema$outboundSchema.and(
-    z.object({ type: z.literal("text") }),
-  ),
-  components.RefusalPartSchema$outboundSchema,
-  components.ReasoningPartSchema$outboundSchema,
-  components.RedactedReasoningPartSchema$outboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    components.TextContentPartSchema$outboundSchema.and(
+      z.object({ type: z.literal("text") }),
+    ),
+    components.RefusalPartSchema$outboundSchema,
+    components.ReasoningPartSchema$outboundSchema,
+    components.RedactedReasoningPartSchema$outboundSchema,
+  ])
+);
 
 export function updatePromptContentPrompts2ToJSON(
   updatePromptContentPrompts2: UpdatePromptContentPrompts2,
@@ -2800,19 +2812,21 @@ export const UpdatePromptMessagesPromptsRequestContent$outboundSchema:
     UpdatePromptMessagesPromptsRequestContent$Outbound,
     z.ZodTypeDef,
     UpdatePromptMessagesPromptsRequestContent
-  > = z.union([
-    z.string(),
-    z.array(
-      z.union([
-        components.TextContentPartSchema$outboundSchema.and(
-          z.object({ type: z.literal("text") }),
-        ),
-        components.RefusalPartSchema$outboundSchema,
-        components.ReasoningPartSchema$outboundSchema,
-        components.RedactedReasoningPartSchema$outboundSchema,
-      ]),
-    ),
-  ]);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.union([
+      z.string(),
+      z.array(
+        z.union([
+          components.TextContentPartSchema$outboundSchema.and(
+            z.object({ type: z.literal("text") }),
+          ),
+          components.RefusalPartSchema$outboundSchema,
+          components.ReasoningPartSchema$outboundSchema,
+          components.RedactedReasoningPartSchema$outboundSchema,
+        ]),
+      ),
+    ])
+  );
 
 export function updatePromptMessagesPromptsRequestContentToJSON(
   updatePromptMessagesPromptsRequestContent:
@@ -2835,9 +2849,11 @@ export const UpdatePromptMessagesAudio$outboundSchema: z.ZodType<
   UpdatePromptMessagesAudio$Outbound,
   z.ZodTypeDef,
   UpdatePromptMessagesAudio
-> = z.object({
-  id: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+  })
+);
 
 export function updatePromptMessagesAudioToJSON(
   updatePromptMessagesAudio: UpdatePromptMessagesAudio,
@@ -2850,7 +2866,7 @@ export function updatePromptMessagesAudioToJSON(
 /** @internal */
 export const UpdatePromptMessagesType$outboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptMessagesType
-> = z.nativeEnum(UpdatePromptMessagesType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(UpdatePromptMessagesType));
 
 /** @internal */
 export type UpdatePromptMessagesFunction$Outbound = {
@@ -2863,10 +2879,12 @@ export const UpdatePromptMessagesFunction$outboundSchema: z.ZodType<
   UpdatePromptMessagesFunction$Outbound,
   z.ZodTypeDef,
   UpdatePromptMessagesFunction
-> = z.object({
-  name: z.string().optional(),
-  arguments: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    arguments: z.string().optional(),
+  })
+);
 
 export function updatePromptMessagesFunctionToJSON(
   updatePromptMessagesFunction: UpdatePromptMessagesFunction,
@@ -2888,13 +2906,15 @@ export const UpdatePromptMessagesGoogle$outboundSchema: z.ZodType<
   UpdatePromptMessagesGoogle$Outbound,
   z.ZodTypeDef,
   UpdatePromptMessagesGoogle
-> = z.object({
-  thoughtSignature: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    thoughtSignature: "thought_signature",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    thoughtSignature: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      thoughtSignature: "thought_signature",
+    });
+  })
+);
 
 export function updatePromptMessagesGoogleToJSON(
   updatePromptMessagesGoogle: UpdatePromptMessagesGoogle,
@@ -2914,9 +2934,11 @@ export const UpdatePromptMessagesExtraContent$outboundSchema: z.ZodType<
   UpdatePromptMessagesExtraContent$Outbound,
   z.ZodTypeDef,
   UpdatePromptMessagesExtraContent
-> = z.object({
-  google: z.lazy(() => UpdatePromptMessagesGoogle$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    google: z.lazy(() => UpdatePromptMessagesGoogle$outboundSchema).optional(),
+  })
+);
 
 export function updatePromptMessagesExtraContentToJSON(
   updatePromptMessagesExtraContent: UpdatePromptMessagesExtraContent,
@@ -2942,19 +2964,21 @@ export const UpdatePromptMessagesToolCalls$outboundSchema: z.ZodType<
   UpdatePromptMessagesToolCalls$Outbound,
   z.ZodTypeDef,
   UpdatePromptMessagesToolCalls
-> = z.object({
-  id: z.string(),
-  type: UpdatePromptMessagesType$outboundSchema,
-  function: z.lazy(() => UpdatePromptMessagesFunction$outboundSchema),
-  thoughtSignature: z.string().optional(),
-  extraContent: z.lazy(() => UpdatePromptMessagesExtraContent$outboundSchema)
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    thoughtSignature: "thought_signature",
-    extraContent: "extra_content",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    type: UpdatePromptMessagesType$outboundSchema,
+    function: z.lazy(() => UpdatePromptMessagesFunction$outboundSchema),
+    thoughtSignature: z.string().optional(),
+    extraContent: z.lazy(() => UpdatePromptMessagesExtraContent$outboundSchema)
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      thoughtSignature: "thought_signature",
+      extraContent: "extra_content",
+    });
+  })
+);
 
 export function updatePromptMessagesToolCallsToJSON(
   updatePromptMessagesToolCalls: UpdatePromptMessagesToolCalls,
@@ -2991,36 +3015,39 @@ export const UpdatePromptMessagesAssistantMessage$outboundSchema: z.ZodType<
   UpdatePromptMessagesAssistantMessage$Outbound,
   z.ZodTypeDef,
   UpdatePromptMessagesAssistantMessage
-> = z.object({
-  reasoningContent: z.string().optional(),
-  content: z.nullable(
-    z.union([
-      z.string(),
-      z.array(
-        z.union([
-          components.TextContentPartSchema$outboundSchema.and(
-            z.object({ type: z.literal("text") }),
-          ),
-          components.RefusalPartSchema$outboundSchema,
-          components.ReasoningPartSchema$outboundSchema,
-          components.RedactedReasoningPartSchema$outboundSchema,
-        ]),
-      ),
-    ]),
-  ).optional(),
-  refusal: z.nullable(z.string()).optional(),
-  role: z.literal("assistant"),
-  name: z.string().optional(),
-  audio: z.nullable(z.lazy(() => UpdatePromptMessagesAudio$outboundSchema))
-    .optional(),
-  toolCalls: z.array(z.lazy(() => UpdatePromptMessagesToolCalls$outboundSchema))
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    reasoningContent: "reasoning_content",
-    toolCalls: "tool_calls",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    reasoningContent: z.string().optional(),
+    content: z.nullable(
+      z.union([
+        z.string(),
+        z.array(
+          z.union([
+            components.TextContentPartSchema$outboundSchema.and(
+              z.object({ type: z.literal("text") }),
+            ),
+            components.RefusalPartSchema$outboundSchema,
+            components.ReasoningPartSchema$outboundSchema,
+            components.RedactedReasoningPartSchema$outboundSchema,
+          ]),
+        ),
+      ]),
+    ).optional(),
+    refusal: z.nullable(z.string()).optional(),
+    role: z.literal("assistant"),
+    name: z.string().optional(),
+    audio: z.nullable(z.lazy(() => UpdatePromptMessagesAudio$outboundSchema))
+      .optional(),
+    toolCalls: z.array(
+      z.lazy(() => UpdatePromptMessagesToolCalls$outboundSchema),
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      reasoningContent: "reasoning_content",
+      toolCalls: "tool_calls",
+    });
+  })
+);
 
 export function updatePromptMessagesAssistantMessageToJSON(
   updatePromptMessagesAssistantMessage: UpdatePromptMessagesAssistantMessage,
@@ -3035,12 +3062,12 @@ export function updatePromptMessagesAssistantMessageToJSON(
 /** @internal */
 export const UpdatePrompt2PromptsType$outboundSchema: z.ZodNativeEnum<
   typeof UpdatePrompt2PromptsType
-> = z.nativeEnum(UpdatePrompt2PromptsType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(UpdatePrompt2PromptsType));
 
 /** @internal */
 export const UpdatePrompt2Ttl$outboundSchema: z.ZodNativeEnum<
   typeof UpdatePrompt2Ttl
-> = z.nativeEnum(UpdatePrompt2Ttl);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(UpdatePrompt2Ttl));
 
 /** @internal */
 export type UpdatePrompt2CacheControl$Outbound = {
@@ -3053,10 +3080,12 @@ export const UpdatePrompt2CacheControl$outboundSchema: z.ZodType<
   UpdatePrompt2CacheControl$Outbound,
   z.ZodTypeDef,
   UpdatePrompt2CacheControl
-> = z.object({
-  type: UpdatePrompt2PromptsType$outboundSchema,
-  ttl: UpdatePrompt2Ttl$outboundSchema.default("5m"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: UpdatePrompt2PromptsType$outboundSchema,
+    ttl: UpdatePrompt2Ttl$outboundSchema.default("5m"),
+  })
+);
 
 export function updatePrompt2CacheControlToJSON(
   updatePrompt2CacheControl: UpdatePrompt2CacheControl,
@@ -3078,16 +3107,18 @@ export const UpdatePrompt24$outboundSchema: z.ZodType<
   UpdatePrompt24$Outbound,
   z.ZodTypeDef,
   UpdatePrompt24
-> = z.object({
-  type: z.literal("file"),
-  cacheControl: z.lazy(() => UpdatePrompt2CacheControl$outboundSchema)
-    .optional(),
-  file: components.FileContentPartSchema$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    cacheControl: "cache_control",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("file"),
+    cacheControl: z.lazy(() => UpdatePrompt2CacheControl$outboundSchema)
+      .optional(),
+    file: components.FileContentPartSchema$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      cacheControl: "cache_control",
+    });
+  })
+);
 
 export function updatePrompt24ToJSON(updatePrompt24: UpdatePrompt24): string {
   return JSON.stringify(UpdatePrompt24$outboundSchema.parse(updatePrompt24));
@@ -3105,14 +3136,16 @@ export const UpdatePromptContent2$outboundSchema: z.ZodType<
   UpdatePromptContent2$Outbound,
   z.ZodTypeDef,
   UpdatePromptContent2
-> = z.union([
-  components.TextContentPartSchema$outboundSchema.and(
-    z.object({ type: z.literal("text") }),
-  ),
-  components.ImageContentPartSchema$outboundSchema,
-  components.AudioContentPartSchema$outboundSchema,
-  z.lazy(() => UpdatePrompt24$outboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    components.TextContentPartSchema$outboundSchema.and(
+      z.object({ type: z.literal("text") }),
+    ),
+    components.ImageContentPartSchema$outboundSchema,
+    components.AudioContentPartSchema$outboundSchema,
+    z.lazy(() => UpdatePrompt24$outboundSchema),
+  ])
+);
 
 export function updatePromptContent2ToJSON(
   updatePromptContent2: UpdatePromptContent2,
@@ -3137,19 +3170,21 @@ export const UpdatePromptMessagesPromptsContent$outboundSchema: z.ZodType<
   UpdatePromptMessagesPromptsContent$Outbound,
   z.ZodTypeDef,
   UpdatePromptMessagesPromptsContent
-> = z.union([
-  z.string(),
-  z.array(
-    z.union([
-      components.TextContentPartSchema$outboundSchema.and(
-        z.object({ type: z.literal("text") }),
-      ),
-      components.ImageContentPartSchema$outboundSchema,
-      components.AudioContentPartSchema$outboundSchema,
-      z.lazy(() => UpdatePrompt24$outboundSchema),
-    ]),
-  ),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.string(),
+    z.array(
+      z.union([
+        components.TextContentPartSchema$outboundSchema.and(
+          z.object({ type: z.literal("text") }),
+        ),
+        components.ImageContentPartSchema$outboundSchema,
+        components.AudioContentPartSchema$outboundSchema,
+        z.lazy(() => UpdatePrompt24$outboundSchema),
+      ]),
+    ),
+  ])
+);
 
 export function updatePromptMessagesPromptsContentToJSON(
   updatePromptMessagesPromptsContent: UpdatePromptMessagesPromptsContent,
@@ -3180,23 +3215,25 @@ export const UpdatePromptMessagesUserMessage$outboundSchema: z.ZodType<
   UpdatePromptMessagesUserMessage$Outbound,
   z.ZodTypeDef,
   UpdatePromptMessagesUserMessage
-> = z.object({
-  role: z.literal("user"),
-  name: z.string().optional(),
-  content: z.union([
-    z.string(),
-    z.array(
-      z.union([
-        components.TextContentPartSchema$outboundSchema.and(
-          z.object({ type: z.literal("text") }),
-        ),
-        components.ImageContentPartSchema$outboundSchema,
-        components.AudioContentPartSchema$outboundSchema,
-        z.lazy(() => UpdatePrompt24$outboundSchema),
-      ]),
-    ),
-  ]),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    role: z.literal("user"),
+    name: z.string().optional(),
+    content: z.union([
+      z.string(),
+      z.array(
+        z.union([
+          components.TextContentPartSchema$outboundSchema.and(
+            z.object({ type: z.literal("text") }),
+          ),
+          components.ImageContentPartSchema$outboundSchema,
+          components.AudioContentPartSchema$outboundSchema,
+          z.lazy(() => UpdatePrompt24$outboundSchema),
+        ]),
+      ),
+    ]),
+  })
+);
 
 export function updatePromptMessagesUserMessageToJSON(
   updatePromptMessagesUserMessage: UpdatePromptMessagesUserMessage,
@@ -3218,10 +3255,12 @@ export const UpdatePromptMessagesContent$outboundSchema: z.ZodType<
   UpdatePromptMessagesContent$Outbound,
   z.ZodTypeDef,
   UpdatePromptMessagesContent
-> = z.union([
-  z.string(),
-  z.array(components.TextContentPartSchema$outboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.string(),
+    z.array(components.TextContentPartSchema$outboundSchema),
+  ])
+);
 
 export function updatePromptMessagesContentToJSON(
   updatePromptMessagesContent: UpdatePromptMessagesContent,
@@ -3245,14 +3284,16 @@ export const UpdatePromptMessagesSystemMessage$outboundSchema: z.ZodType<
   UpdatePromptMessagesSystemMessage$Outbound,
   z.ZodTypeDef,
   UpdatePromptMessagesSystemMessage
-> = z.object({
-  role: z.literal("system"),
-  content: z.union([
-    z.string(),
-    z.array(components.TextContentPartSchema$outboundSchema),
-  ]),
-  name: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    role: z.literal("system"),
+    content: z.union([
+      z.string(),
+      z.array(components.TextContentPartSchema$outboundSchema),
+    ]),
+    name: z.string().optional(),
+  })
+);
 
 export function updatePromptMessagesSystemMessageToJSON(
   updatePromptMessagesSystemMessage: UpdatePromptMessagesSystemMessage,
@@ -3276,12 +3317,14 @@ export const UpdatePromptMessages$outboundSchema: z.ZodType<
   UpdatePromptMessages$Outbound,
   z.ZodTypeDef,
   UpdatePromptMessages
-> = z.union([
-  z.lazy(() => UpdatePromptMessagesSystemMessage$outboundSchema),
-  z.lazy(() => UpdatePromptMessagesUserMessage$outboundSchema),
-  z.lazy(() => UpdatePromptMessagesAssistantMessage$outboundSchema),
-  z.lazy(() => UpdatePromptMessagesToolMessage$outboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => UpdatePromptMessagesSystemMessage$outboundSchema),
+    z.lazy(() => UpdatePromptMessagesUserMessage$outboundSchema),
+    z.lazy(() => UpdatePromptMessagesAssistantMessage$outboundSchema),
+    z.lazy(() => UpdatePromptMessagesToolMessage$outboundSchema),
+  ])
+);
 
 export function updatePromptMessagesToJSON(
   updatePromptMessages: UpdatePromptMessages,
@@ -3294,12 +3337,12 @@ export function updatePromptMessagesToJSON(
 /** @internal */
 export const UpdatePromptVoice$outboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptVoice
-> = z.nativeEnum(UpdatePromptVoice);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(UpdatePromptVoice));
 
 /** @internal */
 export const UpdatePromptFormat$outboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptFormat
-> = z.nativeEnum(UpdatePromptFormat);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(UpdatePromptFormat));
 
 /** @internal */
 export type UpdatePromptAudio$Outbound = {
@@ -3312,10 +3355,12 @@ export const UpdatePromptAudio$outboundSchema: z.ZodType<
   UpdatePromptAudio$Outbound,
   z.ZodTypeDef,
   UpdatePromptAudio
-> = z.object({
-  voice: UpdatePromptVoice$outboundSchema,
-  format: UpdatePromptFormat$outboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    voice: UpdatePromptVoice$outboundSchema,
+    format: UpdatePromptFormat$outboundSchema,
+  })
+);
 
 export function updatePromptAudioToJSON(
   updatePromptAudio: UpdatePromptAudio,
@@ -3339,12 +3384,14 @@ export const UpdatePromptResponseFormatPromptsJsonSchema$outboundSchema:
     UpdatePromptResponseFormatPromptsJsonSchema$Outbound,
     z.ZodTypeDef,
     UpdatePromptResponseFormatPromptsJsonSchema
-  > = z.object({
-    description: z.string().optional(),
-    name: z.string(),
-    schema: z.any().optional(),
-    strict: z.boolean().default(false),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      description: z.string().optional(),
+      name: z.string(),
+      schema: z.any().optional(),
+      strict: z.boolean().default(false),
+    })
+  );
 
 export function updatePromptResponseFormatPromptsJsonSchemaToJSON(
   updatePromptResponseFormatPromptsJsonSchema:
@@ -3368,16 +3415,18 @@ export const UpdatePromptResponseFormatJSONSchema$outboundSchema: z.ZodType<
   UpdatePromptResponseFormatJSONSchema$Outbound,
   z.ZodTypeDef,
   UpdatePromptResponseFormatJSONSchema
-> = z.object({
-  type: z.literal("json_schema"),
-  jsonSchema: z.lazy(() =>
-    UpdatePromptResponseFormatPromptsJsonSchema$outboundSchema
-  ),
-}).transform((v) => {
-  return remap$(v, {
-    jsonSchema: "json_schema",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("json_schema"),
+    jsonSchema: z.lazy(() =>
+      UpdatePromptResponseFormatPromptsJsonSchema$outboundSchema
+    ),
+  }).transform((v) => {
+    return remap$(v, {
+      jsonSchema: "json_schema",
+    });
+  })
+);
 
 export function updatePromptResponseFormatJSONSchemaToJSON(
   updatePromptResponseFormatJSONSchema: UpdatePromptResponseFormatJSONSchema,
@@ -3399,9 +3448,11 @@ export const UpdatePromptResponseFormatJSONObject$outboundSchema: z.ZodType<
   UpdatePromptResponseFormatJSONObject$Outbound,
   z.ZodTypeDef,
   UpdatePromptResponseFormatJSONObject
-> = z.object({
-  type: z.literal("json_object"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("json_object"),
+  })
+);
 
 export function updatePromptResponseFormatJSONObjectToJSON(
   updatePromptResponseFormatJSONObject: UpdatePromptResponseFormatJSONObject,
@@ -3423,9 +3474,11 @@ export const UpdatePromptResponseFormatText$outboundSchema: z.ZodType<
   UpdatePromptResponseFormatText$Outbound,
   z.ZodTypeDef,
   UpdatePromptResponseFormatText
-> = z.object({
-  type: z.literal("text"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("text"),
+  })
+);
 
 export function updatePromptResponseFormatTextToJSON(
   updatePromptResponseFormatText: UpdatePromptResponseFormatText,
@@ -3448,11 +3501,13 @@ export const UpdatePromptResponseFormat$outboundSchema: z.ZodType<
   UpdatePromptResponseFormat$Outbound,
   z.ZodTypeDef,
   UpdatePromptResponseFormat
-> = z.union([
-  z.lazy(() => UpdatePromptResponseFormatText$outboundSchema),
-  z.lazy(() => UpdatePromptResponseFormatJSONObject$outboundSchema),
-  z.lazy(() => UpdatePromptResponseFormatJSONSchema$outboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => UpdatePromptResponseFormatText$outboundSchema),
+    z.lazy(() => UpdatePromptResponseFormatJSONObject$outboundSchema),
+    z.lazy(() => UpdatePromptResponseFormatJSONSchema$outboundSchema),
+  ])
+);
 
 export function updatePromptResponseFormatToJSON(
   updatePromptResponseFormat: UpdatePromptResponseFormat,
@@ -3465,7 +3520,9 @@ export function updatePromptResponseFormatToJSON(
 /** @internal */
 export const UpdatePromptReasoningEffort$outboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptReasoningEffort
-> = z.nativeEnum(UpdatePromptReasoningEffort);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(UpdatePromptReasoningEffort)
+);
 
 /** @internal */
 export type UpdatePromptStop$Outbound = string | Array<string>;
@@ -3475,7 +3532,9 @@ export const UpdatePromptStop$outboundSchema: z.ZodType<
   UpdatePromptStop$Outbound,
   z.ZodTypeDef,
   UpdatePromptStop
-> = z.union([z.string(), z.array(z.string())]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.array(z.string())])
+);
 
 export function updatePromptStopToJSON(
   updatePromptStop: UpdatePromptStop,
@@ -3495,13 +3554,15 @@ export const UpdatePromptStreamOptions$outboundSchema: z.ZodType<
   UpdatePromptStreamOptions$Outbound,
   z.ZodTypeDef,
   UpdatePromptStreamOptions
-> = z.object({
-  includeUsage: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    includeUsage: "include_usage",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    includeUsage: z.boolean().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      includeUsage: "include_usage",
+    });
+  })
+);
 
 export function updatePromptStreamOptionsToJSON(
   updatePromptStreamOptions: UpdatePromptStreamOptions,
@@ -3523,12 +3584,14 @@ export const UpdatePromptThinking$outboundSchema: z.ZodType<
   UpdatePromptThinking$Outbound,
   z.ZodTypeDef,
   UpdatePromptThinking
-> = z.union([
-  components.ThinkingConfigDisabledSchema$outboundSchema,
-  components.ThinkingConfigEnabledSchema$outboundSchema,
-  components.ThinkingConfigAdaptiveSchema$outboundSchema,
-  components.ThinkingConfigBetweenToolsSchema$outboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    components.ThinkingConfigDisabledSchema$outboundSchema,
+    components.ThinkingConfigEnabledSchema$outboundSchema,
+    components.ThinkingConfigAdaptiveSchema$outboundSchema,
+    components.ThinkingConfigBetweenToolsSchema$outboundSchema,
+  ])
+);
 
 export function updatePromptThinkingToJSON(
   updatePromptThinking: UpdatePromptThinking,
@@ -3541,7 +3604,7 @@ export function updatePromptThinkingToJSON(
 /** @internal */
 export const UpdatePromptToolChoiceType$outboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptToolChoiceType
-> = z.nativeEnum(UpdatePromptToolChoiceType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(UpdatePromptToolChoiceType));
 
 /** @internal */
 export type UpdatePromptToolChoiceFunction$Outbound = {
@@ -3553,9 +3616,11 @@ export const UpdatePromptToolChoiceFunction$outboundSchema: z.ZodType<
   UpdatePromptToolChoiceFunction$Outbound,
   z.ZodTypeDef,
   UpdatePromptToolChoiceFunction
-> = z.object({
-  name: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+  })
+);
 
 export function updatePromptToolChoiceFunctionToJSON(
   updatePromptToolChoiceFunction: UpdatePromptToolChoiceFunction,
@@ -3578,10 +3643,12 @@ export const UpdatePromptToolChoice2$outboundSchema: z.ZodType<
   UpdatePromptToolChoice2$Outbound,
   z.ZodTypeDef,
   UpdatePromptToolChoice2
-> = z.object({
-  type: UpdatePromptToolChoiceType$outboundSchema.optional(),
-  function: z.lazy(() => UpdatePromptToolChoiceFunction$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: UpdatePromptToolChoiceType$outboundSchema.optional(),
+    function: z.lazy(() => UpdatePromptToolChoiceFunction$outboundSchema),
+  })
+);
 
 export function updatePromptToolChoice2ToJSON(
   updatePromptToolChoice2: UpdatePromptToolChoice2,
@@ -3594,7 +3661,7 @@ export function updatePromptToolChoice2ToJSON(
 /** @internal */
 export const UpdatePromptToolChoice1$outboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptToolChoice1
-> = z.nativeEnum(UpdatePromptToolChoice1);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(UpdatePromptToolChoice1));
 
 /** @internal */
 export type UpdatePromptToolChoice$Outbound =
@@ -3606,10 +3673,12 @@ export const UpdatePromptToolChoice$outboundSchema: z.ZodType<
   UpdatePromptToolChoice$Outbound,
   z.ZodTypeDef,
   UpdatePromptToolChoice
-> = z.union([
-  z.lazy(() => UpdatePromptToolChoice2$outboundSchema),
-  UpdatePromptToolChoice1$outboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => UpdatePromptToolChoice2$outboundSchema),
+    UpdatePromptToolChoice1$outboundSchema,
+  ])
+);
 
 export function updatePromptToolChoiceToJSON(
   updatePromptToolChoice: UpdatePromptToolChoice,
@@ -3622,12 +3691,12 @@ export function updatePromptToolChoiceToJSON(
 /** @internal */
 export const UpdatePromptModalities$outboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptModalities
-> = z.nativeEnum(UpdatePromptModalities);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(UpdatePromptModalities));
 
 /** @internal */
 export const UpdatePromptId1$outboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptId1
-> = z.nativeEnum(UpdatePromptId1);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(UpdatePromptId1));
 
 /** @internal */
 export type UpdatePromptId$Outbound = string | string;
@@ -3637,7 +3706,9 @@ export const UpdatePromptId$outboundSchema: z.ZodType<
   UpdatePromptId$Outbound,
   z.ZodTypeDef,
   UpdatePromptId
-> = z.union([UpdatePromptId1$outboundSchema, z.string()]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([UpdatePromptId1$outboundSchema, z.string()])
+);
 
 export function updatePromptIdToJSON(updatePromptId: UpdatePromptId): string {
   return JSON.stringify(UpdatePromptId$outboundSchema.parse(updatePromptId));
@@ -3646,7 +3717,7 @@ export function updatePromptIdToJSON(updatePromptId: UpdatePromptId): string {
 /** @internal */
 export const UpdatePromptExecuteOn$outboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptExecuteOn
-> = z.nativeEnum(UpdatePromptExecuteOn);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(UpdatePromptExecuteOn));
 
 /** @internal */
 export type UpdatePromptGuardrails$Outbound = {
@@ -3659,14 +3730,16 @@ export const UpdatePromptGuardrails$outboundSchema: z.ZodType<
   UpdatePromptGuardrails$Outbound,
   z.ZodTypeDef,
   UpdatePromptGuardrails
-> = z.object({
-  id: z.union([UpdatePromptId1$outboundSchema, z.string()]),
-  executeOn: UpdatePromptExecuteOn$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    executeOn: "execute_on",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.union([UpdatePromptId1$outboundSchema, z.string()]),
+    executeOn: UpdatePromptExecuteOn$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      executeOn: "execute_on",
+    });
+  })
+);
 
 export function updatePromptGuardrailsToJSON(
   updatePromptGuardrails: UpdatePromptGuardrails,
@@ -3687,13 +3760,15 @@ export const UpdatePromptPlugins$outboundSchema: z.ZodType<
   UpdatePromptPlugins$Outbound,
   z.ZodTypeDef,
   UpdatePromptPlugins
-> = z.union([
-  components.PIIRedactionPlugin$outboundSchema.and(
-    z.object({ id: z.literal("pii_redaction") }),
-  ),
-  components.ResponseHealingPlugin$outboundSchema,
-  components.TraceScrubbingPlugin$outboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    components.PIIRedactionPlugin$outboundSchema.and(
+      z.object({ id: z.literal("pii_redaction") }),
+    ),
+    components.ResponseHealingPlugin$outboundSchema,
+    components.TraceScrubbingPlugin$outboundSchema,
+  ])
+);
 
 export function updatePromptPluginsToJSON(
   updatePromptPlugins: UpdatePromptPlugins,
@@ -3713,9 +3788,11 @@ export const UpdatePromptFallbacks$outboundSchema: z.ZodType<
   UpdatePromptFallbacks$Outbound,
   z.ZodTypeDef,
   UpdatePromptFallbacks
-> = z.object({
-  model: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model: z.string(),
+  })
+);
 
 export function updatePromptFallbacksToJSON(
   updatePromptFallbacks: UpdatePromptFallbacks,
@@ -3736,14 +3813,16 @@ export const UpdatePromptRetry$outboundSchema: z.ZodType<
   UpdatePromptRetry$Outbound,
   z.ZodTypeDef,
   UpdatePromptRetry
-> = z.object({
-  count: z.number().default(3),
-  onCodes: z.array(z.number()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    onCodes: "on_codes",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    count: z.number().default(3),
+    onCodes: z.array(z.number()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      onCodes: "on_codes",
+    });
+  })
+);
 
 export function updatePromptRetryToJSON(
   updatePromptRetry: UpdatePromptRetry,
@@ -3756,7 +3835,7 @@ export function updatePromptRetryToJSON(
 /** @internal */
 export const UpdatePromptType$outboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptType
-> = z.nativeEnum(UpdatePromptType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(UpdatePromptType));
 
 /** @internal */
 export type UpdatePromptCache$Outbound = {
@@ -3769,10 +3848,12 @@ export const UpdatePromptCache$outboundSchema: z.ZodType<
   UpdatePromptCache$Outbound,
   z.ZodTypeDef,
   UpdatePromptCache
-> = z.object({
-  ttl: z.number().default(3600),
-  type: UpdatePromptType$outboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ttl: z.number().default(3600),
+    type: UpdatePromptType$outboundSchema,
+  })
+);
 
 export function updatePromptCacheToJSON(
   updatePromptCache: UpdatePromptCache,
@@ -3785,7 +3866,9 @@ export function updatePromptCacheToJSON(
 /** @internal */
 export const UpdatePromptLoadBalancerType$outboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptLoadBalancerType
-> = z.nativeEnum(UpdatePromptLoadBalancerType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(UpdatePromptLoadBalancerType)
+);
 
 /** @internal */
 export type UpdatePromptLoadBalancerModels$Outbound = {
@@ -3798,10 +3881,12 @@ export const UpdatePromptLoadBalancerModels$outboundSchema: z.ZodType<
   UpdatePromptLoadBalancerModels$Outbound,
   z.ZodTypeDef,
   UpdatePromptLoadBalancerModels
-> = z.object({
-  model: z.string(),
-  weight: z.number().default(0.5),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model: z.string(),
+    weight: z.number().default(0.5),
+  })
+);
 
 export function updatePromptLoadBalancerModelsToJSON(
   updatePromptLoadBalancerModels: UpdatePromptLoadBalancerModels,
@@ -3824,10 +3909,14 @@ export const UpdatePromptLoadBalancer1$outboundSchema: z.ZodType<
   UpdatePromptLoadBalancer1$Outbound,
   z.ZodTypeDef,
   UpdatePromptLoadBalancer1
-> = z.object({
-  type: UpdatePromptLoadBalancerType$outboundSchema,
-  models: z.array(z.lazy(() => UpdatePromptLoadBalancerModels$outboundSchema)),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: UpdatePromptLoadBalancerType$outboundSchema,
+    models: z.array(
+      z.lazy(() => UpdatePromptLoadBalancerModels$outboundSchema),
+    ),
+  })
+);
 
 export function updatePromptLoadBalancer1ToJSON(
   updatePromptLoadBalancer1: UpdatePromptLoadBalancer1,
@@ -3846,7 +3935,9 @@ export const UpdatePromptLoadBalancer$outboundSchema: z.ZodType<
   UpdatePromptLoadBalancer$Outbound,
   z.ZodTypeDef,
   UpdatePromptLoadBalancer
-> = z.lazy(() => UpdatePromptLoadBalancer1$outboundSchema);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.lazy(() => UpdatePromptLoadBalancer1$outboundSchema)
+);
 
 export function updatePromptLoadBalancerToJSON(
   updatePromptLoadBalancer: UpdatePromptLoadBalancer,
@@ -3866,13 +3957,15 @@ export const UpdatePromptTimeout$outboundSchema: z.ZodType<
   UpdatePromptTimeout$Outbound,
   z.ZodTypeDef,
   UpdatePromptTimeout
-> = z.object({
-  callTimeout: z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    callTimeout: "call_timeout",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    callTimeout: z.number(),
+  }).transform((v) => {
+    return remap$(v, {
+      callTimeout: "call_timeout",
+    });
+  })
+);
 
 export function updatePromptTimeoutToJSON(
   updatePromptTimeout: UpdatePromptTimeout,
@@ -3885,12 +3978,12 @@ export function updatePromptTimeoutToJSON(
 /** @internal */
 export const UpdatePromptPromptsType$outboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptPromptsType
-> = z.nativeEnum(UpdatePromptPromptsType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(UpdatePromptPromptsType));
 
 /** @internal */
 export const UpdatePromptTtl$outboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptTtl
-> = z.nativeEnum(UpdatePromptTtl);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(UpdatePromptTtl));
 
 /** @internal */
 export type UpdatePromptCacheControl$Outbound = {
@@ -3903,10 +3996,12 @@ export const UpdatePromptCacheControl$outboundSchema: z.ZodType<
   UpdatePromptCacheControl$Outbound,
   z.ZodTypeDef,
   UpdatePromptCacheControl
-> = z.object({
-  type: UpdatePromptPromptsType$outboundSchema,
-  ttl: UpdatePromptTtl$outboundSchema.default("5m"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: UpdatePromptPromptsType$outboundSchema,
+    ttl: UpdatePromptTtl$outboundSchema.default("5m"),
+  })
+);
 
 export function updatePromptCacheControlToJSON(
   updatePromptCacheControl: UpdatePromptCacheControl,
@@ -3981,95 +4076,97 @@ export const UpdatePromptPromptInput$outboundSchema: z.ZodType<
   UpdatePromptPromptInput$Outbound,
   z.ZodTypeDef,
   UpdatePromptPromptInput
-> = z.object({
-  messages: z.array(
-    z.union([
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    messages: z.array(z.union([
       z.lazy(() => UpdatePromptMessagesSystemMessage$outboundSchema),
       z.lazy(() => UpdatePromptMessagesUserMessage$outboundSchema),
       z.lazy(() => UpdatePromptMessagesAssistantMessage$outboundSchema),
       z.lazy(() => UpdatePromptMessagesToolMessage$outboundSchema),
-    ]),
-  ).optional(),
-  model: z.nullable(z.string()).optional(),
-  name: z.string().optional(),
-  audio: z.nullable(z.lazy(() => UpdatePromptAudio$outboundSchema)).optional(),
-  frequencyPenalty: z.nullable(z.number()).optional(),
-  maxTokens: z.nullable(z.number().int()).optional(),
-  maxCompletionTokens: z.nullable(z.number().int()).optional(),
-  logprobs: z.nullable(z.boolean()).optional(),
-  topLogprobs: z.nullable(z.number().int()).optional(),
-  n: z.nullable(z.number().int()).optional(),
-  presencePenalty: z.nullable(z.number()).optional(),
-  responseFormat: z.union([
-    z.lazy(() => UpdatePromptResponseFormatText$outboundSchema),
-    z.lazy(() => UpdatePromptResponseFormatJSONObject$outboundSchema),
-    z.lazy(() => UpdatePromptResponseFormatJSONSchema$outboundSchema),
-  ]).optional(),
-  reasoningEffort: UpdatePromptReasoningEffort$outboundSchema.optional(),
-  verbosity: z.string().optional(),
-  seed: z.nullable(z.number()).optional(),
-  stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
-  streamOptions: z.nullable(
-    z.lazy(() => UpdatePromptStreamOptions$outboundSchema),
-  ).optional(),
-  thinking: z.union([
-    components.ThinkingConfigDisabledSchema$outboundSchema,
-    components.ThinkingConfigEnabledSchema$outboundSchema,
-    components.ThinkingConfigAdaptiveSchema$outboundSchema,
-    components.ThinkingConfigBetweenToolsSchema$outboundSchema,
-  ]).optional(),
-  temperature: z.nullable(z.number()).optional(),
-  topP: z.nullable(z.number()).optional(),
-  topK: z.nullable(z.number()).optional(),
-  toolChoice: z.union([
-    z.lazy(() => UpdatePromptToolChoice2$outboundSchema),
-    UpdatePromptToolChoice1$outboundSchema,
-  ]).optional(),
-  parallelToolCalls: z.boolean().optional(),
-  modalities: z.nullable(z.array(UpdatePromptModalities$outboundSchema))
-    .optional(),
-  guardrails: z.array(z.lazy(() => UpdatePromptGuardrails$outboundSchema))
-    .optional(),
-  plugins: z.array(
-    z.union([
-      components.PIIRedactionPlugin$outboundSchema.and(
-        z.object({ id: z.literal("pii_redaction") }),
-      ),
-      components.ResponseHealingPlugin$outboundSchema,
-      components.TraceScrubbingPlugin$outboundSchema,
-    ]),
-  ).optional(),
-  fallbackOnCodes: z.array(z.number().int()).optional(),
-  fallbacks: z.array(z.lazy(() => UpdatePromptFallbacks$outboundSchema))
-    .optional(),
-  retry: z.lazy(() => UpdatePromptRetry$outboundSchema).optional(),
-  cache: z.lazy(() => UpdatePromptCache$outboundSchema).optional(),
-  loadBalancer: z.lazy(() => UpdatePromptLoadBalancer1$outboundSchema)
-    .optional(),
-  timeout: z.lazy(() => UpdatePromptTimeout$outboundSchema).optional(),
-  cacheControl: z.lazy(() => UpdatePromptCacheControl$outboundSchema)
-    .optional(),
-  promptCacheKey: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    frequencyPenalty: "frequency_penalty",
-    maxTokens: "max_tokens",
-    maxCompletionTokens: "max_completion_tokens",
-    topLogprobs: "top_logprobs",
-    presencePenalty: "presence_penalty",
-    responseFormat: "response_format",
-    reasoningEffort: "reasoning_effort",
-    streamOptions: "stream_options",
-    topP: "top_p",
-    topK: "top_k",
-    toolChoice: "tool_choice",
-    parallelToolCalls: "parallel_tool_calls",
-    fallbackOnCodes: "fallback_on_codes",
-    loadBalancer: "load_balancer",
-    cacheControl: "cache_control",
-    promptCacheKey: "prompt_cache_key",
-  });
-});
+    ])).optional(),
+    model: z.nullable(z.string()).optional(),
+    name: z.string().optional(),
+    audio: z.nullable(z.lazy(() =>
+      UpdatePromptAudio$outboundSchema
+    )).optional(),
+    frequencyPenalty: z.nullable(z.number()).optional(),
+    maxTokens: z.nullable(z.number().int()).optional(),
+    maxCompletionTokens: z.nullable(z.number().int()).optional(),
+    logprobs: z.nullable(z.boolean()).optional(),
+    topLogprobs: z.nullable(z.number().int()).optional(),
+    n: z.nullable(z.number().int()).optional(),
+    presencePenalty: z.nullable(z.number()).optional(),
+    responseFormat: z.union([
+      z.lazy(() => UpdatePromptResponseFormatText$outboundSchema),
+      z.lazy(() => UpdatePromptResponseFormatJSONObject$outboundSchema),
+      z.lazy(() => UpdatePromptResponseFormatJSONSchema$outboundSchema),
+    ]).optional(),
+    reasoningEffort: UpdatePromptReasoningEffort$outboundSchema.optional(),
+    verbosity: z.string().optional(),
+    seed: z.nullable(z.number()).optional(),
+    stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
+    streamOptions: z.nullable(
+      z.lazy(() => UpdatePromptStreamOptions$outboundSchema),
+    ).optional(),
+    thinking: z.union([
+      components.ThinkingConfigDisabledSchema$outboundSchema,
+      components.ThinkingConfigEnabledSchema$outboundSchema,
+      components.ThinkingConfigAdaptiveSchema$outboundSchema,
+      components.ThinkingConfigBetweenToolsSchema$outboundSchema,
+    ]).optional(),
+    temperature: z.nullable(z.number()).optional(),
+    topP: z.nullable(z.number()).optional(),
+    topK: z.nullable(z.number()).optional(),
+    toolChoice: z.union([
+      z.lazy(() => UpdatePromptToolChoice2$outboundSchema),
+      UpdatePromptToolChoice1$outboundSchema,
+    ]).optional(),
+    parallelToolCalls: z.boolean().optional(),
+    modalities: z.nullable(z.array(UpdatePromptModalities$outboundSchema))
+      .optional(),
+    guardrails: z.array(z.lazy(() => UpdatePromptGuardrails$outboundSchema))
+      .optional(),
+    plugins: z.array(
+      z.union([
+        components.PIIRedactionPlugin$outboundSchema.and(
+          z.object({ id: z.literal("pii_redaction") }),
+        ),
+        components.ResponseHealingPlugin$outboundSchema,
+        components.TraceScrubbingPlugin$outboundSchema,
+      ]),
+    ).optional(),
+    fallbackOnCodes: z.array(z.number().int()).optional(),
+    fallbacks: z.array(z.lazy(() => UpdatePromptFallbacks$outboundSchema))
+      .optional(),
+    retry: z.lazy(() => UpdatePromptRetry$outboundSchema).optional(),
+    cache: z.lazy(() => UpdatePromptCache$outboundSchema).optional(),
+    loadBalancer: z.lazy(() => UpdatePromptLoadBalancer1$outboundSchema)
+      .optional(),
+    timeout: z.lazy(() => UpdatePromptTimeout$outboundSchema).optional(),
+    cacheControl: z.lazy(() => UpdatePromptCacheControl$outboundSchema)
+      .optional(),
+    promptCacheKey: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      frequencyPenalty: "frequency_penalty",
+      maxTokens: "max_tokens",
+      maxCompletionTokens: "max_completion_tokens",
+      topLogprobs: "top_logprobs",
+      presencePenalty: "presence_penalty",
+      responseFormat: "response_format",
+      reasoningEffort: "reasoning_effort",
+      streamOptions: "stream_options",
+      topP: "top_p",
+      topK: "top_k",
+      toolChoice: "tool_choice",
+      parallelToolCalls: "parallel_tool_calls",
+      fallbackOnCodes: "fallback_on_codes",
+      loadBalancer: "load_balancer",
+      cacheControl: "cache_control",
+      promptCacheKey: "prompt_cache_key",
+    });
+  })
+);
 
 export function updatePromptPromptInputToJSON(
   updatePromptPromptInput: UpdatePromptPromptInput,
@@ -4082,12 +4179,12 @@ export function updatePromptPromptInputToJSON(
 /** @internal */
 export const UpdatePromptUseCases$outboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptUseCases
-> = z.nativeEnum(UpdatePromptUseCases);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(UpdatePromptUseCases));
 
 /** @internal */
 export const UpdatePromptLanguage$outboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptLanguage
-> = z.nativeEnum(UpdatePromptLanguage);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(UpdatePromptLanguage));
 
 /** @internal */
 export type UpdatePromptMetadata$Outbound = {
@@ -4100,14 +4197,16 @@ export const UpdatePromptMetadata$outboundSchema: z.ZodType<
   UpdatePromptMetadata$Outbound,
   z.ZodTypeDef,
   UpdatePromptMetadata
-> = z.object({
-  useCases: z.array(UpdatePromptUseCases$outboundSchema).optional(),
-  language: z.nullable(UpdatePromptLanguage$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    useCases: "use_cases",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    useCases: z.array(UpdatePromptUseCases$outboundSchema).optional(),
+    language: z.nullable(UpdatePromptLanguage$outboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      useCases: "use_cases",
+    });
+  })
+);
 
 export function updatePromptMetadataToJSON(
   updatePromptMetadata: UpdatePromptMetadata,
@@ -4137,26 +4236,28 @@ export const UpdatePromptUpdatePromptRequest$outboundSchema: z.ZodType<
   UpdatePromptUpdatePromptRequest$Outbound,
   z.ZodTypeDef,
   UpdatePromptUpdatePromptRequest
-> = z.object({
-  owner: z.string().optional(),
-  domainId: z.string().optional(),
-  created: z.string().optional(),
-  updated: z.string().optional(),
-  createdById: z.nullable(z.string()).optional(),
-  updatedById: z.nullable(z.string()).optional(),
-  displayName: z.string().optional(),
-  description: z.nullable(z.string()).optional(),
-  prompt: z.lazy(() => UpdatePromptPromptInput$outboundSchema).optional(),
-  metadata: z.lazy(() => UpdatePromptMetadata$outboundSchema).optional(),
-  path: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    domainId: "domain_id",
-    createdById: "created_by_id",
-    updatedById: "updated_by_id",
-    displayName: "display_name",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    owner: z.string().optional(),
+    domainId: z.string().optional(),
+    created: z.string().optional(),
+    updated: z.string().optional(),
+    createdById: z.nullable(z.string()).optional(),
+    updatedById: z.nullable(z.string()).optional(),
+    displayName: z.string().optional(),
+    description: z.nullable(z.string()).optional(),
+    prompt: z.lazy(() => UpdatePromptPromptInput$outboundSchema).optional(),
+    metadata: z.lazy(() => UpdatePromptMetadata$outboundSchema).optional(),
+    path: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      domainId: "domain_id",
+      createdById: "created_by_id",
+      updatedById: "updated_by_id",
+      displayName: "display_name",
+    });
+  })
+);
 
 export function updatePromptUpdatePromptRequestToJSON(
   updatePromptUpdatePromptRequest: UpdatePromptUpdatePromptRequest,
@@ -4179,15 +4280,17 @@ export const UpdatePromptRequest$outboundSchema: z.ZodType<
   UpdatePromptRequest$Outbound,
   z.ZodTypeDef,
   UpdatePromptRequest
-> = z.object({
-  id: z.string(),
-  requestBody: z.lazy(() => UpdatePromptUpdatePromptRequest$outboundSchema)
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    requestBody: "RequestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    requestBody: z.lazy(() => UpdatePromptUpdatePromptRequest$outboundSchema)
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      requestBody: "RequestBody",
+    });
+  })
+);
 
 export function updatePromptRequestToJSON(
   updatePromptRequest: UpdatePromptRequest,
@@ -4200,39 +4303,49 @@ export function updatePromptRequestToJSON(
 /** @internal */
 export const UpdatePromptPromptsResponseType$inboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptPromptsResponseType
-> = z.nativeEnum(UpdatePromptPromptsResponseType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(UpdatePromptPromptsResponseType)
+);
 
 /** @internal */
 export const UpdatePromptModelType$inboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptModelType
-> = z.nativeEnum(UpdatePromptModelType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(UpdatePromptModelType));
 
 /** @internal */
 export const UpdatePromptPromptsFormat$inboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptPromptsFormat
-> = z.nativeEnum(UpdatePromptPromptsFormat);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(UpdatePromptPromptsFormat));
 
 /** @internal */
 export const UpdatePromptResponseFormat6$inboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptResponseFormat6
-> = z.nativeEnum(UpdatePromptResponseFormat6);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(UpdatePromptResponseFormat6)
+);
 
 /** @internal */
 export const UpdatePromptResponseFormat5$inboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptResponseFormat5
-> = z.nativeEnum(UpdatePromptResponseFormat5);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(UpdatePromptResponseFormat5)
+);
 
 /** @internal */
 export const UpdatePromptResponseFormat4$inboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptResponseFormat4
-> = z.nativeEnum(UpdatePromptResponseFormat4);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(UpdatePromptResponseFormat4)
+);
 
 /** @internal */
 export const UpdatePromptResponseFormatPromptsResponse200ApplicationJSONResponseBodyPromptConfigModelParametersType$inboundSchema:
   z.ZodNativeEnum<
     typeof UpdatePromptResponseFormatPromptsResponse200ApplicationJSONResponseBodyPromptConfigModelParametersType
-  > = z.nativeEnum(
-    UpdatePromptResponseFormatPromptsResponse200ApplicationJSONResponseBodyPromptConfigModelParametersType,
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.nativeEnum(
+      UpdatePromptResponseFormatPromptsResponse200ApplicationJSONResponseBodyPromptConfigModelParametersType,
+    )
   );
 
 /** @internal */
@@ -4240,10 +4353,12 @@ export const UpdatePromptResponseFormat3$inboundSchema: z.ZodType<
   UpdatePromptResponseFormat3,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type:
-    UpdatePromptResponseFormatPromptsResponse200ApplicationJSONResponseBodyPromptConfigModelParametersType$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type:
+      UpdatePromptResponseFormatPromptsResponse200ApplicationJSONResponseBodyPromptConfigModelParametersType$inboundSchema,
+  })
+);
 
 export function updatePromptResponseFormat3FromJSON(
   jsonString: string,
@@ -4259,8 +4374,10 @@ export function updatePromptResponseFormat3FromJSON(
 export const UpdatePromptResponseFormatPromptsResponse200ApplicationJSONResponseBodyPromptConfigType$inboundSchema:
   z.ZodNativeEnum<
     typeof UpdatePromptResponseFormatPromptsResponse200ApplicationJSONResponseBodyPromptConfigType
-  > = z.nativeEnum(
-    UpdatePromptResponseFormatPromptsResponse200ApplicationJSONResponseBodyPromptConfigType,
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.nativeEnum(
+      UpdatePromptResponseFormatPromptsResponse200ApplicationJSONResponseBodyPromptConfigType,
+    )
   );
 
 /** @internal */
@@ -4268,10 +4385,12 @@ export const UpdatePromptResponseFormat2$inboundSchema: z.ZodType<
   UpdatePromptResponseFormat2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type:
-    UpdatePromptResponseFormatPromptsResponse200ApplicationJSONResponseBodyPromptConfigType$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type:
+      UpdatePromptResponseFormatPromptsResponse200ApplicationJSONResponseBodyPromptConfigType$inboundSchema,
+  })
+);
 
 export function updatePromptResponseFormat2FromJSON(
   jsonString: string,
@@ -4287,8 +4406,10 @@ export function updatePromptResponseFormat2FromJSON(
 export const UpdatePromptResponseFormatPromptsResponse200ApplicationJSONResponseBodyType$inboundSchema:
   z.ZodNativeEnum<
     typeof UpdatePromptResponseFormatPromptsResponse200ApplicationJSONResponseBodyType
-  > = z.nativeEnum(
-    UpdatePromptResponseFormatPromptsResponse200ApplicationJSONResponseBodyType,
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.nativeEnum(
+      UpdatePromptResponseFormatPromptsResponse200ApplicationJSONResponseBodyType,
+    )
   );
 
 /** @internal */
@@ -4297,12 +4418,14 @@ export const UpdatePromptResponseFormatPromptsResponse200ApplicationJSONJSONSche
     UpdatePromptResponseFormatPromptsResponse200ApplicationJSONJSONSchema,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    name: z.string(),
-    description: z.nullable(z.string()).optional(),
-    strict: z.boolean().optional(),
-    schema: z.record(z.any()),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      name: z.string(),
+      description: z.nullable(z.string()).optional(),
+      strict: z.boolean().optional(),
+      schema: z.record(z.any()),
+    })
+  );
 
 export function updatePromptResponseFormatPromptsResponse200ApplicationJSONJSONSchemaFromJSON(
   jsonString: string,
@@ -4324,19 +4447,21 @@ export const UpdatePromptResponseFormat1$inboundSchema: z.ZodType<
   UpdatePromptResponseFormat1,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type:
-    UpdatePromptResponseFormatPromptsResponse200ApplicationJSONResponseBodyType$inboundSchema,
-  display_name: z.string().optional(),
-  json_schema: z.lazy(() =>
-    UpdatePromptResponseFormatPromptsResponse200ApplicationJSONJSONSchema$inboundSchema
-  ),
-}).transform((v) => {
-  return remap$(v, {
-    "display_name": "displayName",
-    "json_schema": "jsonSchema",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type:
+      UpdatePromptResponseFormatPromptsResponse200ApplicationJSONResponseBodyType$inboundSchema,
+    display_name: z.string().optional(),
+    json_schema: z.lazy(() =>
+      UpdatePromptResponseFormatPromptsResponse200ApplicationJSONJSONSchema$inboundSchema
+    ),
+  }).transform((v) => {
+    return remap$(v, {
+      "display_name": "displayName",
+      "json_schema": "jsonSchema",
+    });
+  })
+);
 
 export function updatePromptResponseFormat1FromJSON(
   jsonString: string,
@@ -4353,14 +4478,16 @@ export const UpdatePromptPromptsResponseResponseFormat$inboundSchema: z.ZodType<
   UpdatePromptPromptsResponseResponseFormat,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  z.lazy(() => UpdatePromptResponseFormat1$inboundSchema),
-  z.lazy(() => UpdatePromptResponseFormat2$inboundSchema),
-  z.lazy(() => UpdatePromptResponseFormat3$inboundSchema),
-  UpdatePromptResponseFormat4$inboundSchema,
-  UpdatePromptResponseFormat5$inboundSchema,
-  UpdatePromptResponseFormat6$inboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => UpdatePromptResponseFormat1$inboundSchema),
+    z.lazy(() => UpdatePromptResponseFormat2$inboundSchema),
+    z.lazy(() => UpdatePromptResponseFormat3$inboundSchema),
+    UpdatePromptResponseFormat4$inboundSchema,
+    UpdatePromptResponseFormat5$inboundSchema,
+    UpdatePromptResponseFormat6$inboundSchema,
+  ])
+);
 
 export function updatePromptPromptsResponseResponseFormatFromJSON(
   jsonString: string,
@@ -4382,25 +4509,29 @@ export function updatePromptPromptsResponseResponseFormatFromJSON(
 export const UpdatePromptPromptsResponse200ApplicationJSONResponseBodyType$inboundSchema:
   z.ZodNativeEnum<
     typeof UpdatePromptPromptsResponse200ApplicationJSONResponseBodyType
-  > = z.nativeEnum(
-    UpdatePromptPromptsResponse200ApplicationJSONResponseBodyType,
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.nativeEnum(UpdatePromptPromptsResponse200ApplicationJSONResponseBodyType)
   );
 
 /** @internal */
 export const UpdatePromptPromptsResponseTtl$inboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptPromptsResponseTtl
-> = z.nativeEnum(UpdatePromptPromptsResponseTtl);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(UpdatePromptPromptsResponseTtl)
+);
 
 /** @internal */
 export const UpdatePromptPromptsResponseCacheControl$inboundSchema: z.ZodType<
   UpdatePromptPromptsResponseCacheControl,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type:
-    UpdatePromptPromptsResponse200ApplicationJSONResponseBodyType$inboundSchema,
-  ttl: UpdatePromptPromptsResponseTtl$inboundSchema.default("5m"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type:
+      UpdatePromptPromptsResponse200ApplicationJSONResponseBodyType$inboundSchema,
+    ttl: UpdatePromptPromptsResponseTtl$inboundSchema.default("5m"),
+  })
+);
 
 export function updatePromptPromptsResponseCacheControlFromJSON(
   jsonString: string,
@@ -4421,71 +4552,75 @@ export function updatePromptPromptsResponseCacheControlFromJSON(
 /** @internal */
 export const UpdatePromptPhotoRealVersion$inboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptPhotoRealVersion
-> = z.nativeEnum(UpdatePromptPhotoRealVersion);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(UpdatePromptPhotoRealVersion)
+);
 
 /** @internal */
 export const UpdatePromptEncodingFormat$inboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptEncodingFormat
-> = z.nativeEnum(UpdatePromptEncodingFormat);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(UpdatePromptEncodingFormat));
 
 /** @internal */
 export const UpdatePromptPromptsResponseReasoningEffort$inboundSchema:
-  z.ZodNativeEnum<typeof UpdatePromptPromptsResponseReasoningEffort> = z
-    .nativeEnum(UpdatePromptPromptsResponseReasoningEffort);
+  z.ZodNativeEnum<typeof UpdatePromptPromptsResponseReasoningEffort> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(UpdatePromptPromptsResponseReasoningEffort)
+    );
 
 /** @internal */
 export const UpdatePromptVerbosity$inboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptVerbosity
-> = z.nativeEnum(UpdatePromptVerbosity);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(UpdatePromptVerbosity));
 
 /** @internal */
 export const UpdatePromptThinkingLevel$inboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptThinkingLevel
-> = z.nativeEnum(UpdatePromptThinkingLevel);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(UpdatePromptThinkingLevel));
 
 /** @internal */
 export const UpdatePromptModelParameters$inboundSchema: z.ZodType<
   UpdatePromptModelParameters,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  temperature: z.number().optional(),
-  maxTokens: z.number().optional(),
-  topK: z.number().optional(),
-  topP: z.number().optional(),
-  frequencyPenalty: z.number().optional(),
-  presencePenalty: z.number().optional(),
-  numImages: z.number().optional(),
-  seed: z.number().optional(),
-  format: UpdatePromptPromptsFormat$inboundSchema.optional(),
-  dimensions: z.string().optional(),
-  quality: z.string().optional(),
-  style: z.string().optional(),
-  responseFormat: z.nullable(
-    z.union([
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    temperature: z.number().optional(),
+    maxTokens: z.number().optional(),
+    topK: z.number().optional(),
+    topP: z.number().optional(),
+    frequencyPenalty: z.number().optional(),
+    presencePenalty: z.number().optional(),
+    numImages: z.number().optional(),
+    seed: z.number().optional(),
+    format: UpdatePromptPromptsFormat$inboundSchema.optional(),
+    dimensions: z.string().optional(),
+    quality: z.string().optional(),
+    style: z.string().optional(),
+    responseFormat: z.nullable(z.union([
       z.lazy(() => UpdatePromptResponseFormat1$inboundSchema),
       z.lazy(() => UpdatePromptResponseFormat2$inboundSchema),
       z.lazy(() => UpdatePromptResponseFormat3$inboundSchema),
       UpdatePromptResponseFormat4$inboundSchema,
       UpdatePromptResponseFormat5$inboundSchema,
       UpdatePromptResponseFormat6$inboundSchema,
-    ]),
-  ).optional(),
-  cacheControl: z.nullable(
-    z.lazy(() => UpdatePromptPromptsResponseCacheControl$inboundSchema),
-  ).optional(),
-  photoRealVersion: UpdatePromptPhotoRealVersion$inboundSchema.optional(),
-  encoding_format: UpdatePromptEncodingFormat$inboundSchema.optional(),
-  reasoningEffort: UpdatePromptPromptsResponseReasoningEffort$inboundSchema
-    .optional(),
-  budgetTokens: z.number().optional(),
-  verbosity: UpdatePromptVerbosity$inboundSchema.optional(),
-  thinkingLevel: UpdatePromptThinkingLevel$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "encoding_format": "encodingFormat",
-  });
-});
+    ])).optional(),
+    cacheControl: z.nullable(z.lazy(() =>
+      UpdatePromptPromptsResponseCacheControl$inboundSchema
+    )).optional(),
+    photoRealVersion: UpdatePromptPhotoRealVersion$inboundSchema.optional(),
+    encoding_format: UpdatePromptEncodingFormat$inboundSchema.optional(),
+    reasoningEffort: UpdatePromptPromptsResponseReasoningEffort$inboundSchema
+      .optional(),
+    budgetTokens: z.number().optional(),
+    verbosity: UpdatePromptVerbosity$inboundSchema.optional(),
+    thinkingLevel: UpdatePromptThinkingLevel$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "encoding_format": "encodingFormat",
+    });
+  })
+);
 
 export function updatePromptModelParametersFromJSON(
   jsonString: string,
@@ -4500,28 +4635,30 @@ export function updatePromptModelParametersFromJSON(
 /** @internal */
 export const UpdatePromptProvider$inboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptProvider
-> = z.nativeEnum(UpdatePromptProvider);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(UpdatePromptProvider));
 
 /** @internal */
 export const UpdatePromptRole$inboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptRole
-> = z.nativeEnum(UpdatePromptRole);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(UpdatePromptRole));
 
 /** @internal */
 export const UpdatePrompt2File$inboundSchema: z.ZodType<
   UpdatePrompt2File,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  file_data: z.string().optional(),
-  uri: z.string().optional(),
-  mimeType: z.string().optional(),
-  filename: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "file_data": "fileData",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    file_data: z.string().optional(),
+    uri: z.string().optional(),
+    mimeType: z.string().optional(),
+    filename: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "file_data": "fileData",
+    });
+  })
+);
 
 export function updatePrompt2FileFromJSON(
   jsonString: string,
@@ -4538,10 +4675,12 @@ export const UpdatePrompt23$inboundSchema: z.ZodType<
   UpdatePrompt23,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("file"),
-  file: z.lazy(() => UpdatePrompt2File$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("file"),
+    file: z.lazy(() => UpdatePrompt2File$inboundSchema),
+  })
+);
 
 export function updatePrompt23FromJSON(
   jsonString: string,
@@ -4558,11 +4697,13 @@ export const UpdatePrompt2ImageUrl$inboundSchema: z.ZodType<
   UpdatePrompt2ImageUrl,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  url: z.string(),
-  detail: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    url: z.string(),
+    detail: z.string().optional(),
+  })
+);
 
 export function updatePrompt2ImageUrlFromJSON(
   jsonString: string,
@@ -4579,14 +4720,16 @@ export const UpdatePrompt22$inboundSchema: z.ZodType<
   UpdatePrompt22,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("image_url"),
-  image_url: z.lazy(() => UpdatePrompt2ImageUrl$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "image_url": "imageUrl",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("image_url"),
+    image_url: z.lazy(() => UpdatePrompt2ImageUrl$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "image_url": "imageUrl",
+    });
+  })
+);
 
 export function updatePrompt22FromJSON(
   jsonString: string,
@@ -4603,10 +4746,12 @@ export const UpdatePrompt21$inboundSchema: z.ZodType<
   UpdatePrompt21,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("text"),
-  text: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("text"),
+    text: z.string(),
+  })
+);
 
 export function updatePrompt21FromJSON(
   jsonString: string,
@@ -4623,11 +4768,13 @@ export const UpdatePromptContentPromptsResponse2$inboundSchema: z.ZodType<
   UpdatePromptContentPromptsResponse2,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  z.lazy(() => UpdatePrompt21$inboundSchema),
-  z.lazy(() => UpdatePrompt22$inboundSchema),
-  z.lazy(() => UpdatePrompt23$inboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => UpdatePrompt21$inboundSchema),
+    z.lazy(() => UpdatePrompt22$inboundSchema),
+    z.lazy(() => UpdatePrompt23$inboundSchema),
+  ])
+);
 
 export function updatePromptContentPromptsResponse2FromJSON(
   jsonString: string,
@@ -4645,14 +4792,16 @@ export const UpdatePromptContent$inboundSchema: z.ZodType<
   UpdatePromptContent,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  z.string(),
-  z.array(z.union([
-    z.lazy(() => UpdatePrompt21$inboundSchema),
-    z.lazy(() => UpdatePrompt22$inboundSchema),
-    z.lazy(() => UpdatePrompt23$inboundSchema),
-  ])),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.string(),
+    z.array(z.union([
+      z.lazy(() => UpdatePrompt21$inboundSchema),
+      z.lazy(() => UpdatePrompt22$inboundSchema),
+      z.lazy(() => UpdatePrompt23$inboundSchema),
+    ])),
+  ])
+);
 
 export function updatePromptContentFromJSON(
   jsonString: string,
@@ -4668,8 +4817,10 @@ export function updatePromptContentFromJSON(
 export const UpdatePromptPromptsResponse200ApplicationJSONResponseBodyPromptConfigType$inboundSchema:
   z.ZodNativeEnum<
     typeof UpdatePromptPromptsResponse200ApplicationJSONResponseBodyPromptConfigType
-  > = z.nativeEnum(
-    UpdatePromptPromptsResponse200ApplicationJSONResponseBodyPromptConfigType,
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.nativeEnum(
+      UpdatePromptPromptsResponse200ApplicationJSONResponseBodyPromptConfigType,
+    )
   );
 
 /** @internal */
@@ -4677,10 +4828,12 @@ export const UpdatePromptFunction$inboundSchema: z.ZodType<
   UpdatePromptFunction,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string(),
-  arguments: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+    arguments: z.string(),
+  })
+);
 
 export function updatePromptFunctionFromJSON(
   jsonString: string,
@@ -4697,13 +4850,15 @@ export const UpdatePromptToolCalls$inboundSchema: z.ZodType<
   UpdatePromptToolCalls,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  index: z.number().optional(),
-  type:
-    UpdatePromptPromptsResponse200ApplicationJSONResponseBodyPromptConfigType$inboundSchema,
-  function: z.lazy(() => UpdatePromptFunction$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    index: z.number().optional(),
+    type:
+      UpdatePromptPromptsResponse200ApplicationJSONResponseBodyPromptConfigType$inboundSchema,
+    function: z.lazy(() => UpdatePromptFunction$inboundSchema),
+  })
+);
 
 export function updatePromptToolCallsFromJSON(
   jsonString: string,
@@ -4720,27 +4875,28 @@ export const UpdatePromptPromptsMessages$inboundSchema: z.ZodType<
   UpdatePromptPromptsMessages,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  role: UpdatePromptRole$inboundSchema,
-  content: z.nullable(
-    z.union([
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    role: UpdatePromptRole$inboundSchema,
+    content: z.nullable(z.union([
       z.string(),
       z.array(z.union([
         z.lazy(() => UpdatePrompt21$inboundSchema),
         z.lazy(() => UpdatePrompt22$inboundSchema),
         z.lazy(() => UpdatePrompt23$inboundSchema),
       ])),
-    ]),
-  ),
-  tool_calls: z.array(z.lazy(() => UpdatePromptToolCalls$inboundSchema))
-    .optional(),
-  tool_call_id: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "tool_calls": "toolCalls",
-    "tool_call_id": "toolCallId",
-  });
-});
+    ])),
+    tool_calls: z.array(z.lazy(() =>
+      UpdatePromptToolCalls$inboundSchema
+    )).optional(),
+    tool_call_id: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "tool_calls": "toolCalls",
+      "tool_call_id": "toolCallId",
+    });
+  })
+);
 
 export function updatePromptPromptsMessagesFromJSON(
   jsonString: string,
@@ -4757,25 +4913,27 @@ export const UpdatePromptPromptConfig$inboundSchema: z.ZodType<
   UpdatePromptPromptConfig,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  stream: z.boolean().optional(),
-  model: z.nullable(z.string()).optional(),
-  model_db_id: z.nullable(z.string()).optional(),
-  model_type: z.nullable(UpdatePromptModelType$inboundSchema).optional(),
-  model_parameters: z.lazy(() => UpdatePromptModelParameters$inboundSchema)
-    .optional(),
-  provider: z.nullable(UpdatePromptProvider$inboundSchema).optional(),
-  integration_id: z.nullable(z.string()).optional(),
-  version: z.string().optional(),
-  messages: z.array(z.lazy(() => UpdatePromptPromptsMessages$inboundSchema)),
-}).transform((v) => {
-  return remap$(v, {
-    "model_db_id": "modelDbId",
-    "model_type": "modelType",
-    "model_parameters": "modelParameters",
-    "integration_id": "integrationId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    stream: z.boolean().optional(),
+    model: z.nullable(z.string()).optional(),
+    model_db_id: z.nullable(z.string()).optional(),
+    model_type: z.nullable(UpdatePromptModelType$inboundSchema).optional(),
+    model_parameters: z.lazy(() => UpdatePromptModelParameters$inboundSchema)
+      .optional(),
+    provider: z.nullable(UpdatePromptProvider$inboundSchema).optional(),
+    integration_id: z.nullable(z.string()).optional(),
+    version: z.string().optional(),
+    messages: z.array(z.lazy(() => UpdatePromptPromptsMessages$inboundSchema)),
+  }).transform((v) => {
+    return remap$(v, {
+      "model_db_id": "modelDbId",
+      "model_type": "modelType",
+      "model_parameters": "modelParameters",
+      "integration_id": "integrationId",
+    });
+  })
+);
 
 export function updatePromptPromptConfigFromJSON(
   jsonString: string,
@@ -4790,23 +4948,26 @@ export function updatePromptPromptConfigFromJSON(
 /** @internal */
 export const UpdatePromptPromptsVoice$inboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptPromptsVoice
-> = z.nativeEnum(UpdatePromptPromptsVoice);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(UpdatePromptPromptsVoice));
 
 /** @internal */
 export const UpdatePromptPromptsResponse200Format$inboundSchema:
-  z.ZodNativeEnum<typeof UpdatePromptPromptsResponse200Format> = z.nativeEnum(
-    UpdatePromptPromptsResponse200Format,
-  );
+  z.ZodNativeEnum<typeof UpdatePromptPromptsResponse200Format> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(UpdatePromptPromptsResponse200Format)
+    );
 
 /** @internal */
 export const UpdatePromptPromptsAudio$inboundSchema: z.ZodType<
   UpdatePromptPromptsAudio,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  voice: UpdatePromptPromptsVoice$inboundSchema,
-  format: UpdatePromptPromptsResponse200Format$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    voice: UpdatePromptPromptsVoice$inboundSchema,
+    format: UpdatePromptPromptsResponse200Format$inboundSchema,
+  })
+);
 
 export function updatePromptPromptsAudioFromJSON(
   jsonString: string,
@@ -4824,12 +4985,14 @@ export const UpdatePromptResponseFormatPromptsResponseJsonSchema$inboundSchema:
     UpdatePromptResponseFormatPromptsResponseJsonSchema,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    description: z.string().optional(),
-    name: z.string(),
-    schema: z.any().optional(),
-    strict: z.boolean().default(false),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      description: z.string().optional(),
+      name: z.string(),
+      schema: z.any().optional(),
+      strict: z.boolean().default(false),
+    })
+  );
 
 export function updatePromptResponseFormatPromptsResponseJsonSchemaFromJSON(
   jsonString: string,
@@ -4853,16 +5016,18 @@ export const UpdatePromptResponseFormatPromptsResponse200JSONSchema$inboundSchem
     UpdatePromptResponseFormatPromptsResponse200JSONSchema,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    type: z.literal("json_schema"),
-    json_schema: z.lazy(() =>
-      UpdatePromptResponseFormatPromptsResponseJsonSchema$inboundSchema
-    ),
-  }).transform((v) => {
-    return remap$(v, {
-      "json_schema": "jsonSchema",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type: z.literal("json_schema"),
+      json_schema: z.lazy(() =>
+        UpdatePromptResponseFormatPromptsResponseJsonSchema$inboundSchema
+      ),
+    }).transform((v) => {
+      return remap$(v, {
+        "json_schema": "jsonSchema",
+      });
+    })
+  );
 
 export function updatePromptResponseFormatPromptsResponse200JSONSchemaFromJSON(
   jsonString: string,
@@ -4885,9 +5050,11 @@ export const UpdatePromptResponseFormatPromptsJSONObject$inboundSchema:
     UpdatePromptResponseFormatPromptsJSONObject,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    type: z.literal("json_object"),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type: z.literal("json_object"),
+    })
+  );
 
 export function updatePromptResponseFormatPromptsJSONObjectFromJSON(
   jsonString: string,
@@ -4910,9 +5077,11 @@ export const UpdatePromptResponseFormatPromptsText$inboundSchema: z.ZodType<
   UpdatePromptResponseFormatPromptsText,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("text"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("text"),
+  })
+);
 
 export function updatePromptResponseFormatPromptsTextFromJSON(
   jsonString: string,
@@ -4930,13 +5099,15 @@ export const UpdatePromptPromptsResponseFormat$inboundSchema: z.ZodType<
   UpdatePromptPromptsResponseFormat,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  z.lazy(() => UpdatePromptResponseFormatPromptsText$inboundSchema),
-  z.lazy(() => UpdatePromptResponseFormatPromptsJSONObject$inboundSchema),
-  z.lazy(() =>
-    UpdatePromptResponseFormatPromptsResponse200JSONSchema$inboundSchema
-  ),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => UpdatePromptResponseFormatPromptsText$inboundSchema),
+    z.lazy(() => UpdatePromptResponseFormatPromptsJSONObject$inboundSchema),
+    z.lazy(() =>
+      UpdatePromptResponseFormatPromptsResponse200JSONSchema$inboundSchema
+    ),
+  ])
+);
 
 export function updatePromptPromptsResponseFormatFromJSON(
   jsonString: string,
@@ -4951,14 +5122,18 @@ export function updatePromptPromptsResponseFormatFromJSON(
 /** @internal */
 export const UpdatePromptPromptsReasoningEffort$inboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptPromptsReasoningEffort
-> = z.nativeEnum(UpdatePromptPromptsReasoningEffort);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(UpdatePromptPromptsReasoningEffort)
+);
 
 /** @internal */
 export const UpdatePromptPromptsStop$inboundSchema: z.ZodType<
   UpdatePromptPromptsStop,
   z.ZodTypeDef,
   unknown
-> = z.union([z.string(), z.array(z.string())]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.array(z.string())])
+);
 
 export function updatePromptPromptsStopFromJSON(
   jsonString: string,
@@ -4975,13 +5150,15 @@ export const UpdatePromptPromptsStreamOptions$inboundSchema: z.ZodType<
   UpdatePromptPromptsStreamOptions,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  include_usage: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "include_usage": "includeUsage",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    include_usage: z.boolean().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "include_usage": "includeUsage",
+    });
+  })
+);
 
 export function updatePromptPromptsStreamOptionsFromJSON(
   jsonString: string,
@@ -4998,12 +5175,14 @@ export const UpdatePromptPromptsThinking$inboundSchema: z.ZodType<
   UpdatePromptPromptsThinking,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  components.ThinkingConfigDisabledSchema$inboundSchema,
-  components.ThinkingConfigEnabledSchema$inboundSchema,
-  components.ThinkingConfigAdaptiveSchema$inboundSchema,
-  components.ThinkingConfigBetweenToolsSchema$inboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    components.ThinkingConfigDisabledSchema$inboundSchema,
+    components.ThinkingConfigEnabledSchema$inboundSchema,
+    components.ThinkingConfigAdaptiveSchema$inboundSchema,
+    components.ThinkingConfigBetweenToolsSchema$inboundSchema,
+  ])
+);
 
 export function updatePromptPromptsThinkingFromJSON(
   jsonString: string,
@@ -5018,16 +5197,20 @@ export function updatePromptPromptsThinkingFromJSON(
 /** @internal */
 export const UpdatePromptToolChoicePromptsType$inboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptToolChoicePromptsType
-> = z.nativeEnum(UpdatePromptToolChoicePromptsType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(UpdatePromptToolChoicePromptsType)
+);
 
 /** @internal */
 export const UpdatePromptToolChoicePromptsFunction$inboundSchema: z.ZodType<
   UpdatePromptToolChoicePromptsFunction,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+  })
+);
 
 export function updatePromptToolChoicePromptsFunctionFromJSON(
   jsonString: string,
@@ -5045,10 +5228,12 @@ export const UpdatePromptToolChoicePrompts2$inboundSchema: z.ZodType<
   UpdatePromptToolChoicePrompts2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: UpdatePromptToolChoicePromptsType$inboundSchema.optional(),
-  function: z.lazy(() => UpdatePromptToolChoicePromptsFunction$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: UpdatePromptToolChoicePromptsType$inboundSchema.optional(),
+    function: z.lazy(() => UpdatePromptToolChoicePromptsFunction$inboundSchema),
+  })
+);
 
 export function updatePromptToolChoicePrompts2FromJSON(
   jsonString: string,
@@ -5063,17 +5248,21 @@ export function updatePromptToolChoicePrompts2FromJSON(
 /** @internal */
 export const UpdatePromptToolChoicePrompts1$inboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptToolChoicePrompts1
-> = z.nativeEnum(UpdatePromptToolChoicePrompts1);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(UpdatePromptToolChoicePrompts1)
+);
 
 /** @internal */
 export const UpdatePromptPromptsToolChoice$inboundSchema: z.ZodType<
   UpdatePromptPromptsToolChoice,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  z.lazy(() => UpdatePromptToolChoicePrompts2$inboundSchema),
-  UpdatePromptToolChoicePrompts1$inboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => UpdatePromptToolChoicePrompts2$inboundSchema),
+    UpdatePromptToolChoicePrompts1$inboundSchema,
+  ])
+);
 
 export function updatePromptPromptsToolChoiceFromJSON(
   jsonString: string,
@@ -5088,19 +5277,23 @@ export function updatePromptPromptsToolChoiceFromJSON(
 /** @internal */
 export const UpdatePromptPromptsModalities$inboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptPromptsModalities
-> = z.nativeEnum(UpdatePromptPromptsModalities);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(UpdatePromptPromptsModalities)
+);
 
 /** @internal */
 export const UpdatePromptIdPrompts1$inboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptIdPrompts1
-> = z.nativeEnum(UpdatePromptIdPrompts1);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(UpdatePromptIdPrompts1));
 
 /** @internal */
 export const UpdatePromptPromptsId$inboundSchema: z.ZodType<
   UpdatePromptPromptsId,
   z.ZodTypeDef,
   unknown
-> = z.union([UpdatePromptIdPrompts1$inboundSchema, z.string()]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([UpdatePromptIdPrompts1$inboundSchema, z.string()])
+);
 
 export function updatePromptPromptsIdFromJSON(
   jsonString: string,
@@ -5115,21 +5308,25 @@ export function updatePromptPromptsIdFromJSON(
 /** @internal */
 export const UpdatePromptPromptsExecuteOn$inboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptPromptsExecuteOn
-> = z.nativeEnum(UpdatePromptPromptsExecuteOn);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(UpdatePromptPromptsExecuteOn)
+);
 
 /** @internal */
 export const UpdatePromptPromptsGuardrails$inboundSchema: z.ZodType<
   UpdatePromptPromptsGuardrails,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.union([UpdatePromptIdPrompts1$inboundSchema, z.string()]),
-  execute_on: UpdatePromptPromptsExecuteOn$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "execute_on": "executeOn",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.union([UpdatePromptIdPrompts1$inboundSchema, z.string()]),
+    execute_on: UpdatePromptPromptsExecuteOn$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "execute_on": "executeOn",
+    });
+  })
+);
 
 export function updatePromptPromptsGuardrailsFromJSON(
   jsonString: string,
@@ -5146,13 +5343,15 @@ export const UpdatePromptPromptsPlugins$inboundSchema: z.ZodType<
   UpdatePromptPromptsPlugins,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  components.PIIRedactionPlugin$inboundSchema.and(
-    z.object({ id: z.literal("pii_redaction") }),
-  ),
-  components.ResponseHealingPlugin$inboundSchema,
-  components.TraceScrubbingPlugin$inboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    components.PIIRedactionPlugin$inboundSchema.and(
+      z.object({ id: z.literal("pii_redaction") }),
+    ),
+    components.ResponseHealingPlugin$inboundSchema,
+    components.TraceScrubbingPlugin$inboundSchema,
+  ])
+);
 
 export function updatePromptPromptsPluginsFromJSON(
   jsonString: string,
@@ -5169,9 +5368,11 @@ export const UpdatePromptPromptsFallbacks$inboundSchema: z.ZodType<
   UpdatePromptPromptsFallbacks,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  model: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model: z.string(),
+  })
+);
 
 export function updatePromptPromptsFallbacksFromJSON(
   jsonString: string,
@@ -5188,14 +5389,16 @@ export const UpdatePromptPromptsRetry$inboundSchema: z.ZodType<
   UpdatePromptPromptsRetry,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  count: z.number().default(3),
-  on_codes: z.array(z.number()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "on_codes": "onCodes",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    count: z.number().default(3),
+    on_codes: z.array(z.number()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "on_codes": "onCodes",
+    });
+  })
+);
 
 export function updatePromptPromptsRetryFromJSON(
   jsonString: string,
@@ -5210,17 +5413,21 @@ export function updatePromptPromptsRetryFromJSON(
 /** @internal */
 export const UpdatePromptPromptsResponse200Type$inboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptPromptsResponse200Type
-> = z.nativeEnum(UpdatePromptPromptsResponse200Type);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(UpdatePromptPromptsResponse200Type)
+);
 
 /** @internal */
 export const UpdatePromptPromptsCache$inboundSchema: z.ZodType<
   UpdatePromptPromptsCache,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  ttl: z.number().default(3600),
-  type: UpdatePromptPromptsResponse200Type$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ttl: z.number().default(3600),
+    type: UpdatePromptPromptsResponse200Type$inboundSchema,
+  })
+);
 
 export function updatePromptPromptsCacheFromJSON(
   jsonString: string,
@@ -5235,17 +5442,21 @@ export function updatePromptPromptsCacheFromJSON(
 /** @internal */
 export const UpdatePromptLoadBalancerPromptsType$inboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptLoadBalancerPromptsType
-> = z.nativeEnum(UpdatePromptLoadBalancerPromptsType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(UpdatePromptLoadBalancerPromptsType)
+);
 
 /** @internal */
 export const UpdatePromptLoadBalancerPromptsModels$inboundSchema: z.ZodType<
   UpdatePromptLoadBalancerPromptsModels,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  model: z.string(),
-  weight: z.number().default(0.5),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model: z.string(),
+    weight: z.number().default(0.5),
+  })
+);
 
 export function updatePromptLoadBalancerPromptsModelsFromJSON(
   jsonString: string,
@@ -5263,12 +5474,14 @@ export const UpdatePromptLoadBalancerPrompts1$inboundSchema: z.ZodType<
   UpdatePromptLoadBalancerPrompts1,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: UpdatePromptLoadBalancerPromptsType$inboundSchema,
-  models: z.array(
-    z.lazy(() => UpdatePromptLoadBalancerPromptsModels$inboundSchema),
-  ),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: UpdatePromptLoadBalancerPromptsType$inboundSchema,
+    models: z.array(
+      z.lazy(() => UpdatePromptLoadBalancerPromptsModels$inboundSchema),
+    ),
+  })
+);
 
 export function updatePromptLoadBalancerPrompts1FromJSON(
   jsonString: string,
@@ -5285,7 +5498,9 @@ export const UpdatePromptPromptsLoadBalancer$inboundSchema: z.ZodType<
   UpdatePromptPromptsLoadBalancer,
   z.ZodTypeDef,
   unknown
-> = z.lazy(() => UpdatePromptLoadBalancerPrompts1$inboundSchema);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.lazy(() => UpdatePromptLoadBalancerPrompts1$inboundSchema)
+);
 
 export function updatePromptPromptsLoadBalancerFromJSON(
   jsonString: string,
@@ -5302,13 +5517,15 @@ export const UpdatePromptPromptsTimeout$inboundSchema: z.ZodType<
   UpdatePromptPromptsTimeout,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  call_timeout: z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    "call_timeout": "callTimeout",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    call_timeout: z.number(),
+  }).transform((v) => {
+    return remap$(v, {
+      "call_timeout": "callTimeout",
+    });
+  })
+);
 
 export function updatePromptPromptsTimeoutFromJSON(
   jsonString: string,
@@ -5322,23 +5539,27 @@ export function updatePromptPromptsTimeoutFromJSON(
 
 /** @internal */
 export const UpdatePromptPromptsResponse200ApplicationJSONType$inboundSchema:
-  z.ZodNativeEnum<typeof UpdatePromptPromptsResponse200ApplicationJSONType> = z
-    .nativeEnum(UpdatePromptPromptsResponse200ApplicationJSONType);
+  z.ZodNativeEnum<typeof UpdatePromptPromptsResponse200ApplicationJSONType> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(UpdatePromptPromptsResponse200ApplicationJSONType)
+    );
 
 /** @internal */
 export const UpdatePromptPromptsTtl$inboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptPromptsTtl
-> = z.nativeEnum(UpdatePromptPromptsTtl);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(UpdatePromptPromptsTtl));
 
 /** @internal */
 export const UpdatePromptPromptsCacheControl$inboundSchema: z.ZodType<
   UpdatePromptPromptsCacheControl,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: UpdatePromptPromptsResponse200ApplicationJSONType$inboundSchema,
-  ttl: UpdatePromptPromptsTtl$inboundSchema.default("5m"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: UpdatePromptPromptsResponse200ApplicationJSONType$inboundSchema,
+    ttl: UpdatePromptPromptsTtl$inboundSchema.default("5m"),
+  })
+);
 
 export function updatePromptPromptsCacheControlFromJSON(
   jsonString: string,
@@ -5356,7 +5577,9 @@ export const UpdatePromptContentPromptsResponse200ApplicationJSONResponseBody2$i
     UpdatePromptContentPromptsResponse200ApplicationJSONResponseBody2,
     z.ZodTypeDef,
     unknown
-  > = components.TextContentPartSchema$inboundSchema;
+  > = /* @__PURE__ */ lazySchema$(() =>
+    components.TextContentPartSchema$inboundSchema
+  );
 
 export function updatePromptContentPromptsResponse200ApplicationJSONResponseBody2FromJSON(
   jsonString: string,
@@ -5379,10 +5602,12 @@ export const UpdatePromptMessagesPromptsResponse200ApplicationJSONResponseBodyCo
     UpdatePromptMessagesPromptsResponse200ApplicationJSONResponseBodyContent,
     z.ZodTypeDef,
     unknown
-  > = z.union([
-    z.string(),
-    z.array(components.TextContentPartSchema$inboundSchema),
-  ]);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.union([
+      z.string(),
+      z.array(components.TextContentPartSchema$inboundSchema),
+    ])
+  );
 
 export function updatePromptMessagesPromptsResponse200ApplicationJSONResponseBodyContentFromJSON(
   jsonString: string,
@@ -5401,23 +5626,29 @@ export function updatePromptMessagesPromptsResponse200ApplicationJSONResponseBod
 
 /** @internal */
 export const UpdatePromptMessagesPromptsResponse200Type$inboundSchema:
-  z.ZodNativeEnum<typeof UpdatePromptMessagesPromptsResponse200Type> = z
-    .nativeEnum(UpdatePromptMessagesPromptsResponse200Type);
+  z.ZodNativeEnum<typeof UpdatePromptMessagesPromptsResponse200Type> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(UpdatePromptMessagesPromptsResponse200Type)
+    );
 
 /** @internal */
 export const UpdatePromptMessagesPromptsTtl$inboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptMessagesPromptsTtl
-> = z.nativeEnum(UpdatePromptMessagesPromptsTtl);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(UpdatePromptMessagesPromptsTtl)
+);
 
 /** @internal */
 export const UpdatePromptMessagesPromptsCacheControl$inboundSchema: z.ZodType<
   UpdatePromptMessagesPromptsCacheControl,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: UpdatePromptMessagesPromptsResponse200Type$inboundSchema,
-  ttl: UpdatePromptMessagesPromptsTtl$inboundSchema.default("5m"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: UpdatePromptMessagesPromptsResponse200Type$inboundSchema,
+    ttl: UpdatePromptMessagesPromptsTtl$inboundSchema.default("5m"),
+  })
+);
 
 export function updatePromptMessagesPromptsCacheControlFromJSON(
   jsonString: string,
@@ -5440,22 +5671,24 @@ export const UpdatePromptMessagesPromptsToolMessage$inboundSchema: z.ZodType<
   UpdatePromptMessagesPromptsToolMessage,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  role: z.literal("tool"),
-  content: z.union([
-    z.string(),
-    z.array(components.TextContentPartSchema$inboundSchema),
-  ]),
-  tool_call_id: z.nullable(z.string()),
-  cache_control: z.lazy(() =>
-    UpdatePromptMessagesPromptsCacheControl$inboundSchema
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "tool_call_id": "toolCallId",
-    "cache_control": "cacheControl",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    role: z.literal("tool"),
+    content: z.union([
+      z.string(),
+      z.array(components.TextContentPartSchema$inboundSchema),
+    ]),
+    tool_call_id: z.nullable(z.string()),
+    cache_control: z.lazy(() =>
+      UpdatePromptMessagesPromptsCacheControl$inboundSchema
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "tool_call_id": "toolCallId",
+      "cache_control": "cacheControl",
+    });
+  })
+);
 
 export function updatePromptMessagesPromptsToolMessageFromJSON(
   jsonString: string,
@@ -5474,14 +5707,16 @@ export const UpdatePromptContentPromptsResponse200ApplicationJson2$inboundSchema
     UpdatePromptContentPromptsResponse200ApplicationJson2,
     z.ZodTypeDef,
     unknown
-  > = z.union([
-    components.TextContentPartSchema$inboundSchema.and(
-      z.object({ type: z.literal("text") }),
-    ),
-    components.RefusalPartSchema$inboundSchema,
-    components.ReasoningPartSchema$inboundSchema,
-    components.RedactedReasoningPartSchema$inboundSchema,
-  ]);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.union([
+      components.TextContentPartSchema$inboundSchema.and(
+        z.object({ type: z.literal("text") }),
+      ),
+      components.RefusalPartSchema$inboundSchema,
+      components.ReasoningPartSchema$inboundSchema,
+      components.RedactedReasoningPartSchema$inboundSchema,
+    ])
+  );
 
 export function updatePromptContentPromptsResponse200ApplicationJSON2FromJSON(
   jsonString: string,
@@ -5505,19 +5740,21 @@ export const UpdatePromptMessagesPromptsResponse200ApplicationJSONContent$inboun
     UpdatePromptMessagesPromptsResponse200ApplicationJSONContent,
     z.ZodTypeDef,
     unknown
-  > = z.union([
-    z.string(),
-    z.array(
-      z.union([
-        components.TextContentPartSchema$inboundSchema.and(
-          z.object({ type: z.literal("text") }),
-        ),
-        components.RefusalPartSchema$inboundSchema,
-        components.ReasoningPartSchema$inboundSchema,
-        components.RedactedReasoningPartSchema$inboundSchema,
-      ]),
-    ),
-  ]);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.union([
+      z.string(),
+      z.array(
+        z.union([
+          components.TextContentPartSchema$inboundSchema.and(
+            z.object({ type: z.literal("text") }),
+          ),
+          components.RefusalPartSchema$inboundSchema,
+          components.ReasoningPartSchema$inboundSchema,
+          components.RedactedReasoningPartSchema$inboundSchema,
+        ]),
+      ),
+    ])
+  );
 
 export function updatePromptMessagesPromptsResponse200ApplicationJSONContentFromJSON(
   jsonString: string,
@@ -5539,9 +5776,11 @@ export const UpdatePromptMessagesPromptsAudio$inboundSchema: z.ZodType<
   UpdatePromptMessagesPromptsAudio,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+  })
+);
 
 export function updatePromptMessagesPromptsAudioFromJSON(
   jsonString: string,
@@ -5555,18 +5794,22 @@ export function updatePromptMessagesPromptsAudioFromJSON(
 
 /** @internal */
 export const UpdatePromptMessagesPromptsResponseType$inboundSchema:
-  z.ZodNativeEnum<typeof UpdatePromptMessagesPromptsResponseType> = z
-    .nativeEnum(UpdatePromptMessagesPromptsResponseType);
+  z.ZodNativeEnum<typeof UpdatePromptMessagesPromptsResponseType> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(UpdatePromptMessagesPromptsResponseType)
+    );
 
 /** @internal */
 export const UpdatePromptMessagesPromptsFunction$inboundSchema: z.ZodType<
   UpdatePromptMessagesPromptsFunction,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string().optional(),
-  arguments: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    arguments: z.string().optional(),
+  })
+);
 
 export function updatePromptMessagesPromptsFunctionFromJSON(
   jsonString: string,
@@ -5584,13 +5827,15 @@ export const UpdatePromptMessagesPromptsGoogle$inboundSchema: z.ZodType<
   UpdatePromptMessagesPromptsGoogle,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  thought_signature: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "thought_signature": "thoughtSignature",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    thought_signature: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "thought_signature": "thoughtSignature",
+    });
+  })
+);
 
 export function updatePromptMessagesPromptsGoogleFromJSON(
   jsonString: string,
@@ -5607,10 +5852,12 @@ export const UpdatePromptMessagesPromptsExtraContent$inboundSchema: z.ZodType<
   UpdatePromptMessagesPromptsExtraContent,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  google: z.lazy(() => UpdatePromptMessagesPromptsGoogle$inboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    google: z.lazy(() => UpdatePromptMessagesPromptsGoogle$inboundSchema)
+      .optional(),
+  })
+);
 
 export function updatePromptMessagesPromptsExtraContentFromJSON(
   jsonString: string,
@@ -5633,20 +5880,22 @@ export const UpdatePromptMessagesPromptsToolCalls$inboundSchema: z.ZodType<
   UpdatePromptMessagesPromptsToolCalls,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  type: UpdatePromptMessagesPromptsResponseType$inboundSchema,
-  function: z.lazy(() => UpdatePromptMessagesPromptsFunction$inboundSchema),
-  thought_signature: z.string().optional(),
-  extra_content: z.lazy(() =>
-    UpdatePromptMessagesPromptsExtraContent$inboundSchema
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "thought_signature": "thoughtSignature",
-    "extra_content": "extraContent",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    type: UpdatePromptMessagesPromptsResponseType$inboundSchema,
+    function: z.lazy(() => UpdatePromptMessagesPromptsFunction$inboundSchema),
+    thought_signature: z.string().optional(),
+    extra_content: z.lazy(() =>
+      UpdatePromptMessagesPromptsExtraContent$inboundSchema
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "thought_signature": "thoughtSignature",
+      "extra_content": "extraContent",
+    });
+  })
+);
 
 export function updatePromptMessagesPromptsToolCallsFromJSON(
   jsonString: string,
@@ -5665,38 +5914,40 @@ export const UpdatePromptMessagesPromptsAssistantMessage$inboundSchema:
     UpdatePromptMessagesPromptsAssistantMessage,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    reasoning_content: z.string().optional(),
-    content: z.nullable(
-      z.union([
-        z.string(),
-        z.array(
-          z.union([
-            components.TextContentPartSchema$inboundSchema.and(
-              z.object({ type: z.literal("text") }),
-            ),
-            components.RefusalPartSchema$inboundSchema,
-            components.ReasoningPartSchema$inboundSchema,
-            components.RedactedReasoningPartSchema$inboundSchema,
-          ]),
-        ),
-      ]),
-    ).optional(),
-    refusal: z.nullable(z.string()).optional(),
-    role: z.literal("assistant"),
-    name: z.string().optional(),
-    audio: z.nullable(
-      z.lazy(() => UpdatePromptMessagesPromptsAudio$inboundSchema),
-    ).optional(),
-    tool_calls: z.array(
-      z.lazy(() => UpdatePromptMessagesPromptsToolCalls$inboundSchema),
-    ).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "reasoning_content": "reasoningContent",
-      "tool_calls": "toolCalls",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      reasoning_content: z.string().optional(),
+      content: z.nullable(
+        z.union([
+          z.string(),
+          z.array(
+            z.union([
+              components.TextContentPartSchema$inboundSchema.and(
+                z.object({ type: z.literal("text") }),
+              ),
+              components.RefusalPartSchema$inboundSchema,
+              components.ReasoningPartSchema$inboundSchema,
+              components.RedactedReasoningPartSchema$inboundSchema,
+            ]),
+          ),
+        ]),
+      ).optional(),
+      refusal: z.nullable(z.string()).optional(),
+      role: z.literal("assistant"),
+      name: z.string().optional(),
+      audio: z.nullable(
+        z.lazy(() => UpdatePromptMessagesPromptsAudio$inboundSchema),
+      ).optional(),
+      tool_calls: z.array(
+        z.lazy(() => UpdatePromptMessagesPromptsToolCalls$inboundSchema),
+      ).optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "reasoning_content": "reasoningContent",
+        "tool_calls": "toolCalls",
+      });
+    })
+  );
 
 export function updatePromptMessagesPromptsAssistantMessageFromJSON(
   jsonString: string,
@@ -5718,25 +5969,29 @@ export function updatePromptMessagesPromptsAssistantMessageFromJSON(
 export const UpdatePrompt2PromptsResponse200ApplicationJSONResponseBodyPromptType$inboundSchema:
   z.ZodNativeEnum<
     typeof UpdatePrompt2PromptsResponse200ApplicationJSONResponseBodyPromptType
-  > = z.nativeEnum(
-    UpdatePrompt2PromptsResponse200ApplicationJSONResponseBodyPromptType,
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.nativeEnum(
+      UpdatePrompt2PromptsResponse200ApplicationJSONResponseBodyPromptType,
+    )
   );
 
 /** @internal */
 export const UpdatePrompt2PromptsTtl$inboundSchema: z.ZodNativeEnum<
   typeof UpdatePrompt2PromptsTtl
-> = z.nativeEnum(UpdatePrompt2PromptsTtl);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(UpdatePrompt2PromptsTtl));
 
 /** @internal */
 export const UpdatePrompt2PromptsCacheControl$inboundSchema: z.ZodType<
   UpdatePrompt2PromptsCacheControl,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type:
-    UpdatePrompt2PromptsResponse200ApplicationJSONResponseBodyPromptType$inboundSchema,
-  ttl: UpdatePrompt2PromptsTtl$inboundSchema.default("5m"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type:
+      UpdatePrompt2PromptsResponse200ApplicationJSONResponseBodyPromptType$inboundSchema,
+    ttl: UpdatePrompt2PromptsTtl$inboundSchema.default("5m"),
+  })
+);
 
 export function updatePrompt2PromptsCacheControlFromJSON(
   jsonString: string,
@@ -5753,16 +6008,18 @@ export const UpdatePrompt2Prompts4$inboundSchema: z.ZodType<
   UpdatePrompt2Prompts4,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("file"),
-  cache_control: z.lazy(() => UpdatePrompt2PromptsCacheControl$inboundSchema)
-    .optional(),
-  file: components.FileContentPartSchema$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "cache_control": "cacheControl",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("file"),
+    cache_control: z.lazy(() => UpdatePrompt2PromptsCacheControl$inboundSchema)
+      .optional(),
+    file: components.FileContentPartSchema$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "cache_control": "cacheControl",
+    });
+  })
+);
 
 export function updatePrompt2Prompts4FromJSON(
   jsonString: string,
@@ -5779,14 +6036,16 @@ export const UpdatePromptContentPromptsResponse2002$inboundSchema: z.ZodType<
   UpdatePromptContentPromptsResponse2002,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  components.TextContentPartSchema$inboundSchema.and(
-    z.object({ type: z.literal("text") }),
-  ),
-  components.ImageContentPartSchema$inboundSchema,
-  components.AudioContentPartSchema$inboundSchema,
-  z.lazy(() => UpdatePrompt2Prompts4$inboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    components.TextContentPartSchema$inboundSchema.and(
+      z.object({ type: z.literal("text") }),
+    ),
+    components.ImageContentPartSchema$inboundSchema,
+    components.AudioContentPartSchema$inboundSchema,
+    z.lazy(() => UpdatePrompt2Prompts4$inboundSchema),
+  ])
+);
 
 export function updatePromptContentPromptsResponse2002FromJSON(
   jsonString: string,
@@ -5805,19 +6064,21 @@ export const UpdatePromptMessagesPromptsResponse200Content$inboundSchema:
     UpdatePromptMessagesPromptsResponse200Content,
     z.ZodTypeDef,
     unknown
-  > = z.union([
-    z.string(),
-    z.array(
-      z.union([
-        components.TextContentPartSchema$inboundSchema.and(
-          z.object({ type: z.literal("text") }),
-        ),
-        components.ImageContentPartSchema$inboundSchema,
-        components.AudioContentPartSchema$inboundSchema,
-        z.lazy(() => UpdatePrompt2Prompts4$inboundSchema),
-      ]),
-    ),
-  ]);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.union([
+      z.string(),
+      z.array(
+        z.union([
+          components.TextContentPartSchema$inboundSchema.and(
+            z.object({ type: z.literal("text") }),
+          ),
+          components.ImageContentPartSchema$inboundSchema,
+          components.AudioContentPartSchema$inboundSchema,
+          z.lazy(() => UpdatePrompt2Prompts4$inboundSchema),
+        ]),
+      ),
+    ])
+  );
 
 export function updatePromptMessagesPromptsResponse200ContentFromJSON(
   jsonString: string,
@@ -5840,23 +6101,25 @@ export const UpdatePromptMessagesPromptsUserMessage$inboundSchema: z.ZodType<
   UpdatePromptMessagesPromptsUserMessage,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  role: z.literal("user"),
-  name: z.string().optional(),
-  content: z.union([
-    z.string(),
-    z.array(
-      z.union([
-        components.TextContentPartSchema$inboundSchema.and(
-          z.object({ type: z.literal("text") }),
-        ),
-        components.ImageContentPartSchema$inboundSchema,
-        components.AudioContentPartSchema$inboundSchema,
-        z.lazy(() => UpdatePrompt2Prompts4$inboundSchema),
-      ]),
-    ),
-  ]),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    role: z.literal("user"),
+    name: z.string().optional(),
+    content: z.union([
+      z.string(),
+      z.array(
+        z.union([
+          components.TextContentPartSchema$inboundSchema.and(
+            z.object({ type: z.literal("text") }),
+          ),
+          components.ImageContentPartSchema$inboundSchema,
+          components.AudioContentPartSchema$inboundSchema,
+          z.lazy(() => UpdatePrompt2Prompts4$inboundSchema),
+        ]),
+      ),
+    ]),
+  })
+);
 
 export function updatePromptMessagesPromptsUserMessageFromJSON(
   jsonString: string,
@@ -5872,10 +6135,12 @@ export function updatePromptMessagesPromptsUserMessageFromJSON(
 /** @internal */
 export const UpdatePromptMessagesPromptsResponseContent$inboundSchema:
   z.ZodType<UpdatePromptMessagesPromptsResponseContent, z.ZodTypeDef, unknown> =
-    z.union([
-      z.string(),
-      z.array(components.TextContentPartSchema$inboundSchema),
-    ]);
+    /* @__PURE__ */ lazySchema$(() =>
+      z.union([
+        z.string(),
+        z.array(components.TextContentPartSchema$inboundSchema),
+      ])
+    );
 
 export function updatePromptMessagesPromptsResponseContentFromJSON(
   jsonString: string,
@@ -5898,14 +6163,16 @@ export const UpdatePromptMessagesPromptsSystemMessage$inboundSchema: z.ZodType<
   UpdatePromptMessagesPromptsSystemMessage,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  role: z.literal("system"),
-  content: z.union([
-    z.string(),
-    z.array(components.TextContentPartSchema$inboundSchema),
-  ]),
-  name: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    role: z.literal("system"),
+    content: z.union([
+      z.string(),
+      z.array(components.TextContentPartSchema$inboundSchema),
+    ]),
+    name: z.string().optional(),
+  })
+);
 
 export function updatePromptMessagesPromptsSystemMessageFromJSON(
   jsonString: string,
@@ -5928,12 +6195,14 @@ export const UpdatePromptPromptsResponseMessages$inboundSchema: z.ZodType<
   UpdatePromptPromptsResponseMessages,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  z.lazy(() => UpdatePromptMessagesPromptsSystemMessage$inboundSchema),
-  z.lazy(() => UpdatePromptMessagesPromptsUserMessage$inboundSchema),
-  z.lazy(() => UpdatePromptMessagesPromptsAssistantMessage$inboundSchema),
-  z.lazy(() => UpdatePromptMessagesPromptsToolMessage$inboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => UpdatePromptMessagesPromptsSystemMessage$inboundSchema),
+    z.lazy(() => UpdatePromptMessagesPromptsUserMessage$inboundSchema),
+    z.lazy(() => UpdatePromptMessagesPromptsAssistantMessage$inboundSchema),
+    z.lazy(() => UpdatePromptMessagesPromptsToolMessage$inboundSchema),
+  ])
+);
 
 export function updatePromptPromptsResponseMessagesFromJSON(
   jsonString: string,
@@ -5951,99 +6220,103 @@ export const UpdatePromptPromptField$inboundSchema: z.ZodType<
   UpdatePromptPromptField,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string().optional(),
-  audio: z.nullable(z.lazy(() => UpdatePromptPromptsAudio$inboundSchema))
-    .optional(),
-  frequency_penalty: z.nullable(z.number()).optional(),
-  max_tokens: z.nullable(z.number().int()).optional(),
-  max_completion_tokens: z.nullable(z.number().int()).optional(),
-  logprobs: z.nullable(z.boolean()).optional(),
-  top_logprobs: z.nullable(z.number().int()).optional(),
-  n: z.nullable(z.number().int()).optional(),
-  presence_penalty: z.nullable(z.number()).optional(),
-  response_format: z.union([
-    z.lazy(() => UpdatePromptResponseFormatPromptsText$inboundSchema),
-    z.lazy(() => UpdatePromptResponseFormatPromptsJSONObject$inboundSchema),
-    z.lazy(() =>
-      UpdatePromptResponseFormatPromptsResponse200JSONSchema$inboundSchema
-    ),
-  ]).optional(),
-  reasoning_effort: UpdatePromptPromptsReasoningEffort$inboundSchema.optional(),
-  verbosity: z.string().optional(),
-  seed: z.nullable(z.number()).optional(),
-  stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
-  stream_options: z.nullable(
-    z.lazy(() => UpdatePromptPromptsStreamOptions$inboundSchema),
-  ).optional(),
-  thinking: z.union([
-    components.ThinkingConfigDisabledSchema$inboundSchema,
-    components.ThinkingConfigEnabledSchema$inboundSchema,
-    components.ThinkingConfigAdaptiveSchema$inboundSchema,
-    components.ThinkingConfigBetweenToolsSchema$inboundSchema,
-  ]).optional(),
-  temperature: z.nullable(z.number()).optional(),
-  top_p: z.nullable(z.number()).optional(),
-  top_k: z.nullable(z.number()).optional(),
-  tool_choice: z.union([
-    z.lazy(() => UpdatePromptToolChoicePrompts2$inboundSchema),
-    UpdatePromptToolChoicePrompts1$inboundSchema,
-  ]).optional(),
-  parallel_tool_calls: z.boolean().optional(),
-  modalities: z.nullable(z.array(UpdatePromptPromptsModalities$inboundSchema))
-    .optional(),
-  guardrails: z.array(z.lazy(() => UpdatePromptPromptsGuardrails$inboundSchema))
-    .optional(),
-  plugins: z.array(
-    z.union([
-      components.PIIRedactionPlugin$inboundSchema.and(
-        z.object({ id: z.literal("pii_redaction") }),
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    audio: z.nullable(z.lazy(() => UpdatePromptPromptsAudio$inboundSchema))
+      .optional(),
+    frequency_penalty: z.nullable(z.number()).optional(),
+    max_tokens: z.nullable(z.number().int()).optional(),
+    max_completion_tokens: z.nullable(z.number().int()).optional(),
+    logprobs: z.nullable(z.boolean()).optional(),
+    top_logprobs: z.nullable(z.number().int()).optional(),
+    n: z.nullable(z.number().int()).optional(),
+    presence_penalty: z.nullable(z.number()).optional(),
+    response_format: z.union([
+      z.lazy(() => UpdatePromptResponseFormatPromptsText$inboundSchema),
+      z.lazy(() => UpdatePromptResponseFormatPromptsJSONObject$inboundSchema),
+      z.lazy(() =>
+        UpdatePromptResponseFormatPromptsResponse200JSONSchema$inboundSchema
       ),
-      components.ResponseHealingPlugin$inboundSchema,
-      components.TraceScrubbingPlugin$inboundSchema,
-    ]),
-  ).optional(),
-  fallback_on_codes: z.array(z.number().int()).optional(),
-  fallbacks: z.array(z.lazy(() => UpdatePromptPromptsFallbacks$inboundSchema))
-    .optional(),
-  retry: z.lazy(() => UpdatePromptPromptsRetry$inboundSchema).optional(),
-  cache: z.lazy(() => UpdatePromptPromptsCache$inboundSchema).optional(),
-  load_balancer: z.lazy(() => UpdatePromptLoadBalancerPrompts1$inboundSchema)
-    .optional(),
-  timeout: z.lazy(() => UpdatePromptPromptsTimeout$inboundSchema).optional(),
-  cache_control: z.lazy(() => UpdatePromptPromptsCacheControl$inboundSchema)
-    .optional(),
-  prompt_cache_key: z.string().optional(),
-  messages: z.array(
-    z.union([
-      z.lazy(() => UpdatePromptMessagesPromptsSystemMessage$inboundSchema),
-      z.lazy(() => UpdatePromptMessagesPromptsUserMessage$inboundSchema),
-      z.lazy(() => UpdatePromptMessagesPromptsAssistantMessage$inboundSchema),
-      z.lazy(() => UpdatePromptMessagesPromptsToolMessage$inboundSchema),
-    ]),
-  ).optional(),
-  model: z.nullable(z.string()).optional(),
-  version: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "frequency_penalty": "frequencyPenalty",
-    "max_tokens": "maxTokens",
-    "max_completion_tokens": "maxCompletionTokens",
-    "top_logprobs": "topLogprobs",
-    "presence_penalty": "presencePenalty",
-    "response_format": "responseFormat",
-    "reasoning_effort": "reasoningEffort",
-    "stream_options": "streamOptions",
-    "top_p": "topP",
-    "top_k": "topK",
-    "tool_choice": "toolChoice",
-    "parallel_tool_calls": "parallelToolCalls",
-    "fallback_on_codes": "fallbackOnCodes",
-    "load_balancer": "loadBalancer",
-    "cache_control": "cacheControl",
-    "prompt_cache_key": "promptCacheKey",
-  });
-});
+    ]).optional(),
+    reasoning_effort: UpdatePromptPromptsReasoningEffort$inboundSchema
+      .optional(),
+    verbosity: z.string().optional(),
+    seed: z.nullable(z.number()).optional(),
+    stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
+    stream_options: z.nullable(
+      z.lazy(() => UpdatePromptPromptsStreamOptions$inboundSchema),
+    ).optional(),
+    thinking: z.union([
+      components.ThinkingConfigDisabledSchema$inboundSchema,
+      components.ThinkingConfigEnabledSchema$inboundSchema,
+      components.ThinkingConfigAdaptiveSchema$inboundSchema,
+      components.ThinkingConfigBetweenToolsSchema$inboundSchema,
+    ]).optional(),
+    temperature: z.nullable(z.number()).optional(),
+    top_p: z.nullable(z.number()).optional(),
+    top_k: z.nullable(z.number()).optional(),
+    tool_choice: z.union([
+      z.lazy(() => UpdatePromptToolChoicePrompts2$inboundSchema),
+      UpdatePromptToolChoicePrompts1$inboundSchema,
+    ]).optional(),
+    parallel_tool_calls: z.boolean().optional(),
+    modalities: z.nullable(z.array(UpdatePromptPromptsModalities$inboundSchema))
+      .optional(),
+    guardrails: z.array(
+      z.lazy(() => UpdatePromptPromptsGuardrails$inboundSchema),
+    ).optional(),
+    plugins: z.array(
+      z.union([
+        components.PIIRedactionPlugin$inboundSchema.and(
+          z.object({ id: z.literal("pii_redaction") }),
+        ),
+        components.ResponseHealingPlugin$inboundSchema,
+        components.TraceScrubbingPlugin$inboundSchema,
+      ]),
+    ).optional(),
+    fallback_on_codes: z.array(z.number().int()).optional(),
+    fallbacks: z.array(z.lazy(() => UpdatePromptPromptsFallbacks$inboundSchema))
+      .optional(),
+    retry: z.lazy(() => UpdatePromptPromptsRetry$inboundSchema).optional(),
+    cache: z.lazy(() => UpdatePromptPromptsCache$inboundSchema).optional(),
+    load_balancer: z.lazy(() => UpdatePromptLoadBalancerPrompts1$inboundSchema)
+      .optional(),
+    timeout: z.lazy(() => UpdatePromptPromptsTimeout$inboundSchema).optional(),
+    cache_control: z.lazy(() => UpdatePromptPromptsCacheControl$inboundSchema)
+      .optional(),
+    prompt_cache_key: z.string().optional(),
+    messages: z.array(
+      z.union([
+        z.lazy(() => UpdatePromptMessagesPromptsSystemMessage$inboundSchema),
+        z.lazy(() => UpdatePromptMessagesPromptsUserMessage$inboundSchema),
+        z.lazy(() => UpdatePromptMessagesPromptsAssistantMessage$inboundSchema),
+        z.lazy(() => UpdatePromptMessagesPromptsToolMessage$inboundSchema),
+      ]),
+    ).optional(),
+    model: z.nullable(z.string()).optional(),
+    version: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "frequency_penalty": "frequencyPenalty",
+      "max_tokens": "maxTokens",
+      "max_completion_tokens": "maxCompletionTokens",
+      "top_logprobs": "topLogprobs",
+      "presence_penalty": "presencePenalty",
+      "response_format": "responseFormat",
+      "reasoning_effort": "reasoningEffort",
+      "stream_options": "streamOptions",
+      "top_p": "topP",
+      "top_k": "topK",
+      "tool_choice": "toolChoice",
+      "parallel_tool_calls": "parallelToolCalls",
+      "fallback_on_codes": "fallbackOnCodes",
+      "load_balancer": "loadBalancer",
+      "cache_control": "cacheControl",
+      "prompt_cache_key": "promptCacheKey",
+    });
+  })
+);
 
 export function updatePromptPromptFieldFromJSON(
   jsonString: string,
@@ -6058,26 +6331,32 @@ export function updatePromptPromptFieldFromJSON(
 /** @internal */
 export const UpdatePromptPromptsUseCases$inboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptPromptsUseCases
-> = z.nativeEnum(UpdatePromptPromptsUseCases);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(UpdatePromptPromptsUseCases)
+);
 
 /** @internal */
 export const UpdatePromptPromptsLanguage$inboundSchema: z.ZodNativeEnum<
   typeof UpdatePromptPromptsLanguage
-> = z.nativeEnum(UpdatePromptPromptsLanguage);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(UpdatePromptPromptsLanguage)
+);
 
 /** @internal */
 export const UpdatePromptPromptsMetadata$inboundSchema: z.ZodType<
   UpdatePromptPromptsMetadata,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  use_cases: z.array(UpdatePromptPromptsUseCases$inboundSchema).optional(),
-  language: z.nullable(UpdatePromptPromptsLanguage$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "use_cases": "useCases",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    use_cases: z.array(UpdatePromptPromptsUseCases$inboundSchema).optional(),
+    language: z.nullable(UpdatePromptPromptsLanguage$inboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "use_cases": "useCases",
+    });
+  })
+);
 
 export function updatePromptPromptsMetadataFromJSON(
   jsonString: string,
@@ -6094,31 +6373,34 @@ export const UpdatePromptPrompt$inboundSchema: z.ZodType<
   UpdatePromptPrompt,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  _id: z.string(),
-  type: UpdatePromptPromptsResponseType$inboundSchema,
-  owner: z.string(),
-  domain_id: z.string(),
-  created: z.string(),
-  updated: z.string(),
-  created_by_id: z.nullable(z.string()).optional(),
-  updated_by_id: z.nullable(z.string()).optional(),
-  display_name: z.string(),
-  description: z.nullable(z.string()).optional(),
-  prompt_config: z.lazy(() => UpdatePromptPromptConfig$inboundSchema)
-    .optional(),
-  prompt: z.lazy(() => UpdatePromptPromptField$inboundSchema),
-  metadata: z.lazy(() => UpdatePromptPromptsMetadata$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "_id": "id",
-    "domain_id": "domainId",
-    "created_by_id": "createdById",
-    "updated_by_id": "updatedById",
-    "display_name": "displayName",
-    "prompt_config": "promptConfig",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    _id: z.string(),
+    type: UpdatePromptPromptsResponseType$inboundSchema,
+    owner: z.string(),
+    domain_id: z.string(),
+    created: z.string(),
+    updated: z.string(),
+    created_by_id: z.nullable(z.string()).optional(),
+    updated_by_id: z.nullable(z.string()).optional(),
+    display_name: z.string(),
+    description: z.nullable(z.string()).optional(),
+    prompt_config: z.lazy(() => UpdatePromptPromptConfig$inboundSchema)
+      .optional(),
+    prompt: z.lazy(() => UpdatePromptPromptField$inboundSchema),
+    metadata: z.lazy(() => UpdatePromptPromptsMetadata$inboundSchema)
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "_id": "id",
+      "domain_id": "domainId",
+      "created_by_id": "createdById",
+      "updated_by_id": "updatedById",
+      "display_name": "displayName",
+      "prompt_config": "promptConfig",
+    });
+  })
+);
 
 export function updatePromptPromptFromJSON(
   jsonString: string,

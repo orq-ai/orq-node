@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -67,35 +67,37 @@ export type Skill = {
 };
 
 /** @internal */
-export const Skill$inboundSchema: z.ZodType<Skill, z.ZodTypeDef, unknown> = z
-  .object({
-    skill_id: z.string(),
-    display_name: z.string(),
-    description: z.string(),
-    tags: z.array(z.string()),
-    project_id: z.string(),
-    path: z.string(),
-    created_at: z.string().datetime({ offset: true }).transform(v =>
-      new Date(v)
-    ),
-    updated_at: z.string().datetime({ offset: true }).transform(v =>
-      new Date(v)
-    ),
-    created_by_id: z.string(),
-    updated_by_id: z.string(),
-    instructions: z.string(),
-    version: z.string(),
-  }).transform((v) => {
-    return remap$(v, {
-      "skill_id": "skillId",
-      "display_name": "displayName",
-      "project_id": "projectId",
-      "created_at": "createdAt",
-      "updated_at": "updatedAt",
-      "created_by_id": "createdById",
-      "updated_by_id": "updatedById",
-    });
-  });
+export const Skill$inboundSchema: z.ZodType<Skill, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      skill_id: z.string(),
+      display_name: z.string(),
+      description: z.string(),
+      tags: z.array(z.string()),
+      project_id: z.string(),
+      path: z.string(),
+      created_at: z.string().datetime({ offset: true }).transform(v =>
+        new Date(v)
+      ),
+      updated_at: z.string().datetime({ offset: true }).transform(v =>
+        new Date(v)
+      ),
+      created_by_id: z.string(),
+      updated_by_id: z.string(),
+      instructions: z.string(),
+      version: z.string(),
+    }).transform((v) => {
+      return remap$(v, {
+        "skill_id": "skillId",
+        "display_name": "displayName",
+        "project_id": "projectId",
+        "created_at": "createdAt",
+        "updated_at": "updatedAt",
+        "created_by_id": "createdById",
+        "updated_by_id": "updatedById",
+      });
+    })
+  );
 
 export function skillFromJSON(
   jsonString: string,

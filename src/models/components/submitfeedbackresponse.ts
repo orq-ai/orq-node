@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -20,13 +20,15 @@ export const SubmitFeedbackResponse$inboundSchema: z.ZodType<
   SubmitFeedbackResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  feedback_id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "feedback_id": "feedbackId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    feedback_id: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "feedback_id": "feedbackId",
+    });
+  })
+);
 
 export function submitFeedbackResponseFromJSON(
   jsonString: string,

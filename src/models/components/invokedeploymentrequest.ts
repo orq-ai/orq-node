@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import {
   AudioContentPartSchema,
@@ -1201,7 +1202,7 @@ export const InvokeDeploymentRequestContent2$outboundSchema: z.ZodType<
   InvokeDeploymentRequestContent2$Outbound,
   z.ZodTypeDef,
   InvokeDeploymentRequestContent2
-> = TextContentPartSchema$outboundSchema;
+> = /* @__PURE__ */ lazySchema$(() => TextContentPartSchema$outboundSchema);
 
 export function invokeDeploymentRequestContent2ToJSON(
   invokeDeploymentRequestContent2: InvokeDeploymentRequestContent2,
@@ -1224,7 +1225,9 @@ export const InvokeDeploymentRequestPrefixMessages5Content$outboundSchema:
     InvokeDeploymentRequestPrefixMessages5Content$Outbound,
     z.ZodTypeDef,
     InvokeDeploymentRequestPrefixMessages5Content
-  > = z.union([z.string(), z.array(TextContentPartSchema$outboundSchema)]);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.union([z.string(), z.array(TextContentPartSchema$outboundSchema)])
+  );
 
 export function invokeDeploymentRequestPrefixMessages5ContentToJSON(
   invokeDeploymentRequestPrefixMessages5Content:
@@ -1239,13 +1242,15 @@ export function invokeDeploymentRequestPrefixMessages5ContentToJSON(
 
 /** @internal */
 export const InvokeDeploymentRequestPrefixMessagesType$outboundSchema:
-  z.ZodNativeEnum<typeof InvokeDeploymentRequestPrefixMessagesType> = z
-    .nativeEnum(InvokeDeploymentRequestPrefixMessagesType);
+  z.ZodNativeEnum<typeof InvokeDeploymentRequestPrefixMessagesType> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(InvokeDeploymentRequestPrefixMessagesType)
+    );
 
 /** @internal */
 export const PrefixMessagesTtl$outboundSchema: z.ZodNativeEnum<
   typeof PrefixMessagesTtl
-> = z.nativeEnum(PrefixMessagesTtl);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(PrefixMessagesTtl));
 
 /** @internal */
 export type PrefixMessagesCacheControl$Outbound = {
@@ -1258,10 +1263,12 @@ export const PrefixMessagesCacheControl$outboundSchema: z.ZodType<
   PrefixMessagesCacheControl$Outbound,
   z.ZodTypeDef,
   PrefixMessagesCacheControl
-> = z.object({
-  type: InvokeDeploymentRequestPrefixMessagesType$outboundSchema,
-  ttl: PrefixMessagesTtl$outboundSchema.default("5m"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: InvokeDeploymentRequestPrefixMessagesType$outboundSchema,
+    ttl: PrefixMessagesTtl$outboundSchema.default("5m"),
+  })
+);
 
 export function prefixMessagesCacheControlToJSON(
   prefixMessagesCacheControl: PrefixMessagesCacheControl,
@@ -1284,18 +1291,23 @@ export const ToolMessage$outboundSchema: z.ZodType<
   ToolMessage$Outbound,
   z.ZodTypeDef,
   ToolMessage
-> = z.object({
-  role: z.literal("tool"),
-  content: z.union([z.string(), z.array(TextContentPartSchema$outboundSchema)]),
-  toolCallId: z.nullable(z.string()),
-  cacheControl: z.lazy(() => PrefixMessagesCacheControl$outboundSchema)
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    toolCallId: "tool_call_id",
-    cacheControl: "cache_control",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    role: z.literal("tool"),
+    content: z.union([
+      z.string(),
+      z.array(TextContentPartSchema$outboundSchema),
+    ]),
+    toolCallId: z.nullable(z.string()),
+    cacheControl: z.lazy(() => PrefixMessagesCacheControl$outboundSchema)
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      toolCallId: "tool_call_id",
+      cacheControl: "cache_control",
+    });
+  })
+);
 
 export function toolMessageToJSON(toolMessage: ToolMessage): string {
   return JSON.stringify(ToolMessage$outboundSchema.parse(toolMessage));
@@ -1313,14 +1325,16 @@ export const Content2$outboundSchema: z.ZodType<
   Content2$Outbound,
   z.ZodTypeDef,
   Content2
-> = z.union([
-  TextContentPartSchema$outboundSchema.and(
-    z.object({ type: z.literal("text") }),
-  ),
-  RefusalPartSchema$outboundSchema,
-  ReasoningPartSchema$outboundSchema,
-  RedactedReasoningPartSchema$outboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    TextContentPartSchema$outboundSchema.and(
+      z.object({ type: z.literal("text") }),
+    ),
+    RefusalPartSchema$outboundSchema,
+    ReasoningPartSchema$outboundSchema,
+    RedactedReasoningPartSchema$outboundSchema,
+  ])
+);
 
 export function content2ToJSON(content2: Content2): string {
   return JSON.stringify(Content2$outboundSchema.parse(content2));
@@ -1342,19 +1356,21 @@ export const InvokeDeploymentRequestPrefixMessages4Content$outboundSchema:
     InvokeDeploymentRequestPrefixMessages4Content$Outbound,
     z.ZodTypeDef,
     InvokeDeploymentRequestPrefixMessages4Content
-  > = z.union([
-    z.string(),
-    z.array(
-      z.union([
-        TextContentPartSchema$outboundSchema.and(
-          z.object({ type: z.literal("text") }),
-        ),
-        RefusalPartSchema$outboundSchema,
-        ReasoningPartSchema$outboundSchema,
-        RedactedReasoningPartSchema$outboundSchema,
-      ]),
-    ),
-  ]);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.union([
+      z.string(),
+      z.array(
+        z.union([
+          TextContentPartSchema$outboundSchema.and(
+            z.object({ type: z.literal("text") }),
+          ),
+          RefusalPartSchema$outboundSchema,
+          ReasoningPartSchema$outboundSchema,
+          RedactedReasoningPartSchema$outboundSchema,
+        ]),
+      ),
+    ])
+  );
 
 export function invokeDeploymentRequestPrefixMessages4ContentToJSON(
   invokeDeploymentRequestPrefixMessages4Content:
@@ -1377,9 +1393,11 @@ export const Audio$outboundSchema: z.ZodType<
   Audio$Outbound,
   z.ZodTypeDef,
   Audio
-> = z.object({
-  id: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+  })
+);
 
 export function audioToJSON(audio: Audio): string {
   return JSON.stringify(Audio$outboundSchema.parse(audio));
@@ -1388,7 +1406,7 @@ export function audioToJSON(audio: Audio): string {
 /** @internal */
 export const PrefixMessagesType$outboundSchema: z.ZodNativeEnum<
   typeof PrefixMessagesType
-> = z.nativeEnum(PrefixMessagesType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(PrefixMessagesType));
 
 /** @internal */
 export type PrefixMessagesFunction$Outbound = {
@@ -1401,10 +1419,12 @@ export const PrefixMessagesFunction$outboundSchema: z.ZodType<
   PrefixMessagesFunction$Outbound,
   z.ZodTypeDef,
   PrefixMessagesFunction
-> = z.object({
-  name: z.string().optional(),
-  arguments: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    arguments: z.string().optional(),
+  })
+);
 
 export function prefixMessagesFunctionToJSON(
   prefixMessagesFunction: PrefixMessagesFunction,
@@ -1424,13 +1444,15 @@ export const Google$outboundSchema: z.ZodType<
   Google$Outbound,
   z.ZodTypeDef,
   Google
-> = z.object({
-  thoughtSignature: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    thoughtSignature: "thought_signature",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    thoughtSignature: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      thoughtSignature: "thought_signature",
+    });
+  })
+);
 
 export function googleToJSON(google: Google): string {
   return JSON.stringify(Google$outboundSchema.parse(google));
@@ -1446,9 +1468,11 @@ export const ExtraContent$outboundSchema: z.ZodType<
   ExtraContent$Outbound,
   z.ZodTypeDef,
   ExtraContent
-> = z.object({
-  google: z.lazy(() => Google$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    google: z.lazy(() => Google$outboundSchema).optional(),
+  })
+);
 
 export function extraContentToJSON(extraContent: ExtraContent): string {
   return JSON.stringify(ExtraContent$outboundSchema.parse(extraContent));
@@ -1468,18 +1492,20 @@ export const ToolCalls$outboundSchema: z.ZodType<
   ToolCalls$Outbound,
   z.ZodTypeDef,
   ToolCalls
-> = z.object({
-  id: z.string(),
-  type: PrefixMessagesType$outboundSchema,
-  function: z.lazy(() => PrefixMessagesFunction$outboundSchema),
-  thoughtSignature: z.string().optional(),
-  extraContent: z.lazy(() => ExtraContent$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    thoughtSignature: "thought_signature",
-    extraContent: "extra_content",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    type: PrefixMessagesType$outboundSchema,
+    function: z.lazy(() => PrefixMessagesFunction$outboundSchema),
+    thoughtSignature: z.string().optional(),
+    extraContent: z.lazy(() => ExtraContent$outboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      thoughtSignature: "thought_signature",
+      extraContent: "extra_content",
+    });
+  })
+);
 
 export function toolCallsToJSON(toolCalls: ToolCalls): string {
   return JSON.stringify(ToolCalls$outboundSchema.parse(toolCalls));
@@ -1510,34 +1536,36 @@ export const AssistantMessage$outboundSchema: z.ZodType<
   AssistantMessage$Outbound,
   z.ZodTypeDef,
   AssistantMessage
-> = z.object({
-  reasoningContent: z.string().optional(),
-  content: z.nullable(
-    z.union([
-      z.string(),
-      z.array(
-        z.union([
-          TextContentPartSchema$outboundSchema.and(
-            z.object({ type: z.literal("text") }),
-          ),
-          RefusalPartSchema$outboundSchema,
-          ReasoningPartSchema$outboundSchema,
-          RedactedReasoningPartSchema$outboundSchema,
-        ]),
-      ),
-    ]),
-  ).optional(),
-  refusal: z.nullable(z.string()).optional(),
-  role: z.literal("assistant"),
-  name: z.string().optional(),
-  audio: z.nullable(z.lazy(() => Audio$outboundSchema)).optional(),
-  toolCalls: z.array(z.lazy(() => ToolCalls$outboundSchema)).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    reasoningContent: "reasoning_content",
-    toolCalls: "tool_calls",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    reasoningContent: z.string().optional(),
+    content: z.nullable(
+      z.union([
+        z.string(),
+        z.array(
+          z.union([
+            TextContentPartSchema$outboundSchema.and(
+              z.object({ type: z.literal("text") }),
+            ),
+            RefusalPartSchema$outboundSchema,
+            ReasoningPartSchema$outboundSchema,
+            RedactedReasoningPartSchema$outboundSchema,
+          ]),
+        ),
+      ]),
+    ).optional(),
+    refusal: z.nullable(z.string()).optional(),
+    role: z.literal("assistant"),
+    name: z.string().optional(),
+    audio: z.nullable(z.lazy(() => Audio$outboundSchema)).optional(),
+    toolCalls: z.array(z.lazy(() => ToolCalls$outboundSchema)).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      reasoningContent: "reasoning_content",
+      toolCalls: "tool_calls",
+    });
+  })
+);
 
 export function assistantMessageToJSON(
   assistantMessage: AssistantMessage,
@@ -1549,12 +1577,14 @@ export function assistantMessageToJSON(
 
 /** @internal */
 export const InvokeDeploymentRequest2PrefixMessagesType$outboundSchema:
-  z.ZodNativeEnum<typeof InvokeDeploymentRequest2PrefixMessagesType> = z
-    .nativeEnum(InvokeDeploymentRequest2PrefixMessagesType);
+  z.ZodNativeEnum<typeof InvokeDeploymentRequest2PrefixMessagesType> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(InvokeDeploymentRequest2PrefixMessagesType)
+    );
 
 /** @internal */
-export const TwoTtl$outboundSchema: z.ZodNativeEnum<typeof TwoTtl> = z
-  .nativeEnum(TwoTtl);
+export const TwoTtl$outboundSchema: z.ZodNativeEnum<typeof TwoTtl> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(TwoTtl));
 
 /** @internal */
 export type TwoCacheControl$Outbound = {
@@ -1567,10 +1597,12 @@ export const TwoCacheControl$outboundSchema: z.ZodType<
   TwoCacheControl$Outbound,
   z.ZodTypeDef,
   TwoCacheControl
-> = z.object({
-  type: InvokeDeploymentRequest2PrefixMessagesType$outboundSchema,
-  ttl: TwoTtl$outboundSchema.default("5m"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: InvokeDeploymentRequest2PrefixMessagesType$outboundSchema,
+    ttl: TwoTtl$outboundSchema.default("5m"),
+  })
+);
 
 export function twoCacheControlToJSON(
   twoCacheControl: TwoCacheControl,
@@ -1590,15 +1622,17 @@ export const InvokeDeploymentRequest24$outboundSchema: z.ZodType<
   InvokeDeploymentRequest24$Outbound,
   z.ZodTypeDef,
   InvokeDeploymentRequest24
-> = z.object({
-  type: z.literal("file"),
-  cacheControl: z.lazy(() => TwoCacheControl$outboundSchema).optional(),
-  file: FileContentPartSchema$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    cacheControl: "cache_control",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("file"),
+    cacheControl: z.lazy(() => TwoCacheControl$outboundSchema).optional(),
+    file: FileContentPartSchema$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      cacheControl: "cache_control",
+    });
+  })
+);
 
 export function invokeDeploymentRequest24ToJSON(
   invokeDeploymentRequest24: InvokeDeploymentRequest24,
@@ -1621,14 +1655,16 @@ export const InvokeDeploymentRequestContentPrefixMessages2$outboundSchema:
     InvokeDeploymentRequestContentPrefixMessages2$Outbound,
     z.ZodTypeDef,
     InvokeDeploymentRequestContentPrefixMessages2
-  > = z.union([
-    TextContentPartSchema$outboundSchema.and(
-      z.object({ type: z.literal("text") }),
-    ),
-    ImageContentPartSchema$outboundSchema,
-    AudioContentPartSchema$outboundSchema,
-    z.lazy(() => InvokeDeploymentRequest24$outboundSchema),
-  ]);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.union([
+      TextContentPartSchema$outboundSchema.and(
+        z.object({ type: z.literal("text") }),
+      ),
+      ImageContentPartSchema$outboundSchema,
+      AudioContentPartSchema$outboundSchema,
+      z.lazy(() => InvokeDeploymentRequest24$outboundSchema),
+    ])
+  );
 
 export function invokeDeploymentRequestContentPrefixMessages2ToJSON(
   invokeDeploymentRequestContentPrefixMessages2:
@@ -1657,19 +1693,21 @@ export const InvokeDeploymentRequestPrefixMessagesContent$outboundSchema:
     InvokeDeploymentRequestPrefixMessagesContent$Outbound,
     z.ZodTypeDef,
     InvokeDeploymentRequestPrefixMessagesContent
-  > = z.union([
-    z.string(),
-    z.array(
-      z.union([
-        TextContentPartSchema$outboundSchema.and(
-          z.object({ type: z.literal("text") }),
-        ),
-        ImageContentPartSchema$outboundSchema,
-        AudioContentPartSchema$outboundSchema,
-        z.lazy(() => InvokeDeploymentRequest24$outboundSchema),
-      ]),
-    ),
-  ]);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.union([
+      z.string(),
+      z.array(
+        z.union([
+          TextContentPartSchema$outboundSchema.and(
+            z.object({ type: z.literal("text") }),
+          ),
+          ImageContentPartSchema$outboundSchema,
+          AudioContentPartSchema$outboundSchema,
+          z.lazy(() => InvokeDeploymentRequest24$outboundSchema),
+        ]),
+      ),
+    ])
+  );
 
 export function invokeDeploymentRequestPrefixMessagesContentToJSON(
   invokeDeploymentRequestPrefixMessagesContent:
@@ -1701,23 +1739,25 @@ export const UserMessage$outboundSchema: z.ZodType<
   UserMessage$Outbound,
   z.ZodTypeDef,
   UserMessage
-> = z.object({
-  role: z.literal("user"),
-  name: z.string().optional(),
-  content: z.union([
-    z.string(),
-    z.array(
-      z.union([
-        TextContentPartSchema$outboundSchema.and(
-          z.object({ type: z.literal("text") }),
-        ),
-        ImageContentPartSchema$outboundSchema,
-        AudioContentPartSchema$outboundSchema,
-        z.lazy(() => InvokeDeploymentRequest24$outboundSchema),
-      ]),
-    ),
-  ]),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    role: z.literal("user"),
+    name: z.string().optional(),
+    content: z.union([
+      z.string(),
+      z.array(
+        z.union([
+          TextContentPartSchema$outboundSchema.and(
+            z.object({ type: z.literal("text") }),
+          ),
+          ImageContentPartSchema$outboundSchema,
+          AudioContentPartSchema$outboundSchema,
+          z.lazy(() => InvokeDeploymentRequest24$outboundSchema),
+        ]),
+      ),
+    ]),
+  })
+);
 
 export function userMessageToJSON(userMessage: UserMessage): string {
   return JSON.stringify(UserMessage$outboundSchema.parse(userMessage));
@@ -1733,7 +1773,9 @@ export const PrefixMessagesContent$outboundSchema: z.ZodType<
   PrefixMessagesContent$Outbound,
   z.ZodTypeDef,
   PrefixMessagesContent
-> = z.union([z.string(), z.array(TextContentPartSchema$outboundSchema)]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.array(TextContentPartSchema$outboundSchema)])
+);
 
 export function prefixMessagesContentToJSON(
   prefixMessagesContent: PrefixMessagesContent,
@@ -1755,11 +1797,16 @@ export const DeveloperMessage$outboundSchema: z.ZodType<
   DeveloperMessage$Outbound,
   z.ZodTypeDef,
   DeveloperMessage
-> = z.object({
-  role: z.literal("developer"),
-  content: z.union([z.string(), z.array(TextContentPartSchema$outboundSchema)]),
-  name: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    role: z.literal("developer"),
+    content: z.union([
+      z.string(),
+      z.array(TextContentPartSchema$outboundSchema),
+    ]),
+    name: z.string().optional(),
+  })
+);
 
 export function developerMessageToJSON(
   developerMessage: DeveloperMessage,
@@ -1777,7 +1824,9 @@ export const Content$outboundSchema: z.ZodType<
   Content$Outbound,
   z.ZodTypeDef,
   Content
-> = z.union([z.string(), z.array(TextContentPartSchema$outboundSchema)]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.array(TextContentPartSchema$outboundSchema)])
+);
 
 export function contentToJSON(content: Content): string {
   return JSON.stringify(Content$outboundSchema.parse(content));
@@ -1795,11 +1844,16 @@ export const SystemMessage$outboundSchema: z.ZodType<
   SystemMessage$Outbound,
   z.ZodTypeDef,
   SystemMessage
-> = z.object({
-  role: z.literal("system"),
-  content: z.union([z.string(), z.array(TextContentPartSchema$outboundSchema)]),
-  name: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    role: z.literal("system"),
+    content: z.union([
+      z.string(),
+      z.array(TextContentPartSchema$outboundSchema),
+    ]),
+    name: z.string().optional(),
+  })
+);
 
 export function systemMessageToJSON(systemMessage: SystemMessage): string {
   return JSON.stringify(SystemMessage$outboundSchema.parse(systemMessage));
@@ -1818,13 +1872,15 @@ export const PrefixMessages$outboundSchema: z.ZodType<
   PrefixMessages$Outbound,
   z.ZodTypeDef,
   PrefixMessages
-> = z.union([
-  z.lazy(() => SystemMessage$outboundSchema),
-  z.lazy(() => DeveloperMessage$outboundSchema),
-  z.lazy(() => UserMessage$outboundSchema),
-  z.lazy(() => AssistantMessage$outboundSchema),
-  z.lazy(() => ToolMessage$outboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => SystemMessage$outboundSchema),
+    z.lazy(() => DeveloperMessage$outboundSchema),
+    z.lazy(() => UserMessage$outboundSchema),
+    z.lazy(() => AssistantMessage$outboundSchema),
+    z.lazy(() => ToolMessage$outboundSchema),
+  ])
+);
 
 export function prefixMessagesToJSON(prefixMessages: PrefixMessages): string {
   return JSON.stringify(PrefixMessages$outboundSchema.parse(prefixMessages));
@@ -1839,7 +1895,7 @@ export const InvokeDeploymentRequestContentMessages52$outboundSchema: z.ZodType<
   InvokeDeploymentRequestContentMessages52$Outbound,
   z.ZodTypeDef,
   InvokeDeploymentRequestContentMessages52
-> = TextContentPartSchema$outboundSchema;
+> = /* @__PURE__ */ lazySchema$(() => TextContentPartSchema$outboundSchema);
 
 export function invokeDeploymentRequestContentMessages52ToJSON(
   invokeDeploymentRequestContentMessages52:
@@ -1862,7 +1918,9 @@ export const InvokeDeploymentRequestMessages5Content$outboundSchema: z.ZodType<
   InvokeDeploymentRequestMessages5Content$Outbound,
   z.ZodTypeDef,
   InvokeDeploymentRequestMessages5Content
-> = z.union([z.string(), z.array(TextContentPartSchema$outboundSchema)]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.array(TextContentPartSchema$outboundSchema)])
+);
 
 export function invokeDeploymentRequestMessages5ContentToJSON(
   invokeDeploymentRequestMessages5Content:
@@ -1877,13 +1935,14 @@ export function invokeDeploymentRequestMessages5ContentToJSON(
 
 /** @internal */
 export const InvokeDeploymentRequestMessagesType$outboundSchema:
-  z.ZodNativeEnum<typeof InvokeDeploymentRequestMessagesType> = z.nativeEnum(
-    InvokeDeploymentRequestMessagesType,
-  );
+  z.ZodNativeEnum<typeof InvokeDeploymentRequestMessagesType> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(InvokeDeploymentRequestMessagesType)
+    );
 
 /** @internal */
-export const MessagesTtl$outboundSchema: z.ZodNativeEnum<typeof MessagesTtl> = z
-  .nativeEnum(MessagesTtl);
+export const MessagesTtl$outboundSchema: z.ZodNativeEnum<typeof MessagesTtl> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(MessagesTtl));
 
 /** @internal */
 export type MessagesCacheControl$Outbound = {
@@ -1896,10 +1955,12 @@ export const MessagesCacheControl$outboundSchema: z.ZodType<
   MessagesCacheControl$Outbound,
   z.ZodTypeDef,
   MessagesCacheControl
-> = z.object({
-  type: InvokeDeploymentRequestMessagesType$outboundSchema,
-  ttl: MessagesTtl$outboundSchema.default("5m"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: InvokeDeploymentRequestMessagesType$outboundSchema,
+    ttl: MessagesTtl$outboundSchema.default("5m"),
+  })
+);
 
 export function messagesCacheControlToJSON(
   messagesCacheControl: MessagesCacheControl,
@@ -1922,17 +1983,22 @@ export const MessagesToolMessage$outboundSchema: z.ZodType<
   MessagesToolMessage$Outbound,
   z.ZodTypeDef,
   MessagesToolMessage
-> = z.object({
-  role: z.literal("tool"),
-  content: z.union([z.string(), z.array(TextContentPartSchema$outboundSchema)]),
-  toolCallId: z.nullable(z.string()),
-  cacheControl: z.lazy(() => MessagesCacheControl$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    toolCallId: "tool_call_id",
-    cacheControl: "cache_control",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    role: z.literal("tool"),
+    content: z.union([
+      z.string(),
+      z.array(TextContentPartSchema$outboundSchema),
+    ]),
+    toolCallId: z.nullable(z.string()),
+    cacheControl: z.lazy(() => MessagesCacheControl$outboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      toolCallId: "tool_call_id",
+      cacheControl: "cache_control",
+    });
+  })
+);
 
 export function messagesToolMessageToJSON(
   messagesToolMessage: MessagesToolMessage,
@@ -1954,14 +2020,16 @@ export const InvokeDeploymentRequestContentMessages42$outboundSchema: z.ZodType<
   InvokeDeploymentRequestContentMessages42$Outbound,
   z.ZodTypeDef,
   InvokeDeploymentRequestContentMessages42
-> = z.union([
-  TextContentPartSchema$outboundSchema.and(
-    z.object({ type: z.literal("text") }),
-  ),
-  RefusalPartSchema$outboundSchema,
-  ReasoningPartSchema$outboundSchema,
-  RedactedReasoningPartSchema$outboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    TextContentPartSchema$outboundSchema.and(
+      z.object({ type: z.literal("text") }),
+    ),
+    RefusalPartSchema$outboundSchema,
+    ReasoningPartSchema$outboundSchema,
+    RedactedReasoningPartSchema$outboundSchema,
+  ])
+);
 
 export function invokeDeploymentRequestContentMessages42ToJSON(
   invokeDeploymentRequestContentMessages42:
@@ -1989,19 +2057,21 @@ export const InvokeDeploymentRequestMessages4Content$outboundSchema: z.ZodType<
   InvokeDeploymentRequestMessages4Content$Outbound,
   z.ZodTypeDef,
   InvokeDeploymentRequestMessages4Content
-> = z.union([
-  z.string(),
-  z.array(
-    z.union([
-      TextContentPartSchema$outboundSchema.and(
-        z.object({ type: z.literal("text") }),
-      ),
-      RefusalPartSchema$outboundSchema,
-      ReasoningPartSchema$outboundSchema,
-      RedactedReasoningPartSchema$outboundSchema,
-    ]),
-  ),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.string(),
+    z.array(
+      z.union([
+        TextContentPartSchema$outboundSchema.and(
+          z.object({ type: z.literal("text") }),
+        ),
+        RefusalPartSchema$outboundSchema,
+        ReasoningPartSchema$outboundSchema,
+        RedactedReasoningPartSchema$outboundSchema,
+      ]),
+    ),
+  ])
+);
 
 export function invokeDeploymentRequestMessages4ContentToJSON(
   invokeDeploymentRequestMessages4Content:
@@ -2024,9 +2094,11 @@ export const MessagesAudio$outboundSchema: z.ZodType<
   MessagesAudio$Outbound,
   z.ZodTypeDef,
   MessagesAudio
-> = z.object({
-  id: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+  })
+);
 
 export function messagesAudioToJSON(messagesAudio: MessagesAudio): string {
   return JSON.stringify(MessagesAudio$outboundSchema.parse(messagesAudio));
@@ -2034,7 +2106,7 @@ export function messagesAudioToJSON(messagesAudio: MessagesAudio): string {
 
 /** @internal */
 export const MessagesType$outboundSchema: z.ZodNativeEnum<typeof MessagesType> =
-  z.nativeEnum(MessagesType);
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(MessagesType));
 
 /** @internal */
 export type MessagesFunction$Outbound = {
@@ -2047,10 +2119,12 @@ export const MessagesFunction$outboundSchema: z.ZodType<
   MessagesFunction$Outbound,
   z.ZodTypeDef,
   MessagesFunction
-> = z.object({
-  name: z.string().optional(),
-  arguments: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    arguments: z.string().optional(),
+  })
+);
 
 export function messagesFunctionToJSON(
   messagesFunction: MessagesFunction,
@@ -2070,13 +2144,15 @@ export const MessagesGoogle$outboundSchema: z.ZodType<
   MessagesGoogle$Outbound,
   z.ZodTypeDef,
   MessagesGoogle
-> = z.object({
-  thoughtSignature: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    thoughtSignature: "thought_signature",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    thoughtSignature: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      thoughtSignature: "thought_signature",
+    });
+  })
+);
 
 export function messagesGoogleToJSON(messagesGoogle: MessagesGoogle): string {
   return JSON.stringify(MessagesGoogle$outboundSchema.parse(messagesGoogle));
@@ -2092,9 +2168,11 @@ export const MessagesExtraContent$outboundSchema: z.ZodType<
   MessagesExtraContent$Outbound,
   z.ZodTypeDef,
   MessagesExtraContent
-> = z.object({
-  google: z.lazy(() => MessagesGoogle$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    google: z.lazy(() => MessagesGoogle$outboundSchema).optional(),
+  })
+);
 
 export function messagesExtraContentToJSON(
   messagesExtraContent: MessagesExtraContent,
@@ -2118,18 +2196,20 @@ export const MessagesToolCalls$outboundSchema: z.ZodType<
   MessagesToolCalls$Outbound,
   z.ZodTypeDef,
   MessagesToolCalls
-> = z.object({
-  id: z.string(),
-  type: MessagesType$outboundSchema,
-  function: z.lazy(() => MessagesFunction$outboundSchema),
-  thoughtSignature: z.string().optional(),
-  extraContent: z.lazy(() => MessagesExtraContent$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    thoughtSignature: "thought_signature",
-    extraContent: "extra_content",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    type: MessagesType$outboundSchema,
+    function: z.lazy(() => MessagesFunction$outboundSchema),
+    thoughtSignature: z.string().optional(),
+    extraContent: z.lazy(() => MessagesExtraContent$outboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      thoughtSignature: "thought_signature",
+      extraContent: "extra_content",
+    });
+  })
+);
 
 export function messagesToolCallsToJSON(
   messagesToolCalls: MessagesToolCalls,
@@ -2164,34 +2244,37 @@ export const MessagesAssistantMessage$outboundSchema: z.ZodType<
   MessagesAssistantMessage$Outbound,
   z.ZodTypeDef,
   MessagesAssistantMessage
-> = z.object({
-  reasoningContent: z.string().optional(),
-  content: z.nullable(
-    z.union([
-      z.string(),
-      z.array(
-        z.union([
-          TextContentPartSchema$outboundSchema.and(
-            z.object({ type: z.literal("text") }),
-          ),
-          RefusalPartSchema$outboundSchema,
-          ReasoningPartSchema$outboundSchema,
-          RedactedReasoningPartSchema$outboundSchema,
-        ]),
-      ),
-    ]),
-  ).optional(),
-  refusal: z.nullable(z.string()).optional(),
-  role: z.literal("assistant"),
-  name: z.string().optional(),
-  audio: z.nullable(z.lazy(() => MessagesAudio$outboundSchema)).optional(),
-  toolCalls: z.array(z.lazy(() => MessagesToolCalls$outboundSchema)).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    reasoningContent: "reasoning_content",
-    toolCalls: "tool_calls",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    reasoningContent: z.string().optional(),
+    content: z.nullable(
+      z.union([
+        z.string(),
+        z.array(
+          z.union([
+            TextContentPartSchema$outboundSchema.and(
+              z.object({ type: z.literal("text") }),
+            ),
+            RefusalPartSchema$outboundSchema,
+            ReasoningPartSchema$outboundSchema,
+            RedactedReasoningPartSchema$outboundSchema,
+          ]),
+        ),
+      ]),
+    ).optional(),
+    refusal: z.nullable(z.string()).optional(),
+    role: z.literal("assistant"),
+    name: z.string().optional(),
+    audio: z.nullable(z.lazy(() => MessagesAudio$outboundSchema)).optional(),
+    toolCalls: z.array(z.lazy(() => MessagesToolCalls$outboundSchema))
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      reasoningContent: "reasoning_content",
+      toolCalls: "tool_calls",
+    });
+  })
+);
 
 export function messagesAssistantMessageToJSON(
   messagesAssistantMessage: MessagesAssistantMessage,
@@ -2203,14 +2286,17 @@ export function messagesAssistantMessageToJSON(
 
 /** @internal */
 export const InvokeDeploymentRequest2MessagesType$outboundSchema:
-  z.ZodNativeEnum<typeof InvokeDeploymentRequest2MessagesType> = z.nativeEnum(
-    InvokeDeploymentRequest2MessagesType,
-  );
+  z.ZodNativeEnum<typeof InvokeDeploymentRequest2MessagesType> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(InvokeDeploymentRequest2MessagesType)
+    );
 
 /** @internal */
 export const InvokeDeploymentRequest2Ttl$outboundSchema: z.ZodNativeEnum<
   typeof InvokeDeploymentRequest2Ttl
-> = z.nativeEnum(InvokeDeploymentRequest2Ttl);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(InvokeDeploymentRequest2Ttl)
+);
 
 /** @internal */
 export type InvokeDeploymentRequest2CacheControl$Outbound = {
@@ -2223,10 +2309,12 @@ export const InvokeDeploymentRequest2CacheControl$outboundSchema: z.ZodType<
   InvokeDeploymentRequest2CacheControl$Outbound,
   z.ZodTypeDef,
   InvokeDeploymentRequest2CacheControl
-> = z.object({
-  type: InvokeDeploymentRequest2MessagesType$outboundSchema,
-  ttl: InvokeDeploymentRequest2Ttl$outboundSchema.default("5m"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: InvokeDeploymentRequest2MessagesType$outboundSchema,
+    ttl: InvokeDeploymentRequest2Ttl$outboundSchema.default("5m"),
+  })
+);
 
 export function invokeDeploymentRequest2CacheControlToJSON(
   invokeDeploymentRequest2CacheControl: InvokeDeploymentRequest2CacheControl,
@@ -2247,17 +2335,19 @@ export type Two4$Outbound = {
 
 /** @internal */
 export const Two4$outboundSchema: z.ZodType<Two4$Outbound, z.ZodTypeDef, Two4> =
-  z.object({
-    type: z.literal("file"),
-    cacheControl: z.lazy(() =>
-      InvokeDeploymentRequest2CacheControl$outboundSchema
-    ).optional(),
-    file: FileContentPartSchema$outboundSchema,
-  }).transform((v) => {
-    return remap$(v, {
-      cacheControl: "cache_control",
-    });
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type: z.literal("file"),
+      cacheControl: z.lazy(() =>
+        InvokeDeploymentRequest2CacheControl$outboundSchema
+      ).optional(),
+      file: FileContentPartSchema$outboundSchema,
+    }).transform((v) => {
+      return remap$(v, {
+        cacheControl: "cache_control",
+      });
+    })
+  );
 
 export function two4ToJSON(two4: Two4): string {
   return JSON.stringify(Two4$outboundSchema.parse(two4));
@@ -2275,14 +2365,16 @@ export const InvokeDeploymentRequestContentMessages2$outboundSchema: z.ZodType<
   InvokeDeploymentRequestContentMessages2$Outbound,
   z.ZodTypeDef,
   InvokeDeploymentRequestContentMessages2
-> = z.union([
-  TextContentPartSchema$outboundSchema.and(
-    z.object({ type: z.literal("text") }),
-  ),
-  ImageContentPartSchema$outboundSchema,
-  AudioContentPartSchema$outboundSchema,
-  z.lazy(() => Two4$outboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    TextContentPartSchema$outboundSchema.and(
+      z.object({ type: z.literal("text") }),
+    ),
+    ImageContentPartSchema$outboundSchema,
+    AudioContentPartSchema$outboundSchema,
+    z.lazy(() => Two4$outboundSchema),
+  ])
+);
 
 export function invokeDeploymentRequestContentMessages2ToJSON(
   invokeDeploymentRequestContentMessages2:
@@ -2310,19 +2402,21 @@ export const InvokeDeploymentRequestMessages3Content$outboundSchema: z.ZodType<
   InvokeDeploymentRequestMessages3Content$Outbound,
   z.ZodTypeDef,
   InvokeDeploymentRequestMessages3Content
-> = z.union([
-  z.string(),
-  z.array(
-    z.union([
-      TextContentPartSchema$outboundSchema.and(
-        z.object({ type: z.literal("text") }),
-      ),
-      ImageContentPartSchema$outboundSchema,
-      AudioContentPartSchema$outboundSchema,
-      z.lazy(() => Two4$outboundSchema),
-    ]),
-  ),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.string(),
+    z.array(
+      z.union([
+        TextContentPartSchema$outboundSchema.and(
+          z.object({ type: z.literal("text") }),
+        ),
+        ImageContentPartSchema$outboundSchema,
+        AudioContentPartSchema$outboundSchema,
+        z.lazy(() => Two4$outboundSchema),
+      ]),
+    ),
+  ])
+);
 
 export function invokeDeploymentRequestMessages3ContentToJSON(
   invokeDeploymentRequestMessages3Content:
@@ -2354,23 +2448,25 @@ export const MessagesUserMessage$outboundSchema: z.ZodType<
   MessagesUserMessage$Outbound,
   z.ZodTypeDef,
   MessagesUserMessage
-> = z.object({
-  role: z.literal("user"),
-  name: z.string().optional(),
-  content: z.union([
-    z.string(),
-    z.array(
-      z.union([
-        TextContentPartSchema$outboundSchema.and(
-          z.object({ type: z.literal("text") }),
-        ),
-        ImageContentPartSchema$outboundSchema,
-        AudioContentPartSchema$outboundSchema,
-        z.lazy(() => Two4$outboundSchema),
-      ]),
-    ),
-  ]),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    role: z.literal("user"),
+    name: z.string().optional(),
+    content: z.union([
+      z.string(),
+      z.array(
+        z.union([
+          TextContentPartSchema$outboundSchema.and(
+            z.object({ type: z.literal("text") }),
+          ),
+          ImageContentPartSchema$outboundSchema,
+          AudioContentPartSchema$outboundSchema,
+          z.lazy(() => Two4$outboundSchema),
+        ]),
+      ),
+    ]),
+  })
+);
 
 export function messagesUserMessageToJSON(
   messagesUserMessage: MessagesUserMessage,
@@ -2390,7 +2486,9 @@ export const InvokeDeploymentRequestMessagesContent$outboundSchema: z.ZodType<
   InvokeDeploymentRequestMessagesContent$Outbound,
   z.ZodTypeDef,
   InvokeDeploymentRequestMessagesContent
-> = z.union([z.string(), z.array(TextContentPartSchema$outboundSchema)]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.array(TextContentPartSchema$outboundSchema)])
+);
 
 export function invokeDeploymentRequestMessagesContentToJSON(
   invokeDeploymentRequestMessagesContent:
@@ -2415,11 +2513,16 @@ export const MessagesDeveloperMessage$outboundSchema: z.ZodType<
   MessagesDeveloperMessage$Outbound,
   z.ZodTypeDef,
   MessagesDeveloperMessage
-> = z.object({
-  role: z.literal("developer"),
-  content: z.union([z.string(), z.array(TextContentPartSchema$outboundSchema)]),
-  name: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    role: z.literal("developer"),
+    content: z.union([
+      z.string(),
+      z.array(TextContentPartSchema$outboundSchema),
+    ]),
+    name: z.string().optional(),
+  })
+);
 
 export function messagesDeveloperMessageToJSON(
   messagesDeveloperMessage: MessagesDeveloperMessage,
@@ -2439,7 +2542,9 @@ export const MessagesContent$outboundSchema: z.ZodType<
   MessagesContent$Outbound,
   z.ZodTypeDef,
   MessagesContent
-> = z.union([z.string(), z.array(TextContentPartSchema$outboundSchema)]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.array(TextContentPartSchema$outboundSchema)])
+);
 
 export function messagesContentToJSON(
   messagesContent: MessagesContent,
@@ -2459,11 +2564,16 @@ export const MessagesSystemMessage$outboundSchema: z.ZodType<
   MessagesSystemMessage$Outbound,
   z.ZodTypeDef,
   MessagesSystemMessage
-> = z.object({
-  role: z.literal("system"),
-  content: z.union([z.string(), z.array(TextContentPartSchema$outboundSchema)]),
-  name: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    role: z.literal("system"),
+    content: z.union([
+      z.string(),
+      z.array(TextContentPartSchema$outboundSchema),
+    ]),
+    name: z.string().optional(),
+  })
+);
 
 export function messagesSystemMessageToJSON(
   messagesSystemMessage: MessagesSystemMessage,
@@ -2486,13 +2596,15 @@ export const Messages$outboundSchema: z.ZodType<
   Messages$Outbound,
   z.ZodTypeDef,
   Messages
-> = z.union([
-  z.lazy(() => MessagesSystemMessage$outboundSchema),
-  z.lazy(() => MessagesDeveloperMessage$outboundSchema),
-  z.lazy(() => MessagesUserMessage$outboundSchema),
-  z.lazy(() => MessagesAssistantMessage$outboundSchema),
-  z.lazy(() => MessagesToolMessage$outboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => MessagesSystemMessage$outboundSchema),
+    z.lazy(() => MessagesDeveloperMessage$outboundSchema),
+    z.lazy(() => MessagesUserMessage$outboundSchema),
+    z.lazy(() => MessagesAssistantMessage$outboundSchema),
+    z.lazy(() => MessagesToolMessage$outboundSchema),
+  ])
+);
 
 export function messagesToJSON(messages: Messages): string {
   return JSON.stringify(Messages$outboundSchema.parse(messages));
@@ -2510,17 +2622,19 @@ export const InvokeDeploymentRequestMetadata$outboundSchema: z.ZodType<
   InvokeDeploymentRequestMetadata$Outbound,
   z.ZodTypeDef,
   InvokeDeploymentRequestMetadata
-> = z.object({
-  fileName: z.string().optional(),
-  fileType: z.string().optional(),
-  pageNumber: z.number().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    fileName: "file_name",
-    fileType: "file_type",
-    pageNumber: "page_number",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    fileName: z.string().optional(),
+    fileType: z.string().optional(),
+    pageNumber: z.number().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      fileName: "file_name",
+      fileType: "file_type",
+      pageNumber: "page_number",
+    });
+  })
+);
 
 export function invokeDeploymentRequestMetadataToJSON(
   invokeDeploymentRequestMetadata: InvokeDeploymentRequestMetadata,
@@ -2543,11 +2657,13 @@ export const Documents$outboundSchema: z.ZodType<
   Documents$Outbound,
   z.ZodTypeDef,
   Documents
-> = z.object({
-  text: z.string(),
-  metadata: z.lazy(() => InvokeDeploymentRequestMetadata$outboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    text: z.string(),
+    metadata: z.lazy(() => InvokeDeploymentRequestMetadata$outboundSchema)
+      .optional(),
+  })
+);
 
 export function documentsToJSON(documents: Documents): string {
   return JSON.stringify(Documents$outboundSchema.parse(documents));
@@ -2565,17 +2681,19 @@ export const InvokeOptions$outboundSchema: z.ZodType<
   InvokeOptions$Outbound,
   z.ZodTypeDef,
   InvokeOptions
-> = z.object({
-  includeRetrievals: z.boolean().default(false),
-  includeUsage: z.boolean().default(false),
-  mockResponse: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    includeRetrievals: "include_retrievals",
-    includeUsage: "include_usage",
-    mockResponse: "mock_response",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    includeRetrievals: z.boolean().default(false),
+    includeUsage: z.boolean().default(false),
+    mockResponse: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      includeRetrievals: "include_retrievals",
+      includeUsage: "include_usage",
+      mockResponse: "mock_response",
+    });
+  })
+);
 
 export function invokeOptionsToJSON(invokeOptions: InvokeOptions): string {
   return JSON.stringify(InvokeOptions$outboundSchema.parse(invokeOptions));
@@ -2592,10 +2710,12 @@ export const InvokeDeploymentRequestThread$outboundSchema: z.ZodType<
   InvokeDeploymentRequestThread$Outbound,
   z.ZodTypeDef,
   InvokeDeploymentRequestThread
-> = z.object({
-  id: z.string(),
-  tags: z.array(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    tags: z.array(z.string()).optional(),
+  })
+);
 
 export function invokeDeploymentRequestThreadToJSON(
   invokeDeploymentRequestThread: InvokeDeploymentRequestThread,
@@ -2615,7 +2735,9 @@ export const OrNin$outboundSchema: z.ZodType<
   OrNin$Outbound,
   z.ZodTypeDef,
   OrNin
-> = z.union([z.string(), z.number(), z.boolean()]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.number(), z.boolean()])
+);
 
 export function orNinToJSON(orNin: OrNin): string {
   return JSON.stringify(OrNin$outboundSchema.parse(orNin));
@@ -2631,9 +2753,11 @@ export const InvokeDeploymentRequestOrNin$outboundSchema: z.ZodType<
   InvokeDeploymentRequestOrNin$Outbound,
   z.ZodTypeDef,
   InvokeDeploymentRequestOrNin
-> = z.object({
-  nin: z.array(z.union([z.string(), z.number(), z.boolean()])),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    nin: z.array(z.union([z.string(), z.number(), z.boolean()])),
+  })
+);
 
 export function invokeDeploymentRequestOrNinToJSON(
   invokeDeploymentRequestOrNin: InvokeDeploymentRequestOrNin,
@@ -2650,7 +2774,9 @@ export type OrIn$Outbound = string | number | boolean;
 
 /** @internal */
 export const OrIn$outboundSchema: z.ZodType<OrIn$Outbound, z.ZodTypeDef, OrIn> =
-  z.union([z.string(), z.number(), z.boolean()]);
+  /* @__PURE__ */ lazySchema$(() =>
+    z.union([z.string(), z.number(), z.boolean()])
+  );
 
 export function orInToJSON(orIn: OrIn): string {
   return JSON.stringify(OrIn$outboundSchema.parse(orIn));
@@ -2666,9 +2792,11 @@ export const InvokeDeploymentRequestOrIn$outboundSchema: z.ZodType<
   InvokeDeploymentRequestOrIn$Outbound,
   z.ZodTypeDef,
   InvokeDeploymentRequestOrIn
-> = z.object({
-  in: z.array(z.union([z.string(), z.number(), z.boolean()])),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    in: z.array(z.union([z.string(), z.number(), z.boolean()])),
+  })
+);
 
 export function invokeDeploymentRequestOrInToJSON(
   invokeDeploymentRequestOrIn: InvokeDeploymentRequestOrIn,
@@ -2690,9 +2818,11 @@ export const OrLte$outboundSchema: z.ZodType<
   OrLte$Outbound,
   z.ZodTypeDef,
   OrLte
-> = z.object({
-  lte: z.number(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    lte: z.number(),
+  })
+);
 
 export function orLteToJSON(orLte: OrLte): string {
   return JSON.stringify(OrLte$outboundSchema.parse(orLte));
@@ -2705,9 +2835,11 @@ export type OrLt$Outbound = {
 
 /** @internal */
 export const OrLt$outboundSchema: z.ZodType<OrLt$Outbound, z.ZodTypeDef, OrLt> =
-  z.object({
-    lt: z.number(),
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      lt: z.number(),
+    })
+  );
 
 export function orLtToJSON(orLt: OrLt): string {
   return JSON.stringify(OrLt$outboundSchema.parse(orLt));
@@ -2723,9 +2855,11 @@ export const OrGte$outboundSchema: z.ZodType<
   OrGte$Outbound,
   z.ZodTypeDef,
   OrGte
-> = z.object({
-  gte: z.number(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    gte: z.number(),
+  })
+);
 
 export function orGteToJSON(orGte: OrGte): string {
   return JSON.stringify(OrGte$outboundSchema.parse(orGte));
@@ -2738,9 +2872,11 @@ export type OrGt$Outbound = {
 
 /** @internal */
 export const OrGt$outboundSchema: z.ZodType<OrGt$Outbound, z.ZodTypeDef, OrGt> =
-  z.object({
-    gt: z.number(),
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      gt: z.number(),
+    })
+  );
 
 export function orGtToJSON(orGt: OrGt): string {
   return JSON.stringify(OrGt$outboundSchema.parse(orGt));
@@ -2751,7 +2887,9 @@ export type OrNe$Outbound = string | number | boolean;
 
 /** @internal */
 export const OrNe$outboundSchema: z.ZodType<OrNe$Outbound, z.ZodTypeDef, OrNe> =
-  z.union([z.string(), z.number(), z.boolean()]);
+  /* @__PURE__ */ lazySchema$(() =>
+    z.union([z.string(), z.number(), z.boolean()])
+  );
 
 export function orNeToJSON(orNe: OrNe): string {
   return JSON.stringify(OrNe$outboundSchema.parse(orNe));
@@ -2767,9 +2905,11 @@ export const InvokeDeploymentRequestOrNe$outboundSchema: z.ZodType<
   InvokeDeploymentRequestOrNe$Outbound,
   z.ZodTypeDef,
   InvokeDeploymentRequestOrNe
-> = z.object({
-  ne: z.union([z.string(), z.number(), z.boolean()]),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ne: z.union([z.string(), z.number(), z.boolean()]),
+  })
+);
 
 export function invokeDeploymentRequestOrNeToJSON(
   invokeDeploymentRequestOrNe: InvokeDeploymentRequestOrNe,
@@ -2786,7 +2926,9 @@ export type OrEq$Outbound = string | number | boolean;
 
 /** @internal */
 export const OrEq$outboundSchema: z.ZodType<OrEq$Outbound, z.ZodTypeDef, OrEq> =
-  z.union([z.string(), z.number(), z.boolean()]);
+  /* @__PURE__ */ lazySchema$(() =>
+    z.union([z.string(), z.number(), z.boolean()])
+  );
 
 export function orEqToJSON(orEq: OrEq): string {
   return JSON.stringify(OrEq$outboundSchema.parse(orEq));
@@ -2802,9 +2944,11 @@ export const InvokeDeploymentRequestOrEq$outboundSchema: z.ZodType<
   InvokeDeploymentRequestOrEq$Outbound,
   z.ZodTypeDef,
   InvokeDeploymentRequestOrEq
-> = z.object({
-  eq: z.union([z.string(), z.number(), z.boolean()]),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    eq: z.union([z.string(), z.number(), z.boolean()]),
+  })
+);
 
 export function invokeDeploymentRequestOrEqToJSON(
   invokeDeploymentRequestOrEq: InvokeDeploymentRequestOrEq,
@@ -2828,17 +2972,19 @@ export type Or$Outbound =
   | InvokeDeploymentRequestOrNin$Outbound;
 
 /** @internal */
-export const Or$outboundSchema: z.ZodType<Or$Outbound, z.ZodTypeDef, Or> = z
-  .union([
-    z.lazy(() => InvokeDeploymentRequestOrEq$outboundSchema),
-    z.lazy(() => InvokeDeploymentRequestOrNe$outboundSchema),
-    z.lazy(() => OrGt$outboundSchema),
-    z.lazy(() => OrGte$outboundSchema),
-    z.lazy(() => OrLt$outboundSchema),
-    z.lazy(() => OrLte$outboundSchema),
-    z.lazy(() => InvokeDeploymentRequestOrIn$outboundSchema),
-    z.lazy(() => InvokeDeploymentRequestOrNin$outboundSchema),
-  ]);
+export const Or$outboundSchema: z.ZodType<Or$Outbound, z.ZodTypeDef, Or> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.union([
+      z.lazy(() => InvokeDeploymentRequestOrEq$outboundSchema),
+      z.lazy(() => InvokeDeploymentRequestOrNe$outboundSchema),
+      z.lazy(() => OrGt$outboundSchema),
+      z.lazy(() => OrGte$outboundSchema),
+      z.lazy(() => OrLt$outboundSchema),
+      z.lazy(() => OrLte$outboundSchema),
+      z.lazy(() => InvokeDeploymentRequestOrIn$outboundSchema),
+      z.lazy(() => InvokeDeploymentRequestOrNin$outboundSchema),
+    ])
+  );
 
 export function orToJSON(or: Or): string {
   return JSON.stringify(Or$outboundSchema.parse(or));
@@ -2866,9 +3012,9 @@ export const KnowledgeFilterOr$outboundSchema: z.ZodType<
   KnowledgeFilterOr$Outbound,
   z.ZodTypeDef,
   KnowledgeFilterOr
-> = z.object({
-  or: z.array(
-    z.record(z.union([
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    or: z.array(z.record(z.union([
       z.lazy(() => InvokeDeploymentRequestOrEq$outboundSchema),
       z.lazy(() =>
         InvokeDeploymentRequestOrNe$outboundSchema
@@ -2879,9 +3025,9 @@ export const KnowledgeFilterOr$outboundSchema: z.ZodType<
       z.lazy(() => OrLte$outboundSchema),
       z.lazy(() => InvokeDeploymentRequestOrIn$outboundSchema),
       z.lazy(() => InvokeDeploymentRequestOrNin$outboundSchema),
-    ])),
-  ),
-});
+    ]))),
+  })
+);
 
 export function knowledgeFilterOrToJSON(
   knowledgeFilterOr: KnowledgeFilterOr,
@@ -2899,7 +3045,9 @@ export const AndNin$outboundSchema: z.ZodType<
   AndNin$Outbound,
   z.ZodTypeDef,
   AndNin
-> = z.union([z.string(), z.number(), z.boolean()]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.number(), z.boolean()])
+);
 
 export function andNinToJSON(andNin: AndNin): string {
   return JSON.stringify(AndNin$outboundSchema.parse(andNin));
@@ -2915,9 +3063,11 @@ export const InvokeDeploymentRequestAndNin$outboundSchema: z.ZodType<
   InvokeDeploymentRequestAndNin$Outbound,
   z.ZodTypeDef,
   InvokeDeploymentRequestAndNin
-> = z.object({
-  nin: z.array(z.union([z.string(), z.number(), z.boolean()])),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    nin: z.array(z.union([z.string(), z.number(), z.boolean()])),
+  })
+);
 
 export function invokeDeploymentRequestAndNinToJSON(
   invokeDeploymentRequestAndNin: InvokeDeploymentRequestAndNin,
@@ -2937,7 +3087,9 @@ export const AndIn$outboundSchema: z.ZodType<
   AndIn$Outbound,
   z.ZodTypeDef,
   AndIn
-> = z.union([z.string(), z.number(), z.boolean()]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.number(), z.boolean()])
+);
 
 export function andInToJSON(andIn: AndIn): string {
   return JSON.stringify(AndIn$outboundSchema.parse(andIn));
@@ -2953,9 +3105,11 @@ export const InvokeDeploymentRequestAndIn$outboundSchema: z.ZodType<
   InvokeDeploymentRequestAndIn$Outbound,
   z.ZodTypeDef,
   InvokeDeploymentRequestAndIn
-> = z.object({
-  in: z.array(z.union([z.string(), z.number(), z.boolean()])),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    in: z.array(z.union([z.string(), z.number(), z.boolean()])),
+  })
+);
 
 export function invokeDeploymentRequestAndInToJSON(
   invokeDeploymentRequestAndIn: InvokeDeploymentRequestAndIn,
@@ -2977,9 +3131,11 @@ export const AndLte$outboundSchema: z.ZodType<
   AndLte$Outbound,
   z.ZodTypeDef,
   AndLte
-> = z.object({
-  lte: z.number(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    lte: z.number(),
+  })
+);
 
 export function andLteToJSON(andLte: AndLte): string {
   return JSON.stringify(AndLte$outboundSchema.parse(andLte));
@@ -2995,9 +3151,11 @@ export const AndLt$outboundSchema: z.ZodType<
   AndLt$Outbound,
   z.ZodTypeDef,
   AndLt
-> = z.object({
-  lt: z.number(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    lt: z.number(),
+  })
+);
 
 export function andLtToJSON(andLt: AndLt): string {
   return JSON.stringify(AndLt$outboundSchema.parse(andLt));
@@ -3013,9 +3171,11 @@ export const AndGte$outboundSchema: z.ZodType<
   AndGte$Outbound,
   z.ZodTypeDef,
   AndGte
-> = z.object({
-  gte: z.number(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    gte: z.number(),
+  })
+);
 
 export function andGteToJSON(andGte: AndGte): string {
   return JSON.stringify(AndGte$outboundSchema.parse(andGte));
@@ -3031,9 +3191,11 @@ export const AndGt$outboundSchema: z.ZodType<
   AndGt$Outbound,
   z.ZodTypeDef,
   AndGt
-> = z.object({
-  gt: z.number(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    gt: z.number(),
+  })
+);
 
 export function andGtToJSON(andGt: AndGt): string {
   return JSON.stringify(AndGt$outboundSchema.parse(andGt));
@@ -3047,7 +3209,9 @@ export const AndNe$outboundSchema: z.ZodType<
   AndNe$Outbound,
   z.ZodTypeDef,
   AndNe
-> = z.union([z.string(), z.number(), z.boolean()]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.number(), z.boolean()])
+);
 
 export function andNeToJSON(andNe: AndNe): string {
   return JSON.stringify(AndNe$outboundSchema.parse(andNe));
@@ -3063,9 +3227,11 @@ export const InvokeDeploymentRequestAndNe$outboundSchema: z.ZodType<
   InvokeDeploymentRequestAndNe$Outbound,
   z.ZodTypeDef,
   InvokeDeploymentRequestAndNe
-> = z.object({
-  ne: z.union([z.string(), z.number(), z.boolean()]),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ne: z.union([z.string(), z.number(), z.boolean()]),
+  })
+);
 
 export function invokeDeploymentRequestAndNeToJSON(
   invokeDeploymentRequestAndNe: InvokeDeploymentRequestAndNe,
@@ -3085,7 +3251,9 @@ export const AndEq$outboundSchema: z.ZodType<
   AndEq$Outbound,
   z.ZodTypeDef,
   AndEq
-> = z.union([z.string(), z.number(), z.boolean()]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.number(), z.boolean()])
+);
 
 export function andEqToJSON(andEq: AndEq): string {
   return JSON.stringify(AndEq$outboundSchema.parse(andEq));
@@ -3101,9 +3269,11 @@ export const InvokeDeploymentRequestAndEq$outboundSchema: z.ZodType<
   InvokeDeploymentRequestAndEq$Outbound,
   z.ZodTypeDef,
   InvokeDeploymentRequestAndEq
-> = z.object({
-  eq: z.union([z.string(), z.number(), z.boolean()]),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    eq: z.union([z.string(), z.number(), z.boolean()]),
+  })
+);
 
 export function invokeDeploymentRequestAndEqToJSON(
   invokeDeploymentRequestAndEq: InvokeDeploymentRequestAndEq,
@@ -3127,17 +3297,19 @@ export type And$Outbound =
   | InvokeDeploymentRequestAndNin$Outbound;
 
 /** @internal */
-export const And$outboundSchema: z.ZodType<And$Outbound, z.ZodTypeDef, And> = z
-  .union([
-    z.lazy(() => InvokeDeploymentRequestAndEq$outboundSchema),
-    z.lazy(() => InvokeDeploymentRequestAndNe$outboundSchema),
-    z.lazy(() => AndGt$outboundSchema),
-    z.lazy(() => AndGte$outboundSchema),
-    z.lazy(() => AndLt$outboundSchema),
-    z.lazy(() => AndLte$outboundSchema),
-    z.lazy(() => InvokeDeploymentRequestAndIn$outboundSchema),
-    z.lazy(() => InvokeDeploymentRequestAndNin$outboundSchema),
-  ]);
+export const And$outboundSchema: z.ZodType<And$Outbound, z.ZodTypeDef, And> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.union([
+      z.lazy(() => InvokeDeploymentRequestAndEq$outboundSchema),
+      z.lazy(() => InvokeDeploymentRequestAndNe$outboundSchema),
+      z.lazy(() => AndGt$outboundSchema),
+      z.lazy(() => AndGte$outboundSchema),
+      z.lazy(() => AndLt$outboundSchema),
+      z.lazy(() => AndLte$outboundSchema),
+      z.lazy(() => InvokeDeploymentRequestAndIn$outboundSchema),
+      z.lazy(() => InvokeDeploymentRequestAndNin$outboundSchema),
+    ])
+  );
 
 export function andToJSON(and: And): string {
   return JSON.stringify(And$outboundSchema.parse(and));
@@ -3165,9 +3337,9 @@ export const KnowledgeFilterAnd$outboundSchema: z.ZodType<
   KnowledgeFilterAnd$Outbound,
   z.ZodTypeDef,
   KnowledgeFilterAnd
-> = z.object({
-  and: z.array(
-    z.record(z.union([
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    and: z.array(z.record(z.union([
       z.lazy(() => InvokeDeploymentRequestAndEq$outboundSchema),
       z.lazy(() =>
         InvokeDeploymentRequestAndNe$outboundSchema
@@ -3178,9 +3350,9 @@ export const KnowledgeFilterAnd$outboundSchema: z.ZodType<
       z.lazy(() => AndLte$outboundSchema),
       z.lazy(() => InvokeDeploymentRequestAndIn$outboundSchema),
       z.lazy(() => InvokeDeploymentRequestAndNin$outboundSchema),
-    ])),
-  ),
-});
+    ]))),
+  })
+);
 
 export function knowledgeFilterAndToJSON(
   knowledgeFilterAnd: KnowledgeFilterAnd,
@@ -3194,8 +3366,10 @@ export function knowledgeFilterAndToJSON(
 export type Nin$Outbound = string | number | boolean;
 
 /** @internal */
-export const Nin$outboundSchema: z.ZodType<Nin$Outbound, z.ZodTypeDef, Nin> = z
-  .union([z.string(), z.number(), z.boolean()]);
+export const Nin$outboundSchema: z.ZodType<Nin$Outbound, z.ZodTypeDef, Nin> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.union([z.string(), z.number(), z.boolean()])
+  );
 
 export function ninToJSON(nin: Nin): string {
   return JSON.stringify(Nin$outboundSchema.parse(nin));
@@ -3211,9 +3385,11 @@ export const InvokeDeploymentRequest1Nin$outboundSchema: z.ZodType<
   InvokeDeploymentRequest1Nin$Outbound,
   z.ZodTypeDef,
   InvokeDeploymentRequest1Nin
-> = z.object({
-  nin: z.array(z.union([z.string(), z.number(), z.boolean()])),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    nin: z.array(z.union([z.string(), z.number(), z.boolean()])),
+  })
+);
 
 export function invokeDeploymentRequest1NinToJSON(
   invokeDeploymentRequest1Nin: InvokeDeploymentRequest1Nin,
@@ -3229,8 +3405,10 @@ export function invokeDeploymentRequest1NinToJSON(
 export type In$Outbound = string | number | boolean;
 
 /** @internal */
-export const In$outboundSchema: z.ZodType<In$Outbound, z.ZodTypeDef, In> = z
-  .union([z.string(), z.number(), z.boolean()]);
+export const In$outboundSchema: z.ZodType<In$Outbound, z.ZodTypeDef, In> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.union([z.string(), z.number(), z.boolean()])
+  );
 
 export function inToJSON(value: In): string {
   return JSON.stringify(In$outboundSchema.parse(value));
@@ -3246,9 +3424,11 @@ export const InvokeDeploymentRequest1In$outboundSchema: z.ZodType<
   InvokeDeploymentRequest1In$Outbound,
   z.ZodTypeDef,
   InvokeDeploymentRequest1In
-> = z.object({
-  in: z.array(z.union([z.string(), z.number(), z.boolean()])),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    in: z.array(z.union([z.string(), z.number(), z.boolean()])),
+  })
+);
 
 export function invokeDeploymentRequest1InToJSON(
   invokeDeploymentRequest1In: InvokeDeploymentRequest1In,
@@ -3264,10 +3444,12 @@ export type Lte$Outbound = {
 };
 
 /** @internal */
-export const Lte$outboundSchema: z.ZodType<Lte$Outbound, z.ZodTypeDef, Lte> = z
-  .object({
-    lte: z.number(),
-  });
+export const Lte$outboundSchema: z.ZodType<Lte$Outbound, z.ZodTypeDef, Lte> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      lte: z.number(),
+    })
+  );
 
 export function lteToJSON(lte: Lte): string {
   return JSON.stringify(Lte$outboundSchema.parse(lte));
@@ -3279,10 +3461,12 @@ export type Lt$Outbound = {
 };
 
 /** @internal */
-export const Lt$outboundSchema: z.ZodType<Lt$Outbound, z.ZodTypeDef, Lt> = z
-  .object({
-    lt: z.number(),
-  });
+export const Lt$outboundSchema: z.ZodType<Lt$Outbound, z.ZodTypeDef, Lt> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      lt: z.number(),
+    })
+  );
 
 export function ltToJSON(lt: Lt): string {
   return JSON.stringify(Lt$outboundSchema.parse(lt));
@@ -3294,10 +3478,12 @@ export type Gte$Outbound = {
 };
 
 /** @internal */
-export const Gte$outboundSchema: z.ZodType<Gte$Outbound, z.ZodTypeDef, Gte> = z
-  .object({
-    gte: z.number(),
-  });
+export const Gte$outboundSchema: z.ZodType<Gte$Outbound, z.ZodTypeDef, Gte> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      gte: z.number(),
+    })
+  );
 
 export function gteToJSON(gte: Gte): string {
   return JSON.stringify(Gte$outboundSchema.parse(gte));
@@ -3309,10 +3495,12 @@ export type Gt$Outbound = {
 };
 
 /** @internal */
-export const Gt$outboundSchema: z.ZodType<Gt$Outbound, z.ZodTypeDef, Gt> = z
-  .object({
-    gt: z.number(),
-  });
+export const Gt$outboundSchema: z.ZodType<Gt$Outbound, z.ZodTypeDef, Gt> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      gt: z.number(),
+    })
+  );
 
 export function gtToJSON(gt: Gt): string {
   return JSON.stringify(Gt$outboundSchema.parse(gt));
@@ -3322,8 +3510,10 @@ export function gtToJSON(gt: Gt): string {
 export type Ne$Outbound = string | number | boolean;
 
 /** @internal */
-export const Ne$outboundSchema: z.ZodType<Ne$Outbound, z.ZodTypeDef, Ne> = z
-  .union([z.string(), z.number(), z.boolean()]);
+export const Ne$outboundSchema: z.ZodType<Ne$Outbound, z.ZodTypeDef, Ne> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.union([z.string(), z.number(), z.boolean()])
+  );
 
 export function neToJSON(ne: Ne): string {
   return JSON.stringify(Ne$outboundSchema.parse(ne));
@@ -3339,9 +3529,11 @@ export const InvokeDeploymentRequest1Ne$outboundSchema: z.ZodType<
   InvokeDeploymentRequest1Ne$Outbound,
   z.ZodTypeDef,
   InvokeDeploymentRequest1Ne
-> = z.object({
-  ne: z.union([z.string(), z.number(), z.boolean()]),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ne: z.union([z.string(), z.number(), z.boolean()]),
+  })
+);
 
 export function invokeDeploymentRequest1NeToJSON(
   invokeDeploymentRequest1Ne: InvokeDeploymentRequest1Ne,
@@ -3355,8 +3547,10 @@ export function invokeDeploymentRequest1NeToJSON(
 export type Eq$Outbound = string | number | boolean;
 
 /** @internal */
-export const Eq$outboundSchema: z.ZodType<Eq$Outbound, z.ZodTypeDef, Eq> = z
-  .union([z.string(), z.number(), z.boolean()]);
+export const Eq$outboundSchema: z.ZodType<Eq$Outbound, z.ZodTypeDef, Eq> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.union([z.string(), z.number(), z.boolean()])
+  );
 
 export function eqToJSON(eq: Eq): string {
   return JSON.stringify(Eq$outboundSchema.parse(eq));
@@ -3372,9 +3566,11 @@ export const InvokeDeploymentRequest1Eq$outboundSchema: z.ZodType<
   InvokeDeploymentRequest1Eq$Outbound,
   z.ZodTypeDef,
   InvokeDeploymentRequest1Eq
-> = z.object({
-  eq: z.union([z.string(), z.number(), z.boolean()]),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    eq: z.union([z.string(), z.number(), z.boolean()]),
+  })
+);
 
 export function invokeDeploymentRequest1EqToJSON(
   invokeDeploymentRequest1Eq: InvokeDeploymentRequest1Eq,
@@ -3396,17 +3592,19 @@ export type One$Outbound =
   | InvokeDeploymentRequest1Nin$Outbound;
 
 /** @internal */
-export const One$outboundSchema: z.ZodType<One$Outbound, z.ZodTypeDef, One> = z
-  .union([
-    z.lazy(() => InvokeDeploymentRequest1Eq$outboundSchema),
-    z.lazy(() => InvokeDeploymentRequest1Ne$outboundSchema),
-    z.lazy(() => Gt$outboundSchema),
-    z.lazy(() => Gte$outboundSchema),
-    z.lazy(() => Lt$outboundSchema),
-    z.lazy(() => Lte$outboundSchema),
-    z.lazy(() => InvokeDeploymentRequest1In$outboundSchema),
-    z.lazy(() => InvokeDeploymentRequest1Nin$outboundSchema),
-  ]);
+export const One$outboundSchema: z.ZodType<One$Outbound, z.ZodTypeDef, One> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.union([
+      z.lazy(() => InvokeDeploymentRequest1Eq$outboundSchema),
+      z.lazy(() => InvokeDeploymentRequest1Ne$outboundSchema),
+      z.lazy(() => Gt$outboundSchema),
+      z.lazy(() => Gte$outboundSchema),
+      z.lazy(() => Lt$outboundSchema),
+      z.lazy(() => Lte$outboundSchema),
+      z.lazy(() => InvokeDeploymentRequest1In$outboundSchema),
+      z.lazy(() => InvokeDeploymentRequest1Nin$outboundSchema),
+    ])
+  );
 
 export function oneToJSON(one: One): string {
   return JSON.stringify(One$outboundSchema.parse(one));
@@ -3433,20 +3631,22 @@ export const KnowledgeFilter$outboundSchema: z.ZodType<
   KnowledgeFilter$Outbound,
   z.ZodTypeDef,
   KnowledgeFilter
-> = z.union([
-  z.lazy(() => KnowledgeFilterAnd$outboundSchema),
-  z.lazy(() => KnowledgeFilterOr$outboundSchema),
-  z.record(z.union([
-    z.lazy(() => InvokeDeploymentRequest1Eq$outboundSchema),
-    z.lazy(() => InvokeDeploymentRequest1Ne$outboundSchema),
-    z.lazy(() => Gt$outboundSchema),
-    z.lazy(() => Gte$outboundSchema),
-    z.lazy(() => Lt$outboundSchema),
-    z.lazy(() => Lte$outboundSchema),
-    z.lazy(() => InvokeDeploymentRequest1In$outboundSchema),
-    z.lazy(() => InvokeDeploymentRequest1Nin$outboundSchema),
-  ])),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => KnowledgeFilterAnd$outboundSchema),
+    z.lazy(() => KnowledgeFilterOr$outboundSchema),
+    z.record(z.union([
+      z.lazy(() => InvokeDeploymentRequest1Eq$outboundSchema),
+      z.lazy(() => InvokeDeploymentRequest1Ne$outboundSchema),
+      z.lazy(() => Gt$outboundSchema),
+      z.lazy(() => Gte$outboundSchema),
+      z.lazy(() => Lt$outboundSchema),
+      z.lazy(() => Lte$outboundSchema),
+      z.lazy(() => InvokeDeploymentRequest1In$outboundSchema),
+      z.lazy(() => InvokeDeploymentRequest1Nin$outboundSchema),
+    ])),
+  ])
+);
 
 export function knowledgeFilterToJSON(
   knowledgeFilter: KnowledgeFilter,
@@ -3507,59 +3707,62 @@ export const InvokeDeploymentRequest$outboundSchema: z.ZodType<
   InvokeDeploymentRequest$Outbound,
   z.ZodTypeDef,
   InvokeDeploymentRequest
-> = z.object({
-  key: z.string(),
-  stream: z.boolean().default(false),
-  inputs: z.record(z.any()).optional(),
-  context: z.record(z.any()).optional(),
-  prefixMessages: z.array(
-    z.union([
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    key: z.string(),
+    stream: z.boolean().default(false),
+    inputs: z.record(z.any()).optional(),
+    context: z.record(z.any()).optional(),
+    prefixMessages: z.array(z.union([
       z.lazy(() => SystemMessage$outboundSchema),
       z.lazy(() => DeveloperMessage$outboundSchema),
       z.lazy(() => UserMessage$outboundSchema),
       z.lazy(() => AssistantMessage$outboundSchema),
       z.lazy(() => ToolMessage$outboundSchema),
-    ]),
-  ).optional(),
-  messages: z.array(
-    z.union([
+    ])).optional(),
+    messages: z.array(z.union([
       z.lazy(() => MessagesSystemMessage$outboundSchema),
-      z.lazy(() => MessagesDeveloperMessage$outboundSchema),
+      z.lazy(() =>
+        MessagesDeveloperMessage$outboundSchema
+      ),
       z.lazy(() => MessagesUserMessage$outboundSchema),
       z.lazy(() => MessagesAssistantMessage$outboundSchema),
       z.lazy(() => MessagesToolMessage$outboundSchema),
-    ]),
-  ).optional(),
-  identity: PublicIdentity$outboundSchema.optional(),
-  fileIds: z.array(z.string()).optional(),
-  metadata: z.record(z.any()).optional(),
-  extraParams: z.record(z.any()).optional(),
-  documents: z.array(z.lazy(() => Documents$outboundSchema)).optional(),
-  invokeOptions: z.lazy(() => InvokeOptions$outboundSchema).optional(),
-  thread: z.lazy(() => InvokeDeploymentRequestThread$outboundSchema).optional(),
-  knowledgeFilter: z.union([
-    z.lazy(() => KnowledgeFilterAnd$outboundSchema),
-    z.lazy(() => KnowledgeFilterOr$outboundSchema),
-    z.record(z.union([
-      z.lazy(() => InvokeDeploymentRequest1Eq$outboundSchema),
-      z.lazy(() => InvokeDeploymentRequest1Ne$outboundSchema),
-      z.lazy(() => Gt$outboundSchema),
-      z.lazy(() => Gte$outboundSchema),
-      z.lazy(() => Lt$outboundSchema),
-      z.lazy(() => Lte$outboundSchema),
-      z.lazy(() => InvokeDeploymentRequest1In$outboundSchema),
-      z.lazy(() => InvokeDeploymentRequest1Nin$outboundSchema),
-    ])),
-  ]).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    prefixMessages: "prefix_messages",
-    fileIds: "file_ids",
-    extraParams: "extra_params",
-    invokeOptions: "invoke_options",
-    knowledgeFilter: "knowledge_filter",
-  });
-});
+    ])).optional(),
+    identity: PublicIdentity$outboundSchema.optional(),
+    fileIds: z.array(z.string()).optional(),
+    metadata: z.record(z.any()).optional(),
+    extraParams: z.record(z.any()).optional(),
+    documents: z.array(z.lazy(() =>
+      Documents$outboundSchema
+    )).optional(),
+    invokeOptions: z.lazy(() => InvokeOptions$outboundSchema).optional(),
+    thread: z.lazy(() => InvokeDeploymentRequestThread$outboundSchema)
+      .optional(),
+    knowledgeFilter: z.union([
+      z.lazy(() => KnowledgeFilterAnd$outboundSchema),
+      z.lazy(() => KnowledgeFilterOr$outboundSchema),
+      z.record(z.union([
+        z.lazy(() => InvokeDeploymentRequest1Eq$outboundSchema),
+        z.lazy(() => InvokeDeploymentRequest1Ne$outboundSchema),
+        z.lazy(() => Gt$outboundSchema),
+        z.lazy(() => Gte$outboundSchema),
+        z.lazy(() => Lt$outboundSchema),
+        z.lazy(() => Lte$outboundSchema),
+        z.lazy(() => InvokeDeploymentRequest1In$outboundSchema),
+        z.lazy(() => InvokeDeploymentRequest1Nin$outboundSchema),
+      ])),
+    ]).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      prefixMessages: "prefix_messages",
+      fileIds: "file_ids",
+      extraParams: "extra_params",
+      invokeOptions: "invoke_options",
+      knowledgeFilter: "knowledge_filter",
+    });
+  })
+);
 
 export function invokeDeploymentRequestToJSON(
   invokeDeploymentRequest: InvokeDeploymentRequest,

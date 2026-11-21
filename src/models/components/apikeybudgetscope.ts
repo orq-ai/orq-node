@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -23,13 +23,15 @@ export const ApiKeyBudgetScope$inboundSchema: z.ZodType<
   ApiKeyBudgetScope,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  api_key_id: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "api_key_id": "apiKeyId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    api_key_id: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "api_key_id": "apiKeyId",
+    });
+  })
+);
 /** @internal */
 export type ApiKeyBudgetScope$Outbound = {
   api_key_id?: string | undefined;
@@ -40,13 +42,15 @@ export const ApiKeyBudgetScope$outboundSchema: z.ZodType<
   ApiKeyBudgetScope$Outbound,
   z.ZodTypeDef,
   ApiKeyBudgetScope
-> = z.object({
-  apiKeyId: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    apiKeyId: "api_key_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    apiKeyId: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      apiKeyId: "api_key_id",
+    });
+  })
+);
 
 export function apiKeyBudgetScopeToJSON(
   apiKeyBudgetScope: ApiKeyBudgetScope,

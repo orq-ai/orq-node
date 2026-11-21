@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import {
   ColumnLayout,
   ColumnLayout$Outbound,
@@ -23,9 +24,11 @@ export const UpdateRunColumnLayoutRequest$outboundSchema: z.ZodType<
   UpdateRunColumnLayoutRequest$Outbound,
   z.ZodTypeDef,
   UpdateRunColumnLayoutRequest
-> = z.object({
-  columns: z.array(ColumnLayout$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    columns: z.array(ColumnLayout$outboundSchema).optional(),
+  })
+);
 
 export function updateRunColumnLayoutRequestToJSON(
   updateRunColumnLayoutRequest: UpdateRunColumnLayoutRequest,

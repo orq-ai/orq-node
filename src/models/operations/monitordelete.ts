@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type MonitorDeleteRequest = {
   /**
@@ -22,13 +23,15 @@ export const MonitorDeleteRequest$outboundSchema: z.ZodType<
   MonitorDeleteRequest$Outbound,
   z.ZodTypeDef,
   MonitorDeleteRequest
-> = z.object({
-  monitorId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    monitorId: "monitor_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    monitorId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      monitorId: "monitor_id",
+    });
+  })
+);
 
 export function monitorDeleteRequestToJSON(
   monitorDeleteRequest: MonitorDeleteRequest,

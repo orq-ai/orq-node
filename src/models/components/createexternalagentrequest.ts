@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import {
   ExternalAgentHeader,
   ExternalAgentHeader$Outbound,
@@ -42,27 +43,29 @@ export const CreateExternalAgentRequest$outboundSchema: z.ZodType<
   CreateExternalAgentRequest$Outbound,
   z.ZodTypeDef,
   CreateExternalAgentRequest
-> = z.object({
-  key: z.string(),
-  displayName: z.string(),
-  description: z.string().optional(),
-  path: z.string(),
-  projectId: z.string().optional(),
-  agentUrl: z.string(),
-  cardUrl: z.string().optional(),
-  headers: z.record(ExternalAgentHeader$outboundSchema).optional(),
-  protocolVersion: z.string().optional(),
-  preferredTransport: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    displayName: "display_name",
-    projectId: "project_id",
-    agentUrl: "agent_url",
-    cardUrl: "card_url",
-    protocolVersion: "protocol_version",
-    preferredTransport: "preferred_transport",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    key: z.string(),
+    displayName: z.string(),
+    description: z.string().optional(),
+    path: z.string(),
+    projectId: z.string().optional(),
+    agentUrl: z.string(),
+    cardUrl: z.string().optional(),
+    headers: z.record(ExternalAgentHeader$outboundSchema).optional(),
+    protocolVersion: z.string().optional(),
+    preferredTransport: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      displayName: "display_name",
+      projectId: "project_id",
+      agentUrl: "agent_url",
+      cardUrl: "card_url",
+      protocolVersion: "protocol_version",
+      preferredTransport: "preferred_transport",
+    });
+  })
+);
 
 export function createExternalAgentRequestToJSON(
   createExternalAgentRequest: CreateExternalAgentRequest,

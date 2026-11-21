@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -74,7 +74,7 @@ export const Evaluator$inboundSchema: z.ZodType<
   Evaluator,
   z.ZodTypeDef,
   unknown
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function evaluatorFromJSON(
   jsonString: string,
@@ -87,8 +87,8 @@ export function evaluatorFromJSON(
 }
 
 /** @internal */
-export const Prompt$inboundSchema: z.ZodType<Prompt, z.ZodTypeDef, unknown> = z
-  .object({});
+export const Prompt$inboundSchema: z.ZodType<Prompt, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function promptFromJSON(
   jsonString: string,
@@ -102,28 +102,30 @@ export function promptFromJSON(
 
 /** @internal */
 export const HubItem$inboundSchema: z.ZodType<HubItem, z.ZodTypeDef, unknown> =
-  z.object({
-    id: z.string(),
-    entity_id: z.string(),
-    display_name: z.string(),
-    description: z.string(),
-    type: z.string(),
-    is_active: z.boolean().optional(),
-    is_private: z.boolean().optional(),
-    is_provided_by_orq: z.boolean().optional(),
-    engine: z.string().optional(),
-    key: z.string().optional(),
-    evaluator: z.lazy(() => Evaluator$inboundSchema).optional(),
-    prompt: z.lazy(() => Prompt$inboundSchema).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "entity_id": "entityId",
-      "display_name": "displayName",
-      "is_active": "isActive",
-      "is_private": "isPrivate",
-      "is_provided_by_orq": "isProvidedByOrq",
-    });
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string(),
+      entity_id: z.string(),
+      display_name: z.string(),
+      description: z.string(),
+      type: z.string(),
+      is_active: z.boolean().optional(),
+      is_private: z.boolean().optional(),
+      is_provided_by_orq: z.boolean().optional(),
+      engine: z.string().optional(),
+      key: z.string().optional(),
+      evaluator: z.lazy(() => Evaluator$inboundSchema).optional(),
+      prompt: z.lazy(() => Prompt$inboundSchema).optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "entity_id": "entityId",
+        "display_name": "displayName",
+        "is_active": "isActive",
+        "is_private": "isPrivate",
+        "is_provided_by_orq": "isProvidedByOrq",
+      });
+    })
+  );
 
 export function hubItemFromJSON(
   jsonString: string,

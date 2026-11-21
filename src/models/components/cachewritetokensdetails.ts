@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -18,15 +18,17 @@ export const CacheWriteTokensDetails$inboundSchema: z.ZodType<
   CacheWriteTokensDetails,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  ttl_12h_tokens: z.number().int(),
-  ttl_30m_tokens: z.number().int(),
-}).transform((v) => {
-  return remap$(v, {
-    "ttl_12h_tokens": "ttl12hTokens",
-    "ttl_30m_tokens": "ttl30mTokens",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ttl_12h_tokens: z.number().int(),
+    ttl_30m_tokens: z.number().int(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ttl_12h_tokens": "ttl12hTokens",
+      "ttl_30m_tokens": "ttl30mTokens",
+    });
+  })
+);
 
 export function cacheWriteTokensDetailsFromJSON(
   jsonString: string,

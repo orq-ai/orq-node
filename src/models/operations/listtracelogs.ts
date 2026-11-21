@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type ListTraceLogsRequest = {
   traceId: string;
@@ -23,16 +24,18 @@ export const ListTraceLogsRequest$outboundSchema: z.ZodType<
   ListTraceLogsRequest$Outbound,
   z.ZodTypeDef,
   ListTraceLogsRequest
-> = z.object({
-  traceId: z.string(),
-  limit: z.number().int().optional(),
-  pageToken: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    traceId: "trace_id",
-    pageToken: "page_token",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    traceId: z.string(),
+    limit: z.number().int().optional(),
+    pageToken: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      traceId: "trace_id",
+      pageToken: "page_token",
+    });
+  })
+);
 
 export function listTraceLogsRequestToJSON(
   listTraceLogsRequest: ListTraceLogsRequest,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -204,7 +204,9 @@ export const CreateClassifyQuestionsRouterClassifyInstructions$outboundSchema:
     CreateClassifyQuestionsRouterClassifyInstructions$Outbound,
     z.ZodTypeDef,
     CreateClassifyQuestionsRouterClassifyInstructions
-  > = z.union([z.string(), z.record(z.any()), z.array(z.any())]);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.union([z.string(), z.record(z.any()), z.array(z.any())])
+  );
 
 export function createClassifyQuestionsRouterClassifyInstructionsToJSON(
   createClassifyQuestionsRouterClassifyInstructions:
@@ -228,10 +230,12 @@ export const BoxQuestion$outboundSchema: z.ZodType<
   BoxQuestion$Outbound,
   z.ZodTypeDef,
   BoxQuestion
-> = z.object({
-  instructions: z.union([z.string(), z.record(z.any()), z.array(z.any())]),
-  type: z.literal("box"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    instructions: z.union([z.string(), z.record(z.any()), z.array(z.any())]),
+    type: z.literal("box"),
+  })
+);
 
 export function boxQuestionToJSON(boxQuestion: BoxQuestion): string {
   return JSON.stringify(BoxQuestion$outboundSchema.parse(boxQuestion));
@@ -247,7 +251,9 @@ export const CreateClassifyQuestionsInstructions$outboundSchema: z.ZodType<
   CreateClassifyQuestionsInstructions$Outbound,
   z.ZodTypeDef,
   CreateClassifyQuestionsInstructions
-> = z.union([z.string(), z.record(z.any()), z.array(z.any())]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.record(z.any()), z.array(z.any())])
+);
 
 export function createClassifyQuestionsInstructionsToJSON(
   createClassifyQuestionsInstructions: CreateClassifyQuestionsInstructions,
@@ -271,11 +277,13 @@ export const ScoreQuestion$outboundSchema: z.ZodType<
   ScoreQuestion$Outbound,
   z.ZodTypeDef,
   ScoreQuestion
-> = z.object({
-  criteria: z.array(z.any()),
-  instructions: z.union([z.string(), z.record(z.any()), z.array(z.any())]),
-  type: z.literal("score"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    criteria: z.array(z.any()),
+    instructions: z.union([z.string(), z.record(z.any()), z.array(z.any())]),
+    type: z.literal("score"),
+  })
+);
 
 export function scoreQuestionToJSON(scoreQuestion: ScoreQuestion): string {
   return JSON.stringify(ScoreQuestion$outboundSchema.parse(scoreQuestion));
@@ -292,7 +300,9 @@ export const QuestionsCriteria$outboundSchema: z.ZodType<
   QuestionsCriteria$Outbound,
   z.ZodTypeDef,
   QuestionsCriteria
-> = z.union([z.string(), z.record(z.any()), z.array(z.any())]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.record(z.any()), z.array(z.any())])
+);
 
 export function questionsCriteriaToJSON(
   questionsCriteria: QuestionsCriteria,
@@ -313,7 +323,9 @@ export const QuestionsInstructions$outboundSchema: z.ZodType<
   QuestionsInstructions$Outbound,
   z.ZodTypeDef,
   QuestionsInstructions
-> = z.union([z.string(), z.record(z.any()), z.array(z.any())]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.record(z.any()), z.array(z.any())])
+);
 
 export function questionsInstructionsToJSON(
   questionsInstructions: QuestionsInstructions,
@@ -335,13 +347,15 @@ export const ChoiceQuestion$outboundSchema: z.ZodType<
   ChoiceQuestion$Outbound,
   z.ZodTypeDef,
   ChoiceQuestion
-> = z.object({
-  criteria: z.record(
-    z.nullable(z.union([z.string(), z.record(z.any()), z.array(z.any())])),
-  ),
-  instructions: z.union([z.string(), z.record(z.any()), z.array(z.any())]),
-  type: z.literal("choice"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    criteria: z.record(
+      z.nullable(z.union([z.string(), z.record(z.any()), z.array(z.any())])),
+    ),
+    instructions: z.union([z.string(), z.record(z.any()), z.array(z.any())]),
+    type: z.literal("choice"),
+  })
+);
 
 export function choiceQuestionToJSON(choiceQuestion: ChoiceQuestion): string {
   return JSON.stringify(ChoiceQuestion$outboundSchema.parse(choiceQuestion));
@@ -355,7 +369,9 @@ export const False$outboundSchema: z.ZodType<
   False$Outbound,
   z.ZodTypeDef,
   False
-> = z.union([z.string(), z.record(z.any()), z.array(z.any())]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.record(z.any()), z.array(z.any())])
+);
 
 export function falseToJSON(value: False): string {
   return JSON.stringify(False$outboundSchema.parse(value));
@@ -366,7 +382,9 @@ export type True$Outbound = string | { [k: string]: any } | Array<any>;
 
 /** @internal */
 export const True$outboundSchema: z.ZodType<True$Outbound, z.ZodTypeDef, True> =
-  z.union([z.string(), z.record(z.any()), z.array(z.any())]);
+  /* @__PURE__ */ lazySchema$(() =>
+    z.union([z.string(), z.record(z.any()), z.array(z.any())])
+  );
 
 export function trueToJSON(value: True): string {
   return JSON.stringify(True$outboundSchema.parse(value));
@@ -383,10 +401,13 @@ export const Criteria$outboundSchema: z.ZodType<
   Criteria$Outbound,
   z.ZodTypeDef,
   Criteria
-> = z.object({
-  false: z.union([z.string(), z.record(z.any()), z.array(z.any())]).optional(),
-  true: z.union([z.string(), z.record(z.any()), z.array(z.any())]).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    false: z.union([z.string(), z.record(z.any()), z.array(z.any())])
+      .optional(),
+    true: z.union([z.string(), z.record(z.any()), z.array(z.any())]).optional(),
+  })
+);
 
 export function criteriaToJSON(criteria: Criteria): string {
   return JSON.stringify(Criteria$outboundSchema.parse(criteria));
@@ -400,7 +421,9 @@ export const Instructions$outboundSchema: z.ZodType<
   Instructions$Outbound,
   z.ZodTypeDef,
   Instructions
-> = z.union([z.string(), z.record(z.any()), z.array(z.any())]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.record(z.any()), z.array(z.any())])
+);
 
 export function instructionsToJSON(instructions: Instructions): string {
   return JSON.stringify(Instructions$outboundSchema.parse(instructions));
@@ -418,11 +441,13 @@ export const NoulQuestion$outboundSchema: z.ZodType<
   NoulQuestion$Outbound,
   z.ZodTypeDef,
   NoulQuestion
-> = z.object({
-  criteria: z.lazy(() => Criteria$outboundSchema).optional(),
-  instructions: z.union([z.string(), z.record(z.any()), z.array(z.any())]),
-  type: z.literal("noul"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    criteria: z.lazy(() => Criteria$outboundSchema).optional(),
+    instructions: z.union([z.string(), z.record(z.any()), z.array(z.any())]),
+    type: z.literal("noul"),
+  })
+);
 
 export function noulQuestionToJSON(noulQuestion: NoulQuestion): string {
   return JSON.stringify(NoulQuestion$outboundSchema.parse(noulQuestion));
@@ -440,12 +465,14 @@ export const Questions$outboundSchema: z.ZodType<
   Questions$Outbound,
   z.ZodTypeDef,
   Questions
-> = z.union([
-  z.lazy(() => NoulQuestion$outboundSchema),
-  z.lazy(() => ChoiceQuestion$outboundSchema),
-  z.lazy(() => ScoreQuestion$outboundSchema),
-  z.lazy(() => BoxQuestion$outboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => NoulQuestion$outboundSchema),
+    z.lazy(() => ChoiceQuestion$outboundSchema),
+    z.lazy(() => ScoreQuestion$outboundSchema),
+    z.lazy(() => BoxQuestion$outboundSchema),
+  ])
+);
 
 export function questionsToJSON(questions: Questions): string {
   return JSON.stringify(Questions$outboundSchema.parse(questions));
@@ -459,7 +486,9 @@ export const State$outboundSchema: z.ZodType<
   State$Outbound,
   z.ZodTypeDef,
   State
-> = z.union([z.string(), z.record(z.any()), z.array(z.any())]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.record(z.any()), z.array(z.any())])
+);
 
 export function stateToJSON(state: State): string {
   return JSON.stringify(State$outboundSchema.parse(state));
@@ -496,37 +525,37 @@ export const CreateClassifyRequestBody$outboundSchema: z.ZodType<
   CreateClassifyRequestBody$Outbound,
   z.ZodTypeDef,
   CreateClassifyRequestBody
-> = z.object({
-  assets: z.record(components.ClassifyAsset$outboundSchema).optional(),
-  cache: components.ClassifyCacheConfig$outboundSchema.optional(),
-  fallbackOnCodes: z.nullable(z.array(z.number().int())).optional(),
-  fallbacks: z.nullable(z.array(components.FallbackConfig$outboundSchema))
-    .optional(),
-  identity: components.ResponseIdentity$outboundSchema.optional(),
-  metadata: z.record(z.string()).optional(),
-  model: z.string(),
-  name: z.string().optional(),
-  promptCacheKey: z.string().optional(),
-  promptCacheOptions: components.ClassifyPromptCacheOptions$outboundSchema
-    .optional(),
-  questions: z.record(
-    z.union([
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    assets: z.record(components.ClassifyAsset$outboundSchema).optional(),
+    cache: components.ClassifyCacheConfig$outboundSchema.optional(),
+    fallbackOnCodes: z.nullable(z.array(z.number().int())).optional(),
+    fallbacks: z.nullable(z.array(components.FallbackConfig$outboundSchema))
+      .optional(),
+    identity: components.ResponseIdentity$outboundSchema.optional(),
+    metadata: z.record(z.string()).optional(),
+    model: z.string(),
+    name: z.string().optional(),
+    promptCacheKey: z.string().optional(),
+    promptCacheOptions: components.ClassifyPromptCacheOptions$outboundSchema
+      .optional(),
+    questions: z.record(z.union([
       z.lazy(() => NoulQuestion$outboundSchema),
       z.lazy(() => ChoiceQuestion$outboundSchema),
       z.lazy(() => ScoreQuestion$outboundSchema),
       z.lazy(() => BoxQuestion$outboundSchema),
-    ]),
-  ),
-  retry: components.ClassifyRetryConfig$outboundSchema.optional(),
-  state: z.union([z.string(), z.record(z.any()), z.array(z.any())]),
-  timeout: components.ClassifyTimeoutConfig$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    fallbackOnCodes: "fallback_on_codes",
-    promptCacheKey: "prompt_cache_key",
-    promptCacheOptions: "prompt_cache_options",
-  });
-});
+    ])),
+    retry: components.ClassifyRetryConfig$outboundSchema.optional(),
+    state: z.union([z.string(), z.record(z.any()), z.array(z.any())]),
+    timeout: components.ClassifyTimeoutConfig$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      fallbackOnCodes: "fallback_on_codes",
+      promptCacheKey: "prompt_cache_key",
+      promptCacheOptions: "prompt_cache_options",
+    });
+  })
+);
 
 export function createClassifyRequestBodyToJSON(
   createClassifyRequestBody: CreateClassifyRequestBody,
@@ -541,12 +570,14 @@ export const CreateClassifyResponseBody$inboundSchema: z.ZodType<
   CreateClassifyResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  answers: z.record(components.ClassifyAnswer$inboundSchema),
-  model: z.string(),
-  telemetry: components.ResponseTelemetry$inboundSchema.optional(),
-  usage: components.ClassifyUsage$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    answers: z.record(components.ClassifyAnswer$inboundSchema),
+    model: z.string(),
+    telemetry: components.ResponseTelemetry$inboundSchema.optional(),
+    usage: components.ClassifyUsage$inboundSchema,
+  })
+);
 
 export function createClassifyResponseBodyFromJSON(
   jsonString: string,

@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type ModelFusionDeleteRequest = {
   modelFusionId: string;
@@ -19,13 +20,15 @@ export const ModelFusionDeleteRequest$outboundSchema: z.ZodType<
   ModelFusionDeleteRequest$Outbound,
   z.ZodTypeDef,
   ModelFusionDeleteRequest
-> = z.object({
-  modelFusionId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    modelFusionId: "model_fusion_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    modelFusionId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      modelFusionId: "model_fusion_id",
+    });
+  })
+);
 
 export function modelFusionDeleteRequestToJSON(
   modelFusionDeleteRequest: ModelFusionDeleteRequest,

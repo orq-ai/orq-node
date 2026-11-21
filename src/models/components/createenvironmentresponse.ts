@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { Environment, Environment$inboundSchema } from "./environment.js";
@@ -17,9 +17,11 @@ export const CreateEnvironmentResponse$inboundSchema: z.ZodType<
   CreateEnvironmentResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  environment: Environment$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    environment: Environment$inboundSchema,
+  })
+);
 
 export function createEnvironmentResponseFromJSON(
   jsonString: string,

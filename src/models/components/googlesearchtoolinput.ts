@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 /**
  * Performs Google searches to retrieve web content
@@ -32,15 +33,17 @@ export const GoogleSearchToolInput$outboundSchema: z.ZodType<
   GoogleSearchToolInput$Outbound,
   z.ZodTypeDef,
   GoogleSearchToolInput
-> = z.object({
-  type: z.literal("google_search"),
-  requiresApproval: z.boolean().optional(),
-  configuration: z.record(z.any()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    requiresApproval: "requires_approval",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("google_search"),
+    requiresApproval: z.boolean().optional(),
+    configuration: z.record(z.any()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      requiresApproval: "requires_approval",
+    });
+  })
+);
 
 export function googleSearchToolInputToJSON(
   googleSearchToolInput: GoogleSearchToolInput,

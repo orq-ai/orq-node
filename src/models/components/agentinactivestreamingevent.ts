@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -197,21 +197,25 @@ export type AgentInactiveStreamingEvent = {
 /** @internal */
 export const AgentInactiveStreamingEventRole$inboundSchema: z.ZodNativeEnum<
   typeof AgentInactiveStreamingEventRole
-> = z.nativeEnum(AgentInactiveStreamingEventRole);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(AgentInactiveStreamingEventRole)
+);
 
 /** @internal */
 export const AgentInactiveStreamingEventParts$inboundSchema: z.ZodType<
   AgentInactiveStreamingEventParts,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  TextPart$inboundSchema,
-  ErrorPart$inboundSchema,
-  DataPart$inboundSchema,
-  FilePart$inboundSchema,
-  ToolCallPart$inboundSchema,
-  ToolResultPart$inboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    TextPart$inboundSchema,
+    ErrorPart$inboundSchema,
+    DataPart$inboundSchema,
+    FilePart$inboundSchema,
+    ToolCallPart$inboundSchema,
+    ToolResultPart$inboundSchema,
+  ])
+);
 
 export function agentInactiveStreamingEventPartsFromJSON(
   jsonString: string,
@@ -228,21 +232,23 @@ export const LastMessageFull$inboundSchema: z.ZodType<
   LastMessageFull,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  messageId: z.string().optional(),
-  role: AgentInactiveStreamingEventRole$inboundSchema,
-  parts: z.array(
-    z.union([
-      TextPart$inboundSchema,
-      ErrorPart$inboundSchema,
-      DataPart$inboundSchema,
-      FilePart$inboundSchema,
-      ToolCallPart$inboundSchema,
-      ToolResultPart$inboundSchema,
-    ]),
-  ),
-  metadata: z.record(z.any()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    messageId: z.string().optional(),
+    role: AgentInactiveStreamingEventRole$inboundSchema,
+    parts: z.array(
+      z.union([
+        TextPart$inboundSchema,
+        ErrorPart$inboundSchema,
+        DataPart$inboundSchema,
+        FilePart$inboundSchema,
+        ToolCallPart$inboundSchema,
+        ToolResultPart$inboundSchema,
+      ]),
+    ),
+    metadata: z.record(z.any()).optional(),
+  })
+);
 
 export function lastMessageFullFromJSON(
   jsonString: string,
@@ -256,23 +262,29 @@ export function lastMessageFullFromJSON(
 
 /** @internal */
 export const AgentInactiveStreamingEventFinishReason$inboundSchema:
-  z.ZodNativeEnum<typeof AgentInactiveStreamingEventFinishReason> = z
-    .nativeEnum(AgentInactiveStreamingEventFinishReason);
+  z.ZodNativeEnum<typeof AgentInactiveStreamingEventFinishReason> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(AgentInactiveStreamingEventFinishReason)
+    );
 
 /** @internal */
 export const AgentInactiveStreamingEventDataType$inboundSchema: z.ZodNativeEnum<
   typeof AgentInactiveStreamingEventDataType
-> = z.nativeEnum(AgentInactiveStreamingEventDataType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(AgentInactiveStreamingEventDataType)
+);
 
 /** @internal */
 export const AgentInactiveStreamingEventFunction$inboundSchema: z.ZodType<
   AgentInactiveStreamingEventFunction,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string().optional(),
-  arguments: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    arguments: z.string().optional(),
+  })
+);
 
 export function agentInactiveStreamingEventFunctionFromJSON(
   jsonString: string,
@@ -291,11 +303,13 @@ export const AgentInactiveStreamingEventPendingToolCalls$inboundSchema:
     AgentInactiveStreamingEventPendingToolCalls,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    id: z.string(),
-    type: AgentInactiveStreamingEventDataType$inboundSchema,
-    function: z.lazy(() => AgentInactiveStreamingEventFunction$inboundSchema),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string(),
+      type: AgentInactiveStreamingEventDataType$inboundSchema,
+      function: z.lazy(() => AgentInactiveStreamingEventFunction$inboundSchema),
+    })
+  );
 
 export function agentInactiveStreamingEventPendingToolCallsFromJSON(
   jsonString: string,
@@ -319,17 +333,19 @@ export const AgentInactiveStreamingEventPromptTokensDetails$inboundSchema:
     AgentInactiveStreamingEventPromptTokensDetails,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    cached_tokens: z.nullable(z.number().int()).optional(),
-    cache_creation_tokens: z.nullable(z.number().int()).optional(),
-    audio_tokens: z.nullable(z.number().int()).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "cached_tokens": "cachedTokens",
-      "cache_creation_tokens": "cacheCreationTokens",
-      "audio_tokens": "audioTokens",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      cached_tokens: z.nullable(z.number().int()).optional(),
+      cache_creation_tokens: z.nullable(z.number().int()).optional(),
+      audio_tokens: z.nullable(z.number().int()).optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "cached_tokens": "cachedTokens",
+        "cache_creation_tokens": "cacheCreationTokens",
+        "audio_tokens": "audioTokens",
+      });
+    })
+  );
 
 export function agentInactiveStreamingEventPromptTokensDetailsFromJSON(
   jsonString: string,
@@ -353,19 +369,21 @@ export const AgentInactiveStreamingEventCompletionTokensDetails$inboundSchema:
     AgentInactiveStreamingEventCompletionTokensDetails,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    reasoning_tokens: z.nullable(z.number()).optional(),
-    accepted_prediction_tokens: z.nullable(z.number()).optional(),
-    rejected_prediction_tokens: z.nullable(z.number()).optional(),
-    audio_tokens: z.nullable(z.number().int()).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "reasoning_tokens": "reasoningTokens",
-      "accepted_prediction_tokens": "acceptedPredictionTokens",
-      "rejected_prediction_tokens": "rejectedPredictionTokens",
-      "audio_tokens": "audioTokens",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      reasoning_tokens: z.nullable(z.number()).optional(),
+      accepted_prediction_tokens: z.nullable(z.number()).optional(),
+      rejected_prediction_tokens: z.nullable(z.number()).optional(),
+      audio_tokens: z.nullable(z.number().int()).optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "reasoning_tokens": "reasoningTokens",
+        "accepted_prediction_tokens": "acceptedPredictionTokens",
+        "rejected_prediction_tokens": "rejectedPredictionTokens",
+        "audio_tokens": "audioTokens",
+      });
+    })
+  );
 
 export function agentInactiveStreamingEventCompletionTokensDetailsFromJSON(
   jsonString: string,
@@ -388,29 +406,33 @@ export const AgentInactiveStreamingEventUsage$inboundSchema: z.ZodType<
   AgentInactiveStreamingEventUsage,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  completion_tokens: z.number().optional(),
-  prompt_tokens: z.number().optional(),
-  total_tokens: z.number().optional(),
-  prompt_tokens_details: z.nullable(
-    z.lazy(() => AgentInactiveStreamingEventPromptTokensDetails$inboundSchema),
-  ).optional(),
-  completion_tokens_details: z.nullable(
-    z.lazy(() =>
-      AgentInactiveStreamingEventCompletionTokensDetails$inboundSchema
-    ),
-  ).optional(),
-  time_to_first_token: z.number().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "completion_tokens": "completionTokens",
-    "prompt_tokens": "promptTokens",
-    "total_tokens": "totalTokens",
-    "prompt_tokens_details": "promptTokensDetails",
-    "completion_tokens_details": "completionTokensDetails",
-    "time_to_first_token": "timeToFirstToken",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    completion_tokens: z.number().optional(),
+    prompt_tokens: z.number().optional(),
+    total_tokens: z.number().optional(),
+    prompt_tokens_details: z.nullable(
+      z.lazy(() =>
+        AgentInactiveStreamingEventPromptTokensDetails$inboundSchema
+      ),
+    ).optional(),
+    completion_tokens_details: z.nullable(
+      z.lazy(() =>
+        AgentInactiveStreamingEventCompletionTokensDetails$inboundSchema
+      ),
+    ).optional(),
+    time_to_first_token: z.number().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "completion_tokens": "completionTokens",
+      "prompt_tokens": "promptTokens",
+      "total_tokens": "totalTokens",
+      "prompt_tokens_details": "promptTokensDetails",
+      "completion_tokens_details": "completionTokensDetails",
+      "time_to_first_token": "timeToFirstToken",
+    });
+  })
+);
 
 export function agentInactiveStreamingEventUsageFromJSON(
   jsonString: string,
@@ -424,20 +446,22 @@ export function agentInactiveStreamingEventUsageFromJSON(
 
 /** @internal */
 export const Billing$inboundSchema: z.ZodType<Billing, z.ZodTypeDef, unknown> =
-  z.object({
-    total_cost: z.number(),
-    input_cost: z.number(),
-    output_cost: z.number(),
-    billable: z.boolean(),
-    integration_id: z.nullable(z.string()),
-  }).transform((v) => {
-    return remap$(v, {
-      "total_cost": "totalCost",
-      "input_cost": "inputCost",
-      "output_cost": "outputCost",
-      "integration_id": "integrationId",
-    });
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      total_cost: z.number(),
+      input_cost: z.number(),
+      output_cost: z.number(),
+      billable: z.boolean(),
+      integration_id: z.nullable(z.string()),
+    }).transform((v) => {
+      return remap$(v, {
+        "total_cost": "totalCost",
+        "input_cost": "inputCost",
+        "output_cost": "outputCost",
+        "integration_id": "integrationId",
+      });
+    })
+  );
 
 export function billingFromJSON(
   jsonString: string,
@@ -454,26 +478,28 @@ export const AgentInactiveStreamingEventData$inboundSchema: z.ZodType<
   AgentInactiveStreamingEventData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  last_message: z.string(),
-  last_message_full: z.lazy(() => LastMessageFull$inboundSchema).optional(),
-  finish_reason: AgentInactiveStreamingEventFinishReason$inboundSchema,
-  pending_tool_calls: z.array(
-    z.lazy(() => AgentInactiveStreamingEventPendingToolCalls$inboundSchema),
-  ).optional(),
-  usage: z.lazy(() => AgentInactiveStreamingEventUsage$inboundSchema)
-    .optional(),
-  billing: z.lazy(() => Billing$inboundSchema).optional(),
-  workflowRunId: z.string(),
-  responseId: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "last_message": "lastMessage",
-    "last_message_full": "lastMessageFull",
-    "finish_reason": "finishReason",
-    "pending_tool_calls": "pendingToolCalls",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    last_message: z.string(),
+    last_message_full: z.lazy(() => LastMessageFull$inboundSchema).optional(),
+    finish_reason: AgentInactiveStreamingEventFinishReason$inboundSchema,
+    pending_tool_calls: z.array(
+      z.lazy(() => AgentInactiveStreamingEventPendingToolCalls$inboundSchema),
+    ).optional(),
+    usage: z.lazy(() => AgentInactiveStreamingEventUsage$inboundSchema)
+      .optional(),
+    billing: z.lazy(() => Billing$inboundSchema).optional(),
+    workflowRunId: z.string(),
+    responseId: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "last_message": "lastMessage",
+      "last_message_full": "lastMessageFull",
+      "finish_reason": "finishReason",
+      "pending_tool_calls": "pendingToolCalls",
+    });
+  })
+);
 
 export function agentInactiveStreamingEventDataFromJSON(
   jsonString: string,
@@ -490,11 +516,13 @@ export const AgentInactiveStreamingEvent$inboundSchema: z.ZodType<
   AgentInactiveStreamingEvent,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("event.agents.inactive"),
-  timestamp: z.string(),
-  data: z.lazy(() => AgentInactiveStreamingEventData$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("event.agents.inactive"),
+    timestamp: z.string(),
+    data: z.lazy(() => AgentInactiveStreamingEventData$inboundSchema),
+  })
+);
 
 export function agentInactiveStreamingEventFromJSON(
   jsonString: string,

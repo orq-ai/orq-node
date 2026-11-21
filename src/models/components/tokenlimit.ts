@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -24,7 +24,7 @@ export type TokenLimit = {
 /** @internal */
 export const TokenLimitPeriod$inboundSchema: z.ZodNativeEnum<
   typeof TokenLimitPeriod
-> = z.nativeEnum(TokenLimitPeriod);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(TokenLimitPeriod));
 /** @internal */
 export const TokenLimitPeriod$outboundSchema: z.ZodNativeEnum<
   typeof TokenLimitPeriod
@@ -35,10 +35,12 @@ export const TokenLimit$inboundSchema: z.ZodType<
   TokenLimit,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  amount: z.number().int(),
-  period: TokenLimitPeriod$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    amount: z.number().int(),
+    period: TokenLimitPeriod$inboundSchema,
+  })
+);
 /** @internal */
 export type TokenLimit$Outbound = {
   amount: number;
@@ -50,10 +52,12 @@ export const TokenLimit$outboundSchema: z.ZodType<
   TokenLimit$Outbound,
   z.ZodTypeDef,
   TokenLimit
-> = z.object({
-  amount: z.number().int(),
-  period: TokenLimitPeriod$outboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    amount: z.number().int(),
+    period: TokenLimitPeriod$outboundSchema,
+  })
+);
 
 export function tokenLimitToJSON(tokenLimit: TokenLimit): string {
   return JSON.stringify(TokenLimit$outboundSchema.parse(tokenLimit));

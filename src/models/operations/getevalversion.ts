@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -29,14 +29,16 @@ export const GetEvalVersionRequest$outboundSchema: z.ZodType<
   GetEvalVersionRequest$Outbound,
   z.ZodTypeDef,
   GetEvalVersionRequest
-> = z.object({
-  id: z.string(),
-  versionId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    versionId: "version_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    versionId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      versionId: "version_id",
+    });
+  })
+);
 
 export function getEvalVersionRequestToJSON(
   getEvalVersionRequest: GetEvalVersionRequest,
@@ -51,7 +53,7 @@ export const GetEvalVersionResponseBody$inboundSchema: z.ZodType<
   GetEvalVersionResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function getEvalVersionResponseBodyFromJSON(
   jsonString: string,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -32,18 +32,22 @@ export const AlertEvidence$inboundSchema: z.ZodType<
   AlertEvidence,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  trace_id: z.string(),
-  span_id: z.string(),
-  start_time: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  value: z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    "trace_id": "traceId",
-    "span_id": "spanId",
-    "start_time": "startTime",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    trace_id: z.string(),
+    span_id: z.string(),
+    start_time: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    value: z.number(),
+  }).transform((v) => {
+    return remap$(v, {
+      "trace_id": "traceId",
+      "span_id": "spanId",
+      "start_time": "startTime",
+    });
+  })
+);
 
 export function alertEvidenceFromJSON(
   jsonString: string,

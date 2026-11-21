@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -39,18 +39,20 @@ export const McpToolAnnotations$inboundSchema: z.ZodType<
   McpToolAnnotations,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  read_only: z.boolean().optional(),
-  destructive: z.boolean().optional(),
-  idempotent: z.boolean().optional(),
-  open_world: z.boolean().optional(),
-  title: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "read_only": "readOnly",
-    "open_world": "openWorld",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    read_only: z.boolean().optional(),
+    destructive: z.boolean().optional(),
+    idempotent: z.boolean().optional(),
+    open_world: z.boolean().optional(),
+    title: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "read_only": "readOnly",
+      "open_world": "openWorld",
+    });
+  })
+);
 
 export function mcpToolAnnotationsFromJSON(
   jsonString: string,

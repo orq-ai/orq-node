@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -17,13 +17,15 @@ export const OutputTokensDetails$inboundSchema: z.ZodType<
   OutputTokensDetails,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  reasoning_tokens: z.number().int(),
-}).transform((v) => {
-  return remap$(v, {
-    "reasoning_tokens": "reasoningTokens",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    reasoning_tokens: z.number().int(),
+  }).transform((v) => {
+    return remap$(v, {
+      "reasoning_tokens": "reasoningTokens",
+    });
+  })
+);
 
 export function outputTokensDetailsFromJSON(
   jsonString: string,

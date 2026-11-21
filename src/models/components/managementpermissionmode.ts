@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 
 export const ManagementPermissionMode = {
@@ -17,7 +18,7 @@ export type ManagementPermissionMode = ClosedEnum<
 /** @internal */
 export const ManagementPermissionMode$inboundSchema: z.ZodNativeEnum<
   typeof ManagementPermissionMode
-> = z.nativeEnum(ManagementPermissionMode);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ManagementPermissionMode));
 /** @internal */
 export const ManagementPermissionMode$outboundSchema: z.ZodNativeEnum<
   typeof ManagementPermissionMode

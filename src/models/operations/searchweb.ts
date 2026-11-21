@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -192,9 +192,11 @@ export const SearchWebIdentity$outboundSchema: z.ZodType<
   SearchWebIdentity$Outbound,
   z.ZodTypeDef,
   SearchWebIdentity
-> = z.object({
-  id: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+  })
+);
 
 export function searchWebIdentityToJSON(
   searchWebIdentity: SearchWebIdentity,
@@ -205,8 +207,8 @@ export function searchWebIdentityToJSON(
 }
 
 /** @internal */
-export const SearchWebId$outboundSchema: z.ZodNativeEnum<typeof SearchWebId> = z
-  .nativeEnum(SearchWebId);
+export const SearchWebId$outboundSchema: z.ZodNativeEnum<typeof SearchWebId> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(SearchWebId));
 
 /** @internal */
 export type SearchWebPlugins$Outbound = {
@@ -224,20 +226,22 @@ export const SearchWebPlugins$outboundSchema: z.ZodType<
   SearchWebPlugins$Outbound,
   z.ZodTypeDef,
   SearchWebPlugins
-> = z.object({
-  entities: z.nullable(z.array(z.string())).optional(),
-  entityThresholds: z.record(z.number()).optional(),
-  id: SearchWebId$outboundSchema,
-  language: z.string().optional(),
-  onFailure: z.string().optional(),
-  regions: z.nullable(z.array(z.string())).optional(),
-  threshold: z.number().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    entityThresholds: "entity_thresholds",
-    onFailure: "on_failure",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    entities: z.nullable(z.array(z.string())).optional(),
+    entityThresholds: z.record(z.number()).optional(),
+    id: SearchWebId$outboundSchema,
+    language: z.string().optional(),
+    onFailure: z.string().optional(),
+    regions: z.nullable(z.array(z.string())).optional(),
+    threshold: z.number().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      entityThresholds: "entity_thresholds",
+      onFailure: "on_failure",
+    });
+  })
+);
 
 export function searchWebPluginsToJSON(
   searchWebPlugins: SearchWebPlugins,
@@ -248,8 +252,8 @@ export function searchWebPluginsToJSON(
 }
 
 /** @internal */
-export const Provider$outboundSchema: z.ZodNativeEnum<typeof Provider> = z
-  .nativeEnum(Provider);
+export const Provider$outboundSchema: z.ZodNativeEnum<typeof Provider> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Provider));
 
 /** @internal */
 export type SearchWebRequestBody$Outbound = {
@@ -265,13 +269,15 @@ export const SearchWebRequestBody$outboundSchema: z.ZodType<
   SearchWebRequestBody$Outbound,
   z.ZodTypeDef,
   SearchWebRequestBody
-> = z.object({
-  identity: z.lazy(() => SearchWebIdentity$outboundSchema).optional(),
-  limit: z.number().int().default(10),
-  plugins: z.array(z.lazy(() => SearchWebPlugins$outboundSchema)).optional(),
-  provider: Provider$outboundSchema,
-  query: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    identity: z.lazy(() => SearchWebIdentity$outboundSchema).optional(),
+    limit: z.number().int().default(10),
+    plugins: z.array(z.lazy(() => SearchWebPlugins$outboundSchema)).optional(),
+    provider: Provider$outboundSchema,
+    query: z.string(),
+  })
+);
 
 export function searchWebRequestBodyToJSON(
   searchWebRequestBody: SearchWebRequestBody,
@@ -282,12 +288,14 @@ export function searchWebRequestBodyToJSON(
 }
 
 /** @internal */
-export const Items$inboundSchema: z.ZodType<Items, z.ZodTypeDef, unknown> = z
-  .object({
-    description: z.string(),
-    title: z.string(),
-    url: z.string(),
-  });
+export const Items$inboundSchema: z.ZodType<Items, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      description: z.string(),
+      title: z.string(),
+      url: z.string(),
+    })
+  );
 
 export function itemsFromJSON(
   jsonString: string,
@@ -302,19 +310,21 @@ export function itemsFromJSON(
 /** @internal */
 export const SearchWebProvider$inboundSchema: z.ZodNativeEnum<
   typeof SearchWebProvider
-> = z.nativeEnum(SearchWebProvider);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(SearchWebProvider));
 
 /** @internal */
 export const SearchWebMetadata$inboundSchema: z.ZodType<
   SearchWebMetadata,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  latencyMs: z.number().int(),
-  provider: SearchWebProvider$inboundSchema,
-  query: z.string(),
-  requestId: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    latencyMs: z.number().int(),
+    provider: SearchWebProvider$inboundSchema,
+    query: z.string(),
+    requestId: z.string(),
+  })
+);
 
 export function searchWebMetadataFromJSON(
   jsonString: string,
@@ -331,10 +341,12 @@ export const SearchWebResponseBody$inboundSchema: z.ZodType<
   SearchWebResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  items: z.array(z.lazy(() => Items$inboundSchema)),
-  metadata: z.lazy(() => SearchWebMetadata$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    items: z.array(z.lazy(() => Items$inboundSchema)),
+    metadata: z.lazy(() => SearchWebMetadata$inboundSchema),
+  })
+);
 
 export function searchWebResponseBodyFromJSON(
   jsonString: string,
@@ -351,15 +363,17 @@ export const SearchWebResponse$inboundSchema: z.ZodType<
   SearchWebResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  Headers: z.record(z.array(z.string())).default({}),
-  Result: z.lazy(() => SearchWebResponseBody$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "Headers": "headers",
-    "Result": "result",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    Headers: z.record(z.array(z.string())).default({}),
+    Result: z.lazy(() => SearchWebResponseBody$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "Headers": "headers",
+      "Result": "result",
+    });
+  })
+);
 
 export function searchWebResponseFromJSON(
   jsonString: string,

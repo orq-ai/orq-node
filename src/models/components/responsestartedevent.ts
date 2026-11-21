@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { Telemetry, Telemetry$inboundSchema } from "./telemetry.js";
@@ -54,16 +54,18 @@ export type ResponseStartedEvent = {
 };
 
 /** @internal */
-export const Data$inboundSchema: z.ZodType<Data, z.ZodTypeDef, unknown> = z
-  .object({
-    responseId: z.string(),
-    taskId: z.string(),
-    model: z.string(),
-    workflowRunId: z.string(),
-    userMessageId: z.string().optional(),
-    assistantMessageId: z.string().optional(),
-    telemetry: Telemetry$inboundSchema.optional(),
-  });
+export const Data$inboundSchema: z.ZodType<Data, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      responseId: z.string(),
+      taskId: z.string(),
+      model: z.string(),
+      workflowRunId: z.string(),
+      userMessageId: z.string().optional(),
+      assistantMessageId: z.string().optional(),
+      telemetry: Telemetry$inboundSchema.optional(),
+    })
+  );
 
 export function dataFromJSON(
   jsonString: string,
@@ -80,11 +82,13 @@ export const ResponseStartedEvent$inboundSchema: z.ZodType<
   ResponseStartedEvent,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("response.started"),
-  timestamp: z.string(),
-  data: z.lazy(() => Data$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("response.started"),
+    timestamp: z.string(),
+    data: z.lazy(() => Data$inboundSchema),
+  })
+);
 
 export function responseStartedEventFromJSON(
   jsonString: string,

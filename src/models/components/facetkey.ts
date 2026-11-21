@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { FacetValue, FacetValue$inboundSchema } from "./facetvalue.js";
@@ -31,20 +31,22 @@ export const FacetKey$inboundSchema: z.ZodType<
   FacetKey,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  key: z.string().optional(),
-  field: z.string().optional(),
-  log_count: z.string().optional(),
-  distinct_value_count: z.string().optional(),
-  top_values: z.array(FacetValue$inboundSchema).optional(),
-  filterable: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "log_count": "logCount",
-    "distinct_value_count": "distinctValueCount",
-    "top_values": "topValues",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    key: z.string().optional(),
+    field: z.string().optional(),
+    log_count: z.string().optional(),
+    distinct_value_count: z.string().optional(),
+    top_values: z.array(FacetValue$inboundSchema).optional(),
+    filterable: z.boolean().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "log_count": "logCount",
+      "distinct_value_count": "distinctValueCount",
+      "top_values": "topValues",
+    });
+  })
+);
 
 export function facetKeyFromJSON(
   jsonString: string,

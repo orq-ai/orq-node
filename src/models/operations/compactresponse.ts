@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
@@ -126,12 +126,12 @@ export type CompactResponseResponseBody = {
 };
 
 /** @internal */
-export const InputRole$outboundSchema: z.ZodNativeEnum<typeof InputRole> = z
-  .nativeEnum(InputRole);
+export const InputRole$outboundSchema: z.ZodNativeEnum<typeof InputRole> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(InputRole));
 
 /** @internal */
-export const InputType$outboundSchema: z.ZodNativeEnum<typeof InputType> = z
-  .nativeEnum(InputType);
+export const InputType$outboundSchema: z.ZodNativeEnum<typeof InputType> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(InputType));
 
 /** @internal */
 export type Input2$Outbound = {
@@ -146,12 +146,14 @@ export const Input2$outboundSchema: z.ZodType<
   Input2$Outbound,
   z.ZodTypeDef,
   Input2
-> = z.object({
-  content: z.string().optional(),
-  id: z.string().optional(),
-  role: InputRole$outboundSchema.optional(),
-  type: InputType$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    content: z.string().optional(),
+    id: z.string().optional(),
+    role: InputRole$outboundSchema.optional(),
+    type: InputType$outboundSchema.optional(),
+  })
+);
 
 export function input2ToJSON(input2: Input2): string {
   return JSON.stringify(Input2$outboundSchema.parse(input2));
@@ -165,7 +167,9 @@ export const CompactResponseInput$outboundSchema: z.ZodType<
   CompactResponseInput$Outbound,
   z.ZodTypeDef,
   CompactResponseInput
-> = z.union([z.string(), z.array(z.lazy(() => Input2$outboundSchema))]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.array(z.lazy(() => Input2$outboundSchema))])
+);
 
 export function compactResponseInputToJSON(
   compactResponseInput: CompactResponseInput,
@@ -189,19 +193,21 @@ export const CompactResponseRequestBody$outboundSchema: z.ZodType<
   CompactResponseRequestBody$Outbound,
   z.ZodTypeDef,
   CompactResponseRequestBody
-> = z.object({
-  input: z.union([z.string(), z.array(z.lazy(() => Input2$outboundSchema))])
-    .optional(),
-  instructions: z.string().optional(),
-  model: z.string().optional(),
-  previousResponseId: z.string().optional(),
-  promptCacheKey: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    previousResponseId: "previous_response_id",
-    promptCacheKey: "prompt_cache_key",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    input: z.union([z.string(), z.array(z.lazy(() => Input2$outboundSchema))])
+      .optional(),
+    instructions: z.string().optional(),
+    model: z.string().optional(),
+    previousResponseId: z.string().optional(),
+    promptCacheKey: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      previousResponseId: "previous_response_id",
+      promptCacheKey: "prompt_cache_key",
+    });
+  })
+);
 
 export function compactResponseRequestBodyToJSON(
   compactResponseRequestBody: CompactResponseRequestBody,
@@ -214,24 +220,26 @@ export function compactResponseRequestBodyToJSON(
 /** @internal */
 export const CompactResponseObject$inboundSchema: z.ZodNativeEnum<
   typeof CompactResponseObject
-> = z.nativeEnum(CompactResponseObject);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(CompactResponseObject));
 
 /** @internal */
 export const CompactResponseResponseBody$inboundSchema: z.ZodType<
   CompactResponseResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  created_at: z.number().int(),
-  id: z.string(),
-  object: CompactResponseObject$inboundSchema,
-  output: z.nullable(z.array(z.any())),
-  usage: components.PublicUsage$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "created_at": "createdAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    created_at: z.number().int(),
+    id: z.string(),
+    object: CompactResponseObject$inboundSchema,
+    output: z.nullable(z.array(z.any())),
+    usage: components.PublicUsage$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "created_at": "createdAt",
+    });
+  })
+);
 
 export function compactResponseResponseBodyFromJSON(
   jsonString: string,

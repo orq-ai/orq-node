@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import {
   GuardrailRuleExpression,
   GuardrailRuleExpression$Outbound,
@@ -52,20 +53,22 @@ export const CreateGuardrailRuleRequest$outboundSchema: z.ZodType<
   CreateGuardrailRuleRequest$Outbound,
   z.ZodTypeDef,
   CreateGuardrailRuleRequest
-> = z.object({
-  displayName: z.string(),
-  description: z.string().optional(),
-  projectId: z.string().optional(),
-  enabled: z.boolean().optional(),
-  expression: GuardrailRuleExpression$outboundSchema.optional(),
-  guardrails: z.array(GuardrailRuleGuardrail$outboundSchema).optional(),
-  plugins: z.array(GuardrailRulePlugin$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    displayName: "display_name",
-    projectId: "project_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    displayName: z.string(),
+    description: z.string().optional(),
+    projectId: z.string().optional(),
+    enabled: z.boolean().optional(),
+    expression: GuardrailRuleExpression$outboundSchema.optional(),
+    guardrails: z.array(GuardrailRuleGuardrail$outboundSchema).optional(),
+    plugins: z.array(GuardrailRulePlugin$outboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      displayName: "display_name",
+      projectId: "project_id",
+    });
+  })
+);
 
 export function createGuardrailRuleRequestToJSON(
   createGuardrailRuleRequest: CreateGuardrailRuleRequest,

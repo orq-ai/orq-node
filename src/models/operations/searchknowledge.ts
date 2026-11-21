@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import * as components from "../components/index.js";
 
 export type SearchKnowledgeRequest = {
@@ -28,15 +29,17 @@ export const SearchKnowledgeRequest$outboundSchema: z.ZodType<
   SearchKnowledgeRequest$Outbound,
   z.ZodTypeDef,
   SearchKnowledgeRequest
-> = z.object({
-  knowledgeId: z.string(),
-  searchKnowledgeRequest: components.SearchKnowledgeRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    knowledgeId: "knowledge_id",
-    searchKnowledgeRequest: "SearchKnowledgeRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    knowledgeId: z.string(),
+    searchKnowledgeRequest: components.SearchKnowledgeRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      knowledgeId: "knowledge_id",
+      searchKnowledgeRequest: "SearchKnowledgeRequest",
+    });
+  })
+);
 
 export function searchKnowledgeRequestToJSON(
   searchKnowledgeRequest: SearchKnowledgeRequest,

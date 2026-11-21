@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -18,14 +18,16 @@ export const PolicyRetryConfig$inboundSchema: z.ZodType<
   PolicyRetryConfig,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  count: z.number().int(),
-  on_codes: z.nullable(z.array(z.number().int())).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "on_codes": "onCodes",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    count: z.number().int(),
+    on_codes: z.nullable(z.array(z.number().int())).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "on_codes": "onCodes",
+    });
+  })
+);
 /** @internal */
 export type PolicyRetryConfig$Outbound = {
   count: number;
@@ -37,14 +39,16 @@ export const PolicyRetryConfig$outboundSchema: z.ZodType<
   PolicyRetryConfig$Outbound,
   z.ZodTypeDef,
   PolicyRetryConfig
-> = z.object({
-  count: z.number().int(),
-  onCodes: z.nullable(z.array(z.number().int())).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    onCodes: "on_codes",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    count: z.number().int(),
+    onCodes: z.nullable(z.array(z.number().int())).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      onCodes: "on_codes",
+    });
+  })
+);
 
 export function policyRetryConfigToJSON(
   policyRetryConfig: PolicyRetryConfig,

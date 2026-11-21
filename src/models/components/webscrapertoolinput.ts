@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 /**
  * Scrapes and extracts content from web pages
@@ -32,15 +33,17 @@ export const WebScraperToolInput$outboundSchema: z.ZodType<
   WebScraperToolInput$Outbound,
   z.ZodTypeDef,
   WebScraperToolInput
-> = z.object({
-  type: z.literal("web_scraper"),
-  requiresApproval: z.boolean().optional(),
-  configuration: z.record(z.any()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    requiresApproval: "requires_approval",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("web_scraper"),
+    requiresApproval: z.boolean().optional(),
+    configuration: z.record(z.any()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      requiresApproval: "requires_approval",
+    });
+  })
+);
 
 export function webScraperToolInputToJSON(
   webScraperToolInput: WebScraperToolInput,

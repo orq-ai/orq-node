@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type VertexCapabilities = {
   structuredOutput: boolean;
@@ -22,11 +23,13 @@ export const VertexCapabilities$outboundSchema: z.ZodType<
   VertexCapabilities$Outbound,
   z.ZodTypeDef,
   VertexCapabilities
-> = z.object({
-  structuredOutput: z.boolean(),
-  supportToolCalling: z.boolean(),
-  vision: z.boolean(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    structuredOutput: z.boolean(),
+    supportToolCalling: z.boolean(),
+    vision: z.boolean(),
+  })
+);
 
 export function vertexCapabilitiesToJSON(
   vertexCapabilities: VertexCapabilities,

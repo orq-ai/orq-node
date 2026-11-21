@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import * as components from "../components/index.js";
 
 export type ExperimentRunCancelRequest = {
@@ -24,18 +25,20 @@ export const ExperimentRunCancelRequest$outboundSchema: z.ZodType<
   ExperimentRunCancelRequest$Outbound,
   z.ZodTypeDef,
   ExperimentRunCancelRequest
-> = z.object({
-  experimentId: z.string(),
-  runId: z.string(),
-  cancelExperimentRunRequest:
-    components.CancelExperimentRunRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    experimentId: "experiment_id",
-    runId: "run_id",
-    cancelExperimentRunRequest: "CancelExperimentRunRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    experimentId: z.string(),
+    runId: z.string(),
+    cancelExperimentRunRequest:
+      components.CancelExperimentRunRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      experimentId: "experiment_id",
+      runId: "run_id",
+      cancelExperimentRunRequest: "CancelExperimentRunRequest",
+    });
+  })
+);
 
 export function experimentRunCancelRequestToJSON(
   experimentRunCancelRequest: ExperimentRunCancelRequest,

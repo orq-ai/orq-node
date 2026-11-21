@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type SmartRouterDeleteRequest = {
   smartRouterId: string;
@@ -19,13 +20,15 @@ export const SmartRouterDeleteRequest$outboundSchema: z.ZodType<
   SmartRouterDeleteRequest$Outbound,
   z.ZodTypeDef,
   SmartRouterDeleteRequest
-> = z.object({
-  smartRouterId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    smartRouterId: "smart_router_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    smartRouterId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      smartRouterId: "smart_router_id",
+    });
+  })
+);
 
 export function smartRouterDeleteRequestToJSON(
   smartRouterDeleteRequest: SmartRouterDeleteRequest,

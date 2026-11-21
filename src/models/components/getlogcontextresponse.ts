@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { Log, Log$inboundSchema } from "./log.js";
@@ -31,18 +31,20 @@ export const GetLogContextResponse$inboundSchema: z.ZodType<
   GetLogContextResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  anchor: Log$inboundSchema,
-  before: z.array(Log$inboundSchema),
-  after: z.array(Log$inboundSchema),
-  has_more_before: z.boolean(),
-  has_more_after: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    "has_more_before": "hasMoreBefore",
-    "has_more_after": "hasMoreAfter",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    anchor: Log$inboundSchema,
+    before: z.array(Log$inboundSchema),
+    after: z.array(Log$inboundSchema),
+    has_more_before: z.boolean(),
+    has_more_after: z.boolean(),
+  }).transform((v) => {
+    return remap$(v, {
+      "has_more_before": "hasMoreBefore",
+      "has_more_after": "hasMoreAfter",
+    });
+  })
+);
 
 export function getLogContextResponseFromJSON(
   jsonString: string,

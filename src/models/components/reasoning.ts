@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -61,28 +61,30 @@ export type Reasoning = {
 /** @internal */
 export const ReasoningContext$inboundSchema: z.ZodNativeEnum<
   typeof ReasoningContext
-> = z.nativeEnum(ReasoningContext);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ReasoningContext));
 
 /** @internal */
 export const ReasoningEffort1$inboundSchema: z.ZodNativeEnum<
   typeof ReasoningEffort1
-> = z.nativeEnum(ReasoningEffort1);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ReasoningEffort1));
 
 /** @internal */
 export const ReasoningSummary$inboundSchema: z.ZodNativeEnum<
   typeof ReasoningSummary
-> = z.nativeEnum(ReasoningSummary);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ReasoningSummary));
 
 /** @internal */
 export const Reasoning$inboundSchema: z.ZodType<
   Reasoning,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  context: ReasoningContext$inboundSchema.optional(),
-  effort: ReasoningEffort1$inboundSchema.optional(),
-  summary: z.nullable(ReasoningSummary$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    context: ReasoningContext$inboundSchema.optional(),
+    effort: ReasoningEffort1$inboundSchema.optional(),
+    summary: z.nullable(ReasoningSummary$inboundSchema).optional(),
+  })
+);
 
 export function reasoningFromJSON(
   jsonString: string,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -48,19 +48,21 @@ export const McpGatewayServerLink$inboundSchema: z.ZodType<
   McpGatewayServerLink,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  mcp_server_id: z.string(),
-  alias: z.string(),
-  enabled: z.boolean().optional(),
-  tool_exposure: McpToolExposure$inboundSchema,
-  skill_exposure: McpSkillExposure$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "mcp_server_id": "mcpServerId",
-    "tool_exposure": "toolExposure",
-    "skill_exposure": "skillExposure",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    mcp_server_id: z.string(),
+    alias: z.string(),
+    enabled: z.boolean().optional(),
+    tool_exposure: McpToolExposure$inboundSchema,
+    skill_exposure: McpSkillExposure$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "mcp_server_id": "mcpServerId",
+      "tool_exposure": "toolExposure",
+      "skill_exposure": "skillExposure",
+    });
+  })
+);
 /** @internal */
 export type McpGatewayServerLink$Outbound = {
   mcp_server_id: string;
@@ -75,19 +77,21 @@ export const McpGatewayServerLink$outboundSchema: z.ZodType<
   McpGatewayServerLink$Outbound,
   z.ZodTypeDef,
   McpGatewayServerLink
-> = z.object({
-  mcpServerId: z.string(),
-  alias: z.string(),
-  enabled: z.boolean().optional(),
-  toolExposure: McpToolExposure$outboundSchema,
-  skillExposure: McpSkillExposure$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    mcpServerId: "mcp_server_id",
-    toolExposure: "tool_exposure",
-    skillExposure: "skill_exposure",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    mcpServerId: z.string(),
+    alias: z.string(),
+    enabled: z.boolean().optional(),
+    toolExposure: McpToolExposure$outboundSchema,
+    skillExposure: McpSkillExposure$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      mcpServerId: "mcp_server_id",
+      toolExposure: "tool_exposure",
+      skillExposure: "skill_exposure",
+    });
+  })
+);
 
 export function mcpGatewayServerLinkToJSON(
   mcpGatewayServerLink: McpGatewayServerLink,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -132,24 +132,28 @@ export type ResponseDoneEvent = {
 /** @internal */
 export const ResponseDoneEventFinishReason$inboundSchema: z.ZodNativeEnum<
   typeof ResponseDoneEventFinishReason
-> = z.nativeEnum(ResponseDoneEventFinishReason);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(ResponseDoneEventFinishReason)
+);
 
 /** @internal */
 export const ResponseDoneEventPromptTokensDetails$inboundSchema: z.ZodType<
   ResponseDoneEventPromptTokensDetails,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  cached_tokens: z.nullable(z.number().int()).optional(),
-  cache_creation_tokens: z.nullable(z.number().int()).optional(),
-  audio_tokens: z.nullable(z.number().int()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "cached_tokens": "cachedTokens",
-    "cache_creation_tokens": "cacheCreationTokens",
-    "audio_tokens": "audioTokens",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    cached_tokens: z.nullable(z.number().int()).optional(),
+    cache_creation_tokens: z.nullable(z.number().int()).optional(),
+    audio_tokens: z.nullable(z.number().int()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "cached_tokens": "cachedTokens",
+      "cache_creation_tokens": "cacheCreationTokens",
+      "audio_tokens": "audioTokens",
+    });
+  })
+);
 
 export function responseDoneEventPromptTokensDetailsFromJSON(
   jsonString: string,
@@ -167,19 +171,21 @@ export const ResponseDoneEventCompletionTokensDetails$inboundSchema: z.ZodType<
   ResponseDoneEventCompletionTokensDetails,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  reasoning_tokens: z.nullable(z.number()).optional(),
-  accepted_prediction_tokens: z.nullable(z.number()).optional(),
-  rejected_prediction_tokens: z.nullable(z.number()).optional(),
-  audio_tokens: z.nullable(z.number().int()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "reasoning_tokens": "reasoningTokens",
-    "accepted_prediction_tokens": "acceptedPredictionTokens",
-    "rejected_prediction_tokens": "rejectedPredictionTokens",
-    "audio_tokens": "audioTokens",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    reasoning_tokens: z.nullable(z.number()).optional(),
+    accepted_prediction_tokens: z.nullable(z.number()).optional(),
+    rejected_prediction_tokens: z.nullable(z.number()).optional(),
+    audio_tokens: z.nullable(z.number().int()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "reasoning_tokens": "reasoningTokens",
+      "accepted_prediction_tokens": "acceptedPredictionTokens",
+      "rejected_prediction_tokens": "rejectedPredictionTokens",
+      "audio_tokens": "audioTokens",
+    });
+  })
+);
 
 export function responseDoneEventCompletionTokensDetailsFromJSON(
   jsonString: string,
@@ -202,25 +208,27 @@ export const ResponseDoneEventUsage$inboundSchema: z.ZodType<
   ResponseDoneEventUsage,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  completion_tokens: z.number().optional(),
-  prompt_tokens: z.number().optional(),
-  total_tokens: z.number().optional(),
-  prompt_tokens_details: z.nullable(
-    z.lazy(() => ResponseDoneEventPromptTokensDetails$inboundSchema),
-  ).optional(),
-  completion_tokens_details: z.nullable(
-    z.lazy(() => ResponseDoneEventCompletionTokensDetails$inboundSchema),
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "completion_tokens": "completionTokens",
-    "prompt_tokens": "promptTokens",
-    "total_tokens": "totalTokens",
-    "prompt_tokens_details": "promptTokensDetails",
-    "completion_tokens_details": "completionTokensDetails",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    completion_tokens: z.number().optional(),
+    prompt_tokens: z.number().optional(),
+    total_tokens: z.number().optional(),
+    prompt_tokens_details: z.nullable(
+      z.lazy(() => ResponseDoneEventPromptTokensDetails$inboundSchema),
+    ).optional(),
+    completion_tokens_details: z.nullable(
+      z.lazy(() => ResponseDoneEventCompletionTokensDetails$inboundSchema),
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "completion_tokens": "completionTokens",
+      "prompt_tokens": "promptTokens",
+      "total_tokens": "totalTokens",
+      "prompt_tokens_details": "promptTokensDetails",
+      "completion_tokens_details": "completionTokensDetails",
+    });
+  })
+);
 
 export function responseDoneEventUsageFromJSON(
   jsonString: string,
@@ -235,17 +243,19 @@ export function responseDoneEventUsageFromJSON(
 /** @internal */
 export const ResponseDoneEventDataType$inboundSchema: z.ZodNativeEnum<
   typeof ResponseDoneEventDataType
-> = z.nativeEnum(ResponseDoneEventDataType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ResponseDoneEventDataType));
 
 /** @internal */
 export const ResponseDoneEventFunction$inboundSchema: z.ZodType<
   ResponseDoneEventFunction,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string().optional(),
-  arguments: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    arguments: z.string().optional(),
+  })
+);
 
 export function responseDoneEventFunctionFromJSON(
   jsonString: string,
@@ -262,11 +272,13 @@ export const ResponseDoneEventPendingToolCalls$inboundSchema: z.ZodType<
   ResponseDoneEventPendingToolCalls,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  type: ResponseDoneEventDataType$inboundSchema,
-  function: z.lazy(() => ResponseDoneEventFunction$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    type: ResponseDoneEventDataType$inboundSchema,
+    function: z.lazy(() => ResponseDoneEventFunction$inboundSchema),
+  })
+);
 
 export function responseDoneEventPendingToolCallsFromJSON(
   jsonString: string,
@@ -283,14 +295,16 @@ export const ResponseDoneEventData$inboundSchema: z.ZodType<
   ResponseDoneEventData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  finishReason: ResponseDoneEventFinishReason$inboundSchema,
-  usage: z.lazy(() => ResponseDoneEventUsage$inboundSchema).optional(),
-  pendingToolCalls: z.array(
-    z.lazy(() => ResponseDoneEventPendingToolCalls$inboundSchema),
-  ).optional(),
-  telemetry: Telemetry$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    finishReason: ResponseDoneEventFinishReason$inboundSchema,
+    usage: z.lazy(() => ResponseDoneEventUsage$inboundSchema).optional(),
+    pendingToolCalls: z.array(
+      z.lazy(() => ResponseDoneEventPendingToolCalls$inboundSchema),
+    ).optional(),
+    telemetry: Telemetry$inboundSchema.optional(),
+  })
+);
 
 export function responseDoneEventDataFromJSON(
   jsonString: string,
@@ -307,11 +321,13 @@ export const ResponseDoneEvent$inboundSchema: z.ZodType<
   ResponseDoneEvent,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("response.done"),
-  timestamp: z.string(),
-  data: z.lazy(() => ResponseDoneEventData$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("response.done"),
+    timestamp: z.string(),
+    data: z.lazy(() => ResponseDoneEventData$inboundSchema),
+  })
+);
 
 export function responseDoneEventFromJSON(
   jsonString: string,

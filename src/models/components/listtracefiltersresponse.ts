@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -30,11 +30,13 @@ export const ListTraceFiltersResponse$inboundSchema: z.ZodType<
   ListTraceFiltersResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  evaluators: z.array(EvaluatorFilter$inboundSchema).optional(),
-  metadata: z.array(MetadataFilter$inboundSchema).optional(),
-  annotations: z.array(AnnotationFilter$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    evaluators: z.array(EvaluatorFilter$inboundSchema).optional(),
+    metadata: z.array(MetadataFilter$inboundSchema).optional(),
+    annotations: z.array(AnnotationFilter$inboundSchema).optional(),
+  })
+);
 
 export function listTraceFiltersResponseFromJSON(
   jsonString: string,

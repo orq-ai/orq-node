@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -18,15 +18,17 @@ export const ResponseTelemetry$inboundSchema: z.ZodType<
   ResponseTelemetry,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  span_id: z.string(),
-  trace_id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "span_id": "spanId",
-    "trace_id": "traceId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    span_id: z.string(),
+    trace_id: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "span_id": "spanId",
+      "trace_id": "traceId",
+    });
+  })
+);
 
 export function responseTelemetryFromJSON(
   jsonString: string,

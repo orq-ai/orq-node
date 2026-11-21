@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { Project, Project$inboundSchema } from "./project.js";
@@ -32,15 +32,17 @@ export const ListProjectsResponse$inboundSchema: z.ZodType<
   ListProjectsResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: z.string(),
-  data: z.array(Project$inboundSchema),
-  has_more: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    "has_more": "hasMore",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.string(),
+    data: z.array(Project$inboundSchema),
+    has_more: z.boolean(),
+  }).transform((v) => {
+    return remap$(v, {
+      "has_more": "hasMore",
+    });
+  })
+);
 
 export function listProjectsResponseFromJSON(
   jsonString: string,

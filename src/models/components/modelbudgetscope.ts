@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -24,13 +24,15 @@ export const ModelBudgetScope$inboundSchema: z.ZodType<
   ModelBudgetScope,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  model_id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "model_id": "modelId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model_id: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "model_id": "modelId",
+    });
+  })
+);
 /** @internal */
 export type ModelBudgetScope$Outbound = {
   model_id: string;
@@ -41,13 +43,15 @@ export const ModelBudgetScope$outboundSchema: z.ZodType<
   ModelBudgetScope$Outbound,
   z.ZodTypeDef,
   ModelBudgetScope
-> = z.object({
-  modelId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    modelId: "model_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    modelId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      modelId: "model_id",
+    });
+  })
+);
 
 export function modelBudgetScopeToJSON(
   modelBudgetScope: ModelBudgetScope,

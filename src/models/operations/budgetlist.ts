@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import * as components from "../components/index.js";
 
 export type BudgetListRequest = {
@@ -78,26 +79,28 @@ export const BudgetListRequest$outboundSchema: z.ZodType<
   BudgetListRequest$Outbound,
   z.ZodTypeDef,
   BudgetListRequest
-> = z.object({
-  limit: z.number().int().optional(),
-  startingAfter: z.string().optional(),
-  endingBefore: z.string().optional(),
-  scopeKind: z.array(components.BudgetScopeKind$outboundSchema).optional(),
-  scopeTargetId: z.string().optional(),
-  isActive: z.boolean().optional(),
-  period: z.array(components.BudgetPeriod$outboundSchema).optional(),
-  query: z.string().optional(),
-  sortBy: components.BudgetSortField$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    startingAfter: "starting_after",
-    endingBefore: "ending_before",
-    scopeKind: "scope_kind",
-    scopeTargetId: "scope_target_id",
-    isActive: "is_active",
-    sortBy: "sort_by",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    limit: z.number().int().optional(),
+    startingAfter: z.string().optional(),
+    endingBefore: z.string().optional(),
+    scopeKind: z.array(components.BudgetScopeKind$outboundSchema).optional(),
+    scopeTargetId: z.string().optional(),
+    isActive: z.boolean().optional(),
+    period: z.array(components.BudgetPeriod$outboundSchema).optional(),
+    query: z.string().optional(),
+    sortBy: components.BudgetSortField$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      startingAfter: "starting_after",
+      endingBefore: "ending_before",
+      scopeKind: "scope_kind",
+      scopeTargetId: "scope_target_id",
+      isActive: "is_active",
+      sortBy: "sort_by",
+    });
+  })
+);
 
 export function budgetListRequestToJSON(
   budgetListRequest: BudgetListRequest,

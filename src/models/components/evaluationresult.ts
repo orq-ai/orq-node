@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -74,24 +74,26 @@ export const EvaluationResult$inboundSchema: z.ZodType<
   EvaluationResult,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.string().optional(),
-  value: z.any().optional(),
-  trace_id: z.string().optional(),
-  span_id: z.string().optional(),
-  evaluator_id: z.string().optional(),
-  status: z.string().optional(),
-  passed: z.boolean().optional(),
-  explanation: z.string().optional(),
-  categories: z.array(z.string()).optional(),
-  confidence: z.number().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "trace_id": "traceId",
-    "span_id": "spanId",
-    "evaluator_id": "evaluatorId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.string().optional(),
+    value: z.any().optional(),
+    trace_id: z.string().optional(),
+    span_id: z.string().optional(),
+    evaluator_id: z.string().optional(),
+    status: z.string().optional(),
+    passed: z.boolean().optional(),
+    explanation: z.string().optional(),
+    categories: z.array(z.string()).optional(),
+    confidence: z.number().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "trace_id": "traceId",
+      "span_id": "spanId",
+      "evaluator_id": "evaluatorId",
+    });
+  })
+);
 
 export function evaluationResultFromJSON(
   jsonString: string,

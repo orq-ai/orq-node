@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type ChunksServiceSetEnabledRequest = {
   enabled: boolean;
@@ -18,9 +19,11 @@ export const ChunksServiceSetEnabledRequest$outboundSchema: z.ZodType<
   ChunksServiceSetEnabledRequest$Outbound,
   z.ZodTypeDef,
   ChunksServiceSetEnabledRequest
-> = z.object({
-  enabled: z.boolean(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    enabled: z.boolean(),
+  })
+);
 
 export function chunksServiceSetEnabledRequestToJSON(
   chunksServiceSetEnabledRequest: ChunksServiceSetEnabledRequest,

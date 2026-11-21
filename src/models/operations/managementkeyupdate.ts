@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import * as components from "../components/index.js";
 
 export type ManagementKeyUpdateRequest = {
@@ -25,16 +26,18 @@ export const ManagementKeyUpdateRequest$outboundSchema: z.ZodType<
   ManagementKeyUpdateRequest$Outbound,
   z.ZodTypeDef,
   ManagementKeyUpdateRequest
-> = z.object({
-  managementKeyId: z.string(),
-  updateManagementKeyRequest:
-    components.UpdateManagementKeyRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    managementKeyId: "management_key_id",
-    updateManagementKeyRequest: "UpdateManagementKeyRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    managementKeyId: z.string(),
+    updateManagementKeyRequest:
+      components.UpdateManagementKeyRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      managementKeyId: "management_key_id",
+      updateManagementKeyRequest: "UpdateManagementKeyRequest",
+    });
+  })
+);
 
 export function managementKeyUpdateRequestToJSON(
   managementKeyUpdateRequest: ManagementKeyUpdateRequest,

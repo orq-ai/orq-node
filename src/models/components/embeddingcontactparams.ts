@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type EmbeddingContactParams = {
   displayName?: string | undefined;
@@ -27,17 +28,19 @@ export const EmbeddingContactParams$outboundSchema: z.ZodType<
   EmbeddingContactParams$Outbound,
   z.ZodTypeDef,
   EmbeddingContactParams
-> = z.object({
-  displayName: z.string().optional(),
-  email: z.string().optional(),
-  id: z.string(),
-  metadata: z.nullable(z.array(z.record(z.any()))).optional(),
-  tags: z.nullable(z.array(z.string())).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    displayName: "display_name",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    displayName: z.string().optional(),
+    email: z.string().optional(),
+    id: z.string(),
+    metadata: z.nullable(z.array(z.record(z.any()))).optional(),
+    tags: z.nullable(z.array(z.string())).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      displayName: "display_name",
+    });
+  })
+);
 
 export function embeddingContactParamsToJSON(
   embeddingContactParams: EmbeddingContactParams,

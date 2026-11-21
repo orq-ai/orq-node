@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { McpAuthType, McpAuthType$inboundSchema } from "./mcpauthtype.js";
@@ -64,17 +64,19 @@ export const McpAuthConfigEnterprise$inboundSchema: z.ZodType<
   McpAuthConfigEnterprise,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  resource: z.string().optional(),
-  client_id: z.string().optional(),
-  masked_value: z.string().optional(),
-  scopes: z.array(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "client_id": "clientId",
-    "masked_value": "maskedValue",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    resource: z.string().optional(),
+    client_id: z.string().optional(),
+    masked_value: z.string().optional(),
+    scopes: z.array(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "client_id": "clientId",
+      "masked_value": "maskedValue",
+    });
+  })
+);
 
 export function mcpAuthConfigEnterpriseFromJSON(
   jsonString: string,
@@ -91,16 +93,18 @@ export const McpAuthConfigOutput$inboundSchema: z.ZodType<
   McpAuthConfigOutput,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: McpAuthType$inboundSchema,
-  static_headers: z.array(McpHeaderSecretOutput$inboundSchema).optional(),
-  oauth: McpOAuthConfigOutput$inboundSchema.optional(),
-  enterprise: z.lazy(() => McpAuthConfigEnterprise$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "static_headers": "staticHeaders",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: McpAuthType$inboundSchema,
+    static_headers: z.array(McpHeaderSecretOutput$inboundSchema).optional(),
+    oauth: McpOAuthConfigOutput$inboundSchema.optional(),
+    enterprise: z.lazy(() => McpAuthConfigEnterprise$inboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "static_headers": "staticHeaders",
+    });
+  })
+);
 
 export function mcpAuthConfigOutputFromJSON(
   jsonString: string,

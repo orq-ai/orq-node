@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import * as components from "../components/index.js";
 
 export type DeleteChunksRequest = {
@@ -25,18 +26,20 @@ export const DeleteChunksRequest$outboundSchema: z.ZodType<
   DeleteChunksRequest$Outbound,
   z.ZodTypeDef,
   DeleteChunksRequest
-> = z.object({
-  knowledgeId: z.string(),
-  datasourceId: z.string(),
-  chunksServiceDeleteManyRequest:
-    components.ChunksServiceDeleteManyRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    knowledgeId: "knowledge_id",
-    datasourceId: "datasource_id",
-    chunksServiceDeleteManyRequest: "ChunksServiceDeleteManyRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    knowledgeId: z.string(),
+    datasourceId: z.string(),
+    chunksServiceDeleteManyRequest:
+      components.ChunksServiceDeleteManyRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      knowledgeId: "knowledge_id",
+      datasourceId: "datasource_id",
+      chunksServiceDeleteManyRequest: "ChunksServiceDeleteManyRequest",
+    });
+  })
+);
 
 export function deleteChunksRequestToJSON(
   deleteChunksRequest: DeleteChunksRequest,

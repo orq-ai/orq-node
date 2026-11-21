@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import * as components from "../components/index.js";
 
 export type ListIdentitiesRequest = {
@@ -65,25 +66,27 @@ export const ListIdentitiesRequest$outboundSchema: z.ZodType<
   ListIdentitiesRequest$Outbound,
   z.ZodTypeDef,
   ListIdentitiesRequest
-> = z.object({
-  limit: z.number().int().optional(),
-  startingAfter: z.string().optional(),
-  endingBefore: z.string().optional(),
-  search: z.string().optional(),
-  filterByTags: z.array(z.string()).optional(),
-  includeMetrics: z.boolean().optional(),
-  sortBy: components.IdentitySortField$outboundSchema.optional(),
-  includeBudget: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    startingAfter: "starting_after",
-    endingBefore: "ending_before",
-    filterByTags: "filter_by.tags",
-    includeMetrics: "include_metrics",
-    sortBy: "sort_by",
-    includeBudget: "include_budget",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    limit: z.number().int().optional(),
+    startingAfter: z.string().optional(),
+    endingBefore: z.string().optional(),
+    search: z.string().optional(),
+    filterByTags: z.array(z.string()).optional(),
+    includeMetrics: z.boolean().optional(),
+    sortBy: components.IdentitySortField$outboundSchema.optional(),
+    includeBudget: z.boolean().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      startingAfter: "starting_after",
+      endingBefore: "ending_before",
+      filterByTags: "filter_by.tags",
+      includeMetrics: "include_metrics",
+      sortBy: "sort_by",
+      includeBudget: "include_budget",
+    });
+  })
+);
 
 export function listIdentitiesRequestToJSON(
   listIdentitiesRequest: ListIdentitiesRequest,

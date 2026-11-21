@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import * as components from "../components/index.js";
 
 export type WorkspaceSecurityCreateDomainRequest = {
@@ -22,15 +23,17 @@ export const WorkspaceSecurityCreateDomainRequest$outboundSchema: z.ZodType<
   WorkspaceSecurityCreateDomainRequest$Outbound,
   z.ZodTypeDef,
   WorkspaceSecurityCreateDomainRequest
-> = z.object({
-  workspaceKey: z.string(),
-  createDomainRequest: components.CreateDomainRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    workspaceKey: "workspace_key",
-    createDomainRequest: "CreateDomainRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    workspaceKey: z.string(),
+    createDomainRequest: components.CreateDomainRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      workspaceKey: "workspace_key",
+      createDomainRequest: "CreateDomainRequest",
+    });
+  })
+);
 
 export function workspaceSecurityCreateDomainRequestToJSON(
   workspaceSecurityCreateDomainRequest: WorkspaceSecurityCreateDomainRequest,

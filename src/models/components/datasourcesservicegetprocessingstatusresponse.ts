@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -32,25 +32,29 @@ export const DatasourcesServiceGetProcessingStatusResponse$inboundSchema:
     DatasourcesServiceGetProcessingStatusResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    total_queued: z.number(),
-    total_completed: z.number(),
-    total_passed: z.number(),
-    total_failed: z.number(),
-    overall_total_processing: z.number(),
-    chunks_processing_attempts: z.array(ChunkProcessingAttempts$inboundSchema),
-    datasource_processing_attempts: z.array(ProcessingAttempt$inboundSchema),
-  }).transform((v) => {
-    return remap$(v, {
-      "total_queued": "totalQueued",
-      "total_completed": "totalCompleted",
-      "total_passed": "totalPassed",
-      "total_failed": "totalFailed",
-      "overall_total_processing": "overallTotalProcessing",
-      "chunks_processing_attempts": "chunksProcessingAttempts",
-      "datasource_processing_attempts": "datasourceProcessingAttempts",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      total_queued: z.number(),
+      total_completed: z.number(),
+      total_passed: z.number(),
+      total_failed: z.number(),
+      overall_total_processing: z.number(),
+      chunks_processing_attempts: z.array(
+        ChunkProcessingAttempts$inboundSchema,
+      ),
+      datasource_processing_attempts: z.array(ProcessingAttempt$inboundSchema),
+    }).transform((v) => {
+      return remap$(v, {
+        "total_queued": "totalQueued",
+        "total_completed": "totalCompleted",
+        "total_passed": "totalPassed",
+        "total_failed": "totalFailed",
+        "overall_total_processing": "overallTotalProcessing",
+        "chunks_processing_attempts": "chunksProcessingAttempts",
+        "datasource_processing_attempts": "datasourceProcessingAttempts",
+      });
+    })
+  );
 
 export function datasourcesServiceGetProcessingStatusResponseFromJSON(
   jsonString: string,

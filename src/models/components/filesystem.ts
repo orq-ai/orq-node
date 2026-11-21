@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -77,34 +77,36 @@ export const FileSystem$inboundSchema: z.ZodType<
   FileSystem,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  key: z.string(),
-  display_name: z.string(),
-  description: z.string(),
-  project_id: z.string(),
-  external_access: FileSystemExternalAccess$inboundSchema,
-  created_by_id: z.nullable(z.string()).optional(),
-  updated_by_id: z.nullable(z.string()).optional(),
-  created: z.string(),
-  updated: z.string(),
-  sharing: Sharing$inboundSchema.optional(),
-  used_bytes: z.nullable(z.string()).optional(),
-  used_inodes: z.nullable(z.string()).optional(),
-  last_metered_at: z.nullable(z.string()).optional(),
-  _id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "display_name": "displayName",
-    "project_id": "projectId",
-    "external_access": "externalAccess",
-    "created_by_id": "createdById",
-    "updated_by_id": "updatedById",
-    "used_bytes": "usedBytes",
-    "used_inodes": "usedInodes",
-    "last_metered_at": "lastMeteredAt",
-    "_id": "id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    key: z.string(),
+    display_name: z.string(),
+    description: z.string(),
+    project_id: z.string(),
+    external_access: FileSystemExternalAccess$inboundSchema,
+    created_by_id: z.nullable(z.string()).optional(),
+    updated_by_id: z.nullable(z.string()).optional(),
+    created: z.string(),
+    updated: z.string(),
+    sharing: Sharing$inboundSchema.optional(),
+    used_bytes: z.nullable(z.string()).optional(),
+    used_inodes: z.nullable(z.string()).optional(),
+    last_metered_at: z.nullable(z.string()).optional(),
+    _id: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "display_name": "displayName",
+      "project_id": "projectId",
+      "external_access": "externalAccess",
+      "created_by_id": "createdById",
+      "updated_by_id": "updatedById",
+      "used_bytes": "usedBytes",
+      "used_inodes": "usedInodes",
+      "last_metered_at": "lastMeteredAt",
+      "_id": "id",
+    });
+  })
+);
 
 export function fileSystemFromJSON(
   jsonString: string,

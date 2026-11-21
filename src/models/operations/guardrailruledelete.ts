@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type GuardrailRuleDeleteRequest = {
   guardrailRuleId: string;
@@ -19,13 +20,15 @@ export const GuardrailRuleDeleteRequest$outboundSchema: z.ZodType<
   GuardrailRuleDeleteRequest$Outbound,
   z.ZodTypeDef,
   GuardrailRuleDeleteRequest
-> = z.object({
-  guardrailRuleId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    guardrailRuleId: "guardrail_rule_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    guardrailRuleId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      guardrailRuleId: "guardrail_rule_id",
+    });
+  })
+);
 
 export function guardrailRuleDeleteRequestToJSON(
   guardrailRuleDeleteRequest: GuardrailRuleDeleteRequest,

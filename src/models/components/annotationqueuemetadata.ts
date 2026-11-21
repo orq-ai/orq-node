@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -23,13 +23,15 @@ export const AnnotationQueueMetadata$inboundSchema: z.ZodType<
   AnnotationQueueMetadata,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  items_count: z.number().int(),
-}).transform((v) => {
-  return remap$(v, {
-    "items_count": "itemsCount",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    items_count: z.number().int(),
+  }).transform((v) => {
+    return remap$(v, {
+      "items_count": "itemsCount",
+    });
+  })
+);
 
 export function annotationQueueMetadataFromJSON(
   jsonString: string,

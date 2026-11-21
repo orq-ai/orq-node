@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { HubItem, HubItem$inboundSchema } from "./hubitem.js";
@@ -18,13 +18,15 @@ export const GetHubItemResponse$inboundSchema: z.ZodType<
   GetHubItemResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  hub_item: HubItem$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "hub_item": "hubItem",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    hub_item: HubItem$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "hub_item": "hubItem",
+    });
+  })
+);
 
 export function getHubItemResponseFromJSON(
   jsonString: string,

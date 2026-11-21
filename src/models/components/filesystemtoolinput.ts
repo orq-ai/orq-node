@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 
 /**
@@ -46,8 +47,8 @@ export type FileSystemToolInput = {
 };
 
 /** @internal */
-export const AccessMode$outboundSchema: z.ZodNativeEnum<typeof AccessMode> = z
-  .nativeEnum(AccessMode);
+export const AccessMode$outboundSchema: z.ZodNativeEnum<typeof AccessMode> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(AccessMode));
 
 /** @internal */
 export type Configuration$Outbound = {
@@ -61,17 +62,19 @@ export const Configuration$outboundSchema: z.ZodType<
   Configuration$Outbound,
   z.ZodTypeDef,
   Configuration
-> = z.object({
-  fileSystemId: z.string().optional(),
-  fileSystemKey: z.string().optional(),
-  accessMode: AccessMode$outboundSchema.default("read_only"),
-}).transform((v) => {
-  return remap$(v, {
-    fileSystemId: "file_system_id",
-    fileSystemKey: "file_system_key",
-    accessMode: "access_mode",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    fileSystemId: z.string().optional(),
+    fileSystemKey: z.string().optional(),
+    accessMode: AccessMode$outboundSchema.default("read_only"),
+  }).transform((v) => {
+    return remap$(v, {
+      fileSystemId: "file_system_id",
+      fileSystemKey: "file_system_key",
+      accessMode: "access_mode",
+    });
+  })
+);
 
 export function configurationToJSON(configuration: Configuration): string {
   return JSON.stringify(Configuration$outboundSchema.parse(configuration));
@@ -89,15 +92,17 @@ export const FileSystemToolInput$outboundSchema: z.ZodType<
   FileSystemToolInput$Outbound,
   z.ZodTypeDef,
   FileSystemToolInput
-> = z.object({
-  type: z.literal("file_system"),
-  requiresApproval: z.boolean().optional(),
-  configuration: z.lazy(() => Configuration$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    requiresApproval: "requires_approval",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("file_system"),
+    requiresApproval: z.boolean().optional(),
+    configuration: z.lazy(() => Configuration$outboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      requiresApproval: "requires_approval",
+    });
+  })
+);
 
 export function fileSystemToolInputToJSON(
   fileSystemToolInput: FileSystemToolInput,

@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type RetrieveIdentityRequest = {
   /**
@@ -35,16 +36,18 @@ export const RetrieveIdentityRequest$outboundSchema: z.ZodType<
   RetrieveIdentityRequest$Outbound,
   z.ZodTypeDef,
   RetrieveIdentityRequest
-> = z.object({
-  id: z.string(),
-  includeMetrics: z.boolean().optional(),
-  includeBudget: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    includeMetrics: "include_metrics",
-    includeBudget: "include_budget",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    includeMetrics: z.boolean().optional(),
+    includeBudget: z.boolean().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      includeMetrics: "include_metrics",
+      includeBudget: "include_budget",
+    });
+  })
+);
 
 export function retrieveIdentityRequestToJSON(
   retrieveIdentityRequest: RetrieveIdentityRequest,

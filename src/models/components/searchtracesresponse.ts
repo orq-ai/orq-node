@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -41,25 +41,27 @@ export type SearchTracesResponse = {
 /** @internal */
 export const SearchTracesResponseObject$inboundSchema: z.ZodNativeEnum<
   typeof SearchTracesResponseObject
-> = z.nativeEnum(SearchTracesResponseObject);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(SearchTracesResponseObject));
 
 /** @internal */
 export const SearchTracesResponse$inboundSchema: z.ZodType<
   SearchTracesResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: SearchTracesResponseObject$inboundSchema.optional(),
-  data: z.array(TraceSummary$inboundSchema).optional(),
-  has_more: z.boolean().optional(),
-  next_page_token: z.string().optional(),
-  meta: TraceSearchMeta$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "has_more": "hasMore",
-    "next_page_token": "nextPageToken",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: SearchTracesResponseObject$inboundSchema.optional(),
+    data: z.array(TraceSummary$inboundSchema).optional(),
+    has_more: z.boolean().optional(),
+    next_page_token: z.string().optional(),
+    meta: TraceSearchMeta$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "has_more": "hasMore",
+      "next_page_token": "nextPageToken",
+    });
+  })
+);
 
 export function searchTracesResponseFromJSON(
   jsonString: string,

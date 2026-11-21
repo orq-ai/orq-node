@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import {
   HarnessConstraints,
   HarnessConstraints$Outbound,
@@ -30,10 +31,12 @@ export const ExecuteConstraints$outboundSchema: z.ZodType<
   ExecuteConstraints$Outbound,
   z.ZodTypeDef,
   ExecuteConstraints
-> = z.object({
-  llm: LlmConstraints$outboundSchema.optional(),
-  harness: HarnessConstraints$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    llm: LlmConstraints$outboundSchema.optional(),
+    harness: HarnessConstraints$outboundSchema.optional(),
+  })
+);
 
 export function executeConstraintsToJSON(
   executeConstraints: ExecuteConstraints,

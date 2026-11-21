@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { TraceCost, TraceCost$inboundSchema } from "./tracecost.js";
@@ -55,7 +55,7 @@ export const RuleAttributes$inboundSchema: z.ZodType<
   RuleAttributes,
   z.ZodTypeDef,
   unknown
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function ruleAttributesFromJSON(
   jsonString: string,
@@ -72,49 +72,52 @@ export const SpanSummary$inboundSchema: z.ZodType<
   SpanSummary,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: z.string().optional(),
-  trace_id: z.string().optional(),
-  span_id: z.string().optional(),
-  parent_span_id: z.string().optional(),
-  name: z.string().optional(),
-  type: z.string().optional(),
-  operation: z.string().optional(),
-  status: z.string().optional(),
-  started_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  ended_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  duration_ms: z.number().optional(),
-  provider: z.string().optional(),
-  model: z.string().optional(),
-  usage: TraceUsage$inboundSchema.optional(),
-  cost: TraceCost$inboundSchema.optional(),
-  has_detail: z.boolean().optional(),
-  level: z.number().int().optional(),
-  has_children: z.boolean().optional(),
-  trace_framework: z.string().optional(),
-  leading_span_type: z.string().optional(),
-  guardrail_enabled: z.boolean().optional(),
-  finish_reasons: z.array(z.string()).optional(),
-  rule_attributes: z.lazy(() => RuleAttributes$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "trace_id": "traceId",
-    "span_id": "spanId",
-    "parent_span_id": "parentSpanId",
-    "started_at": "startedAt",
-    "ended_at": "endedAt",
-    "duration_ms": "durationMs",
-    "has_detail": "hasDetail",
-    "has_children": "hasChildren",
-    "trace_framework": "traceFramework",
-    "leading_span_type": "leadingSpanType",
-    "guardrail_enabled": "guardrailEnabled",
-    "finish_reasons": "finishReasons",
-    "rule_attributes": "ruleAttributes",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.string().optional(),
+    trace_id: z.string().optional(),
+    span_id: z.string().optional(),
+    parent_span_id: z.string().optional(),
+    name: z.string().optional(),
+    type: z.string().optional(),
+    operation: z.string().optional(),
+    status: z.string().optional(),
+    started_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ).optional(),
+    ended_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
+      .optional(),
+    duration_ms: z.number().optional(),
+    provider: z.string().optional(),
+    model: z.string().optional(),
+    usage: TraceUsage$inboundSchema.optional(),
+    cost: TraceCost$inboundSchema.optional(),
+    has_detail: z.boolean().optional(),
+    level: z.number().int().optional(),
+    has_children: z.boolean().optional(),
+    trace_framework: z.string().optional(),
+    leading_span_type: z.string().optional(),
+    guardrail_enabled: z.boolean().optional(),
+    finish_reasons: z.array(z.string()).optional(),
+    rule_attributes: z.lazy(() => RuleAttributes$inboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "trace_id": "traceId",
+      "span_id": "spanId",
+      "parent_span_id": "parentSpanId",
+      "started_at": "startedAt",
+      "ended_at": "endedAt",
+      "duration_ms": "durationMs",
+      "has_detail": "hasDetail",
+      "has_children": "hasChildren",
+      "trace_framework": "traceFramework",
+      "leading_span_type": "leadingSpanType",
+      "guardrail_enabled": "guardrailEnabled",
+      "finish_reasons": "finishReasons",
+      "rule_attributes": "ruleAttributes",
+    });
+  })
+);
 
 export function spanSummaryFromJSON(
   jsonString: string,

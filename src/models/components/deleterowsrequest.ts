@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type DeleteRowsRequest = {
   rowIds?: Array<string> | undefined;
@@ -19,13 +20,15 @@ export const DeleteRowsRequest$outboundSchema: z.ZodType<
   DeleteRowsRequest$Outbound,
   z.ZodTypeDef,
   DeleteRowsRequest
-> = z.object({
-  rowIds: z.array(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    rowIds: "row_ids",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    rowIds: z.array(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      rowIds: "row_ids",
+    });
+  })
+);
 
 export function deleteRowsRequestToJSON(
   deleteRowsRequest: DeleteRowsRequest,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -17,10 +17,12 @@ export const MoveFileSystemFileResponse$inboundSchema: z.ZodType<
   MoveFileSystemFileResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  from: z.string(),
-  to: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    from: z.string(),
+    to: z.string(),
+  })
+);
 
 export function moveFileSystemFileResponseFromJSON(
   jsonString: string,

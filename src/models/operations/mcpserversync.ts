@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import * as components from "../components/index.js";
 
 export type McpServerSyncRequest = {
@@ -25,14 +26,16 @@ export const McpServerSyncRequest$outboundSchema: z.ZodType<
   McpServerSyncRequest$Outbound,
   z.ZodTypeDef,
   McpServerSyncRequest
-> = z.object({
-  id: z.string(),
-  syncMcpServerRequest: components.SyncMcpServerRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    syncMcpServerRequest: "SyncMcpServerRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    syncMcpServerRequest: components.SyncMcpServerRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      syncMcpServerRequest: "SyncMcpServerRequest",
+    });
+  })
+);
 
 export function mcpServerSyncRequestToJSON(
   mcpServerSyncRequest: McpServerSyncRequest,

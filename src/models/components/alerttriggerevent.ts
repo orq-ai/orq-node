@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { AlertEvidence, AlertEvidence$inboundSchema } from "./alertevidence.js";
@@ -41,20 +41,22 @@ export const AlertTriggerEvent$inboundSchema: z.ZodType<
   AlertTriggerEvent,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  event_id: z.string(),
-  trigger_id: z.string(),
-  alert_id: z.string(),
-  at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  value: z.number(),
-  evidence: z.array(AlertEvidence$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "event_id": "eventId",
-    "trigger_id": "triggerId",
-    "alert_id": "alertId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    event_id: z.string(),
+    trigger_id: z.string(),
+    alert_id: z.string(),
+    at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    value: z.number(),
+    evidence: z.array(AlertEvidence$inboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "event_id": "eventId",
+      "trigger_id": "triggerId",
+      "alert_id": "alertId",
+    });
+  })
+);
 
 export function alertTriggerEventFromJSON(
   jsonString: string,

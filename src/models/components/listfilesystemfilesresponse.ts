@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { FileEntry, FileEntry$inboundSchema } from "./fileentry.js";
@@ -34,17 +34,19 @@ export const ListFileSystemFilesResponse$inboundSchema: z.ZodType<
   ListFileSystemFilesResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  path: z.string(),
-  depth: z.number().int(),
-  entries: z.array(FileEntry$inboundSchema),
-  entry_count: z.number().int(),
-  truncated: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    "entry_count": "entryCount",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    path: z.string(),
+    depth: z.number().int(),
+    entries: z.array(FileEntry$inboundSchema),
+    entry_count: z.number().int(),
+    truncated: z.boolean(),
+  }).transform((v) => {
+    return remap$(v, {
+      "entry_count": "entryCount",
+    });
+  })
+);
 
 export function listFileSystemFilesResponseFromJSON(
   jsonString: string,

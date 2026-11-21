@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type ModelEnableRequestBody = {
   modelId: string;
@@ -19,13 +20,15 @@ export const ModelEnableRequestBody$outboundSchema: z.ZodType<
   ModelEnableRequestBody$Outbound,
   z.ZodTypeDef,
   ModelEnableRequestBody
-> = z.object({
-  modelId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    modelId: "model_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    modelId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      modelId: "model_id",
+    });
+  })
+);
 
 export function modelEnableRequestBodyToJSON(
   modelEnableRequestBody: ModelEnableRequestBody,

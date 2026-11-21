@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -24,20 +24,22 @@ export const NumberMetricSummary$inboundSchema: z.ZodType<
   NumberMetricSummary,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  min: z.number().optional(),
-  max: z.number().optional(),
-  avg: z.number().optional(),
-  sum: z.number().optional(),
-  median: z.number().optional(),
-  range: z.number().optional(),
-  std_dev: z.number().optional(),
-  count: z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "std_dev": "stdDev",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    min: z.number().optional(),
+    max: z.number().optional(),
+    avg: z.number().optional(),
+    sum: z.number().optional(),
+    median: z.number().optional(),
+    range: z.number().optional(),
+    std_dev: z.number().optional(),
+    count: z.number().int().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "std_dev": "stdDev",
+    });
+  })
+);
 
 export function numberMetricSummaryFromJSON(
   jsonString: string,

@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import * as components from "../components/index.js";
 
 export type RoutingRuleUpdateRequest = {
@@ -22,15 +23,18 @@ export const RoutingRuleUpdateRequest$outboundSchema: z.ZodType<
   RoutingRuleUpdateRequest$Outbound,
   z.ZodTypeDef,
   RoutingRuleUpdateRequest
-> = z.object({
-  routingRuleId: z.string(),
-  updateRoutingRuleRequest: components.UpdateRoutingRuleRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    routingRuleId: "routing_rule_id",
-    updateRoutingRuleRequest: "UpdateRoutingRuleRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    routingRuleId: z.string(),
+    updateRoutingRuleRequest:
+      components.UpdateRoutingRuleRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      routingRuleId: "routing_rule_id",
+      updateRoutingRuleRequest: "UpdateRoutingRuleRequest",
+    });
+  })
+);
 
 export function routingRuleUpdateRequestToJSON(
   routingRuleUpdateRequest: RoutingRuleUpdateRequest,

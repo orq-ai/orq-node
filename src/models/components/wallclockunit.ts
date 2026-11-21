@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 
 export const WallClockUnit = {
@@ -15,4 +16,4 @@ export type WallClockUnit = ClosedEnum<typeof WallClockUnit>;
 /** @internal */
 export const WallClockUnit$outboundSchema: z.ZodNativeEnum<
   typeof WallClockUnit
-> = z.nativeEnum(WallClockUnit);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(WallClockUnit));

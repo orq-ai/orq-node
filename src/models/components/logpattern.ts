@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { FacetValue, FacetValue$inboundSchema } from "./facetvalue.js";
@@ -51,27 +51,33 @@ export const LogPattern$inboundSchema: z.ZodType<
   LogPattern,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  template: z.string(),
-  count: z.string(),
-  percentage: z.number(),
-  first_seen: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  last_seen: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  sample_log_ids: z.array(z.string()),
-  severity_summary: z.array(FacetValue$inboundSchema),
-  service_summary: z.array(FacetValue$inboundSchema),
-  suggested_query: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "first_seen": "firstSeen",
-    "last_seen": "lastSeen",
-    "sample_log_ids": "sampleLogIds",
-    "severity_summary": "severitySummary",
-    "service_summary": "serviceSummary",
-    "suggested_query": "suggestedQuery",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    template: z.string(),
+    count: z.string(),
+    percentage: z.number(),
+    first_seen: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    last_seen: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    sample_log_ids: z.array(z.string()),
+    severity_summary: z.array(FacetValue$inboundSchema),
+    service_summary: z.array(FacetValue$inboundSchema),
+    suggested_query: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "first_seen": "firstSeen",
+      "last_seen": "lastSeen",
+      "sample_log_ids": "sampleLogIds",
+      "severity_summary": "severitySummary",
+      "service_summary": "serviceSummary",
+      "suggested_query": "suggestedQuery",
+    });
+  })
+);
 
 export function logPatternFromJSON(
   jsonString: string,

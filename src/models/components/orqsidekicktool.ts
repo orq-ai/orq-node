@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 
 /**
@@ -79,12 +80,14 @@ export type OrqSidekickTool = {
 /** @internal */
 export const OrqSidekickToolReasoningEffort$outboundSchema: z.ZodNativeEnum<
   typeof OrqSidekickToolReasoningEffort
-> = z.nativeEnum(OrqSidekickToolReasoningEffort);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(OrqSidekickToolReasoningEffort)
+);
 
 /** @internal */
 export const OrqSidekickToolType$outboundSchema: z.ZodNativeEnum<
   typeof OrqSidekickToolType
-> = z.nativeEnum(OrqSidekickToolType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(OrqSidekickToolType));
 
 /** @internal */
 export type OrqSidekickTool$Outbound = {
@@ -103,24 +106,26 @@ export const OrqSidekickTool$outboundSchema: z.ZodType<
   OrqSidekickTool$Outbound,
   z.ZodTypeDef,
   OrqSidekickTool
-> = z.object({
-  maxTokens: z.number().int().optional(),
-  maxUses: z.number().int().optional(),
-  model: z.string(),
-  outputFormat: z.string().optional(),
-  reasoningEffort: OrqSidekickToolReasoningEffort$outboundSchema.optional(),
-  systemPrompt: z.string().optional(),
-  temperature: z.number().optional(),
-  type: OrqSidekickToolType$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    maxTokens: "max_tokens",
-    maxUses: "max_uses",
-    outputFormat: "output_format",
-    reasoningEffort: "reasoning_effort",
-    systemPrompt: "system_prompt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    maxTokens: z.number().int().optional(),
+    maxUses: z.number().int().optional(),
+    model: z.string(),
+    outputFormat: z.string().optional(),
+    reasoningEffort: OrqSidekickToolReasoningEffort$outboundSchema.optional(),
+    systemPrompt: z.string().optional(),
+    temperature: z.number().optional(),
+    type: OrqSidekickToolType$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      maxTokens: "max_tokens",
+      maxUses: "max_uses",
+      outputFormat: "output_format",
+      reasoningEffort: "reasoning_effort",
+      systemPrompt: "system_prompt",
+    });
+  })
+);
 
 export function orqSidekickToolToJSON(
   orqSidekickTool: OrqSidekickTool,

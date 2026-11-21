@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { Chunk, Chunk$inboundSchema } from "./chunk.js";
@@ -17,9 +17,11 @@ export const ParseResponse$inboundSchema: z.ZodType<
   ParseResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  chunks: z.array(Chunk$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    chunks: z.array(Chunk$inboundSchema),
+  })
+);
 
 export function parseResponseFromJSON(
   jsonString: string,

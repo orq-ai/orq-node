@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -20,19 +20,21 @@ export const UniqueEvaluator$inboundSchema: z.ZodType<
   UniqueEvaluator,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  evaluator_id: z.string().optional(),
-  evaluator_type: z.string().optional(),
-  evaluator_name: z.string().optional(),
-  evaluator_key: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "evaluator_id": "evaluatorId",
-    "evaluator_type": "evaluatorType",
-    "evaluator_name": "evaluatorName",
-    "evaluator_key": "evaluatorKey",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    evaluator_id: z.string().optional(),
+    evaluator_type: z.string().optional(),
+    evaluator_name: z.string().optional(),
+    evaluator_key: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "evaluator_id": "evaluatorId",
+      "evaluator_type": "evaluatorType",
+      "evaluator_name": "evaluatorName",
+      "evaluator_key": "evaluatorKey",
+    });
+  })
+);
 
 export function uniqueEvaluatorFromJSON(
   jsonString: string,

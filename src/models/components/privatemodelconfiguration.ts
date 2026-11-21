@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type PrivateModelConfiguration = {
   /**
@@ -22,13 +23,15 @@ export const PrivateModelConfiguration$outboundSchema: z.ZodType<
   PrivateModelConfiguration$Outbound,
   z.ZodTypeDef,
   PrivateModelConfiguration
-> = z.object({
-  modelId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    modelId: "model_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    modelId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      modelId: "model_id",
+    });
+  })
+);
 
 export function privateModelConfigurationToJSON(
   privateModelConfiguration: PrivateModelConfiguration,

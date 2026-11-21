@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type UpdateDatasetRequest = {
   displayName?: string | undefined;
@@ -26,16 +27,18 @@ export const UpdateDatasetRequest$outboundSchema: z.ZodType<
   UpdateDatasetRequest$Outbound,
   z.ZodTypeDef,
   UpdateDatasetRequest
-> = z.object({
-  displayName: z.string().optional(),
-  projectId: z.string().optional(),
-  path: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    displayName: "display_name",
-    projectId: "project_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    displayName: z.string().optional(),
+    projectId: z.string().optional(),
+    path: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      displayName: "display_name",
+      projectId: "project_id",
+    });
+  })
+);
 
 export function updateDatasetRequestToJSON(
   updateDatasetRequest: UpdateDatasetRequest,

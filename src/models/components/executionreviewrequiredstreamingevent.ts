@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -26,7 +26,7 @@ export const ExecutionReviewRequiredStreamingEventData$inboundSchema: z.ZodType<
   ExecutionReviewRequiredStreamingEventData,
   z.ZodTypeDef,
   unknown
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function executionReviewRequiredStreamingEventDataFromJSON(
   jsonString: string,
@@ -49,11 +49,13 @@ export const ExecutionReviewRequiredStreamingEvent$inboundSchema: z.ZodType<
   ExecutionReviewRequiredStreamingEvent,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("event.agents.execution_review_required"),
-  timestamp: z.string(),
-  data: z.lazy(() => ExecutionReviewRequiredStreamingEventData$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("event.agents.execution_review_required"),
+    timestamp: z.string(),
+    data: z.lazy(() => ExecutionReviewRequiredStreamingEventData$inboundSchema),
+  })
+);
 
 export function executionReviewRequiredStreamingEventFromJSON(
   jsonString: string,

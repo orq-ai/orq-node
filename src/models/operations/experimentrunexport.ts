@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -30,7 +30,7 @@ export type ExperimentRunExportResponse =
 /** @internal */
 export const QueryParamFormat$outboundSchema: z.ZodNativeEnum<
   typeof QueryParamFormat
-> = z.nativeEnum(QueryParamFormat);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(QueryParamFormat));
 
 /** @internal */
 export type ExperimentRunExportRequest$Outbound = {
@@ -44,16 +44,18 @@ export const ExperimentRunExportRequest$outboundSchema: z.ZodType<
   ExperimentRunExportRequest$Outbound,
   z.ZodTypeDef,
   ExperimentRunExportRequest
-> = z.object({
-  experimentId: z.string(),
-  runId: z.string(),
-  format: QueryParamFormat$outboundSchema.default("json"),
-}).transform((v) => {
-  return remap$(v, {
-    experimentId: "experiment_id",
-    runId: "run_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    experimentId: z.string(),
+    runId: z.string(),
+    format: QueryParamFormat$outboundSchema.default("json"),
+  }).transform((v) => {
+    return remap$(v, {
+      experimentId: "experiment_id",
+      runId: "run_id",
+    });
+  })
+);
 
 export function experimentRunExportRequestToJSON(
   experimentRunExportRequest: ExperimentRunExportRequest,
@@ -68,11 +70,13 @@ export const ExperimentRunExportResponse$inboundSchema: z.ZodType<
   ExperimentRunExportResponse,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  z.instanceof(ReadableStream<Uint8Array>),
-  z.instanceof(ReadableStream<Uint8Array>),
-  z.instanceof(ReadableStream<Uint8Array>),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.instanceof(ReadableStream<Uint8Array>),
+    z.instanceof(ReadableStream<Uint8Array>),
+    z.instanceof(ReadableStream<Uint8Array>),
+  ])
+);
 
 export function experimentRunExportResponseFromJSON(
   jsonString: string,

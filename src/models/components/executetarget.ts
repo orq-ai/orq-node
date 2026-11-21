@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type ExecuteTarget = {
   rowId?: string | undefined;
@@ -25,19 +26,21 @@ export const ExecuteTarget$outboundSchema: z.ZodType<
   ExecuteTarget$Outbound,
   z.ZodTypeDef,
   ExecuteTarget
-> = z.object({
-  rowId: z.string().optional(),
-  columnId: z.string().optional(),
-  columnKey: z.string().optional(),
-  repeatIndex: z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    rowId: "row_id",
-    columnId: "column_id",
-    columnKey: "column_key",
-    repeatIndex: "repeat_index",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    rowId: z.string().optional(),
+    columnId: z.string().optional(),
+    columnKey: z.string().optional(),
+    repeatIndex: z.number().int().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      rowId: "row_id",
+      columnId: "column_id",
+      columnKey: "column_key",
+      repeatIndex: "repeat_index",
+    });
+  })
+);
 
 export function executeTargetToJSON(executeTarget: ExecuteTarget): string {
   return JSON.stringify(ExecuteTarget$outboundSchema.parse(executeTarget));

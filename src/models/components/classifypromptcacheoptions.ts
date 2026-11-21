@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 
 /**
@@ -44,12 +45,13 @@ export type ClassifyPromptCacheOptions = {
 /** @internal */
 export const ClassifyPromptCacheOptionsMode$outboundSchema: z.ZodNativeEnum<
   typeof ClassifyPromptCacheOptionsMode
-> = z.nativeEnum(ClassifyPromptCacheOptionsMode);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(ClassifyPromptCacheOptionsMode)
+);
 
 /** @internal */
-export const Ttl$outboundSchema: z.ZodNativeEnum<typeof Ttl> = z.nativeEnum(
-  Ttl,
-);
+export const Ttl$outboundSchema: z.ZodNativeEnum<typeof Ttl> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Ttl));
 
 /** @internal */
 export type ClassifyPromptCacheOptions$Outbound = {
@@ -62,10 +64,12 @@ export const ClassifyPromptCacheOptions$outboundSchema: z.ZodType<
   ClassifyPromptCacheOptions$Outbound,
   z.ZodTypeDef,
   ClassifyPromptCacheOptions
-> = z.object({
-  mode: ClassifyPromptCacheOptionsMode$outboundSchema.optional(),
-  ttl: Ttl$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    mode: ClassifyPromptCacheOptionsMode$outboundSchema.optional(),
+    ttl: Ttl$outboundSchema.optional(),
+  })
+);
 
 export function classifyPromptCacheOptionsToJSON(
   classifyPromptCacheOptions: ClassifyPromptCacheOptions,

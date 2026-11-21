@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import {
   TraceCompute,
   TraceCompute$Outbound,
@@ -46,21 +47,23 @@ export const AggregateTracesRequest$outboundSchema: z.ZodType<
   AggregateTracesRequest$Outbound,
   z.ZodTypeDef,
   AggregateTracesRequest
-> = z.object({
-  from: z.date().transform(v => v.toISOString()).optional(),
-  to: z.date().transform(v => v.toISOString()).optional(),
-  filters: z.array(TraceFilter$outboundSchema).optional(),
-  groupBy: z.array(z.string()).optional(),
-  compute: z.array(TraceCompute$outboundSchema).optional(),
-  limit: z.number().int().optional(),
-  filterOperator: z.string().optional(),
-  query: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    groupBy: "group_by",
-    filterOperator: "filter_operator",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    from: z.date().transform(v => v.toISOString()).optional(),
+    to: z.date().transform(v => v.toISOString()).optional(),
+    filters: z.array(TraceFilter$outboundSchema).optional(),
+    groupBy: z.array(z.string()).optional(),
+    compute: z.array(TraceCompute$outboundSchema).optional(),
+    limit: z.number().int().optional(),
+    filterOperator: z.string().optional(),
+    query: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      groupBy: "group_by",
+      filterOperator: "filter_operator",
+    });
+  })
+);
 
 export function aggregateTracesRequestToJSON(
   aggregateTracesRequest: AggregateTracesRequest,

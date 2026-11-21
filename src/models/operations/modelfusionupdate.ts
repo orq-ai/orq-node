@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import * as components from "../components/index.js";
 
 export type ModelFusionUpdateRequest = {
@@ -22,15 +23,18 @@ export const ModelFusionUpdateRequest$outboundSchema: z.ZodType<
   ModelFusionUpdateRequest$Outbound,
   z.ZodTypeDef,
   ModelFusionUpdateRequest
-> = z.object({
-  modelFusionId: z.string(),
-  updateModelFusionRequest: components.UpdateModelFusionRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    modelFusionId: "model_fusion_id",
-    updateModelFusionRequest: "UpdateModelFusionRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    modelFusionId: z.string(),
+    updateModelFusionRequest:
+      components.UpdateModelFusionRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      modelFusionId: "model_fusion_id",
+      updateModelFusionRequest: "UpdateModelFusionRequest",
+    });
+  })
+);
 
 export function modelFusionUpdateRequestToJSON(
   modelFusionUpdateRequest: ModelFusionUpdateRequest,

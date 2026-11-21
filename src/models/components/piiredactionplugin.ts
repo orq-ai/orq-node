@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -64,13 +64,14 @@ export type PIIRedactionPlugin = {
 };
 
 /** @internal */
-export const Id$inboundSchema: z.ZodNativeEnum<typeof Id> = z.nativeEnum(Id);
+export const Id$inboundSchema: z.ZodNativeEnum<typeof Id> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Id));
 /** @internal */
 export const Id$outboundSchema: z.ZodNativeEnum<typeof Id> = Id$inboundSchema;
 
 /** @internal */
-export const OnFailure$inboundSchema: z.ZodNativeEnum<typeof OnFailure> = z
-  .nativeEnum(OnFailure);
+export const OnFailure$inboundSchema: z.ZodNativeEnum<typeof OnFailure> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(OnFailure));
 /** @internal */
 export const OnFailure$outboundSchema: z.ZodNativeEnum<typeof OnFailure> =
   OnFailure$inboundSchema;
@@ -80,20 +81,22 @@ export const PIIRedactionPlugin$inboundSchema: z.ZodType<
   PIIRedactionPlugin,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: Id$inboundSchema,
-  language: z.string().optional(),
-  regions: z.array(z.string()).optional(),
-  entities: z.array(z.string()).optional(),
-  entity_thresholds: z.record(z.number()).optional(),
-  threshold: z.number().optional(),
-  on_failure: OnFailure$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "entity_thresholds": "entityThresholds",
-    "on_failure": "onFailure",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: Id$inboundSchema,
+    language: z.string().optional(),
+    regions: z.array(z.string()).optional(),
+    entities: z.array(z.string()).optional(),
+    entity_thresholds: z.record(z.number()).optional(),
+    threshold: z.number().optional(),
+    on_failure: OnFailure$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "entity_thresholds": "entityThresholds",
+      "on_failure": "onFailure",
+    });
+  })
+);
 /** @internal */
 export type PIIRedactionPlugin$Outbound = {
   id: string;
@@ -110,20 +113,22 @@ export const PIIRedactionPlugin$outboundSchema: z.ZodType<
   PIIRedactionPlugin$Outbound,
   z.ZodTypeDef,
   PIIRedactionPlugin
-> = z.object({
-  id: Id$outboundSchema,
-  language: z.string().optional(),
-  regions: z.array(z.string()).optional(),
-  entities: z.array(z.string()).optional(),
-  entityThresholds: z.record(z.number()).optional(),
-  threshold: z.number().optional(),
-  onFailure: OnFailure$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    entityThresholds: "entity_thresholds",
-    onFailure: "on_failure",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: Id$outboundSchema,
+    language: z.string().optional(),
+    regions: z.array(z.string()).optional(),
+    entities: z.array(z.string()).optional(),
+    entityThresholds: z.record(z.number()).optional(),
+    threshold: z.number().optional(),
+    onFailure: OnFailure$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      entityThresholds: "entity_thresholds",
+      onFailure: "on_failure",
+    });
+  })
+);
 
 export function piiRedactionPluginToJSON(
   piiRedactionPlugin: PIIRedactionPlugin,

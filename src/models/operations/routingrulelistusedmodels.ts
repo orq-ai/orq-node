@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type RoutingRuleListUsedModelsRequest = {
   projectId?: string | undefined;
@@ -19,13 +20,15 @@ export const RoutingRuleListUsedModelsRequest$outboundSchema: z.ZodType<
   RoutingRuleListUsedModelsRequest$Outbound,
   z.ZodTypeDef,
   RoutingRuleListUsedModelsRequest
-> = z.object({
-  projectId: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    projectId: "project_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    projectId: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      projectId: "project_id",
+    });
+  })
+);
 
 export function routingRuleListUsedModelsRequestToJSON(
   routingRuleListUsedModelsRequest: RoutingRuleListUsedModelsRequest,

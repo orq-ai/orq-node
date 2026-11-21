@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { QueryRow, QueryRow$inboundSchema } from "./queryrow.js";
@@ -23,18 +23,20 @@ export const QueryRunResponse$inboundSchema: z.ZodType<
   QueryRunResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  rows: z.array(QueryRow$inboundSchema).optional(),
-  has_more: z.boolean().optional(),
-  server_timestamp: z.string().datetime({ offset: true }).transform(v =>
-    new Date(v)
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "has_more": "hasMore",
-    "server_timestamp": "serverTimestamp",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    rows: z.array(QueryRow$inboundSchema).optional(),
+    has_more: z.boolean().optional(),
+    server_timestamp: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "has_more": "hasMore",
+      "server_timestamp": "serverTimestamp",
+    });
+  })
+);
 
 export function queryRunResponseFromJSON(
   jsonString: string,

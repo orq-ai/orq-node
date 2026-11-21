@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import * as components from "../components/index.js";
 
 export type DeleteDatasetDatapointsRequest = {
@@ -22,15 +23,17 @@ export const DeleteDatasetDatapointsRequest$outboundSchema: z.ZodType<
   DeleteDatasetDatapointsRequest$Outbound,
   z.ZodTypeDef,
   DeleteDatasetDatapointsRequest
-> = z.object({
-  datasetId: z.string(),
-  deleteDatapointsRequest: components.DeleteDatapointsRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    datasetId: "dataset_id",
-    deleteDatapointsRequest: "DeleteDatapointsRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    datasetId: z.string(),
+    deleteDatapointsRequest: components.DeleteDatapointsRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      datasetId: "dataset_id",
+      deleteDatapointsRequest: "DeleteDatapointsRequest",
+    });
+  })
+);
 
 export function deleteDatasetDatapointsRequestToJSON(
   deleteDatasetDatapointsRequest: DeleteDatasetDatapointsRequest,

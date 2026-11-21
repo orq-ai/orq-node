@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import * as components from "../components/index.js";
 
 export type ExperimentRunCellUpdateRequest = {
@@ -28,21 +29,23 @@ export const ExperimentRunCellUpdateRequest$outboundSchema: z.ZodType<
   ExperimentRunCellUpdateRequest$Outbound,
   z.ZodTypeDef,
   ExperimentRunCellUpdateRequest
-> = z.object({
-  experimentId: z.string(),
-  runId: z.string(),
-  rowId: z.string(),
-  cellId: z.string(),
-  updateRunCellRequest: components.UpdateRunCellRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    experimentId: "experiment_id",
-    runId: "run_id",
-    rowId: "row_id",
-    cellId: "cell_id",
-    updateRunCellRequest: "UpdateRunCellRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    experimentId: z.string(),
+    runId: z.string(),
+    rowId: z.string(),
+    cellId: z.string(),
+    updateRunCellRequest: components.UpdateRunCellRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      experimentId: "experiment_id",
+      runId: "run_id",
+      rowId: "row_id",
+      cellId: "cell_id",
+      updateRunCellRequest: "UpdateRunCellRequest",
+    });
+  })
+);
 
 export function experimentRunCellUpdateRequestToJSON(
   experimentRunCellUpdateRequest: ExperimentRunCellUpdateRequest,

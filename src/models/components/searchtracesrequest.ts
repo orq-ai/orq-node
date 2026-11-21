@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import {
   TraceFilter,
   TraceFilter$Outbound,
@@ -43,21 +44,23 @@ export const SearchTracesRequest$outboundSchema: z.ZodType<
   SearchTracesRequest$Outbound,
   z.ZodTypeDef,
   SearchTracesRequest
-> = z.object({
-  from: z.date().transform(v => v.toISOString()),
-  to: z.date().transform(v => v.toISOString()),
-  filters: z.array(TraceFilter$outboundSchema).optional(),
-  filterOperator: z.string().optional(),
-  query: z.string().optional(),
-  sort: z.array(TraceSort$outboundSchema).optional(),
-  limit: z.number().int().optional(),
-  pageToken: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    filterOperator: "filter_operator",
-    pageToken: "page_token",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    from: z.date().transform(v => v.toISOString()),
+    to: z.date().transform(v => v.toISOString()),
+    filters: z.array(TraceFilter$outboundSchema).optional(),
+    filterOperator: z.string().optional(),
+    query: z.string().optional(),
+    sort: z.array(TraceSort$outboundSchema).optional(),
+    limit: z.number().int().optional(),
+    pageToken: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      filterOperator: "filter_operator",
+      pageToken: "page_token",
+    });
+  })
+);
 
 export function searchTracesRequestToJSON(
   searchTracesRequest: SearchTracesRequest,

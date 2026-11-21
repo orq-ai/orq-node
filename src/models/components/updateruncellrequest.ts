@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type UpdateRunCellRequest = {
   value?: { [k: string]: any } | undefined;
@@ -18,9 +19,11 @@ export const UpdateRunCellRequest$outboundSchema: z.ZodType<
   UpdateRunCellRequest$Outbound,
   z.ZodTypeDef,
   UpdateRunCellRequest
-> = z.object({
-  value: z.record(z.any()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    value: z.record(z.any()).optional(),
+  })
+);
 
 export function updateRunCellRequestToJSON(
   updateRunCellRequest: UpdateRunCellRequest,

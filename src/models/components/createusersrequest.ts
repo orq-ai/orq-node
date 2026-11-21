@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type CreateUsersRequest = {
   emails?: Array<string> | undefined;
@@ -26,10 +27,12 @@ export const CreateUsersRequest$outboundSchema: z.ZodType<
   CreateUsersRequest$Outbound,
   z.ZodTypeDef,
   CreateUsersRequest
-> = z.object({
-  emails: z.array(z.string()).optional(),
-  roles: z.array(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    emails: z.array(z.string()).optional(),
+    roles: z.array(z.string()).optional(),
+  })
+);
 
 export function createUsersRequestToJSON(
   createUsersRequest: CreateUsersRequest,

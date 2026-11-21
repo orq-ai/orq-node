@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { AccessLevel, AccessLevel$outboundSchema } from "./accesslevel.js";
 import {
   ManagementKeyStatus,
@@ -57,20 +58,22 @@ export const UpdateManagementKeyRequest$outboundSchema: z.ZodType<
   UpdateManagementKeyRequest$Outbound,
   z.ZodTypeDef,
   UpdateManagementKeyRequest
-> = z.object({
-  name: z.string().optional(),
-  status: ManagementKeyStatus$outboundSchema.optional(),
-  permissionMode: ManagementPermissionMode$outboundSchema.optional(),
-  access: z.record(AccessLevel$outboundSchema).optional(),
-  expiresAt: z.date().transform(v => v.toISOString()).optional(),
-  clearExpiresAt: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    permissionMode: "permission_mode",
-    expiresAt: "expires_at",
-    clearExpiresAt: "clear_expires_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    status: ManagementKeyStatus$outboundSchema.optional(),
+    permissionMode: ManagementPermissionMode$outboundSchema.optional(),
+    access: z.record(AccessLevel$outboundSchema).optional(),
+    expiresAt: z.date().transform(v => v.toISOString()).optional(),
+    clearExpiresAt: z.boolean().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      permissionMode: "permission_mode",
+      expiresAt: "expires_at",
+      clearExpiresAt: "clear_expires_at",
+    });
+  })
+);
 
 export function updateManagementKeyRequestToJSON(
   updateManagementKeyRequest: UpdateManagementKeyRequest,

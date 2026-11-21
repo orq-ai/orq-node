@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 /**
  * Writes information to agent memory stores
@@ -32,15 +33,17 @@ export const WriteMemoryStoreToolInput$outboundSchema: z.ZodType<
   WriteMemoryStoreToolInput$Outbound,
   z.ZodTypeDef,
   WriteMemoryStoreToolInput
-> = z.object({
-  type: z.literal("write_memory_store"),
-  requiresApproval: z.boolean().optional(),
-  configuration: z.record(z.any()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    requiresApproval: "requires_approval",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("write_memory_store"),
+    requiresApproval: z.boolean().optional(),
+    configuration: z.record(z.any()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      requiresApproval: "requires_approval",
+    });
+  })
+);
 
 export function writeMemoryStoreToolInputToJSON(
   writeMemoryStoreToolInput: WriteMemoryStoreToolInput,

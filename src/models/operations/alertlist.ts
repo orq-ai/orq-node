@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import * as components from "../components/index.js";
 
 export type AlertListRequest = {
@@ -52,19 +53,21 @@ export const AlertListRequest$outboundSchema: z.ZodType<
   AlertListRequest$Outbound,
   z.ZodTypeDef,
   AlertListRequest
-> = z.object({
-  limit: z.number().int().optional(),
-  startingAfter: z.string().optional(),
-  endingBefore: z.string().optional(),
-  projectId: z.string().optional(),
-  scope: components.AlertScope$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    startingAfter: "starting_after",
-    endingBefore: "ending_before",
-    projectId: "project_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    limit: z.number().int().optional(),
+    startingAfter: z.string().optional(),
+    endingBefore: z.string().optional(),
+    projectId: z.string().optional(),
+    scope: components.AlertScope$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      startingAfter: "starting_after",
+      endingBefore: "ending_before",
+      projectId: "project_id",
+    });
+  })
+);
 
 export function alertListRequestToJSON(
   alertListRequest: AlertListRequest,

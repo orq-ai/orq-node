@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import {
   ArtifactRefs,
   ArtifactRefs$Outbound,
@@ -28,15 +29,17 @@ export const PatchTaskCellRequest$outboundSchema: z.ZodType<
   PatchTaskCellRequest$Outbound,
   z.ZodTypeDef,
   PatchTaskCellRequest
-> = z.object({
-  repeatIndex: z.number().int().optional(),
-  value: z.record(z.any()).optional(),
-  artifacts: ArtifactRefs$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    repeatIndex: "repeat_index",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    repeatIndex: z.number().int().optional(),
+    value: z.record(z.any()).optional(),
+    artifacts: ArtifactRefs$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      repeatIndex: "repeat_index",
+    });
+  })
+);
 
 export function patchTaskCellRequestToJSON(
   patchTaskCellRequest: PatchTaskCellRequest,

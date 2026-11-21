@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type DeleteAgentScheduleRequest = {
   /**
@@ -27,15 +28,17 @@ export const DeleteAgentScheduleRequest$outboundSchema: z.ZodType<
   DeleteAgentScheduleRequest$Outbound,
   z.ZodTypeDef,
   DeleteAgentScheduleRequest
-> = z.object({
-  agentKey: z.string(),
-  scheduleId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    agentKey: "agent_key",
-    scheduleId: "schedule_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    agentKey: z.string(),
+    scheduleId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      agentKey: "agent_key",
+      scheduleId: "schedule_id",
+    });
+  })
+);
 
 export function deleteAgentScheduleRequestToJSON(
   deleteAgentScheduleRequest: DeleteAgentScheduleRequest,

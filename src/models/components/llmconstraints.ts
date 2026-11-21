@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type LlmConstraints = {
   maxTurns?: number | undefined;
@@ -23,15 +24,17 @@ export const LlmConstraints$outboundSchema: z.ZodType<
   LlmConstraints$Outbound,
   z.ZodTypeDef,
   LlmConstraints
-> = z.object({
-  maxTurns: z.number().int().optional(),
-  timeout: z.string().optional(),
-  concurrency: z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    maxTurns: "max_turns",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    maxTurns: z.number().int().optional(),
+    timeout: z.string().optional(),
+    concurrency: z.number().int().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      maxTurns: "max_turns",
+    });
+  })
+);
 
 export function llmConstraintsToJSON(llmConstraints: LlmConstraints): string {
   return JSON.stringify(LlmConstraints$outboundSchema.parse(llmConstraints));

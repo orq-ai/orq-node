@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import * as components from "../components/index.js";
 
 export type GetChunksCountRequest = {
@@ -24,18 +25,20 @@ export const GetChunksCountRequest$outboundSchema: z.ZodType<
   GetChunksCountRequest$Outbound,
   z.ZodTypeDef,
   GetChunksCountRequest
-> = z.object({
-  knowledgeId: z.string(),
-  datasourceId: z.string(),
-  chunksServiceCountRequest:
-    components.ChunksServiceCountRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    knowledgeId: "knowledge_id",
-    datasourceId: "datasource_id",
-    chunksServiceCountRequest: "ChunksServiceCountRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    knowledgeId: z.string(),
+    datasourceId: z.string(),
+    chunksServiceCountRequest:
+      components.ChunksServiceCountRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      knowledgeId: "knowledge_id",
+      datasourceId: "datasource_id",
+      chunksServiceCountRequest: "ChunksServiceCountRequest",
+    });
+  })
+);
 
 export function getChunksCountRequestToJSON(
   getChunksCountRequest: GetChunksCountRequest,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -32,19 +32,21 @@ export const IdentityMetrics$inboundSchema: z.ZodType<
   IdentityMetrics,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  total_tokens: z.number(),
-  total_cost: z.number(),
-  total_requests: z.number(),
-  error_rate: z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    "total_tokens": "totalTokens",
-    "total_cost": "totalCost",
-    "total_requests": "totalRequests",
-    "error_rate": "errorRate",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    total_tokens: z.number(),
+    total_cost: z.number(),
+    total_requests: z.number(),
+    error_rate: z.number(),
+  }).transform((v) => {
+    return remap$(v, {
+      "total_tokens": "totalTokens",
+      "total_cost": "totalCost",
+      "total_requests": "totalRequests",
+      "error_rate": "errorRate",
+    });
+  })
+);
 
 export function identityMetricsFromJSON(
   jsonString: string,

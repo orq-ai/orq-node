@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type EvaluatorCallTimeout = {
   /**
@@ -25,13 +26,15 @@ export const EvaluatorCallTimeout$outboundSchema: z.ZodType<
   EvaluatorCallTimeout$Outbound,
   z.ZodTypeDef,
   EvaluatorCallTimeout
-> = z.object({
-  callTimeout: z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    callTimeout: "call_timeout",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    callTimeout: z.number().int().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      callTimeout: "call_timeout",
+    });
+  })
+);
 
 export function evaluatorCallTimeoutToJSON(
   evaluatorCallTimeout: EvaluatorCallTimeout,

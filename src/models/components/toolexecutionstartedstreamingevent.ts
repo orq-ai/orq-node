@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -83,21 +83,23 @@ export type ToolExecutionStartedStreamingEvent = {
 };
 
 /** @internal */
-export const Product$inboundSchema: z.ZodNativeEnum<typeof Product> = z
-  .nativeEnum(Product);
+export const Product$inboundSchema: z.ZodNativeEnum<typeof Product> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Product));
 
 /** @internal */
 export const ToolExecutionStartedStreamingEventMemory$inboundSchema: z.ZodType<
   ToolExecutionStartedStreamingEventMemory,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  entity_id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "entity_id": "entityId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    entity_id: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "entity_id": "entityId",
+    });
+  })
+);
 
 export function toolExecutionStartedStreamingEventMemoryFromJSON(
   jsonString: string,
@@ -120,29 +122,31 @@ export const ToolExecutionContext$inboundSchema: z.ZodType<
   ToolExecutionContext,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  action_id: z.string(),
-  agent_tool_call_id: z.string(),
-  workspace_id: z.string(),
-  agent_manifest_id: z.string(),
-  agent_execution_id: z.string(),
-  product: Product$inboundSchema,
-  memory: z.lazy(() => ToolExecutionStartedStreamingEventMemory$inboundSchema)
-    .optional(),
-  parent_id: z.string().optional(),
-  variables: z.record(z.any()).optional(),
-  secret_keys: z.array(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "action_id": "actionId",
-    "agent_tool_call_id": "agentToolCallId",
-    "workspace_id": "workspaceId",
-    "agent_manifest_id": "agentManifestId",
-    "agent_execution_id": "agentExecutionId",
-    "parent_id": "parentId",
-    "secret_keys": "secretKeys",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    action_id: z.string(),
+    agent_tool_call_id: z.string(),
+    workspace_id: z.string(),
+    agent_manifest_id: z.string(),
+    agent_execution_id: z.string(),
+    product: Product$inboundSchema,
+    memory: z.lazy(() => ToolExecutionStartedStreamingEventMemory$inboundSchema)
+      .optional(),
+    parent_id: z.string().optional(),
+    variables: z.record(z.any()).optional(),
+    secret_keys: z.array(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "action_id": "actionId",
+      "agent_tool_call_id": "agentToolCallId",
+      "workspace_id": "workspaceId",
+      "agent_manifest_id": "agentManifestId",
+      "agent_execution_id": "agentExecutionId",
+      "parent_id": "parentId",
+      "secret_keys": "secretKeys",
+    });
+  })
+);
 
 export function toolExecutionContextFromJSON(
   jsonString: string,
@@ -159,28 +163,30 @@ export const ToolExecutionStartedStreamingEventData$inboundSchema: z.ZodType<
   ToolExecutionStartedStreamingEventData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  tool_id: z.string(),
-  tool_key: z.string().optional(),
-  tool_display_name: z.string().optional(),
-  tool_description: z.nullable(z.string()).optional(),
-  action_type: z.string(),
-  tool_arguments: z.record(z.any()),
-  tool_execution_context: z.lazy(() => ToolExecutionContext$inboundSchema),
-  responseId: z.string().optional(),
-  workflowRunId: z.string(),
-  stream: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "tool_id": "toolId",
-    "tool_key": "toolKey",
-    "tool_display_name": "toolDisplayName",
-    "tool_description": "toolDescription",
-    "action_type": "actionType",
-    "tool_arguments": "toolArguments",
-    "tool_execution_context": "toolExecutionContext",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    tool_id: z.string(),
+    tool_key: z.string().optional(),
+    tool_display_name: z.string().optional(),
+    tool_description: z.nullable(z.string()).optional(),
+    action_type: z.string(),
+    tool_arguments: z.record(z.any()),
+    tool_execution_context: z.lazy(() => ToolExecutionContext$inboundSchema),
+    responseId: z.string().optional(),
+    workflowRunId: z.string(),
+    stream: z.boolean().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "tool_id": "toolId",
+      "tool_key": "toolKey",
+      "tool_display_name": "toolDisplayName",
+      "tool_description": "toolDescription",
+      "action_type": "actionType",
+      "tool_arguments": "toolArguments",
+      "tool_execution_context": "toolExecutionContext",
+    });
+  })
+);
 
 export function toolExecutionStartedStreamingEventDataFromJSON(
   jsonString: string,
@@ -198,11 +204,13 @@ export const ToolExecutionStartedStreamingEvent$inboundSchema: z.ZodType<
   ToolExecutionStartedStreamingEvent,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("event.workflow_events.tool_execution_started"),
-  timestamp: z.string(),
-  data: z.lazy(() => ToolExecutionStartedStreamingEventData$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("event.workflow_events.tool_execution_started"),
+    timestamp: z.string(),
+    data: z.lazy(() => ToolExecutionStartedStreamingEventData$inboundSchema),
+  })
+);
 
 export function toolExecutionStartedStreamingEventFromJSON(
   jsonString: string,

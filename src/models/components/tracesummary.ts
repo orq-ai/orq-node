@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -64,14 +64,14 @@ export type TraceSummary = {
 /** @internal */
 export const TraceSummaryObject$inboundSchema: z.ZodNativeEnum<
   typeof TraceSummaryObject
-> = z.nativeEnum(TraceSummaryObject);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(TraceSummaryObject));
 
 /** @internal */
 export const Attributes$inboundSchema: z.ZodType<
   Attributes,
   z.ZodTypeDef,
   unknown
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function attributesFromJSON(
   jsonString: string,
@@ -88,58 +88,62 @@ export const TraceSummary$inboundSchema: z.ZodType<
   TraceSummary,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: TraceSummaryObject$inboundSchema.optional(),
-  trace_id: z.string().optional(),
-  root_span_id: z.string().optional(),
-  leading_span_id: z.string().optional(),
-  name: z.string().optional(),
-  operation: z.string().optional(),
-  status: z.string().optional(),
-  started_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  ended_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  duration_ms: z.number().optional(),
-  project_id: z.string().optional(),
-  identity_id: z.string().optional(),
-  session_id: z.string().optional(),
-  thread_id: z.string().optional(),
-  product: z.string().optional(),
-  providers: z.array(z.string()).optional(),
-  models: z.array(z.string()).optional(),
-  agent: TraceAgent$inboundSchema.optional(),
-  usage: TraceUsage$inboundSchema.optional(),
-  cost: TraceCost$inboundSchema.optional(),
-  id: z.string().optional(),
-  span_id: z.string().optional(),
-  parent_id: z.string().optional(),
-  type: z.string().optional(),
-  context: TraceContext$inboundSchema.optional(),
-  attributes: z.lazy(() => Attributes$inboundSchema).optional(),
-  start_time: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  end_time: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  duration: z.number().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "trace_id": "traceId",
-    "root_span_id": "rootSpanId",
-    "leading_span_id": "leadingSpanId",
-    "started_at": "startedAt",
-    "ended_at": "endedAt",
-    "duration_ms": "durationMs",
-    "project_id": "projectId",
-    "identity_id": "identityId",
-    "session_id": "sessionId",
-    "thread_id": "threadId",
-    "span_id": "spanId",
-    "parent_id": "parentId",
-    "start_time": "startTime",
-    "end_time": "endTime",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: TraceSummaryObject$inboundSchema.optional(),
+    trace_id: z.string().optional(),
+    root_span_id: z.string().optional(),
+    leading_span_id: z.string().optional(),
+    name: z.string().optional(),
+    operation: z.string().optional(),
+    status: z.string().optional(),
+    started_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ).optional(),
+    ended_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
+      .optional(),
+    duration_ms: z.number().optional(),
+    project_id: z.string().optional(),
+    identity_id: z.string().optional(),
+    session_id: z.string().optional(),
+    thread_id: z.string().optional(),
+    product: z.string().optional(),
+    providers: z.array(z.string()).optional(),
+    models: z.array(z.string()).optional(),
+    agent: TraceAgent$inboundSchema.optional(),
+    usage: TraceUsage$inboundSchema.optional(),
+    cost: TraceCost$inboundSchema.optional(),
+    id: z.string().optional(),
+    span_id: z.string().optional(),
+    parent_id: z.string().optional(),
+    type: z.string().optional(),
+    context: TraceContext$inboundSchema.optional(),
+    attributes: z.lazy(() => Attributes$inboundSchema).optional(),
+    start_time: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ).optional(),
+    end_time: z.string().datetime({ offset: true }).transform(v => new Date(v))
+      .optional(),
+    duration: z.number().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "trace_id": "traceId",
+      "root_span_id": "rootSpanId",
+      "leading_span_id": "leadingSpanId",
+      "started_at": "startedAt",
+      "ended_at": "endedAt",
+      "duration_ms": "durationMs",
+      "project_id": "projectId",
+      "identity_id": "identityId",
+      "session_id": "sessionId",
+      "thread_id": "threadId",
+      "span_id": "spanId",
+      "parent_id": "parentId",
+      "start_time": "startTime",
+      "end_time": "endTime",
+    });
+  })
+);
 
 export function traceSummaryFromJSON(
   jsonString: string,

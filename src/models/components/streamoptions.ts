@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type StreamOptions = {
   includeObfuscation: boolean;
@@ -19,13 +20,15 @@ export const StreamOptions$outboundSchema: z.ZodType<
   StreamOptions$Outbound,
   z.ZodTypeDef,
   StreamOptions
-> = z.object({
-  includeObfuscation: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    includeObfuscation: "include_obfuscation",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    includeObfuscation: z.boolean(),
+  }).transform((v) => {
+    return remap$(v, {
+      includeObfuscation: "include_obfuscation",
+    });
+  })
+);
 
 export function streamOptionsToJSON(streamOptions: StreamOptions): string {
   return JSON.stringify(StreamOptions$outboundSchema.parse(streamOptions));

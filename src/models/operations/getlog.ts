@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type GetLogRequest = {
   id: string;
@@ -18,9 +19,11 @@ export const GetLogRequest$outboundSchema: z.ZodType<
   GetLogRequest$Outbound,
   z.ZodTypeDef,
   GetLogRequest
-> = z.object({
-  id: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+  })
+);
 
 export function getLogRequestToJSON(getLogRequest: GetLogRequest): string {
   return JSON.stringify(GetLogRequest$outboundSchema.parse(getLogRequest));

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -68,36 +68,42 @@ export const ModelFusion$inboundSchema: z.ZodType<
   ModelFusion,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  model_fusion_id: z.string(),
-  key: z.string(),
-  model_ref: z.string(),
-  panel_models: z.array(z.string()),
-  judge_model: z.string(),
-  synthesis_mode: ModelFusionSynthesisMode$inboundSchema,
-  preset: ModelFusionPreset$inboundSchema,
-  orchestrator_model: z.string().optional(),
-  web_tools: z.boolean(),
-  max_tool_calls: z.number().int(),
-  feed_raw_to_synth: z.boolean(),
-  enabled: z.boolean(),
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  updated_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-}).transform((v) => {
-  return remap$(v, {
-    "model_fusion_id": "modelFusionId",
-    "model_ref": "modelRef",
-    "panel_models": "panelModels",
-    "judge_model": "judgeModel",
-    "synthesis_mode": "synthesisMode",
-    "orchestrator_model": "orchestratorModel",
-    "web_tools": "webTools",
-    "max_tool_calls": "maxToolCalls",
-    "feed_raw_to_synth": "feedRawToSynth",
-    "created_at": "createdAt",
-    "updated_at": "updatedAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model_fusion_id: z.string(),
+    key: z.string(),
+    model_ref: z.string(),
+    panel_models: z.array(z.string()),
+    judge_model: z.string(),
+    synthesis_mode: ModelFusionSynthesisMode$inboundSchema,
+    preset: ModelFusionPreset$inboundSchema,
+    orchestrator_model: z.string().optional(),
+    web_tools: z.boolean(),
+    max_tool_calls: z.number().int(),
+    feed_raw_to_synth: z.boolean(),
+    enabled: z.boolean(),
+    created_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    updated_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+  }).transform((v) => {
+    return remap$(v, {
+      "model_fusion_id": "modelFusionId",
+      "model_ref": "modelRef",
+      "panel_models": "panelModels",
+      "judge_model": "judgeModel",
+      "synthesis_mode": "synthesisMode",
+      "orchestrator_model": "orchestratorModel",
+      "web_tools": "webTools",
+      "max_tool_calls": "maxToolCalls",
+      "feed_raw_to_synth": "feedRawToSynth",
+      "created_at": "createdAt",
+      "updated_at": "updatedAt",
+    });
+  })
+);
 
 export function modelFusionFromJSON(
   jsonString: string,

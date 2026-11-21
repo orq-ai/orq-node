@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -36,10 +36,12 @@ export const PiiRedaction$inboundSchema: z.ZodType<
   PiiRedaction,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  enabled: z.boolean(),
-  config: PiiRedactionConfig$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    enabled: z.boolean(),
+    config: PiiRedactionConfig$inboundSchema.optional(),
+  })
+);
 /** @internal */
 export type PiiRedaction$Outbound = {
   enabled: boolean;
@@ -51,10 +53,12 @@ export const PiiRedaction$outboundSchema: z.ZodType<
   PiiRedaction$Outbound,
   z.ZodTypeDef,
   PiiRedaction
-> = z.object({
-  enabled: z.boolean(),
-  config: PiiRedactionConfig$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    enabled: z.boolean(),
+    config: PiiRedactionConfig$outboundSchema.optional(),
+  })
+);
 
 export function piiRedactionToJSON(piiRedaction: PiiRedaction): string {
   return JSON.stringify(PiiRedaction$outboundSchema.parse(piiRedaction));

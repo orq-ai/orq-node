@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import * as components from "../components/index.js";
 
 export type ExperimentReviewCellPatchRequest = {
@@ -28,21 +29,23 @@ export const ExperimentReviewCellPatchRequest$outboundSchema: z.ZodType<
   ExperimentReviewCellPatchRequest$Outbound,
   z.ZodTypeDef,
   ExperimentReviewCellPatchRequest
-> = z.object({
-  experimentId: z.string(),
-  runId: z.string(),
-  reviewId: z.string(),
-  datapointId: z.string(),
-  patchReviewCellRequest: components.PatchReviewCellRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    experimentId: "experiment_id",
-    runId: "run_id",
-    reviewId: "review_id",
-    datapointId: "datapoint_id",
-    patchReviewCellRequest: "PatchReviewCellRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    experimentId: z.string(),
+    runId: z.string(),
+    reviewId: z.string(),
+    datapointId: z.string(),
+    patchReviewCellRequest: components.PatchReviewCellRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      experimentId: "experiment_id",
+      runId: "run_id",
+      reviewId: "review_id",
+      datapointId: "datapoint_id",
+      patchReviewCellRequest: "PatchReviewCellRequest",
+    });
+  })
+);
 
 export function experimentReviewCellPatchRequestToJSON(
   experimentReviewCellPatchRequest: ExperimentReviewCellPatchRequest,

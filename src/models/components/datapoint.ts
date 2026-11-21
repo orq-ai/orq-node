@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -41,12 +41,14 @@ export const DataPoint$inboundSchema: z.ZodType<
   DataPoint,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  timestamp: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  dimensions: z.record(z.string()).optional(),
-  metrics: z.record(z.number()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    timestamp: z.string().datetime({ offset: true }).transform(v => new Date(v))
+      .optional(),
+    dimensions: z.record(z.string()).optional(),
+    metrics: z.record(z.number()).optional(),
+  })
+);
 
 export function dataPointFromJSON(
   jsonString: string,

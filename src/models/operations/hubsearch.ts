@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type HubSearchRequest = {
   q?: string | undefined;
@@ -20,10 +21,12 @@ export const HubSearchRequest$outboundSchema: z.ZodType<
   HubSearchRequest$Outbound,
   z.ZodTypeDef,
   HubSearchRequest
-> = z.object({
-  q: z.string().optional(),
-  types: z.array(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    q: z.string().optional(),
+    types: z.array(z.string()).optional(),
+  })
+);
 
 export function hubSearchRequestToJSON(
   hubSearchRequest: HubSearchRequest,

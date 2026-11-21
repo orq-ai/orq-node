@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import * as components from "../components/index.js";
 
 export type UpdateSessionRequest = {
@@ -22,15 +23,17 @@ export const UpdateSessionRequest$outboundSchema: z.ZodType<
   UpdateSessionRequest$Outbound,
   z.ZodTypeDef,
   UpdateSessionRequest
-> = z.object({
-  sessionId: z.string(),
-  updateThreadRequest: components.UpdateThreadRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    sessionId: "session_id",
-    updateThreadRequest: "UpdateThreadRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    sessionId: z.string(),
+    updateThreadRequest: components.UpdateThreadRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      sessionId: "session_id",
+      updateThreadRequest: "UpdateThreadRequest",
+    });
+  })
+);
 
 export function updateSessionRequestToJSON(
   updateSessionRequest: UpdateSessionRequest,

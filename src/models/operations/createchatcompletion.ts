@@ -5,7 +5,7 @@
 import * as z from "zod/v3";
 import { EventStream } from "../../lib/event-streams.js";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
@@ -2285,7 +2285,9 @@ export const CreateChatCompletionContentRouterChatCompletionsRequest2$outboundSc
     CreateChatCompletionContentRouterChatCompletionsRequest2$Outbound,
     z.ZodTypeDef,
     CreateChatCompletionContentRouterChatCompletionsRequest2
-  > = components.TextContentPartSchema$outboundSchema;
+  > = /* @__PURE__ */ lazySchema$(() =>
+    components.TextContentPartSchema$outboundSchema
+  );
 
 export function createChatCompletionContentRouterChatCompletionsRequest2ToJSON(
   createChatCompletionContentRouterChatCompletionsRequest2:
@@ -2308,10 +2310,12 @@ export const CreateChatCompletionMessagesRouterChatCompletionsRequestRequestBody
     CreateChatCompletionMessagesRouterChatCompletionsRequestRequestBody5Content$Outbound,
     z.ZodTypeDef,
     CreateChatCompletionMessagesRouterChatCompletionsRequestRequestBody5Content
-  > = z.union([
-    z.string(),
-    z.array(components.TextContentPartSchema$outboundSchema),
-  ]);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.union([
+      z.string(),
+      z.array(components.TextContentPartSchema$outboundSchema),
+    ])
+  );
 
 export function createChatCompletionMessagesRouterChatCompletionsRequestRequestBody5ContentToJSON(
   createChatCompletionMessagesRouterChatCompletionsRequestRequestBody5Content:
@@ -2329,12 +2333,16 @@ export function createChatCompletionMessagesRouterChatCompletionsRequestRequestB
 export const CreateChatCompletionMessagesRouterChatCompletionsType$outboundSchema:
   z.ZodNativeEnum<
     typeof CreateChatCompletionMessagesRouterChatCompletionsType
-  > = z.nativeEnum(CreateChatCompletionMessagesRouterChatCompletionsType);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.nativeEnum(CreateChatCompletionMessagesRouterChatCompletionsType)
+  );
 
 /** @internal */
 export const CreateChatCompletionMessagesTtl$outboundSchema: z.ZodNativeEnum<
   typeof CreateChatCompletionMessagesTtl
-> = z.nativeEnum(CreateChatCompletionMessagesTtl);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(CreateChatCompletionMessagesTtl)
+);
 
 /** @internal */
 export type CreateChatCompletionMessagesCacheControl$Outbound = {
@@ -2347,10 +2355,12 @@ export const CreateChatCompletionMessagesCacheControl$outboundSchema: z.ZodType<
   CreateChatCompletionMessagesCacheControl$Outbound,
   z.ZodTypeDef,
   CreateChatCompletionMessagesCacheControl
-> = z.object({
-  type: CreateChatCompletionMessagesRouterChatCompletionsType$outboundSchema,
-  ttl: CreateChatCompletionMessagesTtl$outboundSchema.default("5m"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: CreateChatCompletionMessagesRouterChatCompletionsType$outboundSchema,
+    ttl: CreateChatCompletionMessagesTtl$outboundSchema.default("5m"),
+  })
+);
 
 export function createChatCompletionMessagesCacheControlToJSON(
   createChatCompletionMessagesCacheControl:
@@ -2376,22 +2386,24 @@ export const CreateChatCompletionMessagesToolMessage$outboundSchema: z.ZodType<
   CreateChatCompletionMessagesToolMessage$Outbound,
   z.ZodTypeDef,
   CreateChatCompletionMessagesToolMessage
-> = z.object({
-  role: z.literal("tool"),
-  content: z.union([
-    z.string(),
-    z.array(components.TextContentPartSchema$outboundSchema),
-  ]),
-  toolCallId: z.nullable(z.string()),
-  cacheControl: z.lazy(() =>
-    CreateChatCompletionMessagesCacheControl$outboundSchema
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    toolCallId: "tool_call_id",
-    cacheControl: "cache_control",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    role: z.literal("tool"),
+    content: z.union([
+      z.string(),
+      z.array(components.TextContentPartSchema$outboundSchema),
+    ]),
+    toolCallId: z.nullable(z.string()),
+    cacheControl: z.lazy(() =>
+      CreateChatCompletionMessagesCacheControl$outboundSchema
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      toolCallId: "tool_call_id",
+      cacheControl: "cache_control",
+    });
+  })
+);
 
 export function createChatCompletionMessagesToolMessageToJSON(
   createChatCompletionMessagesToolMessage:
@@ -2417,14 +2429,16 @@ export const CreateChatCompletionContentRouterChatCompletions2$outboundSchema:
     CreateChatCompletionContentRouterChatCompletions2$Outbound,
     z.ZodTypeDef,
     CreateChatCompletionContentRouterChatCompletions2
-  > = z.union([
-    components.TextContentPartSchema$outboundSchema.and(
-      z.object({ type: z.literal("text") }),
-    ),
-    components.RefusalPartSchema$outboundSchema,
-    components.ReasoningPartSchema$outboundSchema,
-    components.RedactedReasoningPartSchema$outboundSchema,
-  ]);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.union([
+      components.TextContentPartSchema$outboundSchema.and(
+        z.object({ type: z.literal("text") }),
+      ),
+      components.RefusalPartSchema$outboundSchema,
+      components.ReasoningPartSchema$outboundSchema,
+      components.RedactedReasoningPartSchema$outboundSchema,
+    ])
+  );
 
 export function createChatCompletionContentRouterChatCompletions2ToJSON(
   createChatCompletionContentRouterChatCompletions2:
@@ -2453,19 +2467,21 @@ export const CreateChatCompletionMessagesRouterChatCompletionsRequestRequestBody
     CreateChatCompletionMessagesRouterChatCompletionsRequestRequestBodyContent$Outbound,
     z.ZodTypeDef,
     CreateChatCompletionMessagesRouterChatCompletionsRequestRequestBodyContent
-  > = z.union([
-    z.string(),
-    z.array(
-      z.union([
-        components.TextContentPartSchema$outboundSchema.and(
-          z.object({ type: z.literal("text") }),
-        ),
-        components.RefusalPartSchema$outboundSchema,
-        components.ReasoningPartSchema$outboundSchema,
-        components.RedactedReasoningPartSchema$outboundSchema,
-      ]),
-    ),
-  ]);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.union([
+      z.string(),
+      z.array(
+        z.union([
+          components.TextContentPartSchema$outboundSchema.and(
+            z.object({ type: z.literal("text") }),
+          ),
+          components.RefusalPartSchema$outboundSchema,
+          components.ReasoningPartSchema$outboundSchema,
+          components.RedactedReasoningPartSchema$outboundSchema,
+        ]),
+      ),
+    ])
+  );
 
 export function createChatCompletionMessagesRouterChatCompletionsRequestRequestBodyContentToJSON(
   createChatCompletionMessagesRouterChatCompletionsRequestRequestBodyContent:
@@ -2489,9 +2505,11 @@ export const CreateChatCompletionMessagesAudio$outboundSchema: z.ZodType<
   CreateChatCompletionMessagesAudio$Outbound,
   z.ZodTypeDef,
   CreateChatCompletionMessagesAudio
-> = z.object({
-  id: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+  })
+);
 
 export function createChatCompletionMessagesAudioToJSON(
   createChatCompletionMessagesAudio: CreateChatCompletionMessagesAudio,
@@ -2506,7 +2524,9 @@ export function createChatCompletionMessagesAudioToJSON(
 /** @internal */
 export const CreateChatCompletionMessagesType$outboundSchema: z.ZodNativeEnum<
   typeof CreateChatCompletionMessagesType
-> = z.nativeEnum(CreateChatCompletionMessagesType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(CreateChatCompletionMessagesType)
+);
 
 /** @internal */
 export type CreateChatCompletionMessagesFunction$Outbound = {
@@ -2519,10 +2539,12 @@ export const CreateChatCompletionMessagesFunction$outboundSchema: z.ZodType<
   CreateChatCompletionMessagesFunction$Outbound,
   z.ZodTypeDef,
   CreateChatCompletionMessagesFunction
-> = z.object({
-  name: z.string().optional(),
-  arguments: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    arguments: z.string().optional(),
+  })
+);
 
 export function createChatCompletionMessagesFunctionToJSON(
   createChatCompletionMessagesFunction: CreateChatCompletionMessagesFunction,
@@ -2544,13 +2566,15 @@ export const CreateChatCompletionMessagesGoogle$outboundSchema: z.ZodType<
   CreateChatCompletionMessagesGoogle$Outbound,
   z.ZodTypeDef,
   CreateChatCompletionMessagesGoogle
-> = z.object({
-  thoughtSignature: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    thoughtSignature: "thought_signature",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    thoughtSignature: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      thoughtSignature: "thought_signature",
+    });
+  })
+);
 
 export function createChatCompletionMessagesGoogleToJSON(
   createChatCompletionMessagesGoogle: CreateChatCompletionMessagesGoogle,
@@ -2572,10 +2596,12 @@ export const CreateChatCompletionMessagesExtraContent$outboundSchema: z.ZodType<
   CreateChatCompletionMessagesExtraContent$Outbound,
   z.ZodTypeDef,
   CreateChatCompletionMessagesExtraContent
-> = z.object({
-  google: z.lazy(() => CreateChatCompletionMessagesGoogle$outboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    google: z.lazy(() => CreateChatCompletionMessagesGoogle$outboundSchema)
+      .optional(),
+  })
+);
 
 export function createChatCompletionMessagesExtraContentToJSON(
   createChatCompletionMessagesExtraContent:
@@ -2602,20 +2628,22 @@ export const CreateChatCompletionMessagesToolCalls$outboundSchema: z.ZodType<
   CreateChatCompletionMessagesToolCalls$Outbound,
   z.ZodTypeDef,
   CreateChatCompletionMessagesToolCalls
-> = z.object({
-  id: z.string(),
-  type: CreateChatCompletionMessagesType$outboundSchema,
-  function: z.lazy(() => CreateChatCompletionMessagesFunction$outboundSchema),
-  thoughtSignature: z.string().optional(),
-  extraContent: z.lazy(() =>
-    CreateChatCompletionMessagesExtraContent$outboundSchema
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    thoughtSignature: "thought_signature",
-    extraContent: "extra_content",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    type: CreateChatCompletionMessagesType$outboundSchema,
+    function: z.lazy(() => CreateChatCompletionMessagesFunction$outboundSchema),
+    thoughtSignature: z.string().optional(),
+    extraContent: z.lazy(() =>
+      CreateChatCompletionMessagesExtraContent$outboundSchema
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      thoughtSignature: "thought_signature",
+      extraContent: "extra_content",
+    });
+  })
+);
 
 export function createChatCompletionMessagesToolCallsToJSON(
   createChatCompletionMessagesToolCalls: CreateChatCompletionMessagesToolCalls,
@@ -2655,38 +2683,40 @@ export const CreateChatCompletionMessagesAssistantMessage$outboundSchema:
     CreateChatCompletionMessagesAssistantMessage$Outbound,
     z.ZodTypeDef,
     CreateChatCompletionMessagesAssistantMessage
-  > = z.object({
-    reasoningContent: z.string().optional(),
-    content: z.nullable(
-      z.union([
-        z.string(),
-        z.array(
-          z.union([
-            components.TextContentPartSchema$outboundSchema.and(
-              z.object({ type: z.literal("text") }),
-            ),
-            components.RefusalPartSchema$outboundSchema,
-            components.ReasoningPartSchema$outboundSchema,
-            components.RedactedReasoningPartSchema$outboundSchema,
-          ]),
-        ),
-      ]),
-    ).optional(),
-    refusal: z.nullable(z.string()).optional(),
-    role: z.literal("assistant"),
-    name: z.string().optional(),
-    audio: z.nullable(
-      z.lazy(() => CreateChatCompletionMessagesAudio$outboundSchema),
-    ).optional(),
-    toolCalls: z.array(
-      z.lazy(() => CreateChatCompletionMessagesToolCalls$outboundSchema),
-    ).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      reasoningContent: "reasoning_content",
-      toolCalls: "tool_calls",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      reasoningContent: z.string().optional(),
+      content: z.nullable(
+        z.union([
+          z.string(),
+          z.array(
+            z.union([
+              components.TextContentPartSchema$outboundSchema.and(
+                z.object({ type: z.literal("text") }),
+              ),
+              components.RefusalPartSchema$outboundSchema,
+              components.ReasoningPartSchema$outboundSchema,
+              components.RedactedReasoningPartSchema$outboundSchema,
+            ]),
+          ),
+        ]),
+      ).optional(),
+      refusal: z.nullable(z.string()).optional(),
+      role: z.literal("assistant"),
+      name: z.string().optional(),
+      audio: z.nullable(
+        z.lazy(() => CreateChatCompletionMessagesAudio$outboundSchema),
+      ).optional(),
+      toolCalls: z.array(
+        z.lazy(() => CreateChatCompletionMessagesToolCalls$outboundSchema),
+      ).optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        reasoningContent: "reasoning_content",
+        toolCalls: "tool_calls",
+      });
+    })
+  );
 
 export function createChatCompletionMessagesAssistantMessageToJSON(
   createChatCompletionMessagesAssistantMessage:
@@ -2701,13 +2731,15 @@ export function createChatCompletionMessagesAssistantMessageToJSON(
 
 /** @internal */
 export const CreateChatCompletion2RouterChatCompletionsType$outboundSchema:
-  z.ZodNativeEnum<typeof CreateChatCompletion2RouterChatCompletionsType> = z
-    .nativeEnum(CreateChatCompletion2RouterChatCompletionsType);
+  z.ZodNativeEnum<typeof CreateChatCompletion2RouterChatCompletionsType> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(CreateChatCompletion2RouterChatCompletionsType)
+    );
 
 /** @internal */
 export const CreateChatCompletion2Ttl$outboundSchema: z.ZodNativeEnum<
   typeof CreateChatCompletion2Ttl
-> = z.nativeEnum(CreateChatCompletion2Ttl);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(CreateChatCompletion2Ttl));
 
 /** @internal */
 export type CreateChatCompletion2CacheControl$Outbound = {
@@ -2720,10 +2752,12 @@ export const CreateChatCompletion2CacheControl$outboundSchema: z.ZodType<
   CreateChatCompletion2CacheControl$Outbound,
   z.ZodTypeDef,
   CreateChatCompletion2CacheControl
-> = z.object({
-  type: CreateChatCompletion2RouterChatCompletionsType$outboundSchema,
-  ttl: CreateChatCompletion2Ttl$outboundSchema.default("5m"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: CreateChatCompletion2RouterChatCompletionsType$outboundSchema,
+    ttl: CreateChatCompletion2Ttl$outboundSchema.default("5m"),
+  })
+);
 
 export function createChatCompletion2CacheControlToJSON(
   createChatCompletion2CacheControl: CreateChatCompletion2CacheControl,
@@ -2747,16 +2781,18 @@ export const CreateChatCompletion24$outboundSchema: z.ZodType<
   CreateChatCompletion24$Outbound,
   z.ZodTypeDef,
   CreateChatCompletion24
-> = z.object({
-  type: z.literal("file"),
-  cacheControl: z.lazy(() => CreateChatCompletion2CacheControl$outboundSchema)
-    .optional(),
-  file: components.FileContentPartSchema$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    cacheControl: "cache_control",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("file"),
+    cacheControl: z.lazy(() => CreateChatCompletion2CacheControl$outboundSchema)
+      .optional(),
+    file: components.FileContentPartSchema$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      cacheControl: "cache_control",
+    });
+  })
+);
 
 export function createChatCompletion24ToJSON(
   createChatCompletion24: CreateChatCompletion24,
@@ -2778,14 +2814,16 @@ export const CreateChatCompletionContent2$outboundSchema: z.ZodType<
   CreateChatCompletionContent2$Outbound,
   z.ZodTypeDef,
   CreateChatCompletionContent2
-> = z.union([
-  components.TextContentPartSchema$outboundSchema.and(
-    z.object({ type: z.literal("text") }),
-  ),
-  components.ImageContentPartSchema$outboundSchema,
-  components.AudioContentPartSchema$outboundSchema,
-  z.lazy(() => CreateChatCompletion24$outboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    components.TextContentPartSchema$outboundSchema.and(
+      z.object({ type: z.literal("text") }),
+    ),
+    components.ImageContentPartSchema$outboundSchema,
+    components.AudioContentPartSchema$outboundSchema,
+    z.lazy(() => CreateChatCompletion24$outboundSchema),
+  ])
+);
 
 export function createChatCompletionContent2ToJSON(
   createChatCompletionContent2: CreateChatCompletionContent2,
@@ -2813,19 +2851,21 @@ export const CreateChatCompletionMessagesRouterChatCompletionsRequestContent$out
     CreateChatCompletionMessagesRouterChatCompletionsRequestContent$Outbound,
     z.ZodTypeDef,
     CreateChatCompletionMessagesRouterChatCompletionsRequestContent
-  > = z.union([
-    z.string(),
-    z.array(
-      z.union([
-        components.TextContentPartSchema$outboundSchema.and(
-          z.object({ type: z.literal("text") }),
-        ),
-        components.ImageContentPartSchema$outboundSchema,
-        components.AudioContentPartSchema$outboundSchema,
-        z.lazy(() => CreateChatCompletion24$outboundSchema),
-      ]),
-    ),
-  ]);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.union([
+      z.string(),
+      z.array(
+        z.union([
+          components.TextContentPartSchema$outboundSchema.and(
+            z.object({ type: z.literal("text") }),
+          ),
+          components.ImageContentPartSchema$outboundSchema,
+          components.AudioContentPartSchema$outboundSchema,
+          z.lazy(() => CreateChatCompletion24$outboundSchema),
+        ]),
+      ),
+    ])
+  );
 
 export function createChatCompletionMessagesRouterChatCompletionsRequestContentToJSON(
   createChatCompletionMessagesRouterChatCompletionsRequestContent:
@@ -2856,23 +2896,25 @@ export const CreateChatCompletionMessagesUserMessage$outboundSchema: z.ZodType<
   CreateChatCompletionMessagesUserMessage$Outbound,
   z.ZodTypeDef,
   CreateChatCompletionMessagesUserMessage
-> = z.object({
-  role: z.literal("user"),
-  name: z.string().optional(),
-  content: z.union([
-    z.string(),
-    z.array(
-      z.union([
-        components.TextContentPartSchema$outboundSchema.and(
-          z.object({ type: z.literal("text") }),
-        ),
-        components.ImageContentPartSchema$outboundSchema,
-        components.AudioContentPartSchema$outboundSchema,
-        z.lazy(() => CreateChatCompletion24$outboundSchema),
-      ]),
-    ),
-  ]),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    role: z.literal("user"),
+    name: z.string().optional(),
+    content: z.union([
+      z.string(),
+      z.array(
+        z.union([
+          components.TextContentPartSchema$outboundSchema.and(
+            z.object({ type: z.literal("text") }),
+          ),
+          components.ImageContentPartSchema$outboundSchema,
+          components.AudioContentPartSchema$outboundSchema,
+          z.lazy(() => CreateChatCompletion24$outboundSchema),
+        ]),
+      ),
+    ]),
+  })
+);
 
 export function createChatCompletionMessagesUserMessageToJSON(
   createChatCompletionMessagesUserMessage:
@@ -2896,10 +2938,12 @@ export const CreateChatCompletionMessagesRouterChatCompletionsContent$outboundSc
     CreateChatCompletionMessagesRouterChatCompletionsContent$Outbound,
     z.ZodTypeDef,
     CreateChatCompletionMessagesRouterChatCompletionsContent
-  > = z.union([
-    z.string(),
-    z.array(components.TextContentPartSchema$outboundSchema),
-  ]);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.union([
+      z.string(),
+      z.array(components.TextContentPartSchema$outboundSchema),
+    ])
+  );
 
 export function createChatCompletionMessagesRouterChatCompletionsContentToJSON(
   createChatCompletionMessagesRouterChatCompletionsContent:
@@ -2924,14 +2968,16 @@ export const CreateChatCompletionMessagesDeveloperMessage$outboundSchema:
     CreateChatCompletionMessagesDeveloperMessage$Outbound,
     z.ZodTypeDef,
     CreateChatCompletionMessagesDeveloperMessage
-  > = z.object({
-    role: z.literal("developer"),
-    content: z.union([
-      z.string(),
-      z.array(components.TextContentPartSchema$outboundSchema),
-    ]),
-    name: z.string().optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      role: z.literal("developer"),
+      content: z.union([
+        z.string(),
+        z.array(components.TextContentPartSchema$outboundSchema),
+      ]),
+      name: z.string().optional(),
+    })
+  );
 
 export function createChatCompletionMessagesDeveloperMessageToJSON(
   createChatCompletionMessagesDeveloperMessage:
@@ -2954,10 +3000,12 @@ export const CreateChatCompletionMessagesContent$outboundSchema: z.ZodType<
   CreateChatCompletionMessagesContent$Outbound,
   z.ZodTypeDef,
   CreateChatCompletionMessagesContent
-> = z.union([
-  z.string(),
-  z.array(components.TextContentPartSchema$outboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.string(),
+    z.array(components.TextContentPartSchema$outboundSchema),
+  ])
+);
 
 export function createChatCompletionMessagesContentToJSON(
   createChatCompletionMessagesContent: CreateChatCompletionMessagesContent,
@@ -2982,14 +3030,16 @@ export const CreateChatCompletionMessagesSystemMessage$outboundSchema:
     CreateChatCompletionMessagesSystemMessage$Outbound,
     z.ZodTypeDef,
     CreateChatCompletionMessagesSystemMessage
-  > = z.object({
-    role: z.literal("system"),
-    content: z.union([
-      z.string(),
-      z.array(components.TextContentPartSchema$outboundSchema),
-    ]),
-    name: z.string().optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      role: z.literal("system"),
+      content: z.union([
+        z.string(),
+        z.array(components.TextContentPartSchema$outboundSchema),
+      ]),
+      name: z.string().optional(),
+    })
+  );
 
 export function createChatCompletionMessagesSystemMessageToJSON(
   createChatCompletionMessagesSystemMessage:
@@ -3015,13 +3065,15 @@ export const CreateChatCompletionMessages$outboundSchema: z.ZodType<
   CreateChatCompletionMessages$Outbound,
   z.ZodTypeDef,
   CreateChatCompletionMessages
-> = z.union([
-  z.lazy(() => CreateChatCompletionMessagesSystemMessage$outboundSchema),
-  z.lazy(() => CreateChatCompletionMessagesDeveloperMessage$outboundSchema),
-  z.lazy(() => CreateChatCompletionMessagesUserMessage$outboundSchema),
-  z.lazy(() => CreateChatCompletionMessagesAssistantMessage$outboundSchema),
-  z.lazy(() => CreateChatCompletionMessagesToolMessage$outboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => CreateChatCompletionMessagesSystemMessage$outboundSchema),
+    z.lazy(() => CreateChatCompletionMessagesDeveloperMessage$outboundSchema),
+    z.lazy(() => CreateChatCompletionMessagesUserMessage$outboundSchema),
+    z.lazy(() => CreateChatCompletionMessagesAssistantMessage$outboundSchema),
+    z.lazy(() => CreateChatCompletionMessagesToolMessage$outboundSchema),
+  ])
+);
 
 export function createChatCompletionMessagesToJSON(
   createChatCompletionMessages: CreateChatCompletionMessages,
@@ -3036,12 +3088,12 @@ export function createChatCompletionMessagesToJSON(
 /** @internal */
 export const CreateChatCompletionVoice$outboundSchema: z.ZodNativeEnum<
   typeof CreateChatCompletionVoice
-> = z.nativeEnum(CreateChatCompletionVoice);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(CreateChatCompletionVoice));
 
 /** @internal */
 export const CreateChatCompletionFormat$outboundSchema: z.ZodNativeEnum<
   typeof CreateChatCompletionFormat
-> = z.nativeEnum(CreateChatCompletionFormat);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(CreateChatCompletionFormat));
 
 /** @internal */
 export type CreateChatCompletionAudio$Outbound = {
@@ -3054,10 +3106,12 @@ export const CreateChatCompletionAudio$outboundSchema: z.ZodType<
   CreateChatCompletionAudio$Outbound,
   z.ZodTypeDef,
   CreateChatCompletionAudio
-> = z.object({
-  voice: CreateChatCompletionVoice$outboundSchema,
-  format: CreateChatCompletionFormat$outboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    voice: CreateChatCompletionVoice$outboundSchema,
+    format: CreateChatCompletionFormat$outboundSchema,
+  })
+);
 
 export function createChatCompletionAudioToJSON(
   createChatCompletionAudio: CreateChatCompletionAudio,
@@ -3082,12 +3136,14 @@ export const CreateChatCompletionResponseFormatRouterChatCompletionsJsonSchema$o
     CreateChatCompletionResponseFormatRouterChatCompletionsJsonSchema$Outbound,
     z.ZodTypeDef,
     CreateChatCompletionResponseFormatRouterChatCompletionsJsonSchema
-  > = z.object({
-    description: z.string().optional(),
-    name: z.string(),
-    schema: z.any().optional(),
-    strict: z.boolean().default(false),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      description: z.string().optional(),
+      name: z.string(),
+      schema: z.any().optional(),
+      strict: z.boolean().default(false),
+    })
+  );
 
 export function createChatCompletionResponseFormatRouterChatCompletionsJsonSchemaToJSON(
   createChatCompletionResponseFormatRouterChatCompletionsJsonSchema:
@@ -3112,16 +3168,18 @@ export const CreateChatCompletionResponseFormatJSONSchema$outboundSchema:
     CreateChatCompletionResponseFormatJSONSchema$Outbound,
     z.ZodTypeDef,
     CreateChatCompletionResponseFormatJSONSchema
-  > = z.object({
-    type: z.literal("json_schema"),
-    jsonSchema: z.lazy(() =>
-      CreateChatCompletionResponseFormatRouterChatCompletionsJsonSchema$outboundSchema
-    ),
-  }).transform((v) => {
-    return remap$(v, {
-      jsonSchema: "json_schema",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type: z.literal("json_schema"),
+      jsonSchema: z.lazy(() =>
+        CreateChatCompletionResponseFormatRouterChatCompletionsJsonSchema$outboundSchema
+      ),
+    }).transform((v) => {
+      return remap$(v, {
+        jsonSchema: "json_schema",
+      });
+    })
+  );
 
 export function createChatCompletionResponseFormatJSONSchemaToJSON(
   createChatCompletionResponseFormatJSONSchema:
@@ -3145,9 +3203,11 @@ export const CreateChatCompletionResponseFormatJSONObject$outboundSchema:
     CreateChatCompletionResponseFormatJSONObject$Outbound,
     z.ZodTypeDef,
     CreateChatCompletionResponseFormatJSONObject
-  > = z.object({
-    type: z.literal("json_object"),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type: z.literal("json_object"),
+    })
+  );
 
 export function createChatCompletionResponseFormatJSONObjectToJSON(
   createChatCompletionResponseFormatJSONObject:
@@ -3170,9 +3230,11 @@ export const CreateChatCompletionResponseFormatText$outboundSchema: z.ZodType<
   CreateChatCompletionResponseFormatText$Outbound,
   z.ZodTypeDef,
   CreateChatCompletionResponseFormatText
-> = z.object({
-  type: z.literal("text"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("text"),
+  })
+);
 
 export function createChatCompletionResponseFormatTextToJSON(
   createChatCompletionResponseFormatText:
@@ -3196,11 +3258,13 @@ export const CreateChatCompletionResponseFormat$outboundSchema: z.ZodType<
   CreateChatCompletionResponseFormat$Outbound,
   z.ZodTypeDef,
   CreateChatCompletionResponseFormat
-> = z.union([
-  z.lazy(() => CreateChatCompletionResponseFormatText$outboundSchema),
-  z.lazy(() => CreateChatCompletionResponseFormatJSONObject$outboundSchema),
-  z.lazy(() => CreateChatCompletionResponseFormatJSONSchema$outboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => CreateChatCompletionResponseFormatText$outboundSchema),
+    z.lazy(() => CreateChatCompletionResponseFormatJSONObject$outboundSchema),
+    z.lazy(() => CreateChatCompletionResponseFormatJSONSchema$outboundSchema),
+  ])
+);
 
 export function createChatCompletionResponseFormatToJSON(
   createChatCompletionResponseFormat: CreateChatCompletionResponseFormat,
@@ -3214,9 +3278,10 @@ export function createChatCompletionResponseFormatToJSON(
 
 /** @internal */
 export const CreateChatCompletionReasoningEffort$outboundSchema:
-  z.ZodNativeEnum<typeof CreateChatCompletionReasoningEffort> = z.nativeEnum(
-    CreateChatCompletionReasoningEffort,
-  );
+  z.ZodNativeEnum<typeof CreateChatCompletionReasoningEffort> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(CreateChatCompletionReasoningEffort)
+    );
 
 /** @internal */
 export type CreateChatCompletionStop$Outbound = string | Array<string>;
@@ -3226,7 +3291,9 @@ export const CreateChatCompletionStop$outboundSchema: z.ZodType<
   CreateChatCompletionStop$Outbound,
   z.ZodTypeDef,
   CreateChatCompletionStop
-> = z.union([z.string(), z.array(z.string())]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.array(z.string())])
+);
 
 export function createChatCompletionStopToJSON(
   createChatCompletionStop: CreateChatCompletionStop,
@@ -3246,13 +3313,15 @@ export const CreateChatCompletionStreamOptions$outboundSchema: z.ZodType<
   CreateChatCompletionStreamOptions$Outbound,
   z.ZodTypeDef,
   CreateChatCompletionStreamOptions
-> = z.object({
-  includeUsage: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    includeUsage: "include_usage",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    includeUsage: z.boolean().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      includeUsage: "include_usage",
+    });
+  })
+);
 
 export function createChatCompletionStreamOptionsToJSON(
   createChatCompletionStreamOptions: CreateChatCompletionStreamOptions,
@@ -3276,12 +3345,14 @@ export const CreateChatCompletionThinking$outboundSchema: z.ZodType<
   CreateChatCompletionThinking$Outbound,
   z.ZodTypeDef,
   CreateChatCompletionThinking
-> = z.union([
-  components.ThinkingConfigDisabledSchema$outboundSchema,
-  components.ThinkingConfigEnabledSchema$outboundSchema,
-  components.ThinkingConfigAdaptiveSchema$outboundSchema,
-  components.ThinkingConfigBetweenToolsSchema$outboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    components.ThinkingConfigDisabledSchema$outboundSchema,
+    components.ThinkingConfigEnabledSchema$outboundSchema,
+    components.ThinkingConfigAdaptiveSchema$outboundSchema,
+    components.ThinkingConfigBetweenToolsSchema$outboundSchema,
+  ])
+);
 
 export function createChatCompletionThinkingToJSON(
   createChatCompletionThinking: CreateChatCompletionThinking,
@@ -3296,12 +3367,14 @@ export function createChatCompletionThinkingToJSON(
 /** @internal */
 export const CreateChatCompletionType$outboundSchema: z.ZodNativeEnum<
   typeof CreateChatCompletionType
-> = z.nativeEnum(CreateChatCompletionType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(CreateChatCompletionType));
 
 /** @internal */
 export const CreateChatCompletionRouterChatCompletionsType$outboundSchema:
-  z.ZodNativeEnum<typeof CreateChatCompletionRouterChatCompletionsType> = z
-    .nativeEnum(CreateChatCompletionRouterChatCompletionsType);
+  z.ZodNativeEnum<typeof CreateChatCompletionRouterChatCompletionsType> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(CreateChatCompletionRouterChatCompletionsType)
+    );
 
 /** @internal */
 export type CreateChatCompletionParameters$Outbound = {
@@ -3316,12 +3389,14 @@ export const CreateChatCompletionParameters$outboundSchema: z.ZodType<
   CreateChatCompletionParameters$Outbound,
   z.ZodTypeDef,
   CreateChatCompletionParameters
-> = z.object({
-  type: CreateChatCompletionRouterChatCompletionsType$outboundSchema,
-  properties: z.record(z.any()),
-  required: z.array(z.string()).optional(),
-  additionalProperties: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: CreateChatCompletionRouterChatCompletionsType$outboundSchema,
+    properties: z.record(z.any()),
+    required: z.array(z.string()).optional(),
+    additionalProperties: z.boolean().optional(),
+  })
+);
 
 export function createChatCompletionParametersToJSON(
   createChatCompletionParameters: CreateChatCompletionParameters,
@@ -3346,13 +3421,15 @@ export const CreateChatCompletionFunction$outboundSchema: z.ZodType<
   CreateChatCompletionFunction$Outbound,
   z.ZodTypeDef,
   CreateChatCompletionFunction
-> = z.object({
-  name: z.string(),
-  description: z.string().optional(),
-  parameters: z.lazy(() => CreateChatCompletionParameters$outboundSchema)
-    .optional(),
-  strict: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+    description: z.string().optional(),
+    parameters: z.lazy(() => CreateChatCompletionParameters$outboundSchema)
+      .optional(),
+    strict: z.boolean().optional(),
+  })
+);
 
 export function createChatCompletionFunctionToJSON(
   createChatCompletionFunction: CreateChatCompletionFunction,
@@ -3375,10 +3452,12 @@ export const CreateChatCompletionTools$outboundSchema: z.ZodType<
   CreateChatCompletionTools$Outbound,
   z.ZodTypeDef,
   CreateChatCompletionTools
-> = z.object({
-  type: CreateChatCompletionType$outboundSchema.optional(),
-  function: z.lazy(() => CreateChatCompletionFunction$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: CreateChatCompletionType$outboundSchema.optional(),
+    function: z.lazy(() => CreateChatCompletionFunction$outboundSchema),
+  })
+);
 
 export function createChatCompletionToolsToJSON(
   createChatCompletionTools: CreateChatCompletionTools,
@@ -3391,7 +3470,9 @@ export function createChatCompletionToolsToJSON(
 /** @internal */
 export const CreateChatCompletionToolChoiceType$outboundSchema: z.ZodNativeEnum<
   typeof CreateChatCompletionToolChoiceType
-> = z.nativeEnum(CreateChatCompletionToolChoiceType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(CreateChatCompletionToolChoiceType)
+);
 
 /** @internal */
 export type CreateChatCompletionToolChoiceFunction$Outbound = {
@@ -3403,9 +3484,11 @@ export const CreateChatCompletionToolChoiceFunction$outboundSchema: z.ZodType<
   CreateChatCompletionToolChoiceFunction$Outbound,
   z.ZodTypeDef,
   CreateChatCompletionToolChoiceFunction
-> = z.object({
-  name: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+  })
+);
 
 export function createChatCompletionToolChoiceFunctionToJSON(
   createChatCompletionToolChoiceFunction:
@@ -3429,10 +3512,14 @@ export const CreateChatCompletionToolChoice2$outboundSchema: z.ZodType<
   CreateChatCompletionToolChoice2$Outbound,
   z.ZodTypeDef,
   CreateChatCompletionToolChoice2
-> = z.object({
-  type: CreateChatCompletionToolChoiceType$outboundSchema.optional(),
-  function: z.lazy(() => CreateChatCompletionToolChoiceFunction$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: CreateChatCompletionToolChoiceType$outboundSchema.optional(),
+    function: z.lazy(() =>
+      CreateChatCompletionToolChoiceFunction$outboundSchema
+    ),
+  })
+);
 
 export function createChatCompletionToolChoice2ToJSON(
   createChatCompletionToolChoice2: CreateChatCompletionToolChoice2,
@@ -3447,7 +3534,9 @@ export function createChatCompletionToolChoice2ToJSON(
 /** @internal */
 export const CreateChatCompletionToolChoice1$outboundSchema: z.ZodNativeEnum<
   typeof CreateChatCompletionToolChoice1
-> = z.nativeEnum(CreateChatCompletionToolChoice1);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(CreateChatCompletionToolChoice1)
+);
 
 /** @internal */
 export type CreateChatCompletionToolChoice$Outbound =
@@ -3459,10 +3548,12 @@ export const CreateChatCompletionToolChoice$outboundSchema: z.ZodType<
   CreateChatCompletionToolChoice$Outbound,
   z.ZodTypeDef,
   CreateChatCompletionToolChoice
-> = z.union([
-  z.lazy(() => CreateChatCompletionToolChoice2$outboundSchema),
-  CreateChatCompletionToolChoice1$outboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => CreateChatCompletionToolChoice2$outboundSchema),
+    CreateChatCompletionToolChoice1$outboundSchema,
+  ])
+);
 
 export function createChatCompletionToolChoiceToJSON(
   createChatCompletionToolChoice: CreateChatCompletionToolChoice,
@@ -3477,12 +3568,14 @@ export function createChatCompletionToolChoiceToJSON(
 /** @internal */
 export const CreateChatCompletionModalities$outboundSchema: z.ZodNativeEnum<
   typeof CreateChatCompletionModalities
-> = z.nativeEnum(CreateChatCompletionModalities);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(CreateChatCompletionModalities)
+);
 
 /** @internal */
 export const CreateChatCompletionId1$outboundSchema: z.ZodNativeEnum<
   typeof CreateChatCompletionId1
-> = z.nativeEnum(CreateChatCompletionId1);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(CreateChatCompletionId1));
 
 /** @internal */
 export type CreateChatCompletionId$Outbound = string | string;
@@ -3492,7 +3585,9 @@ export const CreateChatCompletionId$outboundSchema: z.ZodType<
   CreateChatCompletionId$Outbound,
   z.ZodTypeDef,
   CreateChatCompletionId
-> = z.union([CreateChatCompletionId1$outboundSchema, z.string()]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([CreateChatCompletionId1$outboundSchema, z.string()])
+);
 
 export function createChatCompletionIdToJSON(
   createChatCompletionId: CreateChatCompletionId,
@@ -3505,7 +3600,9 @@ export function createChatCompletionIdToJSON(
 /** @internal */
 export const CreateChatCompletionExecuteOn$outboundSchema: z.ZodNativeEnum<
   typeof CreateChatCompletionExecuteOn
-> = z.nativeEnum(CreateChatCompletionExecuteOn);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(CreateChatCompletionExecuteOn)
+);
 
 /** @internal */
 export type CreateChatCompletionGuardrails$Outbound = {
@@ -3518,14 +3615,16 @@ export const CreateChatCompletionGuardrails$outboundSchema: z.ZodType<
   CreateChatCompletionGuardrails$Outbound,
   z.ZodTypeDef,
   CreateChatCompletionGuardrails
-> = z.object({
-  id: z.union([CreateChatCompletionId1$outboundSchema, z.string()]),
-  executeOn: CreateChatCompletionExecuteOn$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    executeOn: "execute_on",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.union([CreateChatCompletionId1$outboundSchema, z.string()]),
+    executeOn: CreateChatCompletionExecuteOn$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      executeOn: "execute_on",
+    });
+  })
+);
 
 export function createChatCompletionGuardrailsToJSON(
   createChatCompletionGuardrails: CreateChatCompletionGuardrails,
@@ -3548,13 +3647,15 @@ export const CreateChatCompletionPlugins$outboundSchema: z.ZodType<
   CreateChatCompletionPlugins$Outbound,
   z.ZodTypeDef,
   CreateChatCompletionPlugins
-> = z.union([
-  components.PIIRedactionPlugin$outboundSchema.and(
-    z.object({ id: z.literal("pii_redaction") }),
-  ),
-  components.ResponseHealingPlugin$outboundSchema,
-  components.TraceScrubbingPlugin$outboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    components.PIIRedactionPlugin$outboundSchema.and(
+      z.object({ id: z.literal("pii_redaction") }),
+    ),
+    components.ResponseHealingPlugin$outboundSchema,
+    components.TraceScrubbingPlugin$outboundSchema,
+  ])
+);
 
 export function createChatCompletionPluginsToJSON(
   createChatCompletionPlugins: CreateChatCompletionPlugins,
@@ -3576,9 +3677,11 @@ export const CreateChatCompletionFallbacks$outboundSchema: z.ZodType<
   CreateChatCompletionFallbacks$Outbound,
   z.ZodTypeDef,
   CreateChatCompletionFallbacks
-> = z.object({
-  model: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model: z.string(),
+  })
+);
 
 export function createChatCompletionFallbacksToJSON(
   createChatCompletionFallbacks: CreateChatCompletionFallbacks,
@@ -3601,14 +3704,16 @@ export const CreateChatCompletionRetry$outboundSchema: z.ZodType<
   CreateChatCompletionRetry$Outbound,
   z.ZodTypeDef,
   CreateChatCompletionRetry
-> = z.object({
-  count: z.number().default(3),
-  onCodes: z.array(z.number()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    onCodes: "on_codes",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    count: z.number().default(3),
+    onCodes: z.array(z.number()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      onCodes: "on_codes",
+    });
+  })
+);
 
 export function createChatCompletionRetryToJSON(
   createChatCompletionRetry: CreateChatCompletionRetry,
@@ -3621,7 +3726,9 @@ export function createChatCompletionRetryToJSON(
 /** @internal */
 export const CreateChatCompletionRouterChatCompletionsRequestType$outboundSchema:
   z.ZodNativeEnum<typeof CreateChatCompletionRouterChatCompletionsRequestType> =
-    z.nativeEnum(CreateChatCompletionRouterChatCompletionsRequestType);
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(CreateChatCompletionRouterChatCompletionsRequestType)
+    );
 
 /** @internal */
 export type CreateChatCompletionCache$Outbound = {
@@ -3634,10 +3741,12 @@ export const CreateChatCompletionCache$outboundSchema: z.ZodType<
   CreateChatCompletionCache$Outbound,
   z.ZodTypeDef,
   CreateChatCompletionCache
-> = z.object({
-  ttl: z.number().default(3600),
-  type: CreateChatCompletionRouterChatCompletionsRequestType$outboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ttl: z.number().default(3600),
+    type: CreateChatCompletionRouterChatCompletionsRequestType$outboundSchema,
+  })
+);
 
 export function createChatCompletionCacheToJSON(
   createChatCompletionCache: CreateChatCompletionCache,
@@ -3649,9 +3758,10 @@ export function createChatCompletionCacheToJSON(
 
 /** @internal */
 export const CreateChatCompletionLoadBalancerType$outboundSchema:
-  z.ZodNativeEnum<typeof CreateChatCompletionLoadBalancerType> = z.nativeEnum(
-    CreateChatCompletionLoadBalancerType,
-  );
+  z.ZodNativeEnum<typeof CreateChatCompletionLoadBalancerType> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(CreateChatCompletionLoadBalancerType)
+    );
 
 /** @internal */
 export type CreateChatCompletionLoadBalancerModels$Outbound = {
@@ -3664,10 +3774,12 @@ export const CreateChatCompletionLoadBalancerModels$outboundSchema: z.ZodType<
   CreateChatCompletionLoadBalancerModels$Outbound,
   z.ZodTypeDef,
   CreateChatCompletionLoadBalancerModels
-> = z.object({
-  model: z.string(),
-  weight: z.number().default(0.5),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model: z.string(),
+    weight: z.number().default(0.5),
+  })
+);
 
 export function createChatCompletionLoadBalancerModelsToJSON(
   createChatCompletionLoadBalancerModels:
@@ -3691,12 +3803,14 @@ export const CreateChatCompletionLoadBalancer1$outboundSchema: z.ZodType<
   CreateChatCompletionLoadBalancer1$Outbound,
   z.ZodTypeDef,
   CreateChatCompletionLoadBalancer1
-> = z.object({
-  type: CreateChatCompletionLoadBalancerType$outboundSchema,
-  models: z.array(
-    z.lazy(() => CreateChatCompletionLoadBalancerModels$outboundSchema),
-  ),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: CreateChatCompletionLoadBalancerType$outboundSchema,
+    models: z.array(
+      z.lazy(() => CreateChatCompletionLoadBalancerModels$outboundSchema),
+    ),
+  })
+);
 
 export function createChatCompletionLoadBalancer1ToJSON(
   createChatCompletionLoadBalancer1: CreateChatCompletionLoadBalancer1,
@@ -3717,7 +3831,9 @@ export const CreateChatCompletionLoadBalancer$outboundSchema: z.ZodType<
   CreateChatCompletionLoadBalancer$Outbound,
   z.ZodTypeDef,
   CreateChatCompletionLoadBalancer
-> = z.lazy(() => CreateChatCompletionLoadBalancer1$outboundSchema);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.lazy(() => CreateChatCompletionLoadBalancer1$outboundSchema)
+);
 
 export function createChatCompletionLoadBalancerToJSON(
   createChatCompletionLoadBalancer: CreateChatCompletionLoadBalancer,
@@ -3739,13 +3855,15 @@ export const CreateChatCompletionTimeout$outboundSchema: z.ZodType<
   CreateChatCompletionTimeout$Outbound,
   z.ZodTypeDef,
   CreateChatCompletionTimeout
-> = z.object({
-  callTimeout: z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    callTimeout: "call_timeout",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    callTimeout: z.number(),
+  }).transform((v) => {
+    return remap$(v, {
+      callTimeout: "call_timeout",
+    });
+  })
+);
 
 export function createChatCompletionTimeoutToJSON(
   createChatCompletionTimeout: CreateChatCompletionTimeout,
@@ -3761,14 +3879,16 @@ export function createChatCompletionTimeoutToJSON(
 export const CreateChatCompletionRouterChatCompletionsRequestRequestBodyType$outboundSchema:
   z.ZodNativeEnum<
     typeof CreateChatCompletionRouterChatCompletionsRequestRequestBodyType
-  > = z.nativeEnum(
-    CreateChatCompletionRouterChatCompletionsRequestRequestBodyType,
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.nativeEnum(
+      CreateChatCompletionRouterChatCompletionsRequestRequestBodyType,
+    )
   );
 
 /** @internal */
 export const CreateChatCompletionTtl$outboundSchema: z.ZodNativeEnum<
   typeof CreateChatCompletionTtl
-> = z.nativeEnum(CreateChatCompletionTtl);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(CreateChatCompletionTtl));
 
 /** @internal */
 export type CreateChatCompletionCacheControl$Outbound = {
@@ -3781,11 +3901,13 @@ export const CreateChatCompletionCacheControl$outboundSchema: z.ZodType<
   CreateChatCompletionCacheControl$Outbound,
   z.ZodTypeDef,
   CreateChatCompletionCacheControl
-> = z.object({
-  type:
-    CreateChatCompletionRouterChatCompletionsRequestRequestBodyType$outboundSchema,
-  ttl: CreateChatCompletionTtl$outboundSchema.default("5m"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type:
+      CreateChatCompletionRouterChatCompletionsRequestRequestBodyType$outboundSchema,
+    ttl: CreateChatCompletionTtl$outboundSchema.default("5m"),
+  })
+);
 
 export function createChatCompletionCacheControlToJSON(
   createChatCompletionCacheControl: CreateChatCompletionCacheControl,
@@ -3809,14 +3931,16 @@ export const CreateChatCompletionRouterChatCompletionsRetry$outboundSchema:
     CreateChatCompletionRouterChatCompletionsRetry$Outbound,
     z.ZodTypeDef,
     CreateChatCompletionRouterChatCompletionsRetry
-  > = z.object({
-    count: z.number().default(3),
-    onCodes: z.array(z.number()).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      onCodes: "on_codes",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      count: z.number().default(3),
+      onCodes: z.array(z.number()).optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        onCodes: "on_codes",
+      });
+    })
+  );
 
 export function createChatCompletionRouterChatCompletionsRetryToJSON(
   createChatCompletionRouterChatCompletionsRetry:
@@ -3840,9 +3964,11 @@ export const CreateChatCompletionRouterChatCompletionsFallbacks$outboundSchema:
     CreateChatCompletionRouterChatCompletionsFallbacks$Outbound,
     z.ZodTypeDef,
     CreateChatCompletionRouterChatCompletionsFallbacks
-  > = z.object({
-    model: z.string(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      model: z.string(),
+    })
+  );
 
 export function createChatCompletionRouterChatCompletionsFallbacksToJSON(
   createChatCompletionRouterChatCompletionsFallbacks:
@@ -3856,8 +3982,8 @@ export function createChatCompletionRouterChatCompletionsFallbacksToJSON(
 }
 
 /** @internal */
-export const Version$outboundSchema: z.ZodNativeEnum<typeof Version> = z
-  .nativeEnum(Version);
+export const Version$outboundSchema: z.ZodNativeEnum<typeof Version> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Version));
 
 /** @internal */
 export type Prompt$Outbound = {
@@ -3870,10 +3996,12 @@ export const Prompt$outboundSchema: z.ZodType<
   Prompt$Outbound,
   z.ZodTypeDef,
   Prompt
-> = z.object({
-  id: z.string(),
-  version: Version$outboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    version: Version$outboundSchema,
+  })
+);
 
 export function promptToJSON(prompt: Prompt): string {
   return JSON.stringify(Prompt$outboundSchema.parse(prompt));
@@ -3890,10 +4018,12 @@ export const CreateChatCompletionThread$outboundSchema: z.ZodType<
   CreateChatCompletionThread$Outbound,
   z.ZodTypeDef,
   CreateChatCompletionThread
-> = z.object({
-  id: z.string(),
-  tags: z.array(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    tags: z.array(z.string()).optional(),
+  })
+);
 
 export function createChatCompletionThreadToJSON(
   createChatCompletionThread: CreateChatCompletionThread,
@@ -3915,15 +4045,17 @@ export const Inputs2$outboundSchema: z.ZodType<
   Inputs2$Outbound,
   z.ZodTypeDef,
   Inputs2
-> = z.object({
-  key: z.string(),
-  value: z.any().optional(),
-  isPii: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    isPii: "is_pii",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    key: z.string(),
+    value: z.any().optional(),
+    isPii: z.boolean().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      isPii: "is_pii",
+    });
+  })
+);
 
 export function inputs2ToJSON(inputs2: Inputs2): string {
   return JSON.stringify(Inputs2$outboundSchema.parse(inputs2));
@@ -3937,7 +4069,9 @@ export const Inputs$outboundSchema: z.ZodType<
   Inputs$Outbound,
   z.ZodTypeDef,
   Inputs
-> = z.union([z.record(z.any()), z.array(z.lazy(() => Inputs2$outboundSchema))]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.record(z.any()), z.array(z.lazy(() => Inputs2$outboundSchema))])
+);
 
 export function inputsToJSON(inputs: Inputs): string {
   return JSON.stringify(Inputs$outboundSchema.parse(inputs));
@@ -3947,8 +4081,10 @@ export function inputsToJSON(inputs: Inputs): string {
 export const CreateChatCompletionRouterChatCompletionsRequestRequestBodyOrqType$outboundSchema:
   z.ZodNativeEnum<
     typeof CreateChatCompletionRouterChatCompletionsRequestRequestBodyOrqType
-  > = z.nativeEnum(
-    CreateChatCompletionRouterChatCompletionsRequestRequestBodyOrqType,
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.nativeEnum(
+      CreateChatCompletionRouterChatCompletionsRequestRequestBodyOrqType,
+    )
   );
 
 /** @internal */
@@ -3963,11 +4099,13 @@ export const CreateChatCompletionRouterChatCompletionsCache$outboundSchema:
     CreateChatCompletionRouterChatCompletionsCache$Outbound,
     z.ZodTypeDef,
     CreateChatCompletionRouterChatCompletionsCache
-  > = z.object({
-    ttl: z.number().default(3600),
-    type:
-      CreateChatCompletionRouterChatCompletionsRequestRequestBodyOrqType$outboundSchema,
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ttl: z.number().default(3600),
+      type:
+        CreateChatCompletionRouterChatCompletionsRequestRequestBodyOrqType$outboundSchema,
+    })
+  );
 
 export function createChatCompletionRouterChatCompletionsCacheToJSON(
   createChatCompletionRouterChatCompletionsCache:
@@ -3981,8 +4119,8 @@ export function createChatCompletionRouterChatCompletionsCacheToJSON(
 }
 
 /** @internal */
-export const SearchType$outboundSchema: z.ZodNativeEnum<typeof SearchType> = z
-  .nativeEnum(SearchType);
+export const SearchType$outboundSchema: z.ZodNativeEnum<typeof SearchType> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(SearchType));
 
 /** @internal */
 export type CreateChatCompletionOrRouterChatCompletionsNin$Outbound =
@@ -3996,7 +4134,9 @@ export const CreateChatCompletionOrRouterChatCompletionsNin$outboundSchema:
     CreateChatCompletionOrRouterChatCompletionsNin$Outbound,
     z.ZodTypeDef,
     CreateChatCompletionOrRouterChatCompletionsNin
-  > = z.union([z.string(), z.number(), z.boolean()]);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.union([z.string(), z.number(), z.boolean()])
+  );
 
 export function createChatCompletionOrRouterChatCompletionsNinToJSON(
   createChatCompletionOrRouterChatCompletionsNin:
@@ -4019,9 +4159,11 @@ export const CreateChatCompletionOrNin$outboundSchema: z.ZodType<
   CreateChatCompletionOrNin$Outbound,
   z.ZodTypeDef,
   CreateChatCompletionOrNin
-> = z.object({
-  nin: z.array(z.union([z.string(), z.number(), z.boolean()])),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    nin: z.array(z.union([z.string(), z.number(), z.boolean()])),
+  })
+);
 
 export function createChatCompletionOrNinToJSON(
   createChatCompletionOrNin: CreateChatCompletionOrNin,
@@ -4043,7 +4185,9 @@ export const CreateChatCompletionOrRouterChatCompletionsIn$outboundSchema:
     CreateChatCompletionOrRouterChatCompletionsIn$Outbound,
     z.ZodTypeDef,
     CreateChatCompletionOrRouterChatCompletionsIn
-  > = z.union([z.string(), z.number(), z.boolean()]);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.union([z.string(), z.number(), z.boolean()])
+  );
 
 export function createChatCompletionOrRouterChatCompletionsInToJSON(
   createChatCompletionOrRouterChatCompletionsIn:
@@ -4066,9 +4210,11 @@ export const CreateChatCompletionOrIn$outboundSchema: z.ZodType<
   CreateChatCompletionOrIn$Outbound,
   z.ZodTypeDef,
   CreateChatCompletionOrIn
-> = z.object({
-  in: z.array(z.union([z.string(), z.number(), z.boolean()])),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    in: z.array(z.union([z.string(), z.number(), z.boolean()])),
+  })
+);
 
 export function createChatCompletionOrInToJSON(
   createChatCompletionOrIn: CreateChatCompletionOrIn,
@@ -4088,9 +4234,11 @@ export const CreateChatCompletionOrLte$outboundSchema: z.ZodType<
   CreateChatCompletionOrLte$Outbound,
   z.ZodTypeDef,
   CreateChatCompletionOrLte
-> = z.object({
-  lte: z.number(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    lte: z.number(),
+  })
+);
 
 export function createChatCompletionOrLteToJSON(
   createChatCompletionOrLte: CreateChatCompletionOrLte,
@@ -4110,9 +4258,11 @@ export const CreateChatCompletionOrLt$outboundSchema: z.ZodType<
   CreateChatCompletionOrLt$Outbound,
   z.ZodTypeDef,
   CreateChatCompletionOrLt
-> = z.object({
-  lt: z.number(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    lt: z.number(),
+  })
+);
 
 export function createChatCompletionOrLtToJSON(
   createChatCompletionOrLt: CreateChatCompletionOrLt,
@@ -4132,9 +4282,11 @@ export const CreateChatCompletionOrGte$outboundSchema: z.ZodType<
   CreateChatCompletionOrGte$Outbound,
   z.ZodTypeDef,
   CreateChatCompletionOrGte
-> = z.object({
-  gte: z.number(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    gte: z.number(),
+  })
+);
 
 export function createChatCompletionOrGteToJSON(
   createChatCompletionOrGte: CreateChatCompletionOrGte,
@@ -4154,9 +4306,11 @@ export const CreateChatCompletionOrGt$outboundSchema: z.ZodType<
   CreateChatCompletionOrGt$Outbound,
   z.ZodTypeDef,
   CreateChatCompletionOrGt
-> = z.object({
-  gt: z.number(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    gt: z.number(),
+  })
+);
 
 export function createChatCompletionOrGtToJSON(
   createChatCompletionOrGt: CreateChatCompletionOrGt,
@@ -4178,7 +4332,9 @@ export const CreateChatCompletionOrRouterChatCompletionsNe$outboundSchema:
     CreateChatCompletionOrRouterChatCompletionsNe$Outbound,
     z.ZodTypeDef,
     CreateChatCompletionOrRouterChatCompletionsNe
-  > = z.union([z.string(), z.number(), z.boolean()]);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.union([z.string(), z.number(), z.boolean()])
+  );
 
 export function createChatCompletionOrRouterChatCompletionsNeToJSON(
   createChatCompletionOrRouterChatCompletionsNe:
@@ -4201,9 +4357,11 @@ export const CreateChatCompletionOrNe$outboundSchema: z.ZodType<
   CreateChatCompletionOrNe$Outbound,
   z.ZodTypeDef,
   CreateChatCompletionOrNe
-> = z.object({
-  ne: z.union([z.string(), z.number(), z.boolean()]),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ne: z.union([z.string(), z.number(), z.boolean()]),
+  })
+);
 
 export function createChatCompletionOrNeToJSON(
   createChatCompletionOrNe: CreateChatCompletionOrNe,
@@ -4225,7 +4383,9 @@ export const CreateChatCompletionOrRouterChatCompletionsEq$outboundSchema:
     CreateChatCompletionOrRouterChatCompletionsEq$Outbound,
     z.ZodTypeDef,
     CreateChatCompletionOrRouterChatCompletionsEq
-  > = z.union([z.string(), z.number(), z.boolean()]);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.union([z.string(), z.number(), z.boolean()])
+  );
 
 export function createChatCompletionOrRouterChatCompletionsEqToJSON(
   createChatCompletionOrRouterChatCompletionsEq:
@@ -4248,9 +4408,11 @@ export const CreateChatCompletionOrEq$outboundSchema: z.ZodType<
   CreateChatCompletionOrEq$Outbound,
   z.ZodTypeDef,
   CreateChatCompletionOrEq
-> = z.object({
-  eq: z.union([z.string(), z.number(), z.boolean()]),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    eq: z.union([z.string(), z.number(), z.boolean()]),
+  })
+);
 
 export function createChatCompletionOrEqToJSON(
   createChatCompletionOrEq: CreateChatCompletionOrEq,
@@ -4276,16 +4438,18 @@ export const CreateChatCompletionFilterByOr$outboundSchema: z.ZodType<
   CreateChatCompletionFilterByOr$Outbound,
   z.ZodTypeDef,
   CreateChatCompletionFilterByOr
-> = z.union([
-  z.lazy(() => CreateChatCompletionOrEq$outboundSchema),
-  z.lazy(() => CreateChatCompletionOrNe$outboundSchema),
-  z.lazy(() => CreateChatCompletionOrGt$outboundSchema),
-  z.lazy(() => CreateChatCompletionOrGte$outboundSchema),
-  z.lazy(() => CreateChatCompletionOrLt$outboundSchema),
-  z.lazy(() => CreateChatCompletionOrLte$outboundSchema),
-  z.lazy(() => CreateChatCompletionOrIn$outboundSchema),
-  z.lazy(() => CreateChatCompletionOrNin$outboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => CreateChatCompletionOrEq$outboundSchema),
+    z.lazy(() => CreateChatCompletionOrNe$outboundSchema),
+    z.lazy(() => CreateChatCompletionOrGt$outboundSchema),
+    z.lazy(() => CreateChatCompletionOrGte$outboundSchema),
+    z.lazy(() => CreateChatCompletionOrLt$outboundSchema),
+    z.lazy(() => CreateChatCompletionOrLte$outboundSchema),
+    z.lazy(() => CreateChatCompletionOrIn$outboundSchema),
+    z.lazy(() => CreateChatCompletionOrNin$outboundSchema),
+  ])
+);
 
 export function createChatCompletionFilterByOrToJSON(
   createChatCompletionFilterByOr: CreateChatCompletionFilterByOr,
@@ -4319,9 +4483,9 @@ export const FilterByOr$outboundSchema: z.ZodType<
   FilterByOr$Outbound,
   z.ZodTypeDef,
   FilterByOr
-> = z.object({
-  or: z.array(
-    z.record(z.union([
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    or: z.array(z.record(z.union([
       z.lazy(() => CreateChatCompletionOrEq$outboundSchema),
       z.lazy(() =>
         CreateChatCompletionOrNe$outboundSchema
@@ -4332,9 +4496,9 @@ export const FilterByOr$outboundSchema: z.ZodType<
       z.lazy(() => CreateChatCompletionOrLte$outboundSchema),
       z.lazy(() => CreateChatCompletionOrIn$outboundSchema),
       z.lazy(() => CreateChatCompletionOrNin$outboundSchema),
-    ])),
-  ),
-});
+    ]))),
+  })
+);
 
 export function filterByOrToJSON(filterByOr: FilterByOr): string {
   return JSON.stringify(FilterByOr$outboundSchema.parse(filterByOr));
@@ -4352,7 +4516,9 @@ export const CreateChatCompletionAndRouterChatCompletionsNin$outboundSchema:
     CreateChatCompletionAndRouterChatCompletionsNin$Outbound,
     z.ZodTypeDef,
     CreateChatCompletionAndRouterChatCompletionsNin
-  > = z.union([z.string(), z.number(), z.boolean()]);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.union([z.string(), z.number(), z.boolean()])
+  );
 
 export function createChatCompletionAndRouterChatCompletionsNinToJSON(
   createChatCompletionAndRouterChatCompletionsNin:
@@ -4375,9 +4541,11 @@ export const CreateChatCompletionAndNin$outboundSchema: z.ZodType<
   CreateChatCompletionAndNin$Outbound,
   z.ZodTypeDef,
   CreateChatCompletionAndNin
-> = z.object({
-  nin: z.array(z.union([z.string(), z.number(), z.boolean()])),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    nin: z.array(z.union([z.string(), z.number(), z.boolean()])),
+  })
+);
 
 export function createChatCompletionAndNinToJSON(
   createChatCompletionAndNin: CreateChatCompletionAndNin,
@@ -4399,7 +4567,9 @@ export const CreateChatCompletionAndRouterChatCompletionsIn$outboundSchema:
     CreateChatCompletionAndRouterChatCompletionsIn$Outbound,
     z.ZodTypeDef,
     CreateChatCompletionAndRouterChatCompletionsIn
-  > = z.union([z.string(), z.number(), z.boolean()]);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.union([z.string(), z.number(), z.boolean()])
+  );
 
 export function createChatCompletionAndRouterChatCompletionsInToJSON(
   createChatCompletionAndRouterChatCompletionsIn:
@@ -4422,9 +4592,11 @@ export const CreateChatCompletionAndIn$outboundSchema: z.ZodType<
   CreateChatCompletionAndIn$Outbound,
   z.ZodTypeDef,
   CreateChatCompletionAndIn
-> = z.object({
-  in: z.array(z.union([z.string(), z.number(), z.boolean()])),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    in: z.array(z.union([z.string(), z.number(), z.boolean()])),
+  })
+);
 
 export function createChatCompletionAndInToJSON(
   createChatCompletionAndIn: CreateChatCompletionAndIn,
@@ -4444,9 +4616,11 @@ export const CreateChatCompletionAndLte$outboundSchema: z.ZodType<
   CreateChatCompletionAndLte$Outbound,
   z.ZodTypeDef,
   CreateChatCompletionAndLte
-> = z.object({
-  lte: z.number(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    lte: z.number(),
+  })
+);
 
 export function createChatCompletionAndLteToJSON(
   createChatCompletionAndLte: CreateChatCompletionAndLte,
@@ -4466,9 +4640,11 @@ export const CreateChatCompletionAndLt$outboundSchema: z.ZodType<
   CreateChatCompletionAndLt$Outbound,
   z.ZodTypeDef,
   CreateChatCompletionAndLt
-> = z.object({
-  lt: z.number(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    lt: z.number(),
+  })
+);
 
 export function createChatCompletionAndLtToJSON(
   createChatCompletionAndLt: CreateChatCompletionAndLt,
@@ -4488,9 +4664,11 @@ export const CreateChatCompletionAndGte$outboundSchema: z.ZodType<
   CreateChatCompletionAndGte$Outbound,
   z.ZodTypeDef,
   CreateChatCompletionAndGte
-> = z.object({
-  gte: z.number(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    gte: z.number(),
+  })
+);
 
 export function createChatCompletionAndGteToJSON(
   createChatCompletionAndGte: CreateChatCompletionAndGte,
@@ -4510,9 +4688,11 @@ export const CreateChatCompletionAndGt$outboundSchema: z.ZodType<
   CreateChatCompletionAndGt$Outbound,
   z.ZodTypeDef,
   CreateChatCompletionAndGt
-> = z.object({
-  gt: z.number(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    gt: z.number(),
+  })
+);
 
 export function createChatCompletionAndGtToJSON(
   createChatCompletionAndGt: CreateChatCompletionAndGt,
@@ -4534,7 +4714,9 @@ export const CreateChatCompletionAndRouterChatCompletionsNe$outboundSchema:
     CreateChatCompletionAndRouterChatCompletionsNe$Outbound,
     z.ZodTypeDef,
     CreateChatCompletionAndRouterChatCompletionsNe
-  > = z.union([z.string(), z.number(), z.boolean()]);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.union([z.string(), z.number(), z.boolean()])
+  );
 
 export function createChatCompletionAndRouterChatCompletionsNeToJSON(
   createChatCompletionAndRouterChatCompletionsNe:
@@ -4557,9 +4739,11 @@ export const CreateChatCompletionAndNe$outboundSchema: z.ZodType<
   CreateChatCompletionAndNe$Outbound,
   z.ZodTypeDef,
   CreateChatCompletionAndNe
-> = z.object({
-  ne: z.union([z.string(), z.number(), z.boolean()]),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ne: z.union([z.string(), z.number(), z.boolean()]),
+  })
+);
 
 export function createChatCompletionAndNeToJSON(
   createChatCompletionAndNe: CreateChatCompletionAndNe,
@@ -4581,7 +4765,9 @@ export const CreateChatCompletionAndRouterChatCompletionsEq$outboundSchema:
     CreateChatCompletionAndRouterChatCompletionsEq$Outbound,
     z.ZodTypeDef,
     CreateChatCompletionAndRouterChatCompletionsEq
-  > = z.union([z.string(), z.number(), z.boolean()]);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.union([z.string(), z.number(), z.boolean()])
+  );
 
 export function createChatCompletionAndRouterChatCompletionsEqToJSON(
   createChatCompletionAndRouterChatCompletionsEq:
@@ -4604,9 +4790,11 @@ export const CreateChatCompletionAndEq$outboundSchema: z.ZodType<
   CreateChatCompletionAndEq$Outbound,
   z.ZodTypeDef,
   CreateChatCompletionAndEq
-> = z.object({
-  eq: z.union([z.string(), z.number(), z.boolean()]),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    eq: z.union([z.string(), z.number(), z.boolean()]),
+  })
+);
 
 export function createChatCompletionAndEqToJSON(
   createChatCompletionAndEq: CreateChatCompletionAndEq,
@@ -4632,16 +4820,18 @@ export const CreateChatCompletionFilterByAnd$outboundSchema: z.ZodType<
   CreateChatCompletionFilterByAnd$Outbound,
   z.ZodTypeDef,
   CreateChatCompletionFilterByAnd
-> = z.union([
-  z.lazy(() => CreateChatCompletionAndEq$outboundSchema),
-  z.lazy(() => CreateChatCompletionAndNe$outboundSchema),
-  z.lazy(() => CreateChatCompletionAndGt$outboundSchema),
-  z.lazy(() => CreateChatCompletionAndGte$outboundSchema),
-  z.lazy(() => CreateChatCompletionAndLt$outboundSchema),
-  z.lazy(() => CreateChatCompletionAndLte$outboundSchema),
-  z.lazy(() => CreateChatCompletionAndIn$outboundSchema),
-  z.lazy(() => CreateChatCompletionAndNin$outboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => CreateChatCompletionAndEq$outboundSchema),
+    z.lazy(() => CreateChatCompletionAndNe$outboundSchema),
+    z.lazy(() => CreateChatCompletionAndGt$outboundSchema),
+    z.lazy(() => CreateChatCompletionAndGte$outboundSchema),
+    z.lazy(() => CreateChatCompletionAndLt$outboundSchema),
+    z.lazy(() => CreateChatCompletionAndLte$outboundSchema),
+    z.lazy(() => CreateChatCompletionAndIn$outboundSchema),
+    z.lazy(() => CreateChatCompletionAndNin$outboundSchema),
+  ])
+);
 
 export function createChatCompletionFilterByAndToJSON(
   createChatCompletionFilterByAnd: CreateChatCompletionFilterByAnd,
@@ -4675,9 +4865,9 @@ export const FilterByAnd$outboundSchema: z.ZodType<
   FilterByAnd$Outbound,
   z.ZodTypeDef,
   FilterByAnd
-> = z.object({
-  and: z.array(
-    z.record(z.union([
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    and: z.array(z.record(z.union([
       z.lazy(() => CreateChatCompletionAndEq$outboundSchema),
       z.lazy(() =>
         CreateChatCompletionAndNe$outboundSchema
@@ -4688,9 +4878,9 @@ export const FilterByAnd$outboundSchema: z.ZodType<
       z.lazy(() => CreateChatCompletionAndLte$outboundSchema),
       z.lazy(() => CreateChatCompletionAndIn$outboundSchema),
       z.lazy(() => CreateChatCompletionAndNin$outboundSchema),
-    ])),
-  ),
-});
+    ]))),
+  })
+);
 
 export function filterByAndToJSON(filterByAnd: FilterByAnd): string {
   return JSON.stringify(FilterByAnd$outboundSchema.parse(filterByAnd));
@@ -4708,7 +4898,9 @@ export const CreateChatCompletion1RouterChatCompletionsNin$outboundSchema:
     CreateChatCompletion1RouterChatCompletionsNin$Outbound,
     z.ZodTypeDef,
     CreateChatCompletion1RouterChatCompletionsNin
-  > = z.union([z.string(), z.number(), z.boolean()]);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.union([z.string(), z.number(), z.boolean()])
+  );
 
 export function createChatCompletion1RouterChatCompletionsNinToJSON(
   createChatCompletion1RouterChatCompletionsNin:
@@ -4731,9 +4923,11 @@ export const CreateChatCompletion1Nin$outboundSchema: z.ZodType<
   CreateChatCompletion1Nin$Outbound,
   z.ZodTypeDef,
   CreateChatCompletion1Nin
-> = z.object({
-  nin: z.array(z.union([z.string(), z.number(), z.boolean()])),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    nin: z.array(z.union([z.string(), z.number(), z.boolean()])),
+  })
+);
 
 export function createChatCompletion1NinToJSON(
   createChatCompletion1Nin: CreateChatCompletion1Nin,
@@ -4755,7 +4949,9 @@ export const CreateChatCompletion1RouterChatCompletionsIn$outboundSchema:
     CreateChatCompletion1RouterChatCompletionsIn$Outbound,
     z.ZodTypeDef,
     CreateChatCompletion1RouterChatCompletionsIn
-  > = z.union([z.string(), z.number(), z.boolean()]);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.union([z.string(), z.number(), z.boolean()])
+  );
 
 export function createChatCompletion1RouterChatCompletionsInToJSON(
   createChatCompletion1RouterChatCompletionsIn:
@@ -4778,9 +4974,11 @@ export const CreateChatCompletion1In$outboundSchema: z.ZodType<
   CreateChatCompletion1In$Outbound,
   z.ZodTypeDef,
   CreateChatCompletion1In
-> = z.object({
-  in: z.array(z.union([z.string(), z.number(), z.boolean()])),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    in: z.array(z.union([z.string(), z.number(), z.boolean()])),
+  })
+);
 
 export function createChatCompletion1InToJSON(
   createChatCompletion1In: CreateChatCompletion1In,
@@ -4800,9 +4998,11 @@ export const CreateChatCompletion1Lte$outboundSchema: z.ZodType<
   CreateChatCompletion1Lte$Outbound,
   z.ZodTypeDef,
   CreateChatCompletion1Lte
-> = z.object({
-  lte: z.number(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    lte: z.number(),
+  })
+);
 
 export function createChatCompletion1LteToJSON(
   createChatCompletion1Lte: CreateChatCompletion1Lte,
@@ -4822,9 +5022,11 @@ export const CreateChatCompletion1Lt$outboundSchema: z.ZodType<
   CreateChatCompletion1Lt$Outbound,
   z.ZodTypeDef,
   CreateChatCompletion1Lt
-> = z.object({
-  lt: z.number(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    lt: z.number(),
+  })
+);
 
 export function createChatCompletion1LtToJSON(
   createChatCompletion1Lt: CreateChatCompletion1Lt,
@@ -4844,9 +5046,11 @@ export const CreateChatCompletion1Gte$outboundSchema: z.ZodType<
   CreateChatCompletion1Gte$Outbound,
   z.ZodTypeDef,
   CreateChatCompletion1Gte
-> = z.object({
-  gte: z.number(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    gte: z.number(),
+  })
+);
 
 export function createChatCompletion1GteToJSON(
   createChatCompletion1Gte: CreateChatCompletion1Gte,
@@ -4866,9 +5070,11 @@ export const CreateChatCompletion1Gt$outboundSchema: z.ZodType<
   CreateChatCompletion1Gt$Outbound,
   z.ZodTypeDef,
   CreateChatCompletion1Gt
-> = z.object({
-  gt: z.number(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    gt: z.number(),
+  })
+);
 
 export function createChatCompletion1GtToJSON(
   createChatCompletion1Gt: CreateChatCompletion1Gt,
@@ -4890,7 +5096,9 @@ export const CreateChatCompletion1RouterChatCompletionsNe$outboundSchema:
     CreateChatCompletion1RouterChatCompletionsNe$Outbound,
     z.ZodTypeDef,
     CreateChatCompletion1RouterChatCompletionsNe
-  > = z.union([z.string(), z.number(), z.boolean()]);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.union([z.string(), z.number(), z.boolean()])
+  );
 
 export function createChatCompletion1RouterChatCompletionsNeToJSON(
   createChatCompletion1RouterChatCompletionsNe:
@@ -4913,9 +5121,11 @@ export const CreateChatCompletion1Ne$outboundSchema: z.ZodType<
   CreateChatCompletion1Ne$Outbound,
   z.ZodTypeDef,
   CreateChatCompletion1Ne
-> = z.object({
-  ne: z.union([z.string(), z.number(), z.boolean()]),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ne: z.union([z.string(), z.number(), z.boolean()]),
+  })
+);
 
 export function createChatCompletion1NeToJSON(
   createChatCompletion1Ne: CreateChatCompletion1Ne,
@@ -4937,7 +5147,9 @@ export const CreateChatCompletion1RouterChatCompletionsEq$outboundSchema:
     CreateChatCompletion1RouterChatCompletionsEq$Outbound,
     z.ZodTypeDef,
     CreateChatCompletion1RouterChatCompletionsEq
-  > = z.union([z.string(), z.number(), z.boolean()]);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.union([z.string(), z.number(), z.boolean()])
+  );
 
 export function createChatCompletion1RouterChatCompletionsEqToJSON(
   createChatCompletion1RouterChatCompletionsEq:
@@ -4960,9 +5172,11 @@ export const CreateChatCompletion1Eq$outboundSchema: z.ZodType<
   CreateChatCompletion1Eq$Outbound,
   z.ZodTypeDef,
   CreateChatCompletion1Eq
-> = z.object({
-  eq: z.union([z.string(), z.number(), z.boolean()]),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    eq: z.union([z.string(), z.number(), z.boolean()]),
+  })
+);
 
 export function createChatCompletion1EqToJSON(
   createChatCompletion1Eq: CreateChatCompletion1Eq,
@@ -4988,16 +5202,18 @@ export const FilterBy1$outboundSchema: z.ZodType<
   FilterBy1$Outbound,
   z.ZodTypeDef,
   FilterBy1
-> = z.union([
-  z.lazy(() => CreateChatCompletion1Eq$outboundSchema),
-  z.lazy(() => CreateChatCompletion1Ne$outboundSchema),
-  z.lazy(() => CreateChatCompletion1Gt$outboundSchema),
-  z.lazy(() => CreateChatCompletion1Gte$outboundSchema),
-  z.lazy(() => CreateChatCompletion1Lt$outboundSchema),
-  z.lazy(() => CreateChatCompletion1Lte$outboundSchema),
-  z.lazy(() => CreateChatCompletion1In$outboundSchema),
-  z.lazy(() => CreateChatCompletion1Nin$outboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => CreateChatCompletion1Eq$outboundSchema),
+    z.lazy(() => CreateChatCompletion1Ne$outboundSchema),
+    z.lazy(() => CreateChatCompletion1Gt$outboundSchema),
+    z.lazy(() => CreateChatCompletion1Gte$outboundSchema),
+    z.lazy(() => CreateChatCompletion1Lt$outboundSchema),
+    z.lazy(() => CreateChatCompletion1Lte$outboundSchema),
+    z.lazy(() => CreateChatCompletion1In$outboundSchema),
+    z.lazy(() => CreateChatCompletion1Nin$outboundSchema),
+  ])
+);
 
 export function filterBy1ToJSON(filterBy1: FilterBy1): string {
   return JSON.stringify(FilterBy1$outboundSchema.parse(filterBy1));
@@ -5021,20 +5237,22 @@ export const FilterBy$outboundSchema: z.ZodType<
   FilterBy$Outbound,
   z.ZodTypeDef,
   FilterBy
-> = z.union([
-  z.lazy(() => FilterByAnd$outboundSchema),
-  z.lazy(() => FilterByOr$outboundSchema),
-  z.record(z.union([
-    z.lazy(() => CreateChatCompletion1Eq$outboundSchema),
-    z.lazy(() => CreateChatCompletion1Ne$outboundSchema),
-    z.lazy(() => CreateChatCompletion1Gt$outboundSchema),
-    z.lazy(() => CreateChatCompletion1Gte$outboundSchema),
-    z.lazy(() => CreateChatCompletion1Lt$outboundSchema),
-    z.lazy(() => CreateChatCompletion1Lte$outboundSchema),
-    z.lazy(() => CreateChatCompletion1In$outboundSchema),
-    z.lazy(() => CreateChatCompletion1Nin$outboundSchema),
-  ])),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => FilterByAnd$outboundSchema),
+    z.lazy(() => FilterByOr$outboundSchema),
+    z.record(z.union([
+      z.lazy(() => CreateChatCompletion1Eq$outboundSchema),
+      z.lazy(() => CreateChatCompletion1Ne$outboundSchema),
+      z.lazy(() => CreateChatCompletion1Gt$outboundSchema),
+      z.lazy(() => CreateChatCompletion1Gte$outboundSchema),
+      z.lazy(() => CreateChatCompletion1Lt$outboundSchema),
+      z.lazy(() => CreateChatCompletion1Lte$outboundSchema),
+      z.lazy(() => CreateChatCompletion1In$outboundSchema),
+      z.lazy(() => CreateChatCompletion1Nin$outboundSchema),
+    ])),
+  ])
+);
 
 export function filterByToJSON(filterBy: FilterBy): string {
   return JSON.stringify(FilterBy$outboundSchema.parse(filterBy));
@@ -5052,17 +5270,19 @@ export const SearchOptions$outboundSchema: z.ZodType<
   SearchOptions$Outbound,
   z.ZodTypeDef,
   SearchOptions
-> = z.object({
-  includeVectors: z.boolean().optional(),
-  includeMetadata: z.boolean().optional(),
-  includeScores: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    includeVectors: "include_vectors",
-    includeMetadata: "include_metadata",
-    includeScores: "include_scores",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    includeVectors: z.boolean().optional(),
+    includeMetadata: z.boolean().optional(),
+    includeScores: z.boolean().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      includeVectors: "include_vectors",
+      includeMetadata: "include_metadata",
+      includeScores: "include_scores",
+    });
+  })
+);
 
 export function searchOptionsToJSON(searchOptions: SearchOptions): string {
   return JSON.stringify(SearchOptions$outboundSchema.parse(searchOptions));
@@ -5080,15 +5300,17 @@ export const RerankConfig$outboundSchema: z.ZodType<
   RerankConfig$Outbound,
   z.ZodTypeDef,
   RerankConfig
-> = z.object({
-  model: z.string(),
-  threshold: z.number().default(0),
-  topK: z.number().int().default(10),
-}).transform((v) => {
-  return remap$(v, {
-    topK: "top_k",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model: z.string(),
+    threshold: z.number().default(0),
+    topK: z.number().int().default(10),
+  }).transform((v) => {
+    return remap$(v, {
+      topK: "top_k",
+    });
+  })
+);
 
 export function rerankConfigToJSON(rerankConfig: RerankConfig): string {
   return JSON.stringify(RerankConfig$outboundSchema.parse(rerankConfig));
@@ -5104,9 +5326,11 @@ export const AgenticRagConfig$outboundSchema: z.ZodType<
   AgenticRagConfig$Outbound,
   z.ZodTypeDef,
   AgenticRagConfig
-> = z.object({
-  model: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model: z.string(),
+  })
+);
 
 export function agenticRagConfigToJSON(
   agenticRagConfig: AgenticRagConfig,
@@ -5144,40 +5368,44 @@ export const CreateChatCompletionKnowledgeBases$outboundSchema: z.ZodType<
   CreateChatCompletionKnowledgeBases$Outbound,
   z.ZodTypeDef,
   CreateChatCompletionKnowledgeBases
-> = z.object({
-  topK: z.nullable(z.number().int()).optional(),
-  threshold: z.nullable(z.number()).optional(),
-  searchType: z.nullable(SearchType$outboundSchema).optional(),
-  filterBy: z.union([
-    z.lazy(() => FilterByAnd$outboundSchema),
-    z.lazy(() => FilterByOr$outboundSchema),
-    z.record(z.union([
-      z.lazy(() => CreateChatCompletion1Eq$outboundSchema),
-      z.lazy(() => CreateChatCompletion1Ne$outboundSchema),
-      z.lazy(() => CreateChatCompletion1Gt$outboundSchema),
-      z.lazy(() => CreateChatCompletion1Gte$outboundSchema),
-      z.lazy(() => CreateChatCompletion1Lt$outboundSchema),
-      z.lazy(() => CreateChatCompletion1Lte$outboundSchema),
-      z.lazy(() => CreateChatCompletion1In$outboundSchema),
-      z.lazy(() => CreateChatCompletion1Nin$outboundSchema),
-    ])),
-  ]).optional(),
-  searchOptions: z.lazy(() => SearchOptions$outboundSchema).optional(),
-  rerankConfig: z.lazy(() => RerankConfig$outboundSchema).optional(),
-  agenticRagConfig: z.lazy(() => AgenticRagConfig$outboundSchema).optional(),
-  knowledgeId: z.string(),
-  query: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    topK: "top_k",
-    searchType: "search_type",
-    filterBy: "filter_by",
-    searchOptions: "search_options",
-    rerankConfig: "rerank_config",
-    agenticRagConfig: "agentic_rag_config",
-    knowledgeId: "knowledge_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    topK: z.nullable(z.number().int()).optional(),
+    threshold: z.nullable(z.number()).optional(),
+    searchType: z.nullable(SearchType$outboundSchema).optional(),
+    filterBy: z.union([
+      z.lazy(() => FilterByAnd$outboundSchema),
+      z.lazy(() => FilterByOr$outboundSchema),
+      z.record(
+        z.union([
+          z.lazy(() => CreateChatCompletion1Eq$outboundSchema),
+          z.lazy(() => CreateChatCompletion1Ne$outboundSchema),
+          z.lazy(() => CreateChatCompletion1Gt$outboundSchema),
+          z.lazy(() => CreateChatCompletion1Gte$outboundSchema),
+          z.lazy(() => CreateChatCompletion1Lt$outboundSchema),
+          z.lazy(() => CreateChatCompletion1Lte$outboundSchema),
+          z.lazy(() => CreateChatCompletion1In$outboundSchema),
+          z.lazy(() => CreateChatCompletion1Nin$outboundSchema),
+        ]),
+      ),
+    ]).optional(),
+    searchOptions: z.lazy(() => SearchOptions$outboundSchema).optional(),
+    rerankConfig: z.lazy(() => RerankConfig$outboundSchema).optional(),
+    agenticRagConfig: z.lazy(() => AgenticRagConfig$outboundSchema).optional(),
+    knowledgeId: z.string(),
+    query: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      topK: "top_k",
+      searchType: "search_type",
+      filterBy: "filter_by",
+      searchOptions: "search_options",
+      rerankConfig: "rerank_config",
+      agenticRagConfig: "agentic_rag_config",
+      knowledgeId: "knowledge_id",
+    });
+  })
+);
 
 export function createChatCompletionKnowledgeBasesToJSON(
   createChatCompletionKnowledgeBases: CreateChatCompletionKnowledgeBases,
@@ -5193,7 +5421,9 @@ export function createChatCompletionKnowledgeBasesToJSON(
 export const CreateChatCompletionLoadBalancerRouterChatCompletionsType$outboundSchema:
   z.ZodNativeEnum<
     typeof CreateChatCompletionLoadBalancerRouterChatCompletionsType
-  > = z.nativeEnum(CreateChatCompletionLoadBalancerRouterChatCompletionsType);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.nativeEnum(CreateChatCompletionLoadBalancerRouterChatCompletionsType)
+  );
 
 /** @internal */
 export type CreateChatCompletionLoadBalancerRouterChatCompletionsModels$Outbound =
@@ -5208,10 +5438,12 @@ export const CreateChatCompletionLoadBalancerRouterChatCompletionsModels$outboun
     CreateChatCompletionLoadBalancerRouterChatCompletionsModels$Outbound,
     z.ZodTypeDef,
     CreateChatCompletionLoadBalancerRouterChatCompletionsModels
-  > = z.object({
-    model: z.string(),
-    weight: z.number().default(0.5),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      model: z.string(),
+      weight: z.number().default(0.5),
+    })
+  );
 
 export function createChatCompletionLoadBalancerRouterChatCompletionsModelsToJSON(
   createChatCompletionLoadBalancerRouterChatCompletionsModels:
@@ -5237,15 +5469,15 @@ export const CreateChatCompletionLoadBalancerRouterChatCompletions1$outboundSche
     CreateChatCompletionLoadBalancerRouterChatCompletions1$Outbound,
     z.ZodTypeDef,
     CreateChatCompletionLoadBalancerRouterChatCompletions1
-  > = z.object({
-    type:
-      CreateChatCompletionLoadBalancerRouterChatCompletionsType$outboundSchema,
-    models: z.array(
-      z.lazy(() =>
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type:
+        CreateChatCompletionLoadBalancerRouterChatCompletionsType$outboundSchema,
+      models: z.array(z.lazy(() =>
         CreateChatCompletionLoadBalancerRouterChatCompletionsModels$outboundSchema
-      ),
-    ),
-  });
+      )),
+    })
+  );
 
 export function createChatCompletionLoadBalancerRouterChatCompletions1ToJSON(
   createChatCompletionLoadBalancerRouterChatCompletions1:
@@ -5268,8 +5500,10 @@ export const CreateChatCompletionRouterChatCompletionsLoadBalancer$outboundSchem
     CreateChatCompletionRouterChatCompletionsLoadBalancer$Outbound,
     z.ZodTypeDef,
     CreateChatCompletionRouterChatCompletionsLoadBalancer
-  > = z.lazy(() =>
-    CreateChatCompletionLoadBalancerRouterChatCompletions1$outboundSchema
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.lazy(() =>
+      CreateChatCompletionLoadBalancerRouterChatCompletions1$outboundSchema
+    )
   );
 
 export function createChatCompletionRouterChatCompletionsLoadBalancerToJSON(
@@ -5294,13 +5528,15 @@ export const CreateChatCompletionRouterChatCompletionsTimeout$outboundSchema:
     CreateChatCompletionRouterChatCompletionsTimeout$Outbound,
     z.ZodTypeDef,
     CreateChatCompletionRouterChatCompletionsTimeout
-  > = z.object({
-    callTimeout: z.number(),
-  }).transform((v) => {
-    return remap$(v, {
-      callTimeout: "call_timeout",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      callTimeout: z.number(),
+    }).transform((v) => {
+      return remap$(v, {
+        callTimeout: "call_timeout",
+      });
+    })
+  );
 
 export function createChatCompletionRouterChatCompletionsTimeoutToJSON(
   createChatCompletionRouterChatCompletionsTimeout:
@@ -5339,45 +5575,48 @@ export type Orq$Outbound = {
 };
 
 /** @internal */
-export const Orq$outboundSchema: z.ZodType<Orq$Outbound, z.ZodTypeDef, Orq> = z
-  .object({
-    name: z.string().optional(),
-    retry: z.lazy(() =>
-      CreateChatCompletionRouterChatCompletionsRetry$outboundSchema
-    ).optional(),
-    fallbackOnCodes: z.array(z.number().int()).optional(),
-    fallbacks: z.array(
-      z.lazy(() =>
+export const Orq$outboundSchema: z.ZodType<Orq$Outbound, z.ZodTypeDef, Orq> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      name: z.string().optional(),
+      retry: z.lazy(() =>
+        CreateChatCompletionRouterChatCompletionsRetry$outboundSchema
+      ).optional(),
+      fallbackOnCodes: z.array(z.number().int()).optional(),
+      fallbacks: z.array(z.lazy(() =>
         CreateChatCompletionRouterChatCompletionsFallbacks$outboundSchema
-      ),
-    ).optional(),
-    prompt: z.lazy(() => Prompt$outboundSchema).optional(),
-    identity: components.PublicIdentity$outboundSchema.optional(),
-    contact: components.PublicContact$outboundSchema.optional(),
-    thread: z.lazy(() => CreateChatCompletionThread$outboundSchema).optional(),
-    inputs: z.union([
-      z.record(z.any()),
-      z.array(z.lazy(() => Inputs2$outboundSchema)),
-    ]).optional(),
-    cache: z.lazy(() =>
-      CreateChatCompletionRouterChatCompletionsCache$outboundSchema
-    ).optional(),
-    knowledgeBases: z.array(
-      z.lazy(() => CreateChatCompletionKnowledgeBases$outboundSchema),
-    ).optional(),
-    loadBalancer: z.lazy(() =>
-      CreateChatCompletionLoadBalancerRouterChatCompletions1$outboundSchema
-    ).optional(),
-    timeout: z.lazy(() =>
-      CreateChatCompletionRouterChatCompletionsTimeout$outboundSchema
-    ).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      fallbackOnCodes: "fallback_on_codes",
-      knowledgeBases: "knowledge_bases",
-      loadBalancer: "load_balancer",
-    });
-  });
+      )).optional(),
+      prompt: z.lazy(() =>
+        Prompt$outboundSchema
+      ).optional(),
+      identity: components.PublicIdentity$outboundSchema.optional(),
+      contact: components.PublicContact$outboundSchema.optional(),
+      thread: z.lazy(() => CreateChatCompletionThread$outboundSchema)
+        .optional(),
+      inputs: z.union([
+        z.record(z.any()),
+        z.array(z.lazy(() => Inputs2$outboundSchema)),
+      ]).optional(),
+      cache: z.lazy(() =>
+        CreateChatCompletionRouterChatCompletionsCache$outboundSchema
+      ).optional(),
+      knowledgeBases: z.array(
+        z.lazy(() => CreateChatCompletionKnowledgeBases$outboundSchema),
+      ).optional(),
+      loadBalancer: z.lazy(() =>
+        CreateChatCompletionLoadBalancerRouterChatCompletions1$outboundSchema
+      ).optional(),
+      timeout: z.lazy(() =>
+        CreateChatCompletionRouterChatCompletionsTimeout$outboundSchema
+      ).optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        fallbackOnCodes: "fallback_on_codes",
+        knowledgeBases: "knowledge_bases",
+        loadBalancer: "load_balancer",
+      });
+    })
+  );
 
 export function orqToJSON(orq: Orq): string {
   return JSON.stringify(Orq$outboundSchema.parse(orq));
@@ -5455,107 +5694,112 @@ export const CreateChatCompletionRequestBody$outboundSchema: z.ZodType<
   CreateChatCompletionRequestBody$Outbound,
   z.ZodTypeDef,
   CreateChatCompletionRequestBody
-> = z.object({
-  messages: z.array(
-    z.union([
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    messages: z.array(z.union([
       z.lazy(() => CreateChatCompletionMessagesSystemMessage$outboundSchema),
       z.lazy(() =>
         CreateChatCompletionMessagesDeveloperMessage$outboundSchema
       ),
       z.lazy(() => CreateChatCompletionMessagesUserMessage$outboundSchema),
-      z.lazy(() => CreateChatCompletionMessagesAssistantMessage$outboundSchema),
-      z.lazy(() => CreateChatCompletionMessagesToolMessage$outboundSchema),
-    ]),
-  ),
-  model: z.string(),
-  metadata: z.record(z.string()).optional(),
-  name: z.string().optional(),
-  audio: z.nullable(z.lazy(() => CreateChatCompletionAudio$outboundSchema))
-    .optional(),
-  frequencyPenalty: z.nullable(z.number()).optional(),
-  maxTokens: z.nullable(z.number().int()).optional(),
-  maxCompletionTokens: z.nullable(z.number().int()).optional(),
-  logprobs: z.nullable(z.boolean()).optional(),
-  topLogprobs: z.nullable(z.number().int()).optional(),
-  n: z.nullable(z.number().int()).optional(),
-  presencePenalty: z.nullable(z.number()).optional(),
-  responseFormat: z.union([
-    z.lazy(() => CreateChatCompletionResponseFormatText$outboundSchema),
-    z.lazy(() => CreateChatCompletionResponseFormatJSONObject$outboundSchema),
-    z.lazy(() => CreateChatCompletionResponseFormatJSONSchema$outboundSchema),
-  ]).optional(),
-  reasoningEffort: CreateChatCompletionReasoningEffort$outboundSchema
-    .optional(),
-  verbosity: z.string().optional(),
-  seed: z.nullable(z.number()).optional(),
-  stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
-  streamOptions: z.nullable(
-    z.lazy(() => CreateChatCompletionStreamOptions$outboundSchema),
-  ).optional(),
-  thinking: z.union([
-    components.ThinkingConfigDisabledSchema$outboundSchema,
-    components.ThinkingConfigEnabledSchema$outboundSchema,
-    components.ThinkingConfigAdaptiveSchema$outboundSchema,
-    components.ThinkingConfigBetweenToolsSchema$outboundSchema,
-  ]).optional(),
-  temperature: z.nullable(z.number()).optional(),
-  topP: z.nullable(z.number()).optional(),
-  topK: z.nullable(z.number()).optional(),
-  tools: z.array(z.lazy(() => CreateChatCompletionTools$outboundSchema))
-    .optional(),
-  toolChoice: z.union([
-    z.lazy(() => CreateChatCompletionToolChoice2$outboundSchema),
-    CreateChatCompletionToolChoice1$outboundSchema,
-  ]).optional(),
-  parallelToolCalls: z.boolean().optional(),
-  modalities: z.nullable(z.array(CreateChatCompletionModalities$outboundSchema))
-    .optional(),
-  guardrails: z.array(
-    z.lazy(() => CreateChatCompletionGuardrails$outboundSchema),
-  ).optional(),
-  plugins: z.array(
-    z.union([
-      components.PIIRedactionPlugin$outboundSchema.and(
-        z.object({ id: z.literal("pii_redaction") }),
+      z.lazy(() =>
+        CreateChatCompletionMessagesAssistantMessage$outboundSchema
       ),
-      components.ResponseHealingPlugin$outboundSchema,
-      components.TraceScrubbingPlugin$outboundSchema,
-    ]),
-  ).optional(),
-  fallbackOnCodes: z.array(z.number().int()).optional(),
-  fallbacks: z.array(z.lazy(() => CreateChatCompletionFallbacks$outboundSchema))
-    .optional(),
-  retry: z.lazy(() => CreateChatCompletionRetry$outboundSchema).optional(),
-  cache: z.lazy(() => CreateChatCompletionCache$outboundSchema).optional(),
-  loadBalancer: z.lazy(() => CreateChatCompletionLoadBalancer1$outboundSchema)
-    .optional(),
-  timeout: z.lazy(() => CreateChatCompletionTimeout$outboundSchema).optional(),
-  variables: z.record(z.any()).optional(),
-  cacheControl: z.lazy(() => CreateChatCompletionCacheControl$outboundSchema)
-    .optional(),
-  promptCacheKey: z.string().optional(),
-  orq: z.lazy(() => Orq$outboundSchema).optional(),
-  stream: z.boolean().default(false),
-}).transform((v) => {
-  return remap$(v, {
-    frequencyPenalty: "frequency_penalty",
-    maxTokens: "max_tokens",
-    maxCompletionTokens: "max_completion_tokens",
-    topLogprobs: "top_logprobs",
-    presencePenalty: "presence_penalty",
-    responseFormat: "response_format",
-    reasoningEffort: "reasoning_effort",
-    streamOptions: "stream_options",
-    topP: "top_p",
-    topK: "top_k",
-    toolChoice: "tool_choice",
-    parallelToolCalls: "parallel_tool_calls",
-    fallbackOnCodes: "fallback_on_codes",
-    loadBalancer: "load_balancer",
-    cacheControl: "cache_control",
-    promptCacheKey: "prompt_cache_key",
-  });
-});
+      z.lazy(() => CreateChatCompletionMessagesToolMessage$outboundSchema),
+    ])),
+    model: z.string(),
+    metadata: z.record(z.string()).optional(),
+    name: z.string().optional(),
+    audio: z.nullable(z.lazy(() => CreateChatCompletionAudio$outboundSchema))
+      .optional(),
+    frequencyPenalty: z.nullable(z.number()).optional(),
+    maxTokens: z.nullable(z.number().int()).optional(),
+    maxCompletionTokens: z.nullable(z.number().int()).optional(),
+    logprobs: z.nullable(z.boolean()).optional(),
+    topLogprobs: z.nullable(z.number().int()).optional(),
+    n: z.nullable(z.number().int()).optional(),
+    presencePenalty: z.nullable(z.number()).optional(),
+    responseFormat: z.union([
+      z.lazy(() => CreateChatCompletionResponseFormatText$outboundSchema),
+      z.lazy(() => CreateChatCompletionResponseFormatJSONObject$outboundSchema),
+      z.lazy(() => CreateChatCompletionResponseFormatJSONSchema$outboundSchema),
+    ]).optional(),
+    reasoningEffort: CreateChatCompletionReasoningEffort$outboundSchema
+      .optional(),
+    verbosity: z.string().optional(),
+    seed: z.nullable(z.number()).optional(),
+    stop: z.nullable(z.union([z.string(), z.array(z.string())])).optional(),
+    streamOptions: z.nullable(
+      z.lazy(() => CreateChatCompletionStreamOptions$outboundSchema),
+    ).optional(),
+    thinking: z.union([
+      components.ThinkingConfigDisabledSchema$outboundSchema,
+      components.ThinkingConfigEnabledSchema$outboundSchema,
+      components.ThinkingConfigAdaptiveSchema$outboundSchema,
+      components.ThinkingConfigBetweenToolsSchema$outboundSchema,
+    ]).optional(),
+    temperature: z.nullable(z.number()).optional(),
+    topP: z.nullable(z.number()).optional(),
+    topK: z.nullable(z.number()).optional(),
+    tools: z.array(z.lazy(() => CreateChatCompletionTools$outboundSchema))
+      .optional(),
+    toolChoice: z.union([
+      z.lazy(() => CreateChatCompletionToolChoice2$outboundSchema),
+      CreateChatCompletionToolChoice1$outboundSchema,
+    ]).optional(),
+    parallelToolCalls: z.boolean().optional(),
+    modalities: z.nullable(
+      z.array(CreateChatCompletionModalities$outboundSchema),
+    ).optional(),
+    guardrails: z.array(
+      z.lazy(() => CreateChatCompletionGuardrails$outboundSchema),
+    ).optional(),
+    plugins: z.array(
+      z.union([
+        components.PIIRedactionPlugin$outboundSchema.and(
+          z.object({ id: z.literal("pii_redaction") }),
+        ),
+        components.ResponseHealingPlugin$outboundSchema,
+        components.TraceScrubbingPlugin$outboundSchema,
+      ]),
+    ).optional(),
+    fallbackOnCodes: z.array(z.number().int()).optional(),
+    fallbacks: z.array(
+      z.lazy(() => CreateChatCompletionFallbacks$outboundSchema),
+    ).optional(),
+    retry: z.lazy(() => CreateChatCompletionRetry$outboundSchema).optional(),
+    cache: z.lazy(() => CreateChatCompletionCache$outboundSchema).optional(),
+    loadBalancer: z.lazy(() => CreateChatCompletionLoadBalancer1$outboundSchema)
+      .optional(),
+    timeout: z.lazy(() => CreateChatCompletionTimeout$outboundSchema)
+      .optional(),
+    variables: z.record(z.any()).optional(),
+    cacheControl: z.lazy(() => CreateChatCompletionCacheControl$outboundSchema)
+      .optional(),
+    promptCacheKey: z.string().optional(),
+    orq: z.lazy(() => Orq$outboundSchema).optional(),
+    stream: z.boolean().default(false),
+  }).transform((v) => {
+    return remap$(v, {
+      frequencyPenalty: "frequency_penalty",
+      maxTokens: "max_tokens",
+      maxCompletionTokens: "max_completion_tokens",
+      topLogprobs: "top_logprobs",
+      presencePenalty: "presence_penalty",
+      responseFormat: "response_format",
+      reasoningEffort: "reasoning_effort",
+      streamOptions: "stream_options",
+      topP: "top_p",
+      topK: "top_k",
+      toolChoice: "tool_choice",
+      parallelToolCalls: "parallel_tool_calls",
+      fallbackOnCodes: "fallback_on_codes",
+      loadBalancer: "load_balancer",
+      cacheControl: "cache_control",
+      promptCacheKey: "prompt_cache_key",
+    });
+  })
+);
 
 export function createChatCompletionRequestBodyToJSON(
   createChatCompletionRequestBody: CreateChatCompletionRequestBody,
@@ -5570,7 +5814,9 @@ export function createChatCompletionRequestBodyToJSON(
 /** @internal */
 export const CreateChatCompletionFinishReason$inboundSchema: z.ZodNativeEnum<
   typeof CreateChatCompletionFinishReason
-> = z.nativeEnum(CreateChatCompletionFinishReason);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(CreateChatCompletionFinishReason)
+);
 
 /** @internal */
 export const CreateChatCompletionRouterChatCompletionsTopLogprobs$inboundSchema:
@@ -5578,11 +5824,13 @@ export const CreateChatCompletionRouterChatCompletionsTopLogprobs$inboundSchema:
     CreateChatCompletionRouterChatCompletionsTopLogprobs,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    token: z.string(),
-    logprob: z.number(),
-    bytes: z.nullable(z.array(z.number())),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      token: z.string(),
+      logprob: z.number(),
+      bytes: z.nullable(z.array(z.number())),
+    })
+  );
 
 export function createChatCompletionRouterChatCompletionsTopLogprobsFromJSON(
   jsonString: string,
@@ -5606,20 +5854,20 @@ export const CreateChatCompletionRouterChatCompletionsContent$inboundSchema:
     CreateChatCompletionRouterChatCompletionsContent,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    token: z.string(),
-    logprob: z.number(),
-    bytes: z.nullable(z.array(z.number())),
-    top_logprobs: z.array(
-      z.lazy(() =>
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      token: z.string(),
+      logprob: z.number(),
+      bytes: z.nullable(z.array(z.number())),
+      top_logprobs: z.array(z.lazy(() =>
         CreateChatCompletionRouterChatCompletionsTopLogprobs$inboundSchema
-      ),
-    ),
-  }).transform((v) => {
-    return remap$(v, {
-      "top_logprobs": "topLogprobs",
-    });
-  });
+      )),
+    }).transform((v) => {
+      return remap$(v, {
+        "top_logprobs": "topLogprobs",
+      });
+    })
+  );
 
 export function createChatCompletionRouterChatCompletionsContentFromJSON(
   jsonString: string,
@@ -5643,11 +5891,13 @@ export const CreateChatCompletionRouterChatCompletionsResponseTopLogprobs$inboun
     CreateChatCompletionRouterChatCompletionsResponseTopLogprobs,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    token: z.string(),
-    logprob: z.number(),
-    bytes: z.nullable(z.array(z.number())),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      token: z.string(),
+      logprob: z.number(),
+      bytes: z.nullable(z.array(z.number())),
+    })
+  );
 
 export function createChatCompletionRouterChatCompletionsResponseTopLogprobsFromJSON(
   jsonString: string,
@@ -5669,20 +5919,20 @@ export const CreateChatCompletionRefusal$inboundSchema: z.ZodType<
   CreateChatCompletionRefusal,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  token: z.string(),
-  logprob: z.number(),
-  bytes: z.nullable(z.array(z.number())),
-  top_logprobs: z.array(
-    z.lazy(() =>
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    token: z.string(),
+    logprob: z.number(),
+    bytes: z.nullable(z.array(z.number())),
+    top_logprobs: z.array(z.lazy(() =>
       CreateChatCompletionRouterChatCompletionsResponseTopLogprobs$inboundSchema
-    ),
-  ),
-}).transform((v) => {
-  return remap$(v, {
-    "top_logprobs": "topLogprobs",
-  });
-});
+    )),
+  }).transform((v) => {
+    return remap$(v, {
+      "top_logprobs": "topLogprobs",
+    });
+  })
+);
 
 export function createChatCompletionRefusalFromJSON(
   jsonString: string,
@@ -5699,16 +5949,16 @@ export const CreateChatCompletionLogprobs$inboundSchema: z.ZodType<
   CreateChatCompletionLogprobs,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  content: z.nullable(
-    z.array(z.lazy(() =>
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    content: z.nullable(z.array(z.lazy(() =>
       CreateChatCompletionRouterChatCompletionsContent$inboundSchema
-    )),
-  ),
-  refusal: z.nullable(
-    z.array(z.lazy(() => CreateChatCompletionRefusal$inboundSchema)),
-  ),
-});
+    ))),
+    refusal: z.nullable(z.array(z.lazy(() =>
+      CreateChatCompletionRefusal$inboundSchema
+    ))),
+  })
+);
 
 export function createChatCompletionLogprobsFromJSON(
   jsonString: string,
@@ -5724,7 +5974,9 @@ export function createChatCompletionLogprobsFromJSON(
 export const CreateChatCompletionRouterChatCompletionsResponse200Type$inboundSchema:
   z.ZodNativeEnum<
     typeof CreateChatCompletionRouterChatCompletionsResponse200Type
-  > = z.nativeEnum(CreateChatCompletionRouterChatCompletionsResponse200Type);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.nativeEnum(CreateChatCompletionRouterChatCompletionsResponse200Type)
+  );
 
 /** @internal */
 export const CreateChatCompletionRouterChatCompletionsResponseFunction$inboundSchema:
@@ -5732,10 +5984,12 @@ export const CreateChatCompletionRouterChatCompletionsResponseFunction$inboundSc
     CreateChatCompletionRouterChatCompletionsResponseFunction,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    name: z.string().optional(),
-    arguments: z.string().optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      name: z.string().optional(),
+      arguments: z.string().optional(),
+    })
+  );
 
 export function createChatCompletionRouterChatCompletionsResponseFunctionFromJSON(
   jsonString: string,
@@ -5758,13 +6012,15 @@ export const CreateChatCompletionRouterChatCompletionsGoogle$inboundSchema:
     CreateChatCompletionRouterChatCompletionsGoogle,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    thought_signature: z.string().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "thought_signature": "thoughtSignature",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      thought_signature: z.string().optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "thought_signature": "thoughtSignature",
+      });
+    })
+  );
 
 export function createChatCompletionRouterChatCompletionsGoogleFromJSON(
   jsonString: string,
@@ -5788,11 +6044,13 @@ export const CreateChatCompletionRouterChatCompletionsExtraContent$inboundSchema
     CreateChatCompletionRouterChatCompletionsExtraContent,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    google: z.lazy(() =>
-      CreateChatCompletionRouterChatCompletionsGoogle$inboundSchema
-    ).optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      google: z.lazy(() =>
+        CreateChatCompletionRouterChatCompletionsGoogle$inboundSchema
+      ).optional(),
+    })
+  );
 
 export function createChatCompletionRouterChatCompletionsExtraContentFromJSON(
   jsonString: string,
@@ -5816,24 +6074,27 @@ export const CreateChatCompletionRouterChatCompletionsToolCalls$inboundSchema:
     CreateChatCompletionRouterChatCompletionsToolCalls,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    index: z.number().optional(),
-    id: z.string().optional(),
-    type: CreateChatCompletionRouterChatCompletionsResponse200Type$inboundSchema
-      .optional(),
-    function: z.lazy(() =>
-      CreateChatCompletionRouterChatCompletionsResponseFunction$inboundSchema
-    ).optional(),
-    thought_signature: z.string().optional(),
-    extra_content: z.lazy(() =>
-      CreateChatCompletionRouterChatCompletionsExtraContent$inboundSchema
-    ).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "thought_signature": "thoughtSignature",
-      "extra_content": "extraContent",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      index: z.number().optional(),
+      id: z.string().optional(),
+      type:
+        CreateChatCompletionRouterChatCompletionsResponse200Type$inboundSchema
+          .optional(),
+      function: z.lazy(() =>
+        CreateChatCompletionRouterChatCompletionsResponseFunction$inboundSchema
+      ).optional(),
+      thought_signature: z.string().optional(),
+      extra_content: z.lazy(() =>
+        CreateChatCompletionRouterChatCompletionsExtraContent$inboundSchema
+      ).optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "thought_signature": "thoughtSignature",
+        "extra_content": "extraContent",
+      });
+    })
+  );
 
 export function createChatCompletionRouterChatCompletionsToolCallsFromJSON(
   jsonString: string,
@@ -5853,8 +6114,10 @@ export function createChatCompletionRouterChatCompletionsToolCallsFromJSON(
 
 /** @internal */
 export const CreateChatCompletionRouterChatCompletionsRole$inboundSchema:
-  z.ZodNativeEnum<typeof CreateChatCompletionRouterChatCompletionsRole> = z
-    .nativeEnum(CreateChatCompletionRouterChatCompletionsRole);
+  z.ZodNativeEnum<typeof CreateChatCompletionRouterChatCompletionsRole> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(CreateChatCompletionRouterChatCompletionsRole)
+    );
 
 /** @internal */
 export const CreateChatCompletionRouterChatCompletionsResponseAudio$inboundSchema:
@@ -5862,16 +6125,18 @@ export const CreateChatCompletionRouterChatCompletionsResponseAudio$inboundSchem
     CreateChatCompletionRouterChatCompletionsResponseAudio,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    id: z.string().optional(),
-    transcript: z.string().optional(),
-    data: z.string().optional(),
-    expires_at: z.number().int().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "expires_at": "expiresAt",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string().optional(),
+      transcript: z.string().optional(),
+      data: z.string().optional(),
+      expires_at: z.number().int().optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "expires_at": "expiresAt",
+      });
+    })
+  );
 
 export function createChatCompletionRouterChatCompletionsResponseAudioFromJSON(
   jsonString: string,
@@ -5889,32 +6154,30 @@ export function createChatCompletionRouterChatCompletionsResponseAudioFromJSON(
 }
 
 /** @internal */
-export const Delta$inboundSchema: z.ZodType<Delta, z.ZodTypeDef, unknown> = z
-  .object({
-    content: z.nullable(z.string()).optional(),
-    refusal: z.nullable(z.string()).optional(),
-    tool_calls: z.array(
-      z.lazy(() =>
+export const Delta$inboundSchema: z.ZodType<Delta, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      content: z.nullable(z.string()).optional(),
+      refusal: z.nullable(z.string()).optional(),
+      tool_calls: z.array(z.lazy(() =>
         CreateChatCompletionRouterChatCompletionsToolCalls$inboundSchema
-      ),
-    ).optional(),
-    role: CreateChatCompletionRouterChatCompletionsRole$inboundSchema
-      .optional(),
-    reasoning: z.string().optional(),
-    reasoning_signature: z.string().optional(),
-    redacted_reasoning: z.string().optional(),
-    audio: z.nullable(
-      z.lazy(() =>
+      )).optional(),
+      role: CreateChatCompletionRouterChatCompletionsRole$inboundSchema
+        .optional(),
+      reasoning: z.string().optional(),
+      reasoning_signature: z.string().optional(),
+      redacted_reasoning: z.string().optional(),
+      audio: z.nullable(z.lazy(() =>
         CreateChatCompletionRouterChatCompletionsResponseAudio$inboundSchema
-      ),
-    ).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "tool_calls": "toolCalls",
-      "reasoning_signature": "reasoningSignature",
-      "redacted_reasoning": "redactedReasoning",
-    });
-  });
+      )).optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "tool_calls": "toolCalls",
+        "reasoning_signature": "reasoningSignature",
+        "redacted_reasoning": "redactedReasoning",
+      });
+    })
+  );
 
 export function deltaFromJSON(
   jsonString: string,
@@ -5932,18 +6195,20 @@ export const CreateChatCompletionRouterChatCompletionsChoices$inboundSchema:
     CreateChatCompletionRouterChatCompletionsChoices,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    finish_reason: z.nullable(CreateChatCompletionFinishReason$inboundSchema),
-    index: z.number().default(0),
-    logprobs: z.nullable(
-      z.lazy(() => CreateChatCompletionLogprobs$inboundSchema),
-    ).optional(),
-    delta: z.lazy(() => Delta$inboundSchema),
-  }).transform((v) => {
-    return remap$(v, {
-      "finish_reason": "finishReason",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      finish_reason: z.nullable(CreateChatCompletionFinishReason$inboundSchema),
+      index: z.number().default(0),
+      logprobs: z.nullable(
+        z.lazy(() => CreateChatCompletionLogprobs$inboundSchema),
+      ).optional(),
+      delta: z.lazy(() => Delta$inboundSchema),
+    }).transform((v) => {
+      return remap$(v, {
+        "finish_reason": "finishReason",
+      });
+    })
+  );
 
 export function createChatCompletionRouterChatCompletionsChoicesFromJSON(
   jsonString: string,
@@ -5967,17 +6232,19 @@ export const CreateChatCompletionRouterChatCompletionsPromptTokensDetails$inboun
     CreateChatCompletionRouterChatCompletionsPromptTokensDetails,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    cached_tokens: z.nullable(z.number().int()).optional(),
-    cache_creation_tokens: z.nullable(z.number().int()).optional(),
-    audio_tokens: z.nullable(z.number().int()).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "cached_tokens": "cachedTokens",
-      "cache_creation_tokens": "cacheCreationTokens",
-      "audio_tokens": "audioTokens",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      cached_tokens: z.nullable(z.number().int()).optional(),
+      cache_creation_tokens: z.nullable(z.number().int()).optional(),
+      audio_tokens: z.nullable(z.number().int()).optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "cached_tokens": "cachedTokens",
+        "cache_creation_tokens": "cacheCreationTokens",
+        "audio_tokens": "audioTokens",
+      });
+    })
+  );
 
 export function createChatCompletionRouterChatCompletionsPromptTokensDetailsFromJSON(
   jsonString: string,
@@ -6000,19 +6267,21 @@ export const CreateChatCompletionRouterChatCompletionsCompletionTokensDetails$in
     CreateChatCompletionRouterChatCompletionsCompletionTokensDetails,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    reasoning_tokens: z.nullable(z.number()).optional(),
-    accepted_prediction_tokens: z.nullable(z.number()).optional(),
-    rejected_prediction_tokens: z.nullable(z.number()).optional(),
-    audio_tokens: z.nullable(z.number().int()).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "reasoning_tokens": "reasoningTokens",
-      "accepted_prediction_tokens": "acceptedPredictionTokens",
-      "rejected_prediction_tokens": "rejectedPredictionTokens",
-      "audio_tokens": "audioTokens",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      reasoning_tokens: z.nullable(z.number()).optional(),
+      accepted_prediction_tokens: z.nullable(z.number()).optional(),
+      rejected_prediction_tokens: z.nullable(z.number()).optional(),
+      audio_tokens: z.nullable(z.number().int()).optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "reasoning_tokens": "reasoningTokens",
+        "accepted_prediction_tokens": "acceptedPredictionTokens",
+        "rejected_prediction_tokens": "rejectedPredictionTokens",
+        "audio_tokens": "audioTokens",
+      });
+    })
+  );
 
 export function createChatCompletionRouterChatCompletionsCompletionTokensDetailsFromJSON(
   jsonString: string,
@@ -6035,29 +6304,27 @@ export const CreateChatCompletionRouterChatCompletionsUsage$inboundSchema:
     CreateChatCompletionRouterChatCompletionsUsage,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    completion_tokens: z.number().optional(),
-    prompt_tokens: z.number().optional(),
-    total_tokens: z.number().optional(),
-    prompt_tokens_details: z.nullable(
-      z.lazy(() =>
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      completion_tokens: z.number().optional(),
+      prompt_tokens: z.number().optional(),
+      total_tokens: z.number().optional(),
+      prompt_tokens_details: z.nullable(z.lazy(() =>
         CreateChatCompletionRouterChatCompletionsPromptTokensDetails$inboundSchema
-      ),
-    ).optional(),
-    completion_tokens_details: z.nullable(
-      z.lazy(() =>
+      )).optional(),
+      completion_tokens_details: z.nullable(z.lazy(() =>
         CreateChatCompletionRouterChatCompletionsCompletionTokensDetails$inboundSchema
-      ),
-    ).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "completion_tokens": "completionTokens",
-      "prompt_tokens": "promptTokens",
-      "total_tokens": "totalTokens",
-      "prompt_tokens_details": "promptTokensDetails",
-      "completion_tokens_details": "completionTokensDetails",
-    });
-  });
+      )).optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "completion_tokens": "completionTokens",
+        "prompt_tokens": "promptTokens",
+        "total_tokens": "totalTokens",
+        "prompt_tokens_details": "promptTokensDetails",
+        "completion_tokens_details": "completionTokensDetails",
+      });
+    })
+  );
 
 export function createChatCompletionRouterChatCompletionsUsageFromJSON(
   jsonString: string,
@@ -6077,33 +6344,35 @@ export function createChatCompletionRouterChatCompletionsUsageFromJSON(
 
 /** @internal */
 export const CreateChatCompletionRouterChatCompletionsObject$inboundSchema:
-  z.ZodNativeEnum<typeof CreateChatCompletionRouterChatCompletionsObject> = z
-    .nativeEnum(CreateChatCompletionRouterChatCompletionsObject);
+  z.ZodNativeEnum<typeof CreateChatCompletionRouterChatCompletionsObject> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(CreateChatCompletionRouterChatCompletionsObject)
+    );
 
 /** @internal */
 export const CreateChatCompletionData$inboundSchema: z.ZodType<
   CreateChatCompletionData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  choices: z.array(
-    z.lazy(() =>
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    choices: z.array(z.lazy(() =>
       CreateChatCompletionRouterChatCompletionsChoices$inboundSchema
-    ),
-  ),
-  created: z.number(),
-  model: z.string(),
-  system_fingerprint: z.nullable(z.string()).optional(),
-  usage: z.nullable(
-    z.lazy(() => CreateChatCompletionRouterChatCompletionsUsage$inboundSchema),
-  ).optional(),
-  object: CreateChatCompletionRouterChatCompletionsObject$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "system_fingerprint": "systemFingerprint",
-  });
-});
+    )),
+    created: z.number(),
+    model: z.string(),
+    system_fingerprint: z.nullable(z.string()).optional(),
+    usage: z.nullable(z.lazy(() =>
+      CreateChatCompletionRouterChatCompletionsUsage$inboundSchema
+    )).optional(),
+    object: CreateChatCompletionRouterChatCompletionsObject$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "system_fingerprint": "systemFingerprint",
+    });
+  })
+);
 
 export function createChatCompletionDataFromJSON(
   jsonString: string,
@@ -6121,18 +6390,20 @@ export const CreateChatCompletionRouterChatCompletionsResponseBody$inboundSchema
     CreateChatCompletionRouterChatCompletionsResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    data: z.unknown().optional().transform((v, ctx) => {
-      if (v === undefined) return undefined;
-      if (typeof v !== "string") return v;
-      try {
-        return JSON.parse(v);
-      } catch (err) {
-        ctx.addIssue({ code: "custom", message: `malformed json: ${err}` });
-        return z.NEVER;
-      }
-    }).pipe(z.lazy(() => CreateChatCompletionData$inboundSchema).optional()),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      data: z.unknown().optional().transform((v, ctx) => {
+        if (v === undefined) return undefined;
+        if (typeof v !== "string") return v;
+        try {
+          return JSON.parse(v);
+        } catch (err) {
+          ctx.addIssue({ code: "custom", message: `malformed json: ${err}` });
+          return z.NEVER;
+        }
+      }).pipe(z.lazy(() => CreateChatCompletionData$inboundSchema).optional()),
+    })
+  );
 
 export function createChatCompletionRouterChatCompletionsResponseBodyFromJSON(
   jsonString: string,
@@ -6152,13 +6423,15 @@ export function createChatCompletionRouterChatCompletionsResponseBodyFromJSON(
 
 /** @internal */
 export const FinishReason$inboundSchema: z.ZodNativeEnum<typeof FinishReason> =
-  z.nativeEnum(FinishReason);
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(FinishReason));
 
 /** @internal */
 export const CreateChatCompletionRouterChatCompletionsResponseType$inboundSchema:
   z.ZodNativeEnum<
     typeof CreateChatCompletionRouterChatCompletionsResponseType
-  > = z.nativeEnum(CreateChatCompletionRouterChatCompletionsResponseType);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.nativeEnum(CreateChatCompletionRouterChatCompletionsResponseType)
+  );
 
 /** @internal */
 export const CreateChatCompletionRouterChatCompletionsFunction$inboundSchema:
@@ -6166,10 +6439,12 @@ export const CreateChatCompletionRouterChatCompletionsFunction$inboundSchema:
     CreateChatCompletionRouterChatCompletionsFunction,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    name: z.string().optional(),
-    arguments: z.string().optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      name: z.string().optional(),
+      arguments: z.string().optional(),
+    })
+  );
 
 export function createChatCompletionRouterChatCompletionsFunctionFromJSON(
   jsonString: string,
@@ -6192,13 +6467,15 @@ export const CreateChatCompletionGoogle$inboundSchema: z.ZodType<
   CreateChatCompletionGoogle,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  thought_signature: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "thought_signature": "thoughtSignature",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    thought_signature: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "thought_signature": "thoughtSignature",
+    });
+  })
+);
 
 export function createChatCompletionGoogleFromJSON(
   jsonString: string,
@@ -6215,9 +6492,11 @@ export const CreateChatCompletionExtraContent$inboundSchema: z.ZodType<
   CreateChatCompletionExtraContent,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  google: z.lazy(() => CreateChatCompletionGoogle$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    google: z.lazy(() => CreateChatCompletionGoogle$inboundSchema).optional(),
+  })
+);
 
 export function createChatCompletionExtraContentFromJSON(
   jsonString: string,
@@ -6234,23 +6513,25 @@ export const CreateChatCompletionToolCalls$inboundSchema: z.ZodType<
   CreateChatCompletionToolCalls,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  index: z.number().optional(),
-  id: z.string().optional(),
-  type: CreateChatCompletionRouterChatCompletionsResponseType$inboundSchema
-    .optional(),
-  function: z.lazy(() =>
-    CreateChatCompletionRouterChatCompletionsFunction$inboundSchema
-  ).optional(),
-  thought_signature: z.string().optional(),
-  extra_content: z.lazy(() => CreateChatCompletionExtraContent$inboundSchema)
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "thought_signature": "thoughtSignature",
-    "extra_content": "extraContent",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    index: z.number().optional(),
+    id: z.string().optional(),
+    type: CreateChatCompletionRouterChatCompletionsResponseType$inboundSchema
+      .optional(),
+    function: z.lazy(() =>
+      CreateChatCompletionRouterChatCompletionsFunction$inboundSchema
+    ).optional(),
+    thought_signature: z.string().optional(),
+    extra_content: z.lazy(() => CreateChatCompletionExtraContent$inboundSchema)
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "thought_signature": "thoughtSignature",
+      "extra_content": "extraContent",
+    });
+  })
+);
 
 export function createChatCompletionToolCallsFromJSON(
   jsonString: string,
@@ -6265,7 +6546,7 @@ export function createChatCompletionToolCallsFromJSON(
 /** @internal */
 export const CreateChatCompletionRole$inboundSchema: z.ZodNativeEnum<
   typeof CreateChatCompletionRole
-> = z.nativeEnum(CreateChatCompletionRole);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(CreateChatCompletionRole));
 
 /** @internal */
 export const CreateChatCompletionRouterChatCompletionsAudio$inboundSchema:
@@ -6273,16 +6554,18 @@ export const CreateChatCompletionRouterChatCompletionsAudio$inboundSchema:
     CreateChatCompletionRouterChatCompletionsAudio,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    id: z.string(),
-    expires_at: z.number().int(),
-    data: z.string(),
-    transcript: z.string(),
-  }).transform((v) => {
-    return remap$(v, {
-      "expires_at": "expiresAt",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string(),
+      expires_at: z.number().int(),
+      data: z.string(),
+      transcript: z.string(),
+    }).transform((v) => {
+      return remap$(v, {
+        "expires_at": "expiresAt",
+      });
+    })
+  );
 
 export function createChatCompletionRouterChatCompletionsAudioFromJSON(
   jsonString: string,
@@ -6305,25 +6588,30 @@ export const CreateChatCompletionMessage$inboundSchema: z.ZodType<
   CreateChatCompletionMessage,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  content: z.nullable(z.string()).optional(),
-  refusal: z.nullable(z.string()).optional(),
-  tool_calls: z.array(z.lazy(() => CreateChatCompletionToolCalls$inboundSchema))
-    .optional(),
-  role: CreateChatCompletionRole$inboundSchema.optional(),
-  reasoning: z.nullable(z.string()).optional(),
-  reasoning_signature: z.nullable(z.string()).optional(),
-  redacted_reasoning: z.string().optional(),
-  audio: z.nullable(
-    z.lazy(() => CreateChatCompletionRouterChatCompletionsAudio$inboundSchema),
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "tool_calls": "toolCalls",
-    "reasoning_signature": "reasoningSignature",
-    "redacted_reasoning": "redactedReasoning",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    content: z.nullable(z.string()).optional(),
+    refusal: z.nullable(z.string()).optional(),
+    tool_calls: z.array(
+      z.lazy(() => CreateChatCompletionToolCalls$inboundSchema),
+    ).optional(),
+    role: CreateChatCompletionRole$inboundSchema.optional(),
+    reasoning: z.nullable(z.string()).optional(),
+    reasoning_signature: z.nullable(z.string()).optional(),
+    redacted_reasoning: z.string().optional(),
+    audio: z.nullable(
+      z.lazy(() =>
+        CreateChatCompletionRouterChatCompletionsAudio$inboundSchema
+      ),
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "tool_calls": "toolCalls",
+      "reasoning_signature": "reasoningSignature",
+      "redacted_reasoning": "redactedReasoning",
+    });
+  })
+);
 
 export function createChatCompletionMessageFromJSON(
   jsonString: string,
@@ -6340,11 +6628,13 @@ export const TopLogprobs$inboundSchema: z.ZodType<
   TopLogprobs,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  token: z.string(),
-  logprob: z.number(),
-  bytes: z.nullable(z.array(z.number())),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    token: z.string(),
+    logprob: z.number(),
+    bytes: z.nullable(z.array(z.number())),
+  })
+);
 
 export function topLogprobsFromJSON(
   jsonString: string,
@@ -6361,16 +6651,18 @@ export const CreateChatCompletionContent$inboundSchema: z.ZodType<
   CreateChatCompletionContent,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  token: z.string(),
-  logprob: z.number(),
-  bytes: z.nullable(z.array(z.number())),
-  top_logprobs: z.array(z.lazy(() => TopLogprobs$inboundSchema)),
-}).transform((v) => {
-  return remap$(v, {
-    "top_logprobs": "topLogprobs",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    token: z.string(),
+    logprob: z.number(),
+    bytes: z.nullable(z.array(z.number())),
+    top_logprobs: z.array(z.lazy(() => TopLogprobs$inboundSchema)),
+  }).transform((v) => {
+    return remap$(v, {
+      "top_logprobs": "topLogprobs",
+    });
+  })
+);
 
 export function createChatCompletionContentFromJSON(
   jsonString: string,
@@ -6387,11 +6679,13 @@ export const CreateChatCompletionTopLogprobs$inboundSchema: z.ZodType<
   CreateChatCompletionTopLogprobs,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  token: z.string(),
-  logprob: z.number(),
-  bytes: z.nullable(z.array(z.number())),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    token: z.string(),
+    logprob: z.number(),
+    bytes: z.nullable(z.array(z.number())),
+  })
+);
 
 export function createChatCompletionTopLogprobsFromJSON(
   jsonString: string,
@@ -6405,18 +6699,20 @@ export function createChatCompletionTopLogprobsFromJSON(
 
 /** @internal */
 export const Refusal$inboundSchema: z.ZodType<Refusal, z.ZodTypeDef, unknown> =
-  z.object({
-    token: z.string(),
-    logprob: z.number(),
-    bytes: z.nullable(z.array(z.number())),
-    top_logprobs: z.array(
-      z.lazy(() => CreateChatCompletionTopLogprobs$inboundSchema),
-    ),
-  }).transform((v) => {
-    return remap$(v, {
-      "top_logprobs": "topLogprobs",
-    });
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      token: z.string(),
+      logprob: z.number(),
+      bytes: z.nullable(z.array(z.number())),
+      top_logprobs: z.array(
+        z.lazy(() => CreateChatCompletionTopLogprobs$inboundSchema),
+      ),
+    }).transform((v) => {
+      return remap$(v, {
+        "top_logprobs": "topLogprobs",
+      });
+    })
+  );
 
 export function refusalFromJSON(
   jsonString: string,
@@ -6433,12 +6729,14 @@ export const Logprobs$inboundSchema: z.ZodType<
   Logprobs,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  content: z.nullable(
-    z.array(z.lazy(() => CreateChatCompletionContent$inboundSchema)),
-  ),
-  refusal: z.nullable(z.array(z.lazy(() => Refusal$inboundSchema))),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    content: z.nullable(
+      z.array(z.lazy(() => CreateChatCompletionContent$inboundSchema)),
+    ),
+    refusal: z.nullable(z.array(z.lazy(() => Refusal$inboundSchema))),
+  })
+);
 
 export function logprobsFromJSON(
   jsonString: string,
@@ -6455,16 +6753,18 @@ export const CreateChatCompletionChoices$inboundSchema: z.ZodType<
   CreateChatCompletionChoices,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  finish_reason: z.nullable(FinishReason$inboundSchema),
-  index: z.number().default(0),
-  message: z.lazy(() => CreateChatCompletionMessage$inboundSchema),
-  logprobs: z.nullable(z.lazy(() => Logprobs$inboundSchema)).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "finish_reason": "finishReason",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    finish_reason: z.nullable(FinishReason$inboundSchema),
+    index: z.number().default(0),
+    message: z.lazy(() => CreateChatCompletionMessage$inboundSchema),
+    logprobs: z.nullable(z.lazy(() => Logprobs$inboundSchema)).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "finish_reason": "finishReason",
+    });
+  })
+);
 
 export function createChatCompletionChoicesFromJSON(
   jsonString: string,
@@ -6481,17 +6781,19 @@ export const CreateChatCompletionPromptTokensDetails$inboundSchema: z.ZodType<
   CreateChatCompletionPromptTokensDetails,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  cached_tokens: z.nullable(z.number().int()).optional(),
-  cache_creation_tokens: z.nullable(z.number().int()).optional(),
-  audio_tokens: z.nullable(z.number().int()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "cached_tokens": "cachedTokens",
-    "cache_creation_tokens": "cacheCreationTokens",
-    "audio_tokens": "audioTokens",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    cached_tokens: z.nullable(z.number().int()).optional(),
+    cache_creation_tokens: z.nullable(z.number().int()).optional(),
+    audio_tokens: z.nullable(z.number().int()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "cached_tokens": "cachedTokens",
+      "cache_creation_tokens": "cacheCreationTokens",
+      "audio_tokens": "audioTokens",
+    });
+  })
+);
 
 export function createChatCompletionPromptTokensDetailsFromJSON(
   jsonString: string,
@@ -6515,19 +6817,21 @@ export const CreateChatCompletionCompletionTokensDetails$inboundSchema:
     CreateChatCompletionCompletionTokensDetails,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    reasoning_tokens: z.nullable(z.number()).optional(),
-    accepted_prediction_tokens: z.nullable(z.number()).optional(),
-    rejected_prediction_tokens: z.nullable(z.number()).optional(),
-    audio_tokens: z.nullable(z.number().int()).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "reasoning_tokens": "reasoningTokens",
-      "accepted_prediction_tokens": "acceptedPredictionTokens",
-      "rejected_prediction_tokens": "rejectedPredictionTokens",
-      "audio_tokens": "audioTokens",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      reasoning_tokens: z.nullable(z.number()).optional(),
+      accepted_prediction_tokens: z.nullable(z.number()).optional(),
+      rejected_prediction_tokens: z.nullable(z.number()).optional(),
+      audio_tokens: z.nullable(z.number().int()).optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "reasoning_tokens": "reasoningTokens",
+        "accepted_prediction_tokens": "acceptedPredictionTokens",
+        "rejected_prediction_tokens": "rejectedPredictionTokens",
+        "audio_tokens": "audioTokens",
+      });
+    })
+  );
 
 export function createChatCompletionCompletionTokensDetailsFromJSON(
   jsonString: string,
@@ -6550,25 +6854,27 @@ export const CreateChatCompletionUsage$inboundSchema: z.ZodType<
   CreateChatCompletionUsage,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  completion_tokens: z.number().optional(),
-  prompt_tokens: z.number().optional(),
-  total_tokens: z.number().optional(),
-  prompt_tokens_details: z.nullable(
-    z.lazy(() => CreateChatCompletionPromptTokensDetails$inboundSchema),
-  ).optional(),
-  completion_tokens_details: z.nullable(
-    z.lazy(() => CreateChatCompletionCompletionTokensDetails$inboundSchema),
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "completion_tokens": "completionTokens",
-    "prompt_tokens": "promptTokens",
-    "total_tokens": "totalTokens",
-    "prompt_tokens_details": "promptTokensDetails",
-    "completion_tokens_details": "completionTokensDetails",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    completion_tokens: z.number().optional(),
+    prompt_tokens: z.number().optional(),
+    total_tokens: z.number().optional(),
+    prompt_tokens_details: z.nullable(
+      z.lazy(() => CreateChatCompletionPromptTokensDetails$inboundSchema),
+    ).optional(),
+    completion_tokens_details: z.nullable(
+      z.lazy(() => CreateChatCompletionCompletionTokensDetails$inboundSchema),
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "completion_tokens": "completionTokens",
+      "prompt_tokens": "promptTokens",
+      "total_tokens": "totalTokens",
+      "prompt_tokens_details": "promptTokensDetails",
+      "completion_tokens_details": "completionTokensDetails",
+    });
+  })
+);
 
 export function createChatCompletionUsageFromJSON(
   jsonString: string,
@@ -6583,27 +6889,29 @@ export function createChatCompletionUsageFromJSON(
 /** @internal */
 export const CreateChatCompletionObject$inboundSchema: z.ZodNativeEnum<
   typeof CreateChatCompletionObject
-> = z.nativeEnum(CreateChatCompletionObject);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(CreateChatCompletionObject));
 
 /** @internal */
 export const CreateChatCompletionResponseBody$inboundSchema: z.ZodType<
   CreateChatCompletionResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  choices: z.array(z.lazy(() => CreateChatCompletionChoices$inboundSchema)),
-  created: z.number(),
-  model: z.string(),
-  system_fingerprint: z.nullable(z.string()).optional(),
-  usage: z.nullable(z.lazy(() => CreateChatCompletionUsage$inboundSchema))
-    .optional(),
-  object: CreateChatCompletionObject$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "system_fingerprint": "systemFingerprint",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    choices: z.array(z.lazy(() => CreateChatCompletionChoices$inboundSchema)),
+    created: z.number(),
+    model: z.string(),
+    system_fingerprint: z.nullable(z.string()).optional(),
+    usage: z.nullable(z.lazy(() => CreateChatCompletionUsage$inboundSchema))
+      .optional(),
+    object: CreateChatCompletionObject$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "system_fingerprint": "systemFingerprint",
+    });
+  })
+);
 
 export function createChatCompletionResponseBodyFromJSON(
   jsonString: string,
@@ -6620,21 +6928,25 @@ export const CreateChatCompletionResponse$inboundSchema: z.ZodType<
   CreateChatCompletionResponse,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  z.lazy(() => CreateChatCompletionResponseBody$inboundSchema),
-  z.instanceof(ReadableStream<Uint8Array>)
-    .transform(stream => {
-      return new EventStream(stream, rawEvent => {
-        if (rawEvent.data === "[DONE]") return { done: true, value: undefined };
-        return {
-          done: false,
-          value: z.lazy(() =>
-            CreateChatCompletionRouterChatCompletionsResponseBody$inboundSchema
-          ).parse(rawEvent),
-        };
-      }, { dataRequired: false });
-    }),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => CreateChatCompletionResponseBody$inboundSchema),
+    z.instanceof(ReadableStream<Uint8Array>)
+      .transform(stream => {
+        return new EventStream(stream, rawEvent => {
+          if (rawEvent.data === "[DONE]") {
+            return { done: true, value: undefined };
+          }
+          return {
+            done: false,
+            value: z.lazy(() =>
+              CreateChatCompletionRouterChatCompletionsResponseBody$inboundSchema
+            ).parse(rawEvent),
+          };
+        }, { dataRequired: false });
+      }),
+  ])
+);
 
 export function createChatCompletionResponseFromJSON(
   jsonString: string,

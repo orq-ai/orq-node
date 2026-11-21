@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type FileDeleteRequest = {
   /**
@@ -22,13 +23,15 @@ export const FileDeleteRequest$outboundSchema: z.ZodType<
   FileDeleteRequest$Outbound,
   z.ZodTypeDef,
   FileDeleteRequest
-> = z.object({
-  fileId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    fileId: "file_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    fileId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      fileId: "file_id",
+    });
+  })
+);
 
 export function fileDeleteRequestToJSON(
   fileDeleteRequest: FileDeleteRequest,

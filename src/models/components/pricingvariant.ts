@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -39,39 +39,41 @@ export const PricingVariant$inboundSchema: z.ZodType<
   PricingVariant,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  audio_input: Price$inboundSchema.optional(),
-  audio_output: Price$inboundSchema.optional(),
-  audio_session: Price$inboundSchema.optional(),
-  cache_read: Price$inboundSchema.optional(),
-  cache_write_12h: Price$inboundSchema.optional(),
-  cache_write_1h: Price$inboundSchema.optional(),
-  cache_write_30m: Price$inboundSchema.optional(),
-  cache_write_5m: Price$inboundSchema.optional(),
-  fetch: Price$inboundSchema.optional(),
-  image_cache_read: Price$inboundSchema.optional(),
-  image_input: Price$inboundSchema.optional(),
-  input: Price$inboundSchema.optional(),
-  output: Price$inboundSchema.optional(),
-  reasoning: Price$inboundSchema.optional(),
-  search: Price$inboundSchema.optional(),
-  text_input: Price$inboundSchema.optional(),
-  when: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "audio_input": "audioInput",
-    "audio_output": "audioOutput",
-    "audio_session": "audioSession",
-    "cache_read": "cacheRead",
-    "cache_write_12h": "cacheWrite12h",
-    "cache_write_1h": "cacheWrite1h",
-    "cache_write_30m": "cacheWrite30m",
-    "cache_write_5m": "cacheWrite5m",
-    "image_cache_read": "imageCacheRead",
-    "image_input": "imageInput",
-    "text_input": "textInput",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    audio_input: Price$inboundSchema.optional(),
+    audio_output: Price$inboundSchema.optional(),
+    audio_session: Price$inboundSchema.optional(),
+    cache_read: Price$inboundSchema.optional(),
+    cache_write_12h: Price$inboundSchema.optional(),
+    cache_write_1h: Price$inboundSchema.optional(),
+    cache_write_30m: Price$inboundSchema.optional(),
+    cache_write_5m: Price$inboundSchema.optional(),
+    fetch: Price$inboundSchema.optional(),
+    image_cache_read: Price$inboundSchema.optional(),
+    image_input: Price$inboundSchema.optional(),
+    input: Price$inboundSchema.optional(),
+    output: Price$inboundSchema.optional(),
+    reasoning: Price$inboundSchema.optional(),
+    search: Price$inboundSchema.optional(),
+    text_input: Price$inboundSchema.optional(),
+    when: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "audio_input": "audioInput",
+      "audio_output": "audioOutput",
+      "audio_session": "audioSession",
+      "cache_read": "cacheRead",
+      "cache_write_12h": "cacheWrite12h",
+      "cache_write_1h": "cacheWrite1h",
+      "cache_write_30m": "cacheWrite30m",
+      "cache_write_5m": "cacheWrite5m",
+      "image_cache_read": "imageCacheRead",
+      "image_input": "imageInput",
+      "text_input": "textInput",
+    });
+  })
+);
 /** @internal */
 export type PricingVariant$Outbound = {
   audio_input?: Price$Outbound | undefined;
@@ -98,39 +100,41 @@ export const PricingVariant$outboundSchema: z.ZodType<
   PricingVariant$Outbound,
   z.ZodTypeDef,
   PricingVariant
-> = z.object({
-  audioInput: Price$outboundSchema.optional(),
-  audioOutput: Price$outboundSchema.optional(),
-  audioSession: Price$outboundSchema.optional(),
-  cacheRead: Price$outboundSchema.optional(),
-  cacheWrite12h: Price$outboundSchema.optional(),
-  cacheWrite1h: Price$outboundSchema.optional(),
-  cacheWrite30m: Price$outboundSchema.optional(),
-  cacheWrite5m: Price$outboundSchema.optional(),
-  fetch: Price$outboundSchema.optional(),
-  imageCacheRead: Price$outboundSchema.optional(),
-  imageInput: Price$outboundSchema.optional(),
-  input: Price$outboundSchema.optional(),
-  output: Price$outboundSchema.optional(),
-  reasoning: Price$outboundSchema.optional(),
-  search: Price$outboundSchema.optional(),
-  textInput: Price$outboundSchema.optional(),
-  when: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    audioInput: "audio_input",
-    audioOutput: "audio_output",
-    audioSession: "audio_session",
-    cacheRead: "cache_read",
-    cacheWrite12h: "cache_write_12h",
-    cacheWrite1h: "cache_write_1h",
-    cacheWrite30m: "cache_write_30m",
-    cacheWrite5m: "cache_write_5m",
-    imageCacheRead: "image_cache_read",
-    imageInput: "image_input",
-    textInput: "text_input",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    audioInput: Price$outboundSchema.optional(),
+    audioOutput: Price$outboundSchema.optional(),
+    audioSession: Price$outboundSchema.optional(),
+    cacheRead: Price$outboundSchema.optional(),
+    cacheWrite12h: Price$outboundSchema.optional(),
+    cacheWrite1h: Price$outboundSchema.optional(),
+    cacheWrite30m: Price$outboundSchema.optional(),
+    cacheWrite5m: Price$outboundSchema.optional(),
+    fetch: Price$outboundSchema.optional(),
+    imageCacheRead: Price$outboundSchema.optional(),
+    imageInput: Price$outboundSchema.optional(),
+    input: Price$outboundSchema.optional(),
+    output: Price$outboundSchema.optional(),
+    reasoning: Price$outboundSchema.optional(),
+    search: Price$outboundSchema.optional(),
+    textInput: Price$outboundSchema.optional(),
+    when: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      audioInput: "audio_input",
+      audioOutput: "audio_output",
+      audioSession: "audio_session",
+      cacheRead: "cache_read",
+      cacheWrite12h: "cache_write_12h",
+      cacheWrite1h: "cache_write_1h",
+      cacheWrite30m: "cache_write_30m",
+      cacheWrite5m: "cache_write_5m",
+      imageCacheRead: "image_cache_read",
+      imageInput: "image_input",
+      textInput: "text_input",
+    });
+  })
+);
 
 export function pricingVariantToJSON(pricingVariant: PricingVariant): string {
   return JSON.stringify(PricingVariant$outboundSchema.parse(pricingVariant));

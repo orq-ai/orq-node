@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
@@ -361,12 +361,12 @@ export type InvokeAgentA2ATaskResponse = {
 /** @internal */
 export const RoleToolMessage$outboundSchema: z.ZodNativeEnum<
   typeof RoleToolMessage
-> = z.nativeEnum(RoleToolMessage);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(RoleToolMessage));
 
 /** @internal */
 export const RoleUserMessage$outboundSchema: z.ZodNativeEnum<
   typeof RoleUserMessage
-> = z.nativeEnum(RoleUserMessage);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(RoleUserMessage));
 
 /** @internal */
 export type InvokeAgentRole$Outbound = string | string;
@@ -376,7 +376,9 @@ export const InvokeAgentRole$outboundSchema: z.ZodType<
   InvokeAgentRole$Outbound,
   z.ZodTypeDef,
   InvokeAgentRole
-> = z.union([RoleUserMessage$outboundSchema, RoleToolMessage$outboundSchema]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([RoleUserMessage$outboundSchema, RoleToolMessage$outboundSchema])
+);
 
 export function invokeAgentRoleToJSON(
   invokeAgentRole: InvokeAgentRole,
@@ -396,12 +398,14 @@ export const PublicMessagePart$outboundSchema: z.ZodType<
   PublicMessagePart$Outbound,
   z.ZodTypeDef,
   PublicMessagePart
-> = z.union([
-  components.TextPart$outboundSchema,
-  components.FilePart$outboundSchema,
-  components.ToolResultPart$outboundSchema,
-  components.ErrorPart$outboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    components.TextPart$outboundSchema,
+    components.FilePart$outboundSchema,
+    components.ToolResultPart$outboundSchema,
+    components.ErrorPart$outboundSchema,
+  ])
+);
 
 export function publicMessagePartToJSON(
   publicMessagePart: PublicMessagePart,
@@ -428,21 +432,23 @@ export const A2AMessage$outboundSchema: z.ZodType<
   A2AMessage$Outbound,
   z.ZodTypeDef,
   A2AMessage
-> = z.object({
-  messageId: z.string().optional(),
-  role: z.union([
-    RoleUserMessage$outboundSchema,
-    RoleToolMessage$outboundSchema,
-  ]),
-  parts: z.array(
-    z.union([
-      components.TextPart$outboundSchema,
-      components.FilePart$outboundSchema,
-      components.ToolResultPart$outboundSchema,
-      components.ErrorPart$outboundSchema,
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    messageId: z.string().optional(),
+    role: z.union([
+      RoleUserMessage$outboundSchema,
+      RoleToolMessage$outboundSchema,
     ]),
-  ),
-});
+    parts: z.array(
+      z.union([
+        components.TextPart$outboundSchema,
+        components.FilePart$outboundSchema,
+        components.ToolResultPart$outboundSchema,
+        components.ErrorPart$outboundSchema,
+      ]),
+    ),
+  })
+);
 
 export function a2AMessageToJSON(a2AMessage: A2AMessage): string {
   return JSON.stringify(A2AMessage$outboundSchema.parse(a2AMessage));
@@ -463,19 +469,21 @@ export const Identity$outboundSchema: z.ZodType<
   Identity$Outbound,
   z.ZodTypeDef,
   Identity
-> = z.object({
-  id: z.string(),
-  displayName: z.string().optional(),
-  email: z.string().optional(),
-  metadata: z.array(z.record(z.any())).optional(),
-  logoUrl: z.string().optional(),
-  tags: z.array(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    displayName: "display_name",
-    logoUrl: "logo_url",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    displayName: z.string().optional(),
+    email: z.string().optional(),
+    metadata: z.array(z.record(z.any())).optional(),
+    logoUrl: z.string().optional(),
+    tags: z.array(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      displayName: "display_name",
+      logoUrl: "logo_url",
+    });
+  })
+);
 
 export function identityToJSON(identity: Identity): string {
   return JSON.stringify(Identity$outboundSchema.parse(identity));
@@ -496,19 +504,21 @@ export const Contact$outboundSchema: z.ZodType<
   Contact$Outbound,
   z.ZodTypeDef,
   Contact
-> = z.object({
-  id: z.string(),
-  displayName: z.string().optional(),
-  email: z.string().optional(),
-  metadata: z.array(z.record(z.any())).optional(),
-  logoUrl: z.string().optional(),
-  tags: z.array(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    displayName: "display_name",
-    logoUrl: "logo_url",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    displayName: z.string().optional(),
+    email: z.string().optional(),
+    metadata: z.array(z.record(z.any())).optional(),
+    logoUrl: z.string().optional(),
+    tags: z.array(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      displayName: "display_name",
+      logoUrl: "logo_url",
+    });
+  })
+);
 
 export function contactToJSON(contact: Contact): string {
   return JSON.stringify(Contact$outboundSchema.parse(contact));
@@ -525,10 +535,12 @@ export const InvokeAgentThread$outboundSchema: z.ZodType<
   InvokeAgentThread$Outbound,
   z.ZodTypeDef,
   InvokeAgentThread
-> = z.object({
-  id: z.string(),
-  tags: z.array(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    tags: z.array(z.string()).optional(),
+  })
+);
 
 export function invokeAgentThreadToJSON(
   invokeAgentThread: InvokeAgentThread,
@@ -548,13 +560,15 @@ export const Memory$outboundSchema: z.ZodType<
   Memory$Outbound,
   z.ZodTypeDef,
   Memory
-> = z.object({
-  entityId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    entityId: "entity_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    entityId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      entityId: "entity_id",
+    });
+  })
+);
 
 export function memoryToJSON(memory: Memory): string {
   return JSON.stringify(Memory$outboundSchema.parse(memory));
@@ -563,7 +577,7 @@ export function memoryToJSON(memory: Memory): string {
 /** @internal */
 export const InvokeAgentEngine$outboundSchema: z.ZodNativeEnum<
   typeof InvokeAgentEngine
-> = z.nativeEnum(InvokeAgentEngine);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(InvokeAgentEngine));
 
 /** @internal */
 export type Configuration$Outbound = {
@@ -575,9 +589,11 @@ export const Configuration$outboundSchema: z.ZodType<
   Configuration$Outbound,
   z.ZodTypeDef,
   Configuration
-> = z.object({
-  blocking: z.boolean().default(false),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    blocking: z.boolean().default(false),
+  })
+);
 
 export function configurationToJSON(configuration: Configuration): string {
   return JSON.stringify(Configuration$outboundSchema.parse(configuration));
@@ -602,22 +618,24 @@ export const InvokeAgentA2AInvokeRequest$outboundSchema: z.ZodType<
   InvokeAgentA2AInvokeRequest$Outbound,
   z.ZodTypeDef,
   InvokeAgentA2AInvokeRequest
-> = z.object({
-  taskId: z.string().optional(),
-  message: z.lazy(() => A2AMessage$outboundSchema),
-  variables: z.record(z.any()).optional(),
-  identity: z.lazy(() => Identity$outboundSchema).optional(),
-  contact: z.lazy(() => Contact$outboundSchema).optional(),
-  thread: z.lazy(() => InvokeAgentThread$outboundSchema).optional(),
-  memory: z.lazy(() => Memory$outboundSchema).optional(),
-  metadata: z.record(z.any()).optional(),
-  engine: InvokeAgentEngine$outboundSchema.optional(),
-  configuration: z.lazy(() => Configuration$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    taskId: "task_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    taskId: z.string().optional(),
+    message: z.lazy(() => A2AMessage$outboundSchema),
+    variables: z.record(z.any()).optional(),
+    identity: z.lazy(() => Identity$outboundSchema).optional(),
+    contact: z.lazy(() => Contact$outboundSchema).optional(),
+    thread: z.lazy(() => InvokeAgentThread$outboundSchema).optional(),
+    memory: z.lazy(() => Memory$outboundSchema).optional(),
+    metadata: z.record(z.any()).optional(),
+    engine: InvokeAgentEngine$outboundSchema.optional(),
+    configuration: z.lazy(() => Configuration$outboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      taskId: "task_id",
+    });
+  })
+);
 
 export function invokeAgentA2AInvokeRequestToJSON(
   invokeAgentA2AInvokeRequest: InvokeAgentA2AInvokeRequest,
@@ -640,15 +658,17 @@ export const InvokeAgentRequest$outboundSchema: z.ZodType<
   InvokeAgentRequest$Outbound,
   z.ZodTypeDef,
   InvokeAgentRequest
-> = z.object({
-  key: z.string(),
-  requestBody: z.lazy(() => InvokeAgentA2AInvokeRequest$outboundSchema)
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    requestBody: "RequestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    key: z.string(),
+    requestBody: z.lazy(() => InvokeAgentA2AInvokeRequest$outboundSchema)
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      requestBody: "RequestBody",
+    });
+  })
+);
 
 export function invokeAgentRequestToJSON(
   invokeAgentRequest: InvokeAgentRequest,
@@ -659,34 +679,35 @@ export function invokeAgentRequestToJSON(
 }
 
 /** @internal */
-export const Kind$inboundSchema: z.ZodNativeEnum<typeof Kind> = z.nativeEnum(
-  Kind,
-);
+export const Kind$inboundSchema: z.ZodNativeEnum<typeof Kind> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Kind));
 
 /** @internal */
-export const TaskState$inboundSchema: z.ZodNativeEnum<typeof TaskState> = z
-  .nativeEnum(TaskState);
+export const TaskState$inboundSchema: z.ZodNativeEnum<typeof TaskState> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(TaskState));
 
 /** @internal */
 export const InvokeAgentKind$inboundSchema: z.ZodNativeEnum<
   typeof InvokeAgentKind
-> = z.nativeEnum(InvokeAgentKind);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(InvokeAgentKind));
 
 /** @internal */
 export const ExtendedMessageRole$inboundSchema: z.ZodNativeEnum<
   typeof ExtendedMessageRole
-> = z.nativeEnum(ExtendedMessageRole);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ExtendedMessageRole));
 
 /** @internal */
-export const Parts$inboundSchema: z.ZodType<Parts, z.ZodTypeDef, unknown> = z
-  .union([
-    components.TextPart$inboundSchema,
-    components.ErrorPart$inboundSchema,
-    components.DataPart$inboundSchema,
-    components.FilePart$inboundSchema,
-    components.ToolCallPart$inboundSchema,
-    components.ToolResultPart$inboundSchema,
-  ]);
+export const Parts$inboundSchema: z.ZodType<Parts, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.union([
+      components.TextPart$inboundSchema,
+      components.ErrorPart$inboundSchema,
+      components.DataPart$inboundSchema,
+      components.FilePart$inboundSchema,
+      components.ToolCallPart$inboundSchema,
+      components.ToolResultPart$inboundSchema,
+    ])
+  );
 
 export function partsFromJSON(
   jsonString: string,
@@ -703,21 +724,23 @@ export const TaskStatusMessage$inboundSchema: z.ZodType<
   TaskStatusMessage,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  kind: InvokeAgentKind$inboundSchema,
-  messageId: z.string(),
-  role: ExtendedMessageRole$inboundSchema,
-  parts: z.array(
-    z.union([
-      components.TextPart$inboundSchema,
-      components.ErrorPart$inboundSchema,
-      components.DataPart$inboundSchema,
-      components.FilePart$inboundSchema,
-      components.ToolCallPart$inboundSchema,
-      components.ToolResultPart$inboundSchema,
-    ]),
-  ),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    kind: InvokeAgentKind$inboundSchema,
+    messageId: z.string(),
+    role: ExtendedMessageRole$inboundSchema,
+    parts: z.array(
+      z.union([
+        components.TextPart$inboundSchema,
+        components.ErrorPart$inboundSchema,
+        components.DataPart$inboundSchema,
+        components.FilePart$inboundSchema,
+        components.ToolCallPart$inboundSchema,
+        components.ToolResultPart$inboundSchema,
+      ]),
+    ),
+  })
+);
 
 export function taskStatusMessageFromJSON(
   jsonString: string,
@@ -734,11 +757,13 @@ export const TaskStatus$inboundSchema: z.ZodType<
   TaskStatus,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  state: TaskState$inboundSchema,
-  timestamp: z.string().optional(),
-  message: z.lazy(() => TaskStatusMessage$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    state: TaskState$inboundSchema,
+    timestamp: z.string().optional(),
+    message: z.lazy(() => TaskStatusMessage$inboundSchema).optional(),
+  })
+);
 
 export function taskStatusFromJSON(
   jsonString: string,
@@ -755,14 +780,16 @@ export const InvokeAgentA2ATaskResponse$inboundSchema: z.ZodType<
   InvokeAgentA2ATaskResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  contextId: z.string(),
-  kind: Kind$inboundSchema,
-  status: z.lazy(() => TaskStatus$inboundSchema),
-  messages: z.array(components.ExtendedMessage$inboundSchema).optional(),
-  metadata: z.record(z.any()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    contextId: z.string(),
+    kind: Kind$inboundSchema,
+    status: z.lazy(() => TaskStatus$inboundSchema),
+    messages: z.array(components.ExtendedMessage$inboundSchema).optional(),
+    metadata: z.record(z.any()).optional(),
+  })
+);
 
 export function invokeAgentA2ATaskResponseFromJSON(
   jsonString: string,

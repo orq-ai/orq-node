@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type UpdateModelParameter = {
   config?: { [k: string]: any } | undefined;
@@ -35,22 +36,24 @@ export const UpdateModelParameter$outboundSchema: z.ZodType<
   UpdateModelParameter$Outbound,
   z.ZodTypeDef,
   UpdateModelParameter
-> = z.object({
-  config: z.record(z.any()).optional(),
-  description: z.string().optional(),
-  hints: z.string().optional(),
-  id: z.string(),
-  isActive: z.boolean().optional(),
-  name: z.string().optional(),
-  parameter: z.string().optional(),
-  parameterType: z.string().optional(),
-  position: z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    isActive: "is_active",
-    parameterType: "parameter_type",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    config: z.record(z.any()).optional(),
+    description: z.string().optional(),
+    hints: z.string().optional(),
+    id: z.string(),
+    isActive: z.boolean().optional(),
+    name: z.string().optional(),
+    parameter: z.string().optional(),
+    parameterType: z.string().optional(),
+    position: z.number().int().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      isActive: "is_active",
+      parameterType: "parameter_type",
+    });
+  })
+);
 
 export function updateModelParameterToJSON(
   updateModelParameter: UpdateModelParameter,

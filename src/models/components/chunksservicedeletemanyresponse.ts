@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -18,15 +18,17 @@ export const ChunksServiceDeleteManyResponse$inboundSchema: z.ZodType<
   ChunksServiceDeleteManyResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  deleted_count: z.number(),
-  failed_ids: z.array(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "deleted_count": "deletedCount",
-    "failed_ids": "failedIds",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    deleted_count: z.number(),
+    failed_ids: z.array(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "deleted_count": "deletedCount",
+      "failed_ids": "failedIds",
+    });
+  })
+);
 
 export function chunksServiceDeleteManyResponseFromJSON(
   jsonString: string,

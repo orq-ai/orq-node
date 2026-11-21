@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type GetAllMemoryStoresRequest = {
   /**
@@ -47,21 +48,23 @@ export const GetAllMemoryStoresRequest$outboundSchema: z.ZodType<
   GetAllMemoryStoresRequest$Outbound,
   z.ZodTypeDef,
   GetAllMemoryStoresRequest
-> = z.object({
-  limit: z.number().int().default(10),
-  startingAfter: z.string().optional(),
-  endingBefore: z.string().optional(),
-  search: z.string().optional(),
-  updatedBy: z.string().optional(),
-  projectId: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    startingAfter: "starting_after",
-    endingBefore: "ending_before",
-    updatedBy: "updated_by",
-    projectId: "project_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    limit: z.number().int().default(10),
+    startingAfter: z.string().optional(),
+    endingBefore: z.string().optional(),
+    search: z.string().optional(),
+    updatedBy: z.string().optional(),
+    projectId: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      startingAfter: "starting_after",
+      endingBefore: "ending_before",
+      updatedBy: "updated_by",
+      projectId: "project_id",
+    });
+  })
+);
 
 export function getAllMemoryStoresRequestToJSON(
   getAllMemoryStoresRequest: GetAllMemoryStoresRequest,

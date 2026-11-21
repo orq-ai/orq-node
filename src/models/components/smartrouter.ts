@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -54,25 +54,31 @@ export const SmartRouter$inboundSchema: z.ZodType<
   SmartRouter,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  smart_router_id: z.string(),
-  key: z.string(),
-  model_ref: z.string(),
-  models: z.array(z.string()),
-  profile: SmartRouterProfile$inboundSchema,
-  enabled: z.boolean(),
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  updated_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  session_affinity: SmartRouterSessionAffinity$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "smart_router_id": "smartRouterId",
-    "model_ref": "modelRef",
-    "created_at": "createdAt",
-    "updated_at": "updatedAt",
-    "session_affinity": "sessionAffinity",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    smart_router_id: z.string(),
+    key: z.string(),
+    model_ref: z.string(),
+    models: z.array(z.string()),
+    profile: SmartRouterProfile$inboundSchema,
+    enabled: z.boolean(),
+    created_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    updated_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    session_affinity: SmartRouterSessionAffinity$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "smart_router_id": "smartRouterId",
+      "model_ref": "modelRef",
+      "created_at": "createdAt",
+      "updated_at": "updatedAt",
+      "session_affinity": "sessionAffinity",
+    });
+  })
+);
 
 export function smartRouterFromJSON(
   jsonString: string,

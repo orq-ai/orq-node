@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -35,36 +35,40 @@ export const Experiment$inboundSchema: z.ZodType<
   Experiment,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  experiment_id: z.string().optional(),
-  display_name: z.string().optional(),
-  project_id: z.string().optional(),
-  dataset_id: z.string().optional(),
-  dataset_version_id: z.string().optional(),
-  selected_run_id: z.string().optional(),
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  updated_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  source: z.string().optional(),
-  row_height_level: z.number().int().optional(),
-  unique_evaluators: z.array(UniqueEvaluator$inboundSchema).optional(),
-  created_by_id: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "experiment_id": "experimentId",
-    "display_name": "displayName",
-    "project_id": "projectId",
-    "dataset_id": "datasetId",
-    "dataset_version_id": "datasetVersionId",
-    "selected_run_id": "selectedRunId",
-    "created_at": "createdAt",
-    "updated_at": "updatedAt",
-    "row_height_level": "rowHeightLevel",
-    "unique_evaluators": "uniqueEvaluators",
-    "created_by_id": "createdById",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    experiment_id: z.string().optional(),
+    display_name: z.string().optional(),
+    project_id: z.string().optional(),
+    dataset_id: z.string().optional(),
+    dataset_version_id: z.string().optional(),
+    selected_run_id: z.string().optional(),
+    created_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ).optional(),
+    updated_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ).optional(),
+    source: z.string().optional(),
+    row_height_level: z.number().int().optional(),
+    unique_evaluators: z.array(UniqueEvaluator$inboundSchema).optional(),
+    created_by_id: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "experiment_id": "experimentId",
+      "display_name": "displayName",
+      "project_id": "projectId",
+      "dataset_id": "datasetId",
+      "dataset_version_id": "datasetVersionId",
+      "selected_run_id": "selectedRunId",
+      "created_at": "createdAt",
+      "updated_at": "updatedAt",
+      "row_height_level": "rowHeightLevel",
+      "unique_evaluators": "uniqueEvaluators",
+      "created_by_id": "createdById",
+    });
+  })
+);
 
 export function experimentFromJSON(
   jsonString: string,

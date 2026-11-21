@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { ManagementKey, ManagementKey$inboundSchema } from "./managementkey.js";
@@ -21,13 +21,15 @@ export const UpdateManagementKeyResponse$inboundSchema: z.ZodType<
   UpdateManagementKeyResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  management_key: ManagementKey$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "management_key": "managementKey",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    management_key: ManagementKey$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "management_key": "managementKey",
+    });
+  })
+);
 
 export function updateManagementKeyResponseFromJSON(
   jsonString: string,

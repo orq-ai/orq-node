@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import * as components from "../components/index.js";
 
 export type ExperimentReviewCreateRequest = {
@@ -24,18 +25,20 @@ export const ExperimentReviewCreateRequest$outboundSchema: z.ZodType<
   ExperimentReviewCreateRequest$Outbound,
   z.ZodTypeDef,
   ExperimentReviewCreateRequest
-> = z.object({
-  experimentId: z.string(),
-  runId: z.string(),
-  createReviewColumnRequest:
-    components.CreateReviewColumnRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    experimentId: "experiment_id",
-    runId: "run_id",
-    createReviewColumnRequest: "CreateReviewColumnRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    experimentId: z.string(),
+    runId: z.string(),
+    createReviewColumnRequest:
+      components.CreateReviewColumnRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      experimentId: "experiment_id",
+      runId: "run_id",
+      createReviewColumnRequest: "CreateReviewColumnRequest",
+    });
+  })
+);
 
 export function experimentReviewCreateRequestToJSON(
   experimentReviewCreateRequest: ExperimentReviewCreateRequest,

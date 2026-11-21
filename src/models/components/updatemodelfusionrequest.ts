@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import {
   ModelFusionPreset,
   ModelFusionPreset$outboundSchema,
@@ -47,26 +48,28 @@ export const UpdateModelFusionRequest$outboundSchema: z.ZodType<
   UpdateModelFusionRequest$Outbound,
   z.ZodTypeDef,
   UpdateModelFusionRequest
-> = z.object({
-  panelModels: z.array(z.string()),
-  judgeModel: z.string(),
-  synthesisMode: ModelFusionSynthesisMode$outboundSchema,
-  preset: ModelFusionPreset$outboundSchema,
-  orchestratorModel: z.string().optional(),
-  webTools: z.boolean(),
-  maxToolCalls: z.number().int(),
-  feedRawToSynth: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    panelModels: "panel_models",
-    judgeModel: "judge_model",
-    synthesisMode: "synthesis_mode",
-    orchestratorModel: "orchestrator_model",
-    webTools: "web_tools",
-    maxToolCalls: "max_tool_calls",
-    feedRawToSynth: "feed_raw_to_synth",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    panelModels: z.array(z.string()),
+    judgeModel: z.string(),
+    synthesisMode: ModelFusionSynthesisMode$outboundSchema,
+    preset: ModelFusionPreset$outboundSchema,
+    orchestratorModel: z.string().optional(),
+    webTools: z.boolean(),
+    maxToolCalls: z.number().int(),
+    feedRawToSynth: z.boolean(),
+  }).transform((v) => {
+    return remap$(v, {
+      panelModels: "panel_models",
+      judgeModel: "judge_model",
+      synthesisMode: "synthesis_mode",
+      orchestratorModel: "orchestrator_model",
+      webTools: "web_tools",
+      maxToolCalls: "max_tool_calls",
+      feedRawToSynth: "feed_raw_to_synth",
+    });
+  })
+);
 
 export function updateModelFusionRequestToJSON(
   updateModelFusionRequest: UpdateModelFusionRequest,

@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { NotifierType, NotifierType$outboundSchema } from "./notifiertype.js";
 
 /**
@@ -59,7 +60,7 @@ export const UpdateNotifierRequestMetadata$outboundSchema: z.ZodType<
   UpdateNotifierRequestMetadata$Outbound,
   z.ZodTypeDef,
   UpdateNotifierRequestMetadata
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function updateNotifierRequestMetadataToJSON(
   updateNotifierRequestMetadata: UpdateNotifierRequestMetadata,
@@ -79,7 +80,7 @@ export const Headers$outboundSchema: z.ZodType<
   Headers$Outbound,
   z.ZodTypeDef,
   Headers
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function headersToJSON(headers: Headers): string {
   return JSON.stringify(Headers$outboundSchema.parse(headers));
@@ -102,24 +103,26 @@ export const UpdateNotifierRequest$outboundSchema: z.ZodType<
   UpdateNotifierRequest$Outbound,
   z.ZodTypeDef,
   UpdateNotifierRequest
-> = z.object({
-  projectId: z.string().optional(),
-  displayName: z.string().optional(),
-  metadata: z.lazy(() => UpdateNotifierRequestMetadata$outboundSchema)
-    .optional(),
-  type: NotifierType$outboundSchema.optional(),
-  emails: z.array(z.string()).optional(),
-  incomingWebhookUrl: z.string().optional(),
-  webhookUrl: z.string().optional(),
-  headers: z.lazy(() => Headers$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    projectId: "project_id",
-    displayName: "display_name",
-    incomingWebhookUrl: "incoming_webhook_url",
-    webhookUrl: "webhook_url",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    projectId: z.string().optional(),
+    displayName: z.string().optional(),
+    metadata: z.lazy(() => UpdateNotifierRequestMetadata$outboundSchema)
+      .optional(),
+    type: NotifierType$outboundSchema.optional(),
+    emails: z.array(z.string()).optional(),
+    incomingWebhookUrl: z.string().optional(),
+    webhookUrl: z.string().optional(),
+    headers: z.lazy(() => Headers$outboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      projectId: "project_id",
+      displayName: "display_name",
+      incomingWebhookUrl: "incoming_webhook_url",
+      webhookUrl: "webhook_url",
+    });
+  })
+);
 
 export function updateNotifierRequestToJSON(
   updateNotifierRequest: UpdateNotifierRequest,

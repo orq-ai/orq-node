@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -21,14 +21,16 @@ export const DetectResponse$inboundSchema: z.ZodType<
   DetectResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  has_pii: z.boolean().optional(),
-  entities: z.record(z.number().int()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "has_pii": "hasPii",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    has_pii: z.boolean().optional(),
+    entities: z.record(z.number().int()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "has_pii": "hasPii",
+    });
+  })
+);
 
 export function detectResponseFromJSON(
   jsonString: string,

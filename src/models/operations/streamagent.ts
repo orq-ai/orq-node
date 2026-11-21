@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
@@ -290,12 +290,12 @@ export type StreamAgentResponseBody = {
 /** @internal */
 export const StreamAgentRoleToolMessage$outboundSchema: z.ZodNativeEnum<
   typeof StreamAgentRoleToolMessage
-> = z.nativeEnum(StreamAgentRoleToolMessage);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(StreamAgentRoleToolMessage));
 
 /** @internal */
 export const StreamAgentRoleUserMessage$outboundSchema: z.ZodNativeEnum<
   typeof StreamAgentRoleUserMessage
-> = z.nativeEnum(StreamAgentRoleUserMessage);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(StreamAgentRoleUserMessage));
 
 /** @internal */
 export type StreamAgentRole$Outbound = string | string;
@@ -305,10 +305,12 @@ export const StreamAgentRole$outboundSchema: z.ZodType<
   StreamAgentRole$Outbound,
   z.ZodTypeDef,
   StreamAgentRole
-> = z.union([
-  StreamAgentRoleUserMessage$outboundSchema,
-  StreamAgentRoleToolMessage$outboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    StreamAgentRoleUserMessage$outboundSchema,
+    StreamAgentRoleToolMessage$outboundSchema,
+  ])
+);
 
 export function streamAgentRoleToJSON(
   streamAgentRole: StreamAgentRole,
@@ -328,12 +330,14 @@ export const StreamAgentPublicMessagePart$outboundSchema: z.ZodType<
   StreamAgentPublicMessagePart$Outbound,
   z.ZodTypeDef,
   StreamAgentPublicMessagePart
-> = z.union([
-  components.TextPart$outboundSchema,
-  components.FilePart$outboundSchema,
-  components.ToolResultPart$outboundSchema,
-  components.ErrorPart$outboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    components.TextPart$outboundSchema,
+    components.FilePart$outboundSchema,
+    components.ToolResultPart$outboundSchema,
+    components.ErrorPart$outboundSchema,
+  ])
+);
 
 export function streamAgentPublicMessagePartToJSON(
   streamAgentPublicMessagePart: StreamAgentPublicMessagePart,
@@ -362,21 +366,23 @@ export const StreamAgentA2AMessage$outboundSchema: z.ZodType<
   StreamAgentA2AMessage$Outbound,
   z.ZodTypeDef,
   StreamAgentA2AMessage
-> = z.object({
-  messageId: z.string().optional(),
-  role: z.union([
-    StreamAgentRoleUserMessage$outboundSchema,
-    StreamAgentRoleToolMessage$outboundSchema,
-  ]),
-  parts: z.array(
-    z.union([
-      components.TextPart$outboundSchema,
-      components.FilePart$outboundSchema,
-      components.ToolResultPart$outboundSchema,
-      components.ErrorPart$outboundSchema,
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    messageId: z.string().optional(),
+    role: z.union([
+      StreamAgentRoleUserMessage$outboundSchema,
+      StreamAgentRoleToolMessage$outboundSchema,
     ]),
-  ),
-});
+    parts: z.array(
+      z.union([
+        components.TextPart$outboundSchema,
+        components.FilePart$outboundSchema,
+        components.ToolResultPart$outboundSchema,
+        components.ErrorPart$outboundSchema,
+      ]),
+    ),
+  })
+);
 
 export function streamAgentA2AMessageToJSON(
   streamAgentA2AMessage: StreamAgentA2AMessage,
@@ -401,19 +407,21 @@ export const StreamAgentIdentity$outboundSchema: z.ZodType<
   StreamAgentIdentity$Outbound,
   z.ZodTypeDef,
   StreamAgentIdentity
-> = z.object({
-  id: z.string(),
-  displayName: z.string().optional(),
-  email: z.string().optional(),
-  metadata: z.array(z.record(z.any())).optional(),
-  logoUrl: z.string().optional(),
-  tags: z.array(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    displayName: "display_name",
-    logoUrl: "logo_url",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    displayName: z.string().optional(),
+    email: z.string().optional(),
+    metadata: z.array(z.record(z.any())).optional(),
+    logoUrl: z.string().optional(),
+    tags: z.array(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      displayName: "display_name",
+      logoUrl: "logo_url",
+    });
+  })
+);
 
 export function streamAgentIdentityToJSON(
   streamAgentIdentity: StreamAgentIdentity,
@@ -438,19 +446,21 @@ export const StreamAgentContact$outboundSchema: z.ZodType<
   StreamAgentContact$Outbound,
   z.ZodTypeDef,
   StreamAgentContact
-> = z.object({
-  id: z.string(),
-  displayName: z.string().optional(),
-  email: z.string().optional(),
-  metadata: z.array(z.record(z.any())).optional(),
-  logoUrl: z.string().optional(),
-  tags: z.array(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    displayName: "display_name",
-    logoUrl: "logo_url",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    displayName: z.string().optional(),
+    email: z.string().optional(),
+    metadata: z.array(z.record(z.any())).optional(),
+    logoUrl: z.string().optional(),
+    tags: z.array(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      displayName: "display_name",
+      logoUrl: "logo_url",
+    });
+  })
+);
 
 export function streamAgentContactToJSON(
   streamAgentContact: StreamAgentContact,
@@ -471,10 +481,12 @@ export const StreamAgentThread$outboundSchema: z.ZodType<
   StreamAgentThread$Outbound,
   z.ZodTypeDef,
   StreamAgentThread
-> = z.object({
-  id: z.string(),
-  tags: z.array(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    tags: z.array(z.string()).optional(),
+  })
+);
 
 export function streamAgentThreadToJSON(
   streamAgentThread: StreamAgentThread,
@@ -494,13 +506,15 @@ export const StreamAgentMemory$outboundSchema: z.ZodType<
   StreamAgentMemory$Outbound,
   z.ZodTypeDef,
   StreamAgentMemory
-> = z.object({
-  entityId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    entityId: "entity_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    entityId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      entityId: "entity_id",
+    });
+  })
+);
 
 export function streamAgentMemoryToJSON(
   streamAgentMemory: StreamAgentMemory,
@@ -513,7 +527,7 @@ export function streamAgentMemoryToJSON(
 /** @internal */
 export const StreamAgentEngine$outboundSchema: z.ZodNativeEnum<
   typeof StreamAgentEngine
-> = z.nativeEnum(StreamAgentEngine);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(StreamAgentEngine));
 
 /** @internal */
 export type StreamAgentConfiguration$Outbound = {
@@ -525,9 +539,11 @@ export const StreamAgentConfiguration$outboundSchema: z.ZodType<
   StreamAgentConfiguration$Outbound,
   z.ZodTypeDef,
   StreamAgentConfiguration
-> = z.object({
-  blocking: z.boolean().default(false),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    blocking: z.boolean().default(false),
+  })
+);
 
 export function streamAgentConfigurationToJSON(
   streamAgentConfiguration: StreamAgentConfiguration,
@@ -557,25 +573,27 @@ export const StreamAgentA2AInvokeRequest$outboundSchema: z.ZodType<
   StreamAgentA2AInvokeRequest$Outbound,
   z.ZodTypeDef,
   StreamAgentA2AInvokeRequest
-> = z.object({
-  taskId: z.string().optional(),
-  message: z.lazy(() => StreamAgentA2AMessage$outboundSchema),
-  variables: z.record(z.any()).optional(),
-  identity: z.lazy(() => StreamAgentIdentity$outboundSchema).optional(),
-  contact: z.lazy(() => StreamAgentContact$outboundSchema).optional(),
-  thread: z.lazy(() => StreamAgentThread$outboundSchema).optional(),
-  memory: z.lazy(() => StreamAgentMemory$outboundSchema).optional(),
-  metadata: z.record(z.any()).optional(),
-  engine: StreamAgentEngine$outboundSchema.optional(),
-  configuration: z.lazy(() => StreamAgentConfiguration$outboundSchema)
-    .optional(),
-  streamTimeoutSeconds: z.number().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    taskId: "task_id",
-    streamTimeoutSeconds: "stream_timeout_seconds",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    taskId: z.string().optional(),
+    message: z.lazy(() => StreamAgentA2AMessage$outboundSchema),
+    variables: z.record(z.any()).optional(),
+    identity: z.lazy(() => StreamAgentIdentity$outboundSchema).optional(),
+    contact: z.lazy(() => StreamAgentContact$outboundSchema).optional(),
+    thread: z.lazy(() => StreamAgentThread$outboundSchema).optional(),
+    memory: z.lazy(() => StreamAgentMemory$outboundSchema).optional(),
+    metadata: z.record(z.any()).optional(),
+    engine: StreamAgentEngine$outboundSchema.optional(),
+    configuration: z.lazy(() => StreamAgentConfiguration$outboundSchema)
+      .optional(),
+    streamTimeoutSeconds: z.number().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      taskId: "task_id",
+      streamTimeoutSeconds: "stream_timeout_seconds",
+    });
+  })
+);
 
 export function streamAgentA2AInvokeRequestToJSON(
   streamAgentA2AInvokeRequest: StreamAgentA2AInvokeRequest,
@@ -598,14 +616,16 @@ export const StreamAgentRequest$outboundSchema: z.ZodType<
   StreamAgentRequest$Outbound,
   z.ZodTypeDef,
   StreamAgentRequest
-> = z.object({
-  key: z.string(),
-  requestBody: z.lazy(() => StreamAgentA2AInvokeRequest$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    requestBody: "RequestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    key: z.string(),
+    requestBody: z.lazy(() => StreamAgentA2AInvokeRequest$outboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      requestBody: "RequestBody",
+    });
+  })
+);
 
 export function streamAgentRequestToJSON(
   streamAgentRequest: StreamAgentRequest,
@@ -620,25 +640,27 @@ export const StreamAgentData$inboundSchema: z.ZodType<
   StreamAgentData,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  components.AgentExecutionStartedStreamingEvent$inboundSchema,
-  components.AgentStartedStreamingEvent$inboundSchema,
-  components.AgentThoughtStreamingEvent$inboundSchema,
-  components.AgentInactiveStreamingEvent$inboundSchema,
-  components.AgentErroredStreamingEvent$inboundSchema,
-  components.ActionReviewRequestedStreamingEvent$inboundSchema,
-  components.ActionReviewedStreamingEvent$inboundSchema,
-  components.ExecutionReviewRequiredStreamingEvent$inboundSchema,
-  components.ExecutionReviewedStreamingEvent$inboundSchema,
-  components.ExecutionNamedStreamingEvent$inboundSchema,
-  components.AgentHandedOffStreamingEvent$inboundSchema,
-  components.AgentMessageCreatedStreamingEvent$inboundSchema,
-  components.ToolExecutionStartedStreamingEvent$inboundSchema,
-  components.ToolExecutionFinishedStreamingEvent$inboundSchema,
-  components.ToolExecutionFailedStreamingEvent$inboundSchema,
-  components.TimeoutStreamingEvent$inboundSchema,
-  components.ErrorStreamingEvent$inboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    components.AgentExecutionStartedStreamingEvent$inboundSchema,
+    components.AgentStartedStreamingEvent$inboundSchema,
+    components.AgentThoughtStreamingEvent$inboundSchema,
+    components.AgentInactiveStreamingEvent$inboundSchema,
+    components.AgentErroredStreamingEvent$inboundSchema,
+    components.ActionReviewRequestedStreamingEvent$inboundSchema,
+    components.ActionReviewedStreamingEvent$inboundSchema,
+    components.ExecutionReviewRequiredStreamingEvent$inboundSchema,
+    components.ExecutionReviewedStreamingEvent$inboundSchema,
+    components.ExecutionNamedStreamingEvent$inboundSchema,
+    components.AgentHandedOffStreamingEvent$inboundSchema,
+    components.AgentMessageCreatedStreamingEvent$inboundSchema,
+    components.ToolExecutionStartedStreamingEvent$inboundSchema,
+    components.ToolExecutionFinishedStreamingEvent$inboundSchema,
+    components.ToolExecutionFailedStreamingEvent$inboundSchema,
+    components.TimeoutStreamingEvent$inboundSchema,
+    components.ErrorStreamingEvent$inboundSchema,
+  ])
+);
 
 export function streamAgentDataFromJSON(
   jsonString: string,
@@ -655,37 +677,39 @@ export const StreamAgentResponseBody$inboundSchema: z.ZodType<
   StreamAgentResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.unknown().transform((v, ctx) => {
-    if (typeof v !== "string") return v;
-    try {
-      return JSON.parse(v);
-    } catch (err) {
-      ctx.addIssue({ code: "custom", message: `malformed json: ${err}` });
-      return z.NEVER;
-    }
-  }).pipe(
-    z.union([
-      components.AgentExecutionStartedStreamingEvent$inboundSchema,
-      components.AgentStartedStreamingEvent$inboundSchema,
-      components.AgentThoughtStreamingEvent$inboundSchema,
-      components.AgentInactiveStreamingEvent$inboundSchema,
-      components.AgentErroredStreamingEvent$inboundSchema,
-      components.ActionReviewRequestedStreamingEvent$inboundSchema,
-      components.ActionReviewedStreamingEvent$inboundSchema,
-      components.ExecutionReviewRequiredStreamingEvent$inboundSchema,
-      components.ExecutionReviewedStreamingEvent$inboundSchema,
-      components.ExecutionNamedStreamingEvent$inboundSchema,
-      components.AgentHandedOffStreamingEvent$inboundSchema,
-      components.AgentMessageCreatedStreamingEvent$inboundSchema,
-      components.ToolExecutionStartedStreamingEvent$inboundSchema,
-      components.ToolExecutionFinishedStreamingEvent$inboundSchema,
-      components.ToolExecutionFailedStreamingEvent$inboundSchema,
-      components.TimeoutStreamingEvent$inboundSchema,
-      components.ErrorStreamingEvent$inboundSchema,
-    ]),
-  ),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.unknown().transform((v, ctx) => {
+      if (typeof v !== "string") return v;
+      try {
+        return JSON.parse(v);
+      } catch (err) {
+        ctx.addIssue({ code: "custom", message: `malformed json: ${err}` });
+        return z.NEVER;
+      }
+    }).pipe(
+      z.union([
+        components.AgentExecutionStartedStreamingEvent$inboundSchema,
+        components.AgentStartedStreamingEvent$inboundSchema,
+        components.AgentThoughtStreamingEvent$inboundSchema,
+        components.AgentInactiveStreamingEvent$inboundSchema,
+        components.AgentErroredStreamingEvent$inboundSchema,
+        components.ActionReviewRequestedStreamingEvent$inboundSchema,
+        components.ActionReviewedStreamingEvent$inboundSchema,
+        components.ExecutionReviewRequiredStreamingEvent$inboundSchema,
+        components.ExecutionReviewedStreamingEvent$inboundSchema,
+        components.ExecutionNamedStreamingEvent$inboundSchema,
+        components.AgentHandedOffStreamingEvent$inboundSchema,
+        components.AgentMessageCreatedStreamingEvent$inboundSchema,
+        components.ToolExecutionStartedStreamingEvent$inboundSchema,
+        components.ToolExecutionFinishedStreamingEvent$inboundSchema,
+        components.ToolExecutionFailedStreamingEvent$inboundSchema,
+        components.TimeoutStreamingEvent$inboundSchema,
+        components.ErrorStreamingEvent$inboundSchema,
+      ]),
+    ),
+  })
+);
 
 export function streamAgentResponseBodyFromJSON(
   jsonString: string,

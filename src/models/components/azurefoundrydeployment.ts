@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -26,19 +26,21 @@ export const AzureFoundryDeployment$inboundSchema: z.ZodType<
   AzureFoundryDeployment,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  base_url: z.string().optional(),
-  id: z.string(),
-  master_data: AzureFoundryDeploymentMasterData$inboundSchema.optional(),
-  model: z.string(),
-  publisher: z.string().optional(),
-  wire: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "base_url": "baseUrl",
-    "master_data": "masterData",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    base_url: z.string().optional(),
+    id: z.string(),
+    master_data: AzureFoundryDeploymentMasterData$inboundSchema.optional(),
+    model: z.string(),
+    publisher: z.string().optional(),
+    wire: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "base_url": "baseUrl",
+      "master_data": "masterData",
+    });
+  })
+);
 
 export function azureFoundryDeploymentFromJSON(
   jsonString: string,

@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type SyncMcpServerRequest = {
   /**
@@ -22,13 +23,15 @@ export const SyncMcpServerRequest$outboundSchema: z.ZodType<
   SyncMcpServerRequest$Outbound,
   z.ZodTypeDef,
   SyncMcpServerRequest
-> = z.object({
-  discoveryVariables: z.record(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    discoveryVariables: "discovery_variables",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    discoveryVariables: z.record(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      discoveryVariables: "discovery_variables",
+    });
+  })
+);
 
 export function syncMcpServerRequestToJSON(
   syncMcpServerRequest: SyncMcpServerRequest,

@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import {
   Sharing,
   Sharing$Outbound,
@@ -38,18 +39,20 @@ export const CreateEnvironmentRequest$outboundSchema: z.ZodType<
   CreateEnvironmentRequest$Outbound,
   z.ZodTypeDef,
   CreateEnvironmentRequest
-> = z.object({
-  slug: z.string(),
-  displayName: z.string(),
-  description: z.string().optional(),
-  projectId: z.string().optional(),
-  sharing: Sharing$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    displayName: "display_name",
-    projectId: "project_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    slug: z.string(),
+    displayName: z.string(),
+    description: z.string().optional(),
+    projectId: z.string().optional(),
+    sharing: Sharing$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      displayName: "display_name",
+      projectId: "project_id",
+    });
+  })
+);
 
 export function createEnvironmentRequestToJSON(
   createEnvironmentRequest: CreateEnvironmentRequest,

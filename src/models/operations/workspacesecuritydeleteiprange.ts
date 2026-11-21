@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type WorkspaceSecurityDeleteIPRangeRequest = {
   workspaceKey: string;
@@ -21,15 +22,17 @@ export const WorkspaceSecurityDeleteIPRangeRequest$outboundSchema: z.ZodType<
   WorkspaceSecurityDeleteIPRangeRequest$Outbound,
   z.ZodTypeDef,
   WorkspaceSecurityDeleteIPRangeRequest
-> = z.object({
-  workspaceKey: z.string(),
-  rangeId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    workspaceKey: "workspace_key",
-    rangeId: "range_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    workspaceKey: z.string(),
+    rangeId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      workspaceKey: "workspace_key",
+      rangeId: "range_id",
+    });
+  })
+);
 
 export function workspaceSecurityDeleteIPRangeRequestToJSON(
   workspaceSecurityDeleteIPRangeRequest: WorkspaceSecurityDeleteIPRangeRequest,

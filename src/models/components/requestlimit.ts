@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -24,7 +24,7 @@ export type RequestLimit = {
 /** @internal */
 export const RequestLimitPeriod$inboundSchema: z.ZodNativeEnum<
   typeof RequestLimitPeriod
-> = z.nativeEnum(RequestLimitPeriod);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(RequestLimitPeriod));
 /** @internal */
 export const RequestLimitPeriod$outboundSchema: z.ZodNativeEnum<
   typeof RequestLimitPeriod
@@ -35,10 +35,12 @@ export const RequestLimit$inboundSchema: z.ZodType<
   RequestLimit,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  amount: z.number().int(),
-  period: RequestLimitPeriod$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    amount: z.number().int(),
+    period: RequestLimitPeriod$inboundSchema,
+  })
+);
 /** @internal */
 export type RequestLimit$Outbound = {
   amount: number;
@@ -50,10 +52,12 @@ export const RequestLimit$outboundSchema: z.ZodType<
   RequestLimit$Outbound,
   z.ZodTypeDef,
   RequestLimit
-> = z.object({
-  amount: z.number().int(),
-  period: RequestLimitPeriod$outboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    amount: z.number().int(),
+    period: RequestLimitPeriod$outboundSchema,
+  })
+);
 
 export function requestLimitToJSON(requestLimit: RequestLimit): string {
   return JSON.stringify(RequestLimit$outboundSchema.parse(requestLimit));

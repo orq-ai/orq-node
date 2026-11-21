@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { Webhook, Webhook$inboundSchema } from "./webhook.js";
@@ -18,10 +18,12 @@ export const QueryWebhooksResponse$inboundSchema: z.ZodType<
   QueryWebhooksResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  count: z.number().int(),
-  items: z.array(Webhook$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    count: z.number().int(),
+    items: z.array(Webhook$inboundSchema),
+  })
+);
 
 export function queryWebhooksResponseFromJSON(
   jsonString: string,

@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 /**
  * Delegate a subtask to a secondary model for execution
@@ -32,15 +33,17 @@ export const SidekickToolInput$outboundSchema: z.ZodType<
   SidekickToolInput$Outbound,
   z.ZodTypeDef,
   SidekickToolInput
-> = z.object({
-  type: z.literal("sidekick"),
-  requiresApproval: z.boolean().optional(),
-  configuration: z.record(z.any()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    requiresApproval: "requires_approval",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("sidekick"),
+    requiresApproval: z.boolean().optional(),
+    configuration: z.record(z.any()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      requiresApproval: "requires_approval",
+    });
+  })
+);
 
 export function sidekickToolInputToJSON(
   sidekickToolInput: SidekickToolInput,

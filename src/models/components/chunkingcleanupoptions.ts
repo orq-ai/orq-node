@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type ChunkingCleanupOptions = {
   deleteEmails?: boolean | undefined;
@@ -33,27 +34,29 @@ export const ChunkingCleanupOptions$outboundSchema: z.ZodType<
   ChunkingCleanupOptions$Outbound,
   z.ZodTypeDef,
   ChunkingCleanupOptions
-> = z.object({
-  deleteEmails: z.boolean().optional(),
-  deleteCreditCards: z.boolean().optional(),
-  deletePhoneNumbers: z.boolean().optional(),
-  cleanBulletPoints: z.boolean().optional(),
-  cleanNumberedList: z.boolean().optional(),
-  cleanUnicode: z.boolean().optional(),
-  cleanDashes: z.boolean().optional(),
-  cleanWhitespaces: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    deleteEmails: "delete_emails",
-    deleteCreditCards: "delete_credit_cards",
-    deletePhoneNumbers: "delete_phone_numbers",
-    cleanBulletPoints: "clean_bullet_points",
-    cleanNumberedList: "clean_numbered_list",
-    cleanUnicode: "clean_unicode",
-    cleanDashes: "clean_dashes",
-    cleanWhitespaces: "clean_whitespaces",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    deleteEmails: z.boolean().optional(),
+    deleteCreditCards: z.boolean().optional(),
+    deletePhoneNumbers: z.boolean().optional(),
+    cleanBulletPoints: z.boolean().optional(),
+    cleanNumberedList: z.boolean().optional(),
+    cleanUnicode: z.boolean().optional(),
+    cleanDashes: z.boolean().optional(),
+    cleanWhitespaces: z.boolean().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      deleteEmails: "delete_emails",
+      deleteCreditCards: "delete_credit_cards",
+      deletePhoneNumbers: "delete_phone_numbers",
+      cleanBulletPoints: "clean_bullet_points",
+      cleanNumberedList: "clean_numbered_list",
+      cleanUnicode: "clean_unicode",
+      cleanDashes: "clean_dashes",
+      cleanWhitespaces: "clean_whitespaces",
+    });
+  })
+);
 
 export function chunkingCleanupOptionsToJSON(
   chunkingCleanupOptions: ChunkingCleanupOptions,

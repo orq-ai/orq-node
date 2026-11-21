@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type QueryRunRequest = {
   rows?: Array<string> | undefined;
@@ -39,24 +40,26 @@ export const QueryRunRequest$outboundSchema: z.ZodType<
   QueryRunRequest$Outbound,
   z.ZodTypeDef,
   QueryRunRequest
-> = z.object({
-  rows: z.array(z.string()).optional(),
-  columns: z.array(z.string()).optional(),
-  repeatIndex: z.number().int().optional(),
-  limit: z.number().int().optional(),
-  startingAfter: z.string().optional(),
-  updatedAfter: z.date().transform(v => v.toISOString()).optional(),
-  partialRows: z.boolean().optional(),
-  excludeStaticCells: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    repeatIndex: "repeat_index",
-    startingAfter: "starting_after",
-    updatedAfter: "updated_after",
-    partialRows: "partial_rows",
-    excludeStaticCells: "exclude_static_cells",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    rows: z.array(z.string()).optional(),
+    columns: z.array(z.string()).optional(),
+    repeatIndex: z.number().int().optional(),
+    limit: z.number().int().optional(),
+    startingAfter: z.string().optional(),
+    updatedAfter: z.date().transform(v => v.toISOString()).optional(),
+    partialRows: z.boolean().optional(),
+    excludeStaticCells: z.boolean().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      repeatIndex: "repeat_index",
+      startingAfter: "starting_after",
+      updatedAfter: "updated_after",
+      partialRows: "partial_rows",
+      excludeStaticCells: "exclude_static_cells",
+    });
+  })
+);
 
 export function queryRunRequestToJSON(
   queryRunRequest: QueryRunRequest,

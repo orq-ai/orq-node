@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -82,11 +82,13 @@ export const Conditions$inboundSchema: z.ZodType<
   Conditions,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  condition: z.string(),
-  operator: z.string(),
-  value: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    condition: z.string(),
+    operator: z.string(),
+    value: z.string(),
+  })
+);
 
 export function conditionsFromJSON(
   jsonString: string,
@@ -99,28 +101,30 @@ export function conditionsFromJSON(
 }
 
 /** @internal */
-export const Tool$inboundSchema: z.ZodType<Tool, z.ZodTypeDef, unknown> = z
-  .object({
-    id: z.string(),
-    key: z.string().optional(),
-    action_type: z.string(),
-    display_name: z.string().optional(),
-    description: z.string().optional(),
-    configuration: z.record(z.any()).optional(),
-    requires_approval: z.boolean().default(false),
-    tool_id: z.string().optional(),
-    whole_server: z.boolean().optional(),
-    conditions: z.array(z.lazy(() => Conditions$inboundSchema)).optional(),
-    timeout: z.number().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "action_type": "actionType",
-      "display_name": "displayName",
-      "requires_approval": "requiresApproval",
-      "tool_id": "toolId",
-      "whole_server": "wholeServer",
-    });
-  });
+export const Tool$inboundSchema: z.ZodType<Tool, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string(),
+      key: z.string().optional(),
+      action_type: z.string(),
+      display_name: z.string().optional(),
+      description: z.string().optional(),
+      configuration: z.record(z.any()).optional(),
+      requires_approval: z.boolean().default(false),
+      tool_id: z.string().optional(),
+      whole_server: z.boolean().optional(),
+      conditions: z.array(z.lazy(() => Conditions$inboundSchema)).optional(),
+      timeout: z.number().optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "action_type": "actionType",
+        "display_name": "displayName",
+        "requires_approval": "requiresApproval",
+        "tool_id": "toolId",
+        "whole_server": "wholeServer",
+      });
+    })
+  );
 
 export function toolFromJSON(
   jsonString: string,
@@ -137,22 +141,24 @@ export const ActionReviewRequestedStreamingEventData$inboundSchema: z.ZodType<
   ActionReviewRequestedStreamingEventData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  agent_id: z.string(),
-  action_id: z.string(),
-  requires_approval: z.boolean(),
-  tool: z.lazy(() => Tool$inboundSchema),
-  input: z.record(z.any()),
-  agent_tool_call_id: z.string(),
-  responseId: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "agent_id": "agentId",
-    "action_id": "actionId",
-    "requires_approval": "requiresApproval",
-    "agent_tool_call_id": "agentToolCallId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    agent_id: z.string(),
+    action_id: z.string(),
+    requires_approval: z.boolean(),
+    tool: z.lazy(() => Tool$inboundSchema),
+    input: z.record(z.any()),
+    agent_tool_call_id: z.string(),
+    responseId: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "agent_id": "agentId",
+      "action_id": "actionId",
+      "requires_approval": "requiresApproval",
+      "agent_tool_call_id": "agentToolCallId",
+    });
+  })
+);
 
 export function actionReviewRequestedStreamingEventDataFromJSON(
   jsonString: string,
@@ -175,11 +181,13 @@ export const ActionReviewRequestedStreamingEvent$inboundSchema: z.ZodType<
   ActionReviewRequestedStreamingEvent,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("event.agents.action_review_requested"),
-  timestamp: z.string(),
-  data: z.lazy(() => ActionReviewRequestedStreamingEventData$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("event.agents.action_review_requested"),
+    timestamp: z.string(),
+    data: z.lazy(() => ActionReviewRequestedStreamingEventData$inboundSchema),
+  })
+);
 
 export function actionReviewRequestedStreamingEventFromJSON(
   jsonString: string,

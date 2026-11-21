@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { TraceSummary, TraceSummary$inboundSchema } from "./tracesummary.js";
@@ -17,9 +17,11 @@ export const GetTraceResponse$inboundSchema: z.ZodType<
   GetTraceResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  trace: TraceSummary$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    trace: TraceSummary$inboundSchema.optional(),
+  })
+);
 
 export function getTraceResponseFromJSON(
   jsonString: string,

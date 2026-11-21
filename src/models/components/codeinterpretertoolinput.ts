@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 /**
  * Executes model-written Python code. Uses provider-native code execution when the model supports it, otherwise a secure orq-managed sandbox.
@@ -32,15 +33,17 @@ export const CodeInterpreterToolInput$outboundSchema: z.ZodType<
   CodeInterpreterToolInput$Outbound,
   z.ZodTypeDef,
   CodeInterpreterToolInput
-> = z.object({
-  type: z.literal("code_interpreter"),
-  requiresApproval: z.boolean().optional(),
-  configuration: z.record(z.any()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    requiresApproval: "requires_approval",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("code_interpreter"),
+    requiresApproval: z.boolean().optional(),
+    configuration: z.record(z.any()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      requiresApproval: "requires_approval",
+    });
+  })
+);
 
 export function codeInterpreterToolInputToJSON(
   codeInterpreterToolInput: CodeInterpreterToolInput,

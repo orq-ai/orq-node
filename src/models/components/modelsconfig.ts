@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -32,7 +32,7 @@ export type ModelsConfig = {
 /** @internal */
 export const ModelsConfigMode$inboundSchema: z.ZodNativeEnum<
   typeof ModelsConfigMode
-> = z.nativeEnum(ModelsConfigMode);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ModelsConfigMode));
 /** @internal */
 export const ModelsConfigMode$outboundSchema: z.ZodNativeEnum<
   typeof ModelsConfigMode
@@ -43,15 +43,17 @@ export const ModelsConfig$inboundSchema: z.ZodType<
   ModelsConfig,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  fallback_on_codes: z.nullable(z.array(z.number().int())).optional(),
-  mode: ModelsConfigMode$inboundSchema,
-  models: z.nullable(z.array(ModelRef$inboundSchema)),
-}).transform((v) => {
-  return remap$(v, {
-    "fallback_on_codes": "fallbackOnCodes",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    fallback_on_codes: z.nullable(z.array(z.number().int())).optional(),
+    mode: ModelsConfigMode$inboundSchema,
+    models: z.nullable(z.array(ModelRef$inboundSchema)),
+  }).transform((v) => {
+    return remap$(v, {
+      "fallback_on_codes": "fallbackOnCodes",
+    });
+  })
+);
 /** @internal */
 export type ModelsConfig$Outbound = {
   fallback_on_codes?: Array<number> | null | undefined;
@@ -64,15 +66,17 @@ export const ModelsConfig$outboundSchema: z.ZodType<
   ModelsConfig$Outbound,
   z.ZodTypeDef,
   ModelsConfig
-> = z.object({
-  fallbackOnCodes: z.nullable(z.array(z.number().int())).optional(),
-  mode: ModelsConfigMode$outboundSchema,
-  models: z.nullable(z.array(ModelRef$outboundSchema)),
-}).transform((v) => {
-  return remap$(v, {
-    fallbackOnCodes: "fallback_on_codes",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    fallbackOnCodes: z.nullable(z.array(z.number().int())).optional(),
+    mode: ModelsConfigMode$outboundSchema,
+    models: z.nullable(z.array(ModelRef$outboundSchema)),
+  }).transform((v) => {
+    return remap$(v, {
+      fallbackOnCodes: "fallback_on_codes",
+    });
+  })
+);
 
 export function modelsConfigToJSON(modelsConfig: ModelsConfig): string {
   return JSON.stringify(ModelsConfig$outboundSchema.parse(modelsConfig));

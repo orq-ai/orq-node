@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -34,22 +34,24 @@ export const PromptTaskConfig$inboundSchema: z.ZodType<
   PromptTaskConfig,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  prompt_config: z.record(z.any()),
-  messages_source: MessagesSource$inboundSchema.optional(),
-  engine: z.string().optional(),
-  tools: z.array(z.record(z.any())).optional(),
-  knowledge_bases: z.array(z.record(z.any())).optional(),
-  metadata: z.nullable(z.record(z.any())).optional(),
-  entity_configuration: z.nullable(z.record(z.any())).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "prompt_config": "promptConfig",
-    "messages_source": "messagesSource",
-    "knowledge_bases": "knowledgeBases",
-    "entity_configuration": "entityConfiguration",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    prompt_config: z.record(z.any()),
+    messages_source: MessagesSource$inboundSchema.optional(),
+    engine: z.string().optional(),
+    tools: z.array(z.record(z.any())).optional(),
+    knowledge_bases: z.array(z.record(z.any())).optional(),
+    metadata: z.nullable(z.record(z.any())).optional(),
+    entity_configuration: z.nullable(z.record(z.any())).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "prompt_config": "promptConfig",
+      "messages_source": "messagesSource",
+      "knowledge_bases": "knowledgeBases",
+      "entity_configuration": "entityConfiguration",
+    });
+  })
+);
 /** @internal */
 export type PromptTaskConfig$Outbound = {
   prompt_config: { [k: string]: any };
@@ -66,22 +68,24 @@ export const PromptTaskConfig$outboundSchema: z.ZodType<
   PromptTaskConfig$Outbound,
   z.ZodTypeDef,
   PromptTaskConfig
-> = z.object({
-  promptConfig: z.record(z.any()),
-  messagesSource: MessagesSource$outboundSchema.optional(),
-  engine: z.string().optional(),
-  tools: z.array(z.record(z.any())).optional(),
-  knowledgeBases: z.array(z.record(z.any())).optional(),
-  metadata: z.nullable(z.record(z.any())).optional(),
-  entityConfiguration: z.nullable(z.record(z.any())).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    promptConfig: "prompt_config",
-    messagesSource: "messages_source",
-    knowledgeBases: "knowledge_bases",
-    entityConfiguration: "entity_configuration",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    promptConfig: z.record(z.any()),
+    messagesSource: MessagesSource$outboundSchema.optional(),
+    engine: z.string().optional(),
+    tools: z.array(z.record(z.any())).optional(),
+    knowledgeBases: z.array(z.record(z.any())).optional(),
+    metadata: z.nullable(z.record(z.any())).optional(),
+    entityConfiguration: z.nullable(z.record(z.any())).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      promptConfig: "prompt_config",
+      messagesSource: "messages_source",
+      knowledgeBases: "knowledge_bases",
+      entityConfiguration: "entity_configuration",
+    });
+  })
+);
 
 export function promptTaskConfigToJSON(
   promptTaskConfig: PromptTaskConfig,

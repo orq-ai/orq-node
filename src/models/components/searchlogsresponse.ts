@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { Log, Log$inboundSchema } from "./log.js";
@@ -39,20 +39,22 @@ export const SearchLogsResponse$inboundSchema: z.ZodType<
   SearchLogsResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: z.string().optional(),
-  data: z.array(Log$inboundSchema).optional(),
-  has_more: z.boolean().optional(),
-  next_page_token: z.string().optional(),
-  meta: TraceSearchMeta$inboundSchema.optional(),
-  total_count: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "has_more": "hasMore",
-    "next_page_token": "nextPageToken",
-    "total_count": "totalCount",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.string().optional(),
+    data: z.array(Log$inboundSchema).optional(),
+    has_more: z.boolean().optional(),
+    next_page_token: z.string().optional(),
+    meta: TraceSearchMeta$inboundSchema.optional(),
+    total_count: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "has_more": "hasMore",
+      "next_page_token": "nextPageToken",
+      "total_count": "totalCount",
+    });
+  })
+);
 
 export function searchLogsResponseFromJSON(
   jsonString: string,

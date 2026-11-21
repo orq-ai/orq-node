@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type WebhookListRequest = {
   /**
@@ -77,20 +78,22 @@ export const WebhookListRequest$outboundSchema: z.ZodType<
   WebhookListRequest$Outbound,
   z.ZodTypeDef,
   WebhookListRequest
-> = z.object({
-  page: z.number().int().optional(),
-  limit: z.number().int().optional(),
-  search: z.string().optional(),
-  event: z.string().optional(),
-  sort: z.string().optional(),
-  direction: z.string().optional(),
-  contentType: z.string().optional(),
-  enabled: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    contentType: "content_type",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    page: z.number().int().optional(),
+    limit: z.number().int().optional(),
+    search: z.string().optional(),
+    event: z.string().optional(),
+    sort: z.string().optional(),
+    direction: z.string().optional(),
+    contentType: z.string().optional(),
+    enabled: z.boolean().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      contentType: "content_type",
+    });
+  })
+);
 
 export function webhookListRequestToJSON(
   webhookListRequest: WebhookListRequest,

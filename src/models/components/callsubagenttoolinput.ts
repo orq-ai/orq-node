@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 /**
  * Delegates tasks to specialized sub-agents
@@ -32,15 +33,17 @@ export const CallSubAgentToolInput$outboundSchema: z.ZodType<
   CallSubAgentToolInput$Outbound,
   z.ZodTypeDef,
   CallSubAgentToolInput
-> = z.object({
-  type: z.literal("call_sub_agent"),
-  requiresApproval: z.boolean().optional(),
-  configuration: z.record(z.any()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    requiresApproval: "requires_approval",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("call_sub_agent"),
+    requiresApproval: z.boolean().optional(),
+    configuration: z.record(z.any()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      requiresApproval: "requires_approval",
+    });
+  })
+);
 
 export function callSubAgentToolInputToJSON(
   callSubAgentToolInput: CallSubAgentToolInput,

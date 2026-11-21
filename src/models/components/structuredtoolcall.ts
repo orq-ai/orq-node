@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 /**
  * StructuredToolCall mirrors one tool invocation and its result. Name is the
@@ -28,11 +29,13 @@ export const StructuredToolCall$outboundSchema: z.ZodType<
   StructuredToolCall$Outbound,
   z.ZodTypeDef,
   StructuredToolCall
-> = z.object({
-  name: z.string().optional(),
-  arguments: z.string().optional(),
-  output: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    arguments: z.string().optional(),
+    output: z.string().optional(),
+  })
+);
 
 export function structuredToolCallToJSON(
   structuredToolCall: StructuredToolCall,

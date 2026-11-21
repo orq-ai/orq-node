@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -75,7 +75,9 @@ export type PostV2FeedbackRemoveResponseBody = {
 /** @internal */
 export const PostV2FeedbackRemoveProduct$outboundSchema: z.ZodNativeEnum<
   typeof PostV2FeedbackRemoveProduct
-> = z.nativeEnum(PostV2FeedbackRemoveProduct);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(PostV2FeedbackRemoveProduct)
+);
 
 /** @internal */
 export type PostV2FeedbackRemoveRequestBody$Outbound = {
@@ -89,15 +91,17 @@ export const PostV2FeedbackRemoveRequestBody$outboundSchema: z.ZodType<
   PostV2FeedbackRemoveRequestBody$Outbound,
   z.ZodTypeDef,
   PostV2FeedbackRemoveRequestBody
-> = z.object({
-  id: z.string(),
-  traceId: z.string(),
-  product: PostV2FeedbackRemoveProduct$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    traceId: "trace_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    traceId: z.string(),
+    product: PostV2FeedbackRemoveProduct$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      traceId: "trace_id",
+    });
+  })
+);
 
 export function postV2FeedbackRemoveRequestBodyToJSON(
   postV2FeedbackRemoveRequestBody: PostV2FeedbackRemoveRequestBody,
@@ -112,22 +116,26 @@ export function postV2FeedbackRemoveRequestBodyToJSON(
 /** @internal */
 export const PostV2FeedbackRemoveFeedbackProduct$inboundSchema: z.ZodNativeEnum<
   typeof PostV2FeedbackRemoveFeedbackProduct
-> = z.nativeEnum(PostV2FeedbackRemoveFeedbackProduct);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(PostV2FeedbackRemoveFeedbackProduct)
+);
 
 /** @internal */
 export const PostV2FeedbackRemoveResponseBody$inboundSchema: z.ZodType<
   PostV2FeedbackRemoveResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  trace_id: z.string(),
-  product: PostV2FeedbackRemoveFeedbackProduct$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "trace_id": "traceId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    trace_id: z.string(),
+    product: PostV2FeedbackRemoveFeedbackProduct$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "trace_id": "traceId",
+    });
+  })
+);
 
 export function postV2FeedbackRemoveResponseBodyFromJSON(
   jsonString: string,

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 
 export const SessionInterval = {
@@ -22,4 +23,4 @@ export type SessionInterval = ClosedEnum<typeof SessionInterval>;
 /** @internal */
 export const SessionInterval$outboundSchema: z.ZodNativeEnum<
   typeof SessionInterval
-> = z.nativeEnum(SessionInterval);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(SessionInterval));

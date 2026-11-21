@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -55,27 +55,28 @@ export type Domain = {
 };
 
 /** @internal */
-export const Group$inboundSchema: z.ZodNativeEnum<typeof Group> = z.nativeEnum(
-  Group,
-);
+export const Group$inboundSchema: z.ZodNativeEnum<typeof Group> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Group));
 
 /** @internal */
-export const Domain$inboundSchema: z.ZodType<Domain, z.ZodTypeDef, unknown> = z
-  .object({
-    allowed_scopes: z.nullable(z.array(z.string())),
-    display_name: z.string(),
-    extra_write_verbs: z.nullable(z.array(z.string())),
-    group: Group$inboundSchema,
-    id: z.string(),
-    readable: z.boolean(),
-    writable: z.boolean(),
-  }).transform((v) => {
-    return remap$(v, {
-      "allowed_scopes": "allowedScopes",
-      "display_name": "displayName",
-      "extra_write_verbs": "extraWriteVerbs",
-    });
-  });
+export const Domain$inboundSchema: z.ZodType<Domain, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      allowed_scopes: z.nullable(z.array(z.string())),
+      display_name: z.string(),
+      extra_write_verbs: z.nullable(z.array(z.string())),
+      group: Group$inboundSchema,
+      id: z.string(),
+      readable: z.boolean(),
+      writable: z.boolean(),
+    }).transform((v) => {
+      return remap$(v, {
+        "allowed_scopes": "allowedScopes",
+        "display_name": "displayName",
+        "extra_write_verbs": "extraWriteVerbs",
+      });
+    })
+  );
 
 export function domainFromJSON(
   jsonString: string,

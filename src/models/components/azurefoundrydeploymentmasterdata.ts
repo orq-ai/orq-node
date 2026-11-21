@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -26,28 +26,30 @@ export const AzureFoundryDeploymentMasterData$inboundSchema: z.ZodType<
   AzureFoundryDeploymentMasterData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  has_functions: z.boolean(),
-  id: z.string(),
-  input_cost: z.number(),
-  metadata: z.record(z.any()).optional(),
-  model_developer: z.nullable(z.string()),
-  model_family: z.nullable(z.string()),
-  model_id: z.string(),
-  model_type: z.string(),
-  output_cost: z.number(),
-  parameters: z.nullable(z.array(z.any())),
-}).transform((v) => {
-  return remap$(v, {
-    "has_functions": "hasFunctions",
-    "input_cost": "inputCost",
-    "model_developer": "modelDeveloper",
-    "model_family": "modelFamily",
-    "model_id": "modelId",
-    "model_type": "modelType",
-    "output_cost": "outputCost",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    has_functions: z.boolean(),
+    id: z.string(),
+    input_cost: z.number(),
+    metadata: z.record(z.any()).optional(),
+    model_developer: z.nullable(z.string()),
+    model_family: z.nullable(z.string()),
+    model_id: z.string(),
+    model_type: z.string(),
+    output_cost: z.number(),
+    parameters: z.nullable(z.array(z.any())),
+  }).transform((v) => {
+    return remap$(v, {
+      "has_functions": "hasFunctions",
+      "input_cost": "inputCost",
+      "model_developer": "modelDeveloper",
+      "model_family": "modelFamily",
+      "model_id": "modelId",
+      "model_type": "modelType",
+      "output_cost": "outputCost",
+    });
+  })
+);
 
 export function azureFoundryDeploymentMasterDataFromJSON(
   jsonString: string,

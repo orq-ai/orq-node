@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -102,33 +102,35 @@ export const McpServer$inboundSchema: z.ZodType<
   McpServer,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  key: z.string().optional(),
-  display_name: z.string().optional(),
-  description: z.string().optional(),
-  connection: McpConnection$inboundSchema.optional(),
-  auth: McpAuthConfigOutput$inboundSchema.optional(),
-  default_tool_exposure: McpToolExposure$inboundSchema.optional(),
-  sync_state: McpSyncState$inboundSchema.optional(),
-  tools: z.array(McpTool$inboundSchema).optional(),
-  created: z.string().optional(),
-  updated: z.string().optional(),
-  sharing: Sharing$inboundSchema.optional(),
-  created_by_id: z.string().optional(),
-  skills: z.array(McpSkill$inboundSchema).optional(),
-  openapi: McpOpenApiConfig$inboundSchema.optional(),
-  icons: z.array(McpIcon$inboundSchema).optional(),
-  website_url: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "display_name": "displayName",
-    "default_tool_exposure": "defaultToolExposure",
-    "sync_state": "syncState",
-    "created_by_id": "createdById",
-    "website_url": "websiteUrl",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    key: z.string().optional(),
+    display_name: z.string().optional(),
+    description: z.string().optional(),
+    connection: McpConnection$inboundSchema.optional(),
+    auth: McpAuthConfigOutput$inboundSchema.optional(),
+    default_tool_exposure: McpToolExposure$inboundSchema.optional(),
+    sync_state: McpSyncState$inboundSchema.optional(),
+    tools: z.array(McpTool$inboundSchema).optional(),
+    created: z.string().optional(),
+    updated: z.string().optional(),
+    sharing: Sharing$inboundSchema.optional(),
+    created_by_id: z.string().optional(),
+    skills: z.array(McpSkill$inboundSchema).optional(),
+    openapi: McpOpenApiConfig$inboundSchema.optional(),
+    icons: z.array(McpIcon$inboundSchema).optional(),
+    website_url: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "display_name": "displayName",
+      "default_tool_exposure": "defaultToolExposure",
+      "sync_state": "syncState",
+      "created_by_id": "createdById",
+      "website_url": "websiteUrl",
+    });
+  })
+);
 
 export function mcpServerFromJSON(
   jsonString: string,

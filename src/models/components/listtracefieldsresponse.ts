@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { TraceField, TraceField$inboundSchema } from "./tracefield.js";
@@ -17,9 +17,11 @@ export const ListTraceFieldsResponse$inboundSchema: z.ZodType<
   ListTraceFieldsResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.array(TraceField$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.array(TraceField$inboundSchema).optional(),
+  })
+);
 
 export function listTraceFieldsResponseFromJSON(
   jsonString: string,

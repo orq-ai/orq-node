@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import {
   GuardrailRuleExpression,
   GuardrailRuleExpression$Outbound,
@@ -44,18 +45,20 @@ export const UpdateGuardrailRuleRequest$outboundSchema: z.ZodType<
   UpdateGuardrailRuleRequest$Outbound,
   z.ZodTypeDef,
   UpdateGuardrailRuleRequest
-> = z.object({
-  displayName: z.string().optional(),
-  description: z.string().optional(),
-  enabled: z.boolean().optional(),
-  expression: GuardrailRuleExpression$outboundSchema.optional(),
-  guardrails: z.array(GuardrailRuleGuardrail$outboundSchema).optional(),
-  plugins: z.array(GuardrailRulePlugin$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    displayName: "display_name",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    displayName: z.string().optional(),
+    description: z.string().optional(),
+    enabled: z.boolean().optional(),
+    expression: GuardrailRuleExpression$outboundSchema.optional(),
+    guardrails: z.array(GuardrailRuleGuardrail$outboundSchema).optional(),
+    plugins: z.array(GuardrailRulePlugin$outboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      displayName: "display_name",
+    });
+  })
+);
 
 export function updateGuardrailRuleRequestToJSON(
   updateGuardrailRuleRequest: UpdateGuardrailRuleRequest,

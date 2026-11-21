@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -36,18 +36,20 @@ export const HubItemSummary$inboundSchema: z.ZodType<
   HubItemSummary,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  entity_id: z.string().optional(),
-  display_name: z.string(),
-  description: z.string(),
-  type: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "entity_id": "entityId",
-    "display_name": "displayName",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    entity_id: z.string().optional(),
+    display_name: z.string(),
+    description: z.string(),
+    type: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "entity_id": "entityId",
+      "display_name": "displayName",
+    });
+  })
+);
 
 export function hubItemSummaryFromJSON(
   jsonString: string,

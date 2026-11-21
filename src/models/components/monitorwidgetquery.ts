@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -88,7 +88,7 @@ export type MonitorWidgetQuery = {
 /** @internal */
 export const MonitorWidgetQueryGrain$inboundSchema: z.ZodNativeEnum<
   typeof MonitorWidgetQueryGrain
-> = z.nativeEnum(MonitorWidgetQueryGrain);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(MonitorWidgetQueryGrain));
 /** @internal */
 export const MonitorWidgetQueryGrain$outboundSchema: z.ZodNativeEnum<
   typeof MonitorWidgetQueryGrain
@@ -99,21 +99,23 @@ export const MonitorWidgetQuery$inboundSchema: z.ZodType<
   MonitorWidgetQuery,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  source: MonitorTelemetrySource$inboundSchema.optional(),
-  metric: z.string(),
-  operation: z.string().optional(),
-  group_by: z.array(z.string()).optional(),
-  filters: z.array(MonitorFilter$inboundSchema).optional(),
-  grain: MonitorWidgetQueryGrain$inboundSchema.optional(),
-  limit: z.number().int().optional(),
-  additional_computes: z.array(MonitorWidgetCompute$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "group_by": "groupBy",
-    "additional_computes": "additionalComputes",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    source: MonitorTelemetrySource$inboundSchema.optional(),
+    metric: z.string(),
+    operation: z.string().optional(),
+    group_by: z.array(z.string()).optional(),
+    filters: z.array(MonitorFilter$inboundSchema).optional(),
+    grain: MonitorWidgetQueryGrain$inboundSchema.optional(),
+    limit: z.number().int().optional(),
+    additional_computes: z.array(MonitorWidgetCompute$inboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "group_by": "groupBy",
+      "additional_computes": "additionalComputes",
+    });
+  })
+);
 /** @internal */
 export type MonitorWidgetQuery$Outbound = {
   source?: string | undefined;
@@ -131,21 +133,23 @@ export const MonitorWidgetQuery$outboundSchema: z.ZodType<
   MonitorWidgetQuery$Outbound,
   z.ZodTypeDef,
   MonitorWidgetQuery
-> = z.object({
-  source: MonitorTelemetrySource$outboundSchema.optional(),
-  metric: z.string(),
-  operation: z.string().optional(),
-  groupBy: z.array(z.string()).optional(),
-  filters: z.array(MonitorFilter$outboundSchema).optional(),
-  grain: MonitorWidgetQueryGrain$outboundSchema.optional(),
-  limit: z.number().int().optional(),
-  additionalComputes: z.array(MonitorWidgetCompute$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    groupBy: "group_by",
-    additionalComputes: "additional_computes",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    source: MonitorTelemetrySource$outboundSchema.optional(),
+    metric: z.string(),
+    operation: z.string().optional(),
+    groupBy: z.array(z.string()).optional(),
+    filters: z.array(MonitorFilter$outboundSchema).optional(),
+    grain: MonitorWidgetQueryGrain$outboundSchema.optional(),
+    limit: z.number().int().optional(),
+    additionalComputes: z.array(MonitorWidgetCompute$outboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      groupBy: "group_by",
+      additionalComputes: "additional_computes",
+    });
+  })
+);
 
 export function monitorWidgetQueryToJSON(
   monitorWidgetQuery: MonitorWidgetQuery,

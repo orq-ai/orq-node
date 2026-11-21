@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -66,33 +66,35 @@ export type Project = {
 
 /** @internal */
 export const Project$inboundSchema: z.ZodType<Project, z.ZodTypeDef, unknown> =
-  z.object({
-    project_id: z.string(),
-    name: z.string(),
-    key: z.string(),
-    is_archived: z.boolean(),
-    is_default: z.boolean(),
-    teams: z.array(z.string()),
-    created_at: z.string().datetime({ offset: true }).transform(v =>
-      new Date(v)
-    ),
-    updated_at: z.string().datetime({ offset: true }).transform(v =>
-      new Date(v)
-    ),
-    created_by_id: z.string().optional(),
-    updated_by_id: z.string().optional(),
-    description: z.string().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "project_id": "projectId",
-      "is_archived": "isArchived",
-      "is_default": "isDefault",
-      "created_at": "createdAt",
-      "updated_at": "updatedAt",
-      "created_by_id": "createdById",
-      "updated_by_id": "updatedById",
-    });
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      project_id: z.string(),
+      name: z.string(),
+      key: z.string(),
+      is_archived: z.boolean(),
+      is_default: z.boolean(),
+      teams: z.array(z.string()),
+      created_at: z.string().datetime({ offset: true }).transform(v =>
+        new Date(v)
+      ),
+      updated_at: z.string().datetime({ offset: true }).transform(v =>
+        new Date(v)
+      ),
+      created_by_id: z.string().optional(),
+      updated_by_id: z.string().optional(),
+      description: z.string().optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "project_id": "projectId",
+        "is_archived": "isArchived",
+        "is_default": "isDefault",
+        "created_at": "createdAt",
+        "updated_at": "updatedAt",
+        "created_by_id": "createdById",
+        "updated_by_id": "updatedById",
+      });
+    })
+  );
 
 export function projectFromJSON(
   jsonString: string,

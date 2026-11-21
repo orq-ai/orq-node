@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type ApiKeyGetRequest = {
   /**
@@ -22,13 +23,15 @@ export const ApiKeyGetRequest$outboundSchema: z.ZodType<
   ApiKeyGetRequest$Outbound,
   z.ZodTypeDef,
   ApiKeyGetRequest
-> = z.object({
-  apiKeyId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    apiKeyId: "api_key_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    apiKeyId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      apiKeyId: "api_key_id",
+    });
+  })
+);
 
 export function apiKeyGetRequestToJSON(
   apiKeyGetRequest: ApiKeyGetRequest,

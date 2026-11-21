@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import * as components from "../components/index.js";
 
 export type AlertUpdateRequest = {
@@ -25,15 +26,17 @@ export const AlertUpdateRequest$outboundSchema: z.ZodType<
   AlertUpdateRequest$Outbound,
   z.ZodTypeDef,
   AlertUpdateRequest
-> = z.object({
-  alertId: z.string(),
-  updateAlertRequest: components.UpdateAlertRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    alertId: "alert_id",
-    updateAlertRequest: "UpdateAlertRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    alertId: z.string(),
+    updateAlertRequest: components.UpdateAlertRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      alertId: "alert_id",
+      updateAlertRequest: "UpdateAlertRequest",
+    });
+  })
+);
 
 export function alertUpdateRequestToJSON(
   alertUpdateRequest: AlertUpdateRequest,

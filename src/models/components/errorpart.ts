@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -21,11 +21,13 @@ export const ErrorPart$inboundSchema: z.ZodType<
   ErrorPart,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  kind: z.literal("error"),
-  error: z.string(),
-  code: z.number().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    kind: z.literal("error"),
+    error: z.string(),
+    code: z.number().optional(),
+  })
+);
 /** @internal */
 export type ErrorPart$Outbound = {
   kind: "error";
@@ -38,11 +40,13 @@ export const ErrorPart$outboundSchema: z.ZodType<
   ErrorPart$Outbound,
   z.ZodTypeDef,
   ErrorPart
-> = z.object({
-  kind: z.literal("error"),
-  error: z.string(),
-  code: z.number().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    kind: z.literal("error"),
+    error: z.string(),
+    code: z.number().optional(),
+  })
+);
 
 export function errorPartToJSON(errorPart: ErrorPart): string {
   return JSON.stringify(ErrorPart$outboundSchema.parse(errorPart));

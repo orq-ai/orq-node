@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import * as components from "../components/index.js";
 
 export type EnvironmentUpdateRequest = {
@@ -22,15 +23,18 @@ export const EnvironmentUpdateRequest$outboundSchema: z.ZodType<
   EnvironmentUpdateRequest$Outbound,
   z.ZodTypeDef,
   EnvironmentUpdateRequest
-> = z.object({
-  environmentId: z.string(),
-  updateEnvironmentRequest: components.UpdateEnvironmentRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    environmentId: "environment_id",
-    updateEnvironmentRequest: "UpdateEnvironmentRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    environmentId: z.string(),
+    updateEnvironmentRequest:
+      components.UpdateEnvironmentRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      environmentId: "environment_id",
+      updateEnvironmentRequest: "UpdateEnvironmentRequest",
+    });
+  })
+);
 
 export function environmentUpdateRequestToJSON(
   environmentUpdateRequest: EnvironmentUpdateRequest,

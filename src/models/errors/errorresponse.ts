@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { OrqError } from "./orqerror.js";
 
 export type ErrorResponseData = {
@@ -52,18 +53,20 @@ export const ErrorResponse$inboundSchema: z.ZodType<
   ErrorResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  message: z.string(),
-  code: z.number().int().optional(),
-  details: z.array(z.any()).optional(),
-  request$: z.instanceof(Request),
-  response$: z.instanceof(Response),
-  body$: z.string(),
-})
-  .transform((v) => {
-    return new ErrorResponse(v, {
-      request: v.request$,
-      response: v.response$,
-      body: v.body$,
-    });
-  });
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    message: z.string(),
+    code: z.number().int().optional(),
+    details: z.array(z.any()).optional(),
+    request$: z.instanceof(Request),
+    response$: z.instanceof(Response),
+    body$: z.string(),
+  })
+    .transform((v) => {
+      return new ErrorResponse(v, {
+        request: v.request$,
+        response: v.response$,
+        body: v.body$,
+      });
+    })
+);

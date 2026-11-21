@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -80,44 +80,46 @@ export type PublicSchedule = {
 /** @internal */
 export const PublicScheduleType$inboundSchema: z.ZodNativeEnum<
   typeof PublicScheduleType
-> = z.nativeEnum(PublicScheduleType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(PublicScheduleType));
 
 /** @internal */
 export const PublicSchedule$inboundSchema: z.ZodType<
   PublicSchedule,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  _id: z.string(),
-  agent_key: z.string(),
-  agent_tag: z.string().optional(),
-  created: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  created_by_id: z.string(),
-  display_name: z.string().optional(),
-  expression: z.string(),
-  generation: z.number().int(),
-  is_active: z.boolean(),
-  last_triggered_at: z.string().datetime({ offset: true }).transform(v =>
-    new Date(v)
-  ).optional(),
-  payload: PublicSchedulePayload$inboundSchema,
-  trigger_count: z.number().int(),
-  type: PublicScheduleType$inboundSchema,
-  updated: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  updated_by_id: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "_id": "id",
-    "agent_key": "agentKey",
-    "agent_tag": "agentTag",
-    "created_by_id": "createdById",
-    "display_name": "displayName",
-    "is_active": "isActive",
-    "last_triggered_at": "lastTriggeredAt",
-    "trigger_count": "triggerCount",
-    "updated_by_id": "updatedById",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    _id: z.string(),
+    agent_key: z.string(),
+    agent_tag: z.string().optional(),
+    created: z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    created_by_id: z.string(),
+    display_name: z.string().optional(),
+    expression: z.string(),
+    generation: z.number().int(),
+    is_active: z.boolean(),
+    last_triggered_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ).optional(),
+    payload: PublicSchedulePayload$inboundSchema,
+    trigger_count: z.number().int(),
+    type: PublicScheduleType$inboundSchema,
+    updated: z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    updated_by_id: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "_id": "id",
+      "agent_key": "agentKey",
+      "agent_tag": "agentTag",
+      "created_by_id": "createdById",
+      "display_name": "displayName",
+      "is_active": "isActive",
+      "last_triggered_at": "lastTriggeredAt",
+      "trigger_count": "triggerCount",
+      "updated_by_id": "updatedById",
+    });
+  })
+);
 
 export function publicScheduleFromJSON(
   jsonString: string,

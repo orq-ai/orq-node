@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import * as components from "../components/index.js";
 
 export type McpServerUpdateRequest = {
@@ -25,14 +26,16 @@ export const McpServerUpdateRequest$outboundSchema: z.ZodType<
   McpServerUpdateRequest$Outbound,
   z.ZodTypeDef,
   McpServerUpdateRequest
-> = z.object({
-  id: z.string(),
-  updateMcpServerRequest: components.UpdateMcpServerRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    updateMcpServerRequest: "UpdateMcpServerRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    updateMcpServerRequest: components.UpdateMcpServerRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      updateMcpServerRequest: "UpdateMcpServerRequest",
+    });
+  })
+);
 
 export function mcpServerUpdateRequestToJSON(
   mcpServerUpdateRequest: McpServerUpdateRequest,

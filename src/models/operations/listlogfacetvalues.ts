@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type ListLogFacetValuesRequest = {
   field: string;
@@ -29,13 +30,15 @@ export const ListLogFacetValuesRequest$outboundSchema: z.ZodType<
   ListLogFacetValuesRequest$Outbound,
   z.ZodTypeDef,
   ListLogFacetValuesRequest
-> = z.object({
-  field: z.string(),
-  limit: z.number().int().optional(),
-  from: z.date().transform(v => v.toISOString()).optional(),
-  to: z.date().transform(v => v.toISOString()).optional(),
-  search: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    field: z.string(),
+    limit: z.number().int().optional(),
+    from: z.date().transform(v => v.toISOString()).optional(),
+    to: z.date().transform(v => v.toISOString()).optional(),
+    search: z.string().optional(),
+  })
+);
 
 export function listLogFacetValuesRequestToJSON(
   listLogFacetValuesRequest: ListLogFacetValuesRequest,

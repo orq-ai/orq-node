@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { OrqError } from "./orqerror.js";
 import { SDKValidationError } from "./sdkvalidationerror.js";
@@ -46,13 +46,15 @@ export class CreateModerationResponseBody extends OrqError {
 }
 
 /** @internal */
-export const ErrorT$inboundSchema: z.ZodType<ErrorT, z.ZodTypeDef, unknown> = z
-  .object({
-    message: z.string(),
-    type: z.string(),
-    param: z.nullable(z.string()),
-    code: z.nullable(z.string()),
-  });
+export const ErrorT$inboundSchema: z.ZodType<ErrorT, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      message: z.string(),
+      type: z.string(),
+      param: z.nullable(z.string()),
+      code: z.nullable(z.string()),
+    })
+  );
 
 export function errorFromJSON(
   jsonString: string,
@@ -69,16 +71,18 @@ export const CreateModerationResponseBody$inboundSchema: z.ZodType<
   CreateModerationResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  error: z.lazy(() => ErrorT$inboundSchema),
-  request$: z.instanceof(Request),
-  response$: z.instanceof(Response),
-  body$: z.string(),
-})
-  .transform((v) => {
-    return new CreateModerationResponseBody(v, {
-      request: v.request$,
-      response: v.response$,
-      body: v.body$,
-    });
-  });
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    error: z.lazy(() => ErrorT$inboundSchema),
+    request$: z.instanceof(Request),
+    response$: z.instanceof(Response),
+    body$: z.string(),
+  })
+    .transform((v) => {
+      return new CreateModerationResponseBody(v, {
+        request: v.request$,
+        response: v.response$,
+        body: v.body$,
+      });
+    })
+);

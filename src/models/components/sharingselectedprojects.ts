@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -20,13 +20,15 @@ export const SharingSelectedProjects$inboundSchema: z.ZodType<
   SharingSelectedProjects,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  project_ids: z.array(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "project_ids": "projectIds",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    project_ids: z.array(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "project_ids": "projectIds",
+    });
+  })
+);
 /** @internal */
 export type SharingSelectedProjects$Outbound = {
   project_ids?: Array<string> | undefined;
@@ -37,13 +39,15 @@ export const SharingSelectedProjects$outboundSchema: z.ZodType<
   SharingSelectedProjects$Outbound,
   z.ZodTypeDef,
   SharingSelectedProjects
-> = z.object({
-  projectIds: z.array(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    projectIds: "project_ids",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    projectIds: z.array(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      projectIds: "project_ids",
+    });
+  })
+);
 
 export function sharingSelectedProjectsToJSON(
   sharingSelectedProjects: SharingSelectedProjects,

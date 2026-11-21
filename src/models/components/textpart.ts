@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -20,10 +20,12 @@ export const TextPart$inboundSchema: z.ZodType<
   TextPart,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  kind: z.literal("text"),
-  text: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    kind: z.literal("text"),
+    text: z.string(),
+  })
+);
 /** @internal */
 export type TextPart$Outbound = {
   kind: "text";
@@ -35,10 +37,12 @@ export const TextPart$outboundSchema: z.ZodType<
   TextPart$Outbound,
   z.ZodTypeDef,
   TextPart
-> = z.object({
-  kind: z.literal("text"),
-  text: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    kind: z.literal("text"),
+    text: z.string(),
+  })
+);
 
 export function textPartToJSON(textPart: TextPart): string {
   return JSON.stringify(TextPart$outboundSchema.parse(textPart));

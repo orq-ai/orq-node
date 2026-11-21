@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -263,24 +263,26 @@ export type Knowledge = Knowledge1 | Knowledge2;
 /** @internal */
 export const Knowledge2Type$inboundSchema: z.ZodNativeEnum<
   typeof Knowledge2Type
-> = z.nativeEnum(Knowledge2Type);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Knowledge2Type));
 
 /** @internal */
 export const Knowledge2RerankConfig$inboundSchema: z.ZodType<
   Knowledge2RerankConfig,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  top_k: z.number().int().default(5),
-  rerank_threshold: z.number().default(0.5),
-  rerank_model: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "top_k": "topK",
-    "rerank_threshold": "rerankThreshold",
-    "rerank_model": "rerankModel",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    top_k: z.number().int().default(5),
+    rerank_threshold: z.number().default(0.5),
+    rerank_model: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "top_k": "topK",
+      "rerank_threshold": "rerankThreshold",
+      "rerank_model": "rerankModel",
+    });
+  })
+);
 
 export function knowledge2RerankConfigFromJSON(
   jsonString: string,
@@ -297,9 +299,11 @@ export const Knowledge2AgenticRagConfig$inboundSchema: z.ZodType<
   Knowledge2AgenticRagConfig,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  model: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model: z.string(),
+  })
+);
 
 export function knowledge2AgenticRagConfigFromJSON(
   jsonString: string,
@@ -316,21 +320,24 @@ export const KnowledgeRetrievalSettings$inboundSchema: z.ZodType<
   KnowledgeRetrievalSettings,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  top_k: z.number().int().default(5),
-  threshold: z.number().default(0),
-  rerank_config: z.nullable(z.lazy(() => Knowledge2RerankConfig$inboundSchema))
-    .optional(),
-  agentic_rag_config: z.nullable(
-    z.lazy(() => Knowledge2AgenticRagConfig$inboundSchema),
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "top_k": "topK",
-    "rerank_config": "rerankConfig",
-    "agentic_rag_config": "agenticRagConfig",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    top_k: z.number().int().default(5),
+    threshold: z.number().default(0),
+    rerank_config: z.nullable(
+      z.lazy(() => Knowledge2RerankConfig$inboundSchema),
+    ).optional(),
+    agentic_rag_config: z.nullable(
+      z.lazy(() => Knowledge2AgenticRagConfig$inboundSchema),
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "top_k": "topK",
+      "rerank_config": "rerankConfig",
+      "agentic_rag_config": "agenticRagConfig",
+    });
+  })
+);
 
 export function knowledgeRetrievalSettingsFromJSON(
   jsonString: string,
@@ -347,14 +354,16 @@ export const ExternalConfig$inboundSchema: z.ZodType<
   ExternalConfig,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string(),
-  api_url: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "api_url": "apiUrl",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+    api_url: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "api_url": "apiUrl",
+    });
+  })
+);
 
 export function externalConfigFromJSON(
   jsonString: string,
@@ -371,32 +380,34 @@ export const Knowledge2$inboundSchema: z.ZodType<
   Knowledge2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  _id: z.string(),
-  created: z.string(),
-  description: z.nullable(z.string()).optional(),
-  key: z.string(),
-  domain_id: z.string(),
-  path: z.string().optional(),
-  created_by_id: z.nullable(z.string()).optional(),
-  updated_by_id: z.nullable(z.string()).optional(),
-  updated: z.string(),
-  type: Knowledge2Type$inboundSchema.default("external"),
-  retrieval_settings: z.lazy(() => KnowledgeRetrievalSettings$inboundSchema)
-    .optional(),
-  external_config: z.lazy(() => ExternalConfig$inboundSchema),
-  settings: KnowledgeSettings$inboundSchema.optional(),
-  metadata: KnowledgeMetadata$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "_id": "id",
-    "domain_id": "domainId",
-    "created_by_id": "createdById",
-    "updated_by_id": "updatedById",
-    "retrieval_settings": "retrievalSettings",
-    "external_config": "externalConfig",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    _id: z.string(),
+    created: z.string(),
+    description: z.nullable(z.string()).optional(),
+    key: z.string(),
+    domain_id: z.string(),
+    path: z.string().optional(),
+    created_by_id: z.nullable(z.string()).optional(),
+    updated_by_id: z.nullable(z.string()).optional(),
+    updated: z.string(),
+    type: Knowledge2Type$inboundSchema.default("external"),
+    retrieval_settings: z.lazy(() => KnowledgeRetrievalSettings$inboundSchema)
+      .optional(),
+    external_config: z.lazy(() => ExternalConfig$inboundSchema),
+    settings: KnowledgeSettings$inboundSchema.optional(),
+    metadata: KnowledgeMetadata$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "_id": "id",
+      "domain_id": "domainId",
+      "created_by_id": "createdById",
+      "updated_by_id": "updatedById",
+      "retrieval_settings": "retrievalSettings",
+      "external_config": "externalConfig",
+    });
+  })
+);
 
 export function knowledge2FromJSON(
   jsonString: string,
@@ -411,29 +422,31 @@ export function knowledge2FromJSON(
 /** @internal */
 export const KnowledgeType$inboundSchema: z.ZodNativeEnum<
   typeof KnowledgeType
-> = z.nativeEnum(KnowledgeType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(KnowledgeType));
 
 /** @internal */
 export const RetrievalType$inboundSchema: z.ZodNativeEnum<
   typeof RetrievalType
-> = z.nativeEnum(RetrievalType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(RetrievalType));
 
 /** @internal */
 export const KnowledgeRerankConfig$inboundSchema: z.ZodType<
   KnowledgeRerankConfig,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  top_k: z.number().int().default(5),
-  rerank_threshold: z.number().default(0.5),
-  rerank_model: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "top_k": "topK",
-    "rerank_threshold": "rerankThreshold",
-    "rerank_model": "rerankModel",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    top_k: z.number().int().default(5),
+    rerank_threshold: z.number().default(0.5),
+    rerank_model: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "top_k": "topK",
+      "rerank_threshold": "rerankThreshold",
+      "rerank_model": "rerankModel",
+    });
+  })
+);
 
 export function knowledgeRerankConfigFromJSON(
   jsonString: string,
@@ -450,9 +463,11 @@ export const KnowledgeAgenticRagConfig$inboundSchema: z.ZodType<
   KnowledgeAgenticRagConfig,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  model: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model: z.string(),
+  })
+);
 
 export function knowledgeAgenticRagConfigFromJSON(
   jsonString: string,
@@ -469,23 +484,25 @@ export const RetrievalSettings$inboundSchema: z.ZodType<
   RetrievalSettings,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  retrieval_type: RetrievalType$inboundSchema.default("hybrid_search"),
-  top_k: z.number().int().default(5),
-  threshold: z.number().default(0),
-  rerank_config: z.nullable(z.lazy(() => KnowledgeRerankConfig$inboundSchema))
-    .optional(),
-  agentic_rag_config: z.nullable(
-    z.lazy(() => KnowledgeAgenticRagConfig$inboundSchema),
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "retrieval_type": "retrievalType",
-    "top_k": "topK",
-    "rerank_config": "rerankConfig",
-    "agentic_rag_config": "agenticRagConfig",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    retrieval_type: RetrievalType$inboundSchema.default("hybrid_search"),
+    top_k: z.number().int().default(5),
+    threshold: z.number().default(0),
+    rerank_config: z.nullable(z.lazy(() => KnowledgeRerankConfig$inboundSchema))
+      .optional(),
+    agentic_rag_config: z.nullable(
+      z.lazy(() => KnowledgeAgenticRagConfig$inboundSchema),
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "retrieval_type": "retrievalType",
+      "top_k": "topK",
+      "rerank_config": "rerankConfig",
+      "agentic_rag_config": "agenticRagConfig",
+    });
+  })
+);
 
 export function retrievalSettingsFromJSON(
   jsonString: string,
@@ -502,30 +519,33 @@ export const Knowledge1$inboundSchema: z.ZodType<
   Knowledge1,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  _id: z.string(),
-  created: z.string(),
-  description: z.nullable(z.string()).optional(),
-  key: z.string(),
-  domain_id: z.string(),
-  path: z.string().optional(),
-  created_by_id: z.nullable(z.string()).optional(),
-  updated_by_id: z.nullable(z.string()).optional(),
-  updated: z.string(),
-  type: KnowledgeType$inboundSchema.default("internal"),
-  retrieval_settings: z.lazy(() => RetrievalSettings$inboundSchema).optional(),
-  model: z.string(),
-  settings: KnowledgeSettings$inboundSchema.optional(),
-  metadata: KnowledgeMetadata$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "_id": "id",
-    "domain_id": "domainId",
-    "created_by_id": "createdById",
-    "updated_by_id": "updatedById",
-    "retrieval_settings": "retrievalSettings",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    _id: z.string(),
+    created: z.string(),
+    description: z.nullable(z.string()).optional(),
+    key: z.string(),
+    domain_id: z.string(),
+    path: z.string().optional(),
+    created_by_id: z.nullable(z.string()).optional(),
+    updated_by_id: z.nullable(z.string()).optional(),
+    updated: z.string(),
+    type: KnowledgeType$inboundSchema.default("internal"),
+    retrieval_settings: z.lazy(() => RetrievalSettings$inboundSchema)
+      .optional(),
+    model: z.string(),
+    settings: KnowledgeSettings$inboundSchema.optional(),
+    metadata: KnowledgeMetadata$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "_id": "id",
+      "domain_id": "domainId",
+      "created_by_id": "createdById",
+      "updated_by_id": "updatedById",
+      "retrieval_settings": "retrievalSettings",
+    });
+  })
+);
 
 export function knowledge1FromJSON(
   jsonString: string,
@@ -542,10 +562,12 @@ export const Knowledge$inboundSchema: z.ZodType<
   Knowledge,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  z.lazy(() => Knowledge1$inboundSchema),
-  z.lazy(() => Knowledge2$inboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => Knowledge1$inboundSchema),
+    z.lazy(() => Knowledge2$inboundSchema),
+  ])
+);
 
 export function knowledgeFromJSON(
   jsonString: string,

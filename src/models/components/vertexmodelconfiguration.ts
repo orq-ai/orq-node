@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import {
   VertexCapabilities,
   VertexCapabilities$Outbound,
@@ -36,13 +37,15 @@ export const VertexModelConfiguration$outboundSchema: z.ZodType<
   VertexModelConfiguration$Outbound,
   z.ZodTypeDef,
   VertexModelConfiguration
-> = z.object({
-  capabilities: VertexCapabilities$outboundSchema,
-  id: z.string(),
-  inputCost: z.number(),
-  outputCost: z.number(),
-  parameters: VertexParameters$outboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    capabilities: VertexCapabilities$outboundSchema,
+    id: z.string(),
+    inputCost: z.number(),
+    outputCost: z.number(),
+    parameters: VertexParameters$outboundSchema,
+  })
+);
 
 export function vertexModelConfigurationToJSON(
   vertexModelConfiguration: VertexModelConfiguration,

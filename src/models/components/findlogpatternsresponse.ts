@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -26,11 +26,13 @@ export const FindLogPatternsResponse$inboundSchema: z.ZodType<
   FindLogPatternsResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: z.string(),
-  data: z.array(LogPattern$inboundSchema),
-  meta: FindLogPatternsMeta$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.string(),
+    data: z.array(LogPattern$inboundSchema),
+    meta: FindLogPatternsMeta$inboundSchema,
+  })
+);
 
 export function findLogPatternsResponseFromJSON(
   jsonString: string,

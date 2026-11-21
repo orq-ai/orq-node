@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
@@ -347,9 +347,11 @@ export const CreateRerankFallbacks$outboundSchema: z.ZodType<
   CreateRerankFallbacks$Outbound,
   z.ZodTypeDef,
   CreateRerankFallbacks
-> = z.object({
-  model: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model: z.string(),
+  })
+);
 
 export function createRerankFallbacksToJSON(
   createRerankFallbacks: CreateRerankFallbacks,
@@ -370,14 +372,16 @@ export const CreateRerankRetry$outboundSchema: z.ZodType<
   CreateRerankRetry$Outbound,
   z.ZodTypeDef,
   CreateRerankRetry
-> = z.object({
-  count: z.number().default(3),
-  onCodes: z.array(z.number()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    onCodes: "on_codes",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    count: z.number().default(3),
+    onCodes: z.array(z.number()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      onCodes: "on_codes",
+    });
+  })
+);
 
 export function createRerankRetryToJSON(
   createRerankRetry: CreateRerankRetry,
@@ -390,7 +394,7 @@ export function createRerankRetryToJSON(
 /** @internal */
 export const CreateRerankType$outboundSchema: z.ZodNativeEnum<
   typeof CreateRerankType
-> = z.nativeEnum(CreateRerankType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(CreateRerankType));
 
 /** @internal */
 export type CreateRerankCache$Outbound = {
@@ -403,10 +407,12 @@ export const CreateRerankCache$outboundSchema: z.ZodType<
   CreateRerankCache$Outbound,
   z.ZodTypeDef,
   CreateRerankCache
-> = z.object({
-  ttl: z.number().default(3600),
-  type: CreateRerankType$outboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ttl: z.number().default(3600),
+    type: CreateRerankType$outboundSchema,
+  })
+);
 
 export function createRerankCacheToJSON(
   createRerankCache: CreateRerankCache,
@@ -419,7 +425,9 @@ export function createRerankCacheToJSON(
 /** @internal */
 export const CreateRerankLoadBalancerType$outboundSchema: z.ZodNativeEnum<
   typeof CreateRerankLoadBalancerType
-> = z.nativeEnum(CreateRerankLoadBalancerType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(CreateRerankLoadBalancerType)
+);
 
 /** @internal */
 export type CreateRerankLoadBalancerModels$Outbound = {
@@ -432,10 +440,12 @@ export const CreateRerankLoadBalancerModels$outboundSchema: z.ZodType<
   CreateRerankLoadBalancerModels$Outbound,
   z.ZodTypeDef,
   CreateRerankLoadBalancerModels
-> = z.object({
-  model: z.string(),
-  weight: z.number().default(0.5),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model: z.string(),
+    weight: z.number().default(0.5),
+  })
+);
 
 export function createRerankLoadBalancerModelsToJSON(
   createRerankLoadBalancerModels: CreateRerankLoadBalancerModels,
@@ -458,10 +468,14 @@ export const CreateRerankLoadBalancer1$outboundSchema: z.ZodType<
   CreateRerankLoadBalancer1$Outbound,
   z.ZodTypeDef,
   CreateRerankLoadBalancer1
-> = z.object({
-  type: CreateRerankLoadBalancerType$outboundSchema,
-  models: z.array(z.lazy(() => CreateRerankLoadBalancerModels$outboundSchema)),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: CreateRerankLoadBalancerType$outboundSchema,
+    models: z.array(
+      z.lazy(() => CreateRerankLoadBalancerModels$outboundSchema),
+    ),
+  })
+);
 
 export function createRerankLoadBalancer1ToJSON(
   createRerankLoadBalancer1: CreateRerankLoadBalancer1,
@@ -480,7 +494,9 @@ export const CreateRerankLoadBalancer$outboundSchema: z.ZodType<
   CreateRerankLoadBalancer$Outbound,
   z.ZodTypeDef,
   CreateRerankLoadBalancer
-> = z.lazy(() => CreateRerankLoadBalancer1$outboundSchema);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.lazy(() => CreateRerankLoadBalancer1$outboundSchema)
+);
 
 export function createRerankLoadBalancerToJSON(
   createRerankLoadBalancer: CreateRerankLoadBalancer,
@@ -500,13 +516,15 @@ export const CreateRerankTimeout$outboundSchema: z.ZodType<
   CreateRerankTimeout$Outbound,
   z.ZodTypeDef,
   CreateRerankTimeout
-> = z.object({
-  callTimeout: z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    callTimeout: "call_timeout",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    callTimeout: z.number(),
+  }).transform((v) => {
+    return remap$(v, {
+      callTimeout: "call_timeout",
+    });
+  })
+);
 
 export function createRerankTimeoutToJSON(
   createRerankTimeout: CreateRerankTimeout,
@@ -526,9 +544,11 @@ export const CreateRerankRouterRerankFallbacks$outboundSchema: z.ZodType<
   CreateRerankRouterRerankFallbacks$Outbound,
   z.ZodTypeDef,
   CreateRerankRouterRerankFallbacks
-> = z.object({
-  model: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model: z.string(),
+  })
+);
 
 export function createRerankRouterRerankFallbacksToJSON(
   createRerankRouterRerankFallbacks: CreateRerankRouterRerankFallbacks,
@@ -543,7 +563,9 @@ export function createRerankRouterRerankFallbacksToJSON(
 /** @internal */
 export const CreateRerankRouterRerankType$outboundSchema: z.ZodNativeEnum<
   typeof CreateRerankRouterRerankType
-> = z.nativeEnum(CreateRerankRouterRerankType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(CreateRerankRouterRerankType)
+);
 
 /** @internal */
 export type CreateRerankRouterRerankCache$Outbound = {
@@ -556,10 +578,12 @@ export const CreateRerankRouterRerankCache$outboundSchema: z.ZodType<
   CreateRerankRouterRerankCache$Outbound,
   z.ZodTypeDef,
   CreateRerankRouterRerankCache
-> = z.object({
-  ttl: z.number().default(3600),
-  type: CreateRerankRouterRerankType$outboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ttl: z.number().default(3600),
+    type: CreateRerankRouterRerankType$outboundSchema,
+  })
+);
 
 export function createRerankRouterRerankCacheToJSON(
   createRerankRouterRerankCache: CreateRerankRouterRerankCache,
@@ -582,14 +606,16 @@ export const CreateRerankRouterRerankRetry$outboundSchema: z.ZodType<
   CreateRerankRouterRerankRetry$Outbound,
   z.ZodTypeDef,
   CreateRerankRouterRerankRetry
-> = z.object({
-  count: z.number().default(3),
-  onCodes: z.array(z.number()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    onCodes: "on_codes",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    count: z.number().default(3),
+    onCodes: z.array(z.number()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      onCodes: "on_codes",
+    });
+  })
+);
 
 export function createRerankRouterRerankRetryToJSON(
   createRerankRouterRerankRetry: CreateRerankRouterRerankRetry,
@@ -603,8 +629,10 @@ export function createRerankRouterRerankRetryToJSON(
 
 /** @internal */
 export const CreateRerankLoadBalancerRouterRerankType$outboundSchema:
-  z.ZodNativeEnum<typeof CreateRerankLoadBalancerRouterRerankType> = z
-    .nativeEnum(CreateRerankLoadBalancerRouterRerankType);
+  z.ZodNativeEnum<typeof CreateRerankLoadBalancerRouterRerankType> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(CreateRerankLoadBalancerRouterRerankType)
+    );
 
 /** @internal */
 export type CreateRerankLoadBalancerRouterRerankModels$Outbound = {
@@ -618,10 +646,12 @@ export const CreateRerankLoadBalancerRouterRerankModels$outboundSchema:
     CreateRerankLoadBalancerRouterRerankModels$Outbound,
     z.ZodTypeDef,
     CreateRerankLoadBalancerRouterRerankModels
-  > = z.object({
-    model: z.string(),
-    weight: z.number().default(0.5),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      model: z.string(),
+      weight: z.number().default(0.5),
+    })
+  );
 
 export function createRerankLoadBalancerRouterRerankModelsToJSON(
   createRerankLoadBalancerRouterRerankModels:
@@ -645,12 +675,14 @@ export const CreateRerankLoadBalancerRouterRerank1$outboundSchema: z.ZodType<
   CreateRerankLoadBalancerRouterRerank1$Outbound,
   z.ZodTypeDef,
   CreateRerankLoadBalancerRouterRerank1
-> = z.object({
-  type: CreateRerankLoadBalancerRouterRerankType$outboundSchema,
-  models: z.array(
-    z.lazy(() => CreateRerankLoadBalancerRouterRerankModels$outboundSchema),
-  ),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: CreateRerankLoadBalancerRouterRerankType$outboundSchema,
+    models: z.array(
+      z.lazy(() => CreateRerankLoadBalancerRouterRerankModels$outboundSchema),
+    ),
+  })
+);
 
 export function createRerankLoadBalancerRouterRerank1ToJSON(
   createRerankLoadBalancerRouterRerank1: CreateRerankLoadBalancerRouterRerank1,
@@ -671,7 +703,9 @@ export const CreateRerankRouterRerankLoadBalancer$outboundSchema: z.ZodType<
   CreateRerankRouterRerankLoadBalancer$Outbound,
   z.ZodTypeDef,
   CreateRerankRouterRerankLoadBalancer
-> = z.lazy(() => CreateRerankLoadBalancerRouterRerank1$outboundSchema);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.lazy(() => CreateRerankLoadBalancerRouterRerank1$outboundSchema)
+);
 
 export function createRerankRouterRerankLoadBalancerToJSON(
   createRerankRouterRerankLoadBalancer: CreateRerankRouterRerankLoadBalancer,
@@ -693,13 +727,15 @@ export const CreateRerankRouterRerankTimeout$outboundSchema: z.ZodType<
   CreateRerankRouterRerankTimeout$Outbound,
   z.ZodTypeDef,
   CreateRerankRouterRerankTimeout
-> = z.object({
-  callTimeout: z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    callTimeout: "call_timeout",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    callTimeout: z.number(),
+  }).transform((v) => {
+    return remap$(v, {
+      callTimeout: "call_timeout",
+    });
+  })
+);
 
 export function createRerankRouterRerankTimeoutToJSON(
   createRerankRouterRerankTimeout: CreateRerankRouterRerankTimeout,
@@ -729,27 +765,31 @@ export const CreateRerankOrq$outboundSchema: z.ZodType<
   CreateRerankOrq$Outbound,
   z.ZodTypeDef,
   CreateRerankOrq
-> = z.object({
-  name: z.string().optional(),
-  fallbacks: z.array(
-    z.lazy(() => CreateRerankRouterRerankFallbacks$outboundSchema),
-  ).optional(),
-  fallbackOnCodes: z.array(z.number().int()).optional(),
-  cache: z.lazy(() => CreateRerankRouterRerankCache$outboundSchema).optional(),
-  retry: z.lazy(() => CreateRerankRouterRerankRetry$outboundSchema).optional(),
-  identity: components.PublicIdentity$outboundSchema.optional(),
-  contact: components.PublicContact$outboundSchema.optional(),
-  loadBalancer: z.lazy(() =>
-    CreateRerankLoadBalancerRouterRerank1$outboundSchema
-  ).optional(),
-  timeout: z.lazy(() => CreateRerankRouterRerankTimeout$outboundSchema)
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    fallbackOnCodes: "fallback_on_codes",
-    loadBalancer: "load_balancer",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    fallbacks: z.array(
+      z.lazy(() => CreateRerankRouterRerankFallbacks$outboundSchema),
+    ).optional(),
+    fallbackOnCodes: z.array(z.number().int()).optional(),
+    cache: z.lazy(() => CreateRerankRouterRerankCache$outboundSchema)
+      .optional(),
+    retry: z.lazy(() => CreateRerankRouterRerankRetry$outboundSchema)
+      .optional(),
+    identity: components.PublicIdentity$outboundSchema.optional(),
+    contact: components.PublicContact$outboundSchema.optional(),
+    loadBalancer: z.lazy(() =>
+      CreateRerankLoadBalancerRouterRerank1$outboundSchema
+    ).optional(),
+    timeout: z.lazy(() => CreateRerankRouterRerankTimeout$outboundSchema)
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      fallbackOnCodes: "fallback_on_codes",
+      loadBalancer: "load_balancer",
+    });
+  })
+);
 
 export function createRerankOrqToJSON(
   createRerankOrq: CreateRerankOrq,
@@ -781,32 +821,34 @@ export const CreateRerankRequestBody$outboundSchema: z.ZodType<
   CreateRerankRequestBody$Outbound,
   z.ZodTypeDef,
   CreateRerankRequestBody
-> = z.object({
-  query: z.string(),
-  documents: z.array(z.string()),
-  model: z.string(),
-  topN: z.number().int().optional(),
-  returnDocuments: z.boolean().optional(),
-  filename: z.nullable(z.string()).optional(),
-  name: z.string().optional(),
-  fallbackOnCodes: z.array(z.number().int()).optional(),
-  fallbacks: z.array(z.lazy(() => CreateRerankFallbacks$outboundSchema))
-    .optional(),
-  retry: z.lazy(() => CreateRerankRetry$outboundSchema).optional(),
-  cache: z.lazy(() => CreateRerankCache$outboundSchema).optional(),
-  loadBalancer: z.lazy(() => CreateRerankLoadBalancer1$outboundSchema)
-    .optional(),
-  timeout: z.lazy(() => CreateRerankTimeout$outboundSchema).optional(),
-  plugins: z.array(components.PIIRedactionPlugin$outboundSchema).optional(),
-  orq: z.lazy(() => CreateRerankOrq$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    topN: "top_n",
-    returnDocuments: "return_documents",
-    fallbackOnCodes: "fallback_on_codes",
-    loadBalancer: "load_balancer",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    query: z.string(),
+    documents: z.array(z.string()),
+    model: z.string(),
+    topN: z.number().int().optional(),
+    returnDocuments: z.boolean().optional(),
+    filename: z.nullable(z.string()).optional(),
+    name: z.string().optional(),
+    fallbackOnCodes: z.array(z.number().int()).optional(),
+    fallbacks: z.array(z.lazy(() => CreateRerankFallbacks$outboundSchema))
+      .optional(),
+    retry: z.lazy(() => CreateRerankRetry$outboundSchema).optional(),
+    cache: z.lazy(() => CreateRerankCache$outboundSchema).optional(),
+    loadBalancer: z.lazy(() => CreateRerankLoadBalancer1$outboundSchema)
+      .optional(),
+    timeout: z.lazy(() => CreateRerankTimeout$outboundSchema).optional(),
+    plugins: z.array(components.PIIRedactionPlugin$outboundSchema).optional(),
+    orq: z.lazy(() => CreateRerankOrq$outboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      topN: "top_n",
+      returnDocuments: "return_documents",
+      fallbackOnCodes: "fallback_on_codes",
+      loadBalancer: "load_balancer",
+    });
+  })
+);
 
 export function createRerankRequestBodyToJSON(
   createRerankRequestBody: CreateRerankRequestBody,
@@ -819,21 +861,25 @@ export function createRerankRequestBodyToJSON(
 /** @internal */
 export const CreateRerankObject$inboundSchema: z.ZodNativeEnum<
   typeof CreateRerankObject
-> = z.nativeEnum(CreateRerankObject);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(CreateRerankObject));
 
 /** @internal */
 export const CreateRerankRouterRerankObject$inboundSchema: z.ZodNativeEnum<
   typeof CreateRerankRouterRerankObject
-> = z.nativeEnum(CreateRerankRouterRerankObject);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(CreateRerankRouterRerankObject)
+);
 
 /** @internal */
 export const CreateRerankDocument$inboundSchema: z.ZodType<
   CreateRerankDocument,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  text: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    text: z.string(),
+  })
+);
 
 export function createRerankDocumentFromJSON(
   jsonString: string,
@@ -850,16 +896,18 @@ export const CreateRerankResults$inboundSchema: z.ZodType<
   CreateRerankResults,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: CreateRerankRouterRerankObject$inboundSchema,
-  index: z.number(),
-  relevance_score: z.number(),
-  document: z.lazy(() => CreateRerankDocument$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "relevance_score": "relevanceScore",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: CreateRerankRouterRerankObject$inboundSchema,
+    index: z.number(),
+    relevance_score: z.number(),
+    document: z.lazy(() => CreateRerankDocument$inboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "relevance_score": "relevanceScore",
+    });
+  })
+);
 
 export function createRerankResultsFromJSON(
   jsonString: string,
@@ -876,13 +924,15 @@ export const CreateRerankUsage$inboundSchema: z.ZodType<
   CreateRerankUsage,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  total_tokens: z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    "total_tokens": "totalTokens",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    total_tokens: z.number(),
+  }).transform((v) => {
+    return remap$(v, {
+      "total_tokens": "totalTokens",
+    });
+  })
+);
 
 export function createRerankUsageFromJSON(
   jsonString: string,
@@ -899,12 +949,14 @@ export const CreateRerankResponseBody$inboundSchema: z.ZodType<
   CreateRerankResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  object: CreateRerankObject$inboundSchema,
-  results: z.array(z.lazy(() => CreateRerankResults$inboundSchema)),
-  usage: z.lazy(() => CreateRerankUsage$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    object: CreateRerankObject$inboundSchema,
+    results: z.array(z.lazy(() => CreateRerankResults$inboundSchema)),
+    usage: z.lazy(() => CreateRerankUsage$inboundSchema).optional(),
+  })
+);
 
 export function createRerankResponseBodyFromJSON(
   jsonString: string,

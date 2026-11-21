@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type ResponseThread = {
   id: string;
@@ -20,10 +21,12 @@ export const ResponseThread$outboundSchema: z.ZodType<
   ResponseThread$Outbound,
   z.ZodTypeDef,
   ResponseThread
-> = z.object({
-  id: z.string(),
-  tags: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    tags: z.nullable(z.array(z.string())).optional(),
+  })
+);
 
 export function responseThreadToJSON(responseThread: ResponseThread): string {
   return JSON.stringify(ResponseThread$outboundSchema.parse(responseThread));

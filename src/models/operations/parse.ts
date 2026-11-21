@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 
 /**
@@ -403,7 +404,9 @@ export type ParseChunkingRequest =
 export const ParseChunkingRequestChunkingRequestRequestBody7ReturnType$outboundSchema:
   z.ZodNativeEnum<
     typeof ParseChunkingRequestChunkingRequestRequestBody7ReturnType
-  > = z.nativeEnum(ParseChunkingRequestChunkingRequestRequestBody7ReturnType);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.nativeEnum(ParseChunkingRequestChunkingRequestRequestBody7ReturnType)
+  );
 
 /** @internal */
 export type LateChunkerStrategy$Outbound = {
@@ -424,28 +427,30 @@ export const LateChunkerStrategy$outboundSchema: z.ZodType<
   LateChunkerStrategy$Outbound,
   z.ZodTypeDef,
   LateChunkerStrategy
-> = z.object({
-  text: z.string(),
-  metadata: z.boolean().default(true),
-  returnType:
-    ParseChunkingRequestChunkingRequestRequestBody7ReturnType$outboundSchema
-      .default("chunks"),
-  strategy: z.literal("late"),
-  chunkSize: z.number().int().default(512),
-  separators: z.array(z.string()).optional(),
-  minCharactersPerChunk: z.number().int().default(24),
-  embeddingModel: z.string(),
-  dimensions: z.number().int().optional(),
-  maxTokens: z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    returnType: "return_type",
-    chunkSize: "chunk_size",
-    minCharactersPerChunk: "min_characters_per_chunk",
-    embeddingModel: "embedding_model",
-    maxTokens: "max_tokens",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    text: z.string(),
+    metadata: z.boolean().default(true),
+    returnType:
+      ParseChunkingRequestChunkingRequestRequestBody7ReturnType$outboundSchema
+        .default("chunks"),
+    strategy: z.literal("late"),
+    chunkSize: z.number().int().default(512),
+    separators: z.array(z.string()).optional(),
+    minCharactersPerChunk: z.number().int().default(24),
+    embeddingModel: z.string(),
+    dimensions: z.number().int().optional(),
+    maxTokens: z.number().int().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      returnType: "return_type",
+      chunkSize: "chunk_size",
+      minCharactersPerChunk: "min_characters_per_chunk",
+      embeddingModel: "embedding_model",
+      maxTokens: "max_tokens",
+    });
+  })
+);
 
 export function lateChunkerStrategyToJSON(
   lateChunkerStrategy: LateChunkerStrategy,
@@ -459,7 +464,9 @@ export function lateChunkerStrategyToJSON(
 export const ParseChunkingRequestChunkingRequestRequestBodyReturnType$outboundSchema:
   z.ZodNativeEnum<
     typeof ParseChunkingRequestChunkingRequestRequestBodyReturnType
-  > = z.nativeEnum(ParseChunkingRequestChunkingRequestRequestBodyReturnType);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.nativeEnum(ParseChunkingRequestChunkingRequestRequestBodyReturnType)
+  );
 
 /** @internal */
 export type FastChunkerStrategy$Outbound = {
@@ -480,26 +487,28 @@ export const FastChunkerStrategy$outboundSchema: z.ZodType<
   FastChunkerStrategy$Outbound,
   z.ZodTypeDef,
   FastChunkerStrategy
-> = z.object({
-  text: z.string(),
-  metadata: z.boolean().default(true),
-  returnType:
-    ParseChunkingRequestChunkingRequestRequestBodyReturnType$outboundSchema
-      .default("chunks"),
-  strategy: z.literal("fast"),
-  targetSize: z.number().int().default(4096),
-  delimiters: z.string().default("\n.?"),
-  pattern: z.string().optional(),
-  prefix: z.boolean().default(false),
-  consecutive: z.boolean().default(false),
-  forwardFallback: z.boolean().default(false),
-}).transform((v) => {
-  return remap$(v, {
-    returnType: "return_type",
-    targetSize: "target_size",
-    forwardFallback: "forward_fallback",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    text: z.string(),
+    metadata: z.boolean().default(true),
+    returnType:
+      ParseChunkingRequestChunkingRequestRequestBodyReturnType$outboundSchema
+        .default("chunks"),
+    strategy: z.literal("fast"),
+    targetSize: z.number().int().default(4096),
+    delimiters: z.string().default("\n.?"),
+    pattern: z.string().optional(),
+    prefix: z.boolean().default(false),
+    consecutive: z.boolean().default(false),
+    forwardFallback: z.boolean().default(false),
+  }).transform((v) => {
+    return remap$(v, {
+      returnType: "return_type",
+      targetSize: "target_size",
+      forwardFallback: "forward_fallback",
+    });
+  })
+);
 
 export function fastChunkerStrategyToJSON(
   fastChunkerStrategy: FastChunkerStrategy,
@@ -511,8 +520,10 @@ export function fastChunkerStrategyToJSON(
 
 /** @internal */
 export const ParseChunkingRequestChunkingRequestReturnType$outboundSchema:
-  z.ZodNativeEnum<typeof ParseChunkingRequestChunkingRequestReturnType> = z
-    .nativeEnum(ParseChunkingRequestChunkingRequestReturnType);
+  z.ZodNativeEnum<typeof ParseChunkingRequestChunkingRequestReturnType> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(ParseChunkingRequestChunkingRequestReturnType)
+    );
 
 /** @internal */
 export type AgenticChunkerStrategy$Outbound = {
@@ -532,26 +543,28 @@ export const AgenticChunkerStrategy$outboundSchema: z.ZodType<
   AgenticChunkerStrategy$Outbound,
   z.ZodTypeDef,
   AgenticChunkerStrategy
-> = z.object({
-  text: z.string(),
-  metadata: z.boolean().default(true),
-  returnType: ParseChunkingRequestChunkingRequestReturnType$outboundSchema
-    .default("chunks"),
-  strategy: z.literal("agentic"),
-  model: z.string(),
-  chunkSize: z.number().int().default(1024),
-  candidateSize: z.number().int().default(128),
-  minCharactersPerChunk: z.number().int().default(24),
-  systemPrompt: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    returnType: "return_type",
-    chunkSize: "chunk_size",
-    candidateSize: "candidate_size",
-    minCharactersPerChunk: "min_characters_per_chunk",
-    systemPrompt: "system_prompt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    text: z.string(),
+    metadata: z.boolean().default(true),
+    returnType: ParseChunkingRequestChunkingRequestReturnType$outboundSchema
+      .default("chunks"),
+    strategy: z.literal("agentic"),
+    model: z.string(),
+    chunkSize: z.number().int().default(1024),
+    candidateSize: z.number().int().default(128),
+    minCharactersPerChunk: z.number().int().default(24),
+    systemPrompt: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      returnType: "return_type",
+      chunkSize: "chunk_size",
+      candidateSize: "candidate_size",
+      minCharactersPerChunk: "min_characters_per_chunk",
+      systemPrompt: "system_prompt",
+    });
+  })
+);
 
 export function agenticChunkerStrategyToJSON(
   agenticChunkerStrategy: AgenticChunkerStrategy,
@@ -563,13 +576,14 @@ export function agenticChunkerStrategyToJSON(
 
 /** @internal */
 export const ParseChunkingRequestChunkingReturnType$outboundSchema:
-  z.ZodNativeEnum<typeof ParseChunkingRequestChunkingReturnType> = z.nativeEnum(
-    ParseChunkingRequestChunkingReturnType,
-  );
+  z.ZodNativeEnum<typeof ParseChunkingRequestChunkingReturnType> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(ParseChunkingRequestChunkingReturnType)
+    );
 
 /** @internal */
-export const Threshold2$outboundSchema: z.ZodNativeEnum<typeof Threshold2> = z
-  .nativeEnum(Threshold2);
+export const Threshold2$outboundSchema: z.ZodNativeEnum<typeof Threshold2> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Threshold2));
 
 /** @internal */
 export type Threshold$Outbound = number | string;
@@ -579,16 +593,17 @@ export const Threshold$outboundSchema: z.ZodType<
   Threshold$Outbound,
   z.ZodTypeDef,
   Threshold
-> = z.union([z.number(), Threshold2$outboundSchema]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.number(), Threshold2$outboundSchema])
+);
 
 export function thresholdToJSON(threshold: Threshold): string {
   return JSON.stringify(Threshold$outboundSchema.parse(threshold));
 }
 
 /** @internal */
-export const Mode$outboundSchema: z.ZodNativeEnum<typeof Mode> = z.nativeEnum(
-  Mode,
-);
+export const Mode$outboundSchema: z.ZodNativeEnum<typeof Mode> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Mode));
 
 /** @internal */
 export type SemanticChunkerStrategy$Outbound = {
@@ -610,29 +625,31 @@ export const SemanticChunkerStrategy$outboundSchema: z.ZodType<
   SemanticChunkerStrategy$Outbound,
   z.ZodTypeDef,
   SemanticChunkerStrategy
-> = z.object({
-  text: z.string(),
-  metadata: z.boolean().default(true),
-  returnType: ParseChunkingRequestChunkingReturnType$outboundSchema.default(
-    "chunks",
-  ),
-  strategy: z.literal("semantic"),
-  chunkSize: z.number().int().default(512),
-  threshold: z.union([z.number(), Threshold2$outboundSchema]).optional(),
-  embeddingModel: z.string(),
-  dimensions: z.number().int().optional(),
-  maxTokens: z.number().int().optional(),
-  mode: Mode$outboundSchema.default("window"),
-  similarityWindow: z.number().int().default(1),
-}).transform((v) => {
-  return remap$(v, {
-    returnType: "return_type",
-    chunkSize: "chunk_size",
-    embeddingModel: "embedding_model",
-    maxTokens: "max_tokens",
-    similarityWindow: "similarity_window",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    text: z.string(),
+    metadata: z.boolean().default(true),
+    returnType: ParseChunkingRequestChunkingReturnType$outboundSchema.default(
+      "chunks",
+    ),
+    strategy: z.literal("semantic"),
+    chunkSize: z.number().int().default(512),
+    threshold: z.union([z.number(), Threshold2$outboundSchema]).optional(),
+    embeddingModel: z.string(),
+    dimensions: z.number().int().optional(),
+    maxTokens: z.number().int().optional(),
+    mode: Mode$outboundSchema.default("window"),
+    similarityWindow: z.number().int().default(1),
+  }).transform((v) => {
+    return remap$(v, {
+      returnType: "return_type",
+      chunkSize: "chunk_size",
+      embeddingModel: "embedding_model",
+      maxTokens: "max_tokens",
+      similarityWindow: "similarity_window",
+    });
+  })
+);
 
 export function semanticChunkerStrategyToJSON(
   semanticChunkerStrategy: SemanticChunkerStrategy,
@@ -645,7 +662,9 @@ export function semanticChunkerStrategyToJSON(
 /** @internal */
 export const ParseChunkingRequestReturnType$outboundSchema: z.ZodNativeEnum<
   typeof ParseChunkingRequestReturnType
-> = z.nativeEnum(ParseChunkingRequestReturnType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(ParseChunkingRequestReturnType)
+);
 
 /** @internal */
 export type RecursiveChunkerStrategy$Outbound = {
@@ -663,21 +682,23 @@ export const RecursiveChunkerStrategy$outboundSchema: z.ZodType<
   RecursiveChunkerStrategy$Outbound,
   z.ZodTypeDef,
   RecursiveChunkerStrategy
-> = z.object({
-  text: z.string(),
-  metadata: z.boolean().default(true),
-  returnType: ParseChunkingRequestReturnType$outboundSchema.default("chunks"),
-  strategy: z.literal("recursive"),
-  chunkSize: z.number().int().default(512),
-  separators: z.array(z.string()).optional(),
-  minCharactersPerChunk: z.number().int().default(24),
-}).transform((v) => {
-  return remap$(v, {
-    returnType: "return_type",
-    chunkSize: "chunk_size",
-    minCharactersPerChunk: "min_characters_per_chunk",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    text: z.string(),
+    metadata: z.boolean().default(true),
+    returnType: ParseChunkingRequestReturnType$outboundSchema.default("chunks"),
+    strategy: z.literal("recursive"),
+    chunkSize: z.number().int().default(512),
+    separators: z.array(z.string()).optional(),
+    minCharactersPerChunk: z.number().int().default(24),
+  }).transform((v) => {
+    return remap$(v, {
+      returnType: "return_type",
+      chunkSize: "chunk_size",
+      minCharactersPerChunk: "min_characters_per_chunk",
+    });
+  })
+);
 
 export function recursiveChunkerStrategyToJSON(
   recursiveChunkerStrategy: RecursiveChunkerStrategy,
@@ -690,7 +711,7 @@ export function recursiveChunkerStrategyToJSON(
 /** @internal */
 export const ChunkingRequestReturnType$outboundSchema: z.ZodNativeEnum<
   typeof ChunkingRequestReturnType
-> = z.nativeEnum(ChunkingRequestReturnType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ChunkingRequestReturnType));
 
 /** @internal */
 export type SentenceChunkerStrategy$Outbound = {
@@ -708,22 +729,24 @@ export const SentenceChunkerStrategy$outboundSchema: z.ZodType<
   SentenceChunkerStrategy$Outbound,
   z.ZodTypeDef,
   SentenceChunkerStrategy
-> = z.object({
-  text: z.string(),
-  metadata: z.boolean().default(true),
-  returnType: ChunkingRequestReturnType$outboundSchema.default("chunks"),
-  strategy: z.literal("sentence"),
-  chunkSize: z.number().int().default(512),
-  chunkOverlap: z.number().int().default(0),
-  minSentencesPerChunk: z.number().int().default(1),
-}).transform((v) => {
-  return remap$(v, {
-    returnType: "return_type",
-    chunkSize: "chunk_size",
-    chunkOverlap: "chunk_overlap",
-    minSentencesPerChunk: "min_sentences_per_chunk",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    text: z.string(),
+    metadata: z.boolean().default(true),
+    returnType: ChunkingRequestReturnType$outboundSchema.default("chunks"),
+    strategy: z.literal("sentence"),
+    chunkSize: z.number().int().default(512),
+    chunkOverlap: z.number().int().default(0),
+    minSentencesPerChunk: z.number().int().default(1),
+  }).transform((v) => {
+    return remap$(v, {
+      returnType: "return_type",
+      chunkSize: "chunk_size",
+      chunkOverlap: "chunk_overlap",
+      minSentencesPerChunk: "min_sentences_per_chunk",
+    });
+  })
+);
 
 export function sentenceChunkerStrategyToJSON(
   sentenceChunkerStrategy: SentenceChunkerStrategy,
@@ -734,8 +757,8 @@ export function sentenceChunkerStrategyToJSON(
 }
 
 /** @internal */
-export const ReturnTypeT$outboundSchema: z.ZodNativeEnum<typeof ReturnTypeT> = z
-  .nativeEnum(ReturnTypeT);
+export const ReturnTypeT$outboundSchema: z.ZodNativeEnum<typeof ReturnTypeT> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ReturnTypeT));
 
 /** @internal */
 export type TokenChunkerStrategy$Outbound = {
@@ -752,20 +775,22 @@ export const TokenChunkerStrategy$outboundSchema: z.ZodType<
   TokenChunkerStrategy$Outbound,
   z.ZodTypeDef,
   TokenChunkerStrategy
-> = z.object({
-  text: z.string(),
-  metadata: z.boolean().default(true),
-  returnType: ReturnTypeT$outboundSchema.default("chunks"),
-  strategy: z.literal("token"),
-  chunkSize: z.number().int().default(512),
-  chunkOverlap: z.number().int().default(0),
-}).transform((v) => {
-  return remap$(v, {
-    returnType: "return_type",
-    chunkSize: "chunk_size",
-    chunkOverlap: "chunk_overlap",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    text: z.string(),
+    metadata: z.boolean().default(true),
+    returnType: ReturnTypeT$outboundSchema.default("chunks"),
+    strategy: z.literal("token"),
+    chunkSize: z.number().int().default(512),
+    chunkOverlap: z.number().int().default(0),
+  }).transform((v) => {
+    return remap$(v, {
+      returnType: "return_type",
+      chunkSize: "chunk_size",
+      chunkOverlap: "chunk_overlap",
+    });
+  })
+);
 
 export function tokenChunkerStrategyToJSON(
   tokenChunkerStrategy: TokenChunkerStrategy,
@@ -790,15 +815,17 @@ export const ParseChunkingRequest$outboundSchema: z.ZodType<
   ParseChunkingRequest$Outbound,
   z.ZodTypeDef,
   ParseChunkingRequest
-> = z.union([
-  z.lazy(() => TokenChunkerStrategy$outboundSchema),
-  z.lazy(() => SentenceChunkerStrategy$outboundSchema),
-  z.lazy(() => RecursiveChunkerStrategy$outboundSchema),
-  z.lazy(() => SemanticChunkerStrategy$outboundSchema),
-  z.lazy(() => AgenticChunkerStrategy$outboundSchema),
-  z.lazy(() => FastChunkerStrategy$outboundSchema),
-  z.lazy(() => LateChunkerStrategy$outboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => TokenChunkerStrategy$outboundSchema),
+    z.lazy(() => SentenceChunkerStrategy$outboundSchema),
+    z.lazy(() => RecursiveChunkerStrategy$outboundSchema),
+    z.lazy(() => SemanticChunkerStrategy$outboundSchema),
+    z.lazy(() => AgenticChunkerStrategy$outboundSchema),
+    z.lazy(() => FastChunkerStrategy$outboundSchema),
+    z.lazy(() => LateChunkerStrategy$outboundSchema),
+  ])
+);
 
 export function parseChunkingRequestToJSON(
   parseChunkingRequest: ParseChunkingRequest,

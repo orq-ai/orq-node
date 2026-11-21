@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type RedactRequest = {
   text?: string | undefined;
@@ -67,18 +68,20 @@ export const RedactRequest$outboundSchema: z.ZodType<
   RedactRequest$Outbound,
   z.ZodTypeDef,
   RedactRequest
-> = z.object({
-  text: z.string().optional(),
-  language: z.string().optional(),
-  threshold: z.number().optional(),
-  regions: z.array(z.string()).optional(),
-  entities: z.array(z.string()).optional(),
-  entityThresholds: z.record(z.number()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    entityThresholds: "entity_thresholds",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    text: z.string().optional(),
+    language: z.string().optional(),
+    threshold: z.number().optional(),
+    regions: z.array(z.string()).optional(),
+    entities: z.array(z.string()).optional(),
+    entityThresholds: z.record(z.number()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      entityThresholds: "entity_thresholds",
+    });
+  })
+);
 
 export function redactRequestToJSON(redactRequest: RedactRequest): string {
   return JSON.stringify(RedactRequest$outboundSchema.parse(redactRequest));

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -28,24 +28,26 @@ export const RerankConfig$inboundSchema: z.ZodType<
   RerankConfig,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  enabled: z.boolean().optional(),
-  provider: z.string().optional(),
-  top_k: z.number().int().optional(),
-  model: z.string().optional(),
-  model_db_id: z.string().optional(),
-  model_type: z.string().optional(),
-  model_parameters: RerankModelParameters$inboundSchema.optional(),
-  integration_id: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "top_k": "topK",
-    "model_db_id": "modelDbId",
-    "model_type": "modelType",
-    "model_parameters": "modelParameters",
-    "integration_id": "integrationId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    enabled: z.boolean().optional(),
+    provider: z.string().optional(),
+    top_k: z.number().int().optional(),
+    model: z.string().optional(),
+    model_db_id: z.string().optional(),
+    model_type: z.string().optional(),
+    model_parameters: RerankModelParameters$inboundSchema.optional(),
+    integration_id: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "top_k": "topK",
+      "model_db_id": "modelDbId",
+      "model_type": "modelType",
+      "model_parameters": "modelParameters",
+      "integration_id": "integrationId",
+    });
+  })
+);
 
 export function rerankConfigFromJSON(
   jsonString: string,

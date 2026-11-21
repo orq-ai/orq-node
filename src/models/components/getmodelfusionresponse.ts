@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { ModelFusion, ModelFusion$inboundSchema } from "./modelfusion.js";
@@ -18,13 +18,15 @@ export const GetModelFusionResponse$inboundSchema: z.ZodType<
   GetModelFusionResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  model_fusion: ModelFusion$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "model_fusion": "modelFusion",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model_fusion: ModelFusion$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "model_fusion": "modelFusion",
+    });
+  })
+);
 
 export function getModelFusionResponseFromJSON(
   jsonString: string,

@@ -6,6 +6,7 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import {
   collectExtraKeys as collectExtraKeys$,
+  lazySchema as lazySchema$,
   safeParse,
 } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
@@ -545,16 +546,18 @@ export const GetAllToolsRequest$outboundSchema: z.ZodType<
   GetAllToolsRequest$Outbound,
   z.ZodTypeDef,
   GetAllToolsRequest
-> = z.object({
-  limit: z.number().optional(),
-  startingAfter: z.string().optional(),
-  endingBefore: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    startingAfter: "starting_after",
-    endingBefore: "ending_before",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    limit: z.number().optional(),
+    startingAfter: z.string().optional(),
+    endingBefore: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      startingAfter: "starting_after",
+      endingBefore: "ending_before",
+    });
+  })
+);
 
 export function getAllToolsRequestToJSON(
   getAllToolsRequest: GetAllToolsRequest,
@@ -567,19 +570,21 @@ export function getAllToolsRequestToJSON(
 /** @internal */
 export const GetAllToolsObject$inboundSchema: z.ZodNativeEnum<
   typeof GetAllToolsObject
-> = z.nativeEnum(GetAllToolsObject);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(GetAllToolsObject));
 
 /** @internal */
 export const GetAllToolsDataToolsResponseStatus$inboundSchema: z.ZodNativeEnum<
   typeof GetAllToolsDataToolsResponseStatus
-> = z.nativeEnum(GetAllToolsDataToolsResponseStatus);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(GetAllToolsDataToolsResponseStatus)
+);
 
 /** @internal */
 export const GetAllToolsDataToolsResponse200ApplicationJSONResponseBodyType$inboundSchema:
   z.ZodNativeEnum<
     typeof GetAllToolsDataToolsResponse200ApplicationJSONResponseBodyType
-  > = z.nativeEnum(
-    GetAllToolsDataToolsResponse200ApplicationJSONResponseBodyType,
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.nativeEnum(GetAllToolsDataToolsResponse200ApplicationJSONResponseBodyType)
   );
 
 /** @internal */
@@ -587,15 +592,17 @@ export const GetAllToolsDataParameters$inboundSchema: z.ZodType<
   GetAllToolsDataParameters,
   z.ZodTypeDef,
   unknown
-> = collectExtraKeys$(
-  z.object({
-    type:
-      GetAllToolsDataToolsResponse200ApplicationJSONResponseBodyType$inboundSchema,
-    properties: z.record(z.any()),
-    required: z.array(z.string()),
-  }).catchall(z.any()),
-  "additionalProperties",
-  true,
+> = /* @__PURE__ */ lazySchema$(() =>
+  collectExtraKeys$(
+    z.object({
+      type:
+        GetAllToolsDataToolsResponse200ApplicationJSONResponseBodyType$inboundSchema,
+      properties: z.record(z.any()),
+      required: z.array(z.string()),
+    }).catchall(z.any()),
+    "additionalProperties",
+    true,
+  )
 );
 
 export function getAllToolsDataParametersFromJSON(
@@ -610,18 +617,21 @@ export function getAllToolsDataParametersFromJSON(
 
 /** @internal */
 export const DataLanguage$inboundSchema: z.ZodNativeEnum<typeof DataLanguage> =
-  z.nativeEnum(DataLanguage);
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(DataLanguage));
 
 /** @internal */
 export const DataCodeTool$inboundSchema: z.ZodType<
   DataCodeTool,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  parameters: z.lazy(() => GetAllToolsDataParameters$inboundSchema).optional(),
-  language: DataLanguage$inboundSchema,
-  code: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    parameters: z.lazy(() => GetAllToolsDataParameters$inboundSchema)
+      .optional(),
+    language: DataLanguage$inboundSchema,
+    code: z.string(),
+  })
+);
 
 export function dataCodeToolFromJSON(
   jsonString: string,
@@ -638,32 +648,34 @@ export const DataCodeExecutionTool$inboundSchema: z.ZodType<
   DataCodeExecutionTool,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  _id: z.string().default("tool_01M7SYXWT0XCX2DTN8K54SWBDR"),
-  path: z.string(),
-  key: z.string(),
-  display_name: z.string().optional(),
-  description: z.string(),
-  created_by_id: z.nullable(z.string()).optional(),
-  updated_by_id: z.nullable(z.string()).optional(),
-  project_id: z.string(),
-  workspace_id: z.string(),
-  created: z.string(),
-  updated: z.string(),
-  status: GetAllToolsDataToolsResponseStatus$inboundSchema.default("live"),
-  type: z.literal("code"),
-  code_tool: z.lazy(() => DataCodeTool$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "_id": "id",
-    "display_name": "displayName",
-    "created_by_id": "createdById",
-    "updated_by_id": "updatedById",
-    "project_id": "projectId",
-    "workspace_id": "workspaceId",
-    "code_tool": "codeTool",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    _id: z.string().default("tool_01M805EHZGD6MXT93HR2XTN0W6"),
+    path: z.string(),
+    key: z.string(),
+    display_name: z.string().optional(),
+    description: z.string(),
+    created_by_id: z.nullable(z.string()).optional(),
+    updated_by_id: z.nullable(z.string()).optional(),
+    project_id: z.string(),
+    workspace_id: z.string(),
+    created: z.string(),
+    updated: z.string(),
+    status: GetAllToolsDataToolsResponseStatus$inboundSchema.default("live"),
+    type: z.literal("code"),
+    code_tool: z.lazy(() => DataCodeTool$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "_id": "id",
+      "display_name": "displayName",
+      "created_by_id": "createdById",
+      "updated_by_id": "updatedById",
+      "project_id": "projectId",
+      "workspace_id": "workspaceId",
+      "code_tool": "codeTool",
+    });
+  })
+);
 
 export function dataCodeExecutionToolFromJSON(
   jsonString: string,
@@ -678,21 +690,23 @@ export function dataCodeExecutionToolFromJSON(
 /** @internal */
 export const GetAllToolsDataToolsStatus$inboundSchema: z.ZodNativeEnum<
   typeof GetAllToolsDataToolsStatus
-> = z.nativeEnum(GetAllToolsDataToolsStatus);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(GetAllToolsDataToolsStatus));
 
 /** @internal */
-export const DataMethod$inboundSchema: z.ZodNativeEnum<typeof DataMethod> = z
-  .nativeEnum(DataMethod);
+export const DataMethod$inboundSchema: z.ZodNativeEnum<typeof DataMethod> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(DataMethod));
 
 /** @internal */
 export const GetAllToolsHeaders2$inboundSchema: z.ZodType<
   GetAllToolsHeaders2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  value: z.string(),
-  encrypted: z.boolean().default(false),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    value: z.string(),
+    encrypted: z.boolean().default(false),
+  })
+);
 
 export function getAllToolsHeaders2FromJSON(
   jsonString: string,
@@ -709,7 +723,9 @@ export const DataHeaders$inboundSchema: z.ZodType<
   DataHeaders,
   z.ZodTypeDef,
   unknown
-> = z.union([z.lazy(() => GetAllToolsHeaders2$inboundSchema), z.string()]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.lazy(() => GetAllToolsHeaders2$inboundSchema), z.string()])
+);
 
 export function dataHeadersFromJSON(
   jsonString: string,
@@ -726,15 +742,17 @@ export const DataBlueprint$inboundSchema: z.ZodType<
   DataBlueprint,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  url: z.string(),
-  method: DataMethod$inboundSchema,
-  headers: z.record(
-    z.union([z.lazy(() => GetAllToolsHeaders2$inboundSchema), z.string()]),
-  ).optional(),
-  body: z.record(z.any()).optional(),
-  timeout: z.number().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    url: z.string(),
+    method: DataMethod$inboundSchema,
+    headers: z.record(
+      z.union([z.lazy(() => GetAllToolsHeaders2$inboundSchema), z.string()]),
+    ).optional(),
+    body: z.record(z.any()).optional(),
+    timeout: z.number().optional(),
+  })
+);
 
 export function dataBlueprintFromJSON(
   jsonString: string,
@@ -749,14 +767,18 @@ export function dataBlueprintFromJSON(
 /** @internal */
 export const GetAllToolsDataToolsResponse200Type$inboundSchema: z.ZodNativeEnum<
   typeof GetAllToolsDataToolsResponse200Type
-> = z.nativeEnum(GetAllToolsDataToolsResponse200Type);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(GetAllToolsDataToolsResponse200Type)
+);
 
 /** @internal */
 export const DataDefaultValue$inboundSchema: z.ZodType<
   DataDefaultValue,
   z.ZodTypeDef,
   unknown
-> = z.union([z.string(), z.number(), z.boolean()]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.number(), z.boolean()])
+);
 
 export function dataDefaultValueFromJSON(
   jsonString: string,
@@ -773,17 +795,19 @@ export const DataArguments$inboundSchema: z.ZodType<
   DataArguments,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: GetAllToolsDataToolsResponse200Type$inboundSchema,
-  description: z.string(),
-  send_to_model: z.boolean().default(true),
-  default_value: z.union([z.string(), z.number(), z.boolean()]).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "send_to_model": "sendToModel",
-    "default_value": "defaultValue",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: GetAllToolsDataToolsResponse200Type$inboundSchema,
+    description: z.string(),
+    send_to_model: z.boolean().default(true),
+    default_value: z.union([z.string(), z.number(), z.boolean()]).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "send_to_model": "sendToModel",
+      "default_value": "defaultValue",
+    });
+  })
+);
 
 export function dataArgumentsFromJSON(
   jsonString: string,
@@ -800,10 +824,12 @@ export const DataHttp$inboundSchema: z.ZodType<
   DataHttp,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  blueprint: z.lazy(() => DataBlueprint$inboundSchema),
-  arguments: z.record(z.lazy(() => DataArguments$inboundSchema)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    blueprint: z.lazy(() => DataBlueprint$inboundSchema),
+    arguments: z.record(z.lazy(() => DataArguments$inboundSchema)).optional(),
+  })
+);
 
 export function dataHttpFromJSON(
   jsonString: string,
@@ -820,31 +846,33 @@ export const DataHTTPTool$inboundSchema: z.ZodType<
   DataHTTPTool,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  _id: z.string().default("tool_01M7SYXWT0YHZ8PZEP3QF1RKN1"),
-  path: z.string(),
-  key: z.string(),
-  display_name: z.string().optional(),
-  description: z.string(),
-  created_by_id: z.nullable(z.string()).optional(),
-  updated_by_id: z.nullable(z.string()).optional(),
-  project_id: z.string(),
-  workspace_id: z.string(),
-  created: z.string(),
-  updated: z.string(),
-  status: GetAllToolsDataToolsStatus$inboundSchema.default("live"),
-  type: z.literal("http"),
-  http: z.lazy(() => DataHttp$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "_id": "id",
-    "display_name": "displayName",
-    "created_by_id": "createdById",
-    "updated_by_id": "updatedById",
-    "project_id": "projectId",
-    "workspace_id": "workspaceId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    _id: z.string().default("tool_01M805EHZF1E4KPS9JWHF5M8HS"),
+    path: z.string(),
+    key: z.string(),
+    display_name: z.string().optional(),
+    description: z.string(),
+    created_by_id: z.nullable(z.string()).optional(),
+    updated_by_id: z.nullable(z.string()).optional(),
+    project_id: z.string(),
+    workspace_id: z.string(),
+    created: z.string(),
+    updated: z.string(),
+    status: GetAllToolsDataToolsStatus$inboundSchema.default("live"),
+    type: z.literal("http"),
+    http: z.lazy(() => DataHttp$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "_id": "id",
+      "display_name": "displayName",
+      "created_by_id": "createdById",
+      "updated_by_id": "updatedById",
+      "project_id": "projectId",
+      "workspace_id": "workspaceId",
+    });
+  })
+);
 
 export function dataHTTPToolFromJSON(
   jsonString: string,
@@ -859,21 +887,23 @@ export function dataHTTPToolFromJSON(
 /** @internal */
 export const GetAllToolsDataStatus$inboundSchema: z.ZodNativeEnum<
   typeof GetAllToolsDataStatus
-> = z.nativeEnum(GetAllToolsDataStatus);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(GetAllToolsDataStatus));
 
 /** @internal */
 export const DataSchema$inboundSchema: z.ZodType<
   DataSchema,
   z.ZodTypeDef,
   unknown
-> = collectExtraKeys$(
-  z.object({
-    type: z.string(),
-    properties: z.record(z.any()),
-    required: z.array(z.string()),
-  }).catchall(z.any()),
-  "additionalProperties",
-  true,
+> = /* @__PURE__ */ lazySchema$(() =>
+  collectExtraKeys$(
+    z.object({
+      type: z.string(),
+      properties: z.record(z.any()),
+      required: z.array(z.string()),
+    }).catchall(z.any()),
+    "additionalProperties",
+    true,
+  )
 );
 
 export function dataSchemaFromJSON(
@@ -891,12 +921,14 @@ export const DataJsonSchema$inboundSchema: z.ZodType<
   DataJsonSchema,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string(),
-  description: z.string(),
-  schema: z.lazy(() => DataSchema$inboundSchema),
-  strict: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+    description: z.string(),
+    schema: z.lazy(() => DataSchema$inboundSchema),
+    strict: z.boolean().optional(),
+  })
+);
 
 export function dataJsonSchemaFromJSON(
   jsonString: string,
@@ -913,32 +945,34 @@ export const DataJSONSchemaTool$inboundSchema: z.ZodType<
   DataJSONSchemaTool,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  _id: z.string().default("tool_01M7SYXWSZHAP23QWVKXNZCRP5"),
-  path: z.string(),
-  key: z.string(),
-  display_name: z.string().optional(),
-  description: z.string(),
-  created_by_id: z.nullable(z.string()).optional(),
-  updated_by_id: z.nullable(z.string()).optional(),
-  project_id: z.string(),
-  workspace_id: z.string(),
-  created: z.string(),
-  updated: z.string(),
-  status: GetAllToolsDataStatus$inboundSchema.default("live"),
-  type: z.literal("json_schema"),
-  json_schema: z.lazy(() => DataJsonSchema$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "_id": "id",
-    "display_name": "displayName",
-    "created_by_id": "createdById",
-    "updated_by_id": "updatedById",
-    "project_id": "projectId",
-    "workspace_id": "workspaceId",
-    "json_schema": "jsonSchema",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    _id: z.string().default("tool_01M805EHZFR7GQAB6B49TB4ZHG"),
+    path: z.string(),
+    key: z.string(),
+    display_name: z.string().optional(),
+    description: z.string(),
+    created_by_id: z.nullable(z.string()).optional(),
+    updated_by_id: z.nullable(z.string()).optional(),
+    project_id: z.string(),
+    workspace_id: z.string(),
+    created: z.string(),
+    updated: z.string(),
+    status: GetAllToolsDataStatus$inboundSchema.default("live"),
+    type: z.literal("json_schema"),
+    json_schema: z.lazy(() => DataJsonSchema$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "_id": "id",
+      "display_name": "displayName",
+      "created_by_id": "createdById",
+      "updated_by_id": "updatedById",
+      "project_id": "projectId",
+      "workspace_id": "workspaceId",
+      "json_schema": "jsonSchema",
+    });
+  })
+);
 
 export function dataJSONSchemaToolFromJSON(
   jsonString: string,
@@ -951,27 +985,31 @@ export function dataJSONSchemaToolFromJSON(
 }
 
 /** @internal */
-export const DataStatus$inboundSchema: z.ZodNativeEnum<typeof DataStatus> = z
-  .nativeEnum(DataStatus);
+export const DataStatus$inboundSchema: z.ZodNativeEnum<typeof DataStatus> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(DataStatus));
 
 /** @internal */
 export const GetAllToolsDataToolsResponse200ApplicationJSONType$inboundSchema:
-  z.ZodNativeEnum<typeof GetAllToolsDataToolsResponse200ApplicationJSONType> = z
-    .nativeEnum(GetAllToolsDataToolsResponse200ApplicationJSONType);
+  z.ZodNativeEnum<typeof GetAllToolsDataToolsResponse200ApplicationJSONType> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(GetAllToolsDataToolsResponse200ApplicationJSONType)
+    );
 
 /** @internal */
 export const DataParameters$inboundSchema: z.ZodType<
   DataParameters,
   z.ZodTypeDef,
   unknown
-> = collectExtraKeys$(
-  z.object({
-    type: GetAllToolsDataToolsResponse200ApplicationJSONType$inboundSchema,
-    properties: z.record(z.any()),
-    required: z.array(z.string()),
-  }).catchall(z.any()),
-  "additionalProperties",
-  true,
+> = /* @__PURE__ */ lazySchema$(() =>
+  collectExtraKeys$(
+    z.object({
+      type: GetAllToolsDataToolsResponse200ApplicationJSONType$inboundSchema,
+      properties: z.record(z.any()),
+      required: z.array(z.string()),
+    }).catchall(z.any()),
+    "additionalProperties",
+    true,
+  )
 );
 
 export function dataParametersFromJSON(
@@ -989,12 +1027,14 @@ export const DataFunction$inboundSchema: z.ZodType<
   DataFunction,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string(),
-  description: z.string().optional(),
-  strict: z.boolean().optional(),
-  parameters: z.lazy(() => DataParameters$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+    description: z.string().optional(),
+    strict: z.boolean().optional(),
+    parameters: z.lazy(() => DataParameters$inboundSchema).optional(),
+  })
+);
 
 export function dataFunctionFromJSON(
   jsonString: string,
@@ -1011,31 +1051,33 @@ export const DataFunctionTool$inboundSchema: z.ZodType<
   DataFunctionTool,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  _id: z.string().default("tool_01M7SYXWSZXEYQPA5AM18WD3JM"),
-  path: z.string(),
-  key: z.string(),
-  display_name: z.string().optional(),
-  description: z.string(),
-  created_by_id: z.nullable(z.string()).optional(),
-  updated_by_id: z.nullable(z.string()).optional(),
-  project_id: z.string(),
-  workspace_id: z.string(),
-  created: z.string(),
-  updated: z.string(),
-  status: DataStatus$inboundSchema.default("live"),
-  type: z.literal("function"),
-  function: z.lazy(() => DataFunction$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "_id": "id",
-    "display_name": "displayName",
-    "created_by_id": "createdById",
-    "updated_by_id": "updatedById",
-    "project_id": "projectId",
-    "workspace_id": "workspaceId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    _id: z.string().default("tool_01M805EHZEXQZBF6H0DBSRVCSB"),
+    path: z.string(),
+    key: z.string(),
+    display_name: z.string().optional(),
+    description: z.string(),
+    created_by_id: z.nullable(z.string()).optional(),
+    updated_by_id: z.nullable(z.string()).optional(),
+    project_id: z.string(),
+    workspace_id: z.string(),
+    created: z.string(),
+    updated: z.string(),
+    status: DataStatus$inboundSchema.default("live"),
+    type: z.literal("function"),
+    function: z.lazy(() => DataFunction$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "_id": "id",
+      "display_name": "displayName",
+      "created_by_id": "createdById",
+      "updated_by_id": "updatedById",
+      "project_id": "projectId",
+      "workspace_id": "workspaceId",
+    });
+  })
+);
 
 export function dataFunctionToolFromJSON(
   jsonString: string,
@@ -1052,12 +1094,14 @@ export const GetAllToolsData$inboundSchema: z.ZodType<
   GetAllToolsData,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  z.lazy(() => DataFunctionTool$inboundSchema),
-  z.lazy(() => DataJSONSchemaTool$inboundSchema),
-  z.lazy(() => DataHTTPTool$inboundSchema),
-  z.lazy(() => DataCodeExecutionTool$inboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => DataFunctionTool$inboundSchema),
+    z.lazy(() => DataJSONSchemaTool$inboundSchema),
+    z.lazy(() => DataHTTPTool$inboundSchema),
+    z.lazy(() => DataCodeExecutionTool$inboundSchema),
+  ])
+);
 
 export function getAllToolsDataFromJSON(
   jsonString: string,
@@ -1074,22 +1118,22 @@ export const GetAllToolsResponseBody$inboundSchema: z.ZodType<
   GetAllToolsResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: GetAllToolsObject$inboundSchema,
-  data: z.array(
-    z.union([
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: GetAllToolsObject$inboundSchema,
+    data: z.array(z.union([
       z.lazy(() => DataFunctionTool$inboundSchema),
       z.lazy(() => DataJSONSchemaTool$inboundSchema),
       z.lazy(() => DataHTTPTool$inboundSchema),
       z.lazy(() => DataCodeExecutionTool$inboundSchema),
-    ]),
-  ),
-  has_more: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    "has_more": "hasMore",
-  });
-});
+    ])),
+    has_more: z.boolean(),
+  }).transform((v) => {
+    return remap$(v, {
+      "has_more": "hasMore",
+    });
+  })
+);
 
 export function getAllToolsResponseBodyFromJSON(
   jsonString: string,

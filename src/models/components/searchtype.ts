@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 
 export const SearchType = {
@@ -13,5 +14,5 @@ export const SearchType = {
 export type SearchType = ClosedEnum<typeof SearchType>;
 
 /** @internal */
-export const SearchType$outboundSchema: z.ZodNativeEnum<typeof SearchType> = z
-  .nativeEnum(SearchType);
+export const SearchType$outboundSchema: z.ZodNativeEnum<typeof SearchType> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(SearchType));

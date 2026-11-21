@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -43,17 +43,19 @@ export const BudgetAlert$inboundSchema: z.ZodType<
   BudgetAlert,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string().optional(),
-  threshold_percent: z.number().int(),
-  notifier_ids: z.array(z.string()),
-  dimension: BudgetAlertDimension$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "threshold_percent": "thresholdPercent",
-    "notifier_ids": "notifierIds",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    threshold_percent: z.number().int(),
+    notifier_ids: z.array(z.string()),
+    dimension: BudgetAlertDimension$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "threshold_percent": "thresholdPercent",
+      "notifier_ids": "notifierIds",
+    });
+  })
+);
 /** @internal */
 export type BudgetAlert$Outbound = {
   id?: string | undefined;
@@ -67,17 +69,19 @@ export const BudgetAlert$outboundSchema: z.ZodType<
   BudgetAlert$Outbound,
   z.ZodTypeDef,
   BudgetAlert
-> = z.object({
-  id: z.string().optional(),
-  thresholdPercent: z.number().int(),
-  notifierIds: z.array(z.string()),
-  dimension: BudgetAlertDimension$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    thresholdPercent: "threshold_percent",
-    notifierIds: "notifier_ids",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    thresholdPercent: z.number().int(),
+    notifierIds: z.array(z.string()),
+    dimension: BudgetAlertDimension$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      thresholdPercent: "threshold_percent",
+      notifierIds: "notifier_ids",
+    });
+  })
+);
 
 export function budgetAlertToJSON(budgetAlert: BudgetAlert): string {
   return JSON.stringify(BudgetAlert$outboundSchema.parse(budgetAlert));

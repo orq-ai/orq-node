@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import * as components from "../components/index.js";
 
 export type ViewUpdateRequest = {
@@ -22,15 +23,17 @@ export const ViewUpdateRequest$outboundSchema: z.ZodType<
   ViewUpdateRequest$Outbound,
   z.ZodTypeDef,
   ViewUpdateRequest
-> = z.object({
-  viewId: z.string(),
-  updateViewRequest: components.UpdateViewRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    viewId: "view_id",
-    updateViewRequest: "UpdateViewRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    viewId: z.string(),
+    updateViewRequest: components.UpdateViewRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      viewId: "view_id",
+      updateViewRequest: "UpdateViewRequest",
+    });
+  })
+);
 
 export function viewUpdateRequestToJSON(
   viewUpdateRequest: ViewUpdateRequest,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -17,13 +17,15 @@ export const MemoryParam$inboundSchema: z.ZodType<
   MemoryParam,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  entity_id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "entity_id": "entityId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    entity_id: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "entity_id": "entityId",
+    });
+  })
+);
 /** @internal */
 export type MemoryParam$Outbound = {
   entity_id: string;
@@ -34,13 +36,15 @@ export const MemoryParam$outboundSchema: z.ZodType<
   MemoryParam$Outbound,
   z.ZodTypeDef,
   MemoryParam
-> = z.object({
-  entityId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    entityId: "entity_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    entityId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      entityId: "entity_id",
+    });
+  })
+);
 
 export function memoryParamToJSON(memoryParam: MemoryParam): string {
   return JSON.stringify(MemoryParam$outboundSchema.parse(memoryParam));

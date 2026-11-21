@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type ChatKitResource = {
   id?: string | undefined;
@@ -25,18 +26,20 @@ export const ChatKitResource$outboundSchema: z.ZodType<
   ChatKitResource$Outbound,
   z.ZodTypeDef,
   ChatKitResource
-> = z.object({
-  id: z.string().optional(),
-  displayName: z.string().optional(),
-  resourceId: z.string().optional(),
-  resourceType: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    displayName: "display_name",
-    resourceId: "resource_id",
-    resourceType: "resource_type",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+    displayName: z.string().optional(),
+    resourceId: z.string().optional(),
+    resourceType: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      displayName: "display_name",
+      resourceId: "resource_id",
+      resourceType: "resource_type",
+    });
+  })
+);
 
 export function chatKitResourceToJSON(
   chatKitResource: ChatKitResource,

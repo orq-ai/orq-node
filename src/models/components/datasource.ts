@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -62,40 +62,42 @@ export type Datasource = {
 /** @internal */
 export const DatasourceStatus$inboundSchema: z.ZodNativeEnum<
   typeof DatasourceStatus
-> = z.nativeEnum(DatasourceStatus);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(DatasourceStatus));
 
 /** @internal */
 export const Datasource$inboundSchema: z.ZodType<
   Datasource,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  display_name: z.string(),
-  description: z.nullable(z.string()).optional(),
-  status: DatasourceStatus$inboundSchema,
-  file_id: z.nullable(z.string()).optional(),
-  created: z.string(),
-  updated: z.string(),
-  created_by_id: z.nullable(z.string()).optional(),
-  update_by_id: z.nullable(z.string()).optional(),
-  knowledge_id: z.string(),
-  chunks_count: z.number(),
-  processing_attempts: z.array(ProcessingAttempt$inboundSchema).optional(),
-  metadata: CountMetadata$inboundSchema.optional(),
-  attachment: DatasourceAttachment$inboundSchema.optional(),
-  _id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "display_name": "displayName",
-    "file_id": "fileId",
-    "created_by_id": "createdById",
-    "update_by_id": "updateById",
-    "knowledge_id": "knowledgeId",
-    "chunks_count": "chunksCount",
-    "processing_attempts": "processingAttempts",
-    "_id": "id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    display_name: z.string(),
+    description: z.nullable(z.string()).optional(),
+    status: DatasourceStatus$inboundSchema,
+    file_id: z.nullable(z.string()).optional(),
+    created: z.string(),
+    updated: z.string(),
+    created_by_id: z.nullable(z.string()).optional(),
+    update_by_id: z.nullable(z.string()).optional(),
+    knowledge_id: z.string(),
+    chunks_count: z.number(),
+    processing_attempts: z.array(ProcessingAttempt$inboundSchema).optional(),
+    metadata: CountMetadata$inboundSchema.optional(),
+    attachment: DatasourceAttachment$inboundSchema.optional(),
+    _id: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "display_name": "displayName",
+      "file_id": "fileId",
+      "created_by_id": "createdById",
+      "update_by_id": "updateById",
+      "knowledge_id": "knowledgeId",
+      "chunks_count": "chunksCount",
+      "processing_attempts": "processingAttempts",
+      "_id": "id",
+    });
+  })
+);
 
 export function datasourceFromJSON(
   jsonString: string,

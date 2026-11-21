@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -55,39 +55,43 @@ export const AuditLogDelivery$inboundSchema: z.ZodType<
   AuditLogDelivery,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  destination_id: z.string(),
-  event_id: z.string(),
-  kind: AuditLogDeliveryKind$inboundSchema,
-  status: AuditLogDeliveryStatus$inboundSchema,
-  attempts: z.number().int(),
-  next_attempt_at: z.string().datetime({ offset: true }).transform(v =>
-    new Date(v)
-  ).optional(),
-  last_attempt_at: z.string().datetime({ offset: true }).transform(v =>
-    new Date(v)
-  ).optional(),
-  last_status_code: z.number().int().optional(),
-  last_error: z.string().optional(),
-  delivered_at: z.string().datetime({ offset: true }).transform(v =>
-    new Date(v)
-  ).optional(),
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  replay_id: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "destination_id": "destinationId",
-    "event_id": "eventId",
-    "next_attempt_at": "nextAttemptAt",
-    "last_attempt_at": "lastAttemptAt",
-    "last_status_code": "lastStatusCode",
-    "last_error": "lastError",
-    "delivered_at": "deliveredAt",
-    "created_at": "createdAt",
-    "replay_id": "replayId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    destination_id: z.string(),
+    event_id: z.string(),
+    kind: AuditLogDeliveryKind$inboundSchema,
+    status: AuditLogDeliveryStatus$inboundSchema,
+    attempts: z.number().int(),
+    next_attempt_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ).optional(),
+    last_attempt_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ).optional(),
+    last_status_code: z.number().int().optional(),
+    last_error: z.string().optional(),
+    delivered_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ).optional(),
+    created_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    replay_id: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "destination_id": "destinationId",
+      "event_id": "eventId",
+      "next_attempt_at": "nextAttemptAt",
+      "last_attempt_at": "lastAttemptAt",
+      "last_status_code": "lastStatusCode",
+      "last_error": "lastError",
+      "delivered_at": "deliveredAt",
+      "created_at": "createdAt",
+      "replay_id": "replayId",
+    });
+  })
+);
 
 export function auditLogDeliveryFromJSON(
   jsonString: string,

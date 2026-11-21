@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 
 /**
@@ -54,7 +55,9 @@ export type ListKnowledgeBasesRequest = {
 /** @internal */
 export const ListKnowledgeBasesQueryParamType$outboundSchema: z.ZodNativeEnum<
   typeof ListKnowledgeBasesQueryParamType
-> = z.nativeEnum(ListKnowledgeBasesQueryParamType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(ListKnowledgeBasesQueryParamType)
+);
 
 /** @internal */
 export type ListKnowledgeBasesRequest$Outbound = {
@@ -72,22 +75,24 @@ export const ListKnowledgeBasesRequest$outboundSchema: z.ZodType<
   ListKnowledgeBasesRequest$Outbound,
   z.ZodTypeDef,
   ListKnowledgeBasesRequest
-> = z.object({
-  startingAfter: z.string().optional(),
-  endingBefore: z.string().optional(),
-  limit: z.number().int().default(25),
-  search: z.string().optional(),
-  updatedBy: z.string().optional(),
-  type: ListKnowledgeBasesQueryParamType$outboundSchema.optional(),
-  projectId: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    startingAfter: "starting_after",
-    endingBefore: "ending_before",
-    updatedBy: "updated_by",
-    projectId: "project_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    startingAfter: z.string().optional(),
+    endingBefore: z.string().optional(),
+    limit: z.number().int().default(25),
+    search: z.string().optional(),
+    updatedBy: z.string().optional(),
+    type: ListKnowledgeBasesQueryParamType$outboundSchema.optional(),
+    projectId: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      startingAfter: "starting_after",
+      endingBefore: "ending_before",
+      updatedBy: "updated_by",
+      projectId: "project_id",
+    });
+  })
+);
 
 export function listKnowledgeBasesRequestToJSON(
   listKnowledgeBasesRequest: ListKnowledgeBasesRequest,

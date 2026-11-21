@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import {
   McpAuthConfig,
   McpAuthConfig$Outbound,
@@ -82,21 +83,23 @@ export const CreateMcpServerRequest$outboundSchema: z.ZodType<
   CreateMcpServerRequest$Outbound,
   z.ZodTypeDef,
   CreateMcpServerRequest
-> = z.object({
-  key: z.string(),
-  displayName: z.string(),
-  description: z.string().optional(),
-  connection: McpConnection$outboundSchema,
-  auth: McpAuthConfig$outboundSchema,
-  defaultToolExposure: McpToolExposure$outboundSchema,
-  sharing: Sharing$outboundSchema.optional(),
-  openapi: McpOpenApiConfigInput$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    displayName: "display_name",
-    defaultToolExposure: "default_tool_exposure",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    key: z.string(),
+    displayName: z.string(),
+    description: z.string().optional(),
+    connection: McpConnection$outboundSchema,
+    auth: McpAuthConfig$outboundSchema,
+    defaultToolExposure: McpToolExposure$outboundSchema,
+    sharing: Sharing$outboundSchema.optional(),
+    openapi: McpOpenApiConfigInput$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      displayName: "display_name",
+      defaultToolExposure: "default_tool_exposure",
+    });
+  })
+);
 
 export function createMcpServerRequestToJSON(
   createMcpServerRequest: CreateMcpServerRequest,

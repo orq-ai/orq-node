@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import {
   QueryParamsPagination,
   QueryParamsPagination$Outbound,
@@ -34,7 +35,7 @@ export const Query$outboundSchema: z.ZodType<
   Query$Outbound,
   z.ZodTypeDef,
   Query
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function queryToJSON(query: Query): string {
   return JSON.stringify(Query$outboundSchema.parse(query));
@@ -48,7 +49,7 @@ export const Filters$outboundSchema: z.ZodType<
   Filters$Outbound,
   z.ZodTypeDef,
   Filters
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function filtersToJSON(filters: Filters): string {
   return JSON.stringify(Filters$outboundSchema.parse(filters));
@@ -68,13 +69,15 @@ export const QueryWebhooksRequest$outboundSchema: z.ZodType<
   QueryWebhooksRequest$Outbound,
   z.ZodTypeDef,
   QueryWebhooksRequest
-> = z.object({
-  pagination: QueryParamsPagination$outboundSchema.optional(),
-  sortingProps: z.array(QueryParamsSort$outboundSchema).optional(),
-  query: z.lazy(() => Query$outboundSchema).optional(),
-  filters: z.array(z.lazy(() => Filters$outboundSchema)).optional(),
-  includedFields: z.record(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    pagination: QueryParamsPagination$outboundSchema.optional(),
+    sortingProps: z.array(QueryParamsSort$outboundSchema).optional(),
+    query: z.lazy(() => Query$outboundSchema).optional(),
+    filters: z.array(z.lazy(() => Filters$outboundSchema)).optional(),
+    includedFields: z.record(z.string()).optional(),
+  })
+);
 
 export function queryWebhooksRequestToJSON(
   queryWebhooksRequest: QueryWebhooksRequest,

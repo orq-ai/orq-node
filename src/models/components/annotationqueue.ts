@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -64,31 +64,33 @@ export const AnnotationQueue$inboundSchema: z.ZodType<
   AnnotationQueue,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  _id: z.string(),
-  display_name: z.string(),
-  description: z.string(),
-  workspace_id: z.string(),
-  project_id: z.string().optional(),
-  human_review_ids: z.array(z.string()),
-  metadata: AnnotationQueueMetadata$inboundSchema,
-  created_by_id: z.string().optional(),
-  updated_by_id: z.string().optional(),
-  created: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  updated: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "_id": "id",
-    "display_name": "displayName",
-    "workspace_id": "workspaceId",
-    "project_id": "projectId",
-    "human_review_ids": "humanReviewIds",
-    "created_by_id": "createdById",
-    "updated_by_id": "updatedById",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    _id: z.string(),
+    display_name: z.string(),
+    description: z.string(),
+    workspace_id: z.string(),
+    project_id: z.string().optional(),
+    human_review_ids: z.array(z.string()),
+    metadata: AnnotationQueueMetadata$inboundSchema,
+    created_by_id: z.string().optional(),
+    updated_by_id: z.string().optional(),
+    created: z.string().datetime({ offset: true }).transform(v => new Date(v))
+      .optional(),
+    updated: z.string().datetime({ offset: true }).transform(v => new Date(v))
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "_id": "id",
+      "display_name": "displayName",
+      "workspace_id": "workspaceId",
+      "project_id": "projectId",
+      "human_review_ids": "humanReviewIds",
+      "created_by_id": "createdById",
+      "updated_by_id": "updatedById",
+    });
+  })
+);
 
 export function annotationQueueFromJSON(
   jsonString: string,

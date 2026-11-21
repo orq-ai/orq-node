@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { McpGateway, McpGateway$inboundSchema } from "./mcpgateway.js";
@@ -29,15 +29,17 @@ export const ListMcpGatewaysResponse$inboundSchema: z.ZodType<
   ListMcpGatewaysResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: z.string().optional(),
-  data: z.array(McpGateway$inboundSchema).optional(),
-  has_more: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "has_more": "hasMore",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.string().optional(),
+    data: z.array(McpGateway$inboundSchema).optional(),
+    has_more: z.boolean().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "has_more": "hasMore",
+    });
+  })
+);
 
 export function listMcpGatewaysResponseFromJSON(
   jsonString: string,

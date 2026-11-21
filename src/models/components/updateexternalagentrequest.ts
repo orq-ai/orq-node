@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import {
   ExternalAgentHeader,
   ExternalAgentHeader$Outbound,
@@ -42,28 +43,30 @@ export const UpdateExternalAgentRequest$outboundSchema: z.ZodType<
   UpdateExternalAgentRequest$Outbound,
   z.ZodTypeDef,
   UpdateExternalAgentRequest
-> = z.object({
-  displayName: z.string().optional(),
-  description: z.string().optional(),
-  path: z.string().optional(),
-  projectId: z.string().optional(),
-  agentUrl: z.string().optional(),
-  cardUrl: z.string().optional(),
-  headers: z.record(ExternalAgentHeader$outboundSchema).optional(),
-  protocolVersion: z.string().optional(),
-  preferredTransport: z.string().optional(),
-  clearHeaders: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    displayName: "display_name",
-    projectId: "project_id",
-    agentUrl: "agent_url",
-    cardUrl: "card_url",
-    protocolVersion: "protocol_version",
-    preferredTransport: "preferred_transport",
-    clearHeaders: "clear_headers",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    displayName: z.string().optional(),
+    description: z.string().optional(),
+    path: z.string().optional(),
+    projectId: z.string().optional(),
+    agentUrl: z.string().optional(),
+    cardUrl: z.string().optional(),
+    headers: z.record(ExternalAgentHeader$outboundSchema).optional(),
+    protocolVersion: z.string().optional(),
+    preferredTransport: z.string().optional(),
+    clearHeaders: z.boolean().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      displayName: "display_name",
+      projectId: "project_id",
+      agentUrl: "agent_url",
+      cardUrl: "card_url",
+      protocolVersion: "protocol_version",
+      preferredTransport: "preferred_transport",
+      clearHeaders: "clear_headers",
+    });
+  })
+);
 
 export function updateExternalAgentRequestToJSON(
   updateExternalAgentRequest: UpdateExternalAgentRequest,

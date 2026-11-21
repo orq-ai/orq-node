@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { SearchType, SearchType$outboundSchema } from "./searchtype.js";
 
@@ -48,8 +49,8 @@ export type SearchRetrievalConfig = {
 };
 
 /** @internal */
-export const ModelType$outboundSchema: z.ZodNativeEnum<typeof ModelType> = z
-  .nativeEnum(ModelType);
+export const ModelType$outboundSchema: z.ZodNativeEnum<typeof ModelType> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ModelType));
 
 /** @internal */
 export type ModelParameters$Outbound = {
@@ -61,9 +62,11 @@ export const ModelParameters$outboundSchema: z.ZodType<
   ModelParameters$Outbound,
   z.ZodTypeDef,
   ModelParameters
-> = z.object({
-  threshold: z.number().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    threshold: z.number().optional(),
+  })
+);
 
 export function modelParametersToJSON(
   modelParameters: ModelParameters,
@@ -88,24 +91,26 @@ export const SearchRetrievalConfigRerankConfig$outboundSchema: z.ZodType<
   SearchRetrievalConfigRerankConfig$Outbound,
   z.ZodTypeDef,
   SearchRetrievalConfigRerankConfig
-> = z.object({
-  enabled: z.boolean().optional(),
-  provider: z.string().optional(),
-  topK: z.number().int().optional(),
-  model: z.string().optional(),
-  modelDbId: z.string().optional(),
-  modelType: ModelType$outboundSchema.optional(),
-  modelParameters: z.lazy(() => ModelParameters$outboundSchema).optional(),
-  integrationId: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    topK: "top_k",
-    modelDbId: "model_db_id",
-    modelType: "model_type",
-    modelParameters: "model_parameters",
-    integrationId: "integration_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    enabled: z.boolean().optional(),
+    provider: z.string().optional(),
+    topK: z.number().int().optional(),
+    model: z.string().optional(),
+    modelDbId: z.string().optional(),
+    modelType: ModelType$outboundSchema.optional(),
+    modelParameters: z.lazy(() => ModelParameters$outboundSchema).optional(),
+    integrationId: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      topK: "top_k",
+      modelDbId: "model_db_id",
+      modelType: "model_type",
+      modelParameters: "model_parameters",
+      integrationId: "integration_id",
+    });
+  })
+);
 
 export function searchRetrievalConfigRerankConfigToJSON(
   searchRetrievalConfigRerankConfig: SearchRetrievalConfigRerankConfig,
@@ -130,19 +135,21 @@ export const SearchRetrievalConfig$outboundSchema: z.ZodType<
   SearchRetrievalConfig$Outbound,
   z.ZodTypeDef,
   SearchRetrievalConfig
-> = z.object({
-  type: SearchType$outboundSchema.optional(),
-  topK: z.number().int().optional(),
-  threshold: z.number().optional(),
-  rerankConfig: z.nullable(
-    z.lazy(() => SearchRetrievalConfigRerankConfig$outboundSchema),
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    topK: "top_k",
-    rerankConfig: "rerank_config",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: SearchType$outboundSchema.optional(),
+    topK: z.number().int().optional(),
+    threshold: z.number().optional(),
+    rerankConfig: z.nullable(
+      z.lazy(() => SearchRetrievalConfigRerankConfig$outboundSchema),
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      topK: "top_k",
+      rerankConfig: "rerank_config",
+    });
+  })
+);
 
 export function searchRetrievalConfigToJSON(
   searchRetrievalConfig: SearchRetrievalConfig,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -45,25 +45,27 @@ export type AlertRun = {
 };
 
 /** @internal */
-export const Severity$inboundSchema: z.ZodNativeEnum<typeof Severity> = z
-  .nativeEnum(Severity);
+export const Severity$inboundSchema: z.ZodNativeEnum<typeof Severity> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Severity));
 
 /** @internal */
 export const AlertRun$inboundSchema: z.ZodType<
   AlertRun,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  value: z.number(),
-  breached: z.boolean(),
-  has_data: z.boolean(),
-  severity: Severity$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "has_data": "hasData",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    value: z.number(),
+    breached: z.boolean(),
+    has_data: z.boolean(),
+    severity: Severity$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "has_data": "hasData",
+    });
+  })
+);
 
 export function alertRunFromJSON(
   jsonString: string,

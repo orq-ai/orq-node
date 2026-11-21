@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type SubmitFeedbackRequest = {
   /**
@@ -28,16 +29,18 @@ export const SubmitFeedbackRequest$outboundSchema: z.ZodType<
   SubmitFeedbackRequest$Outbound,
   z.ZodTypeDef,
   SubmitFeedbackRequest
-> = z.object({
-  message: z.string(),
-  category: z.string(),
-  requestId: z.string().optional(),
-  url: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    requestId: "request_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    message: z.string(),
+    category: z.string(),
+    requestId: z.string().optional(),
+    url: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      requestId: "request_id",
+    });
+  })
+);
 
 export function submitFeedbackRequestToJSON(
   submitFeedbackRequest: SubmitFeedbackRequest,

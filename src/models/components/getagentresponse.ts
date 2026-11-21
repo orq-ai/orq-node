@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -159,17 +159,19 @@ export const GetAgentResponsePromptTokensDetails$inboundSchema: z.ZodType<
   GetAgentResponsePromptTokensDetails,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  cached_tokens: z.nullable(z.number().int()).optional(),
-  cache_creation_tokens: z.nullable(z.number().int()).optional(),
-  audio_tokens: z.nullable(z.number().int()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "cached_tokens": "cachedTokens",
-    "cache_creation_tokens": "cacheCreationTokens",
-    "audio_tokens": "audioTokens",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    cached_tokens: z.nullable(z.number().int()).optional(),
+    cache_creation_tokens: z.nullable(z.number().int()).optional(),
+    audio_tokens: z.nullable(z.number().int()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "cached_tokens": "cachedTokens",
+      "cache_creation_tokens": "cacheCreationTokens",
+      "audio_tokens": "audioTokens",
+    });
+  })
+);
 
 export function getAgentResponsePromptTokensDetailsFromJSON(
   jsonString: string,
@@ -187,19 +189,21 @@ export const GetAgentResponseCompletionTokensDetails$inboundSchema: z.ZodType<
   GetAgentResponseCompletionTokensDetails,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  reasoning_tokens: z.nullable(z.number()).optional(),
-  accepted_prediction_tokens: z.nullable(z.number()).optional(),
-  rejected_prediction_tokens: z.nullable(z.number()).optional(),
-  audio_tokens: z.nullable(z.number().int()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "reasoning_tokens": "reasoningTokens",
-    "accepted_prediction_tokens": "acceptedPredictionTokens",
-    "rejected_prediction_tokens": "rejectedPredictionTokens",
-    "audio_tokens": "audioTokens",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    reasoning_tokens: z.nullable(z.number()).optional(),
+    accepted_prediction_tokens: z.nullable(z.number()).optional(),
+    rejected_prediction_tokens: z.nullable(z.number()).optional(),
+    audio_tokens: z.nullable(z.number().int()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "reasoning_tokens": "reasoningTokens",
+      "accepted_prediction_tokens": "acceptedPredictionTokens",
+      "rejected_prediction_tokens": "rejectedPredictionTokens",
+      "audio_tokens": "audioTokens",
+    });
+  })
+);
 
 export function getAgentResponseCompletionTokensDetailsFromJSON(
   jsonString: string,
@@ -222,25 +226,27 @@ export const GetAgentResponseUsage$inboundSchema: z.ZodType<
   GetAgentResponseUsage,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  completion_tokens: z.number().optional(),
-  prompt_tokens: z.number().optional(),
-  total_tokens: z.number().optional(),
-  prompt_tokens_details: z.nullable(
-    z.lazy(() => GetAgentResponsePromptTokensDetails$inboundSchema),
-  ).optional(),
-  completion_tokens_details: z.nullable(
-    z.lazy(() => GetAgentResponseCompletionTokensDetails$inboundSchema),
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "completion_tokens": "completionTokens",
-    "prompt_tokens": "promptTokens",
-    "total_tokens": "totalTokens",
-    "prompt_tokens_details": "promptTokensDetails",
-    "completion_tokens_details": "completionTokensDetails",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    completion_tokens: z.number().optional(),
+    prompt_tokens: z.number().optional(),
+    total_tokens: z.number().optional(),
+    prompt_tokens_details: z.nullable(
+      z.lazy(() => GetAgentResponsePromptTokensDetails$inboundSchema),
+    ).optional(),
+    completion_tokens_details: z.nullable(
+      z.lazy(() => GetAgentResponseCompletionTokensDetails$inboundSchema),
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "completion_tokens": "completionTokens",
+      "prompt_tokens": "promptTokens",
+      "total_tokens": "totalTokens",
+      "prompt_tokens_details": "promptTokensDetails",
+      "completion_tokens_details": "completionTokensDetails",
+    });
+  })
+);
 
 export function getAgentResponseUsageFromJSON(
   jsonString: string,
@@ -255,22 +261,26 @@ export function getAgentResponseUsageFromJSON(
 /** @internal */
 export const GetAgentResponseFinishReason$inboundSchema: z.ZodNativeEnum<
   typeof GetAgentResponseFinishReason
-> = z.nativeEnum(GetAgentResponseFinishReason);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(GetAgentResponseFinishReason)
+);
 
 /** @internal */
 export const GetAgentResponseType$inboundSchema: z.ZodNativeEnum<
   typeof GetAgentResponseType
-> = z.nativeEnum(GetAgentResponseType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(GetAgentResponseType));
 
 /** @internal */
 export const GetAgentResponseFunction$inboundSchema: z.ZodType<
   GetAgentResponseFunction,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string().optional(),
-  arguments: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    arguments: z.string().optional(),
+  })
+);
 
 export function getAgentResponseFunctionFromJSON(
   jsonString: string,
@@ -287,11 +297,13 @@ export const GetAgentResponsePendingToolCalls$inboundSchema: z.ZodType<
   GetAgentResponsePendingToolCalls,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  type: GetAgentResponseType$inboundSchema,
-  function: z.lazy(() => GetAgentResponseFunction$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    type: GetAgentResponseType$inboundSchema,
+    function: z.lazy(() => GetAgentResponseFunction$inboundSchema),
+  })
+);
 
 export function getAgentResponsePendingToolCallsFromJSON(
   jsonString: string,
@@ -304,38 +316,40 @@ export function getAgentResponsePendingToolCallsFromJSON(
 }
 
 /** @internal */
-export const Status$inboundSchema: z.ZodNativeEnum<typeof Status> = z
-  .nativeEnum(Status);
+export const Status$inboundSchema: z.ZodNativeEnum<typeof Status> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Status));
 
 /** @internal */
 export const GetAgentResponse$inboundSchema: z.ZodType<
   GetAgentResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  _id: z.string(),
-  task_id: z.string(),
-  output: z.array(AgentResponseMessage$inboundSchema),
-  created_at: z.string(),
-  model: z.string(),
-  usage: z.nullable(z.lazy(() => GetAgentResponseUsage$inboundSchema))
-    .optional(),
-  finish_reason: GetAgentResponseFinishReason$inboundSchema.optional(),
-  pending_tool_calls: z.array(
-    z.lazy(() => GetAgentResponsePendingToolCalls$inboundSchema),
-  ).optional(),
-  telemetry: Telemetry$inboundSchema.optional(),
-  status: Status$inboundSchema,
-  error: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "_id": "id",
-    "task_id": "taskId",
-    "created_at": "createdAt",
-    "finish_reason": "finishReason",
-    "pending_tool_calls": "pendingToolCalls",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    _id: z.string(),
+    task_id: z.string(),
+    output: z.array(AgentResponseMessage$inboundSchema),
+    created_at: z.string(),
+    model: z.string(),
+    usage: z.nullable(z.lazy(() => GetAgentResponseUsage$inboundSchema))
+      .optional(),
+    finish_reason: GetAgentResponseFinishReason$inboundSchema.optional(),
+    pending_tool_calls: z.array(
+      z.lazy(() => GetAgentResponsePendingToolCalls$inboundSchema),
+    ).optional(),
+    telemetry: Telemetry$inboundSchema.optional(),
+    status: Status$inboundSchema,
+    error: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "_id": "id",
+      "task_id": "taskId",
+      "created_at": "createdAt",
+      "finish_reason": "finishReason",
+      "pending_tool_calls": "pendingToolCalls",
+    });
+  })
+);
 
 export function getAgentResponseFromJSON(
   jsonString: string,

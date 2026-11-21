@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type RemoveAnnotationQueueItemsRequest = {
   /**
@@ -22,13 +23,15 @@ export const RemoveAnnotationQueueItemsRequest$outboundSchema: z.ZodType<
   RemoveAnnotationQueueItemsRequest$Outbound,
   z.ZodTypeDef,
   RemoveAnnotationQueueItemsRequest
-> = z.object({
-  spanIds: z.array(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    spanIds: "span_ids",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    spanIds: z.array(z.string()),
+  }).transform((v) => {
+    return remap$(v, {
+      spanIds: "span_ids",
+    });
+  })
+);
 
 export function removeAnnotationQueueItemsRequestToJSON(
   removeAnnotationQueueItemsRequest: RemoveAnnotationQueueItemsRequest,

@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import {
   SessionInterval,
   SessionInterval$outboundSchema,
@@ -44,22 +45,24 @@ export const ThreadFilters$outboundSchema: z.ZodType<
   ThreadFilters$Outbound,
   z.ZodTypeDef,
   ThreadFilters
-> = z.object({
-  interval: SessionInterval$outboundSchema,
-  projectId: z.string().optional(),
-  tags: z.array(z.string()).optional(),
-  startDate: z.string().optional(),
-  endDate: z.string().optional(),
-  client: z.string().optional(),
-  repo: z.string().optional(),
-  kind: ThreadKind$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    projectId: "project_id",
-    startDate: "start_date",
-    endDate: "end_date",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    interval: SessionInterval$outboundSchema,
+    projectId: z.string().optional(),
+    tags: z.array(z.string()).optional(),
+    startDate: z.string().optional(),
+    endDate: z.string().optional(),
+    client: z.string().optional(),
+    repo: z.string().optional(),
+    kind: ThreadKind$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      projectId: "project_id",
+      startDate: "start_date",
+      endDate: "end_date",
+    });
+  })
+);
 
 export function threadFiltersToJSON(threadFilters: ThreadFilters): string {
   return JSON.stringify(ThreadFilters$outboundSchema.parse(threadFilters));

@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type UserDeleteRequest = {
   /**
@@ -22,13 +23,15 @@ export const UserDeleteRequest$outboundSchema: z.ZodType<
   UserDeleteRequest$Outbound,
   z.ZodTypeDef,
   UserDeleteRequest
-> = z.object({
-  userId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    userId: "user_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    userId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      userId: "user_id",
+    });
+  })
+);
 
 export function userDeleteRequestToJSON(
   userDeleteRequest: UserDeleteRequest,

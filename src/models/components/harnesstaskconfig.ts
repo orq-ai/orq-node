@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -17,13 +17,15 @@ export const HarnessTaskConfig$inboundSchema: z.ZodType<
   HarnessTaskConfig,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  harness_config_id: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "harness_config_id": "harnessConfigId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    harness_config_id: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "harness_config_id": "harnessConfigId",
+    });
+  })
+);
 /** @internal */
 export type HarnessTaskConfig$Outbound = {
   harness_config_id?: string | undefined;
@@ -34,13 +36,15 @@ export const HarnessTaskConfig$outboundSchema: z.ZodType<
   HarnessTaskConfig$Outbound,
   z.ZodTypeDef,
   HarnessTaskConfig
-> = z.object({
-  harnessConfigId: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    harnessConfigId: "harness_config_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    harnessConfigId: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      harnessConfigId: "harness_config_id",
+    });
+  })
+);
 
 export function harnessTaskConfigToJSON(
   harnessTaskConfig: HarnessTaskConfig,

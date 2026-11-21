@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -258,16 +258,20 @@ export type EvaluatorResponseFunction = {
 /** @internal */
 export const EvaluatorResponseFunctionOutputType$inboundSchema: z.ZodNativeEnum<
   typeof EvaluatorResponseFunctionOutputType
-> = z.nativeEnum(EvaluatorResponseFunctionOutputType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(EvaluatorResponseFunctionOutputType)
+);
 
 /** @internal */
 export const ThirtyTwo$inboundSchema: z.ZodType<
   ThirtyTwo,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("grammar_diversity"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("grammar_diversity"),
+  })
+);
 
 export function thirtyTwoFromJSON(
   jsonString: string,
@@ -284,9 +288,11 @@ export const ThirtyOne$inboundSchema: z.ZodType<
   ThirtyOne,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("lexical_repetition"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("lexical_repetition"),
+  })
+);
 
 export function thirtyOneFromJSON(
   jsonString: string,
@@ -299,10 +305,12 @@ export function thirtyOneFromJSON(
 }
 
 /** @internal */
-export const Thirty$inboundSchema: z.ZodType<Thirty, z.ZodTypeDef, unknown> = z
-  .object({
-    type: z.literal("sentences_count"),
-  });
+export const Thirty$inboundSchema: z.ZodType<Thirty, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type: z.literal("sentences_count"),
+    })
+  );
 
 export function thirtyFromJSON(
   jsonString: string,
@@ -319,9 +327,11 @@ export const TwentyNine$inboundSchema: z.ZodType<
   TwentyNine,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("words_count"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("words_count"),
+  })
+);
 
 export function twentyNineFromJSON(
   jsonString: string,
@@ -338,9 +348,11 @@ export const TwentyEight$inboundSchema: z.ZodType<
   TwentyEight,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("gse_english_level"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("gse_english_level"),
+  })
+);
 
 export function twentyEightFromJSON(
   jsonString: string,
@@ -357,9 +369,11 @@ export const TwentySeven$inboundSchema: z.ZodType<
   TwentySeven,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("flesch_reading_ease"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("flesch_reading_ease"),
+  })
+);
 
 export function twentySevenFromJSON(
   jsonString: string,
@@ -376,9 +390,11 @@ export const TwentySix$inboundSchema: z.ZodType<
   TwentySix,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("most_repeated_words"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("most_repeated_words"),
+  })
+);
 
 export function twentySixFromJSON(
   jsonString: string,
@@ -395,10 +411,12 @@ export const TwentyFive$inboundSchema: z.ZodType<
   TwentyFive,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("keywords_match"),
-  keywords: z.array(z.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("keywords_match"),
+    keywords: z.array(z.string()),
+  })
+);
 
 export function twentyFiveFromJSON(
   jsonString: string,
@@ -415,9 +433,11 @@ export const TwentyFour$inboundSchema: z.ZodType<
   TwentyFour,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("levenshtein_distance"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("levenshtein_distance"),
+  })
+);
 
 export function twentyFourFromJSON(
   jsonString: string,
@@ -434,9 +454,11 @@ export const TwentyThree$inboundSchema: z.ZodType<
   TwentyThree,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("cosine_similarity"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("cosine_similarity"),
+  })
+);
 
 export function twentyThreeFromJSON(
   jsonString: string,
@@ -453,9 +475,11 @@ export const TwentyTwo$inboundSchema: z.ZodType<
   TwentyTwo,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("meteor_score"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("meteor_score"),
+  })
+);
 
 export function twentyTwoFromJSON(
   jsonString: string,
@@ -472,9 +496,11 @@ export const TwentyOne$inboundSchema: z.ZodType<
   TwentyOne,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("rouge_n"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("rouge_n"),
+  })
+);
 
 export function twentyOneFromJSON(
   jsonString: string,
@@ -487,10 +513,12 @@ export function twentyOneFromJSON(
 }
 
 /** @internal */
-export const Twenty$inboundSchema: z.ZodType<Twenty, z.ZodTypeDef, unknown> = z
-  .object({
-    type: z.literal("bleu_score"),
-  });
+export const Twenty$inboundSchema: z.ZodType<Twenty, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type: z.literal("bleu_score"),
+    })
+  );
 
 export function twentyFromJSON(
   jsonString: string,
@@ -507,9 +535,11 @@ export const Nineteen$inboundSchema: z.ZodType<
   Nineteen,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("bert_score"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("bert_score"),
+  })
+);
 
 export function nineteenFromJSON(
   jsonString: string,
@@ -526,9 +556,11 @@ export const Eighteen$inboundSchema: z.ZodType<
   Eighteen,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("moderations_google"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("moderations_google"),
+  })
+);
 
 export function eighteenFromJSON(
   jsonString: string,
@@ -545,9 +577,11 @@ export const Seventeen$inboundSchema: z.ZodType<
   Seventeen,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("moderations_openai"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("moderations_openai"),
+  })
+);
 
 export function seventeenFromJSON(
   jsonString: string,
@@ -561,9 +595,11 @@ export function seventeenFromJSON(
 
 /** @internal */
 export const Sixteen$inboundSchema: z.ZodType<Sixteen, z.ZodTypeDef, unknown> =
-  z.object({
-    type: z.literal("is_valid_json"),
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type: z.literal("is_valid_json"),
+    })
+  );
 
 export function sixteenFromJSON(
   jsonString: string,
@@ -577,10 +613,12 @@ export function sixteenFromJSON(
 
 /** @internal */
 export const Fifteen$inboundSchema: z.ZodType<Fifteen, z.ZodTypeDef, unknown> =
-  z.object({
-    type: z.literal("regex"),
-    pattern: z.string(),
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type: z.literal("regex"),
+      pattern: z.string(),
+    })
+  );
 
 export function fifteenFromJSON(
   jsonString: string,
@@ -597,9 +635,11 @@ export const Fourteen$inboundSchema: z.ZodType<
   Fourteen,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("one_line"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("one_line"),
+  })
+);
 
 export function fourteenFromJSON(
   jsonString: string,
@@ -616,10 +656,12 @@ export const Thirteen$inboundSchema: z.ZodType<
   Thirteen,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("length_greater_than"),
-  value: z.number(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("length_greater_than"),
+    value: z.number(),
+  })
+);
 
 export function thirteenFromJSON(
   jsonString: string,
@@ -632,12 +674,14 @@ export function thirteenFromJSON(
 }
 
 /** @internal */
-export const Twelve$inboundSchema: z.ZodType<Twelve, z.ZodTypeDef, unknown> = z
-  .object({
-    type: z.literal("length_between"),
-    min: z.number(),
-    max: z.number(),
-  });
+export const Twelve$inboundSchema: z.ZodType<Twelve, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type: z.literal("length_between"),
+      min: z.number(),
+      max: z.number(),
+    })
+  );
 
 export function twelveFromJSON(
   jsonString: string,
@@ -650,11 +694,13 @@ export function twelveFromJSON(
 }
 
 /** @internal */
-export const Eleven$inboundSchema: z.ZodType<Eleven, z.ZodTypeDef, unknown> = z
-  .object({
-    type: z.literal("length_less_than"),
-    value: z.number(),
-  });
+export const Eleven$inboundSchema: z.ZodType<Eleven, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type: z.literal("length_less_than"),
+      value: z.number(),
+    })
+  );
 
 export function elevenFromJSON(
   jsonString: string,
@@ -667,10 +713,12 @@ export function elevenFromJSON(
 }
 
 /** @internal */
-export const Ten$inboundSchema: z.ZodType<Ten, z.ZodTypeDef, unknown> = z
-  .object({
-    type: z.literal("exact_match"),
-  });
+export const Ten$inboundSchema: z.ZodType<Ten, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type: z.literal("exact_match"),
+    })
+  );
 
 export function tenFromJSON(
   jsonString: string,
@@ -683,11 +731,13 @@ export function tenFromJSON(
 }
 
 /** @internal */
-export const Nine$inboundSchema: z.ZodType<Nine, z.ZodTypeDef, unknown> = z
-  .object({
-    type: z.literal("ends_with"),
-    value: z.string(),
-  });
+export const Nine$inboundSchema: z.ZodType<Nine, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type: z.literal("ends_with"),
+      value: z.string(),
+    })
+  );
 
 export function nineFromJSON(
   jsonString: string,
@@ -700,11 +750,13 @@ export function nineFromJSON(
 }
 
 /** @internal */
-export const Eight$inboundSchema: z.ZodType<Eight, z.ZodTypeDef, unknown> = z
-  .object({
-    type: z.literal("start_with"),
-    value: z.string(),
-  });
+export const Eight$inboundSchema: z.ZodType<Eight, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type: z.literal("start_with"),
+      value: z.string(),
+    })
+  );
 
 export function eightFromJSON(
   jsonString: string,
@@ -717,10 +769,12 @@ export function eightFromJSON(
 }
 
 /** @internal */
-export const Seven$inboundSchema: z.ZodType<Seven, z.ZodTypeDef, unknown> = z
-  .object({
-    type: z.literal("contains_valid_link"),
-  });
+export const Seven$inboundSchema: z.ZodType<Seven, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type: z.literal("contains_valid_link"),
+    })
+  );
 
 export function sevenFromJSON(
   jsonString: string,
@@ -733,10 +787,12 @@ export function sevenFromJSON(
 }
 
 /** @internal */
-export const Six$inboundSchema: z.ZodType<Six, z.ZodTypeDef, unknown> = z
-  .object({
-    type: z.literal("contains_url"),
-  });
+export const Six$inboundSchema: z.ZodType<Six, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type: z.literal("contains_url"),
+    })
+  );
 
 export function sixFromJSON(
   jsonString: string,
@@ -749,10 +805,12 @@ export function sixFromJSON(
 }
 
 /** @internal */
-export const Five$inboundSchema: z.ZodType<Five, z.ZodTypeDef, unknown> = z
-  .object({
-    type: z.literal("contains_email"),
-  });
+export const Five$inboundSchema: z.ZodType<Five, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type: z.literal("contains_email"),
+    })
+  );
 
 export function fiveFromJSON(
   jsonString: string,
@@ -765,11 +823,13 @@ export function fiveFromJSON(
 }
 
 /** @internal */
-export const Four$inboundSchema: z.ZodType<Four, z.ZodTypeDef, unknown> = z
-  .object({
-    type: z.literal("contains_any"),
-    keywords: z.array(z.string()),
-  });
+export const Four$inboundSchema: z.ZodType<Four, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type: z.literal("contains_any"),
+      keywords: z.array(z.string()),
+    })
+  );
 
 export function fourFromJSON(
   jsonString: string,
@@ -782,11 +842,13 @@ export function fourFromJSON(
 }
 
 /** @internal */
-export const Three$inboundSchema: z.ZodType<Three, z.ZodTypeDef, unknown> = z
-  .object({
-    type: z.literal("contains_all"),
-    keywords: z.array(z.string()),
-  });
+export const Three$inboundSchema: z.ZodType<Three, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type: z.literal("contains_all"),
+      keywords: z.array(z.string()),
+    })
+  );
 
 export function threeFromJSON(
   jsonString: string,
@@ -803,10 +865,12 @@ export const FunctionParams2$inboundSchema: z.ZodType<
   FunctionParams2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("contains_none"),
-  keywords: z.array(z.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("contains_none"),
+    keywords: z.array(z.string()),
+  })
+);
 
 export function functionParams2FromJSON(
   jsonString: string,
@@ -823,10 +887,12 @@ export const FunctionParams1$inboundSchema: z.ZodType<
   FunctionParams1,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("contains"),
-  value: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("contains"),
+    value: z.string(),
+  })
+);
 
 export function functionParams1FromJSON(
   jsonString: string,
@@ -843,68 +909,8 @@ export const FunctionParams$inboundSchema: z.ZodType<
   FunctionParams,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  z.lazy(() => FunctionParams1$inboundSchema),
-  z.lazy(() => FunctionParams2$inboundSchema),
-  z.lazy(() => Three$inboundSchema),
-  z.lazy(() => Four$inboundSchema),
-  z.lazy(() => Five$inboundSchema),
-  z.lazy(() => Six$inboundSchema),
-  z.lazy(() => Seven$inboundSchema),
-  z.lazy(() => Eight$inboundSchema),
-  z.lazy(() => Nine$inboundSchema),
-  z.lazy(() => Ten$inboundSchema),
-  z.lazy(() => Eleven$inboundSchema),
-  z.lazy(() => Twelve$inboundSchema),
-  z.lazy(() => Thirteen$inboundSchema),
-  z.lazy(() => Fourteen$inboundSchema),
-  z.lazy(() => Fifteen$inboundSchema),
-  z.lazy(() => Sixteen$inboundSchema),
-  z.lazy(() => Seventeen$inboundSchema),
-  z.lazy(() => Eighteen$inboundSchema),
-  z.lazy(() => Nineteen$inboundSchema),
-  z.lazy(() => Twenty$inboundSchema),
-  z.lazy(() => TwentyOne$inboundSchema),
-  z.lazy(() => TwentyTwo$inboundSchema),
-  z.lazy(() => TwentyThree$inboundSchema),
-  z.lazy(() => TwentyFour$inboundSchema),
-  z.lazy(() => TwentyFive$inboundSchema),
-  z.lazy(() => TwentySix$inboundSchema),
-  z.lazy(() => TwentySeven$inboundSchema),
-  z.lazy(() => TwentyEight$inboundSchema),
-  z.lazy(() => TwentyNine$inboundSchema),
-  z.lazy(() => Thirty$inboundSchema),
-  z.lazy(() => ThirtyOne$inboundSchema),
-  z.lazy(() => ThirtyTwo$inboundSchema),
-]);
-
-export function functionParamsFromJSON(
-  jsonString: string,
-): SafeParseResult<FunctionParams, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => FunctionParams$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'FunctionParams' from JSON`,
-  );
-}
-
-/** @internal */
-export const EvaluatorResponseFunction$inboundSchema: z.ZodType<
-  EvaluatorResponseFunction,
-  z.ZodTypeDef,
-  unknown
-> = z.object({
-  _id: z.string(),
-  description: z.string(),
-  created: z.string().default("2026-08-05T15:12:51.947Z"),
-  updated: z.string().default("2026-08-05T15:12:51.947Z"),
-  updated_by_id: z.nullable(z.string()).optional(),
-  project_id: z.string().optional(),
-  timeout: z.nullable(z.number().int()).optional(),
-  guardrail_config: z.any().optional(),
-  type: z.literal("function_eval"),
-  output_type: EvaluatorResponseFunctionOutputType$inboundSchema,
-  function_params: z.union([
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
     z.lazy(() => FunctionParams1$inboundSchema),
     z.lazy(() => FunctionParams2$inboundSchema),
     z.lazy(() => Three$inboundSchema),
@@ -937,18 +943,82 @@ export const EvaluatorResponseFunction$inboundSchema: z.ZodType<
     z.lazy(() => Thirty$inboundSchema),
     z.lazy(() => ThirtyOne$inboundSchema),
     z.lazy(() => ThirtyTwo$inboundSchema),
-  ]),
-  key: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "_id": "id",
-    "updated_by_id": "updatedById",
-    "project_id": "projectId",
-    "guardrail_config": "guardrailConfig",
-    "output_type": "outputType",
-    "function_params": "functionParams",
-  });
-});
+  ])
+);
+
+export function functionParamsFromJSON(
+  jsonString: string,
+): SafeParseResult<FunctionParams, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => FunctionParams$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'FunctionParams' from JSON`,
+  );
+}
+
+/** @internal */
+export const EvaluatorResponseFunction$inboundSchema: z.ZodType<
+  EvaluatorResponseFunction,
+  z.ZodTypeDef,
+  unknown
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    _id: z.string(),
+    description: z.string(),
+    created: z.string().default("2026-08-05T15:12:51.947Z"),
+    updated: z.string().default("2026-08-05T15:12:51.947Z"),
+    updated_by_id: z.nullable(z.string()).optional(),
+    project_id: z.string().optional(),
+    timeout: z.nullable(z.number().int()).optional(),
+    guardrail_config: z.any().optional(),
+    type: z.literal("function_eval"),
+    output_type: EvaluatorResponseFunctionOutputType$inboundSchema,
+    function_params: z.union([
+      z.lazy(() => FunctionParams1$inboundSchema),
+      z.lazy(() => FunctionParams2$inboundSchema),
+      z.lazy(() => Three$inboundSchema),
+      z.lazy(() => Four$inboundSchema),
+      z.lazy(() => Five$inboundSchema),
+      z.lazy(() => Six$inboundSchema),
+      z.lazy(() => Seven$inboundSchema),
+      z.lazy(() => Eight$inboundSchema),
+      z.lazy(() => Nine$inboundSchema),
+      z.lazy(() => Ten$inboundSchema),
+      z.lazy(() => Eleven$inboundSchema),
+      z.lazy(() => Twelve$inboundSchema),
+      z.lazy(() => Thirteen$inboundSchema),
+      z.lazy(() => Fourteen$inboundSchema),
+      z.lazy(() => Fifteen$inboundSchema),
+      z.lazy(() => Sixteen$inboundSchema),
+      z.lazy(() => Seventeen$inboundSchema),
+      z.lazy(() => Eighteen$inboundSchema),
+      z.lazy(() => Nineteen$inboundSchema),
+      z.lazy(() => Twenty$inboundSchema),
+      z.lazy(() => TwentyOne$inboundSchema),
+      z.lazy(() => TwentyTwo$inboundSchema),
+      z.lazy(() => TwentyThree$inboundSchema),
+      z.lazy(() => TwentyFour$inboundSchema),
+      z.lazy(() => TwentyFive$inboundSchema),
+      z.lazy(() => TwentySix$inboundSchema),
+      z.lazy(() => TwentySeven$inboundSchema),
+      z.lazy(() => TwentyEight$inboundSchema),
+      z.lazy(() => TwentyNine$inboundSchema),
+      z.lazy(() => Thirty$inboundSchema),
+      z.lazy(() => ThirtyOne$inboundSchema),
+      z.lazy(() => ThirtyTwo$inboundSchema),
+    ]),
+    key: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "_id": "id",
+      "updated_by_id": "updatedById",
+      "project_id": "projectId",
+      "guardrail_config": "guardrailConfig",
+      "output_type": "outputType",
+      "function_params": "functionParams",
+    });
+  })
+);
 
 export function evaluatorResponseFunctionFromJSON(
   jsonString: string,

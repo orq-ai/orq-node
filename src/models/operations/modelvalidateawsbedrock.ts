@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type ModelValidateAwsBedrockRequestBody = {
   assumeRoleArn?: string | undefined;
@@ -31,24 +32,26 @@ export const ModelValidateAwsBedrockRequestBody$outboundSchema: z.ZodType<
   ModelValidateAwsBedrockRequestBody$Outbound,
   z.ZodTypeDef,
   ModelValidateAwsBedrockRequestBody
-> = z.object({
-  assumeRoleArn: z.string().optional(),
-  assumeRoleExternalId: z.string().optional(),
-  authMode: z.string(),
-  inferenceProfileArn: z.string(),
-  integrationId: z.string().optional(),
-  modelType: z.string().optional(),
-  region: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    assumeRoleArn: "assume_role_arn",
-    assumeRoleExternalId: "assume_role_external_id",
-    authMode: "auth_mode",
-    inferenceProfileArn: "inference_profile_arn",
-    integrationId: "integration_id",
-    modelType: "model_type",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    assumeRoleArn: z.string().optional(),
+    assumeRoleExternalId: z.string().optional(),
+    authMode: z.string(),
+    inferenceProfileArn: z.string(),
+    integrationId: z.string().optional(),
+    modelType: z.string().optional(),
+    region: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      assumeRoleArn: "assume_role_arn",
+      assumeRoleExternalId: "assume_role_external_id",
+      authMode: "auth_mode",
+      inferenceProfileArn: "inference_profile_arn",
+      integrationId: "integration_id",
+      modelType: "model_type",
+    });
+  })
+);
 
 export function modelValidateAwsBedrockRequestBodyToJSON(
   modelValidateAwsBedrockRequestBody: ModelValidateAwsBedrockRequestBody,

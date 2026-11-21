@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import {
   ErrorPart,
@@ -262,12 +263,12 @@ export type AgentResponseRequest = {
 /** @internal */
 export const RoleToolMessage$outboundSchema: z.ZodNativeEnum<
   typeof RoleToolMessage
-> = z.nativeEnum(RoleToolMessage);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(RoleToolMessage));
 
 /** @internal */
 export const RoleUserMessage$outboundSchema: z.ZodNativeEnum<
   typeof RoleUserMessage
-> = z.nativeEnum(RoleUserMessage);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(RoleUserMessage));
 
 /** @internal */
 export type AgentResponseRequestRole$Outbound = string | string;
@@ -277,7 +278,9 @@ export const AgentResponseRequestRole$outboundSchema: z.ZodType<
   AgentResponseRequestRole$Outbound,
   z.ZodTypeDef,
   AgentResponseRequestRole
-> = z.union([RoleUserMessage$outboundSchema, RoleToolMessage$outboundSchema]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([RoleUserMessage$outboundSchema, RoleToolMessage$outboundSchema])
+);
 
 export function agentResponseRequestRoleToJSON(
   agentResponseRequestRole: AgentResponseRequestRole,
@@ -299,12 +302,14 @@ export const PublicMessagePart$outboundSchema: z.ZodType<
   PublicMessagePart$Outbound,
   z.ZodTypeDef,
   PublicMessagePart
-> = z.union([
-  TextPart$outboundSchema,
-  FilePart$outboundSchema,
-  ToolResultPart$outboundSchema,
-  ErrorPart$outboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    TextPart$outboundSchema,
+    FilePart$outboundSchema,
+    ToolResultPart$outboundSchema,
+    ErrorPart$outboundSchema,
+  ])
+);
 
 export function publicMessagePartToJSON(
   publicMessagePart: PublicMessagePart,
@@ -331,21 +336,23 @@ export const A2AMessage$outboundSchema: z.ZodType<
   A2AMessage$Outbound,
   z.ZodTypeDef,
   A2AMessage
-> = z.object({
-  messageId: z.string().optional(),
-  role: z.union([
-    RoleUserMessage$outboundSchema,
-    RoleToolMessage$outboundSchema,
-  ]),
-  parts: z.array(
-    z.union([
-      TextPart$outboundSchema,
-      FilePart$outboundSchema,
-      ToolResultPart$outboundSchema,
-      ErrorPart$outboundSchema,
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    messageId: z.string().optional(),
+    role: z.union([
+      RoleUserMessage$outboundSchema,
+      RoleToolMessage$outboundSchema,
     ]),
-  ),
-});
+    parts: z.array(
+      z.union([
+        TextPart$outboundSchema,
+        FilePart$outboundSchema,
+        ToolResultPart$outboundSchema,
+        ErrorPart$outboundSchema,
+      ]),
+    ),
+  })
+);
 
 export function a2AMessageToJSON(a2AMessage: A2AMessage): string {
   return JSON.stringify(A2AMessage$outboundSchema.parse(a2AMessage));
@@ -366,19 +373,21 @@ export const AgentResponseRequestIdentity$outboundSchema: z.ZodType<
   AgentResponseRequestIdentity$Outbound,
   z.ZodTypeDef,
   AgentResponseRequestIdentity
-> = z.object({
-  id: z.string(),
-  displayName: z.string().optional(),
-  email: z.string().optional(),
-  metadata: z.array(z.record(z.any())).optional(),
-  logoUrl: z.string().optional(),
-  tags: z.array(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    displayName: "display_name",
-    logoUrl: "logo_url",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    displayName: z.string().optional(),
+    email: z.string().optional(),
+    metadata: z.array(z.record(z.any())).optional(),
+    logoUrl: z.string().optional(),
+    tags: z.array(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      displayName: "display_name",
+      logoUrl: "logo_url",
+    });
+  })
+);
 
 export function agentResponseRequestIdentityToJSON(
   agentResponseRequestIdentity: AgentResponseRequestIdentity,
@@ -405,19 +414,21 @@ export const Contact$outboundSchema: z.ZodType<
   Contact$Outbound,
   z.ZodTypeDef,
   Contact
-> = z.object({
-  id: z.string(),
-  displayName: z.string().optional(),
-  email: z.string().optional(),
-  metadata: z.array(z.record(z.any())).optional(),
-  logoUrl: z.string().optional(),
-  tags: z.array(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    displayName: "display_name",
-    logoUrl: "logo_url",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    displayName: z.string().optional(),
+    email: z.string().optional(),
+    metadata: z.array(z.record(z.any())).optional(),
+    logoUrl: z.string().optional(),
+    tags: z.array(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      displayName: "display_name",
+      logoUrl: "logo_url",
+    });
+  })
+);
 
 export function contactToJSON(contact: Contact): string {
   return JSON.stringify(Contact$outboundSchema.parse(contact));
@@ -434,10 +445,12 @@ export const AgentResponseRequestThread$outboundSchema: z.ZodType<
   AgentResponseRequestThread$Outbound,
   z.ZodTypeDef,
   AgentResponseRequestThread
-> = z.object({
-  id: z.string(),
-  tags: z.array(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    tags: z.array(z.string()).optional(),
+  })
+);
 
 export function agentResponseRequestThreadToJSON(
   agentResponseRequestThread: AgentResponseRequestThread,
@@ -457,13 +470,15 @@ export const AgentResponseRequestMemory$outboundSchema: z.ZodType<
   AgentResponseRequestMemory$Outbound,
   z.ZodTypeDef,
   AgentResponseRequestMemory
-> = z.object({
-  entityId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    entityId: "entity_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    entityId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      entityId: "entity_id",
+    });
+  })
+);
 
 export function agentResponseRequestMemoryToJSON(
   agentResponseRequestMemory: AgentResponseRequestMemory,
@@ -474,8 +489,8 @@ export function agentResponseRequestMemoryToJSON(
 }
 
 /** @internal */
-export const Engine$outboundSchema: z.ZodNativeEnum<typeof Engine> = z
-  .nativeEnum(Engine);
+export const Engine$outboundSchema: z.ZodNativeEnum<typeof Engine> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Engine));
 
 /** @internal */
 export type AgentResponseRequestConfiguration$Outbound = {
@@ -487,9 +502,11 @@ export const AgentResponseRequestConfiguration$outboundSchema: z.ZodType<
   AgentResponseRequestConfiguration$Outbound,
   z.ZodTypeDef,
   AgentResponseRequestConfiguration
-> = z.object({
-  blocking: z.boolean().default(false),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    blocking: z.boolean().default(false),
+  })
+);
 
 export function agentResponseRequestConfigurationToJSON(
   agentResponseRequestConfiguration: AgentResponseRequestConfiguration,
@@ -511,13 +528,15 @@ export const Conversation$outboundSchema: z.ZodType<
   Conversation$Outbound,
   z.ZodTypeDef,
   Conversation
-> = z.object({
-  id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    id: "_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      id: "_id",
+    });
+  })
+);
 
 export function conversationToJSON(conversation: Conversation): string {
   return JSON.stringify(Conversation$outboundSchema.parse(conversation));
@@ -545,27 +564,30 @@ export const AgentResponseRequest$outboundSchema: z.ZodType<
   AgentResponseRequest$Outbound,
   z.ZodTypeDef,
   AgentResponseRequest
-> = z.object({
-  taskId: z.string().optional(),
-  message: z.lazy(() => A2AMessage$outboundSchema),
-  variables: z.record(z.any()).optional(),
-  identity: z.lazy(() => AgentResponseRequestIdentity$outboundSchema)
-    .optional(),
-  contact: z.lazy(() => Contact$outboundSchema).optional(),
-  thread: z.lazy(() => AgentResponseRequestThread$outboundSchema).optional(),
-  memory: z.lazy(() => AgentResponseRequestMemory$outboundSchema).optional(),
-  metadata: z.record(z.any()).optional(),
-  engine: Engine$outboundSchema.optional(),
-  configuration: z.lazy(() => AgentResponseRequestConfiguration$outboundSchema)
-    .optional(),
-  background: z.boolean().default(false),
-  stream: z.boolean().default(false),
-  conversation: z.lazy(() => Conversation$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    taskId: "task_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    taskId: z.string().optional(),
+    message: z.lazy(() => A2AMessage$outboundSchema),
+    variables: z.record(z.any()).optional(),
+    identity: z.lazy(() => AgentResponseRequestIdentity$outboundSchema)
+      .optional(),
+    contact: z.lazy(() => Contact$outboundSchema).optional(),
+    thread: z.lazy(() => AgentResponseRequestThread$outboundSchema).optional(),
+    memory: z.lazy(() => AgentResponseRequestMemory$outboundSchema).optional(),
+    metadata: z.record(z.any()).optional(),
+    engine: Engine$outboundSchema.optional(),
+    configuration: z.lazy(() =>
+      AgentResponseRequestConfiguration$outboundSchema
+    ).optional(),
+    background: z.boolean().default(false),
+    stream: z.boolean().default(false),
+    conversation: z.lazy(() => Conversation$outboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      taskId: "task_id",
+    });
+  })
+);
 
 export function agentResponseRequestToJSON(
   agentResponseRequest: AgentResponseRequest,

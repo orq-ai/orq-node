@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -31,15 +31,17 @@ export const RoutingRuleModelsConfig$inboundSchema: z.ZodType<
   RoutingRuleModelsConfig,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  mode: z.string().optional(),
-  models: z.array(RoutingRuleModel$inboundSchema).optional(),
-  fallback_on_codes: z.array(z.number().int()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "fallback_on_codes": "fallbackOnCodes",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    mode: z.string().optional(),
+    models: z.array(RoutingRuleModel$inboundSchema).optional(),
+    fallback_on_codes: z.array(z.number().int()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "fallback_on_codes": "fallbackOnCodes",
+    });
+  })
+);
 /** @internal */
 export type RoutingRuleModelsConfig$Outbound = {
   mode?: string | undefined;
@@ -52,15 +54,17 @@ export const RoutingRuleModelsConfig$outboundSchema: z.ZodType<
   RoutingRuleModelsConfig$Outbound,
   z.ZodTypeDef,
   RoutingRuleModelsConfig
-> = z.object({
-  mode: z.string().optional(),
-  models: z.array(RoutingRuleModel$outboundSchema).optional(),
-  fallbackOnCodes: z.array(z.number().int()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    fallbackOnCodes: "fallback_on_codes",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    mode: z.string().optional(),
+    models: z.array(RoutingRuleModel$outboundSchema).optional(),
+    fallbackOnCodes: z.array(z.number().int()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      fallbackOnCodes: "fallback_on_codes",
+    });
+  })
+);
 
 export function routingRuleModelsConfigToJSON(
   routingRuleModelsConfig: RoutingRuleModelsConfig,

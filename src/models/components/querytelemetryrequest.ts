@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -111,7 +111,7 @@ export type QueryTelemetryRequest = {
 /** @internal */
 export const QueryTelemetryRequestMode$inboundSchema: z.ZodNativeEnum<
   typeof QueryTelemetryRequestMode
-> = z.nativeEnum(QueryTelemetryRequestMode);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(QueryTelemetryRequestMode));
 /** @internal */
 export const QueryTelemetryRequestMode$outboundSchema: z.ZodNativeEnum<
   typeof QueryTelemetryRequestMode
@@ -120,7 +120,7 @@ export const QueryTelemetryRequestMode$outboundSchema: z.ZodNativeEnum<
 /** @internal */
 export const QueryTelemetryRequestSort$inboundSchema: z.ZodNativeEnum<
   typeof QueryTelemetryRequestSort
-> = z.nativeEnum(QueryTelemetryRequestSort);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(QueryTelemetryRequestSort));
 /** @internal */
 export const QueryTelemetryRequestSort$outboundSchema: z.ZodNativeEnum<
   typeof QueryTelemetryRequestSort
@@ -131,38 +131,40 @@ export const QueryTelemetryRequest$inboundSchema: z.ZodType<
   QueryTelemetryRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  source: TelemetrySource$inboundSchema.optional(),
-  from: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  to: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  compute: z.array(TraceCompute$inboundSchema).optional(),
-  grain: z.string().optional(),
-  group_by: z.array(z.string()).optional(),
-  filters: z.array(TraceFilter$inboundSchema).optional(),
-  filter_operator: z.string().optional(),
-  limit: z.number().int().optional(),
-  time_zone: z.string().optional(),
-  include_totals: z.boolean().optional(),
-  mode: QueryTelemetryRequestMode$inboundSchema.optional(),
-  sort: QueryTelemetryRequestSort$inboundSchema.optional(),
-  interval_seconds: z.number().int().optional(),
-  selected_range_seconds: z.number().int().optional(),
-  project_id: z.string().optional(),
-  query: z.string().optional(),
-  oql: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "group_by": "groupBy",
-    "filter_operator": "filterOperator",
-    "time_zone": "timeZone",
-    "include_totals": "includeTotals",
-    "interval_seconds": "intervalSeconds",
-    "selected_range_seconds": "selectedRangeSeconds",
-    "project_id": "projectId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    source: TelemetrySource$inboundSchema.optional(),
+    from: z.string().datetime({ offset: true }).transform(v => new Date(v))
+      .optional(),
+    to: z.string().datetime({ offset: true }).transform(v => new Date(v))
+      .optional(),
+    compute: z.array(TraceCompute$inboundSchema).optional(),
+    grain: z.string().optional(),
+    group_by: z.array(z.string()).optional(),
+    filters: z.array(TraceFilter$inboundSchema).optional(),
+    filter_operator: z.string().optional(),
+    limit: z.number().int().optional(),
+    time_zone: z.string().optional(),
+    include_totals: z.boolean().optional(),
+    mode: QueryTelemetryRequestMode$inboundSchema.optional(),
+    sort: QueryTelemetryRequestSort$inboundSchema.optional(),
+    interval_seconds: z.number().int().optional(),
+    selected_range_seconds: z.number().int().optional(),
+    project_id: z.string().optional(),
+    query: z.string().optional(),
+    oql: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "group_by": "groupBy",
+      "filter_operator": "filterOperator",
+      "time_zone": "timeZone",
+      "include_totals": "includeTotals",
+      "interval_seconds": "intervalSeconds",
+      "selected_range_seconds": "selectedRangeSeconds",
+      "project_id": "projectId",
+    });
+  })
+);
 /** @internal */
 export type QueryTelemetryRequest$Outbound = {
   source?: string | undefined;
@@ -190,36 +192,38 @@ export const QueryTelemetryRequest$outboundSchema: z.ZodType<
   QueryTelemetryRequest$Outbound,
   z.ZodTypeDef,
   QueryTelemetryRequest
-> = z.object({
-  source: TelemetrySource$outboundSchema.optional(),
-  from: z.date().transform(v => v.toISOString()).optional(),
-  to: z.date().transform(v => v.toISOString()).optional(),
-  compute: z.array(TraceCompute$outboundSchema).optional(),
-  grain: z.string().optional(),
-  groupBy: z.array(z.string()).optional(),
-  filters: z.array(TraceFilter$outboundSchema).optional(),
-  filterOperator: z.string().optional(),
-  limit: z.number().int().optional(),
-  timeZone: z.string().optional(),
-  includeTotals: z.boolean().optional(),
-  mode: QueryTelemetryRequestMode$outboundSchema.optional(),
-  sort: QueryTelemetryRequestSort$outboundSchema.optional(),
-  intervalSeconds: z.number().int().optional(),
-  selectedRangeSeconds: z.number().int().optional(),
-  projectId: z.string().optional(),
-  query: z.string().optional(),
-  oql: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    groupBy: "group_by",
-    filterOperator: "filter_operator",
-    timeZone: "time_zone",
-    includeTotals: "include_totals",
-    intervalSeconds: "interval_seconds",
-    selectedRangeSeconds: "selected_range_seconds",
-    projectId: "project_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    source: TelemetrySource$outboundSchema.optional(),
+    from: z.date().transform(v => v.toISOString()).optional(),
+    to: z.date().transform(v => v.toISOString()).optional(),
+    compute: z.array(TraceCompute$outboundSchema).optional(),
+    grain: z.string().optional(),
+    groupBy: z.array(z.string()).optional(),
+    filters: z.array(TraceFilter$outboundSchema).optional(),
+    filterOperator: z.string().optional(),
+    limit: z.number().int().optional(),
+    timeZone: z.string().optional(),
+    includeTotals: z.boolean().optional(),
+    mode: QueryTelemetryRequestMode$outboundSchema.optional(),
+    sort: QueryTelemetryRequestSort$outboundSchema.optional(),
+    intervalSeconds: z.number().int().optional(),
+    selectedRangeSeconds: z.number().int().optional(),
+    projectId: z.string().optional(),
+    query: z.string().optional(),
+    oql: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      groupBy: "group_by",
+      filterOperator: "filter_operator",
+      timeZone: "time_zone",
+      includeTotals: "include_totals",
+      intervalSeconds: "interval_seconds",
+      selectedRangeSeconds: "selected_range_seconds",
+      projectId: "project_id",
+    });
+  })
+);
 
 export function queryTelemetryRequestToJSON(
   queryTelemetryRequest: QueryTelemetryRequest,

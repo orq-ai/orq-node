@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 /**
  * Lists available memory stores
@@ -32,15 +33,17 @@ export const RetrieveMemoryStoresToolInput$outboundSchema: z.ZodType<
   RetrieveMemoryStoresToolInput$Outbound,
   z.ZodTypeDef,
   RetrieveMemoryStoresToolInput
-> = z.object({
-  type: z.literal("retrieve_memory_stores"),
-  requiresApproval: z.boolean().optional(),
-  configuration: z.record(z.any()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    requiresApproval: "requires_approval",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("retrieve_memory_stores"),
+    requiresApproval: z.boolean().optional(),
+    configuration: z.record(z.any()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      requiresApproval: "requires_approval",
+    });
+  })
+);
 
 export function retrieveMemoryStoresToolInputToJSON(
   retrieveMemoryStoresToolInput: RetrieveMemoryStoresToolInput,

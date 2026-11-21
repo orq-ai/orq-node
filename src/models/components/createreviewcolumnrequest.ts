@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type CreateReviewColumnRequest = {
   humanEvalId?: string | undefined;
@@ -25,18 +26,20 @@ export const CreateReviewColumnRequest$outboundSchema: z.ZodType<
   CreateReviewColumnRequest$Outbound,
   z.ZodTypeDef,
   CreateReviewColumnRequest
-> = z.object({
-  humanEvalId: z.string().optional(),
-  displayName: z.string().optional(),
-  humanEvalType: z.string().optional(),
-  position: z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    humanEvalId: "human_eval_id",
-    displayName: "display_name",
-    humanEvalType: "human_eval_type",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    humanEvalId: z.string().optional(),
+    displayName: z.string().optional(),
+    humanEvalType: z.string().optional(),
+    position: z.number().int().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      humanEvalId: "human_eval_id",
+      displayName: "display_name",
+      humanEvalType: "human_eval_type",
+    });
+  })
+);
 
 export function createReviewColumnRequestToJSON(
   createReviewColumnRequest: CreateReviewColumnRequest,

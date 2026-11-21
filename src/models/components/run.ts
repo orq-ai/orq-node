@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -49,48 +49,50 @@ export type Run = {
 };
 
 /** @internal */
-export const Run$inboundSchema: z.ZodType<Run, z.ZodTypeDef, unknown> = z
-  .object({
-    run_id: z.string().optional(),
-    experiment_id: z.string().optional(),
-    key: z.string().optional(),
-    status: RunStatus$inboundSchema.optional(),
-    dataset_id: z.string().optional(),
-    dataset_version_id: z.string().optional(),
-    row_count: z.number().int().optional(),
-    cell_status_counts: CellStatusCounts$inboundSchema.optional(),
-    columns: z.array(Column$inboundSchema).optional(),
-    settings: z.nullable(RunSettings$inboundSchema).optional(),
-    started_at: z.nullable(
-      z.string().datetime({ offset: true }).transform(v => new Date(v)),
-    ).optional(),
-    completed_at: z.nullable(
-      z.string().datetime({ offset: true }).transform(v => new Date(v)),
-    ).optional(),
-    created_at: z.string().datetime({ offset: true }).transform(v =>
-      new Date(v)
-    ).optional(),
-    updated_at: z.string().datetime({ offset: true }).transform(v =>
-      new Date(v)
-    ).optional(),
-    metrics: z.record(z.number()).optional(),
-    stats: RunStats$inboundSchema.optional(),
-    created_by_id: z.string().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "run_id": "runId",
-      "experiment_id": "experimentId",
-      "dataset_id": "datasetId",
-      "dataset_version_id": "datasetVersionId",
-      "row_count": "rowCount",
-      "cell_status_counts": "cellStatusCounts",
-      "started_at": "startedAt",
-      "completed_at": "completedAt",
-      "created_at": "createdAt",
-      "updated_at": "updatedAt",
-      "created_by_id": "createdById",
-    });
-  });
+export const Run$inboundSchema: z.ZodType<Run, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      run_id: z.string().optional(),
+      experiment_id: z.string().optional(),
+      key: z.string().optional(),
+      status: RunStatus$inboundSchema.optional(),
+      dataset_id: z.string().optional(),
+      dataset_version_id: z.string().optional(),
+      row_count: z.number().int().optional(),
+      cell_status_counts: CellStatusCounts$inboundSchema.optional(),
+      columns: z.array(Column$inboundSchema).optional(),
+      settings: z.nullable(RunSettings$inboundSchema).optional(),
+      started_at: z.nullable(
+        z.string().datetime({ offset: true }).transform(v => new Date(v)),
+      ).optional(),
+      completed_at: z.nullable(
+        z.string().datetime({ offset: true }).transform(v => new Date(v)),
+      ).optional(),
+      created_at: z.string().datetime({ offset: true }).transform(v =>
+        new Date(v)
+      ).optional(),
+      updated_at: z.string().datetime({ offset: true }).transform(v =>
+        new Date(v)
+      ).optional(),
+      metrics: z.record(z.number()).optional(),
+      stats: RunStats$inboundSchema.optional(),
+      created_by_id: z.string().optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "run_id": "runId",
+        "experiment_id": "experimentId",
+        "dataset_id": "datasetId",
+        "dataset_version_id": "datasetVersionId",
+        "row_count": "rowCount",
+        "cell_status_counts": "cellStatusCounts",
+        "started_at": "startedAt",
+        "completed_at": "completedAt",
+        "created_at": "createdAt",
+        "updated_at": "updatedAt",
+        "created_by_id": "createdById",
+      });
+    })
+  );
 
 export function runFromJSON(
   jsonString: string,

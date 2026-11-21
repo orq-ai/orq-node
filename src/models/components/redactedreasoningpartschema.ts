@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -26,10 +26,12 @@ export const RedactedReasoningPartSchema$inboundSchema: z.ZodType<
   RedactedReasoningPartSchema,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("redacted_reasoning"),
-  data: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("redacted_reasoning"),
+    data: z.string(),
+  })
+);
 /** @internal */
 export type RedactedReasoningPartSchema$Outbound = {
   type: "redacted_reasoning";
@@ -41,10 +43,12 @@ export const RedactedReasoningPartSchema$outboundSchema: z.ZodType<
   RedactedReasoningPartSchema$Outbound,
   z.ZodTypeDef,
   RedactedReasoningPartSchema
-> = z.object({
-  type: z.literal("redacted_reasoning"),
-  data: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("redacted_reasoning"),
+    data: z.string(),
+  })
+);
 
 export function redactedReasoningPartSchemaToJSON(
   redactedReasoningPartSchema: RedactedReasoningPartSchema,

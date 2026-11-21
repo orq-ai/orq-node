@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -19,17 +19,19 @@ export const ChunkMetadata$inboundSchema: z.ZodType<
   ChunkMetadata,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  start_index: z.number().int(),
-  end_index: z.number().int(),
-  token_count: z.number().int(),
-}).transform((v) => {
-  return remap$(v, {
-    "start_index": "startIndex",
-    "end_index": "endIndex",
-    "token_count": "tokenCount",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    start_index: z.number().int(),
+    end_index: z.number().int(),
+    token_count: z.number().int(),
+  }).transform((v) => {
+    return remap$(v, {
+      "start_index": "startIndex",
+      "end_index": "endIndex",
+      "token_count": "tokenCount",
+    });
+  })
+);
 
 export function chunkMetadataFromJSON(
   jsonString: string,

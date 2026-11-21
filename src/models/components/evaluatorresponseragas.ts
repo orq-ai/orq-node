@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -69,41 +69,45 @@ export type EvaluatorResponseRagas = {
 /** @internal */
 export const EvaluatorResponseRagasOutputType$inboundSchema: z.ZodNativeEnum<
   typeof EvaluatorResponseRagasOutputType
-> = z.nativeEnum(EvaluatorResponseRagasOutputType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(EvaluatorResponseRagasOutputType)
+);
 
 /** @internal */
-export const RagasMetric$inboundSchema: z.ZodNativeEnum<typeof RagasMetric> = z
-  .nativeEnum(RagasMetric);
+export const RagasMetric$inboundSchema: z.ZodNativeEnum<typeof RagasMetric> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(RagasMetric));
 
 /** @internal */
 export const EvaluatorResponseRagas$inboundSchema: z.ZodType<
   EvaluatorResponseRagas,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  _id: z.string(),
-  description: z.string(),
-  created: z.string().default("2026-08-05T15:12:51.947Z"),
-  updated: z.string().default("2026-08-05T15:12:51.947Z"),
-  updated_by_id: z.nullable(z.string()).optional(),
-  project_id: z.string().optional(),
-  timeout: z.nullable(z.number().int()).optional(),
-  guardrail_config: z.any().optional(),
-  type: z.literal("ragas"),
-  output_type: EvaluatorResponseRagasOutputType$inboundSchema,
-  ragas_metric: RagasMetric$inboundSchema,
-  key: z.string(),
-  model: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "_id": "id",
-    "updated_by_id": "updatedById",
-    "project_id": "projectId",
-    "guardrail_config": "guardrailConfig",
-    "output_type": "outputType",
-    "ragas_metric": "ragasMetric",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    _id: z.string(),
+    description: z.string(),
+    created: z.string().default("2026-08-05T15:12:51.947Z"),
+    updated: z.string().default("2026-08-05T15:12:51.947Z"),
+    updated_by_id: z.nullable(z.string()).optional(),
+    project_id: z.string().optional(),
+    timeout: z.nullable(z.number().int()).optional(),
+    guardrail_config: z.any().optional(),
+    type: z.literal("ragas"),
+    output_type: EvaluatorResponseRagasOutputType$inboundSchema,
+    ragas_metric: RagasMetric$inboundSchema,
+    key: z.string(),
+    model: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "_id": "id",
+      "updated_by_id": "updatedById",
+      "project_id": "projectId",
+      "guardrail_config": "guardrailConfig",
+      "output_type": "outputType",
+      "ragas_metric": "ragasMetric",
+    });
+  })
+);
 
 export function evaluatorResponseRagasFromJSON(
   jsonString: string,

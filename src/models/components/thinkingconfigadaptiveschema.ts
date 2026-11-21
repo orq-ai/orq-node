@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -40,7 +40,9 @@ export type ThinkingConfigAdaptiveSchema = {
 /** @internal */
 export const ThinkingConfigAdaptiveSchemaDisplay$inboundSchema: z.ZodNativeEnum<
   typeof ThinkingConfigAdaptiveSchemaDisplay
-> = z.nativeEnum(ThinkingConfigAdaptiveSchemaDisplay);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(ThinkingConfigAdaptiveSchemaDisplay)
+);
 /** @internal */
 export const ThinkingConfigAdaptiveSchemaDisplay$outboundSchema:
   z.ZodNativeEnum<typeof ThinkingConfigAdaptiveSchemaDisplay> =
@@ -51,10 +53,12 @@ export const ThinkingConfigAdaptiveSchema$inboundSchema: z.ZodType<
   ThinkingConfigAdaptiveSchema,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("adaptive"),
-  display: ThinkingConfigAdaptiveSchemaDisplay$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("adaptive"),
+    display: ThinkingConfigAdaptiveSchemaDisplay$inboundSchema.optional(),
+  })
+);
 /** @internal */
 export type ThinkingConfigAdaptiveSchema$Outbound = {
   type: "adaptive";
@@ -66,10 +70,12 @@ export const ThinkingConfigAdaptiveSchema$outboundSchema: z.ZodType<
   ThinkingConfigAdaptiveSchema$Outbound,
   z.ZodTypeDef,
   ThinkingConfigAdaptiveSchema
-> = z.object({
-  type: z.literal("adaptive"),
-  display: ThinkingConfigAdaptiveSchemaDisplay$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("adaptive"),
+    display: ThinkingConfigAdaptiveSchemaDisplay$outboundSchema.optional(),
+  })
+);
 
 export function thinkingConfigAdaptiveSchemaToJSON(
   thinkingConfigAdaptiveSchema: ThinkingConfigAdaptiveSchema,

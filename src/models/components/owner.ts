@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type Owner = {
   type: string;
@@ -21,14 +22,16 @@ export const Owner$outboundSchema: z.ZodType<
   Owner$Outbound,
   z.ZodTypeDef,
   Owner
-> = z.object({
-  type: z.string(),
-  userId: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    userId: "user_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.string(),
+    userId: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      userId: "user_id",
+    });
+  })
+);
 
 export function ownerToJSON(owner: Owner): string {
   return JSON.stringify(Owner$outboundSchema.parse(owner));

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type TraceSort = {
   field?: string | undefined;
@@ -20,10 +21,12 @@ export const TraceSort$outboundSchema: z.ZodType<
   TraceSort$Outbound,
   z.ZodTypeDef,
   TraceSort
-> = z.object({
-  field: z.string().optional(),
-  order: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    field: z.string().optional(),
+    order: z.string().optional(),
+  })
+);
 
 export function traceSortToJSON(traceSort: TraceSort): string {
   return JSON.stringify(TraceSort$outboundSchema.parse(traceSort));

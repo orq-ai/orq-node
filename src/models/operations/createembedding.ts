@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
@@ -102,7 +102,7 @@ export type CreateEmbeddingResponseBody = {
 /** @internal */
 export const EncodingFormat$outboundSchema: z.ZodNativeEnum<
   typeof EncodingFormat
-> = z.nativeEnum(EncodingFormat);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(EncodingFormat));
 
 /** @internal */
 export type CreateEmbeddingInput2$Outbound = string | Array<number>;
@@ -112,7 +112,9 @@ export const CreateEmbeddingInput2$outboundSchema: z.ZodType<
   CreateEmbeddingInput2$Outbound,
   z.ZodTypeDef,
   CreateEmbeddingInput2
-> = z.union([z.string(), z.array(z.number().int())]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.array(z.number().int())])
+);
 
 export function createEmbeddingInput2ToJSON(
   createEmbeddingInput2: CreateEmbeddingInput2,
@@ -132,10 +134,12 @@ export const CreateEmbeddingInput$outboundSchema: z.ZodType<
   CreateEmbeddingInput$Outbound,
   z.ZodTypeDef,
   CreateEmbeddingInput
-> = z.union([
-  z.string(),
-  z.array(z.union([z.string(), z.array(z.number().int())])),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.string(),
+    z.array(z.union([z.string(), z.array(z.number().int())])),
+  ])
+);
 
 export function createEmbeddingInputToJSON(
   createEmbeddingInput: CreateEmbeddingInput,
@@ -167,32 +171,34 @@ export const CreateEmbeddingRequestBody$outboundSchema: z.ZodType<
   CreateEmbeddingRequestBody$Outbound,
   z.ZodTypeDef,
   CreateEmbeddingRequestBody
-> = z.object({
-  cache: components.EmbeddingCacheConfig$outboundSchema.optional(),
-  dimensions: z.number().int().optional(),
-  encodingFormat: EncodingFormat$outboundSchema.optional(),
-  fallbackOnCodes: z.nullable(z.array(z.number().int())).optional(),
-  fallbacks: z.nullable(z.array(components.FallbackConfig$outboundSchema))
-    .optional(),
-  input: z.union([
-    z.string(),
-    z.array(z.union([z.string(), z.array(z.number().int())])),
-  ]),
-  loadBalancer: components.EmbeddingLoadBalancerConfig$outboundSchema
-    .optional(),
-  model: z.string(),
-  name: z.string().optional(),
-  orq: components.EmbeddingOrqParams$outboundSchema.optional(),
-  retry: components.EmbeddingRetryConfig$outboundSchema.optional(),
-  timeout: components.EmbeddingTimeoutConfig$outboundSchema.optional(),
-  user: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    encodingFormat: "encoding_format",
-    fallbackOnCodes: "fallback_on_codes",
-    loadBalancer: "load_balancer",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    cache: components.EmbeddingCacheConfig$outboundSchema.optional(),
+    dimensions: z.number().int().optional(),
+    encodingFormat: EncodingFormat$outboundSchema.optional(),
+    fallbackOnCodes: z.nullable(z.array(z.number().int())).optional(),
+    fallbacks: z.nullable(z.array(components.FallbackConfig$outboundSchema))
+      .optional(),
+    input: z.union([
+      z.string(),
+      z.array(z.union([z.string(), z.array(z.number().int())])),
+    ]),
+    loadBalancer: components.EmbeddingLoadBalancerConfig$outboundSchema
+      .optional(),
+    model: z.string(),
+    name: z.string().optional(),
+    orq: components.EmbeddingOrqParams$outboundSchema.optional(),
+    retry: components.EmbeddingRetryConfig$outboundSchema.optional(),
+    timeout: components.EmbeddingTimeoutConfig$outboundSchema.optional(),
+    user: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      encodingFormat: "encoding_format",
+      fallbackOnCodes: "fallback_on_codes",
+      loadBalancer: "load_balancer",
+    });
+  })
+);
 
 export function createEmbeddingRequestBodyToJSON(
   createEmbeddingRequestBody: CreateEmbeddingRequestBody,
@@ -205,19 +211,21 @@ export function createEmbeddingRequestBodyToJSON(
 /** @internal */
 export const CreateEmbeddingObject$inboundSchema: z.ZodNativeEnum<
   typeof CreateEmbeddingObject
-> = z.nativeEnum(CreateEmbeddingObject);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(CreateEmbeddingObject));
 
 /** @internal */
 export const CreateEmbeddingResponseBody$inboundSchema: z.ZodType<
   CreateEmbeddingResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.nullable(z.array(components.PublicEmbeddingData$inboundSchema)),
-  model: z.string(),
-  object: CreateEmbeddingObject$inboundSchema,
-  usage: components.PublicEmbeddingUsage$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.nullable(z.array(components.PublicEmbeddingData$inboundSchema)),
+    model: z.string(),
+    object: CreateEmbeddingObject$inboundSchema,
+    usage: components.PublicEmbeddingUsage$inboundSchema,
+  })
+);
 
 export function createEmbeddingResponseBodyFromJSON(
   jsonString: string,

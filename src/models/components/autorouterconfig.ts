@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -58,24 +58,26 @@ export const AutoRouterConfig$inboundSchema: z.ZodType<
   AutoRouterConfig,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  benchmark_model: z.string().optional(),
-  economical_model: z.string().optional(),
-  id: z.string().optional(),
-  models: z.nullable(z.array(z.string())).optional(),
-  profile: z.string().optional(),
-  session_affinity: SessionAffinityConfig$inboundSchema.optional(),
-  strong_model: z.string().optional(),
-  v2: AutoRouterV2Config$inboundSchema.optional(),
-  version: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "benchmark_model": "benchmarkModel",
-    "economical_model": "economicalModel",
-    "session_affinity": "sessionAffinity",
-    "strong_model": "strongModel",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    benchmark_model: z.string().optional(),
+    economical_model: z.string().optional(),
+    id: z.string().optional(),
+    models: z.nullable(z.array(z.string())).optional(),
+    profile: z.string().optional(),
+    session_affinity: SessionAffinityConfig$inboundSchema.optional(),
+    strong_model: z.string().optional(),
+    v2: AutoRouterV2Config$inboundSchema.optional(),
+    version: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "benchmark_model": "benchmarkModel",
+      "economical_model": "economicalModel",
+      "session_affinity": "sessionAffinity",
+      "strong_model": "strongModel",
+    });
+  })
+);
 /** @internal */
 export type AutoRouterConfig$Outbound = {
   benchmark_model?: string | undefined;
@@ -94,24 +96,26 @@ export const AutoRouterConfig$outboundSchema: z.ZodType<
   AutoRouterConfig$Outbound,
   z.ZodTypeDef,
   AutoRouterConfig
-> = z.object({
-  benchmarkModel: z.string().optional(),
-  economicalModel: z.string().optional(),
-  id: z.string().optional(),
-  models: z.nullable(z.array(z.string())).optional(),
-  profile: z.string().optional(),
-  sessionAffinity: SessionAffinityConfig$outboundSchema.optional(),
-  strongModel: z.string().optional(),
-  v2: AutoRouterV2Config$outboundSchema.optional(),
-  version: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    benchmarkModel: "benchmark_model",
-    economicalModel: "economical_model",
-    sessionAffinity: "session_affinity",
-    strongModel: "strong_model",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    benchmarkModel: z.string().optional(),
+    economicalModel: z.string().optional(),
+    id: z.string().optional(),
+    models: z.nullable(z.array(z.string())).optional(),
+    profile: z.string().optional(),
+    sessionAffinity: SessionAffinityConfig$outboundSchema.optional(),
+    strongModel: z.string().optional(),
+    v2: AutoRouterV2Config$outboundSchema.optional(),
+    version: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      benchmarkModel: "benchmark_model",
+      economicalModel: "economical_model",
+      sessionAffinity: "session_affinity",
+      strongModel: "strong_model",
+    });
+  })
+);
 
 export function autoRouterConfigToJSON(
   autoRouterConfig: AutoRouterConfig,

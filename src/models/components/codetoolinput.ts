@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 /**
  * Executes code snippets in a sandboxed environment. Must reference a pre-created code tool by key or id.
@@ -45,17 +46,19 @@ export const CodeToolInput$outboundSchema: z.ZodType<
   CodeToolInput$Outbound,
   z.ZodTypeDef,
   CodeToolInput
-> = z.object({
-  type: z.literal("code"),
-  key: z.string().optional(),
-  id: z.string().optional(),
-  requiresApproval: z.boolean().default(false),
-  timeout: z.number().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    requiresApproval: "requires_approval",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("code"),
+    key: z.string().optional(),
+    id: z.string().optional(),
+    requiresApproval: z.boolean().default(false),
+    timeout: z.number().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      requiresApproval: "requires_approval",
+    });
+  })
+);
 
 export function codeToolInputToJSON(codeToolInput: CodeToolInput): string {
   return JSON.stringify(CodeToolInput$outboundSchema.parse(codeToolInput));

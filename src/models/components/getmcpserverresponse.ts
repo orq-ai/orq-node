@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { McpServer, McpServer$inboundSchema } from "./mcpserver.js";
@@ -18,13 +18,15 @@ export const GetMcpServerResponse$inboundSchema: z.ZodType<
   GetMcpServerResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  mcp_server: McpServer$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "mcp_server": "mcpServer",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    mcp_server: McpServer$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "mcp_server": "mcpServer",
+    });
+  })
+);
 
 export function getMcpServerResponseFromJSON(
   jsonString: string,

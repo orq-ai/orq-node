@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { ExternalAgent, ExternalAgent$inboundSchema } from "./externalagent.js";
@@ -17,9 +17,11 @@ export const GetExternalAgentResponse$inboundSchema: z.ZodType<
   GetExternalAgentResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  agent: ExternalAgent$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    agent: ExternalAgent$inboundSchema.optional(),
+  })
+);
 
 export function getExternalAgentResponseFromJSON(
   jsonString: string,
