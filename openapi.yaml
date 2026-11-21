@@ -2592,7 +2592,7 @@ components:
           properties:
             _id:
               type: "string"
-              default: "reasoning_01m7yvsp8nh4d5xvnt0dcvqbsr"
+              default: "reasoning_01m7zc22rfcyb7f1cz16ypmbrw"
               description: "Unique identifier for the part. Format: reasoning_{ulid} (e.g., reasoning_01hxyz...)"
               example: "reasoning_01hxyz123abc"
             kind:
@@ -21204,6 +21204,9 @@ components:
         cached_tokens:
           format: "int64"
           type: "integer"
+        tool_use_tokens:
+          format: "int64"
+          type: "integer"
       required:
         - "cached_tokens"
         - "cache_write_tokens"
@@ -22323,8 +22326,11 @@ components:
                 description: "An input item. The \"type\" field determines the item kind: \"message\", \"function_call\", \"function_call_output\", \"item_reference\", etc."
                 properties:
                   arguments:
-                    description: "The function arguments as a JSON string (for function_call items)."
-                    type: "string"
+                    anyOf:
+                      - type: "string"
+                      - additionalProperties: true
+                        type: "object"
+                    description: "A JSON string for function calls, or an object for OpenAI tool search calls."
                   async:
                     description: "Whether a function or custom tool call runs asynchronously."
                     type: "boolean"
@@ -22332,8 +22338,10 @@ components:
                     description: "The path of the agent that sent the message (for agent_message items)."
                     type: "string"
                   call_id:
-                    description: "The function call identifier (for function_call and function_call_output items)."
-                    type: "string"
+                    description: "The call identifier. Hosted tool search can return null."
+                    type:
+                      - "string"
+                      - "null"
                   content:
                     anyOf:
                       - title: "Text"
@@ -22691,11 +22699,20 @@ components:
                   encrypted_content:
                     description: "Encrypted reasoning or compaction content. Send the item back unchanged to continue the turn."
                     type: "string"
+                  execution:
+                    description: "Execution mode of a tool search item."
+                    enum:
+                      - "server"
+                      - "client"
+                    type: "string"
                   id:
                     description: "The ID of the item. For item_reference items, this identifies the referenced item."
                     type: "string"
                   name:
                     description: "The name of the function that was called (for function_call items)."
+                    type: "string"
+                  namespace:
+                    description: "Namespace of the function call."
                     type: "string"
                   output:
                     description: "The output of the function call (for function_call_output type)."
@@ -22801,6 +22818,12 @@ components:
                   thought_signature:
                     description: "An opaque signature some providers, such as Google Gemini, attach to their output. Send it back unchanged with the item so the model can continue its reasoning."
                     type: "string"
+                  tools:
+                    description: "Tool definitions returned in tool_search_output or provided by additional_tools."
+                    items:
+                      additionalProperties: true
+                      type: "object"
+                    type: "array"
                   type:
                     description: "The type of item."
                     enum:
@@ -23085,7 +23108,7 @@ components:
                     title: "Cache control"
                     type: "object"
                   defer_loading:
-                    description: "Hide this tool from the model until an orq:tool_search call reveals it. Requires an orq:tool_search tool in the same request."
+                    description: "Load this function on demand using tool_search on supported OpenAI models or orq:tool_search on the gateway."
                     type: "boolean"
                   description:
                     description: "A description of what the function does."
@@ -23109,10 +23132,171 @@ components:
                   - "name"
                 title: "Function"
                 type: "object"
+              - description: "Load deferred tools on demand through the native OpenAI Responses API."
+                properties:
+                  description:
+                    description: "Describe the search performed by a client-executed tool."
+                    type: "string"
+                  execution:
+                    description: "Defaults to server. In client mode, return the matching tools in a tool_search_output item."
+                    enum:
+                      - "server"
+                      - "client"
+                    type: "string"
+                  parameters:
+                    additionalProperties: true
+                    description: "JSON Schema for the client-executed search arguments."
+                    type: "object"
+                  type:
+                    enum:
+                      - "tool_search"
+                    type: "string"
+                required:
+                  - "type"
+                title: "OpenAI Tool Search"
+                type: "object"
+              - description: "Group related OpenAI function and custom tools. Set defer_loading on individual functions to use native tool search."
+                properties:
+                  description:
+                    type: "string"
+                  name:
+                    type: "string"
+                  tools:
+                    items:
+                      anyOf:
+                        - description: "A function tool the model can call."
+                          properties:
+                            async:
+                              description: "Whether the tool response can be returned asynchronously."
+                              type: "boolean"
+                            cache_control:
+                              properties:
+                                ttl:
+                                  default: "5m"
+                                  description: "The time-to-live for the cache control breakpoint. This may be one of the following values:\n\n- `5m`: 5 minutes\n- `1h`: 1 hour\n\nDefaults to `5m`. Only supported by Anthropic Claude models."
+                                  enum:
+                                    - "5m"
+                                    - "1h"
+                                  type: "string"
+                                type:
+                                  description: "Create a cache control breakpoint at this content block. Accepts only the value \"ephemeral\"."
+                                  enum:
+                                    - "ephemeral"
+                                  type: "string"
+                              required:
+                                - "type"
+                              title: "Cache control"
+                              type: "object"
+                            defer_loading:
+                              description: "Load this function on demand using tool_search on supported OpenAI models or orq:tool_search on the gateway."
+                              type: "boolean"
+                            description:
+                              description: "A description of what the function does."
+                              type: "string"
+                            name:
+                              description: "The name of the function."
+                              type: "string"
+                            parameters:
+                              additionalProperties: true
+                              description: "The parameters the function accepts, as a JSON Schema object."
+                              type: "object"
+                            strict:
+                              description: "Whether to enforce strict parameter validation."
+                              type: "boolean"
+                            type:
+                              enum:
+                                - "function"
+                              type: "string"
+                          required:
+                            - "type"
+                            - "name"
+                          title: "Function"
+                          type: "object"
+                        - description: "A custom tool that accepts free-form input."
+                          properties:
+                            async:
+                              description: "Whether the tool response can be returned asynchronously."
+                              type: "boolean"
+                            defer_loading:
+                              description: "Load this custom tool on demand using native OpenAI tool_search."
+                              type: "boolean"
+                            description:
+                              description: "A description of what the custom tool does."
+                              type: "string"
+                            name:
+                              description: "The name of the custom tool."
+                              type: "string"
+                            type:
+                              enum:
+                                - "custom"
+                              type: "string"
+                          required:
+                            - "type"
+                            - "name"
+                          title: "Custom"
+                          type: "object"
+                    type: "array"
+                  type:
+                    enum:
+                      - "namespace"
+                    type: "string"
+                required:
+                  - "type"
+                  - "name"
+                  - "description"
+                  - "tools"
+                title: "OpenAI Tool Namespace"
+                type: "object"
+              - description: "A remote MCP server or connector called by the native OpenAI Responses API."
+                properties:
+                  allowed_tools:
+                    anyOf:
+                      - items:
+                          type: "string"
+                        type: "array"
+                      - additionalProperties: true
+                        type: "object"
+                  authorization:
+                    type: "string"
+                  connector_id:
+                    type: "string"
+                  defer_loading:
+                    description: "Load tools from this server on demand when native tool_search is available."
+                    type: "boolean"
+                  headers:
+                    additionalProperties:
+                      type: "string"
+                    type: "object"
+                  require_approval:
+                    anyOf:
+                      - enum:
+                          - "always"
+                          - "never"
+                        type: "string"
+                      - additionalProperties: true
+                        type: "object"
+                  server_description:
+                    type: "string"
+                  server_label:
+                    type: "string"
+                  server_url:
+                    type: "string"
+                  type:
+                    enum:
+                      - "mcp"
+                    type: "string"
+                required:
+                  - "type"
+                  - "server_label"
+                title: "OpenAI MCP Tool"
+                type: "object"
               - description: "A custom tool that accepts free-form input."
                 properties:
                   async:
                     description: "Whether the tool response can be returned asynchronously."
+                    type: "boolean"
+                  defer_loading:
+                    description: "Load this custom tool on demand using native OpenAI tool_search."
                     type: "boolean"
                   description:
                     description: "A description of what the custom tool does."
@@ -29290,7 +29474,7 @@ paths:
                                 type: "string"
                                 format: "ulid"
                                 pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                                default: "01M7YVSP80MEWB112VP7B2TZCW"
+                                default: "01M7ZC22QM49S86DHEENW9KX1S"
                                 readOnly: true
                                 description: "The unique identifier of the playground knowledge base"
                               knowledge_id:
@@ -38709,7 +38893,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01M7YVSP9JPAYNN2QJFNK94PBS"
+                                          default: "01M7ZC22SM7QTAENY5DCBSCA78"
                                         name:
                                           type: "string"
                                         description:
@@ -40337,7 +40521,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01M7YVSP9V8FD0GXVPD190VVHS"
+                                          default: "01M7ZC22T3BECEERENAWNQY1ZE"
                                         name:
                                           type: "string"
                                         description:
@@ -49404,7 +49588,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M7YVSPANCSNQQ9CYA02NDHME"
+                              default: "tool_01M7ZC22V3KV61WAMSCVKVSFV7"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -49505,7 +49689,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M7YVSPAN7C122ATW7T7MAA7D"
+                              default: "tool_01M7ZC22V4225TMDT1NSGAP1XD"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -49608,7 +49792,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M7YVSPAN831G4AP22CWVQRG6"
+                              default: "tool_01M7ZC22V4NSPJFX0VFBPGVSVP"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -49752,7 +49936,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M7YVSPAP8T9DWZ7JJAK3SY74"
+                              default: "tool_01M7ZC22V5CQGPES46DJ6DDJMM"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -50244,7 +50428,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M7YVSPAVDX46N9F25857T68E"
+                        default: "tool_01M7ZC22V7HVAXYXA5YM32W4TV"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -50345,7 +50529,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M7YVSPAVMM7HPKF79Y2VFHZ6"
+                        default: "tool_01M7ZC22V81ED9NKT86KB02YY4"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -50448,7 +50632,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M7YVSPAVWHQA509CGR467QZT"
+                        default: "tool_01M7ZC22V8XD6SMSYBMTFQRNYY"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -50592,7 +50776,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M7YVSPAWQKZ0M200P2X38Y6V"
+                        default: "tool_01M7ZC22V93XJ106B7EFK8PN7C"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -51097,7 +51281,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M7YVSPAXXZPJBZC3A6XVC1J7"
+                        default: "tool_01M7ZC22VA0YFB8FT7BFEN92X7"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -51198,7 +51382,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M7YVSPAXFCPTME4E6MZPAQ3A"
+                        default: "tool_01M7ZC22VAVXXDX6B9SH4D92HK"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -51301,7 +51485,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M7YVSPAX6BR0MAJKGA0T3MZE"
+                        default: "tool_01M7ZC22VB89ZVPHDSJTA5BE73"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -51445,7 +51629,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M7YVSPAYT6P6FGDJENEYZAYQ"
+                        default: "tool_01M7ZC22VB1JGD0BZ220Y6RSSB"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -51614,7 +51798,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M7YVSPB1AM47FSF9BM6YWC5Y"
+                        default: "tool_01M7ZC22VEXK64TGSMS4C9KZ01"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -51715,7 +51899,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M7YVSPB14GKARZQF9MR7VQ5C"
+                        default: "tool_01M7ZC22VFZG094RB637MAACT0"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -51818,7 +52002,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M7YVSPB1DP4R3V3RCQF1AS7D"
+                        default: "tool_01M7ZC22VF1M4BK04WFMQ34CDD"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -51962,7 +52146,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M7YVSPB1D3DQD2HFY338V9TE"
+                        default: "tool_01M7ZC22VF7D1YEPAB45MYFNDS"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -81992,8 +82176,11 @@ paths:
                         description: "An input item. The \"type\" field determines the item kind: \"message\", \"function_call\", \"function_call_output\", \"item_reference\", etc."
                         properties:
                           arguments:
-                            description: "The function arguments as a JSON string (for function_call items)."
-                            type: "string"
+                            anyOf:
+                              - type: "string"
+                              - additionalProperties: true
+                                type: "object"
+                            description: "A JSON string for function calls, or an object for OpenAI tool search calls."
                           async:
                             description: "Whether a function or custom tool call runs asynchronously."
                             type: "boolean"
@@ -82001,8 +82188,10 @@ paths:
                             description: "The path of the agent that sent the message (for agent_message items)."
                             type: "string"
                           call_id:
-                            description: "The function call identifier (for function_call and function_call_output items)."
-                            type: "string"
+                            description: "The call identifier. Hosted tool search can return null."
+                            type:
+                              - "string"
+                              - "null"
                           content:
                             anyOf:
                               - title: "Text"
@@ -82360,11 +82549,20 @@ paths:
                           encrypted_content:
                             description: "Encrypted reasoning or compaction content. Send the item back unchanged to continue the turn."
                             type: "string"
+                          execution:
+                            description: "Execution mode of a tool search item."
+                            enum:
+                              - "server"
+                              - "client"
+                            type: "string"
                           id:
                             description: "The ID of the item. For item_reference items, this identifies the referenced item."
                             type: "string"
                           name:
                             description: "The name of the function that was called (for function_call items)."
+                            type: "string"
+                          namespace:
+                            description: "Namespace of the function call."
                             type: "string"
                           output:
                             description: "The output of the function call (for function_call_output type)."
@@ -82470,6 +82668,12 @@ paths:
                           thought_signature:
                             description: "An opaque signature some providers, such as Google Gemini, attach to their output. Send it back unchanged with the item so the model can continue its reasoning."
                             type: "string"
+                          tools:
+                            description: "Tool definitions returned in tool_search_output or provided by additional_tools."
+                            items:
+                              additionalProperties: true
+                              type: "object"
+                            type: "array"
                           type:
                             description: "The type of item."
                             enum:
@@ -82754,7 +82958,7 @@ paths:
                             title: "Cache control"
                             type: "object"
                           defer_loading:
-                            description: "Hide this tool from the model until an orq:tool_search call reveals it. Requires an orq:tool_search tool in the same request."
+                            description: "Load this function on demand using tool_search on supported OpenAI models or orq:tool_search on the gateway."
                             type: "boolean"
                           description:
                             description: "A description of what the function does."
@@ -82778,10 +82982,171 @@ paths:
                           - "name"
                         title: "Function"
                         type: "object"
+                      - description: "Load deferred tools on demand through the native OpenAI Responses API."
+                        properties:
+                          description:
+                            description: "Describe the search performed by a client-executed tool."
+                            type: "string"
+                          execution:
+                            description: "Defaults to server. In client mode, return the matching tools in a tool_search_output item."
+                            enum:
+                              - "server"
+                              - "client"
+                            type: "string"
+                          parameters:
+                            additionalProperties: true
+                            description: "JSON Schema for the client-executed search arguments."
+                            type: "object"
+                          type:
+                            enum:
+                              - "tool_search"
+                            type: "string"
+                        required:
+                          - "type"
+                        title: "OpenAI Tool Search"
+                        type: "object"
+                      - description: "Group related OpenAI function and custom tools. Set defer_loading on individual functions to use native tool search."
+                        properties:
+                          description:
+                            type: "string"
+                          name:
+                            type: "string"
+                          tools:
+                            items:
+                              anyOf:
+                                - description: "A function tool the model can call."
+                                  properties:
+                                    async:
+                                      description: "Whether the tool response can be returned asynchronously."
+                                      type: "boolean"
+                                    cache_control:
+                                      properties:
+                                        ttl:
+                                          default: "5m"
+                                          description: "The time-to-live for the cache control breakpoint. This may be one of the following values:\n\n- `5m`: 5 minutes\n- `1h`: 1 hour\n\nDefaults to `5m`. Only supported by Anthropic Claude models."
+                                          enum:
+                                            - "5m"
+                                            - "1h"
+                                          type: "string"
+                                        type:
+                                          description: "Create a cache control breakpoint at this content block. Accepts only the value \"ephemeral\"."
+                                          enum:
+                                            - "ephemeral"
+                                          type: "string"
+                                      required:
+                                        - "type"
+                                      title: "Cache control"
+                                      type: "object"
+                                    defer_loading:
+                                      description: "Load this function on demand using tool_search on supported OpenAI models or orq:tool_search on the gateway."
+                                      type: "boolean"
+                                    description:
+                                      description: "A description of what the function does."
+                                      type: "string"
+                                    name:
+                                      description: "The name of the function."
+                                      type: "string"
+                                    parameters:
+                                      additionalProperties: true
+                                      description: "The parameters the function accepts, as a JSON Schema object."
+                                      type: "object"
+                                    strict:
+                                      description: "Whether to enforce strict parameter validation."
+                                      type: "boolean"
+                                    type:
+                                      enum:
+                                        - "function"
+                                      type: "string"
+                                  required:
+                                    - "type"
+                                    - "name"
+                                  title: "Function"
+                                  type: "object"
+                                - description: "A custom tool that accepts free-form input."
+                                  properties:
+                                    async:
+                                      description: "Whether the tool response can be returned asynchronously."
+                                      type: "boolean"
+                                    defer_loading:
+                                      description: "Load this custom tool on demand using native OpenAI tool_search."
+                                      type: "boolean"
+                                    description:
+                                      description: "A description of what the custom tool does."
+                                      type: "string"
+                                    name:
+                                      description: "The name of the custom tool."
+                                      type: "string"
+                                    type:
+                                      enum:
+                                        - "custom"
+                                      type: "string"
+                                  required:
+                                    - "type"
+                                    - "name"
+                                  title: "Custom"
+                                  type: "object"
+                            type: "array"
+                          type:
+                            enum:
+                              - "namespace"
+                            type: "string"
+                        required:
+                          - "type"
+                          - "name"
+                          - "description"
+                          - "tools"
+                        title: "OpenAI Tool Namespace"
+                        type: "object"
+                      - description: "A remote MCP server or connector called by the native OpenAI Responses API."
+                        properties:
+                          allowed_tools:
+                            anyOf:
+                              - items:
+                                  type: "string"
+                                type: "array"
+                              - additionalProperties: true
+                                type: "object"
+                          authorization:
+                            type: "string"
+                          connector_id:
+                            type: "string"
+                          defer_loading:
+                            description: "Load tools from this server on demand when native tool_search is available."
+                            type: "boolean"
+                          headers:
+                            additionalProperties:
+                              type: "string"
+                            type: "object"
+                          require_approval:
+                            anyOf:
+                              - enum:
+                                  - "always"
+                                  - "never"
+                                type: "string"
+                              - additionalProperties: true
+                                type: "object"
+                          server_description:
+                            type: "string"
+                          server_label:
+                            type: "string"
+                          server_url:
+                            type: "string"
+                          type:
+                            enum:
+                              - "mcp"
+                            type: "string"
+                        required:
+                          - "type"
+                          - "server_label"
+                        title: "OpenAI MCP Tool"
+                        type: "object"
                       - description: "A custom tool that accepts free-form input."
                         properties:
                           async:
                             description: "Whether the tool response can be returned asynchronously."
+                            type: "boolean"
+                          defer_loading:
+                            description: "Load this custom tool on demand using native OpenAI tool_search."
                             type: "boolean"
                           description:
                             description: "A description of what the custom tool does."
