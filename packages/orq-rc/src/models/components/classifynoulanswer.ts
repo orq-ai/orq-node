@@ -9,7 +9,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ClassifyNoulAnswer = {
   /**
-   * How sure the model is of its answer. Emulated chat models use the largest value in probabilities. Native providers return their own confidence value, which can be below the largest probability. Present for choice, score and box answers, and native Gemini noul answers.
+   * How sure the model is of its answer. The provider returns its own confidence value, which can be below the largest probability. Present for choice, score and box answers, and native Gemini noul answers.
    */
   confidence?: number | undefined;
   /**
