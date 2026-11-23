@@ -14,6 +14,7 @@ let value: GetAllPromptsPromptField = {
     },
   ],
   retry: {
+    count: 2,
     onCodes: [
       429,
       500,

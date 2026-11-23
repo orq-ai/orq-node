@@ -25,6 +25,7 @@ async function run() {
     model: "LeBaron",
     prompt: "<value>",
     retry: {
+      count: 3,
       onCodes: [
         429,
         500,
@@ -50,6 +51,7 @@ async function run() {
     },
     orq: {
       retry: {
+        count: 3,
         onCodes: [
           429,
           500,
@@ -130,6 +132,7 @@ async function run() {
     model: "LeBaron",
     prompt: "<value>",
     retry: {
+      count: 3,
       onCodes: [
         429,
         500,
@@ -155,6 +158,7 @@ async function run() {
     },
     orq: {
       retry: {
+        count: 3,
         onCodes: [
           429,
           500,

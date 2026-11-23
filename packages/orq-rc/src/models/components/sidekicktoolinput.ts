@@ -12,7 +12,7 @@ import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 export type SidekickToolInput = {
   type: "sidekick";
   /**
-   * Whether this tool requires approval before execution
+   * Whether this tool is marked as requiring approval. An Agent runs its tools without waiting for a human decision on `POST /v3/router/responses`. See https://docs.orq.ai/ai-studio/ai-engineering/build-agents#tool-approval
    */
   requiresApproval?: boolean | undefined;
   /**

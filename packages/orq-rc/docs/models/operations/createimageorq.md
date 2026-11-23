@@ -7,6 +7,7 @@ import { CreateImageOrq } from "@orq-ai/node/models/operations";
 
 let value: CreateImageOrq = {
   retry: {
+    count: 2,
     onCodes: [
       429,
       500,

@@ -29,6 +29,7 @@ async function run() {
       "segment",
     ],
     retry: {
+      count: 3,
       onCodes: [
         429,
         500,
@@ -56,6 +57,7 @@ async function run() {
         },
       ],
       retry: {
+        count: 3,
         onCodes: [
           429,
           500,
@@ -128,6 +130,7 @@ async function run() {
       "segment",
     ],
     retry: {
+      count: 3,
       onCodes: [
         429,
         500,
@@ -155,6 +158,7 @@ async function run() {
         },
       ],
       retry: {
+        count: 3,
         onCodes: [
           429,
           500,

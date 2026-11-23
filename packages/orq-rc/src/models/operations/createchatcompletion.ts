@@ -717,7 +717,7 @@ export type CreateChatCompletionFallbacks = {
  */
 export type CreateChatCompletionRetry = {
   /**
-   * Number of retry attempts (1-5)
+   * Number of retries per model after the initial attempt (0-5). Defaults to 0 when a retry object is sent; omit retry to use the gateway default of two.
    */
   count?: number | undefined;
   /**
@@ -851,7 +851,7 @@ export type CreateChatCompletionCacheControl = {
  */
 export type CreateChatCompletionRouterChatCompletionsRetry = {
   /**
-   * Number of retry attempts (1-5)
+   * Number of retries per model after the initial attempt (0-5). Defaults to 0 when a retry object is sent; omit retry to use the gateway default of two.
    */
   count?: number | undefined;
   /**
@@ -3706,7 +3706,7 @@ export const CreateChatCompletionRetry$outboundSchema: z.ZodType<
   CreateChatCompletionRetry
 > = /* @__PURE__ */ lazySchema$(() =>
   z.object({
-    count: z.number().default(3),
+    count: z.number().default(0),
     onCodes: z.array(z.number()).optional(),
   }).transform((v) => {
     return remap$(v, {
@@ -3933,7 +3933,7 @@ export const CreateChatCompletionRouterChatCompletionsRetry$outboundSchema:
     CreateChatCompletionRouterChatCompletionsRetry
   > = /* @__PURE__ */ lazySchema$(() =>
     z.object({
-      count: z.number().default(3),
+      count: z.number().default(0),
       onCodes: z.array(z.number()).optional(),
     }).transform((v) => {
       return remap$(v, {

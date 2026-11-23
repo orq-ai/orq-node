@@ -11,6 +11,7 @@ import { CreateCompletionOrq } from "@orq-ai/node/models/operations";
 
 let value: CreateCompletionOrq = {
   retry: {
+    count: 3,
     onCodes: [
       429,
       500,

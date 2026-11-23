@@ -16,6 +16,7 @@ let value: GetPromptVersionResponseBody = {
       },
     ],
     retry: {
+      count: 2,
       onCodes: [
         429,
         500,

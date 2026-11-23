@@ -55,7 +55,7 @@ export type CreateTranslationFallbacks = {
  */
 export type CreateTranslationRetry = {
   /**
-   * Number of retry attempts (1-5)
+   * Number of retries per model after the initial attempt (0-5). Defaults to 0 when a retry object is sent; omit retry to use the gateway default of two.
    */
   count?: number | undefined;
   /**
@@ -114,7 +114,7 @@ export type CreateTranslationRouterAudioTranslationsFallbacks = {
  */
 export type CreateTranslationRouterAudioTranslationsRetry = {
   /**
-   * Number of retry attempts (1-5)
+   * Number of retries per model after the initial attempt (0-5). Defaults to 0 when a retry object is sent; omit retry to use the gateway default of two.
    */
   count?: number | undefined;
   /**
@@ -369,7 +369,7 @@ export const CreateTranslationRetry$outboundSchema: z.ZodType<
   CreateTranslationRetry
 > = /* @__PURE__ */ lazySchema$(() =>
   z.object({
-    count: z.number().default(3),
+    count: z.number().default(0),
     onCodes: z.array(z.number()).optional(),
   }).transform((v) => {
     return remap$(v, {
@@ -544,7 +544,7 @@ export const CreateTranslationRouterAudioTranslationsRetry$outboundSchema:
     CreateTranslationRouterAudioTranslationsRetry
   > = /* @__PURE__ */ lazySchema$(() =>
     z.object({
-      count: z.number().default(3),
+      count: z.number().default(0),
       onCodes: z.array(z.number()).optional(),
     }).transform((v) => {
       return remap$(v, {

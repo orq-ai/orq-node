@@ -50,6 +50,7 @@ let value: RetrieveAgentRequestResponseBody = {
       },
     },
     retry: {
+      count: 2,
       onCodes: [
         429,
         500,
@@ -89,7 +90,7 @@ let value: RetrieveAgentRequestResponseBody = {
           },
         },
         retry: {
-          count: 3,
+          count: 2,
           onCodes: [
             429,
             500,

@@ -12,6 +12,7 @@ let value: CreateSpeechRequestBody = {
   model: "Camaro",
   voice: "<value>",
   retry: {
+    count: 2,
     onCodes: [
       429,
       500,
@@ -29,6 +30,7 @@ let value: CreateSpeechRequestBody = {
   },
   orq: {
     retry: {
+      count: 2,
       onCodes: [
         429,
         500,

@@ -30,7 +30,7 @@ import { Result } from "../types/fp.js";
  * Query telemetry
  *
  * @remarks
- * Canonical neutral query envelope for traces, metrics, and logs. Select a source, compute list, and time range; optionally group, filter, bucket, sort, limit, and include totals. ReportingService.QueryReport and TraceQueryService.AggregateTraces remain supported compatibility contracts.
+ * Canonical neutral query envelope for traces, metrics, and logs. Select a source, compute list, and time range; optionally group, filter, bucket, sort, limit, and include totals.
  */
 export function telemetryQuery(
   client: OrqCore,

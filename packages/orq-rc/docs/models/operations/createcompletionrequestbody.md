@@ -9,6 +9,7 @@ let value: CreateCompletionRequestBody = {
   model: "Element",
   prompt: "<value>",
   retry: {
+    count: 2,
     onCodes: [
       429,
       500,

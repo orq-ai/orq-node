@@ -113,7 +113,7 @@ export const ListAgentsType = {
 export type ListAgentsType = ClosedEnum<typeof ListAgentsType>;
 
 /**
- * If all, the agent will require approval for all tools. If respect_tool, the agent will require approval for tools that have the requires_approval flag set to true. If none, the agent will not require approval for any tools.
+ * An Agent runs its tools without waiting for a human decision on `POST /v3/router/responses`. See https://docs.orq.ai/ai-studio/ai-engineering/build-agents#tool-approval.
  */
 export const ListAgentsToolApprovalRequired = {
   All: "all",
@@ -121,7 +121,7 @@ export const ListAgentsToolApprovalRequired = {
   None: "none",
 } as const;
 /**
- * If all, the agent will require approval for all tools. If respect_tool, the agent will require approval for tools that have the requires_approval flag set to true. If none, the agent will not require approval for any tools.
+ * An Agent runs its tools without waiting for a human decision on `POST /v3/router/responses`. See https://docs.orq.ai/ai-studio/ai-engineering/build-agents#tool-approval.
  */
 export type ListAgentsToolApprovalRequired = ClosedEnum<
   typeof ListAgentsToolApprovalRequired
@@ -252,7 +252,7 @@ export type ListAgentsSettings = {
    */
   maxCost: number;
   /**
-   * If all, the agent will require approval for all tools. If respect_tool, the agent will require approval for tools that have the requires_approval flag set to true. If none, the agent will not require approval for any tools.
+   * An Agent runs its tools without waiting for a human decision on `POST /v3/router/responses`. See https://docs.orq.ai/ai-studio/ai-engineering/build-agents#tool-approval.
    */
   toolApprovalRequired: ListAgentsToolApprovalRequired;
   /**
@@ -722,11 +722,11 @@ export type ListAgentsParameters = {
 };
 
 /**
- * Retry configuration for model requests. Allows customizing retry count (1-5) and HTTP status codes that trigger retries. Default codes: 408, 429, 500, 502, 503, 504, 529.
+ * Retry configuration for model requests. Allows customizing retry count (0-5) and HTTP status codes that trigger retries. Default codes: 408, 429, 500, 502, 503, 504, 529.
  */
 export type ListAgentsRetry = {
   /**
-   * Number of retry attempts (1-5)
+   * Number of retries per model after the initial attempt (0-5). Defaults to 0 when a retry object is sent; omit retry to use the gateway default of two.
    */
   count: number;
   /**
@@ -1208,11 +1208,11 @@ export type ListAgentsFallbackModelConfigurationParameters = {
 };
 
 /**
- * Retry configuration for this fallback model. Allows customizing retry count (1-5) and HTTP status codes that trigger retries.
+ * Retry configuration for this fallback model. Allows customizing retry count (0-5) and HTTP status codes that trigger retries.
  */
 export type ListAgentsFallbackModelConfigurationRetry = {
   /**
-   * Number of retry attempts (1-5)
+   * Number of retries per model after the initial attempt (0-5). Defaults to 0 when a retry object is sent; omit retry to use the gateway default of two.
    */
   count: number;
   /**
@@ -1234,7 +1234,7 @@ export type ListAgentsFallbackModelConfiguration2 = {
    */
   parameters?: ListAgentsFallbackModelConfigurationParameters | undefined;
   /**
-   * Retry configuration for this fallback model. Allows customizing retry count (1-5) and HTTP status codes that trigger retries.
+   * Retry configuration for this fallback model. Allows customizing retry count (0-5) and HTTP status codes that trigger retries.
    */
   retry?: ListAgentsFallbackModelConfigurationRetry | undefined;
 };
@@ -1260,7 +1260,7 @@ export type ListAgentsModel = {
    */
   parameters?: ListAgentsParameters | null | undefined;
   /**
-   * Retry configuration for model requests. Allows customizing retry count (1-5) and HTTP status codes that trigger retries. Default codes: 408, 429, 500, 502, 503, 504, 529.
+   * Retry configuration for model requests. Allows customizing retry count (0-5) and HTTP status codes that trigger retries. Default codes: 408, 429, 500, 502, 503, 504, 529.
    */
   retry?: ListAgentsRetry | undefined;
   /**
@@ -2285,7 +2285,7 @@ export const ListAgentsRetry$inboundSchema: z.ZodType<
   unknown
 > = /* @__PURE__ */ lazySchema$(() =>
   z.object({
-    count: z.number().default(3),
+    count: z.number().default(0),
     on_codes: z.array(z.number()).optional(),
   }).transform((v) => {
     return remap$(v, {
@@ -3037,7 +3037,7 @@ export const ListAgentsFallbackModelConfigurationRetry$inboundSchema: z.ZodType<
   unknown
 > = /* @__PURE__ */ lazySchema$(() =>
   z.object({
-    count: z.number().default(3),
+    count: z.number().default(0),
     on_codes: z.array(z.number()).optional(),
   }).transform((v) => {
     return remap$(v, {

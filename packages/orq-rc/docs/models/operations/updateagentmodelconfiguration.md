@@ -43,6 +43,7 @@ const value: operations.UpdateAgentModelConfiguration2 = {
     },
   },
   retry: {
+    count: 2,
     onCodes: [
       429,
       500,

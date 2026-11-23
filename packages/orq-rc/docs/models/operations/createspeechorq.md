@@ -7,6 +7,7 @@ import { CreateSpeechOrq } from "@orq-ai/node/models/operations";
 
 let value: CreateSpeechOrq = {
   retry: {
+    count: 2,
     onCodes: [
       429,
       500,

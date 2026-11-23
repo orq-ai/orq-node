@@ -55,7 +55,7 @@ export type CreateImageVariationFallbacks = {
  */
 export type CreateImageVariationRetry = {
   /**
-   * Number of retry attempts (1-5)
+   * Number of retries per model after the initial attempt (0-5). Defaults to 0 when a retry object is sent; omit retry to use the gateway default of two.
    */
   count?: number | undefined;
   /**
@@ -126,7 +126,7 @@ export type CreateImageVariationTimeout = {
  */
 export type CreateImageVariationRouterImagesVariationsRetry = {
   /**
-   * Number of retry attempts (1-5)
+   * Number of retries per model after the initial attempt (0-5). Defaults to 0 when a retry object is sent; omit retry to use the gateway default of two.
    */
   count?: number | undefined;
   /**
@@ -491,7 +491,7 @@ export const CreateImageVariationRetry$outboundSchema: z.ZodType<
   CreateImageVariationRetry
 > = /* @__PURE__ */ lazySchema$(() =>
   z.object({
-    count: z.number().default(3),
+    count: z.number().default(0),
     onCodes: z.array(z.number()).optional(),
   }).transform((v) => {
     return remap$(v, {
@@ -672,7 +672,7 @@ export const CreateImageVariationRouterImagesVariationsRetry$outboundSchema:
     CreateImageVariationRouterImagesVariationsRetry
   > = /* @__PURE__ */ lazySchema$(() =>
     z.object({
-      count: z.number().default(3),
+      count: z.number().default(0),
       onCodes: z.array(z.number()).optional(),
     }).transform((v) => {
       return remap$(v, {

@@ -38,7 +38,7 @@ let value: UpdateAgentRequest = {
         },
       },
       retry: {
-        count: 3,
+        count: 2,
         onCodes: [
           429,
           500,
@@ -79,7 +79,7 @@ let value: UpdateAgentRequest = {
           },
         },
         retry: {
-          count: 3,
+          count: 2,
           onCodes: [
             429,
             500,

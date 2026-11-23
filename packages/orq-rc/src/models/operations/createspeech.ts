@@ -38,7 +38,7 @@ export type CreateSpeechFallbacks = {
  */
 export type CreateSpeechRetry = {
   /**
-   * Number of retry attempts (1-5)
+   * Number of retries per model after the initial attempt (0-5). Defaults to 0 when a retry object is sent; omit retry to use the gateway default of two.
    */
   count?: number | undefined;
   /**
@@ -90,7 +90,7 @@ export type CreateSpeechTimeout = {
  */
 export type CreateSpeechRouterAudioSpeechRetry = {
   /**
-   * Number of retry attempts (1-5)
+   * Number of retries per model after the initial attempt (0-5). Defaults to 0 when a retry object is sent; omit retry to use the gateway default of two.
    */
   count?: number | undefined;
   /**
@@ -303,7 +303,7 @@ export const CreateSpeechRetry$outboundSchema: z.ZodType<
   CreateSpeechRetry
 > = /* @__PURE__ */ lazySchema$(() =>
   z.object({
-    count: z.number().default(3),
+    count: z.number().default(0),
     onCodes: z.array(z.number()).optional(),
   }).transform((v) => {
     return remap$(v, {
@@ -445,7 +445,7 @@ export const CreateSpeechRouterAudioSpeechRetry$outboundSchema: z.ZodType<
   CreateSpeechRouterAudioSpeechRetry
 > = /* @__PURE__ */ lazySchema$(() =>
   z.object({
-    count: z.number().default(3),
+    count: z.number().default(0),
     onCodes: z.array(z.number()).optional(),
   }).transform((v) => {
     return remap$(v, {
