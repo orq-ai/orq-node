@@ -2667,7 +2667,7 @@ export const ListDeploymentVersionsKnowledgeBases$inboundSchema: z.ZodType<
   unknown
 > = /* @__PURE__ */ lazySchema$(() =>
   z.object({
-    id: z.string().default("01M8073DWQMAD8MDRQTFJX04JD"),
+    id: z.string().default("01M83WSGWXTZFVPC5JBR7CPZMS"),
     knowledge_id: z.string(),
     configuration: z.union([
       z.lazy(() => KnowledgeBaseLastUserMessage$inboundSchema),
