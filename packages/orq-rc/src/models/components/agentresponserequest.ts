@@ -181,11 +181,13 @@ export const Engine = {
 export type Engine = ClosedEnum<typeof Engine>;
 
 /**
- * Configuration options for the agent invocation
+ * A2A compatibility options. Ignored on this endpoint; use background to control whether the call waits.
  */
 export type AgentResponseRequestConfiguration = {
   /**
-   * Whether to block until the agent task completes. When true, the response will include the full task with messages. When false (default), returns immediately with task ID and status.
+   * Accepted for A2A compatibility and ignored on this endpoint. Use background instead.
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   blocking?: boolean | undefined;
 };
@@ -243,11 +245,11 @@ export type AgentResponseRequest = {
    */
   engine?: Engine | undefined;
   /**
-   * Configuration options for the agent invocation
+   * A2A compatibility options. Ignored on this endpoint; use background to control whether the call waits.
    */
   configuration?: AgentResponseRequestConfiguration | undefined;
   /**
-   * If true, returns immediately without waiting for completion. If false (default), waits until the agent becomes inactive or errors.
+   * The only switch that controls whether the call waits. If true, returns immediately with the task ID and status. If false (default), waits until the agent becomes inactive or errors and returns the full conversation.
    */
   background?: boolean | undefined;
   /**

@@ -9,6 +9,9 @@ import * as components from "../components/index.js";
 
 export type UpdateMemoryDocumentRequest = {
   memoryStoreKey: string;
+  /**
+   * The Memory's generated `_id` or its `entity_id`.
+   */
   memoryEntityId: string;
   documentId: string;
   updateMemoryDocumentRequest: components.UpdateMemoryDocumentRequest;

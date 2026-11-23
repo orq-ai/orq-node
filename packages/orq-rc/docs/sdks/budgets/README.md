@@ -148,7 +148,7 @@ run();
 
 | Error Type           | Status Code          | Content Type         |
 | -------------------- | -------------------- | -------------------- |
-| errors.ErrorResponse | 401                  | application/json     |
+| errors.ErrorResponse | 401, 409             | application/json     |
 | errors.APIError      | 4XX, 5XX             | \*/\*                |
 
 ## get

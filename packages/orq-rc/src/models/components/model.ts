@@ -154,11 +154,12 @@ export type Model = {
    */
   reasoningEfforts?: ReasoningEfforts | undefined;
   /**
-   * Blended price in USD per 1M tokens, weighting input to output 3:1. It uses
+   * Blended price in USD per 1M tokens, weighting cache read, input and output
    *
    * @remarks
-   *  base pricing only, so service tiers and conditional prices are ignored.
-   *  Absent when the model has no Artificial Analysis data.
+   *  7:2:1: (7 x cache read + 2 x input + 1 x output) / 10. It uses base pricing
+   *  only, so service tiers and conditional prices are ignored. Absent when the
+   *  model has no Artificial Analysis data.
    */
   blendedPrice?: number | undefined;
   /**
@@ -191,6 +192,23 @@ export type Model = {
    *  when unmeasured.
    */
   medianEndToEndResponseTimeSeconds?: number | undefined;
+  /**
+   * Blend `blended_price` uses: `agentic` is the 7:2:1 cache read, input and
+   *
+   * @remarks
+   *  output blend. Absent when `blended_price` is absent.
+   */
+  blendedPriceMix?: string | undefined;
+  /**
+   * Where the cache read rate in `blended_price` came from: `host` is the
+   *
+   * @remarks
+   *  model's own cache read price, `artificial_analysis` is the Artificial
+   *  Analysis cache hit price capped at the input price, and `input` is the
+   *  input price, used when neither exists. Absent when `blended_price` is
+   *  absent.
+   */
+  blendedPriceCacheReadSource?: string | undefined;
 };
 
 /** @internal */
@@ -280,6 +298,8 @@ export const Model$inboundSchema: z.ZodType<Model, z.ZodTypeDef, unknown> =
       intelligence_index_total_cost: z.number().optional(),
       intelligence_index_cost_per_task: z.number().optional(),
       median_end_to_end_response_time_seconds: z.number().optional(),
+      blended_price_mix: z.string().optional(),
+      blended_price_cache_read_source: z.string().optional(),
     }).transform((v) => {
       return remap$(v, {
         "offering_of": "offeringOf",
@@ -295,6 +315,8 @@ export const Model$inboundSchema: z.ZodType<Model, z.ZodTypeDef, unknown> =
         "intelligence_index_cost_per_task": "intelligenceIndexCostPerTask",
         "median_end_to_end_response_time_seconds":
           "medianEndToEndResponseTimeSeconds",
+        "blended_price_mix": "blendedPriceMix",
+        "blended_price_cache_read_source": "blendedPriceCacheReadSource",
       });
     })
   );

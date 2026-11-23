@@ -12,7 +12,7 @@ export type GetAllMemoryDocumentsRequest = {
    */
   memoryStoreKey: string;
   /**
-   * The unique identifier of the memory
+   * The Memory's generated `_id` or its `entity_id`
    */
   memoryEntityId: string;
   /**

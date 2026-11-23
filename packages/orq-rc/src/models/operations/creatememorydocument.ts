@@ -9,6 +9,9 @@ import * as components from "../components/index.js";
 
 export type CreateMemoryDocumentRequest = {
   memoryStoreKey: string;
+  /**
+   * The Memory's generated `_id` or its `entity_id`.
+   */
   memoryEntityId: string;
   createMemoryDocumentRequest: components.CreateMemoryDocumentRequest;
 };

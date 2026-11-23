@@ -8,6 +8,9 @@ import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type DeleteMemoryRequest = {
   memoryStoreKey: string;
+  /**
+   * The Memory's generated `_id` or its `entity_id`.
+   */
   memoryEntityId: string;
 };
 
