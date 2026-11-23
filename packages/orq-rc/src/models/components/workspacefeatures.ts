@@ -29,6 +29,7 @@ export type WorkspaceFeatures = {
    * Days audit log entries are kept.
    */
   auditRetentionPeriod?: number | undefined;
+  promptCaching?: boolean | undefined;
 };
 
 /** @internal */
@@ -52,6 +53,7 @@ export const WorkspaceFeatures$inboundSchema: z.ZodType<
     file_systems_enabled: z.boolean().optional(),
     retention_period: z.number().int().optional(),
     audit_retention_period: z.number().int().optional(),
+    prompt_caching: z.boolean().optional(),
   }).transform((v) => {
     return remap$(v, {
       "workspace_tier": "workspaceTier",
@@ -68,6 +70,7 @@ export const WorkspaceFeatures$inboundSchema: z.ZodType<
       "file_systems_enabled": "fileSystemsEnabled",
       "retention_period": "retentionPeriod",
       "audit_retention_period": "auditRetentionPeriod",
+      "prompt_caching": "promptCaching",
     });
   })
 );

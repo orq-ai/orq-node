@@ -14,7 +14,7 @@ export type ChunksServiceUpdateRequest = {
   text?: string | undefined;
   embedding?: Array<number> | undefined;
   /**
-   * Metadata of the chunk
+   * Metadata of the chunk. Replaces the existing metadata object: send every key you want to keep.
    */
   metadata?: { [k: string]: string | number | boolean } | undefined;
 };
