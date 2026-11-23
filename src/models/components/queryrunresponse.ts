@@ -10,10 +10,19 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { QueryRow, QueryRow$inboundSchema } from "./queryrow.js";
 
 export type QueryRunResponse = {
+  /**
+   * Page of rows, in creation order.
+   */
   rows?: Array<QueryRow> | undefined;
+  /**
+   * Whether more rows follow this page.
+   */
   hasMore?: boolean | undefined;
   /**
-   * Cursor for the next incremental query (server clock minus a skew buffer).
+   * Value to pass as `updated_after` in the next incremental query: the
+   *
+   * @remarks
+   *  server clock minus 3 seconds.
    */
   serverTimestamp?: Date | undefined;
 };

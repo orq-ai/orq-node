@@ -25,11 +25,11 @@ export type ThinkingConfigBetweenToolsSchemaDisplay = ClosedEnum<
 >;
 
 /**
- * Enables progress updates between tool calls on Sonnet 5.5.
+ * Enables progress updates between tool calls on models that support it.
  */
 export type ThinkingConfigBetweenToolsSchema = {
   /**
-   * Returns Sonnet 5.5 progress updates between tool calls without extended thinking.
+   * Returns progress updates between tool calls without extended thinking.
    */
   type: "between_tools";
   budgetTokens?: number | undefined;

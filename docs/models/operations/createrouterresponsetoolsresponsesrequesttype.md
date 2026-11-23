@@ -1,17 +1,17 @@
 # CreateRouterResponseToolsResponsesRequestType
 
-The platform tool type. orq:web_search, orq:web_fetch, and orq:datetime are the canonical names for orq:google_search, orq:web_scraper, and orq:current_date.
+Create a cache control breakpoint at this content block. Accepts only the value "ephemeral".
 
 ## Example Usage
 
 ```typescript
 import { CreateRouterResponseToolsResponsesRequestType } from "@orq-ai/node/models/operations";
 
-let value: CreateRouterResponseToolsResponsesRequestType = "orq:current_date";
+let value: CreateRouterResponseToolsResponsesRequestType = "ephemeral";
 ```
 
 ## Values
 
 ```typescript
-"orq:web_search" | "orq:web_fetch" | "orq:datetime" | "orq:search_models" | "orq:tool_search" | "orq:image_generation" | "orq:apply_patch" | "orq:fusion" | "orq:shell" | "orq:query_knowledge_base" | "orq:retrieve_knowledge_bases" | "orq:current_date" | "orq:google_search" | "orq:web_scraper" | "orq:code_interpreter" | "orq:mcp" | "orq:http" | "orq:function"
+"ephemeral"
 ```

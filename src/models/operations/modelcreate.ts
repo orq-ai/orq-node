@@ -48,6 +48,8 @@ export type ModelCreateResponseBody = {
   inputCurrency: string;
   isActive: boolean;
   /**
+   * Identifier this model had in the legacy model catalog. Deprecated: use id.
+   *
    * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   legacyUuid?: string | undefined;
@@ -62,6 +64,9 @@ export type ModelCreateResponseBody = {
   parameters: Array<components.ModelParameterDocument> | null;
   pricingUrl: string | null;
   provider: string;
+  /**
+   * Reference the gateway accepts for this model in requests: provider/model_id, or workspace@provider/model_id for a private model.
+   */
   refId: string;
   sharing?: components.ModelSharingConfig | undefined;
   updated: string;

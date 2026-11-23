@@ -27,7 +27,7 @@ export type ClassifyUsage = {
    */
   outputCost?: number | undefined;
   /**
-   * The number of output tokens generated. Free for native classify providers, billed at the model rate for emulated chat models.
+   * The number of output tokens reported by the provider. Native Decisions output tokens are free.
    */
   outputTokens: number;
   /**

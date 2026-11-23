@@ -9,6 +9,9 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { Column, Column$inboundSchema } from "./column.js";
 
 export type ListTaskColumnsResponse = {
+  /**
+   * Task columns of the run, in column order.
+   */
   data?: Array<Column> | undefined;
 };
 

@@ -26,6 +26,7 @@ async function run() {
     model: "Grand Caravan",
     voice: "<value>",
     retry: {
+      count: 3,
       onCodes: [
         429,
         500,
@@ -48,6 +49,7 @@ async function run() {
     },
     orq: {
       retry: {
+        count: 3,
         onCodes: [
           429,
           500,
@@ -129,6 +131,7 @@ async function run() {
     model: "Grand Caravan",
     voice: "<value>",
     retry: {
+      count: 3,
       onCodes: [
         429,
         500,
@@ -151,6 +154,7 @@ async function run() {
     },
     orq: {
       retry: {
+        count: 3,
         onCodes: [
           429,
           500,

@@ -103,6 +103,7 @@ async function $do(
   const path = pathResult.value;
 
   const query = encodeFormQuery({
+    "all_accessible_projects": payload.all_accessible_projects,
     "filter_operator": payload.filter_operator,
     "from": payload.from,
     "limit": payload.limit,

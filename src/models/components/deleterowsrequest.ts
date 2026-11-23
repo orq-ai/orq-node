@@ -7,12 +7,18 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type DeleteRowsRequest = {
-  rowIds?: Array<string> | undefined;
+  /**
+   * Rows to delete, at least one. Unknown IDs are ignored as long as one row
+   *
+   * @remarks
+   *  matches.
+   */
+  rowIds: Array<string>;
 };
 
 /** @internal */
 export type DeleteRowsRequest$Outbound = {
-  row_ids?: Array<string> | undefined;
+  row_ids: Array<string>;
 };
 
 /** @internal */
@@ -22,7 +28,7 @@ export const DeleteRowsRequest$outboundSchema: z.ZodType<
   DeleteRowsRequest
 > = /* @__PURE__ */ lazySchema$(() =>
   z.object({
-    rowIds: z.array(z.string()).optional(),
+    rowIds: z.array(z.string()),
   }).transform((v) => {
     return remap$(v, {
       rowIds: "row_ids",

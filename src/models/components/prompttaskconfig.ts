@@ -12,21 +12,49 @@ import {
   MessagesSource$inboundSchema,
   MessagesSource$outboundSchema,
 } from "./messagessource.js";
+import {
+  PromptConfig,
+  PromptConfig$inboundSchema,
+  PromptConfig$Outbound,
+  PromptConfig$outboundSchema,
+} from "./promptconfig.js";
 
+/**
+ * Configuration of a prompt task column.
+ */
 export type PromptTaskConfig = {
-  promptConfig: { [k: string]: any };
+  /**
+   * Prompt to execute.
+   */
+  promptConfig: PromptConfig;
   messagesSource?: MessagesSource | undefined;
+  /**
+   * Template engine for variables in the messages: `text` (default), `jinja`
+   *
+   * @remarks
+   *  or `mustache`.
+   */
   engine?: string | undefined;
+  /**
+   * Tools saved with the column.
+   */
   tools?: Array<{ [k: string]: any }> | undefined;
+  /**
+   * Knowledge bases searched on each execution, as `{knowledge_id,
+   *
+   * @remarks
+   *  configuration}` with a configuration `type` of `last_user_message` or
+   *  `query`. The retrieved context is available as `{{knowledge_retrieval}}`;
+   *  when the prompt does not use it, it is appended to the system message.
+   */
   knowledgeBases?: Array<{ [k: string]: any }> | undefined;
   /**
-   * Null when the column was saved without metadata.
+   * Metadata saved with the column. Null when the column was saved without
+   *
+   * @remarks
+   *  metadata.
    */
   metadata?: { [k: string]: any } | null | undefined;
-  /**
-   * Null when the column was saved without an entity configuration.
-   */
-  entityConfiguration?: { [k: string]: any } | null | undefined;
 };
 
 /** @internal */
@@ -36,31 +64,28 @@ export const PromptTaskConfig$inboundSchema: z.ZodType<
   unknown
 > = /* @__PURE__ */ lazySchema$(() =>
   z.object({
-    prompt_config: z.record(z.any()),
+    prompt_config: PromptConfig$inboundSchema,
     messages_source: MessagesSource$inboundSchema.optional(),
     engine: z.string().optional(),
     tools: z.array(z.record(z.any())).optional(),
     knowledge_bases: z.array(z.record(z.any())).optional(),
     metadata: z.nullable(z.record(z.any())).optional(),
-    entity_configuration: z.nullable(z.record(z.any())).optional(),
   }).transform((v) => {
     return remap$(v, {
       "prompt_config": "promptConfig",
       "messages_source": "messagesSource",
       "knowledge_bases": "knowledgeBases",
-      "entity_configuration": "entityConfiguration",
     });
   })
 );
 /** @internal */
 export type PromptTaskConfig$Outbound = {
-  prompt_config: { [k: string]: any };
+  prompt_config: PromptConfig$Outbound;
   messages_source?: string | undefined;
   engine?: string | undefined;
   tools?: Array<{ [k: string]: any }> | undefined;
   knowledge_bases?: Array<{ [k: string]: any }> | undefined;
   metadata?: { [k: string]: any } | null | undefined;
-  entity_configuration?: { [k: string]: any } | null | undefined;
 };
 
 /** @internal */
@@ -70,19 +95,17 @@ export const PromptTaskConfig$outboundSchema: z.ZodType<
   PromptTaskConfig
 > = /* @__PURE__ */ lazySchema$(() =>
   z.object({
-    promptConfig: z.record(z.any()),
+    promptConfig: PromptConfig$outboundSchema,
     messagesSource: MessagesSource$outboundSchema.optional(),
     engine: z.string().optional(),
     tools: z.array(z.record(z.any())).optional(),
     knowledgeBases: z.array(z.record(z.any())).optional(),
     metadata: z.nullable(z.record(z.any())).optional(),
-    entityConfiguration: z.nullable(z.record(z.any())).optional(),
   }).transform((v) => {
     return remap$(v, {
       promptConfig: "prompt_config",
       messagesSource: "messages_source",
       knowledgeBases: "knowledge_bases",
-      entityConfiguration: "entity_configuration",
     });
   })
 );

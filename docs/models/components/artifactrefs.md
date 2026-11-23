@@ -1,5 +1,7 @@
 # ArtifactRefs
 
+References read from the cell's value.
+
 ## Example Usage
 
 ```typescript
@@ -10,11 +12,7 @@ let value: ArtifactRefs = {};
 
 ## Fields
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `traceId`          | *string*           | :heavy_minus_sign: | N/A                |
-| `responseId`       | *string*           | :heavy_minus_sign: | N/A                |
-| `sessionId`        | *string*           | :heavy_minus_sign: | N/A                |
-| `sessionRunId`     | *string*           | :heavy_minus_sign: | N/A                |
-| `pullRequestUrl`   | *string*           | :heavy_minus_sign: | N/A                |
-| `patchObjectKey`   | *string*           | :heavy_minus_sign: | N/A                |
+| Field                                           | Type                                            | Required                                        | Description                                     |
+| ----------------------------------------------- | ----------------------------------------------- | ----------------------------------------------- | ----------------------------------------------- |
+| `traceId`                                       | *string*                                        | :heavy_minus_sign:                              | Trace of the execution that produced the value. |
+| `responseId`                                    | *string*                                        | :heavy_minus_sign:                              | Response produced by a prompt or agent cell.    |

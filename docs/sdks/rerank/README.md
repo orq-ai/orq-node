@@ -28,6 +28,7 @@ async function run() {
     ],
     model: "XTS",
     retry: {
+      count: 3,
       onCodes: [
         429,
         500,
@@ -56,6 +57,7 @@ async function run() {
         type: "exact_match",
       },
       retry: {
+        count: 3,
         onCodes: [
           429,
           500,
@@ -127,6 +129,7 @@ async function run() {
     ],
     model: "XTS",
     retry: {
+      count: 3,
       onCodes: [
         429,
         500,
@@ -155,6 +158,7 @@ async function run() {
         type: "exact_match",
       },
       retry: {
+        count: 3,
         onCodes: [
           429,
           500,

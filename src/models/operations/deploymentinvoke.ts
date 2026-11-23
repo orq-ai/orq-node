@@ -171,7 +171,7 @@ export type DeploymentInvokeMessageRole = ClosedEnum<
   typeof DeploymentInvokeMessageRole
 >;
 
-export type Three = {
+export type Message3 = {
   type: "image";
   /**
    * The role of the prompt message
@@ -285,11 +285,11 @@ export type Message1 = {
   redactedReasoning?: string | undefined;
 };
 
-export type Message = Message1 | Message2 | Three;
+export type Message = Message1 | Message2 | Message3;
 
 export type Choices = {
   index: number;
-  message: Message1 | Message2 | Three;
+  message: Message1 | Message2 | Message3;
   finishReason?: string | null | undefined;
 };
 
@@ -534,22 +534,25 @@ export const DeploymentInvokeMessageRole$inboundSchema: z.ZodNativeEnum<
 );
 
 /** @internal */
-export const Three$inboundSchema: z.ZodType<Three, z.ZodTypeDef, unknown> =
-  /* @__PURE__ */ lazySchema$(() =>
-    z.object({
-      type: z.literal("image"),
-      role: DeploymentInvokeMessageRole$inboundSchema,
-      url: z.string(),
-    })
-  );
+export const Message3$inboundSchema: z.ZodType<
+  Message3,
+  z.ZodTypeDef,
+  unknown
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("image"),
+    role: DeploymentInvokeMessageRole$inboundSchema,
+    url: z.string(),
+  })
+);
 
-export function threeFromJSON(
+export function message3FromJSON(
   jsonString: string,
-): SafeParseResult<Three, SDKValidationError> {
+): SafeParseResult<Message3, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Three$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Three' from JSON`,
+    (x) => Message3$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Message3' from JSON`,
   );
 }
 
@@ -687,7 +690,7 @@ export const Message$inboundSchema: z.ZodType<Message, z.ZodTypeDef, unknown> =
     z.union([
       z.lazy(() => Message1$inboundSchema),
       z.lazy(() => Message2$inboundSchema),
-      z.lazy(() => Three$inboundSchema),
+      z.lazy(() => Message3$inboundSchema),
     ])
   );
 
@@ -709,7 +712,7 @@ export const Choices$inboundSchema: z.ZodType<Choices, z.ZodTypeDef, unknown> =
       message: z.union([
         z.lazy(() => Message1$inboundSchema),
         z.lazy(() => Message2$inboundSchema),
-        z.lazy(() => Three$inboundSchema),
+        z.lazy(() => Message3$inboundSchema),
       ]),
       finish_reason: z.nullable(z.string()).optional(),
     }).transform((v) => {

@@ -1,0 +1,27 @@
+# CreateRouterResponseToolsFunction
+
+A function tool the model can call.
+
+## Example Usage
+
+```typescript
+import { CreateRouterResponseToolsFunction } from "@orq-ai/node/models/operations";
+
+let value: CreateRouterResponseToolsFunction = {
+  name: "<value>",
+  type: "function",
+};
+```
+
+## Fields
+
+| Field                                                                                                                | Type                                                                                                                 | Required                                                                                                             | Description                                                                                                          |
+| -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `async`                                                                                                              | *boolean*                                                                                                            | :heavy_minus_sign:                                                                                                   | Whether the tool response can be returned asynchronously.                                                            |
+| `cacheControl`                                                                                                       | [operations.CreateRouterResponseToolsCacheControl](../../models/operations/createrouterresponsetoolscachecontrol.md) | :heavy_minus_sign:                                                                                                   | N/A                                                                                                                  |
+| `deferLoading`                                                                                                       | *boolean*                                                                                                            | :heavy_minus_sign:                                                                                                   | Load this function on demand using tool_search on supported OpenAI models or orq:tool_search on the gateway.         |
+| `description`                                                                                                        | *string*                                                                                                             | :heavy_minus_sign:                                                                                                   | A description of what the function does.                                                                             |
+| `name`                                                                                                               | *string*                                                                                                             | :heavy_check_mark:                                                                                                   | The name of the function.                                                                                            |
+| `parameters`                                                                                                         | Record<string, *any*>                                                                                                | :heavy_minus_sign:                                                                                                   | The parameters the function accepts, as a JSON Schema object.                                                        |
+| `strict`                                                                                                             | *boolean*                                                                                                            | :heavy_minus_sign:                                                                                                   | Whether to enforce strict parameter validation.                                                                      |
+| `type`                                                                                                               | *"function"*                                                                                                         | :heavy_check_mark:                                                                                                   | N/A                                                                                                                  |

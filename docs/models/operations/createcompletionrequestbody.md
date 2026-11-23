@@ -9,6 +9,7 @@ let value: CreateCompletionRequestBody = {
   model: "openai/gpt-3.5-turbo-instruct",
   prompt: "<value>",
   retry: {
+    count: 2,
     onCodes: [
       429,
       500,

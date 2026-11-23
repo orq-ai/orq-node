@@ -12,12 +12,17 @@ export type TracesGetSpanRequest = {
    */
   traceId: string;
   spanId: string;
+  /**
+   * Spans every project the caller belongs to instead of the active one.
+   */
+  allAccessibleProjects?: boolean | undefined;
 };
 
 /** @internal */
 export type TracesGetSpanRequest$Outbound = {
   trace_id: string;
   span_id: string;
+  all_accessible_projects?: boolean | undefined;
 };
 
 /** @internal */
@@ -29,10 +34,12 @@ export const TracesGetSpanRequest$outboundSchema: z.ZodType<
   z.object({
     traceId: z.string(),
     spanId: z.string(),
+    allAccessibleProjects: z.boolean().optional(),
   }).transform((v) => {
     return remap$(v, {
       traceId: "trace_id",
       spanId: "span_id",
+      allAccessibleProjects: "all_accessible_projects",
     });
   })
 );

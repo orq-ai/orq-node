@@ -9,6 +9,7 @@ import { AnnotationQueues } from "./annotationqueues.lazy.js";
 import { Annotations } from "./annotations.lazy.js";
 import { ApiKeys } from "./apikeys.lazy.js";
 import { AuditLogDestinations } from "./auditlogdestinations.lazy.js";
+import { Batches } from "./batches.lazy.js";
 import { Budgets } from "./budgets.lazy.js";
 import { Chunking } from "./chunking.lazy.js";
 import { Datasets } from "./datasets.lazy.js";
@@ -23,6 +24,7 @@ import { GuardrailRules } from "./guardrailrules.lazy.js";
 import { Hub } from "./hub.lazy.js";
 import { Identities } from "./identities.lazy.js";
 import { Knowledge } from "./knowledge.lazy.js";
+import { Live } from "./live.lazy.js";
 import { Logs } from "./logs.lazy.js";
 import { ManagementKeys } from "./managementkeys.lazy.js";
 import { McpGateways } from "./mcpgateways.lazy.js";
@@ -34,7 +36,6 @@ import { Models } from "./models.lazy.js";
 import { Monitors } from "./monitors.lazy.js";
 import { Notifiers } from "./notifiers.lazy.js";
 import { Pii } from "./pii.lazy.js";
-import { Policies } from "./policies.lazy.js";
 import { Projects } from "./projects.lazy.js";
 import { Prompts } from "./prompts.lazy.js";
 import { Reporting } from "./reporting.lazy.js";
@@ -46,10 +47,12 @@ import { Sessions } from "./sessions.lazy.js";
 import { Skills } from "./skills.lazy.js";
 import { SmartRouters } from "./smartrouters.lazy.js";
 import { Telemetry } from "./telemetry.lazy.js";
+import { TelemetryDestinations } from "./telemetrydestinations.lazy.js";
 import { Tools } from "./tools.lazy.js";
 import { Traces } from "./traces.lazy.js";
 import { Users } from "./users.lazy.js";
 import { Views } from "./views.lazy.js";
+import { VirtualModels } from "./virtualmodels.lazy.js";
 import { Webhooks } from "./webhooks.lazy.js";
 import { Websearch } from "./websearch.lazy.js";
 import { Workspaces } from "./workspaces.lazy.js";
@@ -142,6 +145,13 @@ export class Orq extends ClientSDK {
     return (this._telemetry ??= new Telemetry(this._options));
   }
 
+  private _telemetryDestinations?: TelemetryDestinations;
+  get telemetryDestinations(): TelemetryDestinations {
+    return (this._telemetryDestinations ??= new TelemetryDestinations(
+      this._options,
+    ));
+  }
+
   private _traces?: Traces;
   get traces(): Traces {
     return (this._traces ??= new Traces(this._options));
@@ -165,11 +175,6 @@ export class Orq extends ClientSDK {
   private _models?: Models;
   get models(): Models {
     return (this._models ??= new Models(this._options));
-  }
-
-  private _policies?: Policies;
-  get policies(): Policies {
-    return (this._policies ??= new Policies(this._options));
   }
 
   private _alerts?: Alerts;
@@ -284,6 +289,11 @@ export class Orq extends ClientSDK {
     return (this._users ??= new Users(this._options));
   }
 
+  private _virtualModels?: VirtualModels;
+  get virtualModels(): VirtualModels {
+    return (this._virtualModels ??= new VirtualModels(this._options));
+  }
+
   private _webhooks?: Webhooks;
   get webhooks(): Webhooks {
     return (this._webhooks ??= new Webhooks(this._options));
@@ -312,6 +322,16 @@ export class Orq extends ClientSDK {
   private _schedules?: Schedules;
   get schedules(): Schedules {
     return (this._schedules ??= new Schedules(this._options));
+  }
+
+  private _batches?: Batches;
+  get batches(): Batches {
+    return (this._batches ??= new Batches(this._options));
+  }
+
+  private _live?: Live;
+  get live(): Live {
+    return (this._live ??= new Live(this._options));
   }
 
   private _websearch?: Websearch;

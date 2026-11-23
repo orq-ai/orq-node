@@ -11,15 +11,19 @@ import {
 } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import {
+  ResponseOutputItem,
+  ResponseOutputItem$inboundSchema,
+} from "./responseoutputitem.js";
 
 /**
  * A `response.output_item.done` server-sent event.
  */
 export type ResponseOutputItemDoneStreamEvent = {
   /**
-   * The output item (message, function call, reasoning, etc.).
+   * One item of a response's output. The `type` field says which kind it is.
    */
-  item: { [k: string]: any };
+  item: ResponseOutputItem;
   /**
    * Index of the output item in the response output array.
    */
@@ -43,7 +47,7 @@ export const ResponseOutputItemDoneStreamEvent$inboundSchema: z.ZodType<
 > = /* @__PURE__ */ lazySchema$(() =>
   collectExtraKeys$(
     z.object({
-      item: z.record(z.any()),
+      item: ResponseOutputItem$inboundSchema,
       output_index: z.number().int(),
       sequence_number: z.number().int(),
       type: z.literal("response.output_item.done"),

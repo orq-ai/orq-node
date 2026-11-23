@@ -1,5 +1,7 @@
 # CategoricalMetricSummary
 
+Statistics of a metric that returns labels.
+
 ## Example Usage
 
 ```typescript
@@ -10,7 +12,7 @@ let value: CategoricalMetricSummary = {};
 
 ## Fields
 
-| Field                    | Type                     | Required                 | Description              |
-| ------------------------ | ------------------------ | ------------------------ | ------------------------ |
-| `labels`                 | Record<string, *number*> | :heavy_minus_sign:       | N/A                      |
-| `count`                  | *number*                 | :heavy_minus_sign:       | N/A                      |
+| Field                        | Type                         | Required                     | Description                  |
+| ---------------------------- | ---------------------------- | ---------------------------- | ---------------------------- |
+| `labels`                     | Record<string, *number*>     | :heavy_minus_sign:           | Number of rows per label.    |
+| `count`                      | *number*                     | :heavy_minus_sign:           | Number of rows with a label. |

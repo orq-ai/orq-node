@@ -30,7 +30,7 @@ import { Result } from "../types/fp.js";
  * Delete a run
  *
  * @remarks
- * Deletes a run and its cell data. Distinct from cancel, which keeps completed cells.
+ * Deletes a run and its cell data. The last run of an experiment cannot be deleted. Distinct from cancel, which keeps completed cells.
  */
 export function experimentsDeleteRun(
   client: OrqCore,

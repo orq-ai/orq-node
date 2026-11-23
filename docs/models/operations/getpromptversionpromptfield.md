@@ -14,6 +14,7 @@ let value: GetPromptVersionPromptField = {
     },
   ],
   retry: {
+    count: 2,
     onCodes: [
       429,
       500,

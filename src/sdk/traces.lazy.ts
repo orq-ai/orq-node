@@ -254,10 +254,12 @@ export class Traces extends ClientSDK {
    * List currently supported static trace fields.
    */
   async listFields(
+    request?: operations.TracesListFieldsRequest | undefined,
     options?: RequestOptions,
   ): Promise<components.ListTraceFieldsResponse> {
     return unwrapAsync(tracesListFields(
       this,
+      request,
       options,
     ));
   }

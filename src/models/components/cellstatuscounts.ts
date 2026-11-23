@@ -8,12 +8,36 @@ import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+/**
+ * Number of cells in each status, across every row and column of the run,
+ *
+ * @remarks
+ *  dataset and annotation cells included.
+ */
 export type CellStatusCounts = {
+  /**
+   * Cells that have never executed, including cells without a status.
+   */
   notRun?: number | undefined;
+  /**
+   * Cells waiting to execute.
+   */
   queued?: number | undefined;
+  /**
+   * Cells executing now.
+   */
   running?: number | undefined;
+  /**
+   * Cells that finished successfully.
+   */
   completed?: number | undefined;
+  /**
+   * Cells whose execution failed.
+   */
   failed?: number | undefined;
+  /**
+   * Cells canceled before they finished.
+   */
   canceled?: number | undefined;
 };
 

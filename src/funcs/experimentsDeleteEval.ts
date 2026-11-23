@@ -28,6 +28,9 @@ import { Result } from "../types/fp.js";
 
 /**
  * Remove an eval column
+ *
+ * @remarks
+ * Removes an evaluator column and all its cells.
  */
 export function experimentsDeleteEval(
   client: OrqCore,

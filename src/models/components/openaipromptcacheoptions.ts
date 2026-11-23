@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../lib/primitives.js";
 import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -25,6 +26,10 @@ export type OpenAIPromptCacheOptionsTtl = ClosedEnum<
 >;
 
 export type OpenAIPromptCacheOptions = {
+  /**
+   * ID of a stored Orq response to compare for OpenAI prompt cache diagnostics.
+   */
+  comparisonResponseId?: string | undefined;
   mode?: OpenAIPromptCacheOptionsMode | undefined;
   ttl?: OpenAIPromptCacheOptionsTtl | undefined;
 };
@@ -58,12 +63,18 @@ export const OpenAIPromptCacheOptions$inboundSchema: z.ZodType<
   unknown
 > = /* @__PURE__ */ lazySchema$(() =>
   z.object({
+    comparison_response_id: z.string().optional(),
     mode: OpenAIPromptCacheOptionsMode$inboundSchema.optional(),
     ttl: OpenAIPromptCacheOptionsTtl$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "comparison_response_id": "comparisonResponseId",
+    });
   })
 );
 /** @internal */
 export type OpenAIPromptCacheOptions$Outbound = {
+  comparison_response_id?: string | undefined;
   mode?: string | undefined;
   ttl?: string | undefined;
 };
@@ -75,8 +86,13 @@ export const OpenAIPromptCacheOptions$outboundSchema: z.ZodType<
   OpenAIPromptCacheOptions
 > = /* @__PURE__ */ lazySchema$(() =>
   z.object({
+    comparisonResponseId: z.string().optional(),
     mode: OpenAIPromptCacheOptionsMode$outboundSchema.optional(),
     ttl: OpenAIPromptCacheOptionsTtl$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      comparisonResponseId: "comparison_response_id",
+    });
   })
 );
 

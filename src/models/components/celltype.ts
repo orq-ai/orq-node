@@ -16,7 +16,7 @@ export const CellType = {
   CellTypeAgentResponse: "CELL_TYPE_AGENT_RESPONSE",
   CellTypeEvaluator: "CELL_TYPE_EVALUATOR",
   CellTypeMetric: "CELL_TYPE_METRIC",
-  CellTypeHumanEval: "CELL_TYPE_HUMAN_EVAL",
+  CellTypeAnnotation: "CELL_TYPE_ANNOTATION",
   CellTypeOpenresponse: "CELL_TYPE_OPENRESPONSE",
 } as const;
 export type CellType = ClosedEnum<typeof CellType>;

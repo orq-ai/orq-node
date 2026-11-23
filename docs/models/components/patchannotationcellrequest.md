@@ -1,0 +1,23 @@
+# PatchAnnotationCellRequest
+
+## Example Usage
+
+```typescript
+import { PatchAnnotationCellRequest } from "@orq-ai/node/models/components";
+
+let value: PatchAnnotationCellRequest = {
+  value: {
+    "key": "<value>",
+    "key1": "<value>",
+    "key2": "<value>",
+  },
+  taskId: "<id>",
+};
+```
+
+## Fields
+
+| Field                                                                                                                                                                                                                                                                            | Type                                                                                                                                                                                                                                                                             | Required                                                                                                                                                                                                                                                                         | Description                                                                                                                                                                                                                                                                      |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `value`                                                                                                                                                                                                                                                                          | Record<string, *any*>                                                                                                                                                                                                                                                            | :heavy_check_mark:                                                                                                                                                                                                                                                               | Annotation value. type is required: range uses {type: range, value: number}; single- and multi-select use {type: categorical, value: string} or {type: categorical, values: [{value: string, sentiment: string}]}; text and correction use {type: free_form_text, text: string}. |
+| `taskId`                                                                                                                                                                                                                                                                         | *string*                                                                                                                                                                                                                                                                         | :heavy_check_mark:                                                                                                                                                                                                                                                               | ID of the task column whose response is being annotated. An annotation column<br/> holds one cell per task column.                                                                                                                                                               |

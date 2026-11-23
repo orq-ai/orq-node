@@ -19,6 +19,7 @@ export type InputTokensDetails = {
   cacheWriteTokens: number;
   cacheWriteTokensDetails?: CacheWriteTokensDetails | undefined;
   cachedTokens: number;
+  toolUseTokens?: number | undefined;
 };
 
 /** @internal */
@@ -35,6 +36,7 @@ export const InputTokensDetails$inboundSchema: z.ZodType<
     cache_write_tokens_details: CacheWriteTokensDetails$inboundSchema
       .optional(),
     cached_tokens: z.number().int(),
+    tool_use_tokens: z.number().int().optional(),
   }).transform((v) => {
     return remap$(v, {
       "cache_creation_1h_tokens": "cacheCreation1hTokens",
@@ -43,6 +45,7 @@ export const InputTokensDetails$inboundSchema: z.ZodType<
       "cache_write_tokens": "cacheWriteTokens",
       "cache_write_tokens_details": "cacheWriteTokensDetails",
       "cached_tokens": "cachedTokens",
+      "tool_use_tokens": "toolUseTokens",
     });
   })
 );

@@ -9,6 +9,10 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ClassifyNoulAnswer = {
   /**
+   * How sure the model is of its answer. The provider returns its own confidence value, which can be below the largest probability. Present for choice, score and box answers, and native Gemini noul answers.
+   */
+  confidence?: number | undefined;
+  /**
    * Probability between 0 and 1 that the statement holds. Present for noul answers.
    */
   noul: number;
@@ -22,6 +26,7 @@ export const ClassifyNoulAnswer$inboundSchema: z.ZodType<
   unknown
 > = /* @__PURE__ */ lazySchema$(() =>
   z.object({
+    confidence: z.number().optional(),
     noul: z.number(),
     type: z.literal("noul"),
   })

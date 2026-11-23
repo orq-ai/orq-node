@@ -31,6 +31,12 @@ import {
   Pricing$Outbound,
   Pricing$outboundSchema,
 } from "./pricing.js";
+import {
+  VirtualModelConfig,
+  VirtualModelConfig$inboundSchema,
+  VirtualModelConfig$Outbound,
+  VirtualModelConfig$outboundSchema,
+} from "./virtualmodelconfig.js";
 
 export type ModelMetadata = {
   allowedPassthroughParameters?: Array<string> | null | undefined;
@@ -100,6 +106,7 @@ export type ModelMetadata = {
   supportedVideoResolutions?: Array<string> | null | undefined;
   supportedVideoSizes?: Array<string> | null | undefined;
   supportsAdaptiveReasoning?: boolean | undefined;
+  supportsAgentMessageItemType?: boolean | undefined;
   supportsAudioInput?: boolean | undefined;
   supportsAudioOutput?: boolean | undefined;
   supportsB64JsonResponseFormat?: boolean | undefined;
@@ -125,6 +132,7 @@ export type ModelMetadata = {
   supportsMaxCompletionTokens?: boolean | undefined;
   supportsMidConversationSystem?: boolean | undefined;
   supportsNativeClassify?: boolean | undefined;
+  supportsOpenaiLiveApi?: boolean | undefined;
   supportsOpenaiRealtimeApi?: boolean | undefined;
   supportsOpenaiSDK?: boolean | undefined;
   supportsParallelToolCalls?: boolean | undefined;
@@ -140,6 +148,7 @@ export type ModelMetadata = {
   supportsReasoningEffortMinimal?: boolean | undefined;
   supportsReasoningEffortNone?: boolean | undefined;
   supportsReasoningEffortXhigh?: boolean | undefined;
+  supportsResponseSchemaWithTools?: boolean | undefined;
   supportsResponsesApi?: boolean | undefined;
   supportsSamplingParams?: boolean | undefined;
   supportsServiceTier?: boolean | undefined;
@@ -166,6 +175,7 @@ export type ModelMetadata = {
   supportsWebSearch?: boolean | undefined;
   supportsZdr?: boolean | undefined;
   thinkingEnforced?: boolean | undefined;
+  virtualModel?: VirtualModelConfig | undefined;
 };
 
 /** @internal */
@@ -243,6 +253,7 @@ export const ModelMetadata$inboundSchema: z.ZodType<
     supported_video_resolutions: z.nullable(z.array(z.string())).optional(),
     supported_video_sizes: z.nullable(z.array(z.string())).optional(),
     supports_adaptive_reasoning: z.boolean().optional(),
+    supports_agent_message_item_type: z.boolean().optional(),
     supports_audio_input: z.boolean().optional(),
     supports_audio_output: z.boolean().optional(),
     supports_b64_json_response_format: z.boolean().optional(),
@@ -268,6 +279,7 @@ export const ModelMetadata$inboundSchema: z.ZodType<
     supports_max_completion_tokens: z.boolean().optional(),
     supports_mid_conversation_system: z.boolean().optional(),
     supports_native_classify: z.boolean().optional(),
+    supports_openai_live_api: z.boolean().optional(),
     supports_openai_realtime_api: z.boolean().optional(),
     supports_openai_sdk: z.boolean().optional(),
     supports_parallel_tool_calls: z.boolean().optional(),
@@ -283,6 +295,7 @@ export const ModelMetadata$inboundSchema: z.ZodType<
     supports_reasoning_effort_minimal: z.boolean().optional(),
     supports_reasoning_effort_none: z.boolean().optional(),
     supports_reasoning_effort_xhigh: z.boolean().optional(),
+    supports_response_schema_with_tools: z.boolean().optional(),
     supports_responses_api: z.boolean().optional(),
     supports_sampling_params: z.boolean().optional(),
     supports_service_tier: z.boolean().optional(),
@@ -309,6 +322,7 @@ export const ModelMetadata$inboundSchema: z.ZodType<
     supports_web_search: z.boolean().optional(),
     supports_zdr: z.boolean().optional(),
     thinking_enforced: z.boolean().optional(),
+    virtual_model: VirtualModelConfig$inboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
       "allowed_passthrough_parameters": "allowedPassthroughParameters",
@@ -378,6 +392,7 @@ export const ModelMetadata$inboundSchema: z.ZodType<
       "supported_video_resolutions": "supportedVideoResolutions",
       "supported_video_sizes": "supportedVideoSizes",
       "supports_adaptive_reasoning": "supportsAdaptiveReasoning",
+      "supports_agent_message_item_type": "supportsAgentMessageItemType",
       "supports_audio_input": "supportsAudioInput",
       "supports_audio_output": "supportsAudioOutput",
       "supports_b64_json_response_format": "supportsB64JsonResponseFormat",
@@ -404,6 +419,7 @@ export const ModelMetadata$inboundSchema: z.ZodType<
       "supports_max_completion_tokens": "supportsMaxCompletionTokens",
       "supports_mid_conversation_system": "supportsMidConversationSystem",
       "supports_native_classify": "supportsNativeClassify",
+      "supports_openai_live_api": "supportsOpenaiLiveApi",
       "supports_openai_realtime_api": "supportsOpenaiRealtimeApi",
       "supports_openai_sdk": "supportsOpenaiSDK",
       "supports_parallel_tool_calls": "supportsParallelToolCalls",
@@ -419,6 +435,7 @@ export const ModelMetadata$inboundSchema: z.ZodType<
       "supports_reasoning_effort_minimal": "supportsReasoningEffortMinimal",
       "supports_reasoning_effort_none": "supportsReasoningEffortNone",
       "supports_reasoning_effort_xhigh": "supportsReasoningEffortXhigh",
+      "supports_response_schema_with_tools": "supportsResponseSchemaWithTools",
       "supports_responses_api": "supportsResponsesApi",
       "supports_sampling_params": "supportsSamplingParams",
       "supports_service_tier": "supportsServiceTier",
@@ -445,6 +462,7 @@ export const ModelMetadata$inboundSchema: z.ZodType<
       "supports_web_search": "supportsWebSearch",
       "supports_zdr": "supportsZdr",
       "thinking_enforced": "thinkingEnforced",
+      "virtual_model": "virtualModel",
     });
   })
 );
@@ -519,6 +537,7 @@ export type ModelMetadata$Outbound = {
   supported_video_resolutions?: Array<string> | null | undefined;
   supported_video_sizes?: Array<string> | null | undefined;
   supports_adaptive_reasoning?: boolean | undefined;
+  supports_agent_message_item_type?: boolean | undefined;
   supports_audio_input?: boolean | undefined;
   supports_audio_output?: boolean | undefined;
   supports_b64_json_response_format?: boolean | undefined;
@@ -544,6 +563,7 @@ export type ModelMetadata$Outbound = {
   supports_max_completion_tokens?: boolean | undefined;
   supports_mid_conversation_system?: boolean | undefined;
   supports_native_classify?: boolean | undefined;
+  supports_openai_live_api?: boolean | undefined;
   supports_openai_realtime_api?: boolean | undefined;
   supports_openai_sdk?: boolean | undefined;
   supports_parallel_tool_calls?: boolean | undefined;
@@ -559,6 +579,7 @@ export type ModelMetadata$Outbound = {
   supports_reasoning_effort_minimal?: boolean | undefined;
   supports_reasoning_effort_none?: boolean | undefined;
   supports_reasoning_effort_xhigh?: boolean | undefined;
+  supports_response_schema_with_tools?: boolean | undefined;
   supports_responses_api?: boolean | undefined;
   supports_sampling_params?: boolean | undefined;
   supports_service_tier?: boolean | undefined;
@@ -585,6 +606,7 @@ export type ModelMetadata$Outbound = {
   supports_web_search?: boolean | undefined;
   supports_zdr?: boolean | undefined;
   thinking_enforced?: boolean | undefined;
+  virtual_model?: VirtualModelConfig$Outbound | undefined;
 };
 
 /** @internal */
@@ -662,6 +684,7 @@ export const ModelMetadata$outboundSchema: z.ZodType<
     supportedVideoResolutions: z.nullable(z.array(z.string())).optional(),
     supportedVideoSizes: z.nullable(z.array(z.string())).optional(),
     supportsAdaptiveReasoning: z.boolean().optional(),
+    supportsAgentMessageItemType: z.boolean().optional(),
     supportsAudioInput: z.boolean().optional(),
     supportsAudioOutput: z.boolean().optional(),
     supportsB64JsonResponseFormat: z.boolean().optional(),
@@ -687,6 +710,7 @@ export const ModelMetadata$outboundSchema: z.ZodType<
     supportsMaxCompletionTokens: z.boolean().optional(),
     supportsMidConversationSystem: z.boolean().optional(),
     supportsNativeClassify: z.boolean().optional(),
+    supportsOpenaiLiveApi: z.boolean().optional(),
     supportsOpenaiRealtimeApi: z.boolean().optional(),
     supportsOpenaiSDK: z.boolean().optional(),
     supportsParallelToolCalls: z.boolean().optional(),
@@ -702,6 +726,7 @@ export const ModelMetadata$outboundSchema: z.ZodType<
     supportsReasoningEffortMinimal: z.boolean().optional(),
     supportsReasoningEffortNone: z.boolean().optional(),
     supportsReasoningEffortXhigh: z.boolean().optional(),
+    supportsResponseSchemaWithTools: z.boolean().optional(),
     supportsResponsesApi: z.boolean().optional(),
     supportsSamplingParams: z.boolean().optional(),
     supportsServiceTier: z.boolean().optional(),
@@ -728,6 +753,7 @@ export const ModelMetadata$outboundSchema: z.ZodType<
     supportsWebSearch: z.boolean().optional(),
     supportsZdr: z.boolean().optional(),
     thinkingEnforced: z.boolean().optional(),
+    virtualModel: VirtualModelConfig$outboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
       allowedPassthroughParameters: "allowed_passthrough_parameters",
@@ -795,6 +821,7 @@ export const ModelMetadata$outboundSchema: z.ZodType<
       supportedVideoResolutions: "supported_video_resolutions",
       supportedVideoSizes: "supported_video_sizes",
       supportsAdaptiveReasoning: "supports_adaptive_reasoning",
+      supportsAgentMessageItemType: "supports_agent_message_item_type",
       supportsAudioInput: "supports_audio_input",
       supportsAudioOutput: "supports_audio_output",
       supportsB64JsonResponseFormat: "supports_b64_json_response_format",
@@ -820,6 +847,7 @@ export const ModelMetadata$outboundSchema: z.ZodType<
       supportsMaxCompletionTokens: "supports_max_completion_tokens",
       supportsMidConversationSystem: "supports_mid_conversation_system",
       supportsNativeClassify: "supports_native_classify",
+      supportsOpenaiLiveApi: "supports_openai_live_api",
       supportsOpenaiRealtimeApi: "supports_openai_realtime_api",
       supportsOpenaiSDK: "supports_openai_sdk",
       supportsParallelToolCalls: "supports_parallel_tool_calls",
@@ -835,6 +863,7 @@ export const ModelMetadata$outboundSchema: z.ZodType<
       supportsReasoningEffortMinimal: "supports_reasoning_effort_minimal",
       supportsReasoningEffortNone: "supports_reasoning_effort_none",
       supportsReasoningEffortXhigh: "supports_reasoning_effort_xhigh",
+      supportsResponseSchemaWithTools: "supports_response_schema_with_tools",
       supportsResponsesApi: "supports_responses_api",
       supportsSamplingParams: "supports_sampling_params",
       supportsServiceTier: "supports_service_tier",
@@ -861,6 +890,7 @@ export const ModelMetadata$outboundSchema: z.ZodType<
       supportsWebSearch: "supports_web_search",
       supportsZdr: "supports_zdr",
       thinkingEnforced: "thinking_enforced",
+      virtualModel: "virtual_model",
     });
   })
 );

@@ -28,6 +28,9 @@ import { Result } from "../types/fp.js";
 
 /**
  * List task columns
+ *
+ * @remarks
+ * Lists the task columns of a run: prompt, agent and openresponse columns.
  */
 export function experimentsListTasks(
   client: OrqCore,

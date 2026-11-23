@@ -8,6 +8,18 @@ import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
+  McpPromptExposure,
+  McpPromptExposure$inboundSchema,
+  McpPromptExposure$Outbound,
+  McpPromptExposure$outboundSchema,
+} from "./mcppromptexposure.js";
+import {
+  McpResourceExposure,
+  McpResourceExposure$inboundSchema,
+  McpResourceExposure$Outbound,
+  McpResourceExposure$outboundSchema,
+} from "./mcpresourceexposure.js";
+import {
   McpSkillExposure,
   McpSkillExposure$inboundSchema,
   McpSkillExposure$Outbound,
@@ -41,6 +53,11 @@ export type McpGatewayServerLink = {
    * Which of the server's skills this gateway serves. Unset serves none.
    */
   skillExposure?: McpSkillExposure | undefined;
+  /**
+   * Which upstream resources and templates this gateway exposes. Omission preserves an existing link's selection and exposes none on a new link.
+   */
+  resourceExposure?: McpResourceExposure | undefined;
+  promptExposure?: McpPromptExposure | undefined;
 };
 
 /** @internal */
@@ -55,11 +72,15 @@ export const McpGatewayServerLink$inboundSchema: z.ZodType<
     enabled: z.boolean().optional(),
     tool_exposure: McpToolExposure$inboundSchema,
     skill_exposure: McpSkillExposure$inboundSchema.optional(),
+    resource_exposure: McpResourceExposure$inboundSchema.optional(),
+    prompt_exposure: McpPromptExposure$inboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
       "mcp_server_id": "mcpServerId",
       "tool_exposure": "toolExposure",
       "skill_exposure": "skillExposure",
+      "resource_exposure": "resourceExposure",
+      "prompt_exposure": "promptExposure",
     });
   })
 );
@@ -70,6 +91,8 @@ export type McpGatewayServerLink$Outbound = {
   enabled?: boolean | undefined;
   tool_exposure: McpToolExposure$Outbound;
   skill_exposure?: McpSkillExposure$Outbound | undefined;
+  resource_exposure?: McpResourceExposure$Outbound | undefined;
+  prompt_exposure?: McpPromptExposure$Outbound | undefined;
 };
 
 /** @internal */
@@ -84,11 +107,15 @@ export const McpGatewayServerLink$outboundSchema: z.ZodType<
     enabled: z.boolean().optional(),
     toolExposure: McpToolExposure$outboundSchema,
     skillExposure: McpSkillExposure$outboundSchema.optional(),
+    resourceExposure: McpResourceExposure$outboundSchema.optional(),
+    promptExposure: McpPromptExposure$outboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
       mcpServerId: "mcp_server_id",
       toolExposure: "tool_exposure",
       skillExposure: "skill_exposure",
+      resourceExposure: "resource_exposure",
+      promptExposure: "prompt_exposure",
     });
   })
 );

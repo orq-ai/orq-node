@@ -7,19 +7,44 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type QueryRunRequest = {
-  rows?: Array<string> | undefined;
-  columns?: Array<string> | undefined;
-  repeatIndex?: number | undefined;
-  limit?: number | undefined;
-  startingAfter?: string | undefined;
   /**
-   * Incremental refresh: returns running rows plus completed or failed rows
+   * Row IDs to return. Unknown IDs are ignored. Omit for every row.
+   */
+  rows?: Array<string> | undefined;
+  /**
+   * Columns to return, matched against column ID, key and display name. Every
    *
    * @remarks
-   *  updated after this instant.
+   *  matching column is used, and an entry that matches nothing is rejected.
+   *  Omit for every column.
+   */
+  columns?: Array<string> | undefined;
+  /**
+   * Page size, 1 to 1000. Defaults to 25.
+   */
+  limit?: number | undefined;
+  /**
+   * Cursor for forward pagination. Set to the `row_id` of the last row from
+   *
+   * @remarks
+   *  the previous page.
+   */
+  startingAfter?: string | undefined;
+  /**
+   * Incremental refresh: return only rows updated after this instant. Pass the
+   *
+   * @remarks
+   *  previous response's `server_timestamp`. With `partial_rows`, running rows
+   *  are returned as well.
    */
   updatedAfter?: Date | undefined;
+  /**
+   * Return only running, completed and failed rows.
+   */
   partialRows?: boolean | undefined;
+  /**
+   * Leave out data cells: inputs, messages, expected output and job output.
+   */
   excludeStaticCells?: boolean | undefined;
 };
 
@@ -27,7 +52,6 @@ export type QueryRunRequest = {
 export type QueryRunRequest$Outbound = {
   rows?: Array<string> | undefined;
   columns?: Array<string> | undefined;
-  repeat_index?: number | undefined;
   limit?: number | undefined;
   starting_after?: string | undefined;
   updated_after?: string | undefined;
@@ -44,7 +68,6 @@ export const QueryRunRequest$outboundSchema: z.ZodType<
   z.object({
     rows: z.array(z.string()).optional(),
     columns: z.array(z.string()).optional(),
-    repeatIndex: z.number().int().optional(),
     limit: z.number().int().optional(),
     startingAfter: z.string().optional(),
     updatedAfter: z.date().transform(v => v.toISOString()).optional(),
@@ -52,7 +75,6 @@ export const QueryRunRequest$outboundSchema: z.ZodType<
     excludeStaticCells: z.boolean().optional(),
   }).transform((v) => {
     return remap$(v, {
-      repeatIndex: "repeat_index",
       startingAfter: "starting_after",
       updatedAfter: "updated_after",
       partialRows: "partial_rows",

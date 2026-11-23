@@ -12,6 +12,10 @@ import {
   AgentTaskConfig$inboundSchema,
 } from "./agenttaskconfig.js";
 import {
+  AnnotationColumnConfig,
+  AnnotationColumnConfig$inboundSchema,
+} from "./annotationcolumnconfig.js";
+import {
   DatasetColumnConfig,
   DatasetColumnConfig$inboundSchema,
 } from "./datasetcolumnconfig.js";
@@ -19,10 +23,6 @@ import {
   EvalColumnConfig,
   EvalColumnConfig$inboundSchema,
 } from "./evalcolumnconfig.js";
-import {
-  HarnessTaskConfig,
-  HarnessTaskConfig$inboundSchema,
-} from "./harnesstaskconfig.js";
 import {
   JobOutputColumnConfig,
   JobOutputColumnConfig$inboundSchema,
@@ -39,29 +39,84 @@ import {
   PromptTaskConfig,
   PromptTaskConfig$inboundSchema,
 } from "./prompttaskconfig.js";
-import {
-  ReviewColumnConfig,
-  ReviewColumnConfig$inboundSchema,
-} from "./reviewcolumnconfig.js";
 
+/**
+ * A column of a run. Exactly one of the config fields is set, matching the
+ *
+ * @remarks
+ *  column type.
+ */
 export type Column = {
+  /**
+   * Column ID. Dataset, prompt, evaluator and annotation columns keep their ID in
+   *
+   * @remarks
+   *  new runs; agent columns get a new one.
+   */
   columnId?: string | undefined;
+  /**
+   * Column key, derived from the display name: lowercased, with spaces
+   *
+   * @remarks
+   *  replaced by underscores.
+   */
   key?: string | undefined;
+  /**
+   * Column name.
+   */
   displayName?: string | undefined;
+  /**
+   * 0-based position in the run, after the columns are grouped as dataset,
+   *
+   * @remarks
+   *  task, job output, metric, evaluator and annotation columns.
+   */
   position?: number | undefined;
+  /**
+   * Whether the column is shown in the AI Studio grid. False for hidden
+   *
+   * @remarks
+   *  columns, such as the token metric columns.
+   */
   active?: boolean | undefined;
+  /**
+   * Set on prompt task columns.
+   */
   prompt?: PromptTaskConfig | undefined;
+  /**
+   * Set on agent task columns.
+   */
   agent?: AgentTaskConfig | undefined;
-  harness?: HarnessTaskConfig | undefined;
+  /**
+   * Set on task columns whose cells are filled outside orq.ai.
+   */
   openresponse?: OpenResponseTaskConfig | undefined;
+  /**
+   * Set on evaluator columns.
+   */
   evaluator?: EvalColumnConfig | undefined;
-  review?: ReviewColumnConfig | undefined;
+  /**
+   * Set on annotation columns.
+   */
+  annotation?: AnnotationColumnConfig | undefined;
+  /**
+   * Set on the dataset columns: inputs, messages and expected output.
+   */
   dataset?: DatasetColumnConfig | undefined;
+  /**
+   * Set on metric columns: cost, latency and token counts.
+   */
   metric?: MetricColumnConfig | undefined;
   /**
-   * Output of one evaluatorq job; the column holds the text each job produced.
+   * Set on evaluatorq job output columns.
    */
   jobOutput?: JobOutputColumnConfig | undefined;
+  /**
+   * Column width in the AI Studio grid. Task columns default to 280;
+   *
+   * @remarks
+   *  evaluator, annotation and metric columns to 200. 0 when unset.
+   */
   width?: number | undefined;
 };
 
@@ -76,10 +131,9 @@ export const Column$inboundSchema: z.ZodType<Column, z.ZodTypeDef, unknown> =
       active: z.boolean().optional(),
       prompt: PromptTaskConfig$inboundSchema.optional(),
       agent: AgentTaskConfig$inboundSchema.optional(),
-      harness: HarnessTaskConfig$inboundSchema.optional(),
       openresponse: OpenResponseTaskConfig$inboundSchema.optional(),
       evaluator: EvalColumnConfig$inboundSchema.optional(),
-      review: ReviewColumnConfig$inboundSchema.optional(),
+      annotation: AnnotationColumnConfig$inboundSchema.optional(),
       dataset: DatasetColumnConfig$inboundSchema.optional(),
       metric: MetricColumnConfig$inboundSchema.optional(),
       job_output: JobOutputColumnConfig$inboundSchema.optional(),

@@ -30,7 +30,7 @@ import { Result } from "../types/fp.js";
  * Add an eval column
  *
  * @remarks
- * Links an existing evaluator. Config is updated at the evaluator source, not here.
+ * Links an existing evaluator. Each row gets one evaluator cell per task column. Config is updated at the evaluator source, not here.
  */
 export function experimentsCreateEval(
   client: OrqCore,

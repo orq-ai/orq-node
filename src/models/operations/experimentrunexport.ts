@@ -9,16 +9,31 @@ import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+/**
+ * File format: `json` (an array of records), `jsonl` (one record per line) or `csv`. Each record is one row and task column.
+ */
 export const QueryParamFormat = {
   Csv: "csv",
   Json: "json",
   Jsonl: "jsonl",
 } as const;
+/**
+ * File format: `json` (an array of records), `jsonl` (one record per line) or `csv`. Each record is one row and task column.
+ */
 export type QueryParamFormat = ClosedEnum<typeof QueryParamFormat>;
 
 export type ExperimentRunExportRequest = {
+  /**
+   * ID of the experiment.
+   */
   experimentId: string;
+  /**
+   * ID of the run.
+   */
   runId: string;
+  /**
+   * File format: `json` (an array of records), `jsonl` (one record per line) or `csv`. Each record is one row and task column.
+   */
   format?: QueryParamFormat | undefined;
 };
 

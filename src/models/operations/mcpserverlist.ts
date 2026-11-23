@@ -23,6 +23,10 @@ export type McpServerListRequest = {
    * Case-insensitive match against the server key and display name.
    */
   search?: string | undefined;
+  /**
+   * Spans every project the caller belongs to instead of the active one.
+   */
+  allAccessibleProjects?: boolean | undefined;
 };
 
 /** @internal */
@@ -31,6 +35,7 @@ export type McpServerListRequest$Outbound = {
   starting_after?: string | undefined;
   ending_before?: string | undefined;
   search?: string | undefined;
+  all_accessible_projects?: boolean | undefined;
 };
 
 /** @internal */
@@ -44,10 +49,12 @@ export const McpServerListRequest$outboundSchema: z.ZodType<
     startingAfter: z.string().optional(),
     endingBefore: z.string().optional(),
     search: z.string().optional(),
+    allAccessibleProjects: z.boolean().optional(),
   }).transform((v) => {
     return remap$(v, {
       startingAfter: "starting_after",
       endingBefore: "ending_before",
+      allAccessibleProjects: "all_accessible_projects",
     });
   })
 );

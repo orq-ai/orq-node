@@ -28,6 +28,15 @@ export type SkillListRequest = {
    *  item from the previous page.
    */
   endingBefore?: string | undefined;
+  /**
+   * Case-insensitive substring match on display name and description.
+   */
+  search?: string | undefined;
+  /**
+   * Restrict results to one project: its own skills plus the workspace-level skills shared with it.
+   */
+  projectId?: string | undefined;
+  updatedBy?: string | undefined;
 };
 
 /** @internal */
@@ -35,6 +44,9 @@ export type SkillListRequest$Outbound = {
   limit?: number | undefined;
   starting_after?: string | undefined;
   ending_before?: string | undefined;
+  search?: string | undefined;
+  project_id?: string | undefined;
+  updated_by?: string | undefined;
 };
 
 /** @internal */
@@ -47,10 +59,15 @@ export const SkillListRequest$outboundSchema: z.ZodType<
     limit: z.number().int().optional(),
     startingAfter: z.string().optional(),
     endingBefore: z.string().optional(),
+    search: z.string().optional(),
+    projectId: z.string().optional(),
+    updatedBy: z.string().optional(),
   }).transform((v) => {
     return remap$(v, {
       startingAfter: "starting_after",
       endingBefore: "ending_before",
+      projectId: "project_id",
+      updatedBy: "updated_by",
     });
   })
 );

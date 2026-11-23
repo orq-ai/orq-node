@@ -30,7 +30,7 @@ import { Result } from "../types/fp.js";
  * Add a task column
  *
  * @remarks
- * Attaches a prompt, orq agent, or (reserved) harness config as a task column. Input mapping is required.
+ * Adds a task column with one source: a prompt, an agent, or an openresponse column filled outside orq.ai. Every existing row gets a cell for it, and the first task column also adds cost and latency metric columns.
  */
 export function experimentsCreateTask(
   client: OrqCore,

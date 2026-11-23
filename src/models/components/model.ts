@@ -33,6 +33,15 @@ export type ModelPricing = {};
  */
 export type ArtificialIntelligence = {};
 
+/**
+ * Artificial Analysis intelligence index per reasoning effort, keyed by
+ *
+ * @remarks
+ *  effort name. Each value has `intelligence_index`, plus `index_version`
+ *  and `index_is_estimated` when known. Absent when there is no effort ladder.
+ */
+export type ReasoningEfforts = {};
+
 export type Model = {
   /**
    * Catalog identifier, `<provider>/<model>` (for example `openai/gpt-4o`).
@@ -129,6 +138,77 @@ export type Model = {
    * True when this offering guarantees zero data retention.
    */
   zdr: boolean;
+  /**
+   * Reasoning effort that the `artificial_intelligence` scores are measured
+   *
+   * @remarks
+   *  at. Absent when the model has no default effort.
+   */
+  defaultEffort?: string | undefined;
+  /**
+   * Artificial Analysis intelligence index per reasoning effort, keyed by
+   *
+   * @remarks
+   *  effort name. Each value has `intelligence_index`, plus `index_version`
+   *  and `index_is_estimated` when known. Absent when there is no effort ladder.
+   */
+  reasoningEfforts?: ReasoningEfforts | undefined;
+  /**
+   * Blended price in USD per 1M tokens, weighting cache read, input and output
+   *
+   * @remarks
+   *  7:2:1: (7 x cache read + 2 x input + 1 x output) / 10. It uses base pricing
+   *  only, so service tiers and conditional prices are ignored. Absent when the
+   *  model has no Artificial Analysis data.
+   */
+  blendedPrice?: number | undefined;
+  /**
+   * False when `artificial_intelligence` is not the `default_effort` score:
+   *
+   * @remarks
+   *  the default effort has no scored rung, so the score of the model's
+   *  Artificial Analysis slug is used instead. Absent when the model has no
+   *  default effort.
+   */
+  defaultEffortScored?: boolean | undefined;
+  /**
+   * Artificial Analysis cost in USD to run the whole Intelligence Index.
+   *
+   * @remarks
+   *  Absent when Artificial Analysis has not published it for this model.
+   */
+  intelligenceIndexTotalCost?: number | undefined;
+  /**
+   * Artificial Analysis cost in USD per Intelligence Index task. Absent when
+   *
+   * @remarks
+   *  Artificial Analysis has not published it for this model.
+   */
+  intelligenceIndexCostPerTask?: number | undefined;
+  /**
+   * Artificial Analysis median end-to-end response time in seconds. Absent
+   *
+   * @remarks
+   *  when unmeasured.
+   */
+  medianEndToEndResponseTimeSeconds?: number | undefined;
+  /**
+   * Blend `blended_price` uses: `agentic` is the 7:2:1 cache read, input and
+   *
+   * @remarks
+   *  output blend. Absent when `blended_price` is absent.
+   */
+  blendedPriceMix?: string | undefined;
+  /**
+   * Where the cache read rate in `blended_price` came from: `host` is the
+   *
+   * @remarks
+   *  model's own cache read price, `artificial_analysis` is the Artificial
+   *  Analysis cache hit price capped at the input price, and `input` is the
+   *  input price, used when neither exists. Absent when `blended_price` is
+   *  absent.
+   */
+  blendedPriceCacheReadSource?: string | undefined;
 };
 
 /** @internal */
@@ -166,6 +246,23 @@ export function artificialIntelligenceFromJSON(
 }
 
 /** @internal */
+export const ReasoningEfforts$inboundSchema: z.ZodType<
+  ReasoningEfforts,
+  z.ZodTypeDef,
+  unknown
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
+
+export function reasoningEffortsFromJSON(
+  jsonString: string,
+): SafeParseResult<ReasoningEfforts, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ReasoningEfforts$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ReasoningEfforts' from JSON`,
+  );
+}
+
+/** @internal */
 export const Model$inboundSchema: z.ZodType<Model, z.ZodTypeDef, unknown> =
   /* @__PURE__ */ lazySchema$(() =>
     z.object({
@@ -193,6 +290,16 @@ export const Model$inboundSchema: z.ZodType<Model, z.ZodTypeDef, unknown> =
       features: z.array(z.string()),
       deprecated: z.boolean(),
       zdr: z.boolean(),
+      default_effort: z.string().optional(),
+      reasoning_efforts: z.lazy(() => ReasoningEfforts$inboundSchema)
+        .optional(),
+      blended_price: z.number().optional(),
+      default_effort_scored: z.boolean().optional(),
+      intelligence_index_total_cost: z.number().optional(),
+      intelligence_index_cost_per_task: z.number().optional(),
+      median_end_to_end_response_time_seconds: z.number().optional(),
+      blended_price_mix: z.string().optional(),
+      blended_price_cache_read_source: z.string().optional(),
     }).transform((v) => {
       return remap$(v, {
         "offering_of": "offeringOf",
@@ -200,6 +307,16 @@ export const Model$inboundSchema: z.ZodType<Model, z.ZodTypeDef, unknown> =
         "supported_tiers": "supportedTiers",
         "context_window": "contextWindow",
         "artificial_intelligence": "artificialIntelligence",
+        "default_effort": "defaultEffort",
+        "reasoning_efforts": "reasoningEfforts",
+        "blended_price": "blendedPrice",
+        "default_effort_scored": "defaultEffortScored",
+        "intelligence_index_total_cost": "intelligenceIndexTotalCost",
+        "intelligence_index_cost_per_task": "intelligenceIndexCostPerTask",
+        "median_end_to_end_response_time_seconds":
+          "medianEndToEndResponseTimeSeconds",
+        "blended_price_mix": "blendedPriceMix",
+        "blended_price_cache_read_source": "blendedPriceCacheReadSource",
       });
     })
   );

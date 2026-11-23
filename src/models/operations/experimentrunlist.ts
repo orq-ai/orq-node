@@ -7,10 +7,31 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type ExperimentRunListRequest = {
+  /**
+   * ID of the experiment.
+   */
   experimentId: string;
+  /**
+   * Page size, 1 to 200. Defaults to 25.
+   */
   limit?: number | undefined;
+  /**
+   * Cursor for forward pagination. Set to the `run_id` of the last item from
+   *
+   * @remarks
+   *  the previous page.
+   */
   startingAfter?: string | undefined;
+  /**
+   * Cursor for backward pagination. Set to the `run_id` of the first item from
+   *
+   * @remarks
+   *  the previous page.
+   */
   endingBefore?: string | undefined;
+  /**
+   * Include each run's average evaluator results in `metrics`.
+   */
   includeMetrics?: boolean | undefined;
 };
 

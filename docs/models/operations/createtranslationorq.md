@@ -12,6 +12,7 @@ let value: CreateTranslationOrq = {
     },
   ],
   retry: {
+    count: 2,
     onCodes: [
       429,
       500,

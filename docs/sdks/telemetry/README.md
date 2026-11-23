@@ -150,7 +150,7 @@ run();
 
 ## query
 
-Canonical neutral query envelope for traces, metrics, and logs. Select a source, compute list, and time range; optionally group, filter, bucket, sort, limit, and include totals. ReportingService.QueryReport and TraceQueryService.AggregateTraces remain supported compatibility contracts.
+Canonical neutral query envelope for traces, metrics, and logs. Select a source, compute list, and time range; optionally group, filter, bucket, sort, limit, and include totals.
 
 ### Example Usage
 

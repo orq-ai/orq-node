@@ -30,7 +30,7 @@ import { Result } from "../types/fp.js";
  * Duplicate a row
  *
  * @remarks
- * Copies a row's dataset cells into a new row placed after the source. Task, evaluator, metric and review cells start empty.
+ * Copies a row into a new row at the end of the run. Dataset and annotation cells keep their values; response, agent response, open response, evaluator and metric cells start empty.
  */
 export function experimentsDuplicateRow(
   client: OrqCore,

@@ -10,7 +10,16 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { Experiment, Experiment$inboundSchema } from "./experiment.js";
 
 export type ListExperimentsResponse = {
+  /**
+   * Page of experiments, newest first.
+   */
   data?: Array<Experiment> | undefined;
+  /**
+   * Whether more experiments are available in the selected pagination
+   *
+   * @remarks
+   *  direction.
+   */
   hasMore?: boolean | undefined;
 };
 

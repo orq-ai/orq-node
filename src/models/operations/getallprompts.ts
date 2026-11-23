@@ -880,7 +880,7 @@ export type GetAllPromptsFallbacks = {
  */
 export type GetAllPromptsRetry = {
   /**
-   * Number of retry attempts (1-5)
+   * Number of retries per model after the initial attempt (0-5). Defaults to 0 when a retry object is sent; omit retry to use the gateway default of two.
    */
   count: number;
   /**
@@ -2708,7 +2708,7 @@ export const GetAllPromptsRetry$inboundSchema: z.ZodType<
   unknown
 > = /* @__PURE__ */ lazySchema$(() =>
   z.object({
-    count: z.number().default(3),
+    count: z.number().default(0),
     on_codes: z.array(z.number()).optional(),
   }).transform((v) => {
     return remap$(v, {

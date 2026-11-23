@@ -8,12 +8,27 @@ import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+/**
+ * Comparison with the baseline run.
+ */
 export type MetricBaseline = {
+  /**
+   * Average of the baseline run.
+   */
   avg?: number | undefined;
+  /**
+   * This run's average minus the baseline average.
+   */
   delta?: number | undefined;
+  /**
+   * `delta` as a percentage of the baseline average; 0 when the baseline
+   *
+   * @remarks
+   *  average is 0.
+   */
   pctChange?: number | undefined;
   /**
-   * "up", "down" or "flat".
+   * `up`, `down` or `same`, by the sign of `delta`.
    */
   direction?: string | undefined;
 };

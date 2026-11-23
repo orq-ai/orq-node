@@ -11,6 +11,7 @@ let value: CreateImageRequestBody = {
   prompt: "<value>",
   model: "openai/gpt-image-2",
   retry: {
+    count: 2,
     onCodes: [
       429,
       500,
@@ -36,6 +37,7 @@ let value: CreateImageRequestBody = {
   },
   orq: {
     retry: {
+      count: 2,
       onCodes: [
         429,
         500,

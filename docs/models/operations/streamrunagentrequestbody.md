@@ -39,7 +39,7 @@ let value: StreamRunAgentRequestBody = {
         },
       },
       retry: {
-        count: 3,
+        count: 2,
         onCodes: [
           429,
           500,

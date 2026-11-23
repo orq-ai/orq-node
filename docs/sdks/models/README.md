@@ -160,7 +160,7 @@ const orq = new Orq({
 
 async function run() {
   const result = await orq.models.createAwsBedrock({
-    authMode: "<value>",
+    authMode: "pod-identity",
     displayName: "Shanon.Wintheiser",
     modelDeveloper: "<value>",
     modelId: "<id>",
@@ -189,7 +189,7 @@ const orq = new OrqCore({
 
 async function run() {
   const res = await modelsCreateAwsBedrock(orq, {
-    authMode: "<value>",
+    authMode: "pod-identity",
     displayName: "Shanon.Wintheiser",
     modelDeveloper: "<value>",
     modelId: "<id>",
@@ -393,7 +393,6 @@ const orq = new Orq({
 
 async function run() {
   const result = await orq.models.azureFoundryDeployments({
-    apiKey: "<value>",
     baseUrl: "https://admired-overcoat.info",
     provider: "<value>",
   });
@@ -420,7 +419,6 @@ const orq = new OrqCore({
 
 async function run() {
   const res = await modelsAzureFoundryDeployments(orq, {
-    apiKey: "<value>",
     baseUrl: "https://admired-overcoat.info",
     provider: "<value>",
   });
@@ -710,7 +708,7 @@ run();
 
 ## updateOpenaiLike
 
-Updates an OpenAI-compatible custom model. Live-re-probes the target API when base_url or model_id changes, using the stored encrypted api_key. Metadata is merged (existing preserved, new overrides).
+Updates an OpenAI-compatible custom model. `display_name`, `region` and `model_type` are required on every update. Live-re-probes the target API when `base_url` or `configuration.model_id` changes, using the stored encrypted api_key. The body carries no `metadata` field: metadata keys already stored on the model are preserved.
 
 ### Example Usage
 
@@ -807,7 +805,6 @@ const orq = new Orq({
 
 async function run() {
   await orq.models.validate({
-    apiKey: "<value>",
     provider: "<value>",
   });
 
@@ -833,7 +830,6 @@ const orq = new OrqCore({
 
 async function run() {
   const res = await modelsValidate(orq, {
-    apiKey: "<value>",
     provider: "<value>",
   });
   if (res.ok) {

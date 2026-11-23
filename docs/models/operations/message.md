@@ -31,13 +31,13 @@ const value: operations.Message2 = {
 };
 ```
 
-### `operations.Three`
+### `operations.Message3`
 
 ```typescript
-const value: operations.Three = {
+const value: operations.Message3 = {
   type: "image",
-  role: "correction",
-  url: "https://essential-tabletop.org/",
+  role: "assistant",
+  url: "https://massive-hunt.biz",
 };
 ```
 

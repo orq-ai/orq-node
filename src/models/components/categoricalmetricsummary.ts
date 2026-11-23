@@ -7,8 +7,17 @@ import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+/**
+ * Statistics of a metric that returns labels.
+ */
 export type CategoricalMetricSummary = {
+  /**
+   * Number of rows per label.
+   */
   labels?: { [k: string]: number } | undefined;
+  /**
+   * Number of rows with a label.
+   */
   count?: number | undefined;
 };
 

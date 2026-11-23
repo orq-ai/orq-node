@@ -466,11 +466,11 @@ export type RunAgentModelConfigurationParameters = {
 };
 
 /**
- * Retry configuration for model requests. Retries are triggered for specific HTTP status codes (e.g., 500, 429, 502, 503, 504). Supports configurable retry count (1-5) and custom status codes.
+ * Retry configuration for model requests. Allows customizing retry count (0-5) and HTTP status codes that trigger retries. Default codes: 408, 429, 500, 502, 503, 504, 529.
  */
 export type RunAgentModelConfigurationRetry = {
   /**
-   * Number of retry attempts (1-5)
+   * Number of retries per model after the initial attempt (0-5). Defaults to 0 when a retry object is sent; omit retry to use the gateway default of two.
    */
   count?: number | undefined;
   /**
@@ -494,7 +494,7 @@ export type RunAgentModelConfiguration2 = {
    */
   parameters?: RunAgentModelConfigurationParameters | undefined;
   /**
-   * Retry configuration for model requests. Retries are triggered for specific HTTP status codes (e.g., 500, 429, 502, 503, 504). Supports configurable retry count (1-5) and custom status codes.
+   * Retry configuration for model requests. Allows customizing retry count (0-5) and HTTP status codes that trigger retries. Default codes: 408, 429, 500, 502, 503, 504, 529.
    */
   retry?: RunAgentModelConfigurationRetry | undefined;
 };
@@ -973,11 +973,11 @@ export type RunAgentFallbackModelConfigurationParameters = {
 };
 
 /**
- * Retry configuration for this fallback model. Allows customizing retry count (1-5) and HTTP status codes that trigger retries.
+ * Retry configuration for this fallback model. Allows customizing retry count (0-5) and HTTP status codes that trigger retries.
  */
 export type RunAgentFallbackModelConfigurationRetry = {
   /**
-   * Number of retry attempts (1-5)
+   * Number of retries per model after the initial attempt (0-5). Defaults to 0 when a retry object is sent; omit retry to use the gateway default of two.
    */
   count?: number | undefined;
   /**
@@ -999,7 +999,7 @@ export type RunAgentFallbackModelConfiguration2 = {
    */
   parameters?: RunAgentFallbackModelConfigurationParameters | undefined;
   /**
-   * Retry configuration for this fallback model. Allows customizing retry count (1-5) and HTTP status codes that trigger retries.
+   * Retry configuration for this fallback model. Allows customizing retry count (0-5) and HTTP status codes that trigger retries.
    */
   retry?: RunAgentFallbackModelConfigurationRetry | undefined;
 };
@@ -1598,7 +1598,7 @@ export type AgentToolInputRun =
   | MCPToolRun;
 
 /**
- * If all, the agent will require approval for all tools. If respect_tool, the agent will require approval for tools that have the requires_approval flag set to true. If none, the agent will not require approval for any tools.
+ * An Agent runs its tools without waiting for a human decision on `POST /v3/router/responses`. See https://docs.orq.ai/ai-studio/ai-engineering/build-agents#tool-approval.
  */
 export const RunAgentToolApprovalRequired = {
   All: "all",
@@ -1606,7 +1606,7 @@ export const RunAgentToolApprovalRequired = {
   None: "none",
 } as const;
 /**
- * If all, the agent will require approval for all tools. If respect_tool, the agent will require approval for tools that have the requires_approval flag set to true. If none, the agent will not require approval for any tools.
+ * An Agent runs its tools without waiting for a human decision on `POST /v3/router/responses`. See https://docs.orq.ai/ai-studio/ai-engineering/build-agents#tool-approval.
  */
 export type RunAgentToolApprovalRequired = ClosedEnum<
   typeof RunAgentToolApprovalRequired
@@ -1705,7 +1705,7 @@ export type RunAgentSettings = {
     >
     | undefined;
   /**
-   * If all, the agent will require approval for all tools. If respect_tool, the agent will require approval for tools that have the requires_approval flag set to true. If none, the agent will not require approval for any tools.
+   * An Agent runs its tools without waiting for a human decision on `POST /v3/router/responses`. See https://docs.orq.ai/ai-studio/ai-engineering/build-agents#tool-approval.
    */
   toolApprovalRequired?: RunAgentToolApprovalRequired | undefined;
   /**
@@ -2731,7 +2731,7 @@ export const RunAgentModelConfigurationRetry$outboundSchema: z.ZodType<
   RunAgentModelConfigurationRetry
 > = /* @__PURE__ */ lazySchema$(() =>
   z.object({
-    count: z.number().default(3),
+    count: z.number().default(0),
     onCodes: z.array(z.number()).optional(),
   }).transform((v) => {
     return remap$(v, {
@@ -3631,7 +3631,7 @@ export const RunAgentFallbackModelConfigurationRetry$outboundSchema: z.ZodType<
   RunAgentFallbackModelConfigurationRetry
 > = /* @__PURE__ */ lazySchema$(() =>
   z.object({
-    count: z.number().default(3),
+    count: z.number().default(0),
     onCodes: z.array(z.number()).optional(),
   }).transform((v) => {
     return remap$(v, {
@@ -4070,7 +4070,7 @@ export const Tools$outboundSchema: z.ZodType<
   Tools
 > = /* @__PURE__ */ lazySchema$(() =>
   z.object({
-    id: z.string().default("01M83Z65CB7FYVYTQD5KBRTXR6"),
+    id: z.string().default("01M857QBVKX59F3B122NG5CG8C"),
     name: z.string(),
     description: z.string().optional(),
     schema: z.lazy(() => AgentToolInputRunSchema$outboundSchema),

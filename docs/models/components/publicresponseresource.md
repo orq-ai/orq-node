@@ -32,28 +32,33 @@ let value: PublicResponseResource = {
   model: "Mustang",
   object: "<value>",
   output: [
-    "<value 1>",
-    "<value 2>",
-    "<value 3>",
+    {
+      "arguments": "<value>",
+      "call_id": "<id>",
+      "name": "<value>",
+      "type": "function_call",
+    },
   ],
   parallelToolCalls: true,
-  presencePenalty: 2988.81,
+  presencePenalty: 7901.75,
   previousResponseId: "<id>",
   promptCacheKey: "<value>",
   promptCacheOptions: {},
   promptCacheRetention: "<value>",
   reasoning: {},
   safetyIdentifier: "<value>",
-  serviceTier: "scale",
-  status: "in_progress",
+  serviceTier: "default",
+  status: "queued",
   store: true,
-  temperature: 138.17,
+  temperature: 3651.77,
   text: "<value>",
   toolChoice: "<value>",
-  tools: [],
-  topLogprobs: 377524,
-  topP: 8436.75,
-  truncation: "disabled",
+  tools: [
+    "<value 1>",
+  ],
+  topLogprobs: 843675,
+  topP: 2532.92,
+  truncation: "auto",
   usage: {
     inputTokens: 276387,
     inputTokensDetails: {
@@ -67,7 +72,7 @@ let value: PublicResponseResource = {
     },
     totalTokens: 938481,
   },
-  user: "Mervin18",
+  user: "Tito.Harber70",
 };
 ```
 
@@ -84,6 +89,7 @@ let value: PublicResponseResource = {
 | `id`                                                                                                | *string*                                                                                            | :heavy_check_mark:                                                                                  | N/A                                                                                                 |
 | `incompleteDetails`                                                                                 | [components.IncompleteDetails](../../models/components/incompletedetails.md)                        | :heavy_check_mark:                                                                                  | N/A                                                                                                 |
 | `input`                                                                                             | *any*[]                                                                                             | :heavy_check_mark:                                                                                  | Always null. Retained for compatibility with older SDKs; input content is not returned.             |
+| `inputTransformations`                                                                              | [components.InputTransformation](../../models/components/inputtransformation.md)[]                  | :heavy_minus_sign:                                                                                  | Reasoning items removed by OpenAI and the reason for each removal, in input order.                  |
 | `instructions`                                                                                      | *string*                                                                                            | :heavy_check_mark:                                                                                  | N/A                                                                                                 |
 | `maxOutputTokens`                                                                                   | *number*                                                                                            | :heavy_check_mark:                                                                                  | N/A                                                                                                 |
 | `maxToolCalls`                                                                                      | *number*                                                                                            | :heavy_check_mark:                                                                                  | N/A                                                                                                 |
@@ -91,10 +97,11 @@ let value: PublicResponseResource = {
 | `metadata`                                                                                          | Record<string, *string*>                                                                            | :heavy_check_mark:                                                                                  | Developer-defined key-value pairs attached to the response (OpenAI spec: `Map<string, string>`).    |
 | `model`                                                                                             | *string*                                                                                            | :heavy_check_mark:                                                                                  | N/A                                                                                                 |
 | `object`                                                                                            | *string*                                                                                            | :heavy_check_mark:                                                                                  | Always "response"                                                                                   |
-| `output`                                                                                            | *any*[]                                                                                             | :heavy_check_mark:                                                                                  | Array of output items (messages, function calls, reasoning, etc.)                                   |
+| `output`                                                                                            | *components.ResponseOutputItem*[]                                                                   | :heavy_check_mark:                                                                                  | Array of output items (messages, function calls, reasoning, etc.)                                   |
 | `parallelToolCalls`                                                                                 | *boolean*                                                                                           | :heavy_check_mark:                                                                                  | N/A                                                                                                 |
 | `presencePenalty`                                                                                   | *number*                                                                                            | :heavy_check_mark:                                                                                  | N/A                                                                                                 |
 | `previousResponseId`                                                                                | *string*                                                                                            | :heavy_check_mark:                                                                                  | N/A                                                                                                 |
+| `promptCacheDiagnostics`                                                                            | [components.PromptCacheDiagnostics](../../models/components/promptcachediagnostics.md)              | :heavy_minus_sign:                                                                                  | N/A                                                                                                 |
 | `promptCacheKey`                                                                                    | *string*                                                                                            | :heavy_check_mark:                                                                                  | N/A                                                                                                 |
 | `promptCacheOptions`                                                                                | [components.OpenAIPromptCacheOptions](../../models/components/openaipromptcacheoptions.md)          | :heavy_check_mark:                                                                                  | N/A                                                                                                 |
 | `promptCacheRetention`                                                                              | *string*                                                                                            | :heavy_check_mark:                                                                                  | N/A                                                                                                 |

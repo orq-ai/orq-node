@@ -16,35 +16,88 @@ import { RunSettings, RunSettings$inboundSchema } from "./runsettings.js";
 import { RunStats, RunStats$inboundSchema } from "./runstats.js";
 import { RunStatus, RunStatus$inboundSchema } from "./runstatus.js";
 
+/**
+ * A run: one pass of the experiment's columns over a copy of its dataset rows.
+ */
 export type Run = {
+  /**
+   * Run ID (ULID).
+   */
   runId?: string | undefined;
+  /**
+   * Experiment the run belongs to.
+   */
   experimentId?: string | undefined;
+  /**
+   * Run name. `Run 1` for the first run; `Run ` plus the last four characters
+   *
+   * @remarks
+   *  of the run ID when a run is created without a key.
+   */
   key?: string | undefined;
   status?: RunStatus | undefined;
+  /**
+   * Dataset the rows were copied from, taken from the experiment when the run
+   *
+   * @remarks
+   *  was created. Empty for evaluatorq uploads.
+   */
   datasetId?: string | undefined;
-  datasetVersionId?: string | undefined;
+  /**
+   * Number of rows in the run.
+   */
   rowCount?: number | undefined;
+  /**
+   * Number of cells in each status.
+   */
   cellStatusCounts?: CellStatusCounts | undefined;
+  /**
+   * Columns of the run, hidden ones included with `active` false. Get, create
+   *
+   * @remarks
+   *  and update order them as dataset, task, job output, metric, evaluator and
+   *  annotation columns.
+   */
   columns?: Array<Column> | undefined;
   /**
    * Null on runs created without settings, such as evaluatorq uploads.
    */
   settings?: RunSettings | null | undefined;
   /**
-   * Null until the run is executed.
+   * Time the latest execution started. Null until the run is executed.
    */
   startedAt?: Date | null | undefined;
-  completedAt?: Date | null | undefined;
-  createdAt?: Date | undefined;
-  updatedAt?: Date | undefined;
   /**
-   * Averages per task column and metric, keyed "{task_column_id}_{metric_id}"
+   * Time the run completed or was canceled. Null until then, and kept when the
    *
    * @remarks
-   *  ("{run_id}_{metric_id}" for run-level metrics). Only set when requested.
+   *  run is executed again.
+   */
+  completedAt?: Date | null | undefined;
+  /**
+   * Creation time.
+   */
+  createdAt?: Date | undefined;
+  /**
+   * Time of the last change to the run.
+   */
+  updatedAt?: Date | undefined;
+  /**
+   * Average evaluator results per task column, keyed
+   *
+   * @remarks
+   *  `{task_column_id}_{evaluator_id}` (the run ID replaces the task column ID
+   *  for run-level values). Only returned by List runs with `include_metrics`;
+   *  categorical evaluators are left out.
    */
   metrics?: { [k: string]: number } | undefined;
+  /**
+   * Execution totals of the run.
+   */
   stats?: RunStats | undefined;
+  /**
+   * ID of the user or API key that created the run.
+   */
   createdById?: string | undefined;
 };
 
@@ -57,7 +110,6 @@ export const Run$inboundSchema: z.ZodType<Run, z.ZodTypeDef, unknown> =
       key: z.string().optional(),
       status: RunStatus$inboundSchema.optional(),
       dataset_id: z.string().optional(),
-      dataset_version_id: z.string().optional(),
       row_count: z.number().int().optional(),
       cell_status_counts: CellStatusCounts$inboundSchema.optional(),
       columns: z.array(Column$inboundSchema).optional(),
@@ -82,7 +134,6 @@ export const Run$inboundSchema: z.ZodType<Run, z.ZodTypeDef, unknown> =
         "run_id": "runId",
         "experiment_id": "experimentId",
         "dataset_id": "datasetId",
-        "dataset_version_id": "datasetVersionId",
         "row_count": "rowCount",
         "cell_status_counts": "cellStatusCounts",
         "started_at": "startedAt",

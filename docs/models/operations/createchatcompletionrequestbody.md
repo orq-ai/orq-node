@@ -19,6 +19,7 @@ let value: CreateChatCompletionRequestBody = {
     },
   ],
   retry: {
+    count: 2,
     onCodes: [
       429,
       500,

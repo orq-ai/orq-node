@@ -40,7 +40,7 @@ export type MemoryStore = {
   ttl?: number | null | undefined;
   embeddingConfig: MemoryStoreEmbeddingConfig;
   /**
-   * The unique identifier of the memory store
+   * The Memory's generated `_id` or its `entity_id` store
    */
   id: string;
 };

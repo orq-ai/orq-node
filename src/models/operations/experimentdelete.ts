@@ -7,6 +7,9 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type ExperimentDeleteRequest = {
+  /**
+   * ID of the experiment.
+   */
   experimentId: string;
 };
 

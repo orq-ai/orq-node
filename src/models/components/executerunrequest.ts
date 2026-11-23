@@ -3,7 +3,6 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../lib/primitives.js";
 import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import {
   ExecuteConstraints,
@@ -18,18 +17,22 @@ import {
 } from "./executetarget.js";
 
 export type ExecuteRunRequest = {
-  scope?: ExecuteScope | undefined;
+  scope: ExecuteScope;
+  /**
+   * Rows and columns to execute. Required for row, column and cell scope.
+   */
   targets?: Array<ExecuteTarget> | undefined;
+  /**
+   * Limits for this execution, saved into the run's settings.
+   */
   constraints?: ExecuteConstraints | undefined;
-  repeatCount?: number | undefined;
 };
 
 /** @internal */
 export type ExecuteRunRequest$Outbound = {
-  scope?: string | undefined;
+  scope: string;
   targets?: Array<ExecuteTarget$Outbound> | undefined;
   constraints?: ExecuteConstraints$Outbound | undefined;
-  repeat_count?: number | undefined;
 };
 
 /** @internal */
@@ -39,14 +42,9 @@ export const ExecuteRunRequest$outboundSchema: z.ZodType<
   ExecuteRunRequest
 > = /* @__PURE__ */ lazySchema$(() =>
   z.object({
-    scope: ExecuteScope$outboundSchema.optional(),
+    scope: ExecuteScope$outboundSchema,
     targets: z.array(ExecuteTarget$outboundSchema).optional(),
     constraints: ExecuteConstraints$outboundSchema.optional(),
-    repeatCount: z.number().int().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      repeatCount: "repeat_count",
-    });
   })
 );
 

@@ -7,9 +7,30 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type ExperimentListRequest = {
+  /**
+   * Page size, 1 to 200. Defaults to 25.
+   */
   limit?: number | undefined;
+  /**
+   * Cursor for forward pagination. Set to the `experiment_id` of the last item
+   *
+   * @remarks
+   *  from the previous page.
+   */
   startingAfter?: string | undefined;
+  /**
+   * Cursor for backward pagination. Set to the `experiment_id` of the first
+   *
+   * @remarks
+   *  item from the previous page.
+   */
   endingBefore?: string | undefined;
+  /**
+   * Restrict results to one project. Omit to list every project the caller
+   *
+   * @remarks
+   *  can access.
+   */
   projectId?: string | undefined;
 };
 

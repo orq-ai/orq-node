@@ -10,6 +10,10 @@ export type TracesListSpansRequest = {
   traceId: string;
   limit?: number | undefined;
   pageToken?: string | undefined;
+  /**
+   * Spans every project the caller belongs to instead of the active one.
+   */
+  allAccessibleProjects?: boolean | undefined;
 };
 
 /** @internal */
@@ -17,6 +21,7 @@ export type TracesListSpansRequest$Outbound = {
   trace_id: string;
   limit?: number | undefined;
   page_token?: string | undefined;
+  all_accessible_projects?: boolean | undefined;
 };
 
 /** @internal */
@@ -29,10 +34,12 @@ export const TracesListSpansRequest$outboundSchema: z.ZodType<
     traceId: z.string(),
     limit: z.number().int().optional(),
     pageToken: z.string().optional(),
+    allAccessibleProjects: z.boolean().optional(),
   }).transform((v) => {
     return remap$(v, {
       traceId: "trace_id",
       pageToken: "page_token",
+      allAccessibleProjects: "all_accessible_projects",
     });
   })
 );

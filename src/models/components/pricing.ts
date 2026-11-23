@@ -24,6 +24,7 @@ export type Pricing = {
   audioInput?: Price | undefined;
   audioOutput?: Price | undefined;
   audioSession?: Price | undefined;
+  audioSessionStandby?: Price | undefined;
   cacheRead?: Price | undefined;
   cacheWrite12h?: Price | undefined;
   cacheWrite1h?: Price | undefined;
@@ -47,6 +48,7 @@ export const Pricing$inboundSchema: z.ZodType<Pricing, z.ZodTypeDef, unknown> =
       audio_input: Price$inboundSchema.optional(),
       audio_output: Price$inboundSchema.optional(),
       audio_session: Price$inboundSchema.optional(),
+      audio_session_standby: Price$inboundSchema.optional(),
       cache_read: Price$inboundSchema.optional(),
       cache_write_12h: Price$inboundSchema.optional(),
       cache_write_1h: Price$inboundSchema.optional(),
@@ -66,6 +68,7 @@ export const Pricing$inboundSchema: z.ZodType<Pricing, z.ZodTypeDef, unknown> =
         "audio_input": "audioInput",
         "audio_output": "audioOutput",
         "audio_session": "audioSession",
+        "audio_session_standby": "audioSessionStandby",
         "cache_read": "cacheRead",
         "cache_write_12h": "cacheWrite12h",
         "cache_write_1h": "cacheWrite1h",
@@ -82,6 +85,7 @@ export type Pricing$Outbound = {
   audio_input?: Price$Outbound | undefined;
   audio_output?: Price$Outbound | undefined;
   audio_session?: Price$Outbound | undefined;
+  audio_session_standby?: Price$Outbound | undefined;
   cache_read?: Price$Outbound | undefined;
   cache_write_12h?: Price$Outbound | undefined;
   cache_write_1h?: Price$Outbound | undefined;
@@ -108,6 +112,7 @@ export const Pricing$outboundSchema: z.ZodType<
     audioInput: Price$outboundSchema.optional(),
     audioOutput: Price$outboundSchema.optional(),
     audioSession: Price$outboundSchema.optional(),
+    audioSessionStandby: Price$outboundSchema.optional(),
     cacheRead: Price$outboundSchema.optional(),
     cacheWrite12h: Price$outboundSchema.optional(),
     cacheWrite1h: Price$outboundSchema.optional(),
@@ -127,6 +132,7 @@ export const Pricing$outboundSchema: z.ZodType<
       audioInput: "audio_input",
       audioOutput: "audio_output",
       audioSession: "audio_session",
+      audioSessionStandby: "audio_session_standby",
       cacheRead: "cache_read",
       cacheWrite12h: "cache_write_12h",
       cacheWrite1h: "cache_write_1h",

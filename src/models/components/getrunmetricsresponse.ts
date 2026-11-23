@@ -10,7 +10,11 @@ import { MetricSummary, MetricSummary$inboundSchema } from "./metricsummary.js";
 
 export type GetRunMetricsResponse = {
   /**
-   * Keyed "{task_column_id}_{metric_id}" like Run.metrics.
+   * Metrics keyed `{task_column_id}_{evaluator_id}` for evaluators and
+   *
+   * @remarks
+   *  `{task_column_id}_orq_{metric}` for usage metrics such as `orq_cost` and
+   *  `orq_latency`. Empty when the run has no data.
    */
   metrics?: { [k: string]: MetricSummary } | undefined;
 };

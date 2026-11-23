@@ -149,7 +149,7 @@ export type CreateDecisionsRequestBody = {
    */
   fallbackOnCodes?: Array<number> | null | undefined;
   /**
-   * Up to 10 fallback models in order. The gateway retries a model for matching error codes before trying the next model. Every model must support classification and satisfy access checks. Requests with images in state require native OpenAI image-capable fallbacks; requests with assets or box questions require TypeSafe fallbacks.
+   * Up to 10 fallback models in order. The gateway retries a model for matching error codes before trying the next model. Every model must support native Decisions and satisfy access checks. Requests with images in state require native OpenAI image-capable fallbacks; requests with assets or box questions require TypeSafe fallbacks.
    */
   fallbacks?: Array<components.FallbackConfig> | null | undefined;
   identity?: components.ResponseIdentity | undefined;
@@ -158,7 +158,7 @@ export type CreateDecisionsRequestBody = {
    */
   metadata?: { [k: string]: string } | undefined;
   /**
-   * ID of a model that supports native or emulated classify, including openai/gpt-6-luna.
+   * ID of a model that supports native Decisions, such as openai/gpt-6-luna.
    */
   model: string;
   /**

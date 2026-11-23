@@ -8,6 +8,9 @@ import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type RetrieveMemoryDocumentRequest = {
   memoryStoreKey: string;
+  /**
+   * The Memory's generated `_id` or its `entity_id`.
+   */
   memoryEntityId: string;
   documentId: string;
 };

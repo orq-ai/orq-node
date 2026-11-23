@@ -11,11 +11,6 @@ import {
   AgentTaskConfig$outboundSchema,
 } from "./agenttaskconfig.js";
 import {
-  HarnessTaskConfig,
-  HarnessTaskConfig$Outbound,
-  HarnessTaskConfig$outboundSchema,
-} from "./harnesstaskconfig.js";
-import {
   OpenResponseTaskConfig,
   OpenResponseTaskConfig$Outbound,
   OpenResponseTaskConfig$outboundSchema,
@@ -27,20 +22,33 @@ import {
 } from "./prompttaskconfig.js";
 
 export type CreateTaskColumnRequest = {
-  displayName?: string | undefined;
+  /**
+   * Column name.
+   */
+  displayName: string;
+  /**
+   * Runs a prompt. Set exactly one of `prompt`, `agent` or `openresponse`.
+   */
   prompt?: PromptTaskConfig | undefined;
+  /**
+   * Runs an agent.
+   */
   agent?: AgentTaskConfig | undefined;
-  harness?: HarnessTaskConfig | undefined;
+  /**
+   * Creates a column whose cells are filled outside orq.ai.
+   */
   openresponse?: OpenResponseTaskConfig | undefined;
+  /**
+   * 0-based position among the run's columns. Defaults to the end.
+   */
   position?: number | undefined;
 };
 
 /** @internal */
 export type CreateTaskColumnRequest$Outbound = {
-  display_name?: string | undefined;
+  display_name: string;
   prompt?: PromptTaskConfig$Outbound | undefined;
   agent?: AgentTaskConfig$Outbound | undefined;
-  harness?: HarnessTaskConfig$Outbound | undefined;
   openresponse?: OpenResponseTaskConfig$Outbound | undefined;
   position?: number | undefined;
 };
@@ -52,10 +60,9 @@ export const CreateTaskColumnRequest$outboundSchema: z.ZodType<
   CreateTaskColumnRequest
 > = /* @__PURE__ */ lazySchema$(() =>
   z.object({
-    displayName: z.string().optional(),
+    displayName: z.string(),
     prompt: PromptTaskConfig$outboundSchema.optional(),
     agent: AgentTaskConfig$outboundSchema.optional(),
-    harness: HarnessTaskConfig$outboundSchema.optional(),
     openresponse: OpenResponseTaskConfig$outboundSchema.optional(),
     position: z.number().int().optional(),
   }).transform((v) => {

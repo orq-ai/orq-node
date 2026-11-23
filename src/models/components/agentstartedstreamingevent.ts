@@ -55,7 +55,7 @@ export type InputMessage = {
 };
 
 /**
- * If all, the agent will require approval for all tools. If respect_tool, the agent will require approval for tools that have the requires_approval flag set to true. If none, the agent will not require approval for any tools.
+ * An Agent runs its tools without waiting for a human decision on `POST /v3/router/responses`. See https://docs.orq.ai/ai-studio/ai-engineering/build-agents#tool-approval.
  */
 export const ToolApprovalRequired = {
   All: "all",
@@ -63,7 +63,7 @@ export const ToolApprovalRequired = {
   None: "none",
 } as const;
 /**
- * If all, the agent will require approval for all tools. If respect_tool, the agent will require approval for tools that have the requires_approval flag set to true. If none, the agent will not require approval for any tools.
+ * An Agent runs its tools without waiting for a human decision on `POST /v3/router/responses`. See https://docs.orq.ai/ai-studio/ai-engineering/build-agents#tool-approval.
  */
 export type ToolApprovalRequired = ClosedEnum<typeof ToolApprovalRequired>;
 
@@ -194,7 +194,7 @@ export type Settings = {
    */
   maxCost: number;
   /**
-   * If all, the agent will require approval for all tools. If respect_tool, the agent will require approval for tools that have the requires_approval flag set to true. If none, the agent will not require approval for any tools.
+   * An Agent runs its tools without waiting for a human decision on `POST /v3/router/responses`. See https://docs.orq.ai/ai-studio/ai-engineering/build-agents#tool-approval.
    */
   toolApprovalRequired: ToolApprovalRequired;
   /**

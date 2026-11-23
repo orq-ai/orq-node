@@ -10,7 +10,7 @@ let value: ListExperimentRunsResponse = {};
 
 ## Fields
 
-| Field                                              | Type                                               | Required                                           | Description                                        |
-| -------------------------------------------------- | -------------------------------------------------- | -------------------------------------------------- | -------------------------------------------------- |
-| `data`                                             | [components.Run](../../models/components/run.md)[] | :heavy_minus_sign:                                 | N/A                                                |
-| `hasMore`                                          | *boolean*                                          | :heavy_minus_sign:                                 | N/A                                                |
+| Field                                                                 | Type                                                                  | Required                                                              | Description                                                           |
+| --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- |
+| `data`                                                                | [components.Run](../../models/components/run.md)[]                    | :heavy_minus_sign:                                                    | Page of runs, newest first.                                           |
+| `hasMore`                                                             | *boolean*                                                             | :heavy_minus_sign:                                                    | Whether more runs are available in the selected pagination direction. |

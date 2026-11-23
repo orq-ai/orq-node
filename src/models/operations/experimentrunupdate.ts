@@ -8,7 +8,13 @@ import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import * as components from "../components/index.js";
 
 export type ExperimentRunUpdateRequest = {
+  /**
+   * ID of the experiment.
+   */
   experimentId: string;
+  /**
+   * ID of the run.
+   */
   runId: string;
   updateRunRequest: components.UpdateRunRequest;
 };

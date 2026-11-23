@@ -25,6 +25,7 @@ async function run() {
     model: "XC90",
     prompt: "<value>",
     retry: {
+      count: 3,
       onCodes: [
         429,
         500,
@@ -75,6 +76,7 @@ async function run() {
     model: "XC90",
     prompt: "<value>",
     retry: {
+      count: 3,
       onCodes: [
         429,
         500,

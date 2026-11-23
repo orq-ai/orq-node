@@ -8,13 +8,18 @@ import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+/**
+ * References read from the cell's value.
+ */
 export type ArtifactRefs = {
+  /**
+   * Trace of the execution that produced the value.
+   */
   traceId?: string | undefined;
+  /**
+   * Response produced by a prompt or agent cell.
+   */
   responseId?: string | undefined;
-  sessionId?: string | undefined;
-  sessionRunId?: string | undefined;
-  pullRequestUrl?: string | undefined;
-  patchObjectKey?: string | undefined;
 };
 
 /** @internal */
@@ -26,59 +31,14 @@ export const ArtifactRefs$inboundSchema: z.ZodType<
   z.object({
     trace_id: z.string().optional(),
     response_id: z.string().optional(),
-    session_id: z.string().optional(),
-    session_run_id: z.string().optional(),
-    pull_request_url: z.string().optional(),
-    patch_object_key: z.string().optional(),
   }).transform((v) => {
     return remap$(v, {
       "trace_id": "traceId",
       "response_id": "responseId",
-      "session_id": "sessionId",
-      "session_run_id": "sessionRunId",
-      "pull_request_url": "pullRequestUrl",
-      "patch_object_key": "patchObjectKey",
-    });
-  })
-);
-/** @internal */
-export type ArtifactRefs$Outbound = {
-  trace_id?: string | undefined;
-  response_id?: string | undefined;
-  session_id?: string | undefined;
-  session_run_id?: string | undefined;
-  pull_request_url?: string | undefined;
-  patch_object_key?: string | undefined;
-};
-
-/** @internal */
-export const ArtifactRefs$outboundSchema: z.ZodType<
-  ArtifactRefs$Outbound,
-  z.ZodTypeDef,
-  ArtifactRefs
-> = /* @__PURE__ */ lazySchema$(() =>
-  z.object({
-    traceId: z.string().optional(),
-    responseId: z.string().optional(),
-    sessionId: z.string().optional(),
-    sessionRunId: z.string().optional(),
-    pullRequestUrl: z.string().optional(),
-    patchObjectKey: z.string().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      traceId: "trace_id",
-      responseId: "response_id",
-      sessionId: "session_id",
-      sessionRunId: "session_run_id",
-      pullRequestUrl: "pull_request_url",
-      patchObjectKey: "patch_object_key",
     });
   })
 );
 
-export function artifactRefsToJSON(artifactRefs: ArtifactRefs): string {
-  return JSON.stringify(ArtifactRefs$outboundSchema.parse(artifactRefs));
-}
 export function artifactRefsFromJSON(
   jsonString: string,
 ): SafeParseResult<ArtifactRefs, SDKValidationError> {

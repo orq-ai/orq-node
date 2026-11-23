@@ -16,6 +16,12 @@ let value: UpdateMcpGatewayRequest = {
       skillExposure: {
         mode: "MCP_TOOL_EXPOSURE_MODE_ALL",
       },
+      resourceExposure: {
+        mode: "MCP_TOOL_EXPOSURE_MODE_ALL",
+      },
+      promptExposure: {
+        mode: "MCP_TOOL_EXPOSURE_MODE_ALL",
+      },
     },
   ],
 };
@@ -40,3 +46,4 @@ let value: UpdateMcpGatewayRequest = {
 | `replaceIcons`                                                                                                                                                                       | *boolean*                                                                                                                                                                            | :heavy_minus_sign:                                                                                                                                                                   | Set true with an empty icons list to restore default ORQ branding.                                                                                                                   |
 | `websiteUrl`                                                                                                                                                                         | *string*                                                                                                                                                                             | :heavy_minus_sign:                                                                                                                                                                   | Empty restores the default ORQ documentation website.                                                                                                                                |
 | `guardrails`                                                                                                                                                                         | [components.GuardrailRuleGuardrail](../../models/components/guardrailruleguardrail.md)[]                                                                                             | :heavy_minus_sign:                                                                                                                                                                   | Guardrails run on the arguments and result of every tool call this gateway serves.                                                                                                   |
+| `expectedUpdated`                                                                                                                                                                    | *string*                                                                                                                                                                             | :heavy_minus_sign:                                                                                                                                                                   | Latest observed `McpGateway.updated` value. Required when changing resource exposure or re-enabling a link that exposes resources.                                                   |

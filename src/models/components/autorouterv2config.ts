@@ -87,9 +87,17 @@ export type AutoRouterV2Config = {
    */
   intelligenceIndex: number;
   /**
-   * Blended price per million tokens, in USD.
+   * Blended price per million tokens, in USD: (7 x cache read + 2 x input + 1 x output) / 10.
    */
   price: number;
+  /**
+   * Where the cache read rate in the price came from: host, artificial_analysis (capped at the input price) or input.
+   */
+  priceCacheReadSource?: string | undefined;
+  /**
+   * Blend the price uses. agentic is the 7:2:1 cache read, input and output blend.
+   */
+  priceMix?: string | undefined;
   /**
    * Benchmark data for each reasoning effort the model exposes.
    */
@@ -121,6 +129,8 @@ export const AutoRouterV2Config$inboundSchema: z.ZodType<
     default_effort_scored: z.boolean().optional(),
     intelligence_index: z.number(),
     price: z.number(),
+    price_cache_read_source: z.string().optional(),
+    price_mix: z.string().optional(),
     reasoning_efforts: z.record(AutoRouterV2EffortConfig$inboundSchema)
       .optional(),
   }).transform((v) => {
@@ -143,6 +153,8 @@ export const AutoRouterV2Config$inboundSchema: z.ZodType<
       "default_effort": "defaultEffort",
       "default_effort_scored": "defaultEffortScored",
       "intelligence_index": "intelligenceIndex",
+      "price_cache_read_source": "priceCacheReadSource",
+      "price_mix": "priceMix",
       "reasoning_efforts": "reasoningEfforts",
     });
   })
@@ -167,6 +179,8 @@ export type AutoRouterV2Config$Outbound = {
   default_effort_scored?: boolean | undefined;
   intelligence_index: number;
   price: number;
+  price_cache_read_source?: string | undefined;
+  price_mix?: string | undefined;
   reasoning_efforts?:
     | { [k: string]: AutoRouterV2EffortConfig$Outbound }
     | undefined;
@@ -197,6 +211,8 @@ export const AutoRouterV2Config$outboundSchema: z.ZodType<
     defaultEffortScored: z.boolean().optional(),
     intelligenceIndex: z.number(),
     price: z.number(),
+    priceCacheReadSource: z.string().optional(),
+    priceMix: z.string().optional(),
     reasoningEfforts: z.record(AutoRouterV2EffortConfig$outboundSchema)
       .optional(),
   }).transform((v) => {
@@ -218,6 +234,8 @@ export const AutoRouterV2Config$outboundSchema: z.ZodType<
       defaultEffort: "default_effort",
       defaultEffortScored: "default_effort_scored",
       intelligenceIndex: "intelligence_index",
+      priceCacheReadSource: "price_cache_read_source",
+      priceMix: "price_mix",
       reasoningEfforts: "reasoning_efforts",
     });
   })

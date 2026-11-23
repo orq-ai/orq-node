@@ -8,10 +8,28 @@ import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+/**
+ * An evaluator used by the experiment.
+ */
 export type UniqueEvaluator = {
+  /**
+   * Evaluator ID.
+   */
   evaluatorId?: string | undefined;
+  /**
+   * Evaluator type, taken from the evaluator's definition.
+   */
   evaluatorType?: string | undefined;
+  /**
+   * Evaluator display name.
+   */
   evaluatorName?: string | undefined;
+  /**
+   * Column key of the evaluator in an evaluatorq upload. Empty for evaluators
+   *
+   * @remarks
+   *  added through Add an eval column.
+   */
   evaluatorKey?: string | undefined;
 };
 

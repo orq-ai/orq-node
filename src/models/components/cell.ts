@@ -8,42 +8,69 @@ import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { ArtifactRefs, ArtifactRefs$inboundSchema } from "./artifactrefs.js";
-import { CellProgress, CellProgress$inboundSchema } from "./cellprogress.js";
 import { CellStatus, CellStatus$inboundSchema } from "./cellstatus.js";
 import { CellType, CellType$inboundSchema } from "./celltype.js";
 
+/**
+ * A cell: the value of one column in one row.
+ */
 export type Cell = {
+  /**
+   * Cell ID. Token metric cells are derived when read and use
+   *
+   * @remarks
+   *  `{row_id}_{task_column_id}_{metric_key}`.
+   */
   cellId?: string | undefined;
+  /**
+   * Row the cell belongs to.
+   */
   rowId?: string | undefined;
+  /**
+   * Column the cell belongs to.
+   */
   columnId?: string | undefined;
-  repeatIndex?: number | undefined;
   status?: CellStatus | undefined;
   /**
    * Stored documents are returned as-is; strings are wrapped as {"text"},
    *
    * @remarks
    *  arrays as {"messages"} on messages cells and {"items"} elsewhere, other
-   *  scalars as {"value"}. Null for a cell that has no value yet.
+   *  scalars as {"value"}. Null for a cell that has no value yet. Prompt and
+   *  agent cells hold the response with `last_message`, `model`, `usage`,
+   *  `latency` and `total_cost`; evaluator and annotation cells hold `type` and
+   *  `value` (or `text`), with an optional `explanation`.
    */
   value?: { [k: string]: any } | null | undefined;
   /**
-   * Null when the cell holds no trace, response or session references.
+   * Null when the cell holds no trace or response reference.
    */
   artifacts?: ArtifactRefs | null | undefined;
   /**
-   * Only present while the cell is running.
+   * Reason the cell failed. Cleared when the cell is queued again by Execute a
+   *
+   * @remarks
+   *  run.
    */
-  progress?: CellProgress | null | undefined;
   errorMessage?: string | undefined;
   type?: CellType | undefined;
   /**
-   * Task column an evaluator, metric or review cell belongs to.
+   * Task column an evaluator, metric or annotation cell belongs to. Empty on the
+   *
+   * @remarks
+   *  placeholder cells of a run without task columns.
    */
   taskColumnId?: string | undefined;
   /**
    * Null on cells written before timestamps were recorded.
    */
   createdAt?: Date | null | undefined;
+  /**
+   * Time of the last write to the cell. Null on cells written before
+   *
+   * @remarks
+   *  timestamps were recorded.
+   */
   updatedAt?: Date | null | undefined;
 };
 
@@ -54,11 +81,9 @@ export const Cell$inboundSchema: z.ZodType<Cell, z.ZodTypeDef, unknown> =
       cell_id: z.string().optional(),
       row_id: z.string().optional(),
       column_id: z.string().optional(),
-      repeat_index: z.number().int().optional(),
       status: CellStatus$inboundSchema.optional(),
       value: z.nullable(z.record(z.any())).optional(),
       artifacts: z.nullable(ArtifactRefs$inboundSchema).optional(),
-      progress: z.nullable(CellProgress$inboundSchema).optional(),
       error_message: z.string().optional(),
       type: CellType$inboundSchema.optional(),
       task_column_id: z.string().optional(),
@@ -73,7 +98,6 @@ export const Cell$inboundSchema: z.ZodType<Cell, z.ZodTypeDef, unknown> =
         "cell_id": "cellId",
         "row_id": "rowId",
         "column_id": "columnId",
-        "repeat_index": "repeatIndex",
         "error_message": "errorMessage",
         "task_column_id": "taskColumnId",
         "created_at": "createdAt",

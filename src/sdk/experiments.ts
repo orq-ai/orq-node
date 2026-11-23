@@ -4,13 +4,13 @@
 
 import { experimentsCancelRun } from "../funcs/experimentsCancelRun.js";
 import { experimentsCreate } from "../funcs/experimentsCreate.js";
+import { experimentsCreateAnnotation } from "../funcs/experimentsCreateAnnotation.js";
 import { experimentsCreateEval } from "../funcs/experimentsCreateEval.js";
-import { experimentsCreateReview } from "../funcs/experimentsCreateReview.js";
 import { experimentsCreateRun } from "../funcs/experimentsCreateRun.js";
 import { experimentsCreateTask } from "../funcs/experimentsCreateTask.js";
 import { experimentsDelete } from "../funcs/experimentsDelete.js";
+import { experimentsDeleteAnnotation } from "../funcs/experimentsDeleteAnnotation.js";
 import { experimentsDeleteEval } from "../funcs/experimentsDeleteEval.js";
-import { experimentsDeleteReview } from "../funcs/experimentsDeleteReview.js";
 import { experimentsDeleteRows } from "../funcs/experimentsDeleteRows.js";
 import { experimentsDeleteRun } from "../funcs/experimentsDeleteRun.js";
 import { experimentsDeleteTask } from "../funcs/experimentsDeleteTask.js";
@@ -24,18 +24,15 @@ import { experimentsGet } from "../funcs/experimentsGet.js";
 import { experimentsGetRun } from "../funcs/experimentsGetRun.js";
 import { experimentsGetRunMetrics } from "../funcs/experimentsGetRunMetrics.js";
 import { experimentsList } from "../funcs/experimentsList.js";
+import { experimentsListAnnotations } from "../funcs/experimentsListAnnotations.js";
 import { experimentsListEvals } from "../funcs/experimentsListEvals.js";
-import { experimentsListReviews } from "../funcs/experimentsListReviews.js";
 import { experimentsListRuns } from "../funcs/experimentsListRuns.js";
 import { experimentsListTasks } from "../funcs/experimentsListTasks.js";
-import { experimentsPatchEvalCell } from "../funcs/experimentsPatchEvalCell.js";
-import { experimentsPatchReviewCell } from "../funcs/experimentsPatchReviewCell.js";
-import { experimentsPatchTaskCell } from "../funcs/experimentsPatchTaskCell.js";
+import { experimentsPatchAnnotationCell } from "../funcs/experimentsPatchAnnotationCell.js";
 import { experimentsQueryRun } from "../funcs/experimentsQueryRun.js";
 import { experimentsUpdate } from "../funcs/experimentsUpdate.js";
-import { experimentsUpdateReview } from "../funcs/experimentsUpdateReview.js";
+import { experimentsUpdateAnnotation } from "../funcs/experimentsUpdateAnnotation.js";
 import { experimentsUpdateRun } from "../funcs/experimentsUpdateRun.js";
-import { experimentsUpdateRunCell } from "../funcs/experimentsUpdateRunCell.js";
 import { experimentsUpdateRunColumnLayout } from "../funcs/experimentsUpdateRunColumnLayout.js";
 import { experimentsUpdateTask } from "../funcs/experimentsUpdateTask.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
@@ -67,7 +64,7 @@ export class Experiments extends ClientSDK {
    * Create an experiment
    *
    * @remarks
-   * Creates an experiment. project_id defaults to the API key's project and is required for keys that span several projects. When dataset_id is set, a draft run is created with rows from that dataset.
+   * Creates an experiment and its first run, a draft named Run 1. When dataset_id is set, the run gets one row per datapoint, up to 1000. project_id defaults to the caller's project and is required for API keys that span several projects.
    */
   async create(
     request: components.CreateExperimentRequest,
@@ -101,7 +98,7 @@ export class Experiments extends ClientSDK {
    * Delete an experiment
    *
    * @remarks
-   * Deletes an experiment and its runs.
+   * Deletes an experiment with all its runs, rows and cells.
    */
   async delete(
     request: operations.ExperimentDeleteRequest,
@@ -152,7 +149,7 @@ export class Experiments extends ClientSDK {
    * Create a run
    *
    * @remarks
-   * Creates a new run, copying columns from the selected run when present. A rerun is a new run.
+   * Creates a new run, copying columns from the selected run when present. A new run starts with empty output cells; executing cells on an existing run does not create one.
    */
   async createRun(
     request: operations.ExperimentRunCreateRequest,
@@ -186,7 +183,7 @@ export class Experiments extends ClientSDK {
    * Delete a run
    *
    * @remarks
-   * Deletes a run and its cell data. Distinct from cancel, which keeps completed cells.
+   * Deletes a run and its cell data. The last run of an experiment cannot be deleted. Distinct from cancel, which keeps completed cells.
    */
   async deleteRun(
     request: operations.ExperimentRunDeleteRequest,
@@ -210,6 +207,91 @@ export class Experiments extends ClientSDK {
     options?: RequestOptions,
   ): Promise<components.Run> {
     return unwrapAsync(experimentsUpdateRun(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * List annotation columns
+   *
+   * @remarks
+   * Lists the annotation columns of a run.
+   */
+  async listAnnotations(
+    request: operations.ExperimentAnnotationListRequest,
+    options?: RequestOptions,
+  ): Promise<components.ListAnnotationColumnsResponse> {
+    return unwrapAsync(experimentsListAnnotations(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Add an annotation column
+   *
+   * @remarks
+   * Adds an annotation column. Each row gets one annotation cell per task column.
+   */
+  async createAnnotation(
+    request: operations.ExperimentAnnotationCreateRequest,
+    options?: RequestOptions,
+  ): Promise<components.Column> {
+    return unwrapAsync(experimentsCreateAnnotation(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Remove an annotation column
+   *
+   * @remarks
+   * Removes an annotation column and all its cells.
+   */
+  async deleteAnnotation(
+    request: operations.ExperimentAnnotationDeleteRequest,
+    options?: RequestOptions,
+  ): Promise<void> {
+    return unwrapAsync(experimentsDeleteAnnotation(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Update annotation column metadata
+   *
+   * @remarks
+   * Updates display fields on the column. The human-eval definition is updated at source.
+   */
+  async updateAnnotation(
+    request: operations.ExperimentAnnotationUpdateRequest,
+    options?: RequestOptions,
+  ): Promise<components.Column> {
+    return unwrapAsync(experimentsUpdateAnnotation(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Set an annotation cell
+   *
+   * @remarks
+   * Writes the annotation value of one row for one task column. An annotation column holds one cell per task column, so task_id selects which response is being annotated. The task output of that row must be completed. The value must match the annotation type, and a running cell cannot be changed.
+   */
+  async patchAnnotationCell(
+    request: operations.ExperimentAnnotationCellPatchRequest,
+    options?: RequestOptions,
+  ): Promise<components.Cell> {
+    return unwrapAsync(experimentsPatchAnnotationCell(
       this,
       request,
       options,
@@ -252,6 +334,9 @@ export class Experiments extends ClientSDK {
 
   /**
    * List eval columns
+   *
+   * @remarks
+   * Lists the evaluator columns of a run.
    */
   async listEvals(
     request: operations.ExperimentEvalListRequest,
@@ -268,7 +353,7 @@ export class Experiments extends ClientSDK {
    * Add an eval column
    *
    * @remarks
-   * Links an existing evaluator. Config is updated at the evaluator source, not here.
+   * Links an existing evaluator. Each row gets one evaluator cell per task column. Config is updated at the evaluator source, not here.
    */
   async createEval(
     request: operations.ExperimentEvalCreateRequest,
@@ -283,6 +368,9 @@ export class Experiments extends ClientSDK {
 
   /**
    * Remove an eval column
+   *
+   * @remarks
+   * Removes an evaluator column and all its cells.
    */
   async deleteEval(
     request: operations.ExperimentEvalDeleteRequest,
@@ -296,27 +384,10 @@ export class Experiments extends ClientSDK {
   }
 
   /**
-   * Correct an eval cell
-   *
-   * @remarks
-   * Human override of an automated evaluator verdict on one datapoint.
-   */
-  async patchEvalCell(
-    request: operations.ExperimentEvalCellPatchRequest,
-    options?: RequestOptions,
-  ): Promise<components.Cell> {
-    return unwrapAsync(experimentsPatchEvalCell(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
    * Execute a run
    *
    * @remarks
-   * Executes cells at the requested scope. FULL, PARTIAL, ROW and COLUMN queue the matching cells (a task column also queues its linked evaluator, metric and review cells) and start the orchestrator, which also re-runs failed cells of every row it picks up. A run that is already queued or running rejects new execution until it finishes or is cancelled. CELL re-runs one task or evaluator cell in place. Re-executing a terminal run does not require creating a new run.
+   * Executes cells at the requested scope. FULL, PARTIAL, ROW and COLUMN queue the matching cells (a task column also queues its linked evaluator and metric cells) and start the orchestrator, which also re-runs failed cells of every row it picks up. A run that is already queued or running rejects new execution until it finishes or is cancelled. CELL re-runs one task or evaluator cell in place. Re-executing a terminal run does not require creating a new run.
    */
   async executeRun(
     request: operations.ExperimentRunExecuteRequest,
@@ -350,86 +421,13 @@ export class Experiments extends ClientSDK {
    * Query run cells
    *
    * @remarks
-   * Returns selected cells by row and column name. POST because selections can exceed URL limits.
+   * Returns the rows of a run with their cells, filtered by row and column. POST because selections can exceed URL limits.
    */
   async queryRun(
     request: operations.ExperimentRunQueryRequest,
     options?: RequestOptions,
   ): Promise<components.QueryRunResponse> {
     return unwrapAsync(experimentsQueryRun(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * List human review columns
-   */
-  async listReviews(
-    request: operations.ExperimentReviewListRequest,
-    options?: RequestOptions,
-  ): Promise<components.ListReviewColumnsResponse> {
-    return unwrapAsync(experimentsListReviews(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Add a human review column
-   */
-  async createReview(
-    request: operations.ExperimentReviewCreateRequest,
-    options?: RequestOptions,
-  ): Promise<components.Column> {
-    return unwrapAsync(experimentsCreateReview(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Remove a human review column
-   */
-  async deleteReview(
-    request: operations.ExperimentReviewDeleteRequest,
-    options?: RequestOptions,
-  ): Promise<void> {
-    return unwrapAsync(experimentsDeleteReview(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Update review column metadata
-   *
-   * @remarks
-   * Updates display fields on the column. The human-eval definition is updated at source.
-   */
-  async updateReview(
-    request: operations.ExperimentReviewUpdateRequest,
-    options?: RequestOptions,
-  ): Promise<components.Column> {
-    return unwrapAsync(experimentsUpdateReview(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Set a human review cell
-   */
-  async patchReviewCell(
-    request: operations.ExperimentReviewCellPatchRequest,
-    options?: RequestOptions,
-  ): Promise<components.Cell> {
-    return unwrapAsync(experimentsPatchReviewCell(
       this,
       request,
       options,
@@ -454,27 +452,10 @@ export class Experiments extends ClientSDK {
   }
 
   /**
-   * Update a cell
-   *
-   * @remarks
-   * Writes a cell value by cell id, including dataset and review cells. An empty value clears the cell. Running cells cannot be changed.
-   */
-  async updateRunCell(
-    request: operations.ExperimentRunCellUpdateRequest,
-    options?: RequestOptions,
-  ): Promise<components.Cell> {
-    return unwrapAsync(experimentsUpdateRunCell(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
    * Duplicate a row
    *
    * @remarks
-   * Copies a row's dataset cells into a new row placed after the source. Task, evaluator, metric and review cells start empty.
+   * Copies a row into a new row at the end of the run. Dataset and annotation cells keep their values; response, agent response, open response, evaluator and metric cells start empty.
    */
   async duplicateRow(
     request: operations.ExperimentRunRowDuplicateRequest,
@@ -489,6 +470,9 @@ export class Experiments extends ClientSDK {
 
   /**
    * List task columns
+   *
+   * @remarks
+   * Lists the task columns of a run: prompt, agent and openresponse columns.
    */
   async listTasks(
     request: operations.ExperimentTaskListRequest,
@@ -505,7 +489,7 @@ export class Experiments extends ClientSDK {
    * Add a task column
    *
    * @remarks
-   * Attaches a prompt, orq agent, or (reserved) harness config as a task column. Input mapping is required.
+   * Adds a task column with one source: a prompt, an agent, or an openresponse column filled outside orq.ai. Every existing row gets a cell for it, and the first task column also adds cost and latency metric columns.
    */
   async createTask(
     request: operations.ExperimentTaskCreateRequest,
@@ -520,6 +504,9 @@ export class Experiments extends ClientSDK {
 
   /**
    * Delete a task column
+   *
+   * @remarks
+   * Deletes a task column with its cells and the evaluator, metric and annotation cells linked to it. Deleting the last task column also removes the metric columns.
    */
   async deleteTask(
     request: operations.ExperimentTaskDeleteRequest,
@@ -536,7 +523,7 @@ export class Experiments extends ClientSDK {
    * Update a task column
    *
    * @remarks
-   * Updates an unlinked task column in place.
+   * Renames a task column or replaces its source. Existing cells are not changed.
    */
   async updateTask(
     request: operations.ExperimentTaskUpdateRequest,
@@ -550,27 +537,10 @@ export class Experiments extends ClientSDK {
   }
 
   /**
-   * Ingest a task cell
-   *
-   * @remarks
-   * Writes a cell result, including externally executed or harness cells.
-   */
-  async patchTaskCell(
-    request: operations.ExperimentTaskCellPatchRequest,
-    options?: RequestOptions,
-  ): Promise<components.Cell> {
-    return unwrapAsync(experimentsPatchTaskCell(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
    * Export a run
    *
    * @remarks
-   * Downloads the run as a file, including human review and evaluator corrections made after an earlier export.
+   * Downloads the run as a file, including annotations and evaluator corrections made after an earlier export.
    */
   async exportRun(
     request: operations.ExperimentRunExportRequest,

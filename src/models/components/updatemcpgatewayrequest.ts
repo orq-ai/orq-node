@@ -98,6 +98,10 @@ export type UpdateMcpGatewayRequest = {
    * Guardrails run on the arguments and result of every tool call this gateway serves.
    */
   guardrails?: Array<GuardrailRuleGuardrail> | undefined;
+  /**
+   * Latest observed `McpGateway.updated` value. Required when changing resource exposure or re-enabling a link that exposes resources.
+   */
+  expectedUpdated?: string | undefined;
 };
 
 /** @internal */
@@ -117,6 +121,7 @@ export type UpdateMcpGatewayRequest$Outbound = {
   replace_icons?: boolean | undefined;
   website_url?: string | undefined;
   guardrails?: Array<GuardrailRuleGuardrail$Outbound> | undefined;
+  expected_updated?: string | undefined;
 };
 
 /** @internal */
@@ -141,6 +146,7 @@ export const UpdateMcpGatewayRequest$outboundSchema: z.ZodType<
     replaceIcons: z.boolean().optional(),
     websiteUrl: z.string().optional(),
     guardrails: z.array(GuardrailRuleGuardrail$outboundSchema).optional(),
+    expectedUpdated: z.string().optional(),
   }).transform((v) => {
     return remap$(v, {
       displayName: "display_name",
@@ -151,6 +157,7 @@ export const UpdateMcpGatewayRequest$outboundSchema: z.ZodType<
       clearSkillIds: "clear_skill_ids",
       replaceIcons: "replace_icons",
       websiteUrl: "website_url",
+      expectedUpdated: "expected_updated",
     });
   })
 );

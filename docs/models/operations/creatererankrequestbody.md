@@ -16,6 +16,7 @@ let value: CreateRerankRequestBody = {
   ],
   model: "cohere/rerank-v4.0-pro",
   retry: {
+    count: 2,
     onCodes: [
       429,
       500,
@@ -44,6 +45,7 @@ let value: CreateRerankRequestBody = {
       type: "exact_match",
     },
     retry: {
+      count: 2,
       onCodes: [
         429,
         500,

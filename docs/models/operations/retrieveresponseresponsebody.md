@@ -32,25 +32,25 @@ let value: RetrieveResponseResponseBody = {
   model: "A8",
   object: "<value>",
   output: [
-    "<value 1>",
-    "<value 2>",
-    "<value 3>",
+    {
+      "type": "reasoning",
+    },
   ],
   parallelToolCalls: false,
-  presencePenalty: 6082.87,
+  presencePenalty: 9799.32,
   previousResponseId: "<id>",
   promptCacheKey: "<value>",
   promptCacheOptions: {},
   promptCacheRetention: "<value>",
-  reasoning: {},
-  safetyIdentifier: null,
-  serviceTier: "ultrafast",
+  reasoning: null,
+  safetyIdentifier: "<value>",
+  serviceTier: "scale",
   status: "failed",
-  store: false,
-  temperature: 1686.88,
+  store: true,
+  temperature: 1471.06,
   text: "<value>",
   toolChoice: "<value>",
-  tools: [],
+  tools: null,
   topLogprobs: 295476,
   topP: 8427.85,
   truncation: "auto",
@@ -84,6 +84,7 @@ let value: RetrieveResponseResponseBody = {
 | `id`                                                                                                | *string*                                                                                            | :heavy_check_mark:                                                                                  | N/A                                                                                                 |
 | `incompleteDetails`                                                                                 | [components.IncompleteDetails](../../models/components/incompletedetails.md)                        | :heavy_check_mark:                                                                                  | N/A                                                                                                 |
 | `input`                                                                                             | *any*[]                                                                                             | :heavy_check_mark:                                                                                  | Always null. Retained for compatibility with older SDKs; input content is not returned.             |
+| `inputTransformations`                                                                              | [components.InputTransformation](../../models/components/inputtransformation.md)[]                  | :heavy_minus_sign:                                                                                  | Reasoning items removed by OpenAI and the reason for each removal, in input order.                  |
 | `instructions`                                                                                      | *string*                                                                                            | :heavy_check_mark:                                                                                  | N/A                                                                                                 |
 | `maxOutputTokens`                                                                                   | *number*                                                                                            | :heavy_check_mark:                                                                                  | N/A                                                                                                 |
 | `maxToolCalls`                                                                                      | *number*                                                                                            | :heavy_check_mark:                                                                                  | N/A                                                                                                 |
@@ -91,10 +92,11 @@ let value: RetrieveResponseResponseBody = {
 | `metadata`                                                                                          | Record<string, *string*>                                                                            | :heavy_check_mark:                                                                                  | Developer-defined key-value pairs attached to the response (OpenAI spec: `Map<string, string>`).    |
 | `model`                                                                                             | *string*                                                                                            | :heavy_check_mark:                                                                                  | N/A                                                                                                 |
 | `object`                                                                                            | *string*                                                                                            | :heavy_check_mark:                                                                                  | Always "response"                                                                                   |
-| `output`                                                                                            | *any*[]                                                                                             | :heavy_check_mark:                                                                                  | Array of output items (messages, function calls, reasoning, etc.)                                   |
+| `output`                                                                                            | *components.ResponseOutputItem*[]                                                                   | :heavy_check_mark:                                                                                  | Array of output items (messages, function calls, reasoning, etc.)                                   |
 | `parallelToolCalls`                                                                                 | *boolean*                                                                                           | :heavy_check_mark:                                                                                  | N/A                                                                                                 |
 | `presencePenalty`                                                                                   | *number*                                                                                            | :heavy_check_mark:                                                                                  | N/A                                                                                                 |
 | `previousResponseId`                                                                                | *string*                                                                                            | :heavy_check_mark:                                                                                  | N/A                                                                                                 |
+| `promptCacheDiagnostics`                                                                            | [components.PromptCacheDiagnostics](../../models/components/promptcachediagnostics.md)              | :heavy_minus_sign:                                                                                  | N/A                                                                                                 |
 | `promptCacheKey`                                                                                    | *string*                                                                                            | :heavy_check_mark:                                                                                  | N/A                                                                                                 |
 | `promptCacheOptions`                                                                                | [components.OpenAIPromptCacheOptions](../../models/components/openaipromptcacheoptions.md)          | :heavy_check_mark:                                                                                  | N/A                                                                                                 |
 | `promptCacheRetention`                                                                              | *string*                                                                                            | :heavy_check_mark:                                                                                  | N/A                                                                                                 |

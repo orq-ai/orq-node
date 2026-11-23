@@ -12,6 +12,9 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
  * Output of one evaluatorq job; the column holds the text each job produced.
  */
 export type JobOutputColumnConfig = {
+  /**
+   * Name of the evaluatorq job.
+   */
   jobName?: string | undefined;
 };
 

@@ -7,8 +7,20 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type ExperimentRunMetricsGetRequest = {
+  /**
+   * ID of the experiment.
+   */
   experimentId: string;
+  /**
+   * ID of the run.
+   */
   runId: string;
+  /**
+   * Run of the same experiment to compare against. A run without values
+   *
+   * @remarks
+   *  returns no baseline.
+   */
   baselineRunId?: string | undefined;
 };
 

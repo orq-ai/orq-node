@@ -25,6 +25,7 @@ async function run() {
     prompt: "<value>",
     model: "2",
     retry: {
+      count: 3,
       onCodes: [
         429,
         500,
@@ -45,6 +46,7 @@ async function run() {
     },
     orq: {
       retry: {
+        count: 3,
         onCodes: [
           429,
           500,
@@ -121,6 +123,7 @@ async function run() {
     prompt: "<value>",
     model: "2",
     retry: {
+      count: 3,
       onCodes: [
         429,
         500,
@@ -141,6 +144,7 @@ async function run() {
     },
     orq: {
       retry: {
+        count: 3,
         onCodes: [
           429,
           500,

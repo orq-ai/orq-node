@@ -189,6 +189,106 @@ const experimentsUpdateRun =
       })).then((module) => module.experimentsUpdateRun(...args).$inspect()),
     )) as typeof import("../funcs/experimentsUpdateRun.js").experimentsUpdateRun;
 
+let experimentsListAnnotations$module:
+  | Promise<typeof import("../funcs/experimentsListAnnotations.js")>
+  | undefined;
+const experimentsListAnnotations =
+  ((
+    ...args: Parameters<
+      typeof import("../funcs/experimentsListAnnotations.js").experimentsListAnnotations
+    >
+  ) =>
+    new APIPromise(
+      (experimentsListAnnotations$module ??= import(
+        "../funcs/experimentsListAnnotations.js"
+      ).catch((error: unknown) => {
+        experimentsListAnnotations$module = undefined;
+        throw error;
+      })).then((module) =>
+        module.experimentsListAnnotations(...args).$inspect()
+      ),
+    )) as typeof import("../funcs/experimentsListAnnotations.js").experimentsListAnnotations;
+
+let experimentsCreateAnnotation$module:
+  | Promise<typeof import("../funcs/experimentsCreateAnnotation.js")>
+  | undefined;
+const experimentsCreateAnnotation =
+  ((
+    ...args: Parameters<
+      typeof import("../funcs/experimentsCreateAnnotation.js").experimentsCreateAnnotation
+    >
+  ) =>
+    new APIPromise(
+      (experimentsCreateAnnotation$module ??= import(
+        "../funcs/experimentsCreateAnnotation.js"
+      ).catch((error: unknown) => {
+        experimentsCreateAnnotation$module = undefined;
+        throw error;
+      })).then((module) =>
+        module.experimentsCreateAnnotation(...args).$inspect()
+      ),
+    )) as typeof import("../funcs/experimentsCreateAnnotation.js").experimentsCreateAnnotation;
+
+let experimentsDeleteAnnotation$module:
+  | Promise<typeof import("../funcs/experimentsDeleteAnnotation.js")>
+  | undefined;
+const experimentsDeleteAnnotation =
+  ((
+    ...args: Parameters<
+      typeof import("../funcs/experimentsDeleteAnnotation.js").experimentsDeleteAnnotation
+    >
+  ) =>
+    new APIPromise(
+      (experimentsDeleteAnnotation$module ??= import(
+        "../funcs/experimentsDeleteAnnotation.js"
+      ).catch((error: unknown) => {
+        experimentsDeleteAnnotation$module = undefined;
+        throw error;
+      })).then((module) =>
+        module.experimentsDeleteAnnotation(...args).$inspect()
+      ),
+    )) as typeof import("../funcs/experimentsDeleteAnnotation.js").experimentsDeleteAnnotation;
+
+let experimentsUpdateAnnotation$module:
+  | Promise<typeof import("../funcs/experimentsUpdateAnnotation.js")>
+  | undefined;
+const experimentsUpdateAnnotation =
+  ((
+    ...args: Parameters<
+      typeof import("../funcs/experimentsUpdateAnnotation.js").experimentsUpdateAnnotation
+    >
+  ) =>
+    new APIPromise(
+      (experimentsUpdateAnnotation$module ??= import(
+        "../funcs/experimentsUpdateAnnotation.js"
+      ).catch((error: unknown) => {
+        experimentsUpdateAnnotation$module = undefined;
+        throw error;
+      })).then((module) =>
+        module.experimentsUpdateAnnotation(...args).$inspect()
+      ),
+    )) as typeof import("../funcs/experimentsUpdateAnnotation.js").experimentsUpdateAnnotation;
+
+let experimentsPatchAnnotationCell$module:
+  | Promise<typeof import("../funcs/experimentsPatchAnnotationCell.js")>
+  | undefined;
+const experimentsPatchAnnotationCell =
+  ((
+    ...args: Parameters<
+      typeof import("../funcs/experimentsPatchAnnotationCell.js").experimentsPatchAnnotationCell
+    >
+  ) =>
+    new APIPromise(
+      (experimentsPatchAnnotationCell$module ??= import(
+        "../funcs/experimentsPatchAnnotationCell.js"
+      ).catch((error: unknown) => {
+        experimentsPatchAnnotationCell$module = undefined;
+        throw error;
+      })).then((module) =>
+        module.experimentsPatchAnnotationCell(...args).$inspect()
+      ),
+    )) as typeof import("../funcs/experimentsPatchAnnotationCell.js").experimentsPatchAnnotationCell;
+
 let experimentsCancelRun$module:
   | Promise<typeof import("../funcs/experimentsCancelRun.js")>
   | undefined;
@@ -281,24 +381,6 @@ const experimentsDeleteEval =
       })).then((module) => module.experimentsDeleteEval(...args).$inspect()),
     )) as typeof import("../funcs/experimentsDeleteEval.js").experimentsDeleteEval;
 
-let experimentsPatchEvalCell$module:
-  | Promise<typeof import("../funcs/experimentsPatchEvalCell.js")>
-  | undefined;
-const experimentsPatchEvalCell =
-  ((
-    ...args: Parameters<
-      typeof import("../funcs/experimentsPatchEvalCell.js").experimentsPatchEvalCell
-    >
-  ) =>
-    new APIPromise(
-      (experimentsPatchEvalCell$module ??= import(
-        "../funcs/experimentsPatchEvalCell.js"
-      ).catch((error: unknown) => {
-        experimentsPatchEvalCell$module = undefined;
-        throw error;
-      })).then((module) => module.experimentsPatchEvalCell(...args).$inspect()),
-    )) as typeof import("../funcs/experimentsPatchEvalCell.js").experimentsPatchEvalCell;
-
 let experimentsExecuteRun$module:
   | Promise<typeof import("../funcs/experimentsExecuteRun.js")>
   | undefined;
@@ -352,98 +434,6 @@ const experimentsQueryRun =
         })).then((module) => module.experimentsQueryRun(...args).$inspect()),
     )) as typeof import("../funcs/experimentsQueryRun.js").experimentsQueryRun;
 
-let experimentsListReviews$module:
-  | Promise<typeof import("../funcs/experimentsListReviews.js")>
-  | undefined;
-const experimentsListReviews =
-  ((
-    ...args: Parameters<
-      typeof import("../funcs/experimentsListReviews.js").experimentsListReviews
-    >
-  ) =>
-    new APIPromise(
-      (experimentsListReviews$module ??= import(
-        "../funcs/experimentsListReviews.js"
-      ).catch((error: unknown) => {
-        experimentsListReviews$module = undefined;
-        throw error;
-      })).then((module) => module.experimentsListReviews(...args).$inspect()),
-    )) as typeof import("../funcs/experimentsListReviews.js").experimentsListReviews;
-
-let experimentsCreateReview$module:
-  | Promise<typeof import("../funcs/experimentsCreateReview.js")>
-  | undefined;
-const experimentsCreateReview =
-  ((
-    ...args: Parameters<
-      typeof import("../funcs/experimentsCreateReview.js").experimentsCreateReview
-    >
-  ) =>
-    new APIPromise(
-      (experimentsCreateReview$module ??= import(
-        "../funcs/experimentsCreateReview.js"
-      ).catch((error: unknown) => {
-        experimentsCreateReview$module = undefined;
-        throw error;
-      })).then((module) => module.experimentsCreateReview(...args).$inspect()),
-    )) as typeof import("../funcs/experimentsCreateReview.js").experimentsCreateReview;
-
-let experimentsDeleteReview$module:
-  | Promise<typeof import("../funcs/experimentsDeleteReview.js")>
-  | undefined;
-const experimentsDeleteReview =
-  ((
-    ...args: Parameters<
-      typeof import("../funcs/experimentsDeleteReview.js").experimentsDeleteReview
-    >
-  ) =>
-    new APIPromise(
-      (experimentsDeleteReview$module ??= import(
-        "../funcs/experimentsDeleteReview.js"
-      ).catch((error: unknown) => {
-        experimentsDeleteReview$module = undefined;
-        throw error;
-      })).then((module) => module.experimentsDeleteReview(...args).$inspect()),
-    )) as typeof import("../funcs/experimentsDeleteReview.js").experimentsDeleteReview;
-
-let experimentsUpdateReview$module:
-  | Promise<typeof import("../funcs/experimentsUpdateReview.js")>
-  | undefined;
-const experimentsUpdateReview =
-  ((
-    ...args: Parameters<
-      typeof import("../funcs/experimentsUpdateReview.js").experimentsUpdateReview
-    >
-  ) =>
-    new APIPromise(
-      (experimentsUpdateReview$module ??= import(
-        "../funcs/experimentsUpdateReview.js"
-      ).catch((error: unknown) => {
-        experimentsUpdateReview$module = undefined;
-        throw error;
-      })).then((module) => module.experimentsUpdateReview(...args).$inspect()),
-    )) as typeof import("../funcs/experimentsUpdateReview.js").experimentsUpdateReview;
-
-let experimentsPatchReviewCell$module:
-  | Promise<typeof import("../funcs/experimentsPatchReviewCell.js")>
-  | undefined;
-const experimentsPatchReviewCell =
-  ((
-    ...args: Parameters<
-      typeof import("../funcs/experimentsPatchReviewCell.js").experimentsPatchReviewCell
-    >
-  ) =>
-    new APIPromise(
-      (experimentsPatchReviewCell$module ??= import(
-        "../funcs/experimentsPatchReviewCell.js"
-      ).catch((error: unknown) => {
-        experimentsPatchReviewCell$module = undefined;
-        throw error;
-      })).then((module) =>
-        module.experimentsPatchReviewCell(...args).$inspect()
-      ),
-    )) as typeof import("../funcs/experimentsPatchReviewCell.js").experimentsPatchReviewCell;
-
 let experimentsDeleteRows$module:
   | Promise<typeof import("../funcs/experimentsDeleteRows.js")>
   | undefined;
@@ -461,24 +451,6 @@ const experimentsDeleteRows =
         throw error;
       })).then((module) => module.experimentsDeleteRows(...args).$inspect()),
     )) as typeof import("../funcs/experimentsDeleteRows.js").experimentsDeleteRows;
-
-let experimentsUpdateRunCell$module:
-  | Promise<typeof import("../funcs/experimentsUpdateRunCell.js")>
-  | undefined;
-const experimentsUpdateRunCell =
-  ((
-    ...args: Parameters<
-      typeof import("../funcs/experimentsUpdateRunCell.js").experimentsUpdateRunCell
-    >
-  ) =>
-    new APIPromise(
-      (experimentsUpdateRunCell$module ??= import(
-        "../funcs/experimentsUpdateRunCell.js"
-      ).catch((error: unknown) => {
-        experimentsUpdateRunCell$module = undefined;
-        throw error;
-      })).then((module) => module.experimentsUpdateRunCell(...args).$inspect()),
-    )) as typeof import("../funcs/experimentsUpdateRunCell.js").experimentsUpdateRunCell;
 
 let experimentsDuplicateRow$module:
   | Promise<typeof import("../funcs/experimentsDuplicateRow.js")>
@@ -570,24 +542,6 @@ const experimentsUpdateTask =
       })).then((module) => module.experimentsUpdateTask(...args).$inspect()),
     )) as typeof import("../funcs/experimentsUpdateTask.js").experimentsUpdateTask;
 
-let experimentsPatchTaskCell$module:
-  | Promise<typeof import("../funcs/experimentsPatchTaskCell.js")>
-  | undefined;
-const experimentsPatchTaskCell =
-  ((
-    ...args: Parameters<
-      typeof import("../funcs/experimentsPatchTaskCell.js").experimentsPatchTaskCell
-    >
-  ) =>
-    new APIPromise(
-      (experimentsPatchTaskCell$module ??= import(
-        "../funcs/experimentsPatchTaskCell.js"
-      ).catch((error: unknown) => {
-        experimentsPatchTaskCell$module = undefined;
-        throw error;
-      })).then((module) => module.experimentsPatchTaskCell(...args).$inspect()),
-    )) as typeof import("../funcs/experimentsPatchTaskCell.js").experimentsPatchTaskCell;
-
 let experimentsExportRun$module:
   | Promise<typeof import("../funcs/experimentsExportRun.js")>
   | undefined;
@@ -628,7 +582,7 @@ export class Experiments extends ClientSDK {
    * Create an experiment
    *
    * @remarks
-   * Creates an experiment. project_id defaults to the API key's project and is required for keys that span several projects. When dataset_id is set, a draft run is created with rows from that dataset.
+   * Creates an experiment and its first run, a draft named Run 1. When dataset_id is set, the run gets one row per datapoint, up to 1000. project_id defaults to the caller's project and is required for API keys that span several projects.
    */
   async create(
     request: components.CreateExperimentRequest,
@@ -662,7 +616,7 @@ export class Experiments extends ClientSDK {
    * Delete an experiment
    *
    * @remarks
-   * Deletes an experiment and its runs.
+   * Deletes an experiment with all its runs, rows and cells.
    */
   async delete(
     request: operations.ExperimentDeleteRequest,
@@ -713,7 +667,7 @@ export class Experiments extends ClientSDK {
    * Create a run
    *
    * @remarks
-   * Creates a new run, copying columns from the selected run when present. A rerun is a new run.
+   * Creates a new run, copying columns from the selected run when present. A new run starts with empty output cells; executing cells on an existing run does not create one.
    */
   async createRun(
     request: operations.ExperimentRunCreateRequest,
@@ -747,7 +701,7 @@ export class Experiments extends ClientSDK {
    * Delete a run
    *
    * @remarks
-   * Deletes a run and its cell data. Distinct from cancel, which keeps completed cells.
+   * Deletes a run and its cell data. The last run of an experiment cannot be deleted. Distinct from cancel, which keeps completed cells.
    */
   async deleteRun(
     request: operations.ExperimentRunDeleteRequest,
@@ -771,6 +725,91 @@ export class Experiments extends ClientSDK {
     options?: RequestOptions,
   ): Promise<components.Run> {
     return unwrapAsync(experimentsUpdateRun(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * List annotation columns
+   *
+   * @remarks
+   * Lists the annotation columns of a run.
+   */
+  async listAnnotations(
+    request: operations.ExperimentAnnotationListRequest,
+    options?: RequestOptions,
+  ): Promise<components.ListAnnotationColumnsResponse> {
+    return unwrapAsync(experimentsListAnnotations(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Add an annotation column
+   *
+   * @remarks
+   * Adds an annotation column. Each row gets one annotation cell per task column.
+   */
+  async createAnnotation(
+    request: operations.ExperimentAnnotationCreateRequest,
+    options?: RequestOptions,
+  ): Promise<components.Column> {
+    return unwrapAsync(experimentsCreateAnnotation(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Remove an annotation column
+   *
+   * @remarks
+   * Removes an annotation column and all its cells.
+   */
+  async deleteAnnotation(
+    request: operations.ExperimentAnnotationDeleteRequest,
+    options?: RequestOptions,
+  ): Promise<void> {
+    return unwrapAsync(experimentsDeleteAnnotation(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Update annotation column metadata
+   *
+   * @remarks
+   * Updates display fields on the column. The human-eval definition is updated at source.
+   */
+  async updateAnnotation(
+    request: operations.ExperimentAnnotationUpdateRequest,
+    options?: RequestOptions,
+  ): Promise<components.Column> {
+    return unwrapAsync(experimentsUpdateAnnotation(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Set an annotation cell
+   *
+   * @remarks
+   * Writes the annotation value of one row for one task column. An annotation column holds one cell per task column, so task_id selects which response is being annotated. The task output of that row must be completed. The value must match the annotation type, and a running cell cannot be changed.
+   */
+  async patchAnnotationCell(
+    request: operations.ExperimentAnnotationCellPatchRequest,
+    options?: RequestOptions,
+  ): Promise<components.Cell> {
+    return unwrapAsync(experimentsPatchAnnotationCell(
       this,
       request,
       options,
@@ -813,6 +852,9 @@ export class Experiments extends ClientSDK {
 
   /**
    * List eval columns
+   *
+   * @remarks
+   * Lists the evaluator columns of a run.
    */
   async listEvals(
     request: operations.ExperimentEvalListRequest,
@@ -829,7 +871,7 @@ export class Experiments extends ClientSDK {
    * Add an eval column
    *
    * @remarks
-   * Links an existing evaluator. Config is updated at the evaluator source, not here.
+   * Links an existing evaluator. Each row gets one evaluator cell per task column. Config is updated at the evaluator source, not here.
    */
   async createEval(
     request: operations.ExperimentEvalCreateRequest,
@@ -844,6 +886,9 @@ export class Experiments extends ClientSDK {
 
   /**
    * Remove an eval column
+   *
+   * @remarks
+   * Removes an evaluator column and all its cells.
    */
   async deleteEval(
     request: operations.ExperimentEvalDeleteRequest,
@@ -857,27 +902,10 @@ export class Experiments extends ClientSDK {
   }
 
   /**
-   * Correct an eval cell
-   *
-   * @remarks
-   * Human override of an automated evaluator verdict on one datapoint.
-   */
-  async patchEvalCell(
-    request: operations.ExperimentEvalCellPatchRequest,
-    options?: RequestOptions,
-  ): Promise<components.Cell> {
-    return unwrapAsync(experimentsPatchEvalCell(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
    * Execute a run
    *
    * @remarks
-   * Executes cells at the requested scope. FULL, PARTIAL, ROW and COLUMN queue the matching cells (a task column also queues its linked evaluator, metric and review cells) and start the orchestrator, which also re-runs failed cells of every row it picks up. A run that is already queued or running rejects new execution until it finishes or is cancelled. CELL re-runs one task or evaluator cell in place. Re-executing a terminal run does not require creating a new run.
+   * Executes cells at the requested scope. FULL, PARTIAL, ROW and COLUMN queue the matching cells (a task column also queues its linked evaluator and metric cells) and start the orchestrator, which also re-runs failed cells of every row it picks up. A run that is already queued or running rejects new execution until it finishes or is cancelled. CELL re-runs one task or evaluator cell in place. Re-executing a terminal run does not require creating a new run.
    */
   async executeRun(
     request: operations.ExperimentRunExecuteRequest,
@@ -911,86 +939,13 @@ export class Experiments extends ClientSDK {
    * Query run cells
    *
    * @remarks
-   * Returns selected cells by row and column name. POST because selections can exceed URL limits.
+   * Returns the rows of a run with their cells, filtered by row and column. POST because selections can exceed URL limits.
    */
   async queryRun(
     request: operations.ExperimentRunQueryRequest,
     options?: RequestOptions,
   ): Promise<components.QueryRunResponse> {
     return unwrapAsync(experimentsQueryRun(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * List human review columns
-   */
-  async listReviews(
-    request: operations.ExperimentReviewListRequest,
-    options?: RequestOptions,
-  ): Promise<components.ListReviewColumnsResponse> {
-    return unwrapAsync(experimentsListReviews(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Add a human review column
-   */
-  async createReview(
-    request: operations.ExperimentReviewCreateRequest,
-    options?: RequestOptions,
-  ): Promise<components.Column> {
-    return unwrapAsync(experimentsCreateReview(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Remove a human review column
-   */
-  async deleteReview(
-    request: operations.ExperimentReviewDeleteRequest,
-    options?: RequestOptions,
-  ): Promise<void> {
-    return unwrapAsync(experimentsDeleteReview(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Update review column metadata
-   *
-   * @remarks
-   * Updates display fields on the column. The human-eval definition is updated at source.
-   */
-  async updateReview(
-    request: operations.ExperimentReviewUpdateRequest,
-    options?: RequestOptions,
-  ): Promise<components.Column> {
-    return unwrapAsync(experimentsUpdateReview(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Set a human review cell
-   */
-  async patchReviewCell(
-    request: operations.ExperimentReviewCellPatchRequest,
-    options?: RequestOptions,
-  ): Promise<components.Cell> {
-    return unwrapAsync(experimentsPatchReviewCell(
       this,
       request,
       options,
@@ -1015,27 +970,10 @@ export class Experiments extends ClientSDK {
   }
 
   /**
-   * Update a cell
-   *
-   * @remarks
-   * Writes a cell value by cell id, including dataset and review cells. An empty value clears the cell. Running cells cannot be changed.
-   */
-  async updateRunCell(
-    request: operations.ExperimentRunCellUpdateRequest,
-    options?: RequestOptions,
-  ): Promise<components.Cell> {
-    return unwrapAsync(experimentsUpdateRunCell(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
    * Duplicate a row
    *
    * @remarks
-   * Copies a row's dataset cells into a new row placed after the source. Task, evaluator, metric and review cells start empty.
+   * Copies a row into a new row at the end of the run. Dataset and annotation cells keep their values; response, agent response, open response, evaluator and metric cells start empty.
    */
   async duplicateRow(
     request: operations.ExperimentRunRowDuplicateRequest,
@@ -1050,6 +988,9 @@ export class Experiments extends ClientSDK {
 
   /**
    * List task columns
+   *
+   * @remarks
+   * Lists the task columns of a run: prompt, agent and openresponse columns.
    */
   async listTasks(
     request: operations.ExperimentTaskListRequest,
@@ -1066,7 +1007,7 @@ export class Experiments extends ClientSDK {
    * Add a task column
    *
    * @remarks
-   * Attaches a prompt, orq agent, or (reserved) harness config as a task column. Input mapping is required.
+   * Adds a task column with one source: a prompt, an agent, or an openresponse column filled outside orq.ai. Every existing row gets a cell for it, and the first task column also adds cost and latency metric columns.
    */
   async createTask(
     request: operations.ExperimentTaskCreateRequest,
@@ -1081,6 +1022,9 @@ export class Experiments extends ClientSDK {
 
   /**
    * Delete a task column
+   *
+   * @remarks
+   * Deletes a task column with its cells and the evaluator, metric and annotation cells linked to it. Deleting the last task column also removes the metric columns.
    */
   async deleteTask(
     request: operations.ExperimentTaskDeleteRequest,
@@ -1097,7 +1041,7 @@ export class Experiments extends ClientSDK {
    * Update a task column
    *
    * @remarks
-   * Updates an unlinked task column in place.
+   * Renames a task column or replaces its source. Existing cells are not changed.
    */
   async updateTask(
     request: operations.ExperimentTaskUpdateRequest,
@@ -1111,27 +1055,10 @@ export class Experiments extends ClientSDK {
   }
 
   /**
-   * Ingest a task cell
-   *
-   * @remarks
-   * Writes a cell result, including externally executed or harness cells.
-   */
-  async patchTaskCell(
-    request: operations.ExperimentTaskCellPatchRequest,
-    options?: RequestOptions,
-  ): Promise<components.Cell> {
-    return unwrapAsync(experimentsPatchTaskCell(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
    * Export a run
    *
    * @remarks
-   * Downloads the run as a file, including human review and evaluator corrections made after an earlier export.
+   * Downloads the run as a file, including annotations and evaluator corrections made after an earlier export.
    */
   async exportRun(
     request: operations.ExperimentRunExportRequest,

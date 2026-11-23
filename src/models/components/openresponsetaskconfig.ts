@@ -7,6 +7,12 @@ import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+/**
+ * A task column whose cells are filled outside orq.ai, such as by an
+ *
+ * @remarks
+ *  evaluatorq upload. It is never executed.
+ */
 export type OpenResponseTaskConfig = {};
 
 /** @internal */

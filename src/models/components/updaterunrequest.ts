@@ -11,7 +11,16 @@ import {
 } from "./runsettings.js";
 
 export type UpdateRunRequest = {
+  /**
+   * New run name. Must not be empty.
+   */
   key?: string | undefined;
+  /**
+   * Settings to change. `concurrency`, `timeout` and `max_turns` change only
+   *
+   * @remarks
+   *  when set. `hidden_column_ids` is replaced, and cleared when omitted.
+   */
   settings?: RunSettings | undefined;
 };
 

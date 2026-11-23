@@ -24,6 +24,7 @@ async function run() {
   const result = await orq.router.images.variations.create({
     model: "Altima",
     retry: {
+      count: 3,
       onCodes: [
         429,
         500,
@@ -44,6 +45,7 @@ async function run() {
     },
     orq: {
       retry: {
+        count: 3,
         onCodes: [
           429,
           500,
@@ -123,6 +125,7 @@ async function run() {
   const res = await routerImagesVariationsCreate(orq, {
     model: "Altima",
     retry: {
+      count: 3,
       onCodes: [
         429,
         500,
@@ -143,6 +146,7 @@ async function run() {
     },
     orq: {
       retry: {
+        count: 3,
         onCodes: [
           429,
           500,

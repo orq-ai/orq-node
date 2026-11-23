@@ -7,9 +7,24 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
 export type UpdateExperimentRequest = {
+  /**
+   * New experiment name, 1 to 255 characters.
+   */
   displayName?: string | undefined;
+  /**
+   * Run to show by default. Must be a run of this experiment.
+   */
   selectedRunId?: string | undefined;
+  /**
+   * Row height in the AI Studio grid: 1 (compact), 2 or 3 (tallest).
+   */
   rowHeightLevel?: number | undefined;
+  /**
+   * Moves the experiment to another project the caller can access. The
+   *
+   * @remarks
+   *  dataset stays where it is, so new runs need a dataset in the new project.
+   */
   projectId?: string | undefined;
 };
 

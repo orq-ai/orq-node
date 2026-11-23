@@ -12,4 +12,4 @@ let value: ListTaskColumnsResponse = {};
 
 | Field                                                    | Type                                                     | Required                                                 | Description                                              |
 | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
-| `data`                                                   | [components.Column](../../models/components/column.md)[] | :heavy_minus_sign:                                       | N/A                                                      |
+| `data`                                                   | [components.Column](../../models/components/column.md)[] | :heavy_minus_sign:                                       | Task columns of the run, in column order.                |

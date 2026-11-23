@@ -8,7 +8,11 @@ import { ExperimentRunRowsDeleteRequest } from "@orq-ai/node/models/operations";
 let value: ExperimentRunRowsDeleteRequest = {
   experimentId: "<id>",
   runId: "<id>",
-  deleteRowsRequest: {},
+  deleteRowsRequest: {
+    rowIds: [
+      "<value 1>",
+    ],
+  },
 };
 ```
 
@@ -16,6 +20,6 @@ let value: ExperimentRunRowsDeleteRequest = {
 
 | Field                                                                        | Type                                                                         | Required                                                                     | Description                                                                  |
 | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| `experimentId`                                                               | *string*                                                                     | :heavy_check_mark:                                                           | N/A                                                                          |
-| `runId`                                                                      | *string*                                                                     | :heavy_check_mark:                                                           | N/A                                                                          |
+| `experimentId`                                                               | *string*                                                                     | :heavy_check_mark:                                                           | ID of the experiment.                                                        |
+| `runId`                                                                      | *string*                                                                     | :heavy_check_mark:                                                           | ID of the run.                                                               |
 | `deleteRowsRequest`                                                          | [components.DeleteRowsRequest](../../models/components/deleterowsrequest.md) | :heavy_check_mark:                                                           | N/A                                                                          |

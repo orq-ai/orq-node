@@ -16,7 +16,7 @@ export type SearchRerankConfig = {
    */
   threshold?: number | undefined;
   /**
-   * The number of top results to return after reranking. If not provided, will default to the knowledge base configured `top_k`.
+   * The number of top results to return after reranking, 1 to 100. Without a `rerank_config` in the request, the knowledge base setting applies (5 by default); with one, omitting `top_k` here falls back to 10.
    */
   topK?: number | undefined;
 };
@@ -25,7 +25,7 @@ export type SearchRerankConfig = {
 export type SearchRerankConfig$Outbound = {
   model: string;
   threshold: number;
-  top_k: number;
+  top_k?: number | undefined;
 };
 
 /** @internal */
@@ -37,7 +37,7 @@ export const SearchRerankConfig$outboundSchema: z.ZodType<
   z.object({
     model: z.string(),
     threshold: z.number().default(0),
-    topK: z.number().int().default(10),
+    topK: z.number().int().optional(),
   }).transform((v) => {
     return remap$(v, {
       topK: "top_k",

@@ -30,7 +30,7 @@ import { Result } from "../types/fp.js";
  * Delete an experiment
  *
  * @remarks
- * Deletes an experiment and its runs.
+ * Deletes an experiment with all its runs, rows and cells.
  */
 export function experimentsDelete(
   client: OrqCore,

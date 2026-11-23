@@ -8,7 +8,13 @@ import { ExperimentRunColumnLayoutUpdateRequest } from "@orq-ai/node/models/oper
 let value: ExperimentRunColumnLayoutUpdateRequest = {
   experimentId: "<id>",
   runId: "<id>",
-  updateRunColumnLayoutRequest: {},
+  updateRunColumnLayoutRequest: {
+    columns: [
+      {
+        columnId: "<id>",
+      },
+    ],
+  },
 };
 ```
 
@@ -16,6 +22,6 @@ let value: ExperimentRunColumnLayoutUpdateRequest = {
 
 | Field                                                                                              | Type                                                                                               | Required                                                                                           | Description                                                                                        |
 | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
-| `experimentId`                                                                                     | *string*                                                                                           | :heavy_check_mark:                                                                                 | N/A                                                                                                |
-| `runId`                                                                                            | *string*                                                                                           | :heavy_check_mark:                                                                                 | N/A                                                                                                |
+| `experimentId`                                                                                     | *string*                                                                                           | :heavy_check_mark:                                                                                 | ID of the experiment.                                                                              |
+| `runId`                                                                                            | *string*                                                                                           | :heavy_check_mark:                                                                                 | ID of the run.                                                                                     |
 | `updateRunColumnLayoutRequest`                                                                     | [components.UpdateRunColumnLayoutRequest](../../models/components/updateruncolumnlayoutrequest.md) | :heavy_check_mark:                                                                                 | N/A                                                                                                |

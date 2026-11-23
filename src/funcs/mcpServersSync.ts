@@ -30,7 +30,7 @@ import { Result } from "../types/fp.js";
  * Sync an MCP server
  *
  * @remarks
- * Connects to an upstream MCP server, discovers tools, and persists the tool list and sync state on the server record.
+ * Syncs the upstream catalogs and returns discovery outcomes. Resource catalogs and capabilities discovered with user-specific credentials or discovery variables are returned only to the caller. A discovery failure that comes from the upstream server, such as a refused connection or rejected credentials, does not fail the request: the call answers 200 with sync_state.status SYNC_STATUS_FAILED and the reason in sync_state.errors, and the server's tools stay out of every gateway until a sync succeeds.
  */
 export function mcpServersSync(
   client: OrqCore,
@@ -171,7 +171,7 @@ async function $do(
     | SDKValidationError
   >(
     M.json(200, components.SyncMcpServerResponse$inboundSchema),
-    M.jsonErr(401, errors.ErrorResponse$inboundSchema),
+    M.jsonErr([400, 401, 404, 409], errors.ErrorResponse$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });

@@ -8,10 +8,21 @@ import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+/**
+ * Execution totals of a run. Not reset when the run is executed again.
+ */
 export type RunStats = {
+  /**
+   * Total cost in USD of the successful prompt and agent cell executions.
+   */
   totalCost?: number | undefined;
-  totalRuns?: number | undefined;
+  /**
+   * Number of failed prompt and agent cell executions.
+   */
   totalErrors?: number | undefined;
+  /**
+   * Number of successful prompt and agent cell executions.
+   */
   totalDone?: number | undefined;
 };
 
@@ -23,13 +34,11 @@ export const RunStats$inboundSchema: z.ZodType<
 > = /* @__PURE__ */ lazySchema$(() =>
   z.object({
     total_cost: z.number().optional(),
-    total_runs: z.number().int().optional(),
     total_errors: z.number().int().optional(),
     total_done: z.number().int().optional(),
   }).transform((v) => {
     return remap$(v, {
       "total_cost": "totalCost",
-      "total_runs": "totalRuns",
       "total_errors": "totalErrors",
       "total_done": "totalDone",
     });

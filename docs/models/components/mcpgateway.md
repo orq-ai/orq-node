@@ -17,6 +17,12 @@ let value: McpGateway = {
       skillExposure: {
         mode: "MCP_TOOL_EXPOSURE_MODE_ALL",
       },
+      resourceExposure: {
+        mode: "MCP_TOOL_EXPOSURE_MODE_ALL",
+      },
+      promptExposure: {
+        mode: "MCP_TOOL_EXPOSURE_MODE_ALL",
+      },
     },
   ],
 };

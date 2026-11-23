@@ -8,28 +8,40 @@ import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { RunRef, RunRef$Outbound, RunRef$outboundSchema } from "./runref.js";
 
 export type CreateExperimentRequest = {
-  displayName?: string | undefined;
   /**
-   * Project the experiment is created in; defaults to the API key's project when omitted.
+   * Experiment name, 1 to 255 characters.
    */
-  projectId?: string | undefined;
-  datasetId?: string | undefined;
-  datasetVersionId?: string | undefined;
+  displayName: string;
   /**
-   * Copies the task, evaluator and review columns of an existing run into the
+   * Project the experiment is created in. Defaults to the caller's project:
    *
    * @remarks
-   *  new experiment's first run (fork).
+   *  the API key's project, or the project open in the AI Studio. Required for
+   *  API keys that span several projects.
+   */
+  projectId?: string | undefined;
+  /**
+   * Dataset whose datapoints become the rows of the first run, at most 1000.
+   *
+   * @remarks
+   *  Must be in the experiment's project. Omit to start with an empty run.
+   */
+  datasetId?: string | undefined;
+  /**
+   * Run to fork. Its task, metric, evaluator and annotation columns are copied
+   *
+   * @remarks
+   *  into the new experiment's first run; rows still come from `dataset_id`.
+   *  Must be in the same project as the new experiment.
    */
   sourceRun?: RunRef | undefined;
 };
 
 /** @internal */
 export type CreateExperimentRequest$Outbound = {
-  display_name?: string | undefined;
+  display_name: string;
   project_id?: string | undefined;
   dataset_id?: string | undefined;
-  dataset_version_id?: string | undefined;
   source_run?: RunRef$Outbound | undefined;
 };
 
@@ -40,17 +52,15 @@ export const CreateExperimentRequest$outboundSchema: z.ZodType<
   CreateExperimentRequest
 > = /* @__PURE__ */ lazySchema$(() =>
   z.object({
-    displayName: z.string().optional(),
+    displayName: z.string(),
     projectId: z.string().optional(),
     datasetId: z.string().optional(),
-    datasetVersionId: z.string().optional(),
     sourceRun: RunRef$outboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
       displayName: "display_name",
       projectId: "project_id",
       datasetId: "dataset_id",
-      datasetVersionId: "dataset_version_id",
       sourceRun: "source_run",
     });
   })

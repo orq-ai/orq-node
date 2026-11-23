@@ -5,25 +5,24 @@
 import * as z from "zod/v3";
 import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import {
-  HarnessConstraints,
-  HarnessConstraints$Outbound,
-  HarnessConstraints$outboundSchema,
-} from "./harnessconstraints.js";
-import {
   LlmConstraints,
   LlmConstraints$Outbound,
   LlmConstraints$outboundSchema,
 } from "./llmconstraints.js";
 
+/**
+ * Limits for one execution, saved into the run's settings.
+ */
 export type ExecuteConstraints = {
+  /**
+   * Limits for prompt and agent cells.
+   */
   llm?: LlmConstraints | undefined;
-  harness?: HarnessConstraints | undefined;
 };
 
 /** @internal */
 export type ExecuteConstraints$Outbound = {
   llm?: LlmConstraints$Outbound | undefined;
-  harness?: HarnessConstraints$Outbound | undefined;
 };
 
 /** @internal */
@@ -34,7 +33,6 @@ export const ExecuteConstraints$outboundSchema: z.ZodType<
 > = /* @__PURE__ */ lazySchema$(() =>
   z.object({
     llm: LlmConstraints$outboundSchema.optional(),
-    harness: HarnessConstraints$outboundSchema.optional(),
   })
 );
 

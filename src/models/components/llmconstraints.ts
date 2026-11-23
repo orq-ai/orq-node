@@ -6,9 +6,25 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
+/**
+ * Limits for prompt and agent cells, saved into the run's settings.
+ */
 export type LlmConstraints = {
+  /**
+   * Maximum number of model calls in a cell's agent loop.
+   */
   maxTurns?: number | undefined;
+  /**
+   * Wall-clock limit for each cell, as a duration string such as `90s`. Must
+   *
+   * @remarks
+   *  not be shorter than the timeout of any agent used by the run's agent
+   *  columns.
+   */
   timeout?: string | undefined;
+  /**
+   * Maximum number of cells executing at the same time, 1 to 100.
+   */
   concurrency?: number | undefined;
 };
 

@@ -15,6 +15,7 @@ let value: CreateRerankOrq = {
     type: "exact_match",
   },
   retry: {
+    count: 2,
     onCodes: [
       429,
       500,

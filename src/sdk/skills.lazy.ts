@@ -38,6 +38,43 @@ const skillsCreate =
       )).then((module) => module.skillsCreate(...args).$inspect()),
     )) as typeof import("../funcs/skillsCreate.js").skillsCreate;
 
+let skillsImportBundle$module:
+  | Promise<typeof import("../funcs/skillsImportBundle.js")>
+  | undefined;
+const skillsImportBundle =
+  ((
+    ...args: Parameters<
+      typeof import("../funcs/skillsImportBundle.js").skillsImportBundle
+    >
+  ) =>
+    new APIPromise(
+      (skillsImportBundle$module ??= import("../funcs/skillsImportBundle.js")
+        .catch((error: unknown) => {
+          skillsImportBundle$module = undefined;
+          throw error;
+        })).then((module) => module.skillsImportBundle(...args).$inspect()),
+    )) as typeof import("../funcs/skillsImportBundle.js").skillsImportBundle;
+
+let skillsImportFromRepository$module:
+  | Promise<typeof import("../funcs/skillsImportFromRepository.js")>
+  | undefined;
+const skillsImportFromRepository =
+  ((
+    ...args: Parameters<
+      typeof import("../funcs/skillsImportFromRepository.js").skillsImportFromRepository
+    >
+  ) =>
+    new APIPromise(
+      (skillsImportFromRepository$module ??= import(
+        "../funcs/skillsImportFromRepository.js"
+      ).catch((error: unknown) => {
+        skillsImportFromRepository$module = undefined;
+        throw error;
+      })).then((module) =>
+        module.skillsImportFromRepository(...args).$inspect()
+      ),
+    )) as typeof import("../funcs/skillsImportFromRepository.js").skillsImportFromRepository;
+
 let skillsGet$module:
   | Promise<typeof import("../funcs/skillsGet.js")>
   | undefined;
@@ -84,6 +121,165 @@ const skillsUpdate =
       )).then((module) => module.skillsUpdate(...args).$inspect()),
     )) as typeof import("../funcs/skillsUpdate.js").skillsUpdate;
 
+let skillsReplaceBundle$module:
+  | Promise<typeof import("../funcs/skillsReplaceBundle.js")>
+  | undefined;
+const skillsReplaceBundle =
+  ((
+    ...args: Parameters<
+      typeof import("../funcs/skillsReplaceBundle.js").skillsReplaceBundle
+    >
+  ) =>
+    new APIPromise(
+      (skillsReplaceBundle$module ??= import("../funcs/skillsReplaceBundle.js")
+        .catch((error: unknown) => {
+          skillsReplaceBundle$module = undefined;
+          throw error;
+        })).then((module) => module.skillsReplaceBundle(...args).$inspect()),
+    )) as typeof import("../funcs/skillsReplaceBundle.js").skillsReplaceBundle;
+
+let skillsPutFile$module:
+  | Promise<typeof import("../funcs/skillsPutFile.js")>
+  | undefined;
+const skillsPutFile =
+  ((
+    ...args: Parameters<
+      typeof import("../funcs/skillsPutFile.js").skillsPutFile
+    >
+  ) =>
+    new APIPromise(
+      (skillsPutFile$module ??= import("../funcs/skillsPutFile.js").catch(
+        (error: unknown) => {
+          skillsPutFile$module = undefined;
+          throw error;
+        },
+      )).then((module) => module.skillsPutFile(...args).$inspect()),
+    )) as typeof import("../funcs/skillsPutFile.js").skillsPutFile;
+
+let skillsRenameFile$module:
+  | Promise<typeof import("../funcs/skillsRenameFile.js")>
+  | undefined;
+const skillsRenameFile =
+  ((
+    ...args: Parameters<
+      typeof import("../funcs/skillsRenameFile.js").skillsRenameFile
+    >
+  ) =>
+    new APIPromise(
+      (skillsRenameFile$module ??= import("../funcs/skillsRenameFile.js").catch(
+        (error: unknown) => {
+          skillsRenameFile$module = undefined;
+          throw error;
+        },
+      )).then((module) => module.skillsRenameFile(...args).$inspect()),
+    )) as typeof import("../funcs/skillsRenameFile.js").skillsRenameFile;
+
+let skillsSaveFiles$module:
+  | Promise<typeof import("../funcs/skillsSaveFiles.js")>
+  | undefined;
+const skillsSaveFiles =
+  ((
+    ...args: Parameters<
+      typeof import("../funcs/skillsSaveFiles.js").skillsSaveFiles
+    >
+  ) =>
+    new APIPromise(
+      (skillsSaveFiles$module ??= import("../funcs/skillsSaveFiles.js").catch(
+        (error: unknown) => {
+          skillsSaveFiles$module = undefined;
+          throw error;
+        },
+      )).then((module) => module.skillsSaveFiles(...args).$inspect()),
+    )) as typeof import("../funcs/skillsSaveFiles.js").skillsSaveFiles;
+
+let skillsListVersions$module:
+  | Promise<typeof import("../funcs/skillsListVersions.js")>
+  | undefined;
+const skillsListVersions =
+  ((
+    ...args: Parameters<
+      typeof import("../funcs/skillsListVersions.js").skillsListVersions
+    >
+  ) =>
+    new APIPromise(
+      (skillsListVersions$module ??= import("../funcs/skillsListVersions.js")
+        .catch((error: unknown) => {
+          skillsListVersions$module = undefined;
+          throw error;
+        })).then((module) => module.skillsListVersions(...args).$inspect()),
+    )) as typeof import("../funcs/skillsListVersions.js").skillsListVersions;
+
+let skillsExportBundle$module:
+  | Promise<typeof import("../funcs/skillsExportBundle.js")>
+  | undefined;
+const skillsExportBundle =
+  ((
+    ...args: Parameters<
+      typeof import("../funcs/skillsExportBundle.js").skillsExportBundle
+    >
+  ) =>
+    new APIPromise(
+      (skillsExportBundle$module ??= import("../funcs/skillsExportBundle.js")
+        .catch((error: unknown) => {
+          skillsExportBundle$module = undefined;
+          throw error;
+        })).then((module) => module.skillsExportBundle(...args).$inspect()),
+    )) as typeof import("../funcs/skillsExportBundle.js").skillsExportBundle;
+
+let skillsRestoreVersion$module:
+  | Promise<typeof import("../funcs/skillsRestoreVersion.js")>
+  | undefined;
+const skillsRestoreVersion =
+  ((
+    ...args: Parameters<
+      typeof import("../funcs/skillsRestoreVersion.js").skillsRestoreVersion
+    >
+  ) =>
+    new APIPromise(
+      (skillsRestoreVersion$module ??= import(
+        "../funcs/skillsRestoreVersion.js"
+      ).catch((error: unknown) => {
+        skillsRestoreVersion$module = undefined;
+        throw error;
+      })).then((module) => module.skillsRestoreVersion(...args).$inspect()),
+    )) as typeof import("../funcs/skillsRestoreVersion.js").skillsRestoreVersion;
+
+let skillsDeleteFile$module:
+  | Promise<typeof import("../funcs/skillsDeleteFile.js")>
+  | undefined;
+const skillsDeleteFile =
+  ((
+    ...args: Parameters<
+      typeof import("../funcs/skillsDeleteFile.js").skillsDeleteFile
+    >
+  ) =>
+    new APIPromise(
+      (skillsDeleteFile$module ??= import("../funcs/skillsDeleteFile.js").catch(
+        (error: unknown) => {
+          skillsDeleteFile$module = undefined;
+          throw error;
+        },
+      )).then((module) => module.skillsDeleteFile(...args).$inspect()),
+    )) as typeof import("../funcs/skillsDeleteFile.js").skillsDeleteFile;
+
+let skillsGetFileContent$module:
+  | Promise<typeof import("../funcs/skillsGetFileContent.js")>
+  | undefined;
+const skillsGetFileContent =
+  ((
+    ...args: Parameters<
+      typeof import("../funcs/skillsGetFileContent.js").skillsGetFileContent
+    >
+  ) =>
+    new APIPromise(
+      (skillsGetFileContent$module ??= import(
+        "../funcs/skillsGetFileContent.js"
+      ).catch((error: unknown) => {
+        skillsGetFileContent$module = undefined;
+        throw error;
+      })).then((module) => module.skillsGetFileContent(...args).$inspect()),
+    )) as typeof import("../funcs/skillsGetFileContent.js").skillsGetFileContent;
+
 export class Skills extends ClientSDK {
   /**
    * List all skills
@@ -113,6 +309,40 @@ export class Skills extends ClientSDK {
     options?: RequestOptions,
   ): Promise<components.CreateSkillResponse> {
     return unwrapAsync(skillsCreate(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Import a skill bundle
+   *
+   * @remarks
+   * Uploads a zip archive containing a SKILL.md file and optional supporting files. Creates a new file-bearing skill. An existing display name returns AlreadyExists. Operating-system archive metadata is ignored: `__MACOSX` entries, AppleDouble sidecars (`._*`), and per-directory metadata such as `.DS_Store`, `Thumbs.db`, and `desktop.ini` are dropped and do not count toward the per-skill file limit.
+   */
+  async importBundle(
+    request: components.ImportSkillBundleRequest,
+    options?: RequestOptions,
+  ): Promise<components.ImportSkillBundleResponse> {
+    return unwrapAsync(skillsImportBundle(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Import a skill from a repository
+   *
+   * @remarks
+   * Creates an editable skill snapshot from a repository directory using a workspace source control connection. The source commit is retained; subsequent repository changes are not synchronized.
+   */
+  async importFromRepository(
+    request: components.ImportSkillFromRepositoryRequest,
+    options?: RequestOptions,
+  ): Promise<components.ImportSkillFromRepositoryResponse> {
+    return unwrapAsync(skillsImportFromRepository(
       this,
       request,
       options,
@@ -164,6 +394,153 @@ export class Skills extends ClientSDK {
     options?: RequestOptions,
   ): Promise<components.UpdateSkillResponse> {
     return unwrapAsync(skillsUpdate(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Replace a skill bundle
+   */
+  async replaceBundle(
+    request: operations.SkillReplaceBundleRequest,
+    options?: RequestOptions,
+  ): Promise<components.ReplaceSkillBundleResponse> {
+    return unwrapAsync(skillsReplaceBundle(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Add or replace a skill file
+   *
+   * @remarks
+   * Uploads a single file to a skill's bundle. If the path already exists the file is replaced; otherwise it is added to the manifest.
+   */
+  async putFile(
+    request: operations.SkillPutFileRequest,
+    options?: RequestOptions,
+  ): Promise<components.PutSkillFileResponse> {
+    return unwrapAsync(skillsPutFile(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Rename a skill file
+   *
+   * @remarks
+   * Changes a file's path within a skill's bundle. The file content is unchanged. SKILL.md cannot be renamed.
+   */
+  async renameFile(
+    request: operations.SkillRenameFileRequest,
+    options?: RequestOptions,
+  ): Promise<components.RenameSkillFileResponse> {
+    return unwrapAsync(skillsRenameFile(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Save skill files atomically
+   *
+   * @remarks
+   * Saves file drafts and optional skill metadata as one version.
+   */
+  async saveFiles(
+    request: operations.SkillSaveFilesRequest,
+    options?: RequestOptions,
+  ): Promise<components.SaveSkillFilesResponse> {
+    return unwrapAsync(skillsSaveFiles(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * List skill versions
+   */
+  async listVersions(
+    request: operations.SkillListVersionsRequest,
+    options?: RequestOptions,
+  ): Promise<components.ListSkillVersionsResponse> {
+    return unwrapAsync(skillsListVersions(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Export a skill bundle
+   *
+   * @remarks
+   * Downloads the skill as a zip archive containing the SKILL.md file and all files in the manifest. Basic Skills receive a synthesized SKILL.md.
+   */
+  async exportBundle(
+    request: operations.SkillExportBundleRequest,
+    options?: RequestOptions,
+  ): Promise<components.ExportSkillBundleResponse> {
+    return unwrapAsync(skillsExportBundle(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Restore a skill version
+   *
+   * @remarks
+   * Restores a skill to a previous version recorded in the activity log. The restored state becomes a new version.
+   */
+  async restoreVersion(
+    request: operations.SkillRestoreVersionRequest,
+    options?: RequestOptions,
+  ): Promise<components.RestoreSkillVersionResponse> {
+    return unwrapAsync(skillsRestoreVersion(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Delete a skill file
+   *
+   * @remarks
+   * Removes a file from a skill's bundle by its relative path. SKILL.md cannot be deleted.
+   */
+  async deleteFile(
+    request: operations.SkillDeleteFileRequest,
+    options?: RequestOptions,
+  ): Promise<components.DeleteSkillFileResponse> {
+    return unwrapAsync(skillsDeleteFile(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Get a presigned URL for a skill file
+   *
+   * @remarks
+   * Returns a time-limited presigned URL that can be used to download the raw content of a file in the skill bundle.
+   */
+  async getFileContent(
+    request: operations.SkillGetFileContentRequest,
+    options?: RequestOptions,
+  ): Promise<components.GetSkillFileContentResponse> {
+    return unwrapAsync(skillsGetFileContent(
       this,
       request,
       options,

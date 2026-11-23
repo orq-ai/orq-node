@@ -10,15 +10,29 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { Cell, Cell$inboundSchema } from "./cell.js";
 import { RowStatus, RowStatus$inboundSchema } from "./rowstatus.js";
 
+/**
+ * A row of a run with its cells.
+ */
 export type QueryRow = {
+  /**
+   * Row ID (ULID).
+   */
   rowId?: string | undefined;
-  displayName?: string | undefined;
+  /**
+   * Cells of the row, including the derived token metric cells.
+   */
   cells?: Array<Cell> | undefined;
   status?: RowStatus | undefined;
   /**
    * Null on rows written before timestamps were recorded.
    */
   createdAt?: Date | null | undefined;
+  /**
+   * Time of the last change to the row. Null on rows written before
+   *
+   * @remarks
+   *  timestamps were recorded.
+   */
   updatedAt?: Date | null | undefined;
 };
 
@@ -30,7 +44,6 @@ export const QueryRow$inboundSchema: z.ZodType<
 > = /* @__PURE__ */ lazySchema$(() =>
   z.object({
     row_id: z.string().optional(),
-    display_name: z.string().optional(),
     cells: z.array(Cell$inboundSchema).optional(),
     status: RowStatus$inboundSchema.optional(),
     created_at: z.nullable(
@@ -42,7 +55,6 @@ export const QueryRow$inboundSchema: z.ZodType<
   }).transform((v) => {
     return remap$(v, {
       "row_id": "rowId",
-      "display_name": "displayName",
       "created_at": "createdAt",
       "updated_at": "updatedAt",
     });

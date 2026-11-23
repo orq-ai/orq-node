@@ -8,8 +8,17 @@ import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import * as components from "../components/index.js";
 
 export type ExperimentRunRowDuplicateRequest = {
+  /**
+   * ID of the experiment.
+   */
   experimentId: string;
+  /**
+   * ID of the run.
+   */
   runId: string;
+  /**
+   * ID of the row to copy.
+   */
   rowId: string;
   duplicateRowRequest: components.DuplicateRowRequest;
 };

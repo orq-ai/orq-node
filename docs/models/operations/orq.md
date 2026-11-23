@@ -11,6 +11,7 @@ import { Orq } from "@orq-ai/node/models/operations";
 
 let value: Orq = {
   retry: {
+    count: 3,
     onCodes: [
       429,
       500,

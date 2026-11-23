@@ -239,7 +239,7 @@ export class McpServers extends ClientSDK {
    * Sync an MCP server
    *
    * @remarks
-   * Connects to an upstream MCP server, discovers tools, and persists the tool list and sync state on the server record.
+   * Syncs the upstream catalogs and returns discovery outcomes. Resource catalogs and capabilities discovered with user-specific credentials or discovery variables are returned only to the caller. A discovery failure that comes from the upstream server, such as a refused connection or rejected credentials, does not fail the request: the call answers 200 with sync_state.status SYNC_STATUS_FAILED and the reason in sync_state.errors, and the server's tools stay out of every gateway until a sync succeeds.
    */
   async sync(
     request: operations.McpServerSyncRequest,
