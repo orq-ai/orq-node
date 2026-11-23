@@ -1401,7 +1401,7 @@ components:
             - "google_search"
         requires_approval:
           type: "boolean"
-          description: "Whether this tool requires approval before execution"
+          description: "Whether this tool is marked as requiring approval. An Agent runs its tools without waiting for a human decision on `POST /v3/router/responses`. See https://docs.orq.ai/ai-studio/ai-engineering/build-agents#tool-approval"
         configuration:
           type: "object"
           additionalProperties: {}
@@ -1419,7 +1419,7 @@ components:
             - "web_scraper"
         requires_approval:
           type: "boolean"
-          description: "Whether this tool requires approval before execution"
+          description: "Whether this tool is marked as requiring approval. An Agent runs its tools without waiting for a human decision on `POST /v3/router/responses`. See https://docs.orq.ai/ai-studio/ai-engineering/build-agents#tool-approval"
         configuration:
           type: "object"
           additionalProperties: {}
@@ -1437,7 +1437,7 @@ components:
             - "call_sub_agent"
         requires_approval:
           type: "boolean"
-          description: "Whether this tool requires approval before execution"
+          description: "Whether this tool is marked as requiring approval. An Agent runs its tools without waiting for a human decision on `POST /v3/router/responses`. See https://docs.orq.ai/ai-studio/ai-engineering/build-agents#tool-approval"
         configuration:
           type: "object"
           additionalProperties: {}
@@ -1455,7 +1455,7 @@ components:
             - "retrieve_agents"
         requires_approval:
           type: "boolean"
-          description: "Whether this tool requires approval before execution"
+          description: "Whether this tool is marked as requiring approval. An Agent runs its tools without waiting for a human decision on `POST /v3/router/responses`. See https://docs.orq.ai/ai-studio/ai-engineering/build-agents#tool-approval"
         configuration:
           type: "object"
           additionalProperties: {}
@@ -1473,7 +1473,7 @@ components:
             - "query_memory_store"
         requires_approval:
           type: "boolean"
-          description: "Whether this tool requires approval before execution"
+          description: "Whether this tool is marked as requiring approval. An Agent runs its tools without waiting for a human decision on `POST /v3/router/responses`. See https://docs.orq.ai/ai-studio/ai-engineering/build-agents#tool-approval"
         configuration:
           type: "object"
           additionalProperties: {}
@@ -1491,7 +1491,7 @@ components:
             - "write_memory_store"
         requires_approval:
           type: "boolean"
-          description: "Whether this tool requires approval before execution"
+          description: "Whether this tool is marked as requiring approval. An Agent runs its tools without waiting for a human decision on `POST /v3/router/responses`. See https://docs.orq.ai/ai-studio/ai-engineering/build-agents#tool-approval"
         configuration:
           type: "object"
           additionalProperties: {}
@@ -1509,7 +1509,7 @@ components:
             - "retrieve_memory_stores"
         requires_approval:
           type: "boolean"
-          description: "Whether this tool requires approval before execution"
+          description: "Whether this tool is marked as requiring approval. An Agent runs its tools without waiting for a human decision on `POST /v3/router/responses`. See https://docs.orq.ai/ai-studio/ai-engineering/build-agents#tool-approval"
         configuration:
           type: "object"
           additionalProperties: {}
@@ -1527,7 +1527,7 @@ components:
             - "delete_memory_document"
         requires_approval:
           type: "boolean"
-          description: "Whether this tool requires approval before execution"
+          description: "Whether this tool is marked as requiring approval. An Agent runs its tools without waiting for a human decision on `POST /v3/router/responses`. See https://docs.orq.ai/ai-studio/ai-engineering/build-agents#tool-approval"
         configuration:
           type: "object"
           additionalProperties: {}
@@ -1545,7 +1545,7 @@ components:
             - "retrieve_knowledge_bases"
         requires_approval:
           type: "boolean"
-          description: "Whether this tool requires approval before execution"
+          description: "Whether this tool is marked as requiring approval. An Agent runs its tools without waiting for a human decision on `POST /v3/router/responses`. See https://docs.orq.ai/ai-studio/ai-engineering/build-agents#tool-approval"
         configuration:
           type: "object"
           additionalProperties: {}
@@ -1563,7 +1563,7 @@ components:
             - "query_knowledge_base"
         requires_approval:
           type: "boolean"
-          description: "Whether this tool requires approval before execution"
+          description: "Whether this tool is marked as requiring approval. An Agent runs its tools without waiting for a human decision on `POST /v3/router/responses`. See https://docs.orq.ai/ai-studio/ai-engineering/build-agents#tool-approval"
         configuration:
           type: "object"
           additionalProperties: {}
@@ -1581,7 +1581,7 @@ components:
             - "current_date"
         requires_approval:
           type: "boolean"
-          description: "Whether this tool requires approval before execution"
+          description: "Whether this tool is marked as requiring approval. An Agent runs its tools without waiting for a human decision on `POST /v3/router/responses`. See https://docs.orq.ai/ai-studio/ai-engineering/build-agents#tool-approval"
         configuration:
           type: "object"
           additionalProperties: {}
@@ -1599,7 +1599,7 @@ components:
             - "advisor"
         requires_approval:
           type: "boolean"
-          description: "Whether this tool requires approval before execution"
+          description: "Whether this tool is marked as requiring approval. An Agent runs its tools without waiting for a human decision on `POST /v3/router/responses`. See https://docs.orq.ai/ai-studio/ai-engineering/build-agents#tool-approval"
         configuration:
           type: "object"
           additionalProperties: {}
@@ -1617,7 +1617,7 @@ components:
             - "sidekick"
         requires_approval:
           type: "boolean"
-          description: "Whether this tool requires approval before execution"
+          description: "Whether this tool is marked as requiring approval. An Agent runs its tools without waiting for a human decision on `POST /v3/router/responses`. See https://docs.orq.ai/ai-studio/ai-engineering/build-agents#tool-approval"
         configuration:
           type: "object"
           additionalProperties: {}
@@ -1635,7 +1635,7 @@ components:
             - "code_interpreter"
         requires_approval:
           type: "boolean"
-          description: "Whether this tool requires approval before execution"
+          description: "Whether this tool is marked as requiring approval. An Agent runs its tools without waiting for a human decision on `POST /v3/router/responses`. See https://docs.orq.ai/ai-studio/ai-engineering/build-agents#tool-approval"
         configuration:
           type: "object"
           additionalProperties: {}
@@ -1653,7 +1653,7 @@ components:
             - "file_system"
         requires_approval:
           type: "boolean"
-          description: "Whether this tool requires approval before execution"
+          description: "Whether this tool is marked as requiring approval. An Agent runs its tools without waiting for a human decision on `POST /v3/router/responses`. See https://docs.orq.ai/ai-studio/ai-engineering/build-agents#tool-approval"
         configuration:
           type: "object"
           properties:
@@ -1695,7 +1695,7 @@ components:
         requires_approval:
           type: "boolean"
           default: false
-          description: "Whether this tool requires approval before execution"
+          description: "Whether this tool is marked as requiring approval. An Agent runs its tools without waiting for a human decision on `POST /v3/router/responses`. See https://docs.orq.ai/ai-studio/ai-engineering/build-agents#tool-approval"
         timeout:
           type: "number"
           minimum: 1
@@ -1721,7 +1721,7 @@ components:
         requires_approval:
           type: "boolean"
           default: false
-          description: "Whether this tool requires approval before execution"
+          description: "Whether this tool is marked as requiring approval. An Agent runs its tools without waiting for a human decision on `POST /v3/router/responses`. See https://docs.orq.ai/ai-studio/ai-engineering/build-agents#tool-approval"
         timeout:
           type: "number"
           minimum: 1
@@ -1747,7 +1747,7 @@ components:
         requires_approval:
           type: "boolean"
           default: false
-          description: "Whether this tool requires approval before execution"
+          description: "Whether this tool is marked as requiring approval. An Agent runs its tools without waiting for a human decision on `POST /v3/router/responses`. See https://docs.orq.ai/ai-studio/ai-engineering/build-agents#tool-approval"
       title: "Function Tool"
       description: "Calls custom function tools defined in the agent configuration. Must reference a pre-created function tool by key or id."
     JsonSchemaToolInput:
@@ -1768,7 +1768,7 @@ components:
         requires_approval:
           type: "boolean"
           default: false
-          description: "Whether this tool requires approval before execution"
+          description: "Whether this tool is marked as requiring approval. An Agent runs its tools without waiting for a human decision on `POST /v3/router/responses`. See https://docs.orq.ai/ai-studio/ai-engineering/build-agents#tool-approval"
       title: "JSON Schema Tool"
       description: "Enforces structured output format using JSON Schema. Must reference a pre-created JSON Schema tool by key or id."
     McpToolInput:
@@ -1792,7 +1792,7 @@ components:
         requires_approval:
           type: "boolean"
           default: false
-          description: "Whether this tool requires approval before execution"
+          description: "Whether this tool is marked as requiring approval. An Agent runs its tools without waiting for a human decision on `POST /v3/router/responses`. See https://docs.orq.ai/ai-studio/ai-engineering/build-agents#tool-approval"
       title: "MCP Tool"
       description: "Executes tools from Model Context Protocol (MCP) servers and gateways. Reference the server or gateway using \"key\" or \"id\"; add \"tool_id\" to attach a single tool, or omit it to attach every tool it exposes."
       example:
@@ -1820,7 +1820,7 @@ components:
           description: "Tool execution timeout in seconds for this agent (max: 10 minutes). Overrides the timeout configured on the tool definition."
         requires_approval:
           type: "boolean"
-          description: "Whether this tool requires approval before execution"
+          description: "Whether this tool is marked as requiring approval. An Agent runs its tools without waiting for a human decision on `POST /v3/router/responses`. See https://docs.orq.ai/ai-studio/ai-engineering/build-agents#tool-approval"
         configuration:
           type: "object"
           additionalProperties: {}
@@ -2591,7 +2591,7 @@ components:
           properties:
             _id:
               type: "string"
-              default: "reasoning_01m842wgcy74f91w6nmw55rrt2"
+              default: "reasoning_01m845gzjy5z8jhef48cnp60kx"
               description: "Unique identifier for the part. Format: reasoning_{ulid} (e.g., reasoning_01hxyz...)"
               example: "reasoning_01hxyz123abc"
             kind:
@@ -3068,7 +3068,7 @@ components:
                     - "respect_tool"
                     - "none"
                   default: "respect_tool"
-                  description: "If all, the agent will require approval for all tools. If respect_tool, the agent will require approval for tools that have the requires_approval flag set to true. If none, the agent will not require approval for any tools."
+                  description: "An Agent runs its tools without waiting for a human decision on `POST /v3/router/responses`. See https://docs.orq.ai/ai-studio/ai-engineering/build-agents#tool-approval."
                 chat_exposed:
                   type: "boolean"
                   description: "When enabled, this agent is exposed as a selectable target in AI Chat for users to consume."
@@ -29458,7 +29458,7 @@ paths:
                                 type: "string"
                                 format: "ulid"
                                 pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                                default: "01M842WGC6A30XFH0THQ64V1WV"
+                                default: "01M845GZJ1XS4AECV0AG56706C"
                                 readOnly: true
                                 description: "The unique identifier of the playground knowledge base"
                               knowledge_id:
@@ -31336,11 +31336,11 @@ paths:
                           properties:
                             count:
                               type: "number"
-                              minimum: 1
+                              minimum: 0
                               maximum: 5
-                              default: 3
-                              description: "Number of retry attempts (1-5)"
-                              example: 3
+                              default: 0
+                              description: "Number of retries per model after the initial attempt (0-5). Defaults to 0 when a retry object is sent; omit retry to use the gateway default of two."
+                              example: 2
                             on_codes:
                               type: "array"
                               items:
@@ -31355,7 +31355,7 @@ paths:
                                 - 502
                                 - 503
                                 - 504
-                          description: "Retry configuration for model requests. Allows customizing retry count (1-5) and HTTP status codes that trigger retries. Default codes: 408, 429, 500, 502, 503, 504, 529."
+                          description: "Retry configuration for model requests. Allows customizing retry count (0-5) and HTTP status codes that trigger retries. Default codes: 408, 429, 500, 502, 503, 504, 529."
                       required:
                         - "id"
                       description: "\n\nModel configuration with parameters and retry settings."
@@ -31695,11 +31695,11 @@ paths:
                             properties:
                               count:
                                 type: "number"
-                                minimum: 1
+                                minimum: 0
                                 maximum: 5
-                                default: 3
-                                description: "Number of retry attempts (1-5)"
-                                example: 3
+                                default: 0
+                                description: "Number of retries per model after the initial attempt (0-5). Defaults to 0 when a retry object is sent; omit retry to use the gateway default of two."
+                                example: 2
                               on_codes:
                                 type: "array"
                                 items:
@@ -31714,7 +31714,7 @@ paths:
                                   - 502
                                   - 503
                                   - 504
-                            description: "Retry configuration for this fallback model. Allows customizing retry count (1-5) and HTTP status codes that trigger retries."
+                            description: "Retry configuration for this fallback model. Allows customizing retry count (0-5) and HTTP status codes that trigger retries."
                         required:
                           - "id"
                         description: "Fallback model configuration with optional parameters and retry settings."
@@ -31750,7 +31750,7 @@ paths:
                         - "respect_tool"
                         - "none"
                       default: "respect_tool"
-                      description: "If all, the agent will require approval for all tools. If respect_tool, the agent will require approval for tools that have the requires_approval flag set to true. If none, the agent will not require approval for any tools."
+                      description: "An Agent runs its tools without waiting for a human decision on `POST /v3/router/responses`. See https://docs.orq.ai/ai-studio/ai-engineering/build-agents#tool-approval."
                     chat_exposed:
                       type: "boolean"
                       description: "When enabled, this agent is exposed as a selectable target in AI Chat for users to consume."
@@ -32056,7 +32056,7 @@ paths:
                           - "respect_tool"
                           - "none"
                         default: "respect_tool"
-                        description: "If all, the agent will require approval for all tools. If respect_tool, the agent will require approval for tools that have the requires_approval flag set to true. If none, the agent will not require approval for any tools."
+                        description: "An Agent runs its tools without waiting for a human decision on `POST /v3/router/responses`. See https://docs.orq.ai/ai-studio/ai-engineering/build-agents#tool-approval."
                       chat_exposed:
                         type: "boolean"
                         description: "When enabled, this agent is exposed as a selectable target in AI Chat for users to consume."
@@ -32518,11 +32518,11 @@ paths:
                         properties:
                           count:
                             type: "number"
-                            minimum: 1
+                            minimum: 0
                             maximum: 5
-                            default: 3
-                            description: "Number of retry attempts (1-5)"
-                            example: 3
+                            default: 0
+                            description: "Number of retries per model after the initial attempt (0-5). Defaults to 0 when a retry object is sent; omit retry to use the gateway default of two."
+                            example: 2
                           on_codes:
                             type: "array"
                             items:
@@ -32537,7 +32537,7 @@ paths:
                               - 502
                               - 503
                               - 504
-                        description: "Retry configuration for model requests. Allows customizing retry count (1-5) and HTTP status codes that trigger retries. Default codes: 408, 429, 500, 502, 503, 504, 529."
+                        description: "Retry configuration for model requests. Allows customizing retry count (0-5) and HTTP status codes that trigger retries. Default codes: 408, 429, 500, 502, 503, 504, 529."
                       fallback_models:
                         type:
                           - "array"
@@ -32874,11 +32874,11 @@ paths:
                                   properties:
                                     count:
                                       type: "number"
-                                      minimum: 1
+                                      minimum: 0
                                       maximum: 5
-                                      default: 3
-                                      description: "Number of retry attempts (1-5)"
-                                      example: 3
+                                      default: 0
+                                      description: "Number of retries per model after the initial attempt (0-5). Defaults to 0 when a retry object is sent; omit retry to use the gateway default of two."
+                                      example: 2
                                     on_codes:
                                       type: "array"
                                       items:
@@ -32893,7 +32893,7 @@ paths:
                                         - 502
                                         - 503
                                         - 504
-                                  description: "Retry configuration for this fallback model. Allows customizing retry count (1-5) and HTTP status codes that trigger retries."
+                                  description: "Retry configuration for this fallback model. Allows customizing retry count (0-5) and HTTP status codes that trigger retries."
                               required:
                                 - "id"
                               description: "Fallback model configuration with optional parameters and retry settings."
@@ -33147,7 +33147,7 @@ paths:
                                 - "respect_tool"
                                 - "none"
                               default: "respect_tool"
-                              description: "If all, the agent will require approval for all tools. If respect_tool, the agent will require approval for tools that have the requires_approval flag set to true. If none, the agent will not require approval for any tools."
+                              description: "An Agent runs its tools without waiting for a human decision on `POST /v3/router/responses`. See https://docs.orq.ai/ai-studio/ai-engineering/build-agents#tool-approval."
                             chat_exposed:
                               type: "boolean"
                               description: "When enabled, this agent is exposed as a selectable target in AI Chat for users to consume."
@@ -33609,11 +33609,11 @@ paths:
                               properties:
                                 count:
                                   type: "number"
-                                  minimum: 1
+                                  minimum: 0
                                   maximum: 5
-                                  default: 3
-                                  description: "Number of retry attempts (1-5)"
-                                  example: 3
+                                  default: 0
+                                  description: "Number of retries per model after the initial attempt (0-5). Defaults to 0 when a retry object is sent; omit retry to use the gateway default of two."
+                                  example: 2
                                 on_codes:
                                   type: "array"
                                   items:
@@ -33628,7 +33628,7 @@ paths:
                                     - 502
                                     - 503
                                     - 504
-                              description: "Retry configuration for model requests. Allows customizing retry count (1-5) and HTTP status codes that trigger retries. Default codes: 408, 429, 500, 502, 503, 504, 529."
+                              description: "Retry configuration for model requests. Allows customizing retry count (0-5) and HTTP status codes that trigger retries. Default codes: 408, 429, 500, 502, 503, 504, 529."
                             fallback_models:
                               type:
                                 - "array"
@@ -33965,11 +33965,11 @@ paths:
                                         properties:
                                           count:
                                             type: "number"
-                                            minimum: 1
+                                            minimum: 0
                                             maximum: 5
-                                            default: 3
-                                            description: "Number of retry attempts (1-5)"
-                                            example: 3
+                                            default: 0
+                                            description: "Number of retries per model after the initial attempt (0-5). Defaults to 0 when a retry object is sent; omit retry to use the gateway default of two."
+                                            example: 2
                                           on_codes:
                                             type: "array"
                                             items:
@@ -33984,7 +33984,7 @@ paths:
                                               - 502
                                               - 503
                                               - 504
-                                        description: "Retry configuration for this fallback model. Allows customizing retry count (1-5) and HTTP status codes that trigger retries."
+                                        description: "Retry configuration for this fallback model. Allows customizing retry count (0-5) and HTTP status codes that trigger retries."
                                     required:
                                       - "id"
                                     description: "Fallback model configuration with optional parameters and retry settings."
@@ -34033,7 +34033,7 @@ paths:
           source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(\n    api_key=os.environ.get(\"ORQ_API_KEY\")\n)\n\nresponse = client.agents.responses.create(\n    agent_key=\"customer_support\",\n    message={\n        \"role\": \"user\",\n        \"parts\": [\n            {\n                \"kind\": \"text\",\n                \"text\": \"Hi! I am testing your capabilities. Can you describe what you can do?\"\n            }\n        ]\n    }\n)\n\nprint(response.output[0].parts[0].text)\nprint(response.usage)"
         - lang: "typescript"
           label: "Node.js"
-          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\nconst response = await client.agents.responses.create({\n  agentKey: 'customer_support',\n  message: {\n    role: 'user',\n    parts: [\n      {\n        kind: 'text',\n        text: 'Hi! I am testing your capabilities. Can you describe what you can do?',\n      },\n    ],\n  }\n});\n\nconsole.log(response.output[0].parts[0].text);\nconsole.log(response.usage);"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\nconst response = await client.agents.responses.create(\n  {\n    message: {\n      role: 'user',\n      parts: [\n        {\n          kind: 'text',\n          text: 'Hi! I am testing your capabilities. Can you describe what you can do?',\n        },\n      ],\n    },\n  },\n  'customer_support',\n);\n\nif ('output' in response) {\n  const part = response.output[0]?.parts[0];\n  if (part?.kind === 'text') {\n    console.log(part.text);\n  }\n  console.log(response.usage);\n}"
       operationId: "CreateAgentResponseRequest"
       summary: "Create response"
       description: "Create an agent response for a given message. Return the complete conversation including messages, tool interactions, and token usage."
@@ -34349,7 +34349,7 @@ paths:
                           - "respect_tool"
                           - "none"
                         default: "respect_tool"
-                        description: "If all, the agent will require approval for all tools. If respect_tool, the agent will require approval for tools that have the requires_approval flag set to true. If none, the agent will not require approval for any tools."
+                        description: "An Agent runs its tools without waiting for a human decision on `POST /v3/router/responses`. See https://docs.orq.ai/ai-studio/ai-engineering/build-agents#tool-approval."
                       chat_exposed:
                         type: "boolean"
                         description: "When enabled, this agent is exposed as a selectable target in AI Chat for users to consume."
@@ -34811,11 +34811,11 @@ paths:
                         properties:
                           count:
                             type: "number"
-                            minimum: 1
+                            minimum: 0
                             maximum: 5
-                            default: 3
-                            description: "Number of retry attempts (1-5)"
-                            example: 3
+                            default: 0
+                            description: "Number of retries per model after the initial attempt (0-5). Defaults to 0 when a retry object is sent; omit retry to use the gateway default of two."
+                            example: 2
                           on_codes:
                             type: "array"
                             items:
@@ -34830,7 +34830,7 @@ paths:
                               - 502
                               - 503
                               - 504
-                        description: "Retry configuration for model requests. Allows customizing retry count (1-5) and HTTP status codes that trigger retries. Default codes: 408, 429, 500, 502, 503, 504, 529."
+                        description: "Retry configuration for model requests. Allows customizing retry count (0-5) and HTTP status codes that trigger retries. Default codes: 408, 429, 500, 502, 503, 504, 529."
                       fallback_models:
                         type:
                           - "array"
@@ -35167,11 +35167,11 @@ paths:
                                   properties:
                                     count:
                                       type: "number"
-                                      minimum: 1
+                                      minimum: 0
                                       maximum: 5
-                                      default: 3
-                                      description: "Number of retry attempts (1-5)"
-                                      example: 3
+                                      default: 0
+                                      description: "Number of retries per model after the initial attempt (0-5). Defaults to 0 when a retry object is sent; omit retry to use the gateway default of two."
+                                      example: 2
                                     on_codes:
                                       type: "array"
                                       items:
@@ -35186,7 +35186,7 @@ paths:
                                         - 502
                                         - 503
                                         - 504
-                                  description: "Retry configuration for this fallback model. Allows customizing retry count (1-5) and HTTP status codes that trigger retries."
+                                  description: "Retry configuration for this fallback model. Allows customizing retry count (0-5) and HTTP status codes that trigger retries."
                               required:
                                 - "id"
                               description: "Fallback model configuration with optional parameters and retry settings."
@@ -35601,11 +35601,11 @@ paths:
                           properties:
                             count:
                               type: "number"
-                              minimum: 1
+                              minimum: 0
                               maximum: 5
-                              default: 3
-                              description: "Number of retry attempts (1-5)"
-                              example: 3
+                              default: 0
+                              description: "Number of retries per model after the initial attempt (0-5). Defaults to 0 when a retry object is sent; omit retry to use the gateway default of two."
+                              example: 2
                             on_codes:
                               type: "array"
                               items:
@@ -35620,7 +35620,7 @@ paths:
                                 - 502
                                 - 503
                                 - 504
-                          description: "Retry configuration for model requests. Allows customizing retry count (1-5) and HTTP status codes that trigger retries. Default codes: 408, 429, 500, 502, 503, 504, 529."
+                          description: "Retry configuration for model requests. Allows customizing retry count (0-5) and HTTP status codes that trigger retries. Default codes: 408, 429, 500, 502, 503, 504, 529."
                       required:
                         - "id"
                       description: "\n\nModel configuration with parameters and retry settings."
@@ -35960,11 +35960,11 @@ paths:
                             properties:
                               count:
                                 type: "number"
-                                minimum: 1
+                                minimum: 0
                                 maximum: 5
-                                default: 3
-                                description: "Number of retry attempts (1-5)"
-                                example: 3
+                                default: 0
+                                description: "Number of retries per model after the initial attempt (0-5). Defaults to 0 when a retry object is sent; omit retry to use the gateway default of two."
+                                example: 2
                               on_codes:
                                 type: "array"
                                 items:
@@ -35979,7 +35979,7 @@ paths:
                                   - 502
                                   - 503
                                   - 504
-                            description: "Retry configuration for this fallback model. Allows customizing retry count (1-5) and HTTP status codes that trigger retries."
+                            description: "Retry configuration for this fallback model. Allows customizing retry count (0-5) and HTTP status codes that trigger retries."
                         required:
                           - "id"
                         description: "Fallback model configuration with optional parameters and retry settings."
@@ -36323,7 +36323,7 @@ paths:
                           - "respect_tool"
                           - "none"
                         default: "respect_tool"
-                        description: "If all, the agent will require approval for all tools. If respect_tool, the agent will require approval for tools that have the requires_approval flag set to true. If none, the agent will not require approval for any tools."
+                        description: "An Agent runs its tools without waiting for a human decision on `POST /v3/router/responses`. See https://docs.orq.ai/ai-studio/ai-engineering/build-agents#tool-approval."
                       chat_exposed:
                         type: "boolean"
                         description: "When enabled, this agent is exposed as a selectable target in AI Chat for users to consume."
@@ -36785,11 +36785,11 @@ paths:
                         properties:
                           count:
                             type: "number"
-                            minimum: 1
+                            minimum: 0
                             maximum: 5
-                            default: 3
-                            description: "Number of retry attempts (1-5)"
-                            example: 3
+                            default: 0
+                            description: "Number of retries per model after the initial attempt (0-5). Defaults to 0 when a retry object is sent; omit retry to use the gateway default of two."
+                            example: 2
                           on_codes:
                             type: "array"
                             items:
@@ -36804,7 +36804,7 @@ paths:
                               - 502
                               - 503
                               - 504
-                        description: "Retry configuration for model requests. Allows customizing retry count (1-5) and HTTP status codes that trigger retries. Default codes: 408, 429, 500, 502, 503, 504, 529."
+                        description: "Retry configuration for model requests. Allows customizing retry count (0-5) and HTTP status codes that trigger retries. Default codes: 408, 429, 500, 502, 503, 504, 529."
                       fallback_models:
                         type:
                           - "array"
@@ -37141,11 +37141,11 @@ paths:
                                   properties:
                                     count:
                                       type: "number"
-                                      minimum: 1
+                                      minimum: 0
                                       maximum: 5
-                                      default: 3
-                                      description: "Number of retry attempts (1-5)"
-                                      example: 3
+                                      default: 0
+                                      description: "Number of retries per model after the initial attempt (0-5). Defaults to 0 when a retry object is sent; omit retry to use the gateway default of two."
+                                      example: 2
                                     on_codes:
                                       type: "array"
                                       items:
@@ -37160,7 +37160,7 @@ paths:
                                         - 502
                                         - 503
                                         - 504
-                                  description: "Retry configuration for this fallback model. Allows customizing retry count (1-5) and HTTP status codes that trigger retries."
+                                  description: "Retry configuration for this fallback model. Allows customizing retry count (0-5) and HTTP status codes that trigger retries."
                               required:
                                 - "id"
                               description: "Fallback model configuration with optional parameters and retry settings."
@@ -37883,11 +37883,11 @@ paths:
                           properties:
                             count:
                               type: "number"
-                              minimum: 1
+                              minimum: 0
                               maximum: 5
-                              default: 3
-                              description: "Number of retry attempts (1-5)"
-                              example: 3
+                              default: 0
+                              description: "Number of retries per model after the initial attempt (0-5). Defaults to 0 when a retry object is sent; omit retry to use the gateway default of two."
+                              example: 2
                             on_codes:
                               type: "array"
                               items:
@@ -37902,7 +37902,7 @@ paths:
                                 - 502
                                 - 503
                                 - 504
-                          description: "Retry configuration for model requests. Allows customizing retry count (1-5) and HTTP status codes that trigger retries. Default codes: 408, 429, 500, 502, 503, 504, 529."
+                          description: "Retry configuration for model requests. Allows customizing retry count (0-5) and HTTP status codes that trigger retries. Default codes: 408, 429, 500, 502, 503, 504, 529."
                       required:
                         - "id"
                       description: "\n\nModel configuration with parameters and retry settings."
@@ -38242,11 +38242,11 @@ paths:
                             properties:
                               count:
                                 type: "number"
-                                minimum: 1
+                                minimum: 0
                                 maximum: 5
-                                default: 3
-                                description: "Number of retry attempts (1-5)"
-                                example: 3
+                                default: 0
+                                description: "Number of retries per model after the initial attempt (0-5). Defaults to 0 when a retry object is sent; omit retry to use the gateway default of two."
+                                example: 2
                               on_codes:
                                 type: "array"
                                 items:
@@ -38261,7 +38261,7 @@ paths:
                                   - 502
                                   - 503
                                   - 504
-                            description: "Retry configuration for this fallback model. Allows customizing retry count (1-5) and HTTP status codes that trigger retries."
+                            description: "Retry configuration for this fallback model. Allows customizing retry count (0-5) and HTTP status codes that trigger retries."
                         required:
                           - "id"
                         description: "Fallback model configuration with optional parameters and retry settings."
@@ -38873,7 +38873,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01M842WGE2WPEAEM8CES7SJQG8"
+                                          default: "01M845GZM5QTMPGGJBWVTPR519"
                                         name:
                                           type: "string"
                                         description:
@@ -38937,7 +38937,7 @@ paths:
                         - "respect_tool"
                         - "none"
                       default: "none"
-                      description: "If all, the agent will require approval for all tools. If respect_tool, the agent will require approval for tools that have the requires_approval flag set to true. If none, the agent will not require approval for any tools."
+                      description: "An Agent runs its tools without waiting for a human decision on `POST /v3/router/responses`. See https://docs.orq.ai/ai-studio/ai-engineering/build-agents#tool-approval."
                     max_iterations:
                       type: "integer"
                       exclusiveMinimum: 0
@@ -39510,11 +39510,11 @@ paths:
                           properties:
                             count:
                               type: "number"
-                              minimum: 1
+                              minimum: 0
                               maximum: 5
-                              default: 3
-                              description: "Number of retry attempts (1-5)"
-                              example: 3
+                              default: 0
+                              description: "Number of retries per model after the initial attempt (0-5). Defaults to 0 when a retry object is sent; omit retry to use the gateway default of two."
+                              example: 2
                             on_codes:
                               type: "array"
                               items:
@@ -39529,7 +39529,7 @@ paths:
                                 - 502
                                 - 503
                                 - 504
-                          description: "Retry configuration for model requests. Allows customizing retry count (1-5) and HTTP status codes that trigger retries. Default codes: 408, 429, 500, 502, 503, 504, 529."
+                          description: "Retry configuration for model requests. Allows customizing retry count (0-5) and HTTP status codes that trigger retries. Default codes: 408, 429, 500, 502, 503, 504, 529."
                       required:
                         - "id"
                       description: "\n\nModel configuration with parameters and retry settings."
@@ -39869,11 +39869,11 @@ paths:
                             properties:
                               count:
                                 type: "number"
-                                minimum: 1
+                                minimum: 0
                                 maximum: 5
-                                default: 3
-                                description: "Number of retry attempts (1-5)"
-                                example: 3
+                                default: 0
+                                description: "Number of retries per model after the initial attempt (0-5). Defaults to 0 when a retry object is sent; omit retry to use the gateway default of two."
+                                example: 2
                               on_codes:
                                 type: "array"
                                 items:
@@ -39888,7 +39888,7 @@ paths:
                                   - 502
                                   - 503
                                   - 504
-                            description: "Retry configuration for this fallback model. Allows customizing retry count (1-5) and HTTP status codes that trigger retries."
+                            description: "Retry configuration for this fallback model. Allows customizing retry count (0-5) and HTTP status codes that trigger retries."
                         required:
                           - "id"
                         description: "Fallback model configuration with optional parameters and retry settings."
@@ -40500,7 +40500,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01M842WGEDWW96YRXGF1BDA7HX"
+                                          default: "01M845GZMJ477DXJE7VAE3149R"
                                         name:
                                           type: "string"
                                         description:
@@ -40564,7 +40564,7 @@ paths:
                         - "respect_tool"
                         - "none"
                       default: "none"
-                      description: "If all, the agent will require approval for all tools. If respect_tool, the agent will require approval for tools that have the requires_approval flag set to true. If none, the agent will not require approval for any tools."
+                      description: "An Agent runs its tools without waiting for a human decision on `POST /v3/router/responses`. See https://docs.orq.ai/ai-studio/ai-engineering/build-agents#tool-approval."
                     max_iterations:
                       type: "integer"
                       exclusiveMinimum: 0
@@ -41805,11 +41805,11 @@ paths:
                               properties:
                                 count:
                                   type: "number"
-                                  minimum: 1
+                                  minimum: 0
                                   maximum: 5
-                                  default: 3
-                                  description: "Number of retry attempts (1-5)"
-                                  example: 3
+                                  default: 0
+                                  description: "Number of retries per model after the initial attempt (0-5). Defaults to 0 when a retry object is sent; omit retry to use the gateway default of two."
+                                  example: 2
                                 on_codes:
                                   type: "array"
                                   items:
@@ -42810,11 +42810,11 @@ paths:
                       properties:
                         count:
                           type: "number"
-                          minimum: 1
+                          minimum: 0
                           maximum: 5
-                          default: 3
-                          description: "Number of retry attempts (1-5)"
-                          example: 3
+                          default: 0
+                          description: "Number of retries per model after the initial attempt (0-5). Defaults to 0 when a retry object is sent; omit retry to use the gateway default of two."
+                          example: 2
                         on_codes:
                           type: "array"
                           items:
@@ -43675,11 +43675,11 @@ paths:
                         properties:
                           count:
                             type: "number"
-                            minimum: 1
+                            minimum: 0
                             maximum: 5
-                            default: 3
-                            description: "Number of retry attempts (1-5)"
-                            example: 3
+                            default: 0
+                            description: "Number of retries per model after the initial attempt (0-5). Defaults to 0 when a retry object is sent; omit retry to use the gateway default of two."
+                            example: 2
                           on_codes:
                             type: "array"
                             items:
@@ -44835,11 +44835,11 @@ paths:
                         properties:
                           count:
                             type: "number"
-                            minimum: 1
+                            minimum: 0
                             maximum: 5
-                            default: 3
-                            description: "Number of retry attempts (1-5)"
-                            example: 3
+                            default: 0
+                            description: "Number of retries per model after the initial attempt (0-5). Defaults to 0 when a retry object is sent; omit retry to use the gateway default of two."
+                            example: 2
                           on_codes:
                             type: "array"
                             items:
@@ -45824,11 +45824,11 @@ paths:
                       properties:
                         count:
                           type: "number"
-                          minimum: 1
+                          minimum: 0
                           maximum: 5
-                          default: 3
-                          description: "Number of retry attempts (1-5)"
-                          example: 3
+                          default: 0
+                          description: "Number of retries per model after the initial attempt (0-5). Defaults to 0 when a retry object is sent; omit retry to use the gateway default of two."
+                          example: 2
                         on_codes:
                           type: "array"
                           items:
@@ -46727,11 +46727,11 @@ paths:
                         properties:
                           count:
                             type: "number"
-                            minimum: 1
+                            minimum: 0
                             maximum: 5
-                            default: 3
-                            description: "Number of retry attempts (1-5)"
-                            example: 3
+                            default: 0
+                            description: "Number of retries per model after the initial attempt (0-5). Defaults to 0 when a retry object is sent; omit retry to use the gateway default of two."
+                            example: 2
                           on_codes:
                             type: "array"
                             items:
@@ -47942,11 +47942,11 @@ paths:
                                   properties:
                                     count:
                                       type: "number"
-                                      minimum: 1
+                                      minimum: 0
                                       maximum: 5
-                                      default: 3
-                                      description: "Number of retry attempts (1-5)"
-                                      example: 3
+                                      default: 0
+                                      description: "Number of retries per model after the initial attempt (0-5). Defaults to 0 when a retry object is sent; omit retry to use the gateway default of two."
+                                      example: 2
                                     on_codes:
                                       type: "array"
                                       items:
@@ -49103,11 +49103,11 @@ paths:
                             properties:
                               count:
                                 type: "number"
-                                minimum: 1
+                                minimum: 0
                                 maximum: 5
-                                default: 3
-                                description: "Number of retry attempts (1-5)"
-                                example: 3
+                                default: 0
+                                description: "Number of retries per model after the initial attempt (0-5). Defaults to 0 when a retry object is sent; omit retry to use the gateway default of two."
+                                example: 2
                               on_codes:
                                 type: "array"
                                 items:
@@ -49566,7 +49566,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M842WGF7GA2MMPZBV6JS5WYD"
+                              default: "tool_01M845GZNK32SSWX4XPZ63D783"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -49667,7 +49667,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M842WGF7KATK3BXWX4Y1CD7D"
+                              default: "tool_01M845GZNM8YBT2439576EJEGJ"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -49770,7 +49770,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M842WGF70R2DF1RXFRV5XTBC"
+                              default: "tool_01M845GZNM1NJ2E5EMWB532PVY"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -49914,7 +49914,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M842WGF8CW45H6CRV01FJAX5"
+                              default: "tool_01M845GZNNNY5G7BRX1FJRT2PY"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -50402,7 +50402,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M842WGFE6RV5GFGKTHQSZZGD"
+                        default: "tool_01M845GZNVN8X9FAKMPFH20HQC"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -50503,7 +50503,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M842WGFERKCQ0ZD6C97944D9"
+                        default: "tool_01M845GZNV3C4981JB2PWWNA57"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -50606,7 +50606,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M842WGFFS6Q1VYZYVTX8FQD6"
+                        default: "tool_01M845GZNVTJCQBDNPQRW3V2NC"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -50750,7 +50750,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M842WGFF19G3JWDD9D46QACN"
+                        default: "tool_01M845GZNWJKHH5NWGWZ8TJ17Z"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -51255,7 +51255,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M842WGFGWF81NA91NSZHMF60"
+                        default: "tool_01M845GZNY8TWGK85KF8ADD2WG"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -51356,7 +51356,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M842WGFG1VEABZZ4QKZ1CHY3"
+                        default: "tool_01M845GZNY3CAE3JJN53K91ZEW"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -51459,7 +51459,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M842WGFHCHTF6AZNSAWACJ5T"
+                        default: "tool_01M845GZNYCJXBKH4K2N7XJ48V"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -51603,7 +51603,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M842WGFHG8EQKZWSWGQKQ8FP"
+                        default: "tool_01M845GZNZV43KAS6EWW03RS7V"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -51772,7 +51772,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M842WGFM5J299WTTQ0AP81RK"
+                        default: "tool_01M845GZP397B9H4T5N4X5JMKA"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -51873,7 +51873,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M842WGFMN0BPWXSCB3JY89RX"
+                        default: "tool_01M845GZP3VMW2D403Q583T86A"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -51976,7 +51976,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M842WGFN3CY21FFC9EJDKXMM"
+                        default: "tool_01M845GZP3XQXCX82Q3E75F341"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -52120,7 +52120,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M842WGFNC10SP2BKMPA36KZQ"
+                        default: "tool_01M845GZP4XPS89NSQJKE946VQ"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -53035,11 +53035,11 @@ paths:
                       properties:
                         count:
                           type: "number"
-                          minimum: 1
+                          minimum: 0
                           maximum: 5
-                          default: 3
-                          description: "Number of retry attempts (1-5)"
-                          example: 3
+                          default: 0
+                          description: "Number of retries per model after the initial attempt (0-5). Defaults to 0 when a retry object is sent; omit retry to use the gateway default of two."
+                          example: 2
                         on_codes:
                           type: "array"
                           items:
@@ -53159,11 +53159,11 @@ paths:
                           properties:
                             count:
                               type: "number"
-                              minimum: 1
+                              minimum: 0
                               maximum: 5
-                              default: 3
-                              description: "Number of retry attempts (1-5)"
-                              example: 3
+                              default: 0
+                              description: "Number of retries per model after the initial attempt (0-5). Defaults to 0 when a retry object is sent; omit retry to use the gateway default of two."
+                              example: 2
                             on_codes:
                               type: "array"
                               items:
@@ -54867,11 +54867,11 @@ paths:
                   properties:
                     count:
                       type: "number"
-                      minimum: 1
+                      minimum: 0
                       maximum: 5
-                      default: 3
-                      description: "Number of retry attempts (1-5)"
-                      example: 3
+                      default: 0
+                      description: "Number of retries per model after the initial attempt (0-5). Defaults to 0 when a retry object is sent; omit retry to use the gateway default of two."
+                      example: 2
                     on_codes:
                       type: "array"
                       items:
@@ -54998,11 +54998,11 @@ paths:
                       properties:
                         count:
                           type: "number"
-                          minimum: 1
+                          minimum: 0
                           maximum: 5
-                          default: 3
-                          description: "Number of retry attempts (1-5)"
-                          example: 3
+                          default: 0
+                          description: "Number of retries per model after the initial attempt (0-5). Defaults to 0 when a retry object is sent; omit retry to use the gateway default of two."
+                          example: 2
                         on_codes:
                           type: "array"
                           items:
@@ -55211,11 +55211,11 @@ paths:
                   properties:
                     count:
                       type: "number"
-                      minimum: 1
+                      minimum: 0
                       maximum: 5
-                      default: 3
-                      description: "Number of retry attempts (1-5)"
-                      example: 3
+                      default: 0
+                      description: "Number of retries per model after the initial attempt (0-5). Defaults to 0 when a retry object is sent; omit retry to use the gateway default of two."
+                      example: 2
                     on_codes:
                       type: "array"
                       items:
@@ -55280,11 +55280,11 @@ paths:
                       properties:
                         count:
                           type: "number"
-                          minimum: 1
+                          minimum: 0
                           maximum: 5
-                          default: 3
-                          description: "Number of retry attempts (1-5)"
-                          example: 3
+                          default: 0
+                          description: "Number of retries per model after the initial attempt (0-5). Defaults to 0 when a retry object is sent; omit retry to use the gateway default of two."
+                          example: 2
                         on_codes:
                           type: "array"
                           items:
@@ -55524,11 +55524,11 @@ paths:
                       properties:
                         count:
                           type: "number"
-                          minimum: 1
+                          minimum: 0
                           maximum: 5
-                          default: 3
-                          description: "Number of retry attempts (1-5)"
-                          example: 3
+                          default: 0
+                          description: "Number of retries per model after the initial attempt (0-5). Defaults to 0 when a retry object is sent; omit retry to use the gateway default of two."
+                          example: 2
                         on_codes:
                           type: "array"
                           items:
@@ -55626,11 +55626,11 @@ paths:
                           properties:
                             count:
                               type: "number"
-                              minimum: 1
+                              minimum: 0
                               maximum: 5
-                              default: 3
-                              description: "Number of retry attempts (1-5)"
-                              example: 3
+                              default: 0
+                              description: "Number of retries per model after the initial attempt (0-5). Defaults to 0 when a retry object is sent; omit retry to use the gateway default of two."
+                              example: 2
                             on_codes:
                               type: "array"
                               items:
@@ -56620,11 +56620,11 @@ paths:
                   properties:
                     count:
                       type: "number"
-                      minimum: 1
+                      minimum: 0
                       maximum: 5
-                      default: 3
-                      description: "Number of retry attempts (1-5)"
-                      example: 3
+                      default: 0
+                      description: "Number of retries per model after the initial attempt (0-5). Defaults to 0 when a retry object is sent; omit retry to use the gateway default of two."
+                      example: 2
                     on_codes:
                       type: "array"
                       items:
@@ -56714,11 +56714,11 @@ paths:
                       properties:
                         count:
                           type: "number"
-                          minimum: 1
+                          minimum: 0
                           maximum: 5
-                          default: 3
-                          description: "Number of retry attempts (1-5)"
-                          example: 3
+                          default: 0
+                          description: "Number of retries per model after the initial attempt (0-5). Defaults to 0 when a retry object is sent; omit retry to use the gateway default of two."
+                          example: 2
                         on_codes:
                           type: "array"
                           items:
@@ -56975,11 +56975,11 @@ paths:
                   properties:
                     count:
                       type: "number"
-                      minimum: 1
+                      minimum: 0
                       maximum: 5
-                      default: 3
-                      description: "Number of retry attempts (1-5)"
-                      example: 3
+                      default: 0
+                      description: "Number of retries per model after the initial attempt (0-5). Defaults to 0 when a retry object is sent; omit retry to use the gateway default of two."
+                      example: 2
                     on_codes:
                       type: "array"
                       items:
@@ -57064,11 +57064,11 @@ paths:
                       properties:
                         count:
                           type: "number"
-                          minimum: 1
+                          minimum: 0
                           maximum: 5
-                          default: 3
-                          description: "Number of retry attempts (1-5)"
-                          example: 3
+                          default: 0
+                          description: "Number of retries per model after the initial attempt (0-5). Defaults to 0 when a retry object is sent; omit retry to use the gateway default of two."
+                          example: 2
                         on_codes:
                           type: "array"
                           items:
@@ -57349,11 +57349,11 @@ paths:
                   properties:
                     count:
                       type: "number"
-                      minimum: 1
+                      minimum: 0
                       maximum: 5
-                      default: 3
-                      description: "Number of retry attempts (1-5)"
-                      example: 3
+                      default: 0
+                      description: "Number of retries per model after the initial attempt (0-5). Defaults to 0 when a retry object is sent; omit retry to use the gateway default of two."
+                      example: 2
                     on_codes:
                       type: "array"
                       items:
@@ -57438,11 +57438,11 @@ paths:
                       properties:
                         count:
                           type: "number"
-                          minimum: 1
+                          minimum: 0
                           maximum: 5
-                          default: 3
-                          description: "Number of retry attempts (1-5)"
-                          example: 3
+                          default: 0
+                          description: "Number of retries per model after the initial attempt (0-5). Defaults to 0 when a retry object is sent; omit retry to use the gateway default of two."
+                          example: 2
                         on_codes:
                           type: "array"
                           items:
@@ -57745,11 +57745,11 @@ paths:
                   properties:
                     count:
                       type: "number"
-                      minimum: 1
+                      minimum: 0
                       maximum: 5
-                      default: 3
-                      description: "Number of retry attempts (1-5)"
-                      example: 3
+                      default: 0
+                      description: "Number of retries per model after the initial attempt (0-5). Defaults to 0 when a retry object is sent; omit retry to use the gateway default of two."
+                      example: 2
                     on_codes:
                       type: "array"
                       items:
@@ -57837,11 +57837,11 @@ paths:
                       properties:
                         count:
                           type: "number"
-                          minimum: 1
+                          minimum: 0
                           maximum: 5
-                          default: 3
-                          description: "Number of retry attempts (1-5)"
-                          example: 3
+                          default: 0
+                          description: "Number of retries per model after the initial attempt (0-5). Defaults to 0 when a retry object is sent; omit retry to use the gateway default of two."
+                          example: 2
                         on_codes:
                           type: "array"
                           items:
@@ -58110,11 +58110,11 @@ paths:
                   properties:
                     count:
                       type: "number"
-                      minimum: 1
+                      minimum: 0
                       maximum: 5
-                      default: 3
-                      description: "Number of retry attempts (1-5)"
-                      example: 3
+                      default: 0
+                      description: "Number of retries per model after the initial attempt (0-5). Defaults to 0 when a retry object is sent; omit retry to use the gateway default of two."
+                      example: 2
                     on_codes:
                       type: "array"
                       items:
@@ -58202,11 +58202,11 @@ paths:
                       properties:
                         count:
                           type: "number"
-                          minimum: 1
+                          minimum: 0
                           maximum: 5
-                          default: 3
-                          description: "Number of retry attempts (1-5)"
-                          example: 3
+                          default: 0
+                          description: "Number of retries per model after the initial attempt (0-5). Defaults to 0 when a retry object is sent; omit retry to use the gateway default of two."
+                          example: 2
                         on_codes:
                           type: "array"
                           items:
@@ -60496,7 +60496,7 @@ paths:
           source: "curl --request POST \\\n  --url \"https://my.orq.ai/v2/knowledge/$KNOWLEDGE_ID/search\" \\\n  --header \"Authorization: Bearer $ORQ_API_KEY\" \\\n  --header 'Content-Type: application/json' \\\n  --data '{\n    \"query\": \"What is our refund policy?\",\n    \"top_k\": 10,\n    \"search_type\": \"hybrid_search\",\n    \"search_options\": {\n      \"include_vectors\": false,\n      \"include_metadata\": true,\n      \"include_scores\": true\n    }\n  }'"
         - lang: "typescript"
           label: "Node.js"
-          source: "import { Orq } from \"@orq-ai/node\";\n\nconst orq = new Orq({\n  apiKey: process.env[\"ORQ_API_KEY\"]\n});\n\nconst result = await orq.knowledge.search({\n  knowledgeId: process.env[\"KNOWLEDGE_ID\"],\n  requestBody: {\n    query: \"What is our refund policy?\",\n    topK: 10,\n    searchType: \"hybrid_search\",\n    searchOptions: {\n      includeVectors: false,\n      includeMetadata: true,\n      includeScores: true\n    }\n  }\n});\n\nconsole.log(result.matches);"
+          source: "import { Orq } from \"@orq-ai/node\";\n\nconst orq = new Orq({\n  apiKey: process.env[\"ORQ_API_KEY\"]\n});\n\nconst result = await orq.knowledge.search({\n  knowledgeId: process.env[\"KNOWLEDGE_ID\"],\n  searchKnowledgeRequest: {\n    query: \"What is our refund policy?\",\n    topK: 10,\n    searchType: \"hybrid_search\",\n    searchOptions: {\n      includeVectors: false,\n      includeMetadata: true,\n      includeScores: true\n    }\n  }\n});\n\nconsole.log(result.matches);"
         - lang: "python"
           label: "Python"
           source: "import os\nfrom orq_ai_sdk import Orq\n\norq = Orq(api_key=os.getenv(\"ORQ_API_KEY\"))\n\nresult = orq.knowledge.search(\n    knowledge_id=os.getenv(\"KNOWLEDGE_ID\"),\n    query=\"What is our refund policy?\",\n    top_k=10,\n    search_type=\"hybrid_search\",\n    search_options={\n        \"include_vectors\": False,\n        \"include_metadata\": True,\n        \"include_scores\": True,\n    },\n)\n\nprint(result.matches)"
@@ -64863,7 +64863,7 @@ paths:
           source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\nresult = client.api_keys.update(\n    api_key_id=\"01HZXW2K7Y8Q9M0N1P2R3S4T5V\",\n    status=\"disabled\",\n)\n\nprint(result.status)\n"
         - lang: "typescript"
           label: "Node.js - Disable a key"
-          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\nconst result = await client.apiKeys.update({\n  apiKeyId: '01HZXW2K7Y8Q9M0N1P2R3S4T5V',\n  status: 'disabled',\n});\n\nconsole.log(result.status);\n"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\nconst result = await client.apiKeys.update({\n  apiKeyId: '01HZXW2K7Y8Q9M0N1P2R3S4T5V',\n  requestBody: {\n    status: 'disabled',\n  },\n});\n\nconsole.log(result.status);\n"
       security:
         - ApiKey: []
   /v2/traces/{trace_id}/spans/{span_id}/annotation:
@@ -65769,7 +65769,7 @@ paths:
       tags:
         - "Telemetry"
       summary: "Query telemetry"
-      description: "Canonical neutral query envelope for traces, metrics, and logs. Select a source, compute list, and time range; optionally group, filter, bucket, sort, limit, and include totals. ReportingService.QueryReport and TraceQueryService.AggregateTraces remain supported compatibility contracts."
+      description: "Canonical neutral query envelope for traces, metrics, and logs. Select a source, compute list, and time range; optionally group, filter, bucket, sort, limit, and include totals."
       operationId: "TelemetryQuery"
       requestBody:
         content:
@@ -66613,7 +66613,7 @@ paths:
       x-code-samples:
         - lang: "typescript"
           label: "Node.js"
-          source: "import { Orq } from '@orq-ai/node';\n\nconst orq = new Orq({ apiKey: process.env.ORQ_API_KEY });\nconst result = await orq.views.update({ viewId: '01HZXW2K7Y8Q9M0N1P2R3S4T5V', displayName: 'Production errors' });\n"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst orq = new Orq({ apiKey: process.env.ORQ_API_KEY });\nconst result = await orq.views.update({ viewId: '01HZXW2K7Y8Q9M0N1P2R3S4T5V', updateViewRequest: { displayName: 'Production errors' } });\n"
       security:
         - ApiKey: []
   /v2/datasets:
@@ -66670,7 +66670,7 @@ paths:
       x-code-samples:
         - lang: "curl"
           label: "Core - List datasets"
-          source: "curl --get 'https://api.orq.ai/v2/datasets' \\\n  --header \"Authorization: Bearer $ORQ_API_KEY\" \\\n  --data-urlencode 'limit=25'\n"
+          source: "curl --get 'https://my.orq.ai/v2/datasets' \\\n  --header \"Authorization: Bearer $ORQ_API_KEY\" \\\n  --data-urlencode 'limit=25'\n"
         - lang: "python"
           label: "Python - List datasets"
           source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\npage = client.datasets.list(\n    limit=25,\n)\n\nfor dataset in page.data:\n    print(dataset.id, dataset.display_name)\n"
@@ -66712,7 +66712,7 @@ paths:
       x-code-samples:
         - lang: "curl"
           label: "Core - Create dataset"
-          source: "curl --request POST \\\n  --url 'https://api.orq.ai/v2/datasets' \\\n  --header \"Authorization: Bearer $ORQ_API_KEY\" \\\n  --header 'Content-Type: application/json' \\\n  --data '{\n    \"display_name\": \"support_quality_eval\",\n    \"path\": \"/customer-success/datasets/support-quality-eval\"\n  }'\n"
+          source: "curl --request POST \\\n  --url 'https://my.orq.ai/v2/datasets' \\\n  --header \"Authorization: Bearer $ORQ_API_KEY\" \\\n  --header 'Content-Type: application/json' \\\n  --data '{\n    \"display_name\": \"support_quality_eval\",\n    \"path\": \"/customer-success/datasets/support-quality-eval\"\n  }'\n"
         - lang: "python"
           label: "Python - Create dataset"
           source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\ndataset = client.datasets.create(\n    display_name=\"support_quality_eval\",\n    path=\"/customer-success/datasets/support-quality-eval\",\n)\n\nprint(dataset.id)\n"
@@ -66761,7 +66761,7 @@ paths:
       x-code-samples:
         - lang: "curl"
           label: "Core - Retrieve dataset"
-          source: "curl --request GET \\\n  --url 'https://api.orq.ai/v2/datasets/01J6V6G8M4F5N8P9Q0R1S2T3U4' \\\n  --header \"Authorization: Bearer $ORQ_API_KEY\"\n"
+          source: "curl --request GET \\\n  --url 'https://my.orq.ai/v2/datasets/01J6V6G8M4F5N8P9Q0R1S2T3U4' \\\n  --header \"Authorization: Bearer $ORQ_API_KEY\"\n"
         - lang: "python"
           label: "Python - Retrieve dataset"
           source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\ndataset = client.datasets.retrieve(\n    dataset_id=\"01J6V6G8M4F5N8P9Q0R1S2T3U4\",\n)\n\nprint(dataset.display_name)\n"
@@ -66799,7 +66799,7 @@ paths:
       x-code-samples:
         - lang: "curl"
           label: "Core - Delete dataset"
-          source: "curl --request DELETE \\\n  --url 'https://api.orq.ai/v2/datasets/01J6V6G8M4F5N8P9Q0R1S2T3U4' \\\n  --header \"Authorization: Bearer $ORQ_API_KEY\"\n"
+          source: "curl --request DELETE \\\n  --url 'https://my.orq.ai/v2/datasets/01J6V6G8M4F5N8P9Q0R1S2T3U4' \\\n  --header \"Authorization: Bearer $ORQ_API_KEY\"\n"
       security:
         - ApiKey: []
     patch:
@@ -66841,7 +66841,7 @@ paths:
       x-code-samples:
         - lang: "curl"
           label: "Core - Update dataset"
-          source: "curl --request PATCH \\\n  --url 'https://api.orq.ai/v2/datasets/01J6V6G8M4F5N8P9Q0R1S2T3U4' \\\n  --header \"Authorization: Bearer $ORQ_API_KEY\" \\\n  --header 'Content-Type: application/json' \\\n  --data '{\n    \"display_name\": \"support_quality_eval_v2\"\n  }'\n"
+          source: "curl --request PATCH \\\n  --url 'https://my.orq.ai/v2/datasets/01J6V6G8M4F5N8P9Q0R1S2T3U4' \\\n  --header \"Authorization: Bearer $ORQ_API_KEY\" \\\n  --header 'Content-Type: application/json' \\\n  --data '{\n    \"display_name\": \"support_quality_eval_v2\"\n  }'\n"
       security:
         - ApiKey: []
   /v2/datasets/{dataset_id}/clear:
@@ -66874,7 +66874,7 @@ paths:
       x-code-samples:
         - lang: "curl"
           label: "Core - Clear dataset"
-          source: "curl --request DELETE \\\n  --url 'https://api.orq.ai/v2/datasets/01J6V6G8M4F5N8P9Q0R1S2T3U4/clear' \\\n  --header \"Authorization: Bearer $ORQ_API_KEY\"\n"
+          source: "curl --request DELETE \\\n  --url 'https://my.orq.ai/v2/datasets/01J6V6G8M4F5N8P9Q0R1S2T3U4/clear' \\\n  --header \"Authorization: Bearer $ORQ_API_KEY\"\n"
       security:
         - ApiKey: []
   /v2/datasets/{dataset_id}/datapoints:
@@ -66930,7 +66930,7 @@ paths:
       x-code-samples:
         - lang: "curl"
           label: "Core - List datapoints"
-          source: "curl --get 'https://api.orq.ai/v2/datasets/01J6V6G8M4F5N8P9Q0R1S2T3U4/datapoints' \\\n  --header \"Authorization: Bearer $ORQ_API_KEY\" \\\n  --data-urlencode 'limit=25'\n"
+          source: "curl --get 'https://my.orq.ai/v2/datasets/01J6V6G8M4F5N8P9Q0R1S2T3U4/datapoints' \\\n  --header \"Authorization: Bearer $ORQ_API_KEY\" \\\n  --data-urlencode 'limit=25'\n"
       security:
         - ApiKey: []
     post:
@@ -66978,7 +66978,7 @@ paths:
       x-code-samples:
         - lang: "curl"
           label: "Core - Create datapoints"
-          source: "curl --request POST \\\n  --url 'https://api.orq.ai/v2/datasets/01J6V6G8M4F5N8P9Q0R1S2T3U4/datapoints' \\\n  --header \"Authorization: Bearer $ORQ_API_KEY\" \\\n  --header 'Content-Type: application/json' \\\n  --data '[\n    {\n      \"inputs\": {\n        \"ticket\": \"Customer cannot reset their password.\"\n      },\n      \"expected_output\": \"Ask the customer to use the reset link and verify delivery.\"\n    }\n  ]'\n"
+          source: "curl --request POST \\\n  --url 'https://my.orq.ai/v2/datasets/01J6V6G8M4F5N8P9Q0R1S2T3U4/datapoints' \\\n  --header \"Authorization: Bearer $ORQ_API_KEY\" \\\n  --header 'Content-Type: application/json' \\\n  --data '[\n    {\n      \"inputs\": {\n        \"ticket\": \"Customer cannot reset their password.\"\n      },\n      \"expected_output\": \"Ask the customer to use the reset link and verify delivery.\"\n    }\n  ]'\n"
       security:
         - ApiKey: []
   /v2/datasets/{dataset_id}/datapoints-bulk-delete:
@@ -67017,7 +67017,7 @@ paths:
       x-code-samples:
         - lang: "curl"
           label: "Core - Delete datapoints"
-          source: "curl --request POST \\\n  --url 'https://api.orq.ai/v2/datasets/01J6V6G8M4F5N8P9Q0R1S2T3U4/datapoints-bulk-delete' \\\n  --header \"Authorization: Bearer $ORQ_API_KEY\" \\\n  --header 'Content-Type: application/json' \\\n  --data '{\n    \"item_ids\": [\n      \"01J6V6H1Z2A3B4C5D6E7F8G9H0\"\n    ]\n  }'\n"
+          source: "curl --request POST \\\n  --url 'https://my.orq.ai/v2/datasets/01J6V6G8M4F5N8P9Q0R1S2T3U4/datapoints-bulk-delete' \\\n  --header \"Authorization: Bearer $ORQ_API_KEY\" \\\n  --header 'Content-Type: application/json' \\\n  --data '{\n    \"item_ids\": [\n      \"01J6V6H1Z2A3B4C5D6E7F8G9H0\"\n    ]\n  }'\n"
         - lang: "python"
           label: "Python - Delete datapoints"
           source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\nclient.datasets.delete_datapoints(\n    dataset_id=\"01J6V6G8M4F5N8P9Q0R1S2T3U4\",\n    item_ids=[\n        \"01J6V6H1Z2A3B4C5D6E7F8G9H0\",\n    ],\n)\n"
@@ -67068,7 +67068,7 @@ paths:
       x-code-samples:
         - lang: "curl"
           label: "Core - Bulk create datapoints"
-          source: "curl --request POST \\\n  --url 'https://api.orq.ai/v2/datasets/01J6V6G8M4F5N8P9Q0R1S2T3U4/datapoints/bulk' \\\n  --header \"Authorization: Bearer $ORQ_API_KEY\" \\\n  --header 'Content-Type: application/json' \\\n  --data '{\n    \"items\": [\n      {\n        \"inputs\": {\n          \"ticket\": \"Customer asks for an invoice copy.\"\n        },\n        \"expected_output\": \"Explain where invoices are available and offer to resend it.\"\n      }\n    ]\n  }'\n"
+          source: "curl --request POST \\\n  --url 'https://my.orq.ai/v2/datasets/01J6V6G8M4F5N8P9Q0R1S2T3U4/datapoints/bulk' \\\n  --header \"Authorization: Bearer $ORQ_API_KEY\" \\\n  --header 'Content-Type: application/json' \\\n  --data '{\n    \"items\": [\n      {\n        \"inputs\": {\n          \"ticket\": \"Customer asks for an invoice copy.\"\n        },\n        \"expected_output\": \"Explain where invoices are available and offer to resend it.\"\n      }\n    ]\n  }'\n"
         - lang: "python"
           label: "Python - Bulk create datapoints"
           source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\ndatapoints = client.datasets.create_datapoints(\n    dataset_id=\"01J6V6G8M4F5N8P9Q0R1S2T3U4\",\n    items=[\n        {\n            \"inputs\": {\"ticket\": \"Customer asks for an invoice copy.\"},\n            \"expected_output\": \"Explain where invoices are available and offer to resend it.\",\n        }\n    ],\n)\n\nfor datapoint in datapoints:\n    print(datapoint.id)\n"
@@ -67122,7 +67122,7 @@ paths:
       x-code-samples:
         - lang: "curl"
           label: "Core - Retrieve datapoint"
-          source: "curl --request GET \\\n  --url 'https://api.orq.ai/v2/datasets/01J6V6G8M4F5N8P9Q0R1S2T3U4/datapoints/01J6V6H1Z2A3B4C5D6E7F8G9H0' \\\n  --header \"Authorization: Bearer $ORQ_API_KEY\"\n"
+          source: "curl --request GET \\\n  --url 'https://my.orq.ai/v2/datasets/01J6V6G8M4F5N8P9Q0R1S2T3U4/datapoints/01J6V6H1Z2A3B4C5D6E7F8G9H0' \\\n  --header \"Authorization: Bearer $ORQ_API_KEY\"\n"
       security:
         - ApiKey: []
     delete:
@@ -67159,7 +67159,7 @@ paths:
       x-code-samples:
         - lang: "curl"
           label: "Core - Delete datapoint"
-          source: "curl --request DELETE \\\n  --url 'https://api.orq.ai/v2/datasets/01J6V6G8M4F5N8P9Q0R1S2T3U4/datapoints/01J6V6H1Z2A3B4C5D6E7F8G9H0' \\\n  --header \"Authorization: Bearer $ORQ_API_KEY\"\n"
+          source: "curl --request DELETE \\\n  --url 'https://my.orq.ai/v2/datasets/01J6V6G8M4F5N8P9Q0R1S2T3U4/datapoints/01J6V6H1Z2A3B4C5D6E7F8G9H0' \\\n  --header \"Authorization: Bearer $ORQ_API_KEY\"\n"
       security:
         - ApiKey: []
     patch:
@@ -67206,7 +67206,7 @@ paths:
       x-code-samples:
         - lang: "curl"
           label: "Core - Update datapoint"
-          source: "curl --request PATCH \\\n  --url 'https://api.orq.ai/v2/datasets/01J6V6G8M4F5N8P9Q0R1S2T3U4/datapoints/01J6V6H1Z2A3B4C5D6E7F8G9H0' \\\n  --header \"Authorization: Bearer $ORQ_API_KEY\" \\\n  --header 'Content-Type: application/json' \\\n  --data '{\n    \"expected_output\": \"Confirm the invoice email address before resending the invoice.\"\n  }'\n"
+          source: "curl --request PATCH \\\n  --url 'https://my.orq.ai/v2/datasets/01J6V6G8M4F5N8P9Q0R1S2T3U4/datapoints/01J6V6H1Z2A3B4C5D6E7F8G9H0' \\\n  --header \"Authorization: Bearer $ORQ_API_KEY\" \\\n  --header 'Content-Type: application/json' \\\n  --data '{\n    \"expected_output\": \"Confirm the invoice email address before resending the invoice.\"\n  }'\n"
       security:
         - ApiKey: []
   /v3/experiments:
@@ -67439,7 +67439,7 @@ paths:
           source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\nexperiment = client.experiments.update(\n    experiment_id=\"<experiment_id>\",\n    display_name=\"Support replies v3\",\n)\n"
         - lang: "typescript"
           label: "Node.js - Rename an experiment"
-          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({ apiKey: process.env.ORQ_API_KEY });\n\nawait client.experiments.update({\n  experimentId: '<experiment_id>',\n  displayName: 'Support replies v3',\n});\n"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({ apiKey: process.env.ORQ_API_KEY });\n\nawait client.experiments.update({\n  experimentId: '<experiment_id>',\n  updateExperimentRequest: {\n    displayName: 'Support replies v3',\n  },\n});\n"
       security:
         - ApiKey: []
   /v3/experiments/{experiment_id}/runs:
@@ -67553,7 +67553,7 @@ paths:
           source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\nrun = client.experiments.create_run(\n    experiment_id=\"<experiment_id>\",\n    key=\"Run 2\",\n    settings={\"concurrency\": 5},\n)\n\nprint(run.run_id, run.row_count)\n"
         - lang: "typescript"
           label: "Node.js - Create a run"
-          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({ apiKey: process.env.ORQ_API_KEY });\n\nconst run = await client.experiments.createRun({\n  experimentId: '<experiment_id>',\n  key: 'Run 2',\n  settings: { concurrency: 5 },\n});\n\nconsole.log(run.runId, run.rowCount);\n"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({ apiKey: process.env.ORQ_API_KEY });\n\nconst run = await client.experiments.createRun({\n  experimentId: '<experiment_id>',\n  createRunRequest: {\n    key: 'Run 2',\n    settings: { concurrency: 5 },\n  },\n});\n\nconsole.log(run.runId, run.rowCount);\n"
       security:
         - ApiKey: []
   /v3/experiments/{experiment_id}/runs/{run_id}:
@@ -67979,7 +67979,7 @@ paths:
           source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\nrun = client.experiments.cancel_run(experiment_id=\"<experiment_id>\", run_id=\"<run_id>\")\n\nprint(run.status)\n"
         - lang: "typescript"
           label: "Node.js - Cancel a run"
-          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({ apiKey: process.env.ORQ_API_KEY });\n\nconst run = await client.experiments.cancelRun({ experimentId: '<experiment_id>', runId: '<run_id>' });\n\nconsole.log(run.status);\n"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({ apiKey: process.env.ORQ_API_KEY });\n\nconst run = await client.experiments.cancelRun({\n  experimentId: '<experiment_id>',\n  runId: '<run_id>',\n  cancelExperimentRunRequest: {},\n});\n\nconsole.log(run.status);\n"
       security:
         - ApiKey: []
   /v3/experiments/{experiment_id}/runs/{run_id}/columns/layout:
@@ -68035,7 +68035,7 @@ paths:
           source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\nrun = client.experiments.update_run_column_layout(\n    experiment_id=\"<experiment_id>\",\n    run_id=\"<run_id>\",\n    columns=[{\"column_id\": \"<column_id>\", \"position\": 3, \"width\": 320}],\n)\n\nprint([column.display_name for column in run.columns])\n"
         - lang: "typescript"
           label: "Node.js - Reorder and resize columns"
-          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({ apiKey: process.env.ORQ_API_KEY });\n\nconst run = await client.experiments.updateRunColumnLayout({\n  experimentId: '<experiment_id>',\n  runId: '<run_id>',\n  columns: [{ columnId: '<column_id>', position: 3, width: 320 }],\n});\n\nconsole.log(run.columns.map((column) => column.displayName));\n"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({ apiKey: process.env.ORQ_API_KEY });\n\nconst run = await client.experiments.updateRunColumnLayout({\n  experimentId: '<experiment_id>',\n  runId: '<run_id>',\n  updateRunColumnLayoutRequest: {\n    columns: [{ columnId: '<column_id>', position: 3, width: 320 }],\n  },\n});\n\nconsole.log(run.columns.map((column) => column.displayName));\n"
       security:
         - ApiKey: []
   /v3/experiments/{experiment_id}/runs/{run_id}/evaluators:
@@ -68130,7 +68130,7 @@ paths:
           source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\ncolumn = client.experiments.create_eval(\n    experiment_id=\"<experiment_id>\",\n    run_id=\"<run_id>\",\n    evaluator_id=\"<evaluator_id>\",\n)\n"
         - lang: "typescript"
           label: "Node.js - Add an evaluator column"
-          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({ apiKey: process.env.ORQ_API_KEY });\n\nawait client.experiments.createEval({\n  experimentId: '<experiment_id>',\n  runId: '<run_id>',\n  evaluatorId: '<evaluator_id>',\n});\n"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({ apiKey: process.env.ORQ_API_KEY });\n\nawait client.experiments.createEval({\n  experimentId: '<experiment_id>',\n  runId: '<run_id>',\n  createEvalColumnRequest: {\n    evaluatorId: '<evaluator_id>',\n  },\n});\n"
       security:
         - ApiKey: []
   /v3/experiments/{experiment_id}/runs/{run_id}/evaluators/{eval_id}:
@@ -68228,7 +68228,7 @@ paths:
           source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\nrun = client.experiments.execute_run(\n    experiment_id=\"<experiment_id>\",\n    run_id=\"<run_id>\",\n    scope=\"EXECUTE_SCOPE_FULL\",\n    constraints={\"llm\": {\"concurrency\": 5, \"timeout\": \"300s\"}},\n)\n\nprint(run.status)\n"
         - lang: "typescript"
           label: "Node.js - Execute a run"
-          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({ apiKey: process.env.ORQ_API_KEY });\n\nconst run = await client.experiments.executeRun({\n  experimentId: '<experiment_id>',\n  runId: '<run_id>',\n  scope: 'EXECUTE_SCOPE_FULL',\n  constraints: { llm: { concurrency: 5, timeout: '300s' } },\n});\n\nconsole.log(run.status);\n"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({ apiKey: process.env.ORQ_API_KEY });\n\nconst run = await client.experiments.executeRun({\n  experimentId: '<experiment_id>',\n  runId: '<run_id>',\n  executeRunRequest: {\n    scope: 'EXECUTE_SCOPE_FULL',\n    constraints: { llm: { concurrency: 5, timeout: '300s' } },\n  },\n});\n\nconsole.log(run.status);\n"
       security:
         - ApiKey: []
   /v3/experiments/{experiment_id}/runs/{run_id}/metrics:
@@ -68339,7 +68339,7 @@ paths:
           source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\npage = client.experiments.query_run(\n    experiment_id=\"<experiment_id>\",\n    run_id=\"<run_id>\",\n    columns=[\"GPT-4o reply\"],\n    limit=50,\n)\n\nfor row in page.rows:\n    for cell in row.cells:\n        print(row.row_id, cell.status, cell.value)\n"
         - lang: "typescript"
           label: "Node.js - Query run cells"
-          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({ apiKey: process.env.ORQ_API_KEY });\n\nconst page = await client.experiments.queryRun({\n  experimentId: '<experiment_id>',\n  runId: '<run_id>',\n  columns: ['GPT-4o reply'],\n  limit: 50,\n});\n\nfor (const row of page.rows) {\n  for (const cell of row.cells) {\n    console.log(row.rowId, cell.status, cell.value);\n  }\n}\n"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({ apiKey: process.env.ORQ_API_KEY });\n\nconst page = await client.experiments.queryRun({\n  experimentId: '<experiment_id>',\n  runId: '<run_id>',\n  queryRunRequest: {\n    columns: ['GPT-4o reply'],\n    limit: 50,\n  },\n});\n\nfor (const row of page.rows) {\n  for (const cell of row.cells) {\n    console.log(row.rowId, cell.status, cell.value);\n  }\n}\n"
       security:
         - ApiKey: []
   /v3/experiments/{experiment_id}/runs/{run_id}/rows/bulk-delete:
@@ -68391,7 +68391,7 @@ paths:
           source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\nclient.experiments.delete_rows(\n    experiment_id=\"<experiment_id>\",\n    run_id=\"<run_id>\",\n    row_ids=[\"<row_id>\"],\n)\n"
         - lang: "typescript"
           label: "Node.js - Delete rows"
-          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({ apiKey: process.env.ORQ_API_KEY });\n\nawait client.experiments.deleteRows({\n  experimentId: '<experiment_id>',\n  runId: '<run_id>',\n  rowIds: ['<row_id>'],\n});\n"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({ apiKey: process.env.ORQ_API_KEY });\n\nawait client.experiments.deleteRows({\n  experimentId: '<experiment_id>',\n  runId: '<run_id>',\n  deleteRowsRequest: {\n    rowIds: ['<row_id>'],\n  },\n});\n"
       security:
         - ApiKey: []
   /v3/experiments/{experiment_id}/runs/{run_id}/rows/{row_id}/duplicate:
@@ -68548,7 +68548,7 @@ paths:
           source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\ncolumn = client.experiments.create_task(\n    experiment_id=\"<experiment_id>\",\n    run_id=\"<run_id>\",\n    display_name=\"GPT-4o reply\",\n    prompt={\n        \"messages_source\": \"MESSAGES_SOURCE_MESSAGES_COLUMN\",\n        \"prompt_config\": {\"model\": \"openai/gpt-4o\", \"messages\": []},\n    },\n)\n\nprint(column.column_id)\n"
         - lang: "typescript"
           label: "Node.js - Add a prompt task column"
-          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({ apiKey: process.env.ORQ_API_KEY });\n\nconst column = await client.experiments.createTask({\n  experimentId: '<experiment_id>',\n  runId: '<run_id>',\n  displayName: 'GPT-4o reply',\n  prompt: {\n    messagesSource: 'MESSAGES_SOURCE_MESSAGES_COLUMN',\n    promptConfig: { model: 'openai/gpt-4o', messages: [] },\n  },\n});\n\nconsole.log(column.columnId);\n"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({ apiKey: process.env.ORQ_API_KEY });\n\nconst column = await client.experiments.createTask({\n  experimentId: '<experiment_id>',\n  runId: '<run_id>',\n  createTaskColumnRequest: {\n    displayName: 'GPT-4o reply',\n    prompt: {\n      messagesSource: 'MESSAGES_SOURCE_MESSAGES_COLUMN',\n      promptConfig: { model: 'openai/gpt-4o', messages: [] },\n    },\n  },\n});\n\nconsole.log(column.columnId);\n"
       security:
         - ApiKey: []
   /v3/experiments/{experiment_id}/runs/{run_id}/tasks/{task_id}:
@@ -69439,7 +69439,7 @@ paths:
       x-code-samples:
         - label: "Node.js"
           lang: "typescript"
-          source: "await orq.models.updateAwsBedrock({\n  id: \"019d...\",\n  displayName: \"Updated name\",\n  region: \"us-east-1\",\n});"
+          source: "await orq.models.updateAwsBedrock({\n  id: \"019d...\",\n  requestBody: {\n    displayName: \"Updated name\",\n    region: \"us-east-1\",\n  },\n});"
       x-speakeasy-group: "models"
       x-speakeasy-name-override: "updateAwsBedrock"
       security:
@@ -69995,7 +69995,7 @@ paths:
       x-code-samples:
         - label: "Node.js"
           lang: "typescript"
-          source: "await orq.models.updateOpenaiLike({\n  id: \"019d...\",\n  displayName: \"My Renamed Model\",\n  region: \"us\",\n  modelType: \"chat\",\n  inputCost: 0.002,\n  outputCost: 0.004,\n});"
+          source: "await orq.models.updateOpenaiLike({\n  id: \"019d...\",\n  requestBody: {\n    displayName: \"My Renamed Model\",\n    region: \"us\",\n    modelType: \"chat\",\n    inputCost: 0.002,\n    outputCost: 0.004,\n  },\n});"
       x-speakeasy-group: "models"
       x-speakeasy-name-override: "updateOpenaiLike"
       security:
@@ -70417,7 +70417,7 @@ paths:
       x-code-samples:
         - label: "Node.js"
           lang: "typescript"
-          source: "await orq.models.update({\n  id: \"019d...\",\n  displayName: \"New display name\",\n  hasFunctions: true,\n});"
+          source: "await orq.models.update({\n  id: \"019d...\",\n  requestBody: {\n    displayName: \"New display name\",\n    hasFunctions: true,\n  },\n});"
       x-speakeasy-group: "models"
       x-speakeasy-name-override: "update"
       security:
@@ -70707,7 +70707,7 @@ paths:
           source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\nresult = client.agents.external.update(\n    agent_key=\"support_agent\",\n    display_name=\"Support Agent (EU)\",\n    preferred_transport=\"JSONRPC\",\n)\n\nprint(result.agent.display_name, result.agent.version)\n"
         - lang: "typescript"
           label: "Node.js - Update external agent"
-          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\nconst result = await client.agents.external.update({\n  agentKey: 'support_agent',\n  displayName: 'Support Agent (EU)',\n  preferredTransport: 'JSONRPC',\n});\n\nconsole.log(result.agent.displayName, result.agent.version);\n"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\nconst result = await client.agents.external.update({\n  agentKey: 'support_agent',\n  updateExternalAgentRequest: {\n    displayName: 'Support Agent (EU)',\n    preferredTransport: 'JSONRPC',\n  },\n});\n\nconsole.log(result.agent.displayName, result.agent.version);\n"
       security:
         - ApiKey: []
   /v2/agents/external/{agent_key}:refreshCard:
@@ -71364,7 +71364,7 @@ paths:
           source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\nqueue = client.annotation_queues.update(\n    annotation_queue_id=\"01HXXXXXXXXXXXXXXXXXXXXXXX\",\n    display_name=\"Support quality review (Q3)\",\n    description=\"Updated review scope\",\n)\n\nprint(queue.updated)\n"
         - lang: "typescript"
           label: "Node.js - Update an annotation queue"
-          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({ apiKey: process.env.ORQ_API_KEY });\n\nconst queue = await client.annotationQueues.update({\n  annotationQueueId: '01HXXXXXXXXXXXXXXXXXXXXXXX',\n  displayName: 'Support quality review (Q3)',\n  description: 'Updated review scope',\n});\n\nconsole.log(queue.updated);\n"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({ apiKey: process.env.ORQ_API_KEY });\n\nconst queue = await client.annotationQueues.update({\n  annotationQueueId: '01HXXXXXXXXXXXXXXXXXXXXXXX',\n  updateAnnotationQueueRequest: {\n    displayName: 'Support quality review (Q3)',\n    description: 'Updated review scope',\n  },\n});\n\nconsole.log(queue.updated);\n"
       security:
         - ApiKey: []
   /v2/annotation-queues/{annotation_queue_id}/clear:
@@ -71512,7 +71512,7 @@ paths:
           source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\nresult = client.annotation_queues.add_items(\n    annotation_queue_id=\"01HXXXXXXXXXXXXXXXXXXXXXXX\",\n    items=[\n        {\"span_id\": \"span_01\", \"trace_id\": \"trace_01\"},\n        {\"span_id\": \"span_02\", \"trace_id\": \"trace_02\"},\n    ],\n)\n\nprint(f\"added {len(result)} items\")\n"
         - lang: "typescript"
           label: "Node.js - Add span items to a queue"
-          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({ apiKey: process.env.ORQ_API_KEY });\n\nconst result = await client.annotationQueues.addItems({\n  annotationQueueId: '01HXXXXXXXXXXXXXXXXXXXXXXX',\n  items: [\n    { spanId: 'span_01', traceId: 'trace_01' },\n    { spanId: 'span_02', traceId: 'trace_02' },\n  ],\n});\n\nconsole.log(`added ${result.length} items`);\n"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({ apiKey: process.env.ORQ_API_KEY });\n\nconst result = await client.annotationQueues.addItems({\n  annotationQueueId: '01HXXXXXXXXXXXXXXXXXXXXXXX',\n  addAnnotationQueueItemsRequest: {\n    items: [\n      { spanId: 'span_01', traceId: 'trace_01' },\n      { spanId: 'span_02', traceId: 'trace_02' },\n    ],\n  },\n});\n\nconsole.log(`added ${result.length} items`);\n"
       security:
         - ApiKey: []
   /v2/annotation-queues/{annotation_queue_id}/items/remove:
@@ -71557,7 +71557,7 @@ paths:
           source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\nclient.annotation_queues.remove_items(\n    annotation_queue_id=\"01HXXXXXXXXXXXXXXXXXXXXXXX\",\n    span_ids=[\"span_01\", \"span_02\"],\n)\n"
         - lang: "typescript"
           label: "Node.js - Remove span items from a queue"
-          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({ apiKey: process.env.ORQ_API_KEY });\n\nawait client.annotationQueues.removeItems({\n  annotationQueueId: '01HXXXXXXXXXXXXXXXXXXXXXXX',\n  spanIds: ['span_01', 'span_02'],\n});\n"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({ apiKey: process.env.ORQ_API_KEY });\n\nawait client.annotationQueues.removeItems({\n  annotationQueueId: '01HXXXXXXXXXXXXXXXXXXXXXXX',\n  removeAnnotationQueueItemsRequest: {\n    spanIds: ['span_01', 'span_02'],\n  },\n});\n"
       security:
         - ApiKey: []
   /v2/annotation-queues/{annotation_queue_id}/items/{item_id}:
@@ -71611,7 +71611,7 @@ paths:
           source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\nitem = client.annotation_queues.retrieve_item(\n    annotation_queue_id=\"01HXXXXXXXXXXXXXXXXXXXXXXX\",\n    item_id=\"item_01\",\n)\n\nprint(item.span_id)\n"
         - lang: "typescript"
           label: "Node.js - Retrieve a queue item"
-          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({ apiKey: process.env.ORQ_API_KEY });\n\nconst item = await client.annotationQueues.retrieveItem({\n  annotationQueueId: '01HXXXXXXXXXXXXXXXXXXXXXXX',\n  itemId: 'item_01',\n});\n\nconsole.log(item.spanId);\n"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({ apiKey: process.env.ORQ_API_KEY });\n\nconst item = await client.annotationQueues.retrieveItem({\n  annotationQueueId: '01HXXXXXXXXXXXXXXXXXXXXXXX',\n  itemId: 'item_01',\n});\n\nconsole.log(item);\n"
       security:
         - ApiKey: []
   /v3/audit-log-destinations:
@@ -71832,7 +71832,7 @@ paths:
           source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_MANAGEMENT_KEY\"])\n\nresult = client.audit_log_destinations.update(\n    destination_id=\"auditdest_01k7abcde00000000000000000\",\n    status=\"AUDIT_LOG_DESTINATION_STATUS_PAUSED\",\n)\n\nprint(result.destination.status)\n"
         - lang: "typescript"
           label: "Node.js - Pause an audit log destination"
-          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_MANAGEMENT_KEY,\n});\n\nconst result = await client.auditLogDestinations.update({\n  destinationId: 'auditdest_01k7abcde00000000000000000',\n  status: 'AUDIT_LOG_DESTINATION_STATUS_PAUSED',\n});\n\nconsole.log(result.destination.status);\n"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_MANAGEMENT_KEY,\n});\n\nconst result = await client.auditLogDestinations.update({\n  destinationId: 'auditdest_01k7abcde00000000000000000',\n  updateAuditLogDestinationRequest: {\n    status: 'AUDIT_LOG_DESTINATION_STATUS_PAUSED',\n  },\n});\n\nconsole.log(result.destination.status);\n"
       security:
         - ApiKey: []
   /v3/audit-log-destinations/{destination_id}/deliveries:
@@ -71941,7 +71941,7 @@ paths:
           source: "import os\nfrom datetime import datetime, timezone\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_MANAGEMENT_KEY\"])\n\nresult = client.audit_log_destinations.replay(\n    destination_id=\"auditdest_01k7abcde00000000000000000\",\n    from_=datetime(2026, 10, 1, tzinfo=timezone.utc),\n    to=datetime(2026, 10, 2, tzinfo=timezone.utc),\n)\n\nprint(result.replay_id, result.queued)\n"
         - lang: "typescript"
           label: "Node.js - Replay a day of events"
-          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_MANAGEMENT_KEY,\n});\n\nconst result = await client.auditLogDestinations.replay({\n  destinationId: 'auditdest_01k7abcde00000000000000000',\n  from: new Date('2026-10-01T00:00:00Z'),\n  to: new Date('2026-10-02T00:00:00Z'),\n});\n\nconsole.log(result.replayId, result.queued);\n"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_MANAGEMENT_KEY,\n});\n\nconst result = await client.auditLogDestinations.replay({\n  destinationId: 'auditdest_01k7abcde00000000000000000',\n  replayAuditLogDeliveriesRequest: {\n    from: new Date('2026-10-01T00:00:00Z'),\n    to: new Date('2026-10-02T00:00:00Z'),\n  },\n});\n\nconsole.log(result.replayId, result.queued);\n"
       security:
         - ApiKey: []
   /v3/audit-log-destinations/{destination_id}/rotate-secret:
@@ -72401,7 +72401,7 @@ paths:
           source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\nresult = client.environments.create(\n    slug=\"production\",\n    display_name=\"Production\",\n    description=\"Customer-facing production workloads\",\n    project_id=\"proj_01HZXW2K7Y8Q9M0N1P2R3S4T5V\",\n)\n\nprint(result.environment.environment_id)\n"
         - lang: "typescript"
           label: "Node.js - Create a project environment"
-          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({ apiKey: process.env.ORQ_API_KEY });\nconst result = await client.environments.create({\n  slug: 'production',\n  displayName: 'Production',\n  description: 'Customer-facing production workloads',\n  projectId: 'proj_01HZXW2K7Y8Q9M0N1P2R3S4T5V',\n});\nconsole.log(result.environment.environmentId);\n"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({ apiKey: process.env.ORQ_API_KEY });\nconst result = await client.environments.create({\n  slug: 'production',\n  displayName: 'Production',\n  description: 'Customer-facing production workloads',\n  projectId: 'proj_01HZXW2K7Y8Q9M0N1P2R3S4T5V',\n});\nconsole.log(result.environment.id);\n"
       security:
         - ApiKey: []
   /v3/environments/{environment_id}:
@@ -72534,7 +72534,7 @@ paths:
           source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\nresult = client.environments.update(\n    environment_id=\"env_01jz2r3s4t5v6w7x8y9z0abcde\",\n    display_name=\"Production EU\",\n)\n\nprint(result.environment)\n"
         - lang: "typescript"
           label: "Node.js - Update an environment"
-          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({ apiKey: process.env.ORQ_API_KEY });\nconst result = await client.environments.update({\n  environmentId: 'env_01jz2r3s4t5v6w7x8y9z0abcde',\n  displayName: 'Production EU',\n});\nconsole.log(result.environment);\n"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({ apiKey: process.env.ORQ_API_KEY });\nconst result = await client.environments.update({\n  environmentId: 'env_01jz2r3s4t5v6w7x8y9z0abcde',\n  updateEnvironmentRequest: {\n    displayName: 'Production EU',\n  },\n});\nconsole.log(result.environment);\n"
       security:
         - ApiKey: []
   /v3/submit-feedback:
@@ -72871,7 +72871,7 @@ paths:
           source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\nresult = client.files.update(\n    file_id=\"file_01HZXW2K7Y8Q9M0N1P2R3S4T5V\",\n    file_name=\"support-faq-v2.md\",\n)\n\nprint(result.file.file_name)\n"
         - lang: "typescript"
           label: "Node.js - Rename file"
-          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\nconst result = await client.files.update({\n  fileId: 'file_01HZXW2K7Y8Q9M0N1P2R3S4T5V',\n  fileName: 'support-faq-v2.md',\n});\n\nconsole.log(result.file.fileName);\n"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\nconst result = await client.files.update({\n  fileId: 'file_01HZXW2K7Y8Q9M0N1P2R3S4T5V',\n  updateFileRequest: {\n    fileName: 'support-faq-v2.md',\n  },\n});\n\nconsole.log(result.file.fileName);\n"
       security:
         - ApiKey: []
   /v2/guardrail-rules:
@@ -72982,7 +72982,7 @@ paths:
           source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\nrule = client.guardrail_rules.create(\n    display_name=\"Protect customer data\",\n    description=\"Blocks sensitive customer data from model output.\",\n    enabled=True,\n    guardrails=[{\n        \"id\": \"orq_pii_detection\",\n        \"execute_on\": \"output\",\n        \"sample_rate\": 1,\n        \"is_guardrail\": True,\n    }],\n)\n\nprint(rule._id)\n"
         - lang: "typescript"
           label: "Node.js - Create guardrail rule"
-          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({ apiKey: process.env.ORQ_API_KEY });\nconst rule = await client.guardrailRules.create({\n  displayName: 'Protect customer data',\n  description: 'Blocks sensitive customer data from model output.',\n  enabled: true,\n  guardrails: [{\n    id: 'orq_pii_detection',\n    executeOn: 'output',\n    sampleRate: 1,\n    isGuardrail: true,\n  }],\n});\n\nconsole.log(rule._id);\n"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({ apiKey: process.env.ORQ_API_KEY });\nconst rule = await client.guardrailRules.create({\n  displayName: 'Protect customer data',\n  description: 'Blocks sensitive customer data from model output.',\n  enabled: true,\n  guardrails: [{\n    id: 'orq_pii_detection',\n    executeOn: 'output',\n    sampleRate: 1,\n    isGuardrail: true,\n  }],\n});\n\nconsole.log(rule.guardrailRule.id);\n"
       security:
         - ApiKey: []
   /v2/guardrail-rules/used-guardrails:
@@ -73367,7 +73367,7 @@ paths:
           source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\nresult = client.identities.create(\n    external_id=\"customer_12345\",\n    display_name=\"Ada Lovelace\",\n    email=\"ada@example.com\",\n    tags=[\"enterprise\", \"beta\"],\n    metadata={\n        \"plan\": \"enterprise\",\n        \"region\": \"eu\",\n    },\n)\n\nprint(result.identity.external_id)\n"
         - lang: "typescript"
           label: "Node.js - Create customer identity"
-          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\nconst result = await client.identities.create({\n  externalId: 'customer_12345',\n  displayName: 'Ada Lovelace',\n  email: 'ada@example.com',\n  tags: ['enterprise', 'beta'],\n  metadata: {\n    plan: 'enterprise',\n    region: 'eu',\n  },\n});\n\nconsole.log(result.identity.externalId);\n"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\nconst result = await client.identities.create({\n  externalId: 'customer_12345',\n  displayName: 'Ada Lovelace',\n  email: 'ada@example.com',\n  tags: ['enterprise', 'beta'],\n  metadata: {\n    plan: 'enterprise',\n    region: 'eu',\n  },\n});\n\nconsole.log(result.result.identity.externalId);\n"
         - lang: "curl"
           label: "Core - Create minimal identity"
           source: "curl --request POST \\\n  --url 'https://my.orq.ai/v2/identities' \\\n  --header \"Authorization: Bearer $ORQ_API_KEY\" \\\n  --header 'Content-Type: application/json' \\\n  --data '{\n    \"external_id\": \"user_9f4b2a\"\n  }'\n"
@@ -73376,7 +73376,7 @@ paths:
           source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\nresult = client.identities.create(\n    external_id=\"user_9f4b2a\",\n)\n\nprint(result.identity.external_id)\n"
         - lang: "typescript"
           label: "Node.js - Create minimal identity"
-          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\nconst result = await client.identities.create({\n  externalId: 'user_9f4b2a',\n});\n\nconsole.log(result.identity.externalId);\n"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\nconst result = await client.identities.create({\n  externalId: 'user_9f4b2a',\n});\n\nconsole.log(result.result.identity.externalId);\n"
       security:
         - ApiKey: []
   /v2/identities/{id}:
@@ -73528,7 +73528,7 @@ paths:
           source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\nresult = client.identities.update(\n    id=\"customer_12345\",\n    display_name=\"Ada L.\",\n    tags=[\"enterprise\", \"priority\"],\n    metadata={\n        \"plan\": \"enterprise\",\n        \"lifecycle\": \"renewal\",\n    },\n)\n\nprint(result.identity.display_name)\n"
         - lang: "typescript"
           label: "Node.js - Update identity profile"
-          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\nconst result = await client.identities.update({\n  id: 'customer_12345',\n  displayName: 'Ada L.',\n  tags: ['enterprise', 'priority'],\n  metadata: {\n    plan: 'enterprise',\n    lifecycle: 'renewal',\n  },\n});\n\nconsole.log(result.identity.displayName);\n"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\nconst result = await client.identities.update({\n  id: 'customer_12345',\n  updateIdentityRequest: {\n    displayName: 'Ada L.',\n    tags: ['enterprise', 'priority'],\n    metadata: {\n      plan: 'enterprise',\n      lifecycle: 'renewal',\n    },\n  },\n});\n\nconsole.log(result.identity.displayName);\n"
       security:
         - ApiKey: []
   /v2/management-keys:
@@ -74396,7 +74396,7 @@ paths:
           source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\n# The key is immutable; sending a different one is rejected.\nresult = client.mcp_servers.update(\n    id=\"mcp_server_01JQ0K5R8N2ZC7X4M9T3V6HWBD\",\n    display_name=\"GitHub (read only)\",\n    default_tool_exposure={\n        \"mode\": \"MCP_TOOL_EXPOSURE_MODE_ALL\",\n        \"read_only\": True,\n    },\n)\n\nprint(result.mcp_server.display_name)\n"
         - lang: "typescript"
           label: "Node.js - Update an MCP server"
-          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\n// The key is immutable; sending a different one is rejected.\nconst result = await client.mcpServers.update({\n  id: 'mcp_server_01JQ0K5R8N2ZC7X4M9T3V6HWBD',\n  displayName: 'GitHub (read only)',\n  defaultToolExposure: {\n    mode: 'MCP_TOOL_EXPOSURE_MODE_ALL',\n    readOnly: true,\n  },\n});\n\nconsole.log(result.mcpServer.displayName);\n"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\n// The key is immutable; sending a different one is rejected.\nconst result = await client.mcpServers.update({\n  id: 'mcp_server_01JQ0K5R8N2ZC7X4M9T3V6HWBD',\n  updateMcpServerRequest: {\n    displayName: 'GitHub (read only)',\n    defaultToolExposure: {\n      mode: 'MCP_TOOL_EXPOSURE_MODE_ALL',\n      readOnly: true,\n    },\n  },\n});\n\nconsole.log(result.mcpServer.displayName);\n"
       security:
         - ApiKey: []
   /v2/mcp-servers/{id}/tools:test:
@@ -74458,7 +74458,7 @@ paths:
           source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\n# tool_name is the upstream name, not a gateway's namespaced exposed_name.\nresult = client.mcp_servers.test_tool(\n    id=\"mcp_server_01JQ0K5R8N2ZC7X4M9T3V6HWBD\",\n    tool_name=\"search_issues\",\n    arguments={\"query\": \"repo:orq-ai/orq-cli is:open label:bug\"},\n)\n\nprint(result.result.ok, result.result.latency_ms)\n"
         - lang: "typescript"
           label: "Node.js - Test a single tool"
-          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\n// toolName is the upstream name, not a gateway's namespaced exposedName.\nconst { result } = await client.mcpServers.testTool({\n  id: 'mcp_server_01JQ0K5R8N2ZC7X4M9T3V6HWBD',\n  toolName: 'search_issues',\n  arguments: { query: 'repo:orq-ai/orq-cli is:open label:bug' },\n});\n\nconsole.log(result.ok, result.latencyMs);\n"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\n// toolName is the upstream name, not a gateway's namespaced exposedName.\nconst { result } = await client.mcpServers.testTool({\n  id: 'mcp_server_01JQ0K5R8N2ZC7X4M9T3V6HWBD',\n  testMcpServerToolRequest: {\n    toolName: 'search_issues',\n    arguments: { query: 'repo:orq-ai/orq-cli is:open label:bug' },\n  },\n});\n\nconsole.log(result.ok, result.latencyMs);\n"
       security:
         - ApiKey: []
   /v2/mcp-servers/{id}:sync:
@@ -74529,7 +74529,7 @@ paths:
           source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\nresult = client.mcp_servers.sync(id=\"mcp_server_01JQ0K5R8N2ZC7X4M9T3V6HWBD\")\n\nstate = result.mcp_server.sync_state\n# A sync that discovers nothing still reports SYNCED with tools_total 0.\nprint(state.status, state.tools_added, state.tools_removed)\n"
         - lang: "typescript"
           label: "Node.js - Sync the tool catalog"
-          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\nconst result = await client.mcpServers.sync({\n  id: 'mcp_server_01JQ0K5R8N2ZC7X4M9T3V6HWBD',\n});\n\nconst state = result.mcpServer.syncState;\n// A sync that discovers nothing still reports SYNCED with toolsTotal 0.\nconsole.log(state.status, state.toolsAdded, state.toolsRemoved);\n"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\nconst result = await client.mcpServers.sync({\n  id: 'mcp_server_01JQ0K5R8N2ZC7X4M9T3V6HWBD',\n  syncMcpServerRequest: {},\n});\n\nconst state = result.mcpServer.syncState;\n// A sync that discovers nothing still reports SYNCED with toolsTotal 0.\nconsole.log(state.status, state.toolsAdded, state.toolsRemoved);\n"
       security:
         - ApiKey: []
   /v2/model-catalog:
@@ -74656,7 +74656,7 @@ paths:
           source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\npage = client.model_catalog.list(\n    provider=\"openai\",\n    limit=10,\n)\n\nfor model in page.data:\n    print(model.id, model.name)\n"
         - lang: "typescript"
           label: "Node.js - List the model catalog"
-          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\nconst page = await client.modelCatalog.list({\n  provider: 'openai',\n  limit: 10,\n});\n\nfor (const model of page.data) {\n  console.log(model.id, model.name);\n}\n"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\nconst page = await client.modelCatalog.list({\n  provider: ['openai'],\n  limit: 10,\n});\n\nfor (const model of page.data) {\n  console.log(model.id, model.name);\n}\n"
       security:
         - ApiKey: []
   /v2/model-catalog/{model}/offerings:
@@ -75333,7 +75333,7 @@ paths:
       x-cli-help-section: "Observability"
       x-code-samples:
         - lang: "TypeScript"
-          source: "import { Orq } from '@orq-ai/node';\nconst orq = new Orq({ apiKey: process.env.ORQ_API_KEY });\nawait orq.monitors.update({ monitorId: 'monitor_01J81V5RZPVTDHXBV6M2YVJHRA', displayName: 'LLM cost (weekly)', defaultRange: '30d' });\n"
+          source: "import { Orq } from '@orq-ai/node';\nconst orq = new Orq({ apiKey: process.env.ORQ_API_KEY });\nawait orq.monitors.update({ monitorId: 'monitor_01J81V5RZPVTDHXBV6M2YVJHRA', updateMonitorRequest: { displayName: 'LLM cost (weekly)', defaultRange: '30d' } });\n"
       security:
         - ApiKey: []
   /v2/notifiers:
@@ -75404,7 +75404,7 @@ paths:
           source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\npage = client.notifiers.list(\n    project_id=\"proj_01HZXW2K7Y8Q9M0N1P2R3S4T5V\",\n    limit=25,\n)\n\nfor notifier in page.data:\n    print(notifier._id, notifier.display_name)\n"
         - lang: "typescript"
           label: "Node.js - List notifiers"
-          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\nconst page = await client.notifiers.list({\n  projectId: 'proj_01HZXW2K7Y8Q9M0N1P2R3S4T5V',\n  limit: 25,\n});\n\nfor (const notifier of page.data) {\n  console.log(notifier._id, notifier.displayName);\n}\n"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\nconst page = await client.notifiers.list({\n  projectId: 'proj_01HZXW2K7Y8Q9M0N1P2R3S4T5V',\n  limit: 25,\n});\n\nfor (const notifier of page.data) {\n  console.log(notifier.id, notifier.displayName);\n}\n"
       security:
         - ApiKey: []
     post:
@@ -75585,7 +75585,7 @@ paths:
           source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\nresult = client.notifiers.update(\n    notifier_id=\"notifier_01HZXW2K7Y8Q9M0N1P2R3S4T5V\",\n    display_name=\"Production incident alerts\",\n    emails=[\"incidents@example.com\"],\n)\n\nprint(result.notifier.display_name)\n"
         - lang: "typescript"
           label: "Node.js - Update notifier"
-          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\nconst result = await client.notifiers.update({\n  notifierId: 'notifier_01HZXW2K7Y8Q9M0N1P2R3S4T5V',\n  displayName: 'Production incident alerts',\n  emails: ['incidents@example.com'],\n});\n\nconsole.log(result.notifier.displayName);\n"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\nconst result = await client.notifiers.update({\n  notifierId: 'notifier_01HZXW2K7Y8Q9M0N1P2R3S4T5V',\n  updateNotifierRequest: {\n    displayName: 'Production incident alerts',\n    emails: ['incidents@example.com'],\n  },\n});\n\nconsole.log(result.notifier.displayName);\n"
       security:
         - ApiKey: []
   /v2/projects:
@@ -75823,7 +75823,7 @@ paths:
           source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\nresult = client.projects.update(\n    project_id=\"proj_01HZXW2K7Y8Q9M0N1P2R3S4T5V\",\n    name=\"Customer Success Production\",\n    description=\"Production support and retention automations\",\n    teams=[\"team_support\"],\n)\n\nprint(result.project.name)\n"
         - lang: "typescript"
           label: "Node.js - Update project"
-          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\nconst result = await client.projects.update({\n  projectId: 'proj_01HZXW2K7Y8Q9M0N1P2R3S4T5V',\n  name: 'Customer Success Production',\n  description: 'Production support and retention automations',\n  teams: ['team_support'],\n});\n\nconsole.log(result.project.name);\n"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\nconst result = await client.projects.update({\n  projectId: 'proj_01HZXW2K7Y8Q9M0N1P2R3S4T5V',\n  updateProjectRequest: {\n    name: 'Customer Success Production',\n    description: 'Production support and retention automations',\n    teams: ['team_support'],\n  },\n});\n\nconsole.log(result.project.name);\n"
       security:
         - ApiKey: []
   /v2/routing-rules:
@@ -75893,7 +75893,7 @@ paths:
           source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\npage = client.routing_rules.list(limit=25)\n\nfor rule in page.data:\n    print(rule._id, rule.display_name)\n"
         - lang: "typescript"
           label: "Node.js - List routing rules"
-          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({ apiKey: process.env.ORQ_API_KEY });\nconst page = await client.routingRules.list({ limit: 25 });\n\nfor (const rule of page.data) {\n  console.log(rule._id, rule.displayName);\n}\n"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({ apiKey: process.env.ORQ_API_KEY });\nconst page = await client.routingRules.list({ limit: 25 });\n\nfor (const rule of page.data) {\n  console.log(rule.id, rule.displayName);\n}\n"
       security:
         - ApiKey: []
     post:
@@ -75936,7 +75936,7 @@ paths:
           source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\nrule = client.routing_rules.create(\n    display_name=\"Private customer traffic\",\n    description=\"Routes private customer requests through the guarded model path.\",\n)\n\nprint(rule._id)\n"
         - lang: "typescript"
           label: "Node.js - Create routing rule"
-          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({ apiKey: process.env.ORQ_API_KEY });\nconst rule = await client.routingRules.create({\n  displayName: 'Private customer traffic',\n  description:\n    'Routes private customer requests through the guarded model path.',\n});\n\nconsole.log(rule._id);\n"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({ apiKey: process.env.ORQ_API_KEY });\nconst rule = await client.routingRules.create({\n  displayName: 'Private customer traffic',\n  description:\n    'Routes private customer requests through the guarded model path.',\n});\n\nconsole.log(rule.id);\n"
       security:
         - ApiKey: []
   /v2/routing-rules/used-models:
@@ -76117,7 +76117,7 @@ paths:
           source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\nrule = client.routing_rules.update(\n    routing_rule_id=\"rrl_01HZXW2K7Y8Q9M0N1P2R3S4T5V\",\n    enabled=True,\n    priority=10,\n    models_config={\n        \"mode\": \"fallback\",\n        \"models\": [{\"model\": \"openai/gpt-5\"}],\n        \"fallback_on_codes\": [429, 503],\n    },\n)\n\nprint(rule.updated_at)\n"
         - lang: "typescript"
           label: "Node.js - Configure routing rule"
-          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({ apiKey: process.env.ORQ_API_KEY });\nconst rule = await client.routingRules.update({\n  routingRuleId: 'rrl_01HZXW2K7Y8Q9M0N1P2R3S4T5V',\n  enabled: true,\n  priority: 10,\n  modelsConfig: {\n    mode: 'fallback',\n    models: [{ model: 'openai/gpt-5' }],\n    fallbackOnCodes: [429, 503],\n  },\n});\n\nconsole.log(rule.updatedAt);\n"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({ apiKey: process.env.ORQ_API_KEY });\nconst rule = await client.routingRules.update({\n  routingRuleId: 'rrl_01HZXW2K7Y8Q9M0N1P2R3S4T5V',\n  updateRoutingRuleRequest: {\n    enabled: true,\n    priority: 10,\n    modelsConfig: {\n      mode: 'fallback',\n      models: [{ model: 'openai/gpt-5' }],\n      fallbackOnCodes: [429, 503],\n    },\n  },\n});\n\nconsole.log(rule.updatedAt);\n"
       security:
         - ApiKey: []
   /v2/sessions:
@@ -76420,7 +76420,7 @@ paths:
           source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\nresult = client.sessions.update(\n    session_id=\"thread_01HZXW2K7Y8Q9M0N1P2R3S4T5V\",\n    tags=[\"support\", \"escalated\"],\n    traces_count=3,\n)\n\nprint(result.tags)\n"
         - lang: "typescript"
           label: "Node.js - Update session"
-          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\nconst result = await client.sessions.update({\n  sessionId: 'thread_01HZXW2K7Y8Q9M0N1P2R3S4T5V',\n  tags: ['support', 'escalated'],\n  tracesCount: 3,\n});\n\nconsole.log(result.tags);\n"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\nconst result = await client.sessions.update({\n  sessionId: 'thread_01HZXW2K7Y8Q9M0N1P2R3S4T5V',\n  updateThreadRequest: {\n    tags: ['support', 'escalated'],\n    tracesCount: 3,\n  },\n});\n\nconsole.log(result.tags);\n"
       security:
         - ApiKey: []
   /v2/skills:
@@ -76564,8 +76564,8 @@ paths:
       x-cli-help-section: "Managed agents"
       x-code-samples:
         - lang: "typescript"
-          label: "Node.js - ImportBundle"
-          source: "import { Orq } from '@orq-ai/node';\nimport { readFile } from 'node:fs/promises';\n\nconst orq = new Orq({ apiKey: process.env.ORQ_API_KEY });\nconst result = await orq.skills.importBundle({\n  projectId: 'proj_01HZXW2K7Y8Q9M0N1P2R3S4T5V',\n  bundle: (await readFile('skill.zip')).toString('base64'),\n});\nconsole.log(result);\n"
+          label: "Node.js - Import a skill bundle"
+          source: "import { readFile } from 'node:fs/promises';\nimport { Orq } from '@orq-ai/node';\n\nconst orq = new Orq({ apiKey: process.env.ORQ_API_KEY });\n\nconst result = await orq.skills.importBundle({\n  projectId: 'proj_01HZXW2K7Y8Q9M0N1P2R3S4T5V',\n  bundle: (await readFile('skill.zip')).toString('base64'),\n});\n\nconsole.log(result);\n"
       security:
         - ApiKey: []
   /v2/skills/import/repository:
@@ -76599,7 +76599,8 @@ paths:
       x-cli-help-section: "Managed agents"
       x-code-samples:
         - lang: "TypeScript"
-          source: "import { Orq } from '@orq-ai/node';\nconst orq = new Orq({ apiKey: process.env.ORQ_API_KEY });\nawait orq.skills.importFromRepository({ connectionId: 'connection-id', repositoryUrl: 'https://github.com/example/skills', ref: 'main', subdirectory: 'skills/review', projectId: 'project-id' });\n"
+          label: "Node.js - Import a skill from a repository"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst orq = new Orq({ apiKey: process.env.ORQ_API_KEY });\n\nconst result = await orq.skills.importFromRepository({\n  connectionId: 'connection-id',\n  repositoryUrl: 'https://github.com/example/skills',\n  ref: 'main',\n  subdirectory: 'skills/review',\n  projectId: 'project-id',\n});\n\nconsole.log(result);\n"
       security:
         - ApiKey: []
   /v2/skills/{skill_id}:
@@ -76746,7 +76747,7 @@ paths:
           source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\nresult = client.skills.update(\n    skill_id=\"skill_01HZXW2K7Y8Q9M0N1P2R3S4T5V\",\n    description=\"Summarize support tickets for escalation handoff.\",\n    tags=[\"support\", \"handoff\"],\n    instructions=(\n        \"Return the issue summary, urgency, attempted fixes, \"\n        \"and recommended owner.\"\n    ),\n)\n\nprint(result.skill.version)\n"
         - lang: "typescript"
           label: "Node.js - Update skill instructions"
-          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\nconst result = await client.skills.update({\n  skillId: 'skill_01HZXW2K7Y8Q9M0N1P2R3S4T5V',\n  description: 'Summarize support tickets for escalation handoff.',\n  tags: ['support', 'handoff'],\n  instructions:\n    'Return the issue summary, urgency, attempted fixes, and recommended owner.',\n});\n\nconsole.log(result.skill.version);\n"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\nconst result = await client.skills.update({\n  skillId: 'skill_01HZXW2K7Y8Q9M0N1P2R3S4T5V',\n  updateSkillRequest: {\n    description: 'Summarize support tickets for escalation handoff.',\n    tags: ['support', 'handoff'],\n    instructions:\n      'Return the issue summary, urgency, attempted fixes, and recommended owner.',\n  },\n});\n\nconsole.log(result.skill.version);\n"
       security:
         - ApiKey: []
   /v2/skills/{skill_id}/bundle:
@@ -76785,8 +76786,8 @@ paths:
       x-cli-help-section: "Managed agents"
       x-code-samples:
         - lang: "typescript"
-          label: "Node.js - ReplaceBundle"
-          source: "import { Orq } from '@orq-ai/node';\nimport { readFile } from 'node:fs/promises';\n\nconst orq = new Orq({ apiKey: process.env.ORQ_API_KEY });\nconst result = await orq.skills.replaceBundle({\n  skillId: 'skill_01HZXW2K7Y8Q9M0N1P2R3S4T5V',\n  bundle: (await readFile('skill.zip')).toString('base64'),\n});\nconsole.log(result);\n"
+          label: "Node.js - Replace a skill bundle"
+          source: "import { readFile } from 'node:fs/promises';\nimport { Orq } from '@orq-ai/node';\n\nconst orq = new Orq({ apiKey: process.env.ORQ_API_KEY });\n\nconst result = await orq.skills.replaceBundle({\n  skillId: 'skill_01HZXW2K7Y8Q9M0N1P2R3S4T5V',\n  replaceSkillBundleRequest: {\n    bundle: (await readFile('skill.zip')).toString('base64'),\n  },\n});\n\nconsole.log(result);\n"
       security:
         - ApiKey: []
   /v2/skills/{skill_id}/files:
@@ -76828,7 +76829,7 @@ paths:
       x-code-samples:
         - lang: "typescript"
           label: "Node.js - Put a skill file"
-          source: "import { Orq } from '@orq-ai/node';\n\nconst orq = new Orq({ apiKey: process.env.ORQ_API_KEY });\nconst result = await orq.skills.putFile({\n  skillId: 'skill_01HZXW2K7Y8Q9M0N1P2R3S4T5V',\n  path: 'references/guide.md',\n  content: Buffer.from('# Reference\\n').toString('base64'),\n});\nconsole.log(result.skill.files);\n"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst orq = new Orq({ apiKey: process.env.ORQ_API_KEY });\n\nconst result = await orq.skills.putFile({\n  skillId: 'skill_01HZXW2K7Y8Q9M0N1P2R3S4T5V',\n  putSkillFileRequest: {\n    path: 'references/guide.md',\n    content: 'IyBSZWZlcmVuY2UK',\n  },\n});\n\nconsole.log(result);\n"
       security:
         - ApiKey: []
   /v2/skills/{skill_id}/files/rename:
@@ -76870,7 +76871,7 @@ paths:
       x-code-samples:
         - lang: "typescript"
           label: "Node.js - Rename a skill file"
-          source: "import { Orq } from '@orq-ai/node';\n\nconst orq = new Orq({ apiKey: process.env.ORQ_API_KEY });\nawait orq.skills.renameFile({\n  skillId: 'skill_01HZXW2K7Y8Q9M0N1P2R3S4T5V',\n  oldPath: 'references/guide.md',\n  newPath: 'references/overview.md',\n});\n"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst orq = new Orq({ apiKey: process.env.ORQ_API_KEY });\n\nconst result = await orq.skills.renameFile({\n  skillId: 'skill_01HZXW2K7Y8Q9M0N1P2R3S4T5V',\n  renameSkillFileRequest: {\n    oldPath: 'references/guide.md',\n    newPath: 'references/overview.md',\n  },\n});\n\nconsole.log(result);\n"
       security:
         - ApiKey: []
   /v2/skills/{skill_id}/files:save:
@@ -76911,7 +76912,7 @@ paths:
       x-code-samples:
         - lang: "typescript"
           label: "Node.js - Save skill files"
-          source: "import { Orq } from '@orq-ai/node';\nimport { readFile } from 'node:fs/promises';\n\nconst orq = new Orq({ apiKey: process.env.ORQ_API_KEY });\nawait orq.skills.saveFiles({\n  skillId: 'skill_01HZXW2K7Y8Q9M0N1P2R3S4T5V',\n  files: [{ path: 'SKILL.md', content: (await readFile('SKILL.md')).toString('base64') }],\n});\n"
+          source: "import { readFile } from 'node:fs/promises';\nimport { Orq } from '@orq-ai/node';\n\nconst orq = new Orq({ apiKey: process.env.ORQ_API_KEY });\n\nconst result = await orq.skills.saveFiles({\n  skillId: 'skill_01HZXW2K7Y8Q9M0N1P2R3S4T5V',\n  saveSkillFilesRequest: {\n    files: [\n      {\n        path: 'SKILL.md',\n        content: (await readFile('SKILL.md')).toString('base64'),\n      },\n    ],\n  },\n});\n\nconsole.log(result);\n"
       security:
         - ApiKey: []
   /v2/skills/{skill_id}/versions:
@@ -76957,8 +76958,8 @@ paths:
       x-cli-help-section: "Managed agents"
       x-code-samples:
         - lang: "typescript"
-          label: "Node.js - ListVersions"
-          source: "import { Orq } from '@orq-ai/node';\n\nconst orq = new Orq({ apiKey: process.env.ORQ_API_KEY });\nconst result = await orq.skills.listVersions({\n  skillId: 'skill_01HZXW2K7Y8Q9M0N1P2R3S4T5V',\n  limit: 25,\n});\nconsole.log(result);\n"
+          label: "Node.js - List skill versions"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst orq = new Orq({ apiKey: process.env.ORQ_API_KEY });\n\nconst page = await orq.skills.listVersions({\n  skillId: 'skill_01HZXW2K7Y8Q9M0N1P2R3S4T5V',\n  limit: 25,\n});\n\nfor (const version of page.data ?? []) {\n  console.log(version.versionId);\n}\n"
       security:
         - ApiKey: []
   /v2/skills/{skill_id}:export:
@@ -76993,8 +76994,8 @@ paths:
       x-cli-help-section: "Managed agents"
       x-code-samples:
         - lang: "typescript"
-          label: "Node.js - ExportBundle"
-          source: "import { Orq } from '@orq-ai/node';\n\nconst orq = new Orq({ apiKey: process.env.ORQ_API_KEY });\nconst result = await orq.skills.exportBundle({\n  skillId: 'skill_01HZXW2K7Y8Q9M0N1P2R3S4T5V',\n});\nconsole.log(result);\n"
+          label: "Node.js - Export a skill bundle"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst orq = new Orq({ apiKey: process.env.ORQ_API_KEY });\n\nconst result = await orq.skills.exportBundle({\n  skillId: 'skill_01HZXW2K7Y8Q9M0N1P2R3S4T5V',\n});\n\nconsole.log(result.filename);\n"
       security:
         - ApiKey: []
   /v2/skills/{skill_id}:restore:
@@ -77035,8 +77036,8 @@ paths:
       x-cli-help-section: "Managed agents"
       x-code-samples:
         - lang: "typescript"
-          label: "Node.js - RestoreVersion"
-          source: "import { Orq } from '@orq-ai/node';\n\nconst orq = new Orq({ apiKey: process.env.ORQ_API_KEY });\nconst result = await orq.skills.restoreVersion({\n  skillId: 'skill_01HZXW2K7Y8Q9M0N1P2R3S4T5V',\n  versionId: '01HZXW2K7Y8Q9M0N1P2R3S4T5V',\n});\nconsole.log(result);\n"
+          label: "Node.js - Restore a skill version"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst orq = new Orq({ apiKey: process.env.ORQ_API_KEY });\n\nconst result = await orq.skills.restoreVersion({\n  skillId: 'skill_01HZXW2K7Y8Q9M0N1P2R3S4T5V',\n  restoreSkillVersionRequest: {\n    versionId: '01HZXW2K7Y8Q9M0N1P2R3S4T5V',\n  },\n});\n\nconsole.log(result);\n"
       security:
         - ApiKey: []
   /v2/skills/{skill_id}/files/{path}:
@@ -77078,7 +77079,7 @@ paths:
       x-code-samples:
         - lang: "typescript"
           label: "Node.js - Delete a skill file"
-          source: "import { Orq } from '@orq-ai/node';\n\nconst orq = new Orq({ apiKey: process.env.ORQ_API_KEY });\nawait orq.skills.deleteFile({\n  skillId: 'skill_01HZXW2K7Y8Q9M0N1P2R3S4T5V',\n  path: 'references/guide.md',\n});\n"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst orq = new Orq({ apiKey: process.env.ORQ_API_KEY });\n\nawait orq.skills.deleteFile({\n  skillId: 'skill_01HZXW2K7Y8Q9M0N1P2R3S4T5V',\n  path: 'references/guide.md',\n});\n"
       security:
         - ApiKey: []
   /v2/skills/{skill_id}/files/{path}:presign:
@@ -77119,8 +77120,8 @@ paths:
       x-cli-help-section: "Managed agents"
       x-code-samples:
         - lang: "typescript"
-          label: "Node.js - Download a skill file"
-          source: "import { Orq } from '@orq-ai/node';\n\nconst orq = new Orq({ apiKey: process.env.ORQ_API_KEY });\nconst result = await orq.skills.getFileContent({\n  skillId: 'skill_01HZXW2K7Y8Q9M0N1P2R3S4T5V',\n  path: 'references/guide.md',\n});\nconst response = await fetch(result.downloadUrl);\nconsole.log(await response.text());\n"
+          label: "Node.js - Get a skill file download link"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst orq = new Orq({ apiKey: process.env.ORQ_API_KEY });\n\nconst result = await orq.skills.getFileContent({\n  skillId: 'skill_01HZXW2K7Y8Q9M0N1P2R3S4T5V',\n  path: 'references/guide.md',\n});\n\nconsole.log(result.downloadUrl);\n"
       security:
         - ApiKey: []
   /v2/smart-routers:
@@ -77511,7 +77512,7 @@ paths:
           source: "curl --request PATCH \\\n  --url 'https://my.orq.ai/v3/users/550e8400-e29b-41d4-a716-446655440000' \\\n  --header \"Authorization: Bearer $ORQ_MANAGEMENT_KEY\" \\\n  --header 'Content-Type: application/json' \\\n  --data '{\"role\": \"01J3HZA12M14T6Z82BZ35B170K\"}'\n"
         - lang: "typescript"
           label: "TypeScript (orq SDK)"
-          source: "import { Orq } from '@orq-ai/node';\n\nconst orq = new Orq({ apiKey: process.env.ORQ_MANAGEMENT_KEY });\nconst result = await orq.users.update({ userId: '550e8400-e29b-41d4-a716-446655440000', role: '01J3HZA12M14T6Z82BZ35B170K' });\nconsole.log(result.user);\n"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst orq = new Orq({ apiKey: process.env.ORQ_MANAGEMENT_KEY });\nconst result = await orq.users.update({ userId: '550e8400-e29b-41d4-a716-446655440000', updateUserRequest: { role: '01J3HZA12M14T6Z82BZ35B170K' } });\nconsole.log(result.user);\n"
       security:
         - ApiKey: []
     post:
@@ -77557,7 +77558,7 @@ paths:
           source: "curl --request POST \\\n  --url 'https://my.orq.ai/v3/users/550e8400-e29b-41d4-a716-446655440001' \\\n  --header \"Authorization: Bearer $ORQ_MANAGEMENT_KEY\" \\\n  --header 'Content-Type: application/json' \\\n  --data '{\"emails\": [\"member@example.com\"], \"roles\": [\"01J3HZA12M14T6Z82BZ35B170K\"]}'\n"
         - lang: "typescript"
           label: "TypeScript (orq SDK)"
-          source: "import { Orq } from '@orq-ai/node';\n\nconst orq = new Orq({ apiKey: process.env.ORQ_MANAGEMENT_KEY });\nconst result = await orq.users.create({ teamId: '550e8400-e29b-41d4-a716-446655440001', emails: ['member@example.com'], roles: ['01J3HZA12M14T6Z82BZ35B170K'] });\nconsole.log(result.users);\n"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst orq = new Orq({ apiKey: process.env.ORQ_MANAGEMENT_KEY });\nconst result = await orq.users.create({ teamId: '550e8400-e29b-41d4-a716-446655440001', createUsersRequest: { emails: ['member@example.com'], roles: ['01J3HZA12M14T6Z82BZ35B170K'] } });\nconsole.log(result.users);\n"
       security:
         - ApiKey: []
   /v2/virtual-models:
@@ -77830,7 +77831,7 @@ paths:
           source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\npage = client.webhooks.list(\n    search=\"production\",\n    event=\"llm.response\",\n    content_type=\"application/json\",\n    enabled=True,\n    page=1,\n    limit=20,\n    sort=\"created\",\n    direction=\"desc\",\n)\n\nprint(f\"{page.count} matching webhooks\")\nfor webhook in page.items:\n    print(webhook._id, webhook.display_name)\nprint(f\"Has more: {page.has_more}\")\n"
         - lang: "typescript"
           label: "Node.js - List filtered webhooks"
-          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\nconst page = await client.webhooks.list({\n  search: 'production',\n  event: 'llm.response',\n  contentType: 'application/json',\n  enabled: true,\n  page: 1,\n  limit: 20,\n  sort: 'created',\n  direction: 'desc',\n});\n\nconsole.log(`${page.count} matching webhooks`);\nfor (const webhook of page.items) {\n  console.log(webhook._id, webhook.displayName);\n}\nconsole.log(`Has more: ${page.hasMore}`);\n"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\nconst page = await client.webhooks.list({\n  search: 'production',\n  event: 'llm.response',\n  contentType: 'application/json',\n  enabled: true,\n  page: 1,\n  limit: 20,\n  sort: 'created',\n  direction: 'desc',\n});\n\nconsole.log(`${page.count} matching webhooks`);\nfor (const webhook of page.items) {\n  console.log(webhook.id, webhook.displayName);\n}\nconsole.log(`Has more: ${page.hasMore}`);\n"
       security:
         - ApiKey: []
     post:
@@ -82058,7 +82059,7 @@ paths:
       x-code-samples:
         - label: "Node.js"
           lang: "typescript"
-          source: "import { readFile } from \"node:fs/promises\";\nimport { Orq } from \"@orq-ai/node\";\n\nconst orq = new Orq({ apiKey: process.env[\"ORQ_API_KEY\"], serverURL: \"https://my.orq.ai\" });\nconst result = await orq.live.createSession({\n  session: {\n    model: \"openai/gpt-live-1.1\",\n    instructions: \"Keep replies brief.\",\n    wakePolicy: { type: \"speech\" },\n    idleTimeoutS: 15,\n  },\n  transport: {\n    type: \"webrtc\",\n    sdp: await readFile(\"offer.sdp\", \"utf8\"),\n  },\n});\nconsole.log(result.transport.sdp);"
+          source: "import { readFile } from \"node:fs/promises\";\nimport { Orq } from \"@orq-ai/node\";\n\nconst orq = new Orq({ apiKey: process.env.ORQ_API_KEY });\n\nconst result = await orq.live.createSession({\n  session: {\n    model: \"openai/gpt-live-1.1\",\n    instructions: \"Keep replies brief.\",\n    wakePolicy: { type: \"speech\" },\n    idleTimeoutS: 15,\n  },\n  transport: {\n    type: \"webrtc\",\n    sdp: await readFile(\"offer.sdp\", \"utf8\"),\n  },\n});\n\nconsole.log(result.transport.sdp);"
       x-orq-gateway-group: true
       x-speakeasy-group: "live"
       x-speakeasy-name-override: "createSession"
