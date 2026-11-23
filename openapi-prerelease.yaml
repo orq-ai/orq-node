@@ -2591,7 +2591,7 @@ components:
           properties:
             _id:
               type: "string"
-              default: "reasoning_01m82bwnyq2e4gb96pa76jt1vv"
+              default: "reasoning_01m83tsqbvj37p5b0qj27k420m"
               description: "Unique identifier for the part. Format: reasoning_{ulid} (e.g., reasoning_01hxyz...)"
               example: "reasoning_01hxyz123abc"
             kind:
@@ -29445,7 +29445,7 @@ paths:
                                 type: "string"
                                 format: "ulid"
                                 pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                                default: "01M82BWNXVEAHX0ZCZE9ZK5GE7"
+                                default: "01M83TSQAYRWB4MBCQ9NB4X29X"
                                 readOnly: true
                                 description: "The unique identifier of the playground knowledge base"
                               knowledge_id:
@@ -38860,7 +38860,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01M82BWNZWWVC8JSC03CX89Y9J"
+                                          default: "01M83TSQD3HAT6K4WG995WDKJ2"
                                         name:
                                           type: "string"
                                         description:
@@ -40487,7 +40487,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01M82BWP08VSQ2X0P3MQSBM0SY"
+                                          default: "01M83TSQDGWZTF1SWCFZK3V47E"
                                         name:
                                           type: "string"
                                         description:
@@ -49553,7 +49553,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M82BWP18CTA0E8J74R1H8FAR"
+                              default: "tool_01M83TSQEJJBCR8H5T04P4ZQRK"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -49654,7 +49654,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M82BWP19Y1W9QNTRTQ0ETRD6"
+                              default: "tool_01M83TSQEKPE13CHXSW97YSBAP"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -49757,7 +49757,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M82BWP1DW9J2142X2CRQ3J94"
+                              default: "tool_01M83TSQEK3RHPGVWEEZ6KFD84"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -49901,7 +49901,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M82BWP1DY1M25E4MCNT0H8JT"
+                              default: "tool_01M83TSQEM4M3663NSNK1WTT55"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -50389,7 +50389,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M82BWP1GV5ZV71WADHPG6MT5"
+                        default: "tool_01M83TSQETT50ZHCN75QA137N7"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -50490,7 +50490,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M82BWP1G2ZKG7T87YMS0VFT7"
+                        default: "tool_01M83TSQET0KH9D31P30AF7NQA"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -50593,7 +50593,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M82BWP1HZWEE5QCPDJ4WZXK9"
+                        default: "tool_01M83TSQEV49TGSABXF934SKWH"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -50737,7 +50737,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M82BWP1H77H5EDSC2QYSE7A7"
+                        default: "tool_01M83TSQEVKXMGC2PGY69JN9HW"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -51242,7 +51242,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M82BWP1K7YC3SDGW1BMS07QK"
+                        default: "tool_01M83TSQEXGMJ9W9GJ9GT8WNAZ"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -51343,7 +51343,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M82BWP1KY0Z8T7NTV7FV6FGT"
+                        default: "tool_01M83TSQEXK2SGN8N0JGZXN6NK"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -51446,7 +51446,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M82BWP1KCDE131B0Y6V9XTMW"
+                        default: "tool_01M83TSQEY3DNR9S6Y52AGV5V7"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -51590,7 +51590,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M82BWP1MRG47JS631XT5QVTZ"
+                        default: "tool_01M83TSQEY21DSMBCH3FR5H8FB"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -51759,7 +51759,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M82BWP1QK3090VY0VESHWD6V"
+                        default: "tool_01M83TSQF24F5AG766S58NZWJN"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -51860,7 +51860,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M82BWP1R828VGN1PBV3357X7"
+                        default: "tool_01M83TSQF2RGPQAYE9BB0JSXE9"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -51963,7 +51963,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M82BWP1RKFK5NR0H0XSCJWMA"
+                        default: "tool_01M83TSQF3D3R2Y3R5QV2FM82V"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -52107,7 +52107,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M82BWP1RARFVB5A4K1DX34FQ"
+                        default: "tool_01M83TSQF3892VBQC99F55XZ5H"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -58989,7 +58989,7 @@ paths:
           source: "import { Orq } from \"@orq-ai/node\";\n\nconst orq = new Orq({\n  apiKey: process.env[\"ORQ_API_KEY\"]\n});\n\nconst result = await orq.chunking.parse({\n  text: \"Your long text content here...\",\n  strategy: \"semantic\",\n  chunkSize: 256,\n  threshold: 0.8,\n  embeddingModel: \"openai/text-embedding-3-small\",\n  dimensions: 512\n});\n\nconsole.log(result.chunks);"
         - lang: "python"
           label: "Python"
-          source: "from orq_ai_sdk import Orq\n\norq = Orq(api_key=os.getenv(\"ORQ_API_KEY\"))\n\nresult = orq.chunking.parse(\n    text=\"Your long text content here...\",\n    strategy=\"semantic\",\n    chunk_size=256,\n    threshold=0.8,\n    embedding_model=\"openai/text-embedding-3-small\",\n    dimensions=512\n)\n\nfor chunk in result.chunks:\n    print(f\"Chunk {chunk.index}: {chunk.text[:50]}...\")"
+          source: "import os\n\nfrom orq_ai_sdk import Orq\n\norq = Orq(api_key=os.getenv(\"ORQ_API_KEY\"))\n\nresult = orq.chunking.parse(\n    request={\n        \"text\": \"Your long text content here...\",\n        \"strategy\": \"semantic\",\n        \"chunk_size\": 256,\n        \"threshold\": 0.8,\n        \"embedding_model\": \"openai/text-embedding-3-small\",\n        \"dimensions\": 512,\n    }\n)\n\nfor chunk in result.chunks:\n    print(f\"Chunk {chunk.index}: {chunk.text[:50]}...\")"
       security:
         - ApiKey: []
   /v2/file-systems:
@@ -64335,7 +64335,7 @@ paths:
           source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\nevaluation = client.evals.invoke(\n    id=\"01KT1FCSA8N3YD1K8YBPVTAV9E\",\n    context={\n        \"input\": {\n            \"user_query\": \"What is the capital of France?\",\n            \"expected_output\": \"Paris\",\n            \"retrievals\": [\"The capital of France is Paris.\"],\n        },\n        \"output\": {\"response\": \"The capital of France is Paris.\"},\n        \"variables\": {\"tone\": \"formal\"},\n    },\n)\n\n# `passed` is the guardrail's decision when the evaluator has one, and the\n# grader's own judgement otherwise. `value` carries the verdict itself,\n# whose type follows the evaluator: a boolean, a score, a label.\nprint(evaluation.passed, evaluation.value)\n"
         - lang: "typescript"
           label: "Node.js - Run an evaluator"
-          source: "import { Orq } from '@orq-ai/node';\n\nconst orq = new Orq({ apiKey: process.env.ORQ_API_KEY });\n\nconst evaluation = await orq.evals.invoke({\n  id: '01KT1FCSA8N3YD1K8YBPVTAV9E',\n  invokeEvaluatorRequest: {\n    timeout: { call_timeout: 45000 },\n    retry: { count: 2, on_codes: [429, 500, 502, 503, 504] },\n    context: {\n      input: {\n        user_query: 'What is the capital of France?',\n        expected_output: 'Paris',\n        retrievals: ['The capital of France is Paris.'],\n      },\n      output: { response: 'The capital of France is Paris.' },\n      variables: { tone: 'formal' },\n    },\n  },\n});\n\nconsole.log(evaluation.passed, evaluation.value);\n"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst orq = new Orq({ apiKey: process.env.ORQ_API_KEY });\n\nconst evaluation = await orq.evals.invoke({\n  id: '01KT1FCSA8N3YD1K8YBPVTAV9E',\n  invokeEvaluatorRequest: {\n    timeout: { callTimeout: 45000 },\n    retry: { count: 2, onCodes: [429, 500, 502, 503, 504] },\n    context: {\n      input: {\n        userQuery: 'What is the capital of France?',\n        expectedOutput: 'Paris',\n        retrievals: ['The capital of France is Paris.'],\n      },\n      output: { response: 'The capital of France is Paris.' },\n      variables: { tone: 'formal' },\n    },\n  },\n});\n\nconsole.log(evaluation.passed, evaluation.value);\n"
         - lang: "curl"
           label: "Core - Grade a conversation instead of a single turn"
           source: "curl 'https://my.orq.ai/v3/evaluators/01KT1FCSA8N3YD1K8YBPVTAV9E/invoke' \\\n  --header \"Authorization: Bearer $ORQ_API_KEY\" \\\n  --header 'Content-Type: application/json' \\\n  --data-raw '{\n    \"context\": {\n      \"messages\": [\n        {\"role\": \"user\", \"content\": \"What is the capital of France?\"},\n        {\"role\": \"assistant\", \"content\": \"The capital of France is Paris.\"}\n      ],\n      \"input\": {\n        \"expected_output\": \"Paris\"\n      }\n    }\n  }'\n"
@@ -68411,10 +68411,10 @@ paths:
           source: "curl --request POST 'https://my.orq.ai/v3/experiments/<experiment_id>/runs/<run_id>/rows/<row_id>/duplicate' \\\n  --header \"Authorization: Bearer $ORQ_API_KEY\" \\\n  --header 'Content-Type: application/json' \\\n  --data '{}'\n"
         - lang: "python"
           label: "Python - Duplicate a row"
-          source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\nrow = client.experiments.duplicate_row(\n    experiment_id=\"<experiment_id>\",\n    run_id=\"<run_id>\",\n    row_id=\"<row_id>\",\n)\n\nprint(row.row_id, len(row.cells))\n"
+          source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\nrow = client.experiments.duplicate_row(\n    experiment_id=\"<experiment_id>\",\n    run_id=\"<run_id>\",\n    row_id=\"<row_id>\",\n    duplicate_row_request={},\n)\n\nprint(row.row_id, len(row.cells))\n"
         - lang: "typescript"
           label: "Node.js - Duplicate a row"
-          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({ apiKey: process.env.ORQ_API_KEY });\n\nconst row = await client.experiments.duplicateRow({\n  experimentId: '<experiment_id>',\n  runId: '<run_id>',\n  rowId: '<row_id>',\n});\n\nconsole.log(row.rowId, row.cells.length);\n"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({ apiKey: process.env.ORQ_API_KEY });\n\nconst row = await client.experiments.duplicateRow({\n  experimentId: '<experiment_id>',\n  runId: '<run_id>',\n  rowId: '<row_id>',\n  duplicateRowRequest: {},\n});\n\nconsole.log(row.rowId, row.cells?.length);\n"
       security:
         - ApiKey: []
   /v3/experiments/{experiment_id}/runs/{run_id}/tasks:
@@ -70712,10 +70712,10 @@ paths:
           source: "curl --request POST \\\n  --url 'https://my.orq.ai/v2/agents/external/support_agent:refreshCard' \\\n  --header \"Authorization: Bearer $ORQ_API_KEY\"\n"
         - lang: "python"
           label: "Python - Refresh external agent card"
-          source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\nresult = client.agents.external.refresh_card(\n    agent_key=\"support_agent\",\n)\n\nprint(result.agent.card_refreshed_at)\n"
+          source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\nresult = client.agents.external.refresh_card(\n    agent_key=\"support_agent\",\n    refresh_external_agent_card_request={},\n)\n\nprint(result.agent.card_refreshed_at)\n"
         - lang: "typescript"
           label: "Node.js - Refresh external agent card"
-          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\nconst result = await client.agents.external.refreshCard({\n  agentKey: 'support_agent',\n});\n\nconsole.log(result.agent.cardRefreshedAt);\n"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\nconst result = await client.agents.external.refreshCard({\n  agentKey: 'support_agent',\n  refreshExternalAgentCardRequest: {},\n});\n\nconsole.log(result.agent?.cardRefreshedAt);\n"
       security:
         - ApiKey: []
   /v2/agents/external/{agent_key}:testConnection:
@@ -70759,10 +70759,10 @@ paths:
           source: "curl --request POST \\\n  --url 'https://my.orq.ai/v2/agents/external/support_agent:testConnection' \\\n  --header \"Authorization: Bearer $ORQ_API_KEY\"\n"
         - lang: "python"
           label: "Python - Test external agent connection"
-          source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\nresult = client.agents.external.test_connection(\n    agent_key=\"support_agent\",\n)\n\nprint(result.reachable)\n"
+          source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\nresult = client.agents.external.test_connection(\n    agent_key=\"support_agent\",\n    test_external_agent_connection_request={},\n)\n\nprint(result.reachable)\n"
         - lang: "typescript"
           label: "Node.js - Test external agent connection"
-          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\nconst result = await client.agents.external.testConnection({\n  agentKey: 'support_agent',\n});\n\nconsole.log(result.reachable);\n"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\nconst result = await client.agents.external.testConnection({\n  agentKey: 'support_agent',\n  testExternalAgentConnectionRequest: {},\n});\n\nconsole.log(result.reachable);\n"
       security:
         - ApiKey: []
   /v2/alerts:
@@ -73272,10 +73272,10 @@ paths:
           source: "curl --get 'https://my.orq.ai/v2/identities' \\\n  --header \"Authorization: Bearer $ORQ_API_KEY\" \\\n  --data-urlencode 'limit=25' \\\n  --data-urlencode 'search=acme' \\\n  --data-urlencode 'filter_by.tags=enterprise' \\\n  --data-urlencode 'include_metrics=true'\n"
         - lang: "python"
           label: "Python - List identities by tag"
-          source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\npage = client.identities.list(\n    limit=25,\n    search=\"acme\",\n    filter_by={\"tags\": [\"enterprise\"]},\n    include_metrics=True,\n)\n\nfor identity in page.data:\n    print(identity.external_id, identity.display_name)\n"
+          source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\npage = client.identities.list(\n    limit=25,\n    search=\"acme\",\n    filter_by_tags=[\"enterprise\"],\n    include_metrics=True,\n)\n\nfor identity in page.data:\n    print(identity.external_id, identity.display_name)\n"
         - lang: "typescript"
           label: "Node.js - List identities by tag"
-          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\nconst page = await client.identities.list({\n  limit: 25,\n  search: 'acme',\n  filterBy: {\n    tags: ['enterprise'],\n  },\n  includeMetrics: true,\n});\n\nfor (const identity of page.data) {\n  console.log(identity.externalId, identity.displayName);\n}\n"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\nconst page = await client.identities.list({\n  limit: 25,\n  search: 'acme',\n  filterByTags: ['enterprise'],\n  includeMetrics: true,\n});\n\nfor (const identity of page.data) {\n  console.log(identity.externalId, identity.displayName);\n}\n"
       security:
         - ApiKey: []
     post:
@@ -75368,10 +75368,10 @@ paths:
           source: "curl --request POST \\\n  --url 'https://my.orq.ai/v2/notifiers' \\\n  --header \"Authorization: Bearer $ORQ_API_KEY\" \\\n  --header 'Content-Type: application/json' \\\n  --data '{\n    \"project_id\": \"proj_01HZXW2K7Y8Q9M0N1P2R3S4T5V\",\n    \"display_name\": \"Production alerts\",\n    \"type\": \"NOTIFIER_TYPE_EMAIL\",\n    \"emails\": [\"ops@example.com\", \"alerts@example.com\"],\n    \"metadata\": {\"environment\": \"production\"}\n  }'\n"
         - lang: "python"
           label: "Python - Create email notifier"
-          source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\nresult = client.notifiers.create(\n    project_id=\"proj_01HZXW2K7Y8Q9M0N1P2R3S4T5V\",\n    display_name=\"Production alerts\",\n    type=\"NOTIFIER_TYPE_EMAIL\",\n    emails=[\"ops@example.com\", \"alerts@example.com\"],\n    metadata={\"environment\": \"production\"},\n)\n\nprint(result.notifier._id)\n"
+          source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\nresult = client.notifiers.create(\n    request={\n        \"project_id\": \"proj_01HZXW2K7Y8Q9M0N1P2R3S4T5V\",\n        \"display_name\": \"Production alerts\",\n        \"type\": \"NOTIFIER_TYPE_EMAIL\",\n        \"emails\": [\"ops@example.com\", \"alerts@example.com\"],\n        \"metadata\": {\"environment\": \"production\"},\n    }\n)\n\nprint(result.notifier._id)\n"
         - lang: "typescript"
           label: "Node.js - Create email notifier"
-          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\nconst result = await client.notifiers.create({\n  projectId: 'proj_01HZXW2K7Y8Q9M0N1P2R3S4T5V',\n  displayName: 'Production alerts',\n  type: 'NOTIFIER_TYPE_EMAIL',\n  emails: ['ops@example.com', 'alerts@example.com'],\n  metadata: { environment: 'production' },\n});\n\nconsole.log(result.notifier._id);\n"
+          source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\nconst result = await client.notifiers.create({\n  projectId: 'proj_01HZXW2K7Y8Q9M0N1P2R3S4T5V',\n  displayName: 'Production alerts',\n  type: 'NOTIFIER_TYPE_EMAIL',\n  emails: ['ops@example.com', 'alerts@example.com'],\n  metadata: { environment: 'production' },\n});\n\nconsole.log(result.notifier.id);\n"
       security:
         - ApiKey: []
   /v2/notifiers/{notifier_id}:
@@ -76452,7 +76452,7 @@ paths:
           source: "curl --request POST \\\n  --url 'https://my.orq.ai/v2/skills' \\\n  --header \"Authorization: Bearer $ORQ_API_KEY\" \\\n  --header 'Content-Type: application/json' \\\n  --data '{\n    \"display_name\": \"summarize_support_ticket\",\n    \"description\": \"Summarize support tickets into concise resolution notes.\",\n    \"project_id\": \"proj_01HZXW2K7Y8Q9M0N1P2R3S4T5V\",\n    \"path\": \"/customer-success/skills/summarize-support-ticket\",\n    \"tags\": [\"support\", \"summarization\"],\n    \"instructions\": \"Read the ticket conversation and return the problem, customer sentiment, and proposed next step.\"\n  }'\n"
         - lang: "python"
           label: "Python - Create project skill"
-          source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\nresult = client.skills.create(\n    display_name=\"summarize_support_ticket\",\n    description=\"Summarize support tickets into concise resolution notes.\",\n    project_id=\"proj_01HZXW2K7Y8Q9M0N1P2R3S4T5V\",\n    path=\"/customer-success/skills/summarize-support-ticket\",\n    tags=[\"support\", \"summarization\"],\n    instructions=(\n        \"Read the ticket conversation and return the problem, \"\n        \"customer sentiment, and proposed next step.\"\n    ),\n)\n\nprint(result.skill.skill_id)\n"
+          source: "import os\nfrom orq_ai_sdk import Orq\n\nclient = Orq(api_key=os.environ[\"ORQ_API_KEY\"])\n\nresult = client.skills.create(\n    request={\n        \"display_name\": \"summarize_support_ticket\",\n        \"description\": \"Summarize support tickets into concise resolution notes.\",\n        \"project_id\": \"proj_01HZXW2K7Y8Q9M0N1P2R3S4T5V\",\n        \"path\": \"/customer-success/skills/summarize-support-ticket\",\n        \"tags\": [\"support\", \"summarization\"],\n        \"instructions\": (\n            \"Read the ticket conversation and return the problem, \"\n            \"customer sentiment, and proposed next step.\"\n        ),\n    }\n)\n\nprint(result.skill.skill_id)\n"
         - lang: "typescript"
           label: "Node.js - Create project skill"
           source: "import { Orq } from '@orq-ai/node';\n\nconst client = new Orq({\n  apiKey: process.env.ORQ_API_KEY,\n});\n\nconst result = await client.skills.create({\n  displayName: 'summarize_support_ticket',\n  description: 'Summarize support tickets into concise resolution notes.',\n  projectId: 'proj_01HZXW2K7Y8Q9M0N1P2R3S4T5V',\n  path: '/customer-success/skills/summarize-support-ticket',\n  tags: ['support', 'summarization'],\n  instructions:\n    'Read the ticket conversation and return the problem, customer sentiment, and proposed next step.',\n});\n\nconsole.log(result.skill.skillId);\n"
