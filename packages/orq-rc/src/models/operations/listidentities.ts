@@ -31,6 +31,7 @@ export type ListIdentitiesRequest = {
    * Return only identities that have all of these tags.
    */
   filterByTags?: Array<string> | undefined;
+  filterBySource?: number | undefined;
   /**
    * Include aggregate usage metrics on each returned identity.
    */
@@ -56,6 +57,7 @@ export type ListIdentitiesRequest$Outbound = {
   ending_before?: string | undefined;
   search?: string | undefined;
   "filter_by.tags"?: Array<string> | undefined;
+  "filter_by.source"?: number | undefined;
   include_metrics?: boolean | undefined;
   sort_by?: string | undefined;
   include_budget?: boolean | undefined;
@@ -73,6 +75,7 @@ export const ListIdentitiesRequest$outboundSchema: z.ZodType<
     endingBefore: z.string().optional(),
     search: z.string().optional(),
     filterByTags: z.array(z.string()).optional(),
+    filterBySource: z.number().int().optional(),
     includeMetrics: z.boolean().optional(),
     sortBy: components.IdentitySortField$outboundSchema.optional(),
     includeBudget: z.boolean().optional(),
@@ -81,6 +84,7 @@ export const ListIdentitiesRequest$outboundSchema: z.ZodType<
       startingAfter: "starting_after",
       endingBefore: "ending_before",
       filterByTags: "filter_by.tags",
+      filterBySource: "filter_by.source",
       includeMetrics: "include_metrics",
       sortBy: "sort_by",
       includeBudget: "include_budget",

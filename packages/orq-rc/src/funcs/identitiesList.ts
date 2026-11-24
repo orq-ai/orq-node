@@ -95,6 +95,7 @@ async function $do(
 
   const query = encodeFormQuery({
     "ending_before": payload?.ending_before,
+    "filter_by.source": payload?.["filter_by.source"],
     "filter_by.tags": payload?.["filter_by.tags"],
     "include_budget": payload?.include_budget,
     "include_metrics": payload?.include_metrics,
