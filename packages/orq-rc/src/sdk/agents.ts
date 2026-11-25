@@ -76,12 +76,12 @@ export class Agents extends ClientSDK {
    * Permanently remove an agent and all associated configuration from the workspace. Terminate active sessions and the key becomes reusable.
    */
   async delete(
-    agentKey: string,
+    request: operations.DeleteAgentRequest,
     options?: RequestOptions,
   ): Promise<void> {
     return unwrapAsync(agentsDelete(
       this,
-      agentKey,
+      request,
       options,
     ));
   }

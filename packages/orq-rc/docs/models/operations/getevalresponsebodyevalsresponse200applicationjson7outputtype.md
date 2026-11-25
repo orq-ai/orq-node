@@ -14,5 +14,5 @@ let value: GetEvalResponseBodyEvalsResponse200ApplicationJson7OutputType =
 ## Values
 
 ```typescript
-"boolean" | "categorical" | "number" | "string"
+"boolean" | "decision" | "number" | "string"
 ```

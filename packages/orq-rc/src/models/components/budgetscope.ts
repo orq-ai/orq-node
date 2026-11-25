@@ -8,6 +8,12 @@ import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
+  AgentDeploymentBudgetScope,
+  AgentDeploymentBudgetScope$inboundSchema,
+  AgentDeploymentBudgetScope$Outbound,
+  AgentDeploymentBudgetScope$outboundSchema,
+} from "./agentdeploymentbudgetscope.js";
+import {
   ApiKeyBudgetScope,
   ApiKeyBudgetScope$inboundSchema,
   ApiKeyBudgetScope$Outbound,
@@ -45,7 +51,7 @@ import {
 } from "./workspacebudgetscope.js";
 
 /**
- * Closed oneof of workspace, project, identity, api_key, provider, or model. Exactly one variant must be set.
+ * Closed oneof of workspace, project, identity, api_key, provider, model, or agent_deployment. Exactly one variant must be set.
  */
 export type BudgetScope = {
   /**
@@ -85,6 +91,7 @@ export type BudgetScope = {
    *  models).
    */
   model?: ModelBudgetScope | undefined;
+  agentDeployment?: AgentDeploymentBudgetScope | undefined;
 };
 
 /** @internal */
@@ -100,9 +107,11 @@ export const BudgetScope$inboundSchema: z.ZodType<
     api_key: ApiKeyBudgetScope$inboundSchema.optional(),
     provider: ProviderBudgetScope$inboundSchema.optional(),
     model: ModelBudgetScope$inboundSchema.optional(),
+    agent_deployment: AgentDeploymentBudgetScope$inboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
       "api_key": "apiKey",
+      "agent_deployment": "agentDeployment",
     });
   })
 );
@@ -114,6 +123,7 @@ export type BudgetScope$Outbound = {
   api_key?: ApiKeyBudgetScope$Outbound | undefined;
   provider?: ProviderBudgetScope$Outbound | undefined;
   model?: ModelBudgetScope$Outbound | undefined;
+  agent_deployment?: AgentDeploymentBudgetScope$Outbound | undefined;
 };
 
 /** @internal */
@@ -129,9 +139,11 @@ export const BudgetScope$outboundSchema: z.ZodType<
     apiKey: ApiKeyBudgetScope$outboundSchema.optional(),
     provider: ProviderBudgetScope$outboundSchema.optional(),
     model: ModelBudgetScope$outboundSchema.optional(),
+    agentDeployment: AgentDeploymentBudgetScope$outboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
       apiKey: "api_key",
+      agentDeployment: "agent_deployment",
     });
   })
 );

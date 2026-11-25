@@ -36,7 +36,7 @@ export type CreateBudgetRequest = {
    * Structured scope. Mutually exclusive with `match`: provide a scope
    *
    * @remarks
-   *  for the six canonical kinds (the server derives the matching CEL),
+   *  for the canonical kinds (the server derives the matching CEL),
    *  or provide `match` for a dynamic budget. Exactly one of the two
    *  must be set.
    */

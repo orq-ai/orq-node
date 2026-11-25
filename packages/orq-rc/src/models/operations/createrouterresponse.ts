@@ -1776,7 +1776,7 @@ export type CreateRouterResponseRequestBody = {
    */
   metadata?: { [k: string]: string } | undefined;
   /**
-   * The model to use in provider/model format (e.g. openai/gpt-4o). Use `agent/<key>` to invoke a pre-configured agent from this platform.
+   * The model to use in provider/model format (e.g. openai/gpt-4o). Use `agent/<key>` to invoke an agent, or `agent/<key>@<deployment_key>` (or `@<deployment_id>`) to invoke a deployment with its pinned version, payload, limits and run history. Legacy version tags remain supported.
    */
   model?: string | undefined;
   /**

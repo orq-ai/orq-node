@@ -5,17 +5,39 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
+
+/**
+ * Delete even when deployments are active or have runs in progress.
+ */
+export const Force = {
+  True: "true",
+  False: "false",
+} as const;
+/**
+ * Delete even when deployments are active or have runs in progress.
+ */
+export type Force = ClosedEnum<typeof Force>;
 
 export type DeleteAgentRequest = {
   /**
    * The unique key of the agent to delete
    */
   agentKey: string;
+  /**
+   * Delete even when deployments are active or have runs in progress.
+   */
+  force?: Force | undefined;
 };
+
+/** @internal */
+export const Force$outboundSchema: z.ZodNativeEnum<typeof Force> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Force));
 
 /** @internal */
 export type DeleteAgentRequest$Outbound = {
   agent_key: string;
+  force?: string | undefined;
 };
 
 /** @internal */
@@ -26,6 +48,7 @@ export const DeleteAgentRequest$outboundSchema: z.ZodType<
 > = /* @__PURE__ */ lazySchema$(() =>
   z.object({
     agentKey: z.string(),
+    force: Force$outboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
       agentKey: "agent_key",

@@ -268,7 +268,9 @@ const orq = new Orq({
 });
 
 async function run() {
-  await orq.agents.delete("<value>");
+  await orq.agents.delete({
+    agentKey: "<value>",
+  });
 
 
 }
@@ -291,7 +293,9 @@ const orq = new OrqCore({
 });
 
 async function run() {
-  const res = await agentsDelete(orq, "<value>");
+  const res = await agentsDelete(orq, {
+    agentKey: "<value>",
+  });
   if (res.ok) {
     const { value: result } = res;
     
@@ -307,7 +311,7 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `agentKey`                                                                                                                                                                     | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | The unique key of the agent to delete                                                                                                                                          |
+| `request`                                                                                                                                                                      | [operations.DeleteAgentRequest](../../models/operations/deleteagentrequest.md)                                                                                                 | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
@@ -318,10 +322,11 @@ run();
 
 ### Errors
 
-| Error Type                     | Status Code                    | Content Type                   |
-| ------------------------------ | ------------------------------ | ------------------------------ |
-| errors.DeleteAgentResponseBody | 404                            | application/json               |
-| errors.APIError                | 4XX, 5XX                       | \*/\*                          |
+| Error Type                           | Status Code                          | Content Type                         |
+| ------------------------------------ | ------------------------------------ | ------------------------------------ |
+| errors.DeleteAgentResponseBody       | 404                                  | application/json                     |
+| errors.DeleteAgentAgentsResponseBody | 409                                  | application/json                     |
+| errors.APIError                      | 4XX, 5XX                             | \*/\*                                |
 
 ## retrieve
 

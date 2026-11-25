@@ -13,5 +13,5 @@ let value: EvaluatorResponseHttpOutputType = "string";
 ## Values
 
 ```typescript
-"boolean" | "categorical" | "number" | "string"
+"boolean" | "decision" | "number" | "string"
 ```

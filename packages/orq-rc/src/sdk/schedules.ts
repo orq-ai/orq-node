@@ -17,7 +17,9 @@ export class Schedules extends ClientSDK {
    * List schedules
    *
    * @remarks
-   * Lists all schedules attached to the specified agent, most recent first.
+   * Deprecated. Use `/v2/agents/{agent_key}/deployments` and the `agentDeployments` API group. This alias preserves the legacy schedule contract. Lists all schedules attached to the specified agent, most recent first.
+   *
+   * @deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   async list(
     request: operations.ListAgentSchedulesRequest,
@@ -34,7 +36,9 @@ export class Schedules extends ClientSDK {
    * Create schedule
    *
    * @remarks
-   * Creates a schedule that runs the agent on a cron cadence. Only `cron` is accepted, as a 6-field expression firing at most once per hour: hourly `0 0 * * * *`, daily `0 0 9 * * *`, or weekly `0 0 9 * * 1`.
+   * Deprecated. Use `/v2/agents/{agent_key}/deployments` and the `agentDeployments` API group. This alias preserves the legacy schedule contract. Creates a schedule that runs the agent on a cron cadence. Only `cron` is accepted, as a 6-field expression firing at most once per hour: hourly `0 0 * * * *`, daily `0 0 9 * * *`, or weekly `0 0 9 * * 1`.
+   *
+   * @deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   async create(
     request: operations.CreateAgentScheduleRequest,
@@ -51,7 +55,9 @@ export class Schedules extends ClientSDK {
    * Delete schedule
    *
    * @remarks
-   * Permanently removes the schedule. It will not run again.
+   * Deprecated. Use `/v2/agents/{agent_key}/deployments` and the `agentDeployments` API group. This alias preserves the legacy schedule contract. Permanently removes the schedule. It will not run again.
+   *
+   * @deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   async delete(
     request: operations.DeleteAgentScheduleRequest,
@@ -68,7 +74,9 @@ export class Schedules extends ClientSDK {
    * Retrieve schedule
    *
    * @remarks
-   * Retrieves a single schedule by ID.
+   * Deprecated. Use `/v2/agents/{agent_key}/deployments` and the `agentDeployments` API group. This alias preserves the legacy schedule contract. Retrieves a single schedule by ID.
+   *
+   * @deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   async retrieve(
     request: operations.RetrieveAgentScheduleRequest,
@@ -85,7 +93,9 @@ export class Schedules extends ClientSDK {
    * Update schedule
    *
    * @remarks
-   * Partially updates a schedule. Any omitted field is left unchanged. Changing `expression` or `type` (or reactivating from inactive) reschedules the next run and bumps `generation`; payload-only and `agent_tag`-only changes leave the firing cadence in place.
+   * Deprecated. Use `/v2/agents/{agent_key}/deployments` and the `agentDeployments` API group. This alias preserves the legacy schedule contract. Partially updates a schedule. Any omitted field is left unchanged. Changing `expression` or `type` (or reactivating from inactive) reschedules the next run and bumps `generation`; payload-only and `agent_tag`-only changes leave the firing cadence in place.
+   *
+   * @deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   async update(
     request: operations.UpdateAgentScheduleRequest,
@@ -102,7 +112,9 @@ export class Schedules extends ClientSDK {
    * Trigger schedule execution
    *
    * @remarks
-   * Runs the schedule's payload immediately (approximately 10 seconds after the request). The schedule's regular cadence is unaffected. Inactive schedules return 400.
+   * Deprecated. Use `/v2/agents/{agent_key}/deployments` and the `agentDeployments` API group. This alias preserves the legacy schedule contract. Queues the deployment's payload for immediate background execution. The schedule's regular cadence is unaffected. Inactive schedules return 400.
+   *
+   * @deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   async trigger(
     request: operations.TriggerAgentScheduleRequest,

@@ -13,5 +13,5 @@ let value: CreateEval1OutputType = "boolean";
 ## Values
 
 ```typescript
-"boolean" | "categorical" | "number" | "string"
+"boolean" | "decision" | "number" | "string"
 ```

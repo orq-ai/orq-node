@@ -29,7 +29,9 @@ import { Result } from "../types/fp.js";
  * Update schedule
  *
  * @remarks
- * Partially updates a schedule. Any omitted field is left unchanged. Changing `expression` or `type` (or reactivating from inactive) reschedules the next run and bumps `generation`; payload-only and `agent_tag`-only changes leave the firing cadence in place.
+ * Deprecated. Use `/v2/agents/{agent_key}/deployments` and the `agentDeployments` API group. This alias preserves the legacy schedule contract. Partially updates a schedule. Any omitted field is left unchanged. Changing `expression` or `type` (or reactivating from inactive) reschedules the next run and bumps `generation`; payload-only and `agent_tag`-only changes leave the firing cadence in place.
+ *
+ * @deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
  */
 export function schedulesUpdate(
   client: OrqCore,

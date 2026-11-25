@@ -3,6 +3,7 @@
  */
 
 import { ClientSDK } from "../lib/sdks.js";
+import { AgentDeployments } from "./agentdeployments.js";
 import { Agents } from "./agents.js";
 import { Alerts } from "./alerts.js";
 import { AnnotationQueues } from "./annotationqueues.js";
@@ -175,6 +176,11 @@ export class Orq extends ClientSDK {
   private _models?: Models;
   get models(): Models {
     return (this._models ??= new Models(this._options));
+  }
+
+  private _agentDeployments?: AgentDeployments;
+  get agentDeployments(): AgentDeployments {
+    return (this._agentDeployments ??= new AgentDeployments(this._options));
   }
 
   private _alerts?: Alerts;

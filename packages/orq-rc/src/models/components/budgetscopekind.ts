@@ -13,6 +13,7 @@ export const BudgetScopeKind = {
   BudgetScopeKindApiKey: "BUDGET_SCOPE_KIND_API_KEY",
   BudgetScopeKindProvider: "BUDGET_SCOPE_KIND_PROVIDER",
   BudgetScopeKindModel: "BUDGET_SCOPE_KIND_MODEL",
+  BudgetScopeKindAgentDeployment: "BUDGET_SCOPE_KIND_AGENT_DEPLOYMENT",
 } as const;
 export type BudgetScopeKind = ClosedEnum<typeof BudgetScopeKind>;
 

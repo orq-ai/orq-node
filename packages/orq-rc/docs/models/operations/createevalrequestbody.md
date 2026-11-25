@@ -8,7 +8,6 @@
 ```typescript
 const value: operations.RequestBody1 = {
   type: "llm_eval",
-  prompt: "<value>",
   description: "",
   key: "<key>",
   mode: "jury",

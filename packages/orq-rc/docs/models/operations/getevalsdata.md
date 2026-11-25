@@ -11,7 +11,6 @@ const value: components.EvaluatorResponseLlm = {
   description: "wetly whereas failing",
   type: "llm_eval",
   outputType: "string",
-  prompt: "<value>",
   key: "<key>",
   mode: "jury",
 };
@@ -58,7 +57,7 @@ const value: components.EvaluatorResponsePython = {
   description: "glaring which athwart deficient woot alongside",
   code: "<value>",
   type: "python_eval",
-  outputType: "categorical",
+  outputType: "decision",
   key: "<key>",
 };
 ```

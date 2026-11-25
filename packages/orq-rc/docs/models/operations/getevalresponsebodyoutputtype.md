@@ -11,5 +11,5 @@ let value: GetEvalResponseBodyOutputType = "number";
 ## Values
 
 ```typescript
-"boolean" | "categorical" | "number" | "string"
+"boolean" | "decision" | "number" | "string"
 ```

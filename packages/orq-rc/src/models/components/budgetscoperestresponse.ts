@@ -7,6 +7,10 @@ import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
+  AgentDeploymentBudgetScopeRestResponse,
+  AgentDeploymentBudgetScopeRestResponse$inboundSchema,
+} from "./agentdeploymentbudgetscoperestresponse.js";
+import {
   ApiKeyBudgetScopeRestResponse,
   ApiKeyBudgetScopeRestResponse$inboundSchema,
 } from "./apikeybudgetscoperestresponse.js";
@@ -32,7 +36,7 @@ import {
 } from "./workspacebudgetscope.js";
 
 /**
- * Closed oneof of workspace, project, identity, api_key, provider, or model. Exactly one variant must be set.
+ * Closed oneof of workspace, project, identity, api_key, provider, model, or agent_deployment. Exactly one variant must be set.
  */
 export type BudgetScopeRestResponse = {
   /**
@@ -72,6 +76,7 @@ export type BudgetScopeRestResponse = {
    *  models).
    */
   model?: ModelBudgetScopeRestResponse | undefined;
+  agentDeployment?: AgentDeploymentBudgetScopeRestResponse | undefined;
 };
 
 /** @internal */
@@ -87,6 +92,8 @@ export const BudgetScopeRestResponse$inboundSchema: z.ZodType<
     apiKey: ApiKeyBudgetScopeRestResponse$inboundSchema.optional(),
     provider: ProviderBudgetScope$inboundSchema.optional(),
     model: ModelBudgetScopeRestResponse$inboundSchema.optional(),
+    agentDeployment: AgentDeploymentBudgetScopeRestResponse$inboundSchema
+      .optional(),
   })
 );
 

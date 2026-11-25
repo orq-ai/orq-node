@@ -29,7 +29,9 @@ import { Result } from "../types/fp.js";
  * Create schedule
  *
  * @remarks
- * Creates a schedule that runs the agent on a cron cadence. Only `cron` is accepted, as a 6-field expression firing at most once per hour: hourly `0 0 * * * *`, daily `0 0 9 * * *`, or weekly `0 0 9 * * 1`.
+ * Deprecated. Use `/v2/agents/{agent_key}/deployments` and the `agentDeployments` API group. This alias preserves the legacy schedule contract. Creates a schedule that runs the agent on a cron cadence. Only `cron` is accepted, as a 6-field expression firing at most once per hour: hourly `0 0 * * * *`, daily `0 0 9 * * *`, or weekly `0 0 9 * * 1`.
+ *
+ * @deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
  */
 export function schedulesCreate(
   client: OrqCore,

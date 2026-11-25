@@ -7,6 +7,7 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetEvalRequest = {
@@ -75,7 +76,7 @@ export type GetEvalResponseBodyEvalsResponse200ApplicationJson7Metadata = {
  */
 export const GetEvalResponseBodyEvalsResponse200ApplicationJson7OutputType = {
   Boolean: "boolean",
-  Categorical: "categorical",
+  Decision: "decision",
   Number: "number",
   String: "string",
 } as const;
@@ -178,7 +179,7 @@ export type GetEvalResponseBodyEvalsResponse200Metadata = {
  */
 export const GetEvalResponseBodyEvalsResponse200OutputType = {
   Boolean: "boolean",
-  Categorical: "categorical",
+  Decision: "decision",
   Number: "number",
   String: "string",
 } as const;
@@ -344,7 +345,7 @@ export type GetEvalResponseBodyMetadata = {
 
 export const GetEvalResponseBodyOutputType = {
   Boolean: "boolean",
-  Categorical: "categorical",
+  Decision: "decision",
   Number: "number",
   String: "string",
 } as const;
@@ -598,7 +599,7 @@ export type ResponseBodyMetadata = {
  */
 export const ResponseBodyOutputType = {
   Boolean: "boolean",
-  Categorical: "categorical",
+  Decision: "decision",
   Number: "number",
   String: "string",
 } as const;
@@ -742,9 +743,18 @@ export type ResponseBodyJury = {
   tieValue: ResponseBodyTieValue;
 };
 
-export type ResponseBodyCategoricalLabels = {
-  value: string;
-  description?: string | undefined;
+/**
+ * Questions a decision LLM evaluator asks in place of a prompt. Required when `output_type` is `decision`.
+ */
+export type ResponseBodyDecisionQuestions = {
+  /**
+   * Questions keyed by name, in the same shape as `questions` in a Decisions request.
+   */
+  questions: { [k: string]: components.EvaluatorDecisionQuestion };
+  /**
+   * Question names in the order the user arranged them, since `questions` is a map and keeps no order. Lists every question exactly once.
+   */
+  order: Array<string>;
 };
 
 export type ResponseBodyLLM = {
@@ -777,9 +787,14 @@ export type ResponseBodyLLM = {
   repetitions?: number | null | undefined;
   model?: ResponseBodyModel | undefined;
   jury?: ResponseBodyJury | null | undefined;
-  prompt: string;
-  categories?: Array<string> | null | undefined;
-  categoricalLabels?: Array<ResponseBodyCategoricalLabels> | null | undefined;
+  /**
+   * The judge prompt. Required unless `output_type` is `decision`, where each decision question carries its own instructions.
+   */
+  prompt?: string | undefined;
+  /**
+   * Questions a decision LLM evaluator asks in place of a prompt. Required when `output_type` is `decision`.
+   */
+  decisionQuestions?: ResponseBodyDecisionQuestions | null | undefined;
   datasetId?: string | null | undefined;
 };
 
@@ -2879,24 +2894,24 @@ export function responseBodyJuryFromJSON(
 }
 
 /** @internal */
-export const ResponseBodyCategoricalLabels$inboundSchema: z.ZodType<
-  ResponseBodyCategoricalLabels,
+export const ResponseBodyDecisionQuestions$inboundSchema: z.ZodType<
+  ResponseBodyDecisionQuestions,
   z.ZodTypeDef,
   unknown
 > = /* @__PURE__ */ lazySchema$(() =>
   z.object({
-    value: z.string(),
-    description: z.string().optional(),
+    questions: z.record(components.EvaluatorDecisionQuestion$inboundSchema),
+    order: z.array(z.string()),
   })
 );
 
-export function responseBodyCategoricalLabelsFromJSON(
+export function responseBodyDecisionQuestionsFromJSON(
   jsonString: string,
-): SafeParseResult<ResponseBodyCategoricalLabels, SDKValidationError> {
+): SafeParseResult<ResponseBodyDecisionQuestions, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => ResponseBodyCategoricalLabels$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'ResponseBodyCategoricalLabels' from JSON`,
+    (x) => ResponseBodyDecisionQuestions$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ResponseBodyDecisionQuestions' from JSON`,
   );
 }
 
@@ -2927,10 +2942,9 @@ export const ResponseBodyLLM$inboundSchema: z.ZodType<
     repetitions: z.nullable(z.number().int()).optional(),
     model: z.lazy(() => ResponseBodyModel$inboundSchema).optional(),
     jury: z.nullable(z.lazy(() => ResponseBodyJury$inboundSchema)).optional(),
-    prompt: z.string(),
-    categories: z.nullable(z.array(z.string())).optional(),
-    categorical_labels: z.nullable(
-      z.array(z.lazy(() => ResponseBodyCategoricalLabels$inboundSchema)),
+    prompt: z.string().optional(),
+    decision_questions: z.nullable(
+      z.lazy(() => ResponseBodyDecisionQuestions$inboundSchema),
     ).optional(),
     dataset_id: z.nullable(z.string()).optional(),
   }).transform((v) => {
@@ -2943,7 +2957,7 @@ export const ResponseBodyLLM$inboundSchema: z.ZodType<
       "project_id": "projectId",
       "guardrail_config": "guardrailConfig",
       "output_type": "outputType",
-      "categorical_labels": "categoricalLabels",
+      "decision_questions": "decisionQuestions",
       "dataset_id": "datasetId",
     });
   })

@@ -1,0 +1,18 @@
+# AgentDeploymentPayload
+
+## Example Usage
+
+```typescript
+import { AgentDeploymentPayload } from "@orq-ai/node/models/components";
+
+let value: AgentDeploymentPayload = {};
+```
+
+## Fields
+
+| Field                                                                                                                                        | Type                                                                                                                                         | Required                                                                                                                                     | Description                                                                                                                                  |
+| -------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| `input`                                                                                                                                      | *any*                                                                                                                                        | :heavy_minus_sign:                                                                                                                           | Represents a dynamically typed value which can be either null, a number, a string, a boolean, a recursive struct value, or a list of values. |
+| `variables`                                                                                                                                  | [components.Variables](../../models/components/variables.md)                                                                                 | :heavy_minus_sign:                                                                                                                           | N/A                                                                                                                                          |
+| `memoryEntityId`                                                                                                                             | *string*                                                                                                                                     | :heavy_minus_sign:                                                                                                                           | N/A                                                                                                                                          |
+| `metadata`                                                                                                                                   | [components.AgentDeploymentPayloadMetadata](../../models/components/agentdeploymentpayloadmetadata.md)                                       | :heavy_minus_sign:                                                                                                                           | N/A                                                                                                                                          |

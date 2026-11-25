@@ -10,9 +10,18 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type CategoricalLabels = {
-  value: string;
-  description?: string | undefined;
+/**
+ * Questions a decision LLM evaluator asks in place of a prompt. Required when `output_type` is `decision`.
+ */
+export type DecisionQuestions = {
+  /**
+   * Questions keyed by name, in the same shape as `questions` in a Decisions request.
+   */
+  questions: { [k: string]: components.EvaluatorDecisionQuestion };
+  /**
+   * Question names in the order the user arranged them, since `questions` is a map and keeps no order. Lists every question exactly once.
+   */
+  order: Array<string>;
 };
 
 export const UpdateEvalMode = {
@@ -87,10 +96,15 @@ export type UpdateEvalRequestBody = {
   projectId?: string | undefined;
   key?: string | undefined;
   description?: string | undefined;
+  /**
+   * The judge prompt. Required unless `output_type` is `decision`, where each decision question carries its own instructions.
+   */
   prompt?: string | undefined;
   outputType?: string | undefined;
-  categories?: Array<string> | null | undefined;
-  categoricalLabels?: Array<CategoricalLabels> | null | undefined;
+  /**
+   * Questions a decision LLM evaluator asks in place of a prompt. Required when `output_type` is `decision`.
+   */
+  decisionQuestions?: DecisionQuestions | null | undefined;
   datasetId?: string | null | undefined;
   repetitions?: number | undefined;
   mode?: UpdateEvalMode | undefined;
@@ -129,28 +143,28 @@ export type UpdateEvalResponseBody =
   | components.EvaluatorResponseTypescript;
 
 /** @internal */
-export type CategoricalLabels$Outbound = {
-  value: string;
-  description?: string | undefined;
+export type DecisionQuestions$Outbound = {
+  questions: { [k: string]: components.EvaluatorDecisionQuestion$Outbound };
+  order: Array<string>;
 };
 
 /** @internal */
-export const CategoricalLabels$outboundSchema: z.ZodType<
-  CategoricalLabels$Outbound,
+export const DecisionQuestions$outboundSchema: z.ZodType<
+  DecisionQuestions$Outbound,
   z.ZodTypeDef,
-  CategoricalLabels
+  DecisionQuestions
 > = /* @__PURE__ */ lazySchema$(() =>
   z.object({
-    value: z.string(),
-    description: z.string().optional(),
+    questions: z.record(components.EvaluatorDecisionQuestion$outboundSchema),
+    order: z.array(z.string()),
   })
 );
 
-export function categoricalLabelsToJSON(
-  categoricalLabels: CategoricalLabels,
+export function decisionQuestionsToJSON(
+  decisionQuestions: DecisionQuestions,
 ): string {
   return JSON.stringify(
-    CategoricalLabels$outboundSchema.parse(categoricalLabels),
+    DecisionQuestions$outboundSchema.parse(decisionQuestions),
   );
 }
 
@@ -367,8 +381,7 @@ export type UpdateEvalRequestBody$Outbound = {
   description?: string | undefined;
   prompt?: string | undefined;
   output_type?: string | undefined;
-  categories?: Array<string> | null | undefined;
-  categorical_labels?: Array<CategoricalLabels$Outbound> | null | undefined;
+  decision_questions?: DecisionQuestions$Outbound | null | undefined;
   dataset_id?: string | null | undefined;
   repetitions?: number | undefined;
   mode?: string | undefined;
@@ -400,9 +413,8 @@ export const UpdateEvalRequestBody$outboundSchema: z.ZodType<
     description: z.string().optional(),
     prompt: z.string().optional(),
     outputType: z.string().optional(),
-    categories: z.nullable(z.array(z.string())).optional(),
-    categoricalLabels: z.nullable(
-      z.array(z.lazy(() => CategoricalLabels$outboundSchema)),
+    decisionQuestions: z.nullable(
+      z.lazy(() => DecisionQuestions$outboundSchema),
     ).optional(),
     datasetId: z.nullable(z.string()).optional(),
     repetitions: z.number().optional(),
@@ -423,7 +435,7 @@ export const UpdateEvalRequestBody$outboundSchema: z.ZodType<
     return remap$(v, {
       projectId: "project_id",
       outputType: "output_type",
-      categoricalLabels: "categorical_labels",
+      decisionQuestions: "decision_questions",
       datasetId: "dataset_id",
       guardrailConfig: "guardrail_config",
     });

@@ -49,7 +49,7 @@ export type Python = {
  */
 export const OneOutputType = {
   Boolean: "boolean",
-  Categorical: "categorical",
+  Decision: "decision",
   Number: "number",
   String: "string",
 } as const;
@@ -63,9 +63,18 @@ export const CreateEval1Type = {
 } as const;
 export type CreateEval1Type = ClosedEnum<typeof CreateEval1Type>;
 
-export type OneCategoricalLabels = {
-  value: string;
-  description?: string | undefined;
+/**
+ * Questions a decision LLM evaluator asks in place of a prompt. Required when `output_type` is `decision`.
+ */
+export type OneDecisionQuestions = {
+  /**
+   * Questions keyed by name, in the same shape as `questions` in a Decisions request.
+   */
+  questions: { [k: string]: components.EvaluatorDecisionQuestion };
+  /**
+   * Question names in the order the user arranged them, since `questions` is a map and keeps no order. Lists every question exactly once.
+   */
+  order: Array<string>;
 };
 
 export type OneRetry = {
@@ -122,9 +131,14 @@ export type LLMJury = {
   outputType?: OneOutputType | undefined;
   type: CreateEval1Type;
   repetitions?: number | null | undefined;
-  prompt: string;
-  categories?: Array<string> | null | undefined;
-  categoricalLabels?: Array<OneCategoricalLabels> | null | undefined;
+  /**
+   * The judge prompt. Required unless `output_type` is `decision`, where each decision question carries its own instructions.
+   */
+  prompt?: string | undefined;
+  /**
+   * Questions a decision LLM evaluator asks in place of a prompt. Required when `output_type` is `decision`.
+   */
+  decisionQuestions?: OneDecisionQuestions | null | undefined;
   datasetId?: string | null | undefined;
   /**
    * Legacy alternative to `project_id`. Storage path whose first segment names the project that owns the evaluator. Mutually exclusive with `project_id`.
@@ -145,7 +159,7 @@ export type LLMJury = {
  */
 export const CreateEval1OutputType = {
   Boolean: "boolean",
-  Categorical: "categorical",
+  Decision: "decision",
   Number: "number",
   String: "string",
 } as const;
@@ -159,9 +173,18 @@ export const OneType = {
 } as const;
 export type OneType = ClosedEnum<typeof OneType>;
 
-export type CreateEval1CategoricalLabels = {
-  value: string;
-  description?: string | undefined;
+/**
+ * Questions a decision LLM evaluator asks in place of a prompt. Required when `output_type` is `decision`.
+ */
+export type CreateEval1DecisionQuestions = {
+  /**
+   * Questions keyed by name, in the same shape as `questions` in a Decisions request.
+   */
+  questions: { [k: string]: components.EvaluatorDecisionQuestion };
+  /**
+   * Question names in the order the user arranged them, since `questions` is a map and keeps no order. Lists every question exactly once.
+   */
+  order: Array<string>;
 };
 
 export type Llm = {
@@ -176,9 +199,14 @@ export type Llm = {
   outputType?: CreateEval1OutputType | undefined;
   type: OneType;
   repetitions?: number | null | undefined;
-  prompt: string;
-  categories?: Array<string> | null | undefined;
-  categoricalLabels?: Array<CreateEval1CategoricalLabels> | null | undefined;
+  /**
+   * The judge prompt. Required unless `output_type` is `decision`, where each decision question carries its own instructions.
+   */
+  prompt?: string | undefined;
+  /**
+   * Questions a decision LLM evaluator asks in place of a prompt. Required when `output_type` is `decision`.
+   */
+  decisionQuestions?: CreateEval1DecisionQuestions | null | undefined;
   datasetId?: string | null | undefined;
   /**
    * Legacy alternative to `project_id`. Storage path whose first segment names the project that owns the evaluator. Mutually exclusive with `project_id`.
@@ -272,28 +300,28 @@ export const CreateEval1Type$outboundSchema: z.ZodNativeEnum<
 > = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(CreateEval1Type));
 
 /** @internal */
-export type OneCategoricalLabels$Outbound = {
-  value: string;
-  description?: string | undefined;
+export type OneDecisionQuestions$Outbound = {
+  questions: { [k: string]: components.EvaluatorDecisionQuestion$Outbound };
+  order: Array<string>;
 };
 
 /** @internal */
-export const OneCategoricalLabels$outboundSchema: z.ZodType<
-  OneCategoricalLabels$Outbound,
+export const OneDecisionQuestions$outboundSchema: z.ZodType<
+  OneDecisionQuestions$Outbound,
   z.ZodTypeDef,
-  OneCategoricalLabels
+  OneDecisionQuestions
 > = /* @__PURE__ */ lazySchema$(() =>
   z.object({
-    value: z.string(),
-    description: z.string().optional(),
+    questions: z.record(components.EvaluatorDecisionQuestion$outboundSchema),
+    order: z.array(z.string()),
   })
 );
 
-export function oneCategoricalLabelsToJSON(
-  oneCategoricalLabels: OneCategoricalLabels,
+export function oneDecisionQuestionsToJSON(
+  oneDecisionQuestions: OneDecisionQuestions,
 ): string {
   return JSON.stringify(
-    OneCategoricalLabels$outboundSchema.parse(oneCategoricalLabels),
+    OneDecisionQuestions$outboundSchema.parse(oneDecisionQuestions),
   );
 }
 
@@ -495,9 +523,8 @@ export type LLMJury$Outbound = {
   output_type?: string | undefined;
   type: string;
   repetitions?: number | null | undefined;
-  prompt: string;
-  categories?: Array<string> | null | undefined;
-  categorical_labels?: Array<OneCategoricalLabels$Outbound> | null | undefined;
+  prompt?: string | undefined;
+  decision_questions?: OneDecisionQuestions$Outbound | null | undefined;
   dataset_id?: string | null | undefined;
   path?: string | undefined;
   project_id?: string | undefined;
@@ -519,10 +546,9 @@ export const LLMJury$outboundSchema: z.ZodType<
     outputType: OneOutputType$outboundSchema.optional(),
     type: CreateEval1Type$outboundSchema,
     repetitions: z.nullable(z.number().int()).optional(),
-    prompt: z.string(),
-    categories: z.nullable(z.array(z.string())).optional(),
-    categoricalLabels: z.nullable(
-      z.array(z.lazy(() => OneCategoricalLabels$outboundSchema)),
+    prompt: z.string().optional(),
+    decisionQuestions: z.nullable(
+      z.lazy(() => OneDecisionQuestions$outboundSchema),
     ).optional(),
     datasetId: z.nullable(z.string()).optional(),
     path: z.string().optional(),
@@ -535,7 +561,7 @@ export const LLMJury$outboundSchema: z.ZodType<
     return remap$(v, {
       guardrailConfig: "guardrail_config",
       outputType: "output_type",
-      categoricalLabels: "categorical_labels",
+      decisionQuestions: "decision_questions",
       datasetId: "dataset_id",
       projectId: "project_id",
     });
@@ -556,29 +582,29 @@ export const OneType$outboundSchema: z.ZodNativeEnum<typeof OneType> =
   /* @__PURE__ */ lazySchema$(() => z.nativeEnum(OneType));
 
 /** @internal */
-export type CreateEval1CategoricalLabels$Outbound = {
-  value: string;
-  description?: string | undefined;
+export type CreateEval1DecisionQuestions$Outbound = {
+  questions: { [k: string]: components.EvaluatorDecisionQuestion$Outbound };
+  order: Array<string>;
 };
 
 /** @internal */
-export const CreateEval1CategoricalLabels$outboundSchema: z.ZodType<
-  CreateEval1CategoricalLabels$Outbound,
+export const CreateEval1DecisionQuestions$outboundSchema: z.ZodType<
+  CreateEval1DecisionQuestions$Outbound,
   z.ZodTypeDef,
-  CreateEval1CategoricalLabels
+  CreateEval1DecisionQuestions
 > = /* @__PURE__ */ lazySchema$(() =>
   z.object({
-    value: z.string(),
-    description: z.string().optional(),
+    questions: z.record(components.EvaluatorDecisionQuestion$outboundSchema),
+    order: z.array(z.string()),
   })
 );
 
-export function createEval1CategoricalLabelsToJSON(
-  createEval1CategoricalLabels: CreateEval1CategoricalLabels,
+export function createEval1DecisionQuestionsToJSON(
+  createEval1DecisionQuestions: CreateEval1DecisionQuestions,
 ): string {
   return JSON.stringify(
-    CreateEval1CategoricalLabels$outboundSchema.parse(
-      createEval1CategoricalLabels,
+    CreateEval1DecisionQuestions$outboundSchema.parse(
+      createEval1DecisionQuestions,
     ),
   );
 }
@@ -590,12 +616,8 @@ export type Llm$Outbound = {
   output_type?: string | undefined;
   type: string;
   repetitions?: number | null | undefined;
-  prompt: string;
-  categories?: Array<string> | null | undefined;
-  categorical_labels?:
-    | Array<CreateEval1CategoricalLabels$Outbound>
-    | null
-    | undefined;
+  prompt?: string | undefined;
+  decision_questions?: CreateEval1DecisionQuestions$Outbound | null | undefined;
   dataset_id?: string | null | undefined;
   path?: string | undefined;
   project_id?: string | undefined;
@@ -614,10 +636,9 @@ export const Llm$outboundSchema: z.ZodType<Llm$Outbound, z.ZodTypeDef, Llm> =
       outputType: CreateEval1OutputType$outboundSchema.optional(),
       type: OneType$outboundSchema,
       repetitions: z.nullable(z.number().int()).optional(),
-      prompt: z.string(),
-      categories: z.nullable(z.array(z.string())).optional(),
-      categoricalLabels: z.nullable(
-        z.array(z.lazy(() => CreateEval1CategoricalLabels$outboundSchema)),
+      prompt: z.string().optional(),
+      decisionQuestions: z.nullable(
+        z.lazy(() => CreateEval1DecisionQuestions$outboundSchema),
       ).optional(),
       datasetId: z.nullable(z.string()).optional(),
       path: z.string().optional(),
@@ -630,7 +651,7 @@ export const Llm$outboundSchema: z.ZodType<Llm$Outbound, z.ZodTypeDef, Llm> =
       return remap$(v, {
         guardrailConfig: "guardrail_config",
         outputType: "output_type",
-        categoricalLabels: "categorical_labels",
+        decisionQuestions: "decision_questions",
         datasetId: "dataset_id",
         projectId: "project_id",
       });

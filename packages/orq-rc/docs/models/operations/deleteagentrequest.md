@@ -12,6 +12,7 @@ let value: DeleteAgentRequest = {
 
 ## Fields
 
-| Field                                 | Type                                  | Required                              | Description                           |
-| ------------------------------------- | ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| `agentKey`                            | *string*                              | :heavy_check_mark:                    | The unique key of the agent to delete |
+| Field                                                             | Type                                                              | Required                                                          | Description                                                       |
+| ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- |
+| `agentKey`                                                        | *string*                                                          | :heavy_check_mark:                                                | The unique key of the agent to delete                             |
+| `force`                                                           | [operations.Force](../../models/operations/force.md)              | :heavy_minus_sign:                                                | Delete even when deployments are active or have runs in progress. |

@@ -3,8 +3,47 @@
  */
 
 import * as z from "zod/v3";
-import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
+import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
 import { OrqError } from "./orqerror.js";
+import { SDKValidationError } from "./sdkvalidationerror.js";
+
+export type Deployments = {
+  id: string;
+  displayName: string;
+  status: string;
+};
+
+/**
+ * Agent has active deployments or runs in progress.
+ */
+export type DeleteAgentAgentsResponseBodyData = {
+  message: string;
+  deployments: Array<Deployments>;
+};
+
+/**
+ * Agent has active deployments or runs in progress.
+ */
+export class DeleteAgentAgentsResponseBody extends OrqError {
+  deployments: Array<Deployments>;
+
+  /** The original data that was passed to this error instance. */
+  data$: DeleteAgentAgentsResponseBodyData;
+
+  constructor(
+    err: DeleteAgentAgentsResponseBodyData,
+    httpMeta: { response: Response; request: Request; body: string },
+  ) {
+    const message = err.message || `API error occurred: ${JSON.stringify(err)}`;
+    super(message, httpMeta);
+    this.data$ = err;
+    this.deployments = err.deployments;
+
+    this.name = "DeleteAgentAgentsResponseBody";
+  }
+}
 
 /**
  * Agent not found. The specified agent key does not exist in the workspace or has already been deleted.
@@ -31,6 +70,55 @@ export class DeleteAgentResponseBody extends OrqError {
     this.name = "DeleteAgentResponseBody";
   }
 }
+
+/** @internal */
+export const Deployments$inboundSchema: z.ZodType<
+  Deployments,
+  z.ZodTypeDef,
+  unknown
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    display_name: z.string(),
+    status: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "display_name": "displayName",
+    });
+  })
+);
+
+export function deploymentsFromJSON(
+  jsonString: string,
+): SafeParseResult<Deployments, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Deployments$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Deployments' from JSON`,
+  );
+}
+
+/** @internal */
+export const DeleteAgentAgentsResponseBody$inboundSchema: z.ZodType<
+  DeleteAgentAgentsResponseBody,
+  z.ZodTypeDef,
+  unknown
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    message: z.string(),
+    deployments: z.array(z.lazy(() => Deployments$inboundSchema)),
+    request$: z.instanceof(Request),
+    response$: z.instanceof(Response),
+    body$: z.string(),
+  })
+    .transform((v) => {
+      return new DeleteAgentAgentsResponseBody(v, {
+        request: v.request$,
+        response: v.response$,
+        body: v.body$,
+      });
+    })
+);
 
 /** @internal */
 export const DeleteAgentResponseBody$inboundSchema: z.ZodType<

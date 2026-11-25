@@ -29,7 +29,9 @@ import { Result } from "../types/fp.js";
  * List schedules
  *
  * @remarks
- * Lists all schedules attached to the specified agent, most recent first.
+ * Deprecated. Use `/v2/agents/{agent_key}/deployments` and the `agentDeployments` API group. This alias preserves the legacy schedule contract. Lists all schedules attached to the specified agent, most recent first.
+ *
+ * @deprecated method: This will be removed in a future release, please migrate away from it as soon as possible.
  */
 export function schedulesList(
   client: OrqCore,

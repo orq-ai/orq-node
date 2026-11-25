@@ -7,11 +7,11 @@ The type of output expected from the evaluator
 ```typescript
 import { EvaluatorResponseRagasOutputType } from "@orq-ai/node/models/components";
 
-let value: EvaluatorResponseRagasOutputType = "categorical";
+let value: EvaluatorResponseRagasOutputType = "decision";
 ```
 
 ## Values
 
 ```typescript
-"boolean" | "categorical" | "number" | "string"
+"boolean" | "decision" | "number" | "string"
 ```

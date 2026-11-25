@@ -1,19 +1,24 @@
-# Schedules
+# ~~Schedules~~
+
+> [!WARNING]
+> This SDK is **DEPRECATED**
 
 ## Overview
 
 ### Available Operations
 
-* [list](#list) - List schedules
-* [create](#create) - Create schedule
-* [delete](#delete) - Delete schedule
-* [retrieve](#retrieve) - Retrieve schedule
-* [update](#update) - Update schedule
-* [trigger](#trigger) - Trigger schedule execution
+* [~~list~~](#list) - List schedules :warning: **Deprecated**
+* [~~create~~](#create) - Create schedule :warning: **Deprecated**
+* [~~delete~~](#delete) - Delete schedule :warning: **Deprecated**
+* [~~retrieve~~](#retrieve) - Retrieve schedule :warning: **Deprecated**
+* [~~update~~](#update) - Update schedule :warning: **Deprecated**
+* [~~trigger~~](#trigger) - Trigger schedule execution :warning: **Deprecated**
 
-## list
+## ~~list~~
 
-Lists all schedules attached to the specified agent, most recent first.
+Deprecated. Use `/v2/agents/{agent_key}/deployments` and the `agentDeployments` API group. This alias preserves the legacy schedule contract. Lists all schedules attached to the specified agent, most recent first.
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 
@@ -86,9 +91,11 @@ run();
 | errors.APIErrorResponse | 404                     | application/json        |
 | errors.APIError         | 4XX, 5XX                | \*/\*                   |
 
-## create
+## ~~create~~
 
-Creates a schedule that runs the agent on a cron cadence. Only `cron` is accepted, as a 6-field expression firing at most once per hour: hourly `0 0 * * * *`, daily `0 0 9 * * *`, or weekly `0 0 9 * * 1`.
+Deprecated. Use `/v2/agents/{agent_key}/deployments` and the `agentDeployments` API group. This alias preserves the legacy schedule contract. Creates a schedule that runs the agent on a cron cadence. Only `cron` is accepted, as a 6-field expression firing at most once per hour: hourly `0 0 * * * *`, daily `0 0 9 * * *`, or weekly `0 0 9 * * 1`.
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage: daily_cron
 
@@ -449,9 +456,11 @@ run();
 | errors.CreateAgentScheduleSchedulesResponseBody | 404                                             | application/json                                |
 | errors.APIError                                 | 4XX, 5XX                                        | \*/\*                                           |
 
-## delete
+## ~~delete~~
 
-Permanently removes the schedule. It will not run again.
+Deprecated. Use `/v2/agents/{agent_key}/deployments` and the `agentDeployments` API group. This alias preserves the legacy schedule contract. Permanently removes the schedule. It will not run again.
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 
@@ -525,9 +534,11 @@ run();
 | errors.DeleteAgentScheduleResponseBody | 404                                    | application/json                       |
 | errors.APIError                        | 4XX, 5XX                               | \*/\*                                  |
 
-## retrieve
+## ~~retrieve~~
 
-Retrieves a single schedule by ID.
+Deprecated. Use `/v2/agents/{agent_key}/deployments` and the `agentDeployments` API group. This alias preserves the legacy schedule contract. Retrieves a single schedule by ID.
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 
@@ -601,9 +612,11 @@ run();
 | errors.RetrieveAgentScheduleResponseBody | 404                                      | application/json                         |
 | errors.APIError                          | 4XX, 5XX                                 | \*/\*                                    |
 
-## update
+## ~~update~~
 
-Partially updates a schedule. Any omitted field is left unchanged. Changing `expression` or `type` (or reactivating from inactive) reschedules the next run and bumps `generation`; payload-only and `agent_tag`-only changes leave the firing cadence in place.
+Deprecated. Use `/v2/agents/{agent_key}/deployments` and the `agentDeployments` API group. This alias preserves the legacy schedule contract. Partially updates a schedule. Any omitted field is left unchanged. Changing `expression` or `type` (or reactivating from inactive) reschedules the next run and bumps `generation`; payload-only and `agent_tag`-only changes leave the firing cadence in place.
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage: change_cadence
 
@@ -865,9 +878,11 @@ run();
 | errors.UpdateAgentScheduleSchedulesResponseBody | 404                                             | application/json                                |
 | errors.APIError                                 | 4XX, 5XX                                        | \*/\*                                           |
 
-## trigger
+## ~~trigger~~
 
-Runs the schedule's payload immediately (approximately 10 seconds after the request). The schedule's regular cadence is unaffected. Inactive schedules return 400.
+Deprecated. Use `/v2/agents/{agent_key}/deployments` and the `agentDeployments` API group. This alias preserves the legacy schedule contract. Queues the deployment's payload for immediate background execution. The schedule's regular cadence is unaffected. Inactive schedules return 400.
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 

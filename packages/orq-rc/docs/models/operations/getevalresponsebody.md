@@ -17,7 +17,6 @@ const value: operations.ResponseBodyLLM = {
   owner: "<value>",
   domainId: "<id>",
   type: "llm_eval",
-  prompt: "<value>",
 };
 ```
 

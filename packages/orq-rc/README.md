@@ -227,6 +227,17 @@ run();
 <details open>
 <summary>Available methods</summary>
 
+### [AgentDeployments](docs/sdks/agentdeployments/README.md)
+
+* [list](docs/sdks/agentdeployments/README.md#list) - ListAgentDeployments
+* [create](docs/sdks/agentdeployments/README.md#create) - CreateAgentDeployment
+* [retrieve](docs/sdks/agentdeployments/README.md#retrieve) - GetAgentDeployment
+* [delete](docs/sdks/agentdeployments/README.md#delete) - DeleteAgentDeployment
+* [update](docs/sdks/agentdeployments/README.md#update) - UpdateAgentDeployment
+* [listRuns](docs/sdks/agentdeployments/README.md#listruns) - ListAgentDeploymentRuns
+* [retrieveRun](docs/sdks/agentdeployments/README.md#retrieverun) - GetAgentDeploymentRun
+* [run](docs/sdks/agentdeployments/README.md#run) - RunAgentDeployment
+
 ### [Agents](docs/sdks/agents/README.md)
 
 * [create](docs/sdks/agents/README.md#create) - Create agent
@@ -690,14 +701,14 @@ run();
 * [delete](docs/sdks/routingrules/README.md#delete) - Delete a routing rule
 * [update](docs/sdks/routingrules/README.md#update) - Update a routing rule
 
-### [Schedules](docs/sdks/schedules/README.md)
+### [~~Schedules~~](docs/sdks/schedules/README.md)
 
-* [list](docs/sdks/schedules/README.md#list) - List schedules
-* [create](docs/sdks/schedules/README.md#create) - Create schedule
-* [delete](docs/sdks/schedules/README.md#delete) - Delete schedule
-* [retrieve](docs/sdks/schedules/README.md#retrieve) - Retrieve schedule
-* [update](docs/sdks/schedules/README.md#update) - Update schedule
-* [trigger](docs/sdks/schedules/README.md#trigger) - Trigger schedule execution
+* [~~list~~](docs/sdks/schedules/README.md#list) - List schedules :warning: **Deprecated**
+* [~~create~~](docs/sdks/schedules/README.md#create) - Create schedule :warning: **Deprecated**
+* [~~delete~~](docs/sdks/schedules/README.md#delete) - Delete schedule :warning: **Deprecated**
+* [~~retrieve~~](docs/sdks/schedules/README.md#retrieve) - Retrieve schedule :warning: **Deprecated**
+* [~~update~~](docs/sdks/schedules/README.md#update) - Update schedule :warning: **Deprecated**
+* [~~trigger~~](docs/sdks/schedules/README.md#trigger) - Trigger schedule execution :warning: **Deprecated**
 
 ### [Sessions](docs/sdks/sessions/README.md)
 
@@ -853,6 +864,14 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 
 <summary>Available standalone functions</summary>
 
+- [`agentDeploymentsCreate`](docs/sdks/agentdeployments/README.md#create) - CreateAgentDeployment
+- [`agentDeploymentsDelete`](docs/sdks/agentdeployments/README.md#delete) - DeleteAgentDeployment
+- [`agentDeploymentsList`](docs/sdks/agentdeployments/README.md#list) - ListAgentDeployments
+- [`agentDeploymentsListRuns`](docs/sdks/agentdeployments/README.md#listruns) - ListAgentDeploymentRuns
+- [`agentDeploymentsRetrieve`](docs/sdks/agentdeployments/README.md#retrieve) - GetAgentDeployment
+- [`agentDeploymentsRetrieveRun`](docs/sdks/agentdeployments/README.md#retrieverun) - GetAgentDeploymentRun
+- [`agentDeploymentsRun`](docs/sdks/agentdeployments/README.md#run) - RunAgentDeployment
+- [`agentDeploymentsUpdate`](docs/sdks/agentdeployments/README.md#update) - UpdateAgentDeployment
 - [`agentsCreate`](docs/sdks/agents/README.md#create) - Create agent
 - [`agentsDelete`](docs/sdks/agents/README.md#delete) - Delete agent
 - [`agentsExternalCreate`](docs/sdks/external/README.md#create) - Create external agent
@@ -1147,12 +1166,6 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`routingRulesListUsedModels`](docs/sdks/routingrules/README.md#listusedmodels) - List models used by routing rules
 - [`routingRulesRetrieve`](docs/sdks/routingrules/README.md#retrieve) - Retrieve a routing rule
 - [`routingRulesUpdate`](docs/sdks/routingrules/README.md#update) - Update a routing rule
-- [`schedulesCreate`](docs/sdks/schedules/README.md#create) - Create schedule
-- [`schedulesDelete`](docs/sdks/schedules/README.md#delete) - Delete schedule
-- [`schedulesList`](docs/sdks/schedules/README.md#list) - List schedules
-- [`schedulesRetrieve`](docs/sdks/schedules/README.md#retrieve) - Retrieve schedule
-- [`schedulesTrigger`](docs/sdks/schedules/README.md#trigger) - Trigger schedule execution
-- [`schedulesUpdate`](docs/sdks/schedules/README.md#update) - Update schedule
 - [`sessionsCreate`](docs/sdks/sessions/README.md#create) - Create trace thread
 - [`sessionsDelete`](docs/sdks/sessions/README.md#delete) - Delete trace thread
 - [`sessionsGet`](docs/sdks/sessions/README.md#get) - Get trace thread
@@ -1250,6 +1263,12 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - ~~[`agentsStream`](docs/sdks/agents/README.md#stream)~~ - Stream agent execution in real-time :warning: **Deprecated**
 - ~~[`agentsStreamRun`](docs/sdks/agents/README.md#streamrun)~~ - Run agent with streaming response :warning: **Deprecated**
 - ~~[`routerClassifyCreate`](docs/sdks/classify/README.md#create)~~ - Classify :warning: **Deprecated**
+- ~~[`schedulesCreate`](docs/sdks/schedules/README.md#create)~~ - Create schedule :warning: **Deprecated**
+- ~~[`schedulesDelete`](docs/sdks/schedules/README.md#delete)~~ - Delete schedule :warning: **Deprecated**
+- ~~[`schedulesList`](docs/sdks/schedules/README.md#list)~~ - List schedules :warning: **Deprecated**
+- ~~[`schedulesRetrieve`](docs/sdks/schedules/README.md#retrieve)~~ - Retrieve schedule :warning: **Deprecated**
+- ~~[`schedulesTrigger`](docs/sdks/schedules/README.md#trigger)~~ - Trigger schedule execution :warning: **Deprecated**
+- ~~[`schedulesUpdate`](docs/sdks/schedules/README.md#update)~~ - Update schedule :warning: **Deprecated**
 - ~~[`webhooksQuery`](docs/sdks/webhooks/README.md#query)~~ - Query webhooks :warning: **Deprecated**
 
 </details>
@@ -1658,7 +1677,7 @@ run();
 **Primary error:**
 * [`OrqError`](./src/models/errors/orqerror.ts): The base class for HTTP error responses.
 
-<details><summary>Less common errors (100)</summary>
+<details><summary>Less common errors (101)</summary>
 
 <br />
 
@@ -1671,100 +1690,101 @@ run();
 
 
 **Inherit from [`OrqError`](./src/models/errors/orqerror.ts)**:
-* [`ErrorResponse`](./src/models/errors/errorresponse.ts): Applicable to 295 of 398 methods.*
-* [`APIErrorResponse`](./src/models/errors/apierrorresponse.ts): Applicable to 12 of 398 methods.*
-* [`HonoApiError`](./src/models/errors/honoapierror.ts): Applicable to 5 of 398 methods.*
-* [`PostV2FeedbackResponseBody`](./src/models/errors/postv2feedbackresponsebody.ts): Bad Request. Status code `400`. Applicable to 1 of 398 methods.*
-* [`CompactResponseResponseBody`](./src/models/errors/compactresponseresponsebody.ts): Model is required or request is invalid. Status code `400`. Applicable to 1 of 398 methods.*
-* [`CreateAgentScheduleResponseBody`](./src/models/errors/createagentscheduleresponsebody.ts): Invalid schedule type, expression, or sub-hour cadence. Status code `400`. Applicable to 1 of 398 methods.*
-* [`UpdateAgentScheduleResponseBody`](./src/models/errors/updateagentscheduleresponsebody.ts): Invalid type, expression, or sub-hour cadence. Status code `400`. Applicable to 1 of 398 methods.*
-* [`TriggerAgentScheduleResponseBody`](./src/models/errors/triggeragentscheduleresponsebody.ts): Schedule is inactive. Status code `400`. Applicable to 1 of 398 methods.*
-* [`ListBatchesResponseBody`](./src/models/errors/listbatchesresponsebody.ts): Invalid limit, conflicting cursors, or an unknown status or endpoint filter. Status code `400`. Applicable to 1 of 398 methods.*
-* [`CreateBatchResponseBody`](./src/models/errors/createbatchresponsebody.ts): Invalid body, unsupported endpoint, completion window other than 24h, or an input file that is missing the batch purpose. Status code `400`. Applicable to 1 of 398 methods.*
-* [`RetrieveBatchResponseBody`](./src/models/errors/retrievebatchresponsebody.ts): The batch id is missing from the path. Status code `400`. Applicable to 1 of 398 methods.*
-* [`CancelBatchResponseBody`](./src/models/errors/cancelbatchresponsebody.ts): The batch id is missing from the path. Status code `400`. Applicable to 1 of 398 methods.*
-* [`DownloadBatchResultsResponseBody`](./src/models/errors/downloadbatchresultsresponsebody.ts): The batch id is missing, or `file` is neither output nor errors. Status code `400`. Applicable to 1 of 398 methods.*
-* [`CreateLiveSessionResponseBody`](./src/models/errors/createlivesessionresponsebody.ts): Invalid session configuration, SDP offer, transport, or model. Status code `400`. Applicable to 1 of 398 methods.*
-* [`SearchWebResponseBody`](./src/models/errors/searchwebresponsebody.ts): Invalid request, unusable workspace integration, or a blocking guardrail. Check the request fields and workspace integration settings. Status code `400`. Applicable to 1 of 398 methods.*
-* [`CreateModerationResponseBody`](./src/models/errors/createmoderationresponsebody.ts): Returns validation error. Status code `400`. Applicable to 1 of 398 methods.*
-* [`CreateClassifyResponseBody`](./src/models/errors/createclassifyresponsebody.ts): Malformed JSON, missing or unsupported model, or invalid retry, timeout, or fallback fields. Status code `400`. Applicable to 1 of 398 methods.*
-* [`CreateDecisionsResponseBody`](./src/models/errors/createdecisionsresponsebody.ts): Malformed JSON, missing or unsupported model, or invalid retry, timeout, or fallback fields. Status code `400`. Applicable to 1 of 398 methods.*
-* [`CompactResponseResponsesResponseBody`](./src/models/errors/compactresponseresponsesresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 398 methods.*
-* [`ListBatchesBatchesResponseBody`](./src/models/errors/listbatchesbatchesresponsebody.ts): Missing, invalid, expired or revoked API key. Status code `401`. Applicable to 1 of 398 methods.*
-* [`CreateBatchBatchesResponseBody`](./src/models/errors/createbatchbatchesresponsebody.ts): Missing, invalid, expired or revoked API key. Status code `401`. Applicable to 1 of 398 methods.*
-* [`RetrieveBatchBatchesResponseBody`](./src/models/errors/retrievebatchbatchesresponsebody.ts): Missing, invalid, expired or revoked API key. Status code `401`. Applicable to 1 of 398 methods.*
-* [`CancelBatchBatchesResponseBody`](./src/models/errors/cancelbatchbatchesresponsebody.ts): Missing, invalid, expired or revoked API key. Status code `401`. Applicable to 1 of 398 methods.*
-* [`DownloadBatchResultsBatchesResponseBody`](./src/models/errors/downloadbatchresultsbatchesresponsebody.ts): Missing, invalid, expired or revoked API key. Status code `401`. Applicable to 1 of 398 methods.*
-* [`CreateLiveSessionLiveResponseBody`](./src/models/errors/createlivesessionliveresponsebody.ts): Missing or invalid API key. Status code `401`. Applicable to 1 of 398 methods.*
-* [`SearchWebWebsearchResponseBody`](./src/models/errors/searchwebwebsearchresponsebody.ts): Missing or invalid API key. Send a valid API key in the Authorization header. Status code `401`. Applicable to 1 of 398 methods.*
-* [`CreateClassifyRouterClassifyResponseBody`](./src/models/errors/createclassifyrouterclassifyresponsebody.ts): Missing, invalid, expired or revoked API key. Status code `401`. Applicable to 1 of 398 methods.*
-* [`CreateDecisionsRouterDecisionsResponseBody`](./src/models/errors/createdecisionsrouterdecisionsresponsebody.ts): Missing, invalid, expired or revoked API key. Status code `401`. Applicable to 1 of 398 methods.*
-* [`CreateLiveSessionLiveResponseResponseBody`](./src/models/errors/createlivesessionliveresponseresponsebody.ts): Credits or a matching spending limit cannot cover the session. Status code `402`. Applicable to 1 of 398 methods.*
-* [`SearchWebWebsearchResponseResponseBody`](./src/models/errors/searchwebwebsearchresponseresponsebody.ts): Managed search requires a positive platform credit balance. Add credits before retrying. BYOK does not require platform credits. Status code `402`. Applicable to 1 of 398 methods.*
-* [`CreateLiveSessionLiveResponse403ResponseBody`](./src/models/errors/createlivesessionliveresponse403responsebody.ts): The API key lacks realtime.execute or cannot access the model. Status code `403`. Applicable to 1 of 398 methods.*
-* [`SearchWebWebsearchResponse403ResponseBody`](./src/models/errors/searchwebwebsearchresponse403responsebody.ts): The API key lacks websearch.execute permission. Status code `403`. Applicable to 1 of 398 methods.*
-* [`CreateClassifyRouterClassifyResponseResponseBody`](./src/models/errors/createclassifyrouterclassifyresponseresponsebody.ts): The API key lacks classify permission, or the workspace or project cannot access the model. Status code `403`. Applicable to 1 of 398 methods.*
-* [`CreateDecisionsRouterDecisionsResponseResponseBody`](./src/models/errors/createdecisionsrouterdecisionsresponseresponsebody.ts): The API key lacks classify permission, or the workspace or project cannot access the model. Status code `403`. Applicable to 1 of 398 methods.*
-* [`DeleteAgentResponseBody`](./src/models/errors/deleteagentresponsebody.ts): Agent not found. The specified agent key does not exist in the workspace or has already been deleted. Status code `404`. Applicable to 1 of 398 methods.*
-* [`RetrieveAgentRequestResponseBody`](./src/models/errors/retrieveagentrequestresponsebody.ts): Agent not found. The specified agent key does not exist in the workspace or you do not have permission to access it. Status code `404`. Applicable to 1 of 398 methods.*
-* [`UpdateAgentResponseBody`](./src/models/errors/updateagentresponsebody.ts): Agent not found. The specified agent key does not exist in the workspace or you do not have permission to modify it. Status code `404`. Applicable to 1 of 398 methods.*
-* [`StreamRunAgentResponseBody`](./src/models/errors/streamrunagentresponsebody.ts): Model not found. Status code `404`. Applicable to 1 of 398 methods.*
-* [`StreamAgentResponseBody`](./src/models/errors/streamagentresponsebody.ts): Agent not found. Status code `404`. Applicable to 1 of 398 methods.*
-* [`UpdatePromptResponseBody`](./src/models/errors/updatepromptresponsebody.ts): Prompt not found. Status code `404`. Applicable to 1 of 398 methods.*
-* [`DeletePromptResponseBody`](./src/models/errors/deletepromptresponsebody.ts): Prompt not found. Status code `404`. Applicable to 1 of 398 methods.*
-* [`GetPromptVersionResponseBody`](./src/models/errors/getpromptversionresponsebody.ts): Not Found - The prompt or prompt version does not exist. Status code `404`. Applicable to 1 of 398 methods.*
-* [`UpdateToolResponseBody`](./src/models/errors/updatetoolresponsebody.ts): Tool not found. Status code `404`. Applicable to 1 of 398 methods.*
-* [`GetV2ToolsToolIdVersionsResponseBody`](./src/models/errors/getv2toolstoolidversionsresponsebody.ts): Tool not found. Status code `404`. Applicable to 1 of 398 methods.*
-* [`GetV2ToolsToolIdVersionsVersionIdResponseBody`](./src/models/errors/getv2toolstoolidversionsversionidresponsebody.ts): Tool or version not found. Status code `404`. Applicable to 1 of 398 methods.*
-* [`GetEvalsResponseBody`](./src/models/errors/getevalsresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 398 methods.*
-* [`CreateEvalResponseBody`](./src/models/errors/createevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 398 methods.*
-* [`GetEvalResponseBody`](./src/models/errors/getevalresponsebody.ts): No evaluator with this id exists in the authenticated workspace, or the request carries no workspace. Status code `404`. Applicable to 1 of 398 methods.*
-* [`DeleteEvalResponseBody`](./src/models/errors/deleteevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 398 methods.*
-* [`UpdateEvalResponseBody`](./src/models/errors/updateevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 398 methods.*
-* [`PostV2FeedbackFeedbackResponseBody`](./src/models/errors/postv2feedbackfeedbackresponsebody.ts): Workspace, trace, or feedback property was not found. Status code `404`. Applicable to 1 of 398 methods.*
-* [`PostV2FeedbackRemoveResponseBody`](./src/models/errors/postv2feedbackremoveresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 398 methods.*
-* [`RetrieveResponseResponseBody`](./src/models/errors/retrieveresponseresponsebody.ts): Response not found. Status code `404`. Applicable to 1 of 398 methods.*
-* [`CreateAgentScheduleSchedulesResponseBody`](./src/models/errors/createagentscheduleschedulesresponsebody.ts): Agent (or agent version, when agent_tag is set) not found. Status code `404`. Applicable to 1 of 398 methods.*
-* [`DeleteAgentScheduleResponseBody`](./src/models/errors/deleteagentscheduleresponsebody.ts): Schedule not found, or belongs to a different agent. Status code `404`. Applicable to 1 of 398 methods.*
-* [`RetrieveAgentScheduleResponseBody`](./src/models/errors/retrieveagentscheduleresponsebody.ts): Schedule not found, or belongs to a different agent. Status code `404`. Applicable to 1 of 398 methods.*
-* [`UpdateAgentScheduleSchedulesResponseBody`](./src/models/errors/updateagentscheduleschedulesresponsebody.ts): Schedule or agent version not found. Status code `404`. Applicable to 1 of 398 methods.*
-* [`TriggerAgentScheduleSchedulesResponseBody`](./src/models/errors/triggeragentscheduleschedulesresponsebody.ts): Schedule not found, or belongs to a different agent. Status code `404`. Applicable to 1 of 398 methods.*
-* [`CreateBatchBatchesResponseResponseBody`](./src/models/errors/createbatchbatchesresponseresponsebody.ts): The input file does not exist in the caller's projects. Status code `404`. Applicable to 1 of 398 methods.*
-* [`RetrieveBatchBatchesResponseResponseBody`](./src/models/errors/retrievebatchbatchesresponseresponsebody.ts): No batch with this id is visible to the API key's projects. Status code `404`. Applicable to 1 of 398 methods.*
-* [`CancelBatchBatchesResponseResponseBody`](./src/models/errors/cancelbatchbatchesresponseresponsebody.ts): No batch with this id is visible to the API key's projects. Status code `404`. Applicable to 1 of 398 methods.*
-* [`DownloadBatchResultsBatchesResponseResponseBody`](./src/models/errors/downloadbatchresultsbatchesresponseresponsebody.ts): No batch with this id is visible to the API key's projects. Status code `404`. Applicable to 1 of 398 methods.*
-* [`CreateLiveSessionLiveResponse404ResponseBody`](./src/models/errors/createlivesessionliveresponse404responsebody.ts): The requested model does not exist. Status code `404`. Applicable to 1 of 398 methods.*
-* [`CreateClassifyRouterClassifyResponse408ResponseBody`](./src/models/errors/createclassifyrouterclassifyresponse408responsebody.ts): The final model call exceeded its timeout after available retries and fallbacks were exhausted. Status code `408`. Applicable to 1 of 398 methods.*
-* [`CreateDecisionsRouterDecisionsResponse408ResponseBody`](./src/models/errors/createdecisionsrouterdecisionsresponse408responsebody.ts): The final model call exceeded its timeout after available retries and fallbacks were exhausted. Status code `408`. Applicable to 1 of 398 methods.*
-* [`DeleteEvalEvalsResponseBody`](./src/models/errors/deleteevalevalsresponsebody.ts): The evaluator is still referenced as an evaluator or guardrail by one or more deployments. Status code `409`. Applicable to 1 of 398 methods.*
-* [`DownloadBatchResultsBatchesResponse409ResponseBody`](./src/models/errors/downloadbatchresultsbatchesresponse409responsebody.ts): The batch has not reached a terminal status yet (`invalid_request`), or it has no result file (`output_unavailable` for a missing error or output file). Status code `409`. Applicable to 1 of 398 methods.*
-* [`SearchWebWebsearchResponse415ResponseBody`](./src/models/errors/searchwebwebsearchresponse415responsebody.ts): Unsupported or missing Content-Type. Send application/json; an optional charset parameter is accepted. Status code `415`. Applicable to 1 of 398 methods.*
-* [`SearchWebWebsearchResponse422ResponseBody`](./src/models/errors/searchwebwebsearchresponse422responsebody.ts): A configured guardrail evaluator could not complete its evaluation. Status code `422`. Applicable to 1 of 398 methods.*
-* [`CreateClassifyRouterClassifyResponse422ResponseBody`](./src/models/errors/createclassifyrouterclassifyresponse422responsebody.ts): The state or a question violates the classification contract. Status code `422`. Applicable to 1 of 398 methods.*
-* [`CreateDecisionsRouterDecisionsResponse422ResponseBody`](./src/models/errors/createdecisionsrouterdecisionsresponse422responsebody.ts): The state or a question violates the classification contract. Status code `422`. Applicable to 1 of 398 methods.*
-* [`CreateTranscriptionResponseBody`](./src/models/errors/createtranscriptionresponsebody.ts): Returns validation error. Status code `422`. Applicable to 1 of 398 methods.*
-* [`CreateTranslationResponseBody`](./src/models/errors/createtranslationresponsebody.ts): Returns validation error. Status code `422`. Applicable to 1 of 398 methods.*
-* [`CreateLiveSessionLiveResponse429ResponseBody`](./src/models/errors/createlivesessionliveresponse429responsebody.ts): A rate limit or budget was reached. Status code `429`. Applicable to 1 of 398 methods.*
-* [`SearchWebWebsearchResponse429ResponseBody`](./src/models/errors/searchwebwebsearchresponse429responsebody.ts): A workspace or provider rate limit, or a matching budget, was reached. Wait before retrying or raise the budget. Status code `429`. Applicable to 1 of 398 methods.*
-* [`CreateClassifyRouterClassifyResponse429ResponseBody`](./src/models/errors/createclassifyrouterclassifyresponse429responsebody.ts): A plan rate limit, budget or provider rate limit was exceeded. Status code `429`. Applicable to 1 of 398 methods.*
-* [`CreateDecisionsRouterDecisionsResponse429ResponseBody`](./src/models/errors/createdecisionsrouterdecisionsresponse429responsebody.ts): A plan rate limit, budget or provider rate limit was exceeded. Status code `429`. Applicable to 1 of 398 methods.*
-* [`KnowledgeApiError`](./src/models/errors/knowledgeapierror.ts): An error has occured. Status code `500`. Applicable to 1 of 398 methods.*
-* [`ListBatchesBatchesResponseResponseBody`](./src/models/errors/listbatchesbatchesresponseresponsebody.ts): An internal error occurred. Status code `500`. Applicable to 1 of 398 methods.*
-* [`CreateBatchBatchesResponse500ResponseBody`](./src/models/errors/createbatchbatchesresponse500responsebody.ts): An internal error occurred. Status code `500`. Applicable to 1 of 398 methods.*
-* [`RetrieveBatchBatchesResponse500ResponseBody`](./src/models/errors/retrievebatchbatchesresponse500responsebody.ts): An internal error occurred. Status code `500`. Applicable to 1 of 398 methods.*
-* [`CancelBatchBatchesResponse500ResponseBody`](./src/models/errors/cancelbatchbatchesresponse500responsebody.ts): An internal error occurred. Status code `500`. Applicable to 1 of 398 methods.*
-* [`DownloadBatchResultsBatchesResponse500ResponseBody`](./src/models/errors/downloadbatchresultsbatchesresponse500responsebody.ts): An internal error occurred. Status code `500`. Applicable to 1 of 398 methods.*
-* [`SearchWebWebsearchResponse500ResponseBody`](./src/models/errors/searchwebwebsearchresponse500responsebody.ts): Unexpected gateway error. Include the trace ID, if available, when reporting the failure. Status code `500`. Applicable to 1 of 398 methods.*
-* [`CreateClassifyRouterClassifyResponse500ResponseBody`](./src/models/errors/createclassifyrouterclassifyresponse500responsebody.ts): An internal model-resolution error occurred. Status code `500`. Applicable to 1 of 398 methods.*
-* [`CreateDecisionsRouterDecisionsResponse500ResponseBody`](./src/models/errors/createdecisionsrouterdecisionsresponse500responsebody.ts): An internal model-resolution error occurred. Status code `500`. Applicable to 1 of 398 methods.*
-* [`CompactResponseResponsesResponseResponseBody`](./src/models/errors/compactresponseresponsesresponseresponsebody.ts): Failed to compact conversation. Status code `502`. Applicable to 1 of 398 methods.*
-* [`CreateLiveSessionLiveResponse502ResponseBody`](./src/models/errors/createlivesessionliveresponse502responsebody.ts): OpenAI could not create the session or the gateway could not connect to its usage events. Status code `502`. Applicable to 1 of 398 methods.*
-* [`SearchWebWebsearchResponse502ResponseBody`](./src/models/errors/searchwebwebsearchresponse502responsebody.ts): The search provider, PII detector, or guardrail service failed. Invalid upstream credentials can also produce this response. Status code `502`. Applicable to 1 of 398 methods.*
-* [`CreateClassifyRouterClassifyResponse502ResponseBody`](./src/models/errors/createclassifyrouterclassifyresponse502responsebody.ts): The upstream provider failed or returned an invalid classification response. Status code `502`. Applicable to 1 of 398 methods.*
-* [`CreateDecisionsRouterDecisionsResponse502ResponseBody`](./src/models/errors/createdecisionsrouterdecisionsresponse502responsebody.ts): The upstream provider failed or returned an invalid classification response. Status code `502`. Applicable to 1 of 398 methods.*
-* [`CreateLiveSessionLiveResponse503ResponseBody`](./src/models/errors/createlivesessionliveresponse503responsebody.ts): Realtime usage accounting is unavailable. Status code `503`. Applicable to 1 of 398 methods.*
-* [`SearchWebWebsearchResponse503ResponseBody`](./src/models/errors/searchwebwebsearchresponse503responsebody.ts): The gateway could not load workspace integrations. Retry when the credential store is available. Status code `503`. Applicable to 1 of 398 methods.*
-* [`SearchWebWebsearchResponse504ResponseBody`](./src/models/errors/searchwebwebsearchresponse504responsebody.ts): The provider request timed out or was cancelled. Status code `504`. Applicable to 1 of 398 methods.*
+* [`ErrorResponse`](./src/models/errors/errorresponse.ts): Applicable to 303 of 406 methods.*
+* [`APIErrorResponse`](./src/models/errors/apierrorresponse.ts): Applicable to 12 of 406 methods.*
+* [`HonoApiError`](./src/models/errors/honoapierror.ts): Applicable to 5 of 406 methods.*
+* [`PostV2FeedbackResponseBody`](./src/models/errors/postv2feedbackresponsebody.ts): Bad Request. Status code `400`. Applicable to 1 of 406 methods.*
+* [`CompactResponseResponseBody`](./src/models/errors/compactresponseresponsebody.ts): Model is required or request is invalid. Status code `400`. Applicable to 1 of 406 methods.*
+* [`CreateAgentScheduleResponseBody`](./src/models/errors/createagentscheduleresponsebody.ts): Invalid schedule type, expression, or sub-hour cadence. Status code `400`. Applicable to 1 of 406 methods.*
+* [`UpdateAgentScheduleResponseBody`](./src/models/errors/updateagentscheduleresponsebody.ts): Invalid type, expression, or sub-hour cadence. Status code `400`. Applicable to 1 of 406 methods.*
+* [`TriggerAgentScheduleResponseBody`](./src/models/errors/triggeragentscheduleresponsebody.ts): Schedule is inactive. Status code `400`. Applicable to 1 of 406 methods.*
+* [`ListBatchesResponseBody`](./src/models/errors/listbatchesresponsebody.ts): Invalid limit, conflicting cursors, or an unknown status or endpoint filter. Status code `400`. Applicable to 1 of 406 methods.*
+* [`CreateBatchResponseBody`](./src/models/errors/createbatchresponsebody.ts): Invalid body, unsupported endpoint, completion window other than 24h, or an input file that is missing the batch purpose. Status code `400`. Applicable to 1 of 406 methods.*
+* [`RetrieveBatchResponseBody`](./src/models/errors/retrievebatchresponsebody.ts): The batch id is missing from the path. Status code `400`. Applicable to 1 of 406 methods.*
+* [`CancelBatchResponseBody`](./src/models/errors/cancelbatchresponsebody.ts): The batch id is missing from the path. Status code `400`. Applicable to 1 of 406 methods.*
+* [`DownloadBatchResultsResponseBody`](./src/models/errors/downloadbatchresultsresponsebody.ts): The batch id is missing, or `file` is neither output nor errors. Status code `400`. Applicable to 1 of 406 methods.*
+* [`CreateLiveSessionResponseBody`](./src/models/errors/createlivesessionresponsebody.ts): Invalid session configuration, SDP offer, transport, or model. Status code `400`. Applicable to 1 of 406 methods.*
+* [`SearchWebResponseBody`](./src/models/errors/searchwebresponsebody.ts): Invalid request, unusable workspace integration, or a blocking guardrail. Check the request fields and workspace integration settings. Status code `400`. Applicable to 1 of 406 methods.*
+* [`CreateModerationResponseBody`](./src/models/errors/createmoderationresponsebody.ts): Returns validation error. Status code `400`. Applicable to 1 of 406 methods.*
+* [`CreateClassifyResponseBody`](./src/models/errors/createclassifyresponsebody.ts): Malformed JSON, missing or unsupported model, or invalid retry, timeout, or fallback fields. Status code `400`. Applicable to 1 of 406 methods.*
+* [`CreateDecisionsResponseBody`](./src/models/errors/createdecisionsresponsebody.ts): Malformed JSON, missing or unsupported model, or invalid retry, timeout, or fallback fields. Status code `400`. Applicable to 1 of 406 methods.*
+* [`CompactResponseResponsesResponseBody`](./src/models/errors/compactresponseresponsesresponsebody.ts): Unauthorized. Status code `401`. Applicable to 1 of 406 methods.*
+* [`ListBatchesBatchesResponseBody`](./src/models/errors/listbatchesbatchesresponsebody.ts): Missing, invalid, expired or revoked API key. Status code `401`. Applicable to 1 of 406 methods.*
+* [`CreateBatchBatchesResponseBody`](./src/models/errors/createbatchbatchesresponsebody.ts): Missing, invalid, expired or revoked API key. Status code `401`. Applicable to 1 of 406 methods.*
+* [`RetrieveBatchBatchesResponseBody`](./src/models/errors/retrievebatchbatchesresponsebody.ts): Missing, invalid, expired or revoked API key. Status code `401`. Applicable to 1 of 406 methods.*
+* [`CancelBatchBatchesResponseBody`](./src/models/errors/cancelbatchbatchesresponsebody.ts): Missing, invalid, expired or revoked API key. Status code `401`. Applicable to 1 of 406 methods.*
+* [`DownloadBatchResultsBatchesResponseBody`](./src/models/errors/downloadbatchresultsbatchesresponsebody.ts): Missing, invalid, expired or revoked API key. Status code `401`. Applicable to 1 of 406 methods.*
+* [`CreateLiveSessionLiveResponseBody`](./src/models/errors/createlivesessionliveresponsebody.ts): Missing or invalid API key. Status code `401`. Applicable to 1 of 406 methods.*
+* [`SearchWebWebsearchResponseBody`](./src/models/errors/searchwebwebsearchresponsebody.ts): Missing or invalid API key. Send a valid API key in the Authorization header. Status code `401`. Applicable to 1 of 406 methods.*
+* [`CreateClassifyRouterClassifyResponseBody`](./src/models/errors/createclassifyrouterclassifyresponsebody.ts): Missing, invalid, expired or revoked API key. Status code `401`. Applicable to 1 of 406 methods.*
+* [`CreateDecisionsRouterDecisionsResponseBody`](./src/models/errors/createdecisionsrouterdecisionsresponsebody.ts): Missing, invalid, expired or revoked API key. Status code `401`. Applicable to 1 of 406 methods.*
+* [`CreateLiveSessionLiveResponseResponseBody`](./src/models/errors/createlivesessionliveresponseresponsebody.ts): Credits or a matching spending limit cannot cover the session. Status code `402`. Applicable to 1 of 406 methods.*
+* [`SearchWebWebsearchResponseResponseBody`](./src/models/errors/searchwebwebsearchresponseresponsebody.ts): Managed search requires a positive platform credit balance. Add credits before retrying. BYOK does not require platform credits. Status code `402`. Applicable to 1 of 406 methods.*
+* [`CreateLiveSessionLiveResponse403ResponseBody`](./src/models/errors/createlivesessionliveresponse403responsebody.ts): The API key lacks realtime.execute or cannot access the model. Status code `403`. Applicable to 1 of 406 methods.*
+* [`SearchWebWebsearchResponse403ResponseBody`](./src/models/errors/searchwebwebsearchresponse403responsebody.ts): The API key lacks websearch.execute permission. Status code `403`. Applicable to 1 of 406 methods.*
+* [`CreateClassifyRouterClassifyResponseResponseBody`](./src/models/errors/createclassifyrouterclassifyresponseresponsebody.ts): The API key lacks classify permission, or the workspace or project cannot access the model. Status code `403`. Applicable to 1 of 406 methods.*
+* [`CreateDecisionsRouterDecisionsResponseResponseBody`](./src/models/errors/createdecisionsrouterdecisionsresponseresponsebody.ts): The API key lacks classify permission, or the workspace or project cannot access the model. Status code `403`. Applicable to 1 of 406 methods.*
+* [`DeleteAgentResponseBody`](./src/models/errors/deleteagentresponsebody.ts): Agent not found. The specified agent key does not exist in the workspace or has already been deleted. Status code `404`. Applicable to 1 of 406 methods.*
+* [`RetrieveAgentRequestResponseBody`](./src/models/errors/retrieveagentrequestresponsebody.ts): Agent not found. The specified agent key does not exist in the workspace or you do not have permission to access it. Status code `404`. Applicable to 1 of 406 methods.*
+* [`UpdateAgentResponseBody`](./src/models/errors/updateagentresponsebody.ts): Agent not found. The specified agent key does not exist in the workspace or you do not have permission to modify it. Status code `404`. Applicable to 1 of 406 methods.*
+* [`StreamRunAgentResponseBody`](./src/models/errors/streamrunagentresponsebody.ts): Model not found. Status code `404`. Applicable to 1 of 406 methods.*
+* [`StreamAgentResponseBody`](./src/models/errors/streamagentresponsebody.ts): Agent not found. Status code `404`. Applicable to 1 of 406 methods.*
+* [`UpdatePromptResponseBody`](./src/models/errors/updatepromptresponsebody.ts): Prompt not found. Status code `404`. Applicable to 1 of 406 methods.*
+* [`DeletePromptResponseBody`](./src/models/errors/deletepromptresponsebody.ts): Prompt not found. Status code `404`. Applicable to 1 of 406 methods.*
+* [`GetPromptVersionResponseBody`](./src/models/errors/getpromptversionresponsebody.ts): Not Found - The prompt or prompt version does not exist. Status code `404`. Applicable to 1 of 406 methods.*
+* [`UpdateToolResponseBody`](./src/models/errors/updatetoolresponsebody.ts): Tool not found. Status code `404`. Applicable to 1 of 406 methods.*
+* [`GetV2ToolsToolIdVersionsResponseBody`](./src/models/errors/getv2toolstoolidversionsresponsebody.ts): Tool not found. Status code `404`. Applicable to 1 of 406 methods.*
+* [`GetV2ToolsToolIdVersionsVersionIdResponseBody`](./src/models/errors/getv2toolstoolidversionsversionidresponsebody.ts): Tool or version not found. Status code `404`. Applicable to 1 of 406 methods.*
+* [`GetEvalsResponseBody`](./src/models/errors/getevalsresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 406 methods.*
+* [`CreateEvalResponseBody`](./src/models/errors/createevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 406 methods.*
+* [`GetEvalResponseBody`](./src/models/errors/getevalresponsebody.ts): No evaluator with this id exists in the authenticated workspace, or the request carries no workspace. Status code `404`. Applicable to 1 of 406 methods.*
+* [`DeleteEvalResponseBody`](./src/models/errors/deleteevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 406 methods.*
+* [`UpdateEvalResponseBody`](./src/models/errors/updateevalresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 406 methods.*
+* [`PostV2FeedbackFeedbackResponseBody`](./src/models/errors/postv2feedbackfeedbackresponsebody.ts): Workspace, trace, or feedback property was not found. Status code `404`. Applicable to 1 of 406 methods.*
+* [`PostV2FeedbackRemoveResponseBody`](./src/models/errors/postv2feedbackremoveresponsebody.ts): Workspace ID is not found on the request. Status code `404`. Applicable to 1 of 406 methods.*
+* [`RetrieveResponseResponseBody`](./src/models/errors/retrieveresponseresponsebody.ts): Response not found. Status code `404`. Applicable to 1 of 406 methods.*
+* [`CreateAgentScheduleSchedulesResponseBody`](./src/models/errors/createagentscheduleschedulesresponsebody.ts): Agent (or agent version, when agent_tag is set) not found. Status code `404`. Applicable to 1 of 406 methods.*
+* [`DeleteAgentScheduleResponseBody`](./src/models/errors/deleteagentscheduleresponsebody.ts): Schedule not found, or belongs to a different agent. Status code `404`. Applicable to 1 of 406 methods.*
+* [`RetrieveAgentScheduleResponseBody`](./src/models/errors/retrieveagentscheduleresponsebody.ts): Schedule not found, or belongs to a different agent. Status code `404`. Applicable to 1 of 406 methods.*
+* [`UpdateAgentScheduleSchedulesResponseBody`](./src/models/errors/updateagentscheduleschedulesresponsebody.ts): Schedule or agent version not found. Status code `404`. Applicable to 1 of 406 methods.*
+* [`TriggerAgentScheduleSchedulesResponseBody`](./src/models/errors/triggeragentscheduleschedulesresponsebody.ts): Schedule not found, or belongs to a different agent. Status code `404`. Applicable to 1 of 406 methods.*
+* [`CreateBatchBatchesResponseResponseBody`](./src/models/errors/createbatchbatchesresponseresponsebody.ts): The input file does not exist in the caller's projects. Status code `404`. Applicable to 1 of 406 methods.*
+* [`RetrieveBatchBatchesResponseResponseBody`](./src/models/errors/retrievebatchbatchesresponseresponsebody.ts): No batch with this id is visible to the API key's projects. Status code `404`. Applicable to 1 of 406 methods.*
+* [`CancelBatchBatchesResponseResponseBody`](./src/models/errors/cancelbatchbatchesresponseresponsebody.ts): No batch with this id is visible to the API key's projects. Status code `404`. Applicable to 1 of 406 methods.*
+* [`DownloadBatchResultsBatchesResponseResponseBody`](./src/models/errors/downloadbatchresultsbatchesresponseresponsebody.ts): No batch with this id is visible to the API key's projects. Status code `404`. Applicable to 1 of 406 methods.*
+* [`CreateLiveSessionLiveResponse404ResponseBody`](./src/models/errors/createlivesessionliveresponse404responsebody.ts): The requested model does not exist. Status code `404`. Applicable to 1 of 406 methods.*
+* [`CreateClassifyRouterClassifyResponse408ResponseBody`](./src/models/errors/createclassifyrouterclassifyresponse408responsebody.ts): The final model call exceeded its timeout after available retries and fallbacks were exhausted. Status code `408`. Applicable to 1 of 406 methods.*
+* [`CreateDecisionsRouterDecisionsResponse408ResponseBody`](./src/models/errors/createdecisionsrouterdecisionsresponse408responsebody.ts): The final model call exceeded its timeout after available retries and fallbacks were exhausted. Status code `408`. Applicable to 1 of 406 methods.*
+* [`DeleteAgentAgentsResponseBody`](./src/models/errors/deleteagentagentsresponsebody.ts): Agent has active deployments or runs in progress. Status code `409`. Applicable to 1 of 406 methods.*
+* [`DeleteEvalEvalsResponseBody`](./src/models/errors/deleteevalevalsresponsebody.ts): The evaluator is still referenced as an evaluator or guardrail by one or more deployments. Status code `409`. Applicable to 1 of 406 methods.*
+* [`DownloadBatchResultsBatchesResponse409ResponseBody`](./src/models/errors/downloadbatchresultsbatchesresponse409responsebody.ts): The batch has not reached a terminal status yet (`invalid_request`), or it has no result file (`output_unavailable` for a missing error or output file). Status code `409`. Applicable to 1 of 406 methods.*
+* [`SearchWebWebsearchResponse415ResponseBody`](./src/models/errors/searchwebwebsearchresponse415responsebody.ts): Unsupported or missing Content-Type. Send application/json; an optional charset parameter is accepted. Status code `415`. Applicable to 1 of 406 methods.*
+* [`SearchWebWebsearchResponse422ResponseBody`](./src/models/errors/searchwebwebsearchresponse422responsebody.ts): A configured guardrail evaluator could not complete its evaluation. Status code `422`. Applicable to 1 of 406 methods.*
+* [`CreateClassifyRouterClassifyResponse422ResponseBody`](./src/models/errors/createclassifyrouterclassifyresponse422responsebody.ts): The state or a question violates the classification contract. Status code `422`. Applicable to 1 of 406 methods.*
+* [`CreateDecisionsRouterDecisionsResponse422ResponseBody`](./src/models/errors/createdecisionsrouterdecisionsresponse422responsebody.ts): The state or a question violates the classification contract. Status code `422`. Applicable to 1 of 406 methods.*
+* [`CreateTranscriptionResponseBody`](./src/models/errors/createtranscriptionresponsebody.ts): Returns validation error. Status code `422`. Applicable to 1 of 406 methods.*
+* [`CreateTranslationResponseBody`](./src/models/errors/createtranslationresponsebody.ts): Returns validation error. Status code `422`. Applicable to 1 of 406 methods.*
+* [`CreateLiveSessionLiveResponse429ResponseBody`](./src/models/errors/createlivesessionliveresponse429responsebody.ts): A rate limit or budget was reached. Status code `429`. Applicable to 1 of 406 methods.*
+* [`SearchWebWebsearchResponse429ResponseBody`](./src/models/errors/searchwebwebsearchresponse429responsebody.ts): A workspace or provider rate limit, or a matching budget, was reached. Wait before retrying or raise the budget. Status code `429`. Applicable to 1 of 406 methods.*
+* [`CreateClassifyRouterClassifyResponse429ResponseBody`](./src/models/errors/createclassifyrouterclassifyresponse429responsebody.ts): A plan rate limit, budget or provider rate limit was exceeded. Status code `429`. Applicable to 1 of 406 methods.*
+* [`CreateDecisionsRouterDecisionsResponse429ResponseBody`](./src/models/errors/createdecisionsrouterdecisionsresponse429responsebody.ts): A plan rate limit, budget or provider rate limit was exceeded. Status code `429`. Applicable to 1 of 406 methods.*
+* [`KnowledgeApiError`](./src/models/errors/knowledgeapierror.ts): An error has occured. Status code `500`. Applicable to 1 of 406 methods.*
+* [`ListBatchesBatchesResponseResponseBody`](./src/models/errors/listbatchesbatchesresponseresponsebody.ts): An internal error occurred. Status code `500`. Applicable to 1 of 406 methods.*
+* [`CreateBatchBatchesResponse500ResponseBody`](./src/models/errors/createbatchbatchesresponse500responsebody.ts): An internal error occurred. Status code `500`. Applicable to 1 of 406 methods.*
+* [`RetrieveBatchBatchesResponse500ResponseBody`](./src/models/errors/retrievebatchbatchesresponse500responsebody.ts): An internal error occurred. Status code `500`. Applicable to 1 of 406 methods.*
+* [`CancelBatchBatchesResponse500ResponseBody`](./src/models/errors/cancelbatchbatchesresponse500responsebody.ts): An internal error occurred. Status code `500`. Applicable to 1 of 406 methods.*
+* [`DownloadBatchResultsBatchesResponse500ResponseBody`](./src/models/errors/downloadbatchresultsbatchesresponse500responsebody.ts): An internal error occurred. Status code `500`. Applicable to 1 of 406 methods.*
+* [`SearchWebWebsearchResponse500ResponseBody`](./src/models/errors/searchwebwebsearchresponse500responsebody.ts): Unexpected gateway error. Include the trace ID, if available, when reporting the failure. Status code `500`. Applicable to 1 of 406 methods.*
+* [`CreateClassifyRouterClassifyResponse500ResponseBody`](./src/models/errors/createclassifyrouterclassifyresponse500responsebody.ts): An internal model-resolution error occurred. Status code `500`. Applicable to 1 of 406 methods.*
+* [`CreateDecisionsRouterDecisionsResponse500ResponseBody`](./src/models/errors/createdecisionsrouterdecisionsresponse500responsebody.ts): An internal model-resolution error occurred. Status code `500`. Applicable to 1 of 406 methods.*
+* [`CompactResponseResponsesResponseResponseBody`](./src/models/errors/compactresponseresponsesresponseresponsebody.ts): Failed to compact conversation. Status code `502`. Applicable to 1 of 406 methods.*
+* [`CreateLiveSessionLiveResponse502ResponseBody`](./src/models/errors/createlivesessionliveresponse502responsebody.ts): OpenAI could not create the session or the gateway could not connect to its usage events. Status code `502`. Applicable to 1 of 406 methods.*
+* [`SearchWebWebsearchResponse502ResponseBody`](./src/models/errors/searchwebwebsearchresponse502responsebody.ts): The search provider, PII detector, or guardrail service failed. Invalid upstream credentials can also produce this response. Status code `502`. Applicable to 1 of 406 methods.*
+* [`CreateClassifyRouterClassifyResponse502ResponseBody`](./src/models/errors/createclassifyrouterclassifyresponse502responsebody.ts): The upstream provider failed or returned an invalid classification response. Status code `502`. Applicable to 1 of 406 methods.*
+* [`CreateDecisionsRouterDecisionsResponse502ResponseBody`](./src/models/errors/createdecisionsrouterdecisionsresponse502responsebody.ts): The upstream provider failed or returned an invalid classification response. Status code `502`. Applicable to 1 of 406 methods.*
+* [`CreateLiveSessionLiveResponse503ResponseBody`](./src/models/errors/createlivesessionliveresponse503responsebody.ts): Realtime usage accounting is unavailable. Status code `503`. Applicable to 1 of 406 methods.*
+* [`SearchWebWebsearchResponse503ResponseBody`](./src/models/errors/searchwebwebsearchresponse503responsebody.ts): The gateway could not load workspace integrations. Retry when the credential store is available. Status code `503`. Applicable to 1 of 406 methods.*
+* [`SearchWebWebsearchResponse504ResponseBody`](./src/models/errors/searchwebwebsearchresponse504responsebody.ts): The provider request timed out or was cancelled. Status code `504`. Applicable to 1 of 406 methods.*
 * [`ResponseValidationError`](./src/models/errors/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
 
 </details>

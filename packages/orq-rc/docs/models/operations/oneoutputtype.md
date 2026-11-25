@@ -13,5 +13,5 @@ let value: OneOutputType = "boolean";
 ## Values
 
 ```typescript
-"boolean" | "categorical" | "number" | "string"
+"boolean" | "decision" | "number" | "string"
 ```

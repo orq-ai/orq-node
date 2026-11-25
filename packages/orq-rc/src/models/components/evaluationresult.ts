@@ -16,15 +16,18 @@ export type EvaluationResult = {
    * Discriminator for the verdict shape: "string", "number", "boolean",
    *
    * @remarks
-   *  "string_array", "rouge_n", "bert_score", "llm_evaluator", "http_eval".
+   *  "string_array", "rouge_n", "bert_score", "llm_evaluator", "decision",
+   *  "http_eval".
    */
   type?: string | undefined;
   /**
-   * The verdict. Dynamic by design — a boolean pass, a numeric score, a
+   * The verdict. Dynamic by design — a boolean pass, a numeric score, a list
    *
    * @remarks
-   *  categorical label, a list of labels and the nested rouge_n object all
-   *  arrive here.
+   *  of labels, the nested rouge_n object and a decision evaluator's answers
+   *  all arrive here. A decision evaluator returns one entry per question,
+   *  keyed by its name: the answer (noul, choice or score), its probabilities
+   *  and confidence, and whether its pass condition held (passed).
    */
   value?: any | undefined;
   /**

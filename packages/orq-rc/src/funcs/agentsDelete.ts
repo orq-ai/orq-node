@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { OrqCore } from "../core.js";
-import { encodeSimple } from "../lib/encodings.js";
+import { encodeFormQuery, encodeSimple } from "../lib/encodings.js";
 import { matchStatusCode } from "../lib/http.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
@@ -34,12 +34,13 @@ import { Result } from "../types/fp.js";
  */
 export function agentsDelete(
   client: OrqCore,
-  agentKey: string,
+  request: operations.DeleteAgentRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
     void,
     | errors.DeleteAgentResponseBody
+    | errors.DeleteAgentAgentsResponseBody
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -52,20 +53,21 @@ export function agentsDelete(
 > {
   return new APIPromise($do(
     client,
-    agentKey,
+    request,
     options,
   ));
 }
 
 async function $do(
   client: OrqCore,
-  agentKey: string,
+  request: operations.DeleteAgentRequest,
   options?: RequestOptions,
 ): Promise<
   [
     Result<
       void,
       | errors.DeleteAgentResponseBody
+      | errors.DeleteAgentAgentsResponseBody
       | OrqError
       | ResponseValidationError
       | ConnectionError
@@ -78,12 +80,8 @@ async function $do(
     APICall,
   ]
 > {
-  const input: operations.DeleteAgentRequest = {
-    agentKey: agentKey,
-  };
-
   const parsed = safeParse(
-    input,
+    request,
     (value) => operations.DeleteAgentRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
@@ -104,6 +102,10 @@ async function $do(
     return [pathResult, { status: "invalid" }];
   }
   const path = pathResult.value;
+
+  const query = encodeFormQuery({
+    "force": payload.force,
+  });
 
   const headers = new Headers(compactMap({
     Accept: "application/json",
@@ -134,6 +136,7 @@ async function $do(
     baseURL: options?.serverURL,
     path: path,
     headers: headers,
+    query: query,
     body: body,
     userAgent: client._options.userAgent,
     timeoutMs: options?.timeoutMs || client._options.timeoutMs || 600000,
@@ -162,6 +165,7 @@ async function $do(
   const [result] = await M.match<
     void,
     | errors.DeleteAgentResponseBody
+    | errors.DeleteAgentAgentsResponseBody
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -173,6 +177,7 @@ async function $do(
   >(
     M.nil(204, z.void()),
     M.jsonErr(404, errors.DeleteAgentResponseBody$inboundSchema),
+    M.jsonErr(409, errors.DeleteAgentAgentsResponseBody$inboundSchema),
     M.fail([401, "4XX"]),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });

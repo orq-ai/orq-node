@@ -10,7 +10,7 @@ let value: EvaluatorResponsePython = {
   description: "glaring which athwart deficient woot alongside",
   code: "<value>",
   type: "python_eval",
-  outputType: "categorical",
+  outputType: "decision",
   key: "<key>",
 };
 ```

@@ -14,7 +14,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
  */
 export const EvaluatorResponseTypescriptOutputType = {
   Boolean: "boolean",
-  Categorical: "categorical",
+  Decision: "decision",
   Number: "number",
   String: "string",
 } as const;

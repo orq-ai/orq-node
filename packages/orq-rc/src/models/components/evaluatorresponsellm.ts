@@ -8,13 +8,17 @@ import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import {
+  EvaluatorDecisionQuestion,
+  EvaluatorDecisionQuestion$inboundSchema,
+} from "./evaluatordecisionquestion.js";
 
 /**
  * The type of output expected from the evaluator
  */
 export const OutputType = {
   Boolean: "boolean",
-  Categorical: "categorical",
+  Decision: "decision",
   Number: "number",
   String: "string",
 } as const;
@@ -23,9 +27,18 @@ export const OutputType = {
  */
 export type OutputType = ClosedEnum<typeof OutputType>;
 
-export type CategoricalLabels = {
-  value: string;
-  description?: string | undefined;
+/**
+ * Questions a decision LLM evaluator asks in place of a prompt. Required when `output_type` is `decision`.
+ */
+export type DecisionQuestions = {
+  /**
+   * Questions keyed by name, in the same shape as `questions` in a Decisions request.
+   */
+  questions: { [k: string]: EvaluatorDecisionQuestion };
+  /**
+   * Question names in the order the user arranged them, since `questions` is a map and keeps no order. Lists every question exactly once.
+   */
+  order: Array<string>;
 };
 
 export const Mode = {
@@ -97,9 +110,14 @@ export type EvaluatorResponseLlm = {
    */
   outputType: OutputType;
   repetitions?: number | null | undefined;
-  prompt: string;
-  categories?: Array<string> | null | undefined;
-  categoricalLabels?: Array<CategoricalLabels> | null | undefined;
+  /**
+   * The judge prompt. Required unless `output_type` is `decision`, where each decision question carries its own instructions.
+   */
+  prompt?: string | undefined;
+  /**
+   * Questions a decision LLM evaluator asks in place of a prompt. Required when `output_type` is `decision`.
+   */
+  decisionQuestions?: DecisionQuestions | null | undefined;
   datasetId?: string | null | undefined;
   key: string;
   mode: Mode;
@@ -112,24 +130,24 @@ export const OutputType$inboundSchema: z.ZodNativeEnum<typeof OutputType> =
   /* @__PURE__ */ lazySchema$(() => z.nativeEnum(OutputType));
 
 /** @internal */
-export const CategoricalLabels$inboundSchema: z.ZodType<
-  CategoricalLabels,
+export const DecisionQuestions$inboundSchema: z.ZodType<
+  DecisionQuestions,
   z.ZodTypeDef,
   unknown
 > = /* @__PURE__ */ lazySchema$(() =>
   z.object({
-    value: z.string(),
-    description: z.string().optional(),
+    questions: z.record(EvaluatorDecisionQuestion$inboundSchema),
+    order: z.array(z.string()),
   })
 );
 
-export function categoricalLabelsFromJSON(
+export function decisionQuestionsFromJSON(
   jsonString: string,
-): SafeParseResult<CategoricalLabels, SDKValidationError> {
+): SafeParseResult<DecisionQuestions, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => CategoricalLabels$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CategoricalLabels' from JSON`,
+    (x) => DecisionQuestions$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DecisionQuestions' from JSON`,
   );
 }
 
@@ -323,10 +341,9 @@ export const EvaluatorResponseLlm$inboundSchema: z.ZodType<
     type: z.literal("llm_eval"),
     output_type: OutputType$inboundSchema,
     repetitions: z.nullable(z.number().int()).optional(),
-    prompt: z.string(),
-    categories: z.nullable(z.array(z.string())).optional(),
-    categorical_labels: z.nullable(
-      z.array(z.lazy(() => CategoricalLabels$inboundSchema)),
+    prompt: z.string().optional(),
+    decision_questions: z.nullable(
+      z.lazy(() => DecisionQuestions$inboundSchema),
     ).optional(),
     dataset_id: z.nullable(z.string()).optional(),
     key: z.string(),
@@ -340,7 +357,7 @@ export const EvaluatorResponseLlm$inboundSchema: z.ZodType<
       "project_id": "projectId",
       "guardrail_config": "guardrailConfig",
       "output_type": "outputType",
-      "categorical_labels": "categoricalLabels",
+      "decision_questions": "decisionQuestions",
       "dataset_id": "datasetId",
     });
   })
