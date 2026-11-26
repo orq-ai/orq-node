@@ -41,7 +41,7 @@ export const ReasoningPart$inboundSchema: z.ZodType<
   unknown
 > = /* @__PURE__ */ lazySchema$(() =>
   z.object({
-    _id: z.string().default("reasoning_01m8bnqfmkjjdpf1y4bvdjx5b0"),
+    _id: z.string().default("reasoning_01m8bsznm0emtc1p7yw8nam4v1"),
     metadata: z.record(z.any()).optional(),
     kind: z.literal("reasoning"),
     reasoning: z.string(),
