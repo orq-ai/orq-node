@@ -15,6 +15,14 @@ import {
   ApiKeyBudgetScopeRestResponse$inboundSchema,
 } from "./apikeybudgetscoperestresponse.js";
 import {
+  CategoryBudgetScope,
+  CategoryBudgetScope$inboundSchema,
+} from "./categorybudgetscope.js";
+import {
+  FactoryBudgetScopeRestResponse,
+  FactoryBudgetScopeRestResponse$inboundSchema,
+} from "./factorybudgetscoperestresponse.js";
+import {
   IdentityBudgetScopeRestResponse,
   IdentityBudgetScopeRestResponse$inboundSchema,
 } from "./identitybudgetscoperestresponse.js";
@@ -36,7 +44,7 @@ import {
 } from "./workspacebudgetscope.js";
 
 /**
- * Closed oneof of workspace, project, identity, api_key, provider, model, or agent_deployment. Exactly one variant must be set.
+ * Closed oneof of workspace, project, identity, api_key, provider, model, agent_deployment, factory_scope, or category. Exactly one variant must be set.
  */
 export type BudgetScopeRestResponse = {
   /**
@@ -77,6 +85,14 @@ export type BudgetScopeRestResponse = {
    */
   model?: ModelBudgetScopeRestResponse | undefined;
   agentDeployment?: AgentDeploymentBudgetScopeRestResponse | undefined;
+  /**
+   * Per-factory cap. Matches requests from the factory's work units.
+   */
+  factoryScope?: FactoryBudgetScopeRestResponse | undefined;
+  /**
+   * A separate allowance per entity; an active individual budget takes precedence.
+   */
+  category?: CategoryBudgetScope | undefined;
 };
 
 /** @internal */
@@ -94,6 +110,8 @@ export const BudgetScopeRestResponse$inboundSchema: z.ZodType<
     model: ModelBudgetScopeRestResponse$inboundSchema.optional(),
     agentDeployment: AgentDeploymentBudgetScopeRestResponse$inboundSchema
       .optional(),
+    factoryScope: FactoryBudgetScopeRestResponse$inboundSchema.optional(),
+    category: CategoryBudgetScope$inboundSchema.optional(),
   })
 );
 

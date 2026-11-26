@@ -5,6 +5,7 @@
 import { responsesCompact } from "../funcs/responsesCompact.js";
 import { CreateAcceptEnum, responsesCreate } from "../funcs/responsesCreate.js";
 import { responsesGet } from "../funcs/responsesGet.js";
+import { responsesListInputItems } from "../funcs/responsesListInputItems.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
@@ -57,6 +58,23 @@ export class Responses extends ClientSDK {
     options?: RequestOptions,
   ): Promise<operations.RetrieveResponseResponseBody> {
     return unwrapAsync(responsesGet(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * List response input items
+   *
+   * @remarks
+   * Lists the input items stored for a response, paginated with `after`, `limit` and `order`. Returns the input stored for this response: the full chain for `previous_response_id`, only the new turn for `conversation`, and the compaction item for compacted history. Background responses without stored input return an empty list.
+   */
+  async listInputItems(
+    request: operations.ListResponseInputItemsRequest,
+    options?: RequestOptions,
+  ): Promise<operations.ListResponseInputItemsResponseBody> {
+    return unwrapAsync(responsesListInputItems(
       this,
       request,
       options,

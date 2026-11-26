@@ -10,11 +10,31 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+export const Include = {
+  CodeInterpreterCallOutputs: "code_interpreter_call.outputs",
+  ComputerCallOutputOutputImageUrl: "computer_call_output.output.image_url",
+  FileSearchCallResults: "file_search_call.results",
+  MessageInputImageImageUrl: "message.input_image.image_url",
+  MessageOutputTextLogprobs: "message.output_text.logprobs",
+  ReasoningEncryptedContent: "reasoning.encrypted_content",
+  WebSearchCallActionSources: "web_search_call.action.sources",
+  WebSearchCallResults: "web_search_call.results",
+} as const;
+export type Include = ClosedEnum<typeof Include>;
+
 export type RetrieveResponseRequest = {
   /**
    * The ID of the response to retrieve
    */
   responseId: string;
+  /**
+   * Additional fields to include. Each listed field is omitted unless requested. Accepts the OpenAI includables: code_interpreter_call.outputs, computer_call_output.output.image_url, file_search_call.results, message.input_image.image_url, message.output_text.logprobs, reasoning.encrypted_content, web_search_call.action.sources and web_search_call.results.
+   */
+  include?: Array<Include> | null | undefined;
+  /**
+   * Accepted for OpenAI compatibility and ignored.
+   */
+  includeObfuscation?: boolean | undefined;
 };
 
 export const RetrieveResponseServiceTier = {
@@ -127,8 +147,14 @@ export type RetrieveResponseResponseBody = {
 };
 
 /** @internal */
+export const Include$outboundSchema: z.ZodNativeEnum<typeof Include> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Include));
+
+/** @internal */
 export type RetrieveResponseRequest$Outbound = {
   response_id: string;
+  include?: Array<string> | null | undefined;
+  include_obfuscation?: boolean | undefined;
 };
 
 /** @internal */
@@ -139,9 +165,12 @@ export const RetrieveResponseRequest$outboundSchema: z.ZodType<
 > = /* @__PURE__ */ lazySchema$(() =>
   z.object({
     responseId: z.string(),
+    include: z.nullable(z.array(Include$outboundSchema)).optional(),
+    includeObfuscation: z.boolean().optional(),
   }).transform((v) => {
     return remap$(v, {
       responseId: "response_id",
+      includeObfuscation: "include_obfuscation",
     });
   })
 );

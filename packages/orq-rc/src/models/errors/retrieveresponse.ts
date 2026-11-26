@@ -10,12 +10,102 @@ import { OrqError } from "./orqerror.js";
 /**
  * Response not found.
  */
-export type RetrieveResponseResponseBodyData = {
+export type RetrieveResponseResponsesResponse404ResponseBodyData = {
   error: components.APIError;
 };
 
 /**
  * Response not found.
+ */
+export class RetrieveResponseResponsesResponse404ResponseBody extends OrqError {
+  error: components.APIError;
+
+  /** The original data that was passed to this error instance. */
+  data$: RetrieveResponseResponsesResponse404ResponseBodyData;
+
+  constructor(
+    err: RetrieveResponseResponsesResponse404ResponseBodyData,
+    httpMeta: { response: Response; request: Request; body: string },
+  ) {
+    const message = err.error?.message
+      || `API error occurred: ${JSON.stringify(err)}`;
+    super(message, httpMeta);
+    this.data$ = err;
+    this.error = err.error;
+
+    this.name = "RetrieveResponseResponsesResponse404ResponseBody";
+  }
+}
+
+/**
+ * The API key lacks permission to view responses.
+ */
+export type RetrieveResponseResponsesResponseResponseBodyData = {
+  error: components.APIError;
+};
+
+/**
+ * The API key lacks permission to view responses.
+ */
+export class RetrieveResponseResponsesResponseResponseBody extends OrqError {
+  error: components.APIError;
+
+  /** The original data that was passed to this error instance. */
+  data$: RetrieveResponseResponsesResponseResponseBodyData;
+
+  constructor(
+    err: RetrieveResponseResponsesResponseResponseBodyData,
+    httpMeta: { response: Response; request: Request; body: string },
+  ) {
+    const message = err.error?.message
+      || `API error occurred: ${JSON.stringify(err)}`;
+    super(message, httpMeta);
+    this.data$ = err;
+    this.error = err.error;
+
+    this.name = "RetrieveResponseResponsesResponseResponseBody";
+  }
+}
+
+/**
+ * Missing, invalid, expired or revoked API key.
+ */
+export type RetrieveResponseResponsesResponseBodyData = {
+  error: components.APIError;
+};
+
+/**
+ * Missing, invalid, expired or revoked API key.
+ */
+export class RetrieveResponseResponsesResponseBody extends OrqError {
+  error: components.APIError;
+
+  /** The original data that was passed to this error instance. */
+  data$: RetrieveResponseResponsesResponseBodyData;
+
+  constructor(
+    err: RetrieveResponseResponsesResponseBodyData,
+    httpMeta: { response: Response; request: Request; body: string },
+  ) {
+    const message = err.error?.message
+      || `API error occurred: ${JSON.stringify(err)}`;
+    super(message, httpMeta);
+    this.data$ = err;
+    this.error = err.error;
+
+    this.name = "RetrieveResponseResponsesResponseBody";
+  }
+}
+
+/**
+ * Invalid include value.
+ */
+export type RetrieveResponseResponseBodyData = {
+  error: components.APIError;
+};
+
+/**
+ * Invalid include value.
  */
 export class RetrieveResponseResponseBody extends OrqError {
   error: components.APIError;
@@ -36,6 +126,71 @@ export class RetrieveResponseResponseBody extends OrqError {
     this.name = "RetrieveResponseResponseBody";
   }
 }
+
+/** @internal */
+export const RetrieveResponseResponsesResponse404ResponseBody$inboundSchema:
+  z.ZodType<
+    RetrieveResponseResponsesResponse404ResponseBody,
+    z.ZodTypeDef,
+    unknown
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      error: components.APIError$inboundSchema,
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new RetrieveResponseResponsesResponse404ResponseBody(v, {
+          request: v.request$,
+          response: v.response$,
+          body: v.body$,
+        });
+      })
+  );
+
+/** @internal */
+export const RetrieveResponseResponsesResponseResponseBody$inboundSchema:
+  z.ZodType<
+    RetrieveResponseResponsesResponseResponseBody,
+    z.ZodTypeDef,
+    unknown
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      error: components.APIError$inboundSchema,
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new RetrieveResponseResponsesResponseResponseBody(v, {
+          request: v.request$,
+          response: v.response$,
+          body: v.body$,
+        });
+      })
+  );
+
+/** @internal */
+export const RetrieveResponseResponsesResponseBody$inboundSchema: z.ZodType<
+  RetrieveResponseResponsesResponseBody,
+  z.ZodTypeDef,
+  unknown
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    error: components.APIError$inboundSchema,
+    request$: z.instanceof(Request),
+    response$: z.instanceof(Response),
+    body$: z.string(),
+  })
+    .transform((v) => {
+      return new RetrieveResponseResponsesResponseBody(v, {
+        request: v.request$,
+        response: v.response$,
+        body: v.body$,
+      });
+    })
+);
 
 /** @internal */
 export const RetrieveResponseResponseBody$inboundSchema: z.ZodType<

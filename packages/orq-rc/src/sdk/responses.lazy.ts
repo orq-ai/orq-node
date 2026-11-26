@@ -64,6 +64,24 @@ const responsesGet =
       )).then((module) => module.responsesGet(...args).$inspect()),
     )) as typeof import("../funcs/responsesGet.js").responsesGet;
 
+let responsesListInputItems$module:
+  | Promise<typeof import("../funcs/responsesListInputItems.js")>
+  | undefined;
+const responsesListInputItems =
+  ((
+    ...args: Parameters<
+      typeof import("../funcs/responsesListInputItems.js").responsesListInputItems
+    >
+  ) =>
+    new APIPromise(
+      (responsesListInputItems$module ??= import(
+        "../funcs/responsesListInputItems.js"
+      ).catch((error: unknown) => {
+        responsesListInputItems$module = undefined;
+        throw error;
+      })).then((module) => module.responsesListInputItems(...args).$inspect()),
+    )) as typeof import("../funcs/responsesListInputItems.js").responsesListInputItems;
+
 export class Responses extends ClientSDK {
   /**
    * Compact response
@@ -110,6 +128,23 @@ export class Responses extends ClientSDK {
     options?: RequestOptions,
   ): Promise<operations.RetrieveResponseResponseBody> {
     return unwrapAsync(responsesGet(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * List response input items
+   *
+   * @remarks
+   * Lists the input items stored for a response, paginated with `after`, `limit` and `order`. Returns the input stored for this response: the full chain for `previous_response_id`, only the new turn for `conversation`, and the compaction item for compacted history. Background responses without stored input return an empty list.
+   */
+  async listInputItems(
+    request: operations.ListResponseInputItemsRequest,
+    options?: RequestOptions,
+  ): Promise<operations.ListResponseInputItemsResponseBody> {
+    return unwrapAsync(responsesListInputItems(
       this,
       request,
       options,

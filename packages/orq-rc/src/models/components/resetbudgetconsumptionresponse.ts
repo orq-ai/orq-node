@@ -13,10 +13,7 @@ import {
 
 export type ResetBudgetConsumptionResponse = {
   /**
-   * Budget after reset. The record itself is unchanged; only counters
-   *
-   * @remarks
-   *  were cleared.
+   * Budget after reset; category-wide resets advance its internal counter generation.
    */
   budget?: BudgetRestResponse | undefined;
 };

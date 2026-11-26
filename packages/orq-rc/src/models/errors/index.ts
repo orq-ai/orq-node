@@ -30,6 +30,7 @@ export * from "./honoapierror.js";
 export * from "./httpclienterrors.js";
 export * from "./knowledgeapierror.js";
 export * from "./listbatches.js";
+export * from "./listresponseinputitems.js";
 export * from "./orqerror.js";
 export * from "./postv2feedback.js";
 export * from "./postv2feedbackremove.js";

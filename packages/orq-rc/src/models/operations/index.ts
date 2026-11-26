@@ -188,6 +188,7 @@ export * from "./listknowledgebases.js";
 export * from "./listlogfacetvalues.js";
 export * from "./listmodels.js";
 export * from "./listpromptversions.js";
+export * from "./listresponseinputitems.js";
 export * from "./listtracelogs.js";
 export * from "./managementkeydelete.js";
 export * from "./managementkeyget.js";

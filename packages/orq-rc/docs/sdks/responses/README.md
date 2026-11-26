@@ -7,6 +7,7 @@
 * [compact](#compact) - Compact response
 * [create](#create) - Create response
 * [get](#get) - Retrieve response
+* [listInputItems](#listinputitems) - List response input items
 
 ## compact
 
@@ -247,7 +248,87 @@ run();
 
 ### Errors
 
-| Error Type                          | Status Code                         | Content Type                        |
-| ----------------------------------- | ----------------------------------- | ----------------------------------- |
-| errors.RetrieveResponseResponseBody | 404                                 | application/json                    |
-| errors.APIError                     | 4XX, 5XX                            | \*/\*                               |
+| Error Type                                              | Status Code                                             | Content Type                                            |
+| ------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- |
+| errors.RetrieveResponseResponseBody                     | 400                                                     | application/json                                        |
+| errors.RetrieveResponseResponsesResponseBody            | 401                                                     | application/json                                        |
+| errors.RetrieveResponseResponsesResponseResponseBody    | 403                                                     | application/json                                        |
+| errors.RetrieveResponseResponsesResponse404ResponseBody | 404                                                     | application/json                                        |
+| errors.APIError                                         | 4XX, 5XX                                                | \*/\*                                                   |
+
+## listInputItems
+
+Lists the input items stored for a response, paginated with `after`, `limit` and `order`. Returns the input stored for this response: the full chain for `previous_response_id`, only the new turn for `conversation`, and the compaction item for compacted history. Background responses without stored input return an empty list.
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="list-response-input-items" method="get" path="/v3/router/responses/{response_id}/input_items" -->
+```typescript
+import { Orq } from "@orq-ai/node";
+
+const orq = new Orq({
+  apiKey: process.env["ORQ_API_KEY"] ?? "",
+});
+
+async function run() {
+  const result = await orq.responses.listInputItems({
+    responseId: "<id>",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { OrqCore } from "@orq-ai/node/core.js";
+import { responsesListInputItems } from "@orq-ai/node/funcs/responsesListInputItems.js";
+
+// Use `OrqCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const orq = new OrqCore({
+  apiKey: process.env["ORQ_API_KEY"] ?? "",
+});
+
+async function run() {
+  const res = await responsesListInputItems(orq, {
+    responseId: "<id>",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("responsesListInputItems failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.ListResponseInputItemsRequest](../../models/operations/listresponseinputitemsrequest.md)                                                                           | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[operations.ListResponseInputItemsResponseBody](../../models/operations/listresponseinputitemsresponsebody.md)\>**
+
+### Errors
+
+| Error Type                                                    | Status Code                                                   | Content Type                                                  |
+| ------------------------------------------------------------- | ------------------------------------------------------------- | ------------------------------------------------------------- |
+| errors.ListResponseInputItemsResponseBody                     | 400                                                           | application/json                                              |
+| errors.ListResponseInputItemsResponsesResponseBody            | 401                                                           | application/json                                              |
+| errors.ListResponseInputItemsResponsesResponseResponseBody    | 403                                                           | application/json                                              |
+| errors.ListResponseInputItemsResponsesResponse404ResponseBody | 404                                                           | application/json                                              |
+| errors.APIError                                               | 4XX, 5XX                                                      | \*/\*                                                         |

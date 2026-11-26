@@ -1,6 +1,6 @@
 # RetrieveResponseResponseBody
 
-Response not found.
+Invalid include value.
 
 ## Example Usage
 

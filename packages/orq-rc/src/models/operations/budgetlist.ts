@@ -59,6 +59,10 @@ export type BudgetListRequest = {
    * Field used to order the list. Unset orders by most-recently-updated.
    */
   sortBy?: components.BudgetSortField | undefined;
+  /**
+   * True lists budget profiles, false lists individual/workspace/custom budgets.
+   */
+  isProfile?: boolean | undefined;
 };
 
 /** @internal */
@@ -72,6 +76,7 @@ export type BudgetListRequest$Outbound = {
   period?: Array<string> | undefined;
   query?: string | undefined;
   sort_by?: string | undefined;
+  is_profile?: boolean | undefined;
 };
 
 /** @internal */
@@ -90,6 +95,7 @@ export const BudgetListRequest$outboundSchema: z.ZodType<
     period: z.array(components.BudgetPeriod$outboundSchema).optional(),
     query: z.string().optional(),
     sortBy: components.BudgetSortField$outboundSchema.optional(),
+    isProfile: z.boolean().optional(),
   }).transform((v) => {
     return remap$(v, {
       startingAfter: "starting_after",
@@ -98,6 +104,7 @@ export const BudgetListRequest$outboundSchema: z.ZodType<
       scopeTargetId: "scope_target_id",
       isActive: "is_active",
       sortBy: "sort_by",
+      isProfile: "is_profile",
     });
   })
 );

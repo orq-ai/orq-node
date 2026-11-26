@@ -44,6 +44,7 @@ export type ModelUpdateOpenAILikeRequest = {
  * OpenAI-like model updated successfully
  */
 export type ModelUpdateOpenAILikeResponseBody = {
+  autoModelPool?: components.AutoModelPool | undefined;
   configuration: components.ModelConfigurationResponse;
   created: string;
   description: string | null;
@@ -206,6 +207,7 @@ export const ModelUpdateOpenAILikeResponseBody$inboundSchema: z.ZodType<
   unknown
 > = /* @__PURE__ */ lazySchema$(() =>
   z.object({
+    auto_model_pool: components.AutoModelPool$inboundSchema.optional(),
     configuration: components.ModelConfigurationResponse$inboundSchema,
     created: z.string(),
     description: z.nullable(z.string()),
@@ -239,6 +241,7 @@ export const ModelUpdateOpenAILikeResponseBody$inboundSchema: z.ZodType<
     updated: z.string(),
   }).transform((v) => {
     return remap$(v, {
+      "auto_model_pool": "autoModelPool",
       "display_name": "displayName",
       "docs_url": "docsUrl",
       "enabled_for_endpoints": "enabledForEndpoints",

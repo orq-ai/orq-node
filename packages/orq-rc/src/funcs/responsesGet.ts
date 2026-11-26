@@ -3,7 +3,7 @@
  */
 
 import { OrqCore } from "../core.js";
-import { encodeSimple } from "../lib/encodings.js";
+import { encodeFormQuery, encodeSimple } from "../lib/encodings.js";
 import { matchStatusCode } from "../lib/http.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
@@ -39,6 +39,9 @@ export function responsesGet(
   Result<
     operations.RetrieveResponseResponseBody,
     | errors.RetrieveResponseResponseBody
+    | errors.RetrieveResponseResponsesResponseBody
+    | errors.RetrieveResponseResponsesResponseResponseBody
+    | errors.RetrieveResponseResponsesResponse404ResponseBody
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -65,6 +68,9 @@ async function $do(
     Result<
       operations.RetrieveResponseResponseBody,
       | errors.RetrieveResponseResponseBody
+      | errors.RetrieveResponseResponsesResponseBody
+      | errors.RetrieveResponseResponsesResponseResponseBody
+      | errors.RetrieveResponseResponsesResponse404ResponseBody
       | OrqError
       | ResponseValidationError
       | ConnectionError
@@ -103,6 +109,11 @@ async function $do(
   }
   const path = pathResult.value;
 
+  const query = encodeFormQuery({
+    "include": payload.include,
+    "include_obfuscation": payload.include_obfuscation,
+  }, { explode: false });
+
   const headers = new Headers(compactMap({
     Accept: "application/json",
   }));
@@ -132,6 +143,7 @@ async function $do(
     baseURL: options?.serverURL,
     path: path,
     headers: headers,
+    query: query,
     body: body,
     userAgent: client._options.userAgent,
     timeoutMs: options?.timeoutMs || client._options.timeoutMs || 600000,
@@ -160,6 +172,9 @@ async function $do(
   const [result] = await M.match<
     operations.RetrieveResponseResponseBody,
     | errors.RetrieveResponseResponseBody
+    | errors.RetrieveResponseResponsesResponseBody
+    | errors.RetrieveResponseResponsesResponseResponseBody
+    | errors.RetrieveResponseResponsesResponse404ResponseBody
     | OrqError
     | ResponseValidationError
     | ConnectionError
@@ -170,7 +185,16 @@ async function $do(
     | SDKValidationError
   >(
     M.json(200, operations.RetrieveResponseResponseBody$inboundSchema),
-    M.jsonErr(404, errors.RetrieveResponseResponseBody$inboundSchema),
+    M.jsonErr(400, errors.RetrieveResponseResponseBody$inboundSchema),
+    M.jsonErr(401, errors.RetrieveResponseResponsesResponseBody$inboundSchema),
+    M.jsonErr(
+      403,
+      errors.RetrieveResponseResponsesResponseResponseBody$inboundSchema,
+    ),
+    M.jsonErr(
+      404,
+      errors.RetrieveResponseResponsesResponse404ResponseBody$inboundSchema,
+    ),
     M.fail("4XX"),
     M.fail("5XX"),
   )(response, req, { extraFields: responseFields });

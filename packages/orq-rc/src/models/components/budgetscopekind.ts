@@ -14,10 +14,16 @@ export const BudgetScopeKind = {
   BudgetScopeKindProvider: "BUDGET_SCOPE_KIND_PROVIDER",
   BudgetScopeKindModel: "BUDGET_SCOPE_KIND_MODEL",
   BudgetScopeKindAgentDeployment: "BUDGET_SCOPE_KIND_AGENT_DEPLOYMENT",
+  BudgetScopeKindFactoryScope: "BUDGET_SCOPE_KIND_FACTORY_SCOPE",
+  BudgetScopeKindCategory: "BUDGET_SCOPE_KIND_CATEGORY",
 } as const;
 export type BudgetScopeKind = ClosedEnum<typeof BudgetScopeKind>;
 
 /** @internal */
-export const BudgetScopeKind$outboundSchema: z.ZodNativeEnum<
+export const BudgetScopeKind$inboundSchema: z.ZodNativeEnum<
   typeof BudgetScopeKind
 > = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(BudgetScopeKind));
+/** @internal */
+export const BudgetScopeKind$outboundSchema: z.ZodNativeEnum<
+  typeof BudgetScopeKind
+> = BudgetScopeKind$inboundSchema;

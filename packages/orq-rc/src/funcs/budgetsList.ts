@@ -96,6 +96,7 @@ async function $do(
   const query = encodeFormQuery({
     "ending_before": payload?.ending_before,
     "is_active": payload?.is_active,
+    "is_profile": payload?.is_profile,
     "limit": payload?.limit,
     "period": payload?.period,
     "query": payload?.query,

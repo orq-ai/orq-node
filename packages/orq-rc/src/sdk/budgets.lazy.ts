@@ -132,7 +132,7 @@ export class Budgets extends ClientSDK {
    * Create a new budget
    *
    * @remarks
-   * Creates a new budget in the workspace. Exactly one scope variant must be set (workspace / project / identity / api_key / provider / model). At least one of `limits.amount`, `limits.token_limit`, or `rate_limit.requests_per_minute` MUST be provided. Uniqueness is enforced across (workspace_id, scope_kind, scope_target_id). Requires a Management Key with the Budgets permission; project-scoped API keys cannot manage budgets.
+   * Creates a new budget in the workspace. Exactly one scope variant must be set (workspace / project / identity / api_key / provider / model / factory_scope / category). A category default applies independently to every entity of that category, including future entities; active individual budgets override the default. Category defaults do not support the one-time period. At least one of `limits.amount`, `limits.token_limit`, or `rate_limit.requests_per_minute` MUST be provided. Uniqueness is enforced across (workspace_id, scope_kind, scope_target_id). Requires a Management Key with the Budgets permission; project-scoped API keys cannot manage budgets.
    */
   async create(
     request: components.CreateBudgetRequest,
@@ -200,7 +200,7 @@ export class Budgets extends ClientSDK {
    * Reset budget consumption
    *
    * @remarks
-   * Clears the current-period cost, token, and request counters for the budget. The budget record itself is preserved. Requires a Management Key with the Budgets permission; project-scoped API keys cannot manage budgets.
+   * Clears the current-period cost, token, and request counters for the budget. For a category default, omit scope_target_id to reset every entity, or supply it to reset only that entity. The budget configuration is preserved. Requires a Management Key with the Budgets permission; project-scoped API keys cannot manage budgets.
    */
   async resetConsumption(
     request: operations.BudgetResetConsumptionRequest,

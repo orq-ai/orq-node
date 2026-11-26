@@ -7,6 +7,7 @@ import { remap as remap$ } from "../../lib/primitives.js";
 import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import { AutoModelPool, AutoModelPool$inboundSchema } from "./automodelpool.js";
 import {
   ModelConfigurationResponse,
   ModelConfigurationResponse$inboundSchema,
@@ -22,6 +23,7 @@ import {
 } from "./modelsharingconfig.js";
 
 export type ModelDocument = {
+  autoModelPool?: AutoModelPool | undefined;
   configuration: ModelConfigurationResponse;
   created: string;
   description: string | null;
@@ -68,6 +70,7 @@ export const ModelDocument$inboundSchema: z.ZodType<
   unknown
 > = /* @__PURE__ */ lazySchema$(() =>
   z.object({
+    auto_model_pool: AutoModelPool$inboundSchema.optional(),
     configuration: ModelConfigurationResponse$inboundSchema,
     created: z.string(),
     description: z.nullable(z.string()),
@@ -99,6 +102,7 @@ export const ModelDocument$inboundSchema: z.ZodType<
     updated: z.string(),
   }).transform((v) => {
     return remap$(v, {
+      "auto_model_pool": "autoModelPool",
       "display_name": "displayName",
       "docs_url": "docsUrl",
       "enabled_for_endpoints": "enabledForEndpoints",

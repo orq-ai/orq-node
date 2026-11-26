@@ -20,6 +20,18 @@ import {
   ApiKeyBudgetScope$outboundSchema,
 } from "./apikeybudgetscope.js";
 import {
+  CategoryBudgetScope,
+  CategoryBudgetScope$inboundSchema,
+  CategoryBudgetScope$Outbound,
+  CategoryBudgetScope$outboundSchema,
+} from "./categorybudgetscope.js";
+import {
+  FactoryBudgetScope,
+  FactoryBudgetScope$inboundSchema,
+  FactoryBudgetScope$Outbound,
+  FactoryBudgetScope$outboundSchema,
+} from "./factorybudgetscope.js";
+import {
   IdentityBudgetScope,
   IdentityBudgetScope$inboundSchema,
   IdentityBudgetScope$Outbound,
@@ -51,7 +63,7 @@ import {
 } from "./workspacebudgetscope.js";
 
 /**
- * Closed oneof of workspace, project, identity, api_key, provider, model, or agent_deployment. Exactly one variant must be set.
+ * Closed oneof of workspace, project, identity, api_key, provider, model, agent_deployment, factory_scope, or category. Exactly one variant must be set.
  */
 export type BudgetScope = {
   /**
@@ -92,6 +104,14 @@ export type BudgetScope = {
    */
   model?: ModelBudgetScope | undefined;
   agentDeployment?: AgentDeploymentBudgetScope | undefined;
+  /**
+   * Per-factory cap. Matches requests from the factory's work units.
+   */
+  factoryScope?: FactoryBudgetScope | undefined;
+  /**
+   * A separate allowance per entity; an active individual budget takes precedence.
+   */
+  category?: CategoryBudgetScope | undefined;
 };
 
 /** @internal */
@@ -108,10 +128,13 @@ export const BudgetScope$inboundSchema: z.ZodType<
     provider: ProviderBudgetScope$inboundSchema.optional(),
     model: ModelBudgetScope$inboundSchema.optional(),
     agent_deployment: AgentDeploymentBudgetScope$inboundSchema.optional(),
+    factory_scope: FactoryBudgetScope$inboundSchema.optional(),
+    category: CategoryBudgetScope$inboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
       "api_key": "apiKey",
       "agent_deployment": "agentDeployment",
+      "factory_scope": "factoryScope",
     });
   })
 );
@@ -124,6 +147,8 @@ export type BudgetScope$Outbound = {
   provider?: ProviderBudgetScope$Outbound | undefined;
   model?: ModelBudgetScope$Outbound | undefined;
   agent_deployment?: AgentDeploymentBudgetScope$Outbound | undefined;
+  factory_scope?: FactoryBudgetScope$Outbound | undefined;
+  category?: CategoryBudgetScope$Outbound | undefined;
 };
 
 /** @internal */
@@ -140,10 +165,13 @@ export const BudgetScope$outboundSchema: z.ZodType<
     provider: ProviderBudgetScope$outboundSchema.optional(),
     model: ModelBudgetScope$outboundSchema.optional(),
     agentDeployment: AgentDeploymentBudgetScope$outboundSchema.optional(),
+    factoryScope: FactoryBudgetScope$outboundSchema.optional(),
+    category: CategoryBudgetScope$outboundSchema.optional(),
   }).transform((v) => {
     return remap$(v, {
       apiKey: "api_key",
       agentDeployment: "agent_deployment",
+      factoryScope: "factory_scope",
     });
   })
 );

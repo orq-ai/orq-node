@@ -3,19 +3,35 @@
  */
 
 import * as z from "zod/v3";
+import { remap as remap$ } from "../../lib/primitives.js";
 import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 
-export type ResetBudgetConsumptionRequest = {};
+export type ResetBudgetConsumptionRequest = {
+  /**
+   * Category entity target; omit on reset to reset every entity.
+   */
+  scopeTargetId?: string | undefined;
+};
 
 /** @internal */
-export type ResetBudgetConsumptionRequest$Outbound = {};
+export type ResetBudgetConsumptionRequest$Outbound = {
+  scope_target_id?: string | undefined;
+};
 
 /** @internal */
 export const ResetBudgetConsumptionRequest$outboundSchema: z.ZodType<
   ResetBudgetConsumptionRequest$Outbound,
   z.ZodTypeDef,
   ResetBudgetConsumptionRequest
-> = /* @__PURE__ */ lazySchema$(() => z.object({}));
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    scopeTargetId: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      scopeTargetId: "scope_target_id",
+    });
+  })
+);
 
 export function resetBudgetConsumptionRequestToJSON(
   resetBudgetConsumptionRequest: ResetBudgetConsumptionRequest,

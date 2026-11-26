@@ -8,6 +8,12 @@ import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
+  AutoRouterPreset,
+  AutoRouterPreset$inboundSchema,
+  AutoRouterPreset$Outbound,
+  AutoRouterPreset$outboundSchema,
+} from "./autorouterpreset.js";
+import {
   AutoRouterV2Config,
   AutoRouterV2Config$inboundSchema,
   AutoRouterV2Config$Outbound,
@@ -37,6 +43,7 @@ export type AutoRouterConfig = {
    * Models the router chooses from, written as provider/model_id.
    */
   models?: Array<string> | null | undefined;
+  preset?: AutoRouterPreset | undefined;
   /**
    * Routing preference: quality, balanced, or cost.
    */
@@ -64,6 +71,7 @@ export const AutoRouterConfig$inboundSchema: z.ZodType<
     economical_model: z.string().optional(),
     id: z.string().optional(),
     models: z.nullable(z.array(z.string())).optional(),
+    preset: AutoRouterPreset$inboundSchema.optional(),
     profile: z.string().optional(),
     session_affinity: SessionAffinityConfig$inboundSchema.optional(),
     strong_model: z.string().optional(),
@@ -84,6 +92,7 @@ export type AutoRouterConfig$Outbound = {
   economical_model?: string | undefined;
   id?: string | undefined;
   models?: Array<string> | null | undefined;
+  preset?: AutoRouterPreset$Outbound | undefined;
   profile?: string | undefined;
   session_affinity?: SessionAffinityConfig$Outbound | undefined;
   strong_model?: string | undefined;
@@ -102,6 +111,7 @@ export const AutoRouterConfig$outboundSchema: z.ZodType<
     economicalModel: z.string().optional(),
     id: z.string().optional(),
     models: z.nullable(z.array(z.string())).optional(),
+    preset: AutoRouterPreset$outboundSchema.optional(),
     profile: z.string().optional(),
     sessionAffinity: SessionAffinityConfig$outboundSchema.optional(),
     strongModel: z.string().optional(),
