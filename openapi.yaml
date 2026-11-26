@@ -2592,7 +2592,7 @@ components:
           properties:
             _id:
               type: "string"
-              default: "reasoning_01m8abfnzh5p93ztk3wk0vv0q2"
+              default: "reasoning_01m8b276jeazne2hb6hy232yzc"
               description: "Unique identifier for the part. Format: reasoning_{ulid} (e.g., reasoning_01hxyz...)"
               example: "reasoning_01hxyz123abc"
             kind:
@@ -12197,6 +12197,52 @@ components:
         - "MESSAGES_SOURCE_PROMPT_CONFIG"
         - "MESSAGES_SOURCE_MESSAGES_COLUMN"
         - "MESSAGES_SOURCE_COMBINED"
+    AutoModelPool:
+      additionalProperties: false
+      properties:
+        intelligence_index:
+          format: "double"
+          type: "number"
+        models:
+          items:
+            $ref: "#/components/schemas/AutoModelPoolSeat"
+          type:
+            - "array"
+            - "null"
+        pool_status:
+          type: "string"
+        selected_model:
+          type: "string"
+      required:
+        - "pool_status"
+        - "models"
+      type: "object"
+    AutoModelPoolSeat:
+      additionalProperties: false
+      properties:
+        band:
+          type: "string"
+        input_cost:
+          format: "double"
+          type:
+            - "number"
+            - "null"
+        intelligence_index:
+          format: "double"
+          type: "number"
+        model:
+          type: "string"
+        output_cost:
+          format: "double"
+          type:
+            - "number"
+            - "null"
+      required:
+        - "model"
+        - "input_cost"
+        - "output_cost"
+        - "intelligence_index"
+      type: "object"
     AutoRouterConfig:
       additionalProperties: false
       properties:
@@ -12216,6 +12262,9 @@ components:
           type:
             - "array"
             - "null"
+        preset:
+          $ref: "#/components/schemas/AutoRouterPreset"
+          description: "System auto model preset whose pool is derived per request; set only on orq-provided routers such as orq/auto."
         profile:
           description: "Routing preference: quality, balanced, or cost."
           type: "string"
@@ -12231,6 +12280,28 @@ components:
         version:
           description: "Version of the Smart Router configuration format."
           type: "string"
+      type: "object"
+    AutoRouterPreset:
+      additionalProperties: false
+      properties:
+        constraint:
+          type: "string"
+        min_intelligence_index:
+          format: "double"
+          type: "number"
+        min_intelligence_percentile:
+          format: "double"
+          type: "number"
+        name:
+          type: "string"
+        policy:
+          type: "string"
+        profile:
+          type: "string"
+      required:
+        - "name"
+        - "policy"
+        - "constraint"
       type: "object"
     AutoRouterV2Config:
       additionalProperties: false
@@ -12863,6 +12934,8 @@ components:
     ModelDocument:
       additionalProperties: false
       properties:
+        auto_model_pool:
+          $ref: "#/components/schemas/AutoModelPool"
         configuration:
           $ref: "#/components/schemas/ModelConfigurationResponse"
         created:
@@ -15389,6 +15462,8 @@ components:
         - "BUDGET_SCOPE_KIND_PROVIDER"
         - "BUDGET_SCOPE_KIND_MODEL"
         - "BUDGET_SCOPE_KIND_AGENT_DEPLOYMENT"
+        - "BUDGET_SCOPE_KIND_FACTORY_SCOPE"
+        - "BUDGET_SCOPE_KIND_CATEGORY"
     BudgetSortField:
       type: "string"
       enum:
@@ -15509,14 +15584,17 @@ components:
           description: "Updated budget."
     ResetBudgetConsumptionRequest:
       type: "object"
-      properties: {}
+      properties:
+        scope_target_id:
+          type: "string"
+          description: "Category entity target; omit on reset to reset every entity."
     ResetBudgetConsumptionResponse:
       type: "object"
       properties:
         budget:
           allOf:
             - $ref: "#/components/schemas/BudgetRestResponse"
-          description: "Budget after reset. The record itself is unchanged; only counters\n were cleared."
+          description: "Budget after reset; category-wide resets advance its internal counter generation."
     Budget:
       required:
         - "budget_id"
@@ -15577,7 +15655,11 @@ components:
           $ref: "#/components/schemas/ModelBudgetScope"
         agent_deployment:
           $ref: "#/components/schemas/AgentDeploymentBudgetScope"
-      description: "Closed oneof of workspace, project, identity, api_key, provider, model, or agent_deployment. Exactly one variant must be set."
+        factory_scope:
+          $ref: "#/components/schemas/FactoryBudgetScope"
+        category:
+          $ref: "#/components/schemas/CategoryBudgetScope"
+      description: "Closed oneof of workspace, project, identity, api_key, provider, model, agent_deployment, factory_scope, or category. Exactly one variant must be set."
     BudgetMatch:
       type: "object"
       properties:
@@ -15681,6 +15763,20 @@ components:
       properties:
         deployment_id:
           type: "string"
+    FactoryBudgetScope:
+      required:
+        - "factory_id"
+      type: "object"
+      properties:
+        factory_id:
+          type: "string"
+      description: "Per-factory cap. Matches requests from the factory's work units."
+    CategoryBudgetScope:
+      type: "object"
+      properties:
+        category:
+          $ref: "#/components/schemas/BudgetScopeKind"
+      description: "A separate allowance per entity; an active individual budget takes precedence."
     BudgetAlertDimension:
       type: "string"
       enum:
@@ -15747,7 +15843,11 @@ components:
           $ref: "#/components/schemas/ModelBudgetScopeRestResponse"
         agentDeployment:
           $ref: "#/components/schemas/AgentDeploymentBudgetScopeRestResponse"
-      description: "Closed oneof of workspace, project, identity, api_key, provider, model, or agent_deployment. Exactly one variant must be set."
+        factoryScope:
+          $ref: "#/components/schemas/FactoryBudgetScopeRestResponse"
+        category:
+          $ref: "#/components/schemas/CategoryBudgetScope"
+      description: "Closed oneof of workspace, project, identity, api_key, provider, model, agent_deployment, factory_scope, or category. Exactly one variant must be set."
     BudgetLimitsRestResponse:
       type: "object"
       properties:
@@ -15821,6 +15921,14 @@ components:
       properties:
         deploymentId:
           type: "string"
+    FactoryBudgetScopeRestResponse:
+      required:
+        - "factoryId"
+      type: "object"
+      properties:
+        factoryId:
+          type: "string"
+      description: "Per-factory cap. Matches requests from the factory's work units."
     ListEnvironmentsResponse:
       required:
         - "object"
@@ -30007,7 +30115,7 @@ paths:
                                 type: "string"
                                 format: "ulid"
                                 pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                                default: "01M8ABFNYMRZWTKMEW1B1GGF8A"
+                                default: "01M8B276HYAR3KQS0DG5NX9JJW"
                                 readOnly: true
                                 description: "The unique identifier of the playground knowledge base"
                               knowledge_id:
@@ -39463,7 +39571,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01M8ABFP0QVPD0CXD675EMGKWC"
+                                          default: "01M8B276K4V5X279WG6Z2NP7B6"
                                         name:
                                           type: "string"
                                         description:
@@ -41091,7 +41199,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01M8ABFP14DN1ATH23QDRZCDT3"
+                                          default: "01M8B276KBDP9GYMK5JVV4DKEX"
                                         name:
                                           type: "string"
                                         description:
@@ -50158,7 +50266,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M8ABFP25KA8RG7FE8A34TG7P"
+                              default: "tool_01M8B276KW5JTP7HMZ3Q0A40QT"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -50259,7 +50367,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M8ABFP267VBWHBKNX803KABF"
+                              default: "tool_01M8B276KXRHHSR3YXEKB0WACA"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -50362,7 +50470,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M8ABFP29M637GAHTQA8V2XNE"
+                              default: "tool_01M8B276KXXSFJCM5V3FN5NSDS"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -50506,7 +50614,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M8ABFP2AA3ZD0K35EAJKHG1A"
+                              default: "tool_01M8B276KXXEWZ6S0XERHWV524"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -50998,7 +51106,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M8ABFP2D7VMS9G4WK8Z3J52D"
+                        default: "tool_01M8B276M2XEC9DVDQXG1BDSPT"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -51099,7 +51207,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M8ABFP2DSQCG6NY42TQFSMTP"
+                        default: "tool_01M8B276M2FJTVFDMDT4WD23PQ"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -51202,7 +51310,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M8ABFP2E0GEQ6FRBPTGJV9DV"
+                        default: "tool_01M8B276M31D0FHXXB9EJ5YPD8"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -51346,7 +51454,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M8ABFP2E654AH0QZQ6E99R0E"
+                        default: "tool_01M8B276M326QR919NMZ59ZNDY"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -51851,7 +51959,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M8ABFP2GWXQ51EM1PJ5X3YZZ"
+                        default: "tool_01M8B276M4N1CRBDYRP464CHWD"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -51952,7 +52060,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M8ABFP2G7J9XWJ91T74NWK7Q"
+                        default: "tool_01M8B276M42YMH227QGYCCGMSM"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -52055,7 +52163,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M8ABFP2G199QW57M52TZ0M3B"
+                        default: "tool_01M8B276M4406GTD9CEFWVK7Z5"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -52199,7 +52307,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M8ABFP2HXE4X20Y5JDJDB7BK"
+                        default: "tool_01M8B276M4ERDA5DSAQ1MS16XR"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -52368,7 +52476,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M8ABFP2NP452W46SNS0KJNB9"
+                        default: "tool_01M8B276M6P21M0WQY6AA7WGT8"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -52469,7 +52577,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M8ABFP2NN8QPVA5B56FAMSGS"
+                        default: "tool_01M8B276M768CEQ36J8QJ5GMK0"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -52572,7 +52680,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M8ABFP2NK2NMB7G0G0EDGYMH"
+                        default: "tool_01M8B276M7BJAN1TAVVQ9N3EQ8"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -52716,7 +52824,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M8ABFP2PG4753QM44B2S9EVE"
+                        default: "tool_01M8B276M7W85AC075QVVJ6846"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -69611,6 +69719,8 @@ paths:
               schema:
                 additionalProperties: false
                 properties:
+                  auto_model_pool:
+                    $ref: "#/components/schemas/AutoModelPool"
                   configuration:
                     $ref: "#/components/schemas/ModelConfigurationResponse"
                   created:
@@ -69841,6 +69951,8 @@ paths:
               schema:
                 additionalProperties: false
                 properties:
+                  auto_model_pool:
+                    $ref: "#/components/schemas/AutoModelPool"
                   configuration:
                     $ref: "#/components/schemas/ModelConfigurationResponse"
                   created:
@@ -70116,6 +70228,8 @@ paths:
               schema:
                 additionalProperties: false
                 properties:
+                  auto_model_pool:
+                    $ref: "#/components/schemas/AutoModelPool"
                   configuration:
                     $ref: "#/components/schemas/ModelConfigurationResponse"
                   created:
@@ -70465,6 +70579,8 @@ paths:
               schema:
                 additionalProperties: false
                 properties:
+                  auto_model_pool:
+                    $ref: "#/components/schemas/AutoModelPool"
                   configuration:
                     $ref: "#/components/schemas/ModelConfigurationResponse"
                   created:
@@ -70674,6 +70790,8 @@ paths:
               schema:
                 additionalProperties: false
                 properties:
+                  auto_model_pool:
+                    $ref: "#/components/schemas/AutoModelPool"
                   configuration:
                     $ref: "#/components/schemas/ModelConfigurationResponse"
                   created:
@@ -70886,6 +71004,8 @@ paths:
               schema:
                 additionalProperties: false
                 properties:
+                  auto_model_pool:
+                    $ref: "#/components/schemas/AutoModelPool"
                   configuration:
                     $ref: "#/components/schemas/ModelConfigurationResponse"
                   created:
@@ -71096,6 +71216,8 @@ paths:
               schema:
                 additionalProperties: false
                 properties:
+                  auto_model_pool:
+                    $ref: "#/components/schemas/AutoModelPool"
                   configuration:
                     $ref: "#/components/schemas/ModelConfigurationResponse"
                   created:
@@ -71277,6 +71399,8 @@ paths:
           description: "Model disabled"
         "400":
           description: "Invalid request"
+        "409":
+          description: "System auto models cannot be disabled"
         "500":
           description: "Internal server error"
       summary: "Disable model for workspace"
@@ -73245,6 +73369,11 @@ paths:
           description: "Field used to order the list. Unset orders by most-recently-updated."
           schema:
             $ref: "#/components/schemas/BudgetSortField"
+        - name: "is_profile"
+          in: "query"
+          description: "True lists budget profiles, false lists individual/workspace/custom budgets."
+          schema:
+            type: "boolean"
       responses:
         "200":
           description: "OK"
@@ -73279,7 +73408,7 @@ paths:
       tags:
         - "Budgets"
       summary: "Create a new budget"
-      description: "Creates a new budget in the workspace. Exactly one scope variant must be set (workspace / project / identity / api_key / provider / model). At least one of `limits.amount`, `limits.token_limit`, or `rate_limit.requests_per_minute` MUST be provided. Uniqueness is enforced across (workspace_id, scope_kind, scope_target_id). Requires a Management Key with the Budgets permission; project-scoped API keys cannot manage budgets."
+      description: "Creates a new budget in the workspace. Exactly one scope variant must be set (workspace / project / identity / api_key / provider / model / factory_scope / category). A category default applies independently to every entity of that category, including future entities; active individual budgets override the default. Category defaults do not support the one-time period. At least one of `limits.amount`, `limits.token_limit`, or `rate_limit.requests_per_minute` MUST be provided. Uniqueness is enforced across (workspace_id, scope_kind, scope_target_id). Requires a Management Key with the Budgets permission; project-scoped API keys cannot manage budgets."
       operationId: "BudgetCreate"
       requestBody:
         content:
@@ -73470,7 +73599,7 @@ paths:
       tags:
         - "Budgets"
       summary: "Reset budget consumption"
-      description: "Clears the current-period cost, token, and request counters for the budget. The budget record itself is preserved. Requires a Management Key with the Budgets permission; project-scoped API keys cannot manage budgets."
+      description: "Clears the current-period cost, token, and request counters for the budget. For a category default, omit scope_target_id to reset every entity, or supply it to reset only that entity. The budget configuration is preserved. Requires a Management Key with the Budgets permission; project-scoped API keys cannot manage budgets."
       operationId: "BudgetResetConsumption"
       parameters:
         - name: "budget_id"
@@ -73506,13 +73635,13 @@ paths:
       x-code-samples:
         - lang: "curl"
           label: "cURL"
-          source: "curl -X POST 'https://my.orq.ai/v2/budgets/<budget_id>/reset-consumption' \\\n  --header \"Authorization: Bearer $ORQ_API_KEY\" \\\n  --header 'Content-Type: application/json' \\\n  --data '{}'\n"
+          source: "curl -X POST 'https://my.orq.ai/v2/budgets/<budget_id>/reset-consumption' \\\n  --header \"Authorization: Bearer $ORQ_API_KEY\" \\\n  --header 'Content-Type: application/json' \\\n  --data '{ \"scope_target_id\": \"<api_key_id>\" }'\n"
         - lang: "python"
           label: "Python"
-          source: "orq.budgets.reset_consumption(budget_id=\"<budget_id>\")\n"
+          source: "orq.budgets.reset_consumption(budget_id=\"<budget_id>\", scope_target_id=\"<api_key_id>\")\n"
         - lang: "typescript"
           label: "Node.js"
-          source: "await orq.budgets.resetConsumption({ budgetId: \"<budget_id>\", resetBudgetConsumptionRequest: {} });\n"
+          source: "await orq.budgets.resetConsumption({ budgetId: \"<budget_id>\", resetBudgetConsumptionRequest: { scopeTargetId: \"<api_key_id>\" } });\n"
       security:
         - ApiKey: []
   /v3/environments:
@@ -84797,6 +84926,33 @@ paths:
           schema:
             description: "The ID of the response to retrieve"
             type: "string"
+        - description: "Additional fields to include. Each listed field is omitted unless requested. Accepts the OpenAI includables: code_interpreter_call.outputs, computer_call_output.output.image_url, file_search_call.results, message.input_image.image_url, message.output_text.logprobs, reasoning.encrypted_content, web_search_call.action.sources and web_search_call.results."
+          explode: false
+          in: "query"
+          name: "include"
+          schema:
+            description: "Additional fields to include. Each listed field is omitted unless requested. Accepts the OpenAI includables: code_interpreter_call.outputs, computer_call_output.output.image_url, file_search_call.results, message.input_image.image_url, message.output_text.logprobs, reasoning.encrypted_content, web_search_call.action.sources and web_search_call.results."
+            items:
+              enum:
+                - "code_interpreter_call.outputs"
+                - "computer_call_output.output.image_url"
+                - "file_search_call.results"
+                - "message.input_image.image_url"
+                - "message.output_text.logprobs"
+                - "reasoning.encrypted_content"
+                - "web_search_call.action.sources"
+                - "web_search_call.results"
+              type: "string"
+            type:
+              - "array"
+              - "null"
+        - description: "Accepted for OpenAI compatibility and ignored."
+          explode: false
+          in: "query"
+          name: "include_obfuscation"
+          schema:
+            description: "Accepted for OpenAI compatibility and ignored."
+            type: "boolean"
       responses:
         "200":
           content:
@@ -85008,6 +85164,42 @@ paths:
                   - "prompt_cache_options"
                 type: "object"
           description: "Response retrieved successfully."
+        "400":
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                properties:
+                  error:
+                    $ref: "#/components/schemas/APIError"
+                required:
+                  - "error"
+                type: "object"
+          description: "Invalid include value."
+        "401":
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                properties:
+                  error:
+                    $ref: "#/components/schemas/APIError"
+                required:
+                  - "error"
+                type: "object"
+          description: "Missing, invalid, expired or revoked API key."
+        "403":
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                properties:
+                  error:
+                    $ref: "#/components/schemas/APIError"
+                required:
+                  - "error"
+                type: "object"
+          description: "The API key lacks permission to view responses."
         "404":
           content:
             application/json:
@@ -85026,9 +85218,178 @@ paths:
       x-cli-group: "responses"
       x-cli-help-section: "AI Gateway"
       x-cli-name: "get"
+      x-code-samples:
+        - label: "Node.js"
+          lang: "typescript"
+          source: "const response = await orq.responses.get({\n  responseId: \"resp_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n  include: [\"reasoning.encrypted_content\"],\n});"
+        - label: "Python"
+          lang: "python"
+          source: "response = orq.responses.get(\n    response_id=\"resp_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n    include=[\"reasoning.encrypted_content\"],\n)"
       x-orq-gateway-group: true
       x-speakeasy-group: "responses"
       x-speakeasy-name-override: "get"
+      security:
+        - ApiKey: []
+  /v3/router/responses/{response_id}/input_items:
+    get:
+      description: "Lists the input items stored for a response, paginated with `after`, `limit` and `order`. Returns the input stored for this response: the full chain for `previous_response_id`, only the new turn for `conversation`, and the compaction item for compacted history. Background responses without stored input return an empty list."
+      operationId: "list-response-input-items"
+      parameters:
+        - description: "The ID of the response to retrieve"
+          in: "path"
+          name: "response_id"
+          required: true
+          schema:
+            description: "The ID of the response to retrieve"
+            type: "string"
+        - description: "Cursor: return items after this item id."
+          explode: false
+          in: "query"
+          name: "after"
+          schema:
+            description: "Cursor: return items after this item id."
+            type: "string"
+        - description: "Maximum number of items to return, 1 to 100."
+          explode: false
+          in: "query"
+          name: "limit"
+          schema:
+            default: 20
+            description: "Maximum number of items to return, 1 to 100."
+            format: "int64"
+            maximum: 100
+            minimum: 1
+            type: "integer"
+        - description: "Sort order by item position. Defaults to desc."
+          explode: false
+          in: "query"
+          name: "order"
+          schema:
+            default: "desc"
+            description: "Sort order by item position. Defaults to desc."
+            enum:
+              - "asc"
+              - "desc"
+            type: "string"
+        - description: "Additional fields to include. Each listed field is omitted unless requested. Accepts the OpenAI includables: code_interpreter_call.outputs, computer_call_output.output.image_url, file_search_call.results, message.input_image.image_url, message.output_text.logprobs, reasoning.encrypted_content, web_search_call.action.sources and web_search_call.results."
+          explode: false
+          in: "query"
+          name: "include"
+          schema:
+            description: "Additional fields to include. Each listed field is omitted unless requested. Accepts the OpenAI includables: code_interpreter_call.outputs, computer_call_output.output.image_url, file_search_call.results, message.input_image.image_url, message.output_text.logprobs, reasoning.encrypted_content, web_search_call.action.sources and web_search_call.results."
+            items:
+              enum:
+                - "code_interpreter_call.outputs"
+                - "computer_call_output.output.image_url"
+                - "file_search_call.results"
+                - "message.input_image.image_url"
+                - "message.output_text.logprobs"
+                - "reasoning.encrypted_content"
+                - "web_search_call.action.sources"
+                - "web_search_call.results"
+              type: "string"
+            type:
+              - "array"
+              - "null"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                properties:
+                  data:
+                    description: "Input items on the current page."
+                    items: {}
+                    type: "array"
+                  first_id:
+                    description: "ID of the first item on the page. Null when the page is empty."
+                    type:
+                      - "string"
+                      - "null"
+                  has_more:
+                    description: "Whether further items exist beyond this page."
+                    type: "boolean"
+                  last_id:
+                    description: "ID of the last item on the page. Null when the page is empty."
+                    type:
+                      - "string"
+                      - "null"
+                  object:
+                    description: "Object type, always list."
+                    type: "string"
+                required:
+                  - "object"
+                  - "data"
+                  - "first_id"
+                  - "last_id"
+                  - "has_more"
+                type: "object"
+          description: "Input items retrieved successfully."
+        "400":
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                properties:
+                  error:
+                    $ref: "#/components/schemas/APIError"
+                required:
+                  - "error"
+                type: "object"
+          description: "Invalid limit, order, after or include value."
+        "401":
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                properties:
+                  error:
+                    $ref: "#/components/schemas/APIError"
+                required:
+                  - "error"
+                type: "object"
+          description: "Missing, invalid, expired or revoked API key."
+        "403":
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                properties:
+                  error:
+                    $ref: "#/components/schemas/APIError"
+                required:
+                  - "error"
+                type: "object"
+          description: "The API key lacks permission to view responses."
+        "404":
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                properties:
+                  error:
+                    $ref: "#/components/schemas/APIError"
+                required:
+                  - "error"
+                type: "object"
+          description: "Response not found."
+      summary: "List response input items"
+      tags:
+        - "Responses"
+      x-cli-group: "responses"
+      x-cli-help-section: "AI Gateway"
+      x-cli-name: "listInputItems"
+      x-code-samples:
+        - label: "Node.js"
+          lang: "typescript"
+          source: "const items = await orq.responses.listInputItems({\n  responseId: \"resp_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n  limit: 20,\n  order: \"asc\",\n});"
+        - label: "Python"
+          lang: "python"
+          source: "items = orq.responses.list_input_items(\n    response_id=\"resp_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n    limit=20,\n    order=\"asc\",\n)"
+      x-orq-gateway-group: true
+      x-speakeasy-group: "responses"
+      x-speakeasy-name-override: "listInputItems"
       security:
         - ApiKey: []
   /v3/websearch:
@@ -85450,7 +85811,7 @@ tags:
   - name: "Audit Log Destinations"
     description: "Signed webhook destinations that receive workspace audit log events, for SIEM and compliance pipelines."
   - name: "Budgets"
-    description: "Budgets govern spend, token usage, and request rate across six scopes: workspace, project, identity, API key, provider, and model. Every applicable budget is enforced, and the most restrictive limit applies per dimension."
+    description: "Budgets govern spend, token usage, and request rate across workspace, project, identity, API key, provider, model, factory, and category-default scopes. Category defaults provide a separate allowance for each entity; an active individual budget replaces its category default. Every applicable budget is enforced, and the most restrictive limit applies per dimension."
   - name: "Environments"
     description: "Reusable workspace- and project-scoped deployment environments."
   - name: "Files"
