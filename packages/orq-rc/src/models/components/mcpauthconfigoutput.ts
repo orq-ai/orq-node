@@ -57,6 +57,10 @@ export type McpAuthConfigOutput = {
    * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   enterprise?: McpAuthConfigEnterprise | undefined;
+  /**
+   * Outbound workload federation connection that supplies the bearer token; set when type is WORKLOAD_FEDERATION.
+   */
+  outboundConnectionId?: string | undefined;
 };
 
 /** @internal */
@@ -99,9 +103,11 @@ export const McpAuthConfigOutput$inboundSchema: z.ZodType<
     static_headers: z.array(McpHeaderSecretOutput$inboundSchema).optional(),
     oauth: McpOAuthConfigOutput$inboundSchema.optional(),
     enterprise: z.lazy(() => McpAuthConfigEnterprise$inboundSchema).optional(),
+    outbound_connection_id: z.string().optional(),
   }).transform((v) => {
     return remap$(v, {
       "static_headers": "staticHeaders",
+      "outbound_connection_id": "outboundConnectionId",
     });
   })
 );

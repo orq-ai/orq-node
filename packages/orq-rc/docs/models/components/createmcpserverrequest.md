@@ -13,7 +13,7 @@ let value: CreateMcpServerRequest = {
     url: "https://deficient-permafrost.net/",
   },
   auth: {
-    type: "MCP_AUTH_TYPE_ENTERPRISE_MANAGED",
+    type: "MCP_AUTH_TYPE_WORKLOAD_FEDERATION",
   },
   defaultToolExposure: {
     mode: "MCP_TOOL_EXPOSURE_MODE_NONE",

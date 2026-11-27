@@ -12,6 +12,7 @@ export const McpAuthType = {
   McpAuthTypeOauthClientCredentials: "MCP_AUTH_TYPE_OAUTH_CLIENT_CREDENTIALS",
   McpAuthTypePerUserOauth: "MCP_AUTH_TYPE_PER_USER_OAUTH",
   McpAuthTypeEnterpriseManaged: "MCP_AUTH_TYPE_ENTERPRISE_MANAGED",
+  McpAuthTypeWorkloadFederation: "MCP_AUTH_TYPE_WORKLOAD_FEDERATION",
 } as const;
 export type McpAuthType = ClosedEnum<typeof McpAuthType>;
 
