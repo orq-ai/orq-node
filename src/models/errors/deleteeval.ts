@@ -71,10 +71,12 @@ export const DeleteEvalEvalsResponseBody$inboundSchema: z.ZodType<
     body$: z.string(),
   })
     .transform((v) => {
-      return new DeleteEvalEvalsResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
+      const { request$, response$, body$, ...data } = v;
+
+      return new DeleteEvalEvalsResponseBody(data, {
+        request: request$,
+        response: response$,
+        body: body$,
       });
     })
 );
@@ -92,10 +94,12 @@ export const DeleteEvalResponseBody$inboundSchema: z.ZodType<
     body$: z.string(),
   })
     .transform((v) => {
-      return new DeleteEvalResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
+      const { request$, response$, body$, ...data } = v;
+
+      return new DeleteEvalResponseBody(data, {
+        request: request$,
+        response: response$,
+        body: body$,
       });
     })
 );

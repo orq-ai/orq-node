@@ -350,10 +350,12 @@ export const SearchWebWebsearchResponse504ResponseBody$inboundSchema: z.ZodType<
     body$: z.string(),
   })
     .transform((v) => {
-      return new SearchWebWebsearchResponse504ResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
+      const { request$, response$, body$, ...data } = v;
+
+      return new SearchWebWebsearchResponse504ResponseBody(data, {
+        request: request$,
+        response: response$,
+        body: body$,
       });
     })
 );
@@ -371,10 +373,12 @@ export const SearchWebWebsearchResponse503ResponseBody$inboundSchema: z.ZodType<
     body$: z.string(),
   })
     .transform((v) => {
-      return new SearchWebWebsearchResponse503ResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
+      const { request$, response$, body$, ...data } = v;
+
+      return new SearchWebWebsearchResponse503ResponseBody(data, {
+        request: request$,
+        response: response$,
+        body: body$,
       });
     })
 );
@@ -392,10 +396,12 @@ export const SearchWebWebsearchResponse502ResponseBody$inboundSchema: z.ZodType<
     body$: z.string(),
   })
     .transform((v) => {
-      return new SearchWebWebsearchResponse502ResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
+      const { request$, response$, body$, ...data } = v;
+
+      return new SearchWebWebsearchResponse502ResponseBody(data, {
+        request: request$,
+        response: response$,
+        body: body$,
       });
     })
 );
@@ -413,10 +419,12 @@ export const SearchWebWebsearchResponse500ResponseBody$inboundSchema: z.ZodType<
     body$: z.string(),
   })
     .transform((v) => {
-      return new SearchWebWebsearchResponse500ResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
+      const { request$, response$, body$, ...data } = v;
+
+      return new SearchWebWebsearchResponse500ResponseBody(data, {
+        request: request$,
+        response: response$,
+        body: body$,
       });
     })
 );
@@ -434,10 +442,12 @@ export const SearchWebWebsearchResponse429ResponseBody$inboundSchema: z.ZodType<
     body$: z.string(),
   })
     .transform((v) => {
-      return new SearchWebWebsearchResponse429ResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
+      const { request$, response$, body$, ...data } = v;
+
+      return new SearchWebWebsearchResponse429ResponseBody(data, {
+        request: request$,
+        response: response$,
+        body: body$,
       });
     })
 );
@@ -455,10 +465,12 @@ export const SearchWebWebsearchResponse422ResponseBody$inboundSchema: z.ZodType<
     body$: z.string(),
   })
     .transform((v) => {
-      return new SearchWebWebsearchResponse422ResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
+      const { request$, response$, body$, ...data } = v;
+
+      return new SearchWebWebsearchResponse422ResponseBody(data, {
+        request: request$,
+        response: response$,
+        body: body$,
       });
     })
 );
@@ -476,10 +488,12 @@ export const SearchWebWebsearchResponse415ResponseBody$inboundSchema: z.ZodType<
     body$: z.string(),
   })
     .transform((v) => {
-      return new SearchWebWebsearchResponse415ResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
+      const { request$, response$, body$, ...data } = v;
+
+      return new SearchWebWebsearchResponse415ResponseBody(data, {
+        request: request$,
+        response: response$,
+        body: body$,
       });
     })
 );
@@ -497,10 +511,12 @@ export const SearchWebWebsearchResponse403ResponseBody$inboundSchema: z.ZodType<
     body$: z.string(),
   })
     .transform((v) => {
-      return new SearchWebWebsearchResponse403ResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
+      const { request$, response$, body$, ...data } = v;
+
+      return new SearchWebWebsearchResponse403ResponseBody(data, {
+        request: request$,
+        response: response$,
+        body: body$,
       });
     })
 );
@@ -518,10 +534,12 @@ export const SearchWebWebsearchResponseResponseBody$inboundSchema: z.ZodType<
     body$: z.string(),
   })
     .transform((v) => {
-      return new SearchWebWebsearchResponseResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
+      const { request$, response$, body$, ...data } = v;
+
+      return new SearchWebWebsearchResponseResponseBody(data, {
+        request: request$,
+        response: response$,
+        body: body$,
       });
     })
 );
@@ -539,10 +557,12 @@ export const SearchWebWebsearchResponseBody$inboundSchema: z.ZodType<
     body$: z.string(),
   })
     .transform((v) => {
-      return new SearchWebWebsearchResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
+      const { request$, response$, body$, ...data } = v;
+
+      return new SearchWebWebsearchResponseBody(data, {
+        request: request$,
+        response: response$,
+        body: body$,
       });
     })
 );
@@ -560,10 +580,12 @@ export const SearchWebResponseBody$inboundSchema: z.ZodType<
     body$: z.string(),
   })
     .transform((v) => {
-      return new SearchWebResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
+      const { request$, response$, body$, ...data } = v;
+
+      return new SearchWebResponseBody(data, {
+        request: request$,
+        response: response$,
+        body: body$,
       });
     })
 );

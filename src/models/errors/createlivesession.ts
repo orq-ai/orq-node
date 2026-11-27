@@ -261,10 +261,12 @@ export const CreateLiveSessionLiveResponse503ResponseBody$inboundSchema:
       body$: z.string(),
     })
       .transform((v) => {
-        return new CreateLiveSessionLiveResponse503ResponseBody(v, {
-          request: v.request$,
-          response: v.response$,
-          body: v.body$,
+        const { request$, response$, body$, ...data } = v;
+
+        return new CreateLiveSessionLiveResponse503ResponseBody(data, {
+          request: request$,
+          response: response$,
+          body: body$,
         });
       })
   );
@@ -283,10 +285,12 @@ export const CreateLiveSessionLiveResponse502ResponseBody$inboundSchema:
       body$: z.string(),
     })
       .transform((v) => {
-        return new CreateLiveSessionLiveResponse502ResponseBody(v, {
-          request: v.request$,
-          response: v.response$,
-          body: v.body$,
+        const { request$, response$, body$, ...data } = v;
+
+        return new CreateLiveSessionLiveResponse502ResponseBody(data, {
+          request: request$,
+          response: response$,
+          body: body$,
         });
       })
   );
@@ -305,10 +309,12 @@ export const CreateLiveSessionLiveResponse429ResponseBody$inboundSchema:
       body$: z.string(),
     })
       .transform((v) => {
-        return new CreateLiveSessionLiveResponse429ResponseBody(v, {
-          request: v.request$,
-          response: v.response$,
-          body: v.body$,
+        const { request$, response$, body$, ...data } = v;
+
+        return new CreateLiveSessionLiveResponse429ResponseBody(data, {
+          request: request$,
+          response: response$,
+          body: body$,
         });
       })
   );
@@ -327,10 +333,12 @@ export const CreateLiveSessionLiveResponse404ResponseBody$inboundSchema:
       body$: z.string(),
     })
       .transform((v) => {
-        return new CreateLiveSessionLiveResponse404ResponseBody(v, {
-          request: v.request$,
-          response: v.response$,
-          body: v.body$,
+        const { request$, response$, body$, ...data } = v;
+
+        return new CreateLiveSessionLiveResponse404ResponseBody(data, {
+          request: request$,
+          response: response$,
+          body: body$,
         });
       })
   );
@@ -349,10 +357,12 @@ export const CreateLiveSessionLiveResponse403ResponseBody$inboundSchema:
       body$: z.string(),
     })
       .transform((v) => {
-        return new CreateLiveSessionLiveResponse403ResponseBody(v, {
-          request: v.request$,
-          response: v.response$,
-          body: v.body$,
+        const { request$, response$, body$, ...data } = v;
+
+        return new CreateLiveSessionLiveResponse403ResponseBody(data, {
+          request: request$,
+          response: response$,
+          body: body$,
         });
       })
   );
@@ -370,10 +380,12 @@ export const CreateLiveSessionLiveResponseResponseBody$inboundSchema: z.ZodType<
     body$: z.string(),
   })
     .transform((v) => {
-      return new CreateLiveSessionLiveResponseResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
+      const { request$, response$, body$, ...data } = v;
+
+      return new CreateLiveSessionLiveResponseResponseBody(data, {
+        request: request$,
+        response: response$,
+        body: body$,
       });
     })
 );
@@ -391,10 +403,12 @@ export const CreateLiveSessionLiveResponseBody$inboundSchema: z.ZodType<
     body$: z.string(),
   })
     .transform((v) => {
-      return new CreateLiveSessionLiveResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
+      const { request$, response$, body$, ...data } = v;
+
+      return new CreateLiveSessionLiveResponseBody(data, {
+        request: request$,
+        response: response$,
+        body: body$,
       });
     })
 );
@@ -412,10 +426,12 @@ export const CreateLiveSessionResponseBody$inboundSchema: z.ZodType<
     body$: z.string(),
   })
     .transform((v) => {
-      return new CreateLiveSessionResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
+      const { request$, response$, body$, ...data } = v;
+
+      return new CreateLiveSessionResponseBody(data, {
+        request: request$,
+        response: response$,
+        body: body$,
       });
     })
 );

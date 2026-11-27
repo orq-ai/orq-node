@@ -45,10 +45,12 @@ export const RetrieveAgentRequestResponseBody$inboundSchema: z.ZodType<
     body$: z.string(),
   })
     .transform((v) => {
-      return new RetrieveAgentRequestResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
+      const { request$, response$, body$, ...data } = v;
+
+      return new RetrieveAgentRequestResponseBody(data, {
+        request: request$,
+        response: response$,
+        body: body$,
       });
     })
 );

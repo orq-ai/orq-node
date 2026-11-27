@@ -110,10 +110,12 @@ export const ListBatchesBatchesResponseResponseBody$inboundSchema: z.ZodType<
     body$: z.string(),
   })
     .transform((v) => {
-      return new ListBatchesBatchesResponseResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
+      const { request$, response$, body$, ...data } = v;
+
+      return new ListBatchesBatchesResponseResponseBody(data, {
+        request: request$,
+        response: response$,
+        body: body$,
       });
     })
 );
@@ -131,10 +133,12 @@ export const ListBatchesBatchesResponseBody$inboundSchema: z.ZodType<
     body$: z.string(),
   })
     .transform((v) => {
-      return new ListBatchesBatchesResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
+      const { request$, response$, body$, ...data } = v;
+
+      return new ListBatchesBatchesResponseBody(data, {
+        request: request$,
+        response: response$,
+        body: body$,
       });
     })
 );
@@ -152,10 +156,12 @@ export const ListBatchesResponseBody$inboundSchema: z.ZodType<
     body$: z.string(),
   })
     .transform((v) => {
-      return new ListBatchesResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
+      const { request$, response$, body$, ...data } = v;
+
+      return new ListBatchesResponseBody(data, {
+        request: request$,
+        response: response$,
+        body: body$,
       });
     })
 );

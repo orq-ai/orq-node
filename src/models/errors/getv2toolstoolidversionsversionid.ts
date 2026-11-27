@@ -46,10 +46,12 @@ export const GetV2ToolsToolIdVersionsVersionIdResponseBody$inboundSchema:
       body$: z.string(),
     })
       .transform((v) => {
-        return new GetV2ToolsToolIdVersionsVersionIdResponseBody(v, {
-          request: v.request$,
-          response: v.response$,
-          body: v.body$,
+        const { request$, response$, body$, ...data } = v;
+
+        return new GetV2ToolsToolIdVersionsVersionIdResponseBody(data, {
+          request: request$,
+          response: response$,
+          body: body$,
         });
       })
   );

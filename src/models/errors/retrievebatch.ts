@@ -141,10 +141,12 @@ export const RetrieveBatchBatchesResponse500ResponseBody$inboundSchema:
       body$: z.string(),
     })
       .transform((v) => {
-        return new RetrieveBatchBatchesResponse500ResponseBody(v, {
-          request: v.request$,
-          response: v.response$,
-          body: v.body$,
+        const { request$, response$, body$, ...data } = v;
+
+        return new RetrieveBatchBatchesResponse500ResponseBody(data, {
+          request: request$,
+          response: response$,
+          body: body$,
         });
       })
   );
@@ -162,10 +164,12 @@ export const RetrieveBatchBatchesResponseResponseBody$inboundSchema: z.ZodType<
     body$: z.string(),
   })
     .transform((v) => {
-      return new RetrieveBatchBatchesResponseResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
+      const { request$, response$, body$, ...data } = v;
+
+      return new RetrieveBatchBatchesResponseResponseBody(data, {
+        request: request$,
+        response: response$,
+        body: body$,
       });
     })
 );
@@ -183,10 +187,12 @@ export const RetrieveBatchBatchesResponseBody$inboundSchema: z.ZodType<
     body$: z.string(),
   })
     .transform((v) => {
-      return new RetrieveBatchBatchesResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
+      const { request$, response$, body$, ...data } = v;
+
+      return new RetrieveBatchBatchesResponseBody(data, {
+        request: request$,
+        response: response$,
+        body: body$,
       });
     })
 );
@@ -204,10 +210,12 @@ export const RetrieveBatchResponseBody$inboundSchema: z.ZodType<
     body$: z.string(),
   })
     .transform((v) => {
-      return new RetrieveBatchResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
+      const { request$, response$, body$, ...data } = v;
+
+      return new RetrieveBatchResponseBody(data, {
+        request: request$,
+        response: response$,
+        body: body$,
       });
     })
 );

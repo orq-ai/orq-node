@@ -273,10 +273,12 @@ export const CreateDecisionsRouterDecisionsResponse502ResponseBody$inboundSchema
       body$: z.string(),
     })
       .transform((v) => {
-        return new CreateDecisionsRouterDecisionsResponse502ResponseBody(v, {
-          request: v.request$,
-          response: v.response$,
-          body: v.body$,
+        const { request$, response$, body$, ...data } = v;
+
+        return new CreateDecisionsRouterDecisionsResponse502ResponseBody(data, {
+          request: request$,
+          response: response$,
+          body: body$,
         });
       })
   );
@@ -295,10 +297,12 @@ export const CreateDecisionsRouterDecisionsResponse500ResponseBody$inboundSchema
       body$: z.string(),
     })
       .transform((v) => {
-        return new CreateDecisionsRouterDecisionsResponse500ResponseBody(v, {
-          request: v.request$,
-          response: v.response$,
-          body: v.body$,
+        const { request$, response$, body$, ...data } = v;
+
+        return new CreateDecisionsRouterDecisionsResponse500ResponseBody(data, {
+          request: request$,
+          response: response$,
+          body: body$,
         });
       })
   );
@@ -317,10 +321,12 @@ export const CreateDecisionsRouterDecisionsResponse429ResponseBody$inboundSchema
       body$: z.string(),
     })
       .transform((v) => {
-        return new CreateDecisionsRouterDecisionsResponse429ResponseBody(v, {
-          request: v.request$,
-          response: v.response$,
-          body: v.body$,
+        const { request$, response$, body$, ...data } = v;
+
+        return new CreateDecisionsRouterDecisionsResponse429ResponseBody(data, {
+          request: request$,
+          response: response$,
+          body: body$,
         });
       })
   );
@@ -339,10 +345,12 @@ export const CreateDecisionsRouterDecisionsResponse422ResponseBody$inboundSchema
       body$: z.string(),
     })
       .transform((v) => {
-        return new CreateDecisionsRouterDecisionsResponse422ResponseBody(v, {
-          request: v.request$,
-          response: v.response$,
-          body: v.body$,
+        const { request$, response$, body$, ...data } = v;
+
+        return new CreateDecisionsRouterDecisionsResponse422ResponseBody(data, {
+          request: request$,
+          response: response$,
+          body: body$,
         });
       })
   );
@@ -361,10 +369,12 @@ export const CreateDecisionsRouterDecisionsResponse408ResponseBody$inboundSchema
       body$: z.string(),
     })
       .transform((v) => {
-        return new CreateDecisionsRouterDecisionsResponse408ResponseBody(v, {
-          request: v.request$,
-          response: v.response$,
-          body: v.body$,
+        const { request$, response$, body$, ...data } = v;
+
+        return new CreateDecisionsRouterDecisionsResponse408ResponseBody(data, {
+          request: request$,
+          response: response$,
+          body: body$,
         });
       })
   );
@@ -383,10 +393,12 @@ export const CreateDecisionsRouterDecisionsResponseResponseBody$inboundSchema:
       body$: z.string(),
     })
       .transform((v) => {
-        return new CreateDecisionsRouterDecisionsResponseResponseBody(v, {
-          request: v.request$,
-          response: v.response$,
-          body: v.body$,
+        const { request$, response$, body$, ...data } = v;
+
+        return new CreateDecisionsRouterDecisionsResponseResponseBody(data, {
+          request: request$,
+          response: response$,
+          body: body$,
         });
       })
   );
@@ -402,10 +414,12 @@ export const CreateDecisionsRouterDecisionsResponseBody$inboundSchema:
         body$: z.string(),
       })
         .transform((v) => {
-          return new CreateDecisionsRouterDecisionsResponseBody(v, {
-            request: v.request$,
-            response: v.response$,
-            body: v.body$,
+          const { request$, response$, body$, ...data } = v;
+
+          return new CreateDecisionsRouterDecisionsResponseBody(data, {
+            request: request$,
+            response: response$,
+            body: body$,
           });
         })
     );
@@ -423,10 +437,12 @@ export const CreateDecisionsResponseBody$inboundSchema: z.ZodType<
     body$: z.string(),
   })
     .transform((v) => {
-      return new CreateDecisionsResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
+      const { request$, response$, body$, ...data } = v;
+
+      return new CreateDecisionsResponseBody(data, {
+        request: request$,
+        response: response$,
+        body: body$,
       });
     })
 );
