@@ -2591,7 +2591,7 @@ components:
           properties:
             _id:
               type: "string"
-              default: "reasoning_01m8enwezt8bcsm3t5fder8t74"
+              default: "reasoning_01m8g0st95hwtvnwggjbjs0r5n"
               description: "Unique identifier for the part. Format: reasoning_{ulid} (e.g., reasoning_01hxyz...)"
               example: "reasoning_01hxyz123abc"
             kind:
@@ -7245,11 +7245,11 @@ components:
       properties:
         type:
           type: "string"
-          description: "Discriminator for the verdict shape: \"string\", \"number\", \"boolean\",\n \"string_array\", \"rouge_n\", \"bert_score\", \"llm_evaluator\", \"http_eval\"."
+          description: "Discriminator for the verdict shape: \"string\", \"number\", \"boolean\",\n \"string_array\", \"rouge_n\", \"bert_score\", \"llm_evaluator\", \"decision\",\n \"http_eval\"."
         value:
           allOf:
             - $ref: "#/components/schemas/JsonValue"
-          description: "The verdict. Dynamic by design — a boolean pass, a numeric score, a\n categorical label, a list of labels and the nested rouge_n object all\n arrive here."
+          description: "The verdict. Dynamic by design — a boolean pass, a numeric score, a list\n of labels, the nested rouge_n object and a decision evaluator's answers\n all arrive here. A decision evaluator returns one entry per question,\n keyed by its name: the answer (noul, choice or score), its probabilities\n and confidence, and whether its pass condition held (passed)."
         trace_id:
           type: "string"
           description: "Trace reference of the evaluator's own span. Optional so an absent\n reference is omitted rather than emitted as an empty string."
@@ -7403,16 +7403,32 @@ components:
                 type:
                   type: "string"
                   enum:
-                    - "categorical"
-                values:
-                  type: "array"
-                  items:
-                    type: "string"
-                    minLength: 1
+                    - "decision"
+                pass_criteria:
+                  type: "object"
+                  description: "Pass condition for each decision question, keyed by question name. Use `noul` (expected boolean) for a noul question, `choice` (options that pass) for a choice question and `score` (lowest level index that passes) for a score question. Every question needs a condition."
+                  additionalProperties:
+                    type: "object"
+                    properties:
+                      noul:
+                        type:
+                          - "boolean"
+                          - "null"
+                      choice:
+                        type:
+                          - "array"
+                          - "null"
+                        items:
+                          type: "string"
+                      score:
+                        type:
+                          - "integer"
+                          - "null"
+                        minimum: 0
               required:
                 - "type"
-                - "values"
-              title: "Categorical"
+                - "pass_criteria"
+              title: "Decision"
             - type: "object"
               properties:
                 enabled:
@@ -7451,7 +7467,7 @@ components:
           type: "string"
           enum:
             - "boolean"
-            - "categorical"
+            - "decision"
             - "number"
             - "string"
           description: "The type of output expected from the evaluator"
@@ -7827,16 +7843,32 @@ components:
                 type:
                   type: "string"
                   enum:
-                    - "categorical"
-                values:
-                  type: "array"
-                  items:
-                    type: "string"
-                    minLength: 1
+                    - "decision"
+                pass_criteria:
+                  type: "object"
+                  description: "Pass condition for each decision question, keyed by question name. Use `noul` (expected boolean) for a noul question, `choice` (options that pass) for a choice question and `score` (lowest level index that passes) for a score question. Every question needs a condition."
+                  additionalProperties:
+                    type: "object"
+                    properties:
+                      noul:
+                        type:
+                          - "boolean"
+                          - "null"
+                      choice:
+                        type:
+                          - "array"
+                          - "null"
+                        items:
+                          type: "string"
+                      score:
+                        type:
+                          - "integer"
+                          - "null"
+                        minimum: 0
               required:
                 - "type"
-                - "values"
-              title: "Categorical"
+                - "pass_criteria"
+              title: "Decision"
             - type: "object"
               properties:
                 enabled:
@@ -7875,7 +7907,7 @@ components:
           type: "string"
           enum:
             - "boolean"
-            - "categorical"
+            - "decision"
             - "number"
             - "string"
           description: "The type of output expected from the evaluator"
@@ -7966,16 +7998,32 @@ components:
                 type:
                   type: "string"
                   enum:
-                    - "categorical"
-                values:
-                  type: "array"
-                  items:
-                    type: "string"
-                    minLength: 1
+                    - "decision"
+                pass_criteria:
+                  type: "object"
+                  description: "Pass condition for each decision question, keyed by question name. Use `noul` (expected boolean) for a noul question, `choice` (options that pass) for a choice question and `score` (lowest level index that passes) for a score question. Every question needs a condition."
+                  additionalProperties:
+                    type: "object"
+                    properties:
+                      noul:
+                        type:
+                          - "boolean"
+                          - "null"
+                      choice:
+                        type:
+                          - "array"
+                          - "null"
+                        items:
+                          type: "string"
+                      score:
+                        type:
+                          - "integer"
+                          - "null"
+                        minimum: 0
               required:
                 - "type"
-                - "values"
-              title: "Categorical"
+                - "pass_criteria"
+              title: "Decision"
             - type: "object"
               properties:
                 enabled:
@@ -8014,7 +8062,7 @@ components:
           type: "string"
           enum:
             - "boolean"
-            - "categorical"
+            - "decision"
             - "number"
             - "string"
           description: "The type of output expected from the evaluator"
@@ -8090,16 +8138,32 @@ components:
                 type:
                   type: "string"
                   enum:
-                    - "categorical"
-                values:
-                  type: "array"
-                  items:
-                    type: "string"
-                    minLength: 1
+                    - "decision"
+                pass_criteria:
+                  type: "object"
+                  description: "Pass condition for each decision question, keyed by question name. Use `noul` (expected boolean) for a noul question, `choice` (options that pass) for a choice question and `score` (lowest level index that passes) for a score question. Every question needs a condition."
+                  additionalProperties:
+                    type: "object"
+                    properties:
+                      noul:
+                        type:
+                          - "boolean"
+                          - "null"
+                      choice:
+                        type:
+                          - "array"
+                          - "null"
+                        items:
+                          type: "string"
+                      score:
+                        type:
+                          - "integer"
+                          - "null"
+                        minimum: 0
               required:
                 - "type"
-                - "values"
-              title: "Categorical"
+                - "pass_criteria"
+              title: "Decision"
             - type: "object"
               properties:
                 enabled:
@@ -8138,7 +8202,7 @@ components:
           type: "string"
           enum:
             - "boolean"
-            - "categorical"
+            - "decision"
             - "number"
             - "string"
           description: "The type of output expected from the evaluator"
@@ -8150,26 +8214,26 @@ components:
           maximum: 3
         prompt:
           type: "string"
-        categories:
+          description: "The judge prompt. Required unless `output_type` is `decision`, where each decision question carries its own instructions."
+        decision_questions:
           type:
-            - "array"
+            - "object"
             - "null"
-          items:
-            type: "string"
-        categorical_labels:
-          type:
-            - "array"
-            - "null"
-          items:
-            type: "object"
-            properties:
-              value:
+          description: "Questions a decision LLM evaluator asks in place of a prompt. Required when `output_type` is `decision`."
+          properties:
+            questions:
+              type: "object"
+              description: "Questions keyed by name, in the same shape as `questions` in a Decisions request."
+              additionalProperties:
+                $ref: "#/components/schemas/EvaluatorDecisionQuestion"
+            order:
+              type: "array"
+              description: "Question names in the order the user arranged them, since `questions` is a map and keeps no order. Lists every question exactly once."
+              items:
                 type: "string"
-                minLength: 1
-              description:
-                type: "string"
-            required:
-              - "value"
+          required:
+            - "questions"
+            - "order"
         dataset_id:
           type:
             - "string"
@@ -8286,7 +8350,6 @@ components:
         - "description"
         - "type"
         - "output_type"
-        - "prompt"
         - "key"
         - "mode"
       title: "LLM"
@@ -8348,16 +8411,32 @@ components:
                 type:
                   type: "string"
                   enum:
-                    - "categorical"
-                values:
-                  type: "array"
-                  items:
-                    type: "string"
-                    minLength: 1
+                    - "decision"
+                pass_criteria:
+                  type: "object"
+                  description: "Pass condition for each decision question, keyed by question name. Use `noul` (expected boolean) for a noul question, `choice` (options that pass) for a choice question and `score` (lowest level index that passes) for a score question. Every question needs a condition."
+                  additionalProperties:
+                    type: "object"
+                    properties:
+                      noul:
+                        type:
+                          - "boolean"
+                          - "null"
+                      choice:
+                        type:
+                          - "array"
+                          - "null"
+                        items:
+                          type: "string"
+                      score:
+                        type:
+                          - "integer"
+                          - "null"
+                        minimum: 0
               required:
                 - "type"
-                - "values"
-              title: "Categorical"
+                - "pass_criteria"
+              title: "Decision"
             - type: "object"
               properties:
                 enabled:
@@ -8398,7 +8477,7 @@ components:
           type: "string"
           enum:
             - "boolean"
-            - "categorical"
+            - "decision"
             - "number"
             - "string"
           description: "The type of output expected from the evaluator"
@@ -8472,16 +8551,32 @@ components:
                 type:
                   type: "string"
                   enum:
-                    - "categorical"
-                values:
-                  type: "array"
-                  items:
-                    type: "string"
-                    minLength: 1
+                    - "decision"
+                pass_criteria:
+                  type: "object"
+                  description: "Pass condition for each decision question, keyed by question name. Use `noul` (expected boolean) for a noul question, `choice` (options that pass) for a choice question and `score` (lowest level index that passes) for a score question. Every question needs a condition."
+                  additionalProperties:
+                    type: "object"
+                    properties:
+                      noul:
+                        type:
+                          - "boolean"
+                          - "null"
+                      choice:
+                        type:
+                          - "array"
+                          - "null"
+                        items:
+                          type: "string"
+                      score:
+                        type:
+                          - "integer"
+                          - "null"
+                        minimum: 0
               required:
                 - "type"
-                - "values"
-              title: "Categorical"
+                - "pass_criteria"
+              title: "Decision"
             - type: "object"
               properties:
                 enabled:
@@ -8520,7 +8615,7 @@ components:
           type: "string"
           enum:
             - "boolean"
-            - "categorical"
+            - "decision"
             - "number"
             - "string"
           description: "The type of output expected from the evaluator"
@@ -8612,16 +8707,32 @@ components:
                 type:
                   type: "string"
                   enum:
-                    - "categorical"
-                values:
-                  type: "array"
-                  items:
-                    type: "string"
-                    minLength: 1
+                    - "decision"
+                pass_criteria:
+                  type: "object"
+                  description: "Pass condition for each decision question, keyed by question name. Use `noul` (expected boolean) for a noul question, `choice` (options that pass) for a choice question and `score` (lowest level index that passes) for a score question. Every question needs a condition."
+                  additionalProperties:
+                    type: "object"
+                    properties:
+                      noul:
+                        type:
+                          - "boolean"
+                          - "null"
+                      choice:
+                        type:
+                          - "array"
+                          - "null"
+                        items:
+                          type: "string"
+                      score:
+                        type:
+                          - "integer"
+                          - "null"
+                        minimum: 0
               required:
                 - "type"
-                - "values"
-              title: "Categorical"
+                - "pass_criteria"
+              title: "Decision"
             - type: "object"
               properties:
                 enabled:
@@ -8662,7 +8773,7 @@ components:
           type: "string"
           enum:
             - "boolean"
-            - "categorical"
+            - "decision"
             - "number"
             - "string"
           description: "The type of output expected from the evaluator"
@@ -8678,6 +8789,36 @@ components:
         - "output_type"
         - "key"
       title: "Typescript"
+    EvaluatorDecisionQuestion:
+      type: "object"
+      description: "A question the evaluator answers, in the same shape as a Decisions API question. Its pass condition lives in the decision guardrail (`guardrail_config.pass_criteria`), under the same question name."
+      properties:
+        type:
+          type: "string"
+          enum:
+            - "noul"
+            - "choice"
+            - "score"
+          description: "`noul` answers true or false, `choice` picks one option and `score` picks one ordered level."
+        instructions:
+          type: "string"
+          minLength: 1
+          description: "What the question asks. `{{path}}` names a field of the evaluated state, such as `{{output.response}}`."
+        criteria:
+          description: "For `noul`, optional descriptions of the `true` and `false` answers. For `choice`, each option mapped to a description or null (at least 2). For `score`, the level descriptions from lowest to highest (at least 2)."
+          anyOf:
+            - type: "object"
+              additionalProperties:
+                type:
+                  - "string"
+                  - "null"
+            - type: "array"
+              items:
+                type: "string"
+            - type: "null"
+      required:
+        - "type"
+        - "instructions"
     CapabilitiesResponse:
       type: "object"
       properties:
@@ -12053,6 +12194,52 @@ components:
         - "MESSAGES_SOURCE_PROMPT_CONFIG"
         - "MESSAGES_SOURCE_MESSAGES_COLUMN"
         - "MESSAGES_SOURCE_COMBINED"
+    AutoModelPool:
+      additionalProperties: false
+      properties:
+        intelligence_index:
+          format: "double"
+          type: "number"
+        models:
+          items:
+            $ref: "#/components/schemas/AutoModelPoolSeat"
+          type:
+            - "array"
+            - "null"
+        pool_status:
+          type: "string"
+        selected_model:
+          type: "string"
+      required:
+        - "pool_status"
+        - "models"
+      type: "object"
+    AutoModelPoolSeat:
+      additionalProperties: false
+      properties:
+        band:
+          type: "string"
+        input_cost:
+          format: "double"
+          type:
+            - "number"
+            - "null"
+        intelligence_index:
+          format: "double"
+          type: "number"
+        model:
+          type: "string"
+        output_cost:
+          format: "double"
+          type:
+            - "number"
+            - "null"
+      required:
+        - "model"
+        - "input_cost"
+        - "output_cost"
+        - "intelligence_index"
+      type: "object"
     AutoRouterConfig:
       additionalProperties: false
       properties:
@@ -12072,6 +12259,9 @@ components:
           type:
             - "array"
             - "null"
+        preset:
+          $ref: "#/components/schemas/AutoRouterPreset"
+          description: "System auto model preset whose pool is derived per request; set only on orq-provided routers such as orq/auto."
         profile:
           description: "Routing preference: quality, balanced, or cost."
           type: "string"
@@ -12087,6 +12277,28 @@ components:
         version:
           description: "Version of the Smart Router configuration format."
           type: "string"
+      type: "object"
+    AutoRouterPreset:
+      additionalProperties: false
+      properties:
+        constraint:
+          type: "string"
+        min_intelligence_index:
+          format: "double"
+          type: "number"
+        min_intelligence_percentile:
+          format: "double"
+          type: "number"
+        name:
+          type: "string"
+        policy:
+          type: "string"
+        profile:
+          type: "string"
+      required:
+        - "name"
+        - "policy"
+        - "constraint"
       type: "object"
     AutoRouterV2Config:
       additionalProperties: false
@@ -12713,6 +12925,8 @@ components:
     ModelDocument:
       additionalProperties: false
       properties:
+        auto_model_pool:
+          $ref: "#/components/schemas/AutoModelPool"
         configuration:
           $ref: "#/components/schemas/ModelConfigurationResponse"
         created:
@@ -13715,6 +13929,374 @@ components:
       required:
         - "target"
       type: "object"
+    AgentDeploymentStatus:
+      type: "string"
+      enum:
+        - "AGENT_DEPLOYMENT_STATUS_ACTIVE"
+        - "AGENT_DEPLOYMENT_STATUS_PAUSED"
+        - "AGENT_DEPLOYMENT_STATUS_ARCHIVED"
+    ListAgentDeploymentsResponse:
+      type: "object"
+      properties:
+        object:
+          type: "string"
+        data:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/AgentDeployment"
+        has_more:
+          type: "boolean"
+    CreateAgentDeploymentRequest:
+      type: "object"
+      properties:
+        agent_version:
+          type: "string"
+        display_name:
+          type: "string"
+        description:
+          type: "string"
+        trigger:
+          $ref: "#/components/schemas/AgentDeploymentTrigger"
+        payload:
+          $ref: "#/components/schemas/AgentDeploymentPayload"
+        budget:
+          $ref: "#/components/schemas/AgentDeploymentBudget"
+        limits:
+          $ref: "#/components/schemas/AgentDeploymentLimits"
+        metadata:
+          type: "object"
+        status:
+          $ref: "#/components/schemas/AgentDeploymentStatus"
+        key:
+          type: "string"
+          description: "Defaults to one derived from display_name."
+    CreateAgentDeploymentResponse:
+      type: "object"
+      properties:
+        agent_deployment:
+          $ref: "#/components/schemas/AgentDeployment"
+    GetAgentDeploymentResponse:
+      type: "object"
+      properties:
+        agent_deployment:
+          $ref: "#/components/schemas/AgentDeployment"
+    DeleteAgentDeploymentResponse:
+      type: "object"
+      properties: {}
+    UpdateAgentDeploymentRequest:
+      type: "object"
+      properties:
+        display_name:
+          type: "string"
+        description:
+          type: "string"
+        agent_version:
+          type: "string"
+        status:
+          $ref: "#/components/schemas/AgentDeploymentStatus"
+        trigger:
+          $ref: "#/components/schemas/AgentDeploymentTrigger"
+        payload:
+          $ref: "#/components/schemas/AgentDeploymentPayload"
+        budget:
+          $ref: "#/components/schemas/AgentDeploymentBudget"
+        limits:
+          $ref: "#/components/schemas/AgentDeploymentLimits"
+        metadata:
+          type: "object"
+    UpdateAgentDeploymentResponse:
+      type: "object"
+      properties:
+        agent_deployment:
+          $ref: "#/components/schemas/AgentDeployment"
+    AgentDeploymentRunStatus:
+      type: "string"
+      enum:
+        - "AGENT_DEPLOYMENT_RUN_STATUS_QUEUED"
+        - "AGENT_DEPLOYMENT_RUN_STATUS_RUNNING"
+        - "AGENT_DEPLOYMENT_RUN_STATUS_COMPLETED"
+        - "AGENT_DEPLOYMENT_RUN_STATUS_FAILED"
+        - "AGENT_DEPLOYMENT_RUN_STATUS_SKIPPED"
+    ListAgentDeploymentRunsResponse:
+      type: "object"
+      properties:
+        object:
+          type: "string"
+        data:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/AgentDeploymentRun"
+        has_more:
+          type: "boolean"
+    GetAgentDeploymentRunResponse:
+      type: "object"
+      properties:
+        run:
+          $ref: "#/components/schemas/AgentDeploymentRun"
+    RunAgentDeploymentRequest:
+      type: "object"
+      properties:
+        input:
+          $ref: "#/components/schemas/JsonValue"
+        event:
+          $ref: "#/components/schemas/JsonValue"
+    RunAgentDeploymentResponse:
+      type: "object"
+      properties:
+        run:
+          $ref: "#/components/schemas/AgentDeploymentRun"
+    AgentDeployment:
+      type: "object"
+      properties:
+        id:
+          type: "string"
+        workspace_id:
+          type: "string"
+        project_id:
+          type: "string"
+        agent_key:
+          type: "string"
+        agent_version:
+          type: "string"
+        agent_tag:
+          type: "string"
+        display_name:
+          type: "string"
+        description:
+          type: "string"
+        status:
+          $ref: "#/components/schemas/AgentDeploymentStatus"
+        paused_reason:
+          $ref: "#/components/schemas/AgentDeploymentPausedReason"
+        trigger:
+          $ref: "#/components/schemas/AgentDeploymentTrigger"
+        payload:
+          $ref: "#/components/schemas/AgentDeploymentPayload"
+        budget:
+          $ref: "#/components/schemas/AgentDeploymentBudget"
+        limits:
+          $ref: "#/components/schemas/AgentDeploymentLimits"
+        stats:
+          $ref: "#/components/schemas/AgentDeploymentStats"
+        metadata:
+          type: "object"
+        created_by_id:
+          type: "string"
+        updated_by_id:
+          type: "string"
+        created:
+          type: "string"
+          format: "date-time"
+        updated:
+          type: "string"
+          format: "date-time"
+        key:
+          type: "string"
+          description: "Unique within the agent; invokes the deployment as agent/<agent_key>@<key>. Immutable after create."
+    AgentDeploymentTrigger:
+      type: "object"
+      properties:
+        schedule:
+          $ref: "#/components/schemas/AgentDeploymentSchedule"
+        webhook:
+          $ref: "#/components/schemas/AgentDeploymentWebhook"
+    AgentDeploymentPayload:
+      type: "object"
+      properties:
+        input:
+          $ref: "#/components/schemas/JsonValue"
+        variables:
+          type: "object"
+        memory_entity_id:
+          type: "string"
+        metadata:
+          type: "object"
+    AgentDeploymentBudget:
+      type: "object"
+      properties:
+        max_cost_per_run:
+          type: "number"
+          format: "double"
+        amount:
+          type: "number"
+          format: "double"
+        period:
+          description: "Unspecified means monthly; one-time periods are rejected."
+          $ref: "#/components/schemas/BudgetPeriod"
+        budget_id:
+          type: "string"
+    AgentDeploymentLimits:
+      type: "object"
+      properties:
+        max_concurrent_runs:
+          type: "integer"
+          format: "int32"
+        max_invocations_per_hour:
+          type: "integer"
+          format: "int32"
+        max_runtime_seconds:
+          type: "integer"
+          format: "int32"
+    AgentDeploymentRun:
+      type: "object"
+      properties:
+        id:
+          type: "string"
+        workspace_id:
+          type: "string"
+        deployment_id:
+          type: "string"
+        agent_key:
+          type: "string"
+        agent_version:
+          type: "string"
+        trigger_context:
+          $ref: "#/components/schemas/AgentDeploymentTriggerContext"
+        status:
+          $ref: "#/components/schemas/AgentDeploymentRunStatus"
+        error:
+          $ref: "#/components/schemas/AgentDeploymentError"
+        response_id:
+          type: "string"
+        trace_id:
+          type: "string"
+        started_at:
+          type: "string"
+          format: "date-time"
+        ended_at:
+          type: "string"
+          format: "date-time"
+        created:
+          type: "string"
+          format: "date-time"
+      description: "Admission ledger entry for one firing; input, output and usage live on the response and its trace."
+    AgentDeploymentPausedReason:
+      type: "object"
+      properties:
+        type:
+          $ref: "#/components/schemas/AgentDeploymentPauseType"
+        error:
+          $ref: "#/components/schemas/AgentDeploymentError"
+        at:
+          type: "string"
+          format: "date-time"
+    AgentDeploymentStats:
+      type: "object"
+      properties:
+        last_run_at:
+          type: "string"
+          format: "date-time"
+        last_run_status:
+          $ref: "#/components/schemas/AgentDeploymentRunStatus"
+        run_count:
+          type: "string"
+        period_cost:
+          type: "number"
+          format: "double"
+        next_run_at:
+          type: "string"
+          format: "date-time"
+        upcoming_runs_at:
+          type: "array"
+          items:
+            type: "string"
+            format: "date-time"
+        recent_runs:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/AgentDeploymentRunSummary"
+          description: "Output only: the latest settled runs, oldest first, capped at 30."
+    AgentDeploymentSchedule:
+      type: "object"
+      properties:
+        expression:
+          type: "string"
+        timezone:
+          type: "string"
+        ends_at:
+          type: "string"
+          format: "date-time"
+        generation:
+          type: "string"
+        legacy_type:
+          description: "Output only: set on schedules migrated from once and interval schedules."
+          $ref: "#/components/schemas/AgentDeploymentLegacyScheduleType"
+    AgentDeploymentWebhook:
+      type: "object"
+      properties: {}
+    BudgetPeriod:
+      type: "string"
+      enum:
+        - "BUDGET_PERIOD_DAILY"
+        - "BUDGET_PERIOD_WEEKLY"
+        - "BUDGET_PERIOD_MONTHLY"
+        - "BUDGET_PERIOD_YEARLY"
+        - "BUDGET_PERIOD_ONE_TIME"
+    AgentDeploymentTriggerContext:
+      type: "object"
+      properties:
+        type:
+          $ref: "#/components/schemas/AgentDeploymentTriggerType"
+        scheduled_at:
+          type: "string"
+          format: "date-time"
+        actor_id:
+          type: "string"
+        trigger_ref:
+          type: "string"
+    AgentDeploymentError:
+      type: "object"
+      properties:
+        type:
+          $ref: "#/components/schemas/AgentDeploymentRunReason"
+        message:
+          type: "string"
+    AgentDeploymentPauseType:
+      type: "string"
+      enum:
+        - "AGENT_DEPLOYMENT_PAUSE_TYPE_MANUAL"
+        - "AGENT_DEPLOYMENT_PAUSE_TYPE_AUTO"
+    AgentDeploymentRunSummary:
+      type: "object"
+      properties:
+        run_id:
+          type: "string"
+        status:
+          $ref: "#/components/schemas/AgentDeploymentRunStatus"
+        reason:
+          $ref: "#/components/schemas/AgentDeploymentRunReason"
+        at:
+          type: "string"
+          format: "date-time"
+      description: "One firing in the deployment's recent run history."
+    AgentDeploymentLegacyScheduleType:
+      type: "string"
+      enum:
+        - "AGENT_DEPLOYMENT_LEGACY_SCHEDULE_TYPE_ONCE"
+        - "AGENT_DEPLOYMENT_LEGACY_SCHEDULE_TYPE_INTERVAL"
+    AgentDeploymentTriggerType:
+      type: "string"
+      enum:
+        - "AGENT_DEPLOYMENT_TRIGGER_TYPE_SCHEDULE"
+        - "AGENT_DEPLOYMENT_TRIGGER_TYPE_WEBHOOK"
+        - "AGENT_DEPLOYMENT_TRIGGER_TYPE_MANUAL"
+        - "AGENT_DEPLOYMENT_TRIGGER_TYPE_API"
+    AgentDeploymentRunReason:
+      type: "string"
+      enum:
+        - "AGENT_DEPLOYMENT_RUN_REASON_DEPLOYMENT_PAUSED"
+        - "AGENT_DEPLOYMENT_RUN_REASON_DEPLOYMENT_ARCHIVED"
+        - "AGENT_DEPLOYMENT_RUN_REASON_STALE_GENERATION"
+        - "AGENT_DEPLOYMENT_RUN_REASON_AGENT_NOT_FOUND"
+        - "AGENT_DEPLOYMENT_RUN_REASON_AGENT_VERSION_NOT_FOUND"
+        - "AGENT_DEPLOYMENT_RUN_REASON_BUDGET_REACHED"
+        - "AGENT_DEPLOYMENT_RUN_REASON_CONCURRENCY_LIMIT"
+        - "AGENT_DEPLOYMENT_RUN_REASON_RATE_LIMITED"
+        - "AGENT_DEPLOYMENT_RUN_REASON_EXECUTION_FAILED"
+        - "AGENT_DEPLOYMENT_RUN_REASON_EXECUTION_TIMEOUT"
+        - "AGENT_DEPLOYMENT_RUN_REASON_SERVICE_UNAVAILABLE"
+        - "AGENT_DEPLOYMENT_RUN_REASON_DUPLICATE_TRIGGER"
+        - "AGENT_DEPLOYMENT_RUN_REASON_SCHEDULE_COMPLETED"
     ListExternalAgentsResponse:
       type: "object"
       properties:
@@ -14869,14 +15451,9 @@ components:
         - "BUDGET_SCOPE_KIND_API_KEY"
         - "BUDGET_SCOPE_KIND_PROVIDER"
         - "BUDGET_SCOPE_KIND_MODEL"
-    BudgetPeriod:
-      type: "string"
-      enum:
-        - "BUDGET_PERIOD_DAILY"
-        - "BUDGET_PERIOD_WEEKLY"
-        - "BUDGET_PERIOD_MONTHLY"
-        - "BUDGET_PERIOD_YEARLY"
-        - "BUDGET_PERIOD_ONE_TIME"
+        - "BUDGET_SCOPE_KIND_AGENT_DEPLOYMENT"
+        - "BUDGET_SCOPE_KIND_FACTORY_SCOPE"
+        - "BUDGET_SCOPE_KIND_CATEGORY"
     BudgetSortField:
       type: "string"
       enum:
@@ -14907,7 +15484,7 @@ components:
         scope:
           allOf:
             - $ref: "#/components/schemas/BudgetScope"
-          description: "Structured scope. Mutually exclusive with `match`: provide a scope\n for the six canonical kinds (the server derives the matching CEL),\n or provide `match` for a dynamic budget. Exactly one of the two\n must be set."
+          description: "Structured scope. Mutually exclusive with `match`: provide a scope\n for the canonical kinds (the server derives the matching CEL),\n or provide `match` for a dynamic budget. Exactly one of the two\n must be set."
         match:
           allOf:
             - $ref: "#/components/schemas/BudgetMatch"
@@ -14997,14 +15574,17 @@ components:
           description: "Updated budget."
     ResetBudgetConsumptionRequest:
       type: "object"
-      properties: {}
+      properties:
+        scope_target_id:
+          type: "string"
+          description: "Category entity target; omit on reset to reset every entity."
     ResetBudgetConsumptionResponse:
       type: "object"
       properties:
         budget:
           allOf:
             - $ref: "#/components/schemas/BudgetRestResponse"
-          description: "Budget after reset. The record itself is unchanged; only counters\n were cleared."
+          description: "Budget after reset; category-wide resets advance its internal counter generation."
     Budget:
       required:
         - "budget_id"
@@ -15063,7 +15643,13 @@ components:
           $ref: "#/components/schemas/ProviderBudgetScope"
         model:
           $ref: "#/components/schemas/ModelBudgetScope"
-      description: "Closed oneof of workspace, project, identity, api_key, provider, or model. Exactly one variant must be set."
+        agent_deployment:
+          $ref: "#/components/schemas/AgentDeploymentBudgetScope"
+        factory_scope:
+          $ref: "#/components/schemas/FactoryBudgetScope"
+        category:
+          $ref: "#/components/schemas/CategoryBudgetScope"
+      description: "Closed oneof of workspace, project, identity, api_key, provider, model, agent_deployment, factory_scope, or category. Exactly one variant must be set."
     BudgetMatch:
       type: "object"
       properties:
@@ -15162,6 +15748,25 @@ components:
         model_id:
           type: "string"
       description: "Per-model cap. The value is the FULL model reference as callers send\n it (\"openai/gpt-4o\", or \"workspaceKey@openai/gpt-4o\" for private\n models)."
+    AgentDeploymentBudgetScope:
+      type: "object"
+      properties:
+        deployment_id:
+          type: "string"
+    FactoryBudgetScope:
+      required:
+        - "factory_id"
+      type: "object"
+      properties:
+        factory_id:
+          type: "string"
+      description: "Per-factory cap. Matches requests from the factory's work units."
+    CategoryBudgetScope:
+      type: "object"
+      properties:
+        category:
+          $ref: "#/components/schemas/BudgetScopeKind"
+      description: "A separate allowance per entity; an active individual budget takes precedence."
     BudgetAlertDimension:
       type: "string"
       enum:
@@ -15226,7 +15831,13 @@ components:
           $ref: "#/components/schemas/ProviderBudgetScope"
         model:
           $ref: "#/components/schemas/ModelBudgetScopeRestResponse"
-      description: "Closed oneof of workspace, project, identity, api_key, provider, or model. Exactly one variant must be set."
+        agentDeployment:
+          $ref: "#/components/schemas/AgentDeploymentBudgetScopeRestResponse"
+        factoryScope:
+          $ref: "#/components/schemas/FactoryBudgetScopeRestResponse"
+        category:
+          $ref: "#/components/schemas/CategoryBudgetScope"
+      description: "Closed oneof of workspace, project, identity, api_key, provider, model, agent_deployment, factory_scope, or category. Exactly one variant must be set."
     BudgetLimitsRestResponse:
       type: "object"
       properties:
@@ -15295,6 +15906,19 @@ components:
         modelId:
           type: "string"
       description: "Per-model cap. The value is the FULL model reference as callers send\n it (\"openai/gpt-4o\", or \"workspaceKey@openai/gpt-4o\" for private\n models)."
+    AgentDeploymentBudgetScopeRestResponse:
+      type: "object"
+      properties:
+        deploymentId:
+          type: "string"
+    FactoryBudgetScopeRestResponse:
+      required:
+        - "factoryId"
+      type: "object"
+      properties:
+        factoryId:
+          type: "string"
+      description: "Per-factory cap. Matches requests from the factory's work units."
     ListEnvironmentsResponse:
       required:
         - "object"
@@ -16929,6 +17553,9 @@ components:
           allOf:
             - $ref: "#/components/schemas/McpEnterpriseAuthConfig"
           description: "Superseded by `oauth` for ENTERPRISE_MANAGED; accepted on write and mirrored on read."
+        outbound_connection_id:
+          type: "string"
+          description: "Outbound workload federation connection that supplies the bearer token; set when type is WORKLOAD_FEDERATION."
     McpOpenApiConfig:
       type: "object"
       properties:
@@ -17166,6 +17793,7 @@ components:
         - "MCP_AUTH_TYPE_OAUTH_CLIENT_CREDENTIALS"
         - "MCP_AUTH_TYPE_PER_USER_OAUTH"
         - "MCP_AUTH_TYPE_ENTERPRISE_MANAGED"
+        - "MCP_AUTH_TYPE_WORKLOAD_FEDERATION"
     McpHeaderSecret:
       type: "object"
       properties:
@@ -19074,6 +19702,18 @@ components:
         kind:
           description: "Whether this thread is a conversation or a coding-agent chat."
           $ref: "#/components/schemas/ThreadKind"
+        owner_id:
+          type: "string"
+          description: "Account ID of the member who owns a private coding-agent thread. Unset when the thread is visible to the workspace."
+        model:
+          type: "string"
+          description: "Model used by most of the thread's traces."
+        provider:
+          type: "string"
+          description: "Provider of the model used by most of the thread's traces."
+        title_source:
+          type: "string"
+          description: "What set the title: user (renamed in orq), agent (the coding assistant's own name for the session), explicit (sent with the traces) or first_prompt."
     ThreadFilters:
       required:
         - "interval"
@@ -19099,6 +19739,12 @@ components:
           type: "string"
         kind:
           $ref: "#/components/schemas/ThreadKind"
+        search:
+          type: "string"
+          description: "Case-insensitive text matched against the thread title and its external ID."
+        mine:
+          type: "boolean"
+          description: "Only threads owned by the caller: their private coding-agent threads."
     SessionInterval:
       type: "string"
       enum:
@@ -22876,7 +23522,7 @@ components:
           description: "Developer-defined key-value pairs attached to the response (OpenAI spec: `Map<string, string>`). Non-string values are rejected with a 400."
           type: "object"
         model:
-          description: "The model to use in provider/model format (e.g. openai/gpt-4o). Use `agent/<key>` to invoke a pre-configured agent from this platform."
+          description: "The model to use in provider/model format (e.g. openai/gpt-4o). Use `agent/<key>` to invoke an agent, or `agent/<key>@<deployment_key>` (or `@<deployment_id>`) to invoke a deployment with its pinned version, payload, limits and run history. Legacy version tags remain supported."
           type: "string"
         parallel_tool_calls:
           description: "Whether to allow parallel tool calls."
@@ -29462,7 +30108,7 @@ paths:
                                 type: "string"
                                 format: "ulid"
                                 pattern: "^[0-9A-HJKMNP-TV-Z]{26}$"
-                                default: "01M8ENWEZ4800XFE40HC15TAMP"
+                                default: "01M8G0ST8F8AZMXTCGP0234J52"
                                 readOnly: true
                                 description: "The unique identifier of the playground knowledge base"
                               knowledge_id:
@@ -34144,6 +34790,16 @@ paths:
           description: "The unique key of the agent to delete"
           name: "agent_key"
           in: "path"
+        - schema:
+            type: "string"
+            enum:
+              - "true"
+              - "false"
+            description: "Delete even when deployments are active or have runs in progress."
+          required: false
+          description: "Delete even when deployments are active or have runs in progress."
+          name: "force"
+          in: "query"
       responses:
         "204":
           description: "Agent successfully deleted. No content is returned, but the agent has been permanently removed from the workspace."
@@ -34160,6 +34816,33 @@ paths:
                     type: "string"
                 required:
                   - "message"
+        "409":
+          description: "Agent has active deployments or runs in progress."
+          content:
+            application/json:
+              schema:
+                type: "object"
+                properties:
+                  message:
+                    type: "string"
+                  deployments:
+                    type: "array"
+                    items:
+                      type: "object"
+                      properties:
+                        id:
+                          type: "string"
+                        display_name:
+                          type: "string"
+                        status:
+                          type: "string"
+                      required:
+                        - "id"
+                        - "display_name"
+                        - "status"
+                required:
+                  - "message"
+                  - "deployments"
       security:
         - ApiKey: []
     get:
@@ -38877,7 +39560,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01M8ENWF0QEZCS2GSMP53RGKF4"
+                                          default: "01M8G0STA5TNTF8N3E2S32JA7R"
                                         name:
                                           type: "string"
                                         description:
@@ -40504,7 +41187,7 @@ paths:
                                       properties:
                                         id:
                                           type: "string"
-                                          default: "01M8ENWF1066V3K0KZH27TNY3M"
+                                          default: "01M8G0STAHQXR28QX99WAR59K0"
                                         name:
                                           type: "string"
                                         description:
@@ -49570,7 +50253,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M8ENWF1TDVZCCB3F8AJRE8AX"
+                              default: "tool_01M8G0STBBZF72FBV6G3H2HD24"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -49671,7 +50354,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M8ENWF1T8ZWYKPK974S221J5"
+                              default: "tool_01M8G0STBC9KY5KR3N2EW0SFWZ"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -49774,7 +50457,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M8ENWF1TY6KAJ8WVKNRTEY1W"
+                              default: "tool_01M8G0STBCJ9YZRM1BF7E5DNWK"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -49918,7 +50601,7 @@ paths:
                           properties:
                             _id:
                               type: "string"
-                              default: "tool_01M8ENWF1VWX049Y6GPN3CVQ1J"
+                              default: "tool_01M8G0STBDXFWEYDDGSMPZHYRG"
                             path:
                               type: "string"
                               description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -50406,7 +51089,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M8ENWF219AFNBZKBFHMREKP5"
+                        default: "tool_01M8G0STBF6ZWKJ3GZNTQK4Q2Y"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -50507,7 +51190,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M8ENWF21H09CVFRKV0M3H9Z2"
+                        default: "tool_01M8G0STBF3AN4VJAK5A8Q36PC"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -50610,7 +51293,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M8ENWF21ZYKJ889AN4BCQJPQ"
+                        default: "tool_01M8G0STBF1QRZRJ9RQNE49QRX"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -50754,7 +51437,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M8ENWF22E5YXMV2E3NQQ9S9Z"
+                        default: "tool_01M8G0STBG3E59FC0BYACWH0CH"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -51259,7 +51942,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M8ENWF2367D6T457ZAZ3XAFQ"
+                        default: "tool_01M8G0STBHA3GBM4RSKHFT53XQ"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -51360,7 +52043,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M8ENWF23H6CAEQMDY9GP4YD8"
+                        default: "tool_01M8G0STBHKVK23N6EVJ1M0T55"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -51463,7 +52146,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M8ENWF24D99YAJMWV9SDW3VS"
+                        default: "tool_01M8G0STBH6D1TVE09R0W0XT7A"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -51607,7 +52290,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M8ENWF24X00TN2S3KY32RTNP"
+                        default: "tool_01M8G0STBJ4DN90A8E3Q1ZRAG6"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -51776,7 +52459,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M8ENWF27T6EYEQ7PHEQX71N7"
+                        default: "tool_01M8G0STBM5NZ1BSN6TF7YYFC1"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -51877,7 +52560,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M8ENWF27GMYN6PD4WX550B0F"
+                        default: "tool_01M8G0STBNH9CTXD2KG63B04P5"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -51980,7 +52663,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M8ENWF27VCXRJCC6CSQ634XX"
+                        default: "tool_01M8G0STBNY938EFW3MEE030A2"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -52124,7 +52807,7 @@ paths:
                     properties:
                       _id:
                         type: "string"
-                        default: "tool_01M8ENWF28MKYFRR1CTMQPFJCV"
+                        default: "tool_01M8G0STBN4SGKPW0S3NHMNAEW"
                       path:
                         type: "string"
                         description: "Entity storage path.\n\nWith workspace-level API keys, use the format `project/folder/subfolder/...`. The first element must be the display name of an existing project, followed by nested folders (auto-created as needed). Example: `Default Project/agents`.\n\nWith project-level API keys, the project is predetermined by the API key, so the path is relative to that project. Example: `agents`. For backward compatibility, a leading project name is ignored when it matches the scoped project."
@@ -61446,16 +62129,32 @@ paths:
                                 type:
                                   type: "string"
                                   enum:
-                                    - "categorical"
-                                values:
-                                  type: "array"
-                                  items:
-                                    type: "string"
-                                    minLength: 1
+                                    - "decision"
+                                pass_criteria:
+                                  type: "object"
+                                  description: "Pass condition for each decision question, keyed by question name. Use `noul` (expected boolean) for a noul question, `choice` (options that pass) for a choice question and `score` (lowest level index that passes) for a score question. Every question needs a condition."
+                                  additionalProperties:
+                                    type: "object"
+                                    properties:
+                                      noul:
+                                        type:
+                                          - "boolean"
+                                          - "null"
+                                      choice:
+                                        type:
+                                          - "array"
+                                          - "null"
+                                        items:
+                                          type: "string"
+                                      score:
+                                        type:
+                                          - "integer"
+                                          - "null"
+                                        minimum: 0
                               required:
                                 - "type"
-                                - "values"
-                              title: "Categorical"
+                                - "pass_criteria"
+                              title: "Decision"
                             - type: "object"
                               properties:
                                 enabled:
@@ -61490,7 +62189,7 @@ paths:
                           type: "string"
                           enum:
                             - "boolean"
-                            - "categorical"
+                            - "decision"
                             - "number"
                             - "string"
                           description: "The type of output expected from the evaluator"
@@ -61506,26 +62205,26 @@ paths:
                           maximum: 3
                         prompt:
                           type: "string"
-                        categories:
+                          description: "The judge prompt. Required unless `output_type` is `decision`, where each decision question carries its own instructions."
+                        decision_questions:
                           type:
-                            - "array"
+                            - "object"
                             - "null"
-                          items:
-                            type: "string"
-                        categorical_labels:
-                          type:
-                            - "array"
-                            - "null"
-                          items:
-                            type: "object"
-                            properties:
-                              value:
+                          description: "Questions a decision LLM evaluator asks in place of a prompt. Required when `output_type` is `decision`."
+                          properties:
+                            questions:
+                              type: "object"
+                              description: "Questions keyed by name, in the same shape as `questions` in a Decisions request."
+                              additionalProperties:
+                                $ref: "#/components/schemas/EvaluatorDecisionQuestion"
+                            order:
+                              type: "array"
+                              description: "Question names in the order the user arranged them, since `questions` is a map and keeps no order. Lists every question exactly once."
+                              items:
                                 type: "string"
-                                minLength: 1
-                              description:
-                                type: "string"
-                            required:
-                              - "value"
+                          required:
+                            - "questions"
+                            - "order"
                         dataset_id:
                           type:
                             - "string"
@@ -61554,7 +62253,6 @@ paths:
                           type: "string"
                       required:
                         - "type"
-                        - "prompt"
                         - "key"
                         - "mode"
                         - "model"
@@ -61599,16 +62297,32 @@ paths:
                                 type:
                                   type: "string"
                                   enum:
-                                    - "categorical"
-                                values:
-                                  type: "array"
-                                  items:
-                                    type: "string"
-                                    minLength: 1
+                                    - "decision"
+                                pass_criteria:
+                                  type: "object"
+                                  description: "Pass condition for each decision question, keyed by question name. Use `noul` (expected boolean) for a noul question, `choice` (options that pass) for a choice question and `score` (lowest level index that passes) for a score question. Every question needs a condition."
+                                  additionalProperties:
+                                    type: "object"
+                                    properties:
+                                      noul:
+                                        type:
+                                          - "boolean"
+                                          - "null"
+                                      choice:
+                                        type:
+                                          - "array"
+                                          - "null"
+                                        items:
+                                          type: "string"
+                                      score:
+                                        type:
+                                          - "integer"
+                                          - "null"
+                                        minimum: 0
                               required:
                                 - "type"
-                                - "values"
-                              title: "Categorical"
+                                - "pass_criteria"
+                              title: "Decision"
                             - type: "object"
                               properties:
                                 enabled:
@@ -61643,7 +62357,7 @@ paths:
                           type: "string"
                           enum:
                             - "boolean"
-                            - "categorical"
+                            - "decision"
                             - "number"
                             - "string"
                           description: "The type of output expected from the evaluator"
@@ -61659,26 +62373,26 @@ paths:
                           maximum: 3
                         prompt:
                           type: "string"
-                        categories:
+                          description: "The judge prompt. Required unless `output_type` is `decision`, where each decision question carries its own instructions."
+                        decision_questions:
                           type:
-                            - "array"
+                            - "object"
                             - "null"
-                          items:
-                            type: "string"
-                        categorical_labels:
-                          type:
-                            - "array"
-                            - "null"
-                          items:
-                            type: "object"
-                            properties:
-                              value:
+                          description: "Questions a decision LLM evaluator asks in place of a prompt. Required when `output_type` is `decision`."
+                          properties:
+                            questions:
+                              type: "object"
+                              description: "Questions keyed by name, in the same shape as `questions` in a Decisions request."
+                              additionalProperties:
+                                $ref: "#/components/schemas/EvaluatorDecisionQuestion"
+                            order:
+                              type: "array"
+                              description: "Question names in the order the user arranged them, since `questions` is a map and keeps no order. Lists every question exactly once."
+                              items:
                                 type: "string"
-                                minLength: 1
-                              description:
-                                type: "string"
-                            required:
-                              - "value"
+                          required:
+                            - "questions"
+                            - "order"
                         dataset_id:
                           type:
                             - "string"
@@ -61801,7 +62515,6 @@ paths:
                             - "judges"
                       required:
                         - "type"
-                        - "prompt"
                         - "key"
                         - "mode"
                         - "jury"
@@ -61846,16 +62559,32 @@ paths:
                             type:
                               type: "string"
                               enum:
-                                - "categorical"
-                            values:
-                              type: "array"
-                              items:
-                                type: "string"
-                                minLength: 1
+                                - "decision"
+                            pass_criteria:
+                              type: "object"
+                              description: "Pass condition for each decision question, keyed by question name. Use `noul` (expected boolean) for a noul question, `choice` (options that pass) for a choice question and `score` (lowest level index that passes) for a score question. Every question needs a condition."
+                              additionalProperties:
+                                type: "object"
+                                properties:
+                                  noul:
+                                    type:
+                                      - "boolean"
+                                      - "null"
+                                  choice:
+                                    type:
+                                      - "array"
+                                      - "null"
+                                    items:
+                                      type: "string"
+                                  score:
+                                    type:
+                                      - "integer"
+                                      - "null"
+                                    minimum: 0
                           required:
                             - "type"
-                            - "values"
-                          title: "Categorical"
+                            - "pass_criteria"
+                          title: "Decision"
                         - type: "object"
                           properties:
                             enabled:
@@ -62071,16 +62800,32 @@ paths:
                               type:
                                 type: "string"
                                 enum:
-                                  - "categorical"
-                              values:
-                                type: "array"
-                                items:
-                                  type: "string"
-                                  minLength: 1
+                                  - "decision"
+                              pass_criteria:
+                                type: "object"
+                                description: "Pass condition for each decision question, keyed by question name. Use `noul` (expected boolean) for a noul question, `choice` (options that pass) for a choice question and `score` (lowest level index that passes) for a score question. Every question needs a condition."
+                                additionalProperties:
+                                  type: "object"
+                                  properties:
+                                    noul:
+                                      type:
+                                        - "boolean"
+                                        - "null"
+                                    choice:
+                                      type:
+                                        - "array"
+                                        - "null"
+                                      items:
+                                        type: "string"
+                                    score:
+                                      type:
+                                        - "integer"
+                                        - "null"
+                                      minimum: 0
                             required:
                               - "type"
-                              - "values"
-                            title: "Categorical"
+                              - "pass_criteria"
+                            title: "Decision"
                           - type: "object"
                             properties:
                               enabled:
@@ -62115,7 +62860,7 @@ paths:
                         type: "string"
                         enum:
                           - "boolean"
-                          - "categorical"
+                          - "decision"
                           - "number"
                           - "string"
                         description: "The type of output expected from the evaluator"
@@ -62379,26 +63124,26 @@ paths:
                           - "judges"
                       prompt:
                         type: "string"
-                      categories:
+                        description: "The judge prompt. Required unless `output_type` is `decision`, where each decision question carries its own instructions."
+                      decision_questions:
                         type:
-                          - "array"
+                          - "object"
                           - "null"
-                        items:
-                          type: "string"
-                      categorical_labels:
-                        type:
-                          - "array"
-                          - "null"
-                        items:
-                          type: "object"
-                          properties:
-                            value:
+                        description: "Questions a decision LLM evaluator asks in place of a prompt. Required when `output_type` is `decision`."
+                        properties:
+                          questions:
+                            type: "object"
+                            description: "Questions keyed by name, in the same shape as `questions` in a Decisions request."
+                            additionalProperties:
+                              $ref: "#/components/schemas/EvaluatorDecisionQuestion"
+                          order:
+                            type: "array"
+                            description: "Question names in the order the user arranged them, since `questions` is a map and keeps no order. Lists every question exactly once."
+                            items:
                               type: "string"
-                              minLength: 1
-                            description:
-                              type: "string"
-                          required:
-                            - "value"
+                        required:
+                          - "questions"
+                          - "order"
                       dataset_id:
                         type:
                           - "string"
@@ -62411,7 +63156,6 @@ paths:
                       - "owner"
                       - "domain_id"
                       - "type"
-                      - "prompt"
                     title: "LLM"
                   - type: "object"
                     properties:
@@ -62498,16 +63242,32 @@ paths:
                               type:
                                 type: "string"
                                 enum:
-                                  - "categorical"
-                              values:
-                                type: "array"
-                                items:
-                                  type: "string"
-                                  minLength: 1
+                                  - "decision"
+                              pass_criteria:
+                                type: "object"
+                                description: "Pass condition for each decision question, keyed by question name. Use `noul` (expected boolean) for a noul question, `choice` (options that pass) for a choice question and `score` (lowest level index that passes) for a score question. Every question needs a condition."
+                                additionalProperties:
+                                  type: "object"
+                                  properties:
+                                    noul:
+                                      type:
+                                        - "boolean"
+                                        - "null"
+                                    choice:
+                                      type:
+                                        - "array"
+                                        - "null"
+                                      items:
+                                        type: "string"
+                                    score:
+                                      type:
+                                        - "integer"
+                                        - "null"
+                                      minimum: 0
                             required:
                               - "type"
-                              - "values"
-                            title: "Categorical"
+                              - "pass_criteria"
+                            title: "Decision"
                           - type: "object"
                             properties:
                               enabled:
@@ -62542,7 +63302,7 @@ paths:
                         type: "string"
                         enum:
                           - "boolean"
-                          - "categorical"
+                          - "decision"
                           - "number"
                           - "string"
                       type:
@@ -62947,16 +63707,32 @@ paths:
                               type:
                                 type: "string"
                                 enum:
-                                  - "categorical"
-                              values:
-                                type: "array"
-                                items:
-                                  type: "string"
-                                  minLength: 1
+                                  - "decision"
+                              pass_criteria:
+                                type: "object"
+                                description: "Pass condition for each decision question, keyed by question name. Use `noul` (expected boolean) for a noul question, `choice` (options that pass) for a choice question and `score` (lowest level index that passes) for a score question. Every question needs a condition."
+                                additionalProperties:
+                                  type: "object"
+                                  properties:
+                                    noul:
+                                      type:
+                                        - "boolean"
+                                        - "null"
+                                    choice:
+                                      type:
+                                        - "array"
+                                        - "null"
+                                      items:
+                                        type: "string"
+                                    score:
+                                      type:
+                                        - "integer"
+                                        - "null"
+                                      minimum: 0
                             required:
                               - "type"
-                              - "values"
-                            title: "Categorical"
+                              - "pass_criteria"
+                            title: "Decision"
                           - type: "object"
                             properties:
                               enabled:
@@ -63117,16 +63893,32 @@ paths:
                               type:
                                 type: "string"
                                 enum:
-                                  - "categorical"
-                              values:
-                                type: "array"
-                                items:
-                                  type: "string"
-                                  minLength: 1
+                                  - "decision"
+                              pass_criteria:
+                                type: "object"
+                                description: "Pass condition for each decision question, keyed by question name. Use `noul` (expected boolean) for a noul question, `choice` (options that pass) for a choice question and `score` (lowest level index that passes) for a score question. Every question needs a condition."
+                                additionalProperties:
+                                  type: "object"
+                                  properties:
+                                    noul:
+                                      type:
+                                        - "boolean"
+                                        - "null"
+                                    choice:
+                                      type:
+                                        - "array"
+                                        - "null"
+                                      items:
+                                        type: "string"
+                                    score:
+                                      type:
+                                        - "integer"
+                                        - "null"
+                                      minimum: 0
                             required:
                               - "type"
-                              - "values"
-                            title: "Categorical"
+                              - "pass_criteria"
+                            title: "Decision"
                           - type: "object"
                             properties:
                               enabled:
@@ -63262,16 +64054,32 @@ paths:
                               type:
                                 type: "string"
                                 enum:
-                                  - "categorical"
-                              values:
-                                type: "array"
-                                items:
-                                  type: "string"
-                                  minLength: 1
+                                  - "decision"
+                              pass_criteria:
+                                type: "object"
+                                description: "Pass condition for each decision question, keyed by question name. Use `noul` (expected boolean) for a noul question, `choice` (options that pass) for a choice question and `score` (lowest level index that passes) for a score question. Every question needs a condition."
+                                additionalProperties:
+                                  type: "object"
+                                  properties:
+                                    noul:
+                                      type:
+                                        - "boolean"
+                                        - "null"
+                                    choice:
+                                      type:
+                                        - "array"
+                                        - "null"
+                                      items:
+                                        type: "string"
+                                    score:
+                                      type:
+                                        - "integer"
+                                        - "null"
+                                      minimum: 0
                             required:
                               - "type"
-                              - "values"
-                            title: "Categorical"
+                              - "pass_criteria"
+                            title: "Decision"
                           - type: "object"
                             properties:
                               enabled:
@@ -63306,7 +64114,7 @@ paths:
                         type: "string"
                         enum:
                           - "boolean"
-                          - "categorical"
+                          - "decision"
                           - "number"
                           - "string"
                         description: "The type of output expected from the evaluator"
@@ -63426,16 +64234,32 @@ paths:
                               type:
                                 type: "string"
                                 enum:
-                                  - "categorical"
-                              values:
-                                type: "array"
-                                items:
-                                  type: "string"
-                                  minLength: 1
+                                  - "decision"
+                              pass_criteria:
+                                type: "object"
+                                description: "Pass condition for each decision question, keyed by question name. Use `noul` (expected boolean) for a noul question, `choice` (options that pass) for a choice question and `score` (lowest level index that passes) for a score question. Every question needs a condition."
+                                additionalProperties:
+                                  type: "object"
+                                  properties:
+                                    noul:
+                                      type:
+                                        - "boolean"
+                                        - "null"
+                                    choice:
+                                      type:
+                                        - "array"
+                                        - "null"
+                                      items:
+                                        type: "string"
+                                    score:
+                                      type:
+                                        - "integer"
+                                        - "null"
+                                      minimum: 0
                             required:
                               - "type"
-                              - "values"
-                            title: "Categorical"
+                              - "pass_criteria"
+                            title: "Decision"
                           - type: "object"
                             properties:
                               enabled:
@@ -63572,16 +64396,32 @@ paths:
                               type:
                                 type: "string"
                                 enum:
-                                  - "categorical"
-                              values:
-                                type: "array"
-                                items:
-                                  type: "string"
-                                  minLength: 1
+                                  - "decision"
+                              pass_criteria:
+                                type: "object"
+                                description: "Pass condition for each decision question, keyed by question name. Use `noul` (expected boolean) for a noul question, `choice` (options that pass) for a choice question and `score` (lowest level index that passes) for a score question. Every question needs a condition."
+                                additionalProperties:
+                                  type: "object"
+                                  properties:
+                                    noul:
+                                      type:
+                                        - "boolean"
+                                        - "null"
+                                    choice:
+                                      type:
+                                        - "array"
+                                        - "null"
+                                      items:
+                                        type: "string"
+                                    score:
+                                      type:
+                                        - "integer"
+                                        - "null"
+                                      minimum: 0
                             required:
                               - "type"
-                              - "values"
-                            title: "Categorical"
+                              - "pass_criteria"
+                            title: "Decision"
                           - type: "object"
                             properties:
                               enabled:
@@ -63616,7 +64456,7 @@ paths:
                         type: "string"
                         enum:
                           - "boolean"
-                          - "categorical"
+                          - "decision"
                           - "number"
                           - "string"
                         description: "The type of output expected from the evaluator"
@@ -63721,16 +64561,32 @@ paths:
                               type:
                                 type: "string"
                                 enum:
-                                  - "categorical"
-                              values:
-                                type: "array"
-                                items:
-                                  type: "string"
-                                  minLength: 1
+                                  - "decision"
+                              pass_criteria:
+                                type: "object"
+                                description: "Pass condition for each decision question, keyed by question name. Use `noul` (expected boolean) for a noul question, `choice` (options that pass) for a choice question and `score` (lowest level index that passes) for a score question. Every question needs a condition."
+                                additionalProperties:
+                                  type: "object"
+                                  properties:
+                                    noul:
+                                      type:
+                                        - "boolean"
+                                        - "null"
+                                    choice:
+                                      type:
+                                        - "array"
+                                        - "null"
+                                      items:
+                                        type: "string"
+                                    score:
+                                      type:
+                                        - "integer"
+                                        - "null"
+                                      minimum: 0
                             required:
                               - "type"
-                              - "values"
-                            title: "Categorical"
+                              - "pass_criteria"
+                            title: "Decision"
                           - type: "object"
                             properties:
                               enabled:
@@ -63902,28 +64758,28 @@ paths:
                   type: "string"
                 prompt:
                   type: "string"
+                  description: "The judge prompt. Required unless `output_type` is `decision`, where each decision question carries its own instructions."
                 output_type:
                   type: "string"
-                categories:
+                decision_questions:
                   type:
-                    - "array"
+                    - "object"
                     - "null"
-                  items:
-                    type: "string"
-                categorical_labels:
-                  type:
-                    - "array"
-                    - "null"
-                  items:
-                    type: "object"
-                    properties:
-                      value:
+                  description: "Questions a decision LLM evaluator asks in place of a prompt. Required when `output_type` is `decision`."
+                  properties:
+                    questions:
+                      type: "object"
+                      description: "Questions keyed by name, in the same shape as `questions` in a Decisions request."
+                      additionalProperties:
+                        $ref: "#/components/schemas/EvaluatorDecisionQuestion"
+                    order:
+                      type: "array"
+                      description: "Question names in the order the user arranged them, since `questions` is a map and keeps no order. Lists every question exactly once."
+                      items:
                         type: "string"
-                        minLength: 1
-                      description:
-                        type: "string"
-                    required:
-                      - "value"
+                  required:
+                    - "questions"
+                    - "order"
                 dataset_id:
                   type:
                     - "string"
@@ -64086,16 +64942,32 @@ paths:
                         type:
                           type: "string"
                           enum:
-                            - "categorical"
-                        values:
-                          type: "array"
-                          items:
-                            type: "string"
-                            minLength: 1
+                            - "decision"
+                        pass_criteria:
+                          type: "object"
+                          description: "Pass condition for each decision question, keyed by question name. Use `noul` (expected boolean) for a noul question, `choice` (options that pass) for a choice question and `score` (lowest level index that passes) for a score question. Every question needs a condition."
+                          additionalProperties:
+                            type: "object"
+                            properties:
+                              noul:
+                                type:
+                                  - "boolean"
+                                  - "null"
+                              choice:
+                                type:
+                                  - "array"
+                                  - "null"
+                                items:
+                                  type: "string"
+                              score:
+                                type:
+                                  - "integer"
+                                  - "null"
+                                minimum: 0
                       required:
                         - "type"
-                        - "values"
-                      title: "Categorical"
+                        - "pass_criteria"
+                      title: "Decision"
                     - type: "object"
                       properties:
                         enabled:
@@ -68818,6 +69690,8 @@ paths:
               schema:
                 additionalProperties: false
                 properties:
+                  auto_model_pool:
+                    $ref: "#/components/schemas/AutoModelPool"
                   configuration:
                     $ref: "#/components/schemas/ModelConfigurationResponse"
                   created:
@@ -69048,6 +69922,8 @@ paths:
               schema:
                 additionalProperties: false
                 properties:
+                  auto_model_pool:
+                    $ref: "#/components/schemas/AutoModelPool"
                   configuration:
                     $ref: "#/components/schemas/ModelConfigurationResponse"
                   created:
@@ -69323,6 +70199,8 @@ paths:
               schema:
                 additionalProperties: false
                 properties:
+                  auto_model_pool:
+                    $ref: "#/components/schemas/AutoModelPool"
                   configuration:
                     $ref: "#/components/schemas/ModelConfigurationResponse"
                   created:
@@ -69671,6 +70549,8 @@ paths:
               schema:
                 additionalProperties: false
                 properties:
+                  auto_model_pool:
+                    $ref: "#/components/schemas/AutoModelPool"
                   configuration:
                     $ref: "#/components/schemas/ModelConfigurationResponse"
                   created:
@@ -69879,6 +70759,8 @@ paths:
               schema:
                 additionalProperties: false
                 properties:
+                  auto_model_pool:
+                    $ref: "#/components/schemas/AutoModelPool"
                   configuration:
                     $ref: "#/components/schemas/ModelConfigurationResponse"
                   created:
@@ -70091,6 +70973,8 @@ paths:
               schema:
                 additionalProperties: false
                 properties:
+                  auto_model_pool:
+                    $ref: "#/components/schemas/AutoModelPool"
                   configuration:
                     $ref: "#/components/schemas/ModelConfigurationResponse"
                   created:
@@ -70301,6 +71185,8 @@ paths:
               schema:
                 additionalProperties: false
                 properties:
+                  auto_model_pool:
+                    $ref: "#/components/schemas/AutoModelPool"
                   configuration:
                     $ref: "#/components/schemas/ModelConfigurationResponse"
                   created:
@@ -70496,6 +71382,366 @@ paths:
           source: "await orq.models.disable({ modelId: \"model_123\" });"
       x-speakeasy-group: "models"
       x-speakeasy-name-override: "disable"
+      security:
+        - ApiKey: []
+  /v2/agents/{agent_key}/deployments:
+    get:
+      tags: []
+      summary: "ListAgentDeployments"
+      operationId: "ListAgentDeployments"
+      parameters:
+        - name: "agent_key"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+        - name: "limit"
+          in: "query"
+          schema:
+            type: "integer"
+            format: "int32"
+        - name: "starting_after"
+          in: "query"
+          schema:
+            type: "string"
+        - name: "status"
+          in: "query"
+          schema:
+            $ref: "#/components/schemas/AgentDeploymentStatus"
+        - name: "search"
+          in: "query"
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListAgentDeploymentsResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      x-speakeasy-group: "agentDeployments"
+      x-speakeasy-name-override: "list"
+      x-cli-group: "agent-deployments"
+      x-cli-name: "list"
+      x-cli-help-section: "Managed agents"
+      x-code-samples:
+        - lang: "typescript"
+          label: "Node.js"
+          source: "await orq.agentDeployments.list({ agentKey: \"my-agent\" });\n"
+      security:
+        - ApiKey: []
+    post:
+      tags: []
+      summary: "CreateAgentDeployment"
+      operationId: "CreateAgentDeployment"
+      parameters:
+        - name: "agent_key"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateAgentDeploymentRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreateAgentDeploymentResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      x-speakeasy-group: "agentDeployments"
+      x-speakeasy-name-override: "create"
+      x-cli-group: "agent-deployments"
+      x-cli-name: "create"
+      x-cli-help-section: "Managed agents"
+      x-code-samples:
+        - lang: "typescript"
+          label: "Node.js"
+          source: "await orq.agentDeployments.create({ agentKey: \"my-agent\", displayName: \"Daily summary\", trigger: { schedule: { expression: \"0 0 9 * * *\", timezone: \"Europe/Amsterdam\" } } });\n"
+      security:
+        - ApiKey: []
+  /v2/agents/{agent_key}/deployments/{deployment_id}:
+    get:
+      tags: []
+      summary: "GetAgentDeployment"
+      operationId: "GetAgentDeployment"
+      parameters:
+        - name: "agent_key"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+        - name: "deployment_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetAgentDeploymentResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      x-speakeasy-group: "agentDeployments"
+      x-speakeasy-name-override: "retrieve"
+      x-cli-group: "agent-deployments"
+      x-cli-name: "retrieve"
+      x-cli-help-section: "Managed agents"
+      x-code-samples:
+        - lang: "typescript"
+          label: "Node.js"
+          source: "await orq.agentDeployments.retrieve({ agentKey: \"my-agent\", deploymentId: \"01JD6KJ7B5K4YCS6QYGQBK6CTT\" });\n"
+      security:
+        - ApiKey: []
+    delete:
+      tags: []
+      summary: "DeleteAgentDeployment"
+      operationId: "DeleteAgentDeployment"
+      parameters:
+        - name: "agent_key"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+        - name: "deployment_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeleteAgentDeploymentResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      x-speakeasy-group: "agentDeployments"
+      x-speakeasy-name-override: "delete"
+      x-cli-group: "agent-deployments"
+      x-cli-name: "delete"
+      x-cli-help-section: "Managed agents"
+      x-code-samples:
+        - lang: "typescript"
+          label: "Node.js"
+          source: "await orq.agentDeployments.delete({ agentKey: \"my-agent\", deploymentId: \"01JD6KJ7B5K4YCS6QYGQBK6CTT\" });\n"
+      security:
+        - ApiKey: []
+    patch:
+      tags: []
+      summary: "UpdateAgentDeployment"
+      operationId: "UpdateAgentDeployment"
+      parameters:
+        - name: "agent_key"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+        - name: "deployment_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateAgentDeploymentRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UpdateAgentDeploymentResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      x-speakeasy-group: "agentDeployments"
+      x-speakeasy-name-override: "update"
+      x-cli-group: "agent-deployments"
+      x-cli-name: "update"
+      x-cli-help-section: "Managed agents"
+      x-code-samples:
+        - lang: "typescript"
+          label: "Node.js"
+          source: "await orq.agentDeployments.update({ agentKey: \"my-agent\", deploymentId: \"01JD6KJ7B5K4YCS6QYGQBK6CTT\", status: \"AGENT_DEPLOYMENT_STATUS_PAUSED\" });\n"
+      security:
+        - ApiKey: []
+  /v2/agents/{agent_key}/deployments/{deployment_id}/runs:
+    get:
+      tags: []
+      summary: "ListAgentDeploymentRuns"
+      operationId: "ListAgentDeploymentRuns"
+      parameters:
+        - name: "agent_key"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+        - name: "deployment_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+        - name: "limit"
+          in: "query"
+          schema:
+            type: "integer"
+            format: "int32"
+        - name: "starting_after"
+          in: "query"
+          schema:
+            type: "string"
+        - name: "status"
+          in: "query"
+          schema:
+            $ref: "#/components/schemas/AgentDeploymentRunStatus"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListAgentDeploymentRunsResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      x-speakeasy-group: "agentDeployments"
+      x-speakeasy-name-override: "listRuns"
+      x-cli-group: "agent-deployments"
+      x-cli-name: "listRuns"
+      x-cli-help-section: "Managed agents"
+      x-code-samples:
+        - lang: "typescript"
+          label: "Node.js"
+          source: "await orq.agentDeployments.listRuns({ agentKey: \"my-agent\", deploymentId: \"01JD6KJ7B5K4YCS6QYGQBK6CTT\" });\n"
+      security:
+        - ApiKey: []
+  /v2/agents/{agent_key}/deployments/{deployment_id}/runs/{run_id}:
+    get:
+      tags: []
+      summary: "GetAgentDeploymentRun"
+      operationId: "GetAgentDeploymentRun"
+      parameters:
+        - name: "agent_key"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+        - name: "deployment_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+        - name: "run_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetAgentDeploymentRunResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      x-speakeasy-group: "agentDeployments"
+      x-speakeasy-name-override: "retrieveRun"
+      x-cli-group: "agent-deployments"
+      x-cli-name: "retrieveRun"
+      x-cli-help-section: "Managed agents"
+      x-code-samples:
+        - lang: "typescript"
+          label: "Node.js"
+          source: "await orq.agentDeployments.retrieveRun({ agentKey: \"my-agent\", deploymentId: \"01JD6KJ7B5K4YCS6QYGQBK6CTT\", runId: \"01JD6KTFRMDPJJCYZ75DSYE0P5\" });\n"
+      security:
+        - ApiKey: []
+  /v2/agents/{agent_key}/deployments/{deployment_id}:run:
+    post:
+      tags: []
+      summary: "RunAgentDeployment"
+      operationId: "RunAgentDeployment"
+      parameters:
+        - name: "agent_key"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+        - name: "deployment_id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RunAgentDeploymentRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RunAgentDeploymentResponse"
+        "401":
+          description: "Authentication required. See https://docs.orq.ai/reference/errors for the error codes."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+      x-speakeasy-group: "agentDeployments"
+      x-speakeasy-name-override: "run"
+      x-cli-group: "agent-deployments"
+      x-cli-name: "run"
+      x-cli-help-section: "Managed agents"
+      x-code-samples:
+        - lang: "typescript"
+          label: "Node.js"
+          source: "await orq.agentDeployments.run({ agentKey: \"my-agent\", deploymentId: \"01JD6KJ7B5K4YCS6QYGQBK6CTT\" });\n"
       security:
         - ApiKey: []
   /v2/agents/external:
@@ -72090,6 +73336,11 @@ paths:
           description: "Field used to order the list. Unset orders by most-recently-updated."
           schema:
             $ref: "#/components/schemas/BudgetSortField"
+        - name: "is_profile"
+          in: "query"
+          description: "True lists budget profiles, false lists individual/workspace/custom budgets."
+          schema:
+            type: "boolean"
       responses:
         "200":
           description: "OK"
@@ -72108,13 +73359,23 @@ paths:
       x-cli-group: "budgets"
       x-cli-name: "list"
       x-cli-help-section: "AI Gateway"
+      x-code-samples:
+        - lang: "curl"
+          label: "cURL"
+          source: "curl --get 'https://my.orq.ai/v2/budgets' \\\n  --header \"Authorization: Bearer $ORQ_API_KEY\"\n"
+        - lang: "python"
+          label: "Python"
+          source: "orq.budgets.list()\n"
+        - lang: "typescript"
+          label: "Node.js"
+          source: "await orq.budgets.list();\n"
       security:
         - ApiKey: []
     post:
       tags:
         - "Budgets"
       summary: "Create a new budget"
-      description: "Creates a new budget in the workspace. Exactly one scope variant must be set (workspace / project / identity / api_key / provider / model). At least one of `limits.amount`, `limits.token_limit`, or `rate_limit.requests_per_minute` MUST be provided. Uniqueness is enforced across (workspace_id, scope_kind, scope_target_id). Requires a Management Key with the Budgets permission; project-scoped API keys cannot manage budgets."
+      description: "Creates a new budget in the workspace. Exactly one scope variant must be set (workspace / project / identity / api_key / provider / model / factory_scope / category). A category default applies independently to every entity of that category, including future entities; active individual budgets override the default. Category defaults do not support the one-time period. At least one of `limits.amount`, `limits.token_limit`, or `rate_limit.requests_per_minute` MUST be provided. Uniqueness is enforced across (workspace_id, scope_kind, scope_target_id). Requires a Management Key with the Budgets permission; project-scoped API keys cannot manage budgets."
       operationId: "BudgetCreate"
       requestBody:
         content:
@@ -72150,6 +73411,9 @@ paths:
         - lang: "curl"
           label: "cURL"
           source: "curl -X POST 'https://my.orq.ai/v2/budgets' \\\n  --header \"Authorization: Bearer $ORQ_API_KEY\" \\\n  --header 'Content-Type: application/json' \\\n  --data '{\n    \"scope\": { \"workspace\": {} },\n    \"limits\": { \"period\": \"BUDGET_PERIOD_MONTHLY\", \"amount\": 1000 }\n  }'\n"
+        - lang: "python"
+          label: "Python"
+          source: "orq.budgets.create(scope={\"workspace\": {}}, limits={\"period\": \"BUDGET_PERIOD_MONTHLY\", \"amount\": 1000})\n"
         - lang: "typescript"
           label: "Node.js"
           source: "await orq.budgets.create({ scope: { workspace: {} }, limits: { period: \"BUDGET_PERIOD_MONTHLY\", amount: 1000 } });\n"
@@ -72193,6 +73457,16 @@ paths:
       x-cli-group: "budgets"
       x-cli-name: "get"
       x-cli-help-section: "AI Gateway"
+      x-code-samples:
+        - lang: "curl"
+          label: "cURL"
+          source: "curl --get 'https://my.orq.ai/v2/budgets/<budget_id>' \\\n  --header \"Authorization: Bearer $ORQ_API_KEY\"\n"
+        - lang: "python"
+          label: "Python"
+          source: "orq.budgets.get(budget_id=\"<budget_id>\")\n"
+        - lang: "typescript"
+          label: "Node.js"
+          source: "await orq.budgets.get({ budgetId: \"<budget_id>\" });\n"
       security:
         - ApiKey: []
     delete:
@@ -72226,6 +73500,16 @@ paths:
       x-cli-group: "budgets"
       x-cli-name: "delete"
       x-cli-help-section: "AI Gateway"
+      x-code-samples:
+        - lang: "curl"
+          label: "cURL"
+          source: "curl -X DELETE 'https://my.orq.ai/v2/budgets/<budget_id>' \\\n  --header \"Authorization: Bearer $ORQ_API_KEY\"\n"
+        - lang: "python"
+          label: "Python"
+          source: "orq.budgets.delete(budget_id=\"<budget_id>\")\n"
+        - lang: "typescript"
+          label: "Node.js"
+          source: "await orq.budgets.delete({ budgetId: \"<budget_id>\" });\n"
       security:
         - ApiKey: []
     patch:
@@ -72265,6 +73549,16 @@ paths:
       x-cli-group: "budgets"
       x-cli-name: "update"
       x-cli-help-section: "AI Gateway"
+      x-code-samples:
+        - lang: "curl"
+          label: "cURL"
+          source: "curl -X PATCH 'https://my.orq.ai/v2/budgets/<budget_id>' \\\n  --header \"Authorization: Bearer $ORQ_API_KEY\" \\\n  --header 'Content-Type: application/json' \\\n  --data '{ \"is_active\": false }'\n"
+        - lang: "python"
+          label: "Python"
+          source: "orq.budgets.update(budget_id=\"<budget_id>\", is_active=False)\n"
+        - lang: "typescript"
+          label: "Node.js"
+          source: "await orq.budgets.update({ budgetId: \"<budget_id>\", updateBudgetRequest: { isActive: false } });\n"
       security:
         - ApiKey: []
   /v2/budgets/{budget_id}/reset-consumption:
@@ -72272,7 +73566,7 @@ paths:
       tags:
         - "Budgets"
       summary: "Reset budget consumption"
-      description: "Clears the current-period cost, token, and request counters for the budget. The budget record itself is preserved. Requires a Management Key with the Budgets permission; project-scoped API keys cannot manage budgets."
+      description: "Clears the current-period cost, token, and request counters for the budget. For a category default, omit scope_target_id to reset every entity, or supply it to reset only that entity. The budget configuration is preserved. Requires a Management Key with the Budgets permission; project-scoped API keys cannot manage budgets."
       operationId: "BudgetResetConsumption"
       parameters:
         - name: "budget_id"
@@ -72305,6 +73599,16 @@ paths:
       x-cli-group: "budgets"
       x-cli-name: "resetConsumption"
       x-cli-help-section: "AI Gateway"
+      x-code-samples:
+        - lang: "curl"
+          label: "cURL"
+          source: "curl -X POST 'https://my.orq.ai/v2/budgets/<budget_id>/reset-consumption' \\\n  --header \"Authorization: Bearer $ORQ_API_KEY\" \\\n  --header 'Content-Type: application/json' \\\n  --data '{ \"scope_target_id\": \"<api_key_id>\" }'\n"
+        - lang: "python"
+          label: "Python"
+          source: "orq.budgets.reset_consumption(budget_id=\"<budget_id>\", scope_target_id=\"<api_key_id>\")\n"
+        - lang: "typescript"
+          label: "Node.js"
+          source: "await orq.budgets.resetConsumption({ budgetId: \"<budget_id>\", resetBudgetConsumptionRequest: { scopeTargetId: \"<api_key_id>\" } });\n"
       security:
         - ApiKey: []
   /v3/environments:
@@ -73282,6 +74586,11 @@ paths:
             type: "array"
             items:
               type: "string"
+        - name: "filter_by.source"
+          in: "query"
+          schema:
+            type: "integer"
+            format: "enum"
         - name: "include_metrics"
           in: "query"
           description: "Include aggregate usage metrics on each returned identity."
@@ -79244,7 +80553,8 @@ paths:
         - ApiKey: []
   /v3/agents/{agent_key}/schedules:
     get:
-      description: "Lists all schedules attached to the specified agent, most recent first."
+      deprecated: true
+      description: "Deprecated. Use `/v2/agents/{agent_key}/deployments` and the `agentDeployments` API group. This alias preserves the legacy schedule contract. Lists all schedules attached to the specified agent, most recent first."
       operationId: "list-agent-schedules"
       parameters:
         - description: "The unique routing key of the agent the schedule belongs to."
@@ -79288,6 +80598,7 @@ paths:
         - "Agent Schedules"
       x-cli-group: "schedules"
       x-cli-help-section: "Managed agents"
+      x-cli-hidden: true
       x-cli-name: "list"
       x-orq-gateway-group: true
       x-speakeasy-group: "schedules"
@@ -79295,7 +80606,8 @@ paths:
       security:
         - ApiKey: []
     post:
-      description: "Creates a schedule that runs the agent on a cron cadence. Only `cron` is accepted, as a 6-field expression firing at most once per hour: hourly `0 0 * * * *`, daily `0 0 9 * * *`, or weekly `0 0 9 * * 1`."
+      deprecated: true
+      description: "Deprecated. Use `/v2/agents/{agent_key}/deployments` and the `agentDeployments` API group. This alias preserves the legacy schedule contract. Creates a schedule that runs the agent on a cron cadence. Only `cron` is accepted, as a 6-field expression firing at most once per hour: hourly `0 0 * * * *`, daily `0 0 9 * * *`, or weekly `0 0 9 * * 1`."
       operationId: "create-agent-schedule"
       parameters:
         - description: "The unique routing key of the agent the schedule belongs to."
@@ -79466,6 +80778,7 @@ paths:
         - "Agent Schedules"
       x-cli-group: "schedules"
       x-cli-help-section: "Managed agents"
+      x-cli-hidden: true
       x-cli-name: "create"
       x-orq-gateway-group: true
       x-speakeasy-group: "schedules"
@@ -79474,7 +80787,8 @@ paths:
         - ApiKey: []
   /v3/agents/{agent_key}/schedules/{schedule_id}:
     delete:
-      description: "Permanently removes the schedule. It will not run again."
+      deprecated: true
+      description: "Deprecated. Use `/v2/agents/{agent_key}/deployments` and the `agentDeployments` API group. This alias preserves the legacy schedule contract. Permanently removes the schedule. It will not run again."
       operationId: "delete-agent-schedule"
       parameters:
         - description: "The unique routing key of the agent the schedule belongs to."
@@ -79511,6 +80825,7 @@ paths:
         - "Agent Schedules"
       x-cli-group: "schedules"
       x-cli-help-section: "Managed agents"
+      x-cli-hidden: true
       x-cli-name: "delete"
       x-orq-gateway-group: true
       x-speakeasy-group: "schedules"
@@ -79518,7 +80833,8 @@ paths:
       security:
         - ApiKey: []
     get:
-      description: "Retrieves a single schedule by ID."
+      deprecated: true
+      description: "Deprecated. Use `/v2/agents/{agent_key}/deployments` and the `agentDeployments` API group. This alias preserves the legacy schedule contract. Retrieves a single schedule by ID."
       operationId: "retrieve-agent-schedule"
       parameters:
         - description: "The unique routing key of the agent the schedule belongs to."
@@ -79623,6 +80939,7 @@ paths:
         - "Agent Schedules"
       x-cli-group: "schedules"
       x-cli-help-section: "Managed agents"
+      x-cli-hidden: true
       x-cli-name: "retrieve"
       x-orq-gateway-group: true
       x-speakeasy-group: "schedules"
@@ -79630,7 +80947,8 @@ paths:
       security:
         - ApiKey: []
     patch:
-      description: "Partially updates a schedule. Any omitted field is left unchanged. Changing `expression` or `type` (or reactivating from inactive) reschedules the next run and bumps `generation`; payload-only and `agent_tag`-only changes leave the firing cadence in place."
+      deprecated: true
+      description: "Deprecated. Use `/v2/agents/{agent_key}/deployments` and the `agentDeployments` API group. This alias preserves the legacy schedule contract. Partially updates a schedule. Any omitted field is left unchanged. Changing `expression` or `type` (or reactivating from inactive) reschedules the next run and bumps `generation`; payload-only and `agent_tag`-only changes leave the firing cadence in place."
       operationId: "update-agent-schedule"
       parameters:
         - description: "The unique routing key of the agent the schedule belongs to."
@@ -79795,6 +81113,7 @@ paths:
         - "Agent Schedules"
       x-cli-group: "schedules"
       x-cli-help-section: "Managed agents"
+      x-cli-hidden: true
       x-cli-name: "update"
       x-orq-gateway-group: true
       x-speakeasy-group: "schedules"
@@ -79803,7 +81122,8 @@ paths:
         - ApiKey: []
   /v3/agents/{agent_key}/schedules/{schedule_id}/execution:
     post:
-      description: "Runs the schedule's payload immediately (approximately 10 seconds after the request). The schedule's regular cadence is unaffected. Inactive schedules return 400."
+      deprecated: true
+      description: "Deprecated. Use `/v2/agents/{agent_key}/deployments` and the `agentDeployments` API group. This alias preserves the legacy schedule contract. Queues the deployment's payload for immediate background execution. The schedule's regular cadence is unaffected. Inactive schedules return 400."
       operationId: "trigger-agent-schedule"
       parameters:
         - description: "The unique routing key of the agent the schedule belongs to."
@@ -79866,6 +81186,7 @@ paths:
         - "Agent Schedules"
       x-cli-group: "schedules"
       x-cli-help-section: "Managed agents"
+      x-cli-hidden: true
       x-cli-name: "trigger"
       x-orq-gateway-group: true
       x-speakeasy-group: "schedules"
@@ -82764,7 +84085,7 @@ paths:
                   description: "Developer-defined key-value pairs attached to the response (OpenAI spec: `Map<string, string>`). Non-string values are rejected with a 400."
                   type: "object"
                 model:
-                  description: "The model to use in provider/model format (e.g. openai/gpt-4o). Use `agent/<key>` to invoke a pre-configured agent from this platform."
+                  description: "The model to use in provider/model format (e.g. openai/gpt-4o). Use `agent/<key>` to invoke an agent, or `agent/<key>@<deployment_key>` (or `@<deployment_id>`) to invoke a deployment with its pinned version, payload, limits and run history. Legacy version tags remain supported."
                   type: "string"
                 parallel_tool_calls:
                   description: "Whether to allow parallel tool calls."
@@ -83571,6 +84892,33 @@ paths:
           schema:
             description: "The ID of the response to retrieve"
             type: "string"
+        - description: "Additional fields to include. Each listed field is omitted unless requested. Accepts the OpenAI includables: code_interpreter_call.outputs, computer_call_output.output.image_url, file_search_call.results, message.input_image.image_url, message.output_text.logprobs, reasoning.encrypted_content, web_search_call.action.sources and web_search_call.results."
+          explode: false
+          in: "query"
+          name: "include"
+          schema:
+            description: "Additional fields to include. Each listed field is omitted unless requested. Accepts the OpenAI includables: code_interpreter_call.outputs, computer_call_output.output.image_url, file_search_call.results, message.input_image.image_url, message.output_text.logprobs, reasoning.encrypted_content, web_search_call.action.sources and web_search_call.results."
+            items:
+              enum:
+                - "code_interpreter_call.outputs"
+                - "computer_call_output.output.image_url"
+                - "file_search_call.results"
+                - "message.input_image.image_url"
+                - "message.output_text.logprobs"
+                - "reasoning.encrypted_content"
+                - "web_search_call.action.sources"
+                - "web_search_call.results"
+              type: "string"
+            type:
+              - "array"
+              - "null"
+        - description: "Accepted for OpenAI compatibility and ignored."
+          explode: false
+          in: "query"
+          name: "include_obfuscation"
+          schema:
+            description: "Accepted for OpenAI compatibility and ignored."
+            type: "boolean"
       responses:
         "200":
           content:
@@ -83782,6 +85130,42 @@ paths:
                   - "prompt_cache_options"
                 type: "object"
           description: "Response retrieved successfully."
+        "400":
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                properties:
+                  error:
+                    $ref: "#/components/schemas/APIError"
+                required:
+                  - "error"
+                type: "object"
+          description: "Invalid include value."
+        "401":
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                properties:
+                  error:
+                    $ref: "#/components/schemas/APIError"
+                required:
+                  - "error"
+                type: "object"
+          description: "Missing, invalid, expired or revoked API key."
+        "403":
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                properties:
+                  error:
+                    $ref: "#/components/schemas/APIError"
+                required:
+                  - "error"
+                type: "object"
+          description: "The API key lacks permission to view responses."
         "404":
           content:
             application/json:
@@ -83800,9 +85184,178 @@ paths:
       x-cli-group: "responses"
       x-cli-help-section: "AI Gateway"
       x-cli-name: "get"
+      x-code-samples:
+        - label: "Node.js"
+          lang: "typescript"
+          source: "const response = await orq.responses.get({\n  responseId: \"resp_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n  include: [\"reasoning.encrypted_content\"],\n});"
+        - label: "Python"
+          lang: "python"
+          source: "response = orq.responses.get(\n    response_id=\"resp_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n    include=[\"reasoning.encrypted_content\"],\n)"
       x-orq-gateway-group: true
       x-speakeasy-group: "responses"
       x-speakeasy-name-override: "get"
+      security:
+        - ApiKey: []
+  /v3/router/responses/{response_id}/input_items:
+    get:
+      description: "Lists the input items stored for a response, paginated with `after`, `limit` and `order`. Returns the input stored for this response: the full chain for `previous_response_id`, only the new turn for `conversation`, and the compaction item for compacted history. Background responses without stored input return an empty list."
+      operationId: "list-response-input-items"
+      parameters:
+        - description: "The ID of the response to retrieve"
+          in: "path"
+          name: "response_id"
+          required: true
+          schema:
+            description: "The ID of the response to retrieve"
+            type: "string"
+        - description: "Cursor: return items after this item id."
+          explode: false
+          in: "query"
+          name: "after"
+          schema:
+            description: "Cursor: return items after this item id."
+            type: "string"
+        - description: "Maximum number of items to return, 1 to 100."
+          explode: false
+          in: "query"
+          name: "limit"
+          schema:
+            default: 20
+            description: "Maximum number of items to return, 1 to 100."
+            format: "int64"
+            maximum: 100
+            minimum: 1
+            type: "integer"
+        - description: "Sort order by item position. Defaults to desc."
+          explode: false
+          in: "query"
+          name: "order"
+          schema:
+            default: "desc"
+            description: "Sort order by item position. Defaults to desc."
+            enum:
+              - "asc"
+              - "desc"
+            type: "string"
+        - description: "Additional fields to include. Each listed field is omitted unless requested. Accepts the OpenAI includables: code_interpreter_call.outputs, computer_call_output.output.image_url, file_search_call.results, message.input_image.image_url, message.output_text.logprobs, reasoning.encrypted_content, web_search_call.action.sources and web_search_call.results."
+          explode: false
+          in: "query"
+          name: "include"
+          schema:
+            description: "Additional fields to include. Each listed field is omitted unless requested. Accepts the OpenAI includables: code_interpreter_call.outputs, computer_call_output.output.image_url, file_search_call.results, message.input_image.image_url, message.output_text.logprobs, reasoning.encrypted_content, web_search_call.action.sources and web_search_call.results."
+            items:
+              enum:
+                - "code_interpreter_call.outputs"
+                - "computer_call_output.output.image_url"
+                - "file_search_call.results"
+                - "message.input_image.image_url"
+                - "message.output_text.logprobs"
+                - "reasoning.encrypted_content"
+                - "web_search_call.action.sources"
+                - "web_search_call.results"
+              type: "string"
+            type:
+              - "array"
+              - "null"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                properties:
+                  data:
+                    description: "Input items on the current page."
+                    items: {}
+                    type: "array"
+                  first_id:
+                    description: "ID of the first item on the page. Null when the page is empty."
+                    type:
+                      - "string"
+                      - "null"
+                  has_more:
+                    description: "Whether further items exist beyond this page."
+                    type: "boolean"
+                  last_id:
+                    description: "ID of the last item on the page. Null when the page is empty."
+                    type:
+                      - "string"
+                      - "null"
+                  object:
+                    description: "Object type, always list."
+                    type: "string"
+                required:
+                  - "object"
+                  - "data"
+                  - "first_id"
+                  - "last_id"
+                  - "has_more"
+                type: "object"
+          description: "Input items retrieved successfully."
+        "400":
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                properties:
+                  error:
+                    $ref: "#/components/schemas/APIError"
+                required:
+                  - "error"
+                type: "object"
+          description: "Invalid limit, order, after or include value."
+        "401":
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                properties:
+                  error:
+                    $ref: "#/components/schemas/APIError"
+                required:
+                  - "error"
+                type: "object"
+          description: "Missing, invalid, expired or revoked API key."
+        "403":
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                properties:
+                  error:
+                    $ref: "#/components/schemas/APIError"
+                required:
+                  - "error"
+                type: "object"
+          description: "The API key lacks permission to view responses."
+        "404":
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                properties:
+                  error:
+                    $ref: "#/components/schemas/APIError"
+                required:
+                  - "error"
+                type: "object"
+          description: "Response not found."
+      summary: "List response input items"
+      tags:
+        - "Responses"
+      x-cli-group: "responses"
+      x-cli-help-section: "AI Gateway"
+      x-cli-name: "listInputItems"
+      x-code-samples:
+        - label: "Node.js"
+          lang: "typescript"
+          source: "const items = await orq.responses.listInputItems({\n  responseId: \"resp_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n  limit: 20,\n  order: \"asc\",\n});"
+        - label: "Python"
+          lang: "python"
+          source: "items = orq.responses.list_input_items(\n    response_id=\"resp_01ARZ3NDEKTSV4RRFFQ69G5FAV\",\n    limit=20,\n    order=\"asc\",\n)"
+      x-orq-gateway-group: true
+      x-speakeasy-group: "responses"
+      x-speakeasy-name-override: "listInputItems"
       security:
         - ApiKey: []
   /v3/websearch:
@@ -84224,7 +85777,7 @@ tags:
   - name: "Audit Log Destinations"
     description: "Signed webhook destinations that receive workspace audit log events, for SIEM and compliance pipelines."
   - name: "Budgets"
-    description: "Budgets govern spend, token usage, and request rate across six scopes: workspace, project, identity, API key, provider, and model. Every applicable budget is enforced, and the most restrictive limit applies per dimension."
+    description: "Budgets govern spend, token usage, and request rate across workspace, project, identity, API key, provider, model, factory, and category-default scopes. Category defaults provide a separate allowance for each entity; an active individual budget replaces its category default. Every applicable budget is enforced, and the most restrictive limit applies per dimension."
   - name: "Environments"
     description: "Reusable workspace- and project-scoped deployment environments."
   - name: "Files"
