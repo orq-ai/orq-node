@@ -26,6 +26,14 @@ export type ThreadFilters = {
   client?: string | undefined;
   repo?: string | undefined;
   kind?: ThreadKind | undefined;
+  /**
+   * Case-insensitive text matched against the thread title and its external ID.
+   */
+  search?: string | undefined;
+  /**
+   * Only threads owned by the caller: their private coding-agent threads.
+   */
+  mine?: boolean | undefined;
 };
 
 /** @internal */
@@ -38,6 +46,8 @@ export type ThreadFilters$Outbound = {
   client?: string | undefined;
   repo?: string | undefined;
   kind?: string | undefined;
+  search?: string | undefined;
+  mine?: boolean | undefined;
 };
 
 /** @internal */
@@ -55,6 +65,8 @@ export const ThreadFilters$outboundSchema: z.ZodType<
     client: z.string().optional(),
     repo: z.string().optional(),
     kind: ThreadKind$outboundSchema.optional(),
+    search: z.string().optional(),
+    mine: z.boolean().optional(),
   }).transform((v) => {
     return remap$(v, {
       projectId: "project_id",

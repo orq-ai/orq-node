@@ -53,10 +53,12 @@ export const KnowledgeApiError$inboundSchema: z.ZodType<
     body$: z.string(),
   })
     .transform((v) => {
-      return new KnowledgeApiError(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
+      const { request$, response$, body$, ...data } = v;
+
+      return new KnowledgeApiError(data, {
+        request: request$,
+        response: response$,
+        body: body$,
       });
     })
 );

@@ -271,10 +271,12 @@ export const CreateClassifyRouterClassifyResponse502ResponseBody$inboundSchema:
       body$: z.string(),
     })
       .transform((v) => {
-        return new CreateClassifyRouterClassifyResponse502ResponseBody(v, {
-          request: v.request$,
-          response: v.response$,
-          body: v.body$,
+        const { request$, response$, body$, ...data } = v;
+
+        return new CreateClassifyRouterClassifyResponse502ResponseBody(data, {
+          request: request$,
+          response: response$,
+          body: body$,
         });
       })
   );
@@ -293,10 +295,12 @@ export const CreateClassifyRouterClassifyResponse500ResponseBody$inboundSchema:
       body$: z.string(),
     })
       .transform((v) => {
-        return new CreateClassifyRouterClassifyResponse500ResponseBody(v, {
-          request: v.request$,
-          response: v.response$,
-          body: v.body$,
+        const { request$, response$, body$, ...data } = v;
+
+        return new CreateClassifyRouterClassifyResponse500ResponseBody(data, {
+          request: request$,
+          response: response$,
+          body: body$,
         });
       })
   );
@@ -315,10 +319,12 @@ export const CreateClassifyRouterClassifyResponse429ResponseBody$inboundSchema:
       body$: z.string(),
     })
       .transform((v) => {
-        return new CreateClassifyRouterClassifyResponse429ResponseBody(v, {
-          request: v.request$,
-          response: v.response$,
-          body: v.body$,
+        const { request$, response$, body$, ...data } = v;
+
+        return new CreateClassifyRouterClassifyResponse429ResponseBody(data, {
+          request: request$,
+          response: response$,
+          body: body$,
         });
       })
   );
@@ -337,10 +343,12 @@ export const CreateClassifyRouterClassifyResponse422ResponseBody$inboundSchema:
       body$: z.string(),
     })
       .transform((v) => {
-        return new CreateClassifyRouterClassifyResponse422ResponseBody(v, {
-          request: v.request$,
-          response: v.response$,
-          body: v.body$,
+        const { request$, response$, body$, ...data } = v;
+
+        return new CreateClassifyRouterClassifyResponse422ResponseBody(data, {
+          request: request$,
+          response: response$,
+          body: body$,
         });
       })
   );
@@ -359,10 +367,12 @@ export const CreateClassifyRouterClassifyResponse408ResponseBody$inboundSchema:
       body$: z.string(),
     })
       .transform((v) => {
-        return new CreateClassifyRouterClassifyResponse408ResponseBody(v, {
-          request: v.request$,
-          response: v.response$,
-          body: v.body$,
+        const { request$, response$, body$, ...data } = v;
+
+        return new CreateClassifyRouterClassifyResponse408ResponseBody(data, {
+          request: request$,
+          response: response$,
+          body: body$,
         });
       })
   );
@@ -381,10 +391,12 @@ export const CreateClassifyRouterClassifyResponseResponseBody$inboundSchema:
       body$: z.string(),
     })
       .transform((v) => {
-        return new CreateClassifyRouterClassifyResponseResponseBody(v, {
-          request: v.request$,
-          response: v.response$,
-          body: v.body$,
+        const { request$, response$, body$, ...data } = v;
+
+        return new CreateClassifyRouterClassifyResponseResponseBody(data, {
+          request: request$,
+          response: response$,
+          body: body$,
         });
       })
   );
@@ -402,10 +414,12 @@ export const CreateClassifyRouterClassifyResponseBody$inboundSchema: z.ZodType<
     body$: z.string(),
   })
     .transform((v) => {
-      return new CreateClassifyRouterClassifyResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
+      const { request$, response$, body$, ...data } = v;
+
+      return new CreateClassifyRouterClassifyResponseBody(data, {
+        request: request$,
+        response: response$,
+        body: body$,
       });
     })
 );
@@ -423,10 +437,12 @@ export const CreateClassifyResponseBody$inboundSchema: z.ZodType<
     body$: z.string(),
   })
     .transform((v) => {
-      return new CreateClassifyResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
+      const { request$, response$, body$, ...data } = v;
+
+      return new CreateClassifyResponseBody(data, {
+        request: request$,
+        response: response$,
+        body: body$,
       });
     })
 );

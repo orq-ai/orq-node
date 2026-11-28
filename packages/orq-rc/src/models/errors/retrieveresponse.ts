@@ -141,10 +141,12 @@ export const RetrieveResponseResponsesResponse404ResponseBody$inboundSchema:
       body$: z.string(),
     })
       .transform((v) => {
-        return new RetrieveResponseResponsesResponse404ResponseBody(v, {
-          request: v.request$,
-          response: v.response$,
-          body: v.body$,
+        const { request$, response$, body$, ...data } = v;
+
+        return new RetrieveResponseResponsesResponse404ResponseBody(data, {
+          request: request$,
+          response: response$,
+          body: body$,
         });
       })
   );
@@ -163,10 +165,12 @@ export const RetrieveResponseResponsesResponseResponseBody$inboundSchema:
       body$: z.string(),
     })
       .transform((v) => {
-        return new RetrieveResponseResponsesResponseResponseBody(v, {
-          request: v.request$,
-          response: v.response$,
-          body: v.body$,
+        const { request$, response$, body$, ...data } = v;
+
+        return new RetrieveResponseResponsesResponseResponseBody(data, {
+          request: request$,
+          response: response$,
+          body: body$,
         });
       })
   );
@@ -184,10 +188,12 @@ export const RetrieveResponseResponsesResponseBody$inboundSchema: z.ZodType<
     body$: z.string(),
   })
     .transform((v) => {
-      return new RetrieveResponseResponsesResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
+      const { request$, response$, body$, ...data } = v;
+
+      return new RetrieveResponseResponsesResponseBody(data, {
+        request: request$,
+        response: response$,
+        body: body$,
       });
     })
 );
@@ -205,10 +211,12 @@ export const RetrieveResponseResponseBody$inboundSchema: z.ZodType<
     body$: z.string(),
   })
     .transform((v) => {
-      return new RetrieveResponseResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
+      const { request$, response$, body$, ...data } = v;
+
+      return new RetrieveResponseResponseBody(data, {
+        request: request$,
+        response: response$,
+        body: body$,
       });
     })
 );

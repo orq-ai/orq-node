@@ -145,11 +145,12 @@ export const ListResponseInputItemsResponsesResponse404ResponseBody$inboundSchem
       body$: z.string(),
     })
       .transform((v) => {
-        return new ListResponseInputItemsResponsesResponse404ResponseBody(v, {
-          request: v.request$,
-          response: v.response$,
-          body: v.body$,
-        });
+        const { request$, response$, body$, ...data } = v;
+
+        return new ListResponseInputItemsResponsesResponse404ResponseBody(
+          data,
+          { request: request$, response: response$, body: body$ },
+        );
       })
   );
 
@@ -167,10 +168,12 @@ export const ListResponseInputItemsResponsesResponseResponseBody$inboundSchema:
       body$: z.string(),
     })
       .transform((v) => {
-        return new ListResponseInputItemsResponsesResponseResponseBody(v, {
-          request: v.request$,
-          response: v.response$,
-          body: v.body$,
+        const { request$, response$, body$, ...data } = v;
+
+        return new ListResponseInputItemsResponsesResponseResponseBody(data, {
+          request: request$,
+          response: response$,
+          body: body$,
         });
       })
   );
@@ -189,10 +192,12 @@ export const ListResponseInputItemsResponsesResponseBody$inboundSchema:
       body$: z.string(),
     })
       .transform((v) => {
-        return new ListResponseInputItemsResponsesResponseBody(v, {
-          request: v.request$,
-          response: v.response$,
-          body: v.body$,
+        const { request$, response$, body$, ...data } = v;
+
+        return new ListResponseInputItemsResponsesResponseBody(data, {
+          request: request$,
+          response: response$,
+          body: body$,
         });
       })
   );
@@ -210,10 +215,12 @@ export const ListResponseInputItemsResponseBody$inboundSchema: z.ZodType<
     body$: z.string(),
   })
     .transform((v) => {
-      return new ListResponseInputItemsResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
+      const { request$, response$, body$, ...data } = v;
+
+      return new ListResponseInputItemsResponseBody(data, {
+        request: request$,
+        response: response$,
+        body: body$,
       });
     })
 );

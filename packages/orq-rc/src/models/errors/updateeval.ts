@@ -45,10 +45,12 @@ export const UpdateEvalResponseBody$inboundSchema: z.ZodType<
     body$: z.string(),
   })
     .transform((v) => {
-      return new UpdateEvalResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
+      const { request$, response$, body$, ...data } = v;
+
+      return new UpdateEvalResponseBody(data, {
+        request: request$,
+        response: response$,
+        body: body$,
       });
     })
 );

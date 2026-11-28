@@ -54,6 +54,22 @@ export type Thread = {
    */
   repo?: string | undefined;
   kind?: ThreadKind | undefined;
+  /**
+   * Account ID of the member who owns a private coding-agent thread. Unset when the thread is visible to the workspace.
+   */
+  ownerId?: string | undefined;
+  /**
+   * Model used by most of the thread's traces.
+   */
+  model?: string | undefined;
+  /**
+   * Provider of the model used by most of the thread's traces.
+   */
+  provider?: string | undefined;
+  /**
+   * What set the title: user (renamed in orq), agent (the coding assistant's own name for the session), explicit (sent with the traces) or first_prompt.
+   */
+  titleSource?: string | undefined;
 };
 
 /** @internal */
@@ -79,6 +95,10 @@ export const Thread$inboundSchema: z.ZodType<Thread, z.ZodTypeDef, unknown> =
       client: z.string().optional(),
       repo: z.string().optional(),
       kind: ThreadKind$inboundSchema.optional(),
+      owner_id: z.string().optional(),
+      model: z.string().optional(),
+      provider: z.string().optional(),
+      title_source: z.string().optional(),
     }).transform((v) => {
       return remap$(v, {
         "_id": "id",
@@ -88,6 +108,8 @@ export const Thread$inboundSchema: z.ZodType<Thread, z.ZodTypeDef, unknown> =
         "project_id": "projectId",
         "started_at": "startedAt",
         "updated_at": "updatedAt",
+        "owner_id": "ownerId",
+        "title_source": "titleSource",
       });
     })
   );

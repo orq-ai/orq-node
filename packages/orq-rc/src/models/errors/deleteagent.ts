@@ -112,10 +112,12 @@ export const DeleteAgentAgentsResponseBody$inboundSchema: z.ZodType<
     body$: z.string(),
   })
     .transform((v) => {
-      return new DeleteAgentAgentsResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
+      const { request$, response$, body$, ...data } = v;
+
+      return new DeleteAgentAgentsResponseBody(data, {
+        request: request$,
+        response: response$,
+        body: body$,
       });
     })
 );
@@ -133,10 +135,12 @@ export const DeleteAgentResponseBody$inboundSchema: z.ZodType<
     body$: z.string(),
   })
     .transform((v) => {
-      return new DeleteAgentResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
+      const { request$, response$, body$, ...data } = v;
+
+      return new DeleteAgentResponseBody(data, {
+        request: request$,
+        response: response$,
+        body: body$,
       });
     })
 );

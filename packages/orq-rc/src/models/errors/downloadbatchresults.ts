@@ -175,10 +175,12 @@ export const DownloadBatchResultsBatchesResponse500ResponseBody$inboundSchema:
       body$: z.string(),
     })
       .transform((v) => {
-        return new DownloadBatchResultsBatchesResponse500ResponseBody(v, {
-          request: v.request$,
-          response: v.response$,
-          body: v.body$,
+        const { request$, response$, body$, ...data } = v;
+
+        return new DownloadBatchResultsBatchesResponse500ResponseBody(data, {
+          request: request$,
+          response: response$,
+          body: body$,
         });
       })
   );
@@ -197,10 +199,12 @@ export const DownloadBatchResultsBatchesResponse409ResponseBody$inboundSchema:
       body$: z.string(),
     })
       .transform((v) => {
-        return new DownloadBatchResultsBatchesResponse409ResponseBody(v, {
-          request: v.request$,
-          response: v.response$,
-          body: v.body$,
+        const { request$, response$, body$, ...data } = v;
+
+        return new DownloadBatchResultsBatchesResponse409ResponseBody(data, {
+          request: request$,
+          response: response$,
+          body: body$,
         });
       })
   );
@@ -219,10 +223,12 @@ export const DownloadBatchResultsBatchesResponseResponseBody$inboundSchema:
       body$: z.string(),
     })
       .transform((v) => {
-        return new DownloadBatchResultsBatchesResponseResponseBody(v, {
-          request: v.request$,
-          response: v.response$,
-          body: v.body$,
+        const { request$, response$, body$, ...data } = v;
+
+        return new DownloadBatchResultsBatchesResponseResponseBody(data, {
+          request: request$,
+          response: response$,
+          body: body$,
         });
       })
   );
@@ -240,10 +246,12 @@ export const DownloadBatchResultsBatchesResponseBody$inboundSchema: z.ZodType<
     body$: z.string(),
   })
     .transform((v) => {
-      return new DownloadBatchResultsBatchesResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
+      const { request$, response$, body$, ...data } = v;
+
+      return new DownloadBatchResultsBatchesResponseBody(data, {
+        request: request$,
+        response: response$,
+        body: body$,
       });
     })
 );
@@ -261,10 +269,12 @@ export const DownloadBatchResultsResponseBody$inboundSchema: z.ZodType<
     body$: z.string(),
   })
     .transform((v) => {
-      return new DownloadBatchResultsResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
+      const { request$, response$, body$, ...data } = v;
+
+      return new DownloadBatchResultsResponseBody(data, {
+        request: request$,
+        response: response$,
+        body: body$,
       });
     })
 );

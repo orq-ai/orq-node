@@ -71,10 +71,12 @@ export const PostV2FeedbackFeedbackResponseBody$inboundSchema: z.ZodType<
     body$: z.string(),
   })
     .transform((v) => {
-      return new PostV2FeedbackFeedbackResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
+      const { request$, response$, body$, ...data } = v;
+
+      return new PostV2FeedbackFeedbackResponseBody(data, {
+        request: request$,
+        response: response$,
+        body: body$,
       });
     })
 );
@@ -92,10 +94,12 @@ export const PostV2FeedbackResponseBody$inboundSchema: z.ZodType<
     body$: z.string(),
   })
     .transform((v) => {
-      return new PostV2FeedbackResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
+      const { request$, response$, body$, ...data } = v;
+
+      return new PostV2FeedbackResponseBody(data, {
+        request: request$,
+        response: response$,
+        body: body$,
       });
     })
 );
